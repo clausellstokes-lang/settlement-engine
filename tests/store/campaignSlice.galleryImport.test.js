@@ -24,6 +24,11 @@ vi.mock('../../src/lib/gallery.js', () => ({
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { fetchDossierForImport } from '../../src/lib/gallery.js';
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
+import {
+  LIVING_CONTENT_LAW_CONFIG_KEY,
+  materializesLivingContent,
+} from '../../src/domain/content/livingContentLawVersion.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -109,6 +114,54 @@ describe('importGallerySettlement — premium gate', () => {
     expect(cfg.faithProfile).toBeUndefined();
     // The religion subsystem gate stays CLOSED for the imported settlement.
     expect(isSubsystemActive({ settlements: [{ settlement: imported }] }, 'religion')).toBe(false);
+  });
+
+  test('⛔ DEF-1: a foreign scope record never lands in the importer\'s library', async () => {
+    // The mirror of the account-import boundary, at the one import path the
+    // living-content work had never enumerated. A gallery dossier is another
+    // account's world: its roster and provenance receipt are keyed on the SOURCE
+    // account's ledger, this boundary has no archive to resolve them against, and
+    // the public projection already dropped the roster — so keeping the law marker
+    // would import a world claiming a scope record it does not have.
+    fetchDossierForImport.mockResolvedValueOnce({
+      id: 'src', name: 'Borrowed', tier: 'town',
+      settlement: {
+        name: 'Borrowed', tier: 'town',
+        config: { culture: 'norse', [LIVING_CONTENT_LAW_CONFIG_KEY]: 2 },
+        customContentRoster: {
+          schemaVersion: 1,
+          buckets: { deities: [{ localUid: 'src-lu-1', customDefinitionId: 'src-secret-def' }] },
+        },
+        customContentProvenance: {
+          schemaVersion: 1,
+          materializedDefinitions: [{ definitionId: 'src-secret-def', revisionId: 'src-rev-1' }],
+        },
+      },
+    });
+    const store = makeStore({ user: { id: 'u1' }, tier: 'premium' });
+    await store.getState().importGallerySettlement('slug-borrowed');
+
+    const imported = store.getState().savedSettlements[0].settlement;
+    // Liveness: the clone really is the source world, so a green here cannot mean
+    // "nothing was imported at all".
+    expect(imported.name).toBe('Borrowed');
+    expect(imported.config.culture).toBe('norse');
+
+    expectAbsentWithAnchor(Object.keys(imported), 'customContentRoster', 'name', 'gallery ingest');
+    expectAbsentWithAnchor(Object.keys(imported), 'customContentProvenance', 'tier', 'gallery ingest');
+    expectAbsentWithAnchor(
+      Object.keys(imported.config), LIVING_CONTENT_LAW_CONFIG_KEY, 'culture', 'gallery ingest config',
+    );
+    // The imported world reads as v1 — it says what it is.
+    expect(materializesLivingContent(imported.config)).toBe(false);
+    // …and the row the save service was handed carries none of it either (the
+    // in-memory push and the persisted envelope are the same object here).
+    expectAbsentWithAnchor(
+      JSON.stringify(store.getState().savedSettlements[0]),
+      'src-secret-def',
+      'Borrowed',
+      'gallery ingest persisted row',
+    );
   });
 
   test('a developer role passes the gate for testing', async () => {

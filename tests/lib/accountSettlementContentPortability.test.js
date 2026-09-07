@@ -424,6 +424,113 @@ describe('account settlement living-content roster portability', () => {
     }
   });
 
+  // ── DEF-5 (lane L-MAT-FIX) — A LOCAL-ONLY ROW IS RESOLVED, NOT INCOMPLETE ────
+  // `rosterRow` admits a definition on `localUid || customDefinitionId`, and the
+  // identity projection emits every `customDefinition*` key OPTIONALLY. So a
+  // definition that lives only in the author's local library — never committed to
+  // the immutable ledger — produces a row with a localUid and NO account-scoped
+  // identity. Reading that as "unresolved identity" dropped the WHOLE roster of any
+  // world whose scope touched one such definition, which is the exact population
+  // resolve-or-drop exists to preserve. Every fixture above sets
+  // `customDefinitionId`, which is why the defect was green.
+  function localOnlyRow(overrides = {}) {
+    return {
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'deities',
+      localUid: 'lu_archive_hall',
+      name: 'Local Patron',
+      ...overrides,
+    };
+  }
+
+  test('DEF-5: a LOCAL-ONLY row whose localUid resolves keeps the whole roster', () => {
+    const fixture = rosterFixture();
+    const roster = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: { deities: [localOnlyRow()] },
+    };
+    // Non-vacuity: the localUid really is in the map, so a refusal below could
+    // only be the "no account identity ⇒ unresolved" misreading this arm names.
+    expect(fixture.identityMap.localUids.get('lu_archive_hall')).toBe('lu_received_hall');
+    const remapped = remapAccountSettlementLivingContentRoster(roster, fixture.identityMap);
+    expect(
+      remapped.ok,
+      `a fully localUid-mapped roster was refused: ${remapped.error || ''}`,
+    ).toBe(true);
+    const row = remapped.roster.buckets.deities[0];
+    expect(row.localUid).toBe('lu_received_hall');
+    expect(row.name).toBe('Local Patron');
+    // It gains no account-scoped identity it never had — an invented
+    // `customDefinitionId` would be a claim about a ledger row that does not exist.
+    expect(Object.hasOwn(row, 'customDefinitionId')).toBe(false);
+    expect(Object.hasOwn(row, 'customDefinitionRevisionId')).toBe(false);
+  });
+
+  test('DEF-5: a MIXED roster keeps both kinds of row, re-sorted on the destination key', () => {
+    const fixture = rosterFixture();
+    const roster = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: {
+        deities: [
+          localOnlyRow({ localUid: 'lu_archive_hall', name: 'Local Patron' }),
+          {
+            ...fixture.roster.buckets.deities[0],
+            localUid: undefined,
+          },
+        ],
+      },
+    };
+    delete roster.buckets.deities[1].localUid;
+    const remapped = remapAccountSettlementLivingContentRoster(roster, fixture.identityMap);
+    expect(remapped.ok, `mixed roster refused: ${remapped.error || ''}`).toBe(true);
+    const rows = remapped.roster.buckets.deities;
+    expect(rows).toHaveLength(2);
+    // Sorted by `customDefinitionId || localUid`: 'lu_received_hall' < 'received-hall'.
+    expect(rows.map(r => r.customDefinitionId || r.localUid))
+      .toEqual(['lu_received_hall', 'received-hall']);
+  });
+
+  test('DEF-5: an UNRESOLVABLE localUid still refuses the WHOLE roster', () => {
+    // The half the ruling keeps. "No account identity" is a different row KIND;
+    // "a localUid the receipt never mapped" is a genuine miss, and a roster that
+    // half-resolves claims a scope that never existed.
+    const fixture = rosterFixture();
+    const roster = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: { deities: [localOnlyRow({ localUid: 'lu_never_seen' })] },
+    };
+    expect(remapAccountSettlementLivingContentRoster(roster, fixture.identityMap))
+      .toMatchObject({
+        ok: false,
+        code: 'settlement_living_content_roster_identity_incomplete',
+      });
+    // …and a row with NEITHER a localUid nor an account id refuses too.
+    const anonymous = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: { deities: [{ source: 'custom', isCustom: true, name: 'Nameless' }] },
+    };
+    expect(remapAccountSettlementLivingContentRoster(anonymous, fixture.identityMap))
+      .toMatchObject({
+        ok: false,
+        code: 'settlement_living_content_roster_identity_incomplete',
+      });
+  });
+
+  test('DEF-5: an EMPTY customDefinitionId is not an account identity claim', () => {
+    // The membership test reads `customDefinition*` presence, so it must not be
+    // fooled by a key present-but-blank — that is the "absent" the projection
+    // means, and treating it as a claim would re-open the drop.
+    const fixture = rosterFixture();
+    const roster = {
+      schemaVersion: LIVING_CONTENT_ROSTER_SCHEMA_VERSION,
+      buckets: { deities: [localOnlyRow({ customDefinitionId: '', customDefinitionRevisionId: null })] },
+    };
+    const remapped = remapAccountSettlementLivingContentRoster(roster, fixture.identityMap);
+    expect(remapped.ok).toBe(true);
+    expect(remapped.roster.buckets.deities[0].localUid).toBe('lu_received_hall');
+  });
+
   test('⭐ the REAL builder\'s output round-trips through this remapper', () => {
     // The agreement arm. The remapper validates the roster structurally rather
     // than importing the builder's constant (a byte decision recorded in its

@@ -73,6 +73,12 @@ import { newSettlementDensityLaw } from './densityLaw.js';
 // the law rides the lazy side with the two birth callers that reach it.
 // ⚠ THE LAW FILES LIVE UNDER `src/domain/content/`, NOT beside this one.
 import { newSettlementLivingContentLaw } from '../content/livingContentLaw.js';
+// The marker's ONE spelling, for the clamp inside `birthConfig`. It comes from
+// the dependency-free leaf that declares it — the same edge the law file itself
+// takes, and the reason a second copy of the key can never exist. The leaf
+// imports nothing, so this adds no module to any closure the law import above
+// did not already bring.
+import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../content/livingContentLawVersion.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -175,13 +181,33 @@ export const PIPELINE_REACHERS = Object.freeze({
  * dials stay dormant, so the choice costs nothing today and is only about where
  * the next reader has to look.
  *
+ * ⛔ AND THE INCOMING LIVING-CONTENT MARKER IS CLAMPED OFF FIRST, BECAUSE A
+ * SPREAD OF `{}` DELETES NOTHING. While the dial is dormant the mint returns an
+ * empty object, so it cannot overwrite a marker the incoming config already
+ * carries — and a config CAN carry one: the Library's Load hydrates the wizard
+ * form from a saved `settlement._config` (`SettlementsPanel.jsx`, "Apply Saved
+ * Configuration & Regenerate", also reached from `SettlementDetail.jsx`), and the
+ * store's `updateConfig` admits the whole underscore family by prefix. Without
+ * this destructure, loading an imported v2 world's configuration and pressing
+ * Generate births a NEW world under v2 on a build whose dial says v1 — a world
+ * born under a law no dial in this build ever minted, which is precisely what
+ * "a birth's law is the dial's law" is supposed to mean. Measured: at the dormant
+ * default this writes not one config byte, because the key is simply absent from
+ * every config the product produces.
+ *
  * @template {Record<string, unknown>} C
  * @param {C} config the config a birth is about to generate from
  * @returns {C} the same shape, carrying the laws a NEW world is born under
  */
 export function birthConfig(config) {
+  const {
+    // The underscore-prefixed binding IS the clamp (see the note above); the lint
+    // config admits that name shape, so no disable directive is wanted here.
+    [LIVING_CONTENT_LAW_CONFIG_KEY]: _incomingLivingContentLaw,
+    ...carried
+  } = /** @type {Record<string, unknown>} */ ({ ...(config || {}) });
   return /** @type {C} */ ({
-    ...(config || {}),
+    ...carried,
     ...newSettlementDensityLaw(),
     ...newSettlementLivingContentLaw(),
   });

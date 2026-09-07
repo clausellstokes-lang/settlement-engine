@@ -14,7 +14,13 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { scrubImportedConfig, scrubImportedTreasury } from '../../src/lib/importScrub.js';
+import {
+  scrubImportedConfig,
+  scrubImportedTreasury,
+  scrubGalleryImportLivingContent,
+} from '../../src/lib/importScrub.js';
+import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../../src/domain/content/livingContentLawVersion.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 import { prepareSettlementEntry, ensureNormalizeLoaded } from '../../src/lib/accountImport.js';
 
@@ -163,5 +169,79 @@ describe('store-4 — the account-file import path routes through the shared scr
     expect(cfg.primaryDeityRef).toBeUndefined();
     expect(cfg.faithProfile).toBeUndefined();
     expect(cfg._seed).toBeUndefined();
+  });
+});
+
+/**
+ * DEF-1 (lane L-MAT-FIX) — THE GALLERY INGEST CARRIES NO FOREIGN SCOPE RECORD.
+ *
+ * A gallery clone comes from another account's world. `customContentRoster` and
+ * `customContentProvenance` are exactness claims keyed on the SOURCE account's
+ * ledger ids, and this boundary has no archive to resolve them against — so they
+ * are dropped, along with the living-content law marker that would otherwise
+ * leave the clone claiming a scope record the public projection already removed.
+ *
+ * The negatives here go through `expectAbsentWithAnchor` rather than a bare
+ * `not.toHaveProperty`: the anchor is a sibling key that travels the SAME strip,
+ * so "the whole settlement drifted away" cannot pass as "the key was dropped".
+ */
+describe('DEF-1 — scrubGalleryImportLivingContent', () => {
+  const foreignClone = () => ({
+    name: 'Borrowed Town',
+    tier: 'town',
+    customContentRoster: {
+      schemaVersion: 1,
+      buckets: { deities: [{ localUid: 'src-lu-1', customDefinitionId: 'src-secret-def' }] },
+    },
+    customContentProvenance: {
+      schemaVersion: 1,
+      materializedDefinitions: [{ definitionId: 'src-secret-def', revisionId: 'src-rev-1' }],
+    },
+    config: { culture: 'norse', [LIVING_CONTENT_LAW_CONFIG_KEY]: 2 },
+  });
+
+  it('drops BOTH exactness records and the law marker, and keeps every sibling', () => {
+    const src = foreignClone();
+    // Liveness first: the fixture really carries what the strip is asked to remove.
+    expect(Object.keys(src)).toContain('customContentRoster');
+    expect(Object.keys(src)).toContain('customContentProvenance');
+    expect(src.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(2);
+
+    const out = scrubGalleryImportLivingContent(src);
+    expectAbsentWithAnchor(Object.keys(out), 'customContentRoster', 'name', 'gallery ingest');
+    expectAbsentWithAnchor(Object.keys(out), 'customContentProvenance', 'tier', 'gallery ingest');
+    expectAbsentWithAnchor(
+      Object.keys(out.config), LIVING_CONTENT_LAW_CONFIG_KEY, 'culture', 'gallery ingest config',
+    );
+    // The world itself survives whole — a strip, not a reset.
+    expect(out.name).toBe('Borrowed Town');
+    expect(out.config.culture).toBe('norse');
+    // …and the source object is not mutated (the importer spreads it elsewhere).
+    expect(Object.keys(src)).toContain('customContentRoster');
+  });
+
+  it('is REFERENCE-IDENTICAL when there is nothing to strip (every world this build makes)', () => {
+    const clean = { name: 'Ordinary', config: { culture: 'norse' } };
+    expect(scrubGalleryImportLivingContent(clean)).toBe(clean);
+    // A config that is absent or not a record must not throw or invent one.
+    const noConfig = { name: 'Ordinary' };
+    expect(scrubGalleryImportLivingContent(noConfig)).toBe(noConfig);
+    expect(scrubGalleryImportLivingContent(null)).toBe(null);
+  });
+
+  it('⛔ THE ACCOUNT PATH KEEPS THE MARKER — the shared scrub must never learn this key', async () => {
+    // The refusal recorded beside the cure: `scrubImportedConfig` is shared by all
+    // three import paths, and on the ACCOUNT path the marker is a saved world's own
+    // immutable birth law. Dropping it there would reclassify a v2 world as v1 while
+    // the roster remap keeps its record — the two halves would then disagree.
+    await ensureNormalizeLoaded();
+    const res = prepareSettlementEntry({
+      settlement: {
+        name: 'My Own World', tier: 'town',
+        config: { culture: 'x', [LIVING_CONTENT_LAW_CONFIG_KEY]: 2 },
+      },
+    });
+    expect(res.ok).toBe(true);
+    expect(res.entry.settlement.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(2);
   });
 });

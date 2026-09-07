@@ -481,6 +481,77 @@ export const createAccountImportSlice = (set, get) => ({
             });
           }
         }
+        // ── AND THE SAME LAW OVER EVERY SNAPSHOT IN THE TIMELINE ──────────────
+        // ⛔ UNDO IS A WRITE PATH, AND IT WAS THE HOLE. `admitRestoredLifecycle`
+        // restores `versionHistory` verbatim, a snapshot is a WHOLE settlement
+        // (`snapshotSettlement` is a deep clone minus the timeline itself), and
+        // `revertToSnapshotAction` assigns `savedSettlements[idx].settlement =
+        // cloneJson(target.settlement)` and persists it. So the two blocks above,
+        // which rewrite only the LIVE settlement, left every snapshot carrying
+        // the source account's records — and one revert after a correctly
+        // remapped import re-persisted them. Executed before this loop existed: a
+        // snapshot kept the source roster's definition id intact.
+        //
+        // The same remap, the same miss policy, the same records — anything else
+        // would make "the roster an import writes is the roster the world keeps"
+        // true of the world and false of its own history. One warning per record
+        // per settlement, not one per snapshot: the reason is identical for every
+        // snapshot in a timeline and repeating it is noise, not information.
+        const restoredHistory = Array.isArray(preparedResult.entry.versionHistory)
+          ? preparedResult.entry.versionHistory
+          : [];
+        let historyProvenanceDropped = 0;
+        let historyRosterDropped = 0;
+        for (const snapshot of restoredHistory) {
+          const snapshotSettlement = (
+            snapshot
+            && typeof snapshot === 'object'
+            && snapshot.settlement
+            && typeof snapshot.settlement === 'object'
+          ) ? snapshot.settlement : null;
+          if (!snapshotSettlement) continue;
+          if (snapshotSettlement.customContentProvenance != null) {
+            const remapped = remapAccountSettlementContentProvenance(
+              snapshotSettlement.customContentProvenance,
+              contentIdentityMap,
+              bindingDestinations,
+            );
+            if (remapped.ok) {
+              snapshotSettlement.customContentProvenance = remapped.provenance;
+            } else {
+              delete snapshotSettlement.customContentProvenance;
+              historyProvenanceDropped += 1;
+            }
+          }
+          if (snapshotSettlement.customContentRoster != null) {
+            const remapped = remapAccountSettlementLivingContentRoster(
+              snapshotSettlement.customContentRoster,
+              contentIdentityMap,
+            );
+            if (remapped.ok === true) {
+              snapshotSettlement.customContentRoster = remapped.roster;
+            } else {
+              delete snapshotSettlement.customContentRoster;
+              historyRosterDropped += 1;
+            }
+          }
+        }
+        if (historyProvenanceDropped > 0) {
+          settlementContentWarnings.push({
+            name: preparedResult.entry.name,
+            reason: 'The archive receipt did not map the source provenance held by '
+              + `${historyProvenanceDropped} of its saved snapshots. That provenance was removed `
+              + 'from them, so reverting to one cannot restore a foreign receipt.',
+          });
+        }
+        if (historyRosterDropped > 0) {
+          settlementContentWarnings.push({
+            name: preparedResult.entry.name,
+            reason: 'The archive receipt did not map the living-content roster held by '
+              + `${historyRosterDropped} of its saved snapshots. That roster was removed from `
+              + 'them, so reverting to one cannot restore a foreign roster.',
+          });
+        }
         prepared.push({
           entry: preparedResult.entry,
           oldId: rawSettlement?.id != null ? String(rawSettlement.id) : null,

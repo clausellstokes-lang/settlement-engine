@@ -1,3 +1,10 @@
+// The law marker's ONE spelling, read from the dependency-free leaf that declares
+// it rather than re-typed in a strip: a second copy of `_livingContentLawVersion`
+// is exactly the drift that leaf exists to prevent. It imports nothing, so this
+// edge costs no closure. (It sits above the module docblock because that block is
+// also `scrubImportedConfig`'s JSDoc and must abut its function.)
+import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../domain/content/livingContentLawVersion.js';
+
 /**
  * importScrub.js — the SINGLE writer for the imported-settlement dormancy strip.
  *
@@ -8,11 +15,15 @@
  * deity/faith embed key can never re-open the resurrection gap in one path only
  * (store-4: cultDeitySnapshots was missed by both hand-maintained strips).
  *
- * TWO STRIPS, at two levels, because the hazards live at two levels:
+ * THREE STRIPS, at two levels, because the hazards live at two levels:
  *   • `scrubImportedConfig`   — over `settlement.config` (seed + faith embeds);
  *   • `scrubImportedTreasury` — over the SETTLEMENT (the W-COIN state coin ledger,
  *     which lives at `economicState.treasury` and is therefore unreachable from the
- *     config destructure — see that function's own note).
+ *     config destructure — see that function's own note);
+ *   • `scrubGalleryImportLivingContent` — over the SETTLEMENT, on the GALLERY paths
+ *     ONLY (the two custom-content exactness records + the living-content law
+ *     marker). Its own note says why it is gallery-scoped and why the account path
+ *     must NOT share it.
  *
  * The keys dropped, and why each is a dormancy hazard:
  *   • primaryDeitySnapshot / cultDeitySnapshots — the religion subsystem gate flips
@@ -84,4 +95,67 @@ export function scrubImportedTreasury(settlement) {
     ...restEconomicState
   } = /** @type {Record<string, any>} */ (economicState);
   return { ...settlement, economicState: restEconomicState };
+}
+
+/**
+ * THE GALLERY-INGEST LIVING-CONTENT STRIP (lane L-MAT-FIX, DEF-1).
+ *
+ * A gallery clone is a copy of ANOTHER account's world. Two records on it are
+ * account-scoped EXACTNESS claims — `customContentRoster` (which reviewed
+ * living-content definitions were in scope for that run) and
+ * `customContentProvenance` (which of them materialized) — and both are keyed on
+ * `customDefinition*` identifiers that belong to the SOURCE account's ledger.
+ * The account-file importer resolves those identifiers through an archive-backed
+ * identity map, or drops the whole record and says so. THIS boundary has no
+ * identity map and never can: a gallery dossier carries no archive, no receipt
+ * and no pack, so there is nothing to resolve against. A DROP is therefore the
+ * honest act — the alternative is a destination world asserting an exact scope
+ * in a namespace where those ids mean nothing.
+ *
+ * The living-content law marker goes with them, and that is the same claim one
+ * level down. The public projection drops the roster but lets the marker ride
+ * (it discloses birth-era law only), so an ingest that kept the marker would
+ * import a world that says it was born under the roster law while carrying no
+ * roster — a world that lies about its own scope, permanently, because nothing
+ * downstream re-mints a roster. Dropping the marker makes the imported clone say
+ * what it is: a v1 world with no exactness record.
+ *
+ * ⛔ WHY THIS IS GALLERY-SCOPED AND MUST NOT MOVE INTO `scrubImportedConfig`.
+ * That destructure is shared by all three import paths, and the ACCOUNT path is
+ * the user's OWN estate moving between their OWN accounts. There the roster is
+ * REMAPPED (accountImportBody.js, through the archive receipt) rather than
+ * dropped, and the marker is a saved world's immutable birth law — erasing it
+ * would silently reclassify a v2 world as v1, and would leave the remapped
+ * roster attached to a world that denies the law that minted it. Two different
+ * boundaries, two different honest acts; the single-writer module holds both.
+ *
+ * Pure, and REFERENCE-IDENTICAL when there is nothing to strip: a settlement
+ * with none of the three keys (which is every settlement this build generates,
+ * the dial being dormant) comes back as the very object that went in.
+ *
+ * @param {Record<string, any>|null|undefined} settlement
+ * @returns {Record<string, any>|null|undefined}
+ */
+export function scrubGalleryImportLivingContent(settlement) {
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return settlement;
+  const hasRecord = Object.hasOwn(settlement, 'customContentRoster')
+    || Object.hasOwn(settlement, 'customContentProvenance');
+  const config = settlement.config;
+  const configIsRecord = Boolean(config) && typeof config === 'object' && !Array.isArray(config);
+  const hasMarker = configIsRecord && Object.hasOwn(config, LIVING_CONTENT_LAW_CONFIG_KEY);
+  if (!hasRecord && !hasMarker) return settlement;
+  const {
+    // eslint-disable-next-line no-unused-vars -- intentional drop of two source-account exactness records
+    customContentRoster, customContentProvenance,
+    ...rest
+  } = /** @type {Record<string, any>} */ (settlement);
+  if (!hasMarker) return rest;
+  const {
+    // The underscore-prefixed binding is the intentional drop of a foreign
+    // world's birth-law marker; the lint config already admits that name shape,
+    // so no disable directive is needed (and an unused one is itself a warning).
+    [LIVING_CONTENT_LAW_CONFIG_KEY]: _livingContentLawVersion,
+    ...restConfig
+  } = /** @type {Record<string, any>} */ (config);
+  return { ...rest, config: restConfig };
 }

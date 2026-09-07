@@ -20,6 +20,12 @@ import {
 import {
   remapAccountCampaignContentBinding,
 } from './accountContentPortability.js';
+// The estate's own declaration of which row keys are ACCOUNT-SCOPED identity, read
+// rather than re-typed: the roster remapper's local-only branch below keys on it,
+// and a sixth key added to that projection must count here on the day it lands.
+import {
+  CUSTOM_DEFINITION_IDENTITY_KEYS,
+} from '../domain/content/customDefinitionIdentityProjection.js';
 // The roster's buckets are codepoint-sorted by the id this remapper REWRITES, so
 // the destination order has to be re-derived with the same comparator the builder
 // used. deterministicSort.js is a pinned eager leaf, so this edge is lazy→eager.
@@ -297,15 +303,58 @@ export function remapAccountSettlementLivingContentRoster(rawRoster, identityMap
     for (const rawRow of rows) {
       const row = plainObject(rawRow);
       const sourceRevisionId = textOrNull(row.customDefinitionRevisionId);
+      const sourceLocalUid = textOrNull(row.localUid);
+      const localUid = sourceLocalUid === null
+        ? null
+        : identityMap.localUids.get(sourceLocalUid);
+
+      // ⭐ A LOCAL-ONLY ROW IS RESOLVED BY ITS `localUid` ALONE, AND READING IT
+      // OTHERWISE DEFEATED THE WHOLE RULING. `rosterRow` admits a definition on
+      // `localUid || customDefinitionId`, and the identity projection emits every
+      // `customDefinition*` key OPTIONALLY — so a definition that lives only in
+      // the author's local library, never committed to the immutable ledger,
+      // produces a row with a localUid and no account-scoped identity at all.
+      // Such a row has nothing to resolve against the archive; it is not
+      // UNRESOLVED, it is a different KIND of row. Treating "no account identity"
+      // as "unresolved identity" dropped the whole roster of any world whose
+      // scope included one never-archived local definition — the exact population
+      // resolve-or-drop exists to preserve (a user moving their OWN estate keeps
+      // a true record). Executed before this branch existed: a fully
+      // localUid-mapped roster returned `..._identity_incomplete`.
+      //
+      // The membership test reads the estate's OWN declared identity key list
+      // rather than a local re-typing, so a sixth `customDefinition*` key added
+      // to that projection later counts as account-scoped identity here without
+      // anyone remembering to come back.
+      const declaresAccountIdentity = CUSTOM_DEFINITION_IDENTITY_KEYS.some(
+        key => Object.hasOwn(row, key) && row[key] != null && row[key] !== '',
+      );
+      if (!declaresAccountIdentity) {
+        if (sourceLocalUid === null || !localUid) {
+          // No account identity AND no resolvable localUid: nothing about this
+          // row can be re-addressed, so the roster's all-or-nothing law applies.
+          return {
+            ok: false,
+            code: 'settlement_living_content_roster_identity_incomplete',
+            error:
+              'The archive receipt did not map every living-content roster identity.',
+          };
+        }
+        // Annotated rather than inferred: without it the array's element type
+        // becomes a union of "the general row" and "the local-only row", and the
+        // re-sort below — which reads `customDefinitionId` off either — stops
+        // typechecking. The two branches produce the same KIND of thing.
+        /** @type {Record<string, unknown>} */
+        const localOnlyRow = { ...row, localUid };
+        remappedRows.push(Object.freeze(localOnlyRow));
+        continue;
+      }
+
       const definitionId = identityMap.definitionIds.get(
         textOrNull(row.customDefinitionId),
       );
       const revisionId = identityMap.revisionIds.get(sourceRevisionId);
       const contentHash = identityMap.revisionContentHashes.get(sourceRevisionId);
-      const sourceLocalUid = textOrNull(row.localUid);
-      const localUid = sourceLocalUid === null
-        ? null
-        : identityMap.localUids.get(sourceLocalUid);
       if (
         !definitionId
         || !revisionId

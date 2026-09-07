@@ -403,6 +403,96 @@ function selectedCampaignMechanics(ingest, selected) {
 }
 
 /**
+ * ⭐ DROP THE TWO SOURCE-ACCOUNT CUSTOM-CONTENT EXACTNESS RECORDS ON THE
+ * RECONCILED ENTRY (lane L-MAT-FIX, DEF-3). Mutates `entry.settlement` in place
+ * and returns one message per record removed, for the caller's `unsupported`
+ * list.
+ *
+ * ⛔ WHY ANYTHING HAPPENS HERE AT ALL. `prepareSettlementEntry` preserves
+ * `customContentRoster` and `customContentProvenance` verbatim, and this slice
+ * freezes the prepared entry straight into `normalizedInput` — which is what the
+ * `import.settlement.create-and-attach` command persists. So before this
+ * function, a second account's exactness records reached a destination world
+ * with the SOURCE account's ledger ids intact, unwarned. The gap used to be
+ * declared rather than cured on the ground that no world carries these records
+ * while the living-content dial is dormant; that ground is false at this
+ * boundary of all places, because its input is an import FILE — exactly where
+ * such a record comes from without any dial.
+ *
+ * ⛔ WHY BOTH RECORDS, TOGETHER. `customContentProvenance` (what materialized)
+ * and `customContentRoster` (what was in scope) are minted side by side at the
+ * end of one generation run and are governed alike on every other boundary — the
+ * account importer remaps both, the public projection drops both, the gallery
+ * ingest drops both. Curing one here and not the other would leave two records
+ * that agree everywhere else disagreeing about exactly one path, which is a
+ * shape a future reader cannot distinguish from an oversight.
+ *
+ * ⛔ AND WHY A DROP RATHER THAN THE ACCOUNT IMPORTER'S REMAP — MEASURED, NOT
+ * ASSUMED. Both records are keyed on `customDefinition*` identifiers belonging to
+ * the source account's immutable ledger, and remapping them requires an
+ * archive-backed identity map. A reconciliation source is an export FILE: it
+ * carries no ledger archive, no import receipt and no reviewed content pack, so
+ * the only map constructible here is the empty `archiveBacked:false` default, and
+ * nothing in it can resolve a single source id. Routing through the shared
+ * remappers would therefore compute a foregone refusal — every non-null record
+ * would drop anyway, byte for byte the same outcome — while dragging
+ * `accountSettlementContentPortability.js` and, behind it,
+ * `settlementContentProvenance.js` into this module's import closure for no
+ * behavioural difference. A boundary with no identity map performs the honest
+ * act directly, which is the same rule `scrubGalleryImportLivingContent` states
+ * for the other archive-less importer.
+ *
+ * ⇒ THE DAY THIS BOUNDARY GAINS AN ARCHIVE, this is the function to change:
+ * resolve the map, call `remapAccountSettlementLivingContentRoster` and
+ * `remapAccountSettlementContentProvenance` from
+ * `./accountSettlementContentPortability.js`, and keep the drop as their
+ * refusal branch. Nothing else on the path needs to move.
+ *
+ * ⚠ PRESENCE, NOT VALUE — AND THE REASON IS AN INSTRUMENT THIS FILE IS INSIDE.
+ * The condition is `Object.hasOwn`, the house idiom for a strip, rather than a
+ * `settlement.customContentRoster != null` truthiness read. Two reasons, and both
+ * are real. (1) A strip's question IS presence: a settlement carrying the key
+ * explicitly set to `null` is still carrying a source-account field, and removing
+ * it is the same honest act. (2) `observedShapeReaders.walker` resolves a
+ * `settlement`-shaped receiver in THIS file (it holds a frozen row for
+ * `importedFrom on settlement`), and its corpus is GENERATED worlds — which carry
+ * neither record while the living-content dial is dormant. A value read would
+ * therefore be scored a reader-with-no-writer and reds a shrink-only ratchet that
+ * cannot lawfully be grown. The walker is right about generated worlds and blind
+ * to this boundary, whose input is an import FILE; the presence test states the
+ * strip without asserting anything about a value no generator writes.
+ *
+ * @param {Record<string, any>} entry the prepared entry (mutated)
+ * @returns {string[]} one message per record that was dropped
+ */
+function dropReconciledSettlementContentRecords(entry) {
+  const settlement = entry && typeof entry.settlement === 'object' && entry.settlement
+    ? /** @type {Record<string, any>} */ (entry.settlement)
+    : null;
+  if (!settlement) return [];
+  /** @type {string[]} */
+  const dropped = [];
+
+  if (Object.hasOwn(settlement, 'customContentProvenance')) {
+    delete settlement.customContentProvenance;
+    dropped.push(
+      'This import carries no content archive, so the source account\'s '
+      + 'custom-content provenance could not be re-addressed. It was removed.',
+    );
+  }
+
+  if (Object.hasOwn(settlement, 'customContentRoster')) {
+    delete settlement.customContentRoster;
+    dropped.push(
+      'This import carries no content archive, so the source account\'s '
+      + 'living-content roster could not be re-addressed. It was removed.',
+    );
+  }
+
+  return dropped;
+}
+
+/**
  * Admit a source campaign's settlement records and build deterministic
  * candidates against the current owner-visible library.
  *
@@ -538,6 +628,23 @@ export async function admitExistingCampaignImport(ingest, options) {
       admittedIngest.source.checksum,
       sourceIndex,
     );
+    // ⛔ BEFORE THE ENTRY IS FROZEN INTO `normalizedInput` — which is what the
+    // `import.settlement.create-and-attach` command persists. A source-account
+    // roster or provenance receipt that got past here would land in the
+    // destination account's world with ids that mean nothing in its namespace.
+    dropReconciledSettlementContentRecords(prepared.entry).forEach((message, recordIndex) => {
+      unsupported.push({
+        issueId: reconciliationIssueId(
+          proposalId,
+          'settlement-content-record',
+          recordIndex,
+        ),
+        scope: `settlements[${sourceIndex}]`,
+        code: 'settlement_content_record_unmappable',
+        message,
+        sourceName: cleanText(prepared.entry.name) || 'Imported settlement',
+      });
+    });
     const sourceName = cleanText(prepared.entry.name) || 'Imported settlement';
     const candidates = candidatesForProposal(
       proposalId,

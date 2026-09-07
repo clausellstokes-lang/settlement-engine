@@ -54,6 +54,9 @@ import {
   buildSettlementContentProvenance,
 } from '../../src/domain/content/settlementContentProvenance.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+// DEF-4 drives the real UNDO writer rather than reasoning about it: this is the
+// function that assigns and persists a snapshot's settlement.
+import { revertToSnapshotAction } from '../../src/store/settlementVersionHistoryActions.js';
 
 /** Minimal store: import slice + the auth/library/campaign seams it reads. */
 function makeStore(extra = {}) {
@@ -1208,5 +1211,152 @@ describe('importAccountData — the living-content roster (O-11 path 2)', () => 
     const imported = store.getState().savedSettlements
       .find(saved => saved.name === 'Plainton');
     expect(Object.hasOwn(imported.settlement, 'customContentRoster')).toBe(false);
+  });
+});
+
+// ── DEF-4 (lane L-MAT-FIX) — UNDO IS A WRITE PATH, AND IT WAS THE HOLE ────────
+// The block above rewrites the LIVE settlement. `admitRestoredLifecycle` restores
+// `versionHistory` verbatim, a snapshot is a WHOLE settlement, and
+// `revertToSnapshotAction` assigns and PERSISTS `target.settlement`. So one revert
+// after a correctly remapped import used to re-persist the SOURCE account's roster
+// and provenance receipt — the create/read/persist/UNDO trace the lane's own
+// promise proof claimed to have walked. Both envelopes are driven, because they
+// differ in whether the remap can resolve anything at all.
+describe('importAccountData — the roster inside version history (DEF-4)', () => {
+  const sourceContent = {
+    name: 'Haunted Glassworks',
+    localUid: 'lu_glassworks',
+    definitionId: 'source-definition-glassworks',
+    revisionId: 'source-revision-glassworks-2',
+  };
+  const historicalContent = {
+    ...sourceContent,
+    name: 'Old Glassworks',
+    revisionId: 'source-revision-glassworks-1',
+  };
+
+  function rosterFor(binding) {
+    return {
+      schemaVersion: 1,
+      buckets: {
+        deities: [{
+          source: 'custom',
+          isCustom: true,
+          customDefinitionCategory: 'deities',
+          localUid: sourceContent.localUid,
+          customDefinitionId: sourceContent.definitionId,
+          customDefinitionRevisionId: sourceContent.revisionId,
+          customDefinitionContentHash: binding.resolvedDefinitions[0].contentHash,
+          name: 'Aster of the Kiln',
+        }],
+      },
+    };
+  }
+
+  function savedWithHistory(binding) {
+    const settlement = {
+      name: 'Rosterton',
+      tier: 'town',
+      config: { settType: 'town', _livingContentLawVersion: 2 },
+      customContentRoster: rosterFor(binding),
+    };
+    return {
+      id: 'a-1', user_id: 'USER-A', name: 'Rosterton', tier: 'town',
+      settlement,
+      versionHistory: [{
+        id: 'snap-1',
+        ts: 1750000000000,
+        kind: 'manual',
+        label: 'Before the fire',
+        // A snapshot is the whole settlement minus its own timeline.
+        settlement: { ...settlement, name: 'Rosterton (before)' },
+      }],
+    };
+  }
+
+  async function importAndRevert(exported) {
+    const store = makeStore({ activeSaveId: null });
+    const res = await store.getState().importAccountData(JSON.stringify(exported));
+    expect(res.ok).toBe(true);
+    const saved = store.getState().savedSettlements.find(s => s.name === 'Rosterton');
+    expect(saved, 'the settlement must import — a foreign record is dropped, never a world').toBeTruthy();
+    expect(
+      saved.versionHistory,
+      'the timeline did not survive the import — DEF-4\'s arm would prove nothing',
+    ).toHaveLength(1);
+    const reverted = revertToSnapshotAction(store.setState, store.getState, {
+      saveId: saved.id,
+      snapshotId: saved.versionHistory[0].id,
+    });
+    expect(reverted).toBeTruthy();
+    const after = store.getState().savedSettlements.find(s => String(s.id) === String(saved.id));
+    return { res, saved, after };
+  }
+
+  test('a v3 ARCHIVE envelope remaps the SNAPSHOT roster too, so a revert restores the destination record', async () => {
+    const currentBinding = makeCampaignContentBinding({ institutions: [sourceContent] });
+    const exported = buildAccountExport({
+      auth: { user: { id: 'USER-A', email: 'a@x.test' }, displayName: 'A', tier: 'premium' },
+      savedSettlements: [savedWithHistory(currentBinding)],
+      campaigns: [],
+      customContent: { institutions: [sourceContent] },
+      customContentArchive: fullContentArchive(sourceContent, historicalContent),
+    });
+
+    const { res, saved, after } = await importAndRevert(exported);
+    const snapshotRow = saved.versionHistory[0].settlement.customContentRoster
+      .buckets.deities[0];
+    expect(snapshotRow).toMatchObject({
+      customDefinitionId: 'definition-0',
+      customDefinitionRevisionId: 'revision-1',
+      localUid: 'lu_import_0',
+      name: 'Aster of the Kiln',
+    });
+    // THE WHOLE POINT: after the revert the world holds the DESTINATION record.
+    const revertedRow = after.settlement.customContentRoster.buckets.deities[0];
+    expect(revertedRow.customDefinitionId).toBe('definition-0');
+    expect(after.settlement.name).toBe('Rosterton (before)');
+    // Anchored on a field that travels the same remap: the world is live and
+    // correctly keyed, and no source identifier rode back in on the undo.
+    expectAbsentWithAnchor(
+      JSON.stringify(after.settlement),
+      sourceContent.definitionId,
+      'Aster of the Kiln',
+      'DEF-4 revert (archive)',
+    );
+    expect(res.settlementContentWarnings || []).toEqual([]);
+  });
+
+  test('with NO archive the snapshot roster is dropped and warned, so a revert restores nothing foreign', async () => {
+    const currentBinding = makeCampaignContentBinding({ institutions: [sourceContent] });
+    const exported = buildAccountExport({
+      auth: { user: { id: 'USER-A', email: 'a@x.test' }, displayName: 'A', tier: 'premium' },
+      savedSettlements: [savedWithHistory(currentBinding)],
+      campaigns: [],
+      customContent: { institutions: [] },
+    });
+
+    const { res, saved, after } = await importAndRevert(exported);
+    expect(
+      Object.hasOwn(saved.versionHistory[0].settlement, 'customContentRoster'),
+      'the snapshot kept the source roster — a revert would re-persist it',
+    ).toBe(false);
+    expect(Object.hasOwn(after.settlement, 'customContentRoster')).toBe(false);
+    expect(after.settlement.name).toBe('Rosterton (before)');
+    // The timeline drop is REPORTED separately from the live one, and says how
+    // many snapshots it touched rather than repeating itself per snapshot.
+    expect(res.settlementContentWarnings).toEqual([
+      {
+        name: 'Rosterton',
+        reason: 'The archive receipt did not map every living-content roster identity.'
+          + ' Its living-content roster was removed.',
+      },
+      {
+        name: 'Rosterton',
+        reason: 'The archive receipt did not map the living-content roster held by '
+          + '1 of its saved snapshots. That roster was removed from them, so reverting '
+          + 'to one cannot restore a foreign roster.',
+      },
+    ]);
   });
 });

@@ -19,6 +19,7 @@ import {
   reconciliationSourceChecksum,
 } from '../../src/lib/importReconciliation.js';
 import { MAX_IMPORT_BYTES } from '../../src/lib/accountImport.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function sourceSettlement(id, name, settlementPatch = {}, entryPatch = {}) {
   return {
@@ -486,5 +487,100 @@ describe('serialized-session admission', () => {
     const cyclic = JSON.parse(JSON.stringify(preview));
     cyclic.scope.loop = cyclic;
     expect(admitReconciliationSession(cyclic).ok).toBe(false);
+  });
+});
+
+/**
+ * DEF-3 (lane L-MAT-FIX) — THE SECOND IMPORT BOUNDARY DROPS THE TWO
+ * SOURCE-ACCOUNT CUSTOM-CONTENT EXACTNESS RECORDS.
+ *
+ * `prepareSettlementEntry` preserves `customContentRoster` and
+ * `customContentProvenance` verbatim, and this slice froze that entry straight
+ * into `normalizedInput` — which is what `import.settlement.create-and-attach`
+ * persists. So a foreign roster reached a second account's world with the SOURCE
+ * account's ledger ids intact, with no archive and no warning. The gap was
+ * declared rather than cured, on the ground that no world carries a roster while
+ * the dial is dormant; that ground was false here of all places, because this
+ * path's input is an import FILE, which is exactly where a roster comes from
+ * without any dial.
+ */
+describe('DEF-3 — reconciliation drops what it cannot re-address', () => {
+  const FOREIGN_ROSTER = Object.freeze({
+    schemaVersion: 1,
+    buckets: {
+      deities: [{
+        source: 'custom',
+        isCustom: true,
+        customDefinitionCategory: 'deities',
+        localUid: 'src-lu-1',
+        customDefinitionId: 'src-secret-def',
+        customDefinitionRevisionId: 'src-rev-1',
+        customDefinitionContentHash: 'a'.repeat(64),
+        name: 'Foreign Patron',
+      }],
+    },
+  });
+  const FOREIGN_PROVENANCE = Object.freeze({
+    schemaVersion: 1,
+    environmentId: 'src-env-1',
+    environmentRevisionId: 'src-env-rev-1',
+    materializedDefinitions: [{
+      definitionId: 'src-secret-def',
+      revisionId: 'src-rev-1',
+      contentHash: 'a'.repeat(64),
+    }],
+  });
+
+  test('a foreign roster and a foreign provenance receipt never reach normalizedInput', async () => {
+    const text = exportText({
+      settlements: [sourceSettlement('s-1', 'Ashford', {
+        customContentRoster: FOREIGN_ROSTER,
+        customContentProvenance: FOREIGN_PROVENANCE,
+      })],
+    });
+    const { session } = await admittedSession(text);
+    const persisted = session.proposals[0].normalizedInput.settlement;
+
+    // ⛔ THE LIVENESS ANCHOR, and it is the defect itself. The source really does
+    // carry both records into this slice — the shared preparer preserves them —
+    // so a green below cannot mean "the fixture never had one".
+    expect(JSON.parse(text).settlements[0].settlement.customContentRoster)
+      .toEqual(FOREIGN_ROSTER);
+    // The entry itself survives whole; this is a strip, not a rejection.
+    expect(persisted.name).toBe('Ashford');
+    expect(persisted.config).toBeTruthy();
+
+    expect(persisted.customContentRoster).toBeUndefined();
+    expect(persisted.customContentProvenance).toBeUndefined();
+    // …and no SOURCE-account identifier survives anywhere in what gets persisted.
+    // Anchored on the settlement's own name: if the whole entry drifted away this
+    // reds on the anchor rather than passing as "the id was removed".
+    expectAbsentWithAnchor(JSON.stringify(persisted), 'src-secret-def', 'Ashford', 'DEF-3');
+
+    // The drop is REPORTED, not silent — one unsupported issue per dropped record,
+    // each naming the reason this boundary cannot re-address the ids.
+    const reported = session.unsupported.filter(
+      issue => issue.code === 'settlement_content_record_unmappable',
+    );
+    expect(reported).toHaveLength(2);
+    expect(reported.map(issue => issue.scope)).toEqual(['settlements[0]', 'settlements[0]']);
+    expect(reported.every(issue => issue.sourceName === 'Ashford')).toBe(true);
+    expect(new Set(reported.map(issue => issue.issueId)).size).toBe(2);
+    expect(reported.every(issue => /carries no content archive/.test(issue.message))).toBe(true);
+    expect(reported.some(issue => /living-content roster/.test(issue.message))).toBe(true);
+    expect(reported.some(issue => /custom-content provenance/.test(issue.message))).toBe(true);
+  });
+
+  test('a settlement carrying NEITHER record reports nothing and is byte-stable', async () => {
+    // Non-vacuity in the other direction: the cure must be inert for every world
+    // this build actually produces, and must not perturb the deterministic
+    // proposal identity the slice's whole contract rests on.
+    const text = exportText({ settlements: [sourceSettlement('s-1', 'Ashford')] });
+    const first = await admittedSession(text);
+    const second = await admittedSession(text);
+    expect(first.session.proposals).toEqual(second.session.proposals);
+    expect(first.session.unsupported.filter(
+      issue => issue.code === 'settlement_content_record_unmappable',
+    )).toEqual([]);
   });
 });

@@ -10,7 +10,11 @@
  */
 
 import { saves as savesService } from '../lib/saves.js';
-import { scrubImportedConfig, scrubImportedTreasury } from '../lib/importScrub.js';
+import {
+  scrubImportedConfig,
+  scrubImportedTreasury,
+  scrubGalleryImportLivingContent,
+} from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
 import {
@@ -280,12 +284,18 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
         // importer clones whole settlements, so leaving it out here would have made
         // "imports arrive coinless" true on two paths of three — the exact
         // one-path-only shape store-4 was.
-        settlement: scrubImportedTreasury(normalizeSettlement({
+        // The two source-account custom-content exactness records and the
+        // living-content law marker are dropped on THIS path too (DEF-1). The map
+        // importer clones whole settlements from the same public projection, so
+        // leaving it out here would have made "a gallery clone carries no foreign
+        // scope record" true on one gallery path of two — the exact
+        // one-path-only shape store-4 was, in the module whose header says so.
+        settlement: scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
           ...sourceSettlement,
           neighbourNetwork: [],
           neighborRelationship: null,
           interSettlementRelationships: [],
-        })),
+        }))),
         // Imported faith/deity embeds stay dormant; this is the same single
         // scrub seam used by standalone gallery and account imports.
         config: scrubImportedConfig(sourceSettlement.config) || null,

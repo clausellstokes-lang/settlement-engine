@@ -20,7 +20,11 @@ import { fetchDossierForImport } from '../lib/gallery.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 import { saves as savesService } from '../lib/saves.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { scrubImportedConfig, scrubImportedTreasury } from '../lib/importScrub.js';
+import {
+  scrubImportedConfig,
+  scrubImportedTreasury,
+  scrubGalleryImportLivingContent,
+} from '../lib/importScrub.js';
 
 export async function importGallerySettlementImpl(get, set, slug) {
   const st = get();
@@ -59,7 +63,12 @@ export async function importGallerySettlementImpl(get, set, slug) {
     // COINLESS, because a foreign balance is coin no tick of THIS campaign ever
     // minted and the no-backfill law is enforced at the pulse writer, which never
     // sees an import. Reference-identical when there is no ledger to strip.
-    settlement: scrubImportedTreasury(normalizeSettlement({
+    // …and the two SOURCE-ACCOUNT custom-content exactness records go with it,
+    // plus the living-content law marker that would otherwise leave this clone
+    // claiming a scope record the public projection already dropped (DEF-1).
+    // This boundary has no archive-backed identity map, so a drop is the honest
+    // act; the account-file path, which does have one, remaps instead.
+    settlement: scrubGalleryImportLivingContent(scrubImportedTreasury(normalizeSettlement({
       ...src,
       neighbourNetwork: [],
       neighborRelationship: null,
@@ -72,7 +81,7 @@ export async function importGallerySettlementImpl(get, set, slug) {
       // here, so DM-imposed cults imported live and activated the religion subsystem).
       config: scrubImportedConfig(src.config),
       importedFrom: { slug, sourceName: dossier.name || src.name || null, importedAt },
-    })),
+    }))),
     config: null,
     seed: null,
     aiData: {},

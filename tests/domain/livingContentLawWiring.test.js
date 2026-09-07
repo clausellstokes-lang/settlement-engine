@@ -58,6 +58,10 @@ import {
 import { geographyLockedConfig } from '../../src/domain/locksPreservation.js';
 import { deepClone } from '../../src/domain/clone.js';
 import { isAllowedConfigKey } from '../../src/store/configSlice.js';
+// The Library's Load runs a saved `settlement._config` through this before handing
+// it to `updateConfig`; the clamp arm below walks that exact hop rather than
+// asserting about it.
+import { migrateSettlementConfig } from '../../src/lib/settlementConfigMigration.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   registerLivingContentRosterBuilder,
@@ -169,6 +173,70 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     expect(through[ROSTER_KEY]).toBeUndefined();
     expect(resolveLivingContentLawVersion(through.config))
       .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+  });
+
+  it('⛔ CREATE (THE CLAMP): a LIT marker arriving through the wizard form cannot birth a v2 world', () => {
+    // DEF-2. The hole this arm closes was reachable on a SHIPPED DARK BUILD: the
+    // Library's Load ("Apply Saved Configuration & Regenerate") hydrates the wizard
+    // form from a saved `settlement._config`, `updateConfig` admits the underscore
+    // family by prefix, and a spread of `{}` — which is what the dormant mint
+    // returns — deletes nothing. So an imported v2 world's config, loaded and
+    // regenerated, used to mint a roster on a build whose dial says v1.
+    //
+    // Each hop of that path is measured here rather than assumed, so the arm
+    // cannot go green because the path stopped existing.
+    const hydrated = migrateSettlementConfig({ ...LIT_CONFIG });
+    expect(
+      hydrated[LIVING_CONTENT_LAW_CONFIG_KEY],
+      'migrateSettlementConfig stopped carrying the marker — this arm no longer tests the'
+      + ' Library-Load path it was written for',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(isAllowedConfigKey(LIVING_CONTENT_LAW_CONFIG_KEY)).toBe(true);
+
+    // THE POSITIVE CONTROL, and it is the defect itself: that hydrated config
+    // really does mint a roster on this dark build when it reaches the builder
+    // unclamped. A green below without this line would be equally true of a build
+    // where nothing can mint a roster at all.
+    const pack = { deities: [{ localUid: 'lu-clamp', name: 'Hydrated Patron' }] };
+    expect(
+      buildLivingContentRoster(pack, hydrated),
+      'the hydrated lit config no longer mints a roster — the clamp arm below is vacuous',
+    ).not.toBeNull();
+
+    const born = birthConfig(hydrated);
+    expect(born[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    expect(
+      Object.hasOwn(born, LIVING_CONTENT_LAW_CONFIG_KEY),
+      'the marker key survived birthConfig — a birth\'s law is no longer the dial\'s law',
+    ).toBe(false);
+    expect(materializesLivingContent(born)).toBe(false);
+    expect(buildLivingContentRoster(pack, born)).toBeNull();
+    // …and through the REAL pipeline, which is where a roster would actually land.
+    const world = generateSettlementPipeline(born, pack, { seed: 'l-mat-fix-clamp' });
+    expect(world[ROSTER_KEY]).toBeUndefined();
+    expect(world.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    // The clamp takes the marker and NOTHING ELSE.
+    expect(Object.keys(born).sort()).toEqual(
+      Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY).sort(),
+    );
+  });
+
+  it('⛔ THE CLAMP DOES NOT DEFEAT THE MINT: with the dial LIT, a birth is still v2', () => {
+    // The other direction, and the reason the clamp is a destructure rather than a
+    // delete-after-spread: the mint is spread AFTER the carried keys, so lighting
+    // the dial still governs every birth. A clamp that ran last would have made the
+    // dial unlightable — a far worse defect than the one it cures.
+    return boundaryWithLitLaw().then((mod) => {
+      const hydrated = migrateSettlementConfig({ ...LIT_CONFIG });
+      const born = mod.birthConfig(hydrated);
+      expect(born[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+      expect(materializesLivingContent(born)).toBe(true);
+      // …and a DARK incoming config is lit by the dial, not left dark.
+      expect(mod.birthConfig({ ...CONFIG })[LIVING_CONTENT_LAW_CONFIG_KEY])
+        .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+      vi.doUnmock('../../src/domain/content/livingContentLaw.js');
+      vi.resetModules();
+    });
   });
 
   it('⭐ CREATE (LIT, fired deliberately): birthConfig really does spread the mint', () => {
