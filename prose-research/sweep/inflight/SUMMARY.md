@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 18:04:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 18:10:21 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -28,13 +28,6 @@
 | ? | other |  | result | 0 | reconcile-herald-pools.md | — | 15:39:42 |
 | ? | other |  | result | 0 | — | — | 15:56:26 |
 | ? | other |  | failed | 0 | — | — | 16:36:42 |
-| ? | other |  | result | 0 | — | — | 16:05:29 |
-| ? | other |  | result | 0 | FOLD.md | — | 16:14:29 |
-| ? | other |  | result | 0 | import.md | — | 16:06:04 |
-| ? | other |  | result | 0 | — | — | 15:58:42 |
-| ? | other |  | result | 0 | — | — | 16:03:46 |
-| ? | other |  | result | 0 | promise.md | — | 16:03:54 |
-| ? | other |  | result | 0 | — | — | 16:07:57 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
