@@ -36,12 +36,20 @@ export { persistSaveUpdate } from './campaignSliceShared.js';
 // leaf so settlementSlice keeps its single helper import home and gains no new static
 // import of its own — the eager-closure rule the lock leaf's header explains.
 export { sectionLocked, carryLockedSections, geographyLockedConfig } from '../domain/locksPreservation.js';
-// THE CREATE BOUNDARY (ODQ §822), re-exported through this leaf for the SAME reason
-// as the locks read side above: settlementSlice.js is size-ratcheted at tolerance 0
-// and keeps one helper import home rather than gaining a static import of its own.
-// `birthConfig` marks a generation as a BIRTH — see densityCreateBoundary.js for the
-// manifest of which pipeline callers are births and which must never mint.
-export { birthConfig } from '../domain/density/densityCreateBoundary.js';
+// ⛔ THE CREATE BOUNDARY (ODQ §822) IS NOT RE-EXPORTED HERE ANY MORE, AND THE
+// REASON IS THE ONE THE `loadSettlementContentRuntimeOptions` NOTE ABOVE GIVES.
+// This leaf is EAGER, and the re-export was this file's SOLE static edge into
+// `domain/density/densityCreateBoundary.js` — so the boundary module sat in
+// src/main.jsx's static closure no matter which lazy module actually called it.
+// MEASURED (lane L-MAT): its only consumer is the generation lane
+// (settlementGenerateAction.js), which is itself reached only through
+// settlementSlice.js's dynamic import, and the realm composer already imported
+// the boundary directly. Moving the lane to a direct import takes the main.jsx
+// closure 239 -> 238 modules and drops the boundary out of it; `densityLaw.js`
+// stays eager on its own engine-core path, so the density law costs the same.
+// The size-ratchet reason the locks re-export above exists does NOT apply: the
+// consumer here is the LANE, not `settlementSlice.js`, and the lane carries no
+// size-baseline row at all.
 
 const MAX_VERSION_HISTORY = 50;
 

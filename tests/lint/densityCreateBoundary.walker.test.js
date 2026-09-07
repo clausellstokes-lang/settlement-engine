@@ -42,13 +42,21 @@ const SELF = 'src/generators/generateSettlementPipeline.js';
 /** The two symbols that constitute "this module mints a birth law". */
 const MINT_SYMBOLS = ['birthConfig', 'newSettlementDensityLaw'];
 
-/** The create-boundary module and its own re-export leaf legitimately NAME the
- *  mint without being pipeline callers; they are the mint's home and its pass-
- *  through, not generation sites. */
+/** The create-boundary module and the law module behind it legitimately NAME the
+ *  mint without being pipeline callers; they are the mint's home, not generation
+ *  sites.
+ *
+ *  ⚠ `src/store/settlementSliceHelpers.js` WAS THE THIRD ROW AND IS DELETED, NOT
+ *  KEPT AS AN ALLOWLIST ENTRY (lane L-MAT). That leaf re-exported `birthConfig`,
+ *  and the re-export was the SOLE eager edge into the boundary module — so the
+ *  boundary sat in first paint for a pass-through nobody needed. The lane now
+ *  imports the boundary directly and the leaf names the mint nowhere, so the row
+ *  would be a standing excuse for a mint returning to an EAGER store leaf, which
+ *  is the byte defect this file's register exists to keep visible. A row kept
+ *  after its reason has gone is how the next re-export lands green. */
 const MINT_HOMES = Object.freeze([
   'src/domain/density/densityCreateBoundary.js',
   'src/domain/density/densityLaw.js',
-  'src/store/settlementSliceHelpers.js',
 ]);
 
 /**

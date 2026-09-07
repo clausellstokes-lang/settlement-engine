@@ -44,8 +44,16 @@ import {
 } from '../lib/generationProtocol.js';
 import { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
 import {
-  carryLockedSections, geographyLockedConfig, birthConfig, remapLocksAfterGenerate,
+  carryLockedSections, geographyLockedConfig, remapLocksAfterGenerate,
 } from './settlementSliceHelpers.js';
+// ⛔ THE CREATE BOUNDARY IS IMPORTED DIRECTLY, NOT THROUGH THE HELPERS LEAF, AND
+// THAT EDGE IS A FIRST-PAINT MEASUREMENT. `settlementSliceHelpers.js` is EAGER;
+// while it re-exported `birthConfig` the boundary module sat in src/main.jsx's
+// static closure even though its only two callers — this lane and the realm
+// composer — are both lazy. This lane is reached solely through
+// settlementSlice.js's dynamic import, so importing the boundary here keeps it
+// on the lazy side with its callers (MEASURED, lane L-MAT: closure 239 -> 238).
+import { birthConfig } from '../domain/density/densityCreateBoundary.js';
 import { activateFaithIfEntitled, resetSettlementIdentity } from './settlementLifecycleHelpers.js';
 
 /** Request correlation. A counter, never a clock and never a random draw. */
