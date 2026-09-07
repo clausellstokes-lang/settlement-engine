@@ -43,13 +43,23 @@ function readJson(path) {
   return JSON.parse(text);
 }
 
-/** Print one cell's firings with its address — the news address law, on a CLI. */
+/**
+ * Print one cell's firings with its address — the news address law, on a CLI.
+ *
+ * ⛔ THE OBSERVABILITY CHANNEL CARRIES TWO KINDS SINCE §909 CAR 5, AND THE PRINTER SAYS
+ * WHICH. A host-observability firing is a wall-clock or heap reading that must never gate
+ * anything; an `inconclusive` entry is a DETERMINISTIC row that ran and could not conclude
+ * because the run was shorter than the horizon it grades. Printing the second under the
+ * first's label would be the false-report class arriving in the one place a reader looks.
+ */
 function printFirings(label, findings, observability) {
   for (const firing of findings) {
     console.log(`  FINDING  ${label} · ${firing.id} — ${firing.detail}`);
   }
   for (const firing of observability) {
-    console.log(`  observe  ${label} · ${firing.id} — ${firing.detail} (host-observability; never a finding)`);
+    console.log(firing.inconclusive
+      ? `  horizon  ${label} · ${firing.id} — ${firing.detail} (the row RAN; the run was too short to conclude)`
+      : `  observe  ${label} · ${firing.id} — ${firing.detail} (host-observability; never a finding)`);
   }
 }
 
@@ -136,9 +146,11 @@ export function main(argv = process.argv.slice(2)) {
     console.log(`annotated receipt: ${target}`);
   }
   if (argv.includes('--json')) console.log(`\n${JSON.stringify(report, null, 2)}`);
+  const inconclusive = report.observability.filter((firing) => firing.inconclusive).length;
   console.log(
     `\n${report.deterministicFirings ? `FIRED: ${report.deterministicFirings} deterministic finding(s)` : 'OK — no deterministic tripwire fired'}`
-    + ` over ${report.cells} cell(s); ${report.observability.length} host-observability note(s)`,
+    + ` over ${report.cells} cell(s); ${report.observability.length - inconclusive} host-observability note(s)`
+    + `; ${inconclusive} row(s) COMPLETE BUT INCONCLUSIVE (the run was shorter than the horizon they grade)`,
   );
   return report.deterministicFirings ? 1 : 0;
 }

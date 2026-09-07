@@ -15,9 +15,12 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  CAMPAIGN_HORIZON_YEARS,
   LIVENESS_CHECK_TITLE,
   LIVENESS_FAILURE_KINDS,
   LIVENESS_FLOOR,
+  MOTION_FLOOR_01,
+  MOVING_SHARE_FLOOR,
   POPULATION_ENVELOPE,
   WALL_TIME_TREND,
   YEARLY_BYTES_PER_SETTLEMENT_CEILING,
@@ -28,6 +31,10 @@ import {
   wallTimeTrendVerdict,
   yearlyBytesVerdict,
 } from '../../scripts/audit/soakInvariants.mjs';
+// ⭐ THE CERTIFICATION SIDE'S OWN SPELLING OF THE CAMPAIGN HORIZON, imported so the twin is
+// ASSERTED rather than described. `soakScriptSeams.test.js` already reaches into `src/` from
+// this directory, so the reach is precedent and not a new seam.
+import { CERTIFICATION_HORIZONS } from '../../src/domain/certification/behavioralContract.js';
 
 /** Ten years of a living world: fresh types every year and a moving composite. */
 function livingYears(years = 10) {
@@ -103,6 +110,35 @@ describe('the soak invariants — one home per threshold', () => {
     expect(LIVENESS_CHECK_TITLE).toBe(
       'the world keeps moving: every decade carries distinct typed events and the composite state changes every year',
     );
+  }, 20_000);
+
+  test('the three §909 lifted bars hold their values, and the campaign horizon cannot drift from its certification twin', () => {
+    /**
+     * ⛔⛔ THE LIFT MOVED A SPELLING; IT DID NOT REMOVE ONE (§909 car 5, on a skeptic's
+     * count). `CAMPAIGN_HORIZON_YEARS` was two definitions before the lift and is two after
+     * — this module and `CERTIFICATION_HORIZONS.useful.years` — and NOTHING in the estate
+     * reddened when they drifted. The lift is ratified because the envelope suite stopped
+     * TYPING the figure, and this arm is the guard the ratification was conditional on.
+     */
+    expect(CAMPAIGN_HORIZON_YEARS).toBe(CERTIFICATION_HORIZONS.useful.years);
+    // …and the twin is a real reading, not an undefined that would make the equality vacuous
+    // on both sides. A `useful` horizon that stopped existing must red here, not pass.
+    expect(typeof CERTIFICATION_HORIZONS.useful.years).toBe('number');
+    expect(CERTIFICATION_HORIZONS.useful.years).toBeGreaterThan(0);
+
+    // ── THE THREE LIFTED VALUES, PINNED AS CONTROLS READ FROM THE MODULE ─────────────
+    // A tuning value that moves without a declared cause is the estate's STATE-NEVER-FATE
+    // clause; these three are read here so the move reds in a test rather than arriving as a
+    // quiet re-grade of `capacity_envelope_30y` and the envelope suite at once.
+    expect(CAMPAIGN_HORIZON_YEARS).toBe(30);
+    expect(MOVING_SHARE_FLOOR).toBe(0.05);
+    expect(MOTION_FLOOR_01).toBe(0.0025);
+    // The two floors are shares of a whole, so a value outside (0, 1] is not a tightening —
+    // it is a bar that cannot be met or cannot be missed.
+    for (const bar of [MOVING_SHARE_FLOOR, MOTION_FLOOR_01]) {
+      expect(bar).toBeGreaterThan(0);
+      expect(bar).toBeLessThanOrEqual(1);
+    }
   }, 20_000);
 
   test('the liveness floor carries Car 0 measured literal and its hard minimum stays inert', () => {

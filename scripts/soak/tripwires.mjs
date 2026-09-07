@@ -74,19 +74,47 @@ const finite = (value) => typeof value === 'number' && Number.isFinite(value);
  * evidence either, and grading the two apart would be a distinction without a measurement.
  *
  * ⭐⭐ AND THE PATH MAY BE NESTED (§909 car 2). `capacity_realm_load` keys on
- * `behavioral.yearly[last].realmDemography` — an ADDITIVE key `behavioral-observation.mjs`
- * ships CONDITIONALLY (`:1054`, `...(realmDemography ? { realmDemography } : {})`), so a v4
- * receipt, and any receipt whose world ran the demographic term dark, simply lacks it. Its
- * detector then hit `if (!reading || typeof reading !== 'object') return []` and answered
- * `[]` — the SAME weak zero its two siblings paid for one level up, one level down. Grading
- * only TOP-LEVEL fields left exactly that hole, so the path is the unit now.
+ * `behavioral.yearly[last].realmDemography{}` — an ADDITIVE key that
+ * `behavioral-observation.mjs` ships CONDITIONALLY, through the conditional shorthand spread
+ * of `realmDemography` in the yearly row it returns, so a v4 receipt, and any receipt whose
+ * world ran the demographic term dark, simply lacks it. Its detector then hit
+ * `if (!reading || typeof reading !== 'object') return []` and answered `[]` — the SAME weak
+ * zero its two siblings paid for one level up, one level down. Grading only TOP-LEVEL fields
+ * left exactly that hole, so the path is the unit now.
  *
- * ⚠ `[last]` IS THE ONLY INDEX FORM, AND IT IS NOT A CONVENIENCE. Every capacity row reads
- * the LAST observed year and nothing else, so the path says so out loud rather than letting
- * a reader guess which row of the series `requires` meant. An EMPTY array is absent by the
- * same law `null` is: a run that observed no years carried no evidence about its last one.
+ * ⛔⛔ AND "CARRIED" IS THE SHAPE THE ROW READS, NOT MERELY A KEY THAT EXISTS (§909 car 5).
+ * The emptiness law was written into the `[last]` branch alone, so a BARE name was admitted
+ * on `cursor[key] != null` and nothing else — and a lit receipt carrying
+ * `yearlyPopulations: []` graded both series rows EXECUTABLE, let them take their own
+ * `pops.length < 150` early return, and certified `fullInstrument` over two rows that could
+ * not observe. That is this file's own weak zero, one floor further down, with the cure
+ * comment sitting over it. Three statements now hold at EVERY segment:
+ *
+ *   `null`/`undefined`   absent — a receipt that wrote the key and nothing into it carried no
+ *                        evidence, and grading the two apart is a distinction without a
+ *                        measurement.
+ *   an EMPTY ARRAY       absent, bare names included — a run that observed no years carried
+ *                        no evidence about any of them.
+ *   the DECLARED SHAPE   a segment may say what the row reads off it, and a value of another
+ *                        shape is absent rather than a silent clean: `[last]` is a non-empty
+ *                        ARRAY, walked to its final row (every capacity row reads the last
+ *                        observed year and nothing else, so the path says so out loud rather
+ *                        than letting a reader guess); `{}` is a non-array OBJECT with at
+ *                        least one own key, which is what a row keyed on `reading.loadRatio01`
+ *                        actually needs. `realmDemography = 42` and `realmDemography = {}`
+ *                        are both readings the row cannot read, and both used to pass.
+ *
+ * ⚠ THE SHAPE IS DECLARED, NEVER INFERRED, and that is the whole reason it is grammar. A law
+ * that simply refused every primitive terminal would make a future row keyed on a scalar
+ * (`settlements`, whose own `Number(…) || 0` guard is the same weak zero) permanently
+ * NOT-EXECUTABLE and indistinguishable from an honest instrument gap — a false report bought
+ * to close a true one. A bare segment still means "present and not empty", and a row that
+ * needs more says which.
  */
-const REQUIRE_SEGMENT = /^([A-Za-z_$][\w$]*)(\[last\])?$/;
+const REQUIRE_SEGMENT = /^([A-Za-z_$][\w$]*)(\[last\]|\{\})?$/;
+
+/** The shape vocabulary a `requires` segment may declare. Closed, and convicted when wrong. */
+const REQUIRE_SHAPES = Object.freeze(['[last]', '{}']);
 
 /** Is this a well-formed `requires` path? A malformed one is a registry DEFECT, not a miss. */
 const requirePathIsWellFormed = (path) => typeof path === 'string'
@@ -98,16 +126,20 @@ const receiptCarries = (receipt, path) => {
   if (!requirePathIsWellFormed(path)) return false;
   let cursor = receipt;
   for (const segment of path.split('.')) {
-    const [, key, last] = REQUIRE_SEGMENT.exec(segment);
+    const [, key, shape] = REQUIRE_SEGMENT.exec(segment);
     if (cursor == null
       || typeof cursor !== 'object'
       || !Object.prototype.hasOwnProperty.call(cursor, key)
       || cursor[key] == null) return false;
     cursor = cursor[key];
-    if (last) {
-      if (!Array.isArray(cursor) || !cursor.length) return false;
+    // THE EMPTINESS LAW, AT EVERY SEGMENT AND NOT ONLY UNDER `[last]` (§909 car 5).
+    if (Array.isArray(cursor) && !cursor.length) return false;
+    if (shape === '[last]') {
+      if (!Array.isArray(cursor)) return false;
       cursor = cursor[cursor.length - 1];
       if (cursor == null) return false;
+    } else if (shape === '{}') {
+      if (typeof cursor !== 'object' || Array.isArray(cursor) || !Object.keys(cursor).length) return false;
     }
   }
   return true;
@@ -117,6 +149,23 @@ const meanOf = (list, from, to) => {
   const slice = list.slice(Math.floor(list.length * from), Math.floor(list.length * to));
   return slice.reduce((sum, value) => sum + value, 0) / Math.max(1, slice.length);
 };
+
+/**
+ * ⚠ THE TWO CAPACITY HORIZONS, SPELLED ONCE EACH IN THIS FILE (§909 car 5). Each was written
+ * twice — into the row's `band` prose and into its detector's early return — and the row now
+ * declares the same figure to the evaluator as well, so a third spelling would have been the
+ * five-homes defect arriving inside the guard that refuses it. NO VALUE MOVED: 150 and 100
+ * are the figures the detectors already took their early returns at. The campaign horizon
+ * the envelope row grades is NOT here: it has an importable home already
+ * (`soakInvariants.mjs`'s `CAMPAIGN_HORIZON_YEARS`) and this file reads it from there.
+ */
+const PLATEAU_HORIZON_YEARS = 150;
+const FLOOR_THAW_HORIZON_YEARS = 100;
+
+/** How many observed years a receipt's top-level population series carries. */
+const observedPopulationYears = (receipt) => (Array.isArray(receipt?.yearlyPopulations)
+  ? receipt.yearlyPopulations.length
+  : 0);
 
 /**
  * THE REGISTRY. Each row: a stable `id` (the census key — the banked-failure identity
@@ -132,9 +181,17 @@ const meanOf = (list, from, to) => {
  *   `requires: []`    the receipt FIELD PATHS without which the row's silence is not a
  *                     MEASUREMENT. Absent ⇒ the row is NOT-EXECUTABLE and says so with the
  *                     path named; it does NOT answer `[]`. A path is a top-level name
- *                     (`yearlyPopulations`) or a dotted walk into the envelope with `[last]`
- *                     for the last row of a series (`behavioral.yearly[last].realmDemography`
- *                     — §909 car 2, because the same weak zero lives one level down).
+ *                     (`yearlyPopulations[last]`) or a dotted walk into the envelope, each
+ *                     segment optionally declaring the SHAPE the row reads off it — `[last]`
+ *                     the last row of a non-empty series, `{}` an object with a reading in it
+ *                     (`behavioral.yearly[last].realmDemography{}` — §909 car 2, because the
+ *                     same weak zero lives one level down; §909 car 5 for the shape).
+ *   `horizon: {}`     the run length below which this row OBSERVED NOTHING — `required` years
+ *                     against what `observed(receipt)` counts. A row whose detector takes its
+ *                     own "the run was too short" early return did RUN: it is neither a
+ *                     finding nor NOT-EXECUTABLE, it is COMPLETE BUT INCONCLUSIVE, and it
+ *                     says so in the `observability` channel rather than answering a silent
+ *                     `[]` a reader would take for a plateau (§909 car 5).
  *
  * ⛔ THE GATE LIVES ON THE ROW, NOT INSIDE `detect`, AND THAT IS THE WHOLE REASON IT MOVED.
  * While the demographics gate was the detector's own first line, an ungated blindness and a
@@ -186,10 +243,11 @@ export const TRIPWIRES = Object.freeze([
     class: 'deterministic',
     band: 'zero tolerance, REMNANTS EXCEPTED',
     // ⚠ THE REMNANT LAW OR NOTHING. A properly-died settlement legitimately holds zero
-    // (whole-world-soak.mjs:559, the 2026-07-31 law). Without the died-flag exception
+    // (the `everyAlive` check in whole-world-soak.mjs, the 2026-07-31 law). Without the
+    // died-flag exception
     // this row reports every lawful death as a finding, and a registry that cries wolf
     // on the correct behaviour is worse than an absent one.
-    home: 'whole-world-soak.mjs:559, the remnant law, honoured verbatim',
+    home: 'whole-world-soak.mjs\'s `everyAlive` check — the remnant law, honoured verbatim (cited by symbol at §909 car 5: the line number here was 313 lines stale)',
     detect: (receipt) => {
       const populations = Array.isArray(receipt?.finalPopulations) ? receipt.finalPopulations : [];
       const died = Array.isArray(receipt?.finalDiedFlags) ? receipt.finalDiedFlags : [];
@@ -220,7 +278,7 @@ export const TRIPWIRES = Object.freeze([
     id: 'unbounded_growth',
     class: 'deterministic',
     band: `${YEARLY_BYTES_PER_SETTLEMENT_CEILING} bytes × settlements`,
-    home: 'whole-world-soak.mjs:578-582, INHERITED verbatim — never a second spelling',
+    home: 'whole-world-soak.mjs\'s `YEARLY_BYTES_PER_SETTLEMENT_CEILING * SETTLEMENTS` check, INHERITED verbatim — never a second spelling',
     detect: (receipt) => {
       const bytes = Array.isArray(receipt?.yearlyBytes) ? receipt.yearlyBytes.filter(finite) : [];
       const settlements = Number(receipt?.settlements) || 0;
@@ -294,8 +352,10 @@ export const TRIPWIRES = Object.freeze([
   // `unbounded_growth`, and the signing record must cite those rather than these.
   //
   // ⚠ THE GATE READS `subsystems.rules.demographicsEnabled`, CONFIRMED PRESENT: the soak
-  // writes `rules: runA.simulationRules` into its subsystem block
-  // (`whole-world-soak.mjs:1050-1052`), so this is a field that exists, not one hoped for.
+  // writes `rules: runA.simulationRules` into the `subsystems` block of `receiptBody`
+  // (`whole-world-soak.mjs`), so this is a field that exists, not one hoped for. CITED BY
+  // SYMBOL, because the line number this comment carried was already stale when it shipped
+  // and staled twice more while nobody could see it.
   //
   // ⭐⭐ AND THE FOURTH DESIGNED ROW IS ARMED AT §909 CAR 3 — the design's own §2.5 C3
   // prediction, discharged. It shipped unarmed on TWO recorded grounds and only the second
@@ -331,7 +391,7 @@ export const TRIPWIRES = Object.freeze([
   Object.freeze({
     id: 'capacity_plateau',
     class: 'deterministic',
-    band: 'over >= 150 observed years: |y_last - y_mid| / y_mid <= 0.05, and every century multiplier < 50',
+    band: `over >= ${PLATEAU_HORIZON_YEARS} observed years: |y_last - y_mid| / y_mid <= 0.05, and every century multiplier < 50`,
     home: 'tests/domain/demographicsCure.test.js:108-149 — the cure suite\'s own plateau clauses, INHERITED verbatim so the soak and the unit pin cannot disagree about what a plateau is',
     gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
     // ⛔⛔ MEASURED BLIND, SAID SO, AND CURED AT §909 (M1-F1, CONFIRMED twice by independent
@@ -354,12 +414,23 @@ export const TRIPWIRES = Object.freeze([
     // ⚠ THE DIED FLAGS ARE REQUIRED TOO, AND NOT AS SYMMETRY. Without them the remnant law
     // has no exception list and this row would convict every lawful death — a series
     // shipped alone would be worse than no series at all.
-    requires: ['yearlyPopulations', 'yearlyDiedFlags'],
+    //
+    // ⭐ AND THE SHAPE IS DECLARED (§909 car 5). `[last]` says what the detector reads —
+    // `pops[last]`, the final observed year — so `yearlyPopulations: []` and a
+    // `yearlyPopulations` that is not a series at all are ABSENT rather than admitted into
+    // the early return below, which is where the weak zero had its last floor.
+    requires: ['yearlyPopulations[last]', 'yearlyDiedFlags[last]'],
+    // ⛔ AND A RUN TOO SHORT TO OBSERVE SAYS SO (§909 car 5). Below the horizon this row's
+    // detector answers `[]` by its own guard — the correct verdict, and one no reader can
+    // tell from a plateau it measured. The row is COMPLETE BUT INCONCLUSIVE, in
+    // `observability`, with the two figures on its face.
+    horizon: Object.freeze({ required: PLATEAU_HORIZON_YEARS, observed: observedPopulationYears }),
     detect: (receipt) => {
       const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
-      // A run under 150 years did not observe a plateau; reading that silence as either a
-      // pass or a finding is the §206.2b error the liveness row already paid for.
-      if (pops.length < 150) return [];
+      // A run under the plateau horizon did not observe a plateau; reading that silence as
+      // either a pass or a finding is the §206.2b error the liveness row already paid for,
+      // and the row's `horizon` above is what stops it reading as either.
+      if (pops.length < PLATEAU_HORIZON_YEARS) return [];
       const died = Array.isArray(receipt?.yearlyDiedFlags) ? receipt.yearlyDiedFlags : [];
       const last = pops.length - 1;
       const mid = Math.floor(last / 2);
@@ -389,17 +460,18 @@ export const TRIPWIRES = Object.freeze([
   Object.freeze({
     id: 'capacity_floor_thaw',
     class: 'deterministic',
-    band: 'no LIVING settlement holds one head count across its last 100 observed years',
+    band: `no LIVING settlement holds one head count across its last ${FLOOR_THAW_HORIZON_YEARS} observed years`,
     home: 'tests/domain/demographicsFloor.test.js — the floored-six unfreeze. The pre-cure defect had TWO halves and the bounded check only ever saw one: a settlement frozen at 200 for a century is as broken as one at 2.9e13, and it fires nothing',
     gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
     // The SAME blindness as its sibling above, found the same way and cured in the same
     // §909 landing: on the real 300-year receipt the row is correctly silent once the series
     // is rebuilt (nothing is frozen), but as shipped it could not have said otherwise about
     // any world. `requires` stays for the archived receipts, exactly as above.
-    requires: ['yearlyPopulations', 'yearlyDiedFlags'],
+    requires: ['yearlyPopulations[last]', 'yearlyDiedFlags[last]'],
+    horizon: Object.freeze({ required: FLOOR_THAW_HORIZON_YEARS, observed: observedPopulationYears }),
     detect: (receipt) => {
       const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
-      if (pops.length < 100) return [];
+      if (pops.length < FLOOR_THAW_HORIZON_YEARS) return [];
       const died = Array.isArray(receipt?.yearlyDiedFlags) ? receipt.yearlyDiedFlags : [];
       const last = pops.length - 1;
       const from = last - 100;
@@ -428,9 +500,16 @@ export const TRIPWIRES = Object.freeze([
     // which the writer DOES ship, so it was never unreachable the way its two siblings were
     // — but `requires` graded TOP-LEVEL fields only, and the field this row actually stands
     // on is `yearly[last].realmDemography`: an ADDITIVE key `behavioral-observation.mjs`
-    // ships CONDITIONALLY (`:1054`). On a receipt that lacks it the detector hit
+    // ships CONDITIONALLY, through the conditional shorthand spread of `realmDemography` in
+    // its yearly row. On a receipt that lacks it the detector hit
     // `if (!reading …) return []` and answered a silent clean, which is the identical weak
     // zero one level down. The path is declared now, so that silence grades NOT-EXECUTABLE.
+    //
+    // ⭐ AND `{}` DECLARES WHAT THE DETECTOR READS OFF IT (§909 car 5): an object with a
+    // reading in it. `realmDemography = 42` and `realmDemography = {}` both fall through the
+    // `if (!reading || typeof reading !== 'object')` guard below — the first silently, the
+    // second into a non-finite finding — so the row says which shape its silence depends on
+    // rather than accepting any value that is merely not null.
     //
     // ⛔ AND THIS RE-GRADES ARCHIVED RECEIPTS, WHICH IS THE POINT AND IS DECLARED, NOT
     // SMUGGLED. Any receipt whose demographics gate is LIT but whose last observed year
@@ -439,7 +518,7 @@ export const TRIPWIRES = Object.freeze([
     // `requires` (see `evaluateTripwires`), so a legitimately dark cell stays NOT APPLICABLE
     // and owes no ledger entry. The two measured cases both keep their grade — the 300-year
     // `research-lit-4s` receipt and a lit 30-year run each carry the key.
-    requires: ['behavioral.yearly[last].realmDemography'],
+    requires: ['behavioral.yearly[last].realmDemography{}'],
     detect: (receipt) => {
       const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
       // The observation is an ADDITIVE key: a v4 receipt simply lacks it, and a consumer
@@ -477,11 +556,20 @@ export const TRIPWIRES = Object.freeze([
     // presence on the LAST observed row is the honest witness that the series carries it at
     // all — a pre-`37459391a` receipt lacks it on every row, and that silence must grade
     // NOT-EXECUTABLE rather than clean.
-    requires: ['behavioral.yearly[last].motion'],
+    requires: ['behavioral.yearly[last].motion{}'],
+    // ⛔ THE HORIZON IS DECLARED FOR THE SAME REASON ITS TWO SIBLINGS DECLARE THEIRS (§909
+    // car 5). A 29-year run answers `[]` here on the guard below, and a 29-year run is a
+    // legitimate useful-horizon run — so refusing it as NOT-EXECUTABLE would be false and
+    // leaving it silent would be the weak zero. It is COMPLETE BUT INCONCLUSIVE.
+    horizon: Object.freeze({
+      required: CAMPAIGN_HORIZON_YEARS,
+      observed: (receipt) => (Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly.length : 0),
+    }),
     detect: (receipt) => {
       const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
       // A run shorter than the customer horizon did not observe the window this row grades;
-      // reading that silence as a pass or a finding is the §206.2b error twice paid for.
+      // reading that silence as a pass or a finding is the §206.2b error twice paid for, and
+      // the row's `horizon` above is what keeps it from reading as either.
       if (yearly.length < CAMPAIGN_HORIZON_YEARS) return [];
       let transitions = 0;
       let moved = 0;
@@ -509,7 +597,7 @@ export const TRIPWIRES = Object.freeze([
     id: 'tick_duration_blowout',
     class: 'host-observability',
     band: `Q4 > Q1 × ${WALL_TIME_TREND_FACTOR} + ${WALL_TIME_TREND_SLACK_MS}ms`,
-    home: 'whole-world-soak.mjs:590, INHERITED verbatim; machine-tolerant BY DESIGN',
+    home: 'whole-world-soak.mjs\'s `wallTimeTrendVerdict` call, INHERITED verbatim; machine-tolerant BY DESIGN',
     detect: (receipt) => {
       const ms = Array.isArray(receipt?.yearlyMs) ? receipt.yearlyMs.filter(finite) : [];
       if (ms.length < 4) return [];
@@ -555,6 +643,16 @@ export function tripwiresOfClass(klass) {
  * not measurable are different facts, and this estate has already paid for reading them as
  * one.
  *
+ * ⚠⚠ AND `observability` CARRIES TWO KINDS SINCE §909 CAR 5, WHICH IS WHY EVERY ENTRY SAYS
+ * WHICH IT IS. The channel was keyed on the row's CLASS — host-observability firings and
+ * nothing else. A DETERMINISTIC row that ran and could not conclude, because the run was
+ * shorter than the horizon it grades, now rides the same channel with `inconclusive: true`
+ * on it. The alternatives were both false: `notExecutable` would fail `fullInstrument` on
+ * every legitimate 30-year receipt for a property the design does not give it, and silence
+ * is the weak zero this landing exists to close. A reader must never take an `inconclusive`
+ * entry for a host-observability note, so the flag is on the entry rather than in the
+ * caller's head.
+ *
  * @returns {{findings: Array<object>, observability: Array<object>,
  *            notExecutable: Array<{id: string, class: string, reason: string}>}}
  */
@@ -573,6 +671,21 @@ export function evaluateTripwires(receipt) {
         reason: `requires ${missing.map((field) => `receipt.${field}`).join(', ')} — absent from this receipt`,
       });
       continue;
+    }
+    // ⛔ THE HORIZON IS READ AFTER `requires` AND BEFORE THE VERDICT, AND THE ORDER IS THE
+    // STATEMENT. A row that could not run has nothing to say about how long the run was, so
+    // it must not also be reported inconclusive; a row that CAN run and grades a window the
+    // run never reached did run, and its `[]` is not a measurement of the world.
+    if (row.horizon && typeof row.horizon.observed === 'function') {
+      const observed = Number(row.horizon.observed(receipt)) || 0;
+      if (observed < row.horizon.required) {
+        observability.push({
+          id: row.id,
+          class: row.class,
+          inconclusive: true,
+          detail: `horizon: ${observed} years observed, ${row.horizon.required} required`,
+        });
+      }
     }
     for (const detail of row.detect(receipt)) {
       const firing = { id: row.id, class: row.class, detail };
@@ -607,14 +720,19 @@ export function evaluateTripwires(receipt) {
  */
 
 /**
- * The top-level receipt fields ONE row reads, from its `detect` and `gate` source text.
+ * The top-level receipt fields ONE row reads, from its `detect`, `gate` and `horizon.observed`
+ * source text.
  *
- * @param {{detect?: Function, gate?: Function}} row
+ * ⚠ THE HORIZON READER IS SCANNED TOO (§909 car 5), for the same reason the gate is: a row
+ * may read a series to say how much of it there was, and a walker that graded only the
+ * detector would clear a row on a field it also touches somewhere the walker never looked.
+ *
+ * @param {{detect?: Function, gate?: Function, horizon?: {observed?: Function}}} row
  * @returns {{fields: string[], unreadable: string|null}} `unreadable` names a row this
  *   walker refuses to grade rather than passing by default.
  */
 export function tripwireFieldsRead(row) {
-  const source = `${String(row?.detect || '')}\n${String(row?.gate || '')}`;
+  const source = `${String(row?.detect || '')}\n${String(row?.gate || '')}\n${String(row?.horizon?.observed || '')}`;
   const fields = new Set();
   for (const match of source.matchAll(/receipt\s*\??\.\s*([A-Za-z_$][\w$]*)/g)) fields.add(match[1]);
   // THE ONE DOCUMENTED ACCESSOR IDIOM, and it is documented because `negative_stock` uses
@@ -636,16 +754,16 @@ export function tripwireFieldsRead(row) {
 }
 
 /**
- * The top-level keys the soak's receipt writer actually ships, read from its source.
+ * The keys of ONE object literal, from the character just past its opening brace to the
+ * brace that closes it — a depth-1 scan, so a nested literal's keys are not counted as the
+ * outer literal's own. Shared by both writer readers below (§909 car 2 inserted it BETWEEN
+ * `receiptWriterFields` and the JSDoc that documented it, and §909 car 5 gave each function
+ * back its own block: a comment describing the function under it is the cheapest true
+ * statement in a file, and the cheapest false one).
  *
- * ⚠ BOTH OBJECT LITERALS ARE READ, and the second is not decoration: `nonFiniteFigures` is
- * added in `const receipt = { ...receiptBody, nonFiniteFigures }`, one statement after the
- * body closes. A walker that read only `receiptBody` would report
- * `non_finite_ledger_figure` as keyed on an unwritten field — a THIRD unreachable row that
- * is not unreachable at all, and the kind of false positive that gets a guard deleted.
- *
- * @param {string} writerSource the text of `scripts/audit/whole-world-soak.mjs`
- * @returns {string[]}
+ * @param {string} source the module text
+ * @param {number} afterOpener index of the first character inside the literal
+ * @returns {Set<string>}
  */
 function literalKeysFrom(source, afterOpener) {
   const fields = new Set();
@@ -662,7 +780,7 @@ function literalKeysFrom(source, afterOpener) {
       const shorthand = trimmed.match(/^([A-Za-z_$][\w$]*)\s*,\s*$/);
       if (shorthand) fields.add(shorthand[1]);
       // ⛔ AND THE CONDITIONAL SHORTHAND SPREAD, WHICH THIS SCANNER MISSED AND §909 CAR 2
-      // MEASURED. `behavioral-observation.mjs:1054` ships the key this walker was extended
+      // MEASURED. `behavioral-observation.mjs` ships the key this walker was extended
       // to grade as `...(realmDemography ? { realmDemography } : {})` — a spread whose
       // payload is SHORTHAND, so the colon pattern above does not see it and the bare-key
       // pattern does not either. Without this line the walker reported the observer as not
@@ -680,6 +798,18 @@ function literalKeysFrom(source, afterOpener) {
   return fields;
 }
 
+/**
+ * The top-level keys the soak's receipt writer actually ships, read from its source.
+ *
+ * ⚠ BOTH OBJECT LITERALS ARE READ, and the second is not decoration: `nonFiniteFigures` is
+ * added in `const receipt = { ...receiptBody, nonFiniteFigures }`, one statement after the
+ * body closes. A walker that read only `receiptBody` would report
+ * `non_finite_ledger_figure` as keyed on an unwritten field — a THIRD unreachable row that
+ * is not unreachable at all, and the kind of false positive that gets a guard deleted.
+ *
+ * @param {string} writerSource the text of `scripts/audit/whole-world-soak.mjs`
+ * @returns {string[]}
+ */
 export function receiptWriterFields(writerSource) {
   const source = String(writerSource || '');
   const fields = new Set();
@@ -739,6 +869,15 @@ export function nestedWriterFields(nestedSource) {
  * about the exact level where the remaining weak zero lived, which is how a guard earns
  * being deleted. Caller supplies the source or the walker refuses the row.
  *
+ * ⛔⛔ AND THE TWO CHANNELS ARE INDEPENDENT, WHICH THEY WERE NOT (§909 car 5). A row whose
+ * DETECTOR could not be read — a computed `receipt[…]` with no literal key list — used to
+ * `continue` past the `requires` loop entirely, so a row with an unreadable detector and a
+ * requirement naming a path NO writer produces landed in `unreadable` and NOWHERE ELSE,
+ * while this header claimed every declared requirement was graded. The two statements are
+ * different: a READ is what the row touches, a REQUIRE is what the row says its silence
+ * depends on, and the second is knowable from the row's own declaration whatever the
+ * detector's source looks like. Both are graded now, always.
+ *
  * @param {Array<object>} rows
  * @param {string} writerSource
  * @param {string|null} [nestedSource] the text of the nested-section writer
@@ -757,11 +896,14 @@ export function tripwireFieldReach(rows, writerSource, nestedSource = null) {
   for (const row of rows) {
     const read = tripwireFieldsRead(row);
     if (read.unreadable) {
+      // The READ channel refuses this row — its field set is partial by construction, so
+      // grading it would clear reads the walker cannot see. The REQUIRE channel below is
+      // unaffected: it reads the row's own declaration, not its detector's text.
       unreadable.push({ id: row.id, reason: read.unreadable });
-      continue;
-    }
-    for (const field of read.fields.sort()) {
-      if (!written.has(field)) unreachable.push({ id: row.id, field });
+    } else {
+      for (const field of read.fields.sort()) {
+        if (!written.has(field)) unreachable.push({ id: row.id, field });
+      }
     }
     for (const path of (Array.isArray(row.requires) ? row.requires : [])) {
       if (!requirePathIsWellFormed(path)) {
@@ -814,13 +956,25 @@ export function tripwireRegistryDefects(rows = TRIPWIRES) {
       // every receipt and read exactly like an honest instrument gap.
       for (const path of row.requires) {
         if (!requirePathIsWellFormed(path)) {
-          defects.push(`${row.id}: requires path "${path}" is not a dotted field path (name, or name[last])`);
+          defects.push(`${row.id}: requires path "${path}" is not a dotted field path (name, name${REQUIRE_SHAPES.join(' or name')})`);
         }
       }
     }
-    // The clock scan reads the GATE as well as the detector: moving a row's applicability
-    // test onto the row must not open a door the class boundary closed.
-    if (row.class === 'deterministic' && /Date\.now|performance\.now|memoryUsage/.test(`${String(row.detect)}${String(row.gate || '')}`)) {
+    // ⭐ AND A HORIZON IS CONVICTED THE SAME WAY (§909 car 5). A row that declares one and
+    // gets the shape wrong would report nothing at all — a guard silently disarmed is the
+    // class this registry exists to refuse, so a malformed `horizon` is named here.
+    if (row.horizon !== undefined
+      && (typeof row.horizon !== 'object' || row.horizon === null
+        || typeof row.horizon.observed !== 'function'
+        || !(typeof row.horizon.required === 'number' && Number.isFinite(row.horizon.required))
+        || row.horizon.required <= 0)) {
+      defects.push(`${row.id}: horizon is declared and is not { required: a positive number, observed: a function }`);
+    }
+    // The clock scan reads the GATE and the HORIZON READER as well as the detector: moving
+    // a row's applicability test — or its run-length reading — onto the row must not open a
+    // door the class boundary closed.
+    if (row.class === 'deterministic'
+      && /Date\.now|performance\.now|memoryUsage/.test(`${String(row.detect)}${String(row.gate || '')}${String(row.horizon?.observed || '')}`)) {
       defects.push(`${row.id}: a DETERMINISTIC row reads a clock or the heap — it belongs in host-observability`);
     }
   }

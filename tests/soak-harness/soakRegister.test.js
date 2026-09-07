@@ -89,17 +89,27 @@ function researchReceipt({
     IDS.forEach((id, index) => { stateVectors[id] = { population: series[index][year] }; });
     const eventTypeCounts = {};
     for (let n = 0; n < 12; n += 1) eventTypeCounts[`type_${(year * 12) + n}`] = 3;
-    // DERIVED, NEVER TYPED: one transition per settlement per year that has a previous
-    // year, counted as MOVED at the observer's own floor. Year 1 has no previous year, so
-    // it carries zero transitions — exactly what the observer produces.
+    // ⛔ DERIVED, NEVER TYPED — AND DERIVED THE WAY THE OBSERVER DERIVES IT (corrected at
+    // §909 car 5; the claim this comment used to make was false against every real receipt).
+    // `behavioral-observation.mjs` counts ONE transition per settlement present in both the
+    // BEFORE-state and the AFTER-state OF THAT YEAR: it walks the after-map and skips only a
+    // settlement with no `previous` entry — a world founded mid-year, not a first year. So
+    // year 1 is NOT exempt. Measured on all three receipts this lane wrote,
+    // `behavioral.yearly[0].year === 1` carries `populationTransitions: 4`, and ZERO rows
+    // carry zero transitions in 30 years or in 300. The old note here said year 1 "carries
+    // zero transitions — exactly what the observer produces", which was the fixture
+    // inventing a shape the writer does not produce: M1-F1's own lesson, inverted.
+    //
+    // This fixture holds no head count earlier than its own year 1, so year 1's before-state
+    // IS its year-1 value: four transitions, none of them moved. That is the only derivation
+    // its own numbers support, and it is the conservative one — it can lower the moved share
+    // and never raise it.
     const motion = { populationTransitions: 0, populationMoved: 0 };
-    if (year > 0) {
-      for (const row of series) {
-        const before = row[year - 1];
-        const after = row[year];
-        motion.populationTransitions += 1;
-        if (Math.abs(after - before) / Math.max(1, before) >= MOTION_FLOOR_01) motion.populationMoved += 1;
-      }
+    for (const row of series) {
+      const before = row[Math.max(0, year - 1)];
+      const after = row[year];
+      motion.populationTransitions += 1;
+      if (Math.abs(after - before) / Math.max(1, before) >= MOTION_FLOOR_01) motion.populationMoved += 1;
     }
     yearly.push({
       year: year + 1,

@@ -126,7 +126,11 @@ export function aggregateReceiptPaths(aggregate, aggregateDir) {
 
 /**
  * Fold many per-cell evaluations into one report. Deterministic findings are the verdict;
- * host-observability firings ride along as metadata and never gate anything (SK-2A).
+ * the observability array rides along as metadata and never gates anything (SK-2A) — it
+ * carries host-observability firings AND, since §909 car 5, the DETERMINISTIC rows that ran
+ * and could not conclude because the run was shorter than the horizon they grade, each
+ * carrying `inconclusive: true`. Neither kind gates; a reader that needs to tell them apart
+ * reads the flag rather than the row's class.
  *
  * @param {Array<{key: string, findings: Array<object>, observability: Array<object>}>} rows
  */

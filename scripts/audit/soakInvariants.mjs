@@ -131,8 +131,9 @@ export const LIVENESS_FAILURE_KINDS = Object.freeze(['silent', 'monoculture', 'f
  * and `WALL_TIME_TREND` already did, and BOTH former homes import it.
  *
  * ⚠ THE MOTION FLOOR WAS SPELLED TWICE BEFORE THIS LIFT and the two spellings had to agree
- * for the suite and the observer to be measuring the same thing: an inline `0.0025` at
- * `behavioral-observation.mjs:957` and the suite's own constant. Two homes for one figure is
+ * for the suite and the observer to be measuring the same thing: an inline `0.0025` in
+ * `behavioral-observation.mjs`'s per-settlement motion comparison (the `>= MOTION_FLOOR_01`
+ * line, which is what that literal became) and the suite's own constant. Two homes is
  * the five-homes defect in miniature — the observer counts a transition as MOVED at the
  * quarter percent, and the suite grades the share of transitions that moved, so a drift in
  * either spelling would silently re-define the other's denominator.
@@ -140,9 +141,17 @@ export const LIVENESS_FAILURE_KINDS = Object.freeze(['silent', 'monoculture', 'f
  * ⛔ THIS MODULE IMPORTS NOTHING, AND THAT IS DELIBERATE — it is the leaf both sides of the
  * engine/telemetry wall may read. So the campaign horizon is spelled here rather than
  * imported from `src/domain/certification/behavioralContract.js`, whose
- * `CERTIFICATION_HORIZONS.useful.years` is the same figure on the certification side. That
- * is a stated twin, not a silent one, and the lift REMOVES a spelling rather than adding
- * one: `demographicsEnvelope.test.js`'s own `CAMPAIGN_YEARS` now reads from here.
+ * `CERTIFICATION_HORIZONS.useful.years` is the same figure on the certification side.
+ *
+ * ⚠⚠ AND THE LIFT MOVED THAT SPELLING RATHER THAN REMOVING IT — corrected at §909 car 5 on a
+ * skeptic's count, because the difference is exactly the one this header exists to state.
+ * TWO definitions before (`demographicsEnvelope.test.js`'s own `const`, and the certification
+ * contract's) and TWO after (this one, and the certification contract's): what the lift
+ * genuinely bought is that the SUITE no longer types the figure — its `CAMPAIGN_YEARS` is
+ * now an alias of this constant, so the soak row and the suite arm cannot drift. The
+ * certification twin remains, and a stated twin with nothing asserting the two are equal is
+ * the shape that drifts, so `tests/soak-harness/soakInvariants.test.js` now carries the
+ * equality as an arm and pins all three lifted bars as controls read from this module.
  */
 
 /** A settlement-year transition COUNTS as motion at a quarter percent of the head count. */

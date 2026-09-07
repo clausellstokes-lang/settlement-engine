@@ -218,7 +218,14 @@ export async function main(argv = process.argv) {
   }));
   const findings = evaluations.flatMap((row) => row.findings);
   const observability = evaluations.flatMap((row) => row.observability);
-  console.log(`[soak] tripwires: ${findings.length} deterministic finding(s), ${observability.length} host-observability note(s)`);
+  // ⚠ THE OBSERVABILITY ARRAY CARRIES TWO KINDS SINCE §909 CAR 5 — host-observability
+  // firings, and DETERMINISTIC rows that ran and could not conclude on a run shorter than
+  // the horizon they grade. Counted apart, because one is a machine's mood and the other is
+  // a statement about what this run could prove.
+  const inconclusive = observability.filter((firing) => firing.inconclusive).length;
+  console.log(`[soak] tripwires: ${findings.length} deterministic finding(s), `
+    + `${observability.length - inconclusive} host-observability note(s), `
+    + `${inconclusive} row(s) complete but inconclusive`);
   for (const row of evaluations) {
     if (row.unreadable) console.log(`  UNEVALUATED ${row.cellKey} — ${row.unreadable}`);
   }
