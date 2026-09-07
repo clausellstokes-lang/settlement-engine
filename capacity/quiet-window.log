@@ -1,0 +1,5 @@
+SAMPLE 1 | Sun Sep  6 23:58:54 EDT 2026 | load: { 3.31 3.10 7.10 } | vitest: 0
+SAMPLE 2 | Sun Sep  6 23:59:54 EDT 2026 | load: { 2.94 2.99 6.79 } | vitest: 0
+SAMPLE 3 | Mon Sep  7 00:00:54 EDT 2026 | load: { 4.44 3.44 6.70 } | vitest: 0
+SAMPLE 4 | Mon Sep  7 00:01:01 EDT 2026 | load: { 4.64 3.50 6.70 } | vitest: 0
+SAMPLE 5 | Mon Sep  7 00:02:01 EDT 2026 | load: { 4.27 3.59 6.51 } | vitest: 0
