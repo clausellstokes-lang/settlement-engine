@@ -398,3 +398,88 @@ Dock tip `d63f80207`, porcelain 0. Cars 3–6 remain. Car 3's loaders extend
 `src/domain/prose/proseFingerprint.js` with three keys and re-runs the fourteen (the raw-text
 absence in §2.6 bounds what that re-run can cover, and the same refusal applies).
 
+---
+
+## CAR 3 — THE REGISTER LOADERS (chair G; MOVE-GRAMMAR §4.1) — **LANDED** · sha `eb2c330dd` · 2026-09-07 19:44 EDT
+
+### 3.1 What was built
+Seven loaders on ONE harvester, appended to `tests/helpers/dossierCorpus.js`, plus
+`tests/lint/proseRegisterLoaders.walker.test.js` (10 assertions). The registers differ in
+NESTING, not in kind — every one is a frozen table whose leaves are string arrays — so a
+loader per register would have been seven copies of one tree-walk. What differs per register
+is the export ROSTER and it is declared per call.
+
+### 3.2 THE CENSUS, printed against PROBE_ALL's (executed; the walker prints this every run)
+```
+  chronicle (R12)          rows    85 · pools   22 · distinct    81 · singleton pools   15   [R12 n=108 over 7 files; this loader reads 5]
+  R4b herald disclosure    rows    50 · pools   12 · distinct    50 · singleton pools    1   [R4b n=50 over 4 files]
+  R5 crier voice           rows   374 · pools   58 · distinct   374 · singleton pools    0   [R5 n=373, deduplicated SENTENCES]
+  R6 npc ladder            rows  1662 · pools 1104 · distinct  1662 · singleton pools    0   [R6 n=1659; the seat's own 1,662 / 1,104]
+  R7 gazetteer             rows  2254 · pools 1645 · distinct  2234 · singleton pools 1296   [R7 n=2169 over 6 files; this loader reads 5]
+  D-d dm hooks             rows   278 · pools  125 · distinct   278 · singleton pools  123   [no PROBE_ALL column]
+  R9 chrome copy           rows   805 · pools  196 · distinct   770 · singleton pools    -   [R9 n=619 over 6 files]
+```
+**TWO EXACT REPRODUCTIONS, asserted as integers:**
+- **R6 = 1,662 rows in 1,104 pools.** The seat's own figures. The sitting recorded the
+  disagreement with PROBE_ALL's 1,659 rather than erasing it (B.4.4: "546 + 558 = 1,104
+  supports 558; the 554 is recorded, not erased"). This loader lands on the seat's numbers to
+  the unit, which is independent support for 558 over 554.
+- **R4b = 50.** PROBE_ALL's number exactly.
+
+**THE DISAGREEMENTS, reported and NOT reconciled by hand** (the brief's own instruction):
+| register | mine | PROBE_ALL | why they differ |
+|---|---|---|---|
+| R5 | 374 lines / 397 sentences | 373 | unit: PROBE_ALL counts DEDUPLICATED SENTENCES, this counts authored LINES |
+| R7 | 2,254 | 2,169 | roster (5 of 6 files — the sixth exports a builder, no table) **and** predicate: this admission predicate is looser and admits fragments a sentence regex drops |
+| R9 | 805 | 619 | the same looser predicate over the same registry |
+| chronicle | 85 | R12 n=108 over 7 files | roster: this loader reads the FIVE files the brief named, not PROBE_ALL's seven |
+
+### 3.3 THE FINDING R6's LOADER EXISTS TO PRODUCE
+```
+R6 POOL FLOOR · 1,104 pools, mean size 1.51, 546 singletons (49%)
+  [Part B §10 item 9: a register whose mean pool size is under its derived floor reports
+   NOT-EXECUTABLE; the derived floors are 8 / 6 / 4]
+```
+Half the ladder's pools hold ONE line. NL-8b's "a pool of one is not a pool" is not a
+theoretical worry in R6 — it is half the register.
+
+### 3.4 FAIL-CLOSED, AND DRIVEN (each control MUST fire; each does)
+| control | command | result |
+|---|---|---|
+| a roster naming a vanished export | `npx vitest run tests/lint/proseRegisterLoaders.walker.test.js` | THROWS `exports no \`GONE\`` |
+| a module-private array that cannot be found | same | THROWS ``no `const GREETINGS` `` |
+| an empty read on any loader | same | THROWS (`refuseEmpty`) — a loader that returns `[]` turns an honest OWED into a false green |
+| the admission predicate | same | admits two prose forms, refuses SCREAMING_SNAKE, a kebab slug, a two-word fragment, a number and the empty string |
+| a POOL vs a POOL OF ONE | same | an array of prose becomes one pool; a lone string under an object becomes a `::single` pool, which is itself the NL-8b finding |
+
+### 3.5 REFUSALS (car 3)
+1. **`threatAssessment.js` carries NO table.** Executed: `Object.keys(module)` →
+   `['buildThreatAssessment']`, a function. Its branches compose their sentences inline, so
+   "the assessment branches are loaded" is NOT claimed by a loader that harvested nothing.
+   Reaching them needs the builder run or its source read; neither is this car's.
+2. **R16 (JSX + PDF chrome, 2,685 rows over 354 files) is NOT loaded.** It is a JSX SEGMENT
+   walk — PROBE_ALL's own X4 extractor — not a pool table, and the estate already has
+   `tests/helpers/jsxLiteralWalk.js`. A second, weaker extractor beside it would fork a solved
+   problem. A future car that needs R16 routes through that helper.
+3. **The chronicle's register label is CORRECTED to R12.** The first cut labelled
+   `QUIET_FALLBACK` and the demographic table R11. PROBE_ALL's R11 is the EVENT COMPOSER /
+   realm verbs (10 files); `chronicleReadModel`, `chroniclersLetter`, `demographicReading`,
+   `threatAssessment` and `treatyDocument` are all R12. R11 is not loaded, and CL-11 puts the
+   composer's explainer out of the wave in any case.
+
+### 3.6 THE PROOFS
+```
+$ npx vitest run tests/lint/proseRegisterLoaders.walker.test.js ; echo EXIT=$?
+  Test Files  1 passed (1)
+       Tests  10 passed (10)
+EXIT=0
+$ npx vitest run tests/lint/proseRegisterLoaders.walker.test.js \
+      tests/lint/proseEntryContradiction.walker.test.js tests/lint/proseMoveGrammar.walker.test.js
+  Test Files  3 passed (3)
+       Tests  71 passed (71)
+$ npx eslint tests/helpers/dossierCorpus.js tests/lint/proseRegisterLoaders.walker.test.js ; echo EXIT=$?
+EXIT=0
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+```
+
