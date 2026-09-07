@@ -21,3 +21,16 @@ Dock is **DETACHED** (`git rev-parse --abbrev-ref HEAD` = `HEAD`), as every prio
 
 ## RETROVALIDATION ROW
 (none yet)
+
+---
+
+## ORIENTATION — the brief's figures re-derived before any edit (Mon Sep  7 02:50:57 EDT 2026)
+| brief cites | measured at `6ebe0ef3b` | verdict |
+|---|---|---|
+| `receiptBody` ~:1013 | `const receiptBody = {` at **:1013** | **CONFIRMED exactly** |
+| written ~:1163 | `writeFileSync(file, …JSON.stringify(receipt…` at **:1163** | **CONFIRMED exactly** |
+| `behavioral-observation.mjs` ~:957 inline `0.0025` | `:957` | **CONFIRMED exactly** |
+| `demographicsEnvelope.test.js` ~:45 for `MOTION_FLOOR_01` | `MOTION_FLOOR_01` at **:53**, `MOVING_SHARE_FLOOR` at **:55** | **brief off by eight lines; immaterial** |
+| `capacity_realm_load` keys on `behavioral.yearly[last].realmDemography` | `tripwires.mjs:394` | **CONFIRMED** |
+| `behavioral-observation.mjs` writes `realmDemography` | `:998` computes it, `:1054` ships it as `...(realmDemography ? { realmDemography } : {})` | **CONFIRMED — conditional, so a dark run drops the key** |
+| register cells' scaffolded `receiptSchemaVersion` "must move 5 → 6" | both genesis cells scaffold **`receiptSchemaVersion: 0`**, not 5; both `frozenAtSha: ""`, `figures: {}` | **BRIEF PREMISE REFUTED — there is no 5 to move; the value is computed at mint (`register.mjs:195`, `finite(receipt?.schemaVersion) ?? 0`). NO register cell edit is owed and none was made.** |

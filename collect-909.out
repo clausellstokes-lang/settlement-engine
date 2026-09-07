@@ -1,0 +1,24 @@
+LEDGER_TIP_BEFORE=64735cb3494aff3a174d46f3d05e7ce051a498e8
+  product UNCHANGED at 6ebe0ef3b (a ledger-only act)
+  no extra mapped file at §909
+EDIT_OK ledger +7481 B, card +2419 B, frq +381 B
+--- C0 scan ---
+docs/OWNER_DECISION_QUEUE.md:0
+docs/HANDOFF_CURRENT.md:0
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/queue-909.md:0
+  ledger and queue are PURE APPENDS
+LEDGER COMMIT: 921bb9a8f96aeb077921c61ab83981f76cee2fc8
+COMMIT_OK
+--- READ-BACK AT 921bb9a8f ---
+921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment and the chair rules on every one, vetoably, with zero product bytes: the per-year series ships; a 600-year run precedes any re-cut; SOAK-1 is re-priced by measurement; the forty route-questioned D&D rows are relabelled and lawfully replaced; the verify-only pass runs for three sweeps; the successors are named realistic_regional_alive and dramatic_campaign_alive
+
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 4 ++++
+ docs/HANDOFF_CURRENT.md             | 5 ++++-
+ docs/OWNER_DECISION_QUEUE.md        | 3 +++
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+  ODQ §909 rows: 1
+  HANDOFF pickup: 1 new / 1 demoted
+  (no extra file)
+  FRQ §909 section: 1
+  seat trailer Fable (must be 1): 1
+COLLECT_909_OK tip=921bb9a8f

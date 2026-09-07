@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1091-1112",
- "lines": 71,
+ "lines": 81,
  "firstTs": "2026-09-07T06:43:42.704Z",
- "lastTs": "2026-09-07T06:46:01.373Z",
+ "lastTs": "2026-09-07T06:47:16.824Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 18
+  "Bash": 19,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
@@ -17,13 +18,13 @@
   "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All three sources fetched live. Now extracting text.",
+ "lastAssistantText": "itten and validated (15 claims, 15 verdicts, indices aligned, every trueWording under the twelve-word cap). All three sources came back live on the first route — HTTP 200 each, no host blocked, so no Wayback or routeHint recovery was needed; no claim in this chunk carried `routeHints` or `reverify`.",
  "run": "wf_23c7ccc2-48d",
  "agent": "aeb8fc9c3c427fb69",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_23c7ccc2-48d/agent-aeb8fc9c3c427fb69.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1091-1112.json",
-  "exists": false
+  "exists": true
  }
 }

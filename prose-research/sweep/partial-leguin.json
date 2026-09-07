@@ -1932,6 +1932,54 @@
   }
  },
  {
+  "index": 726,
+  "feature": "point of view and distance",
+  "claim": "Saleem describes a gloss attached to a Kesh story as spoken by a commentator on that story in the present tense.",
+  "source": "Mazin Saleem, Strange Horizons, 2018",
+  "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+  "quote": "writes a commentator on the story",
+  "page": "section 'There and back again'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2018-11-26",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 726,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'spoken by a commentator' — the page says the commentator writes the gloss, not speaks it",
+   "trueWording": "writes a commentator on the story",
+   "note": "Same page, section 'There and back again'. Quote verbatim, and the two structural limbs hold: the gloss is attached to the Kesh story 'A War with the Pig People' and both the gloss ('It is appropriate for children to fight') and its attribution verb are present tense. But the page's verb is 'writes', a written commentary; the claim's 'spoken by' is not supported by the page and is contradicted by the quote the claim itself carries.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  }
+ },
+ {
+  "index": 730,
+  "feature": "point of view and distance",
+  "claim": "Garlick and King characterise Pandora as an implicit translator or reporter rather than a character with a stake in the events.",
+  "source": "Ben Garlick and Liesl King, cultural geographies, 2022",
+  "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+  "quote": "narrator or else implicit translator/reporter",
+  "page": "p. 4",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2022",
+  "routeHint": "PDF binary, pypdf extraction",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 730,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than a character with a stake in the events' — the same sentence calls Pandora a participating character",
+   "trueWording": "A consistent voice and participating character, narrator or else implicit translator/reporter",
+   "note": "Same PDF, p. 3–4 (the claim says p. 4; the passage sits immediately above the page-4 break). The quoted fragment 'narrator or else implicit translator/reporter' is verbatim, so the first half of the claim holds. The contrastive half does not: the appositive opens with 'A consistent voice and participating character', and the authors go on to say she operates as cipher for both reader and Le Guin. The page offers the roles as a disjunctive series, not as a denial that Pandora participates.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  }
+ },
+ {
   "index": 737,
   "feature": "other: encyclopedic form",
   "claim": "Troy Press describes 'A Description of Earthsea' as a descriptive essay written alongside the five stories of Tales from Earthsea.",
@@ -1953,6 +2001,54 @@
    "note": "troypress.com 'A History of Earthsea' (11 Nov 2023) carries the quoted clause verbatim in the world-building paragraph, but the string 'Description of Earthsea' never occurs on the page (zero hits over the raw HTML) and the five stories are not tied to Tales from Earthsea in that sentence.",
    "unsupportedLimb": "the identification of that essay as 'A Description of Earthsea'",
    "fromFile": "verdicts-leguin-i709-759.json"
+  }
+ },
+ {
+  "index": 743,
+  "feature": "plainness and economy",
+  "claim": "The field notes close the ambisexuality section with a twelve-word sentence built entirely of common kinship nouns.",
+  "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+  "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+  "quote": "the mother of several children may be the father of several more",
+  "page": "quoted block, cited to p. 91",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2020-12-24 (quoting the 1969 novel)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'twelve-word sentence' closing the section — on the page it is the final clause of a longer sentence inside an elided excerpt, not a section's close",
+   "trueWording": "the mother of several children may be the father of several more",
+   "note": "Same quoted block, p. 91. The twelve words are verbatim and the kinship-noun limb holds — mother, children and father are the only nouns in it. But it is not a sentence on the page: it is joined by 'and' to a preceding clause about no physiological habit being established. Nor does the page show it closing a section; the block is stitched with ellipses, cited to a single page, and the chapter the page calls 'The Question of Sex' continues past it. The sentence does close the excerpt as Hubble prints it.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  }
+ },
+ {
+  "index": 747,
+  "feature": "place and institution description",
+  "claim": "Each attributed Kesh text carries a provenance line naming the teller, her town and the recipient.",
+  "source": "Le Guin, Always Coming Home (1985), item headings relayed by Wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+  "quote": "As told by Little Bear Woman of Sinshan to the Editor",
+  "page": "section 'Summary', list of texts attributed to Little Bear Woman",
+  "kind": "relay",
+  "polarity": "applies",
+  "date": "retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium: relay of the book's headings, not the primary",
+  "angle": "record-register",
+  "verdict": {
+   "index": 747,
+   "verdict": "PARTIAL",
+   "trueWording": "As told by Little Bear Woman of Sinshan to the Editor",
+   "note": "Quote is verbatim in the 'Summary' list of items Pandora attributes to Little Bear Woman, but it is the only entry of the five with the full provenance line. The three poems are credited only 'By Little Bear Woman' with a page number and no town and no recipient; the map entry names the giver and the Editor but not a teller. The universal 'Each attributed Kesh text' is therefore not supported.",
+   "unsupportedLimb": "that EVERY attributed Kesh text carries teller + town + recipient",
+   "fromFile": "verdicts-leguin-i744-764.json"
   }
  },
  {

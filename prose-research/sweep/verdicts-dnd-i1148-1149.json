@@ -1,0 +1,38 @@
+{
+  "name": "dnd",
+  "chunk": 10,
+  "claims": [
+    {
+      "index": 1148,
+      "feature": "boxed text form",
+      "claim": "James Wyatt says the 2024 Dungeon Master’s Guide now defines boxed text, so published adventures need not keep doing so.",
+      "source": "James Wyatt, quoted by Ben Brosofsky, ScreenRant interview with Christopher Perkins and James Wyatt",
+      "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+      "quote": "Now the DMG tells you what boxed text is",
+      "page": "ScreenRant, 25 October 2024"
+    },
+    {
+      "index": 1149,
+      "feature": "boxed text form",
+      "claim": "Dungeon Master’s Workshop dates the introduction of boxed text to the 1979 module The Hidden Shrine of Tamoachan, written so that competing tables received identical room descriptions.",
+      "source": "The Archmage, \"Dungeon Mastering 101: Mastering the Boxed Text\", Dungeon Master’s Workshop",
+      "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+      "quote": "ever since boxed text was introduced in The Hidden Shrine of Tamoachan",
+      "page": "post of 27 September 2019"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 1148,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "Now the DMG tells you what boxed text is",
+      "note": "Raw HTML fetched with a browser UA (200, 54,703 bytes); no summarizer needed for the match. The quoted string appears word for word in James Wyatt's answer in the section on DMG chapters (the doors/boxed-text exchange), attributed to 'James Wyatt:' in the transcript. Every limb holds: the speaker is Wyatt; the page title is '\"Everything In There Better Be Cracking On Topic\": D&D Designers Talk The 2024 Dungeon Master's Guide', so the DMG in question is the 2024 one; and the adventures limb is his own next clause, that he doesn't think adventures need to do that anymore. 'Brosofsky' appears in the page as byline. One nuance that does not disturb the grade: Wyatt frames it as an item on his to-do list and adds that it is still a conversation to have with the editing team, so it is his stated intent rather than settled policy — the claim says 'says ... need not', which matches."
+    },
+    {
+      "index": 1149,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "boxed text was introduced in The Hidden Shrine of Tamoachan (1979)",
+      "note": "Raw HTML fetched with a browser UA (200, 209,736 bytes). The quoted string appears word for word, immediately followed by the parenthetical year, in the paragraph on the pro/anti boxed-text debate. Every limb is supported on the page: the 1979 date is the parenthetical; the competition context is the next sentence (the inaugural C-series 'competition' module, multiple tables under multiple DMs under a time limit); and the identical-descriptions purpose appears twice — once as Hidden Shrine being written with boxed texts to ensure consistent descriptions across the 50-plus rooms, and once as the statement that every table's descriptions were exactly the same. Byline confirmed on the page as 'The Archmage' with posted date September 27, 2019."
+    }
+  ]
+}

@@ -31867,6 +31867,27 @@
    "unsupportedLimb": "the 2009 publication date",
    "fromFile": "verdicts-leguin-i709-759.json"
   },
+  "722": {
+   "index": 722,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Again and again, Le Guin used the word “may”",
+   "note": "Raw HTML fetched (200) and read directly, not summarised. Byline confirmed: Mazin Saleem, Strange Horizons, 26 November 2018. Quote appears verbatim as a prefix in the section headed 'Thou mayest'. Both limbs hold: the repetition ('Again and again') and the tie to Kesh custom — the sentence before it says the lack of compulsion reaches down to the level of customs, and the example given is a ritual song. Only drift is tense: the page has past 'used', the claim says 'uses'.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "723": {
+   "index": 723,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "…or as many as you like, or not at all",
+   "note": "Same page, section 'Thou mayest'. The claim's quote is verbatim; the full quoted line runs on past 'nine times' to the open ending given as trueWording, so 'open list ending in the option of not at all' is exact. One attribution nuance worth recording: the page presents the sentence as Le Guin's own writing ('when describing a ritual song ‘the four/five heya’ she wrote that…'), so 'a Kesh description' must be read as a description of a Kesh song, not one authored by the Kesh.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "724": {
+   "index": 724,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a vengeful biography pretending to be autobiography; or may be pure fiction",
+   "note": "Same page, section 'Thou mayest'. Quote verbatim. Every limb holds: 'The book notes, however, that the accusations might be' introduces it, so it is the book's own note; two readings are offered (vengeful biography posing as autobiography / pure fiction); the modals 'might' and 'may' withhold any verdict. The text glossed is the Kesh poem 'The Third Child Story'; 'disputed' is the claim's word, supported by the note's own hedging rather than stated on the page.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
   "725": {
    "index": 725,
    "verdict": "VERIFIED_VERBATIM",
@@ -31874,12 +31895,70 @@
    "note": "Strange Horizons, Mazin Saleem, 26 November 2018, section 'There and back again'. The note glosses the Pig People, whom the same sentence calls a neighbouring tribe. The page's own wording is 'a note' rather than 'an editorial note'; it is set apart from the story and from a named commentator, so the editorial-apparatus reading holds.",
    "fromFile": "verdicts-leguin-i709-759.json"
   },
+  "726": {
+   "index": 726,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'spoken by a commentator' — the page says the commentator writes the gloss, not speaks it",
+   "trueWording": "writes a commentator on the story",
+   "note": "Same page, section 'There and back again'. Quote verbatim, and the two structural limbs hold: the gloss is attached to the Kesh story 'A War with the Pig People' and both the gloss ('It is appropriate for children to fight') and its attribution verb are present tense. But the page's verb is 'writes', a written commentary; the claim's 'spoken by' is not supported by the page and is contradicted by the quote the claim itself carries.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "727": {
+   "index": 727,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "At 525 pages, including field notes, stories, maps, charts",
+   "note": "Same page, opening section (first body paragraph). Quote verbatim. Both limbs hold: the figure is 525 pages, and 'field notes' is the first item in the list of contents that follows. (Danny Yee's separate review of the Bantam 1987 printing gives 562pp; that is a different edition, not a contradiction of what Saleem writes.)",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
   "728": {
    "index": 728,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "purposefully left the accents off Kesh names until the Back",
    "note": "Same Strange Horizons article, late section on language: introduced by 'she explained that', so it is Le Guin's explanation as Saleem reports it, and it continues 'of the Book'.",
    "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "729": {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "encyclopaedia-like appendices referred to as ‘The Back of the Book’",
+   "note": "PDF fetched (200, 212,960 bytes) and text extracted with pdftotext -layout; read directly. Quote verbatim. The surrounding clause ties the appendices to the 'factual' documentation of practical information, so both limbs hold. Located just before the printed page-4 break, i.e. p. 3 running to p. 4 — consistent with the claim's page field.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "730": {
+   "index": 730,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than a character with a stake in the events' — the same sentence calls Pandora a participating character",
+   "trueWording": "A consistent voice and participating character, narrator or else implicit translator/reporter",
+   "note": "Same PDF, p. 3–4 (the claim says p. 4; the passage sits immediately above the page-4 break). The quoted fragment 'narrator or else implicit translator/reporter' is verbatim, so the first half of the claim holds. The contrastive half does not: the appositive opens with 'A consistent voice and participating character', and the authors go on to say she operates as cipher for both reader and Le Guin. The page offers the roles as a disjunctive series, not as a denial that Pandora participates.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "731": {
+   "index": 731,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kesh grammar makes no provision for a relation of ownership",
+   "note": "Same PDF, p. 11. Quote verbatim; the sentence continues 'between living beings'. Introduced as 'Pandora observes that', and endnote 107 reads 'Le Guin, ACH, p. 42' — so the wording is from Always Coming Home, as the claim's source line states. The social fact (non-ownership, glossed a line earlier as everybody belonging to everybody) is indeed put as a rule of Kesh grammar.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "732": {
+   "index": 732,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and a competitive attitude were all socially disapproved",
+   "note": "Same PDF, p. 11. Quote verbatim. The full quoted clause lists exactly three disapproved things — big families, a large private food store, and competitiveness — and closes in the past passive 'were all socially disapproved' with no by-phrase, so the agentless-past-passive limb holds. Endnote 109 reads 'Le Guin, ACH, p. 437', confirming the wording is from the novel and not the critics'.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "733": {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short life expectancies (30–40 years)",
+   "note": "Same PDF, p. 11 (between the printed page-10 and page-12 breaks). Quote verbatim, en dash as given. Garlick and King state it in their own voice while discussing the novel, attributing it to past catastrophes alongside low birth rates; no separate endnote sits on the figure itself.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "734": {
+   "index": 734,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contains additional information about the Kesh in more traditional ethnographic form",
+   "note": "Page fetched (200) and read as raw text. Quote verbatim; the subject is 'The “back of the book”'. The comparative limb is carried by 'more traditional' against the preceding paragraph, which describes the rest of the volume as a montage of Kesh stories, poems and myths around a central novella. One correction to the claim's locator: the sentence opens paragraph 3 of the review body, not paragraph 2. Review dated August 1995, Danny Yee.",
+   "fromFile": "verdicts-leguin-i722-743.json"
   },
   "735": {
    "index": 735,
@@ -31910,12 +31989,84 @@
    "note": "Same troypress.com paragraph, introduced by 'She wrote', and the sentence ends with finding out what happened. The page does not itself name the Tales from Earthsea foreword as the origin, but the claim sentence does not assert that.",
    "fromFile": "verdicts-leguin-i709-759.json"
   },
+  "739": {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Normal individuals have no predisposition to either sexual role in kemmer",
+   "note": "Page fetched (200) and read as raw text; reviewer confirmed as Nick Hubble, first published in The BSFA Review, posted 24 December 2020. Quote verbatim and it opens the indented block, which the page then identifies as 'the field notes of Ong Tot Oppong of the Hainish Ekumen'; the block is cited '(91)'. Present tense 'have' with the generic plural 'Normal individuals' — both limbs hold. The page names the chapter by title, 'The Question of Sex', and never gives the chapter number 7 that the claim's source line supplies.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "740": {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I haven’t seen this done in rural Karhide",
+   "note": "Same quoted block on the Vector page, cited to p. 91. Quote verbatim, curly apostrophe as given. It sits inside the parenthesis that follows the Otie Nim citation, in the first person, and marks exactly what the observer has not herself witnessed — every limb holds.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Otie Nim wrote that in the Orgoreyn region the use",
+   "note": "Same quoted block, p. 91. Quote verbatim. Otie Nim is a second named observer cited inside the parenthesis by the note-writer Ong Tot Oppong, and the semicolon clause that follows qualifies the report by limiting its reach — the practice is common in Orgoreyn but unseen by her in rural Karhide. The page assigns Otie Nim no gender; the claim's 'his' follows the novel's convention rather than anything on this page.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
   "742": {
    "index": 742,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the 8.4 month gestation period and the 6 to 8 month",
    "note": "vector-bsfa.com, reviewed by Nick Hubble, review first appeared in The BSFA Review. The block quote is cited '(91)' and the next line identifies it as the field notes of Ong Tot Oppong, chapter 'The Question of Sex'. Both figures sit in one sentence, the decimal then the range.",
    "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "743": {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'twelve-word sentence' closing the section — on the page it is the final clause of a longer sentence inside an elided excerpt, not a section's close",
+   "trueWording": "the mother of several children may be the father of several more",
+   "note": "Same quoted block, p. 91. The twelve words are verbatim and the kinship-noun limb holds — mother, children and father are the only nouns in it. But it is not a sentence on the page: it is joined by 'and' to a preceding clause about no physiological habit being established. Nor does the page show it closing a section; the block is stitched with ellipses, cited to a single page, and the chapter the page calls 'The Question of Sex' continues past it. The sentence does close the excerpt as Hubble prints it.",
+   "fromFile": "verdicts-leguin-i722-743.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These notes are in the possession of Genly Ai",
+   "note": "vector-bsfa.com fetched live (HTTP 200, browser UA). Byline reads 'Reviewed by Nick Hubble', BSFA Review, 24 Dec 2020. Quote is verbatim in the paragraph immediately after the block quote, which also names the notes as those of Ong Tot Oppong and calls Genly Ai an ambassador from the Ekumen (page word is 'ambassador', not 'envoy'); the custody statement is explicit on the page.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about a fifth of the number of pages, presents cultural lore",
+   "note": "en.wikipedia.org/wiki/Always_Coming_Home fetched live. Quote verbatim in the 'Summary' section, in the sentence beginning with the title of 'The Back of the Book'. Both limbs (proportion of pages, cultural lore) are on the page.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attributions or annotations that an ethnographic fieldworker might make",
+   "note": "Same 'Summary' sentence as index 745, continuing 'with the format and ...'. Verbatim; the ethnographic-fieldworker limb is stated, not inferred.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "747": {
+   "index": 747,
+   "verdict": "PARTIAL",
+   "trueWording": "As told by Little Bear Woman of Sinshan to the Editor",
+   "note": "Quote is verbatim in the 'Summary' list of items Pandora attributes to Little Bear Woman, but it is the only entry of the five with the full provenance line. The three poems are credited only 'By Little Bear Woman' with a page number and no town and no recipient; the map entry names the giver and the Editor but not a teller. The universal 'Each attributed Kesh text' is therefore not supported.",
+   "unsupportedLimb": "that EVERY attributed Kesh text carries teller + town + recipient",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "748": {
+   "index": 748,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "given to the Editor by Little Bear Woman of Sinshan",
+   "note": "Verbatim in the 'Summary' list entry for the Kesh map of the watershed of Sinshan Creek. The caption-names-the-giver limb is explicit.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "749": {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are not too many of them",
+   "note": "Verbatim on the page in the setting discussion of Kesh population size, introduced as Pandora observing the key difference from the reader's society, with a footnote citation. Counted: seven words, no numeral.",
+   "fromFile": "verdicts-leguin-i744-764.json"
   },
   "750": {
    "index": 750,
@@ -31938,12 +32089,47 @@
    "note": "Second search-inside snippet from the same Cadden volume on the same raw results page: Tales from Earthsea ends with 'A Description of Earthsea', so classed.",
    "fromFile": "verdicts-leguin-i709-759.json"
   },
+  "753": {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "could just as easily be written in straight-forward, declarative sentences",
+   "note": "sites.middlebury.edu fetched live. Quote sits inside the comment signed 'Tori Koontz October 9, 2019 at 11:42 pm' (verified by segmenting the seven comments); the same comment names the chapter as structured in the form of field notes and continues 'Instead we see ... a slew of narrative devices', which carries the 'but is not' limb. The post is Michael Newbury's Science Fiction course blog and Koontz's comment refers to class the next day, supporting 'student reader'.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "754": {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "individual level, to the pairing level/interpersonal level, to the social",
+   "note": "Quote is verbatim and sits inside the comment signed 'Cole Easton October 9, 2019 at 10:13 pm' (verified by comment segmentation), which opens on 'The Question of Sex', the field-notes chapter. The page continues '... to the social level, to the history-shaping level'; the claim's three named levels are all present, it simply stops short of the fourth.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "755": {
+   "index": 755,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "covers topics such as history, language, royal dynasties, and dragons",
+   "note": "bookreporter.com fetched live. Quote verbatim in the paragraph naming the appendix 'A Description of Earthsea'; page is signed 'Reviewed by Kathy Weissman on May 4, 2001'. All four topics are the page's own list.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
   "756": {
    "index": 756,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "with a scholar's seriousness and eye for detail",
    "note": "bookreporter.com review of Tales from Earthsea, reviewed by Kathy Weissman; the sentence says Le Guin has constructed her alternate world in those terms and cites the appendix 'A Description of Earthsea'.",
    "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "757": {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is a compendium of reports on the society of a world",
+   "note": "ursulakleguin.com foreword page fetched live with a browser user agent (HTTP 200, 124KB) despite the site's robots.txt bar on named agents. Quote verbatim in the paragraph on 'The Matter of Seggri', which continues 'called Seggri written by various observers over a period of many years'.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "758": {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These documents are from the archives of the Historians of Hain",
+   "note": "Verbatim, the sentence immediately following the index-757 sentence in the same 'Matter of Seggri' paragraph.",
+   "fromFile": "verdicts-leguin-i744-764.json"
   },
   "759": {
    "index": 759,
@@ -31952,12 +32138,40 @@
    "note": "ursulakleguin.com Foreword: The Birthday of the World, paragraph on 'The Matter of Seggri'; the antecedent on the page is the Historians of Hain and their archives.",
    "fromFile": "verdicts-leguin-i709-759.json"
   },
+  "760": {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first voice is that of a Mobile of the Ekumen",
+   "note": "Verbatim in the paragraph on the 1969 novel The Left Hand of Darkness, which continues 'a traveller, making a report back to the Stabiles, who stay put on Hain' and then names Genly Ai. The report limb is on the page.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "761": {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a non-directive, information-gathering consortium of worlds",
+   "note": "Verbatim in the paragraph that starts from the League of Worlds of the first three sf novels and says it morphs into the Ekumen. The definition is six words as claimed, counting each hyphenated compound as one.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
+  "762": {
+   "index": 762,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "know that it keeps happening and will happen again",
+   "note": "Verbatim in the paragraph about asking the Hainish, whose historians know a lot of what happened; the page then likens them to Ecclesiastes. Locator note: this falls a paragraph or two later than the claim's 'second paragraph', but the wording is exact and the Hainish-historians limb is explicit.",
+   "fromFile": "verdicts-leguin-i744-764.json"
+  },
   "763": {
    "index": 763,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "I drew charts, with male and female symbols, and lines",
    "note": "Raw HTML of ursulakleguin.com foreword fetched with a browser UA (HTTP 200). Quote is verbatim in the paragraph beginning 'In the title story of the collection A Fisherman of the Inland Sea'; the sentence continues 'with arrows, very scientific.' The same paragraph supports the kinship limb: she says she spent systematic thought on the marriage and kinship customs of the people of O.",
    "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "764": {
+   "index": 764,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "of Inanan Farmhold of Tag Village on the Southwest Watershed",
+   "note": "ursulakleguin.com excerpt page fetched live with a browser user agent (HTTP 200, 132KB). Quote verbatim in the byline under the heading 'Unchosen Love / Introduction', signed 'By Heokad'd Arhe of ...' and running on '... of the Budran River on Okets on the Planet O.', so the chain from farmhold to planet is complete on the page.",
+   "fromFile": "verdicts-leguin-i744-764.json"
   },
   "765": {
    "index": 765,

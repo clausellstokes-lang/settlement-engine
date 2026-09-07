@@ -4097,5 +4097,101 @@
    "note": "Heading verbatim on p. 360 (PDF page 360, footer matches); the extracted text carries soft-hyphen artifacts inside 'Fantasy-Historical' that render as the claimed string. The other limbs hold exactly: 550 words on a whitespace tokenizer, 22 sentences, four pantheons (Celtic, Egyptian, Greek, Norse). 'The only institutional prose in either SRD' survives adversarial checking - SRD 5.1's other two appendices are PH-A (Conditions, pure rules) and PH-C (Planes, places rather than institutions), and SRD 5.2.1 carries no lore prose at all, its two lowercase 'pantheon' hits being spell text for Divine Intervention and the spiritual guardian. The paragraph count is the one limb that fails. I found the indent markers directly in the extraction: three continuation paragraphs beyond the five blocks.",
    "fromFile": "verdicts-dnd-i1037-1051.json"
   }
+ },
+ {
+  "index": 1057,
+  "feature": "edition and house style",
+  "claim": "The D&D house style guide circulated to Guild creators is numbered version 1.08a and carries a 2018 Wizards of the Coast copyright line.",
+  "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "Version 1.08a ©2018 Wizards of the Coast",
+  "page": "running footer, every page",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2018",
+  "routeHint": "curl PDF, pypdf extraction",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-editorial-staff",
+  "verdict": {
+   "index": 1057,
+   "verdict": "PARTIAL",
+   "trueWording": "Version 1.08a ©2018 Wizards of the Coast",
+   "note": "PDF fetched raw from cyborgsandmages.wordpress.com (402 KB, HTTP 200) and text-extracted: the quoted string is the running footer on all 11 pages, verbatim, so the version-number and 2018-copyright limbs are confirmed (PDF metadata also shows Author: Kim Mohan, created 2019-01-23). But 'guild' occurs zero times in the extracted text, as do 'creator' and 'freelance' — the document nowhere says it was circulated to Guild creators; that limb comes from the hosting blog's framing, not the page.",
+   "unsupportedLimb": "circulated to Guild creators",
+   "fromFile": "verdicts-dnd-i835-1057.json"
+  }
+ },
+ {
+  "index": 1069,
+  "feature": "register modulation",
+  "claim": "Ray Vallese, the Planescape line's editor, says the products were often written in a wry, overly clever voice that smirked at the setting's ignorant outsiders.",
+  "source": "Ray Vallese, TSR Planescape editor, interviewed at Exposition Break, 2022",
+  "url": "https://www.expositionbreak.com/a-walk-through-the-planes-an-interview-with-monte-cook-ray-vallese-and-colin-mccomb/",
+  "quote": "written in a wry, overly clever voice that smirked",
+  "page": "answer on Planescape's reputation",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2022-03-07",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "angle": "place-editorial-staff",
+  "verdict": {
+   "index": 1069,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the appositive 'the Planescape line's editor' -- the page has Vallese saying he was hired as an editor and assigned to the Planescape line, and it explicitly names a co-equal: the other primary Planescape editor of that era was Michele Carter. The definite article asserting a sole line editor is not what the page supports.",
+   "trueWording": "written in a wry, overly clever voice that smirked",
+   "note": "Raw HTML fetched with a browser user agent (759KB, 200) and stripped to text. Quote is word for word in Ray's answer on Planescape's reputation. The page's object of the smirking is 'all the clueless bashers stumbling around the multiverse'; the claim's gloss 'the setting's ignorant outsiders' is a fair reading of Planescape cant and is NOT the reason for the PARTIAL. Repair is one word: 'a Planescape editor' rather than 'the Planescape line's editor'.",
+   "fromFile": "verdicts-dnd-i1058-1074.json"
+  }
+ },
+ {
+  "index": 1110,
+  "feature": "adjective and adverb discipline",
+  "claim": "Chris Sims, a D&D editor at Wizards of the Coast, says that as an editor he cuts weasel words without mercy.",
+  "source": "Chris S. Sims, Writing: Generalizations and Absolutes, 2020",
+  "url": "https://chrisssims.wordpress.com/2020/07/14/writing-generalizations-and-absolutes/",
+  "quote": "As an editor, I cut weasel words without mercy.",
+  "page": "Hedging",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2020-07-14",
+  "routeHint": "curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-editorial-staff",
+  "verdict": {
+   "index": 1110,
+   "verdict": "PARTIAL",
+   "trueWording": "As an editor, I cut weasel words without mercy.",
+   "note": "Live WordPress page (HTTP 200), post dated July 14 2020, sentence verbatim under the 'Hedging' heading. The quoted assertion is fully supported. The appositive describing Sims is not: the page identifies him only as 'an editor and technical editor (also called developer in some places)' and, in footnote 4, says he began 'working on D&D' after 2000. Wizards of the Coast appears on the page only in an art credit and an ad reference, never as his employer, so the employment limb cannot be verified from this page.",
+   "unsupportedLimb": "that Sims is 'a D&D editor at Wizards of the Coast' -- the page states only 'editor and technical editor' and that he 'started working on D&D'; it never names WotC as his employer",
+   "fromFile": "verdicts-dnd-i1091-1112.json"
+  }
+ },
+ {
+  "index": 1137,
+  "feature": "edition and house style",
+  "claim": "The D&D adventure design guide distributed with the house style guide is bylined Chris Perkins and Greg Bilsland.",
+  "source": "Chris Perkins and Greg Bilsland, Writing Adventures (D&D Adventure Design Guide)",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+  "quote": "By Chris Perkins & Greg Bilsland",
+  "page": "title line",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "pre-2019",
+  "routeHint": "curl PDF, pypdf extraction",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "place-editorial-staff",
+  "verdict": {
+   "index": 1137,
+   "verdict": "PARTIAL",
+   "trueWording": "By Chris Perkins & Greg Bilsland",
+   "unsupportedLimb": "'distributed with the house style guide' - the PDF says nothing about its distribution or about the House Style Guide package; that limb rests on the separate DMs Guild product page (index 1135), not on this page",
+   "note": "PDF fetched (HTTP 200, 2 pages, 745,871 bytes) and text extracted with pdftotext -layout. The title line reads 'WRITING ADVENTURES  By Chris Perkins & Greg Bilsland' - byline verbatim. The document self-titles 'WRITING ADVENTURES'; 'adventure design guide' is the filename and the DMs Guild description's wording. Host is a third-party WordPress reupload, so the copy is a mirror, not a Wizards-hosted original.",
+   "fromFile": "verdicts-dnd-i1132-1146.json"
+  }
  }
 ]
