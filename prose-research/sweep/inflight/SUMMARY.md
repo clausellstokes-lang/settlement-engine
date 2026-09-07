@@ -1,17 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:47:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:53:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ai | verifier | i1214-1239 | in-flight | 2 | — | verdict file absent | 11:54:36 |
-| ai | verifier | i1240-1270 | in-flight | 7 | — | verdict file absent | 11:54:36 |
-| ai | verifier | i1271-1298 | in-flight | 5 | — | verdict file absent | 11:54:36 |
-| ai | verifier | i1299-1315 | in-flight | 2 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i384-536 | in-flight | 6 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i542-616 | in-flight | 13 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
-| ? | critic |  | in-flight | 0 | — | — | 17:45:07 |
+| ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
@@ -67,6 +59,7 @@
 | ? | other |  | result | 0 | best-martin.md | — | 12:08:17 |
 | ? | other |  | result | 0 | best-own.md | — | 13:08:59 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
+| ? | other |  | in-flight | 0 | — | — | 17:50:34 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
 | ? | other |  | result | 0 | refute-chronicle-line.md | — | 17:01:06 |
 | ? | other |  | result | 0 | MOVE-GRAMMAR.md | — | 17:30:42 |
