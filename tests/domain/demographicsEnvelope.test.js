@@ -42,17 +42,22 @@ import { BIRTH_BANDS } from '../../src/domain/worldPulse/demographicsRates.js';
 import { overflowBandOf, overflowRankOf } from '../../src/domain/worldPulse/demographicsResponses.js';
 import { crowdingCrossingOf } from '../../src/domain/worldPulse/demographicsHerald.js';
 import { LIT, boundsOf, realmUpdates, snapshotOf } from '../helpers/demographicsRealmFixture.js';
+// ⭐ THE THREE FIGURES THIS SUITE OWNED ARE NOW IMPORTED, NOT TYPED (§909 car 3). Their one
+// home moved to `scripts/audit/soakInvariants.mjs` so `scripts/soak/tripwires.mjs` could
+// arm `capacity_envelope_30y` against the SAME bar this file grades — a registry row and a
+// unit pin that disagree about what motion is would be worse than no row at all.
+import {
+  CAMPAIGN_HORIZON_YEARS,
+  MOTION_FLOOR_01,
+  MOVING_SHARE_FLOOR,
+} from '../../scripts/audit/soakInvariants.mjs';
 
 const RATES_MODULE = '../../src/domain/worldPulse/demographicsRates.js';
-/** The customer horizon, and the reader corpus's horizon. */
-const CAMPAIGN_YEARS = 30;
+/** The customer horizon, and the reader corpus's horizon. One home, imported. */
+const CAMPAIGN_YEARS = CAMPAIGN_HORIZON_YEARS;
 /** The horizon the ARRIVAL arm is allowed, which is DELIBERATELY longer than the campaign
  *  and is itself the finding — see that arm. */
 const ARRIVAL_YEARS = 60;
-/** A settlement-year transition COUNTS as motion at a quarter percent of the head count. */
-const MOTION_FLOOR_01 = 0.0025;
-/** The share of transitions that must move. An order of magnitude under the measurement. */
-const MOVING_SHARE_FLOOR = 0.05;
 
 /**
  * Run the demographic lane for `years` years and return everything the arms below read.

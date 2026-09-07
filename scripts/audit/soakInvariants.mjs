@@ -118,6 +118,51 @@ export const LIVENESS_FLOOR = Object.freeze({
 export const LIVENESS_FAILURE_KINDS = Object.freeze(['silent', 'monoculture', 'frozen']);
 
 /**
+ * ═══ THE STATE-MOTION BAND — LIFTED HERE AT §909 CAR 3, AND THE LIFT IS THE WHOLE POINT ══
+ *
+ * ⛔⛔ A THRESHOLD WITH NO IMPORTABLE HOME DISARMS THE ROW THAT NEEDS IT. `capacity_envelope_30y`
+ * was designed at CAPACITY C3 and shipped UNARMED for two separate reasons, and only the
+ * second was true: the recorded one ("the field is not written") was refuted at §907 — the
+ * `motion` block has been on every yearly row since `37459391a`, 2026-07-28 — and the real
+ * one was that its bar's ONE home was `tests/domain/demographicsEnvelope.test.js`, a test
+ * file `scripts/soak/tripwires.mjs` must not import. Re-typing `0.05` in the registry would
+ * have been a SECOND SPELLING of one envelope, which that file's own header refuses. So the
+ * band moves HERE, beside `LIVENESS_FLOOR`, exactly as `YEARLY_BYTES_PER_SETTLEMENT_CEILING`
+ * and `WALL_TIME_TREND` already did, and BOTH former homes import it.
+ *
+ * ⚠ THE MOTION FLOOR WAS SPELLED TWICE BEFORE THIS LIFT and the two spellings had to agree
+ * for the suite and the observer to be measuring the same thing: an inline `0.0025` at
+ * `behavioral-observation.mjs:957` and the suite's own constant. Two homes for one figure is
+ * the five-homes defect in miniature — the observer counts a transition as MOVED at the
+ * quarter percent, and the suite grades the share of transitions that moved, so a drift in
+ * either spelling would silently re-define the other's denominator.
+ *
+ * ⛔ THIS MODULE IMPORTS NOTHING, AND THAT IS DELIBERATE — it is the leaf both sides of the
+ * engine/telemetry wall may read. So the campaign horizon is spelled here rather than
+ * imported from `src/domain/certification/behavioralContract.js`, whose
+ * `CERTIFICATION_HORIZONS.useful.years` is the same figure on the certification side. That
+ * is a stated twin, not a silent one, and the lift REMOVES a spelling rather than adding
+ * one: `demographicsEnvelope.test.js`'s own `CAMPAIGN_YEARS` now reads from here.
+ */
+
+/** A settlement-year transition COUNTS as motion at a quarter percent of the head count. */
+export const MOTION_FLOOR_01 = 0.0025;
+
+/**
+ * The share of settlement-year transitions that must move. An order of magnitude under the
+ * measurement: 110 of 120 (0.9167) over the customer horizon on the real 300-year lit
+ * receipt, and 170 of 180 (0.9444) on the envelope suite's own fixture.
+ */
+export const MOVING_SHARE_FLOOR = 0.05;
+
+/**
+ * The customer horizon, in years — the window a reader actually plays inside, and the one
+ * the state-motion band is graded over. The certification side spells the same figure as
+ * `CERTIFICATION_HORIZONS.useful.years`; this is its soak-side home.
+ */
+export const CAMPAIGN_HORIZON_YEARS = 30;
+
+/**
  * Every non-finite number in a structure, as dotted paths. The soak's own scan idiom,
  * hoisted so `whole-world-soak.mjs` and `scripts/soak/tripwires.mjs` stop carrying one
  * copy each.

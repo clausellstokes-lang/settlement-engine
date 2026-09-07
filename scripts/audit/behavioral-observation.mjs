@@ -16,6 +16,11 @@ import { observeRealmDemography } from '../../src/domain/worldPulse/demographics
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 import { prosperityRank } from '../../src/data/constants.js';
 import { measurePhraseRepetition } from './phrase-repetition.mjs';
+// ⭐ ONE SPELLING (§909 car 3). This bar was an inline literal here and a constant in
+// `tests/domain/demographicsEnvelope.test.js`; the suite grades the SHARE of transitions
+// this line marks as moved, so two homes for one figure meant a drift in either could
+// silently re-define the other's denominator. Both now read the one home.
+import { MOTION_FLOOR_01 } from './soakInvariants.mjs';
 
 const FAMILY_TOKENS = Object.freeze({
   pressure: Object.freeze([
@@ -954,7 +959,7 @@ export function observeBehavioralYear({
     const beforePopulation = Math.max(0, finite(previous?.population));
     const afterPopulation = Math.max(0, finite(settlement?.population));
     populationTransitions += 1;
-    if (Math.abs(afterPopulation - beforePopulation) / Math.max(1, beforePopulation) >= 0.0025) {
+    if (Math.abs(afterPopulation - beforePopulation) / Math.max(1, beforePopulation) >= MOTION_FLOOR_01) {
       populationMoved += 1;
     }
     const beforeProsperity = prosperityOf(previous);

@@ -36,6 +36,10 @@ import {
 } from '../../scripts/soak/register.mjs';
 import { evaluateReceipt } from '../../scripts/soak/evaluate.mjs';
 import { buildRealmScalePlan, soakArgsFor } from '../../scripts/audit/realm-scale-certification.mjs';
+// ⭐ THE MOTION FLOOR, IMPORTED (§909 car 3). This fixture's `motion` block is DERIVED from
+// its own series at the very bar `behavioral-observation.mjs` counts at, so a shape planted
+// here and a shape the observer writes cannot mean two different things.
+import { MOTION_FLOOR_01 } from '../../scripts/audit/soakInvariants.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -63,6 +67,11 @@ function researchReceipt({
   // makes the fixture the writer's shape again, and `realmReading: false` reconstructs the
   // pre-P4 shape so the door's refusal can be proved rather than assumed.
   realmReading = true,
+  // ⛔ THE MOTION BLOCK, AS EVERY RECEIPT SINCE `37459391a` (2026-07-28) SHIPS IT (§909 car
+  // 3). `capacity_envelope_30y` stands on it, so a fixture without it makes that row
+  // NOT-EXECUTABLE and the mint door refuse. `motionReading: false` reconstructs the
+  // pre-`37459391a` shape so the door's refusal is proved rather than assumed.
+  motionReading = true,
 } = {}) {
   const seriesFor = (shape, base) => {
     const out = [];
@@ -80,11 +89,24 @@ function researchReceipt({
     IDS.forEach((id, index) => { stateVectors[id] = { population: series[index][year] }; });
     const eventTypeCounts = {};
     for (let n = 0; n < 12; n += 1) eventTypeCounts[`type_${(year * 12) + n}`] = 3;
+    // DERIVED, NEVER TYPED: one transition per settlement per year that has a previous
+    // year, counted as MOVED at the observer's own floor. Year 1 has no previous year, so
+    // it carries zero transitions — exactly what the observer produces.
+    const motion = { populationTransitions: 0, populationMoved: 0 };
+    if (year > 0) {
+      for (const row of series) {
+        const before = row[year - 1];
+        const after = row[year];
+        motion.populationTransitions += 1;
+        if (Math.abs(after - before) / Math.max(1, before) >= MOTION_FLOOR_01) motion.populationMoved += 1;
+      }
+    }
     yearly.push({
       year: year + 1,
       majorEventCount: 4,
       eventTypeCounts,
       stateVectors,
+      ...(motionReading ? { motion } : {}),
       // Inside the row's own band on both clauses (load in [0.6, 1.05]; the binding census
       // accounts for all four settlements), so the fixture stays CLEAN and this key adds an
       // instrument rather than a finding.
@@ -306,6 +328,15 @@ describe('the soak register — shapes, comparisons and the governed growth door
     // so a legitimately dark cell is NOT APPLICABLE and this door never sees the row.
     expect(mintRefusals(annotate(instrumentComplete(researchReceipt({ lit: false }))))
       .some((line) => line.includes('capacity_realm_load'))).toBe(false);
+
+    // ⛔⛔ AND THE FOURTH ROW REFUSES THE SAME DOOR (§909 car 3). A receipt with no `motion`
+    // block at all — the shape every receipt written before `37459391a` carries — leaves
+    // `capacity_envelope_30y` unable to run, and the door must name the path rather than
+    // bank a 300-year curve certified by a detector that never executed.
+    const motionBlind = mintRefusals(annotate(instrumentComplete(researchReceipt({ motionReading: false }))));
+    expect(motionBlind).toContain('not the FULL instrument at build-complete-dark');
+    expect(motionBlind.some((line) => line.includes('capacity_envelope_30y')
+      && line.includes('receipt.behavioral.yearly[last].motion'))).toBe(true);
 
     expect(mintRefusals({ ...annotate(researchReceipt()), passed: false }))
       .toContain('the run did not pass — a register cell is minted from a clean run or not at all');

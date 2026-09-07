@@ -29,6 +29,11 @@ import {
   tripwireRegistryDefects,
   tripwiresOfClass,
 } from '../../scripts/soak/tripwires.mjs';
+import {
+  CAMPAIGN_HORIZON_YEARS,
+  MOTION_FLOOR_01,
+  MOVING_SHARE_FLOOR,
+} from '../../scripts/audit/soakInvariants.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -46,6 +51,10 @@ const WRITER_SOURCE = readFileSync(join(ROOT, 'scripts/audit/whole-world-soak.mj
  * first segment and nothing else. Text-read for the same ARM_B_ROOT reason as above.
  */
 const OBSERVER_SOURCE = readFileSync(join(ROOT, 'scripts/audit/behavioral-observation.mjs'), 'utf8');
+/** The envelope suite, read as text so the ONE-SPELLING claim is checked and not asserted. */
+const ENVELOPE_SUITE_SOURCE = readFileSync(join(ROOT, 'tests/domain/demographicsEnvelope.test.js'), 'utf8');
+/** Source with `//` comments stripped, so a figure QUOTED in prose is not read as a spelling. */
+const codeOnly = (source) => source.split('\n').map((line) => line.replace(/\/\/.*$/, '')).join('\n');
 
 /** A clean receipt: nothing should fire. */
 const clean = (overrides = {}) => ({
@@ -69,6 +78,7 @@ describe('the tripwire registry', () => {
       'throw_or_assert', 'non_finite_ledger_figure', 'population_collapse',
       'negative_stock', 'unbounded_growth', 'liveness_floor',
       'capacity_plateau', 'capacity_floor_thaw', 'capacity_realm_load',
+      'capacity_envelope_30y',
       'tick_duration_blowout', 'memory_watermark',
     ]);
     // TOTAL and DISJOINT: every row is in exactly one class, and both classes are live.
@@ -84,20 +94,20 @@ describe('the tripwire registry', () => {
     // they land in the same place for the same reason: after the deterministic rows that
     // preceded them and before both host-observability rows.
     //
-    // ⚠ THREE, NOT THE DESIGNED FOUR — AND THE RECORDED REASON WAS FALSE, RE-MEASURED AT
-    // §907 car 3. `capacity_envelope_30y` keys on
-    // `behavioral.yearly[29].motion.populationMoved / populationTransitions`, and the claim
-    // that "no such field is written" was wrong when it was made: the block has been on
-    // every yearly row since `37459391a` (2026-07-28), five weeks before C3 landed, and the
-    // real 300-year receipt carries it. The row stays out for a DIFFERENT and measured
-    // reason — its bar (`MOVING_SHARE_FLOOR = 0.05`) has its one home in a test file the
-    // registry may not import, and re-typing it in `tripwires.mjs` would be the second
-    // spelling that file's own header refuses. Armed at that bar it would be SILENT on the
-    // real receipt (110 of 120 transitions moved inside the customer horizon, 0.9167; 3 of 4
-    // at year 30; no year below the bar in 300). Lifting the constant into
-    // `scripts/audit/soakInvariants.mjs` is the chair's act and the roster then goes 11 → 12
-    // and 9 → 10, which is the design's own §2.5 C3 prediction.
-    expect(deterministic.length).toBe(9);
+    // ⭐⭐ AND THE FOURTH IS HERE AT §909 CAR 3 — 11 → 12 and 9 → 10, which is the design's
+    // own §2.5 C3 prediction, landing in the same place and for the same reason as its three
+    // siblings: after the deterministic rows that preceded it and before both
+    // host-observability rows.
+    //
+    // ⚠ IT WAS REFUSED TWICE AND ONLY THE SECOND REFUSAL WAS TRUE. The first said
+    // `behavioral.yearly[].motion` "does not exist" — false when written, refuted at §907
+    // car 3, and re-refuted by the tree below. The second was the threshold's home: the bar
+    // lived in a test file `scripts/soak/**` may not import, so arming the row would have
+    // re-typed `0.05` into the registry — the second spelling `tripwires.mjs`'s own header
+    // refuses. §909 car 3 lifted both bars into `scripts/audit/soakInvariants.mjs` and both
+    // former homes import them, so the row and this suite's STATE MOTION arm now stand on
+    // ONE spelling and cannot drift apart.
+    expect(deterministic.length).toBe(10);
     expect(observability.length).toBe(2);
 
     // ⛔ AND THE FALSE CLAIM CANNOT BE RE-MADE BY READING THIS FILE. The writer is text-read
@@ -179,9 +189,9 @@ describe('the tripwire registry', () => {
 
     // ── CAPACITY C3: three rows, three planted defects, and the DARK control ──────
     // ⛔ THE GATE FIRST, BECAUSE IT IS THE ROWS' MOST IMPORTANT PROPERTY. Every capacity
-    // row is NOT-EXECUTABLE unless the receipt's own subsystem block says the demographic
+    // row is NOT APPLICABLE unless the receipt's own subsystem block says the demographic
     // term was RUNNING. A clean receipt has no such block, which is why every arm above is
-    // unchanged by three new rows.
+    // unchanged by the four capacity rows.
     const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
     // A capacity row names EVERY settlement it convicts, so it can fire more than once on
     // one receipt. WHICH rows fired is the question these plants ask, so the distinct ids
@@ -228,7 +238,9 @@ describe('the tripwire registry', () => {
     });
     expect(firedRows(underloaded)).toEqual(['capacity_realm_load']);
     expect(evaluateTripwires(underloaded).notExecutable.map((row) => row.id))
-      .toEqual(['capacity_plateau', 'capacity_floor_thaw']);
+      // ⭐ THREE SINCE §909: this plant carries a realm reading and NO per-year series and no
+      // `motion` block, so the two series rows and the envelope row all say so positively.
+      .toEqual(['capacity_plateau', 'capacity_floor_thaw', 'capacity_envelope_30y']);
     expect(fired(clean({ behavioral: underloaded.behavioral }))).toEqual([]);
 
     // 4. A BINDING CENSUS THAT DOES NOT ACCOUNT FOR EVERY SETTLEMENT is the other clause,
@@ -241,7 +253,16 @@ describe('the tripwire registry', () => {
     //    can fire and never that they can be satisfied.
     const settled = lit({
       ...capacity(201, (y, i) => (y < 50 ? 100 + i * 100 + y : 150 + i * 100 + (y % 7))),
-      behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } } }] },
+      // ⭐ THE MOTION BLOCK RIDES ALONG SINCE §909 CAR 3. The passing corner claims EVERY
+      // capacity row ran on this receipt, so it must carry what all FOUR of them require;
+      // one observed year is below the envelope row's own thirty-year horizon, so that row
+      // executes and is silent by its own guard rather than by an absent field.
+      behavioral: {
+        yearly: [{
+          realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } },
+          motion: { populationTransitions: 4, populationMoved: 4 },
+        }],
+      },
     });
     expect(fired(settled)).toEqual([]);
     // ⭐ AND THE PASSING CORNER IS A PASS, NOT A SILENCE. Every capacity row RAN on it: the
@@ -254,6 +275,7 @@ describe('the tripwire registry', () => {
     const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
     const REASON = 'requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt';
     const NESTED_REASON = 'requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt';
+    const MOTION_REASON = 'requires receipt.behavioral.yearly[last].motion — absent from this receipt';
     /** The realm reading a receipt must carry for `capacity_realm_load` to be executable. */
     const realmReading = { realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } } };
 
@@ -274,6 +296,9 @@ describe('the tripwire registry', () => {
       // movement and not a drive-by: `capacity_realm_load` keys on a NESTED additive key,
       // so on a lit receipt that carries no realm reading it used to answer a silent clean.
       { id: 'capacity_realm_load', class: 'deterministic', reason: NESTED_REASON },
+      // …and the FOURTH at car 3, on the same reading: a receipt with no `motion` block
+      // measured nothing about the envelope, and the row now says which path it wanted.
+      { id: 'capacity_envelope_30y', class: 'deterministic', reason: MOTION_REASON },
     ]);
 
     // HALF A SERIES IS STILL BLIND, and that is not pedantry: the died flags carry the
@@ -285,10 +310,11 @@ describe('the tripwire registry', () => {
         'requires receipt.yearlyDiedFlags — absent from this receipt',
         'requires receipt.yearlyDiedFlags — absent from this receipt',
         NESTED_REASON,
+        MOTION_REASON,
       ]);
     // A key written with nothing in it carried no evidence either.
     expect(evaluateTripwires(lit({ yearlyPopulations: null, yearlyDiedFlags: null })).notExecutable)
-      .toHaveLength(3);
+      .toHaveLength(4);
 
     // ⭐ PLANT THE FIELDS AND THE ROWS EXECUTE — the existing behaviour, unchanged. Without
     // this half the arm above would pass on a registry whose rows had simply been disabled.
@@ -298,7 +324,7 @@ describe('the tripwire registry', () => {
       // The realm reading rides along from §909 car 2: the arm's claim is that planting what
       // the rows REQUIRE makes them execute, so it must plant what ALL THREE require or it
       // would be asserting the cure for two rows against a third that stayed blind.
-      behavioral: { yearly: [realmReading] },
+      behavioral: { yearly: [{ ...realmReading, motion: { populationTransitions: 4, populationMoved: 4 } }] },
     });
     expect(evaluateTripwires(planted).notExecutable).toEqual([]);
     expect(evaluateTripwires(planted).findings.map((row) => row.id)).toEqual(['capacity_plateau']);
@@ -482,9 +508,15 @@ describe('the tripwire registry', () => {
     expect(convictedBy(legacyReach).filter((id) => !declaresRequires.includes(id))).toEqual([]);
     // …and blinding BOTH writers at once recovers the TOTALITY the old equality asserted:
     // every row that declares a requirement can be convicted of losing it, none excepted.
+    // ⚠ BOTH NESTED KEYS ARE BLINDED, not just one: `capacity_envelope_30y` stands on
+    // `motion` and `capacity_realm_load` on `realmDemography`, so a control that removed
+    // only one would recover three quarters of the roster and call it a totality.
     const legacyObserver = OBSERVER_SOURCE
-      .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n');
+      .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n')
+      .replace(/\n(\s*)motion: \{/, '\n$1motionRenamedForControl: {');
     expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
+    expect(nestedWriterFields(legacyObserver)).not.toContain('realmDemography');
+    expect(nestedWriterFields(legacyObserver)).not.toContain('motion');
     expect(convictedBy(tripwireFieldReach(TRIPWIRES, legacyWriter, legacyObserver)))
       .toEqual(declaresRequires);
 
@@ -567,11 +599,18 @@ describe('the tripwire registry', () => {
     // ⛔⛔ NO NESTED SOURCE ⇒ UNREADABLE, NEVER A PASS. A walker that graded `behavioral` and
     // shrugged at the rest would report a clean sheet about the exact level where the weak
     // zero lived. This is the arm that keeps the two-argument call from becoming a loophole.
-    expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE).unreadable).toEqual([{
-      id: 'capacity_realm_load',
-      reason: 'a nested `requires` path (behavioral.yearly[last].realmDemography) and no '
-        + 'nested-writer source to ground it in',
-    }]);
+    expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE).unreadable).toEqual([
+      {
+        id: 'capacity_realm_load',
+        reason: 'a nested `requires` path (behavioral.yearly[last].realmDemography) and no '
+          + 'nested-writer source to ground it in',
+      },
+      {
+        id: 'capacity_envelope_30y',
+        reason: 'a nested `requires` path (behavioral.yearly[last].motion) and no '
+          + 'nested-writer source to ground it in',
+      },
+    ]);
 
     // A first segment the RECEIPT writer never writes is convicted at that segment, so the
     // two levels are graded against the two different sources and not conflated.
@@ -658,5 +697,99 @@ describe('the tripwire registry', () => {
     // An EMPTY receipt lights no gate, so every capacity row is NOT APPLICABLE rather than
     // not-executable: the third channel stays empty and the two others answer nothing.
     expect(evaluateTripwires({})).toEqual({ findings: [], observability: [], notExecutable: [] });
+  });
+
+  it('capacity_envelope_30y is ARMED on ONE spelling of its bar, and it can both convict and be satisfied', () => {
+    /**
+     * ⭐⭐ THE FOURTH DESIGNED ROW, ARMED AT §909 CAR 3. It shipped unarmed on two recorded
+     * grounds and only the second was true — the first said the `motion` block "does not
+     * exist" and the block has been on every yearly row since 2026-07-28. The true ground
+     * was that its bar's ONE home was an unimportable test file, so this arm's FIRST job is
+     * to prove the lift actually collapsed the spellings rather than adding a third.
+     */
+    const row = TRIPWIRES.find((entry) => entry.id === 'capacity_envelope_30y');
+    expect(row.class).toBe('deterministic');
+    expect(String(row.home)).toContain('demographicsEnvelope');
+
+    // ── ONE SPELLING, CHECKED IN THE TREE ────────────────────────────────────────────
+    // The band STRING is built from the imported constants, so a bar that moved in
+    // soakInvariants.mjs moves this text with it and cannot be silently out of date.
+    expect(row.band).toContain(String(MOVING_SHARE_FLOOR));
+    expect(row.band).toContain(String(MOTION_FLOOR_01));
+    expect(row.band).toContain(String(CAMPAIGN_HORIZON_YEARS));
+    // …and BOTH former homes now import rather than re-type. The motion floor is the
+    // unambiguous witness — `0.05` also spells `capacity_plateau`'s unrelated tolerance, so
+    // scanning for it would convict a coincidence.
+    expect(codeOnly(OBSERVER_SOURCE)).not.toContain('0.0025');
+    expect(codeOnly(ENVELOPE_SUITE_SOURCE)).not.toContain('0.0025');
+    expect(OBSERVER_SOURCE).toContain("import { MOTION_FLOOR_01 } from './soakInvariants.mjs'");
+    expect(ENVELOPE_SUITE_SOURCE).toContain("from '../../scripts/audit/soakInvariants.mjs'");
+    expect(codeOnly(ENVELOPE_SUITE_SOURCE)).toContain('MOVING_SHARE_FLOOR');
+    // ⚠ AND THE OBSERVER STILL COUNTS AT THAT BAR — the import would be decoration if the
+    // comparison had drifted to another figure.
+    expect(OBSERVER_SOURCE).toMatch(/Math\.max\(1, beforePopulation\) >= MOTION_FLOOR_01/);
+
+    // ── THE ROW ITSELF ───────────────────────────────────────────────────────────────
+    const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
+    /** `years` yearly rows, four settlements each, `movedPerYear` of which moved. */
+    const motion = (years, movedPerYear) => ({
+      behavioral: {
+        yearly: Array.from({ length: years }, (_, y) => ({
+          year: y + 1,
+          motion: { populationTransitions: 4, populationMoved: movedPerYear },
+        })),
+      },
+    });
+    const firedRows = (receipt) => evaluateTripwires(receipt).findings.map((entry) => entry.id);
+    const envelopeRows = (receipt) => evaluateTripwires(receipt).notExecutable
+      .filter((entry) => entry.id === 'capacity_envelope_30y').map((entry) => entry.reason);
+
+    // A FROZEN CAMPAIGN: nothing moves for thirty years. Convicted, with the arithmetic on
+    // its face — this is the finding the row exists to make.
+    const frozen = lit(motion(CAMPAIGN_HORIZON_YEARS, 0));
+    expect(firedRows(frozen)).toEqual(['capacity_envelope_30y']);
+    expect(evaluateTripwires(frozen).findings[0].detail)
+      .toContain(`only 0 of 120 settlement-year transitions moved the head count over the first ${CAMPAIGN_HORIZON_YEARS} years`);
+    // …and the PASSING CORNER, without which the plant above proves only that it can fire.
+    // One settlement in four moving every year is 0.25, five times the bar.
+    expect(firedRows(lit(motion(CAMPAIGN_HORIZON_YEARS, 1)))).toEqual([]);
+    // The bar is a real edge: 4 of 120 is 0.0333 and convicts, 6 of 120 is 0.05 and does not.
+    const uneven = (movedTotal) => lit({
+      behavioral: {
+        yearly: Array.from({ length: CAMPAIGN_HORIZON_YEARS }, (_, y) => ({
+          year: y + 1,
+          motion: { populationTransitions: 4, populationMoved: y < movedTotal ? 1 : 0 },
+        })),
+      },
+    });
+    expect(firedRows(uneven(4))).toEqual(['capacity_envelope_30y']);
+    expect(firedRows(uneven(6))).toEqual([]);
+
+    // ⛔ BELOW THE HORIZON IT DID NOT MEASURE, and that silence is neither a pass nor a
+    // finding: the row grades a thirty-year window and a shorter run has none.
+    expect(firedRows(lit(motion(CAMPAIGN_HORIZON_YEARS - 1, 0)))).toEqual([]);
+    expect(envelopeRows(lit(motion(CAMPAIGN_HORIZON_YEARS - 1, 0)))).toEqual([]);
+
+    // ⛔⛔ A ZERO DENOMINATOR IS NAMED, NOT ANSWERED WITH `[]`. `moved / 0` would be the exact
+    // weak zero this lane exists to close, arriving through an arithmetic guard.
+    expect(firedRows(lit({
+      behavioral: {
+        yearly: Array.from({ length: CAMPAIGN_HORIZON_YEARS }, (_, y) => ({
+          year: y + 1, motion: { populationTransitions: 0, populationMoved: 0 },
+        })),
+      },
+    }))).toEqual(['capacity_envelope_30y']);
+
+    // ⛔ NO `motion` BLOCK AT ALL is a pre-2026-07-28 receipt, and its silence grades
+    // NOT-EXECUTABLE with the path on its face rather than clean.
+    expect(envelopeRows(lit({ behavioral: { yearly: [{ year: 1 }] } })))
+      .toEqual(['requires receipt.behavioral.yearly[last].motion — absent from this receipt']);
+
+    // ⛔ AND THE DARK TWIN IS NOT APPLICABLE. The bar's derivation home runs the DEMOGRAPHIC
+    // kernel, so grading a world whose head counts move by another term would be a category
+    // error. Measured on a real dark 30-year receipt the share is 0.70 — well above the bar
+    // — so the gate costs no finding; it costs a claim the row is not entitled to make.
+    expect(firedRows(clean(motion(CAMPAIGN_HORIZON_YEARS, 0)))).toEqual([]);
+    expect(envelopeRows(clean(motion(CAMPAIGN_HORIZON_YEARS, 0)))).toEqual([]);
   });
 });

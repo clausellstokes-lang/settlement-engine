@@ -26,7 +26,10 @@
  */
 
 import {
+  CAMPAIGN_HORIZON_YEARS,
   LIVENESS_FLOOR,
+  MOTION_FLOOR_01,
+  MOVING_SHARE_FLOOR,
   WALL_TIME_TREND,
   YEARLY_BYTES_PER_SETTLEMENT_CEILING as INVARIANT_YEARLY_BYTES_CEILING,
   foldDecades,
@@ -294,40 +297,37 @@ export const TRIPWIRES = Object.freeze([
   // writes `rules: runA.simulationRules` into its subsystem block
   // (`whole-world-soak.mjs:1050-1052`), so this is a field that exists, not one hoped for.
   //
-  // ⛔ AND THE FOURTH DESIGNED ROW IS STILL NOT HERE — BUT NOT FOR THE REASON THIS COMMENT
-  // USED TO GIVE, WHICH WAS FALSE WHEN IT WAS WRITTEN (§907 car 3, re-measured).
+  // ⭐⭐ AND THE FOURTH DESIGNED ROW IS ARMED AT §909 CAR 3 — the design's own §2.5 C3
+  // prediction, discharged. It shipped unarmed on TWO recorded grounds and only the second
+  // was ever true.
   //
-  // It said `behavioral.yearly[].motion` "does not exist… no `motion` block at all". IT
-  // EXISTS. `scripts/audit/behavioral-observation.mjs:1016-1023` writes
-  // `motion: { populationTransitions, populationMoved, prosperityTransitions,
-  // prosperityMoved, powerTransitions, powerMoved }` on EVERY yearly row, and has since
-  // `37459391a` (2026-07-28) — five weeks before C3 landed (`d02c5acde`, 2026-09-03). The
-  // real 300-year receipt carries it: `behavioral.yearly[29].motion` is
-  // `{ populationTransitions: 4, populationMoved: 3, … }`. The refusal's stated MECHANISM
-  // was wrong; the row is refused now on a different ground, and this one is measured.
+  // The FIRST was false when it was written (§907 car 3 re-measured it): it said
+  // `behavioral.yearly[].motion` "does not exist… no `motion` block at all". IT EXISTS.
+  // `scripts/audit/behavioral-observation.mjs` writes `motion: { populationTransitions,
+  // populationMoved, prosperityTransitions, prosperityMoved, powerTransitions, powerMoved }`
+  // on EVERY yearly row, and has since `37459391a` (2026-07-28) — five weeks before C3
+  // landed (`d02c5acde`, 2026-09-03).
   //
-  // ⛔ THE GROUND IS THE THRESHOLD'S HOME, NOT THE FIELD. The row's band is the envelope
-  // suite's own STATE MOTION bar — `MOVING_SHARE_FLOOR = 0.05` over transitions counted at
-  // `MOTION_FLOOR_01 = 0.0025` — and its ONE home today is
-  // `tests/domain/demographicsEnvelope.test.js:45,:47`, a test file this directory must not
-  // import. Re-typing `0.05` here would be a SECOND SPELLING of one envelope, which is the
-  // five-homes defect this registry's own header refuses in its fourth paragraph; the
-  // motion floor is already spelled twice (`behavioral-observation.mjs:957` inline and the
-  // suite's constant) and a third would make it worse. ARMING THE ROW IS THEREFORE ONE ACT
-  // AWAY AND THE ACT IS THE CHAIR'S: lift `MOVING_SHARE_FLOOR` (and, while there, the motion
-  // floor) into `scripts/audit/soakInvariants.mjs` beside `LIVENESS_FLOOR`, then import it
-  // here as `YEARLY_BYTES_PER_SETTLEMENT_CEILING` and `WALL_TIME_TREND` already are.
+  // The SECOND was true and is now discharged: the row's band is the envelope suite's own
+  // STATE MOTION bar, and its one home was `tests/domain/demographicsEnvelope.test.js`, a
+  // test file this directory must not import. Re-typing `0.05` here would have been a
+  // SECOND SPELLING of one envelope — the five-homes defect this file's own header refuses.
+  // §909 car 3 lifted `MOVING_SHARE_FLOOR` and `MOTION_FLOOR_01` into
+  // `scripts/audit/soakInvariants.mjs` beside `LIVENESS_FLOOR`, and BOTH former homes now
+  // import them, so the row below stands on the same bar the suite grades and the two
+  // cannot drift apart. The motion floor stopped being spelled twice in the same act.
   //
-  // ⭐ AND WHAT THE ROW WOULD SAY IS MEASURED RATHER THAN GUESSED, so the chair is not
-  // asked to arm an instrument blind. Run against the real 300-year receipt at the
-  // envelope's own bar it is SILENT, and explainably so from the receipt's own figures:
-  // over the customer horizon the population term moved 110 of 120 settlement-year
+  // ⭐ AND IT WAS NOT ARMED BLIND — the verdict was measured first, on real receipts, and
+  // reproduces the C3 figures exactly. On the 300-year lit `research-lit-4s` receipt it is
+  // SILENT: over the customer horizon the population term moved 110 of 120 settlement-year
   // transitions (share 0.9167); at year 30 exactly, 3 of 4 (0.75); across all 300 years,
-  // 0.8992, with NO year at zero and NO year below the 0.05 bar. That agrees in shape with
-  // the envelope suite's own 170 of 180 (0.9444) on a different fixture.
+  // 1079 of 1200 (0.8992), with NO year at zero and NO year below the bar. On a fresh lit
+  // 30-year run it is SILENT at 110 of 120 (0.9167). That agrees in shape with the envelope
+  // suite's own 170 of 180 (0.9444) on a different fixture.
   //
-  // The property is measured meanwhile in the unconditional chain, by
-  // `tests/domain/demographicsEnvelope.test.js`'s STATE MOTION arm.
+  // The property goes on being measured in the unconditional chain too, by
+  // `tests/domain/demographicsEnvelope.test.js`'s STATE MOTION arm — one bar, two readings,
+  // and now they are the same bar.
   Object.freeze({
     id: 'capacity_plateau',
     class: 'deterministic',
@@ -458,6 +458,51 @@ export const TRIPWIRES = Object.freeze([
         out.push(`binding census ${granary} granary + ${walls} walls does not account for ${settlements} settlements`);
       }
       return out;
+    },
+  }),
+  Object.freeze({
+    id: 'capacity_envelope_30y',
+    class: 'deterministic',
+    band: `over the first ${CAMPAIGN_HORIZON_YEARS} observed years: populationMoved / populationTransitions >= ${MOVING_SHARE_FLOOR}, a transition counted as moved at ${MOTION_FLOOR_01} of the head count`,
+    home: 'tests/domain/demographicsEnvelope.test.js — the CAPACITY C3 envelope suite\'s own STATE MOTION arm. Both bars were lifted to scripts/audit/soakInvariants.mjs at §909 car 3 and BOTH homes import them, so this row and that arm cannot disagree about what motion is',
+    // ⛔ GATED LIKE ITS THREE SIBLINGS, AND FOR THE SAME REASON RATHER THAN FOR SYMMETRY.
+    // The bar's derivation home runs the DEMOGRAPHIC kernel, so it is a bar about that
+    // model's visible motion. A dark world moves its head counts by a different term
+    // (populationDynamics' raw proportional growth), and grading that world at this bar
+    // would be a category error dressed as a wider net. Measured on the fresh 30-year DARK
+    // receipt the share is 84 of 120 (0.70) — comfortably above the bar, so the gate costs
+    // no finding today; it costs a claim this row is not entitled to make.
+    gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
+    // The `motion` block is per-yearly-row and uniformly written by one observer, so its
+    // presence on the LAST observed row is the honest witness that the series carries it at
+    // all — a pre-`37459391a` receipt lacks it on every row, and that silence must grade
+    // NOT-EXECUTABLE rather than clean.
+    requires: ['behavioral.yearly[last].motion'],
+    detect: (receipt) => {
+      const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
+      // A run shorter than the customer horizon did not observe the window this row grades;
+      // reading that silence as a pass or a finding is the §206.2b error twice paid for.
+      if (yearly.length < CAMPAIGN_HORIZON_YEARS) return [];
+      let transitions = 0;
+      let moved = 0;
+      for (const year of yearly.slice(0, CAMPAIGN_HORIZON_YEARS)) {
+        transitions += Number(year?.motion?.populationTransitions) || 0;
+        moved += Number(year?.motion?.populationMoved) || 0;
+      }
+      // ⛔⛔ A ZERO DENOMINATOR IS A FINDING, NOT A SILENCE, AND THAT IS THE WHOLE LESSON OF
+      // THIS LANE APPLIED TO ITS OWN NEW ROW. `moved / 0` would answer `[]` — the exact weak
+      // zero §909 exists to close, and it would arrive here through the back door of an
+      // arithmetic guard. The observer counts one transition per settlement per year that
+      // has a previous-year record, so zero across the whole horizon means the instrument
+      // reported nothing: measured 4 per year on both real receipts, 0 rows at zero in 300
+      // years and in 30. It is unreachable on an honest run and named on a broken one.
+      if (!transitions) {
+        return [`the motion instrument reported ZERO settlement-year transitions over the first ${CAMPAIGN_HORIZON_YEARS} observed years — this row measured nothing`];
+      }
+      const share = moved / transitions;
+      return share < MOVING_SHARE_FLOOR
+        ? [`only ${moved} of ${transitions} settlement-year transitions moved the head count over the first ${CAMPAIGN_HORIZON_YEARS} years (share ${share.toFixed(4)}, floor ${MOVING_SHARE_FLOOR}). A population term still inside a campaign is a term no reader can see, whatever it does at three hundred years`]
+        : [];
     },
   }),
   Object.freeze({
