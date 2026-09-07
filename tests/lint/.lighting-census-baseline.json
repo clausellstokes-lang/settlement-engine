@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d804420d707e0b801a5a874ffcd12de8d0596aa8",
-  "measuredBy": "Fable 5.1 chair — §908 CAP-TRIP landing",
+  "measuredAtSha": "864e76be9e893093f86f7ae9ca7ab75fa625d003",
+  "measuredBy": "Fable 5.1 chair — §910 SOAK-HONEST landing",
   "date": "2026-09-07",
-  "note": "the CAP-TRIP-907 consist (four tripwire-repair cars over the §906 CAS at the tip; re-derived by the farmed probe (printed in run-registers-908.sh); two it() titles added, no test file added",
+  "note": "the SOAK-HONEST-909 consist (five capacity-honesty cars over the §908 CAS at the tip; re-derived by the farmed probe printed in run-registers-910.sh); three it() titles added, no test file added",
   "files": 2543,
   "parked": 373,
   "credited": 2170,
-  "titles": 23662,
+  "titles": 23665,
   "suiteTitles": 6335
 }
