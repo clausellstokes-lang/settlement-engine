@@ -15,3 +15,7 @@ SAMPLE 14 | Mon Sep  7 08:49:02 EDT 2026 | load: { 2.47 2.96 6.89 } | vitest: 0 
 SAMPLE 15 | Mon Sep  7 08:50:02 EDT 2026 | load: { 1.88 2.70 6.52 } | vitest: 0 | gate-mutex procs: 0
 SAMPLE 16 | Mon Sep  7 08:51:02 EDT 2026 | load: { 2.30 2.65 6.24 } | vitest: 0 | gate-mutex procs: 3
 SAMPLE 17 | Mon Sep  7 08:52:02 EDT 2026 | load: { 2.72 2.72 6.02 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 18 | Mon Sep  7 08:53:02 EDT 2026 | load: { 3.66 3.02 5.91 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 19 | Mon Sep  7 08:54:02 EDT 2026 | load: { 2.96 2.97 5.70 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 20 | Mon Sep  7 08:55:02 EDT 2026 | load: { 3.00 2.96 5.50 } | vitest: 0 | gate-mutex procs: 1
+SAMPLER DONE Mon Sep  7 08:55:02 EDT 2026

@@ -1,7 +1,9 @@
 # RECEIPT — LANE CAP-HORIZON-909 (the 600-year horizon + the 12-settlement timing probe)
 **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session b43943b4) · dock `$SC/laneB6` · MEASUREMENT lane, ZERO product bytes**
 
-**STATUS: PARTIAL — arrival check taken Mon Sep  7 08:35:00 EDT 2026; orientation re-derived 08:36–08:38; no run launched yet.**
+**STATUS: PARTIAL — M2 COMPLETE (TRUE_EXIT=0, 9 min 00 s, 08:38:44 → 08:47:44 EDT); M1 RUNNING
+(launched 08:51:02 EDT, predicted ≈ 61 min).** Arrival check 08:35:00; orientation re-derived
+08:36–08:38; receipt re-written at each milestone. Timestamps from `date` in the same shell.
 
 ## ARRIVAL CHECK (Mon Sep  7 08:35:00 EDT 2026, `date`)
 | line | expected | measured | verdict |
@@ -126,3 +128,75 @@ PREDICTED  whole job (A + B + C + isolate) ≈ 3,638 s ≈ 60.6 min
 ⚠ **A 600-YEAR RUN IS NOT TWICE A 300-YEAR RUN** — it is ≈ 2.37× it, because the world ages into a
 dearer per-year cost. The brief's "~52 min at the measured 0.635 s/settlement-year" is the
 constant-rate reading and is the same error M2 removes; it is expected to run ~17 % long.
+
+### M1 QUIET WINDOW — the law met, and ⛔ A FALSE POSITIVE FOUND IN THIS LANE'S OWN INSTRUMENT
+Two INDEPENDENT samplers ran a minute out of phase (`quiet-window-M1.log`, `quiet-window-M1b.log`).
+The window is three consecutive clean minutes AFTER the M2 probe released the box at 08:47:44, and
+both instruments certify it:
+
+```
+sampler B  SAMPLE 3 | 08:47:54 | load-1 3.25 | vitest 0 | gate-mutex 0
+           SAMPLE 4 | 08:48:54 | load-1 2.51 | vitest 0 | gate-mutex 0
+           SAMPLE 5 | 08:49:54 | load-1 1.87 | vitest 0 | gate-mutex 0
+sampler A  SAMPLE 13| 08:48:02 | load-1 3.15 | vitest 0 | gate-mutex 0
+           SAMPLE 14| 08:49:02 | load-1 2.47 | vitest 0 | gate-mutex 0
+           SAMPLE 15| 08:50:02 | load-1 1.88 | vitest 0 | gate-mutex 0
+```
+At the launch instant (08:51:02): `gate-mutex.sh` inspect = **FREE — no held lock or Vitest runner
+outside this process's ancestry** (exit 0), `pgrep -f vitest` = **0**, `$SC/HOLD-VITEST` absent,
+**dock porcelain 0**. The lock was then taken `after 0 atomic poll(s) + 0 legacy poll(s) + 0
+shared-drain poll(s)` — **the mutex itself found nothing to wait for**, which is the strongest
+available evidence that no chair gate was running.
+
+⛔⛔ **AND ONE SAMPLE READ `vitest: 1` — IT IS A DEFECT IN THE DETECTOR, PROVEN BY NEGATIVE CONTROL,
+NOT EXPLAINED AWAY.** Sampler B's SAMPLE 6 (08:50:54) reported `vitest: 1 | gate-mutex procs: 12`.
+Sampler A read `vitest: 0` at 08:50:02 and again at 08:51:02, and the product's own detector read
+FREE at 08:51:02. Rather than argue the outlier away, the mechanism was **executed**:
+
+```
+$ tail -f /tmp/settlementforge-vitest-gate.502.lock/pid &        # NOT vitest — a `tail`
+$ pgrep -f vitest
+31084                                                            # ← it matches
+$ kill 31084 ; pgrep -f vitest | wc -l
+0
+```
+**The machine-wide lock path is `/tmp/settlementforge-vitest-gate.$(id -u).lock`
+(`gate-mutex.sh:61`, `:85`) and the string "vitest" is a SUBSTRING of it.** So `pgrep -f vitest`
+convicts any process whose argv merely NAMES the lock — including `gate-mutex.sh`'s own
+acquisition machinery. SAMPLE 6 was taken while this lane's own launch pipeline was reaching for
+the lock.
+
+**The consequence, stated for the estate and not only for this lane.** `pgrep -f vitest` is the
+idiom every quiet-window log in this program uses, §907's included. The direction of the error
+matters and is the saving grace: a detector that over-matches can produce a FALSE POSITIVE but can
+never manufacture a FALSE ZERO — so every `vitest: 0` on every quiet-window log in the estate
+remains sound, and it is only a NON-ZERO reading that must not be believed without
+`gate-mutex.sh`'s own inspect beside it. This lane's launches all carry that inspect.
+
+### M1 LAUNCH — 2026-09-07 08:51:02 EDT, detached, TRUE_EXIT captured in-shell
+```
+sh scripts/gate-mutex.sh --run -- node --max-old-space-size=6144 \
+  scripts/audit/whole-world-soak.mjs --years 600 --settlements 4 \
+  --seed realm-scale-research-lit-4s-600y-4s-seed1 \
+  --lighting demographicsEnabled=true --receipt $SC/capacity-horizon/artifacts/horizon-600y-4s-lit.json
+```
+Wrapper pid **29037** (`horizon-600y-4s-lit.pid`); mutex holder **29041**; node child **30649** —
+argv verified by `ps`, carrying `--years 600 --settlements 4 … --lighting demographicsEnabled=true`.
+Log `$SC/capacity-horizon/soak-horizon-600y-4s-lit.log`.
+
+⛔⛔ **A METHODOLOGICAL CORRECTION THE CHAIR MUST HAVE BEFORE READING M1'S ANSWER, RAISED BEFORE THE
+RUN FINISHED RATHER THAN AFTER.** The brief prescribes the seed
+`realm-scale-research-lit-4s-600y-4s-seed1`. §907's 300-year run used
+`realm-scale-research-lit-4s-300y-4s-seed1`. **These are DIFFERENT SEEDS, so they are different
+worlds** — the seed drives generation, and the soak's own instrument proves seeds diverge
+(`PASS different seeds produce a divergent event-type mix — TV 0.273`). The 600-year run is
+therefore **not a continuation of the 300-year curve**, and the question "is 0.4787 at year 300 a
+point on a curve still moving at 600?" cannot be answered by extending that curve.
+
+What the 600-year run CAN answer, and what this lane will answer with it:
+1. **WITHIN ITS OWN RUN** — does *this* world's realm load, read at years 300, 350, … 600, still
+   move at the horizon, or does it flatten? That is the settling question, asked of one curve.
+2. **ACROSS THE TWO WORLDS** — does the 600-year world's reading AT YEAR 300 agree in shape with
+   the 300-year world's 0.4787? Two seeds agreeing is evidence about the FIXTURE FAMILY; two seeds
+   disagreeing would mean the §907 figure is seed-specific and the tuning desk is reading noise.
+Both readings are reported. Neither is presented as the other.
