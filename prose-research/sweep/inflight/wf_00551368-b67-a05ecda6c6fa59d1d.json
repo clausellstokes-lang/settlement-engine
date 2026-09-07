@@ -3,14 +3,14 @@
  "name": "ai",
  "angle": "arch-biographical-record",
  "tag": null,
- "lines": 329,
+ "lines": 397,
  "firstTs": "2026-09-07T02:56:37.991Z",
- "lastTs": "2026-09-07T03:16:13.299Z",
+ "lastTs": "2026-09-07T03:22:48.266Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 71,
-  "WebSearch": 18
+  "Bash": 87,
+  "WebSearch": 21
  },
  "urlsFetched": [
   "https://www.theverge.com/2024/2/13/24067157/ai-obituary-spam-generative-clickbait",
@@ -61,7 +61,15 @@
   "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
   "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
   "https://archive.ph/newest/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
-  "https://web.archive.org/web/20250804135306id_/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/"
+  "https://web.archive.org/web/20250804135306id_/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "https://futurism.com/msn-ai-brandon-hunter-useless",
+  "https://www.poynter.org/commentary/2023/artificial-intelligence-obituary-brandon-hunter-useless/",
+  "https://web.archive.org/web/20250804135306id_/…",
+  "https://lastthoughts.substack.com/p/technote028",
+  "https://heartlandgenealogy.org/2026/04/01/ai-2/",
+  "https://www.elderlawanswers.com/ai-and-obituaries-did-ai-write-this-death-announcement-20344",
+  "https://www.tulipcremation.com/articles/tulip-expert-guides/death-resources/using-ai-to-write-an-obituary.html",
+  "https://slate.com/technology/2022/12/davinci-003-chatbot-gpt-wrote-my-obituary.html"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -71,8 +79,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-biographical-record.json",
-  "claims": 53,
-  "complete": false,
-  "mtime": "23:11:53"
+  "claims": 104,
+  "complete": true,
+  "mtime": "23:21:31"
  }
 }

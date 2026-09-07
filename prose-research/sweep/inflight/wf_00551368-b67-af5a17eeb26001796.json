@@ -3,13 +3,13 @@
  "name": "ai",
  "angle": "arch-worldbuilding-communities",
  "tag": null,
- "lines": 339,
+ "lines": 355,
  "firstTs": "2026-09-07T02:56:37.986Z",
- "lastTs": "2026-09-07T03:16:53.438Z",
+ "lastTs": "2026-09-07T03:19:55.070Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 67,
+  "Bash": 71,
   "WebFetch": 3,
   "WebSearch": 27
  },
@@ -74,7 +74,8 @@
   "http://web.archive.org/cdx/search/cdx?url=drivethrurpg.com*&output=text&fl=timestamp,original&filter=original:.*[Tt",
   "https://tenfootpole.org/ironspike/?p=9829",
   "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
-  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://tenfootpole.org/ironspike/?p=9842"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now let me update the checkpoint file with everything so far.",
@@ -84,8 +85,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-worldbuilding-communities.json",
-  "claims": 35,
-  "complete": false,
-  "mtime": "23:13:17"
+  "claims": 66,
+  "complete": true,
+  "mtime": "23:19:37"
  }
 }

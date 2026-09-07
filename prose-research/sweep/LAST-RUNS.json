@@ -103,8 +103,8 @@
    "ai"
   ],
   "running": [
-   "dnd-r9",
-   "ai-r9"
+   "dnd-r9 (DIES at the switch)",
+   "ai-r9 (DIES at the switch)"
   ],
   "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
@@ -123,7 +123,8 @@
   "next": [
    "S10b exemplar-best-parts after BOTH rounds complete (their sections change)",
    "S12"
-  ]
+  ],
+  "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first."
  },
  "_fiveauthor": {
   "runId": "wf_55c30493-02f",

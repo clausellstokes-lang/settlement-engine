@@ -1,20 +1,24 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:16:54 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 23:22:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | in-flight | 0 | — | — | 21:31:03 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
-| ai | finder | arch-biographical-record | in-flight | 49 | — | 53 claims, complete=False @23:11:53 | 03:16:13 |
+| ai | finder | arch-biographical-record | in-flight | 57 | — | 104 claims, complete=True @23:21:31 | 03:22:48 |
 | ai | finder | arch-gazetteer-travel-history | result | 32 | payload.json, payload2.json | 79 claims, complete=True @23:11:48 | 03:15:34 |
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:12:24 | 03:16:09 |
-| ai | finder | arch-worldbuilding-communities | in-flight | 61 | — | 35 claims, complete=False @23:13:17 | 03:16:53 |
+| ai | finder | arch-worldbuilding-communities | in-flight | 62 | — | 66 claims, complete=True @23:19:37 | 03:19:55 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:08:40 | 03:11:50 |
-| dnd | finder | place-dmg-settlements | in-flight | 55 | — | 68 claims, complete=True @23:15:24 | 03:15:41 |
-| dnd | finder | place-editorial-staff | in-flight | 36 | — | 95 claims, complete=True @23:13:38 | 03:14:16 |
-| dnd | finder | place-srd-measure | in-flight | 14 | — | 58 claims, complete=True @23:14:53 | 03:15:55 |
+| dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:15:24 | 03:18:52 |
+| dnd | finder | place-editorial-staff | result | 36 | — | 95 claims, complete=True @23:13:38 | 03:17:42 |
+| dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:14:53 | 03:18:23 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
+| dnd | verifier | i872-886 | in-flight | 6 | claims-in.json | verdict file WRITTEN | 03:22:43 |
+| dnd | verifier | i887-901 | in-flight | 5 | — | verdict file absent | 03:22:42 |
+| dnd | verifier | i902-916 | in-flight | 6 | — | verdict file absent | 03:22:39 |
+| dnd | verifier | i917-931 | in-flight | 9 | — | verdict file absent | 03:22:52 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |
 | hobb | regrade | regrade-r7 | result | 0 | build-r7.mjs | — | 22:00:30 |
 | hobb | synth |  | result | 0 | section-hobb-body.md | — | 22:27:15 |

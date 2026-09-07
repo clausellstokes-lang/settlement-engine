@@ -8,3 +8,8 @@ Started 2026-09-06. Route log.
 - DriveThruRPG help page on AI policy — 403 live; ladder owed.
 - EN World thread on DTRPG AI filter — FETCHED live.
 - Rascal News "AI-generated profiles of TTRPG designers" (Lin Codega, 2026-05-12) — FETCHED live raw. GOLD: archival/encyclopedic register.
+
+## Final route log (see found-*.json for the claims)
+- BLOCKED, no ladder rung worked: help.drivethrurpg.com and help.dmsguild.com (Cloudflare 403, no Wayback capture); worldanvil.com community/codex pages (403); DriveThruRPG store product pages and their customer reviews (403) — so NO one-star review text was obtained.
+- Reddit is entirely walled to this session (login page on www and old, 403 on .json). Wayback raw id_ captures of old.reddit worked for the r/worldbuilding rules wiki and the DnDBehindTheScreen sidebar.
+- Best sources found: Rascal News 4 Pillar investigation (archival register), tenfootpole.org Three Witches (a store-labelled AI hexcrawl reviewed line by line) + Stygina + Snake Temple Ruins comment threads, Wikipedia:Signs of AI writing (the encyclopedic register with dated examples).

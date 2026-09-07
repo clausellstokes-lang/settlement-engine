@@ -3,15 +3,16 @@
  "name": "dnd",
  "angle": "place-srd-measure",
  "tag": null,
- "lines": 340,
+ "lines": 343,
  "firstTs": "2026-09-07T02:52:52.795Z",
- "lastTs": "2026-09-07T03:15:55.893Z",
+ "lastTs": "2026-09-07T03:18:23.720Z",
  "tools": {
   "Read": 1,
   "Bash": 79,
   "ToolSearch": 1,
   "WebFetch": 1,
-  "WebSearch": 5
+  "WebSearch": 5,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
@@ -34,7 +35,7 @@
  "run": "wf_37af3c74-8c8",
  "agent": "aa8ece68c381f59f7",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aa8ece68c381f59f7.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-srd-measure.json",
   "claims": 58,

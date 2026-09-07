@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i887-901",
+ "lines": 60,
+ "firstTs": "2026-09-07T03:18:53.489Z",
+ "lastTs": "2026-09-07T03:22:42.100Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 13
+ },
+ "urlsFetched": [
+  "https://seedofworlds.blogspot.com/2023/12/review-planescape-adventures-in.html",
+  "https://www.expositionbreak.com/a-walk-through-the-planes-sigil-and-the-outlands/",
+  "https://www.strangeassembly.com/2015/review-sword-coast-adventurers-guide-dungeons-dragons",
+  "https://writerinwhite.com/2021/04/23/sword-coast-adventurers-guide-review/",
+  "https://www.dndbeyond.com/posts/855-encounter-of-the-week-trek-to-ten-towns"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 15 quotes appear verbatim. Now the adversarial part — checking every limb, especially universals (\"each\", \"all\") and the publisher attribution on the D&D Beyond page.",
+ "run": "wf_37af3c74-8c8",
+ "agent": "aee3d318fea7a43bf",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aee3d318fea7a43bf.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i887-901.json",
+  "exists": false
+ }
+}

@@ -3,15 +3,16 @@
  "name": "dnd",
  "angle": "place-editorial-staff",
  "tag": null,
- "lines": 341,
+ "lines": 344,
  "firstTs": "2026-09-07T02:52:52.795Z",
- "lastTs": "2026-09-07T03:14:16.124Z",
+ "lastTs": "2026-09-07T03:17:42.782Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 69,
   "WebSearch": 25,
-  "WebFetch": 2
+  "WebFetch": 2,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://50yearsinthedungeon.substack.com/archive",
@@ -56,7 +57,7 @@
  "run": "wf_37af3c74-8c8",
  "agent": "a2b01371ae7eb4e82",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-a2b01371ae7eb4e82.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-editorial-staff.json",
   "claims": 95,
