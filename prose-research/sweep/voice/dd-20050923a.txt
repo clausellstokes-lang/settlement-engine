@@ -1,1 +1,0 @@
- 301 Moved Permanently 301 Moved Permanently nginx/1.22.1 

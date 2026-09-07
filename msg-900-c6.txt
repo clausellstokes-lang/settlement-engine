@@ -1,7 +1,0 @@
-Desk composition (chair car): the whole-world soak's banner names the preset it actually certifies
-
-L-OVERLAY measured that whole-world-soak.mjs printed full_simulation in its stdout banner under any --preset while composing the named preset correctly (all seven births byte-identical) — a configuration line that lied beside a correct JSON receipt. The banner takes SOAK_PRESET.id; the no-flag run's output is byte-identical. The file sits inside REALM_SCALE_SOURCE_PATHS, so the realm-scale sourceFingerprint moves and its door is taken at the register phase. Proof: the soak seams suite under the mutex; node --check.
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
