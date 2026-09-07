@@ -47,3 +47,26 @@ Opus finder, 2026-09-06. Method: OPUS-FINDER-METHOD.md.
 - Table 4 HUMAN EVAL (Llama 3 70B, "Write me a creative story?", Prolific raters, 1–10): T=3 lower-diversity Quality: standard 6.75±0.3509, top-p=0.1 5.75±0.3201, min-p=0.2 7.74±0.2418. T=3 higher-diversity Quality: standard 6.83±0.2895, top-p=0.9 7.11±0.2869, min-p=0.05 7.57±0.2303.
 - RELAY TO PAECH: "min-p (τ = 1.5, pbase = 0.1) scoring 62 versus the baseline's 51.5 at τ = 1.0" on EQ-Bench Creative Writing, attributed to Paech (2024) benchmark, results by Gusev (2024) [reddit].
 - Honest limit on human eval: "this represents a limited sample size, it provides valuable directional insights"; triplet diversity is "a point estimate".
+
+## 4. BASU, RAMACHANDRAN, KESKAR, VARSHNEY — Mirostat. arXiv 2007.14966v2 (14 Jan 2021), ICLR 2021. Models: GPT-2 117M (default), also GPT-2 Medium/Large/XL 1558M; CTRL in appendix. Register: open-ended continuation from a fixed context.
+- Abstract: "cross-entropy (log of perplexity) has a near-linear relation with repetition"; small k/p -> "the boredom trap"; large k/p -> "confusion trap".
+- §5.2: "percentage repetition decreases with increase in cross-entropy and more importantly, for a fixed GPT-2 model, this relation is independent of the sampling method." (=> the SAMPLER is not the variable; the ENTROPY OF SAMPLED TEXT is.)
+- §5.2 Fig 3b: repetitions for different temperature values and k "follow the same curve as in Fig. 3a".
+- §5.2: sentence-level repetitions disappear "beyond a threshold of cross-entropy, which seems to be around 2.5 for GPT-2." Word-level 1-gram repetition persists; they say a good sampler should NOT have zero 1-gram repetition because human text repeats pronouns and conjunctions.
+- §5.2 Fig 3d: "Larger LMs such as GPT-2-XL with 1558M parameters have slightly less repetitions for a fixed value of cross-entropy than smaller LMs such as GPT-2 with 117M parameters." (model-era drift, holding entropy fixed)
+- §5.3 (10 samples of 900-token texts): "Human-generated text converges to some limiting value of cross-entropy when the generated text is long enough and does not fall into either boredom or confusion." <- HUMAN CONTROL MEASUREMENT.
+- §5.4 human eval: 300 tokens, τ ∈ {2.5,3,4,5}, 43 participants (UIUC + IIT Kanpur), 1–7 Likert on fluency/coherence/quality; τ=3 best; "for τ = 3, more than half of raters mistakenly guessed the AI-generated text to be human generated."
+
+## 5. SU, LAN, WANG, YOGATAMA, KONG, COLLIER — A Contrastive Framework for Neural Text Generation (SimCTG + contrastive search). arXiv 2202.06417v3 (26 Sep 2022), NeurIPS 2022. ⭐ MEASURED ON WIKITEXT-103 — THE ENCYCLOPEDIC REGISTER (the gap the program says nobody filled).
+- Abstract/§1 mechanism: "the degeneration of neural language models stems from the anisotropic distribution of token representations".
+- §1: in GPT-2, "the cosine similarities between tokens within a sentence are over 0.95".
+- Table 1 (Wikitext-103 test set), columns rep-2 rep-3 rep-4 diversity MAUVE coherence gen-ppl:
+  Human 3.92 / 0.88 / 0.28 / 0.95 / 1.00 / 0.644 / 24.01
+  MLE greedy 69.21 / 65.18 / 62.05 / 0.04 / 0.03 / 0.587 / 7.32
+  MLE beam 71.94 / 68.97 / 66.62 / 0.03 / 0.03 / 0.585 / 6.42
+  MLE nucleus 4.45 / 0.81 / 0.43 / 0.94 / 0.90 / 0.577 / 49.71
+  SimCTG nucleus 4.05 / 0.79 / 0.37 / 0.94 / 0.92 / 0.584 / 47.19
+  SimCTG contrastive 3.93 / 0.78 / 0.31 / 0.95 / 0.94 / 0.610 / 18.26
+  (NUCLEUS gen-ppl ~47–50 vs HUMAN 24.01 on Wikipedia text: nucleus prose is about twice as surprising as the human encyclopedic reference.)
+- §4.3 human eval: 200 prefixes of length 32 from Wikitext-103 test set, continuations of length 128, five graders, 9,000 annotated samples, 5-point Likert on coherence/fluency/informativeness. SimCTG+contrastive beats nucleus on coherence and fluency, Sign Test p<0.05.
+- §6.1 self-similarity defined per Ethayarajh; at output layer (layer 12) SimCTG self-similarity "notably lower than other baselines".

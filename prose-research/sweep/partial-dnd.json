@@ -3107,6 +3107,98 @@
   }
  },
  {
+  "index": 936,
+  "feature": "dm-facing sentence",
+  "claim": "Every entry on the 2024 DMG's Current Calamities table is a complete sentence in the present tense closed with a full stop.",
+  "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+  "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+  "quote": "Monsters infest the settlement.",
+  "page": "'Settlements' > 'Current Calamities' (1d12)",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2024-11-12",
+  "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "verdict": {
+   "index": 936,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'in the present tense' for EVERY entry - row 2 of the 1d12 table opens in the past tense",
+   "trueWording": "A key figure died; murder is suspected.",
+   "note": "Quote verbatim as row 1. Measured all twelve rows: all twelve are complete sentences closed with a full stop, so those two limbs hold. The universal present-tense limb fails on row 2, whose main clause verb 'died' is past (the second clause 'murder is suspected' is present). Eleven of twelve are present tense; the claim should read 'almost every entry' or drop the tense limb.",
+   "fromFile": "verdicts-dnd-i932-946.json"
+  }
+ },
+ {
+  "index": 938,
+  "feature": "concrete sensory noun",
+  "claim": "The 2024 DMG's Defining Traits table is a list of physical, visible features of the built place rather than of its politics or reputation.",
+  "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+  "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+  "quote": "Impressive structure (such as a keep, temple, circle of standing stones",
+  "page": "'Settlements' > 'Defining Traits' (1d20)",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2024-11-12",
+  "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 938,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'of the built place' - four of the eleven rows are natural or atmospheric, not built",
+   "trueWording": "Lingering fog / Cliffs on one or more sides",
+   "note": "Quote verbatim as the 19-20 row. The claim's central contrast holds completely: measured all eleven rows of the 1d20 table and not one is political or reputational (politics and reputation live in the separate Local Leaders and Claims to Fame tables). But 'built' over-specifies - Lingering fog, Cliffs on one or more sides, Lots of mud, filth, and litter, and Lots of gardens, parks, and greenery are natural or environmental. 'Noise and smoke from smithies and forges' is also audible rather than strictly visible. 'Physical, sensory features of the place' would be true as written.",
+   "fromFile": "verdicts-dnd-i932-946.json"
+  }
+ },
+ {
+  "index": 942,
+  "feature": "civic record register",
+  "claim": "Wizards' Settlement Tracker adds two free-text roster fields, Noteworthy People and Noteworthy Places, that no table in the DMG's Settlements section generates.",
+  "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+  "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+  "quote": "NOTEWORTHY PEOPLE",
+  "page": "Settlement Tracker, lower half",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024-11-12",
+  "routeHint": "PDF binary from media.dndbeyond.com, pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium - the second limb (no generating table) rests on the Roll20 capture of the section",
+  "verdict": {
+   "index": 942,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'that no table in the DMG's Settlements section generates' - the section's Tavern Names and Random Shops tables do generate places",
+   "trueWording": "NOTEWORTHY PEOPLE / NOTEWORTHY PLACES, ruled blank lines",
+   "note": "Quote verbatim; the render confirms both are free-text rosters of seven ruled lines each, unlike the four titled panels above them. The People half of the second limb holds - no table generates noteworthy people. The Places half does not: the same section carries a Tavern Names* table (1d20 x 1d20, two-part names) and a Random Shops table (1d20 shop types), both of which generate places a DM would enter on that roster. True as 'no table dedicated to them' or 'no table generates noteworthy people'.",
+   "fromFile": "verdicts-dnd-i932-946.json"
+  }
+ },
+ {
+  "index": 943,
+  "feature": "other: settlement size bands",
+  "claim": "Wizards' Settlement Tracker records settlement size as one of three tick boxes carrying the population band in numerals.",
+  "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+  "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+  "quote": "TOWN (POP. 501–5,000)",
+  "page": "Settlement Tracker, header line",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2024-11-12",
+  "routeHint": "PDF binary from media.dndbeyond.com, pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 943,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'tick boxes' - the three marks are open circles (radio style), not boxes",
+   "trueWording": "TOWN (POP. 501-5,000) preceded by an open circle",
+   "note": "Quote verbatim including the en dash. The count and the numeral bands hold exactly: three mutually exclusive options reading VILLAGE (POP. UP TO 500), TOWN (POP. 501-5,000), CITY (POP. 5,001+). The shape limb fails on inspection - pdftotext renders the marks as 'l' from an embedded ZapfDingbatsITC subset, and a 90dpi page render shows three unfilled circles, radio-button style, not square tick boxes. The PDF has an AcroForm dictionary but no widget annotations, so these are printed ornaments on a photocopy sheet rather than interactive controls.",
+   "fromFile": "verdicts-dnd-i932-946.json"
+  }
+ },
+ {
   "index": 949,
   "feature": "dm-facing sentence",
   "claim": "The entries on the 2014 DMG's Current Calamity table are unpunctuated noun phrases rather than sentences.",
@@ -3173,6 +3265,75 @@
    "note": "Quote exact, in the City entry's labelled Population field, and the numeral/word contrast the claim is really about is real: the same 25,000 figure appears as digits in the field and as words in the prose, on the same page and in the same entry. The proximity limb overstates it. Between them stand the Government, Defense, Commerce and Organizations fields plus two full paragraphs of prose - about thirty printed lines, not a few. Worth noting for the register work: the field states a ceiling ('Up to about 25,000') and the prose sentence a floor ('more than twenty-five thousand'), so they are the same figure doing opposite duty.",
    "unsupportedLimb": "'a few lines above' - roughly thirty lines, four labelled fields and two paragraphs separate them",
    "fromFile": "verdicts-dnd-i947-961.json"
+  }
+ },
+ {
+  "index": 969,
+  "feature": "civic record register",
+  "claim": "Chris Perkins presents the 2024 tracking sheets, the Settlement Tracker among them, as a device for keeping track of important information in play.",
+  "source": "Chris Perkins, quoted in an official 1 October 2024 livestream by Mollie Russell, Wargamer",
+  "url": "https://www.wargamer.com/dnd/tracking-sheets-dms-guide",
+  "quote": "designed to help you keep track of important information",
+  "page": "Wargamer report of the 1 October 2024 livestream",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2024-10-01",
+  "routeHint": "live URL, browser user agent, curl + HTML strip",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium - Perkins' words as transcribed by a reporter, not a primary transcript",
+  "verdict": {
+   "index": 969,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the Settlement Tracker among them' - the page never names a sheet 'Settlement Tracker'; it says only that the sheets cover settlements among key NPCs, Bastions, magic items and backstories",
+   "trueWording": "designed to help you keep track of important information",
+   "note": "Live URL fetched raw with a browser user agent, HTML stripped locally. Perkins' quoted words appear verbatim ('these sheets are designed to help you keep track of important information in your game'), attributed to an official livestream from October 1, by-lined Mollie Russell. grep for 'settlement tracker' over the raw HTML returns 0. Downstream fix is one word: write 'settlements among them' rather than naming the sheet. Note also the article calls the guide upcoming, so this is pre-release reporting.",
+   "fromFile": "verdicts-dnd-i962-976.json"
+  }
+ },
+ {
+  "index": 971,
+  "feature": "other: settlement slot list",
+  "claim": "A community reproduction citing DMG 5e p.112 gives the full row lists of the 2014 Race Relations, Ruler's Status, Notable Traits, Known for and Calamity tables.",
+  "source": "Jethoof's Digital Garden, \"Settlement Generator\" (reproduction citing DMG 5e p.112), 11 February 2023",
+  "url": "https://jethoof.github.io/home/worldbuilding/Tables/Settlements/",
+  "quote": "Dungeon Master’s Guide 5e, p.112",
+  "page": "'Settlement Generator', footnote 1",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2023-02-11",
+  "routeHint": "live URL, browser user agent, curl + HTML strip",
+  "registerHint": "dossier-archivist",
+  "confidence": "low - the same page also prints a Community Sizes table and an Overall Alignment table that are from the 3.5e DMG, not 5e; use only the tables the 5e book actually has",
+  "verdict": {
+   "index": 971,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the full row lists' - the reproduction's Notable Traits stops at row 19, omitting the DMG's row 20 (built atop ancient ruins), and its Ruler's Status ranges are malformed (17-18 and 18-20 overlap where the book has 19-20)",
+   "trueWording": "Dungeon Master's Guide 5e, p.112",
+   "note": "Live URL fetched raw with a browser user agent, HTML stripped locally. The p.112 citation is verbatim as footnote 1 at the foot of the page, and all five named tables are reproduced with row lists. But the lists are not full: I cross-checked against the 2014 DMG OCR, where Notable Traits is a d20 with 20 rows ending 'Built atop ancient ruins', and Ruler's Status ends 19-20 Religious leader. The supplied low-confidence caveat is also confirmed on the page - it additionally prints Community Sizes (thorp/hamlet bands), Overall Alignment and a d100 Government table, none of which are 5e settlement tables.",
+   "fromFile": "verdicts-dnd-i962-976.json"
+  }
+ },
+ {
+  "index": 972,
+  "feature": "civic record register",
+  "claim": "The 2024 DMG's own worked city description is written in the present tense, opening on the city's physical situation.",
+  "source": "Wizards of the Coast, Dungeon Master's Guide (2024), ch.5 \"Creating Campaigns\" > \"Free City of Greyhawk\", read on the licensed Roll20 compendium",
+  "url": "https://roll20.net/compendium/dnd5e/Rules:Free%20City%20of%20Greyhawk?expansion=33359",
+  "quote": "The city stands on the eastern banks of the Selintan River.",
+  "page": "'Free City of Greyhawk', opening",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2024-11-12",
+  "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 972,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'opening on the city's physical situation' - the description's first paragraph is an adventure hook (would-be heroes drawn by promises of adventure); the river placement is the second paragraph",
+   "trueWording": "The city stands on the eastern banks of the Selintan River.",
+   "note": "roll20.net licensed compendium page fetched raw with a browser user agent; the body text is present in the HTML despite the purchase banner. Quote verbatim. The present-tense limb holds across the section (stands, flows, remains, is ruled, winds), with past tense reserved for the historical clause. Only the 'opening' limb misses by one paragraph, so the safe downstream wording is 'turns to the city's physical situation in its second paragraph'.",
+   "fromFile": "verdicts-dnd-i962-976.json"
   }
  },
  {

@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i1037-1051",
+ "lines": 76,
+ "firstTs": "2026-09-07T03:32:59.437Z",
+ "lastTs": "2026-09-07T03:36:50.869Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 15
+ },
+ "urlsFetched": [
+  "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf",
+  "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+  "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+  "https://www.dndbeyond.com/posts/1717-2024-core-rulebooks-to-expand-the-srd"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "SRD 5.2.1 figures reproduce exactly under digit-run counting. Now SRD 5.1.",
+ "run": "wf_37af3c74-8c8",
+ "agent": "aec237fb294c83814",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aec237fb294c83814.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1037-1051.json",
+  "exists": false
+ }
+}

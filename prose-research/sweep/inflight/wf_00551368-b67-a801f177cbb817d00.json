@@ -3,24 +3,40 @@
  "name": "ai",
  "angle": "arch-decoding-literature",
  "tag": null,
- "lines": 85,
+ "lines": 174,
  "firstTs": "2026-09-07T03:27:43.321Z",
- "lastTs": "2026-09-07T03:30:53.629Z",
+ "lastTs": "2026-09-07T03:37:00.803Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 18,
-  "WebFetch": 1
+  "Bash": 40,
+  "WebFetch": 1,
+  "WebSearch": 2
  },
  "urlsFetched": [
   "https://arxiv.org/abs/1904.09751",
-  "https://arxiv.org/pdf/$id"
+  "https://arxiv.org/pdf/$id",
+  "https://arxiv.org/abs/2202.00666",
+  "https://arxiv.org/abs/2407.01082",
+  "https://arxiv.org/abs/2007.14966",
+  "https://arxiv.org/abs/2202.06417",
+  "https://arxiv.org/pdf/",
+  "https://arxiv.org/pdf/2506.13681",
+  "https://raw.githubusercontent.com/sam-paech/antislop-sampler/main/README.md",
+  "https://raw.githubusercontent.com/sam-paech/slop-forensics/main/README.md",
+  "https://eqbench.com/slop-score.html",
+  "https://raw.githubusercontent.com/sam-paech/auto-antislop/main/README.md"
  ],
  "filesWritten": [],
- "lastAssistantText": "The abs page gave a summariser rendering, not raw text. I'll fetch the PDFs directly and extract text.",
+ "lastAssistantText": "Paech has an arXiv paper (2510.15061). Fetching it.",
  "run": "wf_00551368-b67",
  "agent": "a801f177cbb817d00",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a801f177cbb817d00.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-decoding-literature.json",
+  "claims": 36,
+  "complete": false,
+  "mtime": "23:35:27"
+ }
 }

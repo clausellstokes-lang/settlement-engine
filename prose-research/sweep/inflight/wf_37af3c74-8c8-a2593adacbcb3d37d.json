@@ -3,12 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i962-976",
- "lines": 101,
+ "lines": 116,
  "firstTs": "2026-09-07T03:25:36.160Z",
- "lastTs": "2026-09-07T03:30:29.186Z",
+ "lastTs": "2026-09-07T03:32:25.948Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 23
+  "Bash": 25,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
@@ -23,13 +24,13 @@
   "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 10 sources reached raw. Now writing the checkpoint file.",
+ "lastAssistantText": "All 15 claims verified against raw pages (no summarizer, no search snippets); checkpoint written and read back clean.",
  "run": "wf_37af3c74-8c8",
  "agent": "a2593adacbcb3d37d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-a2593adacbcb3d37d.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i962-976.json",
-  "exists": false
+  "exists": true
  }
 }
