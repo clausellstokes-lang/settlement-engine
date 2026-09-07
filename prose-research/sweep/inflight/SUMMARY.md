@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 19:24:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 19:30:26 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -12,6 +12,10 @@
 | ? | other |  | result | 0 | — | — | 20:31:41 |
 | ? | other |  | result | 0 | bdash.mjs, chron.mjs, figures.md, r6.mjs, r6b.mjs, r6c.mjs, r6d.mjs, rest.mjs, r | — | 20:34:29 |
 | ? | other |  | result | 0 | — | — | 20:48:04 |
+| ? | other |  | in-flight | 0 | — | — | 23:30:24 |
+| ? | other |  | in-flight | 0 | — | — | 23:30:23 |
+| ? | other |  | in-flight | 0 | — | — | 23:30:23 |
+| ? | other |  | in-flight | 0 | — | — | 23:30:16 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |

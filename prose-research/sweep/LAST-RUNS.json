@@ -193,5 +193,10 @@
    },
    "resume": "A NEW session: python3 $SC/prose-research/mk-s12-resume.py -> Workflow({scriptPath: reconciliation-workflow.resume-v2.js, args: sweep/s12-resume-args.json as a JSON object}). Every finished stage with its file on disk + the right seat line is cached; the rest re-run."
   }
+ },
+ "_SKEPTIC_913": {
+  "runId": "wf_568522f1-e3e",
+  "session": "5540cfd2-eea9-4469-ba34-6514b54a83ff",
+  "status": "RUNNING 19:29: four lenses + fold over L-MAT-FIX cars 7-9 (laneLMAT 19642a9fc) -> skeptic-913/FOLD.md"
  }
 }

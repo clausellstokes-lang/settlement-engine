@@ -415,7 +415,7 @@ successor's own arrival, taken before touching anything.
 | `$SC/HOLD-VITEST` | absent | absent ✔ |
 | `pgrep -fl vitest \| grep -v gate-mutex \| wc -l` | 0 | 0 ✔ |
 
-## STATUS: PARTIAL — car 7 LANDED (`f46ba7846`); cars 8/9 not yet landed.
+## STATUS: **COMPLETE** — cars 7 (`f46ba7846`), 8 (`2fd5a380e`) and 9 (`19642a9fc`) all landed. Dock tip `19642a9fc`, porcelain 0.
 
 ---
 
@@ -498,3 +498,182 @@ string and an OSR row that the OSR baseline cannot lawfully take at all.
   corpus is GENERATED worlds, which carry neither exactness record while the dial is dormant.
   Any future cure that READS these keys in a file whose receivers resolve will meet the same
   wall. Recorded at the site in `importReconciliationAdmission.js`.
+
+---
+
+## CAR 8 — INSTRUMENTS (sha `2fd5a380e`) — DEF-6 · DEF-7 · DEF-8 · DEF-9 · R-G · U1
+
+| item | measured BEFORE | measured AFTER |
+|---|---|---|
+| DEF-6 | a loop asserting every `Object.keys(PIPELINE_REACHERS)` key is in `scanned` — a set built two statements above by spreading those keys. TRUE FOR EVERY TREE | deleted, with the tautology named in place; the `toContain('settlementGenerateAction.js')` assertion beneath it is kept and can die. The stray message now names the DIAL when the dial matched |
+| DEF-7 | `expect(rosterKeys.length).toBeGreaterThan(6)` over an 11-name hand literal | the key set is derived from the roster the file generates; the count is read off the real row and anchored on `CUSTOM_DEFINITION_IDENTITY_KEYS` |
+| DEF-8 | THE STOP arm returned identical results with the LIT store config and the dark one — `regenNPCsPipeline` never returns `config`, so all three post-conditions were untouchable | a positive control asserts the regen really rewrote `npcs` first; the read-order claim is re-pointed at the walker's source-text arm, which can fail |
+| DEF-9 | arms 2/3 used bare `KEY in pub`, invisible to `negativeAssertionAnchor.walker` | both go through `expectAbsentWithAnchor` with `config` as the anchor. **No per-file budget moved** — the helper form is not a bare negative (walker 9 passed, budgets EXACT) |
+| R-G | `toPublicSafe(s,{full:true})` carried BOTH records through a DM share | both deleted beside `dmNotes` / `_seed` / `_regenSeed` / `_config` / `latentPantheon` |
+
+### R-G — THE SHARE MODEL WAS READ BEFORE EDITING, AS THE RULING REQUIRES
+R-G's refusal condition is "if the full path is meant to carry the roster to the DM's OWN
+other device". It is not. `ShareToGallery.jsx` states the opt-in in the owner's own words:
+`gallery_share_dm` makes "Secrets, plot hooks, NPC goals and relationships, your DM notes,
+and the DM Compass … **publicly visible to anyone who opens this gallery page**". It is a
+PUBLICATION switch. No reader of a full share is entitled to the author's unadopted
+homebrew library, and no surface reads either key off a shared dossier — so the client half
+lands and nothing is lost to any reader. **Not refused.**
+
+⚠ **OWNER-GATED, STILL OWED:** the SQL twin. `_gallery_dm_full_json` (supabase migrations
+120/129) re-issues both keys server-side, so a DM-shared dossier read back from the server
+still carries them. That sentence is now in the DM-full arm's failure message, the file
+header, and this row. No migration file was written.
+
+### U1 — THE PLANT THE FOLD COULD NOT TAKE (L4's cover, MEASURED not reasoned)
+Planted `newSettlementLivingContentLaw` in `src/workers/customContentPreview.worker.js`,
+a declared **PREVIEW** reacher, so both arms are in scope. Restored by `cp`, never `git checkout`.
+
+| state | md5 of the planted file | `densityCreateBoundary.walker` |
+|---|---|---|
+| clean | `ad11078ef07775df072388722646f0f9` | **14 passed** |
+| planted | `25475df5a41a40a99aeb835ad534a3c5` | **12 passed / 2 FAILED** — `every BIRTH mints the law, and nothing else does` · `the mint is not named outside its homes and its declared BIRTH callers` |
+| restored | `ad11078ef07775df072388722646f0f9` | **14 passed** |
+
+CONFIRMED: the `:251`/`:280` arms really do cover the mint L4 added, in both directions.
+
+---
+
+## CAR 9 — TEXT (sha `19642a9fc`) — DEF-10 · DEF-11 · DEF-12 · DEF-13 · R-I · R-J · X8
+
+| item | the false sentence | what it says now |
+|---|---|---|
+| DEF-10 | "every emitted dist file stayed byte-identical", at the docblock AND inside the executable `GENERATION_LAWS.livingContent` `why` string a walker reads | "no emitted dist file changed SIZE", with the real figures (658 of 1,377 changed BYTES; 0 changed size) and the reason (the entry chunk's hash moves and every file naming it is re-hashed) |
+| DEF-11 | "Nothing anywhere hydrates it from a saved settlement", re-shipped at THREE sites | all three name the Library's Load hop and the CLAMP as the reason it is harmless: `densityCreateBoundary.js`, `settlementGenerateAction.js`, `livingContentLawWiring.test.js` |
+| DEF-12 | "nothing in `src/` READS the key", citing a header car 5 had already amended | "exactly ONE reader, the account-import remap", with the correction named |
+| DEF-13 / R-J | the DM-full arm's premise blamed the DIAL and its message promised a leak | re-anchored on the SQL twin AND on the outage (car 8's arm carries it; car 9 adds the header) |
+
+### R-J — THE OUTAGE, RE-DERIVED BY THIS LANE AND RECORDED IN FOUR PLACES
+Not taken on report. My own grep: `loadLivingContentRoster` occurs in `src/` **exactly twice** —
+its definition (`livingContentSeam.js:92`) and one comment (`:64`). No caller. The throw is at
+`:111`. So **lighting the dial does not produce leaky worlds, it produces NO worlds**:
+`[livingContentSeam] v2 world, roster payload not loaded`, out of `generateSettlementPipeline`.
+Homes: `livingContentRoster.js`'s header (first paragraph, ⛔⛔), the wiring test's docblock,
+the seam-arming comment whose "the same path production takes" was a false friend (now
+"WOULD take"), and the DM-full arm's failure message.
+**This is the TRUE ground of every inertness claim in the estate — the dial is not**, because
+the gate is `materializesLivingContent(settlement.config)`, the WORLD's config, which an
+import file can satisfy with no dial moving. RECORDED, NOT CURED (wiring the loader is the
+lighting car's first task, and it is a capability change, not a repair).
+
+### X8 — the walker limitation, recorded and NOT widened
+`writerReach.walker` probes `read(row.writer)` for the register row's single declared writer,
+so its 56-green says nothing about the second assignment site car 5 created at
+`accountImportBody.js` — now a third, from §912's version-history loop. Written into the
+roster header. The walker is deliberately not widened in this lane.
+
+### R-I — CAR 6 / R-C STAYS REFUSED AND UNBUILT. NO BYTES.
+Recorded as ruled. The four options, not the two the lane weighed:
+1. **wide** (`contentHash` in the triple) — refuted by the F2c tripwire on all 26 blind cases;
+2. **narrow** (`definitionId` + `revisionId`) — clears the tripwire, and the lane's reason for
+   rejecting it is **REFUTED**: the product's `makeContentRevision` is CONTENT-ADDRESSED
+   (`revision:${definitionId}:${number}:${contentHash.slice(0,16)}`), so the narrow digest is
+   not blind in the product — **the blindness belonged to the fixture**, which hand-wrote
+   `revision:<bucket>:<localUid>:1`;
+3. **`{ lawVersion }` alone**, no `rosterHash` — presentation-invariant, keeps R-C's byte claim,
+   defers the hash-contract question rather than deciding it wrongly. **The chair's recommendation.**
+4. re-cut the F2c escape filter — the receipt is not one of the six `LIVING_CONTENT_ADOPTION_SURFACES`.
+
+⛔ **AND THE FACT THAT OUTRANKS ALL FOUR:** `buildSettlementContentProvenance` returns `null`
+for a world with only a roster, so **no receipt exists to carry the marker** on the very worlds
+R-C targets. Shipping any key onto the persisted, hash-validated receipt is a persistence-shape
+change and stays **OWNER-GATED** whichever digest is chosen — and the owner should be told,
+before approving a key sold as tamper-evidence, that neither candidate is tamper-evident over a
+persisted roster row (the row's hash is a copied string, never recomputed).
+
+### X12 / X13 — receipt corrections carried from the fold
+- **X12:** the `MINT_HOMES` helpers-row deletion landed in **car 1** (`442c7f988`), not car 3.
+- **X13:** "Build A — BASE … 11:58:11" is a typo; `build-base.meta` reads **10:58:11**.
+
+---
+
+## THE CONSIST PROOF AT THE COMPOSED TIP `19642a9fc`
+
+| gate | result |
+|---|---|
+| `npm run typecheck:ratchet` | **exit 0 — 173 errors / ceiling 173.** No source shipped a type error; the baseline was not touched |
+| eslint, all 18 touched files | **exit 0, clean** |
+| livingContentLawWiring | 12 passed |
+| livingContentRosterPublicDrop | 6 passed |
+| densityCreateBoundary.walker | 14 passed |
+| accountSettlementContentPortability | 17 passed |
+| accountImportSlice | 26 passed |
+| accountImport | 31 passed |
+| importScrub | 13 passed |
+| campaignSlice.galleryImport | 6 passed |
+| importReconciliation | 18 passed |
+| negativeAssertionAnchor.walker | 9 passed — **budgets EXACT** |
+| writerReach.walker | 56 passed |
+| observedShapeReaders.walker | 44 passed (and `check-observed-shape-readers` = 1972, exactly the frozen inventory) |
+| livingContentSeamLazy | 6 passed |
+| layerBoundaries | 3 passed |
+| engineChunkLazy (VERIFY_DIST=1) | 15 passed |
+| generationWorkerLazy (VERIFY_DIST=1) | 10 passed |
+| customContentCharsetLazy (VERIFY_DIST=1) | 9 passed |
+| vendorPdfLazy (VERIFY_DIST=1) | 42 passed |
+| whole-suite run | **NOT RUN**, as the brief requires — the chair's proof and gate do that |
+
+### ⚠⚠ THE BUILD — AND A BEHAVIOUR SHIFT THIS LANE WILL NOT LET RIDE SILENTLY
+Car 7 added static import edges, so the build was judged needed. **TWO builds** were taken (a
+control at base content restored by `git show 7d96e2b72:<path>`, then the tip restored by
+md5-verified `cp`; porcelain 0 and HEAD `19642a9fc` re-verified after).
+
+| figure | BASE (`7d96e2b72` content) | TIP (`19642a9fc`) | delta |
+|---|---|---|---|
+| first-paint closure RAW | **1,042,086** / 1,048,000 | **1,042,122** / 1,048,000 | **+36 B** (margin 5,914 → 5,878) |
+| gzip | 330,813 / 337,000 | 330,822 / 337,000 | +9 B |
+| Brotli | 277,727 / 283,000 | 277,755 / 283,000 | +28 B |
+| entry chunk | 570,269 | 570,296 | +27 B |
+| `engine-core` | 126,452 | 126,461 | +9 B |
+| the other six closure chunks | — | — | **byte-identical** |
+| emitted files | 1,377 | 1,377 | 0 |
+
+⭐ **THE CONSIST NO LONGER COSTS ZERO FIRST-PAINT BYTES. It costs 36, and that is stated
+rather than rounded away.** The base control reproduces the receipt's recorded 1,042,086
+EXACTLY, so the delta is this lane's and nothing else's.
+
+**WHAT THE 36 BYTES ARE — measured, not inferred.** A character-level diff of `engine-core`
+base vs tip puts the ONLY divergence inside its `export{…}` alias list, at char 125,402: one
+additional exported symbol, shifting the alias sequence. It is cross-chunk plumbing for the
+`livingContentLawVersion.js` leaf, which car 7 gave a second importer in a different chunk
+(`importScrub.js` alongside `densityCreateBoundary.js`); the entry chunk's +27 is the matching
+import-map entry. **NO living-content CODE entered first paint:** `customContentRoster`,
+`customContentProvenance` and `_livingContentLawVersion` appear **zero times** in all eight
+first-paint chunks, and every carrier is a LAZY chunk (`engine-*`, the two workers,
+`importScrub-*`, `publicSafe-*`, `accountImportBody-*`, `StructuredCampaignReconciliation-*`).
+Build determinism re-controlled in passing: the two tip builds produced identical chunk hashes.
+
+## THE LAWS, HELD (cars 7–9)
+- **STATE, NEVER FATE.** Dial still at 1. No tuning value · no golden re-recorded · **no
+  register `--write`** (and the DEF-3 re-cut exists precisely so none was needed) · no
+  signature · no `supabase/applied-head.json` byte · **no migration file** · `ARCHITECTURE.md`
+  untouched · nothing pushed · no `git stash` · every commit staged with EXPLICIT paths ·
+  trailers `Seat: Opus 5 — Fable-unvalidated` + `Lane: L-MAT-FIX` on all three.
+- **THE PROMISE re-proven by execution** on create · create/clamp · read · regenerate ·
+  undo · persist · clone · import (account, gallery ×2, reconciliation) · DM share ·
+  public share — each with the arm named in the car-7 and car-8 tables above.
+- Two out-of-tree measurements (the HEAD control, the L4 plant) restored by `cp` with md5
+  verification on both sides; `git checkout` was never used on a tracked file.
+
+## DEFERRED — cars 7–9 (documented, not bugs to re-find)
+1. **R-J: `loadLivingContentRoster` has no caller.** Lighting the dial takes generation DOWN.
+   Recorded in four places; wiring it is the lighting car's first task. **Not cured here.**
+2. **The DM-full SQL twin** (`_gallery_dm_full_json`, migrations 120/129) — OWNER-GATED.
+   Client half landed; server half still re-issues both keys.
+3. **R-I / car 6** — refused and unbuilt; four options and the outranking fact above.
+4. **X8's walker hole** — `writerReach.walker` reads one declared writer per row and cannot
+   see the second and third assignment sites. Recorded, not widened.
+5. **The three named walker holes from the fold** remain, largest `settlementSlice.js:45`
+   (a live dynamic-import pipeline reacher the create-boundary scan cannot see).
+6. **The OSR and writer-reach instruments are blind to import boundaries by construction** —
+   their corpus is GENERATED worlds, which carry neither exactness record while the dial is
+   dormant. Any future cure that READS these keys on a resolving receiver meets the same wall.
+7. **`node_modules` reads 455**, one above the brief's 453–454 window. No install was run by
+   this lane; every tree-reading walker is green.
+8. **+36 first-paint bytes** (above) — accepted, measured, inside budget by 5,878 B.
+
