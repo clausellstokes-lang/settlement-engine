@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 12:51:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 12:57:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = c5722e98a §911.1: the owner rules the three §911 rows — the stress test accepted at ≈ 4.0–4.
 
@@ -140,5 +140,5 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = c5722e98a §911.1: the owner
 ## WORKFLOW RUNS of chair session ba7d05af-b267-4316-ba6a-74e30f8621c7 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_ac19b0bb-ff0: 3 journal lines, 3 agents
 
-## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.33 2.61 2.59
+## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 2.21 2.34 2.48
