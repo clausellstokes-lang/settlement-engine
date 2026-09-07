@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-06 21:48:11 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 21:53:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
+product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **L-UI-MAT** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
@@ -77,7 +77,7 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
 - **ANCHOR-905** dock `laneANCHOR905` HEAD 0eb028111 · 1 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
-      | # RECEIPT — ANCHOR-905 — **PARTIAL** (in flight)
+      | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
       | Dock: `$SC/laneANCHOR905` detached @ `6582958ce7bdc10bcbb8c69d9789b4d957fc5890`
@@ -91,13 +91,13 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:45 · critic 09-06 14:32
+- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/, hobb r7/wf_255b6391-7fb, dnd r8/wf_f191dac2-82a, ai r8/
 
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_8cd21474-a7b: 1 journal lines, 1 agents
+- wf_8cd21474-a7b: 3 journal lines, 2 agents
 - wf_f191dac2-82a: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.39 3.42 3.30
+load: 1.59 2.73 3.05

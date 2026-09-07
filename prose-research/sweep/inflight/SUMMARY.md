@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:48:33 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:52:34 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -51,23 +51,14 @@
 | leguin | verifier | i843-885 | result | 7 | — | verdict file WRITTEN | 22:04:49 |
 | leguin | verifier | i889-923 | result | 8 | — | verdict file WRITTEN | 22:04:42 |
 | martin | critic |  | in-flight | 0 | — | — | 21:31:03 |
-| wolfe | critic |  | failed | 0 | — | — | 19:50:41 |
-| wolfe | finder | close-continued | failed | 42 | — | 93 claims, complete=True @21:09:26 | 19:45:45 |
+| wolfe | critic |  | in-flight | 0 | — | — | 01:52:32 |
 | wolfe | finder | close-continued | result | 41 | — | 93 claims, complete=True @21:09:26 | 23:31:55 |
 | wolfe | finder | close-continued | in-flight | 1 | — | 93 claims, complete=True @21:09:26 | 21:31:03 |
-| wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
-| wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
-| wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
-| wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
-| wolfe | finder | monographs | failed | 71 | — | 184 claims, complete=True @21:09:26 | 19:46:26 |
 | wolfe | finder | monographs | result | 69 | — | 184 claims, complete=True @21:09:26 | 23:43:23 |
 | wolfe | finder | monographs | in-flight | 8 | — | 184 claims, complete=True @21:09:26 | 21:31:03 |
-| wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
-| wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
 | wolfe | regrade | regrade-r7 | result | 0 | build-wolfe-r7.mjs | — | 01:03:44 |
-| wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | synth |  | in-flight | 0 | — | — | 01:04:17 |
-| wolfe | synth |  | in-flight | 0 | — | — | 01:48:21 |
+| wolfe | synth |  | result | 0 | — | — | 01:52:32 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
 | wolfe | verifier | i1038-1052 | result | 5 | — | verdict file WRITTEN | 00:22:48 |
@@ -85,48 +76,20 @@
 | wolfe | verifier | i1218-1232 | result | 24 | — | verdict file WRITTEN | 00:47:31 |
 | wolfe | verifier | i1233-1247 | result | 13 | — | verdict file WRITTEN | 00:44:25 |
 | wolfe | verifier | i1248-1254 | result | 6 | — | verdict file WRITTEN | 00:39:00 |
-| wolfe | verifier | i468-482 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i468-507 | result | 8 | — | verdict file WRITTEN | 23:47:17 |
-| wolfe | verifier | i483-497 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i498-512 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i508-542 | result | 9 | — | verdict file WRITTEN | 23:47:47 |
-| wolfe | verifier | i513-527 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i528-542 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i543-557 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i545-598 | result | 15 | — | verdict file WRITTEN | 23:50:21 |
-| wolfe | verifier | i558-572 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i573-587 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i588-602 | failed | 0 | — | verdict file absent | 19:50:38 |
 | wolfe | verifier | i602-628 | result | 10 | — | verdict file WRITTEN | 23:49:44 |
-| wolfe | verifier | i603-617 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i618-632 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i629-648 | result | 5 | — | verdict file WRITTEN | 23:53:44 |
-| wolfe | verifier | i633-647 | failed | 0 | — | verdict file absent | 19:50:38 |
-| wolfe | verifier | i648-662 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i649-666 | result | 4 | — | verdict file WRITTEN | 23:53:07 |
-| wolfe | verifier | i663-677 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i667-692 | result | 15 | — | verdict file WRITTEN | 23:56:25 |
-| wolfe | verifier | i678-692 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i693-707 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i693-710 | result | 8 | — | verdict file WRITTEN | 23:56:00 |
-| wolfe | verifier | i708-722 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i711-725 | result | 11 | — | verdict file WRITTEN | 00:02:18 |
-| wolfe | verifier | i723-737 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i726-742 | result | 22 | — | verdict file WRITTEN | 00:05:54 |
-| wolfe | verifier | i738-752 | failed | 0 | — | verdict file absent | 19:50:39 |
 | wolfe | verifier | i743-779 | result | 22 | — | verdict file WRITTEN | 00:06:09 |
-| wolfe | verifier | i753-767 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i768-782 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i783-797 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i787-825 | result | 8 | — | verdict file WRITTEN | 00:01:13 |
-| wolfe | verifier | i798-812 | failed | 0 | — | verdict file absent | 19:50:40 |
-| wolfe | verifier | i813-827 | failed | 0 | — | verdict file absent | 19:50:39 |
-| wolfe | verifier | i828-842 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i829-859 | result | 17 | — | verdict file WRITTEN | 00:12:16 |
-| wolfe | verifier | i843-857 | failed | 0 | — | verdict file absent | 19:50:40 |
-| wolfe | verifier | i858-872 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i860-896 | result | 13 | — | verdict file WRITTEN | 00:12:55 |
-| wolfe | verifier | i873-880 | failed | 0 | — | verdict file absent | 19:50:40 |
 | wolfe | verifier | i897-945 | result | 4 | — | verdict file WRITTEN | 00:11:48 |
 | wolfe | verifier | i947-977 | result | 3 | — | verdict file WRITTEN | 00:10:34 |
 | wolfe | verifier | i978-992 | result | 4 | — | verdict file WRITTEN | 00:17:01 |
