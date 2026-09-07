@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 15:36:03 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 15:42:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -45,9 +45,6 @@
 | ? | other |  | result | 0 | — | — | 14:14:25 |
 | ? | other |  | in-flight | 0 | — | — | 14:26:49 |
 | ? | other |  | result | 0 | reconcile-npc-ladder.md | — | 14:16:27 |
-| ? | other |  | in-flight | 0 | — | — | 13:53:19 |
-| ? | other |  | in-flight | 0 | — | — | 13:53:19 |
-| ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
