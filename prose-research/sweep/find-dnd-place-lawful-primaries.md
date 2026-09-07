@@ -1,9 +1,9 @@
 # find — d&d place, lawful primaries (Opus finder, 2026-09-07)
 
 complete: False
-coverage: in progress after 13 sources
+coverage: in progress after 22 sources
 
-## sources read (14)
+## sources read (23)
 - [own-words] Settlement Tracker (2024 Dungeon Master's Guide handout) — https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf (route: direct PDF fetch from media.dndbeyond.com, pdftotext; substantive: True)
 - [own-words] Death House (Curse of Strahd introductory adventure, free PDF) — https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf (route: direct PDF fetch from media.wizards.com, pdftotext; substantive: True)
 - [vendor] What's New in the 2024 Dungeon Master's Guide? (Mike Bernier, D&D Beyond) — https://www.dndbeyond.com/posts/1825-whats-new-in-the-2024-dungeon-masters-guide (route: curl with browser user agent; substantive: True)
@@ -18,8 +18,17 @@ coverage: in progress after 13 sources
 - [own-words] Adventurers League Dungeon Master's Guide v4 (Wizards of the Coast) — https://media.wizards.com/2016/dnd/ALDMGv4_print.pdf (route: direct PDF fetch, pdftotext — organized-play rules only, no prose or description guidance; substantive: False)
 - [vendor] Lost Mine of Phandelver on D&D Beyond (Phandalin entry) — https://www.dndbeyond.com/sources/dnd/lmop/phandalin (route: BLOCKED — redirects to /claim/source/lost-mine-of-phandelver, body text not served; substantive: False)
 - [vendor] D&D Free Rules (2024) on D&D Beyond — https://www.dndbeyond.com/sources/dnd/free-rules (route: curl; redirects to /sources/dnd/br-2024 — player-facing sections only, DM chapters require sign-in; substantive: True)
+- [vendor] Visit Phandalin, D&D's Most Popular Starter Town! (Mike Bernier, D&D Beyond) — https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town (route: curl with browser user agent — official article that reprints the published Phandalin boxed text with a source line; substantive: True)
+- [own-words] Downloadable Handout: Read the Latest Edition of the Phandalin Post (Mike Bernier, D&D Beyond) — https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of (route: curl with browser user agent — the handout's in-world newspaper text is reproduced in the article body; substantive: True)
+- [vendor] Guide: Running the 1st Chapter of Phandelver and Below (D&D Beyond) — https://www.dndbeyond.com/posts/1558-guide-running-the-1st-chapter-of-phandelver-and (route: curl with browser user agent — no boxed-text or place-register material; substantive: False)
+- [own-words] Encounter of the Week: Storm Celebration (D&D Beyond) — https://www.dndbeyond.com/posts/742-encounter-of-the-week-storm-celebration (route: curl with browser user agent; substantive: True)
+- [reception] Gosh, I think D&D's finally done it — the 2024 Dungeon Master's Guide review (Harvey Randall, PC Gamer) — https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/ (route: live URL 403 to curl; read via Wayback raw capture https://web.archive.org/web/20260612023305id_/<url>; substantive: True)
+- [analysis] GMJ 235: DMG Chapter 5: Adventure Environments — Settlements & Unusual Environments (Lex Starwalker) — https://lexstarwalker.com/gamemastersjourney/235 (route: curl with browser user agent — episode page lists the 2014 DMG section headings it walks through; substantive: True)
+- [own-words] Adventurers League Dungeon Master's Guide v14.0 (Wizards of the Coast) — https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/d&d-adventurers-league-dungeon-masters-guide-v14.0.pdf (route: direct PDF fetch, pdftotext — organized-play rules only; no read-aloud, boxed-text or description guidance; substantive: False)
+- [vendor] Dragon+ (dragonmag.com) via the Wayback Machine — http://www.dragonmag.com/5.0/article/45675/106113/100844328 (route: BLOCKED — Wayback raw capture returns a JavaScript application shell with no article body text; Dragon+ article bodies were never captured as HTML; substantive: False)
+- [vendor] DMs Guild Creator Resource — Style Guide Resources (product page) — https://www.dmsguild.com/en/product/267467/DMs-Guild-Creator-Resource--Style-Guide-Resources (route: BLOCKED — 403 to curl, no Wayback capture available; substantive: False)
 
-## claims (39)
+## claims (62)
 1. (place and institution description | own-words | asserts) Wizards of the Coast's own 2024 settlement handout bands settlement size by population, with a village at up to 500 people.
    src: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
    url: https://media.dndbeyond.com/compendium-images/free-rules/dmg/settlement-tracker.pdf
@@ -176,3 +185,95 @@ coverage: in progress after 13 sources
    src: Wizards of the Coast, System Reference Document 5.1 (2016) and 5.2.1 (2025)
    url: https://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf
    quote: "" [whole documents; grep over extracted text]
+40. (boxed text form | vendor | asserts) An official D&D Beyond article reprints the published Phandalin arrival passage and calls it boxed text.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "The boxed text above serves as a fantastic base" ['Arrival in Phandalin']
+41. (place and institution description | own-words | applies) The published Phandalin boxed text sizes the town by counting its buildings rather than its people.
+   src: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "which consists of forty or fifty simple log buildings" ['Tips For Running Phandalin in Your Games', quoted boxed text, sourced to Dragon of Icespire Peak]
+42. (place and institution description | own-words | applies) The same published passage states the town's defences as two absences rather than as a description.
+   src: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "The town has no walls and no garrison" ['Tips For Running Phandalin in Your Games', quoted boxed text]
+43. (concrete sensory noun | own-words | applies) The same published passage characterises the townspeople by listing their trades and ending the list with children.
+   src: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "They are farmers, stonecutters, blacksmiths, traders, prospectors, and children" ['Tips For Running Phandalin in Your Games', quoted boxed text]
+44. (place and institution description | own-words | applies) The same published passage carries the town's deep history in one physical observation about its ruins.
+   src: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "Crumbling stone ruins surround the newer houses and shops" ['Tips For Running Phandalin in Your Games', quoted boxed text]
+45. (place and institution description | vendor | applies) The official article's own settlement table gives each location a proprietor and a verbless short description.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "Modest inn for eating, resting, and gossip" ['Key NPCs and Locations' table, Stonehill Inn row]
+46. (naming and forms of address | vendor | applies) That table names a proprietor as given name plus surname with species and gender in parentheses.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "Toblen Stonehill (human male)" ['Key NPCs and Locations' table, Stonehill Inn row]
+47. (place and institution description | vendor | applies) That table describes the town's administrative institution as a records office and trading post in one noun phrase.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "Records office and trading post" ['Key NPCs and Locations' table, Phandalin Miner's Exchange row]
+48. (dm-facing sentence | vendor | asserts) The article instructs the DM to describe a town's layout starting from its street surface and cart tracks.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "Describe the town's layout, from the muddy streets lined with cart tracks" ['Arrival in Phandalin', 'Visual Description']
+49. (concrete sensory noun | vendor | asserts) The article prescribes a named craft sound as the second sensory layer after sight when opening a town.
+   src: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+   url: https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town
+   quote: "the distant clang of a blacksmith's hammer" ['Arrival in Phandalin', 'Sounds and Smells']
+50. (civic record register | vendor | asserts) Wizards of the Coast publishes an in-world settlement newspaper as a free handout for the Phandalin adventures.
+   src: Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "a newspaper that covers events in Phandalin" [opening paragraph]
+51. (opening sentence | own-words | applies) That in-world newspaper opens a story with a dateline of in-world date and settlement, then a verbless list of the damage.
+   src: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "Ches 25, Phandalin – Ambushed wagons, dead travelers, and a town" ['Goblin Ambush Shocks Travelers on Triboar Trail']
+52. (naming and forms of address | own-words | applies) That in-world newspaper attributes a quotation by given name, surname, office and institution, then the settlement.
+   src: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "Linene Graywind, owner of Lionshield Coster in Phandalin" ['Goblin Ambush Shocks Travelers on Triboar Trail']
+53. (naming and forms of address | own-words | applies) The same newspaper attributes an ordinary resident by given name alone plus species and residence.
+   src: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "said Freda, a gnome resident of Phandalin" ['Redbrands' Reign of Terror']
+54. (naming and forms of address | own-words | applies) The same newspaper attributes a tradesman by given name plus trade plus the institution he keeps.
+   src: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "said Toblen, the innkeeper of the Stonehill Inn" ['Redbrands' Reign of Terror']
+55. (naming and forms of address | own-words | applies) In reported speech the same newspaper addresses the settlement's leader by office title plus surname, without a given name.
+   src: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "What is Townmaster Wester going to do to keep us safe?" ['Goblin Ambush Shocks Travelers on Triboar Trail']
+56. (terminology consistency | vendor | applies) Within one official article the same officer is called Townminster Weston in the editorial commentary and Townmaster Wester in the handout text.
+   src: Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023
+   url: https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of
+   quote: "Townminster Weston hasn’t been of any help" ['What's in This Issue of the Phandalin Post?']
+57. (place and institution description | own-words | applies) A third official column opens a settlement entry with the settlement's name, its peoples and its region, in one sentence.
+   src: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Storm Celebration', 2020
+   url: https://www.dndbeyond.com/posts/742-encounter-of-the-week-storm-celebration
+   quote: "Boroftkrah is a settlement of orcs, half-orcs, and a few people" ['Boroftkrah and the Gods']
+58. (place and institution description | reception | asserts) A reviewer locates the 2024 Dungeon Master's Guide's settlement-creation tables in the toolbox chapter.
+   src: Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review
+   url: https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/
+   quote: "the toolbox's ones for dungeons and settlement creation" ['The toolbox' section]
+59. (place and institution description | reception | disputes) The same reviewer judges those settlement tables a bullet-point list of suggestions rather than a guide to inventing one's own.
+   src: Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review
+   url: https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/
+   quote: "more of a bullet-point list of suggestions than a guide" ['The toolbox' section]
+60. (place and institution description | analysis | mentions) A read-through of the 2014 Dungeon Master's Guide names Random Settlements as a section of its chapter 5.
+   src: Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018
+   url: https://lexstarwalker.com/gamemastersjourney/235
+   quote: "Random Settlements" [episode contents list]
+61. (place and institution description | analysis | mentions) The same read-through names Mapping a Settlement as another section of the 2014 guide's chapter 5.
+   src: Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018
+   url: https://lexstarwalker.com/gamemastersjourney/235
+   quote: "Mapping a Settlement" [episode contents list]
+62. (edition and house style | analysis | mentions) The same series places a separate Creating Settlements discussion in the 2014 guide's chapter 1, distinct from the chapter 5 material.
+   src: Lex Starwalker, Game Master's Journey episode 235 index of earlier episodes, 16 Dec 2018
+   url: https://lexstarwalker.com/gamemastersjourney/235
+   quote: "Creating Settlements" [episode index, 'Episode 158: DMG Chapter 1']

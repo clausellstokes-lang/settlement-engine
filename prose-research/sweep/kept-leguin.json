@@ -8854,6 +8854,29 @@
   }
  },
  {
+  "index": 490,
+  "feature": "civic record register",
+  "claim": "A generalisation about Seggri's literary institutions is written as an agentless past passive inside the report.",
+  "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+  "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+  "quote": "Small value was placed on preserving a \"true\" text",
+  "page": "report section on Seggri literature",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "1994",
+  "routeHint": "direct curl; quote spans the page's hard line wrap",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Small value was placed on preserving a \"true\" text",
+   "note": "Raw sfsfss.com transcription fetched (200, 95KB). Quote appears word for word in the compiler's headnote paragraph introducing Sem Gridji's story ('The following is a short story...'), which generalises about Seggri's classical poems and plays. The framing voice explicitly calls itself a report earlier ('As of the date of this report'), so the 'inside the report' limb holds; the construction is indeed agentless past passive. Caveat: fan transcription, not an authoritative edition.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
   "index": 491,
   "feature": "per-speaker register",
   "claim": "The captain's log inside 'The Matter of Seggri' is written in an archaic diction the frame narrator never uses.",
@@ -8946,6 +8969,52 @@
   }
  },
  {
+  "index": 496,
+  "feature": "omission as information",
+  "claim": "Le Guin's editorial note on the Kesh novella records its damage in transit and its lost pages in the flat voice of a catalogue entry.",
+  "source": "Ursula K. Le Guin, editorial note in Always Coming Home, quoted by Brian Attebery in a Library of America interview",
+  "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+  "quote": "was damaged in transit, and the rest of the third chapter",
+  "page": "final question of the interview",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-05-01",
+  "routeHint": "direct curl of the LOA interview page, which reproduces the note verbatim",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium: read inside the LOA interview rather than in the book itself",
+  "angle": "record-register",
+  "verdict": {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "was damaged in transit, and the rest of the third chapter",
+   "note": "loa.org fetched raw (200). In the final Q&A (the Dangerous People question), Attebery quotes the book: the copy Pandora sent from the Valley was damaged in transit and the closing pages are lost. Page earlier identifies Pandora as Le Guin's narrative stand-in and mentions 'Pandora's notes on the story', supporting the 'editorial note' limb; the flat catalogue-entry manner is observable in the quoted sentence itself.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 497,
+  "feature": "withheld information and inference",
+  "claim": "The same editorial note states the extent of the loss as a hedged range of pages rather than an exact figure.",
+  "source": "Ursula K. Le Guin, editorial note in Always Coming Home, quoted by Brian Attebery in a Library of America interview",
+  "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+  "quote": "the last ten or twenty pages of the novel, are lost",
+  "page": "final question of the interview",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2019-05-01",
+  "routeHint": "direct curl of the LOA interview page",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium: read inside the LOA interview rather than in the book itself",
+  "angle": "record-register",
+  "verdict": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the last ten or twenty pages of the novel, are lost",
+   "note": "Same loa.org fetch, same final answer, same quoted note. The extent is given as the hedged range 'ten or twenty' rather than an exact figure, exactly as claimed.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
   "index": 498,
   "feature": "other: encyclopedic form",
   "claim": "Brian Attebery, the editor of the Library of America edition, calls the form Le Guin chose for Always Coming Home encyclopedic.",
@@ -8966,6 +9035,52 @@
    "trueWording": "The encyclopedic form of Always Coming Home",
    "note": "Raw loa.org page. The sentence ('...was exactly what she needed at the time, to do the job she wanted to do') closes the answer prefixed 'Attebery:' about nonlinear form; the intro paragraph identifies 'The editor of the new LOA volume is Brian Attebery'. Note the quoted line is the fourth Q&A block, not the third answer as the claim's page field says - a locator slip, not a claim limb.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  }
+ },
+ {
+  "index": 499,
+  "feature": "place and institution description",
+  "claim": "Attebery presents the Back of the Book as a section a reader may begin with for its world-building rather than as an appendix.",
+  "source": "Brian Attebery, interviewed by Library of America",
+  "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+  "quote": "you can start with “The Back of the Book” and relish",
+  "page": "fourth answer",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2019-05-01",
+  "routeHint": "direct curl",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 499,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you can start with \"The Back of the Book\" and relish",
+   "note": "loa.org, the answer to the Delany/how-to-approach question (fourth Q&A). Full sentence offers it as one entry route and names 'the intricate world-building'. The 'rather than as an appendix' limb is carried by the surrounding framing (a hypertext without the electronic interface; readers invited to find their own ways through); the page never uses the word appendix.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 500,
+  "feature": "place and institution description",
+  "claim": "Matthew Keeley argues that the scholarly and cultural notes that would be appendices elsewhere are the main text of Always Coming Home.",
+  "source": "Matthew Keeley, Reactor (Tor.com) review, 2019",
+  "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+  "quote": "are here the core of the text",
+  "page": "paragraph beginning 'The table of contents'",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2019-03-15",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 500,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are here the core of the text",
+   "note": "reactormag.com fetched raw (200); byline 'By Matthew Keeley', published March 15, 2019. Paragraph beginning 'The table of contents' says the scholarly materials, culture notes and literary excerpts that might comprise the Appendices to doorstop fantasy novels are here the core of the text. Every limb supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
   }
  },
  {
@@ -8992,6 +9107,29 @@
   }
  },
  {
+  "index": 502,
+  "feature": "place and institution description",
+  "claim": "Matthew Keeley describes Always Coming Home as a book whose ambition is to become a place.",
+  "source": "Matthew Keeley, Reactor (Tor.com) review, 2019",
+  "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+  "quote": "This is a book that aspires to placehood.",
+  "page": "paragraph beginning 'This novel represents a culmination'",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2019-03-15",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is a book that aspires to placehood.",
+   "note": "Same Reactor page. The sentence closes the paragraph that opens 'A warning: If you read solely for plot...' and contains 'This novel represents a culmination'; the claim's locator points mid-paragraph, but the wording is verbatim and 'aspires to placehood' is exactly ambition to become a place.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
   "index": 503,
   "feature": "other: reader routing through a record",
   "claim": "Le Guin's own first-page note tells readers that the explanatory pieces are set apart so a narrative reader can skip them.",
@@ -9012,6 +9150,211 @@
    "trueWording": "where those who want narrative can ignore them",
    "note": "Same raw Reactor page, paragraph beginning 'The table of contents for this book is several pages long'. Keeley reports that the author announces on the first page that some of the more explanatory, descriptive pieces are relegated to The Back of the Book, with the quoted clause plus 'and those who enjoy explanations can find them.' First-page, set-apart and skippable limbs all present.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  }
+ },
+ {
+  "index": 504,
+  "feature": "point of view and distance",
+  "claim": "A CSU Expository Reading and Writing Course module teaches The Left Hand of Darkness as a report addressed by Genly Ai to an official of the Ekumen.",
+  "source": "CSU Expository Reading and Writing Course, The Left Hand of Darkness module, Student Version",
+  "url": "https://rivercity.wusd.k12.ca.us/subsites/Brandon-Duff/documents/Expository-Reading-and-Writing-Course/Modules/The-Left-Hand-of-Darkness/Student%20Version.pdf",
+  "quote": "this novel is presented as a report from Genly Ai",
+  "page": "Activity 12, p. 73",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "routeHint": "curl of the PDF binary, text extracted with pypdf",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this novel is presented as a report from Genly Ai",
+   "note": "PDF fetched (200, 576KB, 44 pages) and text extracted with pypdf. Header confirms 'CSU EXPOSITORY READING AND WRITING COURSE | SEMESTER TWO / STUDENT VERSION', module The Left Hand of Darkness. The sentence continues 'to an Eku-men official on another planet', supporting the addressee limb. Locator nit: the passage sits in Activity 12 (Continued) on printed page 72, not 73.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 505,
+  "feature": "civic record register",
+  "claim": "The same module names the in-world genre of the novel's frame as an ansible document.",
+  "source": "CSU Expository Reading and Writing Course, The Left Hand of Darkness module, Student Version",
+  "url": "https://rivercity.wusd.k12.ca.us/subsites/Brandon-Duff/documents/Expository-Reading-and-Writing-Course/Modules/The-Left-Hand-of-Darkness/Student%20Version.pdf",
+  "quote": "It is called an ansible document.",
+  "page": "Activity 12, p. 73",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "routeHint": "curl of the PDF binary, text extracted with pypdf",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is called an ansible document.",
+   "note": "Same extracted PDF page (printed 72, Activity 12 Continued): the sentence directly follows the report-from-Genly-Ai sentence and names the in-world genre, then glosses the ansible as a faster-than-light communication device.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 506,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin says the rhythm of a story, however complicated and subtle, is what carries the reader.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "that’s what’s going to carry the reader",
+  "page": "final section, on economy and rhythm",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that's what's going to carry the reader",
+   "note": "Wayback raw id_ capture of the Paris Review interview fetched (200, full closing text present). Closing exchange on rhythm: even if the rhythm is very complicated and subtle, that is what carries the reader. All limbs supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 507,
+  "feature": "plainness and economy",
+  "claim": "Le Guin praises old painters for getting simple in their means because they know they have not got time.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "Just so plain and simple. Because they know they haven’t got time.",
+  "page": "closing answer",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Because they know they haven't got time",
+   "note": "Same capture, final answer. Preceding sentence: she thinks about old painters, who get so simple in their means, then 'Just so plain and simple.' The admiring frame (late Beethoven as her model, 'you really need less') supports 'praises'. Quotation appears word for word.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 508,
+  "feature": "plainness and economy",
+  "claim": "Le Guin distinguishes the economy she means from minimalism, which she calls a self-conscious mannerist style she cannot write.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "I’m not talking minimalism",
+  "page": "closing answer",
+  "kind": "own-words",
+  "polarity": "rejects",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm not talking minimalism",
+   "note": "Same final answer: minimalism is described as a highly self-conscious mannerist style she can't write and doesn't want to, set against her own 'you really need less'. Every limb supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 509,
+  "feature": "diction (native vs latinate)",
+  "claim": "Le Guin says that in departing from the heroic fantasy tradition she found a less formal vocabulary and a cadence better suited to what she had to say.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "I found a less formal vocabulary and a cadence better suited",
+  "page": "answer on the shift toward economy",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 509,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I found a less formal vocabulary and a cadence better suited",
+   "note": "Same capture, the answer following the interviewer's 'shift toward economy' question. The clause opens 'As I began to depart from the heroic or adventure tradition of fantasy' and closes 'to what I had to say'. Verbatim.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 510,
+  "feature": "register modulation",
+  "claim": "Le Guin describes her own career-long change as easing up on the formality of her prose.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "I’ve eased up on the formality of the prose",
+  "page": "answer on the shift toward economy",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've eased up on the formality of the prose",
+   "note": "Same answer, first sentences: she notes a very long career, then this; she adds she likes a more colloquial voice now. The career-long framing is on the page.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 511,
+  "feature": "archaism",
+  "claim": "Le Guin names Tolkien, Dunsany, Eddison, MacDonald and Malory as the earlier-generation styles that the language of serious fantasy still rested on in the sixties and seventies.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "",
+  "page": "answer on the shift toward economy",
+  "kind": "own-words",
+  "polarity": "mentions",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 511,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "still based largely on the styles of writers of earlier generations",
+   "note": "Claim carries no quote, so verbatim grading does not apply; the page states it plainly. Same 'shift toward economy' answer: in the sixties and seventies the language of serious fantasy rested on earlier generations' styles, naming Tolkien, then Dunsany, Eddison, MacDonald, back to Malory. All five names and the decades are present.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  }
+ },
+ {
+  "index": 512,
+  "feature": "plainness and economy",
+  "claim": "Le Guin compares an aging writer's language to old shoes or kitchen gear that no longer needs fancy stuff.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "your language gets like your shoes or your kitchen gear",
+  "page": "answer on the shift toward economy",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "your language gets like your shoes or your kitchen gear",
+   "note": "Same answer: 'you get old and your language gets like your shoes or your kitchen gear' followed by no longer needing fancy stuff. Quotation word for word; both limbs (aging writer, no fancy stuff) supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
   }
  },
  {
@@ -9038,6 +9381,52 @@
   }
  },
  {
+  "index": 514,
+  "feature": "plainness and economy",
+  "claim": "Le Guin characterises genre writers of her early period as deliberately cultivating an attempt to be styleless, which she treats as a fault rather than a model.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "genre writers deliberately cultivated an attempt to be styleless",
+  "page": "answer on The Wave in the Mind sentence",
+  "kind": "own-words",
+  "polarity": "rejects",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "genre writers deliberately cultivated an attempt to be styleless",
+   "note": "Raw Wayback capture of the Paris Review interview. Quote appears word for word in her answer about The Wave in the Mind sentence; the 'fault not model' limb is carried by the same exchange, where she says sf could be 'embarrassingly badly written' and that older men 'prided themselves' on refusing style while 'to me the style is the book'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 515,
+  "feature": "place and institution description",
+  "claim": "Le Guin says that when she creates another world with a society on it she tries to hint at the complexity of that society instead of just referring to an empire.",
+  "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+  "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+  "quote": "I try to hint at the complexity of the society I’m creating",
+  "page": "opening answers, on the social sciences",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2013",
+  "routeHint": "Wayback raw capture (web/<ts>id_/) via curl with a browser user agent; WebFetch is blocked for web.archive.org",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try to hint at the complexity of the society I'm creating",
+   "note": "Same raw capture. Quote is verbatim (curly apostrophe) in the early answer on drawing on the social sciences; the full sentence also carries the 'another planet, another world, with a society on it' and 'instead of just referring to an empire' limbs.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 521,
   "feature": "other: showing versus telling",
   "claim": "Le Guin says showing can be quite static while telling always involves moving on.",
@@ -9058,6 +9447,29 @@
    "trueWording": "Showing can be quite static, after all",
    "note": "Raw ursulakleguin.com page, Session 1. Full sentence: the quoted clause then '; but telling always involves moving on.' It closes the reply prefixed 'UKL :' to the questioner named Paige, whose question is the show-don't-tell one.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  }
+ },
+ {
+  "index": 525,
+  "feature": "place and institution description",
+  "claim": "Le Guin tells a world-building questioner that event requires location and that where we are affects who we are.",
+  "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story: Session 1, Continued' (Book View Cafe, 2015)",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+  "quote": "Event requires location. Where we are affects who we are",
+  "page": "answer to Marion, on world building",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2015-08-24",
+  "routeHint": "direct fetch (curl, browser user agent), HTML stripped to text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 525,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Event requires location. Where we are affects who we are",
+   "note": "Verified on the Wayback raw capture (20250416080121id_) of the ursulakleguin.com page, NOT the live host: ursulakleguin.com/robots.txt disallows user-agents 'anthropic-ai' and 'ClaudeBot' from '/', so the live URL was not fetched. Quote verbatim in the reply to Marion, whose question is explicitly about world building.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   }
  },
  {
@@ -9153,6 +9565,29 @@
   }
  },
  {
+  "index": 535,
+  "feature": "concrete sensory noun",
+  "claim": "Le Guin prescribes passages that describe what the world looks like, smells like and sounds like as the relief that paces an idea-crammed story.",
+  "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story - Session 1, Part 5' (Book View Cafe, 2015)",
+  "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-5",
+  "quote": "describe what the world looks like, smells like, sounds like",
+  "page": "answer on stories too crammed with ideas",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2015",
+  "routeHint": "direct fetch (curl, browser user agent), HTML stripped to text",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "voice-2",
+  "verdict": {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "describe what the world looks like, smells like, sounds like",
+   "note": "The ursulakleguin.com URL has no Wayback capture and the live host blocks Anthropic agents in robots.txt, so verified on the original Book View Cafe post the claim's own source field names: Wayback raw capture 20151029022249id_ of bookviewcafe.com/blog/2015/10/05/navigating-the-ocean-of-story-session-1-part-5/. Quote verbatim in the reply to Tamara, whose readers called her drafts 'too crammed with ideas'; the surrounding sentence supplies the 'easier pace' and 'moments of relief' limbs.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 538,
   "feature": "other: story shape",
   "claim": "Le Guin offers the walking story, in which you cover ground while seeing everything around you, as an alternative to the fast-paced suspenseful one.",
@@ -9222,6 +9657,52 @@
   }
  },
  {
+  "index": 541,
+  "feature": "place and institution description",
+  "claim": "Adam Roberts writes that the Earthsea books take care to render their world as a believable, lived-in space.",
+  "source": "Adam Roberts, \"Ursula Le Guin, 'A Wizard of Earthsea' (1968)\", Adam's Notebook (Medium), 5 February 2023",
+  "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+  "quote": "a believable, lived-in space",
+  "page": "paragraph beginning 'There is a seriousness'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023-02-05",
+  "routeHint": "Wayback raw https://web.archive.org/web/20250908044316id_/https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a believable, lived-in space",
+   "note": "Medium returned 403 to a direct fetch; verified on the Wayback raw capture 20250908044316id_. Sentence reads that the Earthsea books are careful to render their world as a believable, lived-in space, in the paragraph beginning 'There is a seriousness'. Byline Adam Roberts, Feb 5 2023, confirmed on the capture.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 543,
+  "feature": "place and institution description",
+  "claim": "Adam Roberts characterises the detail in Earthsea as anthropological as much as mythographic, and linguistic as much as geographical.",
+  "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+  "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+  "quote": "as much anthropological",
+  "page": "paragraph beginning 'There is a seriousness'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023-02-05",
+  "routeHint": "Wayback raw 20250908044316id_",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium — the twelve-word cap forces a short quote; the full clause is 'the attention to detail, as much anthropological ... as mythographic, as much linguistic as geographical'",
+  "angle": "close",
+  "verdict": {
+   "index": 543,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as mythographic, as much linguistic as geographical",
+   "note": "Same Wayback capture. Page reads 'the attention to detail, as much anthropological (...) as mythographic, as much linguistic as geographical'. The claim's quote fragment 'as much anthropological' is verbatim; the anthropological/mythographic pairing is split by a parenthesis on the page, so the contiguous run quoted here is the tail of it. Both limbs supported.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 544,
   "feature": "other: worldbuilding consistency",
   "claim": "Adam Roberts disputes Francis Spufford's account by arguing that Le Guin is openly inconsistent and untruthful in her worldbuilding.",
@@ -9265,6 +9746,29 @@
    "trueWording": "the deep consistency that allows an imagined world to unfold",
    "note": "Inside the block quotation Roberts reproduces from Spufford, The Child That Books Built (2002), 84-85, cited in-page. Spufford is describing Le Guin's Earthsea novels and says this is what they shared with Tolkien; the sentence continues 'from its premises solidly, step by certain step'. Reached via Wayback raw capture.",
    "fromFile": "verdicts-leguin-i531-560.json"
+  }
+ },
+ {
+  "index": 546,
+  "feature": "concrete sensory noun",
+  "claim": "Adam Roberts observes that Le Guin has a fondness for low walls as boundaries.",
+  "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+  "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+  "quote": "Le Guin has a fondness for low walls as boundaries",
+  "page": "paragraph on the realm of the dead",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023-02-05",
+  "routeHint": "Wayback raw 20250908044316id_",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 546,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin has a fondness for low walls as boundaries",
+   "note": "Same Wayback capture. Appears verbatim as a parenthetical in the passage on the realm of the dead, separated from the living by a low wall.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   }
  },
  {
@@ -9360,6 +9864,29 @@
   }
  },
  {
+  "index": 555,
+  "feature": "register modulation",
+  "claim": "Richard D. Erlich judges that Le Guin's style has become more colloquial and lower-flown, comparing the language of Tehanu with that of the earlier Earthsea trilogy.",
+  "source": "Richard D. Erlich, Coyote's Song: The Teaching Stories of Ursula K. Le Guin, Conclusion (SFRA, (c)2000)",
+  "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+  "quote": "Her style has gotten more colloquial, lower-flown",
+  "page": "Conclusion, section on what has changed",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2000",
+  "routeHint": "Wayback raw 20151107114510id_ (sfra.org is dead)",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 555,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her style has gotten more colloquial, lower-flown",
+   "note": "Raw Wayback capture of sfra.org/Coyote/conclusion.htm. Quote verbatim; the same sentence supplies the Tehanu-versus-Earthsea-trilogy comparison limb explicitly.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 557,
   "feature": "other: theme carried by texture not statement",
   "claim": "Le Guin, quoted by Erlich, said that dissecting the ideas out of the Earthsea trilogy yields fortune-cookie ideas such as Don't Meddle and Keep the Balance.",
@@ -9383,6 +9910,29 @@
   }
  },
  {
+  "index": 558,
+  "feature": "plainness and economy",
+  "claim": "Richard D. Erlich credits Le Guin's 1961 story 'An die Musik' with a genius for handling complex issues in a lucid, simple style at the very beginning of her career.",
+  "source": "Richard D. Erlich, Coyote's Song, Early Works ((c)2000)",
+  "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earlyworks.htm",
+  "quote": "a genius for handling complex issues in a lucid, simple style",
+  "page": "Early Works, section on 'An die Musik'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2000",
+  "routeHint": "Wayback raw 20151107114510id_",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 558,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a genius for handling complex issues in a lucid, simple style",
+   "note": "Raw Wayback capture of sfra.org/Coyote/earlyworks.htm; quote is verbatim across a line wrap. Page reads it as the third of four reasons the story matters, 'for showing at the beginning of her career'. The 1961 date and first-published-story status are both on the page under the heading 'An die Musik' (1961).",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 560,
   "feature": "other: didacticism",
   "claim": "Richard D. Erlich accepts Le Guin's didacticism as a given but calls it dialogic didacticism, noting that her certainties are rare and that she ordinarily debates with herself.",
@@ -9403,6 +9953,121 @@
    "trueWording": "Le Guin has her certainties, but they are rare",
    "note": "Coyote's Song Introduction, opening pages (~2k characters in), reached via the supplied Wayback raw capture. All limbs on the page: he accepts her didacticism as a given, avoids the word because readers hear it negatively, offers 'dialogic didacticism', and the quoted sentence ends 'and, ordinarily, she debates with herself.' Authorship (Richard D. Erlich) confirmed from CoyoteHome.htm.",
    "fromFile": "verdicts-leguin-i531-560.json"
+  }
+ },
+ {
+  "index": 568,
+  "feature": "adjective and adverb discipline",
+  "claim": "Le Guin writes that adjectives and adverbs are rich and good and nourishing, and cause obesity in prose only when used lazily or overused.",
+  "source": "Ursula K. Le Guin, Steering the Craft, quoted in Nicole Bianchi, '3 Powerful Writing Exercises from Steering the Craft' (2021)",
+  "url": "https://nicolebianchi.com/ursula-k-le-guin-steering-the-craft/",
+  "quote": "They cause obesity in prose only when used lazily or overused",
+  "page": "section 2, Practice Eliminating Unnecessary Adjectives and Adverbs",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2021-03-29",
+  "routeHint": "live URL, browser UA; Le Guin's words reached through a blog that quotes the book at length",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium — Le Guin's own words relayed by a blogger, not read from the book itself",
+  "angle": "close",
+  "verdict": {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They cause obesity in prose only when used lazily or overused",
+   "note": "Raw fetch of nicolebianchi.com. Quote verbatim in the block quotation under heading '2. Practice Eliminating Unnecessary Adjectives and Adverbs'; the preceding clause supplies 'rich and good and nourishing'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 569,
+  "feature": "adjective and adverb discipline",
+  "claim": "Le Guin advises that when the quality an adverb indicates can be put in the verb itself, or an adjective's quality in the noun itself, the prose will be cleaner, more intense and more vivid.",
+  "source": "Ursula K. Le Guin, Steering the Craft, quoted in Nicole Bianchi (2021)",
+  "url": "https://nicolebianchi.com/ursula-k-le-guin-steering-the-craft/",
+  "quote": "the prose will be cleaner, more intense, more vivid",
+  "page": "section 2",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2021-03-29",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium — relayed quotation",
+  "angle": "close",
+  "verdict": {
+   "index": 569,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the prose will be cleaner, more intense, more vivid",
+   "note": "Same block quotation. Both antecedent limbs are on the page: quality of the adverb put in the verb itself (they ran quickly = they raced) and of the adjective in the noun itself (a growling voice = a growl).",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 570,
+  "feature": "adjective and adverb discipline",
+  "claim": "Le Guin names Somehow a super-weasel, a word that betrays that the author did not want to bother thinking out the story.",
+  "source": "Ursula K. Le Guin, Steering the Craft, quoted in Nicole Bianchi (2021)",
+  "url": "https://nicolebianchi.com/ursula-k-le-guin-steering-the-craft/",
+  "quote": "Somehow is a super-weasel",
+  "page": "section 2",
+  "kind": "own-words",
+  "polarity": "rejects",
+  "date": "2021-03-29",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "none",
+  "confidence": "medium — relayed quotation",
+  "angle": "close",
+  "verdict": {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Somehow is a super-weasel",
+   "note": "Same block quotation. Page continues 'a word that betrays that the author didn't want to bother thinking out the story' — the claim's 'did not' is its own paraphrase, not part of the quoted fragment.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 571,
+  "feature": "adjective and adverb discipline",
+  "claim": "Le Guin's exercise asks for a paragraph to a page of 200-350 words of descriptive narrative prose written without adjectives or adverbs, using only verbs, nouns, pronouns and articles.",
+  "source": "Ursula K. Le Guin, Steering the Craft, exercise quoted in Nicole Bianchi (2021)",
+  "url": "https://nicolebianchi.com/ursula-k-le-guin-steering-the-craft/",
+  "quote": "(200-350 words) of descriptive narrative prose without adjectives",
+  "page": "section 2, the exercise",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2021-03-29",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium — relayed quotation of the book's exercise",
+  "angle": "close",
+  "verdict": {
+   "index": 571,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(200-350 words) of descriptive narrative prose without adjectives",
+   "note": "Raw fetch of nicolebianchi.com, exercise block in section 2. Word-for-word match; the page uses an en dash in 200-350 where the claim uses a hyphen. Page continues 'or adverbs' and 'using only verbs, nouns, pronouns, and articles', so every limb of the claim is supported.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
+  "index": 572,
+  "feature": "archaism",
+  "claim": "Michael Swanwick lists archaicisms, false feeling, fake grammar and journalistic prose as the ways Le Guin says language should not be used in fantasy.",
+  "source": "Michael Swanwick, 'Revisiting Poughkeepsie, Part 2: The Language of the Night', Flogging Babel, 14 October 2010",
+  "url": "http://floggingbabel.blogspot.com/2010/10/revisiting-poughkeepsie-part-2-language.html",
+  "quote": "Archaicisms, false feeling, fake grammar, journalistic prose",
+  "page": "paragraph beginning 'Accompanying her discussion'",
+  "kind": "reception",
+  "polarity": "applies",
+  "date": "2010-10-14",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Archaicisms, false feeling, fake grammar, journalistic prose",
+   "note": "Raw fetch of floggingbabel.blogspot.com. Quote verbatim in the paragraph beginning 'Accompanying her discussion', introduced as 'examples of ways it should not' be used. Byline Michael Swanwick and date Thursday, October 14, 2010 both confirmed on the page, as is the title 'Revisiting Poughkeepsie, Part 2: The Language of the Night'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   }
  },
  {

@@ -3,14 +3,14 @@
  "name": "dnd",
  "angle": "place-lawful-primaries",
  "tag": null,
- "lines": 160,
+ "lines": 250,
  "firstTs": "2026-09-07T06:15:23.683Z",
- "lastTs": "2026-09-07T06:25:50.543Z",
+ "lastTs": "2026-09-07T06:32:59.289Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 31,
-  "WebSearch": 11,
+  "Bash": 53,
+  "WebSearch": 15,
   "Write": 1
  },
  "urlsFetched": [
@@ -50,7 +50,26 @@
   "https://www.dmsguild.com/en/product/267467/DMs-Guild-Creator-Resource--Style-Guide-Resources",
   "https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/",
   "https://help.dmsguild.com/hc/en-us/articles/12776908616471-D-D-Adventurers-League-on-DMsGuild",
-  "https://web.archive.org/web/20260612023305id_/https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/"
+  "https://web.archive.org/web/20260612023305id_/https://www.pcgamer.com/games/gosh-i-think-d-and-ds-finally-done-it-the-2024-dungeon-masters-guide-actually-does-a-decent-job-of-teaching-you-how-to-run-a-game/",
+  "http://web.archive.org/cdx/search/cdx?url=wizards.com*&filter=original:.*dmexp.*&limit=40&collapse=urlkey&fl=timestamp,original,statuscode&output=text",
+  "http://web.archive.org/cdx/search/cdx?url=dragonmag.com*&limit=40&collapse=urlkey&fl=timestamp,original,statuscode",
+  "https://www.dndbeyond.com/posts/742-encounter-of-the-week-storm-celebration",
+  "https://www.dndbeyond.com/posts/398-encounter-of-the-week-the-abandoned-festival",
+  "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
+  "https://www.dndbeyond.com/posts/1558-guide-running-the-1st-chapter-of-phandelver-and",
+  "https://[^",
+  "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
+  "https://web.archive.org/web/20160112150122id_/http://www.dragonmag.com/5.0/article/45675/106113/100844328",
+  "https://web.archive.org/web/20260612023305id_/",
+  "http://www.dragonmag.com/5.0/article/45675/106113/100844328",
+  "https://toolsandtaverns.com/guides/settlement-guide",
+  "http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "https://media.wizards.com/2015/downloads/dnd/DM_Experience_2011.pdf",
+  "https://dnd.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "https://media.dndbeyond.com/compendium-images/free-rules/dmg/$n.pdf",
+  "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics"
  ],
  "filesWritten": [
   "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/scratchpad/dnd/claims.json"
@@ -62,8 +81,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-place-lawful-primaries.json",
-  "claims": 39,
+  "claims": 62,
   "complete": false,
-  "mtime": "02:24:25"
+  "mtime": "02:30:29"
  }
 }

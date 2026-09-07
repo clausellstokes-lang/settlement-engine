@@ -1,5 +1,5 @@
 #!/bin/sh
-# resume-research.sh [names...] — THE ONE COMMAND after a window cutoff (chair, 2026-09-06 08:10).
+# resume-research.sh [names...] — THE ONE COMMAND after a window cutoff (chair, 2026-09-06 08:10). 09-07: `NO_TRIAGE=1 CONFIRM_DEAD=1 sh resume-research.sh dnd leguin` for the S_VERIFY runs (their rows were UN-triaged on purpose; sweep/untriage.py).
 # For every sweep in prose-research/sweep/LAST-RUNS.json (or the names given): salvage finder results from the dead run's journal
 # (extract-found.py searches every session dir), merge every verdict file (summary), fold found files (assemble; a found file with
 # "complete": false is folded AND its angle re-run), re-split, and write sweep/args-<name>-<nexttag>.json carrying the regrade/synth
@@ -12,6 +12,7 @@ cd $K || exit 1
 # every research run is dead (a cutoff, a TaskStop, a finished run). Confirm with CONFIRM_DEAD=1.
 if [ "$CONFIRM_DEAD" != "1" ]; then echo "REFUSED: set CONFIRM_DEAD=1 only when no research run is alive (their verifiers read the chunk files this rewrites)."; exit 2; fi
 NAMES="$*"; [ -z "$NAMES" ] && NAMES="tolkien kay leguin wolfe martin hobb dnd ai"
+TRIAGE_FLAG=--triage; [ -n "$NO_TRIAGE" ] && TRIAGE_FLAG=""   # 09-07: NO_TRIAGE=1 for S_VERIFY rebuilds (the un-triaged rows must not be re-skipped)
 P=$S/inflight/.scan.pid; if ! { [ -f "$P" ] && kill -0 "$(cat "$P")" 2>/dev/null; }; then nohup python3 $S/inflight-scan.py > $S/inflight/scan.out 2>&1 & echo "inflight scanner restarted (pid $!)"; else echo "inflight scanner alive (pid $(cat $P))"; fi
 python3 $S/inflight-scan.py --once >/dev/null 2>&1; echo "== in-flight progress (sweep/inflight/SUMMARY.md) =="; head -5 $S/inflight/SUMMARY.md
 echo "== sweep state before =="; node sweep-state.mjs summary
@@ -21,7 +22,8 @@ for n in $NAMES; do
   TAG=$(python3 -c "import json;d=json.load(open('$S/LAST-RUNS.json'));t=d.get('$n',{}).get('tag','r3c');import re;m=re.match(r'r(\d+)([a-z]?)',t);print('r%d'%(int(m.group(1))+1) if m else t+'x')")
   echo "== $n: last run $RUN, prev args $PREV -> next tag $TAG =="
   # 09-06 14:25 (S-BOUND rule 3): every rebuild from here is round 5+ → --triage; then the FLAG post-step decides what this launch still owes
-  if [ -n "$PREV" ] && [ -f "$S/$PREV" ]; then python3 $S/mk-round.py $n $TAG --prev $S/$PREV ${RUN:+--runs $RUN} --cap 4 --inflight --triage | tail -1; else echo "  (no prev args in LAST-RUNS.json for $n — build by hand: python3 sweep/mk-round.py $n $TAG --prev sweep/args-$n-<lasttag>.json --triage)"; fi
+  # 09-07 02:30: NO_TRIAGE=1 for an S_VERIFY rebuild (dnd r11 / leguin r9 / ai r11 verify the UN-triaged rows; --triage would re-skip them by finder label)
+  if [ -n "$PREV" ] && [ -f "$S/$PREV" ]; then python3 $S/mk-round.py $n $TAG --prev $S/$PREV ${RUN:+--runs $RUN} --cap 4 --inflight $TRIAGE_FLAG | tail -1; else echo "  (no prev args in LAST-RUNS.json for $n — build by hand: python3 sweep/mk-round.py $n $TAG --prev sweep/args-$n-<lasttag>.json --triage)"; fi
   python3 - "$S" "$n" "$TAG" <<'PY'
 import json,glob,os,sys
 S,n,tag=sys.argv[1:4]; p=f'{S}/args-{n}-{tag}.json'

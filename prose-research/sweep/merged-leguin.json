@@ -16699,6 +16699,13 @@
    "note": "Same raw page. Quote verbatim, in frame narration. Present tense ('stands'), hedged ('about'), expressed as a ratio, and the figure is 12:1 as claimed.",
    "fromFile": "verdicts-leguin-i462-489.json"
   },
+  "490": {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Small value was placed on preserving a \"true\" text",
+   "note": "Raw sfsfss.com transcription fetched (200, 95KB). Quote appears word for word in the compiler's headnote paragraph introducing Sem Gridji's story ('The following is a short story...'), which generalises about Seggri's classical poems and plays. The framing voice explicitly calls itself a report earlier ('As of the date of this report'), so the 'inside the report' limb holds; the construction is indeed agentless past passive. Caveat: fan transcription, not an authoritative edition.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
   "491": {
    "index": 491,
    "verdict": "VERIFIED_VERBATIM",
@@ -16735,12 +16742,40 @@
    "note": "Raw page, paragraph beginning 'But no longer!': 'It does read, to a great extent, like a writer deciding to include all her notes.' The deliberateness limb is carried by the next sentence, in which Horton says he is certain Le Guin did this with full intention.",
    "fromFile": "verdicts-leguin-i477-528.json"
   },
+  "496": {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "was damaged in transit, and the rest of the third chapter",
+   "note": "loa.org fetched raw (200). In the final Q&A (the Dangerous People question), Attebery quotes the book: the copy Pandora sent from the Valley was damaged in transit and the closing pages are lost. Page earlier identifies Pandora as Le Guin's narrative stand-in and mentions 'Pandora's notes on the story', supporting the 'editorial note' limb; the flat catalogue-entry manner is observable in the quoted sentence itself.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "497": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the last ten or twenty pages of the novel, are lost",
+   "note": "Same loa.org fetch, same final answer, same quoted note. The extent is given as the hedged range 'ten or twenty' rather than an exact figure, exactly as claimed.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
   "498": {
    "index": 498,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "The encyclopedic form of Always Coming Home",
    "note": "Raw loa.org page. The sentence ('...was exactly what she needed at the time, to do the job she wanted to do') closes the answer prefixed 'Attebery:' about nonlinear form; the intro paragraph identifies 'The editor of the new LOA volume is Brian Attebery'. Note the quoted line is the fourth Q&A block, not the third answer as the claim's page field says - a locator slip, not a claim limb.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "499": {
+   "index": 499,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you can start with \"The Back of the Book\" and relish",
+   "note": "loa.org, the answer to the Delany/how-to-approach question (fourth Q&A). Full sentence offers it as one entry route and names 'the intricate world-building'. The 'rather than as an appendix' limb is carried by the surrounding framing (a hypertext without the electronic interface; readers invited to find their own ways through); the page never uses the word appendix.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "500": {
+   "index": 500,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are here the core of the text",
+   "note": "reactormag.com fetched raw (200); byline 'By Matthew Keeley', published March 15, 2019. Paragraph beginning 'The table of contents' says the scholarly materials, culture notes and literary excerpts that might comprise the Appendices to doorstop fantasy novels are here the core of the text. Every limb supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
   },
   "501": {
    "index": 501,
@@ -16749,6 +16784,13 @@
    "note": "Raw reactormag.com page; byline 'By Matthew Keeley'. Closes the paragraph beginning 'The interrupted story which resumes 150 pages later', which contrasts the novelistic Stone Telling narrative with an anthropologist's carrier bag of documents.",
    "fromFile": "verdicts-leguin-i477-528.json"
   },
+  "502": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is a book that aspires to placehood.",
+   "note": "Same Reactor page. The sentence closes the paragraph that opens 'A warning: If you read solely for plot...' and contains 'This novel represents a culmination'; the claim's locator points mid-paragraph, but the wording is verbatim and 'aspires to placehood' is exactly ambition to become a place.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
   "503": {
    "index": 503,
    "verdict": "VERIFIED_VERBATIM",
@@ -16756,12 +16798,89 @@
    "note": "Same raw Reactor page, paragraph beginning 'The table of contents for this book is several pages long'. Keeley reports that the author announces on the first page that some of the more explanatory, descriptive pieces are relegated to The Back of the Book, with the quoted clause plus 'and those who enjoy explanations can find them.' First-page, set-apart and skippable limbs all present.",
    "fromFile": "verdicts-leguin-i477-528.json"
   },
+  "504": {
+   "index": 504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this novel is presented as a report from Genly Ai",
+   "note": "PDF fetched (200, 576KB, 44 pages) and text extracted with pypdf. Header confirms 'CSU EXPOSITORY READING AND WRITING COURSE | SEMESTER TWO / STUDENT VERSION', module The Left Hand of Darkness. The sentence continues 'to an Eku-men official on another planet', supporting the addressee limb. Locator nit: the passage sits in Activity 12 (Continued) on printed page 72, not 73.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "505": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is called an ansible document.",
+   "note": "Same extracted PDF page (printed 72, Activity 12 Continued): the sentence directly follows the report-from-Genly-Ai sentence and names the in-world genre, then glosses the ansible as a faster-than-light communication device.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "506": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that's what's going to carry the reader",
+   "note": "Wayback raw id_ capture of the Paris Review interview fetched (200, full closing text present). Closing exchange on rhythm: even if the rhythm is very complicated and subtle, that is what carries the reader. All limbs supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "507": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Because they know they haven't got time",
+   "note": "Same capture, final answer. Preceding sentence: she thinks about old painters, who get so simple in their means, then 'Just so plain and simple.' The admiring frame (late Beethoven as her model, 'you really need less') supports 'praises'. Quotation appears word for word.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "508": {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm not talking minimalism",
+   "note": "Same final answer: minimalism is described as a highly self-conscious mannerist style she can't write and doesn't want to, set against her own 'you really need less'. Every limb supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "509": {
+   "index": 509,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I found a less formal vocabulary and a cadence better suited",
+   "note": "Same capture, the answer following the interviewer's 'shift toward economy' question. The clause opens 'As I began to depart from the heroic or adventure tradition of fantasy' and closes 'to what I had to say'. Verbatim.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "510": {
+   "index": 510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've eased up on the formality of the prose",
+   "note": "Same answer, first sentences: she notes a very long career, then this; she adds she likes a more colloquial voice now. The career-long framing is on the page.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "511": {
+   "index": 511,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "still based largely on the styles of writers of earlier generations",
+   "note": "Claim carries no quote, so verbatim grading does not apply; the page states it plainly. Same 'shift toward economy' answer: in the sixties and seventies the language of serious fantasy rested on earlier generations' styles, naming Tolkien, then Dunsany, Eddison, MacDonald, back to Malory. All five names and the decades are present.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
+  "512": {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "your language gets like your shoes or your kitchen gear",
+   "note": "Same answer: 'you get old and your language gets like your shoes or your kitchen gear' followed by no longer needing fancy stuff. Quotation word for word; both limbs (aging writer, no fancy stuff) supported.",
+   "fromFile": "verdicts-leguin-i490-512.json"
+  },
   "513": {
    "index": 513,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "To me the style is the book, to a large extent",
    "note": "Wayback raw capture (20140118190325id_) of the Paris Review interview; header 'Ursula K. Le Guin, The Art of Fiction No. 221 / Interviewed by John Wray'. Sentence sits in a block prefixed 'LE GUIN' about idea-writers who scorned style, and continues 'Take Borges.', matching the claim's locator.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "514": {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "genre writers deliberately cultivated an attempt to be styleless",
+   "note": "Raw Wayback capture of the Paris Review interview. Quote appears word for word in her answer about The Wave in the Mind sentence; the 'fault not model' limb is carried by the same exchange, where she says sf could be 'embarrassingly badly written' and that older men 'prided themselves' on refusing style while 'to me the style is the book'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "515": {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try to hint at the complexity of the society I'm creating",
+   "note": "Same raw capture. Quote is verbatim (curly apostrophe) in the early answer on drawing on the social sciences; the full sentence also carries the 'another planet, another world, with a society on it' and 'instead of just referring to an empire' limbs.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   },
   "516": {
    "index": 516,
@@ -16826,6 +16945,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "525": {
+   "index": 525,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Event requires location. Where we are affects who we are",
+   "note": "Verified on the Wayback raw capture (20250416080121id_) of the ursulakleguin.com page, NOT the live host: ursulakleguin.com/robots.txt disallows user-agents 'anthropic-ai' and 'ClaudeBot' from '/', so the live URL was not fetched. Quote verbatim in the reply to Marion, whose question is explicitly about world building.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
   "526": {
    "index": 526,
    "verdict": "SKIPPED_TRIAGE",
@@ -16889,6 +17015,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "535": {
+   "index": 535,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "describe what the world looks like, smells like, sounds like",
+   "note": "The ursulakleguin.com URL has no Wayback capture and the live host blocks Anthropic agents in robots.txt, so verified on the original Book View Cafe post the claim's own source field names: Wayback raw capture 20151029022249id_ of bookviewcafe.com/blog/2015/10/05/navigating-the-ocean-of-story-session-1-part-5/. Quote verbatim in the reply to Tamara, whose readers called her drafts 'too crammed with ideas'; the surrounding sentence supplies the 'easier pace' and 'moments of relief' limbs.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
   "536": {
    "index": 536,
    "verdict": "SKIPPED_TRIAGE",
@@ -16924,12 +17057,26 @@
    "note": "'From the Introduction' section on the live Steering the Craft page. The preceding sentence lists subject, predicate, object, adjective and adverb, past tense and past perfect tense, so every grammar term in the claim is on the page. Page describes the book as a complete revision of the 1998 edition.",
    "fromFile": "verdicts-leguin-i531-560.json"
   },
+  "541": {
+   "index": 541,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a believable, lived-in space",
+   "note": "Medium returned 403 to a direct fetch; verified on the Wayback raw capture 20250908044316id_. Sentence reads that the Earthsea books are careful to render their world as a believable, lived-in space, in the paragraph beginning 'There is a seriousness'. Byline Adam Roberts, Feb 5 2023, confirmed on the capture.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
   "542": {
    "index": 542,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "543": {
+   "index": 543,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as mythographic, as much linguistic as geographical",
+   "note": "Same Wayback capture. Page reads 'the attention to detail, as much anthropological (...) as mythographic, as much linguistic as geographical'. The claim's quote fragment 'as much anthropological' is verbatim; the anthropological/mythographic pairing is split by a parenthesis on the page, so the contiguous run quoted here is the tail of it. Both limbs supported.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   },
   "544": {
    "index": 544,
@@ -16944,6 +17091,13 @@
    "trueWording": "the deep consistency that allows an imagined world to unfold",
    "note": "Inside the block quotation Roberts reproduces from Spufford, The Child That Books Built (2002), 84-85, cited in-page. Spufford is describing Le Guin's Earthsea novels and says this is what they shared with Tolkien; the sentence continues 'from its premises solidly, step by certain step'. Reached via Wayback raw capture.",
    "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "546": {
+   "index": 546,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin has a fondness for low walls as boundaries",
+   "note": "Same Wayback capture. Appears verbatim as a parenthetical in the passage on the realm of the dead, separated from the living by a low wall.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   },
   "547": {
    "index": 547,
@@ -17002,12 +17156,34 @@
    "note": "Live reactormag page, byline Sean Guynes, published May 6 2020, paragraph beginning 'Of course, comparisons aren't everything.' The clause continues 'for musings about power and responsibility, life and death, doing and being', supporting both the subject-matter and the pages-at-a-time limbs.",
    "fromFile": "verdicts-leguin-i531-560.json"
   },
+  "555": {
+   "index": 555,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her style has gotten more colloquial, lower-flown",
+   "note": "Raw Wayback capture of sfra.org/Coyote/conclusion.htm. Quote verbatim; the same sentence supplies the Tehanu-versus-Earthsea-trilogy comparison limb explicitly.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "556": {
+   "index": 556,
+   "verdict": "PARTIAL",
+   "trueWording": "than in some of her other, arguably less artful work",
+   "note": "Quote is verbatim on the raw Coyote's Song Conclusion capture, and the attribution limbs check out: Erlich writes 'In responding to the 1975 Le Guin issue of Science-Fiction Studies', cites page 45, and the page elsewhere names Le Guin's 'Response' 45. Only the comparison class is over-specified by the claim.",
+   "unsupportedLimb": "the comparison class 'her other work of that time' — the page sets the Earthsea trilogy against 'some of her other, arguably less artful work', a quality criterion, with no temporal qualifier",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
   "557": {
    "index": 557,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "you get things like Don't Meddle. Keep the Balance",
    "note": "Coyote's Song Conclusion (chapter 20), ~1.9k characters in, reached via the supplied Wayback raw capture. Erlich introduces it as Le Guin responding to the 1975 Le Guin issue of Science-Fiction Studies, quotes 'If you dissect the ideas out of' the Earthsea trilogy, gives a third example, and cites (45); the page's own word is 'Fortune-cookie ideas'. Authorship confirmed from CoyoteHome.htm.",
    "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "558": {
+   "index": 558,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a genius for handling complex issues in a lucid, simple style",
+   "note": "Raw Wayback capture of sfra.org/Coyote/earlyworks.htm; quote is verbatim across a line wrap. Page reads it as the third of four reasons the story matters, 'for showing at the beginning of her career'. The 1961 date and first-published-story status are both on the page under the heading 'An die Musik' (1961).",
+   "fromFile": "verdicts-leguin-i514-572.json"
   },
   "559": {
    "index": 559,
@@ -17072,6 +17248,41 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "568": {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They cause obesity in prose only when used lazily or overused",
+   "note": "Raw fetch of nicolebianchi.com. Quote verbatim in the block quotation under heading '2. Practice Eliminating Unnecessary Adjectives and Adverbs'; the preceding clause supplies 'rich and good and nourishing'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "569": {
+   "index": 569,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the prose will be cleaner, more intense, more vivid",
+   "note": "Same block quotation. Both antecedent limbs are on the page: quality of the adverb put in the verb itself (they ran quickly = they raced) and of the adjective in the noun itself (a growling voice = a growl).",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "570": {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Somehow is a super-weasel",
+   "note": "Same block quotation. Page continues 'a word that betrays that the author didn't want to bother thinking out the story' — the claim's 'did not' is its own paraphrase, not part of the quoted fragment.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "571": {
+   "index": 571,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(200-350 words) of descriptive narrative prose without adjectives",
+   "note": "Raw fetch of nicolebianchi.com, exercise block in section 2. Word-for-word match; the page uses an en dash in 200-350 where the claim uses a hyphen. Page continues 'or adverbs' and 'using only verbs, nouns, pronouns, and articles', so every limb of the claim is supported.",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  },
+  "572": {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Archaicisms, false feeling, fake grammar, journalistic prose",
+   "note": "Raw fetch of floggingbabel.blogspot.com. Quote verbatim in the paragraph beginning 'Accompanying her discussion', introduced as 'examples of ways it should not' be used. Byline Michael Swanwick and date Thursday, October 14, 2010 both confirmed on the page, as is the title 'Revisiting Poughkeepsie, Part 2: The Language of the Night'.",
+   "fromFile": "verdicts-leguin-i514-572.json"
   },
   "573": {
    "index": 573,

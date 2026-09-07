@@ -1692,6 +1692,30 @@
   }
  },
  {
+  "index": 556,
+  "feature": "cadence and rhythm",
+  "claim": "Le Guin, in her Response to the 1975 Le Guin issue of Science-Fiction Studies as quoted by Erlich, said the ideas of the Earthsea trilogy are less detachable from the sounds, rests and rhythms than those of her other work of that time.",
+  "source": "Ursula K. Le Guin, \"Response\", Science-Fiction Studies (1975), p. 45, quoted in Richard D. Erlich, Coyote's Song, Conclusion ((c)2000)",
+  "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+  "quote": "less detachable from the sounds, rests, and rhythms",
+  "page": "Conclusion, opening pages",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1975",
+  "routeHint": "Wayback raw 20151107114510id_",
+  "registerHint": "none",
+  "confidence": "medium — Le Guin's own words reached through Erlich's quotation, not the 1975 journal page itself",
+  "angle": "close",
+  "verdict": {
+   "index": 556,
+   "verdict": "PARTIAL",
+   "trueWording": "than in some of her other, arguably less artful work",
+   "note": "Quote is verbatim on the raw Coyote's Song Conclusion capture, and the attribution limbs check out: Erlich writes 'In responding to the 1975 Le Guin issue of Science-Fiction Studies', cites page 45, and the page elsewhere names Le Guin's 'Response' 45. Only the comparison class is over-specified by the claim.",
+   "unsupportedLimb": "the comparison class 'her other work of that time' — the page sets the Earthsea trilogy against 'some of her other, arguably less artful work', a quality criterion, with no temporal qualifier",
+   "fromFile": "verdicts-leguin-i514-572.json"
+  }
+ },
+ {
   "index": 559,
   "feature": "humour",
   "claim": "Richard D. Erlich attributes to a sly sense of humour the fact that Le Guin's work reads as teaching rather than as Sister Ursula Explaining It All.",
