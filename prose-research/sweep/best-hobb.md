@@ -185,7 +185,7 @@ The critic CONFIRMED that ten of the section's archivist rules are evidenced fro
 **On the page.** "You can have a one sentence chapter if you want." [256]
 
 **Rows.** [255], [256], [152]
-**Distinct sources.** 1 — Hobb's craft post and one interview, one witness. **SINGLE.** (The section's supporting row on the cost of bridging an event, Dray [502, PARTIAL], is PARTIAL and is not used here; that limb therefore has no evidence and must be labelled a design choice.)
+**Distinct sources.** 1 — Hobb's craft post and one interview, one witness. **SINGLE.** (The section's supporting row on the cost of bridging an event, Dray [502, PARTIAL], is not usable and is not counted here; that limb therefore has no evidence and must be labelled a design choice.)
 **Evidence base.** CRAFT.
 **Registers.** chronicle-line; dossier-archivist; herald-pools.
 **Anti-AI risk.** "After four days of…" as a recurring opener is a **fixed move order** at the seam. Bridges must vary in position and in what they name, and a bridge should sometimes name only duration and sometimes only cost.
@@ -409,7 +409,7 @@ The critic CONFIRMED that ten of the section's archivist rules are evidenced fro
 **On the page.** "Often Arnaud has to join several English sentences together" [387]
 
 **Rows.** [386], [387], [389], [395]
-**Distinct sources.** 1 — Hobb, reporting her French translator, in one interview published in two languages. **SINGLE.** (The section's own contrary row on the *record* register — that it is "archaic, and long" — is PARTIAL [138, PARTIAL] and cannot be used; so the only evidence about the record register's sentence length is unusable, and the short-additive rule is imported from Hobb's sentences generally. The critic CONFIRMED this as a chosen departure, not a finding.)
+**Distinct sources.** 1 — Hobb, reporting her French translator, in one interview published in two languages. **SINGLE.** (The section's own contrary row on the *record* register — that its sentences are archaic and long — is [138, PARTIAL] and cannot be used; so the only evidence about the record register's sentence length is unusable, and the short-additive rule is imported from Hobb's sentences generally. The critic CONFIRMED this as a chosen departure, not a finding.)
 **Evidence base.** CRAFT.
 **Registers.** dossier-archivist; chronicle-line; herald-pools; **chrome** (safe: sentence length is not a voice).
 **Anti-AI risk.** SEVERE: uniform short sentences ARE the **metronome**, the most-cited AI rhythm signature. Additive parataxis is also exactly what item 15 identifies as the marker of a *breached* record voice — a chain of short clauses is parataxis. Ship it only with an enforced length distribution, not a length target.
