@@ -3,12 +3,13 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i667-692",
- "lines": 87,
+ "lines": 108,
  "firstTs": "2026-09-06T23:50:21.870Z",
- "lastTs": "2026-09-06T23:53:33.109Z",
+ "lastTs": "2026-09-06T23:56:25.305Z",
  "tools": {
   "Read": 1,
-  "Bash": 21
+  "Bash": 25,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://gwern.net/doc/fiction/gene-wolfe/1988-11-mccaffery-onencompassingtheentireuniverseaninterviewwithgenewolfe.html",
@@ -24,16 +25,17 @@
   "https://www.plantengineering.com/remembering-gene-wolfe-former-plant-engineering-senior-editor/",
   "https://ultan.org.uk/?s=Plant+Engineering",
   "https://ultan.org.uk/plant-engineering/",
-  "http://web.archive.org/cdx/search/cdx?url=plantengineering.com*&filter=urlkey:.*wolfe.*&output=text&fl=timestamp,original&collapse=urlkey&limit=20"
+  "http://web.archive.org/cdx/search/cdx?url=plantengineering.com*&filter=urlkey:.*wolfe.*&output=text&fl=timestamp,original&collapse=urlkey&limit=20",
+  "http://web.archive.org/cdx/search/cdx?url=plantengineering.com&matchType=domain&filter=original:.*[Ww"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the chunk file.",
  "run": "wf_1326cde9-2e5",
  "agent": "a883a8016b6b52580",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a883a8016b6b52580.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i667-692.json",
-  "exists": false
+  "exists": true
  }
 }

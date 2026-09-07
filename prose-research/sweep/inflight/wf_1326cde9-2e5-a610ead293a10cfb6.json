@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i787-825",
+ "lines": 75,
+ "firstTs": "2026-09-06T23:56:25.334Z",
+ "lastTs": "2026-09-06T23:59:27.846Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 20
+ },
+ "urlsFetched": [
+  "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+  "https://ia800901.us.archive.org/6/items/strategies-of-fantasy/strategies-of-fantasy_djvu.txt",
+  "https://ultan.org.uk/tell-me-about-the-lexicon-urthus-an-interview-with-michael-andre-driussi/",
+  "https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/",
+  "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "https://web.archive.org/web/20230128055737id_/http://www.depauw.edu/sfs/birs/bir95b.htm",
+  "https://web.archive.org/web/20240727144048id_/http://www.depauw.edu/sfs/birs/bir45.htm",
+  "https://web.archive.org/web/20250525020134id_/http://www.depauw.edu/sfs/birs/bir41.htm"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll fetch the sources as raw text. Let me start with the parallel fetches.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a610ead293a10cfb6",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a610ead293a10cfb6.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i787-825.json",
+  "exists": false
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i726-742",
+ "lines": 65,
+ "firstTs": "2026-09-06T23:56:25.334Z",
+ "lastTs": "2026-09-06T23:59:50.947Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17
+ },
+ "urlsFetched": [
+  "https://archiveswest.orbiscascade.org/ark:/80444/xv926878",
+  "https://monstersandmanuals.blogspot.com/2019/04/gene-wolfe-ursula-le-guin-and.html",
+  "https://monstersandmanuals.blogspot.com/2019/04/so-farewell-then.html",
+  "https://openlibrary.org/search/inside?q=%22Wolfe+is+so+good+he+leaves+me+speechless%22",
+  "https://openlibrary.org/search/inside?q=%22and+it+has+drawn+numerous+peer%22",
+  "https://scholar.google.com/scholar?q=%22Gene+Wolfe%22+stylometry",
+  "https://api.openalex.org/works?search=gene+wolfe+stylometry&mailto=settlementforge@gmail.com",
+  "https://static1.squarespace.com/static/56b23f391bbee0832a71e819/t/5ebc7271ed9e7b0bfd86b635/1589408969872/Toward-a-science-of-science-fiction-draft.pdf",
+  "https://www.cambridge.org/core/books/attending-daedalus/preface/E534225E10471DD899126B4501FD52B3",
+  "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+  "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+  "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+  "https://reactormag.com/the-land-across-excerpt-gene-wolfe/",
+  "https://reactormag.com/excerpts-a-borrowed-man-gene-wolfe/",
+  "https://web.archive.org/web/20260315150230id_/https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+  "https://web.archive.org/web/20240715194845id_/https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+  "https://web.archive.org/web/20260114144551id_/https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Network works. Fetching the rest in parallel.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "af40e29ea2d18bf37",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-af40e29ea2d18bf37.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i726-742.json",
+  "exists": false
+ }
+}

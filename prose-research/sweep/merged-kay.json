@@ -15742,10 +15742,11 @@
   },
   "55": {
    "index": 55,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the narrator is merely reporting what happened, without any commentary",
-   "note": "Raw text on the Senzio castle-courtyard melee ('some thirty or forty Senzians'): 'the narrator is merely reporting what happened, without any commentary and in the summary fashion of ambient focalization'; the phrase 'according to most reports later'... 'suggests that the narrator is restricting their omniscience and narrating only what people hear about the incident afterwards'; 'The approximate number of the dead could also point in the same direction.'",
-   "fromFile": "verdicts-kay-i45-59.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'approximate counts' rests on Töyrylä alone.",
+   "unsupportedLimb": "the rule stands on a single citation (Töyrylä's BA thesis); no second source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "56": {
    "index": 56,
@@ -15763,10 +15764,11 @@
   },
   "58": {
    "index": 58,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the narrator does not claim that Sandre is dead",
-   "note": "Raw text: 'Kay himself says in his afterword that he started the book with \"an outright lie\" (792), but that is not strictly speaking true since the narrator does not claim that Sandre is dead but states that such \"word went forth\", and that is the truth.' Quotation verbatim; every limb supported.",
-   "fromFile": "verdicts-kay-i45-59.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'misleads truthfully' generalises from one novel's opening.",
+   "unsupportedLimb": "the rule generalises from a single instance, the opening sentence of Tigana's chapter one",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "59": {
    "index": 59,
@@ -15968,10 +15970,11 @@
   },
   "87": {
    "index": 87,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the epilogue, and the final image of the novel: Three full glasses of wine, intentionally left standing together",
-   "note": "Same raw page. Quote verbatim; 'culminating' is the page's own frame too ('Sorenica - serenity - is the culmination of the process of harmonization').",
-   "fromFile": "verdicts-kay-i75-89.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Three full glasses of wine, intentionally left standing together",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'close on an object' generalises from one epilogue. fullSentence: trim before any copy (the verifier's trueWording ran 18 words; trimmed here).",
+   "unsupportedLimb": "the rule generalises from a single epilogue, that of The Lions of Al-Rassan",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "88": {
    "index": 88,
@@ -16091,10 +16094,11 @@
   },
   "104": {
    "index": 104,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "reveal and showcase character within and through action scenes; \"I doubt anyone's ever been better\"",
-   "note": "Kay, in the influences passage: \"Dunnett, along with Mary Renault, is my own nomination for the preeminent historical fiction writer of our time. In Lady Dunnett's case, I remain deeply admiring of her ability to reveal and showcase character within and through action scenes. I doubt anyone's ever been better.\" Quote verbatim; 'unmatched' = \"I doubt anyone's ever been better\", and the 'model' limb sits inside the interviewer's frame \"the writers and experiences that have influenced Guy over the years\". Minor: the page writes \"Dunnett\"/\"Lady Dunnett\" and never the first name \"Dorothy\" (2 occurrences of the surname, no 'Dorothy' on the page); the identification is unambiguous from context.",
-   "fromFile": "verdicts-kay-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "reveal and showcase character within and through action scenes",
+   "note": "Kay, in the influences passage: \"Dunnett, along with Mary Renault, is my own nomination for the preeminent historical fiction writer of our time. In Lady Dunnett's case, I remain deeply admiring of her ability to reveal and showcase character within and through action scenes. I doubt anyone's ever been better.\" Quote verbatim; 'unmatched' = \"I doubt anyone's ever been better\", and the 'model' limb sits inside the interviewer's frame \"the writers and experiences that have influenced Guy over the years\". Minor: the page writes \"Dunnett\"/\"Lady Dunnett\" and never the first name \"Dorothy\" (2 occurrences of the surname, no 'Dorothy' on the page); the identification is unambiguous from context. fullSentence: trim before any copy (the verifier's trueWording ran 15 words; trimmed here).",
+   "unsupportedLimb": "the forename 'Dorothy' — the verifier records that the page writes only 'Dunnett'/'Lady Dunnett' and carries no 'Dorothy'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "105": {
    "index": 105,
@@ -16314,10 +16318,11 @@
   },
   "135": {
    "index": 135,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the sections with women viewpoint characters ... are in present tense, compared to sections with male viewpoint characters in past tense",
-   "note": "Niall's own comment (Aug 19 2010, 7:34 am) on his Vector review; quote 'are in present tense' exact. Live URL 403s behind a JS proof-of-work wall; raw page read via Wayback id_ capture 20250916021402.",
-   "fromFile": "verdicts-kay-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "sections with women viewpoint characters are in present tense",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'present tense for chosen standpoints' rests on two readers of one novel. fullSentence: trim before any copy (the verifier's trueWording ran 21 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on two readers of a single novel; no wider evidence of the tense rule",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "136": {
    "index": 136,
@@ -16370,10 +16375,11 @@
   },
   "143": {
    "index": 143,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Kay mediates the world through the chariot races and the making of mosaics",
-   "note": "Followed by 'We get the heresy and the religion through the mosaics. We get life and control of the empire through the chariot racing.'",
-   "fromFile": "verdicts-kay-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "mediates the world through the chariot races and the making of mosaics",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): the one-mediating-craft rule rests on Walton alone. fullSentence: trim before any copy (the verifier's trueWording ran 13 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on a single citation (Jo Walton); no second source attests the mediating craft",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "144": {
    "index": 144,
@@ -17081,10 +17087,11 @@
   },
   "243": {
    "index": 243,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "People speak with restraint, implication, and subtext",
-   "note": "Section 'Dialogue as character and culture', verbatim; the surrounding sentences make 'People' Kay's characters ('His dialogue is formal... shaped by the social worlds his characters inhabit').",
-   "fromFile": "verdicts-kay-i240-254.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'feeling shown by what is left out' rests on McBean, whom the roster kinds as an uncredentialed blog; Davison and taoofjord dispute it.",
+   "unsupportedLimb": "the sole source is McBean, an uncredentialed blog, and Davison and taoofjord dispute the rule",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "244": {
    "index": 244,
@@ -17640,10 +17647,11 @@
   },
   "322": {
    "index": 322,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a favourite 'Kay-ism': a few lines of gentle dignity at death",
-   "note": "Verbatim: 'Even when death strikes, it's leavened with what has become one of my favorite \"Kay-isms\" — the lingering of a spirit for a brief while in a few moments consideration of a life lived and now ended, a few lines of gentle dignity, of respect accorded by the author... granted to a wide range of characters'. Kay-ism limb, death-moment limb and granted-to-a-character limb all present. Paragraph beginning 'But Kay also is quick to show' confirmed.",
-   "fromFile": "verdicts-kay-i315-329.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'a few lines of dignity' rests on one reviewer in one review.",
+   "unsupportedLimb": "the rule stands on one reviewer (Capossere) in one review; no second source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "323": {
    "index": 323,
@@ -17661,10 +17669,11 @@
   },
   "325": {
    "index": 325,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "characters richly drawn whether central or given two or three paragraphs",
-   "note": "Verbatim: 'the characters... are richly drawn and utterly compelling across the board, whether they take up the bulk of the pages, as with Rafel and Lenia, several strands of a few pages each... or are given just two or three paragraphs.' The 'still richly drawn' limb is carried by 'across the board'. Paragraph beginning 'What I'm trying to say here' confirmed.",
-   "fromFile": "verdicts-kay-i315-329.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'a few lines of dignity' rests on one reviewer in one review.",
+   "unsupportedLimb": "the rule stands on one reviewer (Capossere) in one review; no second source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "326": {
    "index": 326,
@@ -17704,10 +17713,11 @@
   },
   "331": {
    "index": 331,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"It's not giving away much to open this review with the closing words\"",
-   "note": "Raw page: the review's first body line is the quoted closing words, immediately followed by \"It's not giving away much to open this review with the closing words of Written on the Dark, Guy Gavriel Kay's tale of a tavern poet...\". Both limbs (opens; cites the closing words) supported.",
-   "fromFile": "verdicts-kay-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "not giving away much to open this review with the closing words",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): the three-word close rests on this single citation; its companion row #332 is already PARTIAL. fullSentence: trim before any copy (the verifier's trueWording ran 13 words; trimmed here).",
+   "unsupportedLimb": "the three-word-close rule stands on one citation, and its only companion row (#332) is itself PARTIAL",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "332": {
    "index": 332,
@@ -17847,10 +17857,11 @@
   },
   "351": {
    "index": 351,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I wanted to start a book about subterfuge and deception with an outright lie",
-   "note": "Raw page: 'I wanted to start a book about subterfuge and deception with an outright lie – and the first sentence of chapter one does that. I wanted to work with music...' — confirms both the intent limb and the first-sentence-of-chapter-one limb, and the located paragraph does go on to music.",
-   "fromFile": "verdicts-kay-i345-359.json"
+   "verdict": "PARTIAL",
+   "trueWording": "start a book about subterfuge and deception with an outright lie",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'misleads truthfully' generalises from one novel's opening. fullSentence: trim before any copy (the verifier's trueWording ran 14 words; trimmed here).",
+   "unsupportedLimb": "the rule generalises from a single instance, the opening sentence of Tigana's chapter one",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "352": {
    "index": 352,
@@ -18544,10 +18555,11 @@
   },
   "450": {
    "index": 450,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Emotion is often conveyed by what is not said.",
-   "note": "Live fetch, Chris McBean, posted December 24 2025, section 'Dialogue as character and culture'. Sentence appears verbatim.",
-   "fromFile": "verdicts-kay-i441-485.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'feeling shown by what is left out' rests on McBean, whom the roster kinds as an uncredentialed blog; Davison and taoofjord dispute it.",
+   "unsupportedLimb": "the sole source is McBean, an uncredentialed blog, and Davison and taoofjord dispute the rule",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "451": {
    "index": 451,
@@ -18705,10 +18717,11 @@
   },
   "473": {
    "index": 473,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The approximate number of the dead could also point in the same direction",
-   "note": "Live fetch, brightweavings hosting of Roosa Toyryla's 2017 University of Helsinki bachelor's thesis (page states: 'This is a bachelor's thesis by Roosa Toyryla, written at the University of Helsinki, Finland. 2017.'). Section 'Narratorial Focalization: All-seeing but Indifferent'. Quoted novel passage gives 'some thirty or forty Senzians'; thesis adds 'the exact number of casualties does not seem to be of great importance'. Note: the thesis calls the Senzio incident a 'bloody, to-the-death melee' / slaughter, not a 'massacre' - the claim's own label, not a separate factual limb.",
-   "fromFile": "verdicts-kay-i441-485.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The approximate number of the dead could also point",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'approximate counts' rests on Töyrylä alone. fullSentence: trim before any copy (the verifier's trueWording ran 13 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on a single citation (Töyrylä's BA thesis); no second source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "474": {
    "index": 474,
@@ -18965,10 +18978,11 @@
   },
   "510": {
    "index": 510,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "half of the group had scores of nine or above and the other half of the group had scores below 5... average for the group was a solid seven",
-   "note": "Raw live page (HTTP 200). Quote exact, in the opening paragraph. All three limbs — nine-or-above half, below-five half, 'a solid seven' average — are in consecutive sentences. Post by Andrew (Andrew Mather), March 17, 2016; the page also gives 'Bookclub - 7.0/10'.",
-   "fromFile": "verdicts-kay-i486-517.json"
+   "verdict": "PARTIAL",
+   "trueWording": "half of the group had scores of nine or above",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'the split room' rests on one book club post. fullSentence: trim before any copy (the verifier's trueWording ran 29 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on a single book-club post (The Quill to Live, 17 March 2016)",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "511": {
    "index": 511,
@@ -19015,10 +19029,11 @@
   },
   "517": {
    "index": 517,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "As far as coincidental revelations, that's a device GGK uses in all his works. After reading a few you'll start to see it coming ahead of time.",
-   "note": "Same raw live page, same post #6 by chokipokilo, Dec 6, 2011. Quote exact (page renders a curly apostrophe in \"that's\"). Both limbs are consecutive sentences; 'after a few books a reader starts to see it coming' = 'After reading a few you'll start to see it coming ahead of time.'",
-   "fromFile": "verdicts-kay-i486-517.json"
+   "verdict": "PARTIAL",
+   "trueWording": "that's a device GGK uses in all his works",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): #517 is a SFFWorld user (chokipokilo), not Kay — the attribution regrades to kind reader, so feature 7's Kay-attested content is #402 alone. fullSentence: trim before any copy (the verifier's trueWording ran 27 words; trimmed here).",
+   "unsupportedLimb": "the Kay attribution — the speaker is chokipokilo, an SFFWorld forum reader, so this is kind=reader, not author-attested",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "518": {
    "index": 518,
@@ -19043,10 +19058,11 @@
   },
   "521": {
    "index": 521,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "all of that is condensed into an epilogue",
    "note": "Raw source reached: the talk's own transcript (introduction-guy-gavriel-kaydefault.srt, linked from the writersinspire page as 'A transcript/subtitles file (.srt) is available here'). In the Under Heaven passage Olley says almost the entirety of the rebellion itself, the years of upheaval it begins, the victories, the losses, the alliances, the political manoeuvrings, all condensed into an epilogue. Every limb supported. Only naming caveat: the auto-generated transcript renders 'An Shi/An Lushan' phonetically as 'the and Xi rebellion' earlier in the talk, so the rebellion's proper name is identified by context, not spelled on the page.",
-   "fromFile": "verdicts-kay-i521-624.json"
+   "unsupportedLimb": "the name 'An Lushan' — the verifier records that the transcript never spells the rebellion's name (it renders it 'the and Xi rebellion')",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "522": {
    "index": 522,
@@ -19990,24 +20006,27 @@
   },
   "656": {
    "index": 656,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "his choice of tense, depending on which character the novel is following at the time",
-   "note": "Verbatim. Page title is 'Review by Desi Stern for Petrichor Machine'; the sentence sits in the paragraph beginning 'Another way that Kay's mastery of craft is working at its best', exactly as the claim's page field says.",
-   "fromFile": "verdicts-kay-i625-678.json"
+   "verdict": "PARTIAL",
+   "trueWording": "his choice of tense, depending on which character the novel is following",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'present tense for chosen standpoints' rests on two readers of one novel. fullSentence: trim before any copy (the verifier's trueWording ran 15 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on two readers of a single novel (River of Stars); no wider evidence",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "657": {
    "index": 657,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Most sections are written in the past tense, except for those following the character of Shan",
-   "note": "Verbatim, and the present-tense limb is explicit further on: 'her present-tense tale' and 'The present-tense narration really enhances the reader's experience of Shan's awareness'. The review names the book: 'I just finished reading River of Stars'.",
-   "fromFile": "verdicts-kay-i625-678.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Most sections are written in the past tense, except those following Shan",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'present tense for chosen standpoints' rests on two readers of one novel. fullSentence: trim before any copy (the verifier's trueWording ran 16 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on two readers of a single novel (River of Stars); no wider evidence",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "658": {
    "index": 658,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a male character...decides to purposefully think in a more feminine state of mind...and his narration shifts to present tense for the scene",
-   "note": "Verbatim, and it is indeed the parenthetical paragraph immediately after the Shan discussion, as the claim's page field states.",
-   "fromFile": "verdicts-kay-i625-678.json"
+   "verdict": "PARTIAL",
+   "trueWording": "his narration shifts to present tense for the scene",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'present tense for chosen standpoints' rests on two readers of one novel. fullSentence: trim before any copy (the verifier's trueWording ran 22 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on two readers of a single novel (River of Stars); no wider evidence",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "659": {
    "index": 659,
@@ -20095,10 +20114,11 @@
   },
   "671": {
    "index": 671,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "to have figures emote or react as we might, ourselves...feels like a betrayal (even a large one) of the characters and the culture",
-   "note": "Verbatim, in a first-person entry by Kay ('as a writer, if I'm developing characters in a setting meant to evoke a...much more controlled society'), inside the Under Heaven tour journal on the craft-of-emotion topic. The page adds 'and the culture' after 'the characters'; the claim's 'of them' is narrower but not wrong.",
-   "fromFile": "verdicts-kay-i625-678.json"
+   "verdict": "PARTIAL",
+   "trueWording": "feels like a betrayal (even a large one) of the characters",
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'no modern emoting' rests on Kay alone. fullSentence: trim before any copy (the verifier's trueWording ran 23 words; trimmed here).",
+   "unsupportedLimb": "the rule stands on a single citation (Kay's Under Heaven tour journal); no independent source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "672": {
    "index": 672,
@@ -20179,10 +20199,11 @@
   },
   "683": {
    "index": 683,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I have certain characters speaking rapidly at times, under stress",
-   "note": "Raw live page (200). Verbatim, continuing '...tucking a semi-colon into such a passage, or even too many technically viable commas undermines the EFFECT of the passage.'",
-   "fromFile": "verdicts-kay-i679-710.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'no semicolons under stress' rests on Kay alone.",
+   "unsupportedLimb": "the rule stands on a single citation (Kay's Ysabel journal); no independent source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "684": {
    "index": 684,
@@ -20207,10 +20228,11 @@
   },
   "687": {
    "index": 687,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the sentence simply read better after deleting the word 'taste'",
-   "note": "Raw live page (200). Verbatim; preceded by 'Catherine queried ‘taste again at twilight’ ... the sustained metaphor getting tangled, to her ear'. Catherine is identified on the same page as the copy-editor ('Catherine's cover letter for the copy-edited manuscript').",
-   "fromFile": "verdicts-kay-i679-710.json"
+   "note": "COMPLETENESS CRITIC §4 (second-reader pass over the single-citation rules): 'a metaphor that needs a second clause is deleted' rests on Kay alone.",
+   "unsupportedLimb": "the rule stands on a single citation (Kay's own Ysabel journal); no independent source attests it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "688": {
    "index": 688,
@@ -20658,10 +20680,11 @@
   },
   "751": {
    "index": 751,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "remains marked by loss, fragmentation, and incomplete knowledge",
    "note": "OpenAlex record W7163571973 fetched raw and its abstract_inverted_index reconstructed; author Sylwia Borowska-Szerszun, Orbis Litterarum 2026, DOI 10.1111/oli.70057. Abstract's penultimate-but-one sentence supports every limb, but hedges: the restoration 'appears to reproduce' a 'recognizably Tolkienian' resolution rather than flatly reproducing it. Claim carried no quote field, so graded on substance.",
-   "fromFile": "verdicts-kay-i750-779.json"
+   "unsupportedLimb": "the flat 'reproduces' — the verifier records that the abstract only says the restoration 'appears to reproduce' a 'recognizably Tolkienian' resolution",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "752": {
    "index": 752,
@@ -21731,10 +21754,11 @@
   },
   "904": {
    "index": 904,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "studded with poetry quoted in Scots, French, Spanish, Italian, Latin",
    "note": "foxedquarterly.com fetched live, HTTP 200. Article 'Stumbling with Precision', Desert Island Discs paragraph; the quoted list continues to ten languages. Concealment limb rests on the page's framing - the interview called one of the worst ways to gain insight, Dunnett presenting herself as a housewife - but the page's own verb is 'No one mentions', which spreads the omission across her and Plomley rather than her persona alone. Extract credit line reads Slightly Foxed Issue 81, 2024.",
-   "fromFile": "verdicts-kay-i895-919.json"
+   "unsupportedLimb": "that her Desert Island Discs persona concealed it — the verifier records that the page's 'No one mentions' spreads the omission across Dunnett and Plomley",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "905": {
    "index": 905,
@@ -21794,10 +21818,11 @@
   },
   "913": {
    "index": 913,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I think Kilby had the least input and Kay probably the most",
    "note": "Same Feb 2020 post, sixth paragraph, as claimed; the sentence ranks all three, placing Taum between the two and closer to Kay. Naming note: the page writes 'Kilby' without a forename (the claim's 'Clyde' is not on the page), while 'Taum Santoski' does appear in full in the fifth paragraph.",
-   "fromFile": "verdicts-kay-i895-919.json"
+   "unsupportedLimb": "the forename 'Clyde' for Kilby — the verifier records that it is not on the page",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "914": {
    "index": 914,
@@ -21823,24 +21848,27 @@
   },
   "917": {
    "index": 917,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Here I think is where Guy Gavriel Kay enters the picture",
    "note": "Same Jan 2020 page, one fetch; the passage is inside the Anonymous comment of January 29, 2020, quoting Noad. Both limbs on the page: the different-skills contrast and the 'degree of creativity' sentence precede the quoted clause. PROVENANCE CORRECTION for the source field: the commenter states the Tolkien Plaza review itself is NOT archived and that he is quoting from an archived discussion about the review in which he had previously quoted Noad - so this is Noad at second hand, not the archived review.",
-   "fromFile": "verdicts-kay-i895-919.json"
+   "unsupportedLimb": "the 'archived Tolkien Plaza review' provenance — the verifier's PROVENANCE CORRECTION records that the review is not archived; this is Noad at second hand from an archived discussion",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "918": {
    "index": 918,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Kay's idea to produce a finished narrative rather than a scholarly version",
    "note": "Same Jan 2020 page, same Anonymous comment of January 29, 2020. Noad's clause is a 'Given that' premise on which he builds his submission that the published Silmarillion owes a good deal to Kay's input, and he adds parenthetically that Kay has since gone on record against publishing Tolkien's unfinished texts. Same provenance correction as index 917: archived discussion quoting the review, not the review itself.",
-   "fromFile": "verdicts-kay-i895-919.json"
+   "unsupportedLimb": "the 'archived Tolkien Plaza review' provenance — the verifier's PROVENANCE CORRECTION records that the review is not archived; this is Noad at second hand from an archived discussion",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "919": {
    "index": 919,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "mistakenly referred to the scene of Thingol's death as J.R.R. Tolkien's work",
    "note": "Same Jan 2020 page, first comment in the thread, dated January 26, 2020, as the claim's page field says. All three names are on the page - Tom Shippey, Verlyn Flieger, Brian Rosebury - and the editors'-scene limb is carried by the commenter's closing clause crediting Christopher Tolkien and Guy Gavriel Kay with crafting it. ATTRIBUTION CORRECTION for the source field: the comment is signed N.E. Brigand, not an anonymous commenter (the separate Anonymous comment is the later January 29 one).",
-   "fromFile": "verdicts-kay-i895-919.json"
+   "unsupportedLimb": "the 'anonymous commenter' attribution — the verifier's ATTRIBUTION CORRECTION records that the comment is signed N.E. Brigand",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "920": {
    "index": 920,
@@ -22575,10 +22603,11 @@
   },
   "1024": {
    "index": 1024,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the prose is so flowery it made my eyes bleed",
    "note": "Live goodreads.com fetched with a desktop Chrome user agent; review parsed from the __NEXT_DATA__ apolloState Review: nodes. Node matches on every limb: creator Pietro, rating 1, createdAt 2012-08-09, likeCount 431. Quote verbatim in a list of complaints alongside pacing and characters. Only inference: 'his' eyes - the page gives the display name Pietro but never states gender; the review itself says 'my eyes'.",
-   "fromFile": "verdicts-kay-i1022-1036.json"
+   "unsupportedLimb": "the reviewer's gender ('his eyes') — the verifier records that the page gives only the display name Pietro and never states gender",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1025": {
    "index": 1025,
@@ -22715,10 +22744,11 @@
   },
   "1044": {
    "index": 1044,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I often wish there was less of it",
    "note": "Brok3n Engines, 'Tigana, by Guy Gavriel Kay', subtitle 'GGK in transition', 16 Apr 2025. Full sentence begins 'while I enjoy his prose', so both limbs hold. The reviewer's gender is never stated on the page; the claim's 'he' is not page-supported but carries none of the assertion.",
-   "fromFile": "verdicts-kay-i1037-1051.json"
+   "unsupportedLimb": "the reviewer's gender ('he') — the verifier records that it is never stated on the page and is not page-supported",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1045": {
    "index": 1045,
@@ -22778,10 +22808,11 @@
   },
   "1053": {
    "index": 1053,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "beautiful prose is not enough, if you start out promising more",
    "note": "apolloState Review node: agata, rating 3, likeCount 15, createdAt 1340728712000 = 2012-06-26. Quote exact. One caveat that does not change the claim: the page nowhere states the reviewer's gender, so 'for her' is inferred from the display name; the review itself is ungendered and the surrounding paragraph names the prose's high points before the verdict.",
-   "fromFile": "verdicts-kay-i1052-1066.json"
+   "unsupportedLimb": "the reviewer's gender ('for her') — the verifier records that the page nowhere states it and that it is inferred from the display name",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1054": {
    "index": 1054,
@@ -22792,10 +22823,11 @@
   },
   "1055": {
    "index": 1055,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "read about the same event two or three times as multiple characters",
    "note": "apolloState Review node: Mogsy, likeCount 61, createdAt 2015-07-15. Quote exact and the clause completes with the characters describing it from their perspectives. The claim omits no rating (the review is 3 stars) and the page frames this as an at-times consequence of the multi-POV format, inside a passage about POV imbalance — the claim's 'makes the reader' is slightly firmer than the page's 'at times you also had to'.",
-   "fromFile": "verdicts-kay-i1052-1066.json"
+   "unsupportedLimb": "the unhedged 'makes the reader' — the verifier records that this is firmer than the page's 'at times you also had to'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1056": {
    "index": 1056,
@@ -22834,10 +22866,11 @@
   },
   "1061": {
    "index": 1061,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "describe Kay's writing as \"lyrical nostalgia\"",
+   "verdict": "PARTIAL",
+   "trueWording": "describe Kay’s writing as \"lyrical nostalgia\"",
    "note": "apolloState Review node: Joshua Thompson, rating 5, likeCount 39, createdAt 2025-03-01. Quote exact, and the endorsement limb is explicit — the reviewer says he loves the description. One wording drift too small to downgrade: the page calls Janny Wurts 'the author', not 'the novelist', and the relay is second-hand (the reviewer reports having seen her say it), so Wurts's own wording is not independently evidenced here.",
-   "fromFile": "verdicts-kay-i1052-1066.json"
+   "unsupportedLimb": "that the wording is Janny Wurts's own — the verifier records that the relay is second-hand and not independently evidenced, and that the page calls her 'the author', not 'the novelist'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1062": {
    "index": 1062,
@@ -22906,10 +22939,11 @@
   },
   "1071": {
    "index": 1071,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "His best traits are his evocative prose, quality characterization and flair",
    "note": "SFFWorld post #4 by TooNice, Dec 6 2011: quote exact (page continues 'for drama'); the same post carries the fast-paced/tight-narrative warning, though hedged there as 'probably won't be your cup of tea' where the claim states it flatly.",
-   "fromFile": "verdicts-kay-i1067-1081.json"
+   "unsupportedLimb": "the flat fast-paced-reader warning — the verifier records that the post hedges it as 'probably won't be your cup of tea'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1072": {
    "index": 1072,
@@ -22927,17 +22961,19 @@
   },
   "1074": {
    "index": 1074,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "his use of language is precise, and lyric, and highly creative",
    "note": "Goodreads message 12 by Janny, Mar 12 2009: quote exact, preceded on the page by 'I have no issues at all with this author's style'. The page nowhere states Janny's gender, so the claim's 'she' is an outside inference, not a page fact.",
-   "fromFile": "verdicts-kay-i1067-1081.json"
+   "unsupportedLimb": "the reviewer's gender ('she') — the verifier records that it is an outside inference, not a page fact",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1075": {
    "index": 1075,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a reader looking for a leaner prose style",
    "note": "Goodreads message 12 by Janny: quote exact, in the Ysabel sentence; the page reads 'The pace is slightly quicker and less atmospheric', so 'quicker' is said of the pace and is hedged with 'slightly' the claim drops.",
-   "fromFile": "verdicts-kay-i1067-1081.json"
+   "unsupportedLimb": "the unhedged 'quicker' — the verifier records that the page says the pace is only 'slightly quicker' and that the claim drops the hedge",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1076": {
    "index": 1076,
@@ -23053,17 +23089,19 @@
   },
   "1092": {
    "index": 1092,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "surprised at the glowing praise for the prose in this book",
    "note": "Same Morgan node. Verbatim, preceded by 'I have to say I'm quite'. The 'read the other reviews first' limb is supported: she writes that she skimmed the other reviews before feeling compelled to leave her own. One unattested detail, not a claim limb: the page shows only the display name 'Morgan' and never establishes the reviewer's gender, so 'she' is the claim writer's assumption.",
-   "fromFile": "verdicts-kay-i1082-1096.json"
+   "unsupportedLimb": "the reviewer's gender ('she') — the verifier records that the page shows only the display name Morgan and never establishes it",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1093": {
    "index": 1093,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Some will call this style rich, full of weight",
    "note": "Same parsed Goodreads page; Gyan K node: 2 stars (rated 2.5 in the text), 59 likes, createdAt 2025-07-06, matching the claim record. Quote verbatim. The 'rambling' limb is the reviewer's own word later in the same review, where he says all of this rambling distracts from the story; he also says he craves more scene and clash. Gender is not established on the page, only the display name.",
-   "fromFile": "verdicts-kay-i1082-1096.json"
+   "unsupportedLimb": "the reviewer's gender ('he') — the verifier records that gender is not established on the page, only the display name",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1094": {
    "index": 1094,
@@ -23102,17 +23140,19 @@
   },
   "1099": {
    "index": 1099,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "featuring more accessible prose and POVs that stay close",
    "note": "Raw HTML fetched (HTTP 200, browser UA); quote exact. Host sentence: 'The narrative isn't as complex as some of his other works, featuring more accessible prose and POVs that stay close to the main action' - the comparison class is 'some of his other works', slightly narrower than the claim's unqualified 'Kay's other works', but the comparative limb is supported. apolloState confirms rating 4 (the 'four-star' limb), The Speculative Shelf, 2025-02-13.",
-   "fromFile": "verdicts-kay-i1097-1102.json"
+   "unsupportedLimb": "the unqualified 'Kay's other works' — the verifier records that the page compares only with 'some of his other works'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1100": {
    "index": 1100,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "your absolute favorite authors, or you may not care",
    "note": "Raw HTML fetched (HTTP 200, browser UA); quote exact. Host sentence: 'Guy Gavriel Kay writes fantasy in a way that no one else does, which may make him one of your absolute favorite authors, or you may not care for his books at all.' The source hedges each branch with 'may' where the claim uses 'will make him either'; the exhaustive two-camp disjunction is the reviewer's own framing ('I stand in the former camp'), so the either/or limb holds - the modality is softer in the source, not contradicted. Byline Eric Ballein, Grimdark Magazine, datePublished 2022-08-02.",
-   "fromFile": "verdicts-kay-i1097-1102.json"
+   "unsupportedLimb": "the flat 'will make him either' — the verifier records that the source hedges each branch with 'may'",
+   "fromFile": "verdicts-kay-regrade-r8.json"
   },
   "1101": {
    "index": 1101,

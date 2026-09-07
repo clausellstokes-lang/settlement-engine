@@ -1492,5 +1492,77 @@
    "unsupportedLimb": "the temporal limb 'while writing The Book of the New Sun' — the page reports the cover stories in the present tense of the January 1983 interview, when Wolfe says he has finished the first draft of The Urth of the New Sun and is at work on short stories; it never dates the cover stories to the tetralogy's writing",
    "fromFile": "verdicts-wolfe-i629-648.json"
   }
+ },
+ {
+  "index": 675,
+  "feature": "other: dating a record",
+  "claim": "Gale's Major 21st-Century Writers gives Wolfe's Plant Engineering post as senior editor, 1972-84, agreeing with Ultan's Library against the magazine's own obituary.",
+  "source": "'Wolfe, Gene (Rodman)', Major 21st-Century Writers, ed. Tracey Matthews, vol. 5, Gale, 2005",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2010-02-25-gale-genewolfebiography.txt",
+  "quote": "Plant Engineering Magazine, Barrington, IL, senior editor, 1972-84",
+  "page": "CAREER",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "2005",
+  "routeHint": "gwern.net mirror of the original, live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "editors",
+  "verdict": {
+   "index": 675,
+   "verdict": "PARTIAL",
+   "trueWording": "Plant Engineering Magazine, Barrington, IL, senior editor, 1972-84",
+   "note": "Live gwern .txt fetched raw; the CAREER line of the Gale entry (Major 21st-Century Writers, ed. Matthews, vol. 5, 2005) carries the quotation word for word, so the dating limb is verified. The comparison limb is not on this page. Checked separately: Ultan's Library (ultan.org.uk/plant-engineering/, fetched raw) does give 1972-1984 and quotes Wolfe calling himself a senior editor, so that half holds; the Plant Engineering obituary could not be located (two candidate URLs 404, Wayback CDX returned nothing), so the 'against the magazine's own obituary' half is unverified here.",
+   "unsupportedLimb": "that Gale thereby agrees with Ultan's Library against Plant Engineering's own obituary",
+   "fromFile": "verdicts-wolfe-i667-692.json"
+  }
+ },
+ {
+  "index": 680,
+  "feature": "other: an editor's letter as the turning point",
+  "claim": "The finding aid says the Orbit correspondence includes many letters from Gene Wolfe.",
+  "source": "Joyce Griffith and Stephanie Kays, 'Guide to the Damon Knight papers', Archives West, 2015",
+  "url": "https://archiveswest.orbiscascade.org/ark:80444/xv31439",
+  "quote": "Among them: Gene Wolfe, Vonda McIntyre, Gardner Dozois",
+  "page": "Content Description",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2015",
+  "routeHint": "live URL, browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "editors",
+  "verdict": {
+   "index": 680,
+   "verdict": "PARTIAL",
+   "trueWording": "Among them: Gene Wolfe, Vonda McIntyre, Gardner Dozois",
+   "note": "Live Archives West finding aid fetched raw. Content Description says there are many letters in the Orbit correspondence containing material of personal interest, then lists Wolfe first among nine names. The page attributes 'many' to the Orbit correspondence as a whole, not to Wolfe individually; it establishes that Wolfe letters are among them, not their number.",
+   "unsupportedLimb": "that the correspondence holds many letters specifically from Gene Wolfe",
+   "fromFile": "verdicts-wolfe-i667-692.json"
+  }
+ },
+ {
+  "index": 709,
+  "feature": "other: Le Guin as Wolfe's editor",
+  "claim": "Le Guin also selected a Wolfe story, \"A Criminal Proceeding\", for Interfaces, the second anthology she hand-picked with Virginia Kidd in 1980.",
+  "source": "The Ursula K. Le Guin Foundation, official site, page for Interfaces (accessed 2026-09-06)",
+  "url": "https://www.ursulakleguin.com/interfaces",
+  "quote": "Hand picked by Ursula K. Le Guin",
+  "page": "description and Table of Contents",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2026 site; book 1980",
+  "routeHint": "direct fetch with browser user agent",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "le-guin",
+  "verdict": {
+   "index": 709,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Interfaces was the SECOND anthology Le Guin hand-picked with Kidd — this page calls it her first",
+   "trueWording": "the first anthology ever edited by Ursula K. Le Guin",
+   "note": "Le Guin Foundation page fetched live (200, 105KB). The quoted phrase 'Hand picked by Ursula K. Le Guin' is verbatim, Virginia Kidd is named as co-selector in the same sentence, '“A Criminal Proceeding” by Gene Wolfe' is in the Table of Contents, and the page dates it to Ace Books 1980 — so the Wolfe-selection limb and the 1980 limb hold. But the same blurb calls Interfaces her first anthology, which the ordinal 'second' contradicts rather than merely omitting; the page gives no basis for ordering it after Edges.",
+   "fromFile": "verdicts-wolfe-i693-710.json"
+  }
  }
 ]
