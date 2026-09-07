@@ -12,6 +12,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { flag, setFlagOverride, getAllFlags, FLAGS } from '../../src/lib/flags.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // jsdom provides window + localStorage in vitest by default.
 beforeEach(() => {
@@ -95,8 +96,19 @@ describe('getAllFlags()', () => {
 });
 
 describe('FLAGS registry', () => {
+  // Both retirements are anchored on a LIVE SIBLING rather than asserted bare: the
+  // registry is `Object.fromEntries(Object.keys(FLAG_DEFAULTS)…)`, so `Object.keys(FLAGS)`
+  // IS the exposure surface, and a registry that drifted empty or re-keyed reds on the
+  // anchor instead of passing these exclusions vacuously forever.
   it('does not expose the retired journey media-set comparison toggle', () => {
-    expect(FLAGS).not.toHaveProperty('loadingJourneySetBg');
+    expectAbsentWithAnchor(Object.keys(FLAGS), 'loadingJourneySetBg', 'loadingJourneyFilm',
+      'FLAGS registry — the surviving journey-film flag anchors its retired media-set companion');
+  });
+
+  it('does not expose the retired single-chrome mobile nav toggle', () => {
+    // Retired at 89ff7b03b (§904) after its src/App.jsx readers were deleted at 8bf493d05.
+    expectAbsentWithAnchor(Object.keys(FLAGS), 'mobileSingleChrome', 'workshopNav',
+      'FLAGS registry — the surviving top-level nav flag anchors the retired mobile-chrome one');
   });
 
   it('every flag has a default + description', () => {

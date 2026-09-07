@@ -617,7 +617,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lib/editFingerprint.test.js': 1,
   'tests/lib/emailTemplates.test.js': 7,
   'tests/lib/errorReporter.test.js': 5,
-  'tests/lib/flags.test.js': 1,
   'tests/lib/gallery.test.js': 4,
   'tests/lib/galleryChronicle.test.js': 1,
   'tests/lib/galleryDescriptionScrub.test.js': 6,
