@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 10:52:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 10:57:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak receipt ships its per-year series and the capacity rows become fully execu
 
@@ -137,20 +137,8 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 29a4ff20d §910: the soak re
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
-## WORKFLOW RUNS of chair session b43943b4-3b40-4fd9-bc63-9b9c9afb55b4 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_2c525e43-1f2: 8 journal lines, 4 agents
-- wf_33d10449-ec8: 9 journal lines, 6 agents
-- wf_36047b28-91e: 6 journal lines, 3 agents
-- wf_37a1566c-e8f: 8 journal lines, 4 agents
-- wf_43d098bf-eff: 14 journal lines, 7 agents
-- wf_49ef9b66-2e6: 4 journal lines, 4 agents
-- wf_543ddb3b-67c: 20 journal lines, 10 agents
-- wf_6dd3b009-2b0: 50 journal lines, 25 agents
-- wf_7cdbb8bf-177: 3 journal lines, 3 agents
-- wf_a1a420b6-993: 6 journal lines, 3 agents
-- wf_e092839f-8b1: 20 journal lines, 10 agents
-- wf_e90e8bd1-c18: 4 journal lines, 4 agents
-- wf_faa375e7-29f: 20 journal lines, 10 agents
+## WORKFLOW RUNS of chair session 8de5f153-f375-48fb-803c-ec578a273a4a (journal lines; a run dies with the session — the FILES above are the checkpoint)
+- wf_bdebda48-278: 3 journal lines, 3 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.27 1.95 1.88
+load: 1.78 1.77 1.82
