@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 18:15:49 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 18:21:28 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = b09208342 §912.1: the owner charters the authoring wave — new sentence pools keyed to facts the e
+product claude/composite-r4 = 3b1c0eaa5 · ledger = c426b1813 §912.2: the owner rules that the rules are the exemplar, not the practical — walls neve
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -141,4 +141,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = b09208342 §912.1: the owner
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.24 2.86 2.56
+load: 1.86 2.20 2.35
