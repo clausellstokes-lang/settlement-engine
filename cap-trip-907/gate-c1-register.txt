@@ -1,0 +1,79 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+ ❯ tests/soak-harness/soakRegister.test.js (8 tests | 3 failed) 600ms
+     × a receipt that is not clean can never mint a cell 7ms
+     × the committed register is UNFROZEN genesis, and --compare reports that positively 56ms
+     × the growth door refuses a dirty tree, an undeclared move, and an ungoverned debt 523ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/soak-harness/soakRegister.test.js > the soak register — shapes, comparisons and the governed growth door > a receipt that is not clean can never mint a cell
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "not the FULL instrument at build-complete-dark",
++   "2 deterministic tripwire row(s) could not run — tripwire capacity_plateau (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt); tripwire capacity_floor_thaw (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt)",
++ ]
+
+ ❯ tests/soak-harness/soakRegister.test.js:233:55
+    231|   test('a receipt that is not clean can never mint a cell', () => {
+    232|     // §13 C7: a cell designed to fail `population_bounded` — the DARK…
+    233|     expect(mintRefusals(annotate(researchReceipt()))).toEqual([]);
+       |                                                       ^
+    234|     expect(mintRefusals({ ...annotate(researchReceipt()), passed: fals…
+    235|       .toContain('the run did not pass — a register cell is minted fro…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/soak-harness/soakRegister.test.js > the soak register — shapes, comparisons and the governed growth door > the committed register is UNFROZEN genesis, and --compare reports that positively
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "not the FULL instrument at build-complete-dark",
++   "2 deterministic tripwire row(s) could not run — tripwire capacity_plateau (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt); tripwire capacity_floor_thaw (requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt)",
++ ]
+
+ ❯ tests/soak-harness/soakRegister.test.js:274:34
+    272|     const written = JSON.parse(readFileSync(proposal, 'utf8'));
+    273|     expect(written.kind).toBe('soak_register_proposal');
+    274|     expect(written.mintRefusals).toEqual([]);
+       |                                  ^
+    275|     expect(Object.keys(written.figures).length).toBeGreaterThan(10);
+    276|   }, 60_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/soak-harness/soakRegister.test.js > the soak register — shapes, comparisons and the governed growth door > the growth door refuses a dirty tree, an undeclared move, and an ungoverned debt
+AssertionError: expected 2 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ tests/soak-harness/soakRegister.test.js:301:27
+    299|     // THE FIRST CLEAN RUN IS THE FREEZE ACT — and it exits NON-ZERO B…
+    300|     const minted = runCliTolerant(['--write', ...base, '--receipt', re…
+    301|     expect(minted.status).toBe(1);
+       |                           ^
+    302|     expect(minted.stdout).toContain('EXIT 1 BY DESIGN: the register mo…
+    303|     const frozen = JSON.parse(readFileSync(registerPath, 'utf8'));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 5 passed (8)
+   Start at  01:01:03
+   Duration  809ms (transform 73ms, setup 22ms, import 88ms, tests 600ms, environment 0ms)
+

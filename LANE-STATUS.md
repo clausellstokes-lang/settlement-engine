@@ -1,11 +1,15 @@
-# LANE-STATUS — written 2026-09-07 00:58:55 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:04:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 4243bdc61 · 0 cars over 4243bdc61 · porcelain 1 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 4243bdc61 · 0 cars over 4243bdc61 · porcelain 5 · last commits:
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/soak/evaluate.mjs
+       M scripts/soak/register.mjs
        M scripts/soak/tripwires.mjs
+       M tests/soak-harness/soakRegister.test.js
+       M tests/soak-harness/tripwireRegistry.test.js
     receipt `receipt-cap-trip-907.md` (mtime 09-07 00:52) head:
       | # RECEIPT — LANE CAP-TRIP-907 (Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1, session 405b5e7e)
       | 
@@ -137,4 +141,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_4bd76597-3a3: 7 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.25 2.12 2.34
+load: 2.62 2.37 2.41
