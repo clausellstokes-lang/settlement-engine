@@ -3,16 +3,19 @@
  "name": "wolfe",
  "angle": null,
  "tag": "regrade-r7",
- "lines": 109,
+ "lines": 122,
  "firstTs": "2026-09-07T00:47:31.178Z",
- "lastTs": "2026-09-07T00:57:56.023Z",
+ "lastTs": "2026-09-07T01:02:16.188Z",
  "tools": {
   "Bash": 14,
-  "Read": 13
+  "Read": 15,
+  "Write": 1
  },
  "urlsFetched": [],
- "filesWritten": [],
- "lastAssistantText": "Index 174 is already PARTIAL from an earlier r4 regrade (not in the kept set). Now let me dump all 873 kept rows for a full read.",
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/scratchpad/r7/build-wolfe-r7.mjs"
+ ],
+ "lastAssistantText": "I've read all 873 rows. Now let me build the regrade file.",
  "run": "wf_1326cde9-2e5",
  "agent": "a970d0631ad0716f7",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a970d0631ad0716f7.jsonl",

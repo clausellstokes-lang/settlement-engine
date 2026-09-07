@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 20:58:07 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 21:03:37 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MAT landing lands at six cars — two of O-13's three product flags light 
 
@@ -83,7 +83,7 @@ product claude/composite-r4 = 6582958ce · ledger = c19885be6 §904: the L-UI-MA
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
-- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 873 · partial 110 · verdict files 70 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
+- **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
@@ -101,4 +101,4 @@ KeyError: 'tag'
 - wf_e95fca37-bb5: 32 journal lines, 18 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.34 2.65 2.89
+load: 3.31 2.81 2.86

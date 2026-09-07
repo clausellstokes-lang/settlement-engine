@@ -17704,10 +17704,11 @@
   },
   "2": {
    "index": 2,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'Everything may be confusing but that is how things are... Life seen superficially has very little pattern to it.' (p.127)",
-   "note": "Quote verbatim (page reads '...pattern to it. There is a lot of confusion'). The 'clues are there / puzzles the reader is supposed to figure out / not that type of novel' formulation is Jordan's question, which Wolfe affirms with 'Yes' and then elaborates in his own words: 'It is not true that you can't get through the confusion and figure out certain things.' Attribution by assent, not by his own sentence.",
-   "fromFile": "verdicts-wolfe-i0-14.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Life seen superficially has very little pattern to it",
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: 'the puzzles are meant to be solved' is Jordan's QUESTION adopted by assent, not Wolfe's sentence (the [331] defect). Verifier's note: Quote verbatim (page reads '...pattern to it. There is a lot of confusion'). The 'clues are there / puzzles the reader is supposed to figure out / not that type of novel' formulation is Jordan's question, which Wolfe affirms with 'Yes' and then elaborates in his own words: 'It is not true that you can't get through the confusion and figure out certain things.' Attribution by assent, not by his own sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the clues are there, the puzzles are meant to be solved\" — Jordan's question, adopted by Wolfe's assent rather than stated in his own sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "3": {
    "index": 3,
@@ -17719,10 +17720,11 @@
   },
   "4": {
    "index": 4,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'When you research these anomalous stories and accounts you get this sort of thing. You get two witnesses who have very different stories depending on how they perceived some third thing that we don't know what it was. So I tried to show it like that.' (p.126)",
-   "note": "Quote verbatim. The cowboys/knights/spaceship enumeration is Jordan's question ('cowboys and Indians... Arthur and his knights... a spaceship'), which Wolfe adopts with 'So I tried to show it like that', and the Castleview context is explicit on the same page.",
-   "fromFile": "verdicts-wolfe-i0-14.json"
+   "verdict": "PARTIAL",
+   "trueWording": "two witnesses who have very different stories depending on how they perceived",
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: the cowboys/knights/spaceship enumeration is Jordan's QUESTION adopted by assent, not Wolfe's sentence (the [331] defect). Verifier's note: Quote verbatim. The cowboys/knights/spaceship enumeration is Jordan's question ('cowboys and Indians... Arthur and his knights... a spaceship'), which Wolfe adopts with 'So I tried to show it like that', and the Castleview context is explicit on the same page. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the cowboys / Arthurian knights / spaceship enumeration — Jordan's question, adopted by 'So I tried to show it like that', not Wolfe's own sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "5": {
    "index": 5,
@@ -17762,10 +17764,11 @@
   },
   "10": {
    "index": 10,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'Every once in a while you say, \"Gee, that's neat; I'll do that.\" And you do it. I wasn't writing the whole book that way. The book isn't intended as an allegory.' (p.118)",
-   "note": "Quote verbatim including the period. The impulse phrasing on the page is 'Gee, that's neat; I'll do that.' The denial is singular ('The book') where the claim generalises to 'the books'; he separately denies allegory for Free Live Free on p.128 ('I wasn't trying to write allegory').",
-   "fromFile": "verdicts-wolfe-i0-14.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The book isn't intended as an allegory",
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: the denial is singular ('The book') where the claim generalises (the [7] defect). Verifier's note: Quote verbatim including the period. The impulse phrasing on the page is 'Gee, that's neat; I'll do that.' The denial is singular ('The book') where the claim generalises to 'the books'; he separately denies allegory for Free Live Free on p.128 ('I wasn't trying to write allegory'). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"denies the books are allegories\" — the page's denial is singular, 'The book isn't intended as an allegory.'",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "11": {
    "index": 11,
@@ -17805,17 +17808,19 @@
   },
   "16": {
    "index": 16,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"she is saying something that only Maytera Marble would say\"",
-   "note": "Raw PDF p.168. Quote verbatim. Interviewer's question supplies the crowded-scene limb ('scenes with a number of characters all speaking in turn without being identified'); Wolfe gives both mechanisms: 'certain characteristic phrases or mistakes, or whatever, that will identify him as the speaker' and the circumstance test ('the speech that... Maytera Marble makes under a certain circumstance, is not the speech that Blood would make').",
-   "fromFile": "verdicts-wolfe-i15-29.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw PDF p.168. Quote verbatim. Interviewer's question supplies the crowded-scene limb ('scenes with a number of characters all speaking in turn without being identified'); Wolfe gives both mechanisms: 'certain characteristic phrases or mistakes, or whatever, that will identify him as the speaker' and the circumstance test ('the speech that... Maytera Marble makes under a certain circumstance, is not the speech that Blood would make').",
+   "unsupportedLimb": "\"crowded Long Sun scenes ... identified without tags\" — the note says the interviewer's question supplies the crowded-scene limb, not Wolfe's own sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "17": {
    "index": 17,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"or it isn't complex, it's simply confused\"; 10,000 parts shaken = \"a box of junk\"",
-   "note": "Raw PDF p.169. Quote verbatim. Machine limb verbatim too: 'If you have a machine with 10,000 parts and you shake them up in a box, what you have is a box of junk.' One hedge worth recording: Wolfe answers 'It's almost that it has to be', slightly softer than the claim's flat 'must be', but the proposition is his and affirmed.",
-   "fromFile": "verdicts-wolfe-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "or it isn't complex, it's simply confused",
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: 'It's almost that it has to be' is softer than 'must be' (the [0] defect). Verifier's note: Raw PDF p.169. Quote verbatim. Machine limb verbatim too: 'If you have a machine with 10,000 parts and you shake them up in a box, what you have is a box of junk.' One hedge worth recording: Wolfe answers 'It's almost that it has to be', slightly softer than the claim's flat 'must be', but the proposition is his and affirmed. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"must be\" — Wolfe answers 'It's almost that it has to be', softer than the claim's flat modal.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "18": {
    "index": 18,
@@ -17841,10 +17846,11 @@
   },
   "21": {
    "index": 21,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"I think it's mostly laziness. Mental sloth more than anything else.\"",
-   "note": "Raw PDF pp.172-173. Quote verbatim. Big-city limb verbatim: 'If you look at a big city, you discover that, on various levels of society, people are talking in ways that are almost different languages already.' The monoculture-criticism limb is established in the question ('you have in the past criticised sf works that depict monocultured worlds') and affirmed by the answer.",
-   "fromFile": "verdicts-wolfe-i15-29.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw PDF pp.172-173. Quote verbatim. Big-city limb verbatim: 'If you look at a big city, you discover that, on various levels of society, people are talking in ways that are almost different languages already.' The monoculture-criticism limb is established in the question ('you have in the past criticised sf works that depict monocultured worlds') and affirmed by the answer.",
+   "unsupportedLimb": "\"rejects monocultured SF worlds\" — the note says the monoculture-criticism limb is established in the interviewer's question and only affirmed by the answer.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "22": {
    "index": 22,
@@ -17985,10 +17991,11 @@
   },
   "41": {
    "index": 41,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"criticism for being unreadable and overcomplex... 'Well, I'll loosen up.'\"",
-   "note": "MIT Technology Review 2014 raw (HTTP 200, full article text retrieved, section 'EDITING AND WRITING'). Quote verbatim inside: 'It's that I've gotten so much criticism for being unreadable and overcomplex and hard to get into and all this stuff. And I thought, \"Well, I'll loosen up.\"' The shorter-paragraphs/looser-tone description is the interviewer's, which Wolfe re-explains ('It's not that, really') by the criticism — exactly the attribution the claim makes.",
-   "fromFile": "verdicts-wolfe-i30-44.json"
+   "verdict": "PARTIAL",
+   "trueWording": "criticism for being unreadable and overcomplex... 'Well, I'll loosen up.'",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: MIT Technology Review 2014 raw (HTTP 200, full article text retrieved, section 'EDITING AND WRITING'). Quote verbatim inside: 'It's that I've gotten so much criticism for being unreadable and overcomplex and hard to get into and all this stuff. And I thought, \"Well, I'll loosen up.\"' The shorter-paragraphs/looser-tone description is the interviewer's, which Wolfe re-explains ('It's not that, really') by the criticism — exactly the attribution the claim makes.",
+   "unsupportedLimb": "\"the shorter paragraphs and looser tone of his later books\" — the note says that description is the interviewer's, not Wolfe's.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "42": {
    "index": 42,
@@ -18013,10 +18020,11 @@
   },
   "45": {
    "index": 45,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"he's just giving you what he has seen\"",
-   "note": "Raw MIT Tech Review page fetched with a browser UA (200, 468KB). Wolfe: \"I think a naive observer is more interesting to read because he's just giving you what he has seen. If you've ever listened to people giving testimony at a trial, they are almost incapable of distinguishing between what they have actually seen or heard and their opinions of what it means.\" Quote verbatim. Wording note: the page says \"people giving testimony at a trial\", not literally \"adult witnesses\" — the child/adult contrast is the question's frame (young narrators, \"what Maisie knew\"); substance of the limb is fully supported.",
-   "fromFile": "verdicts-wolfe-i45-59.json"
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: 'people giving testimony at a trial', not 'adult witnesses'; the child/adult contrast is the question's frame. Verifier's note: Raw MIT Tech Review page fetched with a browser UA (200, 468KB). Wolfe: \"I think a naive observer is more interesting to read because he's just giving you what he has seen. If you've ever listened to people giving testimony at a trial, they are almost incapable of distinguishing between what they have actually seen or heard and their opinions of what it means.\" Quote verbatim. Wording note: the page says \"people giving testimony at a trial\", not literally \"adult witnesses\" — the child/adult contrast is the question's frame (young narrators, \"what Maisie knew\"); substance of the limb is fully supported.",
+   "unsupportedLimb": "\"adult witnesses\" — the page says 'people giving testimony at a trial'; the child/adult contrast is the interviewer's frame.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "46": {
    "index": 46,
@@ -18127,10 +18135,11 @@
   },
   "61": {
    "index": 61,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"I could have done everything in third person, but it would have been dead there on the page. The chief difficulty was balancing the stories -- not letting one storyline run away with the book.\"",
-   "note": "Quote verbatim. The interviewer's question frames the approach as the interweaving of past/present with uncertain narrator identities, so 'interwoven narrators' is the question's own wording. Minor nuance: Wolfe's primary stated reason is 'that was what I had to do to tell the story'; the third-person remark is his supporting contrast, exactly as the claim renders it.",
-   "fromFile": "verdicts-wolfe-i60-74.json"
+   "verdict": "PARTIAL",
+   "trueWording": "it would have been dead there on the page",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim. The interviewer's question frames the approach as the interweaving of past/present with uncertain narrator identities, so 'interwoven narrators' is the question's own wording. Minor nuance: Wolfe's primary stated reason is 'that was what I had to do to tell the story'; the third-person remark is his supporting contrast, exactly as the claim renders it. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"interwoven narrators\" is the interviewer's own wording, and the note records that Wolfe's primary stated reason is 'that was what I had to do to tell the story', the third-person remark being a supporting contrast.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "62": {
    "index": 62,
@@ -18149,10 +18158,11 @@
   },
   "64": {
    "index": 64,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"If human beings did not prey on one another, the inhumi could not prey on us. That's all. It isn't complicated, and I thought that everyone would get it.\"",
-   "note": "Quote verbatim; the parenthetical restates Wolfe's conditional as a causal, which the page supports. Surprise is carried by the following sentence: 'Maybe the thought of human beings not preying on their own kind is just too foreign.'",
-   "fromFile": "verdicts-wolfe-i60-74.json"
+   "verdict": "PARTIAL",
+   "trueWording": "If human beings did not prey on one another, the inhumi couldn't",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim; the parenthetical restates Wolfe's conditional as a causal, which the page supports. Surprise is carried by the following sentence: 'Maybe the thought of human beings not preying on their own kind is just too foreign.' [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"(they prey on us because we prey on each other)\" — the note says the parenthetical restates Wolfe's conditional as a causal.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "65": {
    "index": 65,
@@ -18249,10 +18259,11 @@
   },
   "78": {
    "index": 78,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "You're right, and they are my mistakes.",
-   "note": "Q28 asks about Mint and Marble seeming to exchange places near the end of Exodus, deliberate or an auctorial/editorial mistake. Quote exact. The editorial aside is signed with initials - '[DRL: You can't imagine how relieved this made me! We read subtleties into Wolfe's least typos....]' - and the name Langford does not appear on cc77 itself; the publication's own index at ansible.uk/cc/ states 'Cloud Chamber is another bloody Langford fanzine', so the attribution holds within the source.",
-   "fromFile": "verdicts-wolfe-i75-89.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Q28 asks about Mint and Marble seeming to exchange places near the end of Exodus, deliberate or an auctorial/editorial mistake. Quote exact. The editorial aside is signed with initials - '[DRL: You can't imagine how relieved this made me! We read subtleties into Wolfe's least typos....]' - and the name Langford does not appear on cc77 itself; the publication's own index at ansible.uk/cc/ states 'Cloud Chamber is another bloody Langford fanzine', so the attribution holds within the source.",
+   "unsupportedLimb": "\"Langford notes\" — the note says the name Langford appears nowhere on cc77; the attribution rests on the initials 'DRL' plus the fanzine's index page.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "79": {
    "index": 79,
@@ -18270,10 +18281,11 @@
   },
   "81": {
    "index": 81,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "What he did, then, was to plant in my consciousness and yours the truth that society need not be as we see it around us.",
-   "note": "Quote exact. Supporting limbs on the page: 'There he found a quality -- let us call it Folk Law -- that has almost disappeared from his world and ours'; 'He uncovered a forgotten wisdom among the barbarian tribes... he had not only uncovered but understood it'; 'Having learned that, he created in Middle-earth a means of displaying it in the clearest and most favourable possible light.' The page's wording is 'created in Middle-earth a means' where the claim says 'built Middle-earth as a means'; the import is the same.",
-   "fromFile": "verdicts-wolfe-i75-89.json"
+   "verdict": "PARTIAL",
+   "trueWording": "society need not be as we see it around us",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote exact. Supporting limbs on the page: 'There he found a quality -- let us call it Folk Law -- that has almost disappeared from his world and ours'; 'He uncovered a forgotten wisdom among the barbarian tribes... he had not only uncovered but understood it'; 'Having learned that, he created in Middle-earth a means of displaying it in the clearest and most favourable possible light.' The page's wording is 'created in Middle-earth a means' where the claim says 'built Middle-earth as a means'; the import is the same. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"built Middle-earth as a means of displaying it\" — the note says the page's wording is 'created in Middle-earth a means'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "82": {
    "index": 82,
@@ -18307,10 +18319,11 @@
   },
   "86": {
    "index": 86,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "He is smart to make you smart as well.",
-   "note": "Rule 7: 'There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well.' Quote exact. The claim's 'the intelligence serves the tale' renders the page's 'the intelligence is less important than the tale'.",
-   "fromFile": "verdicts-wolfe-i75-89.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Rule 7: 'There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well.' Quote exact. The claim's 'the intelligence serves the tale' renders the page's 'the intelligence is less important than the tale'.",
+   "unsupportedLimb": "\"the intelligence serves the tale\" — the note says the page reads 'the intelligence is less important than the tale'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "87": {
    "index": 87,
@@ -18410,10 +18423,11 @@
   },
   "100": {
    "index": 100,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "never acknowledges the Claw raised Dorcas, though he knows its power",
-   "note": "No quote was supplied, so graded on substance. pfsmith: 'Severian indeed \"resurrects\" Dorcas with the Claw while traveling in the Botanic Gardens ... Severian is clearly aware of the Claw's power to resurrect others, because he uses it for this purpose several times later on. However, it seems very odd that nowhere in the text ... does Severian acknowledge that it was the Claw that raised Dorcas from the lake ... But Severian never explicitly states that he realizes he used the Claw on her.' AndyLove raised it first: 'Severian brings someone back to life accidentally (via the Claw ...) and never figures out that he's done so.' Both attributions verified against the comment bylines. One nuance short of verbatim: AndyLove says Severian never figures it out, pfsmith says he knows the Claw's power but never states it of Dorcas - the claim follows pfsmith.",
-   "fromFile": "verdicts-wolfe-i90-104.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: No quote was supplied, so graded on substance. pfsmith: 'Severian indeed \"resurrects\" Dorcas with the Claw while traveling in the Botanic Gardens ... Severian is clearly aware of the Claw's power to resurrect others, because he uses it for this purpose several times later on. However, it seems very odd that nowhere in the text ... does Severian acknowledge that it was the Claw that raised Dorcas from the lake ... But Severian never explicitly states that he realizes he used the Claw on her.' AndyLove raised it first: 'Severian brings someone back to life accidentally (via the Claw ...) and never figures out that he's done so.' Both attributions verified against the comment bylines. One nuance short of verbatim: AndyLove says Severian never figures it out, pfsmith says he knows the Claw's power but never states it of Dorcas - the claim follows pfsmith.",
+   "unsupportedLimb": "the plural \"commenters\" — the note says AndyLove's version (Severian never figures it out) differs from pfsmith's, and the claim follows pfsmith alone.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "101": {
    "index": 101,
@@ -18483,10 +18497,11 @@
   },
   "110": {
    "index": 110,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Wolfe encoder, reader decoder; choice confounds the reader",
-   "note": "Raw page (lareviewofbooks.org, HTTP 200, full article present). Verbatim: 'Wolfe is \"encoder\" and reader \"decoder of elliptical yet elegantly labyrinthine conundrums\" - or, as Wright says later ... \"This element of choice is Wolfe's principal device for confounding the reader.\"' Source named earlier as 'Peter Wright's Attending Daedalus'. Minor context: the second Wright quote is glossed as being about The Book of the New Sun, but its own wording says 'Wolfe's principal device'.",
-   "fromFile": "verdicts-wolfe-i105-119.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw page (lareviewofbooks.org, HTTP 200, full article present). Verbatim: 'Wolfe is \"encoder\" and reader \"decoder of elliptical yet elegantly labyrinthine conundrums\" - or, as Wright says later ... \"This element of choice is Wolfe's principal device for confounding the reader.\"' Source named earlier as 'Peter Wright's Attending Daedalus'. Minor context: the second Wright quote is glossed as being about The Book of the New Sun, but its own wording says 'Wolfe's principal device'.",
+   "unsupportedLimb": "\"the element of choice as his principal device\", stated generally — the note says the second Wright quote is glossed on the page as being about The Book of the New Sun.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "111": {
    "index": 111,
@@ -18710,10 +18725,11 @@
   },
   "142": {
    "index": 142,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"his post Wizard Knight novels... The subtext tends to replace the text.\"; \"he doesn't provide as many metatextual repetitions... I feel he started to play less and less fair\"",
-   "note": "Quote verbatim, and immediately preceded on the page by 'how utterly difficult getting to the bottom of his post Wizard Knight novels can be', supporting the post-Wizard Knight limb. The play-less-fair limb is supported later in the same interview (Aramini on 'his late work'), phrased as late work rather than post-Wizard Knight specifically, which the interview treats as the same body of books.",
-   "fromFile": "verdicts-wolfe-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"his post Wizard Knight novels... The subtext tends to replace the text.\"",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim, and immediately preceded on the page by 'how utterly difficult getting to the bottom of his post Wizard Knight novels can be', supporting the post-Wizard Knight limb. The play-less-fair limb is supported later in the same interview (Aramini on 'his late work'), phrased as late work rather than post-Wizard Knight specifically, which the interview treats as the same body of books. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"in the post-Wizard Knight novels ... plays less fair\" — the note says the play-less-fair limb is phrased on the page as 'his late work', not post-Wizard Knight.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "143": {
    "index": 143,
@@ -18745,17 +18761,19 @@
   },
   "147": {
    "index": 147,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"Wolfe told me once that, having been told so often that he was considered 'a difficult writer,' he strove in his later works to make his style simpler and more accessible.\"",
-   "note": "Quote verbatim, spoken in a 'Nigel:' turn. Interviewer identified on the page as 'Ultan's Library co-editor Nigel Price', so the 'told Nigel Price' limb holds.",
-   "fromFile": "verdicts-wolfe-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "having been told so often that he was considered 'a difficult writer'",
+   "note": "COMPLETENESS CRITIC (r7): Price reporting a private conversation — private conversation, sole basis with [41]. Verifier's note: Quote verbatim, spoken in a 'Nigel:' turn. Interviewer identified on the page as 'Ultan's Library co-editor Nigel Price', so the 'told Nigel Price' limb holds. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Wolfe told Nigel Price\" — a private conversation reported by Price, with no primary record.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "148": {
    "index": 148,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"for pleasure he was mostly reading classic detective stories, and I think that they provided the stylistic model for his writing\"",
-   "note": "Quote verbatim in Nigel Price's turn. Stout/Sayers limb verbatim: 'He loved the Nero Wolfe mysteries and the Lord Peter Winsey stories of Dorothy L. Sayers'. Wizard Knight limb verbatim: 'The Wizard Knight is Wolfe writing heroic fantasy as if he were channeling Rex Stout.' The page says the model was for 'his writing' rather than literally 'his late books', but the sentence is scoped by 'In terms of his own reading at this time' within an exchange about Wolfe's late works, so the limb is supported.",
-   "fromFile": "verdicts-wolfe-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "they provided the stylistic model for his writing",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim in Nigel Price's turn. Stout/Sayers limb verbatim: 'He loved the Nero Wolfe mysteries and the Lord Peter Winsey stories of Dorothy L. Sayers'. Wizard Knight limb verbatim: 'The Wizard Knight is Wolfe writing heroic fantasy as if he were channeling Rex Stout.' The page says the model was for 'his writing' rather than literally 'his late books', but the sentence is scoped by 'In terms of his own reading at this time' within an exchange about Wolfe's late works, so the limb is supported. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the stylistic model for his late books\" — the note says the page reads 'the stylistic model for his writing'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "149": {
    "index": 149,
@@ -18857,10 +18875,11 @@
   },
   "162": {
    "index": 162,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Silk \"does not question whether the Chenille he knows could be possessed\"",
-   "note": "Gerlach 1999, printed p. 157 (cite correct), same extracted PDF. Quote verbatim. The gap limb is on the page in the adjoining clauses: \"his concerns about the nature of his world are not those of the reader\", \"he accepts the concept of a god talking to him, because he has been raised to know the world as one that these gods rule\", and the mechanism is stated positively as the characters' own view - \"The reader is constantly tricked into accepting Silk's position ... because that's how everyone within the novel sees them\" - against the reader's \"humor of knowing that a theophany such as this cannot be exactly as Silk sees it.\" Gerlach never uses the phrase \"narratorial comment\", but he does locate the effect in the character's acceptance rather than in any narratorial gloss.",
-   "fromFile": "verdicts-wolfe-i150-164.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Gerlach 1999, printed p. 157 (cite correct), same extracted PDF. Quote verbatim. The gap limb is on the page in the adjoining clauses: \"his concerns about the nature of his world are not those of the reader\", \"he accepts the concept of a god talking to him, because he has been raised to know the world as one that these gods rule\", and the mechanism is stated positively as the characters' own view - \"The reader is constantly tricked into accepting Silk's position ... because that's how everyone within the novel sees them\" - against the reader's \"humor of knowing that a theophany such as this cannot be exactly as Silk sees it.\" Gerlach never uses the phrase \"narratorial comment\", but he does locate the effect in the character's acceptance rather than in any narratorial gloss.",
+   "unsupportedLimb": "\"rather than by narratorial comment\" — the note says Gerlach never uses the phrase 'narratorial comment'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "163": {
    "index": 163,
@@ -18885,10 +18904,11 @@
   },
   "166": {
    "index": 166,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "lacks the unifying force of a first-person narrator",
-   "note": "Raw PDF, printed p. 30: 'Another, Castleview (1990), projects the legendary figures of the Grail saga into a Chicago suburb with more success, although it, too, lacks the unifying force of a first-person narrator and threatens to collapse under the weight of its too-large cast.' Quote verbatim; 'weakened' is carried by 'threatens to collapse'. Farrell does grant Castleview 'more success' than There Are Doors, which the claim does not mention but does not deny.",
-   "fromFile": "verdicts-wolfe-i165-179.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw PDF, printed p. 30: 'Another, Castleview (1990), projects the legendary figures of the Grail saga into a Chicago suburb with more success, although it, too, lacks the unifying force of a first-person narrator and threatens to collapse under the weight of its too-large cast.' Quote verbatim; 'weakened' is carried by 'threatens to collapse'. Farrell does grant Castleview 'more success' than There Are Doors, which the claim does not mention but does not deny.",
+   "unsupportedLimb": "\"weakened by the absence of a first-person narrator\" — the note says 'weakened' is carried by 'threatens to collapse', which the page attaches to the too-large cast.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "167": {
    "index": 167,
@@ -18937,10 +18957,11 @@
   },
   "173": {
    "index": 173,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "an organising principle of form, a means of confounding interpretation",
-   "note": "Live page fetched raw (HTTP 200, browser UA) and de-tagged. Opening paragraph: 'ambiguity is the watchword to the text. More significantly, it is also an organising principle of form, a means of confounding interpretation, and a fundamental theme...'. Quote verbatim; 'not decoration but' is the claim's own rendering of Wright's 'More significantly, it is also', which the page supports rather than states.",
-   "fromFile": "verdicts-wolfe-i165-179.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live page fetched raw (HTTP 200, browser UA) and de-tagged. Opening paragraph: 'ambiguity is the watchword to the text. More significantly, it is also an organising principle of form, a means of confounding interpretation, and a fundamental theme...'. Quote verbatim; 'not decoration but' is the claim's own rendering of Wright's 'More significantly, it is also', which the page supports rather than states.",
+   "unsupportedLimb": "\"not decoration but\" — the note says this is the claim's own rendering of Wright's 'More significantly, it is also', which the page supports rather than states.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "174": {
    "index": 174,
@@ -18952,10 +18973,11 @@
   },
   "175": {
    "index": 175,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "authenticity can be validated from the clues Wolfe weaves",
-   "note": "Verbatim: 'this narrative is the contextualising document of the collection, whose authenticity can be validated from the clues Wolfe weaves into the text.' The authorship limb is carried by the next sentence: 'the reader can determine that the author of the story is Marsch-Trenchard (if s/he has noted Marsch-Trenchard's contempt for secondhand information... and his resolution to produce a novel [which] would only confuse his case)' — clues drawn from 'V.R.T.', i.e. elsewhere in the collection, against the document's own title-page attribution to John V. Marsch. Note the quoted sentence's word is 'authenticity'; 'authorship' rests on the adjoining sentence.",
-   "fromFile": "verdicts-wolfe-i165-179.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim: 'this narrative is the contextualising document of the collection, whose authenticity can be validated from the clues Wolfe weaves into the text.' The authorship limb is carried by the next sentence: 'the reader can determine that the author of the story is Marsch-Trenchard (if s/he has noted Marsch-Trenchard's contempt for secondhand information... and his resolution to produce a novel [which] would only confuse his case)' — clues drawn from 'V.R.T.', i.e. elsewhere in the collection, against the document's own title-page attribution to John V. Marsch. Note the quoted sentence's word is 'authenticity'; 'authorship' rests on the adjoining sentence.",
+   "unsupportedLimb": "\"authorship\" — the note says the quoted sentence's word is 'authenticity'; authorship rests on the adjoining sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "176": {
    "index": 176,
@@ -19083,17 +19105,19 @@
   },
   "193": {
    "index": 193,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "lack of discourse between colonizer and colonized... well argued and apposite",
-   "note": "Verbatim in Borski's second paragraph: 'Most of the points he makes, especially about the lack of discourse between colonizer and colonized, and the destabilizing effects such omissions have on reality, are well argued and apposite'. Endorsement limb confirmed by 'well argued and apposite'. Wording note: Borski writes 'lack of discourse' (claim says 'absence of any discourse') and 'on reality' unqualified (claim glosses it as 'the reality the book reports') - same substance, slightly stronger in the claim.",
-   "fromFile": "verdicts-wolfe-i180-194.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim in Borski's second paragraph: 'Most of the points he makes, especially about the lack of discourse between colonizer and colonized, and the destabilizing effects such omissions have on reality, are well argued and apposite'. Endorsement limb confirmed by 'well argued and apposite'. Wording note: Borski writes 'lack of discourse' (claim says 'absence of any discourse') and 'on reality' unqualified (claim glosses it as 'the reality the book reports') - same substance, slightly stronger in the claim.",
+   "unsupportedLimb": "\"absence of any discourse\" and \"the reality the book reports\" — the note says Borski writes 'lack of discourse' and 'on reality' unqualified, and calls the claim slightly stronger.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "194": {
    "index": 194,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Both men are served barley soup while imprisoned (list item 14)",
-   "note": "Item 14 of Borski's numbered list is verbatim: 'Both men are served barley soup while imprisoned.' The pattern limb is the list's stated purpose: 'Victor Trenchard and Number Five are symbolic twins, with life circumstances and ultimate fates irrevocably linked'. Note the list is not only small domestic detail - it also rests on major parallels (each kills an alternate version of himself, both arrested for Maitre's murder).",
-   "fromFile": "verdicts-wolfe-i180-194.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Item 14 of Borski's numbered list is verbatim: 'Both men are served barley soup while imprisoned.' The pattern limb is the list's stated purpose: 'Victor Trenchard and Number Five are symbolic twins, with life circumstances and ultimate fates irrevocably linked'. Note the list is not only small domestic detail - it also rests on major parallels (each kills an alternate version of himself, both arrested for Maitre's murder).",
+   "unsupportedLimb": "\"using small domestic repetitions\" — the note says the list is not only small domestic detail but also rests on major parallels.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "195": {
    "index": 195,
@@ -19111,10 +19135,11 @@
   },
   "197": {
    "index": 197,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "explicit mistranslations and substitutions by the translator Wolfe",
-   "note": "Latro chapter (PDF text ~p.41): 'He also notes that these explicit mistranslations and substitutions by the translator Wolfe \"[draw] attention to the gap between the signifier and what is signified...\" (188).' Quote verbatim, attributed to Wright at p.188 as the claim states; the page's adjective is 'explicit' where the claim says 'deliberate' — same substance (Wolfe writing as the scrolls' translator, with Soldier in the Mist p. xi cited just above).",
-   "fromFile": "verdicts-wolfe-i195-209.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Latro chapter (PDF text ~p.41): 'He also notes that these explicit mistranslations and substitutions by the translator Wolfe \"[draw] attention to the gap between the signifier and what is signified...\" (188).' Quote verbatim, attributed to Wright at p.188 as the claim states; the page's adjective is 'explicit' where the claim says 'deliberate' — same substance (Wolfe writing as the scrolls' translator, with Soldier in the Mist p. xi cited just above).",
+   "unsupportedLimb": "\"deliberate mistranslations\" — the note says the page's adjective is 'explicit'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "198": {
    "index": 198,
@@ -19175,10 +19200,11 @@
   },
   "206": {
    "index": 206,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the closest Wolfe normally gets to metaphor is when he allows one of his protagonists to tell a lie",
-   "note": "In the Fifth Head of Cerberus paragraph, as the claim's page field says. Quote verbatim. The page says 'one of his protagonists' where the claim says 'one of his characters' — a broadening of the same statement, not a different one.",
-   "fromFile": "verdicts-wolfe-i195-209.json"
+   "verdict": "PARTIAL",
+   "trueWording": "closest Wolfe gets to metaphor is a protagonist telling a lie",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: In the Fifth Head of Cerberus paragraph, as the claim's page field says. Quote verbatim. The page says 'one of his protagonists' where the claim says 'one of his characters' — a broadening of the same statement, not a different one. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"one of his characters\" — the note says the page reads 'one of his protagonists' and calls the claim a broadening.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "207": {
    "index": 207,
@@ -19210,10 +19236,11 @@
   },
   "211": {
    "index": 211,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Page: 'like so many other houses in Wolfe's work, where the home of the narrator is likely to combine the features of a prison, a \"pleasure garden,\" and a tomb'. The assigned quote 'the home of the narrator of a typical Wolfe tale' appears verbatim in the very next clause (the skull-analogue sentence).",
-   "fromFile": "verdicts-wolfe-i210-224.json"
+   "verdict": "PARTIAL",
+   "trueWording": "combine the features of a prison, a \"pleasure garden,\" and a tomb",
+   "note": "COMPLETENESS CRITIC (r7): the printed words 'a prison, a pleasure garden, and a tomb' exist only in the verifier's note, the row's quote is a different clause and its trueWording was empty — PARTIAL until re-pointed. Verifier's note: Page: 'like so many other houses in Wolfe's work, where the home of the narrator is likely to combine the features of a prison, a \"pleasure garden,\" and a tomb'. The assigned quote 'the home of the narrator of a typical Wolfe tale' appears verbatim in the very next clause (the skull-analogue sentence).",
+   "unsupportedLimb": "the quoted clause — the row's quote points at a different clause from the one carrying prison / pleasure garden / tomb; the row must be re-pointed before use.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "212": {
    "index": 212,
@@ -19304,10 +19331,11 @@
   },
   "224": {
    "index": 224,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Page (Person's question sets up 'characters all speaking in turn, without being identified'), Wolfe: 'When Maytera Marble talks, she is saying something that only Maytera Marble would say. When Blood speaks, he is saying something that only Blood would say. And so the reader, if the reader is intelligent, knows who said that from what was said.' Quote verbatim; page header confirms Lawrence Person, Nova Express Vol. 5 No. 1, Fall/Winter 1998.",
-   "fromFile": "verdicts-wolfe-i210-224.json"
+   "verdict": "PARTIAL",
+   "trueWording": "she is saying something that only Maytera Marble would say",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Page (Person's question sets up 'characters all speaking in turn, without being identified'), Wolfe: 'When Maytera Marble talks, she is saying something that only Maytera Marble would say. When Blood speaks, he is saying something that only Blood would say. And so the reader, if the reader is intelligent, knows who said that from what was said.' Quote verbatim; page header confirms Lawrence Person, Nova Express Vol. 5 No. 1, Fall/Winter 1998.",
+   "unsupportedLimb": "\"unlabelled speakers\" — the note says Person's question sets up the unidentified-speakers frame, not Wolfe's own sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "225": {
    "index": 225,
@@ -19333,10 +19361,11 @@
   },
   "228": {
    "index": 228,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "almost that it has to be, or it isn't complex, it's simply confused",
-   "note": "Verbatim; answers LP's question 'the more complex the story, the more clear the narrative structure should be?'. Wolfe hedges the first limb slightly ('It's almost that it has to be' rather than a flat 'has to be'), then gives the 10,000-part-machine-in-a-box illustration. Hedge noted, not a defect in the claim.",
-   "fromFile": "verdicts-wolfe-i225-239.json"
+   "verdict": "PARTIAL",
+   "trueWording": "almost that it has to be, or it isn't complex, simply confused",
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: 'It's almost that it has to be' is softer than 'has to be' (the [0] defect). Verifier's note: Verbatim; answers LP's question 'the more complex the story, the more clear the narrative structure should be?'. Wolfe hedges the first limb slightly ('It's almost that it has to be' rather than a flat 'has to be'), then gives the 10,000-part-machine-in-a-box illustration. Hedge noted, not a defect in the claim. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"has to be told in a clear structure\" — Wolfe's answer is 'It's almost that it has to be'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "229": {
    "index": 229,
@@ -19438,10 +19467,11 @@
   },
   "243": {
    "index": 243,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Wolfe also left subtle hints and lacunae that may never be explicitly referred to in the text.",
-   "note": "Verbatim, and the next sentence gives the example: 'a backyard full of morning glories is an intentional foreshadowing of events in Free Live Free, but it is apparent only to a reader with a horticultural background.' The sentence carries no footnote, so 'unattributed editorial synthesis' holds.",
-   "fromFile": "verdicts-wolfe-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "subtle hints and lacunae that may never be explicitly referred to",
+   "note": "COMPLETENESS CRITIC (r7): Wikipedia's unattributed editorial synthesis is not a distinct source. Verifier's note: Verbatim, and the next sentence gives the example: 'a backyard full of morning glories is an intentional foreshadowing of events in Free Live Free, but it is apparent only to a reader with a horticultural background.' The sentence carries no footnote, so 'unattributed editorial synthesis' holds. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the source itself — an unattributed editorial synthesis on Wikipedia, not a distinct source for the section.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "244": {
    "index": 244,
@@ -19459,10 +19489,11 @@
   },
   "246": {
    "index": 246,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Recent reading suggests that the range is actually between one thousand and thirty-thousand years",
-   "note": "Section 2.1, verbatim, directly after 'In \"Posthistory 101\" and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad' - the revision limb. He then refines: 'most accurately \"many chiliads,\" which means \"more than three chiliads\"', a narrowing the claim omits but does not misstate.",
-   "fromFile": "verdicts-wolfe-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the range is actually between one thousand and thirty-thousand years",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Section 2.1, verbatim, directly after 'In \"Posthistory 101\" and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad' - the revision limb. He then refines: 'most accurately \"many chiliads,\" which means \"more than three chiliads\"', a narrowing the claim omits but does not misstate. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"only a range between one thousand and thirty thousand years\" — the note records the page's own refinement to 'many chiliads', meaning more than three chiliads, which the claim omits.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "247": {
    "index": 247,
@@ -19526,10 +19557,11 @@
   },
   "255": {
    "index": 255,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"'V.R.T' is told anachronically, with the reader left to piece everything together from a fragmentary, disjointed narrative\"",
-   "note": "Raw HTML of ultan.org.uk fetched with a browser UA (HTTP 200) and stripped to text; quote present word for word. Byline confirms 'reviewed by Robert Borski', posted 28 August 2001. The review also names 'V.R.T.' as 'the closing' novella, so 'third novella' holds. Borski writes 'piece everything together' rather than 'the case', though the same review describes the frame as an officer 'seeking to adjudicate the case of John V. Marsch'.",
-   "fromFile": "verdicts-wolfe-i255-269.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"'V.R.T' is told anachronically, with the reader left to piece everything together",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw HTML of ultan.org.uk fetched with a browser UA (HTTP 200) and stripped to text; quote present word for word. Byline confirms 'reviewed by Robert Borski', posted 28 August 2001. The review also names 'V.R.T.' as 'the closing' novella, so 'third novella' holds. Borski writes 'piece everything together' rather than 'the case', though the same review describes the frame as an officer 'seeking to adjudicate the case of John V. Marsch'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"piece the case together\" — the note says Borski writes 'piece everything together' rather than 'the case'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "256": {
    "index": 256,
@@ -19562,10 +19594,11 @@
   },
   "260": {
    "index": 260,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"that's important, especially when I'm trying to capture a specific atmosphere or cultural attitude in a story\"",
-   "note": "Same raw SFS capture; quote verbatim. Wolfe's 'especially when' carries the claim's 'matters most when'; he is comparing occasions, and the page separately says character is the element he is most interested in overall.",
-   "fromFile": "verdicts-wolfe-i255-269.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"that's important, especially when I'm trying to capture a specific atmosphere or",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same raw SFS capture; quote verbatim. Wolfe's 'especially when' carries the claim's 'matters most when'; he is comparing occasions, and the page separately says character is the element he is most interested in overall. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"matters most when\" — the note says the page's wording is 'that's important, especially when', and that the page separately names character as the element he is most interested in overall.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "261": {
    "index": 261,
@@ -19618,10 +19651,11 @@
   },
   "268": {
    "index": 268,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"building theories by rubbing together two sentences two hundred pages apart\"",
-   "note": "Raw substack HTML fetched with a browser UA (HTTP 200), full post text present, not truncated by a paywall; byline 'Max Gladstone', dated Oct 14, 2022. Quote verbatim. 'rather than from anything stated outright' is supported in substance by the same essay ('vast churning implications invisible to the casual reader'), though not in those words. The quote sits in the paragraph beginning 'Second, when one puts forth a theory' (5th body paragraph, not 4th).",
-   "fromFile": "verdicts-wolfe-i255-269.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw substack HTML fetched with a browser UA (HTTP 200), full post text present, not truncated by a paywall; byline 'Max Gladstone', dated Oct 14, 2022. Quote verbatim. 'rather than from anything stated outright' is supported in substance by the same essay ('vast churning implications invisible to the casual reader'), though not in those words. The quote sits in the paragraph beginning 'Second, when one puts forth a theory' (5th body paragraph, not 4th).",
+   "unsupportedLimb": "\"rather than from anything stated outright\" — the note says this is supported in substance only, not in the essay's words.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "269": {
    "index": 269,
@@ -19689,10 +19723,11 @@
   },
   "278": {
    "index": 278,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"There are no obvious genre trappings in this opening paragraph, at all.\"",
-   "note": "Raw page. Verbatim, in the section headed \"What can an opening teach you?\", reinforced by \"There is nothing speculative, or even particularly fanciful happening here.\" One framing wrinkle short of a PARTIAL: the essay describes itself as dissecting \"a single paragraph\" rather than a sentence-by-sentence reading, but it is a close reading of that opening paragraph's own sentences, so the 'sentence-level' descriptor is not a false limb.",
-   "fromFile": "verdicts-wolfe-i270-284.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw page. Verbatim, in the section headed \"What can an opening teach you?\", reinforced by \"There is nothing speculative, or even particularly fanciful happening here.\" One framing wrinkle short of a PARTIAL: the essay describes itself as dissecting \"a single paragraph\" rather than a sentence-by-sentence reading, but it is a close reading of that opening paragraph's own sentences, so the 'sentence-level' descriptor is not a false limb.",
+   "unsupportedLimb": "\"a sentence-level reading\" — the note says the essay describes itself as dissecting a single paragraph, and calls this one framing wrinkle short of a PARTIAL.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "279": {
    "index": 279,
@@ -19789,10 +19824,11 @@
   },
   "292": {
    "index": 292,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "There's also, perhaps, a slight clue to the story in the sentence's grammar",
-   "note": "Live raw page (curl, 200; published November 9, 2017). The sentence under discussion is expressly the opening line of The Fifth Head of Cerberus. Page hedges with 'perhaps, a slight'; the following sentence ('We eventually do learn why that comma is missing') affirms the clue is real.",
-   "fromFile": "verdicts-wolfe-i285-299.json"
+   "verdict": "PARTIAL",
+   "trueWording": "There's also, perhaps, a slight clue to the story in the sentence's",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live raw page (curl, 200; published November 9, 2017). The sentence under discussion is expressly the opening line of The Fifth Head of Cerberus. Page hedges with 'perhaps, a slight'; the following sentence ('We eventually do learn why that comma is missing') affirms the clue is real. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"carries a clue to the story\" — the note says the page hedges with 'perhaps, a slight', which the claim drops.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "293": {
    "index": 293,
@@ -19916,10 +19952,11 @@
   },
   "310": {
    "index": 310,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "such efforts are particularly rewarding when applied to Wolfe's oeuvre",
-   "note": "Raw page fetched (HTTP 200), 'The Explicated Gene Wolfe', Flogging Babel, Oct 2009. Quote verbatim: '...because he puts so much more into his works than almost any other writer.' The page's word for the payoff limb is 'scholarship, both true and faux' being 'particularly rewarding'; the post's subject is annotation works (Lexicon Urthus, The Wizard Knight Companion), so 'annotation pays off' is the page's sense in other words. Sentence sits in the fifth paragraph, not the third.",
-   "fromFile": "verdicts-wolfe-i300-314.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw page fetched (HTTP 200), 'The Explicated Gene Wolfe', Flogging Babel, Oct 2009. Quote verbatim: '...because he puts so much more into his works than almost any other writer.' The page's word for the payoff limb is 'scholarship, both true and faux' being 'particularly rewarding'; the post's subject is annotation works (Lexicon Urthus, The Wizard Knight Companion), so 'annotation pays off' is the page's sense in other words. Sentence sits in the fifth paragraph, not the third.",
+   "unsupportedLimb": "\"annotation pays off\" — the note says the page's word for the payoff is 'scholarship, both true and faux' being 'particularly rewarding', i.e. the page's sense in other words.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "311": {
    "index": 311,
@@ -20014,10 +20051,11 @@
   },
   "324": {
    "index": 324,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "altogether possible to miss the subtle clues with which the book is filled ... and to still walk away touched by the book",
-   "note": "Quote verbatim. Both limbs supported: 'to miss them altogether' (miss entirely) and 'still walk away touched by the book' (still be moved). The page frames this as conditional on being ignorant of Wolfe's reputation, which does not contradict the claim.",
-   "fromFile": "verdicts-wolfe-i315-329.json"
+   "verdict": "PARTIAL",
+   "trueWording": "altogether possible to miss the subtle clues with which the book is",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim. Both limbs supported: 'to miss them altogether' (miss entirely) and 'still walk away touched by the book' (still be moved). The page frames this as conditional on being ignorant of Wolfe's reputation, which does not contradict the claim. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the unconditional framing — the note says the page makes the possibility conditional on the reader being ignorant of Wolfe's reputation.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "325": {
    "index": 325,
@@ -20057,10 +20095,11 @@
   },
   "330": {
    "index": 330,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "that’s what Wolfe himself said in “Words Weird and Wonderful.”",
-   "note": "Line reads: 'That’s what all the fans were saying, that the words were real, and then that’s what Wolfe himself said in “Words Weird and Wonderful.”' The interviewer's preceding question supplies 'real words and not Wolfe’s coinages'; the article is placed in The Castle of the Otter. Every limb supported.",
-   "fromFile": "verdicts-wolfe-i330-344.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Line reads: 'That’s what all the fans were saying, that the words were real, and then that’s what Wolfe himself said in “Words Weird and Wonderful.”' The interviewer's preceding question supplies 'real words and not Wolfe’s coinages'; the article is placed in The Castle of the Otter. Every limb supported.",
+   "unsupportedLimb": "\"real words, not coinages\" — the note says the interviewer's preceding question supplies that formulation, not Andre-Driussi's own sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "331": {
    "index": 331,
@@ -20093,10 +20132,11 @@
   },
   "335": {
    "index": 335,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "these include folk etymology, association, description, and commemoration",
-   "note": "Verbatim. Page: 'Latro uses a variety of methods to generate place names and, applying the categories provided by academic toponomy, we can identify that these include folk etymology, association, description, and commemoration.' Note the page's hedge is 'include' rather than an explicit 'four', but the essay's own summary enumerates exactly these four ('folk etymology, followed by the less frequent use of descriptive, associative, and commemorative place names') and its section structure follows them, so the four-process limb holds.",
-   "fromFile": "verdicts-wolfe-i330-344.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim. Page: 'Latro uses a variety of methods to generate place names and, applying the categories provided by academic toponomy, we can identify that these include folk etymology, association, description, and commemoration.' Note the page's hedge is 'include' rather than an explicit 'four', but the essay's own summary enumerates exactly these four ('folk etymology, followed by the less frequent use of descriptive, associative, and commemorative place names') and its section structure follows them, so the four-process limb holds.",
+   "unsupportedLimb": "\"four processes\" — the note says the page's hedge is 'include', with no explicit four.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "336": {
    "index": 336,
@@ -20251,17 +20291,19 @@
   },
   "357": {
    "index": 357,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "5HoC's opening line riffs on Proust's 'For a long time I went to bed early.'",
-   "note": "Verbatim: 'The opening line of The Fifth Head of Cerberus... is a riff on Proust’s “For a long time I went to bed early.”' By Matthew Keeley, Tor.com/Reactor, published 9 November 2017 (datePublished 2017-11-09). The page names Swann's Way as the work in the next sentence ('Readers unfamiliar with Swann’s Way... people who recognize the source quote'); it does not itself use the word 'opening' for the Proust line, though that line is Swann's Way's first sentence.",
-   "fromFile": "verdicts-wolfe-i345-359.json"
+   "verdict": "PARTIAL",
+   "trueWording": "5HoC's opening line riffs on Proust's 'For a long time I went",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim: 'The opening line of The Fifth Head of Cerberus... is a riff on Proust’s “For a long time I went to bed early.”' By Matthew Keeley, Tor.com/Reactor, published 9 November 2017 (datePublished 2017-11-09). The page names Swann's Way as the work in the next sentence ('Readers unfamiliar with Swann’s Way... people who recognize the source quote'); it does not itself use the word 'opening' for the Proust line, though that line is Swann's Way's first sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the opening of Proust's Swann's Way\" — the note says the page does not itself use the word 'opening' for the Proust line.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "358": {
    "index": 358,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "'There’s also, perhaps, a slight clue... in the sentence’s grammar'.",
-   "note": "Verbatim in the same paragraph. The page hedges with 'perhaps', which the claim drops; the claim's own wording ('a slight clue') keeps the page's low strength, so the limb stands.",
-   "fromFile": "verdicts-wolfe-i345-359.json"
+   "note": "COMPLETENESS CRITIC (r7), the r4 standard applied to the kept set: the page hedges with 'perhaps', the claim drops it. Verifier's note: Verbatim in the same paragraph. The page hedges with 'perhaps', which the claim drops; the claim's own wording ('a slight clue') keeps the page's low strength, so the limb stands.",
+   "unsupportedLimb": "\"carries a slight clue\" — the page reads 'There's also, perhaps, a slight clue', and the claim drops 'perhaps'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "359": {
    "index": 359,
@@ -20300,10 +20342,11 @@
   },
   "364": {
    "index": 364,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Gordon goes on to explain how the novella's theme of denying human individuality is underscored by small details in the text: the address of the house at 666",
-   "note": "Quote verbatim; the house-address example ('the address of the house at 666...') is on the page. Attribution limbs confirmed: 'Joan Gordon, author of a thin Starmont Press paperback about Gene Wolfe's works, published way back in 1986'. Minor metadata drift only: the claim's source line says 'Starmont House'; Kelly writes 'Starmont Press'.",
-   "fromFile": "verdicts-wolfe-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the novella's theme is underscored by small details in the text",
+   "note": "COMPLETENESS CRITIC (r7): the relayer is Mark R. Kelly, not Gordon (a misattribution in two places). Verifier's note: Quote verbatim; the house-address example ('the address of the house at 666...') is on the page. Attribution limbs confirmed: 'Joan Gordon, author of a thin Starmont Press paperback about Gene Wolfe's works, published way back in 1986'. Minor metadata drift only: the claim's source line says 'Starmont House'; Kelly writes 'Starmont Press'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the relay attribution — the words are Kelly's summary, not Gordon's; the claim's source line also reads 'Starmont House' where Kelly writes 'Starmont Press'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "365": {
    "index": 365,
@@ -20497,10 +20540,11 @@
   },
   "392": {
    "index": 392,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Whenever Severian uses a perhaps... I get nervous",
-   "note": "Same Wayback raw capture. The item is headed 'Suspicious sentence:' and quotes 'The knife had somehow fallen from the dead man's neck. Perhaps he had pulled it out in his agony.', then: 'Whenever Severian uses a perhaps, or one of its relatives, I get nervous. What other purpose would the line have? Is this someone half-healed by Severian's presence? Something entirely different?' The 'something is being covered' limb rests on the 'Suspicious sentence' heading plus those follow-up questions, which is the passage's plain sense.",
-   "fromFile": "verdicts-wolfe-i390-404.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same Wayback raw capture. The item is headed 'Suspicious sentence:' and quotes 'The knife had somehow fallen from the dead man's neck. Perhaps he had pulled it out in his agony.', then: 'Whenever Severian uses a perhaps, or one of its relatives, I get nervous. What other purpose would the line have? Is this someone half-healed by Severian's presence? Something entirely different?' The 'something is being covered' limb rests on the 'Suspicious sentence' heading plus those follow-up questions, which is the passage's plain sense.",
+   "unsupportedLimb": "\"a signal that something is being covered\" — the note says the limb rests on the 'Suspicious sentence' heading plus follow-up questions rather than on a statement.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "393": {
    "index": 393,
@@ -20602,10 +20646,11 @@
   },
   "407": {
    "index": 407,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "After Horn has identified himself as the narrator of Long Sun in the section entitled 'My Defense' (pp. 370-382), thus forcing the reader to re-appraise the whole of the preceding text",
-   "note": "Quote verbatim in the Exodus section. Nuance recorded, not a defect: 'My Defense' (pp. 370-382) is followed by a separate two-page 'Afterward' (pp. 382-383) by an unnamed narrator, so the self-identification sits in the concluding section of Horn's narrative rather than the literal final pages; the page frames the whole passage as how 'Exodus concludes'.",
-   "fromFile": "verdicts-wolfe-i405-419.json"
+   "verdict": "PARTIAL",
+   "trueWording": "After Horn has identified himself as the narrator of Long Sun in",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim in the Exodus section. Nuance recorded, not a defect: 'My Defense' (pp. 370-382) is followed by a separate two-page 'Afterward' (pp. 382-383) by an unnamed narrator, so the self-identification sits in the concluding section of Horn's narrative rather than the literal final pages; the page frames the whole passage as how 'Exodus concludes'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the closing section of Exodus\" — the note says 'My Defense' (pp. 370-382) is followed by a separate two-page 'Afterward', so the self-identification is not the literal closing section.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "408": {
    "index": 408,
@@ -20679,17 +20724,19 @@
   },
   "418": {
    "index": 418,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "but nevertheless it is catalogued, there it is on the page, a part of the collective history",
-   "note": "Quote verbatim. Every limb on the page: Louis Gold is introduced as 'a seller of rare but counterfeit books'; the volume is one he has just forged ('This book on my lap - I just wrote it'; 'I thought you just wrote it.' / 'Nevertheless it is catalogued.'); and Lee glosses the line as running from fabricated to catalogued to 'a part of the collective history', which is the claim's 'a record confers existence on what it lists'. Lee's own headline phrase is 'captures the power of narrative beautifully' - a narrative rather than archival emphasis, but the cataloguing-confers-existence reading is explicit in his gloss.",
-   "fromFile": "verdicts-wolfe-i405-419.json"
+   "verdict": "PARTIAL",
+   "trueWording": "but nevertheless it is catalogued, there it is on the page, a",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote verbatim. Every limb on the page: Louis Gold is introduced as 'a seller of rare but counterfeit books'; the volume is one he has just forged ('This book on my lap - I just wrote it'; 'I thought you just wrote it.' / 'Nevertheless it is catalogued.'); and Lee glosses the line as running from fabricated to catalogued to 'a part of the collective history', which is the claim's 'a record confers existence on what it lists'. Lee's own headline phrase is 'captures the power of narrative beautifully' - a narrative rather than archival emphasis, but the cataloguing-confers-existence reading is explicit in his gloss. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"capturing how a record confers existence on what it lists\" — the note says Lee's own headline phrase is 'captures the power of narrative beautifully', a narrative rather than archival emphasis.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "419": {
    "index": 419,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Wolfe's own comments about Peace suggest that he was concerned that he'd done too good of a job, that readers weren't getting it",
-   "note": "Quote verbatim. Both limbs supported: the comments are Wolfe's own, relayed unspecified by Lee, and the worry is that the concealment worked too well for readers ('that readers weren't getting it').",
-   "fromFile": "verdicts-wolfe-i405-419.json"
+   "verdict": "PARTIAL",
+   "trueWording": "he was concerned that he'd done too good of a job",
+   "note": "COMPLETENESS CRITIC (r7): Lee relaying unspecified comments — no primary. Verifier's note: Quote verbatim. Both limbs supported: the comments are Wolfe's own, relayed unspecified by Lee, and the worry is that the concealment worked too well for readers ('that readers weren't getting it'). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Wolfe's own comments on Peace\" — Lee names no occasion or text, so the relay has no primary source.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "420": {
    "index": 420,
@@ -20861,10 +20908,11 @@
   },
   "444": {
    "index": 444,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“The silence of the torturer also emphasises that the confession is not there for the benefit of the torturers, but to produce penitence in the accused, or to produce truth for the authorities”",
-   "note": "Same raw page. Quote verbatim. The claim compresses 'penitence in the accused, or ... truth for the authorities (be it judge or priest)' to 'penitence or truth for the authorities'; that reads the page correctly rather than adding to it.",
-   "fromFile": "verdicts-wolfe-i435-449.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the confession is not there for the benefit of the torturers",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same raw page. Quote verbatim. The claim compresses 'penitence in the accused, or ... truth for the authorities (be it judge or priest)' to 'penitence or truth for the authorities'; that reads the page correctly rather than adding to it. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"to produce penitence or truth for the authorities\" — the note says the claim compresses the page's 'penitence in the accused, or ... truth for the authorities', relocating the beneficiary of penitence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "445": {
    "index": 445,
@@ -20903,10 +20951,11 @@
   },
   "450": {
    "index": 450,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "no reviewer recognised Weer’s deathly state",
-   "note": "Live raw fetch of lareviewofbooks.org (HTTP 200) carries verbatim: 'as Wright points out, “no reviewer recognised Weer’s deathly state ... and the ghost’s story quickly became Wolfe’s first misinterpreted narrative.”' Wright's Attending Daedalus is named as the source two sentences earlier; Weer is identified as the novel's narrator. The live SPA HTML omits the byline, so the 'Joan Gordon' limb and the 30 April 2013 date were confirmed on the Wayback raw capture of the same URL ('We Read Things Differently By Joan Gordon APRIL 30, 2013'). 'When Peace first appeared' rests on 'no reviewer' + 'quickly became Wolfe's first misinterpreted narrative' plus the review's opening on the 1975 publication.",
-   "fromFile": "verdicts-wolfe-i450-464.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live raw fetch of lareviewofbooks.org (HTTP 200) carries verbatim: 'as Wright points out, “no reviewer recognised Weer’s deathly state ... and the ghost’s story quickly became Wolfe’s first misinterpreted narrative.”' Wright's Attending Daedalus is named as the source two sentences earlier; Weer is identified as the novel's narrator. The live SPA HTML omits the byline, so the 'Joan Gordon' limb and the 30 April 2013 date were confirmed on the Wayback raw capture of the same URL ('We Read Things Differently By Joan Gordon APRIL 30, 2013'). 'When Peace first appeared' rests on 'no reviewer' + 'quickly became Wolfe's first misinterpreted narrative' plus the review's opening on the 1975 publication.",
+   "unsupportedLimb": "\"when Peace first appeared\" — the note says this rests on 'no reviewer' plus the review's opening on the 1975 publication, not on a statement.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "451": {
    "index": 451,
@@ -20973,10 +21022,11 @@
   },
   "460": {
    "index": 460,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "purposeful in establishing, within the first pages, Severian as an unreliable narrator",
-   "note": "Live lists.urth.net is dead (curl exit 28, HTTP 000); recovered via the Wayback raw capture 20210416053637id_ of the same URL, whose 'link: rel=\"original\"' header matches. Message is by 'b sharp', Wed Sep 6 05:48:33 PDT 2006. Verbatim: 'they were Sev’s mistakes not Wolfe’s, and that they are purposeful in establishing, within the first pages, Severian as an unreliable narrator.' The rejection limb is explicit ('I can’t see a repeat of a mistake in an appendix as proof positive of auctorial error') against the quoted claim 'so the mistake is probably Wolfe’s'. The message page names the interlocutor only as 'Roy'; the surname Lackey was confirmed off-page from the archive's September 2006 author index (Roy C. Lackey posted five messages in this same 'Close Reading: Torturer Chapter I' thread).",
-   "fromFile": "verdicts-wolfe-i450-464.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live lists.urth.net is dead (curl exit 28, HTTP 000); recovered via the Wayback raw capture 20210416053637id_ of the same URL, whose 'link: rel=\"original\"' header matches. Message is by 'b sharp', Wed Sep 6 05:48:33 PDT 2006. Verbatim: 'they were Sev’s mistakes not Wolfe’s, and that they are purposeful in establishing, within the first pages, Severian as an unreliable narrator.' The rejection limb is explicit ('I can’t see a repeat of a mistake in an appendix as proof positive of auctorial error') against the quoted claim 'so the mistake is probably Wolfe’s'. The message page names the interlocutor only as 'Roy'; the surname Lackey was confirmed off-page from the archive's September 2006 author index (Roy C. Lackey posted five messages in this same 'Close Reading: Torturer Chapter I' thread).",
+   "unsupportedLimb": "\"Lackey's attribution\" — the note says the message page names the interlocutor only as 'Roy'; the surname was confirmed off-page from the archive's author index.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "461": {
    "index": 461,
@@ -21341,10 +21391,11 @@
   },
   "512": {
    "index": 512,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "has written a rather hagiographic text on the subject",
-   "note": "Live page raw. Sentence reads 'Peter Wright has written a rather hagiographic text on the subject', in the section on obscure diction/lexicons. The page word is 'article', hyperlinked to https://ultan.org.uk/review-botns/ — i.e. the Ultan's Library piece — so the claim's 'Ultan's Library review' is carried by the href on the raw page rather than by the visible text.",
-   "fromFile": "verdicts-wolfe-i508-542.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live page raw. Sentence reads 'Peter Wright has written a rather hagiographic text on the subject', in the section on obscure diction/lexicons. The page word is 'article', hyperlinked to https://ultan.org.uk/review-botns/ — i.e. the Ultan's Library piece — so the claim's 'Ultan's Library review' is carried by the href on the raw page rather than by the visible text.",
+   "unsupportedLimb": "\"Ultan's Library review\" — the note says the page's visible word is 'article' and the identification rests on the href rather than the visible text.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "513": {
    "index": 513,
@@ -21495,10 +21546,11 @@
   },
   "534": {
    "index": 534,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "no one part is whole",
-   "note": "enotes.com returned HTTP 403 to both plain and browser-UA requests; recovered via Wayback raw capture 20241114002444id_ (HTTP 200, full criticism text). Page: 'The difficulty with taking full satisfaction with The Shadow of the Torturer is that one can't; ... no one part is whole.' Citation block confirms F&SF Vol. 58 No. 5, May 1980, pp. 26-7, in CLC Vol. 25. Nuance: Budrys resists the word 'tetralogy', calling it 'one book with four aspects'.",
-   "fromFile": "verdicts-wolfe-i508-542.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: enotes.com returned HTTP 403 to both plain and browser-UA requests; recovered via Wayback raw capture 20241114002444id_ (HTTP 200, full criticism text). Page: 'The difficulty with taking full satisfaction with The Shadow of the Torturer is that one can't; ... no one part is whole.' Citation block confirms F&SF Vol. 58 No. 5, May 1980, pp. 26-7, in CLC Vol. 25. Nuance: Budrys resists the word 'tetralogy', calling it 'one book with four aspects'.",
+   "unsupportedLimb": "\"the tetralogy\" — the note says Budrys resists the word, calling it 'one book with four aspects'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "535": {
    "index": 535,
@@ -21586,10 +21638,11 @@
   },
   "547": {
    "index": 547,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "not the baroque weirdness of its textures",
-   "note": "eNotes live 403; read via Wayback raw 20250316194237id_. Verbatim in the third body paragraph: it is 'this very familiarity', not the baroque weirdness of its textures, that makes Sword of the Lictor so powerful. Referent note: the familiarity is immediately explained by Wolfe never losing sight of his sources and mythical resonances, and by his words sounding like forgotten friends, so the claim's 'familiarity of Wolfe's sources' is a fair but glossed reading. Page has 'its textures'; claim says 'his'. Citation: Fantasy Newsletter Vol. 4 No. 12, Dec 1981, pp. 16-17, 32.",
-   "fromFile": "verdicts-wolfe-i545-598.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: eNotes live 403; read via Wayback raw 20250316194237id_. Verbatim in the third body paragraph: it is 'this very familiarity', not the baroque weirdness of its textures, that makes Sword of the Lictor so powerful. Referent note: the familiarity is immediately explained by Wolfe never losing sight of his sources and mythical resonances, and by his words sounding like forgotten friends, so the claim's 'familiarity of Wolfe's sources' is a fair but glossed reading. Page has 'its textures'; claim says 'his'. Citation: Fantasy Newsletter Vol. 4 No. 12, Dec 1981, pp. 16-17, 32.",
+   "unsupportedLimb": "\"the familiarity of Wolfe's sources\" — the note calls this a glossed reading of the page's 'this very familiarity', and records that the page reads 'its textures' where the claim says 'his'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "548": {
    "index": 548,
@@ -21621,10 +21674,11 @@
   },
   "552": {
    "index": 552,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "may have seemed picaresque, somewhat random in nature",
-   "note": "eNotes live 403; read via Wayback raw 20241005181348id_. Verbatim in the paragraph following the '(pp. 1-2)' marker. Two context points: 'the first three volumes' is the CLC editor's bracketed gloss (page reads Severian's [experiences in the three volumes preceding The Citadel of the Autarch]), and Clute's sentence ends 'though colorful enough' before he insists nothing in the narrative is accidental. Source is Book World - The Washington Post, January 30, 1983.",
-   "fromFile": "verdicts-wolfe-i545-598.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: eNotes live 403; read via Wayback raw 20241005181348id_. Verbatim in the paragraph following the '(pp. 1-2)' marker. Two context points: 'the first three volumes' is the CLC editor's bracketed gloss (page reads Severian's [experiences in the three volumes preceding The Citadel of the Autarch]), and Clute's sentence ends 'though colorful enough' before he insists nothing in the narrative is accidental. Source is Book World - The Washington Post, January 30, 1983.",
+   "unsupportedLimb": "\"the first three volumes\" — the note says this is the CLC editor's bracketed gloss, not Clute's words, and that his sentence ends 'though colorful enough'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "553": {
    "index": 553,
@@ -21649,10 +21703,11 @@
   },
   "556": {
    "index": 556,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I had the feeling that I missed a lot",
-   "note": "Same live page. Post #13, article post-55425, author 'fortytwo', 2002-09-25T18:24:54+0100 - post number, handle and date all match. Verbatim; the sentence opens 'It's quite a while since I read the series and it held my interest, but'. The poster's gender is not stated on the page (the claim's 'his' is an assumption); he/she adds an intention to re-read.",
-   "fromFile": "verdicts-wolfe-i545-598.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same live page. Post #13, article post-55425, author 'fortytwo', 2002-09-25T18:24:54+0100 - post number, handle and date all match. Verbatim; the sentence opens 'It's quite a while since I read the series and it held my interest, but'. The poster's gender is not stated on the page (the claim's 'his' is an assumption); he/she adds an intention to re-read.",
+   "unsupportedLimb": "\"his\" — the note says the poster's gender is not stated on the page and calls the claim's pronoun an assumption.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "557": {
    "index": 557,
@@ -21691,10 +21746,11 @@
   },
   "562": {
    "index": 562,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I don't think I would recommend this book even to someone",
-   "note": "Live eyrie.org fetch, HTTP 200. Verbatim as the opening sentence of the final paragraph, which continues 'who read the original series'. Footer reads 'Reviewed: 2004-09-10', matching the cited date; rating 5 out of 10. One qualification the claim omits: the paragraph ends with an exception - read it if you are going on to an analysis such as Borski's Solar Labyrinth.",
-   "fromFile": "verdicts-wolfe-i545-598.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live eyrie.org fetch, HTTP 200. Verbatim as the opening sentence of the final paragraph, which continues 'who read the original series'. Footer reads 'Reviewed: 2004-09-10', matching the cited date; rating 5 out of 10. One qualification the claim omits: the paragraph ends with an exception - read it if you are going on to an analysis such as Borski's Solar Labyrinth.",
+   "unsupportedLimb": "the flat \"would not recommend ... even to someone who read the original series\" — the note records the paragraph's exception, that Allbery does recommend it to a reader going on to an analysis such as Borski's Solar Labyrinth.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "563": {
    "index": 563,
@@ -21775,10 +21831,11 @@
   },
   "574": {
    "index": 574,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "being dense, labyrinthine, and outright incomprehensible at times",
-   "note": "Live tachy.org fetch, HTTP 200. Verbatim in the third body paragraph. Precise page framing: the book 'doesn't seem to be discussed much outside of a few enclaves of hardcore SF/F readers, probably due to its reputation of' being dense etc. So the attribution is hedged ('probably') and is about how little the book is discussed outside a hardcore-reader niche; 'narrow readership' is a close paraphrase of that, not the page's own noun.",
-   "fromFile": "verdicts-wolfe-i545-598.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live tachy.org fetch, HTTP 200. Verbatim in the third body paragraph. Precise page framing: the book 'doesn't seem to be discussed much outside of a few enclaves of hardcore SF/F readers, probably due to its reputation of' being dense etc. So the attribution is hedged ('probably') and is about how little the book is discussed outside a hardcore-reader niche; 'narrow readership' is a close paraphrase of that, not the page's own noun.",
+   "unsupportedLimb": "\"attributes the book's narrow readership\" — the note says the page hedges with 'probably', speaks of how little the book is discussed outside a hardcore niche, and that 'narrow readership' is not the page's noun.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "575": {
    "index": 575,
@@ -21992,10 +22049,11 @@
   },
   "605": {
    "index": 605,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the first chapter has only four passive sentences",
-   "note": "Live www.reddit.com returned a 'Welcome to Reddit' gate; old.reddit.com gave the same interstitial and the .json route 403'd, so the raw old-reddit rendering was read from the Wayback raw capture (20240416175339id_). Quote verbatim in the passive-voice bullet. Two qualifiers the claim does not carry: the poster attributes the number to 'an online checker I used' (he says grammar is not his strong point and asks for a precise count), and the same sentence adds 'only two if you exclude dialogue' - his own comparison chart lists 2 passive clauses for The Shadow of the Torturer.",
-   "fromFile": "verdicts-wolfe-i602-628.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live www.reddit.com returned a 'Welcome to Reddit' gate; old.reddit.com gave the same interstitial and the .json route 403'd, so the raw old-reddit rendering was read from the Wayback raw capture (20240416175339id_). Quote verbatim in the passive-voice bullet. Two qualifiers the claim does not carry: the poster attributes the number to 'an online checker I used' (he says grammar is not his strong point and asks for a precise count), and the same sentence adds 'only two if you exclude dialogue' - his own comparison chart lists 2 passive clauses for The Shadow of the Torturer.",
+   "unsupportedLimb": "\"only four passive sentences\" — the note records two qualifiers the claim does not carry: the number comes from an online checker, and the same sentence says 'only two if you exclude dialogue'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "606": {
    "index": 606,
@@ -22027,10 +22085,11 @@
   },
   "610": {
    "index": 610,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "15 words per sentence average; longest sentence 96 words",
-   "note": "Same Wayback raw capture; both figures appear verbatim in one sentence of the metrics paragraph (quoted here in condensed form to stay under the twelve-word cap). The poster prefixes it with checking a few other metrics with online tools and the word 'apparently'.",
-   "fromFile": "verdicts-wolfe-i602-628.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same Wayback raw capture; both figures appear verbatim in one sentence of the metrics paragraph (quoted here in condensed form to stay under the twelve-word cap). The poster prefixes it with checking a few other metrics with online tools and the word 'apparently'.",
+   "unsupportedLimb": "the two figures — the note says the poster prefixes them with 'apparently' and credits them to online tools, which the claim drops.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "611": {
    "index": 611,
@@ -22111,10 +22170,11 @@
   },
   "622": {
    "index": 622,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "one a cultivated reader can read with pleasure and later reread",
-   "note": "Same raw cwhowell.com page. Quote verbatim, introduced as what Wolfe related in his essay 'Sun of Helioscope' about what a great story is; the sentence in the surrounding paragraph on content consumption attributes it to Gene Wolfe. One omission, not a contradiction: the page's phrase continues past 'later reread' with an intensifier the claim drops.",
-   "fromFile": "verdicts-wolfe-i602-628.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same raw cwhowell.com page. Quote verbatim, introduced as what Wolfe related in his essay 'Sun of Helioscope' about what a great story is; the sentence in the surrounding paragraph on content consumption attributes it to Gene Wolfe. One omission, not a contradiction: the page's phrase continues past 'later reread' with an intensifier the claim drops.",
+   "unsupportedLimb": "\"read with pleasure and later reread\" — the note says the page's phrase continues past 'later reread' with an intensifier the claim drops.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "623": {
    "index": 623,
@@ -22160,10 +22220,11 @@
   },
   "629": {
    "index": 629,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "none of my magazine articles have been reprinted anywhere",
-   "note": "Raw page ultan.org.uk/plant-engineering fetched (200, browser UA). Quote verbatim in Wolfe's closing written reply to Nigel Price; Wolfe prefaces it with a 'to the best of my knowledge' hedge the claim drops, and the framing paragraph ties the articles to Plant Engineering back issues.",
-   "fromFile": "verdicts-wolfe-i629-648.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw page ultan.org.uk/plant-engineering fetched (200, browser UA). Quote verbatim in Wolfe's closing written reply to Nigel Price; Wolfe prefaces it with a 'to the best of my knowledge' hedge the claim drops, and the framing paragraph ties the articles to Plant Engineering back issues.",
+   "unsupportedLimb": "\"none of his Plant Engineering magazine articles have been reprinted\" — the note says Wolfe prefaces it with a 'to the best of my knowledge' hedge the claim drops.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "630": {
    "index": 630,
@@ -22414,10 +22475,11 @@
   },
   "665": {
    "index": 665,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "there had been no re write",
-   "note": "Same answer, raw page (the interview text spells it 're write'). Galaxy rejected the story; he sent it to If, not knowing Pohl edited both; 'I got an acceptance from Pohl... with a check' and the letter praised the improvement. 'Resubmitted' is fair - Pohl saw the same story a second time, which is what his letter says.",
-   "fromFile": "verdicts-wolfe-i649-666.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same answer, raw page (the interview text spells it 're write'). Galaxy rejected the story; he sent it to If, not knowing Pohl edited both; 'I got an acceptance from Pohl... with a check' and the letter praised the improvement. 'Resubmitted' is fair - Pohl saw the same story a second time, which is what his letter says.",
+   "unsupportedLimb": "\"the resubmitted 'The Mountains are Mice'\" — the note says Galaxy rejected the story and he sent it to If not knowing Pohl edited both, so it was not a resubmission.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "666": {
    "index": 666,
@@ -22710,10 +22772,11 @@
   },
   "707": {
    "index": 707,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "His short story hereunder is a den of iniquity",
-   "note": "Same scan, unsigned headnote facing 'Suzanne Delage' (printed page 94 of the scan sequence), ending 'no one else could have written it.' The headnote carries no byline, so the attribution to Kidd rests on Le Guin's own statement earlier in the same volume that Virginia presents each story while Le Guin introduces the book entire — an inference from the book's stated division of labour, not from a signature.",
-   "fromFile": "verdicts-wolfe-i693-710.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same scan, unsigned headnote facing 'Suzanne Delage' (printed page 94 of the scan sequence), ending 'no one else could have written it.' The headnote carries no byline, so the attribution to Kidd rests on Le Guin's own statement earlier in the same volume that Virginia presents each story while Le Guin introduces the book entire — an inference from the book's stated division of labour, not from a signature.",
+   "unsupportedLimb": "the attribution to Kidd — the note says the headnote carries no byline and the attribution is an inference from the book's stated division of labour, not from a signature.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "708": {
    "index": 708,
@@ -22784,10 +22847,11 @@
   },
   "717": {
    "index": 717,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "share a vast omnivorousness and grasp",
-   "note": "Same sentence: Clute writes the line 'may be fairly understood to suggest that both authors share a vast omnivorousness and grasp', exemplified by The Book of the New Sun and Moby-Dick. Clute's hedge ('may be fairly understood') is softer than the claim's 'glosses ... as claiming', but the gloss is his and the quotation is exact.",
-   "fromFile": "verdicts-wolfe-i711-725.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same sentence: Clute writes the line 'may be fairly understood to suggest that both authors share a vast omnivorousness and grasp', exemplified by The Book of the New Sun and Moby-Dick. Clute's hedge ('may be fairly understood') is softer than the claim's 'glosses ... as claiming', but the gloss is his and the quotation is exact.",
+   "unsupportedLimb": "\"glosses ... as claiming\" — the note says Clute's hedge is 'may be fairly understood to suggest', softer than the claim.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "718": {
    "index": 718,
@@ -22813,10 +22877,11 @@
   },
   "721": {
    "index": 721,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "'Wolfe' occurs zero times in the eight-page essay PDF",
-   "note": "PDF binary fetched (346,717 bytes, 8 pages) and text-extracted with pdftotext: 5,118 words, opening 'Elfland is what Lord Dunsany called the place', closing 'nothing, after all, is realer.' Case-insensitive grep for 'wolfe' and for 'melville' returns nothing. Claim carries no quotation, hence SUBSTANCE not VERBATIM; 'central essay on fantasy style' is the claimant's descriptor, and the essay is indeed about style in fantasy.",
-   "fromFile": "verdicts-wolfe-i711-725.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: PDF binary fetched (346,717 bytes, 8 pages) and text-extracted with pdftotext: 5,118 words, opening 'Elfland is what Lord Dunsany called the place', closing 'nothing, after all, is realer.' Case-insensitive grep for 'wolfe' and for 'melville' returns nothing. Claim carries no quotation, hence SUBSTANCE not VERBATIM; 'central essay on fantasy style' is the claimant's descriptor, and the essay is indeed about style in fantasy.",
+   "unsupportedLimb": "\"central essay on fantasy style\" — the note says 'central essay on fantasy style' is the claimant's descriptor, not the source's.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "722": {
    "index": 722,
@@ -22835,10 +22900,11 @@
   },
   "724": {
    "index": 724,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Thinking about Cordwainer Smith",
-   "note": "ursulakleguin.com/the-wave-in-the-mind, Table of Contents, 'Readings' section: '“Thinking about Cordwainer Smith”' verbatim, and in the same section '“Things Not Actually Present: On The Book of Fantasy and J.L. Borges”'. 0 occurrences of 'Wolfe' on the page. 'Appreciations' is the claimant's descriptor for those two pieces.",
-   "fromFile": "verdicts-wolfe-i711-725.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: ursulakleguin.com/the-wave-in-the-mind, Table of Contents, 'Readings' section: '“Thinking about Cordwainer Smith”' verbatim, and in the same section '“Things Not Actually Present: On The Book of Fantasy and J.L. Borges”'. 0 occurrences of 'Wolfe' on the page. 'Appreciations' is the claimant's descriptor for those two pieces.",
+   "unsupportedLimb": "\"appreciations\" — the note says this is the claimant's descriptor for the two pieces, not the page's word.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "725": {
    "index": 725,
@@ -22849,10 +22915,11 @@
   },
   "726": {
    "index": 726,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Literary agents, publishers, fan letters, other authors",
-   "note": "Content Description: correspondence series arranged in ten categories, that string among them; repository is University of Oregon Libraries SCUA, Coll 270. Page carries no container/item list and no correspondent names: 'Detailed Description of the Collection' is only a link to the UO guide, and Names and Subjects lists subject terms only. Whole page text is 11.4KB, read in full. Page says 'categories' where the claim says 'subseries'.",
-   "fromFile": "verdicts-wolfe-i726-742.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Content Description: correspondence series arranged in ten categories, that string among them; repository is University of Oregon Libraries SCUA, Coll 270. Page carries no container/item list and no correspondent names: 'Detailed Description of the Collection' is only a link to the UO guide, and Names and Subjects lists subject terms only. Whole page text is 11.4KB, read in full. Page says 'categories' where the claim says 'subseries'.",
+   "unsupportedLimb": "\"subseries\" — the note says the page's word is 'categories'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "727": {
    "index": 727,
@@ -22929,24 +22996,27 @@
   },
   "737": {
    "index": 737,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the paucity of detailed analyses available",
-   "note": "Cambridge Core Preface page fetched raw; phrase appears verbatim in the Preface text shown on the page, by-lined Peter Wright, Attending Daedalus pp. xi-xii, Liverpool University Press 2003, in the sentence beginning 'Confronted, then, with the magnitude and range of Wolfe's output...'. The phrase sits mid-Preface rather than in its first sentence, and the Preface itself opens the book.",
-   "fromFile": "verdicts-wolfe-i726-742.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Cambridge Core Preface page fetched raw; phrase appears verbatim in the Preface text shown on the page, by-lined Peter Wright, Attending Daedalus pp. xi-xii, Liverpool University Press 2003, in the sentence beginning 'Confronted, then, with the magnitude and range of Wolfe's output...'. The phrase sits mid-Preface rather than in its first sentence, and the Preface itself opens the book.",
+   "unsupportedLimb": "\"opens Attending Daedalus by naming\" — the note says the phrase sits mid-Preface, not in its first sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "738": {
    "index": 738,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "re-measured mean 32.52, SD 18.15, same 2,005-word window",
-   "note": "Live URL 403s behind Cloudflare with a browser UA; recovered by Wayback raw capture 20260315150230id_. Anchor quotation verbatim in the excerpt's opening paragraph. Independent re-measurement: the first 20 excerpt paragraphs total exactly 2,005 words, splitting into 62 sentences - the same sentence count the claim's own arithmetic implies (2005/32.34) - giving mean 32.52 and population SD 18.15 against the claimed 32.34 and 18.18; the 0.6% gap is word-tokenisation, not a different text. Page names neither 1972 nor 'novella'; it is the 11/8/22 reissue.",
-   "fromFile": "verdicts-wolfe-i726-742.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live URL 403s behind Cloudflare with a browser UA; recovered by Wayback raw capture 20260315150230id_. Anchor quotation verbatim in the excerpt's opening paragraph. Independent re-measurement: the first 20 excerpt paragraphs total exactly 2,005 words, splitting into 62 sentences - the same sentence count the claim's own arithmetic implies (2005/32.34) - giving mean 32.52 and population SD 18.15 against the claimed 32.34 and 18.18; the 0.6% gap is word-tokenisation, not a different text. Page names neither 1972 nor 'novella'; it is the 11/8/22 reissue.",
+   "unsupportedLimb": "\"the 1972 novella\" — the note says the page names neither 1972 nor 'novella'; it is the 2022 reissue.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "739": {
    "index": 739,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "re-measured mean 13.64, SD 10.63 over 2,033 words",
-   "note": "Live URL 403s; recovered by Wayback raw capture 20240715194845id_. Anchor sentence verbatim and is the excerpt's first line, i.e. the opening of The Shadow of the Torturer within the Shadow & Claw omnibus (page frames it as 'the tale of young Severian', on sale 06/08/2021; it does not label a chapter). Re-measurement over the nearest whole-paragraph window, 2,033 words in 149 sentences, gives mean 13.64 and SD 10.63 against the claimed 13.75 and 10.66 - inside 1%.",
-   "fromFile": "verdicts-wolfe-i726-742.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live URL 403s; recovered by Wayback raw capture 20240715194845id_. Anchor sentence verbatim and is the excerpt's first line, i.e. the opening of The Shadow of the Torturer within the Shadow & Claw omnibus (page frames it as 'the tale of young Severian', on sale 06/08/2021; it does not label a chapter). Re-measurement over the nearest whole-paragraph window, 2,033 words in 149 sentences, gives mean 13.64 and SD 10.63 against the claimed 13.75 and 10.66 - inside 1%.",
+   "unsupportedLimb": "\"chapter one\" — the note says the page does not label a chapter, and the replication window is 2,033 words against the claimed 2,007.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "740": {
    "index": 740,
@@ -23002,17 +23072,19 @@
   },
   "747": {
    "index": 747,
-   "verdict": "VERIFIED_SUBSTANCE",
-   "trueWording": "Replication CVs 0.582, 0.718, 0.546, 0.626; Shadow the most variable.",
-   "note": "Four excerpt pages reached raw. The rank claim — Shadow of the Torturer narration the most variable of the four in sentence length — is confirmed by an independent narration-only pass. My coefficients of variation are 0.582 (1972), 0.718 (1980), 0.546 (Land Across) and 0.626 (A Borrowed Man), against the claimed 0.586 / 0.769 / 0.558 / 0.656. Three of the four land within 0.03; the 1980 value is 0.05 low in replication but still the highest of the four, so the ordering and the point stand.",
-   "fromFile": "verdicts-wolfe-i743-779.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Replication CVs 0.582, 0.718, 0.546, 0.626; Shadow the most variable",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Four excerpt pages reached raw. The rank claim — Shadow of the Torturer narration the most variable of the four in sentence length — is confirmed by an independent narration-only pass. My coefficients of variation are 0.582 (1972), 0.718 (1980), 0.546 (Land Across) and 0.626 (A Borrowed Man), against the claimed 0.586 / 0.769 / 0.558 / 0.656. Three of the four land within 0.03; the 1980 value is 0.05 low in replication but still the highest of the four, so the ordering and the point stand.",
+   "unsupportedLimb": "the stated coefficients of variation — the note's replication gives 0.582 / 0.718 / 0.546 / 0.626 against the claimed 0.586 / 0.769 / 0.558 / 0.656, so only the ordering is confirmed.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "748": {
    "index": 748,
-   "verdict": "VERIFIED_SUBSTANCE",
-   "trueWording": "Replication: 21.9, 9.2, 3.7 and 2.9 per cent.",
-   "note": "Four excerpt pages reached raw. An independent narration-only pass counting sentences that carry a parenthesis or a dash gives 21.9 per cent (1972), 9.2 (1980), 3.7 (2013) and 2.9 (2015), against the claimed 22.6 / 7.6 / 3.6 / 2.2. The monotone tenfold fall is reproduced and three of four figures land within 1.6 points, so the claim is sound as substance; treat the decimals as approximate.",
-   "fromFile": "verdicts-wolfe-i743-779.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Replication: 21.9, 9.2, 3.7 and 2.9 per cent",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Four excerpt pages reached raw. An independent narration-only pass counting sentences that carry a parenthesis or a dash gives 21.9 per cent (1972), 9.2 (1980), 3.7 (2013) and 2.9 (2015), against the claimed 22.6 / 7.6 / 3.6 / 2.2. The monotone tenfold fall is reproduced and three of four figures land within 1.6 points, so the claim is sound as substance; treat the decimals as approximate.",
+   "unsupportedLimb": "the stated percentages — the note's replication gives 21.9 / 9.2 / 3.7 / 2.9 against the claimed 22.6 / 7.6 / 3.6 / 2.2, and says to treat the decimals as approximate.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "749": {
    "index": 749,
@@ -23666,10 +23738,11 @@
   },
   "841": {
    "index": 841,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Blood blacked with smoke's a good ink",
-   "note": "Same raw page-3 extraction; sentence completes 'but the blood must be yours, mind.' It is the penultimate sentence of the closing paragraph (the essay's last sentence is the Homer line at index 842), so 'closes the piece' means the closing valediction. Ink-of-smoke-blackened-blood and must-be-the-writer's-own both exact.",
-   "fromFile": "verdicts-wolfe-i829-859.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same raw page-3 extraction; sentence completes 'but the blood must be yours, mind.' It is the penultimate sentence of the closing paragraph (the essay's last sentence is the Homer line at index 842), so 'closes the piece' means the closing valediction. Ink-of-smoke-blackened-blood and must-be-the-writer's-own both exact.",
+   "unsupportedLimb": "\"closes the piece\" — the note says the figure is the penultimate sentence; the essay's last sentence is the Homer line.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "842": {
    "index": 842,
@@ -23890,10 +23963,11 @@
   },
   "873": {
    "index": 873,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Cultures are like people, it seems",
-   "note": "Raw LARB page. In the paragraph on libraries and archives ('The reclone of Smithe is an archive...'), Gordon quotes the narrator Smithe, 'in the literary voice of his originary writer', on books; the quoted line continues 'Sure, they get old and die; but sometimes they die even when they are not very old at all.' Attribution to Wolfe's narrator and the cultures-die-like-people sense are both on the page; 'plain aphorism' is a description of the quoted sentence's own form, not Gordon's wording.",
-   "fromFile": "verdicts-wolfe-i860-896.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw LARB page. In the paragraph on libraries and archives ('The reclone of Smithe is an archive...'), Gordon quotes the narrator Smithe, 'in the literary voice of his originary writer', on books; the quoted line continues 'Sure, they get old and die; but sometimes they die even when they are not very old at all.' Attribution to Wolfe's narrator and the cultures-die-like-people sense are both on the page; 'plain aphorism' is a description of the quoted sentence's own form, not Gordon's wording.",
+   "unsupportedLimb": "\"plain aphorism\" — the note says this describes the quoted sentence's own form and is not Gordon's wording.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "874": {
    "index": 874,
@@ -24079,10 +24153,11 @@
   },
   "900": {
    "index": 900,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "pastiches of anthropological reports, fairy tales, aboriginal tales",
-   "note": "Verbatim in the pastiche paragraph. Robinson does not himself sort the list into fiction/non-fiction, but anthropological reports are listed and the same list carries other non-fiction forms (movie reviews, hunting articles), so the claim's 'non-fiction forms' reading holds on the page.",
-   "fromFile": "verdicts-wolfe-i897-945.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim in the pastiche paragraph. Robinson does not himself sort the list into fiction/non-fiction, but anthropological reports are listed and the same list carries other non-fiction forms (movie reviews, hunting articles), so the claim's 'non-fiction forms' reading holds on the page.",
+   "unsupportedLimb": "\"non-fiction forms\" — the note says Robinson does not himself sort the list into fiction and non-fiction.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "901": {
    "index": 901,
@@ -24234,10 +24309,11 @@
   },
   "922": {
    "index": 922,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "By framing the text as translation... language and its reliability",
-   "note": "ultan.org.uk fetched live. Section 'Who Writes?' In the same section Crampton writes of manuscripts Wolfe 'merely \"edits\" or \"translates\"' and of two writings 'supposedly translated by Wolfe'. The page's exact formulation is 'pointing to the question of language and its reliability'; the claim compresses this to 'the reliability of language', which is the same move.",
-   "fromFile": "verdicts-wolfe-i897-945.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: ultan.org.uk fetched live. Section 'Who Writes?' In the same section Crampton writes of manuscripts Wolfe 'merely \"edits\" or \"translates\"' and of two writings 'supposedly translated by Wolfe'. The page's exact formulation is 'pointing to the question of language and its reliability'; the claim compresses this to 'the reliability of language', which is the same move.",
+   "unsupportedLimb": "\"pointing to the reliability of language\" — the note says the page's formulation is 'pointing to the question of language and its reliability', which the claim compresses.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "923": {
    "index": 923,
@@ -24437,10 +24513,11 @@
   },
   "951": {
    "index": 951,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Perhaps what you're really seeing is Severian's straightforwardness, as opposed to",
-   "note": "Raw archive.org djvu text, p.7. Reply to the interviewer's 'unusual clarity ... so visual' question about the New Sun works. Two wording notes recorded, neither an unsupported limb: Wolfe hedges ('I don't really know' ... 'Perhaps'), and the page's contrast pair is named as 'someone like Number Five or Den' under the word 'protagonist', not 'narrators' — both are narrators of the earlier Fifth Head of Cerberus and Peace.",
-   "fromFile": "verdicts-wolfe-i947-977.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw archive.org djvu text, p.7. Reply to the interviewer's 'unusual clarity ... so visual' question about the New Sun works. Two wording notes recorded, neither an unsupported limb: Wolfe hedges ('I don't really know' ... 'Perhaps'), and the page's contrast pair is named as 'someone like Number Five or Den' under the word 'protagonist', not 'narrators' — both are narrators of the earlier Fifth Head of Cerberus and Peace.",
+   "unsupportedLimb": "\"attributes ... to Severian's straightforwardness\" — the note records Wolfe's hedges ('I don't really know', 'Perhaps') and that the page's word is 'protagonist', not 'narrators'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "952": {
    "index": 952,
@@ -24507,10 +24584,11 @@
   },
   "961": {
    "index": 961,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "He is 6'1\", and weighs 175 pounds",
-   "note": "Raw archive.org djvu text, p.8. Question: 'If Severian were standing in front of us, describe him externally and internally.' Wolfe first fixes a moment ('at the time he leaves the Citadel'), then gives the height and weight; the quoted clause about pallor, eyes and hair follows verbatim in the next sentence. Height 6'1\" and weight 175 pounds both confirmed. Note: the inventory continues past the physical into a mental description, as the question asked, so 'flat physical inventory' describes the opening half of the answer.",
-   "fromFile": "verdicts-wolfe-i947-977.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw archive.org djvu text, p.8. Question: 'If Severian were standing in front of us, describe him externally and internally.' Wolfe first fixes a moment ('at the time he leaves the Citadel'), then gives the height and weight; the quoted clause about pallor, eyes and hair follows verbatim in the next sentence. Height 6'1\" and weight 175 pounds both confirmed. Note: the inventory continues past the physical into a mental description, as the question asked, so 'flat physical inventory' describes the opening half of the answer.",
+   "unsupportedLimb": "\"a flat physical inventory\" — the note says the inventory continues past the physical into a mental description, so the descriptor covers only the opening half of the answer.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "962": {
    "index": 962,
@@ -24626,10 +24704,11 @@
   },
   "978": {
    "index": 978,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it encourages misreadings, demands thoughtful reflection",
-   "note": "Raw Cambridge Core Preface page (pp. xi-xii summary) fetched live, HTTP 200, browser UA. Quote contiguous and verbatim in the sentence beginning 'His fiction is intricately wrought...'. 'By the reader' is carried by the same sentence's continuation about involving the reader in interpretation; 'actively' is the claim's intensifier, not Wright's word, but adds no content.",
-   "fromFile": "verdicts-wolfe-i978-992.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw Cambridge Core Preface page (pp. xi-xii summary) fetched live, HTTP 200, browser UA. Quote contiguous and verbatim in the sentence beginning 'His fiction is intricately wrought...'. 'By the reader' is carried by the same sentence's continuation about involving the reader in interpretation; 'actively' is the claim's intensifier, not Wright's word, but adds no content.",
+   "unsupportedLimb": "\"actively\" — the note says this is the claim's intensifier, not Wright's word.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "979": {
    "index": 979,
@@ -24641,10 +24720,11 @@
   },
   "980": {
    "index": 980,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "complex and wily writer, ambiguous, subtle and playful",
-   "note": "Verbatim on the raw Preface page, introduced by 'as the majority of critics and reviewers who have approached his oeuvre would admit'. Claim's 'critics' narrows the page's 'critics and reviewers'; 'would call him' matches the page's 'would admit'.",
-   "fromFile": "verdicts-wolfe-i978-992.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim on the raw Preface page, introduced by 'as the majority of critics and reviewers who have approached his oeuvre would admit'. Claim's 'critics' narrows the page's 'critics and reviewers'; 'would call him' matches the page's 'would admit'.",
+   "unsupportedLimb": "\"the majority of critics\" — the note says the page reads 'the majority of critics and reviewers', which the claim narrows.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "981": {
    "index": 981,
@@ -24704,10 +24784,11 @@
   },
   "989": {
    "index": 989,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a great deal of knowledge can be intuited",
-   "note": "Verbatim on the raw 'Cues' page. Wright names 'his interview with Larry McCaffery for Science-Fiction Studies' two sentences earlier and then quotes Wolfe; the page's full clause conditions on 'if you know something about the words people use', slightly tighter than the claim's 'from the words people use'. The page carries no date for the interview.",
-   "fromFile": "verdicts-wolfe-i978-992.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim on the raw 'Cues' page. Wright names 'his interview with Larry McCaffery for Science-Fiction Studies' two sentences earlier and then quotes Wolfe; the page's full clause conditions on 'if you know something about the words people use', slightly tighter than the claim's 'from the words people use'. The page carries no date for the interview.",
+   "unsupportedLimb": "\"from the words people use\" — the note says the page's clause conditions on 'if you know something about the words people use'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "990": {
    "index": 990,
@@ -24725,10 +24806,11 @@
   },
   "992": {
    "index": 992,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "willing to question their own literary assumptions, pause, reflect and reread",
-   "note": "Raw Cambridge Core 'A Solar Labyrinth' chapter page fetched live, HTTP 200; page range 'pp. 166 - 182' confirmed. Quote verbatim; the page says the text is organised to be 'understood, or at least appreciated, only by those readers who are willing to...', which the claim compresses to 'rewards only readers'. The page names The Urth Cycle in the next sentence, supporting the work limb.",
-   "fromFile": "verdicts-wolfe-i978-992.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw Cambridge Core 'A Solar Labyrinth' chapter page fetched live, HTTP 200; page range 'pp. 166 - 182' confirmed. Quote verbatim; the page says the text is organised to be 'understood, or at least appreciated, only by those readers who are willing to...', which the claim compresses to 'rewards only readers'. The page names The Urth Cycle in the next sentence, supporting the work limb.",
+   "unsupportedLimb": "\"rewards only readers\" — the note says the page reads 'understood, or at least appreciated, only by those readers', which the claim compresses.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "993": {
    "index": 993,
@@ -24739,10 +24821,11 @@
   },
   "994": {
    "index": 994,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a narrator who omitted or corrupted what happened",
-   "note": "Same Summary paragraph: the words are Bioy Cesares's scheme in the Borges passage Wright quotes, and Wright applies it to Wolfe explicitly ('an analogue of the Borgesian character'), then to Severian. Page attributes the words to Borges's character rather than to Borges speaking directly.",
-   "fromFile": "verdicts-wolfe-i993-1007.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same Summary paragraph: the words are Bioy Cesares's scheme in the Borges passage Wright quotes, and Wright applies it to Wolfe explicitly ('an analogue of the Borgesian character'), then to Severian. Page attributes the words to Borges's character rather than to Borges speaking directly.",
+   "unsupportedLimb": "\"Borges's figure\" — the note says the page attributes the words to Borges's character (Bioy Cesares's scheme), not to Borges speaking directly.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "995": {
    "index": 995,
@@ -24853,10 +24936,11 @@
   },
   "1010": {
    "index": 1010,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a building is to be remembered, as spacious and varied",
-   "note": "Summary, memory-art paragraph. All limbs supported: Yates is named ('As Frances Yates documents in her study The Art of Memory (1966)') and the orator limb is carried both by 'Like the Classical orators' and by the later 'the orator situates his mnemonic images'. Nuance, not an unsupported limb: the page credits the description itself to Quintilian as documented within Yates's study, so the words are Yates relaying Quintilian rather than Yates speaking in her own voice. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring.",
-   "fromFile": "verdicts-wolfe-i1008-1022.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Summary, memory-art paragraph. All limbs supported: Yates is named ('As Frances Yates documents in her study The Art of Memory (1966)') and the orator limb is carried both by 'Like the Classical orators' and by the later 'the orator situates his mnemonic images'. Nuance, not an unsupported limb: the page credits the description itself to Quintilian as documented within Yates's study, so the words are Yates relaying Quintilian rather than Yates speaking in her own voice. chapter Summary extract, Cambridge Core page fetched raw via curl with a browser user agent; quote is a byte-exact contiguous substring.",
+   "unsupportedLimb": "\"Frances Yates's account\" — the note says the page credits the description to Quintilian as documented within Yates's study, not to Yates speaking in her own voice.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1011": {
    "index": 1011,
@@ -24951,10 +25035,11 @@
   },
   "1024": {
    "index": 1024,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"no plot is better than too much plot\"",
-   "note": "Live Cambridge Core Summary, penultimate paragraph. Verbatim. Caution for downstream use: Wolfe's full sentence opens by preferring plot to none and only then ranks excess plot worst, so the claim must not be read as Wolfe preferring plotlessness. Page metadata 'pp. 206 - 207' matches.",
-   "fromFile": "verdicts-wolfe-i1023-1037.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live Cambridge Core Summary, penultimate paragraph. Verbatim. Caution for downstream use: Wolfe's full sentence opens by preferring plot to none and only then ranks excess plot worst, so the claim must not be read as Wolfe preferring plotlessness. Page metadata 'pp. 206 - 207' matches.",
+   "unsupportedLimb": "the flat \"no plot is better than too much plot\" — the note says Wolfe's full sentence opens by preferring plot to none, so the claim must not be read as preferring plotlessness.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1025": {
    "index": 1025,
@@ -25035,10 +25120,11 @@
   },
   "1036": {
    "index": 1036,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"with rituals, guilds, myths and religions, and few machines\"",
-   "note": "Same Wayback capture. The page reads that the society described is largely of an antique or medieval character, then the quoted list. One wording note: the page says 'the society described' and never prints the name Urth, though it places the tetralogy on our Earth far into the future, which is the same referent.",
-   "fromFile": "verdicts-wolfe-i1023-1037.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same Wayback capture. The page reads that the society described is largely of an antique or medieval character, then the quoted list. One wording note: the page says 'the society described' and never prints the name Urth, though it places the tetralogy on our Earth far into the future, which is the same referent.",
+   "unsupportedLimb": "\"the society of Urth\" — the note says the page never prints the name Urth; it reads 'the society described'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1037": {
    "index": 1037,
@@ -25127,10 +25213,11 @@
   },
   "1049": {
    "index": 1049,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "robbed the narrator of his ability to see right and wrong",
-   "note": "Verbatim (the page adds the simile 'in much the same way a fish does not know it bathes'). One precision for downstream use: Wright's grammatical subject is not 'the institutions of St Croix' but a named list — cloning, gene manipulation, gene wolfing, and slavery; St Croix comes from the immediately preceding sentence, on the narrator 'and all the men of St Croix'.",
-   "fromFile": "verdicts-wolfe-i1038-1052.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Verbatim (the page adds the simile 'in much the same way a fish does not know it bathes'). One precision for downstream use: Wright's grammatical subject is not 'the institutions of St Croix' but a named list — cloning, gene manipulation, gene wolfing, and slavery; St Croix comes from the immediately preceding sentence, on the narrator 'and all the men of St Croix'.",
+   "unsupportedLimb": "\"the institutions of St Croix\" — the note says Wright's grammatical subject is cloning, gene manipulation, gene wolfing and slavery; St Croix comes from the preceding sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1050": {
    "index": 1050,
@@ -25148,10 +25235,11 @@
   },
   "1052": {
    "index": 1052,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "sometimes wrote them as he heard them but more often translated",
-   "note": "Ultan's Library essay fetched live; the Foreword passage is block-quoted in the Introduction section, cited to Soldier of the Mist 1986, p. xii (Tor hardback). Verbatim, continuing 'them when he understood (or believed he understood) their meanings'. The 'recorder' is Wolfe's 'original writer', i.e. Latro; the claim drops his 'sometimes', which the page keeps.",
-   "fromFile": "verdicts-wolfe-i1038-1052.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Ultan's Library essay fetched live; the Foreword passage is block-quoted in the Introduction section, cited to Soldier of the Mist 1986, p. xii (Tor hardback). Verbatim, continuing 'them when he understood (or believed he understood) their meanings'. The 'recorder' is Wolfe's 'original writer', i.e. Latro; the claim drops his 'sometimes', which the page keeps.",
+   "unsupportedLimb": "\"wrote place names as heard\" — the note says the claim drops the page's 'sometimes'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1053": {
    "index": 1053,
@@ -25395,10 +25483,11 @@
   },
   "1087": {
    "index": 1087,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I felt a bit stupid to have missed obvious clues",
-   "note": "Fourth paragraph, on the layers Wolfe put into the book. Page hedges with 'In a few places' and 'a bit'; the claim's unqualified 'felt stupid' is a mild flattening, not a break.",
-   "fromFile": "verdicts-wolfe-i1083-1097.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Fourth paragraph, on the layers Wolfe put into the book. Page hedges with 'In a few places' and 'a bit'; the claim's unqualified 'felt stupid' is a mild flattening, not a break.",
+   "unsupportedLimb": "\"felt stupid\" — the note says the page hedges with 'In a few places' and 'a bit', calling the claim a mild flattening.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1088": {
    "index": 1088,
@@ -25466,10 +25555,11 @@
   },
   "1097": {
    "index": 1097,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "that Severian is writing for would know and be able",
-   "note": "Comment by MattD, 28 November 2007, on the Waggish post: some element of the truth can be found from what Severian's public would know and could contradict if he lied. Hedged as 'some element', which the claim's 'truth can be recovered' slightly firms up.",
-   "fromFile": "verdicts-wolfe-i1083-1097.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Comment by MattD, 28 November 2007, on the Waggish post: some element of the truth can be found from what Severian's public would know and could contradict if he lied. Hedged as 'some element', which the claim's 'truth can be recovered' slightly firms up.",
+   "unsupportedLimb": "\"truth can be recovered\" — the note says the page hedges it as 'some element' of the truth.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1098": {
    "index": 1098,
@@ -25494,10 +25584,11 @@
   },
   "1101": {
    "index": 1101,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the great majority of it consists of finding more clues",
-   "note": "Same answer, closing movement: Wolfe turns from the reader solving his books to 'a real life situation' and 'actual police work', where reasoning from clues is little of the work. The likening is his own, carried by that continuous answer rather than by an explicit 'reading is like police work' sentence.",
-   "fromFile": "verdicts-wolfe-i1098-1112.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same answer, closing movement: Wolfe turns from the reader solving his books to 'a real life situation' and 'actual police work', where reasoning from clues is little of the work. The likening is his own, carried by that continuous answer rather than by an explicit 'reading is like police work' sentence.",
+   "unsupportedLimb": "\"likened interpretation to police work\" — the note says the likening is carried by the continuity of the answer rather than by an explicit sentence.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1102": {
    "index": 1102,
@@ -25585,10 +25676,11 @@
   },
   "1114": {
    "index": 1114,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"David felt that I should add one more paragraph saying\"",
-   "note": "Quote exact in the block-quoted 'Secrets of the Greeks' extract, cited (Castle of Days, 416-17). The added paragraph is explanatory (sun fixed, happy ending) and concerns the Citadel of the Autarch ending. 'Editor' is the page's substance not its word: Hartwell is called TBOTNS's 'first reader', the man who would publish Citadel and later bought the coda.",
-   "fromFile": "verdicts-wolfe-i1113-1127.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Quote exact in the block-quoted 'Secrets of the Greeks' extract, cited (Castle of Days, 416-17). The added paragraph is explanatory (sun fixed, happy ending) and concerns the Citadel of the Autarch ending. 'Editor' is the page's substance not its word: Hartwell is called TBOTNS's 'first reader', the man who would publish Citadel and later bought the coda.",
+   "unsupportedLimb": "\"his editor\" — the note says 'editor' is the page's substance not its word; Hartwell is called TBOTNS's 'first reader'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1115": {
    "index": 1115,
@@ -25694,10 +25786,11 @@
   },
   "1129": {
    "index": 1129,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Father was good. That is the hard part to explain",
-   "note": "Block quote from Return to the Whorl reproduced in the column, introduced as Hoof, one of Horn's children, who has taken over the task of writing the Book for a few chapters. The quoted passage is short declarative narration and is explicitly about what is hard to explain; Clute's surrounding paragraphs treat Silk's goodness as the book's hardest matter.",
-   "fromFile": "verdicts-wolfe-i1128-1142.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Block quote from Return to the Whorl reproduced in the column, introduced as Hoof, one of Horn's children, who has taken over the task of writing the Book for a few chapters. The quoted passage is short declarative narration and is explicitly about what is hard to explain; Clute's surrounding paragraphs treat Silk's goodness as the book's hardest matter.",
+   "unsupportedLimb": "\"a plain declarative voice for the hardest matter in the book\" — the note says the hardest-matter limb rests on Clute's surrounding paragraphs, and the voice description is the verifier's characterisation of the passage.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1130": {
    "index": 1130,
@@ -25870,10 +25963,11 @@
   },
   "1154": {
    "index": 1154,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Wolfe writes with the precision of an engineer",
-   "note": "Interview answer on how his approach differs from other critics; prefaced 'One of my starting principles was that', i.e. one of several, past tense.",
-   "fromFile": "verdicts-wolfe-i1143-1157.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Interview answer on how his approach differs from other critics; prefaced 'One of my starting principles was that', i.e. one of several, past tense.",
+   "unsupportedLimb": "\"Aramini's starting principle is\" — the note says the page reads 'One of my starting principles was', one of several and in the past tense.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1155": {
    "index": 1155,
@@ -25920,17 +26014,19 @@
   },
   "1161": {
    "index": 1161,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "about 220 short stories which were not excerpts from larger works",
-   "note": "Answer on how the corpus was divided. One nuance to carry: in the same sentence Aramini says he is grouping the novelettes in with the short stories, so the 220 is short stories plus novelettes as he counts them, and it excludes the individual Bibliomen entries.",
-   "fromFile": "verdicts-wolfe-i1158-1172.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Answer on how the corpus was divided. One nuance to carry: in the same sentence Aramini says he is grouping the novelettes in with the short stories, so the 220 is short stories plus novelettes as he counts them, and it excludes the individual Bibliomen entries.",
+   "unsupportedLimb": "\"about 220 Wolfe short stories\" — the note says Aramini groups the novelettes in with the short stories and excludes the individual Bibliomen entries.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1162": {
    "index": 1162,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Wolfe seems to have made a slip juggling his books",
-   "note": "Wayback raw capture; the live host timed out on every attempt (curl exit 28). Header confirms thalassocrat at nym.hush.com, Sat Oct 14 2006. Both descriptions are on the page: the green book 'no thicker than my index finger' when Severian gets it from Cyby, then too wide for the slot when delivered to Thecla. The page says 'the slot in her door', not 'cell door'; the cell is established elsewhere in the thread.",
-   "fromFile": "verdicts-wolfe-i1158-1172.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Wayback raw capture; the live host timed out on every attempt (curl exit 28). Header confirms thalassocrat at nym.hush.com, Sat Oct 14 2006. Both descriptions are on the page: the green book 'no thicker than my index finger' when Severian gets it from Cyby, then too wide for the slot when delivered to Thecla. The page says 'the slot in her door', not 'cell door'; the cell is established elsewhere in the thread.",
+   "unsupportedLimb": "\"cell door\" — the note says the page reads 'the slot in her door'; the cell is established elsewhere in the thread.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1163": {
    "index": 1163,
@@ -26027,10 +26123,11 @@
   },
   "1176": {
    "index": 1176,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Can you hear the difference in spelling between the spoken",
-   "note": "Raw Wayback capture 20211207113027id_ of 058679.html, same message, body paragraph 3 as claimed. Quote exact; the sentence names the two spellings and the next sentence says Lackey cannot hear it and doubts Severian could. The page names Severian as the character who cannot hear the distinction (Ouen speaks the name); the claim's plural 'characters' generalises that, and the substance — a spelling distinction inaudible inside the spoken scene — is supported.",
-   "fromFile": "verdicts-wolfe-i1173-1187.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw Wayback capture 20211207113027id_ of 058679.html, same message, body paragraph 3 as claimed. Quote exact; the sentence names the two spellings and the next sentence says Lackey cannot hear it and doubts Severian could. The page names Severian as the character who cannot hear the distinction (Ouen speaks the name); the claim's plural 'characters' generalises that, and the substance — a spelling distinction inaudible inside the spoken scene — is supported.",
+   "unsupportedLimb": "the plural \"characters\" — the note says the page names only Severian as unable to hear the distinction.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1177": {
    "index": 1177,
@@ -26139,10 +26236,11 @@
   },
   "1192": {
    "index": 1192,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "That turned out not to be true.",
-   "note": "Present verbatim inside the quoted (>-prefixed) block of message 058654. The page supports both limbs: the last line of Citadel has Severian writing in what would be the last year of the old sun, and Urth makes life go on forty more years. ATTRIBUTION CAVEAT (not a claim limb): the page nowhere names Roy C. Lackey - the message is by James B. Jordan and the quoted writer is unnamed ('At 01:16 AM 9/30/2006, you wrote'), so the Lackey byline is unverified by this source.",
-   "fromFile": "verdicts-wolfe-i1188-1202.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Present verbatim inside the quoted (>-prefixed) block of message 058654. The page supports both limbs: the last line of Citadel has Severian writing in what would be the last year of the old sun, and Urth makes life go on forty more years. ATTRIBUTION CAVEAT (not a claim limb): the page nowhere names Roy C. Lackey - the message is by James B. Jordan and the quoted writer is unnamed ('At 01:16 AM 9/30/2006, you wrote'), so the Lackey byline is unverified by this source.",
+   "unsupportedLimb": "the attribution to Roy C. Lackey — the note says the page nowhere names him; the message is by James B. Jordan and the quoted writer is unnamed.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1193": {
    "index": 1193,
@@ -26188,10 +26286,11 @@
   },
   "1199": {
    "index": 1199,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "obliged to be interesting but he doesn't have to be easy",
-   "note": "1989 review, parenthesis after the artistic-aims sentence: 'A writer, he once remarked, is...'. 'He' is Wolfe by the surrounding context. Form caveat (not a limb failure): Dirda reports the remark indirectly, without quotation marks, so it is a recalled paraphrase rather than a marked quotation.",
-   "fromFile": "verdicts-wolfe-i1188-1202.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: 1989 review, parenthesis after the artistic-aims sentence: 'A writer, he once remarked, is...'. 'He' is Wolfe by the surrounding context. Form caveat (not a limb failure): Dirda reports the remark indirectly, without quotation marks, so it is a recalled paraphrase rather than a marked quotation.",
+   "unsupportedLimb": "\"is quoted as having remarked\" — the note says Dirda reports the remark indirectly, without quotation marks, as a recalled paraphrase.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1200": {
    "index": 1200,
@@ -26251,10 +26350,11 @@
   },
   "1208": {
    "index": 1208,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"he never learned the name of the sailor\"",
-   "note": "In Wolfe's answer about rereading The Island of Dr. Moreau at about fifty; the page says the narrator mentions it 'just in passing', and the surrounding praise limb rests on Wolfe's 'hitting me like a brick' / 'too dumb to appreciate it as a boy'. Strictly the page attributes the passing mention to the narrator rather than to Wells by name. Raw page reached.",
-   "fromFile": "verdicts-wolfe-i1203-1217.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: In Wolfe's answer about rereading The Island of Dr. Moreau at about fifty; the page says the narrator mentions it 'just in passing', and the surrounding praise limb rests on Wolfe's 'hitting me like a brick' / 'too dumb to appreciate it as a boy'. Strictly the page attributes the passing mention to the narrator rather than to Wells by name. Raw page reached.",
+   "unsupportedLimb": "\"a detail Wells mentions only in passing\" — the note says the page attributes the passing mention to the narrator, not to Wells by name.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1209": {
    "index": 1209,
@@ -26272,17 +26372,19 @@
   },
   "1211": {
    "index": 1211,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"remind us that these are told tales, but also introduce layers\"",
-   "note": "Framing-devices paragraph (second body paragraph). Page hedges the phrase as layers of *possible* narrative slippage; the claim drops 'possible' but adds nothing the page denies, and the next sentence calls Wolfe's narrators famously tricky. Raw page reached.",
-   "fromFile": "verdicts-wolfe-i1203-1217.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Framing-devices paragraph (second body paragraph). Page hedges the phrase as layers of *possible* narrative slippage; the claim drops 'possible' but adds nothing the page denies, and the next sentence calls Wolfe's narrators famously tricky. Raw page reached.",
+   "unsupportedLimb": "\"layers of narrative slippage\" — the note says the page hedges it as layers of possible narrative slippage, which the claim drops.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1212": {
    "index": 1212,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"a mysterious pamphlet found in a library\"",
-   "note": "Same framing-devices paragraph; the page attaches it to 'Why I Was Hanged' and lists it alongside a manuscript found in a grave and a journal-and-audiotape log. One list item ('a story passed on by an old friend') is not a document type, so 'document types' is a slight generalisation of the list. Raw page reached.",
-   "fromFile": "verdicts-wolfe-i1203-1217.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same framing-devices paragraph; the page attaches it to 'Why I Was Hanged' and lists it alongside a manuscript found in a grave and a journal-and-audiotape log. One list item ('a story passed on by an old friend') is not a document type, so 'document types' is a slight generalisation of the list. Raw page reached.",
+   "unsupportedLimb": "\"document types\" — the note says one list item, a story passed on by an old friend, is not a document type.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1213": {
    "index": 1213,
@@ -26321,10 +26423,11 @@
   },
   "1218": {
    "index": 1218,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Wolfe doesn't foreground this transformation as most novelists do",
-   "note": "Raw live fetch, browser UA, HTTP 200. Quote is contiguous in the second of the three techniques (Severian's voice and character): the sentence runs on '...but the signposts are there:' and then enumerates them (love, adoptive fatherhood, vow to reform the Guild). Claim's 'leaving only signposts' is the contrast Beck draws, though he writes 'but the signposts are there' rather than 'only'.",
-   "fromFile": "verdicts-wolfe-i1218-1232.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Raw live fetch, browser UA, HTTP 200. Quote is contiguous in the second of the three techniques (Severian's voice and character): the sentence runs on '...but the signposts are there:' and then enumerates them (love, adoptive fatherhood, vow to reform the Guild). Claim's 'leaving only signposts' is the contrast Beck draws, though he writes 'but the signposts are there' rather than 'only'.",
+   "unsupportedLimb": "\"leaving only signposts\" — the note says Beck writes 'but the signposts are there', not 'only'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1219": {
    "index": 1219,
@@ -26356,10 +26459,11 @@
   },
   "1223": {
    "index": 1223,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "there are plenty of clues that give away Five's real name",
-   "note": "Same Wayback capture. Quote verbatim in a parenthetical; Fernandes says critics agree on one choice and withholds it as a spoiler. The 'never given' limb is supported earlier on the page: the boy 'does have a name, but we are never privy to this information'. 'Scattered in the text' is a fair rendering of 'plenty of clues', not the page's own word.",
-   "fromFile": "verdicts-wolfe-i1218-1232.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Same Wayback capture. Quote verbatim in a parenthetical; Fernandes says critics agree on one choice and withholds it as a spoiler. The 'never given' limb is supported earlier on the page: the boy 'does have a name, but we are never privy to this information'. 'Scattered in the text' is a fair rendering of 'plenty of clues', not the page's own word.",
+   "unsupportedLimb": "\"scattered in the text\" — the note says this is not the page's own word; the page reads 'plenty of clues'.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1224": {
    "index": 1224,
@@ -26475,10 +26579,11 @@
   },
   "1240": {
    "index": 1240,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "exact: \"The map was torn out of a book and shoved\"",
-   "note": "Reddit RSS raw. Comment t1_gin9po9 by u/aramini, continuing 'into another one in the wrong direction' inside a chain of theory notes, so the evidence limb holds. DATE DISCREPANCY: the page timestamps this comment 2021-01-09T11:04 UTC, not the 2021-01-08 in the record (aramini has other comments dated 01-08); the quoted sentence occurs exactly once in the thread. The identity 'Marc Aramini' is not stated on the page.",
-   "fromFile": "verdicts-wolfe-i1233-1247.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The map was torn out of a book and shoved",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Reddit RSS raw. Comment t1_gin9po9 by u/aramini, continuing 'into another one in the wrong direction' inside a chain of theory notes, so the evidence limb holds. DATE DISCREPANCY: the page timestamps this comment 2021-01-09T11:04 UTC, not the 2021-01-08 in the record (aramini has other comments dated 01-08); the quoted sentence occurs exactly once in the thread. The identity 'Marc Aramini' is not stated on the page.",
+   "unsupportedLimb": "\"Aramini\" — the note says the identity 'Marc Aramini' is not stated on the page, and the comment is timestamped 2021-01-09, not the 2021-01-08 in the record.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1241": {
    "index": 1241,
@@ -26490,17 +26595,19 @@
   },
   "1242": {
    "index": 1242,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "exact: \"unreliable narrative voices and characters in Moby-Dick, Ulysses, and Lolita\"",
-   "note": "Live reddit RSS raw. Opening post t3_1et7cug by u/WaysofReading, 2024-08-15T21:40. Note the author's own verb: Severian builds a text in ways that CONTRAST with those 'similarly divergent and unreliable' voices — membership in the family rides on 'similarly' and on his parenthetical that the book is on par with those texts, while the contrast is about manner.",
-   "fromFile": "verdicts-wolfe-i1233-1247.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Live reddit RSS raw. Opening post t3_1et7cug by u/WaysofReading, 2024-08-15T21:40. Note the author's own verb: Severian builds a text in ways that CONTRAST with those 'similarly divergent and unreliable' voices — membership in the family rides on 'similarly' and on his parenthetical that the book is on par with those texts, while the contrast is about manner.",
+   "unsupportedLimb": "\"places Severian in the line of\" — the note says the author's own verb is CONTRAST, membership riding on 'similarly' and on a parenthetical.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1243": {
    "index": 1243,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "exact: \"We never sense a hybrid; just Severian\"",
-   "note": "Reddit RSS raw. Comment t1_liv69oh by u/PatrickMcEvoyHalston, 2024-08-19T12:44. Qualifier to carry downstream: the sentence continues that when Severian is sick a Thecla is in charge of the mind — one voice at a time rather than a blend, not literally one voice throughout. He adds that the other autarchs read as resources to be mined, or background voices.",
-   "fromFile": "verdicts-wolfe-i1233-1247.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb of the claim. Verifier's note: Reddit RSS raw. Comment t1_liv69oh by u/PatrickMcEvoyHalston, 2024-08-19T12:44. Qualifier to carry downstream: the sentence continues that when Severian is sick a Thecla is in charge of the mind — one voice at a time rather than a blend, not literally one voice throughout. He adds that the other autarchs read as resources to be mined, or background voices.",
+   "unsupportedLimb": "\"the reader senses only the one narrator\" — the note says the page continues that when Severian is sick a Thecla is in charge of the mind: one voice at a time, not one voice throughout.",
+   "fromFile": "verdicts-wolfe-regrade-r7.json"
   },
   "1244": {
    "index": 1244,

@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 20:58:17 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:02:18 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -169,7 +169,7 @@
 | wolfe | finder | monographs | in-flight | 8 | — | 238 claims, complete=True @19:34:41 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |
-| wolfe | regrade | regrade-r7 | in-flight | 0 | — | — | 00:57:56 |
+| wolfe | regrade | regrade-r7 | in-flight | 0 | build-wolfe-r7.mjs | — | 01:02:16 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
