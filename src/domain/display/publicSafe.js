@@ -278,6 +278,35 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clone._seed;
     delete clone._regenSeed;
     delete clone._config;
+    // THE TWO CUSTOM-CONTENT EXACTNESS RECORDS (§912, R-G — defense in depth, no
+    // migration). `customContentRoster` records EVERY reviewed living-content
+    // definition that was in scope for a run — adopted or NOT — so it is the
+    // author's unadopted homebrew library rather than a property of the town, and
+    // `customContentProvenance` names which of them materialized. Every row carries
+    // the five stable, account-scoped `CUSTOM_DEFINITION_IDENTITY_KEYS`, which is
+    // exactly what lets an observer correlate one private definition across two
+    // published worlds.
+    //
+    // ⛔ AND THE OPT-IN DOES NOT COVER THEM. `gallery_share_dm` is scoped, in the
+    // owner's own words at the toggle, to "Secrets, plot hooks, NPC goals and
+    // relationships, your DM notes, and the DM Compass" becoming "publicly visible
+    // to anyone who opens this gallery page". It is a publication switch, not a
+    // transfer to the owner's other device: no reader of a full share is entitled
+    // to the author's private library, and no surface reads these keys off a
+    // shared dossier. Default mode already drops both through the fail-closed
+    // top-level allowlist; full mode skips that gate, so strip them explicitly —
+    // exactly as `dmNotes`, the seed carriers and `latentPantheon` are stripped
+    // above, and for the same reason each of those is.
+    //
+    // ⚠ THE SERVER TWIN IS NOT LANDED AND IS OWNER-GATED. `_gallery_dm_full_json`
+    // (migrations 120/129) still re-issues both keys server-side, so this is the
+    // CLIENT half only. A new `supabase/migrations/NNN_*.sql` adding them to that
+    // function's delete chain is a migration and belongs on the owner's desk with
+    // the mapEdits precedent (`townMapEditsPublicDrop.test.js` declines the same
+    // half). Landing the client half first costs nothing and reds nothing; it is
+    // strictly better than the gap it replaces.
+    delete clone.customContentRoster;
+    delete clone.customContentProvenance;
     // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting
     // pantheon (config.latentPantheon) NEVER leaves the account — not even on a
     // DM-full share. The owner's gallery_share_dm opt-in reveals THEIR authored

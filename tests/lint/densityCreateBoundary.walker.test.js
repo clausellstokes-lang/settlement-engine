@@ -496,12 +496,15 @@ describe('generation-law register (which LAW a birth mints)', () => {
         .map(row => row.reachesVia)
         .filter(Boolean),
     ])];
-    // The denominator this widening exists for, asserted rather than assumed: a
-    // declared row that fell out of the scan would take its own mint sites with
-    // it, and the arm would go quiet without going red.
-    for (const rel of Object.keys(PIPELINE_REACHERS)) {
-      expect(scanned, `${rel} is a declared row but is not scanned`).toContain(rel);
-    }
+    // ⚠ THE ARM THAT USED TO SIT HERE WAS A TAUTOLOGY, AND IT IS DELETED (§912,
+    // DEF-6). It looped `Object.keys(PIPELINE_REACHERS)` asserting each key was in
+    // `scanned` — a set built two statements above by spreading those very keys
+    // into it. It was TRUE FOR EVERY POSSIBLE TREE, including one where the
+    // widening had been reverted, so it guarded nothing while reading like the
+    // denominator's guard. What it CLAIMED to protect ("a declared row that fell
+    // out of the scan") cannot happen by construction; what actually protects the
+    // denominator is the staleness arm above, which holds `PIPELINE_REACHERS` to
+    // the tree, and the two assertions below, both of which can die.
     expect(scanned.length).toBeGreaterThan(reachers.length);
     expect(
       scanned,
@@ -510,9 +513,16 @@ describe('generation-law register (which LAW a birth mints)', () => {
     const strays = [];
     for (const law of offTheBoundary) {
       for (const rel of scanned) {
-        if (names(rel, law.mint) || names(rel, law.dial)) {
-          strays.push(`${rel} names ${law.mint}`);
-        }
+        // ⚠ NAME WHAT ACTUALLY MATCHED (§912, DEF-6). This used to report
+        // `names ${law.mint}` on both branches, so a DIAL match sent the reader
+        // hunting for a mint symbol that is not in the file — the failure message
+        // of a walker is read exactly once, at the worst possible moment, and a
+        // wrong symbol there costs more than the arm saves.
+        const matched = [
+          names(rel, law.mint) ? law.mint : null,
+          names(rel, law.dial) ? law.dial : null,
+        ].filter(Boolean);
+        if (matched.length) strays.push(`${rel} names ${matched.join(' and ')}`);
       }
     }
     expect(

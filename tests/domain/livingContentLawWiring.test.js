@@ -308,9 +308,24 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
       'the store config is not lit — THE STOP arm would pass on a world nothing threatened',
     ).toBe(true);
 
+    const npcsBefore = JSON.stringify(settlement.npcs);
     await store.getState().regenSection('npcs');
 
     const after = store.getState().settlement;
+    // ⛔ THE POSITIVE CONTROL, ADDED AT §912 (DEF-8), AND WITHOUT IT THIS ARM
+    // COULD NOT FAIL. Measured by the skeptic pass: `regenNPCsPipeline` returns
+    // root parts and never `config`, so all three post-conditions below are
+    // untouchable by the regen in EITHER direction — the arm returned identical
+    // results with the store's lit config and with the world's own dark one, and
+    // would have stayed green on a build where `regenSection` did nothing at all.
+    // Asserting the regen really rewrote the section is what makes the three
+    // "and it did not stamp a law" assertions measure a live operation.
+    expect(
+      JSON.stringify(after.npcs),
+      'regenSection("npcs") did not change the world — THE STOP arm is asserting that an'
+      + ' operation which never ran also failed to stamp a law, which is true of any build',
+    ).not.toBe(npcsBefore);
+
     expect(after.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
     expect(resolveLivingContentLawVersion(after.config))
       .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
@@ -318,6 +333,12 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
       after[ROSTER_KEY],
       'a regeneration materialized a roster onto a world that was born without one',
     ).toBeUndefined();
+    // ⚠ AND THE INSTRUMENT THAT ACTUALLY GUARDS THE READ ORDER IS NOT THIS ONE.
+    // What stops `regenSection` reading the store's form config is a SOURCE-TEXT
+    // arm in `tests/lint/densityCreateBoundary.walker.test.js` (`/settlement\.config
+    // \|\| config/` present, `/\bconfig \|\| settlement\.config/` absent). That arm
+    // dies when the order flips; this one cannot. Cite the walker, not this file,
+    // for the read-order claim.
   });
 
   // ── UNDO / CLONE ───────────────────────────────────────────────────────────

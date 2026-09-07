@@ -112,7 +112,11 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
     expect(rowCount, 'the roster is empty — the drop proves nothing').toBeGreaterThan(0);
 
     const pub = toPublicSafe(settlement);
-    expect(ROSTER_KEY in pub).toBe(false);
+    // §912 DEF-9: through the anchoring helper, not a bare `in` test, so
+    // `negativeAssertionAnchor.walker` can SEE this negative. `config` is the
+    // anchor because it travels the same root allowlist as the roster — a
+    // projection that returned nothing reds on the anchor instead of passing.
+    expectAbsentWithAnchor(Object.keys(pub), ROSTER_KEY, 'config', 'default public projection');
     // …and the allowlisted siblings it rides beside really do survive, so the
     // drop is a selection rather than a projection that returned nothing.
     expect(pub.name).toBe(settlement.name);
@@ -127,7 +131,9 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
       settlement[PROVENANCE_KEY],
       'the reference pack produced no provenance receipt — this drop would be vacuous',
     ).toBeTruthy();
-    expect(PROVENANCE_KEY in toPublicSafe(settlement)).toBe(false);
+    expectAbsentWithAnchor(
+      Object.keys(toPublicSafe(settlement)), PROVENANCE_KEY, 'config', 'default public projection',
+    );
   });
 
   it('the deeper denylist would strip NOTHING here — the drop is the allowlist\'s alone', () => {
@@ -135,11 +141,38 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
     // PRIVATE_KEY_RE, a reader could believe the deeper denylist was a second
     // line of defence for this key. It is not. The root allowlist is the only
     // thing standing between the roster and a public read.
-    const rosterKeys = [
-      'schemaVersion', 'buckets', 'source', 'isCustom', 'customDefinitionCategory',
-      'localUid', ROSTER_KEY, ...CUSTOM_DEFINITION_IDENTITY_KEYS,
-    ];
-    expect(rosterKeys.length).toBeGreaterThan(6);
+    // ⛔ DERIVED FROM THE REAL ROSTER, NEVER HAND-TRANSCRIBED (§912, DEF-7). The
+    // literal that used to sit here named eleven keys, and the builder copies
+    // every manifest-declared authored field on top of them — so the claim "no
+    // roster key matches the denylist" was being tested against a third of the
+    // real surface, and `toBeGreaterThan(6)` over an 11-element literal could not
+    // fail. A future manifest field named `dmGuidance` or `notes` would falsify
+    // the claim while this arm stayed green. Reading the generated row instead
+    // means the arm grows with the roster, which is the only version of it worth
+    // having.
+    const settlement = litSettlement();
+    const roster = settlement[ROSTER_KEY];
+    expect(roster, 'no roster was generated — the key census below would be empty').toBeTruthy();
+    const rows = Object.values(roster.buckets || {}).flat();
+    expect(rows.length, 'the roster has no rows — there are no row keys to census').toBeGreaterThan(0);
+    const rosterKeys = [...new Set([
+      ROSTER_KEY,
+      ...Object.keys(roster),
+      ...rows.flatMap(row => Object.keys(row)),
+    ])];
+    // The count is READ OFF THE REAL ROW rather than asserted against a hand
+    // number: it must at least cover the identity projection plus the roster's own
+    // structural keys, and it is in fact far wider.
+    expect(
+      rosterKeys.length,
+      `the roster surface collapsed to ${rosterKeys.length} keys — this census is no longer`
+      + ' measuring the real record',
+    ).toBeGreaterThan(CUSTOM_DEFINITION_IDENTITY_KEYS.length + 2);
+    // Non-vacuity for the census itself: the account-scoped identifiers this file
+    // exists to keep out of public view really are among the keys measured.
+    for (const key of CUSTOM_DEFINITION_IDENTITY_KEYS) {
+      if (rows.some(row => Object.hasOwn(row, key))) expect(rosterKeys).toContain(key);
+    }
     expect(rosterKeys.filter(key => PRIVATE_KEY_RE.test(key))).toEqual([]);
     // The anchor for that emptiness: the regex is live and still convicts the
     // keys it exists for.
@@ -163,27 +196,54 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
     expect(PUBLIC_TOPLEVEL_KEYS).toContain('generatorVersion');
   });
 
-  it('⛔ THE DM-FULL PROJECTION DOES NOT DROP THE ROSTER, and the dormant dial is why that is safe', () => {
-    // MEASURED, and it CORRECTS the reading that the allowlist protects every
-    // public path: `toPublicSafe(s, { full: true })` does not run the root
-    // allowlist at all — it deep-clones and deletes a named list — so the roster
-    // and the provenance receipt both survive a DM share.
+  it('⛔ THE DM-FULL PROJECTION DROPS BOTH RECORDS TOO — and its SQL twin is still owed', () => {
+    // §912 R-G. `toPublicSafe(s, { full: true })` does not run the root allowlist
+    // at all — it deep-clones and deletes a named list — so before this car both
+    // records survived a DM share. They are now deleted explicitly, beside
+    // `dmNotes`, the two seed carriers and `latentPantheon`, each of which is
+    // stripped from full mode for exactly this reason.
+    //
+    // ⛔ AND THE OPT-IN NEVER COVERED THEM. `gallery_share_dm` publishes the
+    // owner's authored DM-private content — "Secrets, plot hooks, NPC goals and
+    // relationships, your DM notes, and the DM Compass … publicly visible to
+    // anyone who opens this gallery page", in the toggle's own words. It is a
+    // PUBLICATION switch, not a transfer to the owner's other device, so no reader
+    // of a full share is entitled to the author's unadopted homebrew library, and
+    // no surface reads either key off a shared dossier.
     const settlement = litSettlement();
+    // THE LIVENESS HALF: the input really carries both records, so the drop below
+    // is a removal rather than an absence.
+    expect(
+      settlement[ROSTER_KEY],
+      'the lit generation produced no roster — the full-mode drop would be vacuous',
+    ).toBeTruthy();
+    expect(settlement[PROVENANCE_KEY]).toBeTruthy();
+
     const full = toPublicSafe(settlement, { full: true });
-    expect(ROSTER_KEY in full).toBe(true);
-    expect(PROVENANCE_KEY in full).toBe(true);
-    // ⛔ THE ONLY REASON THAT IS NOT A LEAK TODAY, ASSERTED SO THE LIGHTING DAY
-    // MUST VISIT THIS FILE. While the dial sits at the dormant default no
-    // generated world carries a roster at all, so there is nothing for the
-    // DM-share path to carry. Flipping the dial reds HERE, by design: whoever
-    // lights the law must decide whether the DM-full projection drops the roster
-    // — which needs its `_gallery_dm_full_json` SQL twin, exactly as the
-    // mapEdits precedent records for the same §6 opt-in.
+    expectAbsentWithAnchor(Object.keys(full), ROSTER_KEY, 'config', 'DM-full projection');
+    expectAbsentWithAnchor(Object.keys(full), PROVENANCE_KEY, 'config', 'DM-full projection');
+    // …and full mode still is full: the DM-private content the owner DID opt to
+    // publish survives, so this is a selection and not a second allowlist.
+    expect(full.name).toBe(settlement.name);
+    expect(full.config).toBeTruthy();
+
+    // ⛔ THE HALF THAT IS NOT LANDED, ASSERTED SO THE LIGHTING DAY MUST VISIT THIS
+    // FILE. The SERVER re-issues the DM-full payload from `_gallery_dm_full_json`
+    // (migrations 120/129), which has no delete for either key — so a shared
+    // dossier read back through the server still carries them. That twin is a
+    // migration and is owner-gated; this arm is the tripwire that keeps it from
+    // being forgotten.
     expect(
       NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
-      'THE DIAL HAS BEEN LIT. Shipped worlds can now carry customContentRoster, and the'
-      + ' DM-full projection (gallery_share_dm) does NOT drop it — see the measurement in'
-      + ' this test. Decide the DM-full drop and land its SQL twin before this ships.',
+      'THE DIAL HAS BEEN LIT. The CLIENT half of the DM-full drop is landed (publicSafe.js),'
+      + ' but its SERVER twin is NOT: `_gallery_dm_full_json` (supabase migrations 120/129)'
+      + ' still re-issues customContentRoster and customContentProvenance, so a DM-shared'
+      + ' dossier read back from the server carries the author\'s private library. Land that'
+      + ' migration before this ships.'
+      + ' ⚠ AND EXPECT A TOTAL GENERATION OUTAGE FIRST: `loadLivingContentRoster` has NO'
+      + ' caller in src/ (livingContentSeam.js defines it; nothing calls it), so a lit config'
+      + ' throws "[livingContentSeam] v2 world, roster payload not loaded" before any world'
+      + ' is built. Wire the loader before reading anything else in this file as a symptom.',
     ).toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
   });
 });
