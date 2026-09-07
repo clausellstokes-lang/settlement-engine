@@ -3,24 +3,30 @@
  "name": "ai",
  "angle": null,
  "tag": "i1471-1485",
- "lines": 61,
+ "lines": 113,
  "firstTs": "2026-09-07T04:45:37.561Z",
- "lastTs": "2026-09-07T04:47:18.088Z",
+ "lastTs": "2026-09-07T04:52:16.664Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 26,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
-  "https://arxiv.org/pdf/$id"
+  "https://arxiv.org/pdf/$id",
+  "https://arxiv.org/abs/2411.07641",
+  "https://arxiv.org/abs/2210.15097",
+  "https://arxiv.org/abs/2408.13586",
+  "https://arxiv.org/abs/2307.03749",
+  "https://arxiv.org/abs/2310.01041"
  ],
  "filesWritten": [],
- "lastAssistantText": "Claims 1473–1476 all land. Now the Zhou/Keuper/Fritz paper (1477–1480).",
+ "lastAssistantText": "GSM8K, TruthfulQA\" the page field names (TruthfulQA is the separate Section 5.4 validation). Index 1480's causal attribution is also hedged in the source as \"probably because\". Index 1481's \"every truncation sampler\" is broader than the paper's own scope word, which is \"most of the transformations\".",
  "run": "wf_0eb229cc-f75",
  "agent": "a1fcaf550cc7352c4",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a1fcaf550cc7352c4.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1471-1485.json",
-  "exists": false
+  "exists": true
  }
 }

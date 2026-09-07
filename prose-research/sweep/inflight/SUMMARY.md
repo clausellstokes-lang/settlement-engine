@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:47:18 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:53:19 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -44,10 +44,11 @@
 | ai | verifier | i1415-1425 | result | 2 | — | verdict file WRITTEN | 04:40:05 |
 | ai | verifier | i1426-1440 | result | 4 | — | verdict file WRITTEN | 04:44:20 |
 | ai | verifier | i1441-1455 | result | 7 | — | verdict file WRITTEN | 04:45:37 |
-| ai | verifier | i1456-1470 | in-flight | 1 | — | verdict file absent | 04:47:16 |
-| ai | verifier | i1471-1485 | in-flight | 1 | — | verdict file absent | 04:47:18 |
-| ai | verifier | i1486-1500 | in-flight | 1 | — | verdict file absent | 04:47:00 |
-| ai | verifier | i1501-1515 | in-flight | 5 | — | verdict file absent | 04:47:05 |
+| ai | verifier | i1456-1470 | result | 6 | — | verdict file WRITTEN | 04:51:38 |
+| ai | verifier | i1471-1485 | result | 6 | — | verdict file WRITTEN | 04:52:16 |
+| ai | verifier | i1486-1500 | result | 8 | — | verdict file WRITTEN | 04:52:13 |
+| ai | verifier | i1501-1515 | result | 9 | — | verdict file WRITTEN | 04:52:07 |
+| ai | verifier | i1516-1517 | in-flight | 1 | — | verdict file absent | 04:53:07 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
@@ -55,6 +56,7 @@
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
+| dnd | critic |  | in-flight | 0 | — | — | 04:53:15 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
@@ -63,7 +65,7 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
-| dnd | synth |  | in-flight | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:47:01 |
+| dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |

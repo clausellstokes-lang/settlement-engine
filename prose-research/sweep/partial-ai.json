@@ -3126,5 +3126,125 @@
    "note": "37.91 is exact in Table 4 for GPT2-117M, greedy-decoded, Wikitext-103, and rL is defined in §5 as the proportion of decoded continuations at least L tokens long, so the 'share of contexts' reading is right. But §5.3 states explicitly that this experiment defines the non-termination ratio using L = 500, 'more strict than the limit used in the preceding experiments (1500)'; 1500 belongs to the earlier recurrent-LM experiments (Table 1), not to Table 4. Downstream text should say 500 steps.",
    "fromFile": "verdicts-ai-i1426-1440.json"
   }
+ },
+ {
+  "index": 1457,
+  "feature": "steerability",
+  "claim": "Nadeem and colleagues report that sampling algorithms violating one of their three identified properties suffered a large drop on the quality-diversity trade-off, while new algorithms satisfying all three matched the existing ones.",
+  "source": "Nadeem, He, Cho, Glass, arXiv:2009.07243v1 (2020); AACL-IJCNLP 2020",
+  "url": "https://arxiv.org/abs/2009.07243",
+  "quote": "drastic performance degradation, as measured",
+  "page": "Abstract",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2020-09-15",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "GPT2-small fine-tuned on Gigaword and Wikitext-103, 2020; register measured: news sentences and Wikipedia prose",
+  "verdict": {
+   "index": 1457,
+   "verdict": "PARTIAL",
+   "trueWording": "violating the identified properties could lead to drastic performance degradation",
+   "unsupportedLimb": "that violating ANY ONE of the three properties produced the large drop: Section 5.2 finds random mask sampling, which violates order preservation, on par with the existing algorithms, and concludes order preservation could be further relaxed; the degradation is attributed only to violating entropy reduction or slope preservation, and the abstract hedges with 'could lead to'.",
+   "note": "Quotation is verbatim in the abstract, and the second half of the claim (new algorithms satisfying all three perform on par with the existing ones) is supported there and in Section 5.3. Only the unqualified 'violating one of the three properties' limb overreaches.",
+   "fromFile": "verdicts-ai-i1456-1470.json"
+  }
+ },
+ {
+  "index": 1468,
+  "feature": "other: repetition loop mechanism",
+  "claim": "Meister and Cotterell present their rank-frequency and type-token results as quantitative evidence for the qualitative observation that transformer language models left to generate at length babble repetitively.",
+  "source": "Meister, Cotterell, arXiv:2106.00085v3 (2021); ACL 2021",
+  "url": "https://arxiv.org/abs/2106.00085",
+  "quote": "tend to babble repetitively",
+  "page": "Section 5.2 Type-Token",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2021-08-30",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "transformer, LSTM, CNN LMs on Wikipedia Dumps, 2021; register measured: Wikipedia encyclopedic prose",
+  "verdict": {
+   "index": 1468,
+   "verdict": "PARTIAL",
+   "trueWording": "we take this as quantitative evidence for recent qualitative observations",
+   "unsupportedLimb": "the rank-frequency results: the 'this' taken as quantitative evidence for repetitive babbling is only the type-token finding of Section 5.2, namely the two transformer models' visible fall-off in unique words for longer-length sequences, described there as a deficiency seemingly specific to the transformer architecture. No rank-frequency result is cited for the babbling observation.",
+   "note": "The quoted fragment 'tend to babble repetitively' is verbatim in Section 5.2, attributed to Holtzman et al. 2020, Cohen and Beck 2019, and Eikema and Aziz 2020, with 'when left to generate lots of text' matching the claim's 'left to generate at length'.",
+   "fromFile": "verdicts-ai-i1456-1470.json"
+  }
+ },
+ {
+  "index": 1469,
+  "feature": "counter-evidence",
+  "claim": "Meister and Cotterell conclude that adherence to Zipf's law is a poor gauge of a model's consistency with natural language, because models match the empirical rank-frequency trend well while diverging on the type-token relationship.",
+  "source": "Meister, Cotterell, arXiv:2106.00085v3 (2021); ACL 2021",
+  "url": "https://arxiv.org/abs/2106.00085",
+  "quote": "we observe that transformers under the nucleus",
+  "page": "Sections 5.1 and 5.2",
+  "kind": "measurement",
+  "polarity": "disputes",
+  "date": "2021-08-30",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "medium",
+  "modelEra": "transformer, LSTM, CNN LMs on Wikipedia Dumps, 2021; register measured: Wikipedia encyclopedic prose",
+  "verdict": {
+   "index": 1469,
+   "verdict": "PARTIAL",
+   "trueWording": "the limitation of using adherence to Zipf's law as a gauge",
+   "unsupportedLimb": "the stated reason. Section 5.1 grounds the Zipf conclusion in a rank-frequency comparison alone: models fit a Zipfian distribution no more poorly than natural language does, the qualitatively worst text (a trigram model under beam sampling) follows the power law most closely, and models nonetheless learn empirical rank-frequency trends well. Type-token divergence is not offered as the reason; Section 5.2, from which the supplied quotation comes, reports transformers under nucleus sampling matching the type-token trend most closely.",
+   "note": "Supplied quotation is verbatim but sits in Section 5.2, one section after the conclusion the claim reports. The paper does contrast the two elsewhere in 5.2 (type-token more disparate from the empirical natural language distribution than rank-frequency), but never as the basis for the Zipf ruling.",
+   "fromFile": "verdicts-ai-i1456-1470.json"
+  }
+ },
+ {
+  "index": 1503,
+  "feature": "other: truncation-sampling mechanism",
+  "claim": "Ravfogel and colleagues measured calibration on ten thousand English Wikipedia items, one of the few decoding studies to work in the encyclopedic register.",
+  "source": "Ravfogel, Goldberg, Goldberger, arXiv:2305.02633v1 (2023); Findings of ACL 2023",
+  "url": "https://arxiv.org/abs/2305.02633",
+  "quote": "We ran the models on 10,000 English Wikipedia",
+  "page": "Section 3 Experiments",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2023-05-04",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "modelEra": "OPT family, May 2023; register measured: English Wikipedia",
+  "verdict": {
+   "index": 1503,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'one of the few decoding studies to work in the encyclopedic register' - the paper makes no comparative claim about other decoding studies' registers",
+   "trueWording": "We ran the models on 10,000 English Wikipedia predictions",
+   "note": "First limb verbatim and exact (Section 3 Setup, HuggingFace wikipedia dataset); note the paper counts 10,000 *predictions* across entropy percentiles, not 10,000 documents or 'items'. The comparative second limb is the verifier's or the register-hint's framing, absent from the page. Separately, generation quality (MAUVE/BERTScore) was measured on OpenWebText prompts, not Wikipedia.",
+   "fromFile": "verdicts-ai-i1501-1515.json"
+  }
+ },
+ {
+  "index": 1514,
+  "feature": "other: repetition loop mechanism",
+  "claim": "Mahaut and Franzon find that two behaviourally identical repetition loops come from different internal processes, one a learned in-context copying circuit and the other an early-emerging behaviour with no identifiable circuit.",
+  "source": "Mahaut, Franzon, 'Repetitions are not all alike', arXiv:2504.01100v2 (2025)",
+  "url": "https://arxiv.org/abs/2504.01100",
+  "quote": "this condition lacks a clearly identifiable circuit",
+  "page": "Abstract; Section 6 Discussion",
+  "kind": "measurement",
+  "polarity": "asserts",
+  "date": "2025-11-04",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "Pythia 1.4B across training checkpoints, observation 2025; register measured: natural text prompts and in-context learning prompts",
+  "verdict": {
+   "index": 1514,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'behaviourally identical' - the paper says 'behaviorally similar' and 'superficially similar', and Section 5 measures a behavioural difference between the two (natural repetition starts at higher, wider-spread entropy; ICL converges to near-zero entropy by cycle 4)",
+   "trueWording": "Repetition in this condition lacks a clearly identifiable circuit",
+   "note": "Quote verbatim in the Discussion. The substantive limbs all hold: ICL repetition 'relies on a dedicated network of attention heads' that specialise over training, while natural repetition 'emerges early and lacks a defined circuitry'. Only the strength word fails - swap 'behaviourally identical' for 'superficially similar' and this becomes verbatim-clean.",
+   "fromFile": "verdicts-ai-i1501-1515.json"
+  }
  }
 ]
