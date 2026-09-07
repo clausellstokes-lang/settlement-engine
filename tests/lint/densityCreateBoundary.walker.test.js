@@ -475,7 +475,38 @@ describe('generation-law register (which LAW a birth mints)', () => {
     // reach the pipeline: it is what the reachers CALL. A mint added here is
     // minted by every BIRTH at once, which is the widest possible wiring and
     // was the only one the arm could not see.
-    const scanned = [...reachers, MINT_HOME];
+    //
+    // ⛔⛔ AND THE SAME HOLE WAS STILL OPEN ONE FILE FURTHER OUT (lane L-MAT).
+    // `pipelineReachers()` finds the five modules that NAME the pipeline, and
+    // the estate's own birth-mint home is not one of them: the generation lane
+    // mints the law, posts a plain-data request across a worker boundary, and
+    // an EXECUTOR under src/workers/ is what actually calls the pipeline. That
+    // is exactly the split `reachesVia` exists to record — so a mint of an
+    // UNWIRED law placed in `src/store/settlementGenerateAction.js`, the widest
+    // per-caller wiring the product has, would have landed SILENTLY GREEN here.
+    // MEASURED at this tip: the reacher scan returns 5 files and that one is not
+    // among them. The declared rows and the executors they reach through are
+    // therefore folded into the scan; `PIPELINE_REACHERS` is already held to the
+    // tree by the staleness arm above, so this cannot become a place to hide.
+    const scanned = [...new Set([
+      ...reachers,
+      MINT_HOME,
+      ...Object.keys(PIPELINE_REACHERS),
+      ...Object.values(PIPELINE_REACHERS)
+        .map(row => row.reachesVia)
+        .filter(Boolean),
+    ])];
+    // The denominator this widening exists for, asserted rather than assumed: a
+    // declared row that fell out of the scan would take its own mint sites with
+    // it, and the arm would go quiet without going red.
+    for (const rel of Object.keys(PIPELINE_REACHERS)) {
+      expect(scanned, `${rel} is a declared row but is not scanned`).toContain(rel);
+    }
+    expect(scanned.length).toBeGreaterThan(reachers.length);
+    expect(
+      scanned,
+      'the birth-mint home left the scanned set — the hole this widening closed is open again',
+    ).toContain('src/store/settlementGenerateAction.js');
     const strays = [];
     for (const law of offTheBoundary) {
       for (const rel of scanned) {
