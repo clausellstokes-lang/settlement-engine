@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 12:35:06 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 12:39:39 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -10,6 +10,7 @@
 | leguin | verifier | i542-616 | in-flight | 13 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
+| ? | critic |  | failed | 0 | — | — | 16:36:44 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
@@ -17,16 +18,21 @@
 | ? | other |  | result | 0 | — | — | 15:06:40 |
 | ? | other |  | result | 0 | — | — | 15:09:55 |
 | ? | other |  | result | 0 | — | — | 15:05:42 |
+| ? | other |  | failed | 0 | — | — | 16:36:38 |
 | ? | other |  | result | 0 | — | — | 15:43:55 |
+| ? | other |  | failed | 0 | — | — | 16:36:43 |
 | ? | other |  | result | 0 | — | — | 15:59:30 |
+| ? | other |  | failed | 0 | — | — | 16:36:43 |
 | ? | other |  | result | 0 | reconcile-chrome-and-compendium.md | — | 16:29:19 |
 | ? | other |  | result | 0 | — | — | 16:05:21 |
 | ? | other |  | result | 0 | — | — | 15:47:35 |
-| ? | other |  | in-flight | 0 | reconcile-chronicle-line.md | — | 16:32:04 |
-| ? | other |  | in-flight | 0 | — | — | 16:34:49 |
-| ? | other |  | in-flight | 0 | count.py, dsec.py, run-dsec.sh, spec-dm.json | — | 16:27:28 |
+| ? | other |  | failed | 0 | — | — | 16:36:44 |
+| ? | other |  | result | 0 | reconcile-chronicle-line.md | — | 16:35:48 |
+| ? | other |  | failed | 0 | — | — | 16:36:42 |
+| ? | other |  | failed | 0 | reconcile-dm-page.md, count.py, dsec.py, run-dsec.sh, spec-dm.json | — | 16:36:31 |
 | ? | other |  | result | 0 | reconcile-herald-pools.md | — | 15:39:42 |
 | ? | other |  | result | 0 | — | — | 15:56:26 |
+| ? | other |  | failed | 0 | — | — | 16:36:42 |
 | ? | other |  | result | 0 | — | — | 16:05:29 |
 | ? | other |  | result | 0 | FOLD.md | — | 16:14:29 |
 | ? | other |  | result | 0 | import.md | — | 16:06:04 |
