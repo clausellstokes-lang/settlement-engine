@@ -26612,12 +26612,34 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1110": {
+   "index": 1110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"high-quality text usually has information content close to\" H(q); section 4.2",
+   "note": "arXiv abs page + ar5iv full text of 2203.17217 fetched raw (curl, browser UA). Quote is word-for-word in section 4.2 Results. The claim's substance is the paper's stated 'expected information hypothesis' in section 1/3.2: text perceived as human-like should have information content within a small interval around the entropy of natural language strings. All four authors and the 31 Mar 2022 submission date confirmed on the abs page.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1111": {
+   "index": 1111,
+   "verdict": "PARTIAL",
+   "trueWording": "Introduction: \"low-information strings may be seen as boring and uninformative\"",
+   "unsupportedLimb": "\"the low-probability end of the paradox\" - the paper places boring/uninformative strings at the LOW-INFORMATION extreme, which (information = negative log-probability) is the HIGH-probability end; the low-probability end is the one it calls \"hard to process\"",
+   "note": "Quote verbatim in section 1, Introduction, immediately after 'At one extreme, strings with more-than-expected information may be hard to process... At the other extreme, low-information strings may be seen as boring and uninformative.' The communicative framing limb IS supported (the passage rests on 'the goal of human communication is to transmit messages efficiently and reliably'), but the claim attaches the quote to the wrong end of the paradox.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
   "1112": {
    "index": 1112,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1113": {
+   "index": 1113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Abstract: \"we show that the likelihood objective itself is at fault\"",
+   "note": "arxiv.org/abs/1908.04319 fetched raw. Quote word-for-word in the abstract. Both limbs supported: the abstract first says post-hoc fixes 'in particular top-k and nucleus sampling' do not address the poor token-level probabilities, then blames the likelihood objective itself - i.e. the objective, not merely the decoding rule. Dateline confirms v2, 26 Sep 2019; all six authors listed.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
   },
   "1114": {
    "index": 1114,
@@ -26681,6 +26703,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1123": {
+   "index": 1123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Abstract: \"typicality bias in preference data, whereby annotators systematically favor familiar text\"",
+   "note": "arxiv.org/abs/2510.01171 fetched raw. Quote word-for-word. Every limb supported by the abstract: it is named 'a fundamental, pervasive data-level driver' of mode collapse, defined as annotators systematically favouring familiar text. Dateline confirms v4, last revised 15 Jul 2026.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
   },
   "1124": {
    "index": 1124,
@@ -26794,6 +26823,35 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1140": {
+   "index": 1140,
+   "verdict": "PARTIAL",
+   "trueWording": "Quote exact, but framed under \"troubling omissions\", not as close or characteristic",
+   "unsupportedLimb": "(a) that the guidebook \"closed by\" this passage - the article gives no position in the book, saying only that it 'encourages readers to'; (b) that the reporters quote it 'as characteristic of the books' - it appears in the troubling-omissions-and-outdated-information paragraph, not in any discussion of house style",
+   "note": "NYT live URL returned 403; recovered via Wayback raw capture web.archive.org/web/20260207205925id_/. The quoted words appear verbatim (curly apostrophe in 'Europe's'): the Lviv guidebook 'encourages readers to \"pack your bags and get ready for an unforgettable adventure in one of Eastern Europe's most captivating destinations.\"' Nothing on the page locates it at the book's end or calls it typical.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1141": {
+   "index": 1141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"published in May, also fails to mention the war\" (Lviv, Ukraine)",
+   "note": "Same Wayback raw capture. Sentence reads 'And a guidebook on Lviv, Ukraine, published in May, also fails to mention the war...'. Article is dated 5 August 2023, so 'published in May' is May 2023. Bylines Seth Kugel and Stephen Hiltner confirmed at the foot of the page.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1142": {
+   "index": 1142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"makes no mention of Russia's ongoing war with Ukraine\" (Moscow, July)",
+   "note": "Same Wayback raw capture. 'A guidebook on Moscow published in July under the name Rebecca R. Lim ... makes no mention of Russia's ongoing war with Ukraine and includes no up-to-date safety information.' July = July 2023 given the 5 August 2023 dateline. Quote word-for-word (curly apostrophe).",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1143": {
+   "index": 1143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"you've got to be there in the field to write one\"",
+   "note": "Same Wayback raw capture. Attributed to 'The real Mr. Steves' - i.e. Rick Steves, as distinguished throughout from the fabricated 'Mike Steves' - and used as the section heading ‘You've Got to Be There in the Field’. Full sentence: 'And I think you've got to be there in the field to write one.'",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
   "1144": {
    "index": 1144,
    "verdict": "SKIPPED_TRIAGE",
@@ -26807,6 +26865,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1146": {
+   "index": 1146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"History, culture, climate etc. are things I absolutely don't want\" AI handling",
+   "note": "Raw wikitext fetched via action=raw. Quote word-for-word in section '== Discussion on AI policy ==', in LPfi's bulleted comment signed 15:51, 16 May 2026 (UTC). Administrator limb checked independently: the MediaWiki users API returns groups ['sysop','*','user','autoconfirmed'] for LPfi on en.wikivoyage.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1147": {
+   "index": 1147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"as bad as telling about a train that doesn't run\"",
+   "note": "Same raw wikitext, same LPfi comment: 'An Understand that looks complete but misrepresents or misses important points can be as bad as telling about a train that doesn't run or a restaurant that isn't there.' 'Understand' is Wikivoyage's background section, so the paraphrase holds; note the source hedges with 'can be as bad as' where the claim states it flatly.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
   },
   "1148": {
    "index": 1148,
@@ -26828,6 +26900,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1151": {
+   "index": 1151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The prose is nearly always better written by you, for style\"",
+   "note": "Raw wikitext of User:LPfi/AI guidelines fetched via action=raw. The page opens with {{experimental}}, then 'Be very careful if you use artificial intelligence (AI). The prose is nearly always better written by you, for style and to avoid potential copyright and plagiarism issues.' So 'opens by', 'for style' and 'marked experimental' all hold; the source adds copyright/plagiarism as a second reason. Revision date checked via the revisions API: latest edits 2026-09-03, consistent with 'revision of September 2026'.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
   },
   "1152": {
    "index": 1152,
@@ -26857,12 +26936,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1156": {
+   "index": 1156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"charming backstreets\" and \"authentic souvenir shops\" (the robot's words, not mine)",
+   "note": "intrepidtimes.com fetched raw (HTTP 200, no paywall); datePublished 2026-01-02, byline Thom Brown. Quote word-for-word in the ChatGPT-day afternoon passage: 'it tells me to continue exploring these \"charming backstreets\" and \"authentic souvenir shops\" (the robot's words, not mine) until it's time to hit a hilltop viewpoint for the sunset at 4 pm.' The parenthesis is the flagging limb.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1157": {
+   "index": 1157,
+   "verdict": "PARTIAL",
+   "trueWording": "Menu was Pegasus's, the host's alternative after ChatGPT's pick was full",
+   "unsupportedLimb": "\"at the restaurant it named ... that restaurant's menu\" - the ChatGPT-named restaurant could not seat him; the menu lacking the dishes belongs to Pegasus, a place the host recommended instead",
+   "note": "Quote verbatim: 'Naturally, the food suggestions offered by my artificial master do not exist on the menu.' But the preceding sentences read: 'the restaurant recommended by ChatGPT is overflowing with diners. They can't fit me in... The host... recommends some alternatives, leading to a place called Pegasus...'. So the page does not support the dishes being absent from the ChatGPT-named restaurant's own menu.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
   "1158": {
    "index": 1158,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1159": {
+   "index": 1159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"run out of ideas, ordering me to observe locals grabbing coffee\"",
+   "note": "Quote word-for-word in the post-Lonely-Planet comparison passage: 'While ChatGPT is determined to confine me to the boundaries of Tallinn's 800-year-old stone walls... At one point, it seems to have run out of ideas, ordering me to observe locals grabbing coffee.' Confinement to the Old Town, the exhaustion and the coffee-watching order are all on the page.",
+   "fromFile": "verdicts-ai-i1110-1160.json"
+  },
+  "1160": {
+   "index": 1160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"set to transform into a planetarium in the 1960s\" (Alexander Nevsky Cathedral)",
+   "note": "Quote word-for-word in the Sunday Lonely Planet section: 'the ornate mushroom-domed Alexander Nevsky Cathedral, which Lonely Planet tells me was set to transform into a planetarium in the 1960s, but controversially remains a Russian Orthodox church.' The 'model's itinerary did not' limb is supported two sentences later: 'I'm amazed ChatGPT didn't suggest them.'",
+   "fromFile": "verdicts-ai-i1110-1160.json"
   },
   "1161": {
    "index": 1161,
@@ -26871,6 +26979,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1162": {
+   "index": 1162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI does not and cannot do that work",
+   "note": "Live fetch, HTTP 200. Opening paragraph. The preceding two sentences carry the other limbs: the reputation is built on 'the people who actually go', who walk, eat and ask before judging a hotel - so 'that work' is on-the-ground reporting, and the brand-rests-on-it limb is the reputation sentence.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1163": {
+   "index": 1163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We do not use AI to create original editorial reporting",
+   "note": "Section heading 'What we will not do' is on the page verbatim; the sentence continues with recommendations, reviews and destination expertise, so all four items in the claim are listed.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
   "1164": {
    "index": 1164,
    "verdict": "SKIPPED_TRIAGE",
@@ -26878,12 +27000,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1165": {
+   "index": 1165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eleanor and her husband Theodore Roosevelt",
+   "note": "Live fetch, HTTP 200, no paywall. Slate piece by Nitish Pahwa, November 2025 path. Michael Burgess says he put something about Eleanor Roosevelt into ChatGPT and it returned the phrase; he is a local-history author (self-published local history republished by History Press in 2023). The piece returns to the mix-up in its closing paragraph.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1166": {
+   "index": 1166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not going to go and get microfilm",
+   "note": "Same paragraph supplies the remaining limbs: the reporter writes that the book required research Burgess believes AI cannot do, and Burgess names the New York State Library and its microfilm of Franklin Roosevelt's gubernatorial papers. State library limb confirmed.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
   "1167": {
    "index": 1167,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1168": {
+   "index": 1168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cleanliness summarised as 'spotless'",
+   "note": "Live fetch, HTTP 200. Which? press release dated 02 Jul 2026, so 'July 2026' is right. The same sentence names the hotel (Riu Palace Santa Maria, Cape Verde) as the subject of the Tripadvisor AI summary, so the claim's 'that hotel' referent is anchored on the page.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1169": {
+   "index": 1169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "described the atmosphere as 'charming'",
+   "note": "Both limbs sit in one paragraph comparing the platforms for the Britannia International hotel in London: Google's overview is reported as highlighting guest reviews of 'filthy' conditions, and Tripadvisor's summary of the same hotel as praising clean rooms and calling the atmosphere charming.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
   },
   "1170": {
    "index": 1170,
@@ -26927,12 +27077,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1176": {
+   "index": 1176,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'opened by saying' - the page never says the passage was the article's opening, and the cited revision shows it was not",
+   "trueWording": "stands as a vibrant town with a rich cultural heritage",
+   "note": "Quotation is verbatim on the page, in section 'Promotional and advertisement-like language' > 'Subtypes', labelled as from a June 2023 revision to Alamata (woreda). I followed the page's own diff link (oldid 1162718043; API confirms timestamp 2023-06-30 and title 'Alamata (woreda)') and fetched the raw wikitext: the lead is a plain one-sentence definition of Alamata as a woreda in Tigray Region, and the 'Nestled within...' passage is the first line of the '== Overview ==' section, not the opening. Puffery limb, June 2023 limb, Ethiopian-woreda limb and the quotation all hold; only the positional limb fails.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
   "1177": {
    "index": 1177,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1178": {
+   "index": 1178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "solidify its role as a regional hub",
+   "note": "Same page, section 'Undue emphasis on significance, legacy, and broader trends' (shortcuts WP:AILEGACY / WP:AITREND), example labelled as from an October 2024 revision to Kumba, Cameroon; the sentence credits road networks connecting Kumba to Mamfe and Buea. Every limb supported.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
   },
   "1179": {
    "index": 1179,
@@ -26962,6 +27127,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1183": {
+   "index": 1183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the text suddenly switches genre, typically inserting a short promotional phrase",
+   "note": "Opening definition sentence; it continues with 'full of sensory details' and 'into an informational text', so the claim's informational-text limb is on the page. Post dated May 13, 2026. Author descriptor on the page is 'Professor and Co-Director of the Center for Digital Narrative at the University of Bergen'; the page never uses the words 'digital culture', so the claim's 'digital-culture professor' is a field paraphrase, not the page's wording.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1184": {
+   "index": 1184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a route famous for its scenic views of the mountains and deserts",
+   "note": "Example 2. Surrounding text gives the other limbs: the source is cited as the Government's Memorandum in Support of Pretrial Detention in United States v. Cole Tomas Allen, 29 April 2026, page 9, and the glitch fires on a mention of a long-distance Amtrak passenger train to Chicago. The quoted phrase runs on to 'of the American West'.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
   "1185": {
    "index": 1185,
    "verdict": "SKIPPED_TRIAGE",
@@ -26976,6 +27155,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1187": {
+   "index": 1187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "generated an article title in quotations from a specific newspaper",
+   "note": "Live fetch, HTTP 200. Page dated January 9, 2024, by Nikki Koehlert, OHS Reference Librarian. The sentence continues 'on a particular date'. The prompt limb is on the page verbatim as the researcher's ChatGPT prompt about the first Hindu wedding in U.S. media, and the could-not-verify limb is her earlier report that she found neither the article title nor any record of the two named people or such a wedding.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1188": {
+   "index": 1188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it found a repeated pattern and produced a conclusion",
+   "note": "Same paragraph carries the mechanism limb: the names and the words wedding/Hindoo appeared on the same Daily Astorian pages in the 1910s but were unrelated, and the sentence closes with the conclusion not being based in fact.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
   "1189": {
    "index": 1189,
    "verdict": "SKIPPED_TRIAGE",
@@ -26989,6 +27182,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1191": {
+   "index": 1191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such books still tend to be full of inaccuracies",
+   "note": "Live fetch, HTTP 200. Governing, published October 3, 2025, by Jule Pattison-Gordon. The phrase is the reporter's own parenthetical inside her sentence about AI writing nonfiction by compiling information available on the Internet, so both the compiled-from-the-internet limb and the reporter-states limb hold.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1192": {
+   "index": 1192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "confidently written and full of vivid adjectives",
+   "note": "Live fetch, HTTP 200. Gongora Meza is described as founder and director of Evolution Treks Peru, overhearing tourists planning a hike to the 'Sacred Canyon of Humantay', and he states there is no such place. The thing he describes is 'the screenshot'; the article's own framing (travellers using AI to create itineraries; a program like ChatGPT) supports calling it an AI itinerary. Metadata caveat: URL slug is 20250926 but the live page displays 29 September 2025; the claim sentence asserts no date, so the grade is unaffected.",
+   "fromFile": "verdicts-ai-i1162-1193.json"
+  },
+  "1193": {
+   "index": 1193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The name is a combination of two places that have no relation",
+   "note": "Same quoted paragraph; the sentence ends by saying the two places have no relation to the description, which is the claim's 'attached to it' limb. Same date caveat as 1192 (page displays 29 September 2025).",
+   "fromFile": "verdicts-ai-i1162-1193.json"
   },
   "1194": {
    "index": 1194,
@@ -27151,6 +27365,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1232": {
+   "index": 1232,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "missed nuance, context and reading between the lines",
+   "note": "Appendix C (printed p.32), theme row 'Could not pick up nuance / context'; quote appears word for word. Appendix C is headed 'qualitative analysis of the debrief session and assessment rubric comments' and s.5.1 says such quotes are ASIC assessors' - the appendix does not label this individual quote debrief-vs-rubric. Raw PDF fetched and text-extracted; document is ASIC's answer to QoN No.001, Select Committee on Adopting AI.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1233": {
+   "index": 1233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a deep understanding of context, subtle nuances, or implicit meaning",
+   "note": "Section 6 Discussion, printed p.18 (PDF page 20), verbatim; the sentence begins 'Another significant issue was the LLMs limited ability to analyse and summarise complex content requiring ...' and continues that this led to summaries missing deeper implications. Every limb supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
   "1234": {
    "index": 1234,
    "verdict": "SKIPPED_TRIAGE",
@@ -27164,6 +27392,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1236": {
+   "index": 1236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Included analysis which did not come from the document",
+   "note": "Section 5.1 Key Themes, printed p.17 (PDF page 19), under bullet 'Included incorrect information in summaries', prompt 'References to ASIC', attributed in the report to '(ASIC assessor)'; the same words recur in Appendix C. Verbatim.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1237": {
+   "index": 1237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "grammatically correct, but on occasion factually inaccurate",
+   "note": "Section 6.1 Limitations of the PoC, printed p.19, bullet 'Risk of hallucinations'; quote verbatim across a line break. The defining sentence is phrased generically ('Text-based Gen AI can on occasion generate texts that suffer from hallucinations, which means ...'), but the bullet is the PoC's own risk item and the report elsewhere records observed hallucination (Appendix, Model B, wage price spiral).",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1238": {
+   "index": 1238,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Asking the same question twice may not yield the same answer",
+   "note": "Section 6.1 Limitations, printed p.19, bullet 'Variation in outputs'; preceding sentence reads 'Testing was difficult due to low repeatability of model outputs.' Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
   },
   "1239": {
    "index": 1239,
@@ -27179,6 +27428,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1241": {
+   "index": 1241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "51% of all AI answers to questions about the news",
+   "note": "BBC PDF fetched raw; executive-summary bullet on p.2 completes '... were judged to have significant issues of some form.' High-level findings repeats it as flagged 'by reviewers', and the methodology section says BBC journalists rated each response. All limbs supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1242": {
+   "index": 1242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "19% of AI answers which cited BBC content introduced factual errors",
+   "note": "Executive-summary bullet, p.2, continues '- incorrect factual statements, numbers and dates.' Verbatim; the 'such as' list matches exactly.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1243": {
+   "index": 1243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "13% of the quotes sourced from BBC articles were either altered",
+   "note": "Executive-summary bullet, p.2, continues 'from the original source or not present in the article cited.' Verbatim; both disjuncts of the claim supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
   "1244": {
    "index": 1244,
    "verdict": "SKIPPED_TRIAGE",
@@ -27193,6 +27463,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1246": {
+   "index": 1246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "45% of responses contained at least one significant issue",
+   "note": "EBU PDF fetched raw; Foreword p.3 ('What have we found?', second point) reads 'Overall, 45% of responses contained at least one significant issue of any type.' High-level findings p.9 repeats it for all AI responses. Multi-market BBC-EBU study confirmed on the title page.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1247": {
+   "index": 1247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sourcing is the single biggest cause of significant issues (31%)",
+   "note": "Foreword p.3, verbatim. Detailed figure on p.10: 'Sourcing was the biggest cause of problems, with 31% of all responses having significant issues with sourcing', so the 'of all responses' limb is supported too.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
   "1248": {
    "index": 1248,
    "verdict": "SKIPPED_TRIAGE",
@@ -27206,6 +27490,21 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1250": {
+   "index": 1250,
+   "verdict": "PARTIAL",
+   "trueWording": "Accuracy (20%) and providing sufficient context (14%)",
+   "note": "Quote is verbatim on p.10 of the EBU report, but the sentence reads 'were the next biggest contributors to significant issues' and Appendix 3 (results table) defines both figures as the share of ALL AI responses carrying that significant issue (accuracy 20%, context 14%) - not a breakdown of the significant issues themselves. Since 45% of responses had any significant issue, 20% of responses is roughly 44% of the issue-bearing responses, so the claim's denominator is wrong.",
+   "unsupportedLimb": "the '20 percent / 14 percent OF significant issues' denominator - the report gives these as percentages of all AI responses",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1251": {
+   "index": 1251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs hallucinate between 58% (ChatGPT 4) and 88% (Llama 2)",
+   "note": "arXiv PDF fetched raw; Section 1 Introduction, p.6: 'when asked a direct, verifiable question about a randomly selected federal court case, LLMs hallucinate between 58% ... and 88% ... of the time.' Section 4 confirms the random sample spans USDC, USCOA and SCOTUS. All limbs supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
   },
   "1252": {
    "index": 1252,
@@ -27228,6 +27527,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1255": {
+   "index": 1255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "often uncritically accept users' incorrect legal assumptions",
+   "note": "Abstract, p.2 (curly apostrophe in the original); the sentence lists this alongside hallucinating at least 58% of the time. Section 5 develops it as contra-factual bias. All limbs supported.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
   "1256": {
    "index": 1256,
    "verdict": "SKIPPED_TRIAGE",
@@ -27241,6 +27547,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1258": {
+   "index": 1258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4o 38.2 (Table 3, 'Correct' column)",
+   "note": "arXiv PDF fetched raw; Table 3 row 'GPT-4o' gives Correct = 38.2. Abstract describes SimpleQA as evaluating models on 'short, fact-seeking questions'. One locator correction: Table 3 sits on printed page 7 of the arXiv v1 PDF (the caption follows the p.6 footer), not p.6 as cited.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
+  },
+  "1259": {
+   "index": 1259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "OpenAI o1-preview 42.7 (Table 3, 'Correct' column)",
+   "note": "Table 3 row 'OpenAI o1-preview' gives Correct = 42.7, the highest Correct score among the eight models listed (next: GPT-4o 38.2, Claude-3.5-sonnet 28.9); the text notes o1-preview outperforms o1-mini. Same locator correction as 1258: Table 3 is on printed p.7.",
+   "fromFile": "verdicts-ai-i1232-1259.json"
   },
   "1260": {
    "index": 1260,
