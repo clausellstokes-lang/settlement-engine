@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 15:08:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 15:14:01 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -48,16 +48,6 @@
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
 | ? | other |  | in-flight | 0 | — | — | 13:53:19 |
-| ? | other |  | result | 0 | — | — | 12:10:50 |
-| ? | other |  | result | 0 | — | — | 12:39:01 |
-| ? | other |  | result | 0 | best-ai.md | — | 12:53:34 |
-| ? | other |  | result | 0 | best-leguin.md | — | 12:22:45 |
-| ? | other |  | result | 0 | EXEMPLAR-BEST-PARTS.md | — | 13:39:01 |
-| ? | other |  | result | 0 | — | — | 12:24:43 |
-| ? | other |  | result | 0 | — | — | 12:38:09 |
-| ? | other |  | result | 0 | — | — | 12:54:49 |
-| ? | other |  | result | 0 | best-martin.md | — | 12:08:17 |
-| ? | other |  | result | 0 | best-own.md | — | 13:08:59 |
 | ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | failed | 0 | RULES-V2-PART-B.md | — | 18:25:52 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
