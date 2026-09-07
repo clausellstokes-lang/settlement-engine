@@ -1,112 +1,4 @@
 {
- "complete": true,
- "coverage": "Roster: FETCHED RAW and quoted - Compton (galaxykate0.tumblr, 22 Feb 2016), Grinblat & Bucklew FDG'17 PDF, Ryan's 2018 UCSC dissertation (eScholarship PDF, 815pp), Smith & Whitehead PCG 2010 (author PDF), Emily Short's oatmeal post (dated 21 Sep 2016, NOT Feb as the angle stated), Tarn Adams in two interviews (Gamasutra 2008, PC Gamer 2017), Mark R. Johnson (AISB 2015 paper + 2021 URR dev blog), Max Kreminski (Felt, ICIDS 2019, author's own site). NOT FOUND: Johnson's 'Towards Qualitative Procedural Generation' at the roster URL (404) and his RPS columns (404) - substituted his AISB paper and dev blog; Tarn Adams's Roguelike Celebration talk exists only as video, no transcript. BLOCKED: Grinblat's 'Generating Histories' chapter (Taylor & Francis paywall; only unlawful mirrors surfaced) and the GDC Vault Caves of Qud talk - zero claims taken from either. Ten substantive sources: 5 by direct live fetch, 5 by PDF-binary fetch plus pdftotext; discovery expanded by bibliography chasing from Grinblat's and Ryan's reference lists and by lateral search; stopped when the roster was exhausted and two consecutive searches surfaced nothing new that was lawfully reachable.",
- "sourcesRead": [
-  {
-   "title": "So you want to build a generator...",
-   "url": "https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-02-22",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Bowls of Oatmeal and Text Generation",
-   "url": "https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-09-21",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Visualizing Procgen Text, Part Two",
-   "url": "https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2016-09-12",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Analyzing the Expressive Range of a Level Generator",
-   "url": "https://users.soe.ucsc.edu/~ejw/papers/smith-pcg-2010.pdf",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2010-06",
-   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
-  },
-  {
-   "title": "Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud",
-   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2017-08",
-   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
-  },
-  {
-   "title": "Curating Simulated Storyworlds (PhD dissertation, UCSC)",
-   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2018-12",
-   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
-  },
-  {
-   "title": "Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever (PC Gamer)",
-   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2017-03-16",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Interview: The Making Of Dwarf Fortress (Gamasutra / Game Developer)",
-   "url": "https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2008-02-27",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making (AISB 2015)",
-   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2015",
-   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
-  },
-  {
-   "title": "Procedural book generation! (Ultima Ratio Regum dev blog)",
-   "url": "https://www.markrjohnsongames.com/2021/07/27/procedural-book-generation/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2021-07-27",
-   "route": "live URL, curl with browser user agent, HTML stripped to text"
-  },
-  {
-   "title": "Felt: A Simple Story Sifter (ICIDS 2019)",
-   "url": "https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019",
-   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
-  },
-  {
-   "title": "Generating Histories (chapter in Procedural Storytelling in Game Design, CRC/Routledge 2019)",
-   "url": "https://www.taylorfrancis.com/chapters/edit/10.1201/9780429488337-18/generating-histories-jason-grinblat",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2019",
-   "route": "BLOCKED: publisher paywall; only unlawful mirrors surfaced; no claims taken"
-  },
-  {
-   "title": "Towards Qualitative Procedural Generation (Ultima Ratio Regum blog page named in the roster)",
-   "url": "http://www.ultimaratioregum.co.uk/game/2016/01/23/towards-qualitative-procedural-generation/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2016",
-   "route": "NOT FOUND: 404 at the roster URL; substituted Johnson's AISB 2015 paper and 2021 dev blog"
-  }
- ],
  "claims": [
   {
    "feature": "homogenisation",
@@ -166,7 +58,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "herald-pools",
    "confidence": "medium",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose (quote blanked: paraphrase of one sentence about a line of trees)"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally; quote blanked because the support is a paraphrase of one sentence about a line of trees"
   },
   {
    "feature": "other: parametric variation ceiling",
@@ -181,7 +73,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: 3D models, music and creature parameters"
   },
   {
    "feature": "other: distribution methods fail on language",
@@ -196,7 +88,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "herald-pools",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: language and music"
   },
   {
    "feature": "other: grammars cannot hold constraints",
@@ -211,7 +103,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: grammar-generated text"
   },
   {
    "feature": "steerability",
@@ -226,7 +118,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generate-and-test content pipelines"
   },
   {
    "feature": "other: evidence of process as character",
@@ -241,7 +133,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generated objects and environments"
   },
   {
    "feature": "other: failure mode taxonomy",
@@ -256,7 +148,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generated content generally"
   },
   {
    "feature": "other: uneven salience as a cure",
@@ -271,7 +163,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generated artifacts in bulk"
   },
   {
    "feature": "other: possibility space",
@@ -286,7 +178,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generated content generally"
   },
   {
    "feature": "detection and its failures",
@@ -301,7 +193,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: content filtering in generative systems"
   },
   {
    "feature": "other: elicit the human process first",
@@ -316,7 +208,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generator authoring method"
   },
   {
    "feature": "place and institution description",
@@ -331,7 +223,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: game content generally (planets, trees, text), not model prose"
+   "modelEra": "pre-LLM procedural generation, blog post of Feb 2016; register measured: generated places and cities"
   },
   {
    "feature": "other: mechanical connection as the cure",
@@ -436,7 +328,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural text generation, blog post of Sep 2016; register measured: game text and interactive fiction prose"
+   "modelEra": "pre-LLM procedural generation, reader comment quoted Sep 2016; register measured: procedurally generated game content (Spore, No Man's Sky)"
   },
   {
    "feature": "other: generated text as status information",
@@ -451,7 +343,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM procedural text generation, blog post of Sep 2016; register measured: game text and interactive fiction prose"
+   "modelEra": "pre-LLM procedural text generation, blog post of Sep 2016; register measured: generated dialogue in interactive fiction"
   },
   {
    "feature": "homogenisation",
@@ -886,7 +778,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: simulated storyworld chronicles and generated news/biography text; relaying Mike Cook via a 2016 New Scientist article"
+   "modelEra": "pre-LLM procedural generation; Ryan (Dec 2018) relaying Mike Cook via a 2016 New Scientist article; register measured: procedurally generated game worlds"
   },
   {
    "feature": "homogenisation",
@@ -901,7 +793,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: simulated storyworld chronicles and generated news/biography text; relaying Gillian Smith via a 2016 New Scientist article"
+   "modelEra": "pre-LLM procedural generation; Ryan (Dec 2018) relaying Gillian Smith via a 2016 New Scientist article; register measured: procedurally generated game worlds"
   },
   {
    "feature": "other: monotony as backdrop",
@@ -916,7 +808,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: simulated storyworld chronicles and generated news/biography text"
+   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: a simulated town's full generated history"
   },
   {
    "feature": "other: letting the archive speak",
@@ -931,7 +823,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: simulated storyworld chronicles and generated news/biography text"
+   "modelEra": "pre-LLM simulation-based emergent narrative, dissertation Dec 2018; register measured: simulated storyworld chronicles"
   },
   {
    "feature": "reader and expert judgment",
@@ -961,7 +853,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "chronicle-line",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated world history read in Legends mode"
+   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated world history"
   },
   {
    "feature": "homogenisation",
@@ -976,7 +868,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated world history read in Legends mode"
+   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated named artifacts and their histories"
   },
   {
    "feature": "other: derive the system from the world's premise",
@@ -991,7 +883,7 @@
    "routeHint": "live URL, curl with browser user agent, HTML stripped to text",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated world history read in Legends mode"
+   "modelEra": "pre-LLM simulation-based world and history generation, interview Mar 2017 describing Dwarf Fortress in development; register measured: generated creation myths and magic systems"
   },
   {
    "feature": "abstraction over the concrete",
@@ -1066,7 +958,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "dossier-archivist",
    "confidence": "high",
-   "modelEra": "pre-LLM rule-based cultural generation, AISB 2015 paper describing Ultima Ratio Regum in development; register measured: generated cultures, religions and NPC behaviour"
+   "modelEra": "pre-LLM rule-based cultural generation, AISB 2015 paper describing Ultima Ratio Regum in development; register measured: generated religions and cultures"
   },
   {
    "feature": "homogenisation",
@@ -1081,7 +973,7 @@
    "routeHint": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)",
    "registerHint": "none",
    "confidence": "high",
-   "modelEra": "pre-LLM rule-based cultural generation, AISB 2015 paper describing Ultima Ratio Regum in development; register measured: generated cultures, religions and NPC behaviour"
+   "modelEra": "pre-LLM rule-based cultural generation, AISB 2015 paper describing Ultima Ratio Regum in development; register measured: generated NPCs and their cultural contexts"
   },
   {
    "feature": "other: every varying feature carries a fact",
@@ -1127,6 +1019,114 @@
    "registerHint": "none",
    "confidence": "high",
    "modelEra": "pre-LLM logic-programming story sifting, ICIDS 2019; register measured: simulated storyworld event chronicles"
+  }
+ ],
+ "complete": true,
+ "coverage": "Roster FETCHED RAW and quoted: Compton (galaxykate0.tumblr, 22 Feb 2016), Grinblat & Bucklew FDG'17 PDF, Ryan's 2018 UCSC dissertation (eScholarship PDF, 815 pp), Smith & Whitehead PCG 2010 (author PDF), Emily Short's oatmeal post (dated 21 Sep 2016, NOT Feb 2016 as the angle stated), Tarn Adams in two interviews (Gamasutra 2008, PC Gamer 2017), Mark R. Johnson (AISB 2015 paper plus 2021 URR dev blog), Max Kreminski (Felt, ICIDS 2019, author's own site). NOT FOUND: Johnson's 'Towards Qualitative Procedural Generation' at the roster URL (404) and his Rock Paper Shotgun columns (404), substituted by his AISB paper and dev blog; Tarn Adams's Roguelike Celebration talk exists only as video with no transcript. BLOCKED, zero claims taken: Grinblat's 'Generating Histories' chapter (Taylor & Francis paywall; only unlawful mirrors surfaced) and the GDC Vault Caves of Qud talk. Ten substantive sources: five by direct live fetch, five by PDF-binary fetch plus pdftotext; discovery expanded by bibliography chasing through Grinblat's and Ryan's reference lists and by lateral search; stopped when the roster was exhausted and two consecutive searches surfaced nothing new that was lawfully reachable. All 67 non-blank quotations were re-verified verbatim against the fetched text before return.",
+ "sourcesRead": [
+  {
+   "title": "So you want to build a generator...",
+   "url": "https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-02-22",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Bowls of Oatmeal and Text Generation",
+   "url": "https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-09-21",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Visualizing Procgen Text, Part Two",
+   "url": "https://emshort.blog/2016/09/12/visualizing-procgen-text-part-two/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2016-09-12",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Analyzing the Expressive Range of a Level Generator",
+   "url": "https://users.soe.ucsc.edu/~ejw/papers/smith-pcg-2010.pdf",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2010-06",
+   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
+  },
+  {
+   "title": "Subverting Historical Cause & Effect: Generation of Mythic Biographies in Caves of Qud",
+   "url": "https://pcgworkshop.com/archive/grinblat2017subverting.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2017-08",
+   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
+  },
+  {
+   "title": "Curating Simulated Storyworlds (PhD dissertation, UCSC)",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-12",
+   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
+  },
+  {
+   "title": "Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever (PC Gamer)",
+   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2017-03-16",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Interview: The Making Of Dwarf Fortress (Gamasutra / Game Developer)",
+   "url": "https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2008-02-27",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making (AISB 2015)",
+   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015",
+   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
+  },
+  {
+   "title": "Procedural book generation! (Ultima Ratio Regum dev blog)",
+   "url": "https://www.markrjohnsongames.com/2021/07/27/procedural-book-generation/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-07-27",
+   "route": "live URL, curl with browser user agent, HTML stripped to text"
+  },
+  {
+   "title": "Felt: A Simple Story Sifter (ICIDS 2019)",
+   "url": "https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019",
+   "route": "PDF binary fetched with curl, text extracted with pdftotext (no -layout)"
+  },
+  {
+   "title": "Generating Histories (chapter in Procedural Storytelling in Game Design, CRC/Routledge 2019)",
+   "url": "https://www.taylorfrancis.com/chapters/edit/10.1201/9780429488337-18/generating-histories-jason-grinblat",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2019",
+   "route": "BLOCKED: publisher paywall; only unlawful mirrors surfaced; no claims taken"
+  },
+  {
+   "title": "Towards Qualitative Procedural Generation (Ultima Ratio Regum blog page named in the roster)",
+   "url": "http://www.ultimaratioregum.co.uk/game/2016/01/23/towards-qualitative-procedural-generation/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2016",
+   "route": "NOT FOUND: 404 at the roster URL; substituted Johnson's AISB 2015 paper and 2021 dev blog"
   }
  ]
 }

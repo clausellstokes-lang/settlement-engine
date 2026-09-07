@@ -2,157 +2,147 @@
  "name": "ai",
  "chunk": 11,
  "indices": [
-  1299,
-  1300,
-  1302,
-  1303,
-  1304,
-  1305,
-  1306,
-  1307,
-  1308,
-  1309,
-  1310,
-  1311,
-  1312,
-  1314,
-  1315
+  1572,
+  1573,
+  1574,
+  1575,
+  1576,
+  1577,
+  1578,
+  1579,
+  1580,
+  1581,
+  1582,
+  1583,
+  1584,
+  1585
  ],
  "claims": [
   {
-   "index": 1299,
-   "feature": "discourse-level tells",
-   "claim": "The HC3 annotators summarised that ChatGPT writes in an organised manner with clear logic.",
-   "source": "Guo, Zhang, Wang, Jiang, Nie, Ding, Yue & Wu, 'How Close is ChatGPT to Human Experts?' (HC3), 2023",
-   "url": "https://arxiv.org/pdf/2301.07597",
-   "quote": "ChatGPT writes in an organized manner, with clear logic",
-   "page": "Section 3, Distinctive Patterns of ChatGPT, item (a)"
+   "index": 1572,
+   "feature": "other: letting the archive speak",
+   "claim": "Lessard, quoted in Ryan, contrasts template-driven retrieval with the historians' practice of letting the archive speak.",
+   "source": "James Ryan, 'Curating Simulated Storyworlds', PhD dissertation, UC Santa Cruz, Dec 2018",
+   "url": "https://escholarship.org/content/qt1340j5h2/qt1340j5h2_noSplash_7b2b04b56dfeee9e4558c9f47e6cb25b.pdf",
+   "quote": "letting the archive speak",
+   "page": "Chapter 13, closing discussion"
   },
   {
-   "index": 1300,
-   "feature": "discourse-level tells",
-   "claim": "The same summary describes ChatGPT as defining the core concept, answering step by step and offering a summary at the end, following a deduction and summary structure.",
-   "source": "Guo et al., HC3, 2023",
-   "url": "https://arxiv.org/pdf/2301.07597",
-   "quote": "following the deduction and summary structure",
-   "page": "Section 3, Distinctive Patterns of ChatGPT, item (a)"
+   "index": 1573,
+   "feature": "reader and expert judgment",
+   "claim": "Tarn Adams says a whole class of Dwarf Fortress players skip both play modes and instead do archaeology on the worlds they have generated, reading the history in Legends mode.",
+   "source": "Tarn Adams, interviewed by Wes Fenlon, 'Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever', PC Gamer, 16 Mar 2017",
+   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+   "quote": "They just do archaeology on the worlds they've generated",
+   "page": "body, section on the four modes"
   },
   {
-   "index": 1302,
-   "feature": "lexical tells",
-   "claim": "The HC3 annotators reported that ChatGPT expresses less emotion in its responses than human answerers.",
-   "source": "Guo et al., HC3, 2023",
-   "url": "https://arxiv.org/pdf/2301.07597",
-   "quote": "ChatGPT expresses less emotion in its responses",
-   "page": "Section 3, Major Differences between Human and ChatGPT, item (d)"
+   "index": 1574,
+   "feature": "other: generated history that does not reach the present",
+   "claim": "Tarn Adams says many things that happen in world generation do not get pushed forward, leaving stories that cannot continue, and calls that bad.",
+   "source": "Tarn Adams, interviewed by Wes Fenlon, 'Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever', PC Gamer, 16 Mar 2017",
+   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+   "quote": "you have these stories that can't continue, which is bad",
+   "page": "body, on carrying world-generation events into play"
   },
   {
-   "index": 1303,
+   "index": 1575,
    "feature": "homogenisation",
-   "claim": "Jentzsch and Kersting measured that over ninety percent of one thousand and eight generated jokes were the same twenty-five jokes.",
-   "source": "Jentzsch & Kersting, German Aerospace Center and TU Darmstadt, 2023",
-   "url": "https://arxiv.org/abs/2306.04563",
-   "quote": "Over 90% of 1008 generated jokes were the same 25 Jokes",
-   "page": "Abstract"
+   "claim": "Tarn Adams says the named objects Dwarf Fortress dwarves had made for eleven years were not that interesting, though they existed and had names, until claims and history were attached to them.",
+   "source": "Tarn Adams, interviewed by Wes Fenlon, 'Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever', PC Gamer, 16 Mar 2017",
+   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+   "quote": "They're not that interesting, but they're there, they have names",
+   "page": "body, on artifacts"
   },
   {
-   "index": 1304,
-   "feature": "homogenisation",
-   "claim": "Naous and colleagues showed that multilingual and Arabic monolingual language models exhibit bias towards entities associated with Western culture.",
-   "source": "Naous, Ryan, Ritter & Xu, Georgia Institute of Technology, CAMeL, 2024",
-   "url": "https://arxiv.org/abs/2305.14456",
-   "quote": "exhibit bias towards entities associated with Western culture",
-   "page": "Abstract"
+   "index": 1576,
+   "feature": "other: derive the system from the world's premise",
+   "claim": "Tarn Adams says deriving magic from each world's generated creation myth gives a deeper connection than a fixed ladder of level one and level two spells.",
+   "source": "Tarn Adams, interviewed by Wes Fenlon, 'Dwarf Fortress creator Tarn Adams talks about simulating the most complex magic system ever', PC Gamer, 16 Mar 2017",
+   "url": "https://www.pcgamer.com/dwarf-fortress-creator-tarn-adams-talks-about-simulating-the-most-complex-magic-system-ever/",
+   "quote": "There's a deeper connection than just, this is your level one spells",
+   "page": "body, on myth generation and magic"
   },
   {
-   "index": 1305,
-   "feature": "steerability",
-   "claim": "Mohammadi found that RLHF-aligned models exhibit lower entropy in token predictions than their base counterparts in the Llama-2 series.",
-   "source": "Behnam Mohammadi, Carnegie Mellon Tepper School of Business, 'Creativity Has Left the Chat', 2024",
-   "url": "https://arxiv.org/abs/2406.05587",
-   "quote": "aligned models exhibit lower entropy in token predictions",
-   "page": "Abstract"
-  },
-  {
-   "index": 1306,
-   "feature": "homogenisation",
-   "claim": "The same paper reports that aligned models gravitate towards attractor states, indicating limited output diversity.",
-   "source": "Behnam Mohammadi, Carnegie Mellon, 2024",
-   "url": "https://arxiv.org/abs/2406.05587",
-   "quote": "gravitate towards \"attractor states\", indicating limited output diversity",
-   "page": "Abstract"
-  },
-  {
-   "index": 1307,
-   "feature": "lexical tells",
-   "claim": "Yakura and colleagues measured that words preferentially generated by ChatGPT, among them delve, showcase, boast, intricacies and meticulous, increased abruptly in spontaneous human speech.",
-   "source": "Yakura, Lopez-Lopez, Brinkmann et al., Max Planck Institute for Human Development, 2024",
-   "url": "https://arxiv.org/pdf/2409.01754",
-   "quote": "increased abruptly in spontaneous human speech",
-   "page": "Abstract"
-  },
-  {
-   "index": 1308,
-   "feature": "lexical tells",
-   "claim": "The synthetic-control analysis behind that finding covered 737,083 hours of conversation from 824,634 podcast episodes.",
-   "source": "Yakura et al., Max Planck Institute for Human Development, 2024",
-   "url": "https://arxiv.org/pdf/2409.01754",
-   "quote": "737,083 hours of conversation from 824,634 podcast episodes",
-   "page": "Abstract"
-  },
-  {
-   "index": 1309,
-   "feature": "register measured",
-   "claim": "Huang and colleagues simulated Wikipedia revision with GPT-4o-mini and Gemini-1.5-Flash and found that the models substantially reduce the use of auxiliary verbs.",
-   "source": "Huang, Xu, Geng, Wan & Chen, 'Wikipedia in the Era of LLMs: Evolution and Risks', Transactions on Machine Learning Research, February 2026",
-   "url": "https://arxiv.org/pdf/2503.02879",
-   "quote": "LLMs substantially reduce the use of auxiliary verbs",
-   "page": "Section 4.2, Direct Impact 2: Linguistic Style, Results"
-  },
-  {
-   "index": 1310,
+   "index": 1577,
    "feature": "abstraction over the concrete",
-   "claim": "In that study's summary table, LLM processing of Wikipedia articles raised the noun rate, the long-word rate and the average syllables per word while lowering the one-syllable word rate.",
-   "source": "Huang et al., TMLR, February 2026, Table 1 (Summary of linguistic style trends)",
-   "url": "https://arxiv.org/pdf/2503.02879",
-   "quote": "",
-   "page": "Section 4.2, Table 1"
+   "claim": "Tarn Adams says a random generator would be very hard-pressed to capture really beautiful symbolism or an advanced writing device.",
+   "source": "Tarn Adams, interviewed by John Harris, 'Interview: The Making Of Dwarf Fortress', Gamasutra, 27 Feb 2008",
+   "url": "https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress",
+   "quote": "You'd be very hard-pressed to capture really beautiful symbolism",
+   "page": "section 'Storytelling as an Idea Source'"
   },
   {
-   "index": 1311,
-   "feature": "uniform rhythm (low burstiness)",
-   "claim": "The same table records that LLM processing of Wikipedia articles raised the average sentence length, the long-sentence rate, the average parse tree depth and the clause rate.",
-   "source": "Huang et al., TMLR, February 2026, Table 1",
-   "url": "https://arxiv.org/pdf/2503.02879",
-   "quote": "",
-   "page": "Section 4.2, Table 1"
+   "index": 1578,
+   "feature": "other: elicit the human process first",
+   "claim": "Tarn Adams describes his generation method as finding the key basic elements, finding the rules that govern them, and activating them in the world.",
+   "source": "Tarn Adams, interviewed by John Harris, 'Interview: The Making Of Dwarf Fortress', Gamasutra, 27 Feb 2008",
+   "url": "https://www.gamedeveloper.com/design/interview-the-making-of-dwarf-fortress",
+   "quote": "finding the key, basic elements, finding the rules that govern them",
+   "page": "section 'Storytelling as an Idea Source'"
   },
   {
-   "index": 1312,
-   "feature": "counter-evidence",
-   "claim": "The same table records that LLM processing lowered the passive-voice rate in Wikipedia articles while the real Wikipedia trend over the same period rose, so that one metric did not corroborate the simulation.",
-   "source": "Huang et al., TMLR, February 2026, Table 1 and Section 4.2 Results",
-   "url": "https://arxiv.org/pdf/2503.02879",
-   "quote": "",
-   "page": "Section 4.2, Table 1 and Results paragraph"
+   "index": 1579,
+   "feature": "other: generated detail must be load-bearing",
+   "claim": "Mark R. Johnson says Ultima Ratio Regum foregrounds generated civilizational, cultural and religious detail in its actors rather than leaving such content as background or lore, as many games do.",
+   "source": "Mark R. Johnson, 'Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making', AISB 2015 AI and Games symposium",
+   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+   "quote": "rather than leaving such content as \"background\" or \"lore\"",
+   "page": "section 2, Procedural Generation and Artificial Intelligence"
   },
   {
-   "index": 1314,
-   "feature": "register measured",
-   "claim": "Triedman and Mantzarlis conclude that sourcing guardrails have largely been lifted on Grokipedia.",
-   "source": "Harold Triedman & Alexios Mantzarlis, Cornell Tech, 'What did Elon change? A comprehensive analysis of Grokipedia', November 2025",
-   "url": "https://arxiv.org/pdf/2511.09685",
-   "quote": "sourcing guardrails have largely been lifted on Grokipedia",
-   "page": "Discussion"
+   "index": 1580,
+   "feature": "other: generated detail must be load-bearing",
+   "claim": "Mark R. Johnson says the generated cultural backgrounds are the only route by which his actors' motivations, interests and agendas can be understood.",
+   "source": "Mark R. Johnson, 'Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making', AISB 2015 AI and Games symposium",
+   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+   "quote": "whose motivations, interests and agendas can only be understood",
+   "page": "section 2, Procedural Generation and Artificial Intelligence"
   },
   {
-   "index": 1315,
-   "feature": "gloss and over-explaining",
-   "claim": "The same analysis found that Grokipedia articles are much longer and more verbose than Wikipedia articles and cite twice as many sources.",
-   "source": "Triedman & Mantzarlis, Cornell Tech, November 2025",
-   "url": "https://arxiv.org/pdf/2511.09685",
-   "quote": "Grokipedia articles are much longer and more verbose than Wikipedia",
-   "page": "Section 1, summary of findings"
+   "index": 1581,
+   "feature": "other: typed pools of world facts",
+   "claim": "Mark R. Johnson says a URR algorithm can procedurally create over a million detailed religions carrying beliefs, gods, festivals, eschatology and altar appearance.",
+   "source": "Mark R. Johnson, 'Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making', AISB 2015 AI and Games symposium",
+   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+   "quote": "procedurally create over a million detailed religions",
+   "page": "section 2, Procedural Generation and Artificial Intelligence"
+  },
+  {
+   "index": 1582,
+   "feature": "homogenisation",
+   "claim": "Mark R. Johnson reports over 1 trillion possible generated AI actors in URR, and rests the claim of difference on their behaving differently by social and cultural context rather than on the count.",
+   "source": "Mark R. Johnson, 'Modelling Cultural, Religious and Political Affiliation in Artificial Intelligence Decision-Making', AISB 2015 AI and Games symposium",
+   "url": "https://www.cs.kent.ac.uk/events/2015/AISB2015/proceedings/aiAndGames/AI-games-15_submission_01--MarkJohnson-modelling.pdf",
+   "quote": "over 1 trillion possible AI actors",
+   "page": "section 2, Procedural Generation and Artificial Intelligence"
+  },
+  {
+   "index": 1583,
+   "feature": "other: every varying feature carries a fact",
+   "claim": "Mark R. Johnson says a bookmark on a generated URR book shows a scholarly nation, one of several visual features that each encode a fact about the book's nation of origin.",
+   "source": "Mark R. Johnson, 'Procedural book generation!', markrjohnsongames.com (Ultima Ratio Regum dev blog), 27 Jul 2021",
+   "url": "https://www.markrjohnsongames.com/2021/07/27/procedural-book-generation/",
+   "quote": "a bookmark shows a scholarly nation",
+   "page": "blog post body"
+  },
+  {
+   "index": 1584,
+   "feature": "other: sifting only finds what it was told to find",
+   "claim": "Kreminski and colleagues describe a simulated storyworld's output as a profusion of events, many of which are relatively uninteresting as narrative building blocks.",
+   "source": "Max Kreminski, Melanie Dickinson and Noah Wardrip-Fruin, 'Felt: A Simple Story Sifter', ICIDS 2019",
+   "url": "https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf",
+   "quote": "a profusion of events, many of which are relatively uninteresting",
+   "page": "section 1, Introduction"
+  },
+  {
+   "index": 1585,
+   "feature": "steerability",
+   "claim": "Kreminski and colleagues report that they found it very difficult to anticipate in advance the full range of questions a sifting-pattern author would want to ask about the game state, and so gave authors a real query language instead of a preauthored function library.",
+   "source": "Max Kreminski, Melanie Dickinson and Noah Wardrip-Fruin, 'Felt: A Simple Story Sifter', ICIDS 2019",
+   "url": "https://mkremins.github.io/publications/Felt_SimpleStorySifter.pdf",
+   "quote": "very difficult to anticipate in advance the full range of questions",
+   "page": "section 5.1, Authoring Sifting Patterns"
   }
  ]
 }

@@ -1,0 +1,8 @@
+  probe: load=2.28 workers=0 streak=1 waited=0s
+  probe: load=2.12 workers=0 streak=2 waited=60s
+  probe: load=2.80 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=3f4914abcf54fd3135c87d30bd89ae8a81df68e5
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED: totalFiles 2489 (no test file added or removed — the three cars touch four existing test files), entries 3, totalTests = 31979 + the cars net new tests (derived by this run; the probe read +2 it() titles) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 58015 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
