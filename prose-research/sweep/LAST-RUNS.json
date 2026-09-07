@@ -42,7 +42,7 @@
   "argsFile": "args-martin-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r8.js",
-  "status": "RUNNING since 22:52 (session df942c1b) — critic only (skipSynth); section-martin.md 15:41 stands",
+  "status": "COMPLETE 23:1x (r8 = critic only; section-martin.md 15:41 stands; critic-martin.md 27 KB, prior critic preserved). NO find round left (S-BOUND: tolkien/martin none). Critic → S12 HOUSEKEEPING input: regrade 118 (VERBATIM: the capture carries the sentence) + drop the caveats on 119/120; 29 VERIFIED_VERBATIM rows (465-479, 690-704) have EMPTY trueWording (unreproducible); three quotation tags point at the wrong index ([705]/[536]→[706], [159]→[19]); ~30 duplicate rows across angles; 30 of 115 SKIPPED_TRIAGE rows have no kept row (Peterson's book 12 rows — feature 3 rests on Martin's 'about eight'); twelve self-contradictions listed (§6); 'Blocked 0' hides finder-stage blocks; copyright: aggregate 74 Simon + 51 Germani fragments, eleven from one 2018 Gyldayn excerpt — keep at most three; 238 long JSON rows flagged fullSentence. Live routes found: Guardian Open Platform (api-key=test), IA full-text API scoped by identifier (page numbers), Wayback CDX prefix queries.",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js",
   "prev": {
    "runId": "wf_3a29e467-750",
@@ -95,8 +95,8 @@
    "ai"
   ],
   "running": [
-   "martin",
-   "_fiveauthor"
+   "_fiveauthor",
+   "S6b-leguin-fingerprint"
   ],
   "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
@@ -106,7 +106,8 @@
    "tolkien",
    "wolfe",
    "dnd",
-   "ai"
+   "ai",
+   "martin"
   ],
   "open_decision": "(1) TRIAGE-BY-FEATURE completion pass — verify-only: leguin ~250–300, hobb ~60, wolfe ~60, dnd ~35 (every critic names it); kit change + verify-only runs; owner-gated on cost. (2) dnd's ONE targeted FIND round — its critic names the PLACE hole (5e gazetteers, DMG ch. 5 Settlements, SRD measurement, editorial staff). (3) ai's ONE targeted FIND round — its critic names the ARCHIVAL hole (worldbuilding/gazetteer/travel/biographical/historical-fact registers + the decoding literature). Both owner-gated; S-BOUND allows exactly one each.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
@@ -116,5 +117,10 @@
   "runId": "wf_55c30493-02f",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/five-author-check-workflow.js",
   "status": "RUNNING since 23:03 (session df942c1b) — S10: four Opus checkers (cap 2) over section-{kay,leguin,wolfe,hobb}.md + kept-*.json against the owner proposal's characterizations, then the seat folds FIVE_AUTHOR_CHECK.md; no essay on disk (args.essay unset)"
+ },
+ "_fingerprints": {
+  "S3c": "DONE already (stale queue row): K/primary/dnd-rules-srd52.fingerprint.json exists, PROVENANCE row 5 (SRD 5.2.1 pp. 5–18, CC-BY-4.0, fetched 09-05)",
+  "S6b": "DISPATCHED 23:20 as an Opus KIT lane (brief briefs/brief-S6B-LEGUIN-FINGERPRINT.md; receipt receipt-s6b-leguin-fingerprint.md) — the second research lane beside the five-author check; primary/raw was EMPTY (reboot) → lawful re-fetch, derived numbers only",
+  "S5c": "OWNER ROW: the Kay fingerprint needs the owner's own copies of two novels as local files (never sealed); nothing runs until the owner supplies them"
  }
 }

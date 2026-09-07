@@ -1,0 +1,12 @@
+PROOF_HEAD=2f1f9381f6a3f096b1a6e57bf3ab0a9686912222 start 22:27:30 load=2.42 2.63 2.76
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 49574 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneANCHOR905
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 5543ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 88ms
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 22846ms
+     × every config produces byte-identical output to the golden master 22840ms

@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 22:26:39 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 22:34:42 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -53,7 +53,7 @@
 | leguin | verifier | i843-885 | result | 7 | — | verdict file WRITTEN | 22:04:49 |
 | leguin | verifier | i889-923 | result | 8 | — | verdict file WRITTEN | 22:04:42 |
 | martin | critic |  | in-flight | 0 | — | — | 21:31:03 |
-| martin | critic |  | in-flight | 34 | — | — | 02:26:13 |
+| martin | critic |  | result | 34 | critic-martin.md | — | 02:31:58 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 02:10:22 |
 | wolfe | finder | close-continued | result | 41 | — | 93 claims, complete=True @21:09:26 | 23:31:55 |
 | wolfe | finder | close-continued | in-flight | 1 | — | 93 claims, complete=True @21:09:26 | 21:31:03 |
@@ -97,7 +97,9 @@
 | wolfe | verifier | i947-977 | result | 3 | — | verdict file WRITTEN | 00:10:34 |
 | wolfe | verifier | i978-992 | result | 4 | — | verdict file WRITTEN | 00:17:01 |
 | wolfe | verifier | i993-1007 | result | 7 | — | verdict file WRITTEN | 00:17:18 |
-| ? | other |  | in-flight | 0 | — | — | 02:26:34 |
-| ? | other |  | in-flight | 0 | — | — | 02:26:36 |
+| ? | other |  | result | 0 | — | — | 02:32:40 |
+| ? | other |  | in-flight | 0 | — | — | 02:34:33 |
+| ? | other |  | in-flight | 0 | — | — | 02:34:41 |
+| ? | other |  | result | 0 | check-leguin.md | — | 02:34:04 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
