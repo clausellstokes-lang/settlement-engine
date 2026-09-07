@@ -952,3 +952,9 @@ dist/assets/vendor-pdf-D7p7nzp1.js                              1,623.20 kB │ 
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
 
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 49252 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] STRICT DIST OK — 54 discovered/reported file(s), 459 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.
+GATE_END=2026-09-07T03:37:41Z
+TRUE_EXIT=0
+GATE_LOAD_POST=17.60 22.10 21.79
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=4243bdc610fe5b380f1d0029973cf9088bae1631

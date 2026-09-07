@@ -3,12 +3,12 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1037-1051",
- "lines": 76,
+ "lines": 104,
  "firstTs": "2026-09-07T03:32:59.437Z",
- "lastTs": "2026-09-07T03:36:50.869Z",
+ "lastTs": "2026-09-07T03:39:02.530Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 21
  },
  "urlsFetched": [
   "https://media.wizards.com/2018/dnd/downloads/DnD_BasicRules_2018.pdf",
@@ -17,7 +17,7 @@
   "https://www.dndbeyond.com/posts/1717-2024-core-rulebooks-to-expand-the-srd"
  ],
  "filesWritten": [],
- "lastAssistantText": "SRD 5.2.1 figures reproduce exactly under digit-run counting. Now SRD 5.1.",
+ "lastAssistantText": "The gap is tokenizer treatment of em-dash and non-breaking-hyphen compounds. Let me test whitespace tokenization and measure the planes appendix.",
  "run": "wf_37af3c74-8c8",
  "agent": "aec237fb294c83814",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_37af3c74-8c8/agent-aec237fb294c83814.jsonl",

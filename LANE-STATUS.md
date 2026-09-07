@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-06 23:37:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 23:39:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
+product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **L-UI-MAT** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
@@ -76,7 +76,7 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -111,5 +111,5 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
-## PROCESSES: 8548 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi;26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 14.29 22.40 21.88
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 4.37 15.65 19.27

@@ -3,15 +3,15 @@
  "name": "ai",
  "angle": "arch-second-tell-catalogue",
  "tag": null,
- "lines": 190,
+ "lines": 236,
  "firstTs": "2026-09-07T03:27:43.322Z",
- "lastTs": "2026-09-07T03:35:02.396Z",
+ "lastTs": "2026-09-07T03:38:52.773Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 45,
+  "Bash": 56,
   "WebFetch": 3,
-  "WebSearch": 3
+  "WebSearch": 7
  },
  "urlsFetched": [
   "https://en.wikipedia.org/wiki/Wikipedia:Criteria_for_speedy_deletion",
@@ -32,13 +32,30 @@
   "https://arxiv.org/abs/2406.05587",
   "https://www.arxiv.org/abs/2406.05587v3",
   "https://en.wikipedia.org/wiki/$p",
-  "https://arxiv.org/abs/$id"
+  "https://arxiv.org/abs/$id",
+  "https://arxiv.org/pdf/2301.07597",
+  "https://arxiv.org/abs/2306.04563",
+  "https://arxiv.org/abs/2305.14456",
+  "https://arxiv.org/pdf/2409.01754",
+  "https://api.crossref.org/works/10.1007/978-3-031-98420-4_7",
+  "https://fr.wikipedia.org/w/index.php?title=$e&action=raw",
+  "https://fr.wikipedia.org/w/index.php?title=Projet:Observatoire_des_IA&action=raw",
+  "https://fr.wikipedia.org/w/api.php?action=query&list=allpages&apprefix=Observatoire%20des%20IA&apnamespace=102&aplimit=60&format=json",
+  "https://arxiv.org/html/2607.14729v1",
+  "https://fr.wikipedia.org/w/index.php?title=Projet:Observatoire_des_IA/Rapport_du_9_mai_2026&action=raw",
+  "https://de.wikipedia.org/w/index.php?title=Wikipedia:Anzeichen_f%C3%BCr_KI-generierte_Inhalte&action=raw",
+  "https://arxiv.org/pdf/2510.26899"
  ],
  "filesWritten": [],
- "lastAssistantText": "Checkpointing now. Let me pre-verify every quote against the fetched text.",
+ "lastAssistantText": "Checkpoint written (37 claims, 10 sources). Now the rest of the named roster.",
  "run": "wf_00551368-b67",
  "agent": "a653748394a4e717d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a653748394a4e717d.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-arch-second-tell-catalogue.json",
+  "claims": 37,
+  "complete": false,
+  "mtime": "23:37:05"
+ }
 }

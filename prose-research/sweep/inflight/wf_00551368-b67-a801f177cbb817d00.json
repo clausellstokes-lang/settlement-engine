@@ -3,13 +3,13 @@
  "name": "ai",
  "angle": "arch-decoding-literature",
  "tag": null,
- "lines": 174,
+ "lines": 197,
  "firstTs": "2026-09-07T03:27:43.321Z",
- "lastTs": "2026-09-07T03:37:00.803Z",
+ "lastTs": "2026-09-07T03:38:02.242Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 40,
+  "Bash": 46,
   "WebFetch": 1,
   "WebSearch": 2
  },
@@ -25,10 +25,11 @@
   "https://raw.githubusercontent.com/sam-paech/antislop-sampler/main/README.md",
   "https://raw.githubusercontent.com/sam-paech/slop-forensics/main/README.md",
   "https://eqbench.com/slop-score.html",
-  "https://raw.githubusercontent.com/sam-paech/auto-antislop/main/README.md"
+  "https://raw.githubusercontent.com/sam-paech/auto-antislop/main/README.md",
+  "https://arxiv.org/pdf/2510.15061"
  ],
  "filesWritten": [],
- "lastAssistantText": "Paech has an arXiv paper (2510.15061). Fetching it.",
+ "lastAssistantText": "Now I'll add these five sources' claims and checkpoint.",
  "run": "wf_00551368-b67",
  "agent": "a801f177cbb817d00",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_00551368-b67/agent-a801f177cbb817d00.jsonl",

@@ -3,12 +3,12 @@
  "name": "dnd",
  "angle": null,
  "tag": "i1022-1036",
- "lines": 87,
+ "lines": 111,
  "firstTs": "2026-09-07T03:32:59.437Z",
- "lastTs": "2026-09-07T03:36:56.896Z",
+ "lastTs": "2026-09-07T03:38:55.213Z",
  "tools": {
   "ToolSearch": 1,
-  "Bash": 21
+  "Bash": 27
  },
  "urlsFetched": [
   "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
