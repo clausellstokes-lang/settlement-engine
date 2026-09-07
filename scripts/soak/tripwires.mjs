@@ -296,17 +296,22 @@ export const TRIPWIRES = Object.freeze([
     band: 'over >= 150 observed years: |y_last - y_mid| / y_mid <= 0.05, and every century multiplier < 50',
     home: 'tests/domain/demographicsCure.test.js:108-149 — the cure suite\'s own plateau clauses, INHERITED verbatim so the soak and the unit pin cannot disagree about what a plateau is',
     gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
-    // ⛔⛔ MEASURED BLIND, AND NOW IT SAYS SO (M1-F1, CONFIRMED twice by independent
-    // execution). `whole-world-soak.mjs` BUILDS both series per run and ships only the FINAL
-    // row (`finalPopulations`, `finalDiedFlags`); no written receipt has ever carried
-    // `yearlyPopulations`. On the 300-year research receipt this row therefore answered `[]`
-    // while the same detector, fed the series rebuilt from
+    // ⛔⛔ MEASURED BLIND, SAID SO, AND CURED AT §909 (M1-F1, CONFIRMED twice by independent
+    // execution). `whole-world-soak.mjs` BUILT both series per run and shipped only the
+    // FINAL row (`finalPopulations`, `finalDiedFlags`); until §909 no written receipt had
+    // ever carried `yearlyPopulations`. On the 300-year research receipt this row therefore
+    // answered `[]` while the same detector, fed the series rebuilt from
     // `behavioral.yearly[].stateVectors[id].population`, convicts all four settlements
     // (8319@149 → 10869@299; 202 → 1017; 324 → 244; 38 → 159). The unit pin was green
     // throughout because its fixture PLANTS the field — the estate's own "a fixture can be
-    // the only writer of the SHAPE" hazard, live. Shipping the series is a receipt SCHEMA
-    // change and the owner's row; until it lands the row is NOT-EXECUTABLE, which is a
-    // reading a freeze gate can act on and a silent `[]` is not.
+    // the only writer of the SHAPE" hazard, live. §909 ships both series ADDITIVELY on v5
+    // (no version integer moved), so a receipt written from that landing forward EXECUTES
+    // this row.
+    //
+    // ⚠ `requires` STAYS, AND THAT IS THE POINT OF IT. Every receipt already on disk still
+    // lacks both fields, and its silence must keep grading NOT-EXECUTABLE rather than
+    // clean — a reading a freeze gate can act on and a silent `[]` is not. The `requires`
+    // channel, not the schema integer, is what tells a pre-§909 receipt from a later one.
     //
     // ⚠ THE DIED FLAGS ARE REQUIRED TOO, AND NOT AS SYMMETRY. Without them the remnant law
     // has no exception list and this row would convict every lawful death — a series
@@ -349,9 +354,10 @@ export const TRIPWIRES = Object.freeze([
     band: 'no LIVING settlement holds one head count across its last 100 observed years',
     home: 'tests/domain/demographicsFloor.test.js — the floored-six unfreeze. The pre-cure defect had TWO halves and the bounded check only ever saw one: a settlement frozen at 200 for a century is as broken as one at 2.9e13, and it fires nothing',
     gate: (receipt) => receipt?.subsystems?.rules?.demographicsEnabled === true,
-    // The SAME blindness as its sibling above, and it was found the same way: on the real
-    // 300-year receipt the row is correctly silent once the series is rebuilt (nothing is
-    // frozen), but as shipped it could not have said otherwise about any world.
+    // The SAME blindness as its sibling above, found the same way and cured in the same
+    // §909 landing: on the real 300-year receipt the row is correctly silent once the series
+    // is rebuilt (nothing is frozen), but as shipped it could not have said otherwise about
+    // any world. `requires` stays for the archived receipts, exactly as above.
     requires: ['yearlyPopulations', 'yearlyDiedFlags'],
     detect: (receipt) => {
       const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];

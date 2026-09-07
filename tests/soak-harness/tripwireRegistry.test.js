@@ -374,13 +374,14 @@ describe('the tripwire registry', () => {
      * each row reads, from the row's own source; what the writer writes, from the writer's
      * own source; and the difference.
      *
-     * ⛔ THE BASELINE IS A RATCHET AND IT ONLY SHRINKS. Two rows are banked as unreachable —
-     * the two the owner's schema row (§907) will cure by shipping the per-year series. A
-     * THIRD row would fail this arm, and so would a re-blinding of a row already reachable.
-     * When the series lands, both figures go to zero and this baseline goes with them.
+     * ⛔ THE BASELINE IS A RATCHET AND IT ONLY SHRINKS — AND AT §909 IT REACHED ZERO. Two
+     * rows were banked as unreachable; `whole-world-soak.mjs` now ships `yearlyPopulations`
+     * and `yearlyDiedFlags` from run A, so BOTH figures are 0 and the banked pair moves
+     * `2 → 0` and `4 → 0`. A THIRD row would fail this arm, and so would a RE-BLINDING of
+     * either row cured here: the ratchet is now a floor at zero and nothing may climb off it.
      */
-    const UNREACHABLE_ROWS_BANKED = 2;
-    const UNREACHABLE_PAIRS_BANKED = 4;
+    const UNREACHABLE_ROWS_BANKED = 0;
+    const UNREACHABLE_PAIRS_BANKED = 0;
 
     const reach = tripwireFieldReach(TRIPWIRES, WRITER_SOURCE);
 
@@ -389,32 +390,54 @@ describe('the tripwire registry', () => {
     expect(reach.written.length).toBeGreaterThan(35);
     for (const field of ['failures', 'finalPopulations', 'finalDiedFlags', 'startPopulations',
       'stressorCounts', 'yearlyBytes', 'yearlyHashes', 'settlements', 'behavioral', 'liveness',
-      'subsystems', 'notExecutable', 'peakHeapUsedBytes', 'yearlyMs']) {
+      'subsystems', 'notExecutable', 'peakHeapUsedBytes', 'yearlyMs',
+      // ⭐ THE TWO §909 SHIPPED, asserted POSITIVELY beside their FINAL-state siblings. They
+      // were anchored ABSENCES here until the series landed; an absence cured is asserted as
+      // a presence, never quietly deleted.
+      'yearlyPopulations', 'yearlyDiedFlags']) {
       expect(reach.written, `the writer's key set is missing ${field}`).toContain(field);
     }
-    // …and the two the writer has never written are absent from it, which is the finding.
-    // Each absence is anchored by its own FINAL-state sibling — same object literal, same
-    // walker read — so a key set that drifted empty reds here instead of passing quietly.
-    expectAbsentWithAnchor(reach.written, 'yearlyPopulations', 'finalPopulations', "the writer's key set");
-    expectAbsentWithAnchor(reach.written, 'yearlyDiedFlags', 'finalDiedFlags', "the writer's key set");
 
     const unreachableRows = [...new Set(reach.unreachable.map((row) => row.id))];
-    expect(unreachableRows).toEqual(['capacity_plateau', 'capacity_floor_thaw']);
+    expect(unreachableRows).toEqual([]);
     expect(unreachableRows.length).toBeLessThanOrEqual(UNREACHABLE_ROWS_BANKED);
     expect(reach.unreachable.length).toBeLessThanOrEqual(UNREACHABLE_PAIRS_BANKED);
-    expect(reach.unreachable).toEqual([
+    expect(reach.unreachable).toEqual([]);
+    // No row is beyond the walker's reading.
+    expect(reach.unreadable).toEqual([]);
+
+    // ⛔⛔ A ZERO IS ONLY A MEASUREMENT IF THE INSTRUMENT COULD HAVE SAID OTHERWISE. With
+    // both series shipped, every assertion above passes just as well on a walker that
+    // silently reports nothing — the exact weak zero this whole registry exists to refuse.
+    // So the PRE-§909 writer is reconstructed by deleting the two shipped lines, and the
+    // walker is re-run against it: it must find the OLD 2 rows and 4 pairs. That is the
+    // control which proves the zero above was caused by the shipping.
+    const legacyWriter = WRITER_SOURCE
+      .replace(/\n\s*yearlyPopulations: runA\.yearlyPopulations,/, '\n')
+      .replace(/\n\s*yearlyDiedFlags: runA\.yearlyDiedFlags\.map\(\(year\) => year\.map\(Boolean\)\),/, '\n');
+    // ⚠ AND THE CONTROL IS PROVED NON-VACUOUS FIRST. A rename that stopped either replace
+    // from matching would leave `legacyWriter` identical to the real source and the control
+    // would assert the cure against the cure — an assertion that cannot fail.
+    expect(legacyWriter.length).toBeLessThan(WRITER_SOURCE.length);
+    expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyPopulations');
+    expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyDiedFlags');
+    const legacyReach = tripwireFieldReach(TRIPWIRES, legacyWriter);
+    expect(legacyReach.unreachable).toEqual([
       { id: 'capacity_plateau', field: 'yearlyDiedFlags' },
       { id: 'capacity_plateau', field: 'yearlyPopulations' },
       { id: 'capacity_floor_thaw', field: 'yearlyDiedFlags' },
       { id: 'capacity_floor_thaw', field: 'yearlyPopulations' },
     ]);
-    // ⭐ AND EVERY UNREACHABLE ROW DECLARES ITS OWN BLINDNESS. The walker and the runtime
-    // channel must name the same rows, or one of them is lying about the other.
-    expect(unreachableRows).toEqual(
+
+    // ⭐ AND EVERY UNREACHABLE ROW STILL DECLARES ITS OWN BLINDNESS — the law survives the
+    // cure, and it is read off the CONTROL because the live reach is now empty. The two rows
+    // KEEP their `requires`: an archived v4/v5 receipt written before §909 still lacks both
+    // fields, and its silence must still grade NOT-EXECUTABLE rather than clean. Reachability
+    // and requiredness were one fact while the writer was blind; they are two facts now, and
+    // this is the direction that matters — a blind row must announce itself.
+    expect([...new Set(legacyReach.unreachable.map((row) => row.id))]).toEqual(
       TRIPWIRES.filter((row) => Array.isArray(row.requires)).map((row) => row.id),
     );
-    // No row is beyond the walker's reading.
-    expect(reach.unreadable).toEqual([]);
 
     // ⛔ THE THIRD ROW, REFUSED WITH A MEASUREMENT. A walker that read only `receiptBody`
     // would report `non_finite_ledger_figure` as unreachable too — and it is not:
@@ -424,8 +447,14 @@ describe('the tripwire registry', () => {
     const bodyOnly = WRITER_SOURCE.slice(0, WRITER_SOURCE.indexOf('const receipt = {'));
     expectAbsentWithAnchor(receiptWriterFields(bodyOnly), 'nonFiniteFigures', 'finalPopulations',
       'the truncated body is still a live key set');
+    // ⚠ AND THE FALSE POSITIVE IS NOW ALONE, which is itself the §909 measurement. Before the
+    // series landed this list read three ids; the two capacity rows have left it because
+    // their fields live INSIDE `receiptBody` and survive the truncation, so the only row the
+    // body-only read still slanders is the one whose key really is added a statement later.
     expect([...new Set(tripwireFieldReach(TRIPWIRES, bodyOnly).unreachable.map((row) => row.id))])
-      .toEqual(['non_finite_ledger_figure', 'capacity_plateau', 'capacity_floor_thaw']);
+      .toEqual(['non_finite_ledger_figure']);
+    expect(receiptWriterFields(bodyOnly)).toContain('yearlyPopulations');
+    expect(receiptWriterFields(bodyOnly)).toContain('yearlyDiedFlags');
     expect(reach.written).toContain('nonFiniteFigures');
 
     // ⛔ THE NEGATIVE CONTROL. Without it this arm passes on a walker that reads nothing.

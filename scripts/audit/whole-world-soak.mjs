@@ -1014,6 +1014,10 @@ const receiptBody = {
   // Envelope v5 ADDS the `subsystems` section below. Every v4 field keeps its
   // exact v4 meaning; consumers accept both versions
   // (SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).
+  // SCHEMA NOTE (§909, cause §907 M1-F1): the per-year `yearlyPopulations` /
+  // `yearlyDiedFlags` series ship ADDITIVELY on v5 — the same form WR-9's
+  // `warConvergence` took — so the integer does not move and a pre-series receipt is told
+  // apart by the rows' `requires` channel, not by its version.
   schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
   kind: 'whole_world_soak',
   ...(CASE_ID ? { caseId: CASE_ID } : {}),
@@ -1072,6 +1076,39 @@ const receiptBody = {
   // any downstream population-collapse tripwire needs the died flags or it reports every
   // lawful death as a finding. They were computed and then discarded; now they ship.
   finalDiedFlags: (runA.yearlyDiedFlags[runA.yearlyDiedFlags.length - 1] || []).map(Boolean),
+  // ⭐⭐ THE PER-YEAR POPULATION SERIES, AND ITS DIED FLAGS. §907 M1-F1 IS THE CAUSE, and it
+  // was a measured blindness rather than a missing nicety: this script BUILT both series
+  // every run (`:389-390`, pushed at `:489-490`, returned at `:555-556`) and shipped only
+  // the FINAL row, so `capacity_plateau` and `capacity_floor_thaw` — two DETERMINISTIC
+  // registry rows keyed on exactly these two fields — hit their own
+  // `Array.isArray(receipt?.x) ? … : []` guard on a field no writer shipped, read a
+  // zero-length series, took their "did not observe" early return and answered `[]`. On the
+  // 300-year research receipt the same detectors, fed the series rebuilt from
+  // `behavioral.yearly[].stateVectors[id].population`, convict all four settlements. The
+  // rows were not passing; they were not asking.
+  //
+  // ⚠ BOTH OR NEITHER, AND THAT IS THE REMNANT LAW AGAIN. Without the died flags the
+  // plateau row has no exception list and convicts every lawful death, so a series shipped
+  // alone would be worse than no series at all — which is why both rows declare BOTH fields
+  // in their `requires` (`scripts/soak/tripwires.mjs:314,:355`).
+  //
+  // ⛔ ADDITIVE, AND DELIBERATELY NOT A SCHEMA BUMP — the `beliefDivergence` precedent this
+  // envelope has now followed five times (`yearlyHashes` above, `advanceEpochs`, `liveness`
+  // below, `finalDiedFlags` beside it, and `realmDemography` one level down). Every v5 field
+  // keeps its exact v5 meaning and no consumer is required to read these two. THE VERSION
+  // INTEGER IS NOT WHAT MAKES THIS HONEST: a receipt written before this line and one
+  // written after are told apart POSITIVELY, by the rows' own `requires` channel naming the
+  // absent field on the receipt's face (§206.2b's third status), which is a reading a freeze
+  // gate can act on and a version number is not. §909 measured the 5 → 6 bump the brief
+  // asked for and the chair WITHDREW it on that measurement: the constant's one home is
+  // `src/domain/certification/behavioralContract.js:117`, outside this lane's charter and
+  // inside the certification contract, and a correct bump also moves this file's checkpoint
+  // identity stamp (`:519`), its restore-probe stamp (`:644`) and the
+  // `soak_subsystem_configuration` block's (`behavioral-observation.mjs:1202`), which share
+  // it, plus `SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS` in two places and five pinned
+  // fixtures — all of it to buy a signal the `requires` channel already carries better.
+  yearlyPopulations: runA.yearlyPopulations,
+  yearlyDiedFlags: runA.yearlyDiedFlags.map((year) => year.map(Boolean)),
   // performance-scale-6 cost series (the sim-report artifact for the tick axis).
   yearlyBytes: runA.yearlyBytes,
   yearlyRealmBytes: runA.yearlyRealmBytes,
