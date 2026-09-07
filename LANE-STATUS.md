@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 02:32:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 02:39:25 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
@@ -132,16 +132,16 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - **dnd**: claims 1153 · verdicts 1001 (todo 152) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
 - **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-07 01:37 · critic 09-07 02:10
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
-- **leguin**: claims 924 · verdicts 771 (todo 153) · kept 540 · partial 91 · verdict files 47 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
+- **leguin**: claims 924 · verdicts 786 (todo 138) · kept 551 · partial 94 · verdict files 48 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r9/wf_14be9775-021, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r11/wf_23c7ccc2-48d, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_0eb229cc-f75: 50 journal lines, 25 agents
-- wf_14be9775-021: 14 journal lines, 8 agents
-- wf_23c7ccc2-48d: 1 journal lines, 1 agents
+- wf_14be9775-021: 15 journal lines, 8 agents
+- wf_23c7ccc2-48d: 6 journal lines, 5 agents
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;34447 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;34452 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;52543 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 38.79 32.67 27.76
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;34447 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;34452 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 26.61 27.24 27.25

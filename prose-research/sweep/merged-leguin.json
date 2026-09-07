@@ -17629,6 +17629,20 @@
    "note": "Opening section, in the series 'fertile imagination, winsome characters, fabulous plots, and, most of all, resonant prose'. Byline Jason P. Vest, datePublished 2021-05-30.",
    "fromFile": "verdicts-leguin-i628-708.json"
   },
+  "637": {
+   "index": 637,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "both the voices of the anthropologist and the people being studied",
+   "note": "Cummins, search-inside hit: the sentence runs 'the textual model of the ethnograph, in which' the quoted phrase 'are heard'. A separate hit in the same book uses the exact wording 'The ethnograph model', so the claim's 'model' limb is on the page too.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "638": {
+   "index": 638,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin uses an omniscient point of view",
+   "note": "Window widened: the section is the 'narrative of Ged's life, from about age seven to nineteen'. Claim drops 'about'; otherwise every limb sits in one sentence.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
   "639": {
    "index": 639,
    "verdict": "VERIFIED_VERBATIM",
@@ -17650,12 +17664,63 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "642": {
+   "index": 642,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to create an air of factuality",
+   "note": "Full window: 'also in the long tradition of fantastic narratives which include' documents, then the quoted phrase. 'fantastic' and 'documents' both present.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "643": {
+   "index": 643,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The narrator is a historian, telling a familiar story",
+   "note": "Sentence follows a ('WK,' p. 66) citation. A second hit in the same book pairs the siglum with the title Winter's King, confirming the narrator discussed is that story's.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "644": {
+   "index": 644,
+   "verdict": "PARTIAL",
+   "trueWording": "Interpolated into the narrative he composes five years after Estraven's death",
+   "note": "The quoted phrase (archives of the College of Historians in Erhenrang) is verbatim and is cited to LHD p. 26 — i.e. chapter 2, early in the book. What is composed five years after Estraven's death is Ai's narrative; the documents are interpolated into it.",
+   "unsupportedLimb": "the placement 'documents following Estraven's death' — Bittner puts the documents interpolated throughout Ai's narrative, not after the death",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "645": {
+   "index": 645,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "extracts from Estraven's journal, an anthropological report, and Gethenian legends",
+   "note": "Widened: the sentence's agent is Genly Ai, who 'weaves together his own story with' that list, which continues into folktales and religious texts. All three materials the claim names are on the page as interleaved.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
   "646": {
    "index": 646,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "647": {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The landscape is quite ordinary by earth standards",
+   "note": "Preceding clause: 'their history is in many ways ours'; the sentence continues 'if a bit cold'. The world is not named in the window, but the claim only says 'one of Le Guin's worlds'.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "648": {
+   "index": 648,
+   "verdict": "PARTIAL",
+   "trueWording": "Over all lies an editorial framework, intermingled with interpolated tales",
+   "note": "Quotation is verbatim; the list continues 'and constant shifts back and forth in narrative time', preceded by 'The storytelling process is intricate.' The framework itself is named editorial, which is the sharper fact for a compiler/editor register.",
+   "unsupportedLimb": "'a narrative framework' — Slusser's word is editorial, not narrative",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "649": {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin's style has evolved towards simplicity",
+   "note": "Verbatim in the Bloom-edited Modern Critical Views volume (identifier ursulakleguin00bloo), inside a concessive 'Though ... it is still character-' clause. Contributor not resolvable from the window, matching the claim's own hedge.",
+   "fromFile": "verdicts-leguin-i637-659.json"
   },
   "650": {
    "index": 650,
@@ -17672,12 +17737,41 @@
    "unsupportedLimb": "which contributed essay — the snippet route establishes only that the passage is in the Bloom volume",
    "fromFile": "verdicts-leguin-regrade-r8.json"
   },
+  "652": {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "wryly cataloging a weird matter",
+   "note": "Widened: 'The narrator here is neither Ai nor Le Guin but a field investigator of the Ekumen', then the quoted phrase. Page says 'here' rather than naming a chapter; context is the androgyny field notes. Byline is not visible in a search-inside window — the identical passage also stands in Bloom's 1987 LHD volume (see 655), consistent with his reused introduction.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "653": {
+   "index": 653,
+   "verdict": "CONTRADICTED",
+   "trueWording": "six of the twenty chapters (not to mention the Appendix)",
+   "note": "The quoted phrase is verbatim, but the count is wrong: the page reads 'documentation': six of the twenty chapters, not three. The claim's 'three' is lifted from the clause that follows the dash, which enumerates three Hearth tales as some of those documents.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
   "654": {
    "index": 654,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "her alternate realities with a precise, dialectical style",
    "note": "Same Bloom volume; walked left to 'Le Guin guides the reader through her alternate realities with a precise, dialectical style and the storyteller's...'. Claim's 'leading the reader' = source's 'guides the reader'.",
    "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "655": {
+   "index": 655,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her field notes add a number of sharper observations",
+   "note": "Verbatim in the Bloom-edited LHD volume; preceded by 'cataloging a weird matter.' and followed by 'these androgynes have no'. The investigator antecedent is the Ekumen field investigator of the previous sentence.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "656": {
+   "index": 656,
+   "verdict": "PARTIAL",
+   "trueWording": "in Earthsea specifically, and indeed in much of Le Guin's stories",
+   "note": "Quotation 'a steady use of free indirect discourse' is verbatim; the sentence opens 'What we have in Earthsea specifi-cally' and continues to Gerald Prince's definition. Earthsea is novel-length, so narrowing the scope to short fiction is the claim's own addition.",
+   "unsupportedLimb": "'short fiction' — the page's referent is Earthsea specifically plus Le Guin's stories generally, not short fiction",
+   "fromFile": "verdicts-leguin-i637-659.json"
   },
   "657": {
    "index": 657,
@@ -17686,6 +17780,20 @@
    "note": "ursulakleguinbey0000cadd (Cadden, Ursula K. Le Guin Beyond Genre, 2005). Widened hit: 'Le Guin uses free indirect discourse to help put speakers on a more equal ideological footing with other characters'. Source says 'to help put'; claim says 'to put'.",
    "unsupportedLimb": "the unqualified 'to put' — the source reads 'to help put'",
    "fromFile": "verdicts-leguin-regrade-r8.json"
+  },
+  "658": {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a text that is neither story nor afterword",
+   "note": "Verbatim, appositive to 'A Description of Earthsea,' and followed by 'While the foreword is clearly'.",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  },
+  "659": {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "almost thirty pages of Earthsea lore and history",
+   "note": "Verbatim, appositive to the title and followed by 'The first tale, \"The Finder'. OCR leaves a stray closing single quote after 'history'; an unfiltered search-inside for the phrase returns only this book, so the wording is Cadden's own.",
+   "fromFile": "verdicts-leguin-i637-659.json"
   },
   "663": {
    "index": 663,

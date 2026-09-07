@@ -1788,6 +1788,54 @@
   }
  },
  {
+  "index": 644,
+  "feature": "civic record register",
+  "claim": "Bittner reports that the documents following Estraven's death include a hearth-tale from the archives of the College of Historians in Erhenrang.",
+  "source": "James W. Bittner, Approaches to the Fiction of Ursula K. Le Guin (1984)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aapproachestofict0000bitt%20AND%20%22archives%20of%20the%20College%20of%20Historians%20in%20Erhenrang%22",
+  "quote": "archives of the College of Historians in Erhenrang",
+  "page": "archive.org search-inside snippet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1984",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium (snippet-only)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 644,
+   "verdict": "PARTIAL",
+   "trueWording": "Interpolated into the narrative he composes five years after Estraven's death",
+   "note": "The quoted phrase (archives of the College of Historians in Erhenrang) is verbatim and is cited to LHD p. 26 — i.e. chapter 2, early in the book. What is composed five years after Estraven's death is Ai's narrative; the documents are interpolated into it.",
+   "unsupportedLimb": "the placement 'documents following Estraven's death' — Bittner puts the documents interpolated throughout Ai's narrative, not after the death",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  }
+ },
+ {
+  "index": 648,
+  "feature": "civic record register",
+  "claim": "Slusser describes a narrative framework intermingled with interpolated tales, documents and diaries.",
+  "source": "George Edgar Slusser, The Farthest Shores of Ursula K. Le Guin (1976)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Afarthestshoresof0000slus%20AND%20%22intermingled%20with%20interpolated%20tales%2C%20documents%2C%20diaries%22",
+  "quote": "intermingled with interpolated tales, documents, diaries",
+  "page": "archive.org search-inside snippet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1976",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium (snippet-only)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 648,
+   "verdict": "PARTIAL",
+   "trueWording": "Over all lies an editorial framework, intermingled with interpolated tales",
+   "note": "Quotation is verbatim; the list continues 'and constant shifts back and forth in narrative time', preceded by 'The storytelling process is intricate.' The framework itself is named editorial, which is the sharper fact for a compiler/editor register.",
+   "unsupportedLimb": "'a narrative framework' — Slusser's word is editorial, not narrative",
+   "fromFile": "verdicts-leguin-i637-659.json"
+  }
+ },
+ {
   "index": 651,
   "feature": "parataxis vs hypotaxis",
   "claim": "That essay credits Le Guin with a flexible use of compound and complex sentences.",
@@ -1809,6 +1857,30 @@
    "note": "ursulakleguin00bloo (Bloom, ed., Ursula K. Le Guin, 1986). Walked left to the subject: \"Le Guin's style has evolved towards simplicity, it is still characterized by this flowing quality, a skillful use of cadence and sound patterns, and a flexible use...\". The snippet route cannot say which contributed essay holds the passage, only that it is in the volume.",
    "unsupportedLimb": "which contributed essay — the snippet route establishes only that the passage is in the Bloom volume",
    "fromFile": "verdicts-leguin-regrade-r8.json"
+  }
+ },
+ {
+  "index": 656,
+  "feature": "point of view and distance",
+  "claim": "Cadden says much of Le Guin's short fiction shows a steady use of free indirect discourse.",
+  "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre: Fiction for Children and Adults (Routledge, 2005)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22a%20steady%20use%20of%20free%20indirect%20discourse%22",
+  "quote": "a steady use of free indirect discourse",
+  "page": "archive.org search-inside snippet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2005",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "none",
+  "confidence": "medium (snippet-only)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 656,
+   "verdict": "PARTIAL",
+   "trueWording": "in Earthsea specifically, and indeed in much of Le Guin's stories",
+   "note": "Quotation 'a steady use of free indirect discourse' is verbatim; the sentence opens 'What we have in Earthsea specifi-cally' and continues to Gerald Prince's definition. Earthsea is novel-length, so narrowing the scope to short fiction is the claim's own addition.",
+   "unsupportedLimb": "'short fiction' — the page's referent is Earthsea specifically plus Le Guin's stories generally, not short fiction",
+   "fromFile": "verdicts-leguin-i637-659.json"
   }
  },
  {

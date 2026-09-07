@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "in progress after 22 sources",
+ "complete": true,
+ "coverage": "Named roster: FETCHED — the free Death House PDF on media.wizards.com (under its 'Curse of Strahd Introductory Adventure.pdf' filename; the 'Death House.pdf' name 404s), the Settlement Tracker PDF on media.dndbeyond.com, SRD 5.1 and SRD 5.2.1 (both read whole, both negative for settlement description and for read-aloud/boxed text), five D&D Beyond 'Encounter of the Week' columns and eight official dndbeyond.com preview/excerpt/design articles, plus the open 2024 Free Rules 'The Basics' section. BLOCKED — Lost Mine of Phandelver on D&D Beyond (every /sources/dnd/lmop/ path redirects to a claim page), replaced by the official 'Visit Phandalin' article which reprints the published Phandalin boxed text with a 'Source: Dragon of Icespire Peak' line; Dragon+ via Wayback (raw captures of dragonmag.com return a JavaScript shell with no article body, so no Dragon+ claim was written); the DMs Guild 'Style Guide Resources' page (403, no Wayback capture), so the existence of a D&D House Style Guide for creators is reported but not claimed. NOT FOUND — no publicly published Wizards of the Coast prose style guide exists at any lawful route I could reach; the nearest publisher-authored substitutes are Shawn Merwin's boxed-text column and the Free Rules paragraph. Substantive by route: 9 publisher primaries read raw (2 PDFs from media.wizards.com/media.dndbeyond.com, 2 SRD PDFs, the Free Rules section, the Phandalin Post handout text, 3 more), 8 official D&D Beyond articles and columns, 1 designer PDF recovered through the Wayback raw capture (Perkins's collected 2011 columns), 4 relays/reviews that quote or index the page (PC Gamer via Wayback, Gaming Nexus, Lex Starwalker, Tools and Taverns), and 4 sources logged non-substantive or blocked. Discovery stopped after two consecutive searches surfaced nothing new that was both lawful and on-angle. No archive.org or other full-book scan, no Roll20 or purchase-gated body text, was used for any claim.",
  "sourcesRead": [
   {
    "title": "Settlement Tracker (2024 Dungeon Master's Guide handout)",
@@ -185,6 +185,38 @@
    "substantive": false,
    "date": "checked 2026-09-07",
    "route": "BLOCKED — 403 to curl, no Wayback capture available"
+  },
+  {
+   "title": "Let's Design an Adventure: Boxed Text (Shawn Merwin, D&D Beyond)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-11-06",
+   "route": "curl with browser user agent"
+  },
+  {
+   "title": "The Basics — D&D Free Rules (2024), 'Step 1: Describe the Situation'",
+   "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024",
+   "route": "curl with browser user agent — this free-rules section is served without sign-in"
+  },
+  {
+   "title": "The Dungeon Master Experience 2011 collected columns (Christopher Perkins, Wizards of the Coast)",
+   "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2011",
+   "route": "live wizards.com URL now returns an HTML page; read as PDF via the Wayback raw capture, then pdftotext"
+  },
+  {
+   "title": "D&D Settlement Sizes — Hamlet, Village, Town, and City (Vito, Tools and Taverns)",
+   "url": "https://toolsandtaverns.com/guides/settlement-guide",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2026-07-13",
+   "route": "curl with browser user agent — a generator vendor's guide; attributes population tiers to the DMG without quoting it"
   }
  ],
  "claims": [
@@ -316,38 +348,10 @@
   },
   {
    "feature": "boxed text form",
-   "claim": "In its free Death House adventure Wizards of the Coast introduces read-aloud text with a bare instruction to read, placed after the DM-facing sentence that positions the party.",
-   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
-   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
-   "quote": "Once they reach the village, read:",
-   "page": "Death House, 'Rose and Thorn'",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2016",
-   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
-   "registerHint": "chronicle-line",
-   "confidence": "high"
-  },
-  {
-   "feature": "boxed text form",
    "claim": "The Death House read-aloud paragraph opens a settlement with a road, the village, and a simile drawn from its own building stock rather than with any statistic.",
    "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
    "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
    "quote": "The gravel road leads to a village, its tall houses dark as",
-   "page": "Death House, arrival read-aloud",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2016",
-   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
-   "registerHint": "chronicle-line",
-   "confidence": "high"
-  },
-  {
-   "feature": "concrete sensory noun",
-   "claim": "The Death House arrival read-aloud names the village's buildings as solemn dwellings before naming any person.",
-   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
-   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
-   "quote": "Nestled among these solemn dwellings",
    "page": "Death House, arrival read-aloud",
    "kind": "own-words",
    "polarity": "applies",
@@ -368,34 +372,6 @@
    "date": "2016",
    "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
    "registerHint": "dossier-archivist",
-   "confidence": "high"
-  },
-  {
-   "feature": "dm-facing sentence",
-   "claim": "The DM-facing history section of Death House states the townsfolk's behaviour toward the building as a present-tense civic fact.",
-   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
-   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
-   "quote": "Locals give the building a wide berth",
-   "page": "Death House, 'History'",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2016",
-   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
-   "registerHint": "dossier-archivist",
-   "confidence": "high"
-  },
-  {
-   "feature": "naming and forms of address",
-   "claim": "Death House gives a child character a formal given name and a bracketed short form, and states the relationship and age in the same clause.",
-   "source": "Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016",
-   "url": "https://media.wizards.com/2016/downloads/DND/Curse%20of%20Strahd%20Introductory%20Adventure.pdf",
-   "quote": "her seven-year-old brother, Thornboldt",
-   "page": "Death House, 'Rose and Thorn'",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2016",
-   "routeHint": "direct PDF fetch from media.wizards.com, pdftotext",
-   "registerHint": "none",
    "confidence": "high"
   },
   {
@@ -425,20 +401,6 @@
    "routeHint": "curl with browser user agent",
    "registerHint": "none",
    "confidence": "high"
-  },
-  {
-   "feature": "edition and house style",
-   "claim": "In the publisher's own chapter list the 2024 Dungeon Master's Guide puts campaign-setting creation in chapter 5, not in the adventure-environment chapter the 2014 book used.",
-   "source": "DND Staff, 'Updates in the Dungeon Master's Guide (2024)', D&D Beyond, 20 Feb 2025",
-   "url": "https://www.dndbeyond.com/posts/1916-updates-in-the-dungeon-masters-guide-2024",
-   "quote": "explores how to create a campaign and campaign setting",
-   "page": "'Updated Structure and Information', Chapter 5",
-   "kind": "vendor",
-   "polarity": "asserts",
-   "date": "2025-02-20",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "none",
-   "confidence": "medium — the page asserts the 2024 placement; the contrast with 2014 is my framing, and the page does not name the 2014 chapter"
   },
   {
    "feature": "place and institution description",
@@ -483,20 +445,6 @@
    "confidence": "high"
   },
   {
-   "feature": "boxed text form",
-   "claim": "The official column cues its read-aloud with an instruction that licenses paraphrase rather than verbatim reading.",
-   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
-   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
-   "quote": "read or paraphrase the following",
-   "page": "'Investigation Encounter: Snowed In'",
-   "kind": "own-words",
-   "polarity": "asserts",
-   "date": "2020",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "chronicle-line",
-   "confidence": "high"
-  },
-  {
    "feature": "concrete sensory noun",
    "claim": "The arrival read-aloud describes the village through its housing stock and street pattern rather than through its inhabitants.",
    "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
@@ -523,20 +471,6 @@
    "routeHint": "curl with browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
-  },
-  {
-   "feature": "place and institution description",
-   "claim": "The column expresses a settlement's market depth as a gp threshold above which a specialty shop must be searched for, the same economic handle the 2024 settlement handout records.",
-   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020",
-   "url": "https://www.dndbeyond.com/posts/732-encounter-of-the-week-snowed-in",
-   "quote": "an item that costs more than 100 gp",
-   "page": "'1. The Haven'",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2020",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "dm-page",
-   "confidence": "medium — the equation with the 2024 handout's field is my comparison, not the page's"
   },
   {
    "feature": "naming and forms of address",
@@ -581,20 +515,6 @@
    "confidence": "high"
   },
   {
-   "feature": "dm-facing sentence",
-   "claim": "An official D&D Beyond column states that describing travel in an interesting and engaging way is hard to do.",
-   "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020",
-   "url": "https://www.dndbeyond.com/posts/855-encounter-of-the-week-trek-to-ten-towns",
-   "quote": "Describing travel in an interesting and engaging way is hard to do",
-   "page": "'Trek to Ten-Towns'",
-   "kind": "own-words",
-   "polarity": "asserts",
-   "date": "2020",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "dm-page",
-   "confidence": "high"
-  },
-  {
    "feature": "plainness and economy",
    "claim": "The same column advises compressing an unremarkable stretch into a single sentence rather than accumulating uninspired description.",
    "source": "Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020",
@@ -621,20 +541,6 @@
    "routeHint": "curl with browser user agent",
    "registerHint": "chronicle-line",
    "confidence": "high"
-  },
-  {
-   "feature": "place and institution description",
-   "claim": "A reporter covering the publisher's own preview says Settlements is one of the alphabetically arranged topics in the 2024 Dungeon Master's Guide's DM's Toolbox chapter.",
-   "source": "Randy, Gaming Nexus, reporting a Wizards of the Coast preview interview with Chris Perkins and Todd Kenreck, 10 Oct 2024",
-   "url": "https://www.gamingnexus.com/News/65236/The-DMs-Toolbox-in-the-DD-2024-Dungeon-Masters-Guide-is-filled-with-fireball-fungus-and-total-party-kills",
-   "quote": "The topics are so varied that they've resorted to an alphabetical presentation",
-   "page": "opening section",
-   "kind": "reception",
-   "polarity": "asserts",
-   "date": "2024-10-10",
-   "routeHint": "curl with browser user agent; 'Settlements' appears in the bulleted topic list further down the page",
-   "registerHint": "dm-page",
-   "confidence": "medium — the quotation supports the alphabetical arrangement; the presence of Settlements rests on a one-word list item on the same page"
   },
   {
    "feature": "place and institution description",
@@ -676,34 +582,6 @@
    "date": "2024-10-10",
    "routeHint": "curl with browser user agent",
    "registerHint": "dossier-archivist",
-   "confidence": "high"
-  },
-  {
-   "feature": "place and institution description",
-   "claim": "The same report says the 2024 settlement tables are rolled live, with a designer building a random settlement on the spot.",
-   "source": "Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024",
-   "url": "https://www.gamingnexus.com/News/65236/The-DMs-Toolbox-in-the-DD-2024-Dungeon-Masters-Guide-is-filled-with-fireball-fungus-and-total-party-kills",
-   "quote": "Chris Perkins builds a random settlement while he's just sitting there",
-   "page": "settlement demonstration paragraph",
-   "kind": "reception",
-   "polarity": "asserts",
-   "date": "2024-10-10",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "dossier-archivist",
-   "confidence": "high"
-  },
-  {
-   "feature": "edition and house style",
-   "claim": "A long-standing D&D usability critic judges the 2014 Dungeon Master's Guide's organization not the best way to parse the job of being a dungeon master.",
-   "source": "Mike Shea (Sly Flourish), 'Gems of the D&D Dungeon Master's Guide', 1 Mar 2021",
-   "url": "https://slyflourish.com/gems_of_the_dmg.html",
-   "quote": "the best way to parse the job of being a dungeon master",
-   "page": "'How to Read the Dungeon Master's Guide'",
-   "kind": "analysis",
-   "polarity": "disputes",
-   "date": "2021-03-01",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "none",
    "confidence": "high"
   },
   {
@@ -792,20 +670,6 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "The same published passage carries the town's deep history in one physical observation about its ruins.",
-   "source": "Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article",
-   "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
-   "quote": "Crumbling stone ruins surround the newer houses and shops",
-   "page": "'Tips For Running Phandalin in Your Games', quoted boxed text",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2019 text, reprinted 2023",
-   "routeHint": "curl with browser user agent",
-   "registerHint": "annalist voice and deep time",
-   "confidence": "high"
-  },
-  {
-   "feature": "place and institution description",
    "claim": "The official article's own settlement table gives each location a proprietor and a verbless short description.",
    "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
    "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
@@ -833,20 +697,6 @@
    "confidence": "high"
   },
   {
-   "feature": "place and institution description",
-   "claim": "That table describes the town's administrative institution as a records office and trading post in one noun phrase.",
-   "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
-   "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
-   "quote": "Records office and trading post",
-   "page": "'Key NPCs and Locations' table, Phandalin Miner's Exchange row",
-   "kind": "vendor",
-   "polarity": "applies",
-   "date": "2023-09-18",
-   "registerHint": "dossier-archivist",
-   "routeHint": "curl with browser user agent",
-   "confidence": "high"
-  },
-  {
    "feature": "dm-facing sentence",
    "claim": "The article instructs the DM to describe a town's layout starting from its street surface and cart tracks.",
    "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
@@ -857,20 +707,6 @@
    "polarity": "asserts",
    "date": "2023-09-18",
    "registerHint": "dm-page",
-   "routeHint": "curl with browser user agent",
-   "confidence": "high"
-  },
-  {
-   "feature": "concrete sensory noun",
-   "claim": "The article prescribes a named craft sound as the second sensory layer after sight when opening a town.",
-   "source": "Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023",
-   "url": "https://www.dndbeyond.com/posts/1515-visit-phandalin-d-ds-most-popular-starter-town",
-   "quote": "the distant clang of a blacksmith's hammer",
-   "page": "'Arrival in Phandalin', 'Sounds and Smells'",
-   "kind": "vendor",
-   "polarity": "asserts",
-   "date": "2023-09-18",
-   "registerHint": "chronicle-line",
    "routeHint": "curl with browser user agent",
    "confidence": "high"
   },
@@ -909,20 +745,6 @@
    "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
    "quote": "Linene Graywind, owner of Lionshield Coster in Phandalin",
    "page": "'Goblin Ambush Shocks Travelers on Triboar Trail'",
-   "kind": "own-words",
-   "polarity": "applies",
-   "date": "2023-09-05",
-   "registerHint": "herald-pools",
-   "routeHint": "curl with browser user agent",
-   "confidence": "high"
-  },
-  {
-   "feature": "naming and forms of address",
-   "claim": "The same newspaper attributes an ordinary resident by given name alone plus species and residence.",
-   "source": "Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023",
-   "url": "https://www.dndbeyond.com/posts/1560-downloadable-handout-read-the-latest-edition-of",
-   "quote": "said Freda, a gnome resident of Phandalin",
-   "page": "'Redbrands' Reign of Terror'",
    "kind": "own-words",
    "polarity": "applies",
    "date": "2023-09-05",
@@ -1043,18 +865,200 @@
    "confidence": "high"
   },
   {
-   "feature": "edition and house style",
-   "claim": "The same series places a separate Creating Settlements discussion in the 2014 guide's chapter 1, distinct from the chapter 5 material.",
-   "source": "Lex Starwalker, Game Master's Journey episode 235 index of earlier episodes, 16 Dec 2018",
-   "url": "https://lexstarwalker.com/gamemastersjourney/235",
-   "quote": "Creating Settlements",
-   "page": "episode index, 'Episode 158: DMG Chapter 1'",
-   "kind": "analysis",
-   "polarity": "mentions",
-   "date": "2018-12-16",
-   "registerHint": "none",
+   "feature": "boxed text form",
+   "claim": "A Wizards of the Coast adventure designer states on the publisher's own site that boxed text is named for the line that marks it to be read aloud.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "denoting that it should be read aloud to the players",
+   "page": "opening paragraph",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
    "routeHint": "curl with browser user agent",
-   "confidence": "medium — the page's index line reads 'Episode 158: DMG Chapter 1 - Creating Settlements for Your Campaign'; the chapter attribution is the podcaster's, not the book's own"
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "The same designer's first tip is to write boxed text in the third person rather than the second.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Move from the second-person point of view to the third person",
+   "page": "'Tip 1'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "He gives as the reason that dropping the second person makes it hard to attribute actions or feelings to the characters.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "it’s difficult to inadvertently include character actions, motivations, feelings, or movements",
+   "page": "'Tip 1'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "The same designer rules the novelist's impulse out of boxed text.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "boxed text is not the place to unleash that inner novelist",
+   "page": "'Tip 2'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "He rules that boxed text must describe only what the characters can sense.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Describe everything the characters can sense, but not what they can’t",
+   "page": "'Tip 3'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "sentence length variation",
+   "claim": "He measures his own model boxed text at four sentences and under a hundred words.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Four sentences, and less than 100 words.",
+   "page": "'A Boxed-Text Opening'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "opening sentence",
+   "claim": "He assigns the opening sentence of a scene the job of setting tone and introducing the scene.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "The first sentence sets the tone and introduces the scene",
+   "page": "'A Boxed-Text Opening'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019-11-06",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "boxed text form",
+   "claim": "The 2024 free rules define boxed text as text meant to be read aloud when the characters first arrive at a location.",
+   "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+   "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+   "quote": "meant to be read aloud to the players when their characters",
+   "page": "'Step 1: Describe the Situation'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "curl with browser user agent; this free-rules page is served without sign-in",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "The same 2024 free-rules paragraph says boxed text usually describes locations.",
+   "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+   "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+   "quote": "It usually describes locations so the players know what’s happening",
+   "page": "'Step 1: Describe the Situation'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "sentence length variation",
+   "claim": "The publisher's own 2024 rules put the attention limit for descriptive text at about three sentences.",
+   "source": "Wizards of the Coast, D&D Free Rules (2024), 'The Basics'",
+   "url": "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+   "quote": "lose focus after about three sentences of descriptive text",
+   "page": "'Step 1: Describe the Situation'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "The D&D story lead states in his own collected columns that he keeps his descriptions spare.",
+   "source": "Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast",
+   "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "quote": "I keep my descriptions spare.",
+   "page": "'Pacing' column",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2011",
+   "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "claim": "The same designer says he does not frontload information.",
+   "source": "Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast",
+   "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "quote": "I don’t frontload information.",
+   "page": "'Pacing' column",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2011",
+   "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "The same designer says he builds his human surnames on roots from western European cultures.",
+   "source": "Christopher Perkins, 'The Dungeon Master Experience: What's in a Name?', collected 2011 columns, Wizards of the Coast",
+   "url": "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+   "quote": "and last names with roots in western European cultures",
+   "page": "'What's in a Name?'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2011",
+   "routeHint": "Wayback raw capture of the wizards.com PDF, then pdftotext",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "terminology consistency",
+   "claim": "A settlement-generator vendor attributes a population tier set of hamlet 50-300, village 300-900 and town 1,000-8,000 to the Dungeon Master's Guide, figures that match neither the publisher's own 2024 settlement handout nor any edition it names.",
+   "source": "Vito, 'D&D Settlement Sizes — Hamlet, Village, Town, and City', Tools and Taverns, updated 13 Jul 2026",
+   "url": "https://toolsandtaverns.com/guides/settlement-guide",
+   "quote": "DMG population tiers: hamlet 50-300, village 300-900, town 1,000-8,000",
+   "page": "'Key Takeaways'",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2026-07-13",
+   "routeHint": "curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "medium — the page's attribution to the DMG is unsourced and it names no edition; the mismatch with the 2024 Settlement Tracker's 500 / 501-5,000 / 5,001+ bands is my comparison"
   }
  ]
 }
