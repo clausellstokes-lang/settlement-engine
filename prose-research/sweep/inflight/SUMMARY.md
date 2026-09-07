@@ -1,7 +1,8 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 01:52:55 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 01:58:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
+| ai | critic |  | in-flight | 0 | — | — | 05:58:40 |
 | ai | critic |  | failed | 0 | — | — | 03:45:47 |
 | ai | critic |  | result | 0 | critic-ai.md | — | 02:25:15 |
 | ai | finder | arch-biographical-record | result | 57 | — | 104 claims, complete=True @23:50:23 | 03:27:43 |
@@ -13,7 +14,7 @@
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
-| ai | synth |  | in-flight | 0 | — | — | 05:48:16 |
+| ai | synth |  | result | 0 | — | — | 05:55:12 |
 | ai | synth |  | failed | 0 | — | — | 03:45:47 |
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1006-1025 | result | 10 | — | verdict file WRITTEN | 04:24:22 |

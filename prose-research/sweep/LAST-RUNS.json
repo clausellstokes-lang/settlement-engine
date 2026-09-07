@@ -136,9 +136,22 @@
   "open_decision": "ADDED 09-07 01:10 (the dnd r10 critic): ROUTE POLICY for ~40 Part VI rows (archive.org book OCR; Roll20 paywalled body text) — relabel / replace with lawful witnesses / purchase the books (~$30 each) and re-verify; owner's call on route and cost. || DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting",
-  "next": "ai r10 wf_0eb229cc-f75 still RUNNING (synth stage at 01:09); when it COMPLETES: dry-check ai → S10b = Workflow({scriptPath: $SC/prose-research/exemplar-best-parts-workflow.js}) → S12 under the three conditions. dnd r10 COMPLETE 01:06. HORIZON-B6 landed §907; CAP-TRIP-907 is the ONE implementation lane (laneB6).",
+  "next": "ai r10 wf_0eb229cc-f75 RUNNING (synth/critic). When it COMPLETES: dry-check ai; then S_VERIFY dnd + leguin (two slots) → hobb + wolfe → S10b → S12 under the three conditions + the two 09-07 owner rulings. Implementation slot: §908 landing (in flight) → SOAK-HONEST-909 → CAP-HORIZON-909 → L-MAT.",
   "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first.",
-  "owner_rulings_for_S12": "OWNER 09-07 01:20: every dossier element gets the FULL FORM (a whole setting, not a campaign; no place more important than another); D&D features 31/36/55/56 ('size to purpose in play', empty slots omitted, tiers by importance) transfer only as HOW (slot order, typography, register, tiers by the place's OWN rank), never as WHICH/how much; full form is not manufactured content (memory: owner-directive-2026-09-07-every-dossier-element-gets-the-full-form)."
+  "owner_rulings_for_S12": "OWNER 09-07 01:20: every dossier element gets the FULL FORM (a whole setting, not a campaign; no place more important than another); D&D features 31/36/55/56 ('size to purpose in play', empty slots omitted, tiers by importance) transfer only as HOW (slot order, typography, register, tiers by the place's OWN rank), never as WHICH/how much; full form is not manufactured content (memory: owner-directive-2026-09-07-every-dossier-element-gets-the-full-form).",
+  "S_VERIFY": {
+   "decided": "OWNER 09-07 01:45 delegation → chair ruling 5 (memory owner-decision-2026-09-07-delegated-rows-chair-rulings): the verify-only completion pass is GO and runs BEFORE S10b",
+   "what": "verification ONLY (no FIND angles; not a round under the TAG LAW) of the triage-skipped sole witnesses each critic names; dnd also carries the ROUTE RELABEL in its regradeNotes (the ~40 archive.org-OCR / Roll20-paywalled rows → PARTIAL 'route questioned') and the lawful replacement witnesses as verification targets",
+   "recipe": "per sweep, ONLY when no research run is alive for ANY sweep: python3 sweep/untriage.py <name> (dry) → --apply → cd prose-research && node sweep-state.mjs summary → python3 sweep/mk-round.py <name> <nexttag> --prev sweep/args-<name>-<last>.json --cap 4 (NO --triage, NO angles) → edit regradeNotes/synthNotes for the pass → python3 mk-embedded.py sweep/args-<name>-<tag>.json → Workflow({scriptPath}) → record here",
+   "order": [
+    "dnd",
+    "leguin",
+    "hobb",
+    "wolfe"
+   ],
+   "lists": "sweep/untriage-<name>.json (Opus reader from the critics, dispatched 01:47)",
+   "then": "dry-check each → S10b → S12"
+  }
  },
  "_fiveauthor": {
   "runId": "wf_55c30493-02f",

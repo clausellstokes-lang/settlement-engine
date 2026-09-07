@@ -19,3 +19,19 @@ OSR_WALKER_PLAIN_EXIT=0 (must be 0)
 MOUNTS_DOOR_EXIT=0
   changed (must be empty): []
 === 3. PROSE-NUMERICS re-key (dry, then --write; predicted 225 exact, nothing re-keyed):
+PN_DRY_EXIT=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+PN_WRITE_EXIT=0
+  written: 0 snippets re-keyed, 0 lines moved; 0 FELL rows left for review
+=== 4. WRITER-REACH --write (shrink-only; predicted NO refresh, provenance only — the dry run decides):
+WR_DRY_EXIT=0 (read the refusal text if any)
+WRITER_REACH_WRITE_EXIT=0
+writer-reach WRITE — cohort 1322 → 1322; 0 stale folded out; 0 registered rows now lit.
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_PLAIN_EXIT=0 (must be 0)
+=== 5. TUNING INVENTORY — PLAIN walker only (predicted green; no door at this landing):
+TUNING_PLAIN_EXIT=0 (must be 0)
+      Tests  75 passed (75)
+=== 6. WIZARD-NEWS: nothing predicted (green in the proof); the hand re-sign is NOT run.
+REGISTER_PORCELAIN=[scripts/.writer-reach-baseline.json ]
+NEXT: review each changed register against PREDICTIONS (expected: ONLY scripts/.writer-reach-baseline.json, provenance fields); commit register car 2 by hand; then the ratchet (run-ratchet-908.sh), after-ratchet-908.sh <2489> <3>, the kit re-stamp, texts-908, payload, run-gate-908.sh, after-cas-908.sh, collect.
