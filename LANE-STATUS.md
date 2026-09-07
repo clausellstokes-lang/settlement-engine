@@ -1,20 +1,13 @@
-# LANE-STATUS — written 2026-09-07 03:40:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 03:45:42 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 268d53605 · 11 cars over 4243bdc61 · porcelain 6 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD d58b489b8 · 12 cars over 4243bdc61 · porcelain 0 · last commits:
+    d58b489b8 §909 car 3: the fourth designed capacity row is ARMED — the state-motion bars are lifted to one home, both former homes import them, and the roster reaches 12/10 exactly as CAPACITY C3's §2.5 predicted
     268d53605 §909 car 2: the weak zero had a third floor — `requires` becomes a field PATH, the reachability walker learns the observer, and `capacity_realm_load` stops answering a silent clean about a reading it never had
     ec265d24c §909 car 1a: the per-year population series ships, additively on v5 — the two capacity rows stop being blind and the reachability ratchet reaches zero with a control that proves the zero was caused
     6ebe0ef3b Register (capsule car): the base-state capsule regenerates at the §908 tip (rung 18 still; no OSR movement at this landing)
-    029e5406d Register (last car): the census totals re-freeze at the composed tip — totalTests 31977 -> 31979, totalFiles 2489 unchanged, entries 3
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M scripts/audit/behavioral-observation.mjs
-       M scripts/audit/soakInvariants.mjs
-       M scripts/soak/tripwires.mjs
-       M tests/domain/demographicsEnvelope.test.js
-       M tests/soak-harness/soakRegister.test.js
-       M tests/soak-harness/tripwireRegistry.test.js
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -118,7 +111,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -149,6 +142,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_37a1566c-e8f: 8 journal lines, 4 agents
 - wf_43d098bf-eff: 11 journal lines, 6 agents
 - wf_543ddb3b-67c: 17 journal lines, 9 agents
+- wf_e092839f-8b1: 3 journal lines, 3 agents
 
-## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.83 2.48 2.78
+## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;98411 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 2.31 2.31 2.59

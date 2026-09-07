@@ -1,7 +1,7 @@
 # RECEIPT — LANE SOAK-HONEST-909
 **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (re-dispatch session b43943b4) · dock `$SC/laneB6` · implementation lane, three cars**
 
-**STATUS: PARTIAL — CARS 1 AND 2 COMPLETE (`ec265d24c`, `268d53605`), car 3 in flight.** Written Mon Sep  7 03:26:31 EDT 2026.
+**STATUS: COMPLETE — ALL THREE CARS LANDED (`ec265d24c`, `268d53605`, `d58b489b8`); dock porcelain 0; typecheck ratchet 173/173.** Written Mon Sep  7 03:41:48 EDT 2026.
 
 ## ARRIVAL CHECK — the RE-DISPATCH (Mon Sep  7 03:02:16 EDT 2026)
 | line | expected | measured | verdict |
@@ -16,7 +16,7 @@
 ## CARS
 - **CAR 1 — ship the series: DONE. `ec265d24c`** (3 files, +103/−31).
 - **CAR 2 — dotted-path `requires` + walker extension: DONE. `268d53605`** (3 files, +409/−57).
-- CAR 3 — constant lift + arm `capacity_envelope_30y`: **in flight**
+- **CAR 3 — constant lift + arm `capacity_envelope_30y`: DONE. `d58b489b8`** (6 files, +326/−62).
 
 ### CAR 1 — the measurements
 | what | measured | verdict |
@@ -52,6 +52,30 @@
 | focused suites, each run alone, exit captured in-shell | tripwireRegistry **10/10**, tripwireCaller **10/10**, soakRegister **8/8**, soakScriptSeams **8/8**, demographicsEnvelope **6/6**, soakInvariants **16/16**, realmScaleCertification **10/10**, simMetricEmitter **7/7**, curveBandFreeze **4/4** — every `EXIT=0` | **CONFIRMED (each count read from its OWN log file, per R8)** |
 | eslint on the three touched files | `EXIT=0` | **CONFIRMED** |
 
+### CAR 3 — the measurements
+| what | measured | verdict |
+|---|---|---|
+| the constant lift | `MOVING_SHARE_FLOOR` (0.05), `MOTION_FLOOR_01` (0.0025) and `CAMPAIGN_HORIZON_YEARS` (30) now live in `scripts/audit/soakInvariants.mjs` beside `LIVENESS_FLOOR`; `behavioral-observation.mjs` and `demographicsEnvelope.test.js` both IMPORT. `soakInvariants.mjs` still imports nothing | **CONFIRMED** |
+| one spelling, checked in the tree | zero live `0.0025` literals remain in either former home (comment-stripped scan, asserted in the pin); the suite's own `CAMPAIGN_YEARS` now reads the shared home, so the lift REMOVED a spelling of 30 rather than adding one | **CONFIRMED** |
+| ⭐ SAME-SEED PROOF that the lift moved nothing | a lit 30-year soak re-run at the same seed AFTER the change vs BEFORE: **303334 bytes each, identical serialization** (host timings excluded), `finalHash` equal (`1a6f8477f596564bd47f5264dc8615eb7ee3242d45df6c9ea5dde505bb4fd3b5`), all 30 yearly composite hashes equal, population series equal, motion series equal | **CONFIRMED — no behaviour shift, none to declare** |
+| the roster | `TRIPWIRE_IDS` **11 → 12**; deterministic **9 → 10**; host-observability 2. `capacity_envelope_30y` lands after `capacity_realm_load` and before both host-observability rows | **CONFIRMED — the design's own §2.5 C3 prediction** |
+| `tripwireRegistryDefects()` | `[]` | **CONFIRMED** |
+| the walker at the final tip | `unreachable []`, `unreachablePaths []`, `unreadable []` | **CONFIRMED** |
+| ⭐ the armed row's verdict on the ARCHIVED B6 300-year receipt | **EXECUTED, SILENT.** 110 of 120 transitions moved over the customer horizon (**0.9167**); at year 30 exactly 3 of 4 (**0.75**); across all 300 years 1079 of 1200 (**0.8992**); **0** yearly rows at zero transitions, **0** rows below the 0.05 bar | **CONFIRMED — reproduces the C3/§907 figures exactly** |
+| the armed row's verdict on the FRESH LIT 30-year receipt | **EXECUTED, SILENT.** 110 of 120 (**0.9167**) | **CONFIRMED** |
+| the armed row on the FRESH DARK 30-year receipt | **NOT APPLICABLE** (gate false). Its share would have been 84 of 120 (**0.70**), above the bar — so the gate costs no finding, only a claim the row is not entitled to make | **CONFIRMED** |
+| the zero-denominator hole | closed as a FINDING, not a silence. Measured unreachable on an honest run: 4 transitions per year, **0** rows at zero across 300 years and across 30 | **CONFIRMED** |
+| `npm run typecheck:ratchet` at the composed tip | `OK — no type regressions (**173** error(s), ceiling **173**)`, `EXIT=0` | **CONFIRMED — at the ceiling, no regression** |
+| final suite sweep at `d58b489b8`, each file run alone | tripwireRegistry **11/11**, tripwireCaller **10/10**, soakRegister **8/8**, soakInvariants **16/16**, soakScriptSeams **8/8**, curveBandFreeze **4/4**, demographicsEnvelope **6/6**, demographicsCure **4/4**, demographicsFloor **32/32**, engineTelemetryWall.walker **8/8**, realmScaleCertification **10/10**, simMetricEmitter **7/7**, behavioralCertificationContract **39/39** — every `EXIT=0` | **CONFIRMED** |
+| eslint on all six car-3 files | `EXIT=0` | **CONFIRMED** |
+
+### THE FINAL GRADE CENSUS at `d58b489b8`
+| receipt | fullInstrument | notExecutable | findings | the four capacity rows |
+|---|---|---|---|---|
+| ARCHIVED 300y LIT `research-lit-4s-300y-4s-seed1` | **false** | `capacity_plateau`, `capacity_floor_thaw` (both: `requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent`) | `capacity_realm_load` @ 0.4787 | plateau NOT-EXEC · floor_thaw NOT-EXEC · realm_load EXECUTED (fires) · envelope_30y EXECUTED, silent |
+| FRESH 30y DARK | **true** | `[]` | none | all four NOT APPLICABLE (gate false) |
+| FRESH 30y LIT (post-car-3 re-run) | **true** | `[]` | `capacity_realm_load` @ 0.5449 | all four EXECUTED; plateau and floor_thaw silent by their OWN horizon guards, envelope_30y silent at 0.9167, realm_load fires |
+
 ## RETROVALIDATION ROW
 | # | call | ground | who owns it |
 |---|---|---|---|
@@ -65,10 +89,16 @@
 | R8 | **⚠ A FIGURE THIS LANE FIRST WROTE WAS FALSE, CAUGHT AND CORRECTED.** Car 1's six suite counts were recorded from `grep -h 'Tests  ' $SC/soak909/*.log`, which prints in ALPHABETICAL filename order, not the loop's order — so five of six were attributed to the wrong file (tripwireCaller was written 4/4 and is 10/10; curveBandFreeze 10/10 and is 4/4). Every count is now read from its own log by name. The estate's "a verdict keyed by POSITION breaks when the list is reordered" hazard, live, in a receipt. | re-read per file, 03:25. | lane |
 | R9 | **The reachability identity was RESTATED rather than deleted.** `unreachable rows == rows declaring requires` was a coincidence of a single writer; `capacity_realm_load` declares a requirement it can reach, so the equality now fails harmlessly. Kept as the subset law it was protecting (whatever the walker convicts announced its dependency) plus a stronger totality control that blinds BOTH writers and recovers the full roster. Weakening it to nothing was the alternative and was refused. | measured, car 2. | lane |
 | R10 | **A synthetic fixture was corrected to the writer's shape, and the correction is DECLARED because it is the class this lane exists to refuse.** `researchReceipt()` claimed `lit` while carrying no `realmDemography` — the estate's "a fixture can be the only writer of the SHAPE" hazard inverted: here the fixture was the only writer of a shape the writer CANNOT produce, and it made the row's silence look like a pass. The reading planted sits INSIDE the row's band on both clauses, so it adds an instrument and not a green; `realmReading: false` keeps the refusal provable; no register figure moves. | measured, car 2. | lane |
+| R11 | **`capacity_envelope_30y` is GATED on `demographicsEnabled` like its three siblings — a judgment, and not a symmetry one.** Its bar's derivation home runs the DEMOGRAPHIC kernel, so applying it to a world whose head counts move by `populationDynamics`' raw proportional growth would be a category error dressed as a wider net. The cost is measured and small: the dark 30-year run's share is 0.70, well above the bar, so today the gate suppresses no finding. Ungating it is a one-line, reversible act if the chair wants the wider net. | measured, car 3. | lane — reversible, flagged for the chair |
+| R12 | **A ZERO DENOMINATOR IS A FINDING in the new row, not a silence.** `moved / 0` would have answered `[]` — this lane's own defect class arriving through an arithmetic guard. It is named instead. The risk of a false red was weighed against it and measured away: the observer counts one transition per settlement per year with a previous-year record, 4 per year on both real receipts, 0 rows at zero in 300 years and in 30. | measured, car 3. | lane |
+| R13 | **The register fixture gained a DERIVED `motion` block, on the same ground as R10.** Every receipt since `37459391a` (2026-07-28) carries it, so a fixture without it was again a shape the writer cannot produce. It is computed from the fixture's OWN series at the observer's own floor — nothing typed — and year 1 carries zero transitions exactly as the observer produces. `motionReading: false` keeps the mint door's refusal provable. | measured, car 3. | lane |
+| R14 | **The `instrumentComplete` helper was KEPT, against its own note.** Its comment said it "becomes the identity function and should be deleted" once the series shipped. The writer ships them now, but `researchReceipt()` is synthetic and deliberately does not, because the arm below it needs a pre-§909-shaped receipt to prove the mint door refuses a blind instrument. Deleting the helper would have left that arm with no subject. The note is corrected in place. | measured, car 2. | lane |
 
 ## PROVENANCE
-- Scratch: `$SC/soak909/` — `fresh-30y-4s.json` + `.run.log`, `fresh-30y-4s-lit.json` + `.run.log`, `fresh-30y-eval.txt`, `fresh-30y-lit-eval.txt`, `archived-b6-eval.txt`, the three annotated receipts, six vitest logs, `eslint-car1.log`.
-- Every soak ran through `sh scripts/gate-mutex.sh --run -- …` (exclusive tier). Quiet window before each launch: load-1 **3.37** then **2.97** (< 4.0), **0** vitest processes, `gate-mutex.sh` inspect = `FREE`.
+- Scratch: `$SC/soak909/` — three real soak receipts (`fresh-30y-4s.json` dark, `fresh-30y-4s-lit.json`, `fresh-30y-4s-lit-AFTER-car3.json`) with their run logs, the annotated receipts, the eval transcripts, `typecheck-ratchet.log`, and every vitest log (`car2-*`, `car3-*`, `final-*`).
+- **THREE soaks**, each through `sh scripts/gate-mutex.sh --run -- …` (exclusive tier), each under the quiet-window law — load-1 **3.37**, **2.97**, **2.03** (all < 4.0), **0** vitest processes each time, `gate-mutex.sh` inspect = `FREE`. Wall clock: dark 30 y **2 m 34 s**, lit 30 y **2 m 14 s**, lit 30 y re-run **2 m 07 s**.
+- `$SC/HOLD-VITEST` checked before **every** vitest invocation; absent throughout.
+- Dock `$SC/laneB6`, DETACHED, `6ebe0ef3b` → `ec265d24c` → `268d53605` → **`d58b489b8`**; porcelain **0** at the end; nothing staged that this lane did not write; no push, no stash, no `git add -A`/`-u`/`.`.
 
 ---
 

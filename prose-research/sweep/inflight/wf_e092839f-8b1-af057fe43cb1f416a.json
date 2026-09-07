@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 31,
+ "firstTs": "2026-09-07T07:44:49.573Z",
+ "lastTs": "2026-09-07T07:45:33.904Z",
+ "tools": {
+  "Bash": 6
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief, addendum, and receipt, then examine the actual commit.",
+ "run": "wf_e092839f-8b1",
+ "agent": "af057fe43cb1f416a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_e092839f-8b1/agent-af057fe43cb1f416a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
