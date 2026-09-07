@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:15:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:21:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -59,6 +59,7 @@
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 05:08:53 |
+| dnd | critic |  | in-flight | 0 | — | — | 08:21:49 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |
 | dnd | finder | place-dmg-settlements | result | 55 | — | 68 claims, complete=True @23:50:21 | 03:18:52 |
@@ -69,7 +70,7 @@
 | dnd | regrade | regrade-r12 | result | 0 | — | — | 07:19:35 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
-| dnd | synth |  | in-flight | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:09:20 |
+| dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |
@@ -107,7 +108,7 @@
 | dnd | verifier | i962-976 | result | 10 | — | verdict file WRITTEN | 03:32:25 |
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
-| leguin | critic |  | in-flight | 0 | — | — | 08:15:34 |
+| leguin | critic |  | in-flight | 0 | — | — | 08:18:22 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
 | leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
 | leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |
@@ -131,6 +132,7 @@
 | leguin | verifier | i917-921 | result | 2 | verdicts-leguin-i917-921.json | verdict file WRITTEN | 07:22:21 |
 | ? | critic |  | result | 0 | — | — | 07:06:40 |
 | ? | critic |  | result | 0 | — | — | 07:06:57 |
+| ? | critic |  | in-flight | 0 | — | — | 08:21:35 |
 | ? | other |  | result | 0 | — | — | 07:10:20 |
 | ? | other |  | result | 0 | — | — | 07:16:13 |
 | ? | other |  | result | 0 | — | — | 07:16:12 |
@@ -143,7 +145,7 @@
 | ? | other |  | result | 0 | — | — | 08:02:55 |
 | ? | other |  | result | 0 | — | — | 08:13:53 |
 | ? | other |  | result | 0 | — | — | 07:52:44 |
-| ? | other |  | in-flight | 0 | — | — | 08:14:53 |
+| ? | other |  | result | 0 | — | — | 08:16:05 |
 | ? | other |  | result | 0 | — | — | 07:52:09 |
 | ? | other |  | result | 0 | — | — | 02:32:40 |
 | ? | other |  | result | 0 | check-hobb.md | — | 02:37:47 |
