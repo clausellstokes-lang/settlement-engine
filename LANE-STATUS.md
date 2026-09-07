@@ -1,13 +1,13 @@
-# LANE-STATUS — written 2026-09-07 01:10:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:15:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3835be900 · 1 cars over 4243bdc61 · porcelain 2 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 082314af3 · 4 cars over 4243bdc61 · porcelain 0 · last commits:
+    082314af3 §907 CAR 4: the envelope suite's "MEASURED AT THIS COMMIT" header is corrected from a run of that file at this tip — three of its four figures were wrong from the day they were written
+    11f6425a9 §907 CAR 3: capacity_envelope_30y re-measured — the refusal's stated mechanism was FALSE, the row stays out on a different and measured ground, and the reinstatement is handed to the chair with the figures
+    6f4fa80ad §907 CAR 2: the reachability guard — a walker reads what every tripwire row keys on and what the receipt writer actually writes, and the two blind rows are BANKED as a shrink-only baseline
     3835be900 §907 CAR 1: the tripwire registry gets a NOT-EXECUTABLE channel — a row keyed on a field no receipt writer ships says so instead of answering [], and a blind instrument can no longer certify itself full
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M scripts/soak/tripwires.mjs
-       M tests/soak-harness/tripwireRegistry.test.js
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:07) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -142,4 +142,4 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - wf_4bd76597-3a3: 8 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.58 2.50 2.46
+load: 2.88 2.57 2.50
