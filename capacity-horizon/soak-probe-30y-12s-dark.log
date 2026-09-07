@@ -1,0 +1,6 @@
+SOAK START Mon Sep  7 10:08:33 EDT 2026
+ARGV: node --max-old-space-size=6144 scripts/audit/whole-world-soak.mjs --years 30 --settlements 12 --seed realm-scale-research-lit-4s-30y-12s-seed1 --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity-horizon/artifacts/probe-30y-12s-dark.json
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 44907 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+# whole-world soak — 30 years × 12 settlements, seed "realm-scale-research-lit-4s-30y-12s-seed1", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
+
+## run A (primary)

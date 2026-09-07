@@ -224,3 +224,191 @@ costs more per year for reasons that have nothing to do with age. The clean meas
 run's own `yearlyMs` series, which prices any prefix of THIS world — reported when the receipt
 lands. On the 300-year world that instrument reads: century 1 mean **2,147.6 ms/year**, century 2
 **2,504.9** (×1.166), century 3 **2,851.8** (×1.328).
+
+## ⭐⭐ M1 RESULT — ran to completion, **TRUE_EXIT=0**, 08:51:02 → 10:05:54 EDT (**1 h 14 min 52 s**)
+Receipt `$SC/capacity-horizon/artifacts/horizon-600y-4s-lit.json` (**10,496,438 B**, schemaVersion 5,
+`passed: true`, `finalHash e6837b3810a4…`); extract `$SC/capacity-horizon/M1-600y-extract.txt`; log
+`$SC/capacity-horizon/soak-horizon-600y-4s-lit.log`. **Every assertion green**, including
+`byte-identical re-run — all 600 yearly composite hashes equal`, `realm population bounded —
+21124 → 17537 (×0.83; envelope 0.05–20)` and `serialized state under the house envelope — max
+2.93MB < 3.60MB`. `subsystems.rules.demographicsEnabled = true`, read off the receipt.
+
+### ⭐⭐⭐ THE DEFERRAL D1 IS DISCHARGED — `capacity_plateau` GRADED A SHIPPED SERIES AT ITS OWN HORIZON
+§910's D1: *"`capacity_plateau` has never graded a SHIPPED 300-row series… the cure of §907 M1-F1 at
+the row's own horizon is PLAUSIBLE-by-reconstruction, not CONFIRMED-on-a-shipped-series."* It is now
+CONFIRMED on a shipped series:
+```
+yearlyPopulations   rows=600  width=4        yearlyDiedFlags  rows=600  width=4
+capacity_plateau    horizon required=150  observed=600   ⇒ EXECUTED, FIRED  (4 findings)
+  settlement 0 never plateaued: 12186 at year 299 against 14080 at year 599
+  settlement 1 never plateaued:  2968 at year 299 against  3117 at year 599
+  settlement 2 never plateaued:   231 at year 299 against   305 at year 599
+  settlement 3 never plateaued:    65 at year 299 against    35 at year 599
+deterministicFirings 4 · fullInstrument TRUE · notExecutable []  · observability (none)
+```
+It did **not** report through `observability` and it was **not** `notExecutable` — the two channels
+§910 built for a short or a blind run. At 600 observed years the horizon guard is satisfied
+(600 ≥ 150) and the `requires` channel is satisfied (both series present), so the row reached its
+detector and answered with figures. **CONFIRMED.**
+
+### THE FOUR CAPACITY ROWS AT 600 YEARS
+| row | gate | requires | horizon | verdict |
+|---|---|---|---|---|
+| `capacity_plateau` | true | satisfied | 600 obs / 150 req | **EXECUTED, FIRED — 4 findings** |
+| `capacity_floor_thaw` | true | satisfied | 600 obs / 100 req | **EXECUTED, SILENT** — nothing is frozen |
+| `capacity_realm_load` | true | satisfied | n/a | ⭐ **EXECUTED, SILENT — the realm load is INSIDE the window** |
+| `capacity_envelope_30y` | true | satisfied | 600 obs / 30 req | **EXECUTED, SILENT** |
+
+`deterministicFirings` **4**; `fullInstrument` **true**; `notExecutable` **[]**. All four rows
+executed; none was refused; none was inconclusive.
+
+### ⭐⭐ THE ANSWER TO THE ONE QUESTION: DOES THE FIXTURE SETTLE?
+**It settles into a BAND, not onto a POINT — and the band is the row's own window. From roughly
+year 350 the realm stops going anywhere; before that it swings ±25 % per fifty years.**
+
+The realm's 50-year change, at every 50-year mark (the 5 % plateau band is the comparison):
+```
+ y100  -8.8%   1.8x band     y350  -1.9%   INSIDE the band
+ y150 +11.2%   2.2x band     y400  -1.1%   INSIDE the band
+ y200 -25.2%   5.0x band     y450  +2.9%   INSIDE the band
+ y250  -6.9%   1.4x band     y500  +3.2%   INSIDE the band
+ y300 +23.6%   4.7x band     y550 +13.3%   2.7x  band
+                             y600  -2.8%   INSIDE the band
+```
+**Five of the six marks from y350 on sit INSIDE the 5 % band; none of the five before y350 does.**
+The realm total goes 15,450 (y300) → 14,986 (y400) → 15,925 (y500) → 17,537 (y600): it is no longer
+crashing or recovering, it is **oscillating about a level** with one late excursion.
+
+And the load ratio says the same thing in the row's own units:
+```
+ y300 0.6443   y350 0.6320   y400 0.6233   y450 0.6361   y500 0.6603   y550 0.7444   y600 0.7251
+ Δ50y  +0.1229      -0.0123      -0.0087      +0.0128      +0.0242      +0.0841      -0.0193
+```
+After year 300 the 50-year drift collapses from ±0.12–0.19 to ±0.01–0.02 for three consecutive
+half-centuries. **That is a settling curve. CONFIRMED, on this seed.**
+
+### DOES THE REALM ENTER [0.6, 1.05] AND STAY? — **IT ENTERS AT YEAR 10 AND DOES NOT STAY; IT OSCILLATES ACROSS THE FLOOR**
+```
+first decade INSIDE the window : year 10 (0.7367)
+last  decade OUTSIDE          : year 470 (0.5922)
+ENTERS AND STAYS              : NO
+at the horizon, year 600      : 0.7251 — INSIDE, and capacity_realm_load is SILENT
+```
+The excursions below the 0.6 floor are **y200–y280** (min 0.4843 at y230), **y360–y390** (min
+0.5405) and **y470** (0.5922) — three dips, each shallower than the last, and from **y480 to y600
+the reading is continuously in-window**. The window is not a state this world reaches once; it is a
+band it re-enters, and the amplitude of its departures is decaying.
+
+### ⭐⭐⭐ IS 0.4787 AT YEAR 300 A POINT ON A CURVE STILL MOVING? — **THE FIGURES SUPPORT NEITHER "MODEL" NOR "WINDOW". THEY SUPPORT A THIRD ANSWER §907 DID NOT HAVE: IT IS A *SEED* FACT.**
+§907 framed the choice as MODEL (the lit term really settles near half its bound) versus INSTRUMENT
+(the window grades a steady state and 0.4787 was read mid-recovery). This lane can weigh both,
+because the 600-year world passes through year 300 too — and it reads something else there.
+
+| reading at YEAR 300, 4 settlements, LIT, same preset | seed | `loadRatio01` | `capacity_realm_load` |
+|---|---|---|---|
+| §907's run | `…-300y-4s-seed1` | **0.4787** | **FIRES** — outside [0.6, 1.05] |
+| **this lane's run, at its own year 300** | `…-600y-4s-seed1` | **0.6443** | would be **SILENT** — inside the window |
+
+**Two seeds, one horizon, one configuration, and the reading moves from 0.4787 to 0.6443 — across
+the floor of the very window that grades it.** One world is convicted at year 300 and the other is
+not. So:
+- **The MODEL reading is not supported.** "The lit term settles near half its bound at realm scale"
+  cannot be right when a second seed of the same fixture sits at 0.64 at the same year and at 0.73
+  at year 600, with a bound essentially unchanged (24,185 vs 25,674).
+- **The INSTRUMENT reading is PARTLY supported, and only in its weaker half.** §907's tilt — "a
+  realm still gaining 26 %/50 y has not reached the state the window describes" — is vindicated by
+  this run: the mid-recovery years ARE the ones that read low here too (y200–y280 dips to 0.4843,
+  the same neighbourhood as §907's 0.4787), and the settled years read 0.62–0.75, inside the
+  window. **The window is not mis-drawn; it was being read at the wrong time.**
+- **What the figures actually establish is SEED VARIANCE at a single horizon**, which neither
+  option contemplated. A single-seed reading at year 300 is not evidence about the model at all.
+
+⛔ **THE CONSEQUENCE FOR THE TUNING SITTING, AND IT IS THE LOAD-BEARING ONE.** The design's plan is
+to sign bands against a ONE-SEED cell (`seedIndices: [1]` on both `research-lit` and
+`research-lit-4s`, `realm-scale-certification.mjs:97-112`). **Measured here, one seed moves this
+figure by 0.166 on a window whose whole width is 0.45 — 37 % of the band, from a fact about the
+seed.** Signing a tuning value against a single seed at year 300 signs against noise of that size.
+This is a MEASUREMENT handed to the chair, not a ruling: it is the tuning desk's and the owner's to
+decide what the cell must carry. **No dial was touched. THE PROMISE is intact.**
+
+### SETTLEMENT SHAPES AT 600 — and ⛔ THE TWO PLATEAU DEFINITIONS DISAGREE ON THE SAME DATA
+`settlementShapeOf` on the shipped series and on the state vectors AGREE with each other on all
+four (a control this lane ran because the two derivations could have drifted):
+
+| settlement | start | y500 | y600 | `settlementShapeOf` | `capacity_plateau` |
+|---|---|---|---|---|---|
+| soak-a | 15,160 | 12,471 | 14,080 | `other` | **FIRES** — drift 0.1554 (3.1× band) |
+| soak-b | 2,750 | 3,054 | 3,117 | **`plateau`** | **FIRES** — drift **0.0502** (1.0× band) |
+| soak-c | 1,889 | 320 | 305 | **`plateau`** | **FIRES** — drift 0.3203 (6.4× band) |
+| soak-d | 536 | 80 | 35 | `other` | **FIRES** — drift 0.4615 (9.2× band) |
+
+⛔ **`settlementShapeOf` says two of the four PLATEAU; `capacity_plateau` convicts all four. Both are
+right, and a reader who takes one as corroborating the other will be wrong.** The windows differ:
+`settlementShapeOf` compares the final year to **one century earlier** (`CENTURY = 100`,
+`register.mjs:53`), while `capacity_plateau` compares `pops[last]` to `pops[mid]` — on a 600-year
+run that is **three centuries earlier** (`tripwires.mjs:437-438`). soak-c is flat over its last
+century (320 → 305) and has trebled since year 300 (231 → 305); both statements are true of the
+same series. **This is a REPORTED instrument observation, not a defect claim** — neither definition
+is wrong, but the register pins `population.<id>.shape` `exact` while the tripwire grades a
+different window on the same receipt, and nothing in the estate says so today.
+
+⭐ And note **soak-b fails by 0.0002**: drift 0.0502 against a 0.05 band. A hairline conviction is
+worth flagging to the tuning desk before it is read as a strong signal.
+
+### RUNAWAY / FLOOR / BIFURCATION AT 600 YEARS
+```
+realm.runawayCount 0 · realm.flooredCount 0 · realm.unlawfulZeroCount 0 · realm.bifurcated 0
+realm.ratio 0.8302   (21,124 → 17,537; envelope 0.05–20)
+capacity_floor_thaw  EXECUTED, SILENT — no living settlement holds one head count across 100 years
+```
+**The `population-runaway-300y` hazard does not reproduce at DOUBLE the horizon**, and neither does
+a floor. §907 confirmed this at 300 years on one seed; it now holds at 600 years on a second seed,
+with the floor row for the first time **actually able to say so** (at §907 it was NOT-EXECUTABLE).
+`realm.ratio` 0.83 at 600 years against 0.56 at 300 years (other seed) — the realm is nearer its
+starting size after six centuries than after three.
+
+### M1's COST — and ⭐⭐ THE SEED-CONTROLLED HORIZON MEASUREMENT THE `yearlyMs` SERIES MAKES POSSIBLE
+```
+runDurationsMs = {"primary":2239561, "replay":2230837, "divergent":13819}
+peakHeapUsedBytes = 563,801,984 (register ceiling 838,860,800 — under)
+run A 2,239.6 s over 2,400 settlement-years ⇒ 0.9332 s/settlement-year   CONFIRMED
+run B 2,230.8 s ⇒ 0.9295 s/settlement-year (a 0.4 % replay agreement)     CONFIRMED
+whole job 1 h 14 min 52 s (A+B+C = 4,484.2 s; the balance is the isolate, start-up and a
+10.5 MB receipt write)                                                   CONFIRMED — `date` either side
+```
+⭐ **The receipt carries `yearlyMs`, so ANY PREFIX of this one world can be priced — which removes
+the seed confound from the horizon axis entirely.** Reading the horizon inside a single run:
+```
+through y100  270.9 s  0.6772 s/sy      per-century mean cost, this world:
+through y200  586.3 s  0.7329 s/sy        y1-100    2,708.8 ms/y   (baseline)
+through y300  938.2 s  0.7818 s/sy        y101-200  3,154.6 ms/y   x1.165
+through y400 1342.7 s  0.8392 s/sy        y201-300  3,518.2 ms/y   x1.299
+through y500 1776.1 s  0.8880 s/sy        y301-400  4,045.1 ms/y   x1.493
+through y600 2211.6 s  0.9215 s/sy        y401-500  4,333.9 ms/y   x1.600
+                                          y501-600  4,355.0 ms/y   x1.608
+```
+⭐⭐ **THE AGE TERM ITSELF SETTLES, AND IT SETTLES BEFORE THE POPULATION DOES.** Century 5 → century 6
+moves the per-year cost by **+0.5 %** (×1.600 → ×1.608) after four centuries of steep climb. The
+cost of a year of world stops growing at roughly ×1.6 of a young world's year. **A 1,200-year run
+would therefore cost about twice a 600-year run, not four times** — the acceleration that broke my
+own prediction is a transient of the first four centuries, not a standing law.
+
+⭐ **AND THE AGE MULTIPLIER IS SEED-STABLE WHILE THE LEVEL IS NOT** — the one comparison that
+separates the two:
+| | century 1 | century 2 | century 3 |
+|---|---|---|---|
+| the 300-year world (`…-300y-…seed1`) | 2,147.6 ms/y | 2,504.9 (**×1.166**) | 2,851.8 (**×1.328**) |
+| the 600-year world (`…-600y-…seed1`) | 2,708.8 ms/y | 3,154.6 (**×1.165**) | 3,518.2 (**×1.299**) |
+
+The century-over-century MULTIPLIERS agree to within 0.1 % and 2.2 %; the LEVELS differ by 26 %.
+**Ageing costs the same proportion in both worlds; the 600-year world is simply dearer per year
+because it holds ~17,500 souls where the other holds ~12,000–15,500.** So the cross-run horizon
+reading in the previous section (×1.469 from 300 to 600) was indeed carrying a seed effect: the
+seed-controlled figure from inside one world is **0.7818 → 0.9215 s/sy = ×1.179** for the same
+doubling. **The cross-run figure over-states the horizon term by ×1.25.**
+
+⛔ **REFUSAL WITH A MEASUREMENT — my own pre-registered prediction was wrong by +23.8 % and the model
+is named as the cause.** A linear age term fitted inside 300 years (`c(y) = 2012.4 + 3.338·y`)
+reproduced that run to 1.1 % and predicted 1,809 s for 600 years against **2,239.6 s** measured.
+The cost curve is not linear in age; it is concave and saturating near ×1.6. **Any figure in this
+programme extrapolated past its own measured horizon should be read as this prediction was.**
