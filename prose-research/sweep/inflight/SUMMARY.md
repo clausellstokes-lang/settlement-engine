@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:41:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:47:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,7 +11,7 @@
 | leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
-| ? | critic |  | in-flight | 0 | — | — | 17:40:45 |
+| ? | critic |  | in-flight | 0 | — | — | 17:45:07 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
