@@ -1,0 +1,235 @@
+{
+ "name": "martin",
+ "chunk": 22,
+ "claims": [
+  {
+   "index": 660,
+   "feature": "archaism",
+   "claim": "Rivera argues Martin's archaic diction works because each old term sits in a context that lets the reader decipher its older meaning without disruption.",
+   "source": "A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "archaic diction, but synonymy and antonymy, semantic shifts",
+   "page": "opening paragraph and the paragraph on 'elsewise' and 'without'"
+  },
+  {
+   "index": 661,
+   "feature": "compounds and coinages",
+   "claim": "Peterson states that as of 21 September 2011 the Dothraki he built had reached 3,163 words.",
+   "source": "David J. Peterson, 'The Header Script', Dothraki.com, 21 September 2011",
+   "url": "https://www.dothraki.com/2011/09/the-header-script/",
+   "quote": "Dothraki is now up to 3,163 words",
+   "page": "body of the post"
+  },
+  {
+   "index": 662,
+   "feature": "compounds and coinages",
+   "claim": "Peterson treats the spellings of the Dothraki words printed in Martin's books as canon that his own language had to accommodate.",
+   "source": "David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012",
+   "url": "https://dothraki.com/2012/03/developing-canon/",
+   "quote": "The spellings in the books are canon.",
+   "page": "list of principles, body of the post"
+  },
+  {
+   "index": 663,
+   "feature": "compounds and coinages",
+   "claim": "Peterson reports that in Martin's Dothraki material the letters p and b occur only in the two names Pono and Bharbo.",
+   "source": "David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012",
+   "url": "https://dothraki.com/2012/03/developing-canon/",
+   "quote": "In the names Pono and Bharbo",
+   "page": "body of the post"
+  },
+  {
+   "index": 664,
+   "feature": "compounds and coinages",
+   "claim": "Peterson describes the Dothraki in Martin's books as a body of material that already existed before he began work on the language.",
+   "source": "David J. Peterson, 'Developing Canon', Dothraki.com, 18 March 2012",
+   "url": "https://dothraki.com/2012/03/developing-canon/",
+   "quote": "the Dothraki that existed in the books before I took",
+   "page": "opening of the post"
+  },
+  {
+   "index": 665,
+   "feature": "compounds and coinages",
+   "claim": "HBO's 2010 press release credits the Dothraki language with a vocabulary of more than 1,800 words at the time of the announcement.",
+   "source": "HBO official press release, dothraki.conlang.org, 12 April 2010",
+   "url": "http://dothraki.conlang.org/official-hbo-press-release/",
+   "quote": "extensive vocabulary of more than 1,800 words",
+   "page": "press release body"
+  },
+  {
+   "index": 666,
+   "feature": "compounds and coinages",
+   "claim": "HBO's press release says Peterson drew on Martin's description of the language rather than on a vocabulary Martin had supplied.",
+   "source": "HBO official press release, dothraki.conlang.org, 12 April 2010",
+   "url": "http://dothraki.conlang.org/official-hbo-press-release/",
+   "quote": "drew inspiration from George R.R. Martin’s description of the language",
+   "page": "press release body"
+  },
+  {
+   "index": 667,
+   "feature": "compounds and coinages",
+   "claim": "Wikipedia, relaying the HBO press release, states Peterson delivered over 1700 words to HBO before the initial shooting, a figure the press release itself puts at more than 1,800.",
+   "source": "Wikipedia 'Dothraki language' relaying the HBO press release of 12 April 2010",
+   "url": "https://en.wikipedia.org/wiki/Dothraki_language",
+   "quote": "He delivered over 1700 words to HBO before the initial shooting.",
+   "page": "section 'Development'"
+  },
+  {
+   "index": 668,
+   "feature": "other: chapter architecture",
+   "claim": "Knippling argues Martin's main point-of-view character in each book holds an undistinguished share of chapters in the first half and dominates the second.",
+   "source": "DeAnna Knippling, Wonderland Press, 'A Song of Ice and Fire: Structure/Word Count Case Study'",
+   "url": "https://wonderlandpress.com/a-song-of-ice-and-fire-structureword-count-case-study/",
+   "quote": "comes to dominate the number of chapters in the latter half",
+   "page": "body of the post"
+  },
+  {
+   "index": 669,
+   "feature": "archaism",
+   "claim": "Kirner-Ludwig concludes that the archaisms in the Game of Thrones scripted dialogues are not frequent in token terms yet are highly salient.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "may not be particularly frequent token-wise, but are highly salient",
+   "page": "Abstract"
+  },
+  {
+   "index": 670,
+   "feature": "archaism",
+   "claim": "Kirner-Ludwig states that Game of Thrones does not overdo pseudo-archaisms or archaic pronouns.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "GoT does not overdo the use of pseudo-archaisms",
+   "page": "section 6, Conclusion"
+  },
+  {
+   "index": 671,
+   "feature": "stylometry",
+   "claim": "Kirner-Ludwig's corpus is the full Game of Thrones transcripts covering 8 seasons and 73 episodes, analysed in Sketch Engine.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "covering 8 seasons and 73 episodes",
+   "page": "section 1, Introduction"
+  },
+  {
+   "index": 672,
+   "feature": "stylometry",
+   "claim": "Kirner-Ludwig measures function words at about 43% of the Game of Thrones transcript corpus.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "Function words make up for ca. 43% of the corpus",
+   "page": "section 5"
+  },
+  {
+   "index": 673,
+   "feature": "stylometry",
+   "claim": "Kirner-Ludwig finds that only 7.6% of the transcripts' lexical word stock belongs to the medieval and fantasy-medieval semantic fields she investigated.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "only 7.6% responded to the lexico-semantic fields",
+   "page": "section 5, discussion of Table 3"
+  },
+  {
+   "index": 674,
+   "feature": "naming and forms of address",
+   "claim": "Kirner-Ludwig measures 42,426 tokens, 8.38% of her corpus, as names of persons, places and languages.",
+   "source": "Monika Kirner-Ludwig, Springer VS chapter, 2022",
+   "url": "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+   "quote": "42,426 tokens (8.38%) cover names of persons, places and languages",
+   "page": "endnote 6"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each term is used in a context that provides a reader with the ability to decipher the older meaning",
+   "note": "Raw page fetched live (HTTP 200). Quote 'not only archaic diction, but synonymy and antonymy, semantic shifts, and varying registers' is verbatim in the opening paragraph; the deciphering limb is carried verbatim by the sentence closing the 'elsewise'/'without' paragraph: 'Each term is used in a context that provides a reader with the ability to decipher the older meaning, thus enriching the reading experience without disruption.' Every limb supported."
+  },
+  {
+   "index": 661,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dothraki is now up to 3,163 words",
+   "note": "Raw page fetched live (HTTP 200). Verbatim near the end of the post: 'Also, for the curious, Dothraki is now up to 3,163 words: More words than Mr. Padre Tony Gwynn has hits...'. Byline 'Published September 21, 2011 By David J. Peterson' supports the date and the authorship limb."
+  },
+  {
+   "index": 662,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The spellings in the books are canon.",
+   "note": "Raw page fetched live (HTTP 200). Verbatim as principle 1 of the numbered list, introduced by 'In analyzing the words in the books, I held to the following principles'. The accommodation limb is further supported by 'This doesn't mean, though, that the spellings in the books ought to change... jh is just the book's way of spelling Dothraki zh'."
+  },
+  {
+   "index": 663,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they only appear in two places: In the names Pono and Bharbo",
+   "note": "Raw page fetched live (HTTP 200). Full sentence pair: 'The letters p and b occur almost nowhere in Dothraki. In fact they only appear in two places: In the names Pono and Bharbo.' The post's frame is the book-attested corpus ('the Dothraki that existed in the books before I took a crack at it'), and the follow-on 'have them survive only in names' confirms the reading. Note the page's own hedge 'almost nowhere' sits beside the absolute 'only appear in two places'; the claim tracks the latter."
+  },
+  {
+   "index": 664,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Dothraki that existed in the books before I took a crack at it",
+   "note": "Raw page fetched live (HTTP 200). Verbatim in the second paragraph: 'let's take a look at the Dothraki that existed in the books before I took a crack at it.' Every limb supported."
+  },
+  {
+   "index": 665,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an extensive vocabulary of more than 1,800 words",
+   "note": "Live host dothraki.conlang.org does not resolve (curl exit 6, DNS timeout on the subdomain). Recovered via Wayback raw capture https://web.archive.org/web/20200817120827id_/http://dothraki.conlang.org/official-hbo-press-release/ (HTTP 200, 6858 bytes). Quote verbatim: 'It has its own unique sound, an extensive vocabulary of more than 1,800 words and a complex grammatical structure.' Page is dated 'April 12th, 2010' and headed 'EXPERT CREATES LANGUAGE FOR NEW HBO SERIES GAME OF THRONES', supporting the announcement-time limb."
+  },
+  {
+   "index": 666,
+   "verdict": "PARTIAL",
+   "trueWording": "Peterson drew inspiration from George R.R. Martin's description of the language, as well as from such languages as Russian, Turkish, Estonian, Inuktitut and Swahili",
+   "note": "Wayback raw capture (see 665). The quoted clause is verbatim. But the release draws no contrast with a Martin-supplied vocabulary: the alternative it names is other natural languages, and Peterson's own quoted words point the other way, at material Martin did supply in print - 'I wanted to remain as faithful as possible to the extant material in George R.R. Martin's series... Though there isn't a lot of data, there is evidence of a dominant word order'. The 'rather than' framing is the claimant's inference, not the page's.",
+   "unsupportedLimb": "rather than on a vocabulary Martin had supplied"
+  },
+  {
+   "index": 667,
+   "verdict": "PARTIAL",
+   "trueWording": "He delivered over 1700 words to HBO before the initial shooting.",
+   "note": "Raw page fetched live (HTTP 200). The quoted sentence is verbatim in section 'Development'. Two limbs fail. (1) 'relaying the HBO press release': that sentence carries no footnote of its own; ref [5] ('Official HBO Press Release', Dothraki.conlang.org, April 12, 2010) is attached to the NEXT sentence, and the press release itself (read raw via Wayback) contains no 1700 figure at all. (2) 'a figure the press release itself puts at more than 1,800': the release's 'more than 1,800 words' describes the language's total vocabulary, not words delivered to HBO before shooting - a different quantity, so the two are not the same figure restated. Wikipedia's own '3163 words' as of September 2011 elsewhere on the page shows the vocabulary count is tracked separately.",
+   "unsupportedLimb": "that the 1700 figure relays the press release, which puts the same figure at more than 1,800"
+  },
+  {
+   "index": 668,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the main POV has an undistinguished number of chapters in the first half of the book, and then comes to dominate the number of chapters in the latter half",
+   "note": "Raw page fetched live (HTTP 200). Quote verbatim; the preceding clause supplies the first-half limb and 'There is a main plot and a main character to each book' supplies the per-book limb. The page hedges with 'usually' and closes 'this is really tentative', which the claim's 'argues' fairly carries."
+  },
+  {
+   "index": 669,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "archaisms and particularly pseudo-archaisms in Game of Thrones may not be particularly frequent token-wise, but are highly salient",
+   "note": "link.springer.com served a Cloudflare-style 'Client Challenge' interstitial to a browser user agent (3038 bytes, no content). Recovered via Wayback raw capture https://web.archive.org/web/20250801025545id_/https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6 (HTTP 200, 102593 bytes), which carries the COMPLETE open-access chapter text - abstract, sections 1-6, Notes and References - so all six Kirner-Ludwig claims were checked against raw body text, not a landing-page abstract. Quote verbatim in the Abstract; the Conclusion restates it ('language seems to play a comparably marginal role frequency-wise')."
+  },
+  {
+   "index": 670,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GoT does not overdo the use of pseudo-archaisms or, e.g., archaic pronouns at all.",
+   "note": "Wayback raw capture (see 669). Verbatim in section '6 Conclusion'; the page's own wording covers both limbs of the claim (pseudo-archaisms and archaic pronouns) in one sentence."
+  },
+  {
+   "index": 671,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the full GoT transcripts covering 8 seasons and 73 episodes",
+   "note": "Wayback raw capture (see 669). Quote verbatim in section '1 Introduction: Object of this Study'. Section '4 Data and Method' corroborates: 'a corpus including all 73 episodes in all released 8 seasons of GoT (2011-2019)... compiled as a corpus of all in all 506,540 words'. Sketch Engine limb supported twice - Abstract ('By making use of the corpus tool Sketch Engine') and body ('Due to Sketch Engine's automated parts of speech (POS) tagging function')."
+  },
+  {
+   "index": 672,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Function words make up for ca. 43% of the corpus",
+   "note": "Wayback raw capture (see 669). Verbatim in section 5: 'Function words make up for ca. 43% of the corpus, which left me with 57% of the word stock to work with.' Corpus is the GoT transcripts (506,540 words), supporting that limb."
+  },
+  {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Out of that, only 7.6% responded to the lexico-semantic fields or frames under investigation",
+   "note": "Wayback raw capture (see 669). Verbatim in section 5, immediately after the 43%/57% sentence, so 'Out of that' means out of the 57% non-function-word stock - exactly the claim's 'lexical word stock', not the whole corpus. The cited Table 3 is captioned 'Stereotypically medieval and fantasy-medieval frames as represented in GoT', supporting the semantic-fields limb; the next sentence reads 'those small groupings making up less than 8% of the vocabulary'."
+  },
+  {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "42,426 tokens (8.38%) cover names of persons, places and languages",
+   "note": "Wayback raw capture (see 669). Verbatim as note 6 in the 'Notes' list (the footnote marker sits on the 7.6% sentence in section 5, matching the claim's 'endnote 6'); it continues 'and were thus not included in any further deliberations'. Arithmetic corroborates the 'of her corpus' limb: 42,426 / 506,540 = 8.38%."
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i0-14",
+ "lines": 60,
+ "firstTs": "2026-09-06T16:52:50.043Z",
+ "lastTs": "2026-09-06T16:56:40.737Z",
+ "tools": {
+  "Read": 2,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+  "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+  "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
+  "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "er user agent, so no recovery route was needed and nothing is BLOCKED; no claim in this chunk carried `reverify` or `routeHints`. Verdicts were formed by reading the stripped raw HTML directly (not through a summarizer), and every quote was checked mechanically as a normalized substring of its page.",
+ "run": "wf_22752bb0-128",
+ "agent": "aeb5558a8a82122b8",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-aeb5558a8a82122b8.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i0-14.json",
+  "exists": true
+ }
+}

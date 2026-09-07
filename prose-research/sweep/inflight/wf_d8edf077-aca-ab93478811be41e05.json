@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i523-537",
+ "lines": 91,
+ "firstTs": "2026-09-06T12:08:12.669Z",
+ "lastTs": "2026-09-06T12:12:34.693Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 18,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "https://kate-nepveu.livejournal.com/187276.html",
+  "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+  "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+  "https://www.tolkienestate.com/writing/david-bratman-the-history-of-middle-earth/",
+  "https://www.mythsoc.org/reviews/exploring-j-r-r-tolkiens-the-hobbit.htm"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and validated (15 claims, 15 verdicts, index order matches). All seven source URLs returned HTTP 200 on the live raw fetch — no recovery routes were needed, and no claim carried routeHints or a reverify flag.",
+ "run": "wf_d8edf077-aca",
+ "agent": "ab93478811be41e05",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d8edf077-aca/agent-ab93478811be41e05.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i523-537.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "role": "regrade",
+ "name": "leguin",
+ "angle": null,
+ "tag": "regrade-r6",
+ "lines": 5,
+ "firstTs": "2026-09-06T18:42:14.082Z",
+ "lastTs": "2026-09-06T18:42:14.314Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your weekly limit · resets Sep 8 at 11am (America/New_York)",
+ "run": "wf_2b731d5b-460",
+ "agent": "a49e2b4b8325a8302",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_2b731d5b-460/agent-a49e2b4b8325a8302.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

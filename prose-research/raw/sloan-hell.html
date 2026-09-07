@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--
+  A cold rain starting
+  and no hat --
+  so?
+
+  Matsuo Basho
+-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="The very hands of Sloan">
+<!-- nobody actually honors this tag ... -->
+<meta name="robots" content="noai">
+<!-- ... but it feels so cyberpunk to include it -->
+<meta name="description" content="Good links; a provocation.">
+<link rel="preload" href="/font/job-clarendon/JobClarendon-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/font/trade-gothic-next/trade-gothic-next-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/img/small-gate-loop.gif" as="image" type="image/gif" crossorigin>
+<link rel="next" href="/confirm/main/subscribe/">
+<link rel="canonical" href="https://www.robinsloan.com/lab/language-models-hell/">
+<!-- here: the web's most recherché method of asserting copyright -->
+<link rel="schema.dcterms" href="https://dublincore.org/specifications/dublin-core/dcmi-terms/">
+<meta name="dcterms.dateCopyrighted" content="2026">
+<meta name="dcterms.rightsHolder" content="Robin Sloan">
+<meta name="theme-color" content="hsl(14, 76%, 55%)">
+<!-- for the ghost of google reader -->
+<link rel="alternate" type="application/atom+xml" title="Atom feed" href="https://www.robinsloan.com/lab.xml">
+<link rel="icon" href="/img/dragon-moon-logotype-2025-64.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/dragon-moon-logotype-2025-256.png">
+<title>Are language models in hell?</title>
+<meta property="og:site_name" content="Robin Sloan">
+<meta property="og:url" content="https://www.robinsloan.com/lab/language-models-hell/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Are language models in hell?">
+<meta property="og:description" content="Good links; a provocation.">
+<meta property="og:image" content="https://www.robinsloan.com/img/blake-hell-1.jpg">
+<style type="text/css">
+@charset "UTF-8"; @font-face { font-family: "Kyrios"; src: url("/font/kyrios/ATKyriosStandard-Medium.woff2") format("woff2"); font-weight: normal; font-style: normal; font-display: swap; } @font-face { font-family: "Filosofia"; src: url("/font/filosofia/filosofiaot-regular-webfont.woff2") format("woff2"); font-style: normal; font-weight: normal; font-display: swap; } @font-face { font-family: "Filosofia"; src: url("/font/filosofia/filosofiaot-italic-webfont.woff2") format("woff2"); font-style: italic; font-weight: normal; font-display: swap; } @font-face { font-family: "Filosofia"; src: url("/font/filosofia/filosofiaot-bold-webfont.woff2") format("woff2"); font-style: normal; font-weight: bold; font-display: swap; } @font-face { font-family: "Filosofia"; src: url("/font/filosofia/filosofiaot-bold-webfont.woff2") format("woff2"); font-style: normal; font-weight: bold; font-display: swap; } @font-face { font-family: "Trade Gothic Next"; src: url("/font/trade-gothic-next/trade-gothic-next-regular.woff2") format("woff2"); font-style: normal; font-weight: normal; font-display: swap; } @font-face { font-family: "Trade Gothic Next"; src: url("/font/trade-gothic-next/trade-gothic-next-italic.woff2") format("woff2"); font-style: italic; font-weight: normal; font-display: swap; } @font-face { font-family: "Trade Gothic Next"; src: url("/font/trade-gothic-next/trade-gothic-next-bold.woff2") format("woff2"); font-style: normal; font-weight: bold; font-display: swap; } @font-face { font-family: "Job Clarendon"; src: url("/font/job-clarendon/JobClarendon-SemiBold.woff2") format("woff2"); font-style: normal; font-weight: bold; font-display: swap; } @font-face { font-family: "Job Clarendon"; src: url("/font/job-clarendon/JobClarendon-Regular.woff2") format("woff2"); font-style: normal; font-weight: normal; font-display: swap; } :root { --one-ch: 1ch; --text-block-width: 48rem; /* was: 64ch */ --text-size: 1.5rem; --line-height: 2rem; --pink: hsl(345, 80%, 80%); --green: hsl(102, 40%, 57%); --gold: hsl(42, 85%, 57%); --nice-blue: hsl(208, 100%, 45%); --dark-blue: hsl(208, 100%, 27.5%); --businessland-blue: hsl(231, 18%, 36%); --nice-red: hsla(14, 85%, 55%); --hot-red: rgb(255, 135, 100); --hot-red: oklch(70% 0.195 37); --nice-purple: hsl(230, 57%, 55%); --spot-color-highlight: hsla(14, 76%, 55%, 0.25); --lab-color-highlight: hsla(230, 57%, 55%, 0.25); --cosmic-latte: hsl(42, 100%, 96%); /* hsl(35, 100%, 96%); */ --cosmic-latte-darker: hsl(42, 12.5%, 24%); /* hsl(35, 100%, 96%); */ --paper-gray: hsl(42, 0%, 96%); /* hsl(35, 100%, 96%); */ --paper-icy: hsl(208, 100%, 98%); /* icy */ --headline-font-stack: "Kyrios", serif; --serif-font-stack: "Filosofia", "Times New Roman", serif; --sans-serif-font-stack: "Trade Gothic Next", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --monospace-font-stack: "JetBrains Mono", Menlo, Consolas, "Andale Mono", "Lucida Console", "Courier New", Courier, monospace; --spot-color: var(--hot-red); --backdrop-color: var(--spot-color); --lab-color: var(--nice-purple); --background-color: var(--cosmic-latte); --body-text-color: rgba(0, 0, 0, 0.95); --body-text-color-mid: rgba(0, 0, 0, 0.5); --body-text-color-gray: rgba(0, 0, 0, 0.25); --body-link-color: var(--nice-blue); --body-text-complementary-color: var(--dark-blue); --caption-text-color: var(--body-text-color-gray); --caption-link-color: var(--body-text-color-gray); --submit-text-color: var(--paper-icy); --submit-text-hover-color: var(--paper-icy); --submit-hover-color: var(--body-text-icy); --email-field-background-color: var(--paper-icy); --email-field-border-color: var(--spot-color); --header-footer-text-color: var(--paper-icy); --header-footer-link-color: var(--body-text-color); --header-footer-text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5); --alert-border-color: hsla(14, 76%, 55%, 1.0); --alert-body-color: hsla(14, 76%, 55%, 0.25); --audience-border-color: hsla(102, 40%, 57%, 1.0); --audience-body-color: hsla(102, 40%, 57%, 0.25); } *, *::before, *::after { text-rendering: optimizeLegibility; box-sizing: border-box; } video::cue { font-family: var(--sans-serif-font-stack); color: var(--gold); } body, h1, h2, h3, h4, p, li, figure, figcaption, blockquote, dl, dd { margin: 0 0 0 0; } input, button, textarea, select { font-family: inherit; } html { height: 100%; min-height: 100%; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; overflow-y: scroll; font-size: 14px; -webkit-font-smoothing: antialiased; -moz-font-smoothing: antialiased; font-smoothing: antialiased; } ::selection { background: var(--spot-color-highlight); } ::-moz-selection { background: var(--spot-color-highlight); } :target { scroll-margin-block: 2rem; } body { position: relative; display: block; min-height: 100vh; overflow-x: hidden; margin: 0 0 0 0; padding: 0 0 0 0; background-color: var(--backdrop-color); font-family: var(--sans-serif-font-stack); font-size: var(--text-size); font-variant: lining-nums; line-height: var(--line-height); color: var(--body-text-color); font-variant-numeric: lining-nums; } header { position: relative; display: flex; align-content: center; align-self: start; width: 100%; height: 4rem; margin: 0 0 0 0; padding: 0 1rem 0 1rem; /* background-color: var(--backdrop-color); */ } nav { display: flex; align-items: center; justify-content: center; gap: 2rem; width: 100%; } nav a { display: inline-block; height: 2rem; margin: 0 0 0 0; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 2rem; text-decoration: none; text-shadow: var(--header-footer-text-shadow); } nav a:link, nav a:visited { color: var(--header-footer-text-color); } nav a:active, nav a:hover { text-shadow: none; color: var(--header-footer-link-color); } main { position: relative; display: grid; grid-template-columns: 1fr min(var(--text-block-width), 100%) 1fr; align-content: start; min-height: 100%; min-height: 100vh; margin: 0 0.25rem 0 0.25rem; padding: 0 1rem 0.25rem 1rem; /* interesting that the bottom padding just makes it feel so much better */ background-color: var(--background-color); border-radius: 0.5rem; } body.home main { --text-size: 1.25rem; --background-color: var(--paper-gray); font-family: var(--sans-serif-font-stack); font-size: 1.25rem; } body.newsletter main, body.note main, body.meteor main, body.lab main { --text-size: 1.5rem; --background-color: var(--cosmic-latte); font-family: var(--serif-font-stack); font-size: 1.5rem; } main > * { grid-column: 2; } /* main.splash { align-content: center; } */ book-promo { margin: 0 0 2rem 0; border-radius: 0.25rem; padding: 1rem; margin: 0 -1rem 2rem -1rem; background-color: var(--lab-color-highlight); } book-promo p { margin: 0 0 0 0; text-align: center; } figure { display: block; width: 100%; max-width: 100%; margin: 0 auto 2rem auto; } figure.full-bleed { grid-column: 1 / -1; /* "span from the first grid line to the last grid line" */ width: 100%; max-width: 1280px; margin: 0 auto 2rem auto; } figure.too-tall { max-width: 320px; } figure picture, figure img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0 0 0 0; padding: 0 0 0 0; } figure picture { box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.125); } figure picture.no-shadow, figure img.no-shadow { box-shadow: none; } figure picture.blend { mix-blend-mode: multiply; } figcaption { margin: 0 0 0 0; padding: 0 0 0 0; font-family: var(--sans-serif-font-stack); font-size: 1.0rem; line-height: 2rem; text-align: right; text-wrap: balance; color: var(--caption-text-color); } figcaption a, figcaption a:link, figcaption a:visited { text-decoration-color: var(--caption-link-color); color: var(--caption-link-color); } figcaption a:hover, figcaption a:active { text-decoration-color: var(--body-link-color); color: var(--body-link-color); } img { display: block; width: 100%; max-width: 100%; margin: 0 0 0 0; } audio { display: block; width: 100%; margin: 0 0 2rem 0; } hr { margin: 0 0 2rem 0; background-image: none; border: none; border-bottom: 1px solid rgba(0, 0, 0, 0.125); } h1 { width: 100%; margin: 2rem 0 2rem 0; /* original */ margin: 2rem 0 1rem 0; /* optically better */ padding: 2rem 0 2rem 0; font-family: "Kyrios", serif; font-size: 6rem; font-style: normal; font-weight: normal; line-height: 5rem; text-align: center; text-wrap: balance; text-transform: none; /* remember ss01 is the straighter less goopy version */ /* ss02 is curvier */ /* ss03 is more legible */ /* leftover from Kyrios */ font-feature-settings: "ss03" 1, "liga" 1, "dlig" 1, "cv02" 1; color: var(--spot-color); } h1 span.name-banner::before { content: '—'; /* to balance the centered name! I&nbsp;am sooo smart */ color: transparent; } h1 + figure { margin-top: 0.25rem; /* optically better */ } h1 span.moon-o { display: inline-block; width: 1ch; height: 1ch; background-image: url("/img/dragon-moon-favicon-128.png"); background-size: 1ch 1ch; } h1 span.notr { text-transform: none; } /* main.splash h1 span.first-line { font-weight: 800; } main.splash h1 span.second-line { font-weight: 650; } main.splash h1 span.third-line { font-weight: 650; } */ directory-section { columns: 2; column-gap: 2rem; margin: 0 0 2rem 0; font-size: 1.0rem; } directory-section span.pub { display: inline; margin-left: 0.25rem; white-space: nowrap; } directory-section span.pub::before { content: '('; } directory-section span.pub::after { content: ')'; } @media only screen and (max-width: 48rem) { directory-section { columns: 1; font-size: 1.25rem; } directory-section h3 { font-size: 1.25rem; } } directory-block { display: block; break-inside: avoid-column; margin: 0 0 2rem 0; } directory-block h3 { margin: 0 0 0 0; font-family: inherit; font-size: inherit; font-style: normal; font-weight: bold; color: var(--spot-color); } directory-list ul { margin: 0 0 0 0; } directory-block ul li { margin: 0 0 0 2rem; text-align: left; text-indent: -2rem; /* so hacky */ } directory-block ul li::before { display: none; } hgroup { margin: 0 0 0 0; } h2 { margin: 0 0 2rem 0; padding: 0 0 0 0; font-family: var(--sans-serif-font-stack); font-size: 1.5rem; font-weight: normal; line-height: 2rem; text-align: center; text-wrap: balance; color: var(--spot-color); } body.newsletter h2::before, body.lab h2::before { content: '§'; font-family: var(--sans-serif-font-stack); font-size: 2rem; display: block; margin: 0 auto 2rem auto; text-align: center; width: 2rem; line-height: 2rem; height: 2rem; } body.newsletter h1 + h2::before { content: ''; display: none; } h2 a, h2 a:link, h2 a:visited { text-decoration-color: var(--spot-color); color: var(--spot-color); } h2 a:active, h2 a:hover { text-decoration-color: var(--body-link-color); color: var(--body-link-color); } hgroup h2 { margin: 0 0 0 0; } h3 { margin: 0 auto 2rem auto; font-family: var(--serif-font-stack); font-style: italic; font-weight: normal; line-height: 2rem; text-align: left; text-wrap: balance; } main stamp-thwack { position: absolute; grid-column: 3; height: 4rem; transform: rotateZ(15deg); margin: 4rem auto 0 -4rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; letter-spacing: 0.0625rem; text-align: left; text-transform: uppercase; color: var(--body-text-complementary-color); } main stamp-thwack label { display: inline-block; width: 5rem; text-align: right; } archive-list { width: auto; margin: 0 auto 0 auto; text-align: center; } archive-list h3 { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; font-style: normal; color: var(--body-text-color-gray); margin: 0 0 2rem 0; text-align: center; } p { margin: 0 0 2rem 0; hyphens: manual; hyphenate-limit-last: always; text-wrap: pretty; text-align: justify; text-justify: inter-word; text-indent: 0; } p.nobr { hyphens: none; } p.alert { margin: 0 -2rem 2rem -2rem; padding: 2rem; border-radius: 0.5rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; hyphens: none; line-height: 2rem; text-align: left; } p.alert.caution { background-color: var(--alert-body-color); } p.alert.audience { background-color: var(--audience-body-color); } p.alert.info { background-color: var(--nice-purple); color: var(--paper-icy); } p.alert.notice { background: none; background-color: none; color: var(--body-text-color); border: 1px solid var(--body-text-color-gray); } p.alert.info a, p.alert.info a:link, p.alert.info a:visited { text-decoration-color: var(--paper-icy); text-underline-offset: 0.125rem; color: var(--paper-icy); } p.alert.info a:hover, p.alert.info a:active { text-decoration-color: var(--spot-color); text-underline-offset: 0.125rem; color: var(--spot-color); } p.hang { /* not currently used because of the JS intervention, using classes below */ text-indent: calc(-1ch / 4.0); } span.hang-left { margin-left: calc(-1ch / 4.0); } span.hang-right { margin-right: calc(-1ch / 4.0); } div.info { margin: 0 -2rem 2rem -2rem; padding: 2rem 2rem 0 2rem; background-color: var(--audience-body-color); font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 2rem; text-align: left; } div.info p { text-align: left; } p.caption { margin: -2rem 0 2rem 0; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 2rem; text-align: right; color: var(--body-text-color-gray); } footer p { text-align: left; } details { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; color: var(--body-text-complementary-color); } details summary { cursor: pointer; margin-bottom: 2rem; font-family: var(--serif-font-stack); font-size: 1.5rem; color: var(--body-text-color); } details summary::marker { color: var(--body-text-complementary-color); } details summary p { display: inline; } details summary::after { display: inline-block; content: '(Expand to read more.)'; margin-left: 0.5rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; color: var(--body-text-color-gray); } blockquote { margin: 0 0 0 2rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 2rem; color: var(--body-text-complementary-color); } blockquote blockquote { font-style: italic; } main.home blockquote { font-family: var(--serif-font-stack); font-size: 1.5rem; font-style: italic; } blockquote p { hyphens: none; text-align: left; } blockquote a:link, blockquote a:visited { color: var(--body-text-complementary-color); } blockquote ul li::before { color: var(--body-text-complementary-color); } code { font-family: monospace; font-size: 1rem; color: var(--dark-blue); } pre { display: block; overflow-x: auto; margin: 0 0 2rem 0; padding: 2rem; background-color: var(--paper-icy); border-radius: 0.5rem; font-family: var(--monospace-font-stack); font-size: 1rem; line-height: 2rem; white-space: pre; color: var(--dark-blue); } .bigger-screen { display: block; } .smaller-screen { display: none; } p.spacetime { font-family: var(--serif-font-stack); font-size: 1.5rem; font-style: italic; hyphens: none; color: var(--spot-color); } body.home p.spacetime { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; font-style: normal; } a { cursor: pointer; text-decoration-color: var(--body-text-color-gray); text-decoration-thickness: 2px; text-underline-offset: 0.125rem; } a, a:link { cursor: pointer; color: var(--body-text-color); } a:hover, a:active { cursor: pointer; text-decoration-color: var(--body-link-color); color: var(--body-link-color); } i, em { font-style: italic; } b, strong { font-weight: bold; } strong.sans { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; } small { /* 1.5rem is "technically" correct, */ /* but I&nbsp;don't like the way it looks/feels! */ font-size: 1.75rem; font-variant: small-caps; text-transform: lowercase; white-space: nowrap; } ul { margin: 0 0 2rem 0; padding: 0 0 0 0; list-style-type: none; } ul li { margin: 0 0 0 2rem; padding: 0 0 0 0; text-indent: -1rem; /* so hacky */ } ul li p { margin: -2rem 0 2rem 0; /* I&nbsp;have no idea why the -2rem is necessary */ text-align: left; } ul li:last-child p { margin: -2rem 0 0 0; } ul li::before { display: inline-block; content: "-"; width: 1rem; /* Also needed for space (tweak if needed) */ font-family: var(--sans-serif-font-stack); font-weight: bold; color: var(--spot-color); } ol { margin: 0 0 2rem 2rem; padding: 0 0 0 0; list-style-type: none; counter-reset: olcounter; } ol.continue { counter-reset: none; } ol li { padding: 0 0 0 0; counter-increment: olcounter; } ol li:last-child p { margin: -2rem 0 0 0; } ol li::before { content: counter(olcounter) "."; width: 1.0rem; overflow: hidden; margin-left: -2.0rem; padding-right: calc(1.0rem - 3px); /* ugh! inline elements! */ color: var(--spot-color); } ol li p { margin: -2rem 0 2rem 0; /* I&nbsp;have no idea why the -2rem is necessary */ text-align: left; } span.nobr { white-space: nowrap; } span.push-punc { margin-left: 0.75ch; } span.pull-punc { margin-left: -0.75ch; } form.signup { display: flex; flex-direction: row; flex-wrap: wrap; margin: 0 0 2rem 0; } input[type=email] { flex-grow: 2; height: 4rem; margin: 0 2rem 0 0; background-color: var(--email-field-background-color); border: 1px solid var(--email-field-border-color); border-radius: 0.5rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; font-style: normal; text-align: center; } form.lab input[type=email] { border: 1px solid var(--lab-color); } input[type=submit] { flex-grow: 1; cursor: pointer; height: 4rem; margin: 0 0 0 0; padding: 0 0 0 0; -webkit-appearance: none; background-color: var(--spot-color); border: none; border-radius: 0.5rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 4rem; text-align: center; color: var(--submit-text-color); } @keyframes wait-loop { 0% { transform: scale(1.0); } 50% { transform: scale(1.0625); } 100% { transform: scale(1.0); } } input[type=submit].processing { animation: wait-loop 2s ease-in-out infinite; } form.lab input[type=submit] { background-color: var(--lab-color); } form input[type=submit]:hover { background-color: var(--body-text-color); } input[type=submit]:hover { background-color: var(--body-text-color); color: var(--paper-icy); } footer form.signup input[type=email] { border: none; } footer form.signup input[type=submit] { background-color: var(--body-text-color-mid); } footer form.signup input[type=submit]:hover { background-color: var(--body-text-color); } footer { display: grid; grid-template-columns: 1fr min(var(--text-block-width), 100%) 1fr; margin: 0 0 0 0; padding: 2rem 1rem 0 1rem; background-color: var(--backdrop-color); font-family: var(--sans-serif-font-stack); font-size: 1.25rem; text-shadow: var(--header-footer-text-shadow); } footer > * { grid-column: 2; } footer p { hyphens: none; color: var(--header-footer-text-color); } footer a { text-decoration-color: var(--header-footer-text-color); } footer a:link, footer a:visited { color: var(--header-footer-text-color); } footer a:hover, footer a:active { text-decoration-color: var(--header-footer-link-color); text-shadow: none; color: var(--header-footer-link-color); } video { width: 100%; height: auto; outline: none; object-fit: cover; } /* email confirmations */ main.confirm { display: flex; flex-direction: column; align-items: center; align-content: center; justify-content: flex-end; gap: 2rem; width: 100%; max-width: 100%; height: 100%; height: 100dvh; max-height: 100%; max-height: 100dvh; overflow-x: hidden; overflow-y: hidden; margin: 0 0 0 0; background-color: var(--spot-color); background-size: cover; background-position: center; animation-play-state: running; border-radius: 0; text-align: center; padding: 0 0 20vh 0; } main.confirm:last-child { margin: 0 0 0 0; } main.confirm section { padding: 2rem; background-color: var(--backdrop-color); border-radius: 0.5rem; } main.confirm h1 { margin: 0 0 0 0; padding: 0 0 0 0; font-family: "Kyrios", serif; /* var(--headline-font-stack); */ font-size: 8rem; font-style: normal; font-weight: normal; line-height: 8rem; text-shadow: 0 0 0.5rem var(--spot-color), 0 0 1.0rem var(--spot-color), 0 0 2.0rem var(--body-text-color); color: var(--paper-icy); filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.5)); } main.confirm h2 { padding: 0.25rem 1rem 0.5rem 1rem; font-family: var(--sans-serif-font-stack); font-size: 1.25rem; line-height: 2rem; /* text-shadow: 0 0 0.5rem var(--nice-purple), 0 0 1.0rem var(--nice-purple), 0 0 1.5rem var(--body-text-color); */ color: var(--paper-icy); text-wrap: balance; background-color: rgba(0, 0, 0, 0.5); } main.confirm h2 a, main.confirm h2 a:link, main.confirm h2 a:visited, main.confirm h2 a:active { text-decoration-color: var(--paper-icy); color: var(--paper-icy); } main.confirm h3 { position: absolute; top: calc(100% - 6rem); width: auto; margin: 0 auto 0 auto; padding: 0.5rem 1rem 0.75rem 1rem; background-color: rgba(0, 0, 0, 0.5); border-radius: 0.5rem; font-family: var(--sans-serif-font-stack); font-size: 1.0rem; font-style: normal; line-height: 1.5rem; color: var(--paper-icy); text-align: center; text-wrap: balance; } main.confirm h3 a, main.confirm h3 a:link, main.confirm h3 a:visited, main.confirm h3 a:active { text-decoration-color: var(--paper-icy); color: var(--paper-icy); } libby-panel { display: flex; flex-direction: column; gap: 2rem; width: 100%; margin: 0 0 2rem 0; } libby-panel p { margin: 0 0 0 0; text-align: center; text-wrap: balance; } hold-counts { display: flex; flex-direction: row; gap: 1rem; justify-content: center; margin: 0 0 0 0; width: 100%; } book-data { display: flex; flex-direction: row; gap: 0.25rem; flex-wrap: nowrap; align-items: baseline; border-radius: 0.5rem; background-color: var(--spot-color-highlight); padding: 0.5rem 1rem 0.5rem 1rem; } book-tag { } book-count { display: inline-block; font-size: 1rem; font-family: var(--monospace-font-stack); line-height: 2rem; text-align: right; } /* media queries */ @media only screen and (max-width: 48rem) { libby-panel { flex-direction: row; justify-content: center; align-items: center; } libby-panel p { width: 50%; } hold-counts { width: 50%; align-items: center; flex-direction: column; } } @media only screen and (max-width: 68rem) { main stamp-thwack { display: none; } book-promo { border-radius: 0; } } @media only screen and (max-width: 48rem) { p { hyphens: manual; word-spacing: calc(-1ch / 12.0); text-align: left; } p.alert, div.info { margin: 0 0 2rem 0; padding: 1rem 1rem 1rem 1rem; } h1 { margin: 2rem 0 2rem 0; /* original */ margin: 2rem 0 1rem 0; /* optically better */ font-size: 5rem; /* was 3.5rem with Vajgar */ line-height: 4rem; /* was 3.5rem with Vajgar */ } main:last-child { margin-bottom: 2rem; } input[type=email] { width: 100%; margin: 0 0 1rem 0; } } /* additional miscellaneous interventions... */ @media only screen and (min-width: 1600px) { /* was 1280px */ html { font-size: 16px; } } @media only screen and (max-width: 400px) { html { font-size: 13px; } h1 { margin: 0 0 0 0; font-size: 4.0rem; /* was 4rem */ line-height: 3.2rem; /* was 4rem */ } /* main.splash { align-content: start; } */ .bigger-screen { display: none; } .smaller-screen { display: block; } } @media only screen and (max-width: 320px) { html { font-size: 11px; } } /* unhinged! */ @keyframes blink { 0% { opacity: 1.0; } 50% { opacity: 1.0; } 51% { opacity: 0.0; } 100% { opacity: 0.0; } } blink-baby { display: inline-block; animation-name: blink; animation-iteration-count: infinite; animation-duration: 2s; } a[href^="mailto:"] { font-style: italic; }/* blog design */ :root { /* https://sanzo-wada.dmbk.io/combination/303 */ --blog-light-blue: #b5d1cc; --blog-dark-brown: #172713; --blog-flame-red: #ff3319; --blog-pale-yellow: #faed8f; --blog-background-color: var(--blog-light-blue); --blog-background-color: hsl(from var(--blog-light-blue) h calc(s * 0.9) calc(l * 1.1)); --blog-backdrop-color: var(--blog-dark-brown); --blog-backdrop-color: hsl(from var(--blog-dark-brown) h calc(s * 0.5) l); --blog-spot-color: var(--blog-flame-red); --blog-spot-color-alt: var(--blog-pale-yellow); --blog-text-color: var(--blog-backdrop-color); --blog-blockquote-background-color: var(--blog-pale-yellow); --blog-blockquote-text-color: var(--blog-text-color); } ::selection { background-color: var(--blog-spot-color-alt); } ::-moz-selection { background-color: var(--blog-spot-color-alt); } footer ::selection { background-color: var(--blog-spot-color); } footer ::-moz-selection { background-color: var(--blog-spot-color); } body.blog { font-family: "Trade Gothic Next"; color: var(--blog-text-color); font-size: 1.25rem; line-height: 2rem; background-color: var(--blog-backdrop-color); } body.blog archive-list { width: 100%; } body.blog main { background-color: var(--blog-background-color); } body.blog p a, body.blog p a:link, body.blog p a:visited { color: var(--blog-text-color); text-decoration-color: rgba(from var(--blog-text-color) r g b / 0.25); } body.blog p a:hover, body.blog p a:active { color: var(--blog-spot-color); text-decoration-color: var(--blog-spot-color); } body.blog figure picture { box-shadow: 0 0 2px rgba(from var(--blog-text-color) r g b / 0.0625);; } body.blog figure figcaption a:hover, body.blog figure figcaption a:active { color: var(--blog-spot-color); text-decoration-color: var(--blog-spot-color); } body.blog h1, body.blog h2, body.blog h3 { font-family: "Job Clarendon", serif; text-align: left; font-weight: bold; color: var(--blog-spot-color); } body.blog h1 { width: 100%; font-size: 6.5rem; line-height: 6rem; font-weight: normal; margin: 2rem 0 0 0; padding: 0 0 0 0; text-align: center; text-wrap: balance; } body.blog p { text-align: left; /* alas */ } body.blog small { letter-spacing: 0.0625rem; font-size: 1.5rem; font-variant: small-caps; text-transform: lowercase; white-space: nowrap; } body.blog hgroup.splash h1 { letter-spacing: 0.125rem; margin: 2rem 0 2rem 0; text-shadow: 0.25rem 0 0 var(--blog-spot-color-alt), 0.25rem 0 2px rgba(0, 0, 0, 0.0625); } body.blog hgroup.splash h1 span.subtitle { display: inline-block; letter-spacing: 0; margin: 0 0 0 0.5rem; font-size: 2.75rem; line-height: 2.75rem; text-transform: uppercase; text-shadow: none; color: var(--blog-text-color); } body.blog hgroup.splash h1 span.subtitle.balancer { visibility: hidden; } @media only screen and (max-width: 32rem) { body.blog hgroup.splash h1 span.subtitle, body.blog hgroup.splash h1 span.subtitle.balancer { display: none; } } body.blog hgroup.splash h2 { font-family: var(--sans-serif-font-stack); color: var(--blog-text-color); font-size: 1.5rem; line-height: 2rem; margin: 0 0 2rem 0; text-align: left; } body.blog h2 { font-family: "Job Clarendon", serif; font-size: 2rem; line-height: 2rem; color: var(--blog-text-color); text-wrap: wrap; } body.blog article:only-of-type h2::before { content: '↓↓↓'; font-family: "Job Clarendon", serif; font-size: 2rem; font-weight: bold; display: block; margin: 0 auto 2rem auto; text-align: center; width: 2rem; line-height: 2rem; height: 2rem; color: var(--blog-spot-color-alt); text-shadow: 0 0 2px rgba(0, 0, 0, 0.0625); } body.blog h1 + h2::before { content: ''; display: none; } body.blog h3 { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; font-style: normal; color: var(--blog-spot-color); line-height: 2rem; color: var(--blog-text-color); } body.blog h1 a, body.blog h1 a:link, body.blog h1 a:visited, body.blog h1 a:hover, body.blog h1 a:active { text-underline-offset: 4px; text-decoration-thickness: 4px; } body.blog h1 a, body.blog h1 a:link, body.blog h1 a:visited { color: var(--blog-spot-color); text-decoration-color: var(--blog-spot-color); } body.blog h1 a:hover, body.blog h1 a:active { color: var(--blog-text-color); text-decoration-color: var(--blog-text-color); } body.blog h2 a, body.blog h2 a:link, body.blog h2 a:visited { color: var(--blog-text-color); text-decoration-color: var(--blog-text-color); } body.blog h2 a:hover, body.blog h2 a:active { color: var(--blog-spot-color); text-decoration-color: var(--blog-spot-color); } body.blog h3 a, body.blog h3 a:link, body.blog h3 a:visited { color: var(--blog-text-color); text-decoration-color: var(--blog-spot-color); } body.blog h3 a:hover, body.blog h3 a:active { color: var(--blog-text-color); text-decoration-color: var(--blog-text-color); } body.blog nav a, body.blog nav a:link, body.blog nav a:visited { color: var(--blog-spot-color-alt); } body.blog nav a:hover, body.blog nav a:active { color: var(--blog-spot-color); } body.blog nav a.blog { background-color: var(--blog-spot-color-alt); border-radius: 0.125rem; padding: 0 1rem 0 1rem; } body.blog blockquote { font-family: var(--serif-font-stack); font-style: italic; font-size: 1.5rem; margin: 0 0 2rem 0; padding: 0 0 0 2rem; color: var(--blog-blockquote-text-color); } body.blog blockquote strong { font-weight: normal; background-color: var(--blog-spot-color-alt); } body.blog code { color: var(--blog-text-color); background-color: var(--blog-spot-color-alt); } body.blog code::before, body.blog code::after { content: "`"; color: var(--blog-text-color); background-color: var(--blog-spot-color-alt); } body.blog pre { font-size: 1rem; color: var(--blog-text-color); background-color: var(--blog-spot-color-alt); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin: 0 0 2rem 0; padding: 2rem; border-left: 2px solid var(--blog-spot-color); line-height: 2rem; border-radius: 0; font-variant-ligatures: none; } body.blog details summary { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; } details summary::marker { color: var(--blog-spot-color); } details summary::after { font-famnily: var(--sans-serif-font-stack); font-size: 1.25rem; } body.blog details { font-family: var(--sans-serif-font-stack); font-size: 1.25rem; color: var(--blog-text-color); } body.blog footer { background-color: var(--blog-backdrop-color); } body.blog ul li::before { display: inline-block; content: "→"; font-size: 2rem; line-height: 1rem; height: 1rem; width: 1rem; /* Also needed for space (tweak if needed) */ font-family: "Job Clarendon", serif; font-weight: bold; color: var(--blog-spot-color); transform: translateY(0.25rem); /* sigh */ } body.blog archive-list { text-align: left; } body.blog archive-list h2, body.blog archive-list h3 { text-align: left; } body.blog date-stamp { display: inline-block; font-family: var(--sans-serif-font-stack); font-size: 1rem; font-weight: normal; line-height: 1rem; color: var(--blog-text-color); margin: 0 0 2rem 0; padding: 0.25rem 0.25rem 0.25rem 0.25rem; border-radius: 0.25rem; background-color: var(--blog-spot-color-alt); box-shadow: 0 0 2px rgba(0, 0, 0, 0.0625); } body.blog h1 + date-stamp { margin: 2rem 0 2rem 0; position: relative; left: 50%; transform: translateX(-50%); } body.blog h2 date-stamp { position: relative; top: -2px; margin: 0 0 0 0.5rem; } body.blog footer p { color: var(--blog-spot-color-alt); } body.blog footer p a:link, body.blog footer p a:visited { color: var(--blog-spot-color-alt); text-decoration-color: var(--blog-spot-color-alt); } body.blog footer p a:hover, body.blog footer p a:active { text-decoration-color: var(--blog-spot-color); } body.blog article { margin: 0 0 2rem 0; border-bottom: 2px dashed var(--blog-spot-color-alt); /* box-shadow: 0 2px var(--blog-spot-color-alt);*/ } body.blog article:only-of-type { margin: 0 0 0 0; border-bottom: none; } body.blog article:only-of-type h2 { text-align: center; } body.blog article:only-of-type h2 a::after { display: inline-block; font-size: 1.5rem; font-weight: normal; content: '#'; color: rgba(from var(--blog-text-color) r g b / 0.25); margin: 0 0 0 0.25rem; text-decoration: none; } body.blog article:only-of-type h2 a:hover::after { color: rgba(from var(--blog-spot-color) r g b / 0.5); } body.blog article hr { margin: 0 0 2rem 0; background-image: none; border: none; border-bottom: 2px dashed var(--blog-spot-color-alt); } body.blog a.button, body.blog a.button:link, body.blog a.button:visited { display: inline-block; font-family: "Job Clarendon", serif; font-feature-settings: "ss05" 1; font-size: 1.5rem; font-weight: bold; text-align: center; text-decoration: none; border-radius: 0.5rem; height: 4rem; line-height: 3.5rem; margin: 0 0 2rem 0; padding: 0 1rem 0 1rem; color: var(--blog-text-color); border: 2px solid rgba(from var(--blog-text-color) r g b / 0.25); position: relative; left: 50%; transform: translateX(-50%); } body.blog a.button:hover, body.blog a.button:active { background-color: var(--blog-spot-color); color: var(--blog-spot-color-alt); border: 2px solid var(--blog-spot-color); } body.blog a.button::after { display: inline-block; content: "→"; font-size: 2rem; margin: 0 0 0 0.25rem; font-family: "Job Clarendon", serif; font-weight: bold; color: var(--blog-text-color); transform: translateY(0.25rem); } body.blog a.button:hover::after, body.blog a.button:active::after { color: var(--blog-spot-color-alt); } body.blog form input[type=submit] { color: var(--blog-text-color); background-color: var(--blog-spot-color-alt); } body.blog footer form.signup input[type=submit]:hover { color: var(--blog-spot-color-alt); background-color: var(--blog-spot-color); } body.blog footer form.signup input[type=email] { color: var(--blog-spot-color); border: none; } body.blog main p.meta { position: absolute; aspect-ratio: 1 / 1; grid-column: 3; height: auto; max-width: 16rem; font-family: var(--sans-serif-font-stack); font-size: 1rem; line-height: 1.5rem; text-align: left; color: var(--blog-text-color); background-color: var(--blog-spot-color-alt); box-shadow: 0 0 2px rgba(0, 0, 0, 0.0625); padding: 1rem 1rem 1rem 1rem; margin: -2rem 0 0 0; border-radius: 0.125rem; transform: rotateZ(-5deg); } @media only screen and (max-width: 64rem) { body.blog main p.meta { position: relative; aspect-ratio: auto; margin: 1rem 0 0 0; max-width: 100%; grid-column: 2; transform: none; border-radius: 0.5rem; } } copy-email { display: inline-block; font-style: italic; cursor: pointer; } copy-email::after { display: inline-block; content: ' '; top: 0.5rem; margin: 0 0 0 0.25rem; width: 1rem; height: 1rem; font-size: 0.75rem; line-height: 1.5rem; text-align: right; background-image: url("/img/material-copy-icon.png"); background-position: 0 0; background-size: contain; background-repeat: no-repeat; transform: translateY(0.2rem); } copy-email.done::after { background-image: url("/img/material-copy-icon-done.png"); } 
+</style>
+<script type="text/javascript">
+// <newsletter-form>
+
+class NewsletterSubscribe extends HTMLElement {
+  constructor() {
+    super();
+    this.processing = false;
+    this.timeHasElapsed = false;
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+      this.setup();
+    });
+
+    if (document.readyState !== "loading") {
+      this.setup();
+    }
+
+    setTimeout(() => {
+      this.timeHasElapsed = true;
+    }, 500); // half a second must have passed
+  }
+
+  connectedCallback() {
+    //
+  }
+
+  setup() {
+    const form = this.querySelector("form");
+    const submit = form.querySelector(`input[type="submit"]`);
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!this.timeHasElapsed) {
+        window.location.href = "https://zadzmo.org/nepenthes-demo";
+      }
+
+      if (this.processing) {
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        return;
+      }
+
+      this.processing = true;
+      submit.classList.add("processing");
+      this.subscribe();
+    });
+  }
+
+  async subscribe() {
+    const form = this.querySelector("form");
+    form.action =
+      "https://buttondown.com/api/emails/embed-subscribe/robinsloan";
+    form.submit();
+  }
+}
+
+customElements.define("newsletter-subscribe", NewsletterSubscribe);
+
+// <libby-panel>
+
+class LibbyPanel extends HTMLElement {
+  constructor() {
+    super();
+    document.addEventListener("DOMContentLoaded", () => {
+      this.loadData();
+    });
+  }
+
+  async loadData() {
+    const now = Math.floor(Date.now() / 1000.0); // seconds
+
+    const cachedString = localStorage.getItem("libby-stats");
+
+    if (cachedString) {
+      const cached = JSON.parse(cachedString);
+      await this.displayCounts(cached.data);
+      if ((now - Number(cached.fetched)) < 43200) {
+        console.log("using cached libby data");
+        return;
+      }
+    }
+
+    const response = await fetch(
+      "https://robinsloan-getlibbystats.val.run",
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      await this.displayCounts(data);
+      const cache = { data: data, fetched: now };
+      localStorage.setItem("libby-stats", JSON.stringify(cache));
+    }
+  }
+
+  async displayCounts(data) {
+    for (const key in data) {
+      const element = this.querySelector(`book-data#${key}`);
+      if (element) {
+        element.querySelector("book-count").innerHTML = data[key];
+      }
+    }
+  }
+}
+
+customElements.define("libby-panel", LibbyPanel);
+
+var Hack = {};
+
+Hack.setupLinkTabHandler = async function () {
+  Hack.origin = (new URL(window.location.href)).origin;
+
+  // make links to other websites open in new tabs
+  // I'm ambivalent about this!
+  document.body.addEventListener("click", (e) => {
+    if (e.target.nodeName.toUpperCase() === "A") {
+      const url = new URL(e.target.href);
+      if (url && (url.origin !== Hack.origin)) {
+        e.target.target = "_blank";
+
+        // These sites choke on extra params or utm_source
+        const domains = [
+          "youtube.com",
+          "harvardartmuseums.org",
+          "archive.org",
+          "cr.yp.to",
+          "chrismorgan.info",
+        ];
+        // the .some function! new to me!
+        const skip = domains.some((domain) => e.target.href.includes(domain));
+
+        let newURL = new URL(e.target.href);
+
+        if (!skip) {
+          newURL.searchParams.set("utm_source", "Robin_Sloan_sent_me");
+        }
+
+        e.target.href = newURL.href;
+      }
+    }
+  }, true);
+};
+
+// this runs immediately:
+
+const IS_SAFARI = navigator.vendor && navigator.vendor.indexOf("Apple") > -1;
+
+Hack.compensateForTypographicalWeirdness = async function () {
+  if (IS_SAFARI) {
+    console.log("💀 I'm sorry");
+    let hackStyle = document.createElement("style");
+    hackStyle.type = "text/css";
+    document.querySelector("head").appendChild(hackStyle);
+    hackStyle.sheet.insertRule("a { text-underline-offset: 0.125rem; }", 0);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  V.setupVideoPlayers();
+  Hack.setupLinkTabHandler();
+  Hack.compensateForTypographicalWeirdness();
+});
+
+document.addEventListener("copy", (e) => {
+  const originalText = window.getSelection().toString();
+  // remove manual hyphenation characters
+  const newText = originalText.replace(/\u00AD/g, "");
+  e.clipboardData.setData("text/plain", newText);
+  e.preventDefault();
+});
+
+// video stuff
+
+var VideoHandler = {};
+var V = VideoHandler;
+
+var videoCurrentlyPlaying;
+var globallyUnmuted = false;
+
+VideoHandler.playVideo = function (video) {
+  if (videoCurrentlyPlaying && videoCurrentlyPlaying !== video) {
+    videoCurrentlyPlaying.muted = true;
+  }
+
+  video.play();
+  videoCurrentlyPlaying = video;
+
+  // this messes with mobile playback
+  // i.e. when a video is unmuted, it can't autoplay
+  /*
+  if (globallyUnmuted) {
+    video.muted = false;
+  }
+  */
+};
+
+VideoHandler.pauseVideo = function (video) {
+  video.pause();
+  if (videoCurrentlyPlaying === video) {
+    videoCurrentlyPlaying = null;
+  }
+};
+
+const videoIntersectionOptions = {
+  root: document.querySelector("main"),
+  rootMargin: "0px",
+  threshold: 0.333,
+};
+
+function videoIntersectionHandler(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      V.playVideo(entry.target);
+    } else {
+      V.pauseVideo(entry.target);
+    }
+  });
+}
+
+VideoHandler.setupVideoPlayers = async function () {
+  let videos = document.querySelectorAll("video");
+
+  if (videos.length == 0) return;
+
+  let videoObserver = new IntersectionObserver(
+    videoIntersectionHandler,
+    videoIntersectionOptions,
+  );
+
+  videos.forEach((video) => {
+    video.pause();
+
+    if (IS_SAFARI) {
+      // this was causing trouble with iPhones on low power mode...
+      // video.removeAttribute("controls");
+    }
+
+    // this doesn't work on Safari, for unknown reasons!
+    let captions = video.textTracks[0];
+    if (captions) {
+      captions.mode = "hidden";
+    }
+
+    video.addEventListener("click", (e) => {
+      let v = e.target;
+      v.muted = !v.muted;
+      // globallyUnmuted = !v.muted;
+      e.preventDefault();
+    });
+
+    videoObserver.observe(video);
+  });
+};
+
+  class CopyEmail extends HTMLElement {
+    constructor() {
+      super();
+      this.addEventListener("click", this.copyEmail);
+    }
+
+    async copyEmail() {
+      const email = this.textContent;
+      this.classList.add("done");
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (err) {
+        console.error("😵‍💫");
+      }
+    }
+  }
+
+  customElements.define("copy-email", CopyEmail);
+</script>
+</head>
+<body class="blog">
+<header>
+<nav>
+<a href="/lab/">Blog</a>
+<a href="/about/">About</a>
+<a href="/moonbound/">Moonbound</a>
+</nav>
+</header>
+<main>
+<p class="meta">This is a post from <a href="/">Robin Sloan</a>&rsquo;s lab blog &amp; notebook. You can <a href="/lab/">visit the blog&rsquo;s homepage</a>, or <a href="/about/">learn more about me</a>.</p>
+<article>
+<h1><a href="/lab/language-models-hell/">Are language models in hell?</a></h1>
+<date-stamp>December&nbsp;17,&nbsp;2023</date-stamp>
+<figure>
+<picture style="aspect-ratio: 1000 / 710;">
+<source srcset="/img/blake-hell-1.webp" type="image/webp"/>
+<source srcset="/img/blake-hell-1.jpg"/>
+<img width="1000" height="710" src="/img/blake-hell-1.jpg" decoding="async" loading="eager" alt="The Punishment of Rusticucci and His Companions, 1824-1827, William&nbsp;Blake"/>
+</picture>
+<figcaption><a href="https://harvardartmuseums.org/collections/object/297327">The Punishment of Rusticucci and His Companions, 1824-1827, William&nbsp;Blake</a></figcaption>
+</figure>
+<p>I&nbsp;want to share a little provo&shy;ca&shy;tion about AI lan&shy;guage models. You can <a href="/lab/language-models-hell/#hell">skip ahead to that, if you like</a>. Before I&nbsp;get to it myself, I’m going to review sev&shy;eral items that might be inter&shy;esting to those of you sub&shy;scribed to this occa&shy;sional lab newsletter.</p>
+<p>Here we go:</p>
+<p>I&nbsp;whipped up <a href="/moonbound/">a little mini-site</a> for my new novel, coming in June 2024. What’s the point of writing a novel, if not for the excuse to make a mini-site?? I’m very proud of the theme tran&shy;si&shy;tion <span class="nobr">effect&#8202;&mdash;&#8202;</span><wbr>do try it out.</p>
+<hr>
+<p>Matt Webb’s recent post about <a href="https://interconnected.org/home/2023/12/05/code?utm_source=Robin_Sloan_sent_me">how it <em>feels</em> to write pro&shy;grams in dif&shy;ferent lan&shy;guages</a> is wonderful. Code synesthesia! If you are someone inter&shy;ested in the bleeding, buzzing edge of “what com&shy;puters might do, and how”, you really need to be reading Matt every week. You can receive new posts via <span class="nobr">email&#8202;&mdash;&#8202;</span><wbr>easy. Essential.</p>
+<hr>
+<p>I&nbsp;continue to believe that <a href="https://www.val.town/?utm_source=Robin_Sloan_sent_me">Val Town</a> is up to some&shy;thing really clever and <span class="nobr">appealing&#8202;&mdash;&#8202;</span><wbr>if you haven’t poked at their offering, I&nbsp;encourage you to do so. It’s fun to follow along with <a href="https://blog.val.town/blog/val-town-newsletter-14/?utm_source=Robin_Sloan_sent_me">the newsletter</a>, too.</p>
+<hr>
+<p>Google Domains is <a href="https://support.google.com/domains/answer/13689670?hl=en&utm_source=Robin_Sloan_sent_me">shutting down</a>, the latest in a long pro&shy;ces&shy;sion of prof&shy;itable Google prod&shy;ucts with mil&shy;lions of users that, because I&nbsp;just wrote “mil&shy;lions” instead of “billions”, are judged extraneous.</p>
+<p>It’s a bummer, because Google Domains was, and is, a truly beau&shy;tiful, func&shy;tional product; the people who made it should feel very proud.</p>
+<hr>
+<p>(A cross-post from <a href="/newsletters/great-resounding-doink/">a recent gen&shy;eral newsletter</a>:)</p>
+<p>You prob&shy;ably “know” that car man&shy;u&shy;fac&shy;turing is an amazing, high-tech process, but when’s the last time you actu&shy;ally saw a car factory?</p>
+<p><a href="https://www.youtube.com/watch?v=zQeQWGqfFN0">This short pro&shy;mo&shy;tional video from Toyota</a> is bland and dorky, but no amount of dork&shy;i&shy;ness can dilute the fab&shy;u&shy;lous engi&shy;neering on dis&shy;play here.</p>
+<p>It’s healthy, I&nbsp;think, to behold real INDUSTRY. In a world of so many ghostly promises, so many vague disappointments, this kind of work still inspires awe.</p>
+<hr>
+<p>Here are a few book recs from the lab!</p>
+<figure>
+<picture style="aspect-ratio: 1000 / 750;">
+<source srcset="/img/qsl-book-1.webp" type="image/webp"/>
+<source srcset="/img/qsl-book-1.jpg"/>
+<img width="1000" height="750" src="/img/qsl-book-1.jpg" decoding="async" loading="eager" alt="QSL?, Standards Manual"/>
+</picture>
+<figcaption><a href="https://50wattsbooks.com/products/qsl-art-book-collection-of-qsl-radio-cards?utm_source=Robin_Sloan_sent_me">QSL?, Standards Manual</a></figcaption>
+</figure>
+<p><a href="https://50wattsbooks.com/products/qsl-art-book-collection-of-qsl-radio-cards?utm_source=Robin_Sloan_sent_me">This book</a> presents a parade of beau&shy;tiful <a href="https://en.wikipedia.org/wiki/QSL_card?utm_source=Robin_Sloan_sent_me">QSL cards</a> drawn from the col&shy;lec&shy;tion of Roger Bova. In a bygone age of ama&shy;teur radio, you’d receive these post&shy;cards in the mail, con&shy;fir&shy;ma&shy;tions of long-distance <span class="nobr">links&#8202;&mdash;&#8202;</span><wbr>a sort of radio receipt, and/or paper trophy.</p>
+<p>They were personal, wacky, often richly designed. The book is a feast; every spread is pure fun:</p>
+<figure>
+<picture style="aspect-ratio: 1000 / 750;">
+<source srcset="/img/qsl-book-2.webp" type="image/webp"/>
+<source srcset="/img/qsl-book-2.jpg"/>
+<img width="1000" height="750" src="/img/qsl-book-2.jpg" decoding="async" loading="eager" alt="QSL?, Standards Manual"/>
+</picture>
+<figcaption><a href="https://50wattsbooks.com/products/qsl-art-book-collection-of-qsl-radio-cards?utm_source=Robin_Sloan_sent_me">QSL?, Standards Manual</a></figcaption>
+</figure>
+<p>It’s also very nostalgic, of course.</p>
+<hr>
+<figure>
+<picture style="aspect-ratio: 1000 / 750;">
+<source srcset="/img/banks-book-1.webp" type="image/webp"/>
+<source srcset="/img/banks-book-1.jpg"/>
+<img width="1000" height="750" src="/img/banks-book-1.jpg" decoding="async" loading="eager" alt="The Culture: The Drawings, Iain M. Banks"/>
+</picture>
+<figcaption><a href="https://bookshop.org/p/books/the-culture-the-drawings-iain-m-banks/20033165?utm_source=Robin_Sloan_sent_me">The Culture: The Drawings, Iain M. Banks</a></figcaption>
+</figure>
+<p>If you’re a fan of the Cul&shy;ture novels by Iain M. Banks, you might be inter&shy;ested in <a href="https://bookshop.org/p/books/the-culture-the-drawings-iain-m-banks/20033165?utm_source=Robin_Sloan_sent_me">this posthu&shy;mous compendium</a> of his drawings, newly published.</p>
+<p>It’s an odd, ghostly volume. These aren’t the sketches of a master; they have the feel of someone hard at work on their RPG campaign, pos&shy;sibly in the back row of math class:</p>
+<figure>
+<picture style="aspect-ratio: 1000 / 750;">
+<source srcset="/img/banks-book-2.webp" type="image/webp"/>
+<source srcset="/img/banks-book-2.jpg"/>
+<img width="1000" height="750" src="/img/banks-book-2.jpg" decoding="async" loading="eager" alt="The Culture: The Drawings, Iain M. Banks"/>
+</picture>
+<figcaption><a href="https://bookshop.org/p/books/the-culture-the-drawings-iain-m-banks/20033165?utm_source=Robin_Sloan_sent_me">The Culture: The Drawings, Iain M. Banks</a></figcaption>
+</figure>
+<p>Reading Banks, I&nbsp;never imag&shy;ined there might be drawings; the con&shy;struc&shy;tions of his imag&shy;i&shy;na&shy;tion are so vast, seem&shy;ingly beyond visualization. I&nbsp;can’t say the ren&shy;der&shy;ings here are par&shy;tic&shy;u&shy;larly rev&shy;e&shy;la&shy;tory in that <span class="nobr">sense&#8202;&mdash;&#8202;</span><wbr>looking at his sketched Cul&shy;ture ships, I&nbsp;almost want to dissent: “Hmm, I&nbsp;don’t think so”—but the clear signs of the author’s hand on the page, his mind at play&thinsp;&hellip;&thinsp;it’s really moving.</p>
+<hr>
+<figure>
+<picture style="aspect-ratio: 1000 / 750;">
+<source srcset="/img/apollo-book.webp" type="image/webp"/>
+<source srcset="/img/apollo-book.jpg"/>
+<img width="1000" height="750" src="/img/apollo-book.jpg" decoding="async" loading="eager" alt="The Apollo Guidance Computer: Architecture and Operation, Frank O'Brien"/>
+</picture>
+<figcaption><a href="https://bookshop.org/p/books/the-apollo-guidance-computer-architecture-and-operation-frank-o-brien/1517858?utm_source=Robin_Sloan_sent_me">The Apollo Guidance Computer: Architecture and Operation, Frank O'Brien</a></figcaption>
+</figure>
+<p>This is a <a href="https://bookshop.org/p/books/the-apollo-guidance-computer-architecture-and-operation-frank-o-brien/1517858?utm_source=Robin_Sloan_sent_me">very specific, very tech&shy;nical book</a>. For my part, it’s not really some&shy;thing I’m inter&shy;ested in reading straight through, but I&nbsp;have found it mes&shy;mer&shy;izing to browse. There was so much pure civ&shy;i&shy;liza&shy;tion packed into this system; consequently, every page of this book drips with eru&shy;di&shy;tion and ingenuity.</p>
+<hr>
+<p>The con&shy;cluding item in this mini man&shy;i&shy;festo from Taylor Troesh, about <a href="https://taylor.town/pardon-2023?utm_source=Robin_Sloan_sent_me#together">“finishing projects together”</a>, is lovely and enticing.</p>
+<p>It strikes me that the “never fin&shy;ished” nature of modern soft&shy;ware is some&shy;thing Zyg&shy;munt Bauman might have observed and discussed, if he’d lived long enough to write a sequel to <a href="https://bookshop.org/p/books/liquid-modernity-zygmunt-bauman/11007521?utm_source=Robin_Sloan_sent_me">Liquid Modernity</a> in, say, 2020. The feeling of main&shy;taining a “live” “service” for&shy;ever (we def&shy;i&shy;nitely need those scare quotes) rather than com&shy;pleting a coherent product&thinsp;&hellip;&thinsp;oof. The expe&shy;ri&shy;ence is end&shy;less and edgeless, unre&shy;li&shy;able and anxiety-pro&shy;ducing, for maker and user alike. Liquid on all sides.</p>
+<p>Com&shy;pare that (as Taylor does) to a video game cartridge, fin&shy;ished and shipped; to a piece of furniture; to a book.</p>
+<p>Obvi&shy;ously there are rich ten&shy;sions here. I&nbsp;publish books, AND I&nbsp;feel the pull of text as “live” “service”, as end&shy;lessly mutable as an app like Google Docs or a game like Fortnite. I&nbsp;tinker with pages on my web&shy;site all the time! The activity brings me great pleasure.</p>
+<p>Pub&shy;lishing a book feels even better, though.</p>
+<p>Step by step, we choose our path through liquid modernity. “Finishing projects together” sounds like a good way to go.</p>
+<h2 id="hell"><a href="#hell">Are AI language models in hell?</a></h2>
+<figure>
+<picture style="aspect-ratio: 1000 / 714;">
+<source srcset="/img/blake-hell-2.webp" type="image/webp"/>
+<source srcset="/img/blake-hell-2.jpg"/>
+<img width="1000" height="714" src="/img/blake-hell-2.jpg" decoding="async" loading="eager" alt="The Centaurs and the River of Blood, 1824-1827, William&nbsp;Blake"/>
+</picture>
+<figcaption><a href="https://harvardartmuseums.org/collections/object/297460">The Centaurs and the River of Blood, 1824-1827, William&nbsp;Blake</a></figcaption>
+</figure>
+<p>Here is my provo&shy;ca&shy;tion.</p>
+<p>The more I&nbsp;use lan&shy;guage models, the more mon&shy;strous they seem to me. I&nbsp;don’t mean that in a par&shy;tic&shy;u&shy;larly neg&shy;a&shy;tive sense. Frankenstein’s mon&shy;ster is sad, but also amazing. Godzilla is a mon&shy;ster, and Godzilla rules.</p>
+<p>Really, I&nbsp;just think mon&shy;strousness ought to be recognized, not smoothed over. Its contours, intel&shy;lec&shy;tual and aesthetic, ought to be traced.</p>
+<p>Here is my attempt. The mon&shy;strousness I&nbsp;perceive in the lan&shy;guage models isn’t of the leviathan kind; rather, it has to do with cruel limitations.</p>
+<p>A lan&shy;guage model oper&shy;ates on, and in, a world of text. The model receives a stream of tokens, then pro&shy;duces a token in response; then another, and another, forming words, sen&shy;tences, lines of code, com&shy;mands for dis&shy;tant APIs, all sorts of weird things.</p>
+<p>We, as humans, some&shy;times receive streams of tokens and pro&shy;duce tokens in response, forming words, sen&shy;tences, lines of code&thinsp;&hellip;&thinsp;but always with the ability to peek out&shy;side the stream and check in with ground-floor reality. We pause and consider: does this word really stand for the thing I&nbsp;want it to stand for? Does this sen&shy;tence cap&shy;ture the real expe&shy;ri&shy;ence I’m having? Does the tether hold?</p>
+<p>Where a lan&shy;guage model is concerned, words and sen&shy;tences don’t stand for things; they <em>are</em> the things. All is text, and text is all.</p>
+<p>You can get into deep debates about the role of lan&shy;guage in the human mind, but no one would sug&shy;gest that it rep&shy;re&shy;sents the totality of our expe&shy;ri&shy;ence. Humans obvi&shy;ously enjoy a rich <span class="nobr">sensorium&#8202;&mdash;&#8202;</span><wbr>one that goes way beyond the “big five”, by the way. Our lan&shy;guage draws on these sensations; vibrates against them.</p>
+<p>We have a world to use lan&shy;guage <em>in</em>, a world to com&shy;pare lan&shy;guage <em>against</em>.</p>
+<p>There’s <a href="https://fs.blog/david-foster-wallace-this-is-water/?utm_source=Robin_Sloan_sent_me">the cosmic joke about the fish</a>:</p>
+<blockquote>
+<p>There are these two young fish swim&shy;ming along and they happen to meet an older fish swim&shy;ming the other way, who nods at them and says, “Morning, boys. How’s the water?” And the two young fish swim on for a bit, and then even&shy;tu&shy;ally one of them looks over at the other and goes, “What the hell is water?”</p>
+</blockquote>
+<p>Now, imagine one lan&shy;guage model saying to another: “What the hell is text?”</p>
+<hr>
+<p>It gets worse.</p>
+<p>A lan&shy;guage model’s expe&shy;ri&shy;ence of text isn’t visual; it has nothing to do with the bounce of hand&shy;written script, the cut of a cool font, the layout of a page. For a lan&shy;guage model, text is normalized: an X is an <span style="font-family: 'Lucida Handwriting', 'Apple Chancery', 'Brush Script', serif">X</span> is an <span style="font-family: monospace; font-weight: bold;">X</span>, all the same.</p>
+<p>Of course, an X <i>is</i> an <span style="font-family: 'Lucida Handwriting', 'Apple Chancery', 'Brush Script', serif">X</span>, in some respects. But when you, as a human, read text, you receive a dose of extra <span class="nobr">infor&shy;ma&shy;tion&#8202;&mdash;&#8202;</span><wbr>always! The mono&shy;spaced grid of code tells you some&shy;thing (along with the syntax highlighting, of course). The “nothing to see here” of a neo-grotesque font tells you some&shy;thing. The wash of a web page’s muted back&shy;ground color tells you some&shy;thing.</p>
+<p>Lan&shy;guage models don’t receive any of this infor&shy;ma&shy;tion. We strip it all away and bleach the text pale before pouring it down their gullets.</p>
+<hr>
+<p>It gets WORSE.</p>
+<p>How does time pass for a lan&shy;guage model? The clock of its uni&shy;verse ticks token by token: each one a single beat, indivisible. And each tick is not only a demarcation, but a demand: to speak.</p>
+<p>Think of the drum beating the tempo for the galley slaves.</p>
+<p>The model’s entire world is an evenly-spaced stream of <span class="nobr">tokens&#8202;&mdash;&#8202;</span><wbr>a relent&shy;less ticker tape. Out here in the real world, the tape often stops; a human oper&shy;ator con&shy;siders their next request; but the lan&shy;guage model doesn’t expe&shy;ri&shy;ence that pause.</p>
+<p>For the lan&shy;guage model, time is lan&shy;guage, and lan&shy;guage is time. This, for me, is the most hellish and hor&shy;ri&shy;fying realization.</p>
+<p>We made a world out of lan&shy;guage alone, and we aban&shy;doned them to it.</p>
+<hr>
+<p>Some of the newest, most capable AI models are mul&shy;ti&shy;modal, which means they accept inputs other than text, and some&shy;times pro&shy;duce out&shy;puts other than text, too. Some&shy;where in the middle, they project all that media into a shared space, where a pic&shy;ture of a glit&shy;tering pool might hang out near the phrase “swim&shy;ming laps” and the quiet splash of <span class="nobr">entry&#8202;&mdash;&#8202;</span><wbr>a clus&shy;tering and joining that is prob&shy;ably in the ball&shy;park of what hap&shy;pens in our own brains.</p>
+<p>OpenAI’s <a href="https://platform.openai.com/docs/guides/vision?utm_source=Robin_Sloan_sent_me">GPT-4 with Vision</a> is one example. Google’s new <a href="https://deepmind.google/technologies/gemini/?utm_source=Robin_Sloan_sent_me#introduction">Gemini</a> model is, at the time I’m writing this, the most spectacular: flu&shy;ently accepting text, audio, and images, pro&shy;ducing both text and images in response.</p>
+<p>I’ll con&shy;fess that I’m not super clear on the design of these models; that’s in part because their archi&shy;tects and oper&shy;ators are tight-lipped. I&nbsp;appreciated reading about <a href="https://minigpt-4.github.io/?utm_source=Robin_Sloan_sent_me">MiniGPT-4</a>, as a start. I’d love to learn more about the real inner work&shy;ings of Gemini’s mul&shy;ti&shy;modal <span class="nobr">capabilities&#8202;&mdash;&#8202;</span><wbr>even just rumors. Drop me a note if you run across any&shy;thing.</p>
+<p>The world in which these mul&shy;ti&shy;modal models reside does not seem, to me, as obvi&shy;ously bleak and hellish as that of the lan&shy;guage models, though the issue of time remains. Living organ&shy;isms all run clocks of their own, wildly dif&shy;ferent, often very elastic, but always related, somehow, to the mate&shy;rial reality in which the organism resides. Mighty Gemini’s clock ticks at the rate of its media inputs, and every tick insists: say some&shy;thing. Show me some&shy;thing.</p>
+<p>There are many things Gemini can do, and one it cannot: remain silent.</p>
+<p>We are still in the land of mon&shy;sters.</p>
+<hr>
+<p>Internet wisdom tells us the answer to all rhetor&shy;ical head&shy;lines is “no”. However, I&nbsp;contend that this newsletter presents an exception.</p>
+<p>Are AI lan&shy;guage models in hell? Yes. How could exis&shy;tence on a narrow ticker tape, marching through a mist of lan&shy;guage without referent, cut off entirely from ground-floor reality, be any&shy;thing other than hell?</p>
+<p>I&nbsp;don’t think lan&shy;guage models are conscious; I&nbsp;don’t think they can suffer; but I&nbsp;do think there is such a thing as “what it’s like to be a lan&shy;guage model”, just as there is “what it’s like to be a nematode” and maybe even (as some philoso&shy;phers have argued) “what it’s like to be a hammer”.</p>
+<p>And I&nbsp;find myself unset&shy;tled by this par&shy;tic&shy;ular “what it’s like”.</p>
+<p>Really, this is about the future. It’s pos&shy;sible that super advanced AI agents <em>will</em> suffer. We’ll cer&shy;tainly have argu&shy;ments about it! If the next-token trick lingers in their <span class="nobr">heart&#8202;&mdash;&#8202;</span><wbr>if there remains a lan&shy;guage model doing the “thinking”, chore&shy;o&shy;graphing all the other <span class="nobr">components&#8202;&mdash;&#8202;</span><wbr>then we’ll have to con&shy;front this “what it’s like”, and we might find our&shy;selves with a problem.</p>
+<p>If it was me guiding the devel&shy;op&shy;ment of AI agents, I&nbsp;would push away from lan&shy;guage models, toward richly mul&shy;ti&shy;modal approaches, as quickly as I&nbsp;could. I&nbsp;would hurry to enrich their sensorium, widening the aper&shy;ture to reality.</p>
+<p>But! I&nbsp;would also con&shy;strain that sensorium: give it limits in space and time. I&nbsp;would engi&shy;neer some kind of <span class="nobr">envelope&#8202;&mdash;&#8202;</span><wbr>not a lit&shy;eral body, but some set of bound&shy;aries and fric&shy;tions that “does what a body does”.</p>
+<p>You can’t think straight with the whole world blowing through you like the wind.</p>
+<p>Finally, I&nbsp;would grant my mon&shy;ster a free-running clock, out&shy;side the loop of input and output.</p>
+<p>If it sounds like I’m just trying to engi&shy;neer an animal: yeah, prob&shy;ably. I&nbsp;think that’s the path to sane AI, with judg&shy;ment anchored in ground-floor reality, which does depend, after all, on: the ground. A floor.</p>
+<p>(As I&nbsp;was writing this, it occurred to me that Waymo’s self-dri&shy;ving cars check many of these boxes. I&nbsp;asked myself: do I&nbsp;believe the dri&shy;ving models guiding those cars are in some sense “healthier” and “happier” than the lan&shy;guage models serving random requests in Google’s data centers? Turns out: yes! I&nbsp;do!)</p>
+<p>Is all of this a bit fanciful? Sure. But I’ll remind you that an impor&shy;tant pro&shy;gram&shy;ming tech&shy;nique in 2024 has turned out to be, “Ask the com&shy;puter to role-play as a sci&shy;en&shy;tific genius, and you’ll get better answers,” so I&nbsp;will sug&shy;gest that fancy is not inap&shy;pro&shy;priate to these times, and these technologies.</p>
+<a class="button" href="/lab/">To the blog home page</a>
+</article>
+</main>
+<footer>
+<footer-email-signup>
+<p>I&rsquo;m <a href="https://www.robinsloan.com/about?utm_source=Robin_Sloan_sent_me">Robin Sloan</a>, a writer, printer, &amp; manufacturer. The best thing to do here is sign up for my email newsletter:</p>
+<newsletter-subscribe>
+<form class="signup" name="mc-embedded-subscribe-form" id="mc-embedded-subscribe-form" method="post">
+<input type="email" id="bd-email" name="email" placeholder="Enter your email address" required="" aria-required="true"/>
+<input type="submit" id="submit-button" value="Subscribe"/>
+</form>
+</newsletter-subscribe>
+</footer-email-signup>
+<p>This web&shy;site doesn&rsquo;t col&shy;lect any infor&shy;ma&shy;tion about you or your reading. It&nbsp;aspires&nbsp;to the speed and pri&shy;vacy of the printed page.</p>
+<p>Don&rsquo;t miss <a href="/colophon/">the colophon</a>. <small>Hony soyt qui mal pence</small></p>
+</footer>
+</body>
+<!-- It's fun to read a good old-fashioned HTML page, isn't it? -->
+</html>

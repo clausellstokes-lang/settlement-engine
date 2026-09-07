@@ -1,0 +1,323 @@
+{
+  "name": "hobb",
+  "chunk": 7,
+  "claims": [
+    {
+      "index": 491,
+      "feature": "point of view and distance",
+      "claim": "Landon reports that a second point of view in the same novel is also written in the first person and alternates without obvious delineation.",
+      "source": "Justin Landon, review of Fool's Assassin, Tor.com (now Reactor), 12 August 2014",
+      "url": "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+      "quote": "also written in the first person that bounces back and forth",
+      "page": "review body",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2014-08-12",
+      "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 492,
+      "feature": "civic record register",
+      "claim": "Landon describes journal entries written by the narrator about days long past as opening every chapter of the novel.",
+      "source": "Justin Landon, review of Fool's Assassin, Tor.com (now Reactor), 12 August 2014",
+      "url": "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+      "quote": "journal entries that he writes of days long past",
+      "page": "review body",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2014-08-12",
+      "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
+      "registerHint": "chronicle-line",
+      "confidence": "high"
+    },
+    {
+      "index": 493,
+      "feature": "withheld information and inference",
+      "claim": "Landon characterises the narrator as reliably unreliable in interpreting the actions of those around him.",
+      "source": "Justin Landon, review of Fool's Assassin, Tor.com (now Reactor), 12 August 2014",
+      "url": "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+      "quote": "reliably unreliably interpreting the actions of those around him",
+      "page": "review body",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2014-08-12",
+      "routeHint": "live page; the 2014 tor.com URL now redirects to this reactormag canonical",
+      "registerHint": "chronicle-line",
+      "confidence": "high"
+    },
+    {
+      "index": 494,
+      "feature": "consequence on a household",
+      "claim": "A reader commenting on Landon's review says he revelled in the novel's small domestic details and the patient growth of the relationships.",
+      "source": "Justin Landon, review of Fool's Assassin, Tor.com (now Reactor), 12 August 2014",
+      "url": "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+      "quote": "I reveled in the small domestic details and patient growth",
+      "page": "comment by Billcap",
+      "kind": "reader",
+      "polarity": "asserts",
+      "date": "2014-08-12",
+      "routeHint": "live page; this is a reader comment below the review, not the reviewer's text",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 495,
+      "feature": "omission as information",
+      "claim": "A reader commenting on Landon's review says Hobb has been stripping traditional plot out of her books in favour of character and relationships.",
+      "source": "Justin Landon, review of Fool's Assassin, Tor.com (now Reactor), 12 August 2014",
+      "url": "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+      "quote": "stripping a lot of traditional plot out of her books",
+      "page": "comment by Billcap",
+      "kind": "reader",
+      "polarity": "asserts",
+      "date": "2014-08-12",
+      "routeHint": "live page; this is a reader comment below the review, not the reviewer's text",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 496,
+      "feature": "other: pacing and slow consequence",
+      "claim": "Stephanie Dray reports that pacing is the most frequent complaint made against the Liveship Traders series.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "the pacing of the series seems to be the most frequent complaint",
+      "page": "late in the review",
+      "kind": "reception",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 497,
+      "feature": "consequence on a household",
+      "claim": "Dray attributes to Hobb a grim devotion to realistic consequences that leaves the reader unable to predict the outcome.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "This grim devotion to realistic consequences ensures that the reader",
+      "page": "paragraph on Hobb's bravery",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 498,
+      "feature": "consequence on a household",
+      "claim": "Dray notes that Hobb is willing not only to kill characters but to maim, disfigure or transform them.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "she isn't afraid to maim, disfigure, or transform",
+      "page": "paragraph on Hobb's bravery",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page; this section of the page uses straight apostrophes",
+      "registerHint": "none",
+      "confidence": "high"
+    },
+    {
+      "index": 499,
+      "feature": "consequence on a household",
+      "claim": "Dray says the changing fortunes of the single Vestrit family stand for those of all the old trader families of Bingtown.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "Their changing fortunes reflect those of all the other old trader families",
+      "page": "third paragraph",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    },
+    {
+      "index": 500,
+      "feature": "consequence on a household",
+      "claim": "Dray reports that the family's decision to enter the slave trade is taken in order to pay off the family debts.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "engage in slave trading in order to pay off the family debts",
+      "page": "third paragraph",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    },
+    {
+      "index": 501,
+      "feature": "place and institution description",
+      "claim": "Dray's account of Bingtown's founding describes settlers awarded grants and trade monopolies that raised them into a merchant nobility.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "they were awarded grants and trade monopolies that helped them",
+      "page": "second paragraph",
+      "kind": "analysis",
+      "polarity": "asserts",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    },
+    {
+      "index": 502,
+      "feature": "omission as information",
+      "claim": "Dray faults the final volume for summarising the outcome of the civil insurrection briefly rather than dramatising it.",
+      "source": "Stephanie Dray, review of the Liveship Traders, Strange Horizons, 5 November 2001",
+      "url": "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+      "quote": "the outcome of the civil insurrection is summarized briefly",
+      "page": "paragraph on Ship of Destiny",
+      "kind": "analysis",
+      "polarity": "disputes",
+      "date": "2001-11-05",
+      "routeHint": "live page, strangehorizons.com/wordpress/ path",
+      "registerHint": "chronicle-line",
+      "confidence": "high"
+    },
+    {
+      "index": 503,
+      "feature": "concrete sensory noun",
+      "claim": "Hobb says her writing has evolved by slowing down and putting in the small details that add up to a moment of exhilaration or panic.",
+      "source": "Robin Hobb interviewed by Peter Orullian, Tor.com, 7 February 2012",
+      "url": "https://web.archive.org/web/20201111180135id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
+      "quote": "I slow down and put in the small details",
+      "page": "answer on how her writing has evolved",
+      "kind": "own-words",
+      "polarity": "asserts",
+      "date": "2012-02-07",
+      "routeHint": "live tor.com URL returns Cloudflare 403; text is the Wayback raw capture 20201111180135id_",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    },
+    {
+      "index": 504,
+      "feature": "place and institution description",
+      "claim": "Hobb says every one of her stories starts with a character, and that the character is what introduces setting, culture, conflict, government and economy.",
+      "source": "Robin Hobb interviewed by Peter Orullian, Tor.com, 7 February 2012",
+      "url": "https://web.archive.org/web/20201111180135id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
+      "quote": "introduces setting, culture, conflict, government, economy",
+      "page": "answer on worldbuilding",
+      "kind": "own-words",
+      "polarity": "asserts",
+      "date": "2012-02-07",
+      "routeHint": "live tor.com URL returns Cloudflare 403; text is the Wayback raw capture 20201111180135id_",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    },
+    {
+      "index": 505,
+      "feature": "consequence on a household",
+      "claim": "Hobb names as her favourite books the ones in which a protagonist takes part in great events that also strongly affect the little lives.",
+      "source": "Robin Hobb interviewed by Peter Orullian, Tor.com, 7 February 2012",
+      "url": "https://web.archive.org/web/20201111180135id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
+      "quote": "great events that also impact the little lives very strongly",
+      "page": "answer on what makes a fantasy epic",
+      "kind": "own-words",
+      "polarity": "asserts",
+      "date": "2012-02-07",
+      "routeHint": "live tor.com URL returns Cloudflare 403; text is the Wayback raw capture 20201111180135id_",
+      "registerHint": "dossier-archivist",
+      "confidence": "high"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 491,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "also written in the first person that bounces back and forth",
+      "note": "Raw page fetched by curl with a browser UA, HTTP 200. Quote appears word for word in the body paragraph introducing the second point of view. The page continues with 'without obvious delineation', so the alternation limb is on the page too; the novel is Fool's Assassin. Byline 'By Justin Landon', 'Published on August 12, 2014' - the reactormag canonical, as the routeHint said."
+    },
+    {
+      "index": 492,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "journal entries that he writes of days long past",
+      "note": "Verbatim. The very next sentence says these entries open every chapter, so both limbs are on the page. 'He' is Fitz, established two sentences earlier as the head the novel returns inside of and whose every thought the reader is privy to, so 'the narrator' is correct."
+    },
+    {
+      "index": 493,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "reliably unreliably interpreting the actions of those around him",
+      "note": "Verbatim, opening the same paragraph. The page uses the adverb 'unreliably' where the claim says 'unreliable'; the sense is identical and the quoted string is exact. Subject is Fitz, the first-person narrator."
+    },
+    {
+      "index": 494,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "I reveled in the small domestic details and patient growth",
+      "note": "Verbatim in a reader comment signed Billcap, below the review, dated '12 years ago' - a reader comment, not the reviewer's text, exactly as the routeHint states. Two things worth recording for the merger: the page credits patient growth 'in the characters and their relationships to one another', so the claim's narrowing to relationships drops the characters half; and the page nowhere states Billcap's gender, so the claim's 'he' is the claim's own supposition, not the page's."
+    },
+    {
+      "index": 495,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "stripping a lot of traditional plot out of her books",
+      "note": "Verbatim, opening the same Billcap comment. The 'in favour of character and relationships' limb is supported by the same sentence, which says she instead focuses more on character/interpersonal relationships; the page adds cultural clash as a third focus, which the claim omits without distorting it."
+    },
+    {
+      "index": 496,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "the pacing of the series seems to be the most frequent complaint",
+      "note": "Raw page fetched by curl, HTTP 200 on the strangehorizons.com/wordpress/ path. Verbatim, late in the review as the claim's page field says, closing the paragraph on the conclusion. Byline 'By: Stephanie Dray', Issue '5 November 2001'. The page hedges with 'seems to be'; the claim's quote carries that hedge, so nothing is overstated."
+    },
+    {
+      "index": 497,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "This grim devotion to realistic consequences ensures that the reader",
+      "note": "Verbatim. The sentence completes with the reader being unable to predict what happens next and feeling no security in the outcome, so the second limb is on the page. It sits in the paragraph on Hobb's general bravery as an author, matching the claim's page field."
+    },
+    {
+      "index": 498,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "she isn't afraid to maim, disfigure, or transform",
+      "note": "Verbatim, immediately after the page's shorter sentence that Hobb is not afraid to kill - so the claim's 'not only to kill but' limb is supported. Confirmed the routeHint: this section of the raw HTML uses a straight ASCII apostrophe in 'isn't' (the whole document contains only one curly apostrophe, elsewhere)."
+    },
+    {
+      "index": 499,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "Their changing fortunes reflect those of all the other old trader families",
+      "note": "Verbatim in the third body paragraph, as the claim's page field says. 'Their' refers to the Vestrit family, named in the preceding sentence, and the page's phrase ends 'in Bingtown', supporting that limb."
+    },
+    {
+      "index": 500,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "engage in slave trading in order to pay off the family debts",
+      "note": "Verbatim, closing the third body paragraph. The page attributes the decision to the family ('the family decides that it will use the liveship to...'), and the next paragraph opens on the decision to trade in slaves catapulting the Vestrit family onward, so the decision limb is supported."
+    },
+    {
+      "index": 501,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "they were awarded grants and trade monopolies that helped them",
+      "note": "Verbatim in the second body paragraph, as the claim's page field says. The page completes the sentence with rising into the merchant nobility class, and the preceding sentence describes the pioneers who settled the coast of Trader Bay to found the colony - so both the founding-settlers limb and the merchant-nobility limb are on the page."
+    },
+    {
+      "index": 502,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "the outcome of the civil insurrection is summarized briefly",
+      "note": "Verbatim, and clearly framed as a fault: the same sentence follows the page's judgement that the last book may have been too condensed and too neat, and that characters are saved or killed efficiently. Two locator notes for the merger: the quote sits in the later paragraph on the end of the series, not in the earlier paragraph that introduces Ship of Destiny as the finale, so the claim's page field is a shade off; and 'rather than dramatising it' is the claim's own contrast - the page criticises the condensation without using a summarise/dramatise opposition, though the surrounding critique about no time to explore the psychological ramifications supports the sense."
+    },
+    {
+      "index": 503,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "I slow down and put in the small details",
+      "note": "Live tor.com is not needed: fetched the Wayback raw capture 20201111180135id_ by curl, HTTP 200, and it is the genuine article page (title, 'Peter Orullian', 'Tue Feb 7, 2012 6:00pm'). Verbatim in Hobb's answer to the question on how her own writing has evolved since her first published work, and the page completes the sentence with details that all add up to that moment of exhilaration or panic."
+    },
+    {
+      "index": 504,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "introduces setting, culture, conflict, government, economy",
+      "note": "Verbatim in the worldbuilding answer, matching the claim's page field. The clause opens with the page saying all her stories start with a character and that that character is the one introducing these, so the 'every one of her stories' limb is supported; the page adds that it comes through his or her eyes."
+    },
+    {
+      "index": 505,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "great events that also impact the little lives very strongly",
+      "note": "Verbatim in the answer on what makes a fantasy epic, matching the claim's page field. The page frames it as her favourite books being the ones in which the protagonist may participate in such events - the modal 'may' is slightly softer than the claim's 'takes part in', but the favourite-books and little-lives limbs are both exact."
+    }
+  ]
+}

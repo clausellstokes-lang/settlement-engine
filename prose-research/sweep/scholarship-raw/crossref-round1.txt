@@ -1,0 +1,40 @@
+--- George R.R. Martin and the Fantasy Form
+2019 | George R.R. Martin and the Fantasy Form |  | monograph | https://doi.org/10.4324/9781315144795
+2019 | Introduction | George R.R. Martin and the Fantasy Form | book-chapter | https://doi.org/10.4324/9781315144795-1
+2019 | The American Pratchett? – Muck and Modality | George R.R. Martin and the Fantasy Form | book-chapter | https://doi.org/10.4324/9781315144795-2
+2019 | “Enough about Whores” – Sex and Characterisation | George R.R. Martin and the Fantasy Form | book-chapter | https://doi.org/10.4324/9781315144795-3
+2019 | “But Here You Are” – Magic and Healing | George R.R. Martin and the Fantasy Form | book-chapter | https://doi.org/10.4324/9781315144795-7
+2019 | “Dead Men Come Hunting” – Intrusion and Recovery | George R.R. Martin and the Fantasy Form | book-chapter | https://doi.org/10.4324/9781315144795-5
+--- Network of Thrones Beveridge Shan
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+--- Food Fantasies Song of Ice and Fire
+2019 | A SONG OF ICE AND FIRE—AND ICE | The Northeast | book-chapter | https://doi.org/10.2307/j.ctvckq9kd.7
+2014 | The Other Worlds of George R.R. Martin’s A Song of Ice and Fire | George R.R. Martin's "A Song of Ice and Fire" and  | book-chapter | https://doi.org/10.31338/uw.9788323514350.pp.95-114
+2014 | The Function of the Grotesque in George R.R. Martin’s A Song of Ice and Fire | George R.R. Martin's "A Song of Ice and Fire" and  | book-chapter | https://doi.org/10.31338/uw.9788323514350.pp.139-160
+2014 | Ambiguity in the Depiction of Melisandre in A Song of Ice and Fire by George R. R. Martin | George R.R. Martin's "A Song of Ice and Fire" and  | book-chapter | https://doi.org/10.31338/uw.9788323514350.pp.211-230
+2014 | George R.R. Martin’s A Song of Ice and Fire and the Narrative Conventions of the Interlace | George R.R. Martin's "A Song of Ice and Fire" and  | book-chapter | https://doi.org/10.31338/uw.9788323514350.pp.15-48
+2020 | A Song of Ice and Fire—and ICE | To the Last Smoke | book-chapter | https://doi.org/10.2307/j.ctv10h9dr0.34
+--- Medievalism in A Song of Ice and Fire and Game of Thrones
+2018 | Medievalism | Medievalism in A Song of Ice and Fire and Game of  | other | https://doi.org/10.1017/9781787441941.009
+2018 | Bibliography | Medievalism in A Song of Ice and Fire and Game of  | book-chapter | https://doi.org/10.1017/9781787441941.008
+2018 | Medievalism in A Song of Ice and Fire and Game of Thrones |  | monograph | https://doi.org/10.1017/9781787441941
+2018 | Sex and Sexuality | Medievalism in A Song of Ice and Fire and Game of  | book-chapter | https://doi.org/10.1017/9781787441941.004
+2018 | Adaptation and Reception | Medievalism in A Song of Ice and Fire and Game of  | book-chapter | https://doi.org/10.1017/9781787441941.006
+2018 | Masculinity, Femininity, and Gender Relations | Medievalism in A Song of Ice and Fire and Game of  | book-chapter | https://doi.org/10.1017/9781787441941.003
+--- Winter is Coming Medieval World of Game of Thrones
+2016 | Notes | Winter  is  Coming | other | https://doi.org/10.5040/9780755693375.0009
+2016 | Introduction | Winter  is  Coming | other | https://doi.org/10.5040/9780755693375.0007
+2016 | Epilogue | Winter  is  Coming | other | https://doi.org/10.5040/9780755693375.0008
+2016 | Winter  is  Coming |  | book | https://doi.org/10.5040/9780755693375
+2016 | The Centre | Winter  is  Coming | other | https://doi.org/10.5040/9780755693375.ch-001
+2016 | The West | Winter  is  Coming | other | https://doi.org/10.5040/9780755693375.ch-003

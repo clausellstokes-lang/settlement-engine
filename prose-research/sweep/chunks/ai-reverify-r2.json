@@ -1,0 +1,413 @@
+{
+ "name": "ai",
+ "chunk": "reverify-r2",
+ "indices": [
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  24,
+  72,
+  77,
+  79,
+  80,
+  81,
+  87,
+  94,
+  95,
+  108,
+  116,
+  117,
+  118,
+  129,
+  132,
+  141,
+  160,
+  186,
+  187,
+  227,
+  239
+ ],
+ "claims": [
+  {
+   "index": 15,
+   "feature": "rhetorical complexity and literary devices",
+   "claim": "LLM stories pass Rhetorical Complexity only 2.8–11.1% of the time (humans 88.9%) and Literary Devices 5.6–36.1% (humans 88.9%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Attempts at figurative language come across as overwrought, confusing, nonsensical.",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 16,
+   "feature": "subtlety and restraint",
+   "claim": "Expert writers report that LLM figurative language lacks subtlety and obscures rather than illuminates.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Subtlety and restraint seem lacking",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 17,
+   "feature": "endings",
+   "claim": "LLM stories pass the Narrative Ending test 8.3–33.3% of the time versus 91.7% for professionals; experts flag moralistic, unearned and unrealistically happy resolutions.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Abrupt or unearned resolutions, overly moralistic conclusions, unrealistic happy endings",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 18,
+   "feature": "scene vs summary balance",
+   "claim": "LLM stories lean on summary/exposition instead of dramatized scene (pass 8.3–58.3% vs 91.7%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Overreliance on summary leaves the narrative ungrounded",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 19,
+   "feature": "character development and voice flexibility",
+   "claim": "LLM stories pass Character Development 8.3–16.7% (humans 61.1%) and Perspective & Voice Flexibility 8.3–19.4% (humans 72.2%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 20,
+   "feature": "hackneyed ideas despite clean surface",
+   "claim": "A story can avoid clichéd phrasing yet still fail originality because its ideas and themes are stock.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024), expert explanation on a Claude story",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "its ideas and themes are hackneyed",
+   "page": "",
+   "routeHints": [
+    "https://arxiv.org/html/2309.14556v3 — Table 5 and the expert-explanation section (Art or Artifice); or the ACM DL CHI 2024 version via Crossref doi 10.1145/3613904.3642731"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 24,
+   "feature": "expert vs non-expert divergence",
+   "claim": "Experts rate human stories 1.25 points higher than LLM stories while non-experts rate LLM stories 1.19 points higher and LLM judges 1.85 higher; lay ratings track word count.",
+   "source": "Ismayilzada et al. (ICCC 2025)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "driven by linguistic complexity of the stories",
+   "page": "",
+   "routeHints": [
+    "the arXiv HTML full text of 2411.02316 (Ismayilzada deltas) or the ICCC 2025 proceedings PDF via OpenAlex"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 72,
+   "feature": "style imitation fails on restraint",
+   "claim": "GPT-4o imitating Hemingway produced lexical diversity of 47.79 versus Hemingway's 34.62, and its function-word profile overlapped generic GPT output rather than the author's fingerprint.",
+   "source": "Mikros, Digital Scholarship in the Humanities 40(2), 2025",
+   "url": "https://academic.oup.com/dsh/article/40/2/587/8118784",
+   "quote": "significant overlap with generic GPT outputs",
+   "page": "",
+   "routeHints": [
+    "OpenAlex/Crossref on the DOI for an OA location (Unpaywall); the author's institutional repository or Semantic Scholar PDF; archive.ph of the OUP page (Cloudflare blocks curl, not a browser user agent)"
+   ],
+   "reverify": true,
+   "previousVerdict": "BLOCKED"
+  },
+  {
+   "index": 77,
+   "feature": "game dialogue: players prefer designers",
+   "claim": "Disco Elysium players preferred designer-written dialogue to GPT-4 infills 64% vs 23% (66% vs 23% after seeing the next line), citing logical consistency (61% vs 28%) and flow (67% vs 21%).",
+   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
+   "quote": "702 (61%) state a preference for human-written dialogue",
+   "page": "",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 79,
+   "feature": "script dialogue: literal and on the nose",
+   "claim": "Theatre and film professionals found LLM scripts too literal and predictable: a character's noble endeavour is stated in dialogue, names are on-the-nose puns, relationships are tight and prescriptive.",
+   "source": "Mirowski, Mathewson, Pittman & Evans, Dramatron (CHI 2023; arXiv 2209.14958)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "on the nose, pun names",
+   "page": "",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 80,
+   "feature": "script dialogue: no subtext",
+   "claim": "Professionals said LLM dialogue verbalises everything and lacks subtext, motivation and stageable realism.",
+   "source": "Mirowski et al., Dramatron (CHI 2023)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "Show, not tell: here we are just telling",
+   "page": "",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 81,
+   "feature": "script structure: incomplete character journeys",
+   "claim": "Professionals found character journeys unfinished and emotional motivation missing, with logic gaps and repetitive generation loops.",
+   "source": "Mirowski et al., Dramatron (CHI 2023)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "Where is the emotional motivation",
+   "page": "",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 87,
+   "feature": "subtext",
+   "claim": "Clarkesworld's editor found AI submissions flat and boring with no subtext or layers (secondhand: quoted by Vollmer; Clarke's own post was not readable).",
+   "source": "Neil Clarke as quoted by Matthew Vollmer, fiction writer and professor (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "They are boring. They are flat",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "routeHints": [
+    "https://neil-clarke.com \"A Concerning Trend\" (2023-02-15) or its Wayback copy — grade against the primary, not Vollmer"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 94,
+   "feature": "specificity (averaging)",
+   "claim": "Every choice the prompter does not make, the model fills with the statistical average, and that average is the least interesting choice available.",
+   "source": "Nick Bailey, LitReactor (2026-06-18)",
+   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
+   "quote": "that average is equivalent to the least interesting choices possible",
+   "page": "Human Editors vs AI Editing: What AI Still Can't Do",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Ted Chiang, New Yorker, 31 Aug 2024) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 95,
+   "feature": "specificity (averaging)",
+   "claim": "Fiction is roughly one deliberate choice per word; a prompt makes far fewer choices, and the unmade choices come out generic and without intention.",
+   "source": "Lincoln Michel, novelist, Counter Craft (2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "Art is something that results from making a lot of choices.",
+   "page": "Art Without Intention",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Ted Chiang, New Yorker, 31 Aug 2024) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 108,
+   "feature": "tidy endings",
+   "claim": "The model resolves tension because it cannot tell which tension a story needs to keep active; it wants the answer legible where the story needs pressure left unresolved (commentary on StoryScope, not independent of it).",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "The machine wants to make the answer legible",
+   "page": "The AI Tells Are in the Story",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Ethan Mollick) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 116,
+   "feature": "reflexive antithesis",
+   "claim": "The 'isn't just X; it's Y' frame combined with a metaphor and a tricolon is a signature machine sentence that carries no content.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "quote": "It says absolutely nothing at all.",
+   "page": "Spotting machine-made prose",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Elizabeth Goodspeed) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 117,
+   "feature": "the gloss",
+   "claim": "AI narrators explicitly comment on the story's theme 77% of the time versus 52% for humans, with tighter thematic unity and more central moral questions.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI over-explains its themes",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 118,
+   "feature": "the gloss",
+   "claim": "AI spells out meaning that human fiction leaves implied; the tell lives in the story's structure, not its word choice.",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI explains. Humans imply.",
+   "page": "The AI Tells Are in the Story",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Mohammad Siam) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 129,
+   "feature": "metaphor",
+   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "",
+   "page": "How to Identify AI-Written Web Fiction",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Nostalgebraist) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 132,
+   "feature": "reader address",
+   "claim": "AI narrators write as if no one is watching: fourth-wall breaks in 39% of AI stories versus 67% human, direct reader address 7% versus 28%.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI writes as though no one is watching",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "routeHints": [
+    "the quote was found in the PDF / ar5iv / full-text HTML, not the abstract-only landing page: re-point the URL of record to the full-text location in your note; the grade is VERIFIED_VERBATIM only if the full text carries it word for word"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 141,
+   "feature": "POV / pacing",
+   "claim": "AI holds an unnaturally locked point of view across scenes and paces every scene at the same rate.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Charlie Guo) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_SUBSTANCE"
+  },
+  {
+   "index": 160,
+   "feature": "choices per word",
+   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
+   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "shaping, honing, and refining",
+   "page": "",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Ted Chiang, New Yorker, 31 Aug 2024) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 186,
+   "feature": "no concrete particulars",
+   "claim": "AI prose lacks the specific proper nouns, places and objects that anchor human writing.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells' (citing Laura Preston)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "no Tuesday, no laundromat, no grandmother's cough drops",
+   "page": "",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Laura Preston, n+1) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_SUBSTANCE"
+  },
+  {
+   "index": 187,
+   "feature": "what machine prose never does",
+   "claim": "LLM prose never contradicts itself and recovers, digresses and walks it back, uses an unexplained idiom, risks a joke, or leaves a thought unfinished.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells'",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "make a joke that risks falling flat",
+   "page": "",
+   "routeHints": [
+    "search Vollmer's Substack archive for \"falling flat\" / \"walks it back\"; Laura Preston's n+1 essay named in the note; archive.ph for the Substack listing — the claim describes a text that is not this post"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 227,
+   "feature": "em dash",
+   "claim": "Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.",
+   "source": "Anne R. Allen, 2026-03-28",
+   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
+   "quote": "also be attributed to amateurish or unedited writing",
+   "page": "Does the Shy Girl Mess Mean We Give Up the Em Dash?",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Mark Williams / TNPS) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "PARTIAL"
+  },
+  {
+   "index": 239,
+   "feature": "machine detectors (bias)",
+   "claim": "Detectors learn that predictable word choice and simple sentences mean AI, so non-native writers' restricted vocabulary is misread as machine output.",
+   "source": "The Markup — Tara García Mathewson, 2023-08-14",
+   "url": "https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating",
+   "quote": "inherently discriminates against non-native authors",
+   "page": "AI Detection Tools Falsely Accuse International Students of Cheating",
+   "routeHints": [
+    "fetch the PRIMARY the note names (Weixin Liang) and grade the claim against IT, not the secondhand page"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  }
+ ]
+}

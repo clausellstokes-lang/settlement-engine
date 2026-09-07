@@ -1,0 +1,235 @@
+{
+ "name": "martin",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 962,
+   "feature": "other: book and chapter length",
+   "claim": "The forum poster Coren82 measured average chapter length in pages for each volume and reports 9.6 for A Game of Thrones rising to 16.4 for A Feast for Crows.",
+   "source": "Coren82, 'Chapter Length', A Forum of Ice and Fire, 10 May 2013",
+   "url": "https://asoiaf.westeros.org/index.php?/topic/87144-chapter-length/",
+   "quote": "AFFC | 753 | 46 | 16.4",
+   "page": "opening post"
+  },
+  {
+   "index": 963,
+   "feature": "sentence length variation",
+   "claim": "A reader in the same thread observes that the early Song of Ice and Fire books alternate long and short chapters while the later two seem equally long.",
+   "source": "Harroway, reply in 'Chapter Length', A Forum of Ice and Fire, 10 May 2013",
+   "url": "https://asoiaf.westeros.org/index.php?/topic/87144-chapter-length/",
+   "quote": "in the early books, you alternate between long and short chapters",
+   "page": "reply by Harroway"
+  },
+  {
+   "index": 964,
+   "feature": "stylometry",
+   "claim": "AutoCrit's automated analysis gives A Game of Thrones a general fiction summary score of 79.99, which it says is where it expects bestsellers to sit.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "an excellent summary score of 79.99 using AutoCrit",
+   "page": "Summary Score and Fingerprint"
+  },
+  {
+   "index": 965,
+   "feature": "adjective and adverb discipline",
+   "claim": "AutoCrit's adverb meter places A Game of Thrones in its Great band and calls that a real achievement for a book of this length.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "a real achievement, especially for a book of this length",
+   "page": "Strong Writing"
+  },
+  {
+   "index": 966,
+   "feature": "sentence length variation",
+   "claim": "AutoCrit counts 851 sentences of more than thirty words in A Game of Thrones and calls that comparatively small.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "a comparatively small 851 sentences containing more than 30 words",
+   "page": "Pacing & Momentum"
+  },
+  {
+   "index": 968,
+   "feature": "stylometry",
+   "claim": "AutoCrit gives A Game of Thrones a Flesch Reading Ease score of 87 and calls that the realm of conversational English.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "comes in with a Flesch Reading Ease score of 87",
+   "page": "Readability"
+  },
+  {
+   "index": 969,
+   "feature": "other: cliche and redundancy",
+   "claim": "AutoCrit reports that Martin's redundancy result in A Game of Thrones is one of the best it has measured.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "redundancies result is one of the best we",
+   "page": "Clichés and redundancies"
+  },
+  {
+   "index": 970,
+   "feature": "other: generic description",
+   "claim": "AutoCrit finds A Game of Thrones sits near the middle of its generic-description scale, with looked, look and great its most frequent generic words.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "sitting right near the middle, with a primary focus on the words",
+   "page": "Word Choice"
+  },
+  {
+   "index": 971,
+   "feature": "stylometry",
+   "claim": "AutoCrit states that its What's the Score series is not designed to provide any qualitative judgment of the works it analyses.",
+   "source": "AutoCrit, 'What's the Score? - A Game of Thrones'",
+   "url": "https://www.autocrit.com/whats-the-score-a-game-of-thrones/",
+   "quote": "not designed to provide any kind of qualitative judgment",
+   "page": "Disclaimer"
+  },
+  {
+   "index": 972,
+   "feature": "stylometry",
+   "claim": "TeachingBooks records a Lexile measure of 830L for A Game of Thrones.",
+   "source": "TeachingBooks.net text-complexity record, relaying MetaMetrics",
+   "url": "https://www.teachingbooks.net/tb.cgi?tid=30295",
+   "quote": "Lexile Level: 830L",
+   "page": "Text Complexity"
+  },
+  {
+   "index": 973,
+   "feature": "stylometry",
+   "claim": "TeachingBooks records an ATOS reading level of 5.5 for A Game of Thrones.",
+   "source": "TeachingBooks.net text-complexity record, relaying Renaissance Learning",
+   "url": "https://www.teachingbooks.net/tb.cgi?tid=30295",
+   "quote": "ATOS Reading Level: 5.5",
+   "page": "Text Complexity"
+  },
+  {
+   "index": 974,
+   "feature": "other: book and chapter length",
+   "claim": "TeachingBooks gives A Game of Thrones a word count of 292,727.",
+   "source": "TeachingBooks.net record for Game of Thrones, A",
+   "url": "https://www.teachingbooks.net/tb.cgi?tid=30295",
+   "quote": "292,727",
+   "page": "Word Count field"
+  },
+  {
+   "index": 981,
+   "feature": "adjective and adverb discipline",
+   "claim": "The scraped prosecraft figures put the ly-adverb rate of A Dance with Dragons at 0.4% of the text.",
+   "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+   "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+   "quote": "A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67",
+   "page": "row 20474"
+  },
+  {
+   "index": 982,
+   "feature": "adjective and adverb discipline",
+   "claim": "The scraped prosecraft figures put the ly-adverb rate of A Game of Thrones at 0.77% of the text.",
+   "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+   "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+   "quote": "A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67",
+   "page": "row 11522"
+  },
+  {
+   "index": 983,
+   "feature": "adjective and adverb discipline",
+   "claim": "Across the five Song of Ice and Fire novels the scraped prosecraft ly-adverb rates fall in publication order from 0.77 in 1996 to 0.4 in 2011.",
+   "source": "prosecraft.io library figures as scraped in the Genre_Prediction dataset",
+   "url": "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
+   "quote": "A Clash of Kings,George R. R. Martin,318974.0,66.45,7.65,2.49,0.68,1.81",
+   "page": "rows 11522, 13026, 11271, 977, 20474"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 962,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AFFC | 753 | 46 | 16.4 (AGOT | 704 | 73 | 9.6)",
+   "note": "Coren82's opening post (10 May 2013) carries the table 'Volume | Pages | Chapters | Avg Chapter Length' with AGOT 9.6 and AFFC 16.4, both verbatim. The 'in pages' limb is explicitly confirmed by Coren82's own later reply, '16.4 pages per chapter of AFFC', and by the arithmetic (704/73=9.6, 753/46=16.4). The rise AGOT->ACOK->ASOS->AFFC (9.6, 11, 12.1, 16.4) is monotone and AFFC is the maximum, so 'rising to' is exact; the claim correctly stops at AFFC rather than ADWD, which falls back to 14.5."
+  },
+  {
+   "index": 963,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the early books, you alternate between long and short chapters",
+   "note": "Harroway's reply in the same thread, posted 10 May 2013, reads 'Good point, I also noticed that in the early books, you alternate between long and short chapters.' The second limb is carried by his next sentence: 'In Feast and Dance, all chapters seem to be equally long, even those who have little to tell us.' Feast and Dance are the later two novels, so both limbs are on the page verbatim."
+  },
+  {
+   "index": 964,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an excellent summary score of 79.99 using AutoCrit's General Fiction comparison",
+   "note": "Both limbs are verbatim. The page continues: 'This puts it right around where we expect to see bestsellers in our investigations -usually in the region of 75 to 85', which supports the bestseller-band limb explicitly."
+  },
+  {
+   "index": 965,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "our adverb-o-meter plants A Game of Thrones right into the \"Great\" area",
+   "note": "Under the 'Strong Writing' heading, verbatim: 'our adverb-o-meter plants A Game of Thrones right into the \"Great\" area - a real achievement, especially for a book of this length.' The claim's 'adverb meter' is a light paraphrase of the page's 'adverb-o-meter'; the band name and the achievement clause are both exact."
+  },
+  {
+   "index": 966,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a comparatively small 851 sentences containing more than 30 words",
+   "note": "Verbatim in the 'Pacing & Momentum' section: 'Sentences are much the same, with a comparatively small 851 sentences containing more than 30 words.' Count, threshold and the 'comparatively small' judgment are all on the page."
+  },
+  {
+   "index": 968,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "comes in with a Flesch Reading Ease score of 87",
+   "note": "Verbatim under 'Readability', and the next sentence supplies the second limb: 'This puts it in the realm of conversational English, so it should be easily understood and enjoyed by most readers.'"
+  },
+  {
+   "index": 969,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin's redundancies result is one of the best we've seen",
+   "note": "Verbatim: 'Making a quick pivot over to cliches and redundancies, we see nothing of concern - in fact, Martin's redundancies result is one of the best we've seen.' The claim's 'it has measured' renders the page's 'we've seen'; substance identical."
+  },
+  {
+   "index": 970,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sitting right near the middle, with a primary focus on the words looked, look, and great",
+   "note": "Verbatim in the 'Word Choice' section on generic descriptions. The page's phrase for the three words is 'a primary focus on', not literally 'most frequent'; the following paragraphs corroborate frequency directly - 'Martin does appear to enjoy describing things as great, and there's plenty of looked that could be expanded upon' - so the ranking limb is supported rather than merely inferred."
+  },
+  {
+   "index": 971,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this series is not designed to provide any kind of qualitative judgment",
+   "note": "Verbatim in the page's DISCLAIMER: 'Note that this series is not designed to provide any kind of qualitative judgment nor a critique of the works dissected.' The page identifies the series as What's the Score? in the same paragraph, so the series-name limb holds."
+  },
+  {
+   "index": 972,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Lexile Level: 830L",
+   "note": "Verbatim in the Text Complexity block of the TeachingBooks record for A Game of Thrones. Note on provenance, not on the claim: the page does not name MetaMetrics anywhere (zero occurrences), so the source line's 'relaying MetaMetrics' is not verified by this page - but that attribution is not a limb of the claim sentence, which says only that TeachingBooks records it."
+  },
+  {
+   "index": 973,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ATOS Reading Level: 5.5",
+   "note": "Verbatim in the same Text Complexity block. As with 972, the page never names Renaissance Learning (zero occurrences), so that part of the source line is unverified provenance rather than an unsupported limb of the claim."
+  },
+  {
+   "index": 974,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word Count 292,727",
+   "note": "The record's field list reads 'Year Published 1996 / Word Count 292,727 / Text Complexity', so the figure is verbatim and sits in the Word Count field as the claim states."
+  },
+  {
+   "index": 981,
+   "verdict": "PARTIAL",
+   "trueWording": "ly-adverbs column reads 0.4 for A Dance With Dragons; no unit given",
+   "note": "Row 20474 of the CSV is verbatim: 'A Dance With Dragons,George R. R. Martin,414873.0,69.08,7.83,2.07,0.4,1.67'. Under the header ',title,author,total words,vividness,passive voice,all adverbs,ly-adverbs,non-ly-adverbs,genre,year' the ly-adverbs value is exactly 0.4, so the number and the book are confirmed. The percent-of-text unit is not stated anywhere on the fetched page: the column is bare 'ly-adverbs'. It is a strong inference (0.4 + 1.67 = 2.07 exactly matches the all-adverbs column, so the figures are shares of one base, and the repo README says the data is scraped from prosecraft.io, which published these as percentages), but the fetched raw page does not carry the unit, so the '% of the text' limb is graded unsupported rather than verified.",
+   "unsupportedLimb": "the '% of the text' unit - the CSV column is unitless"
+  },
+  {
+   "index": 982,
+   "verdict": "PARTIAL",
+   "trueWording": "ly-adverbs column reads 0.77 for A Game of Thrones; no unit given",
+   "note": "Row 11522 is verbatim: 'A Game of Thrones,George R. R. Martin,292795.0,63.7,7.26,2.44,0.77,1.67'. The ly-adverbs value is exactly 0.77 and the internal check holds (0.77 + 1.67 = 2.44, the all-adverbs column). Same single defect as 981: the page states no unit for the column, so '% of the text' is not supported by the raw source even though the figure is exact.",
+   "unsupportedLimb": "the '% of the text' unit - the CSV column is unitless"
+  },
+  {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "0.77 (1996), 0.68 (1998), 0.6 (2000), 0.47 (2005), 0.4 (2011)",
+   "note": "The quoted A Clash of Kings row is verbatim at index 13026. All five Martin ASOIAF rows are present and the ly-adverbs figures fall strictly monotonically in the CSV's own publication-year order: AGOT 0.77 (1996), ACOK 0.68 (1998), ASOS 0.6 (2000), AFFC 0.47 (2005), ADWD 0.4 (2011). Endpoints and years match the claim exactly. Unlike 981 and 982 this claim asserts no unit, so it carries no unsupported limb."
+  }
+ ]
+}

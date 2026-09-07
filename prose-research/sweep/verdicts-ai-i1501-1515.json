@@ -1,0 +1,340 @@
+{
+ "name": "ai",
+ "chunk": 19,
+ "claims": [
+  {
+   "index": 1501,
+   "feature": "other: truncation-sampling mechanism",
+   "claim": "Ravfogel and colleagues report that the model's overconfidence is worst in its lowest-entropy contexts, the moments where a truncation sampler narrows the candidate set hardest.",
+   "source": "Ravfogel, Goldberg, Goldberger, arXiv:2305.02633v1 (2023); Findings of ACL 2023",
+   "url": "https://arxiv.org/abs/2305.02633",
+   "quote": "when the model is apparently the most",
+   "page": "Section 3, per-entropy calibration results (ten entropy bins)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-05-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "OPT 125M to 30B, May 2023; register measured: English Wikipedia"
+  },
+  {
+   "index": 1502,
+   "feature": "model era drift",
+   "claim": "Ravfogel and colleagues report that calibration of the top-p set shows a moderate inverse scaling with model size, so the larger OPT models were not better calibrated.",
+   "source": "Ravfogel, Goldberg, Goldberger, arXiv:2305.02633v1 (2023); Findings of ACL 2023",
+   "url": "https://arxiv.org/abs/2305.02633",
+   "quote": "calibration shows a moderate inverse scaling",
+   "page": "Abstract; Section 3",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-05-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "OPT 125M, 350M, 1.3B, 13B and 30B, May 2023; register measured: English Wikipedia"
+  },
+  {
+   "index": 1503,
+   "feature": "other: truncation-sampling mechanism",
+   "claim": "Ravfogel and colleagues measured calibration on ten thousand English Wikipedia items, one of the few decoding studies to work in the encyclopedic register.",
+   "source": "Ravfogel, Goldberg, Goldberger, arXiv:2305.02633v1 (2023); Findings of ACL 2023",
+   "url": "https://arxiv.org/abs/2305.02633",
+   "quote": "We ran the models on 10,000 English Wikipedia",
+   "page": "Section 3 Experiments",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-05-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "OPT family, May 2023; register measured: English Wikipedia"
+  },
+  {
+   "index": 1504,
+   "feature": "counter-evidence",
+   "claim": "Borec, Sadler and Schlangen report that widening the nucleus reduces verbatim memorisation only modestly in two fine-tuned GPT-Neo models.",
+   "source": "Borec, Sadler, Schlangen, 'The Unreasonable Ineffectiveness of Nucleus Sampling on Mitigating Text Memorization', arXiv:2408.16345v1 (2024)",
+   "url": "https://arxiv.org/abs/2408.16345",
+   "quote": "of the nucleus size reduces memorization only",
+   "page": "Abstract",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-08-29",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "two GPT-Neo models fine-tuned on a diagnostic duplicate corpus, August 2024; register measured: a constructed duplicate-controlled dataset"
+  },
+  {
+   "index": 1505,
+   "feature": "homogenisation",
+   "claim": "Borec, Sadler and Schlangen name a soft memorisation in which a model's output echoes its training data without reproducing it word for word, and which survives nucleus sampling.",
+   "source": "Borec, Sadler, Schlangen, arXiv:2408.16345v1 (2024)",
+   "url": "https://arxiv.org/abs/2408.16345",
+   "quote": "generate outputs that echo the training data but",
+   "page": "Abstract",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-08-29",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "two GPT-Neo models, August 2024; register measured: a constructed duplicate-controlled dataset"
+  },
+  {
+   "index": 1506,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Liu and colleagues evaluate generated text by the spectrum of its surprisal over position, the dynamic pattern of how surprisal rises and falls through a text, rather than by a static likelihood score.",
+   "source": "Liu, Li, Xu, Wang, Yuan, Yang, 'Evaluating Text Generation Quality Using Spectral Distances of Surprisal', Findings of EMNLP 2025",
+   "url": "https://aclanthology.org/2025.findings-emnlp.132.pdf",
+   "quote": "",
+   "page": "Abstract; Section 1 Introduction",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11",
+   "routeHint": "ACL Anthology PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "Qwen2 family 1.5B to 72B and models up to 70B, observation 2025; registers measured: Wikipedia-English, BBC-News, WritingPrompts stories, plus three Chinese corpora"
+  },
+  {
+   "index": 1507,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Liu and colleagues report that in their smoothed surprisal spectra the larger models produce a spectrum closer to the human one than the smaller models do.",
+   "source": "Liu, Li, Xu, Wang, Yuan, Yang, Findings of EMNLP 2025",
+   "url": "https://aclanthology.org/2025.findings-emnlp.132.pdf",
+   "quote": "order: larger models produce spectrum",
+   "page": "Figure 5 caption",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11",
+   "routeHint": "ACL Anthology PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "Qwen2 1.5B, 7B and 72B, 2025; registers measured: Wikipedia, news and story continuations in English and Chinese"
+  },
+  {
+   "index": 1508,
+   "feature": "model era drift",
+   "claim": "Liu and colleagues state that the earlier Fourier-of-surprisal work's conclusions about model scaling and sampling methods, having been developed on GPT-2 output, need not hold for current large language models.",
+   "source": "Liu, Li, Xu, Wang, Yuan, Yang, Findings of EMNLP 2025",
+   "url": "https://aclanthology.org/2025.findings-emnlp.132.pdf",
+   "quote": "and sampling methods does not necessarily apply",
+   "page": "Section 2.1, limitations of FACE-1",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2025-11",
+   "routeHint": "ACL Anthology PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "comment on GPT-2-era findings from a 2025 vantage; registers measured in the new study: Wikipedia, news, stories"
+  },
+  {
+   "index": 1509,
+   "feature": "steerability",
+   "claim": "Liu and colleagues report that texts generated with top-p at 0.95 and top-k at 40 score better on their surprisal-spectrum metric than those from the simpler sampling settings they compare.",
+   "source": "Liu, Li, Xu, Wang, Yuan, Yang, Findings of EMNLP 2025",
+   "url": "https://aclanthology.org/2025.findings-emnlp.132.pdf",
+   "quote": "with more advanced sampling method (e.g., top-p",
+   "page": "Section 4.2, 'Comparison with sampling methods' (numbers deferred to Appendix B.1)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11",
+   "routeHint": "ACL Anthology PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium",
+   "modelEra": "Qwen2 and Llama3 family models, 2025; registers measured: Wikipedia, news, stories"
+  },
+  {
+   "index": 1510,
+   "feature": "steerability",
+   "claim": "Garces Arias and colleagues conclude from 2.2 million generated continuations that the best decoding hyperparameters differ from model to model and task to task, with no single configuration best everywhere.",
+   "source": "Garces Arias, Li, Heumann, Assenmacher, 'Decoding Decoded', arXiv:2410.06097v2 (2024)",
+   "url": "https://arxiv.org/abs/2410.06097",
+   "quote": "that optimal configurations vary across models",
+   "page": "Abstract",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-12-14",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT2-XL, Mistral 7B v0.3, Llama3 8B, Falcon2 11B, Qwen2, observation late 2024; registers measured: book, wikinews and wikitext continuations"
+  },
+  {
+   "index": 1511,
+   "feature": "model era drift",
+   "claim": "Garces Arias and colleagues report that in their comparison larger models showed no clear advantage over smaller ones, with GPT2-XL at 1.5B parameters sometimes scoring above Llama3 at 8B.",
+   "source": "Garces Arias, Li, Heumann, Assenmacher, arXiv:2410.06097v2 (2024)",
+   "url": "https://arxiv.org/abs/2410.06097",
+   "quote": "Larger models do not show a clear",
+   "page": "Section 5 results discussion; the top-five table of decoding methods per dataset",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-12-14",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "GPT2-XL 1.5B, Llama3 8B, Falcon2 11B, Qwen2, Mistral 7B v0.3, late 2024; registers measured: book, wikinews, wikitext"
+  },
+  {
+   "index": 1512,
+   "feature": "counter-evidence",
+   "claim": "Garces Arias and colleagues report that beam search performed consistently poorly against human references across all their models and beam widths, failing to capture the diversity of human language.",
+   "source": "Garces Arias, Li, Heumann, Assenmacher, arXiv:2410.06097v2 (2024)",
+   "url": "https://arxiv.org/abs/2410.06097",
+   "quote": "that fail to capture the diversity of human language.",
+   "page": "Section 5, beam search discussion; Figure 4",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-12-14",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT2-XL, Mistral 7B v0.3, Llama3 8B, Falcon2 11B, Qwen2, late 2024; registers measured: book, wikinews, wikitext"
+  },
+  {
+   "index": 1513,
+   "feature": "reader and expert judgment",
+   "claim": "Garces Arias and colleagues built their decoding comparison on 2.2 million generated text continuations, released publicly, evaluated with automatic metrics alongside human judgments.",
+   "source": "Garces Arias, Li, Heumann, Assenmacher, arXiv:2410.06097v2 (2024)",
+   "url": "https://arxiv.org/abs/2410.06097",
+   "quote": "In total, we generate 2.2 million",
+   "page": "Section 1, contribution 4",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-12-14",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "five open-source model families, late 2024; registers measured: book, wikinews, wikitext"
+  },
+  {
+   "index": 1514,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Mahaut and Franzon find that two behaviourally identical repetition loops come from different internal processes, one a learned in-context copying circuit and the other an early-emerging behaviour with no identifiable circuit.",
+   "source": "Mahaut, Franzon, 'Repetitions are not all alike', arXiv:2504.01100v2 (2025)",
+   "url": "https://arxiv.org/abs/2504.01100",
+   "quote": "this condition lacks a clearly identifiable circuit",
+   "page": "Abstract; Section 6 Discussion",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Pythia 1.4B across training checkpoints, observation 2025; register measured: natural text prompts and in-context learning prompts"
+  },
+  {
+   "index": 1515,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Mahaut and Franzon report that during naturally arising repetition the model's attention falls disproportionately on low-information tokens such as punctuation and newlines, which they read as a fallback when the relevant context cannot be retrieved.",
+   "source": "Mahaut, Franzon, arXiv:2504.01100v2 (2025)",
+   "url": "https://arxiv.org/abs/2504.01100",
+   "quote": "natural repetition focuses disproportionately on",
+   "page": "Abstract; Section 4 attentional focus",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Pythia 1.4B, 2025; register measured: natural text prompts"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1501,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when the model is apparently the most certain... it is most overconfident",
+   "note": "Quote verbatim in Section 3 ('Dependency of the confidence on the entropy'). Both limbs hold: 'the level of overconfidence decreases with the entropy percentile', and the paper's own note that at low entropy a single token's probability can exceed 0.9, so the top-p set is at its narrowest and cannot be recalibrated by resizing. 10 entropy bins by percentile, Fig. 3, as the page field says."
+  },
+  {
+   "index": 1502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "calibration shows a moderate inverse scaling with model size",
+   "note": "Quote verbatim in the abstract; Section 3 'Calibration and scale' restates it as calibration deteriorating moderately with model scale (Fig. 4, threshold q-hat above the y=x line for every confidence level, i.e. overconfident throughout). Metadata nit only, not a claim limb: Fig. 4 plots 125M, 350M, 1B, 2B, 6B, 13B, 30B, not the '1.3B' listed in modelEra."
+  },
+  {
+   "index": 1503,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'one of the few decoding studies to work in the encyclopedic register' - the paper makes no comparative claim about other decoding studies' registers",
+   "trueWording": "We ran the models on 10,000 English Wikipedia predictions",
+   "note": "First limb verbatim and exact (Section 3 Setup, HuggingFace wikipedia dataset); note the paper counts 10,000 *predictions* across entropy percentiles, not 10,000 documents or 'items'. The comparative second limb is the verifier's or the register-hint's framing, absent from the page. Separately, generation quality (MAUVE/BERTScore) was measured on OpenWebText prompts, not Wikipedia."
+  },
+  {
+   "index": 1504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Larger nucleus sizes only modestly mitigate memorization",
+   "note": "Quote verbatim in abstract point (i); Conclusion repeats it. 'Verbatim' is fair: the paper's memorization metric is Carlini et al.'s exact-string reproduction f(p)=s, contrasted with 'soft' memorization. Two fine-tuned GPT-Neo models = 125M and 350M. Caveat worth carrying: the effect is uneven - larger top_p helps substantially at duplicate 'ramp-up points' and barely at saturation (Finding 2)."
+  },
+  {
+   "index": 1505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "outputs that echo the training data but without a complete one-by-one resemblance",
+   "note": "Quote verbatim in the abstract; the 'survives nucleus sampling' limb is carried by the Conclusion, which says that even when outputs are not exact reproductions, 'n-gram overlap scores indicate a soft memorization' phenomenon, and by Table 2, where BLEU-4 for non-verbatim outputs stays high at top_p 0.8 (0.67-0.73 at high duplicate counts). Their stated cause: peaked distributions where one token exceeds the nucleus threshold, making sampling deterministic."
+  },
+  {
+   "index": 1506,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "extracts the dynamic patterns (spectrum) of text surprisal",
+   "note": "No quote was supplied, so graded on substance. Abstract defines FACE-2 as a psycholinguistically inspired metric extracting the dynamic patterns (spectrum) of surprisal; Section 2.1 grounds surprisal over 'time (or, the position in body of text)'; the abstract closes by advocating metrics that mine the dynamics of likelihood - i.e. against a static score. Registers confirmed: five English sets (Wikipedia, BBC-News, WritingPrompts and two QA sets) plus three Chinese."
+  },
+  {
+   "index": 1507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "larger models produce spectrum (blue and purple) that resembles human (red) more",
+   "note": "Quote verbatim in the Figure 5 caption, which is exactly the GAM-smoothed spectrum plots the claim describes. Scope note: the caption calls these exemplars and frames it as FACE-2 revealing 'the expected order' where FACE-1 does not, so the finding is about the metric's sensitivity as much as about the models."
+  },
+  {
+   "index": 1508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "original conclusions on modeling scaling effects and sampling methods does not necessarily",
+   "note": "Quote verbatim in Section 2.1, in the list of FACE-1 limitations: FACE-1 is 'developed and tested using GPT-2' data, so its 'original conclusions on modeling scaling effects' need not apply to current LLMs (the paper's own agreement slip, 'does not', preserved). Every limb - Fourier-of-surprisal predecessor, GPT-2 provenance, scaling and sampling conclusions, current LLMs - is on the page."
+  },
+  {
+   "index": 1509,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more advanced sampling method... have a better FACE-2 scores",
+   "note": "Quote verbatim in Section 4.2 'Comparison with sampling methods'; Appendix B.1 Table 5 carries the numbers. Two cautions for any downstream use: the margins are small and one setting is a tie (SO 0.58 nucleus p=0.95 vs 0.57 pure sampling and top-k 40; greedy is the clear loser at 0.55 / EMD 6.43), and Table 5 is a single cell - generator Gemma2-2b-base, inference Llama3-70b-base, BBC data - not the Qwen2/Llama3 sweep named in modelEra."
+  },
+  {
+   "index": 1510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "optimal configurations vary across models and tasks",
+   "note": "Quote verbatim in the abstract; the 2.2 million continuations are contribution 4 in Section 1, and Section 6 works the model-by-model and dataset-by-dataset recommendations out in detail. 'No single configuration best everywhere' is the fair reading of 'vary across models and tasks'."
+  },
+  {
+   "index": 1511,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Larger models do not show a clear advantage over smaller ones",
+   "note": "Quote verbatim, and the GPT2-XL/Llama3 limb is explicit twice in Section 6: under temperature, 'GPT2-XL (1.5B) might outperform Llama3 (8B)' at the same configuration; under top-k, GPT2-XL 'performs as well as or better than' Llama3 8B, with Qwen2 7B over Falcon2 11B. Location correction for the page field: Section 6 Practical Recommendations, not Section 5."
+  },
+  {
+   "index": 1512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "consistently low performance across all models and beam width settings",
+   "note": "Quote verbatim in Section 6, 'Deterministic Strategies', which cites Figure 4 as the claim's page field says: beam search is 'generally not recommended for open-ended text generation' because its outputs fail to capture human diversity, showing low performance against human references on four metrics. The paper does add that smaller beam widths (3, 5) fare better while still leaving a substantial gap - a nuance, not a contradiction."
+  },
+  {
+   "index": 1513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In total, we generate 2.2 million text continuations, which are publicly available",
+   "note": "Quote verbatim in Section 1, contribution 4, with the release URL. 'Automatic metrics alongside human judgments' mirrors the abstract's own wording. Scope caveat for downstream use: the human component is 570 evaluations (Table 3, Pearson r = 0.64), a sample of the 2.2M corpus, not a human rating of every continuation."
+  },
+  {
+   "index": 1514,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'behaviourally identical' - the paper says 'behaviorally similar' and 'superficially similar', and Section 5 measures a behavioural difference between the two (natural repetition starts at higher, wider-spread entropy; ICL converges to near-zero entropy by cycle 4)",
+   "trueWording": "Repetition in this condition lacks a clearly identifiable circuit",
+   "note": "Quote verbatim in the Discussion. The substantive limbs all hold: ICL repetition 'relies on a dedicated network of attention heads' that specialise over training, while natural repetition 'emerges early and lacks a defined circuitry'. Only the strength word fails - swap 'behaviourally identical' for 'superficially similar' and this becomes verbatim-clean."
+  },
+  {
+   "index": 1515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "natural repetition focuses disproportionately on low-information tokens, suggesting a fallback behavior",
+   "note": "Quote verbatim in the abstract, continuing '...when relevant context cannot be retrieved'. Section 4.2 supplies the numbers (newline tokens attended 9.9x uniform expectation under natural prompts vs 3.1x under ICL) and the Discussion names 'punctuation or syntactic markers'. Important adjacent finding the claim does not distort but a reader should know: causal tests (adding, removing, reweighting newlines) produced zero change, so the attention pattern co-occurs with repetition rather than causing it."
+  }
+ ]
+}

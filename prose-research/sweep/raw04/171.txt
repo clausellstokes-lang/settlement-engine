@@ -1,0 +1,154 @@
+ 
+ How “AI” submissions have changed our submissions process – Neil Clarke 
+ Skip to the content 
+ Neil Clarke 
+ Award-Winning Editor of Clarkesworld Magazine, Forever Magazine, The Best Science Fiction of the Year, and More 
+ Toggle the mobile menu 
+ Toggle the search field 
+ About 
+ Works Edited 
+ Clarkesworld Anthologies 
+ Clarkesworld: Year Three 
+ Clarkesworld: Year Four 
+ Clarkesworld: Year Five 
+ Clarkesworld: Year Six 
+ Clarkesworld: Year Seven 
+ Clarkesworld: Year Eight 
+ Clarkesworld: Year Nine, Volume One 
+ Clarkesworld: Year Nine, Volume Two 
+ Clarkesworld: Year Ten, Volume One 
+ Clarkesworld: Year Ten, Volume Two 
+ Clarkesworld: Year Eleven, Volume One 
+ Clarkesworld: Year Eleven, Volume Two 
+ Clarkesworld: Year Twelve, Volume One 
+ Clarkesworld: Year Twelve, Volume Two 
+ The Best Science Fiction of the Year Series 
+ The Best Science Fiction of the Year – Volume 1 
+ The Best Science Fiction of the Year – Volume 2 
+ The Best Science Fiction of the Year – Volume 3 
+ The Best Science Fiction of the Year – Volume 4 
+ The Best Science Fiction of the Year – Volume 5 
+ The Best Science Fiction of the Year – Volume 6 
+ The Best Science Fiction of the Year – Volume 7 
+ The Best Science Fiction of the Year – Volume 8 
+ Upgraded 
+ Galactic Empires 
+ The Final Frontier 
+ Touchable Unreality 
+ New Voices in Chinese Science Fiction 
+ More Human Than Human 
+ Not One of Us 
+ The Eagle has Landed 
+ Submission Guidelines 
+ Events 
+ Contact Neil 
+ Mailing List 
+ Search 
+ About 
+ Works Edited 
+ Clarkesworld Anthologies 
+ Clarkesworld: Year Three 
+ Clarkesworld: Year Four 
+ Clarkesworld: Year Five 
+ Clarkesworld: Year Six 
+ Clarkesworld: Year Seven 
+ Clarkesworld: Year Eight 
+ Clarkesworld: Year Nine, Volume One 
+ Clarkesworld: Year Nine, Volume Two 
+ Clarkesworld: Year Ten, Volume One 
+ Clarkesworld: Year Ten, Volume Two 
+ Clarkesworld: Year Eleven, Volume One 
+ Clarkesworld: Year Eleven, Volume Two 
+ Clarkesworld: Year Twelve, Volume One 
+ Clarkesworld: Year Twelve, Volume Two 
+ The Best Science Fiction of the Year Series 
+ The Best Science Fiction of the Year – Volume 1 
+ The Best Science Fiction of the Year – Volume 2 
+ The Best Science Fiction of the Year – Volume 3 
+ The Best Science Fiction of the Year – Volume 4 
+ The Best Science Fiction of the Year – Volume 5 
+ The Best Science Fiction of the Year – Volume 6 
+ The Best Science Fiction of the Year – Volume 7 
+ The Best Science Fiction of the Year – Volume 8 
+ Upgraded 
+ Galactic Empires 
+ The Final Frontier 
+ Touchable Unreality 
+ New Voices in Chinese Science Fiction 
+ More Human Than Human 
+ Not One of Us 
+ The Eagle has Landed 
+ Submission Guidelines 
+ Events 
+ Contact Neil 
+ Mailing List 
+ How “AI” submissions have changed our submissions process 
+ By Neil Clarke 
+ On 05/02/2025 
+ In clarkesworld magazine 
+ This is older news, but I wanted to have something I could easily point people to that explains how our submissions process has changed since the arrival of generative “AI” models. 
+ Up until March 2023, our submissions review process worked something like this: 
+ Plagiarism cases happened, but represented a very small percentage of monthly submissions. They were typically caught because: 
+ Someone on our team recognized the work 
+ They used a plagiarism detection evasion tool and it drew my attention (seen one, seen them all) 
+ We knew about the person from a whisper network 
+ Within months of ChatGPT’s public release, the signal-to-noise ratio shifted . Plagiarism was a fringe case and easily handled by the old model, but the sheer volume of generated work threatened to make human-written works the minority. The old way of finding the works we wanted to publish was no longer sustainable for us, so we temporarily closed submissions in February 2023. 
+ When we reopened in March 2023, we implemented a new process that looks more like this: 
+ The oval step is an in-house automated check. I haven’t spoken much about what we’re checking for there because I don’t want to make it easier for the spammers/sloppers to avoid being caught. Just like with malware and email spam, the patterns shift over time, so I’ve had to make regular changes within that oval over the last two years. (I am the developer of the submission software, so the responsibility for this falls to me.) 
+ No process is perfect. Spam detection has existed for email for decades and still makes mistakes. I would never trust an algorithm to make a final assessment and fully accept that each “suspicious” story is a potential false positive. As such, I personally evaluate each suspicious submission. Our slush readers do not have access to this queue. 
+ Bans are only issued when I am certain a work is generated or plagiarized. If I’m only 99% convinced, I’ll just flag the author for continued review. (One of the few things I’ll admit is part of the oval.) These cases always end in rejection, but they never would have made it further in the submissions process anyway. Some of them likely were using AI, but I’d rather err on the side of caution when banning on the table. 
+ If I believe a work was miscategorized, I check why (to see if I need to refine the filters) and move it back to the main queue. Some of these stories have resulted in acceptance and publication. According to my data, there’s no indication that false positives have negatively impacted our final evaluations. We don’t limit the number of stories we accept on a monthly basis, so there are no missed opportunities in the process. The worst that happens with a miscategorized work is a slightly longer response time. How long depends on whether or not there is an active surge in generated submissions. (Unlike 2023, the daily and weekly volume of generated submissions is more spikey. Some good days. Some really bad.) The range has been anything from a delay of hours to a couple of weeks. 
+ The intent of the oval is not to save time, but rather to act as a pressure valve. What broke our process in 2023 was the signal-to-noise ratio. By redirecting the flow of suspicious submissions to a separate queue, we’ve been able to maintain our team’s attention on the work that has to happen on a daily basis. Adopting this approach has given us the ability to weather storms significantly worse than the one that shut us down and more importantly, it has done so without creating an undo burden or deterrent for authors. 
+ Checking the suspicious submissions has, however, added a substantial amount of work to my plate over the last two years. I’ve begrudgingly accepted this price because of the value I assign to having an open submissions process. Having a path for new and lesser-known voices to find their way into our pages is very important to me and this has kept that door open. 
+ The price I pay is directly impacted by the false positive rate. That’s an area for continued improvement and a topic for another day. 
+ — 
+ And repeated from the previous post: For those that would respond to our complaints with “why don’t you just judge it on its own merits”, keep dreaming. Despite the hype, even if we set aside our legal and ethical concerns with how these systems were developed, the output of these tools is nowhere near the standards we expect. Besides, we’ve said we don’t want it . We don’t publish mysteries or romance either, but those authors are at least respectful of our time and don’t insist that we evaluate their work “on its own merits” when it doesn’t meet our guidelines. (This is not to equate mystery or romance writers with people who use generative AI. Simply demonstrating how real writers behave.) Why would we want to work with someone that can’t respect that? 
+ Previous 
+ Google is still at it 
+ Next 
+ Alternate Universe Ads 
+ 4 Comments
+ Add Comment → 
+ Sara Saab 
+ Neil, the thing that stands out to me is the noise that AI content is creating becomes a labour tax on human artists and people involved in the arts. We need consistent digital watermarking of data, at a minimum. Sorry the team is dealing with this and thanks for maintaining your high standards of curation. 
+ 05/03/2025 
+ Reply 
+ Neil Clarke 
+ Thanks! 
+ The vendors are well-aware that a significant portion of their paid user base would switch products if the output was more easily identifiable as generated. While they can’t control what third parties do (and some of them have become quite good), the “AI” companies have rather deliberately backed away from watermarking and other in-house detection services. I don’t see any reason that they’ll be legislated into incorporating that anytime in the near future. Not sure even trust them at this point. 
+ Speaking of taxes, it would be amusing to see a tax on these companies where the proceeds went towards underwriting independent detection services for schools, small businesses, etc. 
+ 05/03/2025 
+ Reply 
+ GIL ADAMS 
+ Thanks for the explanation. As a sci-fi consumer I love glimpsing under the hood at the producer’s side. 
+ If memory serves, a few years ago in Discord you broke down the categories of Clarkesworld’s published fiction, that is, the quantities of short stories, novellas, etc. I found that data fascinating (I’m a numbers guy) and would like to see something similar again, but with emphasis on how AI shifted submission stats, if all. Do machine generated stories favor particular story types? Robots versus people, for example, or fantasy versus hard sci-fi. Not to give you more work, Neil, but I suspect you already compile such data. You’re a number’s guy too. 
+ 08/06/2025 
+ Reply 
+ Neil Clarke 
+ I’ve done more than a few slush pile stats posts over the years, but not recently. I’m working on something now that is related to “AI” and some recent developments that make it seem like this month’s editorial many have been more timely than I expected. What I can say is that submission trends tend towards stability. It takes time for them to change. The stats (genre, length, etc.) for generated submissions are basically noise, so I tend to exclude them from any reporting on submission data to avoid poisoning the pool. There are some patterns there that I use as warning signs, but I don’t make those public. I don’t want to help them. 
+ 08/06/2025 
+ Reply 
+ Leave a Reply Cancel reply Your email address will not be published. Required fields are marked * Comment * Name * 
+ Email * 
+ Website 
+ Save my name, email, and website in this browser for the next time I comment. 
+ Δ 
+ Search 
+ Connect 
+ BlueSky 
+ Facebook (Clarkesworld) 
+ Facebook (Neil) 
+ Instagram 
+ Mailing List 
+ Mastodon 
+ Twitter 
+ Support 
+ Clarkesworld Citizens 
+ Patreon 
+ Subscribe to Clarkesworld 
+ Shortcuts 
+ Block the Bots that Feed “AI” Models by Scraping Your Website 
+ Clarkesworld Slush Reader Application 
+ What Happened to Amazon Magazine Subscriptions 
+ Where I Stand on AI in Publishing 
+ Powered by WordPress & Theme by Anders Norén 

@@ -1,0 +1,72 @@
+{{short description|1990 novel by Guy Gavriel Kay}}
+{{about||the French-Malian football (soccer) player and manager|Jean Tigana|the town in Mali|Tigana, Mali}}
+{{Infobox book| 
+| name          = Tigana
+| title_orig    =
+| translator    =
+| image         = Tigana - bookcover.jpg
+| caption       = First edition cover
+| author        = [[Guy Gavriel Kay]]
+| illustrator   = 
+| cover_artist  = [[Mel Odom (artist)|Mel Odom]]
+| country       = [[Canada]]
+| language      = [[English language|English]]
+| series        =
+| genre         = [[Fantasy]]
+| publisher     = [[Penguin Group|Penguin Canada]]
+| release_date  = August 1990
+| english_release_date =
+| media_type    = Print
+| pages         = 673 pp.
+| isbn          = 0-451-45028-0
+| oclc= 21332269
+}}
+
+'''''Tigana''''' is a 1990 [[fantasy]] [[novel]] by Canadian writer [[Guy Gavriel Kay]]. The novel is set in a region called the Peninsula of the Palm, which somewhat resembles [[Italian Renaissance|Renaissance Italy]] as well as the [[Peloponnese]] in shape.
+
+==Setting==
+The world where ''Tigana'' takes place is a planet orbited by two moons. Kay notes that some of his readers tried to connect ''Tigana'' with ''[[A Song for Arbonne]]'' by speculating the stories take place on the same [[fictional world]];<ref>{{Cite news|url=https://www.publishersweekly.com/978-0-451-45028-9|title=Fiction Book Review: Tigana by Guy Gavriel Kay, Author  Roc $21.95 (0p) ISBN 978-0-451-45028-9|work=PublishersWeekly.com|access-date=2017-08-09|language=en}}</ref> Kay explained that he only repeated the same idea rather than attempting to expand his [[canon (fiction)|canon]].<ref>[http://www.brightweavings.com/ggkswords/andrews.htm Interview to Andrew A. Adams]</ref>
+
+Action is centered on the Peninsula of the Palm, which shares a common culture and language, but, like [[medieval Italy]], is not a unified nation, comprising instead nine provinces with a long history of [[Civil war|internecine struggle]]. The provinces are: Asoli, Astibar, Certando, Chiara, Corte, Ferraut, Senzio, Tigana, and Tregea. With great subtlety, Kay conveys the fact that all this takes place in the Southern Hemisphere of the unnamed world.
+
+This internal conflict facilitates the conquest of the region by two powerful [[Magic (fantasy)|sorcerers]]:  Brandin, the King of Ygrath, and Alberico, an independent [[warlord]] from the empire of Barbadior.  The two sorcerers conquered simultaneously but independently the peninsula, and have divided it in an uneasy balance of power.
+
+In an interview, Kay noted that the title of the book inadvertently coincided with the football player [[Jean Tigana]]. Because of this, the Italian translation of the novel used the title ''Tigane'' instead.<ref>{{cite web|title=Interview with Solaris|url=http://brightweavings.com/ggk/trudel/|publisher=Solaris / Bright Weavings|accessdate=5 May 2017|author=Jean-Louis Trudel}}</ref>
+
+===Mythology===
+The religion of the Palm is centered on a triad of deities, a God and two Goddesses; the one being his sister-wife and the other being their daughter. An annual feast celebrates the torment and [[deicide]] of the God by his sister-wife and daughter, their eating of his flesh, and his rebirth.
+
+===Riselka===
+The "riselka" is the only [[Legendary creature|supernatural creature]] of the book.  Based on the [[rusalka]] of [[Slavic folklore]] and [[Slavic Mythology|mythology]], its appearance in Kay's world is a token of some portent.  A portion of it reads as follows:
+
+:One man sees a riselka: his life forks there.
+:Two men see a riselka: one of them shall die.
+:Three men see a riselka: one is blessed, one forks, one shall die.
+:One woman sees a riselka: her path comes clear to her.
+:Two women see a riselka: one of them shall bear a child.
+:Three women see a riselka: one is blessed, one is clear, one shall bear a child.
+
+==Plot==
+A group of rebels attempting to overthrow both tyrants and win back their homeland.  Many of the rebels are natives of the province of Tigana, which was the province that most ably resisted Brandin; in a crucial battle, Brandin's son was killed. In retaliation for this, Brandin attacked Tigana and crushed it more savagely than any other part of the Palm; then he used his magic to remove the name and history of Tigana from the minds of the population.  Brandin named it Lower Corte, making Corte, their traditional enemies to their north, seem superior to a land that was all but forgotten.
+
+Only those born in Tigana before the invasion can hear or speak its name, or remember it as it was; as far as everyone else is concerned, that area of the country has always been an insignificant part of a neighbouring province, hence the rebels are battling for the very soul of their country.
+
+In the end the rebels engineer a battle between their two enemies hoping they will defeat each other.  After victory, the magic preventing others from remembering the province of Tigana is removed.
+
+==Awards==
+''Tigana'' was nominated for the 1991 [[World Fantasy Award—Novel]] and [[List of winners and nominees for the Aurora Award for Best Novel|Aurora Award for Best Novel]], winning the latter.
+
+==References==
+{{reflist}}
+
+==External links==
+*[http://brightweavings.com/books/books/tigana/ Tigana at Guy Gavriel Kay's authorized website]
+
+{{Guy Gavriel Kay}}
+
+{{Authority control}}
+
+[[Category:1990 Canadian novels]]
+[[Category:Novels by Guy Gavriel Kay]]
+[[Category:1990 fantasy novels]]
+[[Category:Rusalki]]

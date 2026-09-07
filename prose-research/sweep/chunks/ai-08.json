@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 8,
+ "indices": [
+  1214,
+  1216,
+  1218,
+  1219,
+  1220,
+  1222,
+  1223,
+  1225,
+  1228,
+  1229,
+  1230,
+  1231,
+  1234,
+  1235,
+  1239
+ ],
+ "claims": [
+  {
+   "index": 1214,
+   "feature": "model era drift",
+   "claim": "The paper reports that model accuracy on historical facts falls as the period tested approaches the present day.",
+   "source": "Hauser et al., 'HiST-LLM', NeurIPS 2024 Datasets and Benchmarks Track (Dec 2024)",
+   "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/38cc5cba8e513547b96bc326e25610dc-Paper-Datasets_and_Benchmarks_Track.pdf",
+   "quote": "declines as the time frame approaches the present day",
+   "page": "Section 5, p.8"
+  },
+  {
+   "index": 1216,
+   "feature": "homogenisation",
+   "claim": "Across the four headline models the benchmark's worst regional performance falls on Oceania or Sub-Saharan Africa, which the authors read as a training-data bias.",
+   "source": "Hauser et al., 'HiST-LLM', NeurIPS 2024 Datasets and Benchmarks Track (Dec 2024)",
+   "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/38cc5cba8e513547b96bc326e25610dc-Paper-Datasets_and_Benchmarks_Track.pdf",
+   "quote": "Worst performance Oceania Oceania Oceania Sub-Sah. Africa",
+   "page": "Table 3, p.8"
+  },
+  {
+   "index": 1218,
+   "feature": "counter-evidence",
+   "claim": "The authors caution that their first benchmark result should be read as a lower bound on model historical-knowledge performance.",
+   "source": "Hauser et al., 'HiST-LLM', NeurIPS 2024 Datasets and Benchmarks Track (Dec 2024)",
+   "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/38cc5cba8e513547b96bc326e25610dc-Paper-Datasets_and_Benchmarks_Track.pdf",
+   "quote": "this first benchmark should be taken as a lower bound",
+   "page": "Section 6 Discussion, p.10"
+  },
+  {
+   "index": 1219,
+   "feature": "steerability",
+   "claim": "Del Rio-Chanona attributes the models' weakness to their extrapolating from prominent historical data rather than retrieving obscure knowledge.",
+   "source": "Kyle Wiggers, TechCrunch, reporting and quoting co-author Maria del Rio-Chanona (19 January 2025)",
+   "url": "https://techcrunch.com/2025/01/19/ai-isnt-very-good-at-history-new-paper-finds/",
+   "quote": "LLMs tend to extrapolate from historical data that is very prominent",
+   "page": "body, paragraph beginning 'Why are LLMs bad'"
+  },
+  {
+   "index": 1220,
+   "feature": "steerability",
+   "claim": "Del Rio-Chanona illustrates the mechanism as a model recalling frequently seen items and extrapolating when asked about a rarely seen one.",
+   "source": "Kyle Wiggers, TechCrunch, quoting Maria del Rio-Chanona (19 January 2025)",
+   "url": "https://techcrunch.com/2025/01/19/ai-isnt-very-good-at-history-new-paper-finds/",
+   "quote": "get told A and B 100 times, and C 1 time",
+   "page": "body, quoted illustration"
+  },
+  {
+   "index": 1222,
+   "feature": "reader and expert judgment",
+   "claim": "Del Rio-Chanona says the models are good for basic facts but not for nuanced PhD-level historical inquiry.",
+   "source": "Maria del Rio-Chanona, quoted by Kyle Wiggers, TechCrunch (19 January 2025)",
+   "url": "https://techcrunch.com/2025/01/19/ai-isnt-very-good-at-history-new-paper-finds/",
+   "quote": "They're great for basic facts",
+   "page": "body, quoted co-author"
+  },
+  {
+   "index": 1223,
+   "feature": "reader and expert judgment",
+   "claim": "Turchin says the benchmark shows machine intelligence is domain-specific, strong in some contexts and very poor in others compared with humans.",
+   "source": "Peter Turchin, quoted in Complexity Science Hub press release (21 January 2025)",
+   "url": "https://csh.ac.at/news/can-chatgpt-pass-a-phd-level-history-test/",
+   "quote": "artificial 'intelligence' is quite domain-specific",
+   "page": "pull quote"
+  },
+  {
+   "index": 1225,
+   "feature": "reader and expert judgment",
+   "claim": "Del Rio-Chanona says she expected the chatbots to perform considerably better than the benchmark showed.",
+   "source": "R. Maria del Rio-Chanona, quoted in Complexity Science Hub press release (21 January 2025)",
+   "url": "https://csh.ac.at/news/can-chatgpt-pass-a-phd-level-history-test/",
+   "quote": "I thought the AI chatbots would do a lot better",
+   "page": "body"
+  },
+  {
+   "index": 1228,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "On the coherency and consistency criterion the AI summaries scored 10 against the human summaries' 12, the narrowest margin of the five criteria.",
+   "source": "AWS Professional Services draft report attached to ASIC's answer to Question on Notice No. 001 (21 May 2024)",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "Coherency/Consistency 10 12",
+   "page": "Table 4, ASIC Scoring Summary by Assessment Criteria"
+  },
+  {
+   "index": 1229,
+   "feature": "abstraction over the concrete",
+   "claim": "ASIC chair Joe Longo told the Senate committee the AI summary of the submissions was bland rather than misleading.",
+   "source": "Joe Longo, ASIC Chair, Hansard extract of 21 May 2024 reproduced in ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "It wasn't misleading but it was bland.",
+   "page": "Questions, Hansard extract, p.1"
+  },
+  {
+   "index": 1230,
+   "feature": "abstraction over the concrete",
+   "claim": "ASIC's Greg Jefferson told the committee the AI-generated summaries were quite generic.",
+   "source": "Greg Jefferson, ASIC, Hansard extract of 21 May 2024 reproduced in ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "the summaries were quite generic",
+   "page": "Questions, Hansard extract, p.1"
+  },
+  {
+   "index": 1231,
+   "feature": "discourse-level tells",
+   "claim": "An ASIC assessor recorded that the model made strange choices about what to highlight in a summary.",
+   "source": "Unnamed ASIC assessor, rubric comment quoted in the AWS draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "Made strange choices about what to highlight.",
+   "page": "Section 5.1 Key Themes, p.17"
+  },
+  {
+   "index": 1234,
+   "feature": "gloss and over-explaining",
+   "claim": "An ASIC assessor described one AI summary's handling of references as wordy and pointless.",
+   "source": "Unnamed ASIC assessor, rubric comment quoted in the AWS draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "wordy and pointless",
+   "page": "Section 5.1 Key Themes, p.17"
+  },
+  {
+   "index": 1235,
+   "feature": "gloss and over-explaining",
+   "claim": "The AWS report lists waffliness and wordiness among the recurring themes assessors recorded about the AI summaries.",
+   "source": "AWS Professional Services draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "AI summaries were waffly, wordy",
+   "page": "Section 5.1 Key Themes, p.18"
+  },
+  {
+   "index": 1239,
+   "feature": "discourse-level tells",
+   "claim": "An ASIC assessor described an AI summary as dense and repetitive.",
+   "source": "Unnamed ASIC assessor, rubric comment quoted in Appendix C of the AWS draft report attached to ASIC's answer to Question on Notice No. 001",
+   "url": "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
+   "quote": "dense and repetitive",
+   "page": "Appendix C, qualitative analysis"
+  }
+ ]
+}

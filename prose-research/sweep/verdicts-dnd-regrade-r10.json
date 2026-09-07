@@ -1,0 +1,293 @@
+{
+ "name": "dnd",
+ "regrade": true,
+ "claims": [
+  {
+   "index": 4,
+   "feature": "numerals in rules text",
+   "claim": "Game quantities always take numerals ('3 hit points', '1 round', '30 feet') while narrative distances and durations follow Chicago and are spelled out ('fifty miles', 'six hours').",
+   "source": "Wizards of the Coast, D&D Style Guide v1.04a",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "In rules writing, we use numerals more often.",
+   "angle": "academic"
+  },
+  {
+   "index": 506,
+   "feature": "place and institution description",
+   "claim": "Gus L says making up towns is tricky for a designer.",
+   "source": "Gus L, Dungeon of Signs, 2015",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "quote": "Making up towns is tricky",
+   "page": "section THE TOWN AND BANDITS, opening line",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-12",
+   "routeHint": "direct fetch with browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "angle": "place-register"
+  },
+  {
+   "index": 616,
+   "feature": "boxed text form",
+   "claim": "Merwin says the act of writing boxed text forces designers to think harder about their encounters.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "to think harder about their encounters",
+   "page": "opening",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2019",
+   "routeHint": "direct curl, browser UA",
+   "registerHint": "herald-pools",
+   "confidence": "high",
+   "angle": "scholarship-history",
+   "fullSentence": true
+  },
+  {
+   "index": 706,
+   "feature": "other: seen in a glance",
+   "claim": "cygnus says focusing on what the characters can immediately perceive is what keeps the description from rambling.",
+   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "quote": "focusing on what the characters can immediately perceive",
+   "page": "Rewriting Dungeon Keys",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-11-30",
+   "routeHint": "direct curl (browser UA)",
+   "registerHint": "dm-page",
+   "confidence": "high",
+   "angle": "usability-school",
+   "fullSentence": true
+  },
+  {
+   "index": 910,
+   "feature": "boxed text form",
+   "claim": "Dungeon Master's Workshop distinguishes boxed text written third-person objective from second-person subjective and advises DMs to shift between them.",
+   "source": "Dungeon Master's Workshop, Dungeon Mastering 101: Mastering the Boxed Text, 27 Sep 2019",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "shifting text from third-person objective",
+   "page": "section Using Boxed Text Your Way",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2019-09-27",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 924,
+   "feature": "place and institution description",
+   "claim": "RPG Musings reports that in the 2013 Legacy of the Crystal Shard campaign guide each town write-up carries at least one new NPC per location.",
+   "source": "RPG Musings, Why & How to Use Legacy of the Crystal Shard in Your Frostmaiden Game, Nov 2020",
+   "url": "https://rpgmusings.com/2020/11/why-how-to-use-legacy-of-the-crystal-shard-in-your-frostmaiden-game/",
+   "quote": "each town write-up comes with at least one new NPC",
+   "page": "section on Legacy of the Crystal Shard NPCs",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-11 (describing the 2013 D&D Next product)",
+   "routeHint": "curl with browser UA on the live URL; raw HTML",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 953,
+   "feature": "concrete sensory noun",
+   "claim": "The 2014 DMG asserts that sensory details are what bring a settlement to life for the players.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Sensory details help bring a settlement to life and",
+   "page": "ch.1 > 'Settlements' > 'Atmosphere', p.17",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 984,
+   "feature": "plainness and economy",
+   "claim": "The 2024 DMG instructs the DM to summarise what a long written record says and give only its plot-worthy parts.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Greyhawk Gazetteer\", read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359",
+   "quote": "Summarize what lengthy works say, and focus on the most",
+   "page": "'Greyhawk Gazetteer' > 'Living History' > 'Historical Records'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 995,
+   "feature": "edition and house style",
+   "claim": "The column judges a three-sentence 2005 boxed text short by comparison with a 1999 one, evidence that Wizards' read-aloud passages had already contracted before 5th edition.",
+   "source": "Jesse Decker and David Noonan, \"Design & Development: Undercover at Gen Con, Part 1\", wizards.com, 16 September 2005",
+   "url": "https://web.archive.org/web/20051215014928id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "That’s pretty short. Contrast it with the first room",
+   "page": "'Undercover at Gen Con, Part 1', Tangent Alert",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2005-09-16",
+   "routeHint": "Wayback raw capture (/<ts>id_/ form), curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "medium - 'already contracted' is the column's own framing of two quoted passages, not a measurement over a corpus"
+  },
+  {
+   "index": 999,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos, relaying the Decker and Noonan observation, urges adventure writers to cut read-aloud text to one or two simple sentences or replace it with a point-form list.",
+   "source": "Dyson Logos, \"The Dreaded Boxed Text\", September 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "reduce it down to one or two SIMPLE sentences",
+   "page": "'The Dreaded Boxed Text', closing",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2013-09-29",
+   "routeHint": "live URL, browser user agent, curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1002,
+   "feature": "sentence length variation",
+   "claim": "No sentence in SRD 5.1 Appendix PH-C is shorter than 8 words (shortest 8, longest 41; p10 11, p50 21, p90 30).",
+   "source": "Finder measurement over SRD 5.1 (Wizards of the Coast, CC-BY-4.0, 403 pp.), pdftotext extraction",
+   "url": "https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf",
+   "quote": "",
+   "page": "pp. 363-365",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1018,
+   "feature": "place and institution description",
+   "claim": "Neither SRD contains a settlement table; the word \"settlement\" occurs twice in the whole of SRD 5.1 and once in SRD 5.2.1, always as a rules noun.",
+   "source": "Finder measurement over SRD 5.1 and SRD 5.2.1 (Wizards of the Coast, CC-BY-4.0), pdftotext extraction",
+   "url": "https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf",
+   "quote": "",
+   "page": "whole of both documents",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2026-09-06",
+   "routeHint": "pdftotext -enc UTF-8 on the PDF fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1025,
+   "feature": "edition and house style",
+   "claim": "Wizards of the Coast states that it removed the \"Between Adventures\" section from SRD 5.2 because it is not in the 2024 core rules.",
+   "source": "Wizards of the Coast / D&D Beyond, \"System Reference Document\" page, last updated March 02, 2026",
+   "url": "https://dnd.wizards.com/resources/systems-reference-document",
+   "quote": "Removed: “Between Adventures” section as that is not featured",
+   "page": "SRD page, Game Rules row",
+   "kind": "vendor",
+   "polarity": "asserts",
+   "date": "2026-03-02",
+   "routeHint": "curl with a browser user agent; dnd.wizards.com/resources/systems-reference-document redirects to www.dndbeyond.com/srd",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 4,
+   "verdict": "PARTIAL",
+   "trueWording": "Numerals in Rules. In rules writing, we use numerals more often.",
+   "note": "Every example in the claim is verbatim in the source: 'Anyone who touches the orb regains 3 hit points'; 'The spell lasts for 1 round'; 'The attack has a range of 30 feet'; and under 'But:' - 'The two cities are fifty miles apart' and 'After winning the fight, the characters slept for six hours.' The general rule cited is Chicago 9.2 (spell out zero to one hundred). 'always' is a shade stronger than the guide's framing but the substance holds.",
+   "unsupportedLimb": "the absolute quantifier 'always' in 'Game quantities always take numerals' — the verifier's own note concedes it is 'a shade stronger than the guide's framing'"
+  },
+  {
+   "index": 506,
+   "verdict": "PARTIAL",
+   "trueWording": "Making up towns is tricky ... a tightrope of sorts",
+   "note": "Raw page (live URL, HTTP 200). Verbatim as the opening line of section THE TOWN AND BANDITS: 'Making up towns is tricky, they are instantly identifiable to players... but making them interesting without becoming the focus of the campaign is a tightrope of sorts.' 'for a designer' is implicit in a module review, not stated.",
+   "unsupportedLimb": "'for a designer' — the verifier's own note says that addressee limb is 'implicit in a module review, not stated' on the page"
+  },
+  {
+   "index": 616,
+   "verdict": "PARTIAL",
+   "trueWording": "the very act of having to write it, to think harder about their encounters",
+   "note": "Raw page, third paragraph: 'It can also force adventure designers, by the very act of having to write it, to think harder about their encounters.' Quote exact. Merwin's wording is the modal 'can also force' inside a 'when it's good' clause, where the claim states it flatly; the proposition itself is his.",
+   "unsupportedLimb": "the flat, unconditional 'forces designers to think harder' — the verifier's note records that Merwin's wording is the modal 'can also force' inside a 'when it's good' clause"
+  },
+  {
+   "index": 706,
+   "verdict": "PARTIAL",
+   "trueWording": "focusing on what the characters can immediately perceive helps to ... avoid rambling boxed text",
+   "note": "Quote exact. The page hedges where the claim does not: 'helps to both A) avoid rambling boxed text and, B) quickly identify key room elements', versus the claim's 'is what keeps'. Substance of the single asserted limb is supported.",
+   "unsupportedLimb": "the exclusive-causal 'is what keeps the description from rambling' — the verifier's note records that 'the page hedges where the claim does not' ('helps to both A) avoid rambling boxed text and, B) quickly identify key room elements')"
+  },
+  {
+   "index": 910,
+   "verdict": "PARTIAL",
+   "trueWording": "shifting text from third-person objective",
+   "note": "Raw HTML, HTTP 200. Word-for-word in 'Using Boxed Text Your Way'; the page names both registers, illustrates each with a waterfall example, and advises the shift. Note the advice is one-directional and conditional - third-person objective to second-person subjective, when players tend to lose focus - slightly narrower than the claim's 'between them'.",
+   "unsupportedLimb": "the bidirectional 'shift between them' — the verifier's note records the page's advice as 'one-directional and conditional', third-person objective to second-person subjective only when players lose focus, and 'slightly narrower than the claim's between them'"
+  },
+  {
+   "index": 924,
+   "verdict": "PARTIAL",
+   "trueWording": "each town write-up comes with at least one new NPC per location",
+   "note": "Raw page, section 'NPCs', whose paragraph subject is Legacy of the Crystal Shard's campaign guide ('In this supplement we meet...'). The year 2013 is the claim's own editorial gloss; the page names the product but no year.",
+   "unsupportedLimb": "the '2013' dating of Legacy of the Crystal Shard — the verifier's note says it 'is the claim's own editorial gloss; the page names the product but no year'"
+  },
+  {
+   "index": 953,
+   "verdict": "PARTIAL",
+   "trueWording": "Sensory details help bring a settlement to life",
+   "note": "Quote exact under the 'Atmosphere' subhead; the sentence continues that they vividly communicate the settlement's personality to your players, so the 'for the players' limb is the book's own. One calibration for downstream use: the DMG hedges with 'help bring', where the claim says 'are what bring'. The assertion is the book's; the exclusivity is not, so do not quote the claim as though the DMG said sensory details alone do the work.",
+   "unsupportedLimb": "the exclusivity in 'sensory details are what bring a settlement to life' — the verifier's note states 'the DMG hedges with help bring... The assertion is the book's; the exclusivity is not'"
+  },
+  {
+   "index": 984,
+   "verdict": "PARTIAL",
+   "trueWording": "Summarize what lengthy works say, and focus on the most",
+   "note": "Verbatim as the closing sentence of 'Living History' > 'Historical Records', completing with plot-worthy parts. The page says to focus on the most plot-worthy parts rather than to give only those, so the claim's only is a slight strengthening of the instruction's emphasis.",
+   "unsupportedLimb": "the restrictive 'give only its plot-worthy parts' — the verifier's note says 'the page says to focus on the most plot-worthy parts rather than to give only those, so the claim's only is a slight strengthening'"
+  },
+  {
+   "index": 995,
+   "verdict": "PARTIAL",
+   "trueWording": "That's pretty short. Contrast it with the first room",
+   "note": "Verbatim in the 'Tangent Alert!' aside. The 2005 passage quoted (from Sons of Gruumsh, called 'a recent Forgotten Realms adventure' - the page does not date it) is indeed three sentences; the comparator is named as 1999's Return to the Keep on the Borderlands. The contraction limb is the column's own generalisation immediately above the pair - that boxed text used to be much longer than it is today - so it is asserted, not inferred; but it rests on two hand-picked passages, not a corpus measure, and 5th edition is nowhere on the page, so 'before 5th edition' is external chronology (2005 precedes 2014).",
+   "unsupportedLimb": "'before 5th edition' — the verifier's note states that '5th edition is nowhere on the page' and that the contraction rests on two hand-picked passages rather than a corpus measure"
+  },
+  {
+   "index": 999,
+   "verdict": "PARTIAL",
+   "trueWording": "reduce it down to one or two SIMPLE sentences",
+   "note": "Live URL fetched 200 with a browser UA, 43,692 bytes; post dated 29 September 2013, byline Dyson Logos. Quote verbatim (SIMPLE capitalised in the original). The point-form limb is verbatim in the next sentence, as the preferred option ('But really, replace it with a point-form list of things seen in the room'), and the first option offered is to get rid of boxed text entirely. The relay limb holds: the post names Jesse Decker and David Noonan, block-quotes their Gen Con passage, and links the wizards.com article. One narrowing to flag: the page addresses 'OSR adventure writers', not adventure writers generally.",
+   "unsupportedLimb": "the generalised audience 'adventure writers' — the verifier's note flags that 'the page addresses OSR adventure writers, not adventure writers generally'"
+  },
+  {
+   "index": 1002,
+   "verdict": "PARTIAL",
+   "trueWording": "shortest 8, longest 41; p10 11, p50 21 confirmed",
+   "note": "CONFIRMED for the headline and three of four bracket figures. Re-measured min 8 ('Such a journey is the stuff of legend.'), max 41 (the 'Some are vortices...' sentence on p. 363), p10 11, p50 21. One convention caveat, stated visibly rather than buried: p90 re-measures at 30.9 by linear interpolation and 31 by nearest rank, so the claim's p90 30 holds only under a lower/truncating percentile method. Nothing in the appendix falls below 8 words once the run-in heads 'Spells.' and 'Portals.' are attached to their sentences, which is how the 72-sentence count is reached.",
+   "unsupportedLimb": "the 'p90 30' bracket figure — the verifier's note confirms only 'three of four bracket figures' and records that p90 re-measures at 30.9 (linear interpolation) or 31 (nearest rank), so 30 holds 'only under a lower/truncating percentile method'"
+  },
+  {
+   "index": 1018,
+   "verdict": "PARTIAL",
+   "trueWording": "singular 'settlement' twice and once; plural adds three",
+   "note": "CONFIRMED on the counting convention the claim's own method implies. Word-boundary searches for the singular return exactly 2 in SRD 5.1 and exactly 1 in SRD 5.2.1, as claimed. Both SRD 5.1 instances are plain rules nouns - selling loot on returning 'to a town or other settlement', and delivering something 'to a distant settlement'; the SRD 5.2.1 instance is the crafting-materials rule, 'in any other settlement, that chance is 25 percent'. Flag for downstream use: SRD 5.2.1 additionally carries the plural 'settlements' 3 times (spellcasting services, an area-divination spell, and a druidic locate effect), so a reader who takes 'the word' to include inflected forms would find 4, not 1; SRD 5.1 has no plural at all. The no-settlement-table limb holds: neither document contains any settlement-size table, 'hamlet' and 'metropolis' occur zero times in both, and the only table with settlement categories is the SRD 5.2.1 Spellcasting Services availability column.",
+   "unsupportedLimb": "the count 'the word settlement occurs... once in SRD 5.2.1' — the verifier's own FLAG records that SRD 5.2.1 carries the plural 'settlements' three further times, 'so a reader who takes the word to include inflected forms would find 4, not 1'"
+  },
+  {
+   "index": 1025,
+   "verdict": "PARTIAL",
+   "trueWording": "as that is not featured in the 5.5e core rules",
+   "note": "The quoted fragment is verbatim in the Game Rules row of the SRD 5.2 differences table, but the page attributes the removal to the '5.5e core rules' and never says '2024'; the only '2024' on the page is the footer copyright line. 5.5e is the 2024 revision, so the substance holds - downstream copy should use the page's wording, not '2024 core rules'.",
+   "unsupportedLimb": "the '2024 core rules' attribution — the verifier's note states 'the page attributes the removal to the 5.5e core rules and never says 2024'"
+  }
+ ]
+}

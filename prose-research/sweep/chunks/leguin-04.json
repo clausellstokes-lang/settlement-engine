@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 4,
+ "indices": [
+  858,
+  860,
+  871,
+  873,
+  876,
+  877,
+  878,
+  879,
+  880,
+  881,
+  882,
+  883,
+  884,
+  886,
+  887
+ ],
+ "claims": [
+  {
+   "index": 858,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says she has read overpolished fiction and found it kind of a bore.",
+   "source": "Ursula K. Le Guin, \"A Return to Earthsea\", Locus Magazine, September 2001",
+   "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+   "quote": "I’ve read overpolished fiction, and it’s kind of a bore.",
+   "page": "excerpt on composition and revision"
+  },
+  {
+   "index": 860,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin describes researching the history of Earthsea as going into the archives, which are all in her head.",
+   "source": "Ursula K. Le Guin, \"A Return to Earthsea\", Locus Magazine, September 2001",
+   "url": "https://www.locusmag.com/2001/Issue09/LeGuin.html",
+   "quote": "I went into the archives",
+   "page": "excerpt on returning to Earthsea"
+  },
+  {
+   "index": 871,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says the present tense, used by some writers to make the telling more actual, actually distances the story.",
+   "source": "Ursula K. Le Guin, \"Some Thoughts on Narrative\" (1980), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "actually distances the story",
+   "page": "\"Some Thoughts on Narrative\", p.38"
+  },
+  {
+   "index": 873,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says narrative locates itself in the past in order to allow itself forward movement.",
+   "source": "Ursula K. Le Guin, \"Some Thoughts on Narrative\" (1980), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "It locates itself in the past",
+   "page": "\"Some Thoughts on Narrative\", p.38"
+  },
+  {
+   "index": 876,
+   "feature": "civic record register",
+   "claim": "Le Guin presents a single line of runes carved in Carlisle Cathedral, reading that Tolfink carved these runes in this stone, as a whole story.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night; or, Why Are We Huddling about the Campfire?\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Tolfink carved these runes in this stone.",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 877,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin says that runic inscription is pretty close to Barbara Herrnstein Smith's earliest form of historiography, notch-cutting.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Barbara Herrnstein Smith’s earliest form of historiography",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 878,
+   "feature": "civic record register",
+   "claim": "Le Guin says the inscription does not really meet the requirement of Minimal Connexity and has little beginning or end.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "it does not really meet the requirement of Minimal Connexity",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 879,
+   "feature": "civic record register",
+   "claim": "Le Guin nonetheless judges the carver of that inscription a reliable narrator who bore witness to his own existence.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Tolfink was a reliable narrator",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 880,
+   "feature": "omission as information",
+   "claim": "Le Guin explains the extreme brevity of the runic record by saying the material was obdurate and life is short.",
+   "source": "Ursula K. Le Guin, \"It Was a Dark and Stormy Night\" (1979), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "The material was obdurate, and life is short.",
+   "page": "\"It Was a Dark and Stormy Night\", p.29"
+  },
+  {
+   "index": 881,
+   "feature": "place and institution description",
+   "claim": "Le Guin says what artists do is make a particularly skillful selection of fragments of cosmos, chosen and arranged to give an illusion of coherence and duration.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "a particularly skillful selection of fragments of cosmos",
+   "page": "\"World-Making\", p.46"
+  },
+  {
+   "index": 882,
+   "feature": "place and institution description",
+   "claim": "Le Guin says that all a work of art is, is an explorer's sketch-map.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "all it is is an explorer’s sketch-map",
+   "page": "\"World-Making\", p.47"
+  },
+  {
+   "index": 883,
+   "feature": "civic record register",
+   "claim": "Le Guin reproduces a sentence from her father's Handbook of the Indians of California declaring a people extinct so far as all practical purposes are concerned.",
+   "source": "Ursula K. Le Guin, \"World-Making\" (1981), in Dancing at the Edge of the World (1989), quoting A. L. Kroeber, Handbook of the Indians of California (1918)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "so far as all practical purposes are concerned",
+   "page": "\"World-Making\", p.47-48, block quotation from her father"
+  },
+  {
+   "index": 884,
+   "feature": "place and institution description",
+   "claim": "Le Guin's own travel piece renders a stretch of country as bare noun phrases with a repeated frame, writing that sagebrush is at its intervals and power poles at their intervals.",
+   "source": "Ursula K. Le Guin, \"Places Names\" (1981), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "Sagebrush at its intervals. Power poles at their intervals.",
+   "page": "\"Places Names\", section I, To the Little Bighorn, p.52"
+  },
+  {
+   "index": 886,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the job of composition is getting the right words in the right order and getting the measure right.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "the right order, getting the measure right, is the same",
+   "page": "\"Reciprocity of Prose and Poetry\", p.112-113"
+  },
+  {
+   "index": 887,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says prose could have its own proper, looser rhythms and measures, distinct from metre.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "prose could have its own proper, looser rhythms and measures",
+   "page": "\"Reciprocity of Prose and Poetry\", p.111"
+  }
+ ]
+}

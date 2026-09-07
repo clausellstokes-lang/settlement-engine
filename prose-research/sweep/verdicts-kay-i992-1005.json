@@ -1,0 +1,143 @@
+{
+ "name": "kay",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 992,
+   "feature": "other: invented world as historical ethic",
+   "claim": "Cabon writes that one reason Kay sets fact-based plots in invented worlds is his refusal to betray historical figures by presuming their reactions.",
+   "source": "Mikael Cabon, « Les Chevaux célestes pour \"les cancres\" », Éditions L'Atalante, 11 July 2014",
+   "url": "https://www.l-atalante.com/actualites/les-chevaux-celestes-pour-les-cancres/",
+   "quote": "son refus de trahir les personnages historiques en présumant de leurs réactions",
+   "page": "opening section"
+  },
+  {
+   "index": 994,
+   "feature": "other: retranslation",
+   "claim": "The translator's own page for Voile vers Sarance carries the line announcing Kay's Byzantine epic in a new translation.",
+   "source": "Mikael Cabon, translator's own page for Voile vers Sarance (L'Atalante)",
+   "url": "https://mikaelcabon.fr/voileverssarance.html",
+   "quote": "DANS UNE NOUVELLE TRADUCTION",
+   "page": "back-cover text reproduced on the page"
+  },
+  {
+   "index": 995,
+   "feature": "other: retranslation",
+   "claim": "Elbakin forum readers record that A Brightness Long Ago had already been translated by Élisabeth Vonarburg and published in 2020 before the L'Atalante version appeared.",
+   "source": "Elbakin.net forum thread on Comme un diamant dans ma mémoire (reader posts)",
+   "url": "https://www.forum-elbakin.net/viewtopic.php?t=9311&start=60",
+   "quote": "Il avait déjà été traduit par Élisabeth Vonarburg et paru en 2020",
+   "page": "page 4 of the thread"
+  },
+  {
+   "index": 996,
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that The Last Light of the Sun audiobook was read by Holter Graham.",
+   "source": "Brightweavings News archive, 18 May 2009",
+   "url": "https://brightweavings.com/news/",
+   "quote": "Last Light of the Sun is wrapped, read by Holter Graham",
+   "page": "News, 18 May 2009 entry"
+  },
+  {
+   "index": 997,
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that A Song for Arbonne was read by Euan Morton, who also sang the songs.",
+   "source": "Brightweavings News archive, 18 May 2009",
+   "url": "https://brightweavings.com/news/",
+   "quote": "read by Euan Morton (who sang the songs, as well)",
+   "page": "News, 18 May 2009 entry"
+  },
+  {
+   "index": 1000,
+   "feature": "archaism",
+   "claim": "Gillossen calls Kay's multiplication of period terms in The Last Light of the Sun sometimes incidental to what it adds to the story.",
+   "source": "Gillossen, critique of Les Derniers Feux du soleil, Elbakin.net, 19 April 2009",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "une multiplication de termes \"d'époque\"",
+   "page": "body of the review"
+  },
+  {
+   "index": 1001,
+   "feature": "other: competing memories of one event",
+   "claim": "Siriane observes that in Children of Earth and Sky the same events can be examined from the points of view of different characters, which she calls a kaleidoscopic effect.",
+   "source": "Siriane, critique of Children of Earth and Sky, Elbakin.net, 20 January 2017",
+   "url": "https://www.elbakin.net/fantasy/roman/enfants-de-la-terre-et-du-ciel-5099",
+   "quote": "ce qui donne un intéressant effet kaléidoscopique",
+   "page": "body of the review"
+  },
+  {
+   "index": 1004,
+   "feature": "other: retranslation",
+   "claim": "Elbakin.net records that after a first publication at Le Pré aux Clercs the novel was reissued by L'Atalante with a translation by Mikael Cabon.",
+   "source": "Elbakin.net, update of 20 August 2021 appended to the Les Derniers Feux du soleil page",
+   "url": "https://www.elbakin.net/fantasy/roman/les-derniers-feux-du-soleil-961",
+   "quote": "avec cette fois une traduction de Mikael Cabon",
+   "page": "Mise à jour du 20 aout 2021"
+  },
+  {
+   "index": 1005,
+   "feature": "other: exposition halting the action",
+   "claim": "Haggard criticises The Summer Tree for having characters stop the action dead to make a flowery speech.",
+   "source": "Cynthia Sally Haggard, review of the Simon Vance audiobook of The Summer Tree, 24 May 2020",
+   "url": "https://www.goodreads.com/author_blog_posts/19910169-the-summer-tree-fionavar-tapestry-1-by-guy-gavriel-kay-narrated-by-si",
+   "quote": "stops the action dead in order to make a flowery speech",
+   "page": "body of the blog post"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 992,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "son refus de trahir les personnages historiques en présumant de leurs réactions",
+   "note": "Raw page fetched (curl, browser UA). Fourth paragraph of the article, signed Mikael Cabon, dated 11 juillet 2014: Kay integrates plots founded on authentic facts into fictional universes for ethical and artistic reasons, among them the cited refusal (which continues '...et de leurs sentiments'). Quotation is a contiguous substring; every limb (Cabon as author; fact-based plots; invented worlds; refusal to presume reactions) is on the page."
+  },
+  {
+   "index": 994,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "L'ÉPOPÉE BYZANTINE DE GUY GAVRIEL KAY DANS UNE NOUVELLE TRADUCTION",
+   "note": "Raw page fetched. mikaelcabon.fr is headed 'Mikael Cabon, traducteur'; the Voile vers Sarance page reproduces the quatrieme de couverture and closes it with the em-dash banner line containing the quoted words verbatim (in capitals). Byzantine limb supported both by the banner and by the back-cover text naming Justinian's Constantinople."
+  },
+  {
+   "index": 995,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Il avait déjà été traduit par Élisabeth Vonarburg et paru en 2020",
+   "note": "Live page initially failed (HTTP/2 PROTOCOL_ERROR, then empty reply); recovered on the live URL by first taking a phpBB session cookie from index.php, then re-requesting over HTTP/1.1 with that cookie. Page 4 of 7 confirmed. Post by 'Al1', jeu. 24 août 2023: the novel is a Cabon translation of 'A Brightness Long Ago' (2019), and the quoted sentence continues 'sous le nom \"Un éclat d'antan\"'; he adds L'Atalante's site makes no mention of the earlier one. A second reader (Aerendhyl) re-quotes it and identifies it as the Alire edition."
+  },
+  {
+   "index": 996,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Last Light of the Sun is wrapped, read by Holter Graham",
+   "note": "Raw page fetched from brightweavings.com/news/ (GGK's official site). The 'May 18' entry about audible.com downloads carries the quoted words verbatim. Year limb checked independently of the page's year headers (which sit at block ends here): the same block announces Worldcon 'this August in Montreal' (Anticipation, Aug 2009) and a new novel due spring 2010 (Under Heaven), fixing the entry at 18 May 2009."
+  },
+  {
+   "index": 997,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read by Euan Morton (who sang the songs, as well)",
+   "note": "Same 18 May 2009 entry on brightweavings.com/news/: 'A Song for Arbonne is also done, and should appear next,' followed by the quoted parenthesis verbatim. Corroborated by two later entries on the same page (April 18 and July 4) describing Morton as the reader who 'also did Arbonne, including singing the songs'."
+  },
+  {
+   "index": 1000,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "c'est parfois là aussi quelque peu « accessoire »",
+   "note": "Raw page fetched. Third paragraph of the chronique, signed '— Gillossen, le 19/04/2009': Kay tries to offset a less exotic Celtic setting 'avec notamment une multiplication de termes \"d'époque\"' — the quotation verbatim — but this is sometimes only incidental 'quant à l'intérêt réel que tout cela apporte à l'histoire'. Both limbs (the multiplication of period terms; sometimes incidental to what it adds) are on the page."
+  },
+  {
+   "index": 1001,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ce qui donne un intéressant effet kaléidoscopique",
+   "note": "Raw page fetched. Penultimate paragraph of the chronique, signed '— Siriane, le 20/01/2017': key events 'peuvent d'ailleurs être étudiés sous le point de vue de différents personnages,' followed by the quoted clause verbatim. Same-events, different-POV and kaleidoscopic limbs both supported; review is of Children of Earth and Sky (French edition, L'Atalante)."
+  },
+  {
+   "index": 1004,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avec cette fois une traduction de Mikael Cabon",
+   "note": "Raw page fetched. Block headed 'Mise à jour du 20 aout 2021' at the foot of the Les Derniers Feux du soleil page: after a first publication at Le Pré aux Clercs the novel appears in a new edition at L'Atalante, closing with the quoted words verbatim. All three limbs (prior Pré aux Clercs publication; L'Atalante reissue; Cabon translation) present."
+  },
+  {
+   "index": 1005,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stops the action dead in order to make a flowery speech",
+   "note": "Raw page fetched from goodreads.com (author blog post, published May 24, 2020, titled for the Simon Vance narration). Third paragraph: 'There are too many times where one of the characters' + the quoted words verbatim + 'about people with long unmemorable names'. Criticism limb supported; note for context the same post is otherwise laudatory and ends 'Five stars.'"
+  }
+ ]
+}

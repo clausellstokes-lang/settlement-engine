@@ -1,0 +1,177 @@
+Tales From the Tavern Interview with Scott Fitzgerald Gray – Shadomain – All About Games 
+ Skip to content 
+ September 6, 2026 
+ Shadomain – All About Games 
+ Primary Menu 
+ Shop 
+ Shadomain Studio 
+ Blog Articles 
+ Post O’ the Week 
+ Tales From the Tavern Interviews 
+ Campaign Diaries 
+ GM Tips 
+ RPG Tips 
+ What We Do 
+ Shadomain Store 
+ FREE How to RPG booklet 
+ About Us 
+ Please Complete the Tales From the Tavern Interview 
+ RSS Feed 
+ TTRPG Forum 
+ email us at sh ********** @ *** il.com 
+ Search for: 
+Tales From the Tavern Interview with Scott Fitzgerald Gray
+ Shadomain Staff 
+ March 20, 2024 
+ 13 minutes read 
+ NOTE: the opinions expressed in interviews are those of the guests, not necessarily those of shadomain.com .
+Today we talk with noted RPG writer Scott Fitzgerald Gray. Let’s get right to it!
+ How did you get started in TTRPGs? Do you remember the first game you played? 
+I started with D&D, way back in the 1st-edition days of the early ‘80s. But the first ever game I actually played was a version of D&D that technically didn’t really exist. 
+My high school friends and I used to hang out and talk Star Wars, and read comics, and play board games and a selection of the Avalon Hill war games in our tiny western Canadian town of 2,000 people. I remember that I’d seen the Holmes blue box edition of D&D on store shelves at some point, and I’d read the back cover copy. But I couldn’t quite figure out what it was meant to be about, so I never dug into it farther. Then one of those war-game-and-comic-and-Star Wars friends (Kevin) moved down to Vancouver for while. And while there, he started playing Dungeons & Dragons.
+At one point, another friend (Dave) and I visited Kevin in Vancouver, and he was trying to tell us about D&D, but D&D can be hard to explain to someone who has no context for what a roleplaying game even is. So at some point, Kevin just said, “Here, I’ll show you.” That was my first game of D&D — except Kevin didn’t have any of his books with him at the time, so the game we played was just the rules as he remembered them, with minimalist characters, and roughly paraphrased spells and magic, and homemade paper chits instead of dice. 
+I remember as we were playing that ad hoc homebrew-in-the-moment setup, Kevin described our characters approaching a cave entrance by moonlight, and recalling the rumors we’d heard of a dragon dwelling within. And I realized in that moment that I was feeling something I had never felt before, and that I was going to chase that feeling again for the rest of my life.
+The first version of D&D I bought was the Holmes blue box, shortly after that first game. But even as I was poring over those rules, Dave noticed someone in our English class (Mitch, soon to become another friend) who had a copy of the AD&D Player’s Handbook . So AD&D became the system where I first found my place in the game, and which set up my lifelong love for TTRPGs.
+ What was the inspiration to create your RPG game system, CORE20? 
+The inspiration for CORE20 came about directly as a result of D&D being my first RPG, and Traveller being my second RPG. Because falling in love with D&D irrevocably made me a gamer, and then learning and playing Traveller about a year after my first foray into D&D got me thinking about game design. D&D famously is a game built around classes and levels. Traveller famously doesn’t have classes or levels, but rather a more freeform approach to character building and a more subdued approach to character advancement, wherein you first decide what you want to be good at, and then you later get incrementally better at the things you’re good at through experience and practice.
+I loved the feel of D&D, and the broad strokes of the fantasy storytelling the game let you engage in. But I loved the way Traveller felt a little bit more realistic, and the way it allowed one to create characters more consistently grounded in the world of the story than D&D sometimes did. So way back in 1982, I thought to myself, “Wouldn’t it be great if someone made a version of D&D that had character building more like Traveller?” And I waited patiently for someone else to make that game for 28 years before deciding I might as well just do it myself.
+CORE20 started out as house rules for 3.5e D&D, stripping down the class structure of the game to its mechanical core (hence the name of the alternative system), and I started running it for my home game. It was a fun experiment, and the more I worked with it, the more I liked what it was doing. So I spent even more time expanding the system beyond just house rules and into a full ruleset that did even more of the things I had always wanted D&D to do. The current version of the game — the v1.0 public playtest rules [ https://core20rpg.wordpress.com/blog/the-core20-playtest/ ] — is actually version 7 of the rules that I and other folks have been playing for over 10 years now, counting from the initial v1 house rules that started everything off.
+ Which came first: writing fiction or RPG games/adventures? 
+Definitely fiction, just because I spent much of my early life in a world in which RPGs didn’t exist. It took me a very, very long time to get as good at fiction writing as I wanted to be, though, so I’ve never been particularly prolific in that area. Writing adventures was something I started doing within the first couple of years of playing D&D, and like many other players and GMs, I figured out pretty quickly that writing something for yourself and your group is a whole lot easier than writing something intended for other people. And as do many writers who take on both fiction and adventure writing, I figured out that even as difficult as writing good fiction is, writing adventures for publication can be even harder. Because when writing adventures, you’re always trying to find a delicate balance between telling enough of a story to make it compelling, but leaving enough of the story out that other people can make it their own and finish telling it for you.
+In recent years, I’ve tried as much as possible to divide my time between my own RPG work and my own fiction work (through my personal creative space, Insane Angel Studios) and working on RPGs and fiction for other people. But I get extremely busy sometimes working for other people, and my own fiction is unfortunately the first thing that falls by the wayside.
+ What was your first RPG writing job? 
+My first RPG design job was for Wizards of the Coast — the 3e Eberron book Secrets of Sarlona . I’d been freelance editing for Wizards for about two years by that point, and badgering the appropriate people constantly about design opportunities. Like all of my early work for Wizards, the best part of that book was the opportunity to work with and learn from other people (specifically for Secrets of Sarlona , Keith Baker and Chris Sims). RPG writing is an intensely collaborative medium, probably more so than any other creative form involving words. Being able to watch other people’s creative processes as a means of helping to help shape and improve your own process is a pretty amazing experience.
+ You’ve done a lot of work as an editor for RPGs. What’s something writers and readers might not know about the editing process? 
+There are honestly a lot of things about RPG editing that folks would be surprised by, at least until they’ve been part of that process of working on a book. At the top of that list is the idea that RPG editing is actually three levels of editing all tied tightly together — narrative editing, rules editing, and prose editing. All RPG books work on three different levels as narrative, rules, and prose, whether GM-focused adventures, player-focused character-option books, or hybrid books (including many campaign settings) that focus on both GMs and other players. And the tools and tactics that work for one type of editing often don’t work at all for the other types of editing. 
+Mechanics in RPGs need a specific amount of precision and clarity, not just within a single book but in terms of how that book fits in with the game as a whole. Narrative within a book needs attention to flow and pacing more than attention to words. Sometimes that flow and pacing is the straightforward story of what happens in an adventure, but sometimes it’s the more subtle setup of a class or a subclass or a magic item, and the story that plays out in a reader’s mind as the in-game expression of those mechanical elements unfolds. Prose editing requires attention to the emotional language of the game and how a book can make the game feel real, so that a player reading an RPG doesn’t just feel like a player reading rules — they feel on some level like a character in the world that the game creates.
+In addition to RPG work, I’m an editor and story editor for fiction, and I spent a number of years working in film and doing script editing and development. I spent a number of years working in and around print publishing and journalism before that. And I can say categorically that even as difficult as editing and story editing for fiction, film, and journalism is, RPG editing is more difficult by far — and more gratifying because of that.
+ You recently collaborated on Forge of Foes with Mike Shea and Teos Abadia. What’s it like writing in that sort of collaborative partnership? 
+It’s an amazing experience, and one that really highlights for me how good the process of creating an RPG book can be. Mike, Teos, and I met when we were asked to work on Vault of the Dracolich for Wizards of the Coast, an adventure from the D&D Next playtest days between 4th edition and D&D 5e. I’d been freelancing for Wizards for 9 years at that point, and one of things lots of folks don’t know about RPG books produced by bigger companies is that writing, rules development, and editing happen as separate stages. 
+Usually, if I’m editing a project for a bigger company, I don’t get to work directly with the writer or developer, but instead with the project lead or someone else in a coordinator’s role. By contrast, Vault of the Dracolich was concepted by all three of us (based on an initial design brief from Wizards), written by Mike, developed by Teos, and edited by me — and it was the first (and pretty much only) time I got to work directly with a designer and developer throughout the entire process.
+ Forge of Foes was very much the same kind of setup, with the three of us working together to talk through what the book was going to be, toss ideas around, and review each other’s sections before I then did a final edit pass on everything. It’s still very rare that the design process on an RPG book shakes out that way, so when I get a chance to be part of that kind of project, I jump on it.
+ What gets you excited for the future of TTRPGs? 
+I’m honestly excited by just about everything going on in the hobby these days. I’m excited by the number of people playing and creating RPGs. I’m excited that the group of people playing and creating RPGs gets more diverse every day, and equally excited about how the hobby and the industry gets ever richer because of that. I’m excited by the incredible scope of RPGs these days, both in terms of the number of different games out there and the ways that all of those games have their own take on how to collaboratively craft story around a table (physical or otherwise). I’m excited by how interest in TTRPGs has crossed over into mainstream culture, and how many people are hearing about RPGs as a fun, challenging, social-get-together pastime, rather than having RPGs filtered through a sense that this hobby is a niche, nerdy thing that “regular people” don’t get into. 
+I’m excited in particular about how fantasy RPGs continue to maintain a strong presence within the hobby, as character-focused heroic fantasy is my primary gaming interest. It’s awesome to see that the potential for telling new and exciting fantasy stories through games doesn’t look like it’s going to dry up anytime soon. 
+ What game and fiction projects do you have coming up that you can tell us about? 
+I have relatively few things coming up that I can tell folks about, but many more things that I can’t talk about (yet). A thing going on right now that can be discussed is that I’m editing a new project for Mike Shea called City of Arches . This is an awesome campaign and adventure setting book that Mike has been releasing section by section to people on his Patreon, and which he’s talked about on his podcasts, and it’s great to be working with him again.
+ What else haven’t we asked about that readers would like to know? 
+Of potential interest to some folks, I’m trying to get to more conventions in future, which has always been something I’ve struggled to do. (Traveling to Cons from the little corner of Western Canada where I live can be a bit tricky sometimes.) As of right now, I’m going to be a guest at Gamehole Con [ https://www.gameholecon.com/guests ] in October this year, just generally hanging out and excited to meet more folks who play the games I work on.
+ Where can people find your work? 
+I’m on all the usual social media places (Twittex, Mastodon dice.camp, and Bluesky) as @scottfgray. I have a general fantasy RPG blog and mailing list at https://missivesfrommooncastle.blogspot.com , a CORE20 design and development blog at https://core20rpg.com , and a website that talks about what else I get up to at https://insaneangel.com .
+ Thanks, Scott! 
+ If you’d like to be interviewed at Shadomain, fill out this simple form and we’ll publish your answers on an upcoming Wednesday: https://shadomain.com/interview/ 
+If you’d like customized questions about what you do, just email in ** @ ******* in.com 
+ About the Author 
+ Shadomain Staff 
+ Administrator 
+ View All Posts 
+Post navigation
+ Previous: Meta Points in RPGs 
+ Next: Character Building: Backstory and Emergent Discovery 
+ Related News 
+ Players Input to the World in a TTRPG? 
+ Shadomain Staff 
+ August 12, 2026 
+ 0 
+ Tales From the Tavern Q&A with Keith Ammann 
+ Shadomain Staff 
+ May 12, 2026 
+ Tales From the Tavern Q & A with Jay Sojdelius from The Yellow Hand, plus upcoming game conventions 
+ Shadomain Staff 
+ April 21, 2026 
+ Visit the Shadomain Store for Books, Games, and Cool Merch! 
+ Campaign Diaries 
+ From the Convention Floor 
+ GM Tips 
+ Post O' the Week 
+ read-through 
+ review 
+ RPG News 
+ RPG Tips 
+ Tales from the Tavern 
+ Uncategorized 
+ What We Do 
+ You may have missed 
+ Talking About TRPG Actual Plays 
+ Shadomain Staff 
+ September 2, 2026 
+ 0 
+ Talking Combining Fantasy with Brindlewood Bay with Jason Cordova 
+ Shadomain Staff 
+ August 26, 2026 
+ 0 
+ What’s your favorite memory from your earliest days playing role-playing games? 
+ Shadomain Staff 
+ August 19, 2026 
+ 0 
+ Players Input to the World in a TTRPG? 
+ Shadomain Staff 
+ August 12, 2026 
+ 0 
+ Recent Posts 
+ Talking About TRPG Actual Plays 
+ Talking Combining Fantasy with Brindlewood Bay with Jason Cordova 
+ What’s your favorite memory from your earliest days playing role-playing games? 
+ Players Input to the World in a TTRPG? 
+ One Shots inside a Campaign? 
+ Tags 
+ backerkit 
+ Blades in the Dark 
+ Call of Cthulhu 
+ campaign 
+ charity 
+ Content Creation 
+ Convention 
+ conventions 
+ cookies 
+ crowdfunding 
+ Cypher System 
+ Daggerheart 
+ design 
+ dice 
+ Dragonbane 
+ dungeon master 
+ Dungeons and Dragons 
+ FLGS 
+ Game Master 
+ Games 
+ Guest Author 
+ Handouts 
+ Interview 
+ kickstarter 
+ kids 
+ layout 
+ Merch 
+ News 
+ non-profit 
+ One Shot 
+ pathfinder 
+ PAX East 
+ player 
+ Podcasting 
+ read through 
+ Review 
+ RPG 
+ Safety 
+ Safety Tools 
+ Shadomain Show 
+ Streaming 
+ Tales from the Tavern 
+ tales of the valiant 
+ TTRPG 
+ Video Games 
+ Categories 
+ Campaign Diaries 
+ From the Convention Floor 
+ GM Tips 
+ Post O' the Week 
+ read-through 
+ review 
+ RPG News 
+ RPG Tips 
+ Tales from the Tavern 
+ Uncategorized 
+ What We Do 
+email us at sh ********** @ *** il.com 
+ Copyright ©2026 Shadomain, llc - All rights reserved. | 
+ MoreNews by AF themes.

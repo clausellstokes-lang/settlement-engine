@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i1198-1211",
+ "lines": 88,
+ "firstTs": "2026-09-07T07:02:59.818Z",
+ "lastTs": "2026-09-07T07:09:13.883Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 23,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "https://www.dndbeyond.com/sources/dnd/br-2024/the-basics",
+  "https://web.archive.org/web/20201112024903id_/http://www.wizards.com/dnd/files/DM_Experience_2011.pdf",
+  "https://toolsandtaverns.com/guides/settlement-guide"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All quotes confirmed against raw sources. Now writing the checkpoint file.",
+ "run": "wf_43d098bf-eff",
+ "agent": "ab166384609554aec",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_43d098bf-eff/agent-ab166384609554aec.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i1198-1211.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,65 @@
+
+# W-C5 CAUSE-LIFECYCLE SOAK (deterministic; cohort=4000; RESOLUTION_HOLD 4wk)
+
+## A. OUTCOME DISTRIBUTION BY TRAIT PLANE (climate held at law_order 55, alt cause present)
+   The character-derived gradient: conscience reforms, appetite re-causes, habit historicizes.
+
+   plane              reform     re-cause   historicize
+   principled-good     52.4%       8.7%      38.9%
+   dutiful-lawful      37.4%      11.5%      51.1%
+   steady-neutral      17.5%      16.8%      65.7%
+   greedy-corrupt      10.3%      52.5%      37.2%
+   ruthless-dark       10.6%      53.6%      35.9%
+
+   READING: good planes lean REFORM, corrupt planes lean RE-CAUSE, steady/neutral leans HISTORICIZE.
+
+## B. REFORM CLIMATE GRADIENT (a moderate plane across rotten→clean climates)
+   Same bearer (dutiful-lawful); only the settlement climate changes.
+
+   climate                       reformClimate   reform     historicize
+   captured + evil patron         0.000         18.9%      65.5%
+   low order, neutral             0.380         33.4%      54.3%
+   moderate                       0.530         37.4%      51.1%
+   high order                     0.710         42.0%      46.9%
+   devout-good purge              0.910         46.4%      43.5%
+
+   READING: rotten cities rarely reform; a high-order, devout-good climate invites the purge arc.
+
+## C. RE-CAUSE COHERENCE AUDIT — every adopted cause must be REAL in-state at adoption
+   re-cause events: 5476   adopted causes: siege-scarred
+   INVENTED (not real in-state at adoption): 0   ← must be 0
+
+   READING: re-cause draws ONLY from presentCauseClasses — the new cause is always a live condition.
+
+## D. TERMINAL FREQUENCIES
+   EXPOSURE (covert→revealed): stamps exposed-public = true (quiet lifecycle stops, public arc takes over)
+
+   RE-ADJUDICATION (sustaining institution destroyed) — resolve vs re-catch by plane:
+   plane              resolve    re-catch
+   principled-good     91.2%       8.8%
+   dutiful-lawful      88.2%      11.8%
+   steady-neutral      84.6%      15.4%
+   greedy-corrupt      48.2%      51.8%
+   ruthless-dark       47.8%      52.2%
+
+   READING: habit never survives DEMOLISHED infrastructure intact — the dark reach for a new patron,
+            the principled let it die. The exposure terminal supersedes the quiet lifecycle.
+
+## E. AGE-BAND DISTRIBUTION of surviving (historicized) corruption over origin age
+   The temporal register the display derives from originTick vs the current tick.
+
+   origin age (wk)   band            historicize register
+        1            this-week       fresh / recent (lean-years FORBIDDEN)
+        3            this-month      fresh / recent (lean-years FORBIDDEN)
+        8            this-season     fresh / recent (lean-years FORBIDDEN)
+       13            this-season     fresh / recent (lean-years FORBIDDEN)
+       14            this-year       fresh / recent (lean-years FORBIDDEN)
+       26            this-year       fresh / recent (lean-years FORBIDDEN)
+       49            this-year       fresh / recent (lean-years FORBIDDEN)
+       52            this-year       fresh / recent (lean-years FORBIDDEN)
+       53            years-past      "the lean years" (permitted)
+      200            years-past      "the lean years" (permitted)
+
+   READING: historicizing "lean years" language is impossible below the years threshold (>52wk) —
+            a freshly-resolved cause reads fresh; only years-past corruption reads as history.
+

@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 12,
+ "claims": [
+  {
+   "index": 829,
+   "feature": "consequence on a household",
+   "claim": "Wolfe argues a long work must show its characters earning their living or it acquires a creeping sense of unreality.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden' (2007), Gwern.net",
+   "url": "https://gwern.net/doc/culture/2007-wolfe",
+   "quote": "a creeping sense of unreality",
+   "page": "pg212"
+  },
+  {
+   "index": 830,
+   "feature": "consequence on a household",
+   "claim": "Wolfe claims almost everyone is interesting while at work, even when the work itself is not.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden' (2007), Gwern.net",
+   "url": "https://gwern.net/doc/culture/2007-wolfe",
+   "quote": "virtually everyone is interesting at work",
+   "page": "pg212"
+  },
+  {
+   "index": 836,
+   "feature": "other: length budget",
+   "claim": "Wolfe gives half a million words as the working size of the multivolume work he describes.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden' (2007), Gwern.net",
+   "url": "https://gwern.net/doc/culture/2007-wolfe",
+   "quote": "half a million words",
+   "page": "pg210"
+  },
+  {
+   "index": 837,
+   "feature": "other: setting as promise",
+   "claim": "Wolfe reports telling a beginner to post a sign reading I AM GOING TO TELL YOU SOMETHING COOL facing the desk.",
+   "source": "Gene Wolfe, 'Nor the Summers as Golden' (2007), Gwern.net",
+   "url": "https://gwern.net/doc/culture/2007-wolfe",
+   "quote": "I AM GOING TO TELL YOU SOMETHING COOL",
+   "page": "pg212"
+  },
+  {
+   "index": 840,
+   "feature": "other: manner versus matter",
+   "claim": "Wolfe's closing advice separates manner, to be learned from the masters, from matter, which must be the writer's own.",
+   "source": "Gene Wolfe, 'Elfland' (1987), Gwern.net",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1987-wolfe.pdf",
+   "quote": "For the manner, study the masters; for the matter",
+   "page": "final column"
+  },
+  {
+   "index": 841,
+   "feature": "metaphor discipline",
+   "claim": "Wolfe closes the piece with a figure making ink out of smoke-blackened blood that must be the writer's own.",
+   "source": "Gene Wolfe, 'Elfland' (1987), Gwern.net",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1987-wolfe.pdf",
+   "quote": "Blood blacked with smoke's a good ink",
+   "page": "final column"
+  },
+  {
+   "index": 842,
+   "feature": "other: standard of measure",
+   "claim": "Wolfe tells the aspiring fantasist he will be measured against Homer.",
+   "source": "Gene Wolfe, 'Elfland' (1987), Gwern.net",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1987-wolfe.pdf",
+   "quote": "Work hard, and recollect you'll be measured against Homer",
+   "page": "final column"
+  },
+  {
+   "index": 846,
+   "feature": "other: composition method",
+   "claim": "Wolfe said he writes sequentially and then rewrites repeatedly rather than composing out of order.",
+   "source": "Gene Wolfe, live chat-channel Q&A transcript (1996)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+   "quote": "I write sequentially, and then go back and rewrite",
+   "page": "reply to Robert"
+  },
+  {
+   "index": 847,
+   "feature": "other: influences",
+   "claim": "Wolfe confirmed Nabokov was somewhat an influence, adding that he came to him late.",
+   "source": "Gene Wolfe, live chat-channel Q&A transcript (1996)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+   "quote": "I came to Nabokov somewhat late",
+   "page": "reply to Jude"
+  },
+  {
+   "index": 848,
+   "feature": "other: orality",
+   "claim": "Asked what is lost when people take all their stories from television, Wolfe answered that the personal connection with story and myth is lost.",
+   "source": "Gene Wolfe, live chat-channel Q&A transcript (1996)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2015-genewolfe-sf-chatchannel-interview.txt",
+   "quote": "Any personal connection with story, with myth, is lost",
+   "page": "reply to davelant"
+  },
+  {
+   "index": 850,
+   "feature": "dialogue register",
+   "claim": "Wolfe called Neil Gaiman the great guru of dialogue.",
+   "source": "Gene Wolfe interviewed by David Wilbanks for Hellnotes (2005)",
+   "url": "https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html",
+   "quote": "the great guru of dialog",
+   "page": "answer on favourite horror writers"
+  },
+  {
+   "index": 851,
+   "feature": "other: genre self-description",
+   "claim": "Wolfe classified his own Latro (Soldier) books as historical fantasy.",
+   "source": "Gene Wolfe interviewed by David Wilbanks for Hellnotes (2005)",
+   "url": "https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html",
+   "quote": "I think I'd call the Soldier",
+   "page": "answer on current work"
+  },
+  {
+   "index": 852,
+   "feature": "edition and house style",
+   "claim": "Offering further titles, Wolfe named The Elements of Style alongside an atlas.",
+   "source": "Gene Wolfe interviewed by David Wilbanks for Hellnotes (2005)",
+   "url": "https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html",
+   "quote": "THE ELEMENTS OF STYLE",
+   "page": "answer on five books"
+  },
+  {
+   "index": 853,
+   "feature": "other: work habits",
+   "claim": "Wolfe described eight thirty to eleven as his typical daily writing stretch in 2005.",
+   "source": "Gene Wolfe interviewed by David Wilbanks for Hellnotes (2005)",
+   "url": "https://davoortwilbo.blogspot.com/2015/07/2005-interview-i-did-with-gene-wolfe.html",
+   "quote": "Eight thirty to eleven is pretty typical",
+   "page": "answer on an average work day"
+  },
+  {
+   "index": 859,
+   "feature": "other: externally checkable detail",
+   "claim": "Aramini says Wolfe's planted clues rest on objective external fact rather than on subjective information.",
+   "source": "Marc Aramini, SFBC interview, September 2020",
+   "url": "https://www.middletownlibrary.org/wp-content/uploads/2020/09/Marc-Aramini-Interview.pdf",
+   "quote": "not subjective information but objective fact",
+   "page": "answer on surprises in his research"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 829,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fall prey to a creeping sense of unreality",
+   "note": "Raw gwern HTML read. pg212, paragraph beginning 'And how do his friends and foes earn theirs?': Kafka's salesman need not be seen selling because the story is short, 'In a longer work we must, if the work is not to fall prey to...'. Quote exact; both limbs (must show characters earning a living; else unreality) supported."
+  },
+  {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "virtually everyone is interesting at work",
+   "note": "pg212, paragraph beginning 'Neglecting this aspect of our characters'. Full sentence contrasts being interesting in bed with being interesting at work, and carries the 'even when the work itself is not' limb verbatim. Quote exact."
+  },
+  {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "told in half a million words or so",
+   "note": "pg210, paragraph beginning 'Now we have reached the hard part'. Wolfe: keep in mind the overshadowing story is to be told in that many words; the next paragraph repeats 'half a million words will scarcely suffice'. Working size of the multivolume work confirmed."
+  },
+  {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I AM GOING TO TELL YOU SOMETHING COOL",
+   "note": "pg212, setting paragraph: Wolfe reports once telling a beginner to put up a little sign facing his desk with those words, adding a multi-book work deserves a bigger sign. All limbs (a beginner, sign facing the desk, wording) exact."
+  },
+  {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "For the manner, study the masters; for the matter",
+   "note": "Gwern PDF is a scan; the default text layer is column-scrambled, so extracted with pdftotext -raw -f 3 -l 3, which gives clean prose. Final paragraph continues 'touch none but your own.' Both limbs (manner from the masters, matter the writer's own) exact."
+  },
+  {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Blood blacked with smoke's a good ink",
+   "note": "Same raw page-3 extraction; sentence completes 'but the blood must be yours, mind.' It is the penultimate sentence of the closing paragraph (the essay's last sentence is the Homer line at index 842), so 'closes the piece' means the closing valediction. Ink-of-smoke-blackened-blood and must-be-the-writer's-own both exact."
+  },
+  {
+   "index": 842,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Work hard, and recollect you'll be measured against Homer",
+   "note": "Same raw page-3 extraction; the essay's final sentence. Addressee is a would-be writer: the closing valediction reads 'You can point your feather with that sword'. PDF is 'The Ethos of Elfland', Twilight Zone Magazine, December 1987, pg32-35."
+  },
+  {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I write sequentially, and then go back and rewrite",
+   "note": "Raw .txt transcript. Wolfe's labelled reply 'Sequentially:' answers Robert's question about proceeding sequentially versus jumping around; the answer continues 'and then go back and rewrite, and so on...', supporting the 'rewrites repeatedly' and 'rather than out of order' limbs."
+  },
+  {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I came to Nabokov somewhat late",
+   "note": "Raw .txt transcript. Wolfe's labelled reply 'Nabokov:' to Jude's question about Nabokov as an influence reads 'Yes, somewhat.' then the quote, then 'but the basic answer is yes.' Both limbs exact."
+  },
+  {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any personal connection with story, with myth, is lost",
+   "note": "Raw .txt transcript. davelant asked what is lost in life when people get all their stories 'from TV and such'; Wolfe's labelled reply 'Stories:' is the quote. The claim's 'television' is the page's 'TV'."
+  },
+  {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the great guru of dialog",
+   "note": "Raw blog HTML stripped to text. Answer to 'favorite horror or dark fantasy writers': 'Neil Gaiman, of course. He's the master of the quirky idea and the...'. Quote exact; the claim's 'dialogue' is the page's 'dialog'."
+  },
+  {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think I'd call the Soldier books historical fantasy",
+   "note": "Answer on current work: Wolfe is writing SOLDIER OF SIDON, 'a third novel about Latro', then the quote. Latro-Soldier identification and the historical-fantasy label both on the page."
+  },
+  {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Or THE ELEMENTS OF STYLE?",
+   "note": "Answer on five books: after naming Bible, Rawlinson's Herodotus, Pope's Homer and a dictionary, Wolfe offers to furnish other titles and asks 'What about THE NATIONAL GEOGRAPHIC ATLAS OF THE WORLD?' then the quote. Atlas limb and further-titles limb both supported."
+  },
+  {
+   "index": 853,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eight thirty to eleven is pretty typical",
+   "note": "Answer on an average work day: 'After that I write, usually until eleven.' then the quote. The post is headed '2005 interview I did with Gene Wolfe for Hellnotes', supporting the 2005 limb."
+  },
+  {
+   "index": 859,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not subjective information but objective fact",
+   "note": "URL CORRECTION: the cited host middletownlibrary.org resets the TLS handshake on every route (browser UA, http, no-www, python, WebFetch) and has no Wayback capture. The real document is the same SFBC September 2020 interview at middletownpubliclib.org/wp-content/uploads/2020/09/Discussion-about-Gene-Wolfe.pdf, fetched as a PDF binary and extracted with pdftotext. In the answer to John Grayshaw's 'Was there anything in your research of Wolfe that surprised you?', on 'The Changeling': external verification and wordplay is characteristic of Wolfe, 'as it is...'. Quote exact; both limbs supported."
+  }
+ ]
+}

@@ -1,0 +1,3083 @@
+ZENOPUS ARCHIVES: Part 46: "Zenopus Built a Tower" 
+
+ZENOPUS ARCHIVES
+
+ Exploring the Underworld of Holmes Basic 
+
+ This is the blog. Click
+ here to go to the Zenopus Archives website. 
+
+ Note: Many older posts on this blog are missing images, but can be viewed at the corresponding page in the Internet Archive 
+
+ FEATURED POST
+
+ The Forgotten Smugglers' Cave: Index of Posts 
+
+ An index of posts describing the Forgotten Smugglers' Cave, an adventure for Holmes Basic characters levels 2-4. ...
+
+ Friday, February 6, 2015 
+
+Part 46: "Zenopus Built a Tower"
+
+ Part 46 of a comparison of
+Holmes' manuscript with the published Basic Set rulebook. Turn to page 41 of
+your 'Blue Book' (page 40 for the 1st edition) and follow along... 
+
+ SAMPLE DUNGEON 
+
+ This is my favorite part of the rulebook. The introduction is highly evocative, reading almost like the weird fiction that Holmes was a fan of. As he wrote a few years later in an article for Psychology Today, “my
+players have wandered through bits of Barsoom and Hyperborea, through worlds
+created by Edgar Rice Burroughs, Robert E. Howard, H. Rider Haggard, A.
+Merritt, H.P. Lovecraft, and Clark Ashton Smith” (from "Confessions of a Dungeon Master")
+
+ Like the Example of Play, the Sample Dungeon is modeled on a portion of OD&D, Vol 3 (in this case, the 'Sample Level' on pages 4-5), but again Holmes creates something new in his own voice. The OD&D Sample Level is just a collection of examples whereas Holmes presents his dungeon ideas as part of a coherent adventure, almost a mini-setting. 
+
+ Back in 2006, Gary Gygax wrote, in response to my query, that " J. Eric Holmes did design the sample dungeon in the first D&D Basic Set". This is now confirmed by the manuscript, which includes the entire dungeon as we know it, with only minor changes by TSR in the published version. 
+
+ In the manuscript, the introduction to the sample dungeon takes up exactly two pages (118 & 119), and has the same title as the published version. In fact there are only two significant changes to the introduction, both in the last paragraph. But I'll go through it line-by-line and note some possible inspirations for the story. 
+
+ Background — 100 years ago the sorcerer Zenopus a tower on the low hills overlooking Portown. The tower was close to the sea cliff west of the town and, appropriately, next door to the graveyard. 
+
+ As I've written before, the sorcerer's name is very close to Xenopus, which means “strange 
+foot” in Greek, but is also the name for a genus of African clawed 
+frogs, which are social, aquatic, and fish-eating. The use of the name 
+was presumably an in-joke as Dr. Holmes was a neurophysiologist and Xenopus laevis 
+ is commonly used in biology research. Holmes later 
+used frog-men in his novel Maze of Peril. 
+
+ Going by OD&D, the title "sorcerer" would indicate that Zenopus is a 9th level M-U, but he is also referred to as a magician (level 7) or a wizard (level 11 or above), although only the latter is capitalized, at the end of the fifth paragraph ("Wizard's tower"). See here for more. 
+
+ The dedication in Holmes' 1981 book (Fantasy Role-playing Games) is made to the adventurers in his games, including those "who plumbed the depths of the Wizard's 
+Tower", which is possibly this same adventure. 
+
+ Chris Holmes mentioned to me that " You may find the wizard Zenopus in a [Clark Ashton] Smith story". Smith's work (of which I've only read a select portion - so far), is replete with wizards, but one possible candidate is the wizard Malygris, who has a tower on a hill in a city in the tales The Last Incantation and The Death of Malygris . Another is the Hyperborean wizard Eibon, who has a tower by the sea in The Door to Saturn . Other doomed wizards are found in the The Double Shadow and The Coming of the White Worm . 
+ The location of sorcerer's tower in the town is also reminiscent of Howard's Conan story The 
+Tower of the Elephant (1933), as Paleologos suggested in here .
+
+ Rumor has it that the magician made extensive cellars and tunnels underneath the tower. 
+
+ In Lovecraft's The Strange Case of Charles Dexter Ward (1927), the antagonist Curwen, who is occasionally described as a wizard, has a laboratory in a farm outside of town, and several of his opponents become "convinced that a great series of tunnels 
+ and catacombs ... underlay the farm". 
+
+ The town is located on the ruins of a much older city of doubtful history and Zenopus was said to excavate in his cellars in search of ancient treasures. 
+
+ The older city is also described as "pre-human", making it reminiscent of the ancient non-human civilizations described in Lovecraft's The Nameless City (1921)* and At the Mountains 
+of Madness (1931). Holmes furthered this concept in The Maze of Peril, 
+describing a megadungeon Underworld that stretches to the center of the 
+earth, built by an unknown prehistoric race. 
+
+ *Thanks to Falconer at OD&D74 for this suggestion. 
+
+ Fifty years ago, on a cold wintry night, the wizard's tower was suddenly engulfed in green flame. 
+
+ A monstrous green flame features prominently in Lovecraft's The Festival (1925), and the town in that story (Kingsport, based on real-life Marblehead) is reminiscent of Portown. See here for further discussion. 
+
+ Several of his human servants escaped the holocaust, saying their master had been destroyed by some powerful force he had unleashed in the depths of the tower. 
+
+ The destructive force unleashed in the depths recalls the Balrog of Moria, which was disturbed by the Dwarves deep delving. As Gloin tells the Council at Rivendell, "Too deep we delved there, and woke the nameless fear". 
+
+ Needless to say the tower stood vacant for a while after this, but then the neighbors and the night watchmen complained that ghostly blue lights appeared in the windows at night, that ghastly screams could be heard emanating from the tower at all hours, and goblin figures could be seen dancing on the tower roof in the moonlight. Finally the authorities had a catapult rolled through the streets of the town and the tower was battered to rubble. This stopped the hauntings but the townsfolk continue to shun the ruins. 
+
+ In the Strange Case of Charles Dexter Ward , the neighbors also see and hear strange lights and noises emanating from the Curwen farm, which has a "cryptical stone edifice with high narrow windows". 
+
+ The entrance to the old dungeons can be easily located as a flight of broad stone steps leading down into darkness, but the few adventurous souls who have descended into crypts below the ruin have either reported only empty stone corridors or have failed to return at all. 
+
+ Other magic-users have moved into the town but the site of the old tower remains abandoned. 
+
+ One of these other magic-users may be thaumaturgist found in the dungeon, whose tower above Room S is among the streets of Portown. 
+
+ Whispered tales are told of fabulous treasure and unspeakable monsters in the underground passages below the hilltop, and the story tellers are always careful to point out that the reputed dungeons lie in close proximity to the foundations of the older, prehuman city, to the graveyard, and to the sea. 
+
+ Delta found a passage from Lovecraft's Pickman's Model (1927) that ends in a parallel fashion: " Look here, do you know the whole North End once had a set of tunnels 
+that kept certain people in touch with each other's houses, and the 
+burying-ground, and the sea?" 
+
+ Portown is a small but busy city linking the caravan routes from the south to the merchant ships that dare the pirate-infested waters of the Northern Sea. Humans and non-humans from all over the globe meet here. 
+
+ Here we get a thumbnail sketch of a campaign setting. The mention of pirates is possibly a clue to the pirates hiding in the dungeon - this background material is meant to be read to the players, as indicated below. 
+
+ "Non-humans" appears to be Holmes' term for "demi-humans" (a term that would first appear in the Player's Handbook) but may also include other humanoids. The town in The Maze of Peril had a serpentman or two wandering around. 
+
+ At the Green Dragon Inn, the players of the game gather their characters for an assault on the fabulous passages beneath the ruined Wizard's tower. 
+
+ Holmes' Green Dragon Inn most likely comes from Tolkien rather than Greyhawk, as the one in Greyhawk hadn't been published at the time. Holmes also used the Green Dragon Inn in his Boinger & Zereth stories, including The Maze of Peril. See this post . 
+
+ The Dungeon Master should read the background material above to the assembled players and then let them decide how they will proceed. The
+ stairway from the surface leads twenty five feet straight down and ends
+ in the corridor marked START on the Dungeon Master's map. Because of the nature of some of the traps in the dungeon, it is highly recommended that no one attempt it alone. If only one player is taking his or her character into the dungeon, the Dungeon Master should recommend employing one or more assistants. These non-player characters can then be "rolled up" and hired out for a share of the treasure. 
+
+ In the published rulebook, the second sentence above was moved to the end of the paragraph, but not otherwise changed. This seems a good change as it places it right before the room descriptions. The published version also changes "one or more assistants" to "one or more men-at-arms". Holmes' included guidance on hiring NPCs earlier in the rulebook. 
+
+ (Some material in this post appeared earlier in "Holmes Basic easter eggs" on OD&D74). 
+
+ Continue on to Part 47: "The Occupants are Goblins" (Rooms A-E) 
+
+ or Go Back to Part 45: "Roll the Number and See What Happens!" 
+
+or Go Back to the Index: The Holmes Manuscript 
+
+Posted by
+ Zenopus Archives 
+
+at
+ 6:00 AM 
+
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+
+Labels:
+ Boinger and Zereth ,
+ Holmes Manuscript ,
+ ODnD ,
+ Sample Dungeon 
+
+ 23 comments:
+
+ bliss_infinte February 6, 2015 at 8:35 AM 
+ Good post and continued analysis. As you know this is one of my favorite dungeons and I enjoy learning more about it and Holmes as well.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Geoffrey McKinney February 6, 2015 at 8:58 AM 
+ Another good candidate for the CAS wizard is Maal Dweb (who is in "The Maze of the Enchanter" and in "The Flower-Women".
+ Reply Delete 
+ Replies 
+ Zenopus Archives February 9, 2015 at 10:51 AM 
+ Thanks, I will move those ahead in the reading list!
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous February 6, 2015 at 10:47 AM 
+ Am I the only one who thinks that "Zenopus Built a Tower" would make for a great Vacation Bible School song?
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Tony February 6, 2015 at 9:00 PM 
+ Excellent analysis as always, Zeno.
+
+ "Non-humans" appears to be Holmes' term for "demi-humans" (a term that would first appear in the Player's Handbook) but may also include other humanoids. The town in The Maze of Peril had a serpentman or two wandering around. 
+
+Holmes' character Bolgar the Bold used the term "unhuman" in the story "Trollshead" (THE DRAGON #31).
+
+ Maze of Peril mentions "a few serpentmen" at the Green Dragon Tavern. Silith the Serpent Woman was an important character in Holmes' ("The Adventure of the Lost City" parts I and II, ALARUMS & EXCURSIONS #s 17 and 19). Two lizard men work in Caladan: one who assists Misteera the Medium ("The Sorcerer's Jewel," DRAGON #46) and one standing guard for Grink, the gnomish trader ("In the Bag," DRAGON #58).
+
+ Reply Delete 
+ Replies 
+ Zenopus Archives February 9, 2015 at 10:51 AM 
+ Great list, Tony. There was also that centaur character in one chaper of Maze, and I recall a town guard with horns - suggesting less than human ancestry. Quite a melting pot.
+
+Speaking of Holmes' serpentmen, there's also his mention of the "Half-human, half-serpent Naga" in the Manuscript, which may be the same as his serpentmen, particularly Silith, who seems mostly human. This also makes me think that the Naga PC described in Confession of a DM may be one of these serpent woman rather than a typical D&D Naga.
+
+Several of the Clark Ashton Smith stories I've read recently have featured a nearly forgotten prehistoric serpentman civilization. That could be used for pre-human origins of the dungeons of Portown. Although you'd need to explain why there are some hanging out at the Green Dragon. : )
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Anonymous February 9, 2015 at 8:39 AM 
+ Here's one for the kiddos:
+
+Zenopus built a Tower
+A Tower In Portown
+Zenopus had a Tower
+Until it was knocked Down
+
+Zenopus had his Tower
+Where he could be real mean
+Until his big bad Tower
+Got burned up good and green
+
+Now there is no Tower
+Just rocks there in the town
+Zenopus has no Tower
+Because it was knocked down
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Zenopus Archives February 9, 2015 at 9:42 AM 
+ : )
+
+Perfect for D&D Summer Camp !
+
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Bobjester February 9, 2015 at 11:09 AM 
+ I could deal with a half-serpent character type than a 'half-naga', because I automatically assume that nagas are pretty powerful monsters. Allowing it as a PC (well, half of it anyway) seems to be a bit much. I could deal with lizardman characters, and even a variation on the Yuan-Ti monsters as PC types. 
+
+Not having read Maze of Peril, I can only guess what the guard with horns really was? A half-goat man? Half-demon/devil? (A 'tiefling'??? Oh my!) 
+
+Portown as a setting & Holmes as a rule set keeps opening my eyes wider every time I look closer at them. :)
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Raymond November 3, 2017 at 4:11 PM 
+ I think when this was published that Holmes may have played in Gary's Greyhawk campaign and could have used it for his D&D setting. When I look at a map of Middle-Earth, there really isn't a northern sea. In the various versions of the Greyhawk setting, there does seem to be a northern sea. Also, while the characters start at the Green Dragon Inn, it doesn't indicate directly where the characters go in order to find the dungeon. The text indicates caravan routes to the south and the northern sea to the north are connected. I also see that the pirate cove exits to the "sea," not a river (such as the one next to the City of Greyhawk). Even the coloring book which re-uses the same map indicates starting at the Green Dragon Inn and then riding horses for two or three days to get to the dungeon. Therefore, I think it makes sense to look for a place west of a city where the caravan routes meet the northern sea. It looks like that would be either Vlekstaad or Mosshold based on the routes listed on the http://ghmaps.net/onlinemap/onlinemap.html map and the fact that the sample dungeon text describes the dungeon as west of Portown and because the pirate cove exists to the west on the sample map. Does this make sense to you?
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Zenopus Archives November 6, 2017 at 9:50 PM 
+ I'm not sure if Greyhawk existed in its well-known form (as published in 1980) at the time that Holmes wrote up the Sample Dungeon text (prior to Feb 1977). Gygax's earlier maps looked different: Great Kingdom Map 
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Raymond November 11, 2017 at 11:21 PM 
+ I bought the Holmes book on gaming because of your website. Holmes is aware of the Tolkien connection obviously but I don't get the impression that his setting is Middle-Earth. So that leaves me with a Greyhawk with a sea to the north. Published Greyhawk was published in 1980 so did Gary move a sea into position for his players by 1977...did Holmes play loose with the setting...? It's hard to pin down without a witness for sure.
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Kadmon March 27, 2020 at 1:33 PM 
+ This was interesting! I've linked your work in my article about D&D books - https://alkony.enerla.net/english/the-nexus/rpg-nexus/dungeons-dragons-products-role-playing-games-resources
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Tony October 10, 2024 at 11:29 AM 
+ I am running a game of "Mazes & Minotaurs", which is Mythic Greek inspired OSR game (instead of based on Tolkien and the Middle Ages). The setting is "Kriti" (Crete) during a quasi-mythical version of the Late Bronze Age. As an homage (plus, I am lazy) I repurposed and repackaged "The Tower of Zenopus" to be more Greek-sounding as "The Tower of Xenopus", and tied it into the myth of the Labyrinth of the Minotaur. The stone tower was a fortification built by a Mycenaean warlord, Xenopus ("Strange Foot") which is still standing. It is built on top of the earlier ruins of a Minoan temple on a mountaintop (a "peak sanctuary") in central Crete. Like many Minoan peak sanctuaries it was also a sacred burial cave, which dovetails nicely with parts of the original "Tower of Zenopus". The tunnels of the "dungeon" would have been carved out of the soft limestone rock common to Crete and filled with bones. (Minoans practiced primary and secondary burial, where remains would first be stripped of flesh, then re-interred en masse in ossuaries like jars, small caskets, etc. with several sets of remains in one container). Floors are limestone, all walls have extensive Minoan murals (dolphins, bulls, female goddess figures of Rhea/Cybele, etc.). Most doors have been removed to fit the archaic burial cave theme. Also, metal for hinges was scarce in the Late Bronze Age.
+
+To adapt the map I flipped it over left-to-right but left it mostly unchanged. Above the initial entry stairs was a Mycenaean square stone tower fortification typical of the period (a ground floor and a roof accessed by a stairs). As the underground complex is on a mountain the underground river is the same. But the tunnel to the ocean is now instead a mystical passage to the Underworld. The pirates inside it are all changed to be "Telkines", mythical Greek "fish-children" (aka "Sons of Dagon" or off-brand Deep Ones). The goblins are changed to "Kobaloi". ("Kobalos" is linguistically related to "Kobold", which is itself linguistically related to "Goblin".) The ghouls become "Vrykolakes", a sorta-similar undead cannibal of Greek folklore. Giant rats and the Giant Spider are the same. Room S still has stairs up, these lead to another burial cave. The sorcerer inside is changed to be a Telkine water Elementalist with a Telkine guard.
+
+Room S now also has stairs down, these lead to the Labyrinth of the Minotaur. At the middle of the maze are the remains of the Minotaur, slain by Theseus (and with the sword he used still in its ribs). At the entrance to the Labyrinth a "clue" (ball of thread) is tied off. This is what Theseus used to navigate the Labyrinth. It becomes clear the Labyrinth is not a real maze; although the path twisted and turned there are no branching paths or dead ends. (This is the classical Cretan labyrinth diagram.) It becomes clear the thread does not somehow mark off branches to aid in navigation, it simply measures distance to the middle of the Labyrinth. This is because it was intended all along the Greek (Hellene) sacrifices would be forced to travel a single path inwards to the centre where the Minotaur would be waiting to kill them. There would be no side passages, no dead ends. They would simply travel the path and it turned back and forth, becoming disheartened and confused, then die. Theseus, as he knew how far he would go, was forewarned by the thread running out. Thus when nearing the centre of the Labyrinth he was ready for a fight, unlike all the other sacrificial victims.
+
+Thus, the classic "Tower of Zenopus" becomes the "Tower of Xenopus"!
+ Reply Delete 
+ Replies 
+ Zenopus Archives October 12, 2024 at 7:49 PM 
+ Wow, fantastic stuff! Thanks for sharing it. Sounds like a very fun adaptation to play in. Let us know how it goes.
+ Delete 
+ Replies 
+ Reply 
+
+ Zenopus Archives October 12, 2024 at 7:50 PM 
+ And if you are okay with it, I'd like to share your comment as a post on my blog. 
+ Delete 
+ Replies 
+ Reply 
+
+ Tony November 30, 2024 at 1:15 AM 
+ t would be my pleasure! There are a couple of monsters that do not need adapting: the giant spider and crab, and the skeletons. The players are very into the quest; they have passed up every chance of looting even though there are glints of gold and valuables mixed within the bones in the ossuary vessels, a couple chests of silver in the boats on the shore of the vast underground ocean (the Gods warned them to not proceed further in that direction as it leads to the underworld, and it was not yet their time). As another "Greek" touch the rotating statue is of Poseidon, and the talking mask looks like the "death mask" of Agamemnon. In the central circular room are stairs leading up (into come caves on the mountainside) and a trap door leading down into the labyrinth.
+
+The labyrinth is a classic "Cretan" one: circular with no branching paths with dead ends. One single path to the end. Clearly not the confusing maze they are expecting! The purpose of the labyrinth was to execute prisoners. So they wander the single path to the end where the Minotaur waited to end their lives. By that time they would be disoriented and demoralised, easy prey in the darkness. How Theseus prevailed was using a "clue", a ball of yarn. I could never figure out how that would help to navigate a maze unless it was really, really big! But if the path has no branches then a strand of twine can do one thing well: measure distance. Therefore Theseus would know exactly how far he'd gone and how close to the end. Instead of the Minotaur ambushing him as he stumbled along, confused, he would know to be armed and ready for a fight. A fight the Minotaur would not expect, the advantage would be his. In this case the PCs would follow the twine to the centre, there to face the Minotaur.
+ Delete 
+ Replies 
+ Reply 
+
+ Zenopus Archives December 1, 2024 at 9:06 AM 
+ Great! It's posted here now: Tower of Xenopus . And I'd be happy to update it with your last name or any link you'd like to add.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Raymond October 14, 2024 at 4:23 PM 
+ In case it's of interest to you, I recently found a page for a game with a minotaur maze set under the Knossos Palace Throne Room:
+
+https://greekmythcomix.com/labyrinth-knossos-playset/
+
+The Palace of Knossos has a map:
+
+https://www.google.com/search?sca_esv=21dedb47b9ba1444&sxsrf=ADLYWIJsFHajoQxVOwqyDa-AVLxYg8UPcw:1728945684495&q=Palace+of+Knossos&udm=2&fbs=AEQNm0Aa4sjWe7Rqy32pFwRj0UkWd8nbOJfsBGGB5IQQO6L3J5fCQuDw5vrzPt_cVO2GgWUj9lYp6rkuKNKs7T0vX7Q81Ek5YpPyUVFe3W7KrgIFN8WwPN-DAFe47tgME3LkQB416EY9iB6bjs2oCWxRfkP6N6Vm7VfOQsGak0-AIgGON6Bue0QKBnZ9WGUWJGCQrP5bsM5sLcFwFCKyud37JNX8f5fqmw&sa=X&ved=2ahUKEwj30vDK-I6JAxVYIjQIHTWvEgMQtKgLegQIDhAB&biw=1272&bih=908&dpr=1#vhid=O1NIgZO88wUSaM&vssid=mosaic
+
+Knossos is a Bronze Age archaeological site in Crete. Crete is supposed to be where the minotaur was.
+
+There is also a place that is labeled as a labyrinth on Crete but it is not under the Palace:
+
+https://maps.app.goo.gl/VWZKCLD7Zds1RRmX6
+
+Then there are some cool representations:
+https://www.researchgate.net/figure/A-Conimbriga-mosaic-representing-the-Labyrinth-of-Crete-with-the-Minotaur_fig4_295873913
+
+https://magisterrex.wordpress.com/wp-content/uploads/2012/02/amazeinglabyrinth1989dec.jpg
+
+https://cretelocals.com/wp-content/uploads/2023/08/Knossos_stater_with_labyrinth.jpg
+
+https://www.incrediblecrete.gr/en/place/the-labyrinth/
+
+https://www.reddit.com/r/ArtefactPorn/comments/wt284v/a_cretan_coin_67_bc_the_minotaurs_labyrinth_780_x/
+
+https://commons.wikimedia.org/wiki/File:Labyrinth_of_the_minotaur_%28%3F%29,_Crete_%281600%29.jpg
+
+https://asthekroeflies.wordpress.com/2018/07/30/crete-a-labyrinth-of-history-myth/
+
+https://cretelocals.com/crete-the-myth-of-the-minotaurs-labyrinth/
+
+https://walklabyrinth.blogspot.com/2014/03/the-minoan-labyrinth.html
+
+https://takemetogreece.com/wp-content/uploads/2024/04/mosaic-of-theseus-and-minotaur.jpg
+
+https://upload.wikimedia.org/wikipedia/en/d/dd/Amazing_Labyrinth_game_box.jpg
+
+and the Holmes minotaur map from the "Eye of Arzaz":
+https://grognardia.blogspot.com/2010/10/holmes-maps.html
+
+And on Rhodes is Emirikol the Chaotic:
+https://www.google.com/search?sca_esv=11302d9af1bc4b7f&sxsrf=ADLYWILdcS70T2tsQfEU1vICJnJlFY4R1Q:1728948130503&q=Emirikol+the+Chaotic&udm=2&fbs=AEQNm0AbzhUJjXv6jRup8eVc0BvPyH5PazCaW205cG-Bd0in0SeU-Q4GVbDidOCCAlv8ddwnuh7lPh3aYhqMJdmlhqKO8rDglsPvyMjbq9rCVLJ_yLz05yoyCj0IoTno93uYggnfsWN1FM92F-TFvqgBlLlmP8zrNwNJEd3LcLFp9n7dqviEvbckZCE_JI4OCNw2SzCBq6GPkqgWkri4s4r_BLQYM2Jsmw&sa=X&ved=2ahUKEwi3k53ZgY-JAxW5IjQIHa6kK18QtKgLegQIExAB&biw=1272&bih=908&dpr=1
+ Reply Delete 
+ Replies 
+ Tony November 30, 2024 at 1:17 AM 
+ Thanks! That's great! I'm actually running the adventure "Tomb of the Bull King" which incorporates the map of the palace of Knossos. I decided to run "Tower of Xenopus" first.
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Gideon December 4, 2024 at 12:58 PM 
+ A spot of pedantry: Xenopus is Greek, not Latin.
+ Reply Delete 
+ Replies 
+ Zenopus Archives December 5, 2024 at 6:12 AM 
+ Fixed. Thanks!
+ Delete 
+ Replies 
+ Reply 
+
+ Reply 
+
+ Tony December 10, 2024 at 10:10 AM 
+ Ha ha! Through random chance one of my players came across the write-up and deduced who and what this was about. She promised to not rat me out. I should have waited to post until after we were done! So you may as well add my last name, Stroppa.
+
+I decided to not do random encounters, although the Kobaloi (employed by the sorcerer as guards) are not doing a great job and could start patrolling. The sorcerer "boss" is a recurring NPC in my game, a woman. She's annoyed the Kobaloi are not doing their job!
+
+Although like everyone I read Zenopus in the D&D Basic set, I never experienced it as a player or DM. It just has so many nice touches. And as mentioned it converts well to other fantasy systems. 
+
+As a GM's note, I thought the giant crab would give them a lot of trouble as their claws are very deadly in a low-HP system like Mazes & Minotaurs. But this turned out to not be the case. We are using the optional "Homeric" combat rules (critical hits) and the first shot with a sling stone nailed it in the eye and it spasmed, losing its turn. I determined it had been flipped on its back and needed a turn to right itself. (The actual result was the target fell down, which doesn't make sense for a squat 6-legged behemoth. Instead of ignoring the result I decided on something cinematic.) The PCs piled on and got several good hits in. By the time it stood back up the fight was practically over. It tried to disengage and they finished it off.
+
+ Reply Delete 
+ Replies 
+ Reply 
+
+ Add comment 
+ 
+ Load more... 
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ Holmesian Random Name
+
+ Click here for a name 
+
+ Find it here at DMs Guild 
+Ad by the 1000 Foot General 
+
+ DRIVETHRU RPG 
+
+ Basic/OD&D in PDF 
+
+ Basic/OD&D in Print 
+
+ AD&D 1E in PDF 
+
+ AD&D 1E in Print 
+
+ Gamma World 1E 
+
+ OSR Products 
+
+ Links may contain affiliate #s
+
+ THE MAKING OF OD&D
+
+ Reprints ODnD! Find it here 
+
+ PLAYING AT THE WORLD 2E
+
+ Revised edition! Find it here 
+
+ MAHARS OF PELLUCIDAR
+
+ Hardcover reissue of the 1976 classic. Find it here 
+
+ RED AXE OF PELLUCIDAR
+
+ First official release of the sequel! Find it here 
+
+ As an Amazon Associate I earn from qualifying purchases.
+
+ CHARACTER RECORD
+
+ THIS BLOG is devoted to the original D&D Basic set (aka Holmes Basic) & the writings of its editor, J. Eric Holmes
+
+ BUY The Ruined Tower of Zenopus , a 5E conversion, for $1.99 at DMs Guild
+
+ FIND ME 
+ on social media 
+
+ READ my publications or an interview with me 
+
+ LISTEN to podcasts I'm on 
+
+ HOLMES REF : reference sheets for referees 
+ 
+ View my complete profile 
+
+ BLOG SERIES
+
+ Forgotten Smugglers' Cave 
+
+ Tales of Peril Book Club 
+
+ The Holmes Manuscript 
+
+ Greyhawk & Great Kingdom 
+
+ New Monsters for Holmes 
+
+ Warlock D&D (1975) 
+
+ Tolkien 
+
+ BOOK OF SPELLS (RECENT POSTS)
+
+ ► 
+
+2026
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+2025
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2024
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2023
+ 
+ (44) 
+
+ ► 
+
+December
+ 
+ (1) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (10) 
+
+ ► 
+
+2022
+ 
+ (29) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2021
+ 
+ (23) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2020
+ 
+ (68) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2019
+ 
+ (37) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2018
+ 
+ (31) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2017
+ 
+ (51) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (4) 
+
+ ► 
+
+2016
+ 
+ (36) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ▼ 
+
+2015
+ 
+ (39) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ▼ 
+
+February
+ 
+ (5) 
+ 
+ Holmes Day 2015 
+
+ Part 47: "The Occupants Are Goblins" 
+
+ Ur-Known World 
+
+ Part 46: "Zenopus Built a Tower" 
+
+ One-Page Backgrounds 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2014
+ 
+ (55) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2013
+ 
+ (89) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (5) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (9) 
+
+ ► 
+
+2012
+ 
+ (130) 
+
+ ► 
+
+December
+ 
+ (8) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (10) 
+
+ ► 
+
+September
+ 
+ (14) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+June
+ 
+ (11) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (13) 
+
+ ► 
+
+March
+ 
+ (17) 
+
+ ► 
+
+February
+ 
+ (11) 
+
+ ► 
+
+January
+ 
+ (18) 
+
+ ► 
+
+2011
+ 
+ (65) 
+
+ ► 
+
+December
+ 
+ (11) 
+
+ ► 
+
+November
+ 
+ (13) 
+
+ ► 
+
+October
+ 
+ (16) 
+
+ ► 
+
+September
+ 
+ (25) 
+
+ ANCIENT SCROLLS (POPULAR POSTS)
+
+ The Holmes Manuscript Series: Index of Posts 
+
+ Ruined Tower of Zenopus Goes Mithral! 
+
+ WARLOCK or how to play D&D without playing D&D? 
+
+ The Holmes Basic Set Cover Art: Exhibited! 
+
+ d20 Unexpectedly Intelligent Monsters in the Monster Manual (1977) 
+
+ Gygax's "City on the Edge" Greyhawk Adventure 
+
+ Lee Gold: 45 Years of Alarums & Excursions! 
+
+ Jim Ward on the Why of Chits 
+
+ 20 Backgrounds for OD&D 
+
+ RANDOM ANCIENT SCROLLS
+
+ Click for d12 Random Posts 
+
+ FORUMS & GROUPS
+
+ OD&D Discussion 
+
+ Dragonsfoot 
+
+ K & K Alehouse 
+
+ r/HolmesBasicDnD 
+
+ FB Holmes Basic 
+
+ The Piazza 
+
+ MeWe Holmes Basic 
+
+ Acaeum 
+
+ RPG Pub 
+
+ Other Forums 
+
+ Holmes Basic G+ Community Archives 
+
+ HELM OF TELEPATHY (RPG BLOGS I FOLLOW)
+
+Reviews from R'lyeh 
+
+[Free RPG Day 2026] Terror in Tortuga
+
+1 day ago
+
+What a Horrible Night... 
+
+Selling Physical Books
+
+1 day ago
+
+Mythopoeic Rambling 
+
+Frightful Fridays! Psychokinetic Elemental
+
+1 day ago
+
+Dyson's Dodecahedron 
+
+Halder’s Delve
+
+2 days ago
+
+Tower of the Archmage 
+
+August ‘26 In Review
+
+2 days ago
+
+Save Vs. Dragon 
+
+Outline for the BX DMG
+
+2 days ago
+
+Sorcerer's Skull 
+
+Some Links on Naming
+
+2 days ago
+
+Fabled Lands 
+
+On the road
+
+2 days ago
+
+The Rolemaster Blog 
+
+Rolemaster: Gaps in the Rules?
+
+3 days ago
+
+Bat in the Attic 
+
+Development of the Majestic Fantasy RPG, Part 3
+
+3 days ago
+
+Greyhawkery 
+
+Greyhawkery Comics: Cultists #51
+
+3 days ago
+
+The Other Side 
+
+Witchcraft Wednesday: The Three Laws of Witchcraft
+
+4 days ago
+
+tenfootpole.org 
+
+Stronghold of the Mad Dwarf
+
+4 days ago
+
+Tao of D&D 
+
+Anticipation
+
+4 days ago
+
+Hobby Games Recce 
+
+What Do Games Tell Our Adversaries?
+
+4 days ago
+
+Sly Flourish 
+
+Lazy Improvised Monsters for Daggerheart
+
+6 days ago
+
+B/X BLACKRAZOR 
+
+Back Into The Woods
+
+6 days ago
+
+Leicester's Ramble 
+
+They Met in a Tavern 34: Drom Misses Out on a Ziggurat
+
+1 week ago
+
+The Gloomy Forest 
+
+Bergummo's Tower Is a Silver Best Seller!
+
+1 week ago
+
+Dungeoneering 
+
+Warriors of the Lost Planet - Tékumel Homage
+
+1 week ago
+
+GROGNARDIA 
+
+Reconsiderations: H.P. Lovecraft
+
+2 weeks ago
+
+Applied Phantasticality 
+
+Hit or Miss: Missed
+
+2 weeks ago
+
+Doomslakers! 
+
+Legendary Lives
+
+3 weeks ago
+
+Havard's Blackmoor 
+
+Mystara Could Return Says WotC's Bilsland
+
+3 weeks ago
+
+Akratic Wizardry 
+
+Pete Fenlon on the Rise and Fall of Iron Crown Enterprises
+
+3 weeks ago
+
+Save vs. Total Party Kill 
+
+Some Thoughts on My Awards
+
+3 weeks ago
+
+Wayne's Books 
+
+Lantillian GX1 short hauler “The Long Shot”: A Ship for your Star Wars RPG 
+players
+
+3 weeks ago
+
+DM David 
+
+Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s 
+for You
+
+3 weeks ago
+
+Methods & Madness 
+
+Single saving throws
+
+3 weeks ago
+
+Cave of the Dice... 
+
+Bandits of Fort Emridy: Turning classic modules into outlaw PC settings
+
+3 weeks ago
+
+The Realm of Zhu 
+
+Zone Trooper: The Solo Future War Roleplaying Board Game
+
+4 weeks ago
+
+Yore 
+
+Doing a comprehensive survey of Appendix N
+
+1 month ago
+
+Richard's Dystopian... 
+
+How I read “theory”
+
+2 months ago
+
+Northport 
+
+Two Great Losses
+
+2 months ago
+
+The Hapless Henchman 
+
+The Backrooms: Terrifying Dungeon Crawl
+
+3 months ago
+
+DIY & dragons 
+
+My 2025 in Review
+
+3 months ago
+
+Echoes from the... 
+
+Let’s Talk About Treasure Types (A)
+
+3 months ago
+
+Tom Van Winkle's... 
+
+Maze Rats conversion for Skerples' Monster Overhaul
+
+3 months ago
+
+The Lizard Man Diaries 
+
+Adventure Game on Cardboard
+
+4 months ago
+
+Blog of Holding 
+
+Draw Steel Monsters on a Credit Card
+
+4 months ago
+
+From Kuroth's Quill 
+
+Castle Greyhawk Four New Dungeon Level Maps Revealed
+
+4 months ago
+
+OSR Grimoire 
+
+Gary Con XVIII
+
+5 months ago
+
+Swords & Dorkery 
+
+Wheel…of…fortunes!
+
+5 months ago
+
+DONJON LANDS 
+
+New Adventure: DONJON LANDS is Moving
+
+6 months ago
+
+Alex Schroeder 
+
+2026-02-26 Clone a virtual machine from inside it
+
+6 months ago
+
+The Cryptic Archivist 
+
+Spatial Paradigms of early CRPGs and Adventure Games
+
+6 months ago
+
+Hidden in Shadows 
+
+Mapping the pre D&D Dungeon Adventure From May 25 1972, Part 1
+
+6 months ago
+
+Nine and Thirty Kingdoms 
+
+Downtime
+
+8 months ago
+
+Fen Orc 
+
+Lovely Hedgerow Review
+
+9 months ago
+
+The Collector's Trove 
+
+The Collector's Trove Presents: Our Latest Auction!
+
+9 months ago
+
+Playing at the World 
+
+Playing at the World 2E V2 Arrives
+
+1 year ago
+
+Pulsipher Game Design 
+
+A "special" review of my book "Game Design," with a twist (the book is NOT 
+the point)
+
+1 year ago
+
+oldschool 
+
+D&D Demon Names
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Delta's D&D Hotspot 
+
+Why Did Natural 20's Become Automatic Hits?
+
+1 year ago
+
+Explore: Beneath... 
+
+Original Scenarios Resurrected XI: The Tower of Mrannor (1980, Andrew 
+Ravenscroft)
+
+1 year ago
+
+Circle of Dar Janix 
+
+Traveller : Session 53
+
+1 year ago
+
+An Abominable Fancy 
+
+Knave 2e Alternate Attributes
+
+2 years ago
+
+ChicagoWiz 
+
+Last move - to self-hosting!
+
+2 years ago
+
+Appendix N... 
+
+Creature Companion: Shadowdark Edition!
+
+2 years ago
+
+D&D Chronologically 
+
+The Dragon #28, Vol 4.2
+
+2 years ago
+
+Land of Nod 
+
+Angels, Demons and Subtle Bodies
+
+3 years ago
+
+Scottenkainenland 
+
+Company of the White Oak Campaign - Sessions 63-64
+
+3 years ago
+
+The Song of the Susurrus 
+
+Save Against Death
+
+3 years ago
+
+Wampus Country 
+
+Legends of Law: Von Hoff
+
+3 years ago
+
+Dreamscape Design 
+
+The State of Play
+
+3 years ago
+
+Against The Wicked... 
+
+Notes on a semi-successful skill system
+
+4 years ago
+
+Dungeons of Klang 
+
+Dungeon Meshi for Dungeons and Dragons: Ape to Bear
+
+4 years ago
+
+Necropraxis 
+
+The Worm Ouroboros
+
+4 years ago
+
+Darlene the Artist 
+
+Sacred Art for the New Year
+
+6 years ago
+
+Oubliette Magazine 
+
+Squarehex 2019 Review and 2020 Plans
+
+6 years ago
+
+Geekerati 
+
+[From the Archives] Episode 24: An Interview with Jeff Mariotte and a 
+Discussion of Vampires and Other Things that Prefer the Night
+
+6 years ago
+
+Unvisible Citadel 
+
+Saving Throw fundraiser fanzine for James D. Kramer
+
+6 years ago
+
+The Warlock's Home Brew 
+
+The Warlock's Tower
+
+8 years ago
+
+Semper Initiativus Unum 
+
+Happy Gygax Day!
+
+9 years ago
+
+Parzival's Place 
+
+Show 10
+
+Show All
+
+ MINIATURES GAMING
+
+Small Scale World 
+
+F is for Fattypuff, T is for Thinifer
+
+2 days ago
+
+The Sharp End of... 
+
+Midgard: Early Impressions
+
+4 days ago
+
+Battle Game of the Month 
+
+Meet Me At The Crossroads
+
+4 days ago
+
+Here's No Great Matter 
+
+Trebia - the fight
+
+1 week ago
+
+Dear Tony Blair 
+
+Superior Models Starfleets
+
+1 week ago
+
+Realm of Chaos 80s 
+
+A Second Summer of Citadel: Rogue Trader Orc and Space Skaven Conversion, 
+Heroes of the Enemy Within and an Unreleased Fighter and Druid
+
+1 week ago
+
+Plastic Soldier Review 
+
+Linear-A Alexander with Staff reviewed
+
+3 weeks ago
+
+Graeme Davis 
+
+July’s Monster of the Month: The Bonnacon
+
+1 month ago
+
+Fantasy Toy Soldiers 
+
+MAGI: Non Western Wizards/Shaman
+
+2 months ago
+
+Geordie's Big Battles 
+
+Hinton on AI
+
+2 months ago
+
+SquadPainter 
+
+Unlocking Pro Acryl Paint Secrets
+
+6 months ago
+
+Scrum in Miniature 
+
+Scrum Con V
+
+6 months ago
+
+Super Galactic... 
+
+Presenting ... Bob Moss
+
+6 months ago
+
+Third Point of... 
+
+Hobgoblin First Play
+
+1 year ago
+
+Vintage Wargaming 
+
+Warplan 5/5 Campaign System
+
+6 years ago
+
+1000 Foot General 
+
+Sci-Fi Hangar by Impudent Mortal
+
+6 years ago
+
+Show 5
+
+Show All
+
+ FICTION & TOLKIENANA
+
+Wormwoodiana 
+
+Insidious Mechanisms: A New Anthology from Egaeus Press
+
+1 day ago
+
+Black Gate 
+
+Spoiler Free Review: Coyote vs. Acme
+
+1 day ago
+
+m john harrison 
+
+a couple of reactions to TEoE at Insta
+
+6 days ago
+
+A Shiver in the... 
+
+When the Poet Sings, by Lord Dunsany
+
+2 weeks ago
+
+Sacnoth's Scriptorium 
+
+The Cat Room
+
+5 weeks ago
+
+Tolkien & Fantasy 
+
+Icons of the Fantastic: Behind the Scenes
+
+5 weeks ago
+
+JOHN GARTH 
+
+Tolkien, the critics, and why I’m starting an Oxford doctoral project on 
+The Lord of the Rings and war
+
+2 months ago
+
+Too Many Books... 
+
+Book Notes, January–June 2024
+
+6 months ago
+
+On An Underwood... 
+
+Farnsworth Wright’s Favorite Weird Tales by Bobby Derie
+
+6 years ago
+
+Show 5
+
+Show All
+
+ TEXT ADVENTURES
+
+Renga in Blue 
+
+Twin Kingdom Valley (1983)
+
+6 days ago
+
+Lloyd of Gamebooks 
+
+Voting has now closed for the 2026 Lindenbaum competition
+
+1 week ago
+
+The Stack 
+
+0PLAYER
+
+1 year ago
+
+Emily Short 
+
+Dialogue Expressiveness in Mask of the Rose
+
+2 years ago
+
+ MISC
+
+Love in the Time of Chasmosaurs 
+
+Vintage Dinosaur Art: Lone Star Dinosaurs – Part 1
+
+23 hours ago
+
+Happy & d20 
+
+PCT: Hikertown redux
+
+1 day ago
+
+Plaid Stallions 
+
+5 Awesome Things on eBay this week
+
+2 days ago
+
+GRUBB STREET 
+
+Book: Book about Books
+
+3 weeks ago
+
+Garage Sale Finds 
+
+Sprint Magazine
+
+1 month ago
+
+MONSTER BRAINS 
+
+Osamu Tezuka (1928 - 1989)
+
+4 years ago
+
+Show 5
+
+Show All
+
+ Loading... 
+
+ MIRTH
+
+Rusty and Co. 
+
+Level 14: #67
+
+1 day ago
+
+xkcd 
+
+Asteroid Mission
+
+2 days ago
+
+Dork Tower 
+
+Death Becomes Him
+
+3 days ago
+
+Order of the Stick 
+
+1348: Fading Odds
+
+3 weeks ago
+
+d20monkey 
+
+Forever GM 2.0 Design
+
+2 months ago
+
+KoDT 
+
+Hello world!
+
+4 months ago
+
+Marvin the Mage 
+
+Game Wizards Gary and Dave Minis To Be Released at Gamehole Con
+
+4 years ago
+
+Table Titans 
+
+News & Events: Adventure Journals Return with Five New Colors!
+
+5 years ago
+
+Show 5
+
+Show All
+
+ NPCs
+
+ Follow this blog
+
+ Click here 
+
+ Subscribe To
+
+Posts
+
+ Atom
+
+Posts
+
+Comments
+
+ Atom
+
+Comments
+
+ Labels
+
+ ODnD 
+ (107) 
+
+ Holmes Manuscript 
+ (79) 
+
+ Legacy 
+ (65) 
+
+ Portown Campaign 
+ (56) 
+
+ Sample Dungeon 
+ (56) 
+
+ Artists 
+ (55) 
+
+ Printings 
+ (53) 
+
+ Gygax 
+ (52) 
+
+ Boinger and Zereth 
+ (46) 
+
+ Forgotten Smugglers' Cave 
+ (44) 
+
+ Holmes Ref 
+ (44) 
+
+ New Monsters 
+ (41) 
+
+ Cons 
+ (40) 
+
+ B2 
+ (35) 
+
+ Sutherland 
+ (34) 
+
+ Tolkien 
+ (33) 
+
+ Greyhawk 
+ (30) 
+
+ Monster List 
+ (29) 
+
+ Pirates 
+ (26) 
+
+ GaryCon 
+ (24) 
+
+ Sutherland Dragon 
+ (24) 
+
+ Appendix N 
+ (23) 
+
+ OSR 
+ (23) 
+
+ RTOZ 
+ (23) 
+
+ Tales of Peril 
+ (23) 
+
+ Adventures 
+ (22) 
+
+ Chainmail 
+ (22) 
+
+ Miniatures 
+ (22) 
+
+ Zenopus 
+ (22) 
+
+ Cthulhu 
+ (20) 
+
+ Advertisements 
+ (19) 
+
+ 5E 
+ (18) 
+
+ Podcasts 
+ (18) 
+
+ 50th Anniversary 
+ (17) 
+
+ Books 
+ (17) 
+
+ Holmes Blogs 
+ (17) 
+
+ Zines 
+ (17) 
+
+ B1 
+ (16) 
+
+ Publication History 
+ (16) 
+
+ Scrum Con 
+ (16) 
+
+ B/X 
+ (15) 
+
+ DMsGuild 
+ (15) 
+
+ PatW 
+ (15) 
+
+ Chris Holmes 
+ (14) 
+
+ Dice 
+ (14) 
+
+ Skull Mountain 
+ (14) 
+
+ Trampier 
+ (14) 
+
+ Warlock 
+ (14) 
+
+ Sea Caves 
+ (13) 
+
+ ntrpgcon 
+ (13) 
+
+ Chargen 
+ (12) 
+
+ Foreign Editions 
+ (12) 
+
+ History 
+ (12) 
+
+ Arneson 
+ (11) 
+
+ Drivethru 
+ (11) 
+
+ GenCon 
+ (11) 
+
+ Great Kingdom 
+ (11) 
+
+ In Memoriam 
+ (11) 
+
+ Lee Gold 
+ (11) 
+
+ Popular Culture 
+ (11) 
+
+ Balrogs 
+ (10) 
+
+ Blackmoor 
+ (10) 
+
+ Maps 
+ (10) 
+
+ Otus 
+ (10) 
+
+ RTOZ review 
+ (10) 
+
+ Reprints 
+ (10) 
+
+ TSR 
+ (10) 
+
+ Wandering Monsters 
+ (10) 
+
+ ADnD 
+ (9) 
+
+ B3 
+ (9) 
+
+ Bayt Al Azif 
+ (9) 
+
+ DMG 
+ (9) 
+
+ Easter Eggs 
+ (9) 
+
+ Equipment 
+ (9) 
+
+ Rules Expansions 
+ (9) 
+
+ Dagonites 
+ (8) 
+
+ Darlene 
+ (8) 
+
+ Rules Variants 
+ (8) 
+
+ 35 years 
+ (7) 
+
+ Aurania 
+ (7) 
+
+ Dungeon! 
+ (7) 
+
+ Freebie 
+ (7) 
+
+ Holmes for the Holidays 
+ (7) 
+
+ Jean Wells 
+ (7) 
+
+ Play Report 
+ (7) 
+
+ Cinema 
+ (6) 
+
+ Dragon magazine 
+ (6) 
+
+ Green Dragon 
+ (6) 
+
+ Holmes Bibliography 
+ (6) 
+
+ Lore Suto 
+ (6) 
+
+ Monster Faces 
+ (6) 
+
+ Promo 
+ (6) 
+
+ Roslof 
+ (6) 
+
+ Zenopus Art-chives 
+ (6) 
+
+ Ability Scores 
+ (5) 
+
+ Castle Greyhawk 
+ (5) 
+
+ Conan 
+ (5) 
+
+ DMG Sample Dungeon 
+ (5) 
+
+ Delving Deeper 
+ (5) 
+
+ Fangorn 
+ (5) 
+
+ Holmesiana 
+ (5) 
+
+ John Blanche 
+ (5) 
+
+ Kids 
+ (5) 
+
+ Lakofka 
+ (5) 
+
+ Minifigs 
+ (5) 
+
+ New Magic Items 
+ (5) 
+
+ Periodicals 
+ (5) 
+
+ Quotes 
+ (5) 
+
+ Undead 
+ (5) 
+
+ Wham 
+ (5) 
+
+ 1st print 
+ (4) 
+
+ Combat 
+ (4) 
+
+ Community 
+ (4) 
+
+ EPT 
+ (4) 
+
+ Geomorphs 
+ (4) 
+
+ Lake Geneva 
+ (4) 
+
+ Logo 
+ (4) 
+
+ MM 
+ (4) 
+
+ Magic 
+ (4) 
+
+ New Classes 
+ (4) 
+
+ PHB 
+ (4) 
+
+ Saltmarsh 
+ (4) 
+
+ Turnbull 
+ (4) 
+
+ Video 
+ (4) 
+
+ Wereshark 
+ (4) 
+
+ Bell 
+ (3) 
+
+ Carter 
+ (3) 
+
+ Collecting 
+ (3) 
+
+ Computer Games 
+ (3) 
+
+ Contemporary Reviews 
+ (3) 
+
+ DSL 
+ (3) 
+
+ Dee 
+ (3) 
+
+ Draw Your Own Floor Plan 
+ (3) 
+
+ Dungeoneering 
+ (3) 
+
+ Europa 
+ (3) 
+
+ Gamma World 
+ (3) 
+
+ Guidon DnD 
+ (3) 
+
+ Holmes Expert 
+ (3) 
+
+ Kuntz 
+ (3) 
+
+ Lycanthropes 
+ (3) 
+
+ Mentzer 
+ (3) 
+
+ Monster Manual 
+ (3) 
+
+ ODnD Sample Level 
+ (3) 
+
+ Polyhedron 
+ (3) 
+
+ Review 
+ (3) 
+
+ S1 
+ (3) 
+
+ Scrum Club 
+ (3) 
+
+ Text Adventure 
+ (3) 
+
+ Thomas Cole 
+ (3) 
+
+ Tricks and Traps 
+ (3) 
+
+ Willingham 
+ (3) 
+
+ Arduin 
+ (2) 
+
+ Chaosium 
+ (2) 
+
+ Coloring Album 
+ (2) 
+
+ Dragonmirth 
+ (2) 
+
+ Dragons 
+ (2) 
+
+ Drawings 
+ (2) 
+
+ ERB 
+ (2) 
+
+ Elmore 
+ (2) 
+
+ Ephemera 
+ (2) 
+
+ Examples of Play 
+ (2) 
+
+ FRPG book 
+ (2) 
+
+ Holmes Campaign 
+ (2) 
+
+ Holmes-Era Games 
+ (2) 
+
+ Judges Guild 
+ (2) 
+
+ MTA 
+ (2) 
+
+ Metamorphosis Alpha 
+ (2) 
+
+ Moldvay 
+ (2) 
+
+ Movies 
+ (2) 
+
+ Music 
+ (2) 
+
+ New Races 
+ (2) 
+
+ One-Page Dungeon 
+ (2) 
+
+ Pellucidar 
+ (2) 
+
+ Perren 
+ (2) 
+
+ Photo Gallery 
+ (2) 
+
+ Pulps 
+ (2) 
+
+ Retroclones 
+ (2) 
+
+ Rule Interpretations 
+ (2) 
+
+ Spells 
+ (2) 
+
+ TSR UK 
+ (2) 
+
+ Ward 
+ (2) 
+
+ Wargaming 
+ (2) 
+
+ White Dwarf 
+ (2) 
+
+ de Camp 
+ (2) 
+
+ weapons 
+ (2) 
+
+ what if 
+ (2) 
+
+ 45 years 
+ (1) 
+
+ Artifacts 
+ (1) 
+
+ B4 
+ (1) 
+
+ BECMI 
+ (1) 
+
+ Baguettes 
+ (1) 
+
+ Bio 
+ (1) 
+
+ C1 
+ (1) 
+
+ Catalogs 
+ (1) 
+
+ Cheese 
+ (1) 
+
+ Chits 
+ (1) 
+
+ Comics 
+ (1) 
+
+ DDG 
+ (1) 
+
+ Dawn Patrol 
+ (1) 
+
+ DnD from Memory 
+ (1) 
+
+ DnD50 
+ (1) 
+
+ Dungeon Design 
+ (1) 
+
+ Dungeon Hobby Shop 
+ (1) 
+
+ Eldritch Wizardry 
+ (1) 
+
+ Ernie Gygax 
+ (1) 
+
+ Erol Otus 
+ (1) 
+
+ Expedition to Skull Stack Crater 
+ (1) 
+
+ Fiend Folio 
+ (1) 
+
+ Fonts 
+ (1) 
+
+ Games Workshop 
+ (1) 
+
+ Grenadier 
+ (1) 
+
+ Historic FLGS 
+ (1) 
+
+ Holloway 
+ (1) 
+
+ Inspiration 
+ (1) 
+
+ Known World 
+ (1) 
+
+ Lejendary Adventure 
+ (1) 
+
+ Licensed Products 
+ (1) 
+
+ Links 
+ (1) 
+
+ Marsh 
+ (1) 
+
+ Milestones 
+ (1) 
+
+ Mini Dungeon 
+ (1) 
+
+ Mirth 
+ (1) 
+
+ Monster Plants 
+ (1) 
+
+ New Modules 
+ (1) 
+
+ Norton 
+ (1) 
+
+ Purple Worm 
+ (1) 
+
+ RPG 
+ (1) 
+
+ Rumors 
+ (1) 
+
+ Savage Worlds 
+ (1) 
+
+ Saving Throws 
+ (1) 
+
+ Schick 
+ (1) 
+
+ SciFi 
+ (1) 
+
+ Shakespeare 
+ (1) 
+
+ Solo 
+ (1) 
+
+ Star Schlock 
+ (1) 
+
+ Star Wars 
+ (1) 
+
+ Swords & Sorcery 
+ (1) 
+
+ T1 
+ (1) 
+
+ Weird Fiction 
+ (1) 
+
+ Wilderness Adventures 
+ (1) 
+
+ Zeb Cook 
+ (1) 
+
+ ADVERT (CLICK IMAGE TO VISIT - DISCLOSURE: LINK INCLUDES AFFILIATE #)
+
+ " 
+
+Powered by Blogger .

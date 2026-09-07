@@ -1,0 +1,15 @@
+bw-uhjournal https://brightweavings.com/books/under-heaven-tour-journal/
+bw-lljournal https://brightweavings.com/books/last-light-of-the-sun-tour-journal/
+bw-ysjournal https://brightweavings.com/books/ysabel-journal/
+bw-prologueysabel https://brightweavings.com/prologue-to-ysabel/
+bw-readingtigana https://brightweavings.com/reading-passage-from-tigana/
+bw-guygavrielkay https://brightweavings.com/guygavrielkay/
+bw-avgerman https://brightweavings.com/avgermanreview/
+bw-chansonarbonne https://brightweavings.com/guy-gavriel-kay-la-chanson-darbonne/
+bw-hsysabelintro https://brightweavings.com/books/hsysabel_intro/
+bw-cbc https://brightweavings.com/cbc/
+bw-strangehorizons https://brightweavings.com/strangehorizons/
+bw-revsarantium https://brightweavings.com/revsarantium/
+bw-revarbonne https://brightweavings.com/revarbonne/
+bw-revlastlight https://brightweavings.com/revlastlight/
+bw-writtenrevs https://brightweavings.com/reviews-of-written-on-the-dark/

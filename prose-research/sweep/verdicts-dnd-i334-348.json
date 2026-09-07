@@ -1,0 +1,235 @@
+{
+ "name": "dnd",
+ "chunk": 12,
+ "claims": [
+  {
+   "index": 334,
+   "feature": "real-world religion analogs",
+   "claim": "Real-world religions may not serve as analogs for evil D&D religions.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Don’t use real-world religions as analogs for evil religions",
+   "page": ""
+  },
+  {
+   "index": 335,
+   "feature": "credible threat",
+   "claim": "Perkins and Bilsland's second principle is that an adventure needs a credible threat with logical goals the heroes can uncover and thwart.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs a credible threat",
+   "page": "p.1"
+  },
+  {
+   "index": 336,
+   "feature": "here and now",
+   "claim": "Principle four: adventures are about the here and now; the less backstory needed to set things up, the better.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure is about the here and now.",
+   "page": "p.1"
+  },
+  {
+   "index": 337,
+   "feature": "concision for the DM",
+   "claim": "Principle seven: present information as concisely as possible to ease the DM's burden, reserving descriptive texture for NPCs, dungeon dressing, and treasure.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "to ease the burden on the DM",
+   "page": "p.1"
+  },
+  {
+   "index": 338,
+   "feature": "logical order of information",
+   "claim": "Principle six: information appears in the order a first-time DM needs it, with an NPC introduced before being named casually and nothing important buried.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to present information in a logical",
+   "page": "p.1"
+  },
+  {
+   "index": 339,
+   "feature": "NPC description content",
+   "claim": "NPCs get character through distinctive physical features, mannerisms, and quirks the DM can roleplay.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "features, mannerisms, and quirks",
+   "page": "p.2"
+  },
+  {
+   "index": 340,
+   "feature": "clichés with a spin",
+   "claim": "Familiar tropes (taverns, dragons, mad wizards) are acceptable if the adventure can still surprise; writers add their own spin.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "as long as the adventure can still surprise",
+   "page": "p.1"
+  },
+  {
+   "index": 341,
+   "feature": "PCs as heroes",
+   "claim": "The player characters are the heroes, not spectators; fetch quests for a lazy merchant are called out as underwhelming.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The player characters (PCs) are the heroes",
+   "page": "p.1"
+  },
+  {
+   "index": 342,
+   "feature": "no railroading",
+   "claim": "Text must account for players' decisions and alternate outcomes, or players feel railroaded.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "players will feel “railroaded” by the plot",
+   "page": "p.1"
+  },
+  {
+   "index": 343,
+   "feature": "rise above the humdrum",
+   "claim": "Encounters are elevated by odd monster pairings, terrain, hazards, ruses, complex motives, and plot twists.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to rise above the humdrum",
+   "page": "p.2"
+  },
+  {
+   "index": 344,
+   "feature": "read adventures to write them",
+   "claim": "The guide's craft advice is to read many good adventures, as novelists read novels.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The more good D&D adventures you read, the",
+   "page": "p.2"
+  },
+  {
+   "index": 345,
+   "feature": "organized play: no preset ending",
+   "claim": "AL writers must not decide in advance how the adventure ends, even in a 2- or 4-hour slot.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "how the adventure should end",
+   "page": "p.2"
+  },
+  {
+   "index": 346,
+   "feature": "Chicago edition cited by the design guide",
+   "claim": "The design guide still cites Chicago 16th edition, one edition behind the style guide's 17th, showing the bundle's documents were not synchronized.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "Chicago Manual of Style (16th edition)",
+   "page": "p.2"
+  },
+  {
+   "index": 347,
+   "feature": "bundle cross-reference to format template",
+   "claim": "The design guide points writers to the House Style Guide for grammar and to the Adventure Format Template for layout, which is where boxed-text rules live.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "",
+   "page": "p.2"
+  },
+  {
+   "index": 348,
+   "feature": "Realms tone: hopeful",
+   "claim": "The Forgotten Realms guide sets a hopeful tone in which the good guys eventually win, contrasted with cynical Greyhawk and tragic Dragonlance.",
+   "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+   "quote": "The Forgotten Realms is a hopeful setting.",
+   "page": "p.1"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't use real-world religions as analogs for evil religions in D&D.\"",
+   "note": "Raw PDF reached: zip downloaded from media.dndbeyond.com (200, application/zip, 1,624,152 bytes), unzipped, 'Dungeoncraft Pack/DnD Standards.pdf' text-extracted with pypdf. Quote appears word for word under the 'Religion.' bullet; header line reads '(c)2020 Wizards of the Coast LLC. Confidential information.' Source attribution (2020 Standards inside the 2023-12-04 Dungeoncraft pack) is exact."
+  },
+  {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 2: \"An adventure needs a credible threat\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 745,871 bytes) and extracted with pypdf. Byline reads 'By Chris Perkins & Greg Bilsland'; numbered principle 2 carries the quote verbatim, and the same paragraph adds that antagonists 'should have logical goals that the heroes can uncover and thwart in the course of the adventure.' Every limb supported."
+  },
+  {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 4: \"An adventure is about the here and now.\"",
+   "note": "Quote is word for word at principle 4, p.1. The backstory limb is supported by the next sentence: 'A little bit of history might be needed to set things up, but the less of it, the better.'"
+  },
+  {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 7: concise text \"to ease the burden on the DM\"",
+   "note": "Principle 7 reads 'An adventure should strive to present information as concisely as possible, to ease the burden on the DM,' then names the exceptions deserving special attention: 'NPCs, dungeon dressings, and treasure hoards.' Both limbs supported."
+  },
+  {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 6: \"present information in a logical order\"",
+   "note": "Principle 6 carries the quoted fragment verbatim, plus 'so that a DM reading it for the first time isn't confused,' 'make sure that an NPC is properly introduced before casually mentioning the NPC by name,' and 'shouldn't conceal or bury important information.' All three limbs supported."
+  },
+  {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"features, mannerisms, and quirks\" the DM uses to roleplay",
+   "note": "The sentence straddles the page break: p.1 ends 'describing his or her distinctive physical' and p.2 opens 'features, mannerisms, and quirks (which the DM can then use to roleplay the NPC effectively).' The cited quote and page (p.2) are correct."
+  },
+  {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Cliches are okay, as long as the adventure can still surprise\"",
+   "note": "Principle 3 carries the quote verbatim and names all three tropes: 'dragons, orcs, and insane wizards in towers' and beginning 'in a tavern,' closing with 'try to put your own clever “spin” on it.'"
+  },
+  {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The player characters (PCs) are the heroes, not mere spectators\"",
+   "note": "Principle 1 carries the quote verbatim; the merchant limb is explicit: 'Gathering animal pelts for a lazy merchant might be a tolerable MMO quest, but it makes for an underwhelming D&D experience.'"
+  },
+  {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"players will feel “railroaded” by the plot\"",
+   "note": "Principle 5 carries the quote verbatim (curly quotes around railroaded, as cited). Both limbs supported: 'it needs to allow for more than one preset outcome' and 'the text needs to account for the possibility that the heroes might slay or capture the villain.'"
+  },
+  {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Principle 9: \"An adventure needs to rise above the humdrum\"",
+   "note": "Quote verbatim at principle 9, p.2. The list limb is supported item by item: 'odd monster pairings, unusual terrain, environmental hazards, traps, unexpected reinforcements, red herrings, atypical monster tactics, ruses and other deceptions, NPCs with complex motives, and the occasional plot twist.'"
+  },
+  {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The more good D&D adventures you read, the easier it will be\"",
+   "note": "Quote verbatim on p.2. The novelist analogy is the preceding sentence: 'To write good novels, you need to read good novels... The same is true for adventures.'"
+  },
+  {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't decide in advance how the adventure should end.\"",
+   "note": "Under 'Additional Principles for Organized Play' / 'When writing adventures for the D&D Adventurers League,' item 4 reads 'Just because an adventure is only 2 hours or 4 hours doesn't mean it should be linear or have a pre-established outcome. Don't decide in advance how the adventure should end.' All limbs supported."
+  },
+  {
+   "index": 346,
+   "verdict": "PARTIAL",
+   "trueWording": "\"The Chicago Manual of Style (16th edition) and the D&D House Style Guide\"",
+   "note": "The quotation is on the page verbatim, in the closing line. The comparative limb is not: the design guide never mentions a 17th edition or any other bundle document's edition, so the 'one edition behind' contrast and the 'not synchronized' inference are the verifier's, not the page's. Corroboration from a sibling file (not the cited page): 'DnD House Style Guide.docx' inside the same Dungeoncraft pack does open with 'Chicago Manual of Style, 17th edition', and 'DC Adventure Format v1.3.docx' also cites the 17th - so the substance is true, but it is sourced from other documents and the claim as written overreaches its cited page.",
+   "unsupportedLimb": "that 16th is one edition behind the House Style Guide's 17th, and that this shows the bundle's documents were not synchronized - neither statement appears on the cited page"
+  },
+  {
+   "index": 347,
+   "verdict": "PARTIAL",
+   "trueWording": "\"For adventure format, refer to the Adventure Format Template.\"",
+   "note": "The claim carries no quote field. The page's final two sentences support the first two limbs: 'For rules on grammar and punctuation, please see The Chicago Manual of Style (16th edition) and the D&D House Style Guide. For adventure format, refer to the Adventure Format Template.' Nothing on the page says what the template contains. Corroboration from a sibling file (not the cited page): 'DC Adventure Format v1.3.docx' in the same pack does carry boxed-text rules ('Boxed text should be used very sparingly'), so the limb is true in fact but unsupported by the cited source. Note also that the copy of the design guide bundled in the Dungeoncraft pack ends at the House Style Guide sentence and omits the Adventure Format Template sentence entirely; only the cyborgsandmages URL version verified here contains it.",
+   "unsupportedLimb": "that the Adventure Format Template is where boxed-text rules live - the page never describes the template's contents"
+  },
+  {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"hopeful setting. The good guys will eventually win.\"",
+   "note": "Raw PDF fetched by curl (200, application/pdf, 965,749 bytes), 29 pages, extracted with pypdf. Page 1, under 'Tone': 'The Forgotten Realms is a hopeful setting. The good guys will eventually win. This hopeful tone sets the Forgotten Realms apart from settings like Greyhawk (which is cynical) and Dragonlance (which is a setting of romance and tragedy).' Quote verbatim; every limb supported."
+  }
+ ]
+}

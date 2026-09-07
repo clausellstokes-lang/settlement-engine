@@ -1,0 +1,21 @@
+{
+ "role": "critic",
+ "name": "martin",
+ "angle": null,
+ "tag": null,
+ "lines": 60,
+ "firstTs": "2026-09-06T21:29:33.938Z",
+ "lastTs": "2026-09-06T21:31:03.838Z",
+ "tools": {
+  "Bash": 10,
+  "Read": 7
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll read the sweep section, the kept file, and any finder notes.",
+ "run": "wf_3a29e467-750",
+ "agent": "ae31c70849daa344e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_3a29e467-750/agent-ae31c70849daa344e.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,0 +1,235 @@
+{
+ "name": "wolfe",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 0,
+   "feature": "single-placement of clues",
+   "claim": "Wolfe plants each clue exactly once and refuses to repeat it, on the principle that a clue told five times is written for someone dumber than the reader.",
+   "source": "Jordan 1992 interview (Shadows of the New Sun)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "I try not to leave a clue more than once",
+   "page": "p. 121 (Soldier of Arete / Card's complaint)"
+  },
+  {
+   "index": 1,
+   "feature": "surplus of clues, solvability",
+   "claim": "He says he leaves all the clues a reader will need and often more, because in real detection the work is finding more clues, not reasoning harder from a few.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "very little of it consists of reasoning from clues",
+   "page": "p. 121"
+  },
+  {
+   "index": 2,
+   "feature": "confusion as surface, pattern beneath",
+   "claim": "Wolfe denies writing perspectival novels where confusion is the point: the clues are there, the puzzles are meant to be solved, and superficial confusion is simply how life looks before you think about it.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "Life seen superficially has very little pattern to it.",
+   "page": "p. 127 (Castleview)"
+  },
+  {
+   "index": 3,
+   "feature": "style suited to the story; journalistic third person",
+   "claim": "He writes each book in the style its story calls for; the third-person Long Sun therefore came out as plain, journalistic prose rather than the stylized first-person of the Severian books.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "pretty much straightforward journalistic prose",
+   "page": "p. 103"
+  },
+  {
+   "index": 4,
+   "feature": "divergent-witness perception",
+   "claim": "In Castleview different characters see the same unexplained thing as cowboys, Arthurian knights or a spaceship, modelled on anomaly reports where two witnesses describe a third thing differently.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "two witnesses who have very different stories",
+   "page": "p. 126"
+  },
+  {
+   "index": 5,
+   "feature": "supernatural premise to license memory's vividness",
+   "claim": "Wolfe made Weer a dead man rather than a reminiscing old man so the remembered rooms could be re-created with a strength ordinary reminiscence could not justify.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "lend to the memories certain supernatural strengths",
+   "page": "p. 115 (Peace)"
+  },
+  {
+   "index": 6,
+   "feature": "ghost making sense of his life",
+   "claim": "He conceived Peace not as purgatory but as a ghost trying to make sense of his own life, and accepts purgatory as another way of saying the same thing.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "a ghost trying to make sense of his own life",
+   "page": "p. 116"
+  },
+  {
+   "index": 7,
+   "feature": "amnesiac narrator as social allegory",
+   "claim": "The Soldier books are built to show the problems of a genuinely good man who cannot remember, which Wolfe maps onto a decent society that has no awareness of its history.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "a genuinely good man who can't remember",
+   "page": "p. 118"
+  },
+  {
+   "index": 8,
+   "feature": "writing the pagan world from inside its belief",
+   "claim": "For the Soldier books he wrote the ancient world as the pagans wrote about it rather than through the rationalist modern historian, so gods appear as the characters expected them to.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "as the pagans themselves wrote about it",
+   "page": "p. 117"
+  },
+  {
+   "index": 9,
+   "feature": "memory palace as structural device",
+   "claim": "Wolfe says he used the memory-palace system of Simonides in the Soldier books.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "made use of the memory palace system",
+   "page": "p. 107"
+  },
+  {
+   "index": 10,
+   "feature": "local symbolic touches, no allegory",
+   "claim": "He says symbolic details arrive as local impulses ('that's neat; I'll do that') and denies the books are allegories.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "The book isn't intended as an allegory.",
+   "page": "p. 118"
+  },
+  {
+   "index": 11,
+   "feature": "voice imitation and style-spotting",
+   "claim": "Wolfe claims he can identify a writer from a paragraph or two and could write imitation Shakespeare or Lewis that passes, a self-described knack for voice.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "I am a good imitator.",
+   "page": "p. 103"
+  },
+  {
+   "index": 12,
+   "feature": "Vance-derived rewrite",
+   "claim": "He describes the Severian books as in part his decision to rewrite The Dying Earth from his own standpoint, openly acknowledging Vance and Clark Ashton Smith.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "rewrite The Dying Earth from my own standpoint",
+   "page": "p. 103"
+  },
+  {
+   "index": 13,
+   "feature": "typos as false clues",
+   "claim": "Asked whether he invented any words, Wolfe answers that some odd words in the New Sun are typos, warning readers against treating every oddity as a clue.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "some of them are typos",
+   "page": "p. 128"
+  },
+  {
+   "index": 14,
+   "feature": "picturesque language for unstatable actualities",
+   "claim": "He reads scriptural images (the apple, the sky rolled up) as figurative language giving a general idea to an audience unable to grasp the actuality, a model for conveying meaning in pictures.",
+   "source": "Jordan 1992 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "quote": "figurative language to try to give a general idea",
+   "page": "p. 129"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I try not to leave a clue more than once ... if you tell me five times then I feel that you are writing for somebody that is a lot dumber than I am' (p.121).",
+   "note": "Quote verbatim on p.121. Both limbs on the page; he also says 'So I try and leave my clues once.' Only softening: he says 'I try not to', a shade less absolute than the claim's 'refuses'."
+  },
+  {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'generally try and leave all the clues that I think the reader is going to require, sometimes more than they require' + 'very little of it consists of reasoning from clues and the great majority of it consists of finding more clues' (p.121).",
+   "note": "Quote verbatim. Surplus-of-clues limb and the real-detection reason are both explicit, the latter framed as 'actual police work' / 'a real life situation'."
+  },
+  {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Everything may be confusing but that is how things are... Life seen superficially has very little pattern to it.' (p.127)",
+   "note": "Quote verbatim (page reads '...pattern to it. There is a lot of confusion'). The 'clues are there / puzzles the reader is supposed to figure out / not that type of novel' formulation is Jordan's question, which Wolfe affirms with 'Yes' and then elaborates in his own words: 'It is not true that you can't get through the confusion and figure out certain things.' Attribution by assent, not by his own sentence."
+  },
+  {
+   "index": 3,
+   "verdict": "PARTIAL",
+   "trueWording": "'It isn't a highly very stylized series at all, largely because it is third person. I basically feel that you should write the story in the style that corresponds to the story that you have to tell... but it comes out as a pretty much straightforward journalistic prose' (p.103).",
+   "note": "Quote verbatim and the first two limbs (style follows story; third-person Long Sun as plain journalistic prose) are explicit. The contrast with Severian is not: the phrase 'first person' appears nowhere in the 31-page interview (grepped), and this passage names no book as the stylized counter-example - Jordan only asks whether it will be in 'any of the particular styles you have used before'.",
+   "unsupportedLimb": "the contrast term 'the stylized first-person of the Severian books' - the interview never says 'first person' anywhere, and does not name Severian's style as the thing Long Sun differs from"
+  },
+  {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'When you research these anomalous stories and accounts you get this sort of thing. You get two witnesses who have very different stories depending on how they perceived some third thing that we don't know what it was. So I tried to show it like that.' (p.126)",
+   "note": "Quote verbatim. The cowboys/knights/spaceship enumeration is Jordan's question ('cowboys and Indians... Arthur and his knights... a spaceship'), which Wolfe adopts with 'So I tried to show it like that', and the Castleview context is explicit on the same page."
+  },
+  {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Because I wanted to lend to the memories certain supernatural strengths that an old man thinking over his life wouldn't have. I wanted to do the rooms as re-creations of rooms that he had known as a very young man... I could not have gotten with just reminiscence.' (p.115)",
+   "note": "Quote verbatim and every limb on the page: dead man rather than reminiscing old man (Jordan's question, answered directly), the re-created rooms, and the strength plain reminiscence could not justify."
+  },
+  {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'That is not the way I conceived it when I wrote it. I conceived it more that he was a ghost trying to make sense of his own life. And I think that is another way of saying that.' (p.116)",
+   "note": "Quote verbatim. Both limbs hold, with a nuance the claim keeps: to 'is Weer in Purgatory working toward peace?' he first answers 'Yeah, I think probably he is', then distinguishes conception from purgatory and accepts purgatory as 'another way of saying that'."
+  },
+  {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'The book really is intended to show the problems faced by a genuinely good man who can't remember. Because it seems to me that is the problem of our society... our society has no memory because it has no awareness of history.' (p.118)",
+   "note": "Quote verbatim and the society mapping explicit ('We have a genuinely good society... quite decent individuals'; 'this America blundering around on the world stage more or less as Latro does'). Page says singular 'The book' (Soldier of Arete under discussion) where the claim says 'The Soldier books'."
+  },
+  {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'what I tried to do was to write about that pagan world as the pagans themselves wrote about it. If we read modern historians we are reading a very rationalistic viewpoint...' (p.117)",
+   "note": "Quote verbatim; the rationalist-historian contrast is spelled out at length. The third limb is on the page too, via the Acts example: 'They are mistaken for Zeus and Hermes in human form because people in those days expected that you could see Zeus and Hermes in human form', prefaced by 'I think that the gods of paganism were real.'"
+  },
+  {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I am familiar with the memory palace concept, which originally derives from Simonides, a Greek poet of the fifth century B.C... I have made use of the memory palace system in the Soldier books, of course.' (p.107)",
+   "note": "Quote verbatim; Simonides and the Soldier books both named in the same answer. He adds that he has heard of Yates's The Art of Memory but not read it."
+  },
+  {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Every once in a while you say, \"Gee, that's neat; I'll do that.\" And you do it. I wasn't writing the whole book that way. The book isn't intended as an allegory.' (p.118)",
+   "note": "Quote verbatim including the period. The impulse phrasing on the page is 'Gee, that's neat; I'll do that.' The denial is singular ('The book') where the claim generalises to 'the books'; he separately denies allegory for Free Live Free on p.128 ('I wasn't trying to write allegory')."
+  },
+  {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I could almost invariably identify the writer from the first paragraph or two... And I am a good imitator. I could write imitation Shakespeare that you would think was probably legitimate Shakespeare... I have sort of a knack for doing that sort of thing.' (p.103)",
+   "note": "Quote verbatim and every limb explicit, including the Lewis limb ('I could write much better imitation C. S. Lewis than a lot of this supposedly posthumous stuff') and the self-described knack. The paragraph-or-two identification is set in a writers' chain letter, alongside 'I am pretty good at spotting styles'."
+  },
+  {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Was Jack Vance's style an influence on the style of the Severian novels?' - 'Oh, I'm sure... A lot of that was my deciding to rewrite The Dying Earth from my own standpoint' (p.103); 'I have never concealed a debt to Jack Vance and a debt to Clark Ashton Smith' (p.104).",
+   "note": "Quote verbatim on p.103. 'In part' matches 'A lot of that'. The Clark Ashton Smith acknowledgment sits just over the page break on p.104, not on p.103 as the page field implies."
+  },
+  {
+   "index": 13,
+   "verdict": "PARTIAL",
+   "trueWording": "'You didn't make up any words?' - 'No, but some of them are typos. Ushas is not one of them though.' (p.128)",
+   "note": "Quote verbatim, and the first two limbs are exact: he is asked whether he invented words and answers that some of the odd Severian words are typos. He draws no lesson from it and says nothing about clues; the reader-warning is the researcher's gloss, not on the page.",
+   "unsupportedLimb": "'warning readers against treating every oddity as a clue' - Wolfe issues no warning and never mentions clues here; he only answers the Ushas question and moves on to Qabbalistic sources"
+  },
+  {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'We don't know what is really meant by the world coming to an end, and God rolling up the sky like a carpet and all that. It is all picturesque language, figurative language to try to give a general idea to an audience that would not be capable of understanding the actuality.' (p.129)",
+   "note": "Quote verbatim. The apple limb follows immediately: 'It is like the Genesis story. I don't believe in a literal \"apple\"... but if you have to explain to a bunch of primitives how men differ from animals... this is a pretty good way to do it.' 'In pictures' tracks the page's own 'picturesque language'."
+  }
+ ]
+}

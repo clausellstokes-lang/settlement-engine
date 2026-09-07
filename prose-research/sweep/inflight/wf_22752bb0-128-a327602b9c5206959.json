@@ -1,0 +1,38 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i135-149",
+ "lines": 92,
+ "firstTs": "2026-09-06T17:05:31.216Z",
+ "lastTs": "2026-09-06T17:11:41.736Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 20,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://elliottrwi.com/2026/05/18/another-update-to-moving-beyond-tolkiens-medievalism/",
+  "https://elliottrwi.com/research/hobb-bibliography/",
+  "https://www.sciendo.com/pdf/10.2478/cait-2020-0012",
+  "https://studenttheses.uu.nl/server/api/core/bitstreams/f473796a-a2a2-4791-95bd-f039a6c27af8/content",
+  "https://studenttheses.uu.nl/server/api/core/bitstreams/232bf1b5-ecab-49c6-9f70-39f67fb9c119/content",
+  "https://revistas.ucm.es/index.php/ESTR/article/download/53002/48655",
+  "https://opus.lib.uts.edu.au/bitstream/10453/20138/2/02whole.pdf",
+  "https://peerj.com/articles/cs-189/",
+  "https://www.google.com/",
+  "https://peerj.com/articles/cs-189.pdf",
+  "https://web.archive.org/web/20260208122918id_/https://peerj.com/articles/cs-189/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_22752bb0-128",
+ "agent": "a327602b9c5206959",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a327602b9c5206959.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i135-149.json",
+  "exists": true
+ }
+}

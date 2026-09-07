@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i15-29",
+ "lines": 63,
+ "firstTs": "2026-09-06T16:52:50.043Z",
+ "lastTs": "2026-09-06T16:56:58.120Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 13,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+  "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+  "https://reactormag.com/robin-hobb-nycc-2019-highlights-assassins-apprentice-25-years/",
+  "https://gizmodo.com/find-out-how-robin-hobb-became-two-different-people-5792234",
+  "https://www.locusmag.com/2005/Issues/12Hobb.html",
+  "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+  "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+  "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "kpoint written and re-read successfully. All eight source URLs returned HTTP 200 on the first live fetch with a browser user agent — no Wayback, no routeHints, no BLOCKED. Every one of the 15 quotes is an exact substring of the de-tagged raw page; three claims carry a limb the page does not support.",
+ "run": "wf_22752bb0-128",
+ "agent": "ab86666105cee96fd",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-ab86666105cee96fd.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i15-29.json",
+  "exists": true
+ }
+}

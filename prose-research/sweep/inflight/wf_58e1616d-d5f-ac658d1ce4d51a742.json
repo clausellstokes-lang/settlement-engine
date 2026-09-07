@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i375-389",
+ "lines": 57,
+ "firstTs": "2026-09-06T17:22:17.314Z",
+ "lastTs": "2026-09-06T17:25:45.349Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+  "https://www.sffchronicles.com/threads/11050/",
+  "https://www.sffchronicles.com/threads/528814/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 15 quotes matched exactly against raw page text. Now writing the checkpoint file.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "ac658d1ce4d51a742",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-ac658d1ce4d51a742.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i375-389.json",
+  "exists": true
+ }
+}

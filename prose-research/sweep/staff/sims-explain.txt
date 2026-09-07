@@ -1,0 +1,146 @@
+ 
+ World Building: Explain a Game – Chris S. Sims 
+ Skip to content 
+ Open Menu 
+ Blog 
+ Work 
+ Current Work 
+ Publications 
+ Art 
+ My itch.io 
+ About 
+ About Me 
+ Contact Me 
+ Terms and Conditions 
+ Twitter 
+ Facebook 
+ LinkedIn 
+ Search 
+ Search for: 
+ Close 
+ Chris S. Sims 
+ Thoughts on games, fiction, writing, life.
+ Game Design / Roleplaying Games / Science Fiction & Fantasy / Setting / Video Games / world building / Writing 
+ World Building: Explain a Game
+ January 21, 2020 January 23, 2020 Chris S. Sims Leave a comment 
+ Writing prompts can help you stretch your world-building and narrative skills, such as character development and story development. My friend, game designer and writer Owen K.C. Stephens regularly seeds such prompts on his Twitter feed . Several products on the market, from the Story Engine to the Writer Emergency Pack , aim at feeding prompts or breaking blocks. Writing as an exercise can be fun and creative, as well as training.
+ In that vein, Ryan Kaufman, a veteran of story who has worked at LucasArts and Telltale, gave out random prompts on request. These prompts were from a narrative-design exercise he did with his writers at Jam City, where he’s VP of Narrative. This is how it started (click the date to see the thread).
+ I’m running a narrative design exercise with the Jam City writers where we are randomly assigned a Character Backstory, a Goal, and a Game Genre. Then, we will attempt to explain the resulting game, and how all these things fit together as a ridiculous whole.
+ — Ryan Kaufman (@M1sterFox) November 19, 2019 
+ If you asked Ryan, you received a random character, goal, and game type. Then you explain that game. I asked for a prompt and got the following. (1) 
+ An unusually tall young woman wants to win the Wimbledon in a hack-and-slash.
+ In a lot of ways, this core statement is a lot like the initial basis for a Starfinder Adventure Path or any tabletop adventure. It all starts with an idea. For an Adventure Path, that seed must grow into a detailed story outline for six adventures.
+ It’s familiar ground for me. However, Adventure Path outlines go through a lot of writing, review, and revision. I wanted this exercise to be fast. Therefore, most of the writing is off the cuff, taking place in less than a day’s work, including some research, since this exercise is more for imagination and working with what you have as it is for composition. (2) 
+ First Steps
+ I immediately decided this game had to be set in post-apocalyptic Great Britain. The world went through a big, awful change. What was this world-changing disaster? Well, we’ve seen everything from post-nuclear horror to pandemic zombie apocalypses. I wanted something different.
+ Hack-and-slash games recall tabletop fantasy RPGS. What’s more, throwing Great Britain into a post-apocalyptic pseudo-Celtic state with monsters and magic appeals to me, since such a setting allows for gonzo monstrous enemies. Therefore, I decided to steal an element from one of my home campaign settings, as follows.
+ A few centuries ago, meteorites fell to Earth carrying a mutagen that corrupts all life it touches, turning that life cruel and rapacious. These same meteorites devastated much of the world, killing millions and releasing incredible amounts of spiritual energy.  Such eldritch forces broke the barrier between the spirit realms and Earth as we knew it. Monsters and magic are real now. And some of the meteorites remain, known in this game as the Fomor Stones, still giving off their infectious power.
+ Other details followed.
+ A hack-and-slash game, such as the Darksiders or God of War series, works well when the protagonist must cross dangerous territory to accomplish her goals. So, my heroine needs an impetus to make the dangerous journey to Wimbledon. Why does she need to go there? Where does she start?
+ Part of figuring out why and where starts with determining who she is. So here is what I came up with.
+ She is Cedryca “Ced” the Tall, eldest scion of the ruling family in Cymru (Wales). Ced is not only a princess, but she is also a fighter. She’s a post-apocalyptic knight. One of her advantages is superior reach, which should come out in how she plays in the game, with lunges, sweeps, and bold charges.
+ Now, where does Ced start?
+ Gwendoline Christie is a good model for Ced. 
+ Although the seat of Cymru is Caerdydd (Cardiff), the game starts with Cedryca overseeing the setup of a cultural festival in Abertawe (Swansea) set to occur later in the summer. The opening sequence shows Ced training warriors for combat games at the festival. During this controller tutorial, we learn Ced has intervening plans to travel to London, home of the Royals who rule neighboring realm called England, to take part in the Grand Slam at Wimbledon.
+ This Grand Slam is a gladiatorial event in midsummer that provides the victor with great prestige and wealth. Ced plans to win and use her honors to influence the Royals to continue to leave Cymru in peace. Banter with other warriors shows the two realms enjoy an uneasy truce, but even some of Ced’s friends want a renewed war.
+ Mysterious assassins attack suddenly in Abertawe. These men and women, skilled in weapons or magic, assault the training field in enough force to occupy the warriors there and threaten Ced. Here we learn that Ced has magical talents, too, blocking and returning blasts aimed at her. She also absorbs a measure of the aggression aimed at her and can unleash it in powerful moves, spiritually extending her reach or hitting more targets with her sweeps. She must fight her way free of the training field and pursue her fleeing attackers. On nearby Aberavon Beach, she meets the leader of the assassins, Balar, a towering mutant tainted by the Fomor Stones.
+ Boss fight!
+ The battle and subsequent scene emphasize a sigil on Balar’s head. From the fallen Balar, who is certain of Ced’s doom, our heroine learns her family is under similar attack in Caerdydd. Thus arrives the impetus for her immediate journey.
+ Trek to Centre Court
+ Ced’s trip east to Wimbledon reveals more of the plot against her and the ruling family of Cymru. Each stage becomes a game level or series of them. Like in any hack-and-slash game, Ced has to plow through all kinds of enemies using her superior reach and other fancy moves. She must face crazy boss creatures intermittently, especially as scene cappers. This play scheme has pauses where Ced can train, respec her skills, and reequip. Several level concepts follow.
+ Running the Emfor. Ced rushes to Caerdydd alone. Along the highway, the old Emfor (M4), she faces mutants and other dangers.
+ Ye Olde Emfor (M4) 
+ Gates of Caerdydd. Arriving in Caerdydd, Ced faces more hired killers at the gates and on the streets. She makes it to her home, Cardiff Castle, and must slay powerful enemies to force her way inside. There, she learns that her family has already been slain, although Saiani, a courtier friend, has survived and can tell her what happened.
+ That makes Ced queen of Cymru, but she refuses to wait for a coronation. Vengeance must be had.
+ Ced tracks the killers to the cellars of Bishop’s Palace. There, she fights a warlock named Morbag there who has a grimoire with hints that the Royals, and their patriarch King John III, are behind these dark events. Eliminating the rulers of Cymru paves the way for an easy conquest. Also, sigil in the grimoire is like one Balar bore on his forehead.
+ Our heroine can then rest, train, buy supplies, and take Siani as a retainer. Retainers, which Ced can gain in various interludes, allow Ced to refine her equipment and training on the road. They carry her extra gear and provide her services.
+ Road to Casnewydd. Ced departs her family home, leaving a regent in charge until her return, to continue to Wimbledon. The road to the next city in Cymru, Casnewydd, is fraught with dangers natural and supernatural. Ced can rest only when she reaches Casnewydd, which stands on the border between Cymru and England.
+ Once there, Ced learns a giant has occupied the Severn Bridge, the easiest way across the River Severn into England. Our heroine hears this news from Ebin, an artisan who lost his goods and a child to the beast. This artisan, who wants to see the giant killed, can become a retainer.
+ Crossing the Severn. Ced fights her way through mutants, some bearing Morbag’s sigil, to the Severn Bridge. She then confronts the gargantuan creature occupying it to cross. This hideous monster also bears Morbag’s sigil.
+ A rebuilt highway bridge with a fort, maybe? 
+ Slayers of Bristol. After crossing the Severn, Ced and her entourage travel to Bristol where news of Ced’s struggle and deeds has preceded her. Kane, a crooked local magistrate, levies “taxes” against Ced, arresting some of her retainers as collateral. The price for freedom is Ced’s participation in an arena fighting event against Kane’s mutant champion, Erik the Blooded. Ced can throw the fight, making herself and Kane a lot of money. Or she can win, making Kane an enemy she then must deal with, possibly losing a retainer if she fails. She can also gain one of the other gladiators as a retainer, maybe even Erik if she spares him.
+ Beasts of the Cotswolds. Ced continues down the M4 through beautiful and dangerous hill country. Some unusual creatures appear here, descendants of escapees from a pre-apocalypse zoo. A horrible mutant descended from giraffes is the boss of this level, and it has meerkat minions. Evil, laser-eyed meerkats.
+ Ced’s passage through England continues similarly. As she travels, she faces more threats and gains more resources and skills. Other level names, which follow, hint at her travel and the trials she must overcome. Most of these names are based on Ced’s trek down the M4 to London, which you can trace on a modern map from Swansea , east down the current M4. Apparently, the walk is around 62 hours and could take you through places like those mentioned before and the following.
+ Swindon Market 
+ Ghosts of the Downs (North Wessex; Fomor Stone found in this sequence)
+ In Reading 
+ Demons of the Thames 
+ Sinking Slough 
+ On Stanwell Moor 
+ Heathrow Landing 
+ Gangs of Richmond Park 
+ Wimbledon Commons 
+ The final levels of the game occur in the All England Club where the gladiatorial Centre Court Grand Slam happens in eight rounds. The fights take place in various arenas, all on grass and most divided by obstacles on the sides and in the middle. Several Royal allies face off against Ced in these bouts, and some of them bear Morbag’s sigil. Toward the end, as Ced’s victories mount, she learns Morbag was merely an apprentice to a mightier warlock.
+ This sorcerer, Ulric, has been in the Royal Box, watching the whole time. When Ced wins the championship in the Centre Court, the apparent weakling King John orders Ulric to take Ced down. Ced welcomes the chance to face the dark wizard. Ulric hesitantly agrees. He disintegrates when Ced defeats him, leaving King John alone before the riveted Grand Slam crowd.
+ In ridiculous hack-and-slash fashion, publicly revealing the plot against Cymru, King John drinks a potion and leaps from the Royal Box to attack Ced. A mad melee ensues, involving King John and his soldiers against our heroine. When near defeat, John brands himself with a wand made of Fomor Stone, giving him what turns out to be Ulric’s sigil (rather than Morbag’s). John hopes this infusion of dark power allows him to slay Ced.
+ It doesn’t.
+ Ced defeats the evil king, wins the Wimbledon Grand Slam, and receives her just rewards. The first of her name, Cedryca the Tall goes on to become queen of Cymru and England. Perhaps it isn’t happily ever after for her, though. Is Ulric dead? Might he return to threaten Cymru and England again? That depends on whether the studio wants a sequel.
+ But a sequel to what title? How about Break Point – March to Centre Court . Like that name, the whole game idea is a little tongue in cheek. But it could be cool. It might be a fine tabletop campaign, too. Parts of it, at least, have been and, hopefully, will be again.
+ We could build wonders. If you like what I have done here or with my past work and publications , check out my new Patreon for even more. 
+ 1) You can see Ryan’s tables here if you want to try them out. Conveniently, each list has twenty items, so grab a d20. Roll and write.
+ This exercise would have been quite different if I had gotten “a gunfighter with terrible diarrhea as the protagonist. As I told Ryan, I feel like a game called Runs and Guns pretty much writes itself. 
+ 2) The research was cursory, so please forgive me for liberties taken with Wales and other parts of Great Britain. 
+ Top art Britomart by Walter Crane (1900). Bottom art a crop of Queen Maev by J. C. Leyendecker (1911).
+ Share this:
+ Share on X (Opens in new window) 
+ X 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Like Loading... 
+ Post navigation
+ Previous Post Playing with Exceptional Scores
+ Next Post Playing in Imagination Space
+ Leave a comment Cancel reply 
+ Support Me?
+ Regularly via Patreon 
+ Once via Ko-fi 
+ Purchasing products through links on this site also supports me. So far, all this income goes to support other game makers.
+ What did I say?
+ My Tweets Who will follow? 
+ Enter your email address to receive an email about each new post.
+ Email Address: 
+ Follow! 
+ Navigate!
+ Blog 
+ Work 
+ Current Work 
+ Publications 
+ Art 
+ My itch.io 
+ About 
+ About Me 
+ Contact Me 
+ Terms and Conditions 
+ Communicate!
+ Twitter 
+ Facebook 
+ LinkedIn 
+ Legitimate!
+ © 2020 Christopher Steven Sims. 
+ Text of blog posts and comments shared under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License .
+ See my full terms and conditions here. 
+ Website Powered by WordPress.com .
+ Back to top 
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+To find out more, including how to control cookies, see here:
+ Cookie Policy 
+ Comment 
+ Reblog 
+ Subscribe 
+ Subscribed 
+ Chris S. Sims 
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ Chris S. Sims 
+ Subscribe 
+ Subscribed 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ Loading Comments... 
+ You must be logged in to post a comment. 
+ %d 

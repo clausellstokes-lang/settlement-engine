@@ -1,0 +1,119 @@
+ 
+
+ Contact Verification Suspension Page 
+
+ Action Required: Complete Your Email Verification
+
+ This domain name is currently inactive or suspended because the required
+ verification of the registrant’s email address has not been completed.
+
+ To ensure your domain remains active and in good standing, you need to complete the email
+ verification process, as detailed in the verification email sent to the address listed in your
+ registration record.
+
+ Why This Verification Is Required
+
+ Accurate and up‑to‑date domain registration data is required under applicable law and industry rules to support the security and stability of the internet .
+ This includes maintaining contactability of the domain holder through a valid and reachable email address .
+
+ General Legal Requirements
+
+ Under applicable government regulations – including the EU NIS2 Directive (Directive (EU) 2022/2555)
+ and its national implementations (as well as under ICANN and registry policies) -
+ domain name registrars are required to collect and maintain accurate, complete, and reliable registration data 
+ and to apply
+ verification measures to ensure its correctness. These obligations support
+ the security, stability, and resilience of the Domain Name System (DNS).
+
+ Until verification is completed, this domain cannot be fully activated.
+
+ Why Has This Domain Been Suspended?
+
+ One of these reasons may apply:
+
+ This is a new domain registration and the registrant’s email address has not been verified yet. 
+
+ Every new domain registration requires the associated email address to be verified.
+
+ The email address of the domain registrant has been modified or changed but not verified yet. 
+
+ Changing the email address of the domain registrant requires a verification.
+
+ The domain has recently been transferred and the domain registrant’s email address has not yet been verified at the new registrar. 
+
+ Registrars are required by regulation and policy to verify domain registrant’s email addresses,
+ even after incoming transfers.
+
+ Someone has complained about the accuracy of the data provided for publication in the public registration database, triggering a re‑verification of the email address of the domain registrant but the address has not been verified yet. 
+
+ Any reasonable complaint regarding WHOIS accuracy triggers a requirement for the registrar to
+ re‑verify the email address.
+
+ If You are the Owner of This Domain, You Can Reactivate It
+
+ Click the link provided in the verification email sent to you by your Registrar or direct service provider. 
+
+ After registering, transferring or modifying the registrant contact data of your domain, you should
+ have received the verification email under the email address you provided for the holder of this
+ domain name. Please click the included link and your domain will be unsuspended within 30 minutes.
+ Please make sure to check your spam folder if you cannot find that mail.
+
+ You can request to resend the verification email through your domain provider. 
+
+ The verification mail will be sent to the registrant’s email address used for this domain. If you
+ are the registrant of this domain and unsure which email address is used, try log into your account
+ at your domain provider to view or modify registrant contact data information.
+
+ If you have the trigger code, enter it on http://emailverification.info 
+
+ The trigger code to verify your registrant contact data is contained in the verification mail.
+ However, your domain provider might provide the respective trigger code under certain conditions.
+ This trigger code can be entered on http://emailverification.info 
+ to verify your registrant contact data and remove the suspension on your domain.
+
+ Frequently Asked Questions
+
+ Why are domains with unverified registrant email addresses suspended? 
+
+ To ensure that the registrant is contactable, registrars and other entities providing registration
+ services are required to verify registrant email addresses and contact information after
+ registration and incoming transfers as well as data updates.
+
+ How can I prevent deactivation of my domain in the future? 
+
+ This requires the completion of the verification process within 15 days of the verification mail
+ being sent to you. Make sure the email address you provide works, and that your mailbox is reviewed
+ regularly. Make sure to expect a verification mail when making an update to your data, registering a
+ domain with new data or transferring a domain between registrars.
+
+ How can I reactivate my domain and remove the suspension? 
+
+ This requires the completion of the verification process. You can resend the verification mail
+ through your domain provider. Also, if desired, you can update your registrant contact information
+ at your domain provider and afterwards you will receive a verification email.
+
+ How long does it take until my website comes back online after the suspension is removed? 
+
+ After the verification has been successfully completed the suspension should be removed within 30
+ minutes. Keep in mind that populating new DNS servers might take a bit longer due to DNS caching.
+
+ I’m not the owner of this domain. What can I do? 
+
+ If you are a visitor to this website, please try accessing this domain again later.
+
+ Next Steps
+
+ Check your inbox (and spam/junk folders) for the verification email from your registrar.
+
+ Click the verification link or follow the instructions provided.
+
+ If you did not receive the email or the address is incorrect, contact your registrar immediately to update your contact information and request a new verification email.
+
+ If verification is not completed, your domain may remain suspended.
+
+ Need Help?
+
+ Contact your domain registrar’s support team for assistance with verification or updating your registration contact details.
+
+ Legal Notice 
+

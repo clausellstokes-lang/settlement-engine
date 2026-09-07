@@ -1,0 +1,241 @@
+
+ Square-Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews | Time Extension
+Guest
+Login | Sign Up
+Time Extension
+ Home Best Games
+ SEGA
+ Nintendo
+ PlayStation
+ Amiga
+ Hardware Reviews
+ Book Reviews
+ Emulation Consoles
+ Mini Consoles
+ SNES
+ News Latest News
+ SEGA
+ Nintendo
+ PlayStation
+ Emulation
+ Rom Hacks
+ Game Preservation
+ Tetris
+ Arcade
+ Emulation Consoles
+ Mini Consoles
+ Polymega
+ Features Latest Features
+ Quizzes
+ Interviews
+ Magazines
+ Hands On
+ SEGA
+ Nintendo
+ Exclusive
+ Japan
+ UK
+ Development
+ Accessories
+ Reviews Latest Reviews
+ Mini Consoles
+ Emulation Consoles
+ Clone Consoles
+ Book Reviews
+ Accessories
+ Hardware Mods
+ Mini Handhelds
+ FPGA
+ Games Browse Games
+ Best Games
+ SNES
+ Mega Drive
+ NES
+ PS1
+ PS2
+ Dreamcast
+ N64
+ C64
+ Guides
+ Forums All Topics
+ Watched Topics
+ Home Consoles
+ Handhelds
+ PC & Home Computers
+ Help & Troubleshooting
+ General Discussion
+ Feedback and Suggestions
+ Info About
+ Team
+ Contact
+Follow Time Extension
+ Bluesky
+ Twitter
+ Instagram
+ Facebook
+Policies
+Community Rules
+Terms & Conditions
+Privacy Policy
+ Search
+ Top
+Keywords 
+Guest
+User
+ Notifications 0
+ Bookmarks 0
+ Games Collection
+ Login
+ Sign Up
+ Theme: Dark Scanlines: off
+News
+The Portopia Serial Murder Case
+Square Enix
+Square-Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews
+"I'm not sure what to say about that"
+by Jack Yarwood
+Mon 24th Apr 2023
+Share:
+ Image: EnixUpdate [Mon 24th Apr, 2023 17:35 BST]: As spotted by PC Gamer, it appears Square Enix's new AI Tech Demo for The Portopia Serial Murder Case isn't necessarilly going down well with players on Steam.
+Its Steam page has been inundated with negative reviews from frustrated players and the demo now sits at a "Very Negative" rating with a total of 236 posts from users.
+Chief complaints appear to be about the AI's ability to recognize commands typed into the parser, with the game repeating lines like "Hmm...", "Maybe we should focus on the task at hand", and "I'm not sure what to say about that" to anything but the most precise of inputs. Considering this is the exact problem the demo was meant to solve, it's a little bit disappointing to say the least. Hopefully, over time, Square Enix will address these problems, so that users don't have to go searching for a step-by-step walkthrough just to see the game through.
+Square Enix really Square Enixed this one up. https://t.co/DPSwgzrSvc— PC Gamer (@pcgamer) April 24, 2023
+Original Article [Fri 21st Apr, 2023 16:35 BST]: Square-Enix is releasing a remake of the seminal Japanese graphic adventure game The Portopia Serial Murder Case later this month, as reported by IGN Japan and spotted by the Twitter user Gosokkyu. But before you go getting too excited, it's worth clarifying that this isn't a straightforward remake like you might expect, but a free "educational" demonstration of Natural Language Processing (NLP), a piece of AI technology.
+Players will be able to download the free demo on Steam on April 24th, with the game essentially being a showcase for how well NLP can understand, process, and reply to commands that are being typed into a text box. IGN Japan reports that you will be able to play through the entire story, with the technology apparently working for both Japanese and English. There's even a text-to-speech option too.
+Enix's seminal ADV Portopia Renzoku Satsujin Jiken has been remade and is being released for free on Steam on April 24 https://t.co/Q5Bwj0YsYL…🇯🇵 more specifically, this is a "tech preview" from S-E's AI dept that recreates the Portopia scenario with NLP tech for the text parser https://t.co/3w4pM4Gi2a— GSK | https://cohost.org/gosokkyu (@gosokkyu) April 21, 2023
+In case you've never heard of it, The Portopia Serial Murder Case is an influential Japanese adventure game that was originally released for the NEC-6001 computer back in 1983. The Dragon Quest creator and Chrono Trigger writer/supervisor Yuji Horii was responsible for its design and story, which follows an unnamed detective's investigation into the death of a banker.
+After its initial release, the game was later ported to a range of other computers, consoles, and devices, including MSX, Famicom, and mobile phones.
+It's certainly interesting to see the game get revisited all these years later, but we have to admit we're a little bit undecided on the method of execution. What do you make of the news? Let us know in the comments!
+ Related Articles
+News Square Enix Gives Update On Its Preservation Efforts At CEDEC 2022
+The initiative SAVE was pitched back in Spring 2020
+News Square Enix's New Boss Loves Tobal No. 1
+"I think Tobal No.1 is a masterpiece of action games"
+News Don't Like What Enix Did With ActRaiser 2? Blame North American Gamers
+"We were just paid to do it that way – so we did it that way"
+[source store.steampowered.com, via jp.ign.com, twitter.com]
+ See Also
+ 50 Best NES Games Of All Time
+Share:
+1
+5
+News Taito Reveals Design Docs For A Bubble Bobble-Like Famicom Port Of Bonze Adventure
+ Prev
+News VoidBurst Deluxe Is The Starblade Sequel We Never Got To Play
+Next 
+ About Jack Yarwood
+Hailing from Manchester, Jack has a particular fondness for point-and-click adventure games. In the past, he’s written about lost games from studios like Sony Manchester, Genepool Software, and DMA Design, and has made a habit of debunking video game rumours.
+ Author Profile
+ Reply
+ Comments 5
+1
+-wc-
+Fri 21st Apr 2023
+hell yeah i was just wondering when conversational AI was going to pop up for games in the main. 👍
+0
+2
+alexybubble
+Sat 22nd Apr 2023
+Dang, I'm actually kind of disappointed. I was really hoping that they going to have MAGES remake the entire classic series, like how Nintendo had them remake Famicom Detective Club. I guess that that dream is dead now.
+1
+3
+MSaturn
+Sat 22nd Apr 2023
+I’ve been playing around with ChatGPT for a few months and it’s very fascinating technology (and a little scary, when you imagine it getting a lot better very quickly). One of my first thoughts was that this would be incredible tech to integrate into an RPG, like elder scrolls 6. I’m excited to see this first step in that direction.
+0
+4
+NatiaAdamo
+Tue 25th Apr 2023
+Leave it to Square Enix to develop a text based adventure game with a dumber input system than Zork. Don't let that sink in, let all the plumbing in first.
+1
+5
+Poodlestargenerica
+Wed 26th Apr 2023
+Anything in an AI is just a programmed reaction, this is little different than text input from the 80's lol. I guess if someone gets it to work that's neat, and could be really good, but I also remember in the mid to late 2000's when square used to just... Make good games, so you can't be too surprised that people want more of that.
+0
+ Show Comments
+ Leave A Comment
+Hold on there, you need to login to post a comment...
+Related Articles
+These Adorable Final Fantasy TV Toys Are Available For Pre-Order
+Be wary of Gacha mechanics...
+ Latest News
+ 8
+Feature "Ant & Dec Annoyed The Absolute S**t Out Of Me" - The Complete History Of The Nintendo UK Hotline
+ 81
+News "We Take Copyright Infringement Very Seriously" - The Tetris Company Responds To White House Retro Game Rip-Offs
+ 1
+News "To Make Customers Wonder... And Pick It Up" - Kojima Explains Metal Gear Solid's 'Vertical' Japanese Box Art
+ 2
+News Konami Wai Wai World Craft 'Concept' Trailer Spotlights Some of The Game Maker's Gadgets
+ 4
+News Brazilian Shmup 'Metal Canary' Is Headed To The Nintendo Wii
+ Most Read
+ 1 
+ News "Relive The Glory Days Of Console Gaming" - New 4:3 Monitor Takes Aim At...
+ 2 
+ News The Zelda-Influenced NES Classic 'Battle of Olympus' Is Being Remade By ...
+ 3 
+ News How Kingdom Hearts Almost Paved The Way For A Smash Bros-Like Fighter Fr...
+ 4 
+ Feature "He Is Truly One Of A Kind" - A Celebration Of Nobuo Uematsu, The Maestr...
+ 5 
+ News Anbernic's RG DS Plus Comes With Its Own Capacitive Stylus And Has Highe...
+ 6 
+ Hands On The Evercade Nexus Feels Like A True Evolution Thanks To A Great Display...
+ 7 
+ News "We Take Copyright Infringement Very Seriously" - The Tetris Company Res...
+ 8 
+ News New Virtua Fighter 32X Project Brings HD Polish To Sega's Groundbreaking...
+ 9 
+ News Be Honest, Did You Know About This Mushroom-Saving Super Mario Bros. Trick?
+ 10 
+ News 'Sega VS Capcom' Fan Project Shut Down For "Using Capcom's Characters & ...
+ Top
+About
+Staff
+How We Work
+Support Us
+Contact
+Privacy Policy
+Terms of Use
+Ads Policy
+Archive
+Cookie Settings
+Desktop Version
+Popular Right Now
+Release Date Finally Confirmed For My Arcade's Gamestation Retro Go HandheldWed 2nd Sep 2026
+"We Take Copyright Infringement Very Seriously" - The Tetris Company Responds To White House Retro Game Rip-OffsYesterday, 10:20am
+"Relive The Glory Days Of Console Gaming" - New 4:3 Monitor Takes Aim At Retro PlayersTue 1st Sep 2026
+"Ant & Dec Annoyed The Absolute S**t Out Of Me" - The Complete History Of The Nintendo UK HotlineYesterday, 2pm
+Something Pretty Historic In Amiga History Just Took Place At GamescomSat 29th Aug 2026
+CeX Lists "Retro Birmingham" Store On Its Website, Confirming Recent RumourTue 1st Sep 2026
+"To Make Customers Wonder... And Pick It Up" - Kojima Explains Metal Gear Solid's 'Vertical' Japanese Box ArtYesterday, 10am
+Anbernic's RG DS Plus Comes With Its Own Capacitive Stylus And Has Higher-Resolution ScreensThu, 4pm
+"I Hope They Choke On An AI-Generated Fishbone" - James Pond Creator On System 3's "Soulless" Legacy CollectionThu 27th Aug 2026
+How Kingdom Hearts Almost Paved The Way For A Smash Bros-Like Fighter From Disney & ActivisionTue 1st Sep 2026
+'Sega VS Capcom' Fan Project Shut Down For "Using Capcom's Characters & Likeness"Fri, 3:30pm
+The Zelda-Influenced NES Classic 'Battle of Olympus' Is Being Remade By Its Original Husband-And-Wife TeamMon 31st Aug 2026
+Show More 
+Join 36,098 people following Time Extension:
+RSS Feed
+YouTube
+Twitter
+Bluesky
+Instagram
+Threads
+Facebook
+© 2026 Hookshot Media, partner of IGN Entertainment | Hosted by 44 Bytes | AdChoices | Do Not Sell My Personal Information
+Friends:
+Nintendo Life
+Push Square
+Pure Xbox
+Digital Foundry
+Nintendo News
+IGN
+Eurogamer
+VGC
+GamesIndustry.biz
+CVG
+RPS
+ All the latest Time Extension goodness straight to your inbox

@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 679,
+   "feature": "edition and house style",
+   "claim": "Kay reports getting caught up in small tinkerings with the text and dropping more italics at the page-proof stage.",
+   "source": "Guy Gavriel Kay, Under Heaven tour journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "I get caught up in small tinkerings with the text, word",
+   "page": "journal entry on page proofs"
+  },
+  {
+   "index": 680,
+   "feature": "per-speaker register",
+   "claim": "Kay says he uses punctuation variably depending on context, speaker and rhythms.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "I’ll use punctuation varaibly depending on context, speaker, rhythms.",
+   "page": "entry on the proofreader over-punctuating speech (the misspelling is the source's)"
+  },
+  {
+   "index": 681,
+   "feature": "edition and house style",
+   "claim": "Kay states that The Last Light of the Sun is punctuated differently from the Sarantine Mosaic.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "page": "entry on the proofreader over-punctuating speech"
+  },
+  {
+   "index": 683,
+   "feature": "dialogue register",
+   "claim": "Kay says he has certain characters speak rapidly under stress.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "I have certain characters speaking rapidly at times, under stress",
+   "page": "entry on the proofreader over-punctuating speech"
+  },
+  {
+   "index": 684,
+   "feature": "edition and house style",
+   "claim": "Kay says italics look louder in galleys than on his screen and he consistently deletes them there.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "italics look LOUDER in galleys than they do on my computer",
+   "page": "entry on deleting italics in the galleys"
+  },
+  {
+   "index": 686,
+   "feature": "other: punctuation as craft",
+   "claim": "Kay accepts that a colon better sets off the list that follows in his opening sentence.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "a colon better sets off the ‘list’ that follows",
+   "page": "entry on the copy-editor's query about the Prologue's first sentence"
+  },
+  {
+   "index": 687,
+   "feature": "metaphor discipline",
+   "claim": "Kay reports deleting the word 'taste' after his copy-editor found the sustained metaphor tangled.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "the sentence simply read better after deleting the word ‘taste’",
+   "page": "entry on the Prologue copy-edit"
+  },
+  {
+   "index": 691,
+   "feature": "edition and house style",
+   "claim": "Kay describes copy-editors changing some semi-colons to colons or commas when an author overuses them.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "If an author is overusing semi-colons they change some to colons",
+   "page": "entry explaining the copy-editing stage"
+  },
+  {
+   "index": 692,
+   "feature": "closing sentence",
+   "claim": "Kay says Ysabel carries a tag quotation at the end of the book as The Last Light of the Sun did.",
+   "source": "Guy Gavriel Kay, Ysabel journal, BrightWeavings",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "it also has a tag quote at the end, as LAST",
+   "page": "entry on the epigraph question"
+  },
+  {
+   "index": 696,
+   "feature": "other: design and shaping",
+   "claim": "Wolfe reports Kay's distinction that stories are told but novels are shaped.",
+   "source": "Gary K. Wolfe, Locus, May 2019",
+   "url": "https://locusmag.com/review/gary-k-wolfe-reviews-a-brightness-long-ago-by-guy-gavriel-kay/",
+   "quote": "Stories, he reminds us, are told, but novels are shaped.",
+   "page": "final paragraph"
+  },
+  {
+   "index": 702,
+   "feature": "per-speaker register",
+   "claim": "The reviewer notes that Kay's other viewpoints are in third person and so read as immediately distinct from Danio's first-person musings.",
+   "source": "Elitist Book Reviews, 14 May 2019",
+   "url": "https://elitistbookreviews.com/2019/05/14/a-brightness-long-ago/",
+   "quote": "these are presented in third person, so they are immediately distinct",
+   "page": "paragraph beginning 'Danio’s reflections are the major POV'"
+  },
+  {
+   "index": 703,
+   "feature": "other: counter-reception of the register",
+   "claim": "The reviewer, a self-described completist fan, says Kay's books tend towards a certain sameness.",
+   "source": "Elitist Book Reviews, 14 May 2019",
+   "url": "https://elitistbookreviews.com/2019/05/14/a-brightness-long-ago/",
+   "quote": "his books tend towards a certain… sameness",
+   "page": "paragraph beginning 'Even as a fan'"
+  },
+  {
+   "index": 704,
+   "feature": "other: counter-reception of the register",
+   "claim": "The reviewer lists the recurring archetypes Kay works with as the poet, the warrior, the artist, the lover and the priest.",
+   "source": "Elitist Book Reviews, 14 May 2019",
+   "url": "https://elitistbookreviews.com/2019/05/14/a-brightness-long-ago/",
+   "quote": "He works with archetypes — the poet, the warrior, the artist",
+   "page": "paragraph beginning 'Even as a fan'"
+  },
+  {
+   "index": 708,
+   "feature": "metaphor discipline",
+   "claim": "Fantasy-Faction writes that Kay's writing is lyrical without being flowery.",
+   "source": "Fantasy-Faction, 'The World of Guy Gavriel Kay', 2011",
+   "url": "https://fantasy-faction.com/2011/the-world-of-guy-gavriel-kay",
+   "quote": "His writing is lyrical without being flowery.",
+   "page": "paragraph beginning 'In spite of frequently hitting Canada’s bestseller lists'"
+  },
+  {
+   "index": 710,
+   "feature": "other: episodic structure",
+   "claim": "Salon Futura describes Written on the Dark as a series of vignettes from Thierry's life rather than a unifying plot.",
+   "source": "Salon Futura, review of Written on the Dark, April 2025",
+   "url": "https://www.salonfutura.net/2025/04/written-on-the-dark/",
+   "quote": "a series of vignettes – key moments from Thierry’s life that",
+   "page": "paragraph beginning 'The other thing I should note'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I get caught up in small tinkerings with the text, word changes, deletions, linking up paragraphs, dropping more italics.",
+   "note": "Raw live page (200, browser UA). Entry of Wed 13 Jan 2010: 'I am proofing, about 1/4 of the way through... I get caught up in small tinkerings with the text, word changes, deletions, linking up paragraphs, dropping more italics.' Quote verbatim. The 'page-proof stage' limb is carried by the same page: an earlier (December) entry says 'January is going to be busy. The page proofs will come in, and along with the proofreaders I'll have to read those carefully', and the entry itself discusses typesetters, orphaned ellipses and the approved section ornament (dingbat/fleuron), i.e. typeset pages."
+  },
+  {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'll use punctuation varaibly depending on context, speaker, rhythms.",
+   "note": "Raw live page (200). Exact match including the source's misspelling 'varaibly'; sits in the entry on the proofreader over-punctuating speech, as the claim's page field says."
+  },
+  {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even a given book: LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "note": "Raw live page (200). Quote verbatim. The title expansions are supported on the same page: its book navigation lists 'The Last Light of the Sun' and 'THE SARANTINE MOSAIC: Sailing to Sarantium / Lord of Emperors'."
+  },
+  {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have certain characters speaking rapidly at times, under stress",
+   "note": "Raw live page (200). Verbatim, continuing '...tucking a semi-colon into such a passage, or even too many technically viable commas undermines the EFFECT of the passage.'"
+  },
+  {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "italics look LOUDER in galleys than they do on my computer screen",
+   "note": "Raw live page (200). Both limbs verbatim in one entry: 'how consistently I am deleting italics in the galleys' and 'italics look LOUDER in galleys than they do on my computer screen or even in the printout I use for copyediting.'"
+  },
+  {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is simply true that a colon better sets off the 'list' that follows. So the change is made.",
+   "note": "Raw live page (200). The 'opening sentence' limb is explicit above it: 'Here's an example or two from the Perologue [sic]... Catherine asked if I'd consider a colon after ‘property’ in the first sentence, instead of the semi-colon'; Kay first resisted, then 'So the change is made.'"
+  },
+  {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sentence simply read better after deleting the word 'taste'",
+   "note": "Raw live page (200). Verbatim; preceded by 'Catherine queried ‘taste again at twilight’ ... the sustained metaphor getting tangled, to her ear'. Catherine is identified on the same page as the copy-editor ('Catherine's cover letter for the copy-edited manuscript')."
+  },
+  {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If an author is overusing semi-colons they change some to colons or commas.",
+   "note": "Raw live page (200). Verbatim, inside the passage explaining what the copy-editor does ('The copy-editor is the one who makes sure...'), so the copy-editor subject is supported."
+  },
+  {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it also has a tag quote at the end, as LAST LIGHT did",
+   "note": "Raw live page (200). Verbatim: 'YSABEL has an epigraph from Robert Graves ... and it also has a tag quote at the end, as LAST LIGHT did'."
+  },
+  {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stories, he reminds us, are told, but novels are shaped.",
+   "note": "Raw live page (200). Verbatim, in the review's final paragraph, with 'he' = Kay from the preceding sentences about Kay's own aesthetic. Attribution confirmed on page: byline Gary K Wolfe and 'This review and more like it in the May 2019 issue of Locus.'"
+  },
+  {
+   "index": 702,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "although these are presented in third person, so they are immediately distinct from Danio's musings",
+   "note": "Raw live page (200). Verbatim. The 'first-person' limb is supported in the same paragraph, which opens 'Danio's reflections are the major POV throughout the novel. First person is rare enough (in adult speculative fiction)...' — matching the claim's page field."
+  },
+  {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even as a fan, I'm cognizant that his books tend towards a certain... sameness.",
+   "note": "Raw live page (200). Verbatim (the page's ellipsis is the '…' character). 'Self-described completist fan' is supported two sentences earlier: 'where I find myself as a Guy Gavriel Kay fan. I've been reading him for close to a decade now and I'm a completist'. Review posted May 14, 2019 by Jane Funk."
+  },
+  {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He works with archetypes — the poet, the warrior, the artist, the lover, the priest",
+   "note": "Raw live page (200). All five archetypes verbatim in the listed order; 'recurring' is carried by the same sentence's continuation, 'and continually revisits themes of fate and choice.'"
+  },
+  {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His writing is lyrical without being flowery.",
+   "note": "Raw live page (200). Verbatim, in the paragraph beginning 'In spite of frequently hitting Canada's bestseller lists' exactly as the page field states. Article: 'The World of Guy Gavriel Kay' by Ashley Barnard, March 16, 2011, Fantasy-Faction."
+  },
+  {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a series of vignettes – key moments from Thierry's life that are not particularly connected",
+   "note": "Raw live page (200). Verbatim. The 'rather than a unifying plot' limb is explicit in the same paragraph: 'there isn't exactly a unifying plot'. Salon Futura, April 3, 2025, Cheryl Morgan, reviewing Written on the Dark."
+  }
+ ]
+}

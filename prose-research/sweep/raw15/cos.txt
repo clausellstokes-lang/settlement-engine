@@ -1,0 +1,616 @@
+ 
+ Curse of Strahd - Wikipedia 
+ Jump to content 
+ Main menu 
+ Main menu 
+ move to sidebar 
+ hide 
+ Navigation
+ Main page Contents Current events Random article About Wikipedia Contact us 
+ Contribute
+ Help Learn to edit Community portal Recent changes Upload file Special pages 
+ Search 
+ Search 
+ Appearance 
+ Donate 
+ Create account 
+ Log in 
+ Personal tools 
+ Donate 
+ Create account 
+ Log in 
+ Contents 
+ move to sidebar 
+ hide 
+ (Top) 
+ 1 
+ Contents 
+ Toggle Contents subsection 
+ 1.1 
+ Curse of Strahd: Revamped 
+ 2 
+ Publication history 
+ Toggle Publication history subsection 
+ 2.1 
+ Revamped edition 
+ 3 
+ Reception 
+ Toggle Reception subsection 
+ 3.1 
+ Revamped edition 
+ 4 
+ References 
+ 5 
+ External links 
+ Toggle the table of contents 
+ Curse of Strahd 
+ 3 languages 
+ Español Suomi Français 
+ Edit links 
+ Article 
+ Talk 
+ English 
+ Read 
+ Edit 
+ View history 
+ Tools 
+ Tools 
+ move to sidebar 
+ hide 
+ Actions
+ Read 
+ Edit 
+ View history 
+ General
+ What links here Related changes Upload file Permanent link Page information Cite this page Get shortened URL Switch to legacy parser 
+ Print/export
+ Download as PDF Printable version 
+ In other projects
+ Wikidata item 
+ Appearance 
+ move to sidebar 
+ hide 
+ From Wikipedia, the free encyclopedia 
+ D&D 5e adventure module 
+ Curse of Strahd Rules required Dungeons & Dragons 5th edition Character levels 1–10 Authors Jeremy Crawford , Laura Hickman , Tracy Hickman , Adam Lee , Christopher Perkins , Richard Whitters First published March 15, 2016 ISBN 978-0786965984 
+ Curse of Strahd is an adventure book for the 5th edition of the Dungeons & Dragons role-playing game . It was released on March 15, 2016 and is based on the Ravenloft module published in 1983. 
+ Contents [ edit ] 
+ Adventurers are mysteriously drawn to the realm of Barovia which is surrounded by deadly mist and ruled by the vampire wizard Strahd von Zarovich . This gothic horror adventure takes the players on a course through Barovia that culminates with a vampire hunt inside Castle Ravenloft. Using a deck of tarokka cards, the Dungeon Master can randomize parts of the adventure such as the identity of a powerful ally, the placement of important magic items across Barovia, and Strahd's location within Castle Ravenloft. This adventure module is designed to take four to six player characters from 1st level to 10th level. 
+ Curse of Strahd: Revamped [ edit ] 
+ In addition to a softcover adventure book, the boxed set includes the following: [ 1 ] 
+ The Creatures of Horror book, describing new monsters 
+ A tarokka deck and booklet 
+ A themed dungeon master's screen 
+ A double-sided poster-sized map of Barovia and Castle Ravenloft 
+ 12 postcards themed around locations in the adventure 
+ Publication history [ edit ] 
+ Curse of Strahd was written by Jeremy Crawford , Laura Hickman , Tracy Hickman , Adam Lee , Christopher Perkins , Richard Whitters , and was published by Wizards of the Coast in 2016. [ 2 ] It acts as an adaptation of the original Ravenloft module for the 5th edition of Dungeons & Dragons . [ 3 ] Charlie Hall, for Polygon , explained that "Instead of reinventing the wheel, principle [ sic ] designer Chris Perkins brought in the module's original writers — the husband and wife team of Tracy and Laura Hickman — to create the very best version of the famous module yet. [...] Tracy and Laura have been hosting nearly annual sessions of the original Ravenloft at their home, for friends and family, over the course of decades. When Perkins asked for their input, they flew out to meet with the team. The result was a torrent of ideas for new locations, characters and encounters". [ 4 ] On the development process, Perkins said: "Without the Hickmans, this project would've died on the vine" and that "the Hickmans envisioned Strahd differently than he's depicted in the original Ravenloft adventure. Their image didn't match the Bela Legosi [ sic ] vampire quite so much. Tracy found an old daguerreotype [an early type of photograph captured on a silvered copper plate] [ sic ] that captured the look of Strahd in his mind, and we used that image as a reference to create a new look for the vampire". [ 5 ] The tarokka deck was released as a supplement by Gale Force 9. [ 6 ] 
+ Revamped edition [ edit ] 
+ Revamped edition comes in a coffin-shaped display box. 
+ In July 2020, Wizards of the Coast announced a new edition of the Curse of Strahd module, entitled Curse of Strahd: Revamped . [ 1 ] It was released on October 20, 2020. [ 7 ] This module is the first released with the publisher's new focus on diversity and inclusion. [ 8 ] Wizards of the Coast stated that "the adventure includes the latest errata and a revised depiction of the Vistani" who are based on stereotypes about the Romani people . [ 9 ] Beadle & Grimm, a Wizards of the Coast licensee, released a limited run special "Legendary Edition" which included physical props for the Dungeon Master to use such as handouts, maps, props and encounter cards. [ 8 ] 
+ Chris Perkins , Dungeon & Dragons Principal Narrative Designer, in an interview with IGN said, "We don't do a tremendous number of box sets. [...] It was always my wish that at some point we could put a version of the adventure together that actually had the cards with it, and it's out of that idea that this boxed set emerged. We did want to make sure that if Beadle and Grimm [a company that specializes in high-end D&D box sets like this one or this one] [ sic ] , for instance, were doing their own version of it, we wouldn't eventually be duplicating what they would do. They tend to go [...] in the hundreds of dollars. So this is kind of filling in middle space between what they would normally do and what we would normally sell". [ 10 ] 
+ Reception [ edit ] 
+ Publishers Weekly included the book in their "Best-selling Books Week Ending March 28, 2016", in which Curse of Strahd was #6 in "Hardcover Fiction". [ 11 ] [ 12 ] The book was generally well received, earning the 2016 ENnie Awards for Best Adventure and Best Art/Cover and runner up for Product of the Year. [ 13 ] 
+ In 2016, Henry Glasheen, for SLUG Magazine , highlighted the legacy of the original Castle Ravenloft and wrote " Curse of Strahd carries on this legacy admirably, diving deeper into the bloody past of Count Strahd. Before you even get to the module itself, there is a whole section devoted to Strahd, his personality, and his goals in the adventure. [...] In fact, there really are no pre-scripted Strahd moments in the early stages of the adventure—only various opportunities for him to appear and test the party's mettle. In keeping with the logical structure of the original campaign, Curse of Strahd also finds countless ways to intertwine the larger themes of the campaign into its side adventures. There is, as always, a driving main quest that keeps the action moving forward, but each stop along the way brings moral and ethical dilemmas to the party—and Strahd is always watching, waiting to see which party members evidence a dark side that he can play off the others". [ 14 ] 
+ Rory Bristol, for GeekDad , wrote "Fair warning: the book features a lot of death, blood, and general horror. Descriptions and events can be too much for young kids, so beware running this campaign with little ones. For groups that ride the thrill of horror and intrigue, however, this is 100% the book for your party. [...] Reading through The Curse of Strahd was a thrilling visit to the tortured land of Barovia. As with many pre-written adventures for D&D , it was a bit like reading a choose-your-own-adventure book from front to back, rather than following the breadcrumbs. [...] Play is easy, and intuitive, given you've familiarized yourself with the adventure ahead of time. If the DM hasn't read the full adventure, be prepared for a bored party. There's too much intrigue to wing your way through this adventure". [ 15 ] 
+ In 2017, Cecilia D'Anastasio, for Kotaku , highlighted the inclusion of queer characters in Curse of Strahd and wrote "what was a scattering of queer characters throughout the years formalized into a guiding principle with 2016's Curse of Strahd , an adventure that has players take down the vampire Count Strahd. [...] Every adventure since Curse of Strahd has included one or several queer characters, and Crawford assured Kotaku that this will be a constant into future adventures [...]. Weaving queer plotlines into D&D games is not hard to do. A passing mention of a same-sex couple might be enough to assert that queer sexuality is a natural part of the D&D universe. And instead of relying on stereotypes or fixating on their sexuality, these characters' fleshed-out backstories make them people, not icons". [ 16 ] 
+ In a review of Curse of Strahd in Black Gate , Andrew Zimmerman Jones said " Curse of Strahd is really a mix of setting manual and adventure module in one, with a storyline that is extremely open-ended, with endings that (assuming the players survive) allow for continued adventures centered around the consequences of the players' actions in Castle Ravenloft." [ 17 ] 
+ Revamped edition [ edit ] 
+ The new boxed set was included on The Mary Sue ' s 2020 "Gift Guide for the Dungeons & Dragons Fan". [ 18 ] Christian Hoffer, for Comicbook , wrote "while it doesn't have enough extra material to justify a second purchase, Curse of Strahd Revamped is a great box set for the DM/player group that hasn't traveled to Ravenloft and wants to commit to the campaign with a grim flourish. The box set definitely will enhance your Curse of Strahd experience, and the box alone makes for a great display piece on top of your bookshelf or in the D&D corner of your room". [ 19 ] 
+ Julie Muncy, for Io9 , criticized the "granular changes" to the Vistani people as not very extensive and that "while there's a real opportunity here to do better work—the aforementioned diversity pledge also mentioned future works that will feature the Vistani people and aim to complicate their depictions—starting that work with a fancy collector's edition feels less like a promise to do better and more like a victory lap". [ 20 ] Muncy highlighted that the errata and the Revamped edition "sought to undo some of the harmful stereotyping of the Vistani people, along with revising the book's approach to a specific character's disability to avoid ableist stereotypes. [...] While modifications do fix things like the stereotyping of the Vistani people as 'uncivilized' and heavy drinkers, the module still gives the Vistani abilities to curse and hypnotize players or cast spells like Evil Eye , which, along with unrevised art that heavily conjures stereotyped imagery of the Romani, leans into tropes that suggest the Romani have mystical, dangerous powers, tropes that have been used in the past to target Romani for persecution". [ 20 ] 
+ Jon Ryan, for IGN , wrote "the updates to the adventure itself mostly consist of previously-published amendments to the book, such as tweaks to an additional character option or corrections of printing errors, but the most notable updates are to some items that were deemed insensitive or offensive after the original publishing [...]. It's worth noting that the book's illustrations of the Vistani still evoke Romani culture, and some players may still associate certain abilities (such as their ability to cast curses or hypnotize players using an 'Evil Eye') with outdated cultural stereotypes". [ 10 ] 
+ References [ edit ] 
+ 1 2 Doke, Shunal (2020-07-29). "Dungeons & Dragons: Curse of Strahd Revamped Announced for October Release" . IGN India . Archived from the original on 2020-10-27 . Retrieved 2020-10-23 . 
+ ↑ "Curse of Strahd - RPGnet d20 RPG Game Index" . index.rpg.net . Archived from the original on 2025-04-17. 
+ ↑ "Curse of Strahd" . Wizards of the Coast. Archived from the original on January 21, 2016. 
+ ↑ Hall, Charlie (2016-01-18). "D&D's Ravenloft returns with the help of its original creators" . Polygon . Archived from the original on 2020-08-06 . Retrieved 2020-08-21 . 
+ ↑ Kerzner, Liana (March 8, 2016). "Curse Of Strahd Interview With Chris Perkins" . CGMagazine . Archived from the original on 2022-06-28 . Retrieved 2020-08-21 . 
+ ↑ "Ravenloft Returns: Curse of Strahd is Coming – Black Gate" . 18 January 2016. 
+ ↑ "Curse of Strahd Revamped" . Wizards of the Coast . Archived from the original on August 3, 2020 . Retrieved 2020-11-21 . 
+ 1 2 Hall, Charlie (2020-07-31). "One of Dungeons & Dragons' best campaigns is getting two extravagant new reprints" . Polygon . Archived from the original on 2020-10-27 . Retrieved 2020-10-23 . 
+ ↑ Macgregor, Jody (2020-08-03). "Popular D&D tabletop campaign Curse of Strahd is being re-'vamped' " . PC Gamer . Archived from the original on 2020-10-14 . Retrieved 2020-11-21 . 
+ 1 2 Ryan, Jon (July 27, 2020). "Exclusive: First Look at D&D's 'Curse of Strahd Revamped' Collector's Edition" . IGN . Archived from the original on 2020-11-30 . Retrieved 2020-11-21 . 
+ ↑ Juris, Carolyn (March 25, 2016). "This Week's Bestsellers: March 28, 2016" . www.publishersweekly.com . Archived from the original on 2022-11-11 . Retrieved 2020-08-21 . 
+ ↑ "Best-selling Books List | Back issue 03/28/16" . www.publishersweekly.com . Archived from the original on 2020-09-01 . Retrieved 2020-08-21 . 
+ ↑ "2016 ENnie Award Winners" . Archived from the original on 2017-01-19 . Retrieved 2017-02-28 . 
+ ↑ Glasheen, Henry (2016-03-18). "Review: Dungeons & Dragons: Curse of Strahd" . Slug Magazine - Salt Lake Underground . Archived from the original on 2021-03-03 . Retrieved 2020-08-21 . 
+ ↑ Bristol, Rory (2016-03-15). "Feel the Horror in 'The Curse of Strahd' " . GeekDad . Archived from the original on 2020-07-28 . Retrieved 2020-08-21 . 
+ ↑ D'Anastasio, Cecilia (August 24, 2017). "Dungeons & Dragons Promises To Make Its Adventures More Queer" . Kotaku . Archived from the original on 2020-09-10 . Retrieved 2020-08-21 . 
+ ↑ Jones, Andrew Zimmerman (17 March 2016). "Dungeons, Dragons, and Vampires: Curse of Strahd – Black Gate" . Archived from the original on 2021-07-24. 
+ ↑ Kane, Vivian (November 20, 2020). "The Mary Sue Gift Guide for the Dungeons & Dragons Fan" . www.themarysue.com . Archived from the original on 2020-11-20 . Retrieved 2020-11-21 . 
+ ↑ Hoffer, Christian (October 15, 2020). "Dungeons & Dragons Returns to Ravenloft With Curse of Strahd Revamped" . ComicBook.com . Archived from the original on 2020-11-19 . Retrieved 2020-11-21 . 
+ 1 2 Muncy, Julie (July 27, 2020). "D&D's Culturally Sensitive Strahd Revamp Is Here, But It'll Cost You [ Updated ] " . io9 . Archived from the original on 2020-10-23 . Retrieved 2020-11-21 . 
+ External links [ edit ] 
+ Official website 
+ A selection of untagged maps of Barovia 
+ Official Dungeon Master handouts 
+ Official player options 
+ v t e Dungeons & Dragons rulebooks and accessories TSR modules · Wizards of the Coast adventures Original Dungeons & Dragons Core 
+ Dungeons & Dragons 
+ Chainmail 
+ Supplements 
+ Supplement I: Greyhawk 
+ Supplement II: Blackmoor 
+ Supplement III: Eldritch Wizardry 
+ Supplement IV: Gods, Demi-Gods, and Heroes 
+ Swords & Spells 
+ Basic Dungeons & Dragons Core 
+ Basic Set 
+ Expert Set 
+ Companion Set 
+ Master Rules 
+ Immortals Rules 
+ Rules Cyclopedia 
+ Supplements 
+ Battlesystem 
+ Creature Catalogue 
+ The Shady Dragon Inn 
+ Wrath of the Immortals 
+ Modules 
+ Adventures in Blackmoor 
+ Castle Amber 
+ Castle Caldwell and Beyond 
+ City of the Gods 
+ Combat Shield and Mini-adventure 
+ Curse of Xanathon 
+ Death's Ride 
+ The Duchy of Ten 
+ Earthshaker! 
+ The Endless Stair 
+ The Gem and the Staff 
+ Ghost of Lion Castle 
+ Horror on the Hill 
+ In Search of Adventure 
+ In Search of the Unknown 
+ The Isle of Dread 
+ The Jade Hare 
+ The Keep on the Borderlands 
+ The Kidnapping of Princess Arelina 
+ Legacy of Blood 
+ The Lost City 
+ Master Player Screen 
+ Mystery of the Snow Pearls 
+ Night's Dark Terror 
+ Palace of the Silver Princess 
+ Queen's Harvest 
+ Rahasia 
+ The Revenge of Rusak 
+ Sabre River 
+ Temple of the Frog 
+ Test of the Warlords 
+ The Tree of Life 
+ The Veiled Society 
+ War Rafts of Kron 
+ Where Chaos Reigns 
+ Advanced Dungeons & Dragons Core 
+ Players Handbook (1978) 
+ Dungeon Masters Guide (1979) 
+ Monster Manual (1977) 
+ Supplements 
+ Battlesystem 
+ Deities & Demigods 
+ Dragonlance Adventures 
+ Dungeoneer's Survival Guide 
+ Empires of the Sands 
+ Fiend Folio 
+ Forgotten Realms Campaign Set 
+ Greyhawk Adventures 
+ Lords of Darkness 
+ The Magister 
+ Manual of the Planes 
+ Monster Manual II 
+ Moonshae 
+ Oriental Adventures 
+ The Savage Frontier 
+ Unearthed Arcana 
+ Waterdeep and the North 
+ Wilderness Survival Guide 
+ World of Greyhawk Fantasy Game Setting 
+ Modules 
+ Against the Cult of the Reptile God 
+ Against the Giants 
+ The Assassin's Knot 
+ Assault on the Aerie of the Slave Lords 
+ The Bane of Llywelyn 
+ Beyond the Crystal Cave 
+ Blood of the Yakuza 
+ Bloodstone Pass 
+ The Bloodstone Wars 
+ Castle Greyhawk 
+ Conan Against Darkness! 
+ Conan Unchained! 
+ Danger at Dunwater 
+ Day of Al'Akbar 
+ Deep Dwarven Delve 
+ Descent into the Depths of the Earth 
+ Dragonlance modules 
+ Dragons of Despair 
+ Dungeonland 
+ Dwellers of the Forbidden City 
+ The Final Enemy 
+ The Forest Oracle 
+ Forgotten Temple of Tharizdun 
+ The Gauntlet 
+ The Ghost Tower of Inverness 
+ Glacial Rift of the Frost Giant Jarl 
+ Hall of the Fire Giant King 
+ The Hidden Shrine of Tamoachan 
+ Isle of the Ape 
+ The Land Beyond the Magic Mirror 
+ Lost Caverns of Tsojcanth 
+ The Lost Island of Castanamir 
+ Lost Tomb of Martek 
+ The Mines of Bloodstone 
+ Oasis of the White Palm 
+ Pharaoh 
+ Queen of the Demonweb Pits 
+ Queen of the Spiders 
+ Ravager of Time 
+ Ravenloft 
+ Ravenloft II: The House on Gryphon Hill 
+ Red Sonja Unconquered 
+ Ruins of Adventure 
+ Scourge of the Slave Lords 
+ The Secret of Bone Hill 
+ The Sentinel 
+ Shrine of the Kuo-Toa 
+ Sinister Secret of Saltmarsh 
+ Swords of Deceit 
+ Swords of the Undercity 
+ The Temple of Elemental Evil 
+ The Throne of Bloodstone 
+ To Find a King 
+ Tomb of Horrors 
+ Tomb of the Lizard King 
+ Treasure Hunt 
+ Under Illefarn 
+ Vault of the Drow 
+ The Village of Hommlet 
+ White Plume Mountain 
+ Advanced Dungeons & Dragons 2nd edition Core 
+ Player's Handbook (1989) 
+ Dungeon Master's Guide (1989) 
+ Monstrous Manual 
+ Monstrous Compendium (1989) 
+ Supplements 
+ Anauroch 
+ Arms and Equipment Guide 
+ Battlesystem 
+ Book of Artifacts 
+ The Code of the Harpers 
+ The Complete Book of Dwarves 
+ The Complete Book of Humanoids 
+ The Complete Fighter's Handbook 
+ The Complete Psionics Handbook 
+ The Dalelands 
+ Demihuman Deities 
+ Draconomicon 
+ Drow of the Underdark 
+ Dwarves Deep 
+ Earth, Air, Fire, and Water 
+ Faiths & Avatars 
+ Forgotten Realms Adventures 
+ The Forgotten Realms Atlas 
+ Forgotten Realms Campaign Setting 
+ From the Ashes 
+ Greyhawk: The Adventure Begins 
+ A Guide to the Astral Plane 
+ Hall of Heroes 
+ Heroes' Lorebook 
+ Iuz the Evil 
+ Jungles of Chult 
+ Legends & Lore 
+ The Marklands 
+ Monster Mythology 
+ Old Empires 
+ The Ruins of Undermountain 
+ The Shining South 
+ Tome of Magic 
+ Villains' Lorebook 
+ Adventures 
+ Against the Giants: The Liberation of Geoff 
+ The Bloodstone Lands 
+ Border Watch 
+ The City of Skulls 
+ Crypt of Lyzandred the Mad 
+ Die Vecna Die! 
+ The Doomgrinder 
+ Doom of Daggerdale 
+ Fate of Istus 
+ Five Shall Be One 
+ Gargoyle 
+ Greyhawk Ruins 
+ Halls of the High King 
+ House of Strahd 
+ Howl from the North 
+ Mordenkainen's Fantastic Adventure 
+ Night Below 
+ Patriots of Ulek 
+ Rary the Traitor 
+ Return of the Eight 
+ Return to the Keep on the Borderlands 
+ Return to the Tomb of Horrors 
+ Return to White Plume Mountain 
+ Slavers 
+ The Star Cairns 
+ Treasures of Greyhawk 
+ Vecna Lives! 
+ Dungeons & Dragons 3rd edition Core 
+ Player's Handbook (2000) 
+ Dungeon Master's Guide (2000) 
+ Monster Manual (2000) 
+ Supplements 
+ Arms and Equipment Guide 
+ Book of Challenges 
+ Book of Vile Darkness 
+ Defenders of the Faith 
+ Deities and Demigods 
+ Enemies and Allies 
+ Epic Level Handbook 
+ Faiths and Pantheons 
+ Fiend Folio 
+ Forgotten Realms Campaign Setting 
+ Ghostwalk 
+ Hero Builder's Guidebook 
+ Living Greyhawk Gazetteer 
+ Lords of Darkness 
+ Magic of Faerûn 
+ Monsters of Faerûn 
+ Manual of the Planes 
+ Masters of the Wild 
+ Monster Manual II 
+ Oriental Adventures 
+ Psionics Handbook 
+ Races of Faerûn 
+ Savage Species 
+ Song and Silence 
+ Stronghold Builder's Guidebook 
+ Sword and Fist 
+ Tome and Blood 
+ Adventures 
+ Bastion of Broken Souls 
+ City of the Spider Queen 
+ Deep Horizon 
+ The Forge of Fury 
+ The Fright at Tristor 
+ Heart of Nightfang Spire 
+ Lord of the Iron Fortress 
+ Return to the Temple of Elemental Evil 
+ The Speaker in Dreams 
+ The Standing Stone 
+ The Sunless Citadel 
+ Dungeons & Dragons v3.5 Core 
+ Player's Handbook (2003) 
+ Dungeon Master's Guide (2003) 
+ Monster Manual (2003) 
+ Dungeons & Dragons Basic Game (2004) 
+ Supplements Eberron 
+ An Adventurer's Guide to Eberron 
+ City of Stormreach 
+ Dragonmarked 
+ Dragons of Eberron 
+ Eberron Campaign Setting 
+ Faiths of Eberron 
+ Five Nations 
+ The Forge of War 
+ Sharn: City of Towers 
+ Forgotten Realms 
+ City of Splendors: Waterdeep 
+ Dragons of Faerûn 
+ Drow of the Underdark 
+ The Grand History of the Realms 
+ Lost Empires of Faerûn 
+ Shining South 
+ Underdark 
+ Other 
+ Book of Exalted Deeds 
+ Cityscape 
+ Complete Adventurer 
+ Complete Arcane 
+ Complete Champion 
+ Complete Divine 
+ Complete Mage 
+ Complete Psionic 
+ Complete Scoundrel 
+ Complete Warrior 
+ Draconomicon 
+ Dragon Magic 
+ Dungeon Master's Guide II 
+ Dungeonscape 
+ Elder Evils 
+ Exemplars of Evil 
+ Expanded Psionics Handbook 
+ Fiendish Codex I: Hordes of the Abyss 
+ Fiendish Codex II: Tyrants of the Nine Hells 
+ Frostburn 
+ Heroes of Battle 
+ Heroes of Horror 
+ Libris Mortis 
+ Lords of Madness 
+ Magic Item Compendium 
+ Magic of Incarnum 
+ Miniatures Handbook 
+ Monster Manual III 
+ Monster Manual IV 
+ Monster Manual V 
+ Planar Handbook 
+ Player's Handbook II 
+ Races of Destiny 
+ Races of the Dragon 
+ Races of Stone 
+ Races of the Wild 
+ Rules Compendium 
+ Sandstorm 
+ Spell Compendium 
+ Stormwrack 
+ Tome of Battle: The Book of Nine Swords 
+ Tome of Magic 
+ Unearthed Arcana 
+ Weapons of Legacy 
+ Adventures Eberron 
+ Eyes of the Lich Queen 
+ Grasp of the Emerald Claw 
+ Shadows of the Last War 
+ Voyage of the Golden Dragon 
+ Whispers of the Vampire's Blade 
+ Expedition series 
+ Expedition to Castle Ravenloft 
+ Expedition to the Demonweb Pits 
+ Expedition to the Ruins of Greyhawk 
+ Expedition to Undermountain 
+ Fantastic Locations 
+ City of Peril 
+ Dragondown Grotto 
+ Fane of the Drow 
+ Fields of Ruin 
+ The Frostfell Rift 
+ Hellspike Prison 
+ Other adventures 
+ Barrow of the Forgotten King 
+ Fortress of the Yuan-Ti 
+ Red Hand of Doom 
+ Scourge of the Howling Horde 
+ The Shattered Gates of Slaughtergarde 
+ The Sinister Spire 
+ Dungeons & Dragons 4th edition Core 
+ Player's Handbook (2008) 
+ Dungeon Master's Guide (2008) 
+ Monster Manual (2008) 
+ Sourcebooks Supplements 
+ Arcane Power 
+ Divine Power 
+ Dungeon Master's Guide 2 
+ Draconomicon (Chromatic Dragons & Metallic Dragons) 
+ Martial Power 
+ Martial Power 2 
+ Monster Manual 2 
+ Monster Vault 
+ Player's Handbook 2 
+ Player's Handbook 3 
+ Primal Power 
+ Psionic Power 
+ Essentials 
+ Dungeon Master's Kit 
+ Heroes of the Fallen Lands 
+ Heroes of the Forgotten Kingdoms 
+ Monster Vault 
+ Rules Compendium 
+ Settings 
+ Dark Sun Campaign Setting 
+ Eberron Campaign Guide 
+ Eberron Player's Guide 
+ Forgotten Realms Campaign Guide 
+ Forgotten Realms Player's Guide 
+ Manual of the Planes 
+ Adventures 
+ Assault on Nightwyrm Fortress 
+ Demon Queen's Enclave 
+ Keep on the Shadowfell 
+ King of the Trollhaunt Warrens 
+ Madness at Gardmore Abbey 
+ Marauders of the Dune Sea 
+ Orcs of Stonefang Pass 
+ Prince of Undeath 
+ Pyramid of Shadows 
+ Thunderspire Labyrinth 
+ Tomb of Horrors 
+ Dungeons & Dragons 5th edition Core 
+ Player's Handbook (2014) 
+ Dungeon Master's Guide (2014) 
+ Monster Manual (2014) 
+ Sourcebooks Supplements 
+ Volo's Guide to Monsters 
+ Xanathar's Guide to Everything 
+ Mordenkainen's Tome of Foes 
+ Tasha's Cauldron of Everything 
+ Fizban's Treasury of Dragons 
+ Mordenkainen Presents: Monsters of the Multiverse 
+ Minsc and Boo's Journal of Villainy 
+ Bigby Presents: Glory of the Giants 
+ The Deck of Many Things 
+ Settings 
+ Sword Coast Adventurer's Guide 
+ Guildmasters' Guide to Ravnica 
+ Acquisitions Incorporated 
+ Eberron: Rising from the Last War 
+ Explorer's Guide to Wildemount 
+ Mythic Odysseys of Theros 
+ Van Richten's Guide to Ravenloft 
+ Strixhaven: A Curriculum of Chaos 
+ Spelljammer: Adventures in Space 
+ Planescape: Adventures in the Multiverse 
+ Adventures 
+ Tyranny of Dragons 
+ Hoard of the Dragon Queen 
+ The Rise of Tiamat 
+ Princes of the Apocalypse 
+ Out of the Abyss 
+ Curse of Strahd 
+ Storm King's Thunder 
+ Tomb of Annihilation 
+ Waterdeep
+ Dragon Heist 
+ Dungeon of the Mad Mage 
+ Baldur's Gate: Descent into Avernus 
+ Icewind Dale: Rime of the Frostmaiden 
+ The Wild Beyond the Witchlight 
+ Critical Role: Call of the Netherdeep 
+ Dragonlance: Shadow of the Dragon Queen 
+ Phandelver and Below: The Shattered Obelisk 
+ Vecna: Eve of Ruin 
+ Anthologies 
+ Tales from the Yawning Portal 
+ Ghosts of Saltmarsh 
+ Candlekeep Mysteries 
+ Journeys through the Radiant Citadel 
+ Keys from the Golden Vault 
+ Quests from the Infinite Staircase 
+ Starter sets 
+ Lost Mine of Phandelver 
+ Dragon of Icespire Peak 
+ Dragons of Stormwreck Isle 
+ Dungeons & Dragons 5.5 edition Core 
+ Player's Handbook (2024) 
+ Dungeon Master's Guide (2024) 
+ Monster Manual (2025) 
+ Sourcebooks Supplements 
+ Arcana Unleashed 
+ Settings 
+ Forgotten Realms: Heroes of Faerûn 
+ Eberron: Forge of the Artificer 
+ Ravenloft: The Horrors Within 
+ D&D: World of Warcraft 
+ Adventures 
+ Arcana Unleashed: Deadfall 
+ Anthologies 
+ Dragon Delves 
+ Forgotten Realms: Adventures in Faerûn 
+ Starter & boxed sets 
+ Heroes of the Borderlands 
+ Stranger Things: Welcome to the Hellfire Club 
+ Magazines 
+ Dragon 
+ Dungeon 
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=Curse_of_Strahd&oldid=1357479220 " 
+ Categories : Dungeons & Dragons modules ENnies winners LGBTQ-related tabletop games Role-playing game supplements introduced in 2016 Hidden categories: Articles with short description Short description is different from Wikidata Official website not in Wikidata 
+ This page was last edited on 2 June 2026, at 22:08  (UTC) . 
+ Page was rendered with Parsoid . 
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization. 
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+ Search 
+ Search 
+ Toggle the table of contents 
+ Curse of Strahd 
+ 3 languages 
+ Add topic 
+ 

@@ -1,0 +1,27 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 54420 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18
+
+ ❯ tests/lint/tuningRegister.walker.test.js (75 tests | 75 skipped) 1857ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js [ tests/lint/tuningRegister.walker.test.js ]
+Error: tuning inventory refreeze REFUSED [DIRTY_TREE] — this inventory measures the WORKING TREE, and in a shared tree those paths may belong to another lane. Commit first, then refreeze at the clean tip. Dirty: scripts/.writer-reach-baseline.json
+ ❯ refreezeInventory tests/lint/tuningRegister.walker.test.js:119:11
+    117|   });
+    118|   if (!verdict.ok) {
+    119|     throw new Error(`tuning inventory refreeze REFUSED [${verdict.refu…
+       |           ^
+    120|   }
+    121|   const next = {
+ ❯ tests/lint/tuningRegister.walker.test.js:147:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  75 skipped (75)
+   Start at  00:17:06
+   Duration  2.10s (transform 55ms, setup 25ms, import 114ms, tests 1.86s, environment 0ms)
+

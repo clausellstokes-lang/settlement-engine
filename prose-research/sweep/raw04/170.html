@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <script>
+        const subscriberUser = !!document.cookie.split('; ').find(row => row.startsWith('wordpress_subscriber_user='));
+
+        const userDetails = subscriberUser ? JSON.parse(window.localStorage.getItem('userDetails')) : null;
+        const darkModeEnabled = userDetails ? userDetails?.userPreferences?.darkMode === true : false;
+        const stickyHeaderEnabled = userDetails ? userDetails?.userPreferences?.stickyHeader === true : false;
+
+        // Helper function to read cookies
+        function getCookie(name) {
+            var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return v ? v[2] : null;
+        }
+
+        // Check for the 'wordpress_premium_member' cookie
+        const hasPremiumCookie = getCookie('wordpress_premium_member') === '1';
+        const hasPremiumRoleInLS = userDetails
+            && userDetails.userRoles
+            && Array.isArray(userDetails.userRoles)
+            && userDetails.userRoles.includes('premium_member');
+        const isPremium = hasPremiumCookie || hasPremiumRoleInLS;
+
+        if (darkModeEnabled) {
+            document.documentElement.classList.add('dark');
+        }
+
+        if (isPremium) {
+            document.documentElement.classList.add('premium');
+        }
+    </script>
+
+            <!-- START email detection/removal script -->
+        <script>
+            !function(){"use strict";const t={adt_ei:{identityApiKey:"plainText",source:"url",type:"plaintext",priority:1},adt_eih:{identityApiKey:"sha256",source:"urlh",type:"hashed",priority:2},sh_kit:{identityApiKey:"sha256",source:"urlhck",type:"hashed",priority:3}},e=Object.keys(t);function i(t){return function(t){const e=t.match(/((?=([a-z0-9._!#$%+^&*()[\]<>-]+))\2@[a-z0-9._-]+\.[a-z0-9._-]+)/gi);return e?e[0]:""}(function(t){return t.replace(/\s/g,"")}(t.toLowerCase()))}!async function(){const n=new URL(window.location.href),o=n.searchParams;let a=null;const r=Object.entries(t).sort(([,t],[,e])=>t.priority-e.priority).map(([t])=>t);for(const e of r){const n=o.get(e),r=t[e];if(!n||!r)continue;const c=decodeURIComponent(n),d="plaintext"===r.type&&i(c),s="hashed"===r.type&&c;if(d||s){a={value:c,config:r};break}}if(a){const{value:t,config:e}=a;window.adthrive=window.adthrive||{},window.adthrive.cmd=window.adthrive.cmd||[],window.adthrive.cmd.push(function(){window.adthrive.identityApi({source:e.source,[e.identityApiKey]:t},({success:i,data:n})=>{i?window.adthrive.log("info","Plugin","detectEmails",`Identity API called with ${e.type} email: ${t}`,n):window.adthrive.log("warning","Plugin","detectEmails",`Failed to call Identity API with ${e.type} email: ${t}`,n)})})}!function(t,e){const i=new URL(e);t.forEach(t=>i.searchParams.delete(t)),history.replaceState(null,"",i.toString())}(e,n)}()}();
+        </script>
+        <!-- END email detection/removal script -->
+                    <!-- Raptive Head Tag Manual -->
+        <script data-no-optimize="1" data-cfasync="false">
+            (function(w, d) {
+
+                if (isPremium) {
+                    return;
+                }
+
+                w.adthrive = w.adthrive || {};
+                w.adthrive.cmd = w.adthrive.cmd || [];
+                w.adthrive.plugin = 'adthrive-ads-manual';
+                w.adthrive.host = 'ads.adthrive.com';
+                var s = d.createElement('script');
+                s.async = true;
+                s.referrerpolicy = 'no-referrer-when-downgrade';
+                s.src = 'https://' + w.adthrive.host + '/sites/69caa2a59c365653ba27aeb9/ads.min.js?referrer=' + w.encodeURIComponent(w.location.href) + '&cb=' + (Math.floor(Math.random() * 100) + 1);
+                var n = d.getElementsByTagName('script')[0];
+                n.parentNode.insertBefore(s, n);
+            })(window, document);
+        </script>
+        <!-- End of Raptive Head Tag -->
+                    <!-- Dianomi Context Feed -->
+        <script type="text/javascript" id="dianomi_context_script" src="https://www.dianomi.com/js/contextfeed.js"></script>
+        <!-- End Dianomi Context Feed -->
+        
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MGRKVFC2');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts pre-connect
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.salon.com/app/themes/salon/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.salon.com/app/themes/salon/assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.salon.com/app/themes/salon/assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="https://www.salon.com/app/themes/salon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta property="fb:pages" content="120680396518" />
+    <meta property="fb:app_id" content="134091381200152" />
+    <meta name="p:domain_verify" content="afd252c603232fed8ddf2554b144079b"/>
+
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/icomoon.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/Helvetica-Bold-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/Helvetica-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/Helvetica-Oblique-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/Georgia-Bold-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://www.salon.com/app/themes/salon/dist/assets/TimesNewRoman-subset.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO Premium plugin v25.9 (Yoast SEO v25.9) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Oh, the humanity! Stop using AI to pitch stories - Salon.com</title>
+	<meta name="description" content="An article on Clakesworld and the flood of AI chabot stories and pitches" />
+	<link rel="canonical" href="https://www.salon.com/2023/02/25/ai-writing-clarkesworld-science-fiction/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Oh, the humanity! Stop using AI to pitch stories" />
+	<meta property="og:description" content="As magazines become overwhelmed by AI-generated emails, it isn’t a fun experiment. It’s extra work for humans" />
+	<meta property="og:url" content="https://www.salon.com/2023/02/25/ai-writing-clarkesworld-science-fiction/?utm_source=website&amp;utm_medium=social&amp;utm_campaign=ogshare&amp;utm_content=og" />
+	<meta property="og:site_name" content="Salon.com" />
+	<meta property="article:publisher" content="120680396518" />
+	<meta property="article:published_time" content="2023-02-25T20:30:02+00:00" />
+	<meta property="og:image" content="https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="1200"/>
+	<meta property="og:image:height" content="628"/>
+	<meta name="author" content="Alison Stine" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Oh, the humanity! Stop using AI to pitch stories" />
+	<meta name="twitter:description" content="As magazines become overwhelmed by AI-generated emails, it isn’t a fun experiment. It’s extra work for humans" />
+	<meta name="twitter:image" content="https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526.jpg" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Alison Stine" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="6 minutes" />
+	<meta property="article:section" content="All Salon" />
+	<meta property="article:section" content="Culture" />
+	<meta property="article:tag" content="AI" />
+	<meta property="article:tag" content="Artificial Intelligence" />
+	<meta property="article:tag" content="Chatbots" />
+	<meta property="article:tag" content="Chatgpt" />
+	<meta property="article:tag" content="Clarkesworld" />
+	<meta property="article:tag" content="commentary" />
+	<meta property="article:tag" content="Fiction" />
+	<meta property="article:tag" content="literature" />
+	<meta property="article:tag" content="science-fiction" />
+	<meta property="article:tag" content="Writing" />
+	<meta property="article:author" content="Alison Stine" />
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//a.omappapi.com' />
+<link rel='stylesheet' id='optinmonster-memberpress-css' href='https://www.salon.com/app/plugins/optinmonster/assets/dist/css/memberpress.min.css?ver=2.16.24' media='all' />
+<link rel='stylesheet' id='mp-theme-css' href='https://www.salon.com/app/plugins/memberpress/css/ui/theme.css?ver=1.12.15' media='all' />
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+
+<link rel='stylesheet' id='global-salon-css' href='https://www.salon.com/app/themes/salon/dist/assets/global.css?ver=1.0.30' media='all' />
+<link rel='stylesheet' id='article-salon-css' href='https://www.salon.com/app/themes/salon/dist/assets/article.css?ver=1.0.30' media='all' />
+<link rel='stylesheet' id='ad-salon-css' href='https://www.salon.com/app/themes/salon/dist/assets/ad.css?ver=1.0.30' media='all' />
+<script id="nelio-ab-testing-visitor-type-js" src="https://www.salon.com/app/plugins/nelio-ab-testing/assets/dist/js/visitor-type.js?ver=287e8e4cd3bcff28c95d"></script>
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Organization","url":"https:\/\/www.salon.com\/","sameAs":["https:\/\/www.facebook.com\/salon","https:\/\/www.instagram.com\/salonofficial","https:\/\/x.com\/salon","https:\/\/www.instagram.com\/salondotcom\/"],"logo":{"@type":"ImageObject","url":"https:\/\/www.salon.com\/app\/themes\/salon\/assets\/img\/salon-logo.svg"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Homepage","item":{"@type":"Thing","@id":"https:\/\/www.salon.com"}},{"@type":"ListItem","position":2,"name":"Culture Articles","item":{"@type":"Thing","@id":"https:\/\/www.salon.com\/category\/culture"}},{"@type":"ListItem","position":3,"name":"Alison Stine's Articles","item":{"@type":"Thing","@id":"https:\/\/www.salon.com\/writer\/alison_stine"}}]},{"@type":"NewsArticle","headline":"Oh, the humanity! Stop using AI to pitch stories","url":"https:\/\/www.salon.com\/2023\/02\/25\/ai-writing-clarkesworld-science-fiction\/","thumbnailUrl":"https:\/\/www.salon.com\/app\/uploads\/2023\/02\/robot_reading_book_496822526-150x150.jpg","alternativeHeadline":"As magazines become overwhelmed by AI-generated emails, it isn\u2019t a fun experiment. It\u2019s extra work for humans","dateCreated":"2023-02-25T20:30:02+00:00","datePublished":"2023-02-25T20:30:02+00:00","dateModified":"2023-02-24T20:59:11+00:00","articleSection":"All Salon, Culture","image":["https:\/\/www.salon.com\/app\/uploads\/2023\/02\/robot_reading_book_496822526-150x150.jpg","https:\/\/www.salon.com\/app\/uploads\/2023\/02\/robot_reading_book_496822526-300x200.jpg","https:\/\/www.salon.com\/app\/uploads\/2023\/02\/robot_reading_book_496822526-1024x683.jpg","https:\/\/www.salon.com\/app\/uploads\/2023\/02\/robot_reading_book_496822526.jpg"],"keywords":"AI, Artificial Intelligence, Chatbots, Chatgpt, Clarkesworld, commentary, Fiction, literature, science-fiction, Writing","description":"An article on Clakesworld and the flood of AI chabot stories and pitches","author":[{"@type":"Person","name":"Alison Stine","jobTitle":"Staff Writer","description":"Alison Stine is a former staff writer at Salon. She is the author of the novels \"<a href=\"https:\/\/bookshop.org\/a\/2464\/9780778311270\">Trashlands<\/a>\" and \"<a href=\"https:\/\/bookshop.org\/a\/2464\/9780778309925\">Road Out of Winter<\/a>,\" winner of the 2021 Philip K. Dick Award. A recipient of an Individual Artist Fellowship from the National Endowment for the Arts (NEA), she has written for The New York Times, The Guardian, and others.","url":"https:\/\/www.salon.com\/writer\/alison_stine","sameAs":["https:\/\/x.com\/AlisonStine","https:\/\/instagram.com\/alistinewrites"]}],"publisher":{"@type":"Organization","name":"Salon.com","logo":{"@type":"ImageObject","url":"https:\/\/www.salon.com\/app\/themes\/salon\/assets\/img\/salon-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/www.salon.com\/2023\/02\/25\/ai-writing-clarkesworld-science-fiction\/"}}]}</script>
+
+    <!--<script src="https://www.google.com/recaptcha/api.js?render=6LckLQkrAAAAABD30EsnOQxmtgweb-aPZojeUU3v" async defer></script>-->
+    <script>
+        let siteUrl = 'https://www.salon.com';
+        let captchaKey = '6LckLQkrAAAAABD30EsnOQxmtgweb-aPZojeUU3v';
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '134091381200152',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v21.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+      
+<!-- Chartbeat -->
+<script type="text/javascript">
+(function() {
+    
+    let userType = 'anon';
+
+    if (subscriberUser) {
+        
+        if (isPremium) {
+            userType = 'paid';
+        }
+        else {
+            userType = 'lgdin';
+        }
+    }
+
+    let path = window.location.pathname;
+    var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+    _sf_async_config.uid = 1614;
+    _sf_async_config.domain = 'salon.com'; //CHANGE THIS TO THE ROOT DOMAIN
+    _sf_async_config.flickerControl = false;
+    _sf_async_config.path = path;
+    _sf_async_config.sections = "Culture"; // CHANGE THIS TO YOUR SECTION NAME(s)
+    _sf_async_config.authors = "alison_stine"; // CHANGE THIS TO YOUR AUTHOR NAME(s)
+
+    var _cbq = window._cbq = (window._cbq || []);
+    _cbq.push(["_acct", userType]);
+
+    function loadChartbeat() {
+        var e = document.createElement('script');
+        var n = document.getElementsByTagName('script')[0];
+        e.type = 'text/javascript';
+        e.async = true;
+        e.src = '//static.chartbeat.com/js/chartbeat.js';;
+        n.parentNode.insertBefore(e, n);
+    }
+    loadChartbeat();
+})();
+</script>
+<script async src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="wp-singular post-template-default single single-post postid-842501 single-format-standard wp-theme-salon">
+    <script>
+        if (stickyHeaderEnabled) {
+            document.body.setAttribute('data-fixed', 'true');
+        } else {
+            document.body.removeAttribute('data-fixed');
+        }
+    </script>
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGRKVFC2"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+        
+            <div class="loader-modal">
+    <div></div>
+</div>
+        <header class="main-header-container">
+            
+<section class="header__mobile">
+    <div>
+        <div class="header__mobile__logo">
+            <a href="https://www.salon.com" aria-label="To Salon Homepage">
+                <img class="-mt-2.5" src="https://www.salon.com/app/themes/salon/assets/img/mobile-logo.svg" width="136" height="40" alt="Salon logo" />
+            </a>
+        </div>
+        <div class="header__mobile__actions">
+            <a href="https://www.salon.com/premium?utm_source=header&#038;utm_medium=onsite&#038;utm_campaign=become-a-member-header-subscribe-premium" class="hide-if-premium header__subscribe-link" data-subscription-cta-region="header">
+    <button class="bg-[#ed2c1d] px-2 py-1 text-base font-bold text-white uppercase hover:bg-[#b20000]">
+    Subscribe</button>
+</a>
+            <button class="button__burger group/button__burger text-[#1e1e1e] dark:text-white text-2xl" aria-pressed="false" aria-controls="mobile-menu">
+    <i class="icon icon-burger block group-aria-pressed/button__burger:hidden" ></i>
+    <i class="icon icon-close hidden group-aria-pressed/button__burger:block" ></i>
+</button>
+        </div>
+    </div>
+    <nav
+    class="navigation__mobile"
+    aria-expanded="false"
+    id="mobile-menu"
+>
+    <div>
+        <div class="search__form w-full">
+    <form role="search" method="GET" action="https://www.salon.com/search/">
+        <div>
+                        <label for="search-form-1" class="hidden">Search</label>
+            <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#666666] dark:text-white">
+                    <i class="icon icon-search" ></i>
+                </div>
+                <input type="search" name="s" id="search-form-1" class="block w-full rounded-sm border border-[#a6a6a6] dark:border-white py-2 pr-4 pl-10 text-[#666666] dark:text-white text-base leading-4 placeholder:text-sm placeholder:text-[#666666] dark:placeholder:text-white placeholder:leading-4 outline-0 dark:bg-[#1d1d1d]" placeholder="Search" value="" />
+            </div>
+        </div>
+    </form>
+</div>
+        <div class="menu-burger-menu-container"><ul class="menu"><li class="menu-item"><a href="https://www.salon.com/category/news-and-politics">News &amp; Politics</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/culture">Culture</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/food">Food</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/science-and-health">Science &amp; Health</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/money">Money</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/life-stories">Life Stories</a></li>
+<li class="menu-item"><a href="https://www.salon.com/tv">Video</a></li>
+<li class="menu-item menu-item-has-children"><a href="#">Reviews</a>
+<ul>
+<li class="menu-item menu-item-has-children"><a href="#">Lifestyle</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/12/16/navigating-the-new-sober-boom-where-a-persons-sobriety-is-as-unique-as-their-fingerprint/">The New Sober Boom</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2023/12/30/secrets-of-a-serial-addict-how-i-got-hooked-on-quitting-over-and-over-again/">Getting Hooked on Quitting</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Education</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2024/03/16/ignorance-and-democracy-capitalisms-long-against-higher-education/">Liberal Arts Cuts Are Dangerous</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2022/09/16/college-was-necessary-for-me-will-my-own-child-need-it-like-i-did/">Is College Necessary?</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Finance</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/08/26/my-parents-are-deadcan-i-afford-avocado-toast-now/">Dying Parents Costing Millennials Dear</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2023/09/09/how-did-le-creuset-the-self-described-heirloom-quality-cookware-change-the-cooking-game/">Gen Z Investing In Le Creuset</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Crypto</a>
+	<ul>
+<li class="menu-item menu-item-has-children"><a href="#">Investing</a>
+		<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/03/23/on-thursdays-we-wear-orange-sec-sues-lindsay-lohan-and-others-over-crypto-money-laundering-scam/">SEC vs Celebrity Crypto Promoters</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2022/04/16/impulsive-psychopaths-like-crypto-dark-personality-traits-increase-bitcoin-enthusiasm_partner/">&#8216;Dark&#8217; Personalities Drawn to BTC</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+</ul></div>        <div id="userMenuContainerMobile">
+                    </div>
+        <div>
+            <div class="navigation__social">
+    <a href="https://x.com/Salon" target="_blank">
+        <i class="icon icon-twitter" ></i>
+    </a>
+    <a href="https://www.instagram.com/salonofficial" target="_blank">
+        <i class="icon icon-instagram" ></i>
+    </a>
+    <a href="https://www.youtube.com/user/SalonDotCom" target="_blank">
+        <i class="icon icon-youtube" ></i>
+    </a>
+    <a href="https://www.facebook.com/salon" target="_blank">
+        <i class="icon icon-facebook" ></i>
+    </a>
+    <a href="https://www.tiktok.com/@salonofficial" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-tiktok" ></i>
+    </a>
+    <a href="https://www.reddit.com/domain/salon.com" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-reddit" ></i>
+    </a>
+    <a href="https://www.linkedin.com/company/salon-com" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-linkedin" ></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+</section>
+            
+<section class="header__desktop">
+    <section class="header__desktop__top">
+        <div>
+            <div>
+                <button class="button__burger group/button__burger text-[#1e1e1e] dark:text-white text-2xl" aria-pressed="false" aria-controls="burger-menu">
+    <i class="icon icon-burger block group-aria-pressed/button__burger:hidden" ></i>
+    <i class="icon icon-close hidden group-aria-pressed/button__burger:block" ></i>
+</button>
+                <nav class="navigation__burger" aria-expanded="false" id="burger-menu">
+    <div>
+        <div class="menu-burger-menu-container"><ul class="flex flex-col gap-2"><li class="menu-item"><a href="https://www.salon.com/category/news-and-politics">News &amp; Politics</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/culture">Culture</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/food">Food</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/science-and-health">Science &amp; Health</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/money">Money</a></li>
+<li class="menu-item"><a href="https://www.salon.com/category/life-stories">Life Stories</a></li>
+<li class="menu-item"><a href="https://www.salon.com/tv">Video</a></li>
+<li class="menu-item menu-item-has-children"><a href="#">Reviews</a>
+<ul>
+<li class="menu-item menu-item-has-children"><a href="#">Lifestyle</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/12/16/navigating-the-new-sober-boom-where-a-persons-sobriety-is-as-unique-as-their-fingerprint/">The New Sober Boom</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2023/12/30/secrets-of-a-serial-addict-how-i-got-hooked-on-quitting-over-and-over-again/">Getting Hooked on Quitting</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Education</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2024/03/16/ignorance-and-democracy-capitalisms-long-against-higher-education/">Liberal Arts Cuts Are Dangerous</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2022/09/16/college-was-necessary-for-me-will-my-own-child-need-it-like-i-did/">Is College Necessary?</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Finance</a>
+	<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/08/26/my-parents-are-deadcan-i-afford-avocado-toast-now/">Dying Parents Costing Millennials Dear</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2023/09/09/how-did-le-creuset-the-self-described-heirloom-quality-cookware-change-the-cooking-game/">Gen Z Investing In Le Creuset</a></li>
+	</ul>
+</li>
+<li class="menu-item menu-item-has-children"><a href="#">Crypto</a>
+	<ul>
+<li class="menu-item menu-item-has-children"><a href="#">Investing</a>
+		<ul>
+<li class="menu-item"><a href="https://www.salon.com/2023/03/23/on-thursdays-we-wear-orange-sec-sues-lindsay-lohan-and-others-over-crypto-money-laundering-scam/">SEC vs Celebrity Crypto Promoters</a></li>
+<li class="menu-item"><a href="https://www.salon.com/2022/04/16/impulsive-psychopaths-like-crypto-dark-personality-traits-increase-bitcoin-enthusiasm_partner/">&#8216;Dark&#8217; Personalities Drawn to BTC</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+</ul></div>    </div>
+</nav>
+            </div>
+            <a href="https://www.salon.com/premium?utm_source=header&#038;utm_medium=onsite&#038;utm_campaign=become-a-member-header-subscribe-premium" class="hide-if-premium header__subscribe-link" data-subscription-cta-region="header">
+    <button class="bg-[#ed2c1d] px-2 py-1 text-base font-bold text-white uppercase hover:bg-[#b20000]">
+    Subscribe</button>
+</a>
+            <div class="subscriptionSlogan hide-if-premium">
+                Go ad-free with Premium            </div>
+                    </div>
+        <div>
+                            <a href="https://www.salon.com/newsletter?utm_source=header&#038;utm_medium=onsite&#038;utm_campaign=newsletter-signup-onsite-header" >
+    <button class="border border-[#ed2c1d] text-[#ed2c1d] px-2 py-1 text-base font-bold uppercase hover:text-[#b20000] hover:border-[#b20000]">
+    Newsletters</button>
+</a>
+                        <div class="navigation__social">
+    <a href="https://x.com/Salon" target="_blank">
+        <i class="icon icon-twitter" ></i>
+    </a>
+    <a href="https://www.instagram.com/salonofficial" target="_blank">
+        <i class="icon icon-instagram" ></i>
+    </a>
+    <a href="https://www.youtube.com/user/SalonDotCom" target="_blank">
+        <i class="icon icon-youtube" ></i>
+    </a>
+    <a href="https://www.facebook.com/salon" target="_blank">
+        <i class="icon icon-facebook" ></i>
+    </a>
+    <a href="https://www.tiktok.com/@salonofficial" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-tiktok" ></i>
+    </a>
+    <a href="https://www.reddit.com/domain/salon.com" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-reddit" ></i>
+    </a>
+    <a href="https://www.linkedin.com/company/salon-com" target="_blank" class="salon-lg:hidden">
+        <i class="icon icon-linkedin" ></i>
+    </a>
+</div>
+            <div class="dropdown__user group/dropdown__user relative text-left">
+    <div class="flex justify-center">
+        <button type="button" class="text-[#1e1e1e] dark:text-white group-hover/dropdown__user:text-[#ed2c1d]" id="dropdown-user-2" aria-haspopup="true">
+            <i class="icon icon-user text-2xl" ></i>
+        </button>
+    </div>
+    <div class="absolute right-0 z-10 pt-2 w-56 origin-top-right rounded-md bg-white dark:bg-[#1d1d1d] shadow-lg invisible transition-opacity ease-out delay-100 opacity-0 group-hover/dropdown__user:opacity-100 group-hover/dropdown__user:visible" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-user-2" tabindex="-1">
+        <div role="none" id="userMenuContainer"></div>
+    </div>
+</div>
+        </div>
+    </section>
+    <section class="header__desktop__middle">
+        
+<nav class="navigation__desktop">
+    <div>
+        <div>
+            
+                <ul class="menu"><li class="menu-item"><a href="https://www.salon.com/category/news-and-politics">News &amp; Politics</a></li><li class="menu-item"><a href="https://www.salon.com/category/culture">Culture</a></li><li class="menu-item"><a href="https://www.salon.com/category/food">Food</a></li></ul>            <div class="logo__desktop">
+                <a href="https://www.salon.com" aria-label="To Salon Homepage">
+                    <img src="https://www.salon.com/app/themes/salon/assets/img/salon-logo.svg" width="341" height="100" alt="Salon logo" />
+                </a>
+            </div>
+                <ul class="menu"><li class="menu-item"><a href="https://www.salon.com/category/science-and-health">Science &amp; Health</a></li><li class="menu-item"><a href="https://www.salon.com/category/money">Money</a></li><li class="menu-item"><a href="https://www.salon.com/tv">Video</a></li></ul>                    </div>
+    </div>
+</nav>
+    </section>
+    <section class="header__desktop__bottom">
+        <div>
+            <div class="search__form w-full">
+    <form role="search" method="GET" action="https://www.salon.com/search/">
+        <div>
+                        <label for="search-form-3" class="hidden">Search</label>
+            <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#666666] dark:text-white">
+                    <i class="icon icon-search" ></i>
+                </div>
+                <input type="search" name="s" id="search-form-3" class="block w-full rounded-sm border border-[#a6a6a6] dark:border-white py-2 pr-4 pl-10 text-[#666666] dark:text-white text-base leading-4 placeholder:text-sm placeholder:text-[#666666] dark:placeholder:text-white placeholder:leading-4 outline-0 dark:bg-[#1d1d1d]" placeholder="Search" value="" />
+            </div>
+        </div>
+    </form>
+</div>
+        </div>
+    </section>
+</section>
+        </header>
+    
+    <div class="raptive-salon-header hide-if-premium"></div>
+
+    <main class="main-container">
+
+<div class="articles">
+            <article id="post-842501" class="single-column post-842501 post type-post status-publish format-standard has-post-thumbnail hentry category-all-salon category-culture tag-ai tag-artificial-intelligence tag-chatbots tag-chatgpt tag-clarkesworld tag-commentary tag-fiction tag-literature-2 tag-science-fiction tag-writing" data-post-id="842501">
+    <!-- TODO: Add the preview message here ... -->
+    
+<section class="article__title">
+            <div class="badge">commentary</div>
+        <h1>Oh, the humanity! Stop using AI to pitch stories</h1>
+    <h2>As magazines become overwhelmed by AI-generated emails, it isn’t a fun experiment. It’s extra work for humans</h2>
+    <div class="writers">
+                    <div>
+                <div class="by">
+                    <span>By</span>
+                                            <a href="https://www.salon.com/writer/alison_stine">
+                            Alison Stine                        </a>
+                                                            </div>
+                                    <div>
+                        Staff Writer                    </div>
+                            </div>
+                <div class="date">
+                            <h3>
+                    <span>Published</span>
+                    <time datetime="2023-02-25T15:30:02-05:00">
+                        February 25, 2023 3:30PM (EST)                    </time>
+                </h3>
+                    </div>
+    </div>
+</section>
+    <section class="article__feature">
+    <!-- TODO: Add the featured video here... -->
+        <div class="attachment__image">
+    <div class="image ">
+        <img width="1692" height="1128" src="https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526.jpg" class=" attachment-full size-full position-center" alt="Robot sitting on a bunch of books, reading (Getty Images/Kirillm)" sizes="(max-width: 1692px) 100vw, 1692px" decoding="async" fetchpriority="high" srcset="https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526.jpg 1692w, https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526-300x200.jpg 300w, https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526-1024x683.jpg 1024w, https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526-768x512.jpg 768w, https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526-1536x1024.jpg 1536w, https://www.salon.com/app/uploads/2023/02/robot_reading_book_496822526-354x236.jpg 354w" />    </div>
+            <div class="alt-text">
+            Robot sitting on a bunch of books, reading (Getty Images/Kirillm)        </div>
+    </div>
+</section>
+    <section class="main">
+        <div>
+            <!-- TODO: Add the functionality for the article sharing here ... -->
+            
+<section class="article__share">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.salon.com%2F2023%2F02%2F25%2Fai-writing-clarkesworld-science-fiction%2F&#038;utm_source=facebook&#038;utm_medium=social&#038;utm_campaign=socialbuttons&#038;utm_content=share_button" class="button__share group/button__share flex items-center bg-[#5f5f5f] rounded text-white hover:text-white hover:no-underline h-8 max-w-[115px] min-[801px]:w-full transition-colors relative hover:bg-[#3a5697]" rel="nofollow">
+    <i class="icon icon-facebook bg-[#797777] fill-white max-w-9 !w-9 shrink-0 !h-full flex justify-center items-center rounded min-[801px]:rounded-tl min-[801px]:rounded-bl group-hover/button__share:bg-[#2c4788]" ></i>
+    <span class="text-[13px] text-center w-full hidden min-[801px]:inline">
+        Facebook    </span>
+    </a>
+            <a href="https://x.com/share?url=https%3A%2F%2Fwww.salon.com%2F2023%2F02%2F25%2Fai-writing-clarkesworld-science-fiction%2F&#038;text=Oh%2C+the+humanity%21+Stop+using+AI+to+pitch+stories&#038;utm_source=twitter&#038;utm_medium=social&#038;utm_campaign=socialbuttons&#038;utm_content=share_button" class="button__share group/button__share flex items-center bg-[#5f5f5f] rounded text-white hover:text-white hover:no-underline h-8 max-w-[115px] min-[801px]:w-full transition-colors relative hover:bg-[#03a2e0]" rel="nofollow">
+    <i class="icon icon-twitter bg-[#797777] fill-white max-w-9 !w-9 shrink-0 !h-full flex justify-center items-center rounded min-[801px]:rounded-tl min-[801px]:rounded-bl group-hover/button__share:bg-[#048cc1]" ></i>
+    <span class="text-[13px] text-center w-full hidden min-[801px]:inline">
+        X    </span>
+    </a>
+            <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fwww.salon.com%2F2023%2F02%2F25%2Fai-writing-clarkesworld-science-fiction%2F&#038;title=Oh%2C+the+humanity%21+Stop+using+AI+to+pitch+stories&#038;utm_source=reddit&#038;utm_medium=social&#038;utm_campaign=socialbuttons&#038;utm_content=share_button" class="button__share group/button__share flex items-center bg-[#5f5f5f] rounded text-white hover:text-white hover:no-underline h-8 max-w-[115px] min-[801px]:w-full transition-colors relative hover:bg-[#ff661e]" rel="nofollow">
+    <i class="icon icon-reddit bg-[#797777] fill-white max-w-9 !w-9 shrink-0 !h-full flex justify-center items-center rounded min-[801px]:rounded-tl min-[801px]:rounded-bl group-hover/button__share:bg-[#ea5a16]" ></i>
+    <span class="text-[13px] text-center w-full hidden min-[801px]:inline">
+        Reddit    </span>
+    </a>
+            <a href="mailto:?subject=Oh%2C%20the%20humanity%21%20Stop%20using%20AI%20to%20pitch%20stories&#038;body=Check%20out%20this%20article%21%20https%3A%2F%2Fwww.salon.com%2F2023%2F02%2F25%2Fai-writing-clarkesworld-science-fiction%2F%3Futm_source%3Demail%26utm_medium%3Dsocial%26utm_campaign%3Dsocialbuttons%26utm_content%3Dshare_button" class="button__share group/button__share flex items-center bg-[#5f5f5f] rounded text-white hover:text-white hover:no-underline h-8 max-w-[115px] min-[801px]:w-full transition-colors relative hover:bg-[#3d4e66]" >
+    <i class="icon icon-email bg-[#797777] fill-white max-w-9 !w-9 shrink-0 !h-full flex justify-center items-center rounded min-[801px]:rounded-tl min-[801px]:rounded-bl group-hover/button__share:bg-[#2d394a]" ></i>
+    <span class="text-[13px] text-center w-full hidden min-[801px]:inline">
+        Email    </span>
+    </a>
+        <div class="article__title-badges">
+        <div class="google-preferred-source-container">
+            <a
+                class="google-preferred-source"
+                href="https://www.google.com/preferences/source?q=salon.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Set Salon as a preferred source on Google News"
+                            >
+                <picture
+                    data-light-src="https://www.salon.com/app/themes/salon/assets/img/google_preferred_source_badge_light@2x.png"
+                    data-dark-src="https://www.salon.com/app/themes/salon/assets/img/google_preferred_source_badge_dark@2x.png"
+                >
+                    <source srcset="https://www.salon.com/app/themes/salon/assets/img/google_preferred_source_badge_light@2x.png" media="(prefers-color-scheme: dark)">
+                    <img
+                        src="https://www.salon.com/app/themes/salon/assets/img/google_preferred_source_badge_light@2x.png"
+                        alt="Set Salon as a preferred source on Google News"
+                        loading="lazy"
+                        width="676"
+                        height="213"
+                    >
+                </picture>
+            </a>
+        </div>
+    </div>
+    <template id="save-article-button">
+        
+<button type="button" id="saveArticleBtn-5696" onclick="saveArticle(this.id);" class="button__tertiary group/button__tertiary border-2 border-[#5f5f5f] rounded text-[#5f5f5f] text-sm font-bold px-2 py-1 h-8 lowercase flex items-center gap-x-1.5 hover:text-[#e42416] hover:border-[#e42416]">
+            <i class="icon icon-save !h-4 !w-3 text-[#5f5f5f] group-hover/button__tertiary:text-[#e42416] text-base" ></i>
+        <span class="btnLabel">Save</span>
+</button>
+    </template>
+</section>
+            <!-- TODO: Add the editor's note here ... -->
+                        <section class="article__content page-article"><p style="text-align:start; text-indent:0px">My first experience with AI started innocently enough: a social media message from a stranger. The stranger had been messaging an <a href="https://www.salon.com/2023/02/21/ai-chatbots-are-having-their-tulip-mania-moment/">AI chatbot</a> programmed to respond like a therapist, and the chatbot had recommended several of my books. But the person couldn’t find them in any bookstore. The titles were not, in fact, books I or anyone had written, yet the descriptions provided by the AI sounded very similar to my already-published books by different names. I told the stranger as much and we had a brief and pleasant interaction. Afterward, someone I related the story to asked me, “Are you sure <em>he</em> wasn’t a <a href="https://www.salon.com/2023/01/16/how-m3gan-weaponizes-music/">robot</a>?”</p>
+<p>Honestly, I can’t be sure. None of us can be, not anymore. Except when we obviously, terribly can. On Monday, <a href="https://clarkesworldmagazine.com/">Clarkesworld</a>, a long-running science fiction magazine, took the unprecedented step of closing submissions to writers. Because the more than 50 submissions editor and publisher Neil Clarke had received that single day before noon? They weren’t by writers. They were by <a href="https://www.salon.com/2023/02/24/ai-companionship-masculinity-and-the-case-of-bings-sentient-chatbot/">AI</a>.</p><div class="raptive-salon-video hide-if-premium"></div>
+<p>Clarke wrote in a <a href="http://neil-clarke.com/a-concerning-trend/">blog post</a>, “In 15 days, we’ve more than doubled the total [submissions] for all of January,” later sharing a <a href="https://twitter.com/clarkesworld/status/1627837671069417472">graph</a> showing over 500 submissions for the first few weeks of February alone that were, as he described it, “Plagiarism and bot-written.”</p><div class="raptive-salon-content hide-if-premium"></div>
+<p>AI-generated stories and pitches are not a fun social experiment. They’re malicious spam that wastes time and they couldn’t come at a <em>worst </em>time in the currently precarious world of literature and writing. </p>
+<div class="layout_template_wrapper">
+<div class="related_article">
+<p class="related_text">Related</p>
+<div class="related_link"><a href="https://www.salon.com/2023/01/16/how-m3gan-weaponizes-music/" target="_blank" rel="noopener">How “M3GAN” weaponizes music</a></div>
+</div>
+</div>
+<p>Clarkesworld is a prestigious online science fiction and fantasy magazine that has been publishing monthly for nearly 20 years. It’s known for its fast turnaround times when it comes to submissions of work by writers hoping to be published. Writer <a href="https://bookshop.org/search?keywords=Meg+Elison+">Meg Elison</a> said in a reel on <a href="https://www.instagram.com/p/Co8fw-frwTp/?hl=en" target="_blank" rel="noopener">Instagram</a>, “It has the distinction of being constantly open to submissions, unusual in this world . . . they have a reputation of responding in about 48 hours,” an unbelievably fast response time given that most magazines take months or longer. (A writer friend once sent a birthday card to his short story when it had been under consideration at The Georgia Review for a year.)</p>
+<p>The sudden influx of AI stories “gummed up the process,” said Elison, an alarming uptick that was notable not only for its abruptness but for the quality of the stories. Which were terrible. </p>
+<div class="left_quote">
+<p><strong>Anyone who thinks you can get rich quick through being a writer has never been a writer.</strong></p>
+</div>
+<p><a href="http://neil-clarke.com/a-concerning-trend/">Clarke</a> said he wasn’t going to publicly note all the differences between human-written and AI stories, not wanting to give tips to improve that algorithm, but mentioned “some very obvious patterns, and I have no intention of helping those people become less likely to be caught.” The AI submissions consisted of plagiarized, stitched-together bits of previously published short stories, some of which had been published in <a href="https://twitter.com/clarkesworld/status/1627711728245960704" target="_blank" rel="noopener">Clarkesworld </a>itself. </p>
+<p><span class="zDER0GreBJ1bgpItauyNqkm4nXv8fsVwZFlSC6o5KPAHU7MOd"></span></p>
+<blockquote class="twitter-tweet" data-width="500" data-dnt="true">
+<p lang="en" dir="ltr">Submissions are currently closed. It shouldn't be hard to guess why.</p>
+<p>— clarkesworld (@clarkesworld) <a href="https://twitter.com/clarkesworld/status/1627711728245960704?ref_src=twsrc%5Etfw">February 20, 2023</a></p></blockquote>
+<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p><a href="https://www.buzzfeednews.com/article/pranavdixit/clarkesworld-sci-fi-magazine-ai-story-submissions-closed">Buzzfeed News</a> wrote, the “explosion of generative AI — tools and services that can generate any kind of text or image with a simple prompt — has <a href="https://www.theverge.com/2023/2/2/23582772/chatgpt-ai-get-rich-quick-schemes-hustlers-web" target="_blank" rel="noopener">birthed</a> an online ecosystem of hustlers,” citing a recent <a href="https://www.reuters.com/technology/chatgpt-launches-boom-ai-written-e-books-amazon-2023-02-21/">Reuters</a> story about how Amazon’s self-publishing arm has been inundated with AI-generated “books.” Why? Because some people who use online apps like ChatGPT and Midjourney want to make fast and easy money.</p><div class="raptive-salon-content hide-if-premium"></div>
+<p>Clarke told <a href="https://www.buzzfeednews.com/article/pranavdixit/clarkesworld-sci-fi-magazine-ai-story-submissions-closed">Buzzfeed</a> News, “These are not people that were trying to legitimately submit fiction to us. These are the people who are trying to make money on the side hustle.”</p>
+<p>Anyone who thinks you can get rich quick through being a writer has never been a writer, especially a fiction writer. <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwj_0fqWxa79AhXdIjQIHRsjD6kQFnoECCQQAQ&amp;url=https%3A%2F%2Fwww.nytimes.com%2F2019%2F01%2F05%2Fbooks%2Fauthors-pay-writer.html&amp;usg=AOvVaw1XHGFGC0Mo2_xQnhFm0s83">The New York Times</a> reported that the average pay for full-time writers was $20,300 in 2017. <a href="https://clarkesworldmagazine.com/submissions/" target="_blank" rel="noopener">Clarkesworld</a> pays 12 cents a word for stories, which is higher than many literary magazines, some of which pay nothing at all.</p>
+<p>When it comes to books, the typical <a href="https://www.publishersweekly.com/pw/by-topic/columns-and-blogs/soapbox/article/81738-advice-for-women-with-book-advances.html" target="_blank" rel="noopener">book advance</a> for a first-time author is about <a href="https://goodereader.com/blog/indie-author-news/first-time-authors-normally-get-a-10000-advance-from-a-major-publishing-company" target="_blank" rel="noopener">$10,000</a>. You have to earn that back in book sales before you receive a cent of royalties. But <a href="https://www.publishersweekly.com/pw/by-topic/columns-and-blogs/soapbox/article/6153-a-bookselling-tail.html">Publishers Weekly</a> reported, “In 2004, 950,000 titles out of the 1.2 million tracked by Nielsen Bookscan sold fewer than 99 copies. Another 200,000 sold fewer than 1,000 copies . . . The average book in America sells about 500 copies.” </p>
+<p>These were books written by people, who put serious time and effort into creating something hopefully new, not simply entering some key words into ChatGPT, which is not that great at “writing.” <a href="https://www.buzzfeednews.com/article/pranavdixit/clarkesworld-sci-fi-magazine-ai-story-submissions-closed">Clarke</a> said, “There’s a difference in rhythm, and there are some serious tells, like a bunch of submissions with the same title generated by an AI program.” </p><div class="raptive-salon-content hide-if-premium"></div>
+<div class="top_quote">
+<p><strong>It does the opposite of what AI is “supposed” to do: it makes more work, not less, for humans.</strong></p>
+</div>
+<p>That’s AI right now. What about AI in the near future? Like a science fiction story, the technology is advancing faster than we can figure out what to do with it or how to manage it. Witness the <a href="https://www.salon.com/2023/02/24/ai-companionship-masculinity-and-the-case-of-bings-sentient-chatbot/">Bing chatbot</a> who professed its many so-called feelings, including love for the reporter interviewing it, in a viral <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwjtg5qryK79AhXNATQIHbLeBaAQFnoECE8QAQ&amp;url=https%3A%2F%2Fwww.nytimes.com%2F2023%2F02%2F16%2Ftechnology%2Fbing-chatbot-microsoft-chatgpt.html&amp;usg=AOvVaw1ihF2bxrNkOQsshcCfeHwE">New York Times</a> story. <a href="https://www.buzzfeednews.com/article/pranavdixit/clarkesworld-sci-fi-magazine-ai-story-submissions-closed">Clarke</a> worries, “AI is going to be writing at such a level that you won’t be able to detect it against a normal human.”</p>
+<p><span class="ElyBVks5thdMY2RpOe80JGuUW3xiCSfc1vnI4zrLAKamTbZjgF"><div class="youtube-classic-embed"><span class="w-full flex justify-center !m-0"><iframe title="Definitive proof that the AI art is plagiarism" width="500" height="281" data-src="https://www.youtube.com/embed/TsEMYZqsWcE?feature=oembed" class="lazy w-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span></div></span></p>
+<p>Like <a href="https://www.youtube.com/watch?v=TsEMYZqsWcE">AI art</a>, writing generated by AI both plagiarizes and takes away from real, living artists and their craft, training and livelihood. It’s a sad amalgamation of creativity. It also does the opposite of what AI is “supposed” to do: it makes more work, not less, for humans. When I proposed this story, my editor forwarded me one of the recent AI pitches she had received at Salon. The awkward, halting sentences, inexplicably joined together, reminded me of first year English Composition, catching a student in obvious, cut-and-paste plagiarism. </p>
+<p>The reason for the email was also unclear. There was no call to action, no request for acceptance or money even. If it was a story pitch, it was a sad shadow of one. What’s the purpose of this, other than an experiment that makes many people’s lives harder?</p><div class="raptive-salon-content hide-if-premium"></div>
+<hr>
+<p style="text-align:center"><strong><em>Want a daily wrap-up of all the news and commentary Salon has to offer? <a href="https://www.salon.com/newsletter" target="_blank" rel="noopener">Subscribe to our morning newsletter</a>, Crash Course.</em></strong></p>
+<hr>
+<p>The infusion of AI comes at a precarious time for the writing world. On Valentine’s Day, <a href="https://www.publishersweekly.com/pw/by-topic/industry-news/publisher-news/article/91526-catapult-to-shutter-online-magazine-writing-classes.html">Catapult</a> announced it was shuttering its popular literary magazine and would no longer offer writing classes. Its founder, <a href="https://twitter.com/davidgross_man/status/1628835281834020864">Elizabeth Koch</a>, wants to focus on something called <a href="https://t.co/Rjw8coiEhh">Perception Box</a>, which is as nebulous as it sounds. Other literary magazines to recently end include <a href="https://www.bookforum.com/papertrail/astra-magazine-announces-that-it-will-close-25180">Astra</a> and beloved and well-respected poetry journal and chapbook publisher <a href="http://www.glass-poetry.com/">Glass Poetry Press</a>. </p>
+<p>It’s a hard time to be a writer or a lover of words. It’s a hard time to be an artist — to be a person. It isn’t a hard time to be AI.</p>
+<div class="layout_template_wrapper read_more">
+<div class="red_white_box">
+<p class="red_box">Read more</p>
+<p class="white_box">about AI</p>
+</div>
+<ul>
+<li><strong><a href="https://www.salon.com/2023/02/24/ai-companionship-masculinity-and-the-case-of-bings-sentient-chatbot/" target="_blank" rel="noopener">AI companionship, toxic masculinity and the case of Bing’s “sentient” chatbot</a></strong></li>
+<li><strong><a href="https://www.salon.com/2023/02/21/ai-chatbots-are-having-their-tulip-mania-moment/" target="_blank" rel="noopener">AI chatbots are having their “tulip mania” moment</a></strong></li>
+<li><strong><a href="https://www.salon.com/2022/12/09/lensa-is-turning-us-into-ai-thirst-trappers-with-its-ubiquitous-portrait-app/" target="_blank" rel="noopener">A theory on why Lensa is turning us into AI thirst trappers with its ubiquitous portrait app</a></strong></li>
+</ul>
+</div>
+<hr><div class="raptive-salon-content hide-if-premium"></div></section>
+                <section class="article__writers mt-14">
+                                <div class="post-437506 writer type-writer status-publish hentry article__writers article__writer-container" data-writer-id="437506">
+
+                                    <div class="writer-bio-ajax-content">
+                        <h3>
+                            <span>By</span>
+                            <a href="https://www.salon.com/writer/alison_stine">
+                                Alison Stine                            </a>
+                        </h3>
+                    </div>
+
+                    <template class="writer-bio-template">
+                        <h3>
+                            <span>By</span>
+                            <a href="" class="writer-name-link">
+                            </a>
+                        </h3>
+
+                        <div class="socials" style="display: none;"> <a href="" class="social group/social facebook-link" target="_blank" style="display: none;">
+                                <i class="icon icon-facebook text-white h-5 w-5 flex items-center justify-center duration-[250ms] group-hover/social:scale-125" ></i>
+                            </a>
+                            <a href="" class="social group/social twitter-link" target="_blank" style="display: none;">
+                                <i class="icon icon-twitter text-white h-5 w-5 flex items-center justify-center duration-[250ms] group-hover/social:scale-125" ></i>
+                            </a>
+                            <a href="" class="social group/social instagram-link" target="_blank" style="display: none;">
+                                <i class="icon icon-instagram text-white h-5 w-5 flex items-center justify-center duration-[250ms] group-hover/social:scale-125" ></i>
+                            </a>
+                        </div>
+
+                        <div class="writer-bio-text"></div>
+
+                        <div class="more">
+                            <span>MORE FROM</span>
+                            <a href="" class="writer-more-from-link">
+                            </a>
+                        </div>
+                    </template>
+                            </div>
+            </section>
+            <hr>
+                <section class="article__topics">
+        <h2>
+            Related Topics            <span>
+                ------------------------------------------            </span>
+        </h2>
+        <div>
+                            <a href="https://www.salon.com/topic/ai" class="delay-400 pointer">
+                    AI                </a>
+                            <a href="https://www.salon.com/topic/artificial-intelligence" class="delay-400 pointer">
+                    Artificial Intelligence                </a>
+                            <a href="https://www.salon.com/topic/chatbots" class="delay-400 pointer">
+                    Chatbots                </a>
+                            <a href="https://www.salon.com/topic/chatgpt" class="delay-400 pointer">
+                    Chatgpt                </a>
+                            <a href="https://www.salon.com/topic/clarkesworld" class="delay-400 pointer">
+                    Clarkesworld                </a>
+                            <a href="https://www.salon.com/topic/commentary" class="delay-400 pointer">
+                    Commentary                </a>
+                            <a href="https://www.salon.com/topic/fiction" class="delay-400 pointer">
+                    Fiction                </a>
+                            <a href="https://www.salon.com/topic/literature-2" class="delay-400 pointer">
+                    Literature                </a>
+                            <a href="https://www.salon.com/topic/science-fiction" class="delay-400 pointer">
+                    Science-fiction                </a>
+                            <a href="https://www.salon.com/topic/writing" class="delay-400 pointer">
+                    Writing                </a>
+                    </div>
+    </section>
+            
+<section class="article__related" data-post-id="842501" data-terms="ai,artificial-intelligence,chatbots,chatgpt,clarkesworld,commentary,fiction,literature-2,science-fiction,writing">
+    <h2>
+        <span>
+            Related Articles        </span>
+    </h2>
+    <div>
+        <template>
+            <a href="" class="flex min-[501px]:hidden">
+                <div class="attachment__image">
+                    <div class="image">
+                        <img src="https://www.salon.com/app/themes/salon/assets/img/salon-placeholder.webp" decoding="async" fetchpriority="high" alt="Salon placeholder" class="attachment-full size-full">
+                    </div>
+                </div>
+                <h5></h5>
+                <span></span>
+            </a>
+        </template>
+    </div>
+</section>
+            <hr>
+            <div class="dianomi_context hide-if-premium" data-dianomi-context-id="4879"></div>
+        </div>
+        
+<div class="sidebar-col">
+    <div class="dianomi_context hide-if-premium" data-dianomi-context-id="4876"></div>
+            <div class="raptive-salon-sticky-sidebar hide-if-premium"></div>
+    </div>
+    </section>
+</article>
+    </div>
+
+    </main>
+
+    <footer>
+        <ul class="navigation__footer mt-4 text-center"><li class="menu-item"><a href="https://www.salon.com">Home</a></li>
+<li class="menu-item"><a href="https://www.salon.com/about">About</a></li>
+<li class="menu-item"><a href="https://www.salon.com/about/staff">Staff</a></li>
+<li class="menu-item"><a href="https://www.salon.com/about/contact">Contact</a></li>
+<li class="menu-item"><a href="https://www.salon.com/about/policy">Privacy</a></li>
+<li class="menu-item"><a href="https://www.salon.com/about/tos">Terms of Service</a></li>
+<li class="menu-item"><a href="https://www.salon.com/archive">Archive</a></li>
+<li class="menu-item"><a href="/premium?utm_source=onsite&amp;utm_medium=organic&amp;utm_campaign=go-ad-free-footer">Go Ad Free</a></li>
+</ul>        <div class="footer__copyright">
+    <p>
+        Copyright © 2026 Salon.com, LLC. Reproduction of material from any Salon pages without written permission is strictly prohibited. SALON ® is registered in the U.S. Patent and Trademark Office as a trademark of Salon.com, LLC. Associated Press articles: Copyright © 2016 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed.    </p>
+    <p>
+        <a href="https://www.salon.com/2026/06/02/best-vpn-services-for-2026/">
+            VPN Providers        </a>
+    </p>
+    <p>
+        <a href="https://www.salon.com/about/dmca">
+            DMCA Policy        </a>
+    </p>
+</div>
+    </footer>
+
+    <div class="modal__alert" role="dialog" aria-modal="true" aria-hidden="true" id="alert-modal">
+    <div></div>
+    <div>
+        <div>
+            
+<div class="modal__close">
+    <button type="button" aria-controls="alert-modal">
+        <i class="icon icon-close-extrabold block w-5 text-xl" ></i>
+    </button>
+</div>
+            <div class="modal__content">
+                <div class="message">
+                    This is an alert message.                </div>
+                <div class="modal__close">
+                    <button type="button" aria-controls="alert-modal">
+                        OK                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp/wp-*.php","/wp/wp-admin/*","/app/uploads/*","/app/*","/app/plugins/*","/app/themes/salon/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Sept HP Bold Journalism- -->
+<script>(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,380517,'zecdcaagaabewyym2cue');</script>
+<!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Article Page We need your help-support our work -->
+<script>(function(d,u,ac){var s=d.createElement('script');s.type='text/javascript';s.src='https://a.omappapi.com/app/js/api.min.js';s.async=true;s.dataset.user=u;s.dataset.campaign=ac;d.getElementsByTagName('head')[0].appendChild(s);})(document,380517,'gnqxbubjiym7gdwo38a5');</script>
+<!-- / OptinMonster -->		<script type="text/javascript">
+		var zecdcaagaabewyym2cue_shortcode = true;var gnqxbubjiym7gdwo38a5_shortcode = true;		</script>
+		<script id="global-salon-js-extra">
+var salonSubscriptionTracking = {"eventsEndpoint":"https://www.salon.com/wp-json/salon/v1/subscription-tracking/events","measurementId":"G-7VPPFM7ET6","pageContext":{"contentCategory":"article","currentPlan":null,"isCheckoutPage":false},"pendingSessionIds":[],"bootstrapEvents":[],"approximateBeginCheckout":"1"};
+//# sourceURL=global-salon-js-extra
+</script>
+<script type="module" data-wp-strategy="defer" defer id="global-salon-js" src="https://www.salon.com/app/themes/salon/dist/assets/global.js?ver=1.0.30"></script>
+<script type="module" data-wp-strategy="defer" defer id="article-salon-js" src="https://www.salon.com/app/themes/salon/dist/assets/article.js?ver=1.0.30"></script>
+<script data-wp-strategy="defer" defer id="ad-salon-js" src="https://www.salon.com/app/themes/salon/dist/assets/ad.js?ver=1.0.30"></script>
+<script>(function(d){var s=d.createElement("script");s.type="text/javascript";s.src="https://a.omappapi.com/app/js/api.min.js";s.async=true;s.id="omapi-script";d.getElementsByTagName("head")[0].appendChild(s);})(document);</script><script id="raptive-adblock-detection-js" src="https://www.salon.com/app/themes/salon/assets/js/ad/raptive-adblock-detection.js"></script>
+<script data-cfasync="false" data-abr-mode="essential" id="raptive-adblock-recovery-js" src="https://www.salon.com/app/themes/salon/assets/js/ad/raptive-adblock-recovery.js"></script>
+<script id="optinmonster-wp-helper-js" src="https://www.salon.com/app/plugins/optinmonster/assets/dist/js/helper.min.js?ver=2.16.24"></script>
+		<script type="text/javascript">var omapi_localized = {
+			ajax: 'https://www.salon.com/wp/wp-admin/admin-ajax.php?optin-monster-ajax-route=1',
+			nonce: '75871ef4cc',
+			slugs:
+			{"zecdcaagaabewyym2cue":{"slug":"zecdcaagaabewyym2cue","mailpoet":false},"gnqxbubjiym7gdwo38a5":{"slug":"gnqxbubjiym7gdwo38a5","mailpoet":false}}		};</script>
+				<script type="text/javascript">var omapi_data = {"object_id":842501,"object_key":"post","object_type":"post","term_ids":[43,5,1978,5222,90715,90130,90714,14335,23651,39346,58532,74882],"wp_json":"https:\/\/www.salon.com\/wp-json","wc_active":false,"edd_active":false,"nonce":"a741c6dc5d"};</script>
+		</body>
+</html>
+<!-- Cached by Salon Static Cache on 2026-09-03 05:01:58 -->

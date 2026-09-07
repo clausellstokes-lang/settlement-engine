@@ -1,0 +1,129 @@
+{
+ "_doc": "2026-09-06 23:52 (chair Fable 5.1, session 405b5e7e, after the 23:45 death of df942c1b — the evening's SECOND account switch): dnd r9 + ai r9 DIED with df942c1b (agents failing from ~23:22; the files were the checkpoint: dnd's 4 found + 12 verdict files, ai's 6 found files). Rebuilt as r10 by resume-research.sh (resume-research-2350.log; dnd 1 chunk/11 claims, ai 14 chunks/201 claims + 1 angle re-run), embedded by mk-embedded.py (literal==file, node --check OK), LAUNCHED 23:52 as the two research slots (owner 17:40). || PREVIOUS _doc: 2026-09-06 21:14 (chair Fable 5.1, session df942c1b, after the 20:44 ACCOUNT SWITCH; the old session cc123b6c lived to ~21:03 and is dead): wolfe/dnd/martin/ai REBUILT by resume-research.sh (resume-research-2110.log) as r8 = the TAILS ONLY (no chunks, no angles; wolfe+dnd synth+critic, martin+ai critic-only) and embedded by mk-embedded.py; wolfe r8 + dnd r8 LAUNCHED 21:12 (the two research slots, owner 17:40); martin r8 and ai r8 are BUILT-BUT-UNLAUNCHED (recorded here with runId '' so the resume script's next tag advances past them — see memory a-built-but-unlaunched-args-file-is-clobbered-by-the-resume-script). A NEW session cannot resume a runId; the files are the checkpoint. || PREVIOUS _doc: the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
+ "tolkien": {
+  "runId": "(none — nothingToRun 17:26)",
+  "argsFile": "args-tolkien-r7.json",
+  "tag": "r7-not-launched",
+  "script": "STOPPED by S-BOUND rule 4; section 14:20 + critic 14:42 stand"
+ },
+ "kay": {
+  "runId": "wf_d76e605d-6d1",
+  "argsFile": "args-kay-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
+  "status": "COMPLETE 20:52 (r8 = THE ONE TOP-UP: 17 chunks / 235 verified / 223 kept incl. the 2 rescue chunks and 96 fresh claims from transcripts-and-readers; regrade-r8; section-kay.md 20:21, 120 KB; critic-kay.md second pass 20:5x). STOPPED by S-BOUND rule 4. Its critic: the EoF 1997 entry EXISTS behind an HTTP 404 (Kincaid, not \"Kuzca\"); the Christopher Tolkien primary (War of the Jewels) is open on IA; 11 kept rows are Wikipedia relays counted as voices; and the TRIAGE DEFECT a third time — second sources for #143, #135/#656–658, #683, #974/#975 sit in SKIPPED_TRIAGE while the section marks the rules thin. All of it → S12 input + the open triage decision. DO NOT rebuild kay.",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
+ },
+ "leguin": {
+  "runId": "wf_543ddb3b-67c",
+  "argsFile": "args-leguin-r10.json",
+  "tag": "r10",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--leguin-r10.js",
+  "status": "RUNNING since 03:04 (session b43943b4): r10 = the COMPLETION of the S_VERIFY r9 that died 02:53 with 405b5e7e (831/924 verified at the death): 7 chunks / 93 rows + regrade + synth + critic. Not a FIND round."
+ },
+ "wolfe": {
+  "runId": "wf_8cd21474-a7b",
+  "argsFile": "args-wolfe-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r8.js",
+  "status": "COMPLETE 22:10 (r8 = the r7 TAIL: synth 21:48 section-wolfe.md 139,632 B, 42 features; critic-wolfe.md rewritten). STOPPED by S-BOUND rule 4 (the one top-up was r7). Critic headlines → S12 input + the open triage decision: ~60 SKIPPED_TRIAGE rows would move features (Thrust 1983, Gordon 1986, Auerbach, Clute SFE); feature 40's numeric guards rest on one reddit poster; feature 3's 'a third under eight words' has NO row (metrics json only); 116 kept rows used in no feature; seven printed quotations have no home in their cited row; 277 untagged rows break the coverage table; the Le Guin blurb is reconstructed across four rows (print one fragment); two 13-word kept quotes to trim at source (326, 1244); 681's '1966' implausible on its face.",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js",
+  "prev": {
+   "runId": "wf_1326cde9-2e5",
+   "tag": "r7",
+   "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic on disk: section-wolfe.md@14:19 critic-wolfe.md@14:32; the resume script derives the owed tail"
+  },
+  "dryCheck": "22:15: 42 features vs 38 (section-wolfe.r7.md from the 21:25 seal): 6 new (le guin on wolfe; cadence shifts; the same fact printed differently; the imitation fails as mannered; what the dissent says; the archivist moralises nothing) / 2 dropped. NOT dry by the letter, but wolfe's ONE critic-driven top-up is spent (rule 4) — no further round; the 6 go to S12 as input."
+ },
+ "martin": {
+  "runId": "wf_0cd91522-1ce",
+  "argsFile": "args-martin-r8.json",
+  "tag": "r8",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--martin-r8.js",
+  "status": "COMPLETE 22:32 (launched 22:11) (r8 = critic only; section-martin.md 15:41 stands; critic-martin.md 27 KB, prior critic preserved). NO find round left (S-BOUND: tolkien/martin none). Critic → S12 HOUSEKEEPING input: regrade 118 (VERBATIM: the capture carries the sentence) + drop the caveats on 119/120; 29 VERIFIED_VERBATIM rows (465-479, 690-704) have EMPTY trueWording (unreproducible); three quotation tags point at the wrong index ([705]/[536]→[706], [159]→[19]); ~30 duplicate rows across angles; 30 of 115 SKIPPED_TRIAGE rows have no kept row (Peterson's book 12 rows — feature 3 rests on Martin's 'about eight'); twelve self-contradictions listed (§6); 'Blocked 0' hides finder-stage blocks; copyright: aggregate 74 Simon + 51 Germani fragments, eleven from one 2018 Gyldayn excerpt — keep at most three; 238 long JSON rows flagged fullSentence. Live routes found: Guardian Open Platform (api-key=test), IA full-text API scoped by identifier (page numbers), Wayback CDX prefix queries.",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--martin-r7.js",
+  "prev": {
+   "runId": "wf_3a29e467-750",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 6th (critic only, skipSynth)"
+  }
+ },
+ "hobb": {
+  "runId": "wf_255b6391-7fb",
+  "argsFile": "args-hobb-r7.json",
+  "tag": "r7",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--hobb-r7.js",
+  "status": "COMPLETE 18:38 (r7 = THE ONE TOP-UP + regrade + synth + critic second pass; 23 verified / 17 kept; section 94 KB; critic-hobb.md 18:3x). STOPPED by S-BOUND rule 4 — no further round; the critic §6 (next round) is NOT run; its §7 text fixes ([476] witness, rule 39/11 counts, 71/72, [616], block labels, register labels, rules 3/5/27) and §4 (kept trueWording >12 words: truncate at export) go to S12 as input",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--hobb-r7.js",
+  "dryCheck": "18:40: no baseline (prev null); dry-check.py counted 0 features — the hobb section is written as numbered RULES, not features; kit nit: dry-check's feature regex does not read rule headings"
+ },
+ "dnd": {
+  "runId": "wf_43d098bf-eff",
+  "argsFile": "args-dnd-r12.json",
+  "tag": "r12",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r12.js",
+  "status": "RUNNING since 03:04 (session b43943b4, the account-switch successor): r12 = the COMPLETION of the S_VERIFY r11 that died 02:53 with 405b5e7e (its 152 verify rows all landed, 1153/1153): 4 chunks / 59 rows = the folded place-lawful-primaries finder (60 claims, complete) + regrade (the ROUTE RELABEL notes carried verbatim from r11) + synth + critic. Not a FIND round (TAG LAW)."
+ },
+ "ai": {
+  "runId": "",
+  "argsFile": "args-ai-r11.json",
+  "tag": "r11",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r11.js",
+  "status": "BUILT 03:12 (session b43943b4), NOT LAUNCHED — waits for a research slot (owner 17:40 cap: two runs). r11 = the verify-only pass (231 critic-named SKIPPED_TRIAGE rows un-triaged by sweep/untriage.py from sweep/untriage-ai.json — two Opus readers + a reconciler, wf_36047b28-91e, zero disputes; state backup state-ai.json.pre-untriage-0907-0311.bak) in 16 chunks + the ONE new FIND angle procgen-baseline (owner GO 02:20; sweep/extra-ai-procgen.json) + regrade (r10 notes + the r10 critic's §5/§7 Round A items) + synth (the procgen findings as their own Part with the register each was measured in; the split N; the six §6 contradictions; 'suspected' marks) + critic. Built by $SC/build-ai-r11.sh (mk-round-one.py: per-sweep merge, no cross-sweep summary). ⚠ a runId of '' means never launched; DO NOT re-run resume-research.sh for ai (it would clobber this file) — launch this scriptPath as is."
+ },
+ "_queue": {
+  "ruling": "OWNER 2026-09-06 ~17:30: one research sweep at a time; AMENDED 17:40: \"up to two lanes for research and one additional third lane for implementation\" → TWO research runs alive at once + ONE build lane",
+  "order": [
+   "wolfe",
+   "dnd",
+   "martin",
+   "ai"
+  ],
+  "running": [
+   "dnd-r12 wf_43d098bf-eff (S_VERIFY completion, 03:04)",
+   "leguin-r10 wf_543ddb3b-67c (S_VERIFY completion, 03:04)"
+  ],
+  "resume": "session 405b5e7e (23:52): the two r10 runIds above resume ONLY in that session (Workflow({scriptPath, resumeFromRunId})); a NEW session rebuilds: CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai → r11 args → cd prose-research && python3 mk-embedded.py sweep/args-<n>-r11.json → Workflow({scriptPath}) ×2, then update this file. Both r10 runs are TAILS of the owner-GO'd r9 targeted rounds, not new FIND rounds (S-BOUND: dnd/ai have NO round after these). || keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
+  "done": [
+   "hobb",
+   "leguin",
+   "kay",
+   "tolkien",
+   "wolfe",
+   "dnd",
+   "ai",
+   "martin"
+  ],
+  "open_decision": "DECIDED 09-07 ~02:20 (owner: 'yes to' the procgen-baseline angle): ai r11 = S_VERIFY (its untriage list, still to extract) + ONE extraAngle procgen-baseline (sweep/extra-ai-procgen.json) → regrade → synth (a new feature or Part: sameness under variety, measured in the program's own architecture) → critic; queued behind dnd r11 / leguin r9 (the two slots). || ADDED 09-07 02:10 (the ai r10 critic): the PROCEDURAL-GENERATION baseline angle for ai (Compton, Grinblat/Qud, Dwarf Fortress, Ryan, Smith & Whitehead) — a new FIND angle outside S-BOUND; chair recommends YES (small, ~1 h). || ADDED 09-07 01:10 (the dnd r10 critic): ROUTE POLICY for ~40 Part VI rows (archive.org book OCR; Roll20 paywalled body text) — relabel / replace with lawful witnesses / purchase the books (~$30 each) and re-verify; owner's call on route and cost. || DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
+  "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
+  "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting",
+  "next": "dnd r12 (wf_43d098bf-eff, in its REGRADE stage at 03:12) + leguin r10 (wf_543ddb3b-67c, verifying) RUNNING. ai r11 is BUILT (03:12) — LAUNCH Workflow({scriptPath: d.ai.scriptPath}) the moment either completes (its task notification), then set d.ai.runId/status RUNNING here. As each completes: python3 sweep/dry-check.py <name> (snapshot section-<name>.r<prev>.md FIRST from a kit seal dated before the synth wrote). After dnd, leguin, ai: S10b = Workflow({scriptPath: $SC/prose-research/exemplar-best-parts-workflow.js}) → S12 (build its workflow from LANE-QUEUE.md row S12 + the owner's rulings). hobb/wolfe passes DEFERRED. Implementation slot: SOAK-HONEST-909 running in laneB6 (car 1a ec265d24c landed 03:08) → §910 chain (stamped: *-910.*) → CAP-HORIZON-909 → L-MAT (brief from the map wf_37a1566c-e8f).",
+  "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first.",
+  "owner_rulings_for_S12": "OWNER 09-07 01:20: every dossier element gets the FULL FORM (a whole setting, not a campaign; no place more important than another); D&D features 31/36/55/56 ('size to purpose in play', empty slots omitted, tiers by importance) transfer only as HOW (slot order, typography, register, tiers by the place's OWN rank), never as WHICH/how much; full form is not manufactured content (memory: owner-directive-2026-09-07-every-dossier-element-gets-the-full-form).",
+  "S_VERIFY": {
+   "decided": "OWNER 09-07 01:45 delegation → chair ruling 5 (memory owner-decision-2026-09-07-delegated-rows-chair-rulings): the verify-only completion pass is GO and runs BEFORE S10b",
+   "what": "verification ONLY (no FIND angles; not a round under the TAG LAW) of the triage-skipped sole witnesses each critic names; dnd also carries the ROUTE RELABEL in its regradeNotes (the ~40 archive.org-OCR / Roll20-paywalled rows → PARTIAL 'route questioned') and the lawful replacement witnesses as verification targets",
+   "recipe": "per sweep, ONLY when no research run is alive for ANY sweep: python3 sweep/untriage.py <name> (dry) → --apply → cd prose-research && node sweep-state.mjs summary → python3 sweep/mk-round.py <name> <nexttag> --prev sweep/args-<name>-<last>.json --cap 4 (NO --triage, NO angles) → edit regradeNotes/synthNotes for the pass → python3 mk-embedded.py sweep/args-<name>-<tag>.json → Workflow({scriptPath}) → record here",
+   "order": [
+    "dnd",
+    "leguin",
+    "ai"
+   ],
+   "lists": "sweep/untriage-<name>.json — dnd 152 / leguin 243 / hobb 81 / wolfe 64 written 02:0x by the Opus reader (CONFIRMED against the state); ai list still to extract (from critic-ai.md §2/§5.A) when a slot frees",
+   "then": "dry-check each → S10b → S12",
+   "ai": "OWNER GO 02:20 on the procgen angle; build ai r11 as: extract untriage-ai.json (critic-ai.md §2 + §5.A) when a slot frees → untriage --apply → summary → mk-round ai r11 --prev sweep/args-ai-r10.json --cap 4 → set extraAngles from sweep/extra-ai-procgen.json (mk-round drops it unless passed via mk-args --extra; set it by hand after) + notes → mk-embedded → launch",
+   "deferred": "hobb and wolfe verify-only passes DEFERRED 09-07 02:25 (owner: 'are these additional steps actually substantial?' — chair revised ruling 5: those two are citation hygiene, not rule changes; their untriage-<name>.json lists stay on disk; the reconciler (S12) may request a targeted 15-minute verification of any single-source rule it wants to lean on)"
+  },
+  "resumed_0302": "session b43943b4 (03:04): 405b5e7e died 02:53 (account switch); dnd r11 + leguin r9 rebuilt by NO_TRIAGE=1 CONFIRM_DEAD=1 resume-research.sh (log resume-research-0258.log) and launched as r12 / r10; the ai untriage list is being extracted by workflow wf_36047b28-91e (two Opus readers + a reconciler → sweep/untriage-ai.json, dry-run checked). A NEW session rebuilds again: NO_TRIAGE=1 CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd leguin → mk-embedded → two launches."
+ },
+ "_fiveauthor": {
+  "runId": "wf_55c30493-02f",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/five-author-check-workflow.js",
+  "status": "COMPLETE 22:50 (launched 22:26) — sweep/FIVE_AUTHOR_CHECK.md (42 KB): 9 SUPPORTED / 3 UNSUPPORTED characterizations across four authors; one input to S10b/S12"
+ },
+ "_fingerprints": {
+  "S3c": "DONE already (stale queue row): K/primary/dnd-rules-srd52.fingerprint.json exists, PROVENANCE row 5 (SRD 5.2.1 pp. 5–18, CC-BY-4.0, fetched 09-05)",
+  "S6b": "COMPLETE 22:57 (Opus kit lane; receipt receipt-s6b-leguin-fingerprint.md): primary/leguin-nonfiction (632 sentences; 9,670 words = written 4,776 + spoken 4,894, split diagnostics written), leguin-fiction (162 sentences; 2,822 words, floor cleared), leguin-all (794); 19 PROVENANCE rows (8 fetched, 11 rejected). REFUSED lawfully: ursulakleguin.com, arts.gov (NEA) and theguardian.com bar Anthropic agents BY NAME in robots.txt (Disallow: /) — zero bytes fetched from them; Paris Review 403 behind Cloudflare (the kit's parisreview-leguin.txt is the interstitial, not the interview); substitutes = LitHub publisher excerpts, two reprinted interviews (answers only), Electric Literature, a UC Davis course page for Omelas. Brief premises corrected: primary/'s cut scripts died with the raw (re-written under s6b-scratch/); sweep/leguin1973.txt is CONTAMINATED (quotes Dunsany/Eddison/Tolkien/Kurtz at length) and rejected.",
+  "S5c": "OWNER ROW: the Kay fingerprint needs the owner's own copies of two novels as local files (never sealed); nothing runs until the owner supplies them"
+ }
+}

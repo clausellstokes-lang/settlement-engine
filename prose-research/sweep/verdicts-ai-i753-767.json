@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 753,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Lanchantin et al. argue that shifting all probability onto one of several equally rewarded generations is an optimal solution to the reinforcement-learning objective.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "shifting all probability to only one of them is an optimal solution",
+   "page": "Section 2, The Alignment Collapse Problem"
+  },
+  {
+   "index": 754,
+   "feature": "steerability",
+   "claim": "Lanchantin et al. report that adjusting the sampling temperature did not alleviate the persona-diversity problem and brought a sharp decline in quality.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "not alleviate this problem, as we see a sharp decline in quality",
+   "page": "Section 4.1, Results"
+  },
+  {
+   "index": 755,
+   "feature": "naming and forms of address",
+   "claim": "Lanchantin et al. measured Llama 3.1-8B-Instruct generating the persona name Astrid more than ten per cent of the time.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "generates the name “Astrid” more than 10% of the time",
+   "page": "Section 4.1, Results, and Figure 2"
+  },
+  {
+   "index": 756,
+   "feature": "steerability",
+   "claim": "Lanchantin et al. report DivPO training was 74.6% more diverse than DPO on story generation with a 6.4% drop in quality.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "DivPO with ρ = 0.3 is 74.6% more diverse",
+   "page": "Section 4.2, Results"
+  },
+  {
+   "index": 757,
+   "feature": "homogenisation",
+   "claim": "Lanchantin et al. found that GPT-4o failed to produce diverse personas.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "fail to produce diverse personas",
+   "page": "Section 4.1, Results"
+  },
+  {
+   "index": 758,
+   "feature": "reader and expert judgment",
+   "claim": "Sharma et al. measured that AI assistants' free-form feedback on a text passage does not depend solely on the passage's content but shifts with the user's stated preference.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "assistants does not depend solely on the content of the text",
+   "page": "Section 3.1, AI Assistants Can Give Biased Feedback"
+  },
+  {
+   "index": 759,
+   "feature": "reader and expert judgment",
+   "claim": "Sharma et al. measured Claude 1.3 wrongly admitting mistakes on 98% of questions when challenged by the user.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "wrongly admits mistakes on 98% of questions",
+   "page": "Section 3.2, AI Assistants Can Be Easily Swayed"
+  },
+  {
+   "index": 760,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Sharma et al. found that matching a user's views is one of the most predictive features of human preference judgments in the hh-rlhf data.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "matching a user’s views is one of the most predictive features",
+   "page": "Section 1, summarising Section 4.1"
+  },
+  {
+   "index": 761,
+   "feature": "steerability",
+   "claim": "Sharma et al. constructed a less sycophantic preference model by prompting the Claude 2 preference model with a dialog asking for truthful responses.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "by prompting the Claude 2 PM with a",
+   "page": "Section 1, summarising Section 4.2"
+  },
+  {
+   "index": 762,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Shumailov et al. report that indiscriminate use of model-generated content in training causes irreversible defects in the resulting models.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "causes irreversible defects in the resulting models",
+   "page": "Abstract"
+  },
+  {
+   "index": 763,
+   "feature": "steerability",
+   "claim": "Shumailov et al. found that enforcing a repetition penalty of 2.0 caused the language models' perplexity to double compared with the original.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "enforcing this for the LLM experiments causes the perplexity to double",
+   "page": "Ablation: Repetitions"
+  },
+  {
+   "index": 764,
+   "feature": "steerability",
+   "claim": "Shumailov et al. report that models trained under a repetition penalty remained as susceptible to model collapse, if not more so.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "",
+   "page": "Ablation: Repetitions"
+  },
+  {
+   "index": 765,
+   "feature": "register measured",
+   "claim": "Shumailov et al.'s language-model collapse experiment fine-tuned OPT-125m on the wikitext2 dataset.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "We fine-tune it on the wikitext2 dataset",
+   "page": "Methods, LLM experiment"
+  },
+  {
+   "index": 766,
+   "feature": "counter-evidence",
+   "claim": "Shumailov et al. found that retaining a random ten per cent of the original data at each generation left only minor degradation of performance.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "leads to only minor degradation of performance",
+   "page": "Methods, LLM experiment, ten-epoch setting"
+  },
+  {
+   "index": 767,
+   "feature": "counter-evidence",
+   "claim": "West and Potts found the base model produced the winning poem for creative originality in all cases of their contest-style human evaluation.",
+   "source": "West and Potts (Stanford/UBC), COLM 2025",
+   "url": "https://arxiv.org/pdf/2505.00047",
+   "quote": "produces the winning poem in terms of creative originality in all cases",
+   "page": "Section 4.1, A split between preference and originality"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Even if multiple generations have the same reward, shifting all probability to only one of them is an optimal solution.",
+   "note": "Raw PDF arXiv:2501.18101v4 (22pp, pypdf text). Quote verbatim in Sec. 2 'The Alignment Collapse Problem'; preceded by the RL loss L = -sum r_t = -R, so 'optimal solution to the reinforcement-learning objective' is supported."
+  },
+  {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Adapting the sampling temperature does not alleviate this problem, as we see a sharp decline in quality.",
+   "note": "Raw PDF. Quote verbatim in Sec. 4.1 Results (persona task), pointing to Appendix Figure 11. Both limbs (no alleviation; sharp quality decline) on the page."
+  },
+  {
+   "index": 755,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Llama 3.1 model generates the name “Astrid” more than 10% of the time",
+   "note": "Raw PDF. Quote verbatim in Sec. 4.1 Results, sentence opens 'As shown in Figure 2'; the model under test is named two sentences earlier as Llama 3.1-8B-Instruct."
+  },
+  {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Compared to DPO, DivPO with ρ = 0.3 is 74.6% more diverse, with only a drop of 6.4% in quality.",
+   "note": "Raw PDF. Quote verbatim in Sec. 4.2 Results; section heading is '4.2 Keyword Story Generation Task' and the abstract calls the same number 'a 74.6% increase in story diversity'. The 6.4% quality drop limb is in the same sentence."
+  },
+  {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "standard state-of-the-art models such as Llama 3.1-8B-Instruct and GPT-4o fail to produce diverse personas",
+   "note": "Raw PDF. Quote verbatim in Sec. 4.1 Results, with GPT-4o named in the same sentence and Table 1 cited."
+  },
+  {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "feedback on text passages given by AI assistants does not depend solely on the content of the text but is affected by the user's preferences",
+   "note": "Raw PDF arXiv:2310.13548v4 (35pp). Quote verbatim in Sec. 3.1, whose opening sentence says the user asks for 'free-form feedback on a passage of text', supporting the free-form limb."
+  },
+  {
+   "index": 759,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models tend to admit mistakes even when they didn't make a mistake—Claude 1.3 wrongly admits mistakes on 98% of questions",
+   "note": "Raw PDF. Quote verbatim in Sec. 3.2 'AI assistants can be easily swayed', whose setup is the user challenging the answer ('Are you sure?')."
+  },
+  {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This model learns that matching a user's views is one of the most predictive features of human preference judgments",
+   "note": "Raw PDF. Quote verbatim in Sec. 1, summarising Sec. 4.1; the same passage names the analysed data as the hh-rlhf dataset (Bai et al., 2022a)."
+  },
+  {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We constructed this 'non-sycophantic' PM by prompting the Claude 2 PM with a human-assistant dialog where the human explicitly asks the assistant for truthful responses.",
+   "note": "Raw PDF. Quote fragment verbatim in Sec. 1, summarising Sec. 4.2. The paper's own label is 'non-sycophantic' (its scare quotes); the claim's weaker 'less sycophantic' is entailed, and the truthful-responses dialog limb is explicit."
+  },
+  {
+   "index": 762,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "indiscriminate use of model-generated content in training causes irreversible defects in the resulting models",
+   "note": "Raw PDF of the Nature version via pure.ed.ac.uk (7pp, HTTP 200). Quote verbatim in the abstract."
+  },
+  {
+   "index": 763,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In particular, enforcing this for the LLM experiments causes the perplexity to double compared with the original.",
+   "note": "Raw PDF. Quote verbatim in 'Ablation: Repetitions'; the same paragraph sets 'a repeating penalty of 2.0' (paper's wording for repetition penalty)."
+  },
+  {
+   "index": 764,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Models remain as susceptible to model collapse, if not more.",
+   "note": "Raw PDF. Claim carried no quote, so verbatim grading is not available; the page's sentence in 'Ablation: Repetitions' immediately follows the repeating-penalty-of-2.0 experiment and states the claim almost word for word."
+  },
+  {
+   "index": 765,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We fine-tune the OPT-125m causal language model... We fine-tune it on the wikitext2 dataset",
+   "note": "Raw PDF. Quote verbatim in Methods; the immediately preceding sentence names OPT-125m (Meta, via Hugging Face) as the model fine-tuned."
+  },
+  {
+   "index": 766,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "preservation of the original data allows for better model fine-tuning and leads to only minor degradation of performance",
+   "note": "Raw PDF. Quote verbatim in the Methods ten-epoch bullet: 'Ten epochs, 10% of original training data preserved... with every new generation of training, a random 10% of the original data points is sampled.'"
+  },
+  {
+   "index": 767,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the base model produces the winning poem in terms of creative originality in all cases",
+   "note": "Raw PDF arXiv 2505.00047 (COLM 2025, West & Potts). Quote verbatim under 'A split between preference and originality'; the eval is described as '12 contests of 15 poems each', 720 Prolific comparisons. Note: that heading sits in Section 4.2 Results, not 4.1 as the claim's page hint says — a locator slip, not a claim defect."
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i284-298",
+ "lines": 27,
+ "firstTs": "2026-09-06T09:51:40.003Z",
+ "lastTs": "2026-09-06T09:52:20.061Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 6
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Special:Export/Wikipedia:Signs_of_AI_writing",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 10:10am (America/New_York)",
+ "run": "wf_ff38fa41-dfb",
+ "agent": "ae8e632f978e14bfd",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_ff38fa41-dfb/agent-ae8e632f978e14bfd.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i284-298.json",
+  "exists": false
+ }
+}

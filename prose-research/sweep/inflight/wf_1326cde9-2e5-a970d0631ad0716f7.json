@@ -1,0 +1,24 @@
+{
+ "role": "regrade",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "regrade-r7",
+ "lines": 154,
+ "firstTs": "2026-09-07T00:47:31.178Z",
+ "lastTs": "2026-09-07T01:03:44.053Z",
+ "tools": {
+  "Bash": 22,
+  "Read": 15,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/scratchpad/r7/build-wolfe-r7.mjs"
+ ],
+ "lastAssistantText": "t 13; trimmed to twelve it reads: `a great proportion of the meaning is concealed and has to be`.\n\nBuild script (rerunnable, with the critic/strict tables inline): `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/scratchpad/r7/build-wolfe-r7.mjs`",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a970d0631ad0716f7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a970d0631ad0716f7.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

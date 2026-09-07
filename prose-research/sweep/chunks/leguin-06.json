@@ -1,0 +1,38 @@
+{
+ "name": "leguin",
+ "chunk": 6,
+ "indices": [
+  917,
+  918,
+  921
+ ],
+ "claims": [
+  {
+   "index": 917,
+   "feature": "place and institution description",
+   "claim": "Le Guin says small-town novels are intensely grounded and rich in satire, humour and character.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "small-town novels are intensely grounded",
+   "page": "essay body, paragraph on small-town novels"
+  },
+  {
+   "index": 918,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says of the annalist narrator that he will not and cannot mislead the reader, and that he is transparent.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "He will not, he cannot, mislead you. He is transparent.",
+   "page": "essay body, paragraph on Mr. Balwhidder"
+  },
+  {
+   "index": 921,
+   "feature": "plainness and economy",
+   "claim": "Kim Stanley Robinson says Le Guin's language is clear and clean.",
+   "source": "Kim Stanley Robinson, contribution on The Left Hand of Darkness to \"The stars of modern SF pick the best science fiction\", The Guardian, 14 May 2011",
+   "url": "https://www.theguardian.com/books/2011/may/14/science-fiction-authors-choice",
+   "quote": "Le Guin's language is clear and clean",
+   "page": "Kim Stanley Robinson's contribution"
+  }
+ ]
+}

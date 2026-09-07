@@ -1,0 +1,434 @@
+ 
+ Genre glitches and unexpected promotional phrases as a sign of AI writing – Jill Walker Rettberg 
+ Skip to content 
+ Jill Walker Rettberg 
+ Professor and Co-Director of the Center for Digital Narrative at the University of Bergen
+ Search Here ….
+ Tags
+ affect 
+ AI 
+ AI slop 
+ AI STORIES 
+ alumni 
+ Blogging 
+ book 
+ chatbot 
+ ChatGPT 
+ conferences 
+ cultural bias 
+ data analysis 
+ electronic literature 
+ ELMCIP 
+ emoji 
+ epistemology 
+ exhibition 
+ fascism 
+ floating motifs 
+ Gephi 
+ gestures 
+ history 
+ lip-syncing 
+ LLMs 
+ machine vision 
+ methodology 
+ network analysis 
+ neural networks 
+ norsk 
+ open access 
+ publication 
+ publications 
+ R 
+ research 
+ science fiction 
+ self-representation 
+ selfies 
+ social media 
+ Surveillance 
+ talks 
+ teaching 
+ trip report 
+ twitter 
+ UiB 
+ visualisation 
+ Jill Walker Rettberg 
+ Professor and Co-Director of the Center for Digital Narrative at the University of Bergen
+ Books 
+ Career advice 
+ Press photos 
+ Talks and workshops 
+ AI STORIES 
+ Genre glitches and unexpected promotional phrases as a sign of AI writing
+ Jill May 13, 2026 May 15, 2026 Post a Comment 
+ Genre glitching in the New York Times 
+ A genre glitch is a characteristic of LLM-assisted writing where the text suddenly switches genre, typically inserting a short promotional phrase full of sensory details into an informational text. Genre glitches occur when a word in the generated text is heavily associated with a genre or context that is markedly different to the overall genre or subject of the text, thus activating rhetorically inappropriate paths in the language model.
+ OK, I wrote that definition based on two examples I’ve seen, so maybe it will change. But I’m pretty sure I’m on to something here. Let me explain. 
+ Example 1: Yesterday, in the New York Times, an article on the rising price of tomatoes included a bizarre insert describing the flavour of tomatoes. (Update: The New York Times emailed me on May 14 to let me know they had contacted the journalist, who confirmed that she did not use AI to write this.) 
+The price of tomatoes — tart bursts of flavor in salads and sandwiches — surged nearly 40 percent in April from a year ago on a combination of bad weather, high tariffs and climbing transportation costs.
+ Julie Creswell, “ Tomato Prices Soar as War, Tariffs and Weather Affect a Popular Crop ,” New York Times , 12 May, 2026 
+ “Tart bursts of flavor in salads and sandwiches”?? In the middle of a sentence about inflation? It’s not that a human couldn’t have written this. It just seems unlikely that they would write it like that. It’s a strange mix of genres – flipping from informational writing about inflation to something you’d be more likely to read in an ad for tomatoes, or a food blog, or even in the New York Times food section. There are other signs of AI too in that paragraph – the em-dashes (but they’ve always been common in the New York Times) and the three reasons, each perfectly balanced with an adjective and a noun, like those AI-generated crowd photos where all the people look like clones. 
+ And that comparison gives me a chance to show you the AI-generated ad for a far-right protest that Filter posted a story about today, because hardly anyone actually showed up. But look at those identical people in the crowd!
+ Screenshot from Filter nyheter’s story comparing Norgesdemokratenes AI-generated poster with the actual turnout for their protest. You should subscribe to Filter if you’re interested in Norwegian politics. 
+ Anyway, back to the tomatoes. Scott spotted this genre glitch last night, after I had showed him an example of the phenomenon in the legal documents the US government submitted to obtain pretrial detention of Cole Allen , who was arrested for trying to assassinate Trump at the White House Correspondent’s Dinner on 25 April. And that’s Example 2 , which was brought to my attention by Doremus Schafer , who has become aware that I collect examples of weird and probably AI-generated writing and so helpfully sends me things he finds. Thank you!
+ OK, here’s the genre glitch:
+ A genre glitch: from legal description to travel marketing. 
+ This is from a 20 page document that lays out the evidence and explains Allen’s moves before the event. On page 9 it describes how Allen took the train from LA to Chicago, but on mentioning the “long-distance Amtrak passenger train to Chicago,” the text genre glitches and inserts a description of the route that you’d expect to find on a website promoting the journey, not in a legal document. 
+ On April 21, the defendant used a ride share application to travel from his home to Los Angeles Union Station, where he boarded a long-distance Amtrak passenger train to Chicago —a route famous for its scenic views of the mountains and deserts of the American West before traversing the vast expanse
+of the Great Plains . 
+ United States of America v. Cole Tomas Allen. 29 April, 2026. “ Governments Memorandum in Support of Pretrial Detention .” 
+ I think these genre glitches are another sign of AI-assisted writing. 
+ LLMs generate text associatively. “Long distance passenger train to Chicago” is connected, in the LLM’s model of all the language it’s been trained on, to tourist sites marketing the journey. So when the words “long distance passenger train to Chicago” are generated, the next most probable words are promotional, even though that breaks the genre of the text and is completely irrelevant to the purpose of this text, which is to lay out evidence to convince a judge that Allen is probably guilty.
+ The tomato switch follows the same mechanism. In the training data, the token “tomato” would almost always appear in the context of food, recipes or gardening, and only rarely in the context of inflation or the economy. Online food blogs often have that over-the-top promotional or just very sensory and appealing language that is rare in a legal document or news story about inflation. So the token “tomato” activates connections to this style of writing and the LLM adds an em-dash and breaks the genre completely.
+ Both these examples are in documents that must have been read by many people. But they’re also both genres of writing that are operational (like operational images – I saw Gabriele de Seta use the term operational writing the other day). They’re functional. In his blog post about the orbital argumentation of LLMs , John Gallagher argued that in fact, a lot of writing is not intended to be read. These texts weren’t written so we can savour reading them, or so the author(s) can think through a problem or experience. They are just intended to get a job done. The legal document is important, and one hopes it was written and proofread by several good lawyers before being published – but either none of them read it carefully enough to notice the scenic detour, or they noticed it but didn’t think it mattered. And in a way it doesn’t matter. It’s not wrong . It’s just weird.
+ The story about inflation is the sort of story that newspapers have been automating since at least 2016. It’s not a story that requires a lot to write. My local newspaper has published automated news stories about football matches, real estate sales and the weather for years, starting well before LLMs because this type of automation does not need an LLM. You need a structured dataset, an algorithm that extracts interesting data points (goals, the most expensive recent house sale, a photo of the house, the temperature) and an algorithm that combines these data points with prewritten phrases depending on characteristics of the data. In fact, LLMs make this process worse – because they add bizarre phrases as in the tomato and train examples, and because they don’t always accurately summarise data. 
+ If you spot more of these genre glitches, please let me know – leave a comment here, ping me on Bluesky (I’m @jilltxt) or send me an email at jill.walker.rettberg@uib.no. 
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Related 
+ Discover more from Jill Walker Rettberg
+ Subscribe to get the latest posts sent to your email.
+ Type your email… 
+ Subscribe 
+ AI in the wild AI slop genre glitch LLMs 
+ Facebook Twitter Pinterest LinkedIn 
+ Previous Post
+ UiB self-hosts the open source version of Canvas, so wasn’t affected by the breach 
+ Next Post 
+ Don’t do a systematic review if you’re in the humanities 
+ Leave A Comment Cancel reply 
+ You must be logged in to post a comment.
+ Recommended Posts
+ AI STORIES 
+ AI-generated stories have longer endings than human stories 
+ My colleague Jessica Witte has just shared a preprint where she compared the emotional arcs of the stories we generated using gpt-4o-mini to those of human-authored (pre-2022) stories from the subreddit r/WritingPrompts, conveniently gathered in this dataset. She found a distinct difference in the endings of the LLM-generated stories: both […]
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Academia 
+ How to peer review a paper in 2026 
+ Dorothy Bishop, a psychologist, wrote a useful list of what reviewers need to look out now that so many papers are bad science that looks good thanks to LLMs. Read her whole blog post, she explains it well, but here’s a brief version because I’m pretty sure we’ll be needing […]
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ AI and algorithmic culture 
+ “So what if it was ChatGPT? It *could* have been true!” 
+ I recently read a good article on the different kinds of truth a language model operates with by Luke Mann, Liam Magee and Vanicka Arora, Truth Machines: Synthesizing Veracity in AI Language Models, but despite its lovely typology of truths (consensus, correspondence, coherence and pragmatic) it doesn’t help me with […]
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ AI STORIES 
+ AI shimmer and sparkle 
+ I have this hunch that sparkles and glow and shimmer are somehow a point in the latent spaces of LLMs that have more connections than you would expect. Perhaps their connotation to magic and to the unknown matches some of the mystique of genAI? Or perhaps these words are used […]
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ AI and algorithmic culture 
+ Misaligned citations and LLM-generated scientific fraud 
+ This LLM-generated paper demonstrates how LLMs fail to cite core scholarship on a topic but generate misaligned citations systematically.
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ AI and algorithmic culture Digital Art 
+ Don’t do a systematic review if you’re in the humanities 
+ This paper is a great example of why you probably shouldn’t use a systematic literature review for a theoretical and conceptual research question like “How does artificial intelligence affect the perception of authenticity and aura in art?” However, if you’re looking for an annotated list of 48 recent articles about […]
+ Share this:
+ Share on Bluesky (Opens in new window) 
+ Bluesky 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ Professor, speaker, author
+ I write books, give talks , lead the AI STORIES research project and co-direct the Center for Digital Narrative at the University of Bergen. I’ve been blogging here since October 2000 .
+ Read about my research on my University webpage and follow me on LinkedIn or Google Scholar .
+ Archives
+ Archives 
+ Select Month 
+ August 2026 
+ May 2026 
+ April 2026 
+ March 2026 
+ February 2026 
+ January 2026 
+ November 2025 
+ August 2025 
+ June 2025 
+ March 2025 
+ February 2025 
+ February 2024 
+ January 2024 
+ October 2023 
+ August 2023 
+ April 2023 
+ February 2023 
+ December 2022 
+ November 2022 
+ September 2022 
+ June 2022 
+ February 2022 
+ January 2022 
+ October 2021 
+ March 2021 
+ February 2021 
+ January 2021 
+ July 2020 
+ June 2020 
+ May 2020 
+ December 2019 
+ July 2019 
+ April 2019 
+ February 2019 
+ November 2018 
+ September 2018 
+ August 2018 
+ June 2018 
+ April 2018 
+ March 2018 
+ November 2017 
+ October 2017 
+ September 2017 
+ June 2017 
+ May 2017 
+ January 2017 
+ September 2016 
+ August 2016 
+ July 2016 
+ June 2016 
+ May 2016 
+ April 2016 
+ March 2016 
+ January 2016 
+ December 2015 
+ October 2015 
+ September 2015 
+ August 2015 
+ July 2015 
+ May 2015 
+ April 2015 
+ March 2015 
+ January 2015 
+ December 2014 
+ November 2014 
+ October 2014 
+ September 2014 
+ August 2014 
+ July 2014 
+ May 2014 
+ April 2014 
+ March 2014 
+ February 2014 
+ January 2014 
+ November 2013 
+ October 2013 
+ September 2013 
+ August 2013 
+ July 2013 
+ June 2013 
+ May 2013 
+ April 2013 
+ March 2013 
+ February 2013 
+ January 2013 
+ December 2012 
+ November 2012 
+ October 2012 
+ September 2012 
+ August 2012 
+ July 2012 
+ June 2012 
+ May 2012 
+ April 2012 
+ March 2012 
+ February 2012 
+ January 2012 
+ December 2011 
+ November 2011 
+ October 2011 
+ September 2011 
+ June 2011 
+ April 2011 
+ March 2011 
+ February 2011 
+ January 2011 
+ December 2010 
+ November 2010 
+ October 2010 
+ September 2010 
+ August 2010 
+ July 2010 
+ June 2010 
+ May 2010 
+ April 2010 
+ March 2010 
+ January 2010 
+ December 2009 
+ November 2009 
+ October 2009 
+ September 2009 
+ August 2009 
+ July 2009 
+ May 2009 
+ April 2009 
+ March 2009 
+ February 2009 
+ January 2009 
+ December 2008 
+ November 2008 
+ October 2008 
+ September 2008 
+ August 2008 
+ July 2008 
+ June 2008 
+ May 2008 
+ April 2008 
+ March 2008 
+ February 2008 
+ January 2008 
+ December 2007 
+ November 2007 
+ October 2007 
+ September 2007 
+ August 2007 
+ July 2007 
+ June 2007 
+ May 2007 
+ April 2007 
+ March 2007 
+ February 2007 
+ January 2007 
+ December 2006 
+ November 2006 
+ October 2006 
+ September 2006 
+ August 2006 
+ June 2006 
+ May 2006 
+ April 2006 
+ March 2006 
+ February 2006 
+ January 2006 
+ December 2005 
+ November 2005 
+ October 2005 
+ September 2005 
+ August 2005 
+ July 2005 
+ June 2005 
+ May 2005 
+ April 2005 
+ March 2005 
+ February 2005 
+ January 2005 
+ December 2004 
+ November 2004 
+ October 2004 
+ September 2004 
+ August 2004 
+ July 2004 
+ June 2004 
+ May 2004 
+ April 2004 
+ March 2004 
+ February 2004 
+ January 2004 
+ December 2003 
+ November 2003 
+ October 2003 
+ September 2003 
+ August 2003 
+ July 2003 
+ June 2003 
+ May 2003 
+ April 2003 
+ March 2003 
+ Jill Walker Rettberg
+ Books 
+ Career advice 
+ Press photos 
+ Talks and workshops 
+ Categories
+ Categories 
+ Select Category 
+ Academia 
+ AI and algorithmic culture 
+ AI STORIES 
+ Algorithmic bias 
+ Alumni organisation 
+ Blogging 
+ Digital Art 
+ Digital Humanities 
+ Electronic literature 
+ ELMCIP 
+ Gender balance in academia 
+ Machine Vision 
+ Networked Politics 
+ Norsk 
+ Presentations 
+ Running for Vice-Rector 
+ Snapchat 
+ social media 
+ Social Network Analysis 
+ Teach kids to program! 
+ Teaching 
+ Uncategorized 
+ University politics 
+ Visualise me 
+ Copyright © 2025. All rights reserved. 
+ Designed & Developed By: 
+ rswpthemes.com author website templates 
+ Product successfully added to the cart!
+ Subscribe 
+ Loading Comments... 
+ You must be logged in to post a comment. 

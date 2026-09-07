@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!-- the "no-js" class is for Modernizr. -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://middletownpubliclib.org/xmlrpc.php">
+<link rel="shortcut icon" href="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/img/favicon.ico">
+<link rel="apple-touch-icon" href="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/img/apple-touch-icon.png">
+
+
+<!-- all our JS is at the bottom of the page, except for Modernizr and webfonts. -->
+	<script type='text/javascript' src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/modernizr.custom.js"></script>
+	<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400italic,700italic,400,700|Crimson+Text:400,700,400italic,700italic|Oswald:400,300' rel='stylesheet' type='text/css'>
+
+
+<meta name='robots' content='noindex, follow' />
+<script data-cfasync="false" data-cookieconsent="ignore" data-ezscrex="false" data-no-defer="1" data-pagespeed-no-defer>
+var ctPublicFunctions = {"_ajax_nonce":"dcff5f4b92","_rest_nonce":"06779140fc","_ajax_url":"\/wp-admin\/admin-ajax.php","_rest_url":"https:\/\/middletownpubliclib.org\/wp-json\/","data__cookies_type":"alternative","data__ajax_type":"rest","bot_detector_enabled":true,"data__frontend_data_log_enabled":1,"data__bot_detector_enabled":1,"cookiePrefix":"","wprocket_detected":false,"host_url":"middletownpubliclib.org","text__ee_click_to_select":"Click to select the whole data","text__ee_original_email":"The complete one is","text__ee_got_it":"Got it","text__ee_blocked":"Blocked","text__ee_cannot_connect":"Cannot connect","text__ee_cannot_decode":"Can not decode email. Unknown reason","text__ee_email_decoder":"CleanTalk email decoder","text__ee_wait_for_decoding":"The magic is on the way!","text__ee_decoding_process":"Please wait a few seconds while we decode the contact data."}
+</script>
+<script data-cfasync="false" data-cookieconsent="ignore" data-ezscrex="false" data-no-defer="1" data-pagespeed-no-defer>
+var ctPublic = {"_ajax_nonce":"dcff5f4b92","settings__forms__check_internal":"0","settings__forms__check_external":"0","settings__forms__force_protection":0,"settings__forms__search_test":"1","settings__forms__wc_add_to_cart":"0","bot_detector_enabled":true,"settings__sfw__anti_crawler":0,"blog_home":"https:\/\/middletownpubliclib.org\/","pixel__setting":"3","pixel__enabled":false,"pixel__url":null,"data__email_check_before_post":"1","data__email_check_exist_post":"0","data__cookies_type":"alternative","data__key_is_ok":true,"data__visible_fields_required":true,"wl_brandname":"Anti-Spam by CleanTalk","wl_brandname_short":"CleanTalk","ct_checkjs_key":41217822,"emailEncoderPassKey":"903f56e283f859223fefbc5a484b20b0","bot_detector_forms_excluded":"W10=","advancedCacheExists":false,"varnishCacheExists":false,"wc_ajax_add_to_cart":false}
+</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.4 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>Page not found - Middletown Public Library</title>
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:title" content="Page not found - Middletown Public Library" />
+	<meta property="og:site_name" content="Middletown Public Library" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebSite","@id":"https:\/\/middletownpubliclib.org\/#website","url":"https:\/\/middletownpubliclib.org\/","name":"Middletown Public Library","description":"Middletown, Pennsylvania","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/middletownpubliclib.org\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fd.cleantalk.org' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel="alternate" type="application/rss+xml" title="Middletown Public Library &raquo; Feed" href="https://middletownpubliclib.org/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Middletown Public Library &raquo; Comments Feed" href="https://middletownpubliclib.org/comments/feed/" />
+<link rel="alternate" type="text/calendar" title="Middletown Public Library &raquo; iCal Feed" href="https://middletownpubliclib.org/calendar/?ical=1" />
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v11.1.3 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+		<!-- Note: MonsterInsights is not currently configured on this site. The site owner needs to authenticate with Google Analytics in the MonsterInsights settings panel. -->
+					<!-- No tracking code set -->
+				<!-- / Google Analytics by MonsterInsights -->
+		<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='tribe-events-pro-mini-calendar-block-styles-css' href='https://middletownpubliclib.org/wp-content/plugins/events-calendar-pro/build/css/tribe-events-pro-mini-calendar-block.css?ver=7.8.2' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+/*wp_block_styles_on_demand_placeholder:6a9e00f3e030e*/
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id="wp-block-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the block styles printed at wp_footer." }
+/*# sourceURL=wp-block-styles-placeholder-inline-css */
+</style>
+<style id="wp-global-styles-placeholder-inline-css">
+:root { --wp-internal-comment: "Placeholder for wp_hoist_late_printed_styles() to replace with the global-styles printed at wp_footer." }
+/*# sourceURL=wp-global-styles-placeholder-inline-css */
+</style>
+<link rel='stylesheet' id='cleantalk-public-css-css' href='https://middletownpubliclib.org/wp-content/plugins/cleantalk-spam-protect/css/cleantalk-public.min.css?ver=6.87_1788378493' media='all' />
+<link rel='stylesheet' id='cleantalk-email-decoder-css-css' href='https://middletownpubliclib.org/wp-content/plugins/cleantalk-spam-protect/css/cleantalk-email-decoder.min.css?ver=6.87_1788378493' media='all' />
+<link rel='stylesheet' id='MPLtheme-style-css' href='https://middletownpubliclib.org/wp-content/themes/middletown-theme/style.css?ver=7.1' media='all' />
+<link rel='stylesheet' id='fancybox-css-css' href='https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/fancybox/source/jquery.fancybox.css?ver=7.1' media='all' />
+<style id="jetpack_facebook_likebox-inline-css">
+.widget_facebook_likebox {
+	overflow: hidden;
+}
+
+/*# sourceURL=https://middletownpubliclib.org/wp-content/plugins/jetpack/modules/widgets/facebook-likebox/style.css */
+</style>
+<link rel='stylesheet' id='__EPYT__style-css' href='https://middletownpubliclib.org/wp-content/plugins/youtube-embed-plus/styles/ytprefs.min.css?ver=14.2.6' media='all' />
+<style id="__EPYT__style-inline-css">
+
+                .epyt-gallery-thumb {
+                        width: 33.333%;
+                }
+                
+/*# sourceURL=__EPYT__style-inline-css */
+</style>
+<script id="apbct-public-bundle.min-js-js" src="https://middletownpubliclib.org/wp-content/plugins/cleantalk-spam-protect/js/apbct-public-bundle.min.js?ver=6.87_1788378493"></script>
+<script async data-wp-strategy="async" id="ct_bot_detector-js" src="https://fd.cleantalk.org/ct-bot-detector-wrapper.js?ver=6.87"></script>
+<script id="jquery-core-js" src="https://middletownpubliclib.org/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://middletownpubliclib.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script id="__ytprefs__-js-extra">
+var _EPYT_ = {"ajaxurl":"https://middletownpubliclib.org/wp-admin/admin-ajax.php","security":"4773c59207","gallery_scrolloffset":"20","eppathtoscripts":"https://middletownpubliclib.org/wp-content/plugins/youtube-embed-plus/scripts/","eppath":"https://middletownpubliclib.org/wp-content/plugins/youtube-embed-plus/","epresponsiveselector":"[\"iframe.__youtube_prefs__\",\"iframe[src*='youtube.com']\",\"iframe[src*='youtube-nocookie.com']\",\"iframe[data-ep-src*='youtube.com']\",\"iframe[data-ep-src*='youtube-nocookie.com']\",\"iframe[data-ep-gallerysrc*='youtube.com']\"]","epdovol":"1","version":"14.2.6","evselector":"iframe.__youtube_prefs__[src], iframe[src*=\"youtube.com/embed/\"], iframe[src*=\"youtube-nocookie.com/embed/\"]","ajax_compat":"","maxres_facade":"eager","ytapi_load":"light","pause_others":"","stopMobileBuffer":"1","facade_mode":"","not_live_on_channel":""};
+//# sourceURL=__ytprefs__-js-extra
+</script>
+<script id="__ytprefs__-js" src="https://middletownpubliclib.org/wp-content/plugins/youtube-embed-plus/scripts/ytprefs.min.js?ver=14.2.6"></script>
+<link rel="https://api.w.org/" href="https://middletownpubliclib.org/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://middletownpubliclib.org/xmlrpc.php?rsd" />
+<meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://middletownpubliclib.org"><link rel="alternate" href="https://middletownpubliclib.org/wp-json/tribe/events/v1/" />	<style>img#wpstats{display:none}</style>
+		<!-- Analytics by WP Statistics - https://wp-statistics.com -->
+<script src="https://middletownpubliclib.org/wp-content/mu-plugins/captaincore-analytics.js" data-site="CRVQRWVE" defer></script>
+</head>
+
+<body class="error404 wp-theme-middletown-theme tribe-no-js">
+<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header site-width row" role="banner">
+			<nav id="top-navigation" class="site-nav top-navigation clearfix" role="navigation">
+				<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+				<ul id="menu-top-menu" class="nav-menu"><li id="menu-item-143" class="mobile-hide menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-143"><a href="https://middletownpubliclib.org/"><i></i> Home</a></li>
+<li id="menu-item-128" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-128"><a target="_blank" href="https://clic.polarislibrary.com/polaris/logon.aspx?ctx=6.1033.0.0.1&#038;Header=1"><i></i> My Account</a></li>
+<li id="menu-item-129" class="scroll menu-item menu-item-type-custom menu-item-object-custom menu-item-129"><a href="#site-footer"><i></i> Hours</a></li>
+<li id="menu-item-130" class="how-link menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-130"><a href="#"><i></i> How Do I . . .</a>
+<ul class="sub-menu">
+	<li id="menu-item-131" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-131"><a href="/about-us/faq/#card">How do I get a library card?</a></li>
+	<li id="menu-item-132" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-132"><a href="/about-us/faq/#carduse">How can I use my library card?</a></li>
+	<li id="menu-item-326" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-326"><a href="/about-us/faq/#borrow">How long can I borrow materials?</a></li>
+	<li id="menu-item-327" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-327"><a href="/about-us/faq/#renewal">How do I renew library materials?</a></li>
+	<li id="menu-item-328" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-328"><a href="/about-us/faq/#on-hold">How can I put an item on hold?</a></li>
+	<li id="menu-item-329" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-329"><a href="/about-us/faq/#fees">What are the late fees for overdue materials?</a></li>
+	<li id="menu-item-330" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-330"><a href="/about-us/faq/#notifications">How can I receive notifications that my items are due?</a></li>
+	<li id="menu-item-331" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-331"><a href="/about-us/faq/#damaged">What if I lose or damage an item?</a></li>
+</ul>
+</li>
+<li id="menu-item-8886" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8886"><a href="https://middletownpubliclib.org/contact-us/">Contact Us</a></li>
+</ul>			</nav><!-- #top-navigation -->
+			<h1 class="site-title"><a href="https://middletownpubliclib.org/" title="Middletown Public Library" rel="home"><img src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/img/logo.png" alt="Middletown Public Library" /></a></h1>
+			
+			<div class="header-content clearfix">
+				<a href="http://clic.polarislibrary.com/polaris/default.aspx?ctx=6.1033.0.0.1" class="button blue" target="_blank"><i class="fa fa-book"></i> Catalog Search</a>				<div class="phone-block">
+					<span class="phone"><i class="fa fa-phone"></i>717-944-6412</span>					<span class="address"> 20 N. Catherine St, Middletown, PA</span>				</div>
+			</div><!--/.header-content -->
+	</header><!-- #masthead -->
+	<section id="content" class="site-content site-width">
+		<nav id="main-navigation" class="site-nav main-navigation clearfix" role="navigation">
+			<div id="menuButton"><a href="#" class="menu-toggle"><i class="fa fa-bars"></i> Main Menu</a></div>
+			<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+			<div id="menus" class="saveSpace">			
+				<ul id="menu-main-menu" class="nav-menu"><li id="menu-item-267" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-267"><a href="https://middletownpubliclib.org/about-us/">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-315"><a href="https://middletownpubliclib.org/history/">History of Middletown Public Library</a></li>
+	<li id="menu-item-145" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-145"><a href="https://middletownpubliclib.org/about-us/mission/">Mission &amp; Library Board</a></li>
+	<li id="menu-item-144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-144"><a href="https://middletownpubliclib.org/about-us/hours-directions/">Hours &amp; Directions</a></li>
+	<li id="menu-item-186" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-186"><a href="https://middletownpubliclib.org/about-us/faq/">FAQ</a></li>
+	<li id="menu-item-146" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-146"><a href="https://middletownpubliclib.org/about-us/policies/">Library Policies</a></li>
+	<li id="menu-item-309" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-309"><a href="https://middletownpubliclib.org/meet-staff/">Meet the Staff</a></li>
+	<li id="menu-item-374" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-374"><a href="https://middletownpubliclib.org/about-us/photo-tour/">Photo Tour</a></li>
+	<li id="menu-item-15289" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15289"><a href="https://middletownpubliclib.org/about-us/employment/">Employment</a></li>
+</ul>
+</li>
+<li id="menu-item-268" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-268"><a href="https://middletownpubliclib.org/collection-services/">Collection/Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-298" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-298"><a target="_blank" href="http://clic.polarislibrary.com/polaris/default.aspx">Catalog</a></li>
+	<li id="menu-item-149" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-149"><a href="https://middletownpubliclib.org/collection-services/computer-internet-usage/">Computer &amp; Internet Usage</a></li>
+	<li id="menu-item-325" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-325"><a href="https://middletownpubliclib.org/copying-faxing-scanning/">Copying, Faxing &amp; Scanning</a></li>
+	<li id="menu-item-154" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-154"><a href="https://middletownpubliclib.org/collection-services/research-databases/">Online Research &amp; Databases</a></li>
+	<li id="menu-item-13904" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13904"><a href="https://middletownpubliclib.org/collection-services/student-research-help/">Student Research Help</a></li>
+	<li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://middletownpubliclib.org/collection-services/e-government/">E-Government</a></li>
+	<li id="menu-item-299" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-299"><a href="https://capitalarealibrary.overdrive.com/">E-books and E-audiobooks</a></li>
+	<li id="menu-item-12530" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12530"><a href="https://middletownpubliclib.org/resources-for-parents-and-caregivers/">Resources for Parents, Home Schooling, and Caregivers</a></li>
+	<li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://middletownpubliclib.org/collection-services/genealogy/">Genealogy</a></li>
+	<li id="menu-item-148" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a href="https://middletownpubliclib.org/collection-services/community-resources/">Suggested Websites</a></li>
+	<li id="menu-item-153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-153"><a href="https://middletownpubliclib.org/collection-services/job-career-help/">Job &amp; Career Help</a></li>
+</ul>
+</li>
+<li id="menu-item-269" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-269"><a href="https://middletownpubliclib.org/programs/">Programs</a>
+<ul class="sub-menu">
+	<li id="menu-item-156" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-156"><a href="https://middletownpubliclib.org/programs/children/">Programs for Children</a></li>
+	<li id="menu-item-157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-157"><a href="https://middletownpubliclib.org/programs/young-adults-teens/">Programs for Teens</a></li>
+	<li id="menu-item-155" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-155"><a href="https://middletownpubliclib.org/programs/adults/">Programs for Adults</a></li>
+</ul>
+</li>
+<li id="menu-item-179" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-179"><a href="/calendar/">Calendar</a></li>
+<li id="menu-item-4049" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-4049"><a href="https://middletownpubliclib.org/category/uncategorized/">Middletown History</a>
+<ul class="sub-menu">
+	<li id="menu-item-10407" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10407"><a href="https://middletownpubliclib.org/airplane-crashes/">Airplane Crashes</a></li>
+	<li id="menu-item-10412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10412"><a href="https://middletownpubliclib.org/elks-theatre/">Elks Theatre</a></li>
+	<li id="menu-item-4087" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4087"><a href="https://middletownpubliclib.org/historic-middletown-homes/">Historic Middletown Homes</a></li>
+	<li id="menu-item-4050" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4050"><a href="https://middletownpubliclib.org/history/">History Of Middletown Public Library</a></li>
+	<li id="menu-item-11144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11144"><a href="https://middletownpubliclib.org/hurricane-agnes/">Hurricane Agnes</a></li>
+	<li id="menu-item-11599" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11599"><a href="https://middletownpubliclib.org/middletown-and-the-hamilton-musical/">Middletown and the Hamilton Musical</a></li>
+	<li id="menu-item-4839" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4839"><a href="https://middletownpubliclib.org/middletown-historic-registry/">Middletown Historic Registry</a></li>
+	<li id="menu-item-2187" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2187"><a href="https://middletownpubliclib.org/the-middletown-resolves/">The Middletown Resolves</a></li>
+	<li id="menu-item-11529" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11529"><a href="https://middletownpubliclib.org/middletowns-liberty-band-and-band-hall/">Middletown’s Liberty Band and Band Hall</a></li>
+	<li id="menu-item-10373" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10373"><a href="https://middletownpubliclib.org/middletowns-movie-star/">Middletown’s Movie Star</a></li>
+	<li id="menu-item-10422" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10422"><a href="https://middletownpubliclib.org/middletowns-presidential-visits/">Middletown’s Presidential Visits</a></li>
+	<li id="menu-item-11536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11536"><a href="https://middletownpubliclib.org/olmsted-air-force-base/">Olmsted Air Force Base</a></li>
+	<li id="menu-item-1062" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1062"><a href="https://middletownpubliclib.org/photographic-history-of-middletown/">Photographic History of Middletown</a></li>
+	<li id="menu-item-11580" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11580"><a href="https://middletownpubliclib.org/the-raven-nightclub/">The Raven Nightclub</a></li>
+	<li id="menu-item-4057" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4057"><a href="https://middletownpubliclib.org/story-of-middletown/">Story of Middletown</a></li>
+	<li id="menu-item-11550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11550"><a href="https://middletownpubliclib.org/three-mile-island-accident/">Three Mile Island Accident</a></li>
+	<li id="menu-item-11440" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11440"><a href="https://middletownpubliclib.org/underground-railroad-in-middletown/">Underground Railroad in Middletown</a></li>
+	<li id="menu-item-1002" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1002"><a href="https://middletownpubliclib.org/yearbooks/">Yearbooks</a></li>
+</ul>
+</li>
+<li id="menu-item-270" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-270"><a href="https://middletownpubliclib.org/support-the-library/">Support the Library</a>
+<ul class="sub-menu">
+	<li id="menu-item-159" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a href="https://middletownpubliclib.org/support-the-library/donate/">Donate</a></li>
+	<li id="menu-item-160" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a href="https://middletownpubliclib.org/support-the-library/donate-books/">Book Sale &amp; Donations</a></li>
+	<li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162"><a href="https://middletownpubliclib.org/support-the-library/volunteer/">Volunteer</a></li>
+</ul>
+</li>
+</ul>			</div>	
+		</nav><!-- #site-navigation -->
+	
+	
+		<div id="interior-content-wrap" class="row">
+
+				<header class="entry-header full">
+					<h1 class="page-title entry-title">Oops! That page can&rsquo;t be found.</h1>
+				</header>	
+				<article id="primary" class="content-area col">
+										<main id="main" class="site-main clearfix" role="main">
+						<p><b>It looks like nothing was found at this location. Maybe try one of the links below or a search?</b></p>
+
+						<form apbct-form-sign="native_search" role="search" method="get" class="search-form" action="https://middletownpubliclib.org/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			<input
+                    class="apbct_special_field apbct_email_id__search_form"
+                    name="apbct__email_id__search_form"
+                    aria-label="apbct__label_id__search_form"
+                    type="text" size="30" maxlength="200" autocomplete="off"
+                    value=""
+                /><input
+                   id="apbct_submit_id__search_form" 
+                   class="apbct_special_field apbct__email_id__search_form"
+                   name="apbct__label_id__search_form"
+                   aria-label="apbct_submit_name__search_form"
+                   type="submit"
+                   size="30"
+                   maxlength="200"
+                   value="32210"
+               /></form>	
+							
+												<div class="widget widget_categories">
+							<h2 class="widgettitle">Most Used Categories</h2>
+							<ul>
+							<li class="cat-item-none">No categories</li>							</ul>
+						</div><!-- .widget -->
+							
+						<div class="widget widget_archive"><h2 class="widgettitle">Archives</h2><p>Try looking in the monthly archives. 🙂</p>		<label class="screen-reader-text" for="archives-dropdown--1">Archives</label>
+		<select id="archives-dropdown--1" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+			
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown--1" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</div>	
+									
+					</main>
+				</article>
+				
+			</div><!-- /#interior-content-wrap -->	
+		
+
+
+			<footer id="site-footer" class="site-footer row">
+				<div id="text-4" class="clearfix widget widget_text col span_4"><h2 class="widget-title">Library Hours</h2>			<div class="textwidget"><h4>Regular Hours:</h4>
+<p>Mon., Tues., and Thurs: 9:30am – 8:00pm<br />
+Wed.: 9:30am-4pm<br />
+Friday &amp; Sunday: CLOSED<br />
+Saturday: 9:00am – 4:00pm</p>
+</div>
+		</div><div id="text-5" class="clearfix widget widget_text col span_4"><h2 class="widget-title">Find Us</h2>			<div class="textwidget"><p><a href="https://www.google.com/maps/search/Middletown+Public+Library,+North+Catherine+Street,+Middletown,+PA/@40.1987514,-76.7341423,17z/data=!3m1!4b1"><img src="/wp-content/uploads/2014/05/map.jpg" /></a></p>
+<p>20 North Catherine St, Middletown, PA 17057</p>
+<p><b><a href="https://www.google.com/maps/search/Middletown+Public+Library,+North+Catherine+Street,+Middletown,+PA/@40.1987514,-76.7341423,17z/data=!3m1!4b1">View larger map and directions »</a></b></p>
+</div>
+		</div><div id="text-6" class="clearfix widget widget_text col span_4"><h2 class="widget-title">Connect</h2>			<div class="textwidget"><p><i class="fa fa-phone"></i>  717-944-6412</p> 
+
+<p><a href="/contact-us/"><i class="fa fa-envelope-o"></i> Email us</a></p>
+
+<p class="social-icons">
+<a class="fa fa-facebook" href="https://www.facebook.com/pages/Middletown-Public-Library/77997597403" title="Facebook" target="_blank"></a>  <a class="fa fa-instagram" href="http://instagram.com/middletownpubliclibrary" title="Instagram" target="_blank"></a> 
+</p></div>
+		</div><div id="block-3" class="clearfix widget widget_block col span_4"><a href="https://app.candid.org/profile/9248299/middletown-public-library-37-1706325" target="_blank"> 
+<img decoding="async" src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/9248299/svg" /> </a></div>			</footer>
+		</section><!-- /#content -->	
+		
+		<footer id="colophon" class="site-info site-width row"  role="contentinfo">
+			<small class="copyright">&copy;2026 Middletown Public Library. All rights reserved. <span class="sep"> | </span> <a href="/contact-us/">Contact Us</a> <span class="sep"> | </span> <a href="http://gregyoder.com" target="_blank">Website by Greg Yoder Graphic Design</a></small>
+		</footer>	
+	</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/middletown-theme/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><script id="tec-user-agent-js" src="https://middletownpubliclib.org/wp-content/plugins/the-events-calendar/common/build/js/user-agent.js?ver=da75d0bdea6dde3898df"></script>
+<script id="fancybox-js" src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/fancybox/source/jquery.fancybox.pack.js?ver=7.1"></script>
+<script id="flexslider-js" src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/flexslider/jquery.flexslider-min.js?ver=7.1"></script>
+<script id="theme-functions-js" src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/functions.js?ver=7.1"></script>
+<script id="MPLtheme-skip-link-focus-fix-js" src="https://middletownpubliclib.org/wp-content/themes/middletown-theme/_/js/skip-link-focus-fix.js?ver=20130115"></script>
+<script id="jetpack-facebook-embed-js-extra">
+var jpfbembed = {"appid":"249643311490","locale":"en_US"};
+//# sourceURL=jetpack-facebook-embed-js-extra
+</script>
+<script id="jetpack-facebook-embed-js" src="https://middletownpubliclib.org/wp-content/plugins/jetpack/_inc/build/facebook-embed.min.js?ver=16.1.3"></script>
+<script id="wp-statistics-tracker-js-extra">
+var WP_Statistics_Tracker_Object = {"requestUrl":"https://middletownpubliclib.org/wp-json/wp-statistics/v2","ajaxUrl":"https://middletownpubliclib.org/wp-admin/admin-ajax.php","hitParams":{"wp_statistics_hit":1,"source_type":"404","source_id":0,"search_query":"","signature":"cb4211bf1a4d2efb041ee1415ae9885d","endpoint":"hit"},"option":{"dntEnabled":false,"bypassAdBlockers":false,"consentIntegration":{"name":null,"status":[]},"isPreview":false,"userOnline":false,"isWpConsentApiActive":false},"isLegacyEventLoaded":"","customEventAjaxUrl":"https://middletownpubliclib.org/wp-admin/admin-ajax.php?action=wp_statistics_custom_event&nonce=d97f8a4f5a","onlineParams":{"wp_statistics_hit":1,"source_type":"404","source_id":0,"search_query":"","signature":"cb4211bf1a4d2efb041ee1415ae9885d","action":"wp_statistics_online_check"},"jsCheckTime":"60000"};
+//# sourceURL=wp-statistics-tracker-js-extra
+</script>
+<script id="wp-statistics-tracker-js" src="https://middletownpubliclib.org/wp-content/plugins/wp-statistics/assets/js/tracker.js?ver=14.16.12"></script>
+<script id="__ytprefsfitvids__-js" src="https://middletownpubliclib.org/wp-content/plugins/youtube-embed-plus/scripts/fitvids.min.js?ver=14.2.6"></script>
+<script id="jetpack-stats-js-before">
+_stq = window._stq || [];
+_stq.push([ "view", {"v":"ext","blog":"70667296","post":"0","tz":"-4","srv":"middletownpubliclib.org","arch_err":"/wp-content/uploads/2020/09/Marc-Aramini-Interview.pdf","j":"1:16.1.3"} ]);
+_stq.push([ "clickTrackerInit", "70667296", "0" ]);
+//# sourceURL=jetpack-stats-js-before
+</script>
+<script data-wp-strategy="defer" defer fetchpriority="low" id="jetpack-stats-js" src="https://stats.wp.com/e-202637.js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://middletownpubliclib.org/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://middletownpubliclib.org/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+</body>
+</html>

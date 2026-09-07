@@ -1,0 +1,234 @@
+{
+ "name": "martin",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 875,
+   "feature": "archaism",
+   "claim": "The study notes Martin's conspicuous use of the archaic native prefix a- for position, in atop, abed and ahorse.",
+   "source": "Simon, 'Affixes, compound and combination words', Books & Boots",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "he conspicuously deploys the archaic prefix",
+   "page": "section 1, 'The prefix'"
+  },
+  {
+   "index": 876,
+   "feature": "diction (native vs latinate)",
+   "claim": "The study concludes that Martin's lexical choices matter as much as his subject matter in producing the novels' archaic worldview.",
+   "source": "Simon, 'Affixes, compound and combination words', Books & Boots",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "the lexical choices he makes are as important as the subject matter",
+   "page": "Introduction"
+  },
+  {
+   "index": 878,
+   "feature": "cadence and rhythm",
+   "claim": "The essayist characterises Martin's narration as a steady flow of low-density sentences that keeps pages turning.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer'",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "Martin keeps us turning pages with a steady flow of low-density sentences",
+   "page": "section on oral versus textual storytelling"
+  },
+  {
+   "index": 879,
+   "feature": "sentence length variation",
+   "claim": "The essayist calls the method shotgun writing, in which no single sentence carries the effect on its own.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer'",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "It’s shotgun writing: like buckshot, no single sentence is that effective",
+   "page": "section on oral versus textual storytelling"
+  },
+  {
+   "index": 882,
+   "feature": "stylometry",
+   "claim": "The essayist puts the non-dialogue share of the text at 60 percent and calls that prose forgettable.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer'",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "the prose that constitutes the other 60% of the text is forgettable",
+   "page": "section 'The con: The sentences aren't beautiful'"
+  },
+  {
+   "index": 883,
+   "feature": "cadence and rhythm",
+   "claim": "The essayist argues stock phrases persist because they come easily to a writer working for flow.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer'",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "for a writer, they come easily off the pen",
+   "page": "section on Martin's process"
+  },
+  {
+   "index": 884,
+   "feature": "sentence length variation",
+   "claim": "The author of the five-part video series on Martin's prose credits him with knowing where to end a sentence inside a long description.",
+   "source": "Corey Huffman, video description, '[1] The Prose of George R R Martin | How to Write Focused Descriptions'",
+   "url": "https://www.youtube.com/watch?v=RmB-C9soI_s",
+   "quote": "Martin knows just where to drop his periods",
+   "page": "video description"
+  },
+  {
+   "index": 885,
+   "feature": "sentence length variation",
+   "claim": "The same video's description says Martin breaks large descriptions into easily digestible sentences.",
+   "source": "Corey Huffman, video description, '[1] The Prose of George R R Martin'",
+   "url": "https://www.youtube.com/watch?v=RmB-C9soI_s",
+   "quote": "break up large descriptions into easily digestible sentences",
+   "page": "video description"
+  },
+  {
+   "index": 886,
+   "feature": "other: contrast within description",
+   "claim": "Part two of the series treats contrast as the technique that lets one Martin description do several narrative jobs at once.",
+   "source": "Corey Huffman, video description, '[2] The Prose of George R R Martin | Why You Should Contrast Your Descriptions'",
+   "url": "https://www.youtube.com/watch?v=hl9MF6PEnC8",
+   "quote": "how Martin uses the literary technique of “contrast” to enrich these descriptions",
+   "page": "video description"
+  },
+  {
+   "index": 887,
+   "feature": "metaphor discipline",
+   "claim": "Part three of the series examines twenty-five metaphors and similes drawn from A Game of Thrones.",
+   "source": "Corey Huffman, video description, '[3] The Prose of George R R Martin | Masterful Metaphors & Similes'",
+   "url": "https://www.youtube.com/watch?v=QVYpX8RC0Cg",
+   "quote": "I examine twenty-five metaphors and similes masterfully crafted by George R R",
+   "page": "video description"
+  },
+  {
+   "index": 888,
+   "feature": "adjective and adverb discipline",
+   "claim": "Part four claims Martin frequently structures adjectives, nouns and clauses in threes.",
+   "source": "Corey Huffman, video description, '[4] The Prose of George R R Martin | Adjectives & The Rule of 3'",
+   "url": "https://www.youtube.com/watch?v=10DpU5PbRHY",
+   "quote": "he often uses \"The Rule of 3\" with regards to structuring",
+   "page": "video description"
+  },
+  {
+   "index": 889,
+   "feature": "other: active and passive voice",
+   "claim": "Part five uses passages from A Clash of Kings to argue Martin melds active and passive voice within a single narrative movement.",
+   "source": "Corey Huffman, video description, '[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices'",
+   "url": "https://www.youtube.com/watch?v=dCa8YujbzIU",
+   "quote": "how to differentiate between the Active and Passive voices",
+   "page": "video description"
+  },
+  {
+   "index": 892,
+   "feature": "omission as information",
+   "claim": "The reviewer prefers Martin's vampire history to Anne Rice's because of what Martin leaves unsaid.",
+   "source": "Rob H. Bedford, review of Fevre Dream, SFFWorld",
+   "url": "https://www.sffworld.com/2012/11/bookreview900/",
+   "quote": "more successful than Rice’s history more for what is left unsaid",
+   "page": "review body"
+  },
+  {
+   "index": 893,
+   "feature": "register modulation",
+   "claim": "Adam Whitehead judges The Mystery Knight to lack the elegant simplicity of The Hedge Knight.",
+   "source": "Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk and Egg'",
+   "url": "https://forum.malazanempire.com/topic/17889-the-tales-of-dunk-and-egg-by-george-rr-martin/",
+   "quote": "It lacks the elegant simplicity of The Hedge Knight",
+   "page": "The Mystery Knight review, quoted post"
+  },
+  {
+   "index": 894,
+   "feature": "closing sentence",
+   "claim": "The same reviewer says the novella's ending is unusually neat for Martin and lacks the messy consequences he usually favours.",
+   "source": "Adam Whitehead (Werthead), review posted in the Malazan Empire thread 'The Tales of Dunk and Egg'",
+   "url": "https://forum.malazanempire.com/topic/17889-the-tales-of-dunk-and-egg-by-george-rr-martin/",
+   "quote": "lacks the messy consequences he usually favours",
+   "page": "The Mystery Knight review, quoted post"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 875,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he conspicuously deploys the archaic prefix 'a-' to denote position",
+   "note": "Raw page (astrofella.wordpress.com, curl 200) reads: \"delving beyond common speech into archaic native forms: for example, he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse\". Quote byte-exact; every limb (archaic, native, prefix a-, position, atop/abed/ahorse) on the page, in section '1. The prefix'."
+  },
+  {
+   "index": 876,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lexical choices as important as subject matter; brutal, archaic worldview",
+   "note": "Raw page Abstract: \"then conclude that the lexical choices he makes are as important as the subject matter of the stories in creating the novels' brutal, archaic worldview.\" Quote byte-exact; 'concludes' and 'archaic worldview' both on the page. Located in the Abstract rather than the labelled Introduction, a locator detail only."
+  },
+  {
+   "index": 878,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin keeps us turning pages with a steady flow of low-density sentences",
+   "note": "Raw page (atseajournal.com, curl 200): \"To that end, Martin keeps us turning pages with a steady flow of low-density sentences.\" Byte-exact; the oral-vs-textual storytelling context matches the cited section."
+  },
+  {
+   "index": 879,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's shotgun writing: like buckshot, no single sentence is that effective",
+   "note": "Raw page: \"It's shotgun writing: like buckshot, no single sentence is that effective, but a full cartridge of it gets the point across.\" Byte-exact including the curly apostrophe. The claim's 'no single sentence carries the effect on its own' matches; the page's completing clause (the full cartridge does) is compatible, not contradictory."
+  },
+  {
+   "index": 882,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the prose that constitutes the other 60% of the text is forgettable",
+   "note": "Raw page, under the heading 'The con: The sentences aren't beautiful': top-voted favourite passages are all dialogue, \"But the prose that constitutes the other 60% of the text is forgettable.\" 'the other 60%' is explicitly the non-dialogue remainder, so both limbs (60 percent share, forgettable) hold."
+  },
+  {
+   "index": 883,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "for a writer, they come easily off the pen; very important for momentum",
+   "note": "Raw page: \"Which could be why stock phrases are so prevalent in his work... But for a writer, they come easily off the pen. Very important for maintaining momentum.\" preceded by \"The flow is important\". All limbs supported; the essayist's own framing is hedged ('could be why'), where the claim says 'argues'."
+  },
+  {
+   "index": 884,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin knows just where to drop his periods",
+   "note": "Raw YouTube description (shortDescription, curl 200): \"Martin knows just where to drop his periods, and is able to break up large descriptions into easily digestible sentences... help aspiring writers learn where to end their sentences\". Byte-exact. The 'five-part series' limb is confirmed by the sibling raw pages I fetched: parts [1]-[5], same channel 'Corey Huffman - Writer', cross-linked; this page alone says only 'More to come'."
+  },
+  {
+   "index": 885,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "break up large descriptions into easily digestible sentences",
+   "note": "Same raw description: \"is able to break up large descriptions into easily digestible sentences.\" Byte-exact; every limb on the page."
+  },
+  {
+   "index": 886,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contrast allows him to accomplish multiple narrative tasks simultaneously",
+   "note": "Raw description of [2] (title '[2] The Prose of George R R Martin | Why You Should Contrast Your Descriptions'): \"how Martin uses the literary technique of 'contrast' to enrich these descriptions, and how this technique allows him to accomplish multiple narrative tasks simultaneously.\" Byte-exact with curly quotes; 'several narrative jobs at once' matches 'multiple narrative tasks simultaneously'."
+  },
+  {
+   "index": 887,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I examine twenty-five metaphors and similes... in A Game of Thrones",
+   "note": "Raw description of [3]: \"In this video, I examine twenty-five metaphors and similes masterfully crafted by George R R Martin in his novel, 'A Game of Thrones.'\" Byte-exact; part number, count and source novel all on the page."
+  },
+  {
+   "index": 888,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he often uses \"The Rule of 3\" structuring adjectives, nouns, and clauses",
+   "note": "Raw description of [4]: \"show how he often uses \\\"The Rule of 3\\\" with regards to structuring his adjectives, nouns, and clauses.\" Byte-exact; 'frequently' matches 'often', and the adjective/noun/clause triple is verbatim."
+  },
+  {
+   "index": 889,
+   "verdict": "PARTIAL",
+   "trueWording": "how you, as a writer, can meld the two voices",
+   "note": "Quote byte-exact in the raw description of [5], and the A Clash of Kings limb holds (\"using excerpts taken from George R R Martin's novel, 'A Clash of Kings'\"). But the description attributes the melding to the reader-writer, not to Martin, and says the purpose is \"to take your reader on a smooth, vivid, and immersive journey\" - not a single narrative movement.",
+   "unsupportedLimb": "that Martin himself melds the two voices 'within a single narrative movement' - the page frames melding as advice to the aspiring writer ('how you, as a writer, can meld the two voices') and never uses or paraphrases 'single narrative movement'"
+  },
+  {
+   "index": 892,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more successful than Rice's history more for what is left unsaid",
+   "note": "Raw page (sffworld.com, curl 200), Rob H. Bedford's Fevre Dream review: \"I find it more successful than Rice's history more for what is left unsaid and told for Rice left seemingly no stone unturned. A little bit of mystery is stronger than knowing the full scope.\" Byte-exact; the preference over Anne Rice and the unsaid-as-reason limb both hold."
+  },
+  {
+   "index": 893,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It lacks the elegant simplicity of The Hedge Knight",
+   "note": "Raw forum page (curl 200), post #1 headed 'The Mystery Knight': \"It lacks the elegant simplicity of The Hedge Knight but isn't as slight as The Sworn Sword.\" Byte-exact. The page names the reviewer only by the handle 'Werthead' with the signature 'Visit The Wertzone for reviews of SF&F books' - it never prints 'Adam Whitehead', so the real-name attribution rests on the handle and blog signature."
+  },
+  {
+   "index": 894,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an unusually neat ending by Martin's standards... lacks the messy consequences",
+   "note": "Same post: \"the story lacks the satisfying conclusion of The Hedge Knight, with an unusually neat ending by Martin's standards (although the final line is superb) that lacks the messy consequences he usually favours.\" Byte-exact; both limbs (unusually neat for Martin, missing messy consequences) verbatim. Same handle caveat as 893."
+  }
+ ]
+}

@@ -1,0 +1,188 @@
+{
+  "dossier-state": [
+    {
+      "file": "power.generated.js",
+      "pool": "DS-POW-1 :: Approved",
+      "text": "The {seat}'s standing at {settlement} is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
+    },
+    {
+      "file": "economy.generated.js",
+      "pool": "DS-ECO-12 :: TRADE PROFILE: no significant exports",
+      "text": "{settlement} sends nothing out worth recording. What the town makes, the town uses, and the outward column is empty rather than thin."
+    },
+    {
+      "file": "general.generated.js",
+      "pool": "DS-HK-1 :: clock faction_split",
+      "text": "The people of {settlement} who deal with both {faction} and {faction2} are the ones who will have to choose first."
+    },
+    {
+      "file": "warFaith.generated.js",
+      "pool": "DS-FTH-3 :: TEMPLE WEALTH: rich",
+      "text": "The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments; the town is aware of the stonework."
+    },
+    {
+      "file": "power.generated.js",
+      "pool": "DS-POW-6 :: operation role parallel marketplace",
+      "text": "A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to."
+    },
+    {
+      "file": "general.generated.js",
+      "pool": "DS-HK-1 :: category economics: the books are the opening",
+      "text": "The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders."
+    },
+    {
+      "file": "warFaith.generated.js",
+      "pool": "DS-WAR-2 :: sovereignty · strained",
+      "text": "Foreign coin stirs beneath {settlement}'s internal contests again, and the pledge of non-intervention frays at the edges where the coin lands."
+    },
+    {
+      "file": "warFaith.generated.js",
+      "pool": "DS-WAR-5 :: resistance in open revolt",
+      "text": "{settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets and in daylight."
+    },
+    {
+      "file": "defense.generated.js",
+      "pool": "DS-DEF-5 :: watch PRESENT",
+      "text": "There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate."
+    },
+    {
+      "file": "warFaith.generated.js",
+      "pool": "DS-FTH-4 :: ROOTED",
+      "text": "Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly."
+    },
+    {
+      "file": "economy.generated.js",
+      "pool": "DS-SUP-1 :: COMPLETE LINE, output exported",
+      "text": "The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade."
+    },
+    {
+      "file": "economy.generated.js",
+      "pool": "DS-ECO-4 :: HIGHLIGHT: dear",
+      "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate."
+    }
+  ],
+  "dossier-causal": [
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{settlement} will tell you the quarrel is buried. {counterpart} has buried nothing, and a decree binds only the hall that made it."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{settlement} has been short of both quiet and bread since it took in what came off the {route} that year; those who arrived had chosen the town for the first of them."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "The stain the church quarrel left on {settlement}'s seat is fading, slowly and on its own schedule, and the faction that lost the contest is waiting it out rather than conceding it."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "A stranger at {settlement} finds {creed}'s house on the main street and {rival_creed}'s feasts on a narrower one; the arrangement is {timeband_age} and dates from the winter the column stayed."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{settlement} has carried the grievance against {counterpart} {timeband_since} without ever spending it, and a grievance with nothing behind it has a way of being remembered longer than one that got spent."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "The old hands can still recite what was offered, and {timeband_since} the arithmetic has not changed and neither has the answer."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{house}'s stamp out of {settlement} is worth {band} less with {reason} written beside it in every counting-house that keeps one; two tellings out of it could not both be true, and both were on paper."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{settlement} holds a betrayal-class severance against {counterpart} with {reason} on the record: credit extended in a good season, called in a bad one, entered where commerce entries live."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "{timeband_since}, {temple} is still answering for the provenance, and every reading out of that pulpit is weighed against a ledger before it is weighed against anything else."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "The roll of {settlement}'s named people is unchanged for all that the town was put to the sack: scattered to {band} roads, every one of them still somewhere, and the register says so."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "The price of {good} at {settlement} is set somewhere else. That is not a market condition, it is a clause, and everybody knows which war it came out of."
+    },
+    {
+      "file": "dossierCausalProse.generated.js",
+      "pool": "marks",
+      "text": "Nothing at {settlement} has moved on what the council knew was coming: the knowing is on the record and so is the sitting still, nothing was decided, and the not-deciding is the entry the season carries."
+    }
+  ],
+  "news-pools": [
+    {
+      "file": "grammarReceiptPools.js",
+      "pool": "grammarReceiptPools.js",
+      "text": "Merchants in ${x.settlement} have begun hiring their own guards for the ${x.counterpart} road."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "The war has ground the town to the bone; the seat must have peace to last."
+    },
+    {
+      "file": "commercialReceiptPools.js",
+      "pool": "commercialReceiptPools.js",
+      "text": "Winter and summer alike the ${x.good} comes from ${x.counterpart}; the season changes the weather and nothing else."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "Those who hear of the journey may know more of it than either waiting court."
+    },
+    {
+      "file": "dispositionNews.js",
+      "pool": "dispositionNews.js",
+      "text": "An observed default taught this court what a broken agreement costs."
+    },
+    {
+      "file": "commercialReceiptPools.js",
+      "pool": "commercialReceiptPools.js",
+      "text": "The licence register at ${x.settlement} no longer carries a single name out of ${x.counterpart}."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "The restraint was never in the ledgers; it sat in a chair, and it sits there no longer."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "The alliance obligation is one recorded cause on this edge; other live causes remain their own facts."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "Both parties bargained hard over a thing that no longer existed."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "Whatever is agreed here binds nothing until it is carried home and told."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "The peace exists now, and it exists because a man got back."
+    },
+    {
+      "file": "warReceiptPools.js",
+      "pool": "warReceiptPools.js",
+      "text": "The obligation is discharged: ${x.settlement} came when called."
+    }
+  ]
+}

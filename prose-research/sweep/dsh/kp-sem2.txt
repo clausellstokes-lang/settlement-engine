@@ -1,0 +1,1070 @@
+World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2 - Kobold Press 
+
+ Skip to content 
+
+ Store 
+
+ Quick Links 
+ 
+ Where to Start 
+ Monster Overview 
+ Virtual Table Tops 
+ Kobold Press Merch 
+ On Sale 
+ All Products 
+
+ My Account 
+ 
+ Create Account 
+ Login 
+ Logout 
+ Reset Password 
+ My Downloads 
+
+ Store Search 
+ Search for: 
+
+ Kickstarter 
+ Blog 
+ 
+ Articles 
+ Archive 
+ Submissions 
+
+ Contact 
+ Account 
+ About 
+ 
+ About Kobold Press 
+ The Kobold Team 
+ Kobold Creates 
+ Black Flag Roleplaying 
+ Midgard 
+ Organized Play 
+ Frequently Asked Questions 
+ Errata 
+ Forums 
+
+ Tools 
+ 
+ Labyrinth World Archive 
+ Midgard Map 
+ Encounter Builder 
+ Search 5E Kobold Press Monsters 
+ Search ToV Kobold Press Monsters 
+ Search Kobold Adventures 
+
+ Cart 
+
+ Store 
+
+ Quick Links 
+ 
+ Where to Start 
+ Monster Overview 
+ Virtual Table Tops 
+ Kobold Press Merch 
+ On Sale 
+ All Products 
+
+ My Account 
+ 
+ Create Account 
+ Login 
+ Logout 
+ Reset Password 
+ My Downloads 
+
+ Store Search 
+ Search for: 
+
+ Kickstarter 
+ Blog 
+ 
+ Articles 
+ Archive 
+ Submissions 
+
+ Contact 
+ Account 
+ About 
+ 
+ About Kobold Press 
+ The Kobold Team 
+ Kobold Creates 
+ Black Flag Roleplaying 
+ Midgard 
+ Organized Play 
+ Frequently Asked Questions 
+ Errata 
+ Forums 
+
+ Tools 
+ 
+ Labyrinth World Archive 
+ Midgard Map 
+ Encounter Builder 
+ Search 5E Kobold Press Monsters 
+ Search ToV Kobold Press Monsters 
+ Search Kobold Adventures 
+
+ Cart 
+
+ Home / Delve into the Depths in the Kobold Blog / World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2 
+
+ World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2
+
+ By 
+ Kobold Press 
+
+ / July 21, 2025 / Articles , Design Diary 
+
+ This article is a transcript of a seminar on world building put on during the Kickstarter campaign for Labyrinth Worldbook . ( Out now! )
+
+ Click here to read Part 1! 
+
+ Hosted by Kobold Press Social Media Manager Zach Newbill, the panel featured Kobold Press CEO, Wolfgang Baur, designer Richard Green, and gaming luminary David “Zeb” Cook, who was instrumental to many AD&D releases in the ’80s and ’90s, and invented the Planescape setting.
+
+ The transcript has been edited for clarity and concision.
+
+ Wolfgang Baur: Let’s move on to to another area—choosing a theme. We’ve chosen an inspiration or historic period, or used the Hollywood filter. But what is the one thing you want people to walk away with? Why are they playing it? How do you answer that, Zeb?
+
+ Zeb Cook: I always start from: What do I want to do? Because I have a low boredom threshold, and I don’t want to spend six months writing a book that doesn’t excite me in some way.
+
+ So I start from that. But then it’s the next important filter is, “I think this is a great idea. Will anybody else agree with me?”
+
+ Wolfgang: Well, it depends on who your anybody-else is. Are you opening up a game for your local group? Or are you doing it for a broader audience? For some kids at a convention to have a good time?
+
+ Zeb: If I’m writing something just for my friends, I can get away with just about anything. Tell them, “Yeah, trust me, this will all work right.”
+
+ But if I’m doing something for publication, you always have to remember that you’re not writing a book for yourself. You are not creating a world for yourself. You are creating a world for a whole bunch of other players to play in, to take and use.
+
+ I’ve always wanted to do a steampunk or dieselpunk kind of thing. And every time I get started into it I realize I don’t know if I can get this to where enough people are going to think this is great. It’s such a small genre. Consequently, never done one.
+
+ Wolfgang: For me, what makes a world memorable is often the core conflict or the biggest threat. Like, who’s the big bad?
+
+ If you go back to compelling settings, often it’s the the villain or the threat to the world that is the part I get to play, because forever game master. If the villain’s not interesting, the setting’s not that interesting.
+
+ Zeb: What about you, Richard?
+
+ Richard Green: I like the villains to be to be interesting, and I like a good hook. I think also, when you pick up a new game or a new setting book, it needs to be super clear what kind of adventures take place in that world, and what the characters are going to get up to. What do they do?
+
+ When you pick up a new game or a new setting book, it needs to be super clear what kind of adventures take place in that world, and what the characters are going to get up to. What do they do? 
+
+ I remember years ago buying Skyrealms of Jorune and thinking, “I don’t know what to do with this. It’s too weird.” And I think, having stuff where there are things for people to explore and interact with, and villains to fight is so important.
+
+ Zeb: I don’t focus as much on creating a singular villain, because then things can become too focused on that. Then you kill the villain, and . . . now, what do we do?
+
+ Wolfgang: Well, my favorite villains are cults and societies. Harder to kill.
+
+ Zeb: But also I always want to think about, what’s in it for the player as the character? What’s the character’s role in this world? Where do they fit? And what are they? What are the expectations that they can quickly see?
+
+ Wolfgang: I ran into this not that long ago in a computer RPG, Dishonored , which is a stealth game. It’s all about sneaking. I had just been playing all the first-person shooters in the world, and was used to blowing stuff up.
+
+ So my expectation going in was that I could fight my way out. However, my gameplay experience was not rewarded for for being bold and heroic. In fact, I was punished for being bold and heroic. I got arrested and killed.
+
+ But the minute I started sneaking stealth and climbing walls and stealing stuff. Oh, my goodness! That game started to shine.
+
+ So, spelling that out for the players, making it clear to them, “Oh, you will grow from pauper to merchant prince, or you will become a master of the arcane and rule the underworld—or whatever it is that the expected arc is—you should be explicit about it. Don’t be coy.
+
+ Zeb: Skyrim was was really horrible that way. “Hi! Hey! Here you are! You’re a complete blank slate. You can be anything, do anything.” 
+
+ And then I realized that I don’t know what I’m supposed to do. The first time I played I spent like the first, four days of play wandering around, like, “Well, what what am I? Where do I go? What should I do?”
+
+ Wolfgang: That takes us beautifully to our next point, which is about conflict and what you do. The Midgard solution to this has famously been called the stacks of gunpowder.
+
+ We put hooks all over the Midgard Worldbook . Here’s conflict. Here’s something to do. Here’s something going wrong. No matter where you are in the world, you know what to do because it’s blowing up in your face. The spark of conflict drove those adventures, no matter where you were.
+
+ And I think Skyrim eventually gets to that, too.
+
+ Zeb: Yeah, there’s conflict there. It’s just a matter of digging it out.
+
+ The worst world building books that I have read, and I will not mention any names, are ones that are literally just lists of places and people. Here’s a town. Here’s a town. Here’s a town.
+
+ People get very proud of it. “Wow! I filled out a whole giant space!” But there’s nothing going on. They don’t spend any time saying like, this town hates this town over here, or whatever.
+
+ Wolfgang: You make a really good point. Conflict is the place in world building where it’s smart to design emotion into it. Who loves who? Who hates who? Who is jealous of who? Who wants to outdo their rival?
+
+ A lot of this is, is human emotion brought in. I want to show that I’m better than them, or I want to be the best at such and such, or I want the elves to return, because I love elves. All those kinds of motivation lead straight to conflict.
+
+ Zeb: And when you do that, when you come up with a guy who wants the elves to return, you should also think about who is opposing him? What is opposing him?
+
+ Then you’ve got conflict. You can send the players off to either group, and they can heroically help one group, cut shady deals, or whatever.
+
+ Richard: I like the possibility of players being able to join or ally with all these different groups, and and have some as patrons, or be enemies of others, or on the run from them.
+
+ The more connections you build between groups and nations and things, the better. I think in the Labyrinth Worldbook , we spent a lot of time building these factions that you can join, or be the enemies of.
+
+ Wolfgang: Vampire: the Masquerade is where I first became aware of how useful factions are in world building. But Planescape is where it really entered the fantasy space. And at Kobold, we’ve got a whole book called Demon Cults and Secret Societies , just because they’re so darn useful as antagonists, and hard-to-kill villains.
+
+ There’s a lot more to the seminar, but it was only for Labyrinth Worldbook backers, so it isn’t available on the Kobold Press YouTube channel . 
+
+If you want to see more of the transcript, let us know in the comments or in our Discord community !
+
+ Tags: Labyrinth , seminar 
+
+ ← Previous Post 
+ Next Post → 
+
+ Related Posts 
+
+ Oh, I’m Going to Get Killed Any Minute Now (Part 15) 
+
+ May 5, 2012 
+
+ Howling Tower: Dragons—A Soar Spot 
+
+ April 17, 2012 
+
+ New Figurines of Wondrous Power: amber owlbear, citrine roc, and copper hippogriff 
+
+ February 12, 2025 
+
+ Reach for the Stars: Rare Materials 
+
+ September 13, 2022 
+
+ Now, the Twist: How to Make a Good Turnover 
+
+ January 19, 2011 
+
+ Friday Funny: A Coward’s Life (Part 2) 
+
+ November 27, 2009 
+
+ 1 thought on “World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2” 
+
+ Tim B. 
+ August 4, 2025 at 11:19 pm 
+
+ I’d love to have more of the seminar transcript! This is great stuff.
+
+ Comments are closed.
+
+ Recent Posts
+
+ Memoirs of a Lich: Gods – September 4, 2026 
+
+ Writing a Better Homebrew Campaign: When Your World Mirrors Ours – August 31, 2026 
+
+ Memoirs of a Lich: Gear – August 28, 2026 
+
+ Trapmaster: Spike-Eating Pit Trap – August 26, 2026 
+
+ Writing a Better Homebrew Campaign: Linear and Nonlinear Worlds – August 24, 2026 
+
+ Get the News and Get Loot!
+ 
+ Enter to win a $65 gift certificate! Sign up to get the Kobold Courier in your inbox weekly!
+
+ Delve Into The Tunnels
+ Delve Into The Tunnels 
+
+ Select Month 
+ September 2026 (1) 
+ August 2026 (12) 
+ July 2026 (14) 
+ June 2026 (12) 
+ May 2026 (14) 
+ April 2026 (13) 
+ March 2026 (13) 
+ February 2026 (13) 
+ January 2026 (12) 
+ December 2025 (18) 
+ November 2025 (18) 
+ October 2025 (23) 
+ September 2025 (22) 
+ August 2025 (21) 
+ July 2025 (24) 
+ June 2025 (21) 
+ May 2025 (22) 
+ April 2025 (23) 
+ March 2025 (21) 
+ February 2025 (20) 
+ January 2025 (23) 
+ December 2024 (17) 
+ November 2024 (21) 
+ October 2024 (25) 
+ September 2024 (21) 
+ August 2024 (21) 
+ July 2024 (22) 
+ June 2024 (20) 
+ May 2024 (24) 
+ April 2024 (24) 
+ March 2024 (21) 
+ February 2024 (24) 
+ January 2024 (27) 
+ December 2023 (14) 
+ November 2023 (20) 
+ October 2023 (25) 
+ September 2023 (27) 
+ August 2023 (24) 
+ July 2023 (21) 
+ June 2023 (23) 
+ May 2023 (28) 
+ April 2023 (22) 
+ March 2023 (25) 
+ February 2023 (23) 
+ January 2023 (25) 
+ December 2022 (18) 
+ November 2022 (21) 
+ October 2022 (32) 
+ September 2022 (25) 
+ August 2022 (19) 
+ July 2022 (13) 
+ June 2022 (13) 
+ May 2022 (13) 
+ April 2022 (13) 
+ March 2022 (14) 
+ February 2022 (12) 
+ January 2022 (13) 
+ December 2021 (14) 
+ November 2021 (13) 
+ October 2021 (14) 
+ September 2021 (14) 
+ August 2021 (13) 
+ July 2021 (13) 
+ June 2021 (13) 
+ May 2021 (13) 
+ April 2021 (14) 
+ March 2021 (16) 
+ February 2021 (12) 
+ January 2021 (15) 
+ December 2020 (18) 
+ November 2020 (14) 
+ October 2020 (17) 
+ September 2020 (18) 
+ August 2020 (15) 
+ July 2020 (14) 
+ June 2020 (8) 
+ May 2020 (12) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (15) 
+ December 2019 (13) 
+ November 2019 (11) 
+ October 2019 (14) 
+ September 2019 (13) 
+ August 2019 (13) 
+ July 2019 (14) 
+ June 2019 (12) 
+ May 2019 (14) 
+ April 2019 (13) 
+ March 2019 (13) 
+ February 2019 (12) 
+ January 2019 (13) 
+ December 2018 (12) 
+ November 2018 (12) 
+ October 2018 (14) 
+ September 2018 (12) 
+ August 2018 (14) 
+ July 2018 (13) 
+ June 2018 (13) 
+ May 2018 (11) 
+ April 2018 (13) 
+ March 2018 (13) 
+ February 2018 (14) 
+ January 2018 (14) 
+ December 2017 (14) 
+ November 2017 (13) 
+ October 2017 (13) 
+ September 2017 (13) 
+ August 2017 (15) 
+ July 2017 (13) 
+ June 2017 (15) 
+ May 2017 (15) 
+ April 2017 (12) 
+ March 2017 (14) 
+ February 2017 (13) 
+ January 2017 (15) 
+ December 2016 (15) 
+ November 2016 (14) 
+ October 2016 (16) 
+ September 2016 (15) 
+ August 2016 (22) 
+ July 2016 (18) 
+ June 2016 (14) 
+ May 2016 (12) 
+ April 2016 (13) 
+ March 2016 (24) 
+ February 2016 (19) 
+ January 2016 (15) 
+ December 2015 (24) 
+ November 2015 (13) 
+ October 2015 (22) 
+ September 2015 (22) 
+ August 2015 (23) 
+ July 2015 (25) 
+ June 2015 (23) 
+ May 2015 (22) 
+ April 2015 (25) 
+ March 2015 (25) 
+ February 2015 (22) 
+ January 2015 (25) 
+ December 2014 (24) 
+ November 2014 (22) 
+ October 2014 (24) 
+ September 2014 (21) 
+ August 2014 (23) 
+ July 2014 (20) 
+ June 2014 (21) 
+ May 2014 (20) 
+ April 2014 (24) 
+ March 2014 (19) 
+ February 2014 (22) 
+ January 2014 (28) 
+ December 2013 (27) 
+ November 2013 (22) 
+ October 2013 (27) 
+ September 2013 (24) 
+ August 2013 (26) 
+ July 2013 (27) 
+ June 2013 (27) 
+ May 2013 (27) 
+ April 2013 (25) 
+ March 2013 (23) 
+ February 2013 (26) 
+ January 2013 (33) 
+ December 2012 (26) 
+ November 2012 (29) 
+ October 2012 (28) 
+ September 2012 (23) 
+ August 2012 (33) 
+ July 2012 (33) 
+ June 2012 (27) 
+ May 2012 (32) 
+ April 2012 (31) 
+ March 2012 (38) 
+ February 2012 (21) 
+ January 2012 (24) 
+ December 2011 (24) 
+ November 2011 (24) 
+ October 2011 (23) 
+ September 2011 (22) 
+ August 2011 (27) 
+ July 2011 (31) 
+ June 2011 (38) 
+ May 2011 (23) 
+ April 2011 (22) 
+ March 2011 (25) 
+ February 2011 (21) 
+ January 2011 (26) 
+ December 2010 (29) 
+ November 2010 (28) 
+ October 2010 (28) 
+ September 2010 (31) 
+ August 2010 (40) 
+ July 2010 (36) 
+ June 2010 (32) 
+ May 2010 (28) 
+ April 2010 (28) 
+ March 2010 (26) 
+ February 2010 (24) 
+ January 2010 (27) 
+ December 2009 (34) 
+ November 2009 (29) 
+ October 2009 (21) 
+ September 2009 (18) 
+ August 2009 (22) 
+ July 2009 (23) 
+ June 2009 (17) 
+ May 2009 (25) 
+ April 2009 (24) 
+ March 2009 (15) 
+ February 2009 (11) 
+ January 2009 (16) 
+ December 2008 (19) 
+ November 2008 (16) 
+ October 2008 (18) 
+ September 2008 (6) 
+ August 2008 (8) 
+ July 2008 (4) 
+ June 2008 (9) 
+ May 2008 (5) 
+ April 2008 (3) 
+ March 2008 (1) 
+ February 2008 (1) 
+ January 2008 (10) 
+ October 2007 (1) 
+ July 2007 (1) 
+
+ Article Categories
+ Article Categories 
+ Select Category 
+ 13th Age 
+ Adventurer’s Field Guide 
+ Alternative Adventures 
+ Announcements 
+ Arcane Adventures 
+ Archetypes 
+ Articles 
+ Ask Jiro 
+ Ask the Oracle 
+ Backgrounds 
+ Bards with Class 
+ Behind the Spells 
+ Beyond Damage Dice 
+ Beyond the Audience 
+ Bigger Bads 
+ Black Flag 
+ Boss Fights 
+ Collection Of Curiosities 
+ Con Report 
+ Contest 
+ Cult Activity 
+ Deck of Many More Things 
+ Deep Magic 
+ Demon Cults & Secret Societies 
+ Design Diary 
+ Designing with Style 
+ Dirty Jobs 
+ Divine Purpose 
+ Dos and Don’ts 
+ Downtime 
+ Dungeon 23 
+ Dungeon Tables 
+ Dungeons & Doggos 
+ Editorials 
+ Expanding Codex 
+ Explainer 
+ Feats 
+ Featured 
+ Fistful of Lead 
+ Folk Magic 
+ Friday Funny 
+ From the Archives 
+ From the Ashes 
+ From the Deck of a Sandship 
+ Front Page 
+ Game Changer 
+ Get Started! 
+ Gift Guide 
+ GM Like an Author 
+ Good Riddance! 
+ Green Maiden 
+ Haunted Items 
+ Havens of the Holy 
+ Heritage of Heroes 
+ Heroes of Nuria Natal 
+ Hometown Hazards 
+ How to GM 
+ Howling Tower 
+ Hungry Undead 
+ Improv Proficiency 
+ In The Press 
+ Inbar’s Guide to the Northlands 
+ interview 
+ Into the Wilderness 
+ Introducing Players to RPGs 
+ Isekai’d! 
+ Kickstarter 
+ Kobold Dispatch 
+ Kobold FAQ 
+ Kobold Playtest 
+ Kobold Roundup 
+ Labyrinth Locales 
+ Let’s Build! 
+ Ley Lines 
+ Lineages 
+ Living Locations 
+ Magic Academy 
+ Magic Items 
+ Magical Meals 
+ Magical Wastelands 
+ Magludias Fynch 
+ Make It! 
+ Map Packs 
+ Mastering the Mechanics 
+ Medieval Urbanism 
+ Memoirs of a Lich 
+ Midgard 
+ Midgard 10 
+ Midgard Alchemy 
+ Midgard Expanded 
+ Midgard Ley Magic 
+ Midgard Maps 
+ Midgard Monday 
+ Midgard Monster Lore 
+ Midgard Notebook 
+ Monster Match 
+ Monster Mix 
+ Monster Weaknesses 
+ Monsters 
+ Monstrous Crits 
+ Musings from an Empty Tankard 
+ Narrative Game Tricks 
+ NPC Webs 
+ Of Godly Might 
+ On the Road 
+ One-on-One Roleplaying 
+ Open Design Podcast 
+ OSR Vibe 
+ Out of the Frying Pan 
+ Pack Tactics 
+ Paladin Orders 
+ Parties of Interest 
+ Planar Adventures 
+ Play with Class 
+ Pop Psychology 
+ Potion Commotion 
+ Preview 
+ Pulp Adventure 
+ Q&A 
+ Quantum Ogre 
+ Races of Midgard 
+ Random Encounters 
+ Ratatosk 
+ Reach for the Stars 
+ Real Steel 
+ Reviews 
+ Rider Monsters 
+ Rise of the Mimic Moon 
+ Rogue’s Gallery 
+ RPG Blog Carnival 
+ Saints of Midgard 
+ Scarlet Citadel 
+ Shades of Magic 
+ Shops of Zobeck 
+ Shoulders of Giants 
+ Sidetreks 
+ Skill Challenges 
+ Smell My Feet 
+ Southlands 
+ Spare Parts 
+ Spell Check 
+ Sporting Goods 
+ State of Play 
+ Streaming 
+ Subclasses 
+ Tables 
+ Tales of the Valiant 
+ Terrors of the Dragon Empire 
+ The 4th Pillar 
+ The Amber Bazaar 
+ The Art of Skirmishing 
+ The Far Side of the Table 
+ The Sorcery Stop 
+ Tome Unbound 
+ Tome Unleashed 
+ Tome Unrestricted 
+ Tools of War 
+ Tour of the Empire 
+ Trapmaster 
+ Traps 
+ Treasure Trove 
+ TV to Tabletop 
+ Uncategorized 
+ Under the City 
+ Unlocking the Vault 
+ Video Games 
+ VTT Tips 
+ Wallpapers 
+ Warlock 
+ Warlock’s Apprentice 
+ Wastes Wednesday 
+ Wild West 
+ Wizard’s Playbook 
+ Writing a Better Homebrew Campaign 
+ You Find Yourself in… 
+ Your Whispering Homunculus 
+
+ Cunning Traps
+ #dnd 
+ #dnd5e 
+ #MidgardMonday 
+ #monster 
+ #monsters 
+ #OpenDnD 
+ #pathfinder 
+ 4e D&D 
+ 5E 
+ 13th Age 
+ adventure 
+ advice 
+ AGE 
+ class 
+ contest 
+ conventions 
+ Deep Magic 
+ DnD 
+ Feats 
+ Friday Funny 
+ heritage 
+ Howling Tower 
+ interview 
+ Kickstarter 
+ Labyrinth 
+ lineage 
+ magic 
+ magic items 
+ Midgard 
+ Midgard Monday 
+ monster 
+ monsters 
+ news 
+ open design 
+ Real Steel 
+ review 
+ rpg 
+ sneak peek 
+ Southlands 
+ Tales of the Valiant 
+ Thppgrg 
+ ToV 
+ trap 
+ weapons 
+ Your Whispering Homunculus 
+
+ Join the Kobold Courier and Earn Loot!
+
+ Your subscription could not be saved. Please try again.
+
+ Your subscription has been successful.
+
+ Enter to win a $65 gift certificate! Sign up to get the Kobold Courier in your inbox weekly!
+
+ Enter your email address to subscribe 
+
+ Provide your email address to subscribe. For e.g [email protected] 
+
+ SUBSCRIBE
+
+ Store 
+
+ Quick Links 
+ 
+ Where to Start 
+ Monster Overview 
+ Virtual Table Tops 
+ Kobold Press Merch 
+ On Sale 
+ All Products 
+
+ My Account 
+ 
+ Create Account 
+ Login 
+ Logout 
+ Reset Password 
+ My Downloads 
+
+ Store Search 
+ Search for: 
+
+ Kickstarter 
+ Blog 
+ 
+ Articles 
+ Archive 
+ Submissions 
+
+ Contact 
+ Account 
+ About 
+ 
+ About Kobold Press 
+ The Kobold Team 
+ Kobold Creates 
+ Black Flag Roleplaying 
+ Midgard 
+ Organized Play 
+ Frequently Asked Questions 
+ Errata 
+ Forums 
+
+ Tools 
+ 
+ Labyrinth World Archive 
+ Midgard Map 
+ Encounter Builder 
+ Search 5E Kobold Press Monsters 
+ Search ToV Kobold Press Monsters 
+ Search Kobold Adventures 
+
+ Cart 
+
+ Search for: 
+
+ Contact the Kobolds
+
+ Kobold Press
+
+PO Box 2811
+
+Kirkland, WA 98083
+
+ Kobold Game Studio Ltd
+PO Box 38600
+North Vancouver Stn Metropolitan BC
+V7M 3N1
+
+ Support request: support.koboldpress.com 
+
+ View our Conditions of Use and Privacy Policy .
+
+ Search The Site
+
+ Search for: 
+
+ Delve into the Tunnels
+ Delve into the Tunnels 
+
+ Select Month 
+ September 2026 (1) 
+ August 2026 (12) 
+ July 2026 (14) 
+ June 2026 (12) 
+ May 2026 (14) 
+ April 2026 (13) 
+ March 2026 (13) 
+ February 2026 (13) 
+ January 2026 (12) 
+ December 2025 (18) 
+ November 2025 (18) 
+ October 2025 (23) 
+ September 2025 (22) 
+ August 2025 (21) 
+ July 2025 (24) 
+ June 2025 (21) 
+ May 2025 (22) 
+ April 2025 (23) 
+ March 2025 (21) 
+ February 2025 (20) 
+ January 2025 (23) 
+ December 2024 (17) 
+ November 2024 (21) 
+ October 2024 (25) 
+ September 2024 (21) 
+ August 2024 (21) 
+ July 2024 (22) 
+ June 2024 (20) 
+ May 2024 (24) 
+ April 2024 (24) 
+ March 2024 (21) 
+ February 2024 (24) 
+ January 2024 (27) 
+ December 2023 (14) 
+ November 2023 (20) 
+ October 2023 (25) 
+ September 2023 (27) 
+ August 2023 (24) 
+ July 2023 (21) 
+ June 2023 (23) 
+ May 2023 (28) 
+ April 2023 (22) 
+ March 2023 (25) 
+ February 2023 (23) 
+ January 2023 (25) 
+ December 2022 (18) 
+ November 2022 (21) 
+ October 2022 (32) 
+ September 2022 (25) 
+ August 2022 (19) 
+ July 2022 (13) 
+ June 2022 (13) 
+ May 2022 (13) 
+ April 2022 (13) 
+ March 2022 (14) 
+ February 2022 (12) 
+ January 2022 (13) 
+ December 2021 (14) 
+ November 2021 (13) 
+ October 2021 (14) 
+ September 2021 (14) 
+ August 2021 (13) 
+ July 2021 (13) 
+ June 2021 (13) 
+ May 2021 (13) 
+ April 2021 (14) 
+ March 2021 (16) 
+ February 2021 (12) 
+ January 2021 (15) 
+ December 2020 (18) 
+ November 2020 (14) 
+ October 2020 (17) 
+ September 2020 (18) 
+ August 2020 (15) 
+ July 2020 (14) 
+ June 2020 (8) 
+ May 2020 (12) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (15) 
+ December 2019 (13) 
+ November 2019 (11) 
+ October 2019 (14) 
+ September 2019 (13) 
+ August 2019 (13) 
+ July 2019 (14) 
+ June 2019 (12) 
+ May 2019 (14) 
+ April 2019 (13) 
+ March 2019 (13) 
+ February 2019 (12) 
+ January 2019 (13) 
+ December 2018 (12) 
+ November 2018 (12) 
+ October 2018 (14) 
+ September 2018 (12) 
+ August 2018 (14) 
+ July 2018 (13) 
+ June 2018 (13) 
+ May 2018 (11) 
+ April 2018 (13) 
+ March 2018 (13) 
+ February 2018 (14) 
+ January 2018 (14) 
+ December 2017 (14) 
+ November 2017 (13) 
+ October 2017 (13) 
+ September 2017 (13) 
+ August 2017 (15) 
+ July 2017 (13) 
+ June 2017 (15) 
+ May 2017 (15) 
+ April 2017 (12) 
+ March 2017 (14) 
+ February 2017 (13) 
+ January 2017 (15) 
+ December 2016 (15) 
+ November 2016 (14) 
+ October 2016 (16) 
+ September 2016 (15) 
+ August 2016 (22) 
+ July 2016 (18) 
+ June 2016 (14) 
+ May 2016 (12) 
+ April 2016 (13) 
+ March 2016 (24) 
+ February 2016 (19) 
+ January 2016 (15) 
+ December 2015 (24) 
+ November 2015 (13) 
+ October 2015 (22) 
+ September 2015 (22) 
+ August 2015 (23) 
+ July 2015 (25) 
+ June 2015 (23) 
+ May 2015 (22) 
+ April 2015 (25) 
+ March 2015 (25) 
+ February 2015 (22) 
+ January 2015 (25) 
+ December 2014 (24) 
+ November 2014 (22) 
+ October 2014 (24) 
+ September 2014 (21) 
+ August 2014 (23) 
+ July 2014 (20) 
+ June 2014 (21) 
+ May 2014 (20) 
+ April 2014 (24) 
+ March 2014 (19) 
+ February 2014 (22) 
+ January 2014 (28) 
+ December 2013 (27) 
+ November 2013 (22) 
+ October 2013 (27) 
+ September 2013 (24) 
+ August 2013 (26) 
+ July 2013 (27) 
+ June 2013 (27) 
+ May 2013 (27) 
+ April 2013 (25) 
+ March 2013 (23) 
+ February 2013 (26) 
+ January 2013 (33) 
+ December 2012 (26) 
+ November 2012 (29) 
+ October 2012 (28) 
+ September 2012 (23) 
+ August 2012 (33) 
+ July 2012 (33) 
+ June 2012 (27) 
+ May 2012 (32) 
+ April 2012 (31) 
+ March 2012 (38) 
+ February 2012 (21) 
+ January 2012 (24) 
+ December 2011 (24) 
+ November 2011 (24) 
+ October 2011 (23) 
+ September 2011 (22) 
+ August 2011 (27) 
+ July 2011 (31) 
+ June 2011 (38) 
+ May 2011 (23) 
+ April 2011 (22) 
+ March 2011 (25) 
+ February 2011 (21) 
+ January 2011 (26) 
+ December 2010 (29) 
+ November 2010 (28) 
+ October 2010 (28) 
+ September 2010 (31) 
+ August 2010 (40) 
+ July 2010 (36) 
+ June 2010 (32) 
+ May 2010 (28) 
+ April 2010 (28) 
+ March 2010 (26) 
+ February 2010 (24) 
+ January 2010 (27) 
+ December 2009 (34) 
+ November 2009 (29) 
+ October 2009 (21) 
+ September 2009 (18) 
+ August 2009 (22) 
+ July 2009 (23) 
+ June 2009 (17) 
+ May 2009 (25) 
+ April 2009 (24) 
+ March 2009 (15) 
+ February 2009 (11) 
+ January 2009 (16) 
+ December 2008 (19) 
+ November 2008 (16) 
+ October 2008 (18) 
+ September 2008 (6) 
+ August 2008 (8) 
+ July 2008 (4) 
+ June 2008 (9) 
+ May 2008 (5) 
+ April 2008 (3) 
+ March 2008 (1) 
+ February 2008 (1) 
+ January 2008 (10) 
+ October 2007 (1) 
+ July 2007 (1) 
+
+ Kobold Press on Social Media
+
+ Store 
+
+ About 
+
+ Kickstarters 
+
+ Blog 
+
+ Contact 
+
+ Kobold Press and the Kobold Press logo are registered trademarks and Open Design, Tales of the Valiant, the Tales of the Valiant logo, and Midgard are trademarks of Open Design LLC. © 2026. All rights reserved.
+
+ Start typing and press enter to search
+
+ Search... 
+
+ Win $65 for the Kobold Store!
+
+ Name 
+
+ Email 
+
+ Subscribe 
+
+ Get Kobold news, updates, and cool links around the Web in your inbox weekly. Plus, enter for a weekly drawing for a $65 gift certificate to the Kobold Store! 
+
+ Scroll to Top

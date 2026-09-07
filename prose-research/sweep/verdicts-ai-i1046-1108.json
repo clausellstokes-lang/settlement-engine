@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 1046,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Holtzman and colleagues report that a language model raises the probability of a phrase each time that phrase repeats, so repetition is self-reinforcing.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "The probability of a repeated phrase increases with each repetition",
+   "page": "Figure 4 caption"
+  },
+  {
+   "index": 1047,
+   "feature": "other: mechanism of blandness",
+   "claim": "Holtzman and colleagues conjecture that models trained on a per-word likelihood objective are pushed toward the lowest common denominator rather than toward informative language, so larger models alone will not cure blandness.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "forced to favor the lowest common denominator, rather than informative language",
+   "page": "section 4.3"
+  },
+  {
+   "index": 1048,
+   "feature": "other: mechanism of blandness",
+   "claim": "Holtzman and colleagues ground their conjecture in Grice's maxims, saying that people avoid stating the obvious and therefore disfavour maximally predictable wording.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "people optimize against stating the obvious",
+   "page": "section 4.3"
+  },
+  {
+   "index": 1054,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Meister and colleagues explain the rising probability of a repeated substring by saying the substring carries less information with each further occurrence.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "the substring conveys less and less information after each occurrence",
+   "page": "section 5.1, Shortcomings of Existing Algorithms"
+  },
+  {
+   "index": 1055,
+   "feature": "other: mechanism of blandness",
+   "claim": "Meister and colleagues argue that high-probability text reads as dull because low probability is low information content, so probable text is literally uninformative.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "its low information content likely makes for boring",
+   "page": "section 5.1"
+  },
+  {
+   "index": 1060,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Meister and colleagues state that both maximisation-based and stochastic decoding strategies eventually fall into repetitive loops.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "Both types of strategies tend to eventually fall into repetitive loops",
+   "page": "section 1, footnote 1"
+  },
+  {
+   "index": 1067,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Basu and colleagues measured that the percentage of repeated tokens falls as the observed cross-entropy of the generated text rises.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "percentage repetition decreases with increase in cross-entropy",
+   "page": "section 5.2, discussion of Figure 3a"
+  },
+  {
+   "index": 1068,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Basu and colleagues found that for a fixed GPT-2 model the relation between repetition and observed cross-entropy does not depend on which sampling method produced the text.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "this relation is independent of the sampling method",
+   "page": "section 5.2, discussion of Figure 3a"
+  },
+  {
+   "index": 1073,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Basu and colleagues name the low-cross-entropy failure of small k and p values the boredom trap, in which repetition grows as the generated text lengthens.",
+   "source": "Sourya Basu, Govardana Sachitanandam Ramachandran, Nitish Shirish Keskar and Lav R. Varshney, 'Mirostat: A Neural Text Decoding Algorithm that Directly Controls Perplexity', ICLR 2021 (arXiv v2, 14 Jan 2021)",
+   "url": "https://arxiv.org/abs/2007.14966",
+   "quote": "leads to excessive repetitions",
+   "page": "Abstract"
+  },
+  {
+   "index": 1074,
+   "feature": "other: mechanism of blandness",
+   "claim": "Su and colleagues argue that degeneration originates in the anisotropic distribution of a language model's token representations rather than in the decoding rule alone.",
+   "source": "Yixuan Su, Tian Lan, Yan Wang, Dani Yogatama, Lingpeng Kong and Nigel Collier, 'A Contrastive Framework for Neural Text Generation', NeurIPS 2022 (arXiv v3, 26 Sep 2022)",
+   "url": "https://arxiv.org/abs/2202.06417",
+   "quote": "stems from the anisotropic distribution of token representations",
+   "page": "section 1, Introduction"
+  },
+  {
+   "index": 1094,
+   "feature": "other: mechanism of blandness",
+   "claim": "Paech and colleagues cite Kirk and colleagues for the finding that RLHF significantly reduces output diversity relative to a supervised baseline.",
+   "source": "Samuel J Paech, Allen G Roush, Judah Goldfeder and Ravid Shwartz-Ziv, 'Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models', arXiv preprint v2, 21 Oct 2025",
+   "url": "https://arxiv.org/abs/2510.15061",
+   "quote": "RLHF has been shown to significantly reduce output diversity",
+   "page": "section 2, Related Work"
+  },
+  {
+   "index": 1099,
+   "feature": "punctuation tics",
+   "claim": "Paech weights contrast patterns of the 'not just X, but Y' shape at 25 percent of his composite Slop Score.",
+   "source": "Sam Paech, 'Slop Score' explainer page, EQ-Bench (eqbench.com), read 6 Sep 2026",
+   "url": "https://eqbench.com/slop-score.html",
+   "quote": "25% - Not-x-but-y Patterns",
+   "page": "'Slop Score Calculation'"
+  },
+  {
+   "index": 1100,
+   "feature": "stylometry",
+   "claim": "Paech's slop-forensics toolkit clusters models into a lineage tree by treating each over-used slop term as a present-or-absent trait and running the bioinformatics program PHYLIP over the resulting binary vectors.",
+   "source": "Sam Paech, slop-forensics README (GitHub), 2025",
+   "url": "https://github.com/sam-paech/slop-forensics",
+   "quote": "over-represented lexical patterns",
+   "page": "README, 'How the Analysis Works', section 3"
+  },
+  {
+   "index": 1105,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Hewitt, Manning and Liang hypothesise that top-p sampling produces repetitive text because it truncates low-entropy distributions so hard that only the repetition-continuing word survives.",
+   "source": "John Hewitt, Christopher D. Manning and Percy Liang, 'Truncation Sampling as Language Model Desmoothing', Findings of EMNLP 2022 (arXiv v1, 27 Oct 2022)",
+   "url": "https://arxiv.org/abs/2210.15191",
+   "quote": "to heavily truncate low-entropy distributions causes",
+   "page": "section 5.4, Repetition analysis"
+  },
+  {
+   "index": 1108,
+   "feature": "other: mechanism of blandness",
+   "claim": "Hewitt and colleagues frame a neural language model's distribution as a mixture of the true distribution and a uniform-like smoothing distribution, so that truncation sampling is an attempt at desmoothing.",
+   "source": "John Hewitt, Christopher D. Manning and Percy Liang, 'Truncation Sampling as Language Model Desmoothing', Findings of EMNLP 2022 (arXiv v1, 27 Oct 2022)",
+   "url": "https://arxiv.org/abs/2210.15191",
+   "quote": "we show that top-p unnec",
+   "page": "Abstract (the quotation breaks at a line-wrapped hyphen; the sentence continues 'essarily truncates high-probability words')"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1046,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The probability of a repeated phrase increases with each repetition",
+   "note": "arXiv 1904.09751 PDF, Figure 4 caption, verbatim; caption continues that this creates a positive feedback loop, and adds the effect held for the vast majority of phrases tested regardless of length or sampling. That feedback-loop wording supports the claim's 'self-reinforcing' limb. Fetched raw PDF via arxiv.org/pdf, pdftotext -layout."
+  },
+  {
+   "index": 1047,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "forced to favor the lowest common denominator, rather than informative language",
+   "note": "arXiv 1904.09751, section 4.3 'Natural Language Does Not Maximize Probability', verbatim (paper reads 'are forced to favor...'). Every limb holds: the paragraph opens 'We conjecture that this is an intrinsic property of human language'; it names 'standard per-word learning objectives'; and the immediately preceding sentence calls solving the problem by training larger models or improving neural architectures 'unlikely', which is the claim's 'larger models alone will not cure blandness' limb."
+  },
+  {
+   "index": 1048,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "people optimize against stating the obvious",
+   "note": "arXiv 1904.09751, section 4.3, verbatim, introduced as what Grice's Maxims of Communication (Grice, 1975) show. The next sentence supplies the second limb: making every word as predictable as possible 'will be disfavored'. Grice 1975 also appears in the reference list."
+  },
+  {
+   "index": 1054,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the substring conveys less and less information after each occurrence",
+   "note": "arXiv 2202.00666 PDF, verbatim (across a column line-break). The clause before it states that when a string has a repetitive loop, language models often assign increasingly higher probability to the repeated substring, so the claim's causal framing is the paper's own. Location note: the sentence sits in the section-5 preamble just above Algorithm 5.1 (Top-k Sampling), not under a heading literally named 'Shortcomings of Existing Algorithms' in this version; the verdict is on the claim, not the locator."
+  },
+  {
+   "index": 1055,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'low probability is low information content' - the paper's relation runs the other way: high probability implies low information content",
+   "trueWording": "why high-probability text is often dull or generic",
+   "note": "arXiv 2202.00666: the quoted fragment is on the page verbatim, broken across a hyphenated line ('makes for bor-/ing, i.e., uninformative, text'), and the sentence attributes dullness to low information content. But the claim's stated mechanism is inverted: the paper's information-theoretic framing (information content = -log p) makes HIGH probability the low-information case, which is exactly why high-probability text is dull. As written, 'because low probability is low information content' is not what the page supports, so this grades PARTIAL rather than VERIFIED."
+  },
+  {
+   "index": 1060,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Both types of strategies tend to eventually fall into repetitive loops",
+   "note": "arXiv 2202.00666, footnote 1 on page 1 (section 1, Introduction), verbatim. The preceding footnote sentence names the two types: maximization-based strategies (generic or degenerate text) and stochastic strategies (occasionally nonsensical text), so both limbs of the claim hold."
+  },
+  {
+   "index": 1067,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "percentage repetition decreases with increase in cross-entropy",
+   "note": "arXiv 2007.14966 (Mirostat), section 5.2, discussion of Figure 3a, verbatim. The paper defines percentage repetition as percentage 1-gram repetition, i.e. repeated tokens, and the axis is observed cross-entropy rate of the generated text, so the claim's 'repeated tokens' and 'observed cross-entropy' limbs both hold."
+  },
+  {
+   "index": 1068,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this relation is independent of the sampling method",
+   "note": "arXiv 2007.14966, section 5.2, Figure 3a discussion; the full sentence reads that percentage repetition decreases with increase in cross-entropy 'and more importantly, for a fixed GPT-2 model, this relation is independent of the sampling method' - the 'fixed GPT-2 model' limb is on the page verbatim too (trueWording trimmed to the twelve-word cap). The conclusion section repeats that repetitions are independent of the sampling method."
+  },
+  {
+   "index": 1073,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leads to excessive repetitions (the boredom trap)",
+   "note": "arXiv 2007.14966, Abstract, verbatim: for low values of k and p, perplexity drops significantly with generated text length and leads to excessive repetitions (the boredom trap). Cross-entropy is defined in the paper as log of perplexity, and section 5.3 states directly that for small k and p both methods fall into low cross-entropy regions - boredom traps - which results in increase in repetitions as the length of the text grows, supporting both the 'low-cross-entropy' and the 'grows as the text lengthens' limbs."
+  },
+  {
+   "index": 1074,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stems from the anisotropic distribution of token representations",
+   "note": "arXiv 2202.06417, section 1 Introduction, verbatim: 'In this work, we argue that the degeneration of neural language models stems from the anisotropic distribution of token representations'; the abstract restates it as the underlying reason for model degeneration, and the conclusion repeats it. The 'rather than in the decoding rule alone' limb is supported by the abstract's contrast: existing approaches introduce stochasticity via sampling or modify training objectives, yet the paper locates the underlying reason in the representation space."
+  },
+  {
+   "index": 1094,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "RLHF has been shown to significantly reduce output diversity",
+   "note": "arXiv 2510.15061 (Antislop), section 2 Related Work, verbatim; the sentence continues 'compared to a supervised baseline [Kirk et al., 2024]', so both the citation limb and the 'relative to a supervised baseline' limb hold. Kirk et al., 'Understanding the effects of RLHF on LLM generalisation and diversity', is in the reference list."
+  },
+  {
+   "index": 1099,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "25% - Not-x-but-y Patterns",
+   "note": "eqbench.com/slop-score.html, 'Slop Score Calculation' block in the 'How does this work?' panel, verbatim; the line continues that these are contrast patterns like 'not just X, but Y' which are overused by AI, and the block opens 'The Slop Score is a weighted composite metric', with the other weights 60% slop words and 15% slop trigrams. Attribution limb: the page names no author in prose but points to github.com/sam-paech/slop-score as the source code, and the site is EQ-Bench."
+  },
+  {
+   "index": 1100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "over-represented lexical patterns",
+   "note": "github.com/sam-paech/slop-forensics README (fetched raw from raw.githubusercontent.com/.../main/README.md); the quoted phrase is verbatim in the opening line. Every limb of the claim is supported under 'How the Analysis Works', item 3 'Phylogenetic Tree Building': feature vectors are a binary presence/absence representation (1s and 0s) of whether a model has a given slop word or phrase in its top used list; PHYLIP, described as a bioinformatics tool for DNA or protein sequences, is run over them with each model treated as a species and each slop term as a genetic trait; and the parsimony section says it infers lineage from the fewest mutations. Note the quoted phrase itself sits in the README intro, not inside section 3."
+  },
+  {
+   "index": 1105,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to heavily truncate low-entropy distributions causes",
+   "note": "arXiv 2210.15191, section 5.4 'Repetition analysis', verbatim; the full sentence is 'We hypothesize that the tendency of top-p sampling to heavily truncate low-entropy distributions causes it to generate repetitive text by only allowing the repetition-continuing word', which supplies the claim's hypothesise, top-p, and repetition-continuing-word limbs. Section 5.3's entropy analysis independently measures that top-p heavily truncates low-entropy distributions."
+  },
+  {
+   "index": 1108,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we show that top-p unnec-",
+   "note": "arXiv 2210.15191, Abstract, verbatim including the hyphenated line break ('unnec-/essarily truncates high-probability words'), exactly as the claim's page note predicts. The claim's substance is the abstract's own framing: thinking of a neural language model as a mixture of a true distribution and a smoothing distribution that avoids infinite perplexity, in which light truncation algorithms aim to perform desmoothing; the Introduction adds 'uniform-like' to the smoothing distribution, matching that limb of the claim."
+  }
+ ]
+}

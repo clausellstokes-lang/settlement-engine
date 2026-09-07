@@ -1,0 +1,234 @@
+{
+ "name": "hobb",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 30,
+   "feature": "limited magic",
+   "claim": "Magic must be scarce; three wishes make a tale, infinite wishes make none.",
+   "source": "LisiPieces interview",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "an infinite number of wishes is no story at all",
+   "page": ""
+  },
+  {
+   "index": 31,
+   "feature": "consistent coinage and value",
+   "claim": "Determine coinage and the value of money and keep it consistent through the book.",
+   "source": "LisiPieces interview",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "Determine coinage and value of money",
+   "page": ""
+  },
+  {
+   "index": 32,
+   "feature": "village-economy plausibility",
+   "claim": "Research economy and geography: a tiny village will not support an artisan specialising in doorknockers.",
+   "source": "The OF Blog interview (2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "an artisan specializing in doorknockers",
+   "page": ""
+  },
+  {
+   "index": 33,
+   "feature": "food constrained by technology, geography, climate",
+   "claim": "A meal must be believable for the technology level, geography and climate, and such details fall naturally into the tale.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "the technology level, the geography and climate",
+   "page": ""
+  },
+  {
+   "index": 34,
+   "feature": "household status gradient",
+   "claim": "Status registers in the ordinary: food served in the kitchen was warmer than food served in the hall.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "warmer than that served in the hall",
+   "page": ""
+  },
+  {
+   "index": 35,
+   "feature": "subsistence menu",
+   "claim": "A character on the frontier has a limited menu, and the constraint is listed item by item.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "No flour, no sugar, no milk, cream or butter",
+   "page": ""
+  },
+  {
+   "index": 36,
+   "feature": "magic paid for in the body",
+   "claim": "The whole saga grew from asking what if magic were addictive and degenerative, so that power is paid for physically.",
+   "source": "Locus interview excerpts (January 1998)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "quote": "What if magic were addictive?",
+   "page": ""
+  },
+  {
+   "index": 37,
+   "feature": "common magic is technology",
+   "claim": "Magic that everybody can do becomes commonplace technology; scarcity keeps it magic.",
+   "source": "Locus interview excerpts (December 2005)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "quote": "any sufficiently common magic is technology",
+   "page": ""
+  },
+  {
+   "index": 38,
+   "feature": "violence written as ugly",
+   "claim": "Violence is written to be horrifying and ugly, never lascivious, and rape as a haunting that never fully leaves.",
+   "source": "New Statesman profile (Pauline Bock, 2018)",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "quote": "how horrifying and ugly violence is",
+   "page": ""
+  },
+  {
+   "index": 39,
+   "feature": "follow the story, no reset",
+   "claim": "Once a story goes somewhere she does not turn back or undo it with an it-was-all-a-dream.",
+   "source": "Fantasy-Faction interview part two (2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview-part-two",
+   "quote": "Follow the story, wherever it goes",
+   "page": ""
+  },
+  {
+   "index": 40,
+   "feature": "painted into a corner",
+   "claim": "When a character makes a stupid decision the writer is stuck with it and must write the consequence.",
+   "source": "Dragonsteel Nexus 2024 character panel report",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/how-to-write-compelling-characters-panel-dragonsteel-nexus-2024",
+   "quote": "you are stuck with it",
+   "page": ""
+  },
+  {
+   "index": 41,
+   "feature": "experience shapes character (consequence as identity)",
+   "claim": "What happens to a character changes her permanently, and a character not shaped by her experiences makes those experiences pointless to write.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "The things that happen to us change us",
+   "page": ""
+  },
+  {
+   "index": 42,
+   "feature": "no plot armour; bodily aftermath",
+   "claim": "Physical damage must leave aftermath, bruises, blood, limping, vomiting, because a good character does not protect anyone from a concussion.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "no one limps or throws up in the corner",
+   "page": ""
+  },
+  {
+   "index": 43,
+   "feature": "product of what has been done to us",
+   "claim": "Characters become the product of what has been done to them, or for them.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "the product of what has been done to us",
+   "page": ""
+  },
+  {
+   "index": 44,
+   "feature": "character before purpose",
+   "claim": "Characters step onto the stage unplanned and are allowed their own ideas about the story; the Fool was outlined as a minor character.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "some characters just have their own ideas about the story",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 30,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all.",
+   "note": "Quote verbatim in Hobb's answer on magic's limits; the page's framing is 'It is essential... that magic have limits in a story' rather than the word 'scarce', but the three-wishes/infinite-wishes contrast is exact."
+  },
+  {
+   "index": 31,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Determine coinage and value of money and stick to it consistently.",
+   "note": "Verbatim in Hobb's answer to 'rookie mistakes to avoid when it comes to worldbuilding'; 'stick to it consistently' carries the claim's 'keep it consistent through the book'."
+  },
+  {
+   "index": 32,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "an artisan who makes his living specializing in doorknockers",
+   "note": "Quote is not word for word (page inserts 'who makes his living'). Substance fully supported on The OF Blog, dated 28 April 2003: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers... Make your economy and geography make sense... do the research.'"
+  },
+  {
+   "index": 33,
+   "verdict": "PARTIAL",
+   "trueWording": "The meal has to be believable in terms of the technology level, the geography and climate, and the transportation available.",
+   "note": "Quote verbatim, and the believability limb is exact. But the page says meal detail 'takes a bit of thought and sometimes the pitfalls are not obvious'; the 'naturally fall into place in a tale' line sits in a different answer and refers to status-marking details (below/above the salt, dress, sleeping quarters), not to technology/geography/climate.",
+   "unsupportedLimb": "that such technology, geography and climate details 'fall naturally into the tale'"
+  },
+  {
+   "index": 34,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that food served in the kitchen was warmer than that served in the hall",
+   "note": "Quote verbatim on the page, but inside the interviewer's question quoting Fitz's observation, not in Hobb's own words. Hobb's answer supports the status limb ('inevitable that we judge the status of characters or people by if they are seated below or above the salt') while disclaiming that she plotted it ('you are giving me too much credit for thinking ahead')."
+  },
+  {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No flour, no sugar, no milk, cream or butter, unless he trades for those items",
+   "note": "Verbatim, preceded by 'I know that he's still going to have a very limited menu.' The page's setting wording is 'a small subsistence farmer with a few chickens or pigs and some fish from the stream' rather than 'frontier'."
+  },
+  {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What if magic were addictive? And what if the addiction was destructive or degenerative?",
+   "note": "Verbatim; the page adds 'From there, almost everything developed', 'power or magic has to be paid for in some way' and 'physically degenerative', supporting the origin and the bodily-payment limbs."
+  },
+  {
+   "index": 37,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "any sufficiently common magic is technology",
+   "note": "Verbatim; page also carries 'It's not magic if everybody can do it' and 'it becomes the commonplace technology', supporting both limbs."
+  },
+  {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try to express how horrifying and ugly violence is",
+   "note": "Live URL returned HTTP 403 with a browser user agent; verified on the Wayback raw capture 20220630012930id_. All limbs present: the quote, 'I did not want it to be written as something lascivious or somehow exciting', and 'a traumatic, haunting experience that never fully leaves the characters it happens to' (the latter is the profile writer's description, not Hobb's quote)."
+  },
+  {
+   "index": 39,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Follow the story, wherever it goes. You can't turn back, you can't turn aside and woe betide any writer who suddenly decides, 'It was all just a dream.'",
+   "note": "Verbatim and both limbs explicit, inside a spoiler block in the Fitz answer."
+  },
+  {
+   "index": 40,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Your character has made a stupid decision, and you are stuck with it.",
+   "note": "Verbatim, preceded by 'You can find yourself painted into a corner'; the consequence limb is supported by the report's 'People make mistakes, and they have to deal with the consequences.' Source is a convention panel report quoting Hobb, not a direct interview."
+  },
+  {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The things that happen to us change us.",
+   "note": "Verbatim; the second limb is verbatim too: 'If your character is not shaped by their experiences, what is the point of writing about those experiences?'"
+  },
+  {
+   "index": 42,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no one is bruised afterwards, there is no blood, no one limps or throws up in the corner",
+   "note": "Verbatim; the concussion limb is on the page as 'you are likely to have a concussion. Having a good character does not protect you from physical damage.'"
+  },
+  {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We become the product of what has been done to us. Or for us.",
+   "note": "Verbatim, introduced by 'Characters are shaped by their experiences.'"
+  },
+  {
+   "index": 44,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some characters just have their own ideas about the story",
+   "note": "Verbatim; the unplanned-entry limb ('none of my characters are mapped out by me... a character stepping onto a stage in the spotlight') and the Fool limb ('in it, the Fool was a very minor character') are both on the page."
+  }
+ ]
+}

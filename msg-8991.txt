@@ -1,0 +1,7 @@
+§899.1: the §899 row's unfilled placeholder is read out in a correction row — the guard was right, the override was wrong
+
+One placeholder (__ENC4_PROOFS__) landed in the §899 row: the after-CAS guard fired on it and the chair narrowed the guard to uppercase letters, which the digit in ENC4 slipped past. Rows are append-only, so §899.1 carries the receipt that belongs there (ENC-4's owed vitest: the named suites 121/121, tests/copy 121/121, tests/lint whole with six attributed arms, the three-directory proof, the whole suite through the totals run and the gate) and records the law: when a guard fires, read what it found before narrowing the guard.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

@@ -1,0 +1,1356 @@
+
+===== PAGE 1 =====
+Journal of Tolkien Research Journal of Tolkien Research 
+Volume 11 Issue 1 Article 4 
+2020 
+Tolkien and the Age of Forgery: Improving Antiquarian Practices in Tolkien and the Age of Forgery: Improving Antiquarian Practices in 
+Arda Arda 
+Will Sherwood 
+Independent Scholar, wsherwood92@outlook.com 
+Follow this and additional works at: https://scholar.valpo.edu/journaloftolkienresearch 
+ Part of the Literature in English, British Isles Commons 
+Recommended Citation Recommended Citation 
+Sherwood, Will (2020) "Tolkien and the Age of Forgery: Improving Antiquarian Practices in Arda," Journal 
+of Tolkien Research: Vol. 11 : Iss. 1 , Article 4. 
+Available at: https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4 
+This Article is brought to you for free and open access by the Christopher Center Library at ValpoScholar. It has 
+been accepted for inclusion in Journal of Tolkien Research by an authorized administrator of ValpoScholar. For 
+more information, please contact a ValpoScholar staff member at scholar@valpo.edu. 
+===== PAGE 2 =====
+Tolkien and the Age of Forgery: Improving Antiquarian Practices in Arda Tolkien and the Age of Forgery: Improving Antiquarian Practices in Arda 
+Cover Page Footnote Cover Page Footnote 
+I am obliged to The Tolkien Estate for allowing me to quote from Tolkien’s unpublished manuscripts in 
+this article, and particularly to Cathleen Blackburn, the solicitor for the Estate, who handled my requests. 
+This article is available in Journal of Tolkien Research: https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/
+4 
+===== PAGE 3 =====
+1 
+ 
+Tolkien and the Age of Forgery: Improving Antiquarian 
+Practices in Arda 
+ ‘If a young, perhaps a female author, chooses to circulate a beautiful poem . . . 
+under the disguise of antiquity, the public is surely more enriched by the 
+contribution than injured by the deception.’ (Scott, 1849, p. 16). 
+Literary forgery is not a title we commonly affiliate with J.R.R. Tolkien’s 
+mythical legendarium. Neither is it a term I wish to label him with. However, as 
+Nick Groom has pondered, ‘it is nonetheless interesting that he adopts the 
+techniques of literary forgery’ (2014, p. 294). When referring to the authorial 
+conceit that ties The Book of Lost Tales, The Silmarillion, The Red Book of 
+Westmarch and the less substantial texts that orbit the legendarium together, we 
+are more inclined to use titles like ‘framework’, ‘meta-textual frame’, and ‘depth’ 
+to describe Arda’s historicity.1 We perceive the text to exist simultaneously on 
+two different planes: the fictional world of the story (the “secondary world”) and 
+the real world (“the primary world”) (Pezzini, 2018, p. 49). The theoretical scope 
+of Tolkien’s world-building has therefore received significant attention and 
+scholars have further examined the tools that Tolkien used to bring Arda to life.2 
+However, what has been overlooked is how his world-building strikingly echoes 
+the motivations and methodologies of two literary forgers who were writing in the 
+1760s – the epoch known as the Age of Forgery. James Macpherson (1736 – 
+1796) is renowned for his pseudo-Medieval Scottish mythology attributed to the 
+figure of Ossian, and Thomas Chatterton (1752 – 1770) similarly created scores of 
+manuscripts and paratexts that he purported to be original works by the imaginary 
+Thomas Rowley and Turgot. All three writers considered themselves to have 
+‘found’ the mythologies that they built and dedicated them to their nations. 
+Of the two, Macpherson has received the most attention within Tolkien 
+scholarship. Tom Shippey has argued that Tolkien would have seen Macpherson’s 
+Scottish forgeries as ‘phony’, a poor example of a myth cycle that mishandles its 
+source material and stands far below Elias Lönnrot’s Kalevala (1835), his 
+favoured example of antiquarian scholarship (2007, p. 22). Yet other scholars 
+have since drawn more positive connections between Macpherson’s and Tolkien’s 
+mythologies, citing the sweeping, dramatic landscapes and reliance on ‘Celtic’ 
+ 
+1 For ‘framework’ see Fimi (2010, p. 128) and Tolkien (1984, p. 5). For ‘meta-textual frame’ see 
+Pezzini (2018, p. 32). For ‘depth’ see Shippey (2005, p. 259) and Tolkien (1984, pp. 2 – 5). 
+2 In particular see Nagy (2003, pp. 239 – 258), Flieger (2005, pp. 55 – 84), Flieger (2006, pp. 206 
+– 218), Nagy (2006, pp. 44 – 45), Oberhelman (2008, pp. 81 – 92), Brljak (2010, pp. 1 – 34), 
+Thiessen (2014, pp. 195 – 207), Lee (2014, p. 61), Nagy (2014, pp. 112 – 116), Pezzini (2018, pp. 
+32 – 64). 
+1
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 4 =====
+ 
+ 
+myth as key methods.3 Jamie Williamson reminds us that Macpherson’s Ossian 
+texts were drawn from various ‘Celtic’ sources (Irish and Scottish) and Tolkien 
+similarly ‘built his initial fictional indigenous English mythology out of chosen 
+bits of Germanic and Celtic (and other) tradition and a great deal of his own 
+invention’ (2015, p. 63). Although none of these studies have located evidence 
+that Tolkien read Macpherson, it is strongly implied that Macpherson and Ossian 
+were a part of the academic backcloth that Tolkien grew up with. 
+Comparatively, Chatterton has received little attention and his relationship 
+to Tolkien is woefully under-represented. Nick Groom, Jamie Williamson, and 
+Dimitra Fimi are the only figures to have thematically linked the Bristolian to 
+Tolkien. Groom acknowledges that ‘it is not clear that Tolkien ever studied 
+Chatterton’ but notes that he was later a colleague of David Nichol Smith, an 
+eminent eighteenth-century scholar, and was supposed to supervise a thesis on 
+Thomas Tyrwhitt, the first editor of Chatterton’s work (Groom, 2014, p. 295). 
+Williamson’s attention on the subject is regrettably brief, calling Chatterton a 
+‘clear precursor to the . . . elaborate invented languages of Tolkien’ (2015, pp. 64 
+– 65). Fimi has produced the most fruit thus far, ‘teas[ing] out similarities and 
+parallels’ between their methodologies of Medieval world-building (Fimi, 2016, 
+p. 60). 
+Drawing on new, previously unpublished manuscript material from 
+Tolkien’s undergraduate notebooks, this article will expand and combine these 
+two avenues of scholarship under the frame of the Age of Forgery. It will argue 
+that Tolkien’s legendarium draws heavily from the antiquarian methodologies of 
+Macpherson and Chatterton. It conceives of all three as authors of feigned history 
+who responded to the national anxieties of their contexts. At the heart of their 
+respective mythologies lies the desire to provide their distressed nations with 
+historical and national identities. The modes of transmission are key to their 
+success (or failure) as Macpherson promotes the virtues of the oral tradition and 
+Chatterton, having learnt from his predecessor’s perceived short-comings, sides 
+with the authority of the written word. Tolkien’s position enabled him to judge the 
+values and quality of Macpherson’s and Chatterton’s distinctly different 
+mythologies. He picked, modified, and improved on the antiquarian practices that 
+had been prevalent during the Age of Forgery. Indeed, extent echoes of 
+Macpherson and Chatterton are not coincidences, they are deliberate 
+improvements on previous antiquarian material that marries rather than segregates 
+methodologies. In this manner, Tolkien ultimately transformed the work of the 
+ 
+3 See Shippey (2007, p. 22), Robson (1986, p. 234), Gaskill (1991, p. 6), Rosebury (2003, pp. 3 & 
+22), Groom (2014, pp. 294 – 295), Dawson (2005, pp. 108 – 118), Hunter (2005, pp. 61 – 72), 
+Williamson (2015, pp. 63 – 64) and Bugajska (2014, pp. 159 – 168). 
+2
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 5 =====
+ 
+ 
+antiquarian literary forgers into what structuralists would call the codes and 
+conventions of modern fantasy literature. 
+The article will begin with an overview that will establish how the 
+contextual worlds of Macpherson, Chatterton, and Tolkien mirror one another in 
+terms of national anxieties. In order to fully understand how Tolkien and his 
+contemporaries understood the forgers, it will then place them within the 
+contextual scholarly spheres of the late nineteenth and early twentieth centuries 
+while analysing Tolkien’s undergraduate notebooks. Turning its attention to the 
+texts themselves, it will approach Macpherson and Tolkien, and Chatterton and 
+Tolkien separately, examining the methodological similarities and developments 
+within The Book of Lost Tales (1910s – 1930s), The Hobbit (1937), and The Lord 
+of the Rings (1954 – 1955). 
+ 
+The Worlds of Macpherson, Chatterton, and Tolkien 
+ 
+The 1760s saw a surge in antiquarian activity that pertained to the reclaiming of 
+the British literary tradition. Previously, Thomas Gray had rejected the Hellenic 
+muse in ‘The Bard’ (1757) for a native one and the paucity of Medieval British 
+texts generated a belief that a more substantial body of literature survived 
+somewhere and needed to be found. This desire was so strong that writers started 
+to present their work as spurious antiquarian finds. Horace Walpole’s short-lived 
+preface to The Castle of Otranto (1764) declared that the novel had been ‘found in 
+the library of an ancient catholic family in the north of England’ (2014, p. 5). The 
+English translation of William Beckford’s Vathek (1786) erroneously presented 
+the original text as Arabic, when Beckford had created the story and originally 
+written it in French. This trajectory led to greater forgeries by a wealth of figures 
+across Britain: Iolo Morganwg, Macpherson, Chatterton, and William Ireland to 
+name just a few.4 From the surge of national interest in its literary past and 
+tradition, Macpherson and Chatterton forged respective histories and mythologies 
+in an effort to ‘explore imaginatively the idea of authentic regression into the past’ 
+in order to reclaim it and revive Britain’s national tradition (Haywood, 1986, p. 
+30).  
+Much like Lönnrot, Macpherson undertook field research. He collected 
+native Scottish ballads from the Highlands before redacting and translating them 
+into the Ossian mythology. Set in the third-century Scottish Highlands during the 
+reign of Fingal, Fragments of Ancient Poetry (1760) was followed by two ‘epics’: 
+ 
+4 It is not within the scope of this paper to explore Tolkien’s connections to all of these forgers. 
+However, ‘Tolkien’s Celtic Library’ at the Bodleian evidences that he was familiar with 
+Morganwg. He owned an edited version of Iolo Manuscripts (1888) (edited by Taliesin Williams) 
+and John William’s publications of Barddas volumes 1 (1862) and 2 (1874). 
+3
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 6 =====
+ 
+ 
+Fingal (1761) and Temora (1763). They presented the Scottish as the British 
+people with the rich and untapped national history that Britain had been searching 
+for. Ossian was proclaimed the ‘Homer of the North’ and across Europe, the texts 
+were lauded over by significant cultural figures.5 Macpherson permeated the texts 
+with a deep melancholy that nostalgically recalled the glory of Highland Clan 
+culture that had degenerated down the centuries and was finally destroyed by the 
+Highland’s defeat at the Battle of Culloden in 1746. The choice of the third 
+century was strategic as it allowed Macpherson to ‘turn the Highlands into one 
+enormous echo chamber, evoking an emphatically oral world’ that reflected 
+contemporary views on the value of the oral tradition (Trumpener, 1997, p. 70). 
+ However, not everyone was convinced of Ossian’s authenticity and the 
+permanence of the oral tradition from which it supposedly originated. Samuel 
+Johnson led the assault against Macpherson and demanded that the Scot reveal his 
+sources. Macpherson failed to do so and thus began the tirade against 
+Macpherson’s ingenuity, use of language, and source adaption that was still 
+ongoing during Tolkien’s student days at Exeter College, Oxford. Macpherson’s 
+failure to produce tangible evidence was a warning for later forgers to take greater 
+efforts when fabricating history. 
+ Thanks to William Wordsworth’s ‘marvellous Boy’ description and Henry 
+Wallis’s oil painting The Death of Chatterton (1856) Chatterton is well-known as 
+the iconic youthful artist (Wordsworth, 2008, p. 262; l. 43). His suicide at the age 
+of seventeen has however been contested by Groom in The Forgers Shadow; he 
+has argued that the ‘myth’ of the act ‘became part of the very genesis of 
+Romanticism’ (2002, p. 12). In Chatterton’s very short life he forged a plethora of 
+manuscripts by the fifteenth-century monk Thomas Rowley and tenth-century 
+Anglo-Saxon Turgot, producing a treasure-trove of texts and paratexts that 
+mythologised Bristol in Britain’s literary tradition. This imagined world came 
+from his frustration with the decline of English culture and tradition after the 
+Norman Conquest. He found ‘insufficient materials for his fertile mind’ in the 
+church of St Mary Redcliffe, Bristol, so he started to ‘invent his own’ materials 
+with the intent of reclaiming England’s forgotten glory (Groom, 2014, p. 294). As 
+much as Macpherson was a writer of Highland identity, Chatterton was a poet of 
+English identity (Groom, 2002, p. 170).  
+Chatterton’s letters attest to his dissatisfaction with England after 1066. He 
+strove to archaicise Rowley’s and Turgot’s work with a pseudo-Medieval script 
+ 
+5 Such as Friedrich Gottlieb Klopstock, Gotthold Ephraim Lessing, Johann Gottfried Herder, 
+Gottfried August Bürger, Johann Heinrich Voss, Friedrich Schiller, Johann Wolfgang von Goethe, 
+Madame de Staël, François-René Chateaubriand, Novalis, Ludwig Tieck, Napoleon Bonaparte, 
+Alphonse de Lamartine, Franz Schubert, George Sand, Felix Mendelssohn , and Johannes Brahms. 
+4
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 7 =====
+ 
+ 
+that the Romantic poet John Keats would later call the ‘purest English’ (1935, p. 
+425). Whereas Macpherson embodied the extremes of the oral tradition, so far so 
+that it brought into question his work’s authenticity, Chatterton swung the other 
+way. The aligning of Rowley with the invention of the printing press and 
+manuscript culture was a deliberate choice; the posterity and tangibility of the 
+manuscript meant that Chatterton’s claim to historical authenticity was more 
+secure. Although Macpherson and Chatterton ‘acted as discoverers of “buried” 
+MSS, of literary “monuments”’, Chatterton’s obsession with forging the actual 
+evidence surpassed Macpherson’s own mythological achievements and 
+anticipated Tolkien’s own (Haywood, 1986, p. 22). Chatterton told the spurious 
+tale that he had found and translated the texts of the ‘Battle of Hastings’, ‘The 
+Tournament’, and ‘Ælla’ and claimed that Rowley had translated them from the 
+originals of Turgot in the tenth century. They were therefore products of their 
+time’s nationalism and act as precursors to Tolkien’s own response to twentieth-
+century England’s yearning for a mythology. 
+ The nationalism that permeated the late nineteenth- and early twentieth-
+century was not just located in Britain. The hunt came ‘after the Napoleonic wars’ 
+when ‘the nations or proto-nations of Europe became engaged in what was almost 
+an “arms race” to provide themselves with national literary traditions that would 
+cement their claim to having always existed’ (Shippey, 2004, p. 147). In 1871, 
+Germany became a unified state; Italian irredentism was still ongoing and would 
+not become fully realised until 1918. On the run up to the Great War ‘most of the 
+populations participating . . . already felt to some degree a sense of national 
+identity’ (Mann, 2013, p. 174). The empires of the three Great Powers: Austria-
+Hungary, Russia, and the Ottoman Empire all blended national identities with 
+imperial ones to form a unified nationalism. It was very easy to ‘tug at the strings 
+of national identities’ and spark a patriotic reaction ‘across the classes’ of a nation 
+(Mann, 2013, p. 175).  
+The promotion of nationalism and patriotism in the British school 
+curriculum meant that Tolkien’s own school, King Edward’s, Birmingham was 
+saturated with national pride. During an inspection by The King Edward’s Board 
+of Education in July 1905, the inspectors applauded how boys in the First Form 
+‘did good essays on Patriotism’ (Gross & Matthews, 1905, p. 7), and again on 25th 
+August 1906 how many students ‘took a rather provincial patriotic tone about 
+England, as if there were no other countries in the scale of civilisation’ (Gross & 
+Matthews, 1906, p. 17). Tolkien no doubt partook in classes like this as he moved 
+up to the First Form in the Autumn term of 1907 (Hammond & Scull, 2017a, p. 
+15). The patriotic attitude of the school would find resonance in Tolkien’s letter to 
+Christopher Wiseman on 16th November 1914, in which he considered the 
+unifying forces of the T.C.B.S. to be ‘religion, human love, the duty of patriotism, 
+5
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 8 =====
+ 
+ 
+and a fierce belief in nationalism’ (quoted in Hammond & Scull, 2017a, p. 63). 
+The education reports and Tolkien’s letter therefore echo the larger concerns 
+around the waning state of the British Empire and the global push for national 
+pride. 
+Closer to home the ‘rising Welsh and Scottish nationalism during this 
+period w[ere] additional reason[s] for the focus on English nationalism’ (Fimi, 
+2010, p. 54).  England’s students and writers reacted to this period of national 
+upheaval by deliberately promoting the country’s might in their writing ‘as if 
+there were no other countries in the scale of civilisation’, simultaneously fuelling 
+a powerful English nationalism and separating them from their ‘Celtic’ 
+neighbours. Much like Macpherson’s Highlands and Chatterton’s England, 
+Tolkien’s England found its history to be lacking a mythological identity 
+altogether. Although ‘the Anglo-Saxons had been rediscovered and praised as the 
+ancestors of modern England . . . [there was] very scanty mythological material 
+from the literature of this “great people”’ which frustrated Tolkien and the 
+T.C.B.S. (Fimi, 2010, p. 54). 
+  Macpherson, Chatterton, and Tolkien reacted to the intense national 
+drives of their periods by creating complete mythologies for their deprived 
+nations. Tolkien would reflect on the aim of The Book of Lost Tales in his 1951 
+letter to Milton Waldman in which he originally planned to dedicate his 
+mythology to England (2006a, pp. 144 – 145). 
+ 
+Tolkien’s Undergraduate Notebooks 
+ 
+Tolkien’s education at Oxford introduced him to a vast range of medieval texts 
+and traditions in Britain. Through them he was able to observe how the eighteenth 
+and nineteenth centuries had compartmentalised the Middle Ages; adapting and 
+romanticising it for each century’s gain (Tolkien, 2006b, p. 173). Humphrey 
+Carpenter considers the ‘General Literature / General Miscellaneous’ notebook to 
+contain a ‘few sketchy notes’ that show ‘no indication that [Tolkien] had more 
+than a passing interest’ in the topics covered (2002, p. 99). However, this 
+notebook grants us a fuller picture of what the Oxford curriculum included.  
+In his first year Tolkien was exposed to the Age of Forgery. This came 
+from David Nichol Smith’s lecture series ‘Johnson and His Friends’ that started 
+on Wednesday 15th October 1913 (Hammond & Scull, 2017a, p. 53). On 
+Wednesday 22nd October, Smith lectured on Samuel Johnson’s criticism of 
+Macpherson and Ossian and provided sufficient bibliographical information for 
+his students to take away and investigate further. Tolkien took notes for this 
+lecture and although they focused heavily on Macpherson, Chatterton was 
+6
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 9 =====
+ 
+ 
+included in the list of forgers: 
+ 
+[BODLEIAN LIBRARY MS. TOLKIEN A 21/4: GENERAL LITERATURE / 
+GENERAL MISCELLANEOUS, FOLS. 10 – 11]  
+ 
+Folio 10 
+ 
+Ossian   
+      Johnson’s criticism (one of the few critics) 
+Wordsworth’s critic.<ism> 
+Influence of Ossian. on later poetry (Byron) 
+controversy . JS Smart. “James MacPherson” 
+The age of forgery. Chatterton: Horace Walpole. 
+Castle of Otranto. Ireland .(WH. Skeat. places) 
+James MacPh.<erson> 1736-1796. amid rain sky 
+tutor. (of T. Graham). holidaying at Spar of Moffat 
+in S.Scotl.<and> born Inverness. – univ<ersity> aberdeen 
+Edinburgh 
+Dr Blair. Fingall. 
+Fragment of A. Highland Poetry. 1760. 
+ 
+Folio 11 
+ 
+10 fragments. Celtic scholars find only 2 that have any trace of reality.  
+Fingal an ancient epic in 6 books “1761”. 
+Name Ossian (Oise) a real name. he made 
+him a contemp<orary> of the emperor Caracalla. 
+Temora in 8 book 1763. 
+This is the bulk of Ossianic poetry   —————  
+                             
+They went forth to battle but they always fell. 
+Sylva Gadhelica —————— 
+No one denies a certain windy moonlight 
+Kind of poetry in parts of Ossian. Byron Goethe 
+etc could not have been so far deceived.. 
+There may be much memory of reality. 
+Macph<erson> born about Culloden. 1745 
+It has real scenery of a Kind.. 6 
+ 
+6 These three words are underlined four times. 
+. . 
+7
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 10 =====
+ 
+ 
+Strong strain of litt<erary> reminiscence. 
+(Milton a great source) 
+ 
+The lecture is a key moment in Tolkien’s developing fascination with myth as it 
+provided him with a list of previous writers who had attempted to feign history 
+and literary culture. Although there is no evidence that Tolkien borrowed any 
+copies of Macpherson or Chatterton, there was nothing preventing him from 
+reading about these writers. The notebook mentions the author J.S. Smart, whose 
+1905 book James Macpherson: An Episode In Literature was accessible to 
+students at Oxford. It is evident that Smith’s lecture derives from Smart’s book, 
+referencing it as a recommendation for students to consult. Tolkien appears to 
+have also copied down quotations that resonated strongly with him: ‘They went 
+forth to battle but they always fell.’ is the misquoted line from Ossian ‘they came 
+forth to war, but they always fell’ (Macpherson, 1807, p. 244). This contains a 
+poignant thematic echoing of the Northern courage that Tolkien admired so much 
+in Northern mythology, using it to enrich his own fiction as early as the 1910s. 
+The noting of Ossian as a ‘real name’ and his temporal positioning as a 
+‘contemp<orary> of the emperor Caracalla’ evidenced to Tolkien that 
+Macpherson was tying his mythology into authentic Celtic and Roman history. 
+This of course preceded Tolkien’s own attempt to link his own mythology with 
+authentic English history (Hengest and Horsa) only a few years later. Although he 
+would reference the Kalevala as a key influence, his earlier exposure to 
+Macpherson’s mythological framework for Scotland will have surely piqued 
+Tolkien’s interest. 
+ The biographical information will have brought to Tolkien’s attention how 
+Macpherson was trying to preserve a disappearing Scottish heritage, such as he 
+would soon try to preserve a lost English heritage. The parallel in their motives 
+stem very much from their shared sense of cultural loss. Macpherson’s ‘regret for 
+a great and heroic past, not lost beyond all recall, and of lamentation for the 
+warriors of an earlier time whose day of glory [wa]s gone’ strikingly anticipates 
+the mourning in Chatterton’s Rowley texts and Tolkien’s own for England’s lost 
+Faërie culture (Smart, 1905, p. 29). It was the landscape within the stories as 
+much as the stories themselves that grounded them. The ‘mountain torrent, the 
+dark rock in the ocean, the mist on the hill, the ghosts of heroes half seen by the 
+setting moon’ that make up Macpherson’s mythology helped to build the 
+Romantic Nationalism of the late nineteenth century that later permeated The 
+Book of Lost Tales (Beers, 1899, p. 310). 
+The mention of Chatterton in the undergraduate notebook is also highly 
+significant. It shows that Chatterton was as much a part of the British literary 
+backcloth as Johnson and Macpherson and that Tolkien will have had some 
+8
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 11 =====
+ 
+ 
+awareness of him as a Literature and Language student. The Smith October 1913 
+lecture proves that the poet was taught (if briefly) at Oxford in the 1910s as part 
+of the Age of Forgery. 
+During the fin de siècle and early twentieth century, Chatterton had 
+developed two personas in the public eye. The first was cultivated by the literary 
+critics and philologists, who broke his work down and exposed his ignorance of 
+Middle English. In particular, Walter Skeat’s philological essay shed immense 
+light on the origins of what he called the ‘Rowley dialect’, demystifying a key 
+element of Chatterton’s mythology (1872, p. xl). In his editions of Chatterton’s 
+work, Skeat controversially swapped the language around so the footnotes were 
+made up of the medievalisms and the modern English became the language of the 
+poems. Skeat’s editorial decisions started a trend in Chatterton scholarship, 
+editions by Henry D. Roberts (1906) and Sidney Lee (1906) followed Skeat’s 
+example. To Skeat and others, Chatterton was simply a juvenile forger and 
+second-rate language adapter.  
+The second persona was promoted by the artists. Dante Gabriel Rossetti 
+and Oscar Wilde were two members of an ‘impassioned generation of artists and 
+writers who established the conviction that Chatterton’s works had positively 
+redirected the course of English poetry’ (Bristow & Mitchell, 2015, p. 15). They 
+anticipated Groom’s argument that Chatterton was a ‘poet of English identity’ 
+(2002, p. 170). As Rossetti would insist, not knowing Chatterton was ‘to be 
+ignorant of the true day-spring of modern romantic poetry’, his work was to be 
+revered and admired, not cast aside as juvenile rubbish (2010, p. 186). In 1906 
+Francis E. Clark argued that English in the early twentieth century owed much to 
+the ‘boy poets’ Chatterton and Keats (1906, p. 265).  
+As a student philologist Tolkien could have sided with Skeat, but as a 
+fellow poet, creator of ‘feigned history’ and medievalist, he would have 
+appreciated Chatterton’s efforts and methodology in reconstructing the lost 
+Anglo-Saxon past and drawn parallels with his own attempt to do the same thing 
+from 1915 onwards.7 Tolkien also shared a distaste for French influence. In the 
+King Edward’s Debating Society meeting of 4th November 1910, he had deplored 
+the Norman Conquest. The ‘influx of polysyllabic barbarities’ from the French 
+had ‘ousted the more honest if humbler native words’ and Tolkien, much like 
+Chatterton, called for a ‘return to something of Saxon purity of diction – “right 
+English goodliness of speechcraft”’ in order to maintain the English heritage in a 
+ 
+7 Tolkien was familiar with Skeat around the time of Smith’s lecture as he was borrowing his 
+editions of Chaucer from Exeter College library. 
+9
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 12 =====
+ 
+ 
+period of anxiety over national identity and freedom (MacSwiney & Payton, 
+1910, p. 95). 
+When it came to the framework that Tolkien would use for his mythology, 
+he would go beyond the work of Macpherson and Chatterton. They had worked 
+with homogenous methods: the former celebrating the power of the oral tradition 
+and the latter learning from Macpherson’s controversy and relying on the security 
+of the written word for historical transmission. With over one hundred and fifty 
+years between the Age of Forgery and Tolkien, the twentieth-century author was 
+able to critically reflect and weigh up the pros and cons of both methods. The 
+result was a mythology that was built around a ‘mixture of oral and literate 
+cultures’, balancing both approaches and building on them simultaneously (Lee, 
+p. 2014, p. 59). 
+ 
+The Oral Tradition: Young Nations and Immortality 
+ 
+Deidre Dawson has identified how Macpherson and Tolkien both saw language as 
+‘the key to reviving, recovering, or reconstructing an ancient culture and 
+mythology’ (2005, p. 109). Macpherson thought his contemporary Highlanders 
+‘stood outside contemporary civilisation, preserving in their remote wilds the 
+freshness of early life, their own ancient language, their own picturesque costume 
+and simple habits. They even retained, unimpaired by the contagion of luxury, all 
+the valour of the race that had defeated the Romans themselves’ (Smart, 1905, p. 
+5). They were ‘preserving the last relics of the ancient culture’ of the Celts 
+(Stafford, 1988, p. 97). The failure of the Romans and Normans to colonise 
+Caledonia (the Roman name for the Scottish Highlands) elevated them in 
+Macpherson’s view because their history had remained uncorrupted, unlike the 
+rest of Britain. In his Ossian mythology he aimed to remind his contemporaries 
+just how powerful their ancestors were by making a Caledonian recount the wars 
+of Fingal. 
+According to Katie Trumpener the true subject of the Ossian mythology 
+‘is not epic heroism but the vicissitudes of oral tradition’ (1997, p. 75). 
+Macpherson demonstrates that ‘oral performance functions precisely to keep the 
+past alive’ (Trumpener, 1997, p. 76). Contemporary works like Thomas 
+Blackwell’s An Enquiry into the Life and Writings of Homer (1735), Robert 
+Lowth’s Lectures on the Sacred Poetry of the Hebrews (1753), and Robert 
+Wood’s An Essay on the Original Genius and Writings of Homer (1769) argued 
+that the oral tradition had merit and endurance; it did have the capability to carry 
+the weight and memory of a race or state. These publications helped cultivate a 
+‘rising generation of authors, nurtured on accounts of the fiery eloquence of native 
+speakers, [who] were increasingly willing to speculate that the oral tradition could 
+10
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 13 =====
+ 
+ 
+give rise to literature of outstanding merit’ (Hudson, 1996, p. 167). For Blackwell 
+such fiery eloquence could not be found in modern society as ‘a language 
+thoroughly polished in the modern Sense, will not descend to the Simplicity of 
+Manners absolutely necessary in Epic-Poetry’ as it has made ‘many Words 
+obsolete, it coops a Man up in a Corner, allows him but one Set of courtly 
+Phrases, and deprives him of many significant Terms, and strong beautiful 
+Expressions’ (1735, p. 60). Epic poetry was made in a ‘rude Community’ only ‘a 
+little advanced’ where letters were not commonly used (Blackwell, 1735, p. 42). 
+As a result, Homer’s ‘Poems were made to be recited, or sung to a Company; and 
+not read in private, or perused in a Book, which few were then capable of doing’ 
+and Blackwell subsequently called for his contemporary readers to listen to 
+Homer’s works for ‘his Style . . . cannot be understood in any other light . . . lest 
+we put ourselves in the place of his Audience’ (Blackwell, 1735, p. 122).  
+Works like Blackwell’s enthused the public with a renewed passion for the 
+oral tradition and the memories of the cultures it brought with it. Macpherson 
+aided in revitalising the popularity of the tradition with just his Fragments of 
+Ancient Poetry. But Scotland was not the only country to have produced such as 
+rich oral history. The Finns, Scandinavians, and Germans which Johnson will 
+have called ‘barbarous’ people had produced the Kalevala, The Poetic Edda, and 
+the Nibelungenlied from their own oral traditions, displaying just how capable 
+they were of transmitting tales of extensive length while keeping their integrity. 
+Tolkien worked with these particular texts for the majority of his life and will 
+have seen Macpherson as partaking in the ‘barbarous’ tradition of immortalising 
+the tales of one’s nation by injecting one’s prose with oral techniques. 
+Macpherson’s methods mimicked those of the eighteenth- and nineteenth-
+century ballad collectors like Lönnrot. Tolkien was clearly aware that Macpherson 
+had, like Lönnrot, conducted field research, collected, and consulted his native 
+ballads, as his undergraduate notebooks identify that ‘Celtic scholars find only 2 
+that have any trace of reality.’8 His later reading of Campbell’s Popular Tales of 
+The West Highlands will have positively shifted Tolkien’s understanding of 
+Macpherson’s method as the book identified that Macpherson had built his 
+mythology on the Red and Black Books of Canranald. There were important 
+historical documents from Clan Donald’s heritage that had been compiled from 
+ballads and other surviving tales from the Highlands by Niall MacMhuirich (Red 
+Book) and Christopher Beaton (the main compiler of the Black Book) and 
+transcribed into Gaelic script. It is worth noting here that whereas it has been 
+identified that the Red Book of Hengest is a (if not the) source for Tolkien’s Red 
+ 
+8 As was noted about Smith’s lecture, this information was lifted from Smart’s book (1905, p. 94). 
+11
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 14 =====
+ 
+ 
+Book of Westmarch, there is a strong correlation between Tolkien and 
+Macpherson. 
+For Tolkien, this framework was exactly what he needed. The similarities 
+between Tolkien and Lönnrot’s work has been thoroughly covered, yet it cannot 
+be denied that his framework for The Book of Lost Tales runs closer to 
+Macpherson’s. 9 Eriol did not take part in the myths but is still a named character 
+who is interpolated into English history as the father of Hengest and Horsa and 
+undergoes character development in the work. Tolkien’s similar fascination with 
+the oral tradition’s power is deeply rooted in his mythology. It is intimately tied 
+with cultures that are, similarly to Macpherson’s Scotland, ‘young’ but vigorous 
+and energetic or ancient (Fimi, 2010, p. 149). 
+Perhaps the most prevalent example of a youthful culture that relies on the 
+oral tradition is the Rohirrim. It is also the culture that most poignantly recalls 
+Ossian’s Highlands. Aragorn reflects that the Rohirrim are ‘wise but unlearned, 
+writing no books but singing many songs’ (Tolkien, 2007, p. 430). In contrast to 
+the Elves, the ‘living memory’ of the Rohirrim is limited (Honegger, 2019). To 
+them, the ‘raising of [Edoras] is but a memory of song’ and when Aragorn chants 
+‘Where now is the horse and the rider?’ Legolas’s comments reflect centuries of 
+Ossian scholarship: ‘That, I guess, is the language of the Rohirrim . . . for it is like 
+to this land itself; rich and rolling in part, and else hard and stern as the mountains 
+. . . it is laden with the sadness of Mortal Men’ (Tolkien, 2007, pp. 507 – 508). 
+The language itself is interlinked with its land, just as Ossian’s mournful tone is 
+interlaced with the sounds and movements of the Highlands. Rohan’s culture 
+thrives on this solemn, wilder model of a youthful society that Fimi has called 
+‘closer to the stereotype of the Northern “barbarians”’ that is ‘perceived as a 
+stronger “race”’ (2010, p. 149). The Rohirrim’s oral tradition is saturated in 
+Ossianic melancholy. Even when Théoden improvises verse it is foreboding and 
+laced with the semantics of death: 
+ 
+Arise, arise, Riders of Théoden! 
+ Fell deeds awake: fire and slaughter! 
+ spear shall be shaken, shield be splintered, 
+ a sword-day, a red day, ere the sun rises! 
+ Ride now, ride now! Ride to Gondor! (Tolkien, 2007, p. 838). 
+ 
+9 See Flieger (2005, pp. 27 – 31) and (2004, pp. 277 – 283), Shippey (2001, xv – xvi, 64 & 250), 
+(2004, pp. 154 – 160) and (2005, p. 297), West (2004, pp. 285 – 293) and Gay (2004, pp. 295 – 
+303). 
+12
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 15 =====
+ 
+ 
+ 
+Although the verse can be read as a celebratory battle cry, it is also portentous of 
+the many Rohirrim that will fall, including their King. In this fashion it reads 
+much like the line from Ossian that Tolkien misquoted in his undergraduate 
+notebooks: ‘they came forth to war, but they always fell’ (Macpherson, 1807, p. 
+244). Even later when the song of the Mounds of Mundberg is recited, the heavy 
+alliteration and melancholy aesthetic channels the ‘sadness of Mortal Men’ that 
+permeates Rohan’s oral tradition. 
+ In complete contrast to the Rohirrim can be found the oral culture of the 
+Hobbits. Casting aside the former’s mournful verse, Tolkien shows a very 
+different side of the oral tradition by having the Hobbits recite or sing verse in 
+order to brighten their spirits (Kelly, 1972, p. 172). From the cheery ‘Ho! Ho! Ho! 
+To the bottle I go!’ to the fragments of verse used to ‘encourage’ the Hobbits 
+during their escape from the Shire and the Black Riders, the Hobbits’ approach to 
+the oral tradition is far removed from the Ossianic melancholy, injecting its 
+readers with hope and joy (Tolkien, 2007, p. 112). Perhaps the most powerful use 
+of the oral tradition by a Hobbit is when Sam is searching for Frodo in Cirith 
+Ungol: 
+ 
+The torch, that was already burning low when he arrived, sputtered 
+and went out; and he felt the darkness cover him like a tide. And 
+then softly, to his own surprise, there at the vain end of his long 
+journey and his grief, moved by what thought in his heard he could 
+not tell, Sam began to sing. . . . He murmured old childish tunes 
+out of the Shire, and snatches of Mr. Bilbo’s rhymes . . . and then 
+suddenly new strength rose in him, and his voice ran out. (Tolkien, 
+2007, p. 908). 
+ 
+If the torch symbolises extrinsic hope then Sam’s performance evidences the 
+power of intrinsic hope. He finds new motivation and bravery through the songs 
+of his people. Indeed, Sam uses the tunes to forge his own set of lyrics that look 
+forwards to new life, not backwards into the dark past: 
+ 
+In western lands beneath the Sun 
+the flowers may rise in Spring,  
+the trees may bud, the waters run, 
+the merry finches sing. 
+13
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 16 =====
+ 
+ 
+Or there maybe 'tis cloudless night 
+and swaying beeches bear 
+the Elven-stars as jewels white 
+amid their branching hair. 
+Though here at journey's end I lie 
+in darkness buried deep, 
+beyond all towers strong and high, 
+beyond all mountains steep, 
+above all shadows rides the Sun 
+and Stars for ever dwell: 
+I will not say the Day is done, 
+nor bid the Stars farewell. (Tolkien, 2007, pp. 908 – 909). 
+ 
+Derived from the ballad form (a poetic form deriving from the oral tradition), the 
+iambs bounce with energy and the anaphora catalogues the various natural 
+elements that Sam recalls. It is again used in the second half of the verse to 
+emphasise that ‘beyond’ all darkness stands the symbolic Sun and Stars. Tolkien 
+is able to evidence in moments like this that the oral tradition need not be a 
+historically weighted methodology that only recalls and laments the past, it can 
+also channel courage and hope that looks to the future. It can further help us 
+understand the present and express events in modes that bring cheer and joy. A 
+being’s mortality therefore influences the way they draw on the oral tradition. 
+However, a being’s immortality can imbue the oral tradition with an altogether 
+different feeling. 
+Besides the Rohirrim and the Hobbits, Tolkien’s faëries from The Book of 
+Lost Tales and later Elves preferred to use the oral tradition because of their 
+immortality and living memory. In The Book of Lost Tales, long tales are 
+effortlessly recited at will by the faëries with intricate details, names and lists that 
+show the faëries pride in their already long history, just like Ossian. The faëries 
+and Elves superior memory and immortality meant that they could accurately 
+relay their history for generations. The story tellers were still elders which is in-
+keeping with a sense of realism as it reflects the age of Ossian and the story tellers 
+in Highland culture (Stafford, 1988, p. 13). When he was working on The Lord of 
+the Rings, the Elves still maintained their reliance on the tradition and took pride 
+in their superior abilities. 
+By removing the ‘human limitations’ of mortality for the faëries and 
+Elves, Tolkien built on Macpherson’s view that oral delivery is infinitely more 
+intense than reading an account (Tolkien, 2006a, p. 146). As Vairë reminds his 
+audience, Eriol and the reader, the Cottage of Lost Play was ‘builded of good 
+14
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 17 =====
+ 
+ 
+magic . . . and here old tales, old songs, and elfin music are treasured and 
+rehearsed’ (Tolkien, 1983, p. 20). ‘Rehearsed’ proves that the tales are frequently 
+shared to keep the past very much alive in the present. The recounting of these 
+traditions in the Cottage of Lost Play and much later in Rivendell’s Hall of Fire 
+make them both ‘locus[es] of memory’ for the mythology, empowering the Elves 
+with tradition and history that, in the case of The Book of Lost Tales, would feed 
+down and become Britain’s own (Oberhelman, 2007, p. 485).  
+The immortality of the faëries and Elves meant that it was possible to 
+employ orators who had a living memory of the events they were narrating. This 
+directly recalls Ossian’s living memory of the Highland’s decline. Utilising a 
+character’s living memory makes their narration more nuanced, laden with depth 
+and meaning. When Elrond recalls the ‘“splendour of their banners”’ of the Last 
+Alliance, he embellishes thus: ‘“my memory reaches back even to the Elder Days. 
+Eärendil was my sire, who was born in Gondolin before its fall; and my mother 
+was Elwing, daughter of Dior, son of Lúthien of Doriath. I have seen three ages in 
+the West of the world, and many defeats, and many fruitless victories”’ (Tolkien, 
+2007, p. 243). An elf’s living memory adds incredible gravitas to their tales. It 
+generates the weight that Tolkien would later refer to as ‘a past that itself had 
+depth and reached backward into a dark antiquity’ in his ‘Beowulf: The Monsters 
+and the Critics’ lecture of 1936 (2006b, p. 27). The ‘impression of depth’ grants 
+works of historical and poetical importance like The Aeneid, Beowulf and even 
+Macpherson’s Ossian mythology, a suggested history that the writer is not 
+completely divulging to his audience; a ‘coherent, consistent, deeply fascinating 
+world’ (Shippey, 2005, p. 259). It links to the lays and ballads that fed the ancient 
+epics. Elrond and the memory of the Elven race offer this depth, adding dramatic 
+effect to Elrond’s story.  
+However, when it comes to the history of the Ring, it is concealed by an 
+air of obscurity as only ‘a part of his tale was known to some there, but the full 
+tale to none’ (Tolkien, 2007, p. 243), Elrond’s living memory only achieves so 
+much, it has to be married with Gandalf’s antiquarian work in Minas Tirith to 
+form a complete tale. Characters are not completely convinced by the oral 
+identification of the Ring and relies on Gandalf’s unearthing of Isildur’s scroll 
+where he describes the Ring to confirm the tale (2007, pp. 252 – 253). In the 
+Council of Elrond then, Tolkien perfectly balances the importance of these two 
+methodologies, showing how they complement and complete the other.  
+Tolkien continued to build on Macpherson by using orators that far 
+surpass Ossian in age. If, in Highland Scotland, only old men could recite ballads 
+and epics then ‘there was no time to lose: it must be recovered before it vanished 
+for ever’ (Stafford, 1988, p. 115). A chilling description from Ossian conveys 
+this: ‘then comes a voice to Ossian, and awakes his soul! It is the voice of years 
+15
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 18 =====
+ 
+ 
+that are gone! they roll before me, with all their deeds! I seize the tales, as they 
+pass, and pour them forth in song’ (Macpherson, 1807, p. 319). A mortal’s 
+preoccupation with the death of a narrative is overcome by granting the oral 
+tradition to the immortal faëries and Elves. His early intention to have Heorrenda 
+write up Eriol’s (his father’s) writings from his time in the Cottage of Lost Play 
+and for the Irish and Welsh to tell ‘garbled’ renditions of the ‘true tradition of the 
+fairies’ further evidences Tolkien’s intention to associate the power of the oral 
+tradition with immortal beings (1984, p. 291). It is further telling that The 
+Silmarillion closes with the line: ‘an end was come for the Eldar of story and of 
+song’ (Tolkien, 1999, p. 366). Just as the passing of the faëries in The Book of 
+Lost Tales signalled the end of the oral tradition, here too the passing of the Elves 
+at the end of the Third Age coincides with the end of the living memory that made 
+the Elvish oral tradition so powerful.  
+This power does not only work on the reader, but on characters within the 
+tale. Whereas Ossian’s narrative is emotional heavy and is supposed to conjure a 
+deep nostalgia for its reader, the Elvish verse in the Hall of Fire has a much 
+greater impact on Frodo. The effect is otherworldly and greatly surpasses what 
+Ossian and Macpherson could wish for: 
+ 
+At first the beauty of the melodies and of the interwoven words in 
+elven-tongues, even though [Frodo] understood them little, held 
+him in a spell, as soon as he began to attend to them. Almost it 
+seemed that the words took shape, and visions of far lands and 
+bright things that he had never yet imagined opened out before 
+him; and the firelit hall became like a golden mist above seas of 
+foam that sighed upon the margins of the world. Then the 
+enchantment became more and more dreamlike, until he felt that an 
+endless river of swelling gold and silver was flowing over him, too 
+multitudinous for its pattern to be comprehended; it became part of 
+the throbbing air about him, and it drenched and drowned him. 
+Swiftly he sank under its shining weight into a deep realm of sleep. 
+(Tolkien, 2007, p. 233). 
+ 
+Tolkien luxuriously indulges Frodo’s experience with strikingly Keatsian tones. 
+The entire experience of the oral tradition is intimately linked with the Romantic 
+16
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 19 =====
+ 
+ 
+mental flights and synaesthesia of Romantic lyrical poetry that scholars during the 
+early twentieth century prominently associated with Keats.10 
+Cultures like the Highland Clans, Rohirrim, Shire Hobbits, High Elves of 
+Rivendell, and remnant faëries in the Cottage of Lost Play all utilise the oral 
+tradition to bring the lost past to life in the present. To orally present a tale gave 
+the words energy and tension that could not be encountered when written on the 
+page. Tolkien employed the methodology to great effect in The Book of Lost Tales 
+and The Lord of the Rings, aligning the oral tradition with the immortal faëries 
+and Elves. This gave it a stronger purpose as they did not need to rely on textual 
+transmission. Their long lives allowed them to surpass the mortal anxieties of 
+Ossian. They did not need to capture songs because they lived already within the 
+collective Elven memory. 
+But as was identified earlier, Tolkien balanced the importance of the oral 
+tradition with textual transmission. The authorial conceit that surrounds the chain 
+of authors, editors, redactors, and transcribers of The Red Book of Westmarch and 
+The Book of Lost Tales evidences Tolkien’s marrying of the oral with the written. 
+ 
+Textual Transmission and Mortal Anxiety 
+ 
+A long line of eighteenth-century antiquarian collectors ‘learned from 
+[Macpherson’s] mistakes’ in order to avoid the label of ‘forger’, including Allan 
+Ramsay, Thomas Percy, David Herd, Thomas Evans, Joseph Ritson, John 
+Pinkerton, and Sir Walter Scott (Groom, 1999, p. 73). In the eyes of his 
+disparagers, Macpherson had manipulated his material to the point where 
+providing tangible evidence in Temora was not enough to convince them of its 
+deeply entrenched indebtedness to the Highlands oral past. The ballad and folk-
+tale collectors at the time made extensive use of what written records they could 
+get their hands on, proving that they had not simply made up their edited and 
+published material. In the late eighteenth century ‘the transmission of the past was 
+literary’ (Haywood, 1986, p. 120) and ‘the handling of the source was crucial to 
+the antiquarian reception of literature and its incorporation into the canon’ 
+(Groom, 1999, p. 62).  
+The oral mode of historical transmission lost favour and collapsed under 
+the pressure to evidence antiquarian findings. Haywood has evaluated how 
+Chatterton advanced and developed Macpherson’s experimentations with the past 
+for this exact reason (1986, p. 175). Just his Ossianic imitations alone prove that 
+he was processing and trying to aesthetically replicate Macpherson. The rising 
+ 
+10 I have written extensively on this in chapter one of The Romantic Faëry: Keats, Tolkien, and the 
+Perilous Realm (2020) https://ore.exeter.ac.uk/repository/handle/10871/40585 
+17
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 20 =====
+ 
+ 
+controversy around the authenticity of the Ossian epics further emphasised to 
+Chatterton that the manuscript was everything. In fact, the weight that the 
+eighteenth-century antiquarians placed on the validity of the manuscript tipped the 
+scales too far, leading Chatterton to make ‘historical fiction out of historical fact’ 
+from which his mythology for Bristol grew (Haywood, 1986, p. 121). 
+Chatterton promulgated the notion that the invading Normans had 
+‘destroy’d all the Saxon MSS, Paintings &c that fell in their Way; endeavouring 
+to suppress the very Language’ (quoted in Meyerstein, 1930, p. 264). Counter to 
+David Hume and the views of the other ‘Modern Virtuosos’ on the ‘barbarous’ 
+quality of Saxon literature and culture, ‘it is certain we are indebted to to [sic] 
+Alfred & other Saxon Kings for ye wises of our Laws & in part for ye British 
+Constitution’ (quoted in Meyerstein, 1930, p. 265). Chatterton finalised his case 
+by explaining that the ‘motive that actuates me to do this, is, to convince the 
+world that the monks (of whom some have so despicable an opinion) were not 
+such blockheads, as generally thought and that good poetry might be wrote, in the 
+dark days of superstition as well as in these more enlightened Ages’ (quoted in 
+Meyerstein, 1930, p. 251). In this manner he took after Percy, who yearned to 
+‘show that among the dross of the Dark Ages some literary gems existed’ 
+(Haywood, 1986, p. 123). In Reliques of English Poetry (1765), Percy was 
+‘attempting to “literate” the Goths, he gave written sources authority over oral 
+sources, and printed texts over manuscripts’ (Groom, 2006, p. 183). This would 
+not only influence Chatterton but be later picked up by Tolkien, who was keenly 
+invested in presenting the overlooked grandeur and literary scope of the Middle 
+Ages through various modes of historical transmission. 
+His early fascination with the Gothic language is one example of his 
+experimentation with historical transmission. The dominance of the Roman 
+Empire and its wide-spreading imperial conquest were, to Tolkien, responsible for 
+the ‘ruin of Gaul and the submergence of its native language (or languages) arts 
+and traditions . . . dooming to obscurity and debate the history of perhaps the most 
+remarkable of the Cymric speaking peoples’ (quoted in Hammond & Scull, 
+2017b, p. 741). The sparse extent fragments of Gothic drove him to ‘regret the 
+past’ and the ‘vanishing of their tradition, literature, history, and most of their 
+tongue’ (quoted in Hammond & Scull, 2017b, p. 741). In response he tried to 
+reconstruct the language, carefully distinguishing between the ‘historically 
+recorded Gothic and his own reconstructed’, which came to fruition in the poem 
+‘Bagmē Blōma’ (1936) (Hammond & Scull, 2017b, p. 741). Arden R. Smith has 
+noted how only thirty-eight of the fifty-five words in the poem can be historically 
+attested, meaning seventeen words came from Tolkien’s Gautisk (2006, p. 271). 
+When creating the medieval spellings of Rowleyese, Chatterton drew on 
+genuine Middle-English dictionaries much like how Tolkien based his languages 
+18
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 21 =====
+ 
+ 
+on Welsh, Finnish and other primary world languages, using dictionaries and 
+primers as source material to dress his ‘words in medieval armour’ (Groom, 
+2019).11 Chatterton crafted ‘calligraphy; produced his own complex medieval 
+manuscripts, maps, sketches, and heraldry; loaded his pseudo-antique writings 
+with prefaces, footnotes, appendices, and glossaries; and then wove authentic 
+material into what was his predominantly imagined fifteenth-century world’ 
+(Groom, 2014, p. 295). To a reader of Tolkien these will all sound familiar as they 
+are the techniques that are used to immerse readers into Arda.  
+Tolkien frequently employed protagonists who were storytellers, editors, 
+or translators as a strategy to deepen the historical texture of his stories. As Fimi 
+notes, this is not ‘dissimilar from Chatterton’s layers of ancient Bristol history via 
+Rowley and Turgot’, or, we may add, Macpherson’s (2016, p. 52). Whereas 
+Chatterton sought to merely authenticate his work through his own authorial 
+conceit, Tolkien improved on Chatterton’s practice by amalgamating his 
+knowledge of Medieval manuscripts with his own fiction. Like his mythological 
+characters, he was in charge of ‘bringing ancient works and forgotten authors 
+back to life’ and ensuring the past lived on (Shippey, 2014, p. 41). ‘The Golden 
+Book of Heorrenda’, which recorded the tales of the Elves by Eriol’s third son, 
+Heorrenda, and ‘The Book of Lost Tales’ by Ælfwine are the texts that were 
+translated into The Book of Lost Tales. The Red Book of Westmarch contained The 
+Hobbit, The Lord of the Rings, and other paratextual details and had a long history 
+of textual transmission. Bilbo Baggins was its first author, who handed it to his 
+nephew, Frodo Baggins, who gave it to his friend Samwise Gamgee. It then 
+travelled to Minas Tirith for antiquarian editing and expansion before finally 
+returning to the Shire for paratextual marginalia (Tolkien, 2007, pp. 14 – 15). 
+Flieger has called Tolkien ‘the last in the line’ of ‘transmitters, translators, 
+redactors, scribes, and copyists’ in the genealogy of The Red Book of Westmarch; 
+he ‘inserted his own name into the header and footer on the title-page of The Lord 
+of the Rings (and thus into the history of the “book”), not as the author of the book 
+but as its final transmitter/redactor’ (2012, p. 42).  
+Tolkien presents his texts as antiquarian artefacts that have been ‘filtered 
+down to us through many minds, many disagreements, many rejections’, much 
+like Beowulf, Macpherson’s Ossian mythology, and Chatterton’s Rowley texts 
+(Shippey, 2007, pp. 161 – 162), proving the tales’ antiquity and converting them 
+from ‘tales and narratives’ into ‘historical artefacts’ (Noad, 2000, p. 32). The 
+reader is further reminded that they are reading a ‘found’ text by references to The 
+Red Book of Westmarch: ‘In presenting the matter of The Red Book of Westmarch, 
+ 
+11 According to Skeat: John Kersey’s Dictionarium Anglo-Britannicum (1708) and Nathan 
+Bailey’s Dictionarium Brittanicum (1730) (1872, p. xlii). 
+19
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 22 =====
+ 
+ 
+as a history for people of today to read, the whole of the linguistic setting has been 
+translated as far as possible into terms of our own times’ (Tolkien, 2007, p. 1133). 
+Like Macpherson and Chatterton, Tolkien was deeply invested in presenting his 
+works as found historical artefacts that had come from ancient texts. 
+It was in the 1960s when Tolkien started to conceive of Arda in a denser 
+and more tangible antiquarian manner, creating new paratexts that complimented 
+his narratives and cultures. He had already spent ‘a considerable amount of time 
+creating three pages from The Book of Mazarbul’ with the intention of 
+incorporated them into The Lord of the Rings, but the cost of printing them in 
+colour meant that Tolkien’s vision did not come to fruition in his lifetime (Fimi, 
+2016, p. 57). He later realised that the three pages contained an ‘erroneous 
+extension of the general linguistic treatment’ he gave The Red Book of Westmarch 
+(Tolkien, 1996, p. 299). The inhabitants of Arda at the point of The Lord of the 
+Rings spoke the Common Speech. This is what Tolkien claimed to translate into 
+English, keeping the other languages: Elvish, entish, and dwarvish, intact. 
+However, ‘the text he had transcribed in runes and Elvish script was actually in 
+modern English’ (Fimi, 2016, p. 59).  
+Catherine McIlwaine’s companion book to the 2018 exhibition Tolkien: 
+Maker of Middle-earth is a welcome help here as it not only illustrates Tolkien’s 
+antiquarian experiments of the 1960s but also contains all three facsimiles from 
+The Book of Mazarbul in colour. The task for Tolkien was a ‘labour of love’ 
+(Fimi, 2016, p. 57) and McIlwaine fondly describes how he ‘burnt the paper with 
+the edges with his pipe, pierced holes along one side to resemble the holes where 
+the parchment would have been stitched to the binding and washed them with red 
+paint to resemble bloodstains’ which echoes the techniques Chatterton used to age 
+his own documents and give them the air and look of historic authenticity (2018, 
+pp. 348 – 349).  
+When Tolkien returned to the matter of the Silmarillion he spent time 
+doodling on newspapers, developing ‘designs for brooches or clasps’ and 
+ceramics for the Númenóreans (McIlwaine, 2018, pp. 188 – 194) and ‘drew 
+heraldic devices for the main characters or houses in his legendarium’ 
+(McIlwaine, 2018, pp. 236 – 238). He also ‘had a lifelong interest in calligraphy, 
+which he attributed to his mother’s influence’ and can be drawn from his reading 
+of Edward Johnston’s popular Writing & Illuminating, & Lettering (1906) 
+(McIlwaine, 2018, pp. 186 – 187). Similarly, Chatterton ‘“fell in love with the 
+illuminated capitals”’ at a young age when his own mother was tearing up old 
+books to put on the fire and later when he consulted old manuscripts that lay 
+around St Marys (quoted in Meyerstein, 1930, p. 22). Tolkien was also familiar 
+with the medieval manuscripts that the Bodleian held. The Ancrene Wise and Old 
+English Exodus are both examples of physical manuscripts that he will have 
+20
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 23 =====
+ 
+ 
+handled, consulted, worked, and lectured on which contained such illuminated 
+capitals. 
+His passion for calligraphy shone brightest when he was creating Tengwar 
+and Cirth. Of Eldarin origin, these allowed Tolkien’s languages to inhabit a 
+written world that was connected to and complimented the oral. Even in The 
+Hobbit Tolkien relied on Nordic runes to build the dwarf alphabet, giving them 
+historical authenticity. The dust jacket of The Hobbit and the title pages of The 
+Lord of the Rings rely on these existing written modes to convey secret 
+paratextual messages that unseat Tolkien as the ‘author’ of the texts. The Tengwar 
+that featured on the Ring (Tolkien, 2007, p. 50), the Doors of Durin (Tolkien, 
+2007, p. 305) and the Appendices (Tolkien, 2007, pp. 1119, 1124, & 1125) in The 
+Lord of the Rings attempted to cement the languages in history, imprinting and 
+recording these cultures onto tangible and historical objects. 
+Tolkien’s external management of his work also saw him utilise these 
+writing systems when replying to fan letters (2006a, pp. 132, 223 & 224). His 
+letters, by extension, were a tool to excessively tease his fans about the grandeur 
+of the First and Second Ages, controlling how much information about the stories 
+and characters was released to the wider public. His expansive letter to Milton 
+Waldman is just one of many where he enthusiastically provided deeper insights 
+into Arda’s mythic past. Indeed, in a letter to Hugh Brogan on 18th September 
+1954, he included contextual and editorial comments that strongly echo what has 
+been argued throughout this article: 
+ 
+I have tried to present a kind of legendary and history of a 
+‘forgotten epoch’ . . . Middle-earth is just archaic English for ἡ 
+οἰκουμένη, the inhabited world of men. It lay then as it does. In fact 
+just as it does, round and inescapable. That is partly the point. The 
+new situation, established at the beginning of the Third Age leads 
+on eventually and inevitably to ordinary History. (Tolkien, 2006a, 
+p. 186).  
+ 
+He made it very clear that he preferred ‘history, true or feigned’ and gave each fan 
+a reward of sorts for their curiosity (Tolkien, 2007, p. xxiv). For Tolkien letters 
+were crucial paratextual components to the posthumous life of the mythology. He 
+hoped that his work and letters would inspire others to continue the story. 
+The Hobbit and The Lord of the Rings are brimming with examples where 
+characters rely on manuscripts and the written word. Bilbo is bound by the written 
+contract that Thorin and Company present to him and even when he hands the 
+21
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 24 =====
+ 
+ 
+Arkenstone over to Thranduil and Bard, he recalls the contract that legally classes 
+him as a ‘burglar’ (Tolkien, 1995, p. 244). Additionally the Hobbits and Aragorn 
+also have to decipher Gandalf’s runes on a stone at Weathertop so they can 
+deduce where he might be. Cartography is infectious and maps present characters 
+with more than just directions. Pippin and Gandalf fall into dispute about the 
+Fellowship’s whereabouts and the entire quest to Erebor relies on cryptic moon 
+runes on Thror’s map. Maps are integral to the progress of the companies in both 
+texts and the success of their quest. Without its secured posterity, these quests 
+may never have succeeded (or begun). They further serve as paratextual artefacts 
+as they are placed on the inside covers of both publications. Yet this was not 
+Tolkien’s original plan for Thror’s map as it was supposed to be placed mid-text. 
+He wanted to produce the moon letters on the back of the map which would 
+appear when the reader held the page up to the light (Rateliff, 2013, p. 118). 
+Anticipating The Book of Mazarbul, Tolkien sought to enrich The Hobbit with 
+experiments in antiquarian publishing. 
+As Tolkien granted the oral tradition and its effects primarily to the Elves 
+and primitive, mortal cultures, he channelled Man’s and the Hobbit’s mortal 
+anxieties through their antiquarian dependency on the written word. In The Book 
+of Lost Tales it is only when a mortal human, Eriol, and a half-man half-faërie, 
+Heorrenda, hear the lost tales that the idea of transmitting them into writing even 
+occurs. To Tolkien it is only mortal memory that requires the textual transmission 
+of the oral tradition, reflecting their limited life spans and their anxieties over 
+posterity. Even in the ‘Tale of Ælfwine’ it is the human who proceeds to copy 
+down the Elvish history. This is of course how he planned for his English 
+mythology to have survived down to the early twentieth century. His ‘chains of 
+transmission’, like Chatterton’s alter-egos Rowley and Turgot, deepens and 
+reinforces the historicism of his mythology (Fimi, 2016, p. 52). 
+Tolkien’s central stance on the written and oral traditions came to its 
+climax in The Lord of the Rings. Here he was able to channel mortal anxiety over 
+narrative posterity into Bilbo, the now-turned-antiquarian Hobbit. He goes on a 
+‘holiday’ to Rivendell with the intention of completing his book (The Hobbit) and 
+once there, requests Aragorn’s help to finish his poetic setting of Eärendel’s 
+travels – yet another example of a mortal transmitting the tales of the immortals 
+onto the page (Tolkien, 2007, p. 233). He even asks Frodo to bring back ‘all the 
+news you can, and any old songs and tales you can come by’ for ‘I should like to 
+write the second book’ detailing Frodo’s adventures (Tolkien, 2007, p. 278). His 
+final words to Frodo in Rivendell is a nod to the field work of Percy, Scott, 
+Lönnrot, Macpherson, and many other eighteenth-century antiquarians who 
+travelled in order to record ballads and songs for their cultural projects. By the 
+end of The Lord of the Rings we are given the final title page for The Red Book of 
+22
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 25 =====
+ 
+ 
+Westmarch, a collective text that was ‘intended to echo the great medieval 
+manuscript books’ of the Northern hemisphere such as the White Book of 
+Rhydderch, the Black Book of Carmarthen, the Yellow Book of Lecan, the Red 
+Book of Hengest, and the Red and Black Books of Canranald (Flieger, 2012, p. 
+43).The italics are Bilbo’s sketches and the rest is Frodo’s: 
+ 
+My Diary. My Unexpected Journey. There and Back Again. And 
+What Happened After. 
+Adventures of Five Hobbits. The Tale of the Great Ring, compiled 
+by Bilbo Baggins from his own observations and the accounts of 
+his friends. What we did in the War of the Ring. 
+THE DOWNFALL 
+OF THE 
+LORD OF THE RINGS 
+AND THE 
+RETURN OF THE KING 
+(as seen by the Little People; being the memoirs of Bilbo and 
+Frodo of the Shire, supplemented by the accounts of their friends 
+and the learning of the Wise.) 
+Together with extracts from Books of Lore translated by Bilbo in 
+Rivendell. (Tolkien, 2007, p. 1027). 
+ 
+Tolkien passes the books off as Bilbo’s and Frodo’s actual work. His Red Book of 
+Westmarch ‘takes us into metafictional territory, where Tolkien playfully 
+collaborates with historical authors, translators, and editors that he himself 
+created, treating his own work as if it were written by someone else’ much like 
+Macpherson and Chatterton with their respective alter-egos (Croft, 2018, p. 192). 
+Words like ‘compiled’, ‘observations’, ‘accounts’ and ‘translated’ give The Red 
+Book of Westmarch the antiquarian air of Percy’s Reliques, Macpherson’s 
+translations and Chatterton’s ‘Antiquities’, placing it strongly in the antiquarian 
+tradition and making it a descendent of the Age of Forgery. 
+Bilbo’s role in the forging of The Red Book of Westmarch caused him 
+much angst and the various titles betray his fears of not finishing his work. Much 
+like Tolkien with the Silmarillion, or Ossian with Fingal’s lineage, Bilbo agonizes 
+over the completion of his book. Phrases like ‘if I am spared’ and ‘I am getting 
+very old’ mirror Ossian’s mortal plight in trying to keep the Caledonian traditions 
+alive in his old age (Tolkien, 2007, p. 238). Bilbo exclaims ‘Don’t adventures 
+23
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 26 =====
+ 
+ 
+ever have an end? I suppose not. Someone else always has to carry on the story. 
+Well, it can’t be helped. I wonder if it’s any good trying to finish my book?’ 
+(Tolkien, 2007, p. 232). Although Bilbo is an exemplary employer of the oral 
+tradition, when building The Red Book of Westmarch he has no interest in it. As 
+he gets older he sounds more like Ossian, he seizes whatever tales he comes 
+across (whether Elven or not) and pours them not into oral song, but written song. 
+The reflective phrase ‘someone else always has to carry on the story’ neatly 
+summarises Tolkien’s efforts to conjure a universe where a wealth of storytellers 
+have added to the story of Arda. In a way, Bilbo is anticipating the longevity of 
+The Red Book of Westmarch, for the Prologue to The Lord of the Rings records 
+that ‘the original Red Book has not been preserved, but many copies were made’ 
+(Tolkien, 2007, p. 14), noting the importance of the Thain’s Book as the first. Its 
+history of ‘interwoven multivalent, identifiable source-traditions . . . and voices 
+[therefore] produce the effect of age’ and crucially lend the text antiquarian 
+authenticity (Painter, 2016, p. 125). For Bilbo and Tolkien, the editor (many of 
+whom appear in the life of The Red Book of Westmarch) counted very much as a 
+storyteller. Janet Croft notes that to Tolkien editing meant collaborating ‘with the 
+long-dead original author or transcriber of the piece’, which allows a work to 
+cultivate a history of its own (2018, p. 177).  
+The long history of The Red Book of Westmarch deliberately builds on the 
+manuscript culture cultivated by Chatterton and the antiquarians of the eighteenth 
+century. Tolkien posits himself as one of Bilbo’s and Frodo’s literary descendants 
+in the authorial chain and in so doing marries the internal history of Arda with its 
+role as an antiquarian artefact in the primary world. By publishing the text and 
+drawing the reader’s attention to the monumental task of ‘translating’ and 
+arranging the book, Tolkien confirms the legendarium’s historical validity. The 
+reader is pivotal to reviving and maintaining the forgotten history of Arda by 
+purchasing the physical book and keeping it on their bookshelf. The act of reading 
+the texts that come from The Red Book of Westmarch therefore elevates Arda’s 
+secondary reality so that it becomes a part of the primary world. 
+ 
+The Antiquarian Imagination 
+ 
+Macpherson, Chatterton, and Tolkien all reacted to the gap in their nations’ 
+literary heritage by filling the void with their own mythologies. Although Tolkien 
+eventually moved away from his national pursuits, his early ambitions in The 
+Book of Lost Tales mirror Macpherson’s and Chatterton’s antiquarian 
+methodologies in cultivating a feigned history. Having learnt about the two 
+literary forgers at Exeter College, Tolkien was well placed to have researched 
+their works further before commencing his own mythopoeic project. 
+24
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 27 =====
+ 
+ 
+Tolkien’s antiquarian approach to his legendarium strongly channels the 
+quotation from Sir Walter Scott that opens this article. It is undeniable that 
+Tolkien’s work has ‘enriched’ the literary world and as Shippey summarised at 
+the opening of Author of the Century, ‘the dominant literary mode of the twentieth 
+century has been the fantastic’ (2001, p. vii). To achieve what he did, Tolkien 
+revived the antiquarian methodologies from the Age of Forgery for his 
+legendarium. He harmonised the extremes of the oral tradition and written word 
+as modes of historical transmission so that they complimented and built on each 
+other within the primary and secondary worlds. Individually, he improved on the 
+methodologies of Macpherson and Chatterton by offering more nuanced, tragic, 
+and powerful forms of the oral tradition and integrating the importance of 
+cartography, calligraphy, and archival research into the plots of his works. 
+Beyond this Tolkien layered the history of his legendarium with tangible paratexts 
+that can to this day be found in the Bodleian Library and Marquette archives, 
+allowing his work to exist as a single antiquarian treasury that marries the 
+secondary world with our primary world. 
+It is not overreaching to consider Tolkien’s fresh and blended antiquarian 
+methodology as the perfect template for the fantasy genre more largely. Fantasy 
+throughout the twentieth and twenty-first centuries has relied on the historic 
+validity and gravity that Tolkien’s methodology has exemplified to forge its own 
+histories and sub-creations. Works from Ursula K. Le Guinn’s Earthsea Cycle 
+(1968 – 2001), Robert Jordan’s The Wheel of Time (1984 – 2013), George. R.R. 
+Martin’s The Song of Ice and Fire (1996 – present), J.K. Rowling’s Harry Potter 
+(1997 – 2007), and Christopher Paolini’s The Inheritance Cycle (2003 – 2011) to 
+name just a few all employ Tolkien’s blended antiquarian methodology that has 
+its roots in the literary forgery of the 1760s. There is therefore significant scope to 
+re-evaluate how fantasy literature has derived its motives and methodologies from 
+a period of literary and cultural history that thrived on historical and mythic 
+forgery. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+25
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 28 =====
+ 
+ 
+Bibliography 
+J.R.R. Tolkien’s Unpublished Manuscripts – Bodleian Library 
+ 
+Bodleian Library MS. Tolkien A 21/4: General Literature / General 
+Miscellaneous, Fols. 10 – 11. 
+ 
+Other Works Cited 
+Beers, H. A. (1899). A History of English Romanticism in the Eighteenth Century. 
+New York: Henry Holt and Company. 
+Blackwell, T. (1735). An Enquiry into the Life and Writings of Homer. London: 
+Rose and Crown in the Poultry. 
+Bristow, J. & R. N. Mitchell. (2015). Oscar Wilde’s Chatterton: Literary History, 
+Romanticism, and the Art of Forgery. New Haven: Yale University Press. 
+Brljak, V. (2010). ‘The Book of Lost Tales: Tolkien as Metafictionalist’, Tolkien 
+Studies 7, 1 – 34. 
+Bugajska, A. (2014). 'Scottish Ghosts, English Wraiths: The Supernatural 
+Imagination of Macpherson and Tolkien'. In Anne Walczuk and Wladyslaw 
+Witalisz. (Ed.), Old Challenges and New Horizons in English and American 
+Studies. (pp. 159 – 168). Bern: Peter Lang Edition. 
+Carpenter, H. (2002). J.R.R. Tolkien: A Biography. London: HarperCollins. 
+Chatterton, T. (1872). The Poetical Works of Thomas Chatterton Volume II. [Ed. 
+Skeat, W, W.]. London: Bell and Daldy. 
+Clark, F. E. (1906). 'What English Poetry Owes to Young People'. The North 
+American Review, 182 (591) 255 – 265. 
+Croft, J. B. (2018). ‘Doors into Elf-mounds: J.R.R. Tolkien’s Introductions, 
+Prefaces, and Forewords’. Tolkien Studies (15) 177 – 195. 
+Dawson, D. (2005). 'English, Welsh, and Elvish: Language, Loss, and Cultural 
+Recovery in J.R.R. Tolkien’s The Lord of the Rings'. In Jane Chance & Alfred K. 
+Siewers (Ed.), Tolkien's Modern Middle Ages. (pp. 105 – 120). Basingstoke: 
+Palgrave Macmillan. 
+Fimi, D. (2010). Tolkien, Race and Cultural History: From Fairies to Hobbits. 
+Basingstoke: Palgrave Macmillan. 
+26
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 29 =====
+ 
+ 
+Fimi, D. (2016). ‘The Past as an Imaginary World: The Case of Medievalism’. In 
+Mark Wolf. (Ed.), Revisiting Imaginary Worlds: A Subcreation Studies 
+Anthology. (pp. 46 – 66). New York: Routledge. 
+Flieger, V. (2004). ‘A Mythology for Finland: Tolkien and Lönnrot as 
+Mythmakers’. In Jane Chance (Ed.), Tolkien and the Invention of Myth. (pp. 277 – 
+284). Lexington: The University of Kentucky University Press.  
+Flieger, V. (2005). Interrupted Music: The Making of Tolkien's Mythology. Kent: 
+Kent State University Press. 
+Flieger, V. (2006). ‘Frame Narrative’. In Michael. D. C. Drout (Ed.), J.R.R. 
+Tolkien Encyclopedia. (pp. 206 – 218). New York: Routledge. 
+Flieger, V. (2012). Green Suns and Faerie: Essays on J.R.R. Tolkien. Kent: Kent 
+State University Press. 
+Gaskill, H. (1991). Ossian Revisted. Edinburgh: Edinburgh University Press. 
+Gay, D. E. (2004). ‘J.R.R. Tolkien and the Kalevala: Some Thoughts on the 
+Finnish Origins of Tom Bombadil and Treebeard’. In Jane Chance (Ed.), Tolkien 
+and the Invention of Myth. (pp. 295 – 304). Lexington: The University of 
+Kentucky University Press. 
+Groom, N. (1999). The Making of Percy's Reliques. Oxford: Clarendon Press. 
+Groom, N. (2002). The Forger’s Shadow. London: Picador. 
+Groom, N. (2006). '“The purest english”: Ballads and the English Literary 
+Dialect'. The Eighteenth Century, 47 (2/3) 180 – 202. 
+Groom, N. (2014). ‘The English Literary Tradition: Shakespeare to the Gothic’. In 
+Stuart Lee (Ed.), A Companion to J.R.R. Tolkien. (pp. 286 – 302). Chichester: 
+John Wiley & Sons LTD. 
+Groom, N. (2019). Prom 37: The Childhood of Christ. BBC Proms. Available at: 
+http://www.bbc.co.uk/sounds/play/m0007kws [Accessed 14 Aug. 2019]. 
+Gross, E. J. & Matthews, P. E. (1905). King Edward’s Board of Education Report 
+of First Inspection of the King Edward VI. High School for Boys. 
+Gross, E. J. & Matthews, P. E. (1906). King Edward’s Board of Education Report 
+of First Inspection of the King Edward VI. High School for Boys. 
+Hammond, W. G. & Scull, C. (2017a). The J.R.R. Tolkien Companion: 
+Chronology. New York: Houghton Mifflin Press. 
+27
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 30 =====
+ 
+ 
+Hammond, W. G. & Scull, C. (2017b). The J.R.R. Tolkien Companion: Reader’s 
+Guide Part I. New York: Houghton Mifflin Press. 
+Haywood, I. (1986). The Making of History. London: Associated University 
+Presses.  
+Honegger, T. (2019). Memory, Lore, and Knowledge in Tolkien’s World.  Tolkien 
+2019, 9 August, Birmingham. 
+Hudson, N. (1996). 'Oral Tradition: The Evolution of an Eighteenth-Century 
+Concept'. In Albaro Ribeiro & James G. Basker (Ed.), Tradition in Transition: 
+Women Writers, Marginal Texts, and the Eighteenth-Century Canon. (pp. 161 – 
+176). Oxford: Oxford University Press. 
+Hunter, J. (2005). 'The Reanimation of Antiquity and the Resistance to History: 
+Macpherson-Scott-Tolkien'. In Jane Chance & Alfred K. Siewers (Ed.), Tolkien's 
+Modern Middle Ages. (pp. 61 – 76). Basingstoke: Palgrave Macmillan. 
+Keats, J. (1935). The Letters of John Keats. Oxford: Oxford University Press. 
+Kelly, M. Q. (1972). ‘The Poetry of Fantasy. Verse in The Lord of the Rings. In 
+Neil Isaacs & Roose Zimbardo (ed.), Tolkien and the Critics. (pp. 170 – 200). 
+Notre Dame: Notre Dame University Press. 
+Lee, S. (2014). ‘Manuscripts: Use, and Using’. In Stuart Lee (Ed.), A Companion 
+to J.R.R. Tolkien. (pp. 56 – 76). Chichester: John Wiley & Sons LTD. 
+Macpherson, J. (1807). The Poems of Ossian Volume I. London: Cadell & Davies. 
+MacSwiney, D. G. J. & Payton, W. H. (1910). ‘Debating Society’. King Edward’s 
+School Chronicle (184) 94 – 95. 
+Mann, M. (2013). ‘The role of nationalism in the two world wars’. In John A. 
+Hall & Siniša Malešević (Ed.), Nationalism and War. (pp. 172 – 196). 
+Cambridge: Cambridge University Press. 
+McIlwaine, C. (2018). Tolkien: Maker of Middle-earth. Oxford: Bodleian Library. 
+Meyerstein. E. H. W. (1930). A Life of Chatterton. London: Ingpen and Grant. 
+Nagy, G. (2003). ‘The Great Chain of Reading: (Inter-)textual Relations and the 
+Technique of Mythopoesis in the Turin Story’. In Jane Chance (Ed.), Tolkien the 
+Medievalist. (pp. 239 – 258). London: Routledge. 
+Nagy, G. (2006). ‘Authorship’. In Michael. D. C. Drout (Ed.), J.R.R. Tolkien 
+Encyclopedia. (pp. 41 – 45). New York: Routledge. 
+28
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 31 =====
+ 
+ 
+Nagy, G. ‘The Silmarillion: Tolkien’s Theory of Myth, Text, and Culture’. In 
+Stuart Lee (Ed.), A Companion to J.R.R. Tolkien. (pp. 112 – 116). Chichester: 
+John Wiley & Sons LTD.  
+Noad, C. E. (2000). ‘On the Construction of “The Silmarillion”’. In Verlyn 
+Flieger & Carl F. Hostetter (Ed.), Tolkien’s Legendarium: Essays on The History 
+of Middle-earth. (pp. 31 – 68). London: Greenwood Press. 
+Oberhelman, D. D. (2007). 'Oral Tradition'. In Michael D. C. Drout (Ed.), J.R.R. 
+Tolkien Encyclopedia: Scholarship and Critical Assessment. (pp. 484 – 486). 
+London: Routledge. 
+Oberhelman, D. (2008). ‘A Brief History of Libraries in Middle-earth: Manuscript 
+and Book Repositories in Tolkien’s Legendarium’. In Jonathan B. Himes (Ed.), 
+Truths Breathed Through Silver: The Inklings’ Moral and Mythopoeic Legacy. 
+(pp. 81 – 92) Newcastle: Cambridge Scholars Publishing. 
+Painter, J. (2016). ‘“A Honeycomb Gathered from Different Flowers”: Tolkien-
+the-Compiler’s Middle-earth “Sources” in The Lord of the Rings’. Tolkien Studies 
+(13) 125 – 147. 
+Pezzini, G. (2018). ‘The authors of Middle Earth: Tolkien and the mystery of 
+literary creation’. Journal of Inklings Studies, 8 (1) 31 – 64. 
+Rateliff, J. D. (2013). The History of the Hobbit. London: HarperCollins. 
+Robson, W. W. (1986). A Prologue to English Literature. London: Barnes & 
+Noble Inc. 
+Rosebury, B. (2003). Tolkien: A Cultural Phenomenon. Basingstoke: Palgrave 
+Macmillan. 
+Rossetti, G. D. (2010). The Correspondence of Dante Gabriel Rossetti: Volume 9. 
+[Ed. Fredeman, W. E.]. Cambridge: D. S. Brewer.  
+Scott, W. (1849). The Minstrelsy of the Scottish Border Volume IV. Edinburgh: 
+Robert Cadell. 
+Sherwood, W. (2020). The Romantic Faëry: Keats, Tolkien, and the Perilous 
+Realm. Available at: https://ore.exeter.ac.uk/repository/handle/10871/40585 
+Shippey, T. (2001). J.R.R. Tolkien: Author of the Century. London: 
+HarperCollins. 
+Shippey, T. (2004). ‘Tolkien and the Appeal of the Pagan: Edda and Kalevala’. In 
+Jane Chance (Ed.), Tolkien and the Invention of Myth. (pp. 145 – 164). Lexington: 
+The University of Kentucky University Press. 
+29
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020
+===== PAGE 32 =====
+ 
+ 
+Shippey, T. (2005). The Road to Middle-earth. London: HarperCollins. 
+Shippey, T. (2007). Roots and Branches: Selected Papers on Tolkien. Zurich: 
+Walking Tree Publications. 
+Smart, J. S. (1905). James Macpherson: An Episode in Literature. London: David 
+Nutt, Long Acre. 
+Smith, A. R. (2006). ‘Tolkienian Gothic’. In Wayne G. Hammond & Christina 
+Scull (Ed.), The Lord of the Rings 1954 – 2004: Scholarship in Honor of Richard 
+E. Blackwelder. (pp. 267 – 283). Milwaukee: Marquette University Press. 
+Stafford, F. (1988). The Sublime Savage: A Study of James Macpherson and The 
+Poems of Ossian. Edinburgh: Edinburgh University Press. 
+Thiessen, D. (2014). ‘A Baggins Back Yard: Environmentalism, Authorship and 
+the Elves in Tolkien’s Legendarium’. In Bradford Lee Eden (Ed.), The Hobbit and 
+Tolkien’s Mythology. (pp. 195 – 207). Jefferson, NC: McFarland & Co. 
+Tolkien, J. R. R. (1983). The History of Middle-earth: The Book of Lost Tales, 
+Part I. [Ed. Tolkien, C.]. London: HarperCollins. 
+Tolkien, J. R. R. (1984). The History of Middle-earth: The Book of Lost Tales, 
+Part II. [Ed. Tolkien, C.]. London: HarperCollins. 
+Tolkien, J. R. R. (1995). The Hobbit. London: HarperCollins. 
+Tolkien, J. R. R. (1996). The History of Middle-earth: The Peoples of Middle-
+earth. [Ed. Tolkien, C.]. London: HarperCollins. 
+Tolkien, J. R. R. (1999). The Silmarillion. [Ed. Tolkien, C.]. London: 
+HarperCollins. 
+Tolkien, J. R. R. (2006a). The Letters of J.R.R. Tolkien. [Ed. Carpenter, H.]. 
+London: HarperCollins. 
+Tolkien, J. R. R. (2006b). The Monsters and the Critics and Other Essays. [Ed. 
+Tolkien, C.]. London: HarperCollins. 
+Tolkien. J. R. R. (2007). The Lord of the Rings. London: HarperCollins. 
+Trumpener, K. (1997). Bardic Nationalism: The Romantic Novel and the British 
+Empire. Princeton: Princeton University Press. 
+Walpole, H. (2014). The Castle of Otranto. [Ed. Groom, N.]. Oxford: Oxford 
+University Press. 
+30
+Journal of Tolkien Research, Vol. 11 [2020], Iss. 1, Art. 4
+https://scholar.valpo.edu/journaloftolkienresearch/vol11/iss1/4
+===== PAGE 33 =====
+ 
+ 
+West, R. C. (2004). ‘Setting the Rocket Off in Story: The Kalevala as the Germ of 
+Tolkien’s Legendarium’. In Jane Chance (Ed.), Tolkien and the Invention of Myth. 
+(pp. 285 – 294). Lexington: The University of Kentucky University Press. 
+Williamson, J. (2015). The Evolution of Modern Fantasy: From Antiquarianism 
+to the Ballantine Adult Fantasy Series. Basingstoke: Palgrave Macmillan. 
+Wordsworth, W. (2008). The Major Works. [Ed. Gill, S.]. Oxford: Oxford 
+University Press. 
+31
+Sherwood: Tolkien and the Age of Forgery
+Published by ValpoScholar, 2020

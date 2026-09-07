@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 6,
+ "indices": [
+  1128,
+  1129,
+  1130,
+  1131,
+  1149,
+  1150,
+  1152,
+  1153,
+  1154,
+  1155,
+  1167,
+  1170,
+  1171,
+  1172,
+  1173
+ ],
+ "claims": [
+  {
+   "index": 1128,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Basani and Chen state that human-authored text shows richer variability in lexical and structural unpredictability than language-model output.",
+   "source": "Advik Raj Basani and Pin-Yu Chen, 'Diversity Boosts AI-Generated Text Detection' (DivEye), Transactions on Machine Learning Research, February 2026 (arXiv v3, 25 Feb 2026)",
+   "url": "https://arxiv.org/abs/2509.18880",
+   "quote": "human-authored text exhibits richer variability in lexical",
+   "page": "Abstract"
+  },
+  {
+   "index": 1129,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Basani and Chen argue that likelihood-maximising models approximate the uniform information density optimum too strictly and so produce unnaturally flat probability curves.",
+   "source": "Advik Raj Basani and Pin-Yu Chen, 'Diversity Boosts AI-Generated Text Detection' (DivEye), Transactions on Machine Learning Research, February 2026 (arXiv v3, 25 Feb 2026)",
+   "url": "https://arxiv.org/abs/2509.18880",
+   "quote": "resulting in unnaturally flat probability curves devoid of these organic",
+   "page": "section 3.1"
+  },
+  {
+   "index": 1130,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Basani and Chen measured that second-order surprisal features contributed 39.4 percent of their detector's feature importance, more than the distributional moments or the first-order differences.",
+   "source": "Advik Raj Basani and Pin-Yu Chen, 'Diversity Boosts AI-Generated Text Detection' (DivEye), Transactions on Machine Learning Research, February 2026 (arXiv v3, 25 Feb 2026)",
+   "url": "https://arxiv.org/abs/2509.18880",
+   "quote": "second-order features contribute the most (39.4%)",
+   "page": "section 5, Relevance of DivEye's Features"
+  },
+  {
+   "index": 1131,
+   "feature": "detection and its failures",
+   "claim": "Basani and Chen report that DivEye outperformed existing zero-shot detectors by up to 33.2 percent.",
+   "source": "Advik Raj Basani and Pin-Yu Chen, 'Diversity Boosts AI-Generated Text Detection' (DivEye), Transactions on Machine Learning Research, February 2026 (arXiv v3, 25 Feb 2026)",
+   "url": "https://arxiv.org/abs/2509.18880",
+   "quote": "pointing to rhythmic unpredictability as a powerful and",
+   "page": "Abstract"
+  },
+  {
+   "index": 1149,
+   "feature": "detection and its failures",
+   "claim": "An experienced Wikimedia policy editor recalled a study finding that people who do not use AI have about a fifty-fifty chance of guessing whether a sample of text was AI-generated.",
+   "source": "User:WhatamIdoing, Wikivoyage talk:AI guidelines, 4 September 2026",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
+   "quote": "50–50 chance of guessing whether a piece of sample",
+   "page": "section 'Who will identify AI content?'"
+  },
+  {
+   "index": 1150,
+   "feature": "counter-evidence",
+   "claim": "The same editor found a passage on English Wikipedia he suspected of being AI-generated and discovered from the page history that it had been written 22 years earlier.",
+   "source": "User:WhatamIdoing, Wikivoyage talk:AI guidelines, 4 September 2026",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
+   "quote": "it was written 22 years ago",
+   "page": "section 'Who will identify AI content?'"
+  },
+  {
+   "index": 1152,
+   "feature": "abstraction over the concrete",
+   "claim": "The same draft explains AI invention as the model asserting a particular beach resort has a restaurant because many resorts do, that is, substituting the typical for the particular.",
+   "source": "User:LPfi/AI guidelines, English Wikivoyage draft marked experimental, revision of September 2026",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "quote": "has a restaurant because many do",
+   "page": "section 'Hallucinations'"
+  },
+  {
+   "index": 1153,
+   "feature": "homogenisation",
+   "claim": "The same draft tells editors to avoid converting an existing article into an obvious AI voice.",
+   "source": "User:LPfi/AI guidelines, English Wikivoyage draft marked experimental, revision of September 2026",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "quote": "avoid converting an article into an obvious AI voice",
+   "page": "section 'AI assisted copy editing'"
+  },
+  {
+   "index": 1154,
+   "feature": "homogenisation",
+   "claim": "The same draft characterises what a large language model returns as some average or mishmash of its inputs.",
+   "source": "User:LPfi/AI guidelines, English Wikivoyage draft marked experimental, revision of September 2026",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "quote": "some average or mishmash of the inputs",
+   "page": "section 'Copyright issues'"
+  },
+  {
+   "index": 1155,
+   "feature": "discourse-level tells",
+   "claim": "The same draft bars AI from talk-page posts and instructs editors not to use the style AI chatbots tend to use.",
+   "source": "User:LPfi/AI guidelines, English Wikivoyage draft marked experimental, revision of September 2026",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "quote": "do not use the style AI chatbots tend to use",
+   "page": "section 'Discussions'"
+  },
+  {
+   "index": 1167,
+   "feature": "detection and its failures",
+   "claim": "Which? found 102 mentions of food poisoning in the guest reviews of the Riu Palace Santa Maria when it checked in March 2026.",
+   "source": "Which?, 'Tripadvisor AI tool gives glowing reviews to dangerous hotels, Which? finds', July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "102 mentions of food poisoning",
+   "page": "section on the Riu Palace Santa Maria"
+  },
+  {
+   "index": 1170,
+   "feature": "abstraction over the concrete",
+   "claim": "Tripadvisor's AI summary rendered several reviewers' reports of repeated sexual harassment by staff as lapses in service noted by a few.",
+   "source": "Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "‘Lapses [in service] noted by a few’",
+   "page": "section on Kaia Coracesium"
+  },
+  {
+   "index": 1171,
+   "feature": "abstraction over the concrete",
+   "claim": "Which? concluded that where the summaries do reference serious allegations, the language used appears to minimise their significance.",
+   "source": "Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "the language used appears to minimise their significance",
+   "page": "section on Kaia Coracesium"
+  },
+  {
+   "index": 1172,
+   "feature": "abstraction over the concrete",
+   "claim": "Tripadvisor's own account of its mechanism is that the models identify the most common themes and turn those themes into short plain-English overviews.",
+   "source": "Tripadvisor's statement to Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "identify the most common themes and then turn those themes into short",
+   "page": "Tripadvisor's response"
+  },
+  {
+   "index": 1173,
+   "feature": "counter-evidence",
+   "claim": "Which? found that Google managed context in its AI summaries far better than Tripadvisor, its overview of the same hotel warning of potential for illness.",
+   "source": "Which?, July 2026",
+   "url": "https://www.which.co.uk/policy-and-insight/article/tripadvisor-ai-tool-gives-glowing-reviews-to-dangerous-hotels-which-finds-adbnO9E3Dr2O",
+   "quote": "Google manages context in their AI summaries far better",
+   "page": "comparison with rival platforms"
+  }
+ ]
+}

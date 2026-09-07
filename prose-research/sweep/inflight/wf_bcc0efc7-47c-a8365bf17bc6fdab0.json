@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i753-767",
+ "lines": 73,
+ "firstTs": "2026-09-06T18:16:13.810Z",
+ "lastTs": "2026-09-06T18:19:20.440Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 15,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/2501.18101",
+  "https://arxiv.org/pdf/2310.13548:2310.13548.pdf",
+  "https://arxiv.org/pdf/2505.00047:2505.00047.pdf",
+  "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a8365bf17bc6fdab0",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a8365bf17bc6fdab0.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i753-767.json",
+  "exists": true
+ }
+}

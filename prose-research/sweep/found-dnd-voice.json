@@ -1,0 +1,1044 @@
+{
+ "claims": [
+  {
+   "feature": "two-sentence attention budget",
+   "claim": "Noonan's undercover Gen Con 2005 observation was that players attend to only the first two sentences of read-aloud boxed text before they start stacking dice or talking.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you're the DM, you get two sentences. Period.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "oration versus conversation",
+   "claim": "Boxed text fails because it replaces the game's native conversational exchange (player asks, DM answers) with oration, which players are not used to listening to.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "load-bearing facts lost in boxes",
+   "claim": "Players repeatedly missed the concrete data embedded in boxed text (room dimensions, number of exits, number of monsters, who is a corpse), forcing DMs to repeat it mid-action.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "basic stuff, like room dimensions, how many doors exit the room",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "cold reading of scripted prose",
+   "claim": "DMs read boxed text cold, from a script they have never spoken aloud, so even dynamic DMs deliver it flatly.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Not a recipe for compelling delivery.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "historical shrinkage of boxed text",
+   "claim": "Noonan documents that WotC boxed text had already shortened by 2005, contrasting a three-sentence Sons of Gruumsh door entry with a paragraph-long 1999 Return to the Keep on the Borderlands cave entry.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text in adventures used to be a lot longer",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "paraphrase over verbatim",
+   "claim": "Noonan's advice to DMs is to ditch the boxed text and give the initial room description in their own words to keep the players in a conversation.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "ditch the boxed text and use your own words",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "format experimentation at WotC",
+   "claim": "In 2005 WotC R&D was actively testing alternatives to boxed text at the table, to appear in products if they played better.",
+   "source": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "We're goofing around with some alternatives right now.",
+   "page": "WotC designer column (read via Wayback text)"
+  },
+  {
+   "feature": "read-versus-play gap",
+   "claim": "Noonan states an RPG book is first experienced by reading but lived by playing, so reading only yields an educated guess about quality.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "Reading a roleplaying book just lets you make an educated guess",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "feature": "metaplot prose reads well, plays badly",
+   "claim": "Mid-1990s campaign settings with intertwined factions and metaplots were great reads but hard to run because PCs became bit players.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "In short, they read good, played bad.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "feature": "stat blocks as table-only prose",
+   "claim": "Pregenerated NPC stat blocks are no fun on a read-through but save the busy DM at the table, and WotC was working to make such material easier to find and use.",
+   "source": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "quote": "They're no fun on a read-through.",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "feature": "no second person in read-aloud",
+   "claim": "RPGA/Living Greyhawk guidance forbids 'you', 'your' and 'you're' in read-aloud text because they seize control of the characters.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "Avoid the word \"you\" like the plague",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "no assigned emotions or actions",
+   "claim": "Boxed text must not tell characters what they feel or do (crying babies bringing a tear to your eyes; grabbing your sword in fear); rewrite as a neutral scene the players react to.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "read aloud text does not run the character",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "no NPC monologue in boxes",
+   "claim": "Avoid long read-aloud passages in which NPCs carry on while the players sit idle; insert breaks for reactions.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "this is roleplaying not story time",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "bare-bones essential",
+   "claim": "Balance the amount of boxed text by running adventures to learn what is essential and cutting the rest; too much constrains the GM, too little strands them.",
+   "source": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "quote": "Get a feel for what is bare-bones essential",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "consistent adventure format",
+   "claim": "A consistent style across RPGA adventures lets judges find information quickly; content and style rules live in the Living Greyhawk Writer's Guidelines.",
+   "source": "Living Greyhawk, Intro to Writing: Editor's Pen (Craig Heir, 2004-10-06)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20041006a",
+   "quote": "allows judges to quickly find information they need",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "PG-13 register",
+   "claim": "RPGA adventure content must stay PG-13 because children play the game.",
+   "source": "Living Greyhawk, Intro to Writing: Editor's Pen (Craig Heir, 2004-10-06)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20041006a",
+   "quote": "keep your writing PG-13",
+   "page": "RPGA editor column on WotC site (read via Wayback)"
+  },
+  {
+   "feature": "viewer-free read-aloud",
+   "claim": "Dungeon's read-aloud text gives a bare-bones description of the area and makes no reference to the viewer; 'you see' and 'as you enter the room' are banned.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "it does not make any reference to the viewer",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "no creatures in read-aloud",
+   "claim": "Creatures are excluded from read-aloud text because their positions and activities depend on circumstances such as whether they heard the PCs.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "avoid including descriptions of any creatures in the room",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "few-sentence cap, handouts for the rest",
+   "claim": "Read-aloud text should only rarely exceed a few sentences; anything longer belongs in a player handout.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "should only rarely run more than a few sentences",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "fixed encounter section labels",
+   "claim": "Encounters are keyed with labeled sections in a fixed order (Read-aloud Text, General Description, Creature(s), Tactics, Trap(s), Treasure, Development) and unneeded sections are omitted rather than filled.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "The editors greatly dislike printing the words \"This room is empty\"",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "backstory budget",
+   "claim": "The Adventure Background is capped at 5% of total length, with adventures running 5,000-15,000 words and about 10,000 preferred.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "no more than 5% of the total length",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "synopsis up front",
+   "claim": "The mandatory synopsis must outline surprises and plot twists for the DM at the start rather than springing them during the adventure.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "Outline surprises and plot twists here",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "sidebar cap",
+   "claim": "Sidebars are kept to a minimum and capped at 300 words because they take more page space than their word count suggests.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "no more than 300 words in length",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "play over story",
+   "claim": "Queries and adventures must condense backstory in favour of PC involvement; how the adventure plays decides acceptance.",
+   "source": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "quote": "an adventure is not a short story",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "no first person",
+   "claim": "Dragon refused articles written in the first person; 'I' and 'my' may appear only in a character's speech.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "we will not publish an article written in the first person",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "vignette cap",
+   "claim": "An opening narrative vignette or example dialogue may run no more than 200 words.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "no more than 200 words long",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "active voice",
+   "claim": "Writers are told to avoid passive writing and 'to be' verbs in particular.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "Especially avoid passive writing, particularly \"to be\" verbs",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "typographic conventions",
+   "claim": "Magic item and spell names are italicized and feat names capitalized, following the current D&D product style.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "names of magic items and spells should be italicized",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "page density and length ceiling",
+   "claim": "A Dragon page holds about 750 words and submissions should not exceed 5,000 words.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "A full page of text in DRAGON contains about 750 words",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "D&D style as acceptance criterion",
+   "claim": "Failure to present information in D&D styles is listed alongside poor writing and imprecise mechanics as a standard rejection reason.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "failure to present information in D&D styles",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "flavor must stand alone",
+   "claim": "Backgrounds and stories accompanying new rules must be interesting enough to stand alone without their rules element.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "interesting enough to stand alone without their rules element",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "feature": "journalistic directness",
+   "claim": "Steve Winter applied newsroom training to TSR text: game language must be direct and clear, avoiding flowery phrases and clever wordplay.",
+   "source": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "the language needs to be direct and clear",
+   "page": "interview (TSR/WotC editor)"
+  },
+  {
+   "feature": "teach versus reference",
+   "claim": "A rulebook must decide up front whether it teaches newcomers or serves as a reference for people who know the fundamentals; it cannot do both.",
+   "source": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "I don't believe it can do both.",
+   "page": "interview (TSR/WotC editor)"
+  },
+  {
+   "feature": "documentarian stance",
+   "claim": "Mearls frames the game writer as a documentarian of an imaginary world who focuses on the props of a story: locations, characters, creatures, past events.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "The writer as a documentarian of an imaginary world.",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "feature": "exposition-heavy register",
+   "claim": "Game writing dwells on the kind of exposition that would bore a novel, little of which appears as-is in play.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "the kind of exposition that can make a novel boring",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "feature": "lawyerly mechanics, gapped settings",
+   "claim": "Mechanics demand a lawyerly precision of language while setting text deliberately leaves gaps for the players' imagination.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "a lawyerly approach to writing",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "feature": "shared-language terminology",
+   "claim": "Mearls' 2013 Legends & Lore column: rules terms exist to give abstract concepts a clear shared meaning, so '5th-level wizard' tells everyone what you can do.",
+   "source": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "quote": "D&D is a shared language.",
+   "page": "forum thread quoting designer column"
+  },
+  {
+   "feature": "self-explanatory names over abstract terms",
+   "claim": "Mearls contrasts a self-explanatory descriptor like 'archer' with abstract feat names (Rapid Shot, Precise Shot) that can only be understood by already knowing them.",
+   "source": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "quote": "They don't stand on their own in a meaningful way.",
+   "page": "forum thread quoting designer column"
+  },
+  {
+   "feature": "overwriting and editorial cutting",
+   "claim": "Perkins says he almost always overwrites; his first Dungeon adventure was cut from 28,000 to 16,000 words.",
+   "source": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "I almost always overwrite",
+   "page": "interview"
+  },
+  {
+   "feature": "setting cant and pull-quotes",
+   "claim": "Perkins notes Planescape's slang was mostly absent from Warriors of Heaven and that he missed the pull-quotes that made those products fun to read.",
+   "source": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "What I miss are the pull-quotes",
+   "page": "interview"
+  },
+  {
+   "feature": "overwriting cautionary tale",
+   "claim": "Perkins recounts a 1992 Dungeon draft of 24,000 words cut to 15,000 as a cautionary tale about overwriting, and pitches Curse of Strahd's register as Gothic horror with a dash of dark fantasy.",
+   "source": "Curse of Strahd Interview with Chris Perkins (Fraternity of Shadows, Feb 2016)",
+   "url": "https://www.fraternityofshadows.com/TheParlor/Curse_Of_Strahd_Interview.html",
+   "quote": "a cautionary tale about overwriting",
+   "page": "interview"
+  },
+  {
+   "feature": "entertaining DM-facing text",
+   "claim": "Perkins: adventures are meant to be read, so DM-facing text should be entertaining and bring a smile to the DM preparing.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "make it entertaining",
+   "page": "official interview transcript"
+  },
+  {
+   "feature": "embedded humor",
+   "claim": "Perkins tells adventure writers to put puns, little laughs and Easter eggs in their text, embedded naturally rather than forced.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "Put puns in your adventure.",
+   "page": "official interview transcript"
+  },
+  {
+   "feature": "not a novel",
+   "claim": "Perkins warns against writing an adventure like a novel that dictates how each encounter must resolve; the text must survive unexpected choices and dice.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "",
+   "page": "official interview transcript"
+  },
+  {
+   "feature": "economical originals",
+   "claim": "Perkins characterizes the original 1983 Ravenloft as economical in its writing yet rich in characterization, the model he expanded.",
+   "source": "Ex D&D boss Chris Perkins tells us why Strahd is the RPG's most successful villain (Wargamer, 2026-03-19)",
+   "url": "https://www.wargamer.com/dnd/chris-perkins-strahd",
+   "quote": "economical",
+   "page": "interview"
+  },
+  {
+   "feature": "helpful teaching tone",
+   "claim": "Wyatt set out to recapture the welcoming, teaching tone of the 4e DMG that the 2014 DMG lacked.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "the helpful tone to ease you in",
+   "page": "interview"
+  },
+  {
+   "feature": "surfacing information",
+   "claim": "Perkins found DMs did not know material existed in the 2014 DMG, so the 2024 text is organized to surface what is there.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "they didn't even know it was there",
+   "page": "interview"
+  },
+  {
+   "feature": "examples of play as scripts",
+   "claim": "Wyatt wrote the 2024 DMG's examples of play as scripts of the game unfolding to show how it functions.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "presenting the scripts of that unfolding in play",
+   "page": "interview"
+  },
+  {
+   "feature": "front-loaded basics",
+   "claim": "The 2024 DMG front-loads basic information about DMing and moves world creation to the middle, mirroring the PHB's structure.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "front-loading all of the basic information",
+   "page": "interview transcript + forum"
+  },
+  {
+   "feature": "organization as the 2014 flaw",
+   "claim": "Wyatt names the 2014 DMG's organization as its biggest drawback and says a DMG should guide you on how to be a DM.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "the organization of the 2014 DMG was its biggest drawback",
+   "page": "interview transcript + forum"
+  },
+  {
+   "feature": "boxed-text boilerplate",
+   "claim": "Every published WotC adventure opens by explaining what boxed text is; with the 2024 DMG defining it on p. 9, Wyatt wants to drop that boilerplate.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "tells you what boxed text is",
+   "page": "interview report"
+  },
+  {
+   "feature": "door boilerplate",
+   "claim": "Perkins says re-explaining doors in every adventure bothered him for a decade; the 2024 DMG's doors page lets adventures stop repeating it.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "super, super important",
+   "page": "interview report"
+  },
+  {
+   "feature": "information reach over format",
+   "claim": "Abadia (AL admin): dropping boxed text does not remove the need to tell the DM what to convey; the test is whether information reaches the DM.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "the DM still needs some way to understand what to convey",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "feature": "fragmented templated encounters",
+   "claim": "AL Season 8's rigid template scattered one animated door's description across Dimensions & Terrain, Door and Creatures/NPCs sections, obscuring intent.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "You must read both places",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "feature": "ritual sidebars",
+   "claim": "The AL 'Playing the Pillars' sidebars existed to exist and added little value.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "It exists sort of just to exist",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "feature": "2025 lore contraction",
+   "claim": "Abadia finds the 2025 Monster Manual devotes far fewer words to describing monsters and less actionable encounter information than 2014's inspiring lore.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "far fewer words devoted to describing the monster",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "feature": "stat-block phrasing inconsistency",
+   "claim": "2025 Multiattack lines inconsistently include 'in any combination', and the gelatinous cube's codified wording is harder to understand than before.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "a fair lack of clarity in monster stat blocks",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "feature": "audience-split density",
+   "claim": "Baur: beginners want full support (all stats, contingencies, corner cases) while veterans want bullet lists and bare-bones text with wiggle room.",
+   "source": "Compiling Wolfgang Baur's AMA (EN World, 2015-06-03)",
+   "url": "https://www.enworld.org/threads/compiling-wolfgang-baurs-ama.663114/",
+   "quote": "bullet lists, bare bones text that allows them to improvise",
+   "page": "compiled AMA (ex-Dungeon editor)"
+  },
+  {
+   "feature": "volume as craft",
+   "claim": "Baur's writing advice to designers is to turn out a lot of prose.",
+   "source": "Compiling Wolfgang Baur's AMA (EN World, 2015-06-03)",
+   "url": "https://www.enworld.org/threads/compiling-wolfgang-baurs-ama.663114/",
+   "quote": "Speed keeps you fed; quality keeps you respected.",
+   "page": "compiled AMA (ex-Dungeon editor)"
+  },
+  {
+   "feature": "recent, relevant backstory",
+   "claim": "Baur (ex-Dungeon editor) says most history is wasted energy; keep backstory recent and relevant and avoid openings of 'Thousands of years ago'.",
+   "source": "Adventure Builder: Writing Your First Adventure, Part 1 of 6 (Wolfgang Baur, Wizards.com, 2006-07-28)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060728a",
+   "quote": "avoid anything that starts \"Thousands of years ago...\"",
+   "page": "WotC column (read via Wayback)"
+  },
+  {
+   "feature": "four beginner errors",
+   "claim": "The four errors Baur saw constantly at Dungeon: too much useless backstory, slow starts, random encounters, too many encounters.",
+   "source": "Adventure Builder: Writing Your First Adventure, Part 1 of 6 (Wolfgang Baur, Wizards.com, 2006-07-28)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060728a",
+   "quote": "too much useless backstory",
+   "page": "WotC column (read via Wayback)"
+  },
+  {
+   "feature": "history belongs in sourcebooks",
+   "claim": "Involved history that the PCs cannot learn belongs in sourcebooks, not adventures.",
+   "source": "Adventure Builder: Writing Your First Adventure, Part 1 of 6 (Wolfgang Baur, Wizards.com, 2006-07-28)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060728a",
+   "quote": "Save that for sourcebooks.",
+   "page": "WotC column (read via Wayback)"
+  },
+  {
+   "feature": "concrete, specific hooks",
+   "claim": "Hooks must be specific and hard to refuse; vague or cliched openings (stranger in a tavern, request from the mayor) fail.",
+   "source": "Adventure Builder: Setting the Hook, Part 2 of 6 (Wolfgang Baur, Wizards.com, 2006-08-11)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060811a",
+   "quote": "Vague, overused, or clichéd hooks don't interest players",
+   "page": "WotC column (read via Wayback)"
+  },
+  {
+   "feature": "inciting-incident opening",
+   "claim": "Baur borrows fiction's inciting incident: an arrow with an Elvish note shot into camp beats a guy in a bar.",
+   "source": "Adventure Builder: Setting the Hook, Part 2 of 6 (Wolfgang Baur, Wizards.com, 2006-08-11)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060811a",
+   "quote": "In fiction, it would be called the \"inciting incident.\"",
+   "page": "WotC column (read via Wayback)"
+  },
+  {
+   "feature": "design labels kept out of game text",
+   "claim": "Noonan deliberately used modern-sounding monster role labels (mook, artillery, decathlete) so they would not creep into published game text.",
+   "source": "Design & Development: How to Make a Monster Manual, Part 1 (David Noonan, 2007-07-27)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20070727a",
+   "quote": "I didn't want the roles to creep into game text",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "feature": "no page-spread breaks",
+   "claim": "Monster entries are not allowed to break across page spreads, which limits text length and illustration size.",
+   "source": "Design & Development: How to Make a Monster Manual, Part 1 (David Noonan, 2007-07-27)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20070727a",
+   "quote": "monsters don't break out of page spreads",
+   "page": "WotC designer column (read via Wayback)"
+  },
+  {
+   "feature": "boxed text as 2e house habit",
+   "claim": "Rich Baker, reviewing his own TSR adventures, calls his heavy use of boxed text a 2e-era style thing.",
+   "source": "Baker's Field: Twenty-Eight Adventures (Part 1) (Richard Baker, 2015-03-09)",
+   "url": "http://richard-baker.blogspot.com/2015/03/twenty-eight-adventures-part-1.html",
+   "quote": "kind of a 2e style thing",
+   "page": "designer blog"
+  },
+  {
+   "feature": "module unit",
+   "claim": "WotC scheduled adventure writing in 'MU' units of 32 pages or 20,000-22,000 words, about one designer-month each.",
+   "source": "Baker's Field: Twenty-Eight Adventures (Part 1) (Richard Baker, 2015-03-09)",
+   "url": "http://richard-baker.blogspot.com/2015/03/twenty-eight-adventures-part-1.html",
+   "quote": "20,000 to 22,000 words",
+   "page": "designer blog"
+  },
+  {
+   "feature": "Chicago Manual of Style",
+   "claim": "WotC freelancers in 2012 were held to the Chicago Manual of Style and required to deliver manuscripts in WotC's Word templates needing minimal grammar or syntax editing.",
+   "source": "Freelancer Chronicles: The Coast Wizards and I, Some Lessons (Critical Hits, 2012-12-19)",
+   "url": "https://critical-hits.com/blog/2012/12/19/freelancer-chronicles-the-coast-wizards-and-i-some-lessons/",
+   "quote": "that's going to be your main bible",
+   "page": "WotC freelancer blog"
+  },
+  {
+   "feature": "here-and-now focus",
+   "claim": "The WotC Adventure Guide, as quoted by Shea, instructs writers to focus on the here and now and omit verbose backstories.",
+   "source": "On Writing Adventures (Mike Shea, Sly Flourish, 2019-06-17)",
+   "url": "https://slyflourish.com/on_writing_adventures.html",
+   "quote": "Focus on the here and now. Omit verbose backstories",
+   "page": "compilation of designer advice incl. WotC Adventure Guide"
+  },
+  {
+   "feature": "brevity and read-aloud test",
+   "claim": "Kobold Guide precepts quoted by Shea: small beats large, be specific, read your work aloud.",
+   "source": "On Writing Adventures (Mike Shea, Sly Flourish, 2019-06-17)",
+   "url": "https://slyflourish.com/on_writing_adventures.html",
+   "quote": "Small beats large. Keep it brief",
+   "page": "compilation of designer advice incl. WotC Adventure Guide"
+  },
+  {
+   "feature": "fitting a shared-world prose style",
+   "claim": "Greenwood says shared-world writers must fit in, perhaps even to a particular prose style, without contradicting existing lore.",
+   "source": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
+   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
+   "quote": "perhaps even to a particular prose style",
+   "page": "interview (read via curl)"
+  },
+  {
+   "feature": "sensory immersion",
+   "claim": "Greenwood writes by imagining he is present, smelling and tasting what characters do, then writing down enough for the reader to see the crypt or court.",
+   "source": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
+   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
+   "quote": "I'm smelling what the characters are smelling",
+   "page": "interview (read via curl)"
+  },
+  {
+   "feature": "writing to order",
+   "claim": "Greenwood writes what publishers ask for, in the way they want it, and still entertainingly.",
+   "source": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
+   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
+   "quote": "I write about what publishers ask me to",
+   "page": "interview (read via curl)"
+  },
+  {
+   "feature": "rewrite the weak",
+   "claim": "Greenwood's advice: never think your words are perfect; rewrite anything weak or awkward.",
+   "source": "Author Interview: Ed Greenwood (Paizo Blog, 2013-06-20)",
+   "url": "https://paizo.com/blog/author-interview-ed-greenwood",
+   "quote": "Never think your words are perfect",
+   "page": "interview"
+  },
+  {
+   "feature": "text stands on its own (RAW)",
+   "claim": "Crawford reads a rule first as written, in context and without regard to intent, because the published text must stand on its own.",
+   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
+   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
+   "quote": "The text is forced to stand on its own.",
+   "page": "official rules document (designer's own words)"
+  },
+  {
+   "feature": "rules as foundation, DM as bridge",
+   "claim": "5e's rules deliberately lay a foundation for the DM to build on rather than trying to cover every contingency.",
+   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
+   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
+   "quote": "no set of rules could reasonably account for every contingency",
+   "page": "official rules document (designer's own words)"
+  },
+  {
+   "feature": "public statements are not rulings",
+   "claim": "Only the compendium is official; designers' tweets and public statements are advice.",
+   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
+   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
+   "quote": "are not official rulings; they are advice",
+   "page": "official rules document (designer's own words)"
+  },
+  {
+   "feature": "glossary and taught key terms",
+   "claim": "The 2024 PHB teaches key terms (D20 Test, Magic action) in an opening play guide with examples of play and sidebars, and summarizes rules terminology in a glossary appendix.",
+   "source": "What's New in the 2024 Player's Handbook? (Michael Galvis, D&D Beyond, 2024-09-17)",
+   "url": "https://www.dndbeyond.com/posts/1745-whats-new-in-the-2024-players-handbook",
+   "quote": "key terms of the game, like what a D20 Test",
+   "page": "official article"
+  },
+  {
+   "feature": "updated terminology table",
+   "claim": "The 2024 PHB renames terms via an Updated Terminology Table: Race to Species, Cast a Spell action to Magic action, Ki to Monk's Focus.",
+   "source": "Updates in the Player's Handbook (2024) (D&D Beyond staff, 2024-09-03)",
+   "url": "https://www.dndbeyond.com/posts/1810-updates-in-the-players-handbook-2024",
+   "quote": "uses some new terms, as shown in the Updated Terminology Table",
+   "page": "official article"
+  },
+  {
+   "feature": "headers and bullets for the DM's eye",
+   "claim": "Merwin: use headers, subheaders and bullets to draw the DM's eye to the right information at the right time.",
+   "source": "Let's Design an Adventure: Thinking Like a Designer (Shawn Merwin, D&D Beyond, 2020-03-25)",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "quote": "Use headers and subheaders to call out breaks in information",
+   "page": "official column (AL veteran designer)"
+  },
+  {
+   "feature": "short, evocative, helpful",
+   "claim": "Goodman Games designer Burnside (2025) says boxed text must be short, evocative and helpful, and that his 2018 boxes carried too many distractions.",
+   "source": "Read aloud text in modules: What are folks opinions, page 10 (EN World, 2025)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-10",
+   "quote": "short, evocative, and helpful to the DM and players",
+   "page": "forum (posts by a Goodman Games designer)"
+  },
+  {
+   "feature": "self-contained lore nuggets",
+   "claim": "Crawford: the 2025 core books are filled with lore nuggets because WotC will not assume readers own the old books.",
+   "source": "D&D's Jeremy Crawford on the 2025 Monster Manual, The New Starter Set, and High Level Gameplay (CBR, 2025-02-05)",
+   "url": "https://www.cbr.com/jeremy-crawford-interview-dnd-5e-monster-manual-2025/",
+   "quote": "fill them with lore nuggets",
+   "page": "interview"
+  },
+  {
+   "feature": "house style exists",
+   "claim": "Mearls (2025) credits a collaborator with making sure a third-party manuscript matched the D&D house style, confirming an internal style exists even where none is published.",
+   "source": "Grognardia: Interview: Mike Mearls (2025-08-27)",
+   "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
+   "quote": "everything matched the D&D house style",
+   "page": "interview"
+  }
+ ],
+ "sourcesRead": [
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "WotC designer column (read via Wayback text)",
+   "substantive": true
+  },
+  {
+   "title": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "kind": "WotC designer column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Editor's Pen (Craig Heir, 2004-10-06)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20041006a",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Write it Down (Craig Heir, 2004-02-03)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040203a",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": false
+  },
+  {
+   "title": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "kind": "official editorial guidelines (PDF)",
+   "substantive": true
+  },
+  {
+   "title": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "kind": "official editorial guidelines (PDF)",
+   "substantive": true
+  },
+  {
+   "title": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "kind": "interview (TSR/WotC editor)",
+   "substantive": true
+  },
+  {
+   "title": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "kind": "interview (5e lead designer)",
+   "substantive": true
+  },
+  {
+   "title": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "kind": "forum thread quoting designer column",
+   "substantive": true
+  },
+  {
+   "title": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Curse of Strahd Interview with Chris Perkins (Fraternity of Shadows, Feb 2016)",
+   "url": "https://www.fraternityofshadows.com/TheParlor/Curse_Of_Strahd_Interview.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "kind": "official interview transcript",
+   "substantive": true
+  },
+  {
+   "title": "Ex D&D boss Chris Perkins tells us why Strahd is the RPG's most successful villain (Wargamer, 2026-03-19)",
+   "url": "https://www.wargamer.com/dnd/chris-perkins-strahd",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "kind": "interview transcript + forum",
+   "substantive": true
+  },
+  {
+   "title": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "kind": "interview report",
+   "substantive": true
+  },
+  {
+   "title": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "kind": "AL admin/designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "kind": "AL admin/designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Compiling Wolfgang Baur's AMA (EN World, 2015-06-03)",
+   "url": "https://www.enworld.org/threads/compiling-wolfgang-baurs-ama.663114/",
+   "kind": "compiled AMA (ex-Dungeon editor)",
+   "substantive": true
+  },
+  {
+   "title": "Adventure Builder: Writing Your First Adventure, Part 1 of 6 (Wolfgang Baur, Wizards.com, 2006-07-28)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060728a",
+   "kind": "WotC column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Adventure Builder: Setting the Hook, Part 2 of 6 (Wolfgang Baur, Wizards.com, 2006-08-11)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060811a",
+   "kind": "WotC column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Design & Development: How to Make a Monster Manual, Part 1 (David Noonan, 2007-07-27)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20070727a",
+   "kind": "WotC designer column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Baker's Field: Twenty-Eight Adventures (Part 1) (Richard Baker, 2015-03-09)",
+   "url": "http://richard-baker.blogspot.com/2015/03/twenty-eight-adventures-part-1.html",
+   "kind": "designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Freelancer Chronicles: The Coast Wizards and I, Some Lessons (Critical Hits, 2012-12-19)",
+   "url": "https://critical-hits.com/blog/2012/12/19/freelancer-chronicles-the-coast-wizards-and-i-some-lessons/",
+   "kind": "WotC freelancer blog",
+   "substantive": true
+  },
+  {
+   "title": "On Writing Adventures (Mike Shea, Sly Flourish, 2019-06-17)",
+   "url": "https://slyflourish.com/on_writing_adventures.html",
+   "kind": "compilation of designer advice incl. WotC Adventure Guide",
+   "substantive": true
+  },
+  {
+   "title": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
+   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
+   "kind": "interview (read via curl)",
+   "substantive": true
+  },
+  {
+   "title": "Author Interview: Ed Greenwood (Paizo Blog, 2013-06-20)",
+   "url": "https://paizo.com/blog/author-interview-ed-greenwood",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
+   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
+   "kind": "official rules document (designer's own words)",
+   "substantive": true
+  },
+  {
+   "title": "Updates in the Player's Handbook (2024) (D&D Beyond staff, 2024-09-03)",
+   "url": "https://www.dndbeyond.com/posts/1810-updates-in-the-players-handbook-2024",
+   "kind": "official article",
+   "substantive": true
+  },
+  {
+   "title": "What's New in the 2024 Player's Handbook? (Michael Galvis, D&D Beyond, 2024-09-17)",
+   "url": "https://www.dndbeyond.com/posts/1745-whats-new-in-the-2024-players-handbook",
+   "kind": "official article",
+   "substantive": true
+  },
+  {
+   "title": "Let's Design an Adventure: Thinking Like a Designer (Shawn Merwin, D&D Beyond, 2020-03-25)",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "kind": "official column (AL veteran designer)",
+   "substantive": true
+  },
+  {
+   "title": "Read aloud text in modules: What are folks opinions, page 10 (EN World, 2025)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-10",
+   "kind": "forum (posts by a Goodman Games designer)",
+   "substantive": true
+  },
+  {
+   "title": "D&D's Jeremy Crawford on the 2025 Monster Manual, The New Starter Set, and High Level Gameplay (CBR, 2025-02-05)",
+   "url": "https://www.cbr.com/jeremy-crawford-interview-dnd-5e-monster-manual-2025/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Grognardia: Interview: Mike Mearls (2025-08-27)",
+   "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Writing Adventures the Wolfgang Baur Way (Gnome Stew)",
+   "url": "https://gnomestew.com/writing-adventures-the-wolfgang-baur-way/",
+   "kind": "secondary summary of Baur's WotC column",
+   "substantive": false
+  },
+  {
+   "title": "Chris Perkins says too many rulebooks hurt tabletop RPGs (Popverse, PAX East 2026, 2026-06-02)",
+   "url": "https://www.thepopverse.com/gaming-chris-perkins-daggerheart-pax-east-2026-interview-adventures-fewer-books-critical-role",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Ray Winninger, Dungeoncraft #20: Your Game's Voice (Dragon 1997-99, darkshire.net mirror)",
+   "url": "https://www.darkshire.net/jhkim/rpg/dnd/dungeoncraft/dungeon_craft_20.html",
+   "kind": "designer column mirror",
+   "substantive": false
+  },
+  {
+   "title": "Ray Winninger's Dungeoncraft Essays (index)",
+   "url": "https://www.darkshire.net/jhkim/rpg/dnd/dungeoncraft/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Steve Winter tag (DM David)",
+   "url": "https://dmdavid.com/tag/tag/steve-winter/",
+   "kind": "blog tag page",
+   "substantive": false
+  },
+  {
+   "title": "Three Years of D&D 5e with Mike Mearls (Sly Flourish, 2017-12-18)",
+   "url": "https://slyflourish.com/three_years_with_5e_with_mearls.html",
+   "kind": "interview report",
+   "substantive": false
+  },
+  {
+   "title": "Six Questions: Wolfgang Baur (Keith Baker, 2013-01-11)",
+   "url": "https://keith-baker.com/six-questions-wolfgang-baur/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "AMA: Wolfgang Baur, page 1 (EN World, 2015-04-25)",
+   "url": "https://www.enworld.org/threads/ama-thurs-april-30-wolfgang-baur-kobold-press-tsr-dungeon-magazine-d-d-5e-tyranny-of-dragons-advanced-races-compendium.444980/",
+   "kind": "forum AMA",
+   "substantive": false
+  },
+  {
+   "title": "Jeremy Crawford Talks 2024 Player's Handbook In-Depth (Screen Rant, 2024-07-23)",
+   "url": "https://screenrant.com/jeremy-crawford-dnd-players-handbook-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Curse of Strahd Interview with Chris Perkins (CGMagazine, 2016-03-08)",
+   "url": "https://www.cgmagonline.com/interviews/curse-strahd-interview-chris-perkins/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Chris Perkins - Den of Geek Interview (Tribality, 2014-12-11)",
+   "url": "https://www.tribality.com/2014/12/11/chris-perkins-den-of-geek-interview/",
+   "kind": "interview summary",
+   "substantive": false
+  },
+  {
+   "title": "Perkins AMA Compiled; Haunted One Background Preview (EN World, 2016-02-26)",
+   "url": "https://www.enworld.org/threads/perkins-ama-compiled-haunted-one-background-preview.663636/",
+   "kind": "compiled AMA",
+   "substantive": false
+  },
+  {
+   "title": "This Week's Guest ... Jeremy Crawford (50 Years in the Dungeon, 2025)",
+   "url": "https://50yearsinthedungeon.substack.com/p/this-weeks-guest-jeremy-crawford",
+   "kind": "podcast announcement",
+   "substantive": false
+  },
+  {
+   "title": "Gen Con 2025 D&D Highlights and Interview with Designers Makenzie and Justice (Geek to Geek Media, 2025-08-20)",
+   "url": "https://geektogeekmedia.com/geekery/tabletop-gaming/gen-con-2025-dnd/",
+   "kind": "article",
+   "substantive": false
+  },
+  {
+   "title": "EN World Interview With Mike Mearls, Lead Designer of D&D Next (2012-05)",
+   "url": "https://www.enworld.org/threads/en-world-interview-with-mike-mearls-lead-designer-of-d-d-next.323442/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Mike Mearls Interview with the Escapist, page 2 (EN World, 2014-08-26)",
+   "url": "https://www.enworld.org/threads/mike-mearls-interview-with-the-escapist.358714/page-2",
+   "kind": "forum thread",
+   "substantive": false
+  },
+  {
+   "title": "TSR & WotC Veteran Steve Winter - Episode 284 (Shane Plays, 2025-07-28)",
+   "url": "https://shaneplays.com/steve-winter-rpg-designer-and-tsr-wotc-veteran/",
+   "kind": "podcast page",
+   "substantive": false
+  },
+  {
+   "title": "Adventure-Writing Tips from Dungeon (Gnome Stew, 2006-07-16)",
+   "url": "https://gnomestew.com/adventure-writing-tips-from-dungeon/",
+   "kind": "pointer post",
+   "substantive": false
+  },
+  {
+   "title": "Ed Greenwood Interview (SFFWorld, 2015-03-15)",
+   "url": "https://www.sffworld.com/2015/03/ed-greenwood-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Let's Design an Adventure: Encounter Basics (Shawn Merwin, D&D Beyond, 2019-12-04)",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "kind": "official column",
+   "substantive": false
+  },
+  {
+   "title": "Jeremy Crawford Talks The 2025 Monster Manual (Screen Rant, 2025-01-28)",
+   "url": "https://screenrant.com/dnd-jeremy-crawford-2025-monster-manual-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Five Takeaways From the 2025 Monster Manual (EN World, 2025-04-13)",
+   "url": "https://www.enworld.org/threads/five-takeaways-from-the-2025-monster-manual.710206/",
+   "kind": "article",
+   "substantive": false
+  },
+  {
+   "title": "1d12 questions with James Wyatt (NewbieDM, 2009-09-14)",
+   "url": "https://newbiedm.com/2009/09/14/1d12-questions-with-james-wyatt/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "The James Wyatt Interrogation, Part 1 (dungeonmastering.com)",
+   "url": "https://www.dungeonmastering.com/the-james-wyatt-interrogation-part-1/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Rules as Written (Monte Cook, RPG Design Theories substack, 2026-06-25)",
+   "url": "https://montecook.substack.com/p/rules-as-written",
+   "kind": "designer essay",
+   "substantive": false
+  },
+  {
+   "title": "D&D's Chris Perkins Talks About His Stories, Legacy and Anxiety (Forbes, 2017-05-30)",
+   "url": "https://www.forbes.com/sites/toddkenreck/2017/05/30/dds-chris-perkins-talks-about-his-stories-legacy-and-anxiety/",
+   "kind": "video interview page (read via Wayback; text is one paragraph)",
+   "substantive": false
+  }
+ ]
+}

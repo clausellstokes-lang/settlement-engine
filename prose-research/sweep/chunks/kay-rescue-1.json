@@ -1,0 +1,108 @@
+{
+ "name": "kay",
+ "chunk": "rescue-1",
+ "indices": [
+  626,
+  633,
+  634,
+  635,
+  636,
+  637,
+  638,
+  639,
+  641,
+  645
+ ],
+ "claims": [
+  {
+   "index": 626,
+   "feature": "omission as information",
+   "claim": "Kay says Sailing to Sarantium ends with things left just offstage that the reader knows will happen.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "There are other things, just offstage, that the reader knows will",
+   "page": "answer on the splitting of the diptych"
+  },
+  {
+   "index": 633,
+   "feature": "civic record register",
+   "claim": "The Dictionary of Imaginary Places entry glosses Fionavar as a land of undetermined location.",
+   "source": "Alberto Manguel and Gianni Guadalupi, The Dictionary of Imaginary Places, entry on Fionavar, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "a land of undetermined location",
+   "page": "first line of the entry"
+  },
+  {
+   "index": 634,
+   "feature": "civic record register",
+   "claim": "The entry attributes a built work to a named maker and a named reign inside a parenthesis.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, entry on Fionavar, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "(designed by the gifted T’Varen in the reign of Thallason)",
+   "page": "paragraph on Cathal and Larai Rigal"
+  },
+  {
+   "index": 635,
+   "feature": "civic record register",
+   "claim": "The entry states access to a sacred site as an administrative fact rather than a scene.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "Access to the Godwood and the tree is strictly controlled",
+   "page": "paragraph on the Mornirwood"
+  },
+  {
+   "index": 636,
+   "feature": "annalist voice and deep time",
+   "claim": "The entry declares the region's prehistory hazy rather than narrating it.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "Fionavar’s prehistory is hazy.",
+   "page": "paragraph beginning 'Fionavar’s prehistory'"
+  },
+  {
+   "index": 637,
+   "feature": "annalist voice and deep time",
+   "claim": "The entry records an unresolved dispute about which race came first instead of settling it.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "it is a matter of some dispute which race came first",
+   "page": "paragraph beginning 'Fionavar’s prehistory'"
+  },
+  {
+   "index": 638,
+   "feature": "omission as information",
+   "claim": "The entry notes that the only two visitors to a place have given no account of what they saw.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "neither has offered an account of what they saw there",
+   "page": "paragraph on the Dwarves and Calor Diman"
+  },
+  {
+   "index": 639,
+   "feature": "civic record register",
+   "claim": "The entry hedges a change in conditions as an unconfirmed report and advises accordingly.",
+   "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+   "url": "https://brightweavings.com/dictionary/",
+   "quote": "There have been reports of a lessening of this sentient forest’s",
+   "page": "paragraph on Pendaran Wood"
+  },
+  {
+   "index": 641,
+   "feature": "civic record register",
+   "claim": "The passage Capossere quotes states the Rector's Council's membership in the present tense as of that morning.",
+   "source": "Guy Gavriel Kay, Children of Earth and Sky, quoted by Bill Capossere for Fantasy Literature, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-bill-capossere-for-fantasy-literature/",
+   "quote": "There are sixty-five members of the Rector’s Council as of this",
+   "page": "block quotation following 'we shift immediately into a wholly different voice'"
+  },
+  {
+   "index": 645,
+   "feature": "civic record register",
+   "claim": "Capossere writes that the passage runs for several pages using passive voice to report civic facts such as the Rector's Palace being rebuilt twice.",
+   "source": "Bill Capossere, Fantasy Literature, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-bill-capossere-for-fantasy-literature/",
+   "quote": "often employing passive voice, as we’re informed that the Rector’s Palace",
+   "page": "paragraph following the block quotation"
+  }
+ ]
+}

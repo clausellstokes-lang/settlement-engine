@@ -1,0 +1,53 @@
+{
+  "name": "leguin",
+  "chunk": 6,
+  "claims": [
+    {
+      "index": 917,
+      "feature": "place and institution description",
+      "claim": "Le Guin says small-town novels are intensely grounded and rich in satire, humour and character.",
+      "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+      "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+      "quote": "small-town novels are intensely grounded",
+      "page": "essay body, paragraph on small-town novels"
+    },
+    {
+      "index": 918,
+      "feature": "point of view and distance",
+      "claim": "Le Guin says of the annalist narrator that he will not and cannot mislead the reader, and that he is transparent.",
+      "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+      "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+      "quote": "He will not, he cannot, mislead you. He is transparent.",
+      "page": "essay body, paragraph on Mr. Balwhidder"
+    },
+    {
+      "index": 921,
+      "feature": "plainness and economy",
+      "claim": "Kim Stanley Robinson says Le Guin's language is clear and clean.",
+      "source": "Kim Stanley Robinson, contribution on The Left Hand of Darkness to \"The stars of modern SF pick the best science fiction\", The Guardian, 14 May 2011",
+      "url": "https://www.theguardian.com/books/2011/may/14/science-fiction-authors-choice",
+      "quote": "Le Guin's language is clear and clean",
+      "page": "Kim Stanley Robinson's contribution"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 917,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "small-town novels are intensely grounded; rich in satire, humor, and character",
+      "note": "Raw HTML fetched live (HTTP 200, 101,122 bytes, browser UA) and stripped to text; full essay body present, not a summarizer or snippet. The quoted fragment appears word for word in the paragraph that runs from Gaskell's Cranford through the list of fictional towns (Casterbridge, Lark Rise, Dunnet Landing, Gopher Prairie, Holt). Both limbs of the claim are on the page: 'intensely grounded' and the satire/humor/character series, which the page extends with 'human affectations and affections'. Byline 'Ursula K. Le Guin' and dateline '1.23.2017' confirmed on the page, matching the cited 23 January 2017. Le Guin writes this in her own voice about small-town novels as a class, so the attribution limb holds. Only difference from the claim is the American spelling 'humor'."
+    },
+    {
+      "index": 918,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "He will not, he cannot, mislead you. He is transparent.",
+      "note": "Same live raw fetch of the Public Books essay. The two sentences appear word for word, punctuation included, in the paragraph beginning 'Mr. Balwhidder is a very old-fashioned narrator, and therefore reliable.' The 'annalist narrator' limb is supported: the page identifies Mr. Balwhidder as the minister keeping the annual records of the parish of Dalmailing year by year for 50 years, 1760-1810, and calls him a narrator in the same sentence. The 'transparent' limb is the page's own word. Whole quoted string is ten words, within the twelve-word cap."
+    },
+    {
+      "index": 921,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "Le Guin's language is clear and clean",
+      "note": "Raw HTML fetched live from theguardian.com (HTTP 200, 498,026 bytes, browser UA) and stripped to text; the article body is in the fetched HTML, no paywall or summarizer involved. The quoted fragment appears verbatim, with a straight apostrophe (byte-checked via od), inside the section headed 'Kim Stanley Robinson / The Left Hand of Darkness by Ursula K Le Guin (1969)', so the attribution limb is on the page. The page continues that the language holds both her father Alfred Kroeber's anthropological mindset and her mother Theodora Kroeber's poetry of stories. Article title 'The stars of modern SF pick the best science fiction' and datePublished 2011-05-13T23:06:01Z (14 May 2011 BST) both confirmed in the page metadata, matching the citation."
+    }
+  ]
+}

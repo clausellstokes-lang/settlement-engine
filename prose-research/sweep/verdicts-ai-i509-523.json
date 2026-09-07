@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 509,
+   "feature": "style cues are not what readers use",
+   "claim": "Topic control codes did not change detectability, so readers' cues were not stylistic.",
+   "source": "Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch \u2014 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023)",
+   "url": "https://arxiv.org/abs/2212.12672",
+   "quote": "may not be related to stylistic details",
+   "page": ""
+  },
+  {
+   "index": 510,
+   "feature": "decoding tuned to fool humans, not to write well",
+   "claim": "Truncated sampling optimises for fooling readers while introducing statistical anomalies machines catch.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "improvements in decoding methods have primarily optimized for fooling humans",
+   "page": ""
+  },
+  {
+   "index": 511,
+   "feature": "humans catch semantic errors, machines catch statistics",
+   "claim": "Humans notice contradictions and nonsense; discriminators notice unigram-distribution artefacts.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "humans more easily noticing semantic errors",
+   "page": ""
+  },
+  {
+   "index": 512,
+   "feature": "no dips into low-probability language",
+   "claim": "Human writing dips in and out of low-probability zones; generation cannot mimic that cadence without bad word choices.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "dips in and out of low probability zones",
+   "page": ""
+  },
+  {
+   "index": 513,
+   "feature": "fluency masks emptiness",
+   "claim": "Fluent generated excerpts fooled raters who could otherwise catch topic drift and falsehoods.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "the high level of fluency left human raters fooled",
+   "page": ""
+  },
+  {
+   "index": 514,
+   "feature": "even trained readers fail a quarter of the time",
+   "claim": "Trained raters reached only 71.4% on 192-token excerpts; untrained AMT raters hovered near chance.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "human performance is only at 71.4%",
+   "page": ""
+  },
+  {
+   "index": 515,
+   "feature": "top-k narrows vocabulary yet reads most human",
+   "claim": "Top-k text is hardest for raters and easiest for classifiers because it over-samples common tokens.",
+   "source": "Ippolito, Duckworth, Callison-Burch, Eck \u2014 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "quote": "Top-k produces the text that is hardest for raters",
+   "page": ""
+  },
+  {
+   "index": 516,
+   "feature": "form without meaning",
+   "claim": "A system trained only on linguistic form has no route to meaning or communicative intent.",
+   "source": "Bender, Koller \u2014 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "quote": "has a priori no way to learn meaning",
+   "page": ""
+  },
+  {
+   "index": 517,
+   "feature": "the reader supplies the meaning",
+   "claim": "Octopus text seems meaningful only because the human reader does all the work of attributing meaning.",
+   "source": "Bender, Koller \u2014 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "quote": "A does all the work in attributing meaning",
+   "page": ""
+  },
+  {
+   "index": 518,
+   "feature": "social chat succeeds, grounded novelty fails",
+   "claim": "Internally coherent text suffices for phatic exchange but breaks at the coconut catapult and the bear.",
+   "source": "Bender, Koller \u2014 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "quote": "It is sufficient to produce text that is internally coherent",
+   "page": ""
+  },
+  {
+   "index": 519,
+   "feature": "co-occurrence instead of help",
+   "claim": "GPT-2 knows which words go with bears and sticks, and none of its completions would help.",
+   "source": "Bender, Koller \u2014 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "quote": "none of these completions would be helpful to A",
+   "page": ""
+  },
+  {
+   "index": 520,
+   "feature": "apparent reasoning is artefact leverage",
+   "claim": "BERT's 'reasoning' successes collapse under adversarial data, a mirage built on dataset artefacts.",
+   "source": "Bender, Koller \u2014 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "quote": "a mirage built on leveraging artifacts in the training data",
+   "page": ""
+  },
+  {
+   "index": 521,
+   "feature": "stochastic parrot",
+   "claim": "An LM haphazardly stitches together observed forms by probability, with no reference to meaning.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell \u2014 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "haphazardly stitching together sequences of linguistic forms",
+   "page": ""
+  },
+  {
+   "index": 522,
+   "feature": "no communicative intent or reader model",
+   "claim": "Generated text is grounded in no intent, no world model and no model of the reader's mind.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell \u2014 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "not grounded in communicative intent",
+   "page": ""
+  },
+  {
+   "index": 523,
+   "feature": "coherence lives in the reader",
+   "claim": "Seeming coherence is in the eye of the beholder, who imputes meaning where there is none.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell \u2014 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "coherence is in fact in the eye of the beholder",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 509,
+   "verdict": "PARTIAL",
+   "trueWording": "cues \"may not be related to stylistic details, at least not within ... political speeches\"",
+   "note": "Quote verbatim in arXiv PDF (\u00a75, Do control codes affect detectability?); the control-code result is also verbatim: \"use of the politics control code did not significantly affect players' ability to distinguish real ... from fake text\". Both limbs are on the page, but the paper states the inference as a hedged, genre-bounded suggestion and explicitly disclaims the strong reading (\"This is not to say that control codes do not affect generation ... Further work is needed\"). Raw PDF read (arxiv.org/pdf/2212.12672, 6pp, pdfminer).",
+   "unsupportedLimb": "the unhedged, unrestricted second limb \"readers' cues were not stylistic\" \u2014 the page says only \"may not be related to stylistic details, at least not within the genre of political speeches\""
+  },
+  {
+   "index": 510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "improvements in decoding methods have primarily optimized for fooling humans",
+   "note": "Abstract, verbatim, followed immediately by \"This comes at the expense of introducing statistical abnormalities that make detection easy for automatic systems.\" The \"improvements\" benchmarked are the truncation strategies (top-k, nucleus) against untruncated random sampling, so the \"truncated sampling\" limb is the paper's own framing. Raw PDF read (aclanthology.org/2020.acl-main.164.pdf, 15pp)."
+  },
+  {
+   "index": 511,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "humans more easily noticing semantic errors and discriminators picking up on statistical artifacts",
+   "note": "Quote verbatim (\u00a71 Introduction). \"Contradictions and nonsense\" limb supported: \"choosing one of these words can lead to odd or contradictory phrases and semantic errors. Humans are quick to notice these types of errors.\" \"Unigram-distribution\" limb supported by the abstract (\"when a decoding strategy severely modifies the unigram token distribution, as top-k does\") and \u00a77 (\"[the distribu]tion over unigrams strongly diverges from human-written texts\u2013an easy feature for discriminators to exploit\")."
+  },
+  {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human language ... dips in and out of low probability zones",
+   "note": "Quote verbatim. Second limb verbatim too: \"Today's generation systems have not yet solved the problem of mimicking the human cadence without introducing poor word choices that are easy for humans to detect.\" Note for citation hygiene: on the page the low-probability-zone observation is credited to Holtzman et al. (2020), restated by Ippolito et al.; the claim does not assert originality, so this does not reduce the grade."
+  },
+  {
+   "index": 513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the high level of fluency left human raters fooled",
+   "note": "Quote verbatim (\u00a78, discussion of Table 4). The \"otherwise catch topic drift and falsehoods\" limb is the immediately preceding sentence: \"In the middle two examples, topic drift and falsehoods such as Atlanta being the 'information hub of the nation's capital' allowed humans to correctly detect the generated content.\""
+  },
+  {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human performance is only at 71.4%; AMT accuracy \"hovered around 50%\"",
+   "note": "Quote verbatim: \"Even with the multi-paragraph 192-length excerpts, human performance is only at 71.4%, indicating that even trained humans struggle...\" \u2014 the raters reported there are the trained \"expert raters\" (university students walked through ten examples). Untrained limb verbatim: \"Initially, Amazon Mechanical Turk (AMT) raters were employed ... but rater accuracy was poor ... Accuracy, even for the longest sequences, hovered around 50%\" (chance, since \"Passages are equally likely to be human-written or machine-generated\")."
+  },
+  {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Top-k produces the text that is hardest for raters to correctly distinguish",
+   "note": "Quote verbatim, and the same sentence carries the second limb: \"but as shown in Section 7, it is the easiest for our automatic detection systems.\" Causal limb supported by the abstract (\"when a decoding strategy severely modifies the unigram token distribution, as top-k does\") and \u00a71 (\"any strategy that oversamples high-likelihood words is susceptible\"; See et al. on rare-word usage requiring k=1000)."
+  },
+  {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a system trained only on form has a priori no way to learn meaning",
+   "note": "Quote verbatim in the abstract (and restated \u00a72: \"a system exposed only to form in its training cannot in principle learn meaning\"). The \"or communicative intent\" limb is supported by the paper's own definition: \"We take (linguistic) meaning to be the relation between a linguistic form and communicative intent\" (\u00a71, \u00a73.1). Raw PDF read (aclanthology.org/2020.acl-main.463.pdf, 14pp)."
+  },
+  {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only because A does all the work in attributing meaning to O's response",
+   "note": "Quote verbatim in the octopus test (\u00a74): \"It is absolutely conceivable that A accepts this reply as meaningful \u2014 but only because A does all the work in attributing meaning to O's response. It is not because O understood the meaning of A's instructions or even his own reply.\" O is the octopus, A the human reader."
+  },
+  {
+   "index": 518,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is sufficient to produce text that is internally coherent",
+   "note": "Quote verbatim. Phatic limb on the page: \"the utterances in such conversations have a primarily social function, and do not need to be grounded in the particulars of the interlocutors' actual physical situation.\" Breakage limb on the page: the coconut catapult (\"he does not know what words such as rope and coconut refer to\") and the bear (\"O has no idea what A 'means' ... it is at this point that O would fail the Turing test\")."
+  },
+  {
+   "index": 519,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-2 has learned what activity words tend to co-occur with bears and sticks, but none of these completions would be helpful to A",
+   "note": "Both limbs are one sentence on the page, quote verbatim, in the GPT-2 bear-and-sticks probe (\u00a76.1/Figure). Followed by \"We think this is because GPT-2 does not know the meaning of the prompt and the generated sentences, and thus cannot ground them in reality.\""
+  },
+  {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sometimes a mirage built on leveraging artifacts in the training data",
+   "note": "Quote verbatim (\u00a72, BERTology overview). Adversarial-data limb verbatim in the preceding sentences: McCoy et al.'s syntactic-heuristic finding \u2014 \"In a dataset carefully designed to frustrate such heuristics, BERT's performance falls to significantly below chance.\" One hedge is dropped by the claim: the page says apparent reasoning is \"sometimes a mirage\", not always."
+  },
+  {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "haphazardly stitching together sequences of linguistic forms ... without any reference to meaning: a stochastic parrot",
+   "note": "Quote verbatim (\u00a76.1, end). Every limb is in the same sentence: \"observed in its vast training data\", \"according to probabilistic information about how they combine\", \"but without any reference to meaning\". ACM DL is Cloudflare-403 on a browser UA; reached the publisher PDF by mirror, and confirmed it is byte-identical to the Wayback raw capture of dl.acm.org/doi/pdf/10.1145/3442188.3445922 (sha256 e283b37a14e894c105ca26003d8cf5447535e8a73423cd7f1001d7b46af6c1d6, 304,472 bytes, both files)."
+  },
+  {
+   "index": 522,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Text generated by an LM is not grounded in communicative intent, any model of the world, or any model of the reader's state of mind",
+   "note": "All three limbs are one sentence on the page (\u00a76.1), quote verbatim; followed by \"It can't have been, because the training data never included sharing thoughts with a listener.\" Same publisher PDF verified against the Wayback capture by sha256."
+  },
+  {
+   "index": 523,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "coherence is in fact in the eye of the beholder; interlocutors \"impute meaning where there is none\"",
+   "note": "Quote verbatim (\u00a76.1, \"We say seemingly coherent because coherence is in fact in the eye of the beholder\"; section heading \"Coherence in the Eye of the Beholder\"). Second limb verbatim elsewhere in the paper: \"the tendency of human interlocutors to impute meaning where there is none can mislead both NLP researchers and the general public into taking synthetic text as meaningful.\""
+  }
+ ]
+}

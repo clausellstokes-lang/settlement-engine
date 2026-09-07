@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 409,
+   "feature": "naming and forms of address",
+   "claim": "James Maliszewski praises the names of Hommlet's inhabitants as Gygax at his best and lists five of them.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "quote": "are Gygax at his mellifluent best",
+   "page": "Retrospective: The Village of Hommlet"
+  },
+  {
+   "index": 410,
+   "feature": "proverbs and sayings",
+   "claim": "Maliszewski singles out the holy sayings of St Cuthbert printed in The Village of Hommlet and quotes three of them in capitals as they appear in the module.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "quote": "his holy sayings presented in the module",
+   "page": "Retrospective: The Village of Hommlet"
+  },
+  {
+   "index": 411,
+   "feature": "withheld information and inference",
+   "claim": "Jim Nelson reads Hommlet's villager entries as an iceberg: their ambitions, suspicions and secrets enrich the setting although the players will probably never meet them.",
+   "source": "Jim Nelson, novelist, 'A different kind of naturalism'",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "make the setting richer even if little of it is presented",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 412,
+   "feature": "concrete sensory noun",
+   "claim": "Nelson cites a Hommlet household entry's exact hidden sum as the kind of specific detail that implies a story behind it.",
+   "source": "Jim Nelson, 'A different kind of naturalism'",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "stashed seventy-three silver coins in the hollow of a tree",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 413,
+   "feature": "place and institution description",
+   "claim": "Nelson quotes a reviewer's line that Hommlet is a place whose history shapes its layout, mood and inhabitants.",
+   "source": "Jim Nelson quoting an unnamed reviewer",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "is a place with history and its history shapes and affects",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 414,
+   "feature": "point of view and distance",
+   "claim": "Shawn Merwin's first rule for boxed text is to move from second person to third, and he supplies the same clearing in both, the third-person version making the corpse the subject.",
+   "source": "Shawn Merwin, Critical Hits",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "The bloated corpse of a headless dragon dominates the center",
+   "page": "Tip 1"
+  },
+  {
+   "index": 415,
+   "feature": "adjective and adverb discipline",
+   "claim": "Merwin's rule of thumb as a writer and editor is to keep only the environmental details the characters will have to interact with.",
+   "source": "Shawn Merwin, Critical Hits",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "leave in only the details about the environment",
+   "page": "Tip 2a"
+  },
+  {
+   "index": 416,
+   "feature": "sentence length variation",
+   "claim": "Merwin's own model opening boxed text, printed in the article, is four sentences and under a hundred words, and he then explains what each of the four sentences does.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Four sentences, and less than 100 words.",
+   "page": "A Boxed-Text Opening"
+  },
+  {
+   "index": 417,
+   "feature": "other: hedging verbs",
+   "claim": "Merwin tells adventure writers to avoid 'seems to be' and 'appears to be' in read-aloud text because for the characters perception is reality and the hedge invites metagaming.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "For the characters, perception is reality.",
+   "page": "Tip 4"
+  },
+  {
+   "index": 418,
+   "feature": "cadence and rhythm",
+   "claim": "Merwin makes reading boxed text aloud a required check, naming tongue-twisters and unintended alliteration as faults invisible on the page.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "funny-sounding phrases, unintended alliteration",
+   "page": "Tip 5"
+  },
+  {
+   "index": 419,
+   "feature": "terminology consistency",
+   "claim": "Merwin tells writers not to use game-mechanical words such as stunned or frightened in their ordinary sense inside read-aloud text.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Avoid game mechanical terms used in a non-mechanical way",
+   "page": "Tip 6"
+  },
+  {
+   "index": 420,
+   "feature": "other: craft difficulty",
+   "claim": "Merwin says writing good boxed text needs the precision of fiction or poetry while also doing the work of technical writing.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "the same precision that one might use for fiction or poetry",
+   "page": "opening"
+  },
+  {
+   "index": 421,
+   "feature": "plainness and economy",
+   "claim": "David Hartlage reads the 1989 Gamescience expansion of a Tegel Manor bedroom key as one good middle sentence padded out to length.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "pads it like a school paper stretched to an assigned length",
+   "page": "Longer descriptions"
+  },
+  {
+   "index": 422,
+   "feature": "other: format-induced padding",
+   "claim": "Hartlage attributes the padding to the format itself: the custom of long descriptions makes authors write even where they have nothing to add.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "encourages authors to write something even when they have little to add",
+   "page": "Longer descriptions"
+  },
+  {
+   "index": 423,
+   "feature": "place and institution description",
+   "claim": "Hartlage argues a location's description should be sized to its purpose in play, instancing a sheriff met about a wanted poster whose kitchen needs no inventory.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "no one needs an item-by-item inventory of her kitchen",
+   "page": "Matching description to a location's purpose"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 409,
+   "verdict": "PARTIAL",
+   "trueWording": "\"are Gygax at his mellifluent best: Jaroo Ashstaff, Calmert, Fernok of Ferd, Ostler Gundigoot, and more.\"",
+   "note": "Quote verbatim in the post: 'The inhabitants of the village, from their names to their personalities, are Gygax at his mellifluent best: Jaroo Ashstaff, Calmert, Fernok of Ferd, Ostler Gundigoot, and more.' Confirmed against the raw HTML (grognardia.blogspot.com, 1 Oct 2008): exactly FOUR names are listed before 'and more', not five. The praise limb (names, as Gygax at his best) is supported; the count limb is not.",
+   "unsupportedLimb": "\"lists five of them\" — the post names only four inhabitants"
+  },
+  {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"his holy sayings presented in the module, such as:\" then three capitalised sayings",
+   "note": "Raw page carries the quote word for word and then a blockquote of exactly three all-caps sayings: SQUARE CORNERS CAN BE POUNDED SMOOTH / THICK HEADS ARE NOT MADE OF GLASS / SALVATION IS BETTER THAN SMART ANSWERS. Capitalisation confirmed in the raw HTML blockquote. Every limb supported."
+  },
+  {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Like Hemingway's iceberg... make the setting richer even if little of it is presented in-game.\"",
+   "note": "j-nelson.net raw page: 'They have ambitions, suspicions, and secrets.' and 'it's possible, even likely, none of these inhabitants or their situations will be faced by the players. Like Hemingway's iceberg, Gygax's inclusion of these details make the setting richer even if little of it is presented in-game.' Quote verbatim; iceberg, the three nouns, and the never-met limb all supported."
+  },
+  {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They've stashed seventy-three silver coins in the hollow of a tree—there could be a story\"",
+   "note": "Raw page, of the widower farmer and his spinster daughter: 'They've stashed seventy-three silver coins in the hollow of a tree—there could be a story within all these details, a story within the larger story.' Quote appears word for word; exact hidden sum and the implied-story limb both supported."
+  },
+  {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One reviewer notes Hommlet \"is a place with history and its history shapes and affects its layout, mood and inhabitants.\"",
+   "note": "Raw page attributes it to an unnamed 'One reviewer' and the quoted words run on '...its layout, mood and inhabitants.' Quote verbatim; the reviewer limb and the three-noun limb both supported."
+  },
+  {
+   "index": 414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tip 1: second person → third; \"The bloated corpse of a headless dragon dominates the center of this small clearing\"",
+   "note": "critical-hits.com (27 Aug 2010) Tip 1 heading: 'Move from the second-person point of view to the third person.' Same clearing given both ways: second person 'As you enter the clearing, you notice the bloated corpse of a headless dragon'; third person 'The bloated corpse of a headless dragon dominates the center of this small clearing.' Quote verbatim; the corpse is the grammatical subject of the third-person version."
+  },
+  {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"My rule of thumb when writing or editing is to leave in only the details about the environment\"",
+   "note": "critical-hits.com Tip 2a: '...to leave in only the details about the environment that the PCs need to know about because they will have to interact with them.' Quote verbatim; writer-and-editor limb ('when writing or editing') and the interaction limb both supported. (The later D&D Beyond rewrite reads 'when the PCs must interact with them on some level'; the quote as given matches the Critical Hits original cited.)"
+  },
+  {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Four sentences, and less than 100 words.\" then a first/second/third/fourth breakdown",
+   "note": "dndbeyond.com/posts/625 section 'A Boxed-Text Opening' prints Merwin's own carrion-crow boxed text (four sentences, ~95 words), then: 'Four sentences, and less than 100 words. The first sentence... The second... The third... The fourth...'. Quote verbatim; every limb supported."
+  },
+  {
+   "index": 417,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tip 4 \"Avoid 'seems to be' or 'appears to be.' For the characters, perception is reality.\"",
+   "note": "dndbeyond.com Tip 4 heading is exactly 'Avoid “seems to be” or “appears to be.”' and the body opens 'For the characters, perception is reality.' and adds 'nothing triggers meta-gaming like the words “seems” or “appears” in boxed text.' Quote verbatim; the metagaming limb supported."
+  },
+  {
+   "index": 418,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"tongue-twisters, funny-sounding phrases, unintended alliteration... hard to spot on the page\"",
+   "note": "dndbeyond.com Tip 5: 'Read your boxed text aloud to check readability... it is required for boxed text. Trouble areas like tongue-twisters, funny-sounding phrases, unintended alliteration, and other pitfalls are hard to spot on the page but easy to hear when spoken.' Quote verbatim (hyphenated 'funny-sounding' matches the D&D Beyond text; the 2010 Critical Hits original reads 'funny sounding'). 'Required check' and 'invisible on the page' limbs supported."
+  },
+  {
+   "index": 419,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tip 6 \"Avoid game mechanical terms used in a non-mechanical way\"; list includes stunned, frightened",
+   "note": "dndbeyond.com Tip 6 heading verbatim; body: 'Terms like reaction, action, incapacitated, stunned, frightened, magical, and many others have specific meanings in the game. Using their normal connotations in proximity to mechanical bits can lead to confusion. Avoid them whenever possible.' The tip sits in the article's list of tips for boxed (read-aloud) text; every limb supported."
+  },
+  {
+   "index": 420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It requires the same precision that one might use for fiction or poetry... much like technical writing.\"",
+   "note": "dndbeyond.com opening: 'Writing good boxed text is difficult. It requires the same precision that one might use for fiction or poetry, while also trying to perform the mechanical task of dealing with game elements, much like technical writing.' Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"takes a good, middle sentence and pads it like a school paper stretched to an assigned length\"",
+   "note": "dmdavid.com: 'When Gamescience updated Tegel in 1989, they expanded the descriptions', then the B9 BEDROOM (taxidermist's bedroom) key, then 'This description takes a good, middle sentence and pads it like a school paper stretched to an assigned length.' Quote verbatim; 1989, Gamescience, Tegel Manor bedroom key and the one-good-sentence limb all supported."
+  },
+  {
+   "index": 422,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The custom of longer description encourages authors to write something even when they have little to add.\"",
+   "note": "dmdavid.com, same paragraph: '...encourages authors to write something even when they have little to add. The format makes authors feel obligated to describe the shelves and pegs in an empty closet.' Quote verbatim; the format-blaming limb is supported by the next sentence. Minor paraphrase drift: the page says 'little to add', the claim says 'nothing to add' — the empty-closet sentence carries the stronger sense, so not scored down."
+  },
+  {
+   "index": 423,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If the player characters meet the sheriff about a wanted poster, no one needs an item-by-item inventory of her kitchen.\"",
+   "note": "dmdavid.com section 'Matching description to a location's purpose': 'A location's purpose in the game should also figure into the length of its descriptions. If the player characters meet the sheriff about a wanted poster, no one needs an item-by-item inventory of her kitchen.' Quote verbatim; both limbs supported."
+  }
+ ]
+}

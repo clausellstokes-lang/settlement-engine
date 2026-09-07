@@ -1,0 +1,126 @@
+Design & Development: Undercover at Gen Con, Part 1 
+ Design & Development 09/16/2005 
+ Undercover at Gen Con, Part 1 By Jesse Decker and David Noonan 
+ We're hoping this column becomes your window into roleplaying design and development -- or at least the way we approach these things here at Wizards of the Coast. We'll handle a wide range of topics in weeks to come, from frank discussions about over- or underpowered material, to the design goals of a certain supplement, to what we think are the next big ideas for the Dungeons & Dragons game. All of this comes bundled with a healthy look at the people and events that are roleplaying R&D. 
+ This week, we continue with the design side of things. 
+ The guy in the Van Halen T-Shirt? That was me. 
+ A few weeks ago, about two-thirds of Wizards of the Coast's RPG R&D went to Indianapolis for Gen Con 2005. Our scheduled time was pretty busy: Run the D&D Delve in the Wizards booth, answer D&D questions, run seminars, judge RPGA events. Before we start, I should be absolutely clear: It’s a magical fairy-tale existence, full of pixie dust and moonbeams, whenever I get to talk about D&D and call it “work.” Gen Con is pure fun – scheduled, mandatory fun – but fun nonetheless. 
+ Tangent Alert!: The answers to those questions are, respectively: 
+ The touch attack to start a grapple counts as a melee attack and triggers the confusion . 
+ When the Monster Manual text says, “the tarrasque can be slain only by raising its nonlethal damage total to its full normal hit points +10,” you should pay attention to the “only” part of the sentence. Besides, no DM is going to let you kill a tarrasque with a few walls of force and a raise water spell. 
+ Any of the purple-shirted people can get you a giveaway card and seat you for your first demo game. 
+ Our retail area is on the other side of this silver wall behind me. 
+ It’s also humbling. For every question about what constitutes an attack for cloak of chaos interactions or whether a tarrasque is subject to the drowning rules, I got ten questions about how to get a demo card or where the retail store is. 
+ The scheduled part of the Gen Con experience is pure fun. But it’s not the whole enchilada. After all, they call our department Research & Development for a reason. When you’re playing D&D at Gen Con, I’m watching you. I don’t have a lab coat and clipboard, but I’m taking notes throughout the four days of the convention. It’s a bit like being a naturalist; I’m observing D&D gamers in their natural habitat, hoping to see trends and behaviors that give me some insight into D&D gamers’ minds. 
+ Here’s the Plan: We’re Going Undercover! 
+ So every day at Gen Con, I ditched my standard-issue Wizards polo shirt for a few hours, put on some random black T-shirt, and just hung around where people were playing D&D . I had a few specific things I wanted to look for, so I’d watch a game for about twenty minutes before moving on. Every few sessions, I’d jot down what I'd observed. 
+ It’s worth mentioning at this point that this kind of “research” is pretty qualitative, which is science-speak for “quite possibly bogus.” The “Dave wanders around” technique is no way to get a representative sample, and in any case Gen Con attendees don’t necessarily match up perfectly with the typical D&D player. But in our cottage industry, you get the resources you create yourself, and I figure it’s better than the alternative: going back to the hotel room and sleeping. 
+ Undercover Insight #1: Boxed Text = MEGO MEGO is an acronym for “my eyes glazed over.” Based on some suspicions I had from my own weekly D&D game, I wanted to look at the boxed read-aloud text in adventures. Specifically, I wanted to see to what degree players were paying attention to the DM when the DM started reading the boxed text. My hypothesis was that boxed text longer than a paragraph probably isn’t worth reading, because players tend to have pretty bad listening comprehension when it comes to boxed text. Their eyes glaze over pretty quickly. 
+ What I actually saw was much more dramatic than my hypothesis. If you’re the DM, you get two sentences. Period. Beyond that, your players are stacking dice, talking to each other, or staring off into space. Time after time, players were missing the actual data in the boxed text – basic stuff, like room dimensions, how many doors exit the room, and number of monsters. Among the questions I heard from players who’d supposedly been paying attention: 
+ “How come the floor is slippery?” 
+ “What color is the dragon again?” 
+ “There’s a big lever on the wall?” 
+ “Wait, the lady in the room is a corpse?” 
+ “Who’s Karthos? Is that the guy we’re fighting?” 
+ Over the course of four days, I saw otherwise smart players get stymied because they missed a salient fact within boxed text. I saw otherwise engaging DMs read through boxed text, then get frustrated because they wound up repeating and paraphrasing all the information in it anyway – often in the middle of the action. 
+ As I watched this happen again and again, I started to develop a working theory for why listening comprehension takes a dive when the boxed text comes out. At its heart, a D&D game is a conversation. Look at a typical action: You tell the DM what you want to do, and the DM replies with the consequences of the action. You tell the DM what your attack roll result is, the DM replies with description of the hit, you reply with the amount of damage, and the DM finishes the conversation with a suitably gory description. 
+ Tangent Alert!: This isn’t a revelation that comes totally out of the blue. Boxed text in adventures used to be a lot longer than it is today. Here’s the second room in Sons of Gruumsh , a recent Forgotten Realms adventure: 
+ Two great, 15-foot-high oak doors loom before you. Reinforced with bands of black iron, they defy anyone eager to sunder them. Carved into their dark surface is an enormous and angry All-Seeing Eye. 
+ That’s pretty short. Contrast it with the first room in 1999’s Return to the Keep on the Borderlands , pulled at random from my shelf: 
+ This cave mouth is five and a half feet high and three feet wide – room for just one person at a time to pass (tall characters will need to duck!). Inside you see only darkness, however, the passage quickly doubles in height and breadth, allowing you to stand up and march two abreast if you want. Only some twenty feet from the entrance the passage comes to a “T.” The way ahead is blocked, but new passages head off to the right and left. Diagonally to your right can see what looks like a small alcove that seems to serve as a guard station. A small humanoid creature with scaly skin and a pronounced muzzle is seated there in a crude chain, a spear gripped tightly in one hand, staring balefully in your direction. 
+ Boxed text replaces that conversation with oration. Now the DM is doing the talking, and the players are doing the listening (or, more accurately, they’re doing the half-listening). DMs who don’t have – or aren’t using – boxed text are delivering the same information, but they’re doing it in a style the players are used to. Those DMs are responding to player questions, describing the room as they draw it on the grid around the PCs' minis, and otherwise giving the players an active role in the description. 
+ There are two other factors at work, but they probably aren’t as strong as the conversation vs. oration factor. 
+ 1) DMs are, by and large, reading the boxed text cold. That makes a certain amount of sense; the whole point of boxed text is that it’s prepared for you. But that means that even a dynamic, dramatic DM is reading from a script that he or she has never uttered aloud before. Not a recipe for compelling delivery. 
+ 2) It’s an unfortunate necessity of convention D&D that you’re playing in a room with a lot of tables, each with its own D&D game. The background noise can be loud and distracting. It’s hard to concentrate on really listening when so much sound is competing for the attention of your ears. But the fact that boxed text is the first casualty of a loud room tells me that oration is inherently harder to concentrate on than conversation. 
+ “Beyond the door, you see a format change…” 
+ So do we change all our adventures immediately because Dave spent a lot of time wandering around the convention hall at Gen Con? Hardly. But boxed text is something we’re definitely watching closely. We’re goofing around with some alternatives right now. If they play better at the table, you’ll see them in products at some point. 
+ In the meantime, if you’re the DM, watch your players closely as you read boxed text to them. Make sure their eyes aren’t glazing over. Or better yet, ditch the boxed text and use your own words for the initial description of the room. You’ll engage your players in a conversation, and you won’t have to put up with agonizing you-should-have-been-paying-attention questions later. If you’re a player, still concentrate on that boxed text. You never know – it might reveal the clue that saves your PC’s life. 
+ Next Design Time: Undercover Insight #2 – Why Your Character Sheet Will Kill You. 
+ The Warlock Ranked 
+ Last week , we asked your thoughts on the most powerful class and least powerful race in the Player's Handbook . The results? While the cleric won the crown as player's premier choice, the half-elf has been forced to hang his head in shame. 
+ Most Powerful Class 
+ Least Powerful Race 
+ Cleric 
+ 23.0% 
+ Half-Elves 
+ 33.5% 
+ Wizard 
+ 15.5% 
+ Half-Orcs 
+ 20.1% 
+ Druid 
+ 13.3% 
+ Gnomes 
+ 16.4% 
+ None 
+ 12.6% 
+ None 
+ 11.0% 
+ Monk 
+ 11.1% 
+ Halflings 
+ 8.2% 
+ Fighter 
+ 6.6% 
+ Humans 
+ 5.9% 
+ Sorcerer 
+ 6.2% 
+ Elves 
+ 2.5% 
+ Paladin 
+ 4.1% 
+ Dwarves 
+ 2.5% 
+ Rogue 
+ 2.9% 
+ Barbarian 
+ 2.4% 
+ Ranger 
+ 1.4% 
+ Bard 
+ 1.0% 
+ This week, we had a follow-up query, straight from Development's Jesse Decker. Discussions have been ongoing in the player community regarding the inherent strengths (or lack thereof) of the warlock class. We wanted to ask your opinion on the matter. Just how powerful is the warlock? Too much so, or not enough? (And, we've posted a message board thread for your thoughts on the warlock (and boxed text!) right here .) How powerful do you think the warlock is? 5: Way overpowered. 4: Strong, but not overly so. 3: About right. 2: Weak, but not overly so. 1: Way underpowered. 
+ About the Authors 
+ Design: David Noonan is a designer/developer for Wizards of the Coast. His credits include co-designing Dungeon Master's Guide II, Heroes of Battle, and numerous products for the Eberron campaign setting. He lives in Washington state with his wife, son, and daughter. 
+ Development: Jesse Decker (male human, CR 1/8): I first picked up a d20 somewhere in the early eighties, and I often tell the story of my intro to D&D . I was in elementary school, and a friend received the now famous "red box" set as a gift from his parents. I was instantly hooked, and soon became a regular haunt of the one hobby bookshop here in Renton, WA. Fast forward through some-teen years of gaming (with occasional interruptions for things like school), and just out of college I land a job as editorial assistant for Dragon Magazine. The eight years since that entrance to the gaming industry have included a two-year stint as editor-in-chief of Dragon , freelance design credits such as Hammer & Helm , and Unearthed Arcana . 
+ In the middle of 2003, I left the helm of Dragon for a chance to do full-time design in Wizards' R&D group, and was lucky enough to work on books like Complete Adventurer and the DMG II . I clearly liked to talk too much to remain on the design team, so I moved over to manage the relatively new development team for RPGs and D&D Minis. 
+ It's easily the best job in the whole world, but even so, I swear that as soon as I level up I'm taking the Talk Less in Class feat. 
+ Feedback 
+ Thoughts or suggestions for this article? Topics for future Design & Development articles you'd like to see covered? By all means, please feel free to write directly to the authors, at: dndcolumn@wizards.com . 
+ Recent Design & Development
+ How to Make a Monster Manual, Part 2 
+ 08/03/2007 
+ How to Make a Monster Manual, Part 1 
+ 07/27/2007 
+ Dreamblade Minis… in your D&D Game 
+ 04/13/2007 
+ Magic Item Compendium, part 3 
+ 03/16/2007 
+ Magic Item Compendium, part 2 
+ 03/09/2007 
+ (MORE) 
+ Recent Articles 
+ This Month's Dragon Magazine 
+ 04/26/2007 
+ Chapter 2: Conflict 
+ 09/24/2007 
+ Eastern Classes 
+ 09/18/2007 
+ Crusaders, Swordsages, Warblades 
+ 09/11/2007 
+ Fortress of the Yuan-Ti 
+ 09/04/2007 
+ (MORE) 
+ About Us 
+ Jobs 
+ New to the Game? 
+ Inside Wizards 
+ Find a Store 
+ Press 
+ Help 
+ Sitemap 
+ ©1995- Wizards of the Coast, Inc., a subsidiary of Hasbro, Inc. All Rights Reserved. Terms of Use - Privacy Statement 
+ Home  > Games  > D&D  > Articles   
+Printer Friendly 
+Email A Friend Discuss This Article

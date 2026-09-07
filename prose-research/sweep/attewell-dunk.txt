@@ -1,0 +1,796 @@
+ 
+
+ Dunk and Egg, Essay 1: “What Worth a Hedge Knight?” | Race for the Iron Throne 
+
+ Race for the Iron Throne 
+ You Win or You Die – Historical and Political Analysis of Game of Thrones by Steven Attewell 
+
+ Home About 
+ Archive 
+
+ CBC Analysis 
+
+ CBC Analysis: Game of Thrones 
+ CBC Analysis: A Clash of Kings 
+ CBC Analysis: A Storm of Swords 
+ CBC Analysis: World of Ice and Fire 
+ CBC Analysis: Fire and Blood Volume I 
+
+ Hands of the King 
+ Hollow Crowns and Deadly Thrones 
+ A Laboratory of Politics 
+ The Blacks and Reds 
+ Politics of the Seven Kingdoms 
+ Video Podcasts 
+
+ Season 1 Video Podcasts 
+ Season 2 Video Podcasts 
+ Season 3 Video Podcasts 
+ Season 4 Video Podcasts 
+ Season 5 Video Podcasts 
+
+ Season 2 Episode Discussions 
+ Season 3 Episode Discussions 
+
+ Support Race for the Iron Throne! 
+
+ Feb 03 2020 
+ 53 Comments 
+
+ By stevenattewell 
+
+ A Song of Ice and Fire , Dunk & Egg , Race for the Iron Throne 
+
+ Dunk and Egg, Essay 1: “What Worth a Hedge Knight?” 
+
+ Introduction: 
+
+ At long last, we come to the much-promised, frequently-delayed essay series on the Dunk & Egg series, as a window on the (let me check the wording on the Kickstarter for a second) “ history of House Targaryen  and the Blackfyre Rebellion .” In this essay series, I will cover one novella at a time – which means initially the three stories collected in A Knight of the Seven Kingdoms , but I will be more than happy to re-open the series on that happy day when “Village Hero” or “She-Wolves of Winterfell”  or any other Dunk and Egg story are released.
+
+ So let’s see what we can mine from our memories, shall we? 
+
+ Hedge Knight and the Origin of the Blackfyres 
+
+ Of course, one difficulty about writing this essay series about Dunk & Egg through the lens of the Blackfyre Rebellions is that the Blackfyres do not appear in Hedge Knight , either “on screen” or merely mentioned. This, despite the fact that the Ashford Tourney boasts both Princes Baelor and Maekar, whose reputations were so made by Redgrass Field that they got a song named after their partnership, despite the fact that many of the combatants are of the right age and regional affiliations to be veterans of the First Rebellion, including Ser Arlan of Pennytree himself.
+
+ Indeed, it is quite possible that, when GRRM was writing this first novella in 1997 (at the same time that he was writing A Clash of Kings ), he hadn’t even come up with the idea of the Blackfyres. The meta-fictional history of the Blackfyres in ASOIAF is a really interesting subject: on the one hand, we know that sometime between writing the pitch letter and writing AGOT (I think), GRRM wrote up a rather elaborate set of notes/outlines on his world and its history that included not just the histories but also the personalities and physical appearances of the Targaryen kings . As part of that, we know that the idea of Aegon IV as a bad king with a cloud over the succession from Jon I of ACOK , so there was some sort of skeleton there to build on. On the other hand, the first time when Daemon Blackfyre is finally named is Davos IV of ASOS – and it seems pretty likely that GRRM had just come up with the idea of the Blackfyres around the time he wrote that chapter when you see how he peppers the name into Jaime V and Catelyn V soon thereafter. [1] 
+
+ Regardless, it’s quite possible that the writing of Hedge Knigh t itself prompted the creation of the Blackfyres. Serial formats really benefit from a persistent antagonist – because your only alte rnative is pure Monster of the Week  – and a group threat like the Blackfyres and their loyalists scattered throughout the south are perfect as both background (as in Sworn Sword ) or foreground (as in Mystery Knight ), because defeating or killing off individual Blackfyre loyalists doesn’t end the main threat.
+
+ Finally, there’s a thematic reason why it makes sense that we don’t see the Blackfyres in Hedge Knight – assuming for the sake of argument that the two ideas existed simultaneously – because in a lot of important ways, it is a story about childhood disillusionment. Dunk starts out the chapter as a naïve man-child (in this novella, Egg is the worldly one, although the two will swap roles later on), dreaming an impossible dream of not just the modest upward mobility of a bastard from Flea Bottom becoming a hedge knight, but the full rags-to-riches dream of a tourney champion, in a tourney straight out of Ivanhoe. A key part of Dunk’s fantasy life is the idea of “Good King Daeron” at the head of a large House of ideal princes as the sign and seal of a golden age – and the cotton wool blinders of a childlike imagination would keep the particulars of the perfidious and threatening Blackfyres firmly in the wings.  By the end of the story, Dunk receives a harsh education on the realities of this particular generation of Targaryens, between his observations of Valarr at the joust, his encounters with Aerion, Baelor’s death at the hands of Maekar, and so on that leaves him much more skeptical of the value of Targaryen royalty as the promise of any kind of good government, although ultimately he refuses to break and lose faith for the future (embodied in the person of Egg).
+
+ (A word to the reader: consider the above paragraph merely a prologue or summary of a much lengthier argument you’ll see later.)
+
+ Hedge Knights as Liminal Social Class 
+
+ So why start here, with The Hedge Knight ? I would argue that the primary reason why GRRM starts here is that Dunk’s role as the eponymous hedge knight is foundational to the series as a whole – which is why in each story, he returns to the life despite brief hiatuses as a caravan guard, household knight, or would-be tourney champion.
+
+ In both Westeros  and in medieval Europe (where the term “knight-errant” was used instead) hedge knights occupy a liminal position in relation to the feudal class structure. On the one hand, they are counted as (albeit the “littlest” and most marginal) members of the knightly orders. This means that they are expected to conform to the honor code of chivalry and the aesthetic and cultural mores of the aristocracy  – even though they lack access to the material wealth (which, I will always emphasize, was grounded in the coercive extraction of taxes and rents from landed estates manned by unfree labor) that makes it easier to abide by the former and makes the latter at all possible. In return, though, they cannot be denied the rights and privileges common to all of their station – which means they cannot be denied a place on the fringes of all the ceremonies and rituals, households and feasting tables, courts and command tents of “the great and the good,” and from this surprisingly intimate vantage, they serve as a perfect window on the lives of their betters.
+
+ On the other hand, their material circumstances make them much closer to the smallfolk than any other of their rank would ever get. As with the genteel poor  of European history, the only difference between a hedge knight and a common cottager is the three letters in front of their name and everything they mean – hence why the noblesse d’épée fought the hardest of any of the Second Estate against the abolition of those same feudal privileges. Thus, when hedge knights interact with the smallfolk, they uniquely do so outside of the feudal relationship. Throughout Hedge Knight , when Dunk talks to artisans like Steely Pate or entertainers like Tanselle Too-Tall, he does so from a position of equality. After all, he’s not wealthier than they are, he has no position of authority over them or even a greater estate, he is barely owed social deference. Indeed, it could be argued that hedge knights are properly placed side-by-side with the most marginal in smallfolk society, because they definitionally lack the feudal tenancies  that were the passport to economic survival for 90% plus of the population.
+
+ Thus, Hedge Knight , is a tale of attempted social mobility. We are introduced to Dunk, a seven-foot-tall squire for the elderly Ser Arlan of Pennytree, as he tries to make the impossible leap from Flea Bottom urchin into the nobility by becoming a hedge knight when his master dies unexpectedly. This medieval spin on a Horatio Alger story is complicated when we see how hard the life of a hedge knight can be:
+
+ The only life he knew was the life of a hedge knight, riding from keep to keep, taking service with this lord and that lord, fighting in their battles and eating in their halls until the war was done, and then moving on. There were tourneys from time to time as well, though less often, and he knew that some hedge knights turned robber during lean winters, though the old man never had. 
+
+ The combination of irregular employment and being paid in little more than food and lodging leaves Ser Arlan (and thus Dunk) with only “ three silver stags, nineteen copper pennies, and a chipped garnet; like most hedge knights, the greatest part of his worldly wealth had been tied up in his horses and weapons .” When you learn that the most basic armor required to enter a tourney costs “ eight hundred stags ,” you begin to realize how precarious it is to live hanging on to the very lowest rung of the nobility, one bad joust away from bankruptcy and one hard winter away from turning into bandits and outlaws.
+
+ Given all of these limitations, it’s surprising how difficult it is for Dunk to claim the status of a hedge knight. In sharp contrast to Heath Ledger in A Knight’s Tale , in order to be a knight, or indeed participate in the tourney – in which Dunk will have to wager and risk his entire worldly possessions at every bout – he must first be recognized as a knight by those already in the club. And the club’s members repeatedly refuse to recognize the credentials he borrowed from Ser Arlan of Pennytree:
+
+ “My lord father took eight hundred knights and near four thousand foot into the mountains. I cannot be expected to remember every one of them, nor what shields they carried.” 
+
+ “…The old man took a wound in your father’s service, how can you have forgotten him?” 
+
+ Implicit in Ser Manfred Dondarrion’s rejection of any connection between his House and Ser Arlan of Pennytree is a rejection also of any reciprocal obligations of a liege lord to his vassals. Lords are meant to protect and shelter the men who fight for them, but here we see that hedge knights are just as disposable as any member of the modern precariat, who can be hired by the campaign, thrown away when they are injured in the line of duty, unworthy of even having their names remembered. Only because Baelor Breakspear has a prodigious memory, (“I remember Ser Arlan of Pennytree…He never won a tourney that I know, but he never shamed himself either” ) and a genuine concern for all of his future subjects, is Dunk’s claim recognized.
+
+ The reason why there are so many social barriers to Dunk’s elevation is that knighthood is, as GRRM demonstrates, a system of privilege in the original sense of the term as “private law.” When Prince Aerion Targaryen decides that the puppeteer Tanselle Too-Tall should be crippled and her business be destroyed for the crime of slaying a dragon in a puppet show, Dunk impetuously decides to do something about it, punching and kicking the Prince. In Westeros, it may be perfectly legal for Prince Aerion to cripple a woman and destroy her business with impunity, but to raise a hand to a prince is to lose that hand: 
+
+ “What you did, ser…well, I might have done the same in your place, but I am a prince of the realm, not a hedge knight. It is never wise to strike a king’s grandson in anger, no matter the cause.” 
+
+ “Ser Duncan, let me ask you this – how good a knight are you, truly? How skilled at arms?…You have another choice, though…whether it is a better choice or a worse one, I cannot say, but I remind you that any knight accused of a crime has the right to demand trial by combat. So I ask you once again, Ser Duncan the Tall – how good a knight are you? Truly?” 
+
+ Hedge knights are something of a loophole in this legal system that enshrines inequality of rights and status at its core. As we’ve seen before , the right to trial by combat is the very foundation and root of noble privilege and their last defense in the worst of circumstances. To strip hedge knights of that legal shield is unthinkable twice over: first, because it raises the horrifying possibility that a knight might be treated as badly as any other prisoner in the dock (and once you do that, you might as well declare feudalism dead and buried); second, because it would establish a precedent that a legal authority could deprive other noblemen of their “gods-given rights and liberties.” (WOIAF) But Dunk is spared the immediate prospect of judicial mutilation only because he has been recognized as a knight – had he performed the same actions for the same reasons the day before, Dunk would have forfeited hand and foot without any right to due process whatsoever.
+
+ But for all that this privilege calls into question whether chivalric tropes are but a thin justifying veneer over unacceptable inequality, GRRM uses this very scenario to argue that there is a kernel of truth behind the myth. Following GRRM’s customary preference for existential romanticism, here he argues that true knighthood exists, but only on the margins of society. As an orphan from Flea Bottom – so not only one of the smallfolk but also the lowest of the low – Dunk remains close enough to his roots to remember that the smallfolk are fully human and thus, worthy of being included among the “weak and innocent” who knights are bound by oath to protect:
+
+ “A hedge knight is the truest kind of knight, Dunk,” the old man had told him, a long long time ago. “Other knights serve the lords who keep them, or from whom they hold their lands, but we serve where we will, for men whose causes we believe in. Every knight swears to protect the weak and innocent, but we keep the vow best, I think.” 
+
+ Smallfolk were drifting toward the field as well, and hundreds of them already stood along the fence…a woman called out, “Good fortune to you.” An old man stepped up to take his hand and said, “May the gods give you strength, ser.” Then a begging brother in a tattered brown robe said a blessing on his sword, and a maid kissed his cheek. They are for me. “Why?” he asked Pate. “What am I to them?” 
+
+ “A knight who remembered his vows.” 
+
+ As this passage sets out quite clearly, precisely because of their precariousness, their closeness to the smallfolk, and their alienation from the power and ambitions of the nobility, the hedge knights come closest to the purity of the chivalric ideal. And among all hedge knights, Dunk comes the closest, because he’s not even a hedge knight .
+
+ At this point, it’s not exactly a textual revelation that Dunk’s story that Ser Arlan of Pennytree “knighted me before he passed” is a lie – hence why he can’t look Baelor in the face when the Prince confirms his claim to knighthood, why he hesitates to knight Raymun Fossoway, and feels “as relieved as he was guilty” afterwards. But in Martin’s hands, Dunk’s central sin is transmuted into a strange sort of grace. Dunk did serve Ser Arlan as faithfully as any squire ought, and there is no doubt that the “old man” was a better teacher of the ideals of knighthood (or at least “the pure” that a lifetime of hedge knighting had sifted from the dross) than he was of the fine points of jousting technique. And if Dunk’s story of the dubbing ceremony witnessed only by a robin isn’t the literal truth, it is in a sense the truth of the heart. (To quote one of Martin’s contemporaries in fantasy, it is “what ought to have been true. ”) And as we might expect from a writer with GRRM’s background , it is the sheer impossibility of Dunk’s yearning that acts as the alchemical catalyst that transforms him into not just a knight, but a veritable paladin. Just as Brienne is the truest knight of her time because she is not a knight by virtue of her gender, (her ancestor) Dunk here is a true knight because he stands outside the knightly class and has no other way to clamber over the barriers placed in his way.
+
+ We see this theme take center-stage at the climactic Trial by Seven – in which the unknown hedge knight must find six other knights to take his side, lest he lose by default. Down by a man and on the verge of being condemned without ever having a chance to defend himself, Ser Dunk confronts the assembled nobility and chivalry at Ashford:
+
+ Dunk rode slowly along the fence. The viewing stand was crowded with knights. “M’lords,” he called to them, “do none of you remember Ser Arlan of Pennytree? I was his squire. We served many of you. Ate at your tables and slept in your halls.” He saw Manfred Dondarrion seated in the highest tier. “Ser Arlan took a wound in your lord father’s service.” The knight said something to the lady beside him, paying no heed. Dunk was forced to move on. “Lord Lannister, Ser Arlan unhorsed you once in tourney.” The Grey Lion examined his gloved hands, studiedly refusing to raise his eyes. “He was a good man, and he taught me how to be a knight. Not only sword and lance, but honor. A knight defends the innocent, he said. That’s all I did. I need one more knight to fight beside me. One, that’s all. Lord Caron? Lord Swann?” Lord Swann laughed softly as Lord Caron whispered in his ear. 
+
+ Dunk reined up before Ser Otho Bracken, lowering his voice. “Ser Otho, all know you for a great champion. Join us, I beg you. In the names of the old gods and the new. My cause is just.” 
+
+ “That may be,” said the Brute of Bracken, who had at least the grace to reply, “but it is your cause, not mine. I know you not, boy.” 
+
+ Heartsick, Dunk wheeled Thunder and racked back and forth before the tiers of pale, cold men. Despair made him shout. “ARE THERE NO TRUE KNIGHTS AMONG YOU?” 
+
+ Only silence answered…then came a voice. “I will take Ser Duncan’s side…This man protected the weak, as every true knight must,” replied Prince Baelor. “Let the gods determine if he was right or wrong.” 
+
+ It is in this passage where the thematic parallels with ASOIAF really kick in: while GRRM is often celebrated or condemned for his brutal deconstructions of fantasy tropes, the reality is more complicated. Martin’s realist side ) here acts as the prosecution, condemning the socio-cultural structures of fantasy medievalism . In this case, the institution of knighthood (as represented by this roll of great lords and tourney champions) is weighed in the balance and found wanting – not for nothing does GRRM paraphrase Prince Hal’s heartless denial of Sir John Falstaff. As it turns out, among all of the knights who came to Ashford Tourney, only one lives up to the chivalric code that makes the rule of this warrior caste more legitimate than institutionalized armed robbery. And to go all the way back to our discussion of the Blackfyres, it is a damning indictment of the character of that faction and class labelled as the “good guys” of the central conflict.
+
+ However, GRRM’s Romantic side  is still there to act as counsel for the defense. It might not make for good statistics, but Martin believes that one individual choosing to do the right thing no matter the consequences can save the world, or in this case the idea of knighthood. Where the author differs from other fantasy authors is not in denying that the inner virtue of the individual can be a source of transcendent salvation, but rather arguing that said virtue is found not in Chosen Ones or hidden heirs but only among the “cripples, bastards, and broken things” – or in this case the hedge knights. Their very isolation from the social rewards of virtuous actions, the argument implicitly goes, lends their moral choice the legitimacy of the ascetic.   
+
+ Section 3: The House of Daeron, for Good and Ill 
+
+ But what of that other knight who remembered his vows? What does it say about House Targaryen in the reign of “Good King Daeron” that the lone royal scion who seems remotely worthy of his great privileges is Prince Baelor?
+
+ I’m going to go out on something of a limb and say that it is here, in Hedge Knight, not in ASOIAF (and certainly not in Fire & Blood ) where GRRM comes closest to putting some meat on the bone of his argument about Aragorn’s tax policy . More than any other Targaryen than Jaehaerys the Wise (and arguably more so, given some of Jaehaerys’ actions in Fire & Blood Volume 1 ), we know both the content  as well as the style of the warrior-lawgiver known as Baelor Breakspear:
+
+ Dunk got to his feet, wondering if he should keep his head down or if he was allowed to look a prince in the face . I am speaking with Baelor Targaryen, Prince of Dragonstone, Hand of the King, and heir apparent to the Iron Throne of Aegon the Conqueror . What could a hedge knight dare say to such a person? “Y-you gave him back his horse and armor and took no ransom, I remember,” he stammered. 
+
+ “The old—Ser Arlan, he told me you were the soul of chivalry, and that one day the Seven Kingdoms would be safe in your hands.” 
+
+ ”Not for many a year still, I pray,” Prince Baelor said. 
+
+ “No,” said Dunk, horrified. He almost said, I didn’t mean that the king should die , but stopped himself in time. “I am sorry, m’lord. Your Grace, I mean.” 
+
+ GRRM clearly sets up Baelor as not merely a perfect prince  – a tourney champion who combines impeccable honor with cunning strategy, a fair and compassionate judge who knows how to work multiple loopholes to see that justice is done – but also the promise of his House’s future, a man who “had it in him to be a great king, the greatest since Aegon the Dragon.” 
+
+ This kind of heroic figure, this kind of rhetoric, has a very specific generational valence. Born in 1948, George R.R Martin is a boomer by rights, and no political figure looms as large in the minds of his generation as the hope of a generation lost as John F. Kennedy. It is no accident, then, that GRRM crafts Baelor’s death in the Trial of Seven to evoke JFK’s assassination:
+
+ The prince moved his head slowly from side to side. “Ser Raymun…my helm, if you’d be so kind. Visor…visor’s cracked, and my fingers…fingers feel like wood.” 
+
+ “At once, Your Grace.” Raymun took the prince’s helm in both hands and grunted. “Goodman Pate, a hand.” 
+
+ Steely Pate dragged over a mounting stool. “It’s crushed down at the back, Your Grace, toward the left side. Smashed into the gorget. Good steel, this, to stop such a blow.” 
+
+ “Brother’s mace, most like,” Baelor said thickly. “He’s strong.” He winced. “That…feels queer, I…” 
+
+ “Here it comes.” Pate lifted the battered helm away. “Gods be good. Oh gods oh gods oh gods preserve …” 
+
+ Dunk saw something red and wet fall out of the helm. Someone was screaming, high and terrible. Against the bleak grey sky swayed a tall tall prince in black armor with only half a skull. He could see red blood and pale bone beneath and something else, something blue-grey and pulpy. A queer troubled look passed across Baelor Breakspear’s face, like a cloud passing before a sun. He raised his hand and touched the back of his head with two fingers, oh so lightly. And then he fell. 
+
+ The central tragedy of Hedge Knight is not merely that Baelor dies, but that there is no one else within House Targaryen who can follow Baelor Breakspear; he is a JFK without an RFK. Here is GRRM’s sharpest critique of the “Good Man” theory of monarchy set forward by conventional fantasy: not that a good man cannot be a good ruler, or that it is impossible to be honorable without being stupid or statesmanlike without being amoral, but that a good man remains mortal. By fortune of war or sudden illness, assassination or accident, the life of the wisest prince can be cut short in an instant. As often as they are maligned, the structures of partisan politics ensure that there are many who share the leader’s commitment to an agenda and a platform, who can even in the wake of tragedy insist that “let us continue.” But monarchy has no such safeguard – everything relies on the person of the king, and succession by blood is no guarantee that the son sees eye-to-eye with the father, let alone can live up to their example. And so often in history, we have seen that the death of kings can produce wild gyrations in policy, with objectives of state turning on a dime and experienced councilors replaced en masse with new favorites.
+
+ The clear hope of all the crowd at the tourney is that Prince Valarr would fulfill this role. Indeed, I would argue that the political purpose of Ashford Tourney – why the Targaryens are there en masse , why Prince Valarr was one of the original five champions despite being a slightly odd choice [2] – was to show off the young prince, to demonstrate before the assembled political class of the nation “if Valarr had indeed inherited a measure of his father’s prowess.” The problem is that even Dunk the Lunk can tell“he is a fair knight but nothing more than that,” despite the best efforts of the tourney organizers present to make sure “he had drawn the weakest opponent,” or knights like Lord Gawen Swann to turn Valarr’s glancing blows into telling blows. And when we meet him after his father’s death, he’s no stronger a reed mentally than he was physically –a rather conventional intellect with the misfortune to be born at a time when House Targaryen will need very unconventional intellects if it is to survive.
+
+ Nor is there much hope to be found among Maekar’s brood – ironically, not because they inherited too little Targaryen-ness, but too much. As we see throughout Hedge Knight , Daeron lacks the strength of will or character to master the prophetic dreams that torment him, and so has turned to self-medication. In his own way, Aerion too has inherited another long-running Targaryen dream – “he thinks he is a dragon in human form.” Nor does Maekar (at least to the extent that we’ve seen him so far) possess the same capacity for introspection and growth that turned RFK from Joseph McCarthy’s assistant counsel to the champion of the left.
+
+ And we haven’t even met Aerys I or Bloodraven or Rhegal yet.   
+
+ Conclusion: 
+
+ Thus, even before the Blackfyres show up either thematically in Sworn Sword or in person in Mystery Knight , we see that the foundations of the House of Daeron are weak and rotted through, and will not stand the next crisis that comes its way. (As a good genre writer, GRRM makes sure that the next crisis comes along that very same year.)
+
+ And it is altogether right and proper that this should be the case, because otherwise Egg couldn’t become the unlikely hope of house because he was raised by a simple hedge knight.
+
+ [1] Given that even some very late parts of ASOS were cut from the original ACOK manuscript, it’s unclear whether these sections of ASOS were written in late November 1998 through 1999, or earlier. It remains possible that they were originally written sometime between 1997 and October 1998, although there’s evidence for a later date .
+
+ [2] Lord Ashford’s daughter’s original champions are her two brothers, her father’s liege lord (already an honor both because of his feudal status and because of his reputation as a tourney knight), and Ser Humphrey Hardying, a famous tourney knight but otherwise of relatively low status, who seems to be there to make up the numbers and ensure that at least some of the champions stick around for at least a couple bouts (which is probably a good luck thing). And then there’s Valarr, who is young and untried in comparison to the other Targareyn princes there…
+
+ Like this: 
+ Share on X (Opens in new window) 
+ X 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Like Loading... 
+
+ Related 
+
+ 53 thoughts on “ Dunk and Egg, Essay 1: “What Worth a Hedge Knight?” ” 
+
+ jedimaesteryoda says: 
+
+ February 3, 2020 at 10:52 am 
+
+ An excellent analysis, Maester Steven. Well done. 
+
+ 1. Maekar’s profile: a younger son embittered by living in the shadow of his more charismatic older brother, and haunted by the death of a brother he had a hand in. Well, Stannis had to get it from somewhere. 
+
+ 2. Regarding Egg, as Dunk said “Yes, you from the top of Aegon’s Hill and me from the bottom,” but he finds kinship with Dunk over the shared ideal of knighthood, it’s the one thing that bridges the huge class divide between the two people. 
+
+ 3a. In the trial by seven, it is Dunk against Aerion, his accuser and the one set as the antagonist in this story. It isn’t a case where the lowborn knight manages to show his skill against a highborn knight like in a typical feel-good story. Dunk was trained by a poor hedge knight while Aerion being royalty, of course, had access to the best training money could by for lack of a better term. So, while Dunk had undoubtedly mastered the chivalric ideals of knighthood, Aerion had mastered the martial aspect, and it was that aspect that gave him the edge over Dunk in melee combat. 
+
+ However, ironically, as Dunk noted, it was not Ser Duncan the Tall that defeated Aerion, but Dunk of Flea Bottom. Dunk managed to show that he wasn’t a dumb giant, and switched the fight from an area where Aerion had the advantage: melee, to one where he had the advantage: hand-to-hand. Unhorsed and on the ground, Dunk’s size and strength gave him the advantage against Aerion in a brawl. It was what he learned in the slums of Flea Bottom that gave him his victory against against a prince. 
+
+ 3b. In a way, Dunk is like Davos, in that besides both men being knights having come from Flea Bottom and raised up by royalty, it is the skills they acquired as smallfolk, ie Dunk’s skills in hand-to-hand as a child in the slums, and Davos his political skills learned from being smuggler, that end up serving them in their relations with the highborn. Dunk embodies the ideal knight while Davos embodies the ideal counselor. 
+
+ 4. Your observations about Baelor among the Targaryen clan bring to mind John Hawkwood’s comments on the nobility in Christian Cameron’s The Ill-Made Knight: “As individuals, many are fine mine, but as a whole . . .’ He shook his head.”
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 3:51 pm 
+
+ Thanks very much!
+
+ 1. Maekar, the Targaryen Stannis. Combined with Alaric, the Stark Stannis, this now suggests a Unified Stannis Theory, whereby Stannises inveitably emerge in each major family. In this essay I will…
+
+ 2. Yes. Egg wants to be a squire as much as Dunk wants to be knight. That’s crucial.
+
+ 3A. Well, it’s a different kind of trope. Closer to a Rocky II ending.
+
+ 3B. Absolutely. The similarity in names is not an accident.
+
+ 4. Heh.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 10:59 am 
+
+ Thanks for this. I really liked this addition to ASOIAF. Good observation about the Blackfyres being existential villains for Dunk and Egg and how it gives a structure for the stories.
+
+ Some thoughts:
+
+1. I’ve wondered how D&D would interpret these stories, since they are fairly romantic and wouldn’t adapt well to the nihilistic ideas of “Honor is for chumps” that came from GoT.
+
+2. The puppet show was always a weird plot point to me. It’s something that makes sense in a historical medieval setting (I guess), or other fantasy setting, but seems weird in ASOIAF where there don’t seem to be stories of Knights going around and slaying dragons in any of the other stories. As a result, it might be understandable that the Targaryens might not view the show favorably. It would be like telling a story of LotR in a setting where the orcs are actually the ruling class.
+
+3. I preferred the first two stories over The Mystery Knight. Dunk’s actions were a lot more impactful and meaningful in them, whereas in TMK he’s more of a Pinball Protagonist that bumbles around while other people resolve the plot. We’ll see where the next story goes.
+
+ Reply 
+
+ Murc says: 
+
+ February 3, 2020 at 11:04 am 
+
+ but seems weird in ASOIAF where there don’t seem to be stories of Knights going around and slaying dragons in any of the other stories.
+
+ ???
+
+ People mention the story of Serwyn of the Mirror Shield and his dragonslaying all the time in the text. Others come up as well, though not by name.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 12:12 pm 
+
+ Guess I just don’t remember that then. My mistake.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:14 pm 
+
+ You’re very welcome!
+
+ 1. I don’t want them anywhere near D&E. But the Mandalorian is a good model.
+
+ 2. If I were doing the adaptation, I might have it be a mystery play rather than a puppet show. 
+
+ 3. He’s a little passive in MK until near the end. In terms of how active he is in the process, I like Sworn Sword best.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 5:44 pm 
+
+ Dunk cutting his own cheek is one of my favorite moments in all of the ASOIAF stories, even if it doesn’t end up changing things. I also like the moral complexity of The Sworn Sword.
+
+ Reply 
+
+ Mitch says: 
+
+ February 17, 2020 at 5:17 pm 
+
+ Not sure if this is a hot take, but I thought the Sworn Sword is far and away the best of the Dunk & Egg novellas to date. 
+
+ It’s a much narrower story in a political sense, mostly focusing on the fallout from the Blackfyre Rebellion years after the fact in a minor part of the kingdom. But ever-ratcheting tension throughout the story slowly making the reader feel claustrophobic and there are no good options for Dunk was so satisfying. Honestly, might be GRRM’s best writing to date, imho.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 18, 2020 at 9:09 am 
+
+ It’s not a hot take, since I read the stories a couple of years ago. There are at least half a dozen plot twists in The Sworn Sword, and yet most of them are more grounded than the other two stories (no Prince Baelor Breakspear is going to help out, or Bloodraven was there all along!), AND, it’s the story that gives Dunk the most agency in the story. Him changing his mind about the peasant levies and yet still doing the right thing prepared to die for his employer was one of the stronger writings GRRM has done, IMO.
+
+ Reply 
+
+ Murc says: 
+
+ February 3, 2020 at 11:01 am 
+
+ Indeed, it is quite possible that, when GRRM was writing this first novella in 1997 (at the same time that he was writing A Clash of Kings), he hadn’t even come up with the idea of the Blackfyres.
+
+ The Hedge Knight getting published at all probably involved some real fantasy publishing insider baseball.
+
+ The Hedge Knight was published as part of 1998’s Legends , an anthology of novellas by the “masters of modern fantasy” as it billed itself. The anthology form has fallen on hard times of late; indeed, George Martin is one of the guys doggedly keeping the form going, using his cachet and influence to push through things like Old Mars and Old Venus , as well as doling out ASOIAF content to collections like Rogues . But back in the 90’s the anthology was much healthier, albeit clearly in its sunset years.
+
+ Legends was incredibly star-studded by the standards of the day. This is a book that had so many high-grade authors contributing to it that Terry Pratchett didn’t get cover billing . The guy with top billing with Robert Jordan, contributing a new Wheel of Time novella (if you weren’t a certain age in the 90s it might not register to you just how big a fucking deal Wheel of Time was, before it turned into a ridiculous joke; that novella by ITSELF would have made bank sold separately) but you had Stephen King, Anne McCaffrey, Raymond E. Feist, Orson Scott Card, Robin Hobb, Tad Williams, Terry Goodkind (I know, but still), Ursula K. LeGuin… this was nothing but heavy hitters, contributing novellas set in their pre-existing universes, known, proven earners.
+
+ And then on the back, at the very bottom, was perennial midlist author George R. R Martin, with a story set in a fantasy series that only had one successful but not mind-shatteringly big book out so far (ACOK post-dates Legends by six months) that doesn’t even involve any recognizable parts of his setting and features a ton of characters being mentioned for the first time in it.
+
+ You’ll never NOT convince me that didn’t happen because Martin knew absolutely everybody in the industry and was super tight with Robert Silverberg and Gardner Dozois. Because objectively speaking he probably didn’t belong there.
+
+ ( The Sworn Sword , by contrast, was published in Legends II in 2003, after ACOK and ASOS had come out and the buzz around ASOIAF was only growing. He got cover billing there, actually outbilling Orson Scott Card, something that would likely have been unthinkable even five years prior.)
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 12:18 pm 
+
+ Must have been pretty impressive, then. I recently read “Dangerous Women”, the anthology featuring The Princess and the Queen, but was less than impressed with at least half the stories, and didn’t even read that particular story because I had read Fire and Blood by then. I preferred the Wastelands anthologies more.
+
+ Reply 
+
+ Murc says: 
+
+ February 3, 2020 at 12:46 pm 
+
+ Martin, though known for his doorstops, is an ENORMOUS fan of the short story form. Although, well, it might be more accurate to say he’s an enormous fan of the forms that were prevalent when he was a much younger man; the serialized magazine story, the anthology, the short story, the novella, etc. Those were BIG DEALS from the fifties to the eighties. 
+
+ He’s decided to use his name and influence to try and preserve some of them in this modern hell age, by using ASOIAF content as a lure.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 4:14 pm 
+
+ I had a subscription to https://www.sfsite.com/fsf/ in the early 90s when I was in High School and quite enjoyed it. For some reason, I just fell out of habit of reading short stories except for a few of the anthologies I mentioned. Some of them were quite good, and there’s definitely a different type of story being told than a traditional novel.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:18 pm 
+
+ The generational thing is huge, I agree.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:15 pm 
+
+ Huh. I didn’t know the anthology thing was on the decline; I always think of them as such a bookstore mainstay.
+
+ Reply 
+
+ Tywin of the Hill says: 
+
+ February 3, 2020 at 1:30 pm 
+
+ This was an amazing essay. Looking forward to the next. 
+
+ Indeed, it is quite possible that, when GRRM was writing this first novella in 1997 (at the same time that he was writing A Clash of Kings), he hadn’t even come up with the idea of the Blackfyres. 
+
+ Sworn Sword and Mystery Knight, every 2 pages: “Of course, who could forget the hammer and anvil at Redgrass field?”
+
+Hedge Knight, where Baelor and Maekar actually appear: (crickets chirping).
+
+ This applies to Bloodraven as well, since he wasn’t mentioned at all until The Sworn Sword (2003), but technically made his first appearance in AGOT, as the three-eyed crow. Which suggests that Martin writes the story as he goes.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 1:56 pm 
+
+ Well, he’s said something to this effect all along, but I’m not sure if he’s ever given concrete examples of what being a “gardener” means for him including ideas that he later fleshed out.
+
+ My personal theory is that he’s kind of like an inverted (and way more skilled) J.J. Abrams who writes Mystery boxes, but they’re for himself more than the audience. He writes people reacting a certain way or a certain things as happening, and notes these as challenges for himself to solve later while still maintaining internal consistency in the story. For example, maybe he wrote Mathis Rowan “looks fit to gag” and decided to see if anything would come from it (“friends in the Reach”), and if not, it’s just left as an unexplored side of the story. 
+
+ Maybe if the books all get published, he’ll later discuss what was changed in the creation of each book. Even Tolkien had “Strider” being a hobbit in the original draft, so many important details can get changed later to suit the writer’s needs!
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:23 pm 
+
+ That’s a good analogy, actually. 
+
+ Rather than structure everything around the mystery or the fanservice allusion, he leaves them in the background so that these story hooks are there later for him to use and make it look way more planned than it was.
+
+ Reply 
+
+ cynicalclassicist says: 
+
+ February 3, 2020 at 7:07 pm 
+
+ Good point. Theyre such huge books u can put so much in. Like that talk of Jaime looking like a King which matched original pitch early in AGOT… but was then dropped.
+
+ Reply 
+
+ Julian says: 
+
+ February 3, 2020 at 9:11 pm 
+
+ I think David Simon once said, regarding the scene with Rawls in the gay bar, that they (the writers) were just “laying pipe” to pick up later, which obviously they never did.
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:19 pm 
+
+ Heh, yeah.
+
+ Reply 
+
+ fjallstrom says: 
+
+ February 4, 2020 at 1:14 pm 
+
+ Looking at it as a developing story, I’ve been thinking if Brightflame is a Doylist proto-Blackfyre, and was intended as a growing threat along the novellas. Apart from the name, this story ends with him going to Essos where he becomes a mercenary. He also leaves a dangling branch to the family tree. 
+
+ Maybe Martin had the rough draft of a competing family branch but hadn’t filled in the details, and once he did Brightflame didn’t fit, so Blackfyre was instead put in, leaving the Brightflame branch dangling.
+
+ Reply 
+
+ Wadege says: 
+
+ February 4, 2020 at 1:34 pm 
+
+ It seems very likely Brighflame and Blackfyre will intercede in the third Blackfyre rebellion, at which point Aerion is back in Westeros and performs some likely dark deeds, according to TWOIAF, I expect this will be featured in a future D & E.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:04 pm 
+
+ Dollars to donuts, Aerion murders Haegon after Haegon surrenders.
+
+ Reply 
+
+ Tywin of the Hill says: 
+
+ February 4, 2020 at 7:14 pm 
+
+ Bonus if Aerion had previously sided with the Blackfyres.
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:03 pm 
+
+ I don’t know if I see it. We know how the story ends, he drinks wildfire and dies. 
+
+ IDK, maybe it’s just I see Brightflame as way too much of a s Viserys type to be a persistent/growing threat.
+
+ Reply 
+
+ fjallstrom says: 
+
+ February 4, 2020 at 7:43 pm 
+
+ If the wiki is correct, we know since ASOS how he dies. Which was printed in 2000 according to the wiki. Between The Hedge Knight and ASOS we have Martin in 1998 confirming that Brightflame had kids in Lys. And in 2003 in the Sworn Sword the Blackfyre rebellion is introduced.
+
+ So the 1998 villain exits stage right in 1998 and sets up a possibly competing family branch in Essos. He is then killed of in 2000. Though not his branch.
+
+ As a repeat villain he is weak, I agree there. Was Martin planning on more D&E novellas in 1998? Perhaps it was intended as a one shot and Brightflame’s great grandson was going to be the mummers dragon untill the idea of the Blackfyre rebellion was fleshed out. Or perhaps I am reading to much into Bright/Black Flame/Fyre.
+
+ Reply 
+
+ artihcus022 says: 
+
+ February 3, 2020 at 2:09 pm 
+
+ Dunk and Egg are in my mind GRRM’s most perfect creations. I could read stories with the two of them all day. I appreciate that GRRM wants to get ASOIAF done but to me, it’ll be a disappointment as great if he never finishes the complete adventures of Dunk and Egg. I wonder if Egg is intended as a second echo of JFK. Dunk and Egg meet and form their bond in the death of Baelor at a Tourney, and their relationship ends at Summerhall in fire and blood and Egg is certainly the last decent Targaryen king, and last good king period. 
+
+ Dunk especially is GRRM’s best POV. The writing has voice and a distinct personality, and a quiet charisma, while also being rich in detail and observation.
+
+ I personally think that the Dunk and Egg stories should be adapted for cinema rather than TV. The Hedge Knight could easily be made into a feature film. The Sworn Sword likewise, as well as The Mystery Knight.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 3, 2020 at 4:24 pm 
+
+ IMO, Egg is a way more classic fantasy character than a riff on JFK.
+
+ Reply 
+
+ Manuel S says: 
+
+ February 3, 2020 at 5:11 pm 
+
+ I see that you’re using an intermediate approach between your usual POV Chapter Analysis and your usual “History Book” chapter analysis from F&B and AWOIAF. It makes sense, though I missed your insights on historical counterparts (I don’t remember if you’ve touched on some real life parallels on the protagonists D&E in previous essays, but it’s probably the case).
+
+ I nice read though, as always. Interesting comment on the baby boomer mentality.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:05 pm 
+
+ Yeah, I was looking for a style that would allow for more fluidity and thematic focus, since I did a lot of the stuff on historical counterparts in my Blacks and Reds series.
+
+ Reply 
+
+ Sean C. says: 
+
+ February 3, 2020 at 6:05 pm 
+
+ Nor is there much hope to be found among Maekar’s brood – ironically, not because they inherited too little Targaryen-ness, but too much. As we see throughout Hedge Knight, Daeron lacks the strength of will or character to master the prophetic dreams that torment him, and so has turned to self-medication. In his own way, Aerion too has inherited another long-running Targaryen dream –“he thinks he is a dragon in human form.” 
+
+ The great irony about this, at least from the perspective of those who talk about House Targaryen’s flaws on a genetic/blood level, is that Egg’s generation were at that time the least-inbred Targaryens to ever exist (surpassed only by his own children), being the result of two successive generations of outbreeding. House Targaryen was never less incestuous than at this point in history (which also makes Egg’s particular fixation on incest as a source of their problems a bit hard to fathom, honestly).
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:09 pm 
+
+ Good point!
+
+ On the other hand, if Maekar’s kids are any example, it seems less a question of genetic load and more certain recessives going active.
+
+ Reply 
+
+ Will Rigby says: 
+
+ February 3, 2020 at 8:04 pm 
+
+ I wonder how the Mummer Dragon was going to work before the Blackfyres and the Golden Company existed.
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 3, 2020 at 10:54 pm 
+
+ Could have just been a Pretender in some other fashion. Maybe he was planning on a distant Targaryen relative, or maybe it was one of those placeholder plot points. (Insert General Concept here, figure out the fussy details later).
+
+ Reply 
+
+ Grant says: 
+
+ February 4, 2020 at 3:18 pm 
+
+ It’s possible that he was always planning on Aegon, just that originally Aegon was supposed to actually be Rhaegar’s son. Maybe the mummer’s dragon would have meant that Aegon was held up as this great person, but behind the show he was an arrogant brat without the strength of a real dragon?
+
+ Reply 
+
+ lluewhyn says: 
+
+ February 4, 2020 at 4:12 pm 
+
+ Maybe, but I don’t think that would explain Illyrio and Varys’s actions very well in GoT. If Aegon was the real deal, why are they involved like it’s a conspiracy between just the two of them, and why are they setting up Aegon’s blood kin to be the fall guys?
+
+ Reply 
+
+ Grant says: 
+
+ February 4, 2020 at 4:54 pm 
+
+ Keeping others out of it for security and to control what happens with Aegon would be a good reason, and Varys and Illyrio are the sort of people who would be willing to throw Viserys and Dany to the wolves if it benefited them. Whether or not Varys in pre-ASOS writing still has that same extreme view of the world, it wouldn’t take much investigation to realize that Viserys could never be a good king for any agenda. As for Dany, she’s a girl and doesn’t show leadership traits* until partway through AGOT. So setting them up with the Dothraki for a nice big Distraction Carnifex would seem like the best use of them.
+
+ *The absolute earliest would be her questioning why Illyrio’s helping them, but she doesn’t really show much at the time to make them view her as a more valuable piece.
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:10 pm 
+
+ I think it was always going to be Aegon, because the whole narrative of the Sack of King’s Landing is too developed in AGOT for that not to be the case, but what changed was the Blackfyre connection.
+
+ Reply 
+
+ Sansa&Lady says: 
+
+ February 3, 2020 at 8:59 pm 
+
+ I’ve always LOVED the Dunk and Egg stories and I would really like to see an adaptation of it. Definitely not by D&D since they ruined GoT and are just horrible writers in general. But I’ve always imagined that if someone ever adapted the first three stories of D&E to HBO or something, I could see it work very well as a six-part miniseries. Each story split in half, and each episode an hour long. Just to really flesh it out so it doesn’t feel rushed. That would be cool.
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:12 pm 
+
+ That seems sensible – there’s usually a point in the middle of the story where things fade to black. Dunk gets arrested and passes out in HK, gets drunk and passes out in MK, and I guess just goes to sleep in SS.
+
+ Reply 
+
+ David Hunt says: 
+
+ February 3, 2020 at 9:59 pm 
+
+ I was heartily glad to see this essay. I contains what I think is my favorite moment in all of ASOIAF. One that never fails to bring a tear of my eye. When Dunk, deep in the despair shouts “Are there no true knights among you?” And the truest knight of his generation rides out in answer. I have never failed to be moved by that moment. The fact that Baelor’s honor is so rare makes his decision all the more affecting.
+
+ I don’t have anything meaningful to add, so allow me to add a minor nitpick to show how good it is. 
+
+ “his encounters with Aerion, Baelon’s death at the hands of Maekar,”
+
+ Reply 
+
+ stevenattewell says: 
+
+ February 4, 2020 at 4:13 pm 
+
+ Whoops, will fix.
+
+ Reply 
+
+ Daniel Dunbring says: 
+
+ February 4, 2020 at 12:03 pm 
+
+ “However, GRRM’s Romantic side is still there to act as counsel for the defense. It might not make for good statistics, but Martin believes that one individual choosing to do the right thing no matter the consequences can save the world, or in this case the idea of knighthood”.
+
+ While I totally agree with you that this is what GRRM is going for, I do think I want to present another argument for the defence. After all – while Aerions personality was known, this event is not. Most likely neither Otho Bracken nor Lord Swann knows first hand what happened between Tanselle-too-tall and Aerion. They have most likely only third-hand or at best second-hand accounts of the incident and have therefore very little information about what has happened. For all what they know, Tanselle might have tried to kill him – or maybe the accusation had been absolutely correct – maybe Tanselle made a point during the mummery that the red dragon was really, really bad – but the black dragon was a gentle beast, much better and more suitable at everything. Point is – it is very unfair to demand that they should see Dunk as the just one and therefore directly defend him in a trial. For me the entire situation comes more off as romanticism overload rather than a reasonable request. 
+
+ I also do think that Maekar is used as a literary tool in the novel. He has to be angry about it all and 100% trust his sons in order to force Dunk to choose trial by combat and he in addition has to enter the field personally to defend his son´s honor, but later he comes off as far more reasonable, doing a 180 and even allows Egg to stay with Dunk. Sure, he feels guilty, but he does not come of as entirerly realistic.
+
+ Reply 
+
+ doingnothinginacleverway says: 
+
+ February 5, 2020 at 7:15 am 
+
+ The historical analogy would be the White Ship disaster, that lead to the death of the perfect prince. The resulting civil war (the Anarchy) is also very similiar to the dance of the dragons, and ais similarly timed relative to the Normal conquest.
+
+ Reply 
+
+ Louise says: 
+
+ June 14, 2022 at 3:31 pm 
+
+ Or the death by cart accident of Ferdinand-Philippe, the well-liked heir of the last king of France Louis-Philippe. The king was overthrown a few years later by a revolution.
+
+ Reply 
+
+ RFTIT Tumblr Weeklyish Roundup | Race for the Iron Throne says: 
+
+ February 5, 2020 at 9:00 am 
+
+ […] folks! It feels really good to have Dunk Egg, Part I in the can. As to where I could go from here…I think the next project is either Hour of the […]
+
+ Reply 
+
+ Abbé Battle says: 
+
+ February 6, 2020 at 4:22 pm 
+
+ Ah-HA! So that’s how one puts an accent on the typed é …
+
+ Ahem, that moment of youthful satisfaction aside (if nothing else the joke inherent in my nom-de-plume becomes a little more clear), I wanted to compliment you on putting together a very solid article – which makes me wonder if the reason attendees at the Ashford Tourney fail to break out into repeated choruses of ‘The Hammer and the Anvil’ might be that His Royal Highness Prince Baelor very politely asked them not to (quietly putting the word out that he & his brother were to be guests of honour, while his son was the Champion here) – and say that one looks forward to seeing its sequels!
+
+ I am also interested in hearing your own thoughts on Sir Robyn Rhysling – the odd knight out in Sir Duncan’s party, given we have no idea why he sides with the young unknown; we know him to be a man of fearless, maybe reckless courage from his tilt with Lord Leo of Highgarden and that Prince Aegon knew him from other tourneys & asked for him but are given no reason as to why he might agree to side with the Young Prince against the boy’s own father and his elder brothers.
+
+ I’m not saying this is a deal-breaker, but it’s interesting to note that we have a fairly clear picture of the motivations that pulled the other members of Sir Duncan’s team to his side (For Prince Baelor chivalry & Justice, for Sir Lyonel Baratheon the thrill of a novel challenge & a certain devilment, for Sir Raymun Fossoway family honour & personal rivalry, for Sir Humfrey Harding a personal grudge and for Sir Humfrey Beesbury family loyalty to the former) yet those of Sir Robyn remain uniquely obscure.
+
+ Personally I wonder if he’s a self-made man who sees something of himself in the young Hedge Knight and is too fearless to let a little thing like Royal Displeasure stop him from knocking the snot out of the high & mighty (I also think it would be absolutely hilarious if he were from The Arbor, given ‘Rhysling’ could be pronounced as a homonym for ‘Riesling’).
+
+ Reply 
+
+ Charei says: 
+
+ February 7, 2020 at 2:47 am 
+
+ Do have any ideas about Dunks name? It doesn’t seem to be a common name around the small folk, maybe a nickname
+
+ Reply 
+
+ JG says: 
+
+ February 24, 2020 at 2:08 am 
+
+ “And so often in history, we have seen that the death of kings can produce wild gyrations in policy, with objectives of state turning on a dime and experienced councilors replaced en masse with new favorites.”
+
+ And now we have that every 4-8 years with one of the factions being an authoritarian death cult. Yay democracy.
+
+ Reply 
+
+ Dunk and Egg, Essay 2: “A Sworn Sword After the Spring” | Race for the Iron Throne says: 
+
+ May 11, 2020 at 9:02 am 
+
+ […] Hedge Knight was something of an exercise in finding the empty space where the Blackfyres would go in the story […]
+
+ Reply 
+
+ Chapter-by-Chapter Analysis: Arya IX, ASOS | Race for the Iron Throne says: 
+
+ October 8, 2020 at 3:04 pm 
+
+ […] and therefore he was justified in butchering an unarmed child. The whole point of the knight’s vow is that it is an absolute; a true knight is not only allowed to go against even the king in defense […]
+
+ Reply 
+
+ “What a Wonderful Knight for a Mystery” | Race for the Iron Throne says: 
+
+ January 4, 2021 at 9:00 am 
+
+ […] twelve novellas” covering all of Dunk and Egg’s time together from their first encounter in Hedge Knight to their deaths at Summerhall. This latter perspective would seem to make Mystery Knight a […]
+
+ Reply 
+
+ Leave a comment Cancel reply 
+
+ Δ 
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+
+ ← Previous post 
+ Next post → 
+
+ Recent Posts 
+
+ Non-ASOIAF Content: Getting Animated About X-Men ’97 
+
+ Chapter-by-Chapter Analysis: Arya XII, ASOS 
+
+ Non-ASOIAF Content – People’s History of the Marvel Universe, Week 22: Anti-Mutant Prejudice and Mutant Rights In the Longue Durée 
+
+ Non-ASOIAF Content – People’s History of the Marvel Universe, Week 21: X-Men Blue Origins and the Power of the Additive Retcon 
+
+ Non-ASOIAF Content: Venture Bros Finale, “Radiant is the Blood of the Baboon Heart” 
+
+ Blogroll 
+
+ All Leather Must Be Boiled – Thoughts on George R.R. Martin's A Song of Ice and Fire by Sean T. Collins, the co-author of the Annotated A Game of Throne 
+ ASOIAF University 
+ Boars, Gore and Swords 
+ Cast of Thrones Podcast 
+ Entertained Organizer – Friend of the Blog and Contributor 
+ Game of Owns Podcast 
+ Hidden History of Westeros 
+ History of Westeros Podcast 
+ Made in Myr 
+ Podcast of Ice and Fire 
+ Radio Westeros Podcast 
+ The History Behind the Game of Thrones 
+ The Realignment Project – my other blog 
+ Unspoiled Podcast 
+ Wars and Politics of Ice and Fire 
+ Watchers on the Wall – news about HBO's Game of Thrones 
+ Westeros.org 
+
+ Blog at WordPress.com. 
+
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+
+To find out more, including how to control cookies, see here:
+
+ Cookie Policy 
+
+ Comment 
+
+ Reblog 
+
+ Subscribe 
+
+ Subscribed 
+
+ Race for the Iron Throne 
+
+ Join 938 other subscribers 
+
+ Sign me up 
+
+ Already have a WordPress.com account? Log in now. 
+
+ Race for the Iron Throne 
+
+ Subscribe 
+
+ Subscribed 
+
+ Sign up 
+ Log in 
+
+ Copy shortlink 
+
+ Report this content 
+
+ View post in Reader 
+
+ Manage subscriptions 
+
+ Collapse this bar 
+
+ %d 
+
+ Design a site like this with WordPress.com Get started 
+
+ 

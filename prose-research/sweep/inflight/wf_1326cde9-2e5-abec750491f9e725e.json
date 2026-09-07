@@ -1,0 +1,50 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i743-779",
+ "lines": 135,
+ "firstTs": "2026-09-06T23:56:25.334Z",
+ "lastTs": "2026-09-07T00:06:09.828Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 32,
+  "WebSearch": 2,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/:fifth.html",
+  "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/:ill.html",
+  "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/:shadow.html",
+  "https://treeslices.wordpress.com/2016/08/20/peace-by-gene-wolfe/:peace.html",
+  "https://vc.bridgew.edu/honors_proj/162/:garvey.html",
+  "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+  "https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+  "https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+  "https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+  "https://web.archive.org/web/20260315150230id_/https://www.torforgeblog.com/2022/09/07/excerpt-reveal-the-fifth-head-of-cerberus-by-gene-wolfe/",
+  "https://web.archive.org/web/20260114144551id_/https://www.torforgeblog.com/2020/05/08/excerpt-interlibrary-loan-by-gene-wolfe/",
+  "https://web.archive.org/web/20240715194845id_/https://www.torforgeblog.com/2021/06/07/excerpt-shadow-claw/",
+  "https://reactormag.com/excerpts-a-borrowed-man-gene-wolfe/",
+  "https://www.tor.com/2013/10/22/the-land-across-excerpt-gene-wolfe/",
+  "https://reactormag.com/the-land-across-excerpt-gene-wolfe/",
+  "https://reactormag.com/2013/10/22/the-land-across-excerpt-gene-wolfe/",
+  "https://vc.bridgew.edu/cgi/viewcontent.cgi?article=1148&context=honors_proj",
+  "https://vc.bridgew.edu/honors_proj/162/",
+  "https://web.archive.org/cdx/search/cdx?url=vc.bridgew.edu/cgi/viewcontent.cgi*&filter=urlkey:.*1148.*&limit=20&output=json",
+  "https://web.archive.org/web/20240724062531id_/https://vc.bridgew.edu/cgi/viewcontent.cgi?article=1148&context=honors_proj",
+  "https://treeslices.wordpress.com/about/",
+  "https://treeslices.wordpress.com/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All sources reached raw. Now writing the checkpoint file.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "abec750491f9e725e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-abec750491f9e725e.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i743-779.json",
+  "exists": true
+ }
+}

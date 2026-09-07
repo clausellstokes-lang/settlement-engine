@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 0,
+ "indices": [
+  571,
+  591,
+  661,
+  670,
+  817,
+  832,
+  842,
+  881,
+  890,
+  891,
+  941,
+  943,
+  944,
+  945,
+  949
+ ],
+ "claims": [
+  {
+   "index": 571,
+   "feature": "tidy endings",
+   "claim": "Sudowrite's own marketing names a preference for happy endings as a defect of general-purpose models.",
+   "source": "Sudowrite, Muse product page (vendor marketing copy)",
+   "url": "https://www.sudowrite.com/muse",
+   "quote": "Basic AI loves happy endings",
+   "page": "comparison section heading"
+  },
+  {
+   "index": 591,
+   "feature": "reflexive antithesis",
+   "claim": "Hern names the tendency to offer both sides of an argument in a single response as one of the less noticeable tells of generated text.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "A tendency to offer both sides of an argument in",
+   "page": "opening section, paragraph beginning 'Other tells are less noticeable'"
+  },
+  {
+   "index": 661,
+   "feature": "reflexive antithesis",
+   "claim": "Coagulopath, quoted by nostalgebraist, lists R1's endless not-thing-x-but-thing-y parallelisms among the model's recognisable repetitive habits.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "not thing x, but thing y",
+   "page": "section \"Background: R1\", quoted point 7"
+  },
+  {
+   "index": 670,
+   "feature": "reflexive antithesis",
+   "claim": "Guo argues that the it's-not-X-it's-Y parallelism is a legitimate rhetorical device but that AI uses it constantly and reflexively in situations where it adds nothing.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "AI uses it constantly, reflexively, in situations where it adds nothing",
+   "page": "section \"Parallelism (It's Not X, It's Y)\""
+  },
+  {
+   "index": 817,
+   "feature": "tidy endings",
+   "claim": "The Dramatica Co. asserts the danger is competent AI fiction sharing one underlying shape it names as tidy, explicit, causally legible, emotionally annotated and thematically over-secured.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "tidy, explicit, causally legible, emotionally annotated, and thematically over-secured",
+   "page": "section 'The Cluster Is the Warning'"
+  },
+  {
+   "index": 832,
+   "feature": "tidy endings",
+   "claim": "StoryScope measured protagonist-driven resolutions in 69% of AI stories against 46% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "more protagonist-driven resolutions (69% vs. 46%)",
+   "page": "§4.1 'Human authors subvert linearity'"
+  },
+  {
+   "index": 842,
+   "feature": "tidy endings",
+   "claim": "StoryScope's per-model fingerprints record Gemini as producing the tidiest endings and extended denouements.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Gemini produces the tidiest endings, extended denouements",
+   "page": "§5 'Gemini, DeepSeek, and Kimi are triplets'"
+  },
+  {
+   "index": 881,
+   "feature": "tidy endings",
+   "claim": "The WikiProject names as a tell that many LLM-generated Wikipedia articles include a Challenges section built on a rigid formula and ending in a vaguely positive assessment.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Many LLM-generated Wikipedia articles include a \"Challenges\" section",
+   "page": "section 'Outline-like conclusions about challenges and future prospects'"
+  },
+  {
+   "index": 890,
+   "feature": "reflexive antithesis",
+   "claim": "The WikiProject names as a tell parallel constructions involving not, but or however, such as not only X but also Y and it is not just X, it's Y.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "It is common for LLMs to use parallel constructions involving",
+   "page": "section 'Negative parallelisms', subsection 'Not just X, but also Y'"
+  },
+  {
+   "index": 891,
+   "feature": "reflexive antithesis",
+   "claim": "The WikiProject records the reversed form X rather than Y as particularly common in Grok output.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Grok output is particularly idiosyncratic",
+   "page": "section 'Negative parallelisms', subsection 'X rather than Y'; the quotation is from the AI-vocabulary section of the same page"
+  },
+  {
+   "index": 941,
+   "feature": "homogenisation",
+   "claim": "Sato describes the dozen-plus spam obituaries about one dead woman as detached and near-identical to each other, differing only by a few reordered words.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "The obituaries are detached and nearly identical to one another",
+   "page": "body, section on the Vastag/Mazur obituaries"
+  },
+  {
+   "index": 943,
+   "feature": "lexical tells",
+   "claim": "Sato characterises the generated obituary articles as written in a nondescript gravitas built out of unnatural phrasing.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "written with a nondescript gravitas, using unnatural phrasing",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 944,
+   "feature": "lexical tells",
+   "claim": "Sato names the phrases 'indelible mark' and 'untimely demise' as the unnatural phrasing carrying that gravitas.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "the “indelible mark” a person has left, or their “untimely demise,”",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 945,
+   "feature": "abstraction over the concrete",
+   "claim": "Sato reports that the generated obituaries carry that elevated phrasing while containing no actual detail about the dead person's life.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "but without any actual detail about their life",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 949,
+   "feature": "homogenisation",
+   "claim": "Sato reports that one site's death stories follow a shared structure and sometimes reuse identical vague phrases about different deceased people.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "sometimes using identical vague phrases about the deceased",
+   "page": "body, section on The Thaiger"
+  }
+ ]
+}

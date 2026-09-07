@@ -1,0 +1,97 @@
+Review: Solar Labyrinth by Robert Borski 
+ < Effective Java, Second Edition 
+ Russ Allbery 
+ > Reviews 
+ Unwinding Anxiety > 
+ Solar Labyrinth 
+ by Robert Borski
+ Publisher: 
+ iUniverse 
+ Copyright: 
+ 2004 
+ ISBN: 
+ 0-595-31729-4 
+ Format: 
+ Trade paperback 
+ Pages: 
+ 188 
+I sometimes say that I don't like puzzles. This isn't entirely true.
+What I don't like much is solving puzzles, but I quite enjoy a good
+explanation of a puzzle, showing how the puzzle was set up and how one
+would go about solving it. It's a bit similar to not enjoying writing
+proofs, but enjoying reading a good explanation of an elegant one.
+Gene Wolfe's Book of the New Sun (starting with
+ The Shadow of the Torturer and
+concluding with The Urth of the New Sun )
+is a puzzle, one that I enjoyed in parts regardless, but a puzzle that
+clearly had more depth than I was willing to plumb. Solar
+Labyrinth is an explanation of the puzzle, or at least large parts of it,
+and as such I enjoyed it quite a bit, perhaps more than the series itself.
+This is a very rare sort of book, a full-length non-fiction analysis of a
+science fiction series. Usually this sort of book is reserved for works
+of classical literature, and it's a sign of the degree of literary
+complexity of the Book of the New Sun that it can support an entire book
+(albeit slim) of analysis. Solar Labyrinth is not padded, either;
+each basic theory is set forward in a brief essay, some only a few pages.
+Borski is clear enough for someone with only a casual understanding of
+literary analysis (like myself) and only rarely retreats into jargon,
+although it does help to have a large vocabulary. He also does a fair job
+of pointing out where interpretations are disputed and where his theories
+are controversial or a bit of a stretch.
+The layers that Wolfe put into the Book of the New Sun are impressive. In
+a few places, I felt a bit stupid to have missed obvious clues, but for
+the most part I was just shaking my head, appreciating the artistry, and
+thinking that I never would have taken the time to put the pieces together
+myself. I highly recommend this book to anyone who's read the whole
+series, and it may even be worth finishing the series if you'd given up
+partway through, just so that you can fully appreciate this analysis.
+Borski confines his analysis almost entirely to the New Sun, so don't
+worry about spoilers if you've not yet read the Books of the Long Sun or
+Short Sun (in fact, the most extensive references to Wolfe's work outside
+of the New Sun were to The Fifth Head of Cerberus ).
+There were two things that bothered me, however. One is that, as he warns
+in the foreword, Borski assumes that you are very familiar with the Book
+of the New Sun and doesn't waste any time providing background. I think
+his warning that Solar Labyrinth is only for serious readers of
+Wolfe is a bit overstated, as I'm certainly not a serious reader and I
+managed well enough, but I had just read the series and it was fresh in my
+mind. I would like to recommend this book to friends who had read New Sun
+some time back, but without a basic plot synopsis or timeline as a memory
+refresher, the reading may be hard going. I particularly missed a
+ dramatis personae and think it's a shame Borski didn't include
+one, as he mentions characters (including minor ones) constantly in
+passing and just expects the reader to remember who he's talking about. A
+list of characters, their obvious roles in the book, and summary
+information about who or what Borski thinks they are would have been very
+welcome.
+The second problem with this book is that Borski uses endnotes
+extensively. I truly hate endnotes. I can tolerate them when the only
+thing in the endnotes is purely references (although even there, I'd
+rather see MLA-style citations), but when they're used for interesting
+asides and additional information, as they are here, I find them
+infuriating. It's just obnoxious to have to read the book with an extra
+bookmark at the endnotes and constantly skip back and forth to follow
+Borski's complete train of thought.
+I know footnotes have become passé. I don't care. People
+read linearly, and all of the information related to a page of text needs
+to be put on that page. I don't care if they're hard to typeset or if you
+think they look ugly; people have been using them for years, for very
+good reasons.
+Layout concerns aside, this book was a lot of fun. If you've read the
+Book of the New Sun, had that feeling that lots of things were going on
+that you weren't quite getting, and still remember it well enough to be
+able to follow an analysis without much introduction, I think you'll enjoy
+this book. And if you are interested, I recommend picking up a copy soon;
+the market for books like this tends to be highly limited, and they
+therefore tend to go out of print quickly and then become quite rare.
+After reading Solar Labyrinth , I'm somewhat interested in reading
+Michael Andre-Driussi's Lexicon Urthus , and it looks like finding a
+copy of that is going to be quite a search.
+ Rating: 8 out of 10
+ Reviewed: 2004-09-12
+ < Effective Java, Second Edition 
+ Russ Allbery 
+ > Reviews 
+ Unwinding Anxiety > 
+ Last spun 
+ 2026-05-17 from thread modified 2018-03-24

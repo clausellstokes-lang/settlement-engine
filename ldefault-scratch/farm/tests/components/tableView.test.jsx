@@ -1,0 +1,83 @@
+/** @vitest-environment jsdom */
+/**
+ * tableView.test.jsx — P142 / D-6 contract over the phone Table View.
+ *
+ * Pins:
+ *   • Renders the settlement name, the tension line, stressor chips, and the
+ *     reused "Tonight at the table" cheat-sheet entries.
+ *   • Closes via the X button, via Escape (the shared focus trap), and via a
+ *     backdrop mousedown — but NOT when the inner card is interacted with. The
+ *     backdrop is a role="presentation" scrim that dismisses only on a mousedown
+ *     of the scrim itself (currentTarget); role="dialog" sits on the panel and
+ *     is focus-trapped by useDialogFocusTrap (M12).
+ *
+ * TableView is presentational (settlement + onClose props, no store/flag
+ * reads), so no mocks are needed — the caller owns the flag/pref gating.
+ */
+
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { render, cleanup, fireEvent, screen } from '@testing-library/react';
+
+import TableView from '../../src/components/TableView.jsx';
+
+const fixture = () => ({
+  name: 'Hollowmere',
+  tier: 'village',
+  population: 320,
+  economicState: { prosperity: { tier: 'struggling' } },
+  pressureSentence: 'The reeve runs a quiet skim and the harvest is failing.',
+  stressors: [{ label: 'Failing harvest' }],
+  // Real generator shapes: NPC secret is an object; plot hooks come from the
+  // collectPlotHooks sources (here, a conflict), not a phantom settlement.plotHooks.
+  npcs: [{ name: 'Maren', role: 'Reeve', power: 9, secret: { what: 'skims the tithe' } }],
+  conflicts: [{ parties: ['The Salt Debt'], intensity: 'high', plotHooks: ['A caravan master calls in a favor.'] }],
+});
+
+describe('TableView', () => {
+  let onClose;
+  beforeEach(() => { onClose = vi.fn(); });
+  afterEach(() => cleanup());
+
+  it('renders name, tension line, stressors, and cheat-sheet entries', () => {
+    render(<TableView settlement={fixture()} onClose={onClose} />);
+    expect(screen.getByText('Hollowmere')).toBeTruthy();
+    expect(screen.getByText('The reeve runs a quiet skim and the harvest is failing.')).toBeTruthy();
+    expect(screen.getByText('Failing harvest')).toBeTruthy();
+    // Reused tonightAtTheTable entries.
+    expect(screen.getByText('Maren')).toBeTruthy();
+    expect(screen.getByText('NPC')).toBeTruthy();
+    expect(screen.getByText('The Salt Debt')).toBeTruthy();
+    expect(screen.getByText('HOOK')).toBeTruthy();
+  });
+
+  it('falls back gracefully when there are no entries', () => {
+    render(<TableView settlement={{ name: 'Barebones' }} onClose={onClose} />);
+    expect(screen.getByText('Barebones')).toBeTruthy();
+    expect(screen.getByText(/No table-night entries derived yet/i)).toBeTruthy();
+  });
+
+  it('calls onClose when the X button is clicked', () => {
+    render(<TableView settlement={fixture()} onClose={onClose} />);
+    fireEvent.click(screen.getByLabelText('Close table view'));
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose on Escape', () => {
+    render(<TableView settlement={fixture()} onClose={onClose} />);
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('closes on a backdrop mousedown but not on inner-card interaction', () => {
+    render(<TableView settlement={fixture()} onClose={onClose} />);
+    // A mousedown inside the panel bubbles to the backdrop, but its target is
+    // not the scrim itself (currentTarget), so it does not dismiss.
+    fireEvent.mouseDown(screen.getByText('Hollowmere'));
+    expect(onClose).not.toHaveBeenCalled();
+    // The presentational scrim is the dialog panel's parent; a mousedown on the
+    // scrim itself dismisses.
+    const backdrop = screen.getByRole('dialog').parentElement;
+    fireEvent.mouseDown(backdrop);
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+});
