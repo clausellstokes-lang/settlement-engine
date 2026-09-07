@@ -11,7 +11,7 @@
   "argsFile": "args-kay-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
-  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — verification COMPLETE (12 files / 169 verdicts; state unverified 0); regrade-r8 / section / critic: NOT yet on disk; the resume script derives the owed tail (regrade if no regrade-r8; synth if the section predates the last verdict; critic)",
+  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — verification COMPLETE (12 files / 169 verdicts; state unverified 0); regrade-r8 / section / critic on disk: verdicts-kay-regrade-r8.json@20:00 section-kay.md@20:21 critic-kay.md@15:04; the resume script derives the owed tail (regrade if no regrade-r8; synth if the section predates the last verdict; critic)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
  },
  "leguin": {
@@ -28,7 +28,7 @@
   "argsFile": "args-wolfe-r7.json",
   "tag": "r7",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r7.js",
-  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic: NOT yet on disk; the resume script derives the owed tail",
+  "status": "DIES WITH SESSION cc123b6c at the 20:44:42 account switch — 32 verdict files / 479 verdicts (16 planned + 16 fresh chunks); regrade-r7 / section / critic on disk: section-wolfe.md@14:19 critic-wolfe.md@14:32; the resume script derives the owed tail",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js"
  },
  "martin": {
