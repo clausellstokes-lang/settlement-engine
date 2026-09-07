@@ -1,13 +1,15 @@
-# LANE-STATUS — written 2026-09-07 08:03:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 08:10:00 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegation sitting — the owner hands the open rows to the chair's judgment an
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3f4914abc · 16 cars over 4243bdc61 · porcelain 0 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3f4914abc · 16 cars over 4243bdc61 · porcelain 1 · last commits:
     3f4914abc §910 SOAK-HONEST landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
     6906e1935 §910 SOAK-HONEST landing (register car 1): the lighting census refreezes at the tip — titles 23662 -> 23665 (three it() titles the SOAK-HONEST-909 cars added; files, parked, credited and suiteTitles unchanged)
     864e76be9 §909 CAR 5: the weak zero's last two floors close, and a run too short to conclude stops reading like a world that behaved
     68c3a1618 §909 CAR 4: the seven negative assertions the whole-suite proof counted are anchored — each absence now stands on a liveness anchor that travels its own code path
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/.test-ratchet-baseline.json
     receipt `receipt-cap-trip-907.md` (mtime 09-07 01:50) head:
       | # RECEIPT — LANE CAP-TRIP-907
       | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
@@ -148,7 +150,7 @@ product claude/composite-r4 = 6ebe0ef3b · ledger = 921bb9a8f §909: the delegat
 - wf_a1a420b6-993: 6 journal lines, 3 agents
 - wf_e092839f-8b1: 20 journal lines, 10 agents
 - wf_e90e8bd1-c18: 4 journal lines, 4 agents
-- wf_faa375e7-29f: 2 journal lines, 2 agents
+- wf_faa375e7-29f: 3 journal lines, 2 agents
 
-## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57511 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57619 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
-load: 21.24 19.24 11.93
+## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57619 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;
+load: 10.48 16.46 13.73
