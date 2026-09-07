@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 11:31:32 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 11:37:33 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -17,9 +17,9 @@
 | ? | other |  | result | 0 | — | — | 15:06:40 |
 | ? | other |  | result | 0 | — | — | 15:09:55 |
 | ? | other |  | result | 0 | — | — | 15:05:42 |
-| ? | other |  | in-flight | 0 | — | — | 15:29:55 |
-| ? | other |  | in-flight | 0 | — | — | 15:30:49 |
-| ? | other |  | in-flight | 0 | — | — | 15:30:24 |
+| ? | other |  | in-flight | 0 | — | — | 15:32:51 |
+| ? | other |  | in-flight | 0 | — | — | 15:32:27 |
+| ? | other |  | in-flight | 0 | reconcile-herald-pools.md | — | 15:37:15 |
 | ? | other |  | result | 0 | — | — | 15:14:49 |
 | ? | other |  | in-flight | 0 | — | — | 15:19:38 |
 | ? | other |  | result | 0 | — | — | 15:11:45 |

@@ -8,7 +8,7 @@ of this file, and died with its session before writing a product byte. Its heade
 KEPT verbatim in the arrival section below (marked "predecessor"); its "CARS (none yet)" is
 superseded. Successor session 8de5f153 arrived 2026-09-07 10:56:39 EDT (`date`).
 
-## STATUS: PARTIAL — cars 1-3 landed; cars 4-6 in flight.
+## STATUS: PARTIAL — cars 1-5 landed; car 6 in flight.
 
 ## ARRIVAL CHECK (successor, 2026-09-07 10:56:51 EDT, from `date`) — PASS
 - HEAD `3b1c0eaa51f77561a036ae7ec54682c39856192c` == `git -C <main tree> rev-parse claude/composite-r4`
@@ -26,8 +26,10 @@ superseded. Successor session 8de5f153 arrived 2026-09-07 10:56:39 EDT (`date`).
 | 1 | `442c7f988` | the create boundary leaves first paint; the PIN is REFUTED by the build |
 | 2 | `fe8eb3f56` | the living-content law is WIRED, dark; THE PROMISE re-proven by execution |
 | 3 | `9a9a7856e` | the walker's second hole closed; the plant proves it in both directions |
+| 4 | `525ffa99b` | O-11 path 1 — the public drop PINNED; the DM-full half measured and refused |
+| 5 | `34115c7b7` | O-11 path 2 — resolve-or-drop on account import |
 
-Dock tip after car 3: `9a9a7856e`. Porcelain 0.
+Dock tip after car 5: `34115c7b7`. Porcelain 0.
 
 ## BUILD LISTINGS (the two the brief asks for; three builds taken, plus one control)
 All builds `sh scripts/gate-mutex.sh --run -- npm run build`, exit 0, ~22 s each.
@@ -172,3 +174,77 @@ test as a RECORDED correction.
   (above). `SAMPLE_SETTLEMENTS` is a static in-repo fixture set, so no user world reaches it and it
   is INERT while the dial is dark. On the lighting day, whoever regenerates the samples decides
   whether a forked sample is born under the sample's law or the forker's. Not a bug today.
+
+---
+
+## CAR 4 — O-11 PATH 1 (sha `525ffa99b`, 11:29 EDT) — R-A / R-D
+New file `tests/security/livingContentRosterPublicDrop.test.js`, **6 arms green**.
+
+| measurement (executed against the real projection, lit world) | result |
+|---|---|
+| `customContentRoster` on `PUBLIC_TOPLEVEL_KEYS` | **false** — pinned with `expectAbsentWithAnchor(..., 'config', ...)` |
+| `customContentProvenance` on `PUBLIC_TOPLEVEL_KEYS` | **false** — same anchored form |
+| DEFAULT projection: roster / provenance present | **false / false** — R-A's OUTCOME CONFIRMED |
+| **FULL (`{full:true}`, the DM share): roster / provenance present** | **TRUE / TRUE** — R-A's MECHANISM CORRECTED |
+| `config._livingContentLawVersion` in the DEFAULT projection | **2** (present) — R-D CONFIRMED |
+| tokens of `PRIVATE_KEY_RE` matching any roster key | **none** — R-A(v) CONFIRMED |
+| `gallerySanitizeAllowlist.contract.test.js:124` generates `customContent: {}` | CONFIRMED — its round-trip proves nothing about this key |
+| `customDefinitionIdentityProjection.js:16` = the five account-scoped identifiers | CONFIRMED |
+
+**REFUSAL 2 — the DM-full drop is REFUSED to this lane, with the measurement.** The
+ledger's O-11 tracing line ("publicSafe allowlist drops the roster from DM-shares") is
+FALSE for full mode: `toPublicSafe(s, {full:true})` does not run the root allowlist at all.
+Curing it needs a `_gallery_dm_full_json` SQL twin and this lane lands no migration — the
+same V1 boundary `townMapEditsPublicDrop.test.js` records for `mapEdits`. What makes it
+inert is now a LIVE ASSERTION inside the DM-full arm (the dial is dormant, so no shipped
+world carries a roster): **lighting the dial REDS this file by design**, with a message
+naming the decision.
+
+No migration; `PUBLIC_TOPLEVEL_KEYS` untouched; the SQL twin untouched;
+`supabase/applied-head.json` untouched.
+
+## CAR 5 — O-11 PATH 2 (sha `34115c7b7`, 11:36 EDT) — R-B
+`remapAccountSettlementLivingContentRoster` + its wiring + 9 unit arms + 3 round-trip arms.
+
+**THE OPEN QUESTION R-B ordered traced FIRST — ANSWERED, and it strengthens the ruling.**
+A regen does **NOT** re-mint the roster. Only `generateSettlementPipeline` builds one (the
+estate names `customContentRoster` in exactly one writer, `:185`); neither
+`regenNPCsPipeline` nor `regenHistoryPipeline` touches it. The roster an import writes is
+the roster the world keeps — nothing downstream corrects a foreign one.
+
+**AND THE KEY REALLY REACHES THE REMAP — EXECUTED.** A probe through
+`prepareSettlementEntry` shows `customContentRoster` (source ids unchanged),
+`customContentProvenance`, and `config._livingContentLawVersion` all surviving that call.
+The new branch is live code, not an unreachable one.
+
+| brief figure | measured | verdict |
+|---|---|---|
+| the provenance remapper's four lookups at `:107-128`, core at `:182` | exactly | CONFIRMED |
+| `accountImportBody.js` provenance block `:424-445`, drop-law `:439-443` | exactly — but the file is `src/store/accountImportBody.js`, not `src/lib/` | CONFIRMED (path corrected) |
+| the Phase-4/Phase-8 ordering: empty map at `:186`, replaced at `:631` | CONFIRMED **and wider**: also replaced at `:349` (Phase 3, the v3 ARCHIVE path). So the archive path RESOLVES and every other path degrades | CONFIRMED + widened |
+| `customDefinitionIdentityProjection.js:93-99` falls the fingerprint back to the hash | exactly | CONFIRMED — the trap is real and cured |
+| `livingContentRoster.js:189-194` sorts on the id the remap rewrites | exactly | CONFIRMED — the buckets are re-sorted |
+| `scripts/lib/writer-dark-register.mjs:81` roster row stays as it is | CONFIRMED — dial at 1, no shipped world writes the key |
+| `writerReach.walker.test.js:1164-1167` MAT retro-control stays as it is | CONFIRMED — **56 passed**, including `live.verdicts.has(...) === false`; this car's new read did NOT flip it |
+| the observed-shape-readers baseline | **44 passed, baseline byte-untouched** |
+| the negative-assertion per-file budgets (accountImportSlice 9) | CONFIRMED unchanged — the new arms add ZERO scanned negative sites |
+
+**REFUSAL 3 — the reconciliation boundary is DECLARED, not cured.** MEASURED: the
+reconciliation slice calls the same `prepareSettlementEntry` and has no content identity
+map, so it would carry a foreign roster. NOT cured here because `customContentProvenance`
+has the identical pre-existing gap on that same boundary — curing one leaves two records
+that are governed alike everywhere else disagreeing about one path — and because with the
+dial dormant nothing can reach it. Written into `livingContentRoster.js`'s own header, where
+the next reader of the key will find it.
+
+## MORE JUDGMENT CALLS
+| id | call | who | ground |
+|----|------|-----|--------|
+| R-A | O-11 path 1 = the public projection DROPS the roster, PINNED, no migration | **CHAIR RULING** | **RETROVALIDATED on its outcome; its DM-share mechanism CORRECTED by execution** (car 4 table) |
+| R-D | `_livingContentLawVersion` may reach the public projection; RECORDED not changed | **CHAIR RULING** | **RETROVALIDATED** — measured present in the default projection; pinned with the `schemaVersion`/`generatorVersion` siblings |
+| R-B | O-11 path 2 = RESOLVE-OR-DROP at per-settlement grain | **CHAIR RULING** | **RETROVALIDATED**, and its ⚠ regen question answered in the direction that strengthens it |
+| L8 | assert the DORMANT DIAL inside the DM-full arm so lighting reds there | LANE | the gap is real and un-fixable in this lane; an assertion that fails on the lighting commit makes the decision unavoidable, the estate's own "pins the gap so crossing it reds" idiom |
+| L9 | carry the roster `schemaVersion` rather than import the builder's constant | LANE | the import drags the roster module + the content-manifest closure into the import-path chunk for one integer; the agreement is pinned in the test where the import is free (the walker's own stated idiom) |
+| L10 | drop an INDEPENDENT source fingerprint instead of carrying it | LANE | it has no entry in the identity map; the roster is read by nothing, so an honest absence costs nothing and a stale source identifier costs exactness |
+| L11 | the round-trip arms live in a SIBLING describe, not inside the `export→import round-trip` suite | LANE | the module-scope helpers are shared either way; a named describe says what the three arms are for |
+| L12 | the second round-trip arm exercises "no archive-backed identity map" rather than a literal legacy PACK envelope | LANE | `buildAccountExport` REFUSES to export `customContent` without an archive (`AccountExportPreflightError`), so a literal legacy-pack envelope cannot be built through the public exporter. The map state under test is identical — the empty archiveBacked:false default at Phase 4 — and the arm says so |

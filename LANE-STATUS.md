@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 11:32:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 11:37:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = e3840ab62 §911: the horizon is measured — CAP-HORIZON-909 lands with zero product bytes at 3b1c0e
 
@@ -143,4 +143,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = e3840ab62 §911: the horizon
 - wf_bdebda48-278: 9 journal lines, 6 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.01 2.98 2.86
+load: 2.47 2.73 2.78
