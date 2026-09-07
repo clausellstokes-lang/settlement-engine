@@ -1,10 +1,10 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 17:02:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 17:06:14 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
 | ? | critic |  | result | 0 | CRITIC-S12.md | — | 17:49:27 |
-| ? | other |  | in-flight | 0 | — | — | 20:58:02 |
+| ? | other |  | result | 0 | — | — | 21:05:34 |
 | ? | other |  | result | 0 | refutations.md | — | 20:30:16 |
 | ? | other |  | result | 0 | rulings.md | — | 20:31:15 |
 | ? | other |  | result | 0 | — | — | 20:38:49 |
