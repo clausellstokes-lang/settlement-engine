@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 08:41:16 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 08:46:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -59,23 +59,11 @@
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
 | leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
 | leguin | verifier | i384-536 | in-flight | 6 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |
-| leguin | verifier | i420-438 | result | 5 | — | verdict file WRITTEN | 06:21:10 |
-| leguin | verifier | i439-461 | result | 9 | — | verdict file WRITTEN | 06:21:43 |
-| leguin | verifier | i462-489 | result | 7 | — | verdict file WRITTEN | 06:20:28 |
-| leguin | verifier | i490-512 | result | 5 | — | verdict file WRITTEN | 06:26:50 |
-| leguin | verifier | i514-572 | result | 16 | — | verdict file WRITTEN | 06:29:35 |
 | leguin | verifier | i542-616 | in-flight | 13 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i588-636 | result | 38 | — | verdict file WRITTEN | 06:43:35 |
 | leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i637-659 | result | 4 | — | verdict file WRITTEN | 06:34:20 |
-| leguin | verifier | i660-684 | in-flight | 19 | — | verdict file WRITTEN | 06:53:52 |
 | leguin | verifier | i660-684 | result | 4 | — | verdict file WRITTEN | 07:20:51 |
-| leguin | verifier | i686-721 | in-flight | 9 | — | verdict file WRITTEN | 06:53:37 |
 | leguin | verifier | i686-721 | result | 12 | — | verdict file WRITTEN | 07:14:08 |
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
-| leguin | verifier | i722-743 | result | 4 | — | verdict file WRITTEN | 06:48:26 |
-| leguin | verifier | i744-764 | result | 7 | — | verdict file WRITTEN | 06:48:31 |
 | leguin | verifier | i766-786 | result | 2 | — | verdict file WRITTEN | 07:06:28 |
 | leguin | verifier | i787-857 | result | 8 | — | verdict file WRITTEN | 07:07:52 |
 | leguin | verifier | i858-887 | result | 2 | — | verdict file WRITTEN | 07:25:14 |
@@ -103,11 +91,11 @@
 | ? | other |  | result | 0 | — | — | 07:52:09 |
 | ? | other |  | result | 0 | — | — | 12:10:50 |
 | ? | other |  | result | 0 | — | — | 12:39:01 |
-| ? | other |  | in-flight | 0 | — | — | 12:40:49 |
+| ? | other |  | in-flight | 0 | — | — | 12:45:00 |
 | ? | other |  | result | 0 | best-leguin.md | — | 12:22:45 |
 | ? | other |  | result | 0 | — | — | 12:24:43 |
 | ? | other |  | result | 0 | — | — | 12:38:09 |
-| ? | other |  | in-flight | 0 | — | — | 12:40:22 |
+| ? | other |  | in-flight | 0 | — | — | 12:46:26 |
 | ? | other |  | result | 0 | best-martin.md | — | 12:08:17 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
