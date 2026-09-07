@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i1232-1259",
- "lines": 78,
+ "lines": 84,
  "firstTs": "2026-09-07T04:32:16.903Z",
- "lastTs": "2026-09-07T04:36:07.910Z",
+ "lastTs": "2026-09-07T04:37:03.921Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 19
+  "Bash": 19,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://www.aph.gov.au/DocumentStore.ashx?id=b4fd6043-6626-4cbe-b8ee-a5c7319e94a0",
@@ -23,7 +24,7 @@
  "run": "wf_0eb229cc-f75",
  "agent": "a663ff00b6b0b971e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a663ff00b6b0b971e.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1232-1259.json",
   "exists": true

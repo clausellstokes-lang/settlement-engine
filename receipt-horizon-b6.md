@@ -1,6 +1,16 @@
 # RECEIPT — LANE HORIZON-B6 (the three CAPACITY evidence measurements)
 
-STATUS: PARTIAL (in flight — M1's 300-year soak is running; M2 and M3 are COMPLETE)
+STATUS: **COMPLETE** — all three measurements executed. 2026-09-07 00:38:24 EDT.
+
+**HEADLINE, in one line each:**
+- **M1** the 300-year LIT curve **CURES the runaway** (`runawayCount` 0, `bifurcated` 0) but **does
+  NOT plateau** (`other` x4; the realm is still gaining 26 %/50 y at the horizon) and **fires one
+  deterministic tripwire** (`capacity_realm_load` 0.4787). The register cell is **REFUSED by its own
+  door**. Wall clock **25m43s, not ~2.3 h**.
+- **M2** the reading suite is a **356 ms** item — the design's PLAUSIBLE placeholder is discharged.
+- **M3** the envelope suite is **1.14 s** against a 60 s bar — **52.6x margin**, STOP S1 not tripped.
+- **Two instrument findings and one stale-comment finding** are recorded below; the first
+  (**M1-F1**) is load-bearing for the tuning signature and is the most important thing in this file.
 
 Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · Lane: HORIZON-B6
 Dock: `$SC/laneB6` (detached, never the shared tree). Product bytes changed: **ZERO**.
@@ -12,7 +22,8 @@ Dock: `$SC/laneB6` (detached, never the shared tree). Product bytes changed: **Z
 2. `git -C $SC/laneB6 status --porcelain | wc -l` = `0` — clean. **PASS**
 3. `ls -A $SC/laneB6/node_modules | wc -l` = `453` — **PASS**
 
-No discrepancy; the lane proceeded.
+No discrepancy at arrival; the lane proceeded. (At exit line 3 reads **455** — two Vitest cache
+directories, not packages. See FENCES at the foot of this receipt.)
 
 ---
 
@@ -95,7 +106,7 @@ was running, as the chair stated.
 
 ---
 
-## M1 — THE ~2.3 h PLATEAU RECEIPT (the 300-year lit curve)  ⏳ IN FLIGHT
+## M1 — THE "~2.3 h" PLATEAU RECEIPT (the 300-year lit curve)  ✅ RAN — 25 m 43 s, and it is NOT a plateau
 
 **Invocation (the workflow's own, not hand-spelled).** `.github/workflows/soak-research.yml` runs
 `node --max-old-space-size=6144 scripts/audit/realm-scale-certification.mjs --profile "$SOAK_PROFILE"`,
@@ -168,8 +179,134 @@ at the parent would think the soak had stalled.) The ~2.3 h estimate is consiste
 the run: run A and run B are each a full 300-year traversal (~1.17 h at the 3.5 s/settlement-year
 estimate) and run C's divergence leg is only `min(YEARS, 5)` = 5 years.
 
-**Nothing is claimed for M1 yet.** Figures, shapes, tripwires and the register verdict are written
-below only once `TRUE_EXIT` is in the log.
+### M1 RESULT — ran to completion, **TRUE_EXIT=0**, 00:09:37 → 00:35:20 EDT (**25 min 43 s**)
+
+Full figures: `$SC/capacity/M1-figures.md`. Plateau chart as numbers: `$SC/capacity/M1-plateau-chart.txt`.
+Raw log: `$SC/capacity/soak-300y.log`. Receipt: 5,205,682 B, `schemaVersion` 5, `passed: true`,
+`notExecutable: []`. Aggregate digest `c8205d4e1147c2fb28be42e93a4e18a753850cfa050d5a9709204527f1e3ffe0`,
+source `4243bdc61…`. `subsystems.rules.demographicsEnabled = true` — **the LIT overlay reached the
+world**, verified on the receipt itself and not only on the argv.
+
+**WALL CLOCK — CONFIRMED, and the design's estimate is ~4x too pessimistic.** run A was **762.3 s**
+for 300 y x 4 s = **0.635 s/settlement-year**, against the 3.5 s/settlement-year estimate every
+"~2.3 h" figure in the design rests on (§11.4 off-gate row, §14 E12, the register cell's own note).
+The whole job — run A, byte-identical run B, the 5-year divergence run C, the worker isolate — took
+**25 m 43 s**. *(Consequence, PLAUSIBLE not confirmed: the 12-settlement `research-lit` cell was
+priced at ~7 h / ~17.6 h on the same estimate; the measured rate puts one traversal near ~1.3 h,
+which would fit a hosted six-hour job and re-open owner row SOAK-1. Superlinearity in settlement
+count is exactly what a 4-settlement datum cannot measure, and the register's own note warns that
+two 30-year figures disagreed by 17.8x — so this is a question for the chair, not a finding.)*
+
+**THE VERDICT — the runaway is CURED; the plateau is NOT DEMONSTRATED. CONFIRMED.**
+
+`realm.runawayCount` **0**, `realm.flooredCount` **0**, `realm.unlawfulZeroCount` **0**,
+`realm.bifurcated` **0** — the standing `population-runaway-300y` hazard does not reproduce under
+the lit engine, and `PASS realm population bounded — 21844 → 12289 (×0.56; envelope 0.05–20)`.
+**That half of §2.5 C4′ clause (4)'s prediction holds.**
+
+But every settlement's shape is **`other`**, not `plateau`. The design predicted "`plateau` shapes,
+`bifurcated` 0"; only the second half came true. The curve is a crash, a long trough, and a recovery
+that has not finished at the horizon:
+
+```
+settlement      y1    y25    y50   y100   y150   y200   y250   y300
+soak-a       15196   8065   6823   6840   8319   6576   8620  10869
+soak-b        3457     58     58     91    202    562    606   1017
+soak-c        1263    647    510    420    324    327    277    244
+soak-d         585      0     24    189     38    187    270    159
+REALM        20501   8770   7415   7540   8883   7652   9773  12289
+last 50 y:  y250=9773 y260=10302 y270=10795 y280=11122 y290=11656 y300=12289   (+26 %)
+```
+
+`plateau` needs `|y300 − y200| ≤ 0.05 × y300`; the measured drift is **7.9x** that window for
+soak-a, 8.9x soak-b, 6.8x soak-c, 3.5x soak-d. **300 years is not long enough for this fixture to
+reach a steady state.**
+
+**TRIPWIRE TRIPPED — 1 deterministic finding, with its tick and its figure:**
+
+```
+node scripts/soak/evaluate-receipt.mjs --aggregate …/research.json
+TRUE_EXIT=1                       <- the run is NOT clean
+  FINDING  research-lit-4s-300y-4s-seed1 · capacity_realm_load
+           — realm load 0.4787 outside the plateau window [0.6, 1.05]
+```
+
+At the horizon year **300**: `realmDemography.loadRatio01 = 0.4787` (population **12,289** against
+bound **25,674**, capacity 26,292, `realmPressure01` 0.4674). The row's second clause is SATISFIED
+(`binding.granary 2 + walls 2 === settlements 4`), so it fired on the load window alone. The ladder
+is healthy — `viable 4, failing 0, evacuating 0, remnant_occupied 0, remnant_empty 0`. This is an
+**under-filled realm, not a dying one.**
+
+Whether that is a MODEL fact (the lit term settles near half its bound at realm scale, against
+§2.0's "fixed point at 76–83 % of the bound") or an INSTRUMENT fact (the window grades a steady
+state and this reading was taken mid-recovery) is **not this lane's to rule** — it is CAP-7/the
+tuning desk's. The measured tilt is toward the second: a realm still gaining 26 %/50 y has not
+reached the state the window describes. **No dial was touched. THE PROMISE is intact.**
+
+**⚠ A `TRUE_EXIT` correction, recorded because it nearly became a false green.** The first
+evaluation was run as `… | tee file` and printed `TRUE_EXIT=0` — that was **`tee`'s** exit status,
+not the tool's. Re-run with the exit captured in-shell before any pipe, the true status is
+**`TRUE_EXIT=1`**, which is the documented "at least one deterministic row fired — the run is not
+clean". Every exit in this receipt is captured before a pipe.
+
+### ⛔⛔ M1-F1 — `capacity_plateau` AND `capacity_floor_thaw` CANNOT FIRE ON ANY REAL RECEIPT
+
+**This is the most important finding in this receipt.** Both rows key on
+`receipt.yearlyPopulations` / `receipt.yearlyDiedFlags` (`scripts/soak/tripwires.mjs:239, :243,
+:276, :278`). **No written receipt carries either field.**
+
+`whole-world-soak.mjs` builds both on the per-RUN object (`:389-390`, `:489-490`, `:548-560`) and
+then writes a receipt (`:1068-1074`) carrying only `startPopulations`, `finalPopulations` and
+`finalDiedFlags`. The per-year series survives only inside
+`behavioral.yearly[].stateVectors[id].population` — a different name and a different shape.
+Measured on the real receipt:
+
+```
+yearlyPopulations present? false      yearlyDiedFlags present? false
+notExecutable: []                     <- and the receipt claims FULL instrumentation
+```
+
+Both detectors hit their `Array.isArray(…) ? … : []` guard, read a zero-length series, take the
+`pops.length < 150` (resp. `< 100`) early return, and answer `[]` — **silently, and not as
+NOT-EXECUTABLE**. Their zero is a WEAK ZERO of exactly the class `scripts/soak/evaluate.mjs`'s own
+header names: *"A detector with no caller is not a guard — it is a guard-shaped file, and its zero
+findings are a WEAK zero."*
+
+**Proof the silence is false rather than a pass** — rebuild the two fields from `behavioral.yearly`
+and feed the same receipt back to the same detectors:
+
+```
+capacity_plateau            -> [] (silent)          # as shipped
+PATCHED capacity_plateau    -> FIRED:
+  settlement 0 never plateaued: 8319 at year 149 against 10869 at year 299
+  settlement 1 never plateaued:  202 at year 149 against  1017 at year 299
+  settlement 2 never plateaued:  324 at year 149 against   244 at year 299
+  settlement 3 never plateaued:   38 at year 149 against   159 at year 299
+PATCHED capacity_floor_thaw -> [] (silent)          # correctly silent: nothing is frozen
+```
+
+**The plateau row would convict all four settlements if it could see the data.** The design's
+"`plateau` shapes" prediction is therefore refuted **twice, independently** — by `settlementShapeOf`
+(4x `other`) and by `capacity_plateau`'s own arithmetic.
+
+**Why it was never caught.** `tests/soak-harness/tripwireRegistry.test.js:161` proves the row against
+a hand-planted field on a synthetic receipt — `lit({ yearlyPopulations: years(201, …) })`. The
+fixture is the only writer of that shape, so the row is green in the unit pin and blind in
+production: the estate's own "a fixture can be the only writer of the SHAPE" hazard, live.
+
+**And it is the same defect class C3 already caught once.** `capacity_envelope_30y` was REFUSED at
+landing for keying on an absent field — commit `d02c5acde`, subject "…**and the row that would have
+keyed on an absent field is refused**". Two sibling rows shipped with the identical defect and were
+not checked the same way. **A structural cure is indicated, not three point fixes:** the check that
+refused `capacity_envelope_30y` was a human reading, not an instrument, so nothing stops the next
+row from keying on a field the receipt does not write.
+
+**Consequence for the program — load-bearing.** §2.5 C5's signing proof reads *"the tier-2 LIT 300 y
+receipt PASSES `realm population bounded` and **fires none of the four rows**."* Two of the three
+built rows cannot fire on any receipt, so "fires none" is a weak zero — and the tuning signature
+would cite it as evidence. **The 12 s terminal cell will carry the same hole** unless the receipt
+writer ships the series or the rows are re-keyed onto `behavioral.yearly`. This lane changes no
+product bytes and did not fix it.
 
 ---
 
@@ -366,45 +503,117 @@ receipt-only evidence. No register act is owed for them, and none should be inve
 genesis cell exactly (verified above from the dry-run plan). The door would therefore admit the write
 once the receipt lands clean.
 
-**JUDGMENT (HORIZON-B6), recorded vetoably — the lane does NOT run `--write`.** Three reasons, in
-order of weight: (1) the register's own `_doc` names the minting seat — "CI NEVER WRITES THIS FILE …
-**the chair mints it on a clean tree**" — and this lane is not the chair; (2) this is the **genesis
-freeze act**, not a re-freeze: `cellIsFrozen` is false for both cells, and the design says the cell's
-`frozenAtSha` + `identity.lighting` becomes "the citation the future tuning signature carries", which
-puts it adjacent to the owner-gated signature rather than inside a measurement lane's grant; (3) the
-brief's fence reads "No register `--write` unless the register's door admits a measurement cell by
-design" — the door admits the *shape*, but the `_doc` withholds the *seat*, and the brief's own
-fallback ("otherwise write the receipt and hand the cell to the chair as a register act") is the
-narrower, reversible choice. **Veto shape:** if the chair rules the lane may mint, the exact command
-is below and needs only a seat string and a note.
-
-**REGISTER ACT OWED TO THE CHAIR** (to be filled with the measured cell once M1 lands; the proposal
-JSON will be written to `$SC/capacity/artifacts/soak-register.proposed.json` by the read-only
-`--compare --propose` path, which this lane WILL run):
+**Consequence 3 — THE DOOR ITSELF REFUSES THIS RECEIPT. No judgment call remains.** The read-only
+`--compare --propose` path was run (`TRUE_EXIT=0`, captured in-shell):
 
 ```
-cell key : research-lit-4s/research-lit-4s-300y-4s-seed1
-frozenAtSha : 4243bdc610fe5b380f1d0029973cf9088bae1631
-identity : { seed: "realm-scale-research-lit-4s-300y-4s-seed1", years: 300, settlements: 4,
-             lighting: { demographicsEnabled: true } }
-figures : DERIVED by scripts/soak/register.mjs from the receipt — never typed
-command : SOAK_REGISTER_REFREEZE='<chair seat>' SOAK_REGISTER_NOTE='<why, ≥60 chars>' \
-          node scripts/soak/soak-register.mjs --write --receipt <case receipt> --solo
-note    : `--write` EXITS NON-ZERO BY DESIGN; the evidence is the next plain `--compare`.
+proposal: …/artifacts/soak-register.proposed.json
+NOT-EXECUTABLE  research-lit-4s/research-lit-4s-300y-4s-seed1 — the cell is UNFROZEN genesis
+  measured 24 figure(s); the FIRST clean run is the freeze act
 ```
+
+and the proposal states the refusal in its own words:
+
+```json
+"mintRefusals": ["a deterministic-class tripwire fired — the run is not clean"]
+```
+
+`capacity_realm_load` fired, so `mintRefusals` (`scripts/soak/register.mjs:340-353`) forbids the
+mint. **No `--write` is possible, and none was attempted.** The lane's earlier reservation about the
+minting *seat* is now moot — the door refuses on the receipt's own merits, which is the stronger and
+more honest answer.
+
+**REGISTER ACT OWED TO THE CHAIR: NONE, and that is the finding.** The genesis cell stays UNFROZEN.
+Freezing it needs a receipt with zero deterministic firings, and this one has one. The chair's real
+choice is between three routes, none of which a measurement lane may take alone:
+
+1. **Fix the model or accept the reading at the sitting** — `capacity_realm_load`'s window is the
+   §2.0 fixed-point claim read at realm scale, and the measurement says the realm sits at 0.4787.
+   That is a tuning-desk input (CAP-7), the owner's, signed last.
+2. **Re-cut the row's window or its horizon** — if the fired row is grading a transient (the realm
+   is still climbing 26 %/50 y at year 300), the row is measuring the wrong thing at this horizon.
+   An instrument change, chair-gated.
+3. **`SOAK-4`'s "accept the honest red"** — the register's `_doc` names this as *"the ONLY sanctioned
+   use before the sitting"* of the governed growth door, requiring both `--charter=§NNN` and a
+   `SOAK_REGISTER_NOTE` of ≥ 60 characters. That is a charter act and is explicitly not this lane's.
+
+The full proposal, 24 derived figures, is preserved at
+`$SC/capacity/artifacts/soak-register.proposed.json`. Whichever route the chair takes, **M1-F1 must
+be resolved first**: two of the three capacity rows cannot fire, so a future clean run would be
+clean partly because its detectors are blind.
 
 ---
 
+## WHAT THE CHAIR IS OWED — the acts this lane found but may not take
+
+| # | act | why it is not the lane's | severity |
+|---|---|---|---|
+| 1 | **M1-F1**: ship `yearlyPopulations`/`yearlyDiedFlags` on the receipt, or re-key `capacity_plateau` + `capacity_floor_thaw` onto `behavioral.yearly[].stateVectors` | product bytes in `scripts/audit/whole-world-soak.mjs` or `scripts/soak/tripwires.mjs`; and it changes what a signing proof means | **HIGH** — C5's "fires none of the four rows" is a weak zero until this lands |
+| 2 | a **structural guard** so a tripwire row cannot key on a field no receipt writes (a walker over `TRIPWIRES[].detect` sources against the written receipt's key set) | new instrument; `structural-prevention` class, chair-scoped | **HIGH** — three rows, same defect, one caught by hand |
+| 3 | **M3-F1**: correct the four figures in `demographicsEnvelope.test.js:19-23` to 170/180, 0.9444, 0.4846, Elderfen year 12 | product (test) bytes; better folded into a car already touching the file | LOW — no red, but the header misinforms by design |
+| 4 | rule on `capacity_realm_load` 0.4787: model (CAP-7, owner) or window (instrument, chair) | tuning is the owner's, signed last; THE PROMISE | **decision** |
+| 5 | re-open **SOAK-1** with the measured 0.635 s/settlement-year — the 12 s cell may now fit a hosted job | owner row; and the extrapolation is PLAUSIBLE only | **decision** |
+| 6 | amend §2.5 C4′ clause (4): the interim receipt can be cited for `runawayCount 0` / `bifurcated 0`, **not** for "`plateau` shapes" | the design is the chair's | **MEDIUM** — a citation that would not survive reading |
+
 ## FILES WRITTEN (all outside the repo; the dock is untouched)
-- `$SC/receipt-horizon-b6.md` (this file)
-- `$SC/capacity/quiet-window.log`
-- `$SC/capacity/M2-reading-suite.md`
-- `$SC/capacity/M3-envelope-suite.md`
-- `$SC/capacity/M3-arrival-figures.txt`
-- `$SC/capacity/arrival-probe.mjs`
+- `$SC/receipt-horizon-b6.md` (this file — the deliverable)
+- `$SC/capacity/M1-figures.md` — M1's figures, verdict and both instrument findings
+- `$SC/capacity/M1-plateau-chart.txt` — the plateau chart as numbers, term by term
+- `$SC/capacity/M2-reading-suite.md` · `$SC/capacity/M3-envelope-suite.md`
+- `$SC/capacity/M3-arrival-figures.txt` — the ARRIVAL/CAP-7 figures the green arms discard
+- `$SC/capacity/arrival-probe.mjs` · `$SC/capacity/plateau-extract.mjs` — the two read-only probes
+- `$SC/capacity/quiet-window.log` · `$SC/capacity/soak-300y.log` · `$SC/capacity/soak.pid`
+- `$SC/capacity/tripwire-evaluation.txt` · `$SC/capacity/register-compare.txt`
 - `$SC/capacity/DESIGN_HORIZON.snapshot.md`
-- `$SC/capacity/soak-300y.log`, `$SC/capacity/soak.pid`
-- `$SC/capacity/artifacts/research-plan.json` (+ `research.json` and the `.cases/` dir when M1 lands)
+- `$SC/capacity/artifacts/` — `research-plan.json`, `research.json`,
+  `soak-register.proposed.json`, `research-lit-4s.cases/research-lit-4s-300y-4s-seed1.json` (5.2 MB)
+
+## FENCES — held
+- **Zero product bytes.** Final check 2026-09-07 00:41:26 EDT: `git status --porcelain | wc -l` = **0**,
+  `rev-parse HEAD` = `4243bdc610fe5b380f1d0029973cf9088bae1631` — the tracked tree is byte-identical to
+  arrival. Nothing was committed; nothing was pushed; no `git stash` was used.
+  `DEMOGRAPHIC_TUNING_SIGNATURE` still reads `{ signed: false, lit: null }` at `demographicsRates.js:375`,
+  and `tests/soak-harness/.soak-register.json` is unmodified.
+- **⚠ ONE ARRIVAL INVARIANT MOVED, and it is benign — stated rather than smoothed over.**
+  `ls -A node_modules | wc -l` was **453** at arrival and is **455** at exit. The two new entries are
+  `node_modules/.vite` and `node_modules/.vite-temp`, the Vite/Vitest transform caches created by the
+  two focused vitest runs (M2, M3). Verified: `find node_modules -maxdepth 1 -type l | wc -l` = **453**
+  — every originally symlinked package is still a symlink, none was materialised, `npm install` was
+  never run, and `node_modules/` is gitignored (`.gitignore:1`), so git sees nothing. A successor
+  re-running the arrival check on this dock will read 455 and should not treat it as a discrepancy.
+- **No register `--write`.** Refused by the register's own door; only the read-only
+  `--compare --propose` path ran.
+- **No tuning value moved.** No dial, no band, no fixture number.
+- **Nothing signed, nothing flipped.** `DEMOGRAPHIC_TUNING_SIGNATURE` is untouched at
+  `{ signed: false, lit: null }`.
+- Both probes live outside the repo and import the dock read-only.
+- **The gate slot is handed back.** 00:42:07 EDT: `/tmp/settlementforge-vitest-gate.502.lock` is gone,
+  `sh scripts/gate-mutex.sh` exits **0** with *"gate-mutex: FREE — no held lock or Vitest runner
+  outside this process's ancestry"*, and `pgrep` finds no `realm-scale-certification`,
+  `whole-world-soak` or `vitest` process. The chair may start a gate immediately. The ~2.3 h
+  exclusive-hold hazard flagged at launch never materialised — the hold lasted 25 m 43 s.
 
 ## RETROVALIDATION ROW
-(written at STATUS: COMPLETE)
+
+**HORIZON-B6 · Opus 5 (Fable-unvalidated) · 2026-09-06 23:54:36 → 2026-09-07 00:38 EDT · dock
+`$SC/laneB6` @ `4243bdc61`, clean at entry and exit · ZERO product bytes.** Three measurements owed,
+**three delivered, all CONFIRMED by executed proof with output quoted**: M1 the 300-year lit receipt
+(`TRUE_EXIT=0`, 25 m 43 s — **not ~2.3 h**; runaway CURED, `runawayCount`/`bifurcated` 0; **plateau
+NOT demonstrated**, shapes `other` x4, drift 3.5–8.9x the window; **one deterministic tripwire fired**,
+`capacity_realm_load` 0.4787 at year 300, `evaluate-receipt` `TRUE_EXIT=1`); M2 the reading suite
+**356 ms**; M3 the envelope suite **1.14 s against a 60 s bar**, STOP S1 not tripped, plus the CAP-7
+arrival figures (**3 of 6 settlements arrive inside a 30-year campaign, 5 of 6 inside 60**), which
+confirm the design's reasoning for C2's state surface. **Register act: NONE — the door refuses**
+(`mintRefusals: deterministic-class tripwire fired`); the 24-figure proposal is preserved for the
+chair. **Three findings raised, none fixed by this lane:** M1-F1 (`capacity_plateau` and
+`capacity_floor_thaw` key on `yearlyPopulations`/`yearlyDiedFlags`, which **no written receipt
+carries** — proven false-green by patching the series in and watching the row convict all four
+settlements; same class as the `capacity_envelope_30y` row C3 refused; **it makes C5's "fires none of
+the four rows" a weak zero**), the roster delta (11/9 rows live against the design's predicted 12/10,
+declared in `d02c5acde`'s own subject — no act owed), and M3-F1 (the envelope suite's "MEASURED AT
+THIS COMMIT" header at `:19-23` is false at HEAD — 171/0.95/0.41/year-14 against a measured
+170/0.9444/0.4846/year-12, with all twelve files in the reach proven byte-identical since the header
+was written, so it was never true). One near-miss corrected in flight: a `TRUE_EXIT` read through a
+`tee` pipe reported `0` for a tool that had exited `1`; every exit here is captured before a pipe.
+The quiet-window law needed fourteen samples to yield three consecutive clean minutes, and the
+excursions were macOS `build_hd_index`, not any lane. **STATUS: COMPLETE.**

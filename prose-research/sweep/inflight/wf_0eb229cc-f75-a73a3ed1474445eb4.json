@@ -1,0 +1,26 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1441-1455",
+ "lines": 63,
+ "firstTs": "2026-09-07T04:38:48.707Z",
+ "lastTs": "2026-09-07T04:41:13.323Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 12
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/$id"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Meister confirmed. Now MAUVE (four claims).",
+ "run": "wf_0eb229cc-f75",
+ "agent": "a73a3ed1474445eb4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a73a3ed1474445eb4.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1441-1455.json",
+  "exists": false
+ }
+}

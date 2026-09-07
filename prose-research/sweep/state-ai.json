@@ -27240,6 +27240,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1198": {
+   "index": 1198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI's tendency to hallucinate regarding places or events that don't already",
+   "note": "Raw wikitext (action=raw) of Wikivoyage:Votes for deletion/September 2025, section 'Articles created by A Sulaiman Z'. SelfieCity, 11:59, 22 August 2025 (UTC), votes Delete; the quoted clause runs on to 'have an online presence' and he then says he suspects much of the content in those articles is false. The listed pages are Nigerian localities (Birniwa, Dawakin Kudu, Katagum and about two dozen more); the page calls them articles or African destinations rather than 'towns', though the descriptor is accurate. SelfieCity is the second commenter, so 'another editor' holds.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1199": {
    "index": 1199,
    "verdict": "SKIPPED_TRIAGE",
@@ -27254,6 +27261,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1201": {
+   "index": 1201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "see the ChatGPT-ish bulleted list at the end of the article",
+   "note": "Raw wikitext of Wikivoyage:Votes for deletion/January 2025. SelfieCity, 20:53, 2 January 2025 (UTC), opens the section headed '[[Ambler (Alaska)]]' - so this is the nomination - saying the article appears AI-written, citing the quoted list as an example, and proposing deletion. Ambler is an Alaskan town. Mild softening: the list is offered as one example ('For example'), not stated as the sole ground.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1202": {
+   "index": 1202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am surprised we don't have any AI rules",
+   "note": "Raw wikitext of Wikivoyage:Travellers' pub, section 'AI guidelines'. Signed Sgroey, 02:12, 2 September 2026 (UTC), so 'as of September 2026' holds. The en.wikivoyage user-rights API gives Sgroey groups autopatrolled/user - an ordinary editor. The page nowhere states Sgroey's gender, so the pronoun 'he' is not evidenced by the source.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1203": {
+   "index": 1203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if an article is mostly visibly AI-generated",
+   "note": "Same section: SHB2000, 02:53, 3 September 2026 (UTC), replies to Sgroey that this is mostly true but that a WV:CSD speedy-deletion provision exists, in the quoted terms. The pub page does not itself call SHB2000 an administrator; the en.wikivoyage user-rights API returns groups bureaucrat, checkuser and sysop for that account, which confirms the 'administrator' limb from the same site's records.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1204": {
    "index": 1204,
    "verdict": "SKIPPED_TRIAGE",
@@ -27267,6 +27295,21 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1206": {
+   "index": 1206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model texts remained less diverse, more affectively positive",
+   "note": "arxiv.org/html/2604.20048v3, 'Culturally uneven urban perception in large language models', first author Rong Zhao; the abs page's submission history dates v3 to 8 June 2026, matching the citation. The sentence closes the UK Geograph results paragraph and states the comparison is against the human benchmark, so the 'than the human benchmark' limb is explicit.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1207": {
+   "index": 1207,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'identity-perception indices' - the paper's IPI is the sentiment-based ingroup preference index, not an identity-perception index",
+   "trueWording": "the model estimates were systematically more elevated",
+   "note": "Same paragraph of arXiv 2604.20048v3: human texts gave negative IPIs for all three nations (-0.400 England, -0.256 Scotland, -0.062 Wales) on the 270-image nation-labelled Geograph subset, and the quoted clause follows, adding that several model estimates were positive (Fig. 3e). The quote is verbatim and the numeric substance holds; only the expansion of the acronym is wrong - Fig. 2c defines IPI as the sentiment-based ingroup preference index.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
   },
   "1208": {
    "index": 1208,
@@ -27289,6 +27332,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1211": {
+   "index": 1211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4-turbo 46.0 [45.5, 46.5] (4-choice balanced accuracy)",
+   "note": "NeurIPS 2024 Datasets and Benchmarks PDF fetched and extracted with pdftotext -layout. Table 1 on p.7 carries the row; the seven 4-choice figures are 39.0, 35.6, 46.0, 44.7, 39.5, 40.8 and 33.6, so 46.0 is the best of the seven, and the caption says bold marks the best-performing model. The abstract independently gives 46% for GPT-4-Turbo and describes the test as graduate-level. The table spells the model 'GPT-4-turbo'.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1212": {
+   "index": 1212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Llama-3.1-8B (FP8) 33.6 [33.2, 34.1]",
+   "note": "Same Table 1, p.7: 33.6 is the lowest 4-choice balanced accuracy among the seven models, and the abstract states the range as running from 33.6% for Llama-3.1-8B up to 46% for GPT-4-Turbo, so the 'weakest model tested' limb is supported.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1213": {
+   "index": 1213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "random guessing (25%) but falling short of expert comprehension",
+   "note": "Abstract of the HiST-LLM paper, immediately after the 33.6-46% range, preceded by 'outperforming'. The same finding is restated in the Introduction and again in the Conclusion, where the models are said to beat random guessing while falling short of comprehensive expert-level knowledge.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1214": {
    "index": 1214,
    "verdict": "SKIPPED_TRIAGE",
@@ -27296,12 +27360,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1215": {
+   "index": 1215,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "achieves 55.3% for 8,000-6,000 BCE, drops to 38.7% for 1,500-2,000 CE",
+   "note": "The claim carried no quote, so it is graded on substance. The prose immediately below Table 2 (p.8) gives exactly this example for GPT-4-Turbo, naming both periods and both figures, and Table 2's rows confirm 55.3 [48.0, 62.5] for the 8k-6k BCE bin and 38.7 [37.4, 40.0] for the 1.5k-2k CE bin. Both numbers, both period labels and the direction of the fall match.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1216": {
    "index": 1216,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1217": {
+   "index": 1217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "are recorded as \"evidenced\" or \"inferred\"",
+   "note": "Introduction, p.2: the sentence begins 'All variables' and continues with the quoted words, so the 'every Seshat variable carries that marking' limb is supported. The same section states that the benchmark's questions also explicitly ask whether a fact is evidenced or inferred from indirect evidence, supporting the other limb. Location correction: the passage sits in Section 1 (Introduction), not Section 3; the page number p.2 is right.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
   },
   "1218": {
    "index": 1218,
@@ -27324,6 +27402,14 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1221": {
+   "index": 1221,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the attributed byline - the TechCrunch piece is bylined Charles Rollet, not Kyle Wiggers",
+   "trueWording": "only achieved about 46% accuracy",
+   "note": "Live page fetched with a browser user agent. The third body paragraph names GPT-4 Turbo as the best-performing LLM and carries the quoted words, adding that this is not much higher than random guessing. Dateline 7:01 AM PST, January 19, 2025, matches the cited date; the headline and Hist-LLM/Seshat framing match. Every limb of the claim sentence holds - only the author in the source line is wrong.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1222": {
    "index": 1222,
    "verdict": "SKIPPED_TRIAGE",
@@ -27338,12 +27424,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1224": {
+   "index": 1224,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "History is often viewed as facts, but sometimes interpretation is necessary",
+   "note": "Complexity Science Hub news page, dated 21.01.2025, fetched live. The quoted words are attributed to del Rio-Chanona and continue 'to make sense of it'; she is described there as a CSH external faculty member and a UCL assistant professor, and as the study's corresponding author.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
   "1225": {
    "index": 1225,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1226": {
+   "index": 1226,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human summaries scored 61 (81%) and the Gen AI summaries",
+   "note": "aph.gov.au DocumentStore PDF fetched (1.99 MB, PDF 1.7) and text-extracted. Section 6 DISCUSSION of the attached AWS report states the maximum was 75 points and carries the quoted words, with the Gen AI figure 35 (47%). ASIC's own answer text uses 'aggregated' of both sets and repeats the same two scores, so the 'aggregated' and 'of 75' limbs both hold.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
+  },
+  "1227": {
+   "index": 1227,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI summaries performed lower on all criteria",
+   "note": "Same PDF, ASIC's answer to Question on Notice No. 001 (before the attached AWS report, p.2 of the answer): the final results are reported in the quoted terms, compared with the human summaries. The discussion section repeats that the Gen AI summaries scored lower on all criteria. Header block confirms the Select Committee on Adopting Artificial Intelligence, Question No. 001, reference 21 May 2024.",
+   "fromFile": "verdicts-ai-i1198-1227.json"
   },
   "1228": {
    "index": 1228,
@@ -27584,6 +27691,21 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1262": {
+   "index": 1262,
+   "verdict": "PARTIAL",
+   "trueWording": "there exists only a single, indisputable answer",
+   "unsupportedLimb": "excluding facts on which sources disagree",
+   "note": "Raw PDF arXiv:2411.04368v1. Abstract carries the quotation word for word; Sec. 2.1 'Must have a single answer' repeats it. But the paper's stated exclusion mechanism is annotator-based, not source-based: Sec. 2.2 removes a question when two AI trainers' answers disagree per a ChatGPT classifier, or when the second trainer judged it not timeless / lacking an indisputable answer. 'Sources disagree' is the claimant's gloss; the paper never frames exclusion that way (it only requires two unique source domains across the trainers).",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
+  "1263": {
+   "index": 1263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each hallucinate between 17% and 33% of the time",
+   "note": "Raw PDF arXiv:2405.20362v1, Abstract, word for word. Every limb holds: the abstract names LexisNexis (Lexis+ AI) and Thomson Reuters (Westlaw AI-Assisted Research, Ask Practical Law AI), and 'retrieval-grounded' is the paper's own framing (RAG touted by providers; contribution 1 assesses 'RAG-based proprietary legal AI tools').",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
   "1264": {
    "index": 1264,
    "verdict": "SKIPPED_TRIAGE",
@@ -27597,6 +27719,35 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1266": {
+   "index": 1266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "answering 65% of our queries accurately",
+   "note": "Raw PDF arXiv:2405.20362v1, Section 1 Introduction (p.4 of the preprint), word for word in the sentence beginning 'LexisNexis's Lexis+ AI is the highest-performing system we test'. The 'highest performing system tested' limb is stated on the page. A results figure later restates 65% for Lexis+ AI.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
+  "1267": {
+   "index": 1267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Westlaw's AI-Assisted Research is accurate 42% of the time",
+   "note": "Raw PDF arXiv:2405.20362v1, Section 1 Introduction, word for word (source uses a curly apostrophe in Westlaw's). Same evaluation as index 1266 — the sentence sits in the same paragraph. Page adds that Westlaw hallucinates nearly twice as often as the other legal tools.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
+  "1268": {
+   "index": 1268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they provided incorrect answers to more than 60 percent of queries",
+   "note": "Raw HTML fetched live from cjr.org with a browser user agent (HTTP 200), section 'Chatbots' responses to our queries were often confidently wrong'. Quotation word for word. Every limb supported by the Methodology section: eight generative search tools; excerpts supplied; 'we asked it to identify the corresponding article's headline, original publisher, publication date, and URL'.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
+  "1269": {
+   "index": 1269,
+   "verdict": "PARTIAL",
+   "trueWording": "with Perplexity answering 37 percent of the queries incorrectly",
+   "unsupportedLimb": "that 37% and 94% are the range endpoints across all eight tools",
+   "note": "Raw cjr.org page carries both figures word for word ('while Grok 3 had a much higher error rate, answering 94 percent of the queries incorrectly'), but never says these are the lowest and highest. Per-tool rates for the other six appear only in chart images, and the article separately notes Copilot 'declined more questions than it answered', so a lower incorrect rate than Perplexity's 37% is not excluded. The two numbers are right; 'ranged from ... to' is the claimant's inference.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
   },
   "1270": {
    "index": 1270,
@@ -27612,6 +27763,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1272": {
+   "index": 1272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cited fabricated or broken URLs that led to error pages",
+   "note": "Raw cjr.org page, word for word in 'More than half of responses from Gemini and Grok 3 cited fabricated or broken URLs that led to error pages.' The following sentences add that 154 of 200 Grok 3 citations led to error pages.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
   "1273": {
    "index": 1273,
    "verdict": "SKIPPED_TRIAGE",
@@ -27625,6 +27783,21 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1275": {
+   "index": 1275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "RS scores barely approaching 30, while most LLMs score below 15",
+   "note": "Raw PDF arXiv:2604.24690v1 (paper exists; downloaded and text-extracted, 14 pp.). Section 5.2 'Main results', word for word across a line break, in 'even top-performing LLMs such as Gemini-3-Pro and Qwen3-235B achieve RS scores barely approaching 30, while most LLMs score below 15.' Table 4 is consistent (top RS 28.14; majority under 15).",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
+  "1276": {
+   "index": 1276,
+   "verdict": "PARTIAL",
+   "trueWording": "Gemini-3-Pro-Preview 1.94 6.27 73.97 26.71",
+   "unsupportedLimb": "the highest of the closed-source models listed",
+   "note": "Raw PDF arXiv:2604.24690v1, Table 4 (p.6): the row is exact, so RS 26.71 for Gemini-3-Pro-Preview is confirmed. The superlative is refuted by the same table: the Closed-Source block also lists Gemini-3-Pro-Preview-Thinking at RS 26.73, higher than 26.71. Highest closed-source RS in Table 4 is 26.73, not 26.71.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
   },
   "1277": {
    "index": 1277,
@@ -27702,6 +27875,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1288": {
+   "index": 1288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only Claude used em dashes more than professional writers",
+   "note": "Raw wikitext via en.wikipedia Special:Export. Section Style > 'Overuse of em dashes' (nesting confirmed: ==Style== precedes ===Overuse of em dashes===). Final sentence of that section reads 'A July 2026 study found that of contemporary models only Claude used em dashes more than professional writers, and ChatGPT used them less.' The attached ref is exactly the cited relay: {{cite web |title=How to spot AI writing |website=The Economist |date=30 July 2026}}. Verified only that the Wikipedia page relays this, which is what the claim asserts; the Economist study itself was not opened.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
   },
   "1289": {
    "index": 1289,
@@ -27787,6 +27967,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1301": {
+   "index": 1301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "whereas ChatGPT never uses antiphrasis",
+   "note": "Raw PDF arXiv:2301.07597, Section 3 'Major Differences between Human and ChatGPT', item (c), word for word, immediately after 'Humans also love to apply humor, irony, metaphors, and examples'. Attribution nuance worth noting but not a failed limb: Sec. 3.2 'Human Summarization' says the list distils 200+ feedbacks from 17 volunteer testers 'combined with our observations' — the paper says volunteers, not annotators.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
   "1302": {
    "index": 1302,
    "verdict": "SKIPPED_TRIAGE",
@@ -27864,6 +28051,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1313": {
+   "index": 1313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "present participial clauses at 2 to 5 times the rate",
+   "note": "Raw PDF arXiv:2503.02879v2 = Huang, Xu, Geng, Wan, Chen, 'Wikipedia in the Era of LLMs', Transactions on Machine Learning Research 02/2026 — matches the cited venue and date. Section 4.2 'Direct Impact 2: Linguistic Style', Sentence Level paragraph: 'Reinhart et al. (2025) revealed that LLMs use present participial clauses at 2 to 5 times the rate of human text while using the passive voice at roughly half the rate as human texts.' Both limbs and the relaying attribution hold.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
   "1314": {
    "index": 1314,
    "verdict": "SKIPPED_TRIAGE",
@@ -27877,6 +28071,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1316": {
+   "index": 1316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "13 times more likely to contain a “blacklisted” source",
+   "note": "Raw PDF arXiv:2511.09685 (Triedman & Mantzarlis, Cornell Tech), p.1 summary of findings: 'Non-CC-licensed articles on Grokipedia are 3.2 times more likely than the same articles on Wikipedia to contain a citation that the English Wikipedia community has deemed “generally unreliable” and 13 times more likely to contain a “blacklisted” source.' Every limb — non-CC-licensed subset, same-article comparison, English Wikipedia's blacklist — is on the page.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
   },
   "1317": {
    "index": 1317,
@@ -27906,6 +28107,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1321": {
+   "index": 1321,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "heading 'G15. LLM-generated pages without human review'; 'reasonable human review' required",
+   "note": "Claim carried no quote, so VERIFIED_SUBSTANCE rather than VERBATIM. Raw wikitext via Special:Export. The page opens with {{proposal}} (standing proposal) and the heading 'G15. LLM-generated pages without human review'; its body requires that the page 'could only plausibly have been generated by large language models (LLM) and would have been removed by any reasonable human review', with a footnote defining reasonable human review. 'Earlier wording' checked against the live policy: WP:Speedy deletion now heads the criterion 'G15. Unambiguously LLM-generated pages', keeps the old title only as an anchor, and has dropped the reasonable-human-review clause after a 2026 RfC. Page creator confirmed via the MediaWiki API: first revision by user Ca, 2026-06-06, comment 'rough draft'.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
+  },
   "1322": {
    "index": 1322,
    "verdict": "SKIPPED_TRIAGE",
@@ -27933,6 +28141,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1326": {
+   "index": 1326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "des références bibliographiques plausibles mais fictives",
+   "note": "Raw wikitext via fr.wikipedia Special:Exporter. Section 'Les sources : principal critère de vérification' > 'Types de problèmes rencontrés' opens 'Les contenus générés par IA présentent fréquemment :' and lists, third bullet, the quoted phrase word for word. Page is the Projet:Observatoire des IA report of the 9 May live session, self-described as AI-generated but proofread.",
+   "fromFile": "verdicts-ai-i1262-1326.json"
   },
   "1327": {
    "index": 1327,
@@ -27990,12 +28205,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1335": {
+   "index": 1335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "indicating more syntactically complex and less reader-friendly prose",
+   "note": "arxiv.org/pdf/2510.26899 (Yasseri & Mohammadi, v5, 10 Apr 2026) fetched as PDF and converted with pdftotext. Sec. 3.2 'Descriptive Differences Between Platforms' carries the quoted words verbatim, immediately after naming Flesch-Kincaid grade (Fig. 3b) and lexical diversity (Fig. 3c) as higher on Grokipedia. Table 1 line and the Discussion repeat the same pattern.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
   "1336": {
    "index": 1336,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1337": {
+   "index": 1337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only 7% of the articles had fake sources",
+   "note": "wikiedu.org blog post of January 29, 2026, byline LiAnna Davis, fetched live (HTTP 200). Body: expectation framed as 'Based on the discourse around AI hallucinations, we were expecting... citations to sources that didn't exist, but this wasn't true' before the quoted clause; the flagged set is the 178 of 3,078 articles Pangram flagged. Every limb supported.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
+  "1338": {
+   "index": 1338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "More than two-thirds of these articles failed verification",
+   "note": "Same wikiedu.org page, paragraph directly after the fake-sources one. The page then defines the failure exactly as the claim does: a plausible-sounding sentence cited to a real, relevant-sounding source whose text does not contain the information. 'These articles' = the 178 Pangram-flagged articles.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1339": {
    "index": 1339,
@@ -28031,6 +28267,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1344": {
+   "index": 1344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4o uses present participial clauses at 5.3 times the rate",
+   "note": "arxiv.org/pdf/2410.16107 (Reinhart, Markey, Laudenbach, Pantusen, Yurko, Weinberg, Brown; v2, 21 Aug 2025) fetched as PDF. Results, 'grammatical differences' passage carries the sentence verbatim, continuing '...of humans (paired Cohen's d = 1.38)'. Author list on the PDF matches the citation; the fetched copy is the arXiv preprint of the PNAS paper, not the PNAS page itself.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1345": {
    "index": 1345,
@@ -28137,12 +28380,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1360": {
+   "index": 1360,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "incompatible with our policies on citation",
+   "note": "Live old.reddit.com returned a 'Welcome to Reddit' interstitial under a browser UA, and both .json routes were blocked (403 / same interstitial), so the verdict is taken from the Wayback raw capture web.archive.org/web/20260819232418id_/... . Rule 4 ('This is a DIY community'), subsection 'AI Content': generators 'tend to provide incomplete or even no proper citation for the material used to train the AI'; content from them is the quoted phrase 'and are thus not appropriate for our community'. The rule hedges with 'tend to' where the claim says flatly 'do not cite', but the stated ground of the ban is exactly the training-material citation failure.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
   "1361": {
    "index": 1361,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1362": {
+   "index": 1362,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "generate walls of text that no one will read",
+   "note": "legendkeeper.com/worldbuilding-with-ai/ fetched live. Author's Note (Aug 12th, 2025): 'We see a lot of \"Like LegendKeeper + tons of AI\" competitors pop up every week now-Personally, I wonder why one would' + the quoted words. Byline Braden Herndon; the page's embedded author record gives his bio as 'Co-founder, code-lord...' and 'Braden created LegendKeeper', supporting the founder limb.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1363": {
    "index": 1363,
@@ -28151,12 +28408,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1364": {
+   "index": 1364,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They don't know what they're writing.",
+   "note": "rascal.news article by Lin Codega fetched live. In Appelcline's emailed statement to Rascal: 'Despite being sold as AI, LLMs aren't intelligent.' + the quoted sentence + 'So they definitely don't understand that if you say one thing in one sentence, and then something else in another, that those two sentences create implications between them,' followed by his count of false implications in five paragraphs. The cross-sentence-implication attribution is explicit.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
   "1365": {
    "index": 1365,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1366": {
+   "index": 1366,
+   "verdict": "PARTIAL",
+   "trueWording": "there are no links, internal or external",
+   "note": "Same rascal.news page, section opening 'what the fuck is the point of all this?': 'When you click on the profiles of any person there are no links, internal or external. No list of published work, not even a direct website...'. Two of the claim's three items are verbatim on the page; the third, 'no source references', is nowhere asserted — a grep of the whole article for citation/cited/references finds no such statement about the profiles.",
+   "unsupportedLimb": "no source references — the page reports absent links and no list of published work, never absent citations",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
+  "1367": {
+   "index": 1367,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "wasn't even mentioned in the overwrought bolus of his profile",
+   "note": "Same rascal.news page, Costikyan paragraph: 'As someone who constantly sings the praises of Greg Costikyan's Violence, imagine my surprise when that particular game' + the quoted words, then 'I suppose the AI they used wasn't clever enough to realize that Designer X was one of his pseudonyms.' Both the omission and the pseudonym attribution are Codega's own.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
+  "1368": {
+   "index": 1368,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "three or four paragraphs of sycophantic evasion",
+   "note": "Same rascal.news page, on her hour of questions to 4 Pillar Games through the 'Most Influential Tabletop Game Icons' Facebook page: 'every time I asked a question I was given AI-generated responses... Every single time I asked a question I got an overblown answer,' + the quoted phrase + 'with repeated phrases like \"that's fair\" and \"public historical record\"'. Every limb supported.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1369": {
    "index": 1369,
@@ -28165,12 +28451,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1370": {
+   "index": 1370,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most end up between 1500 and 2000 words",
+   "note": "Same rascal.news page, word-count passage: she checked the word count on newly published profiles, quoted sentence verbatim, then 'I asked how long it took to write these articles, and the response was \"around two hours.\"' Both limbs supported.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
+  "1371": {
+   "index": 1371,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poisoning the well of history",
+   "note": "Same rascal.news page: Appelcline 'received a message from Ken Whitman on LinkedIn in January 2026' about the MITTGI profiles and wrote 'I would like to see that junk gone from the earth because you're' + the quoted phrase. Directed at Whitman, on LinkedIn, about the LLM-written designer histories.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
+  "1372": {
+   "index": 1372,
+   "verdict": "PARTIAL",
+   "trueWording": "It got confused and included Star Trek setting information.",
+   "note": "thealexandrian.net post fetched live; the quoted sentence is verbatim in Justin Alexander's comment, id comment-2035754, dated 'December 31st, 2025 - 3:28 pm' as the claim says, and the mission summary he quotes does import Starfleet where the game's Consortium belongs ('Starfleet (wrong) to the Consortium (correct)'). But the transcript is the Gemini share-link posted by commenter anotherpanacea at 2:33 pm; Alexander writes in the second person about it ('Then you tell it to start the playtest!'). Alexander's own hands-on test in the article body was ChatGPT, not Gemini.",
+   "unsupportedLimb": "Alexander testing Gemini — the Gemini session was commenter anotherpanacea's shared transcript, which Alexander only analysed",
+   "fromFile": "verdicts-ai-i1335-1378.json"
+  },
   "1373": {
    "index": 1373,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1374": {
+   "index": 1374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "produce a simulacrum of criticism",
+   "note": "Same thealexandrian.net post, body: 'there's one thing missing from LLMs: The ability to form mental models. They can't read a text, form a mental model of what that text means...' and then 'In order to meaningfully critique something, you have to be able to form a mental model of that thing... An LLM can't do any of that. At best, it can' + the quoted words. Both limbs supported; the phrase 'Designing with ChatGPT' appears on the page as the following section, not as the heading over this passage.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1375": {
    "index": 1375,
@@ -28192,6 +28507,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1378": {
+   "index": 1378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs have good spelling and bad memory",
+   "note": "tenfootpole.org/ironspike/?p=10009 fetched live; comment by Peltast, October 25, 2025 at 4:20 am (name/date/text order confirmed in the raw HTML): 'There are in fact some tells which are fairly obvious at first glance for distinguishing humans. Bad spelling for example, or certain kinds of complicated, multi-part, widely spaced apart constructions - ' + the quoted words, then 'On the LLM side the signs are more subtle and can be missed.' Every limb supported.",
+   "fromFile": "verdicts-ai-i1335-1378.json"
   },
   "1379": {
    "index": 1379,
@@ -28340,6 +28662,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1415": {
+   "index": 1415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs will often allude vaguely to the two subjects being",
+   "note": "Raw wikitext fetched via ?action=raw (HTTP 200, 220246 bytes). Section 'Vague expression of connection or association' opens by contrasting directly stating a connection or relationship between two subjects with the vague alternative, and gives 'connected to' / 'associated with' as the examples. Every limb of the claim (direct statement avoided; vague allusion; the two connection/association wordings) is on the page.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
+  },
   "1416": {
    "index": 1416,
    "verdict": "SKIPPED_TRIAGE",
@@ -28361,6 +28690,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1419": {
+   "index": 1419,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "documented an over 10% decrease in the usage of the words",
+   "note": "Section 'Avoidance of basic copulatives (\"is\"/\"are\" phrases)' attributes the figure to one study, names the two copulas, dates it to academic writing in 2023, and adds the no-major-change-before-that limb. Cited on the page to Geng and Trotta, 'Is ChatGPT Transforming Academics' Writing Style?' (arXiv 2404.08627). All limbs supported.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
+  },
+  "1420": {
+   "index": 1420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLM output uses them more often than nonprofessional human-written text",
+   "note": "Section 'Overuse of em dashes'. The sentence continues with the same-genre qualifier, so the claim's 'of the same genre' limb is supported too. Page attributes to the Washington Post and Kriss references.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
+  },
+  "1421": {
+   "index": 1421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI-generated em dashes are usually surrounded by spaces",
+   "note": "Same section 'Overuse of em dashes', closing sentence of that paragraph. The page says 'contrary to common typographic guidelines'; the claim drops 'common', which narrows nothing material, so the second limb is supported.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
+  },
   "1422": {
    "index": 1422,
    "verdict": "SKIPPED_TRIAGE",
@@ -28368,12 +28718,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1423": {
+   "index": 1423,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gemini and Claude models typically do not use curly quotes",
+   "note": "Section 'Curly quotation marks and apostrophes'. Its first paragraph carries the ChatGPT/DeepSeek limb for both curly quotation marks (instead of straight) and the curly apostrophe (instead of the straight apostrophe); the Gemini/Claude exception, from which the claim's quote is drawn verbatim, sits three paragraphs later after the caveats about Chicago style, Word smart quotes and macOS.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
+  },
   "1424": {
    "index": 1424,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1425": {
+   "index": 1425,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLMs overuse the rule of three",
+   "note": "Claim carried no quote to match, so graded on substance. Section 'Rule of three' states the overuse, then gives the range of forms as running from three repeated adjectives to three repeated short phrases, and closes by saying LLMs use the structure to make superficial analyses appear more comprehensive. All three limbs supported; wording differs from the claim's paraphrase 'three stacked'.",
+   "fromFile": "verdicts-ai-i1415-1425.json"
   }
  },
  "mergedAt": "see autosave.log",
