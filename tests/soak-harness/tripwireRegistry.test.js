@@ -468,8 +468,14 @@ describe('the tripwire registry', () => {
     // from matching would leave `legacyWriter` identical to the real source and the control
     // would assert the cure against the cure — an assertion that cannot fail.
     expect(legacyWriter.length).toBeLessThan(WRITER_SOURCE.length);
-    expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyPopulations');
-    expect(receiptWriterFields(legacyWriter)).not.toContain('yearlyDiedFlags');
+    // …and each absence is ANCHORED by its own FINAL-state sibling — same object literal in
+    // the writer, same `receiptWriterFields` read — so a reconstruction that emptied the key
+    // set reds here instead of "proving" a deletion it never had to make. The length check
+    // above catches a replace that matched NOTHING; these catch a read that returned nothing.
+    expectAbsentWithAnchor(receiptWriterFields(legacyWriter), 'yearlyPopulations',
+      'finalPopulations', 'the pre-§909 writer still has a live key set');
+    expectAbsentWithAnchor(receiptWriterFields(legacyWriter), 'yearlyDiedFlags',
+      'finalDiedFlags', 'the pre-§909 writer still has a live key set');
     const legacyReach = tripwireFieldReach(TRIPWIRES, legacyWriter, OBSERVER_SOURCE);
     expect(legacyReach.unreachable).toEqual([
       { id: 'capacity_plateau', field: 'yearlyDiedFlags' },
@@ -515,8 +521,18 @@ describe('the tripwire registry', () => {
       .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n')
       .replace(/\n(\s*)motion: \{/, '\n$1motionRenamedForControl: {');
     expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
-    expect(nestedWriterFields(legacyObserver)).not.toContain('realmDemography');
-    expect(nestedWriterFields(legacyObserver)).not.toContain('motion');
+    // ⭐ EACH BLINDING IS ANCHORED, and the two anchors catch DIFFERENT ways this control
+    // could go vacuous. `realmSelfSufficiency` sits one line ABOVE `realmDemography` in the
+    // observer's own literal and ships through the same CONDITIONAL SHORTHAND SPREAD branch
+    // of the key scanner — the exact branch §909 car 2 found blind — so a scanner that
+    // stopped reading spreads reds here rather than reporting a deletion it never made.
+    // `motionRenamedForControl` is the renamed twin itself, and it is the ONLY reading that
+    // proves the rename matched: the length check above cannot, because the rename LENGTHENS
+    // the source and only the deletion shortens it, so a dead rename regex hides behind it.
+    expectAbsentWithAnchor(nestedWriterFields(legacyObserver), 'realmDemography',
+      'realmSelfSufficiency', 'the blinded observer still ships its spread sibling');
+    expectAbsentWithAnchor(nestedWriterFields(legacyObserver), 'motion',
+      'motionRenamedForControl', 'the motion rename really matched');
     expect(convictedBy(tripwireFieldReach(TRIPWIRES, legacyWriter, legacyObserver)))
       .toEqual(declaresRequires);
 
@@ -587,7 +603,13 @@ describe('the tripwire registry', () => {
     const legacyObserver = OBSERVER_SOURCE
       .replace(/\n\s*\.\.\.\(realmDemography \? \{ realmDemography \} : \{\}\),/, '\n');
     expect(legacyObserver.length).toBeLessThan(OBSERVER_SOURCE.length);
-    expect(nestedWriterFields(legacyObserver)).not.toContain('realmDemography');
+    // ⭐ ANCHORED on the SPREAD SIBLING one line above it in the observer's own literal
+    // (`...(realmSelfSufficiency ? { realmSelfSufficiency } : {})`). It travels the same
+    // conditional-shorthand-spread branch of the scanner, so the one drift that would make
+    // this absence meaningless — a scanner blind to spreads again, which is precisely the
+    // defect car 2's walker extension cured — reds on the anchor instead of reading clean.
+    expectAbsentWithAnchor(nestedWriterFields(legacyObserver), 'realmDemography',
+      'realmSelfSufficiency', 'the pre-P4 observer still ships its other spread key');
     expect(tripwireFieldReach(TRIPWIRES, WRITER_SOURCE, legacyObserver).unreachablePaths).toEqual([
       {
         id: 'capacity_realm_load',
@@ -720,8 +742,15 @@ describe('the tripwire registry', () => {
     // …and BOTH former homes now import rather than re-type. The motion floor is the
     // unambiguous witness — `0.05` also spells `capacity_plateau`'s unrelated tolerance, so
     // scanning for it would convict a coincidence.
-    expect(codeOnly(OBSERVER_SOURCE)).not.toContain('0.0025');
-    expect(codeOnly(ENVELOPE_SUITE_SOURCE)).not.toContain('0.0025');
+    // ⭐ ANCHORED on the IDENTIFIER THAT REPLACED THE LITERAL. A bare "no `0.0025` here" is
+    // true of a file that went missing, of a path that never resolved, and of a
+    // comment-stripper that ate the code along with the comments — three ways to certify a
+    // one-spelling lift nobody read. `MOTION_FLOOR_01` survives `codeOnly` in both sources
+    // (it is live code, not prose), so each absence now stands on a source proved readable.
+    expectAbsentWithAnchor(codeOnly(OBSERVER_SOURCE), '0.0025', 'MOTION_FLOOR_01',
+      'the observer was really read, comments stripped');
+    expectAbsentWithAnchor(codeOnly(ENVELOPE_SUITE_SOURCE), '0.0025', 'MOTION_FLOOR_01',
+      'the envelope suite was really read, comments stripped');
     expect(OBSERVER_SOURCE).toContain("import { MOTION_FLOOR_01 } from './soakInvariants.mjs'");
     expect(ENVELOPE_SUITE_SOURCE).toContain("from '../../scripts/audit/soakInvariants.mjs'");
     expect(codeOnly(ENVELOPE_SUITE_SOURCE)).toContain('MOVING_SHARE_FLOOR');
