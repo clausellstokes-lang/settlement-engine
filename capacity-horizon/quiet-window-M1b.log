@@ -1,2 +1,7 @@
 SAMPLE  1 | Mon Sep  7 08:45:54 EDT 2026 | load: { 2.01 3.24 7.93 } | vitest: 0 | gate-mutex procs: 1
 SAMPLE  2 | Mon Sep  7 08:46:54 EDT 2026 | load: { 2.30 3.10 7.56 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  3 | Mon Sep  7 08:47:54 EDT 2026 | load: { 3.25 3.17 7.27 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  4 | Mon Sep  7 08:48:54 EDT 2026 | load: { 2.51 2.98 6.92 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  5 | Mon Sep  7 08:49:54 EDT 2026 | load: { 1.87 2.71 6.55 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  6 | Mon Sep  7 08:50:54 EDT 2026 | load: { 2.23 2.64 6.26 } | vitest: 1 | gate-mutex procs: 12
+SAMPLE  7 | Mon Sep  7 08:51:54 EDT 2026 | load: { 2.79 2.73 6.05 } | vitest: 0 | gate-mutex procs: 1

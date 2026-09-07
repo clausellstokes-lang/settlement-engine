@@ -1,0 +1,6 @@
+SOAK START Mon Sep  7 08:51:02 EDT 2026
+ARGV: node --max-old-space-size=6144 scripts/audit/whole-world-soak.mjs --years 600 --settlements 4 --seed realm-scale-research-lit-4s-600y-4s-seed1 --lighting demographicsEnabled=true --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/capacity-horizon/artifacts/horizon-600y-4s-lit.json
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 29041 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+# whole-world soak — 600 years × 4 settlements, seed "realm-scale-research-lit-4s-600y-4s-seed1", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
+
+## run A (primary)

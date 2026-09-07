@@ -41,7 +41,7 @@ console.log('');
 const ev = evaluateReceipt(r);
 console.log('## ⭐ evaluateReceipt — the PRODUCT grading its own receipt');
 console.log(`  deterministicFirings ${ev.deterministicFirings}`);
-console.log(`  fullInstrument       ${ev.fullInstrument}`);
+console.log(`  fullInstrument       ${ev.annotated.fullInstrument}   (it lives on the ANNOTATED receipt, not on the evaluation)`);
 console.log(`  notExecutable (folded) ${JSON.stringify(ev.notExecutable)}`);
 console.log(`  annotated.notExecutable ${JSON.stringify(ev.annotated.notExecutable)}`);
 console.log('  FINDINGS:');
@@ -59,7 +59,10 @@ for (const row of TRIPWIRES.filter((t) => t.id.startsWith('capacity_'))) {
   const observed = typeof obsFn === 'function' ? obsFn(r) : (row.horizon ? row.horizon.observed : null);
   const fired = ev.findings.filter((f) => f.id === row.id);
   const obs = ev.observability.filter((f) => f.id === row.id);
-  const ne = (ev.annotated.notExecutable || []).filter((f) => (f.id || f.assertion) === row.id);
+  // ⛔ the ledger names a row as `name: 'tripwire <id>'` — matching on `id` alone reports a
+  // REFUSED row as a silent pass, which is the exact weak-zero class this lane measures.
+  const ne = (ev.annotated.notExecutable || []).filter((f) => String(f.name || f.id || f.assertion || '') === `tripwire ${row.id}`
+    || String(f.id || f.assertion || '') === row.id);
   let verdict = 'EXECUTED, SILENT (no finding)';
   if (!gated) verdict = 'NOT APPLICABLE (gate false)';
   else if (ne.length) verdict = 'NOT-EXECUTABLE';
@@ -172,4 +175,26 @@ console.log(`  realm, last 50 y: ${tail.join('  ')}`);
 if (pops.length > 50) {
   const a = realmAt(pops.length - 50), b = realmAt(pops.length);
   console.log(`  realm change over the LAST FIFTY YEARS: ${a} -> ${b} = ${((b / a - 1) * 100).toFixed(1)}%`);
+}
+
+// ── ⭐ THE SETTLING QUESTION, ANSWERED AS A CURVE AND NOT AS A YES/NO ──────────
+console.log('');
+console.log('## ⭐⭐ DOES IT SETTLE? the realm\'s 50-year growth rate at each 50-year mark');
+console.log('   (a SETTLING world drives this toward 0; a world still moving holds it away from 0)');
+console.log('   mark   realm(y-50)   realm(y)    50y change   |change| vs the 5% plateau band');
+for (let y = 100; y <= pops.length; y += 50) {
+  const a = realmAt(y - 50); const b = realmAt(y);
+  if (!a) continue;
+  const ch = (b / a - 1) * 100;
+  console.log(`   y${String(y).padStart(3)}  ${String(a).padStart(11)}  ${String(b).padStart(9)}   ${(ch >= 0 ? '+' : '') + ch.toFixed(1)}%${' '.repeat(Math.max(0, 8 - ch.toFixed(1).length))}   ${Math.abs(ch) <= 5 ? 'INSIDE the band' : `${(Math.abs(ch) / 5).toFixed(1)}x the band`}`);
+}
+console.log('');
+console.log('## ⭐ the realm loadRatio01 at each 50-year mark, and its own 50-year drift');
+let prevLoad = null;
+for (let y = 50; y <= yearly.length; y += 50) {
+  const rd = yearly[y - 1]?.realmDemography;
+  if (!rd) continue;
+  const load = Number(rd.loadRatio01);
+  console.log(`   y${String(y).padStart(3)}  load ${load.toFixed(4)}  ${prevLoad === null ? '' : `Δ50y ${(load - prevLoad >= 0 ? '+' : '') + (load - prevLoad).toFixed(4)}`}   ${load >= 0.6 && load <= 1.05 ? 'IN WINDOW' : 'below the 0.6 floor'}`);
+  prevLoad = load;
 }

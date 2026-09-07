@@ -68,3 +68,61 @@ the whole run. The bounded wait is `GATE_MUTEX_MAX_POLLS=40 × GATE_MUTEX_POLL_S
 minutes**, so any chair gate launched during M1's ~50-minute run will exhaust its wait and refuse.
 That is the serialisation the brief requires, working as designed; the pid files are
 `$SC/capacity-horizon/*.pid` if the chair needs the slot back.
+
+### M2 RESULT — ran to completion, **TRUE_EXIT=0**, 08:38:44 → 08:47:44 EDT (**9 min 00 s**)
+Full figures `$SC/capacity-horizon/M2-figures.md`; extract `$SC/capacity-horizon/M2-lit-extract.txt`;
+log `$SC/capacity-horizon/soak-probe-30y-12s-lit.log`; receipt
+`$SC/capacity-horizon/artifacts/probe-30y-12s-lit.json` (1,043,214 B, schemaVersion 5, `passed: true`).
+
+**THE HEADLINE — the wall clock per settlement-year, and the SUPERLINEARITY the §907 datum could not measure.**
+
+| figure | value | label |
+|---|---|---|
+| run A, 30 y × 12 s LIT | **244,623 ms = 244.6 s** over 360 settlement-years = **0.6795 s/settlement-year** | **CONFIRMED** — `runDurationsMs.primary` off the receipt |
+| run B (byte-identical replay) | 241,917 ms | **CONFIRMED** |
+| run C (5-year divergence) | 37,195 ms | **CONFIRMED** |
+| whole job wall clock | **9 min 00 s** (A+B+C = 523.7 s; the balance is the 11.3 s worker isolate + start-up + receipt write) | **CONFIRMED** — `date` either side |
+| the 4-settlement figure AT THE SAME HORIZON | 30 y × 4 s LIT run A **55,243** and **54,790 ms** → **0.4585 s/settlement-year** | **CONFIRMED** — two §909 receipts on disk |
+| the 300-year 4-settlement figure | 762,290 ms → **0.6352 s/settlement-year** | **CONFIRMED** — §907's receipt, re-read here |
+| **the superlinearity exponent in SETTLEMENT COUNT** | ×4.446 cost for ×3 settlements ⇒ **k = ln(4.446)/ln(3) = 1.358**; the rate rises ×1.482 | **PLAUSIBLE — TWO POINTS** (4 and 12 settlements, one horizon, one seed). Two points fix a power law only if the law is a power law. |
+| the WORLD-AGE term, separately measured | 30 y → 300 y at 4 s: 0.4585 → 0.6352 = **×1.386** | **CONFIRMED** (and corroborated from inside the run: `Q1 2139.2ms → Q4 2890.2ms/year`) |
+| the DARK/LIT cost ratio at 30 y × 4 s | dark 66,679 ms vs lit 55,243 ms = **×1.207 — DARK IS DEARER** | **CONFIRMED** — §909 car 1's own two receipts |
+
+⛔ **THE §907 FIGURE IS NOT A CONSTANT OF THE ENGINE, AND READING IT AS ONE IS THE ERROR THIS
+MEASUREMENT REMOVES.** "0.635 s/settlement-year" is one point on a surface that moves in BOTH the
+settlement count and the horizon. §907 said so itself and named the missing datum. It is now taken.
+
+**THE PRICED TERMINAL CELL — 300 y × 12 s LIT, and its DARK twin.**
+Separable model `rate(S,Y) = rate(4,30) × f_S(S) × f_Y(Y)`, `f_S(12) = 1.4820`, `f_Y(300) = 1.3856`:
+```
+rate(12,300) = 0.4585 × 1.4820 × 1.3856 = 0.9414 s/settlement-year
+3,600 settlement-years ⇒ run A 3,389 s;  run A + run B 6,778 s
+⇒ THE LIT TERMINAL CELL  ≈ 6,838 s ≈ 1.9 h   (design: ≈ 17.6 h — 9.3× high)
+⇒ THE DARK TWIN          ≈ 1.9 h × 1.207 ≈ 2.3 h
+⇒ SOAK-1's TOTAL ASK     ≈ 4.2 h            (design asks the owner for ≈ 35 h)
+```
+**PLAUSIBLE, and the caveat is the MODEL and not the arithmetic.** `f_S` and `f_Y` were each
+measured at ONE point and multiplied; **no measurement in this lane touches the CROSS term** —
+whether a 12-settlement world ages more expensively than a 4-settlement one. The 12-settlement
+30-year run cannot answer it (`Q1 8033.9 → Q4 8115.0 ms/year`, +1.0 % — thirty years is too short
+to see the age term at all). If the axes interact super-multiplicatively the true figure is higher.
+The one measurement that settles it is the terminal cell itself.
+
+⛔ **AND THE DARK TWIN'S PRICE CARRIES ONE MORE RISK, NAMED.** The ×1.207 dark/lit ratio is measured
+at 30 years, where the dark world has not yet run away. The `population-runaway-300y` hazard is the
+dark world's documented 300-year behaviour, and a runaway world costs more per year, not less. **The
+dark twin's ≈ 2.3 h is a FLOOR, not an estimate.**
+
+## M1 — THE 600-YEAR HORIZON (§907 owner row (c); §909's "a 600-year run precedes any re-cut")
+⭐ **THE PREDICTION IS RECORDED BEFORE THE RUN, so the run can grade the model rather than the
+model being fitted to the run.** From the 300-year run's own instrument
+(`Q1 2139.2 ms → Q4 2890.2 ms/year`, quartile mid-years ≈ 38 and ≈ 263) the per-year cost is
+`c(y) = 2012.4 + 3.338·y` ms. Self-check: that model integrates over 1..300 to **754 s** against the
+**762.3 s** actually measured — **1.1 % error**, so it is worth predicting with.
+```
+PREDICTED  run A (600 y × 4 s) = 1,809 s = 30.2 min
+PREDICTED  whole job (A + B + C + isolate) ≈ 3,638 s ≈ 60.6 min
+```
+⚠ **A 600-YEAR RUN IS NOT TWICE A 300-YEAR RUN** — it is ≈ 2.37× it, because the world ages into a
+dearer per-year cost. The brief's "~52 min at the measured 0.635 s/settlement-year" is the
+constant-rate reading and is the same error M2 removes; it is expected to run ~17 % long.

@@ -69,3 +69,40 @@ that would settle it is the terminal cell itself.
 - The design's **ledger 17.6 h/case** (`26,875 + 35,356 s` at `b66e9551`) is a DIFFERENT commit's
   measurement of a different case shape and is not comparable term-by-term to these figures. It is
   the origin of the ≈ 35 h SOAK-1 ask.
+
+## M2 RAN TO COMPLETION — **TRUE_EXIT=0**, 08:38:44 → 08:47:44 EDT (**9 min 00 s**)
+Log `$SC/capacity-horizon/soak-probe-30y-12s-lit.log`; receipt
+`$SC/capacity-horizon/artifacts/probe-30y-12s-lit.json` (1,043,214 B, schemaVersion 5);
+extract `$SC/capacity-horizon/M2-lit-extract.txt`.
+
+```
+runDurationsMs = {"primary":244623, "replay":241917, "divergent":37195}
+peakHeapUsedBytes = 602,385,112   (register ceiling 838,860,800 — under)
+A + B + C = 523.7 s; wall clock 540 s (the balance is the 11.3 s worker isolate,
+node start-up and the receipt write)
+```
+Every assertion green, including `PASS byte-identical re-run (same seed) — all 30 yearly
+composite hashes equal` and `PASS serialized state under the house envelope — max 3.35MB <
+10.80MB (12 settlements)`.
+
+⚠ **THE 12-SETTLEMENT WORLD AGES FLAT OVER 30 YEARS, AND THE 4-SETTLEMENT ONE DOES NOT.**
+`PASS per-year wall-time trend not age-linear — Q1 8033.9ms → Q4 8115.0ms/year` (+1.0 %), against
+the 300-year 4-settlement run's Q1 2139.2 → Q4 2890.2 (+35 %). Thirty years is too short a window
+to see the age term at ALL; the age term in `f_Y` is a 300-year observation and nothing here
+contradicts or confirms it. This is why the horizon factor had to be measured on the 4-settlement
+axis and could not be read off this run.
+
+## THE PILOT'S SECOND JOB — it is the FIRST receipt to exercise §910's whole channel at once
+| what the landing claimed | what this receipt measures | verdict |
+|---|---|---|
+| the per-year series ships additively on v5 | `yearlyPopulations` **30 rows × 12 wide**, `yearlyDiedFlags` **30 × 12**, `schemaVersion` **5** | **CONFIRMED** |
+| the horizon-short rows report through `observability` as `inconclusive: true` | `capacity_plateau` → `{"inconclusive":true,"detail":"horizon: 30 years observed, 150 required"}`; `capacity_floor_thaw` → `100 required` | **CONFIRMED** |
+| `capacity_envelope_30y` is armed | EXECUTED at `observed 30 / required 30`, silent (no finding) | **CONFIRMED** |
+| a lit run still certifies fully | `fullInstrument: true`, `notExecutable: []`, `deterministicFirings 1` | **CONFIRMED** |
+| `capacity_realm_load` grades the realm | FIRED: `realm load 0.4360 outside the plateau window [0.6, 1.05]` | **CONFIRMED** |
+
+⭐ **AND A FIGURE THAT MATTERS TO THE TUNING DESK, TAKEN IN PASSING.** At **12** settlements the
+realm load at year 30 is **0.4360** — against **0.5449** on the fresh 30-year 4-settlement lit run
+(§909 car 3) and **0.4787** at year 300 on the 4-settlement run. Three settlement counts, three
+horizons, and every one of them sits BELOW the [0.6, 1.05] window. The under-fill is not an
+artefact of the 4-settlement fixture.

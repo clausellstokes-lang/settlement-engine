@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 08:46:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 08:52:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -33,28 +33,15 @@
 | ai | verifier | i951-1032 | result | 12 | — | verdict file WRITTEN | 08:56:33 |
 | dnd | critic |  | failed | 0 | — | — | 09:05:59 |
 | dnd | critic |  | result | 0 | — | — | 08:35:20 |
-| dnd | finder | place-lawful-primaries | result | 56 | claims.json | 60 claims, complete=True @03:00:39 | 06:39:14 |
 | dnd | regrade | regrade-r12 | result | 0 | — | — | 07:19:35 |
 | dnd | regrade | regrade-r13 | result | 0 | — | — | 08:47:59 |
 | dnd | synth |  | failed | 0 | _r13-apply.mjs, dnd-coverage.mjs, dnd-stats.mjs | — | 09:05:58 |
 | dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
-| dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |
-| dnd | verifier | i1058-1074 | result | 4 | — | verdict file WRITTEN | 06:48:56 |
-| dnd | verifier | i1075-1090 | result | 3 | — | verdict file WRITTEN | 06:47:39 |
-| dnd | verifier | i1091-1112 | result | 3 | — | verdict file WRITTEN | 06:47:16 |
-| dnd | verifier | i1115-1131 | result | 5 | — | verdict file WRITTEN | 06:53:19 |
-| dnd | verifier | i1132-1146 | result | 4 | — | verdict file WRITTEN | 06:52:21 |
-| dnd | verifier | i1148-1149 | result | 2 | — | verdict file WRITTEN | 06:50:20 |
 | dnd | verifier | i1153-1167 | result | 5 | — | verdict file WRITTEN | 07:07:10 |
 | dnd | verifier | i1168-1182 | result | 7 | — | verdict file WRITTEN | 07:09:39 |
 | dnd | verifier | i1183-1197 | result | 5 | — | verdict file WRITTEN | 07:09:13 |
 | dnd | verifier | i1198-1211 | result | 4 | — | verdict file WRITTEN | 07:09:13 |
-| dnd | verifier | i725-749 | result | 4 | — | verdict file WRITTEN | 06:43:08 |
-| dnd | verifier | i751-774 | result | 5 | — | verdict file WRITTEN | 06:43:42 |
-| dnd | verifier | i775-807 | result | 6 | — | verdict file WRITTEN | 06:43:25 |
-| dnd | verifier | i809-831 | result | 5 | — | verdict file WRITTEN | 06:42:58 |
 | dnd | verifier | i819-823 | result | 1 | verdicts-dnd-i819-823.json | verdict file WRITTEN | 08:39:30 |
-| dnd | verifier | i835-1057 | result | 7 | — | verdict file WRITTEN | 06:47:32 |
 | leguin | critic |  | result | 35 | critic-leguin.md | — | 08:37:32 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
 | leguin | synth |  | result | 0 | assign-leguin.json, secA.md, secB.md, secC.md, secD.md, section-leguin.draft.md | — | 08:14:15 |
@@ -91,11 +78,11 @@
 | ? | other |  | result | 0 | — | — | 07:52:09 |
 | ? | other |  | result | 0 | — | — | 12:10:50 |
 | ? | other |  | result | 0 | — | — | 12:39:01 |
-| ? | other |  | in-flight | 0 | — | — | 12:45:00 |
+| ? | other |  | in-flight | 0 | best-ai.md | — | 12:49:56 |
 | ? | other |  | result | 0 | best-leguin.md | — | 12:22:45 |
 | ? | other |  | result | 0 | — | — | 12:24:43 |
 | ? | other |  | result | 0 | — | — | 12:38:09 |
-| ? | other |  | in-flight | 0 | — | — | 12:46:26 |
+| ? | other |  | in-flight | 0 | — | — | 12:51:36 |
 | ? | other |  | result | 0 | best-martin.md | — | 12:08:17 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
