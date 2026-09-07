@@ -3,11 +3,11 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 78,
+ "lines": 90,
  "firstTs": "2026-09-07T13:08:59.328Z",
- "lastTs": "2026-09-07T13:30:59.949Z",
+ "lastTs": "2026-09-07T13:36:36.099Z",
  "tools": {
-  "Bash": 4,
+  "Bash": 6,
   "Read": 13,
   "Write": 1
  },
@@ -15,7 +15,7 @@
  "filesWritten": [
   "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/EXEMPLAR-BEST-PARTS.md"
  ],
- "lastAssistantText": "Piece three: §3 the conflicts, both sides cited, left open where the evidence does not settle them.",
+ "lastAssistantText": "Piece four: correcting the §3 tally line (recounted: 6 settled, 6 partly, 10 open) and appending §4, the anti-AI check over the 36-technique shortlist union.",
  "run": "wf_faa375e7-29f",
  "agent": "a457cbd8d9d92159f",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_faa375e7-29f/agent-a457cbd8d9d92159f.jsonl",
