@@ -9,8 +9,12 @@
  * property of the town. Every row carries the five stable, account-scoped
  * identifiers of `CUSTOM_DEFINITION_IDENTITY_KEYS`, which is exactly what would
  * let an observer correlate one private definition across two published worlds.
- * And nothing in `src/` READS the key (livingContentRoster.js says so in its own
- * header), so allowlisting it would be pure exposure with zero product value.
+ * The key has exactly ONE reader in `src/` — the account-import remap, which
+ * `livingContentRoster.js:37` names — and no display, export or projection
+ * surface reads it at all, so allowlisting it would be pure exposure with zero
+ * product value. (This header used to say "nothing in `src/` READS the key",
+ * citing that same file's header, which car 5 of this very consist had already
+ * amended to name the reader. Corrected at §912, DEF-12.)
  * The fail-closed root allowlist already drops it; this file holds that to the
  * tree so the day someone adds it is a deliberate day with an SQL twin.
  *
@@ -23,12 +27,28 @@
  * THERE before asserting it is gone.
  *
  * SCOPE — READ THE DM-FULL ARM. The DEFAULT (fail-closed) projection is the
- * shipped anonymous-result / pre-publish-preview path and it drops the roster.
- * The `full: true` DM-share projection does NOT run the root allowlist at all,
- * and it is MEASURED below to carry the roster through. That is the same V1
- * boundary `townMapEditsPublicDrop.test.js` records for `mapEdits`, and the same
- * reason applies: the DM-share opt-in needs its SQL-sanitizer twin migration, so
- * the drop lands with that car and not this one.
+ * shipped anonymous-result / pre-publish-preview path and it drops both records.
+ * The `full: true` DM-share projection does NOT run the root allowlist at all —
+ * it deep-clones and deletes a named list — so it used to carry both through.
+ * §912 (R-G) landed the CLIENT half of that drop in `publicSafe.js`, beside the
+ * existing `dmNotes` / seed-carrier / `latentPantheon` strips, after reading the
+ * share model: `gallery_share_dm` publishes to "anyone who opens this gallery
+ * page", so it is not a transfer to the owner's own other device and no reader of
+ * a full share is entitled to the author's unadopted library.
+ * ⚠ THE SERVER TWIN IS STILL OWED AND IS OWNER-GATED — `_gallery_dm_full_json`
+ * (supabase migrations 120/129) re-issues both keys, so a shared dossier read
+ * back from the server still carries them. Same V1 boundary
+ * `townMapEditsPublicDrop.test.js` records for `mapEdits`, same reason.
+ *
+ * ⛔⛔ AND THE ONE FACT A LIGHTING ENGINEER MEETS BEFORE ANY OF THIS (§912, R-J).
+ * `loadLivingContentRoster` HAS NO CALLER. It appears in `src/` only as its own
+ * definition (`livingContentSeam.js`) and one comment beside it, so lighting the
+ * dial does not produce leaky worlds — it produces NO worlds: a lit config throws
+ * `[livingContentSeam] v2 world, roster payload not loaded` out of
+ * `generateSettlementPipeline`. That outage, not the dial, is the true ground of
+ * every inertness claim in this file; the arms below arm the seam explicitly
+ * (see the `registerLivingContentRosterBuilder` call) which is exactly why they
+ * can measure a real roster while the product cannot build one.
  *
  * @enforced-by this test
  */

@@ -115,12 +115,20 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // same seed + same config + same locks is the same world.
   // THE CREATE BOUNDARY (ODQ §822) — the `birthConfig` wrapper. This action is a
   // BIRTH on every call: it mints a brand-new town from the WIZARD FORM config,
-  // and `state.config` is never hydrated from a saved settlement (hydrateFromSave
-  // assigns the settlement, ids, phase, eventLog and locks — not config), so it
-  // can never re-stamp an existing world's law. Re-derivation of an existing world
-  // goes through regenSection, which reads `settlement.config` FIRST. Dormant
-  // today: birthConfig adds nothing while the dial sits at the default, so a
-  // generation's config stays byte-identical to a pre-law one.
+  // so it can never re-stamp an existing world's law. Re-derivation of an
+  // existing world goes through regenSection, which reads `settlement.config`
+  // FIRST. Dormant today: birthConfig adds nothing while the dial sits at the
+  // default, so a generation's config stays byte-identical to a pre-law one.
+  //
+  // ⛔ AND A SAVED WORLD'S CONFIG *CAN* REACH `state.config` — this comment used
+  // to say otherwise ("never hydrated from a saved settlement"), and that was
+  // false (§912, DEF-11). `hydrateFromSave` really does leave config alone, but
+  // the Library's "Apply Saved Configuration & Regenerate" calls
+  // `updateConfig(migrateConfig(settlement._config || config))` directly, and
+  // `updateConfig` admits the underscore family by prefix. What makes a birth
+  // from such a config safe is not an absence: it is the CLAMP inside
+  // `birthConfig`, which destructures the living-content marker off before
+  // spreading the mint, so a birth's law is the DIAL's law on every path.
   const fullConfig = geographyLockedConfig(state.locks, state.settlement, birthConfig({
     ...config,
     _institutionToggles: institutionToggles,

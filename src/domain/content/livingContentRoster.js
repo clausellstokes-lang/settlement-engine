@@ -2,6 +2,26 @@
  * livingContentRoster.js — the INERT roster of reviewed living-content
  * definitions that were in scope for one generation run.
  *
+ * ⛔⛔ READ THIS FIRST IF YOU ARE ABOUT TO LIGHT THE DIAL: THE LOADER HAS NO
+ * CALLER, SO LIGHTING IT TAKES GENERATION DOWN (§912, R-J — recorded, not cured).
+ * `loadLivingContentRoster` (`livingContentSeam.js`) is the only thing that
+ * registers this module's builder, and it appears in `src/` exactly twice: its own
+ * definition and one comment beside it. Nothing calls it. So on a lit config
+ * `livingContentRosterFor` finds no registered builder and THROWS
+ * `[livingContentSeam] v2 world, roster payload not loaded` out of
+ * `generateSettlementPipeline` — not a leaky world, no world at all. Wiring that
+ * call is the first task of the lighting car, before any behaviour below is worth
+ * reasoning about.
+ *
+ * ⇒ AND IT IS THE TRUE GROUND OF EVERY "THE ROSTER IS INERT" CLAIM IN THIS
+ * ESTATE. The dial is NOT that ground: the gate is
+ * `materializesLivingContent(settlement.config)` — the WORLD'S config, not the
+ * build's dial — and a config carrying the marker can arrive from an import file
+ * without any dial being moved. Tests that arm the seam themselves (they call
+ * `registerLivingContentRosterBuilder` directly) can therefore build real rosters
+ * on a build where the product cannot, which is exactly why the security arms are
+ * able to measure a drop at all.
+ *
  * ⛔ WHAT THIS IS FOR. ODQ §866 found the presentation-neutrality instrument
  * vacuous for the `deities.*` cases; TE-INSTR-1 re-measured it and the vacuity
  * was twice as wide — 26 of 52 cases, four whole categories, one mechanism: the
@@ -41,18 +61,36 @@
  *     the same law the provenance receipt three lines above it obeys. Nothing
  *     reads the key for its CONTENT, which is the claim this bullet makes.
  *
- * ⛔ THE OTHER IMPORT BOUNDARY DOES NOT REMAP IT, AND THAT IS MEASURED RATHER
- * THAN ASSUMED (lane L-MAT, DEFERRED with its reason). The reconciliation slice
- * (`importReconciliationAdmission.js`) calls the SAME `prepareSettlementEntry`,
- * which preserves this key verbatim — executed probe: a roster survives that call
- * with its SOURCE ids unchanged — and that slice has no content identity map at
- * all. So a settlement reconciled across accounts would carry a foreign roster.
- * It is NOT cured here, for two reasons stated so the next reader inherits them:
- * `customContentProvenance` has exactly the same pre-existing gap on exactly that
- * boundary, so curing one and not the other would leave the two records — minted
- * side by side, governed alike everywhere else — disagreeing about one path; and
- * with the dial at its dormant default no shipped world carries a roster at all,
- * so nothing can reach it today. The pair belongs to one car, not to this one.
+ * ⚠ AND THE READER BULLET ABOVE NAMES ONE FILE WHERE THE TREE HAS TWO ASSIGNMENT
+ * SITES (§912, from the skeptic pass's X8). `accountImportBody.js` writes this key
+ * on the LIVE imported settlement and, since §912, again on every
+ * `versionHistory[i].settlement` — because undo is a write path and restoring a
+ * snapshot re-persists whatever it holds. Both sites obey the same remap-or-drop
+ * law. Recorded here because `writerReach.walker` cannot see the second one: it
+ * probes `read(row.writer)` for the register row's single declared writer, so a
+ * green there says nothing about a second assignment site. The walker is NOT
+ * widened for this — that is a separate instrument's car — and this sentence is
+ * the interim record.
+ *
+ * ⛔ EVERY IMPORT BOUNDARY IS NOW CURED, AND HOW EACH ONE IS CURED DIFFERS BY
+ * WHAT IT CAN RESOLVE (§912; this paragraph used to record the reconciliation gap
+ * as a DEFERRAL, on an inertness ground that was false — the input to an import
+ * boundary is a FILE, which is exactly where a roster comes from without any
+ * dial, and an executed probe put a foreign roster through that path into
+ * persistence).
+ *   • ACCOUNT FILE (`accountImportBody.js`) — REMAPS through the archive receipt,
+ *     or drops the whole record with a per-settlement warning. It is the only
+ *     boundary with an archive-backed identity map, so it is the only one that
+ *     can honestly rewrite ids.
+ *   • RECONCILIATION (`importReconciliationAdmission.js`) — DROPS, with one
+ *     reported `unsupported` issue per record. Measured: that source is an export
+ *     file with no archive, no receipt and no pack, so the only identity map
+ *     constructible there is empty and a remap would compute a foregone refusal.
+ *   • GALLERY, both paths (`importScrub.js`'s `scrubGalleryImportLivingContent`) —
+ *     DROPS, with `customContentProvenance` and the law marker, for the same
+ *     reason: a dossier carries no archive to resolve source ids against.
+ * `customContentProvenance` travels with this key on all three, which is the
+ * pairing the earlier deferral asked for.
  *
  * ⛔ WHY THE ROWS CARRY ONLY MANIFEST-ADMITTED FIELDS. A roster that copied
  * whatever the author's object happened to hold would be an uncontrolled

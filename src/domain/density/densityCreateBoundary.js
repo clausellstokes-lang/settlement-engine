@@ -45,7 +45,20 @@
  *      settlement / activeSaveId / lastSeed / phase / eventLog / locks and the
  *      timestamps — and NOT config. `config` lives in configSlice.js behind
  *      `updateConfig`, which validates against an admitted key surface and drops
- *      unknown keys. Nothing anywhere hydrates it from a saved settlement.
+ *      unknown keys.
+ *      ⛔ BUT A SAVED SETTLEMENT *CAN* REACH IT, AND THE ORIGINAL SENTENCE HERE
+ *      ("Nothing anywhere hydrates it from a saved settlement") WAS FALSE — the
+ *      load-bearing half of this correction, and the reason an admission surface
+ *      was left unchanged. The Library's "Apply Saved Configuration & Regenerate"
+ *      runs `updateConfig(migrateConfig(data.settlement?._config || data.config))`
+ *      (`SettlementsPanel.jsx`, also reached from `SettlementDetail.jsx`), and
+ *      `updateConfig` admits the whole underscore family by prefix
+ *      (`isAllowedConfigKey`: `key.startsWith('_')`), so a saved world's law
+ *      marker really does arrive in the form state. What makes that harmless is
+ *      not an absence — it is the CLAMP in `birthConfig` below, which destructures
+ *      the marker off the incoming config before spreading the mint. Measured end
+ *      to end before the clamp existed: an imported v2 world's config, loaded and
+ *      regenerated, minted a roster on a build whose dial says v1.
  *   3. `geographyLockedConfig` cannot smuggle the marker across: it overlays
  *      ONLY the geography keys from the previous settlement.
  *   4. The true regeneration path already reads the world's own law —
@@ -312,9 +325,18 @@ export const LAW_WIRING_STATES = Object.freeze(['WIRED', 'UNWIRED']);
  * What was actually true is that this module's ONLY eager edge was that one
  * `birthConfig` re-export, for a leaf whose two real callers are both lazy. The
  * re-export was cut; the entry's static closure went 239 modules -> 238, this
- * file left it, and every emitted dist file stayed byte-identical. The law's
+ * file left it, and NO EMITTED DIST FILE CHANGED SIZE. The law's
  * import is now a lazy -> lazy edge and the mint stays in `birthConfig` where
  * one function still answers "which law does a birth mint".
+ *
+ * ⚠ THAT SENTENCE USED TO READ "every emitted dist file stayed byte-identical",
+ * AND IT WAS FALSE — corrected at §912 (DEF-10). Re-measured across the two
+ * builds: of 1,377 emitted files, 719 are byte-identical and 658 are NOT (311
+ * HTML + 347 JS), because the entry chunk's content hash moves and every file
+ * naming it is re-hashed. What no file did was change SIZE, which is the claim
+ * the byte objection actually needed. The same wrong sentence is in the
+ * `442c7f988` commit message, which cannot be amended now the register was taken;
+ * the correction lives here and in the lane receipt.
  *
  * ⛔ THE MINT'S NAME IS A STRING FIELD, NEVER THE OBJECT KEY, AND A PLANT IS WHY.
  * Keying this table by the mint's identifier read beautifully and BROKE THE
@@ -348,9 +370,11 @@ export const GENERATION_LAWS = Object.freeze({
       + 'that is a two-build measurement rather than a claim: the byte objection this row used '
       + 'to record was that THIS module was eager, and it was eager only through a birthConfig '
       + 're-export in an eager store leaf whose two real callers are both lazy. Cutting that '
-      + 're-export took the entry closure 239 modules to 238 and this file out of it, with '
-      + 'every emitted dist file byte-identical, so the law rides the lazy side with its '
-      + 'callers and neither living-content module enters first paint. The dial stays at the '
-      + 'dormant default, so the mint still writes not one config byte.',
+      + 're-export took the entry closure 239 modules to 238 and this file out of it, with no '
+      + 'emitted dist file changing SIZE (658 of 1,377 changed BYTES — the entry chunk\'s hash '
+      + 'moves and every file naming it is re-hashed; the earlier "byte-identical" wording here '
+      + 'was wrong and was corrected in the same car that measured it), so the law rides the '
+      + 'lazy side with its callers and neither living-content module enters first paint. The '
+      + 'dial stays at the dormant default, so the mint still writes not one config byte.',
   }),
 });

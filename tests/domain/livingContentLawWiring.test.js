@@ -22,9 +22,12 @@
  * with the law's module mocked to a lit dial. The dark arms are the product
  * truth; the lit arms are what stops them proving nothing.
  *
- * THE SIX LIFECYCLE PATHS, each with its own way of breaking the promise:
+ * THE LIFECYCLE PATHS, each with its own way of breaking the promise:
  *   CREATE      — a birth mints; proved to write zero bytes while dormant, and
  *                 proved to really mint when lit.
+ *   CREATE/CLAMP— a LIT marker arriving through the wizard form CANNOT birth a v2
+ *                 world (§912, DEF-2). This is the path the file originally
+ *                 argued could not exist; see the correction below.
  *   READ        — the version is resolved from the world's own config and NEVER
  *                 from the dial, so flipping the dial cannot re-birth old worlds.
  *   REGENERATE  — `regenSection` reads `settlement.config` FIRST. THE STOP.
@@ -32,7 +35,21 @@
  *   PERSIST     — `geographyLockedConfig` overlays geography keys ONLY, so a lit
  *                 previous world cannot smuggle its law into a dark generation.
  *   IMPORT      — out of scope here; the account-import path is proved in
- *                 `tests/store/accountImportSlice.test.js`.
+ *                 `tests/store/accountImportSlice.test.js`, the gallery path in
+ *                 `tests/lib/importScrub.test.js` and
+ *                 `tests/store/campaignSlice.galleryImport.test.js`, and the
+ *                 reconciliation path in `tests/lib/importReconciliation.test.js`.
+ *
+ * ⛔⛔ AND THE FACT THAT OUTRANKS EVERY INERTNESS CLAIM IN THIS FILE (§912, R-J).
+ * `loadLivingContentRoster` HAS NO CALLER in `src/` — it appears there only as its
+ * own definition in `livingContentSeam.js` and one comment beside it. So lighting
+ * the dial does not produce v2 worlds; it produces a THROW,
+ * `[livingContentSeam] v2 world, roster payload not loaded`, out of
+ * `generateSettlementPipeline`. That outage is the real reason no shipped world
+ * carries a roster — NOT the dial, whose gate reads the WORLD'S config and can be
+ * satisfied by an import file. The arms below arm the seam by hand (see the
+ * `registerLivingContentRosterBuilder` call), which is what lets them measure real
+ * lit behaviour on a build that cannot yet produce it.
  *
  * @enforced-by this test
  */
@@ -75,10 +92,14 @@ vi.mock('../../src/lib/saves.js', () => ({
 // ⛔ THE SEAM MUST BE ARMED BEFORE ANY LIT PIPELINE RUN. The roster payload is
 // reached through a dynamic import in production, and the pipeline THROWS rather
 // than quietly degrading when a v2 world finds no builder registered. Registering
-// the real builder makes the lit arms below take the same path production takes
+// the real builder makes the lit arms below take the path production WOULD take
 // after `loadLivingContentRoster()` — and, more to the point here, it means a
 // DARK arm that accidentally went lit would surface as a wrong world rather than
 // as a throw that could be mistaken for the law being off.
+// ⚠ "WOULD", NOT "DOES", AND THE TENSE IS THE WHOLE POINT (§912, R-J): nothing in
+// `src/` calls `loadLivingContentRoster`, so production reaches the throw and not
+// the builder. This hand-registration is the ONLY thing making a lit roster
+// reachable anywhere in the estate today.
 registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const CONFIG = Object.freeze({
@@ -385,11 +406,21 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // carrying `_livingContentLawVersion` is admitted like any other rider.
     expect(isAllowedConfigKey(LIVING_CONTENT_LAW_CONFIG_KEY)).toBe(true);
     // The promise does not rest on that admission, which is why this is recorded
-    // rather than changed: the store config is the WIZARD FORM, it is never
-    // hydrated from a saved settlement, and the only path that decides an
-    // EXISTING world's law reads `settlement.config` first (THE STOP above). A
-    // lit form config therefore governs the NEXT BIRTH — which is what a birth
-    // config is for — and no world already on disk.
+    // rather than changed: the only path that decides an EXISTING world's law
+    // reads `settlement.config` first (THE STOP above), so a lit form config
+    // governs the NEXT BIRTH — which is what a birth config is for — and no world
+    // already on disk.
+    //
+    // ⛔ AND THE SECOND HALF OF THAT SENTENCE USED TO READ "the store config is
+    // the WIZARD FORM, it is never hydrated from a saved settlement", WHICH WAS
+    // FALSE (§912, DEF-11). The Library's "Apply Saved Configuration &
+    // Regenerate" runs `updateConfig(migrateConfig(settlement._config || config))`
+    // (`SettlementsPanel.jsx`, also reached from `SettlementDetail.jsx`), so a
+    // saved — or IMPORTED — world's marker really does arrive here, admitted by
+    // the prefix rule this very arm measures. What keeps the next birth honest is
+    // the CLAMP in `birthConfig`, driven end to end by the CLAMP arm at the top of
+    // this file. Recorded, not pinned: a future ruler may delete the admission,
+    // and nothing in this file should stop them.
     expect(materializesLivingContent(LIT_CONFIG)).toBe(true);
     expect(materializesLivingContent(CONFIG)).toBe(false);
   });
