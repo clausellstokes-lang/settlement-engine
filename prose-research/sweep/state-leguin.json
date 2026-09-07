@@ -34359,6 +34359,20 @@
    "note": "fantasytradition0000atte (Attebery, The Fantasy Tradition in American Literature, 1980). Full context adds a qualifier the claim omits without distorting: 'at least up to 1975, in her collection...'.",
    "fromFile": "verdicts-leguin-i628-708.json"
   },
+  "686": {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Woodcock: \"a style of crystalline clarity and functional flexibility\"",
+   "note": "archive.org full-text of ursulakleguinvoy0000unse (De Bolt 1979) reads: Le Guin's prose style draws Woodcock's attention, then the quoted phrase, continuing 'that has always reminded me of the limpid prose...' — the 'me' inside the quotation is Woodcock, so the phrase is his. Quote contiguous and exact.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "687": {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"oral elements of the style of WOE are a superb vehicle\"",
+   "note": "Same volume: the fragment carries the running head '124 / JOHN R. PFEIFFER', so the chapter author is Pfeiffer; a separate hit in the volume's abbreviation key gives 'WOE - A Wizard of Earthsea', supporting the claim's expansion. Every limb met.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
   "688": {
    "index": 688,
    "verdict": "SKIPPED_TRIAGE",
@@ -34379,6 +34393,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "691": {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"gives music and richness to her prose through the rhythm\"",
+   "note": "archive.org full-text of ursulakleguinswi00dird: 'She gives music and richness to her prose through the rhythm of her sentences and occasionally through the use of alliteration and assonance.' Item metadata and an internal credits page ('Writers: Michael Dirda for the National Endowment for the Arts') confirm the NEA Big Read teacher's guide (2008) is Dirda's.",
+   "fromFile": "verdicts-leguin-i686-721.json"
   },
   "692": {
    "index": 692,
@@ -34407,6 +34428,21 @@
    "trueWording": "some of Le Guin's most graphic and moving prose",
    "note": "dragonsoffantasy0000pett (Petty, Dragons of Fantasy, 2004): '...on humans and kill one another. The terrifying result is rendered in some of Le Guin's most graphic and moving prose, painted in imagery that sears the mind.' The referent is 'the terrifying result' witnessed by Ged and Arren, which the claim calls 'one scene'.",
    "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "696": {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Le Guin's style is as pellucid as ever\"",
+   "note": "childrensliterat28gera (Children's Literature Review vol. 28, 1992), p. 292: the quoted clause continues 'and her plotting as strong, but Tehanu owes its parentage not so much to Earthsea...', which fixes Tehanu as the book under review. Verbatim and on-page.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "697": {
+   "index": 697,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Le Guin's style is different from her preceding works\"",
+   "note": "Quote is verbatim in Cogell's bibliography (ursulakleguinpri0000coge), ending the annotation that runs up to the next heading, 'D618 SELTZER, HARA L. Review of ...'. The annotated item is therefore D617 SEIDEL, KATHRYN L., 'The Lathe of Heaven,' In Survey of Science Fiction Literature, ed. Frank N. Magill - a critical essay. The bibliography's own index labels D617 '[article]', and it labels genuine reviews 'Review of X' (as in D618), so the 'review' limb fails; the 'one book' limb (The Lathe of Heaven) holds.",
+   "unsupportedLimb": "'a review' - the annotated item D617 is Seidel's essay in Magill's Survey of Science Fiction Literature, not a review",
+   "fromFile": "verdicts-leguin-i686-721.json"
   },
   "698": {
    "index": 698,
@@ -34506,6 +34542,77 @@
    "note": "paradoxa.com volume-21 page shows the title, 'Edited by Sylvia Kelso', and the Erlich item at pages 137-166, verbatim. No year appears anywhere on the page (grep for 2009 over the raw HTML returns zero hits; the only years present are 1995/2000/2015/2019/2020/2024/2025), so the date limb is unsupported by this source.",
    "unsupportedLimb": "the 2009 publication date",
    "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "712": {
+   "index": 712,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Notice that there are no verbs in this excerpt\"",
+   "note": "Raw HTML of the 2008-10-04 TalkToYoUniverse post fetched directly (200, 21,672 bytes); the sentence follows Wade's block quotation of the 'From the Archives of Hain...' header, which she calls the second voice. Post signed 'Posted by Juliette Wade'.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "713": {
+   "index": 713,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"leaving us with a sourceless truth\"",
+   "note": "Same paragraph states that no verbs means no subjects and thus no actors, with agency, identity and intent removed, before the quoted clause - so the 'removes every actor' limb is on the page too.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "714": {
+   "index": 714,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the notes that would head a scientific report\"",
+   "note": "Same paragraph, describing the archival header: a voice of ultimate authority, then the quoted phrase, then the sense of a completely factual account. Register limb supported.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "715": {
+   "index": 715,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it also dictates its own measurement of time\"",
+   "note": "Paragraph beginning 'Think about the number of alien names in these few sentences': Wade reads the header as an overarching institutional structure that spans planets and, in the quoted clause, sets its own time-reckoning - the header's only time content being its 'Hainish Cycle 93, Ekumenical Year 1490-97' line. Wade says 'dictates' where the claim says 'keeps'.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "716": {
+   "index": 716,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"three different voices\"; header introduced as \"the second voice\"",
+   "note": "Wade opens 'The opening is actually quite complex, because it involves three different voices', gives the chapter title as the first, then 'Then we hit the second voice:' followed by the archival header and 'This is a voice of ultimate authority' (the claim's quote, verbatim). She places the parade on page 2, so the three voices are the first page.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "717": {
+   "index": 717,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"From the Archives of Hain. Transcript of Ansible Document 01-01101-934-2-Gethen\"",
+   "note": "Books on GIF review #280 fetched raw (200, 48,741 bytes); under the heading 'An opening excerpt' the header is reproduced with the archive name and the document number, and contains no finite verb before the following 'I'll make my report...' sentence.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "718": {
+   "index": 718,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I'll make my report as if I told a story\"",
+   "note": "Same excerpt, first sentence of the narration; the header above it names 'Report from Genly Ai, First Mobile on Gethen/Winter', tying the 'I' to Genly Ai. Narration of events begins only at 'It starts on the 44th diurnal...'.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "719": {
+   "index": 719,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The story is not all mine, nor told by me alone\"",
+   "note": "Same excerpt, opening the third paragraph, followed by 'Indeed I am not sure whose story it is' - both limbs (not wholly his, not told by him alone) on the page.",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "720": {
+   "index": 720,
+   "verdict": "PARTIAL",
+   "trueWording": "\"It starts on the 44th diurnal of the Year 1491\"",
+   "note": "Quote is verbatim in the Books on GIF excerpt, and within that sentence the ordinal day and numbered year do precede 'the planet Winter' and 'the nation of Karhide'. But the claim's absolute wording fails against the same page: the archival header above already names Hain, Ollul, Genly Ai and Gethen/Winter, and the preceding paragraph names the narrator's homeworld.",
+   "unsupportedLimb": "'before naming any person or place' - the header on the same page already names Hain, Ollul, Genly Ai and Gethen/Winter",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  },
+  "721": {
+   "index": 721,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It is always the Year One here\" - seven words, present tense",
+   "note": "Same excerpt; the sentence stands alone between the dating sentence and 'Only the dating of every past and future year changes each New Year's Day', so it states the local custom. Word count is exactly seven, tense is simple present.",
+   "fromFile": "verdicts-leguin-i686-721.json"
   },
   "722": {
    "index": 722,

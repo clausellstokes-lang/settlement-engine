@@ -1908,6 +1908,30 @@
   }
  },
  {
+  "index": 697,
+  "feature": "register modulation",
+  "claim": "Cogell's bibliography records a review calling Le Guin's style in one book different from her preceding works.",
+  "source": "Elizabeth Cummins Cogell, Ursula K. Le Guin: A Primary and Secondary Bibliography (G. K. Hall, 1983)",
+  "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinpri0000coge%20AND%20%22Le%20Guin%27s%20style%20is%20different%20from%20her%20preceding%20works%22",
+  "quote": "Le Guin's style is different from her preceding works",
+  "page": "archive.org search-inside snippet",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "1983",
+  "routeHint": "archive.org search-inside via Open Library, scoped by identifier",
+  "registerHint": "none",
+  "confidence": "medium (snippet-only; the annotation is Cogell's digest of a review, and the book under review is outside the window)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 697,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Le Guin's style is different from her preceding works\"",
+   "note": "Quote is verbatim in Cogell's bibliography (ursulakleguinpri0000coge), ending the annotation that runs up to the next heading, 'D618 SELTZER, HARA L. Review of ...'. The annotated item is therefore D617 SEIDEL, KATHRYN L., 'The Lathe of Heaven,' In Survey of Science Fiction Literature, ed. Frank N. Magill - a critical essay. The bibliography's own index labels D617 '[article]', and it labels genuine reviews 'Review of X' (as in D618), so the 'review' limb fails; the 'one book' limb (The Lathe of Heaven) holds.",
+   "unsupportedLimb": "'a review' - the annotated item D617 is Seidel's essay in Magill's Survey of Science Fiction Literature, not a review",
+   "fromFile": "verdicts-leguin-i686-721.json"
+  }
+ },
+ {
   "index": 711,
   "feature": "other: research-coverage gap",
   "claim": "Paradoxa number 21 on Ursula K. Le Guin, edited by Sylvia Kelso, is dated 2009 and includes Richard D. Erlich on Always Coming Home as ethnography.",
@@ -1929,6 +1953,30 @@
    "note": "paradoxa.com volume-21 page shows the title, 'Edited by Sylvia Kelso', and the Erlich item at pages 137-166, verbatim. No year appears anywhere on the page (grep for 2009 over the raw HTML returns zero hits; the only years present are 1995/2000/2015/2019/2020/2024/2025), so the date limb is unsupported by this source.",
    "unsupportedLimb": "the 2009 publication date",
    "fromFile": "verdicts-leguin-i709-759.json"
+  }
+ },
+ {
+  "index": 720,
+  "feature": "annalist voice and deep time",
+  "claim": "The report fixes its starting point by an ordinal day of a numbered year before naming any person or place.",
+  "source": "Ursula K. Le Guin, The Left Hand of Darkness, ch. 1 opening, reproduced in Books on GIF review #280",
+  "url": "https://booksongif.substack.com/p/left-hand-of-darkness-ursula-le-guin",
+  "quote": "It starts on the 44th diurnal of the Year 1491",
+  "page": "'An opening excerpt'",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "1969 (text as reprinted by Orbit, 1992)",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 720,
+   "verdict": "PARTIAL",
+   "trueWording": "\"It starts on the 44th diurnal of the Year 1491\"",
+   "note": "Quote is verbatim in the Books on GIF excerpt, and within that sentence the ordinal day and numbered year do precede 'the planet Winter' and 'the nation of Karhide'. But the claim's absolute wording fails against the same page: the archival header above already names Hain, Ollul, Genly Ai and Gethen/Winter, and the preceding paragraph names the narrator's homeworld.",
+   "unsupportedLimb": "'before naming any person or place' - the header on the same page already names Hain, Ollul, Genly Ai and Gethen/Winter",
+   "fromFile": "verdicts-leguin-i686-721.json"
   }
  },
  {
