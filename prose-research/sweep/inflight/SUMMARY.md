@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:31:46 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 13:37:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,6 +11,7 @@
 | leguin | verifier | i618-693 | in-flight | 2 | — | verdict file absent | 11:54:36 |
 | leguin | verifier | i694-849 | in-flight | 6 | — | verdict file absent | 11:54:36 |
 | ? | critic |  | failed | 0 | — | — | 16:36:44 |
+| ? | critic |  | in-flight | 0 | — | — | 17:37:44 |
 | ? | other |  | result | 0 | — | — | 15:08:52 |
 | ? | other |  | result | 0 | FOLD.md | — | 15:23:48 |
 | ? | other |  | result | 0 | — | — | 15:12:16 |
@@ -65,11 +66,11 @@
 | ? | other |  | result | 0 | — | — | 12:54:49 |
 | ? | other |  | result | 0 | best-martin.md | — | 12:08:17 |
 | ? | other |  | result | 0 | best-own.md | — | 13:08:59 |
-| ? | other |  | in-flight | 0 | CLERK-LAWS.md | — | 17:31:36 |
+| ? | other |  | result | 0 | CLERK-LAWS.md | — | 17:32:22 |
 | ? | other |  | result | 0 | reconcile-dm-page.md, dm-only-measure.mjs, recount.py | — | 17:03:54 |
 | ? | other |  | result | 0 | refute-chronicle-line.md | — | 17:01:06 |
 | ? | other |  | result | 0 | MOVE-GRAMMAR.md | — | 17:30:42 |
-| ? | other |  | in-flight | 0 | — | — | 17:29:41 |
+| ? | other |  | result | 0 | CONTRADICTIONS.md | — | 17:34:32 |
 | ? | other |  | result | 0 | — | — | 17:01:30 |
 | ? | other |  | result | 0 | — | — | 17:20:49 |
 
