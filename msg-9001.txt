@@ -1,7 +1,0 @@
-§900.1: the §900 row is corrected by its own read-back — 111 cars not 110, and the four lanes the grouped enrolment missed enter the walk as R51–R54
-
-The row's headline carried the car count of the payload build (110), which predated fix car D; and the kit's re-stamp had regenerated queue-900.md from the draft's TAIL, replacing the chair's hand-written enrolment, so DESK-900-REDS, DESK-900-TAIL, DESK-VISIBILITY and VIS-RESOLVER were not enrolled. The after-CAS guard's bare '__' fired on the __vite__mapDeps literal; the kit template now spells the placeholder alphabet. Rows are append-only; this row reads the corrections out where they belong.
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

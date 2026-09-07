@@ -1,7 +1,0 @@
-{
- "name": "wolfe",
- "regrade": true,
- "claims": [],
- "verdicts": [],
- "note": "NO-OP REGRADE. kept-wolfe.json was [] at regrade time: there are zero verdicts-wolfe-*.json files anywhere in the sweep dir, state-wolfe.json holds zero claims, and the wolfe round-3 sweep is still in its FIND phase (found-wolfe-voice.json, 156 claims / 46 sources, written 2026-09-06 05:50; the academic/craft/close angles have produced no found-wolfe-*.json yet). No verifier note or trueWording exists for any wolfe claim, so no row could be examined and none was downgraded. Zero downgrades here must NOT be read as 'the wolfe rows survived a regrade' — no wolfe row has ever been verified. Next step for wolfe is `sweep-state.mjs assemble wolfe` once the remaining find angles land, then the Verify phase."
-}

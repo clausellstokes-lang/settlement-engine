@@ -1,7 +1,0 @@
-## §900 — THE DESK LANDING (SEAT: Fable 5.1 — validated)
-
-### R46 — lanes DESK-GEN2 (4), DESK-DEF2 (4), DESK-ECON2 (1), DESK-WARFAITH (1), DESK-9 (2), OSR-SCHEMA17 (3), DEADREAD/DESKCURE/STRICT-CLEAN (the desk consist) — OWED
-### R47 — lanes DESK-GEN3 (5: DS-GEN-18, DS-GEN-8, DS-REL-1, DS-POP-3 lit; DS-GEN-15 declined on two unauthored cuts; the `{institution}` mechanism refuted twice and the annex's own ruling used), DESK-TIMEBAND (2), DESK-TIMEBAND-2 (1 car, the append REFUSED with measurement — T5 landed) — OWED
-### R48 — lanes ENC-4b (4) + ENC-4c (2) + PANTHEON-ROSTER (3) — OWED (HIGH: the roster's capsule coupling; the approacher rule; the tie-break)
-### R49 — lanes HORIZON-B1 (7) + HORIZON-B2 (2) + SEAT-78 (3) — OWED (HIGH: the restore split; the WORKER ceiling arm; the SEAT-7a false receipt)
-### R50 — lanes DOCKET-2 (1) + DOCKET-3 (2) + RATCHET-HOLDSAFE (4: `--dry` and `--from-log` for the test-ratchet instrument; all four of its modes had spawned the whole suite) + DESK-900-CARS (5: the `chance_meeting_exposed` voice row, the D10 coupling licence and its bucket, `{founder}` re-declared `phrase` (measured 26/26), DOCKET item 8 as a measurement record; the ninth OSR exemption's retirement REFUSED — it needs schema rung 18 with a migration bundle) — OWED

@@ -1,7 +1,0 @@
-Desk composition (chair car): the viability verdict returns — a whole-file keep-ours resolution had discarded GEN2's DS-GEN-11 wiring
-
-Replaying DESK-GEN2 car 2 onto the composition, the chair resolved ViabilityTab.jsx's conflict with git checkout --ours for the WHOLE FILE (to keep DEF2's cross-tab magic-dependency block) and thereby dropped GEN2's verdict wiring that sat in other hunks of the same file: the generalDeskLines import, the verdictLines draw and its three-lens block. The DS-GEN-11 arm of generalDeskTabFlow was red from 269312783 on; a three-dock bisect found it and this car re-applies GEN2's change three-way, keep-both, so DEF2's block and gate and GEN2's verdict draw coexist. Law recorded in memory: resolve HUNKS, never whole files. Proof: the general and defense tab flows green (58 of 59 arms in the run; the one red is the mount walker's SHIPPED TABLE arm on two unresolved draw sites, cured next by the resolver car); eslint 0.
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

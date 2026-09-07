@@ -1,9 +1,0 @@
-Desk landing (register car 3): the tuning inventory refreezes on the clean tree, and the prose-numerics ledger re-addresses thirty rows — twenty-six by the tool, four by hand where the tool's pairing was ambiguous
-
-Tuning inventory: REFROZEN at 21fe864fa (237 tables, 535 named, 6985 bare) — IRREGULAR_TUNING (SEAT-78, a draft row), the two-band CHANCE_MEETING_NEWS_TUNING (ENC-4b), TUNEREG-2's three tables; no ceiling rises; the first take was REFUSED [DIRTY_TREE] behind register car 2's uncommitted outputs (the sixth costume of the register law), so the door was re-taken after that commit. Plain re-run 75/75.
-
-Prose-numerics: the re-key tool paired 26 rows as RELOCATED (SummaryTab, DailyLifeTab, … — desk mounts inserted lines above them) and wrote them; four rows at EconomicsTab.jsx:345/347 (`{src.percentage}`, floatInterpolation + percentToken, twice each) it could NOT pair, because the same snippet and category recur at two addresses in both the baseline and the live scan (FELL ×4 / NEW ×4 in the dry run). Reviewed by eye: the desk's mount pushed the market-share bar eleven lines down (345→356, 347→358, same order, same text); the chair moved the four rows by hand. No new leak, no fallen debt: baseline 225 = live 225, exact 225 after the write. The re-key tool's usage is `<tree> [--write]`; the runner had passed `--write` as the tree — corrected in the kit.
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
