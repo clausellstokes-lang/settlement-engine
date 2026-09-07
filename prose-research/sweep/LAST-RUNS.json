@@ -154,8 +154,8 @@
   "status": "COMPLETE 09:38 (launched 07:55 on the owner's STOP): nine extracts (404 items) + the fold → sweep/EXEMPLAR-BEST-PARTS.md (86,609 bytes: 52 techniques T1–T52 in nine families; shortlists dossier-archivist 13 · herald-pools 10 · chronicle-line 9 · dm-page 7 · chrome 7 · compendium-docent 8; 22 conflicts (10 open); 35 faults checked; 33 owner questions Q1–Q33)"
  },
  "_S12": {
-  "runId": "wf_7cdbb8bf-177",
+  "runId": "wf_33d10449-ec8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.js",
-  "status": "RUNNING since 09:39: six seat reconcilers → six Opus refuters → the contradiction hunter ∥ MOVE-GRAMMAR ∥ CLERK-LAWS → the critic → the fold into RULES-V2-PART-B.md + sweep/RECONCILIATION-DOSSIER.md"
+  "status": "STOPPED 09:53 (wf_7cdbb8bf-177, three Fable reconcilers ten minutes in) on the OWNER's 09:50 word: every agent OPUS, 'Seat: Opus 5 — Fable-unvalidated' on every file, the Fable chair retrovalidates. Workflow switched (reconciliation-workflow.js; the Fable-seat version kept as reconciliation-workflow.fable-seat.bak.js). RELAUNCHED as wf_33d10449-ec8 (every agent Opus) at 09:54."
  }
 }
