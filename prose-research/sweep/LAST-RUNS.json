@@ -153,10 +153,10 @@
    "ai",
    "martin"
   ],
-  "open_decision": "ADDED 09-07 02:10 (the ai r10 critic): the PROCEDURAL-GENERATION baseline angle for ai (Compton, Grinblat/Qud, Dwarf Fortress, Ryan, Smith & Whitehead) — a new FIND angle outside S-BOUND; chair recommends YES (small, ~1 h). || ADDED 09-07 01:10 (the dnd r10 critic): ROUTE POLICY for ~40 Part VI rows (archive.org book OCR; Roll20 paywalled body text) — relabel / replace with lawful witnesses / purchase the books (~$30 each) and re-verify; owner's call on route and cost. || DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
+  "open_decision": "DECIDED 09-07 ~02:20 (owner: 'yes to' the procgen-baseline angle): ai r11 = S_VERIFY (its untriage list, still to extract) + ONE extraAngle procgen-baseline (sweep/extra-ai-procgen.json) → regrade → synth (a new feature or Part: sameness under variety, measured in the program's own architecture) → critic; queued behind dnd r11 / leguin r9 (the two slots). || ADDED 09-07 02:10 (the ai r10 critic): the PROCEDURAL-GENERATION baseline angle for ai (Compton, Grinblat/Qud, Dwarf Fortress, Ryan, Smith & Whitehead) — a new FIND angle outside S-BOUND; chair recommends YES (small, ~1 h). || ADDED 09-07 01:10 (the dnd r10 critic): ROUTE POLICY for ~40 Part VI rows (archive.org book OCR; Roll20 paywalled body text) — relabel / replace with lawful witnesses / purchase the books (~$30 each) and re-verify; owner's call on route and cost. || DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting",
-  "next": "when EITHER completes: dry-check it; then the next S_VERIFY (hobb r8 / wolfe r9: untriage --apply → summary → mk-round --cap 4 (no triage, no angles) → notes → mk-embedded → launch); the ai extractor (untriage-ai.json from critic-ai.md §2/§5.A) when a slot frees, then ai r11; after ALL five: S10b → S12.",
+  "next": "dnd r11 + leguin r9 RUNNING. When a slot frees: extract untriage-ai.json → ai r11 = verify-only + procgen-baseline (owner GO 02:20). Then S10b → S12. hobb/wolfe passes DEFERRED (recorded above). Implementation slot: §908 gate running → after-cas → SOAK-HONEST-909 → CAP-HORIZON-909 → L-MAT.",
   "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first.",
   "owner_rulings_for_S12": "OWNER 09-07 01:20: every dossier element gets the FULL FORM (a whole setting, not a campaign; no place more important than another); D&D features 31/36/55/56 ('size to purpose in play', empty slots omitted, tiers by importance) transfer only as HOW (slot order, typography, register, tiers by the place's OWN rank), never as WHICH/how much; full form is not manufactured content (memory: owner-directive-2026-09-07-every-dossier-element-gets-the-full-form).",
   "S_VERIFY": {
@@ -166,12 +166,12 @@
    "order": [
     "dnd",
     "leguin",
-    "hobb",
-    "wolfe",
     "ai"
    ],
    "lists": "sweep/untriage-<name>.json — dnd 152 / leguin 243 / hobb 81 / wolfe 64 written 02:0x by the Opus reader (CONFIRMED against the state); ai list still to extract (from critic-ai.md §2/§5.A) when a slot frees",
-   "then": "dry-check each → S10b → S12"
+   "then": "dry-check each → S10b → S12",
+   "ai": "OWNER GO 02:20 on the procgen angle; build ai r11 as: extract untriage-ai.json (critic-ai.md §2 + §5.A) when a slot frees → untriage --apply → summary → mk-round ai r11 --prev sweep/args-ai-r10.json --cap 4 → set extraAngles from sweep/extra-ai-procgen.json (mk-round drops it unless passed via mk-args --extra; set it by hand after) + notes → mk-embedded → launch",
+   "deferred": "hobb and wolfe verify-only passes DEFERRED 09-07 02:25 (owner: 'are these additional steps actually substantial?' — chair revised ruling 5: those two are citation hygiene, not rule changes; their untriage-<name>.json lists stay on disk; the reconciler (S12) may request a targeted 15-minute verification of any single-source rule it wants to lean on)"
   }
  },
  "_fiveauthor": {

@@ -3,13 +3,14 @@
  "name": "leguin",
  "angle": null,
  "tag": "i462-489",
- "lines": 51,
+ "lines": 78,
  "firstTs": "2026-09-07T06:15:25.027Z",
- "lastTs": "2026-09-07T06:17:46.519Z",
+ "lastTs": "2026-09-07T06:20:28.532Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 10
+  "Bash": 16,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
@@ -21,13 +22,13 @@
   "https://web.archive.org/web/20260111213522id_/https://www.nytimes.com/2018/01/23/obituaries/ursula-k-le-guin-acclaimed-for-her-fantasy-fiction-is-dead-at-88.html"
  ],
  "filesWritten": [],
- "lastAssistantText": "WaPo recovered via Wayback. Now the NYT, Reactor and Kelso sources.",
+ "lastAssistantText": "l five sources reached as raw pages — sfsfss.com, reactormag.com and the Paradoxa PDF live; the Washington Post (curl 92, stream not closed cleanly) and the New York Times (HTTP 403) both recovered through Wayback `id_` raw captures, so no BLOCKED verdicts and no verdict formed through a summarizer.",
  "run": "wf_14be9775-021",
  "agent": "a0d5f73acabc7701b",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_14be9775-021/agent-a0d5f73acabc7701b.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i462-489.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -1548,6 +1548,30 @@
   }
  },
  {
+  "index": 422,
+  "feature": "plainness and economy",
+  "claim": "David Mitchell names a studied neutrality of style as one of the two failure modes fantasy prose falls into, the other being a cod-historic narratorial voice.",
+  "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+  "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+  "quote": "a studied neutrality of style tastes like clingfilm",
+  "page": "section on style and voice",
+  "kind": "analysis",
+  "polarity": "rejects",
+  "date": "2015-10-23",
+  "routeHint": "live URL with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 422,
+   "verdict": "PARTIAL",
+   "trueWording": "a studied neutrality of style tastes like clingfilm",
+   "note": "Quote is verbatim, but the enumeration limb fails. The page names THREE hazards in one sentence, separated by semicolons: the cod-historic narratorial voice, jarring neologisms ('totally awesome'), and then studied neutrality. It never frames these as two failure modes, nor pairs neutrality against the cod-historic voice as its opposite. The 'Scylla and Charybdis' figure two sentences earlier applies to style and voice generally, not to this list.",
+   "unsupportedLimb": "that studied neutrality is one of only TWO failure modes, the other being the cod-historic voice - the page names a third, jarring neologisms, between them",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  }
+ },
+ {
   "index": 444,
   "feature": "other: domestic detail",
   "claim": "Jo Walton states that she did not believe in Tenar’s life as a farmwife on Gont and that something about it rings false.",
@@ -1569,6 +1593,54 @@
    "note": "Same Walton essay: 'I didn't quite believe in Tenar's life as a farmwife on Gont-there's something false about it.' Quote verbatim; note the source hedges with 'quite', which the claim's 'did not believe' drops.",
    "unsupportedLimb": "the unhedged 'did not believe' — the source reads \"I didn't quite believe\"",
    "fromFile": "verdicts-leguin-regrade-r8.json"
+  }
+ },
+ {
+  "index": 462,
+  "feature": "opening sentence",
+  "claim": "Michael Dirda opens his review by quoting the first sentence of A Wizard of Earthsea, which names the island of Gont, its mile-high peak, its towns in high valleys and its ports on dark narrow bays before naming any person.",
+  "source": "Michael Dirda, \"The Twilight of an Age of Magic\" (review of Tehanu), The Washington Post, 25 February 1990",
+  "url": "https://www.washingtonpost.com/archive/entertainment/books/1990/02/25/the-twilight-of-an-age-of-magic/34d58490-4114-430b-890e-dc3dc3a3680a/",
+  "quote": "a single mountain that lifts its peak a mile above",
+  "page": "review opening, quoting A Wizard of Earthsea",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1990-02-25",
+  "routeHint": "Wayback raw capture of the Washington Post archive page",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close-2",
+  "verdict": {
+   "index": 462,
+   "verdict": "PARTIAL",
+   "trueWording": "Review opens: \"THE ISLAND of Gont,\" begins A Wizard of Earthsea",
+   "note": "Wayback raw capture (20170827235846id_) of the WaPo archive page; live URL died mid-stream (curl 92). Dirda's review body does open with the novel's opening quotation, and no person is named before Sparrowhawk four sentences in. The quote fragment is verbatim. But the towns/ports detail belongs to the novel's SECOND sentence, which Dirda quotes next, not to the first sentence the claim attributes it to. Byline 'By Michael Dirda', February 25, 1990, reviewing Tehanu - all confirmed.",
+   "unsupportedLimb": "the claim attributes the towns-in-high-valleys and ports-on-dark-narrow-bays detail to the first sentence; on the page those words fall in the novel's second sentence",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  }
+ },
+ {
+  "index": 486,
+  "feature": "place and institution description",
+  "claim": "Each document in 'The Matter of Seggri' is introduced by a provenance line naming the kind of document, its recipient and its date.",
+  "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+  "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+  "quote": "The following is a memoir given to Ambassador Eritho te Ves",
+  "page": "frame line before the Ush memoir",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "1994",
+  "routeHint": "direct curl",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 486,
+   "verdict": "PARTIAL",
+   "trueWording": "The following is a short story -written in 93/1586 by",
+   "note": "Same raw page. The cited quotation is verbatim and that one provenance line does name kind, recipient and date. But the claim is universal ('Each document'), and it fails on the other documents. Enumerated all five: Captain Aolao-olao's report (kind and date, no recipient); Merriment's notes (kind, recipient 'THE EKUMEN', date 93/133 - fits); the Ush memoir (fits); Sem Gridji's short story (kind, date, author, NO recipient); Mobile Ardar Dez's autobiographical sketch (kind only, no recipient and no date in its intro line).",
+   "unsupportedLimb": "the universal limb that every document's provenance line names a recipient and a date - the short story intro names no recipient, and the autobiographical sketch intro names neither recipient nor date",
+   "fromFile": "verdicts-leguin-i462-489.json"
   }
  },
  {

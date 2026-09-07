@@ -15980,6 +15980,13 @@
    "note": "Exact, inside Slusser's quotation of Bloom's introduction to his 1986 Modern Critical Views volume on Le Guin. Both the 1986 date and 'introduction' are on the page. Minor locator drift only: the Bloom quotation sits in the second body paragraph ('Increasingly, Le Guin's work...'), not the third.",
    "fromFile": "verdicts-leguin-i385-415.json"
   },
+  "388": {
+   "index": 388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a virtual anthology of narrative strands of different kinds",
+   "note": "Raw curl fetch of the Wayback id_ capture, HTTP 200; page header confirms Jameson, SFS #7, Vol 2 Part 3, November 1975. Opening paragraph: the novel 'can be shown to be constructed from a heterogeneous group of narrative modes artfully superposed and intertwined, thereby constituting' the quoted phrase. Every limb (heterogeneous narrative modes / superposed / anthology of strands) is on the page; the following sentence enumerates the strands (travel narrative, pastiche of myth, political novel, straight SF, Orwellian dystopia, adventure-story, love-story).",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
   "389": {
    "index": 389,
    "verdict": "SKIPPED_TRIAGE",
@@ -15994,12 +16001,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "391": {
+   "index": 391,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "juxtaposed and recombined into piquant montages",
+   "note": "Same raw Jameson capture (one fetch served indices 388 and 391). The passage on details 'suggesting an attempt to reimagine history' asks 'What reader has not indeed been struck' by the opening cornerstone ceremony and the departure of the first spring caravan, then says extrapolation designates 'just such details as these, in which heterogenous or contradictory elements of the empirical real world are' + the quote. Reader-struck limb, both named details, and the recombination limb are all present.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
   "392": {
    "index": 392,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
+  },
+  "393": {
+   "index": 393,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a taut and spare architectural system of narrative cells",
+   "note": "Raw curl fetch of the Wayback id_ capture, HTTP 200; header confirms Darko Suvin, 'Parables of De-Alienation: Le Guin's Widdershins Dance', SFS #7, November 1975. The ABSTRACT printed at the foot of the page (after the notes) reads: Le Guin is a 'classical' writer, 'her energy is as fierce but is strictly controlled within' + the quote. Claim drops the page's scare quotes around classical and the 'as fierce but' contrast, neither of which it contradicts.",
+   "fromFile": "verdicts-leguin-i388-419.json"
   },
   "394": {
    "index": 394,
@@ -16008,6 +16029,13 @@
    "note": "Quote is exact, but only in the ABSTRACT block appended after Suvin's footnotes; grep of the whole article body (lines 1-565) finds no 'centripetal' or 'delineat' anywhere. That abstract's first paragraph speaks in issue-editorial voice ('argued abundantly in this special issue', 'no contributor attempts to integrate the Earthsea trilogy'), and is unsigned; the second paragraph is the genuine article abstract, matching Suvin's opening line. So 'Le Guin writes centripetally... delineates ever more precisely the same object' is verbatim on Suvin's SFS page but is not shown to be Suvin's own writing. Suvin co-edited the issue, so it is likely his, but the page does not say so.",
    "unsupportedLimb": "attribution to Suvin as the writer of the sentence",
    "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "395": {
+   "index": 395,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "internal consistency and stylistic clarity, that trilogy is her best",
+   "note": "Same raw Suvin capture. Body, in the Earthsea passage: 'Seen from a purely formal viewpoint of' + the quoted words + 'work up to TD.' TD is the issue-wide abbreviation for The Dispossessed (Suvin uses it 14 times and discusses the novel at length; Theall's article in the same issue defines it explicitly), so the 'up to The Dispossessed' limb holds.",
+   "fromFile": "verdicts-leguin-i388-419.json"
   },
   "396": {
    "index": 396,
@@ -16023,6 +16051,13 @@
    "note": "Exact in section 2, 'The New Atlantis' (NA is defined as that story earlier in the same section). Page calls it 'the Atlanteans' last question-segment - the end of their strand and of the whole NA', which supports the claim's 'closing segment'. Suvin's own body text.",
    "fromFile": "verdicts-leguin-i385-415.json"
   },
+  "398": {
+   "index": 398,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the retrenchment she austerely--almost puritanically--operates in all of her work",
+   "note": "Same raw Suvin capture. In the section on Le Guin's ideology and world-reduction: her lonely heretics' position explains 'not only the clear-eyed elegiac atmosphere of Le Guin's, but also' + the quoted words + ', culminating in TD.' Austerity, the near-puritanical qualifier, the retrenchment and its extent across all her work are all on the page.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
   "399": {
    "index": 399,
    "verdict": "VERIFIED_VERBATIM",
@@ -16030,12 +16065,68 @@
    "note": "Exact in the closing section (section 3), before the footnotes. All three ingredients are on the page: '19th-Century Realism', a 'Virginia-Woolf-type adoption of some techniques of lyric poetry', and 'the ethical abstraction of American romances'. Suvin hedges - the blend 'may account for' - where the claim says 'attributes'; the hedge is a softening, not a different proposition.",
    "fromFile": "verdicts-leguin-i385-415.json"
   },
+  "400": {
+   "index": 400,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "provides the novel with the characteristic features of an anthropological report",
+   "note": "Raw curl fetch of the Wayback id_ capture, HTTP 200; header confirms Donald F. Theall, 'The Art of Social-Science Fiction: The Ambiguous Utopian Dialectics of Ursula K. Le Guin', SFS #7, November 1975. One fetch served indices 400-405. In the section on the stranger visiting a new world: in LHD the stranger 'who is also the main narrator--is a professional cultural analyst and cultural communicator, whose concern with a thorough account of the culture' + the quoted words. Causal 'because' limb matches the page's 'whose concern... provides'.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "401": {
+   "index": 401,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "allows for the particularly descriptive approach",
+   "note": "Same raw Theall capture. Full sentence: 'In each case the separateness of the outsider makes him an observer as well as a participant, and' + the quote. The 'allows Le Guin' limb is supported by the immediate context, which is explicitly about the accounts 'Le Guin gives us of her fictional worlds' and her conscious development of the stranger's role; the page's own wording leaves the beneficiary implicit.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "402": {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "validating the carefully chosen and believable details which compose the thorough",
+   "note": "Same raw Theall capture. 'The actual sensory experience and subjective response of strangers or outsiders plays a central role in' + the quoted words + 'accounts Le Guin gives us of her fictional worlds.' The claim's 'validates' compresses the page's 'plays a central role in validating', a shade stronger but not a distinct limb.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "403": {
+   "index": 403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "details of physical geography, sexual customs, cultural evolution, ideology, life-style",
+   "note": "Same raw Theall capture. In the TD discussion: 'we learn about the' + the quoted words + ', and the like on the two worlds', with the preceding sentences establishing Urras and Anarres and The Dispossessed. All five named categories, the two worlds and the reader-learning limb are present; the page's open-ended 'and the like' means the list is illustrative, which the claim does not deny.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "404": {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'll make my report as if I told a story",
+   "note": "Same raw Theall capture. Theall block-quotes the passage and attributes it '(LHD §1)': the narrator continues 'for I was taught as a child on my hornew[or]ld that Truth is a matter of imagination.' Both limbs -- that Theall quotes it, and that LHD's narrator declares it -- are on the page.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "405": {
+   "index": 405,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the rigors of Karhide or the asceticism of Anarres",
+   "note": "Same raw Theall capture, endnote 1 (the passage is immediately followed by note 2 citing Le Guin's 'Is Gender Necessary?'). 'There would appear to be a strong though again ambiguous connection between such a Puritan or Yankee tradition and Le Guin's sensibility, which manifests itself in descriptions such as those of' + the quote. The claim's 'links' drops Theall's hedge ('would appear', 'ambiguous'), but the connection is drawn.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
   "406": {
    "index": 406,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Everywhere the sententiae that are her style prepare us",
    "note": "Exact, in the ansible paragraph as the locator says. 'Everywhere' supports the claim's 'constant', and the page's construction is stronger still - the sententiae are her style, not merely a feature of it. Scoping to The Dispossessed holds: the essay is on TD, and later Bierman writes that TD 'is signed with the same moral sententiae'.",
    "fromFile": "verdicts-leguin-i385-415.json"
+  },
+  "407": {
+   "index": 407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin is rarely a simple, straightforward storyteller",
+   "note": "Raw curl fetch of the Wayback id_ capture, HTTP 200; header confirms Judah Bierman, 'Ambiguity in Utopia: The Dispossessed', SFS #7, November 1975. The sentence stands verbatim in the paragraph following the ansible discussion, after 'Ambiguity... is not intended as a euphemism for legitimated confusion', and is followed by 'TD is a complex utopian tale in which she violates the \"unities.\"' Bierman asserts this flatly rather than rebutting a named critic, but asserting it is disputing her plainness.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "408": {
+   "index": 408,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a care for the way politics works in this archaic system",
+   "note": "Raw curl fetch of the Wayback id_ capture, HTTP 200; header confirms John Huntington, 'Public and Private Imperatives in Le Guin's Novels', SFS #7, November 1975. In the section on LHD's political structures: 'Though Karhide's feudal monarchy owes a good deal to literary convention, it is realized with a detail and with' + the quoted words + 'which is new to Le Guin.' Claim renders the page's 'this' as 'that' and omits the literary-convention concession, neither of which it contradicts.",
+   "fromFile": "verdicts-leguin-i388-419.json"
   },
   "409": {
    "index": 409,
@@ -16093,12 +16184,104 @@
    "note": "Guardian live URL fetched raw (HTTP 200, browser UA), byline David Mitchell. Sentence sits in the style paragraph beginning 'Metaphors and similes are scarce...'. Claim's 'phonetically' is narrower than the source's 'not reproduced', so it is entailed.",
    "fromFile": "verdicts-leguin-i416-475.json"
   },
+  "417": {
+   "index": 417,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin eschews wide variations of tone or register",
+   "note": "Live theguardian.com fetched raw with a browser user agent, HTTP 200, full article body present (no Wayback needed despite the robots.txt bar on named agents). Embedded metadata confirms author David Mitchell and datePublished 2015-10-23. Style-and-voice passage: 'Earthsea's accents and dialects are referred to but not reproduced on the page, and' + the quote; the next sentence names A Wizard of Earthsea, so the novel limb holds.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
   "418": {
    "index": 418,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Dialogue contains warmth and humour, but no knowing wisecracks",
    "note": "Same Guardian paragraph as 416, one sentence later; context is explicitly A Wizard of Earthsea. Raw page reached, not a summarizer.",
    "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "419": {
+   "index": 419,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the calm authority of an age-old Icelandic saga",
+   "note": "Same raw Guardian fetch (one fetch served indices 417 and 419). In the style-and-voice section, after the Scylla-and-Charybdis framing: 'Ged's story is told with' + the quote + ', yet stitched here and there with passages of pure beauty for its own sake.' The narrating-voice limb is the page's own 'is told with', within a passage headed by 'Style and voice'.",
+   "fromFile": "verdicts-leguin-i388-419.json"
+  },
+  "420": {
+   "index": 420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reads like the retelling of a tale first told centuries ago",
+   "note": "Guardian style-and-voice paragraph. Quote verbatim. The 'cumulative effect of restraint' limb holds: the sentence opens 'Consequently,' directly after the catalogue of restraint (scarce metaphors, sparing dialogue, frugal description, no wisecracks, no tricks), and the clause about twists handed down through generations of storytellers follows in the same sentence. ACCESS FLAG for the eight Guardian rows (420-427): theguardian.com/robots.txt names anthropic-ai, ClaudeBot, Claude-SearchBot and Claude-User in its blocked list, and its header asserts content may not be used for LLM purposes. No Wayback capture of this URL exists (availability API returns no snapshot), so the raw page was reached only via recovery route 1, a browser user agent on the live URL. The verification is sound, but whether these eight rows may be KEPT and quoted downstream is a licensing call for the owner, not the lane.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "421": {
+   "index": 421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such specificity is persuasive because it sounds too detailed",
+   "note": "Guardian, paragraph after the blockquote from the novel. Quote verbatim; page continues 'to be made up.' Both limbs hold: the preceding block quotation is a passage from the novel in which a girl bobs her head and hides her eyes with her hands to show respect, as women did in the East Reach.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "422": {
+   "index": 422,
+   "verdict": "PARTIAL",
+   "trueWording": "a studied neutrality of style tastes like clingfilm",
+   "note": "Quote is verbatim, but the enumeration limb fails. The page names THREE hazards in one sentence, separated by semicolons: the cod-historic narratorial voice, jarring neologisms ('totally awesome'), and then studied neutrality. It never frames these as two failure modes, nor pairs neutrality against the cod-historic voice as its opposite. The 'Scylla and Charybdis' figure two sentences earlier applies to style and voice generally, not to this list.",
+   "unsupportedLimb": "that studied neutrality is one of only TWO failure modes, the other being the cod-historic voice - the page names a third, jarring neologisms, between them",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "423": {
+   "index": 423,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "feels like being locked inside a medieval theme park",
+   "note": "Guardian style-and-voice paragraph. The claim's quote fragment 'A cod-historic narratorial voice in a fantasy novel' and the theme-park predicate are contiguous and verbatim on the page. All limbs supported.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "424": {
+   "index": 424,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rich enough to nourish the reader's imagination, but frugal enough",
+   "note": "Guardian style-and-voice paragraph; page continues 'to allow it to collaborate in the act of creation.' Quote verbatim. The 'in A Wizard of Earthsea' limb is contextual rather than explicit - the sentence reads 'Descriptions of people and places are...' inside the paragraph that quotes the novel and concludes about A Wizard of Earthsea - but the antecedent is unambiguous.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "425": {
+   "index": 425,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "thumbnail sketches contain the psychological depth of oil paintings",
+   "note": "Guardian, Pechvarry paragraph. Quote verbatim. The 'appear only briefly' limb is directly supported: the same paragraph says the other characters are minor in terms of screen time and that even the characters that appear most fleetingly are endowed with a fully thought-out inner life.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "426": {
+   "index": 426,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
+   "note": "Guardian, paragraph beginning 'Earthsea is a fantasy world' - the locator in the claim is correct. The seven-item list is verbatim and in order. One softening to note: the page reads 'so human a world - with [list] - that its fantastical elements feel ALMOST quotidian'; the claim drops 'almost'. The hedge is minor and the substance holds, so this is not downgraded, but downstream copy should keep 'almost'.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "427": {
+   "index": 427,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "moments of foreshadowing and authorial omniscience but no tricks",
+   "note": "Guardian style-and-voice paragraph. Page reads 'There are moments of foreshadowing and authorial omniscience but no tricks.' Quote verbatim; the subject is A Wizard of Earthsea, named in the immediately following sentence.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "428": {
+   "index": 428,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "her graceful prose, carefully thought-through premises, psychological insight",
+   "note": "NYRB, paragraph beginning 'Which brings us to Ursula K. Le Guin' - locator correct. Quote verbatim. The 'first among the qualities' limb holds literally: graceful prose heads the list, and the list's verb is 'have earned her the National Book Award, the Kafka Award, five Hugos, five Nebulas...'. Byline Margaret Atwood confirmed in the page title.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "429": {
+   "index": 429,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "non-directive understanding and recording are the functions required",
+   "note": "NYRB, paragraph setting out the Ekumen premise. Quoted fragment is contiguous and verbatim. All limbs hold: the sentence names a benevolent federation called the Ekumen whose explorers or ambassadors are known as Mobiles, sent to societies to see what has become of them. Orthography note only - the page writes 'noninvasive' unhyphenated where the claim paraphrases 'non-invasive'; that word is outside the quoted span.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "430": {
+   "index": 430,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "at times a movingly lyrical writer",
+   "note": "NYRB, paragraph on 'Old Music and the Slave Women' - locator correct. Page reads that Le Guin, although at times a movingly lyrical writer, has never shied away from necessary gore. Quote verbatim; 'never avoided writing gore when the story required it' is an accurate rendering of 'never shied away from necessary gore'.",
+   "fromFile": "verdicts-leguin-i420-438.json"
   },
   "431": {
    "index": 431,
@@ -16114,6 +16297,13 @@
    "note": "Same NYRB article, in the paragraph comparing the 1976 Left Hand of Darkness introduction with the new Birthday of the World foreword; continues 'the genesis of each story, the problems she had to think her way through'.",
    "fromFile": "verdicts-leguin-i416-475.json"
   },
+  "433": {
+   "index": 433,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beguiled by the flawless, poetic prose",
+   "note": "Kirkus review of TEHANU / THE LAST BOOK OF EARTHSEA by Ursula K. Le Guin; no byline on the page, so 'unsigned' holds. Quote verbatim, page reading 'but even young readers will be beguiled by the flawless, poetic prose'. Metadata correction for the citation, not a claim limb: the page dates the review to Kirkus Reviews Issue Jan. 15, 1990; Feb. 1, 1990 is the book's release date.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
   "434": {
    "index": 434,
    "verdict": "VERIFIED_VERBATIM",
@@ -16121,12 +16311,61 @@
    "note": "Kirkus live URL fetched raw; review body is unsigned, headed TEHANU / Ursula K. Le Guin. Page shows 'Pub Date: Feb. 1, 1990' and 'Kirkus Reviews Issue: Jan. 15, 1990' - the 1 Feb 1990 in the source line is the book pub date, not the review issue date.",
    "fromFile": "verdicts-leguin-i416-475.json"
   },
+  "435": {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a tale with the universality and dignity of legend",
+   "note": "Same Kirkus review. Page reads 'She weaves contemporary concerns - the roles of men and women, the theft of resources from and the passage of power to the next generation - into a tale with the universality and dignity of legend.' Quote verbatim; the subject 'She' is Le Guin, named in the preceding sentence. Same Jan. 15, 1990 issue-date correction as index 433.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
   "436": {
    "index": 436,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the philosophy expressed in thoughtful, potent metaphor",
    "note": "Same unsigned Kirkus Tehanu review, same sentence as 434 ('...beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor').",
    "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "437": {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "her sentences, as elegant and beautiful as any written",
+   "note": "Library of America tribute, Zadie Smith entry (first entry under her heading). Page continues 'in the twentieth century.' Quote verbatim and attribution confirmed. Metadata note only: the page's dateline now reads January 5, 2022, a CMS re-date - the text itself places the writing days after Le Guin's death on January 22, 2018.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "438": {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ursula was an exquisite stylist",
+   "note": "Library of America tribute, Harold Bloom entry. Quote verbatim; page continues 'Every word was exactly in place and every sentence or line had resonance.' Attribution confirmed under the Harold Bloom heading. Same January 5, 2022 CMS dateline note as index 437.",
+   "fromFile": "verdicts-leguin-i420-438.json"
+  },
+  "439": {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every word was exactly in place and every sentence or line",
+   "note": "Raw HTML fetched live from loa.org with a browser UA. Quote sits in the Harold Bloom entry (after 'Ursula was an exquisite stylist'), reached from the contributor index. Both limbs — words in place, sentences/lines resonant — are in one sentence. Note the live page header is stamped 'News January 5, 2022' (a republish date), not January 2018 as the source field says; the tribute content is the 2018 obituary round-up.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "440": {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the mysterious depths of Tolkien's, but without his tiresome back-stories",
+   "note": "Raw HTML fetched live from theguardian.com with a browser UA (robots.txt bars named agents, but the article body came through complete). Sentence in the penultimate third of the Classic-of-the-month column: 'This gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying.' The claim's 'verse' is the page's 'versifying'.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "441": {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "allusions to fragmented legends about the tragedies of heroes and heroines",
+   "note": "Same live Guardian fetch. Sentence in the column's closing third: 'Both story and language lie at its heart, for it contains allusions to fragmented legends about the tragedies of heroes and heroines, and the world of Earthsea itself was summoned by speech.'",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "442": {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It reads aloud beautifully. All Le Guin does.",
+   "note": "Raw HTML fetched live from reactormag.com. Essay body, third paragraph: Walton reads Tehanu 'with a small baby in a sling', reads 'some of it aloud to try to soothe him to sleep', then the parenthesis '(It reads aloud beautifully. All Le Guin does.)'. Page date confirmed October 25, 2011, matching the source field.",
+   "fromFile": "verdicts-leguin-i439-461.json"
   },
   "443": {
    "index": 443,
@@ -16143,12 +16382,47 @@
    "unsupportedLimb": "the unhedged 'did not believe' — the source reads \"I didn't quite believe\"",
    "fromFile": "verdicts-leguin-regrade-r8.json"
   },
+  "445": {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beautifully written, but it isn't told like a legend",
+   "note": "Raw HTML fetched live from reactormag.com; the article body sits below a consent shell, extracted in full. Penultimate paragraph: 'This is also beautifully written, but it isn't told like a legend.' The 'unlike A Wizard of Earthsea' limb is carried by the adjacent sentence — 'If we know it's part of a legend, it's because we've read the first book' — rather than stated as a direct comparison. Page date is October 11, 2011 (source field gives only 2011).",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "446": {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "straightforwardly right behind Tenar's shoulder the entire time",
+   "note": "Same live Reactor fetch. Sentence immediately follows the 'not told like a legend' sentence in the penultimate paragraph: 'We are straightforwardly right behind Tenar's shoulder the entire time.'",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
   "447": {
    "index": 447,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "she is described as 'like a child coming home'",
    "note": "Reactor Tombs of Atuan essay fetched raw, 'By Jo Walton', published October 11, 2011 (source line says only 2011). Both limbs present: 'The text at the end describes him as a \"young wizard\"' and Tenar at Havnor 'like a child coming home'.",
    "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "448": {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a lesser writer would have finished the book with the earthquake",
+   "note": "Same live Reactor fetch. Paragraph on female coming of age: '...a lesser writer would have finished the book with the earthquake that destroys the Place and the triumphant escape. The final chapters covering their escape through the mountains and Tenar's questioning the possibilities of what she can be do a lot to ground it.' Both limbs supported.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "449": {
+   "index": 449,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "letting the settings carry part of the emotional charge",
+   "note": "Raw HTML fetched live from newyorker.com with a browser UA; full article text present, no paywall truncation. Section on her girlhood reading (Tolstoy, Olivier's Mr. Darcy): 'From Thomas Hardy she learned to handle strong feelings in fiction by pouring them into landscapes, letting the settings carry part of the emotional charge.'",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "450": {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's not a fallacy; it's art",
+   "note": "Same live New Yorker fetch, the sentence immediately after the Hardy sentence: Le Guin, quoted directly, says 'There's a patronizing word for that: the pathetic fallacy,' then 'It's not a fallacy; it's art.' Attribution to Le Guin is explicit ('she says').",
+   "fromFile": "verdicts-leguin-i439-461.json"
   },
   "451": {
    "index": 451,
@@ -16178,6 +16452,41 @@
    "note": "Wayback raw capture of sfra.org/Coyote/earthsea.htm. Context supports every limb: the 'And therefore' sentence, 'with no explanation of what \"the easy thing\" might refer to', set off in a paragraph by itself; Tehanu ch. 10 'The Dolphin', p. 138.",
    "fromFile": "verdicts-leguin-i416-475.json"
   },
+  "455": {
+   "index": 455,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a welcomed variation from the high-fantastic",
+   "note": "Wayback raw id_ capture of sfra.org/Coyote/earthsea.htm (20151107114510), the URL as given; fetched directly, no live-host attempt needed. Closing section of 'Earthsea Revisited: Tehanu', numbered paragraph 53: '...we gain the possibility for a different style than that of the Earthsea trilogy, and, to my tastes, if not a better style, a welcomed variation from the high-fantastic.' Erlich's wording is 'the possibility for a different style' — a hedge the claim drops, though the same sentence does affirm the variation.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "456": {
+   "index": 456,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "emphatic past perfect, implying futurity",
+   "note": "Wayback raw id_ capture of sfra.org/Coyote/alwayshome.htm (20151107114510). Endnote 29: the opening sentence of Always Coming Home is 'a self-reflexive artistic sentence' whose tense, aspect and mood are 'past conditional, semi-conditional, emphatic past perfect, implying futurity.' The colleague limb is explicit — 'consultation with Max Morenberg, a linguist in my department, 8 May 1995' — though the note credits a Stephens paper as a co-source, which the claim omits.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "457": {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the voice that of the chronicler or mythmaker",
+   "note": "Live washingtonpost.com timed out on both HTTP/2 and HTTP/1.1, so recovery route 2 was used: Wayback raw capture 20170827235846id_ of the exact archive URL, full review text returned. Paragraph on the earlier novels (explicitly the 1968/1971/1972 trilogy): 'The prose is grave and elevated, a style of moral seriousness ... the voice that of the chronicler or mythmaker.'",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "458": {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The prose is grave and elevated, a style of moral seriousness",
+   "note": "Same Wayback raw capture of the Dirda review. Same sentence as index 457, opening clause; the paragraph is introduced by 'The earlier novels describe the life of Sparrowhawk', i.e. the Earthsea trilogy.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "459": {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is consequently meditative, somber, even talky",
+   "note": "Same Wayback raw capture. Later paragraph on Tehanu's themes: 'We are done with journeying and boy's adventures...' then 'It is consequently meditative, somber, even talky.' The contrast-with-journeying limb is the preceding sentence.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
   "460": {
    "index": 460,
    "verdict": "VERIFIED_VERBATIM",
@@ -16185,12 +16494,55 @@
    "note": "Live washingtonpost.com timed out (curl exit 000); recovered via Wayback raw capture 20170827235846id_. Byline 'By Michael Dirda February 25, 1990', heading TEHANU / The Last Book of Earthsea. Source sentence: 'Some critics feel that in recent books Le Guin's writing has grown windy and soft, too feminist, too mythic, too preachy.'",
    "fromFile": "verdicts-leguin-i416-475.json"
   },
+  "461": {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stand your hair on end with her sentences",
+   "note": "Same Wayback raw capture, penultimate section answering critics who call the later work windy: 'But make no mistake. Le Guin can still stand your hair on end with her sentences.' It is immediately followed by the cliff-edge Kalessin scene and a block quotation from Tehanu, so the 'introduces a quoted passage as the demonstration' limb holds.",
+   "fromFile": "verdicts-leguin-i439-461.json"
+  },
+  "462": {
+   "index": 462,
+   "verdict": "PARTIAL",
+   "trueWording": "Review opens: \"THE ISLAND of Gont,\" begins A Wizard of Earthsea",
+   "note": "Wayback raw capture (20170827235846id_) of the WaPo archive page; live URL died mid-stream (curl 92). Dirda's review body does open with the novel's opening quotation, and no person is named before Sparrowhawk four sentences in. The quote fragment is verbatim. But the towns/ports detail belongs to the novel's SECOND sentence, which Dirda quotes next, not to the first sentence the claim attributes it to. Byline 'By Michael Dirda', February 25, 1990, reviewing Tehanu - all confirmed.",
+   "unsupportedLimb": "the claim attributes the towns-in-high-valleys and ports-on-dark-narrow-bays detail to the first sentence; on the page those words fall in the novel's second sentence",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "463": {
+   "index": 463,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "combine compelling stories, rigorous narrative logic and a lean but lyrical style",
+   "note": "Wayback raw capture (20260111213522id_); live nytimes.com returned HTTP 403. Byline 'By Gerald Jonas', Jan. 23, 2018 confirmed on the capture. Quote 'a lean but lyrical style' appears word for word, and all three combined elements are named in the same sentence.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "464": {
+   "index": 464,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their grand scale and elevated style betray no trace of writing down",
+   "note": "Same NYT Wayback capture. Quote verbatim. Every limb holds: 'The first three Earthsea books ... were written, at the request of her publisher, for young adults' and the scale/style clause carries the no-writing-down assertion.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "465": {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I must find the right name or I cannot get on",
+   "note": "Same NYT Wayback capture. Quote verbatim inside a direct quotation attributed to Le Guin; the surrounding sentence establishes the 'for a character' limb ('took this discipline seriously in naming her own characters').",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
   "466": {
    "index": 466,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "a superbly imaginative creator and major stylist",
    "note": "Live nytimes.com returned HTTP 403; recovered via Wayback raw capture 20260111213522id_ (raw page, not a summary). Byline 'By Gerald Jonas', 'Jan. 23, 2018'. Text: the critic Harold Bloom lauded her as this, 'who \"has raised fantasy into high literature for our time.\"'",
    "fromFile": "verdicts-leguin-i416-475.json"
+  },
+  "467": {
+   "index": 467,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simpler and sparser than in The Left Hand of Darkness",
+   "note": "Live reactormag.com fetched raw (HTTP 200). Byline 'By Sean Guynes', published April 8, 2020, 'The Ursula K. Le Guin Reread', instalment covering A Wizard of Earthsea. Quote verbatim; the sentence names both comparison novels and its subject is A Wizard of Earthsea. Locator note: the sentence sits in the fourth body paragraph, an assessment paragraph near the top, consistent with the claim's 'opening section' hint.",
+   "fromFile": "verdicts-leguin-i462-489.json"
   },
   "468": {
    "index": 468,
@@ -16227,6 +16579,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "473": {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin does seem to move toward simplicity, or at least austerity",
+   "note": "PDF fetched raw (HTTP 200) and text-extracted with pdftotext -layout. Article header confirms 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Sylvia A. Kelso. Quote verbatim, on printed page 16 (running head '16  Sylvia A. Kelso') as cited. The Yeats comparison, simplicity/austerity pair and rhythm-and-content limb are all in the one sentence. Citation nit outside the claim sentence: the PDF masthead reads 'Paradoxa, No. 21, 2008', not 2009.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "474": {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tehanu can show the skill of experience making less do more",
+   "note": "Same Kelso PDF, printed page 16. Quote 'making less do more, rather than more do more' verbatim. One nuance: the page hedges with the modal 'can show'; the claim asserts 'shows'. The substance is supported, so the limb stands, but the modal is softer on the page.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
   "475": {
    "index": 475,
    "verdict": "VERIFIED_VERBATIM",
@@ -16262,6 +16628,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "480": {
+   "index": 480,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first recorded contact with Seggri was in year 242",
+   "note": "sfsfss.com transcription fetched raw (HTTP 200, 95KB). The quoted words are the story's first line of text after title and byline, so the 'opens the story' limb holds. Past tense ('was'), dated archival event ('year 242 of Hainish Cycle 93'), and it is summary frame narration, not a dramatised scene.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "481": {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "disclosed the fact, but not the circumstances",
+   "note": "Same raw page. Full sentence: 'Kaza Agad had been killed; the Lords of Awaga Castle finally disclosed the fact, but not the circumstances.' Kaza Agad is identified earlier as one of the First Observers, so the 'observer' limb holds. Nuance: the withholding agent on the page is the Lords of Awaga Castle rather than the archive, but the frame's record is thereby left without the circumstances, which is what the claim asserts.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "482": {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There is no record of further contact with Seggri until",
+   "note": "Same raw page. Quote verbatim, in the present tense ('There is'), and it directly follows the account of the log being dispersed and preserved only in fragmentary form - so it does mark an archival gap, and it sits where the claim says, after Captain Aolao-olao's report.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "483": {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We have only her report, from which three excerpts follow.",
+   "note": "Same raw page. Quote verbatim, first-person-plural 'We', stating the holding's limit ('only her report'), immediately before the excerpted document. Checked the count: exactly three dated excerpts follow (34/223, 34/245, 34/266).",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "484": {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A limit of two hundred visitors from off world was set.",
+   "note": "Same raw page. Quote verbatim. Agentless passive confirmed - 'was set' with no by-phrase - and the quantity is spelled out in words, not digits. It reports a policy decision following Resehavanar's Choice.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
   "485": {
    "index": 485,
    "verdict": "VERIFIED_VERBATIM",
@@ -16269,12 +16670,34 @@
    "note": "Raw HTML from sfsfss.com. In the closing historical/frame narration after Merriment's departure and the Iyoo/Wu mission: the sentence continues 'undertaken major genetic alteration'. No calendar year is attached anywhere in that frame paragraph, so the self-dating limb holds.",
    "fromFile": "verdicts-leguin-i477-528.json"
   },
+  "486": {
+   "index": 486,
+   "verdict": "PARTIAL",
+   "trueWording": "The following is a short story -written in 93/1586 by",
+   "note": "Same raw page. The cited quotation is verbatim and that one provenance line does name kind, recipient and date. But the claim is universal ('Each document'), and it fails on the other documents. Enumerated all five: Captain Aolao-olao's report (kind and date, no recipient); Merriment's notes (kind, recipient 'THE EKUMEN', date 93/133 - fits); the Ush memoir (fits); Sem Gridji's short story (kind, date, author, NO recipient); Mobile Ardar Dez's autobiographical sketch (kind only, no recipient and no date in its intro line).",
+   "unsupportedLimb": "the universal limb that every document's provenance line names a recipient and a date - the short story intro names no recipient, and the autobiographical sketch intro names neither recipient nor date",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
   "487": {
    "index": 487,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "They made Resehavanar's Choice as \"all the truth slowly.\"",
    "note": "Raw page, same closing frame paragraph (immediately before the 'As of the date of this report' sentence). Capitalised proper term, no definition offered in the frame; the term also appears twice inside the Mobile's field notes ('we are facing Resehavanar's Choice here'; 'I chose the option: Less than the truth'), which is where the procedure's options are implied - the frame itself never explains it, so the 'unglossed' limb stands as claimed.",
    "fromFile": "verdicts-leguin-i477-528.json"
+  },
+  "488": {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Her recommendation was to observe and avoid.",
+   "note": "Same raw page. Quote verbatim. 'Her' is Mobile/First Observer Merriment, and the advice is institutional - the following sentence has the Stabiles overriding it. The nominalisation ('recommendation') plus two bare verbs ('observe', 'avoid') is directly checkable against the quoted words.",
+   "fromFile": "verdicts-leguin-i462-489.json"
+  },
+  "489": {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the gender balance now stands at about 12:1",
+   "note": "Same raw page. Quote verbatim, in frame narration. Present tense ('stands'), hedged ('about'), expressed as a ratio, and the figure is 12:1 as claimed.",
+   "fromFile": "verdicts-leguin-i462-489.json"
   },
   "491": {
    "index": 491,
