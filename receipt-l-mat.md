@@ -1,4 +1,4 @@
-# RECEIPT — LANE L-MAT — **PARTIAL** (in flight)
+# RECEIPT — LANE L-MAT — **COMPLETE (5 of 6 cars landed; CAR 6 REFUSED with the measurement)**
 Seat: Opus 5 — Fable-unvalidated · Lane: L-MAT · Chair: Fable 5.1 (session 8de5f153)
 Dock: $SC/laneLMAT · cut at 3b1c0eaa51f77561a036ae7ec54682c39856192c
 
@@ -8,7 +8,7 @@ of this file, and died with its session before writing a product byte. Its heade
 KEPT verbatim in the arrival section below (marked "predecessor"); its "CARS (none yet)" is
 superseded. Successor session 8de5f153 arrived 2026-09-07 10:56:39 EDT (`date`).
 
-## STATUS: PARTIAL — cars 1-5 landed; car 6 in flight.
+## STATUS: DONE. Cars 1-5 landed (+ a 5b typecheck fix). **CAR 6 REFUSED** — R-C's mechanism is refuted by the estate's own F2c tripwire; see REFUSAL 4. Dock tip `7d96e2b72`, porcelain 0.
 
 ## ARRIVAL CHECK (successor, 2026-09-07 10:56:51 EDT, from `date`) — PASS
 - HEAD `3b1c0eaa51f77561a036ae7ec54682c39856192c` == `git -C <main tree> rev-parse claude/composite-r4`
@@ -28,8 +28,10 @@ superseded. Successor session 8de5f153 arrived 2026-09-07 10:56:39 EDT (`date`).
 | 3 | `9a9a7856e` | the walker's second hole closed; the plant proves it in both directions |
 | 4 | `525ffa99b` | O-11 path 1 — the public drop PINNED; the DM-full half measured and refused |
 | 5 | `34115c7b7` | O-11 path 2 — resolve-or-drop on account import |
+| 5b | `7d96e2b72` | the typecheck ratchet made green — car 5 shipped 11 type errors |
+| 6 | — | **REFUSED**, reverted to `34115c7b7` with zero residue (porcelain 0) |
 
-Dock tip after car 5: `34115c7b7`. Porcelain 0.
+Dock tip: `7d96e2b72`. Porcelain 0.
 
 ## BUILD LISTINGS (the two the brief asks for; three builds taken, plus one control)
 All builds `sh scripts/gate-mutex.sh --run -- npm run build`, exit 0, ~22 s each.
@@ -248,3 +250,140 @@ the next reader of the key will find it.
 | L10 | drop an INDEPENDENT source fingerprint instead of carrying it | LANE | it has no entry in the identity map; the roster is read by nothing, so an honest absence costs nothing and a stale source identifier costs exactness |
 | L11 | the round-trip arms live in a SIBLING describe, not inside the `export→import round-trip` suite | LANE | the module-scope helpers are shared either way; a named describe says what the three arms are for |
 | L12 | the second round-trip arm exercises "no archive-backed identity map" rather than a literal legacy PACK envelope | LANE | `buildAccountExport` REFUSES to export `customContent` without an archive (`AccountExportPreflightError`), so a literal legacy-pack envelope cannot be built through the public exporter. The map state under test is identical — the empty archiveBacked:false default at Phase 4 — and the arm says so |
+
+---
+
+## ⛔ CAR 6 — O-11 PATH 3 — **REFUSED**, WITH THE MEASUREMENT (R-C)
+
+CAR 6 was BUILT IN FULL, MEASURED, and then REVERTED. What follows is what the
+implementation measured, because a refusal is only worth what its evidence is.
+
+**What was built** (all four pieces R-C names): the optional `livingContent` core
+key on `settlementContentProvenance.js` (required-plus-optional admission, never
+exact-wider; `schemaVersion` untouched at 1); the identical widening in the
+portability remap's core; the pipeline reordered so the roster is built BEFORE the
+receipt with the marker passed through the existing context bag (zero new edges on
+the receipt module — it derives the digest from what it is handed, using the
+`fingerprintContent` it already imports); and the import path reordered so the
+receipt's marker is re-derived over the **destination** roster (a coupling R-C does
+not mention, and which car 5's own remap creates: a digest of SOURCE ids is stale
+the instant the roster is remapped).
+
+**WHAT REFUTES IT — the estate's own F2c tripwire, on all 26 blind cases:**
+
+```
+every blind case materializes and discovers under the lit law
+AssertionError: presentation→mechanical promotion:
+  stressors.name: flipping a PRESENTATION field moved something outside the inert
+  roster. That is a presentation→mechanical promotion, which is OWNER-GATED and
+  must not arrive as a side effect of materialization.
+  Escaped: $.customContentProvenance.livingContent.rosterHash,
+           $.customContentProvenance.receiptHash
+```
+…and the same line for all 26 cases across `stressors`, `deities`, `traditions`,
+`factions`.
+
+**WHY.** R-C specifies the digest as "the IDENTITY-ONLY projection (definitionId /
+revisionId / **contentHash** triples per row, sorted) — what is immutable — never
+the authored presentation prose (an epithet edit must not move a tamper-evident
+receipt)." MEASURED: `customDefinitionContentHash` is a hash **of the authored
+content**, presentation included. So the projection R-C specifies does not have the
+property R-C requires of it: every presentation edit moves the content hash, moves
+`rosterHash`, and moves `receiptHash` — promoting presentation into a persisted,
+hash-validated surface, which is the exact owner-gated boundary the whole
+living-content design exists to hold.
+
+**THE NARROWER REPAIR WAS ALSO MEASURED, AND IT IS A DIFFERENT DESIGN.** Dropping
+`customDefinitionContentHash` and digesting `definitionId + revisionId` only CLEARS
+the tripwire (measured: 2 failures instead of 3, and both remainders are the
+re-cuts R-C chartered). But it buys that by going blind to exactly what the fixture
+demonstrates happening — a definition whose CONTENT changed while its revisionId did
+not. A tamper-evident digest that cannot see a content change is a hash that does not
+do its job. Choosing it is a ruling about what this receipt must detect, on a
+persisted hash-validated artifact, at the F2c boundary. **That is chair/owner work,
+not a lane repair**, and the brief's own instruction is to refuse rather than guess
+past a contradiction.
+
+**NOTHING IS OWED TODAY.** The dial is at 1, so no shipped world is lit and no
+receipt can carry the key either way. Cars 1–5 are not gated on R-C and stand alone.
+
+**THE REVERT IS CLEAN.** The four touched files were restored from the car-5 tip by
+explicit `git show 34115c7b7:<path> > <path>` (never `git checkout`), porcelain
+returned to 0, and the affected suites were re-run green afterwards:
+livingContentMaterialization 11, settlementContentProvenance 4,
+accountSettlementContentPortability 13, accountImportSlice 24,
+livingContentLawWiring 10, livingContentRosterPublicDrop 6,
+densityCreateBoundary.walker 14.
+
+**WHAT A SUCCESSOR CAR INHERITS** (so none of this is re-derived):
+1. `canonicalContentJson` SORTS keys and emits an absent key as nothing, so
+   omitted-when-dormant really does reproduce the dormant digest byte for byte.
+   R-C's central byte claim is sound; only the digest's INPUT is wrong.
+2. `hasExactKeys` → required-plus-optional is right and necessary: widening
+   `RECEIPT_KEYS` itself would make the admission REJECT every six-key receipt on
+   disk, and the import path answers a failed admit by DELETING the receipt.
+3. The receipt module needs NO new import: pass the roster through the context bag
+   and digest it with the `fingerprintContent` it already has.
+4. `buildSettlementContentProvenance` returns `null` when a world has no
+   environment, no bindingHash and no materialized definitions — so a lit world
+   with only a roster gets NO receipt at all, and the marker cannot ride one.
+   R-C does not address this.
+5. The import ordering coupling above (destination-roster re-derivation).
+6. Two more instruments must be re-cut with it: the lit arm of
+   `livingContentMaterialization.test.js` ("the lit law perturbed the world beyond
+   adding its own key" — a lit world would then differ by TWO things) and the
+   `the provenance receipt is untouched by the roster` pin R-C already names.
+
+## FINAL BUILD — BASE → COMPOSED TIP (`7d96e2b72`)
+**Build E**, 11:47:12→11:47:33 EDT, exit 0, 1,377 files.
+
+- 0 chunks ADDED, 0 REMOVED. **Exactly TWO files changed size:**
+  `accountImportBody.js` **22,782 → 25,209 (+2,427)** — the roster remapper, which
+  Rollup co-locates into that LAZY import-path chunk — and
+  `densityCreateBoundary.js` **101 → 130 (+29)**, the second mint.
+- **First-paint closure raw 1,042,086 / 1,048,000 — IDENTICAL to the base build**
+  (margin 5,914). gzip 330,813 / 337,000 (6,187). Brotli 277,727 / 283,000 (5,273).
+- **The whole consist costs ZERO first-paint bytes and 2,456 lazy ones.**
+- 685 files re-hashed (the entry-chunk filename cascade priced in car 1).
+
+## GATES AT THE COMPOSED TIP
+| gate | result |
+|---|---|
+| `npm run typecheck:ratchet` | **OK — no type regressions (173 errors, ceiling 173)** — after car 5b; it was RED before, and the gate is what found it |
+| `vendorPdfLazy` (VERIFY_DIST=1) | 42 passed |
+| `engineChunkLazy` (VERIFY_DIST=1) | 15 passed |
+| `livingContentSeamLazy` | 6 passed |
+| `generationWorkerLazy` (VERIFY_DIST=1) | 10 passed |
+| `customContentCharsetLazy` (VERIFY_DIST=1) | 9 passed |
+| `densityCreateBoundary.walker` | 14 passed |
+| `writerReach.walker` | 56 passed |
+| `observedShapeReaders.walker` | 44 passed |
+| `negativeAssertionAnchor.walker` | 9 passed |
+| `layerBoundaries` | 3 passed |
+| eslint on every touched file | clean |
+
+## THE LAWS, HELD
+- STATE, NEVER FATE. The dial stays at 1 (`NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION
+  === DEFAULT_LIVING_CONTENT_LAW_VERSION`, asserted in two new test files).
+- No tuning value moved · no golden re-recorded (the same-seed proof is a live
+  CONTROL, not a fixture) · no register `--write` · no signature · no
+  `supabase/applied-head.json` byte · **no migration file** · `ARCHITECTURE.md`
+  untouched · nothing pushed · no `git stash` · every commit staged with explicit
+  paths · trailers `Seat: Opus 5 — Fable-unvalidated` + `Lane: L-MAT` on all six.
+- The lighting census is the chair's at the landing; this lane adds three new test
+  files with literal `it(...)` titles and no `it.each` (the each-family park debt is
+  untouched).
+
+## DEFERRED — THE FULL LIST (documented, not bugs to re-find)
+1. **The DM-full projection does not drop the roster** (car 4). Needs a
+   `_gallery_dm_full_json` SQL twin; inert while the dial is dark; **lighting the
+   dial reds `livingContentRosterPublicDrop.test.js` by design.**
+2. **The reconciliation boundary does not remap the roster** (car 5), and
+   `customContentProvenance` has the identical pre-existing gap there. Written into
+   `livingContentRoster.js`'s own header. The pair belongs to one car.
+3. **O-11 path 3 is unbuilt** (car 6) — the six inherited findings above.
+4. **The sample-fork path is a marker carrier the day the dial lights**
+   (`FoundingWorlds.jsx` + the underscore-family admission).
+5. **`updateConfig` does NOT drop `_livingContentLawVersion`** — the underscore
+   family is admitted by prefix. Recorded and pinned in
+   `livingContentLawWiring.test.js`; the promise does not rest on it.

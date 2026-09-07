@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 11:43:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 11:49:09 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = e3840ab62 §911: the horizon is measured — CAP-HORIZON-909 lands with zero product bytes at 3b1c0e
+product claude/composite-r4 = 3b1c0eaa5 · ledger = c5722e98a §911.1: the owner rules the three §911 rows — the stress test accepted at ≈ 4.0–4.
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -139,8 +139,8 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = e3840ab62 §911: the horizon
 
 ## WORKFLOW RUNS of chair session 8de5f153-f375-48fb-803c-ec578a273a4a (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_7afed34c-ef0: 14 journal lines, 7 agents
-- wf_8b507f28-6e0: 5 journal lines, 4 agents
+- wf_8b507f28-6e0: 9 journal lines, 6 agents
 - wf_bdebda48-278: 9 journal lines, 6 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.92 2.16 2.48
+load: 2.81 3.12 2.85
