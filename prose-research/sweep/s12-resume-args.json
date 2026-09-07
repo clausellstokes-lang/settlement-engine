@@ -332,6 +332,107 @@
     "absenceRule": "(see file)",
     "openQuestions": [],
     "allocation": "(see file; cached from wf_8b507f28-6e0)"
+   },
+   "chrome-and-compendium": {
+    "register": "chrome-and-compendium",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-chrome-and-compendium.md",
+    "rules": [
+     {
+      "id": "CC-1",
+      "strength": "STRONG",
+      "sourceCount": 36,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "CC-2",
+      "strength": "STRONG",
+      "sourceCount": 18,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-3",
+      "strength": "STRONG",
+      "sourceCount": 7,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-4",
+      "strength": "STRONG",
+      "sourceCount": 26,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-5",
+      "strength": "STRONG",
+      "sourceCount": 36,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-6",
+      "strength": "STRONG",
+      "sourceCount": 52,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-7",
+      "strength": "STRONG",
+      "sourceCount": 5,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-8",
+      "strength": "STRONG",
+      "sourceCount": 26,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-9",
+      "strength": "STRONG",
+      "sourceCount": 9,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-10",
+      "strength": "STRONG",
+      "sourceCount": 16,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-11",
+      "strength": "MODERATE",
+      "sourceCount": 0,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-12",
+      "strength": "STRONG",
+      "sourceCount": 38,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-13",
+      "strength": "STRONG",
+      "sourceCount": 17,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CC-14",
+      "strength": "STRONG",
+      "sourceCount": 10,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "CC-15",
+      "strength": "STRONG",
+      "sourceCount": 24,
+      "changesShippedSurface": true
+     }
+    ],
+    "refusedTechniques": [],
+    "conflicts": [],
+    "absenceRule": "(see file)",
+    "openQuestions": [],
+    "allocation": "(see file; cached from wf_8b507f28-6e0)"
    }
   },
   "refute": {

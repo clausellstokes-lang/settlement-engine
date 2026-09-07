@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 95,
+ "firstTs": "2026-09-07T16:29:19.898Z",
+ "lastTs": "2026-09-07T16:34:49.934Z",
+ "tools": {
+  "Bash": 24
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the reconciliation file and the supporting evidence.",
+ "run": "wf_8b507f28-6e0",
+ "agent": "a71e5036109a0b8af",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_8b507f28-6e0/agent-a71e5036109a0b8af.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
