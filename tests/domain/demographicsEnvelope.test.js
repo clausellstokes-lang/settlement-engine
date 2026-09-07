@@ -18,12 +18,20 @@
  *
  * MEASURED AT THIS COMMIT, so a later reader knows what the bars are made of rather than
  * where they were set: over thirty years on the shared realm the cured kernel moves
- * 171 of 180 settlement-year transitions by at least a quarter percent (0.95 against a bar
- * of 0.05), spreads its growth ratios by 0.41 (against a bar of 0.10), leaves no settlement
- * unmoved, and lands Elderfen in the filling band in year 14. The bars are set an order of
+ * 170 of 180 settlement-year transitions by at least a quarter percent (0.9444 against a bar
+ * of 0.05), spreads its growth ratios by 0.4846 (against a bar of 0.10), leaves no settlement
+ * unmoved, and lands Elderfen in the filling band in year 12. The bars are set an order of
  * magnitude below the measurement DELIBERATELY: they are a floor under "the term is alive
  * inside a campaign", not a golden of today's numbers, and a golden here would red on every
  * legitimate tuning move the owner makes at the sitting.
+ *
+ * ⚠ THREE OF THOSE FOUR FIGURES WERE WRONG FROM THE DAY THEY WERE WRITTEN, AND THE MODEL
+ * NEVER MOVED (§907 car 4, M3-F1). The header shipped in `d02c5acde` reading 171 of 180
+ * (0.95), spread 0.41 and Elderfen in year 14; every source file in this suite's reach is
+ * byte-identical between that commit and now, so this is not drift — the numbers were taken
+ * against some draft state and not re-measured before the commit landed. They are corrected
+ * here from a run of THIS file at THIS tip. Nothing gates on them, which is exactly why they
+ * could be wrong for three weeks: a comment is a CLAIM until it is measured.
  *
  * @enforced-by this file
  */
