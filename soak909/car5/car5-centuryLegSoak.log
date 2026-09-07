@@ -2,3 +2,9 @@ gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.sha
 
  RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
 
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  04:46:47
+   Duration  240.82s (transform 1.95s, setup 22ms, import 2.70s, tests 238.01s, environment 0ms)
+

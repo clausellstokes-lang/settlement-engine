@@ -3,14 +3,15 @@
  "name": "ai",
  "angle": "procgen-baseline",
  "tag": null,
- "lines": 211,
+ "lines": 214,
  "firstTs": "2026-09-07T08:35:42.715Z",
- "lastTs": "2026-09-07T08:47:01.850Z",
+ "lastTs": "2026-09-07T08:50:22.266Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "Bash": 49,
-  "WebSearch": 10
+  "WebSearch": 10,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://galaxykate0.tumblr.com/post/139774965871/so-you-want-to-build-a-generator",
@@ -47,7 +48,7 @@
  "run": "wf_6dd3b009-2b0",
  "agent": "a8643a9e14f05a11a",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_6dd3b009-2b0/agent-a8643a9e14f05a11a.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-procgen-baseline.json",
   "claims": 68,

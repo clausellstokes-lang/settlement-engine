@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:49:56 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 04:55:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,7 +11,7 @@
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
-| ai | finder | procgen-baseline | in-flight | 28 | — | 68 claims, complete=True @04:45:55 | 08:47:01 |
+| ai | finder | procgen-baseline | result | 28 | — | 68 claims, complete=True @04:45:55 | 08:50:22 |
 | ai | regrade | regrade-r10 | result | 0 | — | — | 05:07:46 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | result | 0 | — | — | 05:55:12 |
@@ -21,9 +21,11 @@
 | ai | verifier | i1015-1029 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1026-1043 | result | 4 | — | verdict file WRITTEN | 04:29:45 |
 | ai | verifier | i1030-1044 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1037-1062 | result | 2 | — | verdict file WRITTEN | 08:55:46 |
 | ai | verifier | i1045-1059 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1046-1108 | result | 4 | — | verdict file WRITTEN | 04:31:04 |
 | ai | verifier | i1060-1074 | failed | 0 | — | verdict file absent | 03:45:44 |
+| ai | verifier | i1063-1081 | result | 5 | — | verdict file WRITTEN | 08:55:09 |
 | ai | verifier | i1075-1089 | failed | 0 | — | verdict file absent | 03:45:45 |
 | ai | verifier | i1090-1104 | failed | 0 | — | verdict file absent | 03:45:44 |
 | ai | verifier | i1105-1119 | failed | 0 | — | verdict file absent | 03:45:44 |
@@ -52,8 +54,10 @@
 | ai | verifier | i1486-1500 | result | 8 | — | verdict file WRITTEN | 04:52:13 |
 | ai | verifier | i1501-1515 | result | 9 | — | verdict file WRITTEN | 04:52:07 |
 | ai | verifier | i1516-1517 | result | 1 | verdicts-ai-i1516-1517.json | verdict file WRITTEN | 04:53:46 |
+| ai | verifier | i571-949 | result | 8 | — | verdict file WRITTEN | 08:54:35 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
+| ai | verifier | i951-1032 | in-flight | 12 | — | verdict file absent | 08:55:32 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i962-984 | result | 7 | — | verdict file WRITTEN | 04:23:40 |
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
@@ -72,7 +76,7 @@
 | dnd | regrade | regrade-r13 | result | 0 | — | — | 08:47:59 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
-| dnd | synth |  | in-flight | 0 | dnd-stats.mjs | — | 08:49:40 |
+| dnd | synth |  | in-flight | 0 | dnd-coverage.mjs, dnd-stats.mjs | — | 08:55:49 |
 | dnd | synth |  | result | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 08:16:50 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |

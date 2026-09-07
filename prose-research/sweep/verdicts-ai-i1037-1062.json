@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 1037,
+   "feature": "steerability",
+   "claim": "Seife's finding is that the model embellished even where it had no need to.",
+   "source": "Charles Seife, Slate, 13 Dec 2022",
+   "url": "https://slate.com/technology/2022/12/davinci-003-chatbot-gpt-wrote-my-obituary.html",
+   "quote": "It embellished with abandon, even when it didn’t have to",
+   "page": "body, after the birth-date errors"
+  },
+  {
+   "index": 1038,
+   "feature": "lexical tells",
+   "claim": "Seife quotes the generated line remembering him fondly for his wit, intelligence and enthusiasm for life as the cliché his legacy became.",
+   "source": "a Davinci-003 obituary quoted as a demonstration passage by Charles Seife, Slate, 13 Dec 2022",
+   "url": "https://slate.com/technology/2022/12/davinci-003-chatbot-gpt-wrote-my-obituary.html",
+   "quote": "Charles Seife will be fondly remembered by his friends and family",
+   "page": "body, opening section"
+  },
+  {
+   "index": 1044,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Holtzman and colleagues report that the per-token probabilities the model assigns to human-written continuations vary far more from step to step than those of beam-search text given the same context.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "increased variance that characterizes human text",
+   "page": "Figure 2 caption"
+  },
+  {
+   "index": 1045,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Holtzman and colleagues assert that human language does not stay in a high-probability zone across consecutive tokens but veers into lower-probability, more informative ones.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "Natural language rarely remains in a high probability zone",
+   "page": "section 4.3, 'Natural Language Does Not Maximize Probability'"
+  },
+  {
+   "index": 1049,
+   "feature": "steerability",
+   "claim": "Holtzman and colleagues measured that sampling temperatures below 0.9 sharply increase repetition in GPT-2 Large generations.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "Sampling with temperatures lower than 0.9 severely increase repetition",
+   "page": "Figure 9 caption"
+  },
+  {
+   "index": 1050,
+   "feature": "homogenisation",
+   "claim": "In Holtzman and colleagues' Table 1, greedy decoding from GPT-2 Large produced a repetition rate of 73.66 percent against 0.28 percent for the human reference text.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "",
+   "page": "Table 1 (columns Repetition %, rows Human and Greedy)"
+  },
+  {
+   "index": 1051,
+   "feature": "homogenisation",
+   "claim": "In Holtzman and colleagues' Table 1, beam search with width 16 gave generated text a perplexity of 1.48 against 12.38 for human text under the same model.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "",
+   "page": "Table 1 (columns Perplexity, rows Human and Beam b=16)"
+  },
+  {
+   "index": 1052,
+   "feature": "counter-evidence",
+   "claim": "Holtzman and colleagues report that pure sampling produced text of higher perplexity than the human reference, which they read as the model confusing itself by sampling too many unlikely tokens.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "the model is confusing itself: sampling too many unlikely tokens",
+   "page": "section 4.2, Perplexity"
+  },
+  {
+   "index": 1053,
+   "feature": "model era drift",
+   "claim": "Holtzman and colleagues' degeneration findings were measured on a single model, GPT-2 Large at 762 million parameters.",
+   "source": "Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes and Yejin Choi, 'The Curious Case of Neural Text Degeneration', ICLR 2020 (arXiv v2, 14 Feb 2020)",
+   "url": "https://arxiv.org/abs/1904.09751",
+   "quote": "We perform experiments using the Large model (762M parameters)",
+   "page": "section 4.1, Experimental Setup"
+  },
+  {
+   "index": 1056,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Meister and colleagues measured that in human reference text each word's information content sits close to the model's conditional entropy at that step, a per-token deviation distribution peaked near zero.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "human language indeed tends to have per-word information content quite close",
+   "page": "section 4.1, discussion of Figure 1"
+  },
+  {
+   "index": 1057,
+   "feature": "steerability",
+   "claim": "Meister and colleagues found that their repetition metric was much less sensitive to the typical-sampling parameter tau than to top-k's k or nucleus's eta.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "REP appears to be far less sensitive to",
+   "page": "section 6.2, discussion of Figure 2"
+  },
+  {
+   "index": 1058,
+   "feature": "homogenisation",
+   "claim": "In Meister and colleagues' Table 1 for story generation, human reference text scored a REP of 0.28 while nucleus sampling at eta 0.9 and top-k at k 30 both scored 0.35.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "",
+   "page": "Table 1 (WritingPrompts, column REP, rows Reference, Nucleus eta=0.9, Top-k k=30)"
+  },
+  {
+   "index": 1059,
+   "feature": "counter-evidence",
+   "claim": "Meister and colleagues concede that every decoding strategy they tested scored close to the human reference in their human ratings, in some cases above it.",
+   "source": "Clara Meister, Tiago Pimentel, Gian Wiher and Ryan Cotterell, 'Locally Typical Sampling', TACL 2023 (arXiv v6, 5 Jun 2025)",
+   "url": "https://arxiv.org/abs/2202.00666",
+   "quote": "all the strategies we explore are quite close to human-level performance",
+   "page": "section 6.2, Results discussion"
+  },
+  {
+   "index": 1061,
+   "feature": "steerability",
+   "claim": "Nguyen and colleagues claim that under min-p sampling temperatures of 2 or 3 increase diversity with much less loss of coherence than existing methods suffer.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "enhancing diversity with much lower loss of coherence",
+   "page": "section 4, Parameter Selection Guidelines, Temperature Settings"
+  },
+  {
+   "index": 1062,
+   "feature": "steerability",
+   "claim": "Nguyen and colleagues assert that top-p sampling struggles at higher temperatures, where it produces incoherent or repetitive output.",
+   "source": "Nguyen Nhat Minh, Andrew Baker, Clement Neo, Allen Roush, Andreas Kirsch and Ravid Shwartz-Ziv, 'Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs', ICLR 2025 (arXiv v8, 20 Nov 2025)",
+   "url": "https://arxiv.org/abs/2407.01082",
+   "quote": "especially at higher temperatures which lead to incoherent or repetitive outputs",
+   "page": "Abstract"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1037,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It embellished with abandon, even when it didn't have to",
+   "note": "Slate live page (HTTP 200, browser UA). Sentence appears word for word in the body paragraph that follows the wrong birth date, year and city ('Dec. 27, 1966, in Cincinnati'). Both limbs hold: it is Seife's own finding, and the point is that fabrication went beyond gap-filling ('It's not too surprising that the program would make up information to fill in gaps in its knowledge - but it did more than just that')."
+  },
+  {
+   "index": 1038,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Charles Seife will be fondly remembered by his friends and family",
+   "note": "Slate live page. The parenthetical quotes the Davinci-003 line in full, continuing 'for his wit, intelligence, and enthusiasm for life.' The cliche limb is the immediately preceding sentence, where Seife says he was amused by the way his legacy was turned into a cliche. Provenance limb holds: the piece opens by saying he asked Davinci-003 to write his obituary. Only the locator drifts - the passage sits mid-article (before the birth-date paragraph in DOM order), not in an 'opening section'; locator drift is not a claim limb."
+  },
+  {
+   "index": 1044,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "increased variance that characterizes human text",
+   "note": "arXiv PDF v2 (14 Feb 2020) fetched and text-extracted. Figure 2 caption reads: 'The probability assigned to tokens generated by Beam Search and humans, given the same context. Note the increased variance that characterizes human text, in contrast with the endless repetition of text decoded by Beam Search.' Every limb is in that caption - model-assigned per-token probabilities, human vs beam search, same context, greater step-to-step variance. Section 4.3 adds the corroborating 'Figures 2 & 6 show that the per-token probability of natural text is, on average, much lower than text generated by beam search.'"
+  },
+  {
+   "index": 1045,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Natural language rarely remains in a high probability zone",
+   "note": "arXiv PDF v2. Section 4.3, headed 'Natural Language Does Not Maximize Probability', continues '...for multiple consecutive time steps, instead veering into lower-probability but more informative tokens.' Both limbs - not staying high across consecutive tokens, and veering into lower-probability, more informative ones - are that sentence. Section locator in the claim is exact."
+  },
+  {
+   "index": 1049,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sampling with temperatures lower than 0.9 severely increase repetition",
+   "note": "arXiv PDF v2. Sentence is verbatim in the Figure 9 caption, which measures how often decoding methods get stuck in loops within the first 200 tokens. The GPT-2 Large limb is carried by section 4.1, which states all experiments use the Large model; no other model supplies Figure 9. Note the paper's own wording is 'severely increase', paraphrased in the claim as 'sharply increase' - same direction and force."
+  },
+  {
+   "index": 1050,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 1: Greedy Repetition 73.66; Human 0.28",
+   "note": "arXiv PDF v2, Table 1 ('Main results for comparing all decoding methods with selected parameters of each method'), column 'Repetition %': row Human = 0.28, row Greedy = 73.66. Both figures match the claim exactly, cell for cell, and the GPT-2 Large limb is section 4.1. The claim ships no quote string, so nothing was checked for verbatim wording beyond the table cells themselves, which are literal."
+  },
+  {
+   "index": 1051,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 1: Beam b=16 Perplexity 1.48; Human 12.38",
+   "note": "arXiv PDF v2, Table 1, column 'Perplexity': row 'Beam, b=16' = 1.48, row Human = 12.38. Both figures match exactly. 'Under the same model' holds - all Table 1 rows are GPT-2 Large per section 4.1, and section 4.2 states perplexity is computed 'according to the model that is being generated from'. The claim ships no quote string; the table cells are the literal evidence."
+  },
+  {
+   "index": 1052,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model is confusing itself: sampling too many unlikely tokens",
+   "note": "arXiv PDF v2, section 4.2 (Perplexity): 'We see that perplexity of text obtained from pure sampling is worse than the perplexity of the gold. This indicates that the model is confusing itself: sampling too many unlikely tokens and creating context that makes it difficult to recover the human distribution of text.' The direction limb is confirmed numerically by Table 1 - Pure Sampling perplexity 22.73 against Human 12.38 - so 'worse' does mean higher here."
+  },
+  {
+   "index": 1053,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We perform experiments using the Large model (762M parameters)",
+   "note": "arXiv PDF v2, section 4.1 Experimental Setup, verbatim across a line break: 'We perform experiments using the Large model (762M parameters).' The single-model limb is that same setup paragraph - GPT2 is the only architecture and Large the only size used for the analysis. Two frictions worth recording, neither of which falsifies a limb: the Figure 1 caption makes one passing observation about GPT-2 XL as well as Large at beam width b >= 64, and that caption prices Large at 774M where section 4.1 prices it at 762M. The claim tracks the 762M figure, which is the one in the quoted sentence."
+  },
+  {
+   "index": 1056,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human language indeed tends to have per-word information content quite close",
+   "note": "arXiv PDF v6 (5 Jun 2025). Section 4.1, discussing Figure 1: 'The peaked nature of the distributions in Fig. 1 reveals that human language indeed tends to have per-word information content quite close a specific value; the centering of these distributions around 0 suggests that this value is H(Yt | Y<t = y<t).' All three limbs hold - human-generated text, closeness to the model's conditional entropy at that step, and a peaked per-token deviation distribution centred near zero (Figure 1 is captioned 'The per-token distribution of the deviation'). The page's own sentence carries a typo, 'quite close a specific value'; the claim's quote stops before it."
+  },
+  {
+   "index": 1057,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "REP appears to be far less sensitive to",
+   "note": "arXiv PDF v6, section 6.2: 'Fig. 2 shows REP measurements for different values of the hyperparameters k, eta, and tau for top-k, nucleus, and locally typical sampling, respectively. Interestingly, REP appears to be far less sensitive to tau than to k and eta.' The three-way mapping in the claim - tau to typical sampling, k to top-k, eta to nucleus - is stated in the preceding sentence, so every limb is supported."
+  },
+  {
+   "index": 1058,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Table 1 REP: Reference 0.28; Nucleus 0.35; Top-k 0.35",
+   "note": "arXiv PDF v6, Table 1 (WritingPrompts / Story Generation), column 'REP': Reference = 0.28, Nucleus (eta=0.9) = 0.35, Top-k (k=30) = 0.35. All three cells match the claim exactly, and the table caption confirms the dataset (WRITINGPROMPTS) and the model (finetuned GPT-2 large). The claim ships no quote string; the table cells are the literal evidence."
+  },
+  {
+   "index": 1059,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all the strategies we explore are quite close to human-level performance",
+   "note": "arXiv PDF v6, section 6.2 results discussion: 'Importantly, all the strategies we explore are quite close to human-level performance - in some cases even surpassing human references in terms of ratings.' Both limbs hold, including 'in some cases above it'. The concession is made in the summarization discussion and is borne out by both human-rating columns - in Table 2 Beam 4.35 and Typical 4.32 exceed the 4.31 reference, and in Table 1 Typical (tau=0.2) 4.15 exceeds the 4.12 reference."
+  },
+  {
+   "index": 1061,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "enhancing diversity with much lower loss of coherence",
+   "note": "arXiv PDF v8 (20 Nov 2025), section 4, Parameter Selection Guidelines, Temperature Settings bullet: 'Min-p works well across a wide range of temperatures, with higher temperatures (e.g., tau = 2 or tau = 3) enhancing diversity with much lower loss of coherence.' The min-p, tau=2/tau=3 and diversity limbs are that bullet verbatim. The comparand limb - 'than existing methods suffer' - is not named inside the bullet, which leaves 'lower' without an explicit baseline; it is supplied elsewhere on the same page, in the abstract (top-p 'often struggle to balance quality and diversity, especially at higher temperatures') and in section 1's closing claim that min-p is 'a viable and superior alternative to existing sampling methods, both at standard and high-temperature settings'. Graded on the page as a whole, every limb holds."
+  },
+  {
+   "index": 1062,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "especially at higher temperatures which lead to incoherent or repetitive outputs",
+   "note": "arXiv PDF v8, Abstract, second sentence: 'Popular sampling methods like top-p (nucleus sampling) often struggle to balance quality and diversity, especially at higher temperatures which lead to incoherent or repetitive outputs.' Quotation is verbatim across a line break, the source is the Abstract as the claim states, and both limbs - top-p struggling at higher temperatures, and incoherent or repetitive output there - are in that one sentence."
+  }
+ ]
+}
