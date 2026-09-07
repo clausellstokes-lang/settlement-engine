@@ -1,5 +1,0 @@
-# tripwire evaluation — research-lit-4s-300y-4s-seed1 (300y × 4s, schema 5)
-  FINDING  research-lit-4s-300y-4s-seed1 · capacity_realm_load — realm load 0.4787 outside the plateau window [0.6, 1.05]
-  annotation: deterministicFirings 1 · fullInstrument false · provisional false · rolling false · restored false · behavioralPropertiesPassing UNSTATED
-
-FIRED: 1 deterministic finding(s) over 1 cell(s); 0 host-observability note(s); 0 row(s) COMPLETE BUT INCONCLUSIVE (the run was shorter than the horizon they grade)

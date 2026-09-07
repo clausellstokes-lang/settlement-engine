@@ -1,7 +1,0 @@
-CLAMP final wave (chair car): the ceiling rises 62 -> 69 by exactly the measured residual, with seven recorded reasons
-
-Three waves migrated nine hand-rolled clamps onto src/kernel/math.js; seven remain, each refused for a recorded doctrinal reason (two wave-0 exclusions, two wave-1 pins, three wave-2 pins/fence). RULING-CLAMP-FINAL.md rules the raise by the residual, named file by file, in the CR-WR10-A(b) form written into the walker's own docblock. The equality and ceiling arms are GREEN (69 == 69); the clampPrimitiveBaseline known-failure row retires at this landing's ratchet, and its owed-ledger entry leaves with it. Register act: scripts/.clamp-primitive-baseline.json (the seven enter, sorted).
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

@@ -1,7 +1,0 @@
-Desk composition (chair car): the edge-shared bundles re-minted by the ritual — CHARSET Car 2 changed two of their recorded inputs
-
-HORIZON-B1 measured that customContentManifest.js and the new customContentCharset leaf are recorded inputs of both edge bundles, so the three freshness/reproducibility suites were red at every tip since its cars (it could not mint: a symlinked dock writes the owner's home path into the input rows). The chair's ritual materialised exactly immer and seedrandom, ran npm run build:edge-shared, committed the two bundles and five metas, and restored the 453 symlinks; no input row carries a home path (measured: 0 matches). Byte-identical on the Deno side except the inlined leaf and its table. Proof: the three edge suites at the register phase's whole-suite run.
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
