@@ -1,3 +1,15 @@
+# REDISPATCH.md — the recipes for what died at the 2026-09-07 14:09 cutoff (session ba7d05af). Re-derive every figure with `git`/`date` before acting.
+
+## 1. S12 — the FOLD only (every other stage cached)
+`python3 $SC/prose-research/mk-s12-resume.py` → `Workflow({ scriptPath: "$SC/prose-research/reconciliation-workflow.resume-v2.js", args: <sweep/s12-resume-args.json as a JSON object> })` → set `_S12.runId` in `sweep/LAST-RUNS.json`. If `RULES-V2-PART-B.md` / `sweep/RECONCILIATION-DOSSIER.md` exist from the dead fold, back them up as `*.partial-<hhmm>.bak.md` first (a killed agent's file is a CLAIM).
+
+## 2. The verifier pass (after the fold): `$SC/s12-sitting/skeptic-s12-workflow.draft.js`
+Edit the `MY` const to `<new session scratchpad>/skeptic-s12`, `mkdir -p` it, `node --check`, then `Workflow({ scriptPath })`. Seven Opus lenses (sources · figures/sizes · refutations/cures · rulings + chair answers · tests · coherence · SPECS) + an Opus fold → `<MY>/FOLD.md`. Read-only on every tree; porcelain 0 → 0 on every lens.
+
+## 3. L-MAT-FIX — STILL PAUSED (owner 12:40). The previous card's prompt stands verbatim below for when the pause lifts.
+
+---
+
 # REDISPATCH.md — the prompts VERBATIM for the lanes alive at the 2026-09-07 12:28 cutoff (session 8de5f153). Re-derive the dock tip and porcelain with `git` before sending; never send a prompt whose figures you have not re-read.
 
 ## 1. L-MAT-FIX (Opus, background Agent, model "opus") — only if `git -C $SC/laneLMAT log --oneline 7d96e2b72..HEAD` shows fewer than three fix cars

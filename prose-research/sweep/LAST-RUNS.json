@@ -158,7 +158,7 @@
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.resume-v2.js",
   "session": "ba7d05af-b267-4316-ba6a-74e30f8621c7",
   "argsFile": "sweep/s12-resume-args.json",
-  "status": "RELAUNCHED 2026-09-07 12:45 (session ba7d05af, Fable chair) after wf_8b507f28-6e0 died with session 8de5f153 at ~12:36. Cached from that journal: reconcile x5 (dossier-archivist 25, herald-pools 12, npc-ladder 12, chrome-and-compendium 15, chronicle-line 12) + refute x3 (dossier 14/25, herald 13/13, npc 13/19 refuted). RE-RUN LIVE: the dm-page reconciler (its 12:36 file was a killed agent's CLAIM — backed up as reconcile-dm-page.run1-partial-1236.bak.md), the chrome/chronicle/dm-page refuters, then Structure (hunt Opus, grammar Fable, clerk Fable) -> Critique (Opus) -> Fold (Fable). OWNER 12:40: everything else PAUSED until the reconciliation has fully passed.",
+  "status": "CUTOFF PREPARED 2026-09-07 14:09 (session ba7d05af): the FOLD (Fable) was RUNNING since 13:43 and dies with the session; every other stage RETURNED (6 reconcile, 6 refute, CONTRADICTIONS 47, MOVE-GRAMMAR, CLERK-LAWS, CRITIC 25) and is cached in sweep/s12-resume-args.json (rebuilt 14:09). Relaunch = python3 mk-s12-resume.py -> resume-v2 with the args; only the fold runs. Then the seven-lens verifier ($SC/s12-sitting/skeptic-s12-workflow.draft.js), the sitting, the 912r ledger row, the taste sample.",
   "previous": {
    "runId": "wf_8b507f28-6e0",
    "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.split-1120.js",
