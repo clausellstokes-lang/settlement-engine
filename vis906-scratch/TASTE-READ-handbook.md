@@ -23,3 +23,11 @@ are unchanged (claims-parity holds; the numbered steps stay plain per the clarit
 **Owner row proposed at §906:** sign the voiced essay as it stands, or send both Handbook surfaces to the surface-text program (after S12) with this
 table as the baseline; either way the flag stays lit (a display-only, declared shift) — no car in the §906 consist touches the copy.
 War & Resolve: awaiting the lane's rendered text (its reader-facing strings are headings + chips; the taste question there is smaller).
+
+## War & Resolve — the chair's taste read of the lane's rendered dump (`rendered-war-resolve.txt`, 520 B, first paint of the real War door on the siege fixture)
+Text a reader sees, in order: "Resolve is the will to keep resisting; hope is the odds a besieged town faces; supply reads the granary and any circle or airship
+that runs the blockade." → At war (2) → Aurelia · Under siege · Resolve wavering · Hope even · Supply supplied · Public divided → "A teleportation circle runs
+beneath the siege lines. Supplies arrive, and the blockade cannot touch them." → "Besieged by Ravager." → the council/reeve line → Ravager · On campaign · … →
+"Besieging Aurelia." **PASS on taste:** plain nouns, short declaratives, the concrete particular (the circle under the siege lines) carrying the rule, no
+antithesis move, no lexical tell, no digit in prose. One note, not a defect: the lede is a three-clause definitional list joined by semicolons (a "glossary
+lede"); it is the only shaped sentence on the surface and it earns its shape by defining three chips the reader is about to meet. No owner row for this surface.

@@ -78,7 +78,7 @@
   "argsFile": "args-ai-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r8.js",
-  "status": "RUNNING since 22:53 (session df942c1b) — critic only (skipSynth); section-ai.md 15:34 stands",
+  "status": "COMPLETE 23:0x (r8 = critic only; section-ai.md 15:34 stands; critic-ai.md rewritten). ⚠ THE CRITIC NAMES THE ARCHIVAL HOLE (the S-BOUND condition for ai's ONE targeted FIND round — owner-gated): the dossier's own register in the wild (r/worldbuilding rules, World Anvil/Kanka/LegendKeeper, DMs Guild AI supplements — 0 rows), gazetteer/travel/local-history prose (the NYT AI-guidebook investigation, Wikivoyage policy), biographical record (AI obituary spam, WikiTree/FamilySearch), historical fact under measurement (HiST-LLM/Seshat), the decoding literature (Holtzman 2020, Meister 2023, Nguyen 2025) and a second record-register tell catalogue (Pangram, CSD G15). Also: round-1 asks NOT landed ([15]–[20]/[24] NOT_FOUND on abs URLs though the full text verified [13]/[14]; 42 URL-precision rows downgraded not re-pointed; the random second pass over kept rows not run); COPYRIGHT HYGIENE: over-twelve-word trueWordings grew 12 → 277 in the JSON (never printed; trim at export). → S12 input.",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js",
   "prev": {
    "runId": "wf_b15831a8-df4",
@@ -96,7 +96,7 @@
   ],
   "running": [
    "martin",
-   "ai"
+   "_fiveauthor"
   ],
   "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
@@ -105,10 +105,16 @@
    "kay",
    "tolkien",
    "wolfe",
-   "dnd"
+   "dnd",
+   "ai"
   ],
-  "open_decision": "(1) TRIAGE-BY-FEATURE completion pass — verify-only: leguin ~250–300, hobb ~60, wolfe ~60, dnd ~35 rows (both new critics re-name it); a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap. (2) dnd's ONE targeted FIND round: its new critic still names the PLACE hole (5e gazetteers, DMG ch. 5 Settlements, SRD measurement, editorial staff) — S-BOUND allows exactly one; owner says go. (3) ai: decided by its r8 critic (running).",
+  "open_decision": "(1) TRIAGE-BY-FEATURE completion pass — verify-only: leguin ~250–300, hobb ~60, wolfe ~60, dnd ~35 (every critic names it); kit change + verify-only runs; owner-gated on cost. (2) dnd's ONE targeted FIND round — its critic names the PLACE hole (5e gazetteers, DMG ch. 5 Settlements, SRD measurement, editorial staff). (3) ai's ONE targeted FIND round — its critic names the ARCHIVAL hole (worldbuilding/gazetteer/travel/biographical/historical-fact registers + the decoding literature). Both owner-gated; S-BOUND allows exactly one each.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting"
+ },
+ "_fiveauthor": {
+  "runId": "wf_55c30493-02f",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/five-author-check-workflow.js",
+  "status": "RUNNING since 23:03 (session df942c1b) — S10: four Opus checkers (cap 2) over section-{kay,leguin,wolfe,hobb}.md + kept-*.json against the owner proposal's characterizations, then the seat folds FIVE_AUTHOR_CHECK.md; no essay on disk (args.essay unset)"
  }
 }

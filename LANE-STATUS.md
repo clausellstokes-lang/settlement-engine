@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 22:21:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 22:27:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lighting tail's measurement lands with zero product bytes — L-PROBE-2 at ever
 
@@ -76,7 +76,7 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 79b35fdcb · 2 cars over 6582958ce · porcelain 2 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 2f1f9381f · 3 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -84,18 +84,18 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
       | Arrival porcelain: **0 lines**. node_modules: **453 symlinked packages** (never materialised).
       | VITEST HOLD present at start (`$SC/HOLD-VITEST`) — all reading/measuring/editing done under the hold; no vitest, no build.
 - **VIS-906** (same dock laneANCHOR905, on top of the anchor car) receipt head:
-      | # RECEIPT — VIS-906 (PARTIAL — lane in flight, updated after every proof)
+      | # RECEIPT — VIS-906 (COMPLETE — two cars landed, every proof executed)
       | Seat: Opus 5 — Fable-unvalidated · Lane: VIS-906 · Chair: Fable 5.1 · 2026-09-06
       | Dock: `$SC/laneANCHOR905`
       | 
-      | ## STATUS: PARTIAL (arrival verified; no car committed yet)
+      | ## STATUS: COMPLETE — CAR 1 `79b35fdcb`, CAR 2 `2f1f9381f`. STOP RULE NOT FIRED (both surfaces PASS the first-paint law); no CAR 3 exists and none is needed. One register act is OWED TO THE CHAIR: the lighting-census refreeze (retrovalidation R7).
       | 
 - **L-PROBE-2 (chair)**: cheap 6/6 tips · full: FULL_DONE · bracket: BRACKET_DONE
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-05 21:01
 - **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-06 21:46 · critic 09-06 22:09
-- **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
+- **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -104,9 +104,10 @@ product claude/composite-r4 = 6582958ce · ledger = 0e34e1bed §905: the lightin
 
 ## WORKFLOW RUNS of chair session df942c1b-a1a2-4594-ba90-9241ff864ccd (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_0cd91522-1ce: 1 journal lines, 1 agents
+- wf_55c30493-02f: 2 journal lines, 2 agents
 - wf_8cd21474-a7b: 4 journal lines, 2 agents
-- wf_d3face35-f20: 1 journal lines, 1 agents
+- wf_d3face35-f20: 2 journal lines, 1 agents
 - wf_f191dac2-82a: 4 journal lines, 2 agents
 
-## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.50 3.23 2.96
+## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;49053 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 1.77 2.52 2.72
