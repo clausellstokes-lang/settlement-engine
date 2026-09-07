@@ -18692,6 +18692,486 @@
    "confidence": "medium",
    "modelEra": "LLMs generally; example revision July 2024; register measured is encyclopedia article prose",
    "angle": "arch-worldbuilding-communities"
+  },
+  {
+   "index": 1426,
+   "feature": "other: truncation-sampling mechanism",
+   "claim": "Finlayson and colleagues prove that discarding every token below a probability threshold guarantees the sampled tokens all lie in the support of the true next-token distribution, provided the threshold exceeds a bound derived from the model's maximum log-probability underestimation.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, 'Closing the Curious Case of Neural Text Degeneration', arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "can guarantee that all sampled tokens have",
+   "page": "Abstract; Corollary 1, §3.3",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "theory with GPT-2 small/medium/large/XL experiments; observation October 2023; register measured: Open Web Text web documents"
+  },
+  {
+   "index": 1427,
+   "feature": "other: softmax bottleneck as the source of tail errors",
+   "claim": "Finlayson and colleagues attribute a large part of the language model's probability error, which truncation sampling exists to hide, to the softmax bottleneck: the low-rank output matrix cannot represent the true distribution exactly.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "the softmax bottleneck, to prove that certain tokens have nonzero",
+   "page": "Abstract; §2 'The Softmax Bottleneck'; §4",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 family (117M-1.5B), observation October 2023; register: Open Web Text"
+  },
+  {
+   "index": 1428,
+   "feature": "steerability",
+   "claim": "Finlayson and colleagues state that thresholding is structurally unable to remove a bad token that the model ranks above a good one, because any threshold that discards the low-quality token also discards the high-quality one below it.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "truncating via a threshold is an inherently limited approach",
+   "page": "§4 opening paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 family, October 2023; register: Open Web Text"
+  },
+  {
+   "index": 1429,
+   "feature": "counter-evidence",
+   "claim": "In Finlayson and colleagues' MAUVE sweep over four GPT-2 sizes on Open Web Text, no sampling method was best at every model size.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "consistently performs best, with BAT methods sometimes out-performing",
+   "page": "§5.1 'BA-eta outperforms all other methods for GPT-2-Large'; Figure 5",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 small/medium/large/XL, October 2023; register measured: Open Web Text web documents"
+  },
+  {
+   "index": 1430,
+   "feature": "reader and expert judgment",
+   "claim": "Finlayson and colleagues report that their Mechanical Turk annotators preferred the lower-entropy generations, and explain this by the annotators seeing only one generation per method, which makes diversity impossible to assess.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "human annotators prefer lower entropy generations",
+   "page": "§5.1 'Human annotators narrowly favor BA-eta'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2, human raters, October 2023; register measured: Open Web Text continuations"
+  },
+  {
+   "index": 1431,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Finlayson and colleagues report MAUVE scores under lower-entropy Open Web Text generation of 85.0 for eta sampling versus 87.8 for their basis-aware variant at GPT-2 Small, and 87.1 versus 89.6 at GPT-2 XL.",
+   "source": "Finlayson, Hewitt, Koller, Swayamdipta, Sabharwal, arXiv:2310.01693v1 (2023); ICLR 2024",
+   "url": "https://arxiv.org/abs/2310.01693",
+   "quote": "",
+   "page": "Table 1",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2023-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 Small/Medium/Large/XL, October 2023; register measured: Open Web Text"
+  },
+  {
+   "index": 1432,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Xu and colleagues report that consecutive sentence-level repetition occurs in 0.02% of the human Wikitext-103 corpus, which they contrast with the model's rate under greedy decoding.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, 'Learning to Break the Loop', arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "0.02% in Wikitext-103",
+   "page": "Abstract",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder, 750M parameters, trained on Wikitext-103; observation 2022; register measured: Wikipedia encyclopedic prose"
+  },
+  {
+   "index": 1433,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Xu and colleagues name a self-reinforcement effect in which each further repetition of a sentence in the context raises the model's probability of generating that sentence again.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "a sentence is repeated in the context, the higher the probability",
+   "page": "Abstract, finding 2; §2.2",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder 750M on Wikitext-103, 2022; register measured: Wikipedia encyclopedic prose plus BookCorpus and random tokens"
+  },
+  {
+   "index": 1434,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Xu and colleagues measure that a single sentence-level context repetition already raises the probability of repeating in more than ninety per cent of tokens, before any token has actually been repeated at the current step.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "even if there is only one sentence-level context repetition",
+   "page": "§2.2 'Why sentence repetitions occur?'; Figure 3(b)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder 750M on Wikitext-103, 2022; register measured: Wikipedia, BookCorpus, random-token corpora"
+  },
+  {
+   "index": 1435,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Xu and colleagues report that sentences with a higher initial probability show a stronger self-reinforcement effect, which is why text a model has itself produced by maximisation decoding is the text most at risk of looping.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "The sentences with higher initial probabilities usually",
+   "page": "Abstract, finding 3; §2.2 'What kinds of sentences are more likely to be repeated?'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder 750M on Wikitext-103, 2022; register measured: Wikipedia encyclopedic prose"
+  },
+  {
+   "index": 1436,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Xu and colleagues explain the effectiveness of top-k and nucleus sampling as an avoidance of the self-reinforcement effect, because a stochastically chosen token is not the maximum-probability one.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "rather than chosen with maximum probability which can avoid the self-reinforcement effect",
+   "page": "§2.2 'Analyses'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder 750M on Wikitext-103, 2022; register measured: Wikipedia encyclopedic prose"
+  },
+  {
+   "index": 1437,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Xu and colleagues measure sentence-level consecutive repetition on the Wikitext-103 test set at 14.50 per cent for a maximum-likelihood model with greedy-style decoding against 0.01 per cent for human text.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "",
+   "page": "Table 1 (Repetition-Sen column; MLE 14.50 +/- 1.59 %, Human 0.01%)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "16-layer Transformer decoder 750M trained on Wikitext-103, 2022; register measured: Wikipedia encyclopedic prose"
+  },
+  {
+   "index": 1438,
+   "feature": "counter-evidence",
+   "claim": "Xu and colleagues dispute the first-order Markov account of repetition, arguing that Holtzman's positive feedback loop shows the model consults long-distance context.",
+   "source": "Xu, Liu, Yan, Cai, Li, Li, arXiv:2206.02369v2 (2022); NeurIPS 2022",
+   "url": "https://arxiv.org/abs/2206.02369",
+   "quote": "language models do look at the long-distance context",
+   "page": "§1 Introduction",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2022-10-09",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "argument about GPT-2-era models, 2022; register: Wikitext-103"
+  },
+  {
+   "index": 1439,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Welleck and colleagues prove that greedy search, beam search, top-k sampling and nucleus sampling can each return an infinite-length sequence that has zero probability under the model itself.",
+   "source": "Welleck, Kulikov, Kim, Pang, Cho, 'Consistency of a Recurrent Language Model With Respect to Incomplete Decoding', arXiv:2002.02492v2 (2020)",
+   "url": "https://arxiv.org/abs/2002.02492",
+   "quote": "Greedy decoding, beam search, top-k sampling,",
+   "page": "Abstract; Theorem 3.4 and the paragraph following it",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "tanh-RNN and LSTM-RNN plus GPT-2 117M, observation 2020; register measured: Wikitext-103 Wikipedia prose"
+  },
+  {
+   "index": 1440,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Welleck and colleagues measure a non-termination ratio of 37.91 per cent for greedy-decoded GPT-2 117M on Wikitext-103, meaning that share of contexts produced a continuation that had not ended within 1500 steps.",
+   "source": "Welleck, Kulikov, Kim, Pang, Cho, arXiv:2002.02492v2 (2020)",
+   "url": "https://arxiv.org/abs/2002.02492",
+   "quote": "",
+   "page": "Table 4 and §5.3",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high",
+   "modelEra": "GPT-2 117M, observation 2020; register measured: Wikitext-103 Wikipedia articles"
+  },
+  {
+   "index": 1441,
+   "feature": "counter-evidence",
+   "claim": "Welleck and colleagues report that nucleus sampling too produced non-terminating sequences, at 0.06 per cent with the tanh-RNN and 0.13 per cent with the LSTM-RNN at a nucleus of 0.2.",
+   "source": "Welleck, Kulikov, Kim, Pang, Cho, arXiv:2002.02492v2 (2020)",
+   "url": "https://arxiv.org/abs/2002.02492",
+   "quote": "Nucleus sampling also produced",
+   "page": "§5.1; Table 1",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-10-02",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "tanh-RNN and LSTM-RNN, 2020; register measured: Wikitext-103 Wikipedia prose"
+  },
+  {
+   "index": 1442,
+   "feature": "counter-evidence",
+   "claim": "Fu and colleagues argue that the repetition problem originates in properties of human language itself rather than in the model architecture or the sampling method.",
+   "source": "Fu, Lam, So, Shi, 'A Theoretical Analysis of the Repetition Problem in Text Generation', arXiv:2012.14660v4 (2021); AAAI 2021",
+   "url": "https://arxiv.org/abs/2012.14660",
+   "quote": "caused by the traits of our language",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2021-03-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Markov analysis with NMT and language-modelling experiments, 2020-2021; register measured: translation corpora and language modelling"
+  },
+  {
+   "index": 1443,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Fu and colleagues name the high inflow problem, in which many different words predict the same next word with high probability, as the major cause of loops.",
+   "source": "Fu, Lam, So, Shi, arXiv:2012.14660v4 (2021); AAAI 2021",
+   "url": "https://arxiv.org/abs/2012.14660",
+   "quote": "exist too many words predicting the same word as the",
+   "page": "Abstract",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-03-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Markov generation model analysis, 2020-2021; register: NMT and language modelling"
+  },
+  {
+   "index": 1444,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Meister, Vieira and Cotterell argue that beam search works because it enforces uniform information density, an even spread of surprisal across a sentence.",
+   "source": "Meister, Vieira, Cotterell, 'If Beam Search is the Answer, What was the Question?', arXiv:2010.02650v2 (2021); EMNLP 2020",
+   "url": "https://arxiv.org/abs/2010.02650",
+   "quote": "search enforces uniform information density",
+   "page": "Abstract; §4",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-01-17",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "neural machine translation models, IWSLT'14 and WMT'14, observation 2020; register measured: translated news and talks, not open-ended fiction"
+  },
+  {
+   "index": 1445,
+   "feature": "counter-evidence",
+   "claim": "Meister, Vieira and Cotterell report that in their machine-translation experiments a lower standard deviation of per-sentence surprisal went with a higher BLEU score, an inverse relationship they take as evidence for the uniform information density property in good text.",
+   "source": "Meister, Vieira, Cotterell, arXiv:2010.02650v2 (2021); EMNLP 2020",
+   "url": "https://arxiv.org/abs/2010.02650",
+   "quote": "is adhered to strongly correlates with BLEU",
+   "page": "Abstract; §6.1 and Figure 1",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2021-01-17",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "NMT transformer models on IWSLT'14 and WMT'14 Newstest2014, 2020; register measured: translated news, a constrained task rather than open-ended generation"
+  },
+  {
+   "index": 1446,
+   "feature": "detection and its failures",
+   "claim": "Pillutla and colleagues report that MAUVE scores greedy decoding at .016 on web text from GPT-2 XL, the lowest of the three decoding algorithms they compare.",
+   "source": "Pillutla, Swayamdipta, Zellers, Thickstun, Welleck, Choi, Harchaoui, 'MAUVE', arXiv:2102.01454v3 (2021); NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2102.01454",
+   "quote": "the lowest quality to greedy decoding (.016)",
+   "page": "Section 4.1, 'MAUVE identifies quality differences between decoding algorithms'; Table 3",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2021-11-23",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 XL and Grover, observation 2021; register measured: web text, news and story continuations"
+  },
+  {
+   "index": 1447,
+   "feature": "homogenisation",
+   "claim": "Pillutla and colleagues report that nucleus sampling has a lower Type I error than ancestral sampling but a higher Type II error, meaning it fails to cover the spread of human text.",
+   "source": "Pillutla, Swayamdipta, Zellers, Thickstun, Welleck, Choi, Harchaoui, arXiv:2102.01454v3 (2021); NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2102.01454",
+   "quote": "nucleus sampling does not effectively cover the human text distribution",
+   "page": "Figure 2 caption",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2021-11-23",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Grover and GPT-2, 2021; register measured: web text and news"
+  },
+  {
+   "index": 1448,
+   "feature": "homogenisation",
+   "claim": "Pillutla and colleagues state that some plausible human text simply cannot be produced by a truncation-based decoder such as nucleus sampling, which is the Type II error their measure is built to catch.",
+   "source": "Pillutla, Swayamdipta, Zellers, Thickstun, Welleck, Choi, Harchaoui, arXiv:2102.01454v3 (2021); NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2102.01454",
+   "quote": "cannot be generated by truncation-based decoding algorithms such as nucleus sampling",
+   "page": "Section 2, 'Quantifying the Errors'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2021-11-23",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 era, 2021; register: web text"
+  },
+  {
+   "index": 1449,
+   "feature": "detection and its failures",
+   "claim": "Pillutla and colleagues report a Spearman rank correlation of 0.952 between MAUVE and human human-likeness judgments on web text, against 0.810 for generation perplexity and minus 0.167 for the repetition metric.",
+   "source": "Pillutla, Swayamdipta, Zellers, Thickstun, Welleck, Choi, Harchaoui, arXiv:2102.01454v3 (2021); NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2102.01454",
+   "quote": "",
+   "page": "Table 5, row 'Human-like/BT, Web text'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2021-11-23",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT-2 sizes with ancestral and nucleus sampling, 214 Mechanical Turk workers, 2021; register measured: web text"
+  },
+  {
+   "index": 1450,
+   "feature": "counter-evidence",
+   "claim": "Zhang, Duckworth, Ippolito and Neelakantan report a likelihood trap: past an inflection point the sentences a model rates as most likely are rated by human crowdworkers as lower in quality.",
+   "source": "Zhang, Duckworth, Ippolito, Neelakantan, 'Trading Off Diversity and Quality in Natural Language Generation', arXiv:2004.10450v1 (2020)",
+   "url": "https://arxiv.org/abs/2004.10450",
+   "quote": "the highest likelihood sentences are of surprisingly low",
+   "page": "Section 1 Introduction; Figure 1 caption",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-04-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "dialogue and open-ended generation models, 2020; register measured: conversational responses rated by crowdworkers"
+  },
+  {
+   "index": 1451,
+   "feature": "reader and expert judgment",
+   "claim": "Zhang and colleagues based the likelihood trap finding on 146 crowdworkers rating 100 sentences drawn across a range of model likelihoods.",
+   "source": "Zhang, Duckworth, Ippolito, Neelakantan, arXiv:2004.10450v1 (2020)",
+   "url": "https://arxiv.org/abs/2004.10450",
+   "quote": "We asked 146 crowdworkers",
+   "page": "Figure 1 caption",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-04-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "2020; register measured: dialogue responses"
+  },
+  {
+   "index": 1452,
+   "feature": "counter-evidence",
+   "claim": "Zhang and colleagues report that once decoding algorithms are compared at equal entropy, the quality of their samples is comparable over a wide range, and they diverge only in the low-entropy regime.",
+   "source": "Zhang, Duckworth, Ippolito, Neelakantan, arXiv:2004.10450v1 (2020)",
+   "url": "https://arxiv.org/abs/2004.10450",
+   "quote": "when aligned on entropy, sample quality between all",
+   "page": "Section 4.2 Results",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-04-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "2020, twenty decoder-hyperparameter configurations; register measured: dialogue responses rated by crowdworkers"
+  },
+  {
+   "index": 1453,
+   "feature": "steerability",
+   "claim": "Zhang and colleagues report that in the low-entropy regime nucleus sampling beat top-k, which beat temperature sampling, on human quality ratings.",
+   "source": "Zhang, Duckworth, Ippolito, Neelakantan, arXiv:2004.10450v1 (2020)",
+   "url": "https://arxiv.org/abs/2004.10450",
+   "quote": "",
+   "page": "Section 4.2 Results",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-04-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "2020; register measured: dialogue responses"
+  },
+  {
+   "index": 1454,
+   "feature": "reader and expert judgment",
+   "claim": "Zhang and colleagues' decoder comparison rests on over 38,000 paired ratings of almost 10,000 samples.",
+   "source": "Zhang, Duckworth, Ippolito, Neelakantan, arXiv:2004.10450v1 (2020)",
+   "url": "https://arxiv.org/abs/2004.10450",
+   "quote": "over 38,000 ratings on almost 10,000 samples",
+   "page": "Section 1 Introduction; Section 4.2",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-04-22",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "2020; register measured: dialogue responses"
+  },
+  {
+   "index": 1455,
+   "feature": "counter-evidence",
+   "claim": "Nadeem, He, Cho and Glass report that top-k, nucleus and tempered sampling perform on a par with one another in their human quality-diversity evaluation.",
+   "source": "Nadeem, He, Cho, Glass, 'A Systematic Characterization of Sampling Algorithms for Open-ended Language Generation', arXiv:2009.07243v1 (2020); AACL-IJCNLP 2020",
+   "url": "https://arxiv.org/abs/2009.07243",
+   "quote": "are on par with each other",
+   "page": "Figure 1 caption; Conclusion",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2020-09-15",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "GPT2-small 110M fine-tuned on Gigaword and Wikitext-103, 602 Mechanical Turk crowdworkers, 2020; register measured: news sentences and Wikipedia prose"
   }
  ],
  "verdicts": {
@@ -28535,6 +29015,21 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1383": {
+   "index": 1383,
+   "verdict": "PARTIAL",
+   "trueWording": "commercial content primarily written by AI language generators",
+   "unsupportedLimb": "that partly AI-written titles are permitted — page states only the ban and its 'primarily' scope, never an affirmative permission",
+   "note": "Raw fetch, HTTP 200. Quote verbatim in body para on the additional ban effective July 31; 'acknowledge[s] enforcement challenges' also verbatim, attributed to the firm (OneBookShelf), so the enforcement-difficulty limb holds. DriveThruRPG limb holds: article says OneBookshelf marketplaces such as DriveThruRPG will also implement this policy; dateline updated Jul 26, 2023. The permitting limb is an inference from 'primarily', not on the page — only the AI-ART rule has an explicit partial-use allowance (tagging).",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
+  "1384": {
+   "index": 1384,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we don't use AI to generate text for our game design",
+   "note": "Raw fetch, HTTP 200. Section 'The Current State of Generative AI in TTRPGs': Wolfgang Baur of Kobold Press issued the No-AI Pledge, quoted by Mike (Michael E. Shea) on SlyFlourish.com, 30 September 2024. Quote appears word for word inside the pledge's three-clause sentence; publisher and text-generation limbs both hold.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1385": {
    "index": 1385,
    "verdict": "SKIPPED_TRIAGE",
@@ -28542,12 +29037,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1386": {
+   "index": 1386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about 3 in 10 use generative AI",
+   "note": "Raw fetch, HTTP 200. Same section; sentence opens 'Among 3,700 players and GMs I surveyed' and continues with the quoted clause ('...when preparing for or playing RPGs'), so the 3,700 sample, the first-person survey and the 3-in-10 share all hold. trueWording trimmed to 7 words for the cap; the full quoted clause on the page runs 13.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1387": {
    "index": 1387,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1388": {
+   "index": 1388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "often clunky options but they do the job",
+   "note": "Raw fetch, HTTP 200. Section 'Wider Issue'. Hargrave (Wingspan designer, TTGDA co-founder) told BoardGameWire she sees people using AI to generate placeholder names in a prototype and that they are 'often clunky options but they do the job' when everything will change many times over. Article first appeared on BoardGameWire 19 Feb 2026, republished by Rascal News (Mike Didymus-True) with permission — the attribution chain in the claim is stated on the page.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
   },
   "1389": {
    "index": 1389,
@@ -28584,6 +29093,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1394": {
+   "index": 1394,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quality and authenticity as the most frequently mentioned concerns",
+   "note": "Raw fetch of arXiv HTML v3, HTTP 200 (Lloyd, Gosciak, Nguyen, Naaman; CHI '25). Quote verbatim in the Discussion/Conclusion findings summary. The 'as justification' limb is separately carried by the Abstract, which says the rules evoke, as justification, concerns about quality and authenticity. Study scope (300,000+ public subreddits, AI rules) supports the 'study of Reddit community AI rules' limb.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1395": {
    "index": 1395,
    "verdict": "SKIPPED_TRIAGE",
@@ -28598,12 +29114,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1397": {
+   "index": 1397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Second person read-aloud and purple.",
+   "note": "Raw fetch, HTTP 200. Bryce Lynch's review of 'Three Witches'. Sentence sits in the review body immediately after he moves on to the dungeon rooms and quotes a sample read-aloud line; both limbs (second person, purple) are in the five-word sentence. He repeats the charge later ('Overwrought read-aloud in the second person').",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1398": {
    "index": 1398,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1399": {
+   "index": 1399,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the product description says it \"Contains AI-Generated Content\"",
+   "note": "Raw fetch, HTTP 200. Comment by Beoric, June 30, 2025 at 9:10 am, exactly as cited: the product description says it 'Contains AI-Generated Content' and that might have been a clue. DriveThruRPG limb holds from the review body above the thread, which prices the product at DriveThru and links the drivethrurpg.com product page. Page never separately calls the phrase a marketplace-applied label, but it does place it in that store's product description.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
   },
   "1400": {
    "index": 1400,
@@ -28626,6 +29156,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1403": {
+   "index": 1403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which is not, in fact, a summary of the adventure",
+   "note": "Raw fetch, HTTP 200. Comment by Beoric, June 17, 2026 at 10:56 pm, on 'Bryce rebuts - Greg Gawron, Founder, Advanced Fantasy Games'. Same sentence carries both limbs: an 'Adventure Summary' that is not a summary of the adventure and a 'Players Background' which does not, in fact, provide any background. 'Previewed' limb holds — he is describing what the preview shows.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
+  "1404": {
+   "index": 1404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reminiscent of ChatGPT's voice, so either it was generated",
+   "note": "Raw fetch, HTTP 200. Same Beoric comment, next sentence: the summary and background are both reminiscent of ChatGPT's voice, so either an LLM generated it or someone so steeped in LLM writing wrote it, intentionally or not mimicking its style. Both disjuncts of the claim's 'allowing either' limb are on the page.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1405": {
    "index": 1405,
    "verdict": "SKIPPED_TRIAGE",
@@ -28633,12 +29177,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
   },
+  "1406": {
+   "index": 1406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an LLM struggles to remember enough different things at once",
+   "note": "Raw fetch, HTTP 200. Comment by Quentin, June 21, 2025 at 8:45 am, on 'The Snake Temple Ruins'. He quotes room L1-21 and argues the LLM could not credibly have written a sword point in one room from a dead adventurer in another (present in L1-22 with his broken sword) jamming a secret door between the two and acting as a clue to both door and trap — the broken-sword-to-jammed-door chain in the claim. Stated as his reason for concluding it does NOT read like an LLM.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
+  "1407": {
+   "index": 1407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "involving relationships it can't understand or extrapolate from",
+   "note": "Raw fetch, HTTP 200. Same Quentin comment, closing clause of the sentence calling the construction too much sauce on one ingredient 'for a machine' — so the machine-cannot-understand-or-extrapolate limb is on the page as written.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
   "1408": {
    "index": 1408,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1409": {
+   "index": 1409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no longer accept any products containing generative AI",
+   "note": "Raw fetch, HTTP 200; the block-quoted policy sits above Rascal's subscriber wall, so no paywall route was needed. Chase Carter, Jan 27, 2025, quoting the ENNIE Awards post 'Revised Policy on Generative AI Usage': beginning with the 2025-2026 submission cycle the ENNIEs will no longer accept any products containing generative AI or created with the assistance of Large Language Models or similar technologies. Cycle, revised-policy and LLM-assistance limbs all hold.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
+  "1410": {
+   "index": 1410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "puffs up the importance of the subject matter by adding statements",
+   "note": "Raw fetch, HTTP 200. Section 'Undue emphasis on significance, legacy, and broader trends'. Page reads that LLM writing often puffs up the importance of the subject matter by adding statements about how arbitrary aspects of the topic represent or contribute to a broader topic — every limb, including 'arbitrary aspects' and 'broader topic'. Page self-identifies as an advice page from WikiProject AI Cleanup, supporting the attribution.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
   },
   "1411": {
    "index": 1411,
@@ -28653,6 +29225,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-ai-triage-r10.json"
+  },
+  "1413": {
+   "index": 1413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "creating a lively community within its borders.",
+   "note": "Raw fetch, HTTP 200. Section 'Superficial analyses', Examples 2023-2025 (confirmed by walking back to the nearest preceding heading). The example gives the April 2008 census population of Douera followed by the participial clause quoted, and is credited '- From this June 2023 revision to Douéra'. Census-figure, June-2023 and Douéra limbs all hold; the guide's point there is the trailing '-ing' phrase.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
+  },
+  "1414": {
+   "index": 1414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attribute opinions or claims to some vague authority",
+   "note": "Raw fetch, HTTP 200. Section 'Vague attributions and overgeneralization of opinions' (WP:AIWEASEL). Page: AI chatbots tend to attribute opinions or claims to some vague authority - a practice called weasel wording - and also commonly exaggerate the quantity of sources those opinions are attributed to, which carries the claim's second limb. trueWording trimmed below the full 12-word quoted opening.",
+   "fromFile": "verdicts-ai-i1383-1414.json"
   },
   "1415": {
    "index": 1415,
@@ -28730,6 +29316,217 @@
    "trueWording": "LLMs overuse the rule of three",
    "note": "Claim carried no quote to match, so graded on substance. Section 'Rule of three' states the overuse, then gives the range of forms as running from three repeated adjectives to three repeated short phrases, and closes by saying LLMs use the structure to make superficial analyses appear more comprehensive. All three limbs supported; wording differs from the claim's paraphrase 'three stacked'.",
    "fromFile": "verdicts-ai-i1415-1425.json"
+  },
+  "1426": {
+   "index": 1426,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"can guarantee that all sampled tokens have nonzero true probability\" (Abstract)",
+   "note": "Quote verbatim in the Abstract (1 occurrence). Every limb holds: Corollary 1 in §3.3 reads that if log p-hat underestimates log p* by at most delta, then for any threshold tau >= 1-exp(-delta), threshold-based truncation correctly discards all tokens not in the support of p*. §3.1 defines that bound as the maximum log-probability underestimation error max(A-A'). Intro restates it. Route: arXiv PDF v1 -> pdftotext -layout, raw page reached.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1427": {
+   "index": 1427,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a known source of model errors, the softmax bottleneck\" (Abstract)",
+   "note": "Quote verbatim in the Abstract. Low-rank limb supported in §2 'The Softmax Bottleneck': limited expressivity of small hidden size with large vocabulary, A' at best a low-rank approximation of A. Caveat on location, not on truth: §2 hedges ('sources are likely many, but one source'); the 'large part' limb is carried by §5.2 Discussion, which reports empirical evidence that the softmax bottleneck is responsible for significant errors in next-token distributions. Cite §5.2 alongside §2 if the magnitude matters.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1428": {
+   "index": 1428,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"truncating via a threshold is an inherently limited approach\" (§4 opening)",
+   "note": "Quote verbatim at the opening of §4. The mechanism limb is the paper's own next clause: if a model assigns more probability to a low quality token than a high quality token, there is no threshold that discards the low-quality one without discarding the high-quality one. Restated in §6 Conclusion.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1429": {
+   "index": 1429,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"no single method consistently performs best\" (§5.1; Figure 5 caption)",
+   "note": "Quote verbatim in §5.1 under the heading 'BA-eta outperforms all other methods for GPT-2-Large'. Figure 5 caption independently states no single sampling method consistently outperforms across sizes; the four sizes are Small/Medium/Large/XL and the corpus is the Open Web Text test set, as the claim says.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1430": {
+   "index": 1430,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"human annotators prefer lower entropy generations\" (§5.1)",
+   "note": "Quote verbatim. Annotators are Amazon Mechanical Turk workers doing pairwise comparisons (same paragraph). The explanation limb is the paper's next sentence: likely because humans see only one generation per method, making it impossible to assess diversity.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1431": {
+   "index": 1431,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 1: eta 85.0 / 87.1; BA-eta 87.8 / 89.6 (Small, XL)",
+   "note": "No quotation was offered, so this cannot be graded VERBATIM; every figure matches Table 1 exactly. Table 1 reads eta 85.0(1.4) Small, 90.4 Medium, 86.0 Large, 87.1(1.2) XL; BA-eta 87.8(1.0), 92.2, 88.4, 89.6(0.4). Caption: MAUVE scores for different GPT-2 model sizes on lower-entropy OWT generation. Subscripts are standard deviations the claim omits.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1432": {
+   "index": 1432,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"few consecutive sentence-level repetitions in human corpora (e.g., 0.02% in Wikitext-103)\"",
+   "note": "Quote verbatim in the Abstract. The contrast limb is the same Abstract sentence pair: models get stuck in sentence-level loops with maximization-based decoding (e.g., greedy search), which the authors call counter-intuitive against the human 0.02%. Note for the merger: Table 1 lists human Repetition-Sen as 0.01% on the Wikitext-103 test set, a different measurement from the Abstract's corpus figure, not a contradiction.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1433": {
+   "index": 1433,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the more times a sentence is repeated in the context\" (Abstract)",
+   "note": "Quote verbatim; the full Abstract finding 2 names it the self-reinforcement effect and continues 'of continuing to generate that sentence'. Restated in §2.2 under 'Why the model gets stuck into the repetition loop?', which adds that IP, WR and TP converge around ceiling values.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1434": {
+   "index": 1434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"IP1 is higher than 90% across the various corpus\" (§2.2)",
+   "note": "Quote verbatim (2 occurrences: §1 and §2.2). IP is defined in §2.1 as the Rate of Increased Token Probability, the share of tokens whose probability rises versus the first sentence, so 'more than ninety per cent of tokens' is the right reading. The final limb is the paper's own note: the token repetition has not occurred at the current prediction step, only the same sentence-level context.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1435": {
+   "index": 1435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The sentences with higher initial probabilities usually have a stronger self-reinforcement\"",
+   "note": "Quote verbatim in Abstract finding 3. The maximisation-decoding limb is §2.2 'What kinds of sentences are more likely to be repeated?': sentences generated by a maximization-based decoding algorithm have higher initial likelihoods, thus the model prefers to repeat itself. §1 states the same with a hedge ('may have a stronger self-reinforcement effect'); the claim's 'most at risk of looping' is firmer than §1 but matches §2.2.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1436": {
+   "index": 1436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"chosen with maximum probability which can avoid the self-reinforcement effect\" (§2.2)",
+   "note": "Quote verbatim in §2.2 'Analyses'. Two points of nuance the claim smooths over: the paper hedges ('The effectiveness ... may rely on'), and it gives two reasons, of which the claim states only the second; the first is that previously generated sentences carry lower likelihood under stochastic sampling and so are less at risk of repetition.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1437": {
+   "index": 1437,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 1: MLE Repetition-Sen 14.50 +/- 1.59 %, Human 0.01%",
+   "note": "No quotation was offered, so not gradable as VERBATIM; both figures match Table 1 exactly. Table 1 caption: results of different training-based methods on the test set of Wikitext-103 for open-ended generation, and §4.2 states these comparisons are based on greedy decoding, supporting 'greedy-style decoding'. MLE is the maximum-likelihood baseline. Repetition-Sen is defined in §4.1 as 1 - unique sentences / sentences.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1438": {
+   "index": 1438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"language models do look at the long-distance context\" (§1)",
+   "note": "Quote verbatim in §1 Introduction. Both limbs hold: the sentence runs against Fu et al., named in the preceding sentence as assuming language models can be approximated by short-sighted first-order Markov models, and rests on Holtzman et al.'s observed cases of a positive feedback loop of repetitions. Repeated in the Related Work section. Polarity 'disputes' is correct.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1439": {
+   "index": 1439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"top-k sampling, and nucleus sampling are all inconsistent\" (after Theorem 3.4)",
+   "note": "Quote verbatim in the paragraph immediately after Theorem 3.4. The zero-probability limb is the Abstract's definition of inconsistency: the algorithm can yield an infinite-length sequence that has zero probability under the model, and the Abstract states the same four algorithms are proven inconsistent.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1440": {
+   "index": 1440,
+   "verdict": "PARTIAL",
+   "trueWording": "Table 4: GPT2-117M rL 37.91%, greedy decoding, limit L = 500",
+   "unsupportedLimb": "'had not ended within 1500 steps' - the 37.91% figure is measured at L = 500, not 1500",
+   "note": "37.91 is exact in Table 4 for GPT2-117M, greedy-decoded, Wikitext-103, and rL is defined in §5 as the proportion of decoded continuations at least L tokens long, so the 'share of contexts' reading is right. But §5.3 states explicitly that this experiment defines the non-termination ratio using L = 500, 'more strict than the limit used in the preceding experiments (1500)'; 1500 belongs to the earlier recurrent-LM experiments (Table 1), not to Table 4. Downstream text should say 500 steps.",
+   "fromFile": "verdicts-ai-i1426-1440.json"
+  },
+  "1441": {
+   "index": 1441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Nucleus sampling also produced non-terminating sequences with the tanh-RNN\" (§5.1)",
+   "note": "Raw PDF arxiv.org/pdf/2002.02492v2 -> pdftotext -layout. Quote exact. Sentence continues with (0.06%, nuc-0.2) for tanh-RNN and (0.13%, nuc-0.2) for LSTM-RNN; Table 1 row nucleus-0.2 gives 0.06+/-0.02 and 0.13+/-0.15, mean over 10 initializations. Every limb supported. Register caveat: this experiment is Wikitext2, not Wikitext-103 as the claim's modelEra field states (Wikitext-103 is used only for the separate GPT-2 transformer experiment) - the claim sentence itself does not name a corpus, so the verdict stands.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1442": {
+   "index": 1442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"caused by the traits of our language itself\" (Abstract)",
+   "note": "Raw PDF arxiv.org/pdf/2012.14660v4. Quote exact in Abstract. Conclusion repeats it in other words: theory shows the problem is caused by the language itself. The 'rather than architecture or sampling method' limb is the paper's own framing: the Introduction lists those two as prior conjectures whose real cause was 'still unknown', and the Abstract casts existing sampling methods as minimizing the upper bounds (remedies), not causes.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1443": {
+   "index": 1443,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"exist too many words predicting the same word as the subsequent\" (Abstract)",
+   "note": "Raw PDF arxiv.org/pdf/2012.14660v4. Quote exact. Abstract: 'One major reason is attributed to' that fact, and 'it is easy to go back to that word and form repetitions and we dub it as the high inflow problem'. Both the naming limb and the major-cause limb are supported verbatim.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1444": {
+   "index": 1444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"beam search enforces uniform information density in text\" (Abstract)",
+   "note": "Raw PDF arxiv.org/pdf/2010.02650v2. Quote exact in the Abstract, where the finding is credited to a property motivated by cognitive science. Section 4.1 is titled 'The UID Bias in Beam Search'. The 'even spread of surprisal' gloss matches Hypothesis 4.1, which has speakers distributing information uniformly across the signal, with surprisal as the paper's information measure throughout Section 6.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1445": {
+   "index": 1445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a strong inverse relationship between BLEU and average standard deviation\" (§6.1)",
+   "note": "Raw PDF arxiv.org/pdf/2010.02650v2. Abstract quote exact. §6.1 Exact Decoding: 'Fig. 1 also shows a strong inverse relationship between BLEU and average standard deviation (per sentence) of surprisals. We take these observations as empirical validation of Hyp. 4.2.' Direction (lower sigma with higher BLEU), the per-sentence unit, and the evidential use all confirmed. Datasets IWSLT'14 De-En and WMT'14 En-Fr with Newstest'14 test set, matching modelEra.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1446": {
+   "index": 1446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the lowest quality to greedy decoding (.016)\" (§4.1)",
+   "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact. Table 3 caption reads 'web text, GPT-2 xl'; appendix Table 6 xl block confirms greedy MAUVE 0.016 (vs sampling 0.882, nucleus 0.940). Adversarial check on 'lowest of the three': the paper's sentence compares exactly greedy/ancestral/nucleus, and greedy .016 is also below the fourth (adversarial, .057), so the limb is true either way.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1447": {
+   "index": 1447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"nucleus sampling does not effectively cover the human text distribution\" (Fig. 2)",
+   "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact in the Figure 2 caption. That caption calls the Type I error 'slightly smaller' than ancestral sampling's and the Type II error higher, so the claim's 'lower' is accurate and drops only the hedge. The caption scopes the comparison to Grover base (rightmost panel); the claim names no model, so no limb is unsupported.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1448": {
+   "index": 1448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"cannot be generated by truncation-based decoding algorithms such as nucleus sampling\" (§2)",
+   "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact. The sentence opens by defining Type II errors as false negatives and gives this inability as the example, so the Type II attribution is explicit rather than inferred; it is formalized immediately below under 'Quantifying the Errors', where KL(P|Q) quantifies the Type II error. The quote sits a few lines above that heading rather than inside it, which does not affect support.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1449": {
+   "index": 1449,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Table 5 Human-like/BT web text: MAUVE .952, Gen. PPL .810, REP -.167",
+   "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Claim supplied no quote, so verbatim grading does not apply; all three figures match Table 5 row 'Human-like/BT, Web text' exactly, and the body text repeats 'how human-like (0.952)'. §4.3 confirms the measure is a Spearman rank correlation against fitted Bradley-Terry coefficients from 214 Mechanical Turk workers, matching modelEra. Note for downstream use: MAUVE's 'Interesting/BT' correlation is also 0.810, a coincidence that could be misread; the claim's 0.810 is correctly the Gen. PPL cell of the human-like row.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1450": {
+   "index": 1450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the highest likelihood sentences are of surprisingly low quality\" (§1)",
+   "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact in §1. The inflection-point limb comes from the Figure 1 caption: log likelihoods are generally positively correlated with average human quality judgments, with 'an inflection point after which they become negatively correlated'. Raters are crowdworkers (146 AMT workers).",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1451": {
+   "index": 1451,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"We asked 146 crowdworkers to rate the quality of 100 sentences\" (Fig. 1)",
+   "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact; the caption continues 'across a variety of model likelihoods', supporting the range limb, and each plotted point averages 5 sentences of similar likelihood. §4.1 confirms the same qualified pool of 146 AMT workers.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1452": {
+   "index": 1452,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"when aligned on entropy, sample quality between all autoregressive decoding algorithms\" (§4.2)",
+   "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact; the sentence completes with the samples being comparable across a wide range. The divergence limb is the next sentence, which states that algorithms' sample quality diverges only when entropy is low. Twenty decoding algorithm-hyperparameter configurations confirmed in Section 4.2, matching modelEra.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1453": {
+   "index": 1453,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"nucleus sampling outperforms top-k, which in turn outperforms temperature sampling\" (§4.2)",
+   "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Claim supplied no quote, so verbatim grading does not apply; the page states the ordering in almost these words, scoped to 'this regime' - the low-entropy regime named in the preceding sentence. Quality is the human pairwise preference score of §4.1 (workers rate five samples per prompt), supporting the 'human quality ratings' limb.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1454": {
+   "index": 1454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"over 38,000 ratings on almost 10,000 samples\" (§1)",
+   "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact in §1. §4.2 restates it with the 'paired' qualifier the claim uses: 'workers rate nearly 10,000 samples resulting in over 38,000 paired ratings.' Both limbs supported.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
+  },
+  "1455": {
+   "index": 1455,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"are on par with each other\" (Figure 1 caption)",
+   "note": "Raw PDF arxiv.org/pdf/2009.07243v1. Quote exact. Figure 1 is explicitly the human evaluation panel ('Human evaluation (y-axis: quality, x-axis: diversity)'), so the 'human quality-diversity evaluation' limb holds; §1 names the three algorithms (top-k, nucleus, tempered) as performing on par in the Q-D trade-off 'as shown in Figure 1', and the Conclusion repeats it. §5.1 compares them by both automatic and human evaluation. 602 crowdworkers and the Gigaword/Wikitext-103 GPT2-small setup confirmed.",
+   "fromFile": "verdicts-ai-i1441-1455.json"
   }
  }
 }

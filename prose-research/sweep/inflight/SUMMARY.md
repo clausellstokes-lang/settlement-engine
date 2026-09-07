@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:41:17 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:47:18 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -40,10 +40,14 @@
 | ai | verifier | i1255-1257 | failed | 0 | — | verdict file absent | 03:45:46 |
 | ai | verifier | i1262-1326 | result | 8 | — | verdict file WRITTEN | 04:38:48 |
 | ai | verifier | i1335-1378 | result | 11 | — | verdict file WRITTEN | 04:38:32 |
-| ai | verifier | i1383-1414 | in-flight | 9 | — | verdict file absent | 04:41:13 |
+| ai | verifier | i1383-1414 | result | 9 | — | verdict file WRITTEN | 04:44:04 |
 | ai | verifier | i1415-1425 | result | 2 | — | verdict file WRITTEN | 04:40:05 |
-| ai | verifier | i1426-1440 | in-flight | 1 | — | verdict file absent | 04:41:12 |
-| ai | verifier | i1441-1455 | in-flight | 1 | — | verdict file absent | 04:41:13 |
+| ai | verifier | i1426-1440 | result | 4 | — | verdict file WRITTEN | 04:44:20 |
+| ai | verifier | i1441-1455 | result | 7 | — | verdict file WRITTEN | 04:45:37 |
+| ai | verifier | i1456-1470 | in-flight | 1 | — | verdict file absent | 04:47:16 |
+| ai | verifier | i1471-1485 | in-flight | 1 | — | verdict file absent | 04:47:18 |
+| ai | verifier | i1486-1500 | in-flight | 1 | — | verdict file absent | 04:47:00 |
+| ai | verifier | i1501-1515 | in-flight | 5 | — | verdict file absent | 04:47:05 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
@@ -59,7 +63,7 @@
 | dnd | finder | place-srd-measure | result | 14 | — | 58 claims, complete=True @23:50:21 | 03:18:23 |
 | dnd | regrade | regrade-r10 | result | 0 | — | — | 04:08:15 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
-| dnd | synth |  | in-flight | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:37:09 |
+| dnd | synth |  | in-flight | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:47:01 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i1007-1021 | result | 2 | — | verdict file WRITTEN | 03:45:27 |
@@ -104,24 +108,6 @@
 | kay | verifier | i920-969 | result | 12 | — | verdict file WRITTEN | 23:36:40 |
 | kay | verifier | i973-991 | result | 8 | — | verdict file WRITTEN | 23:36:54 |
 | kay | verifier | i992-1005 | result | 13 | — | verdict file WRITTEN | 23:37:58 |
-| leguin | critic |  | result | 15 | critic-leguin.md | — | 22:59:38 |
-| leguin | regrade | regrade-r8 | result | 0 | — | — | 22:16:04 |
-| leguin | synth |  | result | 0 | section-leguin.md | — | 22:44:25 |
-| leguin | verifier | i385-415 | result | 8 | — | verdict file WRITTEN | 21:47:40 |
-| leguin | verifier | i385-415 | in-flight | 8 | — | verdict file WRITTEN | 21:31:03 |
-| leguin | verifier | i416-475 | result | 13 | — | verdict file WRITTEN | 21:46:59 |
-| leguin | verifier | i416-475 | in-flight | 11 | — | verdict file WRITTEN | 21:31:03 |
-| leguin | verifier | i477-528 | result | 8 | — | verdict file WRITTEN | 21:47:18 |
-| leguin | verifier | i477-528 | in-flight | 8 | — | verdict file WRITTEN | 21:31:03 |
-| leguin | verifier | i531-560 | result | 11 | — | verdict file WRITTEN | 21:49:35 |
-| leguin | verifier | i531-560 | in-flight | 13 | — | verdict file WRITTEN | 21:31:03 |
-| leguin | verifier | i573-627 | result | 38 | — | verdict file WRITTEN | 22:00:40 |
-| leguin | verifier | i628-708 | result | 17 | — | verdict file WRITTEN | 21:58:54 |
-| leguin | verifier | i709-759 | result | 10 | — | verdict file WRITTEN | 21:54:34 |
-| leguin | verifier | i763-807 | result | 5 | — | verdict file WRITTEN | 21:53:48 |
-| leguin | verifier | i808-842 | result | 2 | — | verdict file WRITTEN | 22:03:27 |
-| leguin | verifier | i843-885 | result | 7 | — | verdict file WRITTEN | 22:04:49 |
-| leguin | verifier | i889-923 | result | 8 | — | verdict file WRITTEN | 22:04:42 |
 | martin | critic |  | result | 34 | critic-martin.md | — | 02:31:58 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 02:10:22 |
 | wolfe | finder | close-continued | result | 41 | — | 93 claims, complete=True @21:09:26 | 23:31:55 |
