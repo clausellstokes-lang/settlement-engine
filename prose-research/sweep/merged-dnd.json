@@ -22457,6 +22457,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
   },
+  "1056": {
+   "index": 1056,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as a reporter for the Lake Geneva Regional News",
+   "note": "Live mopop.org fetched 200 (raw HTML, curl, browser UA). Inductee bio body: begins career as reporter there, then Beloit Daily News as sports editor and then state editor, 'before joining TSR in 1979'. Every limb supported. Page header confirms 'Kim Mohan | SFFHOF Inductee', 'Induction Year 2025'.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
   "1057": {
    "index": 1057,
    "verdict": "SKIPPED_TRIAGE",
@@ -22547,6 +22554,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
+  },
+  "1070": {
+   "index": 1070,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "issues like structure, plot, playability, how things would fit",
+   "note": "Live expositionbreak.com fetched 200 (raw HTML). In Ray Vallese's answer to the question on what an RPG editor does: his job was editing the words and game stats but also considering larger issues of that list, plus fitting in the layout. All limbs supported; attribution to Vallese correct.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
+  "1071": {
+   "index": 1071,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The other primary Planescape editor of that era was Michele",
+   "note": "Same raw page, same fetch. Parenthetical inside Ray Vallese's answer on how roles were decided; continues 'Carter, who deserves just as much credit as any of us.' Named by Vallese, as claimed.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
   },
   "1072": {
    "index": 1072,
@@ -22751,6 +22772,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
   },
+  "1101": {
+   "index": 1101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a rough average for a single encounter's word count",
+   "note": "PDF fetched 200 and text-extracted with pdftotext -layout (6 pages). Quote is the parenthetical in the APPENDIX II bullet telling writers to multiply encounter count by 500. Section matches. Nuance not contradicting the claim: the same bullet adds that higher-level encounter areas run wordier, averaging 750 or 1,000.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
+  "1102": {
+   "index": 1102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sidebars in your adventure to a minimum, and to no",
+   "note": "Same PDF text. APPENDIX II bullet: keep the number of sidebars to a minimum and to no more than 300 words in length. Both limbs (the 300-word cap and the minimise instruction) supported in one sentence. Later sections repeat the 300-word cap for the Scaling and Adapting sidebars.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
   "1103": {
    "index": 1103,
    "verdict": "SKIPPED_TRIAGE",
@@ -22765,6 +22800,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
   },
+  "1105": {
+   "index": 1105,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "write a 25-word personal bio",
+   "note": "Same PDF text. Section 'The Manuscript', numbered rule 4, exactly as cited: at the end of your manuscript write it, with the parenthetical restricting it to adventure and backdrop manuscript submissions. All limbs supported; page calls it a personal bio, and Appendix II has a matching mandatory Author Bio section.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
   "1106": {
    "index": 1106,
    "verdict": "SKIPPED_TRIAGE",
@@ -22778,6 +22820,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
+  },
+  "1108": {
+   "index": 1108,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A full page of text in Dragon contains about 750 words.",
+   "note": "Live paizo.com/writersguidelines/dragon.html fetched 200 (raw HTML). Sentence stands alone under the 'Format and Style' heading, exactly as cited. Eleven words, within the twelve-word cap.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
   },
   "1109": {
    "index": 1109,
@@ -22806,6 +22855,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
+  },
+  "1113": {
+   "index": 1113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Absolutist statements are, instead, editorial nightmares.",
+   "note": "Live chrisssims.wordpress.com fetched 200 (raw HTML). Closing sentence of a paragraph under 'Superlatives or Absolutisms'; the same paragraph supplies the causal limb, saying that in a shared universe of fiction or game design an absolute statement paints further creation into a corner.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
+  "1114": {
+   "index": 1114,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I call this problem the “flat-culture issue.”",
+   "note": "Same raw page. Under the 'Generalizations' heading; the preceding clause names the problem as homogeny among imaginary people, and the next sentences credit Eberron's sophisticated takes but say it fails to escape the flat-culture issue with much of its reimagining. Every limb supported.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
   },
   "1115": {
    "index": 1115,
@@ -22870,6 +22933,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
   },
+  "1124": {
+   "index": 1124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The cant is mostly absent",
+   "note": "Live mimir.net fetched 200 (raw HTML). Perkins's answer on how the product is written: Warriors of Heaven is a core AD&D product not embracing most Planescape products' narrative style; the quoted clause continues that he slipped the occasional 'basher' and 'leatherhead' past the editors. Both limbs supported.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
+  },
   "1125": {
    "index": 1125,
    "verdict": "SKIPPED_TRIAGE",
@@ -22904,6 +22974,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r10.json"
+  },
+  "1130": {
+   "index": 1130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an editor took over and managed everything about the manuscript",
+   "note": "Live grognardia.blogspot.com fetched 200 (raw HTML). Winter's answer to question 4 on editing at TSR: the designer wrote the original manuscript, then this, 'from that point on' with the parenthetical listing additional development, editing, layout, ordering art and maps, proofreading and typefitting. Every limb supported.",
+   "fromFile": "verdicts-dnd-i1056-1130.json"
   },
   "1131": {
    "index": 1131,

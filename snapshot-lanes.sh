@@ -4,7 +4,10 @@
 # (chair, 2026-09-06 14:40, owner: "record all of the progress in each lane — I'm going to switch accounts").
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine
-SESS=${CHAIR_SESSION:-df942c1b-a1a2-4594-ba90-9241ff864ccd}
+# 09-06 23:57 (session 405b5e7e): the chair session is SELF-DETECTED — the session dir owning the most recently created workflow run dir
+# (a new agent file bumps the run dir's mtime); CHAIR_SESSION overrides; the last chair's id is the fallback. A hardcoded id went stale at every switch.
+SESS=${CHAIR_SESSION:-$(ls -td /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/*/subagents/workflows/wf_*/ 2>/dev/null | head -1 | awk -F/ '{print $(NF-3)}')}
+[ -z "$SESS" ] && SESS=405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074
 O=$SC/LANE-STATUS.md; T=$O.tmp
 {
 echo "# LANE-STATUS — written $(date '+%Y-%m-%d %H:%M:%S') by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)"

@@ -1,5 +1,5 @@
 {
- "_doc": "2026-09-06 23:52 (chair Fable 5.1, session 405b5e7e, after the 23:45 death of df942c1b — the evening's SECOND account switch): dnd r9 + ai r9 DIED with df942c1b (agents failing from ~23:22; the files were the checkpoint: dnd's 4 found + 12 verdict files, ai's 6 found files). Rebuilt as r10 by resume-research.sh (resume-research-2350.log; dnd 1 chunk/11 claims, ai 14 chunks/201 claims + 1 angle re-run), embedded by mk-embedded.py (literal==file, node --check OK), LAUNCHED 23:52 as the two research slots (owner 17:40). || PREVIOUS _doc: 2026-09-06 21:14 (chair Fable 5.1, session df942c1b, after the 20:44 ACCOUNT SWITCH; the old session cc123b6c lived to ~21:03 and is dead): wolfe/dnd/martin/ai REBUILT by resume-research.sh (resume-research-2110.log) as r8 = the TAILS ONLY (no chunks, no angles; wolfe+dnd synth+critic, martin+ai critic-only) and embedded by mk-embedded.py; wolfe r8 + dnd r8 LAUNCHED 21:12 (the two research slots, owner 17:40); martin r8 and ai r8 are BUILT-BUT-UNLAUNCHED (recorded here with runId '' so the resume script's next tag advances past them — see memory a-built-but-unlaunched-args-file-is-clobbered-by-the-resume-script). A NEW session cannot resume a runId; the files are the checkpoint. || PREVIOUS _doc: the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
+ "_doc": "2026-09-06 21:14 (chair Fable 5.1, session df942c1b, after the 20:44 ACCOUNT SWITCH; the old session cc123b6c lived to ~21:03 and is dead): wolfe/dnd/martin/ai REBUILT by resume-research.sh (resume-research-2110.log) as r8 = the TAILS ONLY (no chunks, no angles; wolfe+dnd synth+critic, martin+ai critic-only) and embedded by mk-embedded.py; wolfe r8 + dnd r8 LAUNCHED 21:12 (the two research slots, owner 17:40); martin r8 and ai r8 are BUILT-BUT-UNLAUNCHED (recorded here with runId '' so the resume script's next tag advances past them — see memory a-built-but-unlaunched-args-file-is-clobbered-by-the-resume-script). A NEW session cannot resume a runId; the files are the checkpoint. || PREVIOUS _doc: the LAST launch of every sweep. 2026-09-06 17:31 (chair Fable 5.1, session cc123b6c, after the 15:46 session-limit death of 059d4243): all seven rebuilt by resume-research.sh (kay's two rescue chunks added by hand, step 3) and launched at 17:29 as EMBEDDED scripts (sweep/embedded/*.js: the v3 script with `let A = <args JSON>` spliced in by prose-research/mk-embedded.py — byte-exact, hashes included, no paste; launch = Workflow({scriptPath})). OWNER ~17:30: 'do each research only one at a time. pause all others' → six runs STOPPED at ~17:30 (~3 min in), hobb kept. Resume a paused run by Workflow({scriptPath: <its script>, resumeFromRunId: <its runId>}) when the running one COMPLETES (the task notification); its files are the checkpoint either way. Order (chair, vetoable): hobb → leguin → kay → wolfe → dnd → martin → ai. TAG LAW unchanged: a tag is a LAUNCH COUNTER; these launches complete the r6/r7 rounds (kay r8, leguin r8, others r7); tolkien STOPPED (nothingToRun). Within the single running sweep the cap stays 4 (the args' cap; the owner may lower it).",
  "tolkien": {
   "runId": "(none — nothingToRun 17:26)",
   "argsFile": "args-tolkien-r7.json",
@@ -60,51 +60,34 @@
   "dryCheck": "18:40: no baseline (prev null); dry-check.py counted 0 features — the hobb section is written as numbered RULES, not features; kit nit: dry-check's feature regex does not read rule headings"
  },
  "dnd": {
-  "runId": "wf_4bd76597-3a3",
-  "argsFile": "args-dnd-r10.json",
-  "tag": "r10",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r10.js",
-  "status": "RUNNING since 23:52 (session 405b5e7e) — r10 = the r9 PLACE round's TAIL (no new FIND round; all four place-* found files complete): verify 1 chunk / 11 claims (90 SKIPPED_TRIAGE in verdicts-dnd-triage-r10.json), regrade (the R9 notes, verbatim from r9), synth (the R9 PLACE synthesis notes), critic",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r10.js",
+  "runId": "wf_37af3c74-8c8",
+  "argsFile": "args-dnd-r9.json",
+  "tag": "r9",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r9.js",
+  "status": "RUNNING since 22:53 (session df942c1b) — r9 THE PLACE ROUND (owner GO 23:55): four extra angles (5e gazetteers · DMG settlements · SRD place measure · editorial staff) → verify → regrade → synth → critic",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js",
   "prev": {
-   "runId": "wf_37af3c74-8c8",
-   "argsFile": "args-dnd-r9.json",
-   "tag": "r9",
-   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r9.js",
-   "status": "DIED with session df942c1b (the 23:45 account switch; its agents began failing ~23:22 as the window closed) — the four PLACE finders COMPLETE (61/68/95/58 claims, folded in-run: claims 872→1153), 12 verifier chunks i872–i1051 on disk (23:30–23:43), the 4-chunk batch at 1052+ FAILED, no regrade/synth/critic. Files were the checkpoint; rebuilt as r10.",
-   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r7.js",
-   "prev": {
-    "runId": "wf_3d71f708-fe3",
-    "tag": "r7",
-    "status": "PAUSED ~17:30 — 5th (synth + critic)"
-   },
-   "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated)."
+   "runId": "wf_3d71f708-fe3",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 5th (synth + critic)"
   },
+  "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated).",
   "prev_r8": {
    "runId": "wf_f191dac2-82a",
    "status": "COMPLETE 22:10 (r8 = the r7 launch rebuilt: synth 21:46 section-dnd.md 127,898 B, 50 bold-numbered features; critic-dnd.md 24,659 B, r1 critic preserved as critic-dnd.r1.md). ⚠ THE CRITIC STILL NAMES THE PLACE HOLE (the S-BOUND condition for dnd's ONE targeted FIND round — owner-gated): the 5e settlement gazetteers (Ten-Towns, Baldur's Gate, Vallaki, Sigil, SCAG: 0 hits), 2014 DMG ch. 5 Settlement"
-  },
-  "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated)."
+  }
  },
  "ai": {
-  "runId": "wf_0eb229cc-f75",
-  "argsFile": "args-ai-r10.json",
-  "tag": "r10",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r10.js",
-  "status": "RUNNING since 23:52 (session 405b5e7e) — r10 = the r9 ARCHIVAL round's TAIL (same FIND round): re-run arch-decoding-literature (found file complete=false; 88 claims folded; angleHints list its 30 fetched URLs), verify 14 chunks / 201 claims (285 SKIPPED_TRIAGE in verdicts-ai-triage-r10.json), regrade (R9 notes verbatim), synth (R9 ARCHIVAL synthesis), critic",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r10.js",
+  "runId": "wf_00551368-b67",
+  "argsFile": "args-ai-r9.json",
+  "tag": "r9",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r9.js",
+  "status": "RUNNING since 22:57 (session df942c1b) — r9 THE ARCHIVAL ROUND (owner GO 22:48): six extra angles (worldbuilding communities · gazetteer/travel/local history · biographical record · historical fact measured · decoding literature · second tell catalogue) → verify → regrade → synth → critic",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js",
   "prev": {
-   "runId": "wf_00551368-b67",
-   "argsFile": "args-ai-r9.json",
-   "tag": "r9",
-   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--ai-r9.js",
-   "status": "DIED with session df942c1b (the 23:45 account switch) — six ARCHIVAL finders wrote found files (23:08–23:45; arch-decoding-literature complete=false with 88 claims, its finder killed mid-run), NO verifier chunk completed, no regrade/synth/critic. Rebuilt as r10 (claims 940→1426 by assemble).",
-   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--ai-r7.js",
-   "prev": {
-    "runId": "wf_b15831a8-df4",
-    "tag": "r7",
-    "status": "PAUSED ~17:30 — 7th (critic only, skipSynth)"
-   }
+   "runId": "wf_b15831a8-df4",
+   "tag": "r7",
+   "status": "PAUSED ~17:30 — 7th (critic only, skipSynth)"
   },
   "prev_r8": {
    "runId": "wf_d3face35-f20",
@@ -120,10 +103,10 @@
    "ai"
   ],
   "running": [
-   "dnd-r10 wf_4bd76597-3a3 (session 405b5e7e, 23:52)",
-   "ai-r10 wf_0eb229cc-f75 (session 405b5e7e, 23:52)"
+   "dnd-r9 (DIES at the switch)",
+   "ai-r9 (DIES at the switch)"
   ],
-  "resume": "session 405b5e7e (23:52): the two r10 runIds above resume ONLY in that session (Workflow({scriptPath, resumeFromRunId})); a NEW session rebuilds: CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai → r11 args → cd prose-research && python3 mk-embedded.py sweep/args-<n>-r11.json → Workflow({scriptPath}) ×2, then update this file. Both r10 runs are TAILS of the owner-GO'd r9 targeted rounds, not new FIND rounds (S-BOUND: dnd/ai have NO round after these). || keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
+  "resume": "keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
   "done": [
    "hobb",
    "leguin",
@@ -137,7 +120,10 @@
   "open_decision": "DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting",
-  "next": "when BOTH r10 runs COMPLETE (task notifications): dry-check each; then S10b = Workflow({scriptPath: $SC/prose-research/exemplar-best-parts-workflow.js}) (reads the FINAL dnd/ai sections; cap 2 inside; takes a research slot); then S12 under the owner's three conditions (allocate never average · evidence resets the weights · the two targeted rounds done). HORIZON-B6 runs beside them as the ONE implementation lane (laneB6 @ 4243bdc61).",
+  "next": [
+   "S10b exemplar-best-parts after BOTH rounds complete (their sections change)",
+   "S12"
+  ],
   "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first."
  },
  "_fiveauthor": {
