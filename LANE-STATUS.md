@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 12:40:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 12:46:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = c5722e98a §911.1: the owner rules the three §911 rows — the stress test accepted at ≈ 4.0–4.
 
@@ -137,11 +137,8 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = c5722e98a §911.1: the owner
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
-## WORKFLOW RUNS of chair session 8de5f153-f375-48fb-803c-ec578a273a4a (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_7afed34c-ef0: 14 journal lines, 7 agents
-- wf_8b507f28-6e0: 32 journal lines, 16 agents
-- wf_a4deb4b0-511: 14 journal lines, 7 agents
-- wf_bdebda48-278: 9 journal lines, 6 agents
+## WORKFLOW RUNS of chair session ba7d05af-b267-4316-ba6a-74e30f8621c7 (journal lines; a run dies with the session — the FILES above are the checkpoint)
+- wf_ac19b0bb-ff0: 3 journal lines, 3 agents
 
 ## PROCESSES: 54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.06 3.10 2.76
+load: 2.13 2.49 2.58

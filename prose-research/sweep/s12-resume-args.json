@@ -433,6 +433,89 @@
     "absenceRule": "(see file)",
     "openQuestions": [],
     "allocation": "(see file; cached from wf_8b507f28-6e0)"
+   },
+   "chronicle-line": {
+    "register": "chronicle-line",
+    "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/reconcile-chronicle-line.md",
+    "rules": [
+     {
+      "id": "CL-1",
+      "strength": "STRONG",
+      "sourceCount": 19,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-2",
+      "strength": "STRONG",
+      "sourceCount": 39,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-3",
+      "strength": "STRONG",
+      "sourceCount": 39,
+      "changesShippedSurface": false
+     },
+     {
+      "id": "CL-4",
+      "strength": "STRONG",
+      "sourceCount": 56,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-5",
+      "strength": "STRONG",
+      "sourceCount": 58,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-6",
+      "strength": "STRONG",
+      "sourceCount": 58,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-7",
+      "strength": "STRONG",
+      "sourceCount": 54,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-8",
+      "strength": "STRONG",
+      "sourceCount": 29,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-9",
+      "strength": "STRONG",
+      "sourceCount": 52,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-10",
+      "strength": "STRONG",
+      "sourceCount": 38,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-11",
+      "strength": "STRONG",
+      "sourceCount": 46,
+      "changesShippedSurface": true
+     },
+     {
+      "id": "CL-12",
+      "strength": "STRONG",
+      "sourceCount": 54,
+      "changesShippedSurface": false
+     }
+    ],
+    "refusedTechniques": [],
+    "conflicts": [],
+    "absenceRule": "(see file)",
+    "openQuestions": [],
+    "allocation": "(see file; cached from wf_8b507f28-6e0)"
    }
   },
   "refute": {

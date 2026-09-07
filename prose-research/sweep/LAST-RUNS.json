@@ -154,28 +154,36 @@
   "status": "COMPLETE 09:38 (launched 07:55 on the owner's STOP): nine extracts (404 items) + the fold → sweep/EXEMPLAR-BEST-PARTS.md (86,609 bytes: 52 techniques T1–T52 in nine families; shortlists dossier-archivist 13 · herald-pools 10 · chronicle-line 9 · dm-page 7 · chrome 7 · compendium-docent 8; 22 conflicts (10 open); 35 faults checked; 33 owner questions Q1–Q33)"
  },
  "_S12": {
-  "runId": "wf_8b507f28-6e0",
-  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.split-1120.js",
-  "session": "8de5f153-f375-48fb-803c-ec578a273a4a",
-  "args": {
-   "drafts": {
-    "dossier-archivist": true,
-    "herald-pools": true,
-    "npc-ladder": true
-   }
-  },
-  "status": "RUNNING since 2026-09-07 11:21 on the SEAT SPLIT (owner ~11:15: Fable = manager/architect/judgment, Opus = implementer/verifier): six reconcilers + two specs + fold on Fable 5.1 (session model), six refuters + hunter + critic on Opus. The all-Opus run wf_bdebda48-278 was STOPPED 11:19 after its three Opus refuters returned (npc 21/24, dossier 19/21, herald 16/16 refuted); those three Opus reconciliations and refutations are DRAFTS at sweep/*.opus-draft.md that the Fable reconciler judges rule by rule. If THIS session dies: relaunch the same script with the same args (the sweep/ files are the checkpoint; any completed reconcile-<key>.md can be cached via a further args.cached edit as the 11:00 resume did).",
+  "runId": "wf_ac19b0bb-ff0",
+  "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.resume-v2.js",
+  "session": "ba7d05af-b267-4316-ba6a-74e30f8621c7",
+  "argsFile": "sweep/s12-resume-args.json",
+  "status": "RELAUNCHED 2026-09-07 12:45 (session ba7d05af, Fable chair) after wf_8b507f28-6e0 died with session 8de5f153 at ~12:36. Cached from that journal: reconcile x5 (dossier-archivist 25, herald-pools 12, npc-ladder 12, chrome-and-compendium 15, chronicle-line 12) + refute x3 (dossier 14/25, herald 13/13, npc 13/19 refuted). RE-RUN LIVE: the dm-page reconciler (its 12:36 file was a killed agent's CLAIM — backed up as reconcile-dm-page.run1-partial-1236.bak.md), the chrome/chronicle/dm-page refuters, then Structure (hunt Opus, grammar Fable, clerk Fable) -> Critique (Opus) -> Fold (Fable). OWNER 12:40: everything else PAUSED until the reconciliation has fully passed.",
   "previous": {
-   "runId": "wf_bdebda48-278",
-   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.resume-1100.js",
+   "runId": "wf_8b507f28-6e0",
+   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.split-1120.js",
    "session": "8de5f153-f375-48fb-803c-ec578a273a4a",
-   "status": "RELAUNCHED 2026-09-07 10:58 (session 8de5f153) after wf_33d10449-ec8 died with session b43943b4 ~10:27 with 3/6 reconcilers returned; args.cached = the three (dossier-archivist, herald-pools, npc-ladder) from the dead journal; refuters re-run; every agent Opus",
+   "args": {
+    "drafts": {
+     "dossier-archivist": true,
+     "herald-pools": true,
+     "npc-ladder": true
+    }
+   },
+   "status": "RUNNING since 2026-09-07 11:21 on the SEAT SPLIT (owner ~11:15: Fable = manager/architect/judgment, Opus = implementer/verifier): six reconcilers + two specs + fold on Fable 5.1 (session model), six refuters + hunter + critic on Opus. The all-Opus run wf_bdebda48-278 was STOPPED 11:19 after its three Opus refuters returned (npc 21/24, dossier 19/21, herald 16/16 refuted); those three Opus reconciliations and refutations are DRAFTS at sweep/*.opus-draft.md that the Fable reconciler judges rule by rule. If THIS session dies: relaunch the same script with the same args (the sweep/ files are the checkpoint; any completed reconcile-<key>.md can be cached via a further args.cached edit as the 11:00 resume did).",
    "previous": {
-    "runId": "wf_33d10449-ec8",
-    "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.js",
-    "status": "STOPPED 09:53 (wf_7cdbb8bf-177, three Fable reconcilers ten minutes in) on the OWNER's 09:50 word: every agent OPUS, 'Seat: Opus 5 — Fable-unvalidated' on every file, the Fable chair retrovalidates. Workflow switched (reconciliation-workflow.js; the Fable-seat version kept as reconciliation-workflow.fable-seat.bak.js). RELAUNCHED as wf_33d10449-ec8 (every agent Opus) at 09:54."
-   }
+    "runId": "wf_bdebda48-278",
+    "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.resume-1100.js",
+    "session": "8de5f153-f375-48fb-803c-ec578a273a4a",
+    "status": "RELAUNCHED 2026-09-07 10:58 (session 8de5f153) after wf_33d10449-ec8 died with session b43943b4 ~10:27 with 3/6 reconcilers returned; args.cached = the three (dossier-archivist, herald-pools, npc-ladder) from the dead journal; refuters re-run; every agent Opus",
+    "previous": {
+     "runId": "wf_33d10449-ec8",
+     "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/reconciliation-workflow.js",
+     "status": "STOPPED 09:53 (wf_7cdbb8bf-177, three Fable reconcilers ten minutes in) on the OWNER's 09:50 word: every agent OPUS, 'Seat: Opus 5 — Fable-unvalidated' on every file, the Fable chair retrovalidates. Workflow switched (reconciliation-workflow.js; the Fable-seat version kept as reconciliation-workflow.fable-seat.bak.js). RELAUNCHED as wf_33d10449-ec8 (every agent Opus) at 09:54."
+    }
+   },
+   "resume": "A NEW session: python3 $SC/prose-research/mk-s12-resume.py → Workflow({scriptPath: reconciliation-workflow.resume-v2.js, args: sweep/s12-resume-args.json as a JSON object}). Cutoff prep 2026-09-07 12:28: batch 1 (3 reconcile + 3 refute) complete on disk; batch 2 running."
   },
-  "resume": "A NEW session: python3 $SC/prose-research/mk-s12-resume.py → Workflow({scriptPath: reconciliation-workflow.resume-v2.js, args: sweep/s12-resume-args.json as a JSON object}). Cutoff prep 2026-09-07 12:28: batch 1 (3 reconcile + 3 refute) complete on disk; batch 2 running."
+  "resume": "A NEW session: python3 $SC/prose-research/mk-s12-resume.py -> Workflow({scriptPath: reconciliation-workflow.resume-v2.js, args: sweep/s12-resume-args.json as a JSON object}). Every finished stage with its file on disk + the right seat line is cached; the rest re-run."
  }
 }
