@@ -256,14 +256,40 @@ export const TRIPWIRES = Object.freeze([
   // writes `rules: runA.simulationRules` into its subsystem block
   // (`whole-world-soak.mjs:1050-1052`), so this is a field that exists, not one hoped for.
   //
-  // ⛔ AND THE FOURTH DESIGNED ROW IS NOT HERE. `capacity_envelope_30y` would key on
-  // `behavioral.yearly[29].motion.populationMoved / populationTransitions`, and MEASURED at
-  // this tip that field does not exist: the yearly observation carries `majorEventCount`,
-  // `eventTypeCounts` and `moverCounts` and no `motion` block at all. Writing it is a
-  // receipt SCHEMA change, which is persistence shape and not a lane's act, and building the
-  // row over an absent field would mint an instrument that is NOT-EXECUTABLE forever while
-  // looking like coverage. The property itself is NOT lost: it is measured in the
-  // unconditional chain by `tests/domain/demographicsEnvelope.test.js`'s STATE MOTION arm.
+  // ⛔ AND THE FOURTH DESIGNED ROW IS STILL NOT HERE — BUT NOT FOR THE REASON THIS COMMENT
+  // USED TO GIVE, WHICH WAS FALSE WHEN IT WAS WRITTEN (§907 car 3, re-measured).
+  //
+  // It said `behavioral.yearly[].motion` "does not exist… no `motion` block at all". IT
+  // EXISTS. `scripts/audit/behavioral-observation.mjs:1016-1023` writes
+  // `motion: { populationTransitions, populationMoved, prosperityTransitions,
+  // prosperityMoved, powerTransitions, powerMoved }` on EVERY yearly row, and has since
+  // `37459391a` (2026-07-28) — five weeks before C3 landed (`d02c5acde`, 2026-09-03). The
+  // real 300-year receipt carries it: `behavioral.yearly[29].motion` is
+  // `{ populationTransitions: 4, populationMoved: 3, … }`. The refusal's stated MECHANISM
+  // was wrong; the row is refused now on a different ground, and this one is measured.
+  //
+  // ⛔ THE GROUND IS THE THRESHOLD'S HOME, NOT THE FIELD. The row's band is the envelope
+  // suite's own STATE MOTION bar — `MOVING_SHARE_FLOOR = 0.05` over transitions counted at
+  // `MOTION_FLOOR_01 = 0.0025` — and its ONE home today is
+  // `tests/domain/demographicsEnvelope.test.js:45,:47`, a test file this directory must not
+  // import. Re-typing `0.05` here would be a SECOND SPELLING of one envelope, which is the
+  // five-homes defect this registry's own header refuses in its fourth paragraph; the
+  // motion floor is already spelled twice (`behavioral-observation.mjs:957` inline and the
+  // suite's constant) and a third would make it worse. ARMING THE ROW IS THEREFORE ONE ACT
+  // AWAY AND THE ACT IS THE CHAIR'S: lift `MOVING_SHARE_FLOOR` (and, while there, the motion
+  // floor) into `scripts/audit/soakInvariants.mjs` beside `LIVENESS_FLOOR`, then import it
+  // here as `YEARLY_BYTES_PER_SETTLEMENT_CEILING` and `WALL_TIME_TREND` already are.
+  //
+  // ⭐ AND WHAT THE ROW WOULD SAY IS MEASURED RATHER THAN GUESSED, so the chair is not
+  // asked to arm an instrument blind. Run against the real 300-year receipt at the
+  // envelope's own bar it is SILENT, and explainably so from the receipt's own figures:
+  // over the customer horizon the population term moved 110 of 120 settlement-year
+  // transitions (share 0.9167); at year 30 exactly, 3 of 4 (0.75); across all 300 years,
+  // 0.8992, with NO year at zero and NO year below the 0.05 bar. That agrees in shape with
+  // the envelope suite's own 170 of 180 (0.9444) on a different fixture.
+  //
+  // The property is measured meanwhile in the unconditional chain, by
+  // `tests/domain/demographicsEnvelope.test.js`'s STATE MOTION arm.
   Object.freeze({
     id: 'capacity_plateau',
     class: 'deterministic',
@@ -462,10 +488,12 @@ export function evaluateTripwires(receipt) {
 /**
  * ═══ THE REACHABILITY WALKER — THE CLASS, NOT THE INSTANCE ═══════════════════════════
  *
- * ⛔⛔ THREE ROWS, ONE DEFECT, AND ONLY ONE OF THEM WAS EVER CAUGHT BY HAND.
- * `capacity_envelope_30y` was REFUSED at C3 for keying on a field the writer did not write.
- * Its two siblings shipped with the identical defect on the identical reading and were not
- * checked the same way, because the check was a person remembering rather than a machine.
+ * ⛔⛔ TWO ROWS SHIPPED BLIND AND A THIRD WAS REFUSED ON A MECHANISM THAT WAS ITSELF WRONG.
+ * `capacity_envelope_30y` was REFUSED at C3 for keying on a field the writer "did not
+ * write" — and the field was there all along (see the C3 block above). Its two siblings
+ * shipped keyed on fields that genuinely are not written, and nothing caught them, because
+ * the check was a person remembering rather than a machine. A guess about reachability was
+ * wrong in BOTH directions in the same landing, which is the whole argument for measuring it.
  * These three functions are that check as machinery: what each row READS off the receipt,
  * read from the row's own source; what the writer WRITES, read from the writer's own source;
  * and the difference, which is the set of rows that can never fire on anything.

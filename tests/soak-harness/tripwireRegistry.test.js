@@ -75,16 +75,26 @@ describe('the tripwire registry', () => {
     // they land in the same place for the same reason: after the deterministic rows that
     // preceded them and before both host-observability rows.
     //
-    // ⚠ THREE, NOT THE DESIGNED FOUR, AND THE MISSING ONE IS RECORDED RATHER THAN QUIETLY
-    // DROPPED. `capacity_envelope_30y` would key on
-    // `behavioral.yearly[29].motion.populationMoved / populationTransitions`; MEASURED at
-    // this tip no such field is written — the yearly observation carries `majorEventCount`,
-    // `eventTypeCounts` and `moverCounts` and no `motion` block. Adding it is a receipt
-    // SCHEMA change, and a row over an absent field is an instrument that is NOT-EXECUTABLE
-    // forever while presenting as coverage. The property is measured instead in the
-    // unconditional chain, by demographicsEnvelope.test.js's STATE MOTION arm.
+    // ⚠ THREE, NOT THE DESIGNED FOUR — AND THE RECORDED REASON WAS FALSE, RE-MEASURED AT
+    // §907 car 3. `capacity_envelope_30y` keys on
+    // `behavioral.yearly[29].motion.populationMoved / populationTransitions`, and the claim
+    // that "no such field is written" was wrong when it was made: the block has been on
+    // every yearly row since `37459391a` (2026-07-28), five weeks before C3 landed, and the
+    // real 300-year receipt carries it. The row stays out for a DIFFERENT and measured
+    // reason — its bar (`MOVING_SHARE_FLOOR = 0.05`) has its one home in a test file the
+    // registry may not import, and re-typing it in `tripwires.mjs` would be the second
+    // spelling that file's own header refuses. Armed at that bar it would be SILENT on the
+    // real receipt (110 of 120 transitions moved inside the customer horizon, 0.9167; 3 of 4
+    // at year 30; no year below the bar in 300). Lifting the constant into
+    // `scripts/audit/soakInvariants.mjs` is the chair's act and the roster then goes 11 → 12
+    // and 9 → 10, which is the design's own §2.5 C3 prediction.
     expect(deterministic.length).toBe(9);
     expect(observability.length).toBe(2);
+
+    // ⛔ AND THE FALSE CLAIM CANNOT BE RE-MADE BY READING THIS FILE. The writer is text-read
+    // here so "no `motion` block at all" is refuted by the tree rather than by memory.
+    const observer = readFileSync(join(ROOT, 'scripts/audit/behavioral-observation.mjs'), 'utf8');
+    expect(observer).toMatch(/motion: \{\s*\n\s*populationTransitions,\s*\n\s*populationMoved,/);
   });
 
   it('no DETERMINISTIC row reads a clock or the heap, and the scan really convicts', () => {
@@ -355,9 +365,10 @@ describe('the tripwire registry', () => {
 
   it('NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only', () => {
     /**
-     * ⛔⛔ THREE ROWS, ONE DEFECT, ONE CAUGHT BY HAND. `capacity_envelope_30y` was refused at
-     * C3 for keying on an unwritten field; `capacity_plateau` and `capacity_floor_thaw`
-     * shipped with the identical defect on the identical reading, and nothing checked them,
+     * ⛔⛔ A GUESS ABOUT REACHABILITY WAS WRONG IN BOTH DIRECTIONS IN ONE LANDING.
+     * `capacity_envelope_30y` was refused at C3 for keying on an "unwritten" field that was
+     * in fact written five weeks earlier; `capacity_plateau` and `capacity_floor_thaw`
+     * shipped keyed on fields that genuinely are not written, and nothing checked them,
      * because the check was a person remembering. This arm is that check as machinery: what
      * each row reads, from the row's own source; what the writer writes, from the writer's
      * own source; and the difference.
