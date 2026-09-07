@@ -15,7 +15,7 @@ echo
 echo "product claude/composite-r4 = $(git -C $REPO rev-parse --short claude/composite-r4) · ledger = $(git -C $REPO log -1 --format='%h %s' review-fixes-2026-07-08 | cut -c1-100)"
 echo
 echo "## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)"
-for pair in "laneLUIMAT:dd5f13218:receipt-l-ui-mat.md:L-UI-MAT" "laneLDEFAULT:fd36f0298:receipt-l-default.md:L-DEFAULT(landed §903)"; do
+for pair in "laneB6:4243bdc61:receipt-cap-trip-907.md:CAP-TRIP-907(§907 charter; lands on a chair gate → §908)" "laneLUIMAT:dd5f13218:receipt-l-ui-mat.md:L-UI-MAT(landed §904)" "laneLDEFAULT:fd36f0298:receipt-l-default.md:L-DEFAULT(landed §903)"; do
   d=${pair%%:*}; rest=${pair#*:}; base=${rest%%:*}; rest=${rest#*:}; rec=${rest%%:*}; name=${rest#*:}
   D=$SC/$d; [ -d "$D" ] || { echo "- $name: dock $d ABSENT"; continue; }
   echo "- **$name** dock \`$d\` HEAD $(git -C $D rev-parse --short HEAD) · $(git -C $D rev-list --count $base..HEAD 2>/dev/null) cars over $base · porcelain $(git -C $D status --porcelain -uall | wc -l | tr -d ' ') · last commits:"
@@ -23,7 +23,7 @@ for pair in "laneLUIMAT:dd5f13218:receipt-l-ui-mat.md:L-UI-MAT" "laneLDEFAULT:fd
   [ "$(git -C $D status --porcelain -uall | wc -l | tr -d ' ')" != "0" ] && { echo "    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):"; git -C $D status --porcelain -uall | head -12 | sed 's/^/      /'; }
   if [ -f "$SC/$rec" ]; then echo "    receipt \`$rec\` (mtime $(stat -f '%Sm' -t '%m-%d %H:%M' $SC/$rec)) head:"; head -14 "$SC/$rec" | cut -c1-220 | sed 's/^/      | /'; else echo "    receipt $rec: NOT WRITTEN YET"; fi
 done
-for rec in receipt-s12a-checkpair.md:S12A-CHECKPAIR receipt-r15-tail.md:R15-TAIL; do f=${rec%%:*}; n=${rec#*:}
+for rec in "receipt-horizon-b6.md:HORIZON-B6 (COMPLETE, landed §907)" receipt-s12a-checkpair.md:S12A-CHECKPAIR receipt-r15-tail.md:R15-TAIL; do f=${rec%%:*}; n=${rec#*:}
   if [ -f "$SC/$f" ]; then echo "- **$n** (kit/read-only lane) receipt \`$f\` (mtime $(stat -f '%Sm' -t '%m-%d %H:%M' $SC/$f)) head:"; head -14 "$SC/$f" | cut -c1-220 | sed 's/^/      | /'; else echo "- **$n**: receipt $f NOT WRITTEN YET"; fi; done
 echo "- R15-TAIL checkpoint: $( [ -f $SC/prose-research/sweep/R15-tail-classification.json ] && python3 -c "import json;d=json.load(open('$SC/prose-research/sweep/R15-tail-classification.json'));print('rows',len(d.get('rows',[])),'files',len(d.get('perFile',{})),'complete',d.get('complete'))" 2>/dev/null || echo 'no JSON yet')"
 echo "- S12A: check-pair.v1.mjs $( [ -f $SC/prose-research/check-pair.v1.mjs ] && echo present || echo absent ); check-pair.mjs mtime $(stat -f '%Sm' -t '%m-%d %H:%M' $SC/prose-research/check-pair.mjs)"

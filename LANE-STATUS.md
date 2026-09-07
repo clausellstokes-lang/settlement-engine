@@ -1,9 +1,24 @@
-# LANE-STATUS — written 2026-09-07 00:53:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 00:58:55 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lighting tail's three follow-on cars land as one consist — the mobileSingleCh
+product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **L-UI-MAT** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 4243bdc61 · 0 cars over 4243bdc61 · porcelain 1 · last commits:
+    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
+       M scripts/soak/tripwires.mjs
+    receipt `receipt-cap-trip-907.md` (mtime 09-07 00:52) head:
+      | # RECEIPT — LANE CAP-TRIP-907 (Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1, session 405b5e7e)
+      | 
+      | STATUS: PARTIAL (arrival only)
+      | 
+      | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026
+      | - HEAD == `4243bdc610fe5b380f1d0029973cf9088bae1631` — CONFIRMED (`git rev-parse HEAD`)
+      | - `git status --porcelain | wc -l` == `0` — CONFIRMED
+      | - `ls -A node_modules | wc -l` == `455` — the two extras over 453 are the Vitest cache dirs `.vite` and `.vite-temp` (plus `.bin`, which is part of the 453). Listing of dot-entries: `.bin`, `.vite`, `.vite-temp`. ACCEP
+      | 
+      | ## CARS
+      | (pending)
+- **L-UI-MAT(landed §904)** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
     6582958ce Register (capsule car): the base-state capsule regenerates at the §904 tip (rung 18 still; no OSR movement at this landing)
     56ac834ad Register (last car): the census totals re-freeze at the composed tip — totalTests 31970 -> 31970, totalFiles 2489 unchanged, entries 3
     35638df4b §904 L-UI-MAT landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
@@ -43,6 +58,21 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
       | | 1d | Lived-experience preset census 3 → 4 | **A second red hunk 1 CAUSED**: a literal three-preset roster for `traditionsEnabled`. | **LANDED** | `6ff3249b9` |
       | | 2 | O-1 birth form (lit successor id) | Mints a **PUBLIC, PERSISTED** preset identifier. Brief supplies neither id nor label. | ⛔ **REFUSED — owner-gated** | — |
       | | 3 | Class B into lit successors | Requires hunk 2's id. | ⛔ **REFUSED — gated on 2** | — |
+- **HORIZON-B6 (COMPLETE, landed §907)** (kit/read-only lane) receipt `receipt-horizon-b6.md` (mtime 09-07 00:42) head:
+      | # RECEIPT — LANE HORIZON-B6 (the three CAPACITY evidence measurements)
+      | 
+      | STATUS: **COMPLETE** — all three measurements executed. 2026-09-07 00:38:24 EDT.
+      | 
+      | **HEADLINE, in one line each:**
+      | - **M1** the 300-year LIT curve **CURES the runaway** (`runawayCount` 0, `bifurcated` 0) but **does
+      |   NOT plateau** (`other` x4; the realm is still gaining 26 %/50 y at the horizon) and **fires one
+      |   deterministic tripwire** (`capacity_realm_load` 0.4787). The register cell is **REFUSED by its own
+      |   door**. Wall clock **25m43s, not ~2.3 h**.
+      | - **M2** the reading suite is a **356 ms** item — the design's PLAUSIBLE placeholder is discharged.
+      | - **M3** the envelope suite is **1.14 s** against a 60 s bar — **52.6x margin**, STOP S1 not tripped.
+      | - **Two instrument findings and one stale-comment finding** are recorded below; the first
+      |   (**M1-F1**) is load-bearing for the tuning signature and is the most important thing in this file.
+      | 
 - **S12A-CHECKPAIR** (kit/read-only lane) receipt `receipt-s12a-checkpair.md` (mtime 09-06 14:34) head:
       | # RECEIPT — lane S12A-CHECKPAIR (the two checker gaps + the crosscheck label)
       | ⟦Chair: Fable 5.1 · Lane: Opus 5 (S12A-CHECKPAIR) · KIT-ONLY — no repo change, no dock change, no commit · 2026-09-06⟧
@@ -95,7 +125,7 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
 - **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-06 22:09
-- **ai**: claims 1516 · verdicts 1516 (todo 0) · kept 1036 · partial 168 · verdict files 82 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
+- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1037 · partial 169 · verdict files 83 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -103,8 +133,8 @@ product claude/composite-r4 = 4243bdc61 · ledger = bb9f90997 §906: the lightin
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r10/wf_4bd76597-3a3, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_0eb229cc-f75: 43 journal lines, 22 agents
+- wf_0eb229cc-f75: 45 journal lines, 23 agents
 - wf_4bd76597-3a3: 7 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.54 2.21 2.48
+load: 2.25 2.12 2.34

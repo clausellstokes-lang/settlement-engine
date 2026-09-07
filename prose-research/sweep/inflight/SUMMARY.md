@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:53:19 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 00:59:21 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,6 +11,7 @@
 | ai | finder | arch-historical-fact-measured | result | 22 | — | 69 claims, complete=True @23:50:23 | 03:16:09 |
 | ai | finder | arch-second-tell-catalogue | failed | 51 | — | 80 claims, complete=True @23:45:42 | 03:45:43 |
 | ai | finder | arch-worldbuilding-communities | result | 62 | — | 66 claims, complete=True @23:50:23 | 03:23:02 |
+| ai | regrade | regrade-r10 | in-flight | 0 | — | — | 04:59:16 |
 | ai | regrade | regrade-r9 | failed | 0 | — | — | 03:45:46 |
 | ai | synth |  | failed | 0 | — | — | 03:45:47 |
 | ai | verifier | i1000-1014 | failed | 0 | — | verdict file absent | 03:45:44 |
@@ -48,7 +49,7 @@
 | ai | verifier | i1471-1485 | result | 6 | — | verdict file WRITTEN | 04:52:16 |
 | ai | verifier | i1486-1500 | result | 8 | — | verdict file WRITTEN | 04:52:13 |
 | ai | verifier | i1501-1515 | result | 9 | — | verdict file WRITTEN | 04:52:07 |
-| ai | verifier | i1516-1517 | in-flight | 1 | — | verdict file absent | 04:53:07 |
+| ai | verifier | i1516-1517 | result | 1 | verdicts-ai-i1516-1517.json | verdict file WRITTEN | 04:53:46 |
 | ai | verifier | i940-954 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i940-961 | result | 6 | — | verdict file WRITTEN | 04:22:23 |
 | ai | verifier | i955-969 | failed | 0 | — | verdict file absent | 03:45:43 |
@@ -56,7 +57,7 @@
 | ai | verifier | i970-984 | failed | 0 | — | verdict file absent | 03:45:43 |
 | ai | verifier | i985-1004 | result | 7 | verdicts-ai-i985-1004.json | verdict file WRITTEN | 04:26:43 |
 | ai | verifier | i985-999 | failed | 0 | — | verdict file absent | 03:45:43 |
-| dnd | critic |  | in-flight | 0 | — | — | 04:53:15 |
+| dnd | critic |  | in-flight | 0 | — | — | 04:56:05 |
 | dnd | critic |  | failed | 0 | — | — | 03:45:30 |
 | dnd | critic |  | result | 0 | critic-dnd.md | — | 02:10:32 |
 | dnd | finder | place-5e-gazetteers | result | 44 | — | 61 claims, complete=True @23:50:21 | 03:11:50 |

@@ -22015,5 +22015,28 @@
    "note": "Quote verbatim in the abstract, continuing '...when relevant context cannot be retrieved'. Section 4.2 supplies the numbers (newline tokens attended 9.9x uniform expectation under natural prompts vs 3.1x under ICL) and the Discussion names 'punctuation or syntactic markers'. Important adjacent finding the claim does not distort but a reader should know: causal tests (adding, removing, reweighting newlines) produced zero change, so the attention pattern co-occurs with repetition rather than causing it.",
    "fromFile": "verdicts-ai-i1501-1515.json"
   }
+ },
+ {
+  "index": 1517,
+  "feature": "other: repetition loop mechanism",
+  "claim": "Mahaut and Franzon conclude that both uncertainty and over-reliance on context can drive a model into repetition, and that the two accounts describe concurrent mechanisms rather than rivals.",
+  "source": "Mahaut, Franzon, arXiv:2504.01100v2 (2025)",
+  "url": "https://arxiv.org/abs/2504.01100",
+  "quote": "overreliance on context can lead to repetition, each",
+  "page": "Section 5 Confidence, closing paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-11-04",
+  "routeHint": "arxiv PDF -> pdftotext -layout",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "Pythia 1.4B, 2025; register measured: natural text and in-context prompts",
+  "verdict": {
+   "index": 1517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"both uncertainty and overreliance on context can lead to repetition\"",
+   "note": "Raw PDF (arXiv v2, 4 Nov 2025) via pdftotext -layout. Closing paragraph of Sec. 5 Confidence reads that these findings put together previous accounts, suggesting both uncertainty and overreliance on context can lead to repetition, each reflecting concurring mechanisms in repetition generation. The claim's supplied quote appears word for word; both limbs supported — the two causes, and 'concurring mechanisms' for concurrent-rather-than-rival.",
+   "fromFile": "verdicts-ai-i1516-1517.json"
+  }
  }
 ]

@@ -20132,6 +20132,38 @@
    "registerHint": "none",
    "confidence": "high",
    "modelEra": "Pythia 1.4B, 2025; register measured: natural text prompts"
+  },
+  {
+   "index": 1516,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Mahaut and Franzon measure that as a repeated context lengthens over more cycles the next-token entropy falls and the probability of the repeated tokens rises.",
+   "source": "Mahaut, Franzon, arXiv:2504.01100v2 (2025)",
+   "url": "https://arxiv.org/abs/2504.01100",
+   "quote": "contexts, encompassing more cycles, correlate with",
+   "page": "Section 5 Confidence; Figure 5; Section 6",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2025-11-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Pythia 1.4B, 1000-token greedy generations, 2025; register measured: natural text and in-context prompts"
+  },
+  {
+   "index": 1517,
+   "feature": "other: repetition loop mechanism",
+   "claim": "Mahaut and Franzon conclude that both uncertainty and over-reliance on context can drive a model into repetition, and that the two accounts describe concurrent mechanisms rather than rivals.",
+   "source": "Mahaut, Franzon, arXiv:2504.01100v2 (2025)",
+   "url": "https://arxiv.org/abs/2504.01100",
+   "quote": "overreliance on context can lead to repetition, each",
+   "page": "Section 5 Confidence, closing paragraph",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2025-11-04",
+   "routeHint": "arxiv PDF -> pdftotext -layout",
+   "registerHint": "none",
+   "confidence": "high",
+   "modelEra": "Pythia 1.4B, 2025; register measured: natural text and in-context prompts"
   }
  ],
  "verdicts": {
@@ -30912,6 +30944,21 @@
    "trueWording": "natural repetition focuses disproportionately on low-information tokens, suggesting a fallback behavior",
    "note": "Quote verbatim in the abstract, continuing '...when relevant context cannot be retrieved'. Section 4.2 supplies the numbers (newline tokens attended 9.9x uniform expectation under natural prompts vs 3.1x under ICL) and the Discussion names 'punctuation or syntactic markers'. Important adjacent finding the claim does not distort but a reader should know: causal tests (adding, removing, reweighting newlines) produced zero change, so the attention pattern co-occurs with repetition rather than causing it.",
    "fromFile": "verdicts-ai-i1501-1515.json"
+  },
+  "1516": {
+   "index": 1516,
+   "verdict": "PARTIAL",
+   "trueWording": "Sec. 5: median entropy decreases as cycles increase; probability rise cited",
+   "unsupportedLimb": "that the authors themselves measure rising probability of the repeated tokens — the paper measures entropy only, and attributes the probability rise to prior literature (\"results from the literature reporting increasing probabilities for repetition\", Sec. 3; \"consistent with previous findings\" prefaces the quoted Discussion sentence)",
+   "note": "Raw PDF reached: https://arxiv.org/pdf/2504.01100v2 downloaded (3.2 MB, 8 pages, banner 'arXiv:2504.01100v2 [cs.CL] 4 Nov 2025'), extracted with pdftotext -layout. The quoted fragment is verbatim, in the Discussion (Sec. 6) sentence about longer repeating contexts correlating with lower entropy and higher repetitive-token probabilities. Entropy limb is the authors' own measurement (Sec. 5 / Fig. 5, entropy of the next-token distribution over the first four cycles of 1000-token greedy generations), with a caveat the claim drops: the decrease is a median trend, faster for ICL, while some natural-dataset outliers stay above entropy 6 at cycle 4 and slightly increase. No probability measurement appears anywhere in the paper (grep over full text: every probability-rise mention is a citation to prior work).",
+   "fromFile": "verdicts-ai-i1516-1517.json"
+  },
+  "1517": {
+   "index": 1517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"both uncertainty and overreliance on context can lead to repetition\"",
+   "note": "Raw PDF (arXiv v2, 4 Nov 2025) via pdftotext -layout. Closing paragraph of Sec. 5 Confidence reads that these findings put together previous accounts, suggesting both uncertainty and overreliance on context can lead to repetition, each reflecting concurring mechanisms in repetition generation. The claim's supplied quote appears word for word; both limbs supported — the two causes, and 'concurring mechanisms' for concurrent-rather-than-rival.",
+   "fromFile": "verdicts-ai-i1516-1517.json"
   }
  }
 }
