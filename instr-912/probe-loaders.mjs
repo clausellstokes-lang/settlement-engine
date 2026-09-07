@@ -1,0 +1,16 @@
+import * as C from '../laneINSTR/tests/helpers/dossierCorpus.js';
+const r1 = await C.loadStateLeaves();
+const r2 = await C.loadCausalLeaf();
+const annexRaw = C.loadStateAnnex();
+const { joined, unjoined, leafLines } = C.joinAnnexToLeaves(annexRaw, r1);
+const r5 = await C.loadCrierVoice();
+const fd = C.loadInFunctionNarratives();
+const sent = t => t.split(/(?<=[.?!])\s+(?=[A-Z"'(])/).filter(Boolean).length;
+console.log('R1 variants', r1.length, '| pools', new Set(r1.map(e=>e.poolId)).size, '| blocks', new Set(r1.map(e=>e.block)).size);
+console.log('R2 variants', r2.length, '| pools', new Set(r2.map(e=>e.poolId)).size);
+console.log('annex rows', annexRaw.length, '| joined', joined.length, '| unjoined', unjoined.length, '| leaf lines mapped', leafLines.size);
+console.log('R5 lines', r5.length, '| sentences', r5.reduce((a,e)=>a+sent(e.text),0), '| distinct texts', new Set(r5.map(e=>e.text)).size, '| pools', new Set(r5.map(e=>e.poolId)).size);
+console.log('factionDynamics narratives', fd.length);
+const b1 = joined.find(e=>e.line===5233); console.log('annex:5233 ->', b1 ? `${b1.block} :: ${b1.pool} [${b1.angle}|${b1.marks}] ${b1.text.slice(0,50)}` : 'NOT JOINED');
+const b2 = r5.find(e=>e.text.includes('every household is counted')); console.log('newsVoice hit ->', b2 ? `${b2.id} line ${b2.line}` : 'NOT FOUND');
+console.log('unjoined sample:', unjoined.slice(0,4).map(e=>`${e.id} ${e.block} ${e.text.slice(0,40)}`).join(' | '));

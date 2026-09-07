@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 18:55:45 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 19:01:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = 21df569ab §912.5: the owner commissions the whole rewrite on all the surfaces and the dossier — t
 
@@ -141,4 +141,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 21df569ab §912.5: the owner
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.50 2.80 2.55
+load: 3.79 3.07 2.73
