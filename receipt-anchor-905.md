@@ -66,3 +66,31 @@ I may not cure it: the baseline file's own `_doc` says *"⛔ NEVER HAND-EDIT THE
 The brief lists `totalTests 31970 → 31971` among the registers. The arithmetic is right but the consequence is not: `scripts/check-test-ratchet.mjs:1330-1331` and `:1350-1351` compare against `Math.floor(baseline.totalX * SCOPE_FLOOR_RATIO)` with `SCOPE_FLOOR_RATIO = 0.9` (`:124`) — these are **collapse floors, not exact pins**. 31971 sits far above `floor(31970 × 0.9) = 28773`. And `tests/lint/testRatchet.test.js` is a **static shape pin over the baseline JSON** (key identity, attribution, magnitude well-formedness, `npm run check` wiring) that reads no live count at all. ⇒ the test ratchet **stays green and needs no register act**; the frozen figure is merely one stale-low inside a 10% band, refreshed on the next regeneration.
 
 **Golden-freeze register, checked rather than assumed.** `tests/fixtures/.golden-freeze-register.json` does name `negativeAssertionAnchor.walker.test.js`, but only inside `excludedEnvSpellings` — `UPDATE_EPISTEMIC_ALLOWLIST` is *excluded* from the roster as "an allowlist of epistemically-weak assertion shapes, shrink-only by its own walker. Not a world fingerprint." I add and remove no env spelling, so that entry is untouched and no golden-freeze pin covers my edit.
+
+---
+
+## The car as written (test files only; ZERO `src/` bytes)
+
+**`tests/lib/flags.test.js`** — one import added, the legacy case re-anchored, one new case:
+- `import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';`
+- `loadingJourneySetBg` case: bare `expect(FLAGS).not.toHaveProperty(…)` → `expectAbsentWithAnchor(Object.keys(FLAGS), 'loadingJourneySetBg', 'loadingJourneyFilm', …)`
+- NEW: `it('does not expose the retired single-chrome mobile nav toggle', …)` → `expectAbsentWithAnchor(Object.keys(FLAGS), 'mobileSingleChrome', 'workshopNav', …)`, with one comment line naming `89ff7b03b` and `8bf493d05`.
+- Measured after the edit: **0** walker-countable `not.(toContain|toMatch|toHaveProperty)(` sites remain (was 1); `it(` 10 → **11**; `describe(` **3, unchanged**.
+
+**`tests/lint/negativeAssertionAnchor.walker.test.js`** — the row `'tests/lib/flags.test.js': 1,` at `:620` is **DELETED** (per P2's three citations + `renderLiteral`), banking the burn-down win in the same commit.
+
+No new test file. No `src/` change. Nothing else.
+
+### Ordering choice (the brief's P2 note asked me to declare it)
+I made the edit, then **parked it in scratch and restored the dock to pristine** (`cp` from a pre-edit backup, verified byte-for-byte with `cmp`; porcelain back to 0 — never `git checkout --`, never `git show HEAD:… >`). This buys the honest **three-state** proof the brief's negative control only asked two states of:
+1. **PRE-EDIT baseline** — pristine tree, row at 1 → walker must be **GREEN**, proving the row is a true reading and not already stale.
+2. **NEGATIVE CONTROL** — anchored tree, row still at 1 → walker must be **RED** on `inventory honesty` (`actual 0 < ceiling 1`), proving the anchor is actually recognised by the scanner rather than merely believed to be.
+3. **FINAL** — anchored tree, row deleted → walker must be **GREEN**.
+State 2 needs no deliberate un-anchoring: it *is* the intermediate state, so the control is the real thing rather than a mock-up of it.
+
+Backups (for `cmp` verification of every restore): `$SC/anchor905-scratch/flags.test.js.PRISTINE` sha256 `ff7908ae…`, `$SC/anchor905-scratch/flags.test.js.ANCHORED` sha256 `51cfff08…`, `$SC/anchor905-scratch/walker.test.js.PRISTINE` sha256 `5817164b…`.
+
+**No `src/` bytes moved ⇒ NO typecheck run is owed** (`npm run typecheck:domain:strict` and the full typecheck are untouched by a test-only car).
+
+### Status at the hold
+Reading, measuring, predictions and the edit are all complete. Dock porcelain **0**, edit parked in scratch. Now polling `$SC/HOLD-VITEST` on a 60 s `sleep` loop; no vitest and no build has run.

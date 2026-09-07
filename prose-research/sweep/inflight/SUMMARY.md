@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:36:29 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 21:42:32 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -9,7 +9,7 @@
 | dnd | regrade | regrade-r6 | result | 0 | — | — | 19:13:50 |
 | dnd | synth |  | failed | 0 | secA.md, secB.md, secC.md | — | 19:46:03 |
 | dnd | synth |  | in-flight | 0 | — | — | 21:31:03 |
-| dnd | synth |  | in-flight | 0 | section-dnd.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:36:19 |
+| dnd | synth |  | in-flight | 0 | section-dnd.md, section-dnd.part2.md, section-dnd.part3.md, section-dnd.part4.md | — | 01:42:31 |
 | dnd | verifier | i724-795 | result | 12 | — | verdict file WRITTEN | 19:00:26 |
 | dnd | verifier | i796-842 | result | 10 | — | verdict file WRITTEN | 18:59:33 |
 | dnd | verifier | i843-870 | result | 7 | — | verdict file WRITTEN | 18:58:35 |
@@ -173,7 +173,7 @@
 | wolfe | regrade | regrade-r7 | result | 0 | build-wolfe-r7.mjs | — | 01:03:44 |
 | wolfe | synth |  | failed | 0 | — | — | 19:50:41 |
 | wolfe | synth |  | in-flight | 0 | — | — | 01:04:17 |
-| wolfe | synth |  | in-flight | 0 | — | — | 01:35:48 |
+| wolfe | synth |  | in-flight | 0 | — | — | 01:41:00 |
 | wolfe | verifier | i1008-1022 | result | 6 | — | verdict file WRITTEN | 00:18:08 |
 | wolfe | verifier | i1023-1037 | result | 6 | — | verdict file WRITTEN | 00:17:49 |
 | wolfe | verifier | i1038-1052 | result | 5 | — | verdict file WRITTEN | 00:22:48 |

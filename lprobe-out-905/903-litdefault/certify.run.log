@@ -1,20 +1,20 @@
 TRUE_EXIT_seam=0
   quiet_local            seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
-  realistic_regional     seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
+  realistic_regional     seam HOLDS — soak keys=58 == birth keys=58, values equal, order equal, norm(table)==table
   dramatic_campaign      seam HOLDS — soak keys=56 == birth keys=56, values equal, order equal, norm(table)==table
   static_campaign        seam HOLDS — soak keys=36 == birth keys=36, values equal, order equal, norm(table)==table
   narrative_campaign     seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
   living_realm           seam HOLDS — soak keys=55 == birth keys=55, values equal, order equal, norm(table)==table
   full_simulation        seam HOLDS — soak keys=70 == birth keys=70, values equal, order equal, norm(table)==table
-preset-seam: 7 preset(s), 0 refused -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/seam/preset-seam-report.json
-── step soak_dramatic_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-dramatic_campaign --preset dramatic_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.dramatic_campaign.json --json
+preset-seam: 7 preset(s), 0 refused -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/seam/preset-seam-report.json
+── step soak_dramatic_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-dramatic_campaign --preset dramatic_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.dramatic_campaign.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-dramatic_campaign", dramatic_campaign preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 11.8s — final tick 260 (260 expected)
+  5 years in 12.2s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 2953.25ms · request 2951.527ms · worker handler 2626.078ms
+  cold 3030.598ms · request 3029.805ms · worker handler 2693.233ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -28,7 +28,7 @@ preset-seam: 7 preset(s), 0 refused -> /private/tmp/claude-502/-Users-cstokes-De
   PASS  realm population bounded — 25124 → 39152 (×1.56; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.54MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 2439.0ms → Q4 2377.0ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 2392.0ms → Q4 2343.0ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   262KB 330KB 421KB 491KB 541KB
@@ -56,7 +56,7 @@ preset-seam: 7 preset(s), 0 refused -> /private/tmp/claude-502/-Users-cstokes-De
   PASS  every counted war lands in exactly one duration band — sum 1 === counted 1
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 1 + unclassified 0 === closes 1
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.dramatic_campaign.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.dramatic_campaign.json
 
 {
   "schemaVersion": 5,
@@ -359,14 +359,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     1296743
   ],
   "yearlyMs": [
-    2439,
-    2235,
-    2267,
-    2465,
-    2289
+    2392,
+    2602,
+    2422,
+    2382,
+    2304
   ],
   "finalRealmBytes": 1481597,
-  "structuredCloneMs": 6.666583000000173,
+  "structuredCloneMs": 6.90874999999869,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -408,13 +408,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 1.723,
-      "workerOnlineAfterConstructionStart": 23.116,
-      "productAdapterReadyAfterConstructionStart": 297.428,
-      "coldStartToTerminal": 2953.25,
-      "requestToTerminal": 2951.527,
-      "workerHandlerToTerminalPost": 2626.078,
-      "boundaryAndBootstrapResidual": 325.449
+      "workerConstructor": 0.793,
+      "workerOnlineAfterConstructionStart": 16.491,
+      "productAdapterReadyAfterConstructionStart": 308.112,
+      "coldStartToTerminal": 3030.598,
+      "requestToTerminal": 3029.805,
+      "workerHandlerToTerminalPost": 2693.233,
+      "boundaryAndBootstrapResidual": 336.572
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -425,8 +425,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 326044112,
-  "peakHeapUsedBytes": 319745288,
+  "heapUsedBytes": 317811224,
+  "peakHeapUsedBytes": 311466720,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -3359,9 +3359,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 11803,
-    "replay": 11589,
-    "divergent": 9947
+    "primary": 12212,
+    "replay": 11501,
+    "divergent": 9961
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -3386,7 +3386,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:36:06.232Z",
+  "completedAt": "2026-09-07T01:39:01.054Z",
   "nonFiniteFigures": []
 }
 
@@ -3397,15 +3397,15 @@ TRUE_EXIT_soak_dramatic_campaign=0
   readback ok: dramatic_campaign — receipt.presetId, subsystems.presetId and finalEntries=56 all match the seam
 TRUE_EXIT_readback_dramatic_campaign=0
 TRUE_EXIT_certify_dramatic_campaign=0
-output ok: (b) certification for dramatic_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.dramatic_campaign.json (134790 bytes)
-── step soak_full_simulation: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-full_simulation --preset full_simulation --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.full_simulation.json --json
+output ok: (b) certification for dramatic_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.dramatic_campaign.json (134790 bytes)
+── step soak_full_simulation: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-full_simulation --preset full_simulation --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.full_simulation.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-full_simulation", full_simulation preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 14.8s — final tick 260 (260 expected)
+  5 years in 15.0s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 3998.457ms · request 3997.624ms · worker handler 3678.702ms
+  cold 3960.964ms · request 3960.166ms · worker handler 3636.048ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -3419,7 +3419,7 @@ output ok: (b) certification for dramatic_campaign -> /private/tmp/claude-502/-U
   PASS  realm population bounded — 16718 → 11859 (×0.71; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.71MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 3047.0ms → Q4 2869.5ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 3079.0ms → Q4 2905.5ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   382KB 500KB 581KB 638KB 706KB
@@ -3447,7 +3447,7 @@ output ok: (b) certification for dramatic_campaign -> /private/tmp/claude-502/-U
   PASS  every counted war lands in exactly one duration band — sum 3 === counted 3
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 1 + unclassified 2 === closes 3
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.full_simulation.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.full_simulation.json
 
 {
   "schemaVersion": 5,
@@ -3750,14 +3750,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     1480828
   ],
   "yearlyMs": [
-    3047,
-    3023,
-    2858,
-    2846,
-    2893
+    3079,
+    3145,
+    2816,
+    2877,
+    2934
   ],
   "finalRealmBytes": 1659658,
-  "structuredCloneMs": 8.158457999999882,
+  "structuredCloneMs": 7.377707999999984,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -3799,13 +3799,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.833,
-      "workerOnlineAfterConstructionStart": 16.075,
-      "productAdapterReadyAfterConstructionStart": 292.06,
-      "coldStartToTerminal": 3998.457,
-      "requestToTerminal": 3997.624,
-      "workerHandlerToTerminalPost": 3678.702,
-      "boundaryAndBootstrapResidual": 318.921
+      "workerConstructor": 0.797,
+      "workerOnlineAfterConstructionStart": 15.702,
+      "productAdapterReadyAfterConstructionStart": 296.916,
+      "coldStartToTerminal": 3960.964,
+      "requestToTerminal": 3960.166,
+      "workerHandlerToTerminalPost": 3636.048,
+      "boundaryAndBootstrapResidual": 324.118
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -3816,8 +3816,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 194594264,
-  "peakHeapUsedBytes": 331587312,
+  "heapUsedBytes": 195217296,
+  "peakHeapUsedBytes": 331681456,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -6862,9 +6862,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 14796,
-    "replay": 14365,
-    "divergent": 14024
+    "primary": 14978,
+    "replay": 14621,
+    "divergent": 13141
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -6889,26 +6889,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:36:54.478Z",
+  "completedAt": "2026-09-07T01:39:48.862Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (1): the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_full_simulation=0
-  wall-clock soak_full_simulation = 48s (5y x 4 settlements, 3 runs)
+  wall-clock soak_full_simulation = 47s (5y x 4 settlements, 3 runs)
   readback ok: full_simulation — receipt.presetId, subsystems.presetId and finalEntries=70 all match the seam
 TRUE_EXIT_readback_full_simulation=0
 TRUE_EXIT_certify_full_simulation=0
-output ok: (b) certification for full_simulation -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.full_simulation.json (134738 bytes)
-── step soak_living_realm: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-living_realm --preset living_realm --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.living_realm.json --json
+output ok: (b) certification for full_simulation -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.full_simulation.json (134738 bytes)
+── step soak_living_realm: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-living_realm --preset living_realm --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.living_realm.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-living_realm", living_realm preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 10.6s — final tick 260 (260 expected)
+  5 years in 9.4s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 2569.513ms · request 2568.539ms · worker handler 2252.427ms
+  cold 2579.456ms · request 2578.667ms · worker handler 2244.762ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -6922,7 +6922,7 @@ output ok: (b) certification for full_simulation -> /private/tmp/claude-502/-Use
   PASS  realm population bounded — 22639 → 16345 (×0.72; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.50MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 2013.0ms → Q4 2142.5ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 1819.0ms → Q4 1830.5ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   276KB 344KB 398KB 448KB 496KB
@@ -6950,7 +6950,7 @@ output ok: (b) certification for full_simulation -> /private/tmp/claude-502/-Use
   PASS  every counted war lands in exactly one duration band — sum 0 === counted 0
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 0 + unclassified 0 === closes 0
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.living_realm.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.living_realm.json
 
 {
   "schemaVersion": 5,
@@ -7253,14 +7253,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     1280687
   ],
   "yearlyMs": [
-    2013,
-    2042,
-    2091,
-    2190,
-    2095
+    1819,
+    1848,
+    1923,
+    1837,
+    1824
   ],
   "finalRealmBytes": 1458830,
-  "structuredCloneMs": 7.397000000000844,
+  "structuredCloneMs": 7.117667000000438,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -7302,13 +7302,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.974,
-      "workerOnlineAfterConstructionStart": 17.191,
-      "productAdapterReadyAfterConstructionStart": 288.561,
-      "coldStartToTerminal": 2569.513,
-      "requestToTerminal": 2568.539,
-      "workerHandlerToTerminalPost": 2252.427,
-      "boundaryAndBootstrapResidual": 316.112
+      "workerConstructor": 0.789,
+      "workerOnlineAfterConstructionStart": 15.774,
+      "productAdapterReadyAfterConstructionStart": 304.489,
+      "coldStartToTerminal": 2579.456,
+      "requestToTerminal": 2578.667,
+      "workerHandlerToTerminalPost": 2244.762,
+      "boundaryAndBootstrapResidual": 333.904
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -7319,8 +7319,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 258249208,
-  "peakHeapUsedBytes": 333887888,
+  "heapUsedBytes": 257873704,
+  "peakHeapUsedBytes": 333376496,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -10226,9 +10226,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 10552,
-    "replay": 10062,
-    "divergent": 7605
+    "primary": 9361,
+    "replay": 9086,
+    "divergent": 7212
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -10253,26 +10253,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:37:26.530Z",
+  "completedAt": "2026-09-07T01:40:18.211Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (1): the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_living_realm=0
-  wall-clock soak_living_realm = 32s (5y x 4 settlements, 3 runs)
+  wall-clock soak_living_realm = 29s (5y x 4 settlements, 3 runs)
   readback ok: living_realm — receipt.presetId, subsystems.presetId and finalEntries=55 all match the seam
 TRUE_EXIT_readback_living_realm=0
 TRUE_EXIT_certify_living_realm=0
-output ok: (b) certification for living_realm -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.living_realm.json (134798 bytes)
-── step soak_narrative_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-narrative_campaign --preset narrative_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.narrative_campaign.json --json
+output ok: (b) certification for living_realm -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.living_realm.json (134798 bytes)
+── step soak_narrative_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-narrative_campaign --preset narrative_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.narrative_campaign.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-narrative_campaign", narrative_campaign preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
   5 years in 4.1s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 1406.671ms · request 1405.876ms · worker handler 1091.265ms
+  cold 1388.379ms · request 1387.596ms · worker handler 1074.432ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -10286,7 +10286,7 @@ output ok: (b) certification for living_realm -> /private/tmp/claude-502/-Users-
   PASS  realm population bounded — 21341 → 22050 (×1.03; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.12MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 888.0ms → Q4 781.5ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 869.0ms → Q4 795.0ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   98KB 105KB 110KB 118KB 123KB
@@ -10314,7 +10314,7 @@ output ok: (b) certification for living_realm -> /private/tmp/claude-502/-Users-
   PASS  every counted war lands in exactly one duration band — sum 0 === counted 0
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 0 + unclassified 0 === closes 0
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.narrative_campaign.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.narrative_campaign.json
 
 {
   "schemaVersion": 5,
@@ -10617,14 +10617,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     796013
   ],
   "yearlyMs": [
-    888,
-    785,
-    831,
-    781,
-    782
+    869,
+    792,
+    767,
+    797,
+    793
   ],
   "finalRealmBytes": 854038,
-  "structuredCloneMs": 6.285082999999759,
+  "structuredCloneMs": 6.074500000000626,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -10666,13 +10666,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.796,
-      "workerOnlineAfterConstructionStart": 15.539,
-      "productAdapterReadyAfterConstructionStart": 295.842,
-      "coldStartToTerminal": 1406.671,
-      "requestToTerminal": 1405.876,
-      "workerHandlerToTerminalPost": 1091.265,
-      "boundaryAndBootstrapResidual": 314.61
+      "workerConstructor": 0.783,
+      "workerOnlineAfterConstructionStart": 16.148,
+      "productAdapterReadyAfterConstructionStart": 293.386,
+      "coldStartToTerminal": 1388.379,
+      "requestToTerminal": 1387.596,
+      "workerHandlerToTerminalPost": 1074.432,
+      "boundaryAndBootstrapResidual": 313.164
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -10683,8 +10683,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 235808680,
-  "peakHeapUsedBytes": 296365784,
+  "heapUsedBytes": 236329104,
+  "peakHeapUsedBytes": 296924064,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -12380,9 +12380,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 4117,
-    "replay": 4076,
-    "divergent": 3563
+    "primary": 4069,
+    "replay": 3869,
+    "divergent": 3301
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -12407,26 +12407,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:37:40.747Z",
+  "completedAt": "2026-09-07T01:40:31.882Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (1): the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_narrative_campaign=0
-  wall-clock soak_narrative_campaign = 14s (5y x 4 settlements, 3 runs)
+  wall-clock soak_narrative_campaign = 13s (5y x 4 settlements, 3 runs)
   readback ok: narrative_campaign — receipt.presetId, subsystems.presetId and finalEntries=37 all match the seam
 TRUE_EXIT_readback_narrative_campaign=0
 TRUE_EXIT_certify_narrative_campaign=0
-output ok: (b) certification for narrative_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.narrative_campaign.json (134986 bytes)
-── step soak_quiet_local: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-quiet_local --preset quiet_local --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.quiet_local.json --json
+output ok: (b) certification for narrative_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.narrative_campaign.json (134986 bytes)
+── step soak_quiet_local: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-quiet_local --preset quiet_local --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.quiet_local.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-quiet_local", quiet_local preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 4.9s — final tick 260 (260 expected)
+  5 years in 4.8s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 1702.342ms · request 1701.466ms · worker handler 1370.109ms
+  cold 1638.644ms · request 1637.851ms · worker handler 1323.343ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -12440,7 +12440,7 @@ output ok: (b) certification for narrative_campaign -> /private/tmp/claude-502/-
   PASS  realm population bounded — 33812 → 37271 (×1.10; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.28MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 1129.0ms → Q4 911.0ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 1195.0ms → Q4 861.5ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   141KB 191KB 215KB 244KB 277KB
@@ -12468,7 +12468,7 @@ output ok: (b) certification for narrative_campaign -> /private/tmp/claude-502/-
   PASS  every counted war lands in exactly one duration band — sum 0 === counted 0
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 0 + unclassified 0 === closes 0
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.quiet_local.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.quiet_local.json
 
 {
   "schemaVersion": 5,
@@ -12771,14 +12771,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     946028
   ],
   "yearlyMs": [
-    1129,
-    928,
-    904,
-    903,
-    919
+    1195,
+    916,
+    867,
+    855,
+    868
   ],
   "finalRealmBytes": 1133221,
-  "structuredCloneMs": 8.860750000000735,
+  "structuredCloneMs": 5.159791000000041,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -12820,13 +12820,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.876,
-      "workerOnlineAfterConstructionStart": 16.696,
-      "productAdapterReadyAfterConstructionStart": 311.059,
-      "coldStartToTerminal": 1702.342,
-      "requestToTerminal": 1701.466,
-      "workerHandlerToTerminalPost": 1370.109,
-      "boundaryAndBootstrapResidual": 331.357
+      "workerConstructor": 0.793,
+      "workerOnlineAfterConstructionStart": 16.801,
+      "productAdapterReadyAfterConstructionStart": 293.874,
+      "coldStartToTerminal": 1638.644,
+      "requestToTerminal": 1637.851,
+      "workerHandlerToTerminalPost": 1323.343,
+      "boundaryAndBootstrapResidual": 314.508
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -12837,8 +12837,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 309900360,
-  "peakHeapUsedBytes": 305086576,
+  "heapUsedBytes": 316432656,
+  "peakHeapUsedBytes": 311619040,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -15491,9 +15491,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 4870,
-    "replay": 4604,
-    "divergent": 4013
+    "primary": 4780,
+    "replay": 4550,
+    "divergent": 3783
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -15518,44 +15518,44 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:37:57.063Z",
+  "completedAt": "2026-09-07T01:40:47.740Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (1): the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_quiet_local=0
-  wall-clock soak_quiet_local = 17s (5y x 4 settlements, 3 runs)
+  wall-clock soak_quiet_local = 15s (5y x 4 settlements, 3 runs)
   readback ok: quiet_local — receipt.presetId, subsystems.presetId and finalEntries=37 all match the seam
 TRUE_EXIT_readback_quiet_local=0
 TRUE_EXIT_certify_quiet_local=0
-output ok: (b) certification for quiet_local -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.quiet_local.json (135001 bytes)
-── step soak_realistic_regional: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-realistic_regional --preset realistic_regional --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.realistic_regional.json --json
+output ok: (b) certification for quiet_local -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.quiet_local.json (135001 bytes)
+── step soak_realistic_regional: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-realistic_regional --preset realistic_regional --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.realistic_regional.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-realistic_regional", realistic_regional preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 5.2s — final tick 260 (260 expected)
+  5 years in 9.3s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 1530.07ms · request 1529.264ms · worker handler 1220.68ms
+  cold 2486.492ms · request 2485.664ms · worker handler 2154.447ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
   PASS  tick arithmetic — finalTick 260 == years×52
   PASS  actual isolated Node worker execution — worker thread 1 != main thread 0
-  PASS  isolated worker output equals the direct domain path — ece9053b190b == ece9053b190b
+  PASS  isolated worker output equals the direct domain path — 24f9c770556e == 24f9c770556e
   PASS  isolated worker completed a non-vacuous one-year advance — 52 progress messages; final tick 52/52
   PASS  byte-identical re-run (same seed) — all 5 yearly composite hashes equal
-  PASS  different seeds produce a divergent event-type mix — TV 0.311 (min 0.10); 180.21 shifted event-equivalents (min 2); largest shift faction_institution_capture (0.102); composite hash also differed
+  PASS  different seeds produce a divergent event-type mix — TV 0.285 (min 0.10); 162.16 shifted event-equivalents (min 2); largest shift npc_goal_rebranch (0.069); composite hash also differed
   PASS  every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)
-  PASS  realm population bounded — 20877 → 18006 (×0.86; envelope 0.05–20)
+  PASS  realm population bounded — 20877 → 17582 (×0.84; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
-  PASS  serialized state under the house envelope — max 0.42MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 1034.0ms → Q4 1029.5ms/year
+  PASS  serialized state under the house envelope — max 0.45MB < 3.60MB (4 settlements)
+  PASS  per-year wall-time trend not age-linear — Q1 1650.0ms → Q4 1878.0ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
-  198KB 276KB 343KB 387KB 421KB
-  max 0.42MB · final 0.42MB · 105KB/settlement
+  228KB 279KB 360KB 385KB 454KB
+  max 0.45MB · final 0.45MB · 113KB/settlement
 
 ## stressor rhythm (active stressors at each year end)
   2 0 0 0 0
@@ -15563,10 +15563,10 @@ output ok: (b) certification for quiet_local -> /private/tmp/claude-502/-Users-c
   stressors oscillated across the run (no permanent freeze at this horizon).
 
 ## population trajectory (per settlement, year 1 → 5)
-  soak-a (city): 11774 → 9989 (min 9989, max 12232)
-  soak-b (town): 3985 → 2499 (min 2499, max 3985)
-  soak-c (town): 4676 → 5076 (min 4969, max 5076)
-  soak-d (village): 442 → 442 (min 442, max 442)
+  soak-a (city): 11774 → 10161 (min 10161, max 12232)
+  soak-b (town): 3985 → 2652 (min 2652, max 3985)
+  soak-c (town): 4676 → 4146 (min 4146, max 5105)
+  soak-d (village): 442 → 623 (min 442, max 623)
 
 ## war convergence (WR-9 instrument — envelopes graded by the behavioral oracle, not here)
   counted wars 0 = closed 0 + alive at horizon 0
@@ -15579,7 +15579,7 @@ output ok: (b) certification for quiet_local -> /private/tmp/claude-502/-Users-c
   PASS  every counted war lands in exactly one duration band — sum 0 === counted 0
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 0 + unclassified 0 === closes 0
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.realistic_regional.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.realistic_regional.json
 
 {
   "schemaVersion": 5,
@@ -15604,7 +15604,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "verdict": "PASS",
     "passed": true,
     "instrumentExecutable": true,
-    "smallestSample": 579,
+    "smallestSample": 569,
     "minSampleEvents": 2,
     "notExecutableReason": null,
     "windowYears": 5,
@@ -15616,56 +15616,56 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "minTotalVariationDistance": 0.1,
       "minShiftedEventEquivalents": 2
     },
-    "totalVariationDistance": 0.31124347113733947,
-    "shiftedEventEquivalents": 180.20996978851954,
+    "totalVariationDistance": 0.28499636159207287,
+    "shiftedEventEquivalents": 162.16292974588947,
     "sampleTotals": {
-      "baseline": 579,
-      "divergent": 662
+      "baseline": 569,
+      "divergent": 669
     },
     "distinctTypeTotals": {
-      "baseline": 34,
+      "baseline": 38,
       "divergent": 33
     },
     "topTypeShifts": [
       {
-        "type": "faction_institution_capture",
-        "baselineCount": 145,
-        "comparisonCount": 98,
-        "baselineShare": 0.2504317789291883,
-        "comparisonShare": 0.14803625377643503,
-        "absoluteShareShift": 0.10239552515275324
+        "type": "npc_goal_rebranch",
+        "baselineCount": 54,
+        "comparisonCount": 17,
+        "baselineShare": 0.09490333919156414,
+        "comparisonShare": 0.025411061285500747,
+        "absoluteShareShift": 0.0694922779060634
       },
       {
         "type": "faction_rival_power_contest",
         "baselineCount": 0,
-        "comparisonCount": 43,
+        "comparisonCount": 45,
         "baselineShare": 0,
-        "comparisonShare": 0.0649546827794562,
-        "absoluteShareShift": 0.0649546827794562
-      },
-      {
-        "type": "faction_service_bolster",
-        "baselineCount": 18,
-        "comparisonCount": 59,
-        "baselineShare": 0.031088082901554404,
-        "comparisonShare": 0.0891238670694864,
-        "absoluteShareShift": 0.058035784167931995
+        "comparisonShare": 0.06726457399103139,
+        "absoluteShareShift": 0.06726457399103139
       },
       {
         "type": "npc_bargain",
-        "baselineCount": 44,
-        "comparisonCount": 18,
-        "baselineShare": 0.07599309153713299,
-        "comparisonShare": 0.027190332326283987,
-        "absoluteShareShift": 0.048802759210849006
+        "baselineCount": 52,
+        "comparisonCount": 23,
+        "baselineShare": 0.0913884007029877,
+        "comparisonShare": 0.0343796711509716,
+        "absoluteShareShift": 0.05700872955201611
       },
       {
-        "type": "npc_goal_rebranch",
-        "baselineCount": 35,
-        "comparisonCount": 14,
-        "baselineShare": 0.06044905008635579,
-        "comparisonShare": 0.021148036253776436,
-        "absoluteShareShift": 0.03930101383257935
+        "type": "npc_expose",
+        "baselineCount": 1,
+        "comparisonCount": 33,
+        "baselineShare": 0.0017574692442882249,
+        "comparisonShare": 0.04932735426008968,
+        "absoluteShareShift": 0.04756988501580146
+      },
+      {
+        "type": "faction_service_bolster",
+        "baselineCount": 38,
+        "comparisonCount": 63,
+        "baselineShare": 0.06678383128295255,
+        "comparisonShare": 0.09417040358744394,
+        "absoluteShareShift": 0.02738657230449139
       }
     ],
     "equalWindows": true,
@@ -15826,15 +15826,15 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "decidingTermSampleReason": "warTerminationReads ride the pulse record and collapseIntervalHistory keeps only the year-final tick"
     }
   },
-  "finalHash": "dd1deaf7ff796197fdb07492ccfdc28bd53973197c361ff5c5efb4a61dcf7afd",
+  "finalHash": "fa067000567757b69808ce0d5f1ff0a5aa924d6aa475464290fb5771a58ec596",
   "yearlyHashes": [
-    "7e2a4a5dd8dd0f99bb30ecf552d990cec312f18fb0635e7d290865be0019e86c",
-    "e5c7776e08a1422195253a7d85a4c6b47763b7a3a8bdb103c01612b498d8653d",
-    "f67273b2066a5f37b16f2af8ea7c85a02fc7765b0662f5b7bdf2fb0135b5690d",
-    "4db886436b1d0f4856a1645d096eba9c08988dcae443206c9a60c1697bbeab83",
-    "dd1deaf7ff796197fdb07492ccfdc28bd53973197c361ff5c5efb4a61dcf7afd"
+    "b93290c53c35aeaf16ac7cfeef9716e948dba8374c06df4eeaf1a2e56e0951d7",
+    "ff585146f5b4a8744a64ec27776eb1e17df4c0d7969b1920dfcc337b9757bafb",
+    "7b4ff33c7c99d3994f21ca855bab92ee9bda9dff1444fa8fdd92025763565fdb",
+    "b6e8f43caa4bc3d450e3dcd79a40cc203a75bc285dc203d1b8ff3f944d2455fb",
+    "fa067000567757b69808ce0d5f1ff0a5aa924d6aa475464290fb5771a58ec596"
   ],
-  "directFirstResultSha256": "ece9053b190ba0b5c24c690aeb863885612adf8c9bf5dd2d4a303f92d5349866",
+  "directFirstResultSha256": "24f9c770556e57a8fe882f879ae5c855082385303666cb0b4f231b84d104a67c",
   "advanceEpochs": [
     null,
     null,
@@ -15856,10 +15856,10 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     442
   ],
   "finalPopulations": [
-    9989,
-    2499,
-    5076,
-    442
+    10161,
+    2652,
+    4146,
+    623
   ],
   "finalDiedFlags": [
     false,
@@ -15868,28 +15868,28 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     false
   ],
   "yearlyBytes": [
-    198409,
-    275647,
-    342667,
-    386566,
-    420618
+    228062,
+    278722,
+    360351,
+    384685,
+    453779
   ],
   "yearlyRealmBytes": [
-    889703,
-    984032,
-    1061291,
-    1105062,
-    1140227
+    935702,
+    1040146,
+    1138625,
+    1172974,
+    1245621
   ],
   "yearlyMs": [
-    1034,
-    1080,
-    963,
-    1014,
-    1045
+    1650,
+    1867,
+    1924,
+    1894,
+    1862
   ],
-  "finalRealmBytes": 1330615,
-  "structuredCloneMs": 5.683374999999614,
+  "finalRealmBytes": 1423120,
+  "structuredCloneMs": 7.540750000000116,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -15911,13 +15911,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     },
     "request": {
       "interval": "one_year",
-      "jsonBytes": 642351,
-      "jsonSha256": "1d06c6c201ff111804b054fbd61ef27fc3943dc832fda33013b46277b6d8002b"
+      "jsonBytes": 642922,
+      "jsonSha256": "19a5e08fa491ef11f2ff244a0c926ff3022f89e44b2a5f5ee654563f7860ee5e"
     },
     "response": {
       "status": "complete",
-      "jsonBytes": 5997120,
-      "jsonSha256": "ece9053b190ba0b5c24c690aeb863885612adf8c9bf5dd2d4a303f92d5349866",
+      "jsonBytes": 6085886,
+      "jsonSha256": "24f9c770556e57a8fe882f879ae5c855082385303666cb0b4f231b84d104a67c",
       "progressMessages": 52,
       "firstProgress": {
         "ticksDone": 1,
@@ -15931,13 +15931,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.805,
-      "workerOnlineAfterConstructionStart": 15.117,
-      "productAdapterReadyAfterConstructionStart": 284.333,
-      "coldStartToTerminal": 1530.07,
-      "requestToTerminal": 1529.264,
-      "workerHandlerToTerminalPost": 1220.68,
-      "boundaryAndBootstrapResidual": 308.584
+      "workerConstructor": 0.827,
+      "workerOnlineAfterConstructionStart": 16.618,
+      "productAdapterReadyAfterConstructionStart": 302.997,
+      "coldStartToTerminal": 2486.492,
+      "requestToTerminal": 2485.664,
+      "workerHandlerToTerminalPost": 2154.447,
+      "boundaryAndBootstrapResidual": 331.217
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -15948,35 +15948,56 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 110233712,
-  "peakHeapUsedBytes": 265382032,
+  "heapUsedBytes": 212580472,
+  "peakHeapUsedBytes": 290746920,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
     "kind": "soak_subsystem_configuration",
     "presetId": "realistic_regional",
     "observedYears": 5,
-    "ruleKeysRecorded": 25,
+    "ruleKeysRecorded": 46,
     "rules": {
       "allyDefenseEnabled": false,
+      "allyIntelSharingEnabled": true,
+      "commodityFlowEnabled": true,
+      "constructiveFlowsEnabled": true,
       "defenderAttritionEnabled": false,
       "defenderResolveEnabled": false,
+      "disastersEnabled": true,
+      "distancePricedNewsEnabled": true,
       "emergentEventsEnabled": true,
       "factionCompetitionEnabled": true,
       "faithSpreadEnabled": false,
       "institutionLifecycleEnabled": true,
+      "interventionEnabled": true,
       "majorChangesRequireProposal": true,
       "migrationFlowsEnabled": true,
+      "momentumEnabled": true,
+      "navalEnabled": true,
       "npcAgencyEnabled": true,
+      "npcGrowthEnabled": true,
+      "npcLadderEnabled": true,
+      "peaceEngineEnabled": true,
       "populationDynamicsEnabled": true,
+      "provenanceLedgerEnabled": true,
+      "reframeEnabled": true,
       "relationshipDynamicsEnabled": true,
       "religionDynamicsEnabled": false,
       "resourceDriftEnabled": true,
+      "resourceDynamicsEnabled": true,
+      "roadsEnabled": true,
       "seasonsEnabled": false,
+      "settlementLifecycleEnabled": true,
       "settlementStrategyEnabled": false,
+      "spatialConsequenceEnabled": true,
       "stressorsEnabled": true,
+      "supplyWebWarfareEnabled": true,
       "tierDriftEnabled": true,
       "tradeFlowsEnabled": true,
+      "traditionsEnabled": true,
+      "upswingArcsEnabled": true,
+      "urbanFabricEnabled": true,
       "warDispositionEnabled": false,
       "warEconomyDrainEnabled": false,
       "warForageEnabled": false,
@@ -15997,9 +16018,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         "finalEntries": 1
       },
       "causeLifecycle": {
-        "years": 2,
+        "years": 5,
         "maxEntries": 3,
-        "finalEntries": 1
+        "finalEntries": 3
       },
       "deployments": {
         "years": 5,
@@ -16063,8 +16084,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       "simulationRules": {
         "years": 5,
-        "maxEntries": 37,
-        "finalEntries": 37
+        "maxEntries": 58,
+        "finalEntries": 58
       },
       "spatialCanonVersion": {
         "years": 5,
@@ -16078,18 +16099,98 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       "spatialLedgers": {
         "years": 5,
-        "maxEntries": 2,
-        "finalEntries": 2
+        "maxEntries": 17,
+        "finalEntries": 14
+      },
+      "spatialLedgers.bufferDiscipline": {
+        "years": 1,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "spatialLedgers.commodityStocks": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
       },
       "spatialLedgers.embattlement": {
         "years": 4,
         "maxEntries": 2,
+        "finalEntries": 1
+      },
+      "spatialLedgers.entrepots": {
+        "years": 5,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.generosityWillingness": {
+        "years": 4,
+        "maxEntries": 3,
         "finalEntries": 2
+      },
+      "spatialLedgers.migration": {
+        "years": 1,
+        "maxEntries": 3,
+        "finalEntries": 3
+      },
+      "spatialLedgers.npcGrowth": {
+        "years": 3,
+        "maxEntries": 8,
+        "finalEntries": 8
+      },
+      "spatialLedgers.npcLadder": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.obligations": {
+        "years": 4,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.provenance": {
+        "years": 5,
+        "maxEntries": 49,
+        "finalEntries": 49
+      },
+      "spatialLedgers.refugePostures": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 3
+      },
+      "spatialLedgers.roads": {
+        "years": 5,
+        "maxEntries": 2,
+        "finalEntries": 1
+      },
+      "spatialLedgers.satellites": {
+        "years": 5,
+        "maxEntries": 3,
+        "finalEntries": 3
       },
       "spatialLedgers.supplyShipments": {
         "years": 5,
-        "maxEntries": 7,
-        "finalEntries": 7
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.tradeFlow": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.traditions": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
+      },
+      "spatialLedgers.upswing": {
+        "years": 2,
+        "maxEntries": 1,
+        "finalEntries": 1
+      },
+      "spatialLedgers.urbanFabric": {
+        "years": 5,
+        "maxEntries": 4,
+        "finalEntries": 4
       },
       "stressors": {
         "years": 5,
@@ -16130,34 +16231,34 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "yearly": [
       {
         "year": 1,
-        "eventCount": 181,
+        "eventCount": 184,
         "majorEventCount": 2,
-        "mechanicalOutcomeCount": 265,
+        "mechanicalOutcomeCount": 258,
         "unclassifiedEventCount": 28,
         "eventTypeCounts": {
           "legitimacy_pressure": 3,
           "npc_reform": 6,
           "npc_mobilize": 6,
-          "npc_exploit": 7,
+          "npc_exploit": 6,
           "crime_pressure": 6,
           "rival_sabotage": 10,
           "npc_bargain": 10,
           "stressor_birth_betrayal": 5,
-          "npc_suppress": 16,
+          "npc_suppress": 15,
           "faction_government_challenge": 2,
           "trade_route_disruption": 1,
-          "faction_institution_capture": 25,
+          "faction_institution_capture": 24,
           "faction_institution_suppression": 2,
           "food_pressure": 2,
-          "stressor_residual": 14,
+          "stressor_residual": 16,
           "npc_goal_rebranch": 13,
           "rival_arms_race": 7,
           "neutral_border_incident": 11,
           "resource_depletion": 3,
           "faction_service_bolster": 14,
           "stressor_escalate_betrayal": 1,
-          "stressor_birth_criminal_corridor": 4,
-          "stressor_birth_infiltration": 5,
+          "stressor_birth_criminal_corridor": 6,
+          "stressor_birth_infiltration": 7,
           "stressor_escalate_criminal_corridor": 3,
           "stressor_birth_monster_raider_pressure": 1,
           "stressor_escalate_infiltration": 1,
@@ -16166,26 +16267,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "npc_expose": 1
         },
         "moverCounts": {
-          "pressure": 69,
-          "place": 36,
+          "pressure": 75,
+          "place": 35,
           "population": 0,
           "economy": 1,
           "politics": 19,
           "war": 0,
-          "faith": 2,
-          "people": 61,
-          "constructive": 0,
+          "faith": 14,
+          "people": 73,
+          "constructive": 35,
           "knowledge": 0
         },
         "selectedMoverCounts": {
-          "pressure": 45,
-          "place": 31,
+          "pressure": 51,
+          "place": 30,
           "population": 0,
           "economy": 1,
           "politics": 17,
           "war": 0,
           "faith": 2,
-          "people": 57,
+          "people": 55,
           "constructive": 0,
           "knowledge": 0
         },
@@ -16196,33 +16297,33 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "economy": 0,
           "politics": 2,
           "war": 0,
-          "faith": 0,
-          "people": 4,
-          "constructive": 0,
+          "faith": 12,
+          "people": 18,
+          "constructive": 35,
           "knowledge": 0
         },
-        "postApplyReceiptCount": 35,
+        "postApplyReceiptCount": 96,
         "arcCounts": {
-          "constructive": 4,
+          "constructive": 35,
           "destructive": 0
         },
         "postApplyArcCounts": {
-          "constructive": 4,
+          "constructive": 35,
           "destructive": 0
         },
         "motion": {
           "populationTransitions": 4,
           "populationMoved": 2,
           "prosperityTransitions": 4,
-          "prosperityMoved": 0,
+          "prosperityMoved": 2,
           "powerTransitions": 4,
           "powerMoved": 2
         },
         "attentionCounts": {
-          "soak-d": 25,
+          "soak-d": 24,
           "soak-b": 38,
-          "soak-a": 57,
-          "soak-c": 61
+          "soak-a": 56,
+          "soak-c": 66
         },
         "succession": {
           "pendingProposals": 2,
@@ -16232,9 +16333,11 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "integrityFailureKinds": {}
         },
         "causal": {
-          "crossFamilyEdges": 0,
+          "crossFamilyEdges": 1,
           "multiParentEvents": 0,
-          "familyPairs": []
+          "familyPairs": [
+            "faith->people"
+          ]
         },
         "chronicleSample": [
           {
@@ -16256,7 +16359,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-b"
             ],
-            "severity": 0.5147099527706643,
+            "severity": 0.5078528099135216,
             "parentIds": []
           },
           {
@@ -16329,7 +16432,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         "stateVectors": {
           "soak-a": {
             "population": 12232,
-            "prosperity": 5,
+            "prosperity": 6,
             "topFaction": "Merchant Guild Council",
             "powerEntropy": 0.9722411017551446
           },
@@ -16340,8 +16443,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "powerEntropy": 0.9397083825282471
           },
           "soak-c": {
-            "population": 4969,
-            "prosperity": 5,
+            "population": 4971,
+            "prosperity": 6,
             "topFaction": "Guild Council",
             "powerEntropy": 0.9715006996793791
           },
@@ -16356,24 +16459,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "schemaVersion": 1,
           "kind": "phrase_repetition",
           "windowTicks": 13,
-          "observations": 210,
+          "observations": 292,
           "windows": 19,
-          "exactRepeats": 102,
-          "familyRepeats": 102,
-          "exactRepeatRate": 0.4857,
-          "familyRepeatRate": 0.4857,
-          "untrackedFamilies": 210,
+          "exactRepeats": 149,
+          "familyRepeats": 149,
+          "exactRepeatRate": 0.5103,
+          "familyRepeatRate": 0.5103,
+          "untrackedFamilies": 292,
           "worstWindow": {
             "settlementId": "soak-a",
             "window": 0,
             "startTick": 0,
             "endTick": 12,
-            "observations": 23,
-            "exactRepeats": 17,
-            "familyRepeats": 17,
-            "exactRepeatRate": 0.7391,
-            "familyRepeatRate": 0.7391,
-            "untrackedFamilies": 23
+            "observations": 32,
+            "exactRepeats": 22,
+            "familyRepeats": 22,
+            "exactRepeatRate": 0.6875,
+            "familyRepeatRate": 0.6875,
+            "untrackedFamilies": 32
           },
           "byWindow": [
             {
@@ -16381,48 +16484,48 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 0,
               "startTick": 0,
               "endTick": 12,
-              "observations": 23,
-              "exactRepeats": 17,
-              "familyRepeats": 17,
-              "exactRepeatRate": 0.7391,
-              "familyRepeatRate": 0.7391,
-              "untrackedFamilies": 23
+              "observations": 32,
+              "exactRepeats": 22,
+              "familyRepeats": 22,
+              "exactRepeatRate": 0.6875,
+              "familyRepeatRate": 0.6875,
+              "untrackedFamilies": 32
             },
             {
               "settlementId": "soak-a",
               "window": 1,
               "startTick": 13,
               "endTick": 25,
-              "observations": 8,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.375,
-              "familyRepeatRate": 0.375,
-              "untrackedFamilies": 8
+              "observations": 14,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3571,
+              "familyRepeatRate": 0.3571,
+              "untrackedFamilies": 14
             },
             {
               "settlementId": "soak-a",
               "window": 2,
               "startTick": 26,
               "endTick": 38,
-              "observations": 7,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.5714,
-              "familyRepeatRate": 0.5714,
-              "untrackedFamilies": 7
+              "observations": 13,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.5385,
+              "familyRepeatRate": 0.5385,
+              "untrackedFamilies": 13
             },
             {
               "settlementId": "soak-a",
               "window": 3,
               "startTick": 39,
               "endTick": 51,
-              "observations": 13,
+              "observations": 14,
               "exactRepeats": 6,
               "familyRepeats": 6,
-              "exactRepeatRate": 0.4615,
-              "familyRepeatRate": 0.4615,
-              "untrackedFamilies": 13
+              "exactRepeatRate": 0.4286,
+              "familyRepeatRate": 0.4286,
+              "untrackedFamilies": 14
             },
             {
               "settlementId": "soak-a",
@@ -16441,36 +16544,36 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 0,
               "startTick": 0,
               "endTick": 12,
-              "observations": 19,
-              "exactRepeats": 9,
-              "familyRepeats": 9,
-              "exactRepeatRate": 0.4737,
-              "familyRepeatRate": 0.4737,
-              "untrackedFamilies": 19
+              "observations": 30,
+              "exactRepeats": 17,
+              "familyRepeats": 17,
+              "exactRepeatRate": 0.5667,
+              "familyRepeatRate": 0.5667,
+              "untrackedFamilies": 30
             },
             {
               "settlementId": "soak-b",
               "window": 1,
               "startTick": 13,
               "endTick": 25,
-              "observations": 7,
-              "exactRepeats": 1,
-              "familyRepeats": 1,
-              "exactRepeatRate": 0.1429,
-              "familyRepeatRate": 0.1429,
-              "untrackedFamilies": 7
+              "observations": 14,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 14
             },
             {
               "settlementId": "soak-b",
               "window": 2,
               "startTick": 26,
               "endTick": 38,
-              "observations": 8,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.625,
-              "familyRepeatRate": 0.625,
-              "untrackedFamilies": 8
+              "observations": 15,
+              "exactRepeats": 10,
+              "familyRepeats": 10,
+              "exactRepeatRate": 0.6667,
+              "familyRepeatRate": 0.6667,
+              "untrackedFamilies": 15
             },
             {
               "settlementId": "soak-b",
@@ -16501,51 +16604,99 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 0,
               "startTick": 0,
               "endTick": 12,
-              "observations": 13,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.3846,
-              "familyRepeatRate": 0.3846,
-              "untrackedFamilies": 13
+              "observations": 23,
+              "exactRepeats": 13,
+              "familyRepeats": 13,
+              "exactRepeatRate": 0.5652,
+              "familyRepeatRate": 0.5652,
+              "untrackedFamilies": 23
             },
             {
               "settlementId": "soak-c",
               "window": 1,
               "startTick": 13,
               "endTick": 25,
-              "observations": 12,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.4167,
-              "familyRepeatRate": 0.4167,
-              "untrackedFamilies": 12
+              "observations": 14,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4286,
+              "familyRepeatRate": 0.4286,
+              "untrackedFamilies": 14
             },
             {
               "settlementId": "soak-c",
               "window": 2,
               "startTick": 26,
               "endTick": 38,
-              "observations": 27,
-              "exactRepeats": 16,
-              "familyRepeats": 16,
-              "exactRepeatRate": 0.5926,
-              "familyRepeatRate": 0.5926,
-              "untrackedFamilies": 27
+              "observations": 30,
+              "exactRepeats": 18,
+              "familyRepeats": 18,
+              "exactRepeatRate": 0.6,
+              "familyRepeatRate": 0.6,
+              "untrackedFamilies": 30
             },
             {
               "settlementId": "soak-c",
               "window": 3,
               "startTick": 39,
               "endTick": 51,
-              "observations": 22,
-              "exactRepeats": 9,
-              "familyRepeats": 9,
-              "exactRepeatRate": 0.4091,
-              "familyRepeatRate": 0.4091,
-              "untrackedFamilies": 22
+              "observations": 31,
+              "exactRepeats": 15,
+              "familyRepeats": 15,
+              "exactRepeatRate": 0.4839,
+              "familyRepeatRate": 0.4839,
+              "untrackedFamilies": 31
             },
             {
               "settlementId": "soak-c",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 0,
+              "startTick": 0,
+              "endTick": 12,
+              "observations": 22,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.3636,
+              "familyRepeatRate": 0.3636,
+              "untrackedFamilies": 22
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 2,
+              "startTick": 26,
+              "endTick": 38,
+              "observations": 7,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2857,
+              "familyRepeatRate": 0.2857,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 3,
+              "startTick": 39,
+              "endTick": 51,
+              "observations": 6,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 6
+            },
+            {
+              "settlementId": "soak-d",
               "window": 4,
               "startTick": 52,
               "endTick": 64,
@@ -16555,77 +16706,29 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
               "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 0,
-              "startTick": 0,
-              "endTick": 12,
-              "observations": 15,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.4,
-              "familyRepeatRate": 0.4,
-              "untrackedFamilies": 15
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 2,
-              "startTick": 26,
-              "endTick": 38,
-              "observations": 4,
-              "exactRepeats": 2,
-              "familyRepeats": 2,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 4
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 3,
-              "startTick": 39,
-              "endTick": 51,
-              "observations": 5,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.6,
-              "familyRepeatRate": 0.6,
-              "untrackedFamilies": 5
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 4,
-              "startTick": 52,
-              "endTick": 64,
-              "observations": 3,
-              "exactRepeats": 1,
-              "familyRepeats": 1,
-              "exactRepeatRate": 0.3333,
-              "familyRepeatRate": 0.3333,
-              "untrackedFamilies": 3
             }
           ]
         },
         "addressChain": {
           "schemaVersion": 1,
-          "rows": 203,
-          "subjectAddressed": 203,
-          "typedAction": 203,
-          "affectedSettlements": 203,
-          "reason": 194,
-          "fullyAddressed": 194,
+          "rows": 267,
+          "subjectAddressed": 260,
+          "typedAction": 267,
+          "affectedSettlements": 260,
+          "reason": 260,
+          "fullyAddressed": 253,
           "depthHistogram": {
-            "0": 0,
-            "1": 203,
+            "0": 7,
+            "1": 260,
             "2": 0,
             "3": 0,
             "4": 0
           },
-          "subjectAddressedRateMilli": 1000,
+          "subjectAddressedRateMilli": 974,
           "typedActionRateMilli": 1000,
-          "affectedSettlementsRateMilli": 1000,
-          "reasonRateMilli": 956,
-          "fullyAddressedRateMilli": 956
+          "affectedSettlementsRateMilli": 974,
+          "reasonRateMilli": 974,
+          "fullyAddressedRateMilli": 948
         },
         "beliefDivergence": {
           "infoMode": "omniscient",
@@ -16646,89 +16749,90 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       {
         "year": 2,
-        "eventCount": 118,
+        "eventCount": 102,
         "majorEventCount": 2,
-        "mechanicalOutcomeCount": 277,
-        "unclassifiedEventCount": 21,
+        "mechanicalOutcomeCount": 271,
+        "unclassifiedEventCount": 20,
         "eventTypeCounts": {
-          "npc_goal_rebranch": 11,
+          "stressor_residual": 2,
+          "npc_goal_rebranch": 12,
           "faction_law_preference_push": 1,
           "flow_trade_scarcity": 3,
-          "faction_institution_capture": 42,
           "rival_sabotage": 7,
+          "faction_institution_capture": 23,
           "neutral_border_incident": 6,
           "faction_government_challenge": 2,
           "trade_pressure": 2,
           "trade_route_disruption": 7,
-          "npc_bargain": 7,
-          "rival_arms_race": 8,
-          "npc_goal_culmination": 4,
+          "rival_arms_race": 7,
+          "npc_goal_culmination": 3,
           "npc_reform": 9,
           "npc_mobilize": 1,
           "crime_pressure": 1,
-          "faction_service_bolster": 4,
+          "npc_bargain": 8,
+          "faction_service_bolster": 5,
           "npc_protect": 1,
           "food_pressure": 1,
           "institution_closure": 1
         },
         "moverCounts": {
-          "pressure": 14,
-          "place": 44,
+          "pressure": 17,
+          "place": 25,
           "population": 0,
           "economy": 7,
-          "politics": 9,
+          "politics": 14,
           "war": 0,
-          "faith": 3,
-          "people": 31,
-          "constructive": 0,
+          "faith": 14,
+          "people": 51,
+          "constructive": 10,
           "knowledge": 0
         },
         "selectedMoverCounts": {
-          "pressure": 7,
-          "place": 43,
+          "pressure": 9,
+          "place": 24,
           "population": 0,
           "economy": 7,
-          "politics": 7,
+          "politics": 8,
           "war": 0,
-          "faith": 3,
-          "people": 30,
+          "faith": 2,
+          "people": 32,
           "constructive": 0,
           "knowledge": 0
         },
         "postApplyMoverCounts": {
-          "pressure": 7,
+          "pressure": 8,
           "place": 1,
           "population": 0,
           "economy": 0,
-          "politics": 2,
+          "politics": 6,
           "war": 0,
-          "faith": 0,
-          "people": 1,
-          "constructive": 0,
+          "faith": 12,
+          "people": 19,
+          "constructive": 10,
           "knowledge": 0
         },
-        "postApplyReceiptCount": 11,
+        "postApplyReceiptCount": 56,
         "arcCounts": {
-          "constructive": 0,
+          "constructive": 1,
           "destructive": 0
         },
         "postApplyArcCounts": {
-          "constructive": 0,
+          "constructive": 1,
           "destructive": 0
         },
         "motion": {
           "populationTransitions": 4,
           "populationMoved": 3,
           "prosperityTransitions": 4,
-          "prosperityMoved": 0,
+          "prosperityMoved": 2,
           "powerTransitions": 4,
-          "powerMoved": 4
+          "powerMoved": 3
         },
         "attentionCounts": {
-          "soak-a": 34,
-          "soak-b": 30,
-          "soak-d": 31,
-          "soak-c": 23
+          "soak-c": 8,
+          "soak-a": 37,
+          "soak-b": 29,
+          "soak-d": 28
         },
         "succession": {
           "pendingProposals": 2,
@@ -16751,18 +16855,40 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-c"
             ],
-            "severity": 0.6633122750043798,
+            "severity": 0.6441122750043798,
             "parentIds": []
           },
           {
-            "id": "candidate.faction.faction_government_challenge.soak_a_thieves_guild.101",
+            "id": "candidate.faction.faction_government_challenge.soak_a_thieves_guild.84",
             "type": "faction_government_challenge",
             "headline": "Thieves' Guild may press a challenge to the government",
             "summary": "Thieves' Guild sees an opening to press criminal shadow rule interests.",
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.6710662378816118,
+            "severity": 0.6542662378816118,
+            "parentIds": []
+          },
+          {
+            "id": "world_outcome.residual.world_stressor_infiltration_soak_c.soak_c",
+            "type": "stressor_residual",
+            "headline": "Infiltration network leaves aftereffects",
+            "summary": "Infiltration network is no longer the active crisis, but its consequences remain visible.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.3225398549016143,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.goal_rebranch.soak_a_npc_4.53",
+            "type": "npc_goal_rebranch",
+            "headline": "Quirinus Hoffmann changes ambitions",
+            "summary": "Quirinus Hoffmann's goals shift because the settlement context changed.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.44,
             "parentIds": []
           },
           {
@@ -16808,48 +16934,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             ],
             "severity": 0.44,
             "parentIds": []
-          },
-          {
-            "id": "candidate.npc.goal_rebranch.soak_a_npc_9.53",
-            "type": "npc_goal_rebranch",
-            "headline": "Imma Walter takes up a new ambition",
-            "summary": "New conditions in the settlement have turned Imma Walter's effort toward another end.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.44,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.npc.goal_rebranch.soak_a_npc_arcane_orders_archmagister_0.53",
-            "type": "npc_goal_rebranch",
-            "headline": "The Archmagister takes up a new ambition",
-            "summary": "New conditions in the settlement have turned The Archmagister's effort toward another end.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.44,
-            "parentIds": []
           }
         ],
         "stateVectors": {
           "soak-a": {
-            "population": 11622,
-            "prosperity": 5,
+            "population": 11621,
+            "prosperity": 3,
             "topFaction": "Thieves' Guild",
-            "powerEntropy": 0.9259861454702681
+            "powerEntropy": 0.9527622046307924
           },
           "soak-b": {
             "population": 3549,
-            "prosperity": 4,
+            "prosperity": 3,
             "topFaction": "Thieves' Guild",
             "powerEntropy": 0.902403074031209
           },
           "soak-c": {
-            "population": 5076,
-            "prosperity": 5,
+            "population": 5105,
+            "prosperity": 6,
             "topFaction": "Guild Council",
-            "powerEntropy": 0.9522505370978024
+            "powerEntropy": 0.9715006996793791
           },
           "soak-d": {
             "population": 442,
@@ -16862,24 +16966,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "schemaVersion": 1,
           "kind": "phrase_repetition",
           "windowTicks": 13,
-          "observations": 134,
+          "observations": 153,
           "windows": 20,
-          "exactRepeats": 58,
-          "familyRepeats": 58,
-          "exactRepeatRate": 0.4328,
-          "familyRepeatRate": 0.4328,
-          "untrackedFamilies": 134,
+          "exactRepeats": 59,
+          "familyRepeats": 59,
+          "exactRepeatRate": 0.3856,
+          "familyRepeatRate": 0.3856,
+          "untrackedFamilies": 153,
           "worstWindow": {
-            "settlementId": "soak-c",
+            "settlementId": "soak-d",
             "window": 6,
             "startTick": 78,
             "endTick": 90,
-            "observations": 9,
-            "exactRepeats": 7,
-            "familyRepeats": 7,
-            "exactRepeatRate": 0.7778,
-            "familyRepeatRate": 0.7778,
-            "untrackedFamilies": 9
+            "observations": 5,
+            "exactRepeats": 3,
+            "familyRepeats": 3,
+            "exactRepeatRate": 0.6,
+            "familyRepeatRate": 0.6,
+            "untrackedFamilies": 5
           },
           "byWindow": [
             {
@@ -16887,51 +16991,111 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 4,
               "startTick": 52,
               "endTick": 64,
-              "observations": 10,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 10
+              "observations": 13,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.5385,
+              "familyRepeatRate": 0.5385,
+              "untrackedFamilies": 13
             },
             {
               "settlementId": "soak-a",
               "window": 5,
               "startTick": 65,
               "endTick": 77,
-              "observations": 9,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.4444,
-              "familyRepeatRate": 0.4444,
-              "untrackedFamilies": 9
+              "observations": 18,
+              "exactRepeats": 10,
+              "familyRepeats": 10,
+              "exactRepeatRate": 0.5556,
+              "familyRepeatRate": 0.5556,
+              "untrackedFamilies": 18
             },
             {
               "settlementId": "soak-a",
               "window": 6,
               "startTick": 78,
               "endTick": 90,
-              "observations": 8,
+              "observations": 12,
               "exactRepeats": 4,
               "familyRepeats": 4,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 8
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 12
             },
             {
               "settlementId": "soak-a",
               "window": 7,
               "startTick": 91,
               "endTick": 103,
-              "observations": 8,
+              "observations": 9,
               "exactRepeats": 2,
               "familyRepeats": 2,
-              "exactRepeatRate": 0.25,
-              "familyRepeatRate": 0.25,
-              "untrackedFamilies": 8
+              "exactRepeatRate": 0.2222,
+              "familyRepeatRate": 0.2222,
+              "untrackedFamilies": 9
             },
             {
               "settlementId": "soak-a",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 4,
+              "startTick": 52,
+              "endTick": 64,
+              "observations": 15,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.4667,
+              "familyRepeatRate": 0.4667,
+              "untrackedFamilies": 15
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 5,
+              "startTick": 65,
+              "endTick": 77,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 6,
+              "startTick": 78,
+              "endTick": 90,
+              "observations": 7,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 7,
+              "startTick": 91,
+              "endTick": 103,
+              "observations": 18,
+              "exactRepeats": 10,
+              "familyRepeats": 10,
+              "exactRepeatRate": 0.5556,
+              "familyRepeatRate": 0.5556,
+              "untrackedFamilies": 18
+            },
+            {
+              "settlementId": "soak-b",
               "window": 8,
               "startTick": 104,
               "endTick": 116,
@@ -16943,34 +17107,22 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "untrackedFamilies": 1
             },
             {
-              "settlementId": "soak-b",
+              "settlementId": "soak-c",
               "window": 4,
               "startTick": 52,
               "endTick": 64,
-              "observations": 12,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.4167,
-              "familyRepeatRate": 0.4167,
-              "untrackedFamilies": 12
+              "observations": 8,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.125,
+              "familyRepeatRate": 0.125,
+              "untrackedFamilies": 8
             },
             {
-              "settlementId": "soak-b",
+              "settlementId": "soak-c",
               "window": 5,
               "startTick": 65,
               "endTick": 77,
-              "observations": 4,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 4
-            },
-            {
-              "settlementId": "soak-b",
-              "window": 6,
-              "startTick": 78,
-              "endTick": 90,
               "observations": 6,
               "exactRepeats": 1,
               "familyRepeats": 1,
@@ -16979,100 +17131,52 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "untrackedFamilies": 6
             },
             {
-              "settlementId": "soak-b",
-              "window": 7,
-              "startTick": 91,
-              "endTick": 103,
-              "observations": 13,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.4615,
-              "familyRepeatRate": 0.4615,
-              "untrackedFamilies": 13
-            },
-            {
-              "settlementId": "soak-b",
-              "window": 8,
-              "startTick": 104,
-              "endTick": 116,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 4,
-              "startTick": 52,
-              "endTick": 64,
-              "observations": 4,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 4
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 5,
-              "startTick": 65,
-              "endTick": 77,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
               "settlementId": "soak-c",
               "window": 6,
               "startTick": 78,
               "endTick": 90,
-              "observations": 9,
-              "exactRepeats": 7,
-              "familyRepeats": 7,
-              "exactRepeatRate": 0.7778,
-              "familyRepeatRate": 0.7778,
-              "untrackedFamilies": 9
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
             },
             {
               "settlementId": "soak-c",
               "window": 7,
               "startTick": 91,
               "endTick": 103,
-              "observations": 9,
-              "exactRepeats": 7,
-              "familyRepeats": 7,
-              "exactRepeatRate": 0.7778,
-              "familyRepeatRate": 0.7778,
-              "untrackedFamilies": 9
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
             },
             {
               "settlementId": "soak-c",
               "window": 8,
               "startTick": 104,
               "endTick": 116,
-              "observations": 1,
+              "observations": 2,
               "exactRepeats": 0,
               "familyRepeats": 0,
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
-              "untrackedFamilies": 1
+              "untrackedFamilies": 2
             },
             {
               "settlementId": "soak-d",
               "window": 4,
               "startTick": 52,
               "endTick": 64,
-              "observations": 10,
+              "observations": 12,
               "exactRepeats": 6,
               "familyRepeats": 6,
-              "exactRepeatRate": 0.6,
-              "familyRepeatRate": 0.6,
-              "untrackedFamilies": 10
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 12
             },
             {
               "settlementId": "soak-d",
@@ -17091,59 +17195,59 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 6,
               "startTick": 78,
               "endTick": 90,
-              "observations": 6,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.6667,
-              "familyRepeatRate": 0.6667,
-              "untrackedFamilies": 6
+              "observations": 5,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.6,
+              "familyRepeatRate": 0.6,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-d",
               "window": 7,
               "startTick": 91,
               "endTick": 103,
-              "observations": 6,
+              "observations": 5,
               "exactRepeats": 1,
               "familyRepeats": 1,
-              "exactRepeatRate": 0.1667,
-              "familyRepeatRate": 0.1667,
-              "untrackedFamilies": 6
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-d",
               "window": 8,
               "startTick": 104,
               "endTick": 116,
-              "observations": 3,
+              "observations": 2,
               "exactRepeats": 0,
               "familyRepeats": 0,
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
-              "untrackedFamilies": 3
+              "untrackedFamilies": 2
             }
           ]
         },
         "addressChain": {
           "schemaVersion": 1,
-          "rows": 127,
-          "subjectAddressed": 127,
-          "typedAction": 127,
-          "affectedSettlements": 127,
-          "reason": 125,
-          "fullyAddressed": 125,
+          "rows": 156,
+          "subjectAddressed": 146,
+          "typedAction": 156,
+          "affectedSettlements": 146,
+          "reason": 155,
+          "fullyAddressed": 145,
           "depthHistogram": {
-            "0": 0,
-            "1": 127,
+            "0": 10,
+            "1": 146,
             "2": 0,
             "3": 0,
             "4": 0
           },
-          "subjectAddressedRateMilli": 1000,
+          "subjectAddressedRateMilli": 936,
           "typedActionRateMilli": 1000,
-          "affectedSettlementsRateMilli": 1000,
-          "reasonRateMilli": 984,
-          "fullyAddressedRateMilli": 984
+          "affectedSettlementsRateMilli": 936,
+          "reasonRateMilli": 994,
+          "fullyAddressedRateMilli": 929
         },
         "beliefDivergence": {
           "infoMode": "omniscient",
@@ -17164,47 +17268,50 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       {
         "year": 3,
-        "eventCount": 125,
+        "eventCount": 111,
         "majorEventCount": 0,
-        "mechanicalOutcomeCount": 269,
-        "unclassifiedEventCount": 21,
+        "mechanicalOutcomeCount": 244,
+        "unclassifiedEventCount": 19,
         "eventTypeCounts": {
-          "npc_bargain": 12,
-          "npc_reform": 15,
+          "npc_goal_culmination": 3,
+          "npc_bargain": 9,
+          "npc_reform": 7,
           "rival_sabotage": 10,
-          "faction_institution_capture": 52,
-          "trade_route_disruption": 4,
-          "neutral_border_incident": 6,
-          "npc_goal_rebranch": 10,
+          "faction_institution_capture": 38,
+          "trade_route_disruption": 7,
+          "npc_goal_rebranch": 13,
+          "faction_service_bolster": 1,
           "rival_arms_race": 5,
           "trade_pressure": 2,
-          "crime_pressure": 1,
-          "npc_goal_culmination": 3,
+          "faction_law_preference_push": 4,
+          "resource_discovery": 1,
+          "neutral_border_incident": 4,
+          "crime_pressure": 2,
           "npc_protect": 2,
           "institution_closure": 1,
           "food_pressure": 2
         },
         "moverCounts": {
-          "pressure": 8,
-          "place": 54,
+          "pressure": 9,
+          "place": 41,
           "population": 0,
-          "economy": 4,
-          "politics": 0,
+          "economy": 7,
+          "politics": 10,
           "war": 0,
-          "faith": 6,
-          "people": 37,
-          "constructive": 0,
+          "faith": 15,
+          "people": 51,
+          "constructive": 36,
           "knowledge": 0
         },
         "selectedMoverCounts": {
-          "pressure": 5,
-          "place": 53,
+          "pressure": 6,
+          "place": 40,
           "population": 0,
-          "economy": 4,
-          "politics": 0,
+          "economy": 7,
+          "politics": 5,
           "war": 0,
-          "faith": 6,
-          "people": 36,
+          "faith": 3,
+          "people": 31,
           "constructive": 0,
           "knowledge": 0
         },
@@ -17213,35 +17320,35 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "place": 1,
           "population": 0,
           "economy": 0,
-          "politics": 0,
+          "politics": 5,
           "war": 0,
-          "faith": 0,
-          "people": 1,
-          "constructive": 0,
+          "faith": 12,
+          "people": 20,
+          "constructive": 36,
           "knowledge": 0
         },
-        "postApplyReceiptCount": 5,
+        "postApplyReceiptCount": 77,
         "arcCounts": {
-          "constructive": 0,
+          "constructive": 34,
           "destructive": 0
         },
         "postApplyArcCounts": {
-          "constructive": 0,
+          "constructive": 34,
           "destructive": 0
         },
         "motion": {
           "populationTransitions": 4,
           "populationMoved": 2,
           "prosperityTransitions": 4,
-          "prosperityMoved": 0,
+          "prosperityMoved": 2,
           "powerTransitions": 4,
           "powerMoved": 4
         },
         "attentionCounts": {
-          "soak-a": 31,
-          "soak-b": 35,
-          "soak-c": 17,
-          "soak-d": 42
+          "soak-c": 4,
+          "soak-a": 33,
+          "soak-b": 34,
+          "soak-d": 40
         },
         "succession": {
           "pendingProposals": 0,
@@ -17257,14 +17364,25 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         },
         "chronicleSample": [
           {
-            "id": "candidate.npc.bargain.soak_a_npc_5.105",
+            "id": "candidate.npc.goal_culmination.soak_c_npc_6.105",
+            "type": "npc_goal_culmination",
+            "headline": "Naoise O'Halloran achieves a long ambition",
+            "summary": "Naoise O'Halloran has worked toward \"restore order\" for a long while, and now seizes it.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.85,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.bargain.soak_a_npc_10.105",
             "type": "npc_bargain",
-            "headline": "Diebold Stahl may bargain",
-            "summary": "Diebold Stahl's exploit desperation goal can advance through bargain.",
+            "headline": "Nanthild Schmidt may bargain",
+            "summary": "Nanthild Schmidt's exploit desperation goal can advance through bargain.",
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.7916699757677698,
+            "severity": 0.7750160229815138,
             "parentIds": []
           },
           {
@@ -17275,7 +17393,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.7460329391014937,
+            "severity": 0.7395784734162827,
             "parentIds": []
           },
           {
@@ -17286,7 +17404,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.7382641121566791,
+            "severity": 0.7318096464714682,
             "parentIds": []
           },
           {
@@ -17297,29 +17415,7 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-b"
             ],
-            "severity": 0.6212900960754115,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.faction.faction_institution_capture.soak_c_military_guard.105",
-            "type": "faction_institution_capture",
-            "headline": "Military/Guard may move to capture an institution",
-            "summary": "Military/Guard sees an opening to press military order interests.",
-            "targetSettlementIds": [
-              "soak-c"
-            ],
-            "severity": 0.5396369830020978,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.npc.reform.soak_a_npc_7.106",
-            "type": "npc_reform",
-            "headline": "Luitgard Pfeiffer may reform",
-            "summary": "Luitgard Pfeiffer's survive crisis goal can advance through reform.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.7220516768499651,
+            "severity": 0.6133700960754116,
             "parentIds": []
           },
           {
@@ -17341,32 +17437,43 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.44314285714285717,
+            "severity": 0.4527857142857143,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.relationship.rival_sabotage.edge.soak-b.soak-c.107",
+            "type": "rival_sabotage",
+            "headline": "rival relationship may shift",
+            "summary": "Economic competition and resentment create sabotage, undercutting, or prestige attacks.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5935924766865129,
             "parentIds": []
           }
         ],
         "stateVectors": {
           "soak-a": {
-            "population": 11200,
-            "prosperity": 5,
+            "population": 11196,
+            "prosperity": 3,
             "topFaction": "Thieves' Guild",
-            "powerEntropy": 0.7984457387120368
+            "powerEntropy": 0.9411925646898928
           },
           "soak-b": {
             "population": 3167,
-            "prosperity": 4,
+            "prosperity": 1,
             "topFaction": "Thieves' Guild",
             "powerEntropy": 0.7703536468487202
           },
           "soak-c": {
-            "population": 5076,
-            "prosperity": 5,
+            "population": 5105,
+            "prosperity": 6,
             "topFaction": "Guild Council",
-            "powerEntropy": 0.9452295304308711
+            "powerEntropy": 0.9610903143592411
           },
           "soak-d": {
             "population": 442,
-            "prosperity": 2,
+            "prosperity": 1,
             "topFaction": "Military/Guard",
             "powerEntropy": 0.8095414182883547
           }
@@ -17375,24 +17482,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "schemaVersion": 1,
           "kind": "phrase_repetition",
           "windowTicks": 13,
-          "observations": 133,
+          "observations": 155,
           "windows": 20,
-          "exactRepeats": 63,
-          "familyRepeats": 63,
-          "exactRepeatRate": 0.4737,
-          "familyRepeatRate": 0.4737,
-          "untrackedFamilies": 133,
+          "exactRepeats": 68,
+          "familyRepeats": 68,
+          "exactRepeatRate": 0.4387,
+          "familyRepeatRate": 0.4387,
+          "untrackedFamilies": 155,
           "worstWindow": {
             "settlementId": "soak-c",
-            "window": 8,
-            "startTick": 104,
-            "endTick": 116,
-            "observations": 4,
+            "window": 9,
+            "startTick": 117,
+            "endTick": 129,
+            "observations": 5,
             "exactRepeats": 3,
             "familyRepeats": 3,
-            "exactRepeatRate": 0.75,
-            "familyRepeatRate": 0.75,
-            "untrackedFamilies": 4
+            "exactRepeatRate": 0.6,
+            "familyRepeatRate": 0.6,
+            "untrackedFamilies": 5
           },
           "byWindow": [
             {
@@ -17400,66 +17507,30 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 8,
               "startTick": 104,
               "endTick": 116,
-              "observations": 14,
+              "observations": 18,
               "exactRepeats": 8,
               "familyRepeats": 8,
-              "exactRepeatRate": 0.5714,
-              "familyRepeatRate": 0.5714,
-              "untrackedFamilies": 14
+              "exactRepeatRate": 0.4444,
+              "familyRepeatRate": 0.4444,
+              "untrackedFamilies": 18
             },
             {
               "settlementId": "soak-a",
               "window": 9,
               "startTick": 117,
               "endTick": 129,
-              "observations": 11,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.4545,
-              "familyRepeatRate": 0.4545,
-              "untrackedFamilies": 11
+              "observations": 10,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.4,
+              "familyRepeatRate": 0.4,
+              "untrackedFamilies": 10
             },
             {
               "settlementId": "soak-a",
               "window": 10,
               "startTick": 130,
               "endTick": 142,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-a",
-              "window": 11,
-              "startTick": 143,
-              "endTick": 155,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-a",
-              "window": 12,
-              "startTick": 156,
-              "endTick": 168,
-              "observations": 1,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 1
-            },
-            {
-              "settlementId": "soak-b",
-              "window": 8,
-              "startTick": 104,
-              "endTick": 116,
               "observations": 5,
               "exactRepeats": 2,
               "familyRepeats": 2,
@@ -17468,28 +17539,64 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "untrackedFamilies": 5
             },
             {
+              "settlementId": "soak-a",
+              "window": 11,
+              "startTick": 143,
+              "endTick": 155,
+              "observations": 7,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.5714,
+              "familyRepeatRate": 0.5714,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 8,
+              "startTick": 104,
+              "endTick": 116,
+              "observations": 7,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.5714,
+              "familyRepeatRate": 0.5714,
+              "untrackedFamilies": 7
+            },
+            {
               "settlementId": "soak-b",
               "window": 9,
               "startTick": 117,
               "endTick": 129,
-              "observations": 8,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.375,
-              "familyRepeatRate": 0.375,
-              "untrackedFamilies": 8
+              "observations": 13,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.3846,
+              "familyRepeatRate": 0.3846,
+              "untrackedFamilies": 13
             },
             {
               "settlementId": "soak-b",
               "window": 10,
               "startTick": 130,
               "endTick": 142,
-              "observations": 4,
-              "exactRepeats": 1,
-              "familyRepeats": 1,
-              "exactRepeatRate": 0.25,
-              "familyRepeatRate": 0.25,
-              "untrackedFamilies": 4
+              "observations": 6,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 6
             },
             {
               "settlementId": "soak-b",
@@ -17508,48 +17615,48 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 12,
               "startTick": 156,
               "endTick": 168,
-              "observations": 5,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 5
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
             },
             {
               "settlementId": "soak-c",
               "window": 8,
               "startTick": 104,
               "endTick": 116,
-              "observations": 4,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.75,
-              "familyRepeatRate": 0.75,
-              "untrackedFamilies": 4
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
             },
             {
               "settlementId": "soak-c",
               "window": 9,
               "startTick": 117,
               "endTick": 129,
-              "observations": 3,
-              "exactRepeats": 2,
-              "familyRepeats": 2,
-              "exactRepeatRate": 0.6667,
-              "familyRepeatRate": 0.6667,
-              "untrackedFamilies": 3
+              "observations": 5,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.6,
+              "familyRepeatRate": 0.6,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-c",
               "window": 10,
               "startTick": 130,
               "endTick": 142,
-              "observations": 7,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.4286,
-              "familyRepeatRate": 0.4286,
-              "untrackedFamilies": 7
+              "observations": 5,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-c",
@@ -17580,12 +17687,12 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 8,
               "startTick": 104,
               "endTick": 116,
-              "observations": 9,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.6667,
-              "familyRepeatRate": 0.6667,
-              "untrackedFamilies": 9
+              "observations": 10,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 10
             },
             {
               "settlementId": "soak-d",
@@ -17616,12 +17723,12 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 11,
               "startTick": 143,
               "endTick": 155,
-              "observations": 13,
-              "exactRepeats": 8,
-              "familyRepeats": 8,
-              "exactRepeatRate": 0.6154,
-              "familyRepeatRate": 0.6154,
-              "untrackedFamilies": 13
+              "observations": 12,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.5833,
+              "familyRepeatRate": 0.5833,
+              "untrackedFamilies": 12
             },
             {
               "settlementId": "soak-d",
@@ -17639,24 +17746,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         },
         "addressChain": {
           "schemaVersion": 1,
-          "rows": 127,
-          "subjectAddressed": 127,
-          "typedAction": 127,
-          "affectedSettlements": 127,
-          "reason": 126,
-          "fullyAddressed": 126,
+          "rows": 185,
+          "subjectAddressed": 149,
+          "typedAction": 185,
+          "affectedSettlements": 149,
+          "reason": 184,
+          "fullyAddressed": 148,
           "depthHistogram": {
-            "0": 0,
-            "1": 127,
+            "0": 36,
+            "1": 149,
             "2": 0,
             "3": 0,
             "4": 0
           },
-          "subjectAddressedRateMilli": 1000,
+          "subjectAddressedRateMilli": 805,
           "typedActionRateMilli": 1000,
-          "affectedSettlementsRateMilli": 1000,
-          "reasonRateMilli": 992,
-          "fullyAddressedRateMilli": 992
+          "affectedSettlementsRateMilli": 805,
+          "reasonRateMilli": 995,
+          "fullyAddressedRateMilli": 800
         },
         "beliefDivergence": {
           "infoMode": "omniscient",
@@ -17677,83 +17784,87 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       {
         "year": 4,
-        "eventCount": 80,
+        "eventCount": 83,
         "majorEventCount": 0,
-        "mechanicalOutcomeCount": 279,
-        "unclassifiedEventCount": 19,
+        "mechanicalOutcomeCount": 247,
+        "unclassifiedEventCount": 14,
         "eventTypeCounts": {
           "flow_trade_scarcity": 1,
           "trade_pressure": 2,
-          "npc_goal_rebranch": 1,
-          "neutral_border_incident": 5,
+          "npc_bargain": 14,
+          "npc_goal_rebranch": 4,
+          "faction_service_bolster": 10,
           "npc_reform": 12,
-          "npc_bargain": 8,
-          "faction_institution_capture": 22,
+          "trade_route_disruption": 15,
           "rival_sabotage": 10,
-          "trade_route_disruption": 11,
+          "resource_removal": 1,
           "rival_arms_race": 4,
+          "crime_pressure": 1,
           "institution_closure": 2,
+          "trade_smuggling_pressure": 1,
+          "faction_law_preference_push": 3,
           "npc_protect": 1,
+          "faction_institution_capture": 1,
           "food_pressure": 1
         },
         "moverCounts": {
-          "pressure": 7,
-          "place": 25,
+          "pressure": 9,
+          "place": 7,
           "population": 0,
-          "economy": 11,
-          "politics": 0,
+          "economy": 15,
+          "politics": 19,
           "war": 0,
-          "faith": 2,
-          "people": 20,
-          "constructive": 0,
+          "faith": 13,
+          "people": 40,
+          "constructive": 38,
           "knowledge": 0
         },
         "selectedMoverCounts": {
-          "pressure": 4,
-          "place": 24,
+          "pressure": 6,
+          "place": 4,
           "population": 0,
-          "economy": 11,
-          "politics": 0,
+          "economy": 15,
+          "politics": 13,
           "war": 0,
-          "faith": 2,
-          "people": 20,
+          "faith": 1,
+          "people": 30,
           "constructive": 0,
           "knowledge": 0
         },
         "postApplyMoverCounts": {
           "pressure": 3,
-          "place": 1,
+          "place": 3,
           "population": 0,
           "economy": 0,
-          "politics": 0,
+          "politics": 6,
           "war": 0,
-          "faith": 0,
-          "people": 0,
-          "constructive": 0,
+          "faith": 12,
+          "people": 10,
+          "constructive": 38,
           "knowledge": 0
         },
-        "postApplyReceiptCount": 4,
+        "postApplyReceiptCount": 72,
         "arcCounts": {
-          "constructive": 0,
-          "destructive": 0
+          "constructive": 38,
+          "destructive": 1
         },
         "postApplyArcCounts": {
-          "constructive": 0,
-          "destructive": 0
+          "constructive": 38,
+          "destructive": 1
         },
         "motion": {
           "populationTransitions": 4,
-          "populationMoved": 2,
+          "populationMoved": 3,
           "prosperityTransitions": 4,
-          "prosperityMoved": 0,
+          "prosperityMoved": 1,
           "powerTransitions": 4,
-          "powerMoved": 2
+          "powerMoved": 1
         },
         "attentionCounts": {
-          "soak-b": 23,
+          "soak-b": 19,
           "soak-d": 5,
-          "soak-a": 23,
-          "soak-c": 29
+          "soak-c": 18,
+          "soak-a": 41
         },
         "succession": {
           "pendingProposals": 0,
@@ -17791,10 +17902,21 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "parentIds": []
           },
           {
-            "id": "candidate.npc.goal_rebranch.soak_a_npc_successor_308246.157",
+            "id": "candidate.npc.bargain.soak_c_npc_4.158",
+            "type": "npc_bargain",
+            "headline": "Vénus Murphy may bargain",
+            "summary": "Vénus Murphy's restore order goal can advance through bargain.",
+            "targetSettlementIds": [
+              "soak-c"
+            ],
+            "severity": 0.7734725575753822,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.goal_rebranch.soak_a_npc_3.158",
             "type": "npc_goal_rebranch",
-            "headline": "Petra changes ambitions",
-            "summary": "Petra's goals shift because the settlement context changed.",
+            "headline": "Nikolaus Becker takes up a new ambition",
+            "summary": "New conditions in the settlement have turned Nikolaus Becker's effort toward another end.",
             "targetSettlementIds": [
               "soak-a"
             ],
@@ -17802,25 +17924,25 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "parentIds": []
           },
           {
-            "id": "candidate.relationship.neutral_border_incident.edge.soak_c.soak_b.157",
-            "type": "neutral_border_incident",
-            "headline": "channel inferred relationship may shift",
-            "summary": "Local pressure creates a minor incident between neutral settlements.",
+            "id": "candidate.faction.faction_service_bolster.soak_c_merchant_guilds.158",
+            "type": "faction_service_bolster",
+            "headline": "Merchant Guilds may bolster its services",
+            "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
             "targetSettlementIds": [
-              "soak-b"
+              "soak-c"
             ],
-            "severity": 0.2804094899159634,
+            "severity": 0.3160519520357227,
             "parentIds": []
           },
           {
-            "id": "candidate.npc.reform.soak_a_npc_11.158",
+            "id": "candidate.npc.reform.soak_b_npc_5.159",
             "type": "npc_reform",
-            "headline": "Dorothea Steinberg may reform",
-            "summary": "Dorothea Steinberg's survive crisis goal can advance through reform.",
+            "headline": "Reinhard Forster may reform",
+            "summary": "Reinhard Forster's survive crisis goal can advance through reform.",
             "targetSettlementIds": [
-              "soak-a"
+              "soak-b"
             ],
-            "severity": 0.7435751390753993,
+            "severity": 0.7411338931110096,
             "parentIds": []
           },
           {
@@ -17831,54 +17953,43 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.731173697269735,
+            "severity": 0.7376270341328945,
             "parentIds": []
           },
           {
-            "id": "candidate.npc.bargain.soak_a_npc_6.159",
-            "type": "npc_bargain",
-            "headline": "Hadwige Ritter may bargain",
-            "summary": "Hadwige Ritter's survive crisis goal can advance through bargain.",
+            "id": "candidate.relationship.trade_route_disruption.edge.soak-a.soak-b.159",
+            "type": "trade_route_disruption",
+            "headline": "trade partner relationship may shift",
+            "summary": "Trade pressure disrupts routes and introduces resentment or leverage.",
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.7138984305607792,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.npc.reform.soak_b_npc_5.160",
-            "type": "npc_reform",
-            "headline": "Reinhard Forster may reform",
-            "summary": "Reinhard Forster's survive crisis goal can advance through reform.",
-            "targetSettlementIds": [
-              "soak-b"
-            ],
-            "severity": 0.7456451372155143,
+            "severity": 0.45599999999999996,
             "parentIds": []
           }
         ],
         "stateVectors": {
           "soak-a": {
-            "population": 10705,
-            "prosperity": 5,
+            "population": 10694,
+            "prosperity": 3,
             "topFaction": "Thieves' Guild",
-            "powerEntropy": 0.7720126940030381
+            "powerEntropy": 0.9459733529584605
           },
           "soak-b": {
             "population": 2801,
-            "prosperity": 4,
+            "prosperity": 1,
             "topFaction": "Military/Guard",
             "powerEntropy": 0.9125077644105172
           },
           "soak-c": {
-            "population": 5076,
-            "prosperity": 5,
+            "population": 4146,
+            "prosperity": 6,
             "topFaction": "Guild Council",
-            "powerEntropy": 0.9425941865505784
+            "powerEntropy": 0.9610903143592411
           },
           "soak-d": {
             "population": 442,
-            "prosperity": 2,
+            "prosperity": 0,
             "topFaction": "Military/Guard",
             "powerEntropy": 0.8095414182883547
           }
@@ -17887,24 +17998,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "schemaVersion": 1,
           "kind": "phrase_repetition",
           "windowTicks": 13,
-          "observations": 90,
+          "observations": 114,
           "windows": 19,
-          "exactRepeats": 35,
-          "familyRepeats": 35,
-          "exactRepeatRate": 0.3889,
-          "familyRepeatRate": 0.3889,
-          "untrackedFamilies": 90,
+          "exactRepeats": 33,
+          "familyRepeats": 33,
+          "exactRepeatRate": 0.2895,
+          "familyRepeatRate": 0.2895,
+          "untrackedFamilies": 114,
           "worstWindow": {
-            "settlementId": "soak-c",
-            "window": 15,
-            "startTick": 195,
-            "endTick": 207,
-            "observations": 7,
-            "exactRepeats": 5,
-            "familyRepeats": 5,
-            "exactRepeatRate": 0.7143,
-            "familyRepeatRate": 0.7143,
-            "untrackedFamilies": 7
+            "settlementId": "soak-a",
+            "window": 12,
+            "startTick": 156,
+            "endTick": 168,
+            "observations": 22,
+            "exactRepeats": 13,
+            "familyRepeats": 13,
+            "exactRepeatRate": 0.5909,
+            "familyRepeatRate": 0.5909,
+            "untrackedFamilies": 22
           },
           "byWindow": [
             {
@@ -17912,48 +18023,48 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 12,
               "startTick": 156,
               "endTick": 168,
-              "observations": 10,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.6,
-              "familyRepeatRate": 0.6,
-              "untrackedFamilies": 10
+              "observations": 22,
+              "exactRepeats": 13,
+              "familyRepeats": 13,
+              "exactRepeatRate": 0.5909,
+              "familyRepeatRate": 0.5909,
+              "untrackedFamilies": 22
             },
             {
               "settlementId": "soak-a",
               "window": 13,
               "startTick": 169,
               "endTick": 181,
-              "observations": 9,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.4444,
-              "familyRepeatRate": 0.4444,
-              "untrackedFamilies": 9
+              "observations": 8,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 8
             },
             {
               "settlementId": "soak-a",
               "window": 14,
               "startTick": 182,
               "endTick": 194,
-              "observations": 2,
+              "observations": 4,
               "exactRepeats": 1,
               "familyRepeats": 1,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 2
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 4
             },
             {
               "settlementId": "soak-a",
               "window": 15,
               "startTick": 195,
               "endTick": 207,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
+              "observations": 11,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.4545,
+              "familyRepeatRate": 0.4545,
+              "untrackedFamilies": 11
             },
             {
               "settlementId": "soak-a",
@@ -17969,6 +18080,66 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             },
             {
               "settlementId": "soak-b",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 10,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 10
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 13,
+              "startTick": 169,
+              "endTick": 181,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 14,
+              "startTick": 182,
+              "endTick": 194,
+              "observations": 8,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.375,
+              "familyRepeatRate": 0.375,
+              "untrackedFamilies": 8
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 15,
+              "startTick": 195,
+              "endTick": 207,
+              "observations": 4,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 4
+            },
+            {
+              "settlementId": "soak-b",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
+              "observations": 3,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-c",
               "window": 12,
               "startTick": 156,
               "endTick": 168,
@@ -17980,70 +18151,34 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "untrackedFamilies": 8
             },
             {
-              "settlementId": "soak-b",
+              "settlementId": "soak-c",
               "window": 13,
               "startTick": 169,
               "endTick": 181,
-              "observations": 4,
+              "observations": 7,
               "exactRepeats": 1,
               "familyRepeats": 1,
-              "exactRepeatRate": 0.25,
-              "familyRepeatRate": 0.25,
-              "untrackedFamilies": 4
+              "exactRepeatRate": 0.1429,
+              "familyRepeatRate": 0.1429,
+              "untrackedFamilies": 7
             },
             {
-              "settlementId": "soak-b",
+              "settlementId": "soak-c",
               "window": 14,
               "startTick": 182,
               "endTick": 194,
-              "observations": 9,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.4444,
-              "familyRepeatRate": 0.4444,
-              "untrackedFamilies": 9
+              "observations": 5,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
             },
             {
-              "settlementId": "soak-b",
+              "settlementId": "soak-c",
               "window": 15,
               "startTick": 195,
               "endTick": 207,
-              "observations": 4,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 4
-            },
-            {
-              "settlementId": "soak-b",
-              "window": 16,
-              "startTick": 208,
-              "endTick": 220,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 12,
-              "startTick": 156,
-              "endTick": 168,
-              "observations": 6,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 6
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 13,
-              "startTick": 169,
-              "endTick": 181,
               "observations": 6,
               "exactRepeats": 2,
               "familyRepeats": 2,
@@ -18053,51 +18188,27 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             },
             {
               "settlementId": "soak-c",
-              "window": 14,
-              "startTick": 182,
-              "endTick": 194,
-              "observations": 10,
-              "exactRepeats": 7,
-              "familyRepeats": 7,
-              "exactRepeatRate": 0.7,
-              "familyRepeatRate": 0.7,
-              "untrackedFamilies": 10
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 15,
-              "startTick": 195,
-              "endTick": 207,
-              "observations": 7,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.7143,
-              "familyRepeatRate": 0.7143,
-              "untrackedFamilies": 7
-            },
-            {
-              "settlementId": "soak-c",
               "window": 16,
               "startTick": 208,
               "endTick": 220,
-              "observations": 1,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 1
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 12,
-              "startTick": 156,
-              "endTick": 168,
               "observations": 3,
               "exactRepeats": 0,
               "familyRepeats": 0,
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
               "untrackedFamilies": 3
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 12,
+              "startTick": 156,
+              "endTick": 168,
+              "observations": 5,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-d",
@@ -18139,24 +18250,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         },
         "addressChain": {
           "schemaVersion": 1,
-          "rows": 84,
-          "subjectAddressed": 84,
-          "typedAction": 84,
-          "affectedSettlements": 84,
-          "reason": 83,
-          "fullyAddressed": 83,
+          "rows": 146,
+          "subjectAddressed": 108,
+          "typedAction": 146,
+          "affectedSettlements": 108,
+          "reason": 145,
+          "fullyAddressed": 107,
           "depthHistogram": {
-            "0": 0,
-            "1": 84,
+            "0": 38,
+            "1": 108,
             "2": 0,
             "3": 0,
             "4": 0
           },
-          "subjectAddressedRateMilli": 1000,
+          "subjectAddressedRateMilli": 740,
           "typedActionRateMilli": 1000,
-          "affectedSettlementsRateMilli": 1000,
-          "reasonRateMilli": 988,
-          "fullyAddressedRateMilli": 988
+          "affectedSettlementsRateMilli": 740,
+          "reasonRateMilli": 993,
+          "fullyAddressedRateMilli": 733
         },
         "beliefDivergence": {
           "infoMode": "omniscient",
@@ -18177,46 +18288,50 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       },
       {
         "year": 5,
-        "eventCount": 75,
+        "eventCount": 89,
         "majorEventCount": 0,
-        "mechanicalOutcomeCount": 284,
-        "unclassifiedEventCount": 30,
+        "mechanicalOutcomeCount": 270,
+        "unclassifiedEventCount": 19,
         "eventTypeCounts": {
-          "npc_reform": 14,
-          "npc_goal_culmination": 3,
-          "npc_bargain": 7,
+          "npc_bargain": 11,
+          "npc_reform": 9,
+          "npc_goal_culmination": 2,
           "flow_trade_scarcity": 2,
+          "faction_service_bolster": 8,
           "trade_pressure": 2,
+          "trade_route_disruption": 16,
           "rival_sabotage": 11,
-          "trade_route_disruption": 10,
-          "faction_institution_capture": 4,
-          "neutral_border_incident": 9,
-          "rival_arms_race": 10,
+          "resource_discovery": 1,
+          "npc_goal_rebranch": 12,
+          "rival_arms_race": 5,
+          "neutral_border_incident": 3,
           "institution_closure": 1,
           "food_pressure": 1,
-          "npc_protect": 1
+          "npc_protect": 1,
+          "faction_law_preference_push": 3,
+          "faction_exhaustion": 1
         },
         "moverCounts": {
           "pressure": 9,
-          "place": 6,
+          "place": 3,
           "population": 0,
-          "economy": 10,
-          "politics": 0,
+          "economy": 16,
+          "politics": 15,
           "war": 0,
-          "faith": 2,
-          "people": 23,
-          "constructive": 0,
+          "faith": 15,
+          "people": 54,
+          "constructive": 42,
           "knowledge": 0
         },
         "selectedMoverCounts": {
           "pressure": 5,
-          "place": 5,
+          "place": 2,
           "population": 0,
-          "economy": 10,
-          "politics": 0,
+          "economy": 16,
+          "politics": 12,
           "war": 0,
-          "faith": 2,
-          "people": 23,
+          "faith": 3,
+          "people": 32,
           "constructive": 0,
           "knowledge": 0
         },
@@ -18225,35 +18340,35 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "place": 1,
           "population": 0,
           "economy": 0,
-          "politics": 0,
+          "politics": 3,
           "war": 0,
-          "faith": 0,
-          "people": 0,
-          "constructive": 0,
+          "faith": 12,
+          "people": 22,
+          "constructive": 42,
           "knowledge": 0
         },
-        "postApplyReceiptCount": 5,
+        "postApplyReceiptCount": 84,
         "arcCounts": {
-          "constructive": 0,
+          "constructive": 40,
           "destructive": 0
         },
         "postApplyArcCounts": {
-          "constructive": 0,
+          "constructive": 40,
           "destructive": 0
         },
         "motion": {
           "populationTransitions": 4,
-          "populationMoved": 2,
+          "populationMoved": 3,
           "prosperityTransitions": 4,
-          "prosperityMoved": 0,
+          "prosperityMoved": 1,
           "powerTransitions": 4,
-          "powerMoved": 1
+          "powerMoved": 2
         },
         "attentionCounts": {
-          "soak-d": 5,
-          "soak-a": 20,
-          "soak-b": 36,
-          "soak-c": 14
+          "soak-a": 35,
+          "soak-d": 6,
+          "soak-b": 25,
+          "soak-c": 23
         },
         "succession": {
           "pendingProposals": 0,
@@ -18268,6 +18383,17 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "familyPairs": []
         },
         "chronicleSample": [
+          {
+            "id": "candidate.npc.bargain.soak_a_npc_10.209",
+            "type": "npc_bargain",
+            "headline": "Nanthild Schmidt may bargain",
+            "summary": "Nanthild Schmidt's restore order goal can advance through bargain.",
+            "targetSettlementIds": [
+              "soak-a"
+            ],
+            "severity": 0.7931804386142447,
+            "parentIds": []
+          },
           {
             "id": "candidate.npc.reform.soak_d_npc_4.209",
             "type": "npc_reform",
@@ -18291,39 +18417,6 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "parentIds": []
           },
           {
-            "id": "candidate.npc.reform.soak_a_npc_14.210",
-            "type": "npc_reform",
-            "headline": "Peregrina Neumann may reform",
-            "summary": "Peregrina Neumann's survive crisis goal can advance through reform.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.73667845045678,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.npc.bargain.soak_a_npc_6.210",
-            "type": "npc_bargain",
-            "headline": "Hadwige Ritter may bargain",
-            "summary": "Hadwige Ritter's survive crisis goal can advance through bargain.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.7129444756732064,
-            "parentIds": []
-          },
-          {
-            "id": "candidate.npc.bargain.soak_a_npc_13.210",
-            "type": "npc_bargain",
-            "headline": "Sigebert Schmidt may bargain",
-            "summary": "Sigebert Schmidt's survive crisis goal can advance through bargain.",
-            "targetSettlementIds": [
-              "soak-a"
-            ],
-            "severity": 0.7033455673013891,
-            "parentIds": []
-          },
-          {
             "id": "candidate.flow.trade.soak_a.soak_b.210",
             "type": "flow_trade_scarcity",
             "headline": "Supply from Spitzburg fails Rothain",
@@ -18335,50 +18428,72 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
             "parentIds": []
           },
           {
-            "id": "candidate.npc.reform.soak_a_npc_11.211",
-            "type": "npc_reform",
-            "headline": "Dorothea Steinberg may reform",
-            "summary": "Dorothea Steinberg's survive crisis goal can advance through reform.",
+            "id": "candidate.faction.faction_service_bolster.soak_c_merchant_guilds.210",
+            "type": "faction_service_bolster",
+            "headline": "Merchant Guilds may bolster its services",
+            "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
             "targetSettlementIds": [
-              "soak-a"
+              "soak-c"
             ],
-            "severity": 0.7431932028610851,
+            "severity": 0.34871479451186665,
             "parentIds": []
           },
           {
-            "id": "candidate.npc.reform.soak_a_npc_7.211",
-            "type": "npc_reform",
-            "headline": "Luitgard Pfeiffer may reform",
-            "summary": "Luitgard Pfeiffer's survive crisis goal can advance through reform.",
+            "id": "candidate.condition.trade.soak_b.212",
+            "type": "trade_pressure",
+            "headline": "Trade route strain may take hold",
+            "summary": "Rothain shows enough trade pressure for a new condition to emerge.",
+            "targetSettlementIds": [
+              "soak-b"
+            ],
+            "severity": 0.5885714285714285,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.relationship.trade_route_disruption.edge.soak-a.soak-b.212",
+            "type": "trade_route_disruption",
+            "headline": "trade partner relationship may shift",
+            "summary": "Trade pressure disrupts routes and introduces resentment or leverage.",
             "targetSettlementIds": [
               "soak-a"
             ],
-            "severity": 0.7211851513774655,
+            "severity": 0.3820714285714285,
+            "parentIds": []
+          },
+          {
+            "id": "candidate.npc.reform.soak_d_npc_4.213",
+            "type": "npc_reform",
+            "headline": "Nanna Njálsson may reform",
+            "summary": "Nanna Njálsson's protect followers goal can advance through reform.",
+            "targetSettlementIds": [
+              "soak-d"
+            ],
+            "severity": 0.7441368191115003,
             "parentIds": []
           }
         ],
         "stateVectors": {
           "soak-a": {
-            "population": 9989,
-            "prosperity": 5,
+            "population": 10161,
+            "prosperity": 3,
             "topFaction": "Thieves' Guild",
-            "powerEntropy": 0.7720126940030381
+            "powerEntropy": 0.9339630401517945
           },
           "soak-b": {
-            "population": 2499,
-            "prosperity": 4,
+            "population": 2652,
+            "prosperity": 0,
             "topFaction": "Military/Guard",
             "powerEntropy": 0.9125077644105172
           },
           "soak-c": {
-            "population": 5076,
-            "prosperity": 5,
+            "population": 4146,
+            "prosperity": 6,
             "topFaction": "Guild Council",
-            "powerEntropy": 0.9297820427240284
+            "powerEntropy": 0.9610903143592411
           },
           "soak-d": {
-            "population": 442,
-            "prosperity": 2,
+            "population": 623,
+            "prosperity": 0,
             "topFaction": "Military/Guard",
             "powerEntropy": 0.7226335454578832
           }
@@ -18387,24 +18502,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
           "schemaVersion": 1,
           "kind": "phrase_repetition",
           "windowTicks": 13,
-          "observations": 86,
-          "windows": 19,
-          "exactRepeats": 31,
-          "familyRepeats": 31,
-          "exactRepeatRate": 0.3605,
-          "familyRepeatRate": 0.3605,
-          "untrackedFamilies": 86,
+          "observations": 134,
+          "windows": 20,
+          "exactRepeats": 46,
+          "familyRepeats": 46,
+          "exactRepeatRate": 0.3433,
+          "familyRepeatRate": 0.3433,
+          "untrackedFamilies": 134,
           "worstWindow": {
-            "settlementId": "soak-b",
-            "window": 17,
-            "startTick": 221,
-            "endTick": 233,
-            "observations": 10,
-            "exactRepeats": 6,
-            "familyRepeats": 6,
-            "exactRepeatRate": 0.6,
-            "familyRepeatRate": 0.6,
-            "untrackedFamilies": 10
+            "settlementId": "soak-a",
+            "window": 16,
+            "startTick": 208,
+            "endTick": 220,
+            "observations": 16,
+            "exactRepeats": 8,
+            "familyRepeats": 8,
+            "exactRepeatRate": 0.5,
+            "familyRepeatRate": 0.5,
+            "untrackedFamilies": 16
           },
           "byWindow": [
             {
@@ -18412,36 +18527,48 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 16,
               "startTick": 208,
               "endTick": 220,
-              "observations": 9,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.5556,
-              "familyRepeatRate": 0.5556,
-              "untrackedFamilies": 9
+              "observations": 16,
+              "exactRepeats": 8,
+              "familyRepeats": 8,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 16
+            },
+            {
+              "settlementId": "soak-a",
+              "window": 17,
+              "startTick": 221,
+              "endTick": 233,
+              "observations": 11,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.2727,
+              "familyRepeatRate": 0.2727,
+              "untrackedFamilies": 11
             },
             {
               "settlementId": "soak-a",
               "window": 18,
               "startTick": 234,
               "endTick": 246,
-              "observations": 1,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 1
+              "observations": 8,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.25,
+              "familyRepeatRate": 0.25,
+              "untrackedFamilies": 8
             },
             {
               "settlementId": "soak-a",
               "window": 19,
               "startTick": 247,
               "endTick": 259,
-              "observations": 10,
-              "exactRepeats": 5,
-              "familyRepeats": 5,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 10
+              "observations": 15,
+              "exactRepeats": 7,
+              "familyRepeats": 7,
+              "exactRepeatRate": 0.4667,
+              "familyRepeatRate": 0.4667,
+              "untrackedFamilies": 15
             },
             {
               "settlementId": "soak-a",
@@ -18460,48 +18587,48 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 16,
               "startTick": 208,
               "endTick": 220,
-              "observations": 9,
-              "exactRepeats": 4,
-              "familyRepeats": 4,
-              "exactRepeatRate": 0.4444,
-              "familyRepeatRate": 0.4444,
-              "untrackedFamilies": 9
+              "observations": 12,
+              "exactRepeats": 5,
+              "familyRepeats": 5,
+              "exactRepeatRate": 0.4167,
+              "familyRepeatRate": 0.4167,
+              "untrackedFamilies": 12
             },
             {
               "settlementId": "soak-b",
               "window": 17,
               "startTick": 221,
               "endTick": 233,
-              "observations": 10,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.6,
-              "familyRepeatRate": 0.6,
-              "untrackedFamilies": 10
+              "observations": 8,
+              "exactRepeats": 4,
+              "familyRepeats": 4,
+              "exactRepeatRate": 0.5,
+              "familyRepeatRate": 0.5,
+              "untrackedFamilies": 8
             },
             {
               "settlementId": "soak-b",
               "window": 18,
               "startTick": 234,
               "endTick": 246,
-              "observations": 12,
-              "exactRepeats": 6,
-              "familyRepeats": 6,
-              "exactRepeatRate": 0.5,
-              "familyRepeatRate": 0.5,
-              "untrackedFamilies": 12
+              "observations": 9,
+              "exactRepeats": 3,
+              "familyRepeats": 3,
+              "exactRepeatRate": 0.3333,
+              "familyRepeatRate": 0.3333,
+              "untrackedFamilies": 9
             },
             {
               "settlementId": "soak-b",
               "window": 19,
               "startTick": 247,
               "endTick": 259,
-              "observations": 8,
-              "exactRepeats": 3,
-              "familyRepeats": 3,
-              "exactRepeatRate": 0.375,
-              "familyRepeatRate": 0.375,
-              "untrackedFamilies": 8
+              "observations": 5,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.2,
+              "familyRepeatRate": 0.2,
+              "untrackedFamilies": 5
             },
             {
               "settlementId": "soak-b",
@@ -18520,18 +18647,66 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 16,
               "startTick": 208,
               "endTick": 220,
-              "observations": 3,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 3
+              "observations": 6,
+              "exactRepeats": 1,
+              "familyRepeats": 1,
+              "exactRepeatRate": 0.1667,
+              "familyRepeatRate": 0.1667,
+              "untrackedFamilies": 6
             },
             {
               "settlementId": "soak-c",
               "window": 17,
               "startTick": 221,
               "endTick": 233,
+              "observations": 13,
+              "exactRepeats": 6,
+              "familyRepeats": 6,
+              "exactRepeatRate": 0.4615,
+              "familyRepeatRate": 0.4615,
+              "untrackedFamilies": 13
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 18,
+              "startTick": 234,
+              "endTick": 246,
+              "observations": 5,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.4,
+              "familyRepeatRate": 0.4,
+              "untrackedFamilies": 5
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 19,
+              "startTick": 247,
+              "endTick": 259,
+              "observations": 7,
+              "exactRepeats": 2,
+              "familyRepeats": 2,
+              "exactRepeatRate": 0.2857,
+              "familyRepeatRate": 0.2857,
+              "untrackedFamilies": 7
+            },
+            {
+              "settlementId": "soak-c",
+              "window": 20,
+              "startTick": 260,
+              "endTick": 272,
+              "observations": 2,
+              "exactRepeats": 0,
+              "familyRepeats": 0,
+              "exactRepeatRate": 0,
+              "familyRepeatRate": 0,
+              "untrackedFamilies": 2
+            },
+            {
+              "settlementId": "soak-d",
+              "window": 16,
+              "startTick": 208,
+              "endTick": 220,
               "observations": 6,
               "exactRepeats": 2,
               "familyRepeats": 2,
@@ -18540,54 +18715,6 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "untrackedFamilies": 6
             },
             {
-              "settlementId": "soak-c",
-              "window": 18,
-              "startTick": 234,
-              "endTick": 246,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 19,
-              "startTick": 247,
-              "endTick": 259,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-c",
-              "window": 20,
-              "startTick": 260,
-              "endTick": 272,
-              "observations": 2,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 2
-            },
-            {
-              "settlementId": "soak-d",
-              "window": 16,
-              "startTick": 208,
-              "endTick": 220,
-              "observations": 3,
-              "exactRepeats": 0,
-              "familyRepeats": 0,
-              "exactRepeatRate": 0,
-              "familyRepeatRate": 0,
-              "untrackedFamilies": 3
-            },
-            {
               "settlementId": "soak-d",
               "window": 17,
               "startTick": 221,
@@ -18604,24 +18731,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
               "window": 18,
               "startTick": 234,
               "endTick": 246,
-              "observations": 2,
+              "observations": 3,
               "exactRepeats": 0,
               "familyRepeats": 0,
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
-              "untrackedFamilies": 2
+              "untrackedFamilies": 3
             },
             {
               "settlementId": "soak-d",
               "window": 19,
               "startTick": 247,
               "endTick": 259,
-              "observations": 2,
+              "observations": 3,
               "exactRepeats": 0,
               "familyRepeats": 0,
               "exactRepeatRate": 0,
               "familyRepeatRate": 0,
-              "untrackedFamilies": 2
+              "untrackedFamilies": 3
             },
             {
               "settlementId": "soak-d",
@@ -18639,24 +18766,24 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
         },
         "addressChain": {
           "schemaVersion": 1,
-          "rows": 79,
-          "subjectAddressed": 79,
-          "typedAction": 79,
-          "affectedSettlements": 79,
-          "reason": 78,
-          "fullyAddressed": 78,
+          "rows": 168,
+          "subjectAddressed": 127,
+          "typedAction": 168,
+          "affectedSettlements": 127,
+          "reason": 167,
+          "fullyAddressed": 126,
           "depthHistogram": {
-            "0": 0,
-            "1": 79,
+            "0": 41,
+            "1": 127,
             "2": 0,
             "3": 0,
             "4": 0
           },
-          "subjectAddressedRateMilli": 1000,
+          "subjectAddressedRateMilli": 756,
           "typedActionRateMilli": 1000,
-          "affectedSettlementsRateMilli": 1000,
-          "reasonRateMilli": 987,
-          "fullyAddressedRateMilli": 987
+          "affectedSettlementsRateMilli": 756,
+          "reasonRateMilli": 994,
+          "fullyAddressedRateMilli": 750
         },
         "beliefDivergence": {
           "infoMode": "omniscient",
@@ -18679,9 +18806,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 5226,
-    "replay": 5073,
-    "divergent": 5073
+    "primary": 9300,
+    "replay": 8577,
+    "divergent": 7310
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -18706,26 +18833,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:38:15.067Z",
+  "completedAt": "2026-09-07T01:41:16.556Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (1): the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_realistic_regional=0
-  wall-clock soak_realistic_regional = 18s (5y x 4 settlements, 3 runs)
-  readback ok: realistic_regional — receipt.presetId, subsystems.presetId and finalEntries=37 all match the seam
+  wall-clock soak_realistic_regional = 29s (5y x 4 settlements, 3 runs)
+  readback ok: realistic_regional — receipt.presetId, subsystems.presetId and finalEntries=58 all match the seam
 TRUE_EXIT_readback_realistic_regional=0
 TRUE_EXIT_certify_realistic_regional=0
-output ok: (b) certification for realistic_regional -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.realistic_regional.json (135008 bytes)
-── step soak_static_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneOSR18/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-static_campaign --preset static_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.static_campaign.json --json
+output ok: (b) certification for realistic_regional -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.realistic_regional.json (134761 bytes)
+── step soak_static_campaign: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 --seed lprobe-static_campaign --preset static_campaign --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.static_campaign.json --json
 # whole-world soak — 5 years × 4 settlements, seed "lprobe-static_campaign", static_campaign preset (seasons preset), now pinned 2026-07-12T00:00:00.000Z
 
 ## run A (primary)
-  5 years in 2.2s — final tick 260 (260 expected)
+  5 years in 2.0s — final tick 260 (260 expected)
 
 ## isolated worker evidence (actual Node worker_threads; not browser timing)
-  cold 857.095ms · request 856.287ms · worker handler 559.76ms
+  cold 858.529ms · request 857.77ms · worker handler 556.221ms
   transport node:worker_threads · thread 1 · 52 progress messages
 
 ## assertions
@@ -18739,7 +18866,7 @@ output ok: (b) certification for realistic_regional -> /private/tmp/claude-502/-
   PASS  realm population bounded — 29549 → 29549 (×1.00; envelope 0.05–20)
   NOT-EXECUTABLE  the world keeps moving: every decade carries distinct typed events and the composite state changes every year — a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded
   PASS  serialized state under the house envelope — max 0.08MB < 3.60MB (4 settlements)
-  PASS  per-year wall-time trend not age-linear — Q1 539.0ms → Q4 362.0ms/year
+  PASS  per-year wall-time trend not age-linear — Q1 471.0ms → Q4 379.5ms/year
 
 ## cost envelope (serialized worldState+regionalGraph bytes per year)
   75KB 78KB 79KB 81KB 83KB
@@ -18767,7 +18894,7 @@ output ok: (b) certification for realistic_regional -> /private/tmp/claude-502/-
   PASS  every counted war lands in exactly one duration band — sum 0 === counted 0
   PASS  every closed war lands in exactly one ending or one unclassified reason — classified 0 + unclassified 0 === closes 0
 
-receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-receipt.static_campaign.json
+receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-receipt.static_campaign.json
 
 {
   "schemaVersion": 5,
@@ -19028,14 +19155,14 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     772069
   ],
   "yearlyMs": [
-    539,
-    435,
-    415,
-    365,
-    359
+    471,
+    398,
+    376,
+    362,
+    397
   ],
   "finalRealmBytes": 786172,
-  "structuredCloneMs": 3.7799580000000788,
+  "structuredCloneMs": 3.878957999999784,
   "isolatedWorker": {
     "schemaVersion": 1,
     "kind": "isolated_advance_worker_measurement",
@@ -19077,13 +19204,13 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       }
     },
     "timingsMs": {
-      "workerConstructor": 0.808,
-      "workerOnlineAfterConstructionStart": 16.067,
-      "productAdapterReadyAfterConstructionStart": 289.065,
-      "coldStartToTerminal": 857.095,
-      "requestToTerminal": 856.287,
-      "workerHandlerToTerminalPost": 559.76,
-      "boundaryAndBootstrapResidual": 296.527
+      "workerConstructor": 0.758,
+      "workerOnlineAfterConstructionStart": 15.793,
+      "productAdapterReadyAfterConstructionStart": 293.954,
+      "coldStartToTerminal": 858.529,
+      "requestToTerminal": 857.77,
+      "workerHandlerToTerminalPost": 556.221,
+      "boundaryAndBootstrapResidual": 301.549
     },
     "nonVacuous": true,
     "claimBoundary": {
@@ -19094,8 +19221,8 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     }
   },
   "isolatedWorkerError": null,
-  "heapUsedBytes": 173385696,
-  "peakHeapUsedBytes": 170013608,
+  "heapUsedBytes": 179562608,
+  "peakHeapUsedBytes": 176169336,
   "realmScalingExercised": false,
   "subsystems": {
     "schemaVersion": 5,
@@ -20460,9 +20587,9 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
     "controls": {}
   },
   "runDurationsMs": {
-    "primary": 2160,
-    "replay": 1948,
-    "divergent": 1673
+    "primary": 2048,
+    "replay": 1949,
+    "divergent": 1685
   },
   "ticksAdvanced": 780,
   "frozenTail": false,
@@ -20491,26 +20618,26 @@ receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b220
       "reason": "a liveness floor needs one FULL decade: 5 year(s) against a sample floor of 10, 0 full decade(s) folded"
     }
   ],
-  "completedAt": "2026-09-07T01:38:22.832Z",
+  "completedAt": "2026-09-07T01:41:24.140Z",
   "nonFiniteFigures": []
 }
 
 OK — all assertions green (5y × 3 runs)
 NOT EXECUTABLE (2): different seeds produce a divergent event-type mix, the world keeps moving: every decade carries distinct typed events and the composite state changes every year
 TRUE_EXIT_soak_static_campaign=0
-  wall-clock soak_static_campaign = 7s (5y x 4 settlements, 3 runs)
+  wall-clock soak_static_campaign = 8s (5y x 4 settlements, 3 runs)
   readback ok: static_campaign — receipt.presetId, subsystems.presetId and finalEntries=36 all match the seam
 TRUE_EXIT_readback_static_campaign=0
 TRUE_EXIT_certify_static_campaign=0
-output ok: (b) certification for static_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/b-certification.static_campaign.json (134958 bytes)
-── the per-preset seam roster (from /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/seam/preset-seam-report.json) ──
+output ok: (b) certification for static_campaign -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/b-certification.static_campaign.json (134958 bytes)
+── the per-preset seam roster (from /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault/seam/preset-seam-report.json) ──
   quiet_local            seam HOLDS — certified   soak=37 birth=37 keys
-  realistic_regional     seam HOLDS — certified   soak=37 birth=37 keys
+  realistic_regional     seam HOLDS — certified   soak=58 birth=58 keys
   dramatic_campaign      seam HOLDS — certified   soak=56 birth=56 keys
   static_campaign        seam HOLDS — certified   soak=36 birth=36 keys
   narrative_campaign     seam HOLDS — certified   soak=37 birth=37 keys
   living_realm           seam HOLDS — certified   soak=55 birth=55 keys
   full_simulation        seam HOLDS — certified   soak=70 birth=70 keys
   0 of 7 preset(s) REFUSED.
-certify.sh: certified 7 preset(s); receipts in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18
+certify.sh: certified 7 preset(s); receipts in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/903-litdefault
 TRUE_EXIT=0
