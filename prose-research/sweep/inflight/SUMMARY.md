@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 03:45:35 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 03:51:39 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -71,7 +71,7 @@
 | dnd | regrade | regrade-r12 | result | 0 | — | — | 07:19:35 |
 | dnd | regrade | regrade-r9 | failed | 0 | — | — | 03:45:28 |
 | dnd | synth |  | result | 0 | assemble.js, head.md, part6.md, reconcile.md, tail.md | — | 04:52:03 |
-| dnd | synth |  | in-flight | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, F01.md, F03. | — | 07:45:27 |
+| dnd | synth |  | in-flight | 0 | _assemble-dnd.mjs, _gen-tables-dnd.mjs, 00-header.md, 01-method.md, 06-partVI-in | — | 07:51:27 |
 | dnd | synth |  | failed | 0 | — | — | 03:45:29 |
 | dnd | synth |  | result | 0 | section-dnd.md, section-dnd.part1.md, section-dnd.part2.md, section-dnd.part3.md | — | 01:54:01 |
 | dnd | verifier | i0-14 | in-flight | 6 | — | verdict file WRITTEN | 06:53:51 |
@@ -111,7 +111,7 @@
 | dnd | verifier | i977-991 | result | 4 | — | verdict file WRITTEN | 03:30:44 |
 | dnd | verifier | i992-1006 | result | 5 | — | verdict file WRITTEN | 03:41:17 |
 | leguin | regrade | regrade-r10 | result | 2 | — | — | 07:37:27 |
-| leguin | synth |  | in-flight | 0 | assign-leguin.json | — | 07:45:18 |
+| leguin | synth |  | in-flight | 0 | assign-leguin.json, secA.md | — | 07:51:35 |
 | leguin | verifier | i388-419 | result | 6 | — | verdict file WRITTEN | 06:21:11 |
 | leguin | verifier | i420-438 | result | 5 | — | verdict file WRITTEN | 06:21:10 |
 | leguin | verifier | i439-461 | result | 9 | — | verdict file WRITTEN | 06:21:43 |
@@ -141,9 +141,9 @@
 | ? | other |  | result | 0 | — | — | 07:16:12 |
 | ? | other |  | result | 0 | — | — | 07:16:43 |
 | ? | other |  | result | 0 | — | — | 07:16:25 |
-| ? | other |  | in-flight | 0 | — | — | 07:45:33 |
-| ? | other |  | in-flight | 0 | — | — | 07:45:23 |
-| ? | other |  | in-flight | 0 | — | — | 07:45:32 |
+| ? | other |  | in-flight | 0 | — | — | 07:51:18 |
+| ? | other |  | in-flight | 0 | — | — | 07:51:30 |
+| ? | other |  | in-flight | 0 | — | — | 07:51:16 |
 | ? | other |  | result | 0 | — | — | 02:32:40 |
 | ? | other |  | result | 0 | check-hobb.md | — | 02:37:47 |
 | ? | other |  | result | 0 | FIVE_AUTHOR_CHECK.md | — | 02:50:26 |

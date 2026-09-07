@@ -9,8 +9,8 @@
 # Every door under the gate mutex; refreeze doors exit NON-ZERO on success by design. Prints a PREDICTIONS line first (E4).
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 BASE=6ebe0ef3bd2e7fa0f5d0ede5c93780ecfbf3aada
-# ⛔ UNFILLED-TOKEN GUARD (chair, 03:08): this file carries __TOKENS__ until predict-910.log is read; it refuses to run with any left.
-grep -q "__[A-Z_]*__" "$0" && { echo "REFUSED: unfilled __TOKENS__ in $0 — fill PREDICTIONS / LIGHTING_NOTE / LIGHTING_COMMIT from predict-910.log first"; exit 8; }
+# ⛔ UNFILLED-TOKEN GUARD (chair, 03:08): this file carried three prediction tokens until predict-910.log was read (filled 03:45); it refuses to run with any left.
+grep -qE "__(PREDICTIONS|LIGHTING_NOTE|LIGHTING_COMMIT)__" "$0" && { echo "REFUSED: an unfilled prediction token in $0 — fill PREDICTIONS / LIGHTING_NOTE / LIGHTING_COMMIT from predict-910.log first"; exit 8; }
 D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 EXPECT_CARS=${EXPECT_CARS:?set EXPECT_CARS to the dock car count before the register cars}
