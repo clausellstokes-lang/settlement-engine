@@ -1,11 +1,11 @@
-# RECEIPT — ANCHOR-905 — **PARTIAL** (in flight)
+# RECEIPT — ANCHOR-905 — **COMPLETE**
 
 Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
 Dock: `$SC/laneANCHOR905` detached @ `6582958ce7bdc10bcbb8c69d9789b4d957fc5890`
 Arrival porcelain: **0 lines**. node_modules: **453 symlinked packages** (never materialised).
 VITEST HOLD present at start (`$SC/HOLD-VITEST`) — all reading/measuring/editing done under the hold; no vitest, no build.
 
-Status: PARTIAL. Sections below are appended as each proof lands.
+Status: **COMPLETE** — see the DOCK TIP and RETROVALIDATION ROW at the end.
 
 ---
 
@@ -94,3 +94,121 @@ Backups (for `cmp` verification of every restore): `$SC/anchor905-scratch/flags.
 
 ### Status at the hold
 Reading, measuring, predictions and the edit are all complete. Dock porcelain **0**, edit parked in scratch. Now polling `$SC/HOLD-VITEST` on a 60 s `sleep` loop; no vitest and no build has run.
+
+---
+
+## PROOFS (hold lifted after ~4 min of 60 s polling; every exit captured in-shell as `CMD; E=$?`)
+
+### 1. Negative control — the three-state sequence. **The anchor is PROVEN recognised, not assumed.**
+
+**STATE 1 — PRE-EDIT baseline** (pristine tree, row at 1) · `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js`
+```
+STATE1 EXIT=0
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+```
+⇒ the frozen `1` was a LIVE, true reading on arrival — not an already-stale row. Porcelain was 0 at the moment of this run.
+
+**STATE 2 — NEGATIVE CONTROL** (anchored tree, row still at `1`) — RED, **two arms**, exit 1:
+```
+STATE2 (NEGATIVE CONTROL) EXIT=1
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected [ Array(1) ] to deeply equal []
++   "tests/lib/flags.test.js: 0 un-anchored site(s) found, ceiling 1 — a site was anchored; LOWER the row to 0 (delete it at 0) to bank the win",
+AssertionError: the scan found fewer un-anchored negatives than the frozen inventory — either sites were anchored (lower their rows) or the scanner broke: expected 1530 to be greater than or equal to 1531
+ Test Files  1 failed (1)
+      Tests  2 failed | 7 passed (9)
+```
+Two things this control establishes that a green alone could not:
+- **The scanner genuinely stopped counting the site** — it reports `0 un-anchored site(s) found` where it counted 1 before. The helper form is recognised by `HELPER_RE`, measured rather than believed.
+- **The walker's own arithmetic confirms my written prediction.** vitest prints ACTUAL first: `1530` is the live `totalFound`, `1531` the `totalFrozen` I had computed by hand from the literal *before any instrument ran* (502 rows / 1526 sites general + 5 quarantine). The instrument and the prediction agree on both numbers.
+- It also names the disposition in the walker's own words — **"delete it at 0"** — independently corroborating P2's ruling.
+
+**STATE 3 — FINAL** (anchored tree, row DELETED) — GREEN:
+```
+STATE3 (FINAL) EXIT=0
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+```
+General roster after the bank: **502 → 501 rows, 1526 → 1525 sites** — exactly the predicted shrink.
+
+### 2. `tests/lib/flags.test.js` — GREEN, +1 test
+```
+FLAGS EXIT=0
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+```
+10 → **11 passed**, the predicted +1. Both retirement cases pass through `expectAbsentWithAnchor`, so each now asserts its anchor sibling IS present before asserting the retired key is not.
+
+### 3. OSR plain read — **1972 exact, no drift**
+`node scripts/check-observed-shape-readers.mjs; E=$?`
+```
+OSR EXIT=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+```
+Predicted 1972 exact; measured 1972. A READ only — no register door touched. (Zero `src/` bytes moved, so no drift was possible.)
+
+### 4. THE OWED `tests/lint/` DIRECTORY RUN — exit 1, ONE failing arm, and it is the predicted one
+`GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/ --maxWorkers=2`
+```
+LINT DIR EXIT=1
+ Test Files  1 failed | 139 passed (140)
+      Tests  1 failed | 2193 passed (2194)
+   Duration  169.66s
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 …: expected 23654 to be 23653 // Object.is equality
+```
+**Failing arm list: exactly one** — the lighting census `titles` figure. vitest prints ACTUAL first, so the live tree measures **23654** against the frozen **23653**: precisely the movement predicted in writing above, caused by this car's one new `it(` title.
+
+Two things the run proves beyond the headline:
+- **`files`, `parked` and `credited` did NOT move.** The census is *sequenced* — it stops at its first red figure — and its order is files → parked → credited → titles. Reaching `titles` at all is executed proof that 2543 / 373 / 2170 each passed. `suiteTitles` was never evaluated, but the measured `describe(` count held at 3, so it stays 6333.
+- **The whole scanner family is green.** 139 of 140 files passed, so the src-/test-adding blindness the preamble warns a single-file green about did not materialise anywhere else.
+
+**NOT CURED, NOT BANKED — the door is the chair's.** `tests/lint/.lighting-census-baseline.json`'s own `_doc` reads *"⛔ NEVER HAND-EDIT THE FIVE FIGURES"*, and the only legal cure is `LIGHTING_CENSUS_REFREEZE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` — a register door, forbidden to this lane. It also refuses on a dirty tree, so the chair should take it against a clean checkout of this car.
+
+**No `src/` bytes moved ⇒ NO typecheck run is owed**, and none was run.
+
+---
+
+## COMMIT
+`0eb02811156fd5f181ca9e0f27443b6b4e1c1639` — 2 files changed, 13 insertions(+), 2 deletions(-).
+Staged **explicitly by path** (never `-A`/`-u`/`.`); staged set verified to be exactly the two intended files before committing; no baseline or `.json` touched; porcelain 0 after, with no untracked file lost (none existed).
+
+---
+
+## RETROVALIDATION ROW
+
+**What I judged (all within brief scope, none owner-gated):**
+1. **R4's mechanism is refuted, and the car was written to the measured reading.** The anchor does NOT raise the row 1 → 2; anchoring both sites LOWERS it 1 → 0. The chair's 21:28 re-read was correct and R4 was not. Evidence: the negative control's own message.
+2. **Zero is spelled as DELETION, not `: 0`.** Four independent citations (walker `:193-194`, the arm's failure text, the `homeLanding` precedent at `:200`, and `renderLiteral` at `:140-146` which can never emit a zero row). Note that a `: 0` row would *not* have red — it would have passed silently while diverging permanently from the regenerator. This is a correctness call, not a cosmetic one.
+3. **The helper over the comment marker, with `Object.keys(FLAGS)` as the subject.** `assertContainable` refuses a plain object, so the naive `expectAbsentWithAnchor(FLAGS, …)` would have failed; the keys array is both the working form and the semantically exact one. This does replace `not.toHaveProperty` with key-array containment — own-enumerable rather than own+inherited — which I judged equivalent-and-more-precise here because `FLAGS` is a frozen `Object.fromEntries` literal and the key set *is* the exposure surface. **Re-derive this if you disagree.**
+4. **Anchor siblings chosen for family adjacency** (`loadingJourneyFilm`, `workshopNav`) over the most-exercised key (`discordOauth`), so that a drift removing a whole flag family reds on the anchor rather than passing.
+5. **Three-state negative control instead of two**, at the cost of one extra walker run, to establish that the frozen `1` was live on arrival rather than already stale.
+6. **The test ratchet owes no door** — the brief's P5 listed it among the registers; measurement shows it is a 0.9 collapse floor, not a pin.
+
+**What the Fable chair must re-derive (priority order):**
+- **P1 — HIGH: take the lighting-census door.** `titles` 23653 → **23654**, all other four figures unmoved and three of them proven so by the sequenced arm. This is the only red this lane leaves, it is attributable to this car alone, and `tests/lint/` cannot go green again until the chair refreezes. The refreeze refuses on a dirty tree.
+- **P2 — MEDIUM: ratify the assertion-shape change in `flags.test.js`.** The legacy `loadingJourneySetBg` case no longer uses `not.toHaveProperty`; it uses `expectAbsentWithAnchor` over `Object.keys(FLAGS)` (judgment 3). This is a strengthening in every respect I can measure, but it is a rewrite of a pre-existing assertion rather than a pure addition, so it is the chair's to bless.
+- **P3 — MEDIUM: note that the negative-assertion burn-down is one file shorter.** 502 → 501 rows, 1526 → 1525 sites, `tests/lib/flags.test.js` retired from the worklist at zero. Two sites anchored, one of them legacy debt.
+- **P4 — LOW: `scripts/.test-ratchet-baseline.json` `totalTests` is now one stale-low** (31970 vs a live 31971). Harmless inside the 0.9 floor; it refreshes on the next regeneration. No action needed, recorded so nobody re-finds it as a defect.
+- **P5 — LOW: the §904 ODQ row is discharged.** The retirement is now structurally permanent: a `mobileSingleChrome` key re-entering `FLAG_DEFAULTS` reds `tests/lib/flags.test.js`.
+
+**Receipts by path:**
+- this receipt — `$SC/receipt-anchor-905.md`
+- state 1 (pre-edit green) — `$SC/anchor905-scratch/state1-preedit.txt`
+- state 2 (negative control red) — `$SC/anchor905-scratch/state2-negctl.txt`
+- state 3 (final green) — `$SC/anchor905-scratch/state3-final.txt`
+- flags.test.js run — `$SC/anchor905-scratch/flags-run.txt`
+- OSR dry read — `$SC/anchor905-scratch/osr-dry.txt`
+- `tests/lint/` directory run — `$SC/anchor905-scratch/lint-dir.txt`
+- commit message — `$SC/anchor905-scratch/commit-msg.txt`
+- pre-edit backups — `$SC/anchor905-scratch/flags.test.js.PRISTINE`, `walker.test.js.PRISTINE`, and the parked edit `flags.test.js.ANCHORED`
+
+**Laws observed:** no register doors, no `npm run check`, no `npm run build`, no push, no rebase, no stash, no `git checkout --`, no `git show HEAD:<path> > <path>`, no `--amend`, no subagents, no `node_modules` materialisation (453 symlinks intact), `package.json` untouched, the §898 golden-master red never run. Every exit captured in-shell. The vitest hold was respected in full: all reading, measuring, predicting and editing happened under it, and the first vitest process started only after a 60 s-interval poll saw the file gone (~4 minutes).
+
+---
+
+## DOCK TIP
+`0eb02811156fd5f181ca9e0f27443b6b4e1c1639` · **1 car** over `6582958ce` · porcelain **0** · trailers present (`Seat: Opus 5 — Fable-unvalidated`, `Lane: ANCHOR-905`, the last two lines of the message, nothing after them).
+
+**Status: COMPLETE** (was PARTIAL).
