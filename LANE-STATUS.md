@@ -1,27 +1,28 @@
-# LANE-STATUS — written 2026-09-07 01:04:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 01:10:12 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 lands with zero product bytes — the three CAPACITY measurements are ta
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 4243bdc61 · 0 cars over 4243bdc61 · porcelain 5 · last commits:
+- **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3835be900 · 1 cars over 4243bdc61 · porcelain 2 · last commits:
+    3835be900 §907 CAR 1: the tripwire registry gets a NOT-EXECUTABLE channel — a row keyed on a field no receipt writer ships says so instead of answering [], and a blind instrument can no longer certify itself full
     porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M scripts/soak/evaluate.mjs
-       M scripts/soak/register.mjs
        M scripts/soak/tripwires.mjs
-       M tests/soak-harness/soakRegister.test.js
        M tests/soak-harness/tripwireRegistry.test.js
-    receipt `receipt-cap-trip-907.md` (mtime 09-07 00:52) head:
-      | # RECEIPT — LANE CAP-TRIP-907 (Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1, session 405b5e7e)
+    receipt `receipt-cap-trip-907.md` (mtime 09-07 01:07) head:
+      | # RECEIPT — LANE CAP-TRIP-907
+      | **Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1 (session 405b5e7e) · dock `$SC/laneB6` · repair lane, four cars**
       | 
-      | STATUS: PARTIAL (arrival only)
+      | **STATUS: PARTIAL** — CAR 1 landed (`3835be900`). CARS 2–4 in flight. Last written Mon Sep  7 01:06:33 EDT 2026.
       | 
-      | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026
-      | - HEAD == `4243bdc610fe5b380f1d0029973cf9088bae1631` — CONFIRMED (`git rev-parse HEAD`)
-      | - `git status --porcelain | wc -l` == `0` — CONFIRMED
-      | - `ls -A node_modules | wc -l` == `455` — the two extras over 453 are the Vitest cache dirs `.vite` and `.vite-temp` (plus `.bin`, which is part of the 453). Listing of dot-entries: `.bin`, `.vite`, `.vite-temp`. ACCEP
+      | ## ARRIVAL CHECK — Mon Sep  7 00:52:00 EDT 2026 — **all three lines pass**
+      | - `git rev-parse HEAD` == `4243bdc610fe5b380f1d0029973cf9088bae1631` — **CONFIRMED**
+      | - `git status --porcelain | wc -l` == `0` — **CONFIRMED**
+      | - `ls -A node_modules | wc -l` == `455`. The two over 453 are the Vitest cache dirs; the dot-entries are exactly `.bin`, `.vite`, `.vite-temp`. **ACCEPTABLE per the brief, and stated as the brief requires.**
       | 
-      | ## CARS
-      | (pending)
+      | ## THE BRIEF'S FIGURES, RE-DERIVED BEFORE ANY EDIT (a brief figure is a hypothesis)
+      | | brief cites | measured at `4243bdc61` | verdict |
+      | |---|---|---|
+      | | `tripwires.mjs:239,:243,:276,:278` key on `yearlyPopulations`/`yearlyDiedFlags` | grep: exactly those four lines | **CONFIRMED** |
 - **L-UI-MAT(landed §904)** dock `laneLUIMAT` HEAD 6582958ce · 6 cars over dd5f13218 · porcelain 0 · last commits:
     6582958ce Register (capsule car): the base-state capsule regenerates at the §904 tip (rung 18 still; no OSR movement at this landing)
     56ac834ad Register (last car): the census totals re-freeze at the composed tip — totalTests 31970 -> 31970, totalFiles 2489 unchanged, entries 3
@@ -128,8 +129,8 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:41 · critic 09-06 22:31
-- **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-06 22:09
-- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1037 · partial 169 · verdict files 83 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
+- **dnd**: claims 1153 · verdicts 1153 (todo 0) · kept 760 · partial 195 · verdict files 70 (triage 2, regrade r6) · section 09-07 00:36 · critic 09-07 01:07
+- **ai**: claims 1518 · verdicts 1518 (todo 0) · kept 1015 · partial 191 · verdict files 84 (triage 2, regrade r5) · section 09-06 15:34 · critic 09-06 22:23
 - **kay**: claims 1103 · verdicts 1103 (todo 0) · kept 631 · partial 100 · verdict files 55 (triage 2, regrade r8) · section 09-06 20:21 · critic 09-06 20:50
 - **leguin**: claims 924 · verdicts 924 (todo 0) · kept 454 · partial 87 · verdict files 41 (triage 2, regrade r8) · section 09-06 18:38 · critic 09-06 18:59
 - **wolfe**: claims 1255 · verdicts 1255 (todo 0) · kept 766 · partial 217 · verdict files 71 (triage 1, regrade r7) · section 09-06 21:48 · critic 09-06 22:09
@@ -137,8 +138,8 @@ product claude/composite-r4 = 4243bdc61 · ledger = 898dcb5b8 §907: HORIZON-B6 
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r8/wf_e95fca37-bb5, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r10/wf_4bd76597-3a3, ai r10/wf_0eb229cc-f75
 
 ## WORKFLOW RUNS of chair session 405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_0eb229cc-f75: 45 journal lines, 23 agents
-- wf_4bd76597-3a3: 7 journal lines, 4 agents
+- wf_0eb229cc-f75: 47 journal lines, 24 agents
+- wf_4bd76597-3a3: 8 journal lines, 4 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;54294 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.62 2.37 2.41
+load: 2.58 2.50 2.46

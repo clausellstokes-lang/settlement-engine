@@ -20579,9 +20579,11 @@
   },
   "62": {
    "index": 62,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "more predictable and formulaic narratives",
-   "note": "Quote appears word for word ('they tend to generate more predictable and formulaic narratives'). Table 3 confirms all three figures: GPT-4o 'With at least one cliché phrase' 26,7% (16); Surprising Associations BART 15,0%, GPT-3.5 3,3%, GPT-4o 1,6%. Body text: 'GPT-4o is substantially better, with just one in four synopsis having a cliché phrase (26,7%)'. Note the paper's title is 'Small Language Models can Outperform Humans in Short Creative Writing', and the 26.7% is the least-cliché result of the three models, not a low absolute."
+   "note": "Quote appears word for word ('they tend to generate more predictable and formulaic narratives'). Table 3 confirms all three figures: GPT-4o 'With at least one cliché phrase' 26,7% (16); Surprising Associations BART 15,0%, GPT-3.5 3,3%, GPT-4o 1,6%. Body text: 'GPT-4o is substantially better, with just one in four synopsis having a cliché phrase (26,7%)'. Note the paper's title is 'Small Language Models can Outperform Humans in Short Creative Writing', and the 26.7% is the least-cliché result of the three models, not a low absolute.",
+   "unsupportedLimb": "the framing word 'only' before 26.7% — the verifier records that this is the least-cliche result of the three models, 'not a low absolute'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "63": {
    "index": 63,
@@ -20757,10 +20759,11 @@
   },
   "87": {
    "index": 87,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "They are boring. They are flat",
    "note": "Verbatim: 'AI stories are bad in ways that no human has been bad before. They are boring. They are flat.' The 'no subtext or layers' element appears in the other pass at the same quote. Secondhand framing is accurate - Vollmer cites Post Alley 2024 and NPR 2023 for Clarke, not Clarke's own post.",
-   "fromFile": "verdicts-ai-chunk-00.json"
+   "unsupportedLimb": "the 'no subtext or layers' limb — the verifier does not locate it on this page, recording only that it 'appears in the other pass at the same quote'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "88": {
    "index": 88,
@@ -21270,10 +21273,11 @@
   },
   "156": {
    "index": 156,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Grief, as I've learned, is a delta",
    "note": "Exact capitalisation appears as a standalone pull-quote in the essay body. Michel's cash-out argument is on the page: 'Why is it good? If \"delta\" refers to the geographical delta then in what way is grief metaphorically a delta region...'. Note the line is the OpenAI story's text, quoted by Michel, not his own prose.",
-   "fromFile": "verdicts-ai-i150-164.json"
+   "unsupportedLimb": "the attribution limb — the verifier records the quoted line is the OpenAI story's own text quoted by Michel, not Michel's prose (the rule applied to [100] and [101])",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "157": {
    "index": 157,
@@ -22041,10 +22045,11 @@
   },
   "261": {
    "index": 261,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "neutral-seeming in tone, but not necessarily in substance",
    "note": "Wikitext fetched raw; the quote is verbatim in the rendered page (the wikitext splits it across a piped link: 'neutral-seeming in tone, [[Algorithmic bias|but not necessarily in substance]]'). The biography limb is supported in other words by the next sentence: 'This concern is especially salient for biographies of living persons' - the page says 'especially salient', the claim says 'hardest to catch', and the page narrows to living persons.",
-   "fromFile": "verdicts-ai-i254-268.json"
+   "unsupportedLimb": "the superlative 'hardest to catch' and the unrestricted 'biographies' — the verifier records the page says 'especially salient' and narrows to biographies of living persons",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "262": {
    "index": 262,
@@ -22358,10 +22363,11 @@
   },
   "303": {
    "index": 303,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the object is promoted to subject and becomes the 'doer'",
    "note": "Talk section 'Suggested addition: Inanimate subjects performing human actions (dropped actors)'. 'Rooms tighten' verbatim in the example list ('\"Rooms tighten and rates move\" (hotels sell out and raise rates)'); 'The closure maps publish in June' supplies the maps-publish example. Agent-promotion limb verbatim: 'the object is promoted to subject and becomes the \"doer.\"' Actor-suppression limb: 'while not mentioning or skipping the \"doer\"' and 'prose in which things happen but nobody does anything'. Nuance recorded, not a limb failure: the page says LLM output 'defaults to actor-less constructions at high density', a shade weaker than the claim's 'ever'.",
-   "fromFile": "verdicts-ai-i299-313.json"
+   "unsupportedLimb": "the absolute 'no human actor is ever named' — the verifier records the page says LLM output 'defaults to actor-less constructions at high density'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "304": {
    "index": 304,
@@ -22652,10 +22658,11 @@
   },
   "344": {
    "index": 344,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "DMs found that the model struggled sometimes to describe combat",
    "note": "ar5iv 2308.07540 fetched raw (HTTP 200). One sentence carries every limb: 'DMs found that the model struggled sometimes to describe combat, and suggested that including more information about the combat state ... or map placement information could help generate more specific descriptions (P3, P9). Some DMs used these descriptions verbatim (P3, P8, P17), while others picked out particularly vivid phrases to use in a description of their own (P3, P8, P10, P12, P20). Others disagreed with the model's description and wrote their own instead (P13, P16, P18, P19).' Three-way split confirmed with participant ids. Minor framing note: the missing combat-state/map-placement is the DMs' suggested remedy, so the causal 'because' is the paper's implication rather than its assertion.",
-   "fromFile": "verdicts-ai-i344-358.json"
+   "unsupportedLimb": "the causal 'because it had no combat-state or map-placement information' — the verifier records this is 'the paper's implication rather than its assertion'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "345": {
    "index": 345,
@@ -22791,10 +22798,11 @@
   },
   "363": {
    "index": 363,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "most failed plans causally sound, actions lacking valid intention",
    "note": "Quote 'character actions lacking valid intention' verbatim. Full page sentence: 'For the o1 model, most failed plans are causally sound, but often with character actions lacking valid intention. For instance, Aladdin kills the dragon due to perceived threat but then obtains the lamp and casts a spell without valid motivation.' Two qualifiers the claim drops but does not contradict: the finding is scoped to the o1 model on the Aladdin intentional-planning task, and the page says 'often with', not always.",
-   "fromFile": "verdicts-ai-i359-373.json"
+   "unsupportedLimb": "the unscoped generalisation — the verifier records the finding is scoped to the o1 model and hedged as 'often with', where the claim states it flatly",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "364": {
    "index": 364,
@@ -22869,10 +22877,11 @@
   },
   "374": {
    "index": 374,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "An LLM Game Master would try to accommodate for even the most bizarre requests",
    "note": "Sec. V Limitations. Raw arXiv HTML v5, exact: 'Human GMs frequently curb the more exotic player requests...' then 'An LLM Game Master would try to accommodate for even the most bizarre requests, with little consideration for the consequential impacts to any predetermined game events.' Every limb (human GM curbs; LLM accommodates; little regard for predetermined events) is on the page. Only softening: the paper's verb is conditional 'would try to', the claim's is indicative 'accommodates'.",
-   "fromFile": "verdicts-ai-i374-388.json"
+   "unsupportedLimb": "the indicative 'accommodates' — the verifier records the paper's verb is the conditional 'would try to'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "375": {
    "index": 375,
@@ -22997,10 +23006,11 @@
   },
   "392": {
    "index": 392,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"Note the padding. Note how it doesn't say ANYTHING.\"",
    "note": "Quote verbatim. The opener is on the page exactly as claimed (\"Arriving at the house, the PCs see a strange sight: the structure appears to be ...\" - \"This then is the opening line of the first real room\"), as is the deletability limb: \"You can literally delete everything here and not impact the adventure in any way at all.\" The \"every encounter\" limb is the page's \"And encounter after encounter does this, is like this\" plus \"This is the normal manner for this adventure\" - repetition-across-encounters, phrased as recurrence rather than a literal universal.",
-   "fromFile": "verdicts-ai-i389-403.json"
+   "unsupportedLimb": "the universal 'every encounter' — the verifier records the page phrases it as recurrence, not a literal universal",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "393": {
    "index": 393,
@@ -23090,10 +23100,11 @@
   },
   "405": {
    "index": 405,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "there were similarities with the original room",
    "note": "Raw page, Beoric post #64: after asking for 'a unique encounter in the trick room', he writes 'The other is that there were similarities with the original room; I assume this is because it has a limited data set of D&D adventures to draw on. I suspect that if you use it a lot, you would have to seed it with your own elements.' Both limbs supported. Minor softening: the page says 'I suspect ... if you use it a lot', the claim says 'concluded'.",
-   "fromFile": "verdicts-ai-i404-418.json"
+   "unsupportedLimb": "the verb 'concluded' — the verifier records the page says 'I suspect ... if you use it a lot'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "406": {
    "index": 406,
@@ -23404,10 +23415,11 @@
   },
   "449": {
    "index": 449,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "AI is only adept at regurgitating tropes",
    "note": "Raw arXiv HTML (2405.20956v2) fetched 200 with a browser UA. Quote exact, Sec. 4.4: 'the whole idea of humor is that it is surprising, and it is so human, and AI is only adept at regurgitating tropes' (p15), framed by the authors as: 'By simply learning to predict the most likely next token of text, they hypothesized, models will be unable to produce the surprising and unique moments that are hallmarks of comedy.' All limbs present; note the proposition is reported as a participant hypothesis (p15), not an authors' finding.",
-   "fromFile": "verdicts-ai-i449-463.json"
+   "unsupportedLimb": "the evidential status — the verifier records the proposition is reported as a participant hypothesis (p15), not an authors' finding",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "450": {
    "index": 450,
@@ -23813,11 +23825,11 @@
   },
   "506": {
    "index": 506,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "Players selected the boundary sentence 23.4% of time, chance 10%.",
    "note": "Sec 4: 'players were significantly better than random chance at the boundary detection task, correctly selecting the boundary sentence 23.4% of the time (chance being 10%).' The paper frames 23.4% as above chance rather than as 'only'.",
-   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §4 of the full text of arXiv 2212.12672, not on the cited /abs/ page",
-   "fromFile": "verdicts-ai-regrade-r5.json"
+   "unsupportedLimb": "the framing word 'only' before 23.4% — the verifier records that the paper frames 23.4% as above chance rather than as 'only'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "507": {
    "index": 507,
@@ -23923,11 +23935,11 @@
   },
   "520": {
    "index": 520,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "sometimes a mirage built on leveraging artifacts in the training data",
    "note": "Quote verbatim (§2, BERTology overview). Adversarial-data limb verbatim in the preceding sentences: McCoy et al.'s syntactic-heuristic finding — \"In a dataset carefully designed to frustrate such heuristics, BERT's performance falls to significantly below chance.\" One hedge is dropped by the claim: the page says apparent reasoning is \"sometimes a mirage\", not always.",
-   "unsupportedLimb": "verbatim-at-the-cited-URL — the quote is in §2 of the ACL PDF (2020.acl-main.463.pdf); the landing page carries only the abstract",
-   "fromFile": "verdicts-ai-regrade-r5.json"
+   "unsupportedLimb": "the unhedged 'a mirage' — the verifier records the page says apparent reasoning is 'sometimes a mirage', not always",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "521": {
    "index": 521,
@@ -24011,10 +24023,11 @@
   },
   "531": {
    "index": 531,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "one of the main functions of creativity ... is the expression of (deep) emotions, a feat that machines lack (so far)",
    "note": "ScienceDirect 403 by every route and no Wayback 200; verified against the raw author manuscript PDF (arXiv:2005.09980), the same paper. The quoted fragment 'a feat that machines lack' is verbatim and the no-machine-creativity limb is explicit ('the results do not indicate machines are “creative.”'). Graded SUBSTANCE rather than VERBATIM because the paper calls deep emotion one of the main FUNCTIONS of creativity, not a requirement of it, and hedges the machine limb with '(so far)'.",
-   "fromFile": "verdicts-ai-i524-538.json"
+   "unsupportedLimb": "the 'which requires expression of deep emotion' limb — the verifier records the paper calls deep emotion one of the main FUNCTIONS of creativity, not a requirement of it, and hedges the machine limb with '(so far)'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "532": {
    "index": 532,
@@ -24516,10 +24529,11 @@
   },
   "601": {
    "index": 601,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "“in part because they find AI poems more straightforward”",
    "note": "Discussion, raw page: “We propose that people rate AI poems more highly across all metrics in part because they find AI poems more straightforward.” Quote verbatim; every limb supported. Only softening dropped by the claim is the authors' “in part” (they offer it as a partial, not sole, explanation).",
-   "fromFile": "verdicts-ai-i601-615.json"
+   "unsupportedLimb": "the sole-cause reading — the verifier records the authors offer it 'in part', as a partial and not the sole explanation",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "602": {
    "index": 602,
@@ -24579,10 +24593,11 @@
   },
   "610": {
    "index": 610,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "“possibly because fine-tuning eliminates the stylistic tics… experts used to distinguish”",
    "note": "§4.1; quote verbatim, including the em-dashed list “clíchés, awkward phrasing, overly ornamental language” and the trailing “that experts used to distinguish human from AI-generated text”. The one softening the claim drops is modal: the authors hedge the mechanism as “possibly because”, so “attribute” states with more confidence than the page does — it remains the only explanation the page offers for the expert shift.",
-   "fromFile": "verdicts-ai-i601-615.json"
+   "unsupportedLimb": "the verb 'attribute' — the verifier records the authors hedge the mechanism as 'possibly because', so the claim states it with more confidence than the page does",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "611": {
    "index": 611,
@@ -27645,24 +27660,27 @@
   },
   "1046": {
    "index": 1046,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "The probability of a repeated phrase increases with each repetition",
    "note": "arXiv 1904.09751 PDF, Figure 4 caption, verbatim; caption continues that this creates a positive feedback loop, and adds the effect held for the vast majority of phrases tested regardless of length or sampling. That feedback-loop wording supports the claim's 'self-reinforcing' limb. Fetched raw PDF via arxiv.org/pdf, pdftotext -layout.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/1904.09751) carries only the abstract; the quote is in arXiv 1904.09751 PDF, Figure 4 caption",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1047": {
    "index": 1047,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "forced to favor the lowest common denominator, rather than informative language",
    "note": "arXiv 1904.09751, section 4.3 'Natural Language Does Not Maximize Probability', verbatim (paper reads 'are forced to favor...'). Every limb holds: the paragraph opens 'We conjecture that this is an intrinsic property of human language'; it names 'standard per-word learning objectives'; and the immediately preceding sentence calls solving the problem by training larger models or improving neural architectures 'unlikely', which is the claim's 'larger models alone will not cure blandness' limb.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/1904.09751) carries only the abstract; the quote is in arXiv 1904.09751 PDF, §4.3 'Natural Language Does Not Maximize Probability'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1048": {
    "index": 1048,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "people optimize against stating the obvious",
    "note": "arXiv 1904.09751, section 4.3, verbatim, introduced as what Grice's Maxims of Communication (Grice, 1975) show. The next sentence supplies the second limb: making every word as predictable as possible 'will be disfavored'. Grice 1975 also appears in the reference list.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/1904.09751) carries only the abstract; the quote is in arXiv 1904.09751 PDF, §4.3",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1049": {
    "index": 1049,
@@ -27701,10 +27719,11 @@
   },
   "1054": {
    "index": 1054,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "the substring conveys less and less information after each occurrence",
    "note": "arXiv 2202.00666 PDF, verbatim (across a column line-break). The clause before it states that when a string has a repetitive loop, language models often assign increasingly higher probability to the repeated substring, so the claim's causal framing is the paper's own. Location note: the sentence sits in the section-5 preamble just above Algorithm 5.1 (Top-k Sampling), not under a heading literally named 'Shortcomings of Existing Algorithms' in this version; the verdict is on the claim, not the locator.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2202.00666) carries only the abstract; the quote is in arXiv 2202.00666 PDF, §5 preamble above Algorithm 5.1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1055": {
    "index": 1055,
@@ -27744,10 +27763,11 @@
   },
   "1060": {
    "index": 1060,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Both types of strategies tend to eventually fall into repetitive loops",
    "note": "arXiv 2202.00666, footnote 1 on page 1 (section 1, Introduction), verbatim. The preceding footnote sentence names the two types: maximization-based strategies (generic or degenerate text) and stochastic strategies (occasionally nonsensical text), so both limbs of the claim hold.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2202.00666) carries only the abstract; the quote is in arXiv 2202.00666 PDF, footnote 1 on page 1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1061": {
    "index": 1061,
@@ -27793,17 +27813,19 @@
   },
   "1067": {
    "index": 1067,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "percentage repetition decreases with increase in cross-entropy",
    "note": "arXiv 2007.14966 (Mirostat), section 5.2, discussion of Figure 3a, verbatim. The paper defines percentage repetition as percentage 1-gram repetition, i.e. repeated tokens, and the axis is observed cross-entropy rate of the generated text, so the claim's 'repeated tokens' and 'observed cross-entropy' limbs both hold.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2007.14966) carries only the abstract; the quote is in arXiv 2007.14966 PDF, §5.2 (Figure 3a discussion)",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1068": {
    "index": 1068,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "this relation is independent of the sampling method",
    "note": "arXiv 2007.14966, section 5.2, Figure 3a discussion; the full sentence reads that percentage repetition decreases with increase in cross-entropy 'and more importantly, for a fixed GPT-2 model, this relation is independent of the sampling method' - the 'fixed GPT-2 model' limb is on the page verbatim too (trueWording trimmed to the twelve-word cap). The conclusion section repeats that repetitions are independent of the sampling method.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2007.14966) carries only the abstract; the quote is in arXiv 2007.14966 PDF, §5.2 (Figure 3a discussion)",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1069": {
    "index": 1069,
@@ -27842,10 +27864,11 @@
   },
   "1074": {
    "index": 1074,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "stems from the anisotropic distribution of token representations",
    "note": "arXiv 2202.06417, section 1 Introduction, verbatim: 'In this work, we argue that the degeneration of neural language models stems from the anisotropic distribution of token representations'; the abstract restates it as the underlying reason for model degeneration, and the conclusion repeats it. The 'rather than in the decoding rule alone' limb is supported by the abstract's contrast: existing approaches introduce stochasticity via sampling or modify training objectives, yet the paper locates the underlying reason in the representation space.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2202.06417) carries only the abstract; the quote is in arXiv 2202.06417 PDF, §1 Introduction",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1075": {
    "index": 1075,
@@ -27982,10 +28005,11 @@
   },
   "1094": {
    "index": 1094,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "RLHF has been shown to significantly reduce output diversity",
    "note": "arXiv 2510.15061 (Antislop), section 2 Related Work, verbatim; the sentence continues 'compared to a supervised baseline [Kirk et al., 2024]', so both the citation limb and the 'relative to a supervised baseline' limb hold. Kirk et al., 'Understanding the effects of RLHF on LLM generalisation and diversity', is in the reference list.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2510.15061) carries only the abstract; the quote is in arXiv 2510.15061 PDF, §2 Related Work",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1095": {
    "index": 1095,
@@ -28059,10 +28083,11 @@
   },
   "1105": {
    "index": 1105,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "to heavily truncate low-entropy distributions causes",
    "note": "arXiv 2210.15191, section 5.4 'Repetition analysis', verbatim; the full sentence is 'We hypothesize that the tendency of top-p sampling to heavily truncate low-entropy distributions causes it to generate repetitive text by only allowing the repetition-continuing word', which supplies the claim's hypothesise, top-p, and repetition-continuing-word limbs. Section 5.3's entropy analysis independently measures that top-p heavily truncates low-entropy distributions.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15191) carries only the abstract; the quote is in arXiv 2210.15191 PDF, §5.4 'Repetition analysis'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1106": {
    "index": 1106,
@@ -28080,10 +28105,11 @@
   },
   "1108": {
    "index": 1108,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "we show that top-p unnec-",
    "note": "arXiv 2210.15191, Abstract, verbatim including the hyphenated line break ('unnec-/essarily truncates high-probability words'), exactly as the claim's page note predicts. The claim's substance is the abstract's own framing: thinking of a neural language model as a mixture of a true distribution and a smoothing distribution that avoids infinite perplexity, in which light truncation algorithms aim to perform desmoothing; the Introduction adds 'uniform-like' to the smoothing distribution, matching that limb of the claim.",
-   "fromFile": "verdicts-ai-i1046-1108.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15191) carries only the abstract; the quote is in arXiv 2210.15191 PDF — the trueWording as printed carries the PDF's line-break hyphenation ('top-p unnec-'), which appears nowhere on the cited abs page",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1109": {
    "index": 1109,
@@ -28094,10 +28120,11 @@
   },
   "1110": {
    "index": 1110,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"high-quality text usually has information content close to\" H(q); section 4.2",
    "note": "arXiv abs page + ar5iv full text of 2203.17217 fetched raw (curl, browser UA). Quote is word-for-word in section 4.2 Results. The claim's substance is the paper's stated 'expected information hypothesis' in section 1/3.2: text perceived as human-like should have information content within a small interval around the entropy of natural language strings. All four authors and the 31 Mar 2022 submission date confirmed on the abs page.",
-   "fromFile": "verdicts-ai-i1110-1160.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2203.17217) carries only the abstract; the quote is in ar5iv full text of arXiv 2203.17217, §4.2 Results",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1111": {
    "index": 1111,
@@ -28355,10 +28382,11 @@
   },
   "1147": {
    "index": 1147,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"as bad as telling about a train that doesn't run\"",
    "note": "Same raw wikitext, same LPfi comment: 'An Understand that looks complete but misrepresents or misses important points can be as bad as telling about a train that doesn't run or a restaurant that isn't there.' 'Understand' is Wikivoyage's background section, so the paraphrase holds; note the source hedges with 'can be as bad as' where the claim states it flatly.",
-   "fromFile": "verdicts-ai-i1110-1160.json"
+   "unsupportedLimb": "the flat 'is as bad as' — the verifier records the source hedges with 'can be as bad as'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1148": {
    "index": 1148,
@@ -29854,10 +29882,11 @@
   },
   "1360": {
    "index": 1360,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "incompatible with our policies on citation",
    "note": "Live old.reddit.com returned a 'Welcome to Reddit' interstitial under a browser UA, and both .json routes were blocked (403 / same interstitial), so the verdict is taken from the Wayback raw capture web.archive.org/web/20260819232418id_/... . Rule 4 ('This is a DIY community'), subsection 'AI Content': generators 'tend to provide incomplete or even no proper citation for the material used to train the AI'; content from them is the quoted phrase 'and are thus not appropriate for our community'. The rule hedges with 'tend to' where the claim says flatly 'do not cite', but the stated ground of the ban is exactly the training-material citation failure.",
-   "fromFile": "verdicts-ai-i1335-1378.json"
+   "unsupportedLimb": "the flat 'do not cite the material they were trained on' — the verifier records the rule hedges with 'tend to provide incomplete or even no proper citation'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1361": {
    "index": 1361,
@@ -30333,24 +30362,27 @@
   },
   "1428": {
    "index": 1428,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"truncating via a threshold is an inherently limited approach\" (§4 opening)",
    "note": "Quote verbatim at the opening of §4. The mechanism limb is the paper's own next clause: if a model assigns more probability to a low quality token than a high quality token, there is no threshold that discards the low-quality one without discarding the high-quality one. Restated in §6 Conclusion.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2310.01693) carries only the abstract; the quote is in arXiv 2310.01693 PDF, opening of §4",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1429": {
    "index": 1429,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"no single method consistently performs best\" (§5.1; Figure 5 caption)",
    "note": "Quote verbatim in §5.1 under the heading 'BA-eta outperforms all other methods for GPT-2-Large'. Figure 5 caption independently states no single sampling method consistently outperforms across sizes; the four sizes are Small/Medium/Large/XL and the corpus is the Open Web Text test set, as the claim says.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2310.01693) carries only the abstract; the quote is in arXiv 2310.01693 PDF, §5.1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1430": {
    "index": 1430,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"human annotators prefer lower entropy generations\" (§5.1)",
    "note": "Quote verbatim. Annotators are Amazon Mechanical Turk workers doing pairwise comparisons (same paragraph). The explanation limb is the paper's next sentence: likely because humans see only one generation per method, making it impossible to assess diversity.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2310.01693) carries only the abstract; the quote is in arXiv 2310.01693 PDF, §5.1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1431": {
    "index": 1431,
@@ -30375,10 +30407,11 @@
   },
   "1434": {
    "index": 1434,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"IP1 is higher than 90% across the various corpus\" (§2.2)",
    "note": "Quote verbatim (2 occurrences: §1 and §2.2). IP is defined in §2.1 as the Rate of Increased Token Probability, the share of tokens whose probability rises versus the first sentence, so 'more than ninety per cent of tokens' is the right reading. The final limb is the paper's own note: the token repetition has not occurred at the current prediction step, only the same sentence-level context.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2206.02369) carries only the abstract; the quote is in arXiv 2206.02369 PDF, §1 and §2.2",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1435": {
    "index": 1435,
@@ -30389,10 +30422,11 @@
   },
   "1436": {
    "index": 1436,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"chosen with maximum probability which can avoid the self-reinforcement effect\" (§2.2)",
    "note": "Quote verbatim in §2.2 'Analyses'. Two points of nuance the claim smooths over: the paper hedges ('The effectiveness ... may rely on'), and it gives two reasons, of which the claim states only the second; the first is that previously generated sentences carry lower likelihood under stochastic sampling and so are less at risk of repetition.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "the sole-reason framing and the dropped hedge — the verifier records the paper says the effectiveness 'may rely on' and gives two reasons, of which the claim states only the second; the quote also sits in §2.2 of the PDF, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1437": {
    "index": 1437,
@@ -30403,17 +30437,19 @@
   },
   "1438": {
    "index": 1438,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"language models do look at the long-distance context\" (§1)",
    "note": "Quote verbatim in §1 Introduction. Both limbs hold: the sentence runs against Fu et al., named in the preceding sentence as assuming language models can be approximated by short-sighted first-order Markov models, and rests on Holtzman et al.'s observed cases of a positive feedback loop of repetitions. Repeated in the Related Work section. Polarity 'disputes' is correct.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2206.02369) carries only the abstract; the quote is in arXiv 2206.02369 PDF, §1 Introduction",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1439": {
    "index": 1439,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"top-k sampling, and nucleus sampling are all inconsistent\" (after Theorem 3.4)",
    "note": "Quote verbatim in the paragraph immediately after Theorem 3.4. The zero-probability limb is the Abstract's definition of inconsistency: the algorithm can yield an infinite-length sequence that has zero probability under the model, and the Abstract states the same four algorithms are proven inconsistent.",
-   "fromFile": "verdicts-ai-i1426-1440.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2002.02492) carries only the abstract; the quote is in arXiv 2002.02492 PDF, the paragraph immediately after Theorem 3.4",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1440": {
    "index": 1440,
@@ -30425,10 +30461,11 @@
   },
   "1441": {
    "index": 1441,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"Nucleus sampling also produced non-terminating sequences with the tanh-RNN\" (§5.1)",
    "note": "Raw PDF arxiv.org/pdf/2002.02492v2 -> pdftotext -layout. Quote exact. Sentence continues with (0.06%, nuc-0.2) for tanh-RNN and (0.13%, nuc-0.2) for LSTM-RNN; Table 1 row nucleus-0.2 gives 0.06+/-0.02 and 0.13+/-0.15, mean over 10 initializations. Every limb supported. Register caveat: this experiment is Wikitext2, not Wikitext-103 as the claim's modelEra field states (Wikitext-103 is used only for the separate GPT-2 transformer experiment) - the claim sentence itself does not name a corpus, so the verdict stands.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2002.02492) carries only the abstract; the quote is in arXiv 2002.02492v2 PDF, §5.1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1442": {
    "index": 1442,
@@ -30460,24 +30497,27 @@
   },
   "1446": {
    "index": 1446,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"the lowest quality to greedy decoding (.016)\" (§4.1)",
    "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact. Table 3 caption reads 'web text, GPT-2 xl'; appendix Table 6 xl block confirms greedy MAUVE 0.016 (vs sampling 0.882, nucleus 0.940). Adversarial check on 'lowest of the three': the paper's sentence compares exactly greedy/ancestral/nucleus, and greedy .016 is also below the fourth (adversarial, .057), so the limb is true either way.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2102.01454) carries only the abstract; the quote is in arXiv 2102.01454v3 PDF, §4.1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1447": {
    "index": 1447,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"nucleus sampling does not effectively cover the human text distribution\" (Fig. 2)",
    "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact in the Figure 2 caption. That caption calls the Type I error 'slightly smaller' than ancestral sampling's and the Type II error higher, so the claim's 'lower' is accurate and drops only the hedge. The caption scopes the comparison to Grover base (rightmost panel); the claim names no model, so no limb is unsupported.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2102.01454) carries only the abstract; the quote is in arXiv 2102.01454v3 PDF, Figure 2 caption",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1448": {
    "index": 1448,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"cannot be generated by truncation-based decoding algorithms such as nucleus sampling\" (§2)",
    "note": "Raw PDF arxiv.org/pdf/2102.01454v3. Quote exact. The sentence opens by defining Type II errors as false negatives and gives this inability as the example, so the Type II attribution is explicit rather than inferred; it is formalized immediately below under 'Quantifying the Errors', where KL(P|Q) quantifies the Type II error. The quote sits a few lines above that heading rather than inside it, which does not affect support.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2102.01454) carries only the abstract; the quote is in arXiv 2102.01454v3 PDF, §2",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1449": {
    "index": 1449,
@@ -30488,24 +30528,27 @@
   },
   "1450": {
    "index": 1450,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"the highest likelihood sentences are of surprisingly low quality\" (§1)",
    "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact in §1. The inflection-point limb comes from the Figure 1 caption: log likelihoods are generally positively correlated with average human quality judgments, with 'an inflection point after which they become negatively correlated'. Raters are crowdworkers (146 AMT workers).",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2004.10450) carries only the abstract; the quote is in arXiv 2004.10450v1 PDF, §1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1451": {
    "index": 1451,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"We asked 146 crowdworkers to rate the quality of 100 sentences\" (Fig. 1)",
    "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact; the caption continues 'across a variety of model likelihoods', supporting the range limb, and each plotted point averages 5 sentences of similar likelihood. §4.1 confirms the same qualified pool of 146 AMT workers.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2004.10450) carries only the abstract; the quote is in arXiv 2004.10450v1 PDF, Figure 1 caption",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1452": {
    "index": 1452,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"when aligned on entropy, sample quality between all autoregressive decoding algorithms\" (§4.2)",
    "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact; the sentence completes with the samples being comparable across a wide range. The divergence limb is the next sentence, which states that algorithms' sample quality diverges only when entropy is low. Twenty decoding algorithm-hyperparameter configurations confirmed in Section 4.2, matching modelEra.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2004.10450) carries only the abstract; the quote is in arXiv 2004.10450v1 PDF, §4.2",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1453": {
    "index": 1453,
@@ -30516,17 +30559,19 @@
   },
   "1454": {
    "index": 1454,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"over 38,000 ratings on almost 10,000 samples\" (§1)",
    "note": "Raw PDF arxiv.org/pdf/2004.10450v1. Quote exact in §1. §4.2 restates it with the 'paired' qualifier the claim uses: 'workers rate nearly 10,000 samples resulting in over 38,000 paired ratings.' Both limbs supported.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2004.10450) carries only the abstract; the quote is in arXiv 2004.10450v1 PDF, §1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1455": {
    "index": 1455,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"are on par with each other\" (Figure 1 caption)",
    "note": "Raw PDF arxiv.org/pdf/2009.07243v1. Quote exact. Figure 1 is explicitly the human evaluation panel ('Human evaluation (y-axis: quality, x-axis: diversity)'), so the 'human quality-diversity evaluation' limb holds; §1 names the three algorithms (top-k, nucleus, tempered) as performing on par in the Q-D trade-off 'as shown in Figure 1', and the Conclusion repeats it. §5.1 compares them by both automatic and human evaluation. 602 crowdworkers and the Gigaword/Wikitext-103 GPT2-small setup confirmed.",
-   "fromFile": "verdicts-ai-i1441-1455.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2009.07243) carries only the abstract; the quote is in arXiv 2009.07243v1 PDF, Figure 1 caption",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1456": {
    "index": 1456,
@@ -30552,17 +30597,19 @@
   },
   "1459": {
    "index": 1459,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "up to 80% of its mass in the first 500 most",
    "note": "Found in the 'Why are top-k's samples so easy to detect?' paragraph of the Automatic Detection Results section (numbered 7 in this v2 PDF, not 4 as the page field says). The 1,100-token-type limb is verbatim in the next sentence for the other sampling methods and human text. Scope note: the Figure 2b caption states the measurement is of the FIRST token generated in each sequence; the body sentence the claim paraphrases carries no such qualifier.",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/1911.00650) carries only the abstract; the quote is in arXiv 1911.00650v2 PDF, the Automatic Detection Results section",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1460": {
    "index": 1460,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "human performance is only at 71.4%",
    "note": "In the 'Human Evaluation' paragraph of the Automatic Detection Results section (Figure 3b), which reads that even with multi-paragraph 192-length excerpts performance is only 71.4%; it is overall human performance across all sampling methods, pooling the AMT and expert rater pools. Section number in the page field (4) is off; the content matches.",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/1911.00650) carries only the abstract; the quote is in arXiv 1911.00650v2 PDF, the Human Evaluation paragraph (Figure 3b)",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1461": {
    "index": 1461,
@@ -30587,31 +30634,35 @@
   },
   "1464": {
    "index": 1464,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "for this specific prompt and model, is unable to produce more diversity",
    "note": "Results paragraph of arXiv:2405.00492v1. The semantic limb is stated a few lines later: outputs at higher temperatures do not extend much further away from the exemplar story than outputs at lower temperatures (cosine similarity, Figure 1b). The exemplar is defined in the Introduction as the greedy sample for that context. The paper's hedge is 'not much further'; the claim drops 'much', though the same paragraph's opening sentence is unqualified.",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2405.00492) carries only the abstract; the quote is in arXiv 2405.00492v1 PDF, Results paragraph",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1465": {
    "index": 1465,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "higher temperatures (t > 1.0) do not necessarily lead to more diversity",
    "note": "Results paragraph of arXiv:2405.00492v1. The immediately preceding clause grounds it in the normalised edit distance measure of Figure 1c relative to the exemplar story, and notes an immediate diversity effect already at lower temperatures (.334 < t < 1.0).",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2405.00492) carries only the abstract; the quote is in arXiv 2405.00492v1 PDF, Results paragraph",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1466": {
    "index": 1466,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "aligns with natural language more closely than text produced using other",
    "note": "Section 5.5 'Consistent Trends' of arXiv:2106.00085v3, of text generated under the nucleus sampling decoding scheme versus other generation strategies. Corpus limb confirmed under 'Natural Language Corpus': English Wikipedia Dumps. Two hedges the claim drops: the paper says 'often' aligns more closely, and Section 5.4 records that LSTM text under random sampling follows all three of the length, stopword and symbol distributions the closest of any model.",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "the superlative 'closest' — the verifier records the paper says nucleus sampling 'often' aligns more closely, and that §5.4 has LSTM text under random sampling following all three distributions the closest of any model; the quote also sits in §5.5 of the PDF, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1467": {
    "index": 1467,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "beam sampling leads to strong divergence from natural language distributions",
    "note": "Section 5.4 'Length, Stopwords and Symbols' of arXiv:2106.00085v3, with 'across the board' following, and Table 3 holding the empirical-cdf comparisons for exactly those three distributions. Corpus is English Wikipedia Dumps.",
-   "fromFile": "verdicts-ai-i1456-1470.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2106.00085) carries only the abstract; the quote is in arXiv 2106.00085v3 PDF, §5.4 'Length, Stopwords and Symbols'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1468": {
    "index": 1468,
@@ -30638,17 +30689,19 @@
   },
   "1471": {
    "index": 1471,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "standard sampling and top-p completely fail on GPQA and GSM8K",
    "note": "Quote is verbatim in the paragraph under Table 2 (Sec. 4.2 Single-Pass Results). Every figure checks against Table 2 at T=3.0: GPQA Sample 0.00, Top-p 0.00, Min-p 16.02, Top-n-sigma 25.00; GSM8K Sample 0.00, Top-p 0.00, Min-p 14.84, Top-n-sigma 74.61. Sec. 4.1 Setup names the model LLaMA-3-8B-Instruct. Paper title: 'Top-n-sigma: Not All Logits Are You Need'.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2411.07641) carries only the abstract; the quote is in arXiv 2411.07641v1 PDF, §4.2 (paragraph under Table 2)",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1472": {
    "index": 1472,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "slightly higher temperatures (typically around 1.5) yield optimal performance",
    "note": "Quote verbatim. Full sentence contrasts 'the common guideline that reasoning tasks benefit most from deterministic (greedy) or low-temperature decoding', so the disputes polarity is right. LOCATOR CORRECTION: the paragraph headed 'Optimal Temperature and Exploration' sits in Section 4.2 (Single-Pass Results), not Section 5; the heading name in the page field is right, the section number is not. Metric is Exact Match, consistent with 'best accuracy'.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2411.07641) carries only the abstract; the quote is in arXiv 2411.07641v1 PDF, §4.2 'Optimal Temperature and Exploration'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1473": {
    "index": 1473,
@@ -30666,17 +30719,19 @@
   },
   "1475": {
    "index": 1475,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "there is a style shift from third person narrative style to first",
    "note": "Quote verbatim in Section 6.3 Qualitative Examples: 'moreover, there is a style shift from third person narrative style to first person conversational style.' Table 3 confirms it is the Nucleus (1.5B) continuation of a single Sonic the Hedgehog prompt, so 'nucleus-sampling example' and 'within a single continuation' both hold; the same passage also reports topic drift from a video game to music and an email format.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15097) carries only the abstract; the quote is in arXiv 2210.15097v2 PDF, §6.3 Qualitative Examples",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1476": {
    "index": 1476,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "evaluators preferred CD 2.6x more than nucleus sampling",
    "note": "Quote verbatim in Section 6.2 Human Evaluation. Full passage: CD is significantly more coherent 'across three domains and two models: on average across settings', 2.6x over nucleus on coherence and, 'As for fluency, CD is preferred 1.4x more than nucleus sampling'. Table 2 is indeed the human-evaluation table (wikitext/wikinews/story; GPT-2 XL and OPT-13B), and its caption repeats 'across three domains and two models'. Section 6.1 confirms Amazon Mechanical Turk raters.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2210.15097) carries only the abstract; the quote is in arXiv 2210.15097v2 PDF, §6.2 Human Evaluation",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1477": {
    "index": 1477,
@@ -30687,45 +30742,51 @@
   },
   "1478": {
    "index": 1478,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "There exists no universal optimal paramters in different scenarios and users",
    "note": "Quote verbatim including the source's misspelling 'paramters', and the page field flags that spelling correctly. Full sentence in the second Introduction bullet ('Users are agnostic to the optimal parameters in real-world applications'): '...in different scenarios and users are agnostic to the optimal parameters for their own tasks.' Both limbs supported.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2408.13586) carries only the abstract; the quote is in arXiv 2408.13586v2 PDF, second Introduction bullet",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1479": {
    "index": 1479,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "truncation positions, which exactly cover the full data supports, vary drastically",
    "note": "Quote verbatim in Section 1. Full sentence: '...vary drastically given different prefixes and Top-k sampling could be regarded as a baseline method with zero adaptability', which supports the fixed-k limb in the paper's own words. The prefix tree is built by rearranging Wikipedia-English into a word-level Trie (their Context-Preserving Trie); Figure 2's caption confirms the histogram is gpt2-xl truncation values achieving full recall of data support.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2408.13586) carries only the abstract; the quote is in arXiv 2408.13586v2 PDF, §1",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1480": {
    "index": 1480,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "For all the three tasks, Mirostat does not perform well in general",
    "note": "LOCATOR CORRECTION FIRST: Section 6's three tasks are MBPP, HumanEval and GSM8K (Llama-2-7B, Tables 3-5). The page field's 'HumanEval, GSM8K, TruthfulQA' is wrong - TruthfulQA is the separate Section 5.4 validation, not one of the three. The claim sentence itself says only 'all three of their downstream tasks' and is correct. Quote verbatim; the attribution limb is supported but HEDGED in the source: 'probably because it is based on the Zipf-law of natural language and thus not suitable for code and math tasks.'",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "the unhedged 'which they attribute to' — the verifier records the source's attribution is hedged as 'probably because'; the quote also sits in §6 of the PDF, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1481": {
    "index": 1481,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "model loses its ability to produce certain strings, its precision rate",
    "note": "Quote 'a model loses its ability to produce certain strings,' is verbatim in Section 1; the Abstract carries the near-identical 'the model loses its ability to produce certain strings, its precision rate on desirable text increases', which is the source of the claim's second limb. Note the Section 1 wording differs slightly ('its ability to produce desirable text increases'). Scope check on 'every truncation sampler': the paper's framework 'encompasses most of the transformations performed by previously proposed sampling adapters' and it experiments with top-k, nucleus, typical and eta, so the truncation-sampler class is covered, though the paper's own scope word is 'most', not 'every'.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "the universal 'every truncation sampler' — the verifier records the paper's own scope word is 'most', not 'every'; the exact quote also sits in §1 of the PDF, not on the cited /abs/ page",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1482": {
    "index": 1482,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "increases the precision of a distribution at the expense of its recall",
    "note": "Quote verbatim in Section 7 Conclusion. Full sentence: 'We find evidence that the application of sampling adapters increases the precision of a distribution at the expense of its recall; this observation is robust across several experimental design choices.' The robustness limb is the paper's own words.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2307.03749) carries only the abstract; the quote is in arXiv 2307.03749v2 PDF, §7 Conclusion",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1483": {
    "index": 1483,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "highest sequence-level quality scores do not correspond with the sampling adapter-hyperparameter settings",
    "note": "Quote verbatim under the Section 5 paragraph heading 'A Precision-Recall Trade-Off.', which cites Fig. 2 - the page field is accurate. Full passage: the highest scores do not correspond with the settings 'that achieve the best precision (i.e., lowest reverse cross-entropy). Rather, they correspond to an intermediate point along the line', which is exactly the claim's second limb.",
-   "fromFile": "verdicts-ai-i1471-1485.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2307.03749) carries only the abstract; the quote is in arXiv 2307.03749v2 PDF, §5 'A Precision-Recall Trade-Off'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1484": {
    "index": 1484,
@@ -30743,17 +30804,19 @@
   },
   "1486": {
    "index": 1486,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"achieves better diversity at human-level at the cost of low coherence\"",
    "note": "Quote exact in 2310.01041v2 PDF text (pdftotext -layout, line 547), main-results discussion: 'Nucleus sampling generally preserves more diverse candidates than Top-k sampling and achieves better diversity at human-level at the cost of low coherence.' Domains confirmed at Section 3.1 Datasets: Wikipedia = Wikitext-103, News = Wikinews; models GPT-2 XL / OPT-6.7B. Note the section label in the claim metadata is off: this is Section 3.5 Main Results, not 3.3; Table 1 reference is correct.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2310.01041) carries only the abstract; the quote is in arXiv 2310.01041v2 PDF, §3.5 Main Results",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1487": {
    "index": 1487,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"lexicality (highest diversity) but severe topic shift (lowest coherence)\"",
    "note": "Quote exact (line 548-549): 'Typical decoding over-emphasizes the long tail of the distribution, which produces texts with highly diverse lexicality (highest diversity) but severe topic shift (lowest coherence).' Both limbs hold: the superlatives are stated, and the long-tail attribution is the paper's own causal clause. Typical decoding = Meister et al. 2022 locally typical sampling (baseline list, line 441). Section is 3.5 Main Results, not 3.3.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2310.01041) carries only the abstract; the quote is in arXiv 2310.01041v2 PDF, §3.5 Main Results",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1488": {
    "index": 1488,
@@ -30764,17 +30827,19 @@
   },
   "1489": {
    "index": 1489,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"these heuristics are often ad hoc, based only on empirical observations\"",
    "note": "Introduction, line 55 of extracted text: 'Unfortunately, these heuristics are often ad hoc, based only on empirical observations.' The preceding clause confirms they are truncation heuristics ('in an effort to truncate, or restrict, the LM distribution to a nucleus set'). The 'rather than in a principled target' limb is the claimant's gloss on 'only', and is carried by the paper's own contrast - it proposes aligning to a target entropy profile (Conclusion) and invokes a 'principled account' from information theory (Intro).",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2601.01714) carries only the abstract; the quote is in arXiv 2601.01714v1 PDF, Introduction",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1490": {
    "index": 1490,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"exhibit systematic bias away from the target entropy\"",
    "note": "Section 5 results text: 'standard decoding heuristics such as top-p, top-k, and min-p exhibit systematic bias away from the target entropy, leading to persistent miscalibration even when their hyperparameters are tuned.' Figure 4 caption repeats it ('systematic bias and high variance, leading to persistent miscalibration despite aggressive tuning') and is titled 'Calibration of Decoding Methods to Model Cross-Entropy', so the cross-entropy framing of the claim is the paper's own.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2601.01714) carries only the abstract; the quote is in arXiv 2601.01714v1 PDF, §5 results text",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1491": {
    "index": 1491,
@@ -30820,24 +30885,27 @@
   },
   "1497": {
    "index": 1497,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"distribution distance with past gradually approaches 0\"",
    "note": "Figure 2 caption, panels (c) and (d): 'Compared with human continuation, minimum distribution distance with past gradually approaches 0 (red curves) as similar phrases keep repeating during decoding.' The caption's header confirms the metric is KL divergence, and Section 4.1 defines KL_min^t as the minimum over prior steps 1 <= j <= t-1, so 'current step against earlier steps' is exact. The human-stays-away-from-zero limb rides on the caption's 'Compared with human continuation' plus the plotted Human curve in the 2c/2d legends - it is a figure reading, not a sentence of prose.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2305.13477) carries only the abstract; the quote is in arXiv 2305.13477v2 PDF, Figure 2 caption (panels c and d)",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1498": {
    "index": 1498,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"coherence hypothesis... does not always hold in practice\"",
    "note": "Section 3.2, Incoherence paragraph: 'we find that the coherence hypothesis of pretrained LMs in prior work does not always hold in practice: it is likely to produce incoherent sentences when powerful LMs rigorously follow model confidence at each step with greedy algorithm.' Quote exact and both limbs - the hypothesis behind confidence-following decoders (SimCTG, contrastive decoding, named in the same paragraph) and the greedy counter-example - are in that sentence.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2305.13477) carries only the abstract; the quote is in arXiv 2305.13477v2 PDF, §3.2 Incoherence paragraph",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1499": {
    "index": 1499,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"analogical sequence copying pattern: prefix matching and copying\" (Olsson)",
    "note": "Section 3.2, Repetition paragraph: 'a recent study provides a possible way to explain the repetitive generation with the observed analogical sequence copying pattern: prefix matching and copying (Olsson et al., 2022).' Quote exact; footnote 3 spells out prefix matching and copying. The 'induction-head' descriptor is not in Xu et al.'s body text but is the title of the work they cite - the bibliography entry reads 'In-context learning and induction heads', arXiv:2209.11895 - so the relay label holds. Claim's hedge ('possible explanation', 'relay') matches the paper's own hedge.",
-   "fromFile": "verdicts-ai-i1486-1500.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2305.13477) carries only the abstract; the quote is in arXiv 2305.13477v2 PDF, §3.2 Repetition paragraph",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1500": {
    "index": 1500,
@@ -30848,10 +30916,11 @@
   },
   "1501": {
    "index": 1501,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "when the model is apparently the most certain... it is most overconfident",
    "note": "Quote verbatim in Section 3 ('Dependency of the confidence on the entropy'). Both limbs hold: 'the level of overconfidence decreases with the entropy percentile', and the paper's own note that at low entropy a single token's probability can exceed 0.9, so the top-p set is at its narrowest and cannot be recalibrated by resizing. 10 entropy bins by percentile, Fig. 3, as the page field says.",
-   "fromFile": "verdicts-ai-i1501-1515.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2305.02633) carries only the abstract; the quote is in arXiv 2305.02633v1 PDF, §3 'Dependency of the confidence on the entropy'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1502": {
    "index": 1502,
@@ -30919,17 +30988,19 @@
   },
   "1511": {
    "index": 1511,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Larger models do not show a clear advantage over smaller ones",
    "note": "Quote verbatim, and the GPT2-XL/Llama3 limb is explicit twice in Section 6: under temperature, 'GPT2-XL (1.5B) might outperform Llama3 (8B)' at the same configuration; under top-k, GPT2-XL 'performs as well as or better than' Llama3 8B, with Qwen2 7B over Falcon2 11B. Location correction for the page field: Section 6 Practical Recommendations, not Section 5.",
-   "fromFile": "verdicts-ai-i1501-1515.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2410.06097) carries only the abstract; the quote is in arXiv 2410.06097v2 PDF, §6 Practical Recommendations",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1512": {
    "index": 1512,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "consistently low performance across all models and beam width settings",
    "note": "Quote verbatim in Section 6, 'Deterministic Strategies', which cites Figure 4 as the claim's page field says: beam search is 'generally not recommended for open-ended text generation' because its outputs fail to capture human diversity, showing low performance against human references on four metrics. The paper does add that smaller beam widths (3, 5) fare better while still leaving a substantial gap - a nuance, not a contradiction.",
-   "fromFile": "verdicts-ai-i1501-1515.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2410.06097) carries only the abstract; the quote is in arXiv 2410.06097v2 PDF, §6 'Deterministic Strategies'",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   },
   "1513": {
    "index": 1513,
@@ -30963,10 +31034,11 @@
   },
   "1517": {
    "index": 1517,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"both uncertainty and overreliance on context can lead to repetition\"",
    "note": "Raw PDF (arXiv v2, 4 Nov 2025) via pdftotext -layout. Closing paragraph of Sec. 5 Confidence reads that these findings put together previous accounts, suggesting both uncertainty and overreliance on context can lead to repetition, each reflecting concurring mechanisms in repetition generation. The claim's supplied quote appears word for word; both limbs supported — the two causes, and 'concurring mechanisms' for concurrent-rather-than-rival.",
-   "fromFile": "verdicts-ai-i1516-1517.json"
+   "unsupportedLimb": "verbatim-at-the-cited-URL — the cited page (https://arxiv.org/abs/2504.01100) carries only the abstract; the quote is in arXiv 2504.01100v2 PDF, closing paragraph of §5 Confidence",
+   "fromFile": "verdicts-ai-regrade-r10.json"
   }
  },
  "mergedAt": "see autosave.log",

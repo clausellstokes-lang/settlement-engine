@@ -64,7 +64,7 @@
   "argsFile": "args-dnd-r10.json",
   "tag": "r10",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--dnd-r10.js",
-  "status": "COMPLETE 01:06 (session 405b5e7e; launched 23:52) — r10 = the r9 PLACE round's TAIL: 1 chunk / 11 verified / 11 kept (regrade-r10: 13 rows lowered to PARTIAL); section-dnd.md rewritten 00:36 as 'round 9, the PLACE round' — 61 bold-numbered features (Part VI 'How official D&D writes a settlement', features 51–61, is NEW), the ten round-8 self-contradictions RESOLVED by naming the unit each rule governs, the register map rewritten; 760 kept / 195 partial / 192 SKIPPED_TRIAGE / 4 contradicted / 2 not found from 221 documents on 98 hosts; critic-dnd.md 01:05 (28,862 B; r8 critic preserved as critic-dnd.r8.md). S-BOUND: dnd's ONE targeted FIND round is SPENT — NO further round. Critic → S12 input + TWO OWNER-GATED items: (1) ROUTE POLICY — nineteen 2014 DMG rows (944–962) were read from an archive.org full-book OCR of the copyrighted guide and twenty-one 2024 DMG rows (932–939, 972–984) from Roll20 pages behind a purchase banner, so Part VI's 'lawful routes only' is untrue for ~40 rows (features 51, 52, 54–57, 60, 61): relabel honestly, replace with the lawful witnesses the critic names (Death House PDF, Lost Mine on D&D Beyond, Encounter of the Week, Settlement Tracker), or BUY the two guides + five hardcovers (~$30 each) and re-verify from the owner's copy; (2) the verify-only pass over ~120 triage-skipped sole witnesses (features 31, 39, 51, 56, 58 stated without their official witness). Also for S12: feature 59's archivist profile rests on 72 sentences of cosmology (the critic's rough Greyhawk pass reads shorter and digit-laden); feature 52's title rests on a freelancer's column; rows 1/2 still CONTRADICTED not SUPERSEDED; row 86 mis-filed under Mearls.",
+  "status": "RUNNING since 23:52 (session 405b5e7e) — r10 = the r9 PLACE round's TAIL (no new FIND round; all four place-* found files complete): verify 1 chunk / 11 claims (90 SKIPPED_TRIAGE in verdicts-dnd-triage-r10.json), regrade (the R9 notes, verbatim from r9), synth (the R9 PLACE synthesis notes), critic",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--dnd-r10.js",
   "prev": {
    "runId": "wf_37af3c74-8c8",
@@ -84,7 +84,7 @@
    "runId": "wf_f191dac2-82a",
    "status": "COMPLETE 22:10 (r8 = the r7 launch rebuilt: synth 21:46 section-dnd.md 127,898 B, 50 bold-numbered features; critic-dnd.md 24,659 B, r1 critic preserved as critic-dnd.r1.md). ⚠ THE CRITIC STILL NAMES THE PLACE HOLE (the S-BOUND condition for dnd's ONE targeted FIND round — owner-gated): the 5e settlement gazetteers (Ten-Towns, Baldur's Gate, Vallaki, Sigil, SCAG: 0 hits), 2014 DMG ch. 5 Settlement"
   },
-  "dryCheck": "2026-09-07 01:09: dry-check.py — 61 features vs 50 (section-dnd.r8.md): 10 new / 1 dropped — the eleven Part VI features are the round's yield; NOT dry by the letter, but the one targeted round is spent (S-BOUND rule 4): no round follows; dry-check-dnd-r10.json"
+  "dryCheck": "22:15 (dry-check.py now reads BOLD-numbered features too — the old heading-only regex read 0 and printed a FALSE dry): 50 features vs 19 in the r7 snapshot (section-dnd.r7.md, recovered from the 21:25 kit seal — the 21:42 seal held a MID-WRITE 20 KB partial; never snapshot from a seal taken while a synth is writing): 45 new / 14 dropped by the four-word key — the section was REWRITTEN in the new form, so the diff is a re-keying, not 45 discoveries. NOT dry by the letter; this was a synth-only completion round over verified claims — no FIND round follows unless the critic names the PLACE hole (S-BOUND: ONE targeted round, owner-gated)."
  },
  "ai": {
   "runId": "wf_0eb229cc-f75",
@@ -120,6 +120,7 @@
    "ai"
   ],
   "running": [
+   "dnd-r10 wf_4bd76597-3a3 (session 405b5e7e, 23:52)",
    "ai-r10 wf_0eb229cc-f75 (session 405b5e7e, 23:52)"
   ],
   "resume": "session 405b5e7e (23:52): the two r10 runIds above resume ONLY in that session (Workflow({scriptPath, resumeFromRunId})); a NEW session rebuilds: CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai → r11 args → cd prose-research && python3 mk-embedded.py sweep/args-<n>-r11.json → Workflow({scriptPath}) ×2, then update this file. Both r10 runs are TAILS of the owner-GO'd r9 targeted rounds, not new FIND rounds (S-BOUND: dnd/ai have NO round after these). || keep TWO research runs alive: when one completes (its task notification), LAUNCH the next in `order` by Workflow({scriptPath: d[<next>].scriptPath}) (martin, then ai — their scripts are built; a runId of '' means never launched); set its runId/status RUNNING here. In THIS session a completed run's runId can be resumed by resumeFromRunId; a NEW session must rebuild (CONFIRM_DEAD=1 sh $SC/resume-research.sh <names>) and re-embed.",
@@ -133,10 +134,10 @@
    "ai",
    "martin"
   ],
-  "open_decision": "ADDED 09-07 01:10 (the dnd r10 critic): ROUTE POLICY for ~40 Part VI rows (archive.org book OCR; Roll20 paywalled body text) — relabel / replace with lawful witnesses / purchase the books (~$30 each) and re-verify; owner's call on route and cost. || DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
+  "open_decision": "DECIDED 22:48 (owner: 'i agree on the three conditions'): dnd r9 = the PLACE round and ai r9 = the ARCHIVAL round RUN BEFORE S12 (building now; they take the next two free slots), then S10b (best parts), then S12. STILL OPEN: the triage-by-feature verify-only completion pass (leguin/hobb/wolfe/dnd) — cost-gated; S5c Kay fingerprint needs the owner's copies.",
   "at_switch_2044": "20:44:42: kay COMPLETED at 20:52 (do not rebuild); wolfe was the one live run; dnd → martin → ai queued; after the switch REBUILD wolfe dnd martin ai with `CONFIRM_DEAD=1 sh resume-research.sh wolfe dnd martin ai` (a new session cannot resume a runId) and launch two at a time",
   "resumed_2112": "session df942c1b: wolfe r8 wf_8cd21474-a7b + dnd r8 wf_f191dac2-82a launched 21:12; martin r8 / ai r8 built and waiting",
-  "next": "ai r10 wf_0eb229cc-f75 still RUNNING (synth stage at 01:09); when it COMPLETES: dry-check ai → S10b = Workflow({scriptPath: $SC/prose-research/exemplar-best-parts-workflow.js}) → S12 under the three conditions. dnd r10 COMPLETE 01:06. HORIZON-B6 landed §907; CAP-TRIP-907 is the ONE implementation lane (laneB6).",
+  "next": "when BOTH r10 runs COMPLETE (task notifications): dry-check each; then S10b = Workflow({scriptPath: $SC/prose-research/exemplar-best-parts-workflow.js}) (reads the FINAL dnd/ai sections; cap 2 inside; takes a research slot); then S12 under the owner's three conditions (allocate never average · evidence resets the weights · the two targeted rounds done). HORIZON-B6 runs beside them as the ONE implementation lane (laneB6 @ 4243bdc61).",
   "at_switch_2318": "2026-09-06 23:22:39: dnd r9 `wf_37af3c74-8c8` + ai r9 `wf_00551368-b67` RUNNING and die with session df942c1b; after the switch REBUILD BOTH with `CONFIRM_DEAD=1 sh $SC/resume-research.sh dnd ai` (→ r10 = the completion of r9: complete found files folded, incomplete angles re-run with hints) → mk-embedded → launch both (two slots). S10b after both. The §906 gate is a nohup shell that outlives the session — read gate-906.log first."
  },
  "_fiveauthor": {
