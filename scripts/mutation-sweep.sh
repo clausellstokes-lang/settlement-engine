@@ -44,6 +44,7 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/data/dossierStateProse/stressors.generated.js
   src/domain/prose/wiringCensus.js
   src/domain/prose/wiringBranch.js
   scripts/prose-rate-corpus.mjs
@@ -1315,6 +1316,24 @@ check_caught "dossier-prose-manifest/the classifier tests wording before replace
 #     => 11 passed.
 perl -0pi -e "s/  return new RegExp\(\`\^\\\$\{source\}\\\$\`\)\.test\(String\(rendered\)\);/  return true;/" tests/helpers/dossierManifest.js
 check_caught "dossier-prose-manifest/the template reader matches everything and every cell resolves to a fiction" tests/helpers/dossierManifest.js "npx vitest run tests/property/dossierProseManifest.test.js --no-file-parallelism"
+
+# 95. MEASURE car 2 — A BYTE THAT ENTERS THE CORPUS MUST BE SEEN, AND UNTIL THIS RATCHET
+#     LANDED NOTHING IN THE ESTATE COULD SEE ONE. ARCH-COMPOSED-PROSE §10 grows the six
+#     dossier state leaves from 641,410 raw bytes toward a declared ceiling of about 2.8 MB.
+#     The three first-paint budgets measure the ENTRY CLOSURE, which the corpus is absent
+#     from by construction (it rides data-lazy), and scripts/.size-baseline.json is a max-
+#     LINES instrument whose ceilingFor() returns null for src/data/**, so the corpus sat
+#     outside every existing ruler: a wave that quadrupled it would have measured green
+#     everywhere. This plant lengthens ONE authored sentence by fifteen repetitions of a
+#     clause, +1,110 raw bytes — the smallest realistic shape of the rewrite wave's own
+#     growth, and deliberately a repetitive one, because that is the payload the compressed
+#     half is least able to see. The leaf still parses, the three blocks still export, every
+#     other prose gate stays green, and the corpus has quietly grown.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 1 red of 17 — the RAW
+#     exact arm, naming the leaf and the new count; the GZIP band did NOT fire (+64 B against
+#     a 129 B band), which is why RAW is the exact ruler here; restored cmp-exact => 17 passed.
+perl -0pi -e "s{It is receding\. What remains is the damage rather than the danger\.}{'It is receding. What remains is the damage rather than the danger.' . (' The ledgers still carry the entry and the streets still carry the memory.' x 15)}e" src/data/dossierStateProse/stressors.generated.js
+check_caught "prose-corpus-bytes/a leaf grows by a kilobyte and the byte ratchet does not see it" src/data/dossierStateProse/stressors.generated.js "npx vitest run tests/lint/proseCorpusBytes.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

@@ -2609,6 +2609,11 @@
       "kind": "mutation",
       "label": "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage",
       "what": "The wiring census reports, per (block, pool), the predicate that selects the pool. The owner's rule is that a pool whose predicate is not recoverable is WIRING-UNRESOLVED and never inferred. The plant makes the fallthrough answer RESOLVED, so the census claims total coverage of all 708 pools while the three rung readers go on working and every other figure stays correct. Planted => 5 red of 21 (the 310/398 anti-vacuity split, control c1, control d, the grammar walker's D/wiring arm, C-sibling's premise gate); restored => 21 passed."
+    },
+    "tests/lint/proseCorpusBytes.test.js": {
+      "kind": "mutation",
+      "label": "prose-corpus-bytes/a leaf grows by a kilobyte and the byte ratchet does not see it",
+      "what": "ARCH-COMPOSED-PROSE §10 grows the six dossier state leaves from 641,410 raw bytes toward a declared ceiling of about 2.8 MB, and before car 2 nothing in the estate could see that growth: the three first-paint budgets measure the entry closure, which the corpus is absent from by construction, and scripts/.size-baseline.json measures effective LINES with ceilingFor() returning null for src/data/**. The plant lengthens one authored sentence in stressors.generated.js by fifteen repetitions of a clause, +1,110 raw bytes, which is the smallest realistic shape of the wave's own growth. MEASURED 2026-09-08 by execution (cp backup, git checkout restore, cmp-identical, md5 bc8ee1ea0d9bd8f6ef63dba9da9d7ba6): clean tree => 17 passed; planted => EXACTLY 1 red, the RAW exact arm, naming the leaf and the new byte count => 16 passed; restored cmp-identical => 17 passed. Worth recording because it is the point of the instrument's shape: the GZIP arm did NOT fire, because a repetitive payload compresses to +64 B against a 129 B band, which is why RAW is the exact ruler and gzip is the wire-cost record rather than the convicting arm."
     }
   },
   "meta": {
