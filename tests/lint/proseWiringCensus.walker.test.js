@@ -1177,9 +1177,11 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       'signal:occupied a->b cause:occupation',
     ]);
     // ⛔ AND NOTHING IS RATIFIED: the shipped join is still zero, and the draft is in no leaf.
+    // Anchored on `relations`, a key the committed census DOES carry: a bare exclusion would
+    // pass just as happily if the JSON's whole top level drifted away.
     expect(committed.relations.join.strictBoth, 'the shipped join is unmoved').toBe(0);
-    expect(Object.keys(committed), 'and the committed census carries no alias table')
-      .not.toContain('aliases');
+    expectAbsentWithAnchor(Object.keys(committed), 'aliases', 'relations',
+      'the committed census\'s top level');
   });
 });
 
