@@ -1,0 +1,22 @@
+$ git log --oneline -3
+3f68a9978 MEASURE car 3b: the lighting census refrozen at car 3's tip by its own ritual — files 2553 -> 2553, credited
+3e2a644ec MEASURE car 3: the fold's cures — the economy desk is called by its shipped recipe with every caller reading
+fcd98a3db MEASURE car 2b: the lighting census refrozen at car 2's tip by its own ritual — files 2552 -> 2553, credited
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+$ git rev-list --count 8522a17b2..HEAD
+15
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ wc -c docs/content/wiring-census.json tests/fixtures/dossier-prose-manifest-golden.json
+ 1808325 docs/content/wiring-census.json
+  145375 tests/fixtures/dossier-prose-manifest-golden.json
+ 1953700 total
