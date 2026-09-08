@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e45adbbb51b8b499bfb623c5d7b84683f09086f7",
-  "measuredBy": "INSTR-912 rebase (Opus 5)",
+  "measuredAtSha": "b2d617611c615404f5beae23a78e9437c1b98b99",
+  "measuredBy": "INSTR-912 car 11 (Opus 5)",
   "date": "2026-09-08",
-  "note": "the INSTR-912 instrument consist (nine code cars) carried onto the §913 product tip f3ab08f51: six new tests/lint walker files, four fixtures, two helpers and ten src/ island modules, all additions",
+  "note": "car 11 adds one title to tests/lint/institutionTable.walker.test.js — the produced-path arm that pins the third column source to economicState.treasury, the path the pulse writer actually writes",
   "files": 2551,
   "parked": 375,
   "credited": 2176,
-  "titles": 23778,
+  "titles": 23779,
   "suiteTitles": 6361
 }
