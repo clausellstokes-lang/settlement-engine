@@ -99,6 +99,12 @@ arm spies on `Math.imul`, which `fnv1a32` calls once per character and `avalanch
 * the WHOLE SHIPPED CORPUS — 708 pools, 2,266 variants, read live from the leaves — draws face
   0 on every variant with **0 `Math.imul` calls in total**, and zero variants carry `wordings`;
 * a planted four-face variant over **10,000 seeds**: `2448 / 2533 / 2500 / 2519`, worst
+  ⚠ **[corrected at 5c: THIS TRIPLE IS FIXTURE-LOCAL (fold correction 15).** The distribution
+  depends on the `blockId` and `poolKey` the draw key is built from, and this receipt names
+  neither, so the digits are not reproducible from the receipt alone: the fold's own keys give
+  `2486 / 2460 / 2482 / 2572`, worst **1.663 SE**. Both readings sit inside the 2 SE band, so
+  THE CLAIM HOLDS and only the figure is local. A later car quoting these digits must name the
+  keys or quote the SE bound instead.**]**
   deviation **1.201 SE** against a 2 SE band (the other two seed families measured 1.363 and
   1.940 SE; `seed-${i}` shipped). Every face reachable, no face at zero;
 * seedless draws face 0 at all three spellings of absence — `''`, `null`, `undefined` — and
@@ -274,7 +280,17 @@ call before every run: `HOLD-VITEST` absent, split-pattern runner count **0**.
 ### 3a.8 ⛔ THE RED THIS CAR REFUSES TO CURE, WITH ITS MEASUREMENT — THE WIRING CENSUS INTERLOCK
 
 `tests/lint/proseWiringCensus.walker.test.js` reds on ONE arm, `stale-bytes`. The delta is a
-single integer over a 1,806,768-byte file, and it is exactly this car's seven new src files:
+single integer over a 1,806,768-UNIT file, and it is exactly this car's seven new src files:
+
+> ⚠ **[corrected at 5c: THE UNIT (fold correction 7).** `1806768` is `String.length` — UTF-16
+> CODE UNITS — because the `stale-bytes` arm measures the serialisation in JS string length.
+> The file on disk is **1,808,325 bytes**. The two instruments in this receipt READ IN
+> DIFFERENT UNITS under one word: the walker's `stale-bytes` arm reads String.length, while
+> `wiring-census --dry` reads TRUE bytes. The gap is 1,557 at the four shas the fold checked
+> and **1,597 at `b573bb5f4`** (2,050,453 units against 2,052,050 bytes), so it is not the
+> constant the seam lens took it for. Every EQUALITY verdict here is unaffected — both sides
+> of each comparison are taken with the same instrument. §3h's figures are already true
+> bytes.**]**
 
 ```
 $ node -e "<buildCensus({rates: <the committed rate block>}) and serialise, as the walker does>"
@@ -544,7 +560,8 @@ THE RE-TAKE, measured before the write and printed here in full — count-only, 
 
 ```
 $ node <buildCensus + serialise, as the walker does>
-committed 1806768   fresh 1807516   equal false
+committed 1806768   fresh 1807516   equal false      # [corrected at 5c: UTF-16 code units,
+                                                     #  not bytes; on disk 1,808,325 / 1,809,073]
 13,14c13,21
 <     "candidateLeaves": "none at this tip: car 3a lands src/domain/display/stateProse/*StateProseCandidates.js",
 <     "producerIndexFiles": 1145
@@ -647,7 +664,11 @@ The chair's ADDENDUM: a drift confined to `stamp.producerIndexFiles` and
 stays the chair's.** The six composers ARE stamped files (`STAMPED = [...COMPOSERS,
 dossierMounts.js]`), so every routing stage moves one. Refused at each, and measured at each:
 
-| stage | fresh vs committed | the delta |
+> ⚠ **[corrected at 5c: the `1807516 / 1807516` column below is `String.length` (UTF-16 code
+> units), not bytes; the file on disk is 1,809,073 bytes at each of these stages. Fold
+> correction 7.]**
+
+| stage | fresh vs committed (UTF-16 code units) | the delta |
 |---|---|---|
 | 3b | 1807516 / 1807516 | 4 diff lines — 1 desk sha |
 | 3c | 1807516 / 1807516 | 8 — 2 desk shas |
@@ -1350,6 +1371,13 @@ holds on the shipped leaf.
 
 **4. THE SHIFT REGISTER** — `docs/content/prose-shift-register.json`, **14 mechanisms** and
 **3 named NON-mechanisms**, each with its pin, door, shift class and declared-row idiom:
+
+> ⚠ **[corrected at 5c: FOUR, not three (fold correction 9).** Car 4d added `seat` to
+> `notMechanisms` after this table was printed, and the receipt discloses 4d's row in §4d.3 —
+> the count in the line below simply predates it. At `b573bb5f4` the register prints
+> **14 mechanisms · 4 named NOT mechanisms**. At car 5c it prints the same 14 and 4 with
+> **23 pins over 15 pinned rows**: the band rule gained two (5c-3) and `seat` gained the
+> recomputable pin it never had (5c-4).**]**
 
 ```
 [shift-register] 14 mechanisms, 3 named NOT mechanisms, measured at 708 pools / 2266 variants
@@ -2158,6 +2186,12 @@ THE SAMPLED COMPOSED WALK · N is a PLACEHOLDER until car 6 sets it
   is about 589 ms
 ```
 
+> ⚠ **[corrected at 5c: DO NOT PIN THE WALK COST (fold correction 15).** `52 ms · 260 µs/unit
+> · 589 ms` is a TIMING measurement and it does not reproduce: the fold's re-run on the same
+> tree read `45 ms · 225 µs/unit · 510 ms`. The reproducible parts of this block are the
+> sample sha and the three verdict counts, which are byte-equal across every re-run. Car 6
+> must set N from a cost it measures itself, not from 260 µs.**]**
+
 ⭐ **THE COMPOSED WALK'S COST, WHICH IS THE INPUT CAR 6 SETS N FROM.** 260 microseconds per
 composed unit, so an EXHAUSTIVE composed walk of today's 2,266 units costs about 0.6 s and the
 sample is not yet buying anything. The sample exists because car 6's units are the CARTESIAN
@@ -2183,16 +2217,42 @@ PROVENANCE at last:  variants changed 18 of 2266; orderId changed 15
 ```
 
 **The position in the priority list does not matter on this corpus** (both readings are 18/15),
+⚠ **[re-derived at 5c on the NARROWED detector (fold U5, folded into cure 1's car):** a scratch
+copy with the PROVENANCE row moved to LAST in `CLAUSE_DETECTORS`, `classifyMoves` re-run over
+all six leaves — **2,266 variants compared, 0 move sequences differ, citing 7 either way.** The
+mechanism is now written down rather than observed: `classifyMoves` collects EVERY detector
+that fires and orders them by match index, so the row's position decides only TIES, and the
+walker holds a tie census over the seven citing clauses at `[]`.**]**
 so the detector sits beside CONTRADICTION on the ground that both are assertions ABOUT THE
 RECORD rather than about the town, and the reason is written into the file.
 
-**The vocabulary is the holder table's KINDS as the owner named them** and nothing wider — a
+~~**The vocabulary is the holder table's KINDS as the owner named them** and nothing wider — a
 bare `record` or `count` is a common noun, and reading one as a citation would manufacture a
-habit the corpus does not have.
+habit the corpus does not have.~~
+
+⛔ **[corrected at 5c: THAT SENTENCE WAS FALSE WHEN IT WAS WRITTEN (fold R1, correction 10;
+SITTING §R c-16).** The shipped regex carried a third limb —
+`the (rolls|registers?|ledgers?|books?|records?) (say|…|has)` — which is precisely "a bare
+record" plus a reporting verb; it also admitted `customs` and `tithe` (neither a holder kind)
+and omitted `census`, `office` and `tradition` (all three kinds). Split by limb, the 18
+citations read:
+
+```
+kind-only 7 · generic-only 11 · both 0
+```
+
+**Eleven of the eighteen — the majority — rested on the limb this sentence says was excluded,
+and two of them read literally `the record has` and `the record holds`.** The arithmetic of
+the register move at `da080313d` was correct for the detector as written; the GROUND given for
+it was not. Car 5c narrowed the detector to the twelve kinds: the count falls **18 → 7**, the
+split becomes **7 · 0 · 0**, and it is now PRINTED AND ASSERTED as three integers in
+`tests/lint/proseMoveGrammar.walker.test.js` so the sitting budgets on a figure it understands.
+Nine of the fifteen rows the register car moved return to their pre-car-5 `grammars`; the six
+carrying a real KIND citation stay moved; THIN/COVERED return to 483 / 225. See § CAR 5c.**]**
 
 ```
 $ npx vitest run tests/lint/proseMoveGrammar.walker.test.js               ; exit=0
-      Tests  50 passed (50)
+      Tests  50 passed (50)          # [at 5c: 54 passed — four vocabulary arms added]
 ```
 
 **The move-grammar walker is green**, because its classifier-agreement arm PRINTS its rate
@@ -2226,6 +2286,9 @@ rows whose JSON moved: 15        # every one ONLY its `grammars` integer
 totals.tiers  {MISSING 34, THIN 483, COVERED 225, MISSING-AT-TIER 45}
            -> {MISSING 34, THIN 482, COVERED 226, MISSING-AT-TIER 45}
 sections that moved: factIndex, tiers
+# [corrected at 5c: the ACTUAL set is stamp · totals · rows · factIndex · tiers (fold
+#  correction 15). Nothing is hidden — the two lines above this one print the stamp and the
+#  totals movements explicitly — but the one-line summary is narrower than its own diff.]
 stamp files moved: []            candidateLeaves moved: false
 producerIndexFiles 1152 -> 1153  bytes 1832119 -> 1832122
 ```
@@ -2368,7 +2431,22 @@ $ node scripts/wiring-census.mjs --check                                 ; exit=
 
 **THE STRICT RATCHET SITS EXACTLY ON ITS CEILING, 1120 / 1120** — 526 new effective lines of
 island module added ZERO strict-type errors. The voice E2 red is car 3a's two banked files at
-the counts car 3a measured; this car adds nothing to it. **THE MANIFEST IS BYTE-IDENTICAL** and
+the counts car 3a measured; this car adds nothing to it.
+
+> ⛔ **[corrected at 5c: THE VOICE E2 RED IS *INHERITED*, NOT CAR 3a's (fold R2, correction 11;
+> SITTING §R c-18).** It is filed to the wrong owner in this receipt, and a standing red under a
+> wrong owner never gets cured — every later car reads "car 3a's banked files" and stops. The
+> fold re-measured with the test's own espree literal counter at the §915 BASE `3b22b5c56` and
+> at the SEAM tip: `generalStateProse` BASE `{em:3, bang:0}` TIP `{em:3, bang:0}`;
+> `labelBands` BASE `{em:5}` TIP `{em:5}`. `git log 3b22b5c56..b573bb5f4 -- labelBands.js` is
+> EMPTY — no SEAM commit opens that file at all — and the baseline was never touched either, so
+> `voiceMechanics` fails identically at `3b22b5c56`. Car 3a did not even touch
+> `generalStateProse.js`; car 3g did, without moving its count. **The true statement, which is
+> the stronger one for this lane: the voice E2 red is INHERITED from the §915 product tip;
+> SEAM adds nothing to it and moves neither count.** §916 carries it as the KNOWN INHERITED
+> banked red and its cure is named — the REWRITE (Shift 1), where those strings move with every
+> other sentence. No SEAM car touches them: that would be a text move outside the shift.**]**
+ **THE MANIFEST IS BYTE-IDENTICAL** and
 every printed figure equals car 4d's.
 
 `tests/lint` is 149 files and 2,468 assertions: the base 148 / 2,402 plus this car's one file
@@ -2550,8 +2628,13 @@ beside it (a fabricated line of a real producer file, and an invented token, bot
 ⛔ **THREE ROWS WERE DRAFTED AND WITHDRAWN ON THEIR OWN EVIDENCE**, and they are named in the
 module so the next author does not re-propose them: `granary` (its only writers are a prose
 phrase map at `display/demographicReading.js:145` and a binding counter at
-`worldPulse/demographicsObservation.js:106`), `church` (a `pick()` inside a history strand and
-a classifier regex) and `ledger` (seven writers across the treasury, the peace terms, the
+`worldPulse/demographicsObservation.js:106`), `church` (**[corrected at 5c: SIX citations
+across THREE files — `historyEventStrands.js:176`, `pestilence.js` ×4 and
+`religionLegitimacy.js:181`. This line named two and missed `pestilence.js` entirely (fold
+P6, correction 12). The WITHDRAWAL STANDS, and stands harder: a token six writers produce
+across three files names no one holder even more clearly than a token two produce. It is the
+evidence line that understated its own instrument, not the ruling.]** a `pick()` inside a
+history strand and a classifier regex) and `ledger` (seven writers across the treasury, the peace terms, the
 pantheon and three lifecycles, so the token names no one holder).
 
 ### 5b.2 ⭐⭐ THE COUNTS, PER FIELD AND PER ROW, EXECUTED
@@ -2670,6 +2753,13 @@ citizen militia`, sources `{walls: muster, garrison: muster, militia: muster}`.
 
 ### 5b.5 ⭐⭐ THE INTERESTED-FACT FIGURES PER TIER ON THE RATE CORPUS — ZERO, AND WHY
 
+> ⛔ **[corrected at 5c: THE FIGURES BELOW ARE EXACT AND THE RULE BEHIND THEM WAS INCOMPLETE.**
+> Every integer in this section reproduces byte-identically — the fold re-ran the whole corpus
+> and confirmed the per-tier and per-kind lines character for character. What was wrong is
+> GROUND 1, corrected in place below; under SITTING §R c-22's rule the zero becomes **270
+> towns**. Read this section as the measurement it was, and § CAR 5c for the reading that
+> supersedes it.**]**
+
 ```
 $ node $SC/seam5b/rate-holders.mjs docs/content/wiring-census.json …
 RATE corpus · 768 towns · genThrows 0 · 12 s
@@ -2710,9 +2800,35 @@ towns with a 'corruption' institution impairment: 0 · with ANY institution impa
 towns with a corrupt NPC: 134
 ```
 
-1. **CAPTURE and PATRON CONTROL are structurally absent** — their readers take `factionStates`
+1. ~~**CAPTURE and PATRON CONTROL are structurally absent** — their readers take `factionStates`
    and a `worldState`, and a generated town belongs to no world pulse. They are reported
-   ABSENT with the reader that would hold them, never read as `false`.
+   ABSENT with the reader that would hold them, never read as `false`.~~
+
+   ⛔ **[corrected at 5c: GROUND 1 IS FALSE AS STATED, AND IT WAS THIS CAR'S OWN BLIND SPOT
+   (fold P7, correction 13; SITTING §R c-22).** What is TRUE is narrow: `settlementCaptureState`
+   takes `factionStates` and `capturedPatronOf` takes a `worldState`, and a headless town has
+   neither. What is FALSE is the sentence built on it. **Every generated town carries a typed
+   capture fact at birth:** `powerStructure.criminalCaptureState`, written at
+   `src/generators/power/rulingStructure.js:797` — THE VERY LINE THIS CAR'S OWN HOLDER TABLE
+   CITES AS A `watch` FIELD — on the same five-rung ladder `standingOf` consumes, reading
+   **none 495 · adversarial 194 · equilibrium 64 · corrupted 15** over these 768 towns, with
+   **79** towns additionally carrying a non-`none` `captureState` on a faction entry. The block
+   above PRINTED that distribution and the car did not read it. The car reported the fact
+   ABSENT rather than asking whether it licenses a per-institution standing, and the chair's
+   ruling 2 on this car rested on an answer it never asked for.
+
+   The correction is narrow and does NOT make the zero a mistake: the fact is SETTLEMENT-wide
+   while a standing asks about ONE institution, so feeding it straight through would mark
+   every holder in a corrupted town interested — its own error. SITTING §R c-22 draws the line
+   where the fact reaches: a captured ruling structure IS the state, so the OFFICE, the COURT,
+   the TREASURY and the WATCH are interested parties in their own records by that fact alone,
+   and no other kind is. Grounds 2 and 3 below are facts of the engine and stand unamended.
+   **Re-measured under the ruling at car 5c: towns with at least one interested fact 0 → 270,
+   INTERESTED pairs per tier thorp 0 · hamlet 0 · village 0 · town 420 · city 2,613 ·
+   metropolis 2,658, and per kind treasury 17 · watch 171 · court 266 · office 2 with every
+   other kind at 0.** The full table is in § CAR 5c, and the chair's ruling 2 is amended there:
+   the DM face of an interested fact is a BIRTH feature on the state organs of a captured town
+   and a WORLD-RUN feature for the rest.**]**
 2. **No generated town carries an institution impairment at all**, corruption-typed or
    otherwise: impairments are world-pulse products.
 3. **The covert channel cannot reach a security institution.** 178 corrupt NPCs all carry a
@@ -2898,7 +3014,7 @@ $ ls -ld node_modules/immer node_modules/seedrandom     # symlinks, never cloned
 ⭐⭐ **`tests/lint` IS FULLY GREEN — 149 of 149 files and 2,479 of 2,479 assertions.** The
 strict ratchet sits exactly on its ceiling, 1120 / 1120: 410 new effective lines of island
 module added ZERO strict-type errors. The voice E2 red is car 3a's two banked files at the
-counts car 3a measured, byte-identical; this car adds nothing to it (the census module's one
+counts car 3a measured, byte-identical; this car adds nothing to it  (the census module's one
 `toFixed`-in-a-literal is the `JS_METHOD_TAILS` entry, present at `HEAD` and unmoved).
 
 The census module stands at **751 effective lines against 800** (headroom 49) after four
@@ -3000,3 +3116,340 @@ Re-measured at `b573bb5f4` (porcelain 0, runners 0): census `--check` green; `--
 
 ## THE FOLD'S U1 — THE CHAIR'S WHOLE `tests/lint` AT THE SEAM TIP (Fable, 2026-09-08 19:1x)
 `npx vitest run tests/lint` in laneSEAM at `b573bb5f4`, runners 0 before, `HOLD-VITEST` absent (`$SC/lint-whole-seam-tip.log`): **Test Files 149 passed (149) · Tests 2479 passed (2479) · exit 0.** CONFIRMED; the fold's highest-value untested row is closed. Seat: Fable 5.1 — validated.
+
+
+---
+
+## CAR 5c — THE FOLD'S CURES (SITTING §R; laneSEAM `b573bb5f4` → `8ebd477e1`)
+
+Seat: Opus 5 — Fable-unvalidated. Charter: SITTING §R.4 — code cures 1(i), 2, 3, 4, 5, 6, the
+c-22 standing rule and U5, each with its arm; receipt corrections 7–15; the census re-taken
+twice as two PRE-RULED row moves. **Zero reader-facing bytes, zero corpus bytes, ten commits
+over eleven paths, every one MODIFIED — this car opens no file.**
+
+### 5c.0 ARRIVAL — executed
+
+```
+git -C $SC/laneSEAM rev-parse HEAD      b573bb5f4    porcelain 0    runners 0
+$SC/HOLD-VITEST absent · node_modules/immer and seedrandom left as SYMLINKS · no build, ever
+```
+
+### 5c.1 ⭐⭐ THE PROVENANCE DETECTOR NARROWED — 18 → 7, AND THE SPLIT IS NOW AN ASSERTION
+
+The fold's R1 and the sharpest finding of the pass: the shipped docblock said the vocabulary
+was *"the holder table's KINDS … and nothing wider"* while the regex carried a generic
+reporting-verb limb. Reproduced at `b573bb5f4` before anything was touched, row for row with
+the fold:
+
+```
+variants 2266 · citing variants 18
+kind-only 7 · generic-only 11 · both 0
+```
+
+**Eleven of eighteen named no holder kind at all; two read literally `the record has` and `the
+record holds`.** Narrowed to the twelve kinds — the generic limb dropped, `customs` and `tithe`
+dropped, `census`, `office` and `tradition` added — the shipped docblock is now TRUE:
+
+```
+variants 2266 · citing variants 7
+kind-only 7 · generic-only 0 · both 0        · all seven realise a sequence outside LEVEL1
+```
+
+**U5, folded in as §R.3 directs.** A scratch copy with the PROVENANCE row moved to LAST in
+`CLAUSE_DETECTORS`, `classifyMoves` re-run over all six leaves: **2,266 variants compared,
+0 move sequences differ, citing 7 either way.** The mechanism is now written down rather than
+observed — `classifyMoves` collects EVERY detector that fires and orders by match index, so
+position decides only TIES, and the walker holds a tie census over the seven citing clauses
+at `[]`.
+
+**THE ARM.** Four titles in `tests/lint/proseMoveGrammar.walker.test.js`: the split printed and
+asserted as three integers beside the total; one live sentence per kind so a kind dropped later
+reds by name; the regex source asserted free of the generic limb, `customs` and `tithe` and
+carrying all twelve kinds; and U5 as the tie census. ⭐ **The non-vacuity control is the eleven
+withdrawn sentences themselves** — still in the corpus, asserted NOT cited, so a car re-admitting
+the limb takes `citing` to 18 and `generic-only` to 11 and reds twice. PLANT: restoring the limb
+reds all four by name (`expected 18 to be 7`); md5 `93efade8…` → `d8b87c2e…` → `93efade8…`,
+`cmp` identical.
+
+**TWO ASSERTED INTEGERS FOLLOWED THE CURE.** The census walker's THIN/COVERED move back to
+**483 / 225** with the ground rewritten at the assertion, and A13's shrink-only citation ceiling
+follows the count down **18 → 7** — left at 18 it would silently re-admit the eleven. A13 now
+reads **7 of 2,266 · LICENSED 2 · WITHHELD 5** (was 18 · 6 · 12).
+
+### 5c.2 ⛔ THE FIRST PRE-RULED ROW MOVE — THE CENSUS RE-TAKEN ON THE NARROWED CLASSIFIER
+
+```
+46 content lines · 9 rows' `grammars`, and nothing else
+git diff -U0 | grep '^[+-]' | grep -v grammars | grep -v count | grep -v THIN \
+   | grep -v COVERED | grep -v producerIndexFiles          =>  EMPTY
+totals.tiers  {MISSING 34, THIN 482, COVERED 226, MISSING-AT-TIER 45}
+           -> {MISSING 34, THIN 483, COVERED 225, MISSING-AT-TIER 45}
+sections that moved: totals · rows · factIndex · tiers   ·   stamped shas: (none)
+```
+
+⭐ **THE ROW MOVE IS EXACTLY THE REVERSE OF THE GENERIC LIMB'S HALF OF `da080313d`, AND THE
+RESIDUE IS CORRECT.** The chair's register car moved 15 rows' `grammars`. Car 5c returns **9**
+of them to their pre-car-5 value — every row the generic limb ALONE had moved — and the **6**
+carrying a real KIND citation stay moved. (Two of the eleven generic rows never moved at the
+register car at all, because another variant of the same pool already carried that grammar;
+that is why 9 and not 11.) `--check` verified 708 pools / 2,266 variants / 165 relation rows /
+7 stamped files; `--dry` CURRENT, ROWS 0.
+
+### 5c.3 `reWalkBlock` HANDS THE ARMS ITS OPTIONS, AND A3 TELLS ABSENT FROM EMPTY
+
+`reWalkBlock(units, ground, options)` called `walkComposed(unit, ground)` with no third
+argument, so `siblingKeys`, `relations`, `primaryOf`, `fieldOf`, `register` and `sourceOf` were
+dropped at the door; A3 read `[]` and FAILED *'no sibling names the alternative'* on every
+contrast-carrying unit of a re-walked block — findings manufactured by the driver. The options
+now reach the arms, **and** A3 distinguishes an ABSENT sibling set (NOT-EXECUTABLE, the §908
+law) from an EMPTY one (the honest FAIL, now reachable only on purpose). Every existing A3
+control already passed its set explicitly, including the plant's `[]`, so no verdict of theirs
+moves. ⚠ **It was latent only because DS-DEF-11 — the one block the re-walk arm exercised —
+carries no contrast shape** (FAIL 0 over 12 units, unmoved by this car); the new fixture
+DS-FIX-9 carries one on purpose. PLANT: removing the pass-through reds both new arms by name.
+
+### 5c.4 THE SHIFT REGISTER — THE BAND RULE PINNED, `seat` MADE SELF-ENFORCING, TWO KEYS RESERVED
+
+* **The band rule (R3).** The row was named `comparator-and-band-rule` and pinned neither band
+  nor rule: `bandOf` and `departureBit` appeared in **0** pins register-wide. Two pins now — a
+  `source` pin carrying the tension test, the three-signal sum and the departure threshold
+  verbatim, and a recomputable integer over the LEAF side (**0** of 708 pools declare a
+  relation contributing the tension signal). PLANT: making `consequence` count toward the band
+  reds NAMING THE MECHANISM.
+* **`seat` (cure 4).** The one register entry carried by ARGUMENT rather than by a measurement.
+  It now carries `{integer, 'pools carrying a seat key', 0}`, and the recompute loop walks
+  `[...mechanisms, ...notMechanisms.filter((n) => n.pin)]` with a floor asserting it reaches
+  exactly one more row than the mechanism roster. PLANT: a `"seat": "clause"` key on one shipped
+  spine reds with the promotion message.
+* **`seatReason` / `seatRow` (cure 5).** Named RESERVED on the register beside `seat`, marked
+  RESERVED in the composer's `PoolMeta` typedef, and — the part that makes the naming
+  load-bearing — **the projection contract's stray-key arm READS THAT LIST** rather than
+  retyping it. Two plants: the key shipped on a spine reds the stray arm; the key REMOVED from
+  the register reds its own floor.
+
+**Register at this tip: 14 mechanisms · 4 notMechanisms · 23 pins over 15 pinned rows · drift
+`[]`.**
+
+### 5c.5 ⭐⭐ THE CAPTURE STANDING (SITTING §R c-22) — INTERESTED 0 → 270 TOWNS
+
+The correction the chair ruled must be taken before car 6 is briefed. Car 5b's figure was right
+and its ground was false: `powerStructure.criminalCaptureState` is written at birth on every
+town (`rulingStructure.js:797`, the line this table maps to the WATCH). A settlement-wide
+capture licenses an INTERESTED standing for the STATE'S OWN ORGANS — office, court, treasury,
+watch — and for no other kind.
+
+```
+RATE corpus · 768 towns · genThrows 0 · 12 s · LICENSED census rows walked per town: 114
+towns with at least one interested fact: 0 -> 270
+settlement-wide criminalCaptureState: none 495 · adversarial 194 · equilibrium 64 · corrupted 15
+
+tier        towns   (row,town) pairs   holder named   INTERESTED   interested bp
+thorp         128             14592             78            0               0
+hamlet        128             14592              5            0               0
+village       128             14592            640            0               0
+town          128             14592           6497          420             288
+city          128             14592           2741         2613            1791
+metropolis    128             14592           3284         2658            1822
+
+per KIND, towns whose roster names a holder / towns where that holder is INTERESTED:
+  treasury 151/17 · watch 173/171 · court 339/266 · office 2/2          <- the four organs
+  muster 0/0 · census 0/0 · parish 166/0 · toll-bar 81/0 · market 140/0
+  · elders 13/0 · tradition 0/0 · road 53/0                             <- and no other kind
+```
+
+⭐ **270 = 273 − 3, EXACTLY.** 273 towns are on the capture arc; 3 of them (2 hamlets, 1 town)
+instantiate no institution keeping a licensed state-organ record. Nothing is rounded and
+nothing is inferred.
+
+**THE SIGNATURE CARRIES THE KIND.** `standingOf(institution, settlement, world, kind)` reads
+the ruling structure only for a state organ, PRINTS `captured-at-birth (<kind> is not one of
+the state's own organs…)` in `absent` for every other kind, and gives a caller naming NO kind
+the pre-5c reading exactly — which is why every existing call site is unmoved.
+`sourceOfForTown` now walks (kind, holder) PAIRS, so one institution keeping two kinds' records
+is asked once per kind.
+
+⭐⭐ **A13's FAIL LIMB IS REACHABLE ON REAL INPUT (the fold's P8).** The REGISTER's standing
+vocabulary is still the closed three and still correct — a register knows no town. The TOWN
+path now mints INTERESTED from a typed birth fact, and the arm reaches it with a REAL shipped
+citing variant on a REAL named town: `DS-GEN-11 :: viable: true: the arithmetic closes` (holder
+kind treasury) on `town|road|random_threat|germanic|hills` seed `rate-9-2`
+(`criminalCaptureState: corrupted`, holder `Town hall`). The player face FAILS *'an interested
+holder on the player face'*; the `dm-only` face passes. **17 of the 768 towns put that exact
+row into INTERESTED**, so the arm sits on a measured population and not a coincidence.
+
+**CONTROLS, all on real towns.** The captured city `city|random_trade|random_threat|norse|
+coastal` seed `rate-4-0` makes **16 of 114** licensed rows interested and **not one** row
+without a state organ among its kinds. The clean town
+`town|random_trade|random_threat|arabic|riverside` seed `rate-3-0` keeps **62** of those records
+and makes **none** interested. PLANTS: widening the gate to every kind, and dropping
+`capturedAtBirth` from the `interested` rollup, each red both walkers by name.
+
+### 5c.6 ⛔ THE SECOND PRE-RULED ROW MOVE — THE `stateOrgan` COLUMN
+
+The register knows no town, so its `standing` can never read INTERESTED. What it CAN say is
+which rows a captured town is able to move, and it now says it on the affected rows only.
+
+```
+122 content lines · 40 rows of 708 gain `source.stateOrgan: true` · added 0 · removed 0
+by standing  LICENSED 37 · OFFICE 3
+by kind      court 16 · treasury 14 · watch 9 · office 3 · muster 2 (two-source rows)
+the ONLY other lines are the preceding `twoSource` re-emitted with a comma
+sections other than `rows` that moved: (none)
+```
+
+No row carries `stateOrgan: false` — an absent key is the answer `no`, which is the `readsCount`
+idiom. The walker re-derives the flag from its own definition and asserts the 668 unflagged rows
+carry no key at all.
+
+### 5c.7 THE HOLDER CENSUS HEADLINE COUNTS BECOME PINNED INTEGERS — AND THEY DID NOT MOVE
+
+Measured at MY tip, AFTER the capture standing landed, which answers the brief's own question
+about which figures these are: they are **SOURCE** counts (which holder kind a row's fields
+resolve to), and the capture standing is a TOWN standing no register row can carry. It moved 40
+rows' `stateOrgan` and not one row's `standing`.
+
+```
+ROWS    LICENSED 114 · OFFICE 3 · SOURCE-UNRESOLVED 591      (summing to all 708 pools)
+FIELDS  LICENSED 191 · OFFICE 5 · SOURCE-UNRESOLVED 415      (over 611 sourced field entries)
+two-source rows 10 · rows with no reading at all 368
+unresolvedGrounds {no-mapping 415, no-institution-in-roster 0}      (kept APART)
+byKind  muster 61 · market 49 · treasury 22 · court 21 · toll-bar 13 · watch 9 · road 7
+        · elders 5 · office 5 · parish 4     (asserted to account for LICENSED + OFFICE exactly)
+```
+
+⭐ **THE PLANT IS THE WHOLE ARGUMENT FOR THE CURE, so it was driven the hard way.** Changing one
+mapping row's kind and THEN RE-TAKING THE CENSUS closes the door behind it: `--check` verifies,
+`--dry` reads CURRENT, the byte interlock is satisfied — and the only red in the walker is the
+new pin (`rows whose fields resolve to more than one kind: expected 6 to be 10`). **Before the
+cure that move was silent.** Both files restored by `cmp` and md5.
+
+### 5c.8 ⛔ THE WHOLE `tests/lint` FOUND TWO DEBTS EVERY FOCUSED RUN WAS BLIND TO
+
+The estate's own standing hazard, caught being itself. Every focused run of cars 5c-1…5c-7 was
+green; the whole directory at that tip was not.
+
+1. **`negativeAssertionAnchor.walker.test.js`** reported car 5c-1's arm at a frozen ceiling of
+   0: four un-anchored negatives. Cured at cause (5c-7b) — `NOT_A_CITATION` now carries each
+   refusal's WHOLE move sequence asserted with `toEqual` and paired with
+   `expectAbsentWithAnchor`; the regex-source negatives are anchored by ORDER, the twelve-kind
+   presence loop moved above them with a length floor beside it.
+2. **The lighting census**, titles 24025 → 24031. Re-frozen by its ritual on a clean tip.
+
+⚠ **AND THE FIRST REFREEZE'S NOTE WAS WRONG, WHICH IS ITS OWN RECORDED FINDING.** The note
+attributed the +6 per arm in a sum that did not close: car 5c added **TEN** it/test blocks
+(vitest 2,479 → 2,489), not six. Measured with the walker itself, one file reverted at a time:
+`proseComposed +3 · proseWiringCensus +3 · proseMoveGrammar +0` = 6. **`proseMoveGrammar` is a
+PARKED file and was already parked at the previous freeze** (`parked` holds at 375) — it carries
+a table-driven `it()` whose title is a template literal, which this census refuses to count
+rather than pretend to measure, so none of its titles is credited and the four new literal ones
+inherit the park. The register was re-frozen a second time with the measured note; the FIGURES
+did not move.
+
+```
+lighting census   files 2556 · parked 375 · credited 2181 · titles 24025 -> 24031 · suiteTitles 6419
+```
+
+### 5c.9 THE GATES AT THE TIP `8ebd477e1`
+
+```
+npx vitest run tests/lint                     149 files / 2489 tests, exit 0   (base 149 / 2479)
+node scripts/check-domain-strict.mjs          1120 errors, ceiling 1120 — EXACTLY on the ceiling
+node scripts/check-full-typecheck.mjs         173 / 173
+node scripts/check-observed-shape-readers.mjs 1972 finding(s), exactly matching the frozen inventory
+node scripts/wiring-census.mjs --check        708 pools / 2266 variants / 165 relation rows / 7 stamped
+node scripts/wiring-census.mjs --dry          CURRENT · 2053167 / 2053167 · delta 0 · sections (none) · ROWS 0
+node scripts/generate-dossier-state-prose.mjs --check   68 blocks / 2266 variants · 708 sentence / 0 clause
+node $SC/prose-numerics-rekey.mjs             baseline 225 · live 225 · exact 225 · FELL 0 · NEW 0
+npx eslint .                                  0 errors (31 pre-existing warnings, none in a 5c file)
+npx vitest run tests/property/dossierProseManifest.test.js    14 passed — every figure byte-equal
+npx vitest run tests/lint/proseCorpusBytes.test.js            18 passed
+```
+
+⭐⭐ **THE PROMISE IS INTACT ACROSS CAR 5c AS IT IS ACROSS THE TRAIN.** The golden manifest
+fixture is byte-identical — sha256 `4191775aed6e2608a76fa7909da2d689cc1c7054e9358a8ccf8f2cb000f57add`,
+145,375 B — and `git diff --stat b573bb5f4..HEAD -- src/data/` prints NOTHING. Zero corpus
+bytes, zero reader-facing bytes.
+
+### 5c.10 ⛔ THE OSR SCANNED-PATH DELTA — PRINTED, AND LEFT TO THE CHAIR (c-17)
+
+The fence forbids me the `--write`. Re-measured at my tip and UNCHANGED by this car, which
+opened no src file:
+
+```
+recorded scanTree   2194   ·   live scan set      2196
+recorded sourceTree 2211   ·   live subject set   2213
+live but NOT recorded: [ src/domain/prose/composedWalker.js, src/domain/prose/holderTable.js ]
+recorded but NOT live: []          gate: 1972 findings, exit 0, both files yield ZERO findings
+```
+
+**A scanned-path delta with zero findings, exactly as c-17 describes it.** Car 5c MODIFIED both
+files and added neither, so the delta is precisely the one cars 5 and 5b created. The ratchet is
+not holed — the scan walks the live tree, so a new reader in either file would enter as an ADDED
+identity — but the seal is stale and the provenance gate cannot see it (it fires on
+`detectorDigest` / `unscannedInputDigest`, and a new SCANNED file moves neither). **The §916
+registers step owns this door and must name the two files in its printed diff.**
+
+### 5c.11 THE RECEIPT CORRECTIONS 7–15, APPLIED IN PLACE
+
+Each is marked `[corrected at 5c: …]` at the sentence it corrects, never in a footnote.
+
+| # | where | what |
+|---|---|---|
+| 7 | §3a.8 · §3b-0 · the 3b–3g stage table | `1806768` / `1807516` relabelled **UTF-16 code units**, on disk 1,808,325 / 1,809,073; **the two instruments named** — the walker's `stale-bytes` arm reads String.length, `--dry` reads TRUE bytes; the gap is 1,557 at four shas and **1,597 at `b573bb5f4`**, so it is not a constant |
+| 8 | the composer's docblock | steps 5/6 run **6-then-5** (`:766` / `:769` / `:770`) and step 2's `RESOLVED` filter **does not exist** — both recorded as declared-and-harmless in `composeStateProse.js` itself, not only here (§R.3) |
+| 9 | §4.2's register table | 3 named NOT mechanisms → **4** (`seat`, car 4d); at 5c, 14 · 4 · **23 pins over 15 rows** |
+| 10 | §5.4 | the vocabulary sentence struck; the **7 / 11 / 0** split printed beside the 18, and the narrowing recorded |
+| 11 | §5.9 · §5b.10 | the voice E2 red is **INHERITED from `3b22b5c56`** — a stronger claim for this lane and a true one; §916 carries it as the known inherited red, cured at the REWRITE |
+| 12 | §5b | `church` — **6 citations across 3 files**, `pestilence.js` ×4 missed; the withdrawal stands harder |
+| 13 | §5b.5 | ground 1 restated in full; the zero stands on grounds 2 and 3; the engine DOES hold a typed capture fact at birth |
+| 14 | here | **the consist is 24 commits · 57 paths** at `b573bb5f4` (not 23 · 59), re-measured; **including car 5c it is 34 commits · 58 paths (18 A / 40 M), 38,883 insertions / 3,764 deletions.** Car 5c adds exactly ONE path to the span — `tests/lint/proseMoveGrammar.walker.test.js` — and modifies ten already in it |
+| 15 | §5.3 · §5.5 · §3a | the walk cost **never pinned** (52 ms / 260 µs re-runs at 45 ms / 225 µs); the sections that moved are `stamp · totals · rows · factIndex · tiers`; `drawFace`'s triple named **fixture-local** with the fold's own keys beside it. **AND seam.md's ⛔ `fillSites` gap is WITHDRAWN: the arm exists at `tests/lint/proseEntryContradiction.walker.test.js:328-333` and reads 27 passed at this tip — the cure was already paid** |
+
+### 5c.12 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **The narrowed regex adds a `tradition` limb (`the tradition says|holds|remembers|keeps`)
+   that fires on 0 shipped variants.** The chair asked for `tradition` to be added; the kind had
+   no phrasing of its own, and the elders limb is its nearest sibling, so the shape mirrors it.
+   It steals nothing from the TRADITION detector, which keys on `custom|rite|feast|by tradition`
+   and never on `the tradition holds`. Measured: the citing count is 7 with and without it.
+2. **`source.stateOrgan` is emitted only where TRUE.** The alternative — a boolean on all 708
+   rows — would have made the pre-ruled row move 708 rows wide and buried the 40 that matter.
+   The `readsCount` idiom already establishes absent-means-no in this register.
+3. **A3 gained a NOT-EXECUTABLE limb rather than `reWalkBlock` deriving sibling keys from the
+   block.** Deriving them would have been a defensible third option and a wider one; the charter
+   named the pass-through and the refusal, and the refusal is the §908 law. Recorded because the
+   derivation is the natural next car if a caller ever wants block-derived siblings.
+4. **A13's shrink-only ceiling was tightened 18 → 7 rather than left.** A ratchet left at its old
+   value silently re-admits exactly what the cure removed.
+5. **Commits 5c-6 and 5c-7 land the cures in the order 7-then-6**, because the brief's own note
+   requires cure 6's integers to be pinned at the tip AFTER the capture standing. The commit
+   subjects say what they carry.
+6. **The lighting census was re-frozen TWICE**, the second time to correct a note whose
+   arithmetic did not close. A provenance field that states an unexecuted sum is the thing that
+   register exists to refuse, and correcting it costs one commit and no figure.
+
+### 5c.13 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+1bfc79fdc  5c-1  the provenance detector narrowed to the holder kinds — 18 → 7, the census re-taken
+d50e501b3  5c-2  reWalkBlock hands the arms its options, and A3 tells an absent sibling set from an empty one
+7a826a338  5c-3  the SHIFT REGISTER pins the BAND RULE, not only the comparator
+e3bf6661b  5c-4  `seat` gets a recomputable pin, and the recompute loop reaches a pinned NON-mechanism
+2ec52b178  5c-5  `seatReason` and `seatRow` named RESERVED, and the stray-key arm reads the list
+3a66eb9e3  5c-6  THE CAPTURE STANDING — 0 → 270 towns (cure 7 + c-22)
+965804a26  5c-7  the holder census headline counts become pinned integers (cure 6)
+5df93e9ae  5c-7b the whole tests/lint at the tip anchors 5c-1's four negative assertions
+f43b6bc78  Register  the lighting census re-freezes at the cures' tip, by its ritual
+8ebd477e1  Register  the lighting census note corrected to the MEASURED split
+```
+
+### 5c.14 RETROVALIDATION ROW (for the Fable chair)
+
+**Every cure of SITTING §R.4 landed with the arm it owed and the plant that convicts it.** The
+two pre-ruled row moves are committed with the changes that caused them and their diffs are
+bounded and printed. Two figures the chair should re-measure before §916: the **270** towns and
+the **9-of-15** row return, both of which decide sentences already in the ledger. One door is
+left open on purpose and is the chair's: the **OSR scanned-path delta** (c-17), printed at
+§5c.10 with zero findings. Nothing else is refused; nothing is deferred without a line.
+
+**STATUS: CAR 5c LANDED at `8ebd477e1`.** Porcelain 0, runners 0.
