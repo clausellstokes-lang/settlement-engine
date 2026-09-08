@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0b05e3a7a8d0f8d4fd8338db7f6ce53c72bfbb6b",
-  "measuredBy": "INSTR-912 car 8 (Opus 5)",
+  "measuredAtSha": "8c53ddef1224d6adb7c88998128bf790fd78c2fe",
+  "measuredBy": "INSTR-912 car 9 (Opus 5)",
   "date": "2026-09-08",
-  "note": "car 8 adds tests/lint/proseWiringCensus.walker.test.js — one new lint walker file, 21 titles",
+  "note": "car 9 adds the fold cures arms to five existing lane walkers (no new test FILE): titles and suite titles move, files and parked do not",
   "files": 2549,
   "parked": 375,
   "credited": 2174,
-  "titles": 23717,
-  "suiteTitles": 6352
+  "titles": 23730,
+  "suiteTitles": 6354
 }
