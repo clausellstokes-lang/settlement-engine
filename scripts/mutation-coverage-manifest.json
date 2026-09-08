@@ -1579,6 +1579,10 @@
     "tests/security/ipPrivacy.test.js": {
       "kind": "uncovered"
     },
+    "tests/security/livingContentRosterPublicDrop.test.js": {
+      "kind": "mutation",
+      "label": "security/the living-content roster becomes an allowlisted public key"
+    },
     "tests/security/mapForkXssChain.test.js": {
       "kind": "uncovered"
     },

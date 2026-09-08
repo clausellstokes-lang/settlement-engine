@@ -104,6 +104,7 @@ MUTATED_FILES=(
   src/domain/display/stateProse/dossierMounts.js
   src/domain/content/customContentCharset.generated.js
   tests/fixtures/.golden-freeze-register.json
+  src/domain/display/publicSafe.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1014,6 +1015,31 @@ check_caught "naming-charset/a range leaves the dossier surface and a shipped na
 #     naming the arm and the file; restored cmp-exact => 84 passed.
 perl -0pi -e 's/"UPDATE_MOUNT_BASELINE"/"LIGHTING_CENSUS_REFREEZE"/' tests/fixtures/.golden-freeze-register.json
 check_caught "golden-freeze/the exclusion roster loses a spelling while reading as maintained" tests/fixtures/.golden-freeze-register.json "npx vitest run tests/lint/goldenFreeze.walker.test.js --no-file-parallelism" "every golden-adjacent env spelling in tests is enrolled or written-excluded"
+
+# 74. §913 L-MAT-FIX — THE LIVING-CONTENT ROSTER PUBLISHED BY ONE ALLOWLIST ROW. The
+#     fail-closed root allowlist in publicSafe.js is the ONLY thing standing between
+#     `settlement.customContentRoster` and every public / gallery / anonymous read. The
+#     roster records EVERY reviewed living-content definition in scope for a run — adopted
+#     or NOT — so it is the author's unadopted homebrew library rather than a property of
+#     the town, and every row carries the five stable, account-scoped
+#     CUSTOM_DEFINITION_IDENTITY_KEYS that are exactly what would let an observer correlate
+#     one private definition across two published worlds. There is no second line of
+#     defence: the deeper denylist strips NOTHING here (no roster key matches
+#     PRIVATE_KEY_RE, which that test's third arm MEASURES off a real generated row rather
+#     than assuming), so one key added to PUBLIC_TOPLEVEL_KEYS publishes the library.
+#     The failure this forecloses is the quiet one — the key is added in good faith by
+#     someone growing the public dossier, nothing errors, no surface changes shape, and the
+#     leak is visible only to whoever diffs two published worlds. A constant-only arm would
+#     be a weak witness for it, which is why the named red below is the BEHAVIOURAL one:
+#     it generates a LIT world through the real pipeline, proves the roster IS there, and
+#     only then proves the projection dropped it.
+#     Measured before landing (lane L-MAT-FIX, 2026-09-07): planted => EXACTLY 2 red of 6 —
+#     the allowlist arm and the ⭐ BEHAVIOURAL arm, the only two an added root key can
+#     reach; the provenance, denylist-census, R-D and DM-FULL arms stayed GREEN, so the
+#     named red is attributable to this mutation rather than to a whole-file collapse.
+#     Restored via `git checkout --` => 6 passed.
+perl -0pi -e "s/'structuralViolations', 'thesis', 'tier',/'structuralViolations', 'thesis', 'tier', 'customContentRoster',/" src/domain/display/publicSafe.js
+check_caught "security/the living-content roster becomes an allowlisted public key" src/domain/display/publicSafe.js "npx vitest run tests/security/livingContentRosterPublicDrop.test.js" "⭐ BEHAVIOURAL: a LIT world really carries a roster, and the default projection drops it"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
