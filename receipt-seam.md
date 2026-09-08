@@ -3017,6 +3017,17 @@ module added ZERO strict-type errors. The voice E2 red is car 3a's two banked fi
 counts car 3a measured, byte-identical; this car adds nothing to it  (the census module's one
 `toFixed`-in-a-literal is the `JS_METHOD_TAILS` entry, present at `HEAD` and unmoved).
 
+> ⛔ **[corrected at 5c: THE SAME CORRECTION AS §5.9 — THE VOICE E2 RED IS *INHERITED* FROM THE
+> §915 TIP `3b22b5c56`, NOT CAR 3a's (fold R2, correction 11; SITTING §R c-18).** Re-measured
+> with the test's own espree literal counter at the base and at the SEAM tip: `generalStateProse`
+> BASE `{em:3, bang:0}` TIP `{em:3, bang:0}`; `labelBands` BASE `{em:5}` TIP `{em:5}`.
+> `git log 3b22b5c56..b573bb5f4 -- labelBands.js` is EMPTY, and the baseline was never touched,
+> so `voiceMechanics` fails identically at `3b22b5c56`. Car 3a did not touch
+> `generalStateProse.js` at all; car 3g did, without moving its count. **SEAM adds nothing to
+> this red and moves neither count** — the stronger claim, and the true one. §916 carries it as
+> the KNOWN INHERITED banked red with its cure named: the REWRITE (Shift 1). No SEAM car may
+> touch those strings; that would be a text move outside the shift.**]**
+
 The census module stands at **751 effective lines against 800** (headroom 49) after four
 added lines; `holderTable.js` at **410 against 800** (headroom 390).
 
@@ -3120,11 +3131,11 @@ Re-measured at `b573bb5f4` (porcelain 0, runners 0): census `--check` green; `--
 
 ---
 
-## CAR 5c — THE FOLD'S CURES (SITTING §R; laneSEAM `b573bb5f4` → `8ebd477e1`)
+## CAR 5c — THE FOLD'S CURES (SITTING §R; laneSEAM `b573bb5f4` → `455ec96a4`)
 
 Seat: Opus 5 — Fable-unvalidated. Charter: SITTING §R.4 — code cures 1(i), 2, 3, 4, 5, 6, the
 c-22 standing rule and U5, each with its arm; receipt corrections 7–15; the census re-taken
-twice as two PRE-RULED row moves. **Zero reader-facing bytes, zero corpus bytes, ten commits
+twice as two PRE-RULED row moves. **Zero reader-facing bytes, zero corpus bytes, ELEVEN commits
 over eleven paths, every one MODIFIED — this car opens no file.**
 
 ### 5c.0 ARRIVAL — executed
@@ -3349,7 +3360,7 @@ did not move.
 lighting census   files 2556 · parked 375 · credited 2181 · titles 24025 -> 24031 · suiteTitles 6419
 ```
 
-### 5c.9 THE GATES AT THE TIP `8ebd477e1`
+### 5c.9 THE GATES AT THE TIP `455ec96a4`
 
 ```
 npx vitest run tests/lint                     149 files / 2489 tests, exit 0   (base 149 / 2479)
@@ -3402,7 +3413,7 @@ Each is marked `[corrected at 5c: …]` at the sentence it corrects, never in a 
 | 11 | §5.9 · §5b.10 | the voice E2 red is **INHERITED from `3b22b5c56`** — a stronger claim for this lane and a true one; §916 carries it as the known inherited red, cured at the REWRITE |
 | 12 | §5b | `church` — **6 citations across 3 files**, `pestilence.js` ×4 missed; the withdrawal stands harder |
 | 13 | §5b.5 | ground 1 restated in full; the zero stands on grounds 2 and 3; the engine DOES hold a typed capture fact at birth |
-| 14 | here | **the consist is 24 commits · 57 paths** at `b573bb5f4` (not 23 · 59), re-measured; **including car 5c it is 34 commits · 58 paths (18 A / 40 M), 38,883 insertions / 3,764 deletions.** Car 5c adds exactly ONE path to the span — `tests/lint/proseMoveGrammar.walker.test.js` — and modifies ten already in it |
+| 14 | here | **the consist is 24 commits · 57 paths** at `b573bb5f4` (not 23 · 59), re-measured; **including car 5c it is 35 commits · 58 paths (18 A / 40 M), 38,899 insertions / 3,764 deletions.** Car 5c is 11 commits over 11 paths, ALL MODIFIED, and adds exactly ONE path to the span — `tests/lint/proseMoveGrammar.walker.test.js` — modifying ten already in it |
 | 15 | §5.3 · §5.5 · §3a | the walk cost **never pinned** (52 ms / 260 µs re-runs at 45 ms / 225 µs); the sections that moved are `stamp · totals · rows · factIndex · tiers`; `drawFace`'s triple named **fixture-local** with the fold's own keys beside it. **AND seam.md's ⛔ `fillSites` gap is WITHDRAWN: the arm exists at `tests/lint/proseEntryContradiction.walker.test.js:328-333` and reads 27 passed at this tip — the cure was already paid** |
 
 ### 5c.12 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
@@ -3441,6 +3452,14 @@ e3bf6661b  5c-4  `seat` gets a recomputable pin, and the recompute loop reaches 
 5df93e9ae  5c-7b the whole tests/lint at the tip anchors 5c-1's four negative assertions
 f43b6bc78  Register  the lighting census re-freezes at the cures' tip, by its ritual
 8ebd477e1  Register  the lighting census note corrected to the MEASURED split
+455ec96a4  5c-8  the composer's docblock declares the two departures from ARCH §4.2 (P1, P2)
+```
+
+```
+git -C $SC/laneSEAM log --oneline b573bb5f4..HEAD | wc -l            11
+git -C $SC/laneSEAM diff --name-status b573bb5f4..HEAD | wc -l       11    (11 M, 0 A, 0 D)
+git -C $SC/laneSEAM status --porcelain | wc -l                        0
+npx vitest run tests/lint                       149 passed (149) · 2489 passed (2489) · exit 0
 ```
 
 ### 5c.14 RETROVALIDATION ROW (for the Fable chair)
@@ -3452,4 +3471,4 @@ the **9-of-15** row return, both of which decide sentences already in the ledger
 left open on purpose and is the chair's: the **OSR scanned-path delta** (c-17), printed at
 §5c.10 with zero findings. Nothing else is refused; nothing is deferred without a line.
 
-**STATUS: CAR 5c LANDED at `8ebd477e1`.** Porcelain 0, runners 0.
+**STATUS: CAR 5c LANDED at `455ec96a4`.** Porcelain 0, runners 0.
