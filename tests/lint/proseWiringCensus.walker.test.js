@@ -841,10 +841,22 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     const gen3 = coverage.find((c) => c.block === 'DS-GEN-3');
     expect(gen3.spines, 'DS-GEN-3 is the estate\'s widest block').toBe(42);
     expect(gen3.spinesReachedBp, 'and every one of its spines can carry a modifier').toBe(10000);
-    // ⭐ THE BLOCK THAT CANNOT COMPOSE AT ALL IS A FINDING, not a rounding error: a block
-    // whose every spine tests the same single fact has NO attachable spine for it.
+    expect(coverage.length, 'and that is fifty of the sixty-eight blocks').toBe(50);
+    // ⭐⭐ THE SHARPEST CONSEQUENCE OF THE `reads` GRAIN, AND IT IS OVER HALF THE ESTATE.
+    // `tests` is every reading the KEY FUNCTION touches, so on a block whose pools come from
+    // ONE ladder every spine carries the same read set and NO fact of that block can attach
+    // anywhere. Twenty-six of the fifty composable blocks read 0 bp — DS-DEF-11, the owner's
+    // own walls block, and DS-DEF-2, the threat assessment, among them. ARCH §6.3's worked
+    // `country: pressed (walled)` attaching to STRAINED is NOT reachable at this grain, and
+    // the branch grain that would reach it (`predicate[].field`, available on the 185 rows
+    // carrying a predicate) is a chair ruling with a measured cost rather than a repair.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
-    expect(dark, 'the blocks where no fact of the block can attach anywhere').toContain('DS-STR-1');
+    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(26);
+    expect(dark, 'including the block ARCH §6.3 works its whole example on').toContain('DS-DEF-11');
+    expect(dark, 'and the threat assessment §6.4 works its fact budget on').toContain('DS-DEF-2');
+    expect(dark, 'and the single-fact block').toContain('DS-STR-1');
+    // THE PAIRED POSITIVE: a block whose pools come from SEVERAL key functions composes.
+    expect(dark, 'DS-GEN-3 is not among them').not.toContain('DS-GEN-3');
   });
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
