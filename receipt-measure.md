@@ -534,3 +534,295 @@ the JSON, so the lighting census is unmoved at 0b's tuple and `--check` is green
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: MEASURE
+
+---
+
+## CAR 0e — THE `reads` GRAIN RE-CUT TO THE SELECTING BRANCH (SITTING §O.1, §O.5)
+
+Seat: Opus 5 — implementer · dock `$SC/laneMEASURE`, over car 0d `458eebb2f`.
+Tip after this car: `0dd711c6a` (0e) · `c0269d16f` (0e-b, the lighting refreeze by its ritual).
+
+### 0e.0 ARRIVAL
+
+```
+$ date
+Tue Sep  8 06:17:47 EDT 2026
+$ ls $SC/HOLD-VITEST
+ls: .../scratchpad/HOLD-VITEST: No such file or directory
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ git rev-parse --short HEAD ; git status --porcelain | wc -l
+458eebb2f
+       0
+```
+
+### 0e.1 WHAT WAS BUILT
+
+| file | what |
+|---|---|
+| `src/domain/prose/wiringBranch.js` | **NEW, the ELEVENTH ISLAND MODULE.** `branchPath` (the structural `if`-chain reader), `guardFields` (every reading one guard evaluates), `readingAliases` (the alias map for a READ, which is not the alias map for a VALUE), plus `balancedSlice` and `fieldChains` MOVED WHOLE from the census module and re-exported by it. 133 effective lines. |
+| `src/domain/prose/wiringCensus.js` | `KeyForm.path`; `censusRow` writes `branchReads`; `narrowedReads` takes the branch grain where one was recovered and the function-wide union where none was, and returns which; `decorateRows` writes `readsGrain`; `TIERS` gains `MISSING_AT_TIER`. **745 → 732 effective lines** (the two moved readers pay for the new columns). |
+| `scripts/wiring-census.mjs` | `grainFigures` and the `grains` block in the JSON; `grainLines` printing both grains side by side once; the fourth tier appended from the rate half; `branchGrainRows`, `functionGrainRows`, `tierSilences`, `tierSilencesLawful` in `totals`. |
+| `scripts/prose-rate-corpus.mjs` | `tierSilences` CLASSIFIES: `verdict` · `limb` · `rung` · `grain` · `siblingRungSpoke` · `splitLadder` per row. |
+| `tests/lint/proseWiringCensus.walker.test.js` | **47 → 50 assertions**; the fence widened to ELEVEN modules; the walker now IMPORTS the shipped silence rule instead of re-spelling it. |
+| `tests/fixtures/wiringFixtures.js` | `COMPOSER_BRANCH_GRAIN` (the shipped ladder whole) and `COMPOSER_BRANCH_FLAT` (its paired negative). |
+| `scripts/mutation-sweep.sh` + `scripts/mutation-coverage-manifest.json` | plants **#89 · #90 · #91**, three `meta:` entries, the manifest edited BY TEXT (15 insertions, 0 deletions); `MUTATED_FILES` gains the two new targets. |
+| `docs/content/wiring-census.json` | regenerated; 1,660,000 B → **1,779,223 B**. |
+
+### 0e.2 THE TWO GRAINS, SIDE BY SIDE — the measured cost of the ruling
+
+`node scripts/wiring-census.mjs --print`, verbatim:
+
+```
+  TIERS · MISSING 34 · THIN 483 · COVERED 225 · MISSING-AT-TIER 44 (of 347 per-tier silences, 303 LAWFUL)
+  reads GRAIN (SITTING §O.1) · BRANCH on 287 rows · function-wide, fail-closed, on 421
+  ── the two GRAINS, side by side (branch | function-wide) ─────────
+    read paths over all 708 rows          529    757
+    k = 0 of the RESOLVED rows             49    121
+    blocks that can attach NOTHING         22     26
+    blocks the branch grain FREES: DS-DEF-11 · DS-DEF-9 · DS-ECO-9 · DS-POW-3
+    k histogram, branch:   k=-2 11 · k=-1 12 · k=0 26 · k=1 79 · k=2 190
+    k histogram, function: k=-6 5 · k=-4 7 · k=-2 9 · k=-1 34 · k=0 66 · k=1 87 · k=2 110
+```
+
+**EVERY CAR-8/9/10 HEADLINE INTEGER IS UNMOVED** — 708 / 318 / 390 / with a predicate 185 /
+clean 185 / 118 functions (consulted 118) / 29 tables / MISSING 34 / THIN 483 / COVERED 225.
+What moved is every figure that is a FUNCTION of `reads`, and each is named:
+
+| figure | function-wide (car 0) | branch (this car) |
+|---|---|---|
+| read paths over 708 rows | 757 | **529** |
+| `k = 0` of the 318 RESOLVED | 121 | **49** |
+| blocks that can attach nothing | 26 | **22** |
+| `absent` · measured / default / not-produced | 563 / 20 / 96 | **377 / 10 / 64** |
+| `customReachable` rows | 22 (factions 3) | **21 (factions 2)** |
+| desk read roots the join is taken over | 91 | **85** |
+| modifier-eligible facts per tab | overview 26 · services 9 · power 6 · war 5 | **overview 27 · services 10 · power 7 · war 6** |
+
+### 0e.3 ARCH §6.3's OWN PUBLISHED READING, REPRODUCED TO THE FIELD
+
+ARCH §6.3 wrote DS-DEF-11's `tests` before this reader existed, so the shipped rows
+reproducing it is an INDEPENDENT check on the scanner rather than the scanner checking
+itself:
+
+```
+$ node $SC/measure/probe-branch.mjs
+WALLED-THREATENED | grain branch | reads ["forces.walls.present","settlement.config.monsterThreat","settlement.defenseProfile.economicGates.military"] | k 0
+WALLED-QUIET      | grain branch | reads ["forces.walls.present","settlement.config.monsterThreat","settlement.defenseProfile.economicGates.military"] | k 0
+WALLED-STRAINED   | grain branch | reads ["forces.walls.present","settlement.defenseProfile.economicGates.military"] | k 1
+UNWALLED-SMALL    | grain branch | reads ["forces.walls.present","settlement.tier"] | k 1
+UNWALLED-LARGE    | grain branch | reads ["forces.walls.present","settlement.tier"] | k 1
+rows on the BRANCH grain 287 of 708 · rows carrying a predicate 185
+```
+
+against §6.3: *"STRAINED {walls, gate}; THREATENED and QUIET {walls, gate (by exclusion),
+family}; UNWALLED-* {walls, tier} … STRAINED and UNWALLED-* `k ≤ 1`; THREATENED/QUIET
+`k = 0` unless the chair rules `NARROWS: gate`."* Five rows, five matches, including the
+`k` the document predicts. **DS-DEF-11 leaves the cannot-attach set at 10000 bp reached.**
+
+### 0e.4 ⛔ THE ARM THIS CAR REFUSES, WITH ITS MEASUREMENT — DS-DEF-2 DOES NOT LEAVE
+
+The brief's arm asks for DS-DEF-11 **and DS-DEF-2** to leave the cannot-attach set. DS-DEF-11
+does. DS-DEF-2 does not, and the grain is not what is stopping it:
+
+```
+$ node $SC/measure/probe-def2.mjs
+. none                            Beasts & Monsters: plagued, perimeter AND organized force
+  … 22 rows, every one WIRING-UNRESOLVED …
+R literal  internalRowPoolKey     Internal Security: full legal chain (court AND prison)
+     reads ["court","prison"] grain branch
+R literal  internalRowPoolKey     Internal Security: court without detention
+     reads ["court","prison"] grain branch
+R literal  internalRowPoolKey     Internal Security: detention without process
+     reads ["court","prison"] grain branch
+R literal  internalRowPoolKey     Internal Security: no legal infrastructure
+     reads ["court","prison"] grain branch
+```
+
+**26 pools · 4 RESOLVED · one key function · one read set on all four.** A block's attach set
+is every spine whose `tests` EXCLUDE the fact; when every spine tests both facts, no fact
+attaches, at ANY grain. The 22 unresolved rows fall into exactly two shapes, and neither is a
+grain question:
+
+* **11 rows · the LOCAL KEY-BUILDER** — `const key = (tail) => \`Invasion & War: ${tail}\`` with
+  the tails passed as string literals at the call sites (`invasionRowPoolKey` 6,
+  `disasterRowPoolKey` 5). The template's hole is an ARROW's parameter, so rung 2 cannot bind
+  it, while the value is a literal one line away. A recoverable rung, exactly.
+* **11 rows · the VALUE LOOKUP** — `beastsRowPoolKey`'s `family` (7) and `economicRowPoolKey`'s
+  `scoreBand(economicScore)` (4). The hole resolves to a field but its VALUE is a mapped one,
+  which is the refusal in 0e.5.
+
+**ARCH §6.4 already says this in its own words** — *"The census reads this block 4 of 22
+RESOLVED … its rung-4 keys are a wiring car before any modifier lands here."* A new RUNG moves
+the census's headline RESOLVED integer, which is the chair's number and not this car's
+charter, so it is measured, printed and left for veto rather than taken. **The arm is asserted
+in its measured form instead**: the walker now asserts 26 pools, 4 RESOLVED, ONE key function
+and ONE read set, so the day that changes the gate says so.
+
+### 0e.5 ⛔ THE SECOND REFUSAL, ALSO WITH ITS NUMBER — 50 POOLS THAT WOULD RESOLVE FALSELY
+
+`localAliases` maps an alias to the reading whose value selects the pool; its bare limb reads
+the initialiser's LEADING identifier. Reading one token further (the first PARAM the
+initialiser names) was needed for `family` and `size`, which ARCH §6.3's worked value depends
+on. Measured, that hop applied to the whole map:
+
+```
+$ node $SC/measure/probe-alias.mjs
+key functions 118 · NEW alias entries 50 · guards whose predicate rows change 7 · atoms gained 8
+$ node $SC/measure/probe-delta.mjs        # with the wider map wired into localAliases
+status flips: 50
+beastsRowPoolKey 7 · operationRolePoolKey 6 · criminalCapturePoolKey 5 · devotionPoolKey 5 · …
+  WIRING-UNRESOLVED -> RESOLVED | DS-DEF-2 | Beasts & Monsters: settled, defenses beyond the need
+    | template | beastsRowPoolKey | [{"field":"settlement.config.monsterThreat","op":"===","value":"settled"}]
+SUMMARY: resolved 318 -> 368 · unresolved 390 -> 340 · withPredicate 185 -> 242 · MISSING 34 -> 32
+```
+
+**Fifty of those predicates would be FALSE.** `measuredMonsterFamily` is
+`MONSTER_FAMILY_OF[normalizeMonsterThreat(raw)]` — a LOOKUP — so `family === 'settled'` becomes
+`config.monsterThreat === 'settled'` while the configuration value behind that family is
+`heartland`. That is the inference this census exists to refuse. The hop is EXACT for a READ
+(the branch does read `monsterThreat`, whatever the helper does to it) and false for a VALUE,
+so it lives in `readingAliases` and is refused in `localAliases`:
+
+```
+$ node $SC/measure/probe-delta.mjs        # at the shipped split
+status flips: 0
+SUMMARY NOW: total 708 resolved 318 unresolved 390 withPredicate 185 clean 185 …
+```
+
+### 0e.6 THE PER-TIER SILENCES, CLASSIFIED (§O.5)
+
+The ground, stated before the numbers. A pool's RUNG is its (block, key function). A silence
+is **LAWFUL · `value-class`** when some OTHER pool of the same rung fired at that tier: the
+ladder RAN there and chose a different value class, so the field cannot hold this pool's value
+at that size — which is `walls at a thorp` exactly. It is **MISSING-AT-TIER · `rung-dark`**
+when no pool of the rung fired at that tier at all, though the block mounts there: the reader
+gets silence at one size from a rung that speaks at every other.
+
+```
+$ node scripts/prose-rate-corpus.mjs --out $SC/measure/rate-corpus.json
+  PER-TIER SILENCE FINDINGS: 347 (pool, tier) rows where a MOUNTED block's pool fired somewhere and never at that tier
+    LAWFUL (value-class: the rung spoke at that tier and chose another class) 303 · MISSING-AT-TIER (rung-dark: the rung said nothing at that size) 44 · of 347, at 128 towns per tier
+    rows resting on the coarser BLOCK grain because the census recovered no key function: 123
+    of the 44 MISSING-AT-TIER rows, those whose BLOCK spoke at that tier through another rung: 44 — so no BLOCK is dark at a size on this corpus and only a RUNG is, and 12 sit on a block whose ladder SPLITS across a key table and the function carrying its fallback, where the two halves cannot see each other
+    MISSING-AT-TIER by block: DS-POW-6 23 · DS-GEN-6 10 · DS-DEF-5 4 · DS-DEF-6 3 · DS-ECO-12 2 · DS-GEN-7 2
+    LAWFUL          DS-DEF-2 :: Internal Security: no legal infrastructure — silent at town (its rung DS-DEF-2 :: internalRowPoolKey spoke there)
+```
+
+⚠ **WHAT LAWFUL MEANS HERE, EXACTLY:** the value class does not occur at that size on 128
+towns per tier. It is a MEASUREMENT of the shipped generator and never a proof, and it ships
+with its N. Two coarsenesses are DECLARED with their integers rather than cured behind the
+verdict: 123 rows rest on the BLOCK grain because the census recovered no key function for
+them, and 12 of the 44 sit on a SPLIT LADDER (`originTierPoolKey`'s `|| 'tier overlay: other
+tiers'` against the `TIER_OVERLAY_OF` table — two rung ids to this instrument and one ladder to
+the reader). The 44 join the tier table as its **fourth tier**, `MISSING-AT-TIER`.
+
+### 0e.7 THE PLANTS — three executed, three restored `cmp`-identical
+
+Each was extracted FROM THE SWEEP SCRIPT and run standalone against the committed bytes, and
+each anchor matches EXACTLY ONCE (counted with python, because `scripts/prose-rate-corpus.mjs`
+carries four literal NUL bytes from car 0 and `grep` therefore treats it as binary):
+
+```
+--- plant #89  MUTATED src/domain/prose/wiringCensus.js  0a28c398a1b6cff56183212bed8fa7fd -> bfdb0359319cd43f4ef79b707cf66e25
+    RESTORED cmp-identical
+--- plant #90  MUTATED src/domain/prose/wiringBranch.js  0af43fad161e6939ec086d4784ab8545 -> 6f5396b22a5beeb278e4e99abb9de649
+    RESTORED cmp-identical
+--- plant #91  MUTATED scripts/prose-rate-corpus.mjs     d613d438a7b0fbbeddfecc26d298a956 -> 054d72f97bd83ad2e8263f3c371ecc0e
+    RESTORED cmp-identical
+#89 anchor occurrences: 1 · #90: 1 · #91: 1
+```
+
+```
+#89 `reads` answers the whole key function on a predicate row  => 9 red of 50 · restored => 50 passed
+#90 the branch path enters a sibling block it only walked past => 8 red of 50 · restored => 50 passed
+#91 every per-tier silence is called LAWFUL                    => 1 red of 50 · restored => 50 passed
+```
+
+#91 reds ONE arm and that is stated rather than hidden: the corpus figures are committed DATA
+that no plant can move, so the fixture-driven classification arm is the only one that runs the
+live rule.
+
+### 0e.8 THE GATES
+
+```
+$ npx eslint <the six changed and new files>          ; exit=0
+$ node scripts/check-domain-strict.mjs                ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs               ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs       ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE   ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/wiring-census.mjs --check              ; exit=0
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ npx eslint --rule max-lines(1) src/domain/prose/wiring{Census,Branch}.js
+  wiringCensus.js: 732 effective (was 745, ceiling 800) · wiringBranch.js: 133
+$ node <espree literal scan>
+src/domain/prose/wiringBranch.js	literals:63	em:0	bang:0
+src/domain/prose/wiringCensus.js	literals:270	em:0	bang:0
+$ npx vitest run tests/copy/voiceMechanics.test.js    ; exit=1 (the banked two, unchanged)
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+$ npx vitest run tests/lint/mutationCoverageManifest.test.js
+      Tests  10 passed (10)
+```
+
+The strict ratchet lands EXACTLY on its ceiling: a whole new domain module and 128 changed
+lines of the census added zero strict errors.
+
+### 0e.9 THE WHOLE `tests/lint` RUN — twice, and the first red was the lighting ritual's
+
+```
+$ npx vitest run tests/lint                           ; exit=1  (before 0e-b)
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 …: expected 23803 to be 23800
+ Test Files  1 failed | 145 passed (146)
+      Tests  1 failed | 2366 passed (2367)
+
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 0e (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 0dd711c6a4c2273831a44d34b8fe4bba3ade5fcc by MEASURE car 0e (Opus 5):
+  files 2551 -> 2551, parked 375 -> 375, credited 2176 -> 2176,
+  titles 23800 -> 23803, suiteTitles 6368 -> 6368.
+  This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+      Tests  34 passed (34)
+
+$ npx vitest run tests/lint                           ; exit=0  (at c0269d16f)
+ Test Files  146 passed (146)
+      Tests  2367 passed (2367)
+   Duration  110.45s (transform 22.09s, setup 4.36s, import 147.31s, tests 544.10s, environment 16ms)
+```
+
+146 files and **2,367** assertions against car 0d's **2,364** — exactly the walker's three new
+arms and nothing else. A runner-count check in its own shell call preceded every vitest run in
+this car, with no exceptions and no batching.
+
+### 0e.10 THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. **A SECOND ISLAND MODULE RATHER THAN A TRIM.** Car 0's refusal 1 named this exact shape and
+   §O.7 ratified it. `wiringCensus.js` had 55 effective lines of headroom and the branch reader
+   plus its helpers is ~96; moving `balancedSlice` and `fieldChains` WHOLE (and re-exporting
+   them, so `tests/helpers/dossierComposedFill.js` is untouched) leaves the census module
+   SMALLER than before at 732. The fence arm is widened to eleven with a paired positive: the
+   new module must be reached from exactly one place inside the island.
+2. **THE BRANCH GRAIN APPLIES WHERE A BRANCH WAS RECOVERED, NOT WHERE A PREDICATE ROW EXISTS.**
+   §O.1 says "on every row carrying a predicate (185)". Taken literally, DS-DEF-11's THREATENED
+   and QUIET keep the function-wide grain — they carry `predicate: []` because `guardAt` cannot
+   parse a guard followed by more statements — and ARCH §6.3's own worked value for those two
+   rows becomes unreachable. The rule shipped is: BRANCH where the recovered branch field set is
+   non-empty (**287 rows**), function-wide fail-closed where it is empty (**421**). The 185 is a
+   subset. Recorded because it is a widening of the ruling's letter in service of its worked
+   example.
+3. **`predicate` IS UNTOUCHED.** The branch reads are a NEW column (`branchReads`) and no
+   predicate row moved; `resolvedWithPredicate` and `clean` stay at 185. See 0e.5 for what
+   moving them would have cost.
+4. **THE LAWFUL LIMB IS MEASURED, NOT PROVED** (0e.6), and the two coarsenesses are printed
+   with their integers.
+5. **THE `--check` RATE HALF.** The fourth tier is derived from the rate half the JSON carries,
+   so a build with no rate half has three tiers and says so by their absence rather than by a
+   zero. `--check` is green because the committed rate half is carried through verbatim.
+
