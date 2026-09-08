@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 23:07:59 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 23:13:50 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-content law is wired dark and its seams are closed — the L-MAT consist
 
@@ -140,8 +140,8 @@ product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-
 ## WORKFLOW RUNS of chair session 5540cfd2-eea9-4469-ba34-6514b54a83ff (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 - wf_568522f1-e3e: 10 journal lines, 5 agents
-- wf_b0228653-707: 5 journal lines, 5 agents
-- wf_d3c44881-503: 7 journal lines, 6 agents
+- wf_b0228653-707: 11 journal lines, 6 agents
+- wf_d3c44881-503: 15 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.31 3.97 8.95
+load: 2.44 2.83 6.70

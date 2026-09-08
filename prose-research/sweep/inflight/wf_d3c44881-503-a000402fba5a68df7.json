@@ -3,19 +3,20 @@
  "name": null,
  "angle": null,
  "tag": null,
- "lines": 159,
+ "lines": 184,
  "firstTs": "2026-09-08T02:57:37.997Z",
- "lastTs": "2026-09-08T03:04:06.906Z",
+ "lastTs": "2026-09-08T03:08:57.220Z",
  "tools": {
   "Read": 2,
-  "Bash": 45
+  "Bash": 51,
+  "StructuredOutput": 1
  },
  "urlsFetched": [],
  "filesWritten": [],
- "lastAssistantText": "I'll start by reading the brief.",
+ "lastAssistantText": "The map is written. Returning the structured summary.",
  "run": "wf_d3c44881-503",
  "agent": "a000402fba5a68df7",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_d3c44881-503/agent-a000402fba5a68df7.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": null
 }

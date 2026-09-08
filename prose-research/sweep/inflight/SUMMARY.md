@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:06:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:12:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -7,16 +7,20 @@
 | ? | other |  | result | 0 | — | — | 23:41:42 |
 | ? | other |  | result | 0 | — | — | 23:38:19 |
 | ? | other |  | result | 0 | — | — | 23:37:38 |
-| ? | other |  | in-flight | 0 | — | — | 03:06:17 |
-| ? | other |  | in-flight | 0 | — | — | 03:06:22 |
-| ? | other |  | in-flight | 0 | — | — | 03:06:35 |
-| ? | other |  | in-flight | 0 | — | — | 03:06:27 |
-| ? | other |  | in-flight | 0 | — | — | 03:06:40 |
-| ? | other |  | in-flight | 0 | — | — | 03:05:31 |
-| ? | other |  | in-flight | 0 | read-specs.md | — | 03:06:29 |
-| ? | other |  | in-flight | 0 | — | — | 03:05:53 |
-| ? | other |  | in-flight | 0 | — | — | 03:04:06 |
-| ? | other |  | in-flight | 0 | — | — | 03:03:22 |
-| ? | other |  | in-flight | 0 | — | — | 03:05:29 |
+| ? | other |  | result | 0 | — | — | 03:09:17 |
+| ? | other |  | result | 0 | — | — | 03:09:34 |
+| ? | other |  | result | 0 | gate-proof.md | — | 03:11:30 |
+| ? | other |  | result | 0 | — | — | 03:11:36 |
+| ? | other |  | in-flight | 0 | — | — | 03:12:33 |
+| ? | other |  | result | 0 | — | — | 03:10:11 |
+| ? | other |  | result | 0 | — | — | 03:11:16 |
+| ? | other |  | in-flight | 0 | — | — | 03:12:41 |
+| ? | other |  | result | 0 | read-specs.md | — | 03:07:39 |
+| ? | other |  | in-flight | 0 | — | — | 03:12:20 |
+| ? | other |  | in-flight | 0 | — | — | 03:12:33 |
+| ? | other |  | result | 0 | read-facts.md | — | 03:12:05 |
+| ? | other |  | result | 0 | — | — | 03:08:57 |
+| ? | other |  | result | 0 | — | — | 03:08:35 |
+| ? | other |  | result | 0 | — | — | 03:11:00 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
