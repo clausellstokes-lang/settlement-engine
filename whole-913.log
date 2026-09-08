@@ -12,3 +12,14 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
      × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 24ms
  ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1821ms
      × every completeness claim carries an @enforced-by tag with ≥1 target 10ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+ ❯ tests/lint/mutationCoverageManifest.test.js (10 tests | 1 failed) 160ms
+     × TOTALITY: every enumerated invariant file has a manifest entry 20ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/edgeFunctions/edgeSharedBundleReproducibility.test.js (25 tests | 1 failed) 2141ms
+       × the recorded sourceHash equals the builder hash over INDEX content 111ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document

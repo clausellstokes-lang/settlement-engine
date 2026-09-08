@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 20:15:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 20:23:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = 159b7173c §912.6: the owner strikes the blind DM panel — there are no game masters to convene, so
+product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave's instruments are built (lane INSTR-912, seven commits in laneINSTR, no 
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -142,4 +142,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = 159b7173c §912.6: the owner
 - wf_568522f1-e3e: 10 journal lines, 5 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;81346 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 85.61 38.46 17.98
+load: 23.77 36.02 27.83

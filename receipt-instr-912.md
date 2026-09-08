@@ -780,3 +780,108 @@ $ npx vitest run <the five lane walkers + tuningRegister + domainAnyCastBaseline
        Tests  205 passed (205)
 ```
 
+---
+
+## 8. THE WHOLE `tests/lint` SUITE, BEFORE AND AFTER — and the ONE red that is left
+```
+BEFORE car 7:   Test Files  5 failed | 140 passed (145)   ·   Tests  11 failed | 2275 passed (2286)
+AFTER  car 7:   Test Files  1 failed | 144 passed (145)   ·   Tests   1 failed | 2285 passed (2286)
+```
+### 8.1 The one red, and why it is NOT this lane's
+```
+FAIL tests/lint/sovereigntyLightingContract.walker.test.js
+     > DOOR 3 PARSER DOOR: a file this walker cannot parse parks WHOLE
+Error: Test timed out in 20000ms.        # 21,558 ms under load
+```
+**A TIMEOUT, not a parse failure and not an assertion.** The evidence, all executed:
+- The arm passes in ISOLATION, twice, after the refreeze: `Tests 34 passed (34)` at **17.76 s**.
+- `vitest.config.js:904` sets `testTimeout: 20000`. The arm already sits at **89 % of its own
+  ceiling** with no lane's help.
+- Its cost is dominated by parsing every test file in the estate. This lane added **5 of 2,548**
+  — 0.2 %. Against a 1,558 ms overshoot that is **≈ 42 ms**: removing this lane's five files
+  leaves the arm at ≈ 21,516 ms and still over.
+- The run that failed was CONTENDED: `pgrep` during it showed a SECOND lane's full gate live
+  (`laneLMAT/node_modules/.bin/vitest run` under `gate-mutex.sh --run`), which is the load that
+  pushed a 17.8 s arm past 20 s.
+
+**CONFIRMED as a pre-existing fragility of that arm under contention; not caused by this lane.**
+**Refused as a cure:** raising `testTimeout` is an estate-wide config change and not a lane's
+act; making the arm cheaper is engineering on someone else's instrument. Recorded for the chair.
+
+⚠ **A FENCE NOTE, stated plainly.** The pre-run gate (`ls HOLD-VITEST`; the split-pattern
+runner count) was checked and clean before every vitest invocation in this lane. The other
+lane's gate started DURING the 306-second whole-suite run, not before it. No further whole-suite
+run was started after that was seen.
+
+---
+
+## 9. THE LANE'S FIGURES, GATHERED
+| what | measured | against |
+|---|---|---|
+| R1 + R2 variants / pools | 2,734 / 786 | PROBE_ALL X1 — **exact** |
+| annex rows, raw bytes | 2,030, **all 2,030 joined** to a leaf twin | PROBE_ALL R-4 — **exact** |
+| pools uniform in segment count | **407 / 708** | SITTING B.3's re-cut — **exact**, segment definition pinned |
+| pools with a repeated two-word opener | **79 / 708** | PROBE_ALL — **exact** |
+| R6 rows / pools | **1,662 / 1,104** | the seat's own figures — **exact** (PROBE_ALL prints 1,659; both recorded) |
+| R4b rows | **50** | PROBE_ALL — **exact** |
+| R6 mean pool size | **1.51**, 546 singletons (49 %) | derived floors 8 / 6 / 4 — arm H's finding |
+| `readStateProse` sites resolved | 96, **0 unresolved** | — |
+| blocks with no composer bag | **15**, and they EQUAL `UNMOUNTED_BLOCKS` | an orthogonal, hand-kept registry |
+| settlement-only blocks | **22** | SITTING A12 says 20 — **corrected, with the list** |
+| blocks licensing ONE level-1 member | **33 of 68** | — |
+| unrendered facts | 72 held · 13 rendered as a word · 59 key-only | §912.1's count |
+| composed dossier reading, 200 towns | V1 at **78.4 %** (ceiling 10.7 % at n = 14); run rate **0.618** (ceiling 0.121) | the walker's first-run finding |
+| classifier agreement | **20/24** exact, 18/24 conservative, 22/24 first move | measured before it gates, and it does not gate |
+| exemplar bands, per paragraph | exceeded share median **57 %** (chair's budget 33 %); depth median 0.25, p90 1.75 (chair's 0.5) | the OWED refinement — reported, nothing changed |
+| institution table, 30 settlements | `whoIsExempt` empty on **0**; **146** offices; **no bailiff** | CLERK-LAWS §1.2, re-measured at this tip |
+| D8 plants | **368** enumerated, **0** answerable | the class does not exist |
+| fingerprint parity with the kit's tool | **21/21 metrics identical**, two texts | the second-spelling guard |
+
+---
+
+## 10. EVERY REFUSAL THIS LANE MADE, IN ONE PLACE
+1. §2.4 fixture (b)'s word **"ONLY"** — the FIGURE fails too, and no table row can license it (§1.6).
+2. §2.4's WITHHELD on "goes upriver salted" — honoured, on the **scope** ground rather than "semantic" (§1.6).
+3. C5's office and status limbs **downgraded to WITHHELD** — four measured false positives (§1.6).
+4. R5's count **reported, not reconciled** — a different unit from PROBE_ALL's (§1.6, §3.2).
+5. The annex's **pool grammar is not re-parsed** — the first cut mis-addressed `:5233` (§1.6).
+6. **Arm A does not gate** — the classifier measures 0.75–0.83 (§2.9).
+7. The three numbers are **reported per entry, not applied** — they would fail every human paragraph (§2.6).
+8. The **exemplar bands stay out of the repo** — supplied as an argument (§2.6).
+9. The **`grammar:` tag is declared and applied to nothing**; the two files that must move with it are named (§2.9).
+10. **Arm I** is NOT-EXECUTABLE until a rank-form manifest is typed (§2.9).
+11. **Arm J** ships as a direction with a first arm (§2.9).
+12. **V3 / V8** are reported as one ambiguous reading, never picked between (§2.9).
+13. **`threatAssessment.js` carries no table** — "the assessment branches are loaded" is not claimed (§3.5).
+14. **R16 is not loaded** — a JSX segment walk belongs to the estate's existing helper (§3.5).
+15. The chronicle's register label **corrected to R12** (§3.5).
+16. **`settlement.services` is empty**; the duty column reads `availableServices` (§4.2).
+17. `whoIsCounted` **can never close**, and the table says so in code (§4.3).
+18. The **presence re-run covers 5 of 14** exemplars; nine raw texts do not exist (§5.1).
+19. A **key-only fact is not dark** — 59 is an upper bound, not a count of invisible facts (§5.2).
+20. **A12's 20 is measured as 22**, with the list printed for the chair to diff (§5.3).
+21. **D8 reports NOT-EXECUTABLE** — no plant id, no `answerable` flag, no answer channel (§6.1–6.2).
+22. The **seeded open share is a seed input** and is not implemented (§6.2).
+23. **Two planted mutations that did not red were replaced, not recorded** (§7.1).
+24. The **lighting census timeout is not cured by raising a config ceiling** (§8.1).
+
+---
+
+## 11. WHAT A SUCCESSOR CONTINUES FROM
+**Dock tip `74a1aa0e8`, porcelain 0, seven commits over `3b1c0eaa5`.** All six briefed cars have
+landed and every focused proof is green. What is OWED, and to whom:
+
+| owed | to whom | where it stands |
+|---|---|---|
+| a chair ruling on **arm A's gating** | the chair | the classifier is at 0.75–0.83 and reports; raising it means a tagged corpus or a better classifier |
+| a chair re-ruling on **the three numbers per entry** | the chair | §2.6's measurement says the register-level values cannot be applied per entry unadjusted |
+| the **A12 20-vs-22** diff | the chair | the full 22-block list is printed by the walker |
+| the **exemplar bands** for the three-numbers arms | the chair / the owner | the instrument takes them as an argument; the IP fence is stated |
+| the **`grammar:` tag** and its two-file landing | the authoring wave | contract declared in `GRAMMAR_TAG_CONTRACT`; nothing is tagged |
+| **arm I's rank-form manifest**, **D8's `unresolved` class**, an **`exempt` writer**, a **`bailiff` role**, the table on the **DM page** | the owner | each parked with the field it wants named |
+| the **`sovereigntyLightingContract` DOOR 3 timeout** under contention | the chair | pre-existing; the arithmetic is in §8.1 |
+
+The instruments are ready for the wave: the entry walker gates claims, the grammar walker
+reports order, seven registers load, the table licenses, and the measures size the work.
+
+Seat: Opus 5 — Fable-unvalidated
