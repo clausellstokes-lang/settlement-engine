@@ -6,3 +6,10 @@ RATCHET_HEAD=85cb879286f2fc95893086c0e5fa46a0e96d6f03
 RATCHET_PORCELAIN_PRE=[0]
 PREDICTED: totalFiles 2489 -> 2491 (+2, the two new test files), entries 3 unchanged (no owed-ledger car; no banked row moves), totalTests REFUSED in advance — this run derives it (the probe counts +28 it() titles, which is a hint, not a prediction: it.each and skipped arms are counted only by the run) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 19602 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] baseline updated: 3 failing test(s) remain, 0 removed.
+[test-ratchet] ⚠ 1 magnitude ceiling(s) HELD — a re-freeze never raises one:
+  = tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) [files-over-baseline]: measured 3 EXCEEDS the frozen 2 — held, never raised
+  The gate stays RED on these until the population is actually cut.
+TRUE_EXIT=0
+MEASURED: totalTests=32024 totalFiles=2491 entries=3
+RATCHET_PORCELAIN_POST=[1]
