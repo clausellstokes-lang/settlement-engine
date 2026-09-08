@@ -1,0 +1,14 @@
+PROOF_HEAD=a75faa3a74b47431d1ad6939b0baeee95a9eeb8a start 20:12:13 load=4.42 3.75 3.57
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 83045 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 4489ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 41ms
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 74745ms
+     × every config produces byte-identical output to the golden master 74741ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 7783ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 24ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1821ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 10ms

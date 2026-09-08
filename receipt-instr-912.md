@@ -1,8 +1,19 @@
-# RECEIPT — LANE INSTR-912 (the instrument cars) — **PARTIAL**
+# RECEIPT — LANE INSTR-912 (the instrument cars) — **ALL SIX CARS LANDED**
 Seat: Opus 5 — Fable-unvalidated
 Lane: INSTR-912 · dock `$SC/laneINSTR` (detached at the product tip) · opened 2026-09-07 18:43 EDT (`date`)
 Brief: `$SC/briefs/brief-INSTR-912.md`
-Status: **PARTIAL — in progress.** Sections are appended as each car lands. A successor resumes from the dock's tip + the last landed car below.
+Status: **COMPLETE for this dispatch.** All six cars landed, plus a seventh (the gate repair
+the estate's own ratchets demanded). Dock tip `74a1aa0e8`, porcelain 0.
+
+| # | car | sha | proof |
+|---|-----|-----|-------|
+| 1 | the entry walker (CLERK-LAWS §2) | `950c0c204` | 19 assertions green |
+| 2 | the B-GRAMMAR walker (MOVE-GRAMMAR §4) | `d63f80207` | 42 green |
+| 3 | the register loaders | `eb2c330dd` | 10 green |
+| 4 | the derived institution table | `37833b22e` | 12 green |
+| 5+6 | the measures and D8's ledger walker | `9d257ca7d` | 9 green |
+| 7 | the gate repair (six ratchets cured, five mutations planted and proved) | `e3e56f94a` | 205 green over nine walkers |
+| 7b | the lighting census refrozen by its own ritual | `74a1aa0e8` | 34 green |
 
 ## 0. ARRIVAL CHECK — CONFIRMED
 ```
@@ -595,4 +606,177 @@ table's `office` column is now the per-settlement answer, and
 `entryGround.settlementGround(table)` accepts the table directly. Wiring the corpus walk to a
 per-settlement table is the WAVE's act, not this lane's: a corpus variant is not bound to a
 settlement (§1.1's two scopes), so the estate ground stays the corpus-wide read.
+
+---
+
+## CAR 5 — THE MEASURES (report-only) — **LANDED** · sha `9d257ca7d` · 2026-09-07 19:56 EDT
+
+### 5.1 (a) THE PRESENCE MEASURE (Part B §13.2) — `src/domain/prose/presenceMeasure.js`
+Three lines over a PUBLISHED, sense-partitioned lexicon (177 nouns in five buckets, each noun
+in exactly one). A proper-noun SLOT is refused as texture — `{settlement}` is a name, not a
+thing seen — and a simile is a non-move and is not among the devices.
+```
+PRESENCE MEASURE · the estate, per register (reported, NEVER a gate)
+  R1 dossier state   sensory/100w  1.198 · textured  24% · spread 0.79 bits  [sight 86% hearing 4% smell 0% touch 2% taste 8%]
+  R2 causal join     sensory/100w  1.478 · textured  36% · spread 0.65 bits  [sight 88% …]
+  R4b disclosure     sensory/100w  1.495 · textured  16% · spread 1.06 bits
+  R5 crier voice     sensory/100w  3.437 · textured  46% · spread 1.31 bits
+  R6 npc ladder      sensory/100w  1.046 · textured  21% · spread 1.52 bits
+  R7 gazetteer       sensory/100w  3.358 · textured  31% · spread 1.57 bits  [taste 25%]
+  chronicle R12      sensory/100w  2.276 · textured  32% · spread 0.66 bits
+  D-d dm hooks       sensory/100w  0.577 · textured   8% · spread 1.49 bits
+  R9 chrome copy     sensory/100w  0.663 · textured   7% · spread 0.86 bits
+THE EXEMPLARS the re-run can reach (5 of 14):
+  leguin-fiction             sensory/100w  1.130 · textured  56% · spread 1.80 bits
+  leguin-nonfiction-spoken   sensory/100w  0.429 · textured  21% · spread 0.70 bits
+  leguin-nonfiction-written  sensory/100w  0.306 · textured  16% · spread 1.53 bits
+```
+**THE FINDING IS NOT THE ONE THE MEASURE WAS EXPECTED TO PRODUCE.** The estate is not LESS
+concrete than the exemplars it can reach — R1's 1.20 sensory nouns per hundred words sits
+ABOVE leguin-fiction's 1.13 and well above leguin-nonfiction-written's 0.31. What it is, is
+concrete IN ONE SENSE: R1's spread is **0.79 bits at 86% sight**, against leguin-fiction's
+**1.80 bits**. Line 3 exists precisely to make that visible, and it is a different problem
+from flatness — and a different cure. The textured-paragraph share tells the same story from
+the other side: R1 24% against leguin-fiction's 56%.
+
+**REFUSAL, with its measurement.** The §13.2 instruction is to add the three keys to the
+fingerprint tool and RE-RUN THE FOURTEEN. Executed on **5 of 14**. Nine are NOT-EXECUTABLE:
+their raw texts do not exist anywhere on this machine (§2.6's measurement — the fingerprints'
+own `files` point into a scratchpad that is gone). The five that ran are all Le Guin, one
+author. A five-of-fourteen, one-author band is not the fourteen and this receipt does not
+present it as one.
+
+### 5.2 (b) THE UNRENDERED-FACTS CENSUS (§912.1's condition one)
+```
+  generalStateProse.js     holds  34 · renders as a word  6 · KEY-ONLY  28
+  powerStateProse.js       holds   7 · renders as a word  1 · KEY-ONLY   6
+  economyStateProse.js     holds  12 · renders as a word  2 · KEY-ONLY  10
+  defenseStateProse.js     holds   9 · renders as a word  1 · KEY-ONLY   8
+  stressorsStateProse.js   holds   4 · renders as a word  1 · KEY-ONLY   3
+  warFaithStateProse.js    holds   6 · renders as a word  2 · KEY-ONLY   4
+  TOTAL: holds 72 · renders as a word 13 · key-only 59 (82%)
+```
+**A CORRECTION TO A NAIVE READING OF §912.1, stated on every row and in the print.** A
+KEY-ONLY fact is NOT DARK. It chooses which authored sentence the reader meets, so it reaches
+them as a CHOICE and never as a WORD. **59 is therefore an UPPER bound on the authoring
+wave's opportunity, not a count of facts nobody can see.** The census also measures REACH from
+source and not interest: whether a fact could license a sentence is the wave's judgment and
+the owner's, and the instrument says so.
+
+### 5.3 (c) THE LICENSED LEVEL-1 MEMBERS on the composed fill
+```
+  blocks 68 · settlement-ONLY bag 22 · no bag at all 15
+  licensing ONE member (the bare PRESENT): 33
+  licensing two or more:                   20
+  NOT-EXECUTABLE on every block today: V2 (no structural-consequence field) · V3 / V8 (no
+    typed none-exists or not-held field) · V6 (no typed unresolved / contested / pending
+    STATE field — SITTING A12)
+```
+**⚠ A CORRECTION TO THE SITTING'S A12, OFFERED WITH ITS METHOD AND ITS LIST.** A12 reads
+"20 of 68 settlement-only". This lane measures **22**, by resolving every composer bag from
+source and asking which blocks are offered `settlement` and nothing else. The full list is
+printed by the test so the chair can diff it rather than take either number on trust:
+DS-CND-1 · DS-DEF-1 · DS-DEF-11 · DS-DEF-2 · DS-DEF-3 · DS-DEF-4 · DS-DEF-5 · DS-DEF-6 ·
+DS-DEF-8 · DS-DEF-9 · DS-GEN-11 · DS-GEN-12 · DS-GEN-13 · DS-GEN-14 · DS-GEN-17 · DS-GEN-3 ·
+DS-GEN-5 · DS-GEN-6 · DS-POP-3 · DS-REL-2 · DS-STR-1 · DS-STR-2.
+
+**And the sharper figure beside it: 33 of 68 blocks license exactly ONE level-1 member.** At
+n = 1 arm A is not-executable by construction — no grammar variation is possible on those
+blocks at all without new fields. That, not the ceiling, is what bounds the wave.
+
+---
+
+## CAR 6 — D8's LEDGER WALKER (report-only) — **LANDED** · sha `9d257ca7d`
+
+### 6.1 Three measurements decide the verdict
+1. **THE PLANTS EXIST.** `domain/dossier/plotHooks.js` produces ~38 per town over seven
+   categories, each with `text`, `source`, `role`, `category`, `priority`, `links`.
+2. **NO PLANT CARRIES AN ID.** D8 says "every answerable PLANT ID has exactly one [answer]".
+   There are no plant ids; `links[].id` is the NPC's. The module DERIVES a content id
+   (`category:source:fnv(text)`), report-only and never persisted, so a ledger has something
+   to reconcile against.
+3. **NO ANSWER CHANNEL EXISTS.** No `[answer]`, no `[gap-reason]`, no `answerable` flag
+   anywhere in `src` — the word appears only as ordinary English inside authored prose and
+   comments.
+
+### 6.2 The verdict, and why it REPORTS rather than fails
+```
+D8 PLANT LEDGER · nine settlements over three tiers
+  plants enumerated:            368
+  plants carrying `answerable`: 0
+  open share:                   NOT MEASURABLE — no plant is marked answerable, so the share
+                                is a fact about the missing class, not about a town
+```
+A constant open share of 1.00 is exactly the condition D8's walker is designed to fail on —
+and it must NOT fail on it yet, because **D8's own clause says the walker fails on a zero or
+constant open share ONLY ONCE THE CLASS EXISTS.** The arm returns NOT-EXECUTABLE naming the
+three fields it wants. Both breach shapes (an answer AND a gap-reason; NEITHER) fire on a
+control built to make them fire, so the arm is proved LIVE before it is parked — a parked arm
+nobody proved is the false green one level up.
+
+**⛔ THE SEEDED SHARE IS A SEED INPUT and is not implemented.** Making a share of plants open
+per seed changes what an installed world renders: owner-gated under THE PROMISE, parked at
+dossier item 30(e). This module measures; it plants nothing and persists nothing.
+
+---
+
+## CAR 7 — THE GATE REPAIR: the estate's own ratchets caught six real debts, and every one is CURED — shas `e3e56f94a` + `74a1aa0e8`
+
+A full `npx vitest run tests/lint` after car 6 came back **11 red across five walkers, every
+one of them mine**. None is baselined. The ledgers that could have absorbed them are
+monotone-down by design and say so in their own words, and a lane does not raise a ceiling.
+
+| # | ratchet | what it caught | the cure |
+|---|---|---|---|
+| 1 | **domain any-cast** (new files get ZERO; *fix the types, do not widen*) | 11 casts in `institutionTable.js`, 2 in `grammarWalker.js` | the types WRITTEN OUT — `TableSettlement` and `InstitutionRow` name the whole input surface the projection reads, which documents its reach better than the casts did; one CONCRETE cast to the ruling-power reader's own declared shape |
+| 2 | **tuning register P3** (bare decimals, shrink-only, new files at 0) | 5 decimals in `grammarWalker.js`: 0.10 · 1.5 · 0.05 · 0.50 ×2 | every ceiling became an INPUT. `ceilingFor`, `runCeilingFor`, `armA`, `armsB` and `walkGrammar` take a `CeilingShape`; there is NO DEFAULT; a caller with no shape gets NOT-EXECUTABLE. The chair's values moved to the fixture. **The module's own header already said every number is the owner's — the register is what made it honour that.** |
+| 3 | **tuning register P2** (unregistered named constants) | `FIRST_BAND_CEILING` (entryWalker), `HEAD_WINDOW` (moveGrammar) | written at their use sites with the derivation beside them; neither is a tuning value (one is `QUANTITY_BANDS`' lowest ceiling, one is a parser's reach) |
+| 4 | **tuning register** (a FROZEN table's dependents moved) | `institutionTable` imported `quantityWords`, moving `HERALD_TUNING`'s dependent list — a signed-digest surface no lane refreezes — for seven strings | the band vocabulary is now the CALLER'S (`world.bandOf`). Also the better architecture: the band belongs to the Herald, and the table asks for it |
+| 5 | **negative-assertion anchor** | 10 bare negatives across three of my test files | the anti-vacuity mutation control became a real `expectPresentThenAbsent` PAIR (the arm must FIRE on the shipped sentence and fall silent on the cured one); the fence tests gained two live anchors proving the blanked source is still the module; the rest carry one-line `// anchored:` markers naming the positive on the adjacent line |
+| 6 | **mutation-coverage manifest** | 5 new invariant files with no coverage entry | covered the PREFERRED way — five regressions PLANTED, RUN and RESTORED |
+
+### 7.1 THE FIVE PLANTED MUTATIONS — executed, not claimed
+Each planted by `perl -0pi`, run focused, restored from a backup taken BEFORE the plant and
+**`cmp`-verified byte-identical**, with the dock's porcelain re-checked after every one.
+| the plant | red |
+|---|---|
+| the totality arm stops reading `col.closed` (`entryWalker.js`) | **6 of 19** — all four Brackwater tables and the anti-vacuity guard |
+| the segment definition drifts sentence → clause (`grammarWalker.js`) | **1 of 42** — control 4's 407/708 calibration |
+| a disclosure line leaves R4b (`heraldIntegrity.js`) | **1 of 10** — the exact 50 |
+| the persons column closes (`institutionTable.js`) | **1 of 12** |
+| a sense leaves the published lexicon (`presenceMeasure.js`) | **1 of 9** |
+
+**TWO FIRST ATTEMPTS DID NOT RED, AND WERE REPLACED RATHER THAN RECORDED.** A slot placeholder
+widened from one character to two, and a slot-stripping line removed where no lexicon noun
+followed: both are edits that change no behaviour, so a green there proves nothing about the
+test. Banking either as coverage would have been the exact false green this manifest exists to
+forbid. All five files joined the sweep's dirty guard.
+
+### 7.2 THE LIGHTING CENSUS, refrozen by its own ritual
+Its file forbids a hand-composed figure in as many words, so it was REGENERATED — the ritual
+refuses a dirty tree and exits non-zero by design:
+```
+files 2543 -> 2548 · parked 373 -> 375 · credited 2170 -> 2173
+titles 23665 -> 23696 · suiteTitles 6335 -> 6346   (measuredAtSha e3e56f94a, tree clean)
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+  Tests  34 passed (34)        # the plain green the ritual's docblock asks for
+```
+**`parked` rose by TWO, not five** — PLAUSIBLE, from the shapes rather than from the walker's
+own report: two of the five register their `it()`s inside a `for` loop over a control roster,
+which is run-control the classifier parks rather than credits. Parking reds nothing (a parked
+file's titles are simply not credited to the census), and reshaping a control-driven loop into
+`.each` to chase a bookkeeping credit would be changing a test's shape for a number. Recorded,
+not chased.
+
+### 7.3 THE PROOFS
+```
+$ npx eslint <every file this lane touched> ; echo EXIT=$?
+EXIT=0
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ npx vitest run <the five lane walkers + tuningRegister + domainAnyCastBaseline
+                  + negativeAssertionAnchor + mutationCoverageManifest>
+  Test Files  9 passed (9)
+       Tests  205 passed (205)
+```
 
