@@ -1050,7 +1050,9 @@ check_caught "prose-register-loaders/a disclosure line leaves R4b and the exact 
 # 77. INSTR-912 car 4 — PERSONS ARE NEVER CLOSED. The institution table's one unbreakable
 #     claim is that `whoIsCounted.closed` is false on every settlement forever, because the
 #     population is a number and there is nothing to close. Close it and the Brackwater kicker
-#     becomes licensed everywhere. Measured: planted => 1 red of 12; restored => 12 passed.
+#     becomes licensed everywhere. CORRECTED (INSTR-912 car 10; the comment read "1 red of 12"
+#     and had never been executed): planted => 4 red of 18, `whoIsCounted is OPEN on every
+#     tier` by name; restored cmp-exact => 18 passed.
 perl -0pi -e "s/        closed: false,\n        values: Object\.freeze\(band \? \[band\] : \[\]\),/        closed: true,\n        values: Object.freeze(band ? [band] : []),/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/the persons column closes and the Brackwater quantifier becomes licensed" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
@@ -1071,10 +1073,15 @@ check_caught "prose-presence/a sense leaves the published lexicon and the spread
 #     confident answer built on nothing. The three rung readers go on working, so the row
 #     count, the variant histogram and the fill census all stay correct while the census
 #     silently stops distinguishing what it read from what it did not. Strike the status.
-#     Measured before landing (lane INSTR-912, 2026-09-07): planted => 5 red of 21 — the
-#     anti-vacuity split (310/398), control c1's UNRESOLVED pool, control d's mixed fixture,
-#     the grammar walker's D/wiring not-executable arm and C-sibling's premise gate;
-#     restored cmp-exact => 21 passed.
+#     Measured before landing (lane INSTR-912, 2026-09-07): planted => 5 red of 21.
+#     ⚠ THE ROSTER WAS WRONG BY ONE AND IS CORRECTED HERE (car 10, cure 20): the five were the
+#     anti-vacuity split, control (c1)'s UNRESOLVED pool, control (c1c)'s "a key NEITHER rung
+#     names", control (d)'s mixed fixture and the grammar walker's D/wiring arm. C-SIBLING'S
+#     PREMISE GATE STAYED GREEN — so this plant is NOT evidence that C-sibling consumes the
+#     census, and no other plant proves it either. RE-EXECUTED at car 10's tip: planted =>
+#     7 red of 26 — the anti-vacuity split, controls (c1), (c1c), (c1e), (c1f), (d) and the
+#     grammar walker's arm D. C-sibling stayed green a second time, on a file with five more
+#     assertions than the first run. Restored cmp-exact => 26 passed.
 perl -0pi -e 's/    predicate: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js
 check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
@@ -1087,7 +1094,7 @@ check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED a
 #     quantifier over it). The plant writes the flag by hand instead of deriving it.
 #     Measured before landing (lane INSTR-912, 2026-09-08): planted => 2 red of 17 — the
 #     closed-implies-sources-read arm and the three-columns-open arm; restored cmp-exact
-#     => 17 passed.
+#     => 17 passed. RE-EXECUTED at car 10's tip: 2 red of 18, the same two arms by name.
 perl -0pi -e "s/        closed: sourcesAllRead\('whatItDoes'\),/        closed: true,/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/a partially-filled column is closed by hand and over-licenses a quantifier" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
@@ -1099,7 +1106,7 @@ check_caught "institution-table/a partially-filled column is closed by hand and 
 #     consulting it: the column stays closed, the census still prints, and the duty the world
 #     holds silently leaves the table again. The plant strikes the read and leaves the
 #     declaration standing. Measured: planted => 1 red of 17, on the positive twin;
-#     restored cmp-exact => 17 passed.
+#     restored cmp-exact => 17 passed. RE-EXECUTED at car 10's tip: 1 red of 18, same arm.
 perl -0pi -e "s/\.\.\.dutyRows\.map\(\(s\) => s\.name\), \.\.\.incomeDuties/...dutyRows.map((s) => s.name)/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/a column source declared read stops being read and the duty leaves the table" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
@@ -1112,9 +1119,39 @@ check_caught "institution-table/a column source declared read stops being read a
 #     that ground. Zero were duty-kind, so the Brackwater class did not fire — which is
 #     precisely why it would have stayed latent until a duty-kind row appeared. The plant
 #     removes the column filter. Measured: planted => 1 red of 17; restored cmp-exact
-#     => 17 passed.
+#     => 17 passed. RE-EXECUTED at car 10's tip: 1 red of 18, the ruin-filter arm by name.
 perl -0pi -e "s/  const services = allServices\.filter\(\(row\) => !row\.institution \|\| liveNames\.has\(row\.institution\)\);/  const services = allServices;/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/the ruin filter leaves the service columns and an absent institution licenses a duty" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
+
+# 83. INSTR-912 car 10 — "RESOLVED" MUST NEVER AGAIN BE READ AS "RECOVERED". Plant #79 covers
+#     the STATUS: a pool the census cannot read must say so. This plant covers the quieter
+#     half, which #79's split cannot see by construction: the status stays right, the ladder
+#     goes on reaching its rungs, the anti-vacuity split still reads 318/390 — and the
+#     PREDICATE comes back empty. That is exactly the tip cars 8 and 9 shipped, where 143 of
+#     310 RESOLVED rows carried `predicate: []` while the receipt, this walker's own assertion
+#     message and the wave's tier table all said the selecting predicate had been RECOVERED.
+#     The plant strikes the predicate on rungs one and two and leaves everything else
+#     standing. Measured before landing (lane INSTR-912, 2026-09-08): planted => 9 red of 26 —
+#     the two new integers ("RESOLVED" IS NOT "RECOVERED"), the summary's supporting integers,
+#     controls (c1b), (c1b2), (c1c), (c1d) and (c3), the fact index and the co-occurrence arm.
+#     ⭐ THE ANTI-VACUITY SPLIT (318 / 390) AND THE TIER TABLE STAY GREEN — which is the whole
+#     point of the plant: this is the blindness #79 cannot see, and it is what shipped.
+#     Restored cmp-exact => 26 passed.
+perl -0pi -e 's/        predicate: qualify\(\[\.\.\.guardRows, \.\.\.extra\], fn, callArgs\),/        predicate: [],/' src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/a resolved pool loses its predicate and RESOLVED still reads as RECOVERED" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 84. INSTR-912 car 10 — A SOURCE READ ONLY INTO A STRING NOBODY ASSERTS IS NOT READ.
+#     `whatItCounts.closed` is DERIVED from "every source CLERK-LAWS §1.2 names is read", and
+#     its third source — `treasury.coinFlows.taxed` — reaches only the column's `basis`
+#     string. On every generated settlement the treasury is absent (a world-pulse structure no
+#     generator writes), so the ABSENT branch is taken everywhere and replacing the read with
+#     `NaN` left the whole file green: a column closed in the over-licensing direction §L.2
+#     item 62 forbids, resting on a read no arm could see go dark. Plants #80 and #81 cover the
+#     other two sources; this is the third. The plant strikes the read and leaves the source
+#     roster's `read: true` standing. Measured before landing (lane INSTR-912, 2026-09-08):
+#     planted => 1 red of 18, the present-branch arm by name; restored cmp-exact => 18 passed.
+perl -0pi -e "s/  const taxedCoin = Number\(settlement\?\.treasury\?\.coinFlows\?\.taxed\);/  const taxedCoin = NaN;/" src/domain/institutions/institutionTable.js
+check_caught "institution-table/the third column source stops being read and the closed flag does not notice" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

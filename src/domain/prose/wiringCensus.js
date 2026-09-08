@@ -256,41 +256,111 @@ export function predicateRows(guard, params, aliases) {
 const HOLE = '\u0000';
 
 /**
+ * @typedef {object} StringLiteral
+ * @property {'single'|'double'|'template'} kind
+ * @property {string} text the literal's own bytes, escapes left as written
+ * @property {number} index where it opens in the body
+ */
+
+/**
+ * EVERY string literal in a body, read by ONE scanner that knows all three quote characters.
+ *
+ * ⛔ WHY THIS REPLACED THREE INDEPENDENT REGEXES (INSTR-912 car 10, cure 7). `keyForms` used
+ * to scan single quotes with `/'((?:[^'\\]|\\.)*)'/g` over a body `codeOnly` strips of
+ * COMMENTS but not of STRINGS. A regex that knows one quote character cannot see the other
+ * two, so one apostrophe inside a DOUBLE-quoted literal — `warFaithStateProse.js:668` returns
+ * `"NICHE: the patron's niche carries a contestant"` — opened a phantom string and ate every
+ * later single-quoted key in that function. And the same blindness in the other direction
+ * meant a key WRITTEN with double quotes was never a key form at all, so its pool read
+ * WIRING-UNRESOLVED with a reason that is affirmatively untrue.
+ *
+ * ⭐ MEASURED, AND IT CORRECTS THE FOLD'S MECHANISM. FOLD-2 attributes four false-UNRESOLVED
+ * rows (DS-FTH-3 ×2, DS-ECO-11, DS-GEN-8) to the desync alone. Executed: the desync's live
+ * reach is exactly ONE row (`DS-FTH-3 :: NICHE: every niche uncontested`, the key that
+ * followed the apostrophe); the other three are keys the composers WROTE in double quotes,
+ * which no mask can reach. One scanner closes both halves — which is why this is a scanner
+ * and not a mask.
+ * @param {string} body
+ * @returns {StringLiteral[]} in source order
+ */
+export function stringLiterals(body) {
+  const src = String(body);
+  /** @type {StringLiteral[]} */
+  const out = [];
+  for (let i = 0; i < src.length; i++) {
+    const quote = src[i];
+    if (quote !== '\'' && quote !== '"' && quote !== '`') continue;
+    let j = i + 1;
+    let text = '';
+    while (j < src.length && src[j] !== quote) {
+      if (src[j] === '\\') { text += src[j] + (src[j + 1] ?? ''); j += 2; continue; }
+      text += src[j];
+      j += 1;
+    }
+    // An UNTERMINATED literal is where a one-quote scanner starts inventing. Stop reading
+    // rather than run on: a partial roster of key forms is a finding, a desynced one is a lie.
+    if (j >= src.length) break;
+    /** @type {'single'|'double'|'template'} */
+    let kind = 'template';
+    if (quote === '\'') kind = 'single';
+    else if (quote === '"') kind = 'double';
+    out.push({ kind, text, index: i });
+    i = j;
+  }
+  return out;
+}
+
+/**
  * Every key FORM a function body can produce — string literals and template patterns —
  * each carrying the guard that stands immediately before it.
+ *
+ * THE LADDER'S ORDER IS THE DOCBLOCK'S ORDER: every LITERAL first (rung 1), then every
+ * TEMPLATE (rung 2). The scanner reads in source order; this function does not, because the
+ * rung a pool is attributed to must not depend on where in a function body its key happens
+ * to be written.
  * @param {KeyFunction} fn
  * @returns {KeyForm[]}
  */
 export function keyForms(fn) {
   /** @type {KeyForm[]} */
   const out = [];
+  const literals = stringLiterals(fn.body);
   /** @param {number} at @returns {string} */
   const guardAt = (at) => {
     const before = fn.body.slice(0, at);
-    const m = before.match(/\bif\s*\(([\s\S]*?)\)\s*(?:\{\s*)?(?:return\s*)?$/);
+    // ⛔ THE **LAST** `if (` BEFORE THE LITERAL, NEVER THE LEFTMOST (INSTR-912 car 10, cure 1).
+    // `String.match` with a non-global, `$`-anchored pattern takes the leftmost START that can
+    // reach the end, so in a key function with more than one branch `[\s\S]*?` spanned from
+    // the FIRST `if (` to the last `)` before the literal and swallowed every statement in
+    // between. `predicateRows` then either failed to parse the blob (→ `predicate: []`, 143
+    // rows of 310) or parsed a garbage atom (11 rows carrying a code fragment as their
+    // VALUE). The estate's key functions are ladders — `shadowEconomyPoolKey` has four `if`s
+    // before its last literal — and the one-branch control could not exercise that shape,
+    // which is why the defect was invisible to the gate for two cars.
+    let last = -1;
+    for (const hit of before.matchAll(/\bif\s*\(/g)) last = hit.index ?? last;
+    if (last < 0) return '';
+    const m = before.slice(last).match(/^if\s*\(([\s\S]*?)\)\s*(?:\{\s*)?(?:return\s*)?$/);
     return m ? m[1].replace(/\s+/g, ' ').trim() : '';
   };
-  for (const m of fn.body.matchAll(/'((?:[^'\\]|\\.)*)'/g)) {
+  // RUNG 1 — every plain literal, in EITHER quote, plus a backtick literal with no hole.
+  for (const lit of literals) {
+    if (lit.kind === 'template' && lit.text.includes('${')) continue;
     out.push({
-      kind: 'literal', text: m[1], holes: [], guard: guardAt(m.index || 0),
+      kind: 'literal', text: lit.text, holes: [], guard: guardAt(lit.index),
     });
   }
-  for (const m of fn.body.matchAll(/`((?:[^`\\]|\\.)*)`/g)) {
-    const raw = m[1];
-    if (!raw.includes('${')) {
-      out.push({
-        kind: 'literal', text: raw, holes: [], guard: guardAt(m.index || 0),
-      });
-      continue;
-    }
+  // RUNG 2 — the templates.
+  for (const lit of literals) {
+    if (lit.kind !== 'template' || !lit.text.includes('${')) continue;
     /** @type {string[]} */
     const holes = [];
-    const text = raw.replace(/\$\{([^}]*)\}/g, (_, e) => { holes.push(String(e).trim()); return HOLE; });
+    const text = lit.text.replace(/\$\{([^}]*)\}/g, (_, e) => { holes.push(String(e).trim()); return HOLE; });
     // A template that is nothing BUT a hole matches every key ever written; it recovers
     // nothing and would make the census claim total coverage it does not have.
     if (text === HOLE) continue;
     out.push({
-      kind: 'template', text, holes, guard: guardAt(m.index || 0),
+      kind: 'template', text, holes, guard: guardAt(lit.index),
     });
   }
   return out;
@@ -316,12 +386,43 @@ export function bindTemplate(form, key) {
  * @property {string} name
  * @property {Array<{value: string, key: string}>} entries map key → pool key
  * @property {string[]} readers the expressions this table is indexed by
+ * @property {'object'|'pairs'} shape the literal the composer wrote it as
  */
 
 /**
- * Module-level `const NAME = { '<field value>': '<pool key>' }` tables and the expressions
- * that index them. Rung 3 of the ladder: the predicate is the indexing expression compared
- * against the map's own key.
+ * The expressions a module-level table is CONSULTED by — an index `NAME[expr]` and, for a
+ * pair array, the value a `.find` compares its first element against.
+ * @param {string} src code-only
+ * @param {string} name
+ * @returns {string[]}
+ */
+function tableReaders(src, name) {
+  /** @type {string[]} */
+  const readers = [];
+  for (const r of src.matchAll(new RegExp(`\\b${name}\\s*\\??\\[([^\\]]+)\\]`, 'g'))) readers.push(r[1].trim());
+  for (const r of src.matchAll(new RegExp(`\\b${name}\\s*\\.\\s*find\\s*\\(`, 'g'))) {
+    const open = (r.index || 0) + r[0].length - 1;
+    /** @type {{inner: string, end: number}} */
+    let args;
+    try { args = balancedSlice(src, open); } catch { continue; }
+    const cmp = args.inner.match(/===\s*([A-Za-z_$][\w$.?[\]']*)/);
+    if (cmp) readers.push(cmp[1].trim());
+  }
+  return readers;
+}
+
+/**
+ * Module-level key tables and the expressions that index them. Rung 3 of the ladder: the
+ * predicate is the indexing expression compared against the table's own key.
+ *
+ * TWO SHAPES, because the estate writes two. `{ '<field value>': '<pool key>' }` is the
+ * commoner one; `Object.freeze([['<field value>', '<pool key>'], …])` consulted through
+ * `.find(([token]) => token === x)` is the other (`powerStateProse.js:304`'s
+ * `STABILITY_LADDER`). ⛔ READING ONLY THE FIRST SHAPE WAS A MEASURED DEFECT (INSTR-912
+ * car 10, cure 6): four DS-POW-2 rows read WIRING-UNRESOLVED carrying the reason *no
+ * module-level key table names it* while a module-level key table named every one of them.
+ * A reason that is affirmatively untrue is worse than no reason, because the tier table the
+ * authoring wave is sized from counts it.
  * @param {string} src code-only
  * @returns {KeyTable[]}
  */
@@ -339,10 +440,25 @@ export function moduleKeyTables(src) {
       entries.push({ value: e[1] ?? e[2] ?? e[3], key: e[4] });
     }
     if (entries.length === 0) continue;
-    /** @type {string[]} */
-    const readers = [];
-    for (const r of src.matchAll(new RegExp(`\\b${m[1]}\\s*\\??\\[([^\\]]+)\\]`, 'g'))) readers.push(r[1].trim());
-    out.push({ name: m[1], entries, readers });
+    out.push({
+      name: m[1], entries, readers: tableReaders(src, m[1]), shape: 'object',
+    });
+  }
+  // THE PAIR-ARRAY SHAPE — `const NAME = Object.freeze([['<value>', '<pool key>'], …])`.
+  for (const m of src.matchAll(/\bconst\s+([A-Z][A-Z0-9_]*)\s*=\s*(?:Object\.freeze\()?\s*\[/g)) {
+    const bracket = src.indexOf('[', (m.index || 0) + m[0].length - 1);
+    /** @type {{inner: string, end: number}} */
+    let arr;
+    try { arr = balancedSlice(src, bracket); } catch { continue; }
+    /** @type {Array<{value: string, key: string}>} */
+    const entries = [];
+    for (const e of arr.inner.matchAll(/\[\s*'([^']*)'\s*,\s*'([^']*)'\s*\]/g)) {
+      entries.push({ value: e[1], key: e[2] });
+    }
+    if (entries.length === 0) continue;
+    out.push({
+      name: m[1], entries, readers: tableReaders(src, m[1]), shape: 'pairs',
+    });
   }
   return out;
 }
@@ -414,7 +530,9 @@ export function callArguments(src, fn) {
 /**
  * THE (block, pool) → {predicate, fields read, slots filled} CENSUS.
  * @param {CensusInput} input
- * @returns {{rows: CensusRow[], functions: number, tables: number}}
+ * @returns {{rows: CensusRow[], functions: number, consulted: number, tables: number}}
+ *   `functions` is how many key functions the reader FOUND; `consulted` is how many the
+ *   ladder actually walks. The two must be equal, and the walker asserts it.
  */
 export function wiringCensus(input) {
   const sources = input.sources || new Map();
@@ -433,7 +551,14 @@ export function wiringCensus(input) {
   /** @type {Map<string, {fn: KeyFunction, forms: KeyForm[], aliases: Map<string, string>, args: Map<string, string[]>}>} */
   const prepared = new Map();
   for (const fn of fns) {
-    prepared.set(fn.name, {
+    // ⛔ KEYED ON `file::name`, NEVER ON THE BARE NAME (INSTR-912 car 10, cure 8). Two desks
+    // both export `foodSecurityPoolKey` (`economyStateProse.js:393`, `generalStateProse.js:353`),
+    // so a bare-name key silently dropped one of them: 118 functions found, 117 consulted,
+    // and the walker asserted 118 — `fns.length`, not what the ladder reads. Harmless at this
+    // tip (both are corpus-derived and return no literal), and the next same-named pair would
+    // have lost real keys with no gate saying so. `consulted` is published so the two counts
+    // can be asserted EQUAL rather than one standing in for the other.
+    prepared.set(`${fn.file}::${fn.name}`, {
       fn,
       forms: keyForms(fn),
       aliases: localAliases(fn.body, fn.params),
@@ -460,7 +585,9 @@ export function wiringCensus(input) {
   }
   let tableCount = 0;
   for (const list of tables.values()) tableCount += list.length;
-  return { rows, functions: fns.length, tables: tableCount };
+  return {
+    rows, functions: fns.length, consulted: prepared.size, tables: tableCount,
+  };
 }
 
 /**
@@ -669,6 +796,44 @@ export function factIndex(rows) {
  */
 
 /**
+ * EVERY FACT THE CENSUS'S ROWS SPEAK TO — each as the source spells it AND as `rootOf`
+ * normalises it, taken from the PREDICATE and from `fieldsRead` alike.
+ *
+ * ⛔ WHY BOTH HALVES (INSTR-912 car 10, cure 3). The MISSING tier's membership test used to
+ * read `r.predicate.map(p => p.field)` on the raw string. Two independent faults followed,
+ * and together they overstated MISSING by 41 %:
+ *
+ *   1. A pool whose key function READS a fact but whose guard did not parse carries
+ *      `predicate: []`, so the fact it keys on was invisible — 24 of the 58 MISSING facts
+ *      appear in some row's `fieldsRead`, `readings.criticalIssueCount` among them, keyed by
+ *      `criticalIssuePoolKey` on two pools while the tier row said "0 pools keyed on this fact".
+ *   2. With no `rootOf` — unlike `censusSummary`'s own unread-field arm, which normalises —
+ *      a fact spoken to only through a DEEPER path was falsely MISSING: `readings.exportPosture`
+ *      while DS-ECO-10's predicates name `readings.exportPosture.status`. Three rows.
+ *
+ * A fact a key function reads is spoken to whether or not the guard reader could follow it.
+ * @param {ReadonlyArray<CensusRow>} rows
+ * @returns {Set<string>}
+ */
+function spokenToSet(rows) {
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const row of rows) {
+    for (const p of row.predicate) {
+      if (!p.field) continue;
+      out.add(p.field);
+      out.add(rootOf(p.field));
+    }
+    for (const field of row.fieldsRead || []) {
+      if (!field) continue;
+      out.add(field);
+      out.add(rootOf(field));
+    }
+  }
+  return out;
+}
+
+/**
  * THE THREE TIERS, keyed to the dossier's blocks. Every row names the block, the field(s),
  * the reading function and the COUNT — so the chair hands the wave a list, not a judgment.
  * @param {{rows: ReadonlyArray<CensusRow>, held: ReadonlyArray<string>,
@@ -680,9 +845,9 @@ export function tierRows(input) {
   const rows = input.rows || [];
   /** @type {TierRow[]} */
   const out = [];
-  const spokenTo = new Set(rows.flatMap((r) => r.predicate.map((p) => p.field)));
+  const spokenTo = spokenToSet(rows);
   for (const fact of input.held || []) {
-    if (spokenTo.has(fact)) continue;
+    if (spokenTo.has(fact) || spokenTo.has(rootOf(fact))) continue;
     // A held fact is named by its composer; the block is the composer's, not one pool's.
     out.push({
       tier: TIERS.MISSING,
@@ -806,22 +971,56 @@ export function censusIndex(rows) {
 }
 
 /**
+ * A predicate row nobody can read as a `{field, op, value}` triple — the shape the leftmost-
+ * `if` guard reader used to produce, where the VALUE was every statement between the first
+ * branch and the literal. Kept as an exported rule because `resolvedWithCleanPredicate` is a
+ * wave-sizing integer and a reader must be able to check what it counted.
+ *
+ * ⚠ THE FIGURE IS THE RULE'S. Under this statement-boundary rule the pre-cure tip reads
+ * ELEVEN such rows; FOLD-2's lens reports fourteen and names no rule, and a rule that also
+ * counts a bare `(` reads eighteen (it catches `(no literal)`, the truthy/falsy marker). The
+ * count is published with its predicate so the next reader compares like with like.
+ */
+const CODE_FRAGMENT = /[;{}\n]|=>|\breturn\b|\bif\s*\(/;
+
+/**
+ * Is every row of this predicate readable as a comparison — a field, an operator and a value
+ * that is a value?
+ * @param {ReadonlyArray<PredicateRow>} predicate
+ * @returns {boolean} false for an EMPTY predicate: nothing recovered is not clean recovery
+ */
+export function cleanPredicate(predicate) {
+  const rows = predicate || [];
+  if (rows.length === 0) return false;
+  return rows.every((r) => Boolean(r.field) && !CODE_FRAGMENT.test(String(r.value)));
+}
+
+/**
  * The summary the receipt prints: totals, the status split by block, the largest unresolved
  * reasons, the slots with no provider, and the variants-per-pool histogram (the owner's
  * 21:50 ruling makes the variant count a first-class column: every semantic variant will
  * get a family of FOUR wordings and nothing is ever trimmed, so the tier table sizes that
  * authoring too).
+ *
+ * ⛔ "RESOLVED" IS NOT "RECOVERED", AND THIS SUMMARY NOW SAYS SO IN INTEGERS (INSTR-912
+ * car 10, cure 2). `resolved` counts rows that reached a recovery RUNG. Two narrower counts
+ * ship beside it — `resolvedWithPredicate` (the rung produced at least one predicate row) and
+ * `resolvedWithCleanPredicate` (every one of those rows is a readable comparison) — because
+ * the receipt, the walker's own assertion message and the wave's tier table all read
+ * "RESOLVED 310" as "the selecting predicate was recovered", and at the pre-cure tip 143 of
+ * those 310 carried `predicate: []`.
  * @param {ReadonlyArray<CensusRow>} rows
  * @param {ReadonlyArray<string>} [held] car 5's unrendered-facts census — every reading the
  *   composers HOLD. The "a predicate over a field the block does not read" arm compares each
  *   predicate's root against this set; WITHOUT it the arm is NOT-EXECUTABLE and says so,
  *   because a comparison against nothing answers `[]` and reads as a clean bill.
  * @returns {{total: number, resolved: number, unresolved: number,
+ *   resolvedWithPredicate: number, resolvedWithCleanPredicate: number,
  *   byBlock: Array<[string, {resolved: number, unresolved: number}]>,
  *   reasons: Array<[string, number]>, slotless: Array<{block: string, pool: string, slots: string[]}>,
  *   bagless: Array<{block: string, pool: string, slots: string[]}>,
- *   predicatesOverUnreadFields: Array<{block: string, pool: string, field: string}>,
- *   predicateArmExecutable: boolean,
+ *   predicatesOverUnreadFields: Array<{block: string, pool: string, field: string, rung: string}>,
+ *   syntheticTableFields: number, predicateArmExecutable: boolean,
  *   variantHistogram: Array<[number, number]>, variants: number, meanPerPool: string,
  *   perBlock: Array<[string, number]>}}
  */
@@ -838,29 +1037,47 @@ export function censusSummary(rows, held) {
   const slotless = [];
   /** @type {Array<{block: string, pool: string, slots: string[]}>} */
   const bagless = [];
-  /** @type {Array<{block: string, pool: string, field: string}>} */
+  /** @type {Array<{block: string, pool: string, field: string, rung: string}>} */
   const overUnread = [];
   const heldSet = Array.isArray(held) ? new Set(held) : null;
   let resolved = 0;
   let variants = 0;
+  let withPredicate = 0;
+  let withCleanPredicate = 0;
+  let syntheticTableFields = 0;
   for (const row of rows) {
     if (!byBlock.has(row.block)) byBlock.set(row.block, { resolved: 0, unresolved: 0 });
     const seat = byBlock.get(row.block);
     if (seat) {
       if (row.status === WIRING_STATUS.RESOLVED) seat.resolved++; else seat.unresolved++;
     }
-    if (row.status === WIRING_STATUS.RESOLVED) resolved++;
-    else reasons.set(row.reason, (reasons.get(row.reason) || 0) + 1);
+    if (row.status === WIRING_STATUS.RESOLVED) {
+      resolved++;
+      if (row.predicate.length > 0) withPredicate++;
+      if (cleanPredicate(row.predicate)) withCleanPredicate++;
+    } else reasons.set(row.reason, (reasons.get(row.reason) || 0) + 1);
     histogram.set(row.variants, (histogram.get(row.variants) || 0) + 1);
     perBlock.set(row.block, (perBlock.get(row.block) || 0) + row.variants);
     variants += row.variants;
     if (row.slotsWithoutProvider.length) {
       (row.hasBag ? slotless : bagless).push({ block: row.block, pool: row.pool, slots: row.slotsWithoutProvider });
     }
-    if (heldSet) {
+    // ⛔ THE TABLE RUNG'S FIELD IS THIS INSTRUMENT'S OWN LABEL, NOT A COMPOSER'S READING
+    // (INSTR-912 car 10, cure 4). Rung 3 writes the SAME synthetic string into `predicate[]`
+    // and into `fieldsRead`: `"<reader> (via <TABLE> in <file>)"`. Its `rootOf` is the whole
+    // string, which no held-facts set can ever contain, so EVERY table row was reported as a
+    // predicate over an unheld field BY CONSTRUCTION — 74 of the 158 at the pre-cure tip. The
+    // first cut of this arm compared against the key function's own `fieldsRead` and could
+    // not fail; the comparison moved to the held set and the artefact moved with it. The rows
+    // are counted separately rather than dropped, because a count nobody can see is how the
+    // artefact came back the first time.
+    if (row.rung === 'table') syntheticTableFields += row.predicate.length;
+    if (heldSet && row.rung !== 'table') {
       for (const p of row.predicate) {
         if (p.field === '' || heldSet.has(rootOf(p.field))) continue;
-        overUnread.push({ block: row.block, pool: row.pool, field: p.field });
+        overUnread.push({
+          block: row.block, pool: row.pool, field: p.field, rung: row.rung,
+        });
       }
     }
   }
@@ -869,11 +1086,14 @@ export function censusSummary(rows, held) {
     total,
     resolved,
     unresolved: total - resolved,
+    resolvedWithPredicate: withPredicate,
+    resolvedWithCleanPredicate: withCleanPredicate,
     byBlock: [...byBlock].sort((a, b) => b[1].unresolved - a[1].unresolved),
     reasons: [...reasons].sort((a, b) => b[1] - a[1]),
     slotless,
     bagless,
     predicatesOverUnreadFields: overUnread,
+    syntheticTableFields,
     predicateArmExecutable: heldSet !== null,
     variantHistogram: [...histogram].sort((a, b) => a[0] - b[0]),
     variants,

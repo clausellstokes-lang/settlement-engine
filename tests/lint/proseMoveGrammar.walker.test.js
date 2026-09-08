@@ -24,6 +24,8 @@
  * @see src/domain/prose/grammarWalker.js
  * @see src/domain/prose/moveGrammar.js
  */
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   armA, armE, armESpread, armF, armF10, armG, armThreeNumbers, armsB, ceilingFor, entropyOf,
@@ -39,7 +41,7 @@ import {
   C_SIBLING_CONTROL, fairDraw, HAND_TAGGED, OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE,
   SYNTHETIC_BANDS, TAGGED_POOL,
 } from '../fixtures/grammarControls.js';
-import { loadCausalLeaf, loadStateLeaves, poolCells } from '../helpers/dossierCorpus.js';
+import { loadCausalLeaf, loadStateLeaves, poolCells, ROOT } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
 
 /** @param {import('../../src/domain/prose/grammarWalker.js').GrammarReport} r */
@@ -538,6 +540,29 @@ describe('the classifier — measured against a hand-tagged sample, and printed'
     expect(n).toBeGreaterThanOrEqual(24);
     const baseline = HAND_TAGGED.filter((t) => t.hand.length === 1 && t.hand[0] === 'PRESENT').length;
     expect(exact).toBeGreaterThan(baseline);
+  });
+
+  it('THE DOCBLOCK\'S NAMED SAMPLE PATH EXISTS, and names the export it claims', () => {
+    // ⛔ THE HEADER STRING WAS UNGUARDED (INSTR-912 car 10, cure 14; FOLD-2 P11). Car 12's
+    // cure pointed `moveGrammar.js`'s docblock at the real file, and the walker's IMPORT of
+    // `HAND_TAGGED` would red on a bad path — but the DOCBLOCK is a separate string, and a
+    // successor moving the fixture would fix the import and leave the header pointing at
+    // nothing. A header that names a path is a claim; this is the arm that reads it.
+    const header = readFileSync(join(ROOT, 'src/domain/prose/moveGrammar.js'), 'utf8').slice(0, 4000);
+    const named = header.match(/`(tests\/fixtures\/[\w.-]+\.js)`/);
+    expect(named, 'the docblock names a fixture path at all').toBeTruthy();
+    expect(existsSync(join(ROOT, named[1])), `the docblock's named sample path exists: ${named[1]}`).toBe(true);
+    // AND THE EXPORT IT NAMES BESIDE THE PATH, or the path is right and the claim is not.
+    const exported = header.match(/`(tests\/fixtures\/[\w.-]+\.js)`,\s*`([A-Z_][A-Z0-9_]*)`/);
+    expect(exported, 'the docblock names the export beside the path').toBeTruthy();
+    expect(readFileSync(join(ROOT, exported[1]), 'utf8'))
+      .toContain(`export const ${exported[2]}`);
+    // NON-BLIND: the reader must actually find a path, so a header emptied of its claim reds
+    // here rather than passing an existence check on nothing.
+    expect(existsSync(join(ROOT, 'tests/fixtures/a-path-no-fixture-uses.js')),
+      'the existence check can answer false').toBe(false);
+    expect(named[1], 'and it is the file this test itself imports HAND_TAGGED from')
+      .toBe('tests/fixtures/grammarControls.js');
   });
 
   it('reports `agrees: null` on an untagged variant — never a silent true', () => {
