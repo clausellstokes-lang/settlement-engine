@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "82eeb534f9aae908fd54f5324ae0aa49bfe38fdc",
-  "measuredBy": "SEAM car 5b (Opus 5)",
+  "measuredAtSha": "5df93e9aec9e0fa36155783e16aa2eb47d01dafe",
+  "measuredBy": "lane SEAM, car 5c (Opus 5 — Fable-unvalidated)",
   "date": "2026-09-08",
-  "note": "the holder census: the source column on every census row, the dry read, and the docblock evidence kind withdrawn",
+  "note": "SEAM car 5c added six test titles across three existing lint files: four PROVENANCE-vocabulary arms (5c-1), two block-re-walk contrast arms (5c-2), three capture-standing arms (5c-6), one headline-count pin folded into an existing title (5c-7), less the titles no file lost. No file added or parked.",
   "files": 2556,
   "parked": 375,
   "credited": 2181,
-  "titles": 24025,
+  "titles": 24031,
   "suiteTitles": 6419
 }
