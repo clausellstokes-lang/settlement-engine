@@ -13,6 +13,7 @@
  * ── THE FOUR MODES ──────────────────────────────────────────────────────────────────
  *   (default)             write `docs/content/wiring-census.json`
  *   --check               refuse on a stale byte or a stale stamp; write nothing
+ *   --dry                 the would-be diff summary against the committed file; WRITES NOTHING
  *   --print               the receipt's own figures, from this one command
  *   --rates <file>        fold a RATE-corpus run (scripts/prose-rate-corpus.mjs --out)
  *                         into the rate half before writing
@@ -44,6 +45,7 @@ import {
   attachSets, censusSummary, customReachable, factBudget, factIndex, rootOf, tierRows,
   TIERS, WIRING_STATUS, wiringCensus,
 } from '../src/domain/prose/wiringCensus.js';
+import { holderCensus, sourceSummary } from '../src/domain/prose/holderTable.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS } from '../src/domain/display/stateProse/dossierMounts.js';
 import { CONDITION_ARCHETYPE_TEMPLATES } from '../src/domain/activeConditions.js';
 import { canonicalAffectedSystems } from '../src/domain/worldPulse/stressorsCore.js';
@@ -194,8 +196,26 @@ export function astTokens(source) {
  * @returns {{produced: Set<string>, files: number, unparsed: string[]}}
  */
 export function producerIndex() {
-  /** @type {Set<string>} */
-  const produced = new Set();
+  const { cites, files, unparsed } = producerCitations();
+  return { produced: new Set(cites.keys()), files, unparsed };
+}
+
+/**
+ * ⭐ THE PRODUCER INDEX, KEPT WITH ITS CITATIONS (SEAM car 5b). `producerIndex` answers WHICH
+ * keys the estate writes; the holder table's every mapping row claims WHERE one of them is
+ * written, as a `file:line` a reader can open. This is the same walk with the line kept, so the
+ * walker can re-derive every citation from the tree rather than believe the table: a row whose
+ * `cite` has gone stale, or never existed, reds by name.
+ *
+ * ⛔ IT IS THE SAME SCAN AND NOT A SECOND ONE. Two walks over `src/generators/**` and
+ * `src/domain/**` that could disagree would be two producer indexes, and the estate's rule is
+ * one reader per fact: `producerIndex` is written in terms of this function so a divergence is
+ * impossible rather than merely unlikely.
+ * @returns {{cites: Map<string, string[]>, files: number, unparsed: string[]}}
+ */
+export function producerCitations() {
+  /** @type {Map<string, string[]>} */
+  const cites = new Map();
   /** @type {string[]} */
   const unparsed = [];
   const files = [
@@ -203,11 +223,16 @@ export function producerIndex() {
     ...jsFilesUnder(join(ROOT, 'src/domain')),
   ];
   for (const abs of files) {
+    const rel = relative(ROOT, abs);
     const { writes, parsed } = astTokens(readFileSync(abs, 'utf8'));
-    if (!parsed) { unparsed.push(relative(ROOT, abs)); continue; }
-    for (const write of writes) produced.add(write.name);
+    if (!parsed) { unparsed.push(rel); continue; }
+    for (const write of writes) {
+      const held = cites.get(write.name);
+      if (held) held.push(`${rel}:${write.line}`);
+      else cites.set(write.name, [`${rel}:${write.line}`]);
+    }
   }
-  return { produced, files: files.length, unparsed };
+  return { cites, files: files.length, unparsed };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -691,7 +716,17 @@ function sharedMention(index, a, b) {
  * @param {{endpoints: ReadonlyArray<string>, roots: ReadonlyArray<string>,
  *   paths?: ReadonlyArray<string>, builders?: Map<string, string>,
  *   generators?: Map<string, string>, docs?: Map<string, string>}} input
+ * ⛔ THE `docblock` KIND IS WITHDRAWN FROM `rows` AND SURVIVES AS A REPORT CHANNEL ONLY
+ * (SITTING §P.2-27 EXTENDED, the chair's ruling at SEAM car 3h §3h.6 item 2). §P.2-27 re-cut
+ * `generator-write` as an AST reading because a comment, a prose string, a template string and
+ * an arrow parameter are not evidence; the `docblock` kind is comments BY DEFINITION and cannot
+ * be re-cut the same way. It minted `economicGates.disaster <- row` out of two English words
+ * sharing one comment line, and the note written to record that artefact re-minted the same
+ * row. So a docblock candidate is REPORTED and never proposed: `rows` carries the three
+ * evidence kinds a syntax tree can stand behind, and a car that writes a composer comment can
+ * no longer move a declared figure.
  * @returns {{rows: Array<{endpoint: string, readRoot: string, evidence: string, at: string,
+ *   line: string}>, docblockReports: Array<{endpoint: string, readRoot: string, at: string,
  *   line: string}>, endpointsWithCandidate: number, noCandidate: string[],
  *   syntheticRootsExcluded: number}}
  */
@@ -714,6 +749,8 @@ export function aliasDraft(input) {
   // three times the ground.
   /** @type {Map<string, {endpoint: string, readRoot: string, evidence: string, at: string, line: string}>} */
   const best = new Map();
+  /** @type {Map<string, {endpoint: string, readRoot: string, at: string, line: string}>} */
+  const reported = new Map();
   /** @param {{endpoint: string, readRoot: string, evidence: string, at: string, line: string}} row */
   const offer = (row) => {
     const key = `${row.endpoint}|${row.readRoot}`;
@@ -764,12 +801,20 @@ export function aliasDraft(input) {
       const at = builderAt || generatorAt || docAt;
       if (!at) continue;
       const index = builderAt ? builders : (generatorAt ? generators : docs);
+      const line = index.at.get(at) || '';
+      if (docAt) {
+        // THE REPORT CHANNEL, never a candidate: a comment line is not evidence.
+        reported.set(`${endpoint}|${root}`, {
+          endpoint, readRoot: root, at, line,
+        });
+        continue;
+      }
       offer({
         endpoint,
         readRoot: root,
-        evidence: builderAt ? 'reading-builder' : (generatorAt ? 'generator-write' : 'docblock'),
+        evidence: builderAt ? 'reading-builder' : 'generator-write',
         at,
-        line: index.at.get(at) || '',
+        line,
       });
     }
   }
@@ -778,6 +823,8 @@ export function aliasDraft(input) {
   const covered = new Set(rows.map((r) => r.endpoint));
   return {
     rows,
+    docblockReports: [...reported.values()]
+      .sort((a, b) => (a.endpoint < b.endpoint ? -1 : 1) || (a.readRoot < b.readRoot ? -1 : 1)),
     endpointsWithCandidate: covered.size,
     noCandidate: endpoints.filter((e) => !covered.has(e)),
     syntheticRootsExcluded: allRoots.length - roots.length,
@@ -915,6 +962,7 @@ export async function buildCensus(options = {}) {
     function: grainFigures(shadow, DOSSIER_MOUNTS, deskFacts),
   };
   const custom = customReachable(census.rows, CUSTOM_CONTENT_MANIFEST.categories);
+  const sources = sourceSummary(census.rows);
   const relations = relationTable();
   const rateRows = options.rates?.rows || [];
   const rateBy = new Map(rateRows.map((r) => [`${r.block} :: ${r.pool}`, r]));
@@ -988,6 +1036,10 @@ export async function buildCensus(options = {}) {
       ratifiedAliases: ratifiedAliasRows.length,
       tableRungRowsWithoutAbsence: census.rows.filter((r) => r.rung === 'table').length,
       modifierEligibleFactsByTab: mountsPerFact.byTab,
+      sourceLicensedRows: sources.rows.LICENSED,
+      sourceOfficeRows: sources.rows.OFFICE,
+      sourceUnresolvedRows: sources.rows['SOURCE-UNRESOLVED'],
+      sourceTwoSourceRows: sources.twoSourceRows,
     },
     rows: census.rows,
     factIndex: factIndex(census.rows),
@@ -997,6 +1049,16 @@ export async function buildCensus(options = {}) {
     factBudget: budget,
     grains,
     customReachable: custom,
+    holders: {
+      ruling: 'SITTING §Q (owner "Do it", 2026-09-08): every fact the record states has a typed'
+        + ' SOURCE, derived and never authored. The producing field maps through the frozen'
+        + ' holder table to a record-holder KIND, and the kind resolves to THIS town\'s'
+        + ' institution and its standing through the institution table. A field whose holder the'
+        + ' engine does not hold is SOURCE-UNRESOLVED, printed, never inferred. The `holder` and'
+        + ' the standing beside it are null in this REGISTER because a register is not a town.',
+      census: holderCensus(),
+      summary: sources,
+    },
     relations: { ...relations, join: relationJoin(relations.rows, census.rows) },
     ratifiedAliases: {
       ruling: 'SITTING §P.2-27: the three `identifier` rows are RATIFIED as aliases; the four'
@@ -1066,6 +1128,99 @@ export function censusCheck(committedText, data) {
 }
 
 /**
+ * ⭐ THE DRY READ (SEAM car 5, §5.8 item 3; the chair's ADDENDUM 2 to car 5b). The script had
+ * FOUR modes and none of them could answer "what would change?" without writing: `--check`
+ * throws on the first difference and the bare invocation REWRITES the committed register. A
+ * lane that wanted the delta had to take the door and restore from `HEAD`, and car 5 ran that
+ * write by accident doing exactly this. A register a lane cannot READ without WRITING is a
+ * hazard family this estate has met before, so the read is its own mode.
+ *
+ * It is a SUMMARY and not a diff tool: the whole file is 1.8 MB and a line diff of it belongs
+ * in `git diff`, which is available the moment the door is actually taken. What a lane needs
+ * before deciding is which SECTIONS moved, by how many bytes, and whether any stamped sha or
+ * any ROW moved, because those are the three questions the chair's own rule turns on.
+ * @param {string|null} committedText
+ * @param {object} data the freshly built census
+ * @returns {{ok: boolean, bytes: {committed: number, fresh: number},
+ *   sections: string[], stampFilesMoved: string[], candidateLeavesMoved: boolean,
+ *   rowsMoved: number, rowExamples: string[]}}
+ */
+export function censusDry(committedText, data) {
+  const fresh = serialise(data);
+  // ⚠ BYTES, NOT CODE UNITS. A JS string's `.length` counts UTF-16 units and this register
+  // carries section rules and typographic marks, so the two readings differ by more than a
+  // thousand on the shipped file; a lane comparing `.length` against `wc -c` would read a
+  // delta that is not there.
+  const bytesOf = (text) => Buffer.byteLength(text, 'utf8');
+  if (committedText === null) {
+    return {
+      ok: false,
+      bytes: { committed: 0, fresh: bytesOf(fresh) },
+      sections: ['(the committed file is missing)'],
+      stampFilesMoved: [],
+      candidateLeavesMoved: false,
+      rowsMoved: data.rows.length,
+      rowExamples: [],
+    };
+  }
+  /** @type {object} */
+  let have;
+  try { have = JSON.parse(committedText); } catch {
+    return {
+      ok: false,
+      bytes: { committed: bytesOf(committedText), fresh: bytesOf(fresh) },
+      sections: ['(the committed file does not parse as JSON)'],
+      stampFilesMoved: [],
+      candidateLeavesMoved: false,
+      rowsMoved: data.rows.length,
+      rowExamples: [],
+    };
+  }
+  const sections = Object.keys(data)
+    .filter((key) => JSON.stringify(have[key]) !== JSON.stringify(data[key]));
+  const stampFilesMoved = Object.entries(data.stamp.files)
+    .filter(([rel, sha]) => have.stamp?.files?.[rel] !== sha).map(([rel]) => rel);
+  const before = new Map((have.rows || []).map((r) => [`${r.block} :: ${r.pool}`, JSON.stringify(r)]));
+  /** @type {string[]} */
+  const rowExamples = [];
+  let rowsMoved = 0;
+  for (const row of data.rows) {
+    const key = `${row.block} :: ${row.pool}`;
+    if (before.get(key) === JSON.stringify(row)) continue;
+    rowsMoved += 1;
+    if (rowExamples.length < 5) rowExamples.push(key);
+  }
+  return {
+    ok: committedText === fresh,
+    bytes: { committed: bytesOf(committedText), fresh: bytesOf(fresh) },
+    sections,
+    stampFilesMoved,
+    candidateLeavesMoved: JSON.stringify(have.stamp?.candidateLeaves)
+      !== JSON.stringify(data.stamp.candidateLeaves),
+    rowsMoved,
+    rowExamples,
+  };
+}
+
+/**
+ * The dry read's own print, so the mode is one command and not a command plus a reading.
+ * @param {ReturnType<typeof censusDry>} dry
+ * @returns {string[]}
+ */
+export function dryLines(dry) {
+  return [
+    `[wiring-census --dry] the committed register is ${dry.ok ? 'CURRENT' : 'STALE'}; nothing was written`,
+    `  bytes committed ${dry.bytes.committed} · fresh ${dry.bytes.fresh}`
+      + ` · delta ${dry.bytes.fresh - dry.bytes.committed}`,
+    `  sections that would move: ${dry.sections.join(' · ') || '(none)'}`,
+    `  stamped shas that would move: ${dry.stampFilesMoved.join(' · ') || '(none)'}`
+      + ` · candidate leaves ${dry.candidateLeavesMoved ? 'MOVED' : 'unmoved'}`,
+    `  ROWS that would move: ${dry.rowsMoved}`
+      + (dry.rowExamples.length ? ` (first: ${dry.rowExamples.join(' · ')})` : ''),
+  ];
+}
+
+/**
  * THE TWO GRAINS PRINTED SIDE BY SIDE, ONCE — the measured cost of SITTING §O.1, so that a
  * reader compares two columns rather than two receipts.
  * @param {object} data
@@ -1116,6 +1271,25 @@ export function printLines(data) {
       + ` and T-F12 refuses on the SET) · rows with a mount ${t.mountedRows}`,
     `  fact budget · k = 0 on ${t.zeroK} of ${t.kExecutable} RESOLVED rows · ${t.kNotExecutable} NOT-EXECUTABLE (UNRESOLVED)`,
     `  k histogram: ${data.factBudget.histogram.map(([k, n]) => `k=${k} ${n}`).join(' · ')}`,
+    '  ── THE SOURCE OF EACH CONSTRUCTION (SITTING §Q) ──────────────────',
+    `  ROWS · LICENSED ${t.sourceLicensedRows} · OFFICE ${t.sourceOfficeRows}`
+      + ` · SOURCE-UNRESOLVED ${t.sourceUnresolvedRows} (of ${t.pools});`
+      + ` two-source rows ${t.sourceTwoSourceRows}`,
+    `  of the UNRESOLVED rows, ${data.holders.summary.rowsWithNoReading} carry NO recovered reading at all`
+      + ` (the census's own WIRING-UNRESOLVED set: no predicate, so no field, so no source),`
+      + ` leaving ${t.sourceUnresolvedRows - data.holders.summary.rowsWithNoReading} rows that read`
+      + ` a field the holder table does not map`,
+    `  FIELDS · LICENSED ${data.holders.summary.fields.LICENSED}`
+      + ` · OFFICE ${data.holders.summary.fields.OFFICE}`
+      + ` · SOURCE-UNRESOLVED ${data.holders.summary.fields['SOURCE-UNRESOLVED']}`
+      + ` (no mapping ${data.holders.summary.unresolvedGrounds['no-mapping']},`
+      + ` no institution in the roster ${data.holders.summary.unresolvedGrounds['no-institution-in-roster']})`,
+    `  by KIND: ${data.holders.summary.byKind.map(([k, n]) => `${k} ${n}`).join(' · ') || '(none)'}`,
+    `  holder kinds with NO institution in the shipped roster:`
+      + ` ${data.holders.summary.kindsWithNoInstitution.join(' · ') || '(none)'}`,
+    ...data.holders.census.map((h) => `    ${h.kind.padEnd(10)} fields ${String(h.fields).padStart(2)}`
+      + ` · record services ${String(h.services).padStart(2)} (duty-named ${h.dutyNamed})`
+      + ` · roster ${h.rosterBacked ? 'BACKED' : 'EMPTY'}`),
     `  customReachable rows ${t.customReachableRows} over ${data.customReachable.byKind.length} kinds`,
     `    ${data.customReachable.byKind.map(([k, n]) => `${k} ${n}`).join(' · ')}`,
     `  relation rows ${t.relationRows} · by source ${data.relations.bySource.map(([s, n]) => `(${s}) ${n}`).join(' · ')}`,
@@ -1212,6 +1386,10 @@ export function draftLines(data) {
     `  candidate rows ${draft.rows.length} · endpoints with at least one candidate ${draft.endpointsWithCandidate}`
       + ` · with none ${draft.noCandidate.length}`,
     `  by evidence: ${[...byEvidence].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(' · ') || '(none)'}`,
+    `  DOCBLOCK candidates, WITHDRAWN from the draft and REPORTED only (SITTING §P.2-27 extended,`
+      + ` SEAM car 3h §3h.6 item 2): ${draft.docblockReports.length}`,
+    ...draft.docblockReports.slice(0, 8).map((r) => `    REPORT  ${r.endpoint.slice(0, 42).padEnd(42)}`
+      + ` -> ${r.readRoot.padEnd(26)} ${r.at}`),
     `  RELATION ROWS THAT WOULD JOIN under this draft: ${joined.length} of ${data.relations.rows.length}`
       + ` · by direction ${[...byDirection].map(([d, n]) => `${d} ${n}`).join(' · ') || '(none)'}`,
     `  RELATION ROWS THAT WOULD JOIN under the RATIFIED rows only (SITTING §P.2-27, the three`
@@ -1243,6 +1421,7 @@ function chunked(list, per) {
 async function main() {
   const argv = process.argv.slice(2);
   const checkOnly = argv.includes('--check');
+  const dryOnly = argv.includes('--dry');
   const printOnly = argv.includes('--print');
   const draftOnly = argv.includes('--join-draft');
   const ratesAt = argv.indexOf('--rates');
@@ -1265,6 +1444,12 @@ async function main() {
   // reader can see by the control flow and not only by the docblock that no leaf moves.
   if (draftOnly) {
     for (const line of draftLines(data)) console.log(line);
+    return;
+  }
+  // ⛔ THE DRY MODE RETURNS BEFORE THE WRITE BELOW, like `--join-draft`, so a reader can see by
+  // the control flow and not only by the docblock that no register byte moves.
+  if (dryOnly) {
+    for (const line of dryLines(censusDry(committed, data))) console.log(line);
     return;
   }
   if (checkOnly) {

@@ -436,6 +436,12 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // ⭐ COMPOSED AT §900 (Fable chair): DESK-DEFENSE's 93 → 92 (the desk left the discovery set) and
     // SEAT-78's 93 → 94 (+1 irregularForce.js, exempted above) meet here: 92 + 1 = 93, and the arm was RUN at the
     // composed tip to read the figure from its own failure message rather than trust the arithmetic.
+    // ⭐ UNMOVED AT SEAM car 5b, and the reason is worth the line: `holderTable.js` asks the
+    // roster whether an institution of this town keeps a record, and its FIRST cut read
+    // `settlement.institutions` raw and enrolled here as a 94th non-compliant reader. It routes
+    // through `liveInstitutions` now — for the roster AND for the service rows, because a
+    // calamity-ruined records office keeps no record — so it never names `.institutions` at all
+    // and the discovery set is the same 93. The gate found the defect before the census did.
     expect(readers.length).toBe(93);
   });
 

@@ -46,6 +46,8 @@ import { loadStateLeaves } from '../helpers/dossierCorpus.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DOSSIER_RELATIONS } from '../../src/data/dossierRelations.generated.js';
+import { HOLDER_RECORDS } from '../../src/domain/prose/holderTable.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { FACTION_ROLES } from '../../src/generators/factionRoles.js';
 import * as ROLE_CATALOG from '../../src/generators/npc/factionRoleCatalog.js';
 import { POWER_ROLES_BY_CATEGORY } from '../../src/data/historyData.js';
@@ -829,7 +831,7 @@ describe('A12 — the POSITION BUDGET, as a desk test', () => {
   });
 });
 
-describe('A13 — the PROVENANCE move, counted and NOT-EXECUTABLE until the holder census lands', () => {
+describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed (SEAM car 5b)', () => {
   const cited = {
     blockId: 'DS-FIX-1',
     poolKey: 'muster: long',
@@ -849,14 +851,23 @@ describe('A13 — the PROVENANCE move, counted and NOT-EXECUTABLE until the hold
     expect(out.reports[0].value).toBe('1');
   });
 
-  it('⛔ NOT-EXECUTABLE: the census carries no `source` column until SEAM car 5b lands it', () => {
+  it('⭐ THE COLUMN LANDED: every census row carries a `source`, and the arm is NOT-EXECUTABLE only without a reader', () => {
+    // ⛔ THE ARM THIS REPLACES ASSERTED THE COLUMN'S ABSENCE, and SEAM car 5b falsified it.
+    // Car 4c's precedent: an arm whose claim a later car falsifies is AMENDED at cause, never
+    // left red and never deleted — the property that replaces it is stronger, because the
+    // column is now asserted present on EVERY row rather than absent from all of them.
     const columns = new Set(census.rows.flatMap((row) => Object.keys(row)));
-    expectAbsentWithAnchor([...columns].sort(), 'source', 'reads',
-      'the census row carries `reads` today and gains `source` at car 5b');
+    expect([...columns].sort(), 'the census row carries the holder census\'s column').toContain('source');
+    expect(census.rows.every((row) => typeof row.source === 'object' && row.source !== null),
+      'and every one of the 708 rows carries it').toBe(true);
+    expect(new Set(census.rows.map((r) => r.source.standing)),
+      'from the register\'s own closed standing vocabulary')
+      .toEqual(new Set(['LICENSED', 'OFFICE', 'SOURCE-UNRESOLVED']));
+    // AND THE NOT-EXECUTABLE LIMB SURVIVES, because a CALLER may still bring no reader: the
+    // arm refuses to license anything it cannot look up rather than passing by default.
     const out = armA13(cited, {});
     expect(out.fails).toEqual([]);
     expect(out.notExecutable.map((f) => f.subject)).toEqual(['(census source column)']);
-    expect(out.notExecutable[0].description).toMatch(/SEAM car 5b/);
   });
 
   it('the CLEAN control passes once a holder is licensed, and the two refusals are WITHHELD', () => {
@@ -897,10 +908,59 @@ describe('A13 — the PROVENANCE move, counted and NOT-EXECUTABLE until the hold
       citing += 1;
       byBlock.set(entry.block, (byBlock.get(entry.block) || 0) + count);
     }
+    // ⭐⭐ THE EXECUTABLE VERDICTS, now that the `source` column exists (SEAM car 5b). Every
+    // citing variant is walked as a one-piece composed unit through the SAME arm, with a
+    // `sourceOf` built from the committed census.
+    //
+    // ⚠ THE HOLDER IS THE SHIPPED ROSTER'S KEEPER AND NOT THIS TOWN'S, AND THAT IS STATED
+    // RATHER THAN GLOSSED. The corpus walk has no settlement, so `holderOf(kind, settlement)`
+    // has nothing to resolve against; the register's own `holder` is null by construction. So
+    // the reader names the institution the SHIPPED CATALOG offers for the kind, which is a real
+    // institution of the game rather than a placeholder, and the town-resolved verdict is the
+    // taste's (car 6). Without this, every licensed pool would read WITHHELD for want of a
+    // holder and the tally would measure the walk's own blindness.
+    const keeperOf = (kind) => Object.entries(INSTITUTION_SERVICES).find(([, services]) => Object
+      .keys(services).some((name) => (HOLDER_RECORDS.find((r) => r.kind === kind)?.services || []).includes(name)))?.[0] ?? null;
+    const sourceOf = (key) => {
+      const row = censusByPool.get(key);
+      if (!row?.source) return null;
+      const { kind, kinds, standing } = row.source;
+      return { kind, holder: kinds.length ? keeperOf(kinds[0]) : null, standing };
+    };
+    /** @type {Map<string, number>} */
+    const verdicts = new Map();
+    /** @type {Map<string, number>} */
+    const byStanding = new Map();
+    for (const entry of corpus) {
+      if (provenanceCount(entry.text) === 0) continue;
+      const key = `${entry.block} :: ${entry.pool}`;
+      const unit = {
+        blockId: entry.block,
+        poolKey: entry.pool,
+        text: entry.text,
+        pieces: [{
+          role: 'spine', key, text: entry.text, marks: entry.marks || [], slots: entry.slots || [],
+        }],
+      };
+      const out = armA13(unit, { register: 'R1', sourceOf });
+      const verdict = out.fails.length ? 'FAIL' : (out.withheld.length ? 'WITHHELD' : 'LICENSED');
+      verdicts.set(verdict, (verdicts.get(verdict) || 0) + 1);
+      const standing = sourceOf(key)?.standing ?? '(no census row)';
+      byStanding.set(`${verdict} <- ${standing}`, (byStanding.get(`${verdict} <- ${standing}`) || 0) + 1);
+    }
     console.log(`\nA13 · the CITATION habit before any budget is set`
       + `\n  variants naming a record holder: ${citing} of ${corpus.length}`
-      + `\n  by block: ${[...byBlock.entries()].sort().map(([block, n]) => `${block} ${n}`).join(' · ')}\n`);
+      + `\n  by block: ${[...byBlock.entries()].sort().map(([block, n]) => `${block} ${n}`).join(' · ')}`
+      + `\n  EXECUTABLE VERDICTS (SEAM car 5b): `
+      + `${[...verdicts].sort().map(([v, n]) => `${v} ${n}`).join(' · ')}`
+      + `\n  by the pool's register standing: `
+      + `${[...byStanding].sort().map(([k, n]) => `${k} ${n}`).join(' · ')}\n`);
     expect(citing).toBeGreaterThan(0);
+    // ⛔ NON-VACUITY: the walk answered for every citing variant, and the arm is executable now
+    // (no NOT-EXECUTABLE row can be reached with a reader in hand).
+    expect([...verdicts.values()].reduce((a, b) => a + b, 0), 'every citing variant got a verdict').toBe(citing);
+    expect(armA13({ ...cited, pieces: cited.pieces }, { sourceOf }).notExecutable,
+      'and with a reader in hand the arm is executable').toEqual([]);
     // SHRINK-ONLY. The wave may cite less; it may not quietly cite more before the sitting
     // sets the budget the owner's directive asks the bands for.
     expect(citing).toBeLessThanOrEqual(18);

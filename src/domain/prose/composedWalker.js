@@ -800,11 +800,11 @@ export function provenanceCount(text) {
  * is COUNTED per pool and per register on the REPORT channel until the sitting sets its budget
  * from the bands, and a citation whose holder the census does not license is WITHHELD.
  *
- * ⛔ IT IS NOT-EXECUTABLE AT THIS TIP AND THAT IS PRINTED RATHER THAN PASSED. The `source`
- * column — `{kind, holder, standing}` per field — is SEAM car 5b's, and it does not exist yet.
- * With no column there is no standing to read, so every licensing question answers
- * NOT-EXECUTABLE naming the column, and only the COUNT is reported. The day 5b lands, the same
- * arm reads `sourceOf` and the WITHHELD limb below starts firing with no other change.
+ * ⛔ THE `source` COLUMN LANDED AT SEAM CAR 5b — `{kind, holder, standing}` per pool, written by
+ * `holderTable.js` into every census row — and this arm was written to meet it with no change
+ * of its own: a caller that hands it `sourceOf` gets the WITHHELD and FAIL limbs below, and a
+ * caller that hands it none still answers NOT-EXECUTABLE naming the column rather than passing
+ * by default. The COUNT is reported either way, because the budget is still the sitting's.
  *
  * ⛔ AND NO NEW MARK IS MINTED. The owner's rule gives the DM face of an INTERESTED fact a
  * `holder` mark "the audience filter reads (a `dm-only` mark today)". `dm-only` is a mark the
@@ -826,7 +826,7 @@ export function armA13(unit, options) {
     'the unit names the holder of a record, which is a PROVENANCE move and spends a budget the sitting has not yet set'));
   if (!options.sourceOf) {
     emit(out, row(id, 'A13', 'NOT-EXECUTABLE', '(census source column)', 'absent',
-      'the holder census is SEAM car 5b, so no `source` column exists yet and no cited holder can be licensed or refused'));
+      'this caller brought no reader of the holder census, so no cited holder can be licensed or refused here'));
     return out;
   }
   for (const piece of piecesOf(unit)) {

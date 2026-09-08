@@ -53,6 +53,7 @@
  * argument and returns NOT-EXECUTABLE without one (car 7's tuning-register lesson: a number
  * this module invented would become a design constraint nobody re-asked).
  */
+import { sourceOfRow } from './holderTable.js';
 import { classifyMoves, orderIdOf } from './moveGrammar.js';
 import {
   balancedSlice, branchPath, fieldChains, guardFields, readingAliases,
@@ -503,6 +504,12 @@ export function callArguments(src, fn) {
  * @property {number|null} [k] the fact budget `3 - |reads|`; null when UNRESOLVED
  * @property {number|null} [rateBp] the firing share on the RATE corpus, in basis points
  * @property {0|1|null} [departure] the norm bit, frozen at the pool's birth car
+ * ── SEAM car 5b's column (SITTING §Q), written by `decorateRows` in the same second pass ──
+ * @property {{kind: string, kinds: string[], fields: Record<string, string>, holder: null,
+ *   holderReason: string, standing: string, twoSource: boolean}} [source] the in-world SOURCE of
+ *   every fact this pool reads: the record-holder KIND per field, the row's own standing, and a
+ *   `holder` that is null WITH ITS REASON because a register is not a town (`holdersOf` names
+ *   the institution and `standingOf` its standing once a settlement is supplied)
  */
 
 /**
@@ -1563,6 +1570,10 @@ export function decorateRows(rows, input) {
     row.k = row.status === WIRING_STATUS.RESOLVED ? 3 - row.reads.length : null;
     row.rateBp = null;
     row.departure = null;
+    // ⭐ THE SOURCE COLUMN (SITTING §Q.4 step 1). It is written HERE and not in the ladder
+    // because it reads `row.reads`, which the narrowing above has only just settled; the
+    // resolution itself is the holder table's and this module keeps none of its vocabulary.
+    row.source = sourceOfRow(row);
   }
   return refusals;
 }

@@ -34,10 +34,17 @@ import {
 } from '../../src/domain/prose/wiringCensus.js';
 import {
   aliasDraft, aliasKey, astLineIndex, astTokens, buildCensus, CANDIDATE_LEAF_DIR,
-  CANDIDATE_LEAF_SUFFIX, candidateLeafIndex, censusCheck, CENSUS_JSON,
-  draftSources, EVIDENCE_ORDER, factMounts, producerIndex, relationsFromSitting, relationTable,
-  serialise, wilsonBp, wilsonFloorCount,
+  CANDIDATE_LEAF_SUFFIX, candidateLeafIndex, censusCheck, censusDry, CENSUS_JSON,
+  draftSources, EVIDENCE_ORDER, factMounts, producerCitations, producerIndex,
+  relationsFromSitting, relationTable, serialise, wilsonBp, wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
+import {
+  fieldSourceOf, FIELD_REASONS, holderCensus, HOLDER_KINDS, holderKindOfField, HOLDER_RECORDS,
+  HOLDER_REASONS, HOLDER_SOURCES, holdersOf, sourceOfForTown, sourceOfRow, sourceSummary,
+  sourcesAllCited, standingOf, tableFieldsOf, uncitedSourcesOf,
+} from '../../src/domain/prose/holderTable.js';
+import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
+import { DUTY_SERVICE_KINDS } from '../../src/domain/institutions/institutionTable.js';
 // ⛔ THE SHIPPED RULE, IMPORTED, NEVER RE-SPELLED HERE (car 0e). The first cut of the per-tier
 // arm kept a second copy of the silence rule in this file, so the fixture proved the copy and
 // the corpus figure proved the script, and nothing tied the two together. The estate's idiom
@@ -430,7 +437,7 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     expect(allUnresolved.resolved, 'and one with nothing resolved is a third').toBe(0);
   });
 
-  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its TWELVE modules', () => {
+  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its THIRTEEN modules', () => {
     // ⛔ WIDENED FROM ONE MODULE TO TEN (INSTR-912 car 10, cure 10; FOLD-2 hazard H8). The
     // arm fenced `wiringCensus` alone, so a §913 or wave car could wire `entryWalker`,
     // `grammarWalker`, `moveGrammar`, `presenceMeasure`, `plantLedger`, `proseFingerprint`,
@@ -442,6 +449,12 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       'src/domain/prose/entryLexicons.js',
       'src/domain/prose/entryWalker.js',
       'src/domain/prose/grammarWalker.js',
+      // ⭐ THE THIRTEENTH, ADDED BY SEAM CAR 5b. The holder table answers "who keeps the record
+      // this fact comes from", which is a question a DM PANEL would very much like to ask at
+      // render, and it is the first island module that reads a SETTLEMENT rather than a
+      // source string. That makes it the likeliest of the thirteen to be reached for by a
+      // product surface, and the fence is cheapest before that happens rather than after.
+      'src/domain/prose/holderTable.js',
       'src/domain/prose/moveGrammar.js',
       'src/domain/prose/plantLedger.js',
       'src/domain/prose/presenceMeasure.js',
@@ -484,7 +497,16 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       for (const hit of hits) if (!inIsland(hit)) breaches.push(`${module} <- ${hit}`);
     }
     expect(breaches, 'no product surface reaches the island').toEqual([]);
-    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not twelve copies of the same fence:
+    // AND THE THIRTEENTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND, which is the
+    // paired positive for the module this car lands: the census writes the `source` column
+    // through it and nothing else in the estate names it. A fence that held because nothing
+    // imports the module at all would pass the loop above and prove nothing.
+    const holderHits = files.filter(([, text]) => text.includes('holderTable')).map(([p]) => p);
+    expect(holderHits, 'the census IMPORTS it; the composed walker NAMES it in arm A13\'s docblock,'
+      + ' which is lawful because both are inside the island')
+      .toEqual(['src/domain/prose/composedWalker.js', 'src/domain/prose/holderTable.js',
+        'src/domain/prose/wiringCensus.js']);
+    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not thirteen copies of the same fence:
     // the census names exactly one module of the eleven, so the equality the first cut
     // asserted is kept as the sharpest single case rather than lost inside the loop.
     const censusHits = files.filter(([, text]) => text.includes('wiringCensus')).map(([p]) => p);
@@ -1439,9 +1461,14 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // src/generators/, so a car that edits a generator comment can move them; they are
     // asserted because they are this car's FINDING and a drift should be seen, not because
     // they are structural.
-    expect(draft.rows.length, 'candidate rows at this tip').toBe(33);
-    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(14);
-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(75);
+    // ⛔ 7 AND NOT 33 SINCE SEAM car 5b: the `docblock` kind is WITHDRAWN from `rows` and
+    // survives as a REPORT channel only (SITTING §P.2-27 EXTENDED; the chair's ruling on car
+    // 3h §3h.6 item 2). Twenty-six of the thirty-three candidates rested on a comment line.
+    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(7);
+    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
+    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
+    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(28);
+    expect(draft.rows.every((r) => r.evidence !== 'docblock'), 'no row rests on a comment').toBe(true);
     // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
     // the nine citations the first cut carried were not writes of world state at all — a
     // `reason:` prose string, a comment line, a template string and two arrow parameters of a
@@ -1466,19 +1493,317 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     /** @type {Set<string>} */
     const proposed = new Set(draft.rows.map((r) => r.endpoint));
     const joined = committed.relations.rows.filter((r) => proposed.has(r.a) && proposed.has(r.b));
-    expect(joined.length, 'relation rows that WOULD join under the draft').toBe(4);
-    expect(joined.map((r) => `${r.a} ${r.direction} ${r.b}`)).toEqual([
-      'condition:famine a->b system:food_security',
-      'condition:famine a->b system:public_legitimacy',
-      'condition:boom a->b system:public_legitimacy',
-      'signal:occupied a->b cause:occupation',
-    ]);
+    // ⭐⭐ ZERO, AND THAT IS THE WITHDRAWAL'S WHOLE MEASUREMENT. All four rows that "WOULD
+    // join" under the draft — `condition:famine -> system:food_security`,
+    // `condition:famine -> system:public_legitimacy`, `condition:boom ->
+    // system:public_legitimacy` and `signal:occupied -> cause:occupation` — reached BOTH their
+    // endpoints only through a docblock candidate. With comments out of the evidence, the
+    // draft's own join agrees with the shipped one: car 0's F1 holds at every grade.
+    expect(joined.length, 'relation rows that WOULD join under the draft').toBe(0);
+    // NON-VACUITY, because a zero is the easiest number for a broken walk to answer: the
+    // draft still lands on ONE endpoint of a relation row, so the join is empty by
+    // measurement and not because `proposed` went dark.
+    const oneEnded = committed.relations.rows.filter((r) => proposed.has(r.a) !== proposed.has(r.b));
+    expect(oneEnded.length, 'rows the draft reaches on exactly one endpoint').toBeGreaterThan(0);
     // ⛔ AND NOTHING IS RATIFIED: the shipped join is still zero, and the draft is in no leaf.
     // Anchored on `relations`, a key the committed census DOES carry: a bare exclusion would
     // pass just as happily if the JSON's whole top level drifted away.
     expect(committed.relations.join.strictBoth, 'the shipped join is unmoved').toBe(0);
     expectAbsentWithAnchor(Object.keys(committed), 'aliases', 'relations',
       'the committed census\'s top level');
+  });
+});
+
+describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q)', () => {
+  test('⭐⭐ EVERY MAPPING ROW IS CITED TO A PRODUCER THE TREE STILL CARRIES, and a false one reds', () => {
+    // THE TABLE IS A DECLARATION THE GATE CAN CATCH LYING, exactly as `COLUMN_SOURCES` is
+    // (`institutionTable.js:121`): each row claims a `file:line` where the estate WRITES the
+    // token it maps, and this arm re-derives all of them from a live syntax-tree pass.
+    const { cites, files } = producerCitations();
+    expect(files, 'the producer walk read the estate, not an empty tree').toBeGreaterThan(1000);
+    /** @type {string[]} */
+    const stale = [];
+    for (const [token, row] of Object.entries(HOLDER_SOURCES)) {
+      if (!(cites.get(token) || []).includes(row.cite)) stale.push(`${token} -> ${row.cite}`);
+    }
+    expect(stale, 'every holder-table citation is a live producer write').toEqual([]);
+    // ⛔ THE PLANT, through the SAME reader: a citation to a line that writes nothing is
+    // caught. Without it the loop above would pass on an empty `cites` map just as happily.
+    expect((cites.get('incomeSources') || []).includes('src/generators/economy/economicState.js:1'),
+      'a fabricated line of a real producer file is refused').toBe(false);
+    expect((cites.get('thisTokenIsWrittenNowhere') || []).length, 'and an invented token has no citation').toBe(0);
+  });
+
+  test('the COLUMN_SOURCES arms convict this roster too: every kind is fully cited or names its gaps', () => {
+    for (const kind of HOLDER_KINDS) {
+      const rows = Object.values(HOLDER_SOURCES).filter((r) => r.kind === kind);
+      if (rows.length === 0) {
+        expect(sourcesAllCited(kind), `${kind} maps no field, so it is not "all cited"`).toBe(false);
+        continue;
+      }
+      expect(sourcesAllCited(kind), `${kind} is fully cited`).toBe(true);
+      expect(uncitedSourcesOf(kind), `${kind} names no uncited row`).toEqual([]);
+    }
+    // THE TWO KINDS THAT MAP NO FIELD AT THIS TIP, named rather than left to be noticed.
+    const unmapped = HOLDER_KINDS.filter((k) => !Object.values(HOLDER_SOURCES).some((r) => r.kind === k));
+    expect(unmapped, 'kinds no census field resolves to').toEqual(['census', 'tradition']);
+  });
+
+  test('⭐ THE RECORD-SERVICE LISTS ARE THE SHIPPED ROSTER\'S OWN WORDS, re-measured here', () => {
+    /** @type {Set<string>} */
+    const shipped = new Set();
+    for (const services of Object.values(INSTITUTION_SERVICES)) {
+      for (const name of Object.keys(services)) shipped.add(name);
+    }
+    expect(shipped.size, 'the service catalog is read, not an empty object').toBeGreaterThan(500);
+    /** @type {string[]} */
+    const invented = [];
+    for (const record of HOLDER_RECORDS) {
+      for (const service of record.services) if (!shipped.has(service)) invented.push(`${record.kind}: ${service}`);
+    }
+    expect(invented, 'no kind claims a service name the catalog does not carry').toEqual([]);
+    // ⭐ `rosterBacked` AND `dutyNamed` ARE RE-DERIVED, never believed. A kind is backed when
+    // some institution of the shipped roster offers one of its record services; `dutyNamed`
+    // is the estate's one duty regex counted over the same list.
+    for (const record of HOLDER_RECORDS) {
+      const kind = record.kind;
+      const backers = Object.entries(INSTITUTION_SERVICES)
+        .filter(([, services]) => Object.keys(services).some((n) => record.services.includes(n)))
+        .map(([inst]) => inst);
+      expect(backers.length > 0, `${kind} declares rosterBacked ${record.rosterBacked}`).toBe(record.rosterBacked);
+      expect(record.services.filter((n) => DUTY_SERVICE_KINDS.test(n)).length,
+        `${kind} declares dutyNamed ${record.dutyNamed}`).toBe(record.dutyNamed);
+    }
+    // ⛔ THE WIRING DEBT THE WAVE INHERITS, as an exact list rather than a count nobody reads.
+    const summary = sourceSummary(census.rows);
+    expect(summary.kindsWithNoInstitution, 'holder kinds with NO institution in the shipped roster')
+      .toEqual(['tradition']);
+    console.log(`\nSEAM 5b · THE HOLDER CENSUS on the shipped corpus`
+      + `\n  ROWS      LICENSED ${summary.rows.LICENSED} · OFFICE ${summary.rows.OFFICE}`
+      + ` · SOURCE-UNRESOLVED ${summary.rows['SOURCE-UNRESOLVED']} of ${census.rows.length}`
+      + ` (two-source ${summary.twoSourceRows}; ${summary.rowsWithNoReading} read nothing at all)`
+      + `\n  FIELDS    LICENSED ${summary.fields.LICENSED} · OFFICE ${summary.fields.OFFICE}`
+      + ` · SOURCE-UNRESOLVED ${summary.fields['SOURCE-UNRESOLVED']}`
+      + ` (no mapping ${summary.unresolvedGrounds['no-mapping']},`
+      + ` no institution ${summary.unresolvedGrounds['no-institution-in-roster']})`
+      + `\n  by KIND   ${summary.byKind.map(([k, n]) => `${k} ${n}`).join(' · ')}`
+      + `\n  the table ${holderCensus().map((h) => `${h.kind} ${h.fields}`).join(' · ')}\n`);
+  });
+
+  test('⭐⭐ A TABLED KEY FUNCTION RESOLVES THROUGH THE TABLE\'S OWN FIELDS — A0b\'s blindness is NOT inherited', () => {
+    // ⛔ THE FINDING THIS ARM CLOSES (SEAM car 5, §5.8 item 1; the chair's ruling 4 on car 5).
+    // Rung 3 writes `"<reader> (via <TABLE> in <file>)"` as the row's whole reading, so arm A0b
+    // declares itself NOT-EXECUTABLE on DS-DEF-2 — the very block ARCH §6.4 works its example
+    // on. The source column reads the TABLE'S FIELDS instead, so the same 22 rows answer.
+    expect(tableFieldsOf('invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)'))
+      .toEqual(['walls', 'garrison', 'militia']);
+    expect(tableFieldsOf('text(terrainKey) (via TERRAIN_POOL_BY_KEY in economyStateProse.js)'),
+      'the wrapper call name is not a field').toEqual(['terrainKey']);
+    expect(tableFieldsOf('text(model?.mandate?.phrase) (via MANDATE_POOL_BY_PHRASE in warFaithStateProse.js)'))
+      .toEqual(['model', 'mandate', 'phrase']);
+    expect(tableFieldsOf('first (via STABILITY_LADDER in powerStateProse.js)'),
+      'a bare identifier reader is its own field').toEqual(['first']);
+    expect(tableFieldsOf('eco.foodSecurity.stockpile'), 'a plain path passes through whole')
+      .toEqual(['eco.foodSecurity.stockpile']);
+    expect(tableFieldsOf(''), 'and nothing answers nothing').toEqual([]);
+    // THE SHIPPED BLOCK, ROW BY ROW: 26 pools, every one of them sourced through real fields.
+    const defTwo = census.rows.filter((r) => r.block === 'DS-DEF-2');
+    expect(defTwo.length, 'DS-DEF-2 carries this many pools').toBe(26);
+    const standings = defTwo.reduce((m, r) => m.set(r.source.standing, (m.get(r.source.standing) || 0) + 1), new Map());
+    expect(standings.get('LICENSED'), 'the invasion and beast rows resolve their holder').toBe(13);
+    expect(standings.get('SOURCE-UNRESOLVED'), 'the internal, economic and disaster rows do not').toBe(13);
+    let sourcedFields = 0;
+    for (const row of defTwo) {
+      for (const field of Object.keys(row.source.fields)) {
+        sourcedFields += 1;
+        // anchored: the collection cannot have drifted away — `sourcedFields` is asserted at its exact count below
+        expect(field, `${row.pool} sources a real field and never an instrument label`).not.toContain('(via ');
+      }
+    }
+    expect(sourcedFields, 'and the walk actually saw the block\'s whole field set, not an empty one').toBe(66);
+    const invasion = defTwo.find((r) => r.pool === 'Invasion & War: walls with citizen militia');
+    expect(invasion.source.fields, 'the three fields ARCH §4.4 names, each with its holder').toEqual({
+      walls: 'muster', garrison: 'muster', militia: 'muster',
+    });
+  });
+
+  test('the FIRST HOP is most-specific-first, and a field no row names is UNRESOLVED, never guessed', () => {
+    expect(holderKindOfField('forces.garrison.present').kind, '`present` names no row, `garrison` does').toBe('muster');
+    expect(holderKindOfField('forces.garrison.present').token).toBe('garrison');
+    expect(holderKindOfField('settlement.defenseProfile.economicGates.military').token,
+      'and `military` names none, so `economicGates` answers').toBe('economicGates');
+    expect(holderKindOfField('legitimacy.breakdown').kind, 'the legitimacy breakdown is the court\'s').toBe('court');
+    expect(holderKindOfField('condition.severity'), 'a field no row names answers nothing').toBe(null);
+    expect(fieldSourceOf('condition.severity').reason).toBe(FIELD_REASONS.NO_MAPPING);
+    expect(fieldSourceOf('structuralViolations').standing, 'the record\'s own audit is the OFFICE\'s').toBe('OFFICE');
+    expect(fieldSourceOf('structuralViolations').reason).toBe(FIELD_REASONS.OFFICE);
+    expect(fieldSourceOf('forces.walls.present').standing).toBe('LICENSED');
+    // THE FOURTH REASON, driven on a table whose kind has no institution behind it.
+    const unbacked = { someField: { kind: 'tradition', cite: 'fixture:1', read: true } };
+    expect(fieldSourceOf('a.someField', unbacked).standing).toBe('SOURCE-UNRESOLVED');
+    expect(fieldSourceOf('a.someField', unbacked).reason).toBe(FIELD_REASONS.NO_INSTITUTION);
+  });
+
+  test('⛔ THE PLANT: a table that maps every field to the OFFICE reds — the office does not keep the muster', () => {
+    const musterRow = { reads: ['forces.walls.present', 'forces.garrison.present'] };
+    const honest = sourceOfRow(musterRow);
+    expect(honest.standing, 'the shipped table licenses a muster holder').toBe('LICENSED');
+    expect(honest.kind).toBe('muster');
+    expect(honest.holder, 'and the register names no institution, because a register is not a town').toBe(null);
+    expect(honest.holderReason).toBe(HOLDER_REASONS.TOWN);
+    // THE PLANTED TABLE: every token of the shipped roster re-pointed at the office.
+    const allOffice = Object.fromEntries(Object.entries(HOLDER_SOURCES)
+      .map(([token, row]) => [token, { ...row, kind: 'office' }]));
+    const planted = sourceOfRow(musterRow, allOffice);
+    expect(planted.standing, 'and the plant makes the muster the office\'s own books').toBe('OFFICE');
+    expect(planted.kind).toBe('office');
+    expect(planted.standing).not.toBe(honest.standing);
+    // AND THE STRONGEST-WINS RULE, with its own control: one licensed field among unresolved
+    // ones still licenses a citation, because a citation names ONE holder (arm A13's question).
+    const mixed = sourceOfRow({ reads: ['condition.severity', 'forces.walls.present'] });
+    expect(mixed.standing, 'one licensed reading licenses the row').toBe('LICENSED');
+    expect(sourceOfRow({ reads: ['condition.severity'] }).standing, 'and none licenses none')
+      .toBe('SOURCE-UNRESOLVED');
+    expect(sourceOfRow({ reads: [] }).holderReason, 'a row that reads nothing says so')
+      .toBe(HOLDER_REASONS.UNRESOLVED);
+    // A TWO-SOURCE FACT is counted as one, and named as two.
+    const two = sourceOfRow({ reads: ['forces.walls.present', 'eco.incomeSources'] });
+    expect(two.twoSource).toBe(true);
+    expect(two.kinds).toEqual(['muster', 'treasury']);
+  });
+
+  test('⭐ THE SECOND HOP resolves a KIND to THIS TOWN\'S institution, and to null WITH ITS REASON', () => {
+    const town = {
+      institutions: [{ name: 'Parish burial grounds' }, { name: 'Town watch' }],
+      availableServices: {
+        Religious: [{ name: 'Register of the dead', institution: 'Parish burial grounds' }],
+        Defense: [{ name: 'Night patrol', institution: 'Town watch' }],
+      },
+    };
+    expect(holdersOf('parish', town), 'the keeper of the dead').toEqual(['Parish burial grounds']);
+    expect(holdersOf('watch', town), 'a night patrol keeps no record').toEqual([]);
+    expect(holdersOf('tradition', town), 'and the kind with no service list holds nothing').toEqual([]);
+    const sourced = sourceOfForTown({ reads: ['faith.piety.trend'] }, town);
+    expect(sourced.kind).toBe('parish');
+    expect(sourced.holder, 'THIS town\'s institution, named').toBe('Parish burial grounds');
+    expect(sourced.standing, 'and it is not a power here').toBe('LICENSED');
+    // ⛔ A LICENSED KIND WITH NO INSTITUTION IN THIS TOWN IS `holder: null` WITH THE REASON.
+    const bare = sourceOfForTown({ reads: ['faith.piety.trend'] }, { institutions: [], availableServices: {} });
+    expect(bare.holder).toBe(null);
+    expect(bare.absent, 'the gap is named, never inferred').toEqual([
+      'holder (this town instantiates no institution that keeps this record)',
+    ]);
+    expect(sourceOfForTown({ reads: ['condition.severity'] }, town).standing).toBe('SOURCE-UNRESOLVED');
+  });
+
+  test('⭐ STANDING IS TYPED FACTS ONLY, and the facts the engine does not hold are printed ABSENT', () => {
+    const town = {
+      institutions: [
+        { name: 'Town watch', impairments: [{ type: 'corruption' }] },
+        { name: 'Parish church', impairments: [] },
+      ],
+    };
+    const bought = standingOf('Town watch', town, { compromised: { covert: ['Town watch'], revealed: [] } });
+    expect(bought.corrupt, 'a covert stooge in the watch').toBe(true);
+    expect(bought.interested, 'so the holder is a power with an interest').toBe(true);
+    expect(bought.marks).toContain('corrupt');
+    const clean = standingOf('Parish church', town, { compromised: { covert: [], revealed: [] } });
+    expect(clean.interested, 'and the clean control is not interested').toBe(false);
+    // ⛔ THE ABSENCES ARE NAMED WITH THE READER THAT WOULD HOLD THEM, so a reader knows the
+    // difference between "not captured" and "the engine holds no capture fact for this town".
+    expect(clean.captured, 'no faction states: absent, never false').toBe(null);
+    expect(clean.controlled, 'no world state: absent, never false').toBe(null);
+    expect(clean.absent.length).toBe(2);
+    for (const gap of clean.absent) expect(gap).toMatch(/worldPulse\//);
+    // AND WHEN THE CALLER DOES HOLD THEM, they read.
+    const captured = standingOf('Town watch', town, { captureState: 'capture', patron: 'the Salters' });
+    expect(captured.captured).toBe(true);
+    expect(captured.controlled).toBe(true);
+    expect(captured.absent, 'nothing is absent once the caller supplies both').toEqual([]);
+    // ⛔ AND A HOLDER IS AN INSTITUTION, NEVER A NAMED PERSON: the reason is the institution
+    // table's own hardcoded null, which this table inherits rather than works around.
+    expect(HOLDER_KINDS.includes('holderRole'), 'no kind is a person').toBe(false);
+  });
+
+  test('⭐ THE DRY READ: both modes, and the one that writes is not among them', () => {
+    // ⛔ THE HAZARD (SEAM car 5, §5.8 item 3): the script had four modes and none could answer
+    // "what would change?" without writing the committed register. Car 5 ran that write by
+    // accident doing exactly this. `--dry` is a pure comparison, so this arm drives it.
+    const text = readFileSync(CENSUS_JSON, 'utf8');
+    const current = censusDry(text, committed);
+    expect(current.ok, 'the committed register is current at this tip').toBe(true);
+    expect(current.rowsMoved, 'and no row would move').toBe(0);
+    expect(current.sections, 'and no section would move').toEqual([]);
+    expect(current.bytes.committed, 'the byte reading is the file\'s own length')
+      .toBe(Buffer.byteLength(text, 'utf8'));
+    // THE STALE LIMB, driven on a doctored copy so no committed byte is touched.
+    const moved = JSON.parse(text);
+    moved.rows[0].source = { ...moved.rows[0].source, standing: 'OFFICE' };
+    const stale = censusDry(serialise(moved), committed);
+    expect(stale.ok).toBe(false);
+    expect(stale.rowsMoved, 'exactly the row that moved').toBe(1);
+    expect(stale.rowExamples).toEqual([`${committed.rows[0].block} :: ${committed.rows[0].pool}`]);
+    expect(stale.sections).toContain('rows');
+    // AND THE TWO MODES AGREE: `--check` and `--dry` answer the same question, one by throwing
+    // and one by reporting, so a lane can read the register without taking the door.
+    expect(censusCheck(text, committed).ok).toBe(current.ok);
+    expect(censusCheck(serialise(moved), committed).ok).toBe(stale.ok);
+  });
+
+  test('⛔⛔ THE INSTRUMENT MINTS NO PRODUCER TOKEN A DESK READS — the defect this car caused and cured', () => {
+    // ⛔ MEASURED, NOT FEARED. The producer index reads every object-literal key under
+    // `src/domain/**` as a WRITE of world state (car 3f-0's rule, from the other side). The
+    // first cut of `holderTable.js` keyed its record table on the KIND, so `court`, `elders`,
+    // `parish` and `toll-bar` entered the estate's produced set on the strength of an
+    // instrument naming them, and FOUR DS-DEF-2 rows moved their `absent` label from
+    // `not-produced` to `measured` because the defence desk reads a field called `court`.
+    // The table is an ARRAY of rows now and the kind is a VALUE, so nothing is minted.
+    const { writes } = astTokens(readFileSync(join(ROOT, 'src/domain/prose/holderTable.js'), 'utf8'));
+    expect(writes.length, 'the module was parsed, not skipped').toBeGreaterThan(50);
+    const { cites } = producerCitations();
+    const own = 'src/domain/prose/holderTable.js';
+    const minted = [...new Set(writes.map((w) => w.name))]
+      .filter((token) => (cites.get(token) || []).every((c) => c.startsWith(own))).sort();
+    /** @type {Set<string>} */
+    const readTokens = new Set();
+    for (const row of census.rows) {
+      for (const path of row.reads || []) {
+        for (const token of String(path).split(/[^A-Za-z_$0-9]+/)) if (token) readTokens.add(token);
+      }
+    }
+    expect(readTokens.size, 'the read-token set is the corpus\'s, not an empty one').toBeGreaterThan(100);
+    expect(minted.filter((token) => readTokens.has(token)),
+      'no token this instrument alone writes is a field any pool reads').toEqual([]);
+    // ⛔ THE PLANT, through the SAME two readers: the shape the first cut had. `court` is a
+    // token the corpus reads, so a table that keyed a row on it would be caught here.
+    expect(readTokens.has('court'), 'the control: `court` IS a field the corpus reads').toBe(true);
+    expect(astTokens('export const T = Object.freeze({ court: 1 });').writes.map((w) => w.name),
+      'and a table keyed on the kind writes that token').toEqual(['court']);
+    expect(astTokens('export const T = Object.freeze([{ kind: \'court\' }]);').writes.map((w) => w.name),
+      'while the shipped array shape writes only its own field names').toEqual(['kind']);
+  });
+
+  test('⛔ THE DOCBLOCK KIND IS WITHDRAWN: a comment pairing two tokens proposes nothing', () => {
+    // SITTING §P.2-27 EXTENDED (the chair on car 3h §3h.6 item 2). The kind minted a row out
+    // of two English words sharing one comment line, and the note recording that re-minted it.
+    const docs = new Map([['fixture/composer.js',
+      '// the eco reading is what food_security means on this row\nconst x = 1;\n']]);
+    const draft = aliasDraft({
+      endpoints: ['system:food_security'], roots: ['eco'], paths: [], docs,
+    });
+    expect(draft.rows, 'a comment proposes NO candidate').toEqual([]);
+    expect(draft.docblockReports.length, 'and is reported instead').toBe(1);
+    expect(draft.docblockReports[0]).toEqual({
+      endpoint: 'system:food_security',
+      readRoot: 'eco',
+      at: 'fixture/composer.js:1',
+      line: '// the eco reading is what food_security means on this row',
+    });
+    // THE CONTROL: the same pair on a READ PATH still proposes, so the withdrawal removed one
+    // evidence kind and not the draft's ability to see anything.
+    expect(aliasDraft({
+      endpoints: ['system:food_security'], roots: ['eco'], paths: ['eco.foodSecurity.label'], docs,
+    }).rows.length, 'an identifier candidate survives').toBe(1);
   });
 });
 
