@@ -961,9 +961,13 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     expect([...verdicts.values()].reduce((a, b) => a + b, 0), 'every citing variant got a verdict').toBe(citing);
     expect(armA13({ ...cited, pieces: cited.pieces }, { sourceOf }).notExecutable,
       'and with a reader in hand the arm is executable').toEqual([]);
-    // SHRINK-ONLY. The wave may cite less; it may not quietly cite more before the sitting
-    // sets the budget the owner's directive asks the bands for.
-    expect(citing).toBeLessThanOrEqual(18);
+    // SHRINK-ONLY, AND THE CEILING FOLLOWED THE COUNT DOWN AT CAR 5c. It stood at 18 while
+    // the PROVENANCE detector carried a generic reporting-verb limb; SITTING §R c-16 narrowed
+    // the vocabulary to the twelve holder kinds and 11 of those 18 proved to name no holder at
+    // all. A shrink-only ratchet left at 18 would silently re-admit them. The wave may cite
+    // less; it may not quietly cite more before the sitting sets the budget the owner's
+    // directive asks the bands for.
+    expect(citing).toBeLessThanOrEqual(7);
   });
 });
 

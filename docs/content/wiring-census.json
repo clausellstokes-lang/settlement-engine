@@ -37,8 +37,8 @@
     "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
-      "THIN": 482,
-      "COVERED": 226,
+      "THIN": 483,
+      "COVERED": 225,
       "MISSING-AT-TIER": 45
     },
     "tierSilences": 352,
@@ -6731,7 +6731,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 2,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "forces.walls.present",
@@ -8301,7 +8301,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -11950,7 +11950,7 @@
       ],
       "hasBag": true,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [
         "eco.incomeSources",
@@ -13285,7 +13285,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -13623,7 +13623,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -20467,7 +20467,7 @@
       ],
       "hasBag": false,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -21357,7 +21357,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [
         "readings.criticalIssueCount"
@@ -23745,7 +23745,7 @@
       ],
       "hasBag": true,
       "variants": 5,
-      "grammars": 3,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -24088,7 +24088,7 @@
       ],
       "hasBag": true,
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "predicate": [
         {
           "field": "legitimacy.governanceFractured",
@@ -39188,7 +39188,7 @@
         "DS-POW-1 :: governanceFractured true"
       ],
       "variants": 4,
-      "grammars": 4,
+      "grammars": 3,
       "blocks": [
         "DS-POW-1"
       ]
@@ -48222,7 +48222,7 @@
       "subject": "UNWALLED-LARGE",
       "fields": [],
       "readingFunction": "wallRationalePoolKey",
-      "count": "2 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48443,12 +48443,12 @@
       "count": "3 variant(s) · 2 grammar(s) · slots {chain, institution}"
     },
     {
-      "tier": "COVERED",
+      "tier": "THIN",
       "block": "DS-ECO-5",
       "subject": "MAGICALLY SUSTAINED: a large prop (high magicRecovery)",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {chain}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {chain}"
     },
     {
       "tier": "COVERED",
@@ -49012,7 +49012,7 @@
       "subject": "INCOME MIX: a criminal line is present",
       "fields": [],
       "readingFunction": "criminalIncomePoolKey",
-      "count": "3 variant(s) · 3 grammar(s) · slots {faction, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {faction, settlement}"
     },
     {
       "tier": "THIN",
@@ -49192,7 +49192,7 @@
       "subject": "HERALD KIND: hungry_gap",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {season, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -49256,7 +49256,7 @@
       "subject": "BELIEVED TREND diverges from the ring",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 3 grammar(s) · slots {counterpart, settlement}"
+      "count": "3 variant(s) · 2 grammar(s) · slots {counterpart, settlement}"
     },
     {
       "tier": "THIN",
@@ -50342,7 +50342,7 @@
       "subject": "PRINT-NATIVE CHAPTER OPENERS: economics",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50494,7 +50494,7 @@
       "subject": "criticalIssueCount zero",
       "fields": [],
       "readingFunction": "criticalIssuePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -50832,7 +50832,7 @@
       "subject": "Contested",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "5 variant(s) · 3 grammar(s) · slots {seat, settlement}"
+      "count": "5 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
@@ -50890,7 +50890,7 @@
         "legitimacy.governanceFractured"
       ],
       "readingFunction": "legitimacyLensPoolKey",
-      "count": "4 variant(s) · 4 grammar(s) · slots {seat, settlement}"
+      "count": "4 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",

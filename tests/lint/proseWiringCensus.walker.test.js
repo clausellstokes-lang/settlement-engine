@@ -550,17 +550,23 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // from all three, so two of the three could drift silently under the rebase that H6 says
     // must re-measure everything. MISSING fell 58 → 34 when cure 3 taught the membership test
     // to read `fieldsRead` and to normalise with `rootOf`.
-    // ⭐ THIN 483 -> 482 AND COVERED 225 -> 226 AT SEAM CAR 5, and the ground is one sentence:
-    // the classifier learned the owner's PROVENANCE move (SITTING §Q; MOVE-GRAMMAR §4.4.3), so
-    // 18 of the 2,266 shipped variants now realise a move sequence that names the RECORD as
-    // well as the state. `grammars` is `new Set(orderIdOf(classifyMoves(text)) || the raw
-    // sequence)` per pool, so 15 pools gained a distinct order and ONE of them — the only one
-    // whose whole THINness rested on having a single grammar — left THIN for COVERED.
-    // The counts are recomputed FRESH from the live modules here, which is why they move with
-    // the classifier rather than with the committed JSON.
+    // ⭐ THIN 483 -> 482 AND COVERED 225 -> 226 AT SEAM CAR 5, THEN BACK TO 483 / 225 AT CAR 5c
+    // — AND THE ROUND TRIP IS THE HONEST RECORD OF A CLASSIFIER CORRECTED, NOT A FLIP-FLOP.
+    // Car 5 taught the classifier the owner's PROVENANCE move (SITTING §Q; MOVE-GRAMMAR
+    // §4.4.3) and 18 of the 2,266 shipped variants read as citations, moving 15 pools'
+    // `grammars` and carrying ONE pool — the only one whose whole THINness rested on having a
+    // single grammar — from THIN to COVERED. The skeptic fold then measured the ground: 11 of
+    // those 18 rested on a GENERIC reporting-verb limb naming no holder kind at all (two read
+    // "the record has" / "the record holds"), so the majority of the count was not a citation
+    // in SITTING §Q.2's sense. Car 5c narrowed the detector to the twelve holder kinds
+    // (SITTING §R c-16): 7 citations survive, 9 of the 15 rows return to their pre-car-5
+    // `grammars`, the six carrying a real KIND citation stay moved, and the one pool that
+    // crossed the tier line crosses back. `grammars` is `new Set(orderIdOf(classifyMoves(text))
+    // || the raw sequence)` per pool. The counts are recomputed FRESH from the live modules
+    // here, which is why they move with the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(482);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(226);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(483);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(225);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(census.rows.length);
     for (const row of tiers) {

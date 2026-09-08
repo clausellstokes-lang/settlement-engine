@@ -203,13 +203,26 @@ export const CLAUSE_DETECTORS = Object.freeze([
   // ⭐ PROVENANCE SITS BESIDE CONTRADICTION BECAUSE BOTH ARE ASSERTIONS ABOUT THE RECORD
   // RATHER THAN ABOUT THE TOWN, and it must outrank the state detectors below for the same
   // reason ABSENCE and OPEN do: "the muster roll is long" states which BOOK holds the number
-  // before it states the number. The vocabulary is the holder table's KINDS as the owner
-  // named them (treasury, muster, census, parish, toll-bar, market, watch, court, elders,
-  // road) and nothing wider: a bare `record` or `count` is a common noun and reading it as a
-  // citation would manufacture a habit the corpus does not have. MEASURED at this tip: 18 of
-  // 2,266 shipped variants carry the shape, and 15 of them thereby realise a move sequence
-  // outside LEVEL1 — which is the finding, not a defect of the detector.
-  { move: 'PROVENANCE', re: /\b(the (?:treasury|watch|parish|market|court|customs)(?:'s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll|tithe) (?:roll|rolls|books|register)|the elders (?:say|hold|remember|keep)|from the road|the (?:rolls|registers?|ledgers?|books?|records?) (?:say|says|show|shows|hold|holds|carry|carries|name|names|record|records|have|has))\b/i },
+  // before it states the number. The vocabulary is the holder table's TWELVE KINDS as the
+  // owner named them (treasury, muster, census, parish, toll-bar, market, watch, court,
+  // elders, tradition, road, office) and NOTHING WIDER: a bare `record` or `count` is a
+  // common noun, and a generic reporting verb ("the books say") names no holder at all, so
+  // reading either as a citation would manufacture a habit the corpus does not have.
+  //
+  // ⚠ NARROWED AT SEAM CAR 5c, AND THE SENTENCE ABOVE WAS FALSE UNTIL IT WAS (SITTING §R
+  // c-16). The row carried a third limb — `the (rolls|registers|ledgers|books|records)
+  // (say|shows|holds|carries|names|records|has)` — plus `customs` and `tithe` (neither a
+  // kind), and omitted `census`, `office` and `tradition` (all three kinds). The skeptic
+  // fold measured the damage: of 18 citing variants 11 rested on the generic limb ALONE and
+  // two literally read "the record has" / "the record holds", so a majority of the count
+  // resolved to no holder kind at all while this docblock asserted the opposite in the
+  // product source. SITTING §Q.2 defines the move as a count from an interested party or a
+  // record whose holder is a power, never any sentence in which a book reports something.
+  // MEASURED at this tip with the limb gone: 7 of 2,266 shipped variants carry the shape
+  // (kind-only 7 · generic-only 0 · both 0, printed and asserted as integers by
+  // tests/lint/proseMoveGrammar.walker.test.js), and all seven thereby realise a move
+  // sequence outside LEVEL1 — which is the finding, not a defect of the detector.
+  { move: 'PROVENANCE', re: /\b(the (?:treasury|watch|parish|market|court|census|office)(?:'s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll) (?:roll|rolls|books|register)|the elders (?:say|hold|remember|keep)|the tradition (?:says|holds|remembers|keeps)|from the road)\b/i },
   { move: 'OPEN', re: /\b(unsettled|unresolved|contested|still open|not (yet )?(decided|settled|answered)|stands open|pending|no one has (decided|settled)|remains? open)\b/i },
   { move: 'CONSEQUENCE', re: /\b(cost|costs|paid for|pays for|falls on|fell on|the bill|charged to|comes out of|is borne by|at the expense of|at a loss|the loss is)\b/i },
   // ⚠ THE HISTORY DETECTOR CARRIES NO BARE `was`/`were`, and that is a MEASURED narrowing.

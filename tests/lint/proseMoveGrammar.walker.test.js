@@ -32,7 +32,8 @@ import {
   openerOf, openingShape, runCeilingFor, segmentCount, tenseOf, walkGrammar, wallScopeCensus,
 } from '../../src/domain/prose/grammarWalker.js';
 import {
-  classifyMoves, GRAMMAR_TAG_CONTRACT, LEVEL1_ORDERS, NON_MOVES, orderIdOf, readGrammar, WALLS,
+  classifyMoves, CLAUSE_DETECTORS, clauseUnits, GRAMMAR_TAG_CONTRACT, LEVEL1_ORDERS, NON_MOVES,
+  orderIdOf, readGrammar, WALLS,
 } from '../../src/domain/prose/moveGrammar.js';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../../src/domain/prose/proseFingerprint.js';
 import { typedFactsOf } from '../../src/domain/prose/entryWalker.js';
@@ -685,5 +686,129 @@ describe('the walk over the shipped corpus — REPORTED, and the arms that canno
       ['FEELING', 'FIGURE', 'FORECAST', 'MEANING', 'SAYING', 'VERDICT'],
     );
     for (const spec of Object.values(NON_MOVES)) expect(spec.detect).toBeInstanceOf(RegExp);
+  });
+});
+
+// ── THE PROVENANCE DETECTOR'S VOCABULARY (SITTING §R c-16; the seam fold's R1) ───────
+//
+// The fold refuted the shipped docblock at b573bb5f4: of 18 citing variants, 11 rested on a
+// generic reporting-verb limb naming NO holder kind at all (two literally read "the record
+// has" / "the record holds"), and a frozen register had been re-taken on that ground. Car 5c
+// narrowed the row to the twelve kinds. THIS ARM EXISTS SO THE SITTING BUDGETS ON A FIGURE IT
+// UNDERSTANDS: the split is printed and asserted as three integers beside the total, and the
+// withdrawn limb is driven as a LIVE control over the same corpus, so the arm cannot go
+// vacuous — the eleven sentences are still in the leaves, and the assertion is that the
+// shipped detector no longer reads them as citations.
+
+/** The KIND limb: the twelve holder kinds, each naming the BOOK that holds the record. */
+const PROVENANCE_KIND_LIMB = /\b(the (?:treasury|watch|parish|market|court|census|office)(?:'s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll) (?:roll|rolls|books|register)|the elders (?:say|hold|remember|keep)|the tradition (?:says|holds|remembers|keeps)|from the road)\b/i;
+
+/** The GENERIC limb, WITHDRAWN at car 5c and kept here as the control that proves the split. */
+const PROVENANCE_GENERIC_LIMB = /\b(the (?:rolls|registers?|ledgers?|books?|records?) (?:say|says|show|shows|hold|holds|carry|carries|name|names|record|records|have|has))\b/i;
+
+/** One sentence per kind, so a kind dropped from the vocabulary reds by name. */
+const KIND_CONTROLS = Object.freeze({
+  treasury: 'the treasury\'s ledgers run three years behind',
+  muster: 'the muster roll is long',
+  census: 'the census count was taken two winters ago',
+  parish: 'the parish register names every one of them',
+  'toll-bar': 'the toll rolls show a lean season',
+  market: 'the market books are kept by the guild',
+  watch: 'the watch register carries the names',
+  court: 'the court rolls are sealed',
+  elders: 'the elders remember a drier year',
+  tradition: 'the tradition holds that the well never failed',
+  road: 'from the road it looks prosperous',
+  office: 'the office books close at midwinter',
+});
+
+/** What the narrowed vocabulary REFUSES: a bare record, a generic verb, and two non-kinds. */
+const NOT_A_CITATION = Object.freeze([
+  'the books say the mill is idle',
+  'the record has two readings',
+  'the records show a lean year',
+  'the rolls carry three hundred names',
+  'the customs books are current',
+  'the tithe roll is short',
+]);
+
+describe('the PROVENANCE detector cites the twelve holder kinds and nothing wider (SITTING §R c-16)', () => {
+  it('splits the shipped citations as THREE INTEGERS beside the total: kind-only 7 · generic-only 0 · both 0', async () => {
+    const leaves = await loadStateLeaves();
+    const cited = leaves.filter((v) => classifyMoves(v.text).includes('PROVENANCE'));
+    let kindOnly = 0; let genericOnly = 0; let both = 0;
+    for (const v of cited) {
+      const k = PROVENANCE_KIND_LIMB.test(v.text);
+      const g = PROVENANCE_GENERIC_LIMB.test(v.text);
+      if (k && g) both += 1; else if (k) kindOnly += 1; else if (g) genericOnly += 1;
+    }
+    // THE CONTROL THAT MAKES THE ZERO MEAN SOMETHING: the withdrawn limb's own sentences are
+    // still in the corpus. If a later car re-admits the limb these eleven become citations
+    // again, `cited.length` reads 18 and `genericOnly` reads 11, and both lines below red.
+    const genericNotCited = leaves.filter(
+      (v) => PROVENANCE_GENERIC_LIMB.test(v.text)
+        && !PROVENANCE_KIND_LIMB.test(v.text)
+        && !classifyMoves(v.text).includes('PROVENANCE'),
+    );
+    console.log(`\nPROVENANCE · ${cited.length} citing variants of ${leaves.length}\n`
+      + `  kind-only ${kindOnly} · generic-only ${genericOnly} · both ${both}\n`
+      + `  carrying the WITHDRAWN generic limb but NOT cited: ${genericNotCited.length}\n`
+      + `${cited.map((v) => `    ${v.block} :: ${v.pool} | ${(v.text.match(PROVENANCE_KIND_LIMB) || [''])[0]}`).join('\n')}\n`);
+    expect(cited.length).toBe(7);
+    expect(kindOnly).toBe(7);
+    expect(genericOnly).toBe(0);
+    expect(both).toBe(0);
+    expect(genericNotCited.length).toBe(11);
+  });
+
+  it('every one of the twelve kinds is live, and the withdrawn vocabulary is refused', () => {
+    for (const [kind, text] of Object.entries(KIND_CONTROLS)) {
+      expect(classifyMoves(text), `${kind} must cite`).toContain('PROVENANCE');
+    }
+    expect(Object.keys(KIND_CONTROLS)).toHaveLength(12);
+    for (const text of NOT_A_CITATION) {
+      expect(classifyMoves(text), `"${text}" names no holder kind`).not.toContain('PROVENANCE');
+    }
+  });
+
+  it('the shipped row carries no generic reporting-verb limb, and no non-kind token', () => {
+    const row = CLAUSE_DETECTORS.find((d) => d.move === 'PROVENANCE');
+    expect(row).toBeTruthy();
+    const src = String(row?.re.source);
+    // The withdrawn limb, by its own head: a bare book noun followed by a reporting verb.
+    expect(src).not.toMatch(/rolls\|registers\?\|ledgers\?\|books\?\|records\?/);
+    expect(src).not.toContain('customs');
+    expect(src).not.toContain('tithe');
+    for (const kind of ['treasury', 'muster', 'census', 'parish', 'toll', 'market',
+      'watch', 'court', 'elders', 'tradition', 'road', 'office']) {
+      expect(src, `${kind} is a holder kind and must be in the vocabulary`).toContain(kind);
+    }
+  });
+
+  it('U5 — the reading does not depend on the row\'s PRIORITY POSITION', async () => {
+    // `classifyMoves` collects EVERY detector that fires and orders them by match index, so
+    // position decides only ties. Measured at car 5c over all six leaves with the row moved
+    // to LAST in CLAUSE_DETECTORS: 0 of 2,266 move sequences differ. Held here in the form
+    // the walker can execute without a second module: no OTHER detector claims any of the
+    // seven citing clauses at the same index, so no tie exists for position to break.
+    const leaves = await loadStateLeaves();
+    const cited = leaves.filter((v) => classifyMoves(v.text).includes('PROVENANCE'));
+    const ties = [];
+    for (const v of cited) {
+      for (const unit of clauseUnits(v.text)) {
+        const at = CLAUSE_DETECTORS
+          .map((d) => { const m = d.re.exec(unit); return m ? { move: d.move, at: m.index } : null; })
+          .filter((m) => m !== null);
+        const prov = at.find((m) => m?.move === 'PROVENANCE');
+        if (!prov) continue;
+        for (const other of at) {
+          if (other && other.move !== 'PROVENANCE' && other.at === prov.at) {
+            ties.push(`${v.block} :: ${v.pool} | ${other.move} ties PROVENANCE at ${prov.at}`);
+          }
+        }
+      }
+    }
+    expect(cited.length).toBe(7);
+    expect(ties).toEqual([]);
   });
 });
