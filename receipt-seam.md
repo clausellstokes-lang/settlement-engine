@@ -4,8 +4,9 @@ Seat: Opus 5 — implementer. Chair: Fable 5.1.
 
 ## CAR 3a — THE SEAM, UNREACHABLE (ARCH §12 row 3a)
 
-**STATUS: PARTIAL — in flight.** A session can die with no notice; every section below is
-written as it is executed and nothing here is a prediction unless it says so.
+**STATUS: LANDED** — car 3a at `22ff295a4`, car 3a-b at `84388a185`, porcelain 0.
+Every section below was written as it was executed; nothing here is a prediction unless it
+says so, and the one written prediction (§3a.1) is scored against its measurement in §3a.9.
 
 ### 3a.0 ARRIVAL — executed
 
@@ -269,3 +270,195 @@ and are not in this run. (The base is DERIVED here, not measured: a second whole
 against a tree without the new file would have cost ninety seconds to confirm one subtraction,
 and the subtraction's two inputs are both executed figures above.) Gate check in its own shell
 call before every run: `HOLD-VITEST` absent, split-pattern runner count **0**.
+
+### 3a.8 ⛔ THE RED THIS CAR REFUSES TO CURE, WITH ITS MEASUREMENT — THE WIRING CENSUS INTERLOCK
+
+`tests/lint/proseWiringCensus.walker.test.js` reds on ONE arm, `stale-bytes`. The delta is a
+single integer over a 1,806,768-byte file, and it is exactly this car's seven new src files:
+
+```
+$ node -e "<buildCensus({rates: <the committed rate block>}) and serialise, as the walker does>"
+committed 1806768   fresh 1806768   equal false
+$ diff docs/content/wiring-census.json $SC/seam/census-fresh2.json
+14c14
+<     "producerIndexFiles": 1145
+---
+>     "producerIndexFiles": 1152
+$ diff … | wc -l   =>  5      (one hunk, one figure, nothing else in the census moves)
+```
+
+**WHY IT IS NOT CURED HERE.** Re-taking the census is `node scripts/wiring-census.mjs`, which
+REWRITES the committed register `docs/content/wiring-census.json`. That is a register door.
+ARCH §12 row 3a's `doors` column reads **none**, and the brief budgets this car exactly ONE
+door — the lighting census, as sub-car 3a-b, by its own ritual. "The chair takes every register
+act at the landing" (the lane preamble). So the figure is predicted, measured, and handed over.
+
+**AND A SECOND HALF THE CHAIR MUST SEE, BECAUSE THE RE-TAKE ALONE WOULD LAND A FALSE
+SENTENCE.** The census's own stamp carries a hand-written string that car 0 wrote in
+anticipation of this exact car:
+
+```
+scripts/wiring-census.mjs:916
+  candidateLeaves: 'none at this tip: car 3a lands src/domain/display/stateProse/*StateProseCandidates.js',
+```
+
+After this commit that sentence is FALSE — the six leaves exist. Re-running the census would
+faithfully re-emit the stale claim, because the string is a literal in the script, not a
+measurement. Curing it properly means editing `scripts/wiring-census.mjs`, which is outside
+this car's declared file list ("NO change to any desk, pool leaf, `dossierMounts.js`,
+`legibilityRung.js`, persisted shape or seed input" — and the census script is not in the
+"change only" list either). **The honest cure is one act by the chair or by car 3b:** turn
+`candidateLeaves` into a MEASUREMENT (the leaf count, or the leaves' shas) rather than a
+sentence, then re-run the census; the `producerIndexFiles` figure moves 1145 → 1152 in the
+same act.
+
+**A STRUCTURAL FINDING BESIDE IT, worth a line in the ledger.** `producerIndexFiles` is a
+COUNT of files in the producer trees, so the census interlock reds for ANY car that adds ANY
+file under those trees — whether or not it touches a composer, and whether or not any census
+ROW moves. The per-file `stamp.files` shas are the precise instrument (seven files, the six
+composers and the mount registry, and none of them moved here); the count beside them is a
+tripwire on unrelated growth. Cars 3b–3g and car 4 will each hit it. Recorded, not cured.
+
+### 3a.9 CAR 3a-b — THE LIGHTING CENSUS, REFROZEN BY ITS OWN RITUAL
+
+```
+$ LIGHTING_CENSUS_REFREEZE='SEAM car 3a (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js      ; exit=1 BY DESIGN
+Error: census REFROZEN at 22ff295a49866d264e8157280de0653cc1c92b43 by SEAM car 3a (Opus 5):
+  files 2553 -> 2555, parked 375 -> 375, credited 2178 -> 2180,
+  titles 23843 -> 23894, suiteTitles 6377 -> 6393.
+  This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate.
+      Tests  1 failed | 33 passed (34)
+
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js        ; exit=0
+      Tests  34 passed (34)
+```
+
+**THE PREDICTION IN §3a.1 WAS WRONG IN TWO PLACES, AND THE MEASUREMENT CONVICTED BOTH.**
+Recorded because that is what a written prediction is for:
+
+| figure | predicted | measured | why the prediction missed |
+|---|---|---|---|
+| `files` | 2562 (or 2560) | **2555** | the census counts TEST files only, so the seven new `src/` files move nothing. Both stated readings were wrong. |
+| `parked` | 375 | **375** | right |
+| `credited` | 2187 (or 2185) | **2180** | the same error |
+| `titles` | 23901 (+58) | **23894 (+51)** | `tests/domain/stateProseKernel.test.js` is a PARKED file, and `classify()` gives a parked file `titles: []`. Extending it by seven arms moves NO census figure. |
+| `suiteTitles` | 6394 (+17) | **6393 (+16)** | the same: the one new `describe()` in the parked kernel file does not count |
+
+The two new files' own counts were exact: 42 + 9 = **51** titles and 13 + 3 = **16** suites,
+which is the whole of the movement.
+
+### 3a.10 THE RESUME COMMAND, RUN AT THE TIP
+
+```
+$ npx vitest run tests/domain/composeStateProse.test.js tests/property/dossierProseManifest.test.js
+                                                                                     ; exit=0
+ Test Files  2 passed (2)
+      Tests  56 passed (56)
+```
+
+```
+$ npx vitest run tests/lint                                       ; exit=1   (final, at 84388a185)
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > the committed census is byte-identical …
+ Test Files  1 failed | 147 passed (148)
+      Tests  1 failed | 2399 passed (2400)
+```
+
+One red, and it is §3a.8's refused register door. Nothing else in `tests/lint` is red.
+
+### 3a.11 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **`hashKey` is a SECOND kernel export, beyond the brief's "the one function added".** The
+   composer must mint three keys (the face, the joint, the salience order) and ARCH §2.4 rules
+   that all of them use "the kernel's one hash pair; no second hash is introduced" — while
+   `tests/lint/fnv1a32Identity.walker.test.js` holds the tree at 22 `fnv1a32` definitions,
+   shrink-only, so a local copy in the composer would red by name. Exporting the pair once was
+   the only shape that satisfies both. `drawVariant` is byte-untouched.
+
+2. **The three frozen leaves are an OPTION with a default, not three hidden module reads.**
+   §4.1 says the composer imports them; they do not exist until car 4. Carrying their FLOOR
+   values as constants is forced. Making them an input as well is the call: without it the
+   DEPARTURE signal, the `tension` seat and the entire clause arrangement would ship as
+   branches nothing could execute, because the shipped leaves are empty BY MEASUREMENT (car
+   0's F1). Car 4 swaps each constant for its import at one site. **Veto shape:** if the chair
+   would rather no test seam exist in product code, the alternative is to land car 3a with the
+   clause arrangement absent and add it in car 4 beside the leaves.
+
+3. **The composer's return shape is EXACTLY §4.1's**, and the position budget therefore lives
+   in a second exported function, `composeStateProseMount`, rather than in an extra field on
+   the unit. It ranks each rung on its own top candidate BEFORE composing, then composes each
+   rung once — with its candidates or with an empty list — so no draw is spent twice and the
+   arrangement is genuinely over draws already made.
+
+4. **A `consequence` that cannot take the clause seats as an `addition` — the RELATION changes
+   with the seat, not only the seat.** §4.5 says a cause "seats here [addition]"; the first
+   execution proved the stronger reading is forced, because `consequence` has exactly one list
+   and it is the CLAUSE list, so a fallback that kept its declared relation finds no list and
+   silently fails to seat at all. The piece records the EFFECTIVE relation.
+
+5. **`COMPOSITION_BOUNDS` is one frozen record rather than two named constants** — forced by
+   the tuning register's P2 rule (new files at zero) and taken in preference to raising a
+   ceiling (not a lane's act) or inlining two magic numbers (which the instrument counts at
+   nothing and which is worse code). §3a.7 carries the reasoning; the file carries it too.
+
+6. **The coupling family row is REFUSED** (§3a.5), and **the wiring-census re-take is REFUSED**
+   (§3a.8). Both with their measurements.
+
+7. **`reads` is not in ARCH §2.3's shipped `PoolMeta`, and the fact budget spends `|spine.reads|`.**
+   The composer reads an absent `reads` as ONE fact — the modal spine (91 of 118 key functions
+   read one fact) and the reading that leaves the budget at its documented default of two.
+   **This is an open schema row for car 4:** either the leaf carries a reads COUNT, or the
+   budget is spent on something the render half can see. Named in the code at `factBudget`.
+
+8. **The per-cell base-side arm cannot tell `vid` from `index` at this tip** — 0 of 73,284
+   recorded cells have them differ, measured, printed, and PINNED AT ZERO in both directions so
+   the day a car makes a player face draw past a covert variant, a reader is told the arm has
+   become sensitive. The discrimination itself is driven synthetically beside it.
+
+### 3a.12 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The coupling family row REFUSED | that no LAYER_PATTERNS family should claim a display leaf, and that an `ARGUED_UNLAYERED` row is scoped out too | §3a.5 | ⭐⭐ the brief ordered the row |
+| The wiring-census re-take REFUSED, and its stamp SENTENCE now false | who re-takes the census, and whether `candidateLeaves` becomes a measurement first | §3a.8 | ⭐⭐ one red stands in `tests/lint` until it is taken |
+| The leaf seam (`options.leaves`) | whether a defaulted input in product code is acceptable to buy execution of three limbs | §3a.11 item 2 | ⭐ |
+| `hashKey` as a second kernel export | that one export beats a 23rd `fnv1a32` | §3a.11 item 1 | ⭐ |
+| `COMPOSITION_BOUNDS` shape | that the shape is a cure at cause and not a dodge of P2 | §3a.7, §3a.11 item 5 | ⭐ |
+| The fact budget's absent-`reads` default of 1 | whether car 4's `PoolMeta` carries a reads count | §3a.11 item 7 | ⭐ car 4 |
+| The `consequence` → `addition` relation fallback | that §4.5's "seats here" means the relation, not only the seat | §3a.11 item 4 | ⭐ |
+
+### 3a.13 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+$ git -C $SC/laneSEAM log --oneline -3
+84388a185 SEAM car 3a-b: the lighting census re-freezes at the seam's tip, by its own ritual
+22ff295a4 SEAM car 3a: the seam, unreachable — the composer, drawFace and the six candidate
+          leaves land with nothing calling them
+3b22b5c56 Register (capsule car): the base-state capsule regenerates at the §915 tip
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+```
+
+```
+npx vitest run tests/domain/composeStateProse.test.js tests/property/dossierProseManifest.test.js
+npx vitest run tests/domain/stateProseKernel.test.js tests/lint/composeStateProseFence.test.js
+npx vitest run tests/lint          # 1 red: the census interlock, §3a.8
+node scripts/check-domain-strict.mjs
+```
+
+**STATUS: CAR 3a AND 3a-b LANDED.**
+
+### 3a.14 THE SIX DATA LEAVES, SHA-IDENTICAL — the car's zero-corpus claim, executed
+
+```
+$ for f in src/data/dossierStateProse/*.generated.js; do <sha256 at 3b22b5c56> vs <sha256 at HEAD>; done
+defense.generated.js     base d5c083cdc3bc3acf  tip d5c083cdc3bc3acf  IDENTICAL
+economy.generated.js     base c6ef3e0a5d06f427  tip c6ef3e0a5d06f427  IDENTICAL
+general.generated.js     base 157cb06a42ac1fa8  tip 157cb06a42ac1fa8  IDENTICAL
+power.generated.js       base 43baa58745f54b49  tip 43baa58745f54b49  IDENTICAL
+stressors.generated.js   base 00dbc126f5f1755f  tip 00dbc126f5f1755f  IDENTICAL
+warFaith.generated.js    base b4d2624e295641d1  tip b4d2624e295641d1  IDENTICAL
+
+$ git diff --stat 3b22b5c56..HEAD -- src/data/
+(no output: zero corpus bytes across both commits)
+```

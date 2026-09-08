@@ -350,3 +350,6 @@ Control 4 stands: today's R1 leaves RED on arm E, which carries a fail channel. 
 
 ### §4.4.2 — V1 IS THE CLASSIFIER'S SILENT FALLBACK (chair, 2026-09-08; SITTING §M.2 item 53)
 `LEVEL1_ORDERS.V1 = { order: ['PRESENT'] }` is what the classifier returns when it recognises nothing, so a V1 share measured on RENDERED text is a floor on "nothing recognised", not a statement about the prose's grammar. Every V1 figure names its grain (AUTHORED with {slot} markers intact, or RENDERED) and its n. The authored grain is the one the rewrite is argued from (Part B §18 §16.2).
+
+### §4.4.3 — THE PROVENANCE MOVE (owner "Do it", 2026-09-08; SITTING §Q)
+A move that names the holder of the record a fact comes from ("the count is the watch's own"; "the toll roll, which the Salters keep, shows…" is refused for its "which" — write it as two sentences or a lawful joint). Licensed only where the census's `source` column resolves the holder for THIS town; budgeted from the exemplar bands like every move (the rate measured at the taste, car 6, and set at the sitting, car 7); classified by arm A13; a citation on a fact whose holder is the office itself is a finding (the office does not cite its own books).

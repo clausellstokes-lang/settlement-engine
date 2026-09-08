@@ -655,3 +655,9 @@ Seat: Fable 5.1 — validated.
 - **S2, the clause seat — SIGNED** (the register card's amendment S2): a computed consequence of a sentence's own fact may ride as a clause on it, under the guards SITTING §N.1 lists; every other second fact takes its own sentence.
 - **The index-stable draw — SIGNED, folded into Shift 1:** the variant pick becomes "highest hash over `seed::block::pool::v<vid>` wins" at the rewrite; one appended wording thereafter moves ≈ 1/(n+1) of a pool's reads, all to the new wording (chair-verified 24.17 % vs 75.71 %).
 - **The RATE population — uniform over the game's configuration choices**, with the wizard-default weighting printed as a report beside every rate; a declared re-cut when the beta's distribution exists.
+
+## 20. THE SOURCE OF EACH CONSTRUCTION (owner "Do it", 2026-09-08; SITTING §Q; §0–§12 untouched)
+- Every fact carries a typed SOURCE (the in-world holder of its record), derived from the producing system through a frozen holder table and resolved to this town's institution and standing; SOURCE-UNRESOLVED is printed, never inferred (SEAM car 5b, the holder census).
+- PROVENANCE is a move of the grammar with a budget from the exemplar bands (MOVE-GRAMMAR §4.4.3); a cited claim is two licensed claims; the spread and sibling-distance arms refuse a citation habit.
+- An interested fact has two licensed faces on one pool: the player's as compiled; the DM's naming the holder and its interest from typed capture, corruption and control facts.
+- Custom content inherits the source rule by shape.
