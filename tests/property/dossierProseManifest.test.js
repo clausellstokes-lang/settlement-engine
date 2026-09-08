@@ -39,11 +39,44 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import {
-  AUDIENCES, driftRun, goldenCorpus, keyOf, manifestBytes, poolIndex, sha256, templateMatches,
+  AUDIENCES, driftRun, goldenCorpus, keyOf, manifestBytes, MANIFEST_RECORDER_FILES, poolIndex,
+  recorderShas, sha256, templateMatches,
 } from '../helpers/dossierManifest.js';
 import { classifyCell, classifyCells, VERDICTS } from '../../scripts/prose-manifest-diff.mjs';
 import { drawVariant } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
+
+/**
+ * ⭐ EVERY REGISTERED MOUNT THE DRIFT CORPUS RECORDS NOTHING AT, WITH ITS REASON (the MEASURE
+ * fold's M-3, cure 6). 39 of 56 with no roster is the shape a later car passes vacuously
+ * through: a mount the manifest never records is a mount whose prose can move with the drift
+ * arm green. The roster is EXACT — a mount that leaves the recorded set without a row here
+ * reds, and a reasoned mount that starts recording reds too, because a stale reason is how a
+ * roster becomes decoration.
+ *
+ * ⛔ THE REASONS ARE NOT ASSERTIONS OF FAITH: the arm below re-measures the ground of every
+ * one of them against the committed census (the block fires on no town of the RATE grid
+ * either), so the day a block starts speaking, this roster fails until someone re-states it.
+ */
+const MOUNTS_THE_CORPUS_DOES_NOT_REACH = Object.freeze({
+  'defense.criminalStructure': 'DS-DEF-4 fires on no town of either corpus',
+  'economics.tradeFlow': 'DS-ECO-3 reads `flowDrift`, which EconomicsTab derives from the OWNING'
+    + ' CAMPAIGN\'s worldState; a headless corpus town belongs to no campaign, so the shipped tab'
+    + ' answers null here too',
+  'faith.creedStanding': 'DS-FTH-3 fires on no town of either corpus',
+  'faith.nicheRow': 'DS-FTH-3 fires on no town of either corpus',
+  'faith.patronSeat': 'DS-FTH-1 fires on no town of either corpus',
+  'overview.populationDirection': 'DS-POP-3 fires on no town of either corpus',
+  'overview.steadings': 'DS-GEN-8 fires on no town of either corpus',
+  'overview.stressorLifecycle': 'DS-STR-2 fires on no town of either corpus',
+  'plot_hooks.framing': 'DS-HK-1 fires on no town of either corpus',
+  'power.factionLadder': 'DS-POW-3 fires on no town of either corpus',
+  'relationships.network': 'DS-REL-1 fires on no town of either corpus',
+  'war.dormantNote': 'DS-WAR-3 fires on no town of either corpus',
+  'war.standing': 'DS-WAR-1 fires on no town of either corpus',
+  'war.treaties': 'DS-WAR-2 fires on no town of either corpus',
+});
 
 /** The committed roll-up. Named `-golden` on purpose: see the register row's note. */
 const MANIFEST_REL = 'tests/fixtures/dossier-prose-manifest-golden.json';
@@ -84,8 +117,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
 
   test('⭐ THE DRIFT ARM: no row added, no row removed, no row moved', () => {
     expect(existsSync(MANIFEST), `${MANIFEST_REL} is missing`).toBe(true);
-    /** @type {Record<string, string>} */
-    const fixture = JSON.parse(readFileSync(MANIFEST, 'utf8'));
+    const text = readFileSync(MANIFEST, 'utf8');
+    /** @type {{_provenance: Record<string, any>, rows: Record<string, string>}} */
+    const file = JSON.parse(text);
+    const fixture = file.rows;
     const live = run.rows;
     const added = [...live.keys()].filter((k) => !Object.hasOwn(fixture, k)).sort();
     const removed = Object.keys(fixture).filter((k) => !live.has(k)).sort();
@@ -93,9 +128,93 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     expect(added, 'rows the corpus grew').toEqual([]);
     expect(removed, 'rows the corpus lost').toEqual([]);
     expect(moved, 'rows whose composed prose moved').toEqual([]);
-    // AND THE BYTES, so a whitespace-only edit of the fixture convicts too.
-    expect(sha256(readFileSync(MANIFEST, 'utf8')), 'the fixture is exactly what this run produces')
-      .toBe(sha256(manifestBytes(live)));
+    // AND THE BYTES, so a whitespace-only edit of the fixture convicts too. The provenance the
+    // file carries is fed back in, so this arm compares the ROWS and the next one compares the
+    // provenance against the tree — two refusals rather than one that could be satisfied by
+    // editing both halves to agree with each other.
+    const { rows: _rows, rowsSha: _rowsSha, ...carried } = file._provenance || {};
+    expect(sha256(text), 'the fixture is exactly what this run produces')
+      .toBe(sha256(manifestBytes(live, carried)));
+  }, 120_000);
+
+  test('⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE', () => {
+    // SITTING §P.2-29. P12 measured the gap this closes: `recordGolden` is never called for
+    // this surface, so there is no write path and the fixture is updated by hand-edit today
+    // with nothing refusing it. The executable form of "the tip that wrote it" is the RECORDER
+    // — a git sha cannot be known by the run that is about to be committed, but the bytes of
+    // the code that produced the rows can be, and they are re-read from the tree here.
+    const file = JSON.parse(readFileSync(MANIFEST, 'utf8'));
+    const provenance = file._provenance || {};
+    expect(provenance.shift, 'the re-record is a DECLARED instrument shift').toBe('INSTRUMENT');
+    expect(String(provenance.ruling), 'and it names the ruling that ordered it').toMatch(/P\.2-29/);
+    expect(Object.keys(provenance.recorder || {}).sort(), 'the recorder is named file by file')
+      .toEqual([...MANIFEST_RECORDER_FILES].sort());
+    expect(provenance.recorder, 'a fixture whose recorder has moved since it was written is REFUSED:'
+      + ' re-record with `node scripts/prose-manifest-cells.mjs --record`').toEqual(recorderShas());
+    expect(provenance.rows, 'the row count it claims').toBe(run.rows.size);
+    expect(provenance.rowsSha, 'and the digest of the rows alone, so a hand-edited row reds twice')
+      .toBe(sha256(JSON.stringify(file.rows)));
+  }, 120_000);
+
+  test('⭐ REFUSAL 1: every recorded cell carries a REAL coordinate (index >= 0)', () => {
+    // ⛔ THE FOLD'S P8. `index = audible.indexOf(chosen)` answers −1 when the identified
+    // variant is not in that audience's audible pool at all, and nothing asserted otherwise:
+    // 309 player cells carried `index: -1` and DM-only prose, because the recorder called the
+    // economy desk at the DM face on both audiences. The base-normalisation arm agreed with
+    // itself (`pieces[0].index` and `cell.index` were both −1) and `run.unresolved` counts only
+    // cells that matched NO variant, so nothing in the suite could see it. SEAM car 3a pins
+    // the composer's `pieces` against this table: 309 rows no composer can reproduce would
+    // have been pinned as the target.
+    // ⚠ `null >= 0` IS TRUE IN JAVASCRIPT, so the refusal is written on the TYPE first. An
+    // unresolved cell records `index: null`, and a bare `>= 0` would wave it through — the
+    // paired control below is what caught that in this very arm.
+    const offCoordinate = run.cells.filter((c) => typeof c.index !== 'number' || c.index < 0)
+      .map((c) => `${c.cell} drew index ${c.index} on ${c.block} :: ${c.pool}`);
+    expect(offCoordinate.slice(0, 10), 'a cell whose variant is not in its own audience\'s pool')
+      .toEqual([]);
+    expect(offCoordinate.length, 'and none of them anywhere in the corpus').toBe(0);
+    // THE PAIRED CONTROL, so the predicate cannot go vacuous if `index` stops being recorded.
+    const synthetic = [{ cell: 'x', index: -1 }, { cell: 'y', index: 0 }, { cell: 'z', index: null }];
+    expect(synthetic.filter((c) => typeof c.index !== 'number' || c.index < 0).map((c) => c.cell),
+      'the refusal reads −1 and null alike').toEqual(['x', 'z']);
+    expect(run.cells.every((c) => c.pieces[0].index === c.index),
+      'and the piece carries the same coordinate the cell does').toBe(true);
+  }, 120_000);
+
+  test('⭐ REFUSAL 2: every registered MOUNT is recorded, or carries a measured reason', () => {
+    // ⛔ THE FOLD'S M-3. `DOSSIER_MOUNTS` registers 56 distinct mounts and the cell table
+    // reached 39 — with `economics.foodTile` returning real prose under the tab's recipe and
+    // null under the manifest's, so the absence was the RECIPE's and not the corpus's. A mount
+    // the manifest never records is a mount whose prose can move with the drift arm green.
+    const registered = [...new Set(DOSSIER_MOUNTS.map((m) => m.mount))].sort();
+    /** @type {Set<string>} */
+    const recorded = new Set();
+    for (const cell of run.cells) {
+      for (const mount of cell.cell.split('::')[2].split('|')) recorded.add(mount);
+    }
+    const reasoned = Object.keys(MOUNTS_THE_CORPUS_DOES_NOT_REACH).sort();
+    const absent = registered.filter((m) => !recorded.has(m));
+    expect(absent, 'every mount the corpus does not reach carries a reason, and no other does')
+      .toEqual(reasoned);
+    expect(registered.length, 'the registry\'s distinct mounts').toBe(56);
+    expect(registered.filter((m) => recorded.has(m)).length, 'and the manifest records this many')
+      .toBe(42);
+    // ⛔ AND THE REASONS ARE RE-MEASURED, NEVER TAKEN ON FAITH: every reasoned mount sits on a
+    // block that fires on NO town of the RATE grid either, so its silence here is the world's
+    // and not this recipe's. A block that starts speaking reds this arm until someone re-states
+    // the row — which is exactly what should have happened to the three economy mounts.
+    const census = JSON.parse(readFileSync(join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
+    const speaking = [];
+    for (const mount of reasoned) {
+      const blocks = new Set(DOSSIER_MOUNTS.filter((m) => m.mount === mount).map((m) => m.blockId));
+      const fires = census.rows.filter((r) => blocks.has(r.block) && r.rateBp !== null);
+      if (fires.length) speaking.push(`${mount}: ${fires.length} pool(s) fire on the RATE grid`);
+    }
+    expect(speaking, 'a reasoned absence whose block DOES speak somewhere is a stale reason').toEqual([]);
+    // The paired positive: a mount NOT on the roster really is recorded, so the roster is not
+    // simply the whole registry.
+    expect(recorded.has('economics.foodSecurity'), 'the economy desk speaks here').toBe(true);
+    expect(recorded.has('economics.foodTile'), 'and at the mount cure 1 gave back').toBe(true);
   }, 120_000);
 
   test('the base-side normalisation is the one-piece unit car 3a must reproduce', () => {
@@ -136,9 +255,12 @@ describe('the two controls no one-audience manifest can see', () => {
     /** @type {Array<{at: string, dm: object, player: object}>} */
     const differ = [];
     /** @type {string[]} */
-    const oneSided = [];
+    const dmOnly = [];
+    /** @type {string[]} */
+    const playerOnly = [];
     for (const [at, seat] of byPosition) {
-      if (!seat.dm || !seat.player) { oneSided.push(at); continue; }
+      if (seat.dm && !seat.player) { dmOnly.push(at); continue; }
+      if (!seat.dm && seat.player) { playerOnly.push(at); continue; }
       if (seat.dm.pool !== seat.player.pool || seat.dm.vid !== seat.player.vid
         || seat.dm.textSha !== seat.player.textSha) {
         differ.push({ at, dm: seat.dm, player: seat.player });
@@ -152,13 +274,31 @@ describe('the two controls no one-audience manifest can see', () => {
     // THE COUNT IS PINNED, because both directions are movements a reader must see: a cure
     // that stopped filtering the player face drives it up, and one that stopped composing the
     // player face at all drives it to zero.
-    expect(differ.length, 'cells where the two faces draw differently').toBe(36);
+    //
+    // ⭐ 36 POSITIONS BECAME 345 AT MEASURE CAR 3, AND THAT IS THE CURE ARRIVING, NOT A
+    // REGRESSION. The recorder called the economy desk at the DM face on BOTH audiences
+    // (`economyDeskRead` keys on `options.playerView`, which nothing passed), so the second
+    // live mixed pool — `DS-ECO-6 :: TIER: minor shadow activity (≥3)`, 309 positions — could
+    // not differ by construction. The whole non-vacuity of this control rested on ONE pool and
+    // the recipe blinded the other.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(345);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
-      'over this many of the twelve mixed pools').toBe(1);
-    // AND THE ONE-SIDED POSITIONS: a rung the DM sees and the player does not is the audience
-    // filter emptying a pool, which is lawful and is counted rather than assumed away.
-    process.stdout.write(`[dossier-prose-manifest] audience-divergent cells ${differ.length}`
-      + ` of ${byPosition.size} positions · positions on one face only ${oneSided.length}\n`);
+      'over this many of the twelve mixed pools').toBe(2);
+    // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
+    // check above runs only over positions present on BOTH faces, so a position that exists on
+    // one face alone was skipped and merely printed. The two directions are not the same fact:
+    // a rung the DM sees and the player does not is the audience filter emptying a pool, which
+    // is lawful; a rung the PLAYER sees and the DM does not is prose reaching the narrower
+    // audience only, which is a leak in the other direction and has no lawful reading.
+    expect(playerOnly, 'a position on the PLAYER face only, which no audience filter can produce')
+      .toEqual([]);
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(36);
+    // The paired control on the direction split itself, so it cannot go vacuous.
+    const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
+    expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),
+      'the reader tells a player-only position from a DM-only one').toEqual(['b']);
+    process.stdout.write(`[dossier-prose-manifest] audience-divergent positions ${differ.length}`
+      + ` of ${byPosition.size} · DM-only positions ${dmOnly.length} · player-only ${playerOnly.length}\n`);
   }, 120_000);
 
   test('⭐ THE PAIRED-TOWN COVERT ARM: no player cell is drawn from a covert pool', () => {
@@ -262,10 +402,26 @@ describe('the classifier — what KIND of movement, per cell', () => {
       'same pool, a different variant').toBe('RE-INDEXED');
     expect(classifyCell(base, { ...base, pool: 'Q', textSha: 'bbbb' }), 'a different pool')
       .toBe('REPLACED');
+    // ⭐ ADDITIVE ON A REAL ADDITION — the fixture rebuilt at MEASURE car 3 (the fold's M-2).
+    // The old fixture HELD `textSha` across a piece addition, and passed only because the
+    // classifier required that; a modifier beside a spine adds WORDS, so a cell that gained a
+    // piece and kept its text is a state the cell table cannot produce. Driven on the shape a
+    // real addition has: the spine holds, the pieces grow, the rendered text moves.
     expect(classifyCell(base, {
       ...base,
+      textSha: 'bbbb',
       pieces: [...spine(1, 1), { role: 'modifier', key: 'M', vid: 0, index: 0, face: 0 }],
-    }), 'a piece added beside an unchanged spine').toBe('ADDITIVE');
+    }), 'a piece added beside an unchanged spine, and the words it added').toBe('ADDITIVE');
+    // AND THE TWO NEGATIVES THAT KEEP IT FROM SWALLOWING ITS NEIGHBOURS: a piece added beside a
+    // spine that MOVED is a re-index, and a text that moved with no piece added is wording.
+    expect(classifyCell(base, {
+      ...base,
+      vid: 2,
+      textSha: 'bbbb',
+      pieces: [...spine(2, 1), { role: 'modifier', key: 'M', vid: 0, index: 0, face: 0 }],
+    }), 'the spine moved, so the addition is not what happened').toBe('RE-INDEXED');
+    expect(VERDICTS.indexOf('ADDITIVE') < VERDICTS.indexOf('WORDING-ONLY'),
+      'ADDITIVE is tested before WORDING-ONLY, or every addition would read as wording').toBe(true);
     expect(classifyCell(base, {
       ...base, pieces: [...spine(1, 1), { role: 'turn', key: 'T', vid: 0, index: 0, face: 0 }],
     }), 'a turn is a replacement, never an addition').toBe('REPLACED');

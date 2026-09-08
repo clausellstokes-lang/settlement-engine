@@ -45,7 +45,10 @@
  */
 import { writeFileSync } from 'node:fs';
 
-import { coOccurringPairs } from '../src/domain/prose/wiringCensus.js';
+import { coOccurringPairs, JS_METHOD_TAILS } from '../src/domain/prose/wiringCensus.js';
+import { computeChainSets } from '../src/components/new/tabHelpers.js';
+import { compareCodepoint } from '../src/domain/deterministicSort.js';
+import { deriveFoodBalance, deriveGranaryOutlook } from '../src/domain/display/dossierViewModel.js';
 import { CULTURES, TERRAIN_WEIGHTS } from '../src/generators/steps/resolveConfig.js';
 import { DEFAULT_CONFIG } from '../src/store/configSlice.js';
 import { generateSettlementPipeline } from '../src/generators/generateSettlementPipeline.js';
@@ -152,6 +155,67 @@ function harvestBare(node, out, depth = 0) {
 }
 
 /**
+ * THE ONE IMPAIRED HOUSE THE ECONOMY DESK MAY NAME, derived exactly as `ServicesTab.jsx:100`
+ * derives it: this tab's own impairment sets, the categories that are PRESENT, and the
+ * codepoint order that keeps the same settlement naming the same house on every machine. It
+ * is a caller reading, so an instrument that omits it composes a different world than the
+ * shipped one — the taste sample's `{}`-readings hazard at the reading grain.
+ * @param {object} settlement
+ * @returns {string|null}
+ */
+export function impairedInstitutionOf(settlement) {
+  const services = settlement?.availableServices || {};
+  const { impaired } = computeChainSets(settlement);
+  const catOrder = Object.keys(services).filter((k) => services[k]?.length).sort((a, b) => a.localeCompare(b));
+  const withImpairment = catOrder.filter((cat) => (services[cat] || []).some((svc) => {
+    const name = typeof svc === 'string' ? svc : svc?.name || '';
+    const inst = typeof svc === 'object' ? (svc?.institution || '') : '';
+    return impaired.has(name) || impaired.has(inst);
+  }));
+  return withImpairment
+    .flatMap((cat) => (services[cat] || []).map((svc) => (typeof svc === 'object' ? svc?.institution || '' : '')))
+    .filter((inst) => inst && impaired.has(inst))
+    .sort(compareCodepoint)[0] || null;
+}
+
+/**
+ * ⭐ THE ECONOMY DESK'S OPTIONS, BUILT AS THE FOUR SHIPPED TABS BUILD THEM — the cure the
+ * MEASURE fold's finding 1 names (SITTING §P.1, cure 1).
+ *
+ * ⛔ WHAT WENT WRONG, RECORDED WHERE THE NEXT READER WILL SEE IT. `economyDeskRead` takes
+ * `foodBalance`, `granaryOutlook`, `flowDrift` and `impairedInstitution` from its OPTIONS and
+ * defaults each to `null` (`economyDeskRead.js:104-110`), and it keys the audience on
+ * `options.playerView`, never on `options.audience`. An instrument that passed `{seed,
+ * audience}` therefore composed the economy desk with four readings absent and at the DM face
+ * on BOTH audiences: three FOOD pools could never fire on the RATE corpus, and the
+ * composed-prose manifest was two-audience on five desks and DM-face-twice on the sixth.
+ *
+ * ⚠ `flowDrift` IS NULL BY MEASUREMENT AND NOT BY OMISSION. `EconomicsTab.jsx:251-257` derives
+ * it from the OWNING CAMPAIGN's `worldState`; a headless corpus town belongs to no campaign,
+ * so the tab's own derivation answers null here too. It is passed explicitly so the absence is
+ * a stated reading rather than a forgotten one.
+ *
+ * ⚠ THE SEED STILL COMES FROM THE SETTLEMENT. `economyDeskRead` writes
+ * `seed: String(settlement._seed ?? settlement.id ?? '')` itself, so a caller's `seed` never
+ * reaches this desk. That is the shipped recipe and this function does not fight it; the
+ * consequence for the manifest's seedless control is measured and declared in the receipt.
+ * @param {object} settlement
+ * @param {{seed: string, audience: string}} opts
+ * @returns {{seed: string, audience: string, playerView: boolean, foodBalance: object|null,
+ *   granaryOutlook: object|null, flowDrift: object|null, impairedInstitution: string|null}}
+ */
+export function economyDeskOptions(settlement, opts) {
+  return {
+    ...opts,
+    playerView: opts.audience === 'player',
+    foodBalance: deriveFoodBalance(settlement),
+    granaryOutlook: deriveGranaryOutlook(settlement),
+    flowDrift: null,
+    impairedInstitution: impairedInstitutionOf(settlement),
+  };
+}
+
+/**
  * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
  * ONE SPELLING, and every caller of a composed town goes through it.
  *
@@ -203,7 +267,7 @@ export function deskReturns(s, opts, onThrow) {
     exploitation: s.resourceAnalysis?.exploitation,
     primaryImports: eco.primaryImports,
   }, opts));
-  desk('economy', () => economyDeskRead(s, opts));
+  desk('economy', () => economyDeskRead(s, economyDeskOptions(s, opts)));
   desk('power', () => {
     let contenders = null;
     try { contenders = coupContenders(s); } catch { /* the tab reads null too */ }
@@ -424,6 +488,7 @@ export function tierSilences(rateRows, tiers, sitesByBlock, censusRows) {
 /** @param {number} n @param {number} rateBp @returns {string} */
 const share = (n, rateBp) => `${n} (${rateBp} bp)`;
 
+
 /**
  * WHAT A PAIR MEMBER IS, and why the whole distribution cannot be read as facts (the
  * car-10 cure-4 lesson, applied to the pair table). `coOccurringPairs` builds a town's
@@ -436,15 +501,22 @@ const share = (n, rateBp) => `${n} (${rateBp} bp)`;
  *               for (`axis`, `label`, `granary`). It matches no held reading and the same
  *               token appears in several composers, so pairing on it joins two desks that
  *               were never talking about one fact
+ *   `method`    a dotted path whose LAST segment is a JavaScript method the key function
+ *               called on a reading — `eco.incomeSources.reduce` is `Array.prototype.reduce`
+ *               and not a reading of the world. The dot made it look like a fact, and 21 of
+ *               the 226 usable pairs (19 of the 170 clearing the bound) rested on this one
+ *               token until MEASURE car 3 (the fold's cure 10)
  *
  * A pair is USABLE only when BOTH members are dotted, re-rooted reading paths. Both counts
  * ship: the chair sets the floor from the usable distribution and can see what was excluded.
  * @param {string} field
- * @returns {'synthetic'|'unrooted'|'fact'}
+ * @returns {'synthetic'|'unrooted'|'method'|'fact'}
  */
 export function pairMemberClass(field) {
-  if (String(field).includes(' (via ')) return 'synthetic';
-  return String(field).includes('.') ? 'fact' : 'unrooted';
+  const text = String(field);
+  if (text.includes(' (via ')) return 'synthetic';
+  if (!text.includes('.')) return 'unrooted';
+  return JS_METHOD_TAILS.has(text.slice(text.lastIndexOf('.') + 1)) ? 'method' : 'fact';
 }
 
 /** The entry point. */
@@ -533,9 +605,15 @@ async function main() {
   console.log(`    USABLE pairs (both members a dotted reading path): ${usable.length}`
     + ` · clearing the bound ${usableClearing.length}`);
   const excluded = withInterval.length - usable.length;
-  console.log(`    excluded as the instrument's own labels: ${excluded}`
-    + ` (a table-rung synthetic label on ${withInterval.filter((p) => p.aClass === 'synthetic' || p.bClass === 'synthetic').length},`
-    + ` an unrooted bare parameter on ${withInterval.filter((p) => p.aClass === 'unrooted' || p.bClass === 'unrooted').length})`);
+  // ⚠ THE THREE EXCLUSION SETS OVERLAP AND THE PRINT SAYS SO (the fold's R4). An earlier
+  // wording read "on 437, on 108" as though the exclusion were a partition; 437 + 108 is 545
+  // against a union of 503, because a pair may carry a synthetic member AND an unrooted one.
+  // The counts below are each a MEMBERSHIP count and the union is the excluded total.
+  const carrying = (klass) => withInterval.filter((p) => p.aClass === klass || p.bClass === klass).length;
+  console.log(`    excluded as the instrument's own labels or a builtin: ${excluded}`
+    + ` — the UNION of a table-rung synthetic label on ${carrying('synthetic')},`
+    + ` an unrooted bare parameter on ${carrying('unrooted')},`
+    + ` a JS method tail on ${carrying('method')} (the sets overlap)`);
   const buckets = [1, 8, 39, 77, 154, 385, 768];
   const spread = (rows) => buckets.map((b, i) => {
     const hi = buckets[i + 1] ?? Infinity;

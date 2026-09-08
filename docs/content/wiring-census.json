@@ -32,19 +32,20 @@
       "MISSING": 34,
       "THIN": 483,
       "COVERED": 225,
-      "MISSING-AT-TIER": 44
+      "MISSING-AT-TIER": 45
     },
-    "tierSilences": 347,
-    "tierSilencesLawful": 303,
+    "tierSilences": 352,
+    "tierSilencesLawful": 307,
     "narrowsRefused": 0,
     "narrowedRows": 0,
     "covertRows": 4,
     "objectClassed": 99,
     "mountedRows": 566,
     "absent": {
-      "measured": 377,
-      "default": 10,
-      "not-produced": 64
+      "measured": 370,
+      "default": 3,
+      "not-produced": 60,
+      "method-call": 18
     },
     "zeroK": 49,
     "kExecutable": 318,
@@ -54,6 +55,7 @@
     "customReachableRows": 21,
     "relationRows": 165,
     "relationRowsJoinable": 0,
+    "ratifiedAliases": 3,
     "tableRungRowsWithoutAbsence": 78,
     "modifierEligibleFactsByTab": [
       [
@@ -136,6 +138,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -170,6 +173,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -204,6 +208,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -238,6 +243,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -284,6 +290,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -330,6 +337,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -376,6 +384,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -422,6 +431,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.postureHeader"
@@ -456,6 +466,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.threatAssessment"
@@ -490,6 +503,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.threatAssessment"
@@ -524,6 +540,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.threatAssessment"
@@ -558,6 +577,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -592,6 +612,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.threatAssessment"
@@ -626,6 +649,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -660,6 +684,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -694,6 +719,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.threatAssessment"
@@ -728,6 +756,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.threatAssessment"
@@ -762,6 +793,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -796,6 +828,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -830,6 +863,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.threatAssessment"
@@ -864,6 +900,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -917,10 +954,13 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "measured",
+        "court": "not-produced",
         "prison": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "defense.threatAssessment"
@@ -969,10 +1009,13 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "measured",
+        "court": "not-produced",
         "prison": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "defense.threatAssessment"
@@ -1015,10 +1058,11 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "measured",
+        "court": "not-produced",
         "prison": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1061,10 +1105,11 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "court": "measured",
+        "court": "not-produced",
         "prison": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1099,6 +1144,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1133,6 +1179,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1167,6 +1214,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1201,6 +1249,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.threatAssessment"
@@ -1235,6 +1284,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "care"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.threatAssessment"
@@ -1269,6 +1322,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "temple"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.threatAssessment"
@@ -1303,6 +1360,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "care"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.threatAssessment"
@@ -1337,6 +1398,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "care"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.threatAssessment"
@@ -1371,6 +1436,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "care"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.threatAssessment"
@@ -1405,6 +1474,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1439,6 +1509,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1473,6 +1544,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1507,6 +1579,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1541,6 +1614,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1575,6 +1649,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1609,6 +1684,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.publicOrder"
@@ -1655,6 +1731,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1701,6 +1778,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1747,6 +1825,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1789,6 +1868,7 @@
         "structureKey": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1826,6 +1906,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1863,6 +1944,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1900,6 +1982,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1937,6 +2020,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -1974,6 +2058,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.criminalStructure"
@@ -2014,6 +2099,7 @@
         "forces.walls.present": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2054,6 +2140,7 @@
         "forces.walls.present": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2111,6 +2198,9 @@
         "forces.garrison.present": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.armedForces"
@@ -2171,6 +2261,9 @@
         "forces.militia.present": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.armedForces"
@@ -2234,6 +2327,9 @@
         "forces.watch.present": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "force"
+      ],
       "objectClass": "force",
       "sites": [
         "defense.armedForces"
@@ -2291,6 +2387,7 @@
         "forces.watch.present": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2334,6 +2431,7 @@
         "forces.mercenary.present": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2387,6 +2485,9 @@
         "forces.charter.present": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
       "objectClass": "hall",
       "sites": [
         "defense.armedForces"
@@ -2434,6 +2535,9 @@
         "forces.charter.present": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
       "objectClass": "hall",
       "sites": [
         "defense.armedForces"
@@ -2478,6 +2582,7 @@
         "magicWorks": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2522,6 +2627,7 @@
         "magicWorks": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.armedForces"
@@ -2556,6 +2662,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2590,6 +2697,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2624,6 +2732,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2658,6 +2767,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2692,6 +2802,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2726,6 +2837,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2760,6 +2872,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "defense.supportingCapabilities"
@@ -2794,6 +2909,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "defense.supportingCapabilities"
@@ -2828,6 +2946,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "defense.supportingCapabilities"
@@ -2862,6 +2983,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -2896,6 +3018,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "care"
+      ],
       "objectClass": "care",
       "sites": [
         "defense.supportingCapabilities"
@@ -2933,6 +3058,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple",
+        "care"
+      ],
       "objectClass": "temple",
       "sites": [
         "defense.supportingCapabilities"
@@ -2967,6 +3096,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "care"
+      ],
       "objectClass": "care",
       "sites": [
         "defense.supportingCapabilities"
@@ -3001,6 +3133,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "road"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.supportingCapabilities"
@@ -3035,6 +3171,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.supportingCapabilities"
@@ -3072,6 +3211,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "road"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.supportingCapabilities"
@@ -3106,6 +3249,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store",
+        "road"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.supportingCapabilities"
@@ -3140,6 +3287,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "defense.supportingCapabilities"
@@ -3190,6 +3340,7 @@
         "port": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -3240,6 +3391,9 @@
         "port": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "defense.supportingCapabilities"
@@ -3296,6 +3450,7 @@
         "port": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.supportingCapabilities"
@@ -3330,6 +3485,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3362,6 +3518,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3394,6 +3551,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3426,6 +3584,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3458,6 +3617,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3490,6 +3650,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3522,6 +3683,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3556,6 +3718,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3590,6 +3753,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3624,6 +3788,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3658,6 +3823,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -3696,6 +3862,7 @@
         "stress": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.militaryStatus"
@@ -3748,6 +3915,7 @@
         "stress": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.militaryStatus"
@@ -3794,6 +3962,7 @@
         "stress": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.militaryStatus"
@@ -3828,6 +3997,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "defense.militaryStatus"
@@ -3871,6 +4041,7 @@
         "settlement.defenseProfile.magicDependency": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.magicDependency"
@@ -3917,6 +4088,7 @@
         "settlement.defenseProfile.magicDependency": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.magicDependency"
@@ -3960,6 +4132,7 @@
         "settlement.defenseProfile.magicDependency": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.magicDependency"
@@ -3994,6 +4167,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4026,6 +4200,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4058,6 +4233,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4090,6 +4266,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4122,6 +4299,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4154,6 +4332,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4186,6 +4365,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4218,6 +4398,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4252,6 +4433,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4284,6 +4466,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4316,6 +4499,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4348,6 +4532,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4380,6 +4565,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4412,6 +4598,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4444,6 +4631,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4476,6 +4664,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4508,6 +4697,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4540,6 +4730,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4572,6 +4763,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4604,6 +4796,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4638,6 +4831,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -4690,6 +4884,9 @@
         "settlement.defenseProfile.economicGates.military": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.wallRationale"
@@ -4744,6 +4941,9 @@
         "settlement.defenseProfile.economicGates.military": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.wallRationale"
@@ -4801,6 +5001,9 @@
         "settlement.defenseProfile.economicGates.military": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.wallRationale"
@@ -4849,6 +5052,9 @@
         "settlement.tier": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.wallRationale"
@@ -4897,6 +5103,9 @@
         "settlement.tier": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
       "objectClass": "wall",
       "sites": [
         "defense.wallRationale"
@@ -4946,6 +5155,9 @@
         "rank": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "economics.prosperityHeader"
@@ -4994,6 +5206,9 @@
         "rank": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "economics.prosperityHeader"
@@ -5043,6 +5258,7 @@
         "rank": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.prosperityHeader"
@@ -5091,6 +5307,9 @@
         "rank": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "economics.prosperityHeader"
@@ -5139,6 +5358,9 @@
         "rank": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "economics.prosperityHeader"
@@ -5194,6 +5416,7 @@
         "foodBalance.deficit": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodTile",
@@ -5201,7 +5424,7 @@
       ],
       "attach": [],
       "k": 0,
-      "rateBp": null,
+      "rateBp": 9570,
       "departure": null
     },
     {
@@ -5253,6 +5476,7 @@
         "foodBalance.surplus": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodTile",
@@ -5260,7 +5484,7 @@
       ],
       "attach": [],
       "k": -1,
-      "rateBp": null,
+      "rateBp": 286,
       "departure": null
     },
     {
@@ -5312,6 +5536,7 @@
         "foodBalance.surplus": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodTile",
@@ -5319,7 +5544,7 @@
       ],
       "attach": [],
       "k": -1,
-      "rateBp": null,
+      "rateBp": 143,
       "departure": null
     },
     {
@@ -5374,6 +5599,9 @@
         "granary.band": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "economics.foodTile",
@@ -5436,6 +5664,9 @@
         "granary.band": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "economics.foodTile",
@@ -5498,6 +5729,9 @@
         "granary.band": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "economics.foodTile",
@@ -5559,6 +5793,9 @@
         "granary.band": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "store"
+      ],
       "objectClass": "store",
       "sites": [
         "economics.foodTile",
@@ -5598,6 +5835,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.tradeFlow"
@@ -5636,6 +5876,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.tradeFlow"
@@ -5690,6 +5933,7 @@
         "readings.flowDrift.band": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.tradeFlow"
@@ -5728,6 +5972,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.tradeFlow"
@@ -5766,6 +6013,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.tradeFlow"
@@ -5802,6 +6052,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -5836,6 +6087,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -5868,6 +6120,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -5900,6 +6153,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -5938,6 +6192,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -5970,6 +6225,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6010,6 +6266,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6044,6 +6301,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6078,6 +6336,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6110,6 +6369,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6144,6 +6404,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6182,6 +6443,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6220,6 +6482,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6258,6 +6521,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [],
       "attach": [],
@@ -6296,6 +6562,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6332,6 +6599,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "road",
+        "craft"
+      ],
       "objectClass": "road",
       "sites": [],
       "attach": [],
@@ -6368,6 +6639,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6419,9 +6691,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "eco.safetyProfile.blackMarketCapture": "not-produced"
+        "eco.safetyProfile.blackMarketCapture": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.shadowEconomy"
@@ -6472,9 +6745,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "eco.safetyProfile.blackMarketCapture": "not-produced"
+        "eco.safetyProfile.blackMarketCapture": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.shadowEconomy"
@@ -6525,9 +6799,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "eco.safetyProfile.blackMarketCapture": "not-produced"
+        "eco.safetyProfile.blackMarketCapture": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.shadowEconomy"
@@ -6562,6 +6837,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6594,6 +6870,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -6630,6 +6907,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6669,6 +6947,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6708,6 +6987,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6747,6 +7027,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6786,6 +7067,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6825,6 +7107,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6864,6 +7147,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "daily_life.standingOfLiving",
@@ -6903,6 +7187,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -6941,6 +7226,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -6979,6 +7265,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -7017,6 +7304,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.foodSecurity"
@@ -7055,6 +7345,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -7093,6 +7384,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -7150,10 +7442,11 @@
       "narrowed": false,
       "absent": {
         "eco.foodSecurity.stockpile": "measured",
-        "eco.foodSecurity.stockpile.blockadeBypass": "not-produced",
+        "eco.foodSecurity.stockpile.blockadeBypass": "measured",
         "eco.foodSecurity.stockpile.blockaded": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -7209,9 +7502,10 @@
       "narrowed": false,
       "absent": {
         "eco.foodSecurity.stockpile": "measured",
-        "eco.foodSecurity.stockpile.blockadeBypass": "not-produced"
+        "eco.foodSecurity.stockpile.blockadeBypass": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.foodSecurity"
@@ -7248,6 +7542,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7280,6 +7575,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7312,6 +7608,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7346,6 +7643,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7382,6 +7680,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7414,6 +7713,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7446,6 +7746,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -7497,6 +7798,7 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7551,6 +7853,7 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7605,6 +7908,7 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7658,6 +7962,7 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7711,6 +8016,9 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.exportPosture"
@@ -7764,6 +8072,7 @@
         "readings.exportPosture.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7803,6 +8112,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7841,6 +8151,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7880,6 +8191,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7918,6 +8230,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.exportPosture"
@@ -7970,6 +8283,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8022,6 +8336,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8074,6 +8389,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8126,6 +8442,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8178,6 +8495,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8230,6 +8548,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8282,6 +8601,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8322,6 +8642,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8362,6 +8683,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8402,6 +8724,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8451,6 +8774,7 @@
         "analysis.economicStrengths": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8500,6 +8824,7 @@
         "analysis.economicStrengths": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8546,6 +8871,7 @@
         "analysis.strategicValue": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8601,6 +8927,7 @@
         "leading.row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8655,6 +8982,7 @@
         "leading.row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8720,6 +9048,7 @@
         "leading.row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8782,6 +9111,7 @@
         "leading.row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "resources.groundAndWorkings"
@@ -8839,9 +9169,10 @@
       "absent": {
         "eco.incomeSources": "measured",
         "eco.incomeSources.length": "measured",
-        "eco.incomeSources.reduce": "not-produced"
+        "eco.incomeSources.reduce": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.commercialProfile"
@@ -8899,9 +9230,10 @@
       "absent": {
         "eco.incomeSources": "measured",
         "eco.incomeSources.length": "measured",
-        "eco.incomeSources.reduce": "not-produced"
+        "eco.incomeSources.reduce": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.commercialProfile"
@@ -8953,9 +9285,10 @@
       "absent": {
         "eco.incomeSources": "measured",
         "eco.incomeSources.length": "measured",
-        "eco.incomeSources.reduce": "not-produced"
+        "eco.incomeSources.reduce": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.commercialProfile"
@@ -9006,9 +9339,10 @@
       "narrowed": false,
       "absent": {
         "eco.incomeSources": "measured",
-        "eco.incomeSources.filter": "measured"
+        "eco.incomeSources.filter": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.commercialProfile"
@@ -9056,9 +9390,10 @@
       "narrowed": false,
       "absent": {
         "eco.incomeSources": "measured",
-        "eco.incomeSources.filter": "measured"
+        "eco.incomeSources.filter": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.commercialProfile"
@@ -9128,6 +9463,9 @@
         "eco.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.commercialProfile"
@@ -9190,6 +9528,9 @@
         "eco.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.commercialProfile"
@@ -9252,6 +9593,9 @@
         "eco.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.commercialProfile"
@@ -9314,6 +9658,9 @@
         "eco.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.commercialProfile"
@@ -9382,6 +9729,9 @@
         "eco.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "economics.commercialProfile"
@@ -9431,9 +9781,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9483,9 +9834,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9535,9 +9887,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9587,9 +9940,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9639,9 +9993,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9688,13 +10043,14 @@
         "readings.impairedInstitution": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 1380,
       "departure": null
     },
     {
@@ -9737,9 +10093,10 @@
       "narrowed": false,
       "absent": {
         "readings.notableAbsences": "not-produced",
-        "readings.notableAbsences.map": "measured"
+        "readings.notableAbsences.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "services.catalogStanding"
@@ -9776,6 +10133,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9810,6 +10168,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9838,6 +10197,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9870,6 +10230,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9902,6 +10263,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9934,6 +10296,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9966,6 +10329,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -9998,6 +10362,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10032,6 +10397,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10064,6 +10430,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10096,6 +10463,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10128,6 +10496,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10160,6 +10529,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10192,6 +10562,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10224,6 +10595,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10256,6 +10628,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10290,6 +10663,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10322,6 +10696,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10354,6 +10729,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10386,6 +10762,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10418,6 +10795,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10450,6 +10828,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10482,6 +10861,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10510,6 +10890,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10542,6 +10923,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10576,6 +10958,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10612,6 +10995,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "craft"
+      ],
       "objectClass": "craft",
       "sites": [],
       "attach": [],
@@ -10646,6 +11032,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10680,6 +11067,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10714,6 +11102,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10746,6 +11135,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10778,6 +11168,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10810,6 +11201,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10846,6 +11238,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -10901,6 +11294,7 @@
         "conflict.intensity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.conflicts"
@@ -10958,6 +11352,7 @@
         "conflict.intensity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.conflicts"
@@ -11015,6 +11410,7 @@
         "conflict.intensity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.conflicts"
@@ -11067,6 +11463,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11119,6 +11516,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11171,6 +11569,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11223,6 +11622,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11275,6 +11675,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11327,6 +11728,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11379,6 +11781,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11431,6 +11834,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11483,6 +11887,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11535,6 +11940,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11587,6 +11993,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11639,6 +12046,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11691,6 +12099,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11743,6 +12152,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11795,6 +12205,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11847,6 +12258,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11899,6 +12311,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -11951,6 +12364,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12003,6 +12417,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12055,6 +12470,7 @@
         "score": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12101,6 +12517,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12147,6 +12564,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12193,6 +12611,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12239,6 +12658,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12285,6 +12705,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12331,6 +12752,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12377,6 +12799,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12423,6 +12846,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12471,6 +12895,7 @@
         "readings.viable": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12519,6 +12944,7 @@
         "readings.viable": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12565,6 +12991,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12611,6 +13038,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12657,6 +13085,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12703,6 +13132,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12749,6 +13179,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12795,6 +13226,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12841,6 +13273,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12887,6 +13320,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12933,6 +13367,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -12979,6 +13414,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.systemsHealth"
@@ -13025,6 +13463,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -13071,6 +13510,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.systemsHealth"
@@ -13117,6 +13557,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market",
+        "road"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.situation"
@@ -13165,6 +13609,9 @@
         "readings.primaryStress": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "overview.situation"
@@ -13213,6 +13660,7 @@
         "readings.primaryStress": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.situation"
@@ -13259,6 +13707,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "overview.situation"
@@ -13305,6 +13756,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "overview.situation"
@@ -13351,6 +13805,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13399,6 +13854,9 @@
         "readings.primaryStress": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "overview.origin"
@@ -13447,6 +13905,7 @@
         "readings.primaryStress": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13497,6 +13956,7 @@
         "settlement.config.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13537,6 +13997,9 @@
         "readings.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "overview.origin"
@@ -13583,6 +14046,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13629,6 +14093,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13675,6 +14140,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13715,6 +14181,7 @@
         "readings.tier": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.origin"
@@ -13767,6 +14234,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -13819,6 +14287,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -13866,6 +14335,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.warnings"
@@ -13913,6 +14385,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -13961,6 +14434,10 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple",
+        "hall"
+      ],
       "objectClass": "temple",
       "sites": [
         "overview.warnings"
@@ -14008,6 +14485,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -14052,6 +14530,7 @@
         "readings.structuralViolations.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -14096,6 +14575,7 @@
         "readings.structuralSuggestions.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.warnings"
@@ -14134,6 +14614,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14172,6 +14653,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14225,6 +14707,7 @@
         "ruin.name": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14279,6 +14762,7 @@
         "row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14331,6 +14815,7 @@
         "row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14383,6 +14868,7 @@
         "row": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.steadings"
@@ -14421,6 +14907,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "relationships.network"
@@ -14459,6 +14948,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14504,9 +14994,12 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "link": "default"
+        "link": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "relationships.network"
@@ -14552,9 +15045,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "link": "default"
+        "link": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14593,6 +15087,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14631,6 +15126,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14669,6 +15165,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14707,6 +15204,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14754,6 +15252,7 @@
         "link.npcConnections": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14805,6 +15304,7 @@
         "row.type": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "relationships.network"
@@ -14844,9 +15344,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.prominentRelationship": "not-produced"
+        "readings.prominentRelationship": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.notableConnection"
@@ -14897,6 +15398,7 @@
         "readings.relationships.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.notableConnection"
@@ -14944,6 +15446,7 @@
         "readings.relationships.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.notableConnection"
@@ -14989,6 +15492,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15027,6 +15531,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15070,6 +15575,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15109,6 +15615,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15148,6 +15655,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15187,6 +15695,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15226,6 +15735,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15268,6 +15778,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15307,6 +15818,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15345,6 +15857,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15396,6 +15909,7 @@
         "marker.yearsAgo": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15447,6 +15961,7 @@
         "marker.yearsAgo": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15498,6 +16013,7 @@
         "marker.yearsAgo": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15549,6 +16065,7 @@
         "marker.yearsAgo": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15600,6 +16117,7 @@
         "marker.yearsAgo": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.identity"
@@ -15634,6 +16152,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -15666,6 +16185,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -15698,6 +16218,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -15730,6 +16251,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -15762,6 +16284,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -15795,6 +16318,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -15830,6 +16354,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -15865,6 +16390,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -15900,6 +16426,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -15935,6 +16462,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -15970,6 +16498,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16005,6 +16534,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16040,6 +16570,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16075,6 +16606,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16111,6 +16643,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16151,6 +16684,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "plot_hooks.framing"
@@ -16191,6 +16725,7 @@
         "readings.viable": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16231,6 +16766,7 @@
         "readings.viable": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16271,6 +16807,7 @@
         "readings.viable": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16316,6 +16853,7 @@
         "readings.criticalIssueCount": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16358,6 +16896,7 @@
         "readings.criticalIssueCount": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16392,6 +16931,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "viability.verdict"
@@ -16438,6 +16978,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.ground"
@@ -16484,6 +17025,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.ground"
@@ -16530,6 +17072,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.ground"
@@ -16576,6 +17119,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.ground"
@@ -16622,6 +17166,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.ground"
@@ -16668,6 +17213,9 @@
         "readings.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.market"
@@ -16714,6 +17262,9 @@
         "readings.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.market"
@@ -16763,6 +17314,7 @@
         "readings.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.market"
@@ -16809,6 +17361,9 @@
         "readings.tradeRouteAccess": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.market"
@@ -16853,6 +17408,7 @@
         "hist": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.founded"
@@ -16900,6 +17456,7 @@
         "hist": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.founded"
@@ -16944,6 +17501,7 @@
         "hist": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.founded"
@@ -16992,6 +17550,7 @@
         "readings.populationTrend.window": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.populationDirection"
@@ -17040,6 +17599,7 @@
         "readings.populationTrend.window": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.populationDirection"
@@ -17088,6 +17648,7 @@
         "readings.populationTrend.window": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.populationDirection"
@@ -17136,6 +17697,7 @@
         "readings.populationTrend.window": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.populationDirection"
@@ -17184,6 +17746,7 @@
         "readings.populationTrend.window": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.populationDirection"
@@ -17222,6 +17785,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -17256,6 +17820,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -17288,6 +17853,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -17320,6 +17886,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -17352,6 +17919,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -17393,6 +17961,7 @@
         "events": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.record"
@@ -17437,6 +18006,7 @@
         "events": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.record"
@@ -17479,6 +18049,7 @@
         "events": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.record"
@@ -17522,6 +18093,7 @@
         "events": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.record"
@@ -17564,6 +18136,7 @@
         "events": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "history.record"
@@ -17611,9 +18184,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.inst": "default"
+        "readings.inst": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.institutions"
@@ -17661,9 +18235,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.inst": "default"
+        "readings.inst": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.institutions"
@@ -17711,9 +18286,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.inst": "default"
+        "readings.inst": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.institutions"
@@ -17761,9 +18337,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.inst": "default"
+        "readings.inst": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.institutions"
@@ -17811,9 +18388,10 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "readings.inst": "default"
+        "readings.inst": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.institutions"
@@ -17871,6 +18449,7 @@
         "readings.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.craftReason"
@@ -17928,6 +18507,7 @@
         "readings.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.craftReason"
@@ -17985,6 +18565,7 @@
         "readings.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.craftReason"
@@ -18041,6 +18622,7 @@
         "readings.primaryImports": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "economics.craftReason"
@@ -18080,6 +18662,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18119,6 +18702,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18158,6 +18742,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18197,6 +18782,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18236,6 +18822,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18275,6 +18862,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18314,6 +18902,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18353,6 +18942,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18392,6 +18982,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18431,6 +19022,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18489,6 +19081,7 @@
         "legitimacy.governanceFractured": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.legitimacyBanner"
@@ -18540,6 +19133,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18591,6 +19185,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18642,6 +19237,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18689,6 +19285,7 @@
         "power.stability": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18739,6 +19336,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18778,6 +19376,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18827,6 +19426,7 @@
         "factions.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18876,6 +19476,7 @@
         "factions.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18923,6 +19524,7 @@
         "power.recentConflict": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.stabilityHeader"
@@ -18978,9 +19580,10 @@
         "reading.instability": "measured",
         "reading.rungs": "measured",
         "reading.rungs.length": "measured",
-        "reading.rungs.map": "measured"
+        "reading.rungs.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.factionLadder"
@@ -19036,9 +19639,10 @@
         "reading.instability": "measured",
         "reading.rungs": "measured",
         "reading.rungs.length": "measured",
-        "reading.rungs.map": "measured"
+        "reading.rungs.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.factionLadder"
@@ -19093,6 +19697,7 @@
         "reading.rungs.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.factionLadder"
@@ -19148,9 +19753,10 @@
         "reading.instability": "measured",
         "reading.rungs": "measured",
         "reading.rungs.length": "measured",
-        "reading.rungs.map": "measured"
+        "reading.rungs.map": "method-call"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.factionLadder"
@@ -19209,6 +19815,7 @@
         "reading.rungs.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.factionLadder"
@@ -19260,6 +19867,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19311,6 +19919,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19363,6 +19972,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19414,6 +20024,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
       "objectClass": "hall",
       "sites": [
         "power.succession"
@@ -19466,6 +20079,7 @@
         "legitimacy.govMultiplier": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19513,6 +20127,7 @@
         "legitimacy.govMultiplier": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19566,6 +20181,7 @@
         "legitimacy.govMultiplier": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19607,6 +20223,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19644,6 +20261,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.succession"
@@ -19690,6 +20308,7 @@
         "politics.blocs": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19726,6 +20345,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
       "objectClass": "hall",
       "sites": [
         "power.rulingStructure"
@@ -19765,6 +20387,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19801,6 +20424,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "power.rulingStructure"
@@ -19837,6 +20463,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19873,6 +20500,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19908,6 +20536,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19943,6 +20572,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -19981,6 +20611,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "power.rulingStructure"
@@ -20019,6 +20652,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "craft"
+      ],
       "objectClass": "craft",
       "sites": [
         "power.rulingStructure"
@@ -20054,6 +20690,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -20090,6 +20727,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.rulingStructure"
@@ -20147,6 +20785,7 @@
         "ledger.present": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20201,6 +20840,7 @@
         "legitimacy.breakdown": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20268,6 +20908,7 @@
         "power.criminalCaptureState": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20335,6 +20976,7 @@
         "power.criminalCaptureState": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20383,6 +21025,7 @@
         "power.criminalCaptureState": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20431,6 +21074,7 @@
         "power.criminalCaptureState": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20467,6 +21111,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20503,6 +21148,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20539,6 +21185,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20575,6 +21222,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20611,6 +21259,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "power.criminalUnderside"
@@ -20647,6 +21298,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20691,6 +21343,7 @@
         "name": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.criminalUnderside"
@@ -20744,6 +21397,7 @@
         "politics.blocs": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -20781,6 +21435,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "law"
+      ],
       "objectClass": "law",
       "sites": [
         "power.blocs"
@@ -20819,6 +21476,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -20856,6 +21514,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -20893,6 +21552,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -20930,6 +21590,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -20967,6 +21628,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21004,6 +21666,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21041,6 +21704,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21078,6 +21742,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "power.blocs"
@@ -21115,6 +21782,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21152,6 +21820,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21189,6 +21858,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "power.blocs"
@@ -21226,6 +21898,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21263,6 +21936,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21300,6 +21974,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21337,6 +22012,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21376,6 +22052,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21415,6 +22092,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21463,6 +22141,7 @@
         "politics.blocs": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "power.blocs"
@@ -21509,6 +22188,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21558,6 +22238,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21604,6 +22285,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21650,6 +22332,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21696,6 +22379,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21742,6 +22426,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21788,6 +22473,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21834,6 +22520,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21880,6 +22567,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21926,6 +22614,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -21972,6 +22661,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22018,6 +22708,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22064,6 +22755,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22110,6 +22802,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22159,6 +22852,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22193,6 +22887,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22227,6 +22922,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.crisisBanners"
@@ -22274,6 +22970,7 @@
         "worldStressor.lifecycleStage": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22323,6 +23020,7 @@
         "worldStressor.lifecycleStage": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22370,6 +23068,7 @@
         "worldStressor.lifecycleStage": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22417,6 +23116,7 @@
         "worldStressor.lifecycleStage": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22466,6 +23166,7 @@
         "worldStressor.lifecycleStage": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22500,6 +23201,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22534,6 +23236,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22571,6 +23274,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22605,6 +23309,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22639,6 +23344,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22671,6 +23377,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22705,6 +23412,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22739,6 +23447,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22771,6 +23480,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22805,6 +23515,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.stressorLifecycle"
@@ -22854,6 +23567,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22901,6 +23615,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -22950,6 +23665,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23002,6 +23718,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23049,6 +23766,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23098,6 +23816,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23145,6 +23864,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23192,6 +23912,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23241,6 +23962,9 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [
         "overview.stressorLifecycle"
@@ -23288,6 +24012,9 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "overview.stressorLifecycle"
@@ -23337,6 +24064,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23384,6 +24112,9 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "hall"
+      ],
       "objectClass": "hall",
       "sites": [
         "overview.stressorLifecycle"
@@ -23431,6 +24162,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23480,6 +24212,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23529,6 +24262,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23578,6 +24312,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23627,6 +24362,7 @@
         "worldStressor.originContext.variant": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.stressorLifecycle"
@@ -23677,6 +24413,7 @@
         "condition.severity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23727,6 +24464,7 @@
         "condition.severity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23777,6 +24515,7 @@
         "condition.severity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23827,6 +24566,7 @@
         "condition.severity": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23877,6 +24617,7 @@
         "condition.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23909,6 +24650,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -23961,6 +24703,7 @@
         "condition.status": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24010,6 +24753,7 @@
         "condition.archetype": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24059,6 +24803,7 @@
         "condition.archetype": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24108,6 +24853,7 @@
         "condition.archetype": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24155,6 +24901,7 @@
         "condition": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24202,6 +24949,7 @@
         "condition": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24243,6 +24991,7 @@
         "condition.duration": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24277,6 +25026,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24311,6 +25061,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24345,6 +25096,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24379,6 +25131,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24413,6 +25166,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "overview.activeConditions"
@@ -24481,6 +25235,7 @@
         "war.status.besiegingTargets.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24552,6 +25307,7 @@
         "war.status.besiegingTargets.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24617,6 +25373,7 @@
         "war.status.besiegingTargets.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24655,6 +25412,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24693,6 +25451,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24731,6 +25490,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24769,6 +25529,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24823,6 +25584,7 @@
         "war.postureState": "not-produced"
       },
       "covert": true,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24877,6 +25639,7 @@
         "war.postureState": "not-produced"
       },
       "covert": true,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24928,6 +25691,7 @@
         "war.postureState": "not-produced"
       },
       "covert": true,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -24985,6 +25749,7 @@
         "war.postureState": "not-produced"
       },
       "covert": true,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25033,6 +25798,7 @@
         "war.occupation": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25081,6 +25847,7 @@
         "war.occupation": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25139,6 +25906,7 @@
         "war.occupierPosition.stretchedThin": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25191,6 +25959,7 @@
         "war.occupierPosition.stretchedThin": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25230,6 +25999,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25269,6 +26039,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25308,6 +26079,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25347,6 +26119,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25386,6 +26159,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25425,6 +26199,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.standing"
@@ -25467,6 +26242,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25506,6 +26282,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25545,6 +26322,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25584,6 +26362,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25623,6 +26402,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25662,6 +26442,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25701,6 +26482,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25739,6 +26521,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25778,6 +26561,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25817,6 +26601,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25855,6 +26640,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25893,6 +26679,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25931,6 +26718,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -25969,6 +26757,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26008,6 +26797,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26047,6 +26837,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26085,6 +26876,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26124,6 +26916,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26163,6 +26956,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26201,6 +26995,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26239,6 +27034,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26277,6 +27073,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26315,6 +27112,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26353,6 +27151,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26406,6 +27205,7 @@
         "term.yearsRemaining": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26460,10 +27260,11 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "doc": "measured",
+        "doc": "not-produced",
         "doc.termLines": "default"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26514,10 +27315,11 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "doc": "measured",
+        "doc": "not-produced",
         "doc.termLines": "default"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26566,10 +27368,11 @@
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "doc": "measured",
+        "doc": "not-produced",
         "doc.termLines": "default"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.treaties"
@@ -26620,6 +27423,7 @@
         "warBeat": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "war.dormantNote"
@@ -26654,6 +27458,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26686,6 +27491,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26718,6 +27524,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26750,6 +27557,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26782,6 +27590,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26814,6 +27623,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26846,6 +27656,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26878,6 +27689,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26910,6 +27722,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26942,6 +27755,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -26974,6 +27788,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27006,6 +27821,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27038,6 +27854,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27070,6 +27887,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27102,6 +27920,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27136,6 +27955,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27170,6 +27990,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27204,6 +28025,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27238,6 +28060,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27272,6 +28095,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27306,6 +28130,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27338,6 +28163,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27370,6 +28196,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27402,6 +28229,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27436,6 +28264,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27470,6 +28299,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27502,6 +28332,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27540,6 +28371,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27574,6 +28406,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27606,6 +28439,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27640,6 +28474,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27672,6 +28507,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27704,6 +28540,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27736,6 +28573,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27768,6 +28606,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -27802,6 +28641,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "market"
+      ],
       "objectClass": "market",
       "sites": [],
       "attach": [],
@@ -27839,6 +28681,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -27878,6 +28723,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -27917,6 +28765,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -27956,6 +28807,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -27994,6 +28848,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28032,6 +28887,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28070,6 +28926,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28108,6 +28965,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28146,6 +29004,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28182,6 +29041,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28218,6 +29078,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28254,6 +29115,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28303,6 +29165,9 @@
         "faith.ranks": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -28352,6 +29217,9 @@
         "faith.ranks": "not-produced"
       },
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -28400,6 +29268,7 @@
         "faith.ranks": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28454,9 +29323,10 @@
       "narrowed": false,
       "absent": {
         "faith.piety.trend": "measured",
-        "faith.unaffiliated": "not-produced"
+        "faith.unaffiliated": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28503,9 +29373,10 @@
       "narrowed": false,
       "absent": {
         "faith.piety.trend": "measured",
-        "faith.unaffiliated": "not-produced"
+        "faith.unaffiliated": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28554,6 +29425,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -28602,6 +29476,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.patronSeat"
@@ -28650,6 +29527,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28688,6 +29566,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.patronSeat"
@@ -28732,6 +29611,7 @@
         "hasPatron": "not-produced"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.teaser"
@@ -28770,6 +29650,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.teaser"
@@ -28809,6 +29690,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -28851,6 +29733,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -28891,6 +29774,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -28930,6 +29814,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -28969,6 +29854,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29031,11 +29917,14 @@
       "narrowed": false,
       "absent": {
         "faith.ranks": "not-produced",
-        "faith.ranks.filter": "measured",
-        "faith.ranks.find": "measured",
+        "faith.ranks.filter": "method-call",
+        "faith.ranks.find": "method-call",
         "faith.ranks.length": "measured"
       },
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.creedStanding",
@@ -29090,11 +29979,12 @@
       "narrowed": false,
       "absent": {
         "faith.ranks": "not-produced",
-        "faith.ranks.filter": "measured",
-        "faith.ranks.find": "measured",
+        "faith.ranks.filter": "method-call",
+        "faith.ranks.find": "method-call",
         "faith.ranks.length": "measured"
       },
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29138,6 +30028,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29177,6 +30068,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29216,6 +30108,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29255,6 +30148,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29296,6 +30190,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29335,6 +30230,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29375,6 +30271,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29414,6 +30311,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29453,6 +30351,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29492,6 +30391,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29531,6 +30431,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29573,6 +30474,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.creedStanding",
@@ -29614,6 +30518,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.creedStanding",
@@ -29655,6 +30562,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "temple"
+      ],
       "objectClass": "temple",
       "sites": [
         "faith.creedStanding",
@@ -29695,6 +30605,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29737,6 +30648,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29774,6 +30686,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [
         "faith.creedStanding",
@@ -29813,6 +30726,9 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [
+        "road"
+      ],
       "objectClass": "road",
       "sites": [
         "faith.creedStanding",
@@ -29850,6 +30766,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -29888,6 +30805,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -29922,6 +30840,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -29958,6 +30877,7 @@
       "narrowed": false,
       "absent": {},
       "covert": false,
+      "objectClasses": [],
       "objectClass": null,
       "sites": [],
       "attach": [],
@@ -37602,6 +38522,32 @@
       "deskSegments": 178
     }
   },
+  "ratifiedAliases": {
+    "ruling": "SITTING §P.2-27: the three `identifier` rows are RATIFIED as aliases; the four \"would join\" rows and every `generator-write` citation that is a comment, a prose string, a template string or an arrow parameter are WITHDRAWN. The relations LEAF is SEAM car 4 and carries exactly these rows.",
+    "rows": [
+      {
+        "endpoint": "cause:occupation",
+        "readRoot": "war",
+        "evidence": "identifier",
+        "at": "war.occupation",
+        "line": "war.occupation"
+      },
+      {
+        "endpoint": "economicGates.military",
+        "readRoot": "settlement.defenseProfile",
+        "evidence": "identifier",
+        "at": "settlement.defenseProfile.economicGates.military",
+        "line": "settlement.defenseProfile.economicGates.military"
+      },
+      {
+        "endpoint": "system:food_security",
+        "readRoot": "eco",
+        "evidence": "identifier",
+        "at": "eco.foodSecurity.stockpile",
+        "line": "eco.foodSecurity.stockpile"
+      }
+    ]
+  },
   "tiers": [
     {
       "tier": "MISSING",
@@ -44118,6 +45064,14 @@
     },
     {
       "tier": "MISSING-AT-TIER",
+      "block": "DS-SUP-3",
+      "subject": "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED @ thorp",
+      "fields": [],
+      "readingFunction": "DS-SUP-3 :: impairedServicePoolKey",
+      "count": "fired on 106 towns overall and on 0 at thorp; its rung said nothing there"
+    },
+    {
+      "tier": "MISSING-AT-TIER",
       "block": "DS-DEF-6",
       "subject": "Naval Defense: Port only @ thorp",
       "fields": [],
@@ -44942,6 +45896,48 @@
           }
         },
         "wizardRateBp": 9909
+      },
+      {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: deficit",
+        "towns": 735,
+        "n": 768,
+        "rateBp": 9570,
+        "loBp": 9403,
+        "hiBp": 9692,
+        "byTier": {
+          "thorp": {
+            "towns": 122,
+            "n": 128,
+            "rateBp": 9531
+          },
+          "hamlet": {
+            "towns": 119,
+            "n": 128,
+            "rateBp": 9297
+          },
+          "village": {
+            "towns": 120,
+            "n": 128,
+            "rateBp": 9375
+          },
+          "town": {
+            "towns": 121,
+            "n": 128,
+            "rateBp": 9453
+          },
+          "city": {
+            "towns": 128,
+            "n": 128,
+            "rateBp": 10000
+          },
+          "metropolis": {
+            "towns": 125,
+            "n": 128,
+            "rateBp": 9766
+          }
+        },
+        "wizardRateBp": 9258
       },
       {
         "block": "DS-GEN-14",
@@ -51622,6 +52618,48 @@
         "wizardRateBp": 1029
       },
       {
+        "block": "DS-SUP-3",
+        "pool": "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
+        "towns": 106,
+        "n": 768,
+        "rateBp": 1380,
+        "loBp": 1154,
+        "hiBp": 1642,
+        "byTier": {
+          "thorp": {
+            "towns": 0,
+            "n": 128,
+            "rateBp": 0
+          },
+          "hamlet": {
+            "towns": 19,
+            "n": 128,
+            "rateBp": 1484
+          },
+          "village": {
+            "towns": 23,
+            "n": 128,
+            "rateBp": 1797
+          },
+          "town": {
+            "towns": 8,
+            "n": 128,
+            "rateBp": 625
+          },
+          "city": {
+            "towns": 28,
+            "n": 128,
+            "rateBp": 2188
+          },
+          "metropolis": {
+            "towns": 28,
+            "n": 128,
+            "rateBp": 2188
+          }
+        },
+        "wizardRateBp": 156
+      },
+      {
         "block": "DS-DEF-6",
         "pool": "Naval Defense: Port only",
         "towns": 105,
@@ -54478,6 +55516,48 @@
         "wizardRateBp": 247
       },
       {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: surplus",
+        "towns": 22,
+        "n": 768,
+        "rateBp": 286,
+        "loBp": 190,
+        "hiBp": 430,
+        "byTier": {
+          "thorp": {
+            "towns": 3,
+            "n": 128,
+            "rateBp": 234
+          },
+          "hamlet": {
+            "towns": 9,
+            "n": 128,
+            "rateBp": 703
+          },
+          "village": {
+            "towns": 7,
+            "n": 128,
+            "rateBp": 547
+          },
+          "town": {
+            "towns": 3,
+            "n": 128,
+            "rateBp": 234
+          },
+          "city": {
+            "towns": 0,
+            "n": 128,
+            "rateBp": 0
+          },
+          "metropolis": {
+            "towns": 0,
+            "n": 128,
+            "rateBp": 0
+          }
+        },
+        "wizardRateBp": 573
+      },
+      {
         "block": "DS-POW-2",
         "pool": "Desperate matched",
         "towns": 22,
@@ -55103,6 +56183,48 @@
             "towns": 0,
             "n": 128,
             "rateBp": 0
+          }
+        },
+        "wizardRateBp": 169
+      },
+      {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: balanced",
+        "towns": 11,
+        "n": 768,
+        "rateBp": 143,
+        "loBp": 80,
+        "hiBp": 255,
+        "byTier": {
+          "thorp": {
+            "towns": 3,
+            "n": 128,
+            "rateBp": 234
+          },
+          "hamlet": {
+            "towns": 0,
+            "n": 128,
+            "rateBp": 0
+          },
+          "village": {
+            "towns": 1,
+            "n": 128,
+            "rateBp": 78
+          },
+          "town": {
+            "towns": 4,
+            "n": 128,
+            "rateBp": 313
+          },
+          "city": {
+            "towns": 0,
+            "n": 128,
+            "rateBp": 0
+          },
+          "metropolis": {
+            "towns": 3,
+            "n": 128,
+            "rateBp": 234
           }
         },
         "wizardRateBp": 169
@@ -57489,6 +58611,19 @@
         "splitLadder": false
       },
       {
+        "block": "DS-SUP-3",
+        "pool": "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
+        "tier": "thorp",
+        "firedOverall": 106,
+        "sites": 1,
+        "verdict": "MISSING-AT-TIER",
+        "limb": "rung-dark",
+        "rung": "DS-SUP-3 :: impairedServicePoolKey",
+        "grain": "keyFunction",
+        "siblingRungSpoke": true,
+        "splitLadder": false
+      },
+      {
         "block": "DS-DEF-6",
         "pool": "Naval Defense: Port only",
         "tier": "thorp",
@@ -59049,6 +60184,32 @@
         "splitLadder": false
       },
       {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: surplus",
+        "tier": "city",
+        "firedOverall": 22,
+        "sites": 2,
+        "verdict": "LAWFUL",
+        "limb": "value-class",
+        "rung": "DS-ECO-2 :: foodTilePoolKey",
+        "grain": "keyFunction",
+        "siblingRungSpoke": false,
+        "splitLadder": false
+      },
+      {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: surplus",
+        "tier": "metropolis",
+        "firedOverall": 22,
+        "sites": 2,
+        "verdict": "LAWFUL",
+        "limb": "value-class",
+        "rung": "DS-ECO-2 :: foodTilePoolKey",
+        "grain": "keyFunction",
+        "siblingRungSpoke": false,
+        "splitLadder": false
+      },
+      {
         "block": "DS-POW-2",
         "pool": "Desperate matched",
         "tier": "town",
@@ -59565,6 +60726,32 @@
         "limb": "value-class",
         "rung": "DS-DEF-3 :: (block)",
         "grain": "block",
+        "siblingRungSpoke": false,
+        "splitLadder": false
+      },
+      {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: balanced",
+        "tier": "hamlet",
+        "firedOverall": 11,
+        "sites": 2,
+        "verdict": "LAWFUL",
+        "limb": "value-class",
+        "rung": "DS-ECO-2 :: foodTilePoolKey",
+        "grain": "keyFunction",
+        "siblingRungSpoke": false,
+        "splitLadder": false
+      },
+      {
+        "block": "DS-ECO-2",
+        "pool": "FOOD: balanced",
+        "tier": "city",
+        "firedOverall": 11,
+        "sites": 2,
+        "verdict": "LAWFUL",
+        "limb": "value-class",
+        "rung": "DS-ECO-2 :: foodTilePoolKey",
+        "grain": "keyFunction",
         "siblingRungSpoke": false,
         "splitLadder": false
       },
@@ -60169,15 +61356,15 @@
     ],
     "departureReport": {
       "lineBp": 1000,
-      "uncommon": 70,
-      "common": 197
+      "uncommon": 72,
+      "common": 199
     },
     "pairs": {
       "n": 768,
       "boundCount": 51,
       "clearing": 590,
-      "usable": 226,
-      "usableClearing": 170,
+      "usable": 205,
+      "usableClearing": 151,
       "rows": [
         {
           "a": "readings.exportPosture.status",
@@ -60791,9 +61978,9 @@
           "loBp": 9299,
           "hiBp": 9615,
           "rateBp": 9479,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "eco.incomeSources.reduce",
@@ -60802,7 +61989,7 @@
           "loBp": 9299,
           "hiBp": 9615,
           "rateBp": 9479,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60813,7 +62000,7 @@
           "loBp": 9240,
           "hiBp": 9570,
           "rateBp": 9427,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60825,7 +62012,7 @@
           "hiBp": 9559,
           "rateBp": 9414,
           "aClass": "unrooted",
-          "bClass": "fact",
+          "bClass": "method",
           "usable": false
         },
         {
@@ -60835,7 +62022,7 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60846,9 +62033,9 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "eco.incomeSources.reduce",
@@ -60857,9 +62044,9 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "eco.incomeSources.reduce",
@@ -60868,7 +62055,7 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60879,7 +62066,7 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60890,7 +62077,7 @@
           "loBp": 9225,
           "hiBp": 9559,
           "rateBp": 9414,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -60901,9 +62088,9 @@
           "loBp": 9123,
           "hiBp": 9480,
           "rateBp": 9323,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "axis",
@@ -61033,9 +62220,9 @@
           "loBp": 7088,
           "hiBp": 7706,
           "rateBp": 7409,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "axis",
@@ -61407,7 +62594,7 @@
           "loBp": 6352,
           "hiBp": 7016,
           "rateBp": 6693,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -61418,7 +62605,7 @@
           "loBp": 6312,
           "hiBp": 6978,
           "rateBp": 6654,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -61539,7 +62726,7 @@
           "loBp": 6193,
           "hiBp": 6865,
           "rateBp": 6536,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -61671,9 +62858,9 @@
           "loBp": 6153,
           "hiBp": 6827,
           "rateBp": 6497,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "conflict.intensity",
@@ -61804,8 +62991,8 @@
           "hiBp": 6509,
           "rateBp": 6172,
           "aClass": "fact",
-          "bClass": "fact",
-          "usable": true
+          "bClass": "method",
+          "usable": false
         },
         {
           "a": "first (via STABILITY_LADDER in powerStateProse.js)",
@@ -61836,7 +63023,7 @@
           "loBp": 5573,
           "hiBp": 6267,
           "rateBp": 5924,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -62100,9 +63287,9 @@
           "loBp": 5154,
           "hiBp": 5856,
           "rateBp": 5508,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "eco.incomeSources.reduce",
@@ -62111,9 +63298,9 @@
           "loBp": 5076,
           "hiBp": 5779,
           "rateBp": 5430,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "legitimacy.govMultiplier",
@@ -62463,9 +63650,9 @@
           "loBp": 4427,
           "hiBp": 5132,
           "rateBp": 4779,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "conflict.intensity",
@@ -62585,7 +63772,7 @@
           "hiBp": 4806,
           "rateBp": 4453,
           "aClass": "unrooted",
-          "bClass": "fact",
+          "bClass": "method",
           "usable": false
         },
         {
@@ -63068,7 +64255,7 @@
           "loBp": 3746,
           "hiBp": 4440,
           "rateBp": 4089,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -63255,9 +64442,9 @@
           "loBp": 3478,
           "hiBp": 4164,
           "rateBp": 3815,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "eco.safetyProfile.blackMarketCapture",
@@ -63332,7 +64519,7 @@
           "loBp": 3199,
           "hiBp": 3873,
           "rateBp": 3529,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "unrooted",
           "usable": false
         },
@@ -63607,9 +64794,9 @@
           "loBp": 2870,
           "hiBp": 3528,
           "rateBp": 3190,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "first (via STABILITY_LADDER in powerStateProse.js)",
@@ -63883,8 +65070,8 @@
           "hiBp": 3141,
           "rateBp": 2813,
           "aClass": "fact",
-          "bClass": "fact",
-          "usable": true
+          "bClass": "method",
+          "usable": false
         },
         {
           "a": "prison",
@@ -64069,7 +65256,7 @@
           "loBp": 2244,
           "hiBp": 2859,
           "rateBp": 2539,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -64334,8 +65521,8 @@
           "hiBp": 2521,
           "rateBp": 2214,
           "aClass": "fact",
-          "bClass": "fact",
-          "usable": true
+          "bClass": "method",
+          "usable": false
         },
         {
           "a": "conflict.intensity",
@@ -64652,9 +65839,9 @@
           "loBp": 1639,
           "hiBp": 2194,
           "rateBp": 1901,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "forces.charter.present",
@@ -65082,8 +66269,8 @@
           "hiBp": 1864,
           "rateBp": 1589,
           "aClass": "fact",
-          "bClass": "fact",
-          "usable": true
+          "bClass": "method",
+          "usable": false
         },
         {
           "a": "breakdown.safety",
@@ -65093,8 +66280,8 @@
           "hiBp": 1864,
           "rateBp": 1589,
           "aClass": "fact",
-          "bClass": "fact",
-          "usable": true
+          "bClass": "method",
+          "usable": false
         },
         {
           "a": "legitimacy.governanceFractured",
@@ -65455,9 +66642,9 @@
           "loBp": 1154,
           "hiBp": 1642,
           "rateBp": 1380,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "forces.militia.present",
@@ -65686,7 +66873,7 @@
           "loBp": 999,
           "hiBp": 1461,
           "rateBp": 1211,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "synthetic",
           "usable": false
         },
@@ -66214,9 +67401,9 @@
           "loBp": 728,
           "hiBp": 1136,
           "rateBp": 911,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "conflict.intensity",
@@ -66742,9 +67929,9 @@
           "loBp": 463,
           "hiBp": 804,
           "rateBp": 612,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "forces.watch.present",
@@ -67391,9 +68578,9 @@
           "loBp": 149,
           "hiBp": 367,
           "rateBp": 234,
-          "aClass": "fact",
+          "aClass": "method",
           "bClass": "fact",
-          "usable": true
+          "usable": false
         },
         {
           "a": "leading.bucket",
@@ -67755,7 +68942,7 @@
           "hiBp": 151,
           "rateBp": 65,
           "aClass": "synthetic",
-          "bClass": "fact",
+          "bClass": "method",
           "usable": false
         },
         {
@@ -68301,6 +69488,12 @@
           "pool": "magicDependency false",
           "rateBp": 9909,
           "towns": 761
+        },
+        {
+          "block": "DS-ECO-2",
+          "pool": "FOOD: deficit",
+          "rateBp": 9258,
+          "towns": 711
         },
         {
           "block": "DS-GEN-11",
@@ -69509,6 +70702,12 @@
           "towns": 45
         },
         {
+          "block": "DS-ECO-2",
+          "pool": "FOOD: surplus",
+          "rateBp": 573,
+          "towns": 44
+        },
+        {
           "block": "DS-ECO-6",
           "pool": "TIER: significant off-book activity (≥15)",
           "rateBp": 560,
@@ -69677,6 +70876,12 @@
           "towns": 13
         },
         {
+          "block": "DS-ECO-2",
+          "pool": "FOOD: balanced",
+          "rateBp": 169,
+          "towns": 13
+        },
+        {
           "block": "DS-ECO-12",
           "pool": "TRADE PROFILE: imports only, nothing outward",
           "rateBp": 156,
@@ -69685,6 +70890,12 @@
         {
           "block": "DS-POW-2",
           "pool": "siege matched",
+          "rateBp": 156,
+          "towns": 12
+        },
+        {
+          "block": "DS-SUP-3",
+          "pool": "A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
           "rateBp": 156,
           "towns": 12
         },

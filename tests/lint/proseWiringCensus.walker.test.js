@@ -28,19 +28,26 @@ import { describe, expect, test } from 'vitest';
 import {
   absenceOf, attachSets, censusIndex, censusSummary, CIVIC_OBJECT_CLASSES, cleanPredicate,
   coOccurringPairs, COVERT_SOURCES, customReachable, decorateRows, factBudget, factIndex,
-  isCovertPath, moduleKeyTables, narrowedReads, objectClassOf, poolKeyFunctions, rootOf,
-  stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
+  isCovertPath, JS_METHOD_TAILS, moduleKeyTables, narrowedReads, objectClassesOf, objectClassOf,
+  poolKeyFunctions, rootOf, stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
 } from '../../src/domain/prose/wiringCensus.js';
 import {
-  aliasDraft, aliasKey, buildCensus, censusCheck, CENSUS_JSON, draftSources, EVIDENCE_ORDER,
-  factMounts, producerIndex, relationsFromSitting, relationTable, serialise, wilsonBp,
-  wilsonFloorCount,
+  aliasDraft, aliasKey, astLineIndex, astTokens, buildCensus, censusCheck, CENSUS_JSON,
+  draftSources, EVIDENCE_ORDER, factMounts, producerIndex, relationsFromSitting, relationTable,
+  serialise, wilsonBp, wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
 // ⛔ THE SHIPPED RULE, IMPORTED, NEVER RE-SPELLED HERE (car 0e). The first cut of the per-tier
 // arm kept a second copy of the silence rule in this file, so the fixture proved the copy and
 // the corpus figure proved the script, and nothing tied the two together. The estate's idiom
 // is the walker importing the scanner, which is how the census's own readers arrive above.
-import { tierSilences as tierSilencesOf } from '../../scripts/prose-rate-corpus.mjs';
+import {
+  deskReturns, economyDeskOptions, impairedInstitutionOf, pairMemberClass,
+  tierSilences as tierSilencesOf,
+} from '../../scripts/prose-rate-corpus.mjs';
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { composedReadingSequence } from '../fixtures/composedReadingSequence.js';
 import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { walkEntry, walkPair } from '../../src/domain/prose/entryWalker.js';
 import { walkGrammar } from '../../src/domain/prose/grammarWalker.js';
@@ -821,9 +828,17 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // ⚠ THE THREE MOVED WITH THE GRAIN (car 0e). `absent` is keyed on `reads`, so the branch
     // grain shrinks the read paths from 757 to 529 and the distribution with them; nothing
     // about a path's absence semantics changed, only how many paths a pool is entitled to.
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(377);
-    expect(totals.default, 'read paths where a fallback hides it').toBe(10);
-    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(64);
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(370);
+    expect(totals.default, 'read paths where a fallback hides it').toBe(3);
+    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(60);
+    // ⭐ THE FOURTH LABEL, ADDED AT MEASURE CAR 3 (the fold's cure 8, and the shape its P5
+    // found in the pair table). A chain whose TAIL is a JS method — `eco.incomeSources.reduce`,
+    // `readings.notableAbsences.map` — records a CALL the key function made on a reading, not a
+    // field of the world. Asking the producer index about `map` answered `not-produced` on
+    // eighteen cells, and every one of them was a wrong verdict rather than a finding.
+    expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
+    expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
+      .toBe(451);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -880,6 +895,27 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
     // The paired negative: a modifier over a DIFFERENT object attaches lawfully.
     expect(objectClassOf('watch: bought (covert)')).not.toBe(objectClassOf(spine));
     expect(committed.totals.objectClassed, 'and the corpus count is an integer').toBe(99);
+    // ⭐ THE AMBIGUITY, NAMED (the fold's P3, cure 9). A key can name TWO civic objects and the
+    // first-wins reading hid it: `granary AND hospital` answered `store`, so T-F12 — whose whole
+    // job is to refuse an attach whose spine and modifier name the same object — would have
+    // admitted a `care` modifier beside a spine that already names the hospital. The census now
+    // records the SET and a refusal reads the INTERSECTION.
+    expect(objectClassesOf('Disasters & Famine: granary AND hospital'),
+      'the key names a store AND a care house, in the frozen list\'s order').toEqual(['store', 'care']);
+    expect(objectClassesOf('Disasters & Famine: NO reserves, NO medical provision'),
+      'and the shipped key the walker used to pin as `store` alone').toEqual(['store', 'care']);
+    expect(objectClassesOf('MOOD: calm'), 'a key naming no civic object gets an empty set').toEqual([]);
+    const intersects = (a, b) => objectClassesOf(a).some((k) => objectClassesOf(b).includes(k));
+    expect(intersects('Disasters & Famine: granary AND hospital', 'Medical Readiness: Clergy care'),
+      'the SET refuses what the first class admitted: both name the care house').toBe(true);
+    expect(intersects('Disasters & Famine: granary AND hospital', 'WALLED-STRAINED'),
+      'and a modifier over a different object still attaches').toBe(false);
+    expect(committed.rows.filter((r) => (r.objectClasses || []).length > 1).length,
+      'shipped keys naming MORE THAN ONE class, which first-wins decided silently').toBe(12);
+    for (const row of committed.rows) {
+      expect(row.objectClass, `${row.pool}: the single-valued column is the set's first`)
+        .toBe(row.objectClasses.length ? row.objectClasses[0] : null);
+    }
   });
 
   test('a numeric pool key is named, and its sibling is not', () => {
@@ -893,6 +929,194 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
     expect(rows.find((r) => r.pool === '1').status, 'and it is a real resolved row, not a parse artefact')
       .toBe(WIRING_STATUS.RESOLVED);
     expect(committed.rows.filter((r) => /^\d+$/.test(r.pool)), 'the shipped corpus holds none').toEqual([]);
+  });
+});
+
+describe('MEASURE car 3 — the desk-read recipe, the absence readers and the `sites` column', () => {
+  test('⭐ THE ECONOMY DESK IS CALLED BY ITS SHIPPED RECIPE, AND THE TWO AUDIENCES DIFFER', () => {
+    // ⛔ THE FOLD'S FINDING 1 (SITTING §P.1), CONVICTED. `deskReturns` passed `{seed, audience}`
+    // to `economyDeskRead`, which takes four readings from its OPTIONS and defaults each to
+    // null, and which keys the audience on `options.playerView` — a key nothing passed. So the
+    // instrument composed that desk with four caller readings absent and at the DM face on
+    // BOTH audiences: the RATE corpus under-fired three FOOD pools, and the composed-prose
+    // manifest was two-audience on five desks and DM-face-twice on the sixth, with 309 player
+    // cells carrying DM-only prose at `index: -1`.
+    // THE TOWN IS NAMED, not sampled: `thorp|germanic|forest|isolated|civilized` is the first
+    // golden configuration on which `DS-ECO-6 :: TIER: minor shadow activity` fires, and that
+    // pool holds a `dm-only` variant beside an unmarked one. A town where the two faces cannot
+    // differ would make this arm pass while proving nothing, which is the state it convicts.
+    const config = goldenCorpus()[2];
+    expect(keyOf(config), 'the golden configuration this arm reads')
+      .toBe('thorp|germanic|forest|isolated|civilized|golden-master-v3');
+    const { _seed: seed, ...cfg } = config;
+    const town = generateSettlementPipeline(cfg, null, { seed, customContent: {} });
+    const at = (audience) => ({ seed: String(town._seed ?? town.id ?? seed), audience });
+    // THE FIXTURE ARM: every reading `economyDeskRead` would default to `null` is supplied.
+    const options = economyDeskOptions(town, at('dm'));
+    for (const reading of ['foodBalance', 'granaryOutlook', 'flowDrift', 'impairedInstitution']) {
+      expect(reading in options, `the recipe supplies ${reading}`).toBe(true);
+    }
+    expect(options.foodBalance.available, 'and `deriveFoodBalance` really reads this town').toBe(true);
+    expect(options.playerView, 'the DM face').toBe(false);
+    expect(economyDeskOptions(town, at('player')).playerView, 'and the player face').toBe(true);
+    expect(impairedInstitutionOf(town) === null || typeof impairedInstitutionOf(town) === 'string',
+      'the ServicesTab derivation answers a house or nothing, never undefined').toBe(true);
+    // THE TWO-AUDIENCE ARM: the desk's return must DIFFER somewhere between the faces. Before
+    // the cure this read `true` by construction, on every town in the estate.
+    const dmDesk = economyDeskRead(town, economyDeskOptions(town, at('dm')));
+    const playerDesk = economyDeskRead(town, economyDeskOptions(town, at('player')));
+    expect(JSON.stringify(dmDesk) === JSON.stringify(playerDesk),
+      'the economy desk answers the two audiences identically, which is the defect this arm exists for')
+      .toBe(false);
+    // AND THE PAIRED NEGATIVE, so the arm is not simply reading two different calls: the SAME
+    // audience twice is byte-identical, or the difference above would prove nothing about the
+    // audience at all.
+    expect(JSON.stringify(economyDeskRead(town, economyDeskOptions(town, at('dm')))),
+      'the same face twice is the same prose').toBe(JSON.stringify(dmDesk));
+    // THE DEFECT ITSELF, driven: the old call shape cannot tell the faces apart.
+    expect(JSON.stringify(economyDeskRead(town, at('dm'))),
+      'the old `{seed, audience}` call answers the DM face at both audiences')
+      .toBe(JSON.stringify(economyDeskRead(town, at('player'))));
+    // AND THE SIX-DESK RECIPE CARRIES IT: `deskReturns` is what both instruments compose
+    // through, so the difference must survive the walk and not only the direct call.
+    const economyOf = (audience) => deskReturns(town, at(audience)).find((d) => d.desk === 'economy');
+    expect(JSON.stringify(economyOf('dm').value) === JSON.stringify(economyOf('player').value),
+      'the recipe both instruments use carries the audience through').toBe(false);
+  }, 120_000);
+
+  test('⭐ AND THE FIXTURE THE DEFECT CAME FROM CARRIES THE SAME CURE', () => {
+    // ⛔ CURE 2. `tests/fixtures/composedReadingSequence.js:192` — INSTR-912 car 9's "corrected"
+    // sequence — carried the identical `economyDeskRead(settlement, opts)` call, and car 0's
+    // `deskReturns` took the defect from there. Fixed in the same commit or the next car
+    // re-inherits it: both now build the economy desk's options through ONE function, and this
+    // arm is the two-audience difference read over the FIXTURE rather than over the script.
+    const dm = composedReadingSequence(1, { audience: 'dm' });
+    const player = composedReadingSequence(1, { audience: 'player' });
+    expect(dm.towns, 'one town at each face').toBe(1);
+    expect(dm.deskThrows, 'and no desk threw on either').toEqual({});
+    expect(player.deskThrows).toEqual({});
+    const textAt = (run, pool) => run.rungs.filter((r) => r.pool === pool).map((r) => r.text).join('|');
+    const differing = dm.rungs.filter((rung, i) => player.rungs[i] && player.rungs[i].text !== rung.text);
+    expect(differing.length, 'the two faces read differently somewhere in the sequence').toBeGreaterThan(0);
+    expect(textAt(dm, differing[0].pool) === textAt(player, differing[0].pool),
+      `${differing[0].pool} reads the same on both faces`).toBe(false);
+  }, 120_000);
+
+  test('a REFUSAL GUARD is not a default, and a SHORTHAND write is not un-produced', () => {
+    // ⛔ THE FOLD'S R3, cure 8. `absenceOf` tested `chain \s* (\|\||\?\?)`, which cannot tell
+    // `x || fallback` — a default wearing a reading's clothes, the finding this column exists
+    // for — from `!x || typeof x !== 'object'`, a guard that REFUSES and hands the predicate
+    // nothing. Seven of the ten shipped `default` cells were guards.
+    const guard = "if (!inst || typeof inst !== 'object') return null; return inst.name;";
+    const fallback = 'const inst = readings.inst || {}; return inst.name;';
+    expect(absenceOf('readings.inst', guard, new Set(['inst'])),
+      'a guard that returns null hides nothing from the predicate').toBe('measured');
+    expect(absenceOf('readings.inst', fallback, new Set(['inst'])),
+      'and the same tokens as a fallback still read `default`').toBe('default');
+    expectPresentThenAbsent(
+      [absenceOf('readings.inst', fallback, new Set(['inst']))],
+      [absenceOf('readings.inst', guard, new Set(['inst']))],
+      'default',
+      'the `||` alone is not the finding; the operand is',
+    );
+    // ⛔ THE FOLD'S P2, the other half of cure 8. `producerIndex` matched `key:` and `.key =`
+    // by line regex, so an ES6 SHORTHAND property write was invisible and six cells carried a
+    // wrong `not-produced` verdict. The estate had already spelled the cure by hand for one of
+    // them (`src/domain/fieldManifest.js:373`, `producerProbe`). The index reads the syntax
+    // tree now, where a shorthand key is a Property like any other.
+    const shorthand = astTokens('const f = (blockadeBypass) => ({ stockpile: 1, blockadeBypass });');
+    expect(shorthand.parsed, 'the fixture parses').toBe(true);
+    expect(shorthand.writes.map((w) => w.name).sort(), 'both keys are writes, shorthand included')
+      .toEqual(['blockadeBypass', 'stockpile']);
+    expect(/(?:^|[{,\s])([A-Za-z_$][\w$]*)\s*:/.test('  blockadeBypass,'),
+      'while the line regex it replaces sees nothing at all').toBe(false);
+    expect(/producerProbe:[^\n]*blockadeBypass/.test(readFileSync(join(ROOT, 'src/domain/fieldManifest.js'), 'utf8')),
+      'and the estate had spelled this cure by hand for the same field, at fieldManifest.js:373')
+      .toBe(true);
+    const { produced } = producerIndex();
+    for (const key of ['blackMarketCapture', 'blockadeBypass', 'prominentRelationship']) {
+      expect(produced.has(key), `${key} is written as a shorthand property and the index sees it`).toBe(true);
+    }
+    expect(produced.has('zzzNoWriterAnywhere'), 'and a key nothing writes is still absent').toBe(false);
+    // ⛔ AND THE FOUR SHAPES THE AST REFUSES, which is why `generator-write` was re-cut with it
+    // (SITTING §P.2-27): a comment, a prose string, a template string and an arrow's parameter
+    // all named tokens the line reader counted as writes or as mentions.
+    // The fixture is the four refuted shapes in their SHIPPED spelling: a comment line, a
+    // `reason:` prose string, a template string, and a prose-template table whose key is on one
+    // line and whose arrow parameter is the root the old rule read as a mention.
+    const noisy = astLineIndex(new Map([['fixture/noisy.js', [
+      '// forces: a comment naming a key',
+      "const reason = 'underfunded: a prose string';",
+      'const t = `siege: ${name}`;',
+      'const table = {',
+      '  famine: (row) =>',
+      '    `${row} went hungry`,',
+      '};',
+    ].join('\n')]]));
+    expect([...noisy.byWrite.keys()].sort(), 'only the real Property key is a write').toEqual(['famine']);
+    for (const dead of ['forces', 'underfunded', 'siege']) {
+      expect(noisy.byToken.has(dead), `${dead} is inside a comment or a string and proposes nothing`).toBe(false);
+    }
+    expect([...(noisy.byWrite.get('famine') || [])], 'the write is cited at its own line')
+      .toEqual(['fixture/noisy.js:5']);
+    expect([...(noisy.byToken.get('row') || [])],
+      'and the arrow PARAMETER binding on line 5 is not a mention; only its use in the body is')
+      .toEqual(['fixture/noisy.js:6']);
+    expect(noisy.unparsed, 'and nothing was skipped').toEqual([]);
+    // THE WRITE SHAPES, both of them, over a file set — what the alias draft consumes.
+    const index = astLineIndex(new Map([['f.js', 'const o = { granary: 1 }; o.walls = 2;']]));
+    expect([...index.byWrite.keys()].sort(), 'the two writes, keyed by the alias reading').toEqual(['granary', 'walls']);
+  });
+
+  test('⭐ THE `sites` COLUMN IS CONVICTED BY A FIXTURE THAT MUST FIRE', () => {
+    // ⛔ THE FOLD'S P7. `totals.mountedRows` 566 was covered by the blunt byte-identity arm and
+    // by nothing else: `grep -c "566\|mountedRows"` over this file answered 0. A change-detector
+    // says a number moved; it says nothing about what the column MEANS.
+    const pools = poolsFrom([
+      ['DS-FIX-14', [['MOUNTED: the block speaks', SETTLEMENT_ONLY]]],
+      ['DS-FIX-15', [['DARK: the registry names no mount', SETTLEMENT_ONLY]]],
+    ]);
+    const mounted = fixtureCensus(COMPOSER_ONE_BRANCH, pools, {
+      mounts: [{ mount: 'defense.wallRationale', tab: 'defense', blockId: 'DS-FIX-14' }],
+    }).rows;
+    const speaking = mounted.filter((r) => (r.sites || []).length > 0);
+    expect(speaking.map((r) => r.block), 'only the block the registry mounts carries a site').toEqual(['DS-FIX-14']);
+    expect(speaking[0].sites, 'and it carries the mount by name').toEqual(['defense.wallRationale']);
+    // THE PAIRED NEGATIVE: with no registry the column is EMPTY on every row, so a census that
+    // stopped reading the registry could not pass this arm by answering the same thing twice.
+    const blind = fixtureCensus(COMPOSER_ONE_BRANCH, pools).rows;
+    expect(blind.filter((r) => (r.sites || []).length > 0), 'a blind census mounts nothing').toEqual([]);
+    // AND THE SHIPPED INTEGER, tied to the same column on the same rule.
+    expect(committed.totals.mountedRows, 'rows the mount registry gives a place to speak').toBe(566);
+    expect(committed.rows.filter((r) => (r.sites || []).length > 0).length,
+      'and the total is the column, not a second count').toBe(committed.totals.mountedRows);
+    const registryBlocks = new Set(DOSSIER_MOUNTS.map((m) => m.blockId));
+    expect(committed.rows.filter((r) => (r.sites || []).length > 0).every((r) => registryBlocks.has(r.block)),
+      'every mounted row sits on a block the registry names').toBe(true);
+  });
+
+  test('⭐ THE THREE RATIFIED ALIASES, AND NOTHING ELSE (SITTING §P.2-27)', () => {
+    // The chair ratified the draft's `identifier` rows — the same identifier on both sides,
+    // ARCH §5.2's own worked edge among them — and WITHDREW the four "would join" rows and
+    // every `generator-write` citation that was a comment, a prose string, a template string or
+    // an arrow parameter. The census RECORDS the ratification so the relations leaf (SEAM car
+    // 4) has one source; it is still not a leaf and the shipped join is still zero.
+    const ratified = committed.ratifiedAliases;
+    expect(ratified.rows.map((r) => `${r.endpoint} -> ${r.readRoot}`), 'the three, in the draft\'s order').toEqual([
+      'cause:occupation -> war',
+      'economicGates.military -> settlement.defenseProfile',
+      'system:food_security -> eco',
+    ]);
+    expect(committed.totals.ratifiedAliases, 'and the total says three').toBe(3);
+    expect(new Set(ratified.rows.map((r) => r.evidence)), 'every one of them an identifier row')
+      .toEqual(new Set(['identifier']));
+    for (const row of ratified.rows) {
+      expect(row.at, `${row.endpoint} carries the read path that proposed it`).not.toBe('');
+      expect(committed.rows.some((r) => (r.reads || []).includes(row.at)),
+        `${row.at} is a read path the shipped census carries`).toBe(true);
+    }
+    expect(String(ratified.ruling), 'the ruling that ratified them is quoted in the file').toMatch(/P\.2-27/);
+    expect(committed.relations.join.strictBoth, 'and the shipped join is unmoved at zero').toBe(0);
   });
 });
 
@@ -1163,9 +1387,30 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
     // src/generators/, so a car that edits a generator comment can move them; they are
     // asserted because they are this car's FINDING and a drift should be seen, not because
     // they are structural.
-    expect(draft.rows.length, 'candidate rows at this tip').toBe(37);
-    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(15);
-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(74);
+    expect(draft.rows.length, 'candidate rows at this tip').toBe(33);
+    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(14);
+    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(75);
+    // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
+    // the nine citations the first cut carried were not writes of world state at all — a
+    // `reason:` prose string, a comment line, a template string and two arrow parameters of a
+    // prose-template table — and all four "would join" rows rested on one of them. The evidence
+    // is re-cut to a real Property key or member assignment read from the syntax tree, where a
+    // string, a comment and a parameter binding can propose nothing.
+    const byEvidence = draft.rows.reduce((m, r) => m.set(r.evidence, (m.get(r.evidence) || 0) + 1), new Map());
+    expect(byEvidence.get('generator-write'), 'the four sound citations survive the AST cut').toBe(4);
+    expect(draft.rows.filter((r) => r.evidence === 'generator-write').map((r) => r.at.replace(/:\d+$/, '')).sort(),
+      'and each is a real write in a generator').toEqual([
+      'src/generators/defenseGenerator.js',
+      'src/generators/history/historyEventStrands.js',
+      'src/generators/npc/factionLeaderSecret.js',
+      'src/generators/npcGenerator.js',
+    ]);
+    for (const withdrawn of ['src/generators/structuralValidator.js:588', 'src/generators/stressNarrative.js:80',
+      'src/generators/defenseGenerator.js:608', 'src/generators/narrativeText.js:53',
+      'src/generators/stressNarrative.js:83']) {
+      expect(draft.rows.map((r) => r.at), `${withdrawn} was a comment, a string or an arrow parameter`)
+        .not.toContain(withdrawn); // anchored: the four sound citations are asserted above
+    }
     /** @type {Set<string>} */
     const proposed = new Set(draft.rows.map((r) => r.endpoint));
     const joined = committed.relations.rows.filter((r) => proposed.has(r.a) && proposed.has(r.b));
@@ -1238,13 +1483,20 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     expect(Object.fromEntries(rate.corpus.tierMarginals)).toEqual({
       thorp: 128, hamlet: 128, village: 128, town: 128, city: 128, metropolis: 128,
     });
-    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(267);
+    // ⭐ 267 BECAME 271 AT MEASURE CAR 3, AND THE FOUR ARE THE COST OF ONE OMITTED READING.
+    // `deskReturns` called `economyDeskRead(s, opts)` with `opts = {seed, audience}`, and that
+    // recipe takes `foodBalance`, `granaryOutlook`, `flowDrift` and `impairedInstitution` from
+    // its OPTIONS and defaults each to null. `deriveFoodBalance(s).available` is true on 768 of
+    // 768, so DS-ECO-2's three FOOD pools could never fire in this corpus, and DS-SUP-3's
+    // impaired-house lens could not either. This is the corpus every rate figure below is read
+    // from, so it is also the reason the departure line and the per-tier table moved.
+    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(271);
     // The one-config 200-town probe reached 181; the grid reaches more, which is the point.
     expect(rate.rows.length, 'more than the single-configuration probe could reach').toBeGreaterThan(181);
   });
 
   test('a pool silent at a tier where its block MOUNTS is a per-tier finding', () => {
-    expect(committed.rate.tierSilences.length, '(pool, tier) rows on the shipped grid').toBe(347);
+    expect(committed.rate.tierSilences.length, '(pool, tier) rows on the shipped grid').toBe(352);
     for (const row of committed.rate.tierSilences) {
       expect(row.sites, 'every finding is on a MOUNTED block').toBeGreaterThan(0);
       expect(row.firedOverall, 'and on a pool that fired somewhere').toBeGreaterThan(0);
@@ -1278,15 +1530,15 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     const silences = committed.rate.tierSilences;
     const lawful = silences.filter((r) => r.verdict === 'LAWFUL');
     const missing = silences.filter((r) => r.verdict === 'MISSING-AT-TIER');
-    expect(lawful.length, 'lawful silences, at 128 towns per tier').toBe(303);
-    expect(missing.length, 'and the rows the authoring wave inherits').toBe(44);
-    expect(lawful.length + missing.length, 'the two limbs partition the finding').toBe(347);
+    expect(lawful.length, 'lawful silences, at 128 towns per tier').toBe(307);
+    expect(missing.length, 'and the rows the authoring wave inherits').toBe(45);
+    expect(lawful.length + missing.length, 'the two limbs partition the finding').toBe(352);
     expect(new Set(lawful.map((r) => r.limb)), 'each names the limb that answered it').toEqual(new Set(['value-class']));
     expect(new Set(missing.map((r) => r.limb))).toEqual(new Set(['rung-dark']));
     // THE FOURTH TIER, in the table the authoring wave reads and not in a second list.
-    expect(committed.totals.tiers['MISSING-AT-TIER'], 'the fourth tier carries them').toBe(44);
+    expect(committed.totals.tiers['MISSING-AT-TIER'], 'the fourth tier carries them').toBe(45);
     const fourth = committed.tiers.filter((t) => t.tier === TIERS.MISSING_AT_TIER);
-    expect(fourth.length).toBe(44);
+    expect(fourth.length).toBe(45);
     for (const row of fourth) {
       expect(row.subject, 'each names the pool AND the size').toMatch(/ @ \w+$/);
       expect(row.count, 'and carries the measurement that put it there').toMatch(/fired on \d+ towns overall/);
@@ -1295,9 +1547,31 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // twelve of the 44 sit on a block whose ladder SPLITS across a module-level key table and
     // the function carrying its `||` fallback, where the two halves cannot see each other.
     // Both are DECLARED with their integers rather than cured behind the verdict.
-    expect(missing.filter((r) => r.siblingRungSpoke).length, 'every one of them').toBe(44);
+    expect(missing.filter((r) => r.siblingRungSpoke).length, 'every one of them').toBe(45);
     expect(missing.filter((r) => r.splitLadder).length, 'the split-ladder shape, counted').toBe(12);
-    expect(new Set(missing.map((r) => r.block)).size, 'over this many blocks').toBe(6);
+    expect(new Set(missing.map((r) => r.block)).size, 'over this many blocks').toBe(7);
+    // ⛔ THE THIRD COARSENESS, DECLARED WITH ITS INTEGER (the fold's P6, receipt row 17). The
+    // LAWFUL limb requires ANOTHER pool of the SAME RUNG to have fired at that tier, so a rung
+    // the census knows exactly one pool for can never be lawful and every tier it is quiet at
+    // is automatically rung-dark. Twelve of these rows sit on such a rung — `originTierPoolKey`
+    // 4 (already declared as a split ladder), `contractedForcePoolKey` 4, `operationRolePoolKey`
+    // 3 and `impairedServicePoolKey` 1 (the row cure 1 gave back) — leaving EIGHT undeclared
+    // rows that are not authoring-wave work at all.
+    const poolsPerRung = new Map();
+    for (const row of committed.rows) {
+      const rung = `${row.block} :: ${row.keyFunction}`;
+      poolsPerRung.set(rung, (poolsPerRung.get(rung) || 0) + 1);
+    }
+    const singlePool = missing.filter((r) => poolsPerRung.get(r.rung) === 1);
+    expect(singlePool.length, 'MISSING-AT-TIER rows on a rung whose LAWFUL limb is unreachable').toBe(12);
+    expect(singlePool.filter((r) => !r.splitLadder).length,
+      'of which this many are beyond the twelve already declared').toBe(8);
+    expect([...new Set(singlePool.map((r) => r.rung))].sort(), 'and the four rungs they sit on').toEqual([
+      'DS-DEF-5 :: contractedForcePoolKey',
+      'DS-GEN-6 :: originTierPoolKey',
+      'DS-POW-6 :: operationRolePoolKey',
+      'DS-SUP-3 :: impairedServicePoolKey',
+    ]);
     // THE RULE ITSELF, on a fixture: two pools of ONE rung, one silent at hamlet where the
     // other spoke, against a rung with nothing at hamlet at all.
     const tiers2 = [['hamlet', 4], ['city', 4]];
@@ -1338,12 +1612,27 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // facts from PREDICATE fields, two of whose shapes are this instrument's own bookkeeping:
     // the table rung's synthetic label and a bare unrooted parameter. A floor set on the
     // whole distribution would be set on 503 pairs of labels.
-    expect(pairs.usable, 'pairs whose BOTH members are dotted reading paths').toBe(226);
-    expect(pairs.usableClearing, 'and those clearing the bound').toBe(170);
+    // ⭐ 226 BECAME 205 AND 170 BECAME 151 AT MEASURE CAR 3 (the fold's P5, cure 10).
+    // `pairMemberClass` called anything with a dot a `fact`, so `eco.incomeSources.reduce` —
+    // `Array.prototype.reduce`, not a reading of the world — carried 21 of the 226 usable pairs
+    // and 19 of the 170 clearing them, and four of the twenty most frequent usable pairs were
+    // on it. SITTING §O.3 sets the co-occurrence floor over the USABLE pairs, so 11 % of the
+    // licensed list was a method call until this cure.
+    expect(pairs.usable, 'pairs whose BOTH members are dotted reading paths').toBe(205);
+    expect(pairs.usableClearing, 'and those clearing the bound').toBe(151);
+    expect(pairMemberClass('eco.incomeSources.reduce'), 'the tail is a builtin, never a fact').toBe('method');
+    expect(pairMemberClass('eco.incomeSources'), 'and the reading it was called on is a fact').toBe('fact');
+    expect(pairMemberClass('granary'), 'a bare key-function parameter is unrooted').toBe('unrooted');
+    expect(pairMemberClass('x (via TABLE in f.js)'), 'and the table rung\'s own label is synthetic').toBe('synthetic');
+    expect(JS_METHOD_TAILS.has('reduce'), 'the excluded list is published as a frozen constant').toBe(true);
+    expect(JS_METHOD_TAILS.has('stockpile'), 'and it does not swallow a real settlement field').toBe(false);
+    expect(pairs.rows.filter((p) => p.aClass === 'method' || p.bClass === 'method').length,
+      'the pairs the exclusion removed, counted rather than dropped in silence').toBe(38);
     // ⛔ NO FLOOR IS SET HERE. The distribution ships; the floor is the chair's.
     expect(committed.rate.departureReport.lineBp, 'the departure line is a REPORT at 10 %').toBe(1000);
+    expect(committed.rate.departureReport.uncommon, 'the departure bits at the report line').toBe(72);
     expect(committed.rate.departureReport.uncommon
-      + committed.rate.departureReport.common, 'over every fired pool').toBe(267);
+      + committed.rate.departureReport.common, 'over every fired pool').toBe(271);
   });
 
   test('the wizard-default weighting ships as a REPORT column beside every rate', () => {

@@ -1114,7 +1114,14 @@ check_caught "prose-presence/a sense leaves the published lexicon and the spread
 #     7 red of 26 — the anti-vacuity split, controls (c1), (c1c), (c1e), (c1f), (d) and the
 #     grammar walker's arm D. C-sibling stayed green a second time, on a file with five more
 #     assertions than the first run. Restored cmp-exact => 26 passed.
-perl -0pi -e 's/    predicate: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js
+#     ⛔ RE-ANCHORED AT MEASURE CAR 3 (the fold's R2, cure 3). Car 0e inserted `branchReads: [],`
+#     between `predicate: []` and `fieldsRead: []` (wiringCensus.js:699-702) and this anchor
+#     stopped matching: executed standalone against the committed bytes, md5
+#     0a28c398a1b6cff56183212bed8fa7fd BEFORE and AFTER — the plant mutated nothing and the
+#     sweep reported it as a BROKEN GAP nobody read. Car 11's lesson, which this sweep quotes
+#     to itself, bit the one plant on the file the lane RE-SHAPED. Re-anchored and re-executed:
+#     md5 moves, the walker reds.
+perl -0pi -e 's/    predicate: \[\],\n    branchReads: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    branchReads: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js
 check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 # 81. INSTR-912 car 9 — A COLUMN CLOSES ONLY WHERE EVERY SOURCE THE SPEC NAMES IS READ.

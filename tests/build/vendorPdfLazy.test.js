@@ -1582,7 +1582,18 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
     }
   });
 
-  it('every prose leaf lands in a data-lazy chunk and in NO first-paint chunk', () => {
+  // ⛔ THE ARM IS SPLIT, AND THE SPLIT IS THIS FILE'S OWN STALE-DIST POLICY (the MEASURE fold's
+  // F1, cure 4). The membership check was one `it` under `describe.runIf(distExists)`, and it
+  // carried a PRESENCE limb — `if (!carriers.length) …` — which the policy at the top of this
+  // file rules must be `VERIFY_DIST`-gated, because a stale dist makes a presence assertion
+  // false-RED. The fingerprint is re-derived from the leaf SOURCE every run, so a source
+  // rewrite moves it while the stale chunk still carries the old text: executed, `fingerprint
+  // changed: true`, `does the OLD chunk contain the NEW fingerprint? false` ⇒ carriers `[]` ⇒
+  // RED, with a message naming two wrong causes. `npm run check` runs `test` before `build`,
+  // so the AUTHORING WAVE — the wave this instrument exists for — would have red on every leaf
+  // whose prose moved. The ABSENCE half stays ungated, where a stale dist can only
+  // under-report; the PRESENCE half moves behind the post-build re-run.
+  const membershipFindings = (needCarriers) => {
     const { files: closure } = entryStaticClosure();
     const closureSet = new Set(closure);
     const chunks = readdirSync(assetsDir).filter((f) => f.endsWith('.js'));
@@ -1599,12 +1610,21 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
         // measured correction to §10, which states it rides data-lazy). §12 car 13 is
         // owner-gated, "wire or retire", so BOTH states are lawful and this arm names the
         // one thing that never is: reaching first paint. Wiring it will move this row.
+        //
+        // ⚠ READING THE CAUSAL LEAF'S CARRIERS IS A PRESENCE READ TOO: on a stale dist the
+        // day it is wired, `carriers` is empty and this limb would report the OLD build. It
+        // therefore runs only in the gated half.
+        if (!needCarriers) continue;
         const unlawful = carriers.filter((f) => !/^data-lazy-/.test(f));
         if (unlawful.length) findings.push(`${rel}: carried by ${unlawful.join(', ')} — a wired causal register must ride data-lazy`);
         continue;
       }
       if (!carriers.length) {
-        findings.push(`${rel}: reached NO emitted chunk. Either its desk lost its last importer (the corpus is dead code) or the fingerprint no longer survives minification.`);
+        // THE PRESENCE LIMB. Gated: a stale dist cannot carry a fingerprint derived from a
+        // source it predates, and that is not a finding about the tree.
+        if (needCarriers) {
+          findings.push(`${rel}: reached NO emitted chunk. Either its desk lost its last importer (the corpus is dead code) or the fingerprint no longer survives minification.`);
+        }
         continue;
       }
       const strays = carriers.filter((f) => !/^data-lazy-/.test(f));
@@ -1616,9 +1636,28 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
       const inEntry = carriers.filter((f) => entryChunks.includes(f));
       if (inEntry.length) findings.push(`${rel}: landed in the ENTRY chunk ${inEntry.join(', ')}`);
     }
+    return { findings, closure };
+  };
+
+  it('no prose leaf reaches a first-paint chunk, the entry chunk or the eager data chunk', () => {
+    // THE ABSENCE HALF, UNGATED. Every finding here is "a leaf that IS somewhere it must never
+    // be", which a stale dist can only under-report — the policy's own reason for leaving
+    // absence checks in the plain phase, where they stop the regression at source-edit time.
+    const { findings, closure } = membershipFindings(false);
     expect(
       findings,
       `the composed-prose corpus left the lazy chunk. Closure (${closure.length} files):\n  ${closure.join('\n  ')}\n`
+      + `Findings:\n  ${findings.join('\n  ')}`,
+    ).toEqual([]);
+  });
+
+  it.skipIf(!requireDistRead)('every prose leaf lands in a data-lazy chunk (PRESENCE: the fresh build only)', () => {
+    // THE PRESENCE HALF, GATED. It reads a build taken after the current sources, so a leaf
+    // whose fingerprint reaches no chunk really has lost its importer.
+    const { findings, closure } = membershipFindings(true);
+    expect(
+      findings,
+      `a prose leaf reached no data-lazy chunk in a FRESH build. Closure (${closure.length} files):\n  ${closure.join('\n  ')}\n`
       + `Findings:\n  ${findings.join('\n  ')}`,
     ).toEqual([]);
   });

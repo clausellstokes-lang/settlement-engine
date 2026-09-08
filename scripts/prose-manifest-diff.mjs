@@ -58,8 +58,20 @@ export function classifyCell(base, tip) {
   const baseSpine = spineOf(base.pieces);
   const tipSpine = spineOf(tip.pieces);
   const spineHeld = JSON.stringify(baseSpine) === JSON.stringify(tipSpine);
-  if ((tip.pieces || []).length > (base.pieces || []).length && spineHeld
-    && base.textSha === tip.textSha) return 'ADDITIVE';
+  // ⛔ ADDITIVE DOES NOT REQUIRE THE TEXT TO HOLD, AND REQUIRING IT MADE THE VERDICT
+  // UNREACHABLE (the MEASURE fold's M-2/R9, cure 5). A modifier added beside a spine adds
+  // WORDS, so the cell's single `textSha` necessarily moves; the conjunct `base.textSha ===
+  // tip.textSha` therefore admitted only a state the cell shape cannot produce — a piece
+  // added that changed nothing a reader can see. Driven before the cure: a real addition read
+  // ADDITIVE 0 / WORDING-ONLY 1. ARCH §12 accepts the taste (car 6) and the AUTHORING wave
+  // (car 9) on "every affected cell ADDITIVE", so the criterion those cars are signed against
+  // could not be met by any car that actually added a piece.
+  //
+  // WHAT ADDITIVE MEANS NOW: the unit grew a piece and the SPINE did not move — same pool,
+  // same variant, same drawn index, same face. That is exactly "a piece added beside an
+  // unchanged spine", and the ORDER above still keeps it honest: a cell whose pool or variant
+  // moved is REPLACED or RE-INDEXED before this line is ever read.
+  if ((tip.pieces || []).length > (base.pieces || []).length && spineHeld) return 'ADDITIVE';
   if (base.textSha !== tip.textSha) return 'WORDING-ONLY';
   return 'UNCHANGED';
 }

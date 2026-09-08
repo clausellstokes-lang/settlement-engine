@@ -38,6 +38,8 @@ import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
+import { parse } from 'espree';
+
 import {
   attachSets, censusSummary, customReachable, factBudget, factIndex, rootOf, tierRows,
   TIERS, WIRING_STATUS, wiringCensus,
@@ -84,27 +86,96 @@ function jsFilesUnder(dir, out = []) {
   return out;
 }
 
+/** The parse this module reads every source with. `loc` is what makes a citation openable. */
+const ESPREE_OPTIONS = Object.freeze({ ecmaVersion: 2024, sourceType: 'module', loc: true });
+
+/**
+ * ⭐ WHAT A FILE WRITES AND WHAT IT MENTIONS, READ FROM THE SYNTAX TREE (the MEASURE fold's
+ * cures 8 and 27, SITTING §P.2-27).
+ *
+ * ⛔ WHY A LINE REGEX WAS NOT ENOUGH, TWICE OVER, AND BOTH ARE MEASURED FAILURES.
+ *   (a) `/([A-Za-z_$][\w$]*)\s*:/` cannot see an ES6 SHORTHAND property, so three real writes
+ *       — `blackMarketCapture,` `blockadeBypass,` `prominentRelationship,` — were invisible
+ *       and six `not-produced` cells carried a wrong verdict. The estate already spelled the
+ *       cure for one of them by hand (`fieldManifest.js:373`, `producerProbe`).
+ *   (b) The same regex reads a token inside a PROSE STRING, a TEMPLATE STRING or a COMMENT as
+ *       a write, and reads an arrow's PARAMETER as a mention of a root. Five of the nine
+ *       `generator-write` alias citations rested on exactly those four shapes.
+ * A syntax tree answers both: a Property key and a member assignment target are writes and
+ * nothing else is; an Identifier in code position is a mention, and a parameter BINDING is
+ * not (a function naming its own argument `name` is not naming the desk's `name` root).
+ *
+ * FAIL-CLOSED ON A PARSE FAILURE: the file contributes nothing and is NAMED, because a
+ * silent fallback to the regex would put the shape this function exists to refuse back in.
+ * @param {string} source
+ * @returns {{writes: Array<{name: string, line: number}>,
+ *   mentions: Array<{name: string, line: number}>, parsed: boolean}}
+ */
+export function astTokens(source) {
+  /** @type {Array<{name: string, line: number}>} */
+  const writes = [];
+  /** @type {Array<{name: string, line: number}>} */
+  const mentions = [];
+  /** @type {object} */
+  let root;
+  try { root = parse(String(source), ESPREE_OPTIONS); } catch { return { writes, mentions, parsed: false }; }
+  /** @param {object|null} node @returns {string} */
+  const nameOf = (node) => {
+    if (!node) return '';
+    if (node.type === 'Identifier') return node.name;
+    return node.type === 'Literal' && typeof node.value === 'string' ? node.value : '';
+  };
+  /** @param {unknown} node */
+  const walk = (node) => {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) { for (const child of node) walk(child); return; }
+    const row = /** @type {Record<string, any>} */ (node);
+    if (typeof row.type !== 'string') return;
+    if (row.type === 'Property' && !row.computed && row.key && row.key.loc) {
+      const name = nameOf(row.key);
+      if (name) writes.push({ name, line: row.key.loc.start.line });
+    }
+    if (row.type === 'AssignmentExpression' && row.left && row.left.type === 'MemberExpression'
+      && !row.left.computed && row.left.property && row.left.property.loc) {
+      const name = nameOf(row.left.property);
+      if (name) writes.push({ name, line: row.left.property.loc.start.line });
+    }
+    if (row.type === 'Identifier' && row.loc) mentions.push({ name: row.name, line: row.loc.start.line });
+    const isFunction = row.type === 'FunctionDeclaration' || row.type === 'FunctionExpression'
+      || row.type === 'ArrowFunctionExpression';
+    for (const key of Object.keys(row)) {
+      if (key === 'loc' || key === 'range' || key === 'parent') continue;
+      if (isFunction && key === 'params') continue;
+      walk(row[key]);
+    }
+  };
+  walk(root);
+  return { writes, mentions, parsed: true };
+}
+
 /**
  * THE PRODUCER INDEX — every leaf key some writer in the estate WRITES, as an object
- * literal key or as an assignment target, over `src/generators/**` and `src/domain/**`.
- * It is the ground of the `absent` column's `not-produced` limb: a read of a key no writer
- * produces cannot throw, it degrades to a default, and the arm behind it is dead on every
- * generated world (the observed-shape register's own sentence).
- * @returns {{produced: Set<string>, files: number}}
+ * literal key (SHORTHAND INCLUDED) or as an assignment target, over `src/generators/**` and
+ * `src/domain/**`. It is the ground of the `absent` column's `not-produced` limb: a read of
+ * a key no writer produces cannot throw, it degrades to a default, and the arm behind it is
+ * dead on every generated world (the observed-shape register's own sentence).
+ * @returns {{produced: Set<string>, files: number, unparsed: string[]}}
  */
 export function producerIndex() {
   /** @type {Set<string>} */
   const produced = new Set();
+  /** @type {string[]} */
+  const unparsed = [];
   const files = [
     ...jsFilesUnder(join(ROOT, 'src/generators')),
     ...jsFilesUnder(join(ROOT, 'src/domain')),
   ];
   for (const abs of files) {
-    const src = readFileSync(abs, 'utf8');
-    for (const m of src.matchAll(/(?:^|[{,\s])([A-Za-z_$][\w$]*)\s*:/g)) produced.add(m[1]);
-    for (const m of src.matchAll(/\.\s*([A-Za-z_$][\w$]*)\s*=[^=]/g)) produced.add(m[1]);
+    const { writes, parsed } = astTokens(readFileSync(abs, 'utf8'));
+    if (!parsed) { unparsed.push(relative(ROOT, abs)); continue; }
+    for (const write of writes) produced.add(write.name);
   }
-  return { produced, files: files.length };
+  return { produced, files: files.length, unparsed };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -523,6 +594,51 @@ export function lineIndex(sources, keep) {
 }
 
 /**
+ * ⭐ THE SAME INDEX, READ FROM THE SYNTAX TREE — `generator-write`'s ground after SITTING
+ * §P.2-27 ("re-cut to a real assignment or key write read from an AST, never a line regex").
+ * `byWrite` carries only Property keys and member assignment targets; `byToken` carries only
+ * Identifiers in CODE position, so a comment, a prose string, a template string and an
+ * arrow's parameter — the four shapes the fold refuted — can propose nothing.
+ * @param {Map<string, string>} sources file to text
+ * @returns {{byToken: Map<string, Set<string>>, byWrite: Map<string, Set<string>>,
+ *   at: Map<string, string>, unparsed: string[]}}
+ */
+export function astLineIndex(sources) {
+  /** @type {Map<string, Set<string>>} */
+  const byToken = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const byWrite = new Map();
+  /** @type {Map<string, string>} */
+  const at = new Map();
+  /** @type {string[]} */
+  const unparsed = [];
+  /** @param {Map<string, Set<string>>} index @param {string} token @param {string} id */
+  const add = (index, token, id) => {
+    const key = aliasKey(token);
+    if (!key) return;
+    let seat = index.get(key);
+    if (!seat) { seat = new Set(); index.set(key, seat); }
+    seat.add(id);
+  };
+  for (const [file, text] of sources) {
+    const { writes, mentions, parsed } = astTokens(text);
+    if (!parsed) { unparsed.push(file); continue; }
+    const lines = String(text).split('\n');
+    /** @param {Map<string, Set<string>>} index @param {{name: string, line: number}} row */
+    const record = (index, row) => {
+      const id = `${file}:${row.line}`;
+      at.set(id, String(lines[row.line - 1] || '').trim());
+      add(index, row.name, id);
+    };
+    for (const write of writes) record(byWrite, write);
+    for (const mention of mentions) record(byToken, mention);
+  }
+  return {
+    byToken, byWrite, at, unparsed,
+  };
+}
+
+/**
  * A COMMENT LINE THAT NAMES BOTH TOKENS — the weakest evidence, and the only one where a
  * mention on each side is all there is to have.
  * @param {{byToken: Map<string, Set<string>>}} index
@@ -555,7 +671,11 @@ export function aliasDraft(input) {
   // one of those would be an alias to a string this census invented.
   const roots = allRoots.filter((r) => !r.includes(' (via '));
   const builders = lineIndex(input.builders || new Map(), (line) => !/^\s*(\*|\/\/)/.test(line));
-  const generators = lineIndex(input.generators || new Map(), (line) => /[A-Za-z_$][\w$]*\s*:|\.\s*[A-Za-z_$][\w$]*\s*=[^=]/.test(line));
+  // ⛔ THE GENERATOR INDEX IS AN AST READING AND THE OTHER TWO ARE NOT, DELIBERATELY. §P.2-27
+  // re-cut `generator-write` and nothing else: `docblock` evidence IS a comment line by
+  // definition, and `reading-builder` reads the two desk-read modules, whose bag-key writes a
+  // line reader gets right. The kind the fold refuted is the kind that moved.
+  const generators = astLineIndex(input.generators || new Map());
   const docs = lineIndex(input.docs || new Map(), (line) => /^\s*(\*|\/\/)/.test(line));
   // ONE ROW PER (endpoint, root) PAIR, CARRYING THE STRONGEST EVIDENCE IT HAS. A pair proposed
   // three times over is one proposal, and a table that printed it three times would read as
@@ -770,6 +890,22 @@ export async function buildCensus(options = {}) {
     const hit = rateBy.get(`${row.block} :: ${row.pool}`);
     row.rateBp = hit ? hit.rateBp : null;
   }
+  // ⭐ THE RATIFIED ALIASES (SITTING §P.2-27), AND WHY EXACTLY THREE ROWS SHIP. The chair
+  // ratified the draft's `identifier` rows — the same identifier on both sides, one of them
+  // ARCH §5.2's own worked edge — and WITHDREW the four "would join" rows and every
+  // `generator-write` citation that was a comment, a prose string, a template string or an
+  // arrow parameter. The identifier pass is PURE (it reads the census's own read paths and no
+  // file at all), so this block costs no I/O and cannot drift from the draft mode above: it
+  // is the same function with the three file-reading evidence kinds absent.
+  //
+  // ⛔ STILL NOT A LEAF. The relations leaf is SEAM car 4's; this is the census RECORDING what
+  // the sitting ratified, so the leaf has one source and the walker can convict it.
+  const readPathsForAlias = [...new Set(census.rows.flatMap((r) => r.reads || []))].sort();
+  const ratifiedAliasRows = aliasDraft({
+    endpoints: [...new Set(relations.rows.flatMap((r) => [r.a, r.b]))],
+    roots: [...new Set(readPathsForAlias.map((p) => rootOf(p)))],
+    paths: readPathsForAlias,
+  }).rows.filter((r) => r.evidence === 'identifier');
   /** @type {Array<[string, string]>} */
   const stampedFiles = STAMPED.map((rel) => [rel, sha256(readFileSync(join(ROOT, rel), 'utf8'))]);
   const tierCounts = tiers.reduce((m, t) => m.set(t.tier, (m.get(t.tier) || 0) + 1), new Map());
@@ -817,6 +953,7 @@ export async function buildCensus(options = {}) {
       customReachableRows: custom.rows.length,
       relationRows: relations.rows.length,
       relationRowsJoinable: relationJoin(relations.rows, census.rows).strictBoth,
+      ratifiedAliases: ratifiedAliasRows.length,
       tableRungRowsWithoutAbsence: census.rows.filter((r) => r.rung === 'table').length,
       modifierEligibleFactsByTab: mountsPerFact.byTab,
     },
@@ -829,6 +966,13 @@ export async function buildCensus(options = {}) {
     grains,
     customReachable: custom,
     relations: { ...relations, join: relationJoin(relations.rows, census.rows) },
+    ratifiedAliases: {
+      ruling: 'SITTING §P.2-27: the three `identifier` rows are RATIFIED as aliases; the four'
+        + ' "would join" rows and every `generator-write` citation that is a comment, a prose'
+        + ' string, a template string or an arrow parameter are WITHDRAWN. The relations LEAF is'
+        + ' SEAM car 4 and carries exactly these rows.',
+      rows: ratifiedAliasRows,
+    },
     tiers,
     rate: options.rates || null,
     narrowsRefusals: census.refusals,
@@ -842,7 +986,9 @@ export async function buildCensus(options = {}) {
  */
 export function absentTotals(rows) {
   /** @type {Record<string, number>} */
-  const totals = { measured: 0, default: 0, 'not-produced': 0 };
+  const totals = {
+    measured: 0, default: 0, 'not-produced': 0, 'method-call': 0,
+  };
   for (const row of rows) {
     for (const label of Object.values(row.absent || {})) {
       totals[label] = (totals[label] || 0) + 1;
@@ -930,9 +1076,12 @@ export function printLines(data) {
     `  reads GRAIN (SITTING §O.1) · BRANCH on ${t.branchGrainRows} rows · function-wide, fail-closed, on ${t.functionGrainRows}`,
     ...grainLines(data),
     `  absent · measured ${t.absent.measured} · default ${t.absent.default} · not-produced ${t.absent['not-produced']}`
-      + ` (over ${t.absent.measured + t.absent.default + t.absent['not-produced']} read paths;`
+      + ` · method-call ${t.absent['method-call']}`
+      + ` (over ${Object.values(t.absent).reduce((a, b) => a + b, 0)} read paths;`
       + ` the table rung's ${t.tableRungRowsWithoutAbsence} rows carry the instrument's own label and no absence record)`,
-    `  covert rows ${t.covertRows} · objectClass named on ${t.objectClassed} of ${t.pools} · rows with a mount ${t.mountedRows}`,
+    `  covert rows ${t.covertRows} · objectClass named on ${t.objectClassed} of ${t.pools}`
+      + ` (of which ${data.rows.filter((r) => (r.objectClasses || []).length > 1).length} name MORE THAN ONE class,`
+      + ` and T-F12 refuses on the SET) · rows with a mount ${t.mountedRows}`,
     `  fact budget · k = 0 on ${t.zeroK} of ${t.kExecutable} RESOLVED rows · ${t.kNotExecutable} NOT-EXECUTABLE (UNRESOLVED)`,
     `  k histogram: ${data.factBudget.histogram.map(([k, n]) => `k=${k} ${n}`).join(' · ')}`,
     `  customReachable rows ${t.customReachableRows} over ${data.customReachable.byKind.length} kinds`,
@@ -942,6 +1091,8 @@ export function printLines(data) {
     `    THE JOIN: rows both of whose endpoints a desk reads — STRICT ${data.relations.join.strictBoth}`
       + ` (either endpoint ${data.relations.join.strictEither}) · by LEAF ${data.relations.join.leafBoth}`
       + ` (either ${data.relations.join.leafEither}) over ${data.relations.join.deskRoots} desk read roots`,
+    `  RATIFIED ALIASES (SITTING §P.2-27) ${t.ratifiedAliases} — the identifier rows, and nothing else:`,
+    ...data.ratifiedAliases.rows.map((r) => `    ${r.endpoint.padEnd(30)} -> ${r.readRoot.padEnd(26)} ${r.at}`),
     '  ── attach coverage, the ten blocks with the most spines ──────────',
     ...[...data.attachCoverage].sort((a, b) => b.spines - a.spines).slice(0, 10)
       .map((a) => `    ${a.block.padEnd(11)} spines ${pad(a.spines)} · facts ${pad(a.facts)}`
@@ -1008,6 +1159,13 @@ export function draftLines(data) {
     seat.add(row.readRoot);
   }
   const joined = data.relations.rows.filter((r) => byEndpoint.has(r.a) && byEndpoint.has(r.b));
+  // ⛔ THE JOIN AT THE RATIFIED GRADE, BESIDE THE JOIN AT THE DRAFT'S (SITTING §P.2-27). The
+  // chair ratified the three `identifier` rows and WITHDREW everything else, so a reader who
+  // sees "4 would join" must also see that all four rest on evidence the sitting withdrew.
+  // Both counts print; neither is a join, and the shipped `relationJoin` is still 0.
+  const ratifiedEndpoints = new Set(draft.rows.filter((r) => r.evidence === 'identifier').map((r) => r.endpoint));
+  const joinedRatified = data.relations.rows
+    .filter((r) => ratifiedEndpoints.has(r.a) && ratifiedEndpoints.has(r.b));
   /** @type {Map<string, number>} */
   const byDirection = new Map();
   for (const r of joined) byDirection.set(r.direction, (byDirection.get(r.direction) || 0) + 1);
@@ -1024,6 +1182,8 @@ export function draftLines(data) {
     `  by evidence: ${[...byEvidence].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(' · ') || '(none)'}`,
     `  RELATION ROWS THAT WOULD JOIN under this draft: ${joined.length} of ${data.relations.rows.length}`
       + ` · by direction ${[...byDirection].map(([d, n]) => `${d} ${n}`).join(' · ') || '(none)'}`,
+    `  RELATION ROWS THAT WOULD JOIN under the RATIFIED rows only (SITTING §P.2-27, the three`
+      + ` identifier rows): ${joinedRatified.length} — the four above rest on evidence the sitting WITHDREW`,
     `  (the shipped join, unchanged and unratified: STRICT ${data.relations.join.strictBoth})`,
     ...joined.map((r) => `    WOULD JOIN  ${r.relation} (${r.source}) ${r.a} ${r.direction === 'a->b' ? '->' : '<-'} ${r.b}`),
     '  ── the draft, the forty strongest candidates ─────────────────────',

@@ -497,6 +497,7 @@ export function callArguments(src, fn) {
  * @property {Record<string, string>} [absent] per read path: measured | default | not-produced
  * @property {boolean} [covert] any read on the frozen COVERT-SOURCE list
  * @property {string|null} [objectClass] the civic object the KEY names, from the closed list
+ * @property {string[]} [objectClasses] EVERY class the key names; T-F12 refuses on the SET
  * @property {string[]} [sites] the mounts where this pool can speak
  * @property {string[]} [attach] a MODIFIER's derived spine set; empty on a spine
  * @property {number|null} [k] the fact budget `3 - |reads|`; null when UNRESOLVED
@@ -1184,6 +1185,28 @@ export function isCovertPath(field) {
 }
 
 /**
+ * ⭐ THE JAVASCRIPT METHOD NAMES A READ CHAIN MAY END IN, published as a frozen constant so a
+ * reader can see what is excluded and add to it rather than re-deriving the rule (MEASURE
+ * car 3, the fold's P5 and cure 10). A dotted chain whose TAIL is one of these records a CALL
+ * the key function made on a reading, never a field of the world: `eco.incomeSources.reduce`
+ * is `Array.prototype.reduce`. Two instruments read this one list — the `absent` column here
+ * and the pair table's member class in `scripts/prose-rate-corpus.mjs` — because the same
+ * token was miscounted in both and a second spelling is how one of them would drift back.
+ *
+ * ⚠ THE LIST IS SHORT ON PURPOSE. A name here that is also a real settlement field would be
+ * excluded wrongly, so it carries the builtin surface a composer plausibly reaches and no
+ * more, and the walker asserts what it excludes on the shipped corpus.
+ * @type {ReadonlySet<string>}
+ */
+export const JS_METHOD_TAILS = Object.freeze(new Set([
+  'at', 'concat', 'endsWith', 'entries', 'every', 'filter', 'find', 'findIndex', 'flat',
+  'flatMap', 'forEach', 'includes', 'indexOf', 'join', 'keys', 'lastIndexOf', 'map', 'match',
+  'padEnd', 'padStart', 'pop', 'push', 'reduce', 'replace', 'reverse', 'shift', 'slice',
+  'some', 'sort', 'split', 'startsWith', 'test', 'toFixed', 'toLowerCase', 'toString',
+  'toUpperCase', 'trim', 'values',
+]));
+
+/**
  * THE CLOSED CIVIC-OBJECT CLASS LIST (ARCH T-F12). Two pieces about the SAME civic object
  * restate each other in meaning even when their fields are disjoint: "there are no
  * reserves" beside "the stores are short" passes every field guard and says one thing
@@ -1205,19 +1228,34 @@ export const CIVIC_OBJECT_CLASSES = Object.freeze({
 });
 
 /**
- * The civic object class a pool key names, or null. The FIRST class of the frozen list
- * any of whose tokens the key names as a whole word: a stable order beats a heuristic,
- * because two runs of this census must agree on the class or the projector's refusal is
- * not a refusal.
+ * ⭐ EVERY civic object class a pool key names, in the frozen list's own order — never the
+ * first alone (the MEASURE fold's P3, cure 9).
+ *
+ * ⛔ WHY THE SET AND NOT THE FIRST. `Disasters & Famine: granary AND hospital` names a STORE
+ * and a CARE house; the first-wins reading answered `store`, so T-F12 — whose whole job is to
+ * refuse an attach whose spine and modifier name the SAME civic object — would have admitted
+ * a `care` modifier beside a spine that already names the hospital. Measured at this tip: 12
+ * of the 99 classed keys match more than one class, and the object literal's own key order
+ * silently decided every one of them. T-F12 refuses on the SET: two keys collide when their
+ * class sets INTERSECT, not when their first classes happen to agree.
+ * @param {string} poolKey
+ * @returns {string[]} every matching class, in the frozen list's order
+ */
+export function objectClassesOf(poolKey) {
+  const words = new Set(String(poolKey).toLowerCase().split(/[^a-z]+/).filter(Boolean));
+  return Object.entries(CIVIC_OBJECT_CLASSES)
+    .filter(([, tokens]) => tokens.some((token) => words.has(token)))
+    .map(([klass]) => klass);
+}
+
+/**
+ * The FIRST civic object class a pool key names, or null — the single-valued column kept
+ * beside the set so a reader of one row still gets an answer. A refusal reads the SET.
  * @param {string} poolKey
  * @returns {string|null}
  */
 export function objectClassOf(poolKey) {
-  const words = new Set(String(poolKey).toLowerCase().split(/[^a-z]+/).filter(Boolean));
-  for (const [klass, tokens] of Object.entries(CIVIC_OBJECT_CLASSES)) {
-    if (tokens.some((token) => words.has(token))) return klass;
-  }
-  return null;
+  return objectClassesOf(poolKey)[0] ?? null;
 }
 
 /**
@@ -1230,6 +1268,11 @@ export function objectClassOf(poolKey) {
  *   `not-produced` no writer anywhere in the estate produces this leaf.
  *   `measured`     a writer produces it and the read does not default, so absence is
  *                  visible to the predicate and a guarded `present AND …` is available.
+ *   `method-call`  the chain's TAIL is a JavaScript method the key function called on a
+ *                  reading (`eco.incomeSources.reduce`, `readings.notableAbsences.map`), so
+ *                  the path names no field and no absence semantics apply to it. Asking a
+ *                  producer index about `map` answers `not-produced` on every one of them,
+ *                  which is a wrong verdict rather than a finding.
  *
  * The estate's own case: `economicGates.military` is ABSENT rather than 1.0 when there is
  * no paid stack (`defenseGenerator.js:465-472` writes the key only under `hasAnyDefense`),
@@ -1239,11 +1282,16 @@ export function objectClassOf(poolKey) {
  * @param {string} field the reading path
  * @param {string} body the source of the read site the census can see (the key function)
  * @param {Set<string>|null} produced every leaf key some writer in the estate writes
- * @returns {'measured'|'default'|'not-produced'}
+ * @returns {'measured'|'default'|'not-produced'|'method-call'}
  */
 export function absenceOf(field, body, produced) {
   const parts = String(field).split('.').filter(Boolean);
   if (parts.length === 0) return 'not-produced';
+  // ⛔ A CALL IS NOT A FIELD, AND THE DOT MADE IT LOOK LIKE ONE (MEASURE car 3, the same shape
+  // the fold's P5 found in the pair table's `fact` class). `x.map` is `Array.prototype.map`;
+  // no writer in the estate produces `map`, so the producer index answered `not-produced` on
+  // eleven cells of the shipped corpus and each was a wrong verdict rather than a finding.
+  if (parts.length > 1 && JS_METHOD_TAILS.has(parts[parts.length - 1])) return 'method-call';
   const src = String(body || '');
   // THE LONGEST SUFFIX THE BODY ACTUALLY CARRIES decides, because a row's field is
   // RE-ROOTED on the caller's path (`forces.walls.present` is read as `walls.present`
@@ -1255,7 +1303,19 @@ export function absenceOf(field, body, produced) {
       .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
       .join('\\s*\\??\\.\\s*');
     if (!new RegExp(`\\b${chain}\\b`).test(src)) continue;
-    if (new RegExp(`\\b${chain}\\b\\s*(?:\\|\\||\\?\\?)`).test(src)) return 'default';
+    // ⛔ A REFUSAL GUARD IS THE OPPOSITE OF A DEFAULT, AND THE REGEX COULD NOT TELL THEM
+    // APART (the MEASURE fold's R3, cure 8). `x || fallback` hands the predicate a value it
+    // cannot distinguish from a reading — the finding this column exists for. `!x || typeof x
+    // !== 'object'` REFUSES: the read site returns null and no predicate ever sees a
+    // substitute, which is `measured` behaviour written defensively. Both spell `x ||`, so
+    // the disambiguator is the operand: a `||` whose left side is the NEGATION of the chain
+    // is a guard. Measured at this tip: 7 of the 10 `default` cells were guards
+    // (`readings.inst` 5, `link` 2), so `default 10` was `default 3`.
+    let fallback = false;
+    for (const hit of src.matchAll(new RegExp(`\\b${chain}\\b\\s*(?:\\|\\||\\?\\?)`, 'g'))) {
+      if (!/!\s*$/.test(src.slice(0, hit.index))) fallback = true;
+    }
+    if (fallback) return 'default';
     break;
   }
   return produced instanceof Set && !produced.has(parts[parts.length - 1]) ? 'not-produced' : 'measured';
@@ -1494,7 +1554,8 @@ export function decorateRows(rows, input) {
       ? {}
       : Object.fromEntries(row.reads.map((f) => [f, absenceOf(f, body, produced)]));
     row.covert = row.reads.some((f) => isCovertPath(f));
-    row.objectClass = objectClassOf(row.pool);
+    row.objectClasses = objectClassesOf(row.pool);
+    row.objectClass = row.objectClasses[0] ?? null;
     row.sites = [...(sites.get(row.block) || [])].sort();
     // A SPINE'S ATTACH SET IS EMPTY BY CONSTRUCTION and every shipped pool is a spine at
     // this tip; `attachSets` derives the would-be modifier sets the wave is sized from.

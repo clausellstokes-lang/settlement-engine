@@ -49,12 +49,14 @@
  * anchoring filter's own footprint, and it is a printed figure rather than a silence.
  */
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { drawVariant, variantIsAudible } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deskReturns } from '../../scripts/prose-rate-corpus.mjs';
-import { loadStateLeaves } from './dossierCorpus.js';
+import { loadStateLeaves, ROOT } from './dossierCorpus.js';
 import { goldenCorpus, keyOf } from './goldenMasterCorpus.js';
 
 export { goldenCorpus, keyOf };
@@ -269,13 +271,62 @@ export async function driftRun(options = {}) {
 }
 
 /**
- * The fixture's exact BYTES: the per-row roll-up, keys sorted, one row per (config, audience).
- * @param {Map<string, string>} rows
- * @returns {string}
+ * ⭐ THE FILES WHOSE BYTES DECIDE WHAT THIS INSTRUMENT RECORDS — the executable half of
+ * SITTING §P.2-29's "a fixture whose provenance sha is not the tip that wrote it".
+ *
+ * ⛔ WHY THESE THREE AND WHY A SHA OF THE RECORDER RATHER THAN OF THE COMMIT. A recorder
+ * cannot know the sha of the commit it is about to be committed in, so a git sha in a fixture
+ * is a DECLARATION a reader trusts and no arm can check. What an arm CAN check is the code
+ * that produced the bytes: this module (the cell and the roll-up), the desk-read recipe every
+ * cell is composed through, and the corpus that decides which towns exist. If any of the
+ * three moves and the fixture does not, the fixture was recorded by a recorder that no longer
+ * exists — which is exactly the state P12 says nothing refuses today.
+ * @type {ReadonlyArray<string>}
  */
-export function manifestBytes(rows) {
+export const MANIFEST_RECORDER_FILES = Object.freeze([
+  'tests/helpers/dossierManifest.js',
+  'tests/helpers/goldenMasterCorpus.js',
+  'scripts/prose-rate-corpus.mjs',
+]);
+
+/**
+ * The recorder's own bytes, as one sha per file, read from the tree.
+ * @returns {Record<string, string>}
+ */
+export function recorderShas() {
+  /** @type {Record<string, string>} */
+  const out = {};
+  for (const rel of MANIFEST_RECORDER_FILES) out[rel] = sha256(readFileSync(join(ROOT, rel), 'utf8'));
+  return out;
+}
+
+/**
+ * The roll-up as the fixture carries it: keys sorted, one row per (config, audience).
+ * @param {Map<string, string>} rows
+ * @returns {Record<string, string>}
+ */
+export function manifestRows(rows) {
   /** @type {Record<string, string>} */
   const out = {};
   for (const key of [...rows.keys()].sort()) out[key] = rows.get(key) || '';
-  return `${JSON.stringify(out, null, 2)}\n`;
+  return out;
+}
+
+/**
+ * The fixture's exact BYTES: a provenance block and the per-row roll-up.
+ *
+ * ⚠ THE PROVENANCE IS INSIDE THE BYTES the drift arm compares, so it cannot be edited away
+ * without the arm noticing; and `rowsSha` digests the rows ALONE, so a hand-edited row reds
+ * twice — once against the live run and once against the fixture's own digest.
+ * @param {Map<string, string>} rows
+ * @param {object} provenance the block to carry; `rowsSha` is computed here, never passed
+ * @returns {string}
+ */
+export function manifestBytes(rows, provenance = {}) {
+  const out = manifestRows(rows);
+  const payload = {
+    _provenance: { ...provenance, rows: Object.keys(out).length, rowsSha: sha256(JSON.stringify(out)) },
+    rows: out,
+  };
+  return `${JSON.stringify(payload, null, 2)}\n`;
 }

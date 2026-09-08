@@ -43,6 +43,7 @@ import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.
 import { deriveAllActiveConditions } from '../../src/domain/activeConditions.js';
 import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import { settlementBlocs } from '../../src/domain/display/politicsRead.js';
+import { economyDeskOptions } from '../../scripts/prose-rate-corpus.mjs';
 
 /** The pool key `politicsPresencePoolKey` answers when no ledger exists. */
 export const DORMANT_POOL_KEY = 'layer DORMANT (no ledger materialized)';
@@ -118,7 +119,11 @@ function harvestBareStrings(node, out, depth = 0) {
 /**
  * Compose N towns through all six desks.
  * @param {number} n
- * @param {{materialisePolitics?: boolean, settType?: string, seedPrefix?: string}} [options]
+ * @param {{materialisePolitics?: boolean, settType?: string, seedPrefix?: string,
+ *   audience?: string}} [options]
+ *   `audience` is the face the desks compose at. It defaults to `dm` — the value every
+ *   caller before MEASURE car 3 got implicitly — and exists so the two faces can be
+ *   compared, which is the arm cure 2's own defect would have passed.
  * @returns {{towns: number, lines: string[], rungs: Array<{block: string, pool: string,
  *   text: string}>, bare: string[], blocks: string[], composers: string[],
  *   dormantDraws: number, deskThrows: Record<string, number>}}
@@ -144,7 +149,10 @@ export function composedReadingSequence(n, options = {}) {
       { seed: `${prefix}-${i}`, customContent: {} },
     );
     towns += 1;
-    const opts = { seed: String(settlement._seed ?? settlement.id ?? i), audience: 'dm' };
+    const opts = {
+      seed: String(settlement._seed ?? settlement.id ?? i),
+      audience: options.audience || 'dm',
+    };
     /** @param {string} name @param {() => unknown} fn */
     const desk = (name, fn) => {
       try {
@@ -189,7 +197,12 @@ export function composedReadingSequence(n, options = {}) {
       harvestBareStrings(generalDeskLines(settlement, { publicDossier: false, playerView: false }), bare);
       if (bare.length > before) composers.add('generalDeskLines (bare strings)');
     } catch { deskThrows.generalDeskLines = (deskThrows.generalDeskLines || 0) + 1; }
-    desk('economy', () => economyDeskRead(settlement, opts));
+    // ⛔ THE ECONOMY DESK BY ITS SHIPPED RECIPE, ONE SPELLING (MEASURE fold cure 2). This
+    // line carried `economyDeskRead(settlement, opts)` and car 0's `deskReturns` took the
+    // defect from here: four caller readings defaulted to `null` and the audience keyed on a
+    // `playerView` nobody passed. The options are built by the ONE function both instruments
+    // now call, so a third spelling cannot drift from either.
+    desk('economy', () => economyDeskRead(settlement, economyDeskOptions(settlement, opts)));
     desk('power', () => {
       let contenders = null;
       try { contenders = coupContenders(settlement); } catch { /* the tab reads null too */ }
