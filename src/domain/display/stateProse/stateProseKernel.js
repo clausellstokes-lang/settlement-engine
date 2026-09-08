@@ -65,8 +65,11 @@
  * @property {string} [angle] the standpoint tag (`ledger`, `street`, `visitor`, …)
  * @property {ReadonlyArray<string>} [marks] inline marks — `dm-only`, a STATE DIMENSION
  *   word (see STATE_MARK_DIMENSIONS), or a causal arm name
- * @property {string} text the sentence, slots unfilled
+ * @property {string} text the sentence, slots unfilled — FACE 0, canonical-at-zero
  * @property {ReadonlyArray<string>} [slots] every `{slot}` the sentence names
+ * @property {ReadonlyArray<string>} [wordings] FACES 1..n — the same claim set, the same
+ *   `{slot}` set and the same marks BY CONSTRUCTION (ARCH §2.3). Absent on every variant
+ *   the corpus ships today, which is why `drawFace` below takes no hash at all.
  */
 /**
  * One corpus block — a dossier surface or a closed ladder.
@@ -302,6 +305,61 @@ export function drawVariant(eligible, blockId, poolKey, seed) {
   if (!Array.isArray(eligible) || eligible.length === 0) return null;
   if (!seed) return eligible[0];
   return eligible[avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length];
+}
+
+/**
+ * THE KEY DIGEST — the kernel's ONE hash pair, named once so the composer can mint a key
+ * without minting a second fold.
+ *
+ * ⛔ WHY THIS IS AN EXPORT AND NOT A COPY IN THE COMPOSER. ARCH §2.4 rules that every key
+ * the composed model mints — the wording face, the connective joint, the salience order —
+ * "uses the kernel's one hash pair; no second hash is introduced". The estate enforces the
+ * same thing from the other side: `tests/lint/fnv1a32Identity.walker.test.js` holds the
+ * tree at TWENTY-TWO `fnv1a32` definitions, SHRINK-ONLY, and a twenty-third reds by name
+ * the day it lands. A composer that re-spelled the fold would break both at once, and the
+ * hashes are golden-bound — a divergence is same-seed history moving, not a style question.
+ *
+ * @param {string} key the full key material, already assembled by the caller
+ * @returns {number} a 32-bit unsigned digest, avalanche-finalised (law 3)
+ */
+export function hashKey(key) {
+  return avalanche32(fnv1a32(String(key)));
+}
+
+/**
+ * THE WORDING FACE (ARCH §2.6, car 3a). A variant carries one authored sentence today and,
+ * after the rewrite wave, up to four SURFACES of the same claim set. This picks the surface.
+ *
+ * ── THE THREE THINGS THIS FUNCTION IS ────────────────────────────────────────────────
+ *
+ * 1. A NO-HASH SHORT-CIRCUIT ON TODAY'S CORPUS. Every one of the 2,266 shipped variants has
+ *    exactly one face, so `faces === 1` and the function returns before touching either half
+ *    of the hash pair. That is not an optimisation: it is what makes the seam provably
+ *    byte-identical on the corpus that ships, and it is asserted by COUNTING the hash pair's
+ *    own multiplications rather than by reading this paragraph.
+ *
+ * 2. A SUFFIX OF THE VARIANT KEY, NEVER A NEW ONE. The key is
+ *    `${seed}::${blockId}::${poolKey}::w` — key 1 of ARCH §2.4 with `::w` appended — so the
+ *    parent string never changes and appending faces cannot re-roll the variant draw. The
+ *    suffix is spelled `::w` and nothing else: the migration script that first measured this
+ *    spelled it `::wording`, and a key that disagrees with the shipped one measures a
+ *    different world (P-F10).
+ *
+ * 3. CANONICAL-AT-ZERO, like every other draw here (law 4). A seedless read — the gallery
+ *    import nulls `_seed` — takes face 0, the authored text.
+ *
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {string} blockId
+ * @param {string} poolKey
+ * @param {string} seed
+ * @returns {number} the face index: 0 for the authored text, 1..n into `wordings`
+ */
+export function drawFace(variant, blockId, poolKey, seed) {
+  const wordings = variant ? variant.wordings : undefined;
+  const faces = 1 + (Array.isArray(wordings) ? wordings.length : 0);
+  if (faces === 1) return 0;
+  if (!seed) return 0;
+  return hashKey(`${seed}::${blockId}::${poolKey}::w`) % faces;
 }
 
 /**

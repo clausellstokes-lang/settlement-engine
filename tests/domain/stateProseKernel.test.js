@@ -23,14 +23,16 @@
  * The corpus is read live from the projected desk leaves, not from a fixture: a pin
  * over an invented pool would prove the kernel works on prose that does not ship.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   AUDIENCE_DM,
   AUDIENCE_PLAYER,
+  drawFace,
   drawVariant,
   eligibleVariants,
   fillSlots,
   hasStateProsePool,
+  hashKey,
   poolDimensions,
   readStateProse,
   stateProseSentence,
@@ -449,5 +451,189 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     expect(causal.length).toBeGreaterThanOrEqual(78);
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
     expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored']);
+  });
+});
+
+/**
+ * ── ARCH-COMPOSED-PROSE car 3a: THE WORDING FACE ────────────────────────────────────
+ *
+ * `drawFace` is the SECOND level of the two-level roll (§2.6): the variant is drawn on
+ * today's key and the SURFACE is drawn on a `::w` suffix of it. The whole point of the shape
+ * is that the parent key never changes, so faces can be added to a variant without re-rolling
+ * which variant a town reads — and on TODAY's corpus, where every variant has exactly one
+ * face, the function returns before it touches the hash at all.
+ *
+ * That last claim is the one worth an arm rather than a paragraph, because behaviour cannot
+ * distinguish it: `hash % 1` is 0 whatever the hash was. So the arm COUNTS THE HASH PAIR'S
+ * OWN MULTIPLICATIONS. `fnv1a32` calls `Math.imul` once per character and `avalanche32`
+ * twice; a spy on `Math.imul` therefore witnesses the fold running, and a live control proves
+ * the witness is not simply blind.
+ */
+describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
+  /** A variant with one face: today's whole corpus. */
+  const ONE_FACE = Object.freeze({ text: 'The walls stand.', angle: 'ledger' });
+  /** A PLANTED four-face variant: the shape the rewrite wave freezes (§2.6, faceCounts 4). */
+  const FOUR_FACE = Object.freeze({
+    text: 'The walls stand.', angle: 'ledger', wordings: Object.freeze(['a', 'b', 'c']),
+  });
+
+  /**
+   * THE SIX STATE LEAVES, whole — the R1 register the composed model migrates. The causal
+   * register is excluded on purpose: `faceCounts` is R1's schema (§2.3) and R2's faces are a
+   * deferred owner row (§13 row 14), so folding it in here would make the 2,266 floor below
+   * mean something other than what ARCH counts.
+   */
+  const SHIPPED_POOLS = [
+    ['economy', DOSSIER_STATE_PROSE_ECONOMY], ['power', DOSSIER_STATE_PROSE_POWER],
+    ['defense', DOSSIER_STATE_PROSE_DEFENSE], ['warFaith', DOSSIER_STATE_PROSE_WAR_FAITH],
+    ['stressors', DOSSIER_STATE_PROSE_STRESSORS], ['general', DOSSIER_STATE_PROSE_GENERAL],
+  ].flatMap(([desk, corpus]) => Object.entries(corpus)
+    .flatMap(([blockId, block]) => Object.entries(block.pools)
+      .map(([poolKey, pool]) => ({ desk, blockId, poolKey, pool }))));
+
+  /** The hash pair, re-spelled here so the key can be checked against an INDEPENDENT fold. */
+  function referenceHash(key) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < key.length; i++) {
+      h ^= key.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    let x = h >>> 0;
+    x ^= x >>> 16;
+    x = Math.imul(x, 0x85ebca6b);
+    x ^= x >>> 13;
+    x = Math.imul(x, 0xc2b2ae35);
+    x ^= x >>> 16;
+    return x >>> 0;
+  }
+
+  it('⭐ A ONE-FACE VARIANT NEVER HASHES, counted on the hash pair itself', () => {
+    const spy = vi.spyOn(Math, 'imul');
+    try {
+      expect(drawFace(ONE_FACE, 'DS-DEF-11', 'UNWALLED-SMALL', 'a-long-seed-string'), 'face 0')
+        .toBe(0);
+      expect(spy.mock.calls.length, 'the no-hash short-circuit: NEITHER half of the pair ran')
+        .toBe(0);
+      // THE LIVE CONTROL, or the count above proves only that the spy is deaf. A four-face
+      // variant on the same seed runs the fold, so the witness is demonstrably awake.
+      drawFace(FOUR_FACE, 'DS-DEF-11', 'UNWALLED-SMALL', 'a-long-seed-string');
+      expect(spy.mock.calls.length, 'and the same witness sees the fold when it does run')
+        .toBeGreaterThan(0);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('⭐ THE WHOLE SHIPPED CORPUS TAKES NO HASH, and the corpus is read live', () => {
+    // The claim car 3a rests on: today the composer's face draw is byte-identical BY
+    // CONSTRUCTION, because no variant that ships carries a `wordings` list. Measured over
+    // the live leaves rather than a fixture, so the day the rewrite wave banks a face this
+    // arm moves with it instead of describing a corpus that no longer exists.
+    const withWordings = SHIPPED_POOLS
+      .flatMap(({ desk, blockId, poolKey, pool }) => pool
+        .map((variant, at) => ({ desk, blockId, poolKey, at, variant }))
+        .filter((row) => Array.isArray(row.variant.wordings)))
+      .map((row) => `${row.desk} :: ${row.blockId} :: ${row.poolKey} #${row.at}`);
+    expect(withWordings.slice(0, 5), 'a shipped variant carrying faces').toEqual([]);
+    expect(SHIPPED_POOLS.length, 'and the sweep found the corpus').toBeGreaterThanOrEqual(700);
+    const spy = vi.spyOn(Math, 'imul');
+    let faces = 0;
+    let nonZero = 0;
+    try {
+      for (const row of SHIPPED_POOLS) {
+        for (const variant of row.pool) {
+          faces += 1;
+          if (drawFace(variant, row.blockId, row.poolKey, 'corpus-probe') !== 0) nonZero += 1;
+        }
+      }
+      expect(nonZero, 'every shipped variant draws face 0').toBe(0);
+      expect(spy.mock.calls.length, 'and not one of them touched the hash pair').toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+    expect(faces, 'the variant count the sweep actually walked').toBeGreaterThanOrEqual(2266);
+  });
+
+  it('⭐ A FOUR-FACE VARIANT IS UNIFORM: 25 % per face within 2 SE over 10,000 seeds', () => {
+    // The distribution matters because a face draw that is not uniform is a rewrite wave
+    // whose three new surfaces are read by a quarter of the towns the fourth is. The seeds
+    // are FIXED, so this is a deterministic pin rather than a sample: it either holds at
+    // this spelling forever or it never held.
+    const N = 10000;
+    const counts = [0, 0, 0, 0];
+    for (let i = 0; i < N; i += 1) {
+      counts[drawFace(FOUR_FACE, 'DS-DEF-11', 'UNWALLED-SMALL', `seed-${i}`)] += 1;
+    }
+    const se = Math.sqrt(0.25 * 0.75 / N);
+    const deviations = counts.map((count) => Math.abs(count / N - 0.25) / se);
+    process.stdout.write(`\n[drawFace] 10,000 seeds over four faces: ${counts.join(' / ')}`
+      + ` · worst deviation ${Math.max(...deviations).toFixed(3)} SE\n`);
+    expect(counts.reduce((a, b) => a + b, 0), 'every draw landed on a face').toBe(N);
+    expect(counts.filter((count) => Math.abs(count / N - 0.25) > 2 * se), 'a face outside 2 SE')
+      .toEqual([]);
+    // AND THE NEGATIVE THE BAND WOULD OTHERWISE HIDE: a pin at 2 SE passes a distribution
+    // that is merely close, so the arm also refuses a face nothing ever draws.
+    expect(counts.filter((count) => count === 0), 'an unreachable face').toEqual([]);
+  });
+
+  it('⭐ THE KEY IS THE VARIANT KEY PLUS `::w`, and `::wording` is a different world', () => {
+    // P-F10's nit, made executable. `draw-reroll.mjs` measured the two-level roll with the
+    // suffix spelled `::wording`; the shipped suffix is `::w`, and a script that spells it
+    // differently measures a corpus nobody ships.
+    const seed = 'ashford-7';
+    const expected = referenceHash(`${seed}::DS-DEF-11::UNWALLED-SMALL::w`) % 4;
+    expect(drawFace(FOUR_FACE, 'DS-DEF-11', 'UNWALLED-SMALL', seed), 'the `::w` suffix')
+      .toBe(expected);
+    const other = referenceHash(`${seed}::DS-DEF-11::UNWALLED-SMALL::wording`) % 4;
+    expect(other, 'and the two spellings really do disagree on this key').not.toBe(expected);
+    // A SUFFIX, so the PARENT key is untouched and appending faces cannot re-roll the
+    // variant draw. Driven on the kernel's own draw rather than asserted about it.
+    const pool = [{ text: 'one' }, { text: 'two' }, { text: 'three' }];
+    const faced = pool.map((v) => ({ ...v, wordings: ['x', 'y', 'z'] }));
+    expect(drawVariant(faced, 'DS-DEF-11', 'UNWALLED-SMALL', seed).text,
+      'the same variant before and after faces are added')
+      .toBe(drawVariant(pool, 'DS-DEF-11', 'UNWALLED-SMALL', seed).text);
+  });
+
+  it('SEEDLESS IS CANONICAL-AT-ZERO at the face level too (law 4)', () => {
+    // `galleryImportSettlement.js:76` sets `_seed: undefined` on an imported town, so the
+    // desks reach the kernel with no seed. All three spellings of "no seed" read face 0.
+    expect(drawFace(FOUR_FACE, 'B', 'P', ''), 'the empty string').toBe(0);
+    expect(drawFace(FOUR_FACE, 'B', 'P', null), 'null, as the import leaves it').toBe(0);
+    expect(drawFace(FOUR_FACE, 'B', 'P', undefined), 'undefined').toBe(0);
+    const spy = vi.spyOn(Math, 'imul');
+    try {
+      drawFace(FOUR_FACE, 'B', 'P', '');
+      expect(spy.mock.calls.length, 'and a seedless face takes no hash either').toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('reads a malformed `wordings` as ONE face rather than throwing on it', () => {
+    // A display path: a blank surface beats a crashed one, and the projector is what refuses
+    // a malformed face list. Every one of these is one face, so every one draws 0.
+    expect(drawFace({ text: 'a', wordings: 'not a list' }, 'B', 'P', 's')).toBe(0);
+    expect(drawFace({ text: 'a', wordings: [] }, 'B', 'P', 's')).toBe(0);
+    expect(drawFace(null, 'B', 'P', 's'), 'and a missing variant is one face, not a throw')
+      .toBe(0);
+    expect(drawFace(undefined, 'B', 'P', 's')).toBe(0);
+    // TWO faces is a real modulus, so the family is not simply "always 0".
+    const two = { text: 'a', wordings: ['b'] };
+    const drawn = new Set(Array.from({ length: 64 }, (_, i) => drawFace(two, 'B', 'P', `t${i}`)));
+    expect([...drawn].sort(), 'a two-face variant reaches both faces').toEqual([0, 1]);
+  });
+
+  it('the key digest is the kernel\'s ONE pair, and the composer mints no second fold', () => {
+    // ARCH §2.4: every key the composed model mints uses this pair. `hashKey` is the export
+    // that makes that possible without a twenty-third `fnv1a32` in the tree
+    // (tests/lint/fnv1a32Identity.walker.test.js holds the count SHRINK-ONLY).
+    expect(hashKey('a'), 'against an independently spelled fold').toBe(referenceHash('a'));
+    expect(hashKey(`s::B::P::w`)).toBe(referenceHash('s::B::P::w'));
+    expect(hashKey(''), 'the empty key is still a digest').toBe(referenceHash(''));
+    // And it is the pair the DRAW uses, proven through `drawVariant` rather than restated.
+    const pool = Array.from({ length: 7 }, (_, i) => ({ text: `v${i}` }));
+    expect(drawVariant(pool, 'B', 'P', 'sx').text)
+      .toBe(pool[referenceHash('sx::B::P') % 7].text);
   });
 });

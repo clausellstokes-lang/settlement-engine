@@ -44,6 +44,7 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/domain/display/stateProse/composeStateProse.js
   src/data/dossierStateProse/stressors.generated.js
   src/domain/prose/wiringCensus.js
   src/domain/prose/wiringBranch.js
@@ -1341,6 +1342,24 @@ check_caught "dossier-prose-manifest/the template reader matches everything and 
 #     a 129 B band), which is why RAW is the exact ruler here; restored cmp-exact => 17 passed.
 perl -0pi -e "s{It is receding\. What remains is the damage rather than the danger\.}{'It is receding. What remains is the damage rather than the danger.' . (' The ledgers still carry the entry and the streets still carry the memory.' x 15)}e" src/data/dossierStateProse/stressors.generated.js
 check_caught "prose-corpus-bytes/a leaf grows by a kilobyte and the byte ratchet does not see it" src/data/dossierStateProse/stressors.generated.js "npx vitest run tests/lint/proseCorpusBytes.test.js --no-file-parallelism"
+
+# 96. SEAM car 3a — THE COMPOSER'S ORDER MAY NOT BE A LOCALE'S. The composed model ranks
+#     modifier candidates within a salience band by the kernel's 32-bit digest of key 5 and
+#     breaks an EXACT tie by CODE-UNIT comparison of the candidate key. `localeCompare`
+#     collates through the host's ICU/CLDR tables, so two devices can order the same two keys
+#     differently and compose two DIFFERENT sentences from one seed — the same-seed,
+#     every-device promise broken at the one place in the composer where two strings are
+#     compared at all. This plant swaps the tie-break for a collation.
+#     WHY A SOURCE FENCE AND NOT A BEHAVIOURAL ARM: the tie limb is unreachable on today's
+#     content (no block ships pool metadata, so no modifier can seat), so no composed output
+#     moves and no manifest can see it. A scan of the module is the only instrument that can.
+#     Measured before landing (lane SEAM, 2026-09-08; cp backup, cp restore, never the
+#     checkout family; md5 2a193234ea2ea7ef54b1fb1b6bfd4097 before and after): clean tree =>
+#     9 passed; planted => EXACTLY 1 red, the banned-API arm by name, 8 passed; and
+#     tests/lint/localeCompareGuard.test.js reds independently (1 of 3); restored
+#     cmp-identical => 9 passed.
+perl -0pi -e "s/  return a\.key < b\.key \? -1 : 1;/  return a.key.localeCompare(b.key);/" src/domain/display/stateProse/composeStateProse.js
+check_caught "compose-state-prose-fence/the composer's tie-break becomes a locale collation and the seam stops being device-stable" src/domain/display/stateProse/composeStateProse.js "npx vitest run tests/lint/composeStateProseFence.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
