@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e3e56f94a5b294a17df10e72f614236a9da9fa17",
-  "measuredBy": "INSTR-912 (Opus 5 — Fable-unvalidated)",
+  "measuredAtSha": "0b05e3a7a8d0f8d4fd8338db7f6ce53c72bfbb6b",
+  "measuredBy": "INSTR-912 car 8 (Opus 5)",
   "date": "2026-09-08",
-  "note": "the INSTR-912 instrument consist: five new tests/lint walkers (entry contradiction, move grammar, register loaders, institution table, the report-only measures) and their assertions; no test file removed",
-  "files": 2548,
+  "note": "car 8 adds tests/lint/proseWiringCensus.walker.test.js — one new lint walker file, 21 titles",
+  "files": 2549,
   "parked": 375,
-  "credited": 2173,
-  "titles": 23696,
-  "suiteTitles": 6346
+  "credited": 2174,
+  "titles": 23717,
+  "suiteTitles": 6352
 }
