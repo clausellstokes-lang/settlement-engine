@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-08 06:11:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 06:17:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 8522a17b2 · ledger = fa4987a18 §914: the instruments land — the INSTR-912 consist joins the product as eighteen cars o
 
@@ -145,4 +145,4 @@ product claude/composite-r4 = 8522a17b2 · ledger = fa4987a18 §914: the instrum
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.09 2.43 4.19
+load: 3.39 2.69 3.67

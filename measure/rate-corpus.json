@@ -11325,2429 +11325,4511 @@
       "pool": "COMPLETE FOR ITS TIER",
       "tier": "metropolis",
       "firedOverall": 593,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.military: STRONG",
       "tier": "thorp",
       "firedOverall": 420,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "charter hall PRESENT (specialist monster response)",
       "tier": "thorp",
       "firedOverall": 397,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: charterPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: no legal infrastructure",
       "tier": "town",
       "firedOverall": 384,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: no legal infrastructure",
       "tier": "city",
       "firedOverall": 384,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: no legal infrastructure",
       "tier": "metropolis",
       "firedOverall": 384,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: one source carries the town",
       "tier": "town",
       "firedOverall": 365,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: one source carries the town",
       "tier": "city",
       "firedOverall": 365,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: two or three sources between them",
       "tier": "thorp",
       "firedOverall": 363,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: two or three sources between them",
       "tier": "hamlet",
       "firedOverall": 363,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, NO medical provision",
       "tier": "town",
       "firedOverall": 353,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, NO medical provision",
       "tier": "city",
       "firedOverall": 353,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, NO medical provision",
       "tier": "metropolis",
       "firedOverall": 353,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: STRONG",
       "tier": "thorp",
       "firedOverall": 344,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: STRONG",
       "tier": "hamlet",
       "firedOverall": 344,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: STRONG",
       "tier": "thorp",
       "firedOverall": 340,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: STRONG",
       "tier": "hamlet",
       "firedOverall": 340,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: STRONG",
       "tier": "village",
       "firedOverall": 340,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: STRONG",
       "tier": "thorp",
       "firedOverall": 336,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: STRONG",
       "tier": "hamlet",
       "firedOverall": 336,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: STRONG",
       "tier": "village",
       "firedOverall": 336,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, landlocked",
       "tier": "town",
       "firedOverall": 324,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, landlocked",
       "tier": "city",
       "firedOverall": 324,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, landlocked",
       "tier": "metropolis",
       "firedOverall": 324,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-18",
       "pool": "STALLED",
       "tier": "thorp",
       "firedOverall": 324,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-18 :: craftReasonPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "garrison PRESENT",
       "tier": "thorp",
       "firedOverall": 316,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "garrison PRESENT",
       "tier": "hamlet",
       "firedOverall": 316,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "garrison PRESENT",
       "tier": "village",
       "firedOverall": 316,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: CRITICAL",
       "tier": "town",
       "firedOverall": 314,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: CRITICAL",
       "tier": "city",
       "firedOverall": 314,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: CRITICAL",
       "tier": "metropolis",
       "firedOverall": 314,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls AND professional garrison",
       "tier": "thorp",
       "firedOverall": 306,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls AND professional garrison",
       "tier": "hamlet",
       "firedOverall": 306,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls AND professional garrison",
       "tier": "village",
       "firedOverall": 306,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "arcane defense PRESENT",
       "tier": "thorp",
       "firedOverall": 303,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: arcaneDefensePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: full legal chain (court AND prison)",
       "tier": "thorp",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: full legal chain (court AND prison)",
       "tier": "hamlet",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: full legal chain (court AND prison)",
       "tier": "village",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "ADMINISTERED",
       "tier": "thorp",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "ADMINISTERED",
       "tier": "hamlet",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "ADMINISTERED",
       "tier": "village",
       "firedOverall": 302,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "MARKET-OPEN",
       "tier": "thorp",
       "firedOverall": 277,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND hospital",
       "tier": "thorp",
       "firedOverall": 272,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND hospital",
       "tier": "hamlet",
       "firedOverall": 272,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND hospital",
       "tier": "village",
       "firedOverall": 272,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: WEAK",
       "tier": "metropolis",
       "firedOverall": 259,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: WEAK",
       "tier": "metropolis",
       "firedOverall": 259,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "walls ABSENT",
       "tier": "city",
       "firedOverall": 258,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: fortificationPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "walls ABSENT",
       "tier": "metropolis",
       "firedOverall": 258,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: fortificationPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: CRITICAL",
       "tier": "city",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: CRITICAL",
       "tier": "metropolis",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: thorp / hamlet",
       "tier": "village",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: thorp / hamlet",
       "tier": "town",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: thorp / hamlet",
       "tier": "city",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: thorp / hamlet",
       "tier": "metropolis",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: other tiers",
       "tier": "thorp",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: originTierPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: other tiers",
       "tier": "hamlet",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: originTierPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: other tiers",
       "tier": "city",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: originTierPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: other tiers",
       "tier": "metropolis",
       "firedOverall": 255,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: originTierPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Well-Defended",
       "tier": "thorp",
       "firedOverall": 247,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Well-Defended",
       "tier": "hamlet",
       "firedOverall": 247,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Well-Defended",
       "tier": "village",
       "firedOverall": 247,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "NO organized force at all",
       "tier": "town",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "NO organized force at all",
       "tier": "city",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "NO organized force at all",
       "tier": "metropolis",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "NO-MARKET",
       "tier": "town",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "NO-MARKET",
       "tier": "city",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "NO-MARKET",
       "tier": "metropolis",
       "firedOverall": 246,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: ADEQUATE",
       "tier": "thorp",
       "firedOverall": 245,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: ADEQUATE",
       "tier": "hamlet",
       "firedOverall": 245,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: ADEQUATE",
       "tier": "village",
       "firedOverall": 245,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness WEAK",
       "tier": "metropolis",
       "firedOverall": 238,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: ADEQUATE",
       "tier": "thorp",
       "firedOverall": 234,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "BARE",
       "tier": "town",
       "firedOverall": 232,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "BARE",
       "tier": "city",
       "firedOverall": 232,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "BARE",
       "tier": "metropolis",
       "firedOverall": 232,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-SMALL",
       "tier": "town",
       "firedOverall": 231,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-SMALL",
       "tier": "city",
       "firedOverall": 231,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-SMALL",
       "tier": "metropolis",
       "firedOverall": 231,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary with road supply",
       "tier": "thorp",
       "firedOverall": 228,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary with road supply",
       "tier": "hamlet",
       "firedOverall": 228,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary with road supply",
       "tier": "village",
       "firedOverall": 228,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: neither walls nor force",
       "tier": "city",
       "firedOverall": 218,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: neither walls nor force",
       "tier": "metropolis",
       "firedOverall": 218,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "charter hall ABSENT where the country warrants one",
       "tier": "metropolis",
       "firedOverall": 205,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: charterPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-4",
       "pool": "legitimacyHold: public backing hardens the hold",
       "tier": "thorp",
       "firedOverall": 201,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-4 :: legitimacyHoldPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "GARRISONED",
       "tier": "thorp",
       "firedOverall": 199,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness ADEQUATE",
       "tier": "thorp",
       "firedOverall": 198,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role protection + extraction",
       "tier": "thorp",
       "firedOverall": 197,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role protection + extraction",
       "tier": "hamlet",
       "firedOverall": 197,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role protection + extraction",
       "tier": "village",
       "firedOverall": 197,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role protection + extraction",
       "tier": "town",
       "firedOverall": 197,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness STRONG",
       "tier": "thorp",
       "firedOverall": 191,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness STRONG",
       "tier": "hamlet",
       "firedOverall": 191,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness STRONG",
       "tier": "village",
       "firedOverall": 191,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "Approved",
       "tier": "thorp",
       "firedOverall": 186,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Vulnerable",
       "tier": "city",
       "firedOverall": 174,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Vulnerable",
       "tier": "metropolis",
       "firedOverall": 174,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter AND organized force",
       "tier": "thorp",
       "firedOverall": 173,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Lightly Defended",
       "tier": "metropolis",
       "firedOverall": 162,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "mercenary / contracted forces PRESENT",
       "tier": "thorp",
       "firedOverall": 160,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-5 :: contractedForcePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "mercenary / contracted forces PRESENT",
       "tier": "hamlet",
       "firedOverall": 160,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-5 :: contractedForcePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "mercenary / contracted forces PRESENT",
       "tier": "village",
       "firedOverall": 160,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-5 :: contractedForcePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "mercenary / contracted forces PRESENT",
       "tier": "town",
       "firedOverall": 160,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-5 :: contractedForcePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: WEAK",
       "tier": "thorp",
       "firedOverall": 150,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness CRITICAL",
       "tier": "town",
       "firedOverall": 140,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness CRITICAL",
       "tier": "city",
       "firedOverall": 140,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-1",
       "pool": "readiness CRITICAL",
       "tier": "metropolis",
       "firedOverall": 140,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: metropolis",
       "tier": "thorp",
       "firedOverall": 128,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: metropolis",
       "tier": "hamlet",
       "firedOverall": 128,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: metropolis",
       "tier": "village",
       "firedOverall": 128,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: metropolis",
       "tier": "town",
       "firedOverall": 128,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: metropolis",
       "tier": "city",
       "firedOverall": 128,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: city",
       "tier": "thorp",
       "firedOverall": 126,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: city",
       "tier": "hamlet",
       "firedOverall": 126,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: city",
       "tier": "village",
       "firedOverall": 126,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: city",
       "tier": "town",
       "firedOverall": 126,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-6",
       "pool": "tier overlay: city",
       "tier": "metropolis",
       "firedOverall": 126,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-6 :: TIER_OVERLAY_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with NO force",
       "tier": "city",
       "firedOverall": 125,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with NO force",
       "tier": "metropolis",
       "firedOverall": 125,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-8",
       "pool": "PROSPEROUS",
       "tier": "thorp",
       "firedOverall": 125,
-      "sites": 2
+      "sites": 2,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-8 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "MARKET-NARROW",
       "tier": "thorp",
       "firedOverall": 121,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, credible deterrence",
       "tier": "thorp",
       "firedOverall": 119,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, credible deterrence",
       "tier": "hamlet",
       "firedOverall": 119,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-13",
       "pool": "ENTREPOT",
       "tier": "thorp",
       "firedOverall": 119,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-13 :: marketPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.military: CRITICAL",
       "tier": "city",
       "firedOverall": 119,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.military: CRITICAL",
       "tier": "metropolis",
       "firedOverall": 119,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: settled, defenses beyond the need",
       "tier": "hamlet",
       "firedOverall": 118,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "ONE EXPECTED CATEGORY MISSING",
       "tier": "thorp",
       "firedOverall": 117,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "ONE EXPECTED CATEGORY MISSING",
       "tier": "hamlet",
       "firedOverall": 117,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "ONE EXPECTED CATEGORY MISSING",
       "tier": "village",
       "firedOverall": 117,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: settled, nothing organized",
       "tier": "city",
       "firedOverall": 116,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: settled, nothing organized",
       "tier": "metropolis",
       "firedOverall": 116,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND parish care only",
       "tier": "thorp",
       "firedOverall": 112,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND parish care only",
       "tier": "hamlet",
       "firedOverall": 112,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: granary AND parish care only",
       "tier": "village",
       "firedOverall": 112,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-5",
       "pool": "theocracy",
       "tier": "hamlet",
       "firedOverall": 107,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-5 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "militia PRESENT (no garrison)",
       "tier": "thorp",
       "firedOverall": 106,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "militia PRESENT (no garrison)",
       "tier": "town",
       "firedOverall": 106,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "militia PRESENT (no garrison)",
       "tier": "city",
       "firedOverall": 106,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "militia PRESENT (no garrison)",
       "tier": "metropolis",
       "firedOverall": 106,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Naval Defense: Port only",
       "tier": "thorp",
       "firedOverall": 105,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-6 :: navalDefensePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Naval Defense: Port only",
       "tier": "hamlet",
       "firedOverall": 105,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-6 :: navalDefensePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Naval Defense: Port only",
       "tier": "village",
       "firedOverall": 105,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-DEF-6 :: navalDefensePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-1",
       "pool": "COMBINATION C1: a high rung on a working approach",
       "tier": "thorp",
       "firedOverall": 105,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-1 :: prosperityHeaderPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary + port",
       "tier": "thorp",
       "firedOverall": 104,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary + port",
       "tier": "hamlet",
       "firedOverall": 104,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary + port",
       "tier": "village",
       "firedOverall": 104,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role criminal revenue stream (unclassified)",
       "tier": "thorp",
       "firedOverall": 101,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: operationRolePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role criminal revenue stream (unclassified)",
       "tier": "hamlet",
       "firedOverall": 101,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: operationRolePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role criminal revenue stream (unclassified)",
       "tier": "village",
       "firedOverall": 101,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: operationRolePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: ADEQUATE",
       "tier": "thorp",
       "firedOverall": 96,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: ADEQUATE",
       "tier": "thorp",
       "firedOverall": 96,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.military: WEAK",
       "tier": "city",
       "firedOverall": 93,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.military: WEAK",
       "tier": "metropolis",
       "firedOverall": 93,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Defensible",
       "tier": "thorp",
       "firedOverall": 89,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: WEAK",
       "tier": "city",
       "firedOverall": 87,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: WEAK",
       "tier": "metropolis",
       "firedOverall": 87,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: court without detention",
       "tier": "thorp",
       "firedOverall": 80,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: court without detention",
       "tier": "hamlet",
       "firedOverall": 80,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Internal Security: court without detention",
       "tier": "village",
       "firedOverall": 80,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: internalRowPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with citizen militia",
       "tier": "thorp",
       "firedOverall": 79,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with citizen militia",
       "tier": "town",
       "firedOverall": 79,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with citizen militia",
       "tier": "city",
       "firedOverall": 79,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: walls with citizen militia",
       "tier": "metropolis",
       "firedOverall": 79,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.monster: ADEQUATE",
       "tier": "thorp",
       "firedOverall": 77,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-14",
       "pool": "FOUNDED-YOUNG",
       "tier": "city",
       "firedOverall": 76,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-14 :: foundedPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-14",
       "pool": "FOUNDED-YOUNG",
       "tier": "metropolis",
       "firedOverall": 76,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-14 :: foundedPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: CRITICAL",
       "tier": "town",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: CRITICAL",
       "tier": "city",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Economic Survival: CRITICAL",
       "tier": "metropolis",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: a criminal line is present",
       "tier": "thorp",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-ECO-12 :: criminalIncomePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: CRITICAL",
       "tier": "town",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: CRITICAL",
       "tier": "city",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.economic: CRITICAL",
       "tier": "metropolis",
       "firedOverall": 72,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: STRONG",
       "tier": "thorp",
       "firedOverall": 70,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: STRONG",
       "tier": "hamlet",
       "firedOverall": 70,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.internal: STRONG",
       "tier": "village",
       "firedOverall": 70,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-18",
       "pool": "UNWORKED",
       "tier": "city",
       "firedOverall": 66,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-18 :: craftReasonPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-18",
       "pool": "UNWORKED",
       "tier": "metropolis",
       "firedOverall": 66,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-18 :: craftReasonPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: STRONG",
       "tier": "thorp",
       "firedOverall": 65,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: STRONG",
       "tier": "hamlet",
       "firedOverall": 65,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: STRONG",
       "tier": "village",
       "firedOverall": 65,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "scores.magical: STRONG",
       "tier": "town",
       "firedOverall": 65,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: systemsHealthScorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "watch PRESENT",
       "tier": "thorp",
       "firedOverall": 64,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "watch PRESENT",
       "tier": "hamlet",
       "firedOverall": 64,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "watch PRESENT",
       "tier": "village",
       "firedOverall": 64,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "watch PRESENT",
       "tier": "city",
       "firedOverall": 64,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-5",
       "pool": "watch PRESENT",
       "tier": "metropolis",
       "firedOverall": 64,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-5 :: forceCorePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, port open",
       "tier": "town",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, port open",
       "tier": "city",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: No reserves, port open",
       "tier": "metropolis",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Fortress",
       "tier": "thorp",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Fortress",
       "tier": "hamlet",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Fortress",
       "tier": "village",
       "firedOverall": 59,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "A METROPOLIS-TIER CATALOG, COMPLETE",
       "tier": "thorp",
       "firedOverall": 54,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "A METROPOLIS-TIER CATALOG, COMPLETE",
       "tier": "hamlet",
       "firedOverall": 54,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "A METROPOLIS-TIER CATALOG, COMPLETE",
       "tier": "village",
       "firedOverall": 54,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "A METROPOLIS-TIER CATALOG, COMPLETE",
       "tier": "town",
       "firedOverall": 54,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "A METROPOLIS-TIER CATALOG, COMPLETE",
       "tier": "city",
       "firedOverall": 54,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: local production listed",
       "tier": "hamlet",
       "firedOverall": 53,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: local production listed",
       "tier": "village",
       "firedOverall": 53,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: local production listed",
       "tier": "town",
       "firedOverall": 53,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: local production listed",
       "tier": "city",
       "firedOverall": 53,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: local production listed",
       "tier": "metropolis",
       "firedOverall": 53,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-16",
       "pool": "UNMARKED",
       "tier": "metropolis",
       "firedOverall": 52,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-16 :: eventRecordPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-THREATENED",
       "tier": "thorp",
       "firedOverall": 49,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-THREATENED",
       "tier": "city",
       "firedOverall": 49,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-THREATENED",
       "tier": "metropolis",
       "firedOverall": 49,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary in isolation",
       "tier": "thorp",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary in isolation",
       "tier": "hamlet",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-6",
       "pool": "Logistics & Supply: Granary in isolation",
       "tier": "village",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: vulnerable",
       "tier": "thorp",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: vulnerable",
       "tier": "hamlet",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: vulnerable",
       "tier": "village",
       "firedOverall": 48,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
       "tier": "hamlet",
       "firedOverall": 45,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
       "tier": "village",
       "firedOverall": 45,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
       "tier": "city",
       "firedOverall": 45,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
       "tier": "metropolis",
       "firedOverall": 45,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: significant off-book activity (≥15)",
       "tier": "thorp",
       "firedOverall": 44,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: significant off-book activity (≥15)",
       "tier": "village",
       "firedOverall": 44,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: a broad spread, no leader",
       "tier": "thorp",
       "firedOverall": 40,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: a broad spread, no leader",
       "tier": "hamlet",
       "firedOverall": 40,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: a broad spread, no leader",
       "tier": "village",
       "firedOverall": 40,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: incomeMixPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-11",
       "pool": "EXPLOITATION: unexploited, exportValue: high",
       "tier": "town",
       "firedOverall": 32,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-11 :: exploitationPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Undefended",
       "tier": "town",
       "firedOverall": 32,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Undefended",
       "tier": "city",
       "firedOverall": 32,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "defenseProfile.readiness.label: Undefended",
       "tier": "metropolis",
       "firedOverall": 32,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: READINESS_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "tier": "thorp",
       "firedOverall": 31,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "tier": "hamlet",
       "firedOverall": 31,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "tier": "town",
       "firedOverall": 31,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "tier": "city",
       "firedOverall": 31,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Disasters & Famine: NO reserves, hospital present",
       "tier": "metropolis",
       "firedOverall": 31,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-LARGE",
       "tier": "thorp",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-LARGE",
       "tier": "hamlet",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-LARGE",
       "tier": "village",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-LARGE",
       "tier": "city",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "UNWALLED-LARGE",
       "tier": "metropolis",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: militia only",
       "tier": "thorp",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: militia only",
       "tier": "town",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: militia only",
       "tier": "city",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: militia only",
       "tier": "metropolis",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "breakdown dominated by DEFENSE, adverse",
       "tier": "town",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "breakdown dominated by DEFENSE, adverse",
       "tier": "city",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "breakdown dominated by DEFENSE, adverse",
       "tier": "metropolis",
       "firedOverall": 27,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role duty evasion",
       "tier": "thorp",
       "firedOverall": 26,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role duty evasion",
       "tier": "hamlet",
       "firedOverall": 26,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role duty evasion",
       "tier": "village",
       "firedOverall": 26,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role duty evasion",
       "tier": "city",
       "firedOverall": 26,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role duty evasion",
       "tier": "metropolis",
       "firedOverall": 26,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Dangerous",
       "tier": "town",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Dangerous",
       "tier": "city",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Dangerous",
       "tier": "metropolis",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "foodSecurity.label: Deficit × Active Famine",
       "tier": "town",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: FOOD_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role parallel marketplace",
       "tier": "thorp",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role parallel marketplace",
       "tier": "hamlet",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role parallel marketplace",
       "tier": "village",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role parallel marketplace",
       "tier": "town",
       "firedOverall": 24,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, force without a perimeter",
       "tier": "thorp",
       "firedOverall": 22,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, force without a perimeter",
       "tier": "city",
       "firedOverall": 22,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Beasts & Monsters: frontier, force without a perimeter",
       "tier": "metropolis",
       "firedOverall": 22,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-2",
       "pool": "Desperate matched",
       "tier": "town",
       "firedOverall": 22,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-2 :: STABILITY_LADDER",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role money laundering",
       "tier": "thorp",
       "firedOverall": 19,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role money laundering",
       "tier": "hamlet",
       "firedOverall": 19,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role money laundering",
       "tier": "village",
       "firedOverall": 19,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-1",
       "pool": "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
       "tier": "thorp",
       "firedOverall": 18,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-1 :: prosperityHeaderPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-1",
       "pool": "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
       "tier": "hamlet",
       "firedOverall": 18,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-1 :: prosperityHeaderPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-1",
       "pool": "COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
       "tier": "village",
       "firedOverall": 18,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-1 :: prosperityHeaderPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: imports only, nothing outward",
       "tier": "city",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "TRADE PROFILE: imports only, nothing outward",
       "tier": "metropolis",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: tradeProfilePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "LETTERED",
       "tier": "thorp",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "LETTERED",
       "tier": "town",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "LETTERED",
       "tier": "city",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "LETTERED",
       "tier": "metropolis",
       "firedOverall": 16,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: the criminal line leads",
       "tier": "thorp",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-ECO-12 :: criminalIncomePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: the criminal line leads",
       "tier": "hamlet",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: criminalIncomePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-12",
       "pool": "INCOME MIX: the criminal line leads",
       "tier": "village",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-12 :: criminalIncomePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "Endorsed",
       "tier": "thorp",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "Endorsed",
       "tier": "hamlet",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-1",
       "pool": "Endorsed",
       "tier": "village",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture reached an AGENT of a faction",
       "tier": "thorp",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture reached an AGENT of a faction",
       "tier": "village",
       "firedOverall": 15,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "PROVISIONED",
       "tier": "thorp",
       "firedOverall": 14,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "PROVISIONED",
       "tier": "hamlet",
       "firedOverall": 14,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "PROVISIONED",
       "tier": "town",
       "firedOverall": 14,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "PROVISIONED",
       "tier": "city",
       "firedOverall": 14,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-17",
       "pool": "PROVISIONED",
       "tier": "metropolis",
       "firedOverall": 14,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-17 :: institutionsPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "tier": "thorp",
       "firedOverall": 13,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "tier": "hamlet",
       "firedOverall": 13,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "tier": "village",
       "firedOverall": 13,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "tier": "city",
       "firedOverall": 13,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-2",
       "pool": "Invasion & War: force with NO walls",
       "tier": "metropolis",
       "firedOverall": 13,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-2 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: limited",
       "tier": "town",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: limited",
       "tier": "city",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-10",
       "pool": "POSTURE: limited",
       "tier": "metropolis",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-10 :: exportPosturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: a large share off the books (≥30)",
       "tier": "thorp",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: a large share off the books (≥30)",
       "tier": "hamlet",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: a large share off the books (≥30)",
       "tier": "village",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-ECO-6",
       "pool": "TIER: a large share off the books (≥30)",
       "tier": "town",
       "firedOverall": 12,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-ECO-6 :: shadowEconomyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Unsafe",
       "tier": "town",
       "firedOverall": 11,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Unsafe",
       "tier": "metropolis",
       "firedOverall": 11,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-9",
       "pool": "recency framing: Deep history",
       "tier": "hamlet",
       "firedOverall": 9,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-9 :: recencyFramingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-9",
       "pool": "recency framing: Deep history",
       "tier": "town",
       "firedOverall": 9,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-9 :: recencyFramingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true",
       "tier": "thorp",
       "firedOverall": 8,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true",
       "tier": "hamlet",
       "firedOverall": 8,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-3",
       "pool": "safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
       "tier": "hamlet",
       "firedOverall": 7,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-GEN-3 :: SAFETY_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-STR-1",
       "pool": "ARITY: several banners standing at once",
       "tier": "city",
       "firedOverall": 7,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-STR-1 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role unlicensed revenue",
       "tier": "thorp",
       "firedOverall": 6,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role unlicensed revenue",
       "tier": "hamlet",
       "firedOverall": 6,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role unlicensed revenue",
       "tier": "village",
       "firedOverall": 6,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role unlicensed revenue",
       "tier": "city",
       "firedOverall": 6,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "operation role unlicensed revenue",
       "tier": "metropolis",
       "firedOverall": 6,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true, with a NAMED dependent chain",
       "tier": "thorp",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true, with a NAMED dependent chain",
       "tier": "hamlet",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true, with a NAMED dependent chain",
       "tier": "village",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-9",
       "pool": "magicDependency true, with a NAMED dependent chain",
       "tier": "town",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-9 :: magicDependencyPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-GEN-7",
       "pool": "stress_economic: siege against trade income",
       "tier": "thorp",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-7 :: COHERENCE_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-GEN-7",
       "pool": "stress_economic: siege against trade income",
       "tier": "metropolis",
       "firedOverall": 5,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-GEN-7 :: COHERENCE_POOL_OF",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": true
     },
     {
       "block": "DS-SUP-3",
       "pool": "SEVERAL EXPECTED CATEGORIES MISSING",
       "tier": "thorp",
       "firedOverall": 4,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "SEVERAL EXPECTED CATEGORIES MISSING",
       "tier": "hamlet",
       "firedOverall": 4,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "SEVERAL EXPECTED CATEGORIES MISSING",
       "tier": "village",
       "firedOverall": 4,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "SEVERAL EXPECTED CATEGORIES MISSING",
       "tier": "town",
       "firedOverall": 4,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-SUP-3",
       "pool": "SEVERAL EXPECTED CATEGORIES MISSING",
       "tier": "metropolis",
       "firedOverall": 4,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-SUP-3 :: serviceCatalogPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Safe",
       "tier": "thorp",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Safe",
       "tier": "hamlet",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Safe",
       "tier": "village",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Safe",
       "tier": "city",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-3",
       "pool": "Safe",
       "tier": "metropolis",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-3 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-5",
       "pool": "criminal",
       "tier": "thorp",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-5 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-5",
       "pool": "criminal",
       "tier": "village",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-5 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-5",
       "pool": "criminal",
       "tier": "city",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-5 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-5",
       "pool": "criminal",
       "tier": "metropolis",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-5 :: (block)",
+      "grain": "block",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "neutral baseline (nothing pulling either way)",
       "tier": "thorp",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: legitimacyReadingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "neutral baseline (nothing pulling either way)",
       "tier": "hamlet",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: legitimacyReadingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "neutral baseline (nothing pulling either way)",
       "tier": "town",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: legitimacyReadingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "neutral baseline (nothing pulling either way)",
       "tier": "city",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: legitimacyReadingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "neutral baseline (nothing pulling either way)",
       "tier": "metropolis",
       "firedOverall": 2,
-      "sites": 1
+      "sites": 1,
+      "verdict": "MISSING-AT-TIER",
+      "limb": "rung-dark",
+      "rung": "DS-POW-6 :: legitimacyReadingPoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": true,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-QUIET",
       "tier": "thorp",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-QUIET",
       "tier": "hamlet",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-QUIET",
       "tier": "village",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-QUIET",
       "tier": "city",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-DEF-11",
       "pool": "WALLED-QUIET",
       "tier": "metropolis",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-DEF-11 :: wallRationalePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture pressure RECOVERING (strong security, prosperity)",
       "tier": "thorp",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture pressure RECOVERING (strong security, prosperity)",
       "tier": "hamlet",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture pressure RECOVERING (strong security, prosperity)",
       "tier": "village",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture pressure RECOVERING (strong security, prosperity)",
       "tier": "city",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     },
     {
       "block": "DS-POW-6",
       "pool": "capture pressure RECOVERING (strong security, prosperity)",
       "tier": "metropolis",
       "firedOverall": 1,
-      "sites": 1
+      "sites": 1,
+      "verdict": "LAWFUL",
+      "limb": "value-class",
+      "rung": "DS-POW-6 :: capturePoolKey",
+      "grain": "keyFunction",
+      "siblingRungSpoke": false,
+      "splitLadder": false
     }
   ],
   "departureReport": {
