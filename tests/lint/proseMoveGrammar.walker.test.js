@@ -43,6 +43,7 @@ import {
   SYNTHETIC_BANDS, TAGGED_POOL,
 } from '../fixtures/grammarControls.js';
 import { loadCausalLeaf, loadStateLeaves, poolCells, ROOT } from '../helpers/dossierCorpus.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
 
 /** @param {import('../../src/domain/prose/grammarWalker.js').GrammarReport} r */
@@ -722,14 +723,19 @@ const KIND_CONTROLS = Object.freeze({
   office: 'the office books close at midwinter',
 });
 
-/** What the narrowed vocabulary REFUSES: a bare record, a generic verb, and two non-kinds. */
+/**
+ * What the narrowed vocabulary REFUSES: a bare record, a generic reporting verb, and two
+ * tokens that are not holder kinds. Each carries the WHOLE reading the classifier gives it,
+ * not merely the absence of PROVENANCE — an absence on its own is true both when the token
+ * was correctly excluded and when the classifier stopped answering at all.
+ */
 const NOT_A_CITATION = Object.freeze([
-  'the books say the mill is idle',
-  'the record has two readings',
-  'the records show a lean year',
-  'the rolls carry three hundred names',
-  'the customs books are current',
-  'the tithe roll is short',
+  { text: 'the books say the mill is idle', reads: ['PRESENT', 'OBJECT'] },
+  { text: 'the record has two readings', reads: ['PRESENT'] },
+  { text: 'the records show a lean year', reads: ['PRESENT'] },
+  { text: 'the rolls carry three hundred names', reads: ['PRESENT'] },
+  { text: 'the customs books are current', reads: ['TRADITION'] },
+  { text: 'the tithe roll is short', reads: ['PRESENT'] },
 ]);
 
 describe('the PROVENANCE detector cites the twelve holder kinds and nothing wider (SITTING §R c-16)', () => {
@@ -766,8 +772,12 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
       expect(classifyMoves(text), `${kind} must cite`).toContain('PROVENANCE');
     }
     expect(Object.keys(KIND_CONTROLS)).toHaveLength(12);
-    for (const text of NOT_A_CITATION) {
-      expect(classifyMoves(text), `"${text}" names no holder kind`).not.toContain('PROVENANCE');
+    for (const { text, reads } of NOT_A_CITATION) {
+      // THE WHOLE READING, so the refusal cannot be confused with a classifier that answers
+      // nothing: each of these still classifies, and to something the corpus recognises.
+      expect(classifyMoves(text), `the classifier's reading of "${text}"`).toEqual(reads);
+      expectAbsentWithAnchor(classifyMoves(text), 'PROVENANCE', reads[0],
+        `the classifier's reading of "${text}"`);
     }
   });
 
@@ -775,14 +785,20 @@ describe('the PROVENANCE detector cites the twelve holder kinds and nothing wide
     const row = CLAUSE_DETECTORS.find((d) => d.move === 'PROVENANCE');
     expect(row).toBeTruthy();
     const src = String(row?.re.source);
-    // The withdrawn limb, by its own head: a bare book noun followed by a reporting verb.
-    expect(src).not.toMatch(/rolls\|registers\?\|ledgers\?\|books\?\|records\?/);
-    expect(src).not.toContain('customs');
-    expect(src).not.toContain('tithe');
+    // THE LIVENESS ANCHOR COMES FIRST, and it is the whole vocabulary: all twelve kinds are
+    // asserted PRESENT in this same string before anything is asserted absent from it, so a
+    // regex that drifted away entirely reds here rather than passing the three negatives.
     for (const kind of ['treasury', 'muster', 'census', 'parish', 'toll', 'market',
       'watch', 'court', 'elders', 'tradition', 'road', 'office']) {
       expect(src, `${kind} is a holder kind and must be in the vocabulary`).toContain(kind);
     }
+    expect(src.length, 'and the source is a real regex body, not an empty string').toBeGreaterThan(120);
+    // anchored: the twelve kinds are asserted PRESENT in this same `src` immediately above
+    expect(src).not.toMatch(/rolls\|registers\?\|ledgers\?\|books\?\|records\?/);
+    // anchored: same `src`, whose twelve kind tokens are asserted present immediately above
+    expect(src).not.toContain('customs');
+    // anchored: same `src`, whose twelve kind tokens are asserted present immediately above
+    expect(src).not.toContain('tithe');
   });
 
   it('U5 — the reading does not depend on the row\'s PRIORITY POSITION', async () => {
