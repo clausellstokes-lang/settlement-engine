@@ -25,7 +25,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -33,7 +34,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -41,14 +43,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "counterforce",
           "text": "Crime finds little room at {settlement}, and the watch is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "Approved": [
@@ -58,7 +62,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -66,7 +71,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -74,7 +80,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "unfolding",
@@ -82,7 +89,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "Tolerated": [
@@ -92,7 +100,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -100,7 +109,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -108,7 +118,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "counterforce",
@@ -116,7 +127,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 4
         },
         {
           "angle": "threshold",
@@ -124,7 +136,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 5
         }
       ],
       "Contested": [
@@ -134,7 +147,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -142,7 +156,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -150,7 +165,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
@@ -158,7 +174,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 4
         },
         {
           "angle": "threshold",
@@ -166,7 +183,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 5
         }
       ],
       "Legitimacy Crisis": [
@@ -176,7 +194,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -184,7 +203,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -192,14 +212,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} can find nobody who speaks for the town with any confidence, and several who will speak for a part of it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "breakdown dominated by PROSPERITY, favourable": [
@@ -209,7 +231,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -217,7 +240,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -225,7 +249,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "breakdown dominated by PROSPERITY, adverse": [
@@ -235,7 +260,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -243,7 +269,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -251,7 +278,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "breakdown dominated by SAFETY, adverse": [
@@ -261,7 +289,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -269,7 +298,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -277,7 +307,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "breakdown dominated by DEFENSE, adverse": [
@@ -287,7 +318,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -295,7 +327,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -303,7 +336,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "breakdown dominated by FOOD, adverse": [
@@ -313,7 +347,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -321,7 +356,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -329,7 +365,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "governanceFractured true": [
@@ -339,7 +376,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
@@ -347,7 +385,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -357,7 +396,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} has a governing body and it has a government, and they are not the same set of people. The town knows which one to approach and does not say so aloud.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "unfolding",
@@ -365,9 +405,194 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ]
+    },
+    "poolMeta": {
+      "Endorsed": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "Approved": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "Tolerated": {
+        "role": "spine",
+        "variantCount": 5,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "attach": []
+      },
+      "Contested": {
+        "role": "spine",
+        "variantCount": 5,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "attach": []
+      },
+      "Legitimacy Crisis": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "breakdown dominated by PROSPERITY, favourable": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "breakdown dominated by PROSPERITY, adverse": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "breakdown dominated by SAFETY, adverse": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "breakdown dominated by DEFENSE, adverse": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "breakdown dominated by FOOD, adverse": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "governanceFractured true": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 2,
+        "attach": []
+      }
     }
   },
   "DS-POW-2": {
@@ -392,7 +617,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -400,21 +626,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger doing business at {settlement} needs one name and gets one answer, and can plan a season ahead on the strength of it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "threshold",
           "text": "What is settled at {settlement} is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "unstable matched": [
@@ -424,7 +653,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -432,14 +662,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} is advised to conclude business quickly and not to rely on any arrangement outlasting the season.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "unfolding",
@@ -447,7 +679,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "critical matched": [
@@ -457,7 +690,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -465,7 +699,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -473,14 +708,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
           "text": "A stranger arriving at {settlement} is told plainly by the first person he asks that nobody is in charge in the way he means it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "siege matched": [
@@ -489,7 +726,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the walls have settled the argument.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -497,14 +735,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger cannot get into {settlement} and would not want to; the town is closed around itself and the ordinary business of the place has stopped.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "unfolding",
@@ -512,7 +752,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "Desperate matched": [
@@ -521,7 +762,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is past arguing about who governs. What is left of the hall is doing what it can, and the town is doing what it must.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -529,7 +771,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -537,7 +780,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "no token matched: unclassified (the plain-description floor)": [
@@ -547,7 +791,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -556,7 +801,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "seat",
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -564,7 +810,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "governing faction holds a DOMINANT share": [
@@ -574,7 +821,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -582,7 +830,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -590,7 +839,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "governing faction holds a NARROW plurality": [
@@ -600,7 +850,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -608,7 +859,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -616,7 +868,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "recentConflict present": [
@@ -626,7 +879,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -634,16 +888,171 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Nobody at {settlement} needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "stable matched": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "unstable matched": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "critical matched": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "siege matched": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "Desperate matched": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "no token matched: unclassified (the plain-description floor)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "governing faction holds a DOMINANT share": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "governing faction holds a NARROW plurality": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "recentConflict present": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      }
     }
   },
   "DS-POW-3": {
@@ -667,7 +1076,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "npc",
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -675,7 +1085,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -684,7 +1095,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "settlement",
             "npc"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "crowded top rung, low instability": [
@@ -695,7 +1107,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "settlement",
             "npc"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -703,7 +1116,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -711,7 +1125,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "high instability (churn at the top)": [
@@ -721,7 +1136,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -729,7 +1145,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -737,7 +1154,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "unfolding",
@@ -745,7 +1163,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "low instability, long-held order": [
@@ -755,7 +1174,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "elder",
@@ -763,7 +1183,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -772,7 +1193,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "npc",
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "shallow ladder (few rungs recorded)": [
@@ -782,7 +1204,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -791,7 +1214,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "settlement",
             "npc"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -800,9 +1224,94 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "settlement",
             "npc"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "clear top rung, low instability": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "crowded top rung, low instability": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "high instability (churn at the top)": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 3,
+        "attach": []
+      },
+      "low instability, long-held order": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "shallow ladder (few rungs recorded)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      }
     }
   },
   "DS-POW-4": {
@@ -830,7 +1339,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "settlement",
             "seat",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -838,7 +1348,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -846,7 +1357,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "riskLabel: Holding": [
@@ -857,14 +1369,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "{settlement} has people who would take the hall if they could, and they cannot, and everybody involved understands the arrangement precisely.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -873,7 +1387,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "seat",
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "riskLabel: Contested": [
@@ -885,7 +1400,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "seat",
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -893,7 +1409,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -901,14 +1418,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} is quietly advised to be civil to two houses rather than one, and is not told why in so many words.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "riskLabel: Critical. The seat could fall": [
@@ -919,14 +1438,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "settlement",
             "seat",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "{settlement} is waiting. The hall could change hands within the season and the town has already begun arranging itself for both answers.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -934,7 +1455,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "legitimacyHold: public backing hardens the hold": [
@@ -943,7 +1465,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The town is behind whoever sits at {settlement}, and a ruler with the town behind them can do things a ruler without it cannot attempt.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -951,7 +1474,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -959,7 +1483,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "legitimacyHold: public opinion neither helps nor hurts": [
@@ -970,7 +1495,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "settlement",
             "seat",
             "faction"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -978,7 +1504,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
@@ -986,7 +1513,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "legitimacyHold: public rejection is breaking the hold": [
@@ -995,7 +1523,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The town has turned on whoever sits at {settlement}, and the turning is doing more damage to the hold than any rival has managed.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1004,7 +1533,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "seat",
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -1012,7 +1542,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "previousGovernments present with a recorded cause": [
@@ -1022,21 +1553,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The lineage at {settlement} records what took each prior government out of the hall; the causes are on the rolls, and none of them was age.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town remembers the government before this one and remembers what ended it, and refers to both in the same breath whenever the present {seat} overreaches.",
           "slots": [
             "seat"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "counterforce",
@@ -1045,7 +1579,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "seat",
             "settlement",
             "timeband_age"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "previousGovernments empty (no recorded lineage)": [
@@ -1054,23 +1589,174 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} has no record of a government before this one. Whatever came earlier was not the kind of thing the rolls kept.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The hall at {settlement} has only ever been what it is now, as far as anybody keeping records is concerned.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger asking at {settlement} what came before the present arrangement is told there was nothing worth the name, and is told it without embarrassment.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "riskLabel: Stable (no challengers)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "riskLabel: Holding": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "riskLabel: Contested": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "riskLabel: Critical. The seat could fall": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "legitimacyHold: public backing hardens the hold": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "legitimacyHold: public opinion neither helps nor hurts": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "legitimacyHold: public rejection is breaking the hold": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "previousGovernments present with a recorded cause": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "previousGovernments empty (no recorded lineage)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-POW-5": {
@@ -1097,12 +1783,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town does not wait long for an answer and does not always like the answer it gets, and has no procedure for getting a different one.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1110,14 +1798,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} needs one audience and gets a decision in it, which is either the best or the worst arrangement he will encounter, depending on the decision.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "council": [
@@ -1127,12 +1817,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1140,7 +1832,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "counterforce",
@@ -1148,7 +1841,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "theocracy": [
@@ -1158,12 +1852,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town takes its civic questions to the same place it takes its spiritual ones, and does not experience the two as separate.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1171,7 +1867,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
@@ -1179,7 +1876,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "institution"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "merchant_league": [
@@ -1189,12 +1887,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is run by people who are also its creditors, and the two roles are not kept meaningfully apart.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1202,7 +1902,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "counterforce",
@@ -1210,7 +1911,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "criminal": [
@@ -1222,7 +1924,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What governs {settlement} is an illegal interest that has stopped needing to be illegal here; the forms are kept and the substance is somebody's business.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1230,7 +1933,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "dm-only"
           ],
           "text": "The town knows who decides and does not use the word for it, and the not-using is itself part of the arrangement.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1241,7 +1945,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "mixed": [
@@ -1251,12 +1956,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town cannot say in one word what kind of place it is governed as, and neither can the hall.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1264,7 +1971,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economicBase: extraction": [
@@ -1273,21 +1981,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} lives on what it takes out of the ground, and everything about the town (its rhythm, its politics, its fear) follows the yield.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's whole nightmare is the day the workings run out, and it is discussed at {settlement} the way weather is discussed elsewhere.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} turtles the chokepoints when it fights. It does not campaign; it holds the two or three places that matter and lets everything else go.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economicBase: agrarian": [
@@ -1296,19 +2007,22 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} lives off its own ground and is governed by the calendar of it; nothing here can be decided against the harvest without being decided twice.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's fear is the season that fails, and the fear is old and specific and shared by everybody in it.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} fights seasonally or not at all. The harvest imperative bites, and an army raised past it is an army raised against the town's own bread.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economicBase: trade_hub": [
@@ -1317,7 +2031,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} lives on what passes through it, which makes the roads rather than the fields the thing the town is actually built on.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1325,14 +2040,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "route"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} fights route wars and folds to embargoes; the town can be pressed harder by a closed road than by an army, and its neighbours know it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economicBase: craft": [
@@ -1341,21 +2058,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} makes things, which means it must first be able to get the makings; the town's whole exposure sits upstream of anything it produces.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The fear here is input starvation: not a bad harvest and not a raid, but the season the {good} stops arriving.",
           "slots": [
             "good"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} fights in a limited way and guards its supply above everything else; the town will concede a great deal before it concedes the road its workshops eat from.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economicBase: mixed": [
@@ -1364,21 +2084,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} lives on several things at once, none of them dominant, which spreads the town's risk and denies it any single thing to protect.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The fear at {settlement} is a compound one: not one failure but two arriving together, which is the only kind this town cannot absorb.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} fights in a balanced way because it has to; no single interest here is large enough to make the town's war its own.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "governing body name: a SLOT, never a baked noun": [
@@ -1388,7 +2111,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
@@ -1396,16 +2120,209 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "autocrat": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "council": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "theocracy": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "merchant_league": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "criminal": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "mixed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economicBase: extraction": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economicBase: agrarian": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economicBase: trade_hub": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economicBase: craft": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economicBase: mixed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "governing body name: a SLOT, never a baked noun": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-POW-6": {
@@ -1429,7 +2346,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "There is no reading of how {settlement} regards its rulers. The question has not been put here in any form the rolls would record.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1437,14 +2355,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} cannot tell whether the hall is loved or endured, and neither, on the evidence, can the hall.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "neutral baseline (nothing pulling either way)": [
@@ -1454,12 +2374,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has no particular opinion of the hall, which the hall would do well to notice and generally does not.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
@@ -1467,7 +2389,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "capture pressure ADVANCING (weak security, poor prosperity)": [
@@ -1479,7 +2402,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The criminal interest at {settlement} is gaining ground inside the hall rather than outside it; a poorly-paid, poorly-policed town is cheap to buy into and this one is both.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -1489,7 +2413,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Each season at {settlement} makes the next approach easier. The conditions that would resist it are the same conditions the town has been failing to maintain.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -1499,7 +2424,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Money is being spent at {settlement} on people who cannot account for having it, and the accounting is not being asked for.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "capture pressure RECOVERING (strong security, prosperity)": [
@@ -1511,7 +2437,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
@@ -1521,7 +2448,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -1531,7 +2459,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "capture reached an AGENT of a faction": [
@@ -1544,7 +2473,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1555,7 +2485,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "faction"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -1566,7 +2497,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "capture reached a LEADER": [
@@ -1579,7 +2511,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1590,7 +2523,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -1601,7 +2535,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "faction",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role parallel marketplace": [
@@ -1610,19 +2545,22 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "There is a second market at {settlement} running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town buys in two places and only mentions one of them.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role duty evasion": [
@@ -1631,21 +2569,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "A share of what arrives at {settlement} never appears at the gate, and the share is not small.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The customs at {settlement} are properly kept and thoroughly bypassed, and the two facts do not contradict each other in the way a stranger expects.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role unlicensed revenue": [
@@ -1654,19 +2595,22 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "There is gambling at {settlement} that nobody licenses, and it funds a good deal more than itself.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's debts start in one house and are collected in another, and the two are the same concern.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What is won and lost at {settlement}'s tables funds a great deal that is not a table, and the funding grows with every debt that cannot be paid.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role money laundering": [
@@ -1675,21 +2619,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Several perfectly ordinary businesses at {settlement} exist to make criminal revenue look ordinary, and they are good enough at it to also turn a legitimate profit.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} does business with a respectable house and never learns what else the house is for.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The books of several houses at {settlement} are impeccable, and the impeccability is the service being purchased.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role stolen goods market": [
@@ -1698,21 +2645,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What is taken at {settlement} is moved back into lawful circulation through a clearinghouse, which is the arrangement that makes the taking worth doing at all.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "Theft at {settlement} would not be profitable without somewhere to sell, and the somewhere is the part the watch has never reached.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role protection + extraction": [
@@ -1721,19 +2671,22 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The criminal interest at {settlement} sells safety from itself and calls it something else, steadily, to the same people, every season.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town pays and does not describe the paying as paying.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What is asked of the traders at {settlement} rises a little each year, and each rise is small enough that no single one is worth the trouble of refusing.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "operation role criminal revenue stream (unclassified)": [
@@ -1742,23 +2695,230 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "There is somebody at {settlement} who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} is told there is money in the town that does not come from the market, and is told no more than that.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "present: false (no legitimacy reading)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "neutral baseline (nothing pulling either way)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 3,
+        "attach": []
+      },
+      "capture pressure ADVANCING (weak security, poor prosperity)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "capture pressure RECOVERING (strong security, prosperity)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "capture reached an AGENT of a faction": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "capture reached a LEADER": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "operation role parallel marketplace": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role duty evasion": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role unlicensed revenue": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role money laundering": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role stolen goods market": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role protection + extraction": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "operation role criminal revenue stream (unclassified)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      }
     }
   },
   "DS-POW-7": {
@@ -1783,21 +2943,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The hall at {settlement} is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "There are interests at {settlement} and there are no camps; a question is answered by whoever cares about that question.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} cannot work out who is aligned with whom, and the reason is that nobody is.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "consolidation 0: a fully divided court (live layer, no ruling bloc)": [
@@ -1806,7 +2969,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "No combination at {settlement} holds enough of the hall to govern it; every decision must be assembled separately, and several are not assembled at all.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1816,12 +2980,14 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The court at {settlement} is divided finely enough that it is cheap to influence. A small interest buys a great deal here, because there is no majority for it to have to outbid.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town waits longer for answers than a town this size should, and the waiting is arithmetic rather than idleness.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "a RULING bloc, consolidated": [
@@ -1831,21 +2997,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "seat"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town knows which houses go together at {settlement} and takes its business to whichever of them is nearest.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "There are interests at {settlement} outside the governing combination with real weight, and they do not move. Outbidding a settled majority costs more than any single question is worth.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "glue concession (seats and revenue traded)": [
@@ -1854,21 +3023,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What holds the combination at {settlement} together is a trade: seats and revenue for a working majority, seat-held rather than personal, and outbiddable by anybody who arrives with more.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The arrangement in the hall at {settlement} is a business one and is treated as one by everybody in it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The majority at {settlement} survives every leader it has and would not survive a better offer, and there is no secret about which risk it is running.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "glue patronage (personal loyalty between leaders)": [
@@ -1877,21 +3049,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} is held by a personal loyalty between the people at the head of it, strong while those hands hold those seats, and worth nothing the moment either changes.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The alliance in the hall at {settlement} is between two people rather than two houses, and the town has noticed which.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What binds the majority at {settlement} will die with its bearers' tenure rather than with the arrangement, and the succession that ends it has not yet been called.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "glue doctrine (a shared creed)": [
@@ -1900,21 +3075,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The seats that hold together at {settlement} hold together on a shared creed; it is the most durable binding in the hall and the least negotiable.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The houses that agree at {settlement} agree about something larger than the town, which makes them very hard to divide over anything smaller.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The combination at {settlement} has been offered better terms than it holds and declined them; a binding of belief is not outbid by a binding of coin.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "glue threat (a common danger at the walls)": [
@@ -1923,21 +3101,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The fractious have closed ranks at {settlement} because of what is at the walls; the combination is real, effective and entirely contingent on the danger continuing.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What holds the hall at {settlement} together is outside it, and will leave when the danger does.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "Houses at {settlement} that have not agreed on anything in years are agreeing now, and none of them mistakes it for a reconciliation.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "glue compromise (a corruption leash)": [
@@ -1949,7 +3130,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "One of the seats in the combination at {settlement} carries a leash, and the combination does not name it aloud. It is the strongest binding in the hall and the only one that shatters rather than loosens.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1959,7 +3141,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What holds the majority at {settlement} together would end it in a single afternoon if it were said out loud, and everybody inside it is arranging their affairs accordingly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -1969,7 +3152,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The hall at {settlement} agrees on more than it should and nobody outside it can account for why.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "end seats": [
@@ -1978,21 +3162,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What the combination at {settlement} wants is office. Everything else it takes up is taken up for the effect on who holds what.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The combination at {settlement} takes an interest in everything and cares about one thing, and the one thing is who is sitting where.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What the combination at {settlement} is assembling toward is a hall it does not have to assemble anything for, and each season's trade moves it a little nearer.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "end commerce": [
@@ -2001,21 +3188,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} is organized around money, and its politics are legible the moment the question is framed as a cost.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The houses that agree at {settlement} agree about money, and the agreement lasts exactly as far as the money does.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger who wants something from the combination at {settlement} is not asked what he believes, only what he is offering.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "end doctrine": [
@@ -2024,21 +3214,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} is organized around a belief and will spend office to serve it, which its rivals consistently fail to price correctly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The combination at {settlement} will not trade the thing it is about, which its rivals keep discovering after they have made the offer.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "There are seats the combination at {settlement} could take and will not, because taking them would mean conceding the point the combination exists to hold.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "end survival": [
@@ -2047,21 +3240,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} has one purpose and it is getting the town through; anything not bearing on that is being deferred and openly so.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Everything the combination at {settlement} is doing is aimed at the town still being here afterwards, and it says so plainly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The combination at {settlement} is spending its own future to buy the town a present one, and every member of it knows the bill is coming.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "end patron": [
@@ -2073,7 +3269,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What the combination at {settlement} serves is somebody's interest rather than the town's, and the somebody is not always in the town.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -2083,7 +3280,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} serves an interest, and the interest is not a faction of this town and is not always in it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -2093,7 +3291,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What the combination at {settlement} pursues answers to somebody who never appears in the hall, and the answering is the whole of its consistency.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "receipt formed": [
@@ -2102,21 +3301,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Houses at {settlement} that had no arrangement now have one, and the hall's arithmetic changed the day they announced it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Two interests at {settlement} started voting together and have not stopped, and the town worked out what that meant before the hall admitted it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger who dealt with {settlement}'s hall before the season finds two houses now answering as one, and finds nobody willing to explain when that started.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "receipt realigned": [
@@ -2125,21 +3327,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} is not the combination it was; a seat left and another took its place, and what the majority wants moved with it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The alignment at {settlement} has shifted rather than broken, and what it will now agree to is a different list from last season's.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The combination at {settlement} kept its name and changed its mind, and the town noticed the second before it noticed the first.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "receipt fractured": [
@@ -2148,21 +3353,24 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The combination at {settlement} has come apart. It lost its members and dissolved, and the hall is back to assembling each decision separately.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The arrangement in the hall at {settlement} ended, and it ended over a burden that fell on one house and not the others. That house is the aggrieved party now, and says so.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "A leader who bound the combination at {settlement} left the seat and the personal loyalty went with them; nothing seat-held remained to hold the rest together.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "receipt exposed": [
@@ -2174,7 +3382,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The leash was dragged into the light at {settlement} and the combination shattered in scandal; what had been the hall's most durable arrangement was its most brittle.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -2184,7 +3393,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Something was uncovered at {settlement} and the hall reorganized itself within the week, and the town has a fairly accurate idea of what.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -2194,7 +3404,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "What came out at {settlement} is still working through the hall; the combination is gone and the people who were in it are not, and the arrangements they still hold are the next problem.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "receipt deferred (the alignment exists and has not happened)": [
@@ -2203,14 +3414,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "The alignment is there at {settlement} and the moment has not come; two houses need each other and something keeps them apart, and the keeping-apart is entered every time the question is raised.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "{settlement} already holds three combinations, and a fourth alignment is being held at the cap rather than refused. The houses concerned are aligned in everything but form.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -2219,7 +3432,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "hostile leader tie HARD-BLOCKS an otherwise natural alignment": [
@@ -2228,14 +3442,16 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Two houses at {settlement} want the same things and will not sit together; what is between the people at the head of them is bitter enough that the interests do not get a hearing.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The obvious alliance at {settlement} does not happen, and the town knows exactly whose quarrel is preventing it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -2244,7 +3460,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
             "faction",
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "an opposition bloc forms COVERT under an autarchy": [
@@ -2257,7 +3474,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "slots": [
             "seat",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -2267,7 +3485,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "Seats at {settlement} are coordinating where they cannot be seen to, which is slower, smaller and a great deal more dangerous than coordinating openly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -2277,9 +3496,314 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           "text": "There are meetings at {settlement} that are not meetings, held by people who have no reason to be in the same room and are anyway.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "layer DORMANT (no ledger materialized)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "consolidation 0: a fully divided court (live layer, no ruling bloc)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "a RULING bloc, consolidated": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "glue concession (seats and revenue traded)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "glue patronage (personal loyalty between leaders)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "glue doctrine (a shared creed)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "glue threat (a common danger at the walls)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "glue compromise (a corruption leash)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "end seats": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "end commerce": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "end doctrine": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "end survival": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "end patron": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "receipt formed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "receipt realigned": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "receipt fractured": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "receipt exposed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "receipt deferred (the alignment exists and has not happened)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "hostile leader tie HARD-BLOCKS an otherwise natural alignment": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "an opposition bloc forms COVERT under an autarchy": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      }
     }
   }
 });

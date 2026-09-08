@@ -26,26 +26,30 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What {settlement} wins from this campaign it will win somewhere else; what it is spending, it is spending here, continuously and in plain view.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "visitor",
           "text": "A stranger finds {settlement} quieter than a town this size should be, and finds the reason is arithmetic rather than mood.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "statusLabel: Occupied": [
@@ -55,21 +59,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} deals with the town's own people and notices, eventually, whose soldiers are standing where the town's would be.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "statusLabel: At war (no front at the walls, no army abroad)": [
@@ -79,12 +86,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is at war in the way a town can be at war without seeing any: prices, absences, and a great many conversations about what might happen.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -92,7 +101,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "warExhaustion: rested": [
@@ -101,19 +111,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} carries no scar from fighting. Whatever the town has done, it has recovered from, and what it could put in the field it could put there tomorrow.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has its people and its temper both, and neither has been spent on anything recently.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} could put its full strength in the field this season and is not being asked to; nothing has been spent, and the not-spending is a choice somebody made.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "warExhaustion: near peace": [
@@ -122,24 +135,28 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} carries a light mark from its fighting and is very nearly clear of it; what remains is a preference rather than a weakness.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The town is close to being done with the war it fought, and the last of it is going out of the place slowly.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "{settlement} is at the edge of being clear of its war; another quiet season closes it, and a single hard one would put the town back where it was.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "street",
           "text": "The town talks about the fighting in the past tense now, with the occasional slip.",
-          "slots": []
+          "slots": [],
+          "vid": 4
         }
       ],
       "warExhaustion: war-weary": [
@@ -148,26 +165,30 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} has had enough. The fighting has gone on past what the town believed it agreed to, and the agreement is being withdrawn quietly in a hundred small refusals.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "Sustained fighting has worn {settlement} down to the point where the hall's appetite and the town's have parted; pressure to end it is now internal.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The town is being pushed toward suing for peace by its own weariness rather than by any defeat, and the pushing gets harder to resist each season.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         },
         {
           "angle": "threshold",
           "text": "{settlement} has reached the point where the next demand is the one that gets refused, and nobody in the hall can say in advance which demand that will be.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         }
       ],
       "warExhaustion: exhausted": [
@@ -176,19 +197,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is spent. There is no further war in this town (not unwillingness, absence), and anything asked of it from here will not arrive.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has nothing left to give the war and has stopped pretending it might find some.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "Whatever {settlement} agrees to next it will agree to because it is exhausted, and the terms will show it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "mobilization: climbing the ramp, still distant": [
@@ -197,19 +221,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is turning toward war and is not near it; the muster has begun and the economy has barely started shifting behind it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has begun to prepare in the way towns prepare: quietly, and well ahead of anybody admitting what for.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} notices the town buying things it does not ordinarily buy, and is told nothing about why.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "mobilization: climbing, close to ready": [
@@ -218,19 +245,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is within a season of being able to march. What remains is the last of the provisioning, and the provisioning is nearly done.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The town is very close to war-ready now, and nothing about the preparation looks reversible from inside it.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town has stopped pretending at {settlement}; the preparations are visible, and the visibility is now part of the point.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "mobilization: fully ready": [
@@ -239,21 +269,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is mobilized. The town could march this season, and everything it is doing instead is a choice.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The soldiers are ready at {settlement} and are being kept waiting, and being kept waiting is its own kind of pressure.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "{settlement} is holding a war it has already paid for, and every season it holds it the paying continues without anything being gained.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "mobilization: COVERT": [
@@ -265,7 +298,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is preparing for war without saying so. The muster is being taken as something else, and the accounts have been arranged to agree.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -275,7 +309,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Nothing at {settlement} looks like a town going to war, which at this stage is the intended appearance.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -285,7 +320,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} would be visibly arming by now if it intended to be seen, and the absence of any sign is the strongest sign there is.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation.pays false (the occupation is a net drain on the holder)": [
@@ -295,7 +331,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -303,14 +340,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The soldiers holding {settlement} are costing whoever sent them more than the town has ever produced, and the town is aware of the arithmetic.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation.pays true": [
@@ -320,12 +359,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "What the town produces leaves it, and the leaving has become regular enough that the town budgets around it.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -333,7 +374,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupierHoldings.stretchedThin": [
@@ -343,14 +385,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "The occupier at {settlement} does not press harder because it cannot. What it holds elsewhere is taking the strength that pressing here would need.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -358,7 +402,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupierHoldings.strengthened": [
@@ -368,14 +413,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The occupier's grip on {settlement} is tightening because the occupier is winning elsewhere, and nothing local is causing it or can undo it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -383,7 +430,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility plausible": [
@@ -393,12 +441,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town believes it could be taken and believes it could hold, and lives with both beliefs at once.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -406,7 +456,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility auto_fail": [
@@ -416,7 +467,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -424,14 +476,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town does not lose sleep over {counterpart}, and the not-losing-sleep is well founded.",
           "slots": [
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility harassment": [
@@ -441,7 +495,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -449,7 +504,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -457,7 +513,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility require_coalition": [
@@ -467,7 +524,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -475,7 +533,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -483,7 +542,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility require_betrayal": [
@@ -496,7 +556,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -504,7 +565,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -515,7 +577,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "feasibility require_magic": [
@@ -525,7 +588,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -533,16 +597,352 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town's confidence at {settlement} stops precisely where the arcane begins, and it has no comfortable way of discussing that.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "statusLabel: On campaign": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "statusLabel: Occupied": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 5,
+        "attach": []
+      },
+      "statusLabel: At war (no front at the walls, no army abroad)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 5,
+        "attach": []
+      },
+      "warExhaustion: rested": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "warExhaustion: near peace": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "warExhaustion: war-weary": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      },
+      "warExhaustion: exhausted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "mobilization: climbing the ramp, still distant": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 3,
+        "attach": []
+      },
+      "mobilization: climbing, close to ready": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 3,
+        "attach": []
+      },
+      "mobilization: fully ready": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "mobilization: COVERT": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "occupation.pays false (the occupation is a net drain on the holder)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "occupation.pays true": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "occupierHoldings.stretchedThin": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "occupierHoldings.strengthened": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "feasibility plausible": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "feasibility auto_fail": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "feasibility harassment": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "feasibility require_coalition": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "feasibility require_betrayal": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "feasibility require_magic": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-WAR-2": {
@@ -567,14 +967,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The tribute out of {settlement} goes out on time and in full; the wagons are loaded on the day, and the clerks who load them have stopped remarking on it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "What the town owes {counterpart} it pays, and pays without incident, and the paying has become one of the ordinary burdens of the year.",
           "slots": [
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "elder",
@@ -582,7 +984,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "timeband_span",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economic · strained": [
@@ -591,14 +994,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -606,7 +1011,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "economic · defaulted": [
@@ -616,12 +1022,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has stopped paying and has not said so formally, which everyone involved understands to be the same as saying so.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -629,7 +1037,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "relational · honored": [
@@ -639,19 +1048,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town sends its people when it is called and does not pretend to be glad about it, and the not-pretending is permitted.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} watches the muster go out to a war the town has no interest in, on time and in silence.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "relational · strained": [
@@ -661,21 +1073,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The compelled alliance is holding at {settlement} by less each season, and the muster that arrives is smaller and later than the one before it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Fewer go each time from {settlement}, and fewer of those who go come back to the same houses.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "relational · defaulted": [
@@ -685,14 +1100,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town will not send its people to {counterpart} again, and has said so where it cannot be taken back.",
           "slots": [
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -700,7 +1117,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "security · honored": [
@@ -709,7 +1127,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The cap on arms holds at {settlement}; no muster gathers where the terms forbid one, and the town has arranged its defense around what remains permitted.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
@@ -717,14 +1136,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town keeps within what it agreed at {settlement}, including in the seasons when keeping to it was plainly against its interest.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "security · strained": [
@@ -733,19 +1154,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The cap on arms at {settlement} is fraying. Drills are held quietly and just inside the letter of what was agreed, and the letter is being read generously.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town trains without calling it training, and everybody involved knows exactly which word is doing the work.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The muster at {settlement} has not gathered and everything short of gathering has been done, which is the term being tested rather than broken.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "security · defaulted": [
@@ -754,21 +1178,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} has thrown off the cap on arms; the forbidden muster gathers in the open and has stopped being disguised as anything else.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The town is arming past what it agreed to and is not hiding it, which means the next move belongs to {counterpart}.",
           "slots": [
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town is arming at {settlement} in daylight, and has stopped offering any account of it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "territorial · honored": [
@@ -778,19 +1205,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The soldiers who hold the town are not the town's and there is no trouble about it, which is not the same as there being no feeling about it.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The garrison at {settlement} keeps the walls without incident and has kept them long enough that the absence of incident is beginning to look like the arrangement rather than the truce.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "territorial · strained": [
@@ -799,21 +1229,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The garrison keeps {settlement}'s walls uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What was a quiet occupation at {settlement} is becoming a contested one, incident by incident, and no single incident has been large enough to name.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "The garrison at {settlement} is spending more of its strength on the town than on the walls, and the proportion is moving the wrong way.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "territorial · defaulted": [
@@ -822,19 +1255,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The garrison at {settlement} is besieged inside the very town it holds; the occupation is repudiated and the repudiation is armed.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What holds {settlement}'s walls is now under attack from inside them, and the occupation has become a siege in reverse.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "political · honored": [
@@ -843,21 +1279,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The installed seat at {settlement} still sits, propped exactly as precariously as it was on the day it was set, and propped effectively.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} deals with a hall that plainly answers elsewhere, and finds it functions perfectly well on that basis.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} deals with the installed seat because it must, and deals with it competently, which is not the same as accepting it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "political · strained": [
@@ -866,21 +1305,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The installed seat at {settlement} wavers; its writ runs thinly beyond the hall itself, and the parts of the town that ignore it are growing.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What was set up at {settlement} to govern is governing less each season, and nothing has been sent to shore it up.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The installed seat at {settlement} is obeyed inside the hall and increasingly nowhere else, and the boundary moves inward each season.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "political · defaulted": [
@@ -890,12 +1332,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town took its hall back, and the taking was not gentle and was not disputed by anybody who lives here.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -903,7 +1347,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "informational · honored": [
@@ -913,19 +1358,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "There are people at the hall who are not the town's and everybody knows which, and the arrangement is tolerated as the price of the peace.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement}'s hall finds people present who are plainly not the town's and are plainly entitled to be there.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "informational · strained": [
@@ -934,21 +1382,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The openness of {settlement}'s court is narrowing; the observers are seeing less than they are owed, and are not yet in a position to insist.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "Doors at {settlement} that were meant to stay open are closing one at a time, and none of the closings alone is worth an incident.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The observers at {settlement} are still in the room and are being told less in it, and neither side has said so aloud.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "informational · defaulted": [
@@ -958,14 +1409,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The observers have been put out of the hall at {settlement}, politely and without any pretence about what it means.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -973,7 +1426,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "sovereignty · honored": [
@@ -983,7 +1437,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
@@ -991,14 +1446,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Neither town interferes in the other's quarrels, and at {settlement} that restraint is discussed as a point of pride rather than of policy.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "sovereignty · strained": [
@@ -1010,7 +1467,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Foreign coin stirs beneath {settlement}'s internal contests again, and the pledge of non-intervention frays at the edges where the coin lands.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1020,7 +1478,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Somebody outside is beginning to have opinions about who governs {settlement}, and the opinions are arriving with money attached.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -1030,7 +1489,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Somebody at {settlement} is being funded from outside, and the funding is careful enough that nothing can yet be said about it in the hall.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "sovereignty · defaulted": [
@@ -1039,19 +1499,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "An army has crossed into {settlement}'s internal quarrel; the pledge of non-intervention lies broken, and openly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "{settlement}'s internal quarrel now has a foreign army in it, and whatever it was about before, it is about that now.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "generic floor · honored": [
@@ -1060,19 +1523,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The term is kept at {settlement} as it was written, and the peace holds along this seam of it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Whatever was agreed is being done, and the town has stopped watching to see whether it will be.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} would not know from the town's conduct that there was a term here at all, which is what keeping one looks like.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "generic floor · strained": [
@@ -1081,21 +1547,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The term is kept at {settlement} only barely; the strain of keeping it shows, and the showing is getting worse rather than better.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What was agreed is still being done at {settlement}, later and more grudgingly each season, and nobody has yet decided to stop.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town keeps what it agreed at {settlement} and has begun to talk openly about the cost of keeping it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "generic floor · defaulted": [
@@ -1104,19 +1573,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The term is broken at {settlement}, and this seam of the peace has torn.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "What was agreed is not being done, and the town has stopped explaining why.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "This part of the agreement has failed at {settlement}, and the parts still standing are now carrying the weight of it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "fraying set on a term with time still to run": [
@@ -1126,19 +1598,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "timeband_span"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The term still has its years to run and is failing inside them, which is a different problem from a term expiring.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Everybody at {settlement} expects this term to fail before it expires, and expects it openly enough that the expecting is helping it along.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "document-level: the treaty runs out within the year": [
@@ -1148,19 +1623,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The peace has a short time left in it, and the town has begun to talk about afterwards as a real place.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The peace at {settlement} has a short time left in it, and what replaces it is a decision nobody has made, which is itself the most dangerous fact about the coming season.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "document-level: the town is the LOSER side": [
@@ -1169,21 +1647,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} signed this peace from beneath and the terms show it throughout; nothing in the document was negotiated so much as accepted.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "elder",
           "text": "The town has carried these terms {timeband_since} and has stopped describing them as recent.",
           "slots": [
             "timeband_since"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} calls the document by its proper name and has never once called it an agreement.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "document-level: the town is the VICTOR side": [
@@ -1193,16 +1674,442 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What {settlement} took at the table is still arriving, and the arriving is what the victory actually consists of now.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         }
       ]
+    },
+    "poolMeta": {
+      "economic · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economic · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "economic · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "relational · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "relational · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "relational · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "security · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "security · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "security · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "territorial · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "territorial · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "territorial · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "political · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "political · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "political · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "informational · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "informational · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "informational · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "sovereignty · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "sovereignty · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "sovereignty · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "generic floor · honored": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "generic floor · strained": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "generic floor · defaulted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "fraying set on a term with time still to run": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 3,
+        "attach": []
+      },
+      "document-level: the treaty runs out within the year": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "document-level: the town is the LOSER side": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "document-level: the town is the VICTOR side": {
+        "role": "spine",
+        "variantCount": 2,
+        "faceCounts": [
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2
+        ],
+        "readsCount": 2,
+        "attach": []
+      }
     }
   },
   "DS-WAR-3": {
@@ -1219,35 +2126,62 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "text": "This settlement is at peace and keeps no named faith.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "elder",
           "text": "{settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 4
         },
         {
           "angle": "counterforce",
           "text": "There are quarrels {settlement} could be part of and observances it could keep, and it is part of none and keeps none.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 5
         }
       ]
+    },
+    "poolMeta": {
+      "*": {
+        "role": "spine",
+        "variantCount": 5,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "readsCount": 3,
+        "attach": []
+      }
     }
   },
   "DS-WAR-4": {
@@ -1267,21 +2201,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} reaches for force earlier than its neighbours do; where another hall would send a letter, this one weighs a muster first.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's temper is known. When something goes wrong at a border, {settlement} is not the party that waits.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger negotiating with {settlement} finds the hall reaching for consequences early, and finds the reaching is not a bluff.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "Assertive": [
@@ -1290,21 +2227,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} presses its claims. It does not seek fights and it does not leave a grievance to settle itself, and the difference is legible in how it negotiates.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "A stranger dealing with {settlement} finds the hall firm rather than hostile, and finds that firmness holds when tested.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} does not let a thing go, and its neighbours settle small matters with it promptly rather than discover what happens otherwise.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "Even-handed": [
@@ -1313,19 +2253,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} weighs a quarrel the way most halls do: neither eager nor reluctant, and predictable to anybody who has dealt with it twice.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has no reputation either way, which in these matters is itself a reputation.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger can predict what {settlement}'s hall will do about a grievance, which is the most useful thing a neighbour can say about a town.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "Cautious": [
@@ -1334,21 +2277,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} prefers not to. Where a grievance can be carried rather than pressed, this hall carries it, and the carrying is its habit rather than its calculation.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "There are causes {settlement} holds and does not act on, and the holding is disposition rather than weakness.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} would rather be wronged than be at war, and says so when the question is put directly.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "Pacific": [
@@ -1357,21 +2303,101 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} will go a very long way to avoid a fight, and its neighbours price that in.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town does not answer provocation, and the not-answering is a settled policy rather than a mood.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "{settlement} would not take up a cause another hall would seize on, and its neighbours can plan around that without having to test it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "Belligerent": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "Assertive": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "Even-handed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "Cautious": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "Pacific": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-WAR-5": {
@@ -1397,19 +2423,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is at peace and is arranged for it. Nothing here is being held back for a war, and nothing is being produced against one.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture alert": [
@@ -1418,19 +2447,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is on alert. Nothing has been raised and everything is being watched, and the watching has begun to cost.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has not changed what it does and has changed how carefully it does it.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The watching at {settlement} costs a little more each week and has not yet produced anything to watch, and the hall is beginning to be asked about that.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture war_preparation": [
@@ -1439,19 +2471,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is gearing for war, with the economy beginning to shift onto a war footing; the change is visible in what is being bought before it is visible in who is being raised.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The town is turning, and the turning has not yet reached the point where it could be quietly turned back.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} is buying differently, storing differently and hiring differently, and none of it has been announced.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture mobilized": [
@@ -1460,19 +2495,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is fully mobilized: a war economy, ready to march, and waiting on a decision rather than on preparation.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is ready and is being kept ready, and being kept ready is expensive in ways the hall is discovering.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "{settlement} is ready and idle, which is the most expensive condition a town can hold and the hardest to hold for long.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture deployed": [
@@ -1481,19 +2519,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement}'s army is in the field. What the town has is elsewhere, and what remains here is what could not be taken.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is short of its own people and will be until the campaign ends, however it ends.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger finds {settlement} short of exactly the people a town this size should be full of, and does not have to ask where they are.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture war_exhaustion": [
@@ -1502,19 +2543,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is war-weary and its army is spent; what could be raised here now is a fraction of what was raised, and the fraction is falling.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "The town has reached the end of what it will give and has not formally said so, and the gap between those is where the next few seasons will be spent.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} has stopped answering the muster properly and has not formally refused it, and both facts are understood.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture demobilizing": [
@@ -1523,19 +2567,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is standing down and the war economy is unwinding; what was made for the war is being sold, converted or abandoned, mostly the last.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "People are coming back to the town and are not returning to what they left, because what they left has been reorganized around their absence.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What {settlement} built for the war is being unbuilt at a loss, and the loss is arriving in the accounts a season after the fighting stopped.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "posture COVERT (any state)": [
@@ -1547,7 +2594,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "What {settlement} is doing about war it is doing without declaring, and the accounts have been arranged so that the doing does not appear.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1557,7 +2605,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Nothing at {settlement} looks like a town preparing for anything, and the looking-like-nothing has taken effort.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
@@ -1567,7 +2616,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement}'s disposition has moved and its appearance has not, which took one decision at the top of the hall and a great many small silences beneath it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "settlementWarStatus null (peace, not missing data)": [
@@ -1576,21 +2626,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "{settlement} has neighbours it disagrees with and no front with any of them; the disagreements have stayed disagreements.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "live war_front INTO the settlement (a genuine siege)": [
@@ -1599,19 +2652,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "A live front runs into {settlement}. There is an army here, it is arranged against the town, and the town's condition is now a question of stores and time.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The gates are shut and there is something outside them, and the something is not a rumour.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What decides {settlement} now is being decided outside its walls, and nothing the town does inside them changes the arithmetic much.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "phantom front (hostility with no army behind it)": [
@@ -1621,7 +2677,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -1629,7 +2686,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -1637,7 +2695,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation contested": [
@@ -1647,19 +2706,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The soldiers are here and the town has not accepted that they are, and neither side has yet been able to change the other's mind.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The garrison at {settlement} spends its strength on holding the town rather than through it, and holding costs more every week it is not accepted.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation unstable": [
@@ -1669,21 +2731,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "Nothing about the occupation at {settlement} has settled, and every week it does not settle makes settling harder.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The occupation at {settlement} sits at the point where a single incident decides it, and both the garrison and the town are behaving as though they know which incident.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation extractive": [
@@ -1693,12 +2758,14 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "What the town makes leaves it, and the leaving is thorough enough that the town has stopped planning past the season.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1706,7 +2773,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation stabilized": [
@@ -1716,21 +2784,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} finds the town working normally and takes a day or two to notice whose soldiers are standing in it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} has arranged itself around the occupier and stopped calling it an occupation in ordinary conversation.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "occupation vassalized": [
@@ -1740,7 +2811,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -1748,7 +2820,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
@@ -1756,7 +2829,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "resistance largely quiescent": [
@@ -1765,19 +2839,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is not resisting. The occupation meets no organized opposition, and what opposition exists is individual and unconnected.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has decided, for now, that enduring costs less than the alternative.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "A stranger at {settlement} sees a town under somebody else's soldiers going about its business, and has to be told that is not normal.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "resistance restive": [
@@ -1786,21 +2863,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is restive: sabotage and noncompliance harry the garrison steadily without ever amounting to a rising.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "Nothing large is happening at {settlement} and a great many small things are, and the small things are getting less deniable.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "{settlement} is at the point where the small refusals have become a habit rather than a mood, and a habit is what a rising is assembled out of.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "resistance simmering": [
@@ -1809,19 +2889,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} simmers. The resistance is organized enough to be called that, and has not yet chosen the moment it is waiting for.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town is not quiet and is not in revolt, and everybody in it can feel which way that is trending.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What is organized at {settlement} is waiting rather than idle, and waiting is a decision that can be reversed in an afternoon.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "resistance in open revolt": [
@@ -1831,7 +2914,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1839,14 +2923,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "blockade stamped (recorded cause)": [
@@ -1856,21 +2942,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "counterpart"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town at {settlement} can name what is stopping its supply, and points at the water when it does.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "blockade LIFTED (the impairment is cleared)": [
@@ -1879,21 +2968,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The blockade on {settlement} has ended and what it impaired is running again; the town's supply has resumed, and what it lost while it was closed has not.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The road is open at {settlement} and the prices have not come back down, and the town is learning which of those was actually the blockade's doing.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The blockade on {settlement} is gone and the town's condition has not returned with it, which tells the town something about what the blockade actually cost.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "a stream: true treaty term (the installment shape)": [
@@ -1904,21 +2996,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
             "settlement",
             "counterpart",
             "term"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "What the town owes goes out on a schedule, {timeband_span} of schedule remaining, and it is the bill of the war, still being paid.",
           "slots": [
             "timeband_span"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "The obligation at {settlement} executes itself each season, and stopping it would take a decision nobody in the hall has been willing to be the one to make.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "a HIGH-burden term": [
@@ -1928,7 +3023,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "term",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -1936,14 +3032,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "term"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "What the town sends away at {settlement} is enough that people plan their year around what is left, rather than around what they earn.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath siege_lifted": [
@@ -1952,21 +3050,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "{settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath occupation_lifted": [
@@ -1976,14 +3077,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "unfolding",
@@ -1991,7 +3094,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "counterpart",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath war_exhaustion": [
@@ -2000,19 +3104,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is carrying the mark of the fighting it did. Nothing here is broken, and nothing here has the strength it had.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town has not recovered and has stopped talking about recovering, which is a stage rather than a mood.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "{settlement} is not recovering so much as levelling off, and the level is below where the town started.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath war_drain": [
@@ -2021,21 +3128,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The war is still taking from {settlement} after the fighting. The costs did not end where the campaign did, and the town is meeting them out of ordinary revenue.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What {settlement} spends on a war that is over is spending it cannot spend on anything else, and the list of anything else is getting longer.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The town is still paying for a war that is over at {settlement}, and has begun to resent the paying in a way it never resented the fighting.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath war_spoils": [
@@ -2044,19 +3154,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} came out of the fighting with more than it went in with, and the more is in the town: visible, unevenly distributed, and generating its own quarrels.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town profited, and the profit is not shared in the proportions anybody expected before the fighting started.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "unfolding",
           "text": "What {settlement} took is being turned into something permanent by the people who hold it, and the town's shape after that will not be the shape it had.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath relief_burden": [
@@ -2065,21 +3178,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{settlement} is carrying people it did not have before; the relief the town gave is now a standing cost, and the cost has outlasted the crisis that produced it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
           "text": "What was generosity at {settlement} has become arithmetic, and the town has begun to say so out loud.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The people {settlement} took in are still here, and the town's generosity has become a standing item that somebody has to fund.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "aftermath trade_realignment": [
@@ -2088,14 +3204,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "elder",
@@ -2103,9 +3221,477 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "timeband_since"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "posture peace": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture alert": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture war_preparation": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture mobilized": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture deployed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture war_exhaustion": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture demobilizing": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "posture COVERT (any state)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "settlementWarStatus null (peace, not missing data)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "live war_front INTO the settlement (a genuine siege)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "phantom front (hostility with no army behind it)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "occupation contested": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "occupation unstable": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "occupation extractive": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "occupation stabilized": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "occupation vassalized": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "resistance largely quiescent": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "resistance restive": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "resistance simmering": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "resistance in open revolt": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "blockade stamped (recorded cause)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "blockade LIFTED (the impairment is cleared)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "a stream: true treaty term (the installment shape)": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "a HIGH-burden term": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath siege_lifted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath occupation_lifted": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath war_exhaustion": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath war_drain": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath war_spoils": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath relief_burden": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "aftermath trade_realignment": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-FTH-1": {
@@ -2123,14 +3709,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -2138,7 +3726,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "creed"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "PATRON: rankAxis: minor": [
@@ -2147,14 +3736,16 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town's rite is {creed}'s: established, unremarkable elsewhere, and entirely sufficient here.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
@@ -2162,7 +3753,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "creed"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "PATRON: rankAxis: cult": [
@@ -2172,21 +3764,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "{creed} holds the seat here and almost nowhere else; the town is the faith rather than a part of it.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Outside these walls {creed} is a curiosity. Inside them it is the calendar, the oath and the burial rite.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "CULTS: cults[] present beneath the patron": [
@@ -2195,186 +3790,216 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The patron is not the only creed here; {rival_creed} keeps a following that is real without being a rival for the seat.",
           "slots": [
             "rival_creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Several lesser rites run alongside the patron's, each with its own days and its own quarter of the town.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "DEVOTION: devout": [
         {
           "angle": "street",
           "text": "Devotion here runs deep. The rites are kept by people who would keep them without being asked.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "{settlement} is a pious town in the plain sense: the observance's calendar and the town's calendar are the same document.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "Observance is near-total, and it is not performance; the creed shapes what people do on ordinary days.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "DEVOTION: faithful": [
         {
           "angle": "ledger",
           "text": "The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Devotion here is steady and unspectacular. Most households keep the rites, and the ones that do not are known.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "{settlement} is faithful in the working sense: the benches are full on the days they should be full.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "DEVOTION: observant": [
         {
           "angle": "street",
           "text": "Faith here is habit more than fervour. The rites are kept, and kept without much heat.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The town observes. It marks the days, attends the required occasions, and does not think about it much between them.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "Devotion in {settlement} is ordinary: real enough to organize a year around, thin enough not to organize a life around.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "DEVOTION: lukewarm": [
         {
           "angle": "visitor",
           "text": "The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Faith here has become a formality. The forms are observed, and fewer people each season could say why.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "{settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "DEVOTION: secular": [
         {
           "angle": "ledger",
           "text": "Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The town keeps very little of its faith. Nothing forbids the rites and almost nobody attends them, and neither half of that is discussed.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "{settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "ARC: trend: rising": [
         {
           "angle": "unfolding",
           "text": "Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "ARC: trend: falling": [
         {
           "angle": "unfolding",
           "text": "Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "Belief here is receding ahead of the ceremonies; the ceremonies are the last part to go, and they have not gone.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "ARC: trend: steady": [
         {
           "angle": "ledger",
           "text": "Devotion holds where it has been. Nothing is pulling it up and nothing is pulling it down.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The town's faith is at rest: neither a revival nor a drift, only the same observance it kept within the year.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Nothing about the creed is moving here. The measure of that is that nobody discusses it.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "STANDINGS: the patron dominant": [
         {
           "angle": "ledger",
           "text": "The patron holds most of the town's adherence outright; the other creeds keep shrines rather than congregations.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "There is no real contest for the seat: {creed} holds well past what a rival could close, and the rest of the field knows it.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "One creed carries {settlement}. What else is kept here is kept in its shadow and on its sufferance.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "STANDINGS: the patron pressed by a near rival": [
@@ -2383,19 +4008,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The patron holds the seat, but not comfortably: {rival_creed} has taken enough of the town's adherence to be counted.",
           "slots": [
             "rival_creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "{creed} still leads, and not by much; a rival draws from the same households the patron does, and is close enough to be counted against it.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The seat is held rather than secure. Another rite has closed most of the distance between them.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "STANDINGS: a plural field, no majority": [
@@ -2404,125 +4032,471 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "No creed commands {settlement}. Adherence is divided across several rites, none of them near a majority.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The town's faith is a field rather than a hierarchy. The patron leads a crowd rather than a following.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "Several observances share this town in rough proportion, which the clergy of each describe differently.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "SINK: unaffiliated present, arc falling": [
         {
           "angle": "ledger",
           "text": "A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "The unaffiliated are the fastest-growing part of {settlement}'s religious life, which is a way of saying its religious life is shrinking.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "People here are leaving the rites without joining anything; the benches thin and nothing fills them.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "SINK: unaffiliated present, arc rising": [
         {
           "angle": "unfolding",
           "text": "The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "People who kept no rite are keeping one again, and mostly the one their households kept before them.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "MANDATE: contested, or patron security below the floor": [
         {
           "angle": "counterforce",
           "text": "The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "Whatever legitimacy the seat has, it is not borrowed from the creed; the faith here is too contested to vouch for anyone.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The faith and the government stand apart. Neither is strengthened by the other, and the ruler feels it more than the clergy do.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "MANDATE: a dominant church": [
         {
           "angle": "ledger",
           "text": "The observance stands behind the seat, and it is an observance worth standing behind. The ruler governs with the creed's open endorsement.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Authority here is doubled: what the ruling power asks, the patron's clergy have already asked.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "The faith is strong and it is aligned; the ruler's writ carries a weight the office alone would not give it.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "MANDATE: a measure of divine mandate": [
         {
           "angle": "ledger",
           "text": "The creed lends the ruler some standing, not the whole of the seat's authority, but a serviceable part of it.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "The endorsement is real and measured; the ruler has it, and does not have it unconditionally.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "Faith props the government here modestly, the way a wall props a roof that would mostly stand anyway.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "live: false": [
         {
           "angle": "ledger",
           "text": "The faith here has only just taken root. What share it holds, how firmly, and which way devotion is running are all questions the years have not answered.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "{settlement} has a patron and no history with it. The rite is established, the following is not yet measurable.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The creed is new to this town. Its standing exists on the founding record and nowhere else so far.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "PATRON: rankAxis: major": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PATRON: rankAxis: minor": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PATRON: rankAxis: cult": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "CULTS: cults[] present beneath the patron": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "DEVOTION: devout": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "DEVOTION: faithful": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "DEVOTION: observant": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "DEVOTION: lukewarm": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "DEVOTION: secular": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "ARC: trend: rising": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "ARC: trend: falling": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "ARC: trend: steady": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "STANDINGS: the patron dominant": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "STANDINGS: the patron pressed by a near rival": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "STANDINGS: a plural field, no majority": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "SINK: unaffiliated present, arc falling": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "SINK: unaffiliated present, arc rising": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 2,
+        "attach": []
+      },
+      "MANDATE: contested, or patron security below the floor": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "MANDATE: a dominant church": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "MANDATE: a measure of divine mandate": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "live: false": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-FTH-2": {
@@ -2535,50 +4509,95 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "text": "The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "There is no patron here. Households keep the rites their households have always kept, and nothing claims the town.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "Worship in {settlement} is a private matter: shrines at crossroads and doorframes, none of them a creed's.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         },
         {
           "angle": "elder",
           "text": "No faith holds the town. The observances are real, and they are nobody's in particular.",
-          "slots": []
+          "slots": [],
+          "vid": 4
         }
       ],
       "PUBLIC / SHARED DOSSIER": [
         {
           "angle": "ledger",
           "text": "The town keeps no named faith. What devotion there is runs through custom rather than clergy.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "Observance here is local and unorganized; nothing in {settlement} speaks for a god.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "elder",
           "text": "The shrines are old and unaffiliated. Whatever is kept at them is kept without a name attached.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         },
         {
           "angle": "street",
           "text": "No creed governs the calendar here. The year is marked by the season and the market, not the rite.",
-          "slots": []
+          "slots": [],
+          "vid": 4
         }
       ]
+    },
+    "poolMeta": {
+      "PRIVATE DOSSIER": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "readsCount": 1,
+        "attach": []
+      },
+      "PUBLIC / SHARED DOSSIER": {
+        "role": "spine",
+        "variantCount": 4,
+        "faceCounts": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "attach": []
+      }
     }
   },
   "DS-FTH-3": {
@@ -2598,19 +4617,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "STANDING: established": [
@@ -2619,19 +4641,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The creed is established: a real congregation, a real house, and no serious claim on the patron's place.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "elder",
           "text": "It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons.",
           "slots": [
             "timeband_span"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "STANDING: ascendant": [
@@ -2641,62 +4666,72 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "The creed is ascendant here. It is not the patron, and the gap between what it holds and what the patron holds has become discussable.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "This faith has grown into a contender. Nothing about its position is settled, which is the point.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "NICHE: slots saturated at tier capacity": [
         {
           "angle": "counterforce",
           "text": "The town sustains as many faiths as it can. A new creed arriving here does not join the field; it displaces something.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "{settlement}'s religious life is full. Every observance the population can carry is already carried.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "There is no room. Any rite that takes hold here takes hold at another's expense, and the other knows it.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "NICHE: slots open": [
         {
           "angle": "ledger",
           "text": "The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "{settlement} is under-served by its own gods. The population could sustain more observance than it currently does.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "There is space in the calendar here. Whether anything fills it is a question of who comes down the road.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "NICHE: the patron's niche carries a contestant": [
         {
           "angle": "counterforce",
           "text": "Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence; it is a schism with a calendar.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
@@ -2705,31 +4740,36 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
             "creed",
             "rival_creed",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The contest here is not between different faiths but between near-identical ones, which is why it is bitter.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "NICHE: every niche uncontested": [
         {
           "angle": "ledger",
           "text": "Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "LEGITIMACY: secure": [
@@ -2739,76 +4779,88 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "timeband_span"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "Legitimacy is not this creed's problem. Its right to the seat is treated as a fact about {settlement} rather than an opinion about the faith.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The claim is secure. A rival could out-draw the patron in adherents and still not out-argue it.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "LEGITIMACY: established": [
         {
           "angle": "ledger",
           "text": "The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "{creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The faith's standing is legitimate and ordinary. It is the arrangement people are used to.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "LEGITIMACY: tenuous": [
         {
           "angle": "counterforce",
           "text": "The patron's right to the seat is thin. It holds the benches and it does not hold the argument, and the town has begun to notice the difference.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "{creed}'s claim here is weak enough to be contested by anyone with a better one, and better claims are not scarce.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
           "text": "Legitimacy is the patron's problem. It has the following; what it lacks is the sense of rightfulness that keeps a following in place.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "LEGITIMACY: contested": [
         {
           "angle": "ledger",
           "text": "The patron's claim is broadly rejected. It holds the seat on numbers alone, which is not how seats stay held.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "Nobody here believes {creed} has the right to the place it occupies. The observance continues and the deference has stopped.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The faith is discredited. Its position is now purely a matter of arithmetic, and the arithmetic is against it.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "FALL: displaced": [
@@ -2817,7 +4869,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "The seat changed hands. {rival_creed} drew away enough of the town's adherence to take it, steadily and without any single decisive week.",
           "slots": [
             "rival_creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
@@ -2825,38 +4878,44 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "elder",
           "text": "The old patron was outnumbered rather than defeated. The houses are the same houses, and the name over the calendar has changed.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "FALL: discredited": [
         {
           "angle": "ledger",
           "text": "The patron lost the seat on its right rather than its numbers. The claim failed, and the following followed the claim.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "{creed} was found wanting here. What unseated it was a judgment about rightfulness, and the congregation did not argue.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "The fall was a matter of standing, not share. A rival with a better claim took the seat from a creed that could no longer defend its own.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "FALL: imposed": [
         {
           "angle": "ledger",
           "text": "The patron here arrived with an authority rather than a following. The creed followed the garrison, and the calendar changed by order.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "elder",
@@ -2864,88 +4923,102 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The rite was imposed. Everyone attends, and everyone remembers the season it started.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "FALL: suppressed": [
         {
           "angle": "ledger",
           "text": "The old creed was put down rather than displaced. Its shrines are closed, its days unmarked, and its adherents keep it in whatever form needs no building.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "counterforce",
           "text": "{creed} was evicted from the town's religious life by force. What it holds now, it holds quietly.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The seat was emptied deliberately. Nothing organic did this, and the town's silence about it is itself informative.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "PANTHEON RANK: Cult": [
         {
           "angle": "ledger",
           "text": "The creed holds barely any settlement seats anywhere: a fringe following with one town's worth of conviction behind it.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "Beyond {settlement} this faith is scarcely kept. It is a local phenomenon that happens to have a name.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The rite has almost no reach. Its clergy travel little because there is nowhere to travel to.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "PANTHEON RANK: Minor": [
         {
           "angle": "ledger",
           "text": "The faith holds a few seats across the realm: enough to be known on the road, not enough to be assumed.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "{creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "It is a real faith with a real spread and no pretensions past its district.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "PANTHEON RANK: Major": [
         {
           "angle": "ledger",
           "text": "This is one of the realm's first-rank faiths, kept as patron in enough settlements that its clergy speak to rulers rather than about them.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "threshold",
           "text": "{creed}'s reach is realm-wide. What its councils say about the lawfulness of magic is heard where such things are decided.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "visitor",
           "text": "The faith is major. That is a count of seats rather than a claim about the god, and the count is what gives its clergy their standing.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "TEMPLE WEALTH: rich": [
@@ -2954,19 +5027,22 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{institution} holds a considerable coffer: enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.",
           "slots": [
             "institution"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments; the town is aware of the stonework.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The faith's treasury is full. It is among the richest institutions in {settlement} and behaves like it.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "TEMPLE WEALTH: modest": [
@@ -2975,17 +5051,20 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{institution} is solvent and no more. Its coffer covers the rites, the roof, and a bad season, in that order of priority.",
           "slots": [
             "institution"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "Its means are ordinary: neither a lender nor a supplicant, which suits everyone here.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "elder",
           "text": "The faith is comfortable rather than rich, and has been for long enough that nobody remembers it otherwise.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "TEMPLE WEALTH: drawn down": [
@@ -2994,17 +5073,20 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "{institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.",
           "slots": [
             "institution"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
           "text": "It is poor. The rites are kept and the building is not, and the clergy have started asking in ways they would rather not.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The faith here has no reserve. A bad year would not close it; a second bad year is a real question.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "COVERT CONGREGATION: deities[ref].covert present": [
@@ -3016,7 +5098,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "A congregation persists that the town's records do not show. It keeps {creed} without a building, at a size the suppression was meant to prevent.",
           "slots": [
             "creed"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "unfolding",
@@ -3024,7 +5107,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
             "dm-only"
           ],
           "text": "The evicted rite is still kept here quietly. Its share is small, it is growing, and nothing official acknowledges either fact.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
@@ -3034,7 +5118,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "text": "There is a hidden observance in {settlement}. Its shepherd holds an ordinary clerical post under another creed's roof.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "PILGRIM SEASON: heavy": [
@@ -3044,57 +5129,445 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "season"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "This is the season the faithful come. Beds are scarce, prices are seasonal, and the town's opinion of pilgrims is seasonal too.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "The rite draws a crowd from well outside the district; for a stretch of the year {settlement} is a destination rather than a place.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "PILGRIM SEASON: thin": [
         {
           "angle": "visitor",
           "text": "The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "threshold",
           "text": "The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.",
-          "slots": []
+          "slots": [],
+          "vid": 3
         }
       ],
       "PILGRIM SEASON: suppressed by road danger": [
         {
           "angle": "counterforce",
           "text": "The pilgrims are not coming. The rite has not changed and the road has. What was a devotional journey is now a risk with a devotional excuse.",
-          "slots": []
+          "slots": [],
+          "vid": 1
         },
         {
           "angle": "ledger",
           "text": "The season should be busy and it is not; the country between here and the faithful has stopped being safe to cross.",
-          "slots": []
+          "slots": [],
+          "vid": 2
         },
         {
           "angle": "street",
           "text": "{settlement} is provisioned for a crowd the roads are keeping away.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ]
+    },
+    "poolMeta": {
+      "STANDING: cult": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "STANDING: established": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "STANDING: ascendant": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "NICHE: slots saturated at tier capacity": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "NICHE: slots open": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "NICHE: the patron's niche carries a contestant": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "NICHE: every niche uncontested": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "readsCount": 4,
+        "attach": []
+      },
+      "LEGITIMACY: secure": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "LEGITIMACY: established": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "LEGITIMACY: tenuous": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "LEGITIMACY: contested": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "FALL: displaced": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "FALL: discredited": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "FALL: imposed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "FALL: suppressed": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PANTHEON RANK: Cult": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PANTHEON RANK: Minor": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PANTHEON RANK: Major": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "TEMPLE WEALTH: rich": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "TEMPLE WEALTH: modest": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "TEMPLE WEALTH: drawn down": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "COVERT CONGREGATION: deities[ref].covert present": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PILGRIM SEASON: heavy": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PILGRIM SEASON: thin": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "PILGRIM SEASON: suppressed by road danger": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      }
     }
   },
   "DS-FTH-4": {
@@ -3117,21 +5590,24 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "institution",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
           "text": "{settlement} has more than one answer to the large questions now, and the answers are polite in public and precise in private.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "counterforce",
           "text": "No open breach divides {settlement}'s faiths; the contest stays at the level of attendance, and attendance is watched like weather.",
           "slots": [
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "ROOTED": [
@@ -3142,7 +5618,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
             "creed",
             "settlement",
             "timeband_age"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -3150,7 +5627,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "institution"
-          ]
+          ],
+          "vid": 2
         },
         {
           "angle": "ledger",
@@ -3158,7 +5636,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "institution",
             "settlement"
-          ]
+          ],
+          "vid": 3
         }
       ],
       "ENDOWED": [
@@ -3168,7 +5647,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "institution",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "visitor",
@@ -3176,7 +5656,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "settlement",
             "institution"
-          ]
+          ],
+          "vid": 2
         }
       ],
       "THIN": [
@@ -3186,7 +5667,8 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "creed",
             "settlement"
-          ]
+          ],
+          "vid": 1
         },
         {
           "angle": "street",
@@ -3194,9 +5676,68 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
           "slots": [
             "institution",
             "settlement"
-          ]
+          ],
+          "vid": 2
         }
       ]
+    },
+    "poolMeta": {
+      "CONTESTED": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "ROOTED": {
+        "role": "spine",
+        "variantCount": 3,
+        "faceCounts": [
+          1,
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2,
+          3
+        ],
+        "attach": []
+      },
+      "ENDOWED": {
+        "role": "spine",
+        "variantCount": 2,
+        "faceCounts": [
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2
+        ],
+        "attach": []
+      },
+      "THIN": {
+        "role": "spine",
+        "variantCount": 2,
+        "faceCounts": [
+          1,
+          1
+        ],
+        "vids": [
+          1,
+          2
+        ],
+        "attach": []
+      }
     }
   }
 });

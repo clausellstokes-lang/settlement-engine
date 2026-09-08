@@ -1,0 +1,185 @@
+{
+  "_doc": "THE SHIFT REGISTER (ARCH-COMPOSED-PROSE §8.6; lane SEAM car 4). EVERY MECHANISM WHOSE CHANGE RE-ROLLS A DRAWN INDEX, each with its PIN, its DOOR and its declared-row idiom. THE PROMISE (W3): a FACT shift is forbidden; a TEXT shift is declared and owner-signed. v1 of the architecture declared two shifts and carried at least three more undeclared, which is the failure this file exists to make impossible: a mechanism absent from this register is a same-seed text shift nobody signed. Consumed by tests/data/dossierStateProseProjection.contract.test.js, which PRINTS the register and RECOMPUTES every pin from the leaves themselves. Nothing reads this at runtime and nothing ships it.",
+
+  "_pinIdiom": "A PIN IS A MEASUREMENT, NOT A PROMISE. Each row's `pin` is recomputed by the contract test from the committed leaves (`integer` and `map` compared directly, `digest` re-derived over the named material, `source` asserted as a substring of the named file), so a mechanism that moves without its row moving reds NAMING THE MECHANISM. A car that intends the move edits the row IN THE SAME COMMIT as the change and records the shift class; a car that did not intend it has just been told. This is the `.prose-byte-baseline.json` declared-row idiom applied to draw mechanisms instead of bytes.",
+
+  "_digestMaterial": "Every `digest` pin is sha256 over one line per pool, the pools ordered by `${block} :: ${pool}` ascending, joined by a single newline with no trailing newline. The line is `${block} :: ${pool} :: ${value}` except for `pool-key-rename`, whose line is `${block} :: ${pool}` alone, and for `norm-bit`, whose line is `${blockId}::${poolKey} ${departure}` over the norm leaf's own rows in key order. A digest is used wherever the mechanism is per-pool: 708 integers cannot be read by a person, and a digest that moves names the mechanism while the diff names the pool.",
+
+  "_shiftClasses": "ARCH §8.6 declares FOUR text-shift classes and nothing else re-rolls a drawn index: 1 the REWRITE + FACES freeze (car 8a-8n, one owner re-record); 2 the list-position keys (car 10); 3 THIN-pool growth (car 9b); 4 TURNS (car 11). Each row below names the class it would land under. A row whose `shift` is `none` names a mechanism that must NEVER move: a renumbering, and a pool-key rename.",
+
+  "measuredAt": {
+    "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
+    "tip": "the six state leaves at the car-4 projection; base c45a46a78",
+    "blocks": 68,
+    "pools": 708,
+    "variants": 2266
+  },
+
+  "mechanisms": [
+    {
+      "id": "variant-count-per-pool",
+      "mechanism": "the number of variants in a pool, which is the modulus of the variant draw (`% eligible.length`)",
+      "shift": "3 — THIN-pool growth (car 9b), owner-gated per batch",
+      "door": "the projection contract's variant ratchet, and poolMeta.variantCount per pool",
+      "idiom": "a declared car; the classifier prints RE-INDEXED per pool with its town count (about 75.71 per cent of that pool's reads move under `% length`)",
+      "pin": [
+        { "kind": "integer", "over": "the sum of poolMeta.variantCount over all 708 pools", "value": 2266 },
+        { "kind": "digest", "algo": "sha256", "over": "poolMeta.variantCount per pool", "value": "b0dcbe38d43731d6d75692a1f91670bae05932def2bdd893b914bc2371b175f1" }
+      ]
+    },
+    {
+      "id": "face-count-per-variant",
+      "mechanism": "the number of wording faces a variant carries, which is the modulus of the face draw on the `::w` suffix key",
+      "shift": "1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-record amended per sub-car",
+      "door": "the projection contract, against poolMeta.faceCounts",
+      "idiom": "a declared sub-car; after the freeze a new wording goes in a NEW KEY and never in an existing set (read-specs S9). The seven `canonical` rows keep ONE face by refusal (P-F6)",
+      "pin": [
+        { "kind": "integer", "over": "the sum of every faceCounts entry over all 708 pools", "value": 2266 },
+        { "kind": "integer", "over": "the largest faceCounts entry anywhere in the corpus", "value": 1 },
+        { "kind": "digest", "algo": "sha256", "over": "poolMeta.faceCounts per pool, joined by commas", "value": "0fa317c13a7610e23ae250994e5dea69ef29be857417b5b2aca7a70936bda366" }
+      ]
+    },
+    {
+      "id": "vids",
+      "mechanism": "the stable variant ids — the annex row number at the freeze — which name a variant across a rewrite and which §13 row 22's index-stable draw would hash on",
+      "shift": "none — a renumbering is REFUSED at the projector",
+      "door": "the projection contract, against poolMeta.vids; `vidsOf` in scripts/lib/dossier-annex-grammar.mjs throws",
+      "idiom": "a new variant takes the NEXT number; nothing is ever deleted and nothing is renumbered (NEVER TRIM, §2.6)",
+      "pin": [
+        { "kind": "digest", "algo": "sha256", "over": "poolMeta.vids per pool, joined by commas", "value": "42bb876078541a86a816db3d2fc95f2b468e81eb2d0b969aed9560f160e389b9" }
+      ]
+    },
+    {
+      "id": "pool-key-rename",
+      "mechanism": "the pool key itself, which is hashed into every draw (`${seed}::${blockId}::${poolKey}`): a rename re-rolls every world's reading of that pool",
+      "shift": "none — a rename is a REPLACED cell for every town and has no declared class",
+      "door": "the projection contract's key diff (0 ADDED / 0 REMOVED / 0 CHANGED)",
+      "idiom": "renameable only while the corpus is dark; a live rename is the owner's row",
+      "pin": [
+        { "kind": "digest", "algo": "sha256", "over": "`${block} :: ${pool}` for all 708 pools, in order", "value": "346451703b9b7934636988a77a9c13ce7377f58d5268342eaeb8131620887dbc" }
+      ]
+    },
+    {
+      "id": "connective-list-length",
+      "mechanism": "the length of each (relation, seat) phrase list, which is the modulus of the joint draw `${seed}::${blockId}::${spineKey}::joint::${modifierKey}`",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all",
+      "door": "the connectives leaf's pinned header and §7b's own pin column",
+      "idiom": "the sitting authors the two OWED lists (ARCH §12 car 7); growth after that is a declared row here",
+      "pin": [
+        { "kind": "map", "over": "the length of each list in src/data/dossierConnectives.generated.js", "value": { "consequence.clause": 0, "tension.sentence": 0, "contrast.sentence": 1, "addition.sentence": 1 } }
+      ]
+    },
+    {
+      "id": "norm-bit",
+      "mechanism": "the DEPARTURE bit per pool, which is one of the three signals of the salience BAND and so decides which candidate is ranked first",
+      "shift": "a declared row — a bit crossing the line is a CHAIR FINDING first, then a declared row",
+      "door": "src/data/proseNorms.generated.js, projected from the census's RATE corpus",
+      "idiom": "the bit is FROZEN at the pool's birth car (P-F4); a rate re-measured by an unrelated car would re-order installed worlds without anyone intending it, which is why the leaf carries a BIT and the census keeps the rate as a REPORT",
+      "pin": [
+        { "kind": "integer", "over": "the number of pools carrying a measured bit", "value": 271 },
+        { "kind": "integer", "over": "the number of those bits that read 1", "value": 72 },
+        { "kind": "integer", "over": "the departure line, in basis points, in the census's rate.departureReport", "value": 1000 },
+        { "kind": "digest", "algo": "sha256", "over": "the norm leaf's rows as `${key} ${departure}`", "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d" }
+      ]
+    },
+    {
+      "id": "attach-set",
+      "mechanism": "the set of spines a modifier may attach to, which decides which candidates exist at a rung and therefore what the salience ranking ranks",
+      "shift": "a declared ADDITIVE row per block (the classifier prints ADDITIVE, never RE-INDEXED: a new pool moves nothing existing)",
+      "door": "the projection contract, against poolMeta.attach",
+      "idiom": "EMPTY on every pool at this tip, by construction: every shipped pool is a spine and a spine's attach set is empty. Car 9 authors the first non-empty one",
+      "pin": [
+        { "kind": "integer", "over": "the number of pools whose attach set is non-empty", "value": 0 },
+        { "kind": "digest", "algo": "sha256", "over": "poolMeta.attach per pool, joined by pipes", "value": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59" }
+      ]
+    },
+    {
+      "id": "draw-formula",
+      "mechanism": "the variant draw itself: the key material and the modulus",
+      "shift": "1 — under §13 row 22 the index-stable draw lands ONCE, in car 8a, with the rewrite",
+      "door": "src/domain/display/stateProse/stateProseKernel.js",
+      "idiom": "owner-signed once on the classifier's per-cell diff; the chair measured 75.71 per cent of reads re-rolling on one append under `% length` against 24.17 per cent under the index-stable argmax",
+      "pin": [
+        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length"] }
+      ]
+    },
+    {
+      "id": "face-draw-key",
+      "mechanism": "the wording-face key — a SUFFIX of the variant key, so the parent string never changes",
+      "shift": "1 — the faces land with the rewrite",
+      "door": "src/domain/display/stateProse/stateProseKernel.js `drawFace`",
+      "idiom": "the suffix is `::w` and the script that measures it must spell `::w` (P-F10)",
+      "pin": [
+        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["`${seed}::${blockId}::${poolKey}::w`"] }
+      ]
+    },
+    {
+      "id": "connective-draw-key",
+      "mechanism": "the joint key, which decides WHICH phrase of a list seats at a rung",
+      "shift": "with the first list longer than one phrase",
+      "door": "src/domain/display/stateProse/composeStateProse.js `drawConnective`",
+      "idiom": "no hash at all while the list holds one phrase, which is both shipped lists today",
+      "pin": [
+        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`"] }
+      ]
+    },
+    {
+      "id": "comparator-and-band-rule",
+      "mechanism": "the salience comparator and the band it ranks within: band descending, then the seeded permutation ascending, then an ascending CODE-UNIT comparison of the candidate key",
+      "shift": "a declared row — a comparator change re-orders candidates and so changes which modifier seats",
+      "door": "src/domain/display/stateProse/composeStateProse.js",
+      "idiom": "never a locale API anywhere a draw is ordered (the lint ban in the composer's fence)",
+      "pin": [
+        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::salience::${row.key}`", "return a.key < b.key ? -1 : 1;"] }
+      ]
+    },
+    {
+      "id": "fact-and-position-budget",
+      "mechanism": "how many facts a unit may state and how many rungs of one mount may carry a modifier — both decide how many draws are spent and therefore what a page says",
+      "shift": "a declared row",
+      "door": "src/domain/display/stateProse/composeStateProse.js COMPOSITION_BOUNDS",
+      "idiom": "one frozen record, at zero in the tuning register (P2); a raise is a declared row here and an amendment to ARCH §4.4",
+      "pin": [
+        { "kind": "map", "over": "the composer's exported COMPOSITION_BOUNDS", "value": { "facts": 3, "modifierBearingRungs": 2 } }
+      ]
+    },
+    {
+      "id": "registry-id",
+      "mechanism": "a TURN_KEY_REGISTRY id: a turn REPLACES the spine on every town whose id holds",
+      "shift": "4 — TURNS (car 11), owner-gated per turn class",
+      "door": "scripts/lib/dossier-annex-grammar.mjs TURN_KEY_REGISTRY, and the projector's EXPLAINS refusal",
+      "idiom": "the classifier prints REPLACED per turn class with the towns; tiers 1a to 1c are AVAILABLE and both tier-2 forms are REFUSED at the dossier",
+      "pin": [
+        { "kind": "integer", "over": "the number of pools declaring role `turn`", "value": 0 }
+      ]
+    },
+    {
+      "id": "instance-key",
+      "mechanism": "the list-position instance key `${seed}::${instanceId}`, which the four index-paired positions do not carry today: every row of one list shares one draw",
+      "shift": "2 — the list-position keys (car 10), owner-gated",
+      "door": "src/domain/display/stateProse/generalStateProse.js and generalDeskRead.js; the projector's ATTACH refusal on the index-paired blocks lifts with it",
+      "idiom": "every moved list row named by the classifier; until then modifiers are REFUSED on DS-GEN-2, DS-GEN-8 and DS-REL-1",
+      "pin": [
+        { "kind": "integer", "over": "the number of pools in an index-paired block carrying a non-empty attach set", "value": 0 }
+      ]
+    }
+  ],
+
+  "notMechanisms": [
+    {
+      "id": "readsCount",
+      "what": "poolMeta.readsCount — the census's field count for the pool's selecting branch, carried in the RENDER half so the composer can spend the fact budget `k <= 3 - |spine.reads|` (the car-3a ADDENDUM's ruling)",
+      "why": "IT IS NOT A MECHANISM OF THIS REGISTER, and it is named here so that absence reads as a decision rather than an oversight. It is an integer the composer spends a BUDGET against; it is not a modulus, not a key, not an ordering and not an eligibility test, so no value of it can move a drawn index. It moves only when the census re-measures what a pool's branch reads, which is a WIRING fact and reds at the census's own `--check` interlock; the projector reads it from the census and never derives it. Measured at this tip: present on 340 pools, absent on 368 — exactly the RESOLVED / WIRING-UNRESOLVED split, and on the 368 the composer keeps its documented one-fact default, unchanged."
+    },
+    {
+      "id": "poolMeta.role and the render half generally",
+      "what": "role, relation, form, move, explains, spines, covers",
+      "why": "they select which CANDIDATES exist and how one seats, which is a mechanism of composition and not of the DRAW: `drawVariant` reads `blockId` and `poolKey` and never a pool's fields, so a poolMeta edit cannot move a spine's index by construction (ARCH §2.1). Where one of them changes what a page says it does so through `attach-set` and `registry-id`, which ARE rows above."
+    },
+    {
+      "id": "grammar and vid on a variant",
+      "what": "the `[grammar: Vn]` tag and the minted `vid`",
+      "why": "per-variant DATA that no reader of the draw consults. `variantIsAnchored` reads `slots`, `variantIsAudible` reads `marks`, and neither reads `grammar` or `vid` (GRAMMAR_TAG_CONTRACT.seedSafe). `vids` IS a row above, because a RENUMBERING is refused; carrying the number is not."
+    }
+  ]
+}

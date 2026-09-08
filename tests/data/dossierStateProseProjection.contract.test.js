@@ -23,6 +23,7 @@
  * @enforced-by this file + scripts/generate-dossier-state-prose.mjs --check
  */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { join, resolve } from 'node:path';
@@ -31,6 +32,17 @@ import {
   parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal,
   fillShapeViolation, conformantFill, determinerFill,
 } from '../../scripts/lib/dossier-slot-shapes.mjs';
+import {
+  INDEX_PAIRED_BLOCKS, MODIFIER_MOVES, POOL_ROLES, RELATIONS, S2_SIGNED,
+  applyDeclaration, assertCensusCurrent, assertFaces, assertPoolDeclaration,
+  isDeclarationLine, parseConnectives, readDeclarations, turnKeyStanding, vidsOf,
+} from '../../scripts/lib/dossier-annex-grammar.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { COVERT_SOURCES } from '../../src/domain/prose/wiringCensus.js';
+import { DOSSIER_CONNECTIVES } from '../../src/data/dossierConnectives.generated.js';
+import { DOSSIER_PROSE_NORMS } from '../../src/data/proseNorms.generated.js';
+import { DOSSIER_RELATIONS, DOSSIER_RELATION_ALIASES } from '../../src/data/dossierRelations.generated.js';
+import { COMPOSITION_BOUNDS } from '../../src/domain/display/stateProse/composeStateProse.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
@@ -766,5 +778,775 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(bandBlind).toBeGreaterThanOrEqual(2619);
     expect(DURATION_CLAIM.test('The town stopped calling it new a long while back.')).toBe(true);
     expect(DURATION_CLAIM.test('The town stopped calling it new.')).toBe(false);
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════════════════════
+// SEAM CAR 4 · M2 — THE SCHEMA, KEYS ADDED ONLY (ARCH-COMPOSED-PROSE §12 row 4)
+//
+// The corpus gained `poolMeta` beside every block's `pools` and `vid` on every state variant,
+// and nothing else. The arms below hold that claim in three ways at once: the RENDER half is
+// re-derived from the leaves and from the wiring census and compared; every mechanism whose
+// change would re-roll a drawn index is PINNED on docs/content/prose-shift-register.json and
+// recomputed here; and every refusal of §2.5's grammar table is driven by a plant, because a
+// rule that arrives with its first author is a rule nobody has ever seen refuse anything.
+//
+// ⛔ WHY THE PLANTS DRIVE scripts/lib/dossier-annex-grammar.mjs AND NOT THE PROJECTOR. The
+// projector is an entry script that writes the corpus at import time; a plant that had to
+// regenerate 884 KB of leaves to watch one error is a plant nobody re-runs. The rules live in
+// the lib, the projector holds ONE copy of each, and both are driven here.
+// ══════════════════════════════════════════════════════════════════════════════════
+
+const CENSUS = JSON.parse(readFileSync(resolve(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
+const CENSUS_BY_POOL = new Map(CENSUS.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
+const SHIFT_REGISTER = JSON.parse(
+  readFileSync(resolve(ROOT, 'docs/content/prose-shift-register.json'), 'utf8'),
+);
+
+/** Every (block, pool) of the STATE register with its metadata, ordered as the pins are. */
+const META_ROWS = allStateBlocks
+  .flatMap(([id, block]) => Object.entries(block.pools)
+    .map(([pool, variants]) => ({ id, pool, variants, meta: (block.poolMeta || {})[pool] })))
+  .sort((a, b) => (`${a.id} :: ${a.pool}` < `${b.id} :: ${b.pool}` ? -1 : 1));
+
+/** The digest idiom the register's `_digestMaterial` states, re-spelled here rather than imported. */
+const digestOver = (fn) => sha256Hex(META_ROWS.map((r) => `${r.id} :: ${r.pool} :: ${fn(r)}`).join('\n'));
+/** @param {string} text */
+function sha256Hex(text) {
+  return createHash('sha256').update(text).digest('hex');
+}
+
+describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edited', () => {
+  it('gives every STATE block a poolMeta row per pool, and no row for a pool it does not hold', () => {
+    const missing = [];
+    const orphan = [];
+    for (const [id, block] of allStateBlocks) {
+      const meta = block.poolMeta;
+      if (!meta) { missing.push(`${id}: no poolMeta at all`); continue; }
+      for (const key of Object.keys(block.pools)) if (!meta[key]) missing.push(`${id} :: ${key}`);
+      for (const key of Object.keys(meta)) if (!block.pools[key]) orphan.push(`${id} :: ${key}`);
+    }
+    expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
+    // Non-vacuity: the walk found the whole register, not an empty one.
+    expect(META_ROWS.length).toBe(708);
+    expect(META_ROWS.every((r) => r.meta)).toBe(true);
+  });
+
+  it('counts what is there: variantCount, faceCounts and vids agree with the pool itself', () => {
+    const wrong = [];
+    for (const { id, pool, variants, meta } of META_ROWS) {
+      const at = `${id} :: ${pool}`;
+      if (meta.variantCount !== variants.length) wrong.push(`${at}: variantCount ${meta.variantCount} against ${variants.length} variants`);
+      if (meta.faceCounts.length !== variants.length) wrong.push(`${at}: ${meta.faceCounts.length} faceCounts for ${variants.length} variants`);
+      if (meta.vids.length !== variants.length) wrong.push(`${at}: ${meta.vids.length} vids for ${variants.length} variants`);
+      variants.forEach((v, i) => {
+        const faces = 1 + (Array.isArray(v.wordings) ? v.wordings.length : 0);
+        if (meta.faceCounts[i] !== faces) wrong.push(`${at} #${i}: faceCounts ${meta.faceCounts[i]} against ${faces} faces`);
+        if (meta.vids[i] !== v.vid) wrong.push(`${at} #${i}: vids[${i}] ${meta.vids[i]} against the variant's vid ${v.vid}`);
+      });
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it('mints a vid on every state variant, strictly ascending, and NEVER on the causal leaf', () => {
+    // ⛔ THE CAUSAL LEAF IS EXCLUDED BY A RULING, NOT BY AN OVERSIGHT. Its byte ceiling in
+    // scripts/.prose-byte-baseline.json EQUALS its genesis bytes (`_causalLeafGround`), so a
+    // `vid` on each of its 468 variants would breach a ceiling that is itself a refusal; §11
+    // refuses wording sets on the causal register in wave one, and its families are not in the
+    // wiring census at all. `vid` is the STATE schema's (ARCH §2.3).
+    const bad = [];
+    for (const { id, pool, variants } of META_ROWS) {
+      let last = -1;
+      for (const v of variants) {
+        if (!Number.isInteger(v.vid)) bad.push(`${id} :: ${pool}: a variant carries no vid`);
+        else if (v.vid <= last) bad.push(`${id} :: ${pool}: vid ${v.vid} follows ${last}`);
+        if (Number.isInteger(v.vid)) last = v.vid;
+      }
+    }
+    expect(bad).toEqual([]);
+    const causalWithVid = Object.entries(DOSSIER_CAUSAL_PROSE)
+      .filter(([, family]) => family.poolMeta
+        || Object.values(family.pools).flat().some((v) => v.vid !== undefined))
+      .map(([id]) => id);
+    expect(causalWithVid).toEqual([]);
+  });
+
+  it('orders vids exactly as the manifest recorder orders its own synthesised vid', () => {
+    // ⭐ THE ONE PROPERTY THE DRIFT INSTRUMENT DEPENDS ON. tests/helpers/dossierManifest.js
+    // records a cell's `vid` as the variant's 0-BASED POSITION in the pool as authored, and
+    // says in its own header that car 4's real vid "must reproduce this ordering on an
+    // unchanged corpus". The two are DIFFERENT INTEGERS on purpose — a vid is the ANNEX ROW
+    // NUMBER (§2.6), which starts at 1 on a pool with no canonical row — and the classifier's
+    // re-index detector reads the ordering, not the value. This arm is that agreement, so a
+    // later car that switches the recorder to read the leaf's vid finds the disagreement HERE
+    // rather than in a re-recorded fixture.
+    const disagree = [];
+    for (const { id, pool, meta } of META_ROWS) {
+      const rank = [...meta.vids].map((v, i) => [v, i]).sort((a, b) => a[0] - b[0]).map(([, i]) => i);
+      if (rank.join(',') !== meta.vids.map((_, i) => i).join(',')) disagree.push(`${id} :: ${pool}`);
+    }
+    expect(disagree).toEqual([]);
+    // Non-vacuity, MEASURED: the two spellings differ on the pools with no canonical row, which
+    // is nearly all of them, so an arm that compared the VALUES would be red rather than vacuous.
+    const differing = META_ROWS.filter((r) => r.meta.vids.some((v, i) => v !== i)).length;
+    expect(differing).toBeGreaterThanOrEqual(700);
+  });
+
+  it('declares every shipped pool a SPINE with an EMPTY attach set', () => {
+    const roles = new Set(META_ROWS.map((r) => r.meta.role));
+    expect([...roles]).toEqual(['spine']);
+    expect(META_ROWS.filter((r) => r.meta.attach.length > 0)).toEqual([]);
+    // A spine carries no modifier-only or turn-only field, by construction and by assertion.
+    const stray = META_ROWS.filter((r) => ['relation', 'form', 'move', 'explains', 'spines', 'covers']
+      .some((k) => r.meta[k] !== undefined))
+      .map((r) => `${r.id} :: ${r.pool}`);
+    expect(stray).toEqual([]);
+  });
+
+  it('⭐ readsCount equals the census, pool by pool, and is ABSENT where the census reads nothing', () => {
+    // THE INTERLOCK the car-3a ADDENDUM ruled. The composer bounds a unit at
+    // `k <= 3 - |spine.reads|`, and `reads` itself never ships (ARCH §16), so this integer is
+    // the whole of what the render half knows about the authoring half. It is READ from the
+    // census and never derived, so this arm is a JOIN between two committed files rather than
+    // a restatement of one.
+    const wrong = [];
+    let present = 0;
+    let absent = 0;
+    for (const { id, pool, meta } of META_ROWS) {
+      const row = CENSUS_BY_POOL.get(`${id} :: ${pool}`);
+      const want = row && row.reads.length ? row.reads.length : undefined;
+      if (want === undefined) absent += 1; else present += 1;
+      if (meta.readsCount !== want) {
+        wrong.push(`${id} :: ${pool}: leaf ${String(meta.readsCount)} against census ${String(want)}`);
+      }
+    }
+    expect(wrong).toEqual([]);
+    // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
+    expect({ present, absent }).toEqual({ present: 340, absent: 368 });
+    expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
+  });
+
+  it('MUTANT: a census count that moves without a regeneration is caught by that join', () => {
+    // A control that cannot fail proves nothing. The comparison above is re-driven over a
+    // FABRICATED census in which one pool's reads grew, with the leaves untouched.
+    const compare = (rows, metaRows) => {
+      const by = new Map(rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
+      return metaRows.filter(({ id, pool, meta }) => {
+        const row = by.get(`${id} :: ${pool}`);
+        const want = row && row.reads.length ? row.reads.length : undefined;
+        return meta.readsCount !== want;
+      }).map(({ id, pool }) => `${id} :: ${pool}`);
+    };
+    expect(compare(CENSUS.rows, META_ROWS)).toEqual([]);
+    const target = CENSUS.rows.find((r) => r.reads.length === 1);
+    const moved = CENSUS.rows.map((r) => (r === target
+      ? { ...r, reads: [...r.reads, 'planted.second.field'] } : r));
+    expect(compare(moved, META_ROWS)).toEqual([`${target.block} :: ${target.pool}`]);
+  });
+
+  it('MUTANT: the sha interlock refuses a census taken over a composer that has since moved', () => {
+    const stamped = Object.keys(CENSUS.stamp.files);
+    expect(stamped.length, 'the census stamps no file — the interlock has nothing to check').toBeGreaterThanOrEqual(7);
+    const honest = (rel) => readFileSync(resolve(ROOT, rel), 'utf8');
+    expect(() => assertCensusCurrent(CENSUS, honest, sha256Hex)).not.toThrow();
+    const moved = (rel) => (rel === stamped[0] ? `${honest(rel)}\n// planted\n` : honest(rel));
+    expect(() => assertCensusCurrent(CENSUS, moved, sha256Hex)).toThrow(/is STALE against 1 of its own stamped files/);
+    expect(() => assertCensusCurrent({ ...CENSUS, rows: [] }, honest, sha256Hex)).toThrow(/carries no rows/);
+    expect(() => assertCensusCurrent({ ...CENSUS, schema: 'x' }, honest, sha256Hex)).toThrow(/carries schema/);
+  });
+});
+
+describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (ARCH §8.6)', () => {
+  it('prints the register: every mechanism whose change re-rolls a drawn index', () => {
+    // PRINTED with process.stdout, the idiom the manifest suite already uses: vitest's console
+    // interception swallows a console.log on a PASSING test, and a register nobody can read is
+    // a register nobody checks.
+    const lines = SHIFT_REGISTER.mechanisms.map((m) => `  ${m.id.padEnd(26)} ${m.pin.map((p) => p.kind).join('+').padEnd(24)} ${m.shift.slice(0, 58)}`);
+    process.stdout.write(`\n[shift-register] ${SHIFT_REGISTER.mechanisms.length} mechanisms, `
+      + `${SHIFT_REGISTER.notMechanisms.length} named NOT mechanisms, measured at `
+      + `${SHIFT_REGISTER.measuredAt.pools} pools / ${SHIFT_REGISTER.measuredAt.variants} variants\n`);
+    process.stdout.write(`${lines.join('\n')}\n`);
+    // Non-vacuity: the file was read and it holds the roster ARCH §8.6 enumerates.
+    expect(SHIFT_REGISTER.mechanisms.length).toBeGreaterThanOrEqual(14);
+    const ids = SHIFT_REGISTER.mechanisms.map((m) => m.id);
+    expect(new Set(ids).size, 'a duplicate mechanism id').toBe(ids.length);
+    for (const m of SHIFT_REGISTER.mechanisms) {
+      for (const field of ['mechanism', 'shift', 'door', 'idiom']) {
+        expect(typeof m[field], `${m.id}.${field}`).toBe('string');
+        expect(m[field].trim().length, `${m.id}.${field} is empty; a row that names no door has declared nothing`).toBeGreaterThan(0);
+      }
+      expect(Array.isArray(m.pin) && m.pin.length > 0, `${m.id} carries no pin`).toBe(true);
+    }
+    expect(ids).toEqual(expect.arrayContaining([
+      'variant-count-per-pool', 'face-count-per-variant', 'vids', 'pool-key-rename',
+      'connective-list-length', 'norm-bit', 'attach-set', 'draw-formula',
+      'comparator-and-band-rule', 'fact-and-position-budget', 'registry-id', 'instance-key',
+    ]));
+  });
+
+  it('⭐ recomputes every pin from the leaves themselves — a pin is a measurement, not a promise', () => {
+    /** The live value of each pin, re-derived here and never read from the register. */
+    const live = {
+      'variant-count-per-pool': [
+        META_ROWS.reduce((n, r) => n + r.meta.variantCount, 0),
+        digestOver((r) => r.meta.variantCount),
+      ],
+      'face-count-per-variant': [
+        META_ROWS.reduce((n, r) => n + r.meta.faceCounts.reduce((m, c) => m + c, 0), 0),
+        Math.max(...META_ROWS.flatMap((r) => r.meta.faceCounts)),
+        digestOver((r) => r.meta.faceCounts.join(',')),
+      ],
+      vids: [digestOver((r) => r.meta.vids.join(','))],
+      'pool-key-rename': [sha256Hex(META_ROWS.map((r) => `${r.id} :: ${r.pool}`).join('\n'))],
+      'connective-list-length': [Object.fromEntries(Object.entries(DOSSIER_CONNECTIVES)
+        .flatMap(([rel, bySeat]) => Object.entries(bySeat).map(([seat, list]) => [`${rel}.${seat}`, list.length])))],
+      'norm-bit': [
+        Object.keys(DOSSIER_PROSE_NORMS).length,
+        Object.values(DOSSIER_PROSE_NORMS).filter((v) => v.departure === 1).length,
+        CENSUS.rate.departureReport.lineBp,
+        sha256Hex(Object.entries(DOSSIER_PROSE_NORMS).sort(([a], [b]) => (a < b ? -1 : 1))
+          .map(([k, v]) => `${k} ${v.departure}`).join('\n')),
+      ],
+      'attach-set': [
+        META_ROWS.filter((r) => r.meta.attach.length > 0).length,
+        digestOver((r) => r.meta.attach.join('|')),
+      ],
+      'fact-and-position-budget': [{ ...COMPOSITION_BOUNDS }],
+      'registry-id': [META_ROWS.filter((r) => r.meta.role === 'turn').length],
+      'instance-key': [META_ROWS.filter((r) => INDEX_PAIRED_BLOCKS.includes(r.id) && r.meta.attach.length > 0).length],
+    };
+    const drift = [];
+    for (const m of SHIFT_REGISTER.mechanisms) {
+      m.pin.forEach((pin, i) => {
+        if (pin.kind === 'source') {
+          const src = readFileSync(resolve(ROOT, pin.file), 'utf8');
+          for (const needle of pin.contains) {
+            if (!src.includes(needle)) drift.push(`${m.id}: ${pin.file} no longer contains ${needle}`);
+          }
+          return;
+        }
+        const now = (live[m.id] || [])[i];
+        if (now === undefined) { drift.push(`${m.id} pin ${i}: nothing recomputes it — the pin is a promise, not a measurement`); return; }
+        const want = pin.value;
+        const same = pin.kind === 'map'
+          ? JSON.stringify(now) === JSON.stringify(want)
+          : now === want;
+        if (!same) {
+          drift.push(`${m.id} pin ${i} (${pin.over}): the register pins ${JSON.stringify(want)}`
+            + ` and the corpus measures ${JSON.stringify(now)}. If this move is intended, it is a`
+            + ` ${m.shift} landing: edit the row IN THE SAME COMMIT and say so.`);
+        }
+      });
+    }
+    expect(drift).toEqual([]);
+  });
+
+  it('MUTANT: a mechanism that moves without its row moving reds naming the mechanism', () => {
+    // The reconstruction above, driven over a corpus in which one pool gained a variant.
+    const moved = META_ROWS.map((r, i) => (i === 0
+      ? { ...r, meta: { ...r.meta, variantCount: r.meta.variantCount + 1 } } : r));
+    const pinned = SHIFT_REGISTER.mechanisms.find((m) => m.id === 'variant-count-per-pool').pin[0].value;
+    expect(moved.reduce((n, r) => n + r.meta.variantCount, 0)).not.toBe(pinned);
+    expect(META_ROWS.reduce((n, r) => n + r.meta.variantCount, 0)).toBe(pinned);
+  });
+
+  it('names readsCount as NOT a mechanism, by name and with its reason (the ADDENDUM)', () => {
+    const row = SHIFT_REGISTER.notMechanisms.find((n) => n.id === 'readsCount');
+    expect(row, 'readsCount must be named on the register as a NON-mechanism').toBeTruthy();
+    expect(row.why).toMatch(/not a modulus/i);
+    expect(row.why).toMatch(/340/);
+    expect(row.why).toMatch(/368/);
+  });
+});
+
+describe('SEAM car 4 — the three leaves, at their floors', () => {
+  it('CONNECTIVES: the four reachable pairs, the two OWED floors, and no fifth key', () => {
+    expect(Object.keys(DOSSIER_CONNECTIVES).sort()).toEqual([...RELATIONS].sort());
+    const pairs = Object.entries(DOSSIER_CONNECTIVES)
+      .flatMap(([rel, bySeat]) => Object.keys(bySeat).map((seat) => `${rel}.${seat}`)).sort();
+    expect(pairs).toEqual(['addition.sentence', 'consequence.clause', 'contrast.sentence', 'tension.sentence']);
+    expect(DOSSIER_CONNECTIVES.consequence.clause).toEqual([]);
+    expect(DOSSIER_CONNECTIVES.tension.sentence).toEqual([]);
+    // ⛔ THE EMPTY OPENER IS A PHRASE, and a list of one takes no hash at all (§2.4 key 4).
+    expect(DOSSIER_CONNECTIVES.contrast.sentence).toEqual(['']);
+    expect(DOSSIER_CONNECTIVES.addition.sentence).toEqual(['']);
+    // The floors are OWED, and the leaf's own header is what a reader meets: assert it says so
+    // rather than leaving the emptiness to read as a design.
+    const header = readFileSync(resolve(ROOT, 'src/data/dossierConnectives.generated.js'), 'utf8')
+      .split('\nexport const')[0];
+    expect(header).toContain('consequence.clause 0 (floor 3, OWED)');
+    expect(header).toContain('tension.sentence 0 (floor 3, OWED)');
+  });
+
+  it('NORMS: a bit per FIRED pool, frozen, and absent where the corpus never fired', () => {
+    const keys = Object.keys(DOSSIER_PROSE_NORMS);
+    expect(keys.length).toBe(271);
+    expect(Object.values(DOSSIER_PROSE_NORMS).filter((v) => v.departure === 1).length).toBe(72);
+    const values = new Set(Object.values(DOSSIER_PROSE_NORMS).map((v) => v.departure));
+    expect([...values].sort()).toEqual([0, 1]);
+    // Every key is a LIVE (block, pool) of the shipped corpus, and every bit is the census's
+    // own rate read against its own line. A norm keyed on a pool nobody holds would be a
+    // signal the composer can never consult.
+    const live = new Set(META_ROWS.map((r) => `${r.id}::${r.pool}`));
+    const orphan = keys.filter((k) => !live.has(k));
+    expect(orphan).toEqual([]);
+    const wrong = [];
+    for (const [key, row] of Object.entries(DOSSIER_PROSE_NORMS)) {
+      const at = key.lastIndexOf('::');
+      const census = CENSUS_BY_POOL.get(`${key.slice(0, at)} :: ${key.slice(at + 2)}`);
+      const want = census.rateBp < CENSUS.rate.departureReport.lineBp ? 1 : 0;
+      if (row.departure !== want) wrong.push(`${key}: leaf ${row.departure}, census rate ${census.rateBp} bp`);
+    }
+    expect(wrong).toEqual([]);
+    // And the pools with NO row are exactly the pools the RATE corpus never fired.
+    const unfired = CENSUS.rows.filter((r) => r.rateBp === null).length;
+    expect(META_ROWS.length - keys.length).toBe(unfired);
+  });
+
+  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
+    const rows = Object.values(DOSSIER_RELATIONS).flat();
+    expect(rows.length).toBe(165);
+    const directions = new Set(rows.map((r) => r.direction));
+    expect([...directions]).toEqual(['a→b']);
+    expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
+    expect([...new Set(rows.map((r) => r.source))].sort()).toEqual(['a', 'b', 'c']);
+    // The composer reads the ARROW spelling and the census writes the ASCII one; the leaf is
+    // what the composer reads, so the transcription is asserted rather than assumed.
+    expect(CENSUS.relations.rows.every((r) => r.direction === 'a->b')).toBe(true);
+
+    expect(DOSSIER_RELATION_ALIASES.length).toBe(3);
+    expect(DOSSIER_RELATION_ALIASES.map((a) => a.endpoint).sort())
+      .toEqual(['cause:occupation', 'economicGates.military', 'system:food_security']);
+    expect([...new Set(DOSSIER_RELATION_ALIASES.map((a) => a.evidence))]).toEqual(['identifier']);
+
+    // ⛔⛔ THE JOIN IS EMPTY, AND THAT IS CAR 0's F1 RE-EXECUTED ON THE SHIPPED LEAF. With the
+    // ratified aliases applied, NO row has both endpoints resolving to a field a desk reads, so
+    // no `consequence` and no `tension` joint is authorable anywhere today and every joint
+    // stands at the `addition` floor. This is the arm that would tell the sitting the day an
+    // alias makes the first one authorable.
+    const aliasOf = new Set(DOSSIER_RELATION_ALIASES.map((a) => a.endpoint));
+    const deskRoots = new Set(CENSUS.rows.flatMap((r) => r.reads).map((p) => p.split('.')[0]));
+    const resolves = (e) => aliasOf.has(e) || deskRoots.has(String(e).split('.')[0]);
+    const joined = Object.keys(DOSSIER_RELATIONS)
+      .filter((key) => key.split('|').every((endpoint) => resolves(endpoint)));
+    expect(joined).toEqual([]);
+    // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
+    const half = Object.keys(DOSSIER_RELATIONS)
+      .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
+    expect(half).toBe(10);
+    expect(deskRoots.size).toBeGreaterThanOrEqual(60);
+  });
+
+  it('keeps the three leaves in src/data/ so the lazy-chunk rule claims them', () => {
+    // vite.config.js:877-878 routes `/src/data/` to `data-lazy` unless the module is in the
+    // EAGER set, and the composer that will import these three is reachable only from lazy tab
+    // components. The chunk-membership assertion itself is car 2's, under VERIFY_DIST after a
+    // build; this arm holds the PRECONDITION that rule needs, which is a source fact.
+    for (const rel of ['src/data/dossierConnectives.generated.js', 'src/data/proseNorms.generated.js',
+      'src/data/dossierRelations.generated.js']) {
+      expect(readFileSync(resolve(ROOT, rel), 'utf8')).toContain('GENERATED by scripts/generate-dossier-state-prose.mjs');
+    }
+    const vite = readFileSync(resolve(ROOT, 'vite.config.js'), 'utf8');
+    expect(vite).toContain("id.includes('/src/data/')");
+  });
+});
+
+// ── §2.5's REFUSAL TABLE, ROW BY ROW, EACH WITH ITS PLANT ────────────────────────────
+//
+// The annex carries no typed line at this tip, so every one of these rules is exercised by a
+// FIXTURE and by nothing else — which is exactly why each needs a plant AND a clean control.
+// A refusal nobody has watched fire is a refusal nobody has measured.
+
+/** A pool fixture in the shape the projector hands `assertPoolDeclaration`. */
+function poolFixture(overrides = {}) {
+  return {
+    blockId: 'DS-TEST-1',
+    poolKey: 'muster: short',
+    variants: [
+      { angle: 'plain', marks: ['dm-only'], text: 'the muster is thin', slots: [], index: 1 },
+      { angle: 'plain', marks: ['dm-only'], text: 'the roll is short', slots: [], index: 2 },
+    ],
+    declared: {},
+    censusOf: (key) => ({
+      'muster: short': { tests: ['defenseProfile.economicGates.military'], reads: ['defenseProfile.economicGates.military'], status: 'RESOLVED', objectClass: 'purse', objectClasses: ['purse'], sites: [] },
+      'walls: standing': { tests: ['walls'], reads: ['walls'], status: 'RESOLVED', objectClass: 'wall', objectClasses: ['wall'], sites: [] },
+      'purse: short': { tests: ['defenseProfile.economicGates.military'], reads: ['defenseProfile.economicGates.military'], status: 'RESOLVED', objectClass: 'purse', objectClasses: ['purse'], sites: [] },
+    })[key] || null,
+    isCovert: (field) => COVERT_SOURCES.some((source) => String(field).split('.').includes(source)),
+    edgesFrom: () => [],
+    blockPoolKeys: new Set(['muster: short', 'walls: standing', 'purse: short']),
+    declaredRoleByPool: { 'muster: short': 'modifier', 'walls: standing': 'spine', 'purse: short': 'spine' },
+    ...overrides,
+  };
+}
+
+/** The declared metadata of a lawful `addition` modifier, as the clean control. */
+const LAWFUL_MODIFIER = Object.freeze({
+  role: 'modifier',
+  reads: ['defenseProfile.economicGates.military'],
+  relation: 'addition',
+  form: 'sentence',
+  move: 'CONSEQUENCE',
+  attach: ['walls: standing'],
+});
+
+describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () => {
+  it('reads a typed line, several to a line, and refuses an unknown token AT the token', () => {
+    const decls = readDeclarations('**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `CONSEQUENCE`');
+    expect(decls.map((d) => d.tag)).toEqual(['ROLE', 'FORM', 'MOVE']);
+    expect(decls.map((d) => d.tokens[0])).toEqual(['modifier', 'sentence', 'CONSEQUENCE']);
+    expect(isDeclarationLine('**ROLE:** `modifier`')).toBe(true);
+    // ⛔ AND NOT A LABEL, WHICH IS THE COLLISION THAT MATTERS. `**STATE-KEY.**` opens a prose
+    // paragraph in 68 blocks and must stay prose; a bold pool label must stay a label.
+    expect(isDeclarationLine('**STATE-KEY.** The closed ladder')).toBe(false);
+    expect(isDeclarationLine('**COMBINATION C1: a high rung on a working approach**')).toBe(false);
+
+    const into = {};
+    applyDeclaration(readDeclarations('**ROLE:** `spine`')[0], into, 'x');
+    expect(into.role).toBe('spine');
+    for (const bad of ['**ROLE:** `header`', '**RELATION:** `cause`', '**MOVE:** `ABSENCE`',
+      '**MOVE:** `HISTORY`', '**FORM:** `clause`']) {
+      expect(() => applyDeclaration(readDeclarations(bad)[0], {}, 'x'), bad).toThrow();
+    }
+    expect(POOL_ROLES).toEqual(['spine', 'modifier', 'turn']);
+    expect(MODIFIER_MOVES).toHaveLength(6);
+    // ANCHORED on CONSEQUENCE, a sibling of the same closed vocabulary: the two struck moves
+    // are absent BECAUSE they are struck (§4.6 / R-DA-08 for ABSENCE, R-DA-19 / S15 for
+    // HISTORY on a state spine), not because the roster drifted away.
+    expectAbsentWithAnchor(MODIFIER_MOVES, 'ABSENCE', 'CONSEQUENCE', 'the modifier move vocabulary');
+    expectAbsentWithAnchor(MODIFIER_MOVES, 'HISTORY', 'CONSEQUENCE', 'the modifier move vocabulary');
+  });
+
+  it('refuses a `fragment` while S2 is unsigned, and says the clause seat is what is missing', () => {
+    expect(S2_SIGNED).toBe(false);
+    expect(() => applyDeclaration(readDeclarations('**FORM:** `fragment`')[0], {}, 'x'))
+      .toThrow(/S2 is unsigned/);
+    expect(() => applyDeclaration(readDeclarations('**FORM:** `sentence`')[0], {}, 'x')).not.toThrow();
+  });
+
+  it('refuses a NARROWS with no chair ruling id and no quoted sentence', () => {
+    const ok = readDeclarations('**NARROWS:** `walls` — S12 §O.1 ruled "the reads grain is the selecting branch"')[0];
+    expect(() => applyDeclaration(ok, {}, 'x')).not.toThrow();
+    const bare = readDeclarations('**NARROWS:** `walls`')[0];
+    expect(() => applyDeclaration(bare, {}, 'x')).toThrow(/no chair ruling id and quoted sentence/);
+  });
+
+  it('CLEAN CONTROL: a lawful `addition` modifier passes every cross-field refusal', () => {
+    expect(() => assertPoolDeclaration(poolFixture({ declared: { ...LAWFUL_MODIFIER } }))).not.toThrow();
+  });
+
+  it('PLANT: a numeric pool key — it cannot be told from a variant row in an annex diff', () => {
+    expect(() => assertPoolDeclaration(poolFixture({ poolKey: '3', declared: {} })))
+      .toThrow(/collides with a variant row's own numbering/);
+    expect(() => assertPoolDeclaration(poolFixture({ poolKey: 'C3', declared: {} }))).not.toThrow();
+  });
+
+  it('PLANT: a READS the census does not list, and two READS on one modifier', () => {
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, reads: ['walls'] },
+    }))).toThrow(/which the wiring census does not list/);
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, reads: ['defenseProfile.economicGates.military', 'walls'] },
+    }))).toThrow(/READS exactly ONE field path/);
+  });
+
+  it('PLANT: an UNMARKED variant on a COVERT-SOURCE pool (T-F5)', () => {
+    const covert = `${COVERT_SOURCES[0]}.count`;
+    const censusOf = (key) => (key === 'muster: short'
+      ? { tests: [covert], reads: [covert], status: 'RESOLVED', objectClass: null, objectClasses: [], sites: [] }
+      : poolFixture().censusOf(key));
+    // Every variant marked: lawful, because no player page can meet it.
+    expect(() => assertPoolDeclaration(poolFixture({
+      censusOf, declared: { ...LAWFUL_MODIFIER, reads: [covert] },
+    }))).not.toThrow();
+    // One variant unmarked: the player page would show the SHAPE of a DM fact.
+    expect(() => assertPoolDeclaration(poolFixture({
+      censusOf,
+      variants: [
+        { angle: 'plain', marks: ['dm-only'], text: 'a', slots: [], index: 1 },
+        { angle: 'plain', marks: [], text: 'b', slots: [], index: 2 },
+      ],
+      declared: { ...LAWFUL_MODIFIER, reads: [covert] },
+    }))).toThrow(/carry no `dm-only` mark/);
+  });
+
+  it('PLANT: a `consequence` with no table row, and one whose only row runs modifier→spine', () => {
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, relation: 'consequence', form: undefined },
+    }))).toThrow(/NO relation-table row/);
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, relation: 'consequence', form: undefined },
+      edgesFrom: () => [{ relation: 'consequence', direction: 'b→a' }],
+    }))).toThrow(/that row is a CAUSE and seats as `addition`/);
+    // A row in the LICENSED direction passes, which is what makes the two above refusals and
+    // not a blanket ban.
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, relation: 'consequence', form: undefined },
+      edgesFrom: () => [{ relation: 'consequence', direction: 'a→b' }],
+    }))).not.toThrow();
+    // A modifier with NO relation at all.
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, relation: undefined },
+    }))).toThrow(/a modifier declares a RELATION/);
+  });
+
+  it('PLANT: a FORM that disagrees with the seat its relation takes', () => {
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, relation: 'contrast', form: 'fragment' },
+    }))).toThrow(/disagrees with the seat/);
+  });
+
+  it('PLANT: an ATTACH the block does not hold, and one whose spine already tests the field', () => {
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, attach: ['DS-GEN-3 :: purse: short'] },
+    }))).toThrow(/which block DS-TEST-1 does not hold/);
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { ...LAWFUL_MODIFIER, attach: ['purse: short'] },
+    }))).toThrow(/whose selecting branch already tests/);
+  });
+
+  it('PLANT: an ATTACH on an INDEX-PAIRED list position, refused until Shift 2 (P-F7)', () => {
+    expect(INDEX_PAIRED_BLOCKS).toEqual(['DS-GEN-2', 'DS-GEN-8', 'DS-REL-1']);
+    expect(() => assertPoolDeclaration(poolFixture({
+      blockId: 'DS-GEN-2', declared: { ...LAWFUL_MODIFIER },
+    }))).toThrow(/INDEX-PAIRED list position/);
+    // And the same set of declarations on a block that is NOT index-paired is lawful.
+    expect(() => assertPoolDeclaration(poolFixture({ declared: { ...LAWFUL_MODIFIER } }))).not.toThrow();
+  });
+
+  it('PLANT: an ATTACH naming the same civic object class, and one SPANNING two classes', () => {
+    const censusOf = (key) => (key === 'walls: standing'
+      ? { tests: ['walls'], reads: ['walls'], status: 'RESOLVED', objectClass: 'purse', objectClasses: ['purse'], sites: [] }
+      : poolFixture().censusOf(key));
+    expect(() => assertPoolDeclaration(poolFixture({
+      censusOf, declared: { ...LAWFUL_MODIFIER },
+    }))).toThrow(/name the same civic object class/);
+    // T-F3: a relation-bearing pool whose attach set spans two value classes is TWO pools.
+    const spanning = (key) => ({
+      'walls: standing': { tests: ['walls'], reads: ['walls'], status: 'RESOLVED', objectClass: 'wall', objectClasses: ['wall'], sites: [] },
+      'purse: short': { tests: ['coin'], reads: ['coin'], status: 'RESOLVED', objectClass: 'law', objectClasses: ['law'], sites: [] },
+    })[key] || poolFixture().censusOf(key);
+    expect(() => assertPoolDeclaration(poolFixture({
+      censusOf: spanning,
+      declared: { ...LAWFUL_MODIFIER, relation: 'contrast', attach: ['walls: standing', 'purse: short'] },
+    }))).toThrow(/spans 2 value classes/);
+    // The same spanning set on an `addition` is lawful: no relation flips with polarity there.
+    expect(() => assertPoolDeclaration(poolFixture({
+      censusOf: spanning,
+      declared: { ...LAWFUL_MODIFIER, attach: ['walls: standing', 'purse: short'] },
+    }))).not.toThrow();
+  });
+
+  it('PLANT: a turn with no EXPLAINS, an id outside the registry, and a tier-2 id REFUSED', () => {
+    expect(() => assertPoolDeclaration(poolFixture({
+      declared: { role: 'turn', attach: [] },
+    }))).toThrow(/a turn declares EXPLAINS/);
+    expect(turnKeyStanding('condition:plague').ok).toBe(true);
+    expect(turnKeyStanding('condition:plague:severe').ok).toBe(true);
+    expect(turnKeyStanding('corruption:covert').ok).toBe(true);
+    expect(turnKeyStanding('faction:ascendant').ok).toBe(false);
+    // ⛔ A TIER-2 ID ANSWERS WITH ITS REASON, not with "unknown": the key is real, the import
+    // wall is what refuses it.
+    const refused = turnKeyStanding('cause:trade-strangled');
+    expect(refused.ok).toBe(false);
+    expect(refused.why).toMatch(/REFUSED/);
+    expect(refused.why).toMatch(/import wall/);
+    expect(turnKeyStanding('join:JF-CPL-6b').why).toMatch(/join-deriver/);
+  });
+
+  it('PLANT: a `[grammar: Vn]` tag left in `marks` would open the closed mark vocabulary', () => {
+    // The routing is the projector's; this arm proves the ROUTE by reading the shipped corpus,
+    // where the mark vocabulary is closed at eight words and no `grammar:` string appears.
+    const marks = new Set(allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
+      .flatMap((v) => v.marks || []));
+    expect([...marks].filter((m) => m.startsWith('grammar'))).toEqual([]);
+    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    expect(src).toContain('GRAMMAR_TAG_RE');
+    // No variant carries a grammar tag yet — Shift 1 authors them — so the claim the corpus
+    // supports is the ABSENCE, pinned in both directions.
+    const tagged = allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
+      .filter((v) => v.grammar !== undefined);
+    expect(tagged).toEqual([]);
+  });
+
+  it('PLANT: a face beyond the pin, on a bound row, with a different slot set, or proper-initial', () => {
+    const base = {
+      label: 'x',
+      parent: { angle: 'plain', text: 'the {settlement} muster is thin', slots: ['settlement'] },
+      faces: ['the muster of {settlement} is thin'],
+      pinnedFaceCount: 4,
+      shapeOf: (slot) => (slot === 'settlement' ? 'proper' : 'bare-common'),
+      clauseOpeners: ['and', 'so'],
+      form: 'sentence',
+    };
+    expect(() => assertFaces(base)).not.toThrow();
+    expect(() => assertFaces({ ...base, faces: ['a', 'b', 'c', 'd'] })).toThrow(/against a pin of 4/);
+    expect(() => assertFaces({ ...base, parent: { ...base.parent, angle: 'canonical' } }))
+      .toThrow(/the seven bound rows keep ONE face/);
+    expect(() => assertFaces({ ...base, faces: ['the muster is thin'] })).toThrow(/names slots/);
+    expect(() => assertFaces({ ...base, faces: ['{settlement} keeps a thin muster'] }))
+      .toThrow(/opens on the `proper`-typed slot/);
+    // The fragment half: a face may never carry the joint, which lives in the leaf.
+    const frag = { ...base, form: 'fragment', parent: { angle: 'plain', text: 'thin', slots: [] }, faces: ['thin'] };
+    expect(() => assertFaces(frag)).not.toThrow();
+    expect(() => assertFaces({ ...frag, faces: [', and thin'] })).toThrow(/opens on a comma/);
+    expect(() => assertFaces({ ...frag, faces: ['and thin'] })).toThrow(/a word of a clause list/);
+  });
+
+  it('PLANT: a RENUMBERING that would move an existing vid, and a count above its pin', () => {
+    const two = [{ index: 1 }, { index: 2 }];
+    expect(vidsOf('x', two, [1, 2], 2)).toEqual([1, 2]);
+    expect(() => vidsOf('x', [{ index: 1 }, { index: 3 }], [1, 2], undefined))
+      .toThrow(/would move variant 1's vid from 2 to 3/);
+    expect(() => vidsOf('x', [{ index: 1 }], [1, 2], undefined)).toThrow(/NEVER TRIM/);
+    expect(() => vidsOf('x', [{ index: 1 }, { index: 2 }, { index: 3 }], undefined, 2))
+      .toThrow(/against a pin of 2/);
+    expect(() => vidsOf('x', [{ index: 2 }, { index: 1 }], undefined, undefined)).toThrow(/runs backwards/);
+    expect(() => vidsOf('x', [{ index: 1 }, { index: 1 }], undefined, undefined)).toThrow(/two variants carry row number/);
+  });
+});
+
+describe('SEAM car 4 — §7b, the connectives section, and its own refusals', () => {
+  const section = (rows) => `## §7b THE STATE CONNECTIVES\n\n| relation | seat | floor | pin | joints |\n|---|---|---|---|---|\n${rows.join('\n')}\n`;
+  const FOUR = [
+    '| `consequence` | `clause` | 3 | 0 | *(OWED)* |',
+    '| `tension` | `sentence` | 3 | 0 | *(OWED)* |',
+    '| `contrast` | `sentence` | 1 | 1 | `EMPTY-OPENER` |',
+    '| `addition` | `sentence` | 1 | 1 | `EMPTY-OPENER` |',
+  ];
+
+  it('reads the shipped section into the shipped leaf, byte for byte', () => {
+    const parsed = parseConnectives(readFileSync(STATE_DOC, 'utf8'));
+    expect(parsed.lists).toEqual(DOSSIER_CONNECTIVES);
+    expect(parsed.pins.filter((p) => p.owed).map((p) => `${p.relation}.${p.seat}`).sort())
+      .toEqual(['consequence.clause', 'tension.sentence']);
+  });
+
+  it('CLEAN CONTROL plus PLANTS: a fifth relation, an unreachable seat, and a missing pair', () => {
+    expect(() => parseConnectives(section(FOUR))).not.toThrow();
+    expect(() => parseConnectives(section([...FOUR, '| `cause` | `clause` | 1 | 1 | `, so` |'])))
+      .toThrow(/relation `cause` is outside the four/);
+    expect(() => parseConnectives(section([...FOUR.slice(1), '| `consequence` | `sentence` | 3 | 0 | *(OWED)* |'])))
+      .toThrow(/is not one of the FOUR REACHABLE pairs/);
+    expect(() => parseConnectives(section(FOUR.slice(1)))).toThrow(/a fifth pair is a projector error/);
+    expect(() => parseConnectives('no section here')).toThrow(/the section is missing/);
+  });
+
+  it('PLANT: a joint carrying an em dash, a `which`, a digit or a percent (T-F14)', () => {
+    const withJoint = (joint) => section([
+      FOUR[0], FOUR[1], FOUR[2],
+      `| \`addition\` | \`sentence\` | 1 | 1 | \`${joint}\` |`,
+    ]);
+    expect(() => parseConnectives(withJoint(', and'))).not.toThrow();
+    expect(() => parseConnectives(withJoint(', — and'))).toThrow(/carries an em dash/);
+    expect(() => parseConnectives(withJoint(', which'))).toThrow(/carries a `which` tail/);
+    expect(() => parseConnectives(withJoint(', by 3'))).toThrow(/carries a digit or a percent/);
+    expect(() => parseConnectives(withJoint(', by 5%'))).toThrow(/carries a digit or a percent/);
+  });
+
+  it('⭐ PLANT: a LONGER connective list than its pin — the modulus of every joint drawn on it', () => {
+    const longer = section([
+      FOUR[0], FOUR[1], FOUR[2],
+      '| `addition` | `sentence` | 1 | 1 | `EMPTY-OPENER` · `, and` |',
+    ]);
+    expect(() => parseConnectives(longer)).toThrow(/carries 2 joints against its pin of 1/);
+    // And a pin RAISED without the joints to match is refused too, so the pin cannot be moved
+    // ahead of the list to make room quietly.
+    const emptyPin = section([
+      FOUR[0], FOUR[1], FOUR[2],
+      '| `addition` | `sentence` | 1 | 2 | `EMPTY-OPENER` |',
+    ]);
+    expect(() => parseConnectives(emptyPin)).toThrow(/carries 1 joints and pins 2/);
+  });
+});
+
+describe('SEAM car 4 — the 68 STATE-KEY lines, transcribed against the branch grain', () => {
+  it('⭐ transcribes each block\'s STATE-KEY into the census\'s `reads`, and PRINTS every disagreement', () => {
+    // ARCH §12 row 4's last item. Each of the 68 blocks opens with a `**STATE-KEY.**` paragraph
+    // naming, in prose, what keys the block; its `###` header names the block's FIELDS. The
+    // census's `reads` is the SELECTING BRANCH's field set, recovered from the key function by
+    // execution (SITTING §O.1). Where the two AGREE the transcription is a no-op — the census
+    // already carries it — and where they DISAGREE the lane PRINTS it and resolves nothing: the
+    // census measures the CODE and the STATE-KEY line is an author's account of it, and a lane
+    // that "reconciled" them would be editing a measurement to match prose.
+    //
+    // ⛔ AND NOTHING IS WRITTEN. Transcribing a token the census does not carry would move a
+    // census ROW, which is the chair's register door, so the only lawful landing for a
+    // disagreement is this printed roster.
+    //
+    // ⛔ THE TOKEN SET IS ANCHORED ON THE BLOCK HEADER, and that is not a convenience. A
+    // STATE-KEY paragraph backticks its ENUM VALUES too (`road` · `river` · `stocked` · `thin`),
+    // and counting those as fields manufactures 396 disagreements no author ever made. The
+    // header is where the block declares its own field expression, so a token is FIELD-SHAPED
+    // here only when the header names it.
+    const annex = readFileSync(STATE_DOC, 'utf8').split('\n');
+    const FIELD_RE = /[a-zA-Z_][A-Za-z0-9_]*(?:\.[a-zA-Z_][A-Za-z0-9_]*)*/g;
+    /** blockId -> {header, stateKey} */
+    const blocks = new Map();
+    let at = null;
+    let buffer = null;
+    for (const raw of annex) {
+      const header = raw.match(/^###\s+(DS-[A-Z]+-\d+)\b/);
+      if (header) {
+        at = /FOLDED INTO/i.test(raw) ? null : header[1];
+        if (at) blocks.set(at, { header: raw, stateKey: '' });
+        buffer = null;
+        continue;
+      }
+      if (!at) continue;
+      if (/^\*\*STATE-KEY[:.]\*\*/.test(raw)) { buffer = [raw]; continue; }
+      if (buffer && raw.trim() === '') { blocks.get(at).stateKey = buffer.join(' '); buffer = null; continue; }
+      if (buffer) buffer.push(raw);
+    }
+    expect(blocks.size, 'the block reader found the wrong number of headers').toBe(68);
+    expect([...blocks.values()].filter((b) => b.stateKey).length,
+      'a block lost its STATE-KEY paragraph, or the reader has rotted').toBe(68);
+
+    /** The census's branch-grain reads per block, with every last segment beside them. */
+    const readsByBlock = new Map();
+    for (const row of CENSUS.rows) {
+      const seat = readsByBlock.get(row.block) || new Set();
+      for (const path of row.reads) { seat.add(path); seat.add(path.split('.').pop()); }
+      readsByBlock.set(row.block, seat);
+    }
+
+    const agreeing = [];
+    const darkBlock = [];
+    const readsOther = [];
+    let blocksNamingAField = 0;
+    for (const [block, { header, stateKey }] of blocks) {
+      const declared = new Set(header.match(FIELD_RE) || []);
+      const tokens = [...new Set([...stateKey.matchAll(/`([^`]+)`/g)].map((m) => m[1]))]
+        .filter((t) => declared.has(t) || declared.has(t.split('.').pop()));
+      if (tokens.length) blocksNamingAField += 1;
+      const reads = readsByBlock.get(block) || new Set();
+      for (const token of tokens) {
+        const hit = reads.has(token) || reads.has(token.split('.').pop())
+          || [...reads].some((r) => r.endsWith(`.${token}`) || token.endsWith(`.${r}`));
+        if (hit) agreeing.push(`${block} :: ${token}`);
+        else if (reads.size === 0) darkBlock.push(`${block} :: ${token}`);
+        else readsOther.push(`${block} :: ${token}`);
+      }
+    }
+    const total = agreeing.length + darkBlock.length + readsOther.length;
+    process.stdout.write(`\n[state-key] 68 STATE-KEY paragraphs read · ${blocksNamingAField} name a`
+      + ` field their own header declares · ${total} tokens · ${agreeing.length} AGREE with the`
+      + ` branch grain and are transcribed · ${darkBlock.length} name a field in a block the`
+      + ` census recovered NOTHING for · ${readsOther.length} name a field the census does not`
+      + ` read on a block it did resolve. Nothing is written: a transcription the census does`
+      + ` not carry would move a census row.\n`);
+    for (const row of darkBlock) process.stdout.write(`  DARK-BLOCK  ${row}\n`);
+    for (const row of readsOther) process.stdout.write(`  READS-OTHER ${row}\n`);
+
+    // MEASURED at this tip and RECORDED, not asserted to zero: 16 / 23 / 71 of 110 tokens over
+    // 46 blocks. These are the WIRING debt seen from the AUTHOR's side, which is a reading car 9
+    // wants and not a defect of this car. The floors are what stop the reader going dark — a
+    // token roster that fell to nothing would print an empty disagreement list and read as
+    // agreement, which is the vacuous green this whole family exists to refuse.
+    expect(blocksNamingAField).toBeGreaterThanOrEqual(46);
+    expect(total).toBeGreaterThanOrEqual(110);
+    expect(agreeing.length).toBeGreaterThanOrEqual(16);
+    expect(darkBlock.length + readsOther.length).toBe(total - agreeing.length);
   });
 });

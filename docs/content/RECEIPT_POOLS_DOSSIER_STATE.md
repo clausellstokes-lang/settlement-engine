@@ -6311,3 +6311,45 @@ is architected and unbuilt, so `ENDOWED` is authored, marked and not drawable un
 brace-wrapped mention in prose is indistinguishable from a use under a `grep`, and this file's own
 slot register is audited that way; writing them bare keeps a later census of "is this slot used"
 honest, and keeps the SLOTS-line parser hazard recorded on `DS-GEN-18` from recurring by accident.
+
+---
+
+## §7b THE STATE CONNECTIVES
+
+**Added by SEAM car 4 (ARCH-COMPOSED-PROSE §2.5, §4.5). This section adds no variant, touches no
+sentence above it, and mints no slot.** It is projected into
+`src/data/dossierConnectives.generated.js` and read by the composer; nothing else in the estate
+holds a connective phrase.
+
+**THE SEAM CONTRACT, stated once (T-F1).** The connective phrase — the comma and the word that
+joins a modifier to the spine it is added beside — lives HERE and in that leaf, and never inside a
+variant's own text. A fragment row therefore begins on a bare lower-case word that is no member of
+any clause list and never on a comma; a sentence-form row begins on a capital that is not a
+`proper`-typed slot. The chronicle's colon-bridges are NOT reused.
+
+**THE FOUR REACHABLE PAIRS.** `consequence` seats at the CLAUSE and takes a fragment; `tension`,
+`contrast` and `addition` seat at the SENTENCE and take a sentence. A fifth relation, or a fifth
+(relation, seat) pair, is a projector error. `EMPTY-OPENER` is the seat that takes no word at all:
+adjacency itself, which is exactly what `contrast` and `addition` assert.
+
+**THE PIN IS THE LIST'S OWN LENGTH, AND IT IS A MECHANISM.** A joint is drawn
+`hash(seed::block::spine::joint::modifier) % list.length`, so a longer list re-rolls every joint
+already drawn on it. Growth is a DECLARED row on `docs/content/prose-shift-register.json` and never
+an edit; a list at length one takes no hash at all.
+
+**⛔ TWO FLOORS ARE OWED, AND THAT IS A MEASUREMENT.** `consequence.clause` and `tension.sentence`
+stand at length 0 against a floor of three. None of the engine's 165 relation rows joins two fields
+a desk reads (car 0's F1, ARCH §16 item 9), so no `consequence` and no `tension` joint is
+LICENSED anywhere on the shipped corpus today; a list authored ahead of its licence would be prose
+nothing could lawfully draw. The sitting authors them (ARCH §12 car 7), and the clause seat itself
+waits on S2.
+
+| relation | seat | floor | pin | joints, in order |
+|---|---|---|---|---|
+| `consequence` | `clause` | 3 | 0 | *(OWED: the sitting authors the joints)* |
+| `tension` | `sentence` | 3 | 0 | *(OWED: the sitting authors the openers)* |
+| `contrast` | `sentence` | 1 | 1 | `EMPTY-OPENER` |
+| `addition` | `sentence` | 1 | 1 | `EMPTY-OPENER` |
+
+**WHAT A JOINT MAY NEVER CARRY.** An em dash; a `which` tail (wall 6); a digit or a percent
+(T-F14, and §0d's digit ban read across the join). Each is a projector error naming the joint.

@@ -83,6 +83,19 @@ const CEILING_TOTAL_RAW = baseline.ceilingTotalRawStateLeaves;
 const GZIP_RATIO_TENTHS = baseline.ceilingGzipRatioTenths;
 const GENESIS_BASIS_RAW = baseline.genesisBasisRawStateLeaves;
 
+/**
+ * The three leaves SEAM car 4 projects beside the desks (ARCH §2.3, §4.1): the connective
+ * phrase lists, the departure bits and the relation table. They live in `src/data/` itself
+ * rather than under the desk directory, because they are not a desk's corpus — they are the
+ * composer's frozen inputs — so the directory walk below cannot find them and they are NAMED,
+ * which is what this file's own header requires of a leaf projected outside that walk.
+ */
+const COMPOSER_LEAVES = Object.freeze([
+  'src/data/dossierConnectives.generated.js',
+  'src/data/proseNorms.generated.js',
+  'src/data/dossierRelations.generated.js',
+]);
+
 /** The prose leaves the tree actually holds: the projected state desks, plus the causal leaf.
  *  DERIVED from the directory, never a hand-list, so a leaf car 4 adds under
  *  src/data/dossierStateProse/ is claimed the day it lands. A prose leaf projected to some
@@ -92,7 +105,7 @@ function proseLeavesOnDisk() {
   const state = readdirSync(dir)
     .filter((f) => f.endsWith('.generated.js'))
     .map((f) => `${STATE_LEAF_DIR}/${f}`);
-  return [...state, CAUSAL_LEAF].sort();
+  return [...state, CAUSAL_LEAF, ...COMPOSER_LEAVES].sort();
 }
 
 /** Bytes on disk plus level-9 gzip over the same bytes. */
@@ -108,7 +121,7 @@ describe('the prose byte ratchet — the roster and the measurement (ARCH §10)'
   test('anti-vacuity: the baseline names leaves, they exist, and they are measurable', () => {
     // Without this, every arm below is green-on-nothing the day the baseline is
     // emptied or the leaves move: an empty roster satisfies every for-loop.
-    expect(Object.keys(leaves).length, 'the baseline names no leaf at all').toBeGreaterThanOrEqual(7);
+    expect(Object.keys(leaves).length, 'the baseline names no leaf at all').toBeGreaterThanOrEqual(10);
     expect(stateLeafKeys.length, 'the baseline names no STATE leaf').toBeGreaterThanOrEqual(6);
     for (const rel of Object.keys(leaves)) {
       expect(existsSync(join(ROOT, rel)), `${rel} is baselined but is not on disk`).toBe(true);
@@ -214,6 +227,32 @@ describe('the prose byte ratchet — the ceilings are re-derived, never trusted 
     const sum = stateLeafKeys.reduce((n, rel) => n + leaves[rel].ceilingGzip, 0);
     expect(sum).toBeGreaterThanOrEqual(500_000);
     expect(sum).toBeLessThanOrEqual(650_000);
+  });
+
+  test('each COMPOSER leaf\'s ceiling is ARCH §10\'s three-leaf total, apportioned the same way', () => {
+    // SEAM car 4. §10 prices the three at about 77 KB together, and the apportionment rule is
+    // the state leaves' own: a share of the total in proportion to genesis bytes, re-derived
+    // here rather than trusted as a committed number, with the rounded shares landing on the
+    // total exactly so a hand-edited row is visible instead of absorbed.
+    const total = baseline.ceilingTotalRawNewLeaves;
+    const basis = baseline.genesisBasisRawNewLeaves;
+    expect(COMPOSER_LEAVES.reduce((n, rel) => n + genesis[rel].raw, 0), 'the new-leaf basis disagrees with the rows it sums').toBe(basis);
+    const wrong = [];
+    for (const rel of COMPOSER_LEAVES) {
+      const wantRaw = Math.round((total * genesis[rel].raw) / basis);
+      // §10's 4.5 : 1 is a CORPUS ratio; on a small payload gzip's fixed overhead dominates and
+      // that ratio would set a ceiling the leaf breaches at birth (the connectives leaf
+      // compresses at 1.72 : 1 and this arm's first run said so). The ceiling is therefore the
+      // LARGER of §10's ratio and the leaf's own measured one.
+      const wantGzip = Math.max(
+        Math.round((wantRaw * 10) / GZIP_RATIO_TENTHS),
+        Math.round((genesis[rel].gzip * wantRaw) / genesis[rel].raw),
+      );
+      if (leaves[rel].ceilingRaw !== wantRaw) wrong.push(`${rel}: ceilingRaw ${leaves[rel].ceilingRaw}, apportionment says ${wantRaw}`);
+      if (leaves[rel].ceilingGzip !== wantGzip) wrong.push(`${rel}: ceilingGzip ${leaves[rel].ceilingGzip}, the ratio says ${wantGzip}`);
+    }
+    expect(wrong).toEqual([]);
+    expect(COMPOSER_LEAVES.reduce((n, rel) => n + leaves[rel].ceilingRaw, 0)).toBe(total);
   });
 
   test('the causal leaf takes NO headroom, and that is the refusal pinned', () => {
