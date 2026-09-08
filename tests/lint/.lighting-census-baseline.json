@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "22ff295a49866d264e8157280de0653cc1c92b43",
-  "measuredBy": "SEAM car 3a (Opus 5)",
+  "measuredAtSha": "679b62d4380a8c290700cabcbdcd340b47b56864",
+  "measuredBy": "SEAM car 3b-0 (Opus 5)",
   "date": "2026-09-08",
-  "note": "SEAM car 3a lands the composed-prose SEAM, reachable from nothing: two new test files (tests/domain/composeStateProse.test.js, tests/lint/composeStateProseFence.test.js) and 58 new test titles across them and the extended tests/domain/stateProseKernel.test.js. No product surface is lit or darkened; the seven new src files carry no titles.",
+  "note": "the wiring census stamps the candidate leaves as a measurement; one new walker arm",
   "files": 2555,
   "parked": 375,
   "credited": 2180,
-  "titles": 23894,
+  "titles": 23895,
   "suiteTitles": 6393
 }
