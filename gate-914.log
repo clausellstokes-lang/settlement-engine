@@ -398,3 +398,4 @@ React refs are values that are not needed for rendering. Refs should only be acc
 > settlementforge@1.0.0 test:ratchet
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 25785 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
