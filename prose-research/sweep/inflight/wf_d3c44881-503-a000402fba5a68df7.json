@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 147,
+ "firstTs": "2026-09-08T02:57:37.997Z",
+ "lastTs": "2026-09-08T03:02:40.424Z",
+ "tools": {
+  "Read": 2,
+  "Bash": 42
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the brief.",
+ "run": "wf_d3c44881-503",
+ "agent": "a000402fba5a68df7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_d3c44881-503/agent-a000402fba5a68df7.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

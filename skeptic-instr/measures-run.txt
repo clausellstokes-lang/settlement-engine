@@ -1,0 +1,55 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/skepINSTR
+
+
+PRESENCE MEASURE · the estate, per register (Part B §13.2 — reported, never a gate)
+  R1 dossier state   sensory/100w  1.198 · textured  24% · spread 0.79 bits  [sight 86% · hearing 4% · smell 0% · touch 2% · taste 8%]
+  R2 causal join     sensory/100w  1.478 · textured  36% · spread 0.65 bits  [sight 88% · hearing 8% · smell 0% · touch 0% · taste 4%]
+  R4b disclosure     sensory/100w  1.495 · textured  16% · spread 1.06 bits  [sight 75% · hearing 13% · smell 0% · touch 13% · taste 0%]
+  R5 crier voice     sensory/100w  3.437 · textured  46% · spread 1.31 bits  [sight 71% · hearing 16% · smell 1% · touch 3% · taste 9%]
+  R6 npc ladder      sensory/100w  1.046 · textured  21% · spread 1.52 bits  [sight 61% · hearing 18% · smell 0% · touch 17% · taste 3%]
+  R7 gazetteer       sensory/100w  3.358 · textured  31% · spread 1.57 bits  [sight 59% · hearing 2% · smell 3% · touch 12% · taste 25%]
+  chronicle R12      sensory/100w  2.276 · textured  32% · spread 0.66 bits  [sight 83% · hearing 17% · smell 0% · touch 0% · taste 0%]
+  D-d dm hooks       sensory/100w  0.577 · textured   8% · spread 1.49 bits  [sight 63% · hearing 21% · smell 0% · touch 8% · taste 8%]
+  R9 chrome copy     sensory/100w  0.663 · textured   7% · spread 0.86 bits  [sight 84% · hearing 2% · smell 0% · touch 5% · taste 9%]
+
+
+UNRENDERED-FACTS CENSUS · six composers
+  generalStateProse.js     holds  34 · renders as a word  6 · KEY-ONLY  28
+  powerStateProse.js       holds   7 · renders as a word  1 · KEY-ONLY   6
+  economyStateProse.js     holds  12 · renders as a word  2 · KEY-ONLY  10
+  defenseStateProse.js     holds   9 · renders as a word  1 · KEY-ONLY   8
+  stressorsStateProse.js   holds   4 · renders as a word  1 · KEY-ONLY   3
+  warFaithStateProse.js    holds   6 · renders as a word  2 · KEY-ONLY   4
+  TOTAL: holds 72 · renders as a word 13 · key-only 59 (82%)
+  ⚠ A KEY-ONLY FACT IS NOT DARK. It chooses which authored sentence the reader meets,
+    so it reaches the reader as a CHOICE and never as a WORD. The figure is therefore an
+    UPPER bound on the authoring wave's opportunity, not a count of facts nobody can see.
+
+
+LICENSED LEVEL-1 MEMBERS on the composed fill
+  blocks 68 · settlement-ONLY bag 22 · no bag at all 15
+  licensing ONE member (the bare PRESENT): 33
+  licensing two or more:                   20
+  NOT-EXECUTABLE on every block today: V2 (no structural-consequence field),
+    V3 / V8 (no typed none-exists or not-held field), V6 (no typed unresolved /
+    contested / pending STATE field — SITTING A12)
+  settlement-only blocks: DS-CND-1, DS-DEF-1, DS-DEF-11, DS-DEF-2, DS-DEF-3, DS-DEF-4, DS-DEF-5, DS-DEF-6, DS-DEF-8, DS-DEF-9, DS-GEN-11, DS-GEN-12, DS-GEN-13, DS-GEN-14, DS-GEN-17, DS-GEN-3, DS-GEN-5, DS-GEN-6, DS-POP-3, DS-REL-2, DS-STR-1, DS-STR-2
+
+
+D8 PLANT LEDGER · nine settlements over three tiers
+  plants enumerated:            368
+  plants carrying `answerable`: 0
+  open share:                   NOT MEASURABLE — no plant is marked answerable, so the
+                                share is a fact about the missing class, not about a town
+  fields the arm wants:
+    · plant.id — a stable identity on the plant itself (today: none; `links[].id` is the NPC's)
+    · plant.answerable — the typed flag that makes a plant owe an answer (today: absent)
+    · plant.answer | plant.gapReason — the DM page's answer channel (today: neither exists)
+
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  23:00:47
+   Duration  3.32s (transform 1.83s, setup 25ms, import 1.03s, tests 2.17s, environment 0ms)
+

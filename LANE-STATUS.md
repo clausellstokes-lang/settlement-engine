@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-07 22:56:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 23:02:06 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave's instruments are built (lane INSTR-912, seven commits in laneINSTR, no 
+product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-content law is wired dark and its seams are closed — the L-MAT consist
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -111,7 +111,7 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave'
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -140,6 +140,8 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave'
 ## WORKFLOW RUNS of chair session 5540cfd2-eea9-4469-ba34-6514b54a83ff (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 - wf_568522f1-e3e: 10 journal lines, 5 agents
+- wf_b0228653-707: 5 journal lines, 5 agents
+- wf_d3c44881-503: 6 journal lines, 6 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 8.66 16.13 16.89
+load: 2.96 6.95 12.14
