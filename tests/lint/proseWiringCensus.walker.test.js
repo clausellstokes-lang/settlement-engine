@@ -43,7 +43,7 @@ import { loadStateLeaves, poolCells, ROOT } from '../helpers/dossierCorpus.js';
 import {
   composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites, unrenderedFacts,
 } from '../helpers/dossierComposedFill.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import {
   COMPOSER_COVERT_SOURCE, COMPOSER_DEEP_PATH, COMPOSER_DEFAULTING_READ,
   COMPOSER_DEFAULTING_READ_GUARDED, COMPOSER_DOUBLE_QUOTED_KEY,
@@ -855,8 +855,11 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(dark, 'including the block ARCH §6.3 works its whole example on').toContain('DS-DEF-11');
     expect(dark, 'and the threat assessment §6.4 works its fact budget on').toContain('DS-DEF-2');
     expect(dark, 'and the single-fact block').toContain('DS-STR-1');
-    // THE PAIRED POSITIVE: a block whose pools come from SEVERAL key functions composes.
-    expect(dark, 'DS-GEN-3 is not among them').not.toContain('DS-GEN-3');
+    // THE PAIRED POSITIVE: a block whose pools come from SEVERAL key functions composes, so
+    // the dark list is a SELECTION and not the whole roster. Anchored on DS-DEF-11, which the
+    // same list does carry: a bare `not.toContain` would pass just as happily if the coverage
+    // derivation drifted away entirely.
+    expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-DEF-11', 'the blocks that cannot compose');
   });
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
