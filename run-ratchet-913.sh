@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: totalFiles 2489 -> 2491 (+2, the two new test files), entries 3 unchanged (no owed-ledger car; no banked row moves), totalTests REFUSED in advance — this run derives it (the probe counts +28 it() titles, which is a hint, not a prediction: it.each and skipped arms are counted only by the run) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"

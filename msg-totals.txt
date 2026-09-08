@@ -1,4 +1,4 @@
-Register (last car): the census totals re-freeze at the composed tip — totalTests 31979 -> 31982, totalFiles 2489 unchanged, entries 3
+Register (last car): the census totals re-freeze at the composed tip — totalTests 31982 -> 32024, totalFiles 2489 -> 2491, entries 3
 
 Taken after every content and register car in the lineage that lands (the last car before the gate), under the gate
 mutex, with totalFiles and entries predicted in writing and totalTests refused as a figure: this run is its derivation.
