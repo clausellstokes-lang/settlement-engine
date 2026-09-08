@@ -482,6 +482,33 @@ export function wilsonFloorCount(n, floorBp) {
 // ═══════════════════════════════════════════════════════════════════════════════════
 
 /**
+ * THE TWO GRAINS, SIDE BY SIDE (SITTING §O.1). The ruling re-cut `reads` from the KEY
+ * FUNCTION's whole reading set to the SELECTING BRANCH's own fields, and asked for the cost
+ * to be measured rather than argued. So every figure that is a function of `reads` is
+ * computed TWICE — once on the shipped rows, once on a shadow copy whose `reads` is the
+ * function-wide `fieldsRead` — and both ship in the JSON. The shadow is a copy: no row of
+ * the census is mutated to take the second reading.
+ * @param {ReadonlyArray<object>} rows
+ * @param {ReadonlyArray<object>} mounts
+ * @param {Map<string, ReadonlyArray<string>>} deskFacts
+ * @returns {object}
+ */
+export function grainFigures(rows, mounts, deskFacts) {
+  const budget = factBudget(rows);
+  const attach = attachSets(rows);
+  return {
+    zeroK: budget.zeroK,
+    executable: budget.executable,
+    notExecutable: budget.notExecutable,
+    histogram: budget.histogram,
+    blocksWithSpine: attach.length,
+    cannotAttach: attach.filter((a) => a.spinesReachedBp === 0).map((a) => a.block).sort(),
+    readPaths: rows.reduce((total, r) => total + (r.reads || []).length, 0),
+    modifierEligibleFactsByTab: factMounts(rows, mounts, deskFacts).byTab,
+  };
+}
+
+/**
  * Build the whole census, decorated, with every ARCH car-0 derivation beside it.
  * @param {{rates?: {rows: Array<{block: string, pool: string, rateBp: number,
  *   byTier: Record<string, number>}>, corpus: object}|null}} [options]
@@ -515,12 +542,35 @@ export async function buildCensus(options = {}) {
   const held = [...new Set(unrenderedFacts().flatMap((r) => r.held))];
   const summary = censusSummary(census.rows, held);
   const tiers = tierRows({ rows: census.rows, held });
+  // ⭐ THE FOURTH TIER (SITTING §O.5). A per-tier silence the RATE corpus cannot explain by
+  // the rung choosing another value class at that size is an AUTHORING WAVE row, and it
+  // joins the tier table rather than living in a second list nobody reads. It arrives ONLY
+  // with a rate half: with none, the table carries three tiers and says so by their absence
+  // rather than by a zero that would read as "measured, and none found".
+  for (const s of (options.rates?.tierSilences || [])) {
+    if (s.verdict !== TIERS.MISSING_AT_TIER) continue;
+    tiers.push({
+      tier: TIERS.MISSING_AT_TIER,
+      block: s.block,
+      subject: `${s.pool} @ ${s.tier}`,
+      fields: [],
+      readingFunction: s.rung,
+      count: `fired on ${s.firedOverall} towns overall and on 0 at ${s.tier}; its rung said nothing there`,
+    });
+  }
   const attach = attachSets(census.rows);
   const facts = unrenderedFacts();
   /** @type {Map<string, string[]>} the facts each DESK holds, keyed as the mount registry names it */
   const deskFacts = new Map(facts.map((r) => [r.file.replace(/^.*\/(\w+)StateProse\.js$/, '$1'), r.held]));
   const mountsPerFact = factMounts(census.rows, DOSSIER_MOUNTS, deskFacts);
   const budget = factBudget(census.rows);
+  // THE SHADOW ROWS carry the FUNCTION-WIDE grain and nothing else differs, so the pair of
+  // figure sets below differs by exactly the ruling and by nothing this script chose.
+  const shadow = census.rows.map((row) => ({ ...row, reads: row.fieldsRead }));
+  const grains = {
+    branch: grainFigures(census.rows, DOSSIER_MOUNTS, deskFacts),
+    function: grainFigures(shadow, DOSSIER_MOUNTS, deskFacts),
+  };
   const custom = customReachable(census.rows, CUSTOM_CONTENT_MANIFEST.categories);
   const relations = relationTable();
   const rateRows = options.rates?.rows || [];
@@ -558,7 +608,10 @@ export async function buildCensus(options = {}) {
         MISSING: tierCounts.get(TIERS.MISSING) || 0,
         THIN: tierCounts.get(TIERS.THIN) || 0,
         COVERED: tierCounts.get(TIERS.COVERED) || 0,
+        'MISSING-AT-TIER': tierCounts.get(TIERS.MISSING_AT_TIER) || 0,
       },
+      tierSilences: (options.rates?.tierSilences || []).length,
+      tierSilencesLawful: (options.rates?.tierSilences || []).filter((s) => s.verdict === 'LAWFUL').length,
       narrowsRefused: census.refusals.length,
       narrowedRows: census.rows.filter((r) => r.narrowed).length,
       covertRows: census.rows.filter((r) => r.covert).length,
@@ -568,6 +621,8 @@ export async function buildCensus(options = {}) {
       zeroK: budget.zeroK,
       kExecutable: budget.executable,
       kNotExecutable: budget.notExecutable,
+      branchGrainRows: census.rows.filter((r) => r.readsGrain === 'branch').length,
+      functionGrainRows: census.rows.filter((r) => r.readsGrain === 'function').length,
       customReachableRows: custom.rows.length,
       relationRows: relations.rows.length,
       relationRowsJoinable: relationJoin(relations.rows, census.rows).strictBoth,
@@ -580,6 +635,7 @@ export async function buildCensus(options = {}) {
     attachCoverage: attach.map(({ byFact: _byFact, ...rest }) => rest),
     attachByFact: attach,
     factBudget: budget,
+    grains,
     customReachable: custom,
     relations: { ...relations, join: relationJoin(relations.rows, census.rows) },
     tiers,
@@ -641,6 +697,29 @@ export function censusCheck(committedText, data) {
 }
 
 /**
+ * THE TWO GRAINS PRINTED SIDE BY SIDE, ONCE — the measured cost of SITTING §O.1, so that a
+ * reader compares two columns rather than two receipts.
+ * @param {object} data
+ * @returns {string[]}
+ */
+export function grainLines(data) {
+  const b = data.grains.branch;
+  const f = data.grains.function;
+  const pad = (n) => String(n).padStart(6);
+  /** @param {string} label @param {number|string} left @param {number|string} right */
+  const row = (label, left, right) => `    ${label.padEnd(34)} ${pad(left)} ${pad(right)}`;
+  return [
+    '  ── the two GRAINS, side by side (branch | function-wide) ─────────',
+    row('read paths over all 708 rows', b.readPaths, f.readPaths),
+    row('k = 0 of the RESOLVED rows', b.zeroK, f.zeroK),
+    row('blocks that can attach NOTHING', b.cannotAttach.length, f.cannotAttach.length),
+    `    blocks the branch grain FREES: ${f.cannotAttach.filter((x) => !b.cannotAttach.includes(x)).join(' · ') || '(none)'}`,
+    `    k histogram, branch:   ${b.histogram.map(([k, n]) => `k=${k} ${n}`).join(' · ')}`,
+    `    k histogram, function: ${f.histogram.map(([k, n]) => `k=${k} ${n}`).join(' · ')}`,
+  ];
+}
+
+/**
  * The receipt's own print, from ONE command.
  * @param {object} data
  * @returns {string[]}
@@ -653,9 +732,12 @@ export function printLines(data) {
     `  pools ${t.pools} · blocks ${t.blocks} · variants ${t.variants}`,
     `  RESOLVED ${t.resolved} · WIRING-UNRESOLVED ${t.unresolved} · with a predicate ${t.resolvedWithPredicate} · clean ${t.resolvedWithCleanPredicate}`,
     `  key functions ${t.keyFunctions} (consulted ${t.keyFunctionsConsulted}) · key tables ${t.keyTables}`,
-    `  TIERS · MISSING ${t.tiers.MISSING} · THIN ${t.tiers.THIN} · COVERED ${t.tiers.COVERED}`,
+    `  TIERS · MISSING ${t.tiers.MISSING} · THIN ${t.tiers.THIN} · COVERED ${t.tiers.COVERED}`
+      + ` · MISSING-AT-TIER ${t.tiers['MISSING-AT-TIER']} (of ${t.tierSilences} per-tier silences, ${t.tierSilencesLawful} LAWFUL)`,
     '  ── the car-0 columns ─────────────────────────────────────────────',
     `  reads = tests on ${t.pools - t.narrowedRows} of ${t.pools} rows · narrowed ${t.narrowedRows} · NARROWS refused ${t.narrowsRefused}`,
+    `  reads GRAIN (SITTING §O.1) · BRANCH on ${t.branchGrainRows} rows · function-wide, fail-closed, on ${t.functionGrainRows}`,
+    ...grainLines(data),
     `  absent · measured ${t.absent.measured} · default ${t.absent.default} · not-produced ${t.absent['not-produced']}`
       + ` (over ${t.absent.measured + t.absent.default + t.absent['not-produced']} read paths;`
       + ` the table rung's ${t.tableRungRowsWithoutAbsence} rows carry the instrument's own label and no absence record)`,

@@ -54,6 +54,15 @@
  * this module invented would become a design constraint nobody re-asked).
  */
 import { classifyMoves, orderIdOf } from './moveGrammar.js';
+import {
+  balancedSlice, branchPath, fieldChains, guardFields, readingAliases,
+} from './wiringBranch.js';
+
+// THE TWO SOURCE READERS THIS MODULE OWNED UNTIL ARCH CAR 0e MOVE WHOLE to `wiringBranch.js`
+// beside the branch reader that needs them, and are re-exported here so that the estate keeps
+// ONE bracket reader and ONE chain reader (`tests/helpers/dossierComposedFill.js` re-exports
+// `balancedSlice` from this module and still does).
+export { balancedSlice, fieldChains };
 
 /** Statuses a census row can carry. RESOLVED means the predicate was READ, never guessed. */
 export const WIRING_STATUS = Object.freeze({
@@ -61,45 +70,16 @@ export const WIRING_STATUS = Object.freeze({
   UNRESOLVED: 'WIRING-UNRESOLVED',
 });
 
-/** The three tiers the authoring wave is sized from. */
+/**
+ * The tiers the authoring wave is sized from. The fourth arrives with the RATE corpus
+ * (SITTING §O.5): a pool that fires somewhere and never at a size where its block mounts,
+ * whose silence the corpus cannot explain by the branch choosing another value class there.
+ */
 export const TIERS = Object.freeze({
-  MISSING: 'MISSING', THIN: 'THIN', COVERED: 'COVERED',
+  MISSING: 'MISSING', THIN: 'THIN', COVERED: 'COVERED', MISSING_AT_TIER: 'MISSING-AT-TIER',
 });
 
 // ── THE SOURCE READERS (pure; every input is a string) ──────────────────────────────
-
-/**
- * Read from an opening bracket to its match, respecting strings, template literals and
- * comments. The sibling reader `tests/helpers/dossierComposedFill.js` re-exports THIS one
- * rather than keeping a second spelling: a bracket reader that disagrees with itself across
- * two instruments is how one census counts a key the other cannot see.
- * @param {string} src
- * @param {number} open index of `(` `{` or `[`
- * @returns {{inner: string, end: number}}
- */
-export function balancedSlice(src, open) {
-  /** @type {Record<string, string>} */
-  const pairs = { '(': ')', '{': '}', '[': ']' };
-  if (!pairs[src[open]]) throw new Error(`wiringCensus.balancedSlice: index ${open} is not an opening bracket`);
-  let depth = 0;
-  for (let i = open; i < src.length; i++) {
-    const c = src[i];
-    if (c === '/' && src[i + 1] === '/') { i = src.indexOf('\n', i); if (i < 0) break; continue; }
-    if (c === '/' && src[i + 1] === '*') { i = src.indexOf('*/', i) + 1; if (i < 1) break; continue; }
-    if (c === '\'' || c === '"' || c === '`') {
-      const quote = c;
-      i++;
-      while (i < src.length && src[i] !== quote) { if (src[i] === '\\') i++; i++; }
-      continue;
-    }
-    if (c === '(' || c === '{' || c === '[') depth++;
-    else if (c === ')' || c === '}' || c === ']') {
-      depth--;
-      if (depth === 0) return { inner: src.slice(open + 1, i), end: i };
-    }
-  }
-  throw new Error(`wiringCensus.balancedSlice: unbalanced bracket at ${open}`);
-}
 
 /**
  * Comments name fields constantly and explain at length why they are NOT read. A reader
@@ -157,27 +137,20 @@ export function poolKeyFunctions(src, file) {
 }
 
 /**
- * The member chains a body reads, rooted at one of `roots`. `legitimacy?.breakdown.safety`
- * normalises to `legitimacy.breakdown.safety`; the optional-chain marker carries no fact.
- * @param {string} body
- * @param {ReadonlyArray<string>} roots
- * @returns {string[]} sorted, unique
- */
-export function fieldChains(body, roots) {
-  /** @type {Set<string>} */
-  const out = new Set();
-  for (const root of roots) {
-    const re = new RegExp(`\\b${root}((?:\\s*\\??\\.\\s*[A-Za-z_$][\\w$]*)+)`, 'g');
-    for (const m of body.matchAll(re)) out.add(`${root}${m[1].replace(/\s*\??\.\s*/g, '.')}`);
-  }
-  return [...out].sort();
-}
-
-/**
  * The local `const` aliases of a function body, mapped to the first param-rooted chain in
  * their initialiser. `const state = text(captureState)` makes `state` a reading of
  * `captureState`; without this hop the commonest predicate shape in the estate
  * (`if (state === 'capture')`) resolves to no field at all.
+ *
+ * ⛔ THE BARE LIMB STAYS AT THE LEADING IDENTIFIER, AND THAT IS A REFUSAL WITH A NUMBER
+ * (ARCH car 0e). Reading one token further — the first PARAM the initialiser names rather
+ * than its first identifier — gives 50 more aliases and resolves 50 more pools through the
+ * template rung (RESOLVED 318 to 368), and FIFTY OF THOSE PREDICATES WOULD BE FALSE:
+ * `beastsRowPoolKey`'s `const family = measuredMonsterFamily(monsterThreat)` is a LOOKUP,
+ * so `family === 'settled'` becomes `config.monsterThreat === 'settled'` while the config
+ * value that produces it is `heartland`. This map answers "what VALUE selects the pool" and
+ * a lookup breaks that; `readingAliases` in `wiringBranch.js` answers the other question,
+ * "what field does the branch READ", where the same hop is exact and is taken.
  * @param {string} body
  * @param {ReadonlyArray<string>} params
  * @returns {Map<string, string>} alias → the chain it reads
@@ -247,6 +220,7 @@ export function predicateRows(guard, params, aliases) {
  * @property {string} text the literal, or the template with each hole replaced by the NUL marker
  * @property {string[]} holes the hole expressions, in order
  * @property {string} guard the nearest preceding `if (…)` on the same statement, or ''
+ * @property {string[]} path every guard on the path from the function entry to this literal
  */
 
 /**
@@ -350,6 +324,7 @@ export function keyForms(fn) {
     if (lit.kind === 'template' && lit.text.includes('${')) continue;
     out.push({
       kind: 'literal', text: lit.text, holes: [], guard: guardAt(lit.index),
+      path: branchPath(fn.body, lit.index),
     });
   }
   // RUNG 2 — the templates.
@@ -363,6 +338,7 @@ export function keyForms(fn) {
     if (text === HOLE) continue;
     out.push({
       kind: 'template', text, holes, guard: guardAt(lit.index),
+      path: branchPath(fn.body, lit.index),
     });
   }
   return out;
@@ -514,6 +490,8 @@ export function callArguments(src, fn) {
  * @property {number} variants
  * @property {number} grammars distinct move orders across the pool's variants
  * ── ARCH car 0's columns, written by `decorateRows` in the census's second pass ──
+ * @property {string[]} [branchReads] the SELECTING BRANCH's own fields, [] where none was recovered
+ * @property {'branch'|'function'} [readsGrain] which grain `reads` carries (ARCH §O.1)
  * @property {string[]} [reads] what the pool is ENTITLED to claim: `tests` unless narrowed
  * @property {boolean} [narrowed] did a chair-ruled NARROWS line narrow `reads`?
  * @property {Record<string, string>} [absent] per read path: measured | default | not-produced
@@ -566,7 +544,7 @@ export function wiringCensus(input) {
     fns.push(...poolKeyFunctions(src, file));
     tables.set(file, moduleKeyTables(bare));
   }
-  /** @type {Map<string, {fn: KeyFunction, forms: KeyForm[], aliases: Map<string, string>, args: Map<string, string[]>}>} */
+  /** @type {Map<string, {fn: KeyFunction, forms: KeyForm[], aliases: Map<string, string>, readAliases: Map<string, string>, args: Map<string, string[]>}>} */
   const prepared = new Map();
   for (const fn of fns) {
     // ⛔ KEYED ON `file::name`, NEVER ON THE BARE NAME (INSTR-912 car 10, cure 8). Two desks
@@ -580,6 +558,8 @@ export function wiringCensus(input) {
       fn,
       forms: keyForms(fn),
       aliases: localAliases(fn.body, fn.params),
+      // A SECOND MAP, FOR THE READ AND NEVER FOR THE VALUE (see `readingAliases`).
+      readAliases: readingAliases(fn.body, fn.params),
       args: callArguments(code.get(fn.file) || '', fn),
     });
   }
@@ -624,7 +604,7 @@ export function wiringCensus(input) {
  *   variants: ReadonlyArray<{text: string, slots?: ReadonlyArray<string>}>,
  *   filled: string[],
  *   prepared: Map<string, {fn: KeyFunction, forms: KeyForm[], aliases: Map<string, string>,
- *     args: Map<string, string[]>}>,
+ *     readAliases: Map<string, string>, args: Map<string, string[]>}>,
  *   tables: Map<string, KeyTable[]>, unmounted: Set<string>}} args
  * @returns {CensusRow}
  */
@@ -652,7 +632,9 @@ function censusRow(args) {
     grammars: orders.size,
   };
   // RUNG 1 and RUNG 2 — the key function's own forms.
-  for (const { fn, forms, aliases, args: callArgs } of prepared.values()) {
+  for (const {
+    fn, forms, aliases, readAliases, args: callArgs,
+  } of prepared.values()) {
     for (const form of forms) {
       /** @type {PredicateRow[]|null} */
       let extra = null;
@@ -668,9 +650,19 @@ function censusRow(args) {
       }
       if (!extra) continue;
       const guardRows = predicateRows(form.guard, fn.params, aliases);
+      // THE BRANCH GRAIN (SITTING §O.1, ARCH §4.4). `tests` is what the SELECTING BRANCH
+      // evaluates: the guards on the path from the function's entry to this literal, plus
+      // the template holes the key itself binds. `fieldsRead` below stays the function-wide
+      // union, so both grains ship on every row and the cost of the ruling is measurable
+      // rather than argued.
+      const branch = [...new Set([
+        ...form.path.flatMap((g) => guardFields(g, fn.params, readAliases)),
+        ...extra.map((r) => r.field),
+      ].map((f) => reroot(f, fn, callArgs)))].sort();
       return {
         ...base,
         predicate: qualify([...guardRows, ...extra], fn, callArgs),
+        branchReads: branch,
         fieldsRead: readings(fn, callArgs),
         status: WIRING_STATUS.RESOLVED,
         reason: '',
@@ -693,6 +685,7 @@ function censusRow(args) {
       return {
         ...base,
         predicate: [{ field: readField, op: '===', value: entry.value }],
+        branchReads: [readField],
         fieldsRead: [readField],
         status: WIRING_STATUS.RESOLVED,
         reason: '',
@@ -704,6 +697,7 @@ function censusRow(args) {
   return {
     ...base,
     predicate: [],
+    branchReads: [],
     fieldsRead: [],
     status: WIRING_STATUS.UNRESOLVED,
     reason: unmounted.has(block)
@@ -814,7 +808,7 @@ export function factIndex(rows) {
 
 /**
  * @typedef {object} TierRow
- * @property {'MISSING'|'THIN'|'COVERED'} tier
+ * @property {'MISSING'|'THIN'|'COVERED'|'MISSING-AT-TIER'} tier
  * @property {string} block
  * @property {string} subject the pool, the fact, or the fact pair
  * @property {string[]} fields
@@ -1280,23 +1274,32 @@ export function absenceOf(field, body, produced) {
  * it. A NARROWS line may narrow the set and it is refused without a chair ruling id AND
  * the sentence quoted, and refused again where it names a field the branch does not test:
  * a narrowing nobody ruled is a licence the census would be handing out on its own.
+ *
+ * ⛔ THE GRAIN IS THE BRANCH'S WHERE ONE WAS RECOVERED, AND FUNCTION-WIDE WHERE NONE WAS
+ * (SITTING §O.1). The fallback is FAIL-CLOSED and not a convenience: a row whose branch
+ * reader recovered nothing has an EMPTY branch set, and reading that as the pool's tests
+ * would answer `k = 3` — three free modifier seats on a pool nobody has recovered a
+ * predicate for, which is the friendliest number and the §908 law's own forbidden answer.
  * @param {CensusRow} row
  * @param {Map<string, NarrowsLine>|undefined} narrows
- * @returns {{reads: string[], narrowed: boolean, refusal: string}}
+ * @returns {{reads: string[], narrowed: boolean, refusal: string, grain: 'branch'|'function'}}
  */
 export function narrowedReads(row, narrows) {
-  const tests = [...(row.fieldsRead || [])];
+  const branch = row.branchReads || [];
+  /** @type {'branch'|'function'} */
+  const grain = branch.length > 0 ? 'branch' : 'function';
+  const tests = branch.length > 0 ? [...branch] : [...(row.fieldsRead || [])];
   const line = narrows instanceof Map ? narrows.get(`${row.block} :: ${row.pool}`) : undefined;
-  if (!line) return { reads: tests, narrowed: false, refusal: '' };
+  if (!line) return { reads: tests, narrowed: false, refusal: '', grain };
   const at = `${row.block} :: ${row.pool}`;
   if (!line.ruling || !line.quote) {
-    return { reads: tests, narrowed: false, refusal: `NARROWS at ${at} carries no chair ruling id with its quoted sentence` };
+    return { reads: tests, narrowed: false, grain, refusal: `NARROWS at ${at} carries no chair ruling id with its quoted sentence` };
   }
   const outside = (line.fields || []).filter((f) => !tests.includes(f));
   if (outside.length > 0) {
-    return { reads: tests, narrowed: false, refusal: `NARROWS at ${at} names ${outside.join(', ')}, which the branch does not test` };
+    return { reads: tests, narrowed: false, grain, refusal: `NARROWS at ${at} names ${outside.join(', ')}, which the branch does not test` };
   }
-  return { reads: [...line.fields], narrowed: true, refusal: '' };
+  return { reads: [...line.fields], narrowed: true, refusal: '', grain };
 }
 
 /**
@@ -1478,6 +1481,7 @@ export function decorateRows(rows, input) {
     const narrowed = narrowedReads(row, input.narrows);
     if (narrowed.refusal) refusals.push(narrowed.refusal);
     row.reads = narrowed.reads;
+    row.readsGrain = narrowed.grain;
     row.narrowed = narrowed.narrowed;
     const body = bodies.get(row.keyFunction) || '';
     // ⛔ THE TABLE RUNG'S FIELD IS THIS INSTRUMENT'S OWN LABEL (car 10, cure 4). Rung 3

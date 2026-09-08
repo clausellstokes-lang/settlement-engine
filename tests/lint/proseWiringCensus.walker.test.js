@@ -35,6 +35,11 @@ import {
   buildCensus, censusCheck, CENSUS_JSON, factMounts, producerIndex, relationsFromSitting,
   relationTable, serialise, wilsonBp, wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
+// ⛔ THE SHIPPED RULE, IMPORTED, NEVER RE-SPELLED HERE (car 0e). The first cut of the per-tier
+// arm kept a second copy of the silence rule in this file, so the fixture proved the copy and
+// the corpus figure proved the script, and nothing tied the two together. The estate's idiom
+// is the walker importing the scanner, which is how the census's own readers arrive above.
+import { tierSilences as tierSilencesOf } from '../../scripts/prose-rate-corpus.mjs';
 import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { walkEntry, walkPair } from '../../src/domain/prose/entryWalker.js';
 import { walkGrammar } from '../../src/domain/prose/grammarWalker.js';
@@ -48,6 +53,7 @@ import {
   COMPOSER_COVERT_SOURCE, COMPOSER_DEEP_PATH, COMPOSER_DEFAULTING_READ,
   COMPOSER_DEFAULTING_READ_GUARDED, COMPOSER_DOUBLE_QUOTED_KEY,
   COMPOSER_DOUBLE_QUOTED_KEY_REMOVED, COMPOSER_FOUR_BRANCHES, COMPOSER_NUMERIC_KEY,
+  COMPOSER_BRANCH_FLAT, COMPOSER_BRANCH_GRAIN,
   COMPOSER_ONE_BRANCH, COMPOSER_PAIR_TABLE, COMPOSER_POLARITY,
   COMPOSER_PREDICATE_OVER_UNREAD, COMPOSER_TABLE, COMPOSER_TEMPLATE, COMPOSER_TWO_BRANCHES,
   firingsByTier, firingsCoFiring, MARKED_ON_A_COVERT_PATH, NAMES_AN_UNFILLED_SLOT,
@@ -414,7 +420,7 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     expect(allUnresolved.resolved, 'and one with nothing resolved is a third').toBe(0);
   });
 
-  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its TEN modules', () => {
+  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its ELEVEN modules', () => {
     // ⛔ WIDENED FROM ONE MODULE TO TEN (INSTR-912 car 10, cure 10; FOLD-2 hazard H8). The
     // arm fenced `wiringCensus` alone, so a §913 or wave car could wire `entryWalker`,
     // `grammarWalker`, `moveGrammar`, `presenceMeasure`, `plantLedger`, `proseFingerprint`,
@@ -429,6 +435,10 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       'src/domain/prose/plantLedger.js',
       'src/domain/prose/presenceMeasure.js',
       'src/domain/prose/proseFingerprint.js',
+      // THE ELEVENTH, ADDED BY ARCH CAR 0e. The branch reader is a scanner the census module
+      // could not hold under its 800-effective-line ceiling, and car 0's refusal 1 named this
+      // exact shape as the honest one. It is fenced the moment it lands rather than after.
+      'src/domain/prose/wiringBranch.js',
       'src/domain/prose/wiringCensus.js',
       'src/domain/institutions/institutionTable.js',
     ];
@@ -456,11 +466,16 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       for (const hit of hits) if (!inIsland(hit)) breaches.push(`${module} <- ${hit}`);
     }
     expect(breaches, 'no product surface reaches the island').toEqual([]);
-    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not ten copies of the same fence: the
-    // census names exactly one module of the ten, so the equality the first cut asserted is
-    // kept as the sharpest single case rather than lost inside the loop.
+    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not eleven copies of the same fence:
+    // the census names exactly one module of the eleven, so the equality the first cut
+    // asserted is kept as the sharpest single case rather than lost inside the loop.
     const censusHits = files.filter(([, text]) => text.includes('wiringCensus')).map(([p]) => p);
     expect(censusHits).toEqual(['src/domain/prose/wiringCensus.js']);
+    // AND THE ELEVENTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND, which is the
+    // paired positive: a fence that held because nothing imports the module at all would
+    // pass this loop and prove nothing.
+    const branchHits = files.filter(([, text]) => text.includes('wiringBranch')).map(([p]) => p);
+    expect(branchHits).toEqual(['src/domain/prose/wiringBranch.js', 'src/domain/prose/wiringCensus.js']);
   });
 });
 
@@ -667,16 +682,85 @@ describe('the source readers themselves', () => {
 const committed = await buildCensus({ rates: JSON.parse(readFileSync(CENSUS_JSON, 'utf8')).rate });
 
 describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
-  test('reads = tests on every one of the 708 rows, because no NARROWS line exists', () => {
-    // ⭐ THE DEFAULT IS THE WHOLE RULING (ARCH §4.4, E-F2, T-F7). Every field the selecting
-    // branch evaluates is a field the pool is entitled to claim, and the fact budget is
-    // counted over that. v1 assumed a narrower declared set and the fact budget's k = 0
-    // count moved by a factor of nearly two between the two readings.
+  test('reads = the SELECTING BRANCH\'s tests where one was recovered, function-wide where none was', () => {
+    // ⭐ THE RULING (SITTING §O.1, ARCH §4.4, E-F2, T-F7). `tests` is every field the
+    // SELECTING BRANCH evaluates. Car 8 implemented the KEY FUNCTION's whole reading set, so
+    // two branches of one ladder shared one read set; the sitting re-cut the grain and asked
+    // for the cost to be measured. Both grains ship on every row: `reads` carries the branch
+    // where the reader recovered one, `fieldsRead` stays the function-wide union.
     expect(committed.rows.length, 'the census still covers every pool').toBe(708);
-    const drift = committed.rows.filter((r) => r.reads.join('|') !== r.fieldsRead.join('|'));
+    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(287);
+    expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(421);
+    expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(708);
+    for (const row of committed.rows) {
+      expect(['branch', 'function'], `${row.pool} names its grain`).toContain(row.readsGrain);
+      if (row.readsGrain === 'branch') expect(row.reads, `${row.pool}`).toEqual(row.branchReads);
+      else expect(row.reads, `${row.pool} falls back to the whole function`).toEqual(row.fieldsRead);
+    }
+    // ⛔ THE FAIL-CLOSED HALF, AND IT IS THE ONE THAT COULD ROT. A row whose branch reader
+    // recovered NOTHING must not read as a branch that evaluates nothing: that answers k = 3,
+    // three free modifier seats on a pool nobody recovered, which is the §908 law's own
+    // forbidden answer. Every function-grain row carries an EMPTY branch set and takes the
+    // whole function's readings.
+    const fellBack = committed.rows.filter((r) => r.readsGrain === 'function');
+    expect(fellBack.every((r) => r.branchReads.length === 0), 'and it falls back only where nothing was read').toBe(true);
+    const drift = committed.rows.filter((r) => r.reads.join('|') !== r.branchReads.join('|')
+      && r.reads.join('|') !== r.fieldsRead.join('|'));
     expect(drift, 'no shipped row narrows its reads today').toEqual([]);
     expect(committed.totals.narrowedRows, 'and the narrowed count is an integer, not an impression').toBe(0);
     expect(committed.totals.narrowsRefused).toBe(0);
+  });
+
+  test('⭐ THE BRANCH IS READ STRUCTURALLY: an enclosing guard, a sibling that EXITS, and never a sibling BLOCK\'s insides', () => {
+    // The fixture IS the shipped ladder (`defenseStateProse.js:747`), because the grain has
+    // three shapes to get right and only the whole ladder carries all three at once.
+    const pools = poolsFrom([['DS-FIX-13', [
+      ['WALLED-STRAINED', SETTLEMENT_ONLY], ['WALLED-QUIET', SETTLEMENT_ONLY],
+      ['WALLED-THREATENED', SETTLEMENT_ONLY], ['UNWALLED-SMALL', SETTLEMENT_ONLY],
+      ['UNWALLED-LARGE', SETTLEMENT_ONLY],
+    ]]]);
+    const rows = fixtureCensus(COMPOSER_BRANCH_GRAIN, pools).rows;
+    const readsOf = (pool) => (rows.find((r) => r.pool === pool) || {}).reads;
+    expect(readsOf('WALLED-STRAINED'), 'the enclosing guard and the branch\'s own')
+      .toEqual(['settlement.militaryGate', 'settlement.walls']);
+    expect(readsOf('WALLED-QUIET'), 'plus the gate BY EXCLUSION and the family (ARCH §6.3)')
+      .toEqual(['settlement.militaryGate', 'settlement.monsterThreat', 'settlement.walls']);
+    expect(readsOf('WALLED-THREATENED')).toEqual(readsOf('WALLED-QUIET'));
+    // ⛔ THE THIRD SHAPE, AND THE ONE A BACKWARDS SCAN FAILS: the UNWALLED literals sit AFTER
+    // the walled block, so the guards INSIDE that block are NOT on their path.
+    expect(readsOf('UNWALLED-SMALL'), 'never the gate and never the family')
+      .toEqual(['settlement.tier', 'settlement.walls']);
+    expect(readsOf('UNWALLED-LARGE')).toEqual(readsOf('UNWALLED-SMALL'));
+    // THE PAIRED NEGATIVE — the same ladder flattened, where every branch tests everything.
+    const flat = fixtureCensus(COMPOSER_BRANCH_FLAT, pools).rows.filter((r) => r.status === WIRING_STATUS.RESOLVED);
+    expect(new Set(flat.map((r) => r.reads.join('|'))).size, 'the flat ladder collapses to ONE read set').toBe(1);
+    expect(new Set(rows.map((r) => r.reads.join('|'))).size, 'and the shipped ladder to three').toBe(3);
+    // AND THE CONSEQUENCE THE WAVE IS SIZED FROM: the ladder composes, the flat one cannot.
+    expect(attachSets(rows)[0].spinesReachedBp, 'every spine of the ladder can carry a modifier').toBe(10000);
+    expect(attachSets(flat)[0].spinesReachedBp, 'and none of the flat one can').toBe(0);
+  });
+
+  test('the SHIPPED DS-DEF-11 rows carry ARCH §6.3\'s own worked reading, to the field', () => {
+    // ⭐ NOT A RESTATEMENT OF THE FIXTURE. ARCH §6.3 published DS-DEF-11's `tests` before this
+    // reader existed — "STRAINED {walls, gate}; THREATENED and QUIET {walls, gate (by
+    // exclusion), family}; UNWALLED-* {walls, tier}" — so the shipped rows reproducing it is
+    // an independent check on the scanner, not the scanner checking itself.
+    const readsOf = (pool) => (committed.rows.find(
+      (r) => r.block === 'DS-DEF-11' && r.pool === pool,
+    ) || {}).reads;
+    const WALLS = 'forces.walls.present';
+    const GATE = 'settlement.defenseProfile.economicGates.military';
+    const FAMILY = 'settlement.config.monsterThreat';
+    expect(readsOf('WALLED-STRAINED')).toEqual([WALLS, GATE]);
+    expect(readsOf('WALLED-THREATENED')).toEqual([WALLS, FAMILY, GATE]);
+    expect(readsOf('WALLED-QUIET')).toEqual([WALLS, FAMILY, GATE]);
+    expect(readsOf('UNWALLED-SMALL')).toEqual([WALLS, 'settlement.tier']);
+    expect(readsOf('UNWALLED-LARGE')).toEqual([WALLS, 'settlement.tier']);
+    // AND THE BUDGET §6.3 PREDICTS FROM THEM: STRAINED and UNWALLED-* leave a seat, the two
+    // three-field spines leave none unless the chair rules NARROWS on the gate.
+    const kOf = (pool) => (committed.rows.find((r) => r.block === 'DS-DEF-11' && r.pool === pool) || {}).k;
+    expect([kOf('WALLED-STRAINED'), kOf('UNWALLED-SMALL'), kOf('UNWALLED-LARGE')]).toEqual([1, 1, 1]);
+    expect([kOf('WALLED-QUIET'), kOf('WALLED-THREATENED')]).toEqual([0, 0]);
   });
 
   test('a NARROWS line without a chair ruling id is REFUSED, and one with it narrows', () => {
@@ -733,9 +817,12 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
 
   test('the corpus\'s own absence distribution is an integer, and the table rung is counted apart', () => {
     const totals = committed.totals.absent;
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(563);
-    expect(totals.default, 'read paths where a fallback hides it').toBe(20);
-    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(96);
+    // ⚠ THE THREE MOVED WITH THE GRAIN (car 0e). `absent` is keyed on `reads`, so the branch
+    // grain shrinks the read paths from 757 to 529 and the distribution with them; nothing
+    // about a path's absence semantics changed, only how many paths a pool is entitled to.
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(377);
+    expect(totals.default, 'read paths where a fallback hides it').toBe(10);
+    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(64);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
@@ -842,29 +929,43 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(gen3.spines, 'DS-GEN-3 is the estate\'s widest block').toBe(42);
     expect(gen3.spinesReachedBp, 'and every one of its spines can carry a modifier').toBe(10000);
     expect(coverage.length, 'and that is fifty of the sixty-eight blocks').toBe(50);
-    // ⭐⭐ THE SHARPEST CONSEQUENCE OF THE `reads` GRAIN, AND IT IS OVER HALF THE ESTATE.
-    // `tests` is every reading the KEY FUNCTION touches, so on a block whose pools come from
-    // ONE ladder every spine carries the same read set and NO fact of that block can attach
-    // anywhere. Twenty-six of the fifty composable blocks read 0 bp — DS-DEF-11, the owner's
-    // own walls block, and DS-DEF-2, the threat assessment, among them. ARCH §6.3's worked
-    // `country: pressed (walled)` attaching to STRAINED is NOT reachable at this grain, and
-    // the branch grain that would reach it (`predicate[].field`, available on the 185 rows
-    // carrying a predicate) is a chair ruling with a measured cost rather than a repair.
+    // ⭐⭐ THE RULING'S OWN CONSEQUENCE, MEASURED (SITTING §O.1, car 0e). Under the
+    // FUNCTION-WIDE grain twenty-six of the fifty composable blocks read 0 bp, because on a
+    // block whose pools come from ONE ladder every spine carried the same read set. The
+    // BRANCH grain frees FOUR of them and DS-DEF-11 — the owner's walls block, on which ARCH
+    // §6.3 works its whole example — is one: `country: pressed (walled)` attaching to
+    // STRAINED is reachable at this grain and was not at the last.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
-    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(26);
-    expect(dark, 'including the block ARCH §6.3 works its whole example on').toContain('DS-DEF-11');
-    expect(dark, 'and the threat assessment §6.4 works its fact budget on').toContain('DS-DEF-2');
+    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(22);
+    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(26);
+    expect(committed.grains.function.cannotAttach.filter((b) => !dark.includes(b)),
+      'and these four are what the branch grain buys')
+      .toEqual(['DS-DEF-11', 'DS-DEF-9', 'DS-ECO-9', 'DS-POW-3']);
+    expectAbsentWithAnchor(dark, 'DS-DEF-11', 'DS-DEF-2', 'the blocks that cannot compose');
+    // ⛔ AND DS-DEF-2 DOES NOT LEAVE, WHICH IS A SECOND MEASUREMENT AND NOT A MISS. The
+    // grain cannot free a block whose spines nobody has recovered: 22 of DS-DEF-2's 26 pools
+    // are WIRING-UNRESOLVED, and the 4 that resolve are ONE ladder (`internalRowPoolKey`)
+    // whose every branch tests BOTH of its fields, so no fact of the block excludes a spine.
+    // ARCH §6.4's own sentence names the cure and it is a wiring car, not a grain.
+    expect(dark, 'the threat assessment §6.4 works its fact budget on').toContain('DS-DEF-2');
+    const def2 = committed.rows.filter((r) => r.block === 'DS-DEF-2');
+    const def2Resolved = def2.filter((r) => r.status === WIRING_STATUS.RESOLVED);
+    expect(def2.length, 'DS-DEF-2 ships twenty-six pools').toBe(26);
+    expect(def2Resolved.length, 'and the census recovers four of them').toBe(4);
+    expect(new Set(def2Resolved.map((r) => r.keyFunction)).size, 'all from ONE ladder').toBe(1);
+    expect(new Set(def2Resolved.map((r) => r.reads.join('|'))).size,
+      'whose four branches all test the same two fields, so nothing of the block attaches').toBe(1);
     expect(dark, 'and the single-fact block').toContain('DS-STR-1');
     // THE PAIRED POSITIVE: a block whose pools come from SEVERAL key functions composes, so
-    // the dark list is a SELECTION and not the whole roster. Anchored on DS-DEF-11, which the
+    // the dark list is a SELECTION and not the whole roster. Anchored on DS-DEF-2, which the
     // same list does carry: a bare `not.toContain` would pass just as happily if the coverage
     // derivation drifted away entirely.
-    expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-DEF-11', 'the blocks that cannot compose');
+    expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-DEF-2', 'the blocks that cannot compose');
   });
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
     const budget = committed.factBudget;
-    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(121);
+    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(49);
     expect(budget.executable, 'counted over the RESOLVED rows').toBe(318);
     // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
     // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
@@ -882,6 +983,10 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(factBudget(rows).zeroK).toBe(1);
     expect(factBudget(rows).notExecutable).toBe(1);
     expect(Object.fromEntries(factBudget(rows).histogram)).toEqual({ 0: 1, 2: 1 });
+    // AND THE BRANCH GRAIN IS WHAT THAT 49 IS COUNTED OVER, with the function-wide reading
+    // beside it: the ruling's cost is 72 rows that leave k = 0, printed in ONE table.
+    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(49);
+    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(121);
   });
 });
 
@@ -913,9 +1018,9 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // construction per reachable (kind x fact x value), so the count per kind is its input.
     const custom = committed.customReachable;
     expect(custom.byKind.length, 'the eight authorable kinds, enumerated from the manifest').toBe(8);
-    expect(custom.rows.length, 'in-house (block, pool) predicates a custom definition can reach').toBe(22);
+    expect(custom.rows.length, 'in-house (block, pool) predicates a custom definition can reach').toBe(21);
     expect(Object.fromEntries(custom.byKind), 'per kind, as integers').toEqual({
-      services: 6, resources: 6, institutions: 5, factions: 3, tradeGoods: 2, stressors: 0, deities: 0, traditions: 0,
+      services: 6, resources: 6, institutions: 5, factions: 2, tradeGoods: 2, stressors: 0, deities: 0, traditions: 0,
     });
     for (const row of custom.rows) {
       expect(['bucket', 'field', 'value'], `${row.pool} names which limb caught it`).toContain(row.via);
@@ -965,7 +1070,9 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // key-function parameters (`readings.x`, `gate`, `forces`). At this tip the two
     // vocabularies do not meet — not once, in either direction, and not even at the leaf.
     const join = committed.relations.join;
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(91);
+    // 85 AND NOT 91 SINCE CAR 0e: the join is taken over `reads`, and six roots were reached
+    // only by a field some OTHER branch of the same key function tested.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(85);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
@@ -1067,6 +1174,59 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     expect(towns.length, 'and the fixture carries both tiers').toBe(8);
   });
 
+  test('⭐ each per-tier silence is LAWFUL or MISSING-AT-TIER, and the second joins the tier table', () => {
+    // SITTING §O.5. A pool silent at a size where its block mounts is LAWFUL when its own
+    // RUNG spoke there and chose another value class — the ladder RAN and the field could not
+    // hold this pool's value at that size, which is `walls at a thorp` exactly. It is
+    // MISSING-AT-TIER when NO pool of the rung fired at that tier at all: the reader gets
+    // silence at one size from a rung that speaks at every other, and that is the wave's row.
+    const silences = committed.rate.tierSilences;
+    const lawful = silences.filter((r) => r.verdict === 'LAWFUL');
+    const missing = silences.filter((r) => r.verdict === 'MISSING-AT-TIER');
+    expect(lawful.length, 'lawful silences, at 128 towns per tier').toBe(303);
+    expect(missing.length, 'and the rows the authoring wave inherits').toBe(44);
+    expect(lawful.length + missing.length, 'the two limbs partition the finding').toBe(347);
+    expect(new Set(lawful.map((r) => r.limb)), 'each names the limb that answered it').toEqual(new Set(['value-class']));
+    expect(new Set(missing.map((r) => r.limb))).toEqual(new Set(['rung-dark']));
+    // THE FOURTH TIER, in the table the authoring wave reads and not in a second list.
+    expect(committed.totals.tiers['MISSING-AT-TIER'], 'the fourth tier carries them').toBe(44);
+    const fourth = committed.tiers.filter((t) => t.tier === TIERS.MISSING_AT_TIER);
+    expect(fourth.length).toBe(44);
+    for (const row of fourth) {
+      expect(row.subject, 'each names the pool AND the size').toMatch(/ @ \w+$/);
+      expect(row.count, 'and carries the measurement that put it there').toMatch(/fired on \d+ towns overall/);
+    }
+    // ⚠ WHAT THE 44 ARE NOT: no BLOCK is dark at a size on this corpus, only a RUNG is, and
+    // twelve of the 44 sit on a block whose ladder SPLITS across a module-level key table and
+    // the function carrying its `||` fallback, where the two halves cannot see each other.
+    // Both are DECLARED with their integers rather than cured behind the verdict.
+    expect(missing.filter((r) => r.siblingRungSpoke).length, 'every one of them').toBe(44);
+    expect(missing.filter((r) => r.splitLadder).length, 'the split-ladder shape, counted').toBe(12);
+    expect(new Set(missing.map((r) => r.block)).size, 'over this many blocks').toBe(6);
+    // THE RULE ITSELF, on a fixture: two pools of ONE rung, one silent at hamlet where the
+    // other spoke, against a rung with nothing at hamlet at all.
+    const tiers2 = [['hamlet', 4], ['city', 4]];
+    const sites2 = new Map([['DS-FIX-12', ['defense.wallRationale']]]);
+    const rows2 = [
+      { block: 'DS-FIX-12', pool: 'WALLED', towns: 4, byTier: { hamlet: { towns: 0 }, city: { towns: 4 } } },
+      { block: 'DS-FIX-12', pool: 'UNWALLED', towns: 4, byTier: { hamlet: { towns: 4 }, city: { towns: 0 } } },
+      { block: 'DS-FIX-12', pool: 'MERCENARIES', towns: 4, byTier: { hamlet: { towns: 0 }, city: { towns: 4 } } },
+    ];
+    const census2 = [
+      { block: 'DS-FIX-12', pool: 'WALLED', keyFunction: 'wallPoolKey', rung: 'literal' },
+      { block: 'DS-FIX-12', pool: 'UNWALLED', keyFunction: 'wallPoolKey', rung: 'literal' },
+      { block: 'DS-FIX-12', pool: 'MERCENARIES', keyFunction: 'mercPoolKey', rung: 'literal' },
+    ];
+    const verdicts = tierSilencesOf(rows2, tiers2, sites2, census2);
+    expect(verdicts.map((v) => `${v.pool}/${v.tier}/${v.verdict}`), 'the sibling class answers, the lone rung does not')
+      .toEqual(['WALLED/hamlet/LAWFUL', 'UNWALLED/city/LAWFUL', 'MERCENARIES/hamlet/MISSING-AT-TIER']);
+    // AND WITHOUT THE CENSUS the rung falls back to the BLOCK, which is coarser and says so.
+    const blind = tierSilencesOf(rows2, tiers2, sites2);
+    expect(new Set(blind.map((v) => v.grain)), 'the coarser grain is named on the row').toEqual(new Set(['block']));
+    expect(blind.find((v) => v.pool === 'MERCENARIES').verdict, 'and it calls the lone rung lawful, which is why it is named')
+      .toBe('LAWFUL');
+  });
+
   test('the occurrence bound is the WILSON lower bound, and the pair distribution is printed at it', () => {
     // ARCH E-F4: at 27 of 525 a cell truly at 5 % clears a naive floor 48 % of the time, so
     // the floor is the 95 % LOWER bound and never the point estimate.
@@ -1106,24 +1266,3 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
   });
 });
 
-/**
- * The per-tier silence rule, spelled here so the arm above drives it on a fixture rather
- * than only reading the corpus figure. It is the same rule `scripts/prose-rate-corpus.mjs`
- * runs; a pool of an UNMOUNTED block is never a finding, however silent.
- * @param {ReadonlyArray<object>} rows
- * @param {ReadonlyArray<[string, number]>} tiers
- * @param {Map<string, string[]>} sitesByBlock
- * @returns {Array<{block: string, pool: string, tier: string}>}
- */
-function tierSilencesOf(rows, tiers, sitesByBlock) {
-  /** @type {Array<{block: string, pool: string, tier: string}>} */
-  const out = [];
-  for (const row of rows) {
-    if ((sitesByBlock.get(row.block) || []).length === 0) continue;
-    for (const [tier] of tiers) {
-      if ((row.byTier[tier]?.towns || 0) > 0) continue;
-      out.push({ block: row.block, pool: row.pool, tier });
-    }
-  }
-  return out;
-}

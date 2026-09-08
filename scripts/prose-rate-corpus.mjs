@@ -307,25 +307,91 @@ export function rateTable(run) {
 }
 
 /**
- * THE PER-TIER SILENCE FINDINGS (ARCH §16 item 7, the owner's 2026-09-08 01:3x row). A
- * pool that never fires at a tier where its BLOCK MOUNTS is a per-tier finding: a hamlet
- * with no walls is lawful silence, and a city block dark at city is not. The finding is
- * printed with its counts; nothing here decides which of the two a row is.
+ * THE PER-TIER SILENCE FINDINGS, CLASSIFIED (SITTING §O.5, ARCH §16 item 7). A pool that
+ * never fires at a tier where its BLOCK MOUNTS is a per-tier finding: a hamlet with no walls
+ * is LAWFUL silence, and a city block dark at city is a MISSING-AT-TIER row the authoring
+ * wave inherits. §O.5 asks the lane to mark the lawful ones by reading the field's domain,
+ * so here is the ground, stated before the code and not after:
+ *
+ *   THE RUNG is a pool's own (block, key function) — the ladder that produced its key. Where
+ *   the census recovered no key function the rung falls back to the BLOCK, which is coarser,
+ *   and every row says which grain answered it.
+ *
+ *   LAWFUL · `value-class` — some OTHER pool of the SAME RUNG fired at that tier. The ladder
+ *   RAN there and chose a different value class, so the field cannot hold this pool's firing
+ *   value at that size on this corpus. That is `walls at a thorp` exactly: `wallRationale`
+ *   answers UNWALLED-SMALL on 128 thorps and never WALLED-anything.
+ *
+ *   MISSING-AT-TIER · `rung-dark` — NO pool of the rung fired at that tier at all, though the
+ *   block mounts there. The reader gets silence at that size from a rung that speaks at every
+ *   other, which is the wave's row.
+ *
+ * ⚠ WHAT LAWFUL MEANS HERE, EXACTLY: the value class does not occur at that size on 128
+ * towns per tier. It is a MEASUREMENT of the shipped generator and never a proof, and the
+ * count ships with its N so the chair reads it as one.
  * @param {Array<object>} rateRows
  * @param {Array<[string, number]>} tiers
  * @param {Map<string, string[]>} sitesByBlock
- * @returns {Array<{block: string, pool: string, tier: string, firedOverall: number, sites: number}>}
+ * @param {ReadonlyArray<object>} [censusRows] the census, for each pool's key function
+ * @returns {Array<{block: string, pool: string, tier: string, firedOverall: number,
+ *   sites: number, verdict: string, limb: string, rung: string, grain: string}>}
  */
-export function tierSilences(rateRows, tiers, sitesByBlock) {
-  /** @type {Array<{block: string, pool: string, tier: string, firedOverall: number, sites: number}>} */
+export function tierSilences(rateRows, tiers, sitesByBlock, censusRows) {
+  /** @type {Map<string, string>} `block :: pool` to the key function the census recovered */
+  const keyFunctionOf = new Map();
+  for (const row of censusRows || []) keyFunctionOf.set(`${row.block} :: ${row.pool}`, row.keyFunction || '');
+  /** @type {Map<string, Set<string>>} block to the RUNG KINDS the census recovered on it */
+  const rungKinds = new Map();
+  for (const row of censusRows || []) {
+    if (!rungKinds.has(row.block)) rungKinds.set(row.block, new Set());
+    (rungKinds.get(row.block) || new Set()).add(row.rung);
+  }
+  /** @param {object} row @returns {{id: string, grain: string}} */
+  const rungOf = (row) => {
+    const fn = keyFunctionOf.get(`${row.block} :: ${row.pool}`) || '';
+    return fn ? { id: `${row.block} :: ${fn}`, grain: 'keyFunction' } : { id: `${row.block} :: (block)`, grain: 'block' };
+  };
+  /** @type {Map<string, Set<string>>} tier to the rungs that spoke at it */
+  const spokeAt = new Map();
+  /** @type {Map<string, Set<string>>} tier to the BLOCKS that spoke at it, through any rung */
+  const blockSpokeAt = new Map();
+  for (const [tier] of tiers) { spokeAt.set(tier, new Set()); blockSpokeAt.set(tier, new Set()); }
+  for (const row of rateRows) {
+    for (const [tier] of tiers) {
+      if ((row.byTier[tier]?.towns || 0) === 0) continue;
+      (spokeAt.get(tier) || new Set()).add(rungOf(row).id);
+      (blockSpokeAt.get(tier) || new Set()).add(row.block);
+    }
+  }
+  /** @type {Array<{block: string, pool: string, tier: string, firedOverall: number, sites: number, verdict: string, limb: string, rung: string, grain: string}>} */
   const out = [];
   for (const row of rateRows) {
     const sites = sitesByBlock.get(row.block) || [];
     if (sites.length === 0) continue;
+    const rung = rungOf(row);
     for (const [tier] of tiers) {
       if ((row.byTier[tier]?.towns || 0) > 0) continue;
+      const lawful = (spokeAt.get(tier) || new Set()).has(rung.id);
       out.push({
-        block: row.block, pool: row.pool, tier, firedOverall: row.towns, sites: sites.length,
+        block: row.block,
+        pool: row.pool,
+        tier,
+        firedOverall: row.towns,
+        sites: sites.length,
+        verdict: lawful ? 'LAWFUL' : 'MISSING-AT-TIER',
+        limb: lawful ? 'value-class' : 'rung-dark',
+        rung: rung.id,
+        grain: rung.grain,
+        // ⚠ THE OVER-COUNT LIMB, DECLARED AND COUNTED RATHER THAN CURED. A block whose
+        // ladder splits across a module-level key table and the function that carries its
+        // `||` fallback is TWO rung ids to this instrument and ONE ladder to the reader:
+        // `originTierPoolKey` answers `tier overlay: other tiers` while `TIER_OVERLAY_OF`
+        // answers the named tiers, so each looks dark where the other spoke. This bit says
+        // the pool's BLOCK spoke at that tier through some other rung, which is the shape
+        // that flag catches, and it is a number in the print rather than a silent cure.
+        siblingRungSpoke: !lawful && (blockSpokeAt.get(tier) || new Set()).has(row.block),
+        splitLadder: !lawful && (rungKinds.get(row.block) || new Set()).has('table')
+          && [...(rungKinds.get(row.block) || new Set())].some((k) => k === 'literal' || k === 'template'),
       });
     }
   }
@@ -392,13 +458,30 @@ async function main() {
   console.log(`  pools that fired: ${table.rows.length} of 708`);
 
   const census = await buildCensus();
+  const n0 = run.towns.length;
   /** @type {Map<string, string[]>} */
   const sitesByBlock = new Map();
   for (const row of census.rows) if (!sitesByBlock.has(row.block)) sitesByBlock.set(row.block, row.sites || []);
-  const silences = tierSilences(table.rows, table.tiers, sitesByBlock);
+  const silences = tierSilences(table.rows, table.tiers, sitesByBlock, census.rows);
+  const lawful = silences.filter((s) => s.verdict === 'LAWFUL');
+  const missingAtTier = silences.filter((s) => s.verdict === 'MISSING-AT-TIER');
+  const coarse = silences.filter((s) => s.grain === 'block');
   console.log(`  PER-TIER SILENCE FINDINGS: ${silences.length} (pool, tier) rows where a MOUNTED block's pool`
     + ' fired somewhere and never at that tier');
-  for (const s of silences.slice(0, 12)) console.log(`    ${s.block} :: ${s.pool} — silent at ${s.tier} (fired on ${s.firedOverall} towns overall)`);
+  console.log(`    LAWFUL (value-class: the rung spoke at that tier and chose another class) ${lawful.length}`
+    + ` · MISSING-AT-TIER (rung-dark: the rung said nothing at that size) ${missingAtTier.length}`
+    + ` · of ${silences.length}, at ${Math.round(n0 / TIER_AXIS.length)} towns per tier`);
+  console.log(`    rows resting on the coarser BLOCK grain because the census recovered no key function: ${coarse.length}`);
+  console.log(`    of the ${missingAtTier.length} MISSING-AT-TIER rows, those whose BLOCK spoke at that tier through`
+    + ` another rung: ${missingAtTier.filter((s) => s.siblingRungSpoke).length}`
+    + ' — so no BLOCK is dark at a size on this corpus and only a RUNG is,'
+    + ` and ${missingAtTier.filter((s) => s.splitLadder).length} sit on a block whose ladder SPLITS across a key table`
+    + ' and the function carrying its fallback, where the two halves cannot see each other');
+  const byBlock = new Map();
+  for (const s of missingAtTier) byBlock.set(s.block, (byBlock.get(s.block) || 0) + 1);
+  console.log(`    MISSING-AT-TIER by block: ${[...byBlock].sort((a, b) => b[1] - a[1]).map(([b, n]) => `${b} ${n}`).join(' · ')}`);
+  for (const s of missingAtTier.slice(0, 12)) console.log(`    MISSING-AT-TIER ${s.block} :: ${s.pool} — silent at ${s.tier} (fired on ${s.firedOverall} towns overall)`);
+  for (const s of lawful.slice(0, 4)) console.log(`    LAWFUL          ${s.block} :: ${s.pool} — silent at ${s.tier} (its rung ${s.rung} spoke there)`);
 
   // THE DEPARTURE BIT, AS A REPORT AND NOTHING ELSE (ARCH E-F14a, §4.3). The 10 % line is
   // an ESTIMATE until the MODIFIER candidates' own rates exist; no leaf is written here.
@@ -409,7 +492,7 @@ async function main() {
   const pairs = coOccurringPairs({
     firings: run.towns.map((t) => t.fired), rows: census.rows, minTowns: 1,
   });
-  const n = run.towns.length;
+  const n = n0;
   const bound = wilsonFloorCount(n, 500);
   const withInterval = pairs.pairs.map((p) => ({
     ...p,

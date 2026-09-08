@@ -45,6 +45,8 @@ results=()
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
   src/domain/prose/wiringCensus.js
+  src/domain/prose/wiringBranch.js
+  scripts/prose-rate-corpus.mjs
   src/domain/prose/entryWalker.js
   src/domain/prose/grammarWalker.js
   src/domain/prose/presenceMeasure.js
@@ -1225,6 +1227,48 @@ check_caught "prose-wiring-census/a defaulting read reports as a measurement and
 #     identity arm; restored cmp-exact => 47 passed.
 perl -0pi -e "s/        \.filter\(\(s\) => !\(s\.reads \|\| s\.fieldsRead \|\| \[\]\)\.includes\(field\)\)/        .filter(() => true)/" src/domain/prose/wiringCensus.js
 check_caught "prose-wiring-census/an attach set keeps the spines that already test the fact" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 89. MEASURE car 0e — `reads` MUST BE THE SELECTING BRANCH'S FIELDS AND NOT THE WHOLE
+#     FUNCTION'S. SITTING §O.1 re-cut the grain: ARCH §4.4 defines a pool's `tests` as "every
+#     field the SELECTING BRANCH evaluates", and car 8 implemented the KEY FUNCTION's whole
+#     reading set, so on a block whose pools come from ONE ladder every spine carried the same
+#     read set and no fact of that block could attach anywhere (26 of the 50 composable
+#     blocks, DS-DEF-11 among them). This plant puts the function-wide reading back on every
+#     predicate row. Nothing else moves — the status, the rung, the predicate, the tier table
+#     and the anti-vacuity split are untouched — and the fact budget, the attach coverage, the
+#     absence distribution and the join all quietly return to the pre-ruling numbers.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 9 red of 50; restored
+#     cmp-exact => 50 passed.
+perl -0pi -e "s/        \.\.\.form\.path\.flatMap\(\(g\) => guardFields\(g, fn\.params, readAliases\)\),/        ...readings(fn, callArgs),/" src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/reads answers the whole key function on a row whose branch was recovered" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 90. MEASURE car 0e — THE BRANCH PATH MUST NOT ENTER A SIBLING BLOCK IT ONLY WALKED PAST.
+#     `branchPath` recurses over REGIONS precisely so that a literal sitting AFTER an `if`
+#     block does not inherit the guards INSIDE it: at `defenseStateProse.js:747` the UNWALLED
+#     literals must read {walls, tier} and never the gate or the monster family, which they
+#     never see. This plant drops the upper bound of the containment test, so any literal at
+#     or after a consequent's start reads as being INSIDE it and the reader recurses into a
+#     region it should have stepped over — the exact failure a backwards scan to the nearest
+#     `if` would have. It is the quietest possible corruption: every read set grows, none
+#     disappears, and the census still answers on every row.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 8 red of 50; restored
+#     cmp-exact => 50 passed.
+perl -0pi -e "s/    if \(at >= start && at < end\) \{/    if (at >= start) {/" src/domain/prose/wiringBranch.js
+check_caught "prose-wiring-census/the branch path enters a sibling block it only walked past" src/domain/prose/wiringBranch.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 91. MEASURE car 0e — A PER-TIER SILENCE MUST NOT BE CALLED LAWFUL WITHOUT ITS GROUND.
+#     SITTING §O.5: a pool silent at a size where its block mounts is LAWFUL only when its own
+#     RUNG spoke at that size and chose another value class (the field could not hold this
+#     pool's value there); with no such sibling the rung said NOTHING at that size and the row
+#     is MISSING-AT-TIER, which is the authoring wave's. This plant answers LAWFUL for every
+#     silence, which is the friendliest number available: the wave's list empties, the fourth
+#     tier goes to zero, and the instrument reports a clean bill on 347 rows it never tested.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 1 red of 50 — the
+#     classification arm, driven on its fixture, which is the only arm that runs the live rule
+#     (the corpus figures are committed DATA and a plant cannot move them); restored cmp-exact
+#     => 50 passed.
+perl -0pi -e "s/      const lawful = \(spokeAt\.get\(tier\) \|\| new Set\(\)\)\.has\(rung\.id\);/      const lawful = true;/" scripts/prose-rate-corpus.mjs
+check_caught "prose-wiring-census/every per-tier silence is called lawful and the wave's list empties" scripts/prose-rate-corpus.mjs "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

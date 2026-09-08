@@ -340,6 +340,67 @@ export function fixtureProse(settlement, forces, gate, tier, options) {
 `;
 
 /**
+ * THE SHIPPED LADDER, WHOLE — `defenseStateProse.js:747`'s `wallRationalePoolKey` as a
+ * fixture, because the BRANCH GRAIN (SITTING §O.1) has three distinct shapes to get right
+ * and only this one carries all three at once:
+ *
+ *   an ENCLOSING guard (`walls`) that every literal inside the block must have satisfied;
+ *   a PRECEDING SIBLING that EXITS (`militaryGate < 1` returns), so the literals after it
+ *     were reached by DECIDING it false — ARCH §6.3's "gate (by exclusion)";
+ *   a SIBLING BLOCK that exits, after which the guards INSIDE it are NOT on the path — the
+ *     UNWALLED literals must read `{walls, tier}` and never the gate or the family.
+ *
+ * A reader that walks backwards to the nearest `if` gets the first two and fails the third,
+ * which is why the fixture is the whole ladder and not a two-branch cut of it.
+ */
+export const COMPOSER_BRANCH_GRAIN = `
+export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
+  if (walls) {
+    if (typeof militaryGate === 'number' && militaryGate < 1) {
+      return 'WALLED-STRAINED';
+    }
+    const family = measuredMonsterFamily(monsterThreat);
+    if (!family) return null;
+    return family === 'settled' ? 'WALLED-QUIET' : 'WALLED-THREATENED';
+  }
+  const size = text(tier).toLowerCase();
+  if (SMALL_TIERS.includes(size)) return 'UNWALLED-SMALL';
+  return TOWN_PLUS_TIERS.includes(size) ? 'UNWALLED-LARGE' : null;
+}
+
+export function fixtureProse(settlement, options) {
+  return readStateProse(CORPUS, 'DS-FIX-13', wallRationalePoolKey(settlement.walls, settlement.monsterThreat, settlement.militaryGate, settlement.tier), {
+    slots: { settlement: settlement.name },
+  });
+}
+`;
+
+/**
+ * THE SAME LADDER WITH THE ENCLOSING GUARD DISSOLVED — every branch now sits at the top
+ * level, so a reader that keeps the path collapses `WALLED-STRAINED` and `UNWALLED-SMALL`
+ * onto one read set. The paired negative for the branch grain: with this source the four
+ * pools stop disagreeing, and an arm that cannot tell the two sources apart is measuring
+ * the fixture.
+ */
+export const COMPOSER_BRANCH_FLAT = `
+export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
+  const family = measuredMonsterFamily(monsterThreat);
+  const size = text(tier).toLowerCase();
+  if (walls && militaryGate < 1 && family && size) return 'WALLED-STRAINED';
+  if (walls && militaryGate && family && size) return 'WALLED-QUIET';
+  if (walls && militaryGate && family && size) return 'WALLED-THREATENED';
+  if (walls && militaryGate && family && size) return 'UNWALLED-SMALL';
+  return null;
+}
+
+export function fixtureProse(settlement, options) {
+  return readStateProse(CORPUS, 'DS-FIX-13', wallRationalePoolKey(settlement.walls, settlement.monsterThreat, settlement.militaryGate, settlement.tier), {
+    slots: { settlement: settlement.name },
+  });
+}
+`;
+
+/**
  * A NUMERIC POOL KEY (P-F12). A key matching `^\\d+$` is refused at projection because a
  * desk that iterated its own pools by index would select one, which is the "never by
  * iterating `pools`" law of ARCH §4.1.
