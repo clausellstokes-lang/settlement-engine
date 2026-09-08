@@ -24,3 +24,9 @@ vendored lib pinned in manifest is missing on disk: flatqueue.js
 [dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
 [dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
 [dossier-prose-manifest] seedless cells 1087 · drawing an AUDIBLE index above 0 because anchoring removed an earlier variant: 217 · strictly below every one of the twelve probes (the probes' own coupon-collection shortfall, not a finding): 18
+ ❯ tests/scripts/readerCorpusManifest.test.js (16 tests | 1 failed) 79716ms
+     × the derivation is the golden test own arrow, read from its source and compared field for field 18ms
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+[ai-spend-alarm] dispatch failed (not fatal): network down
