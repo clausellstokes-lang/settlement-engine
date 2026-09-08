@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0dd711c6a4c2273831a44d34b8fe4bba3ade5fcc",
-  "measuredBy": "MEASURE car 0e (Opus 5)",
+  "measuredAtSha": "fab1bfde79f17fbfcdfd025f470073d41130283f",
+  "measuredBy": "MEASURE car 0f (Opus 5)",
   "date": "2026-09-08",
-  "note": "car 0e adds one src module (wiringBranch.js, the eleventh island module) and three walker test titles; no suite and no parked or credited file moves",
+  "note": "car 0f adds two walker test titles and one describe for the alias draft; no new test FILE, so files, parked and credited do not move",
   "files": 2551,
   "parked": 375,
   "credited": 2176,
-  "titles": 23803,
-  "suiteTitles": 6368
+  "titles": 23805,
+  "suiteTitles": 6369
 }
