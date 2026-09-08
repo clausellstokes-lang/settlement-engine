@@ -1,9 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 08:43:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 08:47:29 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ? | other |  | result | 0 | — | — | 12:27:49 |
-| ? | other |  | in-flight | 0 | — | — | 12:43:25 |
+| ? | other |  | result | 0 | — | — | 12:46:56 |
 | ? | other |  | result | 0 | manifest.md | — | 12:27:01 |
 | ? | other |  | result | 0 | — | — | 12:36:29 |
 
