@@ -19,3 +19,14 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
      × no NEW un-anchored negative assertion anywhere in the test corpus 12ms
 Not implemented: navigation to another Document
 Not implemented: navigation to another Document
+ ❯ tests/docs/enforcedByExists.test.js (2 tests | 1 failed) 17ms
+     × every @enforced-by path target resolves to a real file 14ms
+Not implemented: HTMLMediaElement's pause() method
+Not implemented: HTMLMediaElement's load() method
+vendored lib tinymce/plugins/__exact_set_probe__.js ships under public/map/libs/ but is NOT pinned in VENDOR-MANIFEST.json — it would reach production un-verified. Audit the bytes for advisories, add a manifest entry, then re-pin: node scripts/validate-map-fork.mjs --update-manifest
+vendored lib pinned in manifest is missing on disk: flatqueue.js
+Not implemented: navigation to another Document
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest
+E2E anti-vacuity check FAILED: usage: check-e2e-not-vacuous.mjs <playwright args> --projects <a,b> | --results <report.json>
+[ai-spend-alarm] dispatch failed (not fatal): network down
