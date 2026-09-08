@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 00:16:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 00:22:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -18,16 +18,16 @@
 | ? | other |  | result | 0 | _c-dump.mjs, design-C-authoring.md | — | 03:34:17 |
 | ? | other |  | result | 0 | read-specs.md | — | 03:07:39 |
 | ? | other |  | result | 0 | design-A-data.md | — | 03:32:44 |
-| ? | other |  | in-flight | 0 | — | — | 04:14:42 |
+| ? | other |  | in-flight | 0 | — | — | 04:22:22 |
 | ? | other |  | result | 0 | judge-2.md | — | 03:51:26 |
-| ? | other |  | in-flight | 0 | — | — | 04:16:41 |
+| ? | other |  | in-flight | 0 | — | — | 04:21:51 |
 | ? | other |  | result | 0 | design-B-render.md | — | 03:42:54 |
 | ? | other |  | result | 0 | read-facts.md | — | 03:12:05 |
-| ? | other |  | in-flight | 0 | — | — | 04:16:43 |
+| ? | other |  | in-flight | 0 | — | — | 04:22:47 |
 | ? | other |  | result | 0 | — | — | 03:08:57 |
 | ? | other |  | result | 0 | judge-3.md | — | 03:50:40 |
-| ? | other |  | in-flight | 0 | — | — | 04:14:44 |
-| ? | other |  | in-flight | 0 | — | — | 04:14:40 |
+| ? | other |  | in-flight | 0 | — | — | 04:21:42 |
+| ? | other |  | in-flight | 0 | — | — | 04:22:40 |
 | ? | other |  | result | 0 | — | — | 03:08:35 |
 | ? | other |  | result | 0 | — | — | 03:11:00 |
 | ? | other |  | result | 0 | ARCH-COMPOSED-PROSE.md | — | 04:14:20 |
