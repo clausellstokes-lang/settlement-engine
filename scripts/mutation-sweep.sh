@@ -1112,7 +1112,7 @@ perl -0pi -e 's/    predicate: \[\],\n    fieldsRead: \[\],\n    status: WIRING_
 check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 # 81. INSTR-912 car 9 — A COLUMN CLOSES ONLY WHERE EVERY SOURCE THE SPEC NAMES IS READ.
-#     Plant #77 covers the persons column, which is open by LAW; these three cover the
+#     Plant #78 covers the persons column, which is open by LAW; these three cover the
 #     columns that are open by MEASUREMENT, which is where the arm can go quietly vacuous.
 #     `whatItDoes` reads one of the six sources CLERK-LAWS §1.2 names for it, so it is
 #     `closed: false` — and a hand-written `true` beside a five-source shortfall is exactly
@@ -1149,9 +1149,9 @@ check_caught "institution-table/a column source declared read stops being read a
 perl -0pi -e "s/  const services = allServices\.filter\(\(row\) => !row\.institution \|\| liveNames\.has\(row\.institution\)\);/  const services = allServices;/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/the ruin filter leaves the service columns and an absent institution licenses a duty" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
-# 84. INSTR-912 car 10 — "RESOLVED" MUST NEVER AGAIN BE READ AS "RECOVERED". Plant #79 covers
+# 84. INSTR-912 car 10 — "RESOLVED" MUST NEVER AGAIN BE READ AS "RECOVERED". Plant #80 covers
 #     the STATUS: a pool the census cannot read must say so. This plant covers the quieter
-#     half, which #79's split cannot see by construction: the status stays right, the ladder
+#     half, which #80's split cannot see by construction: the status stays right, the ladder
 #     goes on reaching its rungs, the anti-vacuity split still reads 318/390 — and the
 #     PREDICATE comes back empty. That is exactly the tip cars 8 and 9 shipped, where 143 of
 #     310 RESOLVED rows carried `predicate: []` while the receipt, this walker's own assertion
@@ -1161,22 +1161,28 @@ check_caught "institution-table/the ruin filter leaves the service columns and a
 #     the two new integers ("RESOLVED" IS NOT "RECOVERED"), the summary's supporting integers,
 #     controls (c1b), (c1b2), (c1c), (c1d) and (c3), the fact index and the co-occurrence arm.
 #     ⭐ THE ANTI-VACUITY SPLIT (318 / 390) AND THE TIER TABLE STAY GREEN — which is the whole
-#     point of the plant: this is the blindness #79 cannot see, and it is what shipped.
+#     point of the plant: this is the blindness #80 cannot see, and it is what shipped.
 #     Restored cmp-exact => 26 passed.
 perl -0pi -e 's/        predicate: qualify\(\[\.\.\.guardRows, \.\.\.extra\], fn, callArgs\),/        predicate: [],/' src/domain/prose/wiringCensus.js
 check_caught "prose-wiring-census/a resolved pool loses its predicate and RESOLVED still reads as RECOVERED" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 # 85. INSTR-912 car 10 — A SOURCE READ ONLY INTO A STRING NOBODY ASSERTS IS NOT READ.
 #     `whatItCounts.closed` is DERIVED from "every source CLERK-LAWS §1.2 names is read", and
-#     its third source — `treasury.coinFlows.taxed` — reaches only the column's `basis`
-#     string. On every generated settlement the treasury is absent (a world-pulse structure no
-#     generator writes), so the ABSENT branch is taken everywhere and replacing the read with
-#     `NaN` left the whole file green: a column closed in the over-licensing direction §L.2
-#     item 62 forbids, resting on a read no arm could see go dark. Plants #80 and #81 cover the
-#     other two sources; this is the third. The plant strikes the read and leaves the source
-#     roster's `read: true` standing. Measured before landing (lane INSTR-912, 2026-09-08):
+#     its third source — `economicState.treasury.coinFlows.taxed` — reaches only the column's
+#     `basis` string. On every generated settlement the ledger is absent (a world-pulse
+#     structure no generator writes), so the ABSENT branch is taken everywhere and replacing
+#     the read with `NaN` left the whole file green: a column closed in the over-licensing
+#     direction §L.2 item 62 forbids, resting on a read no arm could see go dark. Plant #82
+#     covers the fired income row and plant #81 covers the derivation the flag itself rests on;
+#     this is the third source. The plant strikes the read and leaves the source roster's
+#     `read: true` standing. Measured before landing (lane INSTR-912, 2026-09-08):
 #     planted => 1 red of 18, the present-branch arm by name; restored cmp-exact => 18 passed.
-perl -0pi -e "s/  const taxedCoin = Number\(settlement\?\.treasury\?\.coinFlows\?\.taxed\);/  const taxedCoin = NaN;/" src/domain/institutions/institutionTable.js
+#     ⚠ THE TARGET MOVED AT CAR 11 and this plant moved with it. Car 9 read the ledger at
+#     `settlement.treasury`, a path NO writer in the estate produces; car 11 re-pointed the
+#     read to `settlement.economicState.treasury`, where `advanceTreasury` actually writes it.
+#     The plant's pattern is the NEW line — a plant whose regex no longer matches mutates
+#     nothing and reports CLEAR, which is the silent way a standing plant dies.
+perl -0pi -e "s/  const taxedCoin = Number\(settlement\?\.economicState\?\.treasury\?\.coinFlows\?\.taxed\);/  const taxedCoin = NaN;/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/the third column source stops being read and the closed flag does not notice" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
 echo ""

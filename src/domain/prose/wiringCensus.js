@@ -1021,8 +1021,16 @@ export function cleanPredicate(predicate) {
  *   bagless: Array<{block: string, pool: string, slots: string[]}>,
  *   predicatesOverUnreadFields: Array<{block: string, pool: string, field: string, rung: string}>,
  *   syntheticTableFields: number, predicateArmExecutable: boolean,
- *   variantHistogram: Array<[number, number]>, variants: number, meanPerPool: string,
+ *   variantHistogram: Array<[number, number]>, variants: number,
  *   perBlock: Array<[string, number]>}}
+ *
+ * ⛔ NO FORMATTED MEAN IS RETURNED (INSTR-912 car 11). An earlier cut carried
+ * `meanPerPool: (variants / total).toFixed(2)` — a float interpolation and a two-decimal
+ * score, the two numeric-prose classes the estate's prose-numerics register counts, and it
+ * leaked two rows over that register's reviewed ceiling. The census publishes `variants` and
+ * `total` as INTEGERS and every derived mean is formatted by the CALLER, outside `src/`.
+ * A summary that formats is also a summary that has decided a presentation for a reader it
+ * cannot see, which is the wrong seat for this module.
  */
 export function censusSummary(rows, held) {
   /** @type {Map<string, {resolved: number, unresolved: number}>} */
@@ -1097,7 +1105,6 @@ export function censusSummary(rows, held) {
     predicateArmExecutable: heldSet !== null,
     variantHistogram: [...histogram].sort((a, b) => a[0] - b[0]),
     variants,
-    meanPerPool: total ? (variants / total).toFixed(2) : '0',
     perBlock: [...perBlock].sort((a, b) => b[1] - a[1]),
   };
 }

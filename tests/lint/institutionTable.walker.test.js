@@ -248,24 +248,29 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
   it('READS THE THIRD SOURCE: `coinFlows.taxed` reaches the basis, present-then-absent', () => {
     // ⛔ THE COLUMN CLOSED ON A SOURCE NO ARM COULD SEE (INSTR-912 car 10, cure 11; FOLD-2
     // P10). `whatItCounts.closed` is DERIVED from "every source CLERK-LAWS §1.2 names is
-    // read", and its third source — `treasury.coinFlows.taxed` — reaches only a `basis`
-    // STRING that nothing asserted. On every generated settlement the ABSENT branch is taken
-    // (the treasury is a world-pulse structure no generator writes), so replacing the read
+    // read", and its third source — `economicState.treasury.coinFlows.taxed` — reaches only a
+    // `basis` STRING that nothing asserted. On every generated settlement the ABSENT branch is
+    // taken (the ledger is a world-pulse structure no generator writes), so replacing the read
     // with `NaN` left the walker 17/17 green: `closed === true` — the over-licensing
     // direction §L.2 item 62 forbids — rested on a read whose removal no arm could detect.
     // The PRESENT branch is the only place the read is observable, so that is where the arm
-    // goes. Sweep plant #84 executes it.
+    // goes. Sweep plant #85 executes it.
+    //
+    // ⭐ AND THE FIXTURE NOW CARRIES THE SHAPE THE WORLD CARRIES (INSTR-912 car 11). Car 10's
+    // fixture put the ledger at the TOP LEVEL, which is where car 9's read looked and where
+    // no writer in the estate ever writes — so a green present-branch arm proved only that
+    // the code and its own fixture agreed with each other. Both moved to the produced path.
     const withTreasury = institutionTableOf({
       id: 'coin', institutions: [], npcs: [], availableServices: {},
-      treasury: { coinFlows: { taxed: 42 } },
+      economicState: { treasury: { coinFlows: { taxed: 42 } } },
     }, WORLD);
     const without = institutionTableOf({
       id: 'coin', institutions: [], npcs: [], availableServices: {},
     }, WORLD);
     expect(withTreasury.columns.whatItCounts.basis, 'the magnitude the source carries is READ and reported')
-      .toContain('treasury.coinFlows.taxed = 42');
+      .toContain('economicState.treasury.coinFlows.taxed = 42');
     expect(without.columns.whatItCounts.basis, 'and its absence is reported as absence, never as silence')
-      .toContain('treasury.coinFlows.taxed absent on this settlement');
+      .toContain('economicState.treasury.coinFlows.taxed absent on this settlement');
     expectPresentThenAbsent(
       withTreasury.columns.whatItCounts.basis,
       without.columns.whatItCounts.basis,
@@ -277,13 +282,46 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // treasury — the exact confusion the `basis` exists to prevent.
     expect(institutionTableOf({
       id: 'coin', institutions: [], npcs: [], availableServices: {},
-      treasury: { coinFlows: { taxed: 0 } },
-    }, WORLD).columns.whatItCounts.basis).toContain('treasury.coinFlows.taxed = 0');
+      economicState: { treasury: { coinFlows: { taxed: 0 } } },
+    }, WORLD).columns.whatItCounts.basis).toContain('economicState.treasury.coinFlows.taxed = 0');
     // AND THE COLUMN'S FLAG IS UNMOVED EITHER WAY: this arm proves the READ, not a licence.
     expect(withTreasury.columns.whatItCounts.closed).toBe(true);
     expect(without.columns.whatItCounts.closed).toBe(true);
     expect(sourcesAllRead('whatItCounts'), 'all three sources declared read').toBe(true);
     expect(COLUMN_SOURCES.whatItCounts.length, 'and there are three of them').toBe(3);
+  });
+
+  it('AND IT READS THE PRODUCED PATH: `economicState.treasury`, never `settlement.treasury`', () => {
+    // ⛔ THE DEFECT THIS ARM FORECLOSES (INSTR-912 car 11, measured). A guarded read of a key
+    // NO WRITER PRODUCES cannot throw: `Number(settlement?.treasury?.coinFlows?.taxed)` on a
+    // settlement whose ledger lives under `economicState` is `NaN` on every world that will
+    // ever exist, so the ABSENT branch is not merely the common case — it is the ONLY
+    // reachable one, and the source declared `read: true` is read from nothing. Car 9 shipped
+    // exactly that, and only the observed-shape ratchet could see it, because the arm above
+    // and its fixture agreed with the code about the wrong path. THE ONLY WRITER of a coin
+    // ledger anywhere in the estate is `advanceTreasury`, which writes it INSIDE
+    // `economicState` (src/domain/worldPulse/treasury.js:1253), and the module's own reader
+    // takes it from there (`treasuryRecordOf`, :625) — so the produced path is the only path
+    // a read may use. This arm drives BOTH shapes through the real function.
+    const base = { id: 'coin', institutions: [], npcs: [], availableServices: {} };
+    const produced = institutionTableOf(
+      { ...base, economicState: { treasury: { coinFlows: { taxed: 7 } } } }, WORLD,
+    ).columns.whatItCounts.basis;
+    const topLevel = institutionTableOf(
+      { ...base, treasury: { coinFlows: { taxed: 7 } } }, WORLD,
+    ).columns.whatItCounts.basis;
+    expect(produced, 'the ledger at the path the pulse writer produces IS read')
+      .toContain('economicState.treasury.coinFlows.taxed = 7');
+    expect(topLevel, 'and a ledger at the top level — a shape nothing writes — is NOT')
+      .toContain('economicState.treasury.coinFlows.taxed absent on this settlement');
+    expect(topLevel, 'so a value planted at the phantom path never reaches the basis')
+      .not.toContain('= 7');
+    // AND THE SOURCE ROSTER NAMES THE PATH IT READS, so the declaration cannot drift back to
+    // the top level while the code stays right (or the reverse, which is what car 9 shipped).
+    const third = COLUMN_SOURCES.whatItCounts[2];
+    expect(third.source, 'the roster names the produced path in full')
+      .toBe('economicState.treasury.coinFlows.taxed');
+    expect(third.read, 'and still declares it read').toBe(true);
   });
 
   it('routes the RUIN FILTER through the service COLUMNS, and the filter is measured doing work', () => {

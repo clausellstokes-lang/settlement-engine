@@ -140,15 +140,23 @@ export const COLUMN_SOURCES = Object.freeze({
     Object.freeze({ source: 'the settlement\'s INSTANTIATED service rows, on a LIVE institution', cite: 'institutionServices.js:23, :41, :45, …', read: true }),
     Object.freeze({ source: 'the fired economy income rows', cite: 'economicState.js:215-233 ("Church Tithes", gated on religionInfluence > 55 && hasReligiousInst)', read: true }),
     Object.freeze({
-      source: 'coinFlows.taxed',
-      cite: 'settlement.schema.js:633',
+      source: 'economicState.treasury.coinFlows.taxed',
+      cite: 'settlement.schema.js:628-635 (the ledger is a member of SimEconomicState); '
+        + 'written by worldPulse/treasury.js:1253; read there by treasuryRecordOf :625',
       read: true,
-      note: 'read and found ABSENT AT BIRTH (`settlement.treasury` is a world-pulse structure '
-        + 'no generator writes: measured null on every tier). It is a LAST-TICK MAGNITUDE, not '
-        + 'a duty name, so it can corroborate a tax duty the other two sources already name '
-        + 'and can never carry one they miss — which is why reading it does not widen the '
-        + 'column and why §1.2\'s own MISSING cell names only the service row and the income '
-        + 'row as what a duty word must resolve to.',
+      note: 'THE PATH WAS WRONG IN CAR 9 AND IS CORRECTED HERE (INSTR-912 car 11, measured). '
+        + 'Car 9 read `settlement.treasury`, which NO writer in the estate produces — the '
+        + 'ledger lives at `settlement.economicState.treasury` — so the read degraded to NaN '
+        + 'on every world forever and the observed-shape ratchet convicted it. Still ABSENT '
+        + 'AT BIRTH at the corrected path: the ledger is a world-pulse structure no generator '
+        + 'writes, and the key is absent on every world that has not ticked under a lit '
+        + '`treasuryEnabled` (schema:672), so the ABSENT branch is still the one every '
+        + 'generated settlement takes — but it is now absent BECAUSE THE WORLD HAS NOT '
+        + 'TICKED, not because the code was asking the wrong object. It is a LAST-TICK '
+        + 'MAGNITUDE, not a duty name, so it can corroborate a tax duty the other two '
+        + 'sources already name and can never carry one they miss — which is why reading it '
+        + 'does not widen the column and why §1.2\'s own MISSING cell names only the service '
+        + 'row and the income row as what a duty word must resolve to.',
     }),
   ]),
   whoIsCounted: Object.freeze([
@@ -260,8 +268,8 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
  * @property {Record<string, ReadonlyArray<{name?: string, institution?: string,
  *   desc?: string}>>} [availableServices]
  * @property {ReadonlyArray<unknown>} [services]
- * @property {{incomeSources?: ReadonlyArray<{source?: string}>}} [economicState]
- * @property {{coinFlows?: {taxed?: number}}} [treasury]
+ * @property {{incomeSources?: ReadonlyArray<{source?: string}>,
+ *   treasury?: {coinFlows?: {taxed?: number}}}} [economicState]
  */
 
 /**
@@ -412,7 +420,15 @@ export function institutionTableOf(settlement, world = {}) {
   const incomeDuties = firedDutyIncome(settlement);
   // READ AND REPORTED: a LAST-TICK magnitude, absent at birth on every tier measured. It
   // corroborates a tax duty the two naming sources already hold and carries none of its own.
-  const taxedCoin = Number(settlement?.treasury?.coinFlows?.taxed);
+  // ⛔ THE PATH IS `economicState.treasury`, NEVER `settlement.treasury` (INSTR-912 car 11,
+  // measured). Car 9 read the TOP LEVEL, and no writer in the estate produces it: the only
+  // writer of a coin ledger anywhere is `advanceTreasury`, which writes it INSIDE
+  // `economicState` (worldPulse/treasury.js:1253), and the module's own reader takes it from
+  // there (`treasuryRecordOf`, :625). A guarded top-level read cannot throw — it degrades to
+  // `NaN` forever — so the ABSENT branch was structurally the only reachable one and the
+  // observed-shape ratchet convicted it (`treasury on settlement`, a key no writer produces).
+  // At the produced path the ratchet is silent and the read can actually fire.
+  const taxedCoin = Number(settlement?.economicState?.treasury?.coinFlows?.taxed);
   const population = Number(settlement?.population);
   // ⭐ THE BAND VOCABULARY IS THE CALLER'S, NOT AN IMPORT, and the estate's tuning register is
   // what settled it. Importing `demographicsHerald.quantityWords` moved the dependent list of
@@ -490,18 +506,21 @@ export function institutionTableOf(settlement, world = {}) {
       whatItCounts: Object.freeze({
         // CLOSED, and now honestly: every source CLERK-LAWS §1.2 names for this column is
         // read — the instantiated rows on a LIVE institution, the FIRED income rows, and
-        // `coinFlows.taxed` (a magnitude, measured absent at birth).
+        // `economicState.treasury.coinFlows.taxed` (a magnitude, measured absent at birth,
+        // and read at the path the pulse writer actually produces — INSTR-912 car 11).
         closed: sourcesAllRead('whatItCounts'),
         values: Object.freeze([...new Set([...dutyRows.map((s) => s.name), ...incomeDuties])].sort()),
         basis: 'availableServices rows whose name is a duty kind on a LIVE institution, plus the'
           + ' fired economicState income rows whose source names one'
-          + (Number.isFinite(taxedCoin) ? `; treasury.coinFlows.taxed = ${taxedCoin}` : '; treasury.coinFlows.taxed absent on this settlement'),
+          + (Number.isFinite(taxedCoin)
+            ? `; economicState.treasury.coinFlows.taxed = ${taxedCoin}`
+            : '; economicState.treasury.coinFlows.taxed absent on this settlement'),
       }),
       whoIsCounted: Object.freeze({
         // ⛔ FALSE FOREVER, ON EVERY SETTLEMENT (`OPEN_BY_LAW.whoIsCounted`). The population
         // is a number, never an enumeration; no roll of persons exists; there is nothing to
         // close. Written as the literal `false` and NOT derived, so no source roster and no
-        // future flag can reach it — and so sweep plant #77's target keeps its exact bytes.
+        // future flag can reach it — and so sweep plant #78's target keeps its exact bytes.
         closed: false,
         values: Object.freeze(band ? [band] : []),
         basis: 'settlement.population, spoken only through the caller\'s QUANTITY_BANDS reader — a band, never a roll',

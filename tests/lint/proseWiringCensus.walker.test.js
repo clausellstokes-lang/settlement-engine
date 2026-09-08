@@ -103,7 +103,12 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // FOUR wordings and nothing is ever trimmed. That makes the variant count per pool a
     // first-class column of this census, because it is what the authoring wave is priced on.
     expect(summary.variants, 'the R1 corpus holds this many variants').toBe(2266);
-    expect(summary.meanPerPool, 'mean variants per pool').toBe('3.20');
+    // THE MEAN IS THE CALLER'S TO FORMAT (INSTR-912 car 11). The census publishes `variants`
+    // and `total` as integers; a `toFixed` inside `src/domain/prose/` is a float
+    // interpolation and a two-decimal score against the estate's prose-numerics register, and
+    // the module has no reader to format for. The arm keeps its full force — the same two
+    // decimal places over the same two integers — computed here.
+    expect((summary.variants / summary.total).toFixed(2), 'mean variants per pool').toBe('3.20');
     expect(Object.fromEntries(summary.variantHistogram), 'variants per pool, exactly').toEqual({
       2: 33, 3: 547, 4: 96, 5: 17, 6: 15,
     });
@@ -133,9 +138,9 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // pre-cure tip the receipt, this file's own assertion message and the wave's tier table
     // all read "RESOLVED 310" as "the selecting predicate was recovered", and 143 of those
     // 310 carried `predicate: []`. `resolved` counts a RUNG REACHED; these two count what was
-    // read. Sweep plant #83 makes the pair non-vacuous by execution: the literal rung
+    // read. Sweep plant #84 makes the pair non-vacuous by execution: the literal rung
     // returning `predicate: []` unconditionally reds these two and leaves the split above
-    // green, which is exactly the blindness plant #79 cannot see.
+    // green, which is exactly the blindness plant #80 cannot see.
     expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(185);
     expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(185);
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
@@ -158,7 +163,7 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
       'WIRING CENSUS · beside the composed-fill census · R1 at this tip',
       `  pools ${summary.total} · RESOLVED ${summary.resolved} · WIRING-UNRESOLVED ${summary.unresolved}`,
       `  of the RESOLVED: carrying a predicate row ${summary.resolvedWithPredicate} · every row a readable comparison ${summary.resolvedWithCleanPredicate}`,
-      `  variants ${summary.variants} · mean/pool ${summary.meanPerPool} · histogram ${summary.variantHistogram.map(([k, n]) => `${k}->${n}`).join(' ')}`,
+      `  variants ${summary.variants} · mean/pool ${(summary.variants / summary.total).toFixed(2)} · histogram ${summary.variantHistogram.map(([k, n]) => `${k}->${n}`).join(' ')}`,
       `  recovery rungs: ${[...rungs].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(' · ')}`,
       `  key functions ${census.functions} (consulted ${census.consulted}) · module key tables ${census.tables}`,
       '  the ten largest UNRESOLVED reasons:',

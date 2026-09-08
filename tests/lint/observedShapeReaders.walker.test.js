@@ -843,7 +843,19 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // enumerated identity list above does NOT (still four). Attributed by ENC-4c's receipt and by the
       // walker green at every dock but ENC-4b's; a read of a cleared identity is exactly what this door
       // exists to clear, and the list is what makes a fifth IDENTITY impossible to absorb silently.
-      expect(live.virtualDormantWriters.cleared).toBe(5);
+      //
+      // 5 → 6 READS at INSTR-912 car 11, the SAME shape of move and the same attribution rule.
+      // `institutionTable.js` reads `economicState.treasury.coinFlows.taxed` as `whatItCounts`'s third
+      // source (CLERK-LAWS §1.2). That is a SIXTH read of `treasury on economicState` — REAL.identity,
+      // the row this door has always cleared — so the count moves and the enumerated list above does
+      // NOT (still four). ⭐ IT IS ALSO THIS DOOR'S OWN VINDICATION: car 9 shipped the read at
+      // `settlement.treasury`, a path NO writer in the estate produces, and the ratchet convicted it
+      // (`treasury on settlement`, ceiling 0, no frozen row) precisely BECAUSE the door is keyed on the
+      // full identity and never on the key alone — the arm two tests below asserts exactly that. Car 11
+      // re-pointed the read to the path this row's declared writer actually writes
+      // (`src/domain/worldPulse/treasury.js`, behind `treasuryEnabled`), and the gate went silent
+      // without a single baseline byte moving.
+      expect(live.virtualDormantWriters.cleared).toBe(6);
       // …and the cleared read is really GONE from the post-filter findings, while the
       // raw scan still holds it — the door narrows the verdict, it does not blind the
       // detector.
@@ -866,7 +878,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     });
 
     test('the notice names the door in both states', () => {
-      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 5 read/); // five reads across four identities (ENC-4b's fifth read of grievance.toSid)
+      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 6 read/); // six reads across four identities (ENC-4b's fifth read of grievance.toSid; INSTR-912 car 11's sixth, of treasury on economicState)
       expect(virtualDormantWriterNotice({ applied: false })).toMatch(/NOT APPLIED/);
     });
   });
