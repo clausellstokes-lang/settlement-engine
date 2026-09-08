@@ -22,6 +22,7 @@
  *
  * @enforced-by npx vitest run tests/lint/proseWiringCensus.walker.test.js
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
@@ -32,7 +33,8 @@ import {
   poolKeyFunctions, rootOf, stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
 } from '../../src/domain/prose/wiringCensus.js';
 import {
-  aliasDraft, aliasKey, astLineIndex, astTokens, buildCensus, censusCheck, CENSUS_JSON,
+  aliasDraft, aliasKey, astLineIndex, astTokens, buildCensus, CANDIDATE_LEAF_DIR,
+  CANDIDATE_LEAF_SUFFIX, candidateLeafIndex, censusCheck, CENSUS_JSON,
   draftSources, EVIDENCE_ORDER, factMounts, producerIndex, relationsFromSitting, relationTable,
   serialise, wilsonBp, wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
@@ -1438,6 +1440,36 @@ describe('car 0 — the committed JSON and its interlock', () => {
     expect(verdict.ok).toBe(true);
     expect(text, 'and byte-identical to what the script would write').toBe(serialise(committed));
     expect(Object.keys(committed.stamp.files).length, 'the six composers and the mount registry').toBe(7);
+  });
+
+  test('the CANDIDATE LEAVES are stamped as a measurement of the tip, not as a sentence about it', () => {
+    // ⛔ THE FAILURE THIS ARM EXISTS FOR (SEAM car 3b-0). Car 0 stamped a hand-written string
+    // saying the candidate leaves did not exist yet. Car 3a landed all six. Re-running the
+    // census would have re-emitted the false sentence in good faith, because a literal is not
+    // a reading. The stamp now carries what is THERE, and this arm names the six so that a
+    // seventh desk, or a leaf deleted, reds instead of moving a number nobody reads.
+    const expected = [
+      'defense', 'economy', 'general', 'power', 'stressors', 'warFaith',
+    ].map((desk) => `${CANDIDATE_LEAF_DIR}/${desk}${CANDIDATE_LEAF_SUFFIX}`);
+    expect(Object.keys(committed.stamp.candidateLeaves), 'six leaves, one per desk, by name')
+      .toEqual(expected);
+    expect(candidateLeafIndex(), 'and the committed stamp is the tip').toEqual(committed.stamp.candidateLeaves);
+    // AN ORTHOGONAL WITNESS, so the arm is not the script agreeing with itself: the digest is
+    // recomputed here from the file's own bytes, by a hash this file spells for itself.
+    for (const [rel, digest] of Object.entries(committed.stamp.candidateLeaves)) {
+      const bytes = readFileSync(join(ROOT, rel), 'utf8');
+      expect(digest, `${rel} is stamped by its bytes`)
+        .toBe(createHash('sha256').update(bytes).digest('hex'));
+      expect(digest, 'a sha256, not a claim').toMatch(/^[0-9a-f]{64}$/);
+      expect(bytes, 'and the leaf ships an EMPTY candidate list at this car').toMatch(/const fired = \[\];/);
+    }
+    // THE PLANT, in the only form this arm can take without writing to the tree: a stamp whose
+    // leaf bytes moved is a stale census, and the byte interlock is what says so.
+    const drifted = JSON.parse(serialise(committed));
+    drifted.stamp.candidateLeaves[expected[0]] = '0'.repeat(64);
+    const moved = censusCheck(`${JSON.stringify(drifted, null, 2)}\n`, committed);
+    expect(moved.ok, 'a moved leaf makes the committed census stale').toBe(false);
+    expect(moved.reason, 'as a byte staleness, since the leaves are not in stamp.files').toBe('stale-bytes');
   });
 
   test('a STALE STAMP and a STALE BYTE are different refusals, and both fire', () => {

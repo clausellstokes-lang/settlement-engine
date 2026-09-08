@@ -59,17 +59,49 @@ export const CENSUS_JSON = join(ROOT, 'docs/content/wiring-census.json');
 
 /**
  * The files whose bytes the stamp is taken over: the six composers and the mount registry.
- * ⚠ THE CANDIDATE LEAVES (`*StateProseCandidates.js`, ARCH §4.1) DO NOT EXIST YET — car 3a
- * lands them. They are named here so the next reader adds the path rather than wondering
- * whether the omission was a decision, and `stampedFiles` records what was actually read.
+ * A sha here moving is the `stale-stamp` refusal — the census was taken against a composer
+ * that has since changed. The CANDIDATE LEAVES are stamped too, but through their own
+ * measurement below rather than through this list, because their membership is discovered
+ * at the tip and not declared here (SEAM car 3b-0).
  */
 export const STAMPED = Object.freeze([
   ...COMPOSERS,
   'src/domain/display/stateProse/dossierMounts.js',
 ]);
 
+/** Where the per-desk candidate leaves live, and the suffix that identifies one. */
+export const CANDIDATE_LEAF_DIR = 'src/domain/display/stateProse';
+/** @see CANDIDATE_LEAF_DIR */
+export const CANDIDATE_LEAF_SUFFIX = 'StateProseCandidates.js';
+
 /** @param {string} text @returns {string} */
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
+
+/**
+ * ⭐ THE CANDIDATE LEAVES, MEASURED AT THE TIP (SEAM car 3b-0).
+ *
+ * ⛔ WHY THIS IS A FUNCTION AND NOT A SENTENCE. Car 0 stamped the string `none at this tip:
+ * car 3a lands src/domain/display/stateProse/*StateProseCandidates.js`, written in
+ * anticipation of a car that has now landed. A hand-written claim about the tree is true
+ * until the tree moves and then goes on being re-emitted, word for word, by a script whose
+ * whole job is to say what is actually there: re-running the census would have faithfully
+ * republished a false sentence. So the claim is replaced by the reading — the leaves that
+ * EXIST, by name, each with the sha256 of its bytes. Six today, and the walker asserts the
+ * six by name so a seventh desk, or a leaf deleted, is a red rather than a quiet number.
+ *
+ * The leaves are NOT in `STAMPED`: this is a discovered set, and a path list that had to be
+ * edited by hand to admit a new leaf would carry the same failure mode one level up.
+ *
+ * @returns {Record<string, string>} repo-relative path -> sha256, ordered by path
+ */
+export function candidateLeafIndex() {
+  const dir = join(ROOT, CANDIDATE_LEAF_DIR);
+  const names = readdirSync(dir).filter((name) => name.endsWith(CANDIDATE_LEAF_SUFFIX)).sort();
+  return Object.fromEntries(names.map((name) => [
+    `${CANDIDATE_LEAF_DIR}/${name}`,
+    sha256(readFileSync(join(dir, name), 'utf8')),
+  ]));
+}
 
 /**
  * Every `.js` file under a directory, recursively.
@@ -913,7 +945,7 @@ export async function buildCensus(options = {}) {
     schema: 'wiring-census/1',
     stamp: {
       files: Object.fromEntries(stampedFiles),
-      candidateLeaves: 'none at this tip: car 3a lands src/domain/display/stateProse/*StateProseCandidates.js',
+      candidateLeaves: candidateLeafIndex(),
       producerIndexFiles: producerFiles,
     },
     totals: {
