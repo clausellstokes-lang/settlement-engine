@@ -2198,3 +2198,262 @@ edited: a receipt that rewrites its own history is a receipt a reader cannot aud
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: MEASURE
+
+---
+
+# CAR 4 — THE READER-CORPUS DERIVATION ARM: THE GOLDEN KEY READ WHERE IT NOW LIVES
+
+Shas: **`40dbcfc66`** (car 4) and **`1f89c5d2b`** (car 4b, the lighting refreeze). Seventeen
+commits over `8522a17b2`. **Zero product bytes** — nothing under `src/` moved — and, deliberately,
+**zero helper bytes**: `tests/helpers/goldenMasterCorpus.js` is byte-identical at both ends.
+
+### 4.0 ARRIVAL — the three conditions, executed
+
+```
+$ date
+Tue Sep  8 10:11:49 EDT 2026
+$ ls $SC/HOLD-VITEST
+/…/scratchpad/HOLD-VITEST                    (present; this car is EXEMPT per its brief)
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ git rev-parse HEAD        (dock $SC/laneMEASURE)
+3f68a99782a9a81403ebb83d38b548dda7e39c56
+$ git status --porcelain
+                                             (empty)
+```
+
+The gate check was re-taken **in its own shell call before every one of the nine vitest runs
+below**; `HOLD-VITEST` present-and-exempt and runner count **0** each time.
+
+### 4.1 THE RED, REPRODUCED AT THE DOCK'S TIP
+
+```
+$ npx vitest run tests/scripts/readerCorpusManifest.test.js                 (at 3f68a9978)
+ ❯ tests/scripts/readerCorpusManifest.test.js (16 tests | 1 failed) 23057ms
+     × the derivation is the golden test own arrow, read from its source and compared field for field 6ms
+AssertionError: expected false to be true // Object.is equality
+ ❯ tests/scripts/readerCorpusManifest.test.js:81:34
+      Tests  1 failed | 15 passed (16)
+```
+
+Identical to `$SC/whole-915.log:643-658`. That log's roster confirms this was the **fourth of
+four** whole-suite reds and the only unbanked one: `voiceMechanics` (:39), `enforcement-claims`
+(:64) and `generatorGoldenMaster` (:98) are the banked three, and the run closed
+`Test Files 4 failed | 2548 passed | 1 skipped (2553)` / `Tests 4 failed | 32641 passed`.
+
+### 4.2 THE DIAGNOSIS — and one sentence of the brief corrected by measurement
+
+The brief reads: *"so the regex finds nothing and the arm reads `false`."* **The regex DOES find
+the arrow.** `[^\]]` matches newlines, so it matched car 1's re-wrapped three-line spelling
+happily; what broke is the TOKENIZER on the next line. Measured before any edit:
+
+```
+$ node -e "<the arm's own regex, run against tests/helpers/goldenMasterCorpus.js>"
+matched: true
+raw capture JSON: "\n  c.settType, c.culture, c.terrainOverride, c.tradeRouteAccess, c.monsterThreat, c._seed,\n"
+naive fields: ["settType","culture","terrainOverride","tradeRouteAccess","monsterThreat","_seed",""]
+```
+
+A **dangling comma** — legal in every JS array literal — splits to a SEVENTH, empty field. So the
+arm as written reds at BOTH lines: at `:81` against the golden test (no arrow there at all) and at
+`:83` against the helper (a phantom seventh field). Pointing it at the helper alone would not have
+cured it, which is why this is recorded rather than smoothed over.
+
+### 4.3 WHAT WAS BUILT — one file, three arms where there was one (84 insertions, 11 deletions)
+
+| arm | what it holds | how it fails |
+|---|---|---|
+| **2** (rewritten) | the arrow read from `GOLDEN_KEY_SOURCE_PATH` = `tests/helpers/goldenMasterCorpus.js`, compared field for field against `GOLDEN_KEY_FIELDS` — the comparison line UNCHANGED | a seventh field, a reordering, a hole |
+| **3** (new) | the golden master still IMPORTS `keyOf` from the helper, and carries no second `const keyOf` — the source of truth cannot fork back | EXCLUSION, the toMatch, or LIVENESS |
+| **4** (new) | the helper's arrow and `goldenKeyOf` RUN against each other on three real manifest rows, each also reproducing the manifest key | a computed divergence a source read cannot see |
+
+**THE REGEX IS NOT WIDENED.** Exactly one trailing comma is stripped (`arrow[1].trim().replace(/,$/, '')`)
+— the array literal's own grammar, not a loosening. Both negative controls were measured before the
+line landed:
+
+```
+control "[c.a, , c.b].join('|')"                     -> ["a","","b"]              (a hole still reds)
+control "[…, c.monsterThreat, c._seed, c.extra,]"    -> […,"_seed","extra"]       (a 7th still reds)
+```
+
+### 4.4 THE FOUR PLANTS — every new assertion proven able to fail, each restored `cmp`-identical
+
+```
+########## PLANT 1 — a SEVENTH field on the helper's arrow (tests/helpers/goldenMasterCorpus.js)
+PRISTINE md5: bc7a0dfbf3dc9d1058ec4b9bce4f3096
+PLANTED  md5: 46ca2efbe80edcd8c617b813f05e840b
+60:export const keyOf = (c) => [
+61-  c.settType, …, c._seed, c.extra,
+      Tests  2 failed | 1 passed | 15 skipped (18)
+   → arm 2 reds (the field list) AND arm 4 reds, naming all three real rows:
+     "city|arabic|coastal|port|civilized|golden-master-v3: helper …| vs module …"
+     "…: the helper arrow does not reproduce it"           (×3 rows, both limbs)
+   → arm 3 correctly UNMOVED — it is not the arm that watches the field list.
+RESTORE: cmp identical · RESTORED md5: bc7a0dfbf3dc9d1058ec4b9bce4f3096
+
+########## PLANT 2a — the golden test re-adds a PRIVATE const keyOf (the fork arm 3 exists for)
+AssertionError: EXCLUSION [the golden master must import the one arrow, never re-spell a second]:
+  the member is present in a collection that is supposed to exclude it … not to contain 'const keyOf ='
+      Tests  1 failed | 17 skipped (18)
+restored-2a cmp identical (3a2db26366bb03306ed1f43896d49338)
+
+########## PLANT 2b — the import silently drops keyOf
+765:import { goldenCorpus } from '../helpers/goldenMasterCorpus.js';
+AssertionError: the golden master must import `keyOf` from the corpus helper: expected … to match
+  /import \{[^}]*\bkeyOf\b[^}]*\…/helpers\…
+      Tests  1 failed | 17 skipped (18)
+restored-2b cmp identical (3a2db26366bb03306ed1f43896d49338)
+
+########## PLANT 2c — the LIVENESS ANCHOR itself deleted (the arm must not go quietly green)
+AssertionError: LIVENESS ANCHOR […]: the anchor sibling is missing from the collection, so the
+  exclusion assertion below cannot distinguish "correctly excluded" from "the whole collection
+  drifted away". … do not delete the anchor to get green.: expected … to contain 'rows.map(keyOf)'
+      Tests  1 failed | 17 skipped (18)
+restored-2c cmp identical (3a2db26366bb03306ed1f43896d49338)
+FINAL md5: 3a2db26366bb03306ed1f43896d49338  (pristine was 3a2db26366bb03306ed1f43896d49338)
+```
+
+Plant 2c is the one that matters most: it proves arm 3's negative is not the
+assertion-that-cannot-fail the estate's §39 family names.
+
+### 4.5 THE ARM, GREEN, AND THE 525-ROW IDENTITY
+
+```
+$ npx vitest run tests/scripts/readerCorpusManifest.test.js       (the bytes that became 40dbcfc66)
+ Test Files  1 passed (1)
+      Tests  18 passed (18)                                        (16 -> 18)
+   Duration  26.72s
+```
+
+The corpus is **bit-identical across the whole car**, measured before the first edit and again
+after the last plant was restored:
+
+```
+                       BEFORE (at 3f68a9978)                                  AFTER (at 1f89c5d2b)
+rows                   525                                                    525
+keysSha256   cd35946a81a91d53f6e0e2e64b7d5eb48d00a7e77ac3667b68cf44bbc752478a   (identical)
+rowsSha256   044bd1bf69dedce5770ed1f4b4a991931933dddfd691876b42b438fe6c65aa17   (identical)
+```
+
+And the golden master's own key set still equals the manifest's, computed independently of vitest:
+
+```
+$ node -e "<goldenCorpus + keyOf vs the 525-row manifest>"
+corpus rows: 525 | manifest keys: 525
+KEY SET IDENTICAL: true
+DRIFT ROWS: 525 of 525
+```
+
+`tests/property/generatorGoldenMaster.test.js` is therefore **unchanged in its banked shape**:
+`Tests 1 failed | 2 passed (3)` — the failure is the banked 525-of-525 hash drift at `:822`, and
+the arm that PASSES is *covers the full corpus (no keys added/removed)*, which is the executed
+proof that this car moved neither a row nor the key.
+
+### 4.6 THE GATES
+
+```
+$ npx eslint tests/scripts/readerCorpusManifest.test.js         ; exit=0
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ npx vitest run tests/property/dossierProseManifest.test.js
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 10 s
+      Tests  14 passed (14)                                     ← drift [], provenance arm green
+$ npx vitest run tests/copy/voiceMechanics.test.js              ; exit=1 (the banked two, unchanged)
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+```
+
+Every figure is car 3's figure to the digit: 1120/1120, 173/173, 1972, 225/225, 708/2266/165,
+and voice E2's same two files at em:5 and em:3. This car touched no `src/` byte, so it should be —
+and it is.
+
+### 4.7 THE WHOLE `tests/lint` RUN — once, and its only red was the lighting ritual's
+
+```
+$ npx vitest run tests/lint                                     ; exit=1  (at 40dbcfc66)
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 …: expected 23843 to be 23841
+ Test Files  1 failed | 146 passed (147)
+      Tests  1 failed | 2390 passed (2391)
+   Duration  116.98s
+```
+
+147 files and **2,391** assertions, exactly car 3's count — this car adds no arm under `tests/lint`.
+The single red is the census moving by **exactly +2**, which is exactly the two arms added.
+
+⚠ **ONE whole `tests/lint` run, not car 3's two.** The brief's exemption reads "ONE whole
+`tests/lint` run", and the ritual's own `_doc` says the proof of a refreeze is the plain WALKER
+re-run, not a second whole sweep. The focused re-run below is that proof; the other 146 files were
+green before the refreeze and the refreeze writes one JSON tuple, which no other file reads.
+
+### 4.8 THE LIGHTING DOOR — car 4b, by its own ritual, never by hand
+
+```
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 4 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 40dbcfc66be4a83207b79abbf2cacbb5c4154fc8 by MEASURE car 4 (Opus 5):
+  files 2553 -> 2553, parked 375 -> 375, credited 2178 -> 2178,
+  titles 23841 -> 23843, suiteTitles 6377 -> 6377.
+      Tests  1 failed | 33 passed (34)          (non-zero BY DESIGN)
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+      Tests  34 passed (34)                     ← THIS green is the proof
+```
+
+Taken on a **clean tree** (the ritual refuses a dirty one) at car 4's own tip. `suiteTitles` is
+unmoved because no `describe` was added, and `files` is unmoved because no test FILE was added.
+
+### 4.9 THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. ⛔ **THE BRIEF'S RE-SPELLING OF THE HELPER'S ARROW IS REFUSED, WITH ITS MEASUREMENT.** The brief
+   says: *"If the helper's arrow is not spelled in the exact form the regex expects … re-spell it
+   so … rather than widening the regex."* It is not so spelled, and the brief is RIGHT about the
+   provenance: at `8522a17b2` the arrow was **one line**
+   (`generatorGoldenMaster.test.js:849`), so MEASURE car 1's "VERBATIM" move in fact re-wrapped it
+   and added the dangling comma — the helper's own docblock and the golden test's comment both
+   still claim verbatim. **But the helper's BYTES are pinned by a golden this car is fenced out
+   of.** `tests/fixtures/dossier-prose-manifest-golden.json` carries
+   `_provenance.recorder["tests/helpers/goldenMasterCorpus.js"] = 7f09210e…6d5d`, and
+   `dossierProseManifest.test.js:152` asserts `provenance.recorder` equals live `recorderShas()`.
+   Re-spelling moves that sha and reds an arm the brief requires green, curable only by
+   re-recording a **1,050-row golden whose rows do not change** — a re-record the brief's file
+   fence excludes and that this estate treats as the door's, never a lane's. Between "re-spell"
+   and "manifest drift `[]` + change only these files", the fence and the green win.
+   **The one-line restoration is therefore OWED and handed up**, correctly belonging to a car that
+   re-records that golden; the arm is meanwhile correct on the bytes that exist, and its dangling-
+   comma strip is grammar rather than tolerance, with both negative controls executed (§4.3).
+2. **THE REGEX IS LEFT EXACTLY AS CAR 0 WROTE IT.** Only the PATH it reads and the tokenizer after
+   it changed. A widened regex would have been the cheap cure and the wrong one: the arm's whole
+   value is that it pins a spelling.
+3. **`GOLDEN_TEST_PATH` IS KEPT, NOT REPLACED.** The brief offered either. Both constants are now
+   load-bearing — the helper's path for arm 2, the golden test's for arm 3 — and a single renamed
+   constant would have left arm 3 with nothing to read.
+4. **THE THREE ROWS OF ARM 4 ARE POSITIONAL (first / middle / last of the real manifest), not
+   hand-picked**, so a corpus that shrinks or reorders re-samples rather than quietly testing the
+   same three forever. They resolve today to `city|arabic|coastal|port|civilized|golden-master-v3`,
+   `thorp|celtic|hills|road|civilized|golden-master-v3` and
+   `village|steppe|riverside|river|civilized|golden-master-v3`.
+
+### 4.10 THE TIP
+
+```
+$ git log --oneline -3
+1f89c5d2b MEASURE car 4b: the lighting census refrozen at car 4's tip by its own ritual …
+40dbcfc66 MEASURE car 4: the reader-corpus derivation arm reads the golden key where it now lives …
+3f68a9978 MEASURE car 3b: the lighting census refrozen at car 3's tip by its own ritual …
+$ git status --porcelain --untracked-files=all
+                                             (empty)
+$ git rev-list --count 8522a17b2..HEAD
+      17
+```
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
