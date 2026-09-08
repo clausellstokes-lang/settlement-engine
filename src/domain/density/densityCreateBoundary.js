@@ -139,8 +139,13 @@ export const PIPELINE_REACHERS = Object.freeze({
     class: 'BIRTH',
     why: 'the generation lane mints a brand-new town from the wizard form config on every '
       + 'call; a reroll REPLACES the town rather than re-deriving it, and with a save on '
-      + 'screen it explicitly mints a new identity. state.config is never hydrated from a '
-      + 'saved settlement, so fullConfig cannot carry an existing world\'s law. It mints '
+      + 'screen it explicitly mints a new identity. A SAVED WORLD\'S LAW *CAN* REACH '
+      + 'state.config — the Library\'s "Apply Saved Configuration & Regenerate" runs '
+      + 'updateConfig(migrateConfig(data.settlement?._config || data.config)) and '
+      + 'updateConfig admits the whole underscore family by prefix — so what keeps this '
+      + 'birth unambiguous is not that absence (the sentence here used to claim one, and '
+      + 'it was FALSE; corrected at §913) but the CLAMP in birthConfig, which destructures '
+      + 'the marker off the incoming config before spreading the mint. It mints '
       + 'the law here on the main thread and sends it as request data; the executor named '
       + 'below is what actually calls the pipeline.',
     reachesVia: 'src/workers/generationRequest.js',

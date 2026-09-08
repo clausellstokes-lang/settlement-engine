@@ -59,8 +59,17 @@
  * `tests/lint/densityCreateBoundary.walker.test.js` holds that manifest to the tree,
  * so a new pipeline reacher cannot get its class wrong silently. D1's own premise
  * was OVERTURNED on executed evidence in the same car: `state.config` is the wizard's
- * FORM state and is never hydrated from a save, so the store's generate action is an
- * unambiguous birth. The correction is kept rather than deleted because the reasoning
+ * FORM state, so the store's generate action is an unambiguous birth. ⚠ AND THE
+ * GROUND FOR THAT IS NOT THE ONE THIS PARAGRAPH USED TO GIVE (§913). It said
+ * `state.config` "is never hydrated from a save", which is FALSE: the Library's
+ * "Apply Saved Configuration & Regenerate" runs
+ * `updateConfig(migrateConfig(data.settlement?._config || data.config))`, and
+ * `updateConfig` admits the whole underscore family by prefix
+ * (`isAllowedConfigKey`: `key.startsWith('_')`), so a saved world's law marker really
+ * does arrive in the form state. What makes the birth unambiguous is the CLAMP in
+ * `birthConfig`, which destructures the marker off the incoming config before
+ * spreading the mint — an absence would have been luck; the clamp is a mechanism.
+ * The correction is kept rather than deleted because the reasoning
  * that looked right is the reasoning a future reader will re-derive.
  *
  * Pure. No RNG, no store, no React.

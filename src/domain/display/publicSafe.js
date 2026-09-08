@@ -299,7 +299,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // above, and for the same reason each of those is.
     //
     // ⚠ THE SERVER TWIN IS NOT LANDED AND IS OWNER-GATED. `_gallery_dm_full_json`
-    // (migrations 120/129) still re-issues both keys server-side, so this is the
+    // (migrations 121/129) still re-issues both keys server-side, so this is the
     // CLIENT half only. A new `supabase/migrations/NNN_*.sql` adding them to that
     // function's delete chain is a migration and belongs on the owner's desk with
     // the mapEdits precedent (`townMapEditsPublicDrop.test.js` declines the same

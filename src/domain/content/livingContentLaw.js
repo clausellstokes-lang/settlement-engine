@@ -150,9 +150,12 @@ export const LIVING_CONTENT_BUCKETS = Object.freeze([
  * members. What was true is that the boundary module's ONLY eager edge was a
  * `birthConfig` re-export through an eager store leaf whose two real callers are
  * both lazy. Cutting it took `src/main.jsx`'s static closure from 239 modules to
- * 238, dropped the boundary out of it, and left every emitted dist file
- * byte-identical — so the import below this comment is a lazy -> lazy edge and
- * first paint pays nothing.
+ * 238, dropped the boundary out of it, and changed NO EMITTED DIST FILE'S SIZE
+ * (658 of 1,377 files changed BYTES — the entry chunk's content hash moves and every
+ * file naming it is re-hashed; this sentence used to read "left every emitted dist
+ * file byte-identical", which was FALSE, and it is the third and last home of that
+ * wording, corrected at §913) — so the import below this comment is a lazy -> lazy
+ * edge and first paint pays nothing.
  *
  * @returns {Record<string, number>}
  */

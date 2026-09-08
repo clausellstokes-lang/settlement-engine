@@ -41,8 +41,10 @@
  *                 reconciliation path in `tests/lib/importReconciliation.test.js`.
  *
  * ⛔⛔ AND THE FACT THAT OUTRANKS EVERY INERTNESS CLAIM IN THIS FILE (§912, R-J).
- * `loadLivingContentRoster` HAS NO CALLER in `src/` — it appears there only as its
- * own definition in `livingContentSeam.js` and one comment beside it. So lighting
+ * `loadLivingContentRoster` HAS NO CALLER in `src/` — `livingContentSeam.js` defines
+ * it and nothing invokes it. (The enumeration that used to stand here — "only its own
+ * definition and one comment beside it" — was self-falsifying, this sentence being a
+ * further occurrence; deleted at §913, the no-caller fact kept.) So lighting
  * the dial does not produce v2 worlds; it produces a THROW,
  * `[livingContentSeam] v2 world, roster payload not loaded`, out of
  * `generateSettlementPipeline`. That outage is the real reason no shipped world

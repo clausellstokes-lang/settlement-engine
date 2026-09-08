@@ -5,8 +5,12 @@
  * ⛔⛔ READ THIS FIRST IF YOU ARE ABOUT TO LIGHT THE DIAL: THE LOADER HAS NO
  * CALLER, SO LIGHTING IT TAKES GENERATION DOWN (§912, R-J — recorded, not cured).
  * `loadLivingContentRoster` (`livingContentSeam.js`) is the only thing that
- * registers this module's builder, and it appears in `src/` exactly twice: its own
- * definition and one comment beside it. Nothing calls it. So on a lit config
+ * registers this module's builder, and NOTHING IN `src/` CALLS IT. (This sentence
+ * used to count the occurrences — "exactly twice: its own definition and one comment
+ * beside it" — which was false the moment it was written, because the sentence is
+ * itself one of them. A count of a token in the tree cannot be shipped inside the
+ * tree; the no-caller fact can, and it is the whole of what matters. §913.)
+ * So on a lit config
  * `livingContentRosterFor` finds no registered builder and THROWS
  * `[livingContentSeam] v2 world, roster payload not loaded` out of
  * `generateSettlementPipeline` — not a leaky world, no world at all. Wiring that

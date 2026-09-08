@@ -73,7 +73,7 @@ import {
   readLivingContentLawVersion,
 } from '../../src/domain/content/livingContentLawVersion.js';
 // The REGISTRY half is still the seam's, and arming it is what makes every lit
-// arm below take the same path production takes after loadLivingContentRoster().
+// arm below take the path production WOULD take after loadLivingContentRoster().
 import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
@@ -92,7 +92,12 @@ import {
 // reached through a dynamic import in production (livingContentSeam.js), and the
 // pipeline throws rather than quietly degrading when a v2 world finds no builder
 // registered. Registering the real builder here is what makes every lit arm below
-// exercise the SAME path production takes after `loadLivingContentRoster()`.
+// exercise the path production WOULD take after `loadLivingContentRoster()`.
+// ⚠ "WOULD", NOT "DOES", AND THE TENSE IS THE WHOLE POINT (§912, R-J; the sibling
+// `livingContentLawWiring.test.js` carries the same correction, and this file was the
+// second home of the false friend, cured at §913): nothing in `src/` calls
+// `loadLivingContentRoster`, so production reaches the throw and not the builder. This
+// hand-registration is the only thing making a lit roster reachable in the estate today.
 registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const CONFIG = Object.freeze({

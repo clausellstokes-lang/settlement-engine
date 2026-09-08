@@ -10,11 +10,16 @@
  * identifiers of `CUSTOM_DEFINITION_IDENTITY_KEYS`, which is exactly what would
  * let an observer correlate one private definition across two published worlds.
  * The key has exactly ONE reader in `src/` — the account-import remap, which
- * `livingContentRoster.js:37` names — and no display, export or projection
+ * `livingContentRoster.js` names in its "⚠ AMENDED (lane L-MAT, O-11 path 2)"
+ * paragraph — and no display, export or projection
  * surface reads it at all, so allowlisting it would be pure exposure with zero
  * product value. (This header used to say "nothing in `src/` READS the key",
  * citing that same file's header, which car 5 of this very consist had already
- * amended to name the reader. Corrected at §912, DEF-12.)
+ * amended to name the reader. Corrected at §912, DEF-12. ⛔ AND THAT CORRECTION
+ * SHIPPED A LINE NUMBER — `livingContentRoster.js:37` — WHICH WAS ALREADY WRONG AT
+ * ITS OWN COMMIT, because the same car pushed the paragraph down by adding header
+ * lines above it. A line number cited across files is a hypothesis with a decay
+ * rate; the marker above is not. Cited by marker at §913.)
  * The fail-closed root allowlist already drops it; this file holds that to the
  * tree so the day someone adds it is a deliberate day with an SQL twin.
  *
@@ -36,13 +41,15 @@
  * page", so it is not a transfer to the owner's own other device and no reader of
  * a full share is entitled to the author's unadopted library.
  * ⚠ THE SERVER TWIN IS STILL OWED AND IS OWNER-GATED — `_gallery_dm_full_json`
- * (supabase migrations 120/129) re-issues both keys, so a shared dossier read
+ * (supabase migrations 121/129) re-issues both keys, so a shared dossier read
  * back from the server still carries them. Same V1 boundary
  * `townMapEditsPublicDrop.test.js` records for `mapEdits`, same reason.
  *
  * ⛔⛔ AND THE ONE FACT A LIGHTING ENGINEER MEETS BEFORE ANY OF THIS (§912, R-J).
- * `loadLivingContentRoster` HAS NO CALLER. It appears in `src/` only as its own
- * definition (`livingContentSeam.js`) and one comment beside it, so lighting the
+ * `loadLivingContentRoster` HAS NO CALLER. `livingContentSeam.js` defines it and
+ * nothing in `src/` invokes it (the occurrence count this sentence used to carry was
+ * false at its own commit — the sentence was one of the occurrences — and was deleted
+ * at §913), so lighting the
  * dial does not produce leaky worlds — it produces NO worlds: a lit config throws
  * `[livingContentSeam] v2 world, roster payload not loaded` out of
  * `generateSettlementPipeline`. That outage, not the dial, is the true ground of
@@ -190,9 +197,17 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
     ).toBeGreaterThan(CUSTOM_DEFINITION_IDENTITY_KEYS.length + 2);
     // Non-vacuity for the census itself: the account-scoped identifiers this file
     // exists to keep out of public view really are among the keys measured.
-    for (const key of CUSTOM_DEFINITION_IDENTITY_KEYS) {
-      if (rows.some(row => Object.hasOwn(row, key))) expect(rosterKeys).toContain(key);
-    }
+    // ⛔ UNCONDITIONAL, AND THE GUARD THAT USED TO STAND HERE WAS THE DEF-6 TAUTOLOGY
+    // WEARING DEF-7's LABEL (§913). The deleted form was
+    // `if (rows.some(row => Object.hasOwn(row, key))) expect(rosterKeys).toContain(key)`,
+    // and `rosterKeys` is built from `rows.flatMap(row => Object.keys(row))` two
+    // statements up — so the guard and the assertion were computed from one source and
+    // `Object.hasOwn(row, key)` ENTAILED `key ∈ rosterKeys`. The arm could not fail.
+    // Worse, the regression it read as guarding — the identity projection ceasing to
+    // emit an account-scoped identifier — turned the `if` FALSE and the arm silently
+    // green. Measured, once per key: dropping any one of the five from every row left
+    // the guarded arm GREEN 5 times out of 5 and reds this form 5 times out of 5.
+    expect(rosterKeys).toEqual(expect.arrayContaining(CUSTOM_DEFINITION_IDENTITY_KEYS));
     expect(rosterKeys.filter(key => PRIVATE_KEY_RE.test(key))).toEqual([]);
     // The anchor for that emptiness: the regex is live and still convicts the
     // keys it exists for.
@@ -249,14 +264,14 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
 
     // ⛔ THE HALF THAT IS NOT LANDED, ASSERTED SO THE LIGHTING DAY MUST VISIT THIS
     // FILE. The SERVER re-issues the DM-full payload from `_gallery_dm_full_json`
-    // (migrations 120/129), which has no delete for either key — so a shared
+    // (migrations 121/129), which has no delete for either key — so a shared
     // dossier read back through the server still carries them. That twin is a
     // migration and is owner-gated; this arm is the tripwire that keeps it from
     // being forgotten.
     expect(
       NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
       'THE DIAL HAS BEEN LIT. The CLIENT half of the DM-full drop is landed (publicSafe.js),'
-      + ' but its SERVER twin is NOT: `_gallery_dm_full_json` (supabase migrations 120/129)'
+      + ' but its SERVER twin is NOT: `_gallery_dm_full_json` (supabase migrations 121/129)'
       + ' still re-issues customContentRoster and customContentProvenance, so a DM-shared'
       + ' dossier read back from the server carries the author\'s private library. Land that'
       + ' migration before this ships.'
