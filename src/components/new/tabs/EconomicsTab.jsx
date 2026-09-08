@@ -269,6 +269,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     return deriveMarketPrices({ economicState: eco, worldState: campaign?.worldState || null, settlementId: sid, flowDrift });
   }, [saveId, s, campaigns, eco, flowDrift]);
   const via = s?.economicViability;
+  // DS-GEN-18 (`economics.craftReason`) — the general desk's ONE caller with that reader's own
+  // gate, memoised (ARCH §4.1, X-F9) ABOVE the early return (rules-of-hooks). FOUR LINES, as
+  // many as the block it replaced: this file's thirteen prose-numerics rows are keyed on LINE.
+  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView }).economics.craftReasonLine, [s, publicDossier, playerView]);
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
@@ -322,10 +326,6 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // situationDesc, the tiles and their sub-lines never read the desk.
   const deskProse = economyDeskRead(s, { publicDossier, playerView, foodBalance: fbal, granaryOutlook: granary, flowDrift });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
-  // DS-GEN-18 (`economics.craftReason`) — a GENERAL-desk block on this page, so it comes
-  // through the general desk's one caller and carries that reader's own gate, not this
-  // tab's. The reader is passed the flag it must not assume.
-  const craftReasonLine = generalDeskLines(s, { publicDossier, playerView }).economics.craftReasonLine;
 
   return (
     <div style={{...sans}}>

@@ -35,13 +35,23 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
 
   const grade = settlement?.lifecycleStatus || settlement?.config?.lifecycleStatus || '';
   const ancient = settlement?.history?.ancientRuin || null;
-  if (!steadings.length && !grade && !ancient) return null;
   // DS-GEN-8 (`overview.steadings`) — the town's own account of its remnant grade, the
   // fallen city beside it and each steading it seeded, in the order this section already
   // renders those three things. The steadings come from the ledger resolved above, because
   // only this component holds it. Silent on a free dossier and silent where the record has
   // nothing to say (R-DST-K).
-  const desk = generalDeskLines(settlement, { publicDossier, playerView, steadings, lifecycleStatus: grade, ancientRuin: ancient }).steadings;
+  // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN (rules-of-hooks; ARCH §4.1, X-F9, SEAM car 3g):
+  // from car 3 this call composes eleven of the desk's blocks through `composeStateProse`
+  // rather than through a single kernel read, and the browser-side cost is unmeasured. Every
+  // dependency below is stable — `steadings` is itself a memo, and the other three are the
+  // props and two scalars read off the settlement.
+  const desk = useMemo(
+    () => generalDeskLines(settlement, {
+      publicDossier, playerView, steadings, lifecycleStatus: grade, ancientRuin: ancient,
+    }).steadings,
+    [settlement, publicDossier, playerView, steadings, grade, ancient],
+  );
+  if (!steadings.length && !grade && !ancient) return null;
 
   return (
     <div style={{ marginTop: 14 }}>

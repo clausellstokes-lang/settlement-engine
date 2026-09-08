@@ -79,7 +79,8 @@ import { liveInstitutions } from '../../institutions/institutionRoster.js';
 // declination is stale at this tip rather than wrong when it was written. Measured here,
 // not assumed: see `yearBand` below.
 import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
@@ -1706,9 +1707,16 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
 export function generalStateProse(settlement, readings = {}, options = {}) {
   const slots = { settlement: properFill(text(settlement?.name)) };
 
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
+  // The spine key is this desk's own key function and every bag, dimension answer and
+  // per-lens override is unchanged; the candidates leaf offers the modifier pools the state
+  // earned, and is EMPTY until car 9 authors them. An empty list composes to the kernel's
+  // own draw, which is why the manifest cannot move on this routing.
   /** @param {string} blockId @param {string|null} poolKey @param {string} glance */
   const rung = (blockId, poolKey, glance = '') => (poolKey
-    ? legibilityRung(glance, readStateProse(CORPUS, blockId, poolKey, { ...options, slots }), [])
+    ? legibilityRung(glance, composeStateProse(CORPUS, blockId, {
+      ...options, slots, spineKey: poolKey, candidates: generalStateProseCandidates(blockId, readings),
+    }), [])
     : null);
 
   // DS-GEN-3's ten lenses, in the order the Systems Health dashboard already prints them:
@@ -1730,8 +1738,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   const deficit = foodDeficitDimension(readings.foodBalance);
   /** @param {string|null} poolKey */
   const originLine = (poolKey) => (poolKey && deficit
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-6', poolKey, {
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-6', {
       ...options, slots, dimensions: { deficit },
+      spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-6', readings),
     }), [])
     : null);
   const origin = [
@@ -1748,8 +1757,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       const key = conflictIntensityPoolKey(conflict);
       if (!key) return null;
       const parties = Array.isArray(conflict?.parties) ? conflict.parties : [];
-      return legibilityRung('', readStateProse(CORPUS, 'DS-GEN-2', key, {
+      return legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-2', {
         ...options,
+        spineKey: key,
+        candidates: generalStateProseCandidates('DS-GEN-2', readings),
         slots: {
           ...slots,
           faction: properFill(text(parties[0])),
@@ -1765,7 +1776,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   const warningSlots = { ...slots, govFaction: properFill(text(readings.govFaction)) };
   /** @param {string|null} poolKey */
   const warningLine = (poolKey) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-7', poolKey, { ...options, slots: warningSlots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-7', {
+      ...options, slots: warningSlots,
+      spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-7', readings),
+    }), [])
     : null);
   const warnings = Object.freeze([
     warningLine(structuralViolationsPoolKey(readings.structuralViolations)),
@@ -1807,8 +1821,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   };
   /** @param {string|null} poolKey @param {Record<string, unknown>} [extra] */
   const identityLine = (poolKey, extra = {}) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-9', poolKey, {
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-9', {
       ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { anchor } } : {}),
+      spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-9', readings),
     }), [])
     : null);
   const markerSlots = marker ? {
@@ -1858,8 +1873,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     good: craftKey === 'BOUGHT-IN' ? boughtGood(readings.primaryImports) : undefined,
   };
   const craftReasonLine = craftKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-18', craftKey, {
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-18', {
       ...options, slots: craftSlots,
+      spineKey: craftKey, candidates: generalStateProseCandidates('DS-GEN-18', readings),
     }), [])
     : null;
 
@@ -1894,9 +1910,11 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     .map((row) => {
       const key = steadingPoolKey(row);
       if (!key) return null;
-      const line = legibilityRung('', readStateProse(CORPUS, 'DS-GEN-8', key, {
+      const line = legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-8', {
         ...options,
         slots: { ...slots, steading: properFill(text(/** @type {{name?: unknown}} */ (row)?.name)) },
+        spineKey: key,
+        candidates: generalStateProseCandidates('DS-GEN-8', readings),
       }), []);
       return line && line.sentence ? line : null;
     }));
@@ -1908,7 +1926,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   // standing leads because the card prints its badge directly above.
   /** @param {string|null} key @param {Record<string, unknown>} slotBag */
   const relLine = (key, slotBag) => (key
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-REL-1', key, { ...options, slots: slotBag }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-REL-1', {
+      ...options, slots: slotBag,
+      spineKey: key, candidates: generalStateProseCandidates('DS-REL-1', readings),
+    }), [])
     : null);
   // ⚠ ONE INNER GROUP PER LINK, never a flattened list: the caller renders each pair inside
   // the card it is about, and a flat array of two-per-link makes the pairing an arithmetic
@@ -1936,7 +1957,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       return line && line.sentence ? line : null;
     }));
   const ruinLine = ruinKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-8', ruinKey, { ...options, slots: ruinSlots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-8', {
+      ...options, slots: ruinSlots,
+      spineKey: ruinKey, candidates: generalStateProseCandidates('DS-GEN-8', readings),
+    }), [])
     : null;
 
   return Object.freeze({
@@ -1993,8 +2017,9 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
         ...[...new Set((Array.isArray(readings.clockIds) ? readings.clockIds : [])
           .map((id) => escalationClockPoolKey(id)).filter(Boolean))]
           .map((key) => (key
-            ? legibilityRung('', readStateProse(CORPUS, 'DS-HK-1', key, {
+            ? legibilityRung('', composeStateProse(CORPUS, 'DS-HK-1', {
               ...options, slots: { ...slots, governing: properFill(text(readings.governingName)) },
+              spineKey: key, candidates: generalStateProseCandidates('DS-HK-1', readings),
             }), [])
             : null)),
       ].filter((line) => line && line.sentence)),
@@ -2007,8 +2032,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       identity,
       founded: rung('DS-GEN-14', foundedPoolKey(hist), ''),
       record: recordKey
-        ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-16', recordKey, {
+        ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
           ...options,
+          spineKey: recordKey,
+          candidates: generalStateProseCandidates('DS-GEN-16', readings),
           slots: {
             ...slots,
             calamity: calamityFill(calamityRow?.name),

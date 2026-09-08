@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
@@ -24,6 +24,16 @@ import { generalDeskLines } from '../generalDeskRead.js';
 const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 
 export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
+  // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
+  // the town's own voice beside the three data the panel already prints.
+  // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN (rules-of-hooks; ARCH §4.1, X-F9, SEAM car 3g):
+  // from car 3 this call composes eleven of the desk's blocks through `composeStateProse`
+  // rather than through a single kernel read, and that cost is unmeasured on the browser
+  // side. The result is a pure function of the settlement and the two view flags.
+  const {verdictLines} = useMemo(
+    () => generalDeskLines(s, {publicDossier, playerView}).viability,
+    [s, publicDossier, playerView],
+  );
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
@@ -38,9 +48,6 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       audience: playerView ? 'player' : 'dm',
     });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
-  // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
-  // the town's own voice beside the three data the panel already prints.
-  const {verdictLines} = generalDeskLines(s, {publicDossier, playerView}).viability;
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since

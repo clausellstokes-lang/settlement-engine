@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
@@ -136,6 +136,24 @@ function worldStressorFor(worldState, settlementId) {
 export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false, worldState = null}) {
   const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
+  // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
+  // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
+  // this call composes eleven of the desk's blocks, and from car 3 it composes them THROUGH
+  // `composeStateProse` rather than through a single kernel read. The browser-side cost of
+  // that is unmeasured and the composed-prose manifest cannot measure it, so the memo is
+  // insurance taken before the cost exists rather than after a page feels slow.
+  const stresses = (Array.isArray(r?.stress) ? r.stress : r?.stress ? [r.stress] : []).filter(Boolean);
+  // ⛔ `stresses` IS DELIBERATELY NOT A DEPENDENCY, AND DELIBERATELY NOT ITSELF A `useMemo`.
+  // It is a pure function of `r`, so `r` already covers it and the memo can never be stale.
+  // Memoising it instead was tried and MEASURED: `tests/lint/writerReach.walker.test.js`
+  // moved — `colour on stress` gained a `web-display=R` the frozen surfaceReach does not
+  // carry — because that register attributes a read differently once the expression sits
+  // inside a hook callback. Moving a frozen register is not this car's act, and the register
+  // is right to notice: the plain const keeps the reach exactly where it was.
+  const overviewDesk = useMemo(() => generalDeskLines(r, {
+    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r?.populationHistory),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }).overview, [r, publicDossier, playerView]);
   if (!r) return null;
 
   const eco = r.economicState || {};
@@ -145,7 +163,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
-  const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
   // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
   // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
   // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
@@ -198,9 +215,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
     // annex's own named reader and it imports out of a worldPulse module, so the cost
     // belongs in this lazy tab chunk rather than in a leaf six tabs share.
-  } = generalDeskLines(r, {
-    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r.populationHistory),
-  }).overview;
+  } = overviewDesk;
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions

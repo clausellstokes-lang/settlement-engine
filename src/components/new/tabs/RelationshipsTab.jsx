@@ -62,48 +62,63 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     return campaign ? neighbourMirrorLines({ worldState: campaign.worldState, settlementId: sid, counterpartIds: (campaign.settlementIds || []).map(String).filter(i => i !== sid), tick: campaign.worldState?.tick, nameFor: id => byId.get(String(id)) || String(id), includeGroundTruth }) : [];
   }, [sid, campaigns, savedSettlements, includeGroundTruth, publicDossier]);
 
-  if (!r) return null;
-
-  const rels=(Array.isArray(r.relationships)?r.relationships:[]);
-  const interSettlementRels=r.interSettlementRelationships||[];
-
+  // ⭐ THE TWO LISTS THE DS-REL-1 DESK READS, LIFTED ABOVE THE `!r` EARLY RETURN AND
+  // MEMOISED (SEAM car 3g). They were plain consts below the guard, which put them out of
+  // reach of any hook: the desk read has to be a `useMemo` (ARCH §4.1, X-F9 — from car 3 it
+  // composes eleven blocks through `composeStateProse` rather than through one kernel read,
+  // and that browser-side cost is unmeasured), and a hook may not sit after an early return.
+  // Both are PURE FUNCTIONS of `r` and `liveConflicts`, which is what makes the lift safe and
+  // the memo correct rather than merely cheap; memoising them also makes them stable
+  // dependencies instead of fresh arrays on every render. Nothing about their CONTENT moves.
   // Only typed entries (conflict / faction_engagement) — not raw NPC contacts (which have no type)
-  const crossConflictsRaw = [
-    ...(r.interSettlementRelationships||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-    ...(r.crossSettlementConflicts||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-    ...liveConflicts.filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-  ];
-  const seen = new Set();
-  const crossConflicts = crossConflictsRaw.filter(x => {
-    const key = x.description?.slice(0,40)||x.conflictNature||'';
-    if(seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-  const conflicts=Array.isArray(r.conflicts)?r.conflicts:[];
-  const factionGroups=Array.isArray(r.factions)?r.factions:[];
+  const crossConflicts = useMemo(() => {
+    const raw = [
+      ...(r?.interSettlementRelationships||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
+      ...(r?.crossSettlementConflicts||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
+      ...liveConflicts.filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
+    ];
+    const seen = new Set();
+    return raw.filter(x => {
+      const key = x.description?.slice(0,40)||x.conflictNature||'';
+      if(seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }, [r, liveConflicts]);
   // Use unified neighbourNetwork array (generator's neighborRelationship is migrated to this at save time)
   // Also include live generator output neighborRelationship for unsaved settlements
-  const _liveNR = r.neighborRelationship;
-  const _net    = r.neighbourNetwork || [];
-  const _liveEntry = _liveNR?.name && !_net.some(n => n.name === _liveNR.name)
-    ? [{
-        id:               `live_${_liveNR.name}`,
-        name:             _liveNR.name,
-        neighbourName:    _liveNR.name,
-        neighbourTier:    _liveNR.tier || '',
-        relationshipType: _liveNR.relationshipType || 'neutral',
-        description:      `Generated with ${_liveNR.name} as neighbour (${(_liveNR.relationshipType||'neutral').replace(/_/g,' ')}).`,
-        fromGeneration:   true,
-      }]
-    : [];
-  const neighbours = [..._net, ..._liveEntry];
-  const flagDriven=rels.filter(rel=>rel.flagDriven);
+  const neighbours = useMemo(() => {
+    const liveNR = r?.neighborRelationship;
+    const net    = r?.neighbourNetwork || [];
+    const liveEntry = liveNR?.name && !net.some(n => n.name === liveNR.name)
+      ? [{
+          id:               `live_${liveNR.name}`,
+          name:             liveNR.name,
+          neighbourName:    liveNR.name,
+          neighbourTier:    liveNR.tier || '',
+          relationshipType: liveNR.relationshipType || 'neutral',
+          description:      `Generated with ${liveNR.name} as neighbour (${(liveNR.relationshipType||'neutral').replace(/_/g,' ')}).`,
+          fromGeneration:   true,
+        }]
+      : [];
+    return [...net, ...liveEntry];
+  }, [r]);
   // DS-REL-1 (`relationships.network`) — the town's own account of each standing it keeps
   // and of the engagements running between named houses. The lists are the ones this tab
   // ALREADY assembled above, so the prose and the cards cannot describe two different sets.
   // Silent on a free dossier and silent where a tie's end is unstated (R-DST-K).
-  const relDesk = generalDeskLines(r, { publicDossier, playerView, neighbours, crossEngagements: crossConflicts }).relationships;
+  const relDesk = useMemo(
+    () => generalDeskLines(r, { publicDossier, playerView, neighbours, crossEngagements: crossConflicts }).relationships,
+    [r, publicDossier, playerView, neighbours, crossConflicts],
+  );
+
+  if (!r) return null;
+
+  const rels=(Array.isArray(r.relationships)?r.relationships:[]);
+  const interSettlementRels=r.interSettlementRelationships||[];
+  const conflicts=Array.isArray(r.conflicts)?r.conflicts:[];
+  const factionGroups=Array.isArray(r.factions)?r.factions:[];
+  const flagDriven=rels.filter(rel=>rel.flagDriven);
 
   // Settlement names for "From" filter
   const settlementName=r.name||'';

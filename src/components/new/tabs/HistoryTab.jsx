@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, serif, Collapsible, Section, Empty } from '../Primitives';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
@@ -30,11 +30,19 @@ function formatRecentDate(value) {
 export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll, publicDossier = false, playerView = false}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
-  if (!r?.history) return <Empty message="No historical data available."/>;
-  const h = r.history;
   // DS-GEN-9 (who this town is, and the one event it is still explained by), DS-GEN-14
   // (founded once, grown since) and DS-GEN-16 (what the record still carries forward).
-  const {identityLines, foundedLine, recordLine} = generalDeskLines(r, {publicDossier, playerView}).history;
+  // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN for the same reason `mobile` is (ARCH §4.1,
+  // X-F9, SEAM car 3g): from car 3 this call composes eleven of the desk's blocks through
+  // `composeStateProse` rather than through a single kernel read, and the browser-side cost
+  // is unmeasured. The result is a pure function of the settlement and the two view flags.
+  const historyDesk = useMemo(
+    () => generalDeskLines(r, {publicDossier, playerView}).history,
+    [r, publicDossier, playerView],
+  );
+  if (!r?.history) return <Empty message="No historical data available."/>;
+  const h = r.history;
+  const {identityLines, foundedLine, recordLine} = historyDesk;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
   // Extended event type colors (EVENT_COLORS only covers 5 types)
