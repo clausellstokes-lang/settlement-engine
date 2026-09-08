@@ -462,3 +462,6 @@ warFaith.generated.js    base b4d2624e295641d1  tip b4d2624e295641d1  IDENTICAL
 $ git diff --stat 3b22b5c56..HEAD -- src/data/
 (no output: zero corpus bytes across both commits)
 ```
+
+## CAR 3a — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 12:2x)
+Re-measured at `84388a185` in laneSEAM (porcelain 0, runners 0, symlinks intact): the focused composer + fence + kernel files `3 passed / 81 tests`; the wiring census re-taken into the tree and restored — the whole delta `producerIndexFiles 1145 → 1152`, one integer, no row, no stamped sha (CONFIRMED); the stale literal at `scripts/wiring-census.mjs:916` read verbatim (CONFIRMED); `git diff 3b22b5c56..HEAD -- src/data/` empty per the lane (not re-run). Rulings: (1) a count-only census drift is a lane's plain re-take, printed; a row/sha drift stays the chair's; 3b-0 turns the literal into a measurement — brief-SEAM-car3b-3g ADDENDUM; (2) the coupling-walker refusal accepted, no row for a display leaf; (3) the four judgment calls accepted; `readsCount` ruled for car 4 (its ADDENDUM). Wrong predictions in §3a.1 noted as the lane's own correction. Seat: Fable 5.1 — validated.
