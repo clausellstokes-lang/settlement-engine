@@ -37,6 +37,8 @@ Inputs the sitting reads: the SEAM fold (`skeptic-seam/FOLD.md`) and the §916 l
 4. **The departure calibration rule** — the bit frozen at the pool's birth from the RATE print at the 10 % line (§O.4); a re-cut is a declared shift (§13 row 7's population).
 5. **The NARROWS rulings** on the taste's blocks (DS-DEF-11's THREATENED/QUIET; DS-DEF-2 after 3h; DS-GEN-3's purse) — each on its census row, printed.
 
+## C′ — "never trim" read out (Part B §22, owner-confirmed 09-08): the single-face canonical rows bound to live engine strings are named one by one and their single-faced standing recorded; the face-count ratchet is armed beside the variant ratchet before the REWRITE opens.
+
 ## D — the alias table's first ratifications
 The three identifier aliases stand (§P). The taste's blocks name their own endpoints; each alias the taste NEEDS is put here with its citation (a generator write or a reader path on an AST, never a comment or a prose string — §P's rule); the 74 unjoined endpoints stay unjoined until a car needs them. A ratified alias moves the relations leaf's `aliases` section at the next schema car; the join count is printed before and after.
 
