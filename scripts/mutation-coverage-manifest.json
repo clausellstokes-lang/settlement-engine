@@ -2604,6 +2604,11 @@
     "tests/lint/proseRegisterLoaders.walker.test.js": {
       "kind": "mutation",
       "label": "prose-register-loaders/a disclosure line leaves R4b and the exact count breaks"
+    },
+    "tests/lint/proseWiringCensus.walker.test.js": {
+      "kind": "mutation",
+      "label": "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage",
+      "what": "The wiring census reports, per (block, pool), the predicate that selects the pool. The owner's rule is that a pool whose predicate is not recoverable is WIRING-UNRESOLVED and never inferred. The plant makes the fallthrough answer RESOLVED, so the census claims total coverage of all 708 pools while the three rung readers go on working and every other figure stays correct. Planted => 5 red of 21 (the 310/398 anti-vacuity split, control c1, control d, the grammar walker's D/wiring arm, C-sibling's premise gate); restored => 21 passed."
     }
   },
   "meta": {

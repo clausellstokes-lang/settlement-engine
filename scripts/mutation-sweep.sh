@@ -44,6 +44,7 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/domain/prose/wiringCensus.js
   src/domain/prose/entryWalker.js
   src/domain/prose/grammarWalker.js
   src/domain/prose/presenceMeasure.js
@@ -1086,6 +1087,22 @@ check_caught "institution-table/the persons column closes and the Brackwater qua
 #     1 red of 9; restored => 9 passed.
 perl -0pi -e "s/  smell: Object\.freeze\(\[/  smellRemoved: Object.freeze([/" src/domain/prose/presenceMeasure.js
 check_caught "prose-presence/a sense leaves the published lexicon and the spread stops being a partition" src/domain/prose/presenceMeasure.js "npx vitest run tests/lint/proseMeasures.walker.test.js --no-file-parallelism"
+
+# 80. INSTR-912 car 8 — A POOL THE CENSUS CANNOT READ MUST SAY SO. The wiring census's one
+#     unbreakable claim is the owner's own: a pool whose selecting predicate is not
+#     recoverable is reported WIRING-UNRESOLVED, never inferred. The failure this forecloses
+#     is the quietest one an instrument has: the fallthrough starts answering RESOLVED, the
+#     census claims total coverage of 708 pools, and every downstream arm — arm D's licence,
+#     C-sibling's premise, the MISSING tier the authoring wave is sized from — reads a
+#     confident answer built on nothing. The three rung readers go on working, so the row
+#     count, the variant histogram and the fill census all stay correct while the census
+#     silently stops distinguishing what it read from what it did not. Strike the status.
+#     Measured before landing (lane INSTR-912, 2026-09-07): planted => 5 red of 21 — the
+#     anti-vacuity split (310/398), control c1's UNRESOLVED pool, control d's mixed fixture,
+#     the grammar walker's D/wiring not-executable arm and C-sibling's premise gate;
+#     restored cmp-exact => 21 passed.
+perl -0pi -e 's/    predicate: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

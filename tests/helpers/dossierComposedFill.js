@@ -36,6 +36,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { balancedSlice as balanced } from '../../src/domain/prose/wiringCensus.js';
 import { ROOT } from './dossierCorpus.js';
 
 /** The six desk composers — the only callers of `readStateProse` in the estate. */
@@ -49,35 +50,13 @@ export const COMPOSERS = Object.freeze([
 ]);
 
 /**
- * Read from `open` (the index of an opening bracket) to its match, respecting strings,
- * template literals, comments and nesting. Returns the slice INSIDE the brackets.
- * @param {string} src
- * @param {number} open index of `(` `{` or `[`
- * @returns {{inner: string, end: number}}
+ * The bracket reader. ⚠ ONE SPELLING, and it lives in `src/domain/prose/wiringCensus.js`:
+ * car 8 needed the same reader on the same composer sources, and a second copy here is the
+ * fork the estate has a name for — two readers that disagree by one edge case make one
+ * census count a key the other cannot see. Re-exported under its original name so every
+ * caller of `balanced` in this file (and any future one) is unchanged.
  */
-export function balanced(src, open) {
-  const pairs = { '(': ')', '{': '}', '[': ']' };
-  const close = pairs[src[open]];
-  if (!close) throw new Error(`dossierComposedFill.balanced: index ${open} is not an opening bracket`);
-  let depth = 0;
-  for (let i = open; i < src.length; i++) {
-    const c = src[i];
-    if (c === '/' && src[i + 1] === '/') { i = src.indexOf('\n', i); if (i < 0) break; continue; }
-    if (c === '/' && src[i + 1] === '*') { i = src.indexOf('*/', i) + 1; if (i < 1) break; continue; }
-    if (c === '\'' || c === '"' || c === '`') {
-      const quote = c;
-      i++;
-      while (i < src.length && src[i] !== quote) { if (src[i] === '\\') i++; i++; }
-      continue;
-    }
-    if (c === '(' || c === '{' || c === '[') depth++;
-    else if (c === ')' || c === '}' || c === ']') {
-      depth--;
-      if (depth === 0) return { inner: src.slice(open + 1, i), end: i };
-    }
-  }
-  throw new Error(`dossierComposedFill.balanced: unbalanced bracket at ${open}`);
-}
+export { balancedSlice as balanced } from '../../src/domain/prose/wiringCensus.js';
 
 /**
  * Split a bracket-inner at TOP-LEVEL commas.
@@ -445,4 +424,48 @@ export function unrenderedFacts() {
       file: rel, held: [...held].sort(), rendered, keyOnly,
     };
   });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// CAR 8 — THE WIRING CENSUS's two inputs. The census module is PURE (it reads no file);
+// the I/O is here, where every other composer read in this estate already lives.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * The six composers' source text, keyed by repo-relative path.
+ * @returns {Map<string, string>}
+ */
+export function composerSources() {
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  for (const rel of COMPOSERS) out.set(rel, readFileSync(join(ROOT, rel), 'utf8'));
+  if (out.size === 0) throw new Error('dossierComposedFill: zero composer sources read');
+  return out;
+}
+
+/**
+ * The bag per CALL SITE, keyed `block :: <the pool-key function the site calls>`. The
+ * block-wide union (`composedFillByBlock`) is the superset; this is the refinement the
+ * module's own header says the licence arm needs, because `craftSlots` fills {resource} on
+ * one pool of a block and refuses it on another BY DESIGN.
+ *
+ * A site whose pool expression names no `…PoolKey` function contributes nothing here and
+ * falls back to the block-wide bag — never to an empty one, which would report every slot
+ * of that pool as unprovided.
+ * @param {FillSite[]} sites
+ * @returns {Map<string, string[]>}
+ */
+export function composedFillByKeyFunction(sites) {
+  /** @type {Map<string, Set<string>>} */
+  const byKey = new Map();
+  for (const site of sites) {
+    const named = site.poolExpr.match(/([A-Za-z_$][\w$]*[Pp]oolKey)\s*\(/);
+    if (!named) continue;
+    const id = `${site.block} :: ${named[1]}`;
+    if (!byKey.has(id)) byKey.set(id, new Set());
+    const seat = byKey.get(id);
+    if (!seat) continue;
+    for (const slot of site.slots) seat.add(slot);
+  }
+  return new Map([...byKey].map(([id, set]) => [id, [...set].sort()]));
 }
