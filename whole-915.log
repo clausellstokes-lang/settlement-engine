@@ -1,0 +1,26 @@
+PROOF_HEAD=3f68a99782a9a81403ebb83d38b548dda7e39c56 start 09:50:44 load=2.77 2.94 3.97
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 59470 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneMEASURE
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 18415ms
+     × every config produces byte-identical output to the golden master 18411ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5470ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 17ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1668ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 10ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLMediaElement's pause() method
+Not implemented: HTMLMediaElement's load() method
+vendored lib tinymce/plugins/__exact_set_probe__.js ships under public/map/libs/ but is NOT pinned in VENDOR-MANIFEST.json — it would reach production un-verified. Audit the bytes for advisories, add a manifest entry, then re-pin: node scripts/validate-map-fork.mjs --update-manifest
+vendored lib pinned in manifest is missing on disk: flatqueue.js
+
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 21 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · drawing an AUDIBLE index above 0 because anchoring removed an earlier variant: 217 · strictly below every one of the twelve probes (the probes' own coupon-collection shortfall, not a finding): 18
