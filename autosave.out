@@ -3988,3 +3988,13 @@ else:
 io.open(p,'w',encoding='utf-8').write(s)
 PY
 
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/autosave-handoff.sh: line 52: 45960 Killed: 9               python3 - "$BLOCK"  <<'PY'
+import sys,io,re
+p='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md'
+s=io.open(p,encoding='utf-8').read(); block=sys.argv[1]
+if '<!-- AUTOSTATUS -->' in s: s=re.sub(r'<!-- AUTOSTATUS -->.*?<!-- /AUTOSTATUS -->', lambda m: block, s, flags=re.S)
+else:
+    i=s.find('\n**Seat:**'); s=s[:i+1]+block+'\n'+s[i+1:] if i>0 else block+'\n'+s
+io.open(p,'w',encoding='utf-8').write(s)
+PY
+
