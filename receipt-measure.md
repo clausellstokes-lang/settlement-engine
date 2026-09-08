@@ -1749,7 +1749,7 @@ uncounted here — the two figures moving by exactly one is the check on that re
 6. **NO PLATFORM MARGIN WAS ADDED TO THE DATA-LAZY CEILINGS.** The allowance is ~2.16 MB
    raw against the few hundred bytes of cross-environment Rollup drift the wave-5b note
    measures; a margin here would spend headroom no measurement asks for.
-7. **THE EM DASHES IN SUITE TITLES WERE KEPT.** The car moves ZERO `src/` bytes, so the
+7. **THE EM DASHES WERE KEPT (three suite titles, three failure messages).** The car moves ZERO `src/` bytes, so the
    voice rule's subject is untouched; `vendorPdfLazy.test.js` already carried 24 em dashes
    in literals before this car and car 0 added 12 of its own to
    `proseWiringCensus.walker.test.js`. Matching the file is house voice; the count is
