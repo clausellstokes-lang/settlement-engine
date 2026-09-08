@@ -355,8 +355,8 @@ baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NE
 
 $ npx eslint <the six changed and new files>                    ; exit=0
 
-$ node $SC/probe-em.mjs src/domain/prose/wiringCensus.js
-src/domain/prose/wiringCensus.js	literals:297	em:0	bang:0     (was literals:177 em:0 bang:0)
+$ node $SC/probe-em.mjs src/domain/prose/wiringCensus.js     # at the COMMITTED tip
+src/domain/prose/wiringCensus.js	literals:299	em:0	bang:0     (was literals:177 em:0 bang:0)
 
 $ npx vitest run tests/copy/voiceMechanics.test.js              ; exit=1 (the banked two, unchanged)
 src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
@@ -364,9 +364,9 @@ src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → cur
       Tests  1 failed | 18 passed (19)
 ```
 
-The strict ratchet lands EXACTLY on its ceiling, which is the second half of the proof: 120
-new effective lines of `src/domain/prose/wiringCensus.js` added zero strict errors and moved
-no other domain file's count.
+The strict ratchet lands EXACTLY on its ceiling, which is the second half of the proof: 184
+new effective lines of `src/domain/prose/wiringCensus.js` (561 -> 745, against a hard ceiling
+of 800) added zero strict errors and moved no other domain file's count.
 
 ### 10. THE FOCUSED TALLIES
 
@@ -388,3 +388,96 @@ inside the ten-module island, and the fence arm proves by BYTES that no `src/` f
 names any of the ten. `wiringCensus.js` still reads no file: the producer index, the composer
 sources, the mount registry and the manifest all arrive from the script or the test helper.
 `docs/content/wiring-census.json` is DATA under `docs/`, reachable by no import.
+
+
+### 12. ONE WHOLE `tests/lint` RUN — ZERO REDS
+
+```
+$ npx vitest run tests/lint                                     ; exit=0
+ Test Files  146 passed (146)
+      Tests  2364 passed (2364)
+   Duration  101.72s (transform 16.38s, setup 4.31s, import 136.57s, tests 490.51s, environment 15ms)
+```
+
+146 files and **2,364** assertions against car 13's **2,343** — exactly the walker's twenty-one
+new arms and nothing else. Gate check in its own shell call before the run: `HOLD-VITEST`
+absent, split-pattern runner count **0**.
+
+### 13. THE SWEEP'S OWN PATTERNS, PROVED TO MUTATE
+
+⚠ Car 11's lesson taken seriously: *a plant whose regex no longer matches mutates nothing,
+reports CLEAR, and dies in silence while still claiming to strike the read.* So each of the
+three plants was extracted FROM THE SWEEP SCRIPT and run standalone against the COMMITTED
+bytes (md5 `7dbb934312331dc79af56bf71405013b`):
+
+```
+--- plant #86   MUTATED: isCovertPath's two-line body becomes `return false;`
+--- plant #87   MUTATED: `return 'default';` becomes `return 'measured';`
+--- plant #88   MUTATED: the attach filter becomes `.filter(() => true)`
+RESTORED cmp-identical ; git status --porcelain | wc -l => 0
+```
+
+Each anchor matches EXACTLY ONCE in the committed file, measured by `grep -cF`.
+
+### 14. CAR 0b — THE LIGHTING CENSUS, REFROZEN BY ITS OWN RITUAL (sha `dd540445c`)
+
+```
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 0 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at eb73679a6 by MEASURE car 0 (Opus 5):
+  files 2551 -> 2551, parked 375 -> 375, credited 2176 -> 2176,
+  titles 23779 -> 23800, suiteTitles 6361 -> 6368.
+  This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+      Tests  34 passed (34)
+```
+
+Car 0 adds no test FILE and no new suite, so three of the tuple's five figures do not move.
+The 21 new `test()` titles and 7 new `describe()` titles are all in a file the census already
+credits.
+
+### 15. THE TIP, AND WHAT A SUCCESSOR CONTINUES FROM
+
+```
+$ git log --oneline -3
+dd540445c MEASURE car 0b: the lighting census refrozen at car 0's tip — titles 23779 -> 23800 …
+eb73679a6 MEASURE car 0: the census extended — six new columns per row, the census committed …
+8522a17b2 Register (capsule car): the base-state capsule regenerates at the §914 tip …
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+$ git rev-list --count 8522a17b2..HEAD
+       2
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+```
+
+**The three commands that recompute this car's state:**
+`npx vitest run tests/lint/proseWiringCensus.walker.test.js` (47) ·
+`node scripts/wiring-census.mjs --check` · `node scripts/wiring-census.mjs --print`.
+The RATE corpus re-runs with
+`node scripts/prose-rate-corpus.mjs --out <file>` (26 s for both weightings) and is folded
+back with `node scripts/wiring-census.mjs --rates <file>`.
+
+**OWED, and none of it this car's by the brief:**
+1. **The base-state capsule and the census-totals register are STALE by 21 runtime tests and
+   one doc file.** Car 13's capsule was stamped at `runtimeTests 32173`; this car adds 21
+   assertions and one `docs/content/` file. Both are the chair's register cars and neither is
+   in this car's fence list, so neither was touched. Nothing gates on them today (the whole
+   `tests/lint` run is green), and a chair's capsule car will see `totalTests`, `totalFiles`,
+   `stampedAt` and `lightingCensus` move.
+2. **THE CHAIR'S TWO FLOORS.** The co-occurrence floor (SITTING §L.4, owed since car 8) and
+   the departure line (ARCH E-F14a). This car prints the distributions at the N ARCH states
+   them at and sets neither. The usable pair distribution is the one to set the floor from.
+3. **THE RELATION-TABLE JOIN (F1).** Until the producer-token and caller-path vocabularies are
+   joined, ARCH §4.5's `consequence` and `tension` seats have no licensed row and car 5's arm
+   A2 will refuse every joint. This is a wiring car, chair-decidable, zero text — and it is
+   larger than §3.6's "the wave's first cost is resolution".
+4. **THE `reads` GRAIN (refusal 4).** Function-wide by the brief's ruling; branch-wide is
+   available on the 185 rows carrying a predicate and would lower the k = 0 count. A chair
+   ruling with a measured cost.
+5. **`docs/content/wiring-census.json` IS 1,660,000 B.** Committed data under `docs/`,
+   reachable by no import and in no bundle. Named here because it is the largest single file
+   this lane has added and a successor should know it is deliberate.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
