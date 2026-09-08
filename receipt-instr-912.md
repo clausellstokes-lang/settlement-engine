@@ -2504,3 +2504,279 @@ src/domain/prose/wiringCensus.js	literals:177	em:0	bang:0
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: INSTR-912
+
+---
+
+## CAR 13 — the domain strict ratchet: twelve strict errors leave four island modules, and every other shell-out the base-state capsule makes is executed green
+
+Seat: Opus 5 — implementer. Dock `laneINSTR2`, over **3ccd29a29** (the census-totals register car),
+porcelain 0 at start. `$SC/HOLD-VITEST` present; this car used the exemption for two ratchet
+walkers, the seven lane suites, the E2 arm and ONE whole-`tests/lint` run. Runner count taken in
+its own shell call, **0 every time**, before every one of those runs.
+
+### 1. THE TWELVE, PER FILE — BEFORE → AFTER, WITH THE CURE NAMED
+
+`npx tsc --noEmit -p tsconfig.domain-strict.json`, the ratchet's own command, grepped to the four:
+
+```
+$ npx tsc --noEmit -p tsconfig.domain-strict.json   # BEFORE (at 3ccd29a29)
+src/domain/institutions/institutionTable.js(466,30): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/domain/prose/entryWalker.js(255,9): error TS7034: Variable 'claimed' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/domain/prose/entryWalker.js(259,9): error TS7005: Variable 'claimed' implicitly has an 'any[]' type.
+src/domain/prose/entryWalker.js(391,43): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/domain/prose/entryWalker.js(393,29): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/domain/prose/grammarWalker.js(438,20): error TS7006: Parameter 'wall' implicitly has an 'any' type.
+src/domain/prose/grammarWalker.js(439,17): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/domain/prose/grammarWalker.js(789,21): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/domain/prose/grammarWalker.js(835,29): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/domain/prose/grammarWalker.js(844,9): error TS2322: Type 'boolean | undefined' is not assignable to type 'boolean'.
+src/domain/prose/grammarWalker.js(987,40): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/domain/prose/moveGrammar.js(235,58): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Readonly<{ good: "OBJECT"; ... }>'.
+
+$ npx tsc --noEmit -p tsconfig.domain-strict.json   # AFTER, same grep
+(no matches — the four files emit nothing)
+```
+
+| file | strict errors before → after | the cure |
+|---|---:|---|
+| `src/domain/institutions/institutionTable.js` | 1 → **0** | `/** @type {ReadonlyArray<{type?: string}>} */` on the `impairments` local. `Array.isArray` is declared `arg is any[]`, so the guard WIDENED the row's own `InstitutionRow.impairments` shape and the `.map((i) => …)` below inherited the hole. Naming the shape the typedef already declares is the file's own idiom (§ the `TableSettlement` docblock: *"WRITTEN OUT RATHER THAN CAST TO `any`"*). |
+| `src/domain/prose/entryWalker.js` | 4 → **0** | two annotations plus one get-or-create. `/** @type {string[]} */` on `claimed` (TS7034 + TS7005 are one hole read twice); `/** @type {Map<string, Array<{phrase: string, noun: string, clause: string}>>} */` on `byNoun` — the same inline shape the sibling `out` two lines above already carries — and, because a typed `Map#get` answers `T \| undefined`, `byNoun.get(key).push(b)` becomes `const list = byNoun.get(key) \|\| []; list.push(b); byNoun.set(key, list);`. |
+| `src/domain/prose/grammarWalker.js` | 6 → **0** | four annotations and one narrowing. `/** @param {{scope: ReadonlyArray<string>} \| undefined} wall */` + `Boolean(wall && …)` on `inScope`, `/** @param {number} id */` on `wall`, `/** @param {{entry: GrammarEntry}} r */` on `isTagged`, `/** @type {Map<string, GrammarEntry[]>} */` on `cells` (the `\|\| new Map()` fallback was an untyped `Map<any, any>`, and that is where BOTH `(v) => …` holes at 835 and 987 came from), and `uniformSegments: f.uniformSegments === true`. |
+| `src/domain/prose/moveGrammar.js` | 1 → **0** | `@type {Readonly<Record<string, string>>}` on `SLOT_MOVE`, folded into its existing one-line docblock. The estate's own annotation idiom (`institutionTable.js:208` carries the identical type). |
+
+⛔ **NO BASELINE WAS WIDENED AND NO HOLE WAS OPENED.** `scripts/.domain-strict-baseline.json` is
+byte-untouched (the four files still have NO entry, so their ceiling is still 0); no `--update` was
+run on either ratchet; and **no `any`, `*`, `@ts-ignore` or `@ts-expect-error` was added anywhere** —
+so the strict debt did not move into the cast ratchet. Measured with the cast ratchet's OWN counter
+(`countText` from `scripts/count-domain-any.mjs`), old blob vs working tree, per file:
+
+```
+src/domain/institutions/institutionTable.js before {"any":0,"suppress":0} -> after {"any":0,"suppress":0}
+src/domain/prose/entryWalker.js            before {"any":0,"suppress":0} -> after {"any":0,"suppress":0}
+src/domain/prose/grammarWalker.js          before {"any":0,"suppress":0} -> after {"any":0,"suppress":0}
+src/domain/prose/moveGrammar.js            before {"any":0,"suppress":0} -> after {"any":0,"suppress":0}
+```
+
+The four are absent from the counter's 169-file debt set at both ends; the domain total reads
+**2245** against the pinned ceiling **2287**.
+
+### 2. THE ARM
+
+```
+$ node scripts/check-domain-strict.mjs                          ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+```
+
+The total lands **exactly on the ceiling**, which is the second half of the proof: 12 errors left the
+island and the script prints no "fewer errors than baseline" line, so no OTHER domain file gained or
+lost one under the JSDoc that was added (the script's own docblock warns that annotations narrow
+inferred types into files nobody opened — here they did not).
+
+```
+$ npx vitest run tests/lint/domainStrictBaseline.test.js        ; exit=0
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+
+$ npx vitest run tests/lint/domainAnyCastBaseline.test.js       ; exit=0
+ Test Files  1 passed (1)
+      Tests  19 passed (19)
+
+$ node scripts/check-full-typecheck.mjs                         ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+```
+
+The typecheck ratchet is AT its ceiling, 173/173 — car 12's figure, unmoved.
+
+### 3. THREE OF THE EIGHT EDITS TOUCH RUNTIME BYTES, AND EACH IS PROVED, NOT ARGUED
+
+Five edits are pure JSDoc. Three are not, and a "types only, no behaviour change" claim about them
+would be a claim without a receipt. So the four island modules were loaded TWICE in one process —
+once from the working tree, once from their `HEAD` blobs restored into a copy of `src/` — and run
+against the SHIPPED corpus through the lane's own loader (`tests/helpers/dossierCorpus.js`):
+
+```
+$ node $SC/car13-probe-ab.mjs                                        ; exit=0
+corpus: R1 2266 entries / 708 pools · R2 468 entries
+uniformGrammar-boolean pools whose sibling flag was checked: 708
+comparisons: 42433 · differences: 0
+```
+
+What the 42,433 comparisons cover: `walkGrammar` over R1 and R2 in three ceiling/band configurations;
+`classifyMoves` and `armF` over every entry of both registers under six register names (`dossier`,
+`herald`, `chronicle`, `estate`, `*`, `''` — the wall-6 scope gate read every way it can be read);
+`armE` per pool over all 708; `bandReadings` and `walkEntry` over every entry under BOTH grounds
+(`TABLE_EMPTY` and `TABLE_FULL` — `armC1`'s `byNoun` is inside `walkEntry`). Old and new agree on
+every one.
+
+The three, with the ground each rests on:
+
+1. **`byNoun` get-or-create** (`entryWalker.js:392`). Re-`set`ting a key a `Map` already holds does
+   not move it, so the noun order `for (const [noun, list] of byNoun)` walks is still first-arrival
+   order. Proved by the 2,734 `walkEntry` pairs above, whose C1 findings carry that order.
+2. **`Boolean(wall && …)`** (`grammarWalker.js:441`). `find` answers `wall | undefined`; the only
+   call is `inScope(wall(6))`, and wall 6 exists in the frozen `WALLS` roster (asserted in the
+   probe). The added guard therefore never fires, and where it would, it answers what the file's own
+   wall-10 gate at line 833 already answers with `?.`: no such wall is not in scope.
+3. **`f.uniformSegments === true`** (`grammarWalker.js:854`). `armE` writes `uniformGrammar` and
+   `uniformSegments` into ONE object literal, and its only other exit (a pool of one) writes no
+   figures at all — so the guard `typeof f.uniformGrammar === 'boolean'` already implies the sibling
+   is a boolean. **Executed on all 708 shipped pools: 708 of 708 pass the pairing invariant, 0
+   orphans.** The narrowing is a narrowing, not a coercion; no row's value changes and no row is
+   dropped. ⭐ Recorded for veto: the alternative cure was to widen the guard to test both flags,
+   which WOULD drop a row in the impossible branch. This one cannot.
+
+### 4. EVERY SHELL-OUT THE CAPSULE MAKES — the full list, each executed once
+
+`grep -n 'shellOut(\|ratchetPair(' scripts/base-state-capsule.mjs` finds the boundary and its two
+ratchet callers; the call sites are `readAll` (six) plus `dirtyMeasuredPaths` (one). **Seven, not
+one**, and all seven are green:
+
+| capsule row | argv | exit | last line |
+|---|---|---:|---|
+| `stampedAt` | `git rev-parse --short=8 HEAD` | 0 | `3ccd29a2` |
+| `stampedDate` | `git show -s --format=%cs HEAD` | 0 | `2026-09-08` |
+| `osrFindings` | `node scripts/check-observed-shape-readers.mjs` | 0 | `observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.` (the parsed line; the script's own last line is the CR-OSR-FREEZE-7 cohort note) |
+| `typecheckRatchet` | `node scripts/check-full-typecheck.mjs` | 0 | `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` |
+| `strictDomainRatchet` | `node scripts/check-domain-strict.mjs` | 0 | `[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).` |
+| `validatePackets` | `node scripts/implementation-packets.mjs validate` | 0 | `[implementation-packets] valid: 182 packets (0 READY)` |
+| `dirty-tree` | `git status --porcelain` | 0 | the four modified island modules, and nothing else |
+
+**No red among them, so nothing was cured here that was not the island's and nothing pre-existing was
+touched.**
+
+### 5. THE SEVEN LANE TALLIES — focused files, one at a time, every one EQUAL to car 12's
+
+| file | this car | car 12 |
+|---|---|---|
+| `tests/lint/institutionTable.walker.test.js` | **19 passed (19)** | 19 |
+| `tests/lint/proseWiringCensus.walker.test.js` | **26 passed (26)** | 26 |
+| `tests/lint/proseEntryContradiction.walker.test.js` | **27 passed (27)** | 27 |
+| `tests/lint/proseMoveGrammar.walker.test.js` | **50 passed (50)** | 50 |
+| `tests/lint/proseMeasures.walker.test.js` | **14 passed (14)** | 14 |
+| `tests/lint/proseRegisterLoaders.walker.test.js` | **13 passed (13)** | 13 |
+| `tests/lint/mutationCoverageManifest.test.js` | **10 passed (10)** | 10 |
+
+No test title was added, removed or renamed anywhere in this car, so the lighting census cannot have
+moved and no register `--write` was performed (there is no car 13b).
+
+### 6. THE E2 ARM AND THE TWO DRIES
+
+```
+$ npx vitest run tests/copy/voiceMechanics.test.js              ; exit=1 (the banked two, as at car 12)
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+AssertionError:
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+ Test Files  1 failed (1)
+      Tests  1 failed | 18 passed (19)
+```
+
+**Exactly the two banked files and no island module.** Every byte this car added is a COMMENT or a
+JSDoc tag; the ratchet reads string literals and template quasis only, and no literal in the four
+files was opened, closed, split or merged.
+
+```
+$ node scripts/check-observed-shape-readers.mjs                 ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+
+$ node $SC/prose-numerics-rekey.mjs $SC/laneINSTR2              ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+```
+
+Both EXACT against car 12's tip. No `--write` on any register.
+
+```
+$ npx eslint <the four changed files>                           ; exit=0
+(no output)
+```
+
+Run because three of the four files are long (`entryWalker` 1044 raw, `grammarWalker` 1035) and the
+domain `max-lines` ceiling of 800 counts EFFECTIVE lines: the 32 added lines are 27 comment lines and
+5 code lines, and the rule is green on all four.
+
+### 7. ONE WHOLE `tests/lint` RUN — ZERO REDS
+
+```
+$ npx vitest run tests/lint                                     ; exit=0
+ Test Files  146 passed (146)
+      Tests  2343 passed (2343)
+   Duration  118.71s (transform 26.00s, setup 5.09s, import 163.25s, tests 551.82s, environment 22ms)
+```
+
+146/146 and 2343/2343 — identical to car 12's whole run. The DOOR 3 timing arm did not appear, so no
+lone re-run was needed.
+
+### 8. THE CAPSULE REGENERATES — §914's refusal is discharged
+
+Run ONCE, on the clean tree at this car's tip (the capsule's own dirt gate refuses otherwise, which
+is why it runs after the commit and not before):
+
+```
+$ sh scripts/gate-mutex.sh --run -- node scripts/base-state-capsule.mjs --runtime-tests=32173   ; exit=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 105 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at 3c640f58 (20 figures).
+```
+
+Compare `$SC/capsule-914.log`, where the same command died inside `ratchetPair('strictDomainRatchet', …)`.
+
+The written artifact was then **restored, so the chair's own capsule car writes it**:
+
+```
+$ git checkout -- docs/implementation/BASE_STATE.json    ; exit=0
+$ git status --porcelain | wc -l
+0
+```
+
+What the discarded regeneration would have moved, recorded because the chair's car will see the same
+four rows: `stampedAt` `c54cf238` → `3c640f58`, `stampedDate` `2026-09-07` → `2026-09-08`, `method`
+(it carries the stamp), `lightingCensus` `2545/373/2172/23707/6342` → `2551/375/2176/23779/6361`, and
+`runtimeTests` `32024` → `32173` — i.e. the thirteen cars' census, **not this car's**. Every ratchet
+row it read was UNCHANGED: `osrFindings` 1972, `typecheckRatchet` `173/173`, `strictDomainRatchet`
+`1120/1120`, `validatePackets` `182 packets / 0 READY`.
+
+### 9. THE TIP
+
+```
+$ git rev-parse HEAD
+3c640f58f57ac9b1a042c9c2aafabc237e9b35e8
+$ git log --oneline -2
+3c640f58f INSTR-912 car 13: the domain strict ratchet — twelve strict errors leave four island modules, cured by the estate's own annotation idiom with zero new casts and zero baseline movement
+3ccd29a29 Register (last car): the census totals re-freeze at the composed tip — totalTests 32024 -> 32173, totalFiles 2491 -> 2497, entries 3
+$ git status --porcelain | wc -l
+0
+$ git status --porcelain --untracked-files=all | wc -l
+0
+$ git diff HEAD --stat | wc -l
+0
+$ git rev-list --count f3ab08f51..HEAD
+16
+```
+
+Four files moved and nothing else: the four island `src/` modules named above. No test file, no
+baseline, no register, no script, no manifest, no document. 32 lines added, 5 removed; 27 of the 32
+are comment or JSDoc lines.
+
+### 10. WHAT IS OWED
+
+1. **Three runtime-touching cures, recorded for veto** (§3). Each is proved identical on the shipped
+   corpus, and each has a strictly-worse alternative I did not take: widening the `uniformSegments`
+   guard (drops a row), leaving `byNoun` untyped (the hole the ratchet named), or a `keyof typeof`
+   cast on the `SLOT_MOVE` read (denies that an unnamed slot is a real input).
+2. **`SLOT_MOVE`'s declared type widens its VALUES from the literal union to `string`.** Nothing else
+   in the estate reads it (`git grep SLOT_MOVE` finds its definition and the one read at line 242),
+   so nothing depended on the literals. If a later car wants the literal union back, the honest
+   shape is a `@typedef` for the move vocabulary, not a removal of this annotation.
+3. **The strict ratchet now sits EXACTLY on its ceiling (1120/1120), with no headroom.** The next
+   domain file that lands with a strict error reds the capsule the same way §914 did. That is the
+   ratchet working, and it is worth the successor knowing before it writes a new module.
+4. **Car 12's four owed items still stand** and were not this car's: the chair's veto on car 12's
+   red-3 rephrasing; the two banked E2 files (`labelBands.js` em 5, `generalStateProse.js` em 3),
+   both live product prose and therefore a golden-shift decision; the golden master's 525 drift; and
+   enforcement-claims' six banked naked claims.
+5. Probes kept for the successor: `$SC/car13-probe-ab.mjs` (the A/B identity proof — it restores the
+   four modules' `HEAD` blobs into a copy of `src/` and runs both graphs over the shipped corpus),
+   `$SC/car13-apply-strict.py` (the eight edits, each refusing unless its anchor matches exactly
+   once), `$SC/car13-testslint.log`.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: INSTR-912
