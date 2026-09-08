@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:42:45 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:48:45 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -14,12 +14,15 @@
 | ? | other |  | result | 0 | FOLD.md | — | 03:24:25 |
 | ? | other |  | result | 0 | — | — | 03:10:11 |
 | ? | other |  | result | 0 | — | — | 03:11:16 |
+| ? | other |  | in-flight | 0 | — | — | 03:47:19 |
 | ? | other |  | result | 0 | _c-dump.mjs, design-C-authoring.md | — | 03:34:17 |
 | ? | other |  | result | 0 | read-specs.md | — | 03:07:39 |
 | ? | other |  | result | 0 | design-A-data.md | — | 03:32:44 |
-| ? | other |  | in-flight | 0 | design-B-render.md | — | 03:42:18 |
+| ? | other |  | in-flight | 0 | — | — | 03:47:49 |
+| ? | other |  | result | 0 | design-B-render.md | — | 03:42:54 |
 | ? | other |  | result | 0 | read-facts.md | — | 03:12:05 |
 | ? | other |  | result | 0 | — | — | 03:08:57 |
+| ? | other |  | in-flight | 0 | — | — | 03:47:45 |
 | ? | other |  | result | 0 | — | — | 03:08:35 |
 | ? | other |  | result | 0 | — | — | 03:11:00 |
 
