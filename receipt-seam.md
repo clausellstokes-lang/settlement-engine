@@ -1200,3 +1200,449 @@ pre-ruled census re-take, porcelain 0 and runners 0.
 
 ## CAR 3h — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 14:4x)
 Re-measured at `c45a46a78` (porcelain 0, runners 0): census `--check` green; DS-DEF-2 26 rows / 26 RESOLVED / 22 on rung `table` with k = 2; RESOLVED 340 · unresolved 368 (CONFIRMED from the committed JSON); manifest `14 passed`, the drift lists empty (re-run); `src/data/` untouched between 6d94a41ad and c45a46a78 (CONFIRMED). Rulings: (1) `internalRowPoolKey` left on rung 1 with `reads ["court","prison"]` — ACCEPTED as measured (tabling it would trade the block's one named fact pair for a synthetic label; the walker pins the asymmetry); (2) the `docblock` evidence kind minting an alias-draft row from two English words on a comment line — a FINDING: SITTING §P.2-27 (comments and prose strings are never evidence) is EXTENDED to the docblock kind; the cure (the kind withdrawn from `draft.rows`, the count asserted after) is chartered into car 5b, which owns the census module; until then `draft.rows.length` 33 is a comment-movable figure and the walker's assertion on it is a known soft spot; (3) the island fence reading the census module's bare name in raw text (comments included) — cured at cause by the lane; ACCEPTED; (4) SIZING INPUT recorded for the sitting agenda §F: 29 mounted blocks carry 226 rung-4 pools (DS-WAR-2 24 · DS-FTH-3 23 · DS-DEF-6 18 · DS-POW-7 18); 13 of DS-DEF-6's 18 are `DEF6_C3_BLOCKED_POOLS` (no key function produces them, no table can reach them) — a desk's wiring car is priced AFTER subtracting unproducible pools; `supplyLogisticsPoolKey` (DS-DEF-6, 5 pools) is the same shape as this car's and is its own car. Seat: Fable 5.1 — validated.
+
+---
+
+## CAR 4 — M2, THE SCHEMA: KEYS ADDED ONLY (ARCH §12 row 4)
+
+Seat: Opus 5 — implementer. Chair: Fable 5.1. Dock `$SC/laneSEAM`, base `c45a46a78`.
+**STATUS: LANDED** as three commits. Porcelain 0, runners 0, `node_modules` symlinks intact,
+no build. Every figure below is the tail of a command that ran.
+
+| # | sha | what |
+|---|---|---|
+| 4 | `380bdb94b` | the schema: `poolMeta`, `vid`, the three leaves, the shift register, the grammar |
+| 4b | `cb8311228` | the lighting census re-freezes at 4's tip, by its ritual |
+| 4c | `802589718` | the composer's shipped-corpus arm amended at cause |
+
+### 4.0 ARRIVAL — executed
+
+```
+$ git -C $SC/laneSEAM log --oneline -1
+c45a46a78 SEAM car 3h: the defense desk's key tables exposed — DS-DEF-2 leaves the dark set
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ ls $SC/HOLD-VITEST                       => No such file or directory
+```
+
+⚠ **A MEASUREMENT HAZARD THE LANE HIT ONCE AND RECORDS SO THE NEXT LANE DOES NOT.** The runner
+check MUST run in its own shell, and the reason is mechanical rather than stylistic: `pgrep -fl`
+prints the WHOLE command line of each match, and a shell whose own command line contains the
+literal `vitest` (any heredoc carrying `from 'vitest'`) and a NEWLINE is then counted once per
+LINE by `wc -l`. One idle shell read as **36 runners**. Every run below was gated by the check
+in its own shell.
+
+### 4.1 ⭐⭐ THE ACCEPTANCE — 0 ADDED / 0 REMOVED / 0 CHANGED, AND ONLY TWO KEYS ANYWHERE
+
+The key-by-key differ (`$SC/seam4-keyab.mjs`, `$SC/seam4-diff.mjs`; lane instruments, never
+committed) snapshots every (leaf, block, pool) with its ordered `{angle, marks, text, slots}`
+list — the four keys that existed before this car — and diffs the base against the tip.
+
+```
+$ node $SC/seam4-keyab.mjs . before.json        # at c45a46a78, before any edit
+[seam4-keyab] 7 leaves · 786 pools · 2734 variants
+$ node $SC/seam4-diff.mjs before.json after.json
+[leaf-diff] 0 ADDED / 0 REMOVED / 0 CHANGED pools
+[leaf-diff] VARIANT key-set moves: 17 distinct shapes, 708 pools, EVERY ONE of the form
+    angle[,marks],slots,text  ->  angle[,marks],slots,text,vid
+[leaf-diff] BLOCK key-set moves: 68 blocks, every one of the form
+    [arms,]pools[,sectionTarget],slots,title  ->  [arms,]poolMeta,pools[,sectionTarget],slots,title
+```
+
+The only variant key added anywhere is `vid`; the only block key added anywhere is `poolMeta`.
+No pool's text, marks, slots or angle moved, and no pool was added, removed or renamed.
+
+**THE MANIFEST, BYTE-IDENTICAL:**
+
+```
+$ npx vitest run tests/property/dossierProseManifest.test.js                          ; exit=0
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 10 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · … above 0 because anchoring removed an earlier variant: 217
+ Test Files  1 passed (1)      Tests  14 passed (14)
+```
+
+Every printed figure is byte-equal to car 3a's and to every stage of 3b–3h. The DRIFT arm's
+three lists are empty — rows added `[]`, removed `[]`, moved `[]`.
+
+**THE CLASSIFIER, ON A REAL BASE TREE.** A base dock was made by the estate's own ritual
+(`sh $SC/mkdock.sh seam4base c45a46a78`; `links=453 porcelain=0`) so the per-cell tables are
+two genuine runs and not one run compared with itself:
+
+```
+$ (in seam4base) node scripts/prose-manifest-cells.mjs --out $SC/seam4-cells-base.json
+  towns 525 · rows 1050 · cells 73284 · 10 s
+$ (in laneSEAM)  node scripts/prose-manifest-cells.mjs --out $SC/seam4-cells-tip.json
+  towns 525 · rows 1050 · cells 73284 · 10 s
+$ node scripts/prose-manifest-diff.mjs base tip                                       ; exit=0
+PROSE MANIFEST DIFF · 73284 cells on the tip side
+  REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0 · UNCHANGED 73284 (towns 525)
+  ADDED 0 · REMOVED 0 · (index-only moves with no reader-visible change: 0)
+```
+
+**THE ANNEX, NO SENTENCE TOUCHED:**
+
+```
+$ git diff --stat -- docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+ 1 file changed, 42 insertions(+)
+$ git diff --word-diff=porcelain -- <the annex> | grep "^-" | grep -v "^--- a/" | wc -l
+       0
+$ git diff -U0 -- <the annex> | grep "^@@"
+@@ -6313,0 +6314,42 @@         # ONE hunk, at the end of the file
+```
+
+Zero removed word tokens: the annex gained `## §7b THE STATE CONNECTIVES` and nothing else.
+
+### 4.2 THE SIX ITEMS, EACH AS AN EXECUTED ARM
+
+**1. THE PROJECTOR LEARNS §2.5's LINES, AND EVERY REFUSAL OF THAT TABLE IS THROWN BY NAME.**
+`scripts/lib/dossier-annex-grammar.mjs` (new) carries `ROLE` · `READS` · `NARROWS` · `RELATION`
+· `FORM` · `MOVE` · `ATTACH` · `EXPLAINS`/`SPINES`/`COVERS`, the `[grammar: Vn]` routing, the
+`[face]` sub-rows, the vid numbering and §7b, with **every refusal row of §2.5 as a thrown error
+and a plant that proves it** in the contract test. The vocabularies are the architecture's own,
+not invented here: the six modifier moves are ARCH line 59's `{PRESENT, CONSEQUENCE, OBJECT,
+INSTITUTION, GEOGRAPHY, TRADITION}`; `TURN_KEY_REGISTRY` is §5.3's five tiers with both tier-2
+forms present and REFUSED by name so the refusal answers with its reason.
+
+The annex authors **no per-pool typed line today**, exactly as the brief rules: `poolMeta` is
+emitted from the projector's own knowledge, and the parser's rules are exercised by fixture.
+
+**2. `vid` ON EVERY STATE VARIANT** — the annex row number at the freeze, taken from the
+parser's own `index` (the numbering guard already makes it strictly ascending within a pool).
+2,266 vids over 708 pools. A renumbering that would move one is a projector error (`vidsOf`),
+plant-convicted five ways: a moved vid, a trimmed pool, a count above a pin, a backwards
+numbering and a duplicate row number.
+
+⚠ **THE ONE PROPERTY THE DRIFT INSTRUMENT DEPENDS ON, ASSERTED RATHER THAN HOPED.**
+`tests/helpers/dossierManifest.js` records a cell's `vid` as the variant's **0-based position**
+and says in its own header that car 4's real vid "must reproduce this ordering". The two are
+DIFFERENT INTEGERS on purpose — a vid is the annex row number, which starts at 1 on a pool with
+no canonical row, and **700+ of 708 pools have them differ** — so the contract test asserts the
+RANK ORDER agrees, and a later car that switches the recorder to read the leaf finds the
+disagreement there rather than in a re-recorded fixture.
+
+**3. THE THREE LEAVES, AT THEIR FLOORS.**
+
+| leaf | measured | floor / OWED |
+|---|---|---|
+| `dossierConnectives.generated.js` | `consequence.clause` **0** · `tension.sentence` **0** · `contrast.sentence` **1** (`['']`) · `addition.sentence` **1** (`['']`) | the first two stand at length 0 against a floor of **3**, printed OWED in the leaf header and in §7b |
+| `proseNorms.generated.js` | **271** pools carry a bit; **72** read 1 at the 1,000 bp departure line | the other **437** pools never fired on the RATE corpus, so no bit is measurable: ABSENT, not zero |
+| `dossierRelations.generated.js` | **165** pairs, 165 rows, every one `a→b`, every one `consequence`, sources a/b/c | source (d) empty; **3** ratified aliases; the join **0 of 165** |
+
+⚠ **THE BRIEF'S "70 of 267 fired pools read 1" IS THE CAR-0 PRINT; THIS TIP MEASURES 72 of 271.**
+`rate.departureReport` reads `{lineBp: 1000, uncommon: 72, common: 199}` and 271 census rows
+carry a `rateBp`. The leaf is projected from the committed census, so the leaf's figures are
+that census's and the brief's are car 0's earlier one. Both are recorded; the measurement wins.
+
+⛔ **THE ALIASES CARRY THE THREE RATIFIED ROWS, NOT AN EMPTY MAP, AND THE COMMITTED CENSUS IS
+WHY.** The brief's item 3 says "an EMPTY `aliases` map"; `ratifiedAliases.ruling` in the census
+at this tip reads, verbatim, *"SITTING §P.2-27: the three `identifier` rows are RATIFIED as
+aliases … The relations LEAF is SEAM car 4 and carries exactly these rows."* The sitting has
+ratified, so the leaf carries `cause:occupation → war`, `economicGates.military →
+settlement.defenseProfile` and `system:food_security → eco`, each `evidence: identifier`, and
+**the join is asserted anyway**: with the aliases applied, 0 of 165 rows resolve BOTH endpoints
+to a field a desk reads (10 resolve one, which is the arm's non-vacuity control). Car 0's F1
+holds on the shipped leaf.
+
+**4. THE SHIFT REGISTER** — `docs/content/prose-shift-register.json`, **14 mechanisms** and
+**3 named NON-mechanisms**, each with its pin, door, shift class and declared-row idiom:
+
+```
+[shift-register] 14 mechanisms, 3 named NOT mechanisms, measured at 708 pools / 2266 variants
+  variant-count-per-pool     integer+digest        shift 3 (car 9b)
+  face-count-per-variant     integer+integer+digest shift 1 (cars 8a-8n)
+  vids                       digest                none — a renumbering is REFUSED
+  pool-key-rename            digest                none
+  connective-list-length     map                   a declared row of its own
+  norm-bit                   integer×3+digest      a declared row, after a chair finding
+  attach-set                 integer+digest        a declared ADDITIVE row per block
+  draw-formula               source                shift 1 (§13 row 22, once)
+  face-draw-key              source                shift 1
+  connective-draw-key        source                with the first list longer than one
+  comparator-and-band-rule   source                a declared row
+  fact-and-position-budget   map                   a declared row
+  registry-id                integer               shift 4 (car 11)
+  instance-key               integer               shift 2 (car 10)
+```
+
+**A PIN IS A MEASUREMENT, NOT A PROMISE.** The contract test RECOMPUTES every one from the
+leaves — integers and maps compared directly, digests re-derived over the named material, the
+five `source` pins asserted as substrings of the kernel and the composer — so a mechanism that
+moves without its row moving reds naming the mechanism. `readsCount` is named in
+`notMechanisms` by name and with its reason, as the ADDENDUM requires.
+
+**5. THE CONTRACT-TEST ARMS.** 57 assertions added to
+`tests/data/dossierStateProseProjection.contract.test.js` (19 → 57 tests, 6 new describes).
+Every one of the brief's ten named plants is executed: an appended variant (the register's
+variant-count reconstruction), a fifth face, a renumbering, a fifth relation key, a numeric pool
+key `^\d+$`, an unmarked variant on a covert-source pool, a spanning attach set, a
+proper-slot-initial face, a digit in §7b, a longer connective list. Beside them: a READS the
+census does not list, two READS on a modifier, a NARROWS with no ruling id, a `consequence` with
+no row, a `consequence` whose only row runs modifier→spine, a FORM disagreeing with its seat, a
+`fragment` while S2 is unsigned, `MOVE: ABSENCE`, `MOVE: HISTORY`, an ATTACH the block does not
+hold, an ATTACH whose spine tests the field, an ATTACH on an index-paired block, an ATTACH
+naming the same object class, a turn with no EXPLAINS, an id outside the registry, a tier-2 id,
+a fragment face opening on a comma, a fragment face opening on a clause word, and a census count
+that moves without a regeneration. Each carries a CLEAN CONTROL beside it.
+
+**⭐ `readsCount`, THE ADDENDUM'S RULING, EXECUTED AS A JOIN BETWEEN TWO COMMITTED FILES:**
+
+```
+present 340 · absent 368        # exactly the census's RESOLVED / WIRING-UNRESOLVED split
+```
+
+The projector READS it from `docs/content/wiring-census.json` and never derives it; the contract
+test asserts it equals `reads.length` for every pool with a reading and is ABSENT for every pool
+without, and a fabricated census whose one pool's reads grew names exactly that pool.
+
+**⭐⭐ THE SHA INTERLOCK.** The projection now refuses to run when the census's own stamp is
+stale against a composer that has since moved — ARCH §239's third clause, which no car had built.
+The reader is INJECTED so the plant drives the refusal without moving a committed byte: the
+honest reader passes, a reader that answers with one moved stamped file throws `is STALE against
+1 of its own stamped files`, and an empty or wrong-schema census throws by its own name.
+
+**6. PROOF.** §4.4 below.
+
+### 4.3 THE 68 STATE-KEY TRANSCRIPTIONS — 16 AGREE, 94 PRINTED, NOTHING RESOLVED
+
+```
+[state-key] 68 STATE-KEY paragraphs read · 46 name a field their own header declares ·
+  110 tokens · 16 AGREE with the branch grain and are transcribed · 23 name a field in a
+  block the census recovered NOTHING for · 71 name a field the census does not read on a
+  block it did resolve. Nothing is written: a transcription the census does not carry
+  would move a census row.
+```
+
+⛔ **THE TOKEN SET IS ANCHORED ON THE BLOCK HEADER, AND THAT IS NOT A CONVENIENCE.** The first
+cut took every backticked token of the STATE-KEY paragraph and reported **481 disagreements of
+506** — because a STATE-KEY line backticks its ENUM VALUES too (`road` · `river` · `stocked` ·
+`thin` · `shortage`). Those are not fields, and counting them manufactures a roster no author
+ever wrote. A token is field-shaped only where the block's own `###` header declares it, which
+is where a block names its fields. The corrected roster is 110 tokens over 46 blocks.
+
+**NOTHING IS WRITTEN, AND THAT IS THE REFUSAL.** Transcribing a token the census does not carry
+would move a census ROW, which is the chair's door. The 94 disagreements are printed by name in
+the arm's output — they are the WIRING debt seen from the AUTHOR's side, a reading car 9 wants
+and not a defect of this car.
+
+### 4.4 THE GATES AT THE TIP `802589718`
+
+```
+$ npx vitest run tests/lint                                                          ; exit=1
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > … a freshly re-minted baseline has NO drift
+ Test Files  1 failed | 147 passed (148)
+      Tests  1 failed | 2401 passed (2402)
+
+$ npx vitest run tests/domain tests/data                                             ; exit=0
+ Test Files  1003 passed (1003)
+      Tests  16780 passed (16780)
+
+$ node scripts/generate-dossier-state-prose.mjs --check                              ; exit=0
+[dossier-prose] verified 68 state blocks / 2266 variants across 6 desks, 78 causal families / 468 variants
+$ node scripts/wiring-census.mjs --check                                             ; exit=0
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ node scripts/check-domain-strict.mjs                                               ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                              ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                                      ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ npx eslint <the eight changed js/mjs files>                                        ; exit=0
+✖ 0 problems
+$ node <espree literal probe> <the three new leaves + two regenerated>
+dossierConnectives.generated.js  literals:10    em:0 bang:0
+proseNorms.generated.js          literals:542   em:0 bang:0
+dossierRelations.generated.js    literals:1179  em:0 bang:0
+general.generated.js             literals:6736  em:0 bang:0
+defense.generated.js             literals:3879  em:0 bang:0
+$ grep -c toFixed <all ten leaves + the grammar lib>                                 => 0 everywhere
+$ npx vitest run tests/copy/voiceMechanics.test.js                                   ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+```
+
+**THE STRICT RATCHET SITS EXACTLY ON ITS CEILING, 1120 / 1120.** The voice E2 red is the two
+banked files at the counts car 3a measured; this car adds nothing to it (the grammar lib is
+under `scripts/`, outside that scan, and carries 21 em dashes in its own prose there).
+
+### 4.5 THE BYTE RATCHET — EVERY LEAF'S DELTA AGAINST ITS CEILING
+
+```
+leaf                              raw     from    delta   ceiling  headroom   gzip / ceiling
+defense.generated.js           154593   111827   +42766    488168    333575   23039 / 108482
+economy.generated.js           126213    90212   +36001    393810    267597   19870 /  87513
+general.generated.js           249940   182518   +67422    796761    546821   34607 / 177058
+power.generated.js             109224    81802   +27422    357097    247873   16464 /  79355
+stressors.generated.js          83961    59298   +24663    258858    174897   14038 /  57524
+warFaith.generated.js          160797   115753   +45044    505306    344509   24038 / 112290
+dossierCausalProse.generated.js 210260  210260       +0    210260         0   36700 /  36700
+dossierConnectives.generated.js   1365     NEW        —      2122       757     795 /   1236
+proseNorms.generated.js          19938     NEW        —     30990     11052    4315 /   6887
+dossierRelations.generated.js    28236     NEW        —     43888     15652    2661 /   9753
+```
+
+**NO CEILING IS CROSSED AND NONE IS RAISED.** The six state leaves grow **+243,318 B** (641,410
+→ 884,728, a factor of 1.379) against a §10 ceiling of 2,800,000 for the six together; the
+smallest headroom is stressors' 174,897 B. ARCH §10 priced a render-only `poolMeta {role}` at
++51,994 B; the FULL render half measures +243,318 B, which is 8.7 % of the ceiling. Six declared
+rows land in `scripts/.prose-byte-baseline.json`, each chaining from its genesis measurement.
+
+⛔ **THE CAUSAL LEAF TAKES NEITHER `poolMeta` NOR `vid`, AND THAT IS FORCED RATHER THAN TIDY.**
+Its `ceilingRaw` EQUALS its genesis bytes (`_causalLeafGround`: §11 refuses wording sets on the
+causal register in wave one, §12 car 13 is owner-gated, and the leaf reaches no emitted chunk),
+so a `vid` on each of its 468 variants would have breached a ceiling that is itself a ruling.
+It comes out of the regeneration byte-identical, +0.
+
+⚠ **AND THE BYTE RATCHET CAUGHT THE LANE'S OWN ARITHMETIC ON ITS FIRST RUN, BY NAME.** The three
+new leaves take ARCH §10's "the three leaves ≈ 77 KB either way" as their total, apportioned by
+genesis share exactly as the state leaves are (the three rounded shares sum to 77,000 with no
+remainder). Deriving each gzip ceiling as `ceilingRaw ÷ 4.5` gave the connectives leaf **472 B
+against a measured 795 B — a ceiling already breached at the leaf's birth**, and the arm said so:
+
+```
++   "src/data/dossierConnectives.generated.js: gzip 795 over ceiling 472",
+```
+
+§10's 4.5 : 1 is a CORPUS ratio and gzip's fixed header and Huffman tables cost the same on 1,365
+bytes as on 250,000 — that leaf compresses at 1.72 : 1. The rule is now the LARGER of §10's ratio
+and the leaf's own measured one, machine-checked in the same arm, and the six state leaves are
+unaffected because §10's ratio is the larger term on every one of them.
+
+⭐ **A MEASURED FINDING FOR THE SITTING, RECORDED RATHER THAN SOLVED BY A LARGER NUMBER.** The
+NORM leaf's growth law is one row per firing pool at ≈ 73.6 B, so its 30,990 B ceiling is reached
+at ≈ **421 rows**. It holds 271 today and ARCH §6.6 sizes up to 174 new modifier pools, which
+lands near 445. §10's three-leaf estimate will likely need re-pricing during car 9 — an ARCH §10
+amendment and an owner row (§13 row 17), not a lane's edit. **The lane set the ceiling AT §10's
+own number rather than above it on purpose:** a lane that quietly gave itself headroom would have
+amended the architecture by arithmetic.
+
+### 4.6 ⛔ THE REGISTER DOOR THIS CAR REFUSES, WITH ITS MEASUREMENT
+
+`tests/lint/observedShapeReaders.walker.test.js` reds on ONE arm, and
+`node scripts/check-observed-shape-readers.mjs` exits 1 with the same reading:
+
+```
+observed-shape execution INPUT changed since the last re-freeze (9 path(s):
+  src/data/dossierConnectives.generated.js, src/data/dossierRelations.generated.js,
+  src/data/dossierStateProse/{defense,economy,general,power,stressors,warFaith}.generated.js,
+  src/data/proseNorms.generated.js).
+These are generated/data inputs, not detector sources, so the shrink-only --write re-freeze
+may absorb them; the instrument is NOT darkened by them.
+```
+
+**43 of the walker's 44 arms are green, INCLUDING the inventory arms**, so the finding set itself
+has not moved — only the recorded sha of nine data inputs, which is the unavoidable consequence
+of regenerating the corpus. `drift.detectorSources` is EMPTY: no detector moved.
+
+**WHY IT IS NOT CURED HERE.** The brief's fence: *"register doors: the lighting census re-freeze
+by its ritual and the wiring census under the generalised stamp rule ONLY … every other register
+`--write` is REFUSED with the measurement."* The OSR re-freeze is a `--write`. **The chair's cure
+is one command** on a clean committed tree, and the drift is nine data paths and no detector.
+
+⚠ **AND A STRUCTURAL FINDING BESIDE IT, worth a line in the ledger.** The OSR baseline records the
+GENERATED PROSE LEAVES as execution inputs, so **every car that regenerates the corpus reds this
+arm** — cars 8a–8n and 9 will each hit it, once per sub-car. Whether a generated data leaf should
+be a recorded input of that instrument at all is the chair's question, not this lane's; recorded,
+not cured.
+
+### 4.7 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **The grammar is a LIB (`scripts/lib/dossier-annex-grammar.mjs`), not a block inside the
+   projector.** The projector writes the corpus at import time, so a test cannot import it to
+   drive one refusal without regenerating 884 KB of leaves — and a plant nobody re-runs is a
+   plant nobody has measured. `scripts/lib/dossier-slot-shapes.mjs` already carries exactly this
+   shape for the SHAPE gate, imported by the projector AND by the contract test. **Veto shape:**
+   fold the rules back into the projector and make its side effects conditional on being the
+   entry module, which is a larger change to a file the whole corpus passes through.
+
+2. **The relations leaf carries the THREE RATIFIED ALIASES, against the brief's "EMPTY".** The
+   committed census's own `ratifiedAliases.ruling` says the sitting ratified them and names this
+   leaf as their home. The join is asserted **0** regardless, so nothing the brief's acceptance
+   rests on is weakened. **Veto shape:** ship `DOSSIER_RELATION_ALIASES` empty and leave the
+   three in the census only.
+
+3. **The causal register takes neither `poolMeta` nor `vid`** (§4.5 above). **Veto shape:** give
+   it `vid` and raise its ceiling, which is an owner row.
+
+4. **`readsCount` sits between `vids` and `relation` in the emitted key order**, i.e. inside the
+   spine half rather than after `attach`. ARCH §2.3 does not order a field it does not have.
+
+5. **The `## §7b` heading closes the block region in the STATE annex only.** A global "`## §`
+   closes the region" rule would have changed the CAUSAL parse, whose families are followed by
+   `## §2`…`## §7` headings; measured before the change, the state annex carries no `## §`
+   heading after its first block, so the terminator is provably a no-op on today's parse and the
+   0-CHANGED leaf diff is its proof.
+
+6. **The composer's shipped-corpus arm was AMENDED, not deleted** (car 4c). Its claim ("because
+   no block carries `poolMeta`") is exactly what this car falsifies; the property cars 3b–3g rest
+   on is that every pool declares `role: 'spine'`, which the arm now asserts — a stronger claim
+   than the absence it replaced. `tests/domain/composeStateProse.test.js` is not in the brief's
+   change-only list, but it is a test of the composer rather than the composer, and leaving a
+   false arm red at the tip was the alternative.
+
+7. **The gzip-ceiling rule for a small leaf takes the larger of two ratios** (§4.5). **Veto
+   shape:** give the connectives leaf no gzip ceiling at all, which is a hole in the roster.
+
+8. **The OSR re-freeze is REFUSED** (§4.6), with its measurement.
+
+9. **One commit for items 1–5, not five.** They are byte-inseparable: a commit landing the
+   projector without the leaves leaves `--check` red, and one landing the leaves without the
+   baseline rows leaves the byte ratchet red. The brief's own commit line names `car 4 (+ 4b)`.
+
+### 4.8 ⚠ A SCHEMA ROW STILL OPEN, MEASURED AND HANDED OVER
+
+`seatFor` (`composeStateProse.js:534`) reads `spineMeta.reads[0]` as the spine's PRIMARY FIELD,
+and `PoolMeta` carries no `reads` — ARCH §16 keeps the paths in the census. The car-3a ADDENDUM
+ruled `readsCount` for the FACT BUDGET, which this car lands; the PRIMARY FIELD is a different
+seam and is still absent. Today it costs nothing measurable — `primary` reads `''`, `edgesFrom`
+answers `[]`, and every candidate seats as an `addition`, which is exactly the state the shipped
+leaf measures (join 0 of 165) — so the degradation is INTO the correct answer. It stops being
+free the day an alias makes the first `consequence` authorable. **The chair's row:** either
+`poolMeta` gains a `primaryField` string, or the relation licence is asked at a layer that can
+see the census.
+
+### 4.9 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The relations leaf carries the three ratified aliases against the brief's "EMPTY" | that the census's own ruling supersedes the brief line, and that the join is still asserted 0 | §4.2 item 3 | ⭐⭐ the brief said empty |
+| The OSR re-freeze REFUSED, and it will recur at every corpus car | who takes it, and whether a generated leaf should be an OSR input at all | §4.6 | ⭐⭐ one red stands in `tests/lint` |
+| The three new leaves' ceilings set AT §10's 77 KB, with the norm leaf's law measured to breach it near 421 rows | that a lane setting a new ceiling at the architecture's own number, and printing the finding, is right | §4.5 | ⭐⭐ car 9 pays it |
+| The gzip-ceiling rule for a small leaf | that max(§10's ratio, the leaf's own) is a cure at cause and not a dodge | §4.5 | ⭐ |
+| The grammar lib as a second scripts/lib file | that a fixture-drivable rule beats a rule only the projector can run | §4.7 item 1 | ⭐ |
+| The causal register excluded from `vid` | that a ceiling equal to genesis is a refusal and not an oversight | §4.5 | ⭐ |
+| `composeStateProse.test.js` amended by this car | that amending a falsified arm beats leaving it red | §4.7 item 6 | ⭐ |
+| The primary-field seam still open | whether `poolMeta` gains `primaryField` or the licence moves layer | §4.8 | ⭐ car 5 or 8a |
+| The STATE-KEY roster's header anchor | that an enum value backticked in prose is not a field | §4.3 | ⭐ |
+
+### 4.10 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+node scripts/generate-dossier-state-prose.mjs --check       # the projection, byte-compared
+npx vitest run tests/data/dossierStateProseProjection.contract.test.js   # 57 passed
+npx vitest run tests/property/dossierProseManifest.test.js   # drift [] — the acceptance
+node scripts/prose-manifest-diff.mjs <base cells> <tip cells>  # 73284 UNCHANGED
+npx vitest run tests/lint                                    # 1 red: the OSR door, §4.6
+node scripts/wiring-census.mjs --check                       # green: no census row moved
+node scripts/check-domain-strict.mjs                         # 1120 / 1120
+```
+
+```
+$ git -C $SC/laneSEAM log --oneline -3
+802589718 SEAM car 4c: the composer's shipped-corpus arm is amended at cause
+cb8311228 SEAM car 4b: the lighting census re-freezes at the schema's tip, by its own ritual
+380bdb94b SEAM car 4: the schema, keys added only — poolMeta, vid, the three leaves at their
+          floors and the SHIFT REGISTER
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+```
+
+**STATUS: CAR 4, 4b AND 4c LANDED at `802589718`.**
+
+## CAR 4 — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 15:1x)
+Re-measured at `802589718` (porcelain 0, runners 0): the annex word-diff against c45a46a78 removes 0 tokens (CONFIRMED); nine leaf files changed (17,976 insertions / 2,266 deletions — the old variant lines re-emitted with `vid`); manifest + projection contract `2 files / 71 tests` green (re-run); the OSR dry read names the 9 generated inputs and says itself "may absorb them; the instrument is NOT darkened" (CONFIRMED). Rulings: (1) the OSR re-frozen by the CHAIR as a register car on top of 4c (a shrink-only `--write` on generated inputs; the finding count must not move — printed in the commit body); for later SEAM cars that regenerate the leaves (4d, 5, 5b) the lane does the same re-freeze itself, printing the finding count before/after — ruled a plain re-freeze on generated inputs like the lighting census; the STANDING finding (the OSR baseline records generated prose leaves as inputs, so every corpus car reds it) goes to the SEAM skeptic's arms-fences lens (e) and the chair rules at the fold whether generated leaves leave the OSR input set; (2) the three ratified aliases in the leaf (the brief said EMPTY; the census's own ruling text says the three) — ACCEPTED, the census is the truth; (3) the causal leaf takes no `poolMeta`/`vid` (its ceiling equals its genesis bytes) — ACCEPTED, recorded as a byte-ratchet consequence, not a design choice: the causal register's schema waits on the owner's wire-or-retire (§13 row 14); (4) the connectives gzip ceiling rule (the larger of §10's ratio and the leaf's own) — ACCEPTED; (5) `seatFor` reading `reads[0]` — the open schema row is CHARTERED as car 4d (`briefs/brief-SEAM-car4d.md`): the licence projected where the census is visible; (6) the runner-count hazard saved to memory. Seat: Fable 5.1 — validated.
