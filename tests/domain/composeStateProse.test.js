@@ -871,9 +871,20 @@ describe('the composer — turns (ARCH §4.2 step 1, §5.3)', () => {
     expect(composeFixture(elsewhere, { turns: [{ key: 'turn' }] }).pieces[0].role).toBe('spine');
   });
 
-  it('⛔ NO TURN CAN SEAT ON THE SHIPPED CORPUS, because no block carries `poolMeta`', () => {
-    const withMeta = Object.entries(CORPUS).filter(([, block]) => block.poolMeta);
-    expect(withMeta.map(([blockId]) => blockId), 'a shipped block carrying pool metadata')
+  it('⛔ NO TURN CAN SEAT ON THE SHIPPED CORPUS, because every pool is a SPINE', () => {
+    // ⚠ AMENDED BY SEAM CAR 4, AND THE AMENDMENT IS THE POINT. This arm read "because no
+    // block carries `poolMeta`" — true until car 4 landed the RENDER half, and a claim that
+    // would have gone on being asserted about a corpus that had moved under it. The property
+    // cars 3b–3g rest on is not the ABSENCE of metadata; it is that every shipped pool
+    // declares `role: 'spine'`, which is what makes every candidate and every turn offered
+    // against the corpus read as a spine and be refused. So the arm now asserts the metadata
+    // is THERE and says spine, which is a stronger claim than the absence it replaced: the
+    // day a pool is authored `modifier` or `turn`, this reds instead of going quietly true.
+    const roles = new Set(Object.values(CORPUS)
+      .flatMap((block) => Object.values(block.poolMeta || {})).map((meta) => meta.role));
+    expect([...roles], 'a shipped pool declares a role other than spine').toEqual(['spine']);
+    const withoutMeta = Object.entries(CORPUS).filter(([, block]) => !block.poolMeta);
+    expect(withoutMeta.map(([blockId]) => blockId), 'a shipped block carrying NO pool metadata')
       .toEqual([]);
     // So every candidate and every turn offered against the shipped corpus reads as a spine
     // and is refused, which is what makes cars 3b–3g byte-identical whatever a desk offers.
