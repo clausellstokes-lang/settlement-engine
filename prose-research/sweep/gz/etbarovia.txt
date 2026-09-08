@@ -1,5 +1,0 @@
-Checking your browser before accessing
-
- Please wait for up to 5 seconds...
-
- Please check that your browser supports JavaScript and that it is enabled in the browser settings.

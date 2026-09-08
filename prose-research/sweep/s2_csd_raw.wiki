@@ -1,7 +1,0 @@
-#Redirect [[Wikipedia:Speedy deletion]]
-
-{{Redirect category shell|
-{{R to project namespace}}
-{{R from shortcut}}
-{{R from move}}
-}}
