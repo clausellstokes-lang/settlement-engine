@@ -71,29 +71,52 @@ import { CONTRAST_SHAPES } from './entryLexicons.js';
  *   notExecutable: GrammarFinding[]}} GrammarReport */
 
 /**
+ * @typedef {object} CeilingShape
+ * @property {number} slack the additive term of the share ceiling (the chair's recommended
+ *   value is a tenth)
+ * @property {number} ratioCap the multiplicative cap, as a multiple of uniform (the chair's
+ *   is one and a half — the 13:22 bar)
+ * @property {number} runFloor the floor under arm B1's slack
+ * @property {number} successorCeiling arm B3's per-row successor ceiling
+ */
+
+/**
  * THE CEILING. `null` means NOT-EXECUTABLE — reported, never scored (arm H, extended by
  * Part B §10 item 9).
+ *
+ * ⭐ THE SHAPE IS AN ARGUMENT AND HAS NO DEFAULT, and the estate's tuning register is what
+ * made this file honour its own header. A first cut wrote `min(1/n + 0.10, 1.5/n)` with the
+ * numbers inline; `tests/lint/tuningRegister.walker.test.js` counted four unregistered dials
+ * in a module whose docblock says every number is the OWNER'S. A default would be the same
+ * fault with a longer fuse — a recommendation made law by shipping — so there is none, and a
+ * caller that supplies no shape gets `null`.
  * @param {number} n the ADMISSIBLE order count for the unit
+ * @param {CeilingShape} [shape]
  * @returns {number|null}
  */
-export function ceilingFor(n) {
+export function ceilingFor(n, shape) {
   if (!Number.isFinite(n) || n <= 2) return null;
-  return Math.min(1 / n + 0.10, 1.5 / n);
+  if (!shape || !Number.isFinite(shape.slack) || !Number.isFinite(shape.ratioCap)) return null;
+  return Math.min(1 / n + shape.slack, shape.ratioCap / n);
 }
 
 /**
- * ARM B1's slack: `1/n + 2 SE`, floored at `1/n + 0.05` (Part B §10 item 8 — never a fixed
- * 0.05 on a forty-line sample). SE is the binomial standard error of the run rate at the
- * fair-draw probability `1/n` over `samples` consecutive pairs.
+ * ARM B1's slack: `1/n + 2 SE`, floored at `1/n + shape.runFloor` (Part B §10 item 8 — never
+ * a fixed slack on a forty-line sample). SE is the binomial standard error of the run rate at
+ * the fair-draw probability `1/n` over `samples` consecutive pairs.
  * @param {number} n
  * @param {number} samples
+ * @param {CeilingShape} [shape]
  * @returns {number|null}
  */
-export function runCeilingFor(n, samples) {
+export function runCeilingFor(n, samples, shape) {
   if (!Number.isFinite(n) || n <= 1 || !Number.isFinite(samples) || samples <= 0) return null;
+  if (!shape || !Number.isFinite(shape.runFloor)) return null;
   const p = 1 / n;
   const se = Math.sqrt((p * (1 - p)) / samples);
-  return p + Math.max(2 * se, 0.05);
+  // `2` standard errors is the interval's own definition, not a dial: a two-SE band is what
+  // "outside the fair draw's ordinary range" MEANS. The FLOOR under it is the tunable part.
+  return p + Math.max(2 * se, shape.runFloor);
 }
 
 /**
@@ -157,16 +180,17 @@ export function segmentCount(text) {
  * @param {ReadonlyArray<string>} orders the order id realised by each unit, in any order
  * @param {string} unit
  * @param {number} [admissible] the admissible order count; defaults to the realised count
+ * @param {CeilingShape} [shape] absent ⇒ NOT-EXECUTABLE, never a pass
  * @returns {GrammarReport}
  */
-export function armA(orders, unit, admissible) {
+export function armA(orders, unit, admissible, shape) {
   /** @type {GrammarReport} */
   const out = {
     figures: {}, fails: [], withheld: [], notes: [], notExecutable: [],
   };
   const counts = tally(orders);
   const n = Number.isFinite(admissible) ? Number(admissible) : counts.size;
-  const ceiling = ceilingFor(n);
+  const ceiling = ceilingFor(n, shape);
   const histogram = [...counts].sort((a, b) => b[1] - a[1])
     .map(([id, k]) => ({ order: id, share: k / orders.length, count: k }));
   out.figures = { unit, n, ceiling, total: orders.length, histogram };
@@ -174,7 +198,9 @@ export function armA(orders, unit, admissible) {
     out.notExecutable.push({
       arm: 'A',
       unit,
-      detail: `n = ${n} admissible orders — at n ≤ 2 a share ceiling scores a coin flip, so the arm declares itself not-executable`,
+      detail: shape
+        ? `n = ${n} admissible orders — at n ≤ 2 a share ceiling scores a coin flip, so the arm declares itself not-executable`
+        : 'no ceiling shape supplied — the share ceiling is the owner\'s number and this walker bakes none',
       value: n,
     });
     return out;
@@ -200,9 +226,10 @@ export function armA(orders, unit, admissible) {
  * @param {ReadonlyArray<string>} sequence order ids in reading order
  * @param {string} unit
  * @param {number} [admissible]
+ * @param {CeilingShape} [shape] absent ⇒ the ceilings are NOT-EXECUTABLE
  * @returns {GrammarReport}
  */
-export function armsB(sequence, unit, admissible) {
+export function armsB(sequence, unit, admissible, shape) {
   /** @type {GrammarReport} */
   const out = {
     figures: {}, fails: [], withheld: [], notes: [], notExecutable: [],
@@ -228,7 +255,7 @@ export function armsB(sequence, unit, admissible) {
     if (row) row.set(sequence[i], (row.get(sequence[i]) || 0) + 1);
   }
   const runRate = repeats / pairs;
-  const runCeiling = runCeilingFor(n, pairs);
+  const runCeiling = runCeilingFor(n, pairs, shape);
   // B2's adjacency is at the CHANCE FLOOR, never zero (Part B §10 item 8; SITTING's own
   // control 5: a fair draw must PASS, and a fair draw repeats at 1/n).
   const chanceFloor = 1 / n;
@@ -252,7 +279,7 @@ export function armsB(sequence, unit, admissible) {
       ceiling: runCeiling,
     });
   }
-  if (runRate > chanceFloor * 2 && runRate <= (runCeiling ?? Infinity)) {
+  if (runRate > chanceFloor + chanceFloor && runRate <= (runCeiling ?? Infinity)) {
     out.notes.push({
       arm: 'B2',
       unit,
@@ -264,13 +291,14 @@ export function armsB(sequence, unit, admissible) {
   // a metronome at a longer period. The successor distribution is where it shows.
   if (n >= 3) {
     for (const row of rows) {
-      if (row.topShare > 0.50 && row.total >= 3) {
+      if (shape && Number.isFinite(shape.successorCeiling)
+        && row.topShare > shape.successorCeiling && row.total >= 3) {
         out.fails.push({
           arm: 'B3',
           unit,
-          detail: `after ${row.from}, ${row.topSuccessor} follows ${(row.topShare * 100).toFixed(1)}% of ${row.total} times (ceiling 50% at n ≥ 3); row entropy ${row.entropy.toFixed(2)} bits`,
+          detail: `after ${row.from}, ${row.topSuccessor} follows ${(row.topShare * 100).toFixed(1)}% of ${row.total} times (ceiling ${(shape.successorCeiling * 100).toFixed(0)}% at n ≥ 3); row entropy ${row.entropy.toFixed(2)} bits`,
           value: row.topShare,
-          ceiling: 0.50,
+          ceiling: shape.successorCeiling,
         });
       }
     }
@@ -552,6 +580,8 @@ export function tenGaps(entry) {
  *   composer can fill
  * @property {string} [register]
  * @property {Record<string, number>} [admissible] unit → the admissible order count
+ * @property {CeilingShape} [ceilings] the owner's ceiling shape; ABSENT ⇒ arms A and B report
+ *   NOT-EXECUTABLE rather than scoring against a number this walker invented
  */
 
 /**
@@ -594,7 +624,7 @@ export function walkGrammar(input) {
 
   // ARM A over the register, at level 1.
   const orders = perEntry.map((r) => r.orderId || r.moves.join('→'));
-  absorb(armA(orders, `${register} · level 1`, input.admissible?.[`${register} · level 1`]));
+  absorb(armA(orders, `${register} · level 1`, input.admissible?.[`${register} · level 1`], input.ceilings));
   out.figures.level1 = {
     orderHistogram: [...tally(orders)].sort((a, b) => b[1] - a[1]),
     // The INDEX-0 histogram: a default that is one order everywhere is fault 9 by the back
@@ -611,7 +641,8 @@ export function walkGrammar(input) {
   for (const [poolId, pool] of cells) {
     const e = armE(pool, poolId);
     absorb(e);
-    const f = /** @type {any} */ (e.figures);
+    const f = /** @type {{uniformGrammar?: boolean, uniformSegments?: boolean,
+     *   dupOpeners?: ReadonlyArray<[string, number]>}} */ (e.figures);
     if (typeof f.uniformGrammar === 'boolean') {
       poolRows.push({
         pool: poolId,
@@ -652,7 +683,9 @@ export function walkGrammar(input) {
       // The resolver returns `{slots, conditional, sites}` and a fixture hands a bare array;
       // both are read, because an instrument that only accepts its own shape makes a fixture
       // impossible to write by hand.
-      const composed = Array.isArray(row) ? row : /** @type {any} */ (row)?.slots;
+      const composed = Array.isArray(row)
+        ? row
+        : /** @type {{slots?: ReadonlyArray<string>}|undefined} */ (row)?.slots;
       if (!Array.isArray(composed)) {
         out.notExecutable.push({
           arm: 'D',
@@ -681,7 +714,7 @@ export function walkGrammar(input) {
       detail: 'no simulated reading sequence supplied — the consecutive-pair statistics are taken over a READING, never over a pool dump (§0\'s caveat), so the arm reports not-executable rather than measuring authoring order',
     });
   } else {
-    for (const seq of input.sequences) absorb(armsB(seq.orders, seq.unit, input.admissible?.[seq.unit]));
+    for (const seq of input.sequences) absorb(armsB(seq.orders, seq.unit, input.admissible?.[seq.unit], input.ceilings));
   }
 
   // THE THREE NUMBERS, per pool.

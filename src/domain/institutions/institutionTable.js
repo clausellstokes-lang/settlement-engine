@@ -38,7 +38,6 @@
 import { liveInstitutions } from './institutionRoster.js';
 import { institutionFoundingOf } from '../institutionFounding.js';
 import { governingFactionOf } from '../rulingPower.js';
-import { quantityWords } from '../worldPulse/demographicsHerald.js';
 
 /**
  * The ELEVEN columns. `closed` is not among them: it is a PROPERTY of each column, per
@@ -81,6 +80,38 @@ const RUIN_STATUS = new Set(['ruined', 'removed', 'destroyed', 'remnant']);
 const text = (v) => (typeof v === 'string' ? v.trim() : '');
 
 /**
+ * The loosely-typed settlement shape this projection reads. It names ONLY the fields the
+ * table consults, which is also the honest documentation of its reach: a reader can see the
+ * whole input surface without opening `settlement.schema.js`.
+ *
+ * ⭐ WRITTEN OUT RATHER THAN CAST TO `any`, because the estate's any-cast ratchet allows a new
+ * file exactly ZERO holes and says so in its own words: *fix the types, do not widen*. Eleven
+ * casts became this typedef, and the typedef is more useful than the casts were.
+ * @typedef {object} TableSettlement
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {number} [population]
+ * @property {ReadonlyArray<InstitutionRow>} [institutions]
+ * @property {ReadonlyArray<{role?: string, title?: string}>} [npcs]
+ * @property {{governingName?: string, factions?: ReadonlyArray<{faction?: string,
+ *   isGoverning?: boolean}>}} [powerStructure]
+ * @property {Record<string, ReadonlyArray<{name?: string, institution?: string,
+ *   desc?: string}>>} [availableServices]
+ * @property {ReadonlyArray<unknown>} [services]
+ */
+
+/**
+ * One roster row, as the table reads it.
+ * @typedef {object} InstitutionRow
+ * @property {string} [name]
+ * @property {string} [catalogId]
+ * @property {string} [category]
+ * @property {string} [status]
+ * @property {boolean} [_worldPulseInactive]
+ * @property {ReadonlyArray<{type?: string}>} [impairments]
+ */
+
+/**
  * @typedef {object} TableColumn
  * @property {boolean} closed
  * @property {ReadonlyArray<string>} values
@@ -106,7 +137,7 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
  * INSTITUTION NAME it belongs to — 702 rows over twelve settlements, 697 of which name a live
  * roster row. A table built on the schema's field would have reported every duty column empty
  * and been believed.
- * @param {{availableServices?: unknown}} settlement
+ * @param {TableSettlement} settlement
  * @returns {Array<{name: string, institution: string, desc: string}>}
  */
 export function instantiatedServices(settlement) {
@@ -114,7 +145,7 @@ export function instantiatedServices(settlement) {
   if (!bag || typeof bag !== 'object') return [];
   /** @type {Array<{name: string, institution: string, desc: string}>} */
   const out = [];
-  for (const value of Object.values(/** @type {Record<string, unknown>} */ (bag))) {
+  for (const value of Object.values(bag)) {
     if (!Array.isArray(value)) continue;
     for (const row of value) {
       const name = text(row?.name);
@@ -132,7 +163,7 @@ export function instantiatedServices(settlement) {
  * per faction by its own header), so a town has offices the roster does not name. That is
  * not a gap to be filled; it is what makes the column open, and it is why "the only person
  * the bailiff does not count" is refused twice over.
- * @param {{npcs?: unknown, powerStructure?: unknown}} settlement
+ * @param {TableSettlement} settlement
  * @returns {string[]}
  */
 export function officesOf(settlement) {
@@ -145,27 +176,42 @@ export function officesOf(settlement) {
     if (role) offices.add(role);
     if (title) offices.add(title);
   }
-  const governing = governingFactionOf(/** @type {any} */ (settlement));
-  const seat = text(governing?.faction) || text(/** @type {any} */ (settlement)?.powerStructure?.governingName);
+  // A CONCRETE cast, not an `any`: the ruling-power reader declares its own settlement shape
+  // (`RulingPowerSettlement`), and this table's input is a subset of it. Naming the target
+  // type is what keeps the estate's any-cast ratchet at zero for this file.
+  const governing = governingFactionOf(
+    /** @type {import('../rulingPower.js').RulingPowerSettlement} */ (
+      /** @type {unknown} */ (settlement)),
+  );
+  const seat = text(governing?.faction) || text(settlement?.powerStructure?.governingName);
   if (seat) offices.add(seat);
   return [...offices].sort();
 }
 
 /**
  * THE TABLE. One settlement in, eleven typed columns out.
- * @param {Record<string, unknown>} settlement
- * @param {{treatyTerms?: ReadonlyArray<{kind?: string, route?: string, from?: string}>}} [world]
+ * @param {TableSettlement} settlement
+ * @param {{treatyTerms?: ReadonlyArray<{kind?: string, route?: string, from?: string}>,
+ *   bandOf?: (count: number) => string}} [world]
  *   the realm-level facts a settlement does not carry: today only the treaty TOLL-EXEMPTION
- *   term family, which is the one typed exemption the world holds anywhere
+ *   term family, which is the one typed exemption the world holds anywhere — plus `bandOf`,
+ *   the CLOSED QUANTITY VOCABULARY the caller speaks counts through
  * @returns {InstitutionTable}
  */
 export function institutionTableOf(settlement, world = {}) {
-  const live = liveInstitutions(/** @type {any} */ (settlement));
-  const services = instantiatedServices(/** @type {any} */ (settlement));
-  const offices = officesOf(/** @type {any} */ (settlement));
+  const live = liveInstitutions(settlement);
+  const services = instantiatedServices(settlement);
+  const offices = officesOf(settlement);
   const dutyRows = services.filter((s) => DUTY_SERVICE_KINDS.test(s.name));
-  const population = Number(/** @type {any} */ (settlement)?.population);
-  const band = Number.isFinite(population) ? quantityWords(population) : '';
+  const population = Number(settlement?.population);
+  // ⭐ THE BAND VOCABULARY IS THE CALLER'S, NOT AN IMPORT, and the estate's tuning register is
+  // what settled it. Importing `demographicsHerald.quantityWords` moved the dependent list of
+  // a FROZEN tuning table (`HERALD_TUNING`) — a signed-digest surface no lane refreezes — for
+  // seven strings. The band belongs to the Herald; this table asks for it and says so in the
+  // column's `basis`. With no `bandOf`, `whoIsCounted` holds nothing and the column says why.
+  const band = Number.isFinite(population) && typeof world.bandOf === 'function'
+    ? String(world.bandOf(population))
+    : '';
 
   const rows = live.map((inst) => {
     const name = text(inst?.name);
@@ -184,9 +230,9 @@ export function institutionTableOf(settlement, world = {}) {
       whatItDoes: Object.freeze(own.map((s) => s.name)),
       whatItDoesNotDo: Object.freeze([
         ...(RUIN_STATUS.has(status) ? [status] : []),
-        ...(impairments.map((i) => `impaired: ${text(/** @type {any} */ (i)?.type) || 'unclassified'}`)),
+        ...(impairments.map((i) => `impaired: ${text(i?.type) || 'unclassified'}`)),
       ]),
-      provenance: institutionFoundingOf(/** @type {any} */ (inst)),
+      provenance: institutionFoundingOf(inst),
       // ⛔ NO `exempt` FIELD IS WRITTEN HERE, on this row or any other. An exemption writer is
       // a schema act and OWNER-GATED (CLERK-LAWS §4).
       whoIsExempt: null,
@@ -198,7 +244,7 @@ export function institutionTableOf(settlement, world = {}) {
     .map((t) => `toll exemption on ${String(t?.route || 'a route')}`);
 
   return Object.freeze({
-    settlement: text(/** @type {any} */ (settlement)?.id) || text(/** @type {any} */ (settlement)?.name),
+    settlement: text(settlement?.id) || text(settlement?.name),
     rows: Object.freeze(rows),
     columns: Object.freeze({
       institution: Object.freeze({
@@ -230,7 +276,7 @@ export function institutionTableOf(settlement, world = {}) {
         // enumeration; no roll of persons exists; there is nothing to close.
         closed: false,
         values: Object.freeze(band ? [band] : []),
-        basis: 'settlement.population, spoken only through QUANTITY_BANDS — a band, never a roll',
+        basis: 'settlement.population, spoken only through the caller\'s QUANTITY_BANDS reader — a band, never a roll',
       }),
       whoIsExempt: Object.freeze({
         closed: tollExemptions.length > 0,
@@ -254,7 +300,7 @@ export function institutionTableOf(settlement, world = {}) {
       }),
       provenance: Object.freeze({
         closed: true,
-        values: Object.freeze([...new Set(rows.map((r) => String(/** @type {any} */ (r.provenance)?.kind || '')).filter(Boolean))].sort()),
+        values: Object.freeze([...new Set(rows.map((r) => String(r.provenance?.kind || '')).filter(Boolean))].sort()),
         basis: 'institutionFoundingOf — FOUNDED{year,tick} | FOUNDED_UNDATED | PRE_SEED, where absence is the typed value',
       }),
       sustainer: Object.freeze({

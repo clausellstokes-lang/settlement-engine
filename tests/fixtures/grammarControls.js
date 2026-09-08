@@ -219,6 +219,27 @@ export const SYNTHETIC_BANDS = Object.freeze({
   runsOfThreeSameLengthBand: Object.freeze({ lo: 0.15, hi: 0.45 }),
 });
 
+/**
+ * THE CEILING SHAPE — the chair's recommended values, as a caller's ARGUMENT.
+ *
+ * They live in a fixture rather than in the walker for two reasons that agree. The walker's
+ * own header says every number is the OWNER'S (Q4; §912.3) and a baked default would make a
+ * recommendation law by shipping. And the estate's tuning register counts a module-level
+ * number under `src/domain` as an unregistered dial, which is the same objection with a lint
+ * rule behind it.
+ *
+ * `slack` 0.10 and `ratioCap` 1.5 give `min(1/n + 0.10, 1.5/n)` — SITTING B.3's correction to
+ * R-DA-17, which holds the ceiling at or under 1.6× uniform at every n. `runFloor` 0.05 is
+ * Part B §10 item 8's floor under `1/n + 2 SE`. `successorCeiling` 0.50 is arm B3's.
+ * @type {Readonly<{slack: number, ratioCap: number, runFloor: number, successorCeiling: number}>}
+ */
+export const CHAIR_CEILINGS = Object.freeze({
+  slack: 0.10,
+  ratioCap: 1.5,
+  runFloor: 0.05,
+  successorCeiling: 0.50,
+});
+
 /** The chair's three numbers, as VALUES a caller supplies — never as constants a walker bakes. */
 export const CHAIR_THREE_NUMBERS = Object.freeze({
   budgetShare: 1 / 3,

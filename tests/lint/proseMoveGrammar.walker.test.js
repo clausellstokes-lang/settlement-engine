@@ -35,8 +35,8 @@ import {
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../../src/domain/prose/proseFingerprint.js';
 import { typedFactsOf } from '../../src/domain/prose/entryWalker.js';
 import {
-  ARM_CONTROLS, ARM_D_CONTROL, CHAIR_THREE_NUMBERS, C_SIBLING_CONTROL, fairDraw, HAND_TAGGED,
-  OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE, SYNTHETIC_BANDS,
+  ARM_CONTROLS, ARM_D_CONTROL, CHAIR_CEILINGS, CHAIR_THREE_NUMBERS, C_SIBLING_CONTROL,
+  fairDraw, HAND_TAGGED, OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE, SYNTHETIC_BANDS,
 } from '../fixtures/grammarControls.js';
 import { loadCausalLeaf, loadStateLeaves, poolCells } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
@@ -46,32 +46,32 @@ const armsThatFailed = (r) => [...new Set(r.fails.map((f) => f.arm))].sort();
 
 describe('the ceilings — read from n, never fixed', () => {
   it('is min(1/n + 0.10, 1.5/n) for n ≥ 3 and NOT-EXECUTABLE at n ≤ 2', () => {
-    expect(ceilingFor(1)).toBeNull();
-    expect(ceilingFor(2)).toBeNull();
-    expect(ceilingFor(3)).toBeCloseTo(0.4333, 4);
-    expect(ceilingFor(4)).toBeCloseTo(0.35, 4);
-    expect(ceilingFor(5)).toBeCloseTo(0.30, 4);
+    expect(ceilingFor(1, CHAIR_CEILINGS)).toBeNull();
+    expect(ceilingFor(2, CHAIR_CEILINGS)).toBeNull();
+    expect(ceilingFor(3, CHAIR_CEILINGS)).toBeCloseTo(0.4333, 4);
+    expect(ceilingFor(4, CHAIR_CEILINGS)).toBeCloseTo(0.35, 4);
+    expect(ceilingFor(5, CHAIR_CEILINGS)).toBeCloseTo(0.30, 4);
     // At n = 6 the old fixed 0.35 is 2.1x uniform; the formula holds 1.5x.
-    expect(ceilingFor(6)).toBeCloseTo(0.25, 4);
-    expect(ceilingFor(8)).toBeCloseTo(0.1875, 4);
+    expect(ceilingFor(6, CHAIR_CEILINGS)).toBeCloseTo(0.25, 4);
+    expect(ceilingFor(8, CHAIR_CEILINGS)).toBeCloseTo(0.1875, 4);
     for (const n of [3, 4, 5, 6, 8, 12, 20]) {
-      expect(ceilingFor(n) / (1 / n)).toBeLessThanOrEqual(1.6 + 1e-9);
+      expect(ceilingFor(n, CHAIR_CEILINGS) / (1 / n)).toBeLessThanOrEqual(1.6 + 1e-9);
     }
   });
 
   it('the run ceiling is 1/n + 2 SE, floored at 1/n + 0.05, never a fixed slack', () => {
     // On a 40-line sample the SE term is large and the floor does not bind.
-    expect(runCeilingFor(4, 40)).toBeGreaterThan(0.25 + 0.05);
+    expect(runCeilingFor(4, 40, CHAIR_CEILINGS)).toBeGreaterThan(0.25 + 0.05);
     // On a large sample the floor binds instead.
-    expect(runCeilingFor(4, 100000)).toBeCloseTo(0.30, 3);
-    expect(runCeilingFor(1, 40)).toBeNull();
+    expect(runCeilingFor(4, 100000, CHAIR_CEILINGS)).toBeCloseTo(0.30, 3);
+    expect(runCeilingFor(1, 40, CHAIR_CEILINGS)).toBeNull();
   });
 });
 
 describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, as the sitting re-cut them)', () => {
   it('CONTROL 1 — the owner\'s own template reds on arm A and arm B1', () => {
-    const a = armA(OWNER_TEMPLATE_SEQUENCE, 'control-1', 4);
-    const b = armsB(OWNER_TEMPLATE_SEQUENCE, 'control-1', 4);
+    const a = armA(OWNER_TEMPLATE_SEQUENCE, 'control-1', 4, CHAIR_CEILINGS);
+    const b = armsB(OWNER_TEMPLATE_SEQUENCE, 'control-1', 4, CHAIR_CEILINGS);
     expect(a.fails.map((f) => f.arm)).toContain('A');
     expect(a.fails[0].value).toBe(1);
     expect(b.fails.map((f) => f.arm)).toContain('B1');
@@ -79,9 +79,10 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
   });
 
   it('CONTROL 2 — the rota PASSES A and B1 and REDS on B3, which is the whole point of it', () => {
-    const a = armA(ROTA_SEQUENCE, 'control-2', 4);
-    const b = armsB(ROTA_SEQUENCE, 'control-2', 4);
+    const a = armA(ROTA_SEQUENCE, 'control-2', 4, CHAIR_CEILINGS);
+    const b = armsB(ROTA_SEQUENCE, 'control-2', 4, CHAIR_CEILINGS);
     expect(a.fails).toEqual([]);
+    // anchored: the very next line asserts B3 IS in this same list, so an empty or dead list cannot pass
     expect(b.fails.map((f) => f.arm)).not.toContain('B1');
     expect(b.fails.map((f) => f.arm)).toContain('B3');
     // Every successor is deterministic, so every transition row is at 1.0 and zero bits.
@@ -110,23 +111,23 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
   it('CONTROL 5 (POSITIVE) — a fair draw over n orders passes every arm', () => {
     const n = 6;
     const sequence = fairDraw(n, 600);
-    const a = armA(sequence, 'control-5', n);
-    const b = armsB(sequence, 'control-5', n);
+    const a = armA(sequence, 'control-5', n, CHAIR_CEILINGS);
+    const b = armsB(sequence, 'control-5', n, CHAIR_CEILINGS);
     expect(a.fails).toEqual([]);
     expect(b.fails).toEqual([]);
     const top = /** @type {any[]} */ (a.figures.histogram)[0];
-    expect(top.share).toBeLessThan(ceilingFor(n));
+    expect(top.share).toBeLessThan(Number(ceilingFor(n, CHAIR_CEILINGS)));
     expect(Number(b.figures.runRate)).toBeLessThan(Number(b.figures.runCeiling));
   });
 
   it('CONTROL B2 — adjacency is judged at the CHANCE FLOOR, so a fair draw is not reported as a loop', () => {
-    const b = armsB(fairDraw(4, 400, 99), 'control-b2', 4);
+    const b = armsB(fairDraw(4, 400, 99), 'control-b2', 4, CHAIR_CEILINGS);
     expect(b.notes.filter((note) => note.arm === 'B2')).toEqual([]);
     expect(Number(b.figures.chanceFloor)).toBeCloseTo(0.25, 6);
   });
 
   it('CONTROL H — n ≤ 2 declares NOT-EXECUTABLE and never a pass', () => {
-    const a = armA(['O0', 'O1', 'O0', 'O1'], 'control-h', 2);
+    const a = armA(['O0', 'O1', 'O0', 'O1'], 'control-h', 2, CHAIR_CEILINGS);
     expect(a.fails).toEqual([]);
     expect(a.notExecutable.map((x) => x.arm)).toEqual(['A']);
     expect(armE([{ id: 'x', text: 'One variant.' }], 'pool-of-one').notExecutable).toHaveLength(1);
@@ -151,6 +152,7 @@ describe('arms F and G — one control each, every one of which must fire', () =
     // Wall 6 is the dossier's; a chrome unit of three sentences is not its business.
     const chrome = armF({ id: 'c', text: 'One. Two. Three.' }, ['PRESENT'], 'chrome');
     const dossier = armF({ id: 'd', text: 'One. Two. Three.' }, ['PRESENT'], 'dossier');
+    // anchored: the next line asserts F6 DOES fire on the identical text in the dossier register
     expect(chrome.map((f) => f.arm)).not.toContain('F6');
     expect(dossier.map((f) => f.arm)).toContain('F6');
   });

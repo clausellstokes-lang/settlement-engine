@@ -227,18 +227,6 @@ export function clauseUnits(text) {
  * @param {string} text
  * @returns {string[]}
  */
-/**
- * How far into a clause a structural marker may sit before the clause is read as having a
- * HEAD of its own. Below it the marker IS the clause's opening assertion; above it there is
- * a present-state head in front of it.
- *
- * ⚠ MEASURED. Without a head rule the classifier read "The town can outlast a hungry year
- * and has NO ANSWER AT ALL to a sick one" as ABSENCE → PRESENT, inverting the order of a
- * variant whose first assertion is plainly the capacity. Order is this walker's whole
- * subject, so an order the classifier inverts is worse than one it does not resolve.
- */
-const HEAD_WINDOW = 12;
-
 export function classifyMoves(text) {
   const units = clauseUnits(text);
   /** @type {string[]} */
@@ -259,7 +247,13 @@ export function classifyMoves(text) {
     const head = slots[0] || 'PRESENT';
     if (marks.length === 0) local.push(head);
     else {
-      if (marks[0].at > HEAD_WINDOW) local.push(head);
+      // ⚠ THE HEAD WINDOW — twelve characters, written at its use site rather than hoisted
+      // (a module-top-level named number in `src/domain` is an unregistered tuning dial by the
+      // estate's register, and this is a parser's reach, not a tuning value). MEASURED:
+      // without a head rule the classifier read "The town can outlast a hungry year and has NO
+      // ANSWER AT ALL to a sick one" as ABSENCE → PRESENT, INVERTING the order of a variant
+      // whose first assertion is plainly the capacity. Order is this walker's whole subject.
+      if (marks[0].at > 12) local.push(head);
       for (const mark of marks) local.push(mark.move);
     }
     for (const move of local) if (moves[moves.length - 1] !== move) moves.push(move);
