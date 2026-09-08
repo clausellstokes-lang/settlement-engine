@@ -2616,7 +2616,7 @@ The three, with the ground each rests on:
 2. **`Boolean(wall && …)`** (`grammarWalker.js:441`). `find` answers `wall | undefined`; the only
    call is `inScope(wall(6))`, and wall 6 exists in the frozen `WALLS` roster (asserted in the
    probe). The added guard therefore never fires, and where it would, it answers what the file's own
-   wall-10 gate at line 833 already answers with `?.`: no such wall is not in scope.
+   wall-10 gate at line 834 already answers with `?.`: no such wall is not in scope.
 3. **`f.uniformSegments === true`** (`grammarWalker.js:854`). `armE` writes `uniformGrammar` and
    `uniformSegments` into ONE object literal, and its only other exit (a pool of one) writes no
    figures at all — so the guard `typeof f.uniformGrammar === 'boolean'` already implies the sibling
