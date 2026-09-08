@@ -75,6 +75,7 @@ const ROUTED_DESKS = Object.freeze([
   { car: '3c', desk: 'economy' },
   { car: '3d', desk: 'warFaith' },
   { car: '3e', desk: 'power' },
+  { car: '3f', desk: 'defense' },
 ]);
 
 /** The desk composer each routed car wired, repo-relative. */
@@ -272,9 +273,28 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
       { rel: 'src/domain/display/stateProse/__probe.js', src: "// import { z } from './composeStateProse.js';\nexport const a = 1;" },
     ]), 'a commented-out import is not a live edge').toEqual([]);
     // THE ANTI-VACUITY FLOOR: the scanner really does find real edges in the real tree, or
-    // the empty answers above would be free.
-    expect(importersOf('src/domain/display/stateProse/stateProseKernel.js', LIVE_FILES).length,
-      'the kernel has live importers, so the scan is not simply blind').toBeGreaterThan(3);
+    // the empty answers above would be free. ⚠ THE WITNESS IS `legibilityRung`, NOT THE
+    // KERNEL, and the reason is this car: every desk imported the kernel to call
+    // `readStateProse`, and a desk routed through the composer stops doing so, so the
+    // kernel's importer count SHRINKS as 3b–3g land. A floor keyed on it would fail for the
+    // best possible reason, which makes it the wrong floor. `legibilityRung` is imported by
+    // all six desks and this car touches none of those edges.
+    expect(importersOf('src/domain/display/stateProse/legibilityRung.js', LIVE_FILES),
+      'the rung constructor has live importers, so the scan is not simply blind').toEqual([
+      'src/domain/display/stateProse/defenseStateProse.js',
+      'src/domain/display/stateProse/economyStateProse.js',
+      'src/domain/display/stateProse/generalStateProse.js',
+      'src/domain/display/stateProse/powerStateProse.js',
+      'src/domain/display/stateProse/stressorsStateProse.js',
+      'src/domain/display/stateProse/warFaithStateProse.js',
+    ]);
+    // AND THE SHRINK ITSELF, ASSERTED RATHER THAN LEFT AS A SIDE EFFECT: a routed desk no
+    // longer reaches the kernel directly. It reaches it through the composer, which is what
+    // "the desk maps state to keys and nothing else" means once the seam exists.
+    const kernelImporters = importersOf('src/domain/display/stateProse/stateProseKernel.js', LIVE_FILES);
+    expect(kernelImporters, 'the composer is a live kernel importer').toContain(COMPOSER);
+    expect(kernelImporters.filter((rel) => ROUTED_COMPOSERS.includes(rel)),
+      'a routed desk reaches the kernel through the composer, never directly').toEqual([]);
   });
 });
 

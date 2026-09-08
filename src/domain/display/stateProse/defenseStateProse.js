@@ -102,7 +102,8 @@ import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/def
 import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
 } from './dmFieldProjection.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { defenseStateProseCandidates } from './defenseStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
 /**
@@ -397,9 +398,28 @@ export function defenseThreatProse(settlement, options = {}) {
   const garrison = forces.garrison.present;
   const militia = forces.militia.present;
 
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
+  // spine key is this desk's own key function and every bag is unchanged; the candidates
+  // leaf is EMPTY until car 9 authors it, and an empty list composes to the kernel's own
+  // draw, so the manifest cannot move.
+  //
+  // ⛔ WHAT THE LEAF IS HANDED HERE, AND WHY IT IS THE SETTLEMENT. Alone among the six desks
+  // this one takes no `readings` object: every entry point takes `(settlement, options)` and
+  // derives its own locals. So the reading it holds IS the settlement, and that is what it
+  // hands over — a name it already has, never a fresh `{ dp, compound, forces }` wrapper,
+  // which would mint those names into the wiring census's producer index (car 3f-0, and the
+  // fence arm that now refuses it). ⚠ ONE FACT IS THEREBY OUT OF THE LEAF'S REACH and is
+  // recorded rather than smuggled: DS-DEF-4's `structureKey` is a CALLER'S argument, not a
+  // settlement field, so a car-9 predicate over it needs a shape this signature does not
+  // have. That is a wiring row for car 9, not a wrapper for this car.
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-DEF-2', poolKey, { ...options, slots })
+    ? composeStateProse(CORPUS, 'DS-DEF-2', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-2', settlement),
+    })
     : null);
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey ? legibilityRung('', line(poolKey), []) : null);
@@ -553,7 +573,12 @@ export function defensePostureProse(settlement, options = {}) {
   /** @param {string|null} poolKey */
   const projected = (poolKey) => {
     if (!poolKey) return null;
-    const line = readStateProse(CORPUS, 'DS-DEF-1', poolKey, { ...options, slots });
+    const line = composeStateProse(CORPUS, 'DS-DEF-1', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-1', settlement),
+    });
     return Object.freeze({
       ...projectBesideDmField(dmField, line?.text ?? null),
       rung: legibilityRung('', line, []),
@@ -660,7 +685,12 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
 
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-4', poolKey, { ...options, slots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-4', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-4', settlement),
+    }), [])
     : null);
 
   return Object.freeze({
@@ -786,7 +816,12 @@ export function defenseWallRationaleProse(settlement, options = {}) {
 
   return Object.freeze({
     rationale: poolKey
-      ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-11', poolKey, { ...options, slots }), [])
+      ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-11', {
+        ...options,
+        slots,
+        spineKey: poolKey,
+        candidates: defenseStateProseCandidates('DS-DEF-11', settlement),
+      }), [])
       : null,
   });
 }
@@ -894,7 +929,12 @@ export function defenseMilitaryStatusProse(settlement, options = {}) {
 
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-8', poolKey, { ...options, slots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-8', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-8', settlement),
+    }), [])
     : null);
 
   return Object.freeze({
@@ -1055,7 +1095,12 @@ export function defenseForcesProse(settlement, options = {}) {
 
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-5', poolKey, { ...options, slots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-5', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-5', settlement),
+    }), [])
     : null);
 
   return Object.freeze({
@@ -1088,7 +1133,12 @@ export function defenseStateProse(settlement, options = {}) {
 
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-DEF-3', poolKey, { ...options, slots })
+    ? composeStateProse(CORPUS, 'DS-DEF-3', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-3', settlement),
+    })
     : null);
 
   const orderKey = publicOrderPoolKey(label);
@@ -1272,7 +1322,12 @@ export function defenseSupportingProse(settlement, options = {}) {
 
   /** @param {string|null} poolKey */
   const rung = (poolKey) => (poolKey
-    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-6', poolKey, { ...options, slots }), [])
+    ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-6', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: defenseStateProseCandidates('DS-DEF-6', settlement),
+    }), [])
     : null);
 
   return Object.freeze({
@@ -1426,7 +1481,12 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
 
   return Object.freeze({
     arcaneReliance: poolKey
-      ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-9', poolKey, { ...options, slots }), [])
+      ? legibilityRung('', composeStateProse(CORPUS, 'DS-DEF-9', {
+        ...options,
+        slots,
+        spineKey: poolKey,
+        candidates: defenseStateProseCandidates('DS-DEF-9', settlement),
+      }), [])
       : null,
   });
 }
