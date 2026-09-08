@@ -43,4 +43,7 @@ The three identifier aliases stand (§P). The taste's blocks name their own endp
 ## E — the numbers the sitting reads from the taste, by name
 fragment length (≤ 12 words: the measured distribution and the refusals) · the tie rate · N and its confidence · the per-set authoring cost and round counts · the composed-order share outside LEVEL1 ∪ LEVEL2 · the closure of `corruption.js` against 293,079 B · the paired-town arm on the corruption fixtures · the classifier on every affected cell (ADDITIVE only) · the duplicate-unit rate on VARIETY before and after · the interested fact composed both ways with its holder (§Q.4 step 3).
 
+## F — the wiring cars, priced from 3h (chair, 14:4x)
+After car 3h, 29 mounted blocks still carry 226 rung-4 pools (DS-WAR-2 24 · DS-FTH-3 23 · DS-DEF-6 18 · DS-POW-7 18 at the top). A desk's wiring car is priced AFTER subtracting pools no key function produces (DS-DEF-6: 13 of 18 are `DEF6_C3_BLOCKED_POOLS`); 3h's shape (a key table exposed, key identity proven over 768 + 1,050 + an exhaustive input sweep, zero drift) is the unit. The sitting decides which desks get a wiring car before the REWRITE (the chair's recommendation: the two largest by REACHABLE pools, measured), and records the rest as WAVE-time debt printed per tier. Also ruled here: §P.2-27 extended to the `docblock` evidence kind (cure in 5b).
+
 Seat: Fable 5.1 — validated (a draft; binds nothing until the sitting is held)

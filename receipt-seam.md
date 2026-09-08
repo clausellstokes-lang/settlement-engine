@@ -1181,4 +1181,22 @@ node scripts/check-domain-strict.mjs                         # 1120 / 1120
 node $SC/seam3h-keyab.mjs <out.json>                         # the A/B, re-runnable at any sha
 ```
 
-**STATUS: CAR 3h LANDED.**
+```
+$ git -C $SC/laneSEAM log --oneline -2
+c45a46a78 SEAM car 3h: the defense desk's key tables exposed — DS-DEF-2 leaves the dark set,
+          zero drift
+6d94a41ad Register (SEAM, at 3g): the wiring census re-taken — twelve stamped shas moved, no row
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ ls -ld node_modules/immer node_modules/seedrandom
+lrwxr-xr-x  node_modules/immer -> /Users/cstokes/Desktop/settlement-engine/node_modules/immer
+lrwxr-xr-x  node_modules/seedrandom -> .../node_modules/seedrandom      # symlinks, never cloned
+```
+
+**STATUS: CAR 3h LANDED at `c45a46a78`.** One commit, four files, no register act beyond the
+pre-ruled census re-take, porcelain 0 and runners 0.
+
+## CAR 3h — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 14:4x)
+Re-measured at `c45a46a78` (porcelain 0, runners 0): census `--check` green; DS-DEF-2 26 rows / 26 RESOLVED / 22 on rung `table` with k = 2; RESOLVED 340 · unresolved 368 (CONFIRMED from the committed JSON); manifest `14 passed`, the drift lists empty (re-run); `src/data/` untouched between 6d94a41ad and c45a46a78 (CONFIRMED). Rulings: (1) `internalRowPoolKey` left on rung 1 with `reads ["court","prison"]` — ACCEPTED as measured (tabling it would trade the block's one named fact pair for a synthetic label; the walker pins the asymmetry); (2) the `docblock` evidence kind minting an alias-draft row from two English words on a comment line — a FINDING: SITTING §P.2-27 (comments and prose strings are never evidence) is EXTENDED to the docblock kind; the cure (the kind withdrawn from `draft.rows`, the count asserted after) is chartered into car 5b, which owns the census module; until then `draft.rows.length` 33 is a comment-movable figure and the walker's assertion on it is a known soft spot; (3) the island fence reading the census module's bare name in raw text (comments included) — cured at cause by the lane; ACCEPTED; (4) SIZING INPUT recorded for the sitting agenda §F: 29 mounted blocks carry 226 rung-4 pools (DS-WAR-2 24 · DS-FTH-3 23 · DS-DEF-6 18 · DS-POW-7 18); 13 of DS-DEF-6's 18 are `DEF6_C3_BLOCKED_POOLS` (no key function produces them, no table can reach them) — a desk's wiring car is priced AFTER subtracting unproducible pools; `supplyLogisticsPoolKey` (DS-DEF-6, 5 pools) is the same shape as this car's and is its own car. Seat: Fable 5.1 — validated.
