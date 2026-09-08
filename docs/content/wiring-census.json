@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
       "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "407b5870d3d47ecf77fc4f279853611b9bb65781c159c235989d69f20fdc5359",
+      "src/domain/display/stateProse/defenseStateProse.js": "8aeeba2e1fc32113aefaa6900056902d41feeec481ee87ac3d4d06d4c62855a2",
       "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
       "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
@@ -24,17 +24,17 @@
     "pools": 708,
     "blocks": 68,
     "variants": 2266,
-    "resolved": 318,
-    "unresolved": 390,
-    "resolvedWithPredicate": 185,
-    "resolvedWithCleanPredicate": 185,
+    "resolved": 340,
+    "unresolved": 368,
+    "resolvedWithPredicate": 207,
+    "resolvedWithCleanPredicate": 207,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
-    "keyTables": 29,
+    "keyTables": 33,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 99,
-    "syntheticTableFields": 78,
+    "syntheticTableFields": 100,
     "tiers": {
       "MISSING": 34,
       "THIN": 483,
@@ -55,15 +55,15 @@
       "method-call": 18
     },
     "zeroK": 49,
-    "kExecutable": 318,
-    "kNotExecutable": 390,
-    "branchGrainRows": 287,
-    "functionGrainRows": 421,
+    "kExecutable": 340,
+    "kNotExecutable": 368,
+    "branchGrainRows": 309,
+    "functionGrainRows": 399,
     "customReachableRows": 21,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
-    "tableRungRowsWithoutAbsence": 78,
+    "tableRungRowsWithoutAbsence": 100,
     "modifierEligibleFactsByTab": [
       [
         "viability",
@@ -461,15 +461,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "plagued country, perimeter and force"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -481,7 +493,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2253,
       "departure": null
     },
@@ -498,15 +510,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "plagued country, perimeter without force"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -518,7 +542,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 586,
       "departure": null
     },
@@ -535,15 +559,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "plagued country, neither"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -555,7 +591,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null
     },
@@ -572,15 +608,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "frontier country, perimeter and force"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -590,7 +638,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1549,
       "departure": null
     },
@@ -607,15 +655,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "frontier country, force without a perimeter"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -627,7 +687,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 286,
       "departure": null
     },
@@ -644,15 +704,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "settled country, perimeter"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -662,7 +734,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1536,
       "departure": null
     },
@@ -679,15 +751,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "settled country, neither"
+        }
+      ],
+      "branchReads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "BEASTS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -697,7 +781,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1510,
       "departure": null
     },
@@ -714,15 +798,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "walls, professional garrison"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -734,7 +830,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 3984,
       "departure": null
     },
@@ -751,15 +847,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "walls, citizen militia"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -771,7 +879,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1029,
       "departure": null
     },
@@ -788,15 +896,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "walls, no force"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -806,7 +926,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1628,
       "departure": null
     },
@@ -823,15 +943,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no walls, professional garrison"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -841,7 +973,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 169,
       "departure": null
     },
@@ -858,15 +990,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no walls, citizen militia"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -878,7 +1022,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 352,
       "departure": null
     },
@@ -895,15 +1039,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no walls, no force"
+        }
+      ],
+      "branchReads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "INVASION_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -913,7 +1069,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2839,
       "departure": null
     },
@@ -1139,15 +1295,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "STRONG"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "ECONOMIC_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1157,7 +1325,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 4427,
       "departure": null
     },
@@ -1174,15 +1342,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "ADEQUATE"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "ECONOMIC_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1192,7 +1372,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1250,
       "departure": null
     },
@@ -1209,15 +1389,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "WEAK"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "ECONOMIC_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1227,7 +1419,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 3372,
       "departure": null
     },
@@ -1244,15 +1436,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "CRITICAL"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "ECONOMIC_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1262,7 +1466,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 938,
       "departure": null
     },
@@ -1279,15 +1483,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, hospital"
+        }
+      ],
+      "branchReads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "DISASTER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1300,7 +1516,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 3542,
       "departure": null
     },
@@ -1317,15 +1533,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, parish care"
+        }
+      ],
+      "branchReads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "DISASTER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1338,7 +1566,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1458,
       "departure": null
     },
@@ -1355,15 +1583,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, no medical provision"
+        }
+      ],
+      "branchReads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "DISASTER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1376,7 +1616,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null
     },
@@ -1393,15 +1633,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no reserves, hospital"
+        }
+      ],
+      "branchReads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "DISASTER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1414,7 +1666,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 404,
       "departure": null
     },
@@ -1431,15 +1683,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no reserves, no medical provision"
+        }
+      ],
+      "branchReads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "DISASTER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -1452,7 +1716,7 @@
         "defense.threatAssessment"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 4596,
       "departure": null
     },
@@ -30941,6 +31205,23 @@
       ]
     },
     {
+      "fact": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-2 :: Beasts & Monsters: plagued, perimeter AND organized force",
+        "DS-DEF-2 :: Beasts & Monsters: plagued, perimeter but NO force to hold it",
+        "DS-DEF-2 :: Beasts & Monsters: plagued, NO perimeter and NO force",
+        "DS-DEF-2 :: Beasts & Monsters: frontier, credible deterrence",
+        "DS-DEF-2 :: Beasts & Monsters: frontier, force without a perimeter",
+        "DS-DEF-2 :: Beasts & Monsters: settled, defenses beyond the need",
+        "DS-DEF-2 :: Beasts & Monsters: settled, nothing organized"
+      ],
+      "variants": 21,
+      "grammars": 10,
+      "blocks": [
+        "DS-DEF-2"
+      ]
+    },
+    {
       "fact": "blockaded",
       "pools": [
         "DS-DEF-6 :: Naval Defense: Under blockade"
@@ -31048,6 +31329,21 @@
       "grammars": 1,
       "blocks": [
         "DS-WAR-1"
+      ]
+    },
+    {
+      "fact": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+        "DS-DEF-2 :: Disasters & Famine: granary AND parish care only",
+        "DS-DEF-2 :: Disasters & Famine: granary, NO medical provision",
+        "DS-DEF-2 :: Disasters & Famine: NO reserves, hospital present",
+        "DS-DEF-2 :: Disasters & Famine: NO reserves, NO medical provision"
+      ],
+      "variants": 15,
+      "grammars": 6,
+      "blocks": [
+        "DS-DEF-2"
       ]
     },
     {
@@ -31238,6 +31534,22 @@
       ]
     },
     {
+      "fact": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-2 :: Invasion & War: walls AND professional garrison",
+        "DS-DEF-2 :: Invasion & War: walls with citizen militia",
+        "DS-DEF-2 :: Invasion & War: walls with NO force",
+        "DS-DEF-2 :: Invasion & War: force with NO walls",
+        "DS-DEF-2 :: Invasion & War: militia only",
+        "DS-DEF-2 :: Invasion & War: neither walls nor force"
+      ],
+      "variants": 18,
+      "grammars": 11,
+      "blocks": [
+        "DS-DEF-2"
+      ]
+    },
+    {
       "fact": "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)",
       "pools": [
         "DS-DEF-4 :: structure organized",
@@ -31408,6 +31720,20 @@
       "grammars": 3,
       "blocks": [
         "DS-GEN-5"
+      ]
+    },
+    {
+      "fact": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-2 :: Economic Survival: STRONG",
+        "DS-DEF-2 :: Economic Survival: ADEQUATE",
+        "DS-DEF-2 :: Economic Survival: WEAK",
+        "DS-DEF-2 :: Economic Survival: CRITICAL"
+      ],
+      "variants": 12,
+      "grammars": 5,
+      "blocks": [
+        "DS-DEF-2"
       ]
     },
     {
@@ -31712,6 +32038,15 @@
         "modifierMounts": []
       },
       {
+        "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "blockaded",
         "mountsSpine": 1,
         "mountsModifier": 0,
@@ -31762,6 +32097,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "war"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -31880,6 +32224,15 @@
         "mountsModifier": 0,
         "spineTabs": [
           "history"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -33483,6 +33836,15 @@
         "modifierMounts": []
       },
       {
+        "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "settlement.config",
         "mountsSpine": 2,
         "mountsModifier": 14,
@@ -33971,10 +34333,10 @@
     },
     {
       "block": "DS-DEF-2",
-      "spines": 4,
-      "facts": 2,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 26,
+      "facts": 6,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 8077
     },
     {
       "block": "DS-DEF-4",
@@ -34440,18 +34802,166 @@
     },
     {
       "block": "DS-DEF-2",
-      "spines": 4,
-      "facts": 2,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 26,
+      "facts": 6,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 8077,
       "byFact": [
         {
+          "field": "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
+        },
+        {
           "field": "court",
-          "attach": []
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
+        },
+        {
+          "field": "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL"
+          ]
+        },
+        {
+          "field": "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
         },
         {
           "field": "prison",
-          "attach": []
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Economic Survival: STRONG",
+            "Economic Survival: ADEQUATE",
+            "Economic Survival: WEAK",
+            "Economic Survival: CRITICAL",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
+        },
+        {
+          "field": "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Beasts & Monsters: plagued, perimeter AND organized force",
+            "Beasts & Monsters: plagued, perimeter but NO force to hold it",
+            "Beasts & Monsters: plagued, NO perimeter and NO force",
+            "Beasts & Monsters: frontier, credible deterrence",
+            "Beasts & Monsters: frontier, force without a perimeter",
+            "Beasts & Monsters: settled, defenses beyond the need",
+            "Beasts & Monsters: settled, nothing organized",
+            "Invasion & War: walls AND professional garrison",
+            "Invasion & War: walls with citizen militia",
+            "Invasion & War: walls with NO force",
+            "Invasion & War: force with NO walls",
+            "Invasion & War: militia only",
+            "Invasion & War: neither walls nor force",
+            "Internal Security: full legal chain (court AND prison)",
+            "Internal Security: court without detention",
+            "Internal Security: detention without process",
+            "Internal Security: no legal infrastructure",
+            "Disasters & Famine: granary AND hospital",
+            "Disasters & Famine: granary AND parish care only",
+            "Disasters & Famine: granary, NO medical provision",
+            "Disasters & Famine: NO reserves, hospital present",
+            "Disasters & Famine: NO reserves, NO medical provision"
+          ]
         }
       ]
     },
@@ -36386,8 +36896,8 @@
   ],
   "factBudget": {
     "zeroK": 49,
-    "executable": 318,
-    "notExecutable": 390,
+    "executable": 340,
+    "notExecutable": 368,
     "byBlock": [
       [
         "DS-ECO-12",
@@ -36505,7 +37015,7 @@
         "DS-DEF-2",
         {
           "zeroK": 0,
-          "spines": 4
+          "spines": 26
         }
       ],
       [
@@ -36759,15 +37269,15 @@
       ],
       [
         2,
-        190
+        212
       ]
     ]
   },
   "grains": {
     "branch": {
       "zeroK": 49,
-      "executable": 318,
-      "notExecutable": 390,
+      "executable": 340,
+      "notExecutable": 368,
       "histogram": [
         [
           -2,
@@ -36787,12 +37297,11 @@
         ],
         [
           2,
-          190
+          212
         ]
       ],
       "blocksWithSpine": 50,
       "cannotAttach": [
-        "DS-DEF-2",
         "DS-DEF-6",
         "DS-ECO-1",
         "DS-ECO-10",
@@ -36815,7 +37324,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 529,
+      "readPaths": 551,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -36873,8 +37382,8 @@
     },
     "function": {
       "zeroK": 121,
-      "executable": 318,
-      "notExecutable": 390,
+      "executable": 340,
+      "notExecutable": 368,
       "histogram": [
         [
           -6,
@@ -36902,13 +37411,12 @@
         ],
         [
           2,
-          110
+          132
         ]
       ],
       "blocksWithSpine": 50,
       "cannotAttach": [
         "DS-DEF-11",
-        "DS-DEF-2",
         "DS-DEF-6",
         "DS-DEF-9",
         "DS-ECO-1",
@@ -36934,7 +37442,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 757,
+      "readPaths": 779,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -38525,8 +39033,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 85,
-      "deskSegments": 178
+      "deskRoots": 89,
+      "deskSegments": 192
     }
   },
   "ratifiedAliases": {
@@ -38972,104 +39480,130 @@
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: plagued, perimeter AND organized force",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: plagued, perimeter but NO force to hold it",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: plagued, NO perimeter and NO force",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: frontier, credible deterrence",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: frontier, force without a perimeter",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: settled, defenses beyond the need",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Beasts & Monsters: settled, nothing organized",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "BEASTS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: walls AND professional garrison",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: walls with citizen militia",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: walls with NO force",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: force with NO walls",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: militia only",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Invasion & War: neither walls nor force",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "INVASION_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
@@ -39113,72 +39647,90 @@
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: STRONG",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "ECONOMIC_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: ADEQUATE",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "ECONOMIC_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: WEAK",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "ECONOMIC_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Economic Survival: CRITICAL",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(economicScore) (via ECONOMIC_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "ECONOMIC_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: granary AND hospital",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "DISASTER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: granary AND parish care only",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "DISASTER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: granary, NO medical provision",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "DISASTER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: NO reserves, hospital present",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "DISASTER_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-2",
       "subject": "Disasters & Famine: NO reserves, NO medical provision",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "DISASTER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {

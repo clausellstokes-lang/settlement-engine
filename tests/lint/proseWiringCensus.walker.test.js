@@ -149,8 +149,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
   test('ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers', () => {
     // A census that resolved nothing and a census that resolved everything are both useless
     // and both look healthy from a distance. The arm pins the split.
-    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(318);
-    expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(390);
+    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(340);
+    expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(368);
     expect(summary.resolved + summary.unresolved, 'and the two exhaust the census').toBe(summary.total);
     expect(summary.resolved, 'zero resolved rows would mean the reader is dark').toBeGreaterThan(0);
     expect(summary.unresolved, 'zero unresolved rows would mean it is guessing').toBeGreaterThan(0);
@@ -167,8 +167,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // read. Sweep plant #84 makes the pair non-vacuous by execution: the literal rung
     // returning `predicate: []` unconditionally reds these two and leaves the split above
     // green, which is exactly the blindness plant #80 cannot see.
-    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(185);
-    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(185);
+    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(207);
+    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(207);
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
       .toBeLessThanOrEqual(summary.resolved);
     expect(summary.resolvedWithCleanPredicate).toBeLessThanOrEqual(summary.resolvedWithPredicate);
@@ -219,7 +219,7 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(65);
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(140);
     expect(summary.predicatesOverUnreadFields.length, 'predicates over a field no composer holds').toBe(99);
-    expect(summary.syntheticTableFields, 'and the table rung\'s own labels, counted apart').toBe(78);
+    expect(summary.syntheticTableFields, 'and the table rung\'s own labels, counted apart').toBe(100);
   });
 });
 
@@ -492,7 +492,9 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
 describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', () => {
   test('the fact index inverts the census without losing a pool', () => {
     const facts = factIndex(census.rows);
-    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(59);
+    // 63 AND NOT 59 SINCE SEAM car 3h: DS-DEF-2's four exposed key tables add four synthetic
+    // table labels to the inverse, one per table, and no ordinary reading moved with them.
+    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(63);
     const poolsNamed = new Set(facts.flatMap((f) => f.pools));
     const resolvedWithFields = census.rows.filter((r) => r.predicate.length > 0);
     expect(poolsNamed.size, 'every pool with a recovered predicate appears in the inverse')
@@ -669,7 +671,7 @@ describe('the source readers themselves', () => {
     // two counts are asserted EQUAL, so the next same-named pair cannot go quiet.
     expect(census.consulted, 'and the ladder actually walks every one of them').toBe(census.functions);
     expect(census.consulted, 'as an integer, not only as an equality').toBe(118);
-    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(29);
+    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(33);
   });
 
   test('a reader that went dark would report zero, so both readers are pinned against a fixture', () => {
@@ -699,8 +701,8 @@ describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
     // for the cost to be measured. Both grains ship on every row: `reads` carries the branch
     // where the reader recovered one, `fieldsRead` stays the function-wide union.
     expect(committed.rows.length, 'the census still covers every pool').toBe(708);
-    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(287);
-    expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(421);
+    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(309);
+    expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(399);
     expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(708);
     for (const row of committed.rows) {
       expect(['branch', 'function'], `${row.pool} names its grain`).toContain(row.readsGrain);
@@ -845,7 +847,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
     // CONSTRUCTION. The rows are counted, never dropped in silence.
-    expect(committed.totals.tableRungRowsWithoutAbsence, 'and they are counted').toBe(78);
+    expect(committed.totals.tableRungRowsWithoutAbsence, 'and they are counted').toBe(100);
     for (const row of committed.rows) {
       if (row.rung === 'table') expect(Object.keys(row.absent), `${row.pool} carries no absence record`).toEqual([]);
     }
@@ -1163,44 +1165,64 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     // §6.3 works its whole example — is one: `country: pressed (walled)` attaching to
     // STRAINED is reachable at this grain and was not at the last.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
-    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(22);
-    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(26);
+    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(21);
+    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(25);
     expect(committed.grains.function.cannotAttach.filter((b) => !dark.includes(b)),
       'and these four are what the branch grain buys')
       .toEqual(['DS-DEF-11', 'DS-DEF-9', 'DS-ECO-9', 'DS-POW-3']);
-    expectAbsentWithAnchor(dark, 'DS-DEF-11', 'DS-DEF-2', 'the blocks that cannot compose');
-    // ⛔ AND DS-DEF-2 DOES NOT LEAVE, WHICH IS A SECOND MEASUREMENT AND NOT A MISS. The
-    // grain cannot free a block whose spines nobody has recovered: 22 of DS-DEF-2's 26 pools
-    // are WIRING-UNRESOLVED, and the 4 that resolve are ONE ladder (`internalRowPoolKey`)
-    // whose every branch tests BOTH of its fields, so no fact of the block excludes a spine.
-    // ARCH §6.4's own sentence names the cure and it is a wiring car, not a grain.
-    expect(dark, 'the threat assessment §6.4 works its fact budget on').toContain('DS-DEF-2');
+    expectAbsentWithAnchor(dark, 'DS-DEF-11', 'DS-STR-1', 'the blocks that cannot compose');
+    // ⭐⭐ AND DS-DEF-2 HAS LEFT THE DARK SET (SEAM car 3h) — A WIRING ACT, NEVER A GRAIN ONE.
+    // At the last tip 22 of its 26 pools were WIRING-UNRESOLVED and the 4 that resolved were
+    // ONE ladder (`internalRowPoolKey`) whose every branch tests BOTH of its fields, so no
+    // fact of the block excluded a spine and it read 0 bp. The desk then exposed its four
+    // remaining key tables — BEASTS_ROW_POOL, INVASION_ROW_POOL, ECONOMIC_ROW_POOL,
+    // DISASTER_ROW_POOL — as module-level frozen tables, the ladder's rung 3 recovered all 22
+    // with a predicate each, and the block's fact set went 2 to 6. ARCH §6.4's own sentence
+    // named the cure and this is it.
+    // ⛔ THE MOVE IS DECLARED AND IT MOVED NO TEXT: no key string, no pool, no variant and no
+    // drawn index moved with it, which the manifest drift arm is what proves.
+    expectAbsentWithAnchor(dark, 'DS-DEF-2', 'DS-STR-1', 'the blocks that cannot compose');
     const def2 = committed.rows.filter((r) => r.block === 'DS-DEF-2');
     const def2Resolved = def2.filter((r) => r.status === WIRING_STATUS.RESOLVED);
     expect(def2.length, 'DS-DEF-2 ships twenty-six pools').toBe(26);
-    expect(def2Resolved.length, 'and the census recovers four of them').toBe(4);
-    expect(new Set(def2Resolved.map((r) => r.keyFunction)).size, 'all from ONE ladder').toBe(1);
+    expect(def2Resolved.length, 'and the census now recovers every one of them').toBe(26);
+    expect(new Set(def2Resolved.map((r) => r.keyFunction)).size,
+      'from FIVE readers: the four exposed tables and the one literal ladder').toBe(5);
     expect(new Set(def2Resolved.map((r) => r.reads.join('|'))).size,
-      'whose four branches all test the same two fields, so nothing of the block attaches').toBe(1);
+      'and five read sets are what lets a fact of the block exclude a spine').toBe(5);
+    const def2Coverage = coverage.find((c) => c.block === 'DS-DEF-2');
+    expect(def2Coverage.spines, 'every pool of the threat assessment is a spine now').toBe(26);
+    expect(def2Coverage.facts, 'over six facts, where the last tip had two').toBe(6);
+    expect(def2Coverage.spinesReachedBp, 'and every spine of it can carry a modifier').toBe(10000);
+    // ⛔ THE ONE LADDER IS UNMOVED, which is the half a uniform sweep would have lost.
+    // `internalRowPoolKey` still resolves on rung 1 with its OWN two readings rather than
+    // through a table's synthetic label, so its four rows keep the block's only named fact
+    // pair and their fact budget with it. A car that tabled row 3 as well would read greener
+    // here and know less.
+    const internal = def2Resolved.filter((r) => r.keyFunction === 'internalRowPoolKey');
+    expect(internal.length, 'the literal ladder keeps its four rows').toBe(4);
+    expect([...new Set(internal.map((r) => r.reads.join('|')))],
+      'and its read set, recovered from the branch and not from a label').toEqual(['court|prison']);
+    expect([...new Set(internal.map((r) => r.k))], 'so its fact budget is unmoved').toEqual([1]);
     expect(dark, 'and the single-fact block').toContain('DS-STR-1');
     // THE PAIRED POSITIVE: a block whose pools come from SEVERAL key functions composes, so
-    // the dark list is a SELECTION and not the whole roster. Anchored on DS-DEF-2, which the
+    // the dark list is a SELECTION and not the whole roster. Anchored on DS-STR-1, which the
     // same list does carry: a bare `not.toContain` would pass just as happily if the coverage
     // derivation drifted away entirely.
-    expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-DEF-2', 'the blocks that cannot compose');
+    expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-STR-1', 'the blocks that cannot compose');
   });
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
     const budget = committed.factBudget;
     expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(49);
-    expect(budget.executable, 'counted over the RESOLVED rows').toBe(318);
+    expect(budget.executable, 'counted over the RESOLVED rows').toBe(340);
     // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
     // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
     // and the §908 law forbids exactly that.
-    expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(390);
+    expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(368);
     expect(budget.executable + budget.notExecutable).toBe(708);
     const summed = budget.histogram.reduce((total, [, n]) => total + n, 0);
-    expect(summed, 'the histogram carries every executable row once').toBe(318);
+    expect(summed, 'the histogram carries every executable row once').toBe(340);
     // The rule itself, on a fixture: a three-field spine has no seat and a one-field spine has two.
     const rows = [
       { block: 'B', pool: 'p1', status: WIRING_STATUS.RESOLVED, reads: ['a', 'b', 'c'] },
@@ -1298,8 +1320,11 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // vocabularies do not meet — not once, in either direction, and not even at the leaf.
     const join = committed.relations.join;
     // 85 AND NOT 91 SINCE CAR 0e: the join is taken over `reads`, and six roots were reached
-    // only by a field some OTHER branch of the same key function tested.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(85);
+    // only by a field some OTHER branch of the same key function tested. 89 AND NOT 85 SINCE
+    // SEAM car 3h: the four exposed DS-DEF-2 tables each root in their own synthetic label,
+    // which is a root no relation endpoint can ever meet — so the finding below is unmoved
+    // and the denominator it is measured against grew by exactly four.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(89);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
@@ -1375,7 +1400,9 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       expect(EVIDENCE_ORDER, `${row.endpoint} names an evidence kind from the closed list`).toContain(row.evidence);
       expect(row.at, `${row.endpoint} carries a citation a reader can open`).not.toBe('');
     }
-    expect(draft.syntheticRootsExcluded, 'the instrument\'s own table labels are not join targets').toBe(15);
+    // 19 AND NOT 15 SINCE SEAM car 3h: four more table labels, four more roots the draft
+    // excludes by name rather than offering as a join target.
+    expect(draft.syntheticRootsExcluded, 'the instrument\'s own table labels are not join targets').toBe(19);
     // ⭐ THE THREE IDENTIFIER ROWS, which are the draft's whole strength and come from the
     // census's own read paths — including ARCH §5.2's OWN WORKED EDGE, whose gate endpoint
     // the defence desk reads at `settlement.defenseProfile.economicGates.military`.

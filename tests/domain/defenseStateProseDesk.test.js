@@ -472,6 +472,21 @@ describe('DS-DEF-2 — each row lens at its boundaries', () => {
     // Absent or non-numeric is silence, never a band.
     expect(economicRowPoolKey(undefined)).toBeNull();
     expect(economicRowPoolKey('50')).toBeNull();
+    // ⛔ THE ROSTER THE CORPUS GUARD USED TO ENFORCE, NOW BOUND BOTH WAYS (SEAM car 3h).
+    // Until this car the key was built by template and then checked against
+    // `CORPUS['DS-DEF-2'].pools[key]` at runtime, which is a 1:1 nothing outside the running
+    // process could read. `ECONOMIC_ROW_POOL` is that roster, exposed so the wiring census's
+    // TABLE rung can recover the predicate — so the equality it used to enforce is asserted
+    // here instead of enforced there, in both directions and over the whole band range.
+    const reachedBands = new Set();
+    for (let n = -20; n <= 120; n += 1) {
+      const key = economicRowPoolKey(n);
+      expect(DEF2_POOLS[key], `a score of ${n} must key a LIVE pool`).toBeTruthy();
+      reachedBands.add(key);
+    }
+    expect([...reachedBands].sort(),
+      'and the corpus\'s four Economic Survival pools are exactly what the band reaches')
+      .toEqual(Object.keys(DEF2_POOLS).filter((k) => k.startsWith('Economic Survival: ')).sort());
     // And the desk does not reach for the stranded mean.
     const source = readFileSync(
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/defenseStateProse.js'), 'utf8',

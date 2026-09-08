@@ -273,49 +273,158 @@ export function measuredMonsterFamily(monsterThreat) {
 }
 
 /**
+ * ── ⭐⭐ DS-DEF-2's FOUR KEY TABLES, EXPOSED — THE RUNG-4 KEYS MADE READABLE ──────────
+ *
+ * The four tables below and the three SITUATION readers beside them are a WIRING change and
+ * nothing else: every key this desk returns for every input is the key it returned before,
+ * and the four blocks' prose, pools and slots are untouched. What moves is who can READ the
+ * mapping. ARCH §3.6 asks for it in terms — "the rung-4 keys need the composers to expose
+ * their key tables, a wiring car per desk, chair-decidable, zero text".
+ *
+ * ⛔ WHY IT WAS UNREADABLE, AND WHY A LOCAL BUILDER IS THE CAUSE. The estate's wiring census
+ * (the instrument island under `src/domain/prose/`, which no product file may name — see the
+ * note at the foot of this block) recovers a pool's selecting predicate down a four-rung
+ * ladder: a LITERAL a key function returns, a TEMPLATE of one, a module-level TABLE it
+ * indexes, and then WIRING-UNRESOLVED with a measured reason. Twenty-two of DS-DEF-2's
+ * twenty-six pools sat on that fourth rung, in two families:
+ *   • EIGHTEEN were built by a LOCAL arrow — `const key = (tail) => `<prefix>${family},
+ *     ${tail}`` — so the template's holes bound to a local the census cannot resolve to a
+ *     reading, and the whole pool read "no key function returns this key as a literal";
+ *   • FOUR were a template over a BAND CALL, `` `Economic Survival: ${scoreBand(score)}` ``,
+ *     whose hole is a function call and not a field.
+ * The instrument was right both times. Its own header refuses to read one token further
+ * (the bare-limb rule on its local-alias map): hopping to the first PARAM of a LOOKUP would have
+ * resolved fifty more pools estate-wide and made fifty predicates FALSE — this desk's own
+ * `const family = measuredMonsterFamily(monsterThreat)` is the worked example, because
+ * `family === 'settled'` is produced by the config value `heartland`. A table cannot lie
+ * that way: its key is the value the branch actually selects on.
+ *
+ * ⭐ SO THE SITUATION IS NAMED, AND THE NAME IS THE TABLE'S KEY. Each reader below answers
+ * one question — what SITUATION is this town in, for this row — and the table maps that
+ * situation to the pool the corpus wrote for it. The census then recovers a predicate that
+ * is an exact `if and only if`: `<the reader's call> === '<the situation>'`.
+ *
+ * ⚠ ROW 3 (`internalRowPoolKey`) IS DELIBERATELY NOT TABLED, and that is the one judgment
+ * this car makes. Its four pools already resolve on rung 1 with a REAL read set —
+ * `["court","prison"]`, the block's only fact pair, which SITTING §P.2-28 names — because it
+ * returns its keys as plain literals from guarded branches. Rung 3's field is the census's
+ * own synthetic label (`"<reader> (via <TABLE> in <file>)"`), so tabling that row would trade
+ * two named readings for one label, empty its absence record and move its fact budget from
+ * k = 1 to k = 2 on a claim nobody measured. A wiring car that made four rows less legible to
+ * buy uniformity is not this one. Say "veto" to table it anyway.
+ *
+ * ⚠ AND THE SAME SHAPE SURVIVES ELSEWHERE ON THIS LEAF, RECORDED RATHER THAN SWEPT UP:
+ * `supplyLogisticsPoolKey` (DS-DEF-6) still builds its five keys through a local arrow. It is
+ * a different block with a different chair row, so it is named here and left for its own car.
+ *
+ * ⛔⛔ AND THE INSTRUMENT MAY NOT BE NAMED HERE, WHICH IS WHY THIS BLOCK TALKS AROUND IT.
+ * The census walker's island fence scans every file under `src/` for the BARE MODULE NAME of
+ * each of its eleven modules and refuses a hit outside `src/domain/prose/` — by raw text,
+ * comments included, because a product surface that has learnt the instrument's name is one
+ * refactor away from importing it. A first cut of this docblock spelled the module and the
+ * fence caught it, which is the fence working. Cite the DIRECTORY, never the module.
+ */
+
+/**
  * DS-DEF-2 row 1 — BEASTS & MONSTERS: the threat tier against a perimeter and a force.
  *
- * Each tier has its OWN branches rather than a clean cross-product, because the corpus
+ * Each tier has its OWN situations rather than a clean cross-product, because the corpus
  * wrote the combinations that mean something: a plagued country with a wall and nobody on
  * it is a story; a quiet heartland with a force and no wall is not, and renders nothing.
+ * @type {Readonly<Record<string, string>>}
+ */
+const BEASTS_ROW_POOL = Object.freeze({
+  'plagued country, perimeter and force':
+    'Beasts & Monsters: plagued, perimeter AND organized force',
+  'plagued country, perimeter without force':
+    'Beasts & Monsters: plagued, perimeter but NO force to hold it',
+  'plagued country, neither':
+    'Beasts & Monsters: plagued, NO perimeter and NO force',
+  'frontier country, perimeter and force':
+    'Beasts & Monsters: frontier, credible deterrence',
+  'frontier country, force without a perimeter':
+    'Beasts & Monsters: frontier, force without a perimeter',
+  'settled country, perimeter':
+    'Beasts & Monsters: settled, defenses beyond the need',
+  'settled country, neither':
+    'Beasts & Monsters: settled, nothing organized',
+});
+
+/**
+ * WHICH BEASTS SITUATION a town is in, or `''` where the corpus wrote none.
+ *
+ * ⚠ THE SILENCES ARE THE CORPUS'S AND ARE PRESERVED EXACTLY. A plagued or settled town with
+ * a force and no perimeter, and a frontier town with a perimeter and no force, have no pool:
+ * the corpus did not write those readings and the desk says nothing rather than rounding
+ * them into a neighbour. `settled country, perimeter` deliberately does not consult the
+ * force at all, because a wall in a quiet country is the more specific fact and is read
+ * first — which is the branch the shipped desk already took.
+ * @param {string} family the CORPUS family word from `measuredMonsterFamily`
+ * @param {boolean} perimeter @param {boolean} force @returns {string}
+ */
+function beastsRowSituation(family, perimeter, force) {
+  if (family === 'plagued') {
+    if (perimeter) return force ? 'plagued country, perimeter and force' : 'plagued country, perimeter without force';
+    return force ? '' : 'plagued country, neither';
+  }
+  if (family === 'frontier') {
+    if (perimeter) return force ? 'frontier country, perimeter and force' : '';
+    return force ? 'frontier country, force without a perimeter' : '';
+  }
+  if (perimeter) return 'settled country, perimeter';
+  return force ? '' : 'settled country, neither';
+}
+
+/**
+ * DS-DEF-2 row 1's pool key.
  * @param {unknown} monsterThreat @param {boolean} perimeter @param {boolean} force
  * @returns {string|null}
  */
 export function beastsRowPoolKey(monsterThreat, perimeter, force) {
   const family = measuredMonsterFamily(monsterThreat);
   if (!family) return null;
-  /** @param {string} tail */
-  const key = (tail) => `Beasts & Monsters: ${family}, ${tail}`;
-  if (family === 'plagued') {
-    if (perimeter && force) return key('perimeter AND organized force');
-    if (perimeter) return key('perimeter but NO force to hold it');
-    return force ? null : key('NO perimeter and NO force');
-  }
-  if (family === 'frontier') {
-    if (perimeter && force) return key('credible deterrence');
-    return force ? key('force without a perimeter') : null;
-  }
-  // settled: a wall in a quiet country is the more specific fact, so it is read first.
-  if (perimeter) return key('defenses beyond the need');
-  return force ? null : key('nothing organized');
+  return BEASTS_ROW_POOL[beastsRowSituation(family, perimeter, force)] || null;
 }
 
 /**
  * DS-DEF-2 row 2 — INVASION & WAR: walls against a professional garrison or a militia.
- * TOTAL over the eight boolean combinations; a garrison outranks a militia because the
- * corpus distinguishes them and a town with both is defended by the professionals.
+ * TOTAL over the six situations the eight boolean combinations collapse into.
+ * @type {Readonly<Record<string, string>>}
+ */
+const INVASION_ROW_POOL = Object.freeze({
+  'walls, professional garrison': 'Invasion & War: walls AND professional garrison',
+  'walls, citizen militia': 'Invasion & War: walls with citizen militia',
+  'walls, no force': 'Invasion & War: walls with NO force',
+  'no walls, professional garrison': 'Invasion & War: force with NO walls',
+  'no walls, citizen militia': 'Invasion & War: militia only',
+  'no walls, no force': 'Invasion & War: neither walls nor force',
+});
+
+/**
+ * WHICH INVASION SITUATION a town is in. Total: this lens is never silent.
+ *
+ * ⚠ A GARRISON OUTRANKS A MILITIA, which is why the eight combinations are six situations:
+ * the corpus distinguishes the two forces and a town holding both is defended by the
+ * professionals, so `garrison` is read before `militia` on both sides of the wall.
+ * @param {boolean} walls @param {boolean} garrison @param {boolean} militia
+ * @returns {string}
+ */
+function invasionRowSituation(walls, garrison, militia) {
+  if (walls) {
+    if (garrison) return 'walls, professional garrison';
+    return militia ? 'walls, citizen militia' : 'walls, no force';
+  }
+  if (garrison) return 'no walls, professional garrison';
+  return militia ? 'no walls, citizen militia' : 'no walls, no force';
+}
+
+/**
+ * DS-DEF-2 row 2's pool key.
  * @param {boolean} walls @param {boolean} garrison @param {boolean} militia
  * @returns {string}
  */
 export function invasionRowPoolKey(walls, garrison, militia) {
-  /** @param {string} tail */
-  const key = (tail) => `Invasion & War: ${tail}`;
-  if (walls) {
-    if (garrison) return key('walls AND professional garrison');
-    return militia ? key('walls with citizen militia') : key('walls with NO force');
-  }
-  if (garrison) return key('force with NO walls');
-  return militia ? key('militia only') : key('neither walls nor force');
+  return INVASION_ROW_POOL[invasionRowSituation(walls, garrison, militia)];
 }
 
 /**
@@ -323,6 +432,11 @@ export function invasionRowPoolKey(walls, garrison, militia) {
  * TOTAL over the four combinations — the corpus wrote all four, including both halves
  * without the other, because "detention without process" is a different town from
  * "court without detention".
+ *
+ * ⭐ THE ONE ROW OF THE FIVE WITH NO TABLE, AND THE ABSENCE IS THE POINT. Every key here is
+ * a plain literal returned from a guarded branch, so the wiring census recovers it on RUNG 1
+ * with the branch's OWN fields — `court` and `prison`, this block's only fact pair. See the
+ * exposure docblock above for why a table would be a loss here and a gain on the other four.
  * @param {boolean} court @param {boolean} prison @returns {string}
  */
 export function internalRowPoolKey(court, prison) {
@@ -338,33 +452,82 @@ export function internalRowPoolKey(court, prison) {
  * commented in its own module as "the frozen four; never extend" — and the corpus keys four
  * pools on exactly those words. An EXACT 1:1, and it reads ONE score, so this row needs
  * nothing like the overall `avgScore` mean that DS-DEF-1 waits on.
+ *
+ * ⚠ THE TABLE IS NOW THE ROSTER, WHERE THE CORPUS LOOKUP USED TO BE. The shipped key
+ * function built the key by template and then asked `CORPUS['DS-DEF-2'].pools[key]` whether
+ * the corpus carried it — a guard that answered the same thing this table answers, one
+ * indirection later and invisibly to any reader outside the running process. Both halves of
+ * the 1:1 are bound by the desk suite instead: every band word `scoreBand` can emit is a key
+ * of this table, and every value of it is a live pool of the shipped corpus. A band the
+ * corpus stopped carrying reds an arm rather than going quiet at runtime.
+ * @type {Readonly<Record<string, string>>}
+ */
+const ECONOMIC_ROW_POOL = Object.freeze({
+  STRONG: 'Economic Survival: STRONG',
+  ADEQUATE: 'Economic Survival: ADEQUATE',
+  WEAK: 'Economic Survival: WEAK',
+  CRITICAL: 'Economic Survival: CRITICAL',
+});
+
+/**
+ * DS-DEF-2 row 4's pool key. An absent or non-finite score is SILENCE, never CRITICAL.
  * @param {unknown} economicScore @returns {string|null}
  */
 export function economicRowPoolKey(economicScore) {
   if (typeof economicScore !== 'number' || !Number.isFinite(economicScore)) return null;
-  const key = `Economic Survival: ${scoreBand(economicScore)}`;
-  return CORPUS['DS-DEF-2'].pools[key] ? key : null;
+  return ECONOMIC_ROW_POOL[scoreBand(economicScore)] || null;
 }
 
 /**
  * DS-DEF-2 row 5 — DISASTERS & FAMINE: reserves against medical provision.
+ * TOTAL over the five situations the corpus actually carries.
+ * @type {Readonly<Record<string, string>>}
+ */
+const DISASTER_ROW_POOL = Object.freeze({
+  'granary, hospital': 'Disasters & Famine: granary AND hospital',
+  'granary, parish care': 'Disasters & Famine: granary AND parish care only',
+  'granary, no medical provision': 'Disasters & Famine: granary, NO medical provision',
+  'no reserves, hospital': 'Disasters & Famine: NO reserves, hospital present',
+  'no reserves, no medical provision': 'Disasters & Famine: NO reserves, NO medical provision',
+});
+
+/**
+ * WHICH DISASTER SITUATION a town is in. Total: this lens is never silent.
+ *
+ * ⚠ AND THE SENTENCE ABOVE IS WORDED TO KEEP AN INSTRUMENT QUIET, WHICH IS WORTH THE LINE.
+ * The alias draft's `docblock` evidence kind proposes a candidate alias from any composer
+ * COMMENT line that names both a relation endpoint's leaf and a census read path's root leaf.
+ * A first cut of the sentence above ended "no silence on this one", spelled with the OTHER
+ * three-letter noun for a lens of this block, and that put a bare key-function parameter name
+ * beside this block's own subject word on one line: the draft then proposed an alias between
+ * the two out of nothing but English. SITTING §P.2-27 withdrew exactly that shape from the
+ * `generator-write` evidence kind, and it survives in the kind that IS comments by definition.
+ * ⛔ THE RULE THIS LEAVES: a comment line here may not set a producer token beside a bare
+ * parameter name. The full account is in the SEAM car 3h receipt, for the chair.
  *
  * ⚠ A CHURCH COUNTS AS MEDICAL PROVISION ONLY IN THE GRANARY BRANCH, and that is the
  * corpus's own shape rather than a choice: it wrote `granary AND parish care only` (clergy
  * who tend the sick) but no matching "no reserves, parish care" pool. So for a town with no
- * reserves the split is hospital-or-nothing, which is total over the five pools the corpus
- * actually carries.
+ * reserves the split is hospital-or-nothing, and the church is not consulted there — which
+ * is why the situation set is five and not six.
+ * @param {boolean} granary @param {boolean} hospital @param {boolean} church
+ * @returns {string}
+ */
+function disasterRowSituation(granary, hospital, church) {
+  if (granary) {
+    if (hospital) return 'granary, hospital';
+    return church ? 'granary, parish care' : 'granary, no medical provision';
+  }
+  return hospital ? 'no reserves, hospital' : 'no reserves, no medical provision';
+}
+
+/**
+ * DS-DEF-2 row 5's pool key.
  * @param {boolean} granary @param {boolean} hospital @param {boolean} church
  * @returns {string}
  */
 export function disasterRowPoolKey(granary, hospital, church) {
-  /** @param {string} tail */
-  const key = (tail) => `Disasters & Famine: ${tail}`;
-  if (granary) {
-    if (hospital) return key('granary AND hospital');
-    return church ? key('granary AND parish care only') : key('granary, NO medical provision');
-  }
-  return hospital ? key('NO reserves, hospital present') : key('NO reserves, NO medical provision');
+  return DISASTER_ROW_POOL[disasterRowSituation(granary, hospital, church)];
 }
 
 /**
