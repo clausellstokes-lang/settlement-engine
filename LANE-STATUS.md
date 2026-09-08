@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-08 10:30:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 10:36:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 8522a17b2 · ledger = fa4987a18 §914: the instruments land — the INSTR-912 consist joins the product as eighteen cars o
 
@@ -145,5 +145,5 @@ product claude/composite-r4 = 8522a17b2 · ledger = fa4987a18 §914: the instrum
 - wf_d3c44881-503: 38 journal lines, 19 agents
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
-## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;85082 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;# -*- coding: utf-8 -*-;import io;p='"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engin;s=io.open(p,encoding='"'"'utf-8'"'"').read();old='"'"'titles 23841 · suiteTitles 6377, measuredAtSha 3e2a644ec) al;assert old in s; s=s.replace(old,'"'"'titles 23843 · suiteTitles 6377;s=s.replace('"'"'frozenAtSha 2865da54f -> HEAD'"'"','"'"'frozenAtSha 2;io.open(p,'"'"'w'"'"',encoding='"'"'utf-8'"'"').write(s); print('"'"'p;PYEOF;echo "tip $(git -C $D rev-parse --short HEAD) · cars $(git -C $D rev-;85103 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 2.82 6.55 9.20
+## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;93008 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 21.85 14.46 11.49
