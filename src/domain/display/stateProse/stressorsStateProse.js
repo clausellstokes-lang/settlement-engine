@@ -51,7 +51,8 @@
 import { STRESS_TYPE_MAP } from '../../../data/stressTypes.js';
 import { severityBand } from '../../activeConditions.js';
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../../data/dossierStateProse/stressors.generated.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { stressorsStateProseCandidates } from './stressorsStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
 /**
@@ -460,9 +461,18 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
   const conditions = Array.isArray(readings.conditions) ? readings.conditions : [];
   const condition = conditions.length > 0 ? conditions[0] : null;
 
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3b). The spine key is this desk's own key
+  // function, exactly as before; the candidates leaf offers the modifier pools the state
+  // earned, and is EMPTY until car 9 authors them. An empty list composes to the kernel's
+  // own draw, which is why the manifest cannot move on this routing.
   /** @param {string} blockId @param {string|null} poolKey */
   const line = (blockId, poolKey) => (poolKey
-    ? readStateProse(CORPUS, blockId, poolKey, { ...options, slots })
+    ? composeStateProse(CORPUS, blockId, {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: stressorsStateProseCandidates(blockId, readings),
+    })
     : null);
 
   const arityKey = crisisArityPoolKey(banners);
@@ -506,9 +516,16 @@ export function crisisBannerRung(settlement, banner, options = {}) {
   const key = crisisBannerPoolKey(banner?.type);
   if (!key) return null;
   const slots = { settlement: properFill(text(settlement?.name)) };
+  // The per-banner rung's whole reading IS the banner: this entry point takes no desk
+  // readings, so the candidates leaf is offered the one fact this call site holds.
   return legibilityRung(
     text(banner?.label),
-    readStateProse(CORPUS, 'DS-STR-1', key, { ...options, slots }),
+    composeStateProse(CORPUS, 'DS-STR-1', {
+      ...options,
+      slots,
+      spineKey: key,
+      candidates: stressorsStateProseCandidates('DS-STR-1', { banner }),
+    }),
     [],
   );
 }

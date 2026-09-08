@@ -39,7 +39,7 @@ import { join } from 'node:path';
 import { balancedSlice as balanced } from '../../src/domain/prose/wiringCensus.js';
 import { ROOT } from './dossierCorpus.js';
 
-/** The six desk composers — the only callers of `readStateProse` in the estate. */
+/** The six desk composers — the only callers of the state-prose reader in the estate. */
 export const COMPOSERS = Object.freeze([
   'src/domain/display/stateProse/generalStateProse.js',
   'src/domain/display/stateProse/powerStateProse.js',
@@ -219,7 +219,35 @@ export function enclosingHelper(src, index) {
  */
 
 /**
- * Every `readStateProse` call site in the composers, with its resolved bag.
+ * ⭐ THE SPINE-KEY EXPRESSION OF A COMPOSED CALL — `composeStateProse`'s third argument
+ * carries the pool key that `readStateProse` took positionally (SEAM cars 3b–3g).
+ *
+ * ⛔ WHY THE SCANNER LEARNED A SECOND SHAPE RATHER THAN THE DESKS KEEPING THE OLD ONE. The
+ * census's fill column, the licence arm and `UNMOUNTED_BLOCKS`' second witness are all
+ * derived from THIS reader. A desk routed through the composer stops spelling
+ * `readStateProse(CORPUS, block, pool, {…})` and starts spelling
+ * `composeStateProse(CORPUS, block, {…, spineKey: pool})` — the same three facts, one of
+ * them moved into the options object. A reader that knew only the old spelling would report
+ * the routed desk's blocks as served by NO bag, and the census would record a wiring loss
+ * that never happened. So the anchor takes both call shapes and answers the same triple.
+ * @param {string} optionsArg the options argument as written
+ * @returns {string|null} the spine-key expression, or null when there is none to read
+ */
+export function spineKeyExpr(optionsArg) {
+  const braceAt = optionsArg.indexOf('{');
+  if (braceAt < 0) return null;
+  let obj;
+  try { obj = balanced(optionsArg, braceAt); } catch { return null; }
+  const part = topLevelSplit(obj.inner).find((p) => /^spineKey\b/.test(p.trim()));
+  if (!part) return null;
+  const named = part.trim().match(/^spineKey\s*:\s*([\s\S]+)$/);
+  // A shorthand `spineKey` names a const of that name; the pool expression IS the identifier.
+  return named ? named[1].trim() : 'spineKey';
+}
+
+/**
+ * Every `readStateProse` / `composeStateProse` call site in the composers, with its
+ * resolved bag.
  * @returns {FillSite[]}
  */
 export function fillSites() {
@@ -228,19 +256,25 @@ export function fillSites() {
   for (const rel of COMPOSERS) {
     const abs = join(ROOT, rel);
     const src = readFileSync(abs, 'utf8');
-    const anchor = /\breadStateProse\s*\(/g;
+    const anchor = /\b(readStateProse|composeStateProse)\s*\(/g;
     for (const m of src.matchAll(anchor)) {
+      const composed = m[1] === 'composeStateProse';
       const open = m.index + m[0].length - 1;
       const { inner } = balanced(src, open);
       const args = topLevelSplit(inner);
       if (args.length < 3) continue;
       const blockLiteral = args[1].match(/^'([^']+)'$/);
-      const optsIdx = args.length - 1;
+      // The pool key: positional on a kernel read, `spineKey` inside the options on a
+      // composed one. A composed call with no readable `spineKey` is REPORTED, never guessed.
+      const poolRaw = composed ? spineKeyExpr(args[2]) : args[2];
+      const optsIdx = composed ? 2 : args.length - 1;
       const opts = args[optsIdx];
       /** @type {Array<{name: string, conditional: boolean}>} */
       let keys = [];
       /** @type {string[]} */
       let unresolved = [];
+      if (poolRaw === null) unresolved.push('no readable `spineKey` in the composed options object');
+      const poolText = poolRaw === null ? '(unreadable spineKey)' : poolRaw;
       const braceAt = opts.indexOf('{');
       if (braceAt < 0) {
         unresolved.push(`options is not an object literal: ${opts.slice(0, 50)}`);
@@ -287,7 +321,7 @@ export function fillSites() {
       const base = {
         file: rel,
         line,
-        poolExpr: args[2].trim().slice(0, 40),
+        poolExpr: poolText.trim().slice(0, 40),
         slots: [...new Set(keys.map((k) => k.name))].sort(),
         conditional: [...new Set(keys.filter((k) => k.conditional).map((k) => k.name))].sort(),
         unresolved: unresolved.filter((u) => !paramBags.some((p) => u.includes(`\`${p}\``))),
@@ -330,7 +364,7 @@ export function fillSites() {
         sites.push({
           ...base,
           block,
-          poolExpr: (callArgs[helper.params.indexOf(args[2].trim())] || base.poolExpr).trim().slice(0, 40),
+          poolExpr: (callArgs[helper.params.indexOf(poolText.trim())] || base.poolExpr).trim().slice(0, 40),
           slots: [...new Set(extraKeys.map((k) => k.name))].sort(),
           conditional: [...new Set(extraKeys.filter((k) => k.conditional).map((k) => k.name))].sort(),
           unresolved: [...base.unresolved, ...extraUnresolved],
@@ -341,7 +375,7 @@ export function fillSites() {
     }
   }
   if (sites.length === 0) {
-    throw new Error('dossierComposedFill: ZERO readStateProse call sites found — the composers moved or the scanner went dark');
+    throw new Error('dossierComposedFill: ZERO readStateProse/composeStateProse call sites found — the composers moved or the scanner went dark');
   }
   return sites;
 }

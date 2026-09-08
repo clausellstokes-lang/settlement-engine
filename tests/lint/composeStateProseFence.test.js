@@ -4,14 +4,17 @@
  *
  * ── THE TWO CLASSES THIS FILE EXISTS FOR ────────────────────────────────────────────
  *
- * 1. THE SEAM MUST BE REACHABLE FROM NOTHING, AND STAY THAT WAY UNTIL A CAR ROUTES IT.
+ * 1. THE SEAM IS REACHED BY EXACTLY THE DESKS A LANDED CAR HAS ROUTED, AND BY NOTHING ELSE.
  *    Car 3a lands the composer and six candidate leaves and proves the corpus cannot move,
  *    on the strength of one fact: nothing calls them. Cars 3b–3g then route ONE DESK EACH,
  *    each ending on its own zero-drift manifest run, "so a drift is diagnosed against one
  *    desk's diff, not six" (ARCH §2.7). A lane that wires a second desk in the same commit
  *    destroys that property silently — the manifest would still be green if both routings
  *    happen to be byte-identical, and nobody would learn which one to blame when they are
- *    not. And an EAGER import is worse than early: the prose corpus rides the lazy data
+ *    not. So the fence is not "nobody imports this": it is `ROUTED_DESKS` below, an EXACT
+ *    roster that grows by ONE LINE PER CAR, in the same commit as the desk it admits. A
+ *    seventh importer, or a desk reaching for another desk's candidates leaf, reds.
+ *    And an EAGER import is worse than early: the prose corpus rides the lazy data
  *    chunk against 5,878 B of first-paint margin (`tests/build/vendorPdfLazy.test.js`), so a
  *    desk pulled into the eager graph re-files the whole corpus into the first-paint chunk.
  *    That gate needs a BUILD; this one is a source scan and runs on every gate.
@@ -56,6 +59,27 @@ const CANDIDATE_LEAVES = Object.freeze([
   'src/domain/display/stateProse/stressorsStateProseCandidates.js',
   'src/domain/display/stateProse/warFaithStateProseCandidates.js',
 ]);
+
+/**
+ * ⭐ THE ROSTER OF ROUTED DESKS — the fence's live half, and the ONE LINE a wiring car adds.
+ *
+ * Cars 3b–3g route one desk each, smallest first: stressors (2 call sites) · economy (1) ·
+ * warFaith (1) · power (7) · defense (9) · general (11). Each car adds its own line here in
+ * the same commit as the routing, so "one desk per car" is machine-checked rather than
+ * promised: a second desk wired in the same commit reds on the arms below, by name, and the
+ * receipt's per-stage manifest run keeps its diagnostic value.
+ * @type {ReadonlyArray<{car: string, desk: string}>}
+ */
+const ROUTED_DESKS = Object.freeze([
+  { car: '3b', desk: 'stressors' },
+]);
+
+/** The desk composer each routed car wired, repo-relative. */
+const ROUTED_COMPOSERS = Object.freeze(ROUTED_DESKS
+  .map(({ desk }) => `src/domain/display/stateProse/${desk}StateProse.js`).sort());
+/** The candidates leaf each routed desk may now import, and no other. */
+const ROUTED_LEAVES = Object.freeze(ROUTED_DESKS
+  .map(({ desk }) => `src/domain/display/stateProse/${desk}StateProseCandidates.js`).sort());
 
 /** Static `from '…'` specifiers only, the coupling walker's own reader. */
 const IMPORT_RE = /(?:^|\n)\s*(?:import|export)\b[^;'"]*?from\s*['"]([^'"]+)['"]/g;
@@ -168,16 +192,38 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
     expect(CAR_4_LEAF_SPECIFIERS.length, 'and the licensed roster is three, frozen').toBe(3);
   });
 
-  test('⭐ NOTHING IN `src/` IMPORTS THE COMPOSER — the seam is reachable from nothing', () => {
-    expect(importersOf(COMPOSER, LIVE_FILES), 'car 3a lands the seam unwired; 3b–3g wire ONE'
-      + ' DESK EACH, so a manifest drift is diagnosable against one desk\'s diff').toEqual([]);
+  test('⭐ EXACTLY THE ROUTED DESKS IMPORT THE COMPOSER — one desk per car, and no other reach', () => {
+    expect(importersOf(COMPOSER, LIVE_FILES), 'car 3a landed the seam unwired; 3b–3g wire ONE'
+      + ' DESK EACH, so a manifest drift is diagnosable against one desk\'s diff')
+      .toEqual([...ROUTED_COMPOSERS]);
+    // AND NOBODY ELSE AT ALL: a component, a hook or a second desk reaching the composer
+    // directly would compose outside a desk's one law, and the roster above would not say so
+    // on its own — this is the same answer read as a whole-tree fact.
+    expect(importersOf(COMPOSER, LIVE_FILES).filter((rel) => !/StateProse\.js$/.test(rel)),
+      'only a DESK composes').toEqual([]);
   });
 
-  test('⭐ NOTHING IN `src/` IMPORTS A CANDIDATES LEAF EITHER', () => {
+  test('⭐ EXACTLY THE ROUTED DESKS IMPORT A CANDIDATES LEAF, AND ONLY THEIR OWN', () => {
     const wired = CANDIDATE_LEAVES.flatMap((leaf) => importersOf(leaf, LIVE_FILES)
       .map((rel) => `${rel} -> ${leaf}`));
-    expect(wired, 'a desk that started calling its candidates leaf before its own car')
-      .toEqual([]);
+    expect(wired, 'a desk that called a candidates leaf before its own car, or another desk\'s')
+      .toEqual(ROUTED_DESKS.map(({ desk }) => `src/domain/display/stateProse/${desk}StateProse.js`
+        + ` -> src/domain/display/stateProse/${desk}StateProseCandidates.js`).sort());
+    expect(ROUTED_LEAVES.length, 'one leaf per routed desk').toBe(ROUTED_DESKS.length);
+    // ⛔ AND THE OTHER SIDE OF THE FENCE, IN THE SAME ARM SO IT CANNOT BE READ ALONE: a desk
+    // whose car has not run yet reaches NEITHER the composer nor any leaf. Without this the
+    // roster could be satisfied by a tree in which every desk was wired and the scanner had
+    // gone dark — the empty answer and the exact answer would look the same.
+    const routed = new Set(ROUTED_DESKS.map(({ desk }) => desk));
+    const waiting = ['defense', 'economy', 'general', 'power', 'stressors', 'warFaith']
+      .filter((desk) => !routed.has(desk));
+    expect(waiting.length, 'six desks, less the ones landed cars have routed')
+      .toBe(6 - ROUTED_DESKS.length);
+    for (const desk of waiting) {
+      const specifiers = specifiersIn(read(`src/domain/display/stateProse/${desk}StateProse.js`));
+      expect(specifiers.filter((s) => /composeStateProse|StateProseCandidates/.test(s)),
+        `${desk} is not routed yet and reaches neither the composer nor a leaf`).toEqual([]);
+    }
   });
 
   test('⛔ A PLANTED EAGER IMPORT REDS, driven through the live scanner', () => {
