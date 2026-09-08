@@ -1467,3 +1467,331 @@ writer-reach or the OSR. No product surface, composer, pool text, persisted shap
 input. `git stash`, `git add -A/-u/.`, rebase, amend and push: none.
 
 Seat: Opus 5 — Fable-unvalidated
+
+---
+
+## CAR 10 — THE SECOND FOLD'S CURES: 14 code, 32 receipt corrections, the firings re-run, the tiers re-printed — **LANDED** · shas `CAR10SHA` + `CAR10BSHA` · 2026-09-08 01:5x EDT
+
+Seat: Opus 5 — Fable-unvalidated. Dock `$SC/laneINSTR`, **twelve/thirteen** commits over
+`3b1c0eaa5`, porcelain 0 and zero untracked after both.
+Inputs read whole and in the chair's order: `skeptic-instr2/FOLD.md` (273 lines, 46 cures),
+`s12-sitting/SITTING-RULINGS-912.md` **§M**, the three lens files (`census.md`, `cures.md`,
+`receipt-fences.md`), the amended specs (Part B §18 as §M amends it, CLERK-LAWS §2.6.1 and the
+§1.2 NOTE 2, MOVE-GRAMMAR §4.4.2), and §§ CAR 8 and CAR 9 above. **Where a fold cure and §M
+differ, §M wins**, and the difference is named in the row.
+
+### 10.0 THE HEADLINE
+All fourteen code cures are BUILT with the ARM each fold line names, and every arm is proved by
+EXECUTION — nine mutations applied and restored `cmp`-identical, two of them new standing sweep
+plants (**#83**, **#84**). The three arms car 9 shipped code without (cures 2, 12, 15 of the
+first fold) now red when their code is reverted; before this car all three left their walkers
+green. **Zero product bytes moved outside the lane's island**, and the ten-module byte fence
+now asserts that for the whole island rather than for one module of ten.
+
+⚠ **THE LANE'S OWN CENSUS FIGURES MOVE, AND THAT IS THE POINT OF THE CAR.** The corrected
+reader recovers predicates the old one could not: **RESOLVED 310 → 318 · UNRESOLVED 398 → 390 ·
+MISSING 58 → 34 · facts conjoined 44 → 59 · key tables 28 → 29 · unheld-field predicates 158 →
+99 (+78 counted apart as the table rung's own labels)**. No corpus byte, composer, pool text,
+persisted shape or seed input moved; the tier table is the same measurement taken correctly.
+The one-time shift is declared here and every new figure is asserted as an integer.
+
+| | |
+|---|---|
+| the six lane walkers | **148 passed (148)** (car 9's tip: 138) |
+| every focused file run, one at a time | see 10.6 — **fifteen files, 305 assertions, all green** |
+| mutations executed, restored `cmp`-identical | **9** (#77, #79, #80, #81, #82, the new #83 and #84, and the two in-flight reverts of cures 2 and 15) |
+| eslint over every changed file | EXIT 0 |
+| `node scripts/check-full-typecheck.mjs` | `OK — no type regressions (173 error(s), ceiling 173)` |
+| the register that moved | `tests/lint/.lighting-census-baseline.json` — titles and suiteTitles only (car 10 adds no test FILE); refrozen by its ritual in car **10b** |
+
+### 10.1 THE FOURTEEN CODE CURES — each with the arm the fold names and its executed tail
+
+| # | cure | arm | executed tail | verdict |
+|---|---|---|---|---|
+| 1 | `guardAt` anchors to the **LAST** `if (` before the literal, never the leftmost | a four-`if` fixture composer; the recovered row is `{safetyProfile.blackMarketCapture, >=, 3}` | control **(c1b2)**: the three tiers recover **`30` · `15` · `3`** — three different thresholds, which a leftmost reader collapses into one blob. Corpus: rows carrying a predicate **167 → 180**, code fragments **11 → 0** | **DONE** |
+| 2 | `resolvedWithPredicate` and `resolvedWithCleanPredicate` published and ASSERTED | a plant returning `predicate: []` on the literal rung reds the new integers while the split stays green | **plant #83**: planted ⇒ **9 red of 26** including both new integers; the anti-vacuity split (318/390) and the whole tier table stay **GREEN**; restored `cmp`-identical ⇒ 26 passed. Asserted: **185 / 185** | **DONE** |
+| 3 | `spokenTo` normalises with `rootOf` and unions each row's `fieldsRead` | a deeper-path fact and a fact whose guard did not parse; MISSING excludes both, present-then-absent | control **(c1d)**: `readings.exportPosture` (predicate names `…​.status`) and `readings.flowDrift` (regex guard ⇒ `predicate: []`, fact on `fieldsRead`) — both MISSING with no rows, neither with them. Corpus **MISSING 58 → 34** | **DONE** |
+| 4 | the table rung's synthetic `readField` is not "a predicate over a field no composer holds" | `predicatesOverUnreadFields.filter(rung === 'table')` is empty, beside (c3)'s triple | asserted empty; and NON-BLIND: on a census carrying both, the arm names the **literal** row and not the table one (`['literal']`). `158 → 99`, with the **78** table labels counted apart as `syntheticTableFields` | **DONE** |
+| 5 | THIN, COVERED, 65, 140 and 158 asserted as INTEGERS | the assertions themselves | `THIN 483` · `COVERED 225` · `slotless 65` · `bagless 140` · `predicatesOverUnreadFields 99` · `syntheticTableFields 78` — all `expect(...).toBe(n)`. #83 and #79 both red the block, so the split is not vacuous | **DONE** |
+| 6 | `moduleKeyTables` reads the **pair-array** shape as well as the object shape | a pair-array fixture; the four DS-POW-2 rows move UNRESOLVED → RESOLVED, present-then-absent | control **(c1e)**: `stable/unstable/critical/Desperate matched` all reach **rung `table`** with the pair's own first element as the value; a key the table does not name stays UNRESOLVED; the OBJECT-only composer cannot see the key (present-then-absent). `census.tables 28 → 29` | **DONE** |
+| 7 | ONE string scanner that knows all three quote characters | a composer returning `"NICHE: the patron's niche…"` followed by two single-quoted keys; both resolve, present-then-absent | control **(c1f)**: all three keys resolve; struck, the double-quoted one is UNRESOLVED and the two after it still resolve. ⭐ **AND IT CORRECTS THE FOLD'S MECHANISM** — see correction 18 | **DONE** |
+| 8 | `prepared` keyed on `file::fn.name` | `prepared.size === census.functions` with a same-named pair in two files | `census.consulted` published and asserted **118 === 118** (the shipped `foodSecurityPoolKey` collision is real: `economyStateProse.js:393` and `generalStateProse.js:353`). ⚠ MEASURED: consulting the second changes **no** row — RESOLVED is 318 either way, which is why it was invisible | **DONE** |
+| 9 | `walkPair`'s claim key carries the finding's **SITE**; `notExecutable` unions BEFORE and AFTER | BEFORE 1 fail, AFTER 2 fails of one class and column ⇒ `added` reads **1**; plus a BEFORE-only not-executable limb | executed: `added 1 · preExisting 1` (was `added 0 · preExisting 2`); the same entry against itself still reads `added 0 · preExisting 2`; removing one is credited once. The BEFORE-only limb `C2/duty predicate` survives into the pair's `notExecutable` | **DONE** |
+| 10 | the byte fence generalised to **all TEN** island modules (H8) | the same equality plus a non-blindness control, over the ten paths | the scan reads **2,199** `src/` files; each of the ten is found at its own path; breaches outside the island: **[]**. The `wiringCensus` equality is kept as the sharpest single case | **DONE** |
+| 11 | cure 6's third source (`coinFlows.taxed`) guarded | an assertion on the PRESENT branch of the `basis` string; replacing the read with `NaN` must red | **plant #84**: planted ⇒ **1 red of 18**, the present-branch arm by name; restored `cmp`-identical ⇒ 18 passed. A zero is a reading (`taxed = 0`), not an absence | **DONE** |
+| 12 | the four probe-4 sentences as fixtures | `"The wall is old, and all souls are counted here."` ⇒ FAIL `C4/a totality over an open column`; reverting `locate()` must red | all four read **FAIL** `C4/a totality over an open column`. Reverting `locate()` to a substring: **4 red of 27** (the probe-4 arm among them); restored `cmp`-identical. Before this car the same revert left the file **24/24 green** | **DONE** |
+| 13 | cure 15's arm — `DS-POW-5::autocrat#2` | WITHHELD `Q/a trailing coordinate naming no second field`; stubbing the semicolon limb must red | verdict **WITHHELD** on the SHIPPED variant, read from the corpus and not transcribed; the class is carried by **329 of 2,266** entries. Stubbing the semicolon limb: **1 red of 27**; restored `cmp`-identical. Before this car: **24/24 green** | **DONE** |
+| 14 | cure 12's arm — an `existsSync` on the docblock's named fixture path | the path exists and names the export it claims | the docblock's `` `tests/fixtures/grammarControls.js` `` and `` `HAND_TAGGED` `` are read OUT OF THE HEADER STRING by regex, the path is `existsSync`-checked and the file is asserted to carry `export const HAND_TAGGED`; the existence check is driven false on a path no fixture uses | **DONE** |
+
+### 10.2 THE TIER LINE, RE-PRINTED (U4) — car 8's beside car 10's
+
+```
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js --reporter=verbose
+                                        CAR 8        CAR 10      what moved
+  pools                                    708          708      —
+  RESOLVED (reached a recovery rung)       310          318      +4 pair-array · +4 double-quote/apostrophe
+  WIRING-UNRESOLVED                        398          390      the same eight rows, with their reasons
+  of the RESOLVED, carrying a predicate    (unpublished) 185     167 -> 180 by cure 1, then +5 by cures 6/7
+  ... every row a readable comparison      (unpublished) 185     code fragments 11 -> 0
+  recovery rungs   none/literal/table/template
+                            398/167/74/69  390/171/78/69
+  key functions (consulted)          118 (117)   118 (118)      cure 8
+  module key tables                         28           29      STABILITY_LADDER, a pair array
+  slots with NO provider                    65           65      unmoved, now ASSERTED
+  pools in a block with no bag             140          140      unmoved, now ASSERTED
+  predicates over a field no composer holds 158           99      -78 synthetic table labels, +19 newly recovered
+    (the table rung's own labels, apart)  (unpublished)   78
+  facts a key function conjoins              44           59      asserted at :283 both times
+  TIERS · MISSING                            58           34      cure 3 — `fieldsRead` + `rootOf`
+  TIERS · THIN                              483          483      unmoved, now ASSERTED
+  TIERS · COVERED                           225          225      unmoved, now ASSERTED
+  THIN limbs  one-variant/one-grammar/settlement-only
+                             0 / 298 / 440   0 / 298 / 440
+  variants · mean · histogram   2266 · 3.20 · 2->33 3->547 4->96 5->17 6->15   (unmoved)
+```
+⭐ **THE ⭐ FINDING SURVIVES INTACT:** the THIN one-variant limb fires on **0 of 708** — the
+minimum R1 pool is still TWO, and the histogram still sums back on both units.
+
+**§912.1 CONDITION ONE (§M.2 item 51) is discharged on the TIER TABLE AS A WHOLE**, re-printed
+above — never on MISSING alone, which is the integer that moved 41 %.
+
+### 10.3 THE FIRINGS PROBE, RE-RUN ON CAR 9'S CORRECTED SEQUENCE (cure 22)
+
+`$SC/instr-912/firings-10.mjs` — car 8's probe with car 9's two corrections applied and **car
+8's own seeds unchanged** (`instr-912-wiring-<i>`), so the only thing that could move is the
+sequence.
+```
+$ node firings-10.mjs 200
+towns 200 of 200 (generator throws 0) | firings 13486 | mean 67.4/town
+desk throws: none
+distinct (block,pool) keys fired: 181 of 708
+distinct blocks fired: 39 of 68
+general-desk BARE sentences harvested (no (block,pool) key, so not in the count above): 5531
+keys firing on EVERY town: 20
+$ node -e "<set-diff of firings.json and firings-10.json>"
+in car 10 only: []    in car 8 only : []
+```
+⭐ **THE POOL-FIRING COUNT IS RE-BANKED AT 181, AND THE TWO KEY SETS ARE IDENTICAL** — not
+merely equal in cardinality: set identity over 181 keys, 13,486 firings, 39 blocks. Passing the
+`politics` reading changes nothing on a fresh world, because `settlementBlocs` returns null
+there and `politicsPresencePoolKey(null, …)` answers the same DORMANT key either way. FOLD-2's
+P7 ("the key half is untested after the fix") is discharged: the fix moves the key half by zero.
+The general desk's **5,531** bare sentences are harvested and counted, and they carry **no
+(block, pool) key at all**, so they cannot enter this count — stated rather than left implicit.
+
+**THE FIVE ABSENCE/ZERO/DEFAULT KEYS AMONG THE TWENTY THAT FIRE ON EVERY TOWN, NAMED** (cure 41;
+a mechanical `DORMANT|ABSENT|none` rule reads only the first of the five, so the class is named
+by hand from each key's own text and the roster is printed rather than the count):
+```
+DS-POW-7 :: layer DORMANT (no ledger materialized)            <- the whole of DS-POW-7's firing
+DS-REL-2 :: flagDriven count zero
+DS-DEF-3 :: First-Survey qualification (the reading is a first look)
+DS-GEN-11 :: THE FIRST-SURVEY QUALIFICATION
+DS-GEN-5 :: ordinary (route road and the default)
+```
+
+**THE EXECUTION JOIN, RE-TAKEN AGAINST THE CAR-10 CENSUS:**
+```
+of the 181 fired keys: present in the census 181 · RESOLVED 126 (car 8: 122)
+   carrying a NON-EMPTY predicate 76 (car 8: 63) · and a CLEAN one 76
+co-occurrence   no floor: NOT-EXECUTABLE   100: 285 pairs   180: 136   200: 91   201: 0
+TIERS with the pair rows   floor 100: MISSING 319 · floor 180: MISSING 170 · floor 200: MISSING 125
+```
+**THE FLOOR IS STILL THE CHAIR'S.** Three are printed; the module has no default and adds none.
+
+### 10.4 THE PLANTS — nine executed, nine restored `cmp`-identical
+
+Two are new and STANDING (**#83**, **#84**, numbered after #82, each with a unique label and a
+`meta:` manifest entry — the manifest allows one label per entry and both target files' own
+slots are spent). Five are re-executions of the lane's existing plants at this tip, because the
+walker files grew and a comment carrying a stale red count is the roster a successor reads.
+```
+#83 the literal rung returns predicate: []        => 9 red of 26 · the 318/390 split GREEN   [NEW]
+#84 coinFlows.taxed replaced by NaN               => 1 red of 18, the present-branch arm      [NEW]
+#79 the census's fallthrough answers RESOLVED     => 7 red of 26 (was 5 of 21)
+#77 the persons column closes                     => 4 red of 18 (the comment said 1 of 12)
+#80 whatItDoes closed by hand                     => 2 red of 18
+#81 the fired income row stops being read         => 1 red of 18
+#82 the ruin filter leaves the service COLUMNS    => 1 red of 18
+IN-FLIGHT (cure 12): locate() reverted to a substring         => 4 red of 27  (before car 10: 0)
+IN-FLIGHT (cure 15): the semicolon limb stubbed               => 1 red of 27  (before car 10: 0)
+```
+`md5` on the **committed** bytes, before and after every plant, identical:
+`src/domain/institutions/institutionTable.js` **`12401cb8bae0a859204ec67910182925`** (the same
+value the second fold measured at `454d478a1` — car 10 changes no byte of that module, only its
+test); `src/domain/prose/entryWalker.js` `b82d9ab9f40fc942a3ecf9482c88d68f` and
+`src/domain/prose/wiringCensus.js` `6e456c47df79ce49765293ec11574b0e` at the car-10 working
+tree. Every restore `cmp` byte-identical. Backup by `cp`, restore by `cp`, never the checkout
+family.
+
+⭐ **AND THE PLANT ROSTER'S OWN CORRECTION IS NOW EXECUTED TWICE.** #79 was said to red
+C-sibling's premise gate. **C-SIBLING STAYED GREEN AGAIN**, on a file five assertions larger
+than the one the first run measured. So C-sibling's dependence on the census remains **unproven
+by plant** (correction 46), and no plant in the consist proves it.
+
+### 10.5 REFUSALS (car 10), each with its measurement
+
+1. **THE FOLD'S "FOUR TOKENIZER-DESYNC ROWS" IS REFUTED IN ITS MECHANISM, AND THE CURE IS
+   WIDER THAN THE CURE LINE.** FOLD-2 §3a cure 7 attributes four false-UNRESOLVED rows
+   (DS-FTH-3 ×2, DS-ECO-11, DS-GEN-8) to an apostrophe inside a double-quoted literal opening
+   a phantom string. Executed: masking that apostrophe moves exactly **ONE** row
+   (`DS-FTH-3 :: NICHE: every niche uncontested`). The other three are keys the composers
+   WROTE IN DOUBLE QUOTES — `"STRATEGIC VALUE: the generator's assessment, framed"`,
+   `"steading row: provenance: 'forced'"`, `"NICHE: the patron's niche carries a contestant"` —
+   which the single-quote scanner never read as key forms at all. A mask cannot reach them. So
+   the cure shipped is ONE scanner that knows all three quote characters, which closes both
+   halves and moves all four rows; the fold's substance stands and its mechanism is corrected.
+2. **THE PAIR LIMB OF `tierRows` STILL COMPARES PREDICATE FIELDS ONLY.** Cure 3 unions
+   `fieldsRead` into the HELD-FACT limb, which is what the fold names. The co-occurring-PAIR
+   limb is left reading `r.predicate` because that is where its pairs came from:
+   `coOccurringPairs` builds a town's facts from the predicate fields of the keys that fired,
+   so a pair member is a predicate field by construction and unioning `fieldsRead` there would
+   compare two different populations. Declared, not deferred silently.
+3. **THE `predicate: []` ROWS ARE NOT A DEFECT TO CURE TO ZERO.** 133 of the 318 RESOLVED rows
+   still carry no predicate row, and most are honest: a guard that is a regex test
+   (`/\bsiege\b/.test(lower)`), an `.includes()`, a call. `predicateRows` declines to turn
+   those into a `{field, op, value}` triple rather than guess one, which is the census's whole
+   rule. The number is published (`resolvedWithPredicate`) rather than driven down.
+4. **THE CO-OCCURRENCE FLOOR IS STILL THE CHAIR'S** (car 8's refusal 4, car 9's refusal 5,
+   unchanged). This car re-measures three floors on the corrected census and adds no default.
+5. **U6 IS STILL NOT EXECUTED, BY THE LANE'S OWN MEASUREMENT DISCIPLINE.** The brief forbids
+   the whole suite; the fold prescribes it on the MERGED tree after H3's refreeze. Fourteen
+   focused files are green here, one at a time — see 10.6.
+6. **ONE DECLARED DEVIATION FROM "ONE FILE AT A TIME".** The anchor ratchet and the file it
+   flagged were re-run together once (36 passed), to see the ratchet clear on the same tree
+   that produced the flag. Both were then re-run **individually** and both tallies below are
+   from those single-file runs.
+
+### 10.6 THE PROOFS — every focused file run ALONE, with the gate check in its own shell call
+
+```
+tests/lint/proseWiringCensus.walker.test.js          26 passed (26)   (car 9: 21)
+tests/lint/proseEntryContradiction.walker.test.js    27 passed (27)   (car 9: 24)
+tests/lint/proseMoveGrammar.walker.test.js           50 passed (50)   (car 9: 49)
+tests/lint/institutionTable.walker.test.js           18 passed (18)   (car 9: 17)
+tests/lint/proseRegisterLoaders.walker.test.js       13 passed (13)
+tests/lint/proseMeasures.walker.test.js              14 passed (14)
+                                   the six lane walkers: 148 (car 9: 138)
+tests/lint/mutationCoverageManifest.test.js          10 passed (10)
+tests/lint/negativeAssertionAnchor.walker.test.js     9 passed  (9)
+tests/lint/tuningRegister.walker.test.js             75 passed (75)
+tests/lint/contractTestAntiVacuity.walker.test.js    15 passed (15)
+tests/lint/domainAnyCastBaseline.test.js             19 passed (19)
+tests/lint/proseFamilyContract.walker.test.js         8 passed  (8)
+tests/lint/domainStrictBaseline.test.js              12 passed (12)
+tests/lint/domainStrictFailClosed.test.js             6 passed  (6)
+tests/lint/sizeBaseline.test.js                       3 passed  (3)
+                                   FIFTEEN FILES · 305 assertions · all green
+$ npx eslint <the seven changed files> ; echo EXIT=$?
+EXIT=0
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+```
+Pre-run gate before EVERY vitest invocation, in its OWN shell call (car 8's hazard respected):
+`ls $SC/HOLD-VITEST` absent; split-pattern runner count **0**. No `--write`, no `--update`, no
+whole suite, no build.
+
+**⭐ THE ESTATE'S RATCHETS CAUGHT ONE MORE DEBT IN THIS CAR, AND IT IS CURED RATHER THAN
+MARKED.** `negativeAssertionAnchor.walker.test.js` flagged one un-anchored negative introduced
+by the probe-4 arm (`proseEntryContradiction.walker.test.js:618`). It is now a real removal
+pair: the same sentence with the quantifier struck out, through `expectPresentThenAbsent`. Nine
+ratchets green.
+
+### 10.7 THE PROMISE — held
+No product surface, composer, pool text, persisted shape or seed input moved. `drawVariant` is
+byte-unchanged. The two `src/` modules this car edits — `wiringCensus.js` and `entryWalker.js` —
+are inside the same island, and the fence arm now proves by BYTES that no `src/` file outside
+`src/domain/prose/` and `src/domain/institutions/institutionTable.js` names ANY of the ten
+island modules (2,199 files scanned, breaches `[]`). `wiringCensus.js` still reads no file and
+holds no state; every source it measures arrives as a string from the test helper.
+
+### 10.8 WHAT A SUCCESSOR CONTINUES FROM
+Dock tip = car 10b, porcelain 0, zero untracked, **thirteen** commits over `3b1c0eaa5`; the
+PRODUCT tip has since moved to `f3ab08f51` in another dock and **the rebase is the chair's**
+(FOLD-2 §5, H1–H9), not this lane's. FOLD-2's forty-six cures are discharged: **14 code (built,
+every arm executed) · 32 receipt (below) · 9 spec (the chair's §M, already written into Part B
+§18, CLERK-LAWS §2.6.1 and §1.2 NOTE 2, and MOVE-GRAMMAR §4.4.2)**.
+
+⚠ **THE REBASE INSTRUCTIONS THIS CAR CHANGES:**
+- **H1** — INSTR now contributes **ELEVEN** manifest entries for **eleven** plants: six
+  `invariants` (car 7's five and #79) and **five** `meta:` (car 9's three, plus car 10's
+  `meta:prose-wiring-census-resolved-is-not-recovered` and
+  `meta:institution-table-third-source-actually-read`). Still re-applied **by text** in the
+  dock's current serialization: car 10's edit is **10 insertions, 0 deletions**, no
+  re-serialization.
+- **H2b** — the consist's plant comments now run **`#74` … `#84`** (eleven plants, eleven
+  distinct labels). With §913 holding `# 74`, the instruction becomes **renumber INSTR's
+  `#74`–`#84` → `#75`–`#85`, comments only, labels untouched.** ⚠ The number is still not a
+  locator: **find the lane's plants by LABEL.**
+- **H2** — `MUTATED_FILES` is unchanged at 66 (both new plants target files already on the
+  roster). `src/domain/display/heraldIntegrity.js` is still the lane's only roster entry
+  outside the island.
+- **H6** — the census's asserted integers are now **708 / 2266 / 318 / 390 / 185 / 185 / 59 /
+  65 / 140 / 99 / 78 / 118 / 29 / MISSING 34 / THIN 483 / COVERED 225**. Every one of them will
+  red on a rebase that moves a composer or a pool — that is the gate working. **Re-take the
+  census by §8.2's command; never edit the numbers.** Nothing in the tier table is `console.log`
+  only any more.
+- **H8** — **LANDED** (cure 10): the fence covers all ten island modules.
+- **H9** — **LANDED** (cure 9): `walkPair` can see an added FAIL of an inherited class.
+
+**STILL OWED, and unchanged by this car:** U6 on the merged tree; the per-tab presence measure
+(the kernel lane's); the co-occurrence floor (the chair's, after ARCH car 0); the seven lost raw
+exemplar texts (the owner's); R5's 374-vs-373 disagreement, cause unknown; `$SC/prose-research`
+under version control (§M.4, the chair's).
+
+---
+
+## CAR 10 — CORRECTIONS TO CARS 8–9
+
+Thirty-two rows, items 15–46 of FOLD-2 §3b. **Nothing above is edited in place**; each row
+QUOTES the superseded sentence and states the measured one. Where a sentence cannot be quoted
+because the superseded material is a TABLE ROW or a FENCED BLOCK, the row says so and quotes the
+cell or the line — P16's finding taken seriously, so no row here describes where a quote exists.
+
+| # | section | the superseded sentence, QUOTED | the measured sentence | cure |
+|---|---|---|---|---|
+| 15 | §8.2 · §8.11 | the walker's own assertion message: *"pools whose selecting predicate was RECOVERED"* — 310; and §8.11's row *"pools the wiring can license \| **310** of 708"* | **RESOLVED counts a RUNG REACHED, never a predicate read.** At the car-8 tip 143 of the 310 carried `predicate: []` and 11 carried a code fragment as their VALUE. At this tip, with the guard reader corrected: **318 reached a rung · 185 carry a predicate row · 185 of those are readable comparisons · 133 carry `predicate: []` honestly** (a regex or a call for a guard, which the census declines to turn into a triple). The message now reads *"pools that reached a recovery RUNG"* and two narrower integers ship beside it | 2 |
+| 16 | §8.3 · §8.11 | §8.11's row *"MISSING (held facts with no pool) \| **58**; **163** with the co-firing pairs at the 90 % floor"* | **MISSING 58 → 34.** The membership test read `r.predicate.map(p => p.field)` on the raw string: a fact a key function READS but whose guard did not parse was invisible, and a fact spoken to only through a deeper path (`readings.exportPosture.status` against the held `readings.exportPosture`) was falsely MISSING for want of `rootOf`. Both are cured; the corrected figure is **34**, and with the pair rows at the 180 floor **170** | 3 |
+| 17 | §8.2 · §8.11 | the fenced block's line *"predicates over a field no composer holds: 158"*, and §8.11's row *"predicates over a field no composer holds \| **158**"* | **158 → 99, and 78 of the old 158 were the instrument's own bookkeeping.** Rung 3 writes the same synthetic string — `"<reader> (via <TABLE> in <file>)"` — into both `predicate[].field` and `fieldsRead`; its `rootOf` is the whole string, which no held set can contain, so every table row was a finding BY CONSTRUCTION. The table rung is excluded and its labels are counted apart as `syntheticTableFields` **78**; the usable figure is **99** at this tip | 4 |
+| 18 | §8.2 · §8.7 refusal 1 | the fenced block's *"the ten largest UNRESOLVED reasons:      [there are TWO, and they are exhaustive]"* | **Eight of the 256 mounted-UNRESOLVED rows carried an affirmatively FALSE reason, and all eight are cured** — four DS-POW-2 rows whose key IS in a module-level pair-array table (cure 6) and four keys the single-quote scanner could not read (cure 7). ⚠ **AND THE FOLD'S MECHANISM FOR THE SECOND FOUR IS CORRECTED**: masking the apostrophe moves ONE row; the other three are keys the composers wrote in DOUBLE quotes, which the scanner never read as key forms at all. The two reasons are exhaustive again at **390**, on eight fewer rows | 6, 7 |
+| 19 | §8.4 | the fenced block's *"TIERS with the pair rows: MISSING 163 · THIN 483 · COVERED 225"*, printed directly under *"floor 200:  91"* | **163 was the floor-180 figure, not the floor-200 one** (58 + 105 = 163; floor 200 gave 149). §8.11's *"at the 90 % floor"* was right; §8.4's layout was not. Re-taken on the corrected census in 10.3, every floor labelled with its own tier line: **floor 100 ⇒ MISSING 319 · floor 180 ⇒ 170 · floor 200 ⇒ 125 · floor 201 ⇒ 34** | 19 |
+| 20 | §8.9 and `scripts/mutation-sweep.sh`'s #79 comment | *"planted  => 5 red of 21 — the anti-vacuity split (310/398), control c1's UNRESOLVED pool, control d's mixed fixture, the grammar walker's D/wiring arm, C-sibling's premise gate"* | **The count was right and the roster wrong by one: the fifth red was control (c1c), and C-SIBLING STAYED GREEN.** Re-executed at the car-10 tip on a file five assertions larger: **7 red of 26** — the anti-vacuity split, (c1), (c1c), (c1e), (c1f), (d) and arm D. C-sibling stayed green a second time. The sweep comment is corrected in place and says so | 20 |
+| 21 | §8.2 · §8.3 | §8.2's heading *"THE CENSUS SUMMARY — reproducible by ONE command"*, over a fenced block introduced by the `npx vitest run …` line | **The block was ASSEMBLED, not verbatim.** Five printed `DS-DEF-4 :: capture …` lines were compressed into one and the `(via … in defenseStateProse.js)` tails dropped; §8.3's `facts a key function conjoins: 44` is **asserted** at `proseWiringCensus.walker.test.js:283` and never printed; the 19-block settlement-only list is not in the walker's output. 10.2's block is labelled a COMPARISON of two runs and is not presented as command output | 21 |
+| 22 | §8.4 · §8.11 | the fenced block's *"distinct (block,pool) keys fired: 181 of 708      # ← the finding, before any pair is counted"* | **RE-BANKED AT 181 ON CAR 9's CORRECTED SEQUENCE, and the two key sets are IDENTICAL** — set identity over 181 keys, 13,486 firings, 39 blocks, car 8's own seeds unchanged. Passing the `politics` reading moves nothing on a fresh world: `settlementBlocs` returns null there and `politicsPresencePoolKey(null, …)` answers the same DORMANT key. The general desk's 5,531 bare sentences carry no (block, pool) key and cannot enter the count | 22 |
+| 23 | §8.6 · the LABEL RULE (§8.7 refusal 2) | *"The annex's pool DESCRIPTIONS are not parsed into predicates."* | **True of the FIELD on every rung, and the VALUE is a different question.** The TEMPLATE rung binds its value from the pool-key STRING — `bindTemplate` matches `` `posture ${status}` `` against `posture peace` and reads `'peace'` — for **69** pools. That is recovery against a template the composer itself wrote, and it is defensible; it is now said plainly here and in the census docblock rather than left inside the phrase "read OFF the key" (SITTING §M.2 item 54) | 23 |
+| 24 | §9.4 | *"`md5` before and after every plant identical (`a1670cfbb22b894e2e051d60992ff2aa`)"* | **That md5 is of an IN-FLIGHT working copy** — car 9's own anti-vacuity cure landed after the plants ran — so it cannot serve a successor as the restore check it looks like. The COMMITTED bytes of `src/domain/institutions/institutionTable.js` at `8c53ddef1`, `454d478a1` and at this car's tip are **`12401cb8bae0a859204ec67910182925`**, measured three times by three readers. Car 10's own plant md5s are in 10.4, on committed or working bytes as each line says | 24 |
+| 25 | §9.8 | *"The fold's sixty cures are discharged: **18 code (built, none by citation) · 42 receipt (below) · 12 spec (the chair's §L, with the ONE Part B blank filled)**."* | **Those three sum to 72, not sixty.** The error is inherited: the first fold's §3b heading read "RECEIPT CORRECTIONS (30)" while its items ran 19–60, which is 42. The sentence should read **72 cures (18 · 42 · 12)**. FOLD-2's own arithmetic is right: 46 = 14 · 23 · 9, and this car discharges 14 code and **32** receipt rows (15–46), the chair having already written the 9 spec items | 25 |
+| 26 | §9.1 rows 2, 12 and 15 | the verdict cell **"DONE"**, in the same shape as the fifteen rows that carry arms | **Code built, ARM owed — until this car.** Cures 2, 12 and 15 of the first fold shipped their code with no fixture naming them: reverting `locate()` left the walker 24/24 green, and so did stubbing the whole semicolon limb. Car 10 builds all three arms (cures 12, 13, 14 of FOLD-2) and executes each revert: **4 red of 27**, **1 red of 27**, and a docblock path check driven false | 12, 13, 14 |
+| 27 | §9.1 row 6 | *"`whatItCounts` closed (3 of 3 read — the fired income row and `coinFlows.taxed` are now read)"* | **The third source reached only a `basis` STRING no test asserted, and on every generated settlement the ABSENT branch is taken** (the treasury is a world-pulse structure no generator writes), so replacing the read with `NaN` left the file green. `closed === true` — the over-licensing direction §L.2 item 62 forbids — rested on a read no arm could see go dark. Cured: the PRESENT branch is asserted, a zero is a reading rather than an absence, and standing plant **#84** reds 1 of 18 | 11 |
+| 28 | §9.1 row 15 | *"the class reads **890 of 2,266** R1 variants, report-only"* | **890 is a count of FINDINGS, not of variants** — 330 trailing-coordinate plus 560 second-sentence. The trailing limb is carried by **329 entries**, measured twice (the lens's figure and this car's own, on the shipped corpus), and 329 is now asserted in the walker beside the named `DS-POW-5::autocrat#2` control | 13 |
+| 29 | §9.1 row 18 and the lane headline | *"DORMANT draws **3 → 0** with a materialised ledger"* | **The SHIPPED sequence draws the DORMANT key on 3 of 3 towns and on 200 of 200 towns; zero is reached only under a synthetic materialised ledger.** §9.2 discloses it and the cure-table tail does not, so a reader taking "3 → 0" from the table believes the shipped sequence draws none. The qualifier is carried into every summary from here on, and 10.3 measures the same key firing on every one of 200 towns — the whole of DS-POW-7's firing | 29 |
+| 30 | §9.3 refusal 1 and the code comment | *"it fires **no arm of this walker at all**"* (of `RECEIPT_POOLS_DOSSIER_STATE.md:2247`, at every value of the provenance flag) | **It fires five arms at every flag value** — 2 WITHHELD `Q`, 3 NOTE (C1 ×2, C4) — and reads WITHHELD. What it produces is **no FAIL and no C3 finding**, which is all the gate asserts. The refusal's substance stands and its sentence does not; the correct wording is *"produces no FAIL and no C3 finding at any flag value"* | 30 |
+| 31 | §9.1 row 16 · §9.3 | *"**44 of them, the same 44** the flagless walk reports not-executable"* | **The claim is stronger than the arm.** Set IDENTITY holds over the 3,132-entry corpus: `notExecutable` {44} and `fails` {44} are the SAME 44 entries, zero either way. But the gate asserts only the two CARDINALITIES, so what is claimed (identity) and what is proven (two counts agreeing) are different statements. Both are recorded here; the arm is unchanged | 31 |
+| 32 | §9.1 row 12 | *"`tests/fixtures/grammarHandTagged.js` → `tests/fixtures/grammarControls.js`, `HAND_TAGGED`"* | **No file was renamed.** The change was a one-line reference fix in `moveGrammar.js` (2 ±) plus 47 added lines in `grammarControls.js`; the arrow notation oversells it. And the docblock STRING it fixed was itself unguarded until cure 14, which now reads the path and the export name out of the header and checks both | 14, 32 |
+| 33 | §9.2 · §11 (f) | *"the sentence's trailing parenthetical "(blank until measured — a blank is not a number)" is now stale and is left untouched"* | **That phrase occurs ZERO times in `RULES-V2-PART-B.md`** — the OWED row pointed at nothing. What was stale in that bullet was the future-tense clause *"replace them here when car 9 lands"* and the attribution *"(INSTR car 8's probe)"*, car 9 having refused car 8's probe and built its own sequence. The chair has since struck both under §M.2 items 47/48, and the row is WITHDRAWN | 33 |
+| 34 | §9.0 · §9.6 | the table cell *"focused suites, sixteen files, on the COMMITTED tree \| **329 passed (329)**, 18.28 s"* | **The lane's only unreproduced aggregate**, because both skeptic fences permit one focused file at a time. Car 10 does not re-take it; it replaces it with the honest form — **fifteen files run ONE AT A TIME, 305 assertions, each tally printed per file in 10.6** — and leaves the sixteen-file aggregate to the merged-tree run U6 prescribes | 34 |
+| 35 | §8.2 · §8.11 | §8.11's rows *"THIN \| **483** = 0 one-variant · 298 one-grammar · 440 settlement-only"* and *"COVERED \| **225**"* | **Both were `console.log` only, as were 65, 140 and 158**, while Part B §18 sized the authoring wave from all three tier figures — so two of the three could drift silently under the rebase H6 says must re-measure everything. **All are asserted as integers now** (cure 5): THIN 483 · COVERED 225 · slotless 65 · bagless 140 · unheld-field 99 · synthetic table labels 78 | 5, 35 |
+| 36 | §8.10 · the fences | *"the fence arm proves by bytes that nothing under `src/` outside `src/domain/prose/` imports it"* | **It fenced ONE module of TEN.** `entryWalker`, `grammarWalker`, `moveGrammar`, `presenceMeasure`, `plantLedger`, `proseFingerprint`, `entryGround`, `entryLexicons` and `institutionTable` had no such arm, so a §913 or wave car could wire any of them into a product surface and no gate would say so (FOLD-2's H8). **Cured**: the arm now scans 2,199 `src/` files, finds each of the ten at its own path, and asserts zero hits outside the island | 10, 36 |
+| 37 | §9.5 U8 | *"**159 entries fail on both, and ZERO verdicts flip.**"* | **The load-bearing half is CONFIRMED THREE TIMES — 0 verdicts flip — and the companion integer is WITHDRAWN as a standalone figure.** Three independent constructions read three numbers: car 9's **159** (ground unnamed and unrecoverable from the receipt), the second fold's **148** (seed `census-town`, the annex-joined corpus), and car 10's **118** (`$SC/instr-912/probe-u8-car10.mjs`: corpus = state leaves + crier voice + in-function narratives, **2,664** entries; ground = `settlementGround(institutionTableOf(s, {bandOf}))`; seeds `census-town`, `census-hamlet` and `census-city`, all three reading 118 closed, 118 open, 118 on both, **0 flips**). The count is a property of its corpus and its ground; only the ZERO travels. Any future companion integer names both or is not written | 37 |
+| 38 | §9.8 · the K.6 row | the walker docblock's *"⚠ THE FOURTH SOURCE IS UNREACHABLE BY IMPORT AND IS DECLARED RATHER THAN SKIPPED."* — the only declared looseness in the office roster | **A second looseness is banked beside it: the keyword half licenses by VOCABULARY.** `sheriff`, `constable` and `sergeant` are held ONLY by `ROLE_CATEGORY_KEYWORDS`, a categorisation vocabulary, and by no instantiated role list. No corpus entry turns on them today (the set of entries hidden by the keyword half is measured EMPTY), but a wave car authoring a constable would pass C2 on a keyword rather than on an office the world instantiates. The chair has written it into CLERK-LAWS §1.2 NOTE 2 (§M.2 item 55) | 38 |
+| 39 | FOLD §4's figures, wherever the chair carries them | *"20 files / 17 additions"* at `74a1aa0e8`, and *"89 sweep labels, 79 manifest mutation entries"* | **21 / 18 at `74a1aa0e8`; 25 files — 22 additions, 3 modifications — at `454d478a1`.** And the manifest join is **EXACT at every sha — 85 = 85 (base) · 90 = 90 (`74a1aa0e8`) · 94 = 94 (tip)** — once `check_caught_planted` is counted against `meta` as well as `invariants`. The "1-and-11 asymmetry" was an artefact of reading `invariants` only, and it must not steer the rebase. Car 10 adds two labels and two `meta` entries, so the join stays exact at 96 = 96 | 39 |
+| 40 | §8.13 · §9.8 | *"Dock tip `27c24522c`, porcelain 0, zero untracked, nine commits over `3b1c0eaa5`."* — the successor block, which hands on the consist without its plant-numbering hazard | **The sweep carries DUPLICATE `# NN.` comment numbers at the base and at the tip** — 37, 38, 39, 47, 48, 72, 73, 74, 75, 76, 77, 78, 79 — so **the number is not a locator**. The lane's plants are found by LABEL (`INSTR-912 car N`, and each plant's own unique `check_caught` label). At this tip the lane's comments run `#74`–`#84`, eleven plants with eleven distinct labels | 40 |
+| 41 | §8.4 refusal 2 | *"so the pools they key cannot fire, and this receipt does not present 181 as a ceiling"* | **The caveat is right and its measured consequence was missing.** Of the twenty keys that fire on EVERY one of 200 towns, **five are absence, zero or default pools** — `DS-POW-7 :: layer DORMANT (no ledger materialized)` (which is the whole of DS-POW-7's firing), `DS-REL-2 :: flagDriven count zero`, both First-Survey qualifications (`DS-DEF-3`, `DS-GEN-11`) and `DS-GEN-5 :: ordinary (route road and the default)`. All five are named in 10.3, because a mechanical `DORMANT\|ABSENT\|none` rule reads only the first of the five | 41 |
+| 42 | §8.4 | the fenced block's *"of the 181 fired keys, RESOLVED in the census: 122"* | **Only 63 of the 181 carried a NON-EMPTY predicate at the car-8 tip**, so `coOccurringPairs` — whose facts-of-a-town are the predicate fields of the keys that fired — saw the facts of a third of what fired, and the co-occurrence measure inherited the literal rung's defect. Re-taken on the corrected census: **126 RESOLVED · 76 carrying a predicate · 76 of those clean**, and the pair counts rise with them (floor 100: 168 → 285) | 42 |
+| 43 | §8.3 · §F | the fenced block's line *"facts a key function conjoins: 44"*, presented as walker output | **44 was ASSERTED at `proseWiringCensus.walker.test.js:283` and never printed** — the stronger fact, presented as the weaker one. It is still asserted, and at this tip the integer is **59**: the corrected guard reader recovers fifteen more distinct fields, which is the same movement as 167 → 180 rows carrying a predicate | 43 |
+| 44 | §8.2 · §8.11 | the fenced block's *"key functions 118 · module key tables 28"* | **118 was `fns.length`, not what the ladder consulted.** `prepared` was keyed on the BARE function name and two desks both export `foodSecurityPoolKey`, so 118 collapsed to **117 consulted** while the walker asserted 118. Cured (cure 8): the key is `file::name`, `consulted` is published, and the two are asserted EQUAL at **118**. Key tables read **29** now — `STABILITY_LADDER` is a pair array and was invisible | 8, 44 |
+| 45 | §9.6 · U7 | *"So the "named message" half is confirmed and the "`failing > 4` red" half is a wave-scale prediction, not a one-anchor one."* — correct, and left inside a U row rather than banked as a standing figure | **Banked as a standing figure for the wave:** curing ONE anchor moves `failing` **251 → 250** against `FAILING_FLOOR = 4`, so the census bound does **not** red; only the named message does, **2 of 24**. A wave car that cures an anchor must name its replacement in the same car and lower the floor deliberately — the procedure is in the walker's docblock and `armCandidates()` prints live replacements per arm | 45 |
+| 46 | §8.5 · §8.6 | §8.6's *"**Grammar walker, C-sibling.** Its premise is "same key ⇒ same state"… with an UNRESOLVED census row the arm reports `C-sibling/wiring` NOT-EXECUTABLE instead"* — true of the code, and offered beside a plant roster that named C-sibling as a red | **Plant #79's five-red roster is the only executed proof that the census's own walkers consume it, and C-SIBLING IS NOT IN IT.** Arm D reds; C-sibling does not — measured twice, at the car-8 tip (5 red of 21) and again here (7 red of 26). C-sibling's census dependence is proved by its own in-test control and **not by any plant in the consist**. Recorded so the rebase does not read the arm as plant-covered | 46 |
+
+**FENCES OBSERVED (car 10).** Changed only: `src/domain/prose/wiringCensus.js`,
+`src/domain/prose/entryWalker.js`, `tests/fixtures/wiringFixtures.js`, the lane's four
+`tests/lint/*.walker.test.js` (wiring census, entry contradiction, move grammar, institution
+table), `scripts/mutation-sweep.sh` (comments plus two plants numbered after #82, each with a
+unique label), `scripts/mutation-coverage-manifest.json` (by text, in the dock's current
+serialization: 10 insertions, 0 deletions, no re-serialization),
+`tests/lint/.lighting-census-baseline.json` (car **10b** only, by the door's own ritual), the
+probes under `$SC/instr-912/`, and this receipt. No product surface, composer, pool text,
+persisted shape or seed input. No `--write` and no `--update` on writer-reach or the OSR. No
+whole-suite run. `git stash`, `git add -A/-u/.`, rebase, amend and push: none.
+
+Seat: Opus 5 — Fable-unvalidated
