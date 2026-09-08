@@ -1022,10 +1022,20 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
       ],
       'fact-and-position-budget': [{ ...COMPOSITION_BOUNDS }],
       'registry-id': [META_ROWS.filter((r) => r.meta.role === 'turn').length],
+      // ⛔ A NON-MECHANISM WITH A PIN (SEAM car 5c, SITTING §R cure 4). `seat` was the one
+      // register entry carried by ARGUMENT rather than by a measurement, so nothing red if a
+      // later car started emitting it on a spine. The pin is its own promotion trigger.
+      seat: [META_ROWS.filter((r) => r.meta.seat !== undefined).length],
       'instance-key': [META_ROWS.filter((r) => INDEX_PAIRED_BLOCKS.includes(r.id) && r.meta.attach.length > 0).length],
     };
     const drift = [];
-    for (const m of SHIFT_REGISTER.mechanisms) {
+    // A NON-MECHANISM MAY CARRY A PIN, and when it does the same loop recomputes it. A
+    // mechanism MUST carry one (asserted above); a non-mechanism's pin is the trigger that
+    // promotes it, so it is walked here and not in an arm of its own.
+    const pinned = [...SHIFT_REGISTER.mechanisms, ...SHIFT_REGISTER.notMechanisms.filter((n) => n.pin)];
+    expect(pinned.length, 'the loop must reach every pinned row, mechanism or not')
+      .toBe(SHIFT_REGISTER.mechanisms.length + 1);
+    for (const m of pinned) {
       m.pin.forEach((pin, i) => {
         if (pin.kind === 'source') {
           const src = readFileSync(resolve(ROOT, pin.file), 'utf8');
@@ -1043,7 +1053,8 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
         if (!same) {
           drift.push(`${m.id} pin ${i} (${pin.over}): the register pins ${JSON.stringify(want)}`
             + ` and the corpus measures ${JSON.stringify(now)}. If this move is intended, it is a`
-            + ` ${m.shift} landing: edit the row IN THE SAME COMMIT and say so.`);
+            + ` ${m.shift || 'PROMOTION of a named NON-mechanism to a mechanism'} landing:`
+            + ' edit the row IN THE SAME COMMIT and say so.');
         }
       });
     }
@@ -1744,6 +1755,15 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     // re-derive whether it was ever a mechanism.
     expect(row.why).toMatch(/SHIFT-CLASS/);
     expect(row.why).toMatch(/0 of 165/);
+    // ⛔ AND THE PROMOTION TRIGGER IS NOW EXECUTABLE, not only written (SEAM car 5c, cure 4).
+    // The argument above is sound and the skeptic could not refute it; what was missing is
+    // that nothing RED if a later car started emitting `seat` on a spine, because the
+    // recompute loop walked `mechanisms` only. The pin is recomputed by that same loop.
+    expect(row.pin, '`seat` must carry a recomputable pin').toEqual([
+      { kind: 'integer', over: 'pools carrying a seat key', value: 0 },
+    ]);
+    expect(META_ROWS.filter((r) => r.meta.seat !== undefined).length,
+      'and the corpus must agree with it').toBe(0);
     // The two register halves agree: it is named NOT a mechanism and it is not a mechanism.
     // ANCHORED on `attach-set`, the mechanism row that governs the OTHER half of how a
     // modifier reaches a spine, so an empty mechanism roster cannot pass as an exclusion.
