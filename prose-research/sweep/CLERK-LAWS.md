@@ -254,3 +254,9 @@ The anti-vacuity guard anchors on SIX shipped breaches, present-then-absent: the
 
 ### §1.2 — NOTE (chair, 2026-09-07; SITTING §L.2 items 61–62)
 `whatItCounts` sources the settlement's INSTANTIATED services, which the code resolves as `availableServices` (no field is named here; no ratification was owed). A column is `closed: true` only when every source this table names for it is read by the code; `whatItCounts`, `whatItDoes`, `whatItDoesNotDo` are `closed: false` until then; `holderRole`'s basis is `'absent'` while its value is a hardcoded null.
+
+### §2.6.1 — THE C-PAIR CLAIM KEY CARRIES ITS SITE (chair, 2026-09-08; SITTING §M.2 item 52)
+"A rewrite may not ADD a FAIL" is enforceable only when a finding is keyed on its SITE (the text or offset) as well as its class, arm and column; a class-only key reads a second fault of an inherited class as `added 0`. The pair instrument's `claimKey` carries the site, and `notExecutable` is the union of BEFORE and AFTER. (INSTR car 10, cure 9.)
+
+### §1.2 — NOTE 2 (chair, 2026-09-08; SITTING §M.2 item 55)
+The C2 office arm's keyword half licenses by VOCABULARY (`ROLE_CATEGORY_KEYWORDS`: `sheriff`, `constable`, `sergeant` are held by no instantiated role list). A wave car authoring such an office cites an instantiated role or WITHHOLDS; the walker's docblock declares the looseness beside its fourth-source note.

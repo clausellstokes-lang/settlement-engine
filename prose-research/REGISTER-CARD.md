@@ -33,3 +33,5 @@ Seat: Fable 5.1 — validated (the chair's one page; the rulebook is `RULES-V2-D
 - Chrome and the docent: never the archivist; the product speaking to the person who runs it; mechanics first, one term per thing, the label as the only emphasis.
 
 **The three questions before any sentence ships.** Which field licenses it? Which claims does it carry, and are they the same claims as before? What does it leave standing open?
+
+**AMENDMENT S2 (chair under the owner's delegation, 2026-09-08 01:1x; SITTING §N.1; vetoable).** A second fact takes its own sentence — except a CONSEQUENCE the engine computed of the sentence's own fact, which may ride as a clause on that sentence: one joint at most, the joint's own comma and word from the connectives list, never "which", the fragment short, the whole unit still two sentences at most.
