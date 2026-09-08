@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED (second pass, after car 12): totalTests 32024 unchanged (car 12 adds no it() title), totalFiles 2491 unchanged, entries 3 unchanged, measuredAtSha moves to HEAD; the voiceMechanics magnitude [files-over-baseline] must now read 2 = ceiling 2, so NO ceiling(s) HELD line may print — a HELD line is a STOP before after-ratchet (E4)"
+echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
