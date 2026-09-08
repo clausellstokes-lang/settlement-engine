@@ -1774,3 +1774,395 @@ $ git rev-list --count 8522a17b2..HEAD
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: MEASURE
+
+---
+
+## CAR 3 — THE FOLD'S CURES (SITTING §P.3)
+
+Shas: **`3e2a644ec`** (car 3) and **`3f68a9978`** (car 3b, the lighting refreeze). Fifteen commits
+over `8522a17b2`. Dock `$SC/laneMEASURE`, cut from `fcd98a3db`.
+
+**Zero product-surface bytes.** The only `src/` motion is `src/domain/prose/wiringCensus.js`
+(+73/−12), the fenced census island. `git diff --name-only 8522a17b2..HEAD -- src/data src/store
+src/generators src/kernel src/components` is empty.
+
+### 3.0 ARRIVAL — the three conditions, executed
+
+```
+$ date
+Tue Sep  8 09:12:47 EDT 2026
+$ ls $SC/HOLD-VITEST
+ls: .../scratchpad/HOLD-VITEST: No such file or directory
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ git rev-parse HEAD ; git status --porcelain -uall | wc -l ; git rev-list --count 8522a17b2..HEAD
+fcd98a3dbb3178adccb37b6f3f103bb5dc03af63
+       0
+      13
+```
+
+The runner-count check was re-taken IN ITS OWN SHELL CALL before every one of the fourteen
+vitest runs this car took. No batching, no exceptions.
+
+### 3.1 THE ELEVEN CODE CURES, EACH WITH THE ARM ITS LINE NAMES
+
+| # | the cure | the arm, executed | verdict |
+|---|---|---|---|
+| 1 | `scripts/prose-rate-corpus.mjs` — the economy desk through its SHIPPED recipe. A new exported `economyDeskOptions(s, opts)` supplies `playerView` from the audience and all four readings the desk defaults to `null`: `foodBalance` and `granaryOutlook` from `dossierViewModel`, `flowDrift` explicitly null (the tab derives it from the OWNING CAMPAIGN's `worldState`; a headless town belongs to none), and `impairedInstitution` from a new `impairedInstitutionOf(s)` that reproduces `ServicesTab.jsx:100` — the ServicesTab derivation U1 named | the walker's two-audience arm on the named golden town (`thorp\|germanic\|forest\|isolated\|civilized`), the fixture arm asserting all four readings present, the paired negative (the same face twice is byte-identical), and the OLD call shape driven beside it answering the DM face at both audiences | **DONE** |
+| 2 | `tests/fixtures/composedReadingSequence.js:192` — the same defective call, cured through the SAME function; the fixture gains an `audience` option so the two faces can be compared at all | a second two-audience arm over the FIXTURE: `composedReadingSequence(1, {audience})` at each face, differing rungs > 0, and the differing pool's text differing | **DONE** |
+| 3 | `scripts/mutation-sweep.sh:1124` — plant #80 re-anchored to include `branchReads: [],` | executed standalone from the committed sweep line: md5 `d4b33c77b7ef5700d089201655135ad5` → `98af0c6e84dba446d772d13a9f16220f` (it moved; before the cure it was `0a28c398…` → itself), then `npx vitest run tests/lint/proseWiringCensus.walker.test.js` → **11 red of 57**; restored `cmp`-identical | **DONE** |
+| 4 | `tests/build/vendorPdfLazy.test.js` — the membership arm SPLIT per the file's own stale-dist policy: the four stray/closure/eager-data/entry comparisons stay ungated, the `!carriers.length` presence limb and the causal leaf's carrier read move behind `it.skipIf(!requireDistRead)` | three executions: (a) a source rewrite against the stale dist (one word of `general.generated.js`'s fingerprint sentence; the stale chunk does not carry the new fingerprint) → **40 passed \| 14 skipped, no red**; (b) the same state under `VERIFY_DIST=1` → **1 failed**, naming the leaf, so the gated half is live; (c) plant B (an eager static import into `settlementSlice.js`) → **2 failed** on both absence arms in the ungated half. All three restored `cmp`-identical | **DONE** |
+| 5 | `scripts/prose-manifest-diff.mjs:61-62` — the `base.textSha === tip.textSha` conjunct dropped, so ADDITIVE means "the unit grew a piece and the SPINE did not move" | driven on the fold's own fixtures: a REAL addition (spine held, text moved) now reads **ADDITIVE 1 / WORDING-ONLY 0** where it read ADDITIVE 0 / WORDING-ONLY 1; the suite's ADDITIVE fixture rebuilt on that shape, with two negatives beside it (a piece added beside a MOVED spine is RE-INDEXED; the ADDITIVE-before-WORDING-ONLY order asserted) | **DONE** |
+| 6 | `tests/property/dossierProseManifest.test.js` — three refusals: `index >= 0` on every cell (written on the TYPE, because `null >= 0` is true in JavaScript and the paired control caught exactly that in this arm); a mount-coverage arm against `DOSSIER_MOUNTS` with a 14-row reason roster whose ground is re-measured against the census; the one-sided positions split BY DIRECTION | each red on the pre-cure recipe (§3.3 below): `index < 0` on 309 cells, 16 absent mounts against the roster's 14, and 36 divergent positions against 345. Player-only positions `[]` with a synthetic control proving the direction split is live | **DONE** |
+| 7 | `scripts/prose-manifest-cells.mjs` — `--seeds N` and `--seed-prefix`, so plant B's 8 × 60 corpus is reproducible from the tree; plus `--record`, the fixture's one write path | U4 re-run in full: see §3.5 | **DONE** |
+| 8 | `absenceOf` distinguishes a refusal guard from a fallback (a `\|\|` whose left operand is the NEGATION of the chain is a guard); `producerIndex` reads the SYNTAX TREE (`astTokens`, espree), so an ES6 shorthand property write is a write and a token inside a comment, a prose string or a template string is not | fixtures both ways in the walker, plus the estate's own hand-spelled cure cited (`fieldManifest.js:373`); the three named shorthand writes are now in the produced set. **`default` 10 → 3** — exactly the fold's seven guards (`readings.inst` 5, `link` 2) | **DONE** |
+| 9 | `objectClassesOf` records EVERY matching class in the frozen list's order; `objectClassOf` is its first, and each row carries `objectClasses` | the :872 arm restated to name the ambiguity: `granary AND hospital` → `['store','care']`, an INTERSECTION test refusing what first-wins admitted, and the shipped count of multi-class keys asserted at **12** | **DONE** |
+| 10 | `pairMemberClass` excludes JS method tails from the `fact` class, reading one frozen `JS_METHOD_TAILS` set that now lives in the census island so both instruments share a spelling | the usable-pair arm asserts **226 → 205** and **170 → 151** with `eco.incomeSources.reduce` named and driven, plus the 38 pairs the exclusion removed, counted rather than dropped | **DONE** |
+| 11 | a `sites` conviction | a fixture census with one mounted block and one the registry does not name: `sites` non-empty on exactly the mounted one and carrying the mount by name; the paired negative (a census with no registry mounts nothing); and `totals.mountedRows` **566** tied to the same column | **DONE** |
+
+⚠ **ONE CURE WENT FURTHER THAN THE FOLD ASKED, AND IT IS DECLARED HERE RATHER THAN DISCOVERED
+LATER.** Cure 8's re-measurement exposed the fold's own P5 shape inside the census's `absent`
+column: eleven cells read `not-produced` about a chain whose tail is a JS method
+(`readings.notableAbsences.map`, `eco.incomeSources.reduce`, `faith.ranks.filter`). Asking a
+producer index whether anything writes `map` is a wrong verdict, not a finding. A FOURTH label
+— `method-call` — ships, on 18 read paths, and the walker asserts the four labels partition the
+451. Vetoable: the alternative is to leave eighteen wrong verdicts in the column the wave reads.
+
+### 3.2 THE RATE HALF, RE-RUN AND RE-FOLDED — the corrected lists beside the committed ones
+
+```
+$ node scripts/prose-rate-corpus.mjs --out $SC/measure/car3-rate-corpus.json      (27 s)
+  generated 768 of 768 (generator throws 0) in 13 s · desk throws none
+  tier marginals: thorp 128 · hamlet 128 · village 128 · town 128 · city 128 · metropolis 128
+  pools that fired: 271 of 708
+  PER-TIER SILENCE FINDINGS: 352 (pool, tier) rows
+    LAWFUL 307 · MISSING-AT-TIER 45 · of 352, at 128 towns per tier
+    MISSING-AT-TIER by block: DS-POW-6 23 · DS-GEN-6 10 · DS-DEF-5 4 · DS-DEF-6 3 · DS-ECO-12 2 · DS-GEN-7 2 · DS-SUP-3 1
+  DEPARTURE bits at the 10 % report line: 72 of 271 fired pools would read 1; 199 would read 0
+  CO-OCCURRING FACT PAIRS WITH NO POOL: 729 distinct pairs over 768 towns
+    ALL pairs clearing the bound: 590 of 729
+    USABLE pairs (both members a dotted reading path): 205 · clearing the bound 151
+    excluded as the instrument's own labels or a builtin: 524 — the UNION of a table-rung
+      synthetic label on 437, an unrooted bare parameter on 108, a JS method tail on 38
+      (the sets overlap)
+    distribution, USABLE: [1-7] 12 · [8-38] 31 · [39-76] 39 · [77-153] 47 · [154-384] 44 · [385-767] 32 · [768+] 0
+$ node scripts/wiring-census.mjs --rates $SC/measure/car3-rate-corpus.json
+[wiring-census] wrote docs/content/wiring-census.json — 708 pools, 165 relation rows, 7 stamped files
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+```
+
+| figure | committed at `fcd98a3db` | at `3e2a644ec` | who reads it |
+|---|---|---|---|
+| pools that fired | 267 | **271** | F2, the walker's `rate.rows.length` |
+| per-tier silences | 347 = 303 + 44 | **352 = 307 + 45** | SITTING §O.5, the authoring wave's per-tier table |
+| departure bits at 10 % | 70 / 197 | **72 / 199** | SITTING §O.4 |
+| distinct pairs / clearing | 729 / 590 | **729 / 590** (unmoved) | §O.3 |
+| USABLE pairs / clearing | 226 / 170 | **205 / 151** | §O.3 — the list the co-occurrence floor is read from |
+| `absent` measured / default / not-produced / method-call | 377 / 10 / 64 / — | **370 / 3 / 60 / 18** | the `absent` column |
+| MISSING-AT-TIER rows on a single-pool rung | 11 (fold) | **12**, of which **8** beyond the twelve split-ladder rows | the third coarseness (P6) |
+
+**NO FLOOR IS SET IN THIS CAR.** §P.2-26 rules the RULES stand and the LISTS are re-read; the
+lists above are printed and nothing is set. The fold predicted 270 / 351 / 72-198 / ≈ 205 /
+≈ 151 with only `foodBalance` restored; the shipped cure threads `impairedInstitution` too, which
+is U1's answer: **one further pool fires (271, not 270), one further MISSING-AT-TIER row appears
+(45, not 44), and the departure denominator is 271** — DS-SUP-3's impaired-house lens.
+
+**The ABSENT column's forty moved cells, printed so no reader has to re-derive them:**
+
+```
+    6  measured      -> method-call   :: readings.notableAbsences.map
+    5  default       -> measured      :: readings.inst          (a refusal guard)
+    4  measured      -> not-produced  :: court                  (a bare key-function parameter)
+    3  not-produced  -> measured      :: eco.safetyProfile.blackMarketCapture   (shorthand write)
+    3  not-produced  -> method-call   :: eco.incomeSources.reduce
+    3  measured      -> method-call   :: reading.rungs.map
+    3  measured      -> not-produced  :: doc
+    2  not-produced  -> measured      :: eco.foodSecurity.stockpile.blockadeBypass (shorthand)
+    2  measured      -> method-call   :: eco.incomeSources.filter
+    2  default       -> measured      :: link                   (a refusal guard)
+    2  not-produced  -> measured      :: faith.unaffiliated
+    2  measured      -> method-call   :: faith.ranks.filter
+    2  measured      -> method-call   :: faith.ranks.find
+    1  not-produced  -> measured      :: readings.prominentRelationship         (shorthand)
+  TOTAL cells moved 40
+```
+
+Six of the eight `not-produced → measured` cells are the fold's own six (P2); the other two
+(`faith.unaffiliated`) it did not name. The four `court` and three `doc` cells moved the other
+way: the line regex had been finding those tokens in a ternary or a comment, and the AST does
+not — they join the 30 bare-parameter cells the fold already counted.
+
+### 3.3 THE MANIFEST — the shift measured, classified, and re-recorded by a recorder
+
+The pre-cure world was reproduced by reverting cure 1's one line, so the shift is a MEASUREMENT
+and not an argument. `scripts/prose-rate-corpus.mjs` md5 `6f4efe97…` → `c4bac429…` planted →
+restored `cmp`-identical, `6f4efe97…`.
+
+```
+$ node scripts/prose-manifest-cells.mjs --out <pre-cure>     (cure 1 reverted)
+  towns 525 · rows 1050 · cells 72160 · 10 s
+  … recomputation would draw differently: 6275
+$ npx vitest run tests/property/dossierProseManifest.test.js       (cure 1 reverted)
+     × ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+     × ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE
+     × ⭐ REFUSAL 1: every recorded cell carries a REAL coordinate (index >= 0)
+     × ⭐ REFUSAL 2: every registered MOUNT is recorded, or carries a measured reason
+     × ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+      Tests  5 failed | 9 passed (14)
+$ <restore>  node scripts/prose-manifest-cells.mjs --out <post-cure>
+  towns 525 · rows 1050 · cells 73284 · 10 s
+  … recomputation would draw differently: 5966
+$ node scripts/prose-manifest-diff.mjs <pre-cure> <post-cure>
+PROSE MANIFEST DIFF · 73284 cells on the tip side
+  REPLACED       cells       0 · towns     0
+  RE-INDEXED     cells     309 · towns   309
+  ADDITIVE       cells       0 · towns     0
+  WORDING-ONLY   cells       0 · towns     0
+  UNCHANGED      cells   71851 · towns   525
+  ADDED          cells    1124
+  REMOVED        cells       0
+  ── RE-INDEXED ──  …::player::economics.shadowEconomy::0  (all 309, the player face)
+```
+
+⭐ **THE DECLARED INSTRUMENT SHIFT, TO THE CELL (SITTING §P.2-29).** **309 RE-INDEXED** — the
+chair's own figure, every one of them a player cell at `economics.shadowEconomy` that had been
+recording a `dm-only` variant at `index: -1` — and **1,124 ADDED**, the cells of the two economy
+mounts that could not speak at all. Nothing REPLACED, nothing WORDING-ONLY: no composer, no pool
+leaf and no seed input moved, and the classifier says so in its own vocabulary.
+
+⚠ **AND ONE CORRECTION TO THE RULING'S OWN ARITHMETIC, MEASURED:** §P.2-29 says "cure 1 changes
+309 player cells' variant", which is exact at the CELL grain. At the ROW grain **all 1,050 rows
+move**, because the roll-up hashes a town's whole cell array and every town gained cells. The
+fixture is 141,855 B → **145,375 B**; rows added 0, removed 0, moved 1,050 (525 dm + 525 player).
+
+```
+$ node scripts/prose-manifest-cells.mjs --record
+  towns 525 · rows 1050 · cells 73284 · 10 s
+  RE-RECORDED tests/fixtures/dossier-prose-manifest-golden.json — 1050 rows, shift INSTRUMENT
+$ npx vitest run tests/property/dossierProseManifest.test.js
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 10 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · … above 0 …: 217 · strictly below every probe: 18
+ Test Files  1 passed (1)      Tests  14 passed (14)
+```
+
+**THE PROVENANCE, AND WHAT IT CAN AND CANNOT REFUSE.** The fixture now carries `_provenance`
+inside the bytes the drift arm compares: `shift: INSTRUMENT`, the §P.2-29 ruling quoted, the car,
+a `note` naming what moved, `rows`, `rowsSha` (the digest of the rows ALONE), and `recorder` —
+one sha256 per file whose bytes decide what is recorded (`tests/helpers/dossierManifest.js`,
+`tests/helpers/goldenMasterCorpus.js`, `scripts/prose-rate-corpus.mjs`). A new arm re-reads all
+three from the tree and refuses a mismatch, naming the re-record command. ⚠ **Declared narrower
+than the ruling's letter:** `recordedOverSha` (the parent tip `fcd98a3db`) is DECLARATIVE — a
+recorder cannot know the sha of the commit it is about to land in — and the executable refusal is
+the recorder-sha one. It fires: under the reverted-cure plant the provenance arm red, and under
+plant #94 it red again.
+
+**THE MOUNT ROSTER (39 → 42 of 56).** `economics.foodTile` and `economics.seasonTile` record
+again. `economics.tradeFlow` stays absent and its reason is now stated and re-measured: the rung
+reads `flowDrift`, which the shipped tab derives from the owning campaign's `worldState`. The
+other thirteen absences sit on blocks that fire on **no town of the RATE grid either** — the arm
+re-measures exactly that against the committed census, so a block that starts speaking reds the
+roster instead of passing through it.
+
+### 3.4 THE ALIAS TABLE, CUT TO THREE — and `generator-write` re-cut on an AST
+
+```
+$ node scripts/wiring-census.mjs --join-draft
+  endpoints 89 · desk read roots 85 (15 excluded) · read paths 153
+  candidate rows 33 · endpoints with at least one candidate 14 · with none 75
+  by evidence: docblock 26 · generator-write 4 · identifier 3
+  RELATION ROWS THAT WOULD JOIN under this draft: 4 of 165 · by direction a->b 4
+  RELATION ROWS THAT WOULD JOIN under the RATIFIED rows only (SITTING §P.2-27, the three
+    identifier rows): 0 — the four above rest on evidence the sitting WITHDREW
+  (the shipped join, unchanged and unratified: STRICT 0)
+$ node scripts/wiring-census.mjs --print   |  RATIFIED ALIASES (SITTING §P.2-27) 3
+    cause:occupation               -> war                        war.occupation
+    economicGates.military         -> settlement.defenseProfile  settlement.defenseProfile.economicGates.military
+    system:food_security           -> eco                        eco.foodSecurity.stockpile
+```
+
+`generator-write` **9 → 4**, and the four survivors are exactly the four the fold called sound
+(`historyEventStrands.js:42`, `factionLeaderSecret.js:56`, `npcGenerator.js:169`,
+`defenseGenerator.js:552`). All five unsound citations are gone — the `reason:` prose string, the
+comment line, the template string and the two arrow parameters — and the walker asserts each by
+name. Rows 37 → 33, endpoints with a candidate 15 → 14, debt 74 → 75. The census carries a
+`ratifiedAliases` block (the three rows and the ruling that ratified them) computed by the SAME
+`aliasDraft` function with the file-reading evidence kinds absent, so it costs no I/O and cannot
+drift from the draft mode. **No leaf is written; the shipped join is still STRICT 0.**
+
+### 3.5 THE PLANTS AND THE UNTESTED ROWS
+
+```
+--- plant #80 (RE-ANCHORED)  src/domain/prose/wiringCensus.js
+    d4b33c77b7ef5700d089201655135ad5 -> 98af0c6e84dba446d772d13a9f16220f   (it MOVES now)
+    npx vitest run tests/lint/proseWiringCensus.walker.test.js  =>  11 red of 57
+    RESTORED cmp-identical, md5 d4b33c77b7ef5700d089201655135ad5
+--- plant #93  scripts/prose-manifest-diff.mjs
+    96c4a7ad4ede0495192a9ce49e00b788 -> 2d47d5a09031cceaece480aa019892fe
+    npx vitest run tests/property/dossierProseManifest.test.js  =>  1 red of 14
+      × the five verdicts are tested strongest-first, and each fits its own case
+    RESTORED cmp-identical, md5 96c4a7ad4ede0495192a9ce49e00b788
+--- plant #94  tests/helpers/dossierManifest.js
+    7cc9177080c2bdf980330be286974891 -> c4066362417cd1a90c7171294b45a43a
+    npx vitest run tests/property/dossierProseManifest.test.js  =>  4 red of 14
+      × EVERY CELL RESOLVES TO A VARIANT · × THE DRIFT ARM · × THE PROVENANCE · × the template reader
+    RESTORED cmp-identical, md5 7cc9177080c2bdf980330be286974891
+```
+
+#94's fourth red is the new provenance arm, which is the shape it should have: a recorder whose
+bytes moved can no longer certify the fixture it wrote.
+
+**THE UNTESTED ROSTER (fold §6), WITH DISPOSITIONS:**
+
+| # | disposition |
+|---|---|
+| U1 | **DISCHARGED.** `impairedInstitution` is threaded through `impairedInstitutionOf`, reproducing `ServicesTab.jsx:100`. Its delta, isolated against the fold's foodBalance-only projection: fired **271 not 270**, MISSING-AT-TIER **45 not 44** (DS-SUP-3's impaired-house lens), departure **72 of 271**. |
+| U2 | **DISCHARGED.** `probe-alias.mjs` and `probe-delta.mjs` re-run in this dock at car 3's tip: `key functions 118 · NEW alias entries 50 · guards whose predicate rows change 7 · atoms gained 8`, and at the shipped split `status flips: 0`. 0e.5's three figures reproduce exactly. |
+| U3 | **PARTLY DISCHARGED, and the rest is owed.** Every one of the ELEVEN sweep lines targeting this lane's files was executed standalone at car 3's tip and every one MUTATES (no stale anchor survives the car's re-shaping of `wiringCensus.js`, `prose-rate-corpus.mjs`, `prose-manifest-diff.mjs` and `dossierManifest.js`). The WHOLE sweep is still not run — it spawns a suite per plant, which this car's fence forbids. ⚠ The anchor sweep was taken with a harness whose file-path extraction was wrong for double-quoted `perl` lines: nine plants applied and its restore failed. Every one was reversed by hand and verified — `wiringCensus.js` and `prose-rate-corpus.mjs` from `cp` backups, `wiringBranch.js` to md5 `0af43fad161e6939ec086d4784ab8545` and `stressors.generated.js` to `bc8ee1ea0d9bd8f6ef63dba9da9d7ba6` (both the receipt's own pristine values), `prose-manifest-diff.mjs` and `dossierManifest.js` by reversing the exact substitution and re-running their suite green. `git status` returned to the car's own thirteen files and `--check` is green. Recorded because a restore that fails silently is the failure this estate names. |
+| U4 | **DISCHARGED.** Cure 7's seed flag, then the plant re-run from the tree: `node scripts/prose-manifest-cells.mjs --out <base> --limit 8 --seeds 60` (480 towns, 61,729 cells, 3 s), a third variant appended to `UNWALLED-SMALL`, the same command, then the diff: **RE-INDEXED 454 of 61,729 cells over 227 towns**; the pool's own share **454 of 672 = 6,756 bp** against the P-F1 arithmetic's exact 6,667, seed grain **42 of 60 = 7,000 bp**. Both sit inside car 1's stated Wilson interval [5923, 8149]. `defense.generated.js` md5 `1454b340aea5cab4f1d17c8265859591` before and after, restored `cmp`-identical. The corpus is a different seed family from car 1's, so 6,756 and 6,685 are two seed facts about one arithmetic, not a disagreement. |
+| U5 | **DISCHARGED** — plants #93 and #94 above, each extracted from the sweep by `sed`, run standalone, md5 in and out, restored `cmp`-identical. |
+
+### 3.6 THE GATES
+
+```
+$ npx eslint <the ten changed files>                            ; exit=0
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ npx vitest run tests/copy/voiceMechanics.test.js              ; exit=1 (the banked two, unchanged)
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+$ npx vitest run tests/lint/mutationCoverageManifest.test.js    Tests  10 passed (10)
+$ npx vitest run tests/build/vendorPdfLazy.test.js              Tests  40 passed | 14 skipped (54)
+$ npx vitest run tests/property/dossierProseManifest.test.js    Tests  14 passed (14)   (11 -> 14)
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js    Tests  57 passed (57)   (52 -> 57)
+$ node $SC/measure/voice-scan.mjs <the ten changed files>
+src/domain/prose/wiringCensus.js  literals 310 · em 0 · bang 0        (HEAD: 270 · em 0 · bang 0)
+tests/lint/proseWiringCensus.walker.test.js  literals 1176 · em 19 · bang 1  (HEAD: 970 · 18 · 0)
+```
+
+The strict ratchet lands EXACTLY on its ceiling: 73 new lines of `wiringCensus.js` (732 → **749**
+effective, against the hard 800) added zero strict errors. ⚠ **ONE EXCLAMATION MARK ENTERS A
+WALKER STRING LITERAL AND IT IS NOT PROSE:** the fixture the refusal-guard arm drives is a JS
+guard, `"if (!inst || typeof inst !== 'object') return null;"`. It cannot be spelled without the
+`!` and no `src/` string moved; `voiceMechanics` shows the banked two and nothing else.
+
+### 3.7 THE WHOLE `tests/lint` RUN — twice, and the first red was the lighting ritual's
+
+```
+$ npx vitest run tests/lint                                     ; exit=1  (at 3e2a644ec)
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+AssertionError: the live TEST-title count moved …: expected 23841 to be 23833
+ Test Files  1 failed | 146 passed (147)
+      Tests  1 failed | 2390 passed (2391)
+
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 3 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 3e2a644ec799834228fe95ce88679128210ba316 by MEASURE car 3 (Opus 5):
+  files 2553 -> 2553, parked 375 -> 375, credited 2178 -> 2178,
+  titles 23833 -> 23841, suiteTitles 6376 -> 6377.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js      Tests  34 passed (34)
+
+$ npx vitest run tests/lint                                     ; exit=0  (at 3f68a9978)
+ Test Files  147 passed (147)
+      Tests  2391 passed (2391)
+   Duration  105.86s (transform 22.55s, setup 4.23s, import 144.22s, tests 510.35s, environment 15ms)
+```
+
+147 files and **2,391** assertions against car 2's **2,386** — exactly the walker's five new arms.
+The manifest suite's three new arms live in `tests/property/`, which is why they do not appear
+here. The refreeze's `note` carries the R11 correction in the same act: `vendorPdfLazy.test.js`
+gained eleven arms in **TWO** new describes, not three, measured at both ends of the car-2 consist.
+
+### 3.8 THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. **THE ECONOMY DESK IS CURED THROUGH ITS SHIPPED RECIPE, NOT AROUND IT.** The fold offered
+   calling `economyStateProse` directly with `opts`, which would also have carried the caller's
+   SEED. The brief and §P.1 both say "through the shipped desk-read recipe", so the cure supplies
+   `playerView` and the four readings and lets `economyDeskRead` keep writing the seed from the
+   settlement. **Consequence, measured and NOT cured here:** the manifest's seedless control still
+   cannot reach that desk (`economyDeskRead` writes `seed: String(settlement._seed ?? …)`), so the
+   fold's P11 is unmoved by cure 1 — the fold's claim that cure 1 "un-blinds P11's 152 cells" is
+   **wrong**, and the honest cure is for the seedless control to null `_seed` on the settlement as
+   `galleryImportSettlement.js:67` does. Left for the chair with its measurement rather than taken
+   silently: it changes what the control measures.
+2. **A FOURTH `absent` LABEL** (`method-call`, 18 read paths) — §3.1's note. Vetoable.
+3. **ONE SPELLING OF THE ECONOMY READINGS, IN `scripts/`.** `tests/fixtures/composedReadingSequence.js`
+   imports `economyDeskOptions` from `scripts/prose-rate-corpus.mjs` rather than carrying a second
+   copy. The estate already runs both directions of that edge (`scripts/prose-manifest-cells.mjs`
+   imports `tests/helpers/dossierManifest.js`; the wiring walker imports `scripts/wiring-census.mjs`).
+4. **THE PROVENANCE ARM REFUSES ON THE RECORDER'S BYTES, NOT ON A GIT SHA** (§3.3). The git sha is
+   carried and declared unverifiable.
+5. **`generator-write` IS AN AST READING AND THE OTHER TWO EVIDENCE KINDS ARE NOT.** §P.2-27 re-cut
+   that kind and no other: `docblock` evidence IS a comment line by definition, and
+   `reading-builder` reads two desk-read modules whose bag-key writes a line reader gets right.
+6. **THE `--record` PATH IS NOT THE GOLDEN DOOR.** Car 1's refusal stands (ratified §O.8): while
+   the register is unfrozen, a door write fills fields the register's own arms forbid. The recorder
+   plus the provenance arm is the bounded cure for P12's "nothing refuses a hand-edit".
+7. **THE MOUNT ROSTER IS A FROZEN LIST WITH A RE-MEASURED GROUND**, not a bare count. A roster
+   whose reasons nothing checks is the decoration the fold's M-3 warns about.
+
+### 3.9 THE TIP
+
+```
+$ git log --oneline -3
+3f68a9978 MEASURE car 3b: the lighting census refrozen at car 3's tip by its own ritual …
+3e2a644ec MEASURE car 3: the fold's cures — the economy desk is called by its shipped recipe …
+fcd98a3db MEASURE car 2b: the lighting census refrozen at car 2's tip by its own ritual …
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+$ git rev-list --count 8522a17b2..HEAD
+      15
+$ wc -c docs/content/wiring-census.json tests/fixtures/dossier-prose-manifest-golden.json
+ 1808325 docs/content/wiring-census.json
+  145375 tests/fixtures/dossier-prose-manifest-golden.json
+```
+
+**The commands that recompute this car:** `node scripts/prose-rate-corpus.mjs --out <file>` then
+`node scripts/wiring-census.mjs --rates <file>` (27 s) · `node scripts/wiring-census.mjs --check`
+· `node scripts/wiring-census.mjs --join-draft` · `node scripts/prose-manifest-cells.mjs --record`
+· `node scripts/prose-manifest-cells.mjs --out <f> --limit 8 --seeds 60` (the RE-INDEXED plant's
+corpus) · `npx vitest run tests/lint/proseWiringCensus.walker.test.js` (57) ·
+`npx vitest run tests/property/dossierProseManifest.test.js` (14).
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
+
+---
+
+## CAR 3 — CORRECTIONS TO CARS 0–2
+
+Fourteen rows, the fold's receipt cures 12–25. Each quotes the sentence it supersedes VERBATIM
+from this file and states the measured one with its figure or its command. Nothing above is
+edited: a receipt that rewrites its own history is a receipt a reader cannot audit.
+
+| # | where | the SUPERSEDED sentence, quoted | the measured correction |
+|---|---|---|---|
+| 12 | § CAR 0 §7, and 0e/0f's arm lists | *"New arms, each with a fixture or plant that MUST fire and a cure that MUST silence it: … the RATE corpus's balanced tier axis; the per-tier silence rule on a fixture; the Wilson bound at 768 and 525."* | **THE RATE ARMS CANNOT FAIL, and the receipt must say so.** `scripts/wiring-census.mjs:1065` re-injects the committed rate half before `--check` compares (`if (!rates && committed) rates = JSON.parse(committed).rate;`), and the walker builds `committed` the same way at `:683`, then asserts 271, 352, 307, 729, 205, 151 and the departure report AGAINST THE DATA THOSE INTEGERS CAME FROM. The census half IS genuinely re-derived — every plant on `wiringCensus.js` reds the byte-identity arm — but the RATE half is self-certifying, and only a re-run of `prose-rate-corpus.mjs` can move it. The script's docblock (`:20-25`) declared this; the receipt did not. |
+| 13 | § CAR 0 §3 F5 | *"F5 — `not-produced` on 96 read paths is a real measurement, not a blind index."* | **"64 cells over 24 paths, of which 30 are bare key-function parameters and 6 carried a wrong verdict on an ES6 shorthand write"** — and after cure 8 the column reads **60 not-produced + 18 method-call**, with **8** cells moving `not-produced -> measured` (6 of them the fold's own three shorthand paths, 2 on `faith.unaffiliated` it did not name), **18** method-tail cells no longer answered at all (15 of them out of `measured`, 3 out of `not-produced`), and **7** moving `measured -> not-produced` (`court` 4, `doc` 3) because the line regex had been finding those tokens in a ternary or a comment. (The 96 is the FUNCTION-grain figure car 0e superseded with 64; F5's own grep evidence for `prison`/`forces`/`navy` reproduces and is evidence about PARAMETER NAMES.) |
+| 14 | § CAR 0 §4, the pair print | *"excluded as the instrument's own labels: 503 (a table-rung synthetic label on 437, an unrooted bare parameter on 108)"* | **437 ∪ 108, overlapping on 42, = 503**; 437 + 108 = 545 and the phrasing read as a partition. The print itself is re-cut (car 3): `excluded … 524 — the UNION of a table-rung synthetic label on 437, an unrooted bare parameter on 108, a JS method tail on 38 (the sets overlap)`. |
+| 15 | § CAR 0 §2 and the column table | *"`customReachable` \| — \| **22** rows over **8** kinds"* | **21 hit rows over 9 DISTINCT (block, pool) pairs** at the tip; "22" is car 0's function-grain figure and "8 kinds" is the kind ROSTER, of which 5 carry a hit. Limbs value 19 / bucket 2; **19 of the 21 are string collisions** on tier and severity words. §O.6's DIRECTION survives (the true reach is smaller); the quoted number is not a count of reachable pools. |
+| 16 | § CAR 0e.2's "what moved" list | *"**EVERY CAR-8/9/10 HEADLINE INTEGER IS UNMOVED** … What moved is every figure that is a FUNCTION of `reads`, and each is named:"* (a seven-row table) | **TWO PRINTED TABLES ALSO MOVED AND ARE NOT IN IT.** The ATTACH-COVERAGE per-block `facts`/`meanReach` columns (DS-STR-2 3 → 2, DS-CND-1 8 → 5, DS-DEF-5 10 → 8, DS-WAR-1 14 → 10, DS-ECO-11 7 → 5, DS-GEN-6 10 → 9, DS-FTH-1 6 → 4) and the MOUNTS-PER-FACT top twelve (`readings.tradeRouteAccess` left it, `readings.primaryStress` entered). **Car 0 §2's two printed tables are STALE at every tip from `0dd711c6a` onward**; car 3's own `--print` is the current one. |
+| 17 | § CAR 0e.6 / §O.5 | *"Two coarsenesses are DECLARED with their integers rather than cured behind the verdict: 123 rows rest on the BLOCK grain … and 12 of the 44 sit on a SPLIT LADDER"* | **A THIRD COARSENESS.** The LAWFUL limb requires another pool of the SAME RUNG to have fired at that tier, so a single-pool rung can never be lawful and every tier it is quiet at is automatically rung-dark. Measured at car 3: **12 of the 45** MISSING-AT-TIER rows sit on such a rung — `originTierPoolKey` 4 (already declared a split ladder), `contractedForcePoolKey` 4, `operationRolePoolKey` 3, `impairedServicePoolKey` 1 — leaving **8 undeclared rows that are not authoring-wave work**. `contractedForcePoolKey`'s own docblock says why it is single-pool by design. Now asserted in the walker. |
+| 18 | § CAR 0f.2 | *"**THE THREE IDENTIFIER ROWS ARE THE DRAFT'S WHOLE STRENGTH**, and one of them is ARCH §5.2's OWN WORKED EDGE"* | True as far as it goes, and it does not say the strength and the four joins are **DISJOINT**: not one of the four "RELATION ROWS THAT WOULD JOIN" used two identifier-grade aliases, and **5 of the 9 `generator-write` citations were a comment (`defenseGenerator.js:608`), a `reason:` prose string (`structuralValidator.js:588`), a template string (`narrativeText.js:53`) or an arrow parameter (`stressNarrative.js:80` and `:83`)**. Cured in car 3: the AST cut leaves `generator-write` 4, all sound; the ratified set is the three identifier rows; the draft prints the join at BOTH grades, and at the ratified grade it is **0**. |
+| 19 | § CAR 1 §1.2 | *"**36** audience-divergent cells over **36,098** positions, every one of them on a mixed pool"* | **36 POSITIONS = 72 CELLS**, not 36 cells; and the leak check ran only over positions present on BOTH faces, so the 36 one-sided positions were skipped and merely printed. After cure 1 the figure is **345 positions over 36,660**, on 2 of the 12 mixed pools, with the one-sided positions now split by DIRECTION (DM-only 36, lawful; player-only 0, and a player-only position is a leak the arm refuses). |
+| 20 | § CAR 1 §1.3 | *"**PLANT B — a THIRD variant appended to that two-variant pool**, measured on 8 configurations × **60 seeds** = 480 towns"* | **PLANT B WAS NOT REPRODUCIBLE FROM THE TREE.** No committed command produced that corpus: `prose-manifest-cells.mjs` took `--out` and `--limit` and no seed flag, and `proseVarietyCorpus.varietyConfigs` is reachable only from `prose-duplicate-units.mjs`, which prints no cell table. Cured by cure 7 and re-run in car 3 (§3.5, U4): **454 of 672 pool cells = 6,756 bp**, seed grain 42 of 60. |
+| 21 | § CAR 2 §1 and §10 | *"`tests/build/vendorPdfLazy.test.js` \| EXTENDED: **+11 arms** in three suites"* and *"the eleven new arms and three new describes in `vendorPdfLazy.test.js`"* | **TWO new describes, not three.** Measured at both ends of the consist: base `8522a17b2` `it( 30 + it.skipIf( 11 = 41 sites · describe( 5`; tip `fcd98a3db` `it( 39 + it.skipIf( 13 = 52 · describe( 7`. The arm count 41 → 52 is exactly right. The wrong word had been carried into `tests/lint/.lighting-census-baseline.json`'s `note`, where a later reader takes it as the record; **re-stamped in car 3b's refreeze**, whose note carries the correction and the measurement. Every NUMBER in that baseline was correct. |
+| 22 | § CAR 2 §5 and §8 | *"`$ node $SC/measure/car2-dist.mjs`"* above a fenced block presented as command output; and §8's sha-pin table labelled *"tip 710ef8e08"* | §5's block is an **ASSEMBLY, not a transcript**: the log prints a per-leaf `fp(NNNB) "…"` line above each carriers line and all seven were dropped with no elision mark, unlike §2/§3/§8. Every figure in it is faithful and the seven fingerprint lengths reappear in §6. §8's middle column should read car 2's tip (`55d7f696b`), not car 1b's; the three shas are identical at both, so the pin holds either way. |
+| 23 | § CAR 0 §13 | *"⚠ Car 11's lesson taken seriously: *a plant whose regex no longer matches mutates nothing, reports CLEAR, and dies in silence while still claiming to strike the read.* So each of the three plants was extracted FROM THE SWEEP SCRIPT and run standalone"* | **THE LESSON WAS APPLIED TO THIS CAR'S OWN THREE PLANTS AND NOT TO THE STANDING PLANT ON THE FILE IT RE-SHAPED.** Car 0e's `branchReads: [],` insert (`wiringCensus.js:699-702`) broke plant **#80** (`mutation-sweep.sh`), which then mutated nothing: md5 `0a28c398a1b6cff56183212bed8fa7fd` before and after. The sweep's `check_caught` reports it as a BROKEN GAP — a red the lane shipped and this receipt never mentioned. **Cured in car 3 (cure 3): re-anchored, md5 now moves, and the plant reds 11 arms of 57.** |
+| 24 | § CAR 1 §1.1 and §1.5 | *"the DRIFT corpus (the golden master's own 525 configurations, at BOTH audiences) composed through the six desks by their shipped desk-read recipes"* | **IT WAS TWO-AUDIENCE ON FIVE DESKS AND THE DM FACE TWICE ON THE SIXTH.** `deskReturns` routed the economy desk through `economyDeskRead(s, {seed, audience})`, and that recipe keys on `options.playerView`. **11,792 of 72,160 cells (16.3 %)** sat on that desk and on all 5,371 both-face positions the two faces were identical BY CONSTRUCTION; **309 player cells carried `index: -1` and DM-only prose** (`DS-ECO-6 :: TIER: minor shadow activity (≥3)`); and 39 of 56 registered mounts recorded anything. Cured in car 3: 42 of 56 mounts, 345 divergent positions, `index >= 0` on every one of 73,284 cells. |
+| 25 | this file | (no sentence: the roster did not exist) | **AN UNTESTED ROSTER SHIPS** — §3.5's U1–U5 table, so a successor does not re-find them as gaps. U6–U9 (the test ratchet, the whole `tests/lint` at car 2's tip, the "ten-module byte fence" naming, the chartered `vite build`) are the verifier's rows and stand as the fold left them; U7 is answered ONE TIP LATER rather than at car 2's: car 3 ran the whole `tests/lint` twice, 147 files and 2,391 assertions, which confirms the file count and leaves car 2's own 2,386 standing on its static count. |
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
