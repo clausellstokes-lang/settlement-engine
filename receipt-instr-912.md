@@ -2231,3 +2231,226 @@ baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NE
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: INSTR-912
+
+---
+
+## CAR 12 — the whole-suite proof's four reds: sixty-five em dashes and one exclamation mark leave the island's string literals, a dangling enforcer pointer is re-pointed, an untagged completeness claim is retired, one un-anchored negative is anchored
+
+Seat: Opus 5 — implementer. Dock `laneINSTR2`, over **983a37f26** (car 11b), porcelain 0 at start.
+`$SC/HOLD-VITEST` present; this car used the exemption for the four arms, the seven lane
+suites and ONE whole-`tests/lint` run. Runner count taken in its own shell call, **0 every
+time**, before every one of those runs.
+
+### 0. ⚠ THE ARM NAMED TEN FILES, NOT SIX — THE BRIEF'S "FORTY-FOUR" WAS A PARTIAL READ
+
+The brief's title says *forty-four em dashes* across four island files (`institutionTable` 13 ·
+`entryGround` 2 · `entryWalker` 6 · `grammarWalker` 23). **The E2 arm in `$SC/whole-914.log` names
+ten files, eight of them the island's**, and the brief's own §1 anticipated this ("check the other
+six island modules … for any the arm did not list"). Four more island modules were over baseline
+and the arm listed them explicitly: `moveGrammar` 9 · `plantLedger` 10 · `proseFingerprint` 1 ·
+`wiringCensus` 1 em **and 1 bang**. The true debt was **65 em + 1 bang**, not 44 em. All of it is
+burned here; had this car cured only the four named files the arm would still have named six.
+
+**Measured with the test's own idiom** (`espree`, `Literal` + every `TemplateLiteral` quasi —
+`$SC/probe-em.mjs`, the byte-identical walk of `voiceMechanics.test.js#stringLiteralContents`):
+
+| file | literals before → after | em before → after | bang before → after |
+|---|---|---|---|
+| `src/domain/institutions/institutionTable.js` | 142 → **142** | 13 → **0** | 0 → 0 |
+| `src/domain/prose/entryGround.js` | 5 → **5** | 2 → **0** | 0 → 0 |
+| `src/domain/prose/entryWalker.js` | 326 → **326** | 6 → **0** | 0 → 0 |
+| `src/domain/prose/grammarWalker.js` | 279 → **279** | 23 → **0** | 0 → 0 |
+| `src/domain/prose/moveGrammar.js` | 151 → **151** | 9 → **0** | 0 → 0 |
+| `src/domain/prose/plantLedger.js` | 49 → **49** | 10 → **0** | 0 → 0 |
+| `src/domain/prose/proseFingerprint.js` | 54 → **54** | 1 → **0** | 0 → 0 |
+| `src/domain/prose/wiringCensus.js` | 178 → **177** | 1 → **0** | **1 → 0** |
+| `src/domain/prose/entryLexicons.js` | 324 → 324 | 0 → 0 | 0 → 0 |
+| `src/domain/prose/presenceMeasure.js` | 171 → 171 | 0 → 0 | 0 → 0 |
+
+⚠ **ONE literal count moved, deliberately, and it is the only one.** `wiringCensus.js` 178 → **177**:
+the file's single exclamation mark was not reader prose at all but the code comparison
+`bare[1] === '!'` against the `(!?)` capture of `predicateRows`'s bare-atom regex. Rewriting the
+MARK would have changed the parse; the lawful cure is to spell the same test without the literal:
+
+```js
+-    rows.push({ field, op: bare[1] === '!' ? 'falsy' : 'truthy', value: '(no literal)' });
++    // The `(!?)` group captures the negation mark or the empty string, so a non-empty
++    // capture IS the negation: the mark itself never has to sit in a string literal.
++    rows.push({ field, op: bare[1] ? 'falsy' : 'truthy', value: '(no literal)' });
+```
+
+`(!?)` always participates, so the capture is `''` or the mark and the truthiness test is exactly
+the equality test. Every other file's literal count is byte-for-byte identical: **no literal was
+dropped, merged or split anywhere.** The 65 em dashes became a colon, a semicolon, a comma, a full
+stop or a parenthesis, one site at a time; comments keep theirs (the walk does not read them).
+
+### 1. THE FOUR ARMS, EXECUTED
+
+**Red 1 — E2 voiceMechanics.** The per-file arm now names exactly the BANKED TWO and nothing else:
+
+```
+$ npx vitest run tests/copy/voiceMechanics.test.js
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+AssertionError:
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+: expected [ …(2) ] to deeply equal []
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 18 passed (19)
+```
+
+Ten rows → two. The baseline was NOT touched: no `UPDATE_VOICE_BASELINE=1`, no `--write`, and the
+banked ceiling of two files over baseline is unchanged and unraised.
+
+**Red 2 — enforcedByExists.**
+
+```
+$ npx vitest run tests/docs/enforcedByExists.test.js
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+```
+
+`tests/lint/proseMeasures.walker.test.js:70` carried the historical record of car 9's defect by
+QUOTING the dead tag — `` DECLARED `@enforced-by tests/lint/plantLedger.walker.test.js` `` — and the
+existence sibling reads everything after a live `@enforced-by` marker on a line, so the quotation
+WAS a pointer. The comment now names the dead enforcer as a name (no marker on that line) and puts
+the live marker on the real one, `tests/lint/proseMeasures.walker.test.js`, with the following line
+opening on prose so the continuation walk stops. The record is kept; the pointer resolves.
+
+**Red 3 — enforcement-claims, both arms:**
+
+```
+$ npx vitest run tests/docs/enforcement-claims.test.js --reporter=verbose
+ × tests/docs/enforcement-claims.test.js > enforcement-claims meta-pin (A+ P1.1) > every completeness claim carries an @enforced-by tag with ≥1 target 5ms
+ ✓ tests/docs/enforcement-claims.test.js > enforcement-claims meta-pin (A+ P1.1) > the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it 8ms
+      Tests  1 failed | 20 passed (21)
+```
+
+The banked arm still fails on **exactly the six banked claims** (four in `FABLE_VALIDATION_QUEUE.md`,
+one in `GOLDEN_SHIFT_LEDGER.md`, one in `IN-0C.md`) — the seventh, `plantLedger.js:10`, is gone from
+its list — and **the per-claim freeze arm passes**.
+
+⭐ **A JUDGMENT CALL, RECORDED FOR VETO.** The brief offered two cures: tag the claim, or rephrase it.
+I RE-PHRASED. `plantLedger.js:10` read *"stated here because a walker that quietly returned `"0 problems"`
+would be the false green the estate has already burned"* — a HYPOTHETICAL about what a dishonest
+walker would be, not a standing assertion about current state. Hanging an `@enforced-by` beside it
+would assert that an enforcer proves a claim nobody is making, which is the precise overstatement
+the meta-pin exists to kill; the pin's own docblock excludes text that "QUOTE[s] the convention …
+not standing assertions about current state", and `src/` has no exemption list to say so with. The
+sentence now reads *"a walker that quietly reported a clean sweep"* — same meaning, no vocabulary.
+The module's real tag is untouched at `plantLedger.js:47` and still resolves. **If the chair prefers
+the tag, it is a one-line change.**
+
+**Red 4 — negativeAssertionAnchor.**
+
+```
+$ npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+```
+
+The new un-anchored negative was `tests/lint/institutionTable.walker.test.js:318`, car 11's own
+produced-path arm: `.not.toContain('= 7')` on the top-level-treasury basis. The estate's marker
+idiom could not reach it (line 317 is the `expect(` opener, so a marker above the run lands two
+lines off the flagged line), so it is anchored properly instead, with the helper:
+
+```js
+    expectAbsentWithAnchor(
+      topLevel,
+      '= 7',
+      'economicState.treasury.coinFlows.taxed absent on this settlement',
+      'a value planted at the phantom top-level path never reaches the basis',
+    );
+```
+
+The anchor is the absence clause the SAME branch of the SAME basis string writes, so a basis that
+drifted, emptied or stopped naming the path reds on the anchor rather than passing the exclusion
+vacuously.
+
+### 2. THE ASSERTIONS THAT MIRRORED A CHANGED STRING — ONE, FOUND AND UPDATED IN THIS CAR
+
+Every changed literal was swept for external readers (`$SC/probe-refs.mjs`: a 60-char needle
+centred on each tell, grepped over `tests/` and `scripts/`), then the seven lane suites and the
+mutation sweep were read directly. **Exactly one assertion mirrored a changed string:**
+
+```js
+-    expect(table.columns.holderRole.basis).toMatch(/^absent —/);
++    expect(table.columns.holderRole.basis).toMatch(/^absent:/);
+```
+
+Two near-misses that needed NO change, both verified: `proseMeasures.walker.test.js:354` matches
+`/two plants fold to one derived id/`, and my rewrite changes only the punctuation AFTER that
+phrase; `proseMoveGrammar.walker.test.js:225` merely contains "does not offer" in its own test
+title. **No plant label moved and no `check_caught` expected-title moved.** The five island plants
+in `scripts/mutation-sweep.sh` (#78 · #81 · #82 · #83 · #85 on `institutionTable.js`, plus the
+`entryWalker`, `grammarWalker`, `presenceMeasure` and two `wiringCensus` plants) anchor on CODE —
+`closed:` flags, a `predicate:`/`status:` block, a `.filter(...)` call, a regex literal, a
+`Number(...)` read — and not one anchors on a string literal this car rewrote. `mutation-sweep.sh`
+and `mutation-coverage-manifest.json` are **byte-untouched**; the manifest arm is green below.
+
+**The island stays instrument-only.** No `src/` file outside `src/domain/prose/` and
+`src/domain/institutions/institutionTable.js` imports any of the ten, so no product surface,
+composer, pool text, persisted shape or seed input can see a rewritten string. Verified by
+importer scan at this tip: every importer is one of the ten themselves, a `tests/lint` walker
+suite, `tests/fixtures/brackwaterTables.js`, `tests/helpers/dossierComposedFill.js`, or the sweep.
+
+### 3. THE SEVEN LANE TALLIES — focused files, one at a time, every one EQUAL to car 11's
+
+| file | this car | car 11 |
+|---|---|---|
+| `tests/lint/institutionTable.walker.test.js` | **19 passed (19)** | 19 |
+| `tests/lint/proseWiringCensus.walker.test.js` | **26 passed (26)** | 26 |
+| `tests/lint/proseEntryContradiction.walker.test.js` | **27 passed (27)** | 27 |
+| `tests/lint/proseMoveGrammar.walker.test.js` | **50 passed (50)** | 50 |
+| `tests/lint/proseMeasures.walker.test.js` | **14 passed (14)** | 14 |
+| `tests/lint/proseRegisterLoaders.walker.test.js` | **13 passed (13)** | 13 |
+| `tests/lint/mutationCoverageManifest.test.js` | **10 passed (10)** | 10 |
+
+No title was added, removed or renamed: the anchor cure replaces two statements with one helper
+call inside the same `it`, and the regex cure edits one line.
+
+### 4. THE GATES
+
+```
+$ npm run typecheck:ratchet
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+
+$ node scripts/check-observed-shape-readers.mjs                 ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+
+$ node $SC/prose-numerics-rekey.mjs $SC/laneINSTR2              ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+```
+
+Both dries are EXACT against car 11's tip: 1972 findings and `225/225 exact, 0 rekeyed, 0 relocated,
+0 FELL, 0 NEW`. No `--write` was run on any register.
+
+### 5. ONE WHOLE `tests/lint` RUN — ZERO REDS
+
+```
+$ npx vitest run tests/lint                                     ; exit=0
+ Test Files  146 passed (146)
+      Tests  2343 passed (2343)
+   Duration  113.80s (transform 24.66s, setup 4.69s, import 154.35s, tests 548.82s, environment 40ms)
+```
+
+The DOOR 3 timing arm did not appear, so no lone re-run was needed.
+
+### 6. NO CAR 12b — THE LIGHTING DOOR NEEDED NO REFREEZE
+
+`tests/lint/sovereigntyLightingContract.walker.test.js` is inside the directory above and is one of
+the 146 green files, so the lighting census is EXACT at this tip and **no title moved**. Car 11b
+existed because car 11 added a title to a credited file; this car adds none. No register `--write`
+was performed anywhere in this car.
+
+### 7. WHAT MOVED, AND NOTHING ELSE
+
+Ten files: the eight island `src/` modules (string literals, plus the one `wiringCensus` truthiness
+spelling and the one `plantLedger` docblock sentence), and two lane test files
+(`institutionTable.walker.test.js` — the mirrored regex, the anchor, one import;
+`proseMeasures.walker.test.js` — the header pointer). `git status --porcelain` named exactly those
+ten before the commit and **0 after**.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: INSTR-912
