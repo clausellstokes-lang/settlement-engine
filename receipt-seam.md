@@ -2051,3 +2051,381 @@ no `src/` file was added.
 
 ## CAR 4d — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 16:0x)
 Re-measured at `7fb28ed34` (porcelain 0, runners 0): no `src/data/` byte moved since 318c05a86 (CONFIRMED); the composer's only `reads[0]` mention is the docblock at `:517` describing the cured defect, and `readsCount` is the spent integer (`:594`) (CONFIRMED); OSR dry exit 0 with no write (CONFIRMED); projection contract + composer tests `2 files / 114 tests` green (re-run). Rulings: (1) `seat` emitted on `role: 'modifier'` pools only — ACCEPTED (zero leaf bytes; the licence exists where a seat can exist); (2) the pool-level `every`-grain — ACCEPTED for the freeze; the per-pair map is the veto shape and becomes a sitting row the day the taste shows a mixed attach set; (3) `factBudget`'s second phantom read cured — ACCEPTED, and the lesson recorded: car 4 landed `readsCount` for a reader it never wired (a schema key with no consumer is a claim; the arms car asserts every `poolMeta` key has a reader or is named as reserved); (4) `S2_SIGNED` false in the lib while §N.1 signed S2 — STANDS false until the `consequence.clause` list reaches its floor at the taste (flipping it moves nothing while the join is 0; the sitting flips it with the floor met); (5) the direction re-check on already-filtered rows — a skeptic row; (6) the OSR standing finding narrowed to "every corpus car that moves a leaf byte". Seat: Fable 5.1 — validated.
+
+---
+
+## CAR 5 — THE NEW ARMS ON THE LANDED INSTRUMENTS (ARCH §12 row 5, §8.4)
+
+Seat: Opus 5 — implementer. Chair: Fable 5.1. Dock `$SC/laneSEAM`, base `7fb28ed34` (car 4e).
+**STATUS: LANDED.** Porcelain 0, runners 0, `node_modules` symlinks intact, no build, no golden
+re-record, no leaf byte. Every figure below is the tail of a command that ran.
+
+### 5.0 ARRIVAL — executed
+
+```
+$ git -C $SC/laneSEAM log --oneline -1
+7fb28ed34 SEAM car 4e: the lighting census re-freezes at 4d's tip, by its own ritual
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l    # its own shell, per car 4's hazard
+       0
+$ ls $SC/HOLD-VITEST                                              => No such file or directory
+```
+
+### 5.1 WHAT WAS BUILT — one new island module, one new gate, one script out of the kit
+
+| file | what |
+|---|---|
+| `src/domain/prose/composedWalker.js` | NEW, **526 effective lines against a ceiling of 800** (headroom 274): the composed unit as the walked entry, and the ten arms whose subject is the JOIN. |
+| `src/domain/prose/moveGrammar.js` | +`MOVES.PROVENANCE`, +one `CLAUSE_DETECTORS` row, +`composedOrderIdOf`. 169 effective lines (headroom 631). |
+| `scripts/check-pair.mjs` | NEW, from the kit, **with the LONGER arm switchable** and the CLI side effect guarded. |
+| `tests/lint/proseComposed.walker.test.js` | NEW, **66 arms**. |
+| `tests/lint/proseWiringCensus.walker.test.js` | the island fence widened to TWELVE, plus the two declared tier figures re-measured (§5.6). |
+| `scripts/mutation-sweep.sh` + `scripts/mutation-coverage-manifest.json` | plant **#97**, edited BY TEXT. |
+
+Zero corpus bytes: `src/data/` does not appear in `git status`, and
+`node scripts/generate-dossier-state-prose.mjs --check` exits 0 with
+`708 sentence / 0 clause` and `68 state blocks / 2266 variants` unchanged.
+
+### 5.2 ⭐⭐ THE ARM TABLE — planted red / clean pass / channel, every one executed
+
+| arm | planted control (reds) | clean control (passes) | NOT-EXECUTABLE where the input is absent | channel |
+|---|---|---|---|---|
+| **A0a** projector `reads ⊆ tests` | `READS tolls.exemptions` outside the census tests, refused by name | a READS inside the tests | n/a (landed car 4; asserted here through the live lib) | FAIL |
+| **A0b** over-claim | text names `garrison` on a pool reading only `walls` | text claims exactly what the pool reads | **two, each named:** the census recovered no reading · the reading is a SYNTHETIC TABLE LABEL | FAIL |
+| **A0b** under-claim | `reads` names `militia`, the text never claims it | as above | as above | FAIL |
+| **A0b** implicit negation | `garrison` held FALSE by the predicate and unnamed by the text | as above | as above | FAIL |
+| **A1** restatement | two pieces band "households" the same way | two pieces band two different nouns | a bare spine (every shipped unit) | FAIL |
+| **A1** conflict | two pieces band "households" into disjoint classes | as above | as above | FAIL |
+| **A2** no row | both endpoints in the table's vocabulary, no row joining them | a forward row of the declared relation | **three:** no joint · no relation leaf · no primary field | FAIL |
+| **A2** direction / unestablished | a `b→a` row (WITHHELD) · the shipped leaf (WITHHELD) | as above | as above | WITHHELD |
+| **A3** wall 5 | a contrast in a block with NO sibling | no contrast shape | no contrast shape in the unit | FAIL / WITHHELD |
+| **A4** determinism | (the arm IS the control: shuffled input must compose identically over 6 seeds) | 6 seeds × 3 calls byte-identical | n/a | FAIL |
+| **A4** locale ban | `localeCompare`, `Intl`, `toLocaleUpperCase` each caught by the live scanner | the composer, and a comment naming all three | n/a | FAIL |
+| **A5** sibling distance | a family of four that is one wording said four times (6 pair reports) | a family of four that moves opener, length and words | a one-face variant (every shipped variant) | REPORT → FAIL |
+| **A6** LONGER switch | `longer: true` reds a longer AFTER | `longer: false` does not, and DIGIT/COUNT still fire | n/a | FAIL |
+| **A6** byte-equality | a face naming a different slot · a face carrying different marks | a face with the parent's slots and marks | n/a | FAIL |
+| **A8** the registry | `EXPLAINS: weather:rain` · a turn with no EXPLAINS | `condition:plague` | n/a (frozen list, landed car 4) | FAIL at projection |
+| **A9** fragment | opens on a comma · on a clause word · on a capital · carries a stop | a bare lower-case fragment with no stop | no `FORM` (every shipped pool) | FAIL at projection |
+| **A9** sentence | opens on `{settlement}` · lower-case · no terminal stop | a capital-initial sentence closing on a stop | as above | FAIL at projection |
+| **A11** echo | one fact at two modifier mounts | one fact, one modifier mount | the shipped census: no pool declares `role: modifier` | FAIL |
+| **A11** spines | a modifier on a fact that spines at the same mount | as above | as above | FAIL |
+| **A12** position budget | `limit: 4` makes four rungs bear, so TWO is the budget | four rungs, two bear, two are bare spines | n/a (driven on a fixture through the real composer) | FAIL |
+| **A13** interested fact | a citing face with no `dm-only` mark | the same face marked `dm-only`; a LICENSED holder | **the `source` column is absent until car 5b, printed by name** | REPORT / WITHHELD / FAIL |
+| **C7** cross-block | a true cross-block band conflict on one page-set | an innocent cross-block pair | fewer than two blocks on the page-set | REPORT → FAIL |
+| **`composedOrderIdOf`** | — | V1/V2/V3\|V8 at level 1, E3 at level 2, `PRESENT→PROVENANCE` outside both | — | FAIL / REPORT |
+| **the composed walker** | the ANTI-VACUITY control: two innocent pieces manufacture a C2 duty+exemption pair | each half alone is clean | an empty block re-walk is NOT-EXECUTABLE, never green | FAIL |
+| **`check-pair`** wrapper | see A6 | the CLI output is byte-identical to the kit's | — | FAIL |
+
+```
+$ npx vitest run tests/lint/proseComposed.walker.test.js                 ; exit=0
+ Test Files  1 passed (1)
+      Tests  66 passed (66)
+```
+
+### 5.3 ⭐ WHAT THE ARMS MEASURED ON THE SHIPPED CORPUS — five printed readings
+
+```
+A0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves
+  variants walked      2266
+  over-claims          55
+  under-claims         1282
+  implicit negations   13
+  NOT-EXECUTABLE reads 1530   pools carrying a finding 240
+
+A5 · the SIBLING-distance distribution the wording-set floor will be cut from
+  sibling pairs 2645 over 708 pools
+  same opener 95   same sentence count 1898
+  content overlap in basis points, 0-999 / 1000-1999 / 2000-2999 / 3000-3999 / 4000+:
+    2449 / 172 / 17 / 5 / 2
+
+A13 · the CITATION habit before any budget is set
+  variants naming a record holder: 18 of 2266
+  by block: DS-DEF-1 1 · DS-DEF-11 1 · DS-DEF-7 1 · DS-ECO-12 1 · DS-ECO-5 1 · DS-ECO-9 1 ·
+  DS-GEN-1 1 · DS-GEN-10 1 · DS-GEN-11 2 · DS-GEN-3 1 · DS-POP-1 4 · DS-POP-2 1 · DS-POW-1 2
+
+composedOrderIdOf · 2266 shipped variants as one-piece composed units
+  outside LEVEL1 union LEVEL2: 544 (2401 basis points)
+  V1 1490 · (outside) 544 · V5 63 · V3|V8 54 · V2 39 · V7 35 · V4 34 · V6 7
+
+THE BLOCK RE-WALK · DS-DEF-11 at a modifier landing
+  units walked 12   FAIL 0  WITHHELD 8   PASS 4
+
+THE SAMPLED COMPOSED WALK · N is a PLACEHOLDER until car 6 sets it
+  N 200 of 2266   sample sha f7666ef6b9958ada467679a2c9cda02e1c628acbf9239076dfae364c01df6a9c
+  FAIL 40   WITHHELD 75   PASS 85
+  cost 52 ms for the sample, about 260 microseconds per unit; the whole corpus at this rate
+  is about 589 ms
+```
+
+⭐ **THE COMPOSED WALK'S COST, WHICH IS THE INPUT CAR 6 SETS N FROM.** 260 microseconds per
+composed unit, so an EXHAUSTIVE composed walk of today's 2,266 units costs about 0.6 s and the
+sample is not yet buying anything. The sample exists because car 6's units are the CARTESIAN
+ones — a block's spines times its modifiers times the faces — not the 2,266.
+
+⛔ **THE A0b READING IS HELD SHRINK-ONLY AND NOT PINNED EXACTLY.** A heuristic asserted at an
+exact integer becomes a re-record every corpus car pays and nobody reads; a ceiling that may
+not GROW reds the day a car ADDS a claim the census does not license, which is the property
+worth having. Non-vacuity is asserted separately (`under-claim > 0`, `implicit-negation > 0`),
+so a reader-that-stopped-reading cannot pass as a debt paid.
+
+### 5.4 ⛔⛔ THE ONE BEHAVIOUR CHANGE THIS CAR MAKES TO A LANDED INSTRUMENT, MEASURED BOTH WAYS
+
+The owner's 2026-09-08 directive (SITTING §Q) makes PROVENANCE a MOVE of the grammar, and the
+car-5 ADDENDUM says in terms that it "is classified by `classifyMoves`". So `moveGrammar.js`
+gains a thirteenth move and a thirteenth clause detector. That is a real change to a landed
+classifier and it was measured before it was made:
+
+```
+$ node <the live classifier vs the same classifier plus the PROVENANCE detector, over the leaves>
+PROVENANCE at first: variants changed 18 of 2266; orderId changed 15
+PROVENANCE at last:  variants changed 18 of 2266; orderId changed 15
+```
+
+**The position in the priority list does not matter on this corpus** (both readings are 18/15),
+so the detector sits beside CONTRADICTION on the ground that both are assertions ABOUT THE
+RECORD rather than about the town, and the reason is written into the file.
+
+**The vocabulary is the holder table's KINDS as the owner named them** and nothing wider — a
+bare `record` or `count` is a common noun, and reading one as a citation would manufacture a
+habit the corpus does not have.
+
+```
+$ npx vitest run tests/lint/proseMoveGrammar.walker.test.js               ; exit=0
+      Tests  50 passed (50)
+```
+
+**The move-grammar walker is green**, because its classifier-agreement arm PRINTS its rate
+rather than asserting it and no shipped variant carries a `grammar:` tag for the reading to
+disagree with (`level1.untagged === corpus.length`).
+
+### 5.5 ⛔ THE REGISTER DOOR THIS CAR REFUSES, WITH ITS MEASUREMENT — A CENSUS **ROW** MOVE
+
+`node scripts/wiring-census.mjs --check` exits 1 and `tests/lint/proseWiringCensus.walker.test.js`
+reds on ONE arm (`stale-bytes`). The drift is the PROVENANCE detector's, and it is a ROW move,
+not a stamp-only one:
+
+```
+$ node <index committed vs fresh by `block :: pool`, compare whole rows>
+rows whose JSON moved: 15        # every one ONLY its `grammars` integer
+   grammars 1 -> 2  DS-DEF-1 :: readiness STRONG
+   grammars 1 -> 2  DS-DEF-7 :: band collapsed
+   grammars 1 -> 2  DS-DEF-11 :: UNWALLED-LARGE
+   grammars 1 -> 2  DS-ECO-5 :: MAGICALLY SUSTAINED: a large prop (high magicRecovery)
+   grammars 2 -> 3  DS-ECO-12 :: INCOME MIX: a criminal line is present
+   grammars 1 -> 2  DS-POP-1 :: QUANTITY: many hundreds
+   grammars 2 -> 3  DS-POP-1 :: HERALD KIND: hungry_gap
+   grammars 1 -> 2  DS-POP-1 :: RECEIPT: births exceed deaths
+   grammars 2 -> 3  DS-POP-1 :: BELIEVED TREND diverges from the ring
+   grammars 1 -> 2  DS-GEN-3 :: scores.military: STRONG
+   grammars 1 -> 2  DS-GEN-10 :: PRINT-NATIVE CHAPTER OPENERS: economics
+   grammars 1 -> 2  DS-GEN-11 :: viable: true: the arithmetic closes
+   grammars 1 -> 2  DS-GEN-11 :: criticalIssueCount zero
+   grammars 2 -> 3  DS-POW-1 :: Contested
+   grammars 3 -> 4  DS-POW-1 :: governanceFractured true
+totals.tiers  {MISSING 34, THIN 483, COVERED 225, MISSING-AT-TIER 45}
+           -> {MISSING 34, THIN 482, COVERED 226, MISSING-AT-TIER 45}
+sections that moved: factIndex, tiers
+stamp files moved: []            candidateLeaves moved: false
+producerIndexFiles 1152 -> 1153  bytes 1832119 -> 1832122
+```
+
+**WHY IT IS REFUSED.** The chair's generalised rule (cars 3b–3g, ruling 1): *a stamp-only drift
+is a lane's plain re-take with the printed proof; a row move is the chair's unless pre-ruled.*
+This one moves fifteen rows, a `totals` figure and two sections, and it is NOT pre-ruled — car
+3h's was, at SITTING §P.2-28, as the declared purpose of that car. So the lane measures it,
+prints it and hands it over. **The chair's cure is one command**, `node scripts/wiring-census.mjs`,
+and the delta above is the whole of it.
+
+⚠ **THE LANE RAN THAT COMMAND ONCE, BY ACCIDENT, AND SAYS SO.** `scripts/wiring-census.mjs`
+takes no `--out` flag and writes the committed register unconditionally; a probe invoked it
+expecting a dry read. The file was restored from `HEAD` by `git show` (never the checkout
+family) and is byte-identical to the commit: `git diff --stat -- docs/content/wiring-census.json`
+prints nothing. The fresh build is kept at `$SC/seam5/census-fresh.json` so the chair can take
+the door without re-running anything.
+
+⭐ **THE GROUND, IN ONE SENTENCE, BECAUSE THE FIGURE IS A FINDING AND NOT A DEFECT.**
+`grammars` is `new Set(orderIdOf(classifyMoves(text)) || the raw move sequence)` per pool
+(`wiringCensus.js:624`), so a variant that gains a PROVENANCE move gains a distinct order
+identity. Fifteen pools were carrying a citation the classifier could not see, and ONE of them
+— the only one whose whole THINness rested on having a single grammar — leaves THIN for
+COVERED. The corpus's grammar dispersion was being under-counted, and the tier table that
+sizes the authoring wave was reading one pool as thinner than it is.
+
+### 5.6 THE TWO DECLARED FIGURES UPDATED IN THE CENSUS WALKER, WITH THEIR GROUND
+
+`tierRows` in `proseWiringCensus.walker.test.js` is recomputed FRESH from the live modules
+(`census = wiringCensus({sources: composerSources(), …})` at the file's top), so it moves with
+the classifier rather than with the committed JSON:
+
+| assertion | before | after | why |
+|---|---|---|---|
+| `counts.get(TIERS.THIN)` | 483 | **482** | the one pool that left THIN |
+| `counts.get(TIERS.COVERED)` | 225 | **226** | the same pool |
+| `counts.get(TIERS.MISSING)` | 34 | 34 | unmoved |
+
+That is a DECLARED-ROW update of the kind car 3h made fourteen of, with the ground written
+beside it in the file; it is not a register write, and the committed JSON stays stale until the
+chair takes the door.
+
+### 5.7 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **`PROVENANCE` is a thirteenth `MOVES` member and a thirteenth `CLAUSE_DETECTORS` row**
+   (§5.4). The ADDENDUM's own words are "classified by `classifyMoves`", and a separate
+   classifier beside it would have been a second home for one vocabulary. **Veto shape:** a
+   `provenanceMovesOf` reader that leaves `classifyMoves` byte-identical, at the cost of the
+   census `grammars` figure going on under-counting and of PROVENANCE never appearing in a
+   composed order.
+2. **A2 HAS THREE ANSWERS AND NOT TWO, and the third is why the shipped state is WITHHELD.**
+   Endpoints the relation table has never heard of are an UNESTABLISHED join; endpoints it
+   knows with no row between them are a refusal. Car 0's F1 puts every shipped pair in the
+   first class. **Veto shape:** collapse them and report every authorable joint in the estate as
+   a failure, which is precisely what mutation plant #97 now convicts.
+3. **A6's CLAIM half is `scripts/check-pair.mjs` and is NOT re-implemented in `src/domain`.**
+   That instrument owns the duration, count, ration, antithesis and closer vocabularies, and a
+   second copy in the island would be a second home for a word list the estate argues with by
+   editing one file. The module keeps only the slot/mark byte-equality half. **Veto shape:**
+   move the vocabularies into `entryLexicons.js` and have both read them, which is a larger
+   change to a file the entry walker's every arm passes through.
+4. **`scripts/check-pair.mjs` now EXITS NON-ZERO on a failing pair.** The kit script printed
+   `N fail` and exited 0, which is the false-green shape the estate refuses; a gate that cannot
+   fail is not a gate. The CLI's OUTPUT is byte-identical to the kit's, proved by diff on the
+   S12A control pairs. **Veto shape:** keep exit 0 and let the caller read the summary line.
+5. **The sample is a DETERMINISTIC STRIDE over the sorted addresses, not a seeded draw.**
+   A seeded draw needs a hash, and `tests/lint/fnv1a32Identity.walker.test.js` holds the estate
+   at its current `fnv1a32` count shrink-only, so an instrument minting a copy reds by name; and
+   a stride is reproducible from the printed N alone, which is what makes the printed sha a
+   check rather than a decoration. **Veto shape:** inject the kernel's hash pair, which gives
+   the island a kernel dependency it does not have today.
+6. **A12 is a TEST-side arm** driving the real `composeStateProseMount`, because the composer's
+   own fence forbids anything in `src/` from importing it. Same for the A4 determinism arm.
+7. **`composedOrderIdOf` searches LEVEL1 FIRST and does not break the tie by length.** `E5` is
+   `INSTITUTION → PRESENT`, which is `V5` exactly; a single composed unit realising it is a
+   level-1 grammar, and calling it E5 would report a tab order for one unit. Asserted.
+8. **The A0b readings are SHRINK-ONLY ceilings, not exact pins** (§5.3).
+9. **A13 mints NO new mark.** The owner's rule gives an interested fact's DM face a `holder`
+   mark "the audience filter reads (a `dm-only` mark today)"; `dm-only` is already emitted and
+   already filtered, so the arm asks for it by name and the mark vocabulary gains nothing. No
+   refusal is owed, and the ADDENDUM's escape hatch was not needed.
+10. **The census re-take is REFUSED** (§5.5), and the two declared tier figures are updated at
+    cause (§5.6).
+
+### 5.8 ⚠ THREE MEASURED FINDINGS RECORDED RATHER THAN CURED
+
+1. ⛔ **A0b IS NOT-EXECUTABLE ON DS-DEF-2, THE BLOCK ARCH WORKS ITS OWN EXAMPLE ON.** ARCH
+   §4.4 names `invasionRowPoolKey`'s `walls with citizen militia` as the implicit-negation case;
+   SEAM car 3h tabled that key function, so the census row now reads ONE synthetic table label
+   (`invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in …)`) instead of
+   the three fields. No text can claim an instrument label, so the arm declares itself
+   not-executable BY NAME on that row and the plant is a fixture reproducing
+   `defenseStateProse.js:412-425`. **This is the cost of 3h's tabling, seen from the arms
+   side**, and it is 22 rows wide: a later car wanting A0b executable on DS-DEF-2 must carry the
+   real field triple beside the table label.
+2. ⚠ **A COMPOSED-WALK DRIVER THAT DROPS A PIECE'S DECLARED `slots` MEASURES ITS OWN HARNESS.**
+   The first cut built one-piece units without them, `composedEntryOf` produced an entry
+   declaring no slots over a text naming `{settlement}`, and arm D reported 18 findings on
+   DS-DEF-11 — 12 FAIL of 12 units, every one manufactured. Cured, and written into the test so
+   the next driver does not re-find it.
+3. ⚠ **`scripts/wiring-census.mjs` HAS NO DRY-READ FLAG.** `--check` verifies and the bare
+   invocation WRITES; there is no `--out`. Every lane that wants to measure the drift without
+   taking the door must write the file and restore it. A `--out <path>` flag is a one-function
+   change in a script the chair owns; recorded, not cured.
+
+### 5.9 THE GATES AT THE TIP
+
+```
+$ npx vitest run tests/lint                                              ; exit=1
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > the committed census is byte-identical …
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > THE CENSUS IS AN ASSERTION …
+ Test Files  2 failed | 147 passed (149)
+      Tests  2 failed | 2466 passed (2468)
+
+$ node scripts/check-domain-strict.mjs                                   ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                  ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs                          ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                         ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/generate-dossier-state-prose.mjs --check                  ; exit=0
+[dossier-prose] seats: 708 sentence / 0 clause over 708 state pools (not-a-modifier 708)
+[dossier-prose] verified 68 state blocks / 2266 variants across 6 desks, 78 causal families / 468 variants
+$ npx eslint <the five changed/added js/mjs files>                       ; exit=0   (0 problems)
+$ node <espree literal probe>
+src/domain/prose/composedWalker.js   literals:400  em:0  bang:0
+src/domain/prose/moveGrammar.js      literals:159  em:0  bang:0
+$ grep -c toFixed <the three new/changed src and scripts files>          => 0 everywhere
+$ npx vitest run tests/property/dossierProseManifest.test.js             ; exit=0
+      Tests  14 passed (14)      # the DRIFT arm's three lists empty
+$ npx vitest run tests/lint/proseCorpusBytes.test.js                     ; exit=0   18 passed
+$ npx vitest run tests/copy/voiceMechanics.test.js                       ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+$ node scripts/wiring-census.mjs --check                                 ; exit=1   # §5.5, refused
+```
+
+**THE STRICT RATCHET SITS EXACTLY ON ITS CEILING, 1120 / 1120** — 526 new effective lines of
+island module added ZERO strict-type errors. The voice E2 red is car 3a's two banked files at
+the counts car 3a measured; this car adds nothing to it. **THE MANIFEST IS BYTE-IDENTICAL** and
+every printed figure equals car 4d's.
+
+`tests/lint` is 149 files and 2,468 assertions: the base 148 / 2,402 plus this car's one file
+and 66 arms, which is the subtraction printed rather than derived.
+
+### 5.10 THE MUTATION PLANT, MEASURED BY EXECUTION BEFORE IT LANDED
+
+```
+$ md5 -q src/domain/prose/composedWalker.js                => b40a9dc406ab010407da8bf602cc36a8
+$ npx vitest run tests/lint/proseComposed.walker.test.js --no-file-parallelism   => 66 passed
+$ perl -0pi -e "s/'A2', 'WITHHELD', 'unestablished join'/'A2', 'FAIL', 'unestablished join'/" …
+$ npx vitest run tests/lint/proseComposed.walker.test.js --no-file-parallelism
+     × ⭐ THE SHIPPED STATE: every joint over the committed leaf is WITHHELD, not failed
+      Tests  1 failed | 65 passed (66)          # EXACTLY one red, by name
+$ cp <backup> src/domain/prose/composedWalker.js ; cmp                => RESTORED cmp-identical
+$ md5 -q src/domain/prose/composedWalker.js                => b40a9dc406ab010407da8bf602cc36a8
+$ npx vitest run tests/lint/proseComposed.walker.test.js             => 66 passed
+$ npx vitest run tests/lint/mutationCoverageManifest.test.js         => 10 passed
+```
+
+`src/domain/prose/composedWalker.js` joins `MUTATED_FILES` in the same edit, and
+`uncoveredBaseline` is untouched at 186.
+
+### 5.11 THE CHECK-PAIR MOVE, PROVED BY DIFF RATHER THAN BY READING
+
+```
+$ node $SC/prose-research/check-pair.mjs $SC/laneSEAM <the S12A control pairs>  > kit.out   ; exit=0
+$ node scripts/check-pair.mjs            $SC/laneSEAM <the same pairs>          > landed.out; exit=1
+$ diff kit.out landed.out                                                       => IDENTICAL
+corpus loaded: 2734 variants in 1020 pools; 6 pass mechanically, 1 WITHHELD (R4-BAND …), 1 fail
+```
+
+Byte-identical output, arm for arm, on the kit's own control set. The exit code is the one
+deliberate change (§5.7 item 4).
+
+### 5.12 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The census ROW move REFUSED, and its ground | that fifteen `grammars` integers and one THIN/COVERED pool are the chair's door, and that the figure is a finding rather than a defect | §5.5 | ⭐⭐ one red stands in `tests/lint` |
+| `PROVENANCE` added to `classifyMoves` | that the owner's ADDENDUM orders exactly this, and that 18 of 2,266 is the price | §5.4, §5.7 item 1 | ⭐⭐ a landed classifier moved |
+| The two declared tier figures updated in the census walker | that a fresh-recompute figure moving with the tree is a lane's declared row, not a register act | §5.6 | ⭐⭐ |
+| A2's THREE answers | that an unestablished join is not a refused one, and that the shipped state is therefore WITHHELD and not FAIL | §5.7 item 2 | ⭐⭐ the acceptance shape |
+| The A0b readings held SHRINK-ONLY | that a heuristic's corpus reading should be a ceiling and not a pin | §5.3, §5.7 item 8 | ⭐ |
+| `check-pair` exits non-zero | that a gate that cannot fail is not a gate, and that byte-identical OUTPUT is the compatibility that matters | §5.11, §5.7 item 4 | ⭐ |
+| A0b NOT-EXECUTABLE on DS-DEF-2 | that 3h's tabling cost the arms side its own worked example, 22 rows wide | §5.8 item 1 | ⭐ car 8a/9 |
+| The sample as a deterministic stride | that reproducibility-from-N beats a seeded draw, and that the `fnv1a32` ratchet forbids the alternative | §5.7 item 5 | ⭐ |
+| A13 mints no new mark | that `dm-only` carries the owner's holder rule at this car | §5.7 item 9 | ⭐ car 5b |
+| `wiring-census.mjs` has no dry-read flag | whether `--out` is worth a one-function change | §5.8 item 3 | ⭐ |
+
+### 5.13 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+npx vitest run tests/lint/proseComposed.walker.test.js       # 66 passed, every arm
+npx vitest run tests/lint/proseMoveGrammar.walker.test.js    # 50 passed, the classifier
+npx vitest run tests/lint/proseWiringCensus.walker.test.js   # 1 red: the refused door
+npx vitest run tests/property/dossierProseManifest.test.js   # drift [] — the corpus cannot move
+node scripts/check-pair.mjs <dock> <pairs.json>              # the pair instrument, landed
+node scripts/check-domain-strict.mjs                         # 1120 / 1120
+```
