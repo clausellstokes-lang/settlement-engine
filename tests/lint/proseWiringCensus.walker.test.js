@@ -26,9 +26,16 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
-  censusIndex, censusSummary, cleanPredicate, coOccurringPairs, factIndex, moduleKeyTables,
-  poolKeyFunctions, rootOf, stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
+  absenceOf, attachSets, censusIndex, censusSummary, CIVIC_OBJECT_CLASSES, cleanPredicate,
+  coOccurringPairs, COVERT_SOURCES, customReachable, decorateRows, factBudget, factIndex,
+  isCovertPath, moduleKeyTables, narrowedReads, objectClassOf, poolKeyFunctions, rootOf,
+  stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
 } from '../../src/domain/prose/wiringCensus.js';
+import {
+  buildCensus, censusCheck, CENSUS_JSON, factMounts, producerIndex, relationsFromSitting,
+  relationTable, serialise, wilsonBp, wilsonFloorCount,
+} from '../../scripts/wiring-census.mjs';
+import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { walkEntry, walkPair } from '../../src/domain/prose/entryWalker.js';
 import { walkGrammar } from '../../src/domain/prose/grammarWalker.js';
 import { UNMOUNTED_BLOCKS } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -38,10 +45,13 @@ import {
 } from '../helpers/dossierComposedFill.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import {
-  COMPOSER_DEEP_PATH, COMPOSER_DOUBLE_QUOTED_KEY, COMPOSER_DOUBLE_QUOTED_KEY_REMOVED,
-  COMPOSER_FOUR_BRANCHES, COMPOSER_ONE_BRANCH, COMPOSER_PAIR_TABLE,
+  COMPOSER_COVERT_SOURCE, COMPOSER_DEEP_PATH, COMPOSER_DEFAULTING_READ,
+  COMPOSER_DEFAULTING_READ_GUARDED, COMPOSER_DOUBLE_QUOTED_KEY,
+  COMPOSER_DOUBLE_QUOTED_KEY_REMOVED, COMPOSER_FOUR_BRANCHES, COMPOSER_NUMERIC_KEY,
+  COMPOSER_ONE_BRANCH, COMPOSER_PAIR_TABLE, COMPOSER_POLARITY,
   COMPOSER_PREDICATE_OVER_UNREAD, COMPOSER_TABLE, COMPOSER_TEMPLATE, COMPOSER_TWO_BRANCHES,
-  firingsCoFiring, NAMES_AN_UNFILLED_SLOT, NAMES_ONLY_FILLED_SLOTS, SETTLEMENT_ONLY,
+  firingsByTier, firingsCoFiring, MARKED_ON_A_COVERT_PATH, NAMES_AN_UNFILLED_SLOT,
+  NAMES_ONLY_FILLED_SLOTS, SETTLEMENT_ONLY, UNMARKED_ON_A_COVERT_PATH,
 } from '../fixtures/wiringFixtures.js';
 
 /** Build the block → pool → variants table the census takes, from the R1 leaves. */
@@ -644,3 +654,461 @@ describe('the source readers themselves', () => {
     expect(moduleKeyTables(COMPOSER_TEMPLATE).length, 'a composer with no table has none').toBe(0);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// ARCH CAR 0 — THE COLUMNS THE COMPOSED-PROSE WAVE IS SIZED FROM
+//
+// Every arm below carries a fixture or a plant that MUST fire and a paired cure that MUST
+// silence it. A census column is the easiest thing in the estate to make vacuous: answer
+// `{}`, answer 0, answer "measured" for everything, and read healthy from a distance.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/** The committed census, built once: the same call `scripts/wiring-census.mjs` makes. */
+const committed = await buildCensus({ rates: JSON.parse(readFileSync(CENSUS_JSON, 'utf8')).rate });
+
+describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
+  test('reads = tests on every one of the 708 rows, because no NARROWS line exists', () => {
+    // ⭐ THE DEFAULT IS THE WHOLE RULING (ARCH §4.4, E-F2, T-F7). Every field the selecting
+    // branch evaluates is a field the pool is entitled to claim, and the fact budget is
+    // counted over that. v1 assumed a narrower declared set and the fact budget's k = 0
+    // count moved by a factor of nearly two between the two readings.
+    expect(committed.rows.length, 'the census still covers every pool').toBe(708);
+    const drift = committed.rows.filter((r) => r.reads.join('|') !== r.fieldsRead.join('|'));
+    expect(drift, 'no shipped row narrows its reads today').toEqual([]);
+    expect(committed.totals.narrowedRows, 'and the narrowed count is an integer, not an impression').toBe(0);
+    expect(committed.totals.narrowsRefused).toBe(0);
+  });
+
+  test('a NARROWS line without a chair ruling id is REFUSED, and one with it narrows', () => {
+    const row = {
+      block: 'DS-FIX-1', pool: 'MOOD: calm', fieldsRead: ['readings.reading.mood', 'readings.reading.tier'],
+    };
+    const naked = narrowedReads(row, new Map([['DS-FIX-1 :: MOOD: calm', { fields: ['readings.reading.mood'] }]]));
+    expect(naked.narrowed, 'a narrowing nobody ruled is not a narrowing').toBe(false);
+    expect(naked.reads, 'and the reads stay at the recovered tests').toEqual(row.fieldsRead);
+    expect(naked.refusal).toMatch(/no chair ruling id/);
+    const ruled = narrowedReads(row, new Map([['DS-FIX-1 :: MOOD: calm', {
+      fields: ['readings.reading.mood'], ruling: 'S-912-NARROWS-1', quote: 'the text claims the mood and never the tier',
+    }]]));
+    expect(ruled.narrowed, 'a ruled narrowing narrows').toBe(true);
+    expect(ruled.reads).toEqual(['readings.reading.mood']);
+    expect(ruled.refusal).toBe('');
+    // AND THE SECOND REFUSAL: a ruling may not invent a field the branch does not test.
+    const invented = narrowedReads(row, new Map([['DS-FIX-1 :: MOOD: calm', {
+      fields: ['readings.reading.walls'], ruling: 'S-912-NARROWS-2', quote: 'x',
+    }]]));
+    expect(invented.narrowed).toBe(false);
+    expect(invented.refusal).toMatch(/which the branch does not test/);
+  });
+});
+
+describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s clothes', () => {
+  test('a read that supplies its own fallback is `default`; the guarded sibling is `measured`', () => {
+    const pools = poolsFrom([['DS-FIX-10', [
+      ['THREAT: embattled', SETTLEMENT_ONLY], ['GATE: underfunded', SETTLEMENT_ONLY],
+    ]]]);
+    const defaulting = fixtureCensus(COMPOSER_DEFAULTING_READ, pools).rows;
+    const guarded = fixtureCensus(COMPOSER_DEFAULTING_READ_GUARDED, pools).rows;
+    const labelOf = (rows, pool, needle) => {
+      const row = rows.find((r) => r.pool === pool);
+      const key = Object.keys(row.absent).find((f) => f.endsWith(needle));
+      return row.absent[key];
+    };
+    // PRESENT-THEN-ABSENT on the one field, with the composer's ONLY change being the `||`.
+    expect(labelOf(defaulting, 'THREAT: embattled', 'monsterThreat'), 'the fallback hides the absence').toBe('default');
+    expect(labelOf(guarded, 'THREAT: embattled', 'monsterThreat'), 'and struck, the absence is visible').toBe('measured');
+    // The gate read is the estate's own shape: ABSENT rather than 1.0 when no paid stack
+    // exists, and guarded by `typeof === 'number' && Number.isFinite` before `< 1`.
+    expect(labelOf(defaulting, 'GATE: underfunded', 'military'), 'a guarded read is a measurement').toBe('measured');
+    // THE RULE ITSELF, driven in all three directions on strings, so the corpus integers
+    // are not the only thing standing behind the column.
+    expect(absenceOf('config.monsterThreat', "const t = config.monsterThreat || 'frontier';", null)).toBe('default');
+    expect(absenceOf('config.monsterThreat', 'if (config.monsterThreat === \'plagued\') return 1;', new Set(['monsterThreat']))).toBe('measured');
+    expect(absenceOf('ledger.ghostField', 'if (ledger.ghostField) return 1;', new Set(['other'])), 'no writer produces it').toBe('not-produced');
+    // AND THE LONGEST-SUFFIX RULE: one `present ||` must not label every `*.present` path.
+    const body = 'const a = forces.walls.present || false; if (forces.charter.present) return 1;';
+    expect(absenceOf('forces.walls.present', body, new Set(['present']))).toBe('default');
+    expect(absenceOf('forces.charter.present', body, new Set(['present'])), 'the sibling path is unmoved').toBe('measured');
+  });
+
+  test('the corpus\'s own absence distribution is an integer, and the table rung is counted apart', () => {
+    const totals = committed.totals.absent;
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(563);
+    expect(totals.default, 'read paths where a fallback hides it').toBe(20);
+    expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(96);
+    // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
+    // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
+    // so asking a producer index about it answers `not-produced` on every table row BY
+    // CONSTRUCTION. The rows are counted, never dropped in silence.
+    expect(committed.totals.tableRungRowsWithoutAbsence, 'and they are counted').toBe(78);
+    for (const row of committed.rows) {
+      if (row.rung === 'table') expect(Object.keys(row.absent), `${row.pool} carries no absence record`).toEqual([]);
+    }
+  });
+});
+
+describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
+  test('a covert read is covert and its revealed sibling is not', () => {
+    const pools = poolsFrom([['DS-FIX-11', [
+      ['WATCH: bought, unexposed', UNMARKED_ON_A_COVERT_PATH],
+      ['WATCH: bought, on the record', MARKED_ON_A_COVERT_PATH],
+    ]]]);
+    const rows = fixtureCensus(COMPOSER_COVERT_SOURCE, pools).rows;
+    const covert = rows.find((r) => r.pool === 'WATCH: bought, unexposed');
+    const revealed = rows.find((r) => r.pool === 'WATCH: bought, on the record');
+    expect(covert.covert, 'the `.covert` path is on the frozen list').toBe(true);
+    expect(revealed.covert, 'and the `.revealed` path over the same call is not').toBe(false);
+    // THE PROJECTOR ERROR CAR 4 REFUSES, convicted here on the census's own column: a
+    // covert pool holding a variant with no `dm-only` mark.
+    const unmarked = rows.filter((r) => r.covert)
+      .filter((r) => pools.get('DS-FIX-11').get(r.pool).some((v) => !(v.marks || []).includes('dm-only')));
+    expect(unmarked.map((r) => r.pool), 'an unmarked variant on a covert path is a finding')
+      .toEqual(['WATCH: bought, unexposed']);
+    const curedPools = poolsFrom([['DS-FIX-11', [['WATCH: bought, unexposed', MARKED_ON_A_COVERT_PATH]]]]);
+    const cured = fixtureCensus(COMPOSER_COVERT_SOURCE, curedPools).rows;
+    expect(cured.filter((r) => r.covert).map((r) => r.pool), 'the pool is still covert').toEqual(['WATCH: bought, unexposed']);
+    expect(cured.filter((r) => r.covert && curedPools.get('DS-FIX-11').get(r.pool)
+      .some((v) => !(v.marks || []).includes('dm-only'))), 'and marked dm-only, it is no longer a finding').toEqual([]);
+    // The roster is DECLARED, and the general limb catches a covert segment anywhere.
+    expect(COVERT_SOURCES.length, 'the covert-source list is published as a frozen constant').toBe(6);
+    expect(isCovertPath('compromisedSecurityInstitutions.covert')).toBe(true);
+    expect(isCovertPath('npc.corrupt')).toBe(true);
+    expect(isCovertPath('readings.reading.mood'), 'and an ordinary reading is not covert').toBe(false);
+  });
+
+  test('the object class is read off the KEY, from the closed list the census emits', () => {
+    // ⛔ THE ONE LICENSED USE OF THE KEY STRING (ARCH T-F12). Every other column is derived
+    // from the recovered wiring; this one is the LABEL half by construction, because the
+    // refusal it grounds is "the spine key and the modifier key name the same civic object".
+    expect(objectClassOf('WALLED-STRAINED')).toBe('wall');
+    expect(objectClassOf('Disasters & Famine: NO reserves, NO medical provision')).toBe('store');
+    expect(objectClassOf('MOOD: calm'), 'a key naming no civic object gets none').toBe(null);
+    expect(Object.keys(CIVIC_OBJECT_CLASSES).length, 'the list is closed at ten classes').toBe(10);
+    // THE SAME-CLASS ATTACH, convicted: two keys of one block naming one object.
+    const spine = 'Disasters & Famine: NO reserves, NO medical provision';
+    const modifier = 'stores: short';
+    expect(objectClassOf(spine)).toBe(objectClassOf(modifier));
+    expect(objectClassOf(spine), 'so the projector refuses this attach').toBe('store');
+    // The paired negative: a modifier over a DIFFERENT object attaches lawfully.
+    expect(objectClassOf('watch: bought (covert)')).not.toBe(objectClassOf(spine));
+    expect(committed.totals.objectClassed, 'and the corpus count is an integer').toBe(99);
+  });
+
+  test('a numeric pool key is named, and its sibling is not', () => {
+    const rows = fixtureCensus(COMPOSER_NUMERIC_KEY, poolsFrom([['DS-FIX-13', [
+      ['1', SETTLEMENT_ONLY], ['RUNG: the second', SETTLEMENT_ONLY],
+    ]]])).rows;
+    // P-F12: a key matching `^\d+$` is refused at projection, because a desk that iterated
+    // its own pools by index would select one. The census names them so car 4 can refuse.
+    const numeric = rows.filter((r) => /^\d+$/.test(r.pool)).map((r) => r.pool);
+    expect(numeric, 'the numeric key is named').toEqual(['1']);
+    expect(rows.find((r) => r.pool === '1').status, 'and it is a real resolved row, not a parse artefact')
+      .toBe(WIRING_STATUS.RESOLVED);
+    expect(committed.rows.filter((r) => /^\d+$/.test(r.pool)), 'the shipped corpus holds none').toEqual([]);
+  });
+});
+
+describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget', () => {
+  test('an attach set is every RESOLVED spine whose tests EXCLUDE the fact', () => {
+    const rows = fixtureCensus(COMPOSER_POLARITY, poolsFrom([['DS-FIX-12', [
+      ['WALLED-STRAINED', SETTLEMENT_ONLY], ['WALLED-QUIET', SETTLEMENT_ONLY],
+      ['UNWALLED-SMALL', SETTLEMENT_ONLY], ['UNWALLED-LARGE', SETTLEMENT_ONLY],
+    ]]])).rows;
+    expect(rows.every((r) => r.status === WIRING_STATUS.RESOLVED), 'all four spines resolve').toBe(true);
+    const [block] = attachSets(rows);
+    expect(block.spines, 'four spines over one polarity field').toBe(4);
+    const gate = block.byFact.find((f) => f.field === 'gate');
+    expect(gate, 'the block reads a second fact only ONE spine tests').toBeTruthy();
+    // The spines whose branch tests `gate` are excluded; the rest are the attach set.
+    expect(gate.attach.sort(), 'and every spine that does NOT test it is attachable')
+      .toEqual(['UNWALLED-LARGE', 'UNWALLED-SMALL', 'WALLED-QUIET']);
+    // ⭐ THE SPANNING SET, CONVICTED (T-F3). `gate`'s attach set holds spines on BOTH sides
+    // of the polarity field `forces.walls.present`, and a relation-bearing modifier may not
+    // span two value classes: a pressed country beside a standing wall and beside no wall
+    // are not one relation. The census hands car 4 the set the refusal is computed over.
+    const polarityOf = (pool) => (pool.startsWith('WALLED') ? 'walls=true' : 'walls=false');
+    expect(new Set(gate.attach.map(polarityOf)).size, 'the set spans two polarity classes').toBe(2);
+    const walled = block.byFact.find((f) => f.field === 'forces.walls.present');
+    expect(walled.attach, 'while the polarity field itself attaches nowhere: every spine tests it')
+      .toEqual([]);
+  });
+
+  test('attach coverage is printed per block, in basis points, over the shipped corpus', () => {
+    const coverage = committed.attachCoverage;
+    expect(coverage.length, 'one row per block carrying a RESOLVED spine').toBe(
+      new Set(committed.rows.filter((r) => r.status === WIRING_STATUS.RESOLVED).map((r) => r.block)).size,
+    );
+    const gen3 = coverage.find((c) => c.block === 'DS-GEN-3');
+    expect(gen3.spines, 'DS-GEN-3 is the estate\'s widest block').toBe(42);
+    expect(gen3.spinesReachedBp, 'and every one of its spines can carry a modifier').toBe(10000);
+    // ⭐ THE BLOCK THAT CANNOT COMPOSE AT ALL IS A FINDING, not a rounding error: a block
+    // whose every spine tests the same single fact has NO attachable spine for it.
+    const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
+    expect(dark, 'the blocks where no fact of the block can attach anywhere').toContain('DS-STR-1');
+  });
+
+  test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
+    const budget = committed.factBudget;
+    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(121);
+    expect(budget.executable, 'counted over the RESOLVED rows').toBe(318);
+    // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
+    // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
+    // and the §908 law forbids exactly that.
+    expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(390);
+    expect(budget.executable + budget.notExecutable).toBe(708);
+    const summed = budget.histogram.reduce((total, [, n]) => total + n, 0);
+    expect(summed, 'the histogram carries every executable row once').toBe(318);
+    // The rule itself, on a fixture: a three-field spine has no seat and a one-field spine has two.
+    const rows = [
+      { block: 'B', pool: 'p1', status: WIRING_STATUS.RESOLVED, reads: ['a', 'b', 'c'] },
+      { block: 'B', pool: 'p2', status: WIRING_STATUS.RESOLVED, reads: ['a'] },
+      { block: 'B', pool: 'p3', status: WIRING_STATUS.UNRESOLVED, reads: [] },
+    ];
+    expect(factBudget(rows).zeroK).toBe(1);
+    expect(factBudget(rows).notExecutable).toBe(1);
+    expect(Object.fromEntries(factBudget(rows).histogram)).toEqual({ 0: 1, 2: 1 });
+  });
+});
+
+describe('car 0 — mounts per fact, custom reachability, and the relation table', () => {
+  test('the modifier half of mounts-per-fact is NOT-EXECUTABLE without a desk-fact census', () => {
+    const blind = factMounts(committed.rows, DOSSIER_MOUNTS);
+    expect(blind.notExecutable.length, 'a comparison against nothing is not a clean bill').toBe(1);
+    expect(blind.rows.every((r) => r.mountsModifier === null), 'and the column is null, never 0').toBe(true);
+    const wired = committed.mountsPerFact;
+    expect(wired.notExecutable, 'with the census supplied it is executable').toEqual([]);
+    // ⭐ THE MODIFIER HALF IS THE TAB'S QUESTION. Derived within a block it is zero on every
+    // row by construction, because a fact one of a block's own spines reads SPINES on that
+    // block's tab and the echo bound excludes it there.
+    expect(wired.rows.some((r) => (r.mountsModifier || 0) > 0), 'and it answers a real number').toBe(true);
+    expect(wired.byTab.length, 'every mounted tab carries a modifier-eligible count').toBe(
+      new Set(DOSSIER_MOUNTS.map((m) => m.tab)).size,
+    );
+    // ARCH §6.5's worked REFUSAL, as a measurement: `tradeRouteAccess` spines at
+    // `overview.origin`, so it may take no modifier seat anywhere on the overview tab.
+    const route = wired.rows.find((r) => r.field === 'readings.tradeRouteAccess');
+    expect(route.spineTabs, 'the route spines on overview').toContain('overview');
+    expect(route.modifierMounts.filter((m) => m.startsWith('overview.')),
+      'so no overview mount is modifier-eligible for it').toEqual([]);
+    expect(route.modifierMounts.length, 'while other tabs remain open to it').toBeGreaterThan(0);
+  });
+
+  test('custom-content reachability is enumerable from code, per kind, with the limb named', () => {
+    // The owner's 2026-09-08 ~04:00 row: the CUSTOM-PROSE train authors one generic
+    // construction per reachable (kind x fact x value), so the count per kind is its input.
+    const custom = committed.customReachable;
+    expect(custom.byKind.length, 'the eight authorable kinds, enumerated from the manifest').toBe(8);
+    expect(custom.rows.length, 'in-house (block, pool) predicates a custom definition can reach').toBe(22);
+    expect(Object.fromEntries(custom.byKind), 'per kind, as integers').toEqual({
+      services: 6, resources: 6, institutions: 5, factions: 3, tradeGoods: 2, stressors: 0, deities: 0, traditions: 0,
+    });
+    for (const row of custom.rows) {
+      expect(['bucket', 'field', 'value'], `${row.pool} names which limb caught it`).toContain(row.via);
+    }
+    // THE LIMBS, driven on a fixture so the integers above are not the only evidence.
+    const categories = [{
+      key: 'resources',
+      singular: 'Resource',
+      fields: [{ key: 'criticality', effect: 'mechanical', values: ['critical', 'important'] }],
+    }];
+    const hit = customReachable([{
+      block: 'B', pool: 'p', reads: ['readings.resources'], predicate: [],
+    }], categories);
+    expect(hit.rows[0].via, 'a reads path naming the bucket').toBe('bucket');
+    const byValue = customReachable([{
+      block: 'B', pool: 'p', reads: ['readings.other'], predicate: [{ field: 'x', op: '===', value: 'critical' }],
+    }], categories);
+    expect(byValue.rows[0].via, 'a predicate value inside a mechanical enum').toBe('value');
+    expect(customReachable([{ block: 'B', pool: 'p', reads: ['readings.mood'], predicate: [] }], categories).rows,
+      'and a pool reaching nothing is not counted').toEqual([]);
+  });
+
+  test('the relation table has its row count by source and by direction, and source (d) is EMPTY', () => {
+    const relations = committed.relations;
+    expect(relations.rows.length, 'rows the four sources yield at this tip').toBe(165);
+    expect(Object.fromEntries(relations.bySource), 'by source').toEqual({ a: 131, b: 28, c: 6 });
+    expect(Object.fromEntries(relations.byDirection), 'and every row carries its direction').toEqual({ 'a->b': 165 });
+    // ⭐ SOURCE (d) IS THE SITTING'S AND IS EMPTY, ASSERTED (ARCH §5.2, E-F14b). A missing key
+    // would leave a reader to infer the emptiness; an assertion makes the standing
+    // ratification door's first row visible the moment it lands.
+    expect(relationsFromSitting(), 'no sitting has ratified an axis pair').toEqual([]);
+    expect(relations.rows.filter((r) => r.source === 'd'), 'so the table carries none').toEqual([]);
+    // THE EDGE ARCH §5.2 NAMES, recovered rather than transcribed: the generator's
+    // `milUpkeepMult = min(1, 0.6 + econOutput/50 * 0.4)` degrading the military score.
+    const gate = relations.rows.filter((r) => r.b === 'economicGates.military');
+    expect(gate.map((r) => r.a), 'econOutput is the gate\'s source')
+      .toEqual(['src/generators/defenseGenerator.js::econOutput']);
+    expect(gate[0].relation).toBe('consequence');
+    expect(gate[0].direction).toBe('a->b');
+  });
+
+  test('⭐ NOT ONE RELATION ROW JOINS TWO FIELDS A DESK READS, and that is the car\'s finding', () => {
+    // ⛔ ARCH §11's EMPTY-TABLE RISK HAS MATERIALISED, MEASURED RATHER THAN FEARED. A
+    // `consequence` or `tension` joint is licensed only by a row whose endpoints include the
+    // spine's PRIMARY field. The table names PRODUCER tokens (`condition:<archetype>`,
+    // `system:<variable>`, `economicGates.<gate>`); the census names CALLER paths and bare
+    // key-function parameters (`readings.x`, `gate`, `forces`). At this tip the two
+    // vocabularies do not meet — not once, in either direction, and not even at the leaf.
+    const join = committed.relations.join;
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(91);
+    expect(join.strictBoth, 'rows a projector could license today').toBe(0);
+    expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
+    expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
+    // ⭐ TWO ROWS JOIN ON ONE ENDPOINT AT THE LEAF, and one of them is the ARCH document's
+    // own worked edge — `econOutput` degrading `economicGates.military`. Even that edge is
+    // half-joined, because the desks read the gate as an unrooted parameter.
+    expect(join.leafEither, 'two rows touch a desk read at the leaf').toBe(2);
+    expect(join.leafRows, 'and none of them on BOTH endpoints').toEqual([]);
+    // THE CONSEQUENCE, stated as an executable fact rather than a caution: until a
+    // normalisation lands, the clause seat has no licensed row and every modifier at this
+    // tip is an `addition` with the empty opener. The measurement is what car 5's arm A2
+    // will refuse against.
+    const licensed = committed.relations.rows.filter((r) => r.relation === 'tension');
+    expect(licensed, 'and no source yields a tension row at all today').toEqual([]);
+  });
+});
+
+describe('car 0 — the committed JSON and its interlock', () => {
+  test('the committed census is byte-identical to a fresh build, and the stamp is live', () => {
+    const text = readFileSync(CENSUS_JSON, 'utf8');
+    const verdict = censusCheck(text, committed);
+    expect(verdict.reason, 'the committed file is current').toBe('');
+    expect(verdict.ok).toBe(true);
+    expect(text, 'and byte-identical to what the script would write').toBe(serialise(committed));
+    expect(Object.keys(committed.stamp.files).length, 'the six composers and the mount registry').toBe(7);
+  });
+
+  test('a STALE STAMP and a STALE BYTE are different refusals, and both fire', () => {
+    // ⛔ THE PLANT THE INTERLOCK EXISTS FOR. A composer moves, nobody re-takes the census,
+    // and the projector goes on refusing `READS` tokens against a map of a tree that no
+    // longer exists. The two failures have different cures and are not collapsed.
+    const fresh = JSON.parse(serialise(committed));
+    fresh.stamp.files[Object.keys(fresh.stamp.files)[0]] = '0'.repeat(64);
+    const stamped = censusCheck(`${JSON.stringify(fresh, null, 2)}\n`, committed);
+    expect(stamped.ok, 'a stale stamp refuses').toBe(false);
+    expect(stamped.reason).toBe('stale-stamp');
+    expect(stamped.detail).toMatch(/the composer moved since the census was taken/);
+    const drifted = JSON.parse(serialise(committed));
+    drifted.totals.pools = 707;
+    const bytes = censusCheck(`${JSON.stringify(drifted, null, 2)}\n`, committed);
+    expect(bytes.ok, 'a stale byte refuses').toBe(false);
+    expect(bytes.reason, 'and says which failure it is').toBe('stale-bytes');
+    expect(censusCheck(null, committed).reason, 'a missing file is its own refusal').toBe('missing');
+    // THE PAIRED POSITIVE, so the check is not simply refusing everything.
+    expect(censusCheck(serialise(committed), committed).ok).toBe(true);
+  });
+
+  test('the producer index reads the estate, and a blind one would report nothing', () => {
+    const { produced, files } = producerIndex();
+    expect(files, 'the scan read src/generators and src/domain, not an empty directory').toBeGreaterThan(400);
+    expect(produced.size, 'and found this many written leaf keys').toBeGreaterThan(2000);
+    expect(produced.has('economicGates'), 'including the gate the ARCH document works from').toBe(true);
+    expect(produced.has('zzzNoWriterAnywhere'), 'and not a key nothing writes').toBe(false);
+  });
+});
+
+describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound', () => {
+  test('the corpus is a marginal-controlled grid whose TIER axis is balanced', () => {
+    const rate = committed.rate;
+    expect(rate, 'the committed census carries its rate half').toBeTruthy();
+    expect(rate.corpus.cells, 'threat 4 x route 8 x tier 6').toBe(192);
+    expect(rate.corpus.seeds, 'seeds per cell').toBe(4);
+    expect(rate.corpus.towns, 'and the sample the Wilson bound is stated at').toBe(768);
+    expect(rate.corpus.genThrows, 'no generator threw').toBe(0);
+    expect(rate.corpus.deskThrows, 'and no desk threw').toEqual([]);
+    // ⭐ THE TIER AXIS IS EXACTLY BALANCED (the owner's 2026-09-08 01:3x row). A corpus whose
+    // tiers were rolled could not answer "is this pool dark at city?" at all.
+    expect(Object.fromEntries(rate.corpus.tierMarginals)).toEqual({
+      thorp: 128, hamlet: 128, village: 128, town: 128, city: 128, metropolis: 128,
+    });
+    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(267);
+    // The one-config 200-town probe reached 181; the grid reaches more, which is the point.
+    expect(rate.rows.length, 'more than the single-configuration probe could reach').toBeGreaterThan(181);
+  });
+
+  test('a pool silent at a tier where its block MOUNTS is a per-tier finding', () => {
+    expect(committed.rate.tierSilences.length, '(pool, tier) rows on the shipped grid').toBe(347);
+    for (const row of committed.rate.tierSilences) {
+      expect(row.sites, 'every finding is on a MOUNTED block').toBeGreaterThan(0);
+      expect(row.firedOverall, 'and on a pool that fired somewhere').toBeGreaterThan(0);
+    }
+    // THE ARM ITSELF, on a fixture built to hold one silence and one lawful absence: a pool
+    // that fires only at `city` is silent at `hamlet`, and a pool of an UNMOUNTED block is
+    // not a finding at all, however silent it is.
+    const towns = firingsByTier(4);
+    const rows = [
+      {
+        block: 'DS-FIX-12', pool: 'WALLED-QUIET', towns: 4, byTier: { hamlet: { towns: 0 }, city: { towns: 4 } },
+      },
+      {
+        block: 'DS-FIX-99', pool: 'DARK', towns: 4, byTier: { hamlet: { towns: 0 }, city: { towns: 4 } },
+      },
+    ];
+    const tiers = [['hamlet', 4], ['city', 4]];
+    const sites = new Map([['DS-FIX-12', ['defense.wallRationale']], ['DS-FIX-99', []]]);
+    const found = tierSilencesOf(rows, tiers, sites);
+    expect(found.map((f) => `${f.block}/${f.tier}`), 'the mounted block\'s silence is named, the unmounted one is not')
+      .toEqual(['DS-FIX-12/hamlet']);
+    expect(towns.length, 'and the fixture carries both tiers').toBe(8);
+  });
+
+  test('the occurrence bound is the WILSON lower bound, and the pair distribution is printed at it', () => {
+    // ARCH E-F4: at 27 of 525 a cell truly at 5 % clears a naive floor 48 % of the time, so
+    // the floor is the 95 % LOWER bound and never the point estimate.
+    expect(wilsonFloorCount(768, 500), 'the bound at N = 768').toBe(51);
+    expect(wilsonFloorCount(525, 500), 'and at the golden corpus\'s N').toBe(37);
+    expect(wilsonBp(51, 768).loBp, 'the interval at the bound clears 500 bp').toBeGreaterThanOrEqual(500);
+    expect(wilsonBp(50, 768).loBp, 'and one town below it does not').toBeLessThan(500);
+    const pairs = committed.rate.pairs;
+    expect(pairs.n).toBe(768);
+    expect(pairs.boundCount, 'the census carries the bound it was measured at').toBe(51);
+    expect(pairs.rows.length, 'distinct co-occurring fact pairs with no pool keyed on both').toBe(729);
+    expect(pairs.clearing, 'pairs clearing the bound, ALL members').toBe(590);
+    // ⛔ AND THE HALF THE CHAIR MUST SET THE FLOOR FROM. `coOccurringPairs` builds a town's
+    // facts from PREDICATE fields, two of whose shapes are this instrument's own bookkeeping:
+    // the table rung's synthetic label and a bare unrooted parameter. A floor set on the
+    // whole distribution would be set on 503 pairs of labels.
+    expect(pairs.usable, 'pairs whose BOTH members are dotted reading paths').toBe(226);
+    expect(pairs.usableClearing, 'and those clearing the bound').toBe(170);
+    // ⛔ NO FLOOR IS SET HERE. The distribution ships; the floor is the chair's.
+    expect(committed.rate.departureReport.lineBp, 'the departure line is a REPORT at 10 %').toBe(1000);
+    expect(committed.rate.departureReport.uncommon
+      + committed.rate.departureReport.common, 'over every fired pool').toBe(267);
+  });
+
+  test('the wizard-default weighting ships as a REPORT column beside every rate', () => {
+    // SITTING §N.3: the measurement population is UNIFORM OVER THE CONFIGURATION CHOICES;
+    // the funnel is printed beside it and never silently re-orders an installed world.
+    const wizard = committed.rate.wizard;
+    expect(wizard.towns, 'the same N, so the two columns are comparable').toBe(768);
+    // ⭐ THE FUNNEL'S TIERS ARE NOT BALANCED AND THE GRID'S ARE, which is the whole reason
+    // the two populations are different questions.
+    const wizardTiers = Object.fromEntries(wizard.tiers);
+    expect(new Set(Object.values(wizardTiers)).size, 'the wizard rolls its tier').toBeGreaterThan(1);
+    for (const row of committed.rate.rows) {
+      expect(typeof row.wizardRateBp, `${row.pool} carries its report column`).toBe('number');
+    }
+  });
+});
+
+/**
+ * The per-tier silence rule, spelled here so the arm above drives it on a fixture rather
+ * than only reading the corpus figure. It is the same rule `scripts/prose-rate-corpus.mjs`
+ * runs; a pool of an UNMOUNTED block is never a finding, however silent.
+ * @param {ReadonlyArray<object>} rows
+ * @param {ReadonlyArray<[string, number]>} tiers
+ * @param {Map<string, string[]>} sitesByBlock
+ * @returns {Array<{block: string, pool: string, tier: string}>}
+ */
+function tierSilencesOf(rows, tiers, sitesByBlock) {
+  /** @type {Array<{block: string, pool: string, tier: string}>} */
+  const out = [];
+  for (const row of rows) {
+    if ((sitesByBlock.get(row.block) || []).length === 0) continue;
+    for (const [tier] of tiers) {
+      if ((row.byTier[tier]?.towns || 0) > 0) continue;
+      out.push({ block: row.block, pool: row.pool, tier });
+    }
+  }
+  return out;
+}

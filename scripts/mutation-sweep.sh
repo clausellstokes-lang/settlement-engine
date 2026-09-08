@@ -1185,6 +1185,47 @@ check_caught "prose-wiring-census/a resolved pool loses its predicate and RESOLV
 perl -0pi -e "s/  const taxedCoin = Number\(settlement\?\.economicState\?\.treasury\?\.coinFlows\?\.taxed\);/  const taxedCoin = NaN;/" src/domain/institutions/institutionTable.js
 check_caught "institution-table/the third column source stops being read and the closed flag does not notice" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
 
+# 86. MEASURE car 0 — A COVERT READING MUST NEVER READ AS AN ORDINARY ONE. The wiring
+#     census's `covert` column is what makes ARCH §2.5's projector refusal executable: a pool
+#     whose READS names `compromisedSecurityInstitutions().covert`, `npc.corrupt` or any
+#     covert impairment may hold no unmarked variant, because on the player face it must not
+#     be a candidate at all and nothing it does — including what it prevented — may be
+#     observable there. This plant makes `isCovertPath` answer `false` for everything. Every
+#     other column stays exactly right: the status, the rung, the predicate, the tier table
+#     and the anti-vacuity split are all unmoved, and the census simply stops being able to
+#     see the one class of reading that can leak a DM fact onto a player page. Measured before
+#     landing (lane MEASURE, 2026-09-08): planted => 2 red of 47 — the covert control by name
+#     and the committed-JSON identity arm; restored cmp-exact => 47 passed.
+perl -0pi -e "s/  if \(COVERT_SOURCES\.some\(\(source\) => chain\.includes\(source\)\)\) return true;\n  return chain\.split\('\.'\)\.includes\('covert'\);/  return false;/" src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/a covert reading reads as an ordinary one and an unmarked variant passes" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 87. MEASURE car 0 — A DEFAULT MUST NEVER WEAR A READING'S CLOTHES. The `absent` column
+#     generalises the mount registry's own test (dossierMounts.js:56-80) to the field grain:
+#     a read that supplies its own fallback (`config.monsterThreat || 'frontier'`) cannot tell
+#     an absent producer value from the fallback, so a modifier predicate over it is a
+#     projector error unless written `present AND …`. This plant makes the `default` verdict
+#     answer `measured` instead — a one-token change that leaves the `not-produced` limb, the
+#     rung attribution, the tier table and every other integer standing while the whole finding
+#     class goes quiet. It is the exact shape of every dead arm this subsystem has shipped.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 3 red of 47 — the
+#     fallback control, the corpus absence distribution, and the committed-JSON identity arm;
+#     restored cmp-exact => 47 passed.
+perl -0pi -e "s/ return 'default';/ return 'measured';/" src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/a defaulting read reports as a measurement and the absence class goes quiet" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 88. MEASURE car 0 — AN ATTACH SET MUST EXCLUDE THE SPINES THAT ALREADY TEST THE FACT. The
+#     derived attach set is what keeps the authored corpus LINEAR (ARCH §6.2, E-F1): a modifier
+#     reading one fact attaches to every RESOLVED spine of its block whose own `tests` EXCLUDE
+#     that fact, and a spine that already tests it would be restating itself in the second
+#     sentence. This plant drops the exclusion, so every attach set becomes every spine and
+#     ATTACH COVERAGE reads 100 % everywhere — the friendliest possible number, and the one
+#     that would let car 9 author a modifier onto the very spine that already says its fact.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 3 red of 47 — the attach
+#     control, the corpus coverage arm (DS-STR-1 stops being a finding), and the committed-JSON
+#     identity arm; restored cmp-exact => 47 passed.
+perl -0pi -e "s/        \.filter\(\(s\) => !\(s\.reads \|\| s\.fieldsRead \|\| \[\]\)\.includes\(field\)\)/        .filter(() => true)/" src/domain/prose/wiringCensus.js
+check_caught "prose-wiring-census/an attach set keeps the spines that already test the fact" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

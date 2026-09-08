@@ -1,0 +1,724 @@
+/**
+ * scripts/wiring-census.mjs — ARCH car 0: THE WIRING CENSUS, COMMITTED AS DATA.
+ *
+ * WHAT THIS IS. `src/domain/prose/wiringCensus.js` is an INSTRUMENT: pure, file-free, and
+ * fenced out of every product import path by bytes. The composed-prose model needs its
+ * output at AUTHORING time — the projector reads it beside the annex to refuse a `READS`
+ * token the census does not list, to emit the render half of `poolMeta`, and to refuse to
+ * run at all when its stamp is stale (ARCH §3.5). A module the product cannot import
+ * cannot serve that, and a leaf the product CAN import would breach the fence. So the
+ * census ships as DATA: `docs/content/wiring-census.json`, written here, `--check`-gated
+ * exactly as the prose leaves are (`generate-dossier-state-prose.mjs:706-713`).
+ *
+ * ── THE FOUR MODES ──────────────────────────────────────────────────────────────────
+ *   (default)             write `docs/content/wiring-census.json`
+ *   --check               refuse on a stale byte or a stale stamp; write nothing
+ *   --print               the receipt's own figures, from this one command
+ *   --rates <file>        fold a RATE-corpus run (scripts/prose-rate-corpus.mjs --out)
+ *                         into the rate half before writing
+ *
+ * ⚠ WHY `--check` DOES NOT RECOMPUTE THE RATE HALF. The rate half is 768 generated towns
+ * composed through six desks; that is a lane's probe and never a gate operation. `--check`
+ * recomputes the CENSUS half and the STAMP and carries the committed rate half through
+ * verbatim, so a stale composer byte reds and a stale rate table is refreshed by an
+ * explicit `--rates` run. Stated here rather than left as a silence: a check that quietly
+ * skipped half the file would be the false green this estate has a name for.
+ *
+ * ── WHY THE SOURCE READERS FOR THE RELATION TABLE LIVE HERE AND NOT IN THE MODULE ────
+ * `src/domain/**` carries a hard 800-effective-line ceiling and `wiringCensus.js` stands
+ * at 783 after car 0's six row columns. The RELATION EXTRACTION produces no row column, it
+ * READS FILES (which the census module's own header forbids it to do), and it lands in
+ * this JSON. It is therefore built here, in the estate's own idiom — the scanner lives in
+ * `scripts/` and the walker imports it, exactly as `writerReach.walker.test.js` imports
+ * `check-writer-reach.mjs` and `scripts/lib/writer-reach-scan.mjs`.
+ *
+ * READ-ONLY except `docs/content/wiring-census.json`. No RNG, no clock in any figure.
+ */
+import { createHash } from 'node:crypto';
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { join, relative } from 'node:path';
+
+import {
+  attachSets, censusSummary, customReachable, factBudget, factIndex, rootOf, tierRows,
+  TIERS, WIRING_STATUS, wiringCensus,
+} from '../src/domain/prose/wiringCensus.js';
+import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS } from '../src/domain/display/stateProse/dossierMounts.js';
+import { CONDITION_ARCHETYPE_TEMPLATES } from '../src/domain/activeConditions.js';
+import { canonicalAffectedSystems } from '../src/domain/worldPulse/stressorsCore.js';
+import { CAUSE_SIGNAL } from '../src/domain/worldPulse/causeVocabulary.js';
+import { CUSTOM_CONTENT_MANIFEST } from '../src/domain/content/customContentManifest.js';
+import { loadStateLeaves, ROOT } from '../tests/helpers/dossierCorpus.js';
+import {
+  COMPOSERS, composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites,
+  unrenderedFacts,
+} from '../tests/helpers/dossierComposedFill.js';
+
+export const CENSUS_JSON = join(ROOT, 'docs/content/wiring-census.json');
+
+/**
+ * The files whose bytes the stamp is taken over: the six composers and the mount registry.
+ * ⚠ THE CANDIDATE LEAVES (`*StateProseCandidates.js`, ARCH §4.1) DO NOT EXIST YET — car 3a
+ * lands them. They are named here so the next reader adds the path rather than wondering
+ * whether the omission was a decision, and `stampedFiles` records what was actually read.
+ */
+export const STAMPED = Object.freeze([
+  ...COMPOSERS,
+  'src/domain/display/stateProse/dossierMounts.js',
+]);
+
+/** @param {string} text @returns {string} */
+const sha256 = (text) => createHash('sha256').update(text).digest('hex');
+
+/**
+ * Every `.js` file under a directory, recursively.
+ * @param {string} dir
+ * @param {string[]} [out]
+ * @returns {string[]} absolute paths
+ */
+function jsFilesUnder(dir, out = []) {
+  for (const name of readdirSync(dir)) {
+    const abs = join(dir, name);
+    if (statSync(abs).isDirectory()) { jsFilesUnder(abs, out); continue; }
+    if (abs.endsWith('.js')) out.push(abs);
+  }
+  return out;
+}
+
+/**
+ * THE PRODUCER INDEX — every leaf key some writer in the estate WRITES, as an object
+ * literal key or as an assignment target, over `src/generators/**` and `src/domain/**`.
+ * It is the ground of the `absent` column's `not-produced` limb: a read of a key no writer
+ * produces cannot throw, it degrades to a default, and the arm behind it is dead on every
+ * generated world (the observed-shape register's own sentence).
+ * @returns {{produced: Set<string>, files: number}}
+ */
+export function producerIndex() {
+  /** @type {Set<string>} */
+  const produced = new Set();
+  const files = [
+    ...jsFilesUnder(join(ROOT, 'src/generators')),
+    ...jsFilesUnder(join(ROOT, 'src/domain')),
+  ];
+  for (const abs of files) {
+    const src = readFileSync(abs, 'utf8');
+    for (const m of src.matchAll(/(?:^|[{,\s])([A-Za-z_$][\w$]*)\s*:/g)) produced.add(m[1]);
+    for (const m of src.matchAll(/\.\s*([A-Za-z_$][\w$]*)\s*=[^=]/g)) produced.add(m[1]);
+  }
+  return { produced, files: files.length };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// THE RELATION TABLE (ARCH §5.2) — FOUR SOURCES, DIRECTION ON EVERY ROW
+//
+// A connective is chosen by the typed provenance EDGE and never by the music, so a
+// `consequence` or a `tension` joint needs a table row whose endpoints include the spine's
+// PRIMARY field, READ IN ITS DIRECTION. Car 0 PRINTS the row count before any car authors
+// a joint, because a table that turns out to be empty between the fields a desk reads is
+// the risk §11 carries and the arithmetic of §6 rests on.
+//
+//   (a) condition archetype -> system variable, through `canonicalAffectedSystems`
+//   (b) the CAUSE_SIGNAL rows: the score or condition a cause class READS is the cause and
+//       the class is its reading, so the direction is source -> class
+//   (c) the generator's recorded derivations: a persisted gate or score whose initialiser
+//       reads another field
+//   (d) the sitting's ratified axis pairs and `interesting_tension` types — EMPTY today,
+//       and asserted empty rather than left unmentioned
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * @typedef {object} RelationRow
+ * @property {string} a the endpoint the edge runs FROM
+ * @property {string} b the endpoint the edge runs TO
+ * @property {'consequence'|'tension'} relation
+ * @property {'a'|'b'|'c'|'d'} source
+ * @property {'a->b'|'b->a'} direction
+ * @property {string} via how the edge was recovered
+ */
+
+/**
+ * Source (a): 46 condition archetypes to their canonical system variables.
+ * @returns {RelationRow[]}
+ */
+export function relationsFromArchetypes() {
+  /** @type {RelationRow[]} */
+  const out = [];
+  for (const [archetype, template] of Object.entries(CONDITION_ARCHETYPE_TEMPLATES)) {
+    for (const system of canonicalAffectedSystems(template.affectedSystems || [])) {
+      out.push({
+        a: `condition:${archetype}`,
+        b: `system:${system}`,
+        relation: 'consequence',
+        source: 'a',
+        direction: 'a->b',
+        via: 'CONDITION_ARCHETYPE_TEMPLATES.affectedSystems via canonicalAffectedSystems',
+      });
+    }
+  }
+  return out;
+}
+
+/**
+ * Source (b): the resolution-predicate table, read out of each class's own function source.
+ * @returns {RelationRow[]}
+ */
+export function relationsFromCauseSignal() {
+  /** @type {RelationRow[]} */
+  const out = [];
+  for (const [cls, fn] of Object.entries(CAUSE_SIGNAL)) {
+    const body = String(fn);
+    /** @type {Set<string>} */
+    const endpoints = new Set();
+    for (const m of body.matchAll(/ctx\.scores\.([A-Za-z_$][\w$]*)/g)) endpoints.add(`system:${m[1]}`);
+    for (const m of body.matchAll(/ctx\.conditions\.has\('([^']+)'\)/g)) endpoints.add(`condition:${m[1]}`);
+    for (const m of body.matchAll(/ctx\.([A-Za-z_$][\w$]*)/g)) {
+      if (m[1] === 'scores' || m[1] === 'conditions') continue;
+      endpoints.add(`signal:${m[1]}`);
+    }
+    for (const endpoint of [...endpoints].sort()) {
+      out.push({
+        a: endpoint,
+        b: `cause:${cls}`,
+        relation: 'consequence',
+        source: 'b',
+        direction: 'a->b',
+        via: 'CAUSE_SIGNAL predicate source',
+      });
+    }
+  }
+  return out;
+}
+
+/**
+ * THE DECLARED SHAPE source (c) reads, stated so a reader can check what it counted rather
+ * than trusting the number: a persisted GATE or SCORE object literal (`economicGates: {…}`
+ * / `scores: {…}`) in a generator, plus a reassignment of one of its keys in the same file.
+ * Each initialiser's identifiers are resolved through the file's own `const` aliases for at
+ * most TWO hops, and the identifier reached is the source endpoint.
+ */
+const DERIVED_CONTAINERS = Object.freeze(['economicGates', 'scores']);
+
+/** Identifiers a derivation never runs from. */
+const NOT_A_FIELD = new Set([
+  'Math', 'Number', 'Object', 'Array', 'String', 'Boolean', 'JSON', 'min', 'max', 'round',
+  'true', 'false', 'null', 'undefined', 'const', 'let', 'return', 'if', 'else', 'new',
+  'typeof', 'length', 'floor', 'ceil', 'abs', 'isFinite', 'map', 'filter', 'reduce',
+]);
+
+/**
+ * @param {string} expr
+ * @returns {string[]} the identifiers an expression reads
+ */
+function identifiersIn(expr) {
+  return [...new Set([...String(expr).matchAll(/\b([A-Za-z_$][\w$]*)\b/g)].map((m) => m[1]))]
+    .filter((id) => !NOT_A_FIELD.has(id));
+}
+
+/**
+ * Source (c): the generator's own recorded derivations. The estate's canonical instance is
+ * `milUpkeepMult = min(1, 0.6 + econOutput/50 * 0.4)` degrading `scores.military` and
+ * persisted as `economicGates.military` (`defenseGenerator.js:189-191, :467-472`).
+ * @returns {RelationRow[]}
+ */
+export function relationsFromGenerators() {
+  /** @type {RelationRow[]} */
+  const out = [];
+  for (const abs of jsFilesUnder(join(ROOT, 'src/generators'))) {
+    const src = readFileSync(abs, 'utf8');
+    const file = relative(ROOT, abs);
+    /** @type {Map<string, string>} */
+    const aliases = new Map();
+    for (const m of src.matchAll(/\bconst\s+([A-Za-z_$][\w$]*)\s*=\s*([^;\n]+)/g)) aliases.set(m[1], m[2]);
+    /** @param {string} expr @param {number} depth @returns {string[]} */
+    const resolve = (expr, depth) => {
+      const ids = identifiersIn(expr);
+      if (depth === 0) return ids;
+      return [...new Set(ids.flatMap((id) => (aliases.has(id) ? resolve(aliases.get(id) || '', depth - 1) : [id])))];
+    };
+    for (const container of DERIVED_CONTAINERS) {
+      for (const m of src.matchAll(new RegExp(`\\b${container}\\s*:\\s*\\{([^{}]*(?:\\{[^{}]*\\}[^{}]*)*)\\}`, 'g'))) {
+        for (const entry of m[1].matchAll(/([A-Za-z_$][\w$]*)\s*:\s*([^,\n]+)/g)) {
+          for (const id of resolve(entry[2], 2)) {
+            if (id === entry[1]) continue;
+            out.push({
+              a: `${file}::${id}`,
+              b: `${container}.${entry[1]}`,
+              relation: 'consequence',
+              source: 'c',
+              direction: 'a->b',
+              via: `${file} ${container} literal, two alias hops`,
+            });
+          }
+        }
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Source (d) — the sitting's. A ratified axis pair or an `interesting_tension` type becomes
+ * a row through the STANDING RATIFICATION DOOR (ARCH §5.2, E-F14b). No sitting has ratified
+ * one, so the source is EMPTY, and it is returned empty rather than omitted so the walker
+ * can assert the emptiness instead of a reader inferring it from a missing key.
+ * @returns {RelationRow[]}
+ */
+export function relationsFromSitting() {
+  return [];
+}
+
+/**
+ * The whole relation table, with its row counts by source and by direction.
+ * @returns {{rows: RelationRow[], bySource: Array<[string, number]>,
+ *   byDirection: Array<[string, number]>}}
+ */
+export function relationTable() {
+  const rows = [
+    ...relationsFromArchetypes(),
+    ...relationsFromCauseSignal(),
+    ...relationsFromGenerators(),
+    ...relationsFromSitting(),
+  ];
+  /** @type {Map<string, number>} */
+  const bySource = new Map();
+  /** @type {Map<string, number>} */
+  const byDirection = new Map();
+  for (const row of rows) {
+    bySource.set(row.source, (bySource.get(row.source) || 0) + 1);
+    byDirection.set(row.direction, (byDirection.get(row.direction) || 0) + 1);
+  }
+  return {
+    rows,
+    bySource: [...bySource].sort(),
+    byDirection: [...byDirection].sort(),
+  };
+}
+
+/**
+ * MOUNTS PER FACT — spine and modifier (ARCH §3.2, §6.6, T-F10), keyed on the PRODUCER
+ * TOKEN (`rootOf`) so the two halves speak one vocabulary. The echo bound the owner vetoes
+ * is stated over this table: one producer fact backs a modifier at at most ONE mount per
+ * page-set, and at NO mount on a tab where that fact is already a spine.
+ *
+ * ⭐ THE MODIFIER HALF IS THE TAB'S QUESTION, NOT THE BLOCK'S, and getting that wrong
+ * answers zero on every row. A fact read by one of a block's own spines SPINES on that
+ * block's tab by construction, so the echo bound excludes it there and a within-block
+ * derivation can only ever report nothing. §6.6's own sentence is the right one: the
+ * modifier-eligible facts of a tab are the facts THE TAB'S DESKS READ that do not spine on
+ * that tab — the key-only facts of car 5's census, which is exactly where `purse: short`
+ * comes from in ARCH §6.5 (`economicGates.military` spines on defense and is free to
+ * modify on overview).
+ *
+ * ⛔ NOT-EXECUTABLE WITHOUT `deskFacts`. With no held-fact census the modifier column is
+ * `null`, never 0: a comparison against nothing answers "no modifier can attach anywhere",
+ * which reads as a finding and is a blindness.
+ * @param {ReadonlyArray<object>} rows the decorated census rows
+ * @param {ReadonlyArray<{mount: string, tab: string, desk: string, blockId: string}>} mounts
+ * @param {Map<string, ReadonlyArray<string>>} [deskFacts] desk name to the facts it HOLDS
+ * @returns {{rows: Array<{field: string, mountsSpine: number, mountsModifier: number|null,
+ *   spineTabs: string[], modifierMounts: string[]}>, byTab: Array<[string, number]>,
+ *   notExecutable: string[]}}
+ */
+export function factMounts(rows, mounts, deskFacts) {
+  /** @type {Map<string, Array<{mount: string, tab: string, desk: string}>>} */
+  const byBlock = new Map();
+  for (const m of mounts) {
+    const seat = byBlock.get(m.blockId);
+    if (seat) seat.push(m); else byBlock.set(m.blockId, [m]);
+  }
+  /** @type {Map<string, Set<string>>} tab to the facts that SPINE on it */
+  const spineFactsByTab = new Map();
+  /** @type {Map<string, {spine: Set<string>, tabs: Set<string>, modifier: Set<string>}>} */
+  const index = new Map();
+  const seatOf = (field) => {
+    let seat = index.get(field);
+    if (!seat) { seat = { spine: new Set(), tabs: new Set(), modifier: new Set() }; index.set(field, seat); }
+    return seat;
+  };
+  /** @type {Map<string, number>} tab to how many RESOLVED spines it carries */
+  const spinesByTab = new Map();
+  for (const row of rows) {
+    if (row.status !== WIRING_STATUS.RESOLVED) continue;
+    for (const m of byBlock.get(row.block) || []) {
+      spinesByTab.set(m.tab, (spinesByTab.get(m.tab) || 0) + 1);
+      let tabSeat = spineFactsByTab.get(m.tab);
+      if (!tabSeat) { tabSeat = new Set(); spineFactsByTab.set(m.tab, tabSeat); }
+      for (const path of row.reads || row.fieldsRead || []) {
+        const field = rootOf(path);
+        seatOf(field).spine.add(m.mount);
+        seatOf(field).tabs.add(m.tab);
+        tabSeat.add(field);
+      }
+    }
+  }
+  if (!(deskFacts instanceof Map)) {
+    return {
+      rows: [...index].map(([field, seat]) => ({
+        field, mountsSpine: seat.spine.size, mountsModifier: null, spineTabs: [...seat.tabs].sort(), modifierMounts: [],
+      })).sort((a, b) => (a.field < b.field ? -1 : 1)),
+      byTab: [],
+      notExecutable: ['no desk-fact census supplied: the modifier half of mounts-per-fact is NOT-EXECUTABLE'],
+    };
+  }
+  /** @type {Map<string, Set<string>>} tab to every fact its desks hold */
+  const tabFacts = new Map();
+  for (const m of mounts) {
+    let seat = tabFacts.get(m.tab);
+    if (!seat) { seat = new Set(); tabFacts.set(m.tab, seat); }
+    for (const fact of deskFacts.get(m.desk) || []) seat.add(fact);
+  }
+  /** @type {Array<[string, number]>} */
+  const byTab = [];
+  for (const [tab, facts] of tabFacts) {
+    const spineFacts = spineFactsByTab.get(tab) || new Set();
+    const eligible = [...facts].filter((f) => !spineFacts.has(f));
+    byTab.push([tab, eligible.length]);
+    if ((spinesByTab.get(tab) || 0) === 0) continue;
+    for (const field of eligible) {
+      for (const m of mounts.filter((x) => x.tab === tab)) seatOf(field).modifier.add(m.mount);
+    }
+  }
+  return {
+    rows: [...index].map(([field, seat]) => ({
+      field,
+      mountsSpine: seat.spine.size,
+      mountsModifier: seat.modifier.size,
+      spineTabs: [...seat.tabs].sort(),
+      modifierMounts: [...seat.modifier].sort(),
+    })).sort((a, b) => (a.field < b.field ? -1 : 1)),
+    byTab: byTab.sort((a, b) => b[1] - a[1]),
+    notExecutable: [],
+  };
+}
+
+/**
+ * ⭐ THE JOIN BETWEEN THE RELATION TABLE AND THE DESKS, MEASURED BOTH WAYS — and this is
+ * car 0's sharpest finding, so it is printed as two integers rather than one.
+ *
+ * A `consequence` or a `tension` joint is licensed ONLY by a table row whose endpoints
+ * include the spine's PRIMARY field (ARCH §4.5, E-F14b). The two vocabularies are:
+ *
+ *   the TABLE names PRODUCER tokens — `condition:<archetype>`, `system:<variable>`,
+ *     `cause:<class>`, `economicGates.<gate>`, `scores.<score>`
+ *   the CENSUS names CALLER paths and bare key-function parameters — `readings.x`,
+ *     `settlement.x`, and unrooted locals like `gate`, `forces`, `granary`
+ *
+ * STRICT is the join a projector could perform today: `rootOf(endpoint)` present in the
+ * desks' read roots. LEAF is the join available after a normalisation nobody has built:
+ * the endpoint's final token present as a segment of some read path. The gap between the
+ * two is the wiring debt the joint sits behind, and it is a NUMBER rather than a worry.
+ * @param {ReadonlyArray<RelationRow>} rows
+ * @param {ReadonlyArray<object>} censusRows
+ * @returns {{strictBoth: number, strictEither: number, leafBoth: number, leafEither: number,
+ *   leafRows: RelationRow[], deskRoots: number, deskSegments: number}}
+ */
+export function relationJoin(rows, censusRows) {
+  /** @type {Set<string>} */
+  const roots = new Set();
+  /** @type {Set<string>} */
+  const segments = new Set();
+  for (const row of censusRows) {
+    for (const path of row.reads || row.fieldsRead || []) {
+      roots.add(rootOf(path));
+      for (const segment of String(path).split(/[^A-Za-z_$]+/)) if (segment) segments.add(segment);
+    }
+  }
+  /** @param {string} endpoint @returns {string} */
+  const leafOf = (endpoint) => {
+    const bare = String(endpoint).replace(/^[a-z]+:/, '').split('::').pop() || '';
+    return bare.split('.').filter(Boolean).pop() || bare;
+  };
+  const strict = (endpoint) => roots.has(rootOf(endpoint));
+  const leaf = (endpoint) => segments.has(leafOf(endpoint));
+  const leafRows = rows.filter((r) => leaf(r.a) && leaf(r.b));
+  return {
+    strictBoth: rows.filter((r) => strict(r.a) && strict(r.b)).length,
+    strictEither: rows.filter((r) => strict(r.a) || strict(r.b)).length,
+    leafBoth: leafRows.length,
+    leafEither: rows.filter((r) => leaf(r.a) || leaf(r.b)).length,
+    leafRows,
+    deskRoots: roots.size,
+    deskSegments: segments.size,
+  };
+}
+
+/**
+ * THE WILSON 95 % INTERVAL, IN BASIS POINTS. ARCH E-F4: a cell earns hand-written text only
+ * when the LOWER bound of its rate clears 5 %, because at 27 of 525 a cell truly at 5 %
+ * clears a naive floor 48 % of the time and a coin flip cannot gate a permanent authoring
+ * act. Returned as integers: this estate's prose-numerics register counts a `toFixed` and a
+ * float interpolation, and a statistic that formats has decided a presentation for a reader
+ * it cannot see.
+ * @param {number} k successes
+ * @param {number} n trials
+ * @returns {{loBp: number, hiBp: number, rateBp: number}}
+ */
+export function wilsonBp(k, n) {
+  if (!n) return { loBp: 0, hiBp: 0, rateBp: 0 };
+  const z = 1.959963984540054;
+  const p = k / n;
+  const denominator = 1 + (z * z) / n;
+  const centre = (p + (z * z) / (2 * n)) / denominator;
+  const spread = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / denominator;
+  return {
+    loBp: Math.round(Math.max(0, centre - spread) * 10000),
+    hiBp: Math.round(Math.min(1, centre + spread) * 10000),
+    rateBp: Math.round(p * 10000),
+  };
+}
+
+/**
+ * The smallest count whose Wilson lower bound clears `floorBp` at sample size `n`.
+ * @param {number} n
+ * @param {number} floorBp
+ * @returns {number}
+ */
+export function wilsonFloorCount(n, floorBp) {
+  for (let k = 0; k <= n; k++) if (wilsonBp(k, n).loBp >= floorBp) return k;
+  return n + 1;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// THE CENSUS ITSELF
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Build the whole census, decorated, with every ARCH car-0 derivation beside it.
+ * @param {{rates?: {rows: Array<{block: string, pool: string, rateBp: number,
+ *   byTier: Record<string, number>}>, corpus: object}|null}} [options]
+ * @returns {Promise<object>}
+ */
+export async function buildCensus(options = {}) {
+  const leaves = await loadStateLeaves();
+  /** @type {Map<string, Map<string, Array<{text: string, slots: string[]}>>>} */
+  const pools = new Map();
+  for (const e of leaves) {
+    if (!pools.has(e.block)) pools.set(e.block, new Map());
+    const block = pools.get(e.block);
+    if (!block.has(e.pool)) block.set(e.pool, []);
+    block.get(e.pool).push({ text: e.text, slots: e.slots });
+  }
+  const sites = fillSites();
+  const fill = new Map([...composedFillByBlock(sites)].map(([b, r]) => [b, r.slots]));
+  const { produced, files: producerFiles } = producerIndex();
+  const census = wiringCensus({
+    sources: composerSources(),
+    pools,
+    fill,
+    fillByKeyFunction: composedFillByKeyFunction(sites),
+    unmounted: UNMOUNTED_BLOCKS,
+    produced,
+    mounts: DOSSIER_MOUNTS,
+    // NO NARROWS LINE EXISTS AT THIS TIP. `reads === tests` on every one of the 708 rows;
+    // the mechanism is proved by the walker's fixture rather than by a shipped row.
+    narrows: new Map(),
+  });
+  const held = [...new Set(unrenderedFacts().flatMap((r) => r.held))];
+  const summary = censusSummary(census.rows, held);
+  const tiers = tierRows({ rows: census.rows, held });
+  const attach = attachSets(census.rows);
+  const facts = unrenderedFacts();
+  /** @type {Map<string, string[]>} the facts each DESK holds, keyed as the mount registry names it */
+  const deskFacts = new Map(facts.map((r) => [r.file.replace(/^.*\/(\w+)StateProse\.js$/, '$1'), r.held]));
+  const mountsPerFact = factMounts(census.rows, DOSSIER_MOUNTS, deskFacts);
+  const budget = factBudget(census.rows);
+  const custom = customReachable(census.rows, CUSTOM_CONTENT_MANIFEST.categories);
+  const relations = relationTable();
+  const rateRows = options.rates?.rows || [];
+  const rateBy = new Map(rateRows.map((r) => [`${r.block} :: ${r.pool}`, r]));
+  for (const row of census.rows) {
+    const hit = rateBy.get(`${row.block} :: ${row.pool}`);
+    row.rateBp = hit ? hit.rateBp : null;
+  }
+  /** @type {Array<[string, string]>} */
+  const stampedFiles = STAMPED.map((rel) => [rel, sha256(readFileSync(join(ROOT, rel), 'utf8'))]);
+  const tierCounts = tiers.reduce((m, t) => m.set(t.tier, (m.get(t.tier) || 0) + 1), new Map());
+  return {
+    schema: 'wiring-census/1',
+    stamp: {
+      files: Object.fromEntries(stampedFiles),
+      candidateLeaves: 'none at this tip: car 3a lands src/domain/display/stateProse/*StateProseCandidates.js',
+      producerIndexFiles: producerFiles,
+    },
+    totals: {
+      pools: summary.total,
+      blocks: new Set(census.rows.map((r) => r.block)).size,
+      variants: summary.variants,
+      resolved: summary.resolved,
+      unresolved: summary.unresolved,
+      resolvedWithPredicate: summary.resolvedWithPredicate,
+      resolvedWithCleanPredicate: summary.resolvedWithCleanPredicate,
+      keyFunctions: census.functions,
+      keyFunctionsConsulted: census.consulted,
+      keyTables: census.tables,
+      slotless: summary.slotless.length,
+      bagless: summary.bagless.length,
+      predicatesOverUnreadFields: summary.predicatesOverUnreadFields.length,
+      syntheticTableFields: summary.syntheticTableFields,
+      tiers: {
+        MISSING: tierCounts.get(TIERS.MISSING) || 0,
+        THIN: tierCounts.get(TIERS.THIN) || 0,
+        COVERED: tierCounts.get(TIERS.COVERED) || 0,
+      },
+      narrowsRefused: census.refusals.length,
+      narrowedRows: census.rows.filter((r) => r.narrowed).length,
+      covertRows: census.rows.filter((r) => r.covert).length,
+      objectClassed: census.rows.filter((r) => r.objectClass !== null).length,
+      mountedRows: census.rows.filter((r) => (r.sites || []).length > 0).length,
+      absent: absentTotals(census.rows),
+      zeroK: budget.zeroK,
+      kExecutable: budget.executable,
+      kNotExecutable: budget.notExecutable,
+      customReachableRows: custom.rows.length,
+      relationRows: relations.rows.length,
+      relationRowsJoinable: relationJoin(relations.rows, census.rows).strictBoth,
+      tableRungRowsWithoutAbsence: census.rows.filter((r) => r.rung === 'table').length,
+      modifierEligibleFactsByTab: mountsPerFact.byTab,
+    },
+    rows: census.rows,
+    factIndex: factIndex(census.rows),
+    mountsPerFact,
+    attachCoverage: attach.map(({ byFact: _byFact, ...rest }) => rest),
+    attachByFact: attach,
+    factBudget: budget,
+    customReachable: custom,
+    relations: { ...relations, join: relationJoin(relations.rows, census.rows) },
+    tiers,
+    rate: options.rates || null,
+    narrowsRefusals: census.refusals,
+  };
+}
+
+/**
+ * The `absent` label distribution over every read path of every row.
+ * @param {ReadonlyArray<{absent?: Record<string, string>}>} rows
+ * @returns {Record<string, number>}
+ */
+export function absentTotals(rows) {
+  /** @type {Record<string, number>} */
+  const totals = { measured: 0, default: 0, 'not-produced': 0 };
+  for (const row of rows) {
+    for (const label of Object.values(row.absent || {})) {
+      totals[label] = (totals[label] || 0) + 1;
+    }
+  }
+  return totals;
+}
+
+/** @param {object} data @returns {string} */
+export const serialise = (data) => `${JSON.stringify(data, null, 2)}\n`;
+
+/**
+ * THE INTERLOCK, as a pure comparison so the walker can drive BOTH its limbs without
+ * writing a byte. A stale STAMP and a stale BYTE are different failures with different
+ * cures, and a check that collapsed them would tell a maintainer to regenerate when the
+ * real answer is that a composer moved under a census nobody re-took.
+ * @param {string|null} committedText
+ * @param {object} data the freshly built census
+ * @returns {{ok: boolean, reason: 'missing'|'stale-stamp'|'stale-bytes'|'', detail: string}}
+ */
+export function censusCheck(committedText, data) {
+  if (committedText === null) {
+    return { ok: false, reason: 'missing', detail: 'docs/content/wiring-census.json is missing; run `node scripts/wiring-census.mjs`.' };
+  }
+  /** @type {object} */
+  let have;
+  try { have = JSON.parse(committedText); } catch {
+    return { ok: false, reason: 'stale-bytes', detail: 'docs/content/wiring-census.json does not parse as JSON.' };
+  }
+  for (const [rel, hash] of Object.entries(data.stamp.files)) {
+    if (have.stamp?.files?.[rel] !== hash) {
+      return {
+        ok: false,
+        reason: 'stale-stamp',
+        detail: `wiring-census.json stamp is stale for ${rel}: the composer moved since the census was taken. Re-run \`node scripts/wiring-census.mjs\`.`,
+      };
+    }
+  }
+  if (committedText !== serialise(data)) {
+    return { ok: false, reason: 'stale-bytes', detail: 'docs/content/wiring-census.json is stale; run `node scripts/wiring-census.mjs`.' };
+  }
+  return { ok: true, reason: '', detail: '' };
+}
+
+/**
+ * The receipt's own print, from ONE command.
+ * @param {object} data
+ * @returns {string[]}
+ */
+export function printLines(data) {
+  const t = data.totals;
+  const pad = (n) => String(n).padStart(5);
+  const lines = [
+    'WIRING CENSUS · ARCH car 0 · committed at docs/content/wiring-census.json',
+    `  pools ${t.pools} · blocks ${t.blocks} · variants ${t.variants}`,
+    `  RESOLVED ${t.resolved} · WIRING-UNRESOLVED ${t.unresolved} · with a predicate ${t.resolvedWithPredicate} · clean ${t.resolvedWithCleanPredicate}`,
+    `  key functions ${t.keyFunctions} (consulted ${t.keyFunctionsConsulted}) · key tables ${t.keyTables}`,
+    `  TIERS · MISSING ${t.tiers.MISSING} · THIN ${t.tiers.THIN} · COVERED ${t.tiers.COVERED}`,
+    '  ── the car-0 columns ─────────────────────────────────────────────',
+    `  reads = tests on ${t.pools - t.narrowedRows} of ${t.pools} rows · narrowed ${t.narrowedRows} · NARROWS refused ${t.narrowsRefused}`,
+    `  absent · measured ${t.absent.measured} · default ${t.absent.default} · not-produced ${t.absent['not-produced']}`
+      + ` (over ${t.absent.measured + t.absent.default + t.absent['not-produced']} read paths;`
+      + ` the table rung's ${t.tableRungRowsWithoutAbsence} rows carry the instrument's own label and no absence record)`,
+    `  covert rows ${t.covertRows} · objectClass named on ${t.objectClassed} of ${t.pools} · rows with a mount ${t.mountedRows}`,
+    `  fact budget · k = 0 on ${t.zeroK} of ${t.kExecutable} RESOLVED rows · ${t.kNotExecutable} NOT-EXECUTABLE (UNRESOLVED)`,
+    `  k histogram: ${data.factBudget.histogram.map(([k, n]) => `k=${k} ${n}`).join(' · ')}`,
+    `  customReachable rows ${t.customReachableRows} over ${data.customReachable.byKind.length} kinds`,
+    `    ${data.customReachable.byKind.map(([k, n]) => `${k} ${n}`).join(' · ')}`,
+    `  relation rows ${t.relationRows} · by source ${data.relations.bySource.map(([s, n]) => `(${s}) ${n}`).join(' · ')}`,
+    `    by direction ${data.relations.byDirection.map(([d, n]) => `${d} ${n}`).join(' · ')}`,
+    `    THE JOIN: rows both of whose endpoints a desk reads — STRICT ${data.relations.join.strictBoth}`
+      + ` (either endpoint ${data.relations.join.strictEither}) · by LEAF ${data.relations.join.leafBoth}`
+      + ` (either ${data.relations.join.leafEither}) over ${data.relations.join.deskRoots} desk read roots`,
+    '  ── attach coverage, the ten blocks with the most spines ──────────',
+    ...[...data.attachCoverage].sort((a, b) => b.spines - a.spines).slice(0, 10)
+      .map((a) => `    ${a.block.padEnd(11)} spines ${pad(a.spines)} · facts ${pad(a.facts)}`
+        + ` · spines reached ${pad(a.spinesReachedBp)} bp · mean reach ${pad(a.meanReachBp)} bp`),
+    `  modifier-eligible facts per tab: ${t.modifierEligibleFactsByTab.map(([tab, n]) => `${tab} ${n}`).join(' · ')}`,
+    '  ── mounts per fact, the twelve with the most spine mounts ────────',
+    ...[...data.mountsPerFact.rows].sort((a, b) => b.mountsSpine - a.mountsSpine).slice(0, 12)
+      .map((f) => `    ${f.field.slice(0, 46).padEnd(46)} spine ${pad(f.mountsSpine)} · modifier ${pad(f.mountsModifier)}`),
+  ];
+  if (data.rate) {
+    lines.push('  ── the RATE corpus ───────────────────────────────────────────────');
+    lines.push(`    ${data.rate.corpus.cells} cells x ${data.rate.corpus.seeds} seeds = ${data.rate.corpus.towns} towns`
+      + ` · pools that fired ${data.rate.rows.length}`);
+  } else {
+    lines.push('  RATE corpus: ABSENT from this file (run scripts/prose-rate-corpus.mjs --out, then --rates)');
+  }
+  return lines;
+}
+
+/** The entry point. */
+async function main() {
+  const argv = process.argv.slice(2);
+  const checkOnly = argv.includes('--check');
+  const printOnly = argv.includes('--print');
+  const ratesAt = argv.indexOf('--rates');
+  /** @type {object|null} */
+  let rates = null;
+  if (ratesAt >= 0 && argv[ratesAt + 1]) rates = JSON.parse(readFileSync(argv[ratesAt + 1], 'utf8'));
+  const committed = (() => {
+    try { return readFileSync(CENSUS_JSON, 'utf8'); } catch { return null; }
+  })();
+  // THE RATE HALF IS CARRIED THROUGH unless a run supplies a new one, so a check and a
+  // no-flag write are both reproducible from the committed file plus the live composers.
+  if (!rates && committed) rates = JSON.parse(committed).rate;
+  const data = await buildCensus({ rates });
+  const text = serialise(data);
+  if (printOnly) {
+    for (const line of printLines(data)) console.log(line);
+    return;
+  }
+  if (checkOnly) {
+    const verdict = censusCheck(committed, data);
+    if (!verdict.ok) throw new Error(verdict.detail);
+    console.log(`[wiring-census] verified ${data.totals.pools} pools / ${data.totals.variants} variants`
+      + ` / ${data.totals.relationRows} relation rows against ${Object.keys(data.stamp.files).length} stamped files`);
+    return;
+  }
+  writeFileSync(CENSUS_JSON, text);
+  console.log(`[wiring-census] wrote ${relative(ROOT, CENSUS_JSON)} — ${data.totals.pools} pools,`
+    + ` ${data.totals.relationRows} relation rows, ${Object.keys(data.stamp.files).length} stamped files`);
+}
+
+if (process.argv[1] && process.argv[1].endsWith('wiring-census.mjs')) await main();

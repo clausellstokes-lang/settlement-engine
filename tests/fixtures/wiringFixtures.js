@@ -217,3 +217,167 @@ export function firingsCoFiring(towns) {
   }
   return out;
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// ARCH CAR 0 — the controls for the six new columns. Each fixture switches ONE column
+// on, and each ships with the paired composer that switches it off again, so an arm that
+// reds on everything is distinguishable from one that reds on the thing it names.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * A DEFAULT WEARING A READING'S CLOTHES (ARCH §3.3). `threatPoolKey` supplies its own
+ * fallback, so an absent producer value arrives as `'frontier'` and no predicate over it
+ * can tell absence from the fallback. `gatePoolKey` beside it GUARDS presence first, which
+ * is the same read done honestly and the shape `wallRationalePoolKey` actually ships.
+ */
+export const COMPOSER_DEFAULTING_READ = `
+import { readStateProse } from './stateProseKernel.js';
+
+export function threatPoolKey(config) {
+  const threat = config?.monsterThreat || 'frontier';
+  if (threat === 'plagued') return 'THREAT: embattled';
+  return null;
+}
+
+export function gatePoolKey(defenseProfile) {
+  const gate = defenseProfile?.economicGates?.military;
+  if (typeof gate === 'number' && Number.isFinite(gate) && gate < 1) return 'GATE: underfunded';
+  return null;
+}
+
+export function fixtureProse(settlement, readings, options) {
+  readStateProse(CORPUS, 'DS-FIX-10', threatPoolKey(readings.config), { slots: { settlement: settlement.name } });
+  return readStateProse(CORPUS, 'DS-FIX-10', gatePoolKey(readings.defenseProfile), { slots: { settlement: settlement.name } });
+}
+`;
+
+/** The same composer with the fallback struck: the read becomes a MEASUREMENT. */
+export const COMPOSER_DEFAULTING_READ_GUARDED = COMPOSER_DEFAULTING_READ
+  .replace("config?.monsterThreat || 'frontier'", 'config?.monsterThreat');
+
+/**
+ * A COVERT SOURCE (ARCH §2.5, T-F5). `covertWatchPoolKey` reads
+ * `compromisedSecurityInstitutions(settlement).covert`, so its pool may hold no unmarked
+ * variant and can never be a candidate on the player face. The revealed sibling is the same
+ * shape over the same call and is NOT covert, which is what makes the column a reading of
+ * the PATH and not of the call.
+ *
+ * ⚠ TWO KEY FUNCTIONS AND NOT TWO BRANCHES OF ONE, DELIBERATELY. `tests` is every reading
+ * the KEY FUNCTION touches (ARCH §3.2's `fieldsRead`), so two branches of one function share
+ * one read set and the covert column could not tell them apart — it would mark the revealed
+ * pool too. That is the conservative, fail-closed answer on a spine and it is the RIGHT one;
+ * it is simply not a control, because a column that answers `true` for both proves nothing.
+ */
+export const COMPOSER_COVERT_SOURCE = `
+import { readStateProse } from './stateProseKernel.js';
+
+export function covertWatchPoolKey(compromised) {
+  if (compromised?.covert?.length > 0) return 'WATCH: bought, unexposed';
+  return null;
+}
+
+export function revealedWatchPoolKey(compromised) {
+  if (compromised?.revealed?.length > 0) return 'WATCH: bought, on the record';
+  return null;
+}
+
+export function fixtureProse(settlement, readings, options) {
+  const compromised = compromisedSecurityInstitutions(settlement);
+  readStateProse(CORPUS, 'DS-FIX-11', covertWatchPoolKey(compromised), { slots: { settlement: settlement.name } });
+  return readStateProse(CORPUS, 'DS-FIX-11', revealedWatchPoolKey(compromised), { slots: { settlement: settlement.name } });
+}
+`;
+
+/** A variant with NO `dm-only` mark on a covert pool — the projector error of ARCH §2.5. */
+export const UNMARKED_ON_A_COVERT_PATH = Object.freeze([
+  { text: 'The watch at {settlement} answers to a purse it does not name.', slots: ['settlement'], marks: [] },
+  { text: 'At {settlement} the watch is bought, and quietly.', slots: ['settlement'], marks: [] },
+]);
+
+/** The same two variants marked `dm-only`, which is what the covert column requires. */
+export const MARKED_ON_A_COVERT_PATH = Object.freeze([
+  { text: 'The watch at {settlement} answers to a purse it does not name.', slots: ['settlement'], marks: ['dm-only'] },
+  { text: 'At {settlement} the watch is bought, and quietly.', slots: ['settlement'], marks: ['dm-only'] },
+]);
+
+/**
+ * A POLARITY BLOCK (ARCH §4.5, T-F3). Four spines over one polarity field (`walls`), split
+ * across THREE key functions so their read sets genuinely differ: `gate` is tested by one
+ * spine only, so a would-be modifier of `gate` attaches to the other three — an attach set
+ * SPANNING both value classes of `walls`. That is the projector refusal car 4 builds and the
+ * set car 0 must be able to hand it.
+ *
+ * ⚠ THREE FUNCTIONS AND NOT ONE LADDER, for the same reason the covert fixture uses two:
+ * `tests` is function-wide, so a four-branch ladder gives all four pools one read set and
+ * every attach set collapses to empty. The estate's own DS-DEF-11 is a single four-fact
+ * ladder and its attach sets ARE empty under this grain — which is the conservative answer
+ * and a finding in its own right, not a fixture to be arranged around.
+ */
+export const COMPOSER_POLARITY = `
+import { readStateProse } from './stateProseKernel.js';
+
+export function wallStrainedPoolKey(forces, gate) {
+  if (forces?.walls?.present === true && gate < 1) return 'WALLED-STRAINED';
+  return null;
+}
+
+export function wallQuietPoolKey(forces) {
+  if (forces?.walls?.present === true) return 'WALLED-QUIET';
+  return null;
+}
+
+export function unwalledPoolKey(forces, tier) {
+  if (forces?.walls?.present === false && tier === 'hamlet') return 'UNWALLED-SMALL';
+  if (forces?.walls?.present === false) return 'UNWALLED-LARGE';
+  return null;
+}
+
+export function fixtureProse(settlement, forces, gate, tier, options) {
+  readStateProse(CORPUS, 'DS-FIX-12', wallStrainedPoolKey(forces, gate), { slots: { settlement: settlement.name } });
+  readStateProse(CORPUS, 'DS-FIX-12', wallQuietPoolKey(forces), { slots: { settlement: settlement.name } });
+  return readStateProse(CORPUS, 'DS-FIX-12', unwalledPoolKey(forces, tier), { slots: { settlement: settlement.name } });
+}
+`;
+
+/**
+ * A NUMERIC POOL KEY (P-F12). A key matching `^\\d+$` is refused at projection because a
+ * desk that iterated its own pools by index would select one, which is the "never by
+ * iterating `pools`" law of ARCH §4.1.
+ */
+export const COMPOSER_NUMERIC_KEY = `
+import { readStateProse } from './stateProseKernel.js';
+
+export function rungPoolKey(reading) {
+  if (reading?.rung === 1) return '1';
+  if (reading?.rung === 2) return 'RUNG: the second';
+  return null;
+}
+
+export function fixtureProse(settlement, readings, options) {
+  return readStateProse(CORPUS, 'DS-FIX-13', rungPoolKey(readings.reading), {
+    slots: { settlement: settlement.name },
+  });
+}
+`;
+
+/**
+ * A firing record where one pool of a MOUNTED block fires on every town of one tier and on
+ * none of another — ARCH §16 item 7's per-tier silence, as data.
+ * @param {number} perTier
+ * @returns {Array<{tier: string, fired: Array<{block: string, pool: string}>}>}
+ */
+export function firingsByTier(perTier) {
+  /** @type {Array<{tier: string, fired: Array<{block: string, pool: string}>}>} */
+  const out = [];
+  for (const tier of ['hamlet', 'city']) {
+    for (let i = 0; i < perTier; i++) {
+      out.push({
+        tier,
+        fired: tier === 'city'
+          ? [{ block: 'DS-FIX-12', pool: 'WALLED-QUIET' }]
+          : [{ block: 'DS-FIX-12', pool: 'UNWALLED-SMALL' }],
+      });
+    }
+  }
+  return out;
+}

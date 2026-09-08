@@ -513,6 +513,17 @@ export function callArguments(src, fn) {
  * @property {'literal'|'template'|'table'|'none'} rung which rung of the ladder answered
  * @property {number} variants
  * @property {number} grammars distinct move orders across the pool's variants
+ * ── ARCH car 0's columns, written by `decorateRows` in the census's second pass ──
+ * @property {string[]} [reads] what the pool is ENTITLED to claim: `tests` unless narrowed
+ * @property {boolean} [narrowed] did a chair-ruled NARROWS line narrow `reads`?
+ * @property {Record<string, string>} [absent] per read path: measured | default | not-produced
+ * @property {boolean} [covert] any read on the frozen COVERT-SOURCE list
+ * @property {string|null} [objectClass] the civic object the KEY names, from the closed list
+ * @property {string[]} [sites] the mounts where this pool can speak
+ * @property {string[]} [attach] a MODIFIER's derived spine set; empty on a spine
+ * @property {number|null} [k] the fact budget `3 - |reads|`; null when UNRESOLVED
+ * @property {number|null} [rateBp] the firing share on the RATE corpus, in basis points
+ * @property {0|1|null} [departure] the norm bit, frozen at the pool's birth car
  */
 
 /**
@@ -527,14 +538,19 @@ export function callArguments(src, fn) {
  *   HOME-FED and refuses it on STALLED, in one block); this is that refinement, and the
  *   block-wide bag is the fallback when no call site can be attributed.
  * @property {ReadonlyArray<string>} [unmounted] blocks the mount registry does not mount
+ * @property {Map<string, NarrowsLine>} [narrows] the chair-ruled NARROWS lines, `block :: pool` keyed
+ * @property {Set<string>} [produced] every leaf key some writer in the estate writes
+ * @property {ReadonlyArray<{mount: string, tab: string, blockId: string}>} [mounts] the mount registry
  */
 
 /**
  * THE (block, pool) → {predicate, fields read, slots filled} CENSUS.
  * @param {CensusInput} input
- * @returns {{rows: CensusRow[], functions: number, consulted: number, tables: number}}
+ * @returns {{rows: CensusRow[], functions: number, consulted: number, tables: number,
+ *   refusals: string[]}}
  *   `functions` is how many key functions the reader FOUND; `consulted` is how many the
- *   ladder actually walks. The two must be equal, and the walker asserts it.
+ *   ladder actually walks. The two must be equal, and the walker asserts it. `refusals`
+ *   carries every NARROWS line the second pass refused, with its reason.
  */
 export function wiringCensus(input) {
   const sources = input.sources || new Map();
@@ -587,8 +603,17 @@ export function wiringCensus(input) {
   }
   let tableCount = 0;
   for (const list of tables.values()) tableCount += list.length;
+  // THE SECOND PASS (ARCH car 0). Six columns need a row's own recovered `fieldsRead` and
+  // the estate's own tables, so they are written after every row exists rather than inside
+  // the ladder, where they would have to be threaded through three rungs that do not use them.
+  /** @type {Map<string, string>} */
+  const bodies = new Map();
+  for (const { fn } of prepared.values()) bodies.set(fn.name, `${bodies.get(fn.name) || ''}\n${fn.body}`);
+  const refusals = decorateRows(rows, {
+    narrows: input.narrows, produced: input.produced, bodies, mounts: input.mounts,
+  });
   return {
-    rows, functions: fns.length, consulted: prepared.size, tables: tableCount,
+    rows, functions: fns.length, consulted: prepared.size, tables: tableCount, refusals,
   };
 }
 
@@ -1109,4 +1134,370 @@ export function censusSummary(rows, held) {
     variants,
     perBlock: [...perBlock].sort((a, b) => b[1] - a[1]),
   };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// ARCH CAR 0 — THE COLUMNS THE COMPOSED-PROSE WAVE IS SIZED FROM
+//
+// Car 8 answered "what selects this pool". The composed-prose model (ARCH §3.2) needs
+// six more answers per row before a modifier can be authored anywhere, and every one of
+// them is a MEASUREMENT the wave's arithmetic rests on rather than a judgment:
+//
+//   reads       what the pool is ENTITLED to claim — `tests` by default, narrower only
+//               by a chair-ruled NARROWS line carrying its ruling id and quoted sentence
+//   absent      what an ABSENT value at a read path MEANS: measured, a reader's default,
+//               or a path no writer produces (ARCH §3.3, the general test of
+//               dossierMounts.js:56-80 read at the field grain)
+//   covert      the read is on the frozen COVERT-SOURCE list, so the pool may hold no
+//               unmarked variant and can never be a candidate on the player face
+//   objectClass the civic object the key NAMES, from a closed list this module emits
+//   sites       the mounts where the pool can speak
+//   k           the fact budget left for modifiers: `3 - |reads|`
+//
+// ⛔ THE LABEL RULE STILL BINDS, AND `objectClass` IS ITS ONE LICENSED USE. The pool key
+// string is never the PREDICATE (the owner's rule; §M.2 item 54). `objectClass` is the
+// LABEL half by construction — ARCH T-F12 asks for "the civic object class the key string
+// names", so this column reads the key and nothing else reads the key. Every other column
+// below is derived from the recovered wiring or from a table the estate itself exports.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * THE COVERT-SOURCE LIST, published as a frozen constant (ARCH §2.5, T-F5). A pool whose
+ * `reads` names one of these may not hold an unmarked variant: on the player face it is
+ * not a candidate at all, so nothing it does — including what it prevented — is
+ * observable there. The roster is DECLARED rather than inferred, and the general limb
+ * (`isCovertPath`) catches a `covert` segment anywhere in a chain so a new covert reading
+ * cannot arrive unnamed.
+ * @type {ReadonlyArray<string>}
+ */
+export const COVERT_SOURCES = Object.freeze([
+  'compromisedSecurityInstitutions',
+  'npc.corrupt',
+  'corruptNpc',
+  'impairment.covert',
+  'mobilization.covert',
+  'blocs.covert',
+]);
+
+/**
+ * @param {string} field
+ * @returns {boolean} is this reading on the covert list, or does it carry a covert segment?
+ */
+export function isCovertPath(field) {
+  const chain = String(field);
+  if (COVERT_SOURCES.some((source) => chain.includes(source))) return true;
+  return chain.split('.').includes('covert');
+}
+
+/**
+ * THE CLOSED CIVIC-OBJECT CLASS LIST (ARCH T-F12). Two pieces about the SAME civic object
+ * restate each other in meaning even when their fields are disjoint: "there are no
+ * reserves" beside "the stores are short" passes every field guard and says one thing
+ * twice. The projector refuses an attach whose spine key and modifier key name the same
+ * class, and this is the list it refuses from.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const CIVIC_OBJECT_CLASSES = Object.freeze({
+  wall: Object.freeze(['wall', 'walled', 'unwalled', 'perimeter', 'rampart', 'palisade', 'gate']),
+  force: Object.freeze(['garrison', 'militia', 'muster', 'watch', 'guard', 'soldier', 'patrol', 'armed']),
+  store: Object.freeze(['granary', 'stores', 'reserve', 'reserves', 'stock', 'larder', 'harvest']),
+  market: Object.freeze(['market', 'trade', 'export', 'import', 'commerce', 'merchant', 'caravan']),
+  law: Object.freeze(['court', 'prison', 'gaol', 'law', 'justice', 'magistrate', 'assize']),
+  temple: Object.freeze(['temple', 'shrine', 'church', 'parish', 'clergy', 'faith', 'patron']),
+  road: Object.freeze(['road', 'route', 'approach', 'port', 'harbour', 'bridge', 'pass', 'ford']),
+  hall: Object.freeze(['hall', 'council', 'charter', 'seat', 'office', 'chamber', 'moot']),
+  care: Object.freeze(['hospital', 'infirmary', 'healer', 'medical', 'physician', 'ward']),
+  craft: Object.freeze(['forge', 'smith', 'workshop', 'guild', 'craft', 'mill', 'yard']),
+});
+
+/**
+ * The civic object class a pool key names, or null. The FIRST class of the frozen list
+ * any of whose tokens the key names as a whole word: a stable order beats a heuristic,
+ * because two runs of this census must agree on the class or the projector's refusal is
+ * not a refusal.
+ * @param {string} poolKey
+ * @returns {string|null}
+ */
+export function objectClassOf(poolKey) {
+  const words = new Set(String(poolKey).toLowerCase().split(/[^a-z]+/).filter(Boolean));
+  for (const [klass, tokens] of Object.entries(CIVIC_OBJECT_CLASSES)) {
+    if (tokens.some((token) => words.has(token))) return klass;
+  }
+  return null;
+}
+
+/**
+ * WHAT AN ABSENT VALUE AT THIS PATH MEANS (ARCH §3.3), generalising the mount registry's
+ * own test — "DORMANT IS A TRUE STATEMENT, NOT A FALLBACK" — from the surface to the field:
+ *
+ *   `default`      the READ SITE supplies a fallback (`|| x`, `?? x`), so an absent
+ *                  producer value arrives wearing a reading's clothes and a predicate over
+ *                  it cannot tell absence from the fallback. THIS IS THE FINDING CLASS.
+ *   `not-produced` no writer anywhere in the estate produces this leaf.
+ *   `measured`     a writer produces it and the read does not default, so absence is
+ *                  visible to the predicate and a guarded `present AND …` is available.
+ *
+ * The estate's own case: `economicGates.military` is ABSENT rather than 1.0 when there is
+ * no paid stack (`defenseGenerator.js:465-472` writes the key only under `hasAnyDefense`),
+ * and `wallRationalePoolKey` guards `typeof === 'number' && Number.isFinite` before `< 1`.
+ * That read is `measured`; the same predicate written without the guard would be the
+ * projector error ARCH §3.3 names.
+ * @param {string} field the reading path
+ * @param {string} body the source of the read site the census can see (the key function)
+ * @param {Set<string>|null} produced every leaf key some writer in the estate writes
+ * @returns {'measured'|'default'|'not-produced'}
+ */
+export function absenceOf(field, body, produced) {
+  const parts = String(field).split('.').filter(Boolean);
+  if (parts.length === 0) return 'not-produced';
+  const src = String(body || '');
+  // THE LONGEST SUFFIX THE BODY ACTUALLY CARRIES decides, because a row's field is
+  // RE-ROOTED on the caller's path (`forces.walls.present` is read as `walls.present`
+  // inside the key function). A leaf-only match would let one `present ||` anywhere in a
+  // body label every `*.present` path in that function a default, which is the coarse
+  // reading the estate has already been bitten by once.
+  for (let start = 0; start < parts.length; start++) {
+    const chain = parts.slice(start)
+      .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+      .join('\\s*\\??\\.\\s*');
+    if (!new RegExp(`\\b${chain}\\b`).test(src)) continue;
+    if (new RegExp(`\\b${chain}\\b\\s*(?:\\|\\||\\?\\?)`).test(src)) return 'default';
+    break;
+  }
+  return produced instanceof Set && !produced.has(parts[parts.length - 1]) ? 'not-produced' : 'measured';
+}
+
+/**
+ * @typedef {object} NarrowsLine
+ * @property {ReadonlyArray<string>} fields the narrowed reads
+ * @property {string} ruling the chair ruling id
+ * @property {string} quote the sentence the ruling quotes
+ */
+
+/**
+ * `reads` DEFAULTS TO `tests` (ARCH §4.4, E-F2, T-F7). Every field the selecting branch
+ * evaluates is a field the pool is entitled to claim, and the fact budget is counted over
+ * it. A NARROWS line may narrow the set and it is refused without a chair ruling id AND
+ * the sentence quoted, and refused again where it names a field the branch does not test:
+ * a narrowing nobody ruled is a licence the census would be handing out on its own.
+ * @param {CensusRow} row
+ * @param {Map<string, NarrowsLine>|undefined} narrows
+ * @returns {{reads: string[], narrowed: boolean, refusal: string}}
+ */
+export function narrowedReads(row, narrows) {
+  const tests = [...(row.fieldsRead || [])];
+  const line = narrows instanceof Map ? narrows.get(`${row.block} :: ${row.pool}`) : undefined;
+  if (!line) return { reads: tests, narrowed: false, refusal: '' };
+  const at = `${row.block} :: ${row.pool}`;
+  if (!line.ruling || !line.quote) {
+    return { reads: tests, narrowed: false, refusal: `NARROWS at ${at} carries no chair ruling id with its quoted sentence` };
+  }
+  const outside = (line.fields || []).filter((f) => !tests.includes(f));
+  if (outside.length > 0) {
+    return { reads: tests, narrowed: false, refusal: `NARROWS at ${at} names ${outside.join(', ')}, which the branch does not test` };
+  }
+  return { reads: [...line.fields], narrowed: true, refusal: '' };
+}
+
+/**
+ * THE DERIVED ATTACH SETS AND THEIR COVERAGE (ARCH §2.2, §6.2, E-F1). A would-be modifier
+ * reading ONE field may attach to every RESOLVED spine of its block whose own `tests`
+ * EXCLUDE that field — a spine that already tests the field would be restating itself.
+ * `attach` is DERIVED and UNCAPPED, and that is the whole reason the authored corpus stays
+ * linear: under a cap of three a modifier reaching a 42-spine block cost fourteen replicas.
+ *
+ * COVERAGE is printed per block in two integers, because the two answer different owner
+ * questions: `spinesReachedBp` is the share of the block's spines that ANY would-be
+ * modifier can sit beside (can this block compose at all), and `meanReachBp` is the mean
+ * share of spines one fact's modifier reaches (how far one authored piece travels).
+ * @param {ReadonlyArray<CensusRow & {reads?: string[]}>} rows
+ * @returns {Array<{block: string, spines: number, facts: number, spinesReachedBp: number,
+ *   meanReachBp: number, byFact: Array<{field: string, attach: string[]}>}>}
+ */
+export function attachSets(rows) {
+  /** @type {Map<string, Array<CensusRow & {reads?: string[]}>>} */
+  const byBlock = new Map();
+  for (const row of rows) {
+    if (row.status !== WIRING_STATUS.RESOLVED) continue;
+    const seat = byBlock.get(row.block);
+    if (seat) seat.push(row); else byBlock.set(row.block, [row]);
+  }
+  /** @type {Array<{block: string, spines: number, facts: number, spinesReachedBp: number, meanReachBp: number, byFact: Array<{field: string, attach: string[]}>}>} */
+  const out = [];
+  for (const [block, spines] of byBlock) {
+    /** @type {Set<string>} */
+    const facts = new Set();
+    for (const spine of spines) for (const f of spine.reads || spine.fieldsRead || []) facts.add(f);
+    /** @type {Array<{field: string, attach: string[]}>} */
+    const byFact = [];
+    /** @type {Set<string>} */
+    const reached = new Set();
+    let reachTotal = 0;
+    for (const field of [...facts].sort()) {
+      const attach = spines
+        .filter((s) => !(s.reads || s.fieldsRead || []).includes(field))
+        .map((s) => s.pool);
+      byFact.push({ field, attach });
+      for (const pool of attach) reached.add(pool);
+      reachTotal += attach.length;
+    }
+    const denominator = spines.length * Math.max(facts.size, 1);
+    out.push({
+      block,
+      spines: spines.length,
+      facts: facts.size,
+      spinesReachedBp: Math.round((reached.size / spines.length) * 10000),
+      meanReachBp: Math.round((reachTotal / denominator) * 10000),
+      byFact,
+    });
+  }
+  return out.sort((a, b) => (a.block < b.block ? -1 : 1));
+}
+
+// MOUNTS PER FACT lives in `scripts/wiring-census.mjs` (ARCH T-F10). It needs the facts
+// each DESK holds, which is car 5's unrendered-facts census and therefore file I/O; this
+// module's own header forbids it to read a file, and `src/domain/**` carries a hard
+// 800-effective-line ceiling this file now stands close to. The estate's idiom for a
+// scanner a walker must assert is `scripts/` plus an import, which is what it uses.
+
+/**
+ * THE FACT BUDGET, COUNTED (ARCH §4.4, E-F8). A unit carries at most three facts, so a
+ * spine leaves `k = 3 - |reads|` seats for modifiers and a three-field spine leaves NONE.
+ * The k = 0 count is the number the owner vetoes the budget against: on DS-DEF-2 it is the
+ * MOST SPECIFIC shipped cells that can never gain a fact.
+ *
+ * ⛔ COUNTED OVER RESOLVED ROWS ONLY, AND THE REST ARE NOT-EXECUTABLE. An UNRESOLVED row
+ * has `reads: []`, which would read as `k = 3` — a budget of three seats on a pool whose
+ * predicate nobody has recovered. That is the §908 law: a row whose input is missing
+ * declares itself not-executable rather than answering with the friendliest number.
+ * @param {ReadonlyArray<CensusRow & {reads?: string[]}>} rows
+ * @returns {{zeroK: number, executable: number, notExecutable: number,
+ *   byBlock: Array<[string, {zeroK: number, spines: number}]>, histogram: Array<[number, number]>}}
+ */
+export function factBudget(rows) {
+  /** @type {Map<string, {zeroK: number, spines: number}>} */
+  const byBlock = new Map();
+  /** @type {Map<number, number>} */
+  const histogram = new Map();
+  let zeroK = 0;
+  let executable = 0;
+  let notExecutable = 0;
+  for (const row of rows) {
+    if (row.status !== WIRING_STATUS.RESOLVED) { notExecutable += 1; continue; }
+    executable += 1;
+    const k = 3 - (row.reads || row.fieldsRead || []).length;
+    histogram.set(k, (histogram.get(k) || 0) + 1);
+    let seat = byBlock.get(row.block);
+    if (!seat) { seat = { zeroK: 0, spines: 0 }; byBlock.set(row.block, seat); }
+    seat.spines += 1;
+    if (k <= 0) { zeroK += 1; seat.zeroK += 1; }
+  }
+  return {
+    zeroK,
+    executable,
+    notExecutable,
+    byBlock: [...byBlock].sort((a, b) => b[1].zeroK - a[1].zeroK),
+    histogram: [...histogram].sort((a, b) => a[0] - b[0]),
+  };
+}
+
+/**
+ * CUSTOM-CONTENT PARITY (ARCH §16 item 8, the owner's 2026-09-08 ~04:00 row). Which
+ * in-house (block, pool) predicates read a fact a CUSTOM definition of some kind can
+ * carry? Every reachable combination with no custom analogue is a MISSING-CUSTOM tier row
+ * for the CUSTOM-PROSE train.
+ *
+ * THREE LIMBS, EACH DECLARED AND EACH NAMED ON THE ROW, so a reader can see which rule
+ * caught a pool rather than trusting a verdict:
+ *   `bucket` a reads path names the kind's own bucket key or its singular
+ *   `field`  a reads path's LEAF is a MECHANICAL field of that kind (a presentation field
+ *            changes no world state, so a predicate over one is not a mechanical reach)
+ *   `value`  a predicate VALUE is a member of a closed enum a mechanical field declares
+ * @param {ReadonlyArray<CensusRow & {reads?: string[]}>} rows
+ * @param {ReadonlyArray<{key: string, singular?: string, authorable?: boolean,
+ *   fields?: ReadonlyArray<{key: string, effect?: string, values?: ReadonlyArray<string>}>}>} categories
+ * @returns {{byKind: Array<[string, number]>, rows: Array<{block: string, pool: string, kind: string, via: string, on: string}>}}
+ */
+export function customReachable(rows, categories) {
+  /** @type {Array<{kind: string, tokens: Set<string>, fields: Set<string>, values: Set<string>}>} */
+  const kinds = [];
+  for (const category of categories || []) {
+    if (category.authorable === false) continue;
+    const mechanical = (category.fields || []).filter((f) => f.effect === 'mechanical');
+    kinds.push({
+      kind: category.key,
+      tokens: new Set([category.key, String(category.singular || '').replace(/\s+/g, '')].map((t) => t.toLowerCase()).filter(Boolean)),
+      fields: new Set(mechanical.map((f) => f.key)),
+      values: new Set(mechanical.flatMap((f) => [...(f.values || [])])),
+    });
+  }
+  /** @type {Array<{block: string, pool: string, kind: string, via: string, on: string}>} */
+  const hits = [];
+  /** @type {Map<string, number>} */
+  const counts = new Map(kinds.map((k) => [k.kind, 0]));
+  for (const row of rows) {
+    const reads = row.reads || row.fieldsRead || [];
+    const segments = reads.flatMap((r) => r.split('.').map((s) => s.toLowerCase()));
+    const leaves = reads.map((r) => r.split('.').filter(Boolean).pop() || '');
+    const values = (row.predicate || []).map((p) => String(p.value));
+    for (const kind of kinds) {
+      const bucket = segments.find((s) => kind.tokens.has(s));
+      const field = leaves.find((l) => kind.fields.has(l));
+      const value = values.find((v) => kind.values.has(v));
+      const via = bucket ? 'bucket' : (field ? 'field' : (value ? 'value' : ''));
+      if (!via) continue;
+      hits.push({
+        block: row.block, pool: row.pool, kind: kind.kind, via, on: bucket || field || value || '',
+      });
+      counts.set(kind.kind, (counts.get(kind.kind) || 0) + 1);
+    }
+  }
+  return { byKind: [...counts].sort((a, b) => b[1] - a[1]), rows: hits };
+}
+
+/**
+ * THE SECOND PASS — the six ARCH car-0 columns written onto every row. Exported so a
+ * fixture census can be decorated on its own and each column driven present-then-absent.
+ * @param {Array<CensusRow>} rows mutated in place
+ * @param {{narrows?: Map<string, NarrowsLine>, produced?: Set<string>,
+ *   bodies?: Map<string, string>, mounts?: ReadonlyArray<{mount: string, tab: string, blockId: string}>}} input
+ * @returns {string[]} every NARROWS line the census REFUSED, with its reason
+ */
+export function decorateRows(rows, input) {
+  const bodies = input.bodies instanceof Map ? input.bodies : new Map();
+  const produced = input.produced instanceof Set ? input.produced : null;
+  /** @type {Map<string, string[]>} */
+  const sites = new Map();
+  for (const m of input.mounts || []) {
+    const seat = sites.get(m.blockId);
+    if (seat) seat.push(m.mount); else sites.set(m.blockId, [m.mount]);
+  }
+  /** @type {string[]} */
+  const refusals = [];
+  for (const row of rows) {
+    const narrowed = narrowedReads(row, input.narrows);
+    if (narrowed.refusal) refusals.push(narrowed.refusal);
+    row.reads = narrowed.reads;
+    row.narrowed = narrowed.narrowed;
+    const body = bodies.get(row.keyFunction) || '';
+    // ⛔ THE TABLE RUNG'S FIELD IS THIS INSTRUMENT'S OWN LABEL (car 10, cure 4). Rung 3
+    // writes `"<reader> (via <TABLE> in <file>)"` into both `predicate[].field` and
+    // `fieldsRead`; asking a producer index whether anything writes that string answers
+    // `not-produced` on every table row BY CONSTRUCTION, which is the artefact that arm
+    // already had to be cured of once. Table rows carry an EMPTY absence record and the
+    // caller counts them apart, because a count nobody can see is how it came back before.
+    row.absent = row.rung === 'table'
+      ? {}
+      : Object.fromEntries(row.reads.map((f) => [f, absenceOf(f, body, produced)]));
+    row.covert = row.reads.some((f) => isCovertPath(f));
+    row.objectClass = objectClassOf(row.pool);
+    row.sites = [...(sites.get(row.block) || [])].sort();
+    // A SPINE'S ATTACH SET IS EMPTY BY CONSTRUCTION and every shipped pool is a spine at
+    // this tip; `attachSets` derives the would-be modifier sets the wave is sized from.
+    row.attach = [];
+    row.k = row.status === WIRING_STATUS.RESOLVED ? 3 - row.reads.length : null;
+    row.rateBp = null;
+    row.departure = null;
+  }
+  return refusals;
 }
