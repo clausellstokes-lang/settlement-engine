@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "eb73679a6fd3a3b6def7519b15bdec84b40bc894",
-  "measuredBy": "MEASURE car 0 (Opus 5)",
+  "measuredAtSha": "0dd711c6a4c2273831a44d34b8fe4bba3ade5fcc",
+  "measuredBy": "MEASURE car 0e (Opus 5)",
   "date": "2026-09-08",
-  "note": "the census extended: twenty-one new test titles in tests/lint/proseWiringCensus.walker.test.js (26 -> 47 assertions); no new test FILE and no new suite, so files, parked, credited and suiteTitles do not move",
+  "note": "car 0e adds one src module (wiringBranch.js, the eleventh island module) and three walker test titles; no suite and no parked or credited file moves",
   "files": 2551,
   "parked": 375,
   "credited": 2176,
-  "titles": 23800,
+  "titles": 23803,
   "suiteTitles": 6368
 }
