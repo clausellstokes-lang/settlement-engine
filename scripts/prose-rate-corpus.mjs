@@ -152,24 +152,25 @@ function harvestBare(node, out, depth = 0) {
 }
 
 /**
- * ONE TOWN, composed through all six desks by their SHIPPED recipes (INSTR-912 car 9's
- * corrected sequence). Returns the (block, pool) keys that fired and the town's resolved
- * marginals, or null when the generator threw.
- * @param {{seed: string, config: object}} spec
- * @param {Map<string, number>} deskThrows
- * @returns {{tier: string, threat: string, route: string, fired: Array<{block: string, pool: string}>, bare: number}|null}
+ * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
+ * ONE SPELLING, and every caller of a composed town goes through it.
+ *
+ * ⛔ EXTRACTED FROM `composeTown` AT ARCH CAR 1 AND NOT RE-TYPED THERE. The RATE corpus reads
+ * these returns for the (block, pool) keys that FIRED; the composed-prose manifest reads the
+ * SAME returns for each rung's provenance and text, at two audiences. A second spelling of a
+ * fourteen-argument reading bag is how one instrument comes to measure a different world than
+ * its sibling while both report green — the taste sample's `{}`-readings hazard, one level up.
+ * `composeTown` below is unchanged in behaviour: it walks what this returns.
+ * @param {object} s the generated settlement
+ * @param {{seed: string, audience: string}} opts
+ * @param {(name: string, error: unknown) => void} [onThrow] called per desk that threw
+ * @returns {Array<{desk: string, value: unknown}>} in call order
  */
-export function composeTown(spec, deskThrows) {
-  let s;
-  try {
-    s = generateSettlementPipeline(spec.config, null, { seed: spec.seed, customContent: {} });
-  } catch { return null; }
-  const seed = String(s._seed ?? s.id ?? spec.seed);
-  const opts = { seed, audience: 'dm' };
-  /** @type {Array<{block: string, pool: string}>} */
-  const fired = [];
+export function deskReturns(s, opts, onThrow) {
+  /** @type {Array<{desk: string, value: unknown}>} */
+  const out = [];
   const desk = (name, fn) => {
-    try { walk(fn(), fired); } catch { deskThrows.set(name, (deskThrows.get(name) || 0) + 1); }
+    try { out.push({ desk: name, value: fn() }); } catch (error) { if (onThrow) onThrow(name, error); }
   };
   const eco = s.economicState || {};
   const dp = s.defenseProfile || {};
@@ -202,11 +203,6 @@ export function composeTown(spec, deskThrows) {
     exploitation: s.resourceAnalysis?.exploitation,
     primaryImports: eco.primaryImports,
   }, opts));
-  /** @type {string[]} */
-  const bare = [];
-  try {
-    harvestBare(generalDeskLines(s, { publicDossier: false, playerView: false }), bare);
-  } catch { deskThrows.set('generalDeskLines', (deskThrows.get('generalDeskLines') || 0) + 1); }
   desk('economy', () => economyDeskRead(s, opts));
   desk('power', () => {
     let contenders = null;
@@ -233,6 +229,33 @@ export function composeTown(spec, deskThrows) {
     const model = faithPanelModel(s);
     return warFaith.warFaithStateProse(s, { faith: model, hasPatron: !!model.hasEmbed }, opts);
   });
+  return out;
+}
+
+/**
+ * ONE TOWN, composed through all six desks by their SHIPPED recipes. Returns the
+ * (block, pool) keys that fired and the town's resolved marginals, or null when the
+ * generator threw.
+ * @param {{seed: string, config: object}} spec
+ * @param {Map<string, number>} deskThrows
+ * @returns {{tier: string, threat: string, route: string, fired: Array<{block: string, pool: string}>, bare: number}|null}
+ */
+export function composeTown(spec, deskThrows) {
+  let s;
+  try {
+    s = generateSettlementPipeline(spec.config, null, { seed: spec.seed, customContent: {} });
+  } catch { return null; }
+  const seed = String(s._seed ?? s.id ?? spec.seed);
+  /** @type {Array<{block: string, pool: string}>} */
+  const fired = [];
+  const returns = deskReturns(s, { seed, audience: 'dm' },
+    (name) => deskThrows.set(name, (deskThrows.get(name) || 0) + 1));
+  for (const entry of returns) walk(entry.value, fired);
+  /** @type {string[]} */
+  const bare = [];
+  try {
+    harvestBare(generalDeskLines(s, { publicDossier: false, playerView: false }), bare);
+  } catch { deskThrows.set('generalDeskLines', (deskThrows.get('generalDeskLines') || 0) + 1); }
   return {
     tier: String(s.tier),
     threat: String(s.config?.monsterThreat),

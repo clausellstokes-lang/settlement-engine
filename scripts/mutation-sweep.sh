@@ -48,6 +48,8 @@ MUTATED_FILES=(
   src/domain/prose/wiringBranch.js
   scripts/prose-rate-corpus.mjs
   scripts/wiring-census.mjs
+  scripts/prose-manifest-diff.mjs
+  tests/helpers/dossierManifest.js
   src/domain/prose/entryWalker.js
   src/domain/prose/grammarWalker.js
   src/domain/prose/presenceMeasure.js
@@ -1286,6 +1288,33 @@ check_caught "prose-wiring-census/every per-tier silence is called lawful and th
 #     cmp-exact => 52 passed.
 perl -0pi -e "s/export const aliasKey = \(token\) => String\(token\)\.toLowerCase\(\)\.replace/export const aliasKey = (token) => String(token).replace/" scripts/wiring-census.mjs
 check_caught "prose-wiring-census/the alias draft stops reading case and its identifier evidence disappears" scripts/wiring-census.mjs "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 93. MEASURE car 1 — THE CLASSIFIER'S ORDER IS ITS SPECIFICATION. `classifyCell` answers with
+#     the FIRST verdict that fits, strongest first: a cell whose POOL changed also has new
+#     words and usually a new variant, so testing WORDING-ONLY before REPLACED lets a signed
+#     car report "only the wording moved" about a cell that now speaks a different fact. That
+#     is the whole reason the composed-prose model can be accepted on a classification instead
+#     of on a diff. This plant moves the WORDING-ONLY test to the front. Every count still
+#     prints, every cell still gets a verdict, and the instrument has quietly stopped being
+#     able to tell a rewrite from a replacement.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 1 red of 11; restored
+#     cmp-exact => 11 passed.
+perl -0pi -e "s/  if \(base\.pool !== tip\.pool\) return 'REPLACED';/  if (base.textSha !== tip.textSha) return 'WORDING-ONLY';/" scripts/prose-manifest-diff.mjs
+check_caught "dossier-prose-manifest/the classifier tests wording before replacement and cannot tell them apart" scripts/prose-manifest-diff.mjs "npx vitest run tests/property/dossierProseManifest.test.js --no-file-parallelism"
+
+# 94. MEASURE car 1 — THE CELL'S VARIANT IS IDENTIFIED FROM THE RENDERED SENTENCE, AND THE
+#     TEMPLATE READER IS THE WHOLE IDENTIFICATION. `eligibleVariants` filters by slot ANCHORING
+#     and by state DIMENSIONS, neither visible outside the desk call, so the manifest cannot
+#     recompute the draw; it matches the rendered sentence against each variant's template
+#     instead, and `vid`, `index` and every `pieces` entry follow from that match. This plant
+#     makes `templateMatches` answer true for everything: every cell then "resolves" to the
+#     first variant of its pool, the whole manifest re-keys onto a fiction, and the ambiguity
+#     counter — the one arm that would notice — is answering about the same fiction.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 3 red of 11 — the
+#     resolution arm, the drift arm and the template reader's own control; restored cmp-exact
+#     => 11 passed.
+perl -0pi -e "s/  return new RegExp\(\`\^\\\$\{source\}\\\$\`\)\.test\(String\(rendered\)\);/  return true;/" tests/helpers/dossierManifest.js
+check_caught "dossier-prose-manifest/the template reader matches everything and every cell resolves to a fiction" tests/helpers/dossierManifest.js "npx vitest run tests/property/dossierProseManifest.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
