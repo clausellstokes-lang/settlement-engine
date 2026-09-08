@@ -1078,6 +1078,44 @@ check_caught "prose-presence/a sense leaves the published lexicon and the spread
 perl -0pi -e 's/    predicate: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js
 check_caught "prose-wiring-census/an unrecoverable predicate reads as RESOLVED and the census claims total coverage" src/domain/prose/wiringCensus.js "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
+# 80. INSTR-912 car 9 — A COLUMN CLOSES ONLY WHERE EVERY SOURCE THE SPEC NAMES IS READ.
+#     Plant #77 covers the persons column, which is open by LAW; these three cover the
+#     columns that are open by MEASUREMENT, which is where the arm can go quietly vacuous.
+#     `whatItDoes` reads one of the six sources CLERK-LAWS §1.2 names for it, so it is
+#     `closed: false` — and a hand-written `true` beside a five-source shortfall is exactly
+#     the over-licence the honesty rule exists to forbid (a closed column licenses a
+#     quantifier over it). The plant writes the flag by hand instead of deriving it.
+#     Measured before landing (lane INSTR-912, 2026-09-08): planted => 2 red of 17 — the
+#     closed-implies-sources-read arm and the three-columns-open arm; restored cmp-exact
+#     => 17 passed.
+perl -0pi -e "s/        closed: sourcesAllRead\('whatItDoes'\),/        closed: true,/" src/domain/institutions/institutionTable.js
+check_caught "institution-table/a partially-filled column is closed by hand and over-licenses a quantifier" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
+
+# 81. INSTR-912 car 9 — A SOURCE DECLARED READ MUST ACTUALLY BE READ. `whatItCounts` closes
+#     BECAUSE all three of its §1.2 sources are read, and the third of them — the fired
+#     `economicState` income row — was the one car 4 left on the table (a town holds `Market
+#     Taxes`, `Church Tithes` and `Gate Tolls` and the duty column refused every one). The
+#     quiet failure is a source roster that still SAYS `read: true` while the code stops
+#     consulting it: the column stays closed, the census still prints, and the duty the world
+#     holds silently leaves the table again. The plant strikes the read and leaves the
+#     declaration standing. Measured: planted => 1 red of 17, on the positive twin;
+#     restored cmp-exact => 17 passed.
+perl -0pi -e "s/\.\.\.dutyRows\.map\(\(s\) => s\.name\), \.\.\.incomeDuties/...dutyRows.map((s) => s.name)/" src/domain/institutions/institutionTable.js
+check_caught "institution-table/a column source declared read stops being read and the duty leaves the table" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
+
+# 82. INSTR-912 car 9 — THE RUIN FILTER MUST ROUTE THROUGH THE COLUMNS, NOT ONLY THE ROWS.
+#     The table's roster is the LIVE roster, so a ruined citadel carries no wall duty — and
+#     the first cut applied that to the ROWS while building the service COLUMNS from the
+#     unfiltered bag. Over 30 settlements, 23 service rows named an institution the roster
+#     does not hold (`(lawless)`, `(informal)`, `(street gang)`, `(arcane underground)`,
+#     `(smuggling)`), and `census-city`'s `whatItDoes` carried `Arcane services (illicit)` on
+#     that ground. Zero were duty-kind, so the Brackwater class did not fire — which is
+#     precisely why it would have stayed latent until a duty-kind row appeared. The plant
+#     removes the column filter. Measured: planted => 1 red of 17; restored cmp-exact
+#     => 17 passed.
+perl -0pi -e "s/  const services = allServices\.filter\(\(row\) => !row\.institution \|\| liveNames\.has\(row\.institution\)\);/  const services = allServices;/" src/domain/institutions/institutionTable.js
+check_caught "institution-table/the ruin filter leaves the service columns and an absent institution licenses a duty" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

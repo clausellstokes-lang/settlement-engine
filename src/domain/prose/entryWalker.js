@@ -185,8 +185,27 @@ const lower = (s) => String(s || '').toLowerCase();
  * @returns {boolean}
  */
 function holds(haystack, needle) {
+  return locate(haystack, needle) >= 0;
+}
+
+/**
+ * WHERE a phrase occurs, under the SAME word-boundary rule `holds` tests with.
+ *
+ * ⛔ THE PAIR `holds(t, q)` + `t.indexOf(q)` IS A REAL DEFECT AND IT SHIPPED. `holds` is
+ * word-boundary; `indexOf` is a substring, so "The wall is old, and all souls are counted
+ * here." detected the quantifier `all` at word boundary and then LOCATED it inside `wall` at
+ * index 4 — the governed noun read as "is/old", no column resolved, and a totality over the
+ * open persons column degraded from FAIL to NOTE. Measured over the shipped corpus: 69 of
+ * 3,132 entries carry a mis-located quantifier (70 occurrences). `bandReadings` shared the
+ * same pair. One locator, one rule, both callers.
+ * @param {string} haystack already lower-cased
+ * @param {string} needle already lower-cased
+ * @returns {number} the index of the phrase itself, or -1
+ */
+function locate(haystack, needle) {
   const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`(^|[^a-z])${escaped}([^a-z]|$)`).test(haystack);
+  const m = new RegExp(`(^|[^a-z])(${escaped})([^a-z]|$)`).exec(haystack);
+  return m ? m.index + m[1].length : -1;
 }
 
 /**
@@ -239,7 +258,7 @@ export function bandReadings(text) {
     // A phrase already covered by a longer one it sits inside is the same reading.
     if (claimed.some((c) => c.includes(phrase))) continue;
     claimed.push(phrase);
-    const at = t.indexOf(phrase);
+    const at = locate(t, phrase);
     const tail = t.slice(at + phrase.length, at + phrase.length + 40);
     const noun = COUNT_NOUNS.find((n) => holds(tail, n)) || (COUNT_NOUNS.find((n) => holds(phrase, n)) || '');
     out.push({ phrase, noun, clause: clauseHolding(text, phrase) });
@@ -587,7 +606,7 @@ function armC4(entry, ground, out) {
   const masked = maskBands(entry.text);
   for (const q of QUANTIFIERS) {
     if (!holds(masked, q)) continue;
-    const at = masked.indexOf(q);
+    const at = locate(masked, q);
     const tail = masked.slice(at + q.length, at + q.length + 40);
     const next = (tail.match(/[a-z']+/g) || []).slice(0, 2);
     // ⛔ BARE `one` IS A PRONOUN IN THIS ESTATE, not a count. It maps to the persons column
@@ -782,20 +801,34 @@ function armD(entry, ground, out) {
  * @param {WalkResult} out
  */
 function armQualify(entry, ground, out) {
-  const sentences = sentencesOf(entry.text);
-  if (sentences.length < 2) return;
   const raw = String(entry.text).split(/(?<=[.?!])\s+(?=[A-Z"'(])/).filter((s) => s.trim() !== '');
   const declared = Array.isArray(entry.slots) ? entry.slots : [];
-  for (let i = 1; i < raw.length; i++) {
-    const named = [...raw[i].matchAll(SLOT_RE)].map((m) => m[1]);
-    if (named.length) continue; // a second field is named: licensed by construction
-    const second = raw[i].trim();
-    // A second sentence that carries a band word or a status word is grounded in the same
-    // typed reading and is not the unlicensed shape.
-    if (bandReadings(second).length) continue;
-    out.withheld.push(finding(entry, 'Q', 'a second sentence naming no second field', second,
+  /**
+   * @param {string} segment the candidate qualifier
+   * @param {string} shape the arm's own name for the shape it found
+   */
+  const consider = (segment, shape) => {
+    const text = segment.trim();
+    if (!text) return;
+    if ([...text.matchAll(SLOT_RE)].length) return; // a second field is named: licensed
+    // A segment carrying a band word or a status word is grounded in the same typed reading
+    // and is not the unlicensed shape.
+    if (bandReadings(text).length) return;
+    out.withheld.push(finding(entry, 'Q', shape, text,
       '(second typed field)', declared.join(', ') || 'none',
-      'R-DA-03 licenses a QUALIFY by a SECOND typed field; this sentence names none — a second fact or a summarising beat is the refuter\'s call'));
+      'R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none — a second fact or a summarising beat is the refuter\'s call'));
+  };
+  for (let i = 1; i < raw.length; i++) consider(raw[i], 'a second sentence naming no second field');
+  // ⛔ THE ARM RETURNED EARLY ON A ONE-SENTENCE VARIANT, AND THE BRIEF'S OWN NAMED POSITIVE
+  // CONTROL IS ONE. `power.generated.js::DS-POW-5::autocrat#2` carries its second fact after
+  // a SEMICOLON — "…the people closest to it; a seat held by one person is lost the way one
+  // person can be replaced." — one sentence by `sentencesOf`, two facts by R-DA-03, and the
+  // walker returned PASS with three empty channels. A trailing coordinate inside one
+  // sentence is the same shape as a second sentence and is read as one; the finding names
+  // which shape it was, so a reader can tell the two apart.
+  for (const sentence of raw) {
+    const parts = sentence.split(/\s*;\s*/);
+    for (let i = 1; i < parts.length; i++) consider(parts[i], 'a trailing coordinate naming no second field');
   }
 }
 

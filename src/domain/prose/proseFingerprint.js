@@ -23,8 +23,17 @@
  * refuses a band set whose keys do not cover the metrics it is asked to score; and the
  * derivation of each formula is written beside it.
  *
+ * ⭐ THE THREE PRESENCE KEYS SIT BESIDE `metrics`, NEVER INSIDE IT (Part B §18; SITTING §L.2
+ * item 71). §13.2's presence measure is REPORTED and never gates, and `RATE_METRICS` is the
+ * denominator of the owner's BUDGET — a third of the soft rules "measurable on the unit". Move
+ * the three into that list and 21 becomes 24, every BUDGET share silently re-bases, and the
+ * chair's measured numbers stop meaning what they were measured to mean. So `fingerprint()`
+ * returns a `presence` block alongside `metrics`, `scoreAgainstBands` is untouched, and the
+ * twenty-one stay twenty-one.
+ *
  * PURE, HEADLESS. No I/O, no clock, no RNG. Nothing here runs at the draw.
  */
+import { presenceOf } from './presenceMeasure.js';
 
 /**
  * The rate-like metric ids, as DOTTED PATHS into the fingerprint shape. These twenty-one are
@@ -80,13 +89,18 @@ export function sentencesIn(paragraphs) {
  * The fingerprint of one unit of prose. Paragraphs in, derived numbers out — no passage is
  * stored, exactly as the kit's tool declares of itself.
  * @param {ReadonlyArray<string>} paragraphs each already whitespace-normalised
- * @returns {{sentences: number, paragraphs: number, metrics: Record<string, number>}}
+ * @returns {{sentences: number, paragraphs: number, metrics: Record<string, number>,
+ *   presence: ReturnType<typeof presenceOf>}} `presence` sits BESIDE `metrics` and is never
+ *   scored — see the header: it is Part B §13.2's reported measure, not a soft rule, and
+ *   moving it into `metrics` would re-base the owner's BUDGET denominator from 21 to 24
  */
 export function fingerprint(paragraphs) {
   const paras = (paragraphs || []).map((p) => String(p).replace(/\s+/g, ' ').trim()).filter((p) => p.length > 20);
   const sentences = sentencesIn(paras);
   if (sentences.length === 0) {
-    return { sentences: 0, paragraphs: paras.length, metrics: {} };
+    return {
+      sentences: 0, paragraphs: paras.length, metrics: {}, presence: presenceOf(paras),
+    };
   }
   const lens = sentences.map((s) => wordsOf(s).length);
   const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
@@ -135,6 +149,13 @@ export function fingerprint(paragraphs) {
       'openers.sameOpenerAsPreviousRate': rate(first.slice(1).filter((w, i) => w === first[i]).length),
       runsOfThreeSameLengthBand: rate(runs),
     },
+    // ── THE PRESENCE BLOCK (Part B §13.2's three lines) — REPORTED, never scored ──────
+    // 1. concrete sensory nouns per hundred words, from the published closed lexicon;
+    // 2. the share of paragraphs carrying a licensed texture device;
+    // 3. the spread across senses, with the entropy printed.
+    // Deliberately OUTSIDE `metrics`: see the header. A band file that does not carry these
+    // keys is not missing anything, because nothing scores them.
+    presence: presenceOf(paras),
   };
 }
 

@@ -23,7 +23,7 @@
  * ── WHAT THE CLASSIFIER IS WORTH, MEASURED ────────────────────────────────────────
  * It reads clause structure and slot references. It is a heuristic and its agreement with a
  * hand-tagged sample is MEASURED and PRINTED by the walker test, never assumed
- * (`tests/fixtures/grammarHandTagged.js`). A classifier whose precision nobody measured is
+ * (`tests/fixtures/grammarControls.js`, `HAND_TAGGED`). A classifier whose precision nobody measured is
  * the false-green instrument the estate has already burned.
  *
  * PURE, HEADLESS. Nothing here runs at the draw.
