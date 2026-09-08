@@ -19,3 +19,8 @@ Runner count in its own shell; focused one at a time; one whole `tests/lint`; st
 
 ## ADDENDUM (chair, 2026-09-08 14:4x) — one more cure this car owns, from 3h's finding
 SITTING §P.2-27 extended: the alias draft's `docblock` evidence kind is WITHDRAWN from `draft.rows` (comments are never evidence — 3h minted `economicGates.disaster <- row` from two English words on one comment line, and the note recording it re-minted the row); the kind may survive as a REPORT channel only; `draft.rows.length` re-asserted at its post-withdrawal count with a plant (a comment pairing a producer token with a reading token moves nothing).
+
+## ADDENDUM (chair, 2026-09-08 15:3x, after car 4) — three standing rules for this car
+1. **Your tip is the dock's HEAD when you are dispatched** — read `git log --oneline -5` and the receipt's last chair section; the dispatch prompt names the sha.
+2. **The observed-shape readers baseline:** if your car regenerates any `src/data/*.generated.js` leaf, the OSR dry read names those inputs and prints "the instrument is NOT darkened" — that shrink-only `--write` is yours (ruled at car 4), with the finding count printed before and after (it must stay 1972; any other drift, or any detector source named, is REFUSED with the output). If your car regenerates no leaf, the OSR must read exact with no write.
+3. **The runner count is its own tool call** — a one-line shell with nothing else in it; `pgrep -fl` matches any command line that spells the runner's name (a heredoc carrying test source read as 36 runners at car 4); list the matches before waiting on a non-zero count.
