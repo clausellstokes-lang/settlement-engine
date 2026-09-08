@@ -2429,3 +2429,63 @@ npx vitest run tests/property/dossierProseManifest.test.js   # drift [] — the 
 node scripts/check-pair.mjs <dock> <pairs.json>              # the pair instrument, landed
 node scripts/check-domain-strict.mjs                         # 1120 / 1120
 ```
+
+### 5.14 THE LANDING — TWO COMMITS, AND THE ONE RED AT THE TIP
+
+| # | sha | what |
+|---|---|---|
+| 5 | `006dba6e5` | the new arms — the composed unit becomes the walked entry, and every one of them convicts a plant |
+| 5-lighting | `ba99d979e` | the lighting census re-freezes at car 5's tip, by its own ritual |
+
+⛔ **WHY TWO AND NOT ONE, against the brief's "one commit (+ 5b)".** The lighting walker counts
+the WORKING TREE and its own refusal #1 is a dirty tree, so the ritual can only run on the clean
+tip — the car 4 → 4b and 4d → 4e shape exactly. The sub-car is named `5-lighting` and NOT `5b`
+because `brief-SEAM-car5b.md` charters `5b` as the HOLDER CENSUS; two register acts sharing a
+name would be the harder thing to read at the landing. Nothing else was split.
+
+```
+$ npx vitest run tests/lint                                              ; exit=1  (final)
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > the committed census is byte-identical …
+ Test Files  1 failed | 148 passed (149)
+      Tests  1 failed | 2467 passed (2468)
+$ node scripts/check-domain-strict.mjs                                   ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                  ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs                          ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                         ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ git diff --stat 7fb28ed34..HEAD -- src/data/                           => (no output)
+$ ls -ld node_modules/immer node_modules/seedrandom
+lrwxr-xr-x  node_modules/immer -> /Users/cstokes/Desktop/settlement-engine/node_modules/immer
+lrwxr-xr-x  node_modules/seedrandom -> .../node_modules/seedrandom       # symlinks, never cloned
+$ node -e "<read the committed census>"
+committed census tiers: {"MISSING":34,"THIN":483,"COVERED":225,"MISSING-AT-TIER":45}
+committed producerIndexFiles: 1152                                       # stale, by refusal
+```
+
+**ONE RED STANDS AND IT IS THE REFUSED DOOR** (§5.5). The lighting refreeze reads
+`files 2555 -> 2556, parked 375 -> 375, credited 2180 -> 2181, titles 23948 -> 24014,
+suiteTitles 6400 -> 6418`, and the green re-run without `LIGHTING_CENSUS_REFREEZE` reads
+34 passed.
+
+⭐ **AND THE CLASSIFIER IS UNCHANGED ON EVERY ONE OF THE 73,284 CELLS, EXECUTED RATHER THAN
+ARGUED FROM "no leaf byte moved":**
+
+```
+$ node scripts/prose-manifest-cells.mjs --out $SC/seam5/cells-tip.json
+  towns 525 · rows 1050 · cells 73284
+$ cmp $SC/seam4d-cells-tip.json $SC/seam5/cells-tip.json      => BYTE-IDENTICAL
+$ node scripts/prose-manifest-diff.mjs <car 4d cells> <car 5 cells>       ; exit=0
+  UNCHANGED      cells   73284 · towns   525
+  ADDED          cells       0        REMOVED  cells  0
+  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)
+```
+
+The cells file is byte-equal to the one car 4d took, which is the strongest form of "no drawn
+index moved".
+
+**STATUS: CARS 5 AND 5-lighting LANDED at `ba99d979e`.**
