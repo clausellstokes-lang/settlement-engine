@@ -1,5 +1,5 @@
 VARIETY CORPUS · 525 configurations x 8 seeds = 4200 towns x 2 audiences
-  towns 4200 · cells 532689 · 75 s · 18 ms per town
+  towns 4200 · cells 532689 · 74 s · 18 ms per town
   cells the rendered sentence did not identify 0 · identified ambiguously 0
   ── THE DUPLICATE-UNIT BASELINE ───────────────────────────────────
     unit instances 532689 · instances whose (position, text) pair is seen on more than one town 520632
@@ -21,4 +21,3 @@ VARIETY CORPUS · 525 configurations x 8 seeds = 4200 towns x 2 audiences
     groups showing fewer than half the distinct texts the chance floor expects: 2
       dm::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCount: distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
       player::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCo distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
-  wrote ../measure/variety-baseline.json
