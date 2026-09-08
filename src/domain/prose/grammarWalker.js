@@ -202,8 +202,8 @@ export function armA(orders, unit, admissible, shape) {
       arm: 'A',
       unit,
       detail: shape
-        ? `n = ${n} admissible orders — at n ≤ 2 a share ceiling scores a coin flip, so the arm declares itself not-executable`
-        : 'no ceiling shape supplied — the share ceiling is the owner\'s number and this walker bakes none',
+        ? `n = ${n} admissible orders; at n ≤ 2 a share ceiling scores a coin flip, so the arm declares itself not-executable`
+        : 'no ceiling shape supplied: the share ceiling is the owner\'s number and this walker bakes none',
       value: n,
     });
     return out;
@@ -243,7 +243,7 @@ export function armsB(sequence, unit, admissible, shape) {
     out.notExecutable.push({
       arm: 'B',
       unit,
-      detail: `${sequence.length} reading(s), ${n} order(s) — a run rate needs consecutive pairs and at least two orders`,
+      detail: `${sequence.length} reading(s), ${n} order(s); a run rate needs consecutive pairs and at least two orders`,
     });
     return out;
   }
@@ -313,7 +313,7 @@ export function armsB(sequence, unit, admissible, shape) {
       }
     }
   } else {
-    out.notExecutable.push({ arm: 'B3', unit, detail: `n = ${n} — the rota arm needs n ≥ 3` });
+    out.notExecutable.push({ arm: 'B3', unit, detail: `n = ${n}; the rota arm needs n ≥ 3` });
   }
   return out;
 }
@@ -394,7 +394,7 @@ export function armESpread(poolRows, unit, shape) {
   };
   out.figures = { unit, pools: n, ...shares, counts };
   if (n === 0) {
-    out.notExecutable.push({ arm: 'E/spread', unit, detail: 'no measurable pool — a spread over nothing is not a spread' });
+    out.notExecutable.push({ arm: 'E/spread', unit, detail: 'no measurable pool: a spread over nothing is not a spread' });
     return out;
   }
   const ceilings = shape?.spread;
@@ -402,7 +402,7 @@ export function armESpread(poolRows, unit, shape) {
     out.notExecutable.push({
       arm: 'E/spread',
       unit,
-      detail: 'no spread ceilings supplied — MOVE-GRAMMAR §4.3 recommends 0.30 uniform grammar,'
+      detail: 'no spread ceilings supplied: MOVE-GRAMMAR §4.3 recommends 0.30 uniform grammar,'
         + ' 0.40 uniform segment count and 0.030 repeated opener, and this walker bakes none of them',
     });
     return out;
@@ -415,7 +415,7 @@ export function armESpread(poolRows, unit, shape) {
       out.fails.push({
         arm: 'E/spread',
         unit,
-        detail: `${counts[key]} of ${n} pools (${(share * 100).toFixed(1)}%) — ${key} above the ceiling ${(Number(ceiling) * 100).toFixed(1)}%`,
+        detail: `${counts[key]} of ${n} pools (${(share * 100).toFixed(1)}%): ${key} above the ceiling ${(Number(ceiling) * 100).toFixed(1)}%`,
         value: share,
         ceiling: Number(ceiling),
       });
@@ -457,7 +457,7 @@ export function armF(entry, moves, register) {
   // (SITTING B.4.1: wall 6 does not reach chrome's units or the docent).
   if (inScope(wall(6))) {
     if (segmentCount(text) > 2) {
-      fails.push({ arm: 'F6', unit: entry.id, detail: `${segmentCount(text)} sentences — the register is one flowing sentence or two short ones (wall 6)` });
+      fails.push({ arm: 'F6', unit: entry.id, detail: `${segmentCount(text)} sentences; the register is one flowing sentence or two short ones (wall 6)` });
     }
     if (/,\s*which\b/.test(text)) {
       fails.push({ arm: 'F6', unit: entry.id, detail: 'a QUALIFY carried as a "which" tail (wall 6)' });
@@ -492,14 +492,14 @@ export function armF10(pool, unit) {
     fails.push({
       arm: 'F10',
       unit,
-      detail: `${count} of ${pool.length} variants open on the settlement token — the wall allows at most one per pool (wall 10)`,
+      detail: `${count} of ${pool.length} variants open on the settlement token; the wall allows at most one per pool (wall 10)`,
       value: count,
       ceiling: 1,
     });
   }
   for (let i = 1; i < opens.length; i += 1) {
     if (opens[i] && opens[i - 1]) {
-      fails.push({ arm: 'F10', unit, detail: `variants ${i - 1} and ${i} both open on the settlement token — never two adjacent (wall 10)` });
+      fails.push({ arm: 'F10', unit, detail: `variants ${i - 1} and ${i} both open on the settlement token; never two adjacent (wall 10)` });
     }
   }
   return fails;
@@ -520,7 +520,7 @@ export function wallScopeCensus(register) {
   /** @type {Record<number, string>} */
   const NEEDS = {
     4: 'a DEED→BILL adjacency test inside one sentence, on the Herald\'s units (out of this walk\'s register)',
-    5: 'the sibling pool key or band that names the rejected alternative — the wiring census supplies the key, the REJECTED alternative is not typed anywhere',
+    5: 'the sibling pool key or band that names the rejected alternative: the wiring census supplies the key, the REJECTED alternative is not typed anywhere',
     7: 'a typed "standing fact the table could act on" predicate on the last move; the move vocabulary marks no move as a reaction point',
     8: 'a GESTURE count on a Herald headline (out of this walk\'s register)',
     9: 'a per-SECTION RECALL count and a per-SURFACE LIMIT count on the chronicle (out of this walk\'s register)',
@@ -535,7 +535,7 @@ export function wallScopeCensus(register) {
       return {
         arm: `F${wall.id}`,
         unit: register,
-        detail: `NOT-EXECUTABLE — wall ${wall.id} ("${wall.wall}") has no detector and no control`
+        detail: `NOT-EXECUTABLE: wall ${wall.id} ("${wall.wall}") has no detector and no control`
           + `; scope ${wall.scope.join('/')}${inScope ? ' (IN SCOPE HERE)' : ' (out of this register)'}`
           + `. Wanted: ${NEEDS[wall.id]}`,
       };
@@ -589,13 +589,13 @@ export function armThreeNumbers(paragraphs, bands, three, unit) {
     out.notExecutable.push({
       arm: 'three-numbers',
       unit,
-      detail: 'no exemplar bands supplied — the BUDGET, DEPTH and PERFECTION arms all read a band and none was given',
+      detail: 'no exemplar bands supplied: the BUDGET, DEPTH and PERFECTION arms all read a band and none was given',
     });
     return out;
   }
   const fp = fingerprint(paragraphs);
   if (fp.sentences < 2) {
-    out.notExecutable.push({ arm: 'three-numbers', unit, detail: `${fp.sentences} sentence(s) — too small to fingerprint` });
+    out.notExecutable.push({ arm: 'three-numbers', unit, detail: `${fp.sentences} sentence(s): too small to fingerprint` });
     return out;
   }
   const { scored, exceeded, unscorable } = scoreAgainstBands(fp.metrics, bands);
@@ -636,7 +636,7 @@ export function armThreeNumbers(paragraphs, bands, three, unit) {
       out.notes.push({
         arm: 'DEPTH',
         unit,
-        detail: `${e.metric} sits ${e.depth.toFixed(2)} band-widths ${e.side} — exempt as a declared defining feature`,
+        detail: `${e.metric} sits ${e.depth.toFixed(2)} band-widths ${e.side}; exempt as a declared defining feature`,
         value: e.depth,
       });
       continue;
@@ -655,7 +655,7 @@ export function armThreeNumbers(paragraphs, bands, three, unit) {
     out.notes.push({
       arm: 'PERFECTION',
       unit,
-      detail: `zero exceedances across ${scored.length} soft rules — FLAGGED SUSPECT (no exemplar record sits here); a finding for the walk, never a trigger to manufacture a fault`,
+      detail: `zero exceedances across ${scored.length} soft rules: FLAGGED SUSPECT (no exemplar record sits here); a finding for the walk, never a trigger to manufacture a fault`,
       value: 0,
     });
   }
@@ -770,7 +770,7 @@ export function walkGrammar(input) {
       out.withheld.push({
         arm: 'A/tag',
         unit: entry.id,
-        detail: `the tag says ${entry.grammar}; the classifier reads ${moves.join('→')}${orderId ? ` (${orderId})` : ' (no member)'} — the classifier is a CHECK, never a source`,
+        detail: `the tag says ${entry.grammar}; the classifier reads ${moves.join('→')}${orderId ? ` (${orderId})` : ' (no member)'}; the classifier is a CHECK, never a source`,
       });
     }
     return {
@@ -915,7 +915,7 @@ export function walkGrammar(input) {
         out.notExecutable.push({
           arm: 'D',
           unit: entry.id,
-          detail: `block ${entry.block} has no composer bag — every variant of it is unreachable, or the block is unmounted`,
+          detail: `block ${entry.block} has no composer bag; every variant of it is unreachable, or the block is unmounted`,
         });
         continue;
       }
@@ -941,13 +941,13 @@ export function walkGrammar(input) {
           out.notExecutable.push({
             arm: 'D/wiring',
             unit: entry.id,
-            detail: `no wiring census row for ${entry.block} :: ${entry.pool} — the census and the corpus disagree about which pools exist`,
+            detail: `no wiring census row for ${entry.block} :: ${entry.pool}; the census and the corpus disagree about which pools exist`,
           });
         } else if (row.status !== 'RESOLVED') {
           out.notExecutable.push({
             arm: 'D/wiring',
             unit: entry.id,
-            detail: `${row.status}: ${row.reason || 'the selecting predicate was not recovered'} — what this pool is entitled to say is unknown, and the walker will not infer it from the pool's name`,
+            detail: `${row.status}: ${row.reason || 'the selecting predicate was not recovered'}: what this pool is entitled to say is unknown, and the walker will not infer it from the pool's name`,
           });
         } else {
           const licensed = row.slotsFilled || [];
@@ -969,7 +969,7 @@ export function walkGrammar(input) {
     out.notExecutable.push({
       arm: 'B',
       unit: register,
-      detail: 'no simulated reading sequence supplied — the consecutive-pair statistics are taken over a READING, never over a pool dump (§0\'s caveat), so the arm reports not-executable rather than measuring authoring order',
+      detail: 'no simulated reading sequence supplied: the consecutive-pair statistics are taken over a READING, never over a pool dump (§0\'s caveat), so the arm reports not-executable rather than measuring authoring order',
     });
   } else {
     for (const seq of input.sequences) absorb(armsB(seq.orders, seq.unit, input.admissible?.[seq.unit], input.ceilings));
@@ -980,7 +980,7 @@ export function walkGrammar(input) {
     out.notExecutable.push({
       arm: 'three-numbers',
       unit: register,
-      detail: 'no exemplar bands or no owner numbers supplied — BUDGET, DEPTH and PERFECTION all read them',
+      detail: 'no exemplar bands or no owner numbers supplied: BUDGET, DEPTH and PERFECTION all read them',
     });
   } else {
     for (const [poolId, pool] of cells) {
@@ -1005,7 +1005,7 @@ export function walkGrammar(input) {
       out.notes.push({
         arm: 'J',
         unit: row.entry.id,
-        detail: `${sentences} sentence(s) against ${triples} licensed move/field unit(s) — a sentence may exist only to connect two others`,
+        detail: `${sentences} sentence(s) against ${triples} licensed move/field unit(s); a sentence may exist only to connect two others`,
       });
     }
   }

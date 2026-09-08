@@ -210,7 +210,7 @@ export function bandsFrom(exemplars, excluding) {
   const bands = {};
   const labels = Object.keys(exemplars || {}).filter((l) => l !== excluding);
   if (labels.length < 2) {
-    throw new Error(`proseFingerprint.bandsFrom: ${labels.length} exemplar(s) after exclusion — a band needs at least two`);
+    throw new Error(`proseFingerprint.bandsFrom: ${labels.length} exemplar(s) after exclusion; a band needs at least two`);
   }
   for (const metric of RATE_METRICS) {
     const values = labels.map((l) => exemplars[l]?.[metric]).filter((v) => typeof v === 'number');

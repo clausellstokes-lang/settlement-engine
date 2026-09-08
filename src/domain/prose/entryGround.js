@@ -48,7 +48,7 @@
 export function estateGround(sources) {
   const roster = Array.isArray(sources?.officeRoster) ? sources.officeRoster : null;
   if (!roster || roster.length === 0) {
-    throw new Error('entryGround.estateGround: the office roster is empty — derive it from the role catalogues, never transcribe it');
+    throw new Error('entryGround.estateGround: the office roster is empty; derive it from the role catalogues, never transcribe it');
   }
   return Object.freeze({
     scope: /** @type {'estate'} */ ('estate'),
@@ -96,7 +96,7 @@ export function withEntryContext(base, per) {
  */
 export function settlementGround(table) {
   if (!table || !table.columns) {
-    throw new Error('entryGround.settlementGround: no table supplied — a settlement ground without a table is a guess');
+    throw new Error('entryGround.settlementGround: no table supplied; a settlement ground without a table is a guess');
   }
   return {
     scope: 'settlement',

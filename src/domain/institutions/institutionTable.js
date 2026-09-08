@@ -133,7 +133,7 @@ export const COLUMN_SOURCES = Object.freeze({
       read: false,
       note: 'none exists; `npcProfile.js:341-353` infers a link by name regex and this module '
         + 'does not call it. The value is a hardcoded null, so the basis is `absent` and not '
-        + '`inferred` — a basis names what the code DOES.',
+        + '`inferred`: a basis names what the code DOES.',
     }),
   ]),
   whatItCounts: Object.freeze([
@@ -145,16 +145,16 @@ export const COLUMN_SOURCES = Object.freeze({
         + 'written by worldPulse/treasury.js:1253; read there by treasuryRecordOf :625',
       read: true,
       note: 'THE PATH WAS WRONG IN CAR 9 AND IS CORRECTED HERE (INSTR-912 car 11, measured). '
-        + 'Car 9 read `settlement.treasury`, which NO writer in the estate produces — the '
-        + 'ledger lives at `settlement.economicState.treasury` — so the read degraded to NaN '
+        + 'Car 9 read `settlement.treasury`, which NO writer in the estate produces (the '
+        + 'ledger lives at `settlement.economicState.treasury`), so the read degraded to NaN '
         + 'on every world forever and the observed-shape ratchet convicted it. Still ABSENT '
         + 'AT BIRTH at the corrected path: the ledger is a world-pulse structure no generator '
         + 'writes, and the key is absent on every world that has not ticked under a lit '
         + '`treasuryEnabled` (schema:672), so the ABSENT branch is still the one every '
-        + 'generated settlement takes — but it is now absent BECAUSE THE WORLD HAS NOT '
+        + 'generated settlement takes, but it is now absent BECAUSE THE WORLD HAS NOT '
         + 'TICKED, not because the code was asking the wrong object. It is a LAST-TICK '
         + 'MAGNITUDE, not a duty name, so it can corroborate a tax duty the other two '
-        + 'sources already name and can never carry one they miss — which is why reading it '
+        + 'sources already name and can never carry one they miss, which is why reading it '
         + 'does not widen the column and why §1.2\'s own MISSING cell names only the service '
         + 'row and the income row as what a duty word must resolve to.',
     }),
@@ -181,7 +181,7 @@ export const COLUMN_SOURCES = Object.freeze({
     Object.freeze({ source: 'the backing faction and the finite basis phrases', cite: 'institutionProfile.js:182-192; powerSupport.js:58-75', read: false }),
   ]),
   whatItDoesNotDo: Object.freeze([
-    Object.freeze({ source: 'status in {ruined, removed, destroyed, remnant}', cite: 'institutionRoster.js:30-41', read: true, note: 'read on every row — and STRUCTURALLY SILENT on a LIVE one, because `isLiveInstitution` removes exactly the rows that could carry it. Measured: held = 0 on all three census tiers.' }),
+    Object.freeze({ source: 'status in {ruined, removed, destroyed, remnant}', cite: 'institutionRoster.js:30-41', read: true, note: 'read on every row, and STRUCTURALLY SILENT on a LIVE one, because `isLiveInstitution` removes exactly the rows that could carry it. Measured: held = 0 on all three census tiers.' }),
     Object.freeze({ source: 'typed impairments', cite: 'corruption.js:677', read: true }),
     Object.freeze({ source: '_worldPulseInactive', cite: 'institutionRoster.js:40', read: true, note: 'read on every row, and unreachable for the same reason as the status: `isLiveInstitution` returns false the moment it is true.' }),
     Object.freeze({
@@ -189,13 +189,13 @@ export const COLUMN_SOURCES = Object.freeze({
       cite: 'CLERK-LAWS §1.2',
       read: false,
       note: 'THE FIELD DOES NOT EXIST ON THE DATA. Measured over three tiers: 199 '
-        + '`availableServices` rows, ZERO carrying an `on` key at all — the `on`/`p` pair is '
+        + '`availableServices` rows, ZERO carrying an `on` key at all: the `on`/`p` pair is '
         + 'the catalog MENU\'s, and the instantiated row drops it. So the column cannot '
         + 'enumerate what an institution declines to do, and cannot close.',
     }),
   ]),
   provenance: Object.freeze([
-    Object.freeze({ source: 'institutionFoundingOf — the three typed kinds', cite: 'institutionFounding.js:44-46, :141-148', read: true }),
+    Object.freeze({ source: 'institutionFoundingOf: the three typed kinds', cite: 'institutionFounding.js:44-46, :141-148', read: true }),
   ]),
   sustainer: Object.freeze([
     Object.freeze({ source: 'the R6 receipt\'s localSustainerGone and the re-adjudication terminal\'s institution', cite: 'NL-4', read: false }),
@@ -494,14 +494,14 @@ export function institutionTableOf(settlement, world = {}) {
         // OPEN: the structural NPC roster is a sample, so a town has offices it does not name.
         closed: false,
         values: Object.freeze(offices),
-        basis: `the NPC roster's role and title nouns plus the governing seat's designation; OPEN BY LAW — ${OPEN_BY_LAW.office}`,
+        basis: `the NPC roster's role and title nouns plus the governing seat's designation; OPEN BY LAW: ${OPEN_BY_LAW.office}`,
       }),
       holderRole: Object.freeze({
         closed: false,
         values: Object.freeze([]),
         // The value is a hardcoded null on every row, so the basis says `absent` and not
         // `inferred`: this module makes no inference (SITTING §L.2 item 62).
-        basis: `absent — ${OPEN_BY_LAW.holderRole}; a name-regex inference exists at npcProfile.js:341-353 and is not called here`,
+        basis: `absent: ${OPEN_BY_LAW.holderRole}; a name-regex inference exists at npcProfile.js:341-353 and is not called here`,
       }),
       whatItCounts: Object.freeze({
         // CLOSED, and now honestly: every source CLERK-LAWS §1.2 names for this column is
@@ -523,12 +523,12 @@ export function institutionTableOf(settlement, world = {}) {
         // future flag can reach it — and so sweep plant #78's target keeps its exact bytes.
         closed: false,
         values: Object.freeze(band ? [band] : []),
-        basis: 'settlement.population, spoken only through the caller\'s QUANTITY_BANDS reader — a band, never a roll',
+        basis: 'settlement.population, spoken only through the caller\'s QUANTITY_BANDS reader: a band, never a roll',
       }),
       whoIsExempt: Object.freeze({
         closed: tollExemptions.length > 0,
         values: Object.freeze(tollExemptions),
-        basis: 'the treaty TOLL-EXEMPTION term family — a route\'s exemption from a toll, never a person\'s from a count',
+        basis: 'the treaty TOLL-EXEMPTION term family: a route\'s exemption from a toll, never a person\'s from a count',
         // MEASURED, not assumed: no exemption writer exists on any settlement path. The one
         // live typed `exempt: true|false` in the estate is `demographicsLand.js`'s SITE
         // LEGALITY flag (a user-provenance site is exempt from the legality refusal), which is
@@ -558,7 +558,7 @@ export function institutionTableOf(settlement, world = {}) {
       provenance: Object.freeze({
         closed: true,
         values: Object.freeze([...new Set(rows.map((r) => String(r.provenance?.kind || '')).filter(Boolean))].sort()),
-        basis: 'institutionFoundingOf — FOUNDED{year,tick} | FOUNDED_UNDATED | PRE_SEED, where absence is the typed value',
+        basis: 'institutionFoundingOf: FOUNDED{year,tick} | FOUNDED_UNDATED | PRE_SEED, where absence is the typed value',
       }),
       sustainer: Object.freeze({
         closed: false,

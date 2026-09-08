@@ -234,7 +234,9 @@ export function predicateRows(guard, params, aliases) {
     if (!bare) continue;
     const field = resolve(bare[2]);
     if (!field) continue;
-    rows.push({ field, op: bare[1] === '!' ? 'falsy' : 'truthy', value: '(no literal)' });
+    // The `(!?)` group captures the negation mark or the empty string, so a non-empty
+    // capture IS the negation: the mark itself never has to sit in a string literal.
+    rows.push({ field, op: bare[1] ? 'falsy' : 'truthy', value: '(no literal)' });
   }
   return rows;
 }
@@ -909,7 +911,7 @@ export function coOccurringPairs(input) {
     return {
       pairs: [],
       towns: firings.length,
-      notExecutable: ['no `minTowns` floor supplied — "co-fire on many towns" is a threshold, and this instrument does not invent one'],
+      notExecutable: ['no `minTowns` floor supplied: "co-fire on many towns" is a threshold, and this instrument does not invent one'],
     };
   }
   /** @type {Map<string, string[]>} */

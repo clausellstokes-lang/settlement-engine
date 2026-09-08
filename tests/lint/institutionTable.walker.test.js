@@ -30,7 +30,7 @@ import {
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { quantityWords } from '../../src/domain/worldPulse/demographicsHerald.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SOURCE = readFileSync(join(ROOT, 'src/domain/institutions/institutionTable.js'), 'utf8');
@@ -204,7 +204,7 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     expect(table.columns.whatItDoesNotDo.closed).toBe(false);
     // `holderRole`'s BASIS names what the code does — `absent`, never `inferred` over a null.
     expect(table.columns.holderRole.closed).toBe(false);
-    expect(table.columns.holderRole.basis).toMatch(/^absent —/);
+    expect(table.columns.holderRole.basis).toMatch(/^absent:/);
     // anchored: the line above pins the basis string live, so an emptied basis cannot pass
     expect(table.columns.holderRole.basis).not.toMatch(/inferred licence|basis: 'inferred'/);
     expect(table.rows.every((r) => r.holderBasis === 'absent')).toBe(true);
@@ -314,8 +314,15 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
       .toContain('economicState.treasury.coinFlows.taxed = 7');
     expect(topLevel, 'and a ledger at the top level — a shape nothing writes — is NOT')
       .toContain('economicState.treasury.coinFlows.taxed absent on this settlement');
-    expect(topLevel, 'so a value planted at the phantom path never reaches the basis')
-      .not.toContain('= 7');
+    // The negative is anchored on a LIVE sibling of the same basis string: the absence
+    // clause the same branch writes. A basis that drifted, emptied or stopped naming the
+    // path reds on the anchor instead of passing the exclusion vacuously.
+    expectAbsentWithAnchor(
+      topLevel,
+      '= 7',
+      'economicState.treasury.coinFlows.taxed absent on this settlement',
+      'a value planted at the phantom top-level path never reaches the basis',
+    );
     // AND THE SOURCE ROSTER NAMES THE PATH IT READS, so the declaration cannot drift back to
     // the top level while the code stays right (or the reverse, which is what car 9 shipped).
     const third = COLUMN_SOURCES.whatItCounts[2];

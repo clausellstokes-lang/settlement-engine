@@ -398,7 +398,7 @@ function armC1(entry, ground, out) {
     } else {
       out.notes.push(finding(entry, 'C1', 'two bands, no shared noun', list[0].clause,
         'whoIsCounted', where,
-        `two count words (${where}) with no shared count noun — whether they name one quantity is the refuter's`));
+        `two count words (${where}) with no shared count noun; whether they name one quantity is the refuter's`));
     }
   }
   for (const f of figureReadings(entry.text)) {
@@ -706,7 +706,7 @@ function armC5(entry, ground, out) {
       if (!other || other === band) continue;
       out.fails.push(finding(entry, 'C5', 'siblings band one noun differently', entry.text,
         `whoIsCounted (${noun})`, `${band} vs ${other}`,
-        `this variant bands "${noun}" as ${band}; its sibling bands it ${other} — the same cell, the same state`,
+        `this variant bands "${noun}" as ${band}; its sibling bands it ${other} (the same cell, the same state)`,
         sib.id));
     }
     // ⚠ THE OFFICE AND STATUS LIMBS ARE **WITHHELD**, and that is a measured retreat. A bag
@@ -723,7 +723,7 @@ function armC5(entry, ground, out) {
       if (shared.length) continue;
       out.withheld.push(finding(entry, 'C5', `siblings differ in ${slot}`, entry.text,
         slot, `${a.join('/')} vs ${b.join('/')}`,
-        `this variant carries ${slot} ${a.join('/')}; its sibling carries ${b.join('/')} — whether they name one subject is the refuter's`,
+        `this variant carries ${slot} ${a.join('/')}; its sibling carries ${b.join('/')}; whether they name one subject is the refuter's`,
         sib.id));
     }
   }
@@ -786,7 +786,7 @@ function armD(entry, ground, out) {
   if (unfillable.length) {
     out.fails.push(finding(entry, 'D', 'a slot the composer never fills', unfillable.join(', '),
       '(composed fill)', composed.join(', ') || 'empty',
-      `the sentence names {${unfillable.join('}, {')}}, which this (block, pool)'s composer bag does not offer — the variant is unreachable at every draw`));
+      `the sentence names {${unfillable.join('}, {')}}, which this (block, pool)'s composer bag does not offer; the variant is unreachable at every draw`));
   }
 }
 
@@ -816,7 +816,7 @@ function armQualify(entry, ground, out) {
     if (bandReadings(text).length) return;
     out.withheld.push(finding(entry, 'Q', shape, text,
       '(second typed field)', declared.join(', ') || 'none',
-      'R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none — a second fact or a summarising beat is the refuter\'s call'));
+      'R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter\'s call'));
   };
   for (let i = 1; i < raw.length; i++) consider(raw[i], 'a second sentence naming no second field');
   // ⛔ THE ARM RETURNED EARLY ON A ONE-SENTENCE VARIANT, AND THE BRIEF'S OWN NAMED POSITIVE
@@ -914,7 +914,7 @@ function armWiring(entry, ground, out) {
   if (unlicensed.length) {
     out.withheld.push(finding(entry, 'W', 'PRE-EXISTING unlicensed', unlicensed.join(', '),
       `(wiring: ${wiring.keyFunction || 'unnamed key'})`, filled.join(', ') || 'nothing',
-      `the sentence names {${unlicensed.join('}, {')}}, which this (block, pool)'s wiring does not fill — a pre-existing unlicensed claim, banked for the wave`));
+      `the sentence names {${unlicensed.join('}, {')}}, which this (block, pool)'s wiring does not fill; a pre-existing unlicensed claim, banked for the wave`));
   }
 }
 

@@ -7,7 +7,7 @@
  * class, which the sitting ADDED as a design and which does not exist in the engine today.
  *
  * ── WHAT THIS WALKER FOUND, AND WHY IT REPORTS RATHER THAN FAILS ───────────────────
- * MEASURED at 3b1c0eaa5, and stated here because a walker that quietly returned "0 problems"
+ * MEASURED at 3b1c0eaa5, and stated here because a walker that quietly reported a clean sweep
  * would be the false green the estate has already burned:
  *
  *   1. THE PLANTS EXIST. `domain/dossier/plotHooks.js` produces them — ~38 per town over
@@ -54,9 +54,9 @@ import { fnv1a32 } from '../../kernel/proseHash.js';
  * @type {ReadonlyArray<string>}
  */
 export const REQUIRED_FIELDS = Object.freeze([
-  'plant.id — a stable identity on the plant itself (today: none; `links[].id` is the NPC\'s)',
-  'plant.answerable — the typed flag that makes a plant owe an answer (today: absent)',
-  'plant.answer | plant.gapReason — the DM page\'s answer channel (today: neither exists)',
+  'plant.id: a stable identity on the plant itself (today: none; `links[].id` is the NPC\'s)',
+  'plant.answerable: the typed flag that makes a plant owe an answer (today: absent)',
+  'plant.answer | plant.gapReason: the DM page\'s answer channel (today: neither exists)',
 ]);
 
 /**
@@ -128,7 +128,7 @@ export function plantLedgerOf(plants, ledger = {}) {
   const notExecutable = [];
   if (answerable.length === 0) {
     notExecutable.push(
-      'no plant carries `answerable: true` — D8\'s arm has no subject, so the open share is'
+      'no plant carries `answerable: true`; D8\'s arm has no subject, so the open share is'
       + ' not a measurement of this town but of the missing class. Wanted: '
       + REQUIRED_FIELDS.join(' · '),
     );
@@ -166,13 +166,13 @@ export function walkPlantLedger(ledger) {
   for (const row of ledger.rows) {
     if (!row.answerable) continue;
     if (row.answered && row.hasGapReason) {
-      fails.push(`${row.id}: carries BOTH an answer and a gap-reason — D8 says exactly one`);
+      fails.push(`${row.id}: carries BOTH an answer and a gap-reason; D8 says exactly one`);
     } else if (!row.answered && !row.hasGapReason) {
       fails.push(`${row.id}: answerable and carries NEITHER an answer nor a gap-reason`);
     }
   }
   for (const id of ledger.duplicates) {
-    notes.push(`${id}: two plants fold to one derived id — the derived id is a content fold and`
+    notes.push(`${id}: two plants fold to one derived id; the derived id is a content fold and`
       + ' two identical plants are indistinguishable to it; a real plant id would separate them');
   }
   // ── THE OPEN-SHARE ARM, BEHIND THE CLASS-EXISTENCE GUARD ──────────────────────────
@@ -181,10 +181,10 @@ export function walkPlantLedger(ledger) {
   // carries the reason, so the arm is silent WITHOUT ever having been a pass.
   if (ledger.answerable > 0) {
     if (!(Number.isFinite(ledger.openShare) && Number(ledger.openShare) >= 0 && Number(ledger.openShare) <= 1)) {
-      fails.push(`open share ${String(ledger.openShare)} lies outside [0, 1] — a plant carrying`
+      fails.push(`open share ${String(ledger.openShare)} lies outside [0, 1]; a plant carrying`
         + ' both an answer and a gap-reason must be counted closed ONCE');
     } else if (ledger.namedOpenShare === 0) {
-      fails.push(`nothing is named OPEN over ${ledger.answerable} answerable plant(s) — D8 wants a`
+      fails.push(`nothing is named OPEN over ${ledger.answerable} answerable plant(s); D8 wants a`
         + ' SEEDED, NON-ZERO share named as open, and a record that answers everything is a'
         + ' record with nothing left to find');
     }
@@ -212,14 +212,14 @@ export function walkPlantLedgersAcrossSeeds(ledgers) {
   const withClass = (ledgers || []).filter((l) => l && l.answerable > 0);
   if (withClass.length < 2) {
     notExecutable.push(`${withClass.length} of ${(ledgers || []).length} ledger(s) carry an`
-      + ' answerable plant — the cross-seed limb needs at least two, so it declares itself'
+      + ' answerable plant; the cross-seed limb needs at least two, so it declares itself'
       + ` not-executable rather than answering []. Wanted: ${REQUIRED_FIELDS[1]}`);
     return { fails, notes, notExecutable };
   }
   const shares = withClass.map((l) => Number(l.namedOpenShare));
   const distinct = [...new Set(shares.map((v) => v.toFixed(6)))];
   if (distinct.length === 1) {
-    fails.push(`the named-open share is ${shares[0].toFixed(3)} on all ${shares.length} seeds —`
+    fails.push(`the named-open share is ${shares[0].toFixed(3)} on all ${shares.length} seeds.`
       + ' D8 wants a SEEDED share, and a share that never moves is a constant the seed does'
       + ' not reach');
   } else {

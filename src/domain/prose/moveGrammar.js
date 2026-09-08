@@ -39,15 +39,15 @@ export const MOVES = Object.freeze({
   PRESENT: Object.freeze({ asserts: 'the condition that stands', licences: 'a standing configuration field: the STATE-KEY, a band, a tier, a posture' }),
   HISTORY: Object.freeze({ asserts: 'what happened; a closed span', licences: 'an EVENT-PROVENANCE field only' }),
   PERSON: Object.freeze({ asserts: 'an office-holder as office, at most one recorded act', licences: 'a role: an office roll, `role`, `holderRole`' }),
-  OBJECT: Object.freeze({ asserts: 'a named thing — the object, never the class', licences: 'a named-object field: `good`, `resource`, a built-fabric field' }),
+  OBJECT: Object.freeze({ asserts: 'a named thing: the object, never the class', licences: 'a named-object field: `good`, `resource`, a built-fabric field' }),
   INSTITUTION: Object.freeze({ asserts: 'who holds, who counts, who is counted, what it does', licences: 'a row of the institution table; the predicate by a COLUMN value' }),
   CONTRADICTION: Object.freeze({ asserts: 'two records carry one fact differently', licences: 'a provenance field carrying TWO accounts' }),
   CONSEQUENCE: Object.freeze({ asserts: 'what an event cost, on a household, trade or office', licences: 'event provenance AND a household/office row (double-licensed)' }),
   GEOGRAPHY: Object.freeze({ asserts: 'where; the land, the route, neighbours by name', licences: 'a geography / terrain / route / dest field' }),
   TRADITION: Object.freeze({ asserts: 'a custom, a rite, a feast the world holds', licences: 'a custom/rite/creed field' }),
-  OPEN: Object.freeze({ asserts: 'a civic matter left standing open — never an interrogative', licences: 'a state field whose value is unresolved / contested / pending' }),
+  OPEN: Object.freeze({ asserts: 'a civic matter left standing open; never an interrogative', licences: 'a state field whose value is unresolved / contested / pending' }),
   ABSENCE: Object.freeze({ asserts: 'what the record does not hold, or what the world has none of', licences: 'LACK a `none-exists` field · GAP a `not-held` field with provenance · LIMIT a computed flag' }),
-  CLOSE: Object.freeze({ asserts: 'positional: the last move is a standing fact of a varied KIND', licences: 'positional — a KIND, never a position rule' }),
+  CLOSE: Object.freeze({ asserts: 'positional: the last move is a standing fact of a varied KIND', licences: 'positional: a KIND, never a position rule' }),
   LABEL: Object.freeze({ asserts: 'positional: the run-in label, the pointer, the route (chrome and docent only)', licences: 'the registry entry' }),
 });
 
@@ -93,7 +93,7 @@ export const LEVEL1_ORDERS = Object.freeze({
   V3: Object.freeze({ order: Object.freeze(['PRESENT', 'ABSENCE']), licences: 'state key + a `none-exists` field (the LACK)' }),
   V4: Object.freeze({ order: Object.freeze(['OBJECT', 'PRESENT']), licences: 'a named object + the state key' }),
   V5: Object.freeze({ order: Object.freeze(['INSTITUTION', 'PRESENT']), licences: 'an institution row + the state key' }),
-  V6: Object.freeze({ order: Object.freeze(['PRESENT', 'OPEN']), licences: 'a state key whose value is unresolved — NOT-EXECUTABLE today (no typed field, SITTING A12)' }),
+  V6: Object.freeze({ order: Object.freeze(['PRESENT', 'OPEN']), licences: 'a state key whose value is unresolved; NOT-EXECUTABLE today (no typed field, SITTING A12)' }),
   V7: Object.freeze({ order: Object.freeze(['HISTORY', 'PRESENT']), licences: 'R2 only: event provenance + the state key, the joint chosen' }),
   V8: Object.freeze({ order: Object.freeze(['PRESENT', 'ABSENCE']), licences: 'state key + a `not-held` field with provenance (the GAP)' }),
 });
@@ -126,7 +126,7 @@ export const WALLS = Object.freeze([
   Object.freeze({ id: 4, wall: 'BILL never immediately follows DEED within one sentence', scope: Object.freeze(['herald']) }),
   Object.freeze({ id: 5, wall: 'CONTRAST only where a sibling pool key or band names the rejected alternative', scope: Object.freeze(['dossier']) }),
   Object.freeze({ id: 6, wall: 'QUALIFY never as a "which" tail; never a third sentence', scope: Object.freeze(['dossier']) }),
-  Object.freeze({ id: 7, wall: 'the last move is a standing fact the table could act on — the reaction point', scope: Object.freeze(['*']) }),
+  Object.freeze({ id: 7, wall: 'the last move is a standing fact the table could act on: the reaction point', scope: Object.freeze(['*']) }),
   Object.freeze({ id: 8, wall: 'GESTURE at most one in a Herald headline', scope: Object.freeze(['herald']) }),
   Object.freeze({ id: 9, wall: 'RECALL at most once per letter section; LIMIT never twice on one surface', scope: Object.freeze(['chronicle']) }),
   Object.freeze({ id: 10, wall: 'the settlement token opens at most one variant per pool, never two adjacent', scope: Object.freeze(['dossier']) }),
@@ -144,19 +144,19 @@ export const WALLS = Object.freeze([
  */
 export const GRAMMAR_TAG_CONTRACT = Object.freeze({
   shape: 'a member id of LEVEL1_ORDERS (`V1`…`V8`), one per variant, optional while the wave runs',
-  annexForm: 'a third bracketed tag on the row: `N. `[angle · mark]` `[grammar: V4]` text` — the'
+  annexForm: 'a third bracketed tag on the row: `N. `[angle · mark]` `[grammar: V4]` text`; the'
     + ' projection already parses a SECOND bracketed tag (`VARIANT_RE`\'s optional group), so the'
     + ' grammar tag rides that slot with a `grammar:` prefix and needs no new row grammar',
   leafForm: 'a `"grammar": "V4"` key on the variant object, beside `angle`, `marks` and `slots`',
   movesWith: Object.freeze([
-    'scripts/generate-dossier-state-prose.mjs — parseTag() must route a `grammar:`-prefixed tag'
+    'scripts/generate-dossier-state-prose.mjs: parseTag() must route a `grammar:`-prefixed tag'
     + ' to its own field instead of into `marks`, or the mark vocabulary gains eight members and'
     + ' `STATE_MARK_DIMENSIONS`\'s contract test reds',
-    'tests/data/dossierStateProseProjection.contract.test.js — the `--check` byte-compare moves'
+    'tests/data/dossierStateProseProjection.contract.test.js: the `--check` byte-compare moves'
     + ' with the emitted shape',
   ]),
   seedSafe: 'THE PROMISE holds: the tag is a per-variant DATUM, not a pool member. It changes no'
-    + ' pool length, no key, no index and no eligibility — `variantIsAnchored` reads `slots`,'
+    + ' pool length, no key, no index and no eligibility; `variantIsAnchored` reads `slots`,'
     + ' `variantIsAudible` reads `marks`, and neither reads `grammar`. Nothing an installed world'
     + ' draws moves.',
 });

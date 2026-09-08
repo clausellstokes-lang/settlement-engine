@@ -67,9 +67,12 @@ describe('CAR 5(a) — the presence measure, three lines, reported', () => {
   });
 
   it('every module in the measures pair names the walker that enforces it, and the target EXISTS', () => {
-    // ⛔ `plantLedger.js:37` DECLARED `@enforced-by tests/lint/plantLedger.walker.test.js`,
-    // WHICH DOES NOT EXIST — an enforced-by pointing at nothing is worse than none, because
-    // a reader stops looking. `presenceMeasure.js` carried none at all.
+    // ⛔ `plantLedger.js:37` ONCE NAMED A DEAD ENFORCER, `tests/lint/plantLedger.walker.test.js`,
+    // which has never existed: a pointer at nothing is worse than none, because a reader
+    // stops looking. Both modules now carry `@enforced-by tests/lint/proseMeasures.walker.test.js`
+    // and the assertion below pins that exact target, so the dead name cannot come back — and
+    // it is no longer written after a live marker, where the existence sibling read it as a
+    // real pointer and convicted this header. `presenceMeasure.js` carried no tag at all.
     const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
     for (const module of ['src/domain/prose/plantLedger.js', 'src/domain/prose/presenceMeasure.js']) {
       const source = readFileSync(join(root, module), 'utf8');
