@@ -1967,6 +1967,38 @@ other thirteen absences sit on blocks that fire on **no town of the RATE grid ei
 re-measures exactly that against the committed census, so a block that starts speaking reds the
 roster instead of passing through it.
 
+### 3.3b THE VARIETY BASELINE MOVES TOO, AND IT IS RE-MEASURED RATHER THAN LEFT STALE
+
+Not in the brief's list, and owed anyway: the DUPLICATE-UNIT RATE is the owner-facing staleness
+statistic every later car states its delta against, and cure 1 changes which cells exist.
+
+```
+$ node scripts/prose-duplicate-units.mjs --out $SC/measure/car3-variety-baseline.json      (80 s)
+VARIETY CORPUS · 525 configurations x 8 seeds = 4200 towns x 2 audiences
+  towns 4200 · cells 541505 · 80 s · 19 ms per town
+  cells the rendered sentence did not identify 0 · identified ambiguously 0
+    unit instances 541505 · … seen on more than one town 529086
+    DUPLICATE-UNIT RATE 9771 bp at N = 4200 towns over 8 seeds and 525 configurations
+    distinct (position, text) pairs 51832 · pairs seen on more than one town 39413
+  ── THE REPEAT CENSUS, per (position, pool) ───────────────────────
+    groups 636 · EXECUTABLE 349 · NOT-EXECUTABLE 287
+    groups showing fewer than half the distinct texts the chance floor expects: 2
+```
+
+| figure | car 1 | car 3 |
+|---|---|---|
+| cells | 532,689 | **541,505** |
+| DUPLICATE-UNIT RATE | 9,774 bp | **9,771 bp** |
+| distinct (position, text) pairs | 51,396 | **51,832** |
+| groups / EXECUTABLE / NOT-EXECUTABLE | 632 / 347 / 285 | **636 / 349 / 287** |
+| sub-floor groups | 2 | **2** (the same DS-GEN-11 row at two audiences) |
+
+The rate moves by **3 basis points** on 8,816 more unit instances: the two economy mounts cure 1
+gave back are as duplicated as the rest of the corpus, which is the finding the wave exists to
+change and not a defect. `dm::economics.foodTile|economics.seasonTile::0` enters the ten
+positions carrying the most instances, at 4,180 of 4,200 duplicated. **The N, the seed count and
+the configuration count are unchanged, so the two numbers are comparable.**
+
 ### 3.4 THE ALIAS TABLE, CUT TO THREE — and `generator-write` re-cut on an AST
 
 ```
