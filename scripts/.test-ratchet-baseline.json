@@ -1,6 +1,6 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "85cb879286f2fc95893086c0e5fa46a0e96d6f03",
+  "measuredAtSha": "fd4a56a14ab77180861f04e54b1b3366afb6cec3",
   "totalTests": 32024,
   "totalFiles": 2491,
   "skippedCeiling": 1,
