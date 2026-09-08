@@ -75,7 +75,8 @@
 import { prosperityRank } from '../../../data/constants.js';
 import { compareCodepoint } from '../../deterministicSort.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../../data/dossierStateProse/economy.generated.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { economyStateProseCandidates } from './economyStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { COMPLEXITY_LABEL } from '../labelBands.js';
 
@@ -920,14 +921,22 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   };
 
   /**
+   * ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3c). The spine key is this desk's own key
+   * function and the per-lens `extra` override still reaches the kernel unchanged; the
+   * candidates leaf offers the modifier pools the state earned, and is EMPTY until car 9
+   * authors them. An empty list composes to the kernel's own draw, which is why the
+   * manifest cannot move on this routing.
    * @param {string} blockId
    * @param {string|null} poolKey
    * @param {Record<string, string|undefined>|null} [extra] a PER-LENS slot override
-   * @returns {{blockId: string, poolKey: string, angle: string, text: string}|null}
+   * @returns {import('./composeStateProse.js').ComposedUnit|null}
    */
   const line = (blockId, poolKey, extra = null) => (poolKey
-    ? readStateProse(CORPUS, blockId, poolKey, {
-      ...options, slots: extra ? { ...slots, ...extra } : slots,
+    ? composeStateProse(CORPUS, blockId, {
+      ...options,
+      slots: extra ? { ...slots, ...extra } : slots,
+      spineKey: poolKey,
+      candidates: economyStateProseCandidates(blockId, readings),
     })
     : null);
 

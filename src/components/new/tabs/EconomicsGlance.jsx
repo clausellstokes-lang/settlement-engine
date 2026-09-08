@@ -162,10 +162,15 @@ export default function EconomicsGlance({
 export function DeskLines({ mount, rungs }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
+  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3c). Two lenses
+  // of one position may legitimately draw the SAME line — a pool with one variant left after
+  // anchoring says the same thing twice — and `key={line}` then collides, so React drops one
+  // paragraph and the reader silently loses a lens. The position is what a line IS here, so
+  // the position is its identity.
   return (
     <div style={{margin:'0 0 12px'}}>
-      {lines.map((line) => (
-        <p key={line} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}>{line}</p>
+      {lines.map((line, position) => (
+        <p key={`${mount}::${position}`} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}>{line}</p>
       ))}
     </div>
   );
