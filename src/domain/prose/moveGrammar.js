@@ -46,6 +46,14 @@ export const MOVES = Object.freeze({
   GEOGRAPHY: Object.freeze({ asserts: 'where; the land, the route, neighbours by name', licences: 'a geography / terrain / route / dest field' }),
   TRADITION: Object.freeze({ asserts: 'a custom, a rite, a feast the world holds', licences: 'a custom/rite/creed field' }),
   OPEN: Object.freeze({ asserts: 'a civic matter left standing open; never an interrogative', licences: 'a state field whose value is unresolved / contested / pending' }),
+  // ⭐ THE OWNER'S 2026-09-08 MOVE (SITTING §Q; MOVE-GRAMMAR §4.4.3, "the source of each
+  // construction"). A fact has an in-world RECORD HOLDER, and naming that holder is an
+  // assertion in its own right: a cited claim is TWO licensed claims, so it spends a budget
+  // rather than riding along free. The licence is the holder table's KIND, which SEAM car 5b
+  // derives per field; until that column exists arm A13 declares itself NOT-EXECUTABLE on
+  // every licensing question and reports only the COUNT, which is what the sitting sets its
+  // budget from.
+  PROVENANCE: Object.freeze({ asserts: 'which record holds this fact, and therefore who counted it', licences: 'a holder KIND from the holder table, resolved to this town\'s institution' }),
   ABSENCE: Object.freeze({ asserts: 'what the record does not hold, or what the world has none of', licences: 'LACK a `none-exists` field · GAP a `not-held` field with provenance · LIMIT a computed flag' }),
   CLOSE: Object.freeze({ asserts: 'positional: the last move is a standing fact of a varied KIND', licences: 'positional: a KIND, never a position rule' }),
   LABEL: Object.freeze({ asserts: 'positional: the run-in label, the pointer, the route (chrome and docent only)', licences: 'the registry entry' }),
@@ -192,6 +200,16 @@ const SLOT_MOVE = Object.freeze({
 export const CLAUSE_DETECTORS = Object.freeze([
   { move: 'ABSENCE', re: /\b(there (is|are) no\b|no \w+ (here|at all)\b|sends nothing\b|nothing (out|here|at|in) \w*\s*(worth|has|have)?\b|the record does not\b|does not (say|record|hold)\b|nobody has\b|none (of|is|are) (recorded|held|named)\b|is not (recorded|held|named)\b|no longer (holds|keeps|has)\b|has none\b|holds none\b|carries none\b|never had\b)/i },
   { move: 'CONTRADICTION', re: /\b(one (record|roll|account) \w+|some say\b|others say\b|two (records|accounts)|neither account|the rolls disagree|is disputed|both are recorded|account is not\b|accounts? (differ|disagree))\b/i },
+  // ⭐ PROVENANCE SITS BESIDE CONTRADICTION BECAUSE BOTH ARE ASSERTIONS ABOUT THE RECORD
+  // RATHER THAN ABOUT THE TOWN, and it must outrank the state detectors below for the same
+  // reason ABSENCE and OPEN do: "the muster roll is long" states which BOOK holds the number
+  // before it states the number. The vocabulary is the holder table's KINDS as the owner
+  // named them (treasury, muster, census, parish, toll-bar, market, watch, court, elders,
+  // road) and nothing wider: a bare `record` or `count` is a common noun and reading it as a
+  // citation would manufacture a habit the corpus does not have. MEASURED at this tip: 18 of
+  // 2,266 shipped variants carry the shape, and 15 of them thereby realise a move sequence
+  // outside LEVEL1 — which is the finding, not a defect of the detector.
+  { move: 'PROVENANCE', re: /\b(the (?:treasury|watch|parish|market|court|customs)(?:'s)? (?:books|roll|rolls|register|registers|count|ledger|ledgers)|the (?:muster|toll|tithe) (?:roll|rolls|books|register)|the elders (?:say|hold|remember|keep)|from the road|the (?:rolls|registers?|ledgers?|books?|records?) (?:say|says|show|shows|hold|holds|carry|carries|name|names|record|records|have|has))\b/i },
   { move: 'OPEN', re: /\b(unsettled|unresolved|contested|still open|not (yet )?(decided|settled|answered)|stands open|pending|no one has (decided|settled)|remains? open)\b/i },
   { move: 'CONSEQUENCE', re: /\b(cost|costs|paid for|pays for|falls on|fell on|the bill|charged to|comes out of|is borne by|at the expense of|at a loss|the loss is)\b/i },
   // ⚠ THE HISTORY DETECTOR CARRIES NO BARE `was`/`were`, and that is a MEASURED narrowing.
@@ -282,6 +300,38 @@ export function orderIdOf(moves) {
     .filter(([, spec]) => spec.order.join('→') === key)
     .map(([id]) => id);
   return hits.join('|');
+}
+
+/**
+ * ⭐ THE COMPOSED ORDER (ARCH §8.4; T-F4). `orderIdOf` classifies ONE variant against the
+ * eight LEVEL-1 orders, which is the right ruler for a pool row and the wrong one for a
+ * COMPOSED unit: the unit's derived order is literally `spine.order ++ [modifier moves]`
+ * (§4.2 step 8), and a spine plus a modifier can realise a TAB order rather than a variant
+ * one. So the composed classifier searches LEVEL1 first and LEVEL2 second and says WHICH
+ * level answered, and a sequence outside both is `''` at level `0`.
+ *
+ * ⛔ IT REPORTS, IT DOES NOT REFUSE, and the reason is the whole point of measuring at car 6
+ * rather than legislating at car 5: the SHARE of composed units outside both sets is the
+ * number that says whether the two closed sets are the right sets. A gate that failed every
+ * unit outside them would have decided that question by construction. The share is printed
+ * by the walker; the sitting rules on it.
+ *
+ * ⛔ LEVEL1 IS SEARCHED FIRST AND THE TIE IS NOT BROKEN BY LENGTH. `E5` is
+ * `INSTITUTION → PRESENT`, which is `V5` exactly; a composed unit realising it is a
+ * LEVEL-1 grammar that happens also to be a lawful tab order, and calling it E5 would report
+ * a tab order for a single unit. The overlap is named here rather than left to whichever
+ * object literal happens to be read first.
+ * @param {ReadonlyArray<string>} moves
+ * @returns {{id: string, level: 0|1|2}}
+ */
+export function composedOrderIdOf(moves) {
+  const level1 = orderIdOf(moves);
+  if (level1 !== '') return { id: level1, level: 1 };
+  const key = moves.join('→');
+  const hits = Object.entries(LEVEL2_ORDERS)
+    .filter(([, order]) => order.join('→') === key)
+    .map(([id]) => id);
+  return hits.length ? { id: hits.join('|'), level: 2 } : { id: '', level: 0 };
 }
 
 /**

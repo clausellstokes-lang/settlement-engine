@@ -44,6 +44,7 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/domain/prose/composedWalker.js
   src/domain/display/stateProse/composeStateProse.js
   src/data/dossierStateProse/stressors.generated.js
   src/domain/prose/wiringCensus.js
@@ -1360,6 +1361,25 @@ check_caught "prose-corpus-bytes/a leaf grows by a kilobyte and the byte ratchet
 #     cmp-identical => 9 passed.
 perl -0pi -e "s/  return a\.key < b\.key \? -1 : 1;/  return a.key.localeCompare(b.key);/" src/domain/display/stateProse/composeStateProse.js
 check_caught "compose-state-prose-fence/the composer's tie-break becomes a locale collation and the seam stops being device-stable" src/domain/display/stateProse/composeStateProse.js "npx vitest run tests/lint/composeStateProseFence.test.js --no-file-parallelism"
+
+# 97. SEAM car 5 -- AN UNESTABLISHED JOIN MAY NOT BE REPORTED AS A REFUSED ONE. Arm A2 licenses
+#     a `consequence` or `tension` joint against the relation table for (the spine's PRIMARY
+#     field, the modifier's field), with the direction read. It has THREE answers and not two:
+#     both endpoints in the table's own vocabulary and no row joining them is a FAIL, because
+#     the question was asked and answered; endpoints the table has never heard of are WITHHELD,
+#     because the join is UNESTABLISHED rather than negative. That second answer is the shipped
+#     state -- car 0's F1 measured that NONE of the 165 engine relation rows joins a desk read
+#     root, source (d) empty -- so a walker that collapsed the two would report every authorable
+#     joint in the estate as a failure and would blame authors for a table nobody has ratified.
+#     This plant moves the unestablished limb from WITHHELD to FAIL: every other arm stays
+#     green, the counts stay the same, and the one distinction the channel exists to carry is
+#     gone.
+#     Measured before landing (lane SEAM, 2026-09-08; cp backup, cp restore, never the checkout
+#     family; md5 b40a9dc406ab010407da8bf602cc36a8 before and after): clean tree => 66 passed;
+#     planted => EXACTLY 1 red, the shipped-state arm by name, 65 passed; restored cmp-identical
+#     => 66 passed.
+perl -0pi -e "s/emit\(out, row\(id, 'A2', 'WITHHELD', 'unestablished join'/emit(out, row(id, 'A2', 'FAIL', 'unestablished join'/" src/domain/prose/composedWalker.js
+check_caught "prose-composed-walker/an unestablished relation join is reported as a refused one" src/domain/prose/composedWalker.js "npx vitest run tests/lint/proseComposed.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

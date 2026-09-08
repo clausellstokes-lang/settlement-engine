@@ -430,13 +430,14 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     expect(allUnresolved.resolved, 'and one with nothing resolved is a third').toBe(0);
   });
 
-  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its ELEVEN modules', () => {
+  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its TWELVE modules', () => {
     // ⛔ WIDENED FROM ONE MODULE TO TEN (INSTR-912 car 10, cure 10; FOLD-2 hazard H8). The
     // arm fenced `wiringCensus` alone, so a §913 or wave car could wire `entryWalker`,
     // `grammarWalker`, `moveGrammar`, `presenceMeasure`, `plantLedger`, `proseFingerprint`,
     // `entryGround`, `entryLexicons` or `institutionTable` into a product surface and NO GATE
     // WOULD SAY SO. The island is cheapest to fence before the merge, not after.
     const ISLAND = [
+      'src/domain/prose/composedWalker.js',
       'src/domain/prose/entryGround.js',
       'src/domain/prose/entryLexicons.js',
       'src/domain/prose/entryWalker.js',
@@ -445,6 +446,13 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       'src/domain/prose/plantLedger.js',
       'src/domain/prose/presenceMeasure.js',
       'src/domain/prose/proseFingerprint.js',
+      // ⭐ THE TWELFTH IS `composedWalker.js`, ADDED BY SEAM CAR 5 AND LISTED FIRST ONLY BECAUSE
+      // THE ROSTER IS ALPHABETICAL. It walks the COMPOSED unit — a spine, its seated modifiers
+      // and their joint — against the facts of all of its pieces at once, so it is the one
+      // island module whose subject is a PRODUCT shape. That makes it the likeliest of the
+      // twelve to be reached for by a desk wanting "the same check at render", and the fence is
+      // cheapest before that happens rather than after: a runtime refusal would change
+      // `eligible.length` and move every later index (CLERK-LAWS §2.5 / R-DA-20).
       // THE ELEVENTH, ADDED BY ARCH CAR 0e. The branch reader is a scanner the census module
       // could not hold under its 800-effective-line ceiling, and car 0's refusal 1 named this
       // exact shape as the honest one. It is fenced the moment it lands rather than after.
@@ -476,7 +484,7 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       for (const hit of hits) if (!inIsland(hit)) breaches.push(`${module} <- ${hit}`);
     }
     expect(breaches, 'no product surface reaches the island').toEqual([]);
-    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not eleven copies of the same fence:
+    // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not twelve copies of the same fence:
     // the census names exactly one module of the eleven, so the equality the first cut
     // asserted is kept as the sharpest single case rather than lost inside the loop.
     const censusHits = files.filter(([, text]) => text.includes('wiringCensus')).map(([p]) => p);
@@ -486,6 +494,13 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     // pass this loop and prove nothing.
     const branchHits = files.filter(([, text]) => text.includes('wiringBranch')).map(([p]) => p);
     expect(branchHits).toEqual(['src/domain/prose/wiringBranch.js', 'src/domain/prose/wiringCensus.js']);
+    // AND THE TWELFTH IS REACHED FROM NOWHERE AT ALL, which is a THIRD shape and needs saying:
+    // the composed walker is a GATE instrument with no importer inside the island either, so
+    // its fence holds vacuously today. The arm asserts exactly that state rather than letting a
+    // future importer arrive unremarked — `composedWalker` names itself and nothing else names
+    // it, and a desk that reached for it would move this list.
+    const composedHits = files.filter(([, text]) => text.includes('composedWalker')).map(([p]) => p);
+    expect(composedHits).toEqual(['src/domain/prose/composedWalker.js']);
   });
 });
 
@@ -513,9 +528,17 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     // from all three, so two of the three could drift silently under the rebase that H6 says
     // must re-measure everything. MISSING fell 58 → 34 when cure 3 taught the membership test
     // to read `fieldsRead` and to normalise with `rootOf`.
+    // ⭐ THIN 483 -> 482 AND COVERED 225 -> 226 AT SEAM CAR 5, and the ground is one sentence:
+    // the classifier learned the owner's PROVENANCE move (SITTING §Q; MOVE-GRAMMAR §4.4.3), so
+    // 18 of the 2,266 shipped variants now realise a move sequence that names the RECORD as
+    // well as the state. `grammars` is `new Set(orderIdOf(classifyMoves(text)) || the raw
+    // sequence)` per pool, so 15 pools gained a distinct order and ONE of them — the only one
+    // whose whole THINness rested on having a single grammar — left THIN for COVERED.
+    // The counts are recomputed FRESH from the live modules here, which is why they move with
+    // the classifier rather than with the committed JSON.
     expect(counts.get(TIERS.MISSING), 'held facts with no pool keyed on them').toBe(34);
-    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(483);
-    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(225);
+    expect(counts.get(TIERS.THIN), 'pools with one variant, one grammar, or {settlement} alone').toBe(482);
+    expect(counts.get(TIERS.COVERED), 'and the rest').toBe(226);
     expect(counts.get(TIERS.THIN) + counts.get(TIERS.COVERED), 'every pool lands in one of the two pool tiers')
       .toBe(census.rows.length);
     for (const row of tiers) {
