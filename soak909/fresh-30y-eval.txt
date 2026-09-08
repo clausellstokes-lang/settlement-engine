@@ -1,0 +1,5 @@
+# tripwire evaluation — w0-soak (30y × 4s, schema 5)
+  annotation: deterministicFirings 0 · fullInstrument true · provisional false · rolling false · restored false · behavioralPropertiesPassing UNSTATED
+annotated receipt: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/soak909/fresh-30y-annotated.json
+
+OK — no deterministic tripwire fired over 1 cell(s); 0 host-observability note(s)

@@ -1,0 +1,233 @@
+{
+ "name": "martin",
+ "chunk": 21,
+ "claims": [
+  {
+   "index": 645,
+   "feature": "naming and forms of address",
+   "claim": "Spathis reports that lady and queen are among the most frequent nouns in the Game of Thrones books.",
+   "source": "Dimitris Spathis, Medium, 29 March 2015",
+   "url": "https://medium.com/@dimitrisspathis/exploring-linguistic-patterns-in-best-selling-book-series-100290c94242",
+   "quote": "is probably apparent in Game of Thrones",
+   "page": "section 2) Nouns"
+  },
+  {
+   "index": 646,
+   "feature": "adjective and adverb discipline",
+   "claim": "Spathis offers Stephen King's advice against adverbs only as speculation about why Martin's -ly count is low, not as anything Martin said.",
+   "source": "Dimitris Spathis, Medium, 29 March 2015",
+   "url": "https://medium.com/@dimitrisspathis/exploring-linguistic-patterns-in-best-selling-book-series-100290c94242",
+   "quote": "Perhaps George Martin follows Stephen King",
+   "page": "section 4) Adverbs"
+  },
+  {
+   "index": 647,
+   "feature": "plainness and economy",
+   "claim": "Spathis reports that the largest books in his four-series analysis score low on lexical density.",
+   "source": "Dimitris Spathis, Medium, 29 March 2015",
+   "url": "https://medium.com/@dimitrisspathis/exploring-linguistic-patterns-in-best-selling-book-series-100290c94242",
+   "quote": "the largest books of our analysis behave poorly",
+   "page": "section 6) Lexical Density"
+  },
+  {
+   "index": 648,
+   "feature": "other: book and chapter length",
+   "claim": "WordsRated's length table totals 344 chapters across the five published A Song of Ice and Fire novels.",
+   "source": "WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'",
+   "url": "https://wordsrated.com/game-of-thrones-stats/",
+   "quote": "344",
+   "page": "section 'Length of A Song of Ice and Fire books', table Total row"
+  },
+  {
+   "index": 649,
+   "feature": "other: book and chapter length",
+   "claim": "WordsRated's length table totals 1,736,054 words across the five published novels.",
+   "source": "WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'",
+   "url": "https://wordsrated.com/game-of-thrones-stats/",
+   "quote": "1,736,054",
+   "page": "section 'Length of A Song of Ice and Fire books', table Total row"
+  },
+  {
+   "index": 650,
+   "feature": "other: book and chapter length",
+   "claim": "WordsRated's length table gives A Storm of Swords 414,604 words in 82 chapters.",
+   "source": "WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'",
+   "url": "https://wordsrated.com/game-of-thrones-stats/",
+   "quote": "414,604",
+   "page": "section 'Length of A Song of Ice and Fire books'"
+  },
+  {
+   "index": 651,
+   "feature": "point of view and distance",
+   "claim": "WordsRated states that the A Song of Ice and Fire novels are written in third person limited.",
+   "source": "WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'",
+   "url": "https://wordsrated.com/game-of-thrones-stats/",
+   "quote": "The books are written in 3rd person limited.",
+   "page": "section 'Characters, narrative device and perspective'"
+  },
+  {
+   "index": 652,
+   "feature": "point of view and distance",
+   "claim": "WordsRated counts nine point-of-view characters in the first novel.",
+   "source": "WordsRated (Danny McLoughlin), 'Game of Thrones Book Stats'",
+   "url": "https://wordsrated.com/game-of-thrones-stats/",
+   "quote": "The first book takes place from the perspective of 9 different characters",
+   "page": "section 'Characters, narrative device and perspective'"
+  },
+  {
+   "index": 653,
+   "feature": "dialogue register",
+   "claim": "Becce's LIWC measurement of the dialogue in Martin's A Game of Thrones gives 11,02 words per sentence for male characters and 10,59 for female characters.",
+   "source": "Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94",
+   "url": "https://serena.sharepress.it/anglistica-aion/article/download/8606/9299/31827",
+   "quote": "Words/sentence 11,02 10,59",
+   "page": "Tab. 1, p. 88"
+  },
+  {
+   "index": 654,
+   "feature": "dialogue register",
+   "claim": "Becce measures the male characters' dialogue in Martin's novel at 81890 words, 84% of all dialogue in the book.",
+   "source": "Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94",
+   "url": "https://serena.sharepress.it/anglistica-aion/article/download/8606/9299/31827",
+   "quote": "81890 (84%)",
+   "page": "Tab. 1, p. 88"
+  },
+  {
+   "index": 655,
+   "feature": "per-speaker register",
+   "claim": "Becce finds that in every one of the three versions of the story the male characters' utterances have longer sentences and longer words than the female characters'.",
+   "source": "Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94",
+   "url": "https://serena.sharepress.it/anglistica-aion/article/download/8606/9299/31827",
+   "quote": "the male characters’ utterances are characterized by having longer",
+   "page": "section 3, Data analysis, p. 88"
+  },
+  {
+   "index": 656,
+   "feature": "per-speaker register",
+   "claim": "Becce reports that among the eight viewpoint characters the one exception to the pattern is words per sentence in the novel, where the female viewpoint characters lead.",
+   "source": "Nicolangelo Becce, Anglistica AION 22.2 (2018), 83-94",
+   "url": "https://serena.sharepress.it/anglistica-aion/article/download/8606/9299/31827",
+   "quote": "the female characters have a slight advantage",
+   "page": "discussion of Tab. 2, p. 89"
+  },
+  {
+   "index": 657,
+   "feature": "per-speaker register",
+   "claim": "Rivera observes that the high-born and low-born characters of the novels are given different speech, a dialect ruled by rank rather than region.",
+   "source": "A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "high-born characters also speak differently than the characters of lower birth",
+   "page": "body, paragraph on forms of address"
+  },
+  {
+   "index": 658,
+   "feature": "repetition and refrain",
+   "claim": "Rivera counts the insult against Jon Snow repeated five times within a few paragraphs of A Game of Thrones and calls it lexical cohesion.",
+   "source": "A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "the insult is repeated five times for emphasis",
+   "page": "body, paragraph on repetition"
+  },
+  {
+   "index": 659,
+   "feature": "plainness and economy",
+   "claim": "Rivera reports a lexical density score of between 4 and 4.5 for A Game of Thrones, which she calls quite low.",
+   "source": "A. R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire', 10 September 2023",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "A Game of Thrones has a score between 4 and 4.5",
+   "page": "body, paragraph on lexical density"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 645,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gender equality is probably apparent in Game of Thrones lady, queen",
+   "note": "Section '2) Nouns' reads: \"Gender “equality” is probably apparent in Game of Thrones lady, queen as well as in Hunger Games mother\"; quote appears word for word. Key takeaways add \"high occurrence of words such as lady, queen and mother\". Raw page reached via Wayback capture 20250828164038id_ (live Medium returned 403)."
+  },
+  {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps George Martin follows Stephen King’s advice",
+   "note": "Section '4) Adverbs' reads: \"The first observation is the lack of -ly adverbs in Game of Thrones. Perhaps George Martin follows Stephen King’s advice ‘The adverb is not your friend...’\". Quote verbatim; 'Perhaps' marks it as Spathis's own speculation, and nothing on the page attributes it to Martin. Raw page via Wayback."
+  },
+  {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Indeed, the largest books of our analysis behave poorly",
+   "note": "Section '6) Lexical Density' reads: \"It is obvious to draw parallels between the book length and its lexical density... Indeed, the largest books of our analysis behave poorly.\" Quote verbatim; the analysis covers four series / 19 books. Raw page via Wayback."
+  },
+  {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Total | 4,224 | 344 | 1,736,054",
+   "note": "Table 'Length of A Song of Ice and Fire books' Total row gives Chapters 344 across the five published novels (73+70+82+46+73=344). Raw page reached via Wayback capture 20260210045808id_ (live wordsrated.com returned a WAF '454 Request blocked' interstitial to curl)."
+  },
+  {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Total | 4,224 | 344 | 1,736,054",
+   "note": "Same Total row gives Words 1,736,054; page adds \"There are more than 1.7 million words in the 5 A Song of Ice and Fire novels\". Raw page via Wayback."
+  },
+  {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A Storm of Swords | 973 | 82 | 414,604",
+   "note": "Table row for A Storm of Swords: Pages 973, Chapters 82, Words 414,604 — both limbs of the claim present. Raw page via Wayback."
+  },
+  {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The books are written in 3rd person limited.",
+   "note": "Section 'Characters, narrative device and perspective' opens with that exact sentence. Raw page via Wayback."
+  },
+  {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first book takes place from the perspective of 9 different characters",
+   "note": "Bullet under 'How many chapters are there from each character’s perspective in GOT?' reads exactly that; the next bullet gives 31 by the fifth book. Raw page via Wayback."
+  },
+  {
+   "index": 653,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Words/sentence 11,02 10,59 (GoT dialogues, male/female)",
+   "note": "Tab. 1, p. 88: the Words/sentence row under 'GoT dialogues' gives 11,02 (Male Characters) and 10,59 (Female Characters). The LIWC limb holds — the methodology section names LIWC2015 as the tool. PDF fetched directly (HTTP 200) and text extracted with pypdf."
+  },
+  {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word count (%) 81890 (84%) 15026 (16%)",
+   "note": "Tab. 1, p. 88, first row, GoT dialogues: male characters 81890 (84%) against female 15026 (16%); surrounding prose confirms these are all dialogues in the novel. PDF text extracted directly."
+  },
+  {
+   "index": 655,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in each and every case the male characters’ utterances are characterized by having longer sentences",
+   "note": "p. 88: \"While the difference ... is less conspicuous, in each and every case the male characters’ utterances are characterized by having longer sentences and using longer words compared to the female counterparts\" — said of all three versions (novel, graphic novel, TV series). Quote verbatim."
+  },
+  {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Except for the number of words per sentence ... the female characters have a slight advantage",
+   "note": "p. 89, discussion of Tab. 2 (the eight viewpoint characters): \"only in one case do the female characters ‘perform better’... Except for the number of words per sentence in the original version of A Game of Thrones, where the female characters have a slight advantage\". Tab. 2 confirms: GoT Words/sentence male AVG 10,11 vs female AVG 10,61. Quote verbatim."
+  },
+  {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The high-born characters also speak differently than the characters of lower birth. A sort of dialect ruled by rank rather than region.",
+   "note": "Both limbs are consecutive sentences on the page, and the m’Lord / my Lord / your Grace examples follow. Live page fetched directly with a browser user agent (HTTP 200)."
+  },
+  {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In just a few paragraphs, the insult is repeated five times for emphasis",
+   "note": "The sentence follows a block cited \"(A Game Of Thrones, Martin, pp. 118-19)\" about the insult 'bastard' slung at Jon Snow, and continues \"this kind of repetition is called lexical cohesion\". Every limb supported. Live page fetched directly."
+  },
+  {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A Game of Thrones has a score between 4 and 4.5, which is quite low",
+   "note": "Lexical-density paragraph, compared against the first Harry Potter book. Quote verbatim; 'quite low' is the page's own wording. Live page fetched directly."
+  }
+ ]
+}

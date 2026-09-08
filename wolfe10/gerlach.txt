@@ -1,0 +1,423 @@
+=== PAGE 1 ===
+The Rhetoric of an Impossible
+Object: Gods, Chems, and Science
+Fantasy in Gene Wolfe's
+Book of the Long Sun
+JOHN GERLACH
+• Robert Scholes has called science fantasy an "oxymoronic monster" (4)—as
+he has said of a blurb about a previous tetralogy of Wolfe's, "Science fiction is
+described as hard and sharp—in contrast with the soft and shapeless lyric ex-
+travagance of fantasy. Science fantasy, is then, by definition an impossible ob-
+ject, hard and soft, pointed and uncircumscribed: a monstrosity" (5), But by the
+end of the essay Scholes concedes that the "oxymoronic structure" of science
+fantasy "does convey something important about this new and extremely inter-
+esting fictional development" (18), Just how interesting, we can see in Wolfe's
+latest tetralogy, the Book ofthe Long Sun.
+It's easy enough to define the individual components of this mixed genre: as
+one commentator on speculative fiction has fancifully noted, "spaceships, ro-
+bots, or rivets mean science fiction; a quaint village, an old man with a very
+long white beard, or a sword held by a mostly naked person mean fantasy"
+(McClintock
+ 26), Wolfe's own definition ofthe components is handy, too: "Sci-
+ence fiction is what you can make people believe; fantasy is what people have to
+suspend disbelief for" (Baber i). But how then, as Scholes has pointed out, can
+something be both science and fantasy? In an excellent essay on science fan-
+tasy, Brian Attebery sidesteps the problem by concentrating on what the authors
+actually do. He notes that the genre tends to be very ad hoc—writers, as Roger
+Zelazny also argues in an article m Intersections, mix and match the science and
+the fantasy freely according to need. Furthermore, the writer may willfully ignore
+Extrapolation, Vol, 40, No, 2 © 1999 by The Kent State University Press
+=== PAGE 2 ===
+John Gerlach
+any specific considerations of genre. As Wolfe himself has said, "I'm not trying
+to write genres, I'm trying to write a book" (Baber 3).
+Critics of course enjoy occupying themselves with what fiction writers prefer
+to do intuitively. Critics such as Gary Wolfe and John Clute treat science fantasy
+as a branch of fantasy—specifically, they would probably consider  The Long
+Sun a "rationalized fantasy." In Gary Wolfe's terms, science fantasy "refers to a
+genre in which devices of fantasy are employed in a 'science-fictional' context"
+(107); the Clute/Grant Encyclopedia of Fantasy contends science fantasy in-
+vokes "historical or scientific explanations for happenings that seem magical."
+Perhaps most significantly
+ ihe, Encyclopedia does not list science fantasy as one
+of the terms within the umbrella category, the FANTASTIC (which includes FAN-
+TASY, SCIENCE FICTION, MAGIC REALISM, FABULATION, and SURREALISM).' I be-
+lieve that the Encyclopedia'^ omission is appropriate because science fantasy
+isn't truly a subgenre but instead is an inherently unstable isotope whose slow
+decay produces the special effect that makes it distinctive.
+Science fantasy, in other words, is inherently unstable; based on the clues
+given in the individual work, the reader is likely to subsume the fantasy into the
+science, or the science into the fantasy. In the case of the Long Sun, readers are
+at the beginning most likely to explain the fantasy in terms of science, but they
+will ultimately be unable to do so completely, and that inability will produce
+some of the book's most memorable effects. The instability of the mixture, I
+will argue, is essential for the effects this strange compound produces.
+The problem of mixed genres immediately affects the reader's attempt to
+understand a novel's setting. The question of how to interpret the setting is basic
+to reading any fiction, and particularly important in fantasy, science fiction, or
+the blend of the two. Starting Nightside the Long Sun, the first volume of the
+series, a reader attentive to Wolfe's title might look for references to the sun as
+clues to the nature of
+ this fictional world, and at first the evidence is ambiguous.
+One phrase notes that "sun's golden road across the sky was markedly narrower
+already" (1:23).^ Does the sun create an imaginary golden road in its path, as
+our sun does, or is the sun constantly a golden road—a long sun? Terms like
+"shadeup" and "shadedown" are different, too. Are they just terms different
+from our "sunrise" and "sunset," or signals that the sun's not like ours?
+The reader will be probing a good deal more than the image ofthe sun. From
+the first chapter of Nightside we know we're confronting a world of contradic-
+tions: "A black civilian floater was roaring down Sun Street, scattering men and
+women on foot and dodging ramshackle carts and patient gray donkeys, its
+blowers raising a choking cloud of hot yellow dust" (1:17). In addition to the
+contrast of the high-tech floaters and the no-tech donkeys of that passage, the
+reader will discover augurs sacrificing animals to gods who seem something
+from the Greco-Roman pantheon (later on one of the gods, not one of the origi-
+nal nine, will be named Kypris, an appellation associated with
+ Aphrodite). Words
+154
+=== PAGE 3 ===
+Wolfe's Book of the Long Sun
+we're familiar with are applied in unusual, usually comical ways. "Mainframe"
+seems to be the place you go when you die—this mythological world of fantasy
+is strangely technological. The gods once appeared on Sacred Windows in the
+manteions (the places of worship), and sacred cables run from these windows.
+The gods depend, we suspect, on rather ancient technology—cathode ray ter-
+minals that can be wheeled into the street, though it takes a dozen men to do so
+(3:112)—really Big Screen TV. in service of a national religion.
+Most readers will resolve the instability of science and fantasy by developing
+a rational explanation, first by hypothesizing that this "whorl," as it's called,
+with its cities visible above in the night sky, is some sort of space ark (genera-
+tion starship) illuminated with t;he futuristic equivalent of a huge fluorescent
+light
+ bulb. The reader in effect subsumes the fantasy into a science fiction con-
+figuration. By the time the reader learns in Exodus from the Long Sun that the
+whorl was dug out from a "big hunk of rock" (4:155) the reader is likely to have
+surmised that this space ark is perhaps a hollowed-out asteroid, given a spin, a
+"whorl," to create the appropriate level of gravity, after the fashion ofthe spin-
+ning torus colonies that have proliferated as a trope in science fiction. Further-
+more, readers are likely to continue this assimilation by positing the gods as
+humanly controlled myth—after
+ all. Enlightenment thinkers and Marxists long
+ago told us that religion is used to manipulate the masses. These gods seem to
+be human attempts to solidify through ideology, as contemporary thinkers would
+tell us, the prevailing power structure, which is controlled in this tetralogy by
+"Mainframe." If the technological explanation were fully satisfying. The Long
+Sun would be a "rationalized fantasy."
+My brief account of how a reader might analyze this opposition of science
+fiction and fantasy, however, necessarily distorts the actual experience of read-
+ing the four volumes that constitute The Book ofthe Long Sun. Although ques-
+tions about this world this may predominate early, clues are so sparse the reader
+will focus elsewhere. Most of
+ us focus on the plot, as we follow the protagonist,
+Patera Silk, in his quest to respond to the initial charge of a different god, the
+Outsider, not one among the nine. As instructed by tbe Outsider, Silk strives to
+save his manteion, located in a poor neighborhood, and it is at risk of being
+sold. Furthermore, the world we're immersed in is one we begin to inhabit much
+as the characters
+ do. This world is dense and intricate, rich in detail, with recur-
+ring street names, new weapons—a needier, for instance, tbe equivalent of  a .22
+pistol. For the characters this whorl is the only world they know. The reader's
+angle is only slightly different, and only occasionally is a clue given to invoke
+again the issue of who the gods are or where this world is. Surely, most readers
+would assume, we will eventually find out who's manipulating these gods, these
+T.V. screens, and for what purpose, and the assumption that such gods will be
+rationally explained is likely to persist through all four volumes. Ultimately,
+however, Wolfe uses the instability of science fantasy as a genre for unique
+155
+=== PAGE 4 ===
+John Gerlach
+twists. We could see how by analyzing a number of different strands, but I will
+focus first on the gods themselves and then on taluses and chems—mechanical
+people—to observe how science fantasy works.
+The gods of this book, creatures of the fantasy half of the genre, have a cer-
+tain power and authority. We can "believe" in them. They have not appeared for
+over thirty years, but they are beginning to appear again—twelve theophanies
+on sacred windows over the four volumes of the Long Sun, in addition to seven
+possessions (Turner, intemet). The theophanies have a certain majesty, given
+the swirling hues that announce them on the sacred windows and the magical
+conditions under which the gods can be heard—only those without sexual rela-
+tions, with a few exceptions, can understand the message—hence a celibate
+clergy is needed to interpret what others can see and only partially hear. Gener-
+ally in the course of
+ the theophanies those rules seem to hold, and the condition
+of celibacy itself hardly seems something accessible to technological manipula-
+tion. And the gods deliver traditional messages—Echidna appears to demand that
+the city of Viron retum to worship of her daughter, Scylla, who in tum appears
+to demand the overthrow of the current rulers of the Ayuntamiento (the ruling
+body of the city) and the restoration the city's charter, as well as the release of
+prisoners,
+ A god insisting on her power and rights, her tradition and appropriate
+worship, matches the way we expect gods, including the God of the Old Testa-
+ment, to behave.
+Scenes in which a god appears are strong scenes, climactic scenes, and their
+strength and violence are not easily explained away, Maytera Marble, seem-
+ingly possessed by Echidna, interrupts Musk's assassination plot at a ceremony
+and holds him at the flaming altar, buming him as a sacrifice, as Echnidna's
+familiars—vipers—appear.
+ As elements of fantasy and myth reenacted, theophanies
+are powerful experiences. Curiously enough, Wolfe has even argued in an inter-
+view that "the gods of paganism were real," meaning that they were real pow-
+ers, but not worthy of worship—one instance where Wolfe, a Catholic, confessed
+he "split off from conventional Catholic thinking" (Jordan io).
+Strong, however, as these fantasy elements are, the gods are clearly computer
+beings. The goddess Kypris, possessing the human character Chenille, uses terms
+like "copy" and "erase" to explain how parts of the gods can be put in people, all
+under the control of the gods at Mainframe (3:107-9), And these are gods that
+can die. As Chenille (then possessed by Scylla) reveals, the god Pas, the father
+of the gods, has long been dead: "We wiped him out of core thirty years ago"
+(2:262), As another god, Tartaros, explains to Auk in the tunnel, "The faces we
+had as mortals have rotted to dust, and the voices we once possessed have been
+still for a thousand years. No augur, no sibyl in the Whorl, has ever seen or
+heard them. What your augurs and sibyls see, if they see anything, is the self-
+image ofthe god who chooses to be seen" (3:231),
+These gods are representations of a human family, and very much a family of
+squabblers, Kypris, who is not one of the daughters of Pas, but rather his lover,
+156
+=== PAGE 5 ===
+Wolfe's Book of the Long Sun
+is particularly jealous ofthe rest, commenting on "homely little Scylla, with her
+father's temperament and her mother's intellect" and on Pas, who wanted to wipe
+Echidna out of core (4:189-90) once he felt she would try the same on him.
+What Wolfe can do with the ambiguity of the gods, what kind of storytelling
+energy he can derive from that, we can best see in one particular theophany. At
+one point the goddess Scylla has possessed Chenille—a large raspberry-haired
+tart from Orchid's brothel—who maintains her normal appearance, which in her
+case is naked (satisfying one of McClintock's descriptors for fantasy!), while the
+group remains on
+ a joumey. The "Daddy" the goddess speaking through Che-
+nille refers to in what follows is Pas, the father of the gods. As the group passes
+glowing windows of cookshops and taverns . . . late diners bound for rented beds
+stared rudely at Chenille's nakedness, or resolutely did not stare. "Six children after
+me! Daddy had this thing about a male heir, and this other thing about not dying." A
+drunken carter tried to tweak her nipple; she gouged his eyes with both thumbs and
+left him keening in the gutter. "Molpe was just another girl, but you would have
+thought Tartaros would do it. Oh, no. So along came little Hierax, but even Hierax
+wasn't enough. So then three more girls, and after that—I suppose you already knew
+we could take you over like this?" (2:261-62)
+Patera Silk, whom Chenille/Scylla is addressing, does not question whether
+the Chenille he knows could be possessed; his concems about the nature of his
+world are not those of the reader. He does not, as does the drunken carter, try to
+take advantage of the opportunity of Chenille's nakedness; instead he accepts
+the concept of a god talking to him, because he has been raised to know the
+world as one that these gods rule. If we are inclined to look down on Silk be-
+cause he's hoodwinked by these "gods," we are also likely to look up to him as
+considerably more noble than the drunken carter. The reader
+ is constantly tricked
+into accepting Silk's position, believing these things are "actually happening,"
+because that's how everyone within the novel sees them. Yet at another level the
+reader's response is tinged with the humor of knowing that a theophany such as
+this cannot be exactly as Silk sees it. In that sense the continual instability ofthe
+genre, our continuing tendency to be pulled in imaginatively to something we
+rationally know can't be so, is interesting to the reader scene by scene, moment
+by moment. In terms of the Encyclopedia of
+ Fantasy, then, science fantasy does
+what's central to all forms of fantasy—it modifies our  PERCEPTION.
+At the same time readers may enjoy local effects, larger questions remain.
+We would most clearly be able to confirm the assumption that through science,
+human manipulation and not the "real gods" of fantasy rule, if we could under-
+stand how the inhabitants are being led into an Exodus, and where they are
+going, in the final volume. We know that Pas, or something manipulating his
+image, even though it has supposedly been erased, is guiding the Exodus; but
+only a few inhabitants escape at the end, and more questions emerge—is Patera
+Quetzal, who seems to be gaining influence, in fact an inhumi, a vampire-like
+157
+=== PAGE 6 ===
+John Gerlach
+fantasy creature from of a type imagined in other fictions by Wolfe, and can he
+control the Exodus? Or is Typhon, a godlike character from the previous tetral-
+ogy. The Book ofthe New Sun, the reality behind Pas? Ultimately Wolfe seems
+to be locating the whorl not in our world but in his previous fictions, endlessly
+deferring the questions of what is figure, what is ground, what is science, and
+what is fantasy.
+Even more significantly, the motif of the Outsider, present but submerged
+from the beginning, ultimately destabilizes even the assumption that we can
+locate the whorl within Wolfe's previous fiction or that science can be used to
+ground our conception of the whorl. Initially the Outsider is a very minor pres-
+ence, appearing only three times, none on sacred windows. How this god relates
+to Pas and the others is a continual problem for Silk. He knows of selected
+references to the Outsider in the Chrasmologic Writings, which are treated as a
+kind of sacred scripture. But this god, the one who appeard to Silk as he played
+ball on a court witb his pupils, the god who had "always been behind [Silk] and
+standing (as it were) at both his shoulders had, after so many years of pregnant
+silence, begun to whisper into both his ears," tbis god who, after he is known,
+"nothing could ever be tbe same," is a driving force for Silk, a force that will
+make him question wbat kind of world be does live in (i :9).
+An entirely rational, scientific explanation of Silk's perception of tbe Out-
+sider is offered—Dr. Crane discounts the experience, in a sense repeating the
+original tendency of the reader to imagine fantasy in the context of science:
+"'You had a cerebral accident, that's all. Most likely a tiny vein burst as a result
+of your exertions during the game. When that happens in the right spot, delu-
+sions like yours aren't at all
+ uncommon. Wemicke's area, it's called.' He touched
+his own bead to indicate the place" (2:280). The text encourages the reader to
+develop hypotheses about who the Outsider is from minimal clues, going be-
+yond Dr. Crane's skepticism. The Outsider, we leam, made men and women of
+mud "according to one somewhat doubtful passage in tbe Writings" (2:101). In
+another passage Silk further explains the vision the Outsider first gave him on the
+ball court: "There was a naked criminal on a scaffold, and we came back to that
+when he died, and again when bis body was taken down. His mother was watch-
+ing with a group of
+ his friends, and when someone said he had incited sedition,
+she said that she didn't think he had ever been really bad, and tbat she would
+always love him" (2:273). What Silk is hearing is scripture from our world,
+skewed. We recognize Mary's response to the crucifixion, Mary who like any
+loving mother of
+ a son accused of crime, believes He wasn't a bad boy after all.
+One way to understand the Outsider is to focus on the effect he has on Silk.
+The Outsider does not possess Patera Silk as Kypris possesses Chenille; the
+Outsider enlightens
+ Silk. And it is this enlightened Silk who shows patience and
+understanding to the frightful yet piteous Mucor, the girl at times chained by
+her father. Blood, to control her eerie power of possession of others that seems
+to have none ofthe copy/erase technology associated with Pas or the other gods.
+158
+=== PAGE 7 ===
+Wolfe's Book of the Long Sun
+It is due to the Outsider that Silk, in dealing with the Ayuntamiento, surrenders
+in order to achieve peace, in Christ-like manner overcoming opposition by re-
+nunciation. Ironically his moral behavior bas grown from tbe obedience re-
+quired of augurs in the Chrasmologic writings, obedience that is possibly a
+form of manipulation; but Patera Silk can apply tbat morality beyond anything
+"Mainframe" might dictate. He is far beyond manipulative augury and beyond
+the cynicism of such as Quetzal, who knows Pas is dead—the priest who knows
+God is Dead theology—but who conceals that knowledge merely to keep the
+morals of the inhabitants of the whorl in place.
+At the same time the Outsider is gradually revealing himself to Silk, Wolfe
+gradually reveals the Outsider to the reader. Crane once refers to the Outsider as
+a "minor god" (2:275), but perhaps the most delicious irony of all is in the
+preface, entitled "God, Persons, and Animals Mentioned in the Text," placed
+before volume 2, where the Outsider is described as "the minor God who en-
+lightened Silk"; subsequent volumes offer a truer picture—in the preface to
+volume
+ 3 the Outsider becomes "the god ofthe broken and the disparaged whose
+realm lies outside the Whorl," and by volume 4, simply and most accurately
+"the god of gods."
+The ultimate instability, the ultimate shift in figure-ground relationships, tums
+out not to be between science fiction and fantasy at all but between fiction and
+theology. That shift is not a necessary product of science fantasy—science fan-
+tasy need not devolve into metafiction or theology. But the fluidity of bound-
+aries of interpretation and the need for reversal due to the instability of science
+fantasy easily allows Wolfe his major surprise: tbe Outsider is the God of our
+world. Readers, instead of finding themselves coping with tbe impossible ob-
+ject of
+ a mixed genre, are coping with the longstanding and equally impossible
+hypothesis of tbe dual nature of our earthly world, tbe creation of a God who
+bas given us not only the Chrasmologic Writings but the Bible as well. He who
+built the Long Sun also built our world.
+The Book ofthe Long Sun is a rich, multi-stranded work, and tbe theme of the
+gods/Outsider, significant as it is, is but one of many. Wherever we look, the
+issue of whether science and fantasy can co-exist ultimately dissolves into merry
+ironies and beyond tbem into the context of our very familiar cultural concems.
+Chems, for instance, provide many such rich ironies. Chems such as taluses,
+huge ones that can serve as soldiers or security staffs and that can hold perfectly
+plausible conversations with humans (or biochemicals, as humans are known
+in the
+ Long Sun), provide satire on human labor contracts; their presence in a high-
+tech world also offers Wolfe a chance for an extended leg-puller on readers too
+eager to find fully scientific explanations. One reads attentively to follow bow
+taluses are constructed, but they seem like the products of
+ a nineteenth-century
+foundry, not a silicon culture. Their heads are made of brass, explains Swallow,
+a talus salesman: "A talus's head requires some pretty complicated castings,
+and brass is easier to cast than iron, so we use that for the head" (4:134).
+159
+=== PAGE 8 ===
+John Gerlach
+Chems that seem more human, like the Mayteras, in effect nuns that assist the
+Pateras in teaching schools, are evidently capable of some kind of reproduction
+and can cannibalize each other for
+ parts. The biggest stretcher is that chems can
+reproduce. They in fact have not, but they were programmed to do so. As
+Hammerstone, a soldier chem explains to Silk, "Each of us is hardwired with
+half the plans. But the thing is, it might take us a year or so if we're lucky,
+maybe twenty if
+ we weren't, where you bios can do the main business any night
+after work" (2:224). When Marble proposes to make a child with Hammerstone,
+the joke is again sexual. Nettle, a young girl at Silk's manteion, announces when
+caught spying, "Maytera caught me and made me quit, but when she went to
+work on her child again I came back" (4:316). Nettle seems to witness at the
+keyhole a comically primal Freudian scene between robots.
+Shy and supportive, a chem like Mint can be inspired by the gods to become
+General Mint, commander ofthe rebellion against the Ayuntamiento. Details of
+the their bodies come as surprises to the reader: as Maytera Marble comforts
+Silk, "smiling she clasped his hand in hers, surprising him. The soft skin had
+wom from the tips of her fingers long ago, leaving bare steel darkened like her
+thoughts by time, and polished by unending toil" (1:60). The image is hardly
+plausible if we wish to read with the eye of the scientist, and in that sense sci-
+ence fantasy is consistently inconsistent. But most readers will be more pleased
+than bothered, for we perceive not so much the metal, but a metaphor for fingers
+worked to the
+ bone. We take these dedicated and loving women not as mechani-
+cal creatures at all, but as people, interesting people in an intricate and interesting
+fiction, which itself
+ begins to lose its boundaries, as I hope I have demonstrated,
+as fiction at all. Just as with the gods and the Outsider we are ultimately con-
+fronted with the mysteries of duty and sexuality in our world, transformed un-
+der the illusion of the fictional imagination.
+The jolting ofthe fictional rules by which we interpret the game we're play-
+ing as readers, whether we're trying to figure out gods or chems, are not un-
+pleasant violations of genre rules but opportunities for humor and understanding
+that most of us would choose to enjoy with complicity. Wolfe affords the reader
+the luxury of a long escape from our world into a new Whorl but reminds us
+ultimately that this fiction is still grounded in our world. As The Encyclopedia
+of Fantasy argues, fantasy isn't an escape from mimetic reality, but an adjust-
+ment of perception that restores our ability to know our world, changing our
+perception of it.
+Science fantasy proves to be,
+ in Wolfe's hands, as stimulating as Scholes had
+hoped. Its very instability and inconsistency is precisely what generates spar-
+kling ironies, moving the reader through hypotheses of the primacy of science
+to comical revelations that characters from the whorl listen to with straight-
+faced credulity, to a vehicle to revisit one of our culture's most continuing and
+compelling mysteries—in what way is God in our world? Science fantasy, the
+160
+=== PAGE 9 ===
+Wolfe's Book of the Long Sun
+genre of impossible objects, easily lends itself to the exploration of longstanding
+issues of mysterious multiple perspectives within our own world.
+Notes
+1. I've capitalized the terms that lead to entries within the Encyclopedia of Fantasy. Such refer-
+ences constitute a sort of hypertext version ofthe most comprehensive theoretical approach to
+fantasy now available.
+2. Citations refer to the paperback editions. As I develop answers to questions about the relation-
+ship of the "whorl" of the Long Sun to our world, I stay within the four-volume series itself
+rather locate answers within other works by Wolfe. Discussion on connections to earlier works
+has been a hot topic on the intemet—see in particular the archive of discussions at http://
+moonmilk.volcano.or/whorl/archives, and the review by John
+ Clute. I received a copy of Michael
+Andre-Driussi's Quick and Dirty Guide to the Long Sun Whorl by the time I had finished this
+paper, but subsequent versions of this guide, available through Sirius Fiction in San Francisco,
+could be very valuable for further study.
+Works Cited
+Attebery, Brian. "Science Fantasy." Twentieth Century American Science Fiction Writ-
+ers. Vol. 8 of Dictionary of Literary Biography, part 2: M-Z. Ed. David Cowart and
+Thomas L. Wymer. Detroit: Gale, 1981. 236-42.
+Baber, Brendan. "Gene Wolfe Interview." 3/20/94. http://world.std.com/~pduggan/
+wolfeint.html (Aug. 1997)
+Clute, John. Rev. of Exodus from the Long Sun. The New York Review of Science Fic-
+tion 9 (June 1997): 6-8.
+Clute, John, and John Grant. Encyclopedia of Fantasy. New York: St. Martin's, 1997.
+Jordan, James B. "Gene Wolfe Interview." 1992. http://world.std.com/~pduggan/
+gwjbj.html (Aug. 1997)
+McClintock, Michael W. "High Tech and High Sorcery: Some Discriminations Between
+Science Fiction and Fantasy." Slusser and Rabkin 26-35.
+Scholes, Robert. "Boiling Roses: Thoughts on Science Fantasy." Slusser and Rabkin 3-18.
+George E. Slusser and Eric S. Rabkin, eds. Intersections: Fantasy and Science Fiction.
+Carbondale: Southern Illinois UP, 1987.
+Turner, Alice, "Theophanies and Possessions." 3 Feb 1997. http://moonmilk.cotn/whorl/
+archives/v2.html#iO3 (Feb. 24, 1999).
+Wolfe, Gary K. Critical Terms for Science Fiction and Fantasy. New York: Greenwood,
+1986.
+Wolfe, Gene. CaldeoftheLongSun. Vol. 3 of Book of the Long Sun. New York: Tor, 1995.
+. Exodus from the Long Sun. Vol. 4 of Book ofthe Long Sun. New York: Tor, 1997.
+. Lake ofthe Long Sun. Vol. 2 of Book ofthe Long Sun. New York: Tor, 1995.
+. Nightside the Long Sun. Vol. i of Book ofthe Long Sun. New York: Tor, 1993.
+Zelazny, Roger. "Fantasy and Science Fiction: A Writer's View." Slusser and Rabkin
+50-60.
+161
+=== PAGE 10 ===
+Copyright of Extrapolation (Kent State University Press) is the property of Kent State 
+University Press. The copyright in an individual article may be maintained by the author 
+in certain cases. Content may not be copied or emailed to multiple sites or posted toa 
+listserv without the copyright holder's express written permission. However, users may 
+print, download, or email articles for individual use.

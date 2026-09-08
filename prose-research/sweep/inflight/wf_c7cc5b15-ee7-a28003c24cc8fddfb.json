@@ -1,0 +1,40 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i375-389",
+ "lines": 98,
+ "firstTs": "2026-09-06T17:19:44.670Z",
+ "lastTs": "2026-09-06T17:25:24.016Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 22,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://dc.swosu.edu/mythlore/vol43/iss2/11/|mythlore",
+  "https://www.ceeol.com/search/chapter-detail?id=1266561|ceeol",
+  "https://jfs.today/index.php/jfs/article/view/34|jfs",
+  "https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/|med",
+  "https://nerdist.com/article/house-of-the-dragon-leaves-out-fire-and-blood-unreliable-history-game-of-thrones/|nerdist",
+  "https://dc.swosu.edu/cgi/viewcontent.cgi?article=3342&context=mythlore",
+  "https://dc.swosu.edu/mythlore/vol43/iss2/11/",
+  "https://web.archive.org/web/20260104003407id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3342&context=mythlore",
+  "http://web.archive.org/cdx/search/cdx?url=dc.swosu.edu/cgi/viewcontent.cgi*&output=text&fl=timestamp,original,statuscode,mimetype&filter=original:.*3342.*&limit=20",
+  "https://web.archive.org/web/20251004113739id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3342&context=mythlore",
+  "https://web.archive.org/web/20251106025859id_/https://dc.swosu.edu/cgi/viewcontent.cgi?params=/context/mythlore/article/3342/&path_info=11._damkjaer.pdf",
+  "https://jfs.today/index.php/jfs/article/view/34/31",
+  "https://jfs.today/index.php/jfs/article/download/34/31/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 15 claims verified against raw sources; checkpoint written.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "a28003c24cc8fddfb",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a28003c24cc8fddfb.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i375-389.json",
+  "exists": true
+ }
+}

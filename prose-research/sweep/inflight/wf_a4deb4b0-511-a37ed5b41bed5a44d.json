@@ -1,0 +1,24 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 170,
+ "firstTs": "2026-09-07T15:51:50.747Z",
+ "lastTs": "2026-09-07T16:03:54.858Z",
+ "tools": {
+  "Bash": 43,
+  "Write": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/scratchpad/skeptic-912/promise.md"
+ ],
+ "lastAssistantText": "I'll start by recording the dock state and reading the receipt and brief in full.",
+ "run": "wf_a4deb4b0-511",
+ "agent": "a37ed5b41bed5a44d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_a4deb4b0-511/agent-a37ed5b41bed5a44d.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

@@ -1,0 +1,11 @@
+§913 L-MAT landing (register car 3): the edge-shared bundles rebuild at the tip — aiGrounding's sourceHash 20a25783c91da70a -> 7f6db544ccb813f0; the four sibling hashes byte-identical, re-stamped in one build window
+
+Why the register moved: car 10 (a75faa3a7) cured a sentence in src/domain/density/densityLaw.js, which is one of the 74 inputs of supabase/functions/_shared/aiGroundingBundle.js. The whole-suite proof at a75faa3a7 (whole-913.log) named the consequence exactly: aiGroundingBundle.freshness red with the tree hashing to 7f6db544ccb813f0 against the recorded 20a25783c91da70a, and edgeSharedBundleReproducibility red on the same recorded hash. This car is the regeneration the freshness test prescribes (node scripts/build-edge-shared.mjs), run at 34fb45c38 (registers-913.log, 20:42): aiGrounding 7f6db544ccb813f0 (the predicted value, to the digit); aiCharter 150a3a3850539e85, aiOutputSchema 0a41d171c5a47d71, analyticsEvents 0a6ba64ce0b8d5e2, intentAtlas 9136e063f280d77f — all four unchanged; their meta files carry only the new generatedAt, which the reproducibility test's build-window arm requires of all five together. The aiGrounding bundle text differs from HEAD by its banner's Source hash line alone (numstat 1/1).
+
+A dock hazard met and cured on the way, recorded for the next builder: a dock cut by mkdock.sh carries node_modules as per-package SYMLINKS into the main tree, and esbuild resolves a symlinked package to its real path — so the first rebuild in this dock recorded ../../../../../../../Users/cstokes/Desktop/settlement-engine/node_modules/… for immer and seedrandom, moved aiCharter's and aiOutputSchema's hashes and rewrote module names inside two bundles. That output was discarded (git checkout), the two packages were replaced by APFS clones (cp -Rc) in the dock's node_modules, and the rebuild above produced the committed inputs and hashes exactly. No builder byte changed.
+
+Proof (bundles-913.log): Tests  127 passed (127) across the five freshness suites and the reproducibility suite, run under the chair's hold with zero other runners.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

@@ -1,0 +1,18 @@
+{
+ "role": "regrade",
+ "name": "ai",
+ "angle": null,
+ "tag": "regrade-r11",
+ "lines": 8,
+ "firstTs": "2026-09-07T09:01:53.428Z",
+ "lastTs": "2026-09-07T09:01:53.673Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 7:50am (America/New_York)",
+ "run": "wf_6dd3b009-2b0",
+ "agent": "a0477656eea75f8f6",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_6dd3b009-2b0/agent-a0477656eea75f8f6.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

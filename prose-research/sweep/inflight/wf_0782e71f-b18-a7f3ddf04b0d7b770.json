@@ -1,0 +1,23 @@
+{
+ "role": "finder",
+ "name": "dnd",
+ "angle": "scholarship-history",
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T09:51:06.125Z",
+ "lastTs": "2026-09-06T09:51:06.747Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_0782e71f-b18",
+ "agent": "a7f3ddf04b0d7b770",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_0782e71f-b18/agent-a7f3ddf04b0d7b770.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
+  "claims": 72,
+  "complete": false,
+  "mtime": "08:26:58"
+ }
+}

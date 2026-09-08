@@ -1,0 +1,50 @@
+SEAT-78 car 3: the second verdict caller had no test in the estate at all, and lighting it changes whether the seat falls
+
+⛔ THE GAP, MEASURED BEFORE IT WAS CURED. `resolveCoupVerdict` has TWO production callers and
+SEAT-7a wires both — its own message says wiring one without the other "is a silent PARTIAL
+lighting". Its dormancy fence drives only `coup.js`. And the return-coup path was not merely
+unfenced: `grep -rln 'return_coup\|deployment_return_coup' tests/` returns ZERO FILES at this tip,
+so `deploymentReturn.js`'s coup branch had NO test of any kind in the whole estate — a lane that
+deleted the `forceRatioFactor` line from it would have broken nothing anywhere. That is the
+per-key dormancy FENCE this lane was chartered to build (L-HOMES P13's shape: a dark half plus a
+lit control per key), and the half that was missing is the one that mattered.
+
+⚠ THE FIRST FIXTURE DRAWN WAS VACUOUS, AND THE TRAP IS THIS SUITE'S OWN, ARRIVING THROUGH A SECOND
+DOOR. A plain contested vassal at legitimacy 40 gives a lit factor of 0.984466 — the mechanism is
+demonstrably alive — and yet the two arms emit BYTE-IDENTICAL output (1040 = 1040 bytes), because
+the seat falls at that seed either way and no emitted field carries pHold's provenance. An
+aliveness arm written there would have passed while proving nothing, exactly as the header's
+recorded un-gated-incumbent trap did. So the fixture is chosen BY SWEEP, not by taste: 3,600 points
+over legitimacy score × incumbent power × challenger power × sixteen seeds, of which 189 differ,
+minimum factor 0.917517. The pinned point is the strongest form available — `seed 's8'`,
+legitimacy 0, incumbent 55, challengers 20, factor 0.945284: **DARK emits NO OUTCOME AT ALL (the
+order held) and LIT emits `coup_succeeded` / `deployment_return_coup`.** The flag changes whether
+the seat falls, through the real return writer.
+
+WHAT LANDS: six arms appended to the EXISTING fence file — no new test file, so no new-file census
+bill — mirroring the coup-side half exactly (no rules object · explicitly false · six truthy-
+non-true values · an unrelated lit key · the aliveness arm) plus one the coup side does not need:
+a NEGATIVE CONTROL proving the branch emits under DARK rules at another seed, so the empty dark
+array at the pinned seed is a HELD SEAT and not an unreachable path. The four preconditions that
+gate the branch (not occupied · not besieged · junior side of a vassal edge · ratio clears
+`SPLINTER_RATIO`) are written into the fixture's header so a later tuning cannot strand the arms
+silently.
+
+RECEIPTS: `eslint` on the file **EXIT=0**, zero output. ⛔ **THE VITEST RUN IS OWED, NOT CLAIMED** —
+the chair ordered ALL lane vitest held for a gate-class run, so both suites were instead executed
+verbatim under a node stand-in for `vitest` (`describe`/`it`/`expect` shim, the file's own text with
+only its import specifiers rewritten, run from the dock): **irregularForceDormancy.byteIdentity
+PASS 11 FAIL 0** and **irregularForce PASS 9 FAIL 0**, exit 0 both. That is executed evidence that
+every assertion holds; it is NOT a vitest green and is not offered as one. OWED-UNTIL-RESUME:
+`sh scripts/gate-mutex.sh --run -- npx vitest run tests/domain/irregularForce.test.js
+tests/domain/irregularForceDormancy.byteIdentity.test.js tests/lint` plus
+`tests/lint/sovereigntyLightingContract.walker.test.js` for the title census.
+
+PREDICTED REGISTER MOVEMENT FROM THIS CAR (the chair's act, not taken here): +1 suiteTitle and +6
+titles in the lighting census; ZERO new files; no fixture, so no golden-freeze register row (the
+file carries no `process.env.UPDATE_*` and mints no surface).
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: SEAT-78
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

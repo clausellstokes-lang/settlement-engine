@@ -1,0 +1,264 @@
+=== #59 [VERIFIED_VERBATIM] pos53
+CLAIM: Character speech comes from listening to what people actually say as well as what they mean; Remora and Incus are slight exaggerations of real people, and Oreb manages only two syllables.
+TW: "Oreb can manage only two syllables"
+NOTE: Same SF Site capture: "I listen to people, what they actually say as well as what they mean, and how they say it. Both Patera Remora and Patera Incus speak as slight exaggerations of people I've met." And: "Oreb [the night chough, a talking bird] talks, but Oreb can manage only two syllables: 'Good bird! Watch out! Bad boy. Iron girl. Good Silk!'" All three limbs verbatim.
+
+=== #60 [VERIFIED_VERBATIM] pos54
+CLAIM: For about half the first draft of Long Sun Wolfe did not know who was writing it, considered Maytera Marble, settled on Horn and rewrote accordingly.
+TW: "For about half the first draft, I didn't know who was writing The Book of the Long Sun, and considered various characters -- Maytera Marble, for example. I finally settled on Horn, and did the rewrites with that in mind."
+NOTE: Every limb verbatim on the SF Site page (Wayback 20020703232613): half the first draft, not knowing the writer, Maytera Marble as a considered candidate, settling on Horn, rewrites done with that in mind.
+
+=== #61 [VERIFIED_VERBATIM] pos55
+CLAIM: He chose Short Sun's interwoven narrators because telling it in third person would have been dead on the page; the difficulty was balancing storylines.
+TW: "I could have done everything in third person, but it would have been dead there on the page. The chief difficulty was balancing the stories -- not letting one storyline run away with the book."
+NOTE: Quote verbatim. The interviewer's question frames the approach as the interweaving of past/present with uncertain narrator identities, so 'interwoven narrators' is the question's own wording. Minor nuance: Wolfe's primary stated reason is 'that was what I had to do to tell the story'; the third-person remark is his supporting contrast, exactly as the claim renders it.
+
+=== #62 [VERIFIED_VERBATIM] pos56
+CLAIM: Daisy, principal writer of the Whorl chapters, strings others' accounts into plausible incidents and has deliberately falsified nothing, leaving errors to ignorance not intent.
+TW: "Daisy is the principal writer of the storyline back on the Whorl... She has done her best to string the incidents together and make everything plausible. She has deliberately falsified nothing."
+NOTE: Quote and the first three limbs verbatim. The last limb ('errors to ignorance not intent') is the direct entailment of the question it answers -- 'Have Hoof, Hide, Daisy, and Vadsig got major details wrong, deliberately, or out of ignorance?' -- but note that Wolfe does not concede the one alleged error: on the godling's size he replies 'he is far too large if he is structured along familiar lines, but who said he was?'
+
+=== #63 [VERIFIED_VERBATIM] pos57
+CLAIM: Asked directly whether Pig is a godling, Wolfe says certainly, since there are telltale signs all through the book.
+TW: Q: "Is Pig a godling?" GW: "Certainly. There are telltale signs all through the book."
+NOTE: Direct question, direct answer, both verbatim; the interviewer's bracketed '[Hooray! But...]' confirms it was one of the deliberately blunt questions.
+
+=== #64 [VERIFIED_VERBATIM] pos58
+CLAIM: He is surprised readers missed the inhumi secret (they prey on us because we prey on each other), which he thought everyone would get.
+TW: "If human beings did not prey on one another, the inhumi could not prey on us. That's all. It isn't complicated, and I thought that everyone would get it."
+NOTE: Quote verbatim; the parenthetical restates Wolfe's conditional as a causal, which the page supports. Surprise is carried by the following sentence: 'Maybe the thought of human beings not preying on their own kind is just too foreign.'
+
+=== #65 [VERIFIED_VERBATIM] pos59
+CLAIM: Wolfe cites Roger Rabbit slipping the handcuffs 'only when it's funny' as the law binding writers: a gun on the wall in Act I must be fired.
+TW: Roger: "No, only when it's funny." -- "That is a profound expression of the law that governs all writers and performers... If there's a gun on the wall in Act I, it must be fired before the end of the play."
+NOTE: All three limbs verbatim: the Roger Rabbit handcuffs anecdote, the line as the law binding writers and performers, and the Act I gun.
+
+=== #66 [VERIFIED_VERBATIM] pos60
+CLAIM: He constructs a clued short story from one or more ideas and an ending image, answering the questions that image raises before writing.
+TW: "I have one or more ideas, and an ending -- a space ship takes off, and the blast fries someone who's been waiting outside. Who was that?... When I had answered those questions, I could write the story, and I did."
+NOTE: Verbatim, in answer to a question about his 'precisely-honed tales, with their wealth of subtle clues' and specifically 'In Glory Like Their Star'; 'clued' is the interviewer's descriptor, which Wolfe accepts ('Thanks. Thank you!') before giving the method.
+
+=== #67 [VERIFIED_VERBATIM] pos61
+CLAIM: Gevers characterizes Wolfe's range as writing alternately with limpid simplicity and formidable baroque density of diction, in the service of oblique many-layered fictions.
+TW: "he possesses an extraordinary stylistic breadth, writing alternately with limpid simplicity and with a formidable baroque density of diction; and all this in the service of oblique, many-layered, endlessly surprising and beautifully structured fictions."
+NOTE: Verbatim in Gevers's own introduction (bylined 'An interview with Nick Gevers', Copyright 2002 Nick Gevers); attribution to Gevers rather than Wolfe is correct. The same paragraph is reproduced verbatim in the 2003 Infinity Plus introduction.
+
+=== #68 [VERIFIED_VERBATIM] pos62
+CLAIM: Ambiguity is necessary in some of his stories and not in others; where present it contributes richness, but he doubts thematic closure is never attainable.
+TW: "Ambiguity is necessary in some of my stories, not in all. In those, it certainly contributes to the richness of the story. I doubt that thematic closure is never attainable."
+NOTE: All three limbs verbatim on the live infinityplus.co.uk page, answering Gevers's question about whether thematic closure is never attainable. Wolfe's 'I doubt that thematic closure is never attainable' is reproduced with its double negative intact.
+
+=== #69 [VERIFIED_VERBATIM] pos63
+CLAIM: The Knight's narrator is a contemporary American because Wolfe needed someone from outside who would not have grown up hearing of the Aelf and Angrborn.
+TW: "I felt I needed to bring in someone from outside, who would not have heard about the Aelf and Angrborn from childhood."
+NOTE: Verbatim, answering 'Why did you choose to make the narrator of The Knight a contemporary American?'; 'from childhood' is the page's wording for 'grown up hearing of'. Wolfe prefaces it with 'I've no good answer' before giving the reason.
+
+=== #71 [VERIFIED_VERBATIM] pos64
+CLAIM: Wolfe holds that people's pivotal life events as they actually occurred would not be believed, and that literature should not dumb reality down but smart it up.
+TW: "if you were to tell me the pivotal events of your life, as they actually occurred, I wouldn't believe you" / "Let's write literature in which we don't dumb it down. Let's 'smart' it up."
+NOTE: Both limbs verbatim in the Baber interview (Wayback 20060208231553). The 'smart it up' sentence puts 'smart' in quotation marks on the page.
+
+=== #72 [VERIFIED_VERBATIM] pos65
+CLAIM: Real complex character comes from people who are rotten only selectively, nice to their drinking buddies, unlike utopian or dystopian casts.
+TW: "most rotten people are only rotten selectively. They're not lousy and rotten to their kids, or they are, but they're nice to their drinking buddies."
+NOTE: Quote and the drinking-buddies limb verbatim. The utopian/dystopian contrast is the immediately preceding text ('Utopias in the utopian novels work because everyone is good and reasonable'; 'The dystopian novel... Everybody is lousy and rotten in all their relationships'), and the complex-character limb is Wolfe's next answer: Q 'So the goal is to make complex character?' GW 'I think that's what real human character is.'
+
+=== #73 [VERIFIED_VERBATIM] pos66
+CLAIM: Against a materialist correspondent Wolfe insists a piece of paper is a piece of paper and cheese is cheese, the animal-level knowing that living and, by implication, fiction require.
+TW: "the one thing that we really can't get along without is the realization that a piece of paper is a piece of paper... That's what you've got to do to live on the animal level." / "Knowing what it is. It is paper. It is cheese."
+NOTE: Quote verbatim; the correspondent is verbatim 'a materialist philosophy student who used to write to me', and the cheese figure is the mouse's 'I know cheese'. The fiction application is flagged by the claim itself as 'by implication' and is contextual: the materialism exchange grows out of Wolfe calling literary realism 'a dumbed-down part of reality'. The page never states the fiction consequence outright.
+
+=== #74 [VERIFIED_VERBATIM] pos67
+CLAIM: He defends mixing private eyes and witches in one SF novel because such people exist; he is not trying to write genres.
+TW: "I'm not trying to write genres, I'm trying to write a book."
+NOTE: Verbatim, and both existence defences are on the page for Free Live Free: 'there are real private eyes. Look in the phone book' and 'I've had witches give me their business cards... They're real people.'
+
+=== #75 [VERIFIED_VERBATIM] pos68
+CLAIM: Asked why he is drawn to deceptions that turn out to be true, Wolfe says it must be the unconscious hope that some of his will.
+TW: I'm sure it must be the unconscious hope that some of mine will.
+NOTE: Q2 on the page: 'What is his [Wolfe's] attraction to [pretences or deceptions that turn out to be true]? - I'm sure it must be the unconscious hope that some of mine will.' Quote matches word for word; both limbs (the question asked, the answer given) are on the page. The bracketed restorations of the abbreviated question are the editor's, as the page states up front.
+
+=== #76 [VERIFIED_VERBATIM] pos69
+CLAIM: Scenes Horn could not have witnessed are sourced within the fiction (an unnamed kite builder; prayers written by Horn and Nettle who heard Silk pray), and Wolfe points to a page in Exodus.
+TW: Please reread Exodus, p. 371.
+NOTE: Q21 asks about scenes 'hard to imagine Horn hearing about from witnesses'. Wolfe: 'Horn's information on the first came from the kite builder, who asked that his name not be used. Silk's prayers (etc.) were written by Horn and Nettle, who had heard him pray many times. Please reread Exodus, p. 371.' Every limb - unnamed kite builder, prayers written by Horn and Nettle who heard Silk pray, the Exodus page pointer - is present.
+
+=== #77 [VERIFIED_VERBATIM] pos70
+CLAIM: Horn and Nettle tell what happened, what probably happened and what must have happened, in dramatic form; their account is necessarily subjective and they make mistakes.
+TW: Horn and Nettle are doing their best to tell you what happened, what probably happened, and what must have happened, in dramatic form.
+NOTE: Q21a ('How trustworthy a narrator is Horn?'). The page continues: 'They are human beings, however, and make mistakes. (We all do, especially me.) Their account is subjective, necessarily, as all accounts are.' Quote exact; the subjectivity and mistake limbs both present.
+
+=== #78 [VERIFIED_VERBATIM] pos71
+CLAIM: Wolfe concedes the Mint/Marble location swap in Exodus is his mistake; Langford notes readers had been reading subtleties into his least typos.
+TW: You're right, and they are my mistakes.
+NOTE: Q28 asks about Mint and Marble seeming to exchange places near the end of Exodus, deliberate or an auctorial/editorial mistake. Quote exact. The editorial aside is signed with initials - '[DRL: You can't imagine how relieved this made me! We read subtleties into Wolfe's least typos....]' - and the name Langford does not appear on cc77 itself; the publication's own index at ansible.uk/cc/ states 'Cloud Chamber is another bloody Langford fanzine', so the attribution holds within the source.
+
+=== #79 [VERIFIED_VERBATIM] pos72
+CLAIM: Asked who or what Oreb is, Wolfe answers only that Oreb is a night chough, declining the symbolic reading the questioner wanted.
+TW: Oreb is a night chough.
+NOTE: Q1: 'Who or what is Oreb? - Oreb is a night chough.' Quote exact, and the declining-the-symbolic-reading limb is carried by the editorial bracket that follows: 'Needless to say, the questioner hoped for an answer concerning the bird's symbolism or significance....'
+
+=== #80 [VERIFIED_VERBATIM] pos73
+CLAIM: Some questions (Quetzal's motive) are answered only by telling the reader to read the next series, keeping the withholding in force.
+TW: You will have to read The Book of the Short Sun.
+NOTE: Q23: 'What was Quetzal's motive in wanting a thriving human colony on Green? - You will have to read The Book of the Short Sun.' The quote fragment is verbatim. That Short Sun is the next series is confirmed lower on the same page: 'It is leading to the Book of the Short Sun. It will deal with the colonists...'
+
+=== #81 [VERIFIED_VERBATIM] pos74
+CLAIM: Wolfe reads Tolkien as having uncovered a forgotten Folk Law and built Middle-earth as a means of displaying it in the clearest light, planting the truth that society need not be as we see it.
+TW: What he did, then, was to plant in my consciousness and yours the truth that society need not be as we see it around us.
+NOTE: Quote exact. Supporting limbs on the page: 'There he found a quality -- let us call it Folk Law -- that has almost disappeared from his world and ours'; 'He uncovered a forgotten wisdom among the barbarian tribes... he had not only uncovered but understood it'; 'Having learned that, he created in Middle-earth a means of displaying it in the clearest and most favourable possible light.' The page's wording is 'created in Middle-earth a means' where the claim says 'built Middle-earth as a means'; the import is the same.
+
+=== #84 [VERIFIED_VERBATIM] pos75
+CLAIM: Gaiman's first two rules: trust the text implicitly because the answers are in there, and do not trust it farther than you can throw it because it may go off in your hand.
+TW: 1) Trust the text implicitly. The answers are in there.
+NOTE: Rule 1 exact. Rule 2 on the page: 'Do not trust the text farther than you can throw it, if that far. It's tricksy and desperate stuff, and it may go off in your hand at any time.' Both limbs of the claim are on the page.
+
+=== #85 [VERIFIED_VERBATIM] pos76
+CLAIM: The books subtly reshape themselves while you are away; Peace was a gentle Midwestern memoir on first reading and a horror novel on the second or third.
+TW: It only became a horror novel on the second or the third reading.
+NOTE: Rule 3 in full: 'Reread... And anyway, the books will subtly reshape themselves while you are away from them. Peace really was a gentle Midwestern memoir the first time I read it. It only became a horror novel on the second or the third reading.' Quote verbatim; both limbs present.
+
+=== #86 [VERIFIED_VERBATIM] pos77
+CLAIM: Wolfe is the kind of clever writer who sees no need to point out his cleverness; the intelligence serves the tale and makes the reader smart too.
+TW: He is smart to make you smart as well.
+NOTE: Rule 7: 'There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well.' Quote exact. The claim's 'the intelligence serves the tale' renders the page's 'the intelligence is less important than the tale'.
+
+=== #87 [VERIFIED_VERBATIM] pos78
+CLAIM: Rule 8 asserts the author was there and knows whose reflection they saw in the mirror, i.e. the withheld fact is known and recoverable.
+TW: He was there. He saw it happen. He knows whose reflection they saw in the mirror that night.
+NOTE: Rule 8 exact, quote verbatim as a prefix. The 'known' limb is rule 8 itself; the 'recoverable' limb is not in rule 8 but is supported elsewhere on the same page by rule 1, 'Trust the text implicitly. The answers are in there.'
+
+=== #89 [VERIFIED_VERBATIM] pos79
+CLAIM: Clute's summary law: a Wolfe story always knows more than it says and can almost never be fully grasped on a first reading.
+TW: A Wolfe story always knows more than it says, and can almost never be fully grasped on a first-time reading.
+NOTE: Quote exact. The entry is signed '[JC]' - John Clute - and the site footer reads 'Site and SFE content (c) 2011-2026 John Clute & David Langford', so the Clute attribution is supported on the page. The claim writes 'first reading' where the page has 'first-time reading'; the quoted limb itself is untouched by that.
+
+=== #90 [VERIFIED_VERBATIM] pos80
+CLAIM: The true story is conveyed by indirection and reveals itself through the reader's ultimate decipherment.
+TW: the true story within is generally conveyed by indirection, revealing itself through the reader's ultimate decipherment
+NOTE: SFE (Clute), Archipelago paragraph: 'for although the surface is nearly always described with precision in a Wolfe tale, the true story within is generally conveyed by indirection, revealing itself through the reader's ultimate decipherment and comprehension of the proper and hierarchical sorting of its parts.' Quote verbatim; both limbs on the page; the sentence is framed generally ('in a Wolfe tale'), so the claim's generalisation holds. Fetched raw via curl with a browser UA, HTTP 200.
+
+=== #91 [VERIFIED_VERBATIM] pos81
+CLAIM: Fifth Head's clues are almost subliminal on first pass but in retrospect or after rereading lucid and inevitable, and the key twists are extractable from the manuscript that tells the story.
+TW: almost subliminal - but in retrospect or after rereading almost invariably lucid and inevitable - clues
+NOTE: SFE, Fifth Head paragraph, quote verbatim inside 'the almost subliminal - but in retrospect or after rereading almost invariably lucid and inevitable - clues laid down in the text to govern its comprehension.' Second limb also verbatim on the same page: 'the evidence for the transfer (as very frequently in Wolfe) being extractable through an examination of the manuscript that tells the story.' Raw page.
+
+=== #95 [VERIFIED_VERBATIM] pos82
+CLAIM: Severian's unreliability is mostly omission; the gaps are not hidden but catch gently on first reading and insistently on rereading.
+TW: unreliability often being more sins of omission than outright deception; gaps catch gently, then insistently
+NOTE: Reactor/Evenson, raw page: 'with his unreliability often being more sins of omission than outright deception. There are deliberate gaps in his narrative, but he does little to hide these gaps: they seem meant to catch gently on the reader's attention upon first read, and more insistently as you reread.' Quote verbatim; every limb present.
+
+=== #96 [VERIFIED_VERBATIM] pos83
+CLAIM: The rearranged order of recounting, combined with gaps, leaves it uncertain whether Severian hides things or merely tells what he wants in the order he wants, making the unreliability feel human rather than literary.
+TW: not so much to veil the unreliability as to make it seem less literarily motivated, more informal and human
+NOTE: Same paragraph: 'There's also a significant disjunction in the order in which events happen and the order in which Severian chooses to recount them, and this rearrangement, combined with the gaps, makes it so that it is difficult to say at times ... if Severian is hiding something or simply telling the bits he wants to tell in the order he wants to tell them. That uncertainty is something Wolfe uses not so much to veil the unreliability as to make it seem less literarily motivated, more informal and human.' All limbs verbatim.
+
+=== #97 [VERIFIED_VERBATIM] pos84
+CLAIM: Severian's obscure wish to carry the moon-landing picture to a forest reads as random until pages later we learn the moon is now forested; Wolfe often passes such moments in silence.
+TW: feels wrong or random to us, when in fact we later discover that it's exactly right
+NOTE: Reactor: Severian 'says that "in some obscure way" he feels he wants to take the picture off the wall and carry it to a mountain forest. Only a few pages later are we told that the moon is now covered with trees ... So Severian's obscure desire to put the moon in the forest feels wrong or random to us, when in fact we later discover that it's exactly right.' The silence limb is also there: 'at least as often Wolfe passes over them in silence.' Quote verbatim (curly apostrophe on the page).
+
+=== #98 [VERIFIED_VERBATIM] pos85
+CLAIM: After absorbing Thecla and the Autarch the narrator is a multiplicity speaking as a oneness; a parenthetical memory of torturing for fun turns out to be Thecla's.
+TW: It is a multiplicity trying to speak as if it were a oneness
+NOTE: Reactor: after the alzabo feast Severian acquires Thecla, and 'Late in the tetralogy Severian encounters the dying Autarch, who encourages him to eat his forebrain ... Severian, once he consumes the Autarch's forebrain, is, in one body, a thousand and two.' Then: 'a multiform and unstable personality is telling a story as if it were stable and unified. It is a multiplicity trying to speak as if it were a oneness.' The parenthetical limb is verbatim too: 'Severian, in a parenthetical, recalls laughing with five other people ... as he plays with torture equipment ... only upon rereading did I realize that he has slipped into Thecla's memories here ... she and her wealthy friends used to sneak into the prison through a secret door and torture people for fun.'
+
+=== #99 [VERIFIED_VERBATIM] pos86
+CLAIM: A commenter observes that chapters tend to end in an incoherent hugger-mugger that the next chapter's opening explains.
+TW: chapters tend to end with an incoherent hugger-mugger, which is explained at the beginning of the next chapter
+NOTE: Comment thread on the raw page (9 comments were served in the HTML, no JS needed). Attribution confirmed: the comment sits directly under the byline 'NancyLebovitz', 4 years ago. Quote verbatim; the claim's hedge 'tend to' matches the commenter's own 'I think I noticed'.
+
+=== #100 [VERIFIED_SUBSTANCE] pos87
+CLAIM: Commenters note Severian resurrects Dorcas with the Claw and never states that he did so, even after he learns the Claw's power.
+TW: never acknowledges the Claw raised Dorcas, though he knows its power
+NOTE: No quote was supplied, so graded on substance. pfsmith: 'Severian indeed "resurrects" Dorcas with the Claw while traveling in the Botanic Gardens ... Severian is clearly aware of the Claw's power to resurrect others, because he uses it for this purpose several times later on. However, it seems very odd that nowhere in the text ... does Severian acknowledge that it was the Claw that raised Dorcas from the lake ... But Severian never explicitly states that he realizes he used the Claw on her.' AndyLove raised it first: 'Severian brings someone back to life accidentally (via the Claw ...) and never figures out that he's done so.' Both attributions verified against the comment bylines. One nuance short of verbatim: AndyLove says Severian never figures it out, pfsmith says he knows the Claw's power but never states it of Dorcas - the claim follows pfsmith.
+
+=== #101 [VERIFIED_VERBATIM] pos88
+CLAIM: Wolfe eschews neologism; his obscure real words work at a surface level, a mystery-clue level and an allusive level, which drives close reading and rereading.
+TW: prose works on at least three levels: superficial, a story-mystery layer, and an allusive layer
+NOTE: Gerwel/Moher, raw page: 'Wolfe eschews the use of neologism. The words that he uses ... are real English, Greek, or Latinate words, however obscure.' Then: 'its effect is to make the prose work on at least three different levels: There is a superficial meaning ... Below that, there is a deeper meaning which ties to one or another of the story's central mysteries, and below still that there is an allusive layer ...' and 'It is this density of language and its multiplicity of meanings which encourage close readings of Wolfe's texts, and which encourage multiple re-readings of his work.' Every limb verbatim.
+
+=== #102 [VERIFIED_VERBATIM] pos89
+CLAIM: Peace never states that its narrator is dead, in a memory-palace purgatory, and probably a multiple murderer; the reader must identify and solve the puzzle from clues.
+TW: what Wolfe never states explicitly - a puzzle which must be identified and then solved by the reader's own effort from clues in the text
+NOTE: Gerwel: 'what Wolfe never states explicitly - a puzzle which must be identified and then solved by the reader's own effort from clues in the text - is that the narrator is dead (the story is told by his ghost), that the setting from which he is reminiscing is Purgatory in the form of a memory palace, and that he is in all probability a multiple murderer.' All three unstated premises and the solve-from-clues limb are verbatim.
+
+=== #103 [VERIFIED_VERBATIM] pos90
+CLAIM: The opening sentence about the fallen elm becomes clear only when connected to a single, seemingly unrelated line of dialogue in the novel's final third.
+TW: the first sentence ... suddenly becomes clear (when a connection is made to a different, single, and seemingly unrelated line of dialog in the novel's latter third)
+NOTE: Gerwel: 'on re-reading Peace, the significance of individual words (such as a the first sentence "The elm tree planted by Eleanor Bold, the judge's daughter, fell last night.") suddenly becomes clear (when a connection is made to a different, single, and seemingly unrelated line of dialog in the novel's latter third).' Quote verbatim; 'final third' vs the page's 'latter third' is the same sense.
+
+=== #104 [VERIFIED_VERBATIM] pos91
+CLAIM: Severian cannot forget yet lies and is inconsistent; Latro cannot remember yet his narrative is consistent, an inversion that asks which narrator is trustworthy.
+TW: Latro has an inability to remember anything, yet his narrative is consistent throughout
+NOTE: Gerwel: 'the Latro sequence ... can be read as a inversion of the Book of the New Sun. At the most basic level, Severian has a stated inability to forget anything, though he can choose to lie and is inconsistent in his narrative. While Latro, by contrast, has an inability to remember anything, yet his narrative is consistent throughout. Which story, then, is the more stable? Which narrator the more trustworthy?' Quote verbatim; the inversion and the trustworthiness question are both on the page.
+
+=== #107 [VERIFIED_VERBATIM] pos92
+CLAIM: The sentences are clear, cut back and almost Hemingwayesque, while exotic nouns like 'burginot' estrange without obscuring.
+TW: Sentences clear, cut back, Hemmingwayesque; exotic nouns give alien tinge
+NOTE: Raw page (murrayewing.co.uk). Verbatim: 'it's quite cut back and simplified, almost Hemmingwayesque'; 'he generally only uses exotic nouns. The meanings of his sentences are quite clear, they're just given an alien tinge by having, for instance, a helmet referred to as as burginot' and 'you can often guess the rough meaning of the noun by its context, without having to resort to a dictionary' - estrangement without obscurity. Page spelling 'Hemmingwayesque' and 'burginot' both match the claim.
+
+=== #109 [VERIFIED_VERBATIM] pos93
+CLAIM: Wolfe takes Heinlein's 'the door dilated' further, using unexplained background details to imply worlds, and leaves questions half-answered as a feature.
+TW: Wolfe just takes Heinlein's unexplained detail to the next level
+NOTE: Raw page (murrayewing.co.uk). Verbatim: 'ever since Robert A Heinlein wrote "the door dilated" -- an unexplained background detail that (literally) opened a portal through which the reader could imagine an entire futuristic world. Wolfe just takes this to the next level.' Half-answered questions as a feature: 'those half-answered, or unanswered, questions are part of Wolfe's worlds, just as they're part of ours.'
+
+=== #110 [VERIFIED_VERBATIM] pos94
+CLAIM: Peter Wright's Attending Daedalus casts Wolfe as encoder and the reader as decoder of labyrinthine conundrums, with the element of choice as his principal device for confounding the reader.
+TW: Wolfe encoder, reader decoder; choice confounds the reader
+NOTE: Raw page (lareviewofbooks.org, HTTP 200, full article present). Verbatim: 'Wolfe is "encoder" and reader "decoder of elliptical yet elegantly labyrinthine conundrums" - or, as Wright says later ... "This element of choice is Wolfe's principal device for confounding the reader."' Source named earlier as 'Peter Wright's Attending Daedalus'. Minor context: the second Wright quote is glossed as being about The Book of the New Sun, but its own wording says 'Wolfe's principal device'.
+
+=== #111 [VERIFIED_VERBATIM] pos95
+CLAIM: Wright records that no reviewer recognised Weer's deathly state, making Peace Wolfe's first misinterpreted narrative.
+TW: No reviewer recognised Weer's deathly state; first misinterpreted narrative
+NOTE: Raw page (lareviewofbooks.org). Verbatim, attributed to Wright: 'as Wright points out, "no reviewer recognised Weer's deathly state ... and the ghost's story quickly became Wolfe's first misinterpreted narrative."' Both limbs (Wright as recorder; Peace as the first misinterpreted narrative) supported.
+
+=== #112 [VERIFIED_VERBATIM] pos96
+CLAIM: The reviewer maintains the novel contains as many readings as readers and resists the reading that Wolfe aims to confound.
+TW: Many readings as readers; disagrees Wolfe's goal is confounding
+NOTE: Raw page (lareviewofbooks.org). Verbatim: 'this novel contains many readings, as many readings perhaps as there are readers, which is as it should be' (prefaced 'I would maintain'). Resistance limb verbatim too: 'I vehemently disagree that Wolfe's goal is to confound the reader.'
+
+=== #113 [VERIFIED_VERBATIM] pos97
+CLAIM: Peace's first section collapses SF's cosmic perspective into religious ecstasy and cascades from metaphor to metaphor; no one else writes like that.
+TW: First section collapses SF's cosmic view with religion, ecstatically
+NOTE: Raw page (lareviewofbooks.org). Verbatim: 'Just in the first section, "Alden Dennis Weer," look how Wolfe collapses the cosmic perspective of science fiction with that of religion in an ecstatic description'; and after the second excerpt, 'And the passage goes on, cascading from metaphor to metaphor. No one else writes like that.' All three limbs supported.
+
+=== #114 [VERIFIED_VERBATIM] pos98
+CLAIM: Wolfe is quoted as saying of Weer that they have similar souls, against readings of Weer as the devil.
+TW: Wolfe has said of Weer, 'we have similar souls'
+NOTE: Raw page (lareviewofbooks.org). Verbatim: 'But Gene Wolfe is not evil, nor is he sympathetic with the devil, and Wolfe has said of Weer, "we have similar souls."' The sentence stands in the reviewer's resistance to Borski's reading that 'Alden Dennis Weer may be the Devil incarnate', so the 'against readings of Weer as the devil' limb holds.
+
+=== #115 [VERIFIED_VERBATIM] pos99
+CLAIM: Weer leaves stories unfinished and declines to narrate the visit to Gold's farm, later revealing he murdered the librarian; the reader must sift the evidence.
+TW: Weer withholds the Gold's trip; reader sifts evidence; Weer killed her
+NOTE: Raw page (blog.ayjay.org, HTTP 200). Verbatim: 'the reader has to sift the evidence to figure out what really happened' - said of Severian, then explicitly extended: 'The same is true of Weer's narration in Peace.' Also 'Often he leaves stories unfinished'; 'He explicitly says that he will not tell us what happened when he and the librarian Lois Arbuthnot visited a farm outside of town'; Weer's own line 'the trip Lois and I made to Gold's'; 'later it becomes pretty clear what happened: Weer killed her.'
+
+=== #117 [VERIFIED_VERBATIM] pos100
+CLAIM: Weer lives in a rambling memory palace of his own making whose rooms he can temporarily or permanently lose access to.
+TW: Rambling memory palace of his own making; rooms lost temporarily or permanently
+NOTE: Raw page (blog.ayjay.org). Verbatim and contiguous: 'He clearly lives, or "lives," in a rambling memory palace of his own making, each room of which is related to some season of his life. But the palace is not complete, and he can temporarily or permanently lose access to some of its rooms.' Every limb supported.
+
+=== #119 [VERIFIED_VERBATIM] pos101
+CLAIM: Weer's narration stops just before a character dies and resumes later, so murders are inferred from absence, a 'shadow narrative'.
+TW: Stops just before a death, resumes after; narrative defined by what isn't narrated
+NOTE: Raw page (the-solute.com). Verbatim: 'he often stops just before a character dies and resumes some time after, beginning with Bobby Black and ending with his secretary.' Inference-from-absence limb: 'crafting a narrative that's largely defined by what isn't narrated' and 'especially important if it's the last time he mentions a character, because that's the sign he doesn't want to tell us ... something'. The term appears hyphenated on the page - 'What's the shadow-narrative of his life' (also 'Shadow Life', 'Shadow Plot').
+
+=== #120 [VERIFIED_VERBATIM] pos102
+CLAIM: The Boy Scout knife that Weer can never locate, and the pun in 'my den, where I now never go', carry double meanings the narrator does not acknowledge.
+TW: 
+NOTE: Raw page (curl, HTTP 200). Quote exact: Weer lists rooms of his memory house, finishing with 'my den, where I now never go' — 'given how almost everyone calls him Den, of course that's the room he must never visit.' Knife limb also supported: 'since it's a Boy Scout knife, it has a meaning and not just a use'; 'Weer keeps looking in the rooms of his memory for the knife and not finding it'; 'Weer can't find his knife because he can't see what he did with it.'
+
+=== #121 [VERIFIED_VERBATIM] pos103
+CLAIM: The layered tales let Weer escape: as long as he keeps telling stories he need not face what comes next.
+TW: 
+NOTE: Exact: 'the sense that as long as Weer keeps telling stories, or remembering the stories he was told, he won't have to face whatever comes next.' Escape limb supported by the same paragraph: 'digressions and stories not so much building on each other as descending from each other ... a labyrinth in which Weer hopes to disappear.'
+
+=== #122 [VERIFIED_VERBATIM] pos104
+CLAIM: Gaiman's remark, quoted here, that Wolfe's narrators are scrupulously honest but only up to a point.
+TW: 
+NOTE: Exact, and attributed to Gaiman on the page: 'Gaiman notes that Wolfe's narrators are “scrupulously honest, but only up to a point.”'
+
+=== #124 [VERIFIED_VERBATIM] pos105
+CLAIM: The house functions as a point in space for a dead person to revisit his life, a motif Wolfe reused in 'Checking Out'.
+TW: 
+NOTE: Exact: 'the use of a house as a sort of haunting place, a point in space for a dead person who uses it as a mnemonic device, revisiting his life. Wolfe has employed this at least once since Peace: ... a short story written by Wolfe called “Checking Out.”'

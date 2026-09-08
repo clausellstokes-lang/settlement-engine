@@ -1,0 +1,7 @@
+Desk landing (register car 4): the JSX voice baseline banks the win the desks and DESK-900-TAIL made — the Tier-2 row stays red, banked as debt where the ratchet can see it
+
+The E-E JSX ratchet's per-file arm reported the fall (VOICE-JSX's 34 cures and TAIL's last em dash: the JSX arm "CURED, em 1 → 0, the refreeze legal"); the documented door for a fall is to lower or delete the file's baseline entry ("fell ⇒ bank the win"), which is what this car does by hand, because `UPDATE_VOICE_BASELINE=1` writes the Tier-2 baseline first through `writeShrinkOnlyBaseline` and that one THROWS on the Tier-2 RISE (frozen 311 vs 319 em, two files at 8 em as a total map over a producer's authored vocabulary) — the rise is BANKED as declared debt in the test ratchet (car 3544f35ef, magnitude files-over-baseline ceiling 2, OWED_CEILING 3), so the Tier-2 per-file arm stays red on purpose and the JSX arm goes green. Total JSX budget unchanged (a fall).
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

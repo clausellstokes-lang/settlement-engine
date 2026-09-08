@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i664-678",
+ "lines": 53,
+ "firstTs": "2026-09-06T18:39:16.735Z",
+ "lastTs": "2026-09-06T18:42:15.603Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 9,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+  "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+  "http://grognardia.blogspot.com/2009/02/high-gygaxian.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All three sources were fetched as raw HTML with a browser user agent (HTTP 200 each, no summarizer in the loop), stripped to text locally, and every quotation was matched mechanically against the raw text after quote-character normalization — all 15 quotes matched word for word.",
+ "run": "wf_a9298963-fdf",
+ "agent": "aa197dfbc8e4facf2",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-aa197dfbc8e4facf2.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i664-678.json",
+  "exists": true
+ }
+}

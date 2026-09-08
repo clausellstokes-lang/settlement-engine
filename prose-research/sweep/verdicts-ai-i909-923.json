@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 27,
+ "claims": [
+  {
+   "index": 909,
+   "feature": "metaphor discipline",
+   "claim": "Kriss argues that in the AI dismissive formula an X with Y and Z, one or both attributes are either already implicit in X or make no sense at all.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "either already implicit in X",
+   "page": "section on the 'an X with Y and Z' tic"
+  },
+  {
+   "index": 910,
+   "feature": "other: too much consistency or none",
+   "claim": "Kriss argues the model cannot get the balance right: either it imposes too much consistency, making its language redundant, or too little, turning it into drivel.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "it imposes too much consistency, in which case its language is redundant",
+   "page": "section on the 'an X with Y and Z' tic"
+  },
+  {
+   "index": 911,
+   "feature": "abstraction over the concrete",
+   "claim": "Kriss attributes the failure to the models never having experienced the world, so everything they know reaches them through statistical correlations within quantities of words.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "Everything they know about the world comes to them through statistical correlations",
+   "page": "section citing Woolf's 'great plateful of blue water'"
+  },
+  {
+   "index": 912,
+   "feature": "metaphor discipline",
+   "claim": "Kriss cites a generated phrase describing a studio that smelled of turpentine and dreams as a cheap literary effect that AI cannot avoid, since all it can do is pile concepts until they collapse.",
+   "source": "Sam Kriss quoting his own ChatGPT-5 output, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "smelled of turpentine and dreams",
+   "page": "section on sensory language"
+  },
+  {
+   "index": 913,
+   "feature": "reader and expert judgment",
+   "claim": "Kriss reports that researchers found most people vastly prefer AI-generated poetry to the actual works of Shakespeare, T.S. Eliot and Emily Dickinson.",
+   "source": "Sam Kriss relaying a study, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "most people vastly prefer A.I.-generated poetry to the actual works of Shakespeare",
+   "page": "closing section"
+  },
+  {
+   "index": 914,
+   "feature": "homogenisation",
+   "claim": "Kriss characterises the resulting public voice as mixed metaphors and empty sincerity, impersonal and overwrought, and says it is how corporations and elected officials now speak.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "Mixed metaphors and empty sincerity. Impersonal and overwrought.",
+   "page": "section on the Starbucks closure notice"
+  },
+  {
+   "index": 915,
+   "feature": "model era drift",
+   "claim": "Kriss reports that British MPs began opening speeches with 'I rise to speak', an American convention, and that on a single day in June it happened 26 times.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "On a single day this June, it happened 26 times.",
+   "page": "section on cultural smuggling"
+  },
+  {
+   "index": 916,
+   "feature": "model era drift",
+   "claim": "Kriss reports a Max Planck Institute for Human Development study that analysed more than 360,000 YouTube videos of extemporaneous academic talks and found AI language increasingly coming out of human mouths.",
+   "source": "Sam Kriss relaying a Max Planck study, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "analyzed more than 360,000 YouTube videos",
+   "page": "closing section"
+  },
+  {
+   "index": 917,
+   "feature": "other: what the machine says about itself is wrong",
+   "claim": "Kriss reports that ChatGPT describes its own prose as too clean and neutral, and asserts that this is not remotely true because the writing is not smooth or neutral but weird.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "It’s not smooth or neutral at all — it’s weird",
+   "page": "section beginning 'If we’re going to turn over essentially all communication'"
+  },
+  {
+   "index": 918,
+   "feature": "other: parody passage in the AI voice",
+   "claim": "Kriss opens the essay with a paragraph written in the AI voice as a demonstration, whose clauses include the claim that the writing does not open up the tapestry of human experience.",
+   "source": "Sam Kriss, parody passage written by the author in the machine's voice, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "It doesn’t open up the tapestry of human experience",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 919,
+   "feature": "register measured",
+   "claim": "Taha Yasseri compared 1,800 matched article pairs and found Grokipedia averages about 14,200 words against 9,400 on Wikipedia.",
+   "source": "Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "quote": "Grokipedia articles average about 14,200 words versus 9,400 on Wikipedia",
+   "page": "§3.2, results on the enlarged dataset"
+  },
+  {
+   "index": 920,
+   "feature": "register measured",
+   "claim": "Yasseri measured a mean Flesch-Kincaid grade of 19.3 for Grokipedia against 12.8 for Wikipedia across 1,811 matched pairs.",
+   "source": "Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "quote": "indicating more syntactically complex and less reader-friendly prose",
+   "page": "§3.2 and Table 1"
+  },
+  {
+   "index": 921,
+   "feature": "other: citation density",
+   "claim": "Yasseri measured 21.4 references per thousand words on Grokipedia against 90.2 on Wikipedia, and 2.87 headings per thousand words against 5.58.",
+   "source": "Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "quote": "longer but less lexically diverse articles, with fewer references per word",
+   "page": "Abstract and Table 1"
+  },
+  {
+   "index": 922,
+   "feature": "counter-evidence",
+   "claim": "Yasseri's measured lexical diversity gap is very small: type-token ratio 0.244 on Grokipedia against 0.248 on Wikipedia, a difference of 0.004 at p equals 0.02.",
+   "source": "Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "quote": "inflates sentence length and readability grade without a proportional increase in lexical variety",
+   "page": "Table 1 and §4 discussion"
+  },
+  {
+   "index": 923,
+   "feature": "discourse-level tells",
+   "claim": "Yasseri concludes that AI-generated encyclopedic content mirrors Wikipedia's informational scope but diverges in editorial norms, favouring narrative expansion over citation-based verification.",
+   "source": "Taha Yasseri, Trinity College Dublin, arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "quote": "favoring narrative expansion over citation-based verification",
+   "page": "Abstract"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 909,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one or both of Y or Z already implicit in X",
+   "note": "Raw page reached via Wayback raw capture web.archive.org/web/20251221211413id_/ (live nytimes.com returns 403 to a browser UA; the 20260127 capture is a paywall preview only, the 20251221 one carries the full text). Page: 'When it wants to be lightheartedly dismissive of something, A.I. has another strange tic: It will almost always describe that thing as “an X with Y and Z.” ... A lot of the time, one or both of Y or Z are either already implicit in X (which Reddit trolls don’t have Wi-Fi?) or make no sense at all.' Quote verbatim; every limb supported. Minor: the page hedges with 'A lot of the time', which the claim drops — the claim reads as an unquantified generic, not as 'always', so no limb is unsupported."
+  },
+  {
+   "index": 910,
+   "verdict": "PARTIAL",
+   "trueWording": "A.I. finds it very difficult to get the balance right",
+   "note": "Quote verbatim on the page: 'Either it imposes too much consistency, in which case its language is redundant, or not enough, in which case it turns into drivel.' Both horns of the dilemma are exact. The framing limb is not: the page says the model 'finds it very difficult to get the balance right', not that it cannot.",
+   "unsupportedLimb": "'the model cannot get the balance right' — the page asserts difficulty ('A.I. finds it very difficult to get the balance right'), not impossibility"
+  },
+  {
+   "index": 911,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they can never experience the world; knowledge is statistical correlation",
+   "note": "Page: 'they have a serious disability: They can’t ever actually experience the world... Everything they know about the world comes to them through statistical correlations within large quantities of words.' Quote verbatim; the Woolf 'great plateful of blue water' citation sits in the same paragraph, as the claim's page field says. Every limb supported."
+  },
+  {
+   "index": 912,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cheap literary effect; all they can do is pile concepts until they collapse",
+   "note": "Page: 'a “cluttered art studio that smelled of turpentine and dreams.” This is a cheap literary effect when humans do it, but A.I.s can’t really write any other way. All they can do is pile concepts on top of one another until they collapse.' Attribution also checks: the quiet-party story was ChatGPT-5's output ('That new model was an early version of ChatGPT-5. When I asked it to write a story about a party...')."
+  },
+  {
+   "index": 913,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Researchers found most people vastly prefer A.I.-generated poetry",
+   "note": "Page, near the close: 'Researchers found that most people vastly prefer A.I.-generated poetry to the actual works of Shakespeare, T.S. Eliot and Emily Dickinson.' Quote and all three named poets verbatim. Note the essay names no study, journal or authors — the claim correctly attributes it as Kriss relaying researchers, not as a primary finding."
+  },
+  {
+   "index": 914,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mixed metaphors and empty sincerity. Impersonal and overwrought.",
+   "note": "Page, in the Starbucks closure-notice section: 'Every day, another major corporation or elected official or distant family member is choosing to speak to you in this particular voice. This is just what the world sounds like now. This is how everything has chosen to speak. Mixed metaphors and empty sincerity. Impersonal and overwrought.' Quote verbatim, both sentences, and the corporations/elected-officials limb is on the page."
+  },
+  {
+   "index": 915,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "On a single day this June, it happened 26 times.",
+   "note": "Page: 'In the British Parliament, for instance, transcripts show that M.P.s have suddenly started opening their speeches with the phrase “I rise to speak.” On a single day this June, it happened 26 times. ... Among American lawmakers, however, beginning a speech this way is standard practice.' All three limbs — the phrase, the American convention, the 26 counts in one June day — are on the page verbatim."
+  },
+  {
+   "index": 916,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Max Planck study analyzed 360,000+ YouTube videos of academics' talks",
+   "note": "Page: 'A recent study from the Max Planck Institute for Human Development analyzed more than 360,000 YouTube videos consisting of extemporaneous talks by flesh-and-blood academics and found that A.I. language is increasingly coming out of human mouths.' Every limb verbatim, including the institute's full name."
+  },
+  {
+   "index": 917,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not even remotely true; it's not smooth or neutral at all — it's weird",
+   "note": "Page, in the section opening 'If we’re going to turn over essentially all communication to the Omniwriter': ChatGPT offers 'false modesty about how its prose is sleek and precise but somehow hollow: too clean, too efficient, too neutral, too perfect... In fact, this is not even remotely true. ... It’s not smooth or neutral at all — it’s weird.' Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 918,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It doesn’t open up the tapestry of human experience",
+   "note": "The essay's first paragraph is the AI-voice pastiche and contains the quoted clause verbatim; the second paragraph confirms its demonstrative function ('If you’re anything like me, you did not enjoy reading that paragraph... It’s one of them'). One nuance, not a limb of the claim sentence: the article never states who composed that paragraph, so the source field's 'written by the author' is an inference the page neither confirms nor denies."
+  },
+  {
+   "index": 919,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "average about 14,200 words versus 9,400 on Wikipedia",
+   "note": "arxiv.org/html/2510.26899v2 fetched live (HTTP 200). §3.2: 'Across the enlarged dataset, Grokipedia articles average about 14,200 words versus 9,400 on Wikipedia'. The 1,800 matched-pairs limb is the abstract's own figure ('a large-scale computational comparison of 1,800 matched article pairs'); Table 1's exact N is 1,811 and its Wikipedia mean 9,360 [4,710], both consistent with the rounded prose."
+  },
+  {
+   "index": 920,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Flesch–Kincaid grade 19.3 [6.6] vs 12.8 [9.9]",
+   "note": "Table 1 (N=1,811, values are means [SD]): Flesch–Kincaid grade 19.3 [6.6] Grokipedia against 12.8 [9.9] Wikipedia, Δ +6.5, p < 10^-100. Quote verbatim from §3.2: 'Readability, measured by the Flesch–Kincaid grade level (panel B of Figure 2), is again higher on Grokipedia, indicating more syntactically complex and less reader-friendly prose.' Every limb supported."
+  },
+  {
+   "index": 921,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "references/1k 21.4 vs 90.2; headings/1k 2.87 vs 5.58",
+   "note": "Table 1: 'References per 1k words 21.4 [7.4] | 90.2 [218]' and 'Headings (H2–H4)/1k words 2.87 [1.20] | 5.58 [8.32]'. Quote verbatim from the abstract ('it typically produces longer but less lexically diverse articles, with fewer references per word and greater structural variability'). Both figure pairs exact; note Wikipedia's reference SD (218) is more than twice its mean, so that comparison is heavily dispersed — the paper reports it without that caveat."
+  },
+  {
+   "index": 922,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "TTR 0.244 vs 0.248, Δ −0.004, p = 0.02",
+   "note": "Table 1: 'Lexical diversity (TTR) 0.244 [0.057] | 0.248 [0.049] | −0.004 | 0.02'. Quote verbatim from §4: 'Grokipedia’s language inflates sentence length and readability grade without a proportional increase in lexical variety.' The figures and the p-value are exact. 'Very small' is the claimant's gloss, not the paper's word — the paper says only 'lower lexical diversity' — but it is an arithmetic reading of the table's own Δ, and the SDs (0.057, 0.049) are more than ten times the gap, so the counter-evidence framing is sound."
+  },
+  {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mirrors Wikipedia’s informational scope but diverges in editorial norms",
+   "note": "Abstract, verbatim: 'These findings suggest that AI-generated encyclopedic content currently mirrors Wikipedia’s informational scope but diverges in editorial norms, favoring narrative expansion over citation-based verification.' Every limb present; the paper's hedge 'currently' and 'suggest' are softer than the claim's 'concludes', but the same sentence recurs as a conclusion in §4 ('It mirrors Wikipedia’s informational scope and linguistic tone but replaces community deliberation with algorithmic synthesis')."
+  }
+ ]
+}

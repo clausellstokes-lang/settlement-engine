@@ -1,0 +1,206 @@
+Bathtub Review: Lost Mine of Phandelver – Playful Void 
+
+ Skip to content 
+
+ January 13, 2025 
+
+ Bathtub Review: Lost Mine of Phandelver
+
+ Bathtub Reviews are an excuse for me to read modules a little more closely. I’m doing them to critique a wide range of modules from the perspective of my own table and to learn for my own module design. They’re stream of consciousness and unedited critiques. I’m writing them on my phone in the bath. 
+
+ The end of January marks my 100th Bathtub Review (not counting my I Read Reviews and Critique Navidad, so the number may be closer to 150 reviews in total), so I’m celebrating with an Introductory Extravaganza, where I review a different Dungeons and Dragons starter module every week for a few weeks. In the last two weeks I covered the Village of Hommlet (AD&D) and the Sunless Citadel (D&D 3e), and this week I’m covering the Lost Mine of Phandelver (D&D 5e). Then come the Iron Coral (Into the Odd) and Blancmange and Thistle (Troika!). My regular programming will resume in February, and boy do I have a lot of new and excellent stuff lined up. 
+
+ Lost Mine of Phandelver is a 64 page module for D&D 5th edition. There’s no credits given in the booklet, and I can’t find them online (please, if you have it let me know and I’ll update this). In it, the player characters will rescue their friends’ brother, only to discover he’s at the heart of a mystery that leads deep beneath the town of Phandalin. It features a hex crawl and multiple dungeons, as well as the titular (ish) town.
+
+ It opens with two pages of rules summary for the referee and provides a single hook that is assumed to be used for the rest of the module — something I think is the right decision for a starter referee. More interestingly, it provides sidebars throughout the module detailing relevant rules as they come up — rests, how to read and use maps, wilderness encounters, etc. There are also references to the rule book — which in this case is another short pamphlet that came in the boxed set, rather than the Players Handbook. In the back of the module is an index for this rule book — whatever you have a reference for in this module, there’s a page number in the mini-rule-book to refer to. And in addition, the text of the key talks the referee through how to handle situations, then gradually removes this scaffolding throughout the module, until it’s more or less a standard key. Whilst it’s not without flaws, compared to anything else I’ve read it is a far greater success in gradually teaching the referee how to referee.
+
+ It also succeeds in doing this for players, in my opinion. The initial encounters are very rigid and on rails, designed to expose the player characters to threatening situations and an ambush by goblins, with fallbacks if they’re defeated, and gradually introduces them to more complex rules and encounters as the campaign goes on. By the time the campaign is over, they’re crawling through a 20 room dungeon and exploring a hex map that covers over 100 miles. They’ve been gradually introduced to the strategies they might use to participate in these as they go. Now, I’m probably raining praise a little effusively here: It’s clumsy in a lot of ways. I could see the player characters being soundly defeated in a number of situations, with the module not accounting for this possibility to the referee. I think some of this support would be more valuable than the broader exploration of the world in the form of the hex crawl, which while granting a sense of the breadth of the game, the space could’ve been used to support the campaign better in other areas. But without a doubt, of the three starter modules I’ve read so far, it’s the first that actually onboards both referee and player in a meaningful way.
+
+ In terms of layout, it’s the first thing to be released in the 5th edition house style, which isn’t terrible but has been abused in the last ten years to the point where it feels like a powerpoint template. That said, while being overwritten is a signature of 5th edition module writing, it flags and highlights points of interest well, headings are clear and leading and padding lead to recognisable and navigable pages. It could be written better with the same layout choices and it’d be a stellar example of key-writing; it’s the editorial choices that are its downfall. Interestingly, the art here doesn’t feel as overdone as I feel it has been in more recent 5th edition work; most of the art is monster art recycled from other books, there is a piece of art for every 3 pages at maximum — often not even every spread, and there are only two large-scale art pieces aside from the cover. The 5th edition digital painting style is present here, but much lower in profile than in the rest of the line and what came over the next 10 years. It’s interesting how art expectations have morphed in that time.
+
+ As for the module itself: It’s good. The initial stages are on rails in the way that befits a tutorial. Once you reach the town of Phandelin, it opens up significantly, introducing a whole lot of quests, rumours and NPCs, which should lead them to the Redbrand Manor, their first larger, 12 room dungeon. From there it’s truly a sandbox: 5 significant locations in a massive wilderness, all with clues leading to the final dungeon, Wave Echo Cave. Two of these are decent sized adventuring locations — a town with 12 areas and a castle with 14. Each of these locations aren’t huge, but in total you’ll get about 2 or 3 sessions from each, so we’re talking months of play in this 64 page booklet. And this is pretty remarkable compared to the two shorter starter modules I’ve reviewed, because 5e takes up a lot more space per key than they do, but fits a lot more gameable content into its key, especially when compared to the Village of Hommlet, which has a comparable number of locations in a third of the space, but with most of them being devoid of built-in interactivity. The locations, too, are much more thematic than the previous two slapdash dungeons, one being dragon-themed, a hobgoblin castle, a witches lair, a wizard manor, etc. The content here is really strong overall.
+
+ There are a lot of design missteps, though, which are common to 5th edition modules in my opinion, and likely related to the the apparent design by committee in the Hasbro-owned company: There’s less character here, with the NPCs being stereotypes, the evil wizards being just evil wizards, the dwarf being a dwarf, the dragon being just a dragon. You need to bring it to make this module exciting. This could, generously, be by design, though? One of the core appeals of 5th edition after all is the power of its iconic archetypes. To beginner players and referees, these could be a similar hook: It’s easy to play a dark elf wizard, or a hobgoblin warlord, or a greedy young dragonling. This “weakness” could be, in fact, considered an onboarding tool. Being generic may be a useful tool in this specific use case.
+
+ Further design missteps, I think are in the lethality of this heroic play introduction. The dragon encounter in particular needs a lot of advice in tend if how to run it and how to prepare the players for it to be a slaughter. It does a great job of teaching the rules of the game gradually, but it doesn’t do an excellent job of preparing the players to gauge danger, to retreat, and to act with caution. I found this a trend in 5th edition as a whole. When you set up your player characters as heroes with a 20 level future, you’ll expect them to survive those 20 levels. This leads to a difficult line to tread, especially in the context that this boxed set doesn’t come with character creation rules, just a few pregenerated characters.
+
+ It does also train some bad habits, I think, though. The NPC descriptions, particularly for the town of Phandalin (as an NPC-dense space), leaves a lot to be desired, and that makes it more challenging to run. While I like the advice it provides the referee with for running them, the actual NPCs neither consistently use the (admittedly new at the time) traits-ideals-bonds-flaws structure, but also doesn’t succeed in providing them with goals or anything for the referee to hook into when improvising a personality for them. It’s a bad start, when a lot of players looking to try 5th edition for the first time are likely to be inclined to treat them as videogame quest givers, rather than people. It would help to provide them with some kind of inner life, something being done as early as Against the Cult of the Reptile God as far as I can easily recall. The structure is in acts, which trains the referee to consider this a story you’re walking the players through — which, I know, may not be considered bad practice in the realm of 5th edition, but to me, this could function without this drive to place the players on narrative rails, so it’s a disappointment it undermines that open-world structure with some narrative overlaying. 
+
+ Like the first two modules I’ve reviewed, Lost Mine of Phandelver speaks deeply to what 5th edition modules would end up looking like — large scale, broad sandboxes containing set railroaded narratives that the player characters can choose to engage with or not, resulting in a generation of unhappy referees that rail against the freeform nature of sandboxes and expect players to do as the narrative requires. It’s this structure, among other things, that drove many people out of 5th edition and into the broader world of DIY elf games. But the Lost Mine of Phandelver so close to a damned appealing open-world structure to me — if the railroading was a little less ham handed, and the final dungeon had a little more depth, I think this has huge potential as a larger campaign. In fact (and correct me if I’m wrong), I believe the module Phandelver and Below attempted to expand this module in exactly that way — although I don’t know with how much success. I think I could certainly, with a bit of work, make this into very memorable campaign, although I wouldn’t choose to run it in 5th edition these days.
+
+ Does it need work though? I bought this, back in 2014 when it was released, and before we finished the campaign — I don’t remember how long we played it for — we all decided to invest in the core books. And the wealth of advice for expanding and improving the campaign of the starter set speaks volumes about how compelling it is as a generic fantasy introduction to a complex game, even if it at the same time fails to introduce adequately the in-game behaviour necessary to survive the game. I think it’s apparent it works well as a starter set, but I wonder how much more attention to the latter would have impacted the culture of actual play and OC play that developed over the decade since 5th edition came out. 
+
+ Idle Cartulary
+
+ Playful Void is a production of Idle Cartulary. If you liked this article, please consider liking, sharing, and subscribing to the Idle Digest Newsletter . If you want to support Idle Cartulary continuing to provide Bathtub Reviews, I Read Reviews, and Dungeon Regular, please consider a one-off donation or becoming a regular supporter of Idle Cartulary on Ko-fi .
+
+ Tweet 
+
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+
+ Like Loading… 
+
+ Bathtub Reviews 
+
+ ad&d , introductory extravaganza 
+
+ Posted by:
+ Idle Cartulary
+
+ « Previous Post 
+
+ Next Post » 
+
+ 2 responses to “Bathtub Review: Lost Mine of Phandelver”
+
+ Anonymous
+
+ January 13, 2025 at 8:37 pm 
+
+ Looks like a much better product than I’d anticipated. I haven’t bought anything official since the TSR days, so that’s a pleasant surprise. I have a deep interest in introductory modules and look forward to the rest of the series. I hope it gets a re-run later with other classics like the Red Box and some of the modules that are floated as introductory ones in the “OSR”. It seems like an area of design that still needs a lot more work. 
+
+ Like Like 
+
+ Reply 
+
+ passionate018eeeb8cf
+
+ January 24, 2025 at 1:56 pm 
+
+ I have been using this as a sandbox type adventure. As for the design misteps – I use my on NPC’s tweaked a little to be more realistic and tied the adventure in to the bigger Forgotten Realms world.
+
+ We play a homebrew of 3.5/5.5/Shadowdark which the players seem to enjoy. I’ve also added a few side stories for possible future adventures. The weekly sessions are fun to adjust and re-make to want the players to keep coming back.
+
+ Pretty sure they’ll not finish all the quests but as new stories, rumors and the world grow…so does the PC’s.
+
+ Like Like 
+
+ Reply 
+
+ Leave a comment Cancel reply 
+
+ Δ 
+
+ Want to support Playful Void or Bathtub Reviews? Donate to or join my Ko-fi! 
+
+ I use affiliate links where I can, to keep reviewing sustainable! Please click them if you’re considering buying something I’ve reviewed! Want to know more? 
+
+ Have a module, adventure or supplement you’d like me to review? Read my review policy here , and then email me at idle dot cartulary at gmail dot com, or direct message me on Discord!
+
+ Recent Posts
+
+ Bathtub Review: The Doom of the Dark 
+
+ Bathtub Review: These Bloody Sails 
+
+ Bathtub Review: Drought Dragon Desolation 
+
+ Bathtub Review: Oni 
+
+ Bathtub Review: Tomb of Tog 
+
+ rootring: follow the ring from blog to blog, catch up on recent posts, and discover new TTRPG writing without relying on feeds, timelines, or recommendation algorithms. 
+
+ Prev 
+ Next 
+ Random 
+ Ring 
+
+ Categories
+
+ A Wee Mechanic 
+
+ Appendix Nova 
+
+ Bathtub Reviews 
+
+ Content 
+
+ Critique Navidad! 
+
+ Design 
+
+ I Read A Game 
+
+ Intentional Reviews 
+
+ Make Dice Work For You 
+
+ Reveries 
+
+ Session Reports 
+
+ Techniques 
+
+ Theory 
+
+ Uncategorized 
+
+ Zungeon Zundays 
+
+ Archives
+
+ January 2025 
+
+ M 
+ T 
+ W 
+ T 
+ F 
+ S 
+ S 
+
+ 1 2 3 4 5 
+
+ 6 7 8 9 10 11 12 
+
+ 13 14 15 16 17 18 19 
+
+ 20 21 22 23 24 25 26 
+
+ 27 28 29 30 31 
+
+ « Dec 
+
+ Feb » 
+
+ Search Search 
+
+ Recent Posts
+
+ Comment 
+
+ Subscribe 
+
+ Subscribed 
+
+ Playful Void 
+
+ Join 95 other subscribers
+
+ Sign me up 
+
+ Already have a WordPress.com account? Log in now. 
+
+ Playful Void 
+
+ Subscribe 
+
+ Subscribed 
+
+ Sign up 
+
+ Log in 
+
+ Copy shortlink 
+
+ Report this content 
+
+ View post in Reader 
+
+ Manage subscriptions 
+
+ Collapse this bar 
+
+ %d

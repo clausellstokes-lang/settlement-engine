@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i973-991",
+ "lines": 83,
+ "firstTs": "2026-09-06T23:32:58.891Z",
+ "lastTs": "2026-09-06T23:36:54.031Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 19,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://brightweavings.com/books/ysabel-journal/",
+  "https://brightweavings.com/books/under-heaven-tour-journal/",
+  "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+  "https://mikaelcabon.fr/commeundiamantdansmamemoire.html",
+  "https://mikaelcabon.fr/leschevauxcelestes.html",
+  "https://mikaelcabon.fr/lefleuveceleste.html",
+  "https://diacritik.com/2021/02/19/elisabeth-vonarburg-fiat-tyranael-et-tyranael-fut/",
+  "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All fifteen claims were checked against the raw pages: every source fetched at 200 on the first live route (no Wayback or PDF-binary fallback needed, no BLOCKED verdicts). Fourteen quotations appear word for word; one claim (982) overstates its page.",
+ "run": "wf_d76e605d-6d1",
+ "agent": "a4bd2d449f748a8c3",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-a4bd2d449f748a8c3.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i973-991.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 33,
+ "claims": [
+  {
+   "index": 649,
+   "feature": "edition and house style",
+   "claim": "Justin Alexander says the standardized 3rd Edition adventure format encourages writers to fill the format with text that is not needed.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "it tends to encourage writers to “fill the format”",
+   "page": "Art of the Key, 'Adventure Formatting Guides'"
+  },
+  {
+   "index": 650,
+   "feature": "other: key format",
+   "claim": "Justin Alexander labels the dense undifferentiated paragraph key that TSR used for most of a decade the Gygax wall of text.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "the Gygax “wall of text” key",
+   "page": "Art of the Key, 'A Brief History of the Key'"
+  },
+  {
+   "index": 651,
+   "feature": "other: seen in a glance",
+   "claim": "Justin Alexander's prescribed key opens with the information a character perceives on entering, which he calls seen in a glance.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "seen in a glance",
+   "page": "Part 2, 'Boxed Text'"
+  },
+  {
+   "index": 652,
+   "feature": "other: information sequencing",
+   "claim": "Justin Alexander's alternative to a fixed key format is to order the entry by the sequence in which information will be wanted at the table.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "focus on the sequencing of information",
+   "page": "Part 2, opening"
+  },
+  {
+   "index": 653,
+   "feature": "other: information sequencing",
+   "claim": "Justin Alexander tells key writers to move from the general to the specific as the players investigate.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "move from the general to the specific",
+   "page": "Part 2, 'Developing Significant Elements'"
+  },
+  {
+   "index": 654,
+   "feature": "dm-facing sentence",
+   "claim": "Justin Alexander bolds the name of each significant element in a room so the GM can find the matching information quickly.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "the bold title makes it easy to find the information",
+   "page": "Part 2, 'Significant Elements'"
+  },
+  {
+   "index": 655,
+   "feature": "other: background and history in a key",
+   "claim": "Justin Alexander confines a location's history and former use to a GM Background tag that must be brief and infrequently needed.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "It should be brief, to the point, and infrequently needed.",
+   "page": "Part 2, 'GM Background Tag'"
+  },
+  {
+   "index": 656,
+   "feature": "other: reference layout",
+   "claim": "Justin Alexander credits the delve format with the single good idea that everything the GM needs is on the page.",
+   "source": "Justin Alexander, 'The Art of the Key - Part 3', The Alexandrian, 2016",
+   "url": "https://thealexandrian.net/wordpress/38497/roleplaying-games/the-art-of-the-key-part-3-hierarchy-of-reference",
+   "quote": "Everything you need is on the page.",
+   "page": "Part 3, opening"
+  },
+  {
+   "index": 657,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander grants that boxed text virtually guarantees essential information is not accidentally omitted in play.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "will virtually guarantee that it’s not accidentally omitted",
+   "page": "GM Don't List #13, advantages"
+  },
+  {
+   "index": 658,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander counts inflexibility as an inherent cost of prewritten boxed text, since one passage must serve every approach and condition.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "The result is inherently less flexible.",
+   "page": "GM Don't List #13, 'So why wouldn't you use boxed text?'"
+  },
+  {
+   "index": 659,
+   "feature": "other: reaction point",
+   "claim": "Justin Alexander names freeze-frame boxed text as the failure in which the world keeps moving while the characters stand frozen.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "PCs are frozen in place while a bunch of stuff happens",
+   "page": "GM Don't List #13, 'Sins of the Box'"
+  },
+  {
+   "index": 660,
+   "feature": "other: reaction point",
+   "claim": "Justin Alexander names the reaction point as the place in a description past which the world must not move without the players.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "What we’ve identified here is the reaction point",
+   "page": "GM Don't List #13, 'Sins of the Box'"
+  },
+  {
+   "index": 661,
+   "feature": "point of view and distance",
+   "claim": "Justin Alexander condemns remote-control boxed text, which declares the thoughts, feelings or actions of the player characters.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "declaring the thoughts or feelings or (worse yet!) actions of the PCs",
+   "page": "GM Don't List #13, 'Remote-Control Boxed Text'"
+  },
+  {
+   "index": 662,
+   "feature": "point of view and distance",
+   "claim": "Justin Alexander's rule for read-aloud text is to show the scene and never to tell the players how they are reacting to it.",
+   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "Don’t tell them how they’re reacting to it.",
+   "page": "GM Don't List #13, 'Remote-Control Boxed Text'"
+  },
+  {
+   "index": 663,
+   "feature": "boxed text form",
+   "claim": "A reader commenting on the Alexandrian recalls a lost Wizards devblog article whose thesis was that GM description should never run past three sentences.",
+   "source": "Reader comment by 'mellonbread', 2 August 2022, on The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "should never be longer than three sentences",
+   "page": "GM Don't List #13, comments, 2022-08-02"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it tends to encourage writers to “fill the format”",
+   "note": "Live page (HTTP 200, raw HTML fetched with a browser UA). Section 'ADVENTURE FORMATTING GUIDES' introduces the 3rd Edition 'standard format' (Traps/Creatures/Tactics/Development/Treasure, first in The Sunless Citadel), then: 'the problem with this specific approach to adventure writing is that it tends to encourage writers to “fill the format”. You probably don’t really need to tell a DM that the orcs attack people using their swords... but the format says you should have a “Tactics” section, so you might as well write two or three paragraphs about it.' Quote verbatim; the not-needed-text limb is the orcs/swords sentence."
+  },
+  {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "featured the Gygax “wall of text” key which would become a staple at TSR for the better part of a decade",
+   "note": "Section 'A BRIEF HISTORY OF THE KEY': 'The Lost Caverns of Tsojconth, on the other hand, featured the Gygax “wall of text” key which would become a staple at TSR for the better part of a decade:' Quote verbatim; 'most of a decade' = 'the better part of a decade'. The 'dense undifferentiated paragraph' limb is shown rather than asserted — the quoted Tsojconth exemplar is one unbroken paragraph, and the article's stated purpose of the later formats is 'To break up the wall of text'."
+  },
+  {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We start with boxed text... I also think of this section as seen in a glance",
+   "note": "Section 'BOXED TEXT': 'We start with boxed text which conveys the common information that anyone walking into the room would immediately perceive.' and 'it should be clearly delineated from the rest of the key and contain all of the information that should be immediately conveyed when the PCs first enter the room. I also think of this section as seen in a glance.' Quote verbatim. Minor: an optional room title ('Technically, this is optional') precedes the boxed text in his layout."
+  },
+  {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "focus on the sequencing of information: How the information will flow... at the actual gaming table",
+   "note": "Opening of Part 2: 'We’ve already rejected the idea of a rigid or dogmatized format, but there has to be something better... The ultimate solution, in my experience, is to focus on the sequencing of information: How the information will flow (or is likely to flow) at the actual gaming table.' Quote verbatim; both limbs (alternative to a fixed format; ordering by table-use sequence) supported."
+  },
+  {
+   "index": 653,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "move from the general to the specific while paying particular attention to how the players are gaining that information",
+   "note": "Section 'DEVELOPING SIGNIFICANT ELEMENTS': 'What you want to do is to move from the general to the specific while paying particular attention to how the players are gaining that information.' The investigation limb is explicit two paragraphs later: 'They’ll start with general questions and then proceed to detailed investigation (so put the information in that order).' Quote verbatim."
+  },
+  {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Notice that the bold title makes it easy to find the information you need",
+   "note": "Section 'SIGNIFICANT ELEMENTS' shows each element with a bold lead-in (Old Jars:, Clay Pots/Urns:, Vats:) then: 'Notice that the bold title makes it easy to find the information you need. It also makes it easy for the GM to quickly process what the room contains and how it “works” in play.' Quote verbatim; every limb supported."
+  },
+  {
+   "index": 655,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It should be brief, to the point, and infrequently needed",
+   "note": "Section 'GM BACKGROUND TAG': 'The tag is particularly useful for information of the “this is what this ruined room used to be” and “this is what the NPCs use this room for” variety' and the caution 'It should be brief, to the point, and infrequently needed.' Quote verbatim. Nuance: he says the tag is 'particularly useful for' such history rather than issuing an absolute confinement rule, but his worked Ptolus example does exactly the confining the claim describes."
+  },
+  {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the delve format does have one really good idea: Everything you need is on the page",
+   "note": "Opening of Part 3: 'I’ve previously dismissed the dogmatization of the old delve adventure format... But the delve format does have one really good idea: Everything you need is on the page.' The GM-facing limb follows: 'you don’t have to open your Monster Manual... the GM can focus on running the encounter instead of flipping pages.' Quote verbatim, sentence-final period included."
+  },
+  {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "putting it in boxed text will virtually guarantee that it’s not accidentally omitted in actual play",
+   "note": "Advantages paragraph: 'If there’s essential information that needs to be conveyed to the players, putting it in boxed text will virtually guarantee that it’s not accidentally omitted in actual play.' Quote verbatim; 'essential information' and 'in play' both on the page."
+  },
+  {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The result is inherently less flexible... the boxed text needs to be generic enough to work for any potential entrance",
+   "note": "Under 'So why wouldn’t you use boxed text?': 'The result is inherently less flexible. (For example, if a room has multiple entries the boxed text needs to be generic enough to work for any potential entrance. Add to this NPCs, lighting conditions, etc.)' 'Prewritten' is the article's own opening definition ('Boxed text in an RPG scenario is a prewritten narration'). Quote verbatim."
+  },
+  {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Freeze-frame boxed text is when the GM starts reading and then the PCs are frozen in place while a bunch of stuff happens",
+   "note": "Section 'SINS OF THE BOX', first paragraph of the freeze-frame discussion; the Radiant Citadel example follows, with 'everyone else in the scene – including the ox! – gets to react before they do.' Quote appears verbatim as a substring of that sentence."
+  },
+  {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What we’ve identified here is the reaction point",
+   "note": "Section 'SINS OF THE BOX': 'What we’ve identified here is the reaction point. ... what you should avoid at all costs is having the game world continue to move forward past the reaction point without letting the players react; without letting the players play the game.' Quote verbatim; both limbs (naming, and the world-must-not-move-past rule) supported."
+  },
+  {
+   "index": 661,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "insidiously goes one step further by declaring the thoughts or feelings or (worse yet!) actions of the PCs",
+   "note": "Section 'REMOTE-CONTROL BOXED TEXT': 'Remote-control boxed text suffers from similar problems (preventing the players from participating), but insidiously goes one step further by declaring the thoughts or feelings or (worse yet!) actions of the PCs.' The condemnation limb: 'So… don’t do this.' Quote verbatim."
+  },
+  {
+   "index": 662,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Focus on showing the players the scene and letting them react to it. Don’t tell them how they’re reacting to it.",
+   "note": "Section 'REMOTE-CONTROL BOXED TEXT', closing rule. Quote verbatim including the final period; the show-the-scene limb is the immediately preceding sentence. The article's subject throughout is boxed text, i.e. prewritten read-aloud narration ('designed to be read to the players by the GM')."
+  },
+  {
+   "index": 663,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "should never be longer than three sentences, because after that point the players stop paying attention",
+   "note": "Comment #1976289, cited author 'mellonbread', timestamped 'August 2nd, 2022 - 11:58 am': 'There was a lovely article in the old Wizards devblog, from around the 3.5 or 4e days, which was lost when they nuked their archives. The basic thesis was that boxed text (or any descriptive text delivered by the GM) should never be longer than three sentences...' Every limb (reader comment, lost Wizards devblog, thesis) verbatim on the page; author and date confirmed in the raw comment markup."
+  }
+ ]
+}

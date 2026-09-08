@@ -1,0 +1,540 @@
+/**
+ * tests/lib/gallery.test.js — Gallery client API + curation/privacy contract.
+ *
+ * These tests stub the supabase client and verify the gallery.js library
+ * dispatches the right RPC / table calls and sanitizes responses
+ * correctly. SQL privacy boundaries are guarded by contract tests and
+ * should also be exercised by pgTAP server-side.
+ */
+
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+vi.mock('../../src/lib/supabase.js', () => {
+  const queryBuilder = (mockResponse) => {
+    const builder = {};
+    const methods = ['select', 'eq', 'order', 'range', 'maybeSingle', 'update'];
+    for (const m of methods) {
+      builder[m] = vi.fn().mockReturnValue(builder);
+    }
+    builder.then = (resolve) => resolve(mockResponse);
+    return builder;
+  };
+
+  const mockSupabase = {
+    from: vi.fn(() => queryBuilder({ data: [], error: null, count: 0 })),
+    rpc: vi.fn(() => Promise.resolve({ data: [], error: null })),
+  };
+
+  return {
+    supabase: mockSupabase,
+    isConfigured: true,
+  };
+});
+
+import { supabase } from '../../src/lib/supabase.js';
+import {
+  publishSettlement, unpublishSettlement,
+  fetchPublicGallery, fetchPublicDossier,
+  fetchCuratedGallery, setCurated,
+  updateGalleryMetadata, toggleGalleryVote, fetchGalleryComments,
+  addGalleryComment, deleteGalleryComment, reportGalleryDossier,
+  fetchGalleryReports, resolveGalleryReport,
+  fetchGalleryMaps, normalizeMapFilters, shareMap,
+} from '../../src/lib/gallery.js';
+import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
+
+afterEach(() => vi.clearAllMocks());
+
+describe('gallery.js — publish/unpublish (RPC)', () => {
+  it('publishSettlement calls publish_settlement and returns the slug', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'abc123', error: null });
+    const slug = await publishSettlement('settlement-uuid');
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_settlement', { target_id: 'settlement-uuid' });
+    expect(slug).toBe('abc123');
+  });
+
+  it('publishSettlement updates metadata before publishing when provided', async () => {
+    supabase.from.mockImplementationOnce(() => ({
+      update: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockResolvedValue({ error: null }),
+    }));
+    supabase.rpc.mockResolvedValueOnce({ data: 'abc123', error: null });
+    const slug = await publishSettlement('settlement-uuid', {
+      description: 'A public hook.',
+      imageUrl: 'https://example.com/a.jpg',
+      tags: 'frontier, high magic',
+    });
+    expect(slug).toBe('abc123');
+    expect(supabase.from).toHaveBeenCalledWith('settlements');
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_settlement', { target_id: 'settlement-uuid' });
+  });
+
+  it('publishSettlement throws on RPC error', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'Not owned' } });
+    await expect(publishSettlement('x')).rejects.toThrow('Not owned');
+  });
+
+  it('unpublishSettlement calls unpublish_settlement', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: null });
+    await unpublishSettlement('settlement-uuid');
+    expect(supabase.rpc).toHaveBeenCalledWith('unpublish_settlement', { target_id: 'settlement-uuid' });
+  });
+});
+
+describe('gallery.js — fetchPublicGallery (community listing)', () => {
+  beforeEach(() => {
+    supabase.rpc.mockResolvedValue({
+      data: [
+        {
+          id: '1',
+          public_slug: 's1',
+          name: 'Bramblefen',
+          tier: 'town',
+          published_at: '2025-01-01',
+          updated_at: '2025-01-02',
+          view_count: 5,
+          is_curated: false,
+          gallery_description: 'A market town.',
+          gallery_image_url: 'https://example.com/bramble.jpg',
+          gallery_tags: ['market'],
+          population: 1200,
+          terrain: 'forest',
+          net_votes: 3,
+          comment_count: 2,
+          total_count: 1,
+        },
+      ],
+      error: null,
+    });
+  });
+
+  it('calls the filtered listing RPC with sort, search, and filters', async () => {
+    await fetchPublicGallery({
+      page: 0,
+      sort: 'top_voted',
+      search: 'bramble',
+      filters: { tier: ['town'], hasImage: true },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', {
+      page_number: 0,
+      page_size: 24,
+      sort_key: 'top_voted',
+      search_query: 'bramble',
+      filters: { tier: ['town'], hasImage: true },
+      exclude_curated: true,
+    });
+  });
+
+  it('forwards the bounded-vocab + boolean facets (incl. the importable opt-in) to the RPC', async () => {
+    await fetchPublicGallery({
+      page: 0,
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        hasDeity: true,
+        // Owner import opt-in facet (gallery_importable; surfaced by migration 071).
+        importable: true,
+        // At-war facet: the server honored it since 063; forwarded since
+        // GALLERY-2 phase 2 (the /gallery/at-war hub) — no longer dropped.
+        atWar: true,
+        // Retired facets must NOT be forwarded: governmentType / stability have no
+        // stable vocabulary to match, and the population range was dropped as
+        // redundant with tier/size and noisy.
+        populationMin: 401,
+        populationMax: 5000,
+        governmentType: ['monarchy'],
+        stability: ['stable'],
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', expect.objectContaining({
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        hasDeity: true,
+        importable: true,
+        atWar: true,
+      },
+    }));
+  });
+
+  it('surfaces the new facet columns on the sanitized tile', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{
+        id: '9', public_slug: 's9', name: 'Frosthold', tier: 'city',
+        culture: 'norse', prosperity: 'Wealthy', primary_deity: 'Verra', at_war: true,
+        total_count: 1,
+      }],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0]).toMatchObject({
+      culture: 'norse', prosperity: 'Wealthy', primaryDeity: 'Verra', atWar: true,
+    });
+  });
+
+  it('can be told to include curated tiles via excludeCurated=false', async () => {
+    await fetchPublicGallery({ page: 0, excludeCurated: false });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', expect.objectContaining({
+      exclude_curated: false,
+    }));
+  });
+
+  it('sanitizes rows to a tile shape (drops user_id, hides DB column names)', async () => {
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0]).toMatchObject({
+      id: '1', slug: 's1', name: 'Bramblefen', tier: 'town',
+      publishedAt: '2025-01-01', updatedAt: '2025-01-02', viewCount: 5,
+      curated: false, description: 'A market town.', imageUrl: 'https://example.com/bramble.jpg',
+      tags: ['market'], population: 1200, terrain: 'forest', netVotes: 3, commentCount: 2,
+    });
+    // Defense-in-depth: the row's `user_id` (if it leaked) must not
+    // appear anywhere in the sanitized tile.
+    expect(Object.keys(items[0])).not.toContain('user_id');
+  });
+
+  it('reads governmentType from the string powerStructure.government the engine writes', async () => {
+    // powerStructure.governmentType is never written by the generator —
+    // government is a STRING (the governing entry's name doubles as the
+    // government type). The old read left every tile's governmentType ''.
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{
+        id: '2', public_slug: 's2', name: 'Veilport', tier: 'city',
+        data: { powerStructure: { government: 'Merchant council', governingName: 'Merchant council' } },
+        total_count: 1,
+      }],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0].governmentType).toBe('Merchant council');
+  });
+
+  it('falls through legacy object .type, then governingName, then top-level fields', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [
+        { id: '3', public_slug: 's3', name: 'A', tier: 'town',
+          data: { powerStructure: { government: { type: 'feudal' } } }, total_count: 3 },
+        { id: '4', public_slug: 's4', name: 'B', tier: 'town',
+          data: { powerStructure: { governingName: 'Town moot' } }, total_count: 3 },
+        { id: '5', public_slug: 's5', name: 'C', tier: 'town',
+          data: { government: { type: 'theocracy' } }, total_count: 3 },
+      ],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0].governmentType).toBe('feudal');
+    expect(items[1].governmentType).toBe('Town moot');
+    expect(items[2].governmentType).toBe('theocracy');
+  });
+
+  it('returns empty when supabase is not configured', async () => {
+    vi.doMock('../../src/lib/supabase.js', () => ({
+      supabase: {}, isConfigured: false,
+    }));
+    vi.resetModules();
+    const { fetchPublicGallery: fn } = await import('../../src/lib/gallery.js');
+    const res = await fn({ page: 0 });
+    expect(res.items).toEqual([]);
+    expect(res.hasMore).toBe(false);
+    vi.doUnmock('../../src/lib/supabase.js');
+  });
+
+  it('does not fall back to direct table reads when the listing RPC is unavailable', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'missing function' } });
+    const res = await fetchPublicGallery({ page: 0 });
+    expect(res).toEqual({ items: [], hasMore: false, total: 0 });
+    expect(supabase.from).not.toHaveBeenCalled();
+  });
+});
+
+describe('gallery.js — fetchCuratedGallery (Tier 8.1)', () => {
+  it('calls list_curated_dossiers RPC and returns curated tiles', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [
+        { id: 'c1', public_slug: 'cur1', name: 'Mossgate', tier: 'town',
+          published_at: '2025-01-02', view_count: 12, curated_order: 1 },
+        { id: 'c2', public_slug: 'cur2', name: 'Black Crag', tier: 'city',
+          published_at: '2025-01-03', view_count: 8, curated_order: 2 },
+      ],
+      error: null,
+    });
+    const items = await fetchCuratedGallery();
+    expect(supabase.rpc).toHaveBeenCalledWith('list_curated_dossiers');
+    expect(items).toHaveLength(2);
+    expect(items[0]).toEqual({
+      id: 'c1', slug: 'cur1', name: 'Mossgate', tier: 'town',
+      publishedAt: '2025-01-02', viewCount: 12, curated: true,
+    });
+  });
+
+  it('returns [] on RPC error rather than throwing', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'network' } });
+    const items = await fetchCuratedGallery();
+    expect(items).toEqual([]);
+  });
+
+  it('every curated tile has curated:true set', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{ id: '1', public_slug: 'a', name: 'A', tier: 'town', published_at: null, view_count: 0, curated_order: null }],
+      error: null,
+    });
+    const items = await fetchCuratedGallery();
+    expect(items.every(t => t.curated === true)).toBe(true);
+  });
+});
+
+describe('gallery.js — setCurated (admin RPC)', () => {
+  it('calls set_curated with target + curated + sort_order', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: null });
+    await setCurated('settlement-uuid', true, 5);
+    expect(supabase.rpc).toHaveBeenCalledWith('set_curated', {
+      target_id:  'settlement-uuid',
+      curated:    true,
+      sort_order: 5,
+    });
+  });
+
+  it('passes null as sort_order by default', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: null });
+    await setCurated('settlement-uuid', false);
+    expect(supabase.rpc).toHaveBeenCalledWith('set_curated', {
+      target_id:  'settlement-uuid',
+      curated:    false,
+      sort_order: null,
+    });
+  });
+
+  it('throws when the RPC returns an error (so the admin UI can surface it)', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: null, error: { message: 'Only admins can change curation status' } });
+    await expect(setCurated('x', true)).rejects.toThrow(/admins/i);
+  });
+});
+
+describe('gallery.js — fetchPublicDossier (slug lookup)', () => {
+  it('returns null for missing/invalid slugs without hitting the network', async () => {
+    expect(await fetchPublicDossier(null)).toBe(null);
+    expect(await fetchPublicDossier('')).toBe(null);
+    expect(await fetchPublicDossier(42)).toBe(null);
+    expect(supabase.from).not.toHaveBeenCalled();
+    expect(supabase.rpc).not.toHaveBeenCalled();
+  });
+
+  it('sanitizes returned dossier (strips owner-identifying columns)', async () => {
+    supabase.rpc
+      .mockResolvedValueOnce({
+        data: [{
+          id: '1', public_slug: 's1', name: 'X', tier: 'town',
+          // population is on the public top-level allowlist; dmCompass is not
+          // (and is DM-private) — the projection keeps the former, drops the latter.
+          data: { population: 1200, dmCompass: { secret: true } }, published_at: '2025-01-01', view_count: 3,
+        }],
+        error: null,
+      })
+      .mockResolvedValueOnce({ data: null, error: null })  // bump_public_view
+      .mockResolvedValueOnce({ data: [{ net_votes: 4, voted: true }], error: null })
+      .mockResolvedValueOnce({ data: [], error: null });
+    const dossier = await fetchPublicDossier('s1');
+    expect(dossier).toMatchObject({
+      id: '1',
+      slug: 's1', name: 'X', tier: 'town',
+      settlement: { population: 1200 },
+      publishedAt: '2025-01-01', viewCount: 3,
+      netVotes: 4,
+      voteState: { netVotes: 4, voted: true },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('get_gallery_dossier', { dossier_slug: 's1' });
+    // No user_id leak.
+    expect(Object.keys(dossier)).not.toContain('user_id');
+  });
+});
+
+describe('gallery.js - metadata, votes, comments', () => {
+  it('updateGalleryMetadata patches public metadata columns', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', { description: 'Hello', imageUrl: 'https://x.test/a.jpg', tags: 'a, b' });
+    expect(update).toHaveBeenCalledWith(expect.objectContaining({
+      gallery_description: 'Hello',
+      gallery_image_url: 'https://x.test/a.jpg',
+      gallery_tags: ['a', 'b'],
+    }));
+    expect(eq).toHaveBeenCalledWith('id', 's1');
+  });
+
+  it('drops non-http public image URLs before patching metadata', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', { imageUrl: 'javascript:alert(1)' });
+    expect(update).toHaveBeenCalledWith(expect.objectContaining({
+      gallery_image_url: null,
+    }));
+  });
+
+  it('sanitizes the description ON WRITE so no live HTML is persisted', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', {
+      description: '<script>alert(1)</script>Safe hook<img src=x onerror=alert(2)>',
+    });
+    const patch = update.mock.calls[0][0];
+    // Stored value carries no script/img/event-handler markup regardless of the
+    // render path — sanitize-on-write closes the stored-XSS gap at the source.
+    expect(patch.gallery_description).not.toMatch(/<script|<img|onerror/i);
+    expect(patch.gallery_description).toContain('Safe hook');
+  });
+
+  it('clamps gallery_tags ON WRITE to mirror the read-path bounds', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    // A raw owner write that the read normalizer would later trim: a per-tag
+    // over-long blob, mixed case, markup, and far more than the count cap. The
+    // write must store the same shape the read path enforces, not an unbounded
+    // value the column carries until something reads it.
+    const tags = [
+      'A'.repeat(200),                                   // → length-capped to 40
+      'CoastalPort',                                     // → lower-cased
+      '<img src=x>',                                     // → markup stripped
+      ...Array.from({ length: 30 }, (_, i) => `t${i}`),  // → count-capped to 12
+    ];
+    await updateGalleryMetadata('s1', { tags });
+    const patch = update.mock.calls[0][0];
+    expect(patch.gallery_tags.length).toBeLessThanOrEqual(12);
+    for (const tag of patch.gallery_tags) {
+      expect(tag.length).toBeLessThanOrEqual(40);
+      expect(tag).toBe(tag.toLowerCase());
+      expect(tag).not.toMatch(/[<>]/);
+    }
+    expect(patch.gallery_tags).toContain('coastalport');
+  });
+
+  it('toggleGalleryVote calls the vote RPC and normalizes the result', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: [{ net_votes: 5, voted: true }], error: null });
+    await expect(toggleGalleryVote('s1')).resolves.toEqual({ netVotes: 5, voted: true });
+    expect(supabase.rpc).toHaveBeenCalledWith('toggle_gallery_vote', { target_settlement_id: 's1' });
+  });
+
+  it('comments use safe RPC helpers', async () => {
+    supabase.rpc
+      .mockResolvedValueOnce({ data: [{ id: 'c1', body: 'Nice', created_at: '2026-01-01', updated_at: '2026-01-01', can_delete: false, author_label: 'A DM' }], error: null })
+      .mockResolvedValueOnce({ data: 'c2', error: null })
+      .mockResolvedValueOnce({ data: null, error: null });
+
+    const comments = await fetchGalleryComments('s1');
+    expect(comments[0]).toMatchObject({ id: 'c1', body: 'Nice', authorLabel: 'A DM' });
+    await addGalleryComment('s1', 'Hello');
+    await deleteGalleryComment('c1');
+    expect(supabase.rpc).toHaveBeenCalledWith('add_gallery_comment', { target_settlement_id: 's1', comment_body: 'Hello' });
+    expect(supabase.rpc).toHaveBeenCalledWith('delete_gallery_comment', { target_comment_id: 'c1' });
+  });
+
+  it('reports use the moderation RPC helper', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'report-id', error: null });
+    await expect(reportGalleryDossier('s1', 'unsafe_content', 'Needs review')).resolves.toBe('report-id');
+    expect(supabase.rpc).toHaveBeenCalledWith('report_gallery_dossier', {
+      target_settlement_id: 's1',
+      report_reason: 'unsafe_content',
+      report_body: 'Needs review',
+    });
+  });
+
+  it('moderation queue helpers use elevated-only report RPCs', async () => {
+    supabase.rpc
+      .mockResolvedValueOnce({
+        data: [{
+          report_id: 'r1',
+          settlement_id: 's1',
+          public_slug: 'bramblefen',
+          settlement_name: 'Bramblefen',
+          tier: 'town',
+          gallery_image_url: 'https://x.test/a.jpg',
+          is_public: true,
+          report_reason: 'spam',
+          report_body: 'Needs review',
+          status: 'open',
+          report_created_at: '2026-01-01',
+          report_updated_at: '2026-01-02',
+          reporter_label: 'Gallery reader',
+          report_count: 2,
+        }],
+        error: null,
+      })
+      .mockResolvedValueOnce({ data: null, error: null });
+
+    const reports = await fetchGalleryReports({ status: 'open', limit: 10 });
+    expect(reports[0]).toMatchObject({
+      id: 'r1',
+      settlementId: 's1',
+      slug: 'bramblefen',
+      name: 'Bramblefen',
+      reason: 'spam',
+      status: 'open',
+      reportCount: 2,
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_reports', {
+      report_status: 'open',
+      limit_count: 10,
+    });
+
+    await resolveGalleryReport('r1', 'resolved', 'Handled');
+    expect(supabase.rpc).toHaveBeenCalledWith('resolve_gallery_report', {
+      target_report_id: 'r1',
+      next_status: 'resolved',
+      resolution_note: 'Handled',
+    });
+  });
+});
+
+describe('gallery.js — maps Importable facet (migration 072)', () => {
+  it('forwards the importable opt-in facet to list_gallery_maps, dropping empties', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: [], error: null });
+    await fetchGalleryMaps({
+      page: 0,
+      filters: {
+        kind: ['map_with_campaign'],
+        // Owner import opt-in facet (saved_maps.gallery_importable, migration 072).
+        importable: true,
+        // Empty facets + a falsy toggle must NOT be forwarded — an empty facet
+        // never narrows the server query.
+        backdrop: [],
+        tags: [],
+        hasSettlements: false,
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_maps', expect.objectContaining({
+      p_filters: { kind: ['map_with_campaign'], importable: true },
+    }));
+  });
+
+  it('normalizeMapFilters forwards importable only when truthy', () => {
+    expect(normalizeMapFilters({ importable: true })).toEqual({ importable: true });
+    // Unchecked toggle is omitted entirely (no `importable: false` key).
+    expect(normalizeMapFilters({ importable: false })).toEqual({});
+    expect(normalizeMapFilters({})).toEqual({});
+  });
+
+  it('the maps sidebar default carries the importable key (off), and it counts as a facet', () => {
+    const def = emptyMapFilters();
+    expect(def).toHaveProperty('importable', false);
+    expect(activeMapFilterCount(def)).toBe(0);
+    expect(activeMapFilterCount({ ...def, importable: true })).toBe(1);
+  });
+
+  it('shareMap forwards the owner import opt-in to publish_map', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map', importable: true });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: true,
+    }));
+  });
+
+  it('shareMap leaves the opt-in untouched (p_importable null) when omitted', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map' });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: null,
+    }));
+  });
+});

@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 24,
+ "claims": [
+  {
+   "index": 514,
+   "feature": "other: rumour table",
+   "claim": "Merric Blackman says Ghosts of Saltmarsh includes ten rumors that can be heard on the docks.",
+   "source": "Merric Blackman, Merric's Musings, 2019",
+   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
+   "quote": "includes ten rumors that can be heard on the docks",
+   "page": "body, paragraph on rumors"
+  },
+  {
+   "index": 515,
+   "feature": "boxed text form",
+   "claim": "Merric Blackman says T1's player-facing village text is a long way from read-aloud text and should be paraphrased.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "a long way from read-aloud text",
+   "page": "body, paragraph on parentheses and bold"
+  },
+  {
+   "index": 516,
+   "feature": "place and institution description",
+   "claim": "Merric Blackman judges T1's inhabitants to be described in more detail than necessary.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "described in more detail than I think necessary",
+   "page": "body, paragraph on the published version"
+  },
+  {
+   "index": 517,
+   "feature": "place and institution description",
+   "claim": "Merric Blackman says T1 presents the villagers mostly in the houses where they live.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "in the houses where they live",
+   "page": "body, paragraph on Wall of Text syndrome"
+  },
+  {
+   "index": 518,
+   "feature": "annalist voice and deep time",
+   "claim": "Merric Blackman says T1's introduction describes the founding of the village, the rise of the Temple and its fall.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "It describes the founding of the Village of Hommlet",
+   "page": "body, paragraph on the introduction"
+  },
+  {
+   "index": 519,
+   "feature": "civic record register",
+   "claim": "Hipsters and Dragons says Dragon Heist's final chapter details Waterdeep's laws, taxes, landmarks, nobility and guilds before its wards.",
+   "source": "Hipsters & Dragons review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.hipstersanddragons.com/waterdeep-dragon-heist-review/",
+   "quote": "details on laws, admin, taxes, taxis, landmarks, nobility and guilds",
+   "page": "section Chapters 9: Volo's Waterdeep Enchiridion"
+  },
+  {
+   "index": 520,
+   "feature": "civic record register",
+   "claim": "Strange Assembly says Dragon Heist's Enchiridion gives a very brief history and layout of Waterdeep.",
+   "source": "Strange Assembly review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+   "quote": "a very brief history, layout",
+   "page": "body, paragraph on the closing sections"
+  },
+  {
+   "index": 521,
+   "feature": "civic record register",
+   "claim": "Strange Assembly says the Enchiridion introduces Waterdeep's legal system alongside its social norms.",
+   "source": "Strange Assembly review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+   "quote": "an introduction to the legal system",
+   "page": "body, paragraph on the closing sections"
+  },
+  {
+   "index": 522,
+   "feature": "other: in-world guidebook voice",
+   "claim": "Shannon Appelcline says the early-nineties in-character game books were written as if they were real-world sources from within the setting.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "written as if they were real-world sources from within the gaming settings",
+   "page": "Product History, Introducing the Volo Guides"
+  },
+  {
+   "index": 523,
+   "feature": "point of view and distance",
+   "claim": "Appelcline reports that Greenwood used an unreliable narrator so that DMs could dismiss any detail by saying Volo was wrong.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG, reporting Ed Greenwood",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "Volo was wrong",
+   "page": "Product History, Introducing the Volo Guides"
+  },
+  {
+   "index": 524,
+   "feature": "omission as information",
+   "claim": "Appelcline says Greenwood could omit a locale by writing that Volo had been kicked out of it.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "",
+   "page": "Product History, paragraph on the in-world narrator"
+  },
+  {
+   "index": 525,
+   "feature": "dialogue register",
+   "claim": "Elminster's in-world preface to Volo's Guide to Waterdeep opens by warning the reader.",
+   "source": "Ed Greenwood writing as Elminster, preface to Volo's Guide to Waterdeep (TSR, 1993), quoted in Appelcline's Product History",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "I must warn ye",
+   "page": "Product History, quoting Elminster's preface"
+  },
+  {
+   "index": 526,
+   "feature": "other: in-world guidebook voice",
+   "claim": "The product page describes Volo's Guide to Waterdeep as the first of a series of in-character looks at parts of the Forgotten Realms.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "in-depth, in-character looks at important parts",
+   "page": "Product History, opening paragraph"
+  },
+  {
+   "index": 527,
+   "feature": "place and institution description",
+   "claim": "Gus L says B2's Keep is heaped with loving detail to almost no obvious purpose.",
+   "source": "Gus L, Dungeon of Signs, 2014",
+   "url": "http://dungeonofsigns.blogspot.com/2014/01/b2-keep-on-borderlands-review.html",
+   "quote": "heaped with loving detail to almost no obvious purpose",
+   "page": "section 1. Excessively Keep Focused"
+  },
+  {
+   "index": 528,
+   "feature": "place and institution description",
+   "claim": "Prince of Nothing says B2 describes the Keep as a series of rooms with text conveyed in thick blocks.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2019",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "quote": "described as a series of rooms, with text conveyed in thick blocks",
+   "page": "body, paragraph on the first major roadblock"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 514,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ghosts of Saltmarsh includes ten rumors that can be heard on the docks",
+   "note": "Live merricb.com is now a spam 'SULTANSLOT' site; recovered via Wayback raw capture 20230416034304id_. Byline merricb@yahoo.co.uk, May 22, 2019. Sentence appears word for word."
+  },
+  {
+   "index": 515,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "although it's a long way from read-aloud text; it still should be paraphrased or roleplayed out",
+   "note": "Wayback raw capture 20220130065118id_ (live domain hijacked). Both limbs present: player-revealable remainder, and 'should be paraphrased or roleplayed out'."
+  },
+  {
+   "index": 516,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with the inhabitants described in more detail than I think necessary",
+   "note": "Same Wayback capture; verbatim in the paragraph on the published version of T1."
+  },
+  {
+   "index": 517,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The villagers are presented (mostly) in the houses where they live",
+   "note": "Same capture, in the 'Wall of Text syndrome' paragraph; the parenthetical '(mostly)' matches the claim's 'mostly'."
+  },
+  {
+   "index": 518,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It describes the founding of the Village of Hommlet, the rise of the Temple of Elemental Evil, and the fall of the latter",
+   "note": "Same capture, introduction paragraph. All three limbs (founding, rise, fall) present."
+  },
+  {
+   "index": 519,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "details on laws, admin, taxes, taxis, landmarks, nobility and guilds",
+   "note": "Live page fetched raw. Section 'Chapters 9: Volo's Waterdeep Enchiridion': 'The final chapter... before we're given an overview of each of the city's wards' — supports 'final chapter' and 'before its wards'."
+  },
+  {
+   "index": 520,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The enchiridion gives a very brief history, layout",
+   "note": "Live page fetched raw; sentence continues '(including the various wards...) and calendar of the city'."
+  },
+  {
+   "index": 521,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "along with an introduction to the legal system ... and social norms",
+   "note": "Same sentence as 520; legal system and social norms are conjoined exactly as the claim states."
+  },
+  {
+   "index": 522,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "game books that were written as if they were real-world sources from within the gaming settings",
+   "note": "DriveThruRPG live URL is Cloudflare-blocked (403 'Just a moment...'); recovered via Wayback raw capture 20210120014759id_. 'Introducing the Volo Guides' opens 'In the early 90s' and the Product Historian is named as Shannon Appelcline."
+  },
+  {
+   "index": 523,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "those DMs could just say, \"Volo was wrong\"",
+   "note": "Same capture: 'he got to use an unreliable narrator... allowed him to create details without worrying about contradicting the readers' own campaigns'. Attribution 'He says' is to Greenwood, reported by Appelcline, as the claim states."
+  },
+  {
+   "index": 524,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "skip topics by saying Volo had been kicked out of a locale",
+   "note": "Claim carries no quote field, so verbatim grading does not apply. Page: 'he could skip over some topics by saying simply that Volo had been kicked out of whatever locale Greenwood had decided not to write about.' Substance fully supported."
+  },
+  {
+   "index": 525,
+   "verdict": "PARTIAL",
+   "trueWording": "he has Elminster state, in his preface to the book, \"I must warn ye...\"",
+   "note": "The quoted words are on the page verbatim and Elminster's preface is in-world, but the page presents the line as a statement within the preface; it never says the preface opens with it. Graded PARTIAL on that positional limb only.",
+   "unsupportedLimb": "that the warning opens the preface — the page does not place the line at the preface's start"
+  },
+  {
+   "index": 526,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first guidebook in Volo's famous series of in-depth, in-character looks at important parts of the Forgotten Realms",
+   "note": "Same Wayback capture, opening line of Product History. 'first', 'in-character looks', 'parts of the Forgotten Realms' all present."
+  },
+  {
+   "index": 527,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Keep, as written is heaped with loving detail to almost no obvious purpose",
+   "note": "Live blogspot page fetched raw; section '1. Excessively Keep Focused', post dated Sunday, January 26, 2014, posted by Gus L."
+  },
+  {
+   "index": 528,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the keep is described as a series of rooms, with text conveyed in thick blocks",
+   "note": "Live WordPress page fetched raw; 'The first major roadblock' paragraph. Posted January 26, 2019 by Prince (Age of Dusk)."
+  }
+ ]
+}

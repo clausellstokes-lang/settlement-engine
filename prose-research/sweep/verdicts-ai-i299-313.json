@@ -1,0 +1,236 @@
+{
+ "name": "ai",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 299,
+   "feature": "reader address in article body",
+   "claim": "Collaborative or letter-like sentences address the reader or community from inside the entry.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "As you can see from the evidence presented above",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 300,
+   "feature": "chatbot markup artefacts",
+   "claim": "oaicite, contentReference, turn0search0 and Markdown syntax survive in the record.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "oaicite",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 301,
+   "feature": "invalid identifiers",
+   "claim": "Citations carry broken URLs, invalid DOIs or ISBNs and book cites without page numbers.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 302,
+   "feature": "knowledge-cutoff leak",
+   "claim": "A live article stated the model's training cutoff as if it were the record's date of information.",
+   "source": "404 Media 2024-10 \u2014 The Editors Protecting Wikipedia from AI Hoaxes",
+   "url": "https://www.404media.co/email/d516cf7f-3b5f-4bf4-93da-325d9522dd79/",
+   "quote": "As of my last knowledge update in January 2022",
+   "page": "404 Media 2024-10 \u2014 The Editors Protecting Wikipedia from AI Hoaxes"
+  },
+  {
+   "index": 303,
+   "feature": "agentless action",
+   "claim": "Inanimate subjects are promoted to agents (rooms tighten, maps publish) so no human actor is ever named.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "Rooms tighten",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 304,
+   "feature": "periphrastic connection phrases",
+   "claim": "'In connection with', 'associated with', 'involvement in' appear disproportionately; 720 Draft-space hits, many obviously AI.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "in connection with",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 305,
+   "feature": "repeated broken table template",
+   "claim": "The same malformed wikitable recurs across many musician discographies and filmographies, implausible for independent human authors.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 306,
+   "feature": "indicator spreadsheet is variants of a core",
+   "claim": "Editors track 106 indicators, most of which are variations on a small set of core patterns.",
+   "source": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia talk:Signs of AI writing"
+  },
+  {
+   "index": 307,
+   "feature": "marker-word surge",
+   "claim": "realm, intricate, showcasing and pivotal held low, stable frequency 2010-2022 then surged in 2023 abstracts.",
+   "source": "Liang et al. 2024 \u2014 Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)",
+   "url": "https://arxiv.org/html/2404.01268v1",
+   "quote": "sudden surge in usage starting in 2023",
+   "page": "Liang et al. 2024 \u2014 Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)"
+  },
+  {
+   "index": 308,
+   "feature": "homogenising pressure in crowded fields",
+   "claim": "LLM modification is highest where papers most resemble neighbours (22.2% vs 14.7% of sentences) and in short papers (17.7% vs 13.6%).",
+   "source": "Liang et al. 2024 \u2014 Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)",
+   "url": "https://arxiv.org/html/2404.01268v1",
+   "quote": "",
+   "page": "Liang et al. 2024 \u2014 Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)"
+  },
+  {
+   "index": 309,
+   "feature": "copula loss at corpus scale",
+   "claim": "'is' and 'are' fell 10-17% in 2023 arXiv abstracts while 'significant' rose 99% (CS) to 308% (math).",
+   "source": "Geng & Trotta 2024 \u2014 Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)",
+   "url": "https://arxiv.org/html/2404.08627v2",
+   "quote": "",
+   "page": "Geng & Trotta 2024 \u2014 Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)"
+  },
+  {
+   "index": 310,
+   "feature": "CS abstracts about one-third LLM-style",
+   "claim": "By 2024-01 roughly 35% of arXiv CS abstracts carried ChatGPT-style word density; astro and cond-mat 10-20%.",
+   "source": "Geng & Trotta 2024 \u2014 Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)",
+   "url": "https://arxiv.org/html/2404.08627v2",
+   "quote": "approximately 35%",
+   "page": "Geng & Trotta 2024 \u2014 Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)"
+  },
+  {
+   "index": 311,
+   "feature": "style words displace content words",
+   "claim": "2024 excess vocabulary is almost entirely style verbs and adjectives (delves 25.2x, showcasing 9.2x, underscores 9.1x), unlike earlier content-noun spikes.",
+   "source": "Kobak et al. 2024 \u2014 Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)",
+   "url": "https://arxiv.org/html/2406.07016v1",
+   "quote": "consisted almost entirely of style words",
+   "page": "Kobak et al. 2024 \u2014 Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)"
+  },
+  {
+   "index": 312,
+   "feature": "topic-level homogenisation",
+   "claim": "LLM-written introductions on one topic may all sound the same and carry the same ideas and references.",
+   "source": "Kobak et al. 2024 \u2014 Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)",
+   "url": "https://arxiv.org/html/2406.07016v1",
+   "quote": "all LLM-generated introductions on a certain topic might sound the same",
+   "page": "Kobak et al. 2024 \u2014 Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)"
+  },
+  {
+   "index": 313,
+   "feature": "readability drop under LLM revision",
+   "claim": "LLM-revised Wikipedia text uses longer words, fewer to-be and auxiliary verbs, fewer pronouns and longer sentences, scoring less readable on Flesch-Kincaid, Dale-Chall and Coleman-Liau.",
+   "source": "Huang, Xu, Geng, Wan & Chen 2025 \u2014 Wikipedia in the Era of LLMs: Evolution and Risks (arXiv 2503.02879, TMLR)",
+   "url": "https://arxiv.org/html/2503.02879v1",
+   "quote": "tend to be less readable",
+   "page": "Huang, Xu, Geng, Wan & Chen 2025 \u2014 Wikipedia in the Era of LLMs: Evolution and Risks (arXiv 2503.02879, TMLR)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 299,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Editors sometimes paste chatbot correspondence, meant for the user, into article text",
+   "note": "Raw wikitext (action=raw) and rendered HTML both fetched. The supplied quote 'As you can see from the evidence presented above' is NOT on the page (zero hits in either representation) - it is not the page's wording. The substance is supported by section 'Communication intended for the user' > 'Collaborative communication': 'Editors sometimes paste text from an AI chatbot that was meant as correspondence, prewriting or advice, rather than article content. This may appear in article text or within comments', with words-to-watch 'I hope this helps', 'let me know', 'Would you like...', and community-addressing examples ('Collaboration, not confrontation, should be the goal')."
+  },
+  {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contentReference, oaicite/oai_citation, +1, turn0search0, attributableIndex; plus 'Use of Markdown'",
+   "note": "'oaicite' appears verbatim many times. Subsection heading: 'ChatGPT: contentReference, oaicite/oai_citation, +1, turn0search0, attributableIndex' - 'LLM output sometimes exposes its internal formatting code, which is an unambiguous indicator that the text originated with AI.' turn0search0 limb: 'ChatGPT may include citeturn0search0 ... at the ends of sentences'. Markdown limb: separate section 'Use of Markdown' - Markdown formatting 'is preserved in clipboard text by the copy functions on some chatbot platforms' and shows up in saved revisions (examples cited by diff). All four limbs supported; all are documented as surviving into live revisions."
+  },
+  {
+   "index": 301,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Broken external links; invalid DOI/ISBNs; book citations without page numbers",
+   "note": "Claim carries no quote, so verbatim cannot be graded; every limb is supported by three named sections. 'Broken external links': 'If a new article or draft has multiple citations with external links, and several of them are broken ... this is a strong sign of an AI-generated page'. 'Invalid DOI and ISBNs': 'Unresolvable DOIs and invalid ISBNs can be indicators of hallucinated references.' 'Book citations without page numbers or URLs': 'LLMs often generate book citations that do not include page numbers.'"
+  },
+  {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Chester Mental Health Center article, November 2023, included that phrase",
+   "note": "404 Media article fetched live (no block, no archive route needed). Verbatim: 'One egregious example is this Wikipedia article about the Chester Mental Health Center, which in November of 2023 included the phrase \"As of my last knowledge update in January 2022,\" referring to the last time the large language model was updated.' Live-article limb, training-cutoff limb and date-of-information limb all supported; the page uses curly quotes around the phrase but the phrase itself is word for word."
+  },
+  {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the object is promoted to subject and becomes the 'doer'",
+   "note": "Talk section 'Suggested addition: Inanimate subjects performing human actions (dropped actors)'. 'Rooms tighten' verbatim in the example list ('\"Rooms tighten and rates move\" (hotels sell out and raise rates)'); 'The closure maps publish in June' supplies the maps-publish example. Agent-promotion limb verbatim: 'the object is promoted to subject and becomes the \"doer.\"' Actor-suppression limb: 'while not mentioning or skipping the \"doer\"' and 'prose in which things happen but nobody does anything'. Nuance recorded, not a limb failure: the page says LLM output 'defaults to actor-less constructions at high density', a shade weaker than the claim's 'ever'."
+  },
+  {
+   "index": 304,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'720 Draft-space hits' is the count for \"in connection with\" alone, not the three phrases together; 'disproportionately' is asserted by no measurement on the page",
+   "trueWording": "insource search of \"in connection with\" in Draft space returns 720 results",
+   "note": "Talk section 'Connections'. Quote 'in connection with' verbatim. Supported: all three phrases are named ('similar use of \"in connection with/to\" / \"associated with/to\" / \"involvement in\" language in other drafts that read as unnatural'), and 'a lot of obvious/likely AI content' among the hits. Unsupported as stated: the 720 figure is one insource search for the single phrase \"in connection with\", and the editor's 'a lot of obvious/likely AI content' is a look at the FIRST PAGE of those results, not the 720; the page offers no base-rate comparison, so 'disproportionately' is not established there."
+  },
+  {
+   "index": 305,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "not plausible many editors duplicated the same broken table format independently",
+   "note": "Talk section 'Weird table coding'; claim carries no quote so verbatim cannot be graded. Recurrence limb: 'have now seen at least a dozen or so times this year alone' and 'I've consistently come across this particular format in either the discography tables of musicians or the filmography tables of actors and filmmakers'. Independence limb verbatim in substance: 'it's just not plausible that this many editors would just suddenly keep inventing and duplicating the same broken table-coding format independently of each other.' (A later reply attributes the format to Markdown table syntax; that does not disturb the claim.)"
+  },
+  {
+   "index": 306,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'most of which' overstates the page's 'a lot of them', and it is one editor's personal spreadsheet, not 'editors' collectively tracking",
+   "trueWording": "the spreadsheet I keep has 106 signs (sorted by strength)",
+   "note": "Talk section 'AI edit summaries section', Gnomingstuff: 'the spreadsheet I keep has 106 signs (sorted by strength) but a lot of them are variations on the same thing.' The 106 figure is exact and the variation observation is real, but the page says 'a lot of them', not 'most', gives no 'small set of core patterns', and the spreadsheet is one editor's private list rather than a project-wide tracker."
+  },
+  {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "consistently low frequency 2010-2022, sudden surge in usage starting in 2023",
+   "note": "Figure 2 caption, arXiv HTML v1: 'The words are: realm, intricate, showcasing, pivotal. These terms maintained a consistently low frequency in arXiv CS abstracts over more than a decade (2010-2022) but experienced a sudden surge in usage starting in 2023.' Quote verbatim; all four words, the flat 2010-2022 baseline and the 2023 surge all supported. Scope note: the corpus is arXiv Computer Science abstracts specifically."
+  },
+  {
+   "index": 308,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "By February 2024: 22.2% vs 14.7%; shorter papers 17.7% vs 13.6%",
+   "note": "No quote supplied, so verbatim cannot be graded; both figure pairs appear exactly. 'By February 2024, the abstracts of papers more similar to their closest peer had an estimated 22.2% of sentences modified by LLMs, compared to 14.7% for papers less similar to their closest peer.' And: 'By February 2024, the abstracts of shorter papers had an estimated 17.7% of sentences modified by LLMs, compared to 13.6% for longer papers'. Both limbs supported, including 'of sentences'."
+  },
+  {
+   "index": 309,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the 10-17% range and the 99%/308% rises are GPT-3.5 SIMULATION results (Table 1, abstracts before vs after ChatGPT processing), not measured changes in 2023 arXiv abstracts",
+   "trueWording": "real 2023 abstracts: is/are 'dropped by more than 10%'; rest is simulation",
+   "note": "Geng & Trotta v2 fetched raw. Real-data finding: 'The counts in 10,000 abstracts of these two words were quite stable before 2023. However, the frequency of these two terms has dropped by more than 10% in 2023' - a lower bound only, no upper bound and no per-category split. The numbers the claim cites are Table 1, 'Word frequency (per abstract) before and after ChatGPT processing': is/are cs -14%,-17%; math -9%,-5%; astro -11%,-1%; cond-mat -16%,-13%; significant cs 99%, math 308%, astro 53%, cond-mat 171%. That table is GPT-3.5 re-writing 10,000 period-14 (April-July 2022) abstracts, not an observation of 2023 abstracts. So the direction is right, the attribution of the figures to 2023 abstracts is wrong; the '10-17%' range also does not match the across-category simulation spread (-1% to -17%)."
+  },
+  {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fraction of LLM-style abstracts estimated approximately 35% in computer science",
+   "note": "Abstract: 'especially in the field of computer science, where the fraction of LLM-style abstracts is estimated to be approximately 35%, if we take the responses of GPT-3.5 to one simple prompt ... as a baseline.' Results: 'the density of ChatGPT style texts of the most recent time period in this category is around 35% ... astro and cond-mat both reach values between 10% and 20%, approximately.' Date limb: the corpus is 'one million arXiv papers submitted from May 2018 to January 2024', so 'the most recent time period' ends 2024-01. All limbs supported; the paper's baseline caveat (one simple GPT-3.5 prompt) is worth carrying."
+  },
+  {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excess vocabulary in 2024 consisted almost entirely of style words",
+   "note": "Kobak et al. v1 raw. Quote verbatim: 'whereas the excess vocabulary in 2024 consisted almost entirely of style words (Figure 3a)'. Parts of speech limb: 'Out of all 280 excess style words in 2024, 66% were verbs and 18% were adjectives.' Ratios limb verbatim: 'Less common words with strong excess usage included delves (r = 25.2), showcasing (r = 9.2) and underscores (r = 9.1)'. Contrast limb: 'The excess vocabulary during the Covid pandemic consisted almost entirely of content words ... most excess words in prior years were nouns.' Corpus is 14 million PubMed abstracts, not arXiv."
+  },
+  {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "might sound the same and would contain the same set of ideas and references",
+   "note": "Discussion section, verbatim: 'For instance, all LLM-generated introductions on a certain topic might sound the same and would contain the same set of ideas and references, thereby missing out on innovations and exacerbating citation injustice.' Framed by the authors as a consequence of homogenisation ('This makes LLM outputs less diverse and novel than human-written text'). Both limbs of the claim supported; it is the paper's stated expectation, not a measurement, and the claim's 'may' preserves that."
+  },
+  {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "six readability metrics all indicate LLM-generated texts tend to be less readable",
+   "note": "Huang et al. v1 raw. Quote verbatim: 'Figure 5(c) presents the results of six readability metrics, all of which indicate that LLM-generated texts tend to be less readable.' Table 1's LLM-processing column carries every other limb: Long word % up, 'To Be' verb % down, Auxiliary verb % down, Pronouns % down, Average sentence length up (Long sentence % up), Dale-Chall readability up, Flesch-Kincaid grade level up, Coleman-Liau index up (and Flesch reading ease down) - all three named formulas move in the less-readable direction. 'LLM-revised Wikipedia text' matches the method: real Wikipedia simulated through GPT-4o-mini and Gemini-1.5-Flash, 'comparing the texts before and after LLM processing'."
+  }
+ ]
+}

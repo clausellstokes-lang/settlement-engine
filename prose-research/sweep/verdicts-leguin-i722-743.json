@@ -1,0 +1,236 @@
+{
+ "name": "leguin",
+ "chunk": 10,
+ "claims": [
+  {
+   "index": 722,
+   "feature": "civic record register",
+   "claim": "Mazin Saleem notes that Le Guin repeatedly uses the modal 'may' when the book describes a Kesh custom.",
+   "source": "Mazin Saleem, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "Again and again, Le Guin used the word",
+   "page": "section 'Thou mayest'"
+  },
+  {
+   "index": 723,
+   "feature": "place and institution description",
+   "claim": "Saleem quotes a Kesh description of a ritual song whose permitted repetitions are given as an open list ending in the option of not at all.",
+   "source": "Mazin Saleem quoting Always Coming Home, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "it may be sung four times, or five times, or nine times",
+   "page": "section 'Thou mayest'"
+  },
+  {
+   "index": 724,
+   "feature": "omission as information",
+   "claim": "Saleem reports that the book's own note offers two competing readings of a disputed Kesh text rather than a verdict.",
+   "source": "Mazin Saleem quoting Always Coming Home, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "a vengeful biography pretending to be autobiography",
+   "page": "section 'Thou mayest'"
+  },
+  {
+   "index": 726,
+   "feature": "point of view and distance",
+   "claim": "Saleem describes a gloss attached to a Kesh story as spoken by a commentator on that story in the present tense.",
+   "source": "Mazin Saleem, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "writes a commentator on the story",
+   "page": "section 'There and back again'"
+  },
+  {
+   "index": 727,
+   "feature": "edition and house style",
+   "claim": "Saleem gives the length of Always Coming Home as 525 pages and lists field notes first among its contents.",
+   "source": "Mazin Saleem, Strange Horizons, 2018",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+   "quote": "At 525 pages, including field notes, stories, maps, charts",
+   "page": "opening section"
+  },
+  {
+   "index": 729,
+   "feature": "place and institution description",
+   "claim": "Garlick and King describe the Back of the Book as encyclopaedia-like appendices holding the novel's practical information.",
+   "source": "Ben Garlick and Liesl King, cultural geographies, 2022",
+   "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+   "quote": "appendices referred to as ‘The Back of the Book’",
+   "page": "pp. 3-4, section on the text"
+  },
+  {
+   "index": 730,
+   "feature": "point of view and distance",
+   "claim": "Garlick and King characterise Pandora as an implicit translator or reporter rather than a character with a stake in the events.",
+   "source": "Ben Garlick and Liesl King, cultural geographies, 2022",
+   "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+   "quote": "narrator or else implicit translator/reporter",
+   "page": "p. 4"
+  },
+  {
+   "index": 731,
+   "feature": "civic record register",
+   "claim": "A Kesh social fact is stated in Always Coming Home as a rule of the language's grammar.",
+   "source": "Le Guin, Always Coming Home, quoted in Garlick and King, cultural geographies, 2022",
+   "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+   "quote": "Kesh grammar makes no provision for a relation of ownership",
+   "page": "p. 11 (note 107)"
+  },
+  {
+   "index": 732,
+   "feature": "civic record register",
+   "claim": "Kesh social disapproval is reported in Always Coming Home as an agentless past passive listing three disapproved things.",
+   "source": "Le Guin, Always Coming Home, quoted in Garlick and King, cultural geographies, 2022",
+   "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+   "quote": "a competitive attitude were all socially disapproved",
+   "page": "p. 11 (note 109)"
+  },
+  {
+   "index": 733,
+   "feature": "place and institution description",
+   "claim": "Garlick and King report the Kesh life expectancy from the novel as a range of thirty to forty years.",
+   "source": "Ben Garlick and Liesl King, cultural geographies, 2022",
+   "url": "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+   "quote": "short life expectancies (30–40 years)",
+   "page": "p. 11"
+  },
+  {
+   "index": 734,
+   "feature": "place and institution description",
+   "claim": "Danny Yee describes the Back of the Book as presenting the Kesh in a more traditional ethnographic form than the rest of the volume.",
+   "source": "Danny Yee, review of Always Coming Home, 1995",
+   "url": "https://dannyreviews.com/h/Always_Coming_Home.html",
+   "quote": "contains additional information about the Kesh in more traditional ethnographic form",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 739,
+   "feature": "civic record register",
+   "claim": "The Ekumen field notes in The Left Hand of Darkness state a biological rule in the present tense with a generic plural subject.",
+   "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "Normal individuals have no predisposition to either sexual role in kemmer",
+   "page": "quoted block, cited to p. 91"
+  },
+  {
+   "index": 740,
+   "feature": "withheld information and inference",
+   "claim": "The same field notes mark the limit of the observer's own experience in a first-person parenthesis.",
+   "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "I haven’t seen this done in rural Karhide",
+   "page": "quoted block, cited to p. 91"
+  },
+  {
+   "index": 741,
+   "feature": "place and institution description",
+   "claim": "The field notes cite a second named observer inside a parenthesis before qualifying his report.",
+   "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "Otie Nim wrote that in the Orgoreyn region the use",
+   "page": "quoted block, cited to p. 91"
+  },
+  {
+   "index": 743,
+   "feature": "plainness and economy",
+   "claim": "The field notes close the ambisexuality section with a twelve-word sentence built entirely of common kinship nouns.",
+   "source": "Le Guin, The Left Hand of Darkness ch. 7, quoted in Nick Hubble's BSFA Review notice",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "the mother of several children may be the father of several more",
+   "page": "quoted block, cited to p. 91"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 722,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Again and again, Le Guin used the word “may”",
+   "note": "Raw HTML fetched (200) and read directly, not summarised. Byline confirmed: Mazin Saleem, Strange Horizons, 26 November 2018. Quote appears verbatim as a prefix in the section headed 'Thou mayest'. Both limbs hold: the repetition ('Again and again') and the tie to Kesh custom — the sentence before it says the lack of compulsion reaches down to the level of customs, and the example given is a ritual song. Only drift is tense: the page has past 'used', the claim says 'uses'."
+  },
+  {
+   "index": 723,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "…or as many as you like, or not at all",
+   "note": "Same page, section 'Thou mayest'. The claim's quote is verbatim; the full quoted line runs on past 'nine times' to the open ending given as trueWording, so 'open list ending in the option of not at all' is exact. One attribution nuance worth recording: the page presents the sentence as Le Guin's own writing ('when describing a ritual song ‘the four/five heya’ she wrote that…'), so 'a Kesh description' must be read as a description of a Kesh song, not one authored by the Kesh."
+  },
+  {
+   "index": 724,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a vengeful biography pretending to be autobiography; or may be pure fiction",
+   "note": "Same page, section 'Thou mayest'. Quote verbatim. Every limb holds: 'The book notes, however, that the accusations might be' introduces it, so it is the book's own note; two readings are offered (vengeful biography posing as autobiography / pure fiction); the modals 'might' and 'may' withhold any verdict. The text glossed is the Kesh poem 'The Third Child Story'; 'disputed' is the claim's word, supported by the note's own hedging rather than stated on the page."
+  },
+  {
+   "index": 726,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'spoken by a commentator' — the page says the commentator writes the gloss, not speaks it",
+   "trueWording": "writes a commentator on the story",
+   "note": "Same page, section 'There and back again'. Quote verbatim, and the two structural limbs hold: the gloss is attached to the Kesh story 'A War with the Pig People' and both the gloss ('It is appropriate for children to fight') and its attribution verb are present tense. But the page's verb is 'writes', a written commentary; the claim's 'spoken by' is not supported by the page and is contradicted by the quote the claim itself carries."
+  },
+  {
+   "index": 727,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "At 525 pages, including field notes, stories, maps, charts",
+   "note": "Same page, opening section (first body paragraph). Quote verbatim. Both limbs hold: the figure is 525 pages, and 'field notes' is the first item in the list of contents that follows. (Danny Yee's separate review of the Bantam 1987 printing gives 562pp; that is a different edition, not a contradiction of what Saleem writes.)"
+  },
+  {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "encyclopaedia-like appendices referred to as ‘The Back of the Book’",
+   "note": "PDF fetched (200, 212,960 bytes) and text extracted with pdftotext -layout; read directly. Quote verbatim. The surrounding clause ties the appendices to the 'factual' documentation of practical information, so both limbs hold. Located just before the printed page-4 break, i.e. p. 3 running to p. 4 — consistent with the claim's page field."
+  },
+  {
+   "index": 730,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than a character with a stake in the events' — the same sentence calls Pandora a participating character",
+   "trueWording": "A consistent voice and participating character, narrator or else implicit translator/reporter",
+   "note": "Same PDF, p. 3–4 (the claim says p. 4; the passage sits immediately above the page-4 break). The quoted fragment 'narrator or else implicit translator/reporter' is verbatim, so the first half of the claim holds. The contrastive half does not: the appositive opens with 'A consistent voice and participating character', and the authors go on to say she operates as cipher for both reader and Le Guin. The page offers the roles as a disjunctive series, not as a denial that Pandora participates."
+  },
+  {
+   "index": 731,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kesh grammar makes no provision for a relation of ownership",
+   "note": "Same PDF, p. 11. Quote verbatim; the sentence continues 'between living beings'. Introduced as 'Pandora observes that', and endnote 107 reads 'Le Guin, ACH, p. 42' — so the wording is from Always Coming Home, as the claim's source line states. The social fact (non-ownership, glossed a line earlier as everybody belonging to everybody) is indeed put as a rule of Kesh grammar."
+  },
+  {
+   "index": 732,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and a competitive attitude were all socially disapproved",
+   "note": "Same PDF, p. 11. Quote verbatim. The full quoted clause lists exactly three disapproved things — big families, a large private food store, and competitiveness — and closes in the past passive 'were all socially disapproved' with no by-phrase, so the agentless-past-passive limb holds. Endnote 109 reads 'Le Guin, ACH, p. 437', confirming the wording is from the novel and not the critics'."
+  },
+  {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short life expectancies (30–40 years)",
+   "note": "Same PDF, p. 11 (between the printed page-10 and page-12 breaks). Quote verbatim, en dash as given. Garlick and King state it in their own voice while discussing the novel, attributing it to past catastrophes alongside low birth rates; no separate endnote sits on the figure itself."
+  },
+  {
+   "index": 734,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "contains additional information about the Kesh in more traditional ethnographic form",
+   "note": "Page fetched (200) and read as raw text. Quote verbatim; the subject is 'The “back of the book”'. The comparative limb is carried by 'more traditional' against the preceding paragraph, which describes the rest of the volume as a montage of Kesh stories, poems and myths around a central novella. One correction to the claim's locator: the sentence opens paragraph 3 of the review body, not paragraph 2. Review dated August 1995, Danny Yee."
+  },
+  {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Normal individuals have no predisposition to either sexual role in kemmer",
+   "note": "Page fetched (200) and read as raw text; reviewer confirmed as Nick Hubble, first published in The BSFA Review, posted 24 December 2020. Quote verbatim and it opens the indented block, which the page then identifies as 'the field notes of Ong Tot Oppong of the Hainish Ekumen'; the block is cited '(91)'. Present tense 'have' with the generic plural 'Normal individuals' — both limbs hold. The page names the chapter by title, 'The Question of Sex', and never gives the chapter number 7 that the claim's source line supplies."
+  },
+  {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I haven’t seen this done in rural Karhide",
+   "note": "Same quoted block on the Vector page, cited to p. 91. Quote verbatim, curly apostrophe as given. It sits inside the parenthesis that follows the Otie Nim citation, in the first person, and marks exactly what the observer has not herself witnessed — every limb holds."
+  },
+  {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Otie Nim wrote that in the Orgoreyn region the use",
+   "note": "Same quoted block, p. 91. Quote verbatim. Otie Nim is a second named observer cited inside the parenthesis by the note-writer Ong Tot Oppong, and the semicolon clause that follows qualifies the report by limiting its reach — the practice is common in Orgoreyn but unseen by her in rural Karhide. The page assigns Otie Nim no gender; the claim's 'his' follows the novel's convention rather than anything on this page."
+  },
+  {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'twelve-word sentence' closing the section — on the page it is the final clause of a longer sentence inside an elided excerpt, not a section's close",
+   "trueWording": "the mother of several children may be the father of several more",
+   "note": "Same quoted block, p. 91. The twelve words are verbatim and the kinship-noun limb holds — mother, children and father are the only nouns in it. But it is not a sentence on the page: it is joined by 'and' to a preceding clause about no physiological habit being established. Nor does the page show it closing a section; the block is stitched with ellipses, cited to a single page, and the chapter the page calls 'The Question of Sex' continues past it. The sentence does close the excerpt as Hubble prints it."
+  }
+ ]
+}

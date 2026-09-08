@@ -1,0 +1,38 @@
+inflight scanner alive (pid 54294)
+== in-flight progress (sweep/inflight/SUMMARY.md) ==
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 03:00:39 (inflight-scan.py; every 120 s; the autosave seals this dir)
+
+| sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
+|---|---|---|---|---:|---|---|---|
+| ai | critic |  | result | 11 | — | — | 06:11:37 |
+== sweep state before ==
+SKIP verdicts-dnd-i0-14.json index 0: claim not in state and slot 0 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 1: claim not in state and slot 1 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 2: claim not in state and slot 2 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 3: claim not in state and slot 3 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 4: claim not in state and slot 4 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 5: claim not in state and slot 5 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 6: claim not in state and slot 6 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 7: claim not in state and slot 7 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 8: claim not in state and slot 8 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 9: claim not in state and slot 9 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 10: claim not in state and slot 10 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 11: claim not in state and slot 11 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 12: claim not in state and slot 12 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 13: claim not in state and slot 13 holds a different claim
+SKIP verdicts-dnd-i0-14.json index 14: claim not in state and slot 14 holds a different claim
+{"tolkien":{"claims":874,"verdicts":874,"kept":641,"partial":214},"martin":{"claims":990,"verdicts":990,"kept":763,"partial":107},"dnd":{"claims":1153,"verdicts":1153,"kept":903,"partial":204},"ai":{"claims":1518,"verdicts":1518,"kept":1015,"partial":191},"kay":{"claims":1103,"verdicts":1103,"kept":631,"partial":100},"leguin":{"claims":924,"verdicts":831,"kept":592,"partial":98},"wolfe":{"claims":1255,"verdicts":1255,"kept":766,"partial":217},"hobb":{"claims":696,"verdicts":696,"kept":363,"partial":174}}
+== dnd: last run wf_23c7ccc2-48d, prev args args-dnd-r11.json -> next tag r12 ==
+{"name": "dnd", "tag": "r12", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r12.json", "bytes": 5291, "chunks": 4, "toVerify": 59, "findAngles": [], "extraAngles": [], "droppedComplete": ["place-lawful-primaries"], "baseIndex": null, "verifiedCount": 1153, "cap": 4}
+  flags: {'regrade': True, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 4 angles [] []
+== leguin: last run wf_14be9775-021, prev args args-leguin-r9.json -> next tag r10 ==
+{"name": "leguin", "tag": "r10", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-leguin-r10.json", "bytes": 4788, "chunks": 7, "toVerify": 93, "findAngles": [], "extraAngles": [], "droppedComplete": [], "baseIndex": null, "verifiedCount": 831, "cap": 4}
+  flags: {'regrade': True, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 7 angles [] []
+
+== PASTE, one Workflow call per sweep (scriptPath = /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/research-workflow-v3.js; args = the JSON of the file named) ==
+  dnd -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r12.json (    5291 bytes)
+  leguin -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-leguin-r10.json (    4788 bytes)
+Then: update /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/LAST-RUNS.json with the new runIds/argsFiles/tags; the autosave seals the kit every 5 min.
+⚠ TAG LAW: the tag (r6, r7…) is a LAUNCH COUNTER, not the owner's round. A launch with no findAngles/extraAngles COMPLETES the previous round.
+   The owner's S-BOUND rounds count FIND rounds only: tolkien/martin have none left; dnd/ai one targeted round (the PLACE register / the ARCHIVAL register);
+   kay/leguin/wolfe/hobb one critic-driven top-up; NO further round after those. A file with nothingToRun=true is NOT launched.

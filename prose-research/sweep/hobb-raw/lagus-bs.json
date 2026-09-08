@@ -1,0 +1,58 @@
+{
+  "_embedded" : {
+    "bitstreams" : [ {
+      "id" : "ae370f8d-eafe-41e3-8eb9-79b245702b82",
+      "uuid" : "ae370f8d-eafe-41e3-8eb9-79b245702b82",
+      "name" : "towardfi.pdf",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "towardfi.pdf",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "bundleName" : "ORIGINAL",
+      "sizeBytes" : 698761,
+      "checkSum" : {
+        "checkSumAlgorithm" : "MD5",
+        "value" : "5131510474baef57304f4fe39c5c673f"
+      },
+      "sequenceId" : 1,
+      "type" : "bitstream",
+      "_links" : {
+        "content" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/content"
+        },
+        "bundle" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/bundle"
+        },
+        "accessStatus" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/accessStatus"
+        },
+        "format" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/format"
+        },
+        "thumbnail" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/thumbnail"
+        },
+        "self" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82"
+        }
+      }
+    } ]
+  },
+  "page" : {
+    "number" : 0,
+    "size" : 20,
+    "totalPages" : 1,
+    "totalElements" : 1
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://helda.helsinki.fi/server/api/core/bundles/149b3c0a-f401-447f-8a22-452273227d93/bitstreams"
+    }
+  }
+}

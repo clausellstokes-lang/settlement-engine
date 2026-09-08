@@ -1,0 +1,217 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd" version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <dbname>enwiki</dbname>
+    <base>https://en.wikipedia.org/wiki/Main_Page</base>
+    <generator>MediaWiki 1.47.0-wmf.18</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal talk</namespace>
+      <namespace key="118" case="first-letter">Draft</namespace>
+      <namespace key="119" case="first-letter">Draft talk</namespace>
+      <namespace key="126" case="first-letter">MOS</namespace>
+      <namespace key="127" case="first-letter">MOS talk</namespace>
+      <namespace key="710" case="first-letter">TimedText</namespace>
+      <namespace key="711" case="first-letter">TimedText talk</namespace>
+      <namespace key="828" case="first-letter">Module</namespace>
+      <namespace key="829" case="first-letter">Module talk</namespace>
+      <namespace key="1728" case="first-letter">Event</namespace>
+      <namespace key="1729" case="first-letter">Event talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Tehanu</title>
+    <ns>0</ns>
+    <id>350754</id>
+    <revision>
+      <id>1371251649</id>
+      <parentid>1371241027</parentid>
+      <timestamp>2026-08-25T12:56:35Z</timestamp>
+      <contributor>
+        <username>Frost</username>
+        <id>30292728</id>
+      </contributor>
+      <minor/>
+      <comment>Frost moved page [[Earthsea: Tehanu]] to [[Tehanu]] over redirect: [[Special:Permalink/1371250893#IT4|Requested]] by Binksternet at [[WP:RM/TR]]: Move vandalism by banned editor. The talk page was already moved back.</comment>
+      <origin>1367020593</origin>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text bytes="26774" sha1="2rved8v4prrks14brdk9vrfj10d2fa0" xml:space="preserve">{{Short description|1990 fantasy novel by Ursula K. Le Guin}}
+{{good article}}
+{{Use mdy dates|date=March 2025}}
+{{Infobox book|
+|name         = Tehanu
+|image        = Tehanu(1stEd).jpg
+|image_size   = 175
+|caption      = Cover of first edition, with the subtitle ''The Last Book of Earthsea'' (absent from later editions)
+|author       = [[Ursula K. Le Guin]]
+|country      = United States
+|language     = English
+|series       = ''[[Earthsea]]''
+|release_number = 4
+|genre        = [[Fantasy]]
+|published    = 1990 ([[Atheneum Books|Atheneum]]), 2012 ([[Gallery Publishing Group|Saga]])
+|media_type   = Print ([[hardcover]] and [[paperback]])
+|pages        = 226
+|award        = [[Nebula Award for Best Novel]] (1990), [[Locus Award for Best Fantasy Novel]] (1991)
+|isbn         = 0-689-31595-3
+|dewey        = [Fic] 20
+|congress     = PZ7.L5215 Te 1990
+|oclc         = 19975630
+|preceded_by  = [[The Farthest Shore]]
+|followed_by  = [[Tales from Earthsea]]
+}}
+'''''Tehanu''''' {{IPAc-en|t|ə|ˈ|h|ɑː|n|uː}},&lt;ref&gt;{{cite AV media |last=Le Guin |first=Ursula K. |date=October 10, 2010 |title=Ursula K. Le Guin reads from "The Wizard of Earthsea" |type=Reading |url=https://www.youtube.com/watch?v=i6KrU84CPKE |access-date=December 28, 2022 |time=1:05:45 |location=Washington Center for the Performing Arts |publisher=Timberland Regional Library |archive-date=December 29, 2022 |archive-url=https://web.archive.org/web/20221229101241/https://www.youtube.com/watch?v=i6KrU84CPKE |url-status=live }}&lt;/ref&gt; initially subtitled ''The Last Book of Earthsea'', is a [[fantasy]] novel by [[Ursula K. Le Guin]], published in February 1990 by Atheneum.&lt;!--&lt;ref name=Kirkus/&gt;--&gt; It is the fourth of her [[Earthsea]] novels, written nearly twenty years after the first three novels. It was followed by further Earthsea stories, even though its subtitle initially proclaimed it as the last.&lt;!--&lt;ref name="Guynes 2021"/&gt;--&gt;&lt;!--&lt;ref name=isfdb&gt;--&gt;&lt;ref group=lower-alpha&gt;Two short stories set in Earthsea preceded the trilogy. A fifth novel and a collection of stories and essays were published about ten years after ''Tehanu''. See {{isfdb series |4220 |title=Earthsea Cycle}}.&lt;/ref&gt;
+
+The novel is viewed as an enlargement of the earlier ''Earthsea'' trilogy (marketed for [[young adult fiction|young adults]]), as ''Tehanu'' presents an aging hero and heroine—[[Ged (Earthsea)|Ged]], a principal character in all three earlier ''Earthsea'' novels, and Tenar, the protagonist of the second in the series, ''[[The Tombs of Atuan]]''.&lt;!--&lt;ref name="Dirda 2017"/&gt;--&gt;&lt;!--&lt;ref name="Guynes 2021"/&gt;--&gt; ''Tehanu'' won the 1990 [[Nebula Award for Best Novel]]&lt;!--&lt;ref name=sfwa/&gt;--&gt; and the 1991 [[Locus Award for Best Fantasy Novel]].&lt;!--&lt;ref name=locus&gt;--&gt;
+
+''Tehanu'' has been called Le Guin's best novel, featuring greater depth of characterisation than did her earlier books.&lt;!--&lt;ref name="Guynes 2021"/&gt;--&gt; Critics have commented that the novel responds to the first three ''Earthsea'' books, moving from male-oriented high fantasy to a [[Feminism|feminist]] exploration of what [[Simone de Beauvoir]] called "immanence", a woman's situation in the world.
+
+== Background ==
+
+''Tehanu'' is the fourth book in the ''Earthsea'' cycle, which began with Le Guin's 1968 novel ''[[A Wizard of Earthsea]]'' and its protagonist, Sparrowhawk, whose [[true name]] is Ged. The author provided some description in a recorded afterword to the 2016 audiobook version: as ''Tehanu'' opens, approximately 25 years have passed since the events at the end of ''[[The Tombs of Atuan]]'', "time enough for the girl Tenar to become a widow with grown children"; and "a day or two" has passed since the close of ''[[The Farthest Shore]]'' to ''Tehanu''&lt;nowiki&gt;'&lt;/nowiki&gt;s Chapter 4, "Kalessin", "time enough for [that] dragon... to carry Ged from Roke to Gont."{{efn|Le Guin says: "Between the last chapter of ''The Tombs of Atuan'' and the first chapter of ''Tehanu'', twenty-five years or so pass, time enough for the girl Tenar to become a widow with grown children. Between the last chapter of ''The Farthest Shore'' and the fourth chapter of ''Tehanu'', a day or two passes, time enough for the dragon Kalessin to carry Ged from Roke to Gont."&lt;ref name=LeGuinAfterwardInterprEssay&gt;{{cite AV media |people=Le Guin, Ursula K. (author, narrator) &amp; Sterlin, Jenny (narrator) |date= May 31, 2016 |title=Tehanu: The Earthsea Cycle, Book Four |type=audiobook |url=https://rbmediaglobal.com/audiobook/9781501923920/ |access-date=4 December 2024 |version=unabridged ed. |time=0:00-0:26 (of afterward) |location=Landover, Maryland |publisher=Recorded Books—RBmedia |asin=B01G9EP4ZQ}}&lt;/ref&gt;}}
+
+== Book ==
+
+=== Plot ===
+
+Goha lives alone on Gont because her farmer husband Flint has died, and her two children, Apple and Spark, have grown up. A burned child is brought to her at Oak Farm, and she saves her life. The burns leave scarring on the child's face, and the fingers of one hand have been fused into a claw. Goha adopts her and gives the child the name Therru, which means flame.
+
+Goha learns that the mage Ogion requests her presence at his deathbed in Re Albi. She sets out to visit him with Therru. On the way, she encounters a group of ruffians, one of whom is Handy, who claims to be Therru's uncle. Ogion reveals Goha as Tenar, and he says she must teach Therru. After his death, Tenar stays on at his cottage, assisted by Moss, a local witch, and Heather, a simple village girl. Ged (also called Sparrowhawk) arrives on the back of the dragon Kalessin, unconscious and near death, having spent all his wizardly powers in sealing the gap between the worlds of the living and the dead created by the evil sorcerer Cob. Tenar nurses Ged back to health, but when the new king Lebannen sends envoys to bring him back to Havnor for the coronation, Ged cannot face them. He accepts Tenar's offer to return to Oak Farm to manage things there in her absence and once more takes up life as a goatherd. While at Re Albi, Tenar is confronted by the local lord's wicked mage, Aspen, who attempts to put a curse on her, but is thwarted.
+
+Tenar informs the king's men that she cannot reveal Ged's whereabouts, and they accept the situation and depart. Tenar is threatened by both Aspen and Handy, and she flees with Therru. Confused by Aspen's magic, Tenar is almost overtaken by Handy, but escapes to Gont Port, taking refuge in the king's ship. Lebannen takes Tenar and Therru to Valmouth, where Tenar eventually returns to Oak Farm to find that Ged is away tending goats in the mountains for the season. Tenar settles back into life on the farm, until one night when Handy and a few other men attempt to break into the house. They are driven off by Tenar and Ged, and the latter nearly kills one of them with a pitchfork. Tenar and Ged begin a relationship, acknowledging that they had always loved each other. Ged wants to settle down and live an ordinary life. Together, they teach and care for Therru and manage the farm. Tenar's son Spark returns home from the sea, demanding and getting the farm, as under Gontish law, it belongs to him.
+
+Tenar receives word that Moss is dying and wants to see her. She, Ged and Therru leave for Re Albi. However, the message was a trap set by Aspen, who reveals himself to be a follower of the evil Cob. Tenar and Ged are led to the lord's mansion controlled by Aspen's magic. Therru runs to the cliff behind Ogion's cottage, where she calls to the dragon Kalessin for help, and reveals her true nature: she is "a double being, half human, half-dragon". Aspen and his followers bring both Tenar and Ged up to the clifftop. Under the influence of Aspen's spell, they are both moving to jump to their deaths when Kalessin arrives, burning Aspen and his men to ash. Kalessin addresses Therru by her [[true name]] Tehanu, calling her daughter, and asks if she would like to leave. Tehanu decides to stay with Tenar and Ged; they settle down to a simple life at Ogion's old cottage.
+
+=== Major characters ===
+
+{{See also|List of characters in Earthsea}}
+
+[[File:Tehanu (2012 edition).png|thumb|upright|Cover of 2012 edition (hardcover) with corrected title.]]
+
+The primary characters of the novel are:&lt;ref name=DF&gt;Petty, Anne C. ''Dragons of Fantasy: The Scaly Villains &amp; Heroes of Tolkien, Rowling, McCaffrey, Pratchett &amp; Other Fantasy Greats'', (Cold Spring Harbor, New York: Cold Spring Press, 2004)&lt;/ref&gt;
+
+* Goha, as known by her husband and locals, revealed to be ''Tenar'', former priestess of the Tombs of Atuan, and the White Lady of Gont&lt;!--&lt;ref name=Kirkus/&gt;--&gt;
+* [[Ged (Earthsea)|Ged]], also called ''Sparrowhawk'', the Archmage of Roke
+* Aspen, revealed as ''Erisen'', a twisted mage and follower of ''Cob''
+* Kalessin, a dragon, the eldest
+* Therru, a burned child, revealed as ''Tehanu'', and a woman-dragon
+
+=== Publication history ===
+
+''Tehanu'' is the fourth novel set in the fictional [[archipelago]] of [[Earthsea]], published almost twenty years after the first three Earthsea novels (1968–1972); it was not the last, despite the subtitle of the first edition, which was later dropped.&lt;ref name=isfdb&gt;{{ISFDB title|7656|Tehanu}} (ISFDB).&lt;/ref&gt;
+
+* {{cite book |author=Le Guin, Ursula K. |date=1990 |title=Tehanu: The Last Book of Earthsea |volume=4 |series=Earthsea cycle |location=New York, New York |publisher=[[Atheneum Books|Atheneum]] (Simon &amp; Schuster) |url=https://books.google.com/books?id=2sinwwEACAAJ |isbn=0689315953 |ref=none}} and simultaneously Gollancz in London. Bantam Books reprinted the book in paperback.
+* {{cite AV media |people=Le Guin, Ursula K. (author, narrator) &amp; Sterlin, Jenny (narrator)  |date=&lt;!--May 31, --&gt;2016 |title=Tehanu: The Earthsea Cycle, Book Four |type=audiobook |url=https://rbmediaglobal.com/audiobook/9781501923920/ |version=unabridged ed. |location=Landover, Maryland |publisher=Recorded Books—RBmedia |asin=B01G9EP4ZQ}} Includes extensive interpretative and explanatory material composed and read by Le Guin, entitled "An Afterward From the Author".
+
+The book has been reprinted many times, including in collections of the Earthsea series or "Earthsea Cycle" by publishers and imprints including Atheneum, Simon &amp; Schuster, Pocket Books, Simon Pulse, and Penguin Books.
+
+== Reception ==
+
+Michael Dirda, writing for ''[[The Washington Post]]'', writes that after the "honored and loved" Earthsea trilogy of "deeply imagined" and "finely wrought" books marketed as young-adult novels, ''Tehanu'' is "less sheerly exciting" but perhaps "the most moving" as it examines how Ged and Tenar address their own old age.&lt;ref name="Dirda 1990"/&gt; The book revisits the Earthsea themes of balance, integration with one's personal shadow, and trust, but in Dirda's view giving them "a darker, more realistic edge".&lt;ref name="Dirda 1990"/&gt; Further, ''Tehanu'' presents the world from a woman's point of view, with a social structure that disfavours women, unheroic men, and child abuse. All this makes the book "meditative, somber, even talky".&lt;ref name="Dirda 1990"&gt;{{cite news |last=Dirda |first=Michael |title=The Twilight of an Age of Magic |url=https://www.washingtonpost.com/archive/entertainment/books/1990/02/25/the-twilight-of-an-age-of-magic/34d58490-4114-430b-890e-dc3dc3a3680a/ |work=[[The Washington Post]] |date=February 25, 1990}}&lt;/ref&gt; 
+Dirda notes that ''Tehanu''  "reveal[s] what happened to [the series'] hero and heroine in old age", and with its emphasis on these aging, earlier novel protagonists is thus an enlargement of the earlier ''Earthsea'' trilogy (which was largely marketed for [[young adult fiction|young adults]]).&lt;ref name="Dirda 2017"&gt;{{cite news |last=Dirda |first=Michael |date=December 6, 2017 |title=What We Can Learn From Two Literary Masters: Ursula K. Le Guin and James Salter |newspaper=[[The Washington Post]] |url=https://www.washingtonpost.com/entertainment/books/what-we-can-learn-from-two-literary-masters-ursula-k-le-guin-and-james-salter/2017/12/05/536a7968-d9d9-11e7-b1a8-62589434a581_story.html |access-date=30 November 2024}}&lt;/ref&gt;
+
+''Kirkus Reviews'' comments that "Yes, there are dragons; but the human story and its meaning are primary here. Unlike Ged's, Le Guin's power is undiminished." It notes that Ged and Tenar are "past middle age", reflecting the slower action, but "even young readers will be beguiled by the flawless, poetic prose, the philosophy expressed in thoughtful, potent metaphor, and the consummately imagined world".&lt;ref name=Kirkus&gt;{{cite web |date=January 15, 1990 |title=Tehanu, The Last Book of Earthsea by Ursula K. Le Guin |publisher=[[Kirkus Reviews]] |url=https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/ |access-date=November 30, 2024 |quote=Tenar (the young priestess of The Tombs of Atuan...), now the widow of Farmer Flint, adopts a young child (Therru) who has been viciously abused and maimed by her own parents. |archive-date=October 23, 2016 |archive-url=https://web.archive.org/web/20161023211852/https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/ |url-status=live }}&lt;/ref&gt;  The ''[[Science Fiction Review]]'' summarizes the novel as "Great things happen to great people, whatever their station in life, and wherever they may be. An excellent story and a fine capstone to Earthsea."&lt;ref&gt;{{Cite journal |title=Science Fiction Review: Tehanu: The Last Book of Earthsea |journal=[[Science Fiction Review]] |date=Summer 1990 |volume=1 |issue= 2 |pages=75}}&lt;/ref&gt;
+
+== Analysis ==
+
+[[File:Janus the doorkeeper.jpg|thumb|left|upright=0.8|Richard D. Erlich describes the book as being [[Liminality|liminal]], like the Roman god [[Janus|Janus the doorkeeper]], looking both backward (to male-oriented fantasy) and forward (to feminist analysis).{{sfn|Erlich|2009|p=404}}]]
+
+The initial trilogy focuses on the character and quests of Ged, with Tenar as the central character of the second book. Sean Guynes, in ''Reactor Magazine'', calls ''Tehanu'' Le Guin's best novel.&lt;ref name="Guynes 2021"/&gt; In his view, it goes beyond the initial trilogy in its willingness to show the reader the characters' dark sides as they grow older.&lt;ref name="Guynes 2021"/&gt; Like ''The Farthest Shore'', it reflects on "power and its loss"; like ''The Tombs of Atuan'', it focuses on gender; but unlike them, it makes use of a new "reflective distance", revisiting the trilogy and addressing "earlier faults" in its writing, just as ''The Tombs of Atuan'' had revisited Earthsea's lack of "a female protagonist".&lt;ref name="Guynes 2021"&gt;{{cite web |last=Guynes |first=Sean |date=24 February 2021 |title=Tehanu: Le Guin's Return to Earthsea—and Her Best Novel |work=[[Reactor (magazine)|Reactor Magazine]] |location=London, England |url=https://reactormag.com/tehanu-le-guins-return-to-earthsea-and-her-best-novel/}}&lt;/ref&gt; Also in ''Reactor Magazine'', [[Jo Walton]] finds ''Tehanu'' "problematic", writing that it is "a restless book with very strange pacing",&lt;ref name="Walton 2010"/&gt; but that it is surprising that it "works as well as it does", given the competing demands of "the force of story" – plot, action – and Le Guin's evident intention to place "women's domestic lives" at the novel's centre.&lt;ref name="Walton 2010"&gt;{{cite web |last=Walton |first=Jo |author-link=Jo Walton |date=February 1, 2010 |title=A Woman on Gont: Ursula Le Guin's Tehanu |work=[[Reactor (magazine)|Reactor Magazine]] |location=London, England |publisher=Holtzbrinck-Macmillan |url=https://reactormag.com/a-woman-on-gont-ursula-le-guins-lemgtehanulemg/}}&lt;/ref&gt;
+
+In an analysis from her doctoral dissertation – that Le Guin featured on her webpage – Sharada Bhanu argues that ''Tehanu'' functions with ''Tales from Earthsea'' and ''The Other Wind'' as a second trilogy, unlike the first.&lt;ref name="Bhanu 2007"/&gt; In Bhanu's view, the first looked at coming-of-age, while the second presented sexual experience and "middle-aged protagonists", seen "from the outside".&lt;ref name="Bhanu 2007"/&gt; This changed the work's focus and "emotional tone".&lt;ref name="Bhanu 2007"/&gt; The effect, Bhanu writes, is that the "second trilogy enlarges, interrogates and deconstructs the first", the "cultural ethos" now being [[feminism]].&lt;ref name="Bhanu 2007"/&gt; She quotes an Earthsea proverb, "Weak as women's magic; wicked as women's magic", and notes the male focus of the earlier trilogy, with women unable to enter the school of Roke. ''Tehanu'' compensates "by presenting a woman's world" from the now middle-aged Tenar's point of view, alongside sympathetic portraits of other women "of various ages and professions", and "weak and limited" men "even when well meaning".&lt;ref name="Bhanu 2007"&gt;{{cite thesis |last=Bhanu |first=Sharada |date=2007 |title=Not Two: An Indian Perspective on Western Fantasy Fiction for Children |degree=PhD |chapter=Tehanu: A Return to the Source |location=[[Chennai]], India |publisher=[[University of Madras|Stella Maris College-Madras University]] |url=http://www.ursulakleguin.com/Bhanu-Thesis-Tehanu.html |url-status=dead |archive-url=https://web.archive.org/web/20071011121331/https://www.ursulakleguin.com/Bhanu-Thesis-Tehanu.html |archive-date=11 October 2007}}&lt;/ref&gt;
+
+[[File:Simone De Beauvoir (cropped).jpg|thumb|upright|Ursula Le Guin's [[feminism]] as seen in ''Tehanu'' has been contrasted with that of [[Simone De Beauvoir]] (pictured).{{sfn|Erlich|2009|pp=405–408}} ]]
+
+The literary scholar Richard D. Erlich devotes an entire chapter, "Earthsea Revisited", of his book ''Coyote's Song'' (on Le Guin's teaching stories) to ''Tehanu'': it is the only Earthsea book to receive this treatment.{{sfn|Erlich|2009|pp=379–417}} Most of this is an annotated summary of the plot, the notes drawing out literary and philosophical connections with her other works, and with those of other authors including [[Rilke]]'s ''[[Duino Elegies]]'', [[Shakespeare]]'s ''[[Macbeth]]'' and ''[[King Lear]]'', and the ''[[Tao te Ching]]''.{{sfn|Erlich|2009|pp=379–404}} Erlich writes that Le Guin and critics agree that ''Tehanu'' is "Le Guin's revising and revisioning of Earthsea".{{sfn|Erlich|2009|p=404}} A major strand of this consists of putting her "Is Gender Necessary? Redux" into a fiction presentation.&lt;!--https://theanarchistlibrary.org/library/ursula-k-le-guin-is-gender-necessary-redux--&gt;{{sfn|Erlich|2009|p=404}} Ehrlich argues that the book has a [[Janus]]-like aspect, facing both back to her earlier, more male-oriented books, and forwards to feminist writings. He finds this "[[wikt:decorous|decorous]]"{{sfn|Erlich|2009|p=404}} for a story which combines emphasis on faces that have one side scarred – both Therru/Tehanu and Sparrowhawk/Ged – and "so much stress on doorways and [[liminality]]", attention to in-between space.{{sfn|Erlich|2009|p=404}} Erlich concludes the chapter by stating that it is "unquestionably feminist and highly interesting" that ''Tehanu'' completes the logical arc from ''The Tombs of Atuan'' and other stories towards having "definitely a female protagonist"; and by saying that ''Tehanu'' is "an open-ended work" which he (successfully&lt;ref name=isfdb/&gt;) hoped would not be "The Last Book of Earthsea" claimed in the subtitle.{{sfn|Erlich|2009|p=416}}
+
+Erlich compares Le Guin's treatment of [[immanence]] in ''Tehanu'' to [[Simone de Beauvoir]]'s usage in her 1949 book ''[[The Second Sex]]'', "but with values reversed".{{sfn|Erlich|2009|pp=405–408}} De Beauvoir used the term, along with "transcendence", non-metaphysically to denote a woman's situation, being trapped in daily household chores, which she saw as bad. Erlich writes that in ''The Tombs of Atuan'', Tenar was trapped as a high priestess, isolated from daily chores, the point being in his view that high position can be a trap worse than being a 1940s housewife. Erlich writes that immanence is usually good in the Earthsea trilogy, and that Tenar gets to the goal of [[being, not doing]] some twenty years before Ged does. He summarizes Le Guin's position as valuing not only the male-style power that modern women may be able to seize from men, but also (in Le Guin's words) "the other room, where women live", meaning, he writes, "a domestic life", including the old-age unmarried partnership of Tenar and Ged.{{sfn|Erlich|2009|pp=405–408}}
+
+Erlich writes that what he calles "silences" are an important aspect of ''Tehanu''. In his analysis of the text, he mentions multiple places where readers are obliged to fill in gaps from their "own lives and experience".{{sfn|Erlich|2009|pp=409–416}} One such concerns the motives that drive the "villains" of the story, nowhere described by Le Guin. Erlich suggests that the reader needs to apply "a strong suspicion" of men's motives to get ''Tehanu'' to work. If the novel were high fantasy, he writes, then an evil wizard like Aspen would be simply a hook for "racist and sexist obsessions with purity and power".{{sfn|Erlich|2009|pp=409–416}} But since the book only touches on high fantasy, and is otherwise more down-to-earth, Aspen's "blind misogyny and male pigheadedness" will, Erlich suggests, seem understandable in proportion to how common readers have found those evils to be in the "patriarchal world we inhabit".{{sfn|Erlich|2009|pp=409–416}}
+
+{| class="wikitable" style="margin: 1em auto; text-align:center;"  
+|+ ''Tehanu''{{'s}} relationship to the initial ''[[Earthsea]]'' trilogy, according to Richard D. Erlich{{sfn|Erlich|2009|pp=379–417}}
+|-
+!   !! ''[[A Wizard of Earthsea]]''&lt;br/&gt;1968 !! ''[[The Tombs of Atuan]]''&lt;br/&gt;1970 !! ''[[The Farthest Shore]]''&lt;br/&gt;1972 !! ''Tehanu''&lt;br/&gt;1990
+|-
+! Protagonist 
+| Ged || Tenar (and Ged) || Ged || Therru/Tehanu
+|-
+! Protagonist's gender
+| Male || Female (and male) || Male || Female
+|-
+! Genre 
+| colspan=3 | [[High fantasy]] || Fantasy / philosophical novel
+|}
+
+== Awards ==
+
+''Tehanu'' won the 1990 [[Nebula Award]];&lt;ref name=sfwa&gt;{{cite web |url=https://nebulas.sfwa.org/nominated-work/tehanu-last-book-earthsea/ |title=1990 Nebula Awards |work=[[Nebula Award|The Nebula Awards]] |publisher=[[Science Fiction &amp; Fantasy Writers of America]] |access-date=August 19, 2021 |archive-date=August 19, 2021 |archive-url=https://web.archive.org/web/20210819121911/https://nebulas.sfwa.org/nominated-work/tehanu-last-book-earthsea/ |url-status=live }}&lt;/ref&gt; this made Le Guin the first person to win three Nebula Awards for Best Novel.&lt;ref name=SFADB-Nebulas&gt;{{cite web |url=http://www.sfadb.com/Nebula_Awards_Winners_By_Category |title=Nebula Awards Winners By Category |work=Science Fiction Awards Database |publisher=Locus Science Fiction Foundation |access-date=August 17, 2021 |archive-date=January 19, 2025 |archive-url=https://web.archive.org/web/20250119065504/http://www.sfadb.com/Nebula_Awards_Winners_By_Category |url-status=live }}&lt;/ref&gt;{{efn|[[Joe Haldeman]] would go on to equal this number in 2006, winning his third Nebula for [[Camouflage (novel)|''Camouflage'']]. Three years later, Le Guin received a fourth Nebula for [[Powers (novel)|''Powers'']]. As of 2021, she holds the record for the most Best Novel Nebulas.&lt;ref name=SFADB-Nebulas/&gt;&lt;ref&gt;{{cite journal |last=Troughton |first=R. K. |date=May 14, 2014 |title=Nebula Awards by the Numbers |url=https://amazingstories.com/2014/05/nebula-awards-numbers/ |journal=Amazing Stories |access-date=August 19, 2019 |archive-date=January 27, 2020 |archive-url=https://web.archive.org/web/20200127100449/https://amazingstories.com/2014/05/nebula-awards-numbers/ |url-status=live }}&lt;/ref&gt;}} The book won the [[Locus Award]] for Best Fantasy Novel,&lt;ref name=locus&gt;{{cite web |url=http://www.sfadb.com/Locus_Awards_1991 |title=Locus Awards 1991 |work=Science Fiction Awards Database |publisher=Locus Science Fiction Foundation |access-date=August 19, 2021 |archive-date=May 27, 2022 |archive-url=https://web.archive.org/web/20220527130815/http://sfadb.com/Locus_Awards_1991 |url-status=live }}&lt;/ref&gt; and was nominated for both the [[Mythopoeic Fantasy Award]] and the Homer Award.&lt;ref&gt;{{cite web |url=http://www.sfadb.com/Ursula_K_Le_Guin |title=Ursula K. Le Guin Awards |work=Science Fiction Awards Database |publisher=Locus Science Fiction Foundation |access-date=August 19, 2021 |archive-date=July 21, 2019 |archive-url=https://web.archive.org/web/20190721004427/http://www.sfadb.com/Ursula_K_Le_Guin |url-status=live}}&lt;/ref&gt;
+
+== See also ==
+
+* ''[[Tales from Earthsea]]'', including "Dragonfly", a postscript to ''Tehanu''
+
+== Notes ==
+
+{{reflist|group=lower-alpha}}
+
+==References==
+
+{{reflist}}
+
+== Sources ==
+
+* {{cite book |last=Erlich |first=Richard D. |year=2009 |chapter=Earthsea Revisited: ''Tehanu'' |title=Coyote's Song: The Teaching Stories of Ursula K. Le Guin |series=Milford series: Popular writers of today |volume=72 |location=Rockville, Maryland |publisher=[[Wildside Press]] |isbn=9781434457752 |url=https://books.google.com/books?id=dQJMK8SeNmsC |pages=379–417}}
+
+== Further reading ==
+
+* {{cite book |last1=Bernardo |first1=Susan M. |last2=Murphy |first2=Graham J. |title=Ursula K. Le Guin: A Critical Companion |publisher=[[Greenwood Press]] |location=Westport, Connecticut |edition=1st |year=2006 |isbn=0313332258 |ref=none}}
+* {{cite book |last=Cadden |first=Mike  |title=Ursula K. Le Guin Beyond Genre: Fiction for Children and Adults |publisher=[[Routledge]] |location=New York, New York |edition=1st |year=2005 |isbn=0415995272 |ref=none}}
+* {{cite book |last=Drout |first=Michael |author-link=Michael D. C. Drout |title=Of Sorcerers and Men: Tolkien and the Roots of Modern Fantasy Literature |publisher=[[Barnes &amp; Noble]] |location=China |edition=1st |year=2006 |isbn=978-0760785232 |ref=none}}
+* {{cite book |last=Martin |first=Philip |title=A Guide to Fantasy Literature: Thoughts on Stories of Wonder &amp; Enchantment |publisher=Crickhollow Books |location=Milwaukee, Wisconsin |edition=1st |year=2009 |isbn=978-1933987040 |url-access=registration |url=https://archive.org/details/guidetofantasyli0000mart |ref=none}}
+* {{cite book |last=Mathews |first=Richard |title=Fantasy: The Liberation of Imagination |publisher=[[Routledge]] |location=New York |edition=1st |year=2002 |isbn=0415938902 |ref=none}}
+
+==External links==
+* [https://en.wikiquote.org/wiki/Ursula_K._Le_Guin#Tehanu_(1990) Wikiquote]
+* {{ISFDB title|7656}}
+* [http://www.worldswithoutend.com/novel.asp?ID=183 ''Tehanu: The Last Book of Earthsea''] at Worlds Without End
+
+{{Ursula K. Le Guin}}
+{{Locus Award Best Fantasy Novel}}
+{{Nebula Award Best Novel}}
+
+{{Authority control}}
+
+[[Category:Earthsea novels]]
+[[Category:1990 American novels]]
+[[Category:1990 English-language novels]]
+[[Category:1990 fantasy novels]]
+[[Category:American fantasy novels]]
+[[Category:Sequel novels]]
+[[Category:Nebula Award for Best Novel–winning works]]
+[[Category:Atheneum Books books]]
+[[Category:Locus Award–winning works]]</text>
+      <sha1>2rved8v4prrks14brdk9vrfj10d2fa0</sha1>
+    </revision>
+  </page>
+</mediawiki>

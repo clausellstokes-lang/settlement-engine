@@ -1,0 +1,234 @@
+{
+ "name": "martin",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 945,
+   "feature": "diction (native vs latinate)",
+   "claim": "The Books and Boots essay argues that Martin's vocabulary systematically excludes almost all words derived from Latin, Greek or French.",
+   "source": "Simon, Books & Boots blog, 'George RR Martin's prose style - Affixes, compound and combination words' (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "systematic exclusion from his vocabulary of almost all words",
+   "page": "Abstract"
+  },
+  {
+   "index": 946,
+   "feature": "diction (native vs latinate)",
+   "claim": "The Books and Boots essay asserts that Martin's style shows a high frequency of words of Anglo-Saxon origin.",
+   "source": "Simon, Books & Boots blog (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "his style shows a high frequency of words of Anglo-Saxon origin",
+   "page": "Abstract"
+  },
+  {
+   "index": 947,
+   "feature": "diction (native vs latinate)",
+   "claim": "The Books and Boots essay reports that the common Latin and Greek prefixes it lists are almost never found in Martin's work.",
+   "source": "Simon, Books & Boots blog (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "Almost none of these are found in Martin",
+   "page": "GRRM's practice, 1. use of prefixes"
+  },
+  {
+   "index": 948,
+   "feature": "register modulation",
+   "claim": "The Books and Boots essay argues that Martin reserves his rare neoclassical words for scenes whose speaker or setting is legalistic or learned, naming the maesters and the septons' court as the places they appear.",
+   "source": "Simon, Books & Boots blog (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "deploying them carefully to distinguish scenes where he wants to accentuate",
+   "page": "GRRM's practice, 3. use of combining forms"
+  },
+  {
+   "index": 949,
+   "feature": "archaism",
+   "claim": "The Books and Boots essay identifies the archaic native prefix a- in atop, abed and ahorse as a deliberate archaism in Martin's prose.",
+   "source": "Simon, Books & Boots blog (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "he conspicuously deploys the archaic prefix",
+   "page": "GRRM's practice, 1. use of prefixes"
+  },
+  {
+   "index": 952,
+   "feature": "diction (native vs latinate)",
+   "claim": "The Books and Boots essay concludes that the scarcity of Latin, Greek and French sourced words is what makes Martin's prose feel archaic.",
+   "source": "Simon, Books & Boots blog (2013)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "The result is to make his prose feel archaic",
+   "page": "Some examples"
+  },
+  {
+   "index": 953,
+   "feature": "stylometry",
+   "claim": "Blatt's corpus for the book includes eight George R. R. Martin novels, the appendix listing Dying of the Light, Fevre Dream, The Armageddon Rag and the five published Song of Ice and Fire volumes.",
+   "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), appendix of books used, pages 240-241",
+   "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=George+R.+R.+Martin",
+   "quote": "George R. R. Martin—8 Novels Dying of the Light Fevre Dream",
+   "page": "pp. 240-241, list of books used"
+  },
+  {
+   "index": 954,
+   "feature": "other: favourite words",
+   "claim": "Blatt's cinnamon-words table gives Martin the three words dragons, cloaks and unsullied as the words he uses most anomalously often.",
+   "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), cinnamon words and nod words table, page 175",
+   "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=unsullied",
+   "quote": "dragons, cloaks, unsullied",
+   "page": "p. 175, table of cinnamon words and nod words"
+  },
+  {
+   "index": 955,
+   "feature": "stylometry",
+   "claim": "Blatt states that the tables of clichés and favourite words in his book cover the fifty authors he has been using as examples throughout it.",
+   "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), page 172",
+   "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=%22fifty+authors%22",
+   "quote": "fifty authors I've been using as examples throughout this book",
+   "page": "p. 172"
+  },
+  {
+   "index": 956,
+   "feature": "adjective and adverb discipline",
+   "claim": "Blatt reports that for every 10,000 words E L James writes, 155 are -ly adverbs, against 134 for Meyer and an average of 105 for King.",
+   "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), chapter 1 'Use Sparingly', page 13",
+   "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=adverbs+per+10%2C000+words",
+   "quote": "155 are -ly adverbs . For Meyer the count is 134",
+   "page": "p. 13, Use Sparingly"
+  },
+  {
+   "index": 957,
+   "feature": "adjective and adverb discipline",
+   "claim": "Blatt's 'Use Sparingly' chapter prints its per-book adverb tables for Hemingway and Steinbeck, and a full-text search of the volume returns Martin's name on no page of that chapter.",
+   "source": "Ben Blatt, Nabokov's Favorite Word Is Mauve (2017), chapter 1 'Use Sparingly', pages 9-27",
+   "url": "https://books.google.com/books?id=0AhHDgAAQBAJ&jscmd=SearchWithinVolume2&q=Martin",
+   "quote": "Adverbs per 10,000 Words - Steinbeck The Winter of Our Discontent",
+   "page": "pp. 14-16, Use Sparingly"
+  },
+  {
+   "index": 958,
+   "feature": "other: book and chapter length",
+   "claim": "The A Song of Ice and Fire Wiki's chapter table for A Game of Thrones totals 292,332 words.",
+   "source": "A Song of Ice and Fire Wiki, 'A Game of Thrones/Statistical Analysis'",
+   "url": "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+   "quote": "Word Count (292,332)",
+   "page": "Unique POV Breakdown table header"
+  },
+  {
+   "index": 959,
+   "feature": "other: book and chapter length",
+   "claim": "The same wiki table counts 73 point-of-view chapters shared among nine characters in A Game of Thrones.",
+   "source": "A Song of Ice and Fire Wiki, 'A Game of Thrones/Statistical Analysis'",
+   "url": "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+   "quote": "# of POVs (73)",
+   "page": "Unique POV Breakdown table header"
+  },
+  {
+   "index": 960,
+   "feature": "other: book and chapter length",
+   "claim": "The wiki gives Eddard Stark 15 of the book's chapters and 53,467 words, 18.29% of the novel.",
+   "source": "A Song of Ice and Fire Wiki, 'A Game of Thrones/Statistical Analysis'",
+   "url": "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+   "quote": "53,467",
+   "page": "Unique POV Breakdown table, Eddard Stark row"
+  },
+  {
+   "index": 961,
+   "feature": "other: book and chapter length",
+   "claim": "The wiki's chapter-by-chapter table for A Game of Thrones gives its shortest chapter 1,696 words and its longest 7,334 words.",
+   "source": "A Song of Ice and Fire Wiki, 'A Game of Thrones/Statistical Analysis'",
+   "url": "https://iceandfire.fandom.com/wiki/A_Game_of_Thrones/Statistical_Analysis",
+   "quote": "1,696",
+   "page": "Chapter by Chapter Breakdown, chapters 17 and 34"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a systematic exclusion from his vocabulary of almost all words\"",
+   "note": "Abstract, para 1, verbatim: \"distinguished not only by its pseudo-medieval setting... but by a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French or other languages\". Every limb (Latin, Greek, French) supported. Live page fetched raw, HTTP 200, browser UA."
+  },
+  {
+   "index": 946,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"his style shows a high frequency of words of Anglo-Saxon origin\"",
+   "note": "Abstract, para 2, verbatim: \"Instead, his style shows a high frequency of words of Anglo-Saxon origin, a tendency which is particularly conspicuous in his use of compound and combination words.\" Live page raw fetch."
+  },
+  {
+   "index": 947,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Almost none of these are found in Martin's work.\"",
+   "note": "Section 'GRRM's PRACTICE / 1. George R.R. Martin's use of prefixes'. The page first reprints Dr Lam's Latin (ab-, ad-, inter-, intra-, post-, pre-, re-, sub-, super-) and Greek (a-, ana-, dia-, endo-, exo-, epi-, hyper-, hypo-) prefix lists, then says verbatim \"Almost none of these are found in Martin's work. There are hardly if any words starting ab, sub, super, post... Their absence speaks volumes.\" Claim's 'almost never' limb matches; the essay itself grants exceptions (re-, submit, intermittent, fornication)."
+  },
+  {
+   "index": 948,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"deploying them carefully to distinguish scenes where he wants to accentuate\"",
+   "note": "Section 3 (combining forms), verbatim: \"...emphasises Martin's craft in deploying them carefully to distinguish scenes where he wants to accentuate the legalistic or learned character of the speaker or context of the setting.\" Both named venues are on the page: Maester Colemon's 'intercession' and the Oldtown maesters ('penetrate', 'complement', 'complaint'), and 'Fornication' in the chapter where Margaery is accused by the religious order of the septons (section 1 also cites 'chapters about the High Septon and his religious court')."
+  },
+  {
+   "index": 949,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse\"",
+   "note": "Section 1, verbatim: \"And sometimes Martin goes to the other extreme... delving beyond common speech into archaic native forms: for example, he conspicuously deploys the archaic prefix 'a-' to denote position: atop, abed, ahorse\". All three exemplars and the native/archaic characterisation are on the page."
+  },
+  {
+   "index": 952,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The result is to make his prose feel archaic.\"",
+   "note": "Section 'Some examples', verbatim, and the preceding sentence supplies the causal limb: \"And they feel that much more ubiquitous because there are so few words sourced from Latin, Greek or French, few if any neoclassical affixes, no foreign combining forms. The result is to make his prose feel archaic.\" Note the sentence sits in 'Some examples', not the essay's CONCLUSION section, but the abstract makes the same conclusion."
+  },
+  {
+   "index": 953,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"George R. R. Martin-8 Novels Dying of the Light Fevre Dream\"",
+   "note": "books.google.com SearchWithinVolume2 (the URL the claim names) fetched raw, HTTP 200. p. 241 returns verbatim: \"George R. R. Martin—8 Novels Dying of the Light Fevre Dream The Armageddon Rag A Game of Thrones... A Clash of Kings A Storm of Swords A Feast for Crows A Dance [with Dragons]\" (the OCR interleaves the adjacent Cormac McCarthy column). 3 standalone novels + 5 ASOIAF volumes = the stated 8. p. 240 carries the running head of the same appendix. Evidence is Google Books' verbatim full-text index of pp. 240-241, not a page image."
+  },
+  {
+   "index": 954,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"dragons, cloaks, unsullied\" - p. 175 CINNAMON WORDS column",
+   "note": "p. 175 returns the string \"dragons, cloaks, unsullied\" verbatim, and the page header \"CINNAMON WORDS NOD WORDS\". Attribution to Martin is by column alignment on the same page: the author column (returned by q=George+R.+R.+Martin) runs Martin, McCarthy, McEwan, Mead, Melville, Meyer, Mitchell, Morrison, Nabokov, Orwell...; the cinnamon column runs \"dragons, cloaks, unsullied / yessir, mam, upriver / lavatory, forwards, fridge / guardians, vampire, dorm / whale, forecastle, sperm / vampire, grimaced, flinched / mam, dint, piss / messed, navel, slop / mauve, banal, pun / beastly, quid, workhouse\" - anchored decisively by Melville=whale/forecastle/sperm and Nabokov=mauve/banal/pun, so the first triple is Martin's. 'most anomalously often' matches the book's own gloss of cinnamon words (p. 170 \"an approximation of their favorites\", p. 172 \"top three 'cinnamon words'\", p. 166 discusses anomalous use)."
+  },
+  {
+   "index": 955,
+   "verdict": "PARTIAL",
+   "trueWording": "p.172: fifty example authors PLUS \"fifty more authors\"; clichés not mentioned",
+   "unsupportedLimb": "that the quoted sentence covers the clichés table, and that the favourite-words table stops at the fifty - p. 172's very next sentence adds \"fifty more authors of popular and critical acclaim\", so that table covers a hundred",
+   "note": "The quotation is verbatim on p. 172: \"...top three 'cinnamon words' and top three 'nod words' for each of the fifty authors I've been using as examples throughout this book. To add to the fun, I've also included fifty more authors of popular and critical acclaim.\" So the sentence is about the favourite-words (cinnamon/nod) table only - clichés are a different table on p. 158, worded differently (\"fifty authors I use as examples, Number of Clichés per 100,000 Words\"). The claim fuses two pages into one sentence and drops the second fifty. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet."
+  },
+  {
+   "index": 956,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"155 are -ly adverbs. For Meyer the count is 134, while King averages 105\"",
+   "note": "p. 13 returns verbatim: \"...10,000 words E L James writes, 155 are -ly adverbs. For Meyer the count is 134, while King averages 105...\" All three figures and the per-10,000-words denominator are on the page; 'averages' for King is the page's own word. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet."
+  },
+  {
+   "index": 957,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Adverbs per 10,000 Words - Steinbeck The Winter of Our Discontent\"",
+   "note": "Quote verbatim on p. 16. p. 15 carries the parallel \"Adverbs per 10,000 Words - Hemingway To Have and Have Not The Sun Also Rises...\", so both named per-book tables exist. Second limb reproduced independently: q=Martin over the volume returns 7 hits - pp. 156, 213, 232, 240, 241, 262, 269 - none inside pp. 9-27, and pp. 213/232/240/262 are other Martins (Martin Amis, Martin Chuzzlewit, Martin Eden). Caveat on method, not on the verdict: Google Books caps a result set at ten, and this query returned seven, so the enumeration is complete. Route: books.google.com SearchWithinVolume2, the exact URL the claim names, fetched raw with a browser UA, HTTP 200 - Google Books' verbatim full-text index of the book, not a page image and not a third-party search snippet."
+  },
+  {
+   "index": 958,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Word Count (292,332)\" - and the chapter rows sum to exactly 292,332",
+   "note": "Two independent raw routes, the live host having returned 403 to curl: (1) the wiki's own api.php action=parse prop=wikitext, HTTP 200, and (2) the Wayback raw capture web/20250521205534id_/, HTTP 200. Both carry the header row verbatim: \"Character (9) | # of POVs (73) | % of Total POVs | Word Count (292,332) | % of Word Count\". Locational nuance: the figure is printed in the Unique POV Breakdown header, not in the Chapter by Chapter table - but I summed the rendered chapter table myself and it is 73 rows totalling exactly 292,332, so the claim's limb holds."
+  },
+  {
+   "index": 959,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Character (9)!!# of POVs (73)\" - header of Unique POV Breakdown",
+   "note": "Verbatim in both routes: \"# of POVs (73)\" and \"Character (9)\" in the same header row. The table body lists exactly nine POV characters (Eddard, Catelyn, Daenerys, Tyrion, Jon, Bran, Sansa, Arya, Will) whose chapter counts 15+11+10+9+9+7+6+5+1 = 73, matching the chapter table's 73 rows (prologue + 72 chapters)."
+  },
+  {
+   "index": 960,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Eddard Stark row: 15 | 20.55% | 53,467 | 18.29%",
+   "note": "Verbatim in both routes. All three limbs on the page: 15 POV chapters, 53,467 words, 18.29% of word count. Cross-checked against the chapter table, which contains Eddard I through Eddard XV = 15 chapters."
+  },
+  {
+   "index": 961,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1,696 (Chapter 17, Bran III); 7,334 (Chapter 34, Catelyn VI)",
+   "note": "\"1,696\" appears verbatim. I parsed all 73 rendered chapter rows: minimum 1,696 = Chapter 17 (Bran III), maximum 7,334 = Chapter 34 (Catelyn VI), exactly the two chapters the claim's page field names. Runners-up 7,214 (Eddard VII, ch. 30) and 7,100 (Tyrion VIII, ch. 62) confirm the maximum; the prologue's 3,801 is well above the minimum."
+  }
+ ]
+}

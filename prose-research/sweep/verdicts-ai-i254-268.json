@@ -1,0 +1,239 @@
+{
+ "name": "ai",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 254,
+   "feature": "plausible hoax with real anchors",
+   "claim": "A ~2,000-word article on an Ottoman fortress that never existed passed Articles for Creation by anchoring to a real sultan (Mehmed the Conqueror, 1466), plausible structural detail and well-formatted citations to nonexistent works, surviving from 2023-01 to 2023-12.",
+   "source": "404 Media 2024-10 \u2014 The Editors Protecting Wikipedia from AI Hoaxes",
+   "url": "https://www.404media.co/email/d516cf7f-3b5f-4bf4-93da-325d9522dd79/",
+   "quote": "well-formatted citations referencing completely nonexistent works",
+   "page": "404 Media 2024-10 \u2014 The Editors Protecting Wikipedia from AI Hoaxes"
+  },
+  {
+   "index": 255,
+   "feature": "fake sources in low-checkability languages",
+   "claim": "The 'Leninist historiography' article carried entirely invented references in Russian and Hungarian, where fewer reviewers could check them.",
+   "source": "Wikipedia:WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup",
+   "quote": "completely fake sources in Russian and Hungarian",
+   "page": "Wikipedia:WikiProject AI Cleanup"
+  },
+  {
+   "index": 256,
+   "feature": "real source, wrong subject",
+   "claim": "AI paragraphs on the beetle Estola albosignata cited real German and French papers that were about unrelated subjects (a crab).",
+   "source": "Wikipedia:WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup",
+   "quote": "completely off-topic",
+   "page": "Wikipedia:WikiProject AI Cleanup"
+  },
+  {
+   "index": 257,
+   "feature": "real citations attached without verification",
+   "claim": "Models cite real sources without checking that the source supports the sentence it is attached to.",
+   "source": "Wikipedia:WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup",
+   "quote": "will likely not verify the content",
+   "page": "Wikipedia:WikiProject AI Cleanup"
+  },
+  {
+   "index": 258,
+   "feature": "unsourced claims as the default",
+   "claim": "LLM-generated encyclopedic text virtually always fails to source its claims properly and often introduces errors.",
+   "source": "Wikipedia:WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup",
+   "quote": "virtually always fail to properly source claims",
+   "page": "Wikipedia:WikiProject AI Cleanup"
+  },
+  {
+   "index": 259,
+   "feature": "fictitious entity with plausible detail",
+   "claim": "A confidently detailed entry can describe a species that does not exist.",
+   "source": "Wikipedia:Large language models",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "greater-toothed pademelons",
+   "page": "Wikipedia:Large language models"
+  },
+  {
+   "index": 260,
+   "feature": "synthesis present in no source",
+   "claim": "LLMs draw conclusions that appear in no single reliable source, i.e. original research delivered in encyclopedic voice.",
+   "source": "Wikipedia:Large language models",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "not present in any single reliable source",
+   "page": "Wikipedia:Large language models"
+  },
+  {
+   "index": 261,
+   "feature": "neutral tone, partial substance",
+   "claim": "Generated text sounds neutral while its substance takes a side, which is hardest to catch in biographies.",
+   "source": "Wikipedia:Large language models",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "neutral-seeming in tone, but not necessarily in substance",
+   "page": "Wikipedia:Large language models"
+  },
+  {
+   "index": 262,
+   "feature": "confident delivery of error",
+   "claim": "Errors arrive plausible-sounding and with an air of confidence, so spot-checking produces false confidence.",
+   "source": "Wikipedia:Large language models",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "quote": "plausible-sounding and given with an air of confidence",
+   "page": "Wikipedia:Large language models"
+  },
+  {
+   "index": 263,
+   "feature": "obscure prompt triggers invention",
+   "claim": "Faced with an obscure topic the model invents details rather than saying less.",
+   "source": "Wikipedia:Case against LLM-generated articles",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+   "quote": "invented details when faced with a prompt on an obscure topic",
+   "page": "Wikipedia:Case against LLM-generated articles"
+  },
+  {
+   "index": 264,
+   "feature": "single subtle falsehood survives review",
+   "claim": "One subtly false claim or distorted quote embedded in otherwise correct text survives review and misinforms.",
+   "source": "Wikipedia:Case against LLM-generated articles",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+   "quote": "one subtly false claim or distorted quote",
+   "page": "Wikipedia:Case against LLM-generated articles"
+  },
+  {
+   "index": 265,
+   "feature": "advertorial or partisan register",
+   "claim": "Generated articles read like advertorials or partisan spin with promotional language mixed into facts.",
+   "source": "Wikipedia:Case against LLM-generated articles",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+   "quote": "read like advertorials or partisan spins",
+   "page": "Wikipedia:Case against LLM-generated articles"
+  },
+  {
+   "index": 266,
+   "feature": "fabricated citations in an editor test",
+   "claim": "In one editor's test five of seven generated citations were fabricated and others led to unrelated articles.",
+   "source": "Wikipedia:Case against LLM-generated articles",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+   "quote": "five of those were fabricated",
+   "page": "Wikipedia:Case against LLM-generated articles"
+  },
+  {
+   "index": 267,
+   "feature": "real author, fabricated title",
+   "claim": "An AI-generated newspaper reading list paired real authors with books that do not exist; patrons then asked librarians to find them.",
+   "source": "404 Media 2025 \u2014 Librarians Are Being Asked to Find AI-Hallucinated Books",
+   "url": "https://www.404media.co/librarians-are-being-asked-to-find-ai-hallucinated-books/",
+   "quote": "asking him to find books that don't exist",
+   "page": "404 Media 2025 \u2014 Librarians Are Being Asked to Find AI-Hallucinated Books"
+  },
+  {
+   "index": 268,
+   "feature": "biography factual precision",
+   "claim": "ChatGPT biographies were 58.3% atomic-fact precise (InstructGPT 42.5%, search-augmented PerplexityAI 71.5%); all far below humans.",
+   "source": "Min et al. 2023 \u2014 FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)",
+   "url": "https://arxiv.org/html/2305.14251",
+   "quote": "riddled with errors",
+   "page": "Min et al. 2023 \u2014 FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 254,
+   "verdict": "PARTIAL",
+   "trueWording": "hoax with well-formatted citations referencing completely nonexistent works",
+   "unsupportedLimb": "that it passed Articles for Creation, and that it survived 2023-01 to 2023-12",
+   "note": "Raw article fetched in full (404media.co, HTTP 200, not paywalled). Quote verbatim: 'The entire thing was an AI-generated hoax, with well-formatted citations referencing completely nonexistent works.' Supported limbs: 'more than 2,000 word article'; Ottoman fortress of Amberlisihar; 'the fortress never existed'; built '1466 by Mehmed the Conqueror' who the piece confirms was real; structural detail (stone and brick, craftsmen from Rumelia, timber from Black Sea forests). Unsupported: the page never mentions Articles for Creation or any review venue, and gives no lifespan for the article - its only dates are November 2023 (a different article, Chester Mental Health Center) and 'January 2022' inside a quoted ChatGPT phrase. Lebleu says only that fake citations 'might stay undetected for months'."
+  },
+  {
+   "index": 255,
+   "verdict": "PARTIAL",
+   "trueWording": "list of completely fake sources in Russian and Hungarian",
+   "unsupportedLimb": "that Russian and Hungarian were chosen/effective because fewer reviewers could check them",
+   "note": "Wikipedia wikitext fetched via ?action=raw. Quote verbatim: 'the article Leninist historiography was entirely written by AI and included a list of completely fake sources in Russian and Hungarian at the bottom of the page. Google turned up no results for these sources.' The checkability rationale is absent from this page (no 'non-English', 'harder for', or 'fewer editors' anywhere in it). That rationale IS made in the 404 Media piece at index 254 ('This adds a layer of complications if the sources are not in English, as it makes it harder for most readers and editors to notice the issue') - but about the beetle/French case, not this one, and not on the cited page."
+  },
+  {
+   "index": 256,
+   "verdict": "PARTIAL",
+   "trueWording": "real German and French sources, but completely off-topic; unrelated lifeform",
+   "unsupportedLimb": "that the unrelated subject was a crab",
+   "note": "Wikitext fetched raw. Quote verbatim: 'While the sourced articles were real, they were completely off-topic, with the French one discussing a completely unrelated lifeform.' The page names Estola albosignata, the beetle, and the German and French sources. It never says crab - the single 'crab' string match in the page is inside the username 'ScrabbleTiles'. The crab detail is real but comes from the 404 Media article at index 254 ('that article was about a completely unrelated species of crab'), a different source than the one cited here."
+  },
+  {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models cite real sources but likely not verify the content",
+   "note": "Wikitext fetched raw. Full sentence: 'As of 2026, recent models will usually cite real sources, although they will likely not verify the content they are being cited for. The existence of these sources should not, by itself, be taken as evidence that the content is human-written.' Quote appears word for word; both limbs (real sources cited; the source is not checked against the sentence) are supported."
+  },
+  {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models virtually always fail to properly source claims, often introduce errors",
+   "note": "Wikitext fetched raw. Full sentence: 'Unfortunately, these models virtually always fail to properly source claims and often introduce errors.' Quote word for word. One framing nuance, not a limb failure: the page predicates this of the models, the claim predicates it of the generated text."
+  },
+  {
+   "index": 259,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLM confidently described the fictitious 'greater-toothed pademelon' as real",
+   "note": "Wikitext fetched raw. The quoted phrase appears word for word ('greater-toothed pademelons are found in wildlife preserves in Queensland'), and the page states 'greater-toothed pademelon' is a fictitious species, that 'This complete statement is false', that the model padded it with real red-necked-pademelon detail (shy, nocturnal, tracks, rustling), and that this shows 'LLM's can offer statements with a confident tone even when that information is factually incorrect'. Graded SUBSTANCE rather than VERBATIM only because the page's example is a chatbot response to a prompt, not an 'entry'."
+  },
+  {
+   "index": 260,
+   "verdict": "PARTIAL",
+   "trueWording": "LLMs draw conclusions not present in any single reliable source",
+   "unsupportedLimb": "that it is delivered in encyclopedic voice",
+   "note": "Wikitext fetched raw. Quote verbatim: 'LLMs will sometimes \"draw conclusions\" which, even if they seem superficially familiar, are not present in any single reliable source', and the paragraph closes 'All of this is, in practical terms, equivalent to original research, or worse, outright fabrication' - so the original-research limb is fully supported. The register limb is not: the string 'encyclopedic' does not occur in the page at all. The nearest support is a different section's 'plausible-sounding and given with an air of confidence', which is about confidence, not encyclopedic register."
+  },
+  {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neutral-seeming in tone, but not necessarily in substance",
+   "note": "Wikitext fetched raw; the quote is verbatim in the rendered page (the wikitext splits it across a piped link: 'neutral-seeming in tone, [[Algorithmic bias|but not necessarily in substance]]'). The biography limb is supported in other words by the next sentence: 'This concern is especially salient for biographies of living persons' - the page says 'especially salient', the claim says 'hardest to catch', and the page narrows to living persons."
+  },
+  {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "plausible-sounding and given with an air of confidence",
+   "note": "Wikitext fetched raw. Quote verbatim. The spot-check limb is supported in the same sentence-pair: 'An average user who believes that they are in possession of a useful tool, who maybe did a spot check for accuracy and \"didn't see any problems\", is biased to accept the output as provided; but it is highly likely that there are problems.'"
+  },
+  {
+   "index": 263,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "might invent details when faced with an obscure-topic prompt",
+   "note": "Wikitext fetched raw. Near-verbatim, one inflection off: the page reads 'It might even invent details when faced with a prompt on an obscure topic or a nonsensical request' - 'invent', not the claim's 'invented' - so this is SUBSTANCE, not VERBATIM. 'Rather than saying less' is not stated but follows directly from inventing. STANDING CAVEAT for this source: the page carries {{Humorous essay|WP:NOAI}} at the top and its supporting refs are deliberate jokes (e.g. 'Chatty Al, On the Ontology of Ontologies: Why Everything is Probably a Sandwich'); it is a Wikipedia essay, not a guideline, and its examples are hypothetical or invented on purpose."
+  },
+  {
+   "index": 264,
+   "verdict": "PARTIAL",
+   "trueWording": "One subtly false claim or distorted quote can misinform readers",
+   "unsupportedLimb": "that it survives review (the page asserts only that it can misinform and damage trust)",
+   "note": "Wikitext fetched raw. Quote verbatim (sentence-initial capital only): 'One subtly false claim or distorted quote can misinform readers and damage trust.' The 'embedded in otherwise correct text' limb is supported by the preceding sentence ('Even if 90% of an AI-generated article is correct and 10% is false, that 10% is a huge problem'). 'Survives review' is supported only inside an explicitly hypothetical scenario elsewhere on the page ('Imagine a scenario... This fictional biography could stand for days or weeks'), not as an observed fact. Same humorous-essay caveat as index 263."
+  },
+  {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "drafts often read like advertorials or partisan spins",
+   "note": "Wikitext fetched raw. Quote verbatim: 'editors noted how these drafts often read like advertorials or partisan spins - text that superficially met Wikipedia's guidelines in form, but not in spirit.' The promotional-language limb is stated as a feared hypothetical ('One hypothetical scenario we fear is an LLM churning out dozens of boosters for a company or ideology, each mixing facts with subtle promotional language') but also follows directly from 'advertorials'. Same humorous-essay caveat as index 263; note also the surrounding factual scaffolding is real (Princeton/WaPo, New Scientist refs)."
+  },
+  {
+   "index": 266,
+   "verdict": "PARTIAL",
+   "trueWording": "seven references in one AI draft, five of those fabricated",
+   "unsupportedLimb": "that the others led to unrelated articles - the page says the citations 'led nowhere'",
+   "note": "Wikitext fetched raw. Quote verbatim: 'In one analysis, researchers found an AI-written draft of a historical article included seven references - and five of those were fabricated.' Two divergences: (a) the page attributes it to 'one analysis' by 'researchers', not 'one editor's test' (the preceding sentence does frame it as 'Wikipedia editors who have tested LLMs report'); (b) the follow-on reads 'on closer inspection they led nowhere', which is not 'led to unrelated articles'. ADVERSARIAL FLAG: the citation attached to this five-of-seven figure is itself one of the essay's joke refs - 'Irma McFakerson, How to Cite Books That Don't Exist' - so on this humorous-essay page the number has no traceable provenance and should not be repeated as a measured finding."
+  },
+  {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "patrons ask librarians to find books that don't exist",
+   "note": "Raw page fetched (HTTP 200); the article is member-gated after the lede, but the whole claim sits in the free lede: 'Reference librarian Eddie Kristan said lenders at the library where he works have been asking him to find books that don't exist without realizing they were hallucinated by AI... after fielding patron requests for the same fake book titles from real authors - the consequences of an AI-generated summer reading list circulated in special editions of the Chicago Sun-Times and The Philadelphia Inquirer.' Quote verbatim; every limb (newspaper list, real authors, nonexistent books, patrons asking librarians) supported. The claim says 'newspaper reading list'; the page specifies a syndicated summer reading list in two newspapers' special editions."
+  },
+  {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "commercially available LMs are riddled with errors",
+   "note": "arXiv HTML v2 fetched raw (483KB, full paper). Quote verbatim: 'Our results indicate that commercially available LMs are riddled with errors, having FActScores of 42%, 58% and 71%, respectively.' Exact figures confirmed: 'InstructGPT and ChatGPT achieve FActScores of 42.5% and 58.3%, respectively' and 'PerplexityAI... attains a FActScore of 71.5%'; PerplexityAI is described as 'search-augmented'. Biographies limb confirmed ('FActScores of people biographies generated by several state-of-the-art commercial LMs'). The below-humans limb is stated twice: 'All LMs are substantially less factual than humans' and 'GPT-4 and ChatGPT are far less factual than humans'."
+  }
+ ]
+}

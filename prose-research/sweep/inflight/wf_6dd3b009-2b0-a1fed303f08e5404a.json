@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i951-1032",
+ "lines": 89,
+ "firstTs": "2026-09-07T08:50:23.438Z",
+ "lastTs": "2026-09-07T08:56:33.475Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 21,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+  "https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content",
+  "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+  "https://familylocket.com/can-chatgpt-help-with-genealogy-citations/",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "https://arxiv.org/pdf/2305.14251",
+  "https://web.archive.org/web/20250804135306id_/https://www.washingtonpost.com/technology/2025/08/03/ai-obituaries-funeral-homes/",
+  "http://web.archive.org/cdx/search/cdx?url=amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/&output=text&limit=10&filter=statuscode:200",
+  "http://web.archive.org/cdx/search/cdx?url=wikitree.com/g2g/1665597*&output=text&limit=20",
+  "https://web.archive.org/web/20250115092958id_/https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+  "https://web.archive.org/web/20260525050716id_/https://www.wikitree.com/g2g/1665597/should-wikitree-have-a-style-guide-for-ai-generated-content"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_6dd3b009-2b0",
+ "agent": "a1fed303f08e5404a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/b43943b4-3b40-4fd9-bc63-9b9c9afb55b4/subagents/workflows/wf_6dd3b009-2b0/agent-a1fed303f08e5404a.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i951-1032.json",
+  "exists": true
+ }
+}

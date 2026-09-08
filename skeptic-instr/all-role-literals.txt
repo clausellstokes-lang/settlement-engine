@@ -1,0 +1,524 @@
+A settlement that explains itself
+A settlement that remembers what your players did to it.
+A town that wears its history
+A useful-campaign behavior horizon. Evidence-bearing, but not sufficient for the product certificate.
+A world that runs while you are away
+AI Appendix
+Abbot/Abbess
+About
+Account
+Acolyte
+Add internal note
+Added by you
+Admin
+Advance Time
+Advance history
+Advance the realm
+Advanced Generate
+Agent
+Agricultural Surplus
+Alchemist
+Alderman
+Ally defense relief
+Ally intel sharing
+An attractor and legibility study. It diagnoses the model and never widens the launch promise by itself.
+Apothecary
+Apprentice
+Apprentice Mage
+Arcane Archivist
+Archbishop/Patriarch
+Archmagister
+Armourer
+Artificer
+Ask the world anything, in plain words
+Assassin Guildmaster
+Auctioneer
+Auto-resolved dependency
+A–Z index: SettlementForge Compendium
+Ban map
+Ban settlement
+Bandit Contact
+Banking Agent
+Banking Without Economic Focus
+Bard/Chronicler
+Baron/Baroness
+Basic Generate
+Belief axes (demographic and cultural)
+Believed conditions (tier, stores, road position, pull)
+Believed devotion (how a neighbour\
+Believed scarcity (what a court thinks its neighbours lack)
+Black Market Fence
+Blacksmith
+Border Warden
+Bring a world you already have
+Buy more credits
+Calamities (the natural-disaster mover)
+Calamity reference: SettlementForge Compendium
+Campaign
+Caravan Master
+Cartographer
+Cavalry Commander
+Chance meetings between named people across settlements
+Chaplain
+Chief Magistrate
+City Clerk
+City Watch Chief
+Clerk
+Coalition graph, expenditure, and pairwise settlement
+Commitment momentum
+Commodity continuity
+Compendium
+Compendium · Deities: desk
+Conjurer
+Conquest doctrine (the vengeance license)
+Constructive flows (generosity)
+Contradiction Bounty
+Corrupt Official
+Council Member
+Councilor
+Counterfeiter
+Court Advisor
+Court Sorcerer
+Covert confirmation missions (the espionage layer)
+Craft Guild Representative
+Create Your Account
+Create a Settlement
+Create full debug copy
+Crime Lord
+Culture
+Current State
+Customs Inspector
+Cutpurse/Pickpocket
+Deacon/Curate
+Debt Collector
+Debt-Ridden Noble
+Defender siege attrition
+Defense & Security
+Disgraced Official
+Distance
+Distance-priced news
+Diviner/Seer
+Dockworker/Stevedore
+Druid Elder
+Duke/Duchess
+Duke/Viceroy
+Durable peace envoys and carried terms
+Economics & Trade
+Economy reference: SettlementForge Compendium
+Elder
+Email Confirmed
+Email confirmed
+Emergent pressure conditions
+Enchanter
+Escaped Slave/Serf
+Exorcist
+Facets & interior grammar: SettlementForge Compendium
+Faction competition
+Factor
+Faith & War
+Faith spread
+Faith spread (legacy alias)
+Fisherman
+Food Import Requirement
+Foreign Ambassador
+Foreign intervention
+Forge a settlement worth running a campaign in.
+Gallery
+Gang Leader
+Garrison Commander
+Get the most from SettlementForge
+Governor
+Grain Factor
+Granary Keeper
+Grand Chancellor
+Grand Magister
+Grant / refund credits
+Gravedigger
+Guard
+Guard Captain
+Guild Archmage
+Guild Master
+Guild Warden
+Guildmaster
+Habit conditioning (the learned-contrast sub-ledger)
+Hand
+Harbor Master
+Harbour-guild boss
+Head
+Head Brewer
+Head of the Faithful
+Head of the merchant council
+Healer
+Heavy Food Import Dependency
+Hedge Witch
+Hedge Wizard
+Herald/Town Crier
+High Crime Priority: No Criminal or Guard Institutions
+High Military Priority Without Defences
+High Priest
+High Priestess
+High Religious Priority Without Clergy
+Historically required
+History & Founding
+House Steward
+How this was simulated
+How would you like your dossier?
+Identity & Daily Life
+Imports bulk materials and fuel
+Imports finished goods and luxuries
+Imports staple food at urban scale
+Information brokerages
+Information statecraft (secrecy, sight, lies, credibility)
+Innkeeper
+Inquisitor
+Institution lifecycle
+Institutional catalog: SettlementForge Compendium
+Institutions
+Insufficient Craft Industries
+Isolation Support Gap
+Issue warning
+Journeyman
+Journeyman Overseer
+Just want one dossier?
+Keeper of the sea-shrine
+Kingpin
+Knight/Dame
+Land Agent
+Layers
+Leader
+Learned disposition channels
+Legitimacy-scaled upheaval (how brittle THIS kind of seat is to THIS kind of decline)
+Lieutenant
+Lineage claim and kinship mirror
+Living World reference: SettlementForge Compendium
+Living traditions
+Local Fence
+Locally Sustained Isolation
+Lord
+Lord Mayor
+Lord/Lady of the Manor
+Magic & religion reference: SettlementForge Compendium
+Magic Level
+Magic economy and institution status
+Magically-Sustained Isolation
+Magistrate
+Map lenses & style schema: SettlementForge Compendium
+Map modes
+Market Overseer
+Master
+Master Blacksmith
+Master Builder
+Master Carpenter
+Master Craftsman
+Master Glassblower
+Master Potter
+Master Shipwright
+Master Smith
+Master Tanner
+Master Weaver
+Master of Arms
+Master of Coin
+Mayor
+Mercenary Captain
+Mercenary-for-Hire
+Midwife
+Migration flows
+Migration rumor carrier (the refugee lane)
+Military Quartermaster
+Miller
+Monastery Archivist
+Moneylender
+Monster Threat
+NPC Quick Reference
+NPC agency
+NPC growth layer
+Naval Commander
+Naval layer
+Neighbour System reference: SettlementForge Compendium
+New settlement
+News
+No Grain Storage Facility
+No Milling Facility
+No Trade Infrastructure
+Noble Heir
+Notable NPCs
+Notary/Scrivener
+Organic route lifecycle
+Overview
+Parish Priest
+Peace engine
+Peacetime pact formation (the standalone NAP)
+Place & select settlements
+Plot Hooks & Quests
+Population dynamics
+Portability Covenant
+Power & faction archetypes: SettlementForge Compendium
+Power Structure
+Practical Guide
+Pricing
+Pricing: desk
+Priest
+Prison Warden
+Privacy Policy
+Prophet/Seer
+Proprietor
+Provenance ledger
+Purchase Complete
+Queue broadcast to every account
+Racketeer
+Rat Catcher
+Realm
+Realm Inspector
+Reeve
+Refunds
+Relationship dynamics
+Relationships
+Remove comment
+Remove gallery item
+Replay this tour
+Reply to user
+Reset Password
+Resource discovery and removal
+Resource drift
+Resources & Production
+Restore comment
+Restore map
+Retired Adventurer
+Reveal full details
+Revoke share link
+Roadmap
+Royal Chamberlain
+Royal Envoy
+Runesmith
+Sack and forage
+Sage/Scholar
+Same seed, same world, forever
+Save the map
+Scout/Ranger
+Seasons (the aspatial food year)
+Senior Trader
+Sergeant
+Server
+Services
+Set a New Password
+Set a new password
+Set map private
+Settlement Tier
+Settlement lifecycle
+Settlement politics (ruling blocs and coalition consolidation)
+Settlement strategy chooser
+Settlement tiers & trade routes: SettlementForge Compendium
+Settlements at War
+Severe Food Import Dependency
+Shadow Council Leader
+Share a world, keep your secrets
+Shared World
+Shepherd
+Ship Captain
+Shrine Keeper
+Siege Engineer
+Sign In
+Sign in to keep your work
+Smuggler
+Smuggler Chief
+Soft-delete map
+Soft-delete settlement
+Spatial consequence (the map to engine coupling)
+Spy/Informant
+Spymaster
+Steward
+Strategic posture (a court\
+Street Preacher
+Stress conditions: SettlementForge Compendium
+Stress: Food Production Degraded
+Stressors
+Supply-gap deployed quality
+Supply-web warfare
+Tavern Owner
+Tax Collector
+Templar Commander
+Temple Healer
+Terms of Service
+Terrain
+The Crown That Will Not Hold
+The DM Screen
+The First Hundred
+The Founders
+The Keeper’s Handbook
+The Mill That Outlived Its Wars
+The Most Alive Worlds
+The Remembrance ledger (a world remembers the wars it fought)
+The Rot Beneath the Ore
+The SettlementForge Compendium
+The advance epoch (a per-advance nonce on the pulse root, so a re-advanced world draws a genuinely new future)
+The casus commercii (commerce\
+The chronicle
+The contested court (NPC ladder)
+The demographic engine (births, deaths, carrying capacity)
+The dossier in FIELD MODE: mobile, dim
+The envoy task catalog: what a court may send somebody to do, and how they may ask
+The errand spine (six purpose classes and the declared/true split)
+The foreign seat (the occupier or overlord who looms over the ruler)
+The infiltration ladder: how deep a planted operative is, and what depth costs
+The irregular force (whether the town itself would come out, and what that mass is worth)
+The library: desk
+The living pantheon
+The mirror (what our own record says a court has been shown of us)
+The mission dispatcher: which of a principal\
+The monotone memory (a treaty remembers its worst observed compliance)
+The oath-holder identity (who swore)
+The operation registry: SettlementForge Compendium
+The operations voice: the sentences a covert receipt is allowed to become
+The pact lifecycle voice (lapse, detection, longevity)
+The personal consequence economy (durable identity, the world NPC ledger, the verdict table, circulation and replacement)
+The reframe layer
+The release and endurance horizon. This is the only horizon that can earn the product certificate.
+The roads (named-NPC travel, capture, ransom)
+The self-ending war
+The settlement dossier: desk
+The sovereignty market (settlement conveyance)
+The state treasury (the conserved coin stock)
+The typed patron fall (a settlement records WHICH creed lost its patron seat, and by which of four believer-side causes)
+The underways (organic clandestine founding)
+The vertical high-water mark (a syndicate remembers its strongest year)
+The war-contribution ledger (record shapes and their fail-closed normalizer)
+Thieves
+Tier drift
+Time
+Timeline
+Tonight at the Table
+Tower Wizard
+Town cartography (the deterministic settlement map)
+Trade Dependencies
+Trade Factor
+Trade Route
+Trade scarcity flows
+Trade-dependent craft economy
+Traditions
+Travel
+Traveling Merchant
+Travelling Performer
+Treasurer
+Two-track defender resolve
+Unban map
+Unban settlement
+Uncovered Local Food Deficit
+Underground Broker
+Upswing arcs (reconstruction, boom, flourishing)
+Urban fabric
+Verify Your Email
+Verify your email
+Veteran Soldier
+Viability Assessment
+Village Priest
+Wandering Friar
+Wandering Peddler
+War circulation (the layer gate: people, columns and contributions move as one conserved population)
+War disposition flywheel
+War economy population drain
+War layer
+War levy
+War termination and comparative-cost read
+Warehouse Master
+Warlock/Bargain-Sworn
+Watch Captain
+Watch a region wake up
+Wealthiest Merchant
+Welcome
+What am I looking at?
+What this Is
+Where the world is going
+Who decides
+Widowed Farmer
+Woodcutter
+Workshop
+World Map
+Wounded Soldier
+Your Library
+absent
+advisor
+agent
+alchemist
+alert
+archmage
+ashlar
+banker
+bar
+bard
+bearer
+broker
+button
+buttressStone
+captain
+center
+clerk
+contact
+contender
+corbel
+corrupted
+council
+defending
+dependent
+detail
+dressedStone
+druid
+elder
+faction
+fence
+fill
+first of the governing house
+giver
+glass
+glassLead
+groundStone
+guard
+guild
+guild_master
+harbor_master
+healer
+inquisitor
+intervene
+keeper
+kin
+knight
+lord
+magistrate
+master
+mayor
+merchant
+mullion
+neighbour
+noble
+npc
+overseer
+owner
+partner
+patron
+pinnacleStone
+power
+priest
+proposer
+protector
+relief
+responder
+roof
+roofLead
+ruler
+sage
+settlement
+sharer
+siege
+smuggler
+sorcerer
+status
+steward
+stone
+stroke
+structure
+tax_collector
+templar
+tracery
+user
+voussoir
+warden
+wizard

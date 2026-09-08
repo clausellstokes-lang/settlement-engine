@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 660,
+   "feature": "point of view and distance",
+   "claim": "Cadden says 'A Description of Earthsea' is told from outside the world of Earthsea.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22is%20told%20from%20outside%20the%20world%20of%20Earthsea%22",
+   "quote": "is told from outside the world of Earthsea",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 661,
+   "feature": "annalist voice and deep time",
+   "claim": "Cadden says the book is true to the voice of the anthropologist examining the ways of the Kesh.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22the%20voice%20of%20the%20anthropologist%20examining%20the%20ways%22",
+   "quote": "the voice of the anthropologist examining the ways",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 662,
+   "feature": "point of view and distance",
+   "claim": "Cadden says the book does not rely on any one narrating voice in the presentation of this anthropological text.",
+   "source": "Mike Cadden, Ursula K. Le Guin Beyond Genre (Routledge, 2005)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinbey0000cadd%20AND%20%22in%20the%20presentation%20of%20this%20anthropological%20text%22",
+   "quote": "in the presentation of this anthropological text",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 668,
+   "feature": "concrete sensory noun",
+   "claim": "An essay in that volume notes that Ai sees each keystone in the city of Erhenrang joined by red cement.",
+   "source": "An essay in Olander and Greenberg, eds., Ursula K. Le Guin (Taplinger, 1979)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00olan%20AND%20%22each%20keystone%20he%20sees%20in%20the%20city%20of%20Erhenrang%22",
+   "quote": "each keystone he sees in the city of Erhenrang",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 670,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack says the language of A Wizard of Earthsea is largely Anglo-Saxon in diction.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22Saxon%20in%20diction%2C%20strongly%20alliterative%22",
+   "quote": "Saxon in diction, strongly alliterative",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 671,
+   "feature": "cadence and rhythm",
+   "claim": "Spivack says the alliteration in A Wizard of Earthsea is pervasive, recalling the oral tradition.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22The%20alliteration%20is%20pervasive%2C%20recalling%20the%20oral%20tradition%22",
+   "quote": "The alliteration is pervasive, recalling the oral tradition",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 672,
+   "feature": "place and institution description",
+   "claim": "Spivack says Le Guin draws on her anthropological background to create cultural concepts for her imaginary worlds.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22Drawing%20on%20her%20anthropological%20background%2C%20Le%20Guin%20is%20able%22",
+   "quote": "Drawing on her anthropological background, Le Guin is able",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 673,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack says the vocabulary of Le Guin's poems is straightforward, with a diction austerely avoiding the Latinate or the ornate.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22a%20diction%20austerely%20avoiding%20the%20Latinate%20or%20the%20ornate%22",
+   "quote": "a diction austerely avoiding the Latinate or the ornate",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 674,
+   "feature": "diction (native vs latinate)",
+   "claim": "Spivack calls the diction of those poems homely and reminiscent of Robert Frost.",
+   "source": "Charlotte Spivack, Ursula K. Le Guin (Twayne, 1984)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin0453spiv%20AND%20%22The%20homely%20diction%20is%20reminiscent%20of%20Robert%20Frost%22",
+   "quote": "The homely diction is reminiscent of Robert Frost",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 676,
+   "feature": "plainness and economy",
+   "claim": "Bucknall says what Le Guin says of Tolkien's style is to a certain extent true of the way she writes herself.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (Frederick Ungar, 1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22is%20to%20a%20certain%20extent%20true%20of%20the%20way%20she%22",
+   "quote": "is to a certain extent true of the way she",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 677,
+   "feature": "register modulation",
+   "claim": "Bucknall says Le Guin's style varies from book to book and from character to character.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22which%20varies%20from%20book%20to%20book%20and%20from%20character%22",
+   "quote": "which varies from book to book and from character",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 678,
+   "feature": "adjective and adverb discipline",
+   "claim": "Bucknall praises Le Guin for writing poetically while resisting the temptation to overwrite.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22while%20resisting%20the%20temptation%20to%20overwrite%22",
+   "quote": "while resisting the temptation to overwrite",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 679,
+   "feature": "register modulation",
+   "claim": "Bucknall says Le Guin's style does not have the stately and heroic tone of The Lord of the Rings.",
+   "source": "Barbara J. Bucknall, Ursula K. Le Guin (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22does%20not%20have%20the%20stately%20and%20heroic%20tone%22",
+   "quote": "does not have the stately and heroic tone",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 683,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin writes that Tolkien writes a plain, clear English.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973), quoted in Bucknall (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22Tolkien%20writes%20a%20plain%2C%20clear%20English%22",
+   "quote": "Tolkien writes a plain, clear English",
+   "page": "archive.org search-inside snippet"
+  },
+  {
+   "index": 684,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin writes that Tolkien's vocabulary is not striking.",
+   "source": "Ursula K. Le Guin, \"From Elfland to Poughkeepsie\" (1973), quoted in Bucknall (1981)",
+   "url": "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguin00buck%20AND%20%22Tolkien%E2%80%99s%20vocabulary%20is%20not%20striking%22",
+   "quote": "Tolkien’s vocabulary is not striking",
+   "page": "archive.org search-inside snippet"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is told from outside the world of Earthsea",
+   "note": "Cadden (Routledge 2005, ursulakleguinbey0000cadd) full sentence reads: 'A Description of Earthsea' is told from outside the world of Earthsea rather than by the historian from within. Quote verbatim; subject and predicate both on the page."
+  },
+  {
+   "index": 661,
+   "verdict": "PARTIAL",
+   "trueWording": "“The Back of the Book” in Always Coming Home is true",
+   "note": "Quote verbatim (…the voice of the anthropologist examining the ways of the Kesh). But the page attributes the anthropologist-voice to one back-matter section, not to the novel; the claim generalises a section to the whole book, and the neighbouring sentences stress that no single voice governs.",
+   "unsupportedLimb": "'the book' — Cadden's subject is the section “The Back of the Book”, not Always Coming Home entire"
+  },
+  {
+   "index": 662,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "narrative relationships keep us from fixing on any one narrating voice",
+   "note": "Quote 'in the presentation of this anthropological text' is verbatim. Page wording is 'The rich and layered narrative relationships keep us from fixing on any one narrating voice…' — agency is the reader/narrative relationships, not 'the book does not rely'; substance (no single narrating voice) holds."
+  },
+  {
+   "index": 668,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each keystone he sees in the city of Erhenrang",
+   "note": "Olander & Greenberg eds., Taplinger 1979 (ursulakleguin00olan) confirmed by item metadata. Page: 'Ai notices that each keystone he sees in the city of Erhenrang is joined by red cement.' Quote verbatim, red-cement limb supported."
+  },
+  {
+   "index": 670,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language is largely Anglo-Saxon in diction, strongly alliterative",
+   "note": "Spivack, Twayne 1984 (ursulakleguin0453spiv) confirmed by metadata. Work identity proven by walking left: 'The style of A Wizard of Earthsea is suitable to its subject of mythic magery. Artful yet simple, the language is largely Anglo-Saxon in diction…'"
+  },
+  {
+   "index": 671,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The alliteration is pervasive, recalling the oral tradition",
+   "note": "Contiguous with the A Wizard of Earthsea sentence proven for 670 (…of an austere but heroic age. The alliteration is pervasive…). Page continues 'of the heroic poem Beowulf'; the claim's truncation at 'oral tradition' does not distort."
+  },
+  {
+   "index": 672,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "create cultural concepts for her imaginary societies",
+   "note": "Quote 'Drawing on her anthropological background, Le Guin is able' is verbatim, but the page reads 'imaginary societies', not 'imaginary worlds'; page then instances 'kemmer'. Substance of the claim holds in the page's other words."
+  },
+  {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a diction austerely avoiding the Latinate or the ornate",
+   "note": "The 'poems' limb proven by walking left: '…achieve an economy rare in poetry, and quite different from Le Guin's fictional style. The vocabulary is straightforward, with a diction austerely avoiding the Latinate or the ornate.'"
+  },
+  {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The homely diction is reminiscent of Robert Frost",
+   "note": "Same poetry passage as 673; page: 'These monologues are richly suggestive, leaving much unsaid. The homely diction is reminiscent of Robert Frost, but the mythic allusions are closer to William Butler Yeats.'"
+  },
+  {
+   "index": 676,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is to a certain extent true of the way she writes herself",
+   "note": "Bucknall, Ungar 1981 (ursulakleguin00buck) confirmed by metadata. Full sentence recovered: 'And yet what she says of Tolkien's style, as opposed to the “Poughkeepsie” (or fake fantasy) style, is to a certain extent true of the way she writes herself.'"
+  },
+  {
+   "index": 677,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which varies from book to book and from character to character",
+   "note": "Page: 'Her style, which varies from book to book and from character to character, does not have…'. Subject fixed to Le Guin by the preceding sentences ('She is also an outstanding stylist. She expresses herself…')."
+  },
+  {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "vividly, and poetically while resisting the temptation to overwrite",
+   "note": "Page: 'She is also an outstanding stylist. She expresses herself clearly, vividly, and poetically while resisting the temptation to overwrite.' Praise limb supported by 'outstanding stylist'."
+  },
+  {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not have the stately and heroic tone",
+   "note": "Page continues '…of The Lord of the Rings'; subject is 'Her style' (Le Guin), established in the same sentence verified at 677."
+  },
+  {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien writes a plain, clear English",
+   "note": "Words are Le Guin's, not Bucknall's: the block quote runs 'A plain language is the noblest of all. It is also the most difficult. Tolkien writes a plain, clear English…' and Bucknall closes 'This tribute to Tolkien is a statement of the standard Le Guin sets for herself.' Her notes cite '…Poughkeepsie,” in The Language of the Night, p. 93'."
+  },
+  {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien’s vocabulary is not striking",
+   "note": "Page: 'Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete and simple.' Same Le Guin block quote as 683, attribution proven by the following 'This tribute to Tolkien is a statement of the standard Le Guin sets for herself.'"
+  }
+ ]
+}

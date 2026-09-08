@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i570-584",
+ "lines": 57,
+ "firstTs": "2026-09-06T17:38:15.047Z",
+ "lastTs": "2026-09-06T17:41:05.829Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://web.archive.org/web/20251208213633id_/https://www.westeros.org/Citadel/SSM/Entry/Heraldry_in_Westeros",
+  "https://georgerrmartin.com/notablog/2009/07/17/the-genius-of-jack-vance/",
+  "https://harpervoyagerbooks.co.uk/2013/06/03/george-r-r-martin-on-jack-vance/",
+  "https://georgerrmartin.com/maurice-druons-the-iron-king/",
+  "https://reactormag.com/review-the-iron-king-maurice-druon/",
+  "https://reactormag.com/getting-medieval-on-george-r-r-martin/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and verified (15 claims, 15 verdicts, indices in order).",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "aaeee5080025c0a96",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-aaeee5080025c0a96.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i570-584.json",
+  "exists": true
+ }
+}

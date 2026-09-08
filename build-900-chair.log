@@ -1,0 +1,28 @@
+BUILD ACTS at b620cb408 12:38:19 · symlinks before: 453
+--- 1. edge-shared re-mint (the ritual):
+  supabase/functions/_shared/aiCharterBundle.js
+  supabase/functions/_shared/aiCharterBundle.meta.json
+  supabase/functions/_shared/aiGroundingBundle.meta.json
+  supabase/functions/_shared/aiOutputSchemaBundle.js
+  supabase/functions/_shared/aiOutputSchemaBundle.meta.json
+  supabase/functions/_shared/analyticsEventsBundle.meta.json
+  supabase/functions/_shared/intentAtlasBundle.meta.json
+RE-MINT CAR fd35e4186: supabase/functions/_shared/aiCharterBundle.js supabase/functions/_shared/aiCharterBundle.meta.json supabase/functions/_shared/aiGrounding
+RITUAL_EXIT=0 · symlinks after: 453 (must be 453) · porcelain=[]
+--- 2. the full build (dist/):
+BUILD_EXIT=0
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 311 static route documents (13 views + 15 gallery hubs + 283 compendium entries) under dist/
+--- the WORKER bundle(s) in dist/ (bytes):
+   2658954  dist/assets/advanceInterval.worker-Bn9QGP9h.js
+   1627627  dist/assets/customContentPreview.worker-BGkjwmFr.js
+      1114  dist/assets/advanceWorkerClient-IbMrq3vK.js
+   2036314  dist/assets/pdfRender.worker-Cv5rIAzu.js
+   1404242  dist/assets/generation.worker-DJ5p8GPj.js
+--- hashed chunk listing → /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/listing-900.txt:
+  chunks: 689
+--- __vite__mapDeps in the entry (filenames):
+
+porcelain after build (dist/ must be ignored): []
+NEXT: write the WORKER_BUNDLE_CEILING_BYTES arm from the printed worker bytes (monotone-down; cite this log) as a chair car; diff listing-900.txt by filename against HORIZON-B1's prediction; then the whole suite, the registers (plan §3 + f2), the kit, the gate.

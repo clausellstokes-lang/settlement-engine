@@ -1,0 +1,21 @@
+SAMPLE  1 | Mon Sep  7 08:36:01 EDT 2026 | load: { 2.73 9.76 13.63 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  2 | Mon Sep  7 08:37:01 EDT 2026 | load: { 2.07 8.29 12.82 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  3 | Mon Sep  7 08:38:01 EDT 2026 | load: { 2.22 7.18 12.09 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE  4 | Mon Sep  7 08:39:01 EDT 2026 | load: { 2.40 6.30 11.43 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  5 | Mon Sep  7 08:40:01 EDT 2026 | load: { 3.01 5.79 10.88 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  6 | Mon Sep  7 08:41:01 EDT 2026 | load: { 3.05 5.27 10.34 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  7 | Mon Sep  7 08:42:01 EDT 2026 | load: { 2.33 4.68 9.77 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  8 | Mon Sep  7 08:43:01 EDT 2026 | load: { 2.20 4.24 9.26 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE  9 | Mon Sep  7 08:44:02 EDT 2026 | load: { 1.96 3.81 8.76 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 10 | Mon Sep  7 08:45:02 EDT 2026 | load: { 1.72 3.42 8.27 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 11 | Mon Sep  7 08:46:02 EDT 2026 | load: { 2.32 3.26 7.88 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 12 | Mon Sep  7 08:47:02 EDT 2026 | load: { 2.25 3.06 7.49 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 13 | Mon Sep  7 08:48:02 EDT 2026 | load: { 3.15 3.15 7.24 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE 14 | Mon Sep  7 08:49:02 EDT 2026 | load: { 2.47 2.96 6.89 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE 15 | Mon Sep  7 08:50:02 EDT 2026 | load: { 1.88 2.70 6.52 } | vitest: 0 | gate-mutex procs: 0
+SAMPLE 16 | Mon Sep  7 08:51:02 EDT 2026 | load: { 2.30 2.65 6.24 } | vitest: 0 | gate-mutex procs: 3
+SAMPLE 17 | Mon Sep  7 08:52:02 EDT 2026 | load: { 2.72 2.72 6.02 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 18 | Mon Sep  7 08:53:02 EDT 2026 | load: { 3.66 3.02 5.91 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 19 | Mon Sep  7 08:54:02 EDT 2026 | load: { 2.96 2.97 5.70 } | vitest: 0 | gate-mutex procs: 1
+SAMPLE 20 | Mon Sep  7 08:55:02 EDT 2026 | load: { 3.00 2.96 5.50 } | vitest: 0 | gate-mutex procs: 1
+SAMPLER DONE Mon Sep  7 08:55:02 EDT 2026

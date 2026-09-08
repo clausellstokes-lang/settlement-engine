@@ -1,0 +1,29 @@
+{
+ "role": "finder",
+ "name": "wolfe",
+ "angle": "close-continued",
+ "tag": null,
+ "lines": 40,
+ "firstTs": "2026-09-06T21:29:32.521Z",
+ "lastTs": "2026-09-06T21:31:03.874Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 8,
+  "ToolSearch": 1
+ },
+ "urlsFetched": [
+  "https://web.archive.org/web/2021id_/http://lists.urth.net/pipermail/urth-urth.net/%s/%s.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
+ "run": "wf_1326cde9-2e5",
+ "agent": "a58e5fb5dd4cf1ea1",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_1326cde9-2e5/agent-a58e5fb5dd4cf1ea1.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-close-continued.json",
+  "claims": 93,
+  "complete": true,
+  "mtime": "21:09:26"
+ }
+}

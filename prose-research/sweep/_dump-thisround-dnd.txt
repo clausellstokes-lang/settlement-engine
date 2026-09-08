@@ -1,0 +1,1759 @@
+#86 PARTIAL | F=- | craft | enworld.org | verdicts-dnd-regrade-r12.json
+  SRC: EN World — Design Philosophy of 5e (thread, 2014-06-25)
+  LABEL: 5e natural-language intent (community inference)
+  CLAIM: A 2014 EN World thread infers that 5e designers chose rulings over exact language, which lets them 'use more natural language' — community inference from Mearls' videos, not a designer statement about prose.
+  Q: use more natural language
+  TW: allows them to state things more plainly and use more natural language
+  NOTE: R11 completeness-critic finding (4): row 86 is an EN World poster's 'I think', not Mearls — PARTIAL on the attribution limb. The verifier's own note agrees: 'the natural-language line is the poster's own "I think", hung off the Mearls Starter Set Unboxing video (one video, cited at ~46:15/48:00), not a designer statement about prose.'
+  LIMB: the attribution: the 'more natural language' inference is poster Thaumaturge's own 'I think', not a Mearls statement
+#725 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: plainness and economy
+  CLAIM: Bryce Lynch says one well written specific sentence is worth more than a page of details.
+  Q: one well written specific sentence is worth more
+  TW: one well written specific sentence is worth more than a page
+  NOTE: Raw page fetched with a browser UA (HTTP 200). Sentence sits in the details-vs-specifics paragraph of the Swan Hollow Intrigue review, prefaced by the picture/thousand-words comparison; 'of details' closes it. Every limb holds.
+#726 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: plainness and economy
+  CLAIM: Bryce Lynch defines specificity as terse, so that it does not interrupt the DM scanning the page.
+  Q: It is terse, meaning it doesn’t get in the way
+  TW: It is terse, meaning it doesn't get in the way
+  NOTE: Same paragraph, defining Specificity against detail; the sentence continues about scanning an adventure and not pausing mid-game. Claim's 'the page' is the page of an adventure being scanned, and the DM is the reader throughout the paragraph.
+#727 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: dm-facing sentence
+  CLAIM: Bryce Lynch says the specific sentence communicates to the DM exactly the vibe to aim for.
+  Q: It communicates exactly the vibe the DM should be going for.
+  TW: It communicates exactly the vibe the DM should be going for.
+  NOTE: Closing sentence of the details-vs-specifics paragraph, immediately after the one-sentence/page-of-details line. Quotation word for word.
+#728 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: adjective and adverb discipline
+  CLAIM: Bryce Lynch says a single parenthetical adjective on a random-encounter entry tells the DM a great deal.
+  Q: That (dubious) in parens tells us a lot.
+  TW: That (dubious) in parens tells us a lot.
+  NOTE: Next paragraph, on the Quack selling a (dubious) potion of healing. The page calls the table 'a wandering traveller table for one of the inns' rather than 'random-encounter table'; that is a naming difference, the entry is a rolled table entry and the parenthetical adjective limb is exact.
+#729 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: adjective and adverb discipline
+  CLAIM: Bryce Lynch says quick adjectives and adverbs describing an NPC work where a paragraph of italic read-aloud for the same NPC fails.
+  Q: quick adjectives/adverbs used to describe NPCs hit so well
+  TW: quick adjectives/adverbs used to describe NPCs hit so well
+  NOTE: Same paragraph; the contrast limb is the following sentence, where a long section of italics read-aloud per NPC meant to convey personality is said to fail. Both limbs on the page.
+#730 VERIFIED_VERBATIM | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026
+  LABEL: plainness and economy
+  CLAIM: Bryce Lynch's verdict on exposition in an adventure text is that more is not better.
+  Q: More is not better.
+  TW: More is not better.
+  NOTE: Stands as its own sentence inside the paragraph on long bouts of exposition and irrelevant detail, so the claim's framing as a verdict on exposition is the page's own context.
+#733 VERIFIED_VERBATIM | F=33 | usability-school | alldeadgenerations.blogspot.com | verdicts-dnd-i725-749.json
+  SRC: Gus L, 'Maxims of the OSR', All Dead Generations, 2023
+  LABEL: civic record register
+  CLAIM: Gus L says a game text made entirely of fruitful voids becomes at best a prose poem shaped like an instruction manual or gazetteer.
+  Q: a mediocre at best prose poem in the form
+  TW: a mediocre at best prose poem in the form of
+  NOTE: Post is '7 Maxims of the OSR', section III 'Role Playing not Roll Playing', final sentence of the fruitful-voids paragraph: when such voids are everywhere one has no game, but that prose poem, shaped as an instruction manual or gazetteer. 'Made entirely of' maps to the page's 'when they are everywhere'. Byline renders via script, but Gus L answers as blog au
+#735 PARTIAL | F=33 | usability-school | tenfootpole.org | verdicts-dnd-i725-749.json
+  SRC: module text by Nikoline quoted in Bryce Lynch's review, tenfootpole.org, 2026
+  LABEL: concrete sensory noun
+  CLAIM: The room text Bryce Lynch holds up as the model is a string of verbless sensory noun phrases, quoted in his review.
+  Q: Sickly stench; grease and putrescence.
+  TW: Sickly stench; grease and putrescence.
+  NOTE: Quotation is exact: Bryce quotes room 28 'Lower Hydra Nest' from Nikoline's Lions of Tell Arn Part 2 and does hold the writing up as the model ('That IS the goal of good writing'). But the entry he quotes is not verbless throughout - after the two noun phrases it runs a ledge line and then a finite-verb clause about water and blood dripping from above, and t
+  LIMB: 'a string of verbless sensory noun phrases' - the same quoted room 28 entry ends in a finite-verb clause (water and blood dripping from above) and includes a non-sensory ledge/exit line
+#740 VERIFIED_VERBATIM | F=36 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: other: key format
+  CLAIM: David Hartlage reports that Gygax's own Castle Greyhawk key usually gave each room a one-line note.
+  Q: he usually wrote a 1-line note for each room
+  TW: he usually wrote a 1-line note for each room
+  NOTE: Opening paragraph of the post (the tag archive renders the article in full). Page frames it as Gygax's first dungeon under Castle Greyhawk, notes shared with co-DM Rob Kuntz. Claim's limbs hold.
+#741 VERIFIED_VERBATIM | F=36 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: edition and house style
+  CLAIM: David Hartlage says Gygax's generous location descriptions in G1 set the pattern for virtually every adventure that followed.
+  Q: Gary’s longer descriptions set the pattern for virtually every adventure to follow.
+  TW: Gary's longer descriptions set the pattern for virtually every adventure
+  NOTE: Section 'Gary Gygax sets the standard'; the preceding sentences name G1 Steading of the Hill Giant Chief (1978) and generous descriptions for every location, so the G1 limb is on the page. Quoted sentence closes with 'to follow'.
+#742 VERIFIED_VERBATIM | F=33, 34, 36 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: place and institution description
+  CLAIM: David Hartlage argues longer descriptions spare the DM inventing details, whose first ideas tend toward the obvious.
+  Q: the ideas that spring to mind first will steer toward the obvious
+  TW: ideas that spring to mind first will steer toward the obvious
+  NOTE: Section 'Longer descriptions'. The preceding sentence supplies the first limb: longer descriptions free DMs from needing to invent details at the table. The quoted clause continues about the most familiar and blandest ideas.
+#744 VERIFIED_VERBATIM | F=34 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: edition and house style
+  CLAIM: David Hartlage says the custom of long descriptions makes authors write even when they have nothing to add.
+  Q: encourages authors to write something even when they have little
+  TW: encourages authors to write something even when they have little to add
+  NOTE: Section 'Longer descriptions', on the padded taxidermist's-bedroom entry. Noting the wording gap honestly: the page says 'encourages' and 'little to add' where the claim says 'makes' and 'nothing to add'; the very next sentence carries the stronger form, saying the format makes authors feel obligated to describe an empty closet's shelves and pegs, so both li
+#745 VERIFIED_VERBATIM | F=34 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: omission as information
+  CLAIM: David Hartlage says an avalanche of description buries the details that would actually reach play.
+  Q: An avalanche of description does more than squander page count.
+  TW: An avalanche of description does more than squander page count.
+  NOTE: Section 'Matching description to a location's purpose'; the next sentence (with a typo in the original) says it buries great details that might actually enter play, and the Victor Wachter example follows. Both limbs on the page.
+#746 VERIFIED_VERBATIM | F=36 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: place and institution description
+  CLAIM: David Hartlage says a location's description should be as long as the way players will actually engage that location.
+  Q: The length of descriptions should match the way players will engage
+  TW: The length of descriptions should match the way players will engage
+  NOTE: Section 'The ideal dungeon description'; sentence ends 'a location', followed by the widow's-salon versus Tomb of Horrors contrast. Claim's paraphrase matches.
+#749 VERIFIED_VERBATIM | F=33, 34, 36 | usability-school | dmdavid.com | verdicts-dnd-i725-749.json
+  SRC: David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016
+  LABEL: place and institution description
+  CLAIM: David Hartlage's test for cutting a description is whether it is the first thing a typical DM would imagine anyway.
+  Q: the first thing a typical DM would imagine at the table
+  TW: the first thing a typical DM would imagine at the table
+  NOTE: Section 'The ideal dungeon description', final paragraph: if your kitchen description reads that way, you may as well rely on the typical imagination - which is the cutting test the claim describes.
+#751 VERIFIED_VERBATIM | F=41 | usability-school | dmdavid.com | verdicts-dnd-i751-774.json
+  SRC: Bob Bledsaw in Dragon #27, quoted by David Hartlage, DMDavid, 2016
+  LABEL: edition and house style
+  CLAIM: David Hartlage quotes Bob Bledsaw in Dragon 27 saying judges regarded describing dungeons as their own domain.
+  Q: judges felt that the actual description of dungeons was their ‘domain’
+  TW: judges felt that the actual description of dungeons was their 'domain'
+  NOTE: Live raw page fetched (dmdavid.com tag page renders the full 2016-11-21 post, bylined David Hartlage). Under heading 'Tegel Manor and minimal descriptions': introduced as 'In Dragon magazine issue 27, Bob Bledsaw wrote'. Every limb holds (Hartlage; Bledsaw; Dragon 27; judges' own domain). Bledsaw's sentence continues that all judges wanted was a skeletal fra
+#753 PARTIAL | F=33, 34, 36 | usability-school | lukegearing.blot.im | verdicts-dnd-regrade-r12.json
+  SRC: Luke Gearing, 'Bullet Points vs Prose', lukegearing.blot.im, 2023
+  LABEL: other: key format
+  CLAIM: Luke Gearing's rewrite of his own adventure consisted largely of turning its bullet points back into prose.
+  Q: A lot of this involves de-bullet pointing the text.
+  TW: A lot of this involves de-bullet pointing the text.
+  NOTE: Live raw page fetched. Opening paragraph, dated March 23 2023: the rewrite is of 'Behind Closed Doors', shown to be his own by 'I'm a better writer than I was three years ago' and 'even my bullet-points'. 'Largely' tracks the page's 'a lot of this'. Only nuance: the page says bullets -> prose, never that the text had been prose before ('back into').
+  LIMB: 'back into prose': the verifier records that the page says bullets -> prose and never that the text had been prose before
+#754 VERIFIED_VERBATIM | F=33, 34, 36 | usability-school | lukegearing.blot.im | verdicts-dnd-i751-774.json
+  SRC: Luke Gearing, 'Bullet Points vs Prose', lukegearing.blot.im, 2023
+  LABEL: other: key format
+  CLAIM: Luke Gearing says his own bullet points were already more prose-based than most, which worsens rather than eases his objection to them.
+  Q: I find this only exacerbates my issue with them.
+  TW: I find this only exacerbates my issue with them.
+  NOTE: Live raw page fetched. Same opening paragraph; the preceding sentence is that even his bullet-points are more prose-based than a lot of other examples he has seen. Both limbs (more prose-based than most; worsens rather than eases the objection) are on the page.
+#755 PARTIAL | F=33, 34, 36 | usability-school | lukegearing.blot.im | verdicts-dnd-i751-774.json
+  SRC: Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023
+  LABEL: place and institution description
+  CLAIM: Luke Gearing's model prose keys a room in the present tense from a single dominant smell or object outward.
+  Q: The smell of cold grease fills the air
+  TW: The old bricks of the kitchen are stained black with soot.
+  NOTE: Live raw page fetched; the quoted smell line is verbatim in the room 4 Kitchen prose version, and the prose is present tense throughout. But it is the SECOND sentence: room 4 opens on the soot-stained bricks. The page never states a method, and the demonstrated openings are not uniform - rooms 10 and 14 open on a bare adjective ('Austere.', 'Pristine, kept i
+  LIMB: that the prose keys a room 'from a single dominant smell or object outward'
+#757 VERIFIED_VERBATIM | F=33, 34, 36 | usability-school | lukegearing.blot.im | verdicts-dnd-i751-774.json
+  SRC: Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021
+  LABEL: place and institution description
+  CLAIM: Luke Gearing's method for writing a place is to close his eyes and imagine standing in it.
+  Q: I often just close my eyes and imagine being there
+  TW: I often just close my eyes and imagine being there
+  NOTE: Live raw page fetched (post dated September 14 2021), under 'Structures' > 'Mental Dig/Exploration'. Supported, with two framings the claim flattens: the page conditions it on already having 'a good sense of the vibe and tone of a physical space', says 'often', and offers it as one of five interchangeable structures (Mental Dig, Map First, Pearl, Resonance &
+#758 VERIFIED_VERBATIM | F=33, 34, 36 | usability-school | lukegearing.blot.im | verdicts-dnd-i751-774.json
+  SRC: Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021
+  LABEL: concrete sensory noun
+  CLAIM: Luke Gearing says that mental walk-through is for finding the touchstones that communicate a place's tone.
+  Q: finding those touchstones which communicate the tone
+  TW: finding those touchstones which communicate the tone
+  NOTE: Live raw page fetched. Same 'Mental Dig/Exploration' paragraph, which lists three uses: fine-tuning the vibe/tone, finding those touchstones, and finding out what else is there. The walk-through limb is the same paragraph's 'moving from room to room, the contents of physical space begin to suggest themselves to me'.
+#760 VERIFIED_VERBATIM | F=38, 46 | scholarship-history | zenopusarchives.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Zach Howard (Zenopus Archives), 'Part 46: "Zenopus Built a Tower"', 2015
+  LABEL: place and institution description
+  CLAIM: Zach Howard judges the introduction to the Holmes Basic Sample Dungeon highly evocative, reading almost like weird fiction.
+  Q: The introduction is highly evocative, reading almost like the weird fiction
+  TW: The introduction is highly evocative, reading almost like the weird fiction
+  NOTE: Live raw page fetched. Section 'SAMPLE DUNGEON', second sentence; the page continues 'that Holmes was a fan of'. One attribution note: the post is bylined 'Zenopus Archives', not 'Zach Howard' - the identification is corroborated on the Delta page fetched for this same chunk, which credits 'Zach Howard (Zenopus)'.
+#761 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | zenopusarchives.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: J. Eric Holmes, D&D Basic Set (1977), quoted by Zach Howard (Zenopus Archives) 2015
+  LABEL: boxed text form
+  CLAIM: J. Eric Holmes instructs the Dungeon Master to read the sample dungeon's background material aloud to the assembled players.
+  Q: should read the background material above to the assembled players
+  TW: should read the background material above to the assembled players
+  NOTE: Live raw page fetched. Quoted Holmes manuscript text: 'The Dungeon Master should read the background material above to the assembled players and then let them decide how they will proceed.' 'Aloud' is entailed by 'read ... to the assembled players'. The 1977 attribution survives: the post names only two changes to the introduction in the published rulebook (
+#762 PARTIAL | F=27, 29, 34, 47 | scholarship-history | zenopusarchives.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Zach Howard (Zenopus Archives), 'Part 46', 2015
+  LABEL: boxed text form
+  CLAIM: Howard reads Holmes's Portown background as material meant to be read to the players, predating boxed text.
+  Q: this background material is meant to be read to the players
+  TW: this background material is meant to be read to the players
+  NOTE: Live raw page fetched; the quotation is verbatim in Howard's commentary on the Portown paragraph ('- this background material is meant to be read to the players, as indicated below'), and the read-to-the-players limb is fully supported. The chronological limb is absent: the words 'boxed text' do not occur anywhere on the page (checked against the full raw te
+  LIMB: 'predating boxed text' - the page never mentions boxed text at all
+#763 VERIFIED_VERBATIM | F=38, 46 | scholarship-history | zenopusarchives.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Zach Howard (Zenopus Archives), 'Part 46', 2015
+  LABEL: place and institution description
+  CLAIM: Howard calls Holmes's one-paragraph account of Portown's trade, ships and inhabitants a thumbnail sketch of a campaign setting.
+  Q: Here we get a thumbnail sketch of a campaign setting
+  TW: Here we get a thumbnail sketch of a campaign setting
+  NOTE: Live raw page fetched. Commentary immediately below the quoted Holmes paragraph, which is one paragraph covering caravan routes from the south (trade), merchant ships on pirate-infested waters, and humans and non-humans from all over the globe (inhabitants). Every limb holds.
+#768 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', Delta's D&D Hotspot, 2021
+  LABEL: boxed text form
+  CLAIM: Delta dates the first boxed text in a Gygax adventure to the 1982 published Lost Caverns of Tsojcanth.
+  Q: And hey, there's boxed text for the first time!
+  TW: And hey, there's boxed text for the first time!
+  NOTE: Live raw page fetched. Closing line of the section headed '1982 - Lost Caverns of Tsojcanth Publication', and corroborated later in the same post: the 1983-85 adventures use boxed text 'as introduced in the 1982 Tsojcanth dungeon areas'. 'First' is first within Delta's declared sample - adventures authored by Gygax at two-year intervals across 1974-1985.
+#770 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: plainness and economy
+  CLAIM: Gygax's 1974 Castle Greyhawk notes gave a single curt bullet-line per encounter area.
+  Q: only a single curt bullet-line per encounter area
+  TW: only a single curt bullet-line per encounter area
+  NOTE: Live raw page fetched. Section '1974 - Castle Greyhawk Notes'; the sentence continues 'noting monster type, number range, and treasure (and absolutely nothing else)'. Two hedges the claim drops: the notes were never published (known from a photo taken at a Gen Con 2007 event), and Delta records debate over whether the encounter text is original, with the map
+#772 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: concrete sensory noun
+  CLAIM: In the 1978 Steading of the Hill Giant Chief the area paragraphs tend to lead with sense-descriptions.
+  Q: the paragraphs tend to lead with those sense-descriptions
+  TW: the paragraphs tend to lead with those sense-descriptions
+  NOTE: Live raw page fetched. Section '1978 - Steading of the Hill Giant Chief'; the sentence continues that monster identification and hit points possibly occur deeper in the block, which is the point of the observation. Both limbs (the 1978 module; paragraphs leading with sense-descriptions) hold.
+#773 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: place and institution description
+  CLAIM: Expedition to the Barrier Peaks devotes almost 500 words to the Ship Commander's Quarters, an area with no monsters.
+  Q: almost 500 words total for the one area
+  TW: almost 500 words total for the one area
+  NOTE: Live raw page fetched. Section '1980 - Expedition to the Barrier Peaks', on area 7, the 'Ship Commander's Quarters'. The no-monsters limb is doubly supported: the area is offered as an example of deeply detailed areas 'even without any monsters or traps at all', and its sub-areas a-d are parenthesised as having no monsters or unnatural contents. Delta's word
+#774 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i751-774.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: boxed text form
+  CLAIM: Isle of the Ape opens with a boxed speech by Tenser of some 1,600 words to be read verbatim.
+  Q: 2 full pages of text to be read verbatim
+  TW: 2 full pages of text to be read verbatim
+  NOTE: Live raw page fetched. In the final section '1984 (c.) - Dungeonland & Temple of Elemental Evil', where Delta brings in 1985's Isle of the Ape: an introductory boxed-speech by Tenser running two full pages to be read verbatim, parenthesised as 'some 1,600 words!'. Every limb (opens with; boxed; Tenser; ~1,600 words; read verbatim) holds.
+#775 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: boxed text form
+  CLAIM: The Temple of Elemental Evil's introductory boxed text runs about 1,300 words, more than a full page.
+  Q: introductory boxed text section that runs more than a full page
+  TW: introductory boxed text section that runs more than a full page
+  NOTE: Live raw page (curl, browser UA, HTTP 200). Final section '1984 (c.) - Dungeonland & Temple of Elemental Evil'; the sentence names the Gygax/Mentzer Temple and puts the ~1,300-word figure in parentheses immediately after. Both limbs (word count, more than a page) supported.
+#776 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: place and institution description
+  CLAIM: Delta counts 1,200 words of content text for room 404 of the Temple of Elemental Evil, a 20 by 30 foot room.
+  Q: room 404 is ironically a 20'×30' room with 1,200 words
+  TW: room 404 is ironically a 20'×30' room with 1,200 words
+  NOTE: Same section and same sentence chain as 775; the page continues 'of content text' and adds room 417 at 1,400 words. Dimensions, word count and Temple attribution all on the page. Quote matched byte-for-byte including the × character.
+#777 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', 2021
+  LABEL: dm-facing sentence
+  CLAIM: The Temple of Elemental Evil tends to open an encounter with non-boxed information for the DM before the boxed description.
+  Q: start with some non-boxed info to the DM, and then
+  TW: start with some non-boxed info to the DM, and then
+  NOTE: Same final section: the page says Temple has a strong tendency to do this and gives the boxed description deep in the encounter text. The page's own hedge, that this is not universal, is consistent with the claim's 'tends to'.
+#782 VERIFIED_VERBATIM | F=27, 29, 34, 47 | scholarship-history | deltasdnd.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Delta (Daniel R. Collins), 'Tip-Offs in Tamoachan', Delta's D&D Hotspot, 2017
+  LABEL: boxed text form
+  CLAIM: In the 1979 Lost Tamoachan the initial area descriptions are set as quoted and indented passages rather than boxed text.
+  Q: not exactly in boxed text, but in specially quoted and indented
+  TW: not exactly in boxed text, but in specially quoted and indented
+  NOTE: Live raw page, HTTP 200. Section 'Other Curiosities', item 'Proto-Boxed Text'. The 1979 date limb is carried by the post's opening paragraph, which dates the Collector's Edition of Lost Tamoachan to TSR 1979. 'Initial descriptions for each area' matches the claim's 'initial area descriptions'.
+#783 VERIFIED_VERBATIM | F=31, 46 | scholarship-history | greyhawkery.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery
+  LABEL: edition and house style
+  CLAIM: Bruce Cordell wrote that the 4e tactical format makes a compelling adventure narrative difficult to generate.
+  Q: The tactical format makes it difficult to generate a compelling adventure narrative
+  TW: The tactical format makes it difficult to generate a compelling adventure narrative
+  NOTE: Live raw page, HTTP 200. Opening sentence of the first quoted block. The '4e' limb is carried by Bridges' framing sentence directly above the block, which calls Cordell a main designer of 4th edition rejecting the current tactical format; post labels include '4th edition'.
+#784 VERIFIED_VERBATIM | F=31, 46 | scholarship-history | greyhawkery.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery
+  LABEL: omission as information
+  CLAIM: Cordell wrote that the tactical format leaves too little space for notes on exploration, lore or character story.
+  Q: adventures tend to be fairly Spartan affairs, because too little space
+  TW: adventures tend to be fairly Spartan affairs, because too little space
+  NOTE: Final paragraph of the same first quoted block; it continues with notes on exploration, lore and character story, so all three of the claim's listed omissions are on the page.
+#785 VERIFIED_VERBATIM | F=31, 46 | scholarship-history | greyhawkery.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery
+  LABEL: edition and house style
+  CLAIM: Cordell reports reviewing 1st Edition adventures including Tomb of Horrors for models of adventure format.
+  Q: 1st Edition adventures I looked at included Tomb of Horrors
+  TW: 1st Edition adventures I looked at included Tomb of Horrors
+  NOTE: Second quoted block, opening words; the block goes on to White Plume Mountain and Isle of Dread. The 'models of adventure format' limb is carried by Bridges' bridging sentence about going back to the classics for formatting examples.
+#787 VERIFIED_VERBATIM | F=31, 46 | scholarship-history | deathtrap-games.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Welcome to the Deathtrap (OSR blog), 'Designing Layout and Information in Adventures', 2021
+  LABEL: place and institution description
+  CLAIM: In 4th Edition adventures, locations with no encounter are compressed into single paragraphs with minimal description.
+  Q: compressed into single paragraphs with minimal effort spent on description
+  TW: compressed into single paragraphs with minimal effort spent on description
+  NOTE: Live raw page, HTTP 200. Section 'The Evolution of Dungeons & Dragons' Information Design', in the 4th Edition paragraph. The page hedges with 'often'; the claim drops that word but states a tendency, not a universal, so the limb stands.
+#788 VERIFIED_VERBATIM | F=46 | scholarship-history | deathtrap-games.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Welcome to the Deathtrap (OSR blog), 2021
+  LABEL: boxed text form
+  CLAIM: The blogger describes 5th Edition's Candlekeep Mysteries as a wall of text with a boxed description.
+  Q: it is a wall of text with a boxed description
+  TW: it is a wall of text with a boxed description
+  NOTE: Same section, the paragraph comparing the author's copy of D&D5e's Candlekeep Mysteries to Temple of Elemental Evil. 'The blogger' is Brian C. Rideout, the post's bylined author.
+#791 VERIFIED_VERBATIM | F=46 | scholarship-history | deathtrap-games.blogspot.com | verdicts-dnd-i775-807.json
+  SRC: Welcome to the Deathtrap (OSR blog), 2021
+  LABEL: boxed text form
+  CLAIM: The Dark of Hot Springs Island replaces long box text with a handful of adjectives for the GM to improvise from.
+  Q: rather than give a long box text, Hot Springs Island provides
+  TW: rather than give a long box text, Hot Springs Island provides
+  NOTE: Section 'Point Form Description'; the sentence continues that the adjectives describe the area for the GM to use while improvising. The full title The Dark of Hot Springs Island appears in the adjacent section and image credit.
+#800 VERIFIED_VERBATIM | F=46 | scholarship-history | polygon.com | verdicts-dnd-i775-807.json
+  SRC: Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon
+  LABEL: dm-facing sentence
+  CLAIM: Peterson says In Search of the Unknown carried starting guidance on running an adventure absent from the then-current D&D books.
+  Q: useful starting guidance on running an adventure that you wouldn’t find
+  TW: useful starting guidance on running an adventure that you wouldn’t find
+  NOTE: Live raw page, HTTP 200, Polygon excerpt bylined Jon Peterson. First paragraph of the excerpt under 'From the Unknown to the Borderlands'; the antecedent 'It' is In Search of the Unknown (B1) by Mike Carr, named in the preceding clause. Page continues 'in the D&D books available at the time', supporting the 'then-current' limb.
+#801 VERIFIED_VERBATIM | F=46 | scholarship-history | polygon.com | verdicts-dnd-i775-807.json
+  SRC: Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon
+  LABEL: edition and house style
+  CLAIM: Peterson says much of Carr's text on the art of dungeon mastering was effectively paraphrased in Gygax's Keep on the Borderlands.
+  Q: enlightening text about the art of dungeon mastering was effectively paraphrased
+  TW: enlightening text about the art of dungeon mastering was effectively paraphrased
+  NOTE: Paragraph beginning 'It was then that Gygax apparently grasped'. The page says 'in Gygax's version'; that version is identified two sentences earlier as Keep on the Borderlands (B2), so the claim's naming of B2 is supported in context, not asserted beyond the page.
+#802 VERIFIED_VERBATIM | F=46 | scholarship-history | polygon.com | verdicts-dnd-i775-807.json
+  SRC: Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon
+  LABEL: edition and house style
+  CLAIM: Peterson dates the start of modules as a business for TSR to the summer of 1978.
+  Q: Modules only started to become a business for TSR in the summer
+  TW: Modules only started to become a business for TSR in the summer
+  NOTE: First paragraph of the excerpt; the page completes the date as 'of 1978'. Claim's dating limb matches exactly.
+#806 VERIFIED_VERBATIM | F=38 | scholarship-history | writeups.letsyouandhimfight.com | verdicts-dnd-i775-807.json
+  SRC: Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups
+  LABEL: plainness and economy
+  CLAIM: The same writeup says the Gazetteers make their points quickly and efficiently.
+  Q: points are made quickly and efficiently
+  TW: points are made quickly and efficiently
+  NOTE: Live raw page, HTTP 200. Introduction, subsection 'The Base Rules', third point about the GAZ books; the same sentence notes casual, informal language and no overuse of purple prose. Subject is the Gazetteer series, matching the claim.
+#807 VERIFIED_VERBATIM | F=38 | scholarship-history | writeups.letsyouandhimfight.com | verdicts-dnd-i775-807.json
+  SRC: Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups
+  LABEL: plainness and economy
+  CLAIM: GAZ1 The Grand Duchy of Karameikos runs to 64 pages plus maps.
+  Q: The first one clocks in at a mere 64 pages plus maps
+  TW: The first one clocks in at a mere 64 pages plus maps
+  NOTE: Same 'The Base Rules' subsection. 'The first one' is GAZ1: The Grand Duchy of Karameikos: the writeup proceeds in publication order and the very next heading is GAZ1 Karameikos; the GAZ1 conclusion later on the same page independently exclaims that it was only 64 pages.
+#809 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | writeups.letsyouandhimfight.com | verdicts-dnd-i809-831.json
+  SRC: Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups
+  LABEL: civic record register
+  CLAIM: GAZ1 gives Specularum an official census of 50.000 taken fifteen years before the setting's present.
+  Q: the official census of 50.000 was taken 15 years ago
+  TW: the official census of 50.000 was taken 15 years ago
+  NOTE: Raw page fetched by curl (browser UA, HTTP 200). Quote is verbatim in the 'Gaz 1 Part 4: The Lay of the Land' post, subheading 'An Array of Strange Places'. Every limb holds: GAZ1, Specularum, official census of 50.000, taken 15 years ago; page adds it has grown considerably since.
+#810 VERIFIED_VERBATIM | F=38 | scholarship-history | writeups.letsyouandhimfight.com | verdicts-dnd-i809-831.json
+  SRC: Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups
+  LABEL: place and institution description
+  CLAIM: In GAZ1 some notable places of Karameikos merit only a paragraph of description.
+  Q: Some merit only a paragraph
+  TW: Some merit only a paragraph
+  NOTE: Raw page, same Gaz 1 Part 4 post, paragraph immediately after the Specularum passage: the other notable places in Karameikos get their own descriptions, some merit only a paragraph. All limbs supported.
+#811 VERIFIED_VERBATIM | F=46 | scholarship-history | therpggazette.wordpress.com | verdicts-dnd-i809-831.json
+  SRC: Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025
+  LABEL: plainness and economy
+  CLAIM: An essayist characterises J. Eric Holmes's Basic Set prose as dispassionate, methodical and encouraging.
+  Q: His prose is dispassionate, methodical, and encouraging
+  TW: His prose is dispassionate, methodical, and encouraging
+  NOTE: Raw page fetched by curl (HTTP 200). Verbatim in the section 'The Translotar: J. Eric Holmes and the Bridge Between Worlds'; the surrounding sentences name Holmes and the Holmes Basic Set, so the prose attribution holds.
+#812 PARTIAL | F=46 | scholarship-history | therpggazette.wordpress.com | verdicts-dnd-i809-831.json
+  SRC: Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025
+  LABEL: edition and house style
+  CLAIM: The same essay calls the original 1974 boxed set's text dense and peculiar.
+  Q: The text in the set was dense and peculiar
+  TW: The text in the set was dense and peculiar
+  NOTE: The quotation is verbatim in the Holmes section, but the essay never dates the original boxed set: it says only 'the original boxed set', and the sole years it prints are 1930, 1977, 1970, 1948, 1981 and 1980. The 1974 date is the claim's own gloss, not the page's, so the attribution 'the same essay calls the original 1974 boxed set' overstates what is on th
+  LIMB: the 1974 dating of the boxed set
+#813 VERIFIED_VERBATIM | F=46 | scholarship-history | therpggazette.wordpress.com | verdicts-dnd-i809-831.json
+  SRC: Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025
+  LABEL: plainness and economy
+  CLAIM: The same essay calls Tom Moldvay's 1981 Basic text both efficient and lyrical.
+  Q: Moldvay’s text seems both efficient and lyrical
+  TW: Moldvay's text seems both efficient and lyrical
+  NOTE: Raw page, section 'The poet: Tom Moldvay and the Art of Elegance'. The 1981 limb is supported in the same paragraph, which dates the Basic D&D set to 1981.
+#815 VERIFIED_VERBATIM | F=46 | scholarship-history | therpggazette.wordpress.com | verdicts-dnd-i809-831.json
+  SRC: Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025
+  LABEL: omission as information
+  CLAIM: The essay says Moldvay's adventures implied a cosmology, a history and a mood through their placement of statues, monsters and ruins.
+  Q: Each adventure implied a cosmology, a history, and a mood
+  TW: Each adventure implied a cosmology, a history, and a mood
+  NOTE: Raw page, Moldvay section, paragraph on Isle of Dread and The Lost City. The page continues that the mood was built in by its placement of statues, monsters and ruins, supporting that limb too.
+#816 VERIFIED_VERBATIM | F=46 | scholarship-history | therpggazette.wordpress.com | verdicts-dnd-i809-831.json
+  SRC: Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025
+  LABEL: place and institution description
+  CLAIM: The essay says Moldvay's adventures communicated worldviews rather than merely offering maps.
+  Q: These adventures communicated worldviews, rather than merely offering maps
+  TW: These adventures communicated worldviews, rather than merely offering maps
+  NOTE: Raw page, Moldvay section, the sentence immediately preceding the cosmology sentence; refers to Isle of Dread and The Lost City.
+#820 VERIFIED_VERBATIM | F=38 | scholarship-history | dndbeyond.com | verdicts-dnd-i809-831.json
+  SRC: John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024
+  LABEL: civic record register
+  CLAIM: The article says Gygax's settlement populations and locations followed real-world economic maxims.
+  Q: His settlement populations and locations followed real-world economic maxims
+  TW: His settlement populations and locations followed real-world economic maxims
+  NOTE: Raw page fetched by curl (HTTP 200), byline John Roy, Oct 21 2024. Verbatim as the opening sentence of the second paragraph under the heading 'Keeping It Real'; the preceding sentence names Gygax, so 'His' is Gygax.
+#821 VERIFIED_VERBATIM | F=38 | scholarship-history | dndbeyond.com | verdicts-dnd-i809-831.json
+  SRC: John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024
+  LABEL: civic record register
+  CLAIM: The article says Gygax gave each nation its imports, exports and the trade routes used to carry them.
+  Q: each nation's imports and exports and the trade routes they used
+  TW: each nation's imports and exports and the trade routes they used
+  NOTE: Raw page, same 'Keeping It Real' paragraph: he provided each nation's imports and exports and the trade routes they used to transport them. Subject is Gygax, named in the same paragraph.
+#825 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025
+  LABEL: plainness and economy
+  CLAIM: Zeb Cook says TSR's early module settings were held to no more than what would fit on a page.
+  Q: We made no more than what we could put on a page
+  TW: We made no more than what we could put on a page
+  NOTE: Raw transcript fetched by curl (HTTP 200), part 1, dated July 14 2025. Verbatim at the end of Zeb Cook's first answer in the exchange on models of world building, which opens 'when we started doing things [at TSR], we were doing modules'. TSR and the early-module limbs are both on the page.
+#826 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025
+  LABEL: place and institution description
+  CLAIM: Cook says every early TSR module required a quick setting created only so the module could be explained.
+  Q: For every module, you had to create a quick setting
+  TW: For every module, you had to create a quick setting
+  NOTE: Raw transcript, part 1, same Zeb Cook turn; the page continues 'so you could explain it', supporting the purpose limb.
+#827 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025
+  LABEL: omission as information
+  CLAIM: Cook reports readers wrote in convinced TSR held much more setting material than the page contained.
+  Q: You obviously have a whole bunch more
+  TW: You obviously have a whole bunch more
+  NOTE: Raw transcript, part 1, the paragraph after the page remark: 'Then we got letters from people saying...' followed by 'No, we don't have anything more on that.' Readers writing in and the belief in more material are both on the page.
+#829 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025
+  LABEL: place and institution description
+  CLAIM: Baur calls the Forgotten Realms the kitchen sink approach to world building.
+  Q: The Forgotten Realms is the kitchen sink approach to world building
+  TW: The Forgotten Realms is the kitchen sink approach to world building
+  NOTE: Raw transcript, part 1, verbatim in Wolfgang Baur's turn replying to Cook on the TSR settings; the turn is speaker-tagged 'Wolfgang' and the seminar intro identifies him as Wolfgang Baur of Kobold Press.
+#830 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025
+  LABEL: plainness and economy
+  CLAIM: Baur describes a newer one-book model as providing the minimum viable world building.
+  Q: to provide the minimum viable world building
+  TW: to provide the minimum viable world building
+  NOTE: Raw transcript, part 1, Baur's turn: a new model of world building that Kobold Press and others have pursued, which is to provide the minimum viable world building; the next sentence names the one-book model.
+#831 VERIFIED_VERBATIM | F=38, 39, 41 | scholarship-history | koboldpress.com | verdicts-dnd-i809-831.json
+  SRC: David 'Zeb' Cook, Kobold Press world building seminar transcript, part 2, 2025
+  LABEL: place and institution description
+  CLAIM: Cook says the worst world building books he has read are literally just lists of places and people.
+  Q: are ones that are literally just lists of places and people
+  TW: are ones that are literally just lists of places and people
+  NOTE: Raw transcript fetched by curl (HTTP 200), part 2, dated July 21 2025, in the exchange on conflict. The paragraph is an unbroken continuation of the turn tagged 'Zeb:' ('Yeah, there's conflict there'), with the next speaker tag being 'Wolfgang:' two paragraphs later, so the attribution to Cook holds.
+#835 VERIFIED_VERBATIM | F=41, 42 | scholarship-history | koboldpress.com | verdicts-dnd-i835-1057.json
+  SRC: Wolfgang Baur, Kobold Press world building seminar transcript, part 2, 2025
+  LABEL: withheld information and inference
+  CLAIM: Baur says the expected arc of play should be stated explicitly to players rather than kept coy.
+  Q: you should be explicit about it. Don’t be coy
+  TW: you should be explicit about it. Don't be coy
+  NOTE: Live page (koboldpress.com, transcript dated July 21, 2025) fetched raw with a browser UA. Quote appears word for word in Wolfgang Baur's speaking turn, immediately after '...or whatever it is that the expected arc is'. Speaker label 'Wolfgang' confirms Baur; both limbs (state the expected arc explicitly, do not be coy) are on the page.
+#851 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: boxed text form
+  CLAIM: Noonan reports that a DM reading boxed text holds player attention for two sentences and no further.
+  Q: If you’re the DM, you get two sentences. Period.
+  TW: If you're the DM, you get two sentences. Period.
+  NOTE: Live wizards.com URL 302s to the modern Nuxt D&D site; recovered via Wayback raw capture 20140530180347id_. Quote verbatim in 'Undercover Insight #1: Boxed Text = MEGO'; the next sentence ('Beyond that, your players are stacking dice...') supports 'and no further'. The first-person observer is Noonan ('the Dave wanders around technique'; author bio names Dav
+#852 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: boxed text form
+  CLAIM: Noonan's hypothesis was that boxed text longer than a paragraph probably is not worth reading aloud.
+  Q: boxed text longer than a paragraph probably isn’t worth reading
+  TW: boxed text longer than a paragraph probably isn't worth reading
+  NOTE: Same Wayback capture. Verbatim in 'Undercover Insight #1', introduced by 'My hypothesis was that...' — the hypothesis limb is explicit. 'Aloud' is the article's own frame (boxed read-aloud text the DM reads to players).
+#853 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: boxed text form
+  CLAIM: Noonan observed players repeatedly missing the actual data inside the boxed text, such as room dimensions and exits.
+  Q: players were missing the actual data in the boxed text
+  TW: players were missing the actual data in the boxed text
+  NOTE: Same Wayback capture, 'Undercover Insight #1'. Full sentence begins 'Time after time,' (supports 'repeatedly') and continues '- basic stuff, like room dimensions, how many doors exit the room, and number of monsters' (supports dimensions and exits).
+#856 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: cadence and rhythm
+  CLAIM: Noonan concludes that oration is inherently harder to concentrate on than conversation.
+  Q: oration is inherently harder to concentrate on than conversation
+  TW: oration is inherently harder to concentrate on than conversation
+  NOTE: Same Wayback capture, numbered factor 2 of the two secondary factors: '...tells me that oration is inherently harder to concentrate on than conversation.' Verbatim, and it is stated as the conclusion drawn from the loud-room observation.
+#857 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: dm-facing sentence
+  CLAIM: Noonan notes DMs are by and large reading the boxed text cold, from a script never uttered aloud before.
+  Q: DMs are, by and large, reading the boxed text cold
+  TW: DMs are, by and large, reading the boxed text cold
+  NOTE: Same Wayback capture, numbered factor 1. Quote verbatim; the second limb is the following sentence, which says even a dynamic DM reads from a script he or she has never uttered aloud before.
+#858 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: edition and house style
+  CLAIM: Writing in 2005, the authors say boxed text in adventures used to be a lot longer than it was then.
+  Q: used to be a lot longer than it is today
+  TW: used to be a lot longer than it is today
+  NOTE: Same Wayback capture; article header reads 'Design & Development 09/16/2005'. The 'Tangent Alert!' passage carries the quote verbatim, then contrasts the short Sons of Gruumsh box with the long first room of 1999's Return to the Keep on the Borderlands, exactly as the claim's page note says.
+#859 VERIFIED_VERBATIM | F=27 | scholarship-history | wizards.com | verdicts-dnd-i835-1057.json
+  SRC: Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005
+  LABEL: boxed text form
+  CLAIM: The authors advise the DM to ditch boxed text and use his own words for the initial description of the room.
+  Q: use your own words for the initial description of the room
+  TW: ditch the boxed text and use your own words
+  NOTE: Same Wayback capture, closing 'Beyond the door, you see a format change...' section: 'Or better yet, ditch the boxed text and use your own words for the initial description of the room.' Claim's quoted fragment is verbatim; advice is addressed to the DM, phrased second person.
+#861 VERIFIED_VERBATIM | F=29 | scholarship-history | dysonlogos.blog | verdicts-dnd-i835-1057.json
+  SRC: Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013
+  LABEL: boxed text form
+  CLAIM: Dyson Logos dates boxed and read-aloud text to the 1e period of published adventures.
+  Q: During the 1e days, we saw the advent of “boxed” or “read-aloud” text
+  TW: During the 1e days, we saw the advent of “boxed”
+  NOTE: Live dysonlogos.blog page fetched raw (HTTP 200). Second paragraph of the post reads in full: 'During the 1e days, we saw the advent of “boxed” or “read-aloud” text.' Verbatim including the curly quotes; the 1e-period dating limb is explicit.
+#862 VERIFIED_VERBATIM | F=29 | scholarship-history | dysonlogos.blog | verdicts-dnd-i835-1057.json
+  SRC: Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013
+  LABEL: boxed text form
+  CLAIM: Dyson attributes boxed text to tournament use, whose goal was to standardize the experience for each play group.
+  Q: the goal being to standardize the game experience for each play group
+  TW: to standardize the game experience for each play group
+  NOTE: Same live page, same paragraph 2, immediately after the 861 sentence: 'I tend to blame this on the tournament usage of the original published adventures – the goal being to standardize the game experience for each play group, regardless of the DM.' Both limbs (tournament use, standardizing per play group) verbatim; 'attributes' renders the source's hedged 'I
+#866 VERIFIED_VERBATIM | F=41, 42 | scholarship-history | journals.uu.se | verdicts-dnd-i835-1057.json
+  SRC: David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013
+  LABEL: omission as information
+  CLAIM: Jara argues setting and rules frame the game because they invariably imply reductions of the imagined world.
+  Q: reductions of the imagined world
+  TW: frame it as they invariably imply reductions of the imagined world
+  NOTE: PDF fetched from journals.uu.se (4.5 MB, HTTP 200) and text-extracted. Conclusion, p. 51: 'I have argued that setting and rules not only provide the structural basis to the game but that they also frame it as they invariably imply reductions of the imagined world'. Article is Jara, 'A Closer Look at the (Rule-)Books: Framings and Paratexts in Tabletop Role-p
+#867 VERIFIED_VERBATIM | F=41, 42 | scholarship-history | journals.uu.se | verdicts-dnd-i835-1057.json
+  SRC: David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013
+  LABEL: civic record register
+  CLAIM: Jara treats the information a game setting gives as otherwise purely factual, to which intra-textual framing devices add diegetic meaning.
+  Q: factual information given by the game setting
+  TW: add diegetic meaning to the otherwise purely factual information
+  NOTE: Same PDF, Conclusion: 'the rulebook's intra-textual framing devices serve to add diegetic meaning to the otherwise purely factual information given by the game setting.' Claim's quoted fragment verbatim; both limbs (intra-textual framing devices; setting information as otherwise purely factual) present.
+#925 PARTIAL | F=- | ? | rpgmusings.com | verdicts-dnd-regrade-r12.json
+  SRC: RPG Musings, Why & How to Use Legacy of the Crystal Shard in Your Frostmaiden Game, Nov 2020
+  LABEL: place and institution description
+  CLAIM: RPG Musings measures two of the minor Bryn Shander locations in Legacy of the Crystal Shard at two to three sentences each.
+  Q: the Armory and Council Hall in Bryn Shander get 2-3
+  TW: the Armory and Council Hall in Bryn Shander get 2-3 sentences each
+  NOTE: R11 completeness-critic finding (3): row 925 measures Legacy of the Crystal Shard (2013, D&D Next), not a fifth-edition hardcover — PARTIAL on the dating limb. The measured Bryn Shander Armory/Council Hall write-ups are real; the edition the row is filed under is not.
+  LIMB: the dating/edition limb: Legacy of the Crystal Shard is a 2013 D&D Next product, not a fifth-edition hardcover
+#932 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: other: settlement slot list
+  CLAIM: The 2024 Dungeon Master's Guide defines a settlement with exactly four settlement-level tables, headed Defining Traits, Claims to Fame, Current Calamities and Local Leaders, plus a Settlements by Size table.
+  Q: The following tables allow you to flesh out details about a settlement.
+  TW: The following tables allow you to flesh out details about a settlement.
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#933 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: place and institution description
+  CLAIM: The 2024 DMG asserts that describing a settlement to the players in words is usually enough and no map is required.
+  Q: Simply describing the settlement to your players is usually sufficient.
+  TW: Simply describing the settlement to your players is usually sufficient.
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#934 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: other: settlement size bands
+  CLAIM: The 2024 DMG's Settlements by Size table gives population ranges of up to 500 for a village, 501-5,000 for a town and 5,001 and higher for a city.
+  Q: population ranges for villages, towns, and cities
+  TW: population ranges for villages, towns, and cities
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner — trueWording replaced by the verifier-confirmed quote field per the r11 critic finding 6; the three bands the verifier confirmed in the table are Village Up to 500; Town 501-5,000; City 5,001 and higher
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#935 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: The 2024 DMG writes a price as a numeral inside a running sentence of its own worked example rather than spelling it out.
+  Q: (which costs 50 GP) is too expensive an item
+  TW: (which costs 50 GP) is too expensive an item
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#937 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: other: settlement slot list
+  CLAIM: The 2024 DMG's leadership slot, retitled Local Leaders, admits a council rather than only a single ruler as a settlement's leader.
+  Q: Respected, fair, and just leader or council
+  TW: Respected, fair, and just leader or council
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#939 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Settlements" (DM's Toolbox), read on the licensed Roll20 compendium
+  LABEL: other: settlement slot list
+  CLAIM: The 2024 DMG's Settlements section carries no table on relations between the peoples living in a settlement, a slot the 2014 book had as Race Relations.
+  Q: 
+  TW: 2024 tables: Size, Traits, Fame, Calamities, Leaders, Taverns, Shops - none relations
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#944 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: place and institution description
+  CLAIM: The 2014 DMG tells the DM to build a settlement around the locations most relevant to the adventure.
+  Q: When creating a settlement for your campaign, focus
+  TW: When creating a settlement for your campaign, focus
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#945 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: omission as information
+  CLAIM: The 2014 DMG warns the DM off naming every street and identifying every building's inhabitants, calling that way madness.
+  Q: the inhabitants of every building; that way lies madness.
+  TW: the inhabitants of every building; that way lies madness.
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#946 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: other: settlement slot list
+  CLAIM: The 2014 DMG's five Random Settlements tables presuppose that the settlement's size and basic form of government have already been fixed elsewhere.
+  Q: settlement. They assume that you've already determined
+  TW: settlement. They assume that you've already determined
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#947 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: other: settlement slot list
+  CLAIM: The 2014 DMG's settlement slots are five tables headed Race Relations, Ruler's Status, Notable Traits, Known For Its, and Current Calamity.
+  Q: its size and its basic form of government.
+  TW: its size and its basic form of government.
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#948 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: other: table heading form
+  CLAIM: The 2014 DMG heads its reputation slot as a sentence stem with an ellipsis that the rolled result completes.
+  Q: Known For Its ...
+  TW: Known For Its ...
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#950 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: place and institution description
+  CLAIM: The 2014 DMG tells the DM drawing a settlement map to ignore the placement of every building and concentrate on major features.
+  Q: concentrate instead on the major features.
+  TW: concentrate instead on the major features.
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#951 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: naming and forms of address
+  CLAIM: The 2014 DMG advises naming a city's wards after the dominant trade, a geographical characteristic, or a dominant site, offering Tannery Square, Riverside and the Lords' Quarter as its own examples.
+  Q: the kinds of trades that dominate the neighborhood
+  TW: the kinds of trades that dominate the neighborhood
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#954 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: place and institution description
+  CLAIM: The 2014 DMG tells the DM to fix one defining factor for a settlement's personality and extrapolate the rest of the description from it.
+  Q: Settle on a single defining factor that sums up a
+  TW: Settle on a single defining factor that sums up a
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#955 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: plainness and economy
+  CLAIM: The 2014 DMG rules that a settlement the party only rests and resupplies in needs no more than a brief description.
+  Q: of this sort needs no more than a brief description.
+  TW: of this sort needs no more than a brief description.
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#956 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: omission as information
+  CLAIM: The 2014 DMG instructs the DM to create only the settlement features the campaign will actually need and let the place grow later.
+  Q: you put into it. Create only the features of a settlement
+  TW: Create only the features of a settlement
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#957 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: edition and house style
+  CLAIM: The 2014 DMG explicitly licenses the DM to disregard its own settlement advice where it conflicts with the DM's vision.
+  Q: Disregard any advice here that runs counter to
+  TW: Disregard any advice here that runs counter to
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#958 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: civic record register
+  CLAIM: Each settlement size in the 2014 DMG is written as a five-field labelled record: Population, Government, Defense, Commerce and Organizations.
+  Q: Organizations: A village might contain one or two
+  TW: Organizations: A village might contain one or two
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#959 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: other: digits in prose
+  CLAIM: In the 2014 DMG the city population threshold is spelled out in words inside the running prose.
+  Q: Cities that hold more than twenty-five thousand people
+  TW: Cities that hold more than twenty-five thousand people
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#961 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: other: digits in prose
+  CLAIM: The 2014 DMG's Forgotten Realms currency example carries two coin values as numerals inside one sentence of running prose.
+  Q: worth 50 gp in Waterdeep and 30 gp
+  TW: worth 50 gp in Waterdeep and 30 gp
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#962 PARTIAL | F=- | ? | archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)
+  LABEL: place and institution description
+  CLAIM: The 2014 DMG defines a ward as a neighbourhood of a city defined by specific features, produced by the outward expansion of city walls.
+  Q: naturally divide the city into wards (neighborhoods
+  TW: naturally divide the city into wards (neighborhoods defined by specific features)
+  NOTE: ROUTE QUESTIONED — archive.org full-book OCR
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from an archive.org full-book OCR of the copyrighted 2014 Dungeon Master's Guide, so it may be cited only with this mark until a lawful witness replaces it
+#973 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Free City of Greyhawk", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: In the 2024 DMG's worked city description an elapsed span of years is spelled out in words rather than given as a numeral.
+  Q: proclaimed itself free and independent seventy-eight years ago
+  TW: proclaimed itself free and independent seventy-eight years ago
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#974 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Free City of Greyhawk", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: In the same city description the count of a governing council's members is spelled out in words.
+  Q: made up of sixteen coequal rulers
+  TW: made up of sixteen coequal rulers
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#975 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Free City of Greyhawk", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: In the same city description the size of the standing garrison is spelled out in words.
+  Q: a standing garrison of some eight hundred
+  TW: a standing garrison of some eight hundred
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#976 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Free City of Greyhawk", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: In the same city description a physical measurement in feet is written as a numeral inside running prose.
+  Q: A 30-foot-high stone wall winds like a snake around the city.
+  TW: A 30-foot-high stone wall winds like a snake around the city.
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#977 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Free City of Greyhawk", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: In the same city description a fine is given as a dice expression and a coin abbreviation inside a sentence of prose.
+  Q: The perpetrator pays a fine of 2d10 GP or works
+  TW: The perpetrator pays a fine of 2d10 GP or works
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#980 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Greyhawk Gazetteer", read on the licensed Roll20 compendium
+  LABEL: annalist voice and deep time
+  CLAIM: The 2024 DMG's Greyhawk Gazetteer dates realm-level events with numerals and an era abbreviation, giving the present year as 576 CY.
+  Q: picture the Flanaess about 200 years ago
+  TW: the year 576 in the Common Year
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#981 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Greyhawk Gazetteer", read on the licensed Roll20 compendium
+  LABEL: other: digits in prose
+  CLAIM: On the same gazetteer page an elapsed interval is spelled out in words in one paragraph and written as the numeral 200 in another, so the book applies no single rule.
+  Q: Seven years ago, knights and soldiers from Furyondy
+  TW: Seven years ago, knights and soldiers from Furyondy
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#982 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Greyhawk Gazetteer", read on the licensed Roll20 compendium
+  LABEL: withheld information and inference
+  CLAIM: The 2024 DMG rules that only the details of a setting's history that feature in the adventures are relevant.
+  Q: the only relevant details of this history are those that
+  TW: the only relevant details of this history are those that
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#983 PARTIAL | F=- | ? | roll20.net | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, Dungeon Master's Guide (2024), "Greyhawk Gazetteer", read on the licensed Roll20 compendium
+  LABEL: consequence on a household
+  CLAIM: The 2024 DMG tells the DM to carry past events into the present as physical residue - a crater, a defaced statue in the town square, a holiday for a local hero.
+  Q: provide concrete touchstones to past events
+  TW: provide concrete touchstones to past events
+  NOTE: ROUTE QUESTIONED — Roll20 body behind a purchase banner
+  LIMB: the witness itself, not a limb of the claim: the whole row was read from a Roll20 compendium page whose fetched body opens 'Unlock to Continue Reading', so it may be cited only with this mark until a lawful witness replaces it
+#1052 VERIFIED_VERBATIM | F=33 | place-editorial-staff | save.vs.totalpartykill.ca | verdicts-dnd-i835-1057.json
+  SRC: Kim Mohan, quoted by Ramanan Sivaranjan reporting the D&D podcast interview, 2013
+  LABEL: withheld information and inference
+  CLAIM: Kim Mohan, D&D's longest-serving editor, praises Ed Greenwood's prose for leaving the reader feeling that fifty words are held back behind every word given.
+  Q: you feel like he’s holding fifty in reserve
+  TW: you feel like he's holding fifty in reserve
+  NOTE: Live save.vs.totalpartykill.ca page fetched raw (6 KB, whole post visible). Body sentence: 'For every word that he gives you, you feel like he's holding fifty in reserve.' Post by Ramanan Sivaranjan, June 16, 2013, reporting the D&D podcast interview. The 'longest-serving editor' descriptor rests on the page's own hedged wording ('apparently no one... has wo
+#1053 VERIFIED_VERBATIM | F=33 | place-editorial-staff | save.vs.totalpartykill.ca | verdicts-dnd-i835-1057.json
+  SRC: Kim Mohan, quoted by Ramanan Sivaranjan reporting the D&D podcast interview, 2013
+  LABEL: plainness and economy
+  CLAIM: Mohan says that of every ten words Ed Greenwood supplies, three or four could probably have been kept back.
+  Q: for every ten that he gives you he probably could
+  TW: for every ten … he probably could have kept three or four
+  NOTE: Same live page, same quoted passage, sentence immediately following 1052's: 'And for every ten that he gives you he probably could have kept three or four.' The claim's fragment is verbatim inside it; 'ten words' is the antecedent from the preceding sentence about words Greenwood gives.
+#1057 PARTIAL | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i835-1057.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a
+  LABEL: edition and house style
+  CLAIM: The D&D house style guide circulated to Guild creators is numbered version 1.08a and carries a 2018 Wizards of the Coast copyright line.
+  Q: Version 1.08a ©2018 Wizards of the Coast
+  TW: Version 1.08a ©2018 Wizards of the Coast
+  NOTE: PDF fetched raw from cyborgsandmages.wordpress.com (402 KB, HTTP 200) and text-extracted: the quoted string is the running footer on all 11 pages, verbatim, so the version-number and 2018-copyright limbs are confirmed (PDF metadata also shows Author: Kim Mohan, created 2019-01-23). But 'guild' occurs zero times in the extracted text, as do 'creator' and 'fre
+  LIMB: circulated to Guild creators
+#1058 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a
+  LABEL: edition and house style
+  CLAIM: Version 1.08a takes the Chicago Manual of Style, 17th edition as one of its two foundations.
+  Q: The Chicago Manual of Style, 17th edition
+  TW: The Chicago Manual of Style, 17th edition
+  NOTE: Raw PDF (curl, 402KB, application/pdf; pdftotext -layout, 11 pages). Opening section lists two primary resources -- Chicago 17th and Merriam-Webster's Collegiate 11th -- then says the guide takes both works as its foundation. Footer on all 11 pages reads Version 1.08a (c)2018 Wizards of the Coast. Quote appears word for word.
+#1059 VERIFIED_VERBATIM | F=58 | place-editorial-staff | adventurersleague.files.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.04a
+  LABEL: edition and house style
+  CLAIM: The earlier version 1.04a of the same guide took the Chicago Manual of Style, 16th edition as its foundation, so the house authority moved one Chicago edition between the two releases.
+  Q: The Chicago Manual of Style, 16th edition
+  TW: The Chicago Manual of Style, 16th edition
+  NOTE: Raw PDF (curl, 1.24MB; pdftotext -layout, 9 pages). Opening section of v1.04a lists Chicago 16th plus Merriam-Webster's Collegiate 11th, then: 'Because this guide takes both of those works as its foundation'. Footer reads Version 1.04a (c)2013. The comparative limb (one Chicago edition of movement) was confirmed against the v1.08a raw text fetched in the sam
+#1060 VERIFIED_VERBATIM | F=58 | place-editorial-staff | adventurersleague.files.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.04a
+  LABEL: edition and house style
+  CLAIM: The superseded version of the guide is numbered 1.04a and carries a 2013 copyright line.
+  Q: Version 1.04a ©2013 Wizards of the Coast
+  TW: Version 1.04a ©2013 Wizards of the Coast
+  NOTE: Raw PDF. The footer line occurs on all nine pages (extracted lines 54, 107, 160, 218, 282, 338, 397, 457, 514), matching the claim's 'running footer, every page'. Whitespace between the version and the copyright is column padding from -layout extraction, not extra words.
+#1061 VERIFIED_SUBSTANCE | F=1 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a (11 pages) and v1.04a (9 pages)
+  LABEL: edition and house style
+  CLAIM: Neither released version of the D&D style guide names an author, editor or compiler anywhere in its pages; the only attribution is the corporate copyright line.
+  Q: 
+  TW: Pages carry only the corporate copyright footer; no personal name
+  NOTE: Both PDFs read raw end to end. Page counts match the source field exactly (v1.08a 11 pages, v1.04a 9 pages). No 'Credits', 'written by', 'compiled', or editor/author byline anywhere in either body text; a name-shaped scan (Mohan, Crawford, Perkins, Mearls, Wyatt, Schwalb, Cordell, Winter, Lysa) returned zero hits in both. Final pages are weapon/armor compoun
+#1062 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Achieving Gender Neutrality
+  LABEL: dm-facing sentence
+  CLAIM: The house style guide states that in rules text the D&D editors prefer to achieve gender neutrality by writing in the second person wherever possible.
+  Q: neutrality by writing in the second person
+  TW: neutrality by writing in the second person
+  NOTE: Raw PDF, 'Achieving Gender Neutrality' section: the guide prefers this in rules text 'whenever possible'. Quote is contiguous across a column line break in the original layout. The claim's 'wherever possible' is its own paraphrase of the page's 'whenever possible'; the quoted fragment itself matches word for word.
+#1063 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Page References
+  LABEL: terminology consistency
+  CLAIM: The house style guide instructs writers to avoid page references as much as possible.
+  Q: We avoid page references as much as possible.
+  TW: We avoid page references as much as possible.
+  NOTE: Raw PDF, 'Page References' subsection under Cross-References. Sentence appears word for word as the section's opening line.
+#1064 PARTIAL | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-regrade-r12.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Page References
+  LABEL: terminology consistency
+  CLAIM: The guide's stated reason for avoiding page references is that they are labor-intensive, having to be added by hand during galley review.
+  Q: They are labor-intensive (they must be added by
+  TW: They are labor-intensive (they must be added by
+  NOTE: Raw PDF, 'Page References'. Full sentence continues 'hand during galley review), and they invite error.' Quote matches word for word and every limb (labor-intensive; added by hand; during galley review) is on the page. Flag for the downstream editor: the guide gives TWO reasons in that one sentence -- labor-intensiveness AND that page references invite error
+  LIMB: the definite 'The guide's stated reason': the verifier flags that the guide gives TWO reasons in that sentence — labour-intensiveness AND that page references invite error
+#1065 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Cross-References
+  LABEL: terminology consistency
+  CLAIM: The guide tells writers to use cross-references judiciously because they are easily overused.
+  Q: Use cross-references judiciously.
+  TW: Use cross-references judiciously.
+  NOTE: Raw PDF, 'Cross-References' section. Next sentence supplies the claim's reason limb: they are useful tools that can be easily overused.
+#1066 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Set in Bold
+  LABEL: terminology consistency
+  CLAIM: The guide sets a monster's name in bold only on its first appearance in an encounter area or subsection, not on every mention.
+  Q: Set a monster’s name in bold only the first time
+  TW: Set a monster’s name in bold only the first time
+  NOTE: Raw PDF, 'Terms to Set in Bold'. Sentence completes 'it appears in an encounter area or other subsection', supporting both the encounter-area/subsection limb and the not-every-mention limb. Apostrophe in the source is a typographic curly apostrophe.
+#1067 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Set in Bold
+  LABEL: terminology consistency
+  CLAIM: The guide forbids any word coming between the number of monsters appearing and the name of the stat block.
+  Q: Make sure no text gets between the number of
+  TW: Make sure no text gets between the number of
+  NOTE: Raw PDF, 'Terms to Set in Bold'. Sentence completes 'monsters appearing and the name of the stat block', with the worked example: write 'four goblins', not 'four loud goblins'. The page says 'no text', which covers the claim's narrower 'any word'.
+#1068 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1058-1074.json
+  SRC: Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a, Terms to Italicize
+  LABEL: terminology consistency
+  CLAIM: The guide treats italicized spell and magic item names as titles rather than as descriptions of the thing they create.
+  Q: The italicized terms are treated as titles
+  TW: The italicized terms are treated as titles
+  NOTE: Raw PDF, 'Terms to Italicize' (list covers artifacts, magic items, spells; continues onto the next page). Page continues: don't confuse one of these titles with an effect it creates, with the wall of fire spell example -- which supports the claim's 'rather than as descriptions of the thing they create' limb.
+#1069 PARTIAL | F=44, 45 | place-editorial-staff | expositionbreak.com | verdicts-dnd-i1058-1074.json
+  SRC: Ray Vallese, TSR Planescape editor, interviewed at Exposition Break, 2022
+  LABEL: register modulation
+  CLAIM: Ray Vallese, the Planescape line's editor, says the products were often written in a wry, overly clever voice that smirked at the setting's ignorant outsiders.
+  Q: written in a wry, overly clever voice that smirked
+  TW: written in a wry, overly clever voice that smirked
+  NOTE: Raw HTML fetched with a browser user agent (759KB, 200) and stripped to text. Quote is word for word in Ray's answer on Planescape's reputation. The page's object of the smirking is 'all the clueless bashers stumbling around the multiverse'; the claim's gloss 'the setting's ignorant outsiders' is a fair reading of Planescape cant and is NOT the reason for th
+  LIMB: the appositive 'the Planescape line's editor' -- the page has Vallese saying he was hired as an editor and assigned to the Planescape line, and it explicitly names a co-equal: the other primary Planescape editor of that era was Michele Carter. The definite article asserting a sol
+#1072 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | expositionbreak.com | verdicts-dnd-i1058-1074.json
+  SRC: Monte Cook, Planescape designer, interviewed at Exposition Break, 2022
+  LABEL: diction (native vs latinate)
+  CLAIM: Monte Cook recalls that WotC president Peter Adkison did not want a line whose characters used slang he could not understand to discuss philosophy.
+  Q: not people using slang he didn’t understand to discuss philosophy
+  TW: not people using slang he didn’t understand to discuss philosophy
+  NOTE: Same raw page. Monte's answer on the WotC purchase reads: WotC president Peter Adkison loved planar stuff, but he wanted guys hitting demons with swords, not people using slang he didn't understand to discuss philosophy and ethics. Speaker attribution (Monte), Adkison's title (WotC president) and the slang/philosophy limb are all on the page; the claim simpl
+#1073 VERIFIED_VERBATIM | F=55, R9 | place-editorial-staff | web.archive.org | verdicts-dnd-i1058-1074.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011
+  LABEL: plainness and economy
+  CLAIM: Christopher Perkins states as a working practice that he keeps his descriptions spare.
+  Q: I keep my descriptions spare.
+  TW: I keep my descriptions spare.
+  NOTE: Wayback raw PDF capture (3.8MB, application/pdf, 107 pages; pdftotext -layout). Sentence appears word for word in the December 2011 / DUNGEON 197 column running-headed 'The Dungeon Master Experience: T'wit', inside the list introduced by 'Here are a few specific tactics that I use'. The 'I' is Christopher Perkins: the compilation's front matter and its credi
+#1074 VERIFIED_VERBATIM | F=55, R9 | place-editorial-staff | web.archive.org | verdicts-dnd-i1058-1074.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011
+  LABEL: adjective and adverb discipline
+  CLAIM: Perkins says he keeps his NPC descriptions brief as well.
+  Q: I keep my NPC descriptions brief as well.
+  TW: I keep my NPC descriptions brief as well.
+  NOTE: Same raw Wayback PDF, same T'wit column, roughly nineteen extracted lines after the previous item and under the same 'tactics that I use' list. Sentence appears word for word; the Vantajar example that follows (one distinguishing characteristic, everything else left to the players' imaginations) supports the brevity limb.
+#1075 VERIFIED_VERBATIM | F=55, 57, R9 | place-editorial-staff | web.archive.org | verdicts-dnd-i1075-1090.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011
+  LABEL: concrete sensory noun
+  CLAIM: Perkins gives an NPC one distinguishing characteristic and then moves on.
+  Q: I generally like to give an NPC one
+  TW: I generally like to give an NPC one distinguishing characteristic
+  NOTE: Raw PDF (Wayback capture of wizards.com DM_Experience_2011.pdf) extracted with pdftotext. Sentence ends 'before moving on', in the column headed 'The Dungeon Master Experience: T’wit', December 2011 | DUNGEON 197, in the run of paragraphs beginning 'I keep my NPC descriptions brief as well.' Quote appears word for word; both limbs (one characteristic, then m
+#1076 VERIFIED_VERBATIM | F=55, R9 | place-editorial-staff | web.archive.org | verdicts-dnd-i1075-1090.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: T'wit, Dungeon 197, 2011
+  LABEL: omission as information
+  CLAIM: Perkins says he does not frontload information but lets it trickle out.
+  Q: I don’t frontload information.
+  TW: I don’t frontload information. I let it trickle out
+  NOTE: Same raw PDF, T’wit column, the paragraph immediately after the NPC-description paragraph. Continues 'in dribs and drabs' and explains he controls the pace. Quote verbatim (curly apostrophe); both limbs supported.
+#1077 VERIFIED_VERBATIM | F=56, 39 | place-editorial-staff | web.archive.org | verdicts-dnd-i1075-1090.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: Lies My DM Told Me, Dungeon 197, 2011
+  LABEL: place and institution description
+  CLAIM: Perkins says that whenever the characters arrive in a new village, town or city he gives them local rumours, some true and some false.
+  Q: new village, town, or city, I pepper them with local
+  TW: I pepper them with local rumors—some true, some false
+  NOTE: Same raw PDF, column 'The Dungeon Master Experience: Lies My DM Told Me', December 2011 | DUNGEON 197. Sentence opens 'Whenever the characters arrive in a new village, town, or city'. Quote verbatim; village/town/city and true-and-false limbs both supported.
+#1078 VERIFIED_VERBATIM | F=56, 39 | place-editorial-staff | web.archive.org | verdicts-dnd-i1075-1090.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: Lies My DM Told Me, Dungeon 197, 2011
+  LABEL: withheld information and inference
+  CLAIM: Perkins advises that when in doubt the DM should tell the players things that are true, noting that old D&D adventures carried more true rumours than false ones.
+  Q: When in doubt, tell the players things that are true.
+  TW: When in doubt, tell the players things that are true.
+  NOTE: Same raw PDF, 'Lies My DM Told Me', under the subhead 'Lessons Learned'. Quote verbatim as a standalone sentence; the next sentence supports the second limb, saying even the old D&D adventures tended to carry more true rumors than false ones.
+#1079 VERIFIED_VERBATIM | F=57 | place-editorial-staff | web.archive.org | verdicts-dnd-i1075-1090.json
+  SRC: Christopher Perkins, The Dungeon Master Experience: What's in a Name?, Dungeon 197, 2011
+  LABEL: naming and forms of address
+  CLAIM: Perkins says the trick with human names is finding names that sound human yet seem grounded in a world of fantasy rather than reality.
+  Q: names that sound human but seem grounded in a
+  TW: names that sound human but seem grounded in a
+  NOTE: Same raw PDF, column 'The Dungeon Master Experience: What’s in a Name?', December 2011 | DUNGEON 197, in the paragraph on human names. The sentence begins 'The trick is coming up with' and closes on a world of fantasy rather than reality. Quote verbatim; every limb supported.
+#1080 VERIFIED_VERBATIM | F=55, R9 | place-editorial-staff | textual.ru | verdicts-dnd-i1075-1090.json
+  SRC: Ray Winninger, Dungeoncraft, Dragon 256 (later WotC's D&D executive producer)
+  LABEL: plainness and economy
+  CLAIM: Ray Winninger's First Rule of Dungeoncraft is never to force yourself to create more than you must.
+  Q: Never force yourself to create more than
+  TW: Never force yourself to create more than you must.
+  NOTE: Raw PDF textual.ru/rpg/dungeoncraft.pdf (John H. Kim’s preservation of the 29-part Dragon series, bylined Ray Winninger on its title page), chapter 2 'World Building, Part I — From Dragon Magazine 256'. Printed under the display head 'First Rule of Dungeoncraft:', so the rule’s name and text both match. The source field’s parenthetical about a later WotC rol
+#1082 VERIFIED_VERBATIM | F=51 | place-editorial-staff | textual.ru | verdicts-dnd-i1075-1090.json
+  SRC: Ray Winninger, Dungeoncraft, Dragon 257, Home Base
+  LABEL: place and institution description
+  CLAIM: Winninger populates a fantasy city's government with functional bureaucrats such as a Master of the Docks who authorises all cargo in and out of the city.
+  Q: Master of the Docks who authorizes all cargo that
+  TW: a Master of the Docks who authorizes all cargo
+  NOTE: Same raw PDF, chapter 3 'World Building, Part II — From Dragon Magazine 257', under 'Home Base', in the 'City' home-base template. The passage says bureaucrats governing the city are dedicated to trade and knowledge functions, giving this office and a Dean of Colleges as examples; the sentence continues 'that comes in and out of the city'. Quote verbatim; ev
+#1083 VERIFIED_VERBATIM | F=56, 39, 51 | place-editorial-staff | textual.ru | verdicts-dnd-i1075-1090.json
+  SRC: Ray Winninger, Dungeoncraft, Dragon 261, The Rumor Mill
+  LABEL: place and institution description
+  CLAIM: Winninger tells the DM to give the home settlement a rumour mill, a place where adventurers gather to swap boasts, rumours and legends.
+  Q: a place where adventurers gather to
+  TW: a place where adventurers gather to swap boasts, rumors, and legends
+  NOTE: Same raw PDF, chapter 7 'The Rumor Mill and Maps — From Dragon Magazine 261', section 'The Rumor Mill'. The instruction is to plan a fairly obvious rumor mill in your base of operations (the home base of the preceding chapters), which carries the claim’s 'home settlement'. Quote verbatim; every limb supported.
+#1084 VERIFIED_VERBATIM | F=55, 39, 51 | place-editorial-staff | textual.ru | verdicts-dnd-i1075-1090.json
+  SRC: Ray Winninger, Dungeoncraft, Dragon 261, Interesting NPCs
+  LABEL: place and institution description
+  CLAIM: Winninger sets the minimum population of a home base at two interesting NPCs, arguing it is better to develop two really good ideas than four or five mediocre ones.
+  Q: better to develop two really good ideas than four
+  TW: better to develop two really good ideas than four
+  NOTE: Same raw PDF, Dragon 261 chapter, section 'Interesting NPCs'. The floor is phrased 'you should try to create at least two such personalities' for the base of operations, which supports the claim’s minimum of two interesting NPCs; the quoted sentence continues 'or five mediocre ideas' (claim says 'ones'). Quote verbatim; both limbs supported, the floor in sli
+#1085 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Read-Aloud Text section
+  LABEL: boxed text form
+  CLAIM: The DUNGEON staff's writers' guidelines state that read-aloud text makes no reference to the viewer.
+  Q: does not make any reference to the viewer
+  TW: does not make any reference to the viewer
+  NOTE: Raw PDF paizo.com/writersguidelines/dungeon_writer_guidelines.pdf, section 'Read-Aloud Text (Mandatory)'. Full sentence says read-aloud text gives a bare-bones description of the encounter area and then the quoted clause. Quote verbatim; limb supported.
+#1086 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Read-Aloud Text section
+  LABEL: boxed text form
+  CLAIM: The DUNGEON guidelines tell writers to avoid phrases such as "you see" and "as you enter the room" in read-aloud text because they assume player action.
+  Q: Avoid phrases such as “you see,” “as you enter the
+  TW: Avoid phrases such as “you see,” “as you enter the room,”
+  NOTE: Same raw PDF, 'Read-Aloud Text (Mandatory)'. Quote verbatim including the curly quotation marks; the rationale limb is carried by the rest of the sentence, which bars other phrases that assume any action whatsoever on behalf of the players.
+#1087 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Read-Aloud Text section
+  LABEL: boxed text form
+  CLAIM: The DUNGEON guidelines cap read-aloud text: it should only rarely run more than a few sentences.
+  Q: should only rarely run more than a few sentences
+  TW: should only rarely run more than a few sentences
+  NOTE: Same raw PDF, 'Read-Aloud Text (Mandatory)', penultimate sentence of the section: read-aloud text for an encounter is what carries the cap. Quote verbatim; limb supported.
+#1088 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Read-Aloud Text section
+  LABEL: boxed text form
+  CLAIM: The DUNGEON guidelines say long sections of read-aloud text are better served as player handouts.
+  Q: are better served as player handouts
+  TW: Long sections of read-aloud text are better served as player handouts
+  NOTE: Same raw PDF, 'Read-Aloud Text (Mandatory)', final sentence of the section, immediately after the few-sentences cap. Quote verbatim; limb supported.
+#1089 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Read-Aloud Text section
+  LABEL: boxed text form
+  CLAIM: The DUNGEON guidelines tell writers to keep descriptions of creatures out of read-aloud text, because a creature's position and activity depend on circumstances.
+  Q: descriptions of any creatures in the room
+  TW: avoid including descriptions of any creatures in the room
+  NOTE: Same raw PDF, 'Read-Aloud Text (Mandatory)'. Quote verbatim inside the sentence beginning 'You should also'; the rationale limb is supported by its 'since' clause, which says creatures’ activities and positions in the room often depend on multiple factors (whether they hear the PCs coming, night or day, and so on).
+#1090 VERIFIED_VERBATIM | F=31, 55 | place-editorial-staff | paizo.com | verdicts-dnd-i1075-1090.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, The Adventure's Encounters
+  LABEL: omission as information
+  CLAIM: The DUNGEON editors say they greatly dislike printing the words "This room is empty" in the magazine.
+  Q: printing the words “This room is empty”
+  TW: The editors greatly dislike printing the words “This room is empty”
+  NOTE: Same raw PDF, section 'The Adventure’s Encounters (Mandatory)', closing the paragraph on encounter sections: if you have nothing to say for any category the area is not an encounter. The sentence ends 'in DUNGEON', which is the magazine, supporting that limb. Quote verbatim.
+#1091 VERIFIED_VERBATIM | F=31, 55 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, The Adventure's Encounters
+  LABEL: dm-facing sentence
+  CLAIM: The DUNGEON guidelines rule that if a writer has nothing to say under any of the encounter's headings, the area is not an encounter and takes no number.
+  Q: the area is not an encounter and should not be
+  TW: the area is not an encounter and should not be assigned
+  NOTE: Live PDF (HTTP 200, 6pp, pdftotext -layout). Appendix II, 'The Adventure's Encounters (Mandatory)': if you have nothing to say for any of the listed categories (Read-aloud Text, General Description, Creature(s), Tactics, Trap(s), Treasure, Development, Ad-Hoc XP), the area is not an encounter and gets no encounter number. Both limbs -- nothing to say under a
+#1093 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Appendix 1: Cities of Adventure
+  LABEL: place and institution description
+  CLAIM: The DUNGEON staff say the key to designing a compelling fantasy city is presenting a strong sense of place.
+  Q: compelling fantasy city is presenting a strong “sense of place.”
+  TW: compelling fantasy city is presenting a strong "sense of place"
+  NOTE: Appendix 1: Cities of Adventure, opening line under the heading THIRTY QUESTIONS ABOUT YOUR CITY. Quote matches word for word including the curly quotation marks around the phrase; attribution to the DUNGEON staff is the document's own voice.
+#1094 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Appendix 1: Cities of Adventure
+  LABEL: place and institution description
+  CLAIM: The DUNGEON staff set a writer thirty questions about a city before writing it, opening with who rules the city and how the ruler maintains power.
+  Q: THIRTY QUESTIONS ABOUT YOUR CITY
+  TW: THIRTY QUESTIONS ABOUT YOUR CITY
+  NOTE: Appendix 1 heading verbatim. Every limb supported: the lead-in directs the writer to answer the 30 questions before starting the Cities of Adventure submission, and the list opens with question 1 on who rules the city and question 2 on how the ruler maintains power. Counted the list -- it runs 1 to 30.
+#1095 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Appendix 1, question 24
+  LABEL: concrete sensory noun
+  CLAIM: Among the thirty questions the DUNGEON staff require a city writer to answer is what the city smells like.
+  Q: What does the city smell like?
+  TW: What does the city smell like?
+  NOTE: Appendix 1, question 24, verbatim and at the claimed number. Framing limb is directive rather than a stated mandate: the lead-in is an imperative ('develop a familiarity with your locale by answering the following 30 questions') and the Features entry says 'take some time to answer the questions in Appendix 1' -- not labelled Mandatory the way adventure sect
+#1096 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Appendix 1, question 30
+  LABEL: place and institution description
+  CLAIM: The last of the DUNGEON staff's thirty city questions, and the only one set in capitals, asks why adventurers come to the city.
+  Q: WHY DO ADVENTURERS COME TO YOUR CITY?
+  TW: WHY DO ADVENTURERS COME TO YOUR CITY?
+  NOTE: Appendix 1, question 30, verbatim. Both distinguishing limbs checked mechanically against the extracted text: it is the last of the thirty, and a regex scan of questions 1-30 found question 30 the only one set in capitals (the all-caps section heading is not a question).
+#1097 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Features
+  LABEL: place and institution description
+  CLAIM: A DUNGEON "Cities of Adventure" article runs from 8,000 to 10,000 words.
+  Q: Cities of Adventure articles range in length from
+  TW: Cities of Adventure articles range in length from 8,000-10,000 words
+  NOTE: Features section, Cities of Adventure entry. Quote verbatim; the sentence completes with the 8,000-10,000 word range the claim states (en dash in the original, not 'to').
+#1098 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Features
+  LABEL: place and institution description
+  CLAIM: A DUNGEON city article must carry a brief appendix with up to five complete stat blocks for personages important to the city.
+  Q: stat blocks for personages important to the city
+  TW: brief appendix with up to five complete stat blocks
+  NOTE: Features, Cities of Adventure: the finished article 'should include' a brief appendix with up to five complete stat blocks for personages important to the city. Quote verbatim; the claim's 'must' is a slight hardening of the guidelines' 'should include', but the requirement and every other limb (brief appendix, up to five, complete, personages important to t
+#1100 VERIFIED_VERBATIM | F=51, 39 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, Adventure Background
+  LABEL: plainness and economy
+  CLAIM: The DUNGEON staff hold that a background that cannot be presented in 500 words is probably too complex and should be simplified.
+  Q: present an adventure background in 500 words, it’s probably
+  TW: present an adventure background in 500 words, it's probably too complex
+  NOTE: Appendix II, Adventure Background (Mandatory). Quote verbatim (curly apostrophe in original); the sentence ends 'and should be simplified', supporting that limb, and the following sentence caps the background at 5% of total length.
+#1104 VERIFIED_VERBATIM | F=51, 39, 56 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: The DUNGEON Staff, DUNGEON Submission Guidelines, The Adventure's Encounters
+  LABEL: place and institution description
+  CLAIM: The DUNGEON guidelines list rumours, researchable background and town statistics among the sections a writer may place before an adventure's encounters.
+  Q: background information the players can uncover in research
+  TW: detail rumors, background information the players can uncover in research
+  NOTE: Appendix II, The Adventure's Encounters (Mandatory). Quote verbatim. The page's phrasing is 'At the start of the adventure's encounters, you can include additional sections that detail rumors, background information the players can uncover in research or by using bardic knowledge checks, town statistics...' -- all three listed items present ('rumors', US spe
+#1106 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: Dragon Writers Guidelines (Dragon editorial staff), Format and Style
+  LABEL: point of view and distance
+  CLAIM: The Dragon editorial staff state that they will not publish an article written in the first person.
+  Q: we will not publish an article written in the first person
+  TW: we will not publish an article written in the first person
+  NOTE: Live HTML fetched with a browser user agent (HTTP 200). Under the 'Format and Style' heading, verbatim, preceded by 'Note that'. The following sentences forbid 'I' or 'my' unless spoken by a character other than the author, confirming the rule's strength.
+#1107 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: Dragon Writers Guidelines (Dragon editorial staff), Format and Style
+  LABEL: opening sentence
+  CLAIM: The Dragon guidelines cap an article's opening narrative vignette or example dialogue at 200 words.
+  Q: no more than 200 words long
+  TW: it should be no more than 200 words long
+  NOTE: Format and Style: 'If your article begins with a narrative vignette or piece of example dialog, it should be no more than 200 words long.' Quote verbatim; both limbs of the claim (narrative vignette, example dialogue) and the 200-word cap are on the page.
+#1109 VERIFIED_VERBATIM | F=58 | place-editorial-staff | paizo.com | verdicts-dnd-i1091-1112.json
+  SRC: Dragon Writers Guidelines (Dragon editorial staff), Format and Style
+  LABEL: terminology consistency
+  CLAIM: The Dragon guidelines require article manuscripts to use the current style of D&D game products, italicising magic item and spell names and capitalising feat names.
+  Q: should use the current style of D&D game
+  TW: Article manuscripts should use the current style of D&D game products
+  NOTE: Format and Style, first paragraph. Quote verbatim, and the very next sentence supplies both remaining limbs: names of magic items and spells should be italicized, and feat names should be capitalized. Claim's 'require' renders the guidelines' 'should'.
+#1110 PARTIAL | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1091-1112.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: adjective and adverb discipline
+  CLAIM: Chris Sims, a D&D editor at Wizards of the Coast, says that as an editor he cuts weasel words without mercy.
+  Q: As an editor, I cut weasel words without mercy.
+  TW: As an editor, I cut weasel words without mercy.
+  NOTE: Live WordPress page (HTTP 200), post dated July 14 2020, sentence verbatim under the 'Hedging' heading. The quoted assertion is fully supported. The appositive describing Sims is not: the page identifies him only as 'an editor and technical editor (also called developer in some places)' and, in footnote 4, says he began 'working on D&D' after 2000. Wizards o
+  LIMB: that Sims is 'a D&D editor at Wizards of the Coast' -- the page states only 'editor and technical editor' and that he 'started working on D&D'; it never names WotC as his employer
+#1111 VERIFIED_VERBATIM | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1091-1112.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: adjective and adverb discipline
+  CLAIM: Sims names generally and typically among the weasel words he objects to.
+  Q: words such as generally, typically, and similar weasels
+  TW: words such as generally, typically, and similar weasels
+  NOTE: Footnote 3 of the same post, verbatim: he has 'a thing against' such words, calling them long and slippery enough to resemble their namesake. Supports both named examples and the objection.
+#1112 VERIFIED_VERBATIM | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1091-1112.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: adjective and adverb discipline
+  CLAIM: Sims says he has yet to see a superlative that was necessary for the fiction or mechanic in which it appeared.
+  Q: yet to see a superlative that was necessary for the
+  TW: yet to see a superlative that was necessary for the fiction
+  NOTE: Under 'Superlatives or Absolutisms', verbatim: 'I've yet to see a superlative that was necessary for the fiction or mechanic in which the absolute appears.' Only divergence is the closing noun -- the page says 'in which the absolute appears' where the claim says 'in which it appeared', a pronoun for the same superlative-created absolute; no limb unsupported.
+#1115 VERIFIED_VERBATIM | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1115-1131.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: concrete sensory noun
+  CLAIM: Sims holds that more examples are better than hedged generalizations when writing a species or culture for a game.
+  Q: more examples are better than hedged generalizations
+  TW: more examples are better than hedged generalizations
+  NOTE: Raw page fetched (chrisssims.wordpress.com, HTTP 200). Quote appears word for word in the 'Generalizations' section, in the paragraph explicitly about writing a description of a species for a game; the surrounding text contrasts game species descriptions with other narratives, so every limb holds.
+#1116 VERIFIED_VERBATIM | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1115-1131.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: edition and house style
+  CLAIM: Sims cites the 5e Player's Handbook half-orc passage as superlatives hedged into words doing little work.
+  Q: leaving a lot of words doing little work
+  TW: leaving a lot of words doing little work
+  NOTE: Raw page. In 'Superlatives or Absolutisms': the sentence about hedged superlatives leads directly into the block-quoted 5e Player's Handbook half-orc passage, which the raw text carries in full. All limbs supported.
+#1117 VERIFIED_VERBATIM | F=58 | place-editorial-staff | chrisssims.wordpress.com | verdicts-dnd-i1115-1131.json
+  SRC: Chris S. Sims, Writing: Generalizations and Absolutes, 2020
+  LABEL: edition and house style
+  CLAIM: Sims names Kim Mohan among the mentors who taught him about generalizations, hedging and superlatives.
+  Q: Among them is the great Kim Mohan
+  TW: Among them is the great Kim Mohan
+  NOTE: Raw page, opening paragraph. Sims's topic sentence names generalizations, hedging and superlatives, then thanks mentors and colleagues who freed him from those habits, Mohan named among them as having tried to teach him more than he could absorb.
+#1118 VERIFIED_VERBATIM | F=16 | place-editorial-staff | alphastream.org | verdicts-dnd-i1115-1131.json
+  SRC: Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020
+  LABEL: boxed text form
+  CLAIM: Teos Abadia records that Season 8 of the D&D Adventurers League moved away from boxed text and separated the information into specific headings.
+  Q: moving away from boxed text and separating information into specific
+  TW: moving away from boxed text and separating information into specific headings
+  NOTE: Raw page fetched (alphastream.org, HTTP 200). 'Season 8 Changes' section; the page frames it as Season 8 AL leaning heavily into that idea, the reason given being that DMs could find and use information as needed. Program named on the page as the D&D Adventurer's League.
+#1119 VERIFIED_VERBATIM | F=16 | place-editorial-staff | alphastream.org | verdicts-dnd-i1115-1131.json
+  SRC: Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020
+  LABEL: dm-facing sentence
+  CLAIM: Abadia records that Season 8 required its authors to use the heading-based format.
+  Q: Season 8 required that authors use the format.
+  TW: Season 8 required that authors use the format.
+  NOTE: Raw page, 'Season 8 Changes', immediately after the description of the heading-driven format (Call to Action, Playing the Pillars, flowchart), so 'the format' is the heading-based one. The page adds that Season 9 keeps the requirement in altered form.
+#1120 VERIFIED_VERBATIM | F=16 | place-editorial-staff | alphastream.org | verdicts-dnd-i1115-1131.json
+  SRC: Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020
+  LABEL: place and institution description
+  CLAIM: Abadia argues the Season 8 format broke a single place description across several headings so that the door's appearance had to be assembled from two sections.
+  Q: The information is spread out.
+  TW: The information is spread out; You must read both places
+  NOTE: Raw page, the MOON12-02 talking-door example. The page states that multiple required headings force the author to break up information that belongs in one place, that the door description sits under 'Dimensions & Terrain' while a clarification sits under 'Door', and that both must be read; a third section (Creatures/NPCs) carries yet more door detail.
+#1121 VERIFIED_VERBATIM | F=16 | place-editorial-staff | alphastream.org | verdicts-dnd-i1115-1131.json
+  SRC: Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020
+  LABEL: dm-facing sentence
+  CLAIM: Abadia's verdict is that the Season 8 format actively obfuscates the content and makes the adventure harder to run at the table.
+  Q: actively obfuscates the content and makes the adventure harder to
+  TW: actively obfuscates the content and makes the adventure harder to run
+  NOTE: Raw page, closing sentence of the Season 8 discussion. The page's wording is 'harder to run well at the table'; the claim's 'harder to run at the table' is the same verdict.
+#1122 PARTIAL | F=16 | place-editorial-staff | alphastream.org | verdicts-dnd-i1115-1131.json
+  SRC: Teos Abadia (Alphastream), The Best and Worst of Adventure Formats at Winter Fantasy 2020
+  LABEL: boxed text form
+  CLAIM: Abadia praises a rival format's equivalent of boxed text not for being boxed but because it gathers all of the information in one place.
+  Q: eschews the format and actually gathers all of the information
+  TW: novel excerpt in MOON12-02 eschews the format and actually gathers
+  NOTE: Raw page. The quotation is present and the praise-not-for-being-boxed limb is exact, but the praised passage is not a rival format's: it is an excerpt from a novel printed inside the same Season 8 Moonshae adventure (MOON12-02, A Gift From the Queen) that the post is criticising, and the page's point is that it departs from that Season 8 format. Abadia's riv
+  LIMB: that it is a rival format's equivalent of boxed text - the passage praised sits inside the same Season 8 Moonshae adventure and eschews that format
+#1123 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1115-1131.json
+  SRC: Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: register modulation
+  CLAIM: Christopher Perkins, then editor of DUNGEON Adventures, says Warriors of Heaven does not embrace the narrative style of most Planescape products because it is a core AD&D product.
+  Q: does not embrace the narrative style of most PLANESCAPE
+  TW: does not embrace the narrative style of most PLANESCAPE products
+  NOTE: Raw page fetched (mimir.net, HTTP 200). Answer to 'From what perspective is the product written?'. The page joins the two limbs with 'and' rather than 'because', but the causal reading is the page's own: the next answer notes A Guide to Hell uses a similar narrative style and 'It, too, is designed as a core AD&D product'. The editor's note at the head of the
+#1125 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1115-1131.json
+  SRC: Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: plainness and economy
+  CLAIM: Perkins says that anyone who has edited his work knows he almost always overwrites.
+  Q: I almost always overwrite
+  TW: I almost always overwrite
+  NOTE: Raw page, answer to how the supplement grew from 64 to 96 pages. Perkins prefaces it by saying anyone who has edited his work knows this, then explains he had all but exhausted his word count.
+#1126 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1115-1131.json
+  SRC: Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: place and institution description
+  CLAIM: Perkins says an adventure set in Sigil has an entirely different feel from one set in the Abyss, and that he values describing places that could exist nowhere else.
+  Q: an adventure set in Sigil has an entirely different
+  TW: an adventure set in Sigil has an entirely different feel
+  NOTE: Raw page, answer on what attracts him to PLANESCAPE. The same answer carries the second limb: as a designer he enjoys the chance to describe places that could exist nowhere else. Page prints 'feel' in quotation marks and contrasts Sigil with an adventure in the Abyss.
+#1127 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1115-1131.json
+  SRC: Christopher Perkins, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: register modulation
+  CLAIM: Perkins says the voice and design of the Planescape campaign setting were daring and striking in their originality.
+  Q: The voice and design of the campaign setting was daring
+  TW: The voice and design of the campaign setting was daring
+  NOTE: Raw page, answer on how he got involved with the PLANESCAPE line. Preceded by his being blown away by the PLANESCAPE Campaign Setting boxed set, so 'the campaign setting' is Planescape; page continues 'and striking in its originality'.
+#1128 VERIFIED_VERBATIM | F=58 | place-editorial-staff | grognardia.blogspot.com | verdicts-dnd-i1115-1131.json
+  SRC: Steve Winter, TSR editor, interviewed at Grognardia, 2009
+  LABEL: plainness and economy
+  CLAIM: Steve Winter, TSR's first hire with professional editing experience, says that in games as in journalism the language needs to be direct and clear.
+  Q: the language needs to be direct and clear
+  TW: the language needs to be direct and clear
+  NOTE: Raw page fetched (grognardia.blogspot.com, HTTP 200, dated 8 August 2009). The quote closes the answer that begins with journalists being trained for clarity and directness, applying the same to games. The first-hire limb is Winter's own hedged self-report ('I think that I was the first person hired at TSR who had actual job experience in writing and editing
+#1129 VERIFIED_VERBATIM | F=58 | place-editorial-staff | grognardia.blogspot.com | verdicts-dnd-i1115-1131.json
+  SRC: Steve Winter, TSR editor, interviewed at Grognardia, 2009
+  LABEL: adjective and adverb discipline
+  CLAIM: Winter says flowery phrases and clever wordplay are things journalists avoid, and that the same holds in games.
+  Q: Flowery phrases and clever wordplay are things to avoid
+  TW: Flowery phrases and clever wordplay are things to avoid
+  NOTE: Raw page, same answer as 1128: the sentence follows the statement that journalists are trained to write for clarity and directness, and is followed by 'The same is true in games'. Locator is answer 2, not answer 3.
+#1131 VERIFIED_VERBATIM | F=1 | place-editorial-staff | archive.org | verdicts-dnd-i1115-1131.json
+  SRC: Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text
+  LABEL: edition and house style
+  CLAIM: Waterdeep: Dragon Heist, the 2018 city adventure, credits Michele Carter, Scott Fitzgerald Gray and Kim Mohan as its editors.
+  Q: Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan
+  TW: Editors: Michele Carter Scott Fitzgerald Cray, Kim Mohan
+  NOTE: Raw archive.org full-text page fetched (HTTP 200, 1.19MB) and the OCR credits block read directly. Match is exact once the OCR's doubled spaces are collapsed; the OCR renders Gray as 'Cray'. Same page gives 'First Printing: September 201S' (2018) and the 2018 copyright line, and the foreword frames it as a Waterdeep / City of Splendors adventure, so the date
+#1132 VERIFIED_VERBATIM | F=1 | place-editorial-staff | archive.org | verdicts-dnd-i1132-1146.json
+  SRC: Waterdeep: Dragon Heist (Wizards of the Coast, 2018), credits page, read through the Internet Archive's OCR text
+  LABEL: edition and house style
+  CLAIM: Jeremy Crawford is credited as managing editor of Waterdeep: Dragon Heist.
+  Q: Managing Editor: Jeremy Crawford
+  TW: Managing Editor: Jeremy Crawford
+  NOTE: archive.org OCR full text of wdh, credits block under the WATERDEEP DRAGON HEIST title; OCR renders it with doubled spaces ('Managing Editor: Jeremy Crawford'), otherwise word for word. Same credits block also lists Crawford under Rules Development, and Christopher Perkins as Lead Designer and Lead Editor. Fetched raw with a browser UA; text read directly fr
+#1133 VERIFIED_VERBATIM | F=58 | place-editorial-staff | web.archive.org | verdicts-dnd-i1132-1146.json
+  SRC: Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page
+  LABEL: edition and house style
+  CLAIM: The DMs Guild describes the style-guide package as PDF documents distributed by Wizards of the Coast to official play writers.
+  Q: distributed by Wizards of the Coast to official play writers
+  TW: distributed by Wizards of the Coast to official play writers
+  NOTE: Wayback raw capture 20240423102657id_ of dmsguild.com/product/267467. Product description sentence begins 'These PDF documents are distributed by Wizards of the Coast to official play writers and are now available for all DMsGuild creators.' Both limbs (PDF documents; official play writers) present.
+#1134 VERIFIED_VERBATIM | F=1 | place-editorial-staff | web.archive.org | verdicts-dnd-i1132-1146.json
+  SRC: Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page
+  LABEL: edition and house style
+  CLAIM: The DMs Guild product page dates the House Style Guide's update to January 2019.
+  Q: The House Style Guide has been updated January 2019.
+  TW: The House Style Guide has been updated January 2019.
+  NOTE: Same Wayback capture; the line sits at the head of the description prefixed 'Note:'. Page's own File Last Updated field reads February 22, 2019, which does not contradict the January 2019 update note for the House Style Guide component.
+#1135 PARTIAL | F=58 | place-editorial-staff | web.archive.org | verdicts-dnd-regrade-r12.json
+  SRC: Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page
+  LABEL: edition and house style
+  CLAIM: The DMs Guild page credits the package's adventure-design tips to Chris Perkins and Greg Bilsland.
+  Q: tips for adventure design from Chris Perkins and Greg
+  TW: tips for adventure design from Chris Perkins and Greg
+  NOTE: Same Wayback capture: 'In addition to the D&D House Style Guide, this package includes tips for adventure design from Chris Perkins and Greg Bilsand...'. The quoted fragment is word for word. FLAG: the page misspells the surname as 'Bilsand'; the string 'Bilsland' does not occur on this page, though the guide PDF itself is bylined 'Greg Bilsland'. The claim'
+  LIMB: the surname as cited: the verifier's FLAG records that the page reads 'Bilsand' and that the string 'Bilsland' does not occur on it
+#1136 VERIFIED_VERBATIM | F=1 | place-editorial-staff | web.archive.org | verdicts-dnd-i1132-1146.json
+  SRC: Dungeon Masters Guild, DMs Guild Creator Resource - Style Guide Resources product page
+  LABEL: edition and house style
+  CLAIM: The DMs Guild states that following the style guides is not required to publish on the platform.
+  Q: Following these style guides is not required to publish on
+  TW: Following these style guides is not required to publish on
+  NOTE: Same Wayback capture; the sentence continues 'DMsGuild, but they are provided here at the request of our community creators.' 'the platform' in the claim is DMsGuild, named on the page.
+#1137 PARTIAL | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures (D&D Adventure Design Guide)
+  LABEL: edition and house style
+  CLAIM: The D&D adventure design guide distributed with the house style guide is bylined Chris Perkins and Greg Bilsland.
+  Q: By Chris Perkins & Greg Bilsland
+  TW: By Chris Perkins & Greg Bilsland
+  NOTE: PDF fetched (HTTP 200, 2 pages, 745,871 bytes) and text extracted with pdftotext -layout. The title line reads 'WRITING ADVENTURES By Chris Perkins & Greg Bilsland' - byline verbatim. The document self-titles 'WRITING ADVENTURES'; 'adventure design guide' is the filename and the DMs Guild description's wording. Host is a third-party WordPress reupload, so th
+  LIMB: 'distributed with the house style guide' - the PDF says nothing about its distribution or about the House Style Guide package; that limb rests on the separate DMs Guild product page (index 1135), not on this page
+#1138 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7
+  LABEL: plainness and economy
+  CLAIM: Perkins and Bilsland tell adventure writers to present information as concisely as possible to ease the burden on the DM.
+  Q: present information as concisely as possible, to ease the burden
+  TW: present information as concisely as possible, to ease the burden
+  NOTE: General Principles item 7 opens 'An adventure should strive to present information as concisely as possible, to ease the burden on the DM.' Quote verbatim; the DM limb is on the page.
+#1139 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7
+  LABEL: concrete sensory noun
+  CLAIM: Perkins and Bilsland name NPCs, dungeon dressings and treasure hoards as the elements that deserve descriptive text despite the concision rule.
+  Q: namely NPCs, dungeon dressings, and treasure hoards
+  TW: namely NPCs, dungeon dressings, and treasure hoards
+  NOTE: Item 7 continues 'However, there are certain elements of an adventure that deserve special attention, namely NPCs, dungeon dressings, and treasure hoards.' The page's own words are 'deserve special attention'; the descriptive-text limb is then made explicit in the same item - NPCs get described features and a striking dungeon feature or treasure 'can also be
+#1140 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 7
+  LABEL: naming and forms of address
+  CLAIM: Perkins and Bilsland say character is added to an NPC by describing distinctive physical features, mannerisms and quirks.
+  Q: distinctive physical features, mannerisms, and quirks
+  TW: distinctive physical features, mannerisms, and quirks
+  NOTE: Item 7: 'You can add character to any NPC by describing his or her distinctive physical features, mannerisms, and quirks (which the DM can then use to roleplay the NPC effectively).' Every limb present.
+#1141 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 6
+  LABEL: withheld information and inference
+  CLAIM: Perkins and Bilsland rule that the text must not keep the DM in suspense, and must not conceal or bury information the DM needs.
+  Q: The goal isn’t to keep the DM in suspense
+  TW: The goal isn't to keep the DM in suspense
+  NOTE: General Principles item 6, with the curly apostrophe as quoted. Same item carries the second limb: 'the adventure shouldn't conceal or bury important information that the DM needs to understand what's really going on.'
+#1142 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 6
+  LABEL: dm-facing sentence
+  CLAIM: Perkins and Bilsland require that an NPC be properly introduced before the text mentions that NPC by name in passing.
+  Q: make sure that an NPC is properly introduced before casually
+  TW: make sure that an NPC is properly introduced before casually
+  NOTE: Item 6 continues '...mentioning the NPC by name in running text', which is the claim's 'by name in passing'. The rule is framed as an example of presenting information in a logical order.
+#1143 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, General Principles 4
+  LABEL: annalist voice and deep time
+  CLAIM: Perkins and Bilsland hold that an adventure is about the here and now, and that the less history it carries the better.
+  Q: An adventure is about the here and now.
+  TW: An adventure is about the here and now.
+  NOTE: General Principles item 4; the next sentence supplies the history limb - a little history may set things up, 'but the less of it, the better.'
+#1144 VERIFIED_VERBATIM | F=58 | place-editorial-staff | cyborgsandmages.wordpress.com | verdicts-dnd-i1132-1146.json
+  SRC: Chris Perkins and Greg Bilsland, Writing Adventures, closing line
+  LABEL: edition and house style
+  CLAIM: The Perkins and Bilsland guide sends writers to the Chicago Manual of Style, 16th edition, and to the D&D House Style Guide for grammar and punctuation.
+  Q: The Chicago Manual of Style (16th edition) and the
+  TW: The Chicago Manual of Style (16th edition) and the
+  NOTE: Closing line: 'For rules on grammar and punctuation, please see The Chicago Manual of Style (16th edition) and the D&D House Style Guide. For adventure format, refer to the Adventure Format Template.' All three limbs (grammar/punctuation, CMoS 16th, House Style Guide) present.
+#1145 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1132-1146.json
+  SRC: Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: plainness and economy
+  CLAIM: Ray Vallese says RPG supplements are supposed to focus on communicating the basic information rather than dazzling the audience with clever prose.
+  Q: communicating the basic info and less on dazzling the audience
+  TW: communicating the basic info and less on dazzling the audience
+  NOTE: mimir.net fetched live, HTTP 200; page title 'An Interview with Ray and Val Vallese - Planescape: I am the Mimir', Gen Con '99 framing. The passage answers the question 'Ray, how did writing this book differ from others, such as PS supplements, you've written?', so the speaker is Ray Vallese. Page reads 'focus more on communicating the basic info and less on
+#1146 VERIFIED_VERBATIM | F=44, 45 | place-editorial-staff | mimir.net | verdicts-dnd-i1132-1146.json
+  SRC: Ray Vallese, TSR Planescape editor, interviewed at Planescape: I am the Mimir, 1999
+  LABEL: register modulation
+  CLAIM: Vallese qualifies that rule for the Planescape line, saying many people have remarked they bought Planescape products just to read them.
+  Q: purchased PS products just to read them
+  TW: purchased PS products just to read them
+  NOTE: Same Ray Vallese answer, parenthetical immediately after the supplements rule: 'Granted, that's not entirely true for the PS line, as many people have remarked that they've purchased PS products just to read them.' Qualification, Planescape line and the many-people-remarked limbs all present; 'bought' = 'purchased'.
+#1148 VERIFIED_VERBATIM | F=16 | place-srd-measure | screenrant.com | verdicts-dnd-i1148-1149.json
+  SRC: James Wyatt, quoted by Ben Brosofsky, ScreenRant interview with Christopher Perkins and James Wyatt
+  LABEL: boxed text form
+  CLAIM: James Wyatt says the 2024 Dungeon Master’s Guide now defines boxed text, so published adventures need not keep doing so.
+  Q: Now the DMG tells you what boxed text is
+  TW: Now the DMG tells you what boxed text is
+  NOTE: Raw HTML fetched with a browser UA (200, 54,703 bytes); no summarizer needed for the match. The quoted string appears word for word in James Wyatt's answer in the section on DMG chapters (the doors/boxed-text exchange), attributed to 'James Wyatt:' in the transcript. Every limb holds: the speaker is Wyatt; the page title is '"Everything In There Better Be Cr
+#1149 VERIFIED_VERBATIM | F=29 | place-srd-measure | dmsworkshop.com | verdicts-dnd-i1148-1149.json
+  SRC: The Archmage, "Dungeon Mastering 101: Mastering the Boxed Text", Dungeon Master’s Workshop
+  LABEL: boxed text form
+  CLAIM: Dungeon Master’s Workshop dates the introduction of boxed text to the 1979 module The Hidden Shrine of Tamoachan, written so that competing tables received identical room descriptions.
+  Q: ever since boxed text was introduced in The Hidden Shrine of Tamoachan
+  TW: boxed text was introduced in The Hidden Shrine of Tamoachan (1979)
+  NOTE: Raw HTML fetched with a browser UA (200, 209,736 bytes). The quoted string appears word for word, immediately followed by the parenthetical year, in the paragraph on the pro/anti boxed-text debate. Every limb is supported on the page: the 1979 date is the parenthetical; the competition context is the next sentence (the inaugural C-series 'competition' module
+#1153 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: Wizards of the Coast's own 2024 settlement handout bands settlement size by population, with a village at up to 500 people.
+  Q: VILLAGE (POP. UP TO 500)
+  TW: “VILLAGE (POP. UP TO 500)”
+  NOTE: Raw PDF pulled by curl (HTTP 200, 5.3 MB) and extracted with pdftotext -layout. The size checkbox row carries all three bands; footer reads TM & © 2024 Wizards of the Coast LLC, and the page is a photocopiable handout. Every limb (WotC, 2024, handout, size banded by population, village up to 500) is on the page.
+#1154 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The same 2024 handout sets the town band at a population of 501 to 5,000.
+  Q: TOWN (POP. 501–5,000)
+  TW: “TOWN (POP. 501–5,000)”
+  NOTE: Same raw PDF text; second checkbox of the size row, en dash as quoted. Exact string match.
+#1155 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The same 2024 handout sets the city band at a population of 5,001 or more.
+  Q: CITY (POP. 5,001+)
+  TW: “CITY (POP. 5,001+)”
+  NOTE: Same raw PDF text; third checkbox of the size row. Exact string match.
+#1156 PARTIAL | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The publisher's settlement slot list opens with a slot labelled Defining Trait.
+  Q: DEFINING TRAIT
+  TW: “DEFINING TRAIT” — third element, after SETTLEMENT NAME and the size row
+  NOTE: Quote is on the page verbatim as the first large boxed field, but the tracker's field order is SETTLEMENT NAME, then the VILLAGE/TOWN/CITY checkbox row, then DEFINING TRAIT. The claim's own page note ('first field') is therefore wrong; DEFINING TRAIT is the first descriptive prompt, not the first slot.
+  LIMB: opens with — DEFINING TRAIT is not the handout's first slot
+#1157 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The publisher's settlement slot list carries a slot labelled Claim to Fame.
+  Q: CLAIM TO FAME
+  TW: “CLAIM TO FAME”
+  NOTE: Same raw PDF text; the boxed field immediately below DEFINING TRAIT. Claim asserts only that the slot exists and is so labelled — supported.
+#1158 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The publisher's settlement slot list carries a single leadership slot labelled Local Leader.
+  Q: LOCAL LEADER
+  TW: “LOCAL LEADER”
+  NOTE: Same raw PDF text; fourth boxed field (after CURRENT CALAMITY). It is the only leadership-labelled slot on the sheet — the other fields are DEFINING TRAIT, CLAIM TO FAME, CURRENT CALAMITY, NOTEWORTHY PEOPLE/PLACES and the gp line — so 'single leadership slot' holds.
+#1159 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The publisher's settlement handout keeps a list slot for the settlement's noteworthy places, separate from its people.
+  Q: NOTEWORTHY PLACES
+  TW: “NOTEWORTHY PLACES”
+  NOTE: Same raw PDF text; a seven-line list column headed NOTEWORTHY PLACES sits beside a separate seven-line NOTEWORTHY PEOPLE column, so both the list-slot limb and the separation limb are on the page.
+#1160 VERIFIED_VERBATIM | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Settlement Tracker handout, 2024 Dungeon Master's Guide
+  LABEL: place and institution description
+  CLAIM: The only economic figure the publisher's settlement handout asks a DM to record is the gp value of the most expensive item for sale.
+  Q: GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE
+  TW: “GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE”
+  NOTE: Same raw PDF text; the footer field above the copyright line. The whole sheet was read: the only other numerals are the population bands (demographic, not economic), so 'the only economic figure' holds.
+#1161 PARTIAL | F=- | place-lawful-primaries | media.wizards.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016
+  LABEL: boxed text form
+  CLAIM: The Death House read-aloud paragraph opens a settlement with a road, the village, and a simile drawn from its own building stock rather than with any statistic.
+  Q: The gravel road leads to a village, its tall houses dark as
+  TW: “its tall houses dark as tombstones”
+  NOTE: Raw PDF (media.wizards.com, HTTP 200, 62 MB) via curl + pdftotext. The boxed read-aloud after 'Once they reach the village, read:' begins 'The gravel road leads to a village, its tall houses dark as tombstones.' Road, village and absence of any statistic are all supported; the simile's vehicle is tombstones (grave markers), while the houses are its subject, 
+  LIMB: a simile drawn from its own building stock — the simile's image is tombstones, not the village's buildings
+#1162 PARTIAL | F=- | place-lawful-primaries | media.wizards.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast, Death House (Curse of Strahd introductory adventure), 2016
+  LABEL: naming and forms of address
+  CLAIM: Death House names a building by the name the locals give it rather than by an owner or address.
+  Q: Death House is the name given to an old row house
+  TW: “Death House is the name given to an old row house”
+  NOTE: Same raw PDF, 'History' section. The sentence continues 'in the village of Barovia (area E7 on the village map)'; naming by neither owner nor street address is supported (the Durst family is named only later), but the agent of the naming is unstated — the only 'locals' sentence on the page is 'Locals give the building a wide berth for fear of antagonizing th
+  LIMB: the name the locals give it — the page never says locals bestow the name
+#1163 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Mike Bernier, 'What's New in the 2024 Dungeon Master's Guide?', D&D Beyond, 12 Nov 2024
+  LABEL: place and institution description
+  CLAIM: D&D Beyond's own launch article says the 2024 Dungeon Master's Guide's handouts serve as a template for building settlements.
+  Q: creating NPCs and building settlements
+  TW: “provide a template for creating NPCs and building settlements”
+  NOTE: Raw HTML pulled by curl with a browser UA (HTTP 200, 323 KB), tags stripped locally — no summarizer. Byline 'by Mike Bernier', dated Nov 12, 2024 (launch day: the page carries 'The 2024 Dungeon Master's Guide is Now Available'), section heading 'Adventures, Handouts, and Ready-to-Play Maps'. Sentence: 'the handouts sprinkled throughout the book provide a tem
+#1164 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: DND Staff, 'Updates in the Dungeon Master's Guide (2024)', D&D Beyond, 20 Feb 2025
+  LABEL: edition and house style
+  CLAIM: Wizards of the Coast states that the 2024 Dungeon Master's Guide replaces all rules in the 2014 version of the book.
+  Q: it replaces all rules in the 2014 version of the book
+  TW: “it replaces all rules in the 2014 version of the book”
+  NOTE: Raw HTML by curl with browser UA (HTTP 200, 270 KB), tags stripped locally. Under heading 'Using This Book with Older Books': 'When you play D&D with the Dungeon Master's Guide (2024), it replaces all rules in the 2014 version of the book.' Byline 'by DND Staff', Feb 20, 2025, tagged Studio Blog, on the WotC-owned D&D Beyond (page footer: Wizards of the Coas
+#1165 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020
+  LABEL: place and institution description
+  CLAIM: An official free D&D Beyond encounter opens a settlement entry with the settlement's name, a population figure, and its people's trade, in one sentence.
+  Q: Icehaven is a village of 5,000 souls
+  TW: “Icehaven is a village of 5,000 souls”
+  NOTE: Raw HTML by curl with browser UA (HTTP 200, 284 KB), tags stripped locally. Under 'The Village of Icehaven' the opening sentence gives name, population and demographics and ends '—on the northern coast of the Dwendalian Empire.' The trade limb comes only in the following sentence: 'the people of Icehaven primarily ply their trades on fishing boats.' Free, of
+  LIMB: in one sentence — the trade is in the next sentence, not the opener
+#1166 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020
+  LABEL: terminology consistency
+  CLAIM: The same official column calls Icehaven a village while giving it a population of 5,000, a figure the publisher's own 2024 settlement handout places in the town band.
+  Q: Icehaven is a village of 5,000 souls
+  TW: “Icehaven is a village of 5,000 souls”
+  NOTE: Same raw article; the section heading is literally 'The Village of Icehaven'. The band limb is checked against the other raw source in this chunk: the 2024 Settlement Tracker's middle checkbox reads TOWN (POP. 501–5,000), so 5,000 falls in the town band while the column calls it a village. Both limbs supported.
+#1167 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1153-1167.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020
+  LABEL: naming and forms of address
+  CLAIM: The same column names a settlement's leader as office title plus given name plus surname, in that order.
+  Q: The leader of the village, Starosta Ernath Noack
+  TW: “The leader of the village, Starosta Ernath Noack”
+  NOTE: Same raw article, under the heading 'Arrival of the Infected One' as the claim's page note says. Order is office title (starosta, the Dwendalian village-elder office — the page also uses 'Starosta of Icehaven' and 'the village starosta'), given name Ernath, surname Noack.
+#1168 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020
+  LABEL: concrete sensory noun
+  CLAIM: The arrival read-aloud describes the village through its housing stock and street pattern rather than through its inhabitants.
+  Q: mostly made up of steep-roofed cottages, separated by twisting streets
+  TW: mostly made up of steep-roofed cottages, separated by twisting streets
+  NOTE: Raw page fetched with a browser UA (HTTP 200). Quote is strict-exact in the arrival read-aloud introduced by 'When the characters arrive in Icehaven, read or paraphrase the following:'. The whole read-aloud names arch, cottages, streets, docks, inn, ship and no inhabitants, so the 'rather than through its inhabitants' limb holds.
+#1169 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Snowed In', 2020
+  LABEL: place and institution description
+  CLAIM: The column then lists the settlement's important locations by name and numbers them as labelled sub-entries.
+  Q: The following areas in Icehaven are important to this encounter
+  TW: The following areas in Icehaven are important to this encounter
+  NOTE: Strict-exact, immediately after the arrival read-aloud. Five areas are listed by name (The Haven, The Harborline, Icebreaker Inn and Tavern, House of Warmth, Starosta's Manor) and then appear as numbered sub-headings 1.-5., with cross-references of the form '(area 1)'. Every limb supported.
+#1170 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020
+  LABEL: naming and forms of address
+  CLAIM: A second official column names a governing officer as an invented office title plus given name plus surname, followed by the plain English office in apposition.
+  Q: Taskhand Durth Mirimm, the current governor
+  TW: Taskhand Durth Mirimm, the current governor
+  NOTE: Strict-exact in 'The Wastes of Xhorhas and the City of Jigow'. Invented office title (Taskhand) + given name + surname, then the plain-English office in apposition; the sentence goes on to call him the Kryn governor exerting power over local matters.
+#1171 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020
+  LABEL: terminology consistency
+  CLAIM: The same column qualifies its own size label, calling Jigow a small city by population while describing its extent as a sprawl of towns.
+  Q: Jigow is a small city by population, but its sprawl of towns
+  TW: a small city by population, but its sprawl of towns
+  NOTE: Strict-exact; full sentence reads 'Jigow is a small city by population, but its sprawl of towns, villages, and neighborhoods stretches across much of the northern coast of Xhorhas.' Both limbs (size label qualified by population; extent given as sprawl) supported.
+#1172 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Battle of the Braggarts', 2020
+  LABEL: boxed text form
+  CLAIM: The same column ties each read-aloud to the precise moment and threshold at which it is spoken.
+  Q: Read or paraphrase the following as the characters enter the Wartpimple Tavern
+  TW: one cue: 'At some point ... at the DM's discretion'
+  NOTE: The quoted cue itself is strict-exact on the page. The article carries four 'Read or paraphrase' cues: the tavern entry (moment), the bar patrons (purpose only), the boasting escalation (explicitly DM discretion, no threshold), and the failure branch (three failures before three successes - a real threshold). So the universal 'each' is not supported; two of 
+  LIMB: 'ties EACH read-aloud to the precise moment and threshold' - one of the four cues is explicitly left to the DM ('At some point when the characters are in the tavern (at the DM's discretion)'), and a second is tied only to a purpose ('to introduce the characters to some of the bar
+#1173 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020
+  LABEL: plainness and economy
+  CLAIM: An official D&D Beyond column advises compressing an unremarkable stretch into a single sentence rather than accumulating uninspired description.
+  Q: better to simply describe the day’s travel in a single sentence
+  TW: better to simply describe the day's travel in a single sentence
+  NOTE: Strict-exact in the 'Trek to Ten-Towns' travel section; the sentence begins 'if there isn't anything special around' (the unremarkable stretch) and ends 'than to give a litany of uninspired descriptions of a nondescript snowy road'. Every limb supported.
+#1174 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Trek to Ten-Towns', 2020
+  LABEL: boxed text form
+  CLAIM: The same column tells the DM to vary the wording of a repeated transition so the read-aloud does not sound scripted.
+  Q: so it doesn't seem like you're reading from a script
+  TW: so it doesn't seem like you're reading from a script
+  NOTE: Strict-exact. Full sentence: 'You should improvise a slightly different sentence every time you move from scene to scene, so it doesn't seem like you're reading from a script.' It follows the scene-to-scene read-aloud, so 'vary the wording of a repeated transition' is supported.
+#1175 VERIFIED_VERBATIM | F=- | place-lawful-primaries | gamingnexus.com | verdicts-dnd-i1168-1182.json
+  SRC: Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024
+  LABEL: place and institution description
+  CLAIM: A reporter covering the publisher's own preview says the 2024 settlement generator's first roll produces the town's defining feature, giving a Sprawling Cemetery in the demonstration.
+  Q: the town's defining feature is [roll the dice] a Sprawling Cemetery
+  TW: the town's defining feature is [roll the dice] a Sprawling Cemetery
+  NOTE: Raw page fetched (HTTP 200, 27KB); byline 'Randy', posted 10/10/2024, covering the Wizards preview with Chris Perkins and interviewer Todd Kenreck. Quote strict-exact; it is the first roll narrated in the demonstration ('[roll the dice]' then 'roll dice again' for claim to fame), which supports the 'first roll' limb.
+#1176 VERIFIED_VERBATIM | F=- | place-lawful-primaries | gamingnexus.com | verdicts-dnd-i1168-1182.json
+  SRC: Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024
+  LABEL: place and institution description
+  CLAIM: The same report gives the current-calamity roll's demonstration result as monsters infesting the settlement.
+  Q: What current calamity is befalling the town: Monsters infest the settlement
+  TW: What current calamity is befalling the town: Monsters infest the settlement
+  NOTE: Strict-exact in the same settlement demonstration paragraph, third roll in the narrated sequence.
+#1177 PARTIAL | F=- | place-lawful-primaries | gamingnexus.com | verdicts-dnd-i1168-1182.json
+  SRC: Randy, Gaming Nexus, reporting a Wizards of the Coast preview with Chris Perkins, 10 Oct 2024
+  LABEL: place and institution description
+  CLAIM: The same report shows the leadership roll returning a political condition rather than a person, an illegitimate leader causing civil unrest.
+  Q: Local leaders: An illegitimate leader causing civil unrest
+  TW: Local leaders: An illegitimate leader causing civil unrest
+  NOTE: Quote is strict-exact. The page supports that the result is a leadership situation rather than a named individual, but it does not support the stronger 'a condition rather than a person' framing; the roll returns a leader described by his effect. Downgraded rather than caveated.
+  LIMB: 'returning a political condition rather than a person' - the entry's head noun is a leader ('An illegitimate leader'), unnamed but a person-type result, with the condition attached as a participial clause
+#1178 PARTIAL | F=- | place-lawful-primaries | media.dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast, System Reference Document 5.2.1 (CC-BY-4.0), 2025
+  LABEL: civic record register
+  CLAIM: The freely licensed System Reference Document 5.2.1 contains no settlement-description rules: its four occurrences of settlement are all inside spell and equipment text.
+  Q: 
+  TW: fourth mention sits in 'Crafting Magic Items' (p. 206)
+  NOTE: PDF fetched (HTTP 200, 6.03MB) and text extracted with pdftotext; two extractions agree on exactly four stem occurrences (three 'settlements', one 'settlement'). Locations: p.102 Equipment > Spellcasting services ('Most settlements contain individuals who are willing to cast spells'); p.116 spell Commune with Nature, twice ('castles and settlements'; 'Locati
+  LIMB: 'all inside spell and equipment text' - the fourth mention is in the Magic Items chapter's 'Crafting Magic Items' rules (p. 206), a chapter the SRD itself distinguishes from 'Equipment'
+#1179 PARTIAL | F=- | place-lawful-primaries | media.wizards.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast, System Reference Document 5.1 (2016) and 5.2.1 (2025)
+  LABEL: boxed text form
+  CLAIM: Neither freely licensed SRD, 5.1 nor 5.2.1, mentions read-aloud or boxed text anywhere, so no lawful open-licence source carries the form.
+  Q: 
+  TW: zero matches for 'read-aloud' or 'boxed' in both SRDs
+  NOTE: Both PDFs fetched (5.1 HTTP 200, 4.86MB; 5.2.1 HTTP 200, 6.03MB) and extracted with pdftotext. Case-insensitive grep for 'read aloud', 'read-aloud', 'boxed text' and bare 'boxed' returns 0 in each document, so the measured limb is CONFIRMED for both SRDs; only the generalising 'so' clause outruns the evidence.
+  LIMB: 'so no lawful open-licence source carries the form' - a universal claim about open-licence sources generally that two documents cannot establish
+#1180 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+  LABEL: boxed text form
+  CLAIM: An official D&D Beyond article reprints the published Phandalin arrival passage and calls it boxed text.
+  Q: The boxed text above serves as a fantastic base
+  TW: The boxed text above serves as a fantastic base
+  NOTE: Raw page fetched (HTTP 200). Quote strict-exact under 'Arrival in Phandalin' > 'Visual Description'; the passage it points back to is the reprinted Phandalin description, closed by the line 'Source: Dragon of Icespire Peak'. Article bylined Mike Bernier, Sep 18, 2023. Both limbs (reprints the passage; calls it boxed text) supported.
+#1181 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+  LABEL: place and institution description
+  CLAIM: The published Phandalin boxed text sizes the town by counting its buildings rather than its people.
+  Q: which consists of forty or fifty simple log buildings
+  TW: which consists of forty or fifty simple log buildings
+  NOTE: Strict-exact in the reprinted boxed text sourced to Dragon of Icespire Peak. The passage gives no population figure anywhere - the residents are characterised by trade ('farmers, stonecutters, blacksmiths, traders, prospectors, and children'), never counted - so 'sizes the town by counting its buildings rather than its people' holds.
+#1182 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1168-1182.json
+  SRC: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+  LABEL: place and institution description
+  CLAIM: The same published passage states the town's defences as two absences rather than as a description.
+  Q: The town has no walls and no garrison
+  TW: 'The town has no walls and no garrison' plus armed adults
+  NOTE: Quote is strict-exact and the 'two absences' limb (no walls, no garrison) is fully supported. The contrastive second clause of the same sentence supplies a positive defensive description, so the exclusive framing is downgraded rather than caveated.
+  LIMB: 'rather than as a description' - the same sentence continues 'but most of the adults keep weapons within easy reach in case the need for arms should arise', a positive description of the town's defence
+#1183 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast, Dragon of Icespire Peak boxed text, reprinted in D&D Beyond's Phandalin article
+  LABEL: concrete sensory noun
+  CLAIM: The same published passage characterises the townspeople by listing their trades and ending the list with children.
+  Q: They are farmers, stonecutters, blacksmiths, traders, prospectors, and children
+  TW: They are farmers, stonecutters, blacksmiths, traders, prospectors, and children
+  NOTE: Raw page fetched (HTTP 200, browser UA). Quote byte-exact in the boxed text under 'Tips For Running Phandalin in Your Games', immediately followed on the page by 'Source: Dragon of Icespire Peak', confirming the reprint attribution. The list runs trades then ends on children, exactly as claimed.
+#1184 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+  LABEL: place and institution description
+  CLAIM: The official article's own settlement table gives each location a proprietor and a verbless short description.
+  Q: Modest inn for eating, resting, and gossip
+  TW: Modest inn for eating, resting, and gossip
+  NOTE: Quote byte-exact in the 'Key NPCs and Locations' table, Stonehill Inn row; the table's three columns are Location / Proprietor / Short description and all nine rows do carry a named proprietor. The universal 'verbless' limb fails on one row.
+  LIMB: that EVERY row's short description is verbless - the Lionshield Coster row reads 'Supplies armor and weapons', a finite verb phrase (8 of 9 rows are verbless)
+#1185 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+  LABEL: naming and forms of address
+  CLAIM: That table names a proprietor as given name plus surname with species and gender in parentheses.
+  Q: Toblen Stonehill (human male)
+  TW: Toblen Stonehill (human male)
+  NOTE: Byte-exact in the 'Key NPCs and Locations' table, Proprietor column of the Stonehill Inn row. Given name plus surname with species and gender parenthesised is the table's consistent form (e.g. the Barthen's Provisions and Alderleaf Farm rows follow it).
+#1186 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Mike Bernier, 'Visit Phandalin, D&D's Most Popular Starter Town!', D&D Beyond, 18 Sep 2023
+  LABEL: dm-facing sentence
+  CLAIM: The article instructs the DM to describe a town's layout starting from its street surface and cart tracks.
+  Q: Describe the town's layout, from the muddy streets lined with cart tracks
+  TW: the town's layout, from the muddy streets lined with cart tracks
+  NOTE: Byte-exact, straight apostrophe included, in the 'Visual Description' bullet under the 'Arrival in Phandalin' heading. The sentence is addressed to the DM and does begin the layout at street surface and cart tracks before moving to the buildings.
+#1187 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-regrade-r12.json
+  SRC: Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023
+  LABEL: civic record register
+  CLAIM: Wizards of the Coast publishes an in-world settlement newspaper as a free handout for the Phandalin adventures.
+  Q: a newspaper that covers events in Phandalin
+  TW: a newspaper that covers events in Phandalin
+  NOTE: Byte-exact in the opening body paragraph. In-world newspaper, handout, and the Phandalin adventures (Shattered Obelisk, Lost Mine of Phandelver) are all on the page. Caveat, not a failed limb: the page says 'Downloadable Handout' and supplies the image inline rather than printing the word 'free', and credits D&D Beyond / Mike Bernier rather than naming Wizar
+  LIMB: the publisher-and-price limbs: the verifier records that the page says 'Downloadable Handout' rather than 'free' and credits D&D Beyond / Mike Bernier rather than naming Wizards of the Coast
+#1188 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+  LABEL: opening sentence
+  CLAIM: That in-world newspaper opens a story with a dateline of in-world date and settlement, then a verbless list of the damage.
+  Q: Ches 25, Phandalin – Ambushed wagons, dead travelers, and a town
+  TW: Ches 25, Phandalin - Ambushed wagons, dead travelers, and a town
+  NOTE: Byte-exact including the en dash, opening the story headlined 'Goblin Ambush Shocks Travelers on Triboar Trail'. Ches is a Forgotten Realms month, so the dateline is in-world date plus settlement; the list that follows carries no finite verb.
+#1189 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+  LABEL: naming and forms of address
+  CLAIM: That in-world newspaper attributes a quotation by given name, surname, office and institution, then the settlement.
+  Q: Linene Graywind, owner of Lionshield Coster in Phandalin
+  TW: Linene Graywind, owner of Lionshield Coster in Phandalin
+  NOTE: Byte-exact in the attribution of the first quoted speaker in the 'Goblin Ambush' story. Given name, surname, office ('owner'), institution ('Lionshield Coster'), then settlement ('in Phandalin') appear in exactly the claimed order.
+#1190 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+  LABEL: naming and forms of address
+  CLAIM: The same newspaper attributes a tradesman by given name plus trade plus the institution he keeps.
+  Q: said Toblen, the innkeeper of the Stonehill Inn
+  TW: said Toblen, the innkeeper of the Stonehill Inn
+  NOTE: Byte-exact in the section headed "Redbrands' Reign of Terror". Given name alone, then trade, then the institution he keeps, with no surname used here (the sister article's table gives it as Stonehill).
+#1191 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast, the Phandalin Post handout, reproduced on D&D Beyond, 5 Sep 2023
+  LABEL: naming and forms of address
+  CLAIM: In reported speech the same newspaper addresses the settlement's leader by office title plus surname, without a given name.
+  Q: What is Townmaster Wester going to do to keep us safe?
+  TW: What is Townmaster Wester going to do to keep us safe?
+  NOTE: Byte-exact inside speech the paper reports from an anonymous townsperson in the 'Goblin Ambush' story. Office title plus surname with no given name; the same form recurs in the paper's own narrative prose ('a lack of resistance from Townmaster Wester').
+#1192 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Mike Bernier, 'Downloadable Handout: Read the Latest Edition of the Phandalin Post', D&D Beyond, 5 Sep 2023
+  LABEL: terminology consistency
+  CLAIM: Within one official article the same officer is called Townminster Weston in the editorial commentary and Townmaster Wester in the handout text.
+  Q: Townminster Weston hasn’t been of any help
+  TW: Townminster Weston hasn't been of any help
+  NOTE: Byte-exact, curly apostrophe included, in the editorial section "What's in This Issue of the Phandalin Post?", while the reproduced handout text above it twice reads 'Townmaster Wester'. Both spellings sit in the one article and the commentary refers back to those same articles, so it is the same officer: title and surname both differ.
+#1193 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1183-1197.json
+  SRC: Wizards of the Coast / D&D Beyond, 'Encounter of the Week: Storm Celebration', 2020
+  LABEL: place and institution description
+  CLAIM: A third official column opens a settlement entry with the settlement's name, its peoples and its region, in one sentence.
+  Q: Boroftkrah is a settlement of orcs, half-orcs, and a few people
+  TW: Boroftkrah is a settlement of orcs, half-orcs, and a few people
+  NOTE: Byte-exact as the opening sentence under the 'Boroftkrah and the Gods' heading; the sentence continues 'of other races in the Greying Wildlands', supplying the region. Page is dated Mar 9, 2020 and tagged 'Encounter Of The Week', matching the cited column and year.
+#1194 VERIFIED_VERBATIM | F=- | place-lawful-primaries | pcgamer.com | verdicts-dnd-i1183-1197.json
+  SRC: Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review
+  LABEL: place and institution description
+  CLAIM: A reviewer locates the 2024 Dungeon Master's Guide's settlement-creation tables in the toolbox chapter.
+  Q: the toolbox's ones for dungeons and settlement creation
+  TW: the toolbox's ones for dungeons and settlement creation
+  NOTE: Byte-exact in the random-tables paragraph; the preceding paragraph opens 'First up, the toolbox: This is the least focused chapter of the book', locating the tables in that chapter. Byline Harvey Randall, and the piece reviews the 2024 DMG. Locator nit: the section's actual heading is 'Tools & boxes', not 'The toolbox'.
+#1195 VERIFIED_VERBATIM | F=- | place-lawful-primaries | pcgamer.com | verdicts-dnd-i1183-1197.json
+  SRC: Harvey Randall, PC Gamer, 2024 Dungeon Master's Guide review
+  LABEL: place and institution description
+  CLAIM: The same reviewer judges those settlement tables a bullet-point list of suggestions rather than a guide to inventing one's own.
+  Q: more of a bullet-point list of suggestions than a guide
+  TW: more of a bullet-point list of suggestions than a guide
+  NOTE: Byte-exact, same paragraph as 1194; the sentence completes 'to cooking up good ideas of your own', which carries the claim's 'inventing one's own' limb. The referent 'these' is the dungeon and settlement-creation tables named in the prior clause.
+#1196 VERIFIED_VERBATIM | F=- | place-lawful-primaries | lexstarwalker.com | verdicts-dnd-i1183-1197.json
+  SRC: Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018
+  LABEL: place and institution description
+  CLAIM: A read-through of the 2014 Dungeon Master's Guide names Random Settlements as a section of its chapter 5.
+  Q: Random Settlements
+  TW: Random Settlements
+  NOTE: Byte-exact as an h3 in the episode contents list, sitting under the h2 'Adventure Environments - Settlements'; page title is 'GMJ 235: DMG Chapter 5: Adventure Environments', dated December 16, 2018. The page names the book only as 'Dungeon Master's Guide', but its 2018 date and the listed chapter structure (Chapters 1-5 across earlier episodes) fix it as th
+#1197 VERIFIED_VERBATIM | F=- | place-lawful-primaries | lexstarwalker.com | verdicts-dnd-i1183-1197.json
+  SRC: Lex Starwalker, Game Master's Journey episode 235, 16 Dec 2018
+  LABEL: place and institution description
+  CLAIM: The same read-through names Mapping a Settlement as another section of the 2014 guide's chapter 5.
+  Q: Mapping a Settlement
+  TW: Mapping a Settlement
+  NOTE: Byte-exact as a sibling h3 to 'Random Settlements' under the same 'Adventure Environments - Settlements' h2 of the episode contents list, so it is named as another chapter 5 section. Edition inferred from the page's December 16, 2018 date as for 1196.
+#1198 PARTIAL | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-regrade-r12.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: boxed text form
+  CLAIM: A Wizards of the Coast adventure designer states on the publisher's own site that boxed text is named for the line that marks it to be read aloud.
+  Q: denoting that it should be read aloud to the players
+  TW: denoting that it should be read aloud to the players
+  NOTE: Raw HTML fetched (200, 319KB). Opening paragraph: boxed text 'got its name from the thin boxed-line that sometimes surrounds the text', with the quoted clause following word for word. Byline 'by Shawn Merwin'; his bio lists WotC-published credits (Acquisitions Incorporated, Baldur's Gate: Descent into Avernus, Storm Lord's Wrath) and an Adventurers League ro
+  LIMB: 'the publisher's own site' at publication: the verifier's FLAG records that D&D Beyond was operated by Fandom/Curse in Nov 2019 and that WotC ownership came later, and that 'a Wizards of the Coast adventure designer' is supported as a designer of WotC adventures, not as a stated 
+#1199 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: point of view and distance
+  CLAIM: The same designer's first tip is to write boxed text in the third person rather than the second.
+  Q: Move from the second-person point of view to the third person
+  TW: Move from the second-person point of view to the third person
+  NOTE: Exact heading of 'Tip 1', the first of six numbered tips. Claim limb 'first tip' confirmed: the tip list begins at Tip 1 immediately after the worked bad example.
+#1200 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: point of view and distance
+  CLAIM: He gives as the reason that dropping the second person makes it hard to attribute actions or feelings to the characters.
+  Q: it’s difficult to inadvertently include character actions, motivations, feelings, or movements
+  TW: difficult to inadvertently include character actions, motivations, feelings, or movements
+  NOTE: Body of 'Tip 1', word for word including the curly apostrophe in 'it's'. The full sentence supplies the causal limb: 'If we do not use the word “you” as the subject of the sentences in boxed text, it's difficult...' — so the reason limb ('dropping the second person makes it hard to attribute actions or feelings') is supported.
+#1201 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: plainness and economy
+  CLAIM: The same designer rules the novelist's impulse out of boxed text.
+  Q: boxed text is not the place to unleash that inner novelist
+  TW: boxed text is not the place to unleash that inner novelist
+  NOTE: Body of 'Tip 2. Avoid the novelist/dramatist urge', word for word. The section then enumerates three sub-problems (2a purple detail, 2b villain soliloquy, 2c action in progress), which supports 'rules the novelist's impulse out'.
+#1202 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: withheld information and inference
+  CLAIM: He rules that boxed text must describe only what the characters can sense.
+  Q: Describe everything the characters can sense, but not what they can’t
+  TW: Describe everything the characters can sense, but not what they can't
+  NOTE: Exact heading of 'Tip 3' (curly apostrophe in 'can't'). Body confirms both halves: text must not omit the obvious (the 50-foot chasm) and must not detail what characters could not know (crates' contents).
+#1203 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: sentence length variation
+  CLAIM: He measures his own model boxed text at four sentences and under a hundred words.
+  Q: Four sentences, and less than 100 words.
+  TW: Four sentences, and less than 100 words.
+  NOTE: Exact sentence opening the analysis under 'A Boxed-Text Opening', immediately after his own carrion-crows sample. It is his measurement of his own model text, as the claim states.
+#1204 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 6 Nov 2019
+  LABEL: opening sentence
+  CLAIM: He assigns the opening sentence of a scene the job of setting tone and introducing the scene.
+  Q: The first sentence sets the tone and introduces the scene
+  TW: The first sentence sets the tone and introduces the scene
+  NOTE: Word for word under 'A Boxed-Text Opening'; the page continues 'using words like “carrion” and “bloody.”' He then assigns jobs to sentences two, three and four in the same paragraph, so the sentence-role framing is the section's own.
+#1205 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Wizards of the Coast, D&D Free Rules (2024), 'The Basics'
+  LABEL: boxed text form
+  CLAIM: The 2024 free rules define boxed text as text meant to be read aloud when the characters first arrive at a location.
+  Q: meant to be read aloud to the players when their characters
+  TW: meant to be read aloud to the players when their characters
+  NOTE: Raw HTML fetched (200, 246KB). Third paragraph under 'Step 1: Describe the Situation': 'Published adventures often include text in a box like this, which is meant to be read aloud to the players when their characters first arrive at a location or under a specific circumstance.' Two scope notes: the page never uses the phrase 'boxed text' (it says 'text in a 
+#1206 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Wizards of the Coast, D&D Free Rules (2024), 'The Basics'
+  LABEL: place and institution description
+  CLAIM: The same 2024 free-rules paragraph says boxed text usually describes locations.
+  Q: It usually describes locations so the players know what’s happening
+  TW: It usually describes locations so the players know what's happening
+  NOTE: Same paragraph as index 1205, sentence two, word for word; the paragraph continues 'and have a sense of what their characters' options are'. The 'same paragraph' limb is confirmed — both quotes sit in one paragraph under 'Step 1: Describe the Situation'.
+#1207 VERIFIED_VERBATIM | F=- | place-lawful-primaries | dndbeyond.com | verdicts-dnd-i1198-1211.json
+  SRC: Wizards of the Coast, D&D Free Rules (2024), 'The Basics'
+  LABEL: sentence length variation
+  CLAIM: The publisher's own 2024 rules put the attention limit for descriptive text at about three sentences.
+  Q: lose focus after about three sentences of descriptive text
+  TW: lose focus after about three sentences of descriptive text
+  NOTE: Word for word in the paragraph directly after the boxed-text paragraph, still under 'Step 1: Describe the Situation': 'Most players begin to lose focus after about three sentences of descriptive text.' Scope note: the rules say players 'begin to lose focus after about' three sentences — a hedged observation rather than a prescribed cap; the claim's word 'lim
+#1208 PARTIAL | F=- | place-lawful-primaries | web.archive.org | verdicts-dnd-i1198-1211.json
+  SRC: Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast
+  LABEL: plainness and economy
+  CLAIM: The D&D story lead states in his own collected columns that he keeps his descriptions spare.
+  Q: I keep my descriptions spare.
+  TW: I keep my descriptions spare.
+  NOTE: Wayback raw PDF fetched (200, 3.8MB, PDF 1.7) and text-extracted with pdftotext. The quoted sentence appears word for word in the December 2011 / Dungeon 197 installment, whose running head is 'The Dungeon Master Experience: T'wit' — the pacing column on 'the ancient art of contraction', not a column titled 'Pacing' as the claim's page field says. It heads o
+  LIMB: 'The D&D story lead' — the source names Perkins D&D Senior Producer, not story lead
+#1209 VERIFIED_VERBATIM | F=- | place-lawful-primaries | web.archive.org | verdicts-dnd-i1198-1211.json
+  SRC: Christopher Perkins, The Dungeon Master Experience 2011 collected columns, Wizards of the Coast
+  LABEL: withheld information and inference
+  CLAIM: The same designer says he does not frontload information.
+  Q: I don’t frontload information.
+  TW: I don't frontload information.
+  NOTE: Word for word (curly apostrophe) in the same December 2011 / Dungeon 197 pacing column, a few tactics below index 1208's sentence: 'I don't frontload information. I let it trickle out in dribs and drabs...' The claim sentence carries no job-title limb (it says only 'the same designer'), so it verifies where 1208 goes PARTIAL.
+#1210 VERIFIED_VERBATIM | F=- | place-lawful-primaries | web.archive.org | verdicts-dnd-i1198-1211.json
+  SRC: Christopher Perkins, 'The Dungeon Master Experience: What's in a Name?', collected 2011 columns, Wizards of the Coast
+  LABEL: naming and forms of address
+  CLAIM: The same designer says he builds his human surnames on roots from western European cultures.
+  Q: and last names with roots in western European cultures
+  TW: and last names with roots in western European cultures
+  NOTE: Found in 'The Dungeon Master Experience: What's in a Name?' in the same collected PDF. The only break is the PDF's typographic line-break hyphen ('cul-tures'); reading order confirms the words are contiguous. Full sentence: 'I tend to go for names that sound like seldom used real-world names (e.g., Arando, Caven, Fenton, Mirabel, Remora) and last names with 
+#1211 PARTIAL | F=- | place-lawful-primaries | toolsandtaverns.com | verdicts-dnd-i1198-1211.json
+  SRC: Vito, 'D&D Settlement Sizes — Hamlet, Village, Town, and City', Tools and Taverns, updated 13 Jul 2026
+  LABEL: terminology consistency
+  CLAIM: A settlement-generator vendor attributes a population tier set of hamlet 50-300, village 300-900 and town 1,000-8,000 to the Dungeon Master's Guide, figures that match neither the publisher's own 2024 settlement handout nor any edition it names.
+  Q: DMG population tiers: hamlet 50-300, village 300-900, town 1,000-8,000
+  TW: DMG population tiers: hamlet 50-300, village 300-900, town 1,000-8,000
+  NOTE: Raw HTML fetched (200, 25KB). The quote is the exact opening of the first 'Key Takeaways' bullet, which continues ', city 8,000+, metropolis 25,000+.' The vendor limb is supported: the site sells/hosts a 'D&D Settlement Generator' it links from this guide. The attribution limb is supported twice — the bullet's 'DMG population tiers' and the body's 'The Dunge
+  LIMB: that the figures match no WotC edition nor the 2024 settlement handout — the page makes no comparison and names no edition

@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 6,
+ "indices": [
+  973,
+  976,
+  977,
+  979,
+  980,
+  981,
+  982,
+  983,
+  984,
+  985,
+  986,
+  988,
+  989,
+  990,
+  991
+ ],
+ "claims": [
+  {
+   "index": 973,
+   "feature": "translation and register",
+   "claim": "Fréchette judges that this translation choice diminishes the effect the legendary name can produce in the reader's imagination.",
+   "source": "Amélie Fréchette, mémoire de maîtrise, Université Laval, 2013, note 42",
+   "url": "https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/QQLA/TC-QQLA-29596.pdf",
+   "quote": "ce choix de traduction diminue à mon avis l’effet",
+   "page": "note 42, p. 31"
+  },
+  {
+   "index": 976,
+   "feature": "other: punctuation as rhythm control",
+   "claim": "Kay says he uses punctuation variably depending on context, speaker and rhythms.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "I’ll use punctuation varaibly depending on context, speaker, rhythms.",
+   "page": "Ysabel journal, post on proofreading (2006)"
+  },
+  {
+   "index": 977,
+   "feature": "other: punctuation as rhythm control",
+   "claim": "Kay states that The Last Light of the Sun is punctuated differently from the Sarantine Mosaic.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "page": "Ysabel journal, post on proofreading (2006)"
+  },
+  {
+   "index": 979,
+   "feature": "other: copy-editor as close reader",
+   "claim": "Kay describes his exchanges with his copy-editor as comma, semi-colon, paragraph break, tense shift and word-choice wars.",
+   "source": "Guy Gavriel Kay, Brightweavings journal, Children of Earth and Sky",
+   "url": "http://brightweavings.com/journal/category/children-of-earth-and-sky/",
+   "quote": "comma, semi-colon, paragraph break, tense shift, word-choice wars",
+   "page": "post on copy-editing"
+  },
+  {
+   "index": 980,
+   "feature": "other: reading aloud",
+   "claim": "Kay states that hearing a reading aloud is not the same as reading a book.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "Hearing a reading aloud isn’t reading a book.",
+   "page": "Under Heaven tour journal, post on touring and sharing"
+  },
+  {
+   "index": 981,
+   "feature": "other: reading aloud",
+   "claim": "Kay says what works when reading alone to yourself is not the same as what works when listening in public.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, 20 November 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "what works when you are reading alone to yourself is not",
+   "page": "Ysabel journal, 20 November 2006 post on his first public reading from Ysabel"
+  },
+  {
+   "index": 982,
+   "feature": "other: narrator roster",
+   "claim": "Kay's site records that Simon Vance read Under Heaven for the audiobook as he had for Tigana and the Fionavar trilogy.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 18 February 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "do the reading, as he did for Tigana and the Fionavar trilogy",
+   "page": "Under Heaven tour journal, 18 February 2010"
+  },
+  {
+   "index": 983,
+   "feature": "other: narrator roster",
+   "claim": "Kay states he is not an audio book person.",
+   "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 18 February 2010",
+   "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+   "quote": "I’m not an audio book person",
+   "page": "Under Heaven tour journal, 18 February 2010"
+  },
+  {
+   "index": 984,
+   "feature": "translation and register",
+   "claim": "Kay writes that a reader of his work in Russian, Korean or Portuguese is reading someone else's rendering of him.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "you are reading someone else’s rendering of me",
+   "page": "Ysabel journal, October 2006 post on the Giller Prize and translation"
+  },
+  {
+   "index": 985,
+   "feature": "translation and register",
+   "claim": "Kay states that a translated work is a version and an interpretation of the original author's work.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "It is a version, an interpretation, of that person’s work.",
+   "page": "Ysabel journal, October 2006 post on translation and the Giller Prize"
+  },
+  {
+   "index": 986,
+   "feature": "translation and register",
+   "claim": "Kay describes the people who carry his work over into another language as felt alternately as a gift or a burden.",
+   "source": "Guy Gavriel Kay, Brightweavings Ysabel journal, October 2006",
+   "url": "https://brightweavings.com/books/ysabel-journal/",
+   "quote": "the gift or the burden of the people who carry my work",
+   "page": "Ysabel journal, October 2006 post on translation"
+  },
+  {
+   "index": 988,
+   "feature": "translation and register",
+   "claim": "Vonarburg says that translation, for a writer, is still writing.",
+   "source": "Élisabeth Vonarburg, interviewed by Yann Etienne, Diacritik, 19 February 2021",
+   "url": "https://diacritik.com/2021/02/19/elisabeth-vonarburg-fiat-tyranael-et-tyranael-fut/",
+   "quote": "la traduction, pour une écrivaine, c’est encore de l’écriture",
+   "page": "answer to the question on having been a translator"
+  },
+  {
+   "index": 989,
+   "feature": "concrete sensory noun",
+   "claim": "Cabon names an illustrated clothing encyclopedia, Sophie George's Le vêtement de A à Z, as particularly useful for his translation of A Brightness Long Ago.",
+   "source": "Mikael Cabon, translator's own page for Comme un diamant dans ma mémoire (L'Atalante, 2023)",
+   "url": "https://mikaelcabon.fr/commeundiamantdansmamemoire.html",
+   "quote": "particulièrement utile pour cette traduction",
+   "page": "Références section"
+  },
+  {
+   "index": 990,
+   "feature": "terminology consistency",
+   "claim": "Cabon says a Chinese mythology dictionary let him solve many puzzles tied to Chinese legends while translating Under Heaven.",
+   "source": "Mikael Cabon, translator's own page for Les Chevaux célestes (L'Atalante, 2014)",
+   "url": "https://mikaelcabon.fr/leschevauxcelestes.html",
+   "quote": "m'a permis de résoudre bien des énigmes liées aux légendes chinoises",
+   "page": "Références section"
+  },
+  {
+   "index": 991,
+   "feature": "translation and register",
+   "claim": "Cabon says he tried to keep Billeter's reflection on the difficulties of translating Chinese poetry in mind throughout his own work on River of Stars.",
+   "source": "Mikael Cabon, translator's own page for Le Fleuve céleste (L'Atalante)",
+   "url": "https://mikaelcabon.fr/lefleuveceleste.html",
+   "quote": "que je me suis efforcé de garder à l'esprit pendant mes propres travaux",
+   "page": "Références section"
+  }
+ ]
+}

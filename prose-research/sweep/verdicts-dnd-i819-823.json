@@ -1,0 +1,53 @@
+{
+  "name": "dnd",
+  "chunk": 0,
+  "claims": [
+    {
+      "index": 819,
+      "feature": "withheld information and inference",
+      "claim": "A D&D Beyond article credits Carl Sargent with implying terrifying things through a few carefully chosen words in Iuz the Evil.",
+      "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+      "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+      "quote": "implying terrifying things with a few carefully chosen words",
+      "page": "section 'Getting into Greyhawk'"
+    },
+    {
+      "index": 822,
+      "feature": "place and institution description",
+      "claim": "The 2024 Dungeon Master's Guide gazetteer highlights dozens of locations across the Flanaess.",
+      "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+      "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+      "quote": "highlights dozens of locations across the Flanaess",
+      "page": "section 'Keeping It Real'"
+    },
+    {
+      "index": 823,
+      "feature": "dm-facing sentence",
+      "claim": "The article tells DMs to emphasise in their descriptions that Oerth is a world much like our own late Middle Ages.",
+      "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+      "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+      "quote": "emphasize that this is a world much like our own",
+      "page": "section 'Giving Greyhawk: DMing in Gygax's World'"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 819,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "master at implying terrifying things with a few carefully chosen words",
+      "note": "Raw HTML fetched by curl with a browser UA (HTTP 200, 321,029 bytes), text extracted locally; no summarizer. Byline 'by John Roy', Oct 21, 2024 — source attribution correct. The claim's quoted span appears word for word in the section headed 'Getting into Greyhawk', in the sentence naming Author Carl Sargent, whose clause continues that such words suggested more than they described. The 'in Iuz the Evil' limb is supported by the immediately preceding two paragraphs of that same section, which describe the writer buying the Greyhawk supplement Iuz the Evil in a 1993 Chicago bookstore and finding it truly horrific; Sargent is introduced as its author in the next breath. The article does not use the exact apposition 'Sargent, author of Iuz the Evil', but the referent is unambiguous in context."
+    },
+    {
+      "index": 822,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "It highlights dozens of locations across the Flanaess",
+      "note": "Same raw fetch. The quoted span appears word for word in the section headed 'Keeping It Real', in the sentence about the Gazetteer included in the chapter, which continues that it also provides an in-depth overview of the City of Greyhawk. The '2024 Dungeon Master's Guide gazetteer' limb is supported: the article's earlier section 'A Battle-Ready World' names the Greyhawk campaign setting in the 2024 Dungeon Master's Guide and then refers to the chapter's Greyhawk Gazetteer, so 'the chapter' in the verified sentence is the DMG's Greyhawk chapter. An editor's note dated March 2, 2026 on the page says '2024' now labels as '5.5e' on D&D Beyond, a labelling change only."
+    },
+    {
+      "index": 823,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "emphasize that this is a world much like our own",
+      "note": "Same raw fetch. The quoted span appears word for word under the heading 'Giving Greyhawk: DMing in Gygax's World', in its first subsection 'Describe Oerthlings' Hardships'; the sentence opens by addressing the DM's descriptions to players and closes by placing that world in the late Middle Ages, so the claim's 'late Middle Ages' limb is on the page. The 'Oerth' limb is carried by the subsection heading and by the following sentence about the difficulty of Oerth's civilians' lives. Twelve-word cap observed: the remainder of the sentence is named by section rather than quoted."
+    }
+  ]
+}

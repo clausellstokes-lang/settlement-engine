@@ -1,0 +1,7 @@
+Composed landing (register car 1 of 2): the tuning inventory refreeze and writer-reach, taken at the composed tip after the last content car
+
+Tuning inventory: TUNING_INVENTORY_REFREEZE at ba8561ff7 — CHANCE_MEETING_NEWS_TUNING enters P1 (233 tables), the news writer's P3 goes 1 -> 0, no ceiling rises; the door exited non-zero by design and the plain re-run is the receipt (75/75 under the mutex). Writer-reach: plain --write, cohort 1322 -> 1322, 0 stale folded out; seed on generationCoherenceReceipt gains news=N (ENC-4's Herald writer reads the seed), which the whole-tree proof had shown as the round-trip arm's lag. The lighting refreeze follows as its own car: its door refuses a dirty tree, so it could not run behind these two uncommitted outputs.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

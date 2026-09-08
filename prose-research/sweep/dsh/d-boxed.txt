@@ -1,0 +1,1758 @@
+Delta's D&D Hotspot: Search results for boxed text 
+
+ skip to main |
+ skip to sidebar 
+
+Delta's D&D Hotspot
+
+ Math, history, and design of old-school D&D 
+
+Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+
+ Showing posts sorted by relevance for query boxed text . Sort by date Show all posts 
+
+ 2021-10-25 
+
+ Early Evolution of Encounter Text 
+
+ A number of times in recent episodes of the Wandering DMs D&D Sunday talk show we've wound up debating how much detail is best for published adventure text. So I wanted to share some of the possibilities running around my head from classic D&D products. In particular, for what follows I'll present a snippet of an adventure authored by Gary Gygax, graduated in 2-year intervals throughout his tenure as the "boss" of D&D (1974-1985). I've also intentionally tried to focus on his higher-level adventures, which composed most of his published output, so as to compare like-to-like in as many cases as possible (i.e., I intentionally skipped Keep on the Borderlands for this reason). Here we go:
+ 1974 – Castle Greyhawk Notes
+
+Okay, so this one wasn't exactly published , and it also isn't high-level. But we managed to get a look at Gary's notes for running Castle Greyhawk's first level when Matt Bogen (Eridanis) caught a photo at a special Gen Con 2007 event. As you can see, it's only a single curt bullet-line per encounter area, noting monster type, number range, and treasure (and absolutely nothing else). In fact, it's more stark than that, because multiple rooms on the map are denoted with any one given key number (often a half-dozen or so); and about three-quarters of the rooms have no key whatsoever, being simply empty (in line with the design advice from OD&D Vol-3). 
+
+ Most everyone involved agrees the map layout is Gygax's original design for Greyhawk from the early 70's (could be 1972-1974 or so), developed in conjunction with the D&D rules; but there is some debate on whether the encounter text is original or not (maybe changed up for convention play?). Personally, I'm pretty confident that the text seen here is either original or in the same basic format -- if Gygax was so famous for improvising things mid-game, what would be the point to rewriting these minimalist text notes? Big thanks to Alan Grohe (grodog) & Zach Howard (Zenopus) for managing to decode that fuzzy photo taken from over Gary's shoulder. 
+
+ 1976 – Lost Caverns of Tsojconth Tournament
+
+ This is a snippet from the document Gygax wrote for DMs running the D&D tournament at Winter Con V, which occurred at Oakland University in 1976. Rather than bullet-point atoms, here we at least get full English sentences describing each area (usually 2-3 per encounter). But the emphasis is largely the same: the very first piece of text per area gives the monsters and hit points; this is followed by a small bit of descriptive text, and ends by denoting a treasure value (possibly none). Instead of a numeric range for monster number appearing (as in his Greyhawk notes), the monster numbers are now fixed, and their hit points are listed in advance. Arguably this might be motivated by the tournament situation where the strength of encounters should be as fixed as possible across different tables. We should also note that the back of the document has a table (one page per dungeon level) with summary statistics for all the monsters present, including number, hit points, move, attacks, and specials -- and even a "hit bonus" and a target number to hit each PC in the adventure, which is equivalent to ascending-AC in the d20 system (!). 
+
+ 1978 – Steading of the Hill Giant Chief
+
+ By the time of the GDQ (Giants/Drow) series, Gygax now starts providing a name for each keyed area (instead of just identifying it by monster type). The narrative descriptions are somewhat more textured, and the paragraphs tend to lead with those sense-descriptions -- with identification of any monster, and their hit points, possibly occurring deeper in the block. (As a result, it's possibly easy for the DM to overlook the monster present in room 2. above, say). Again it tends to conclude with a discussion of treasure, with somewhat more detail given to that description as well. 
+ 1980 – Expedition to the Barrier Peaks
+
+ AD&D module S3, Expedition to the Barrier Peaks , like most of Gygax's famous adventures, was birthed at a tournament event -- in this case at the Origins II game fair in Baltimore in 1976. Four years later, we got the elaborate published product, in full-color, and with a copious illustration booklet. Note that it exhibits similar DNA to the 1976 Tsojconth tournament text: areas are often identified only by the monster, the text is very mechanically terse, it concludes with a treasure, etc. (e.g., areas 5. and 6. above). But in some other cases we have a blossoming of more deeply detailed areas, even without any monsters or traps at all; for example area 7. above, the "Ship Commander's Quarters" -- which actually continues to sub-areas a., b., c., and d. (none of which have any monsters or unnatural contents), almost 500 words total for the one area. Also we see here an expansion of the monster statistics within the paragraph text -- not just hit points alone, but now also armor class, movement, hit dice, attacks, and damage. In some case these notational statistics take up a larger proportion of a paragraph, possibly making for a choppier read.
+ 1982 – Lost Caverns of Tsojcanth Publication
+
+ The 1982 publication version of Lost Caverns of Tsojcanth gives us a golden opportunity to compare to the earlier tournament module (above). The maps in question closely match; from a quick survey they appear identical (despite lots of tricky, crooked, freehand-caverns). Areas 2., 3., and 4. in the 1982 publication (above) are the same caves as B., A., and D., respectively, in the earlier 1976 adventure (further up). We can see then that many of the contents were changed, moved, added, etc. Stirges in 2/B are basically the same. A flesh golem in D was changed to a clay golem in 3 (formerly A), the back-map removed. Blink dogs are removed entirely and the new mobat monster inserted. And so forth. 
+
+Aside from those content changes, the text is again more elaborate than in the tournament document. Note that the brand-new encounter with the mobats gets significantly more verbiage than some older encounters, say. We again have a name for each area, and a tendency to start the description with a monster, and end with a treasure. Monsters have expanded parenthetical stat blocks, including possibly extended description of special abilities. And hey, there's boxed text for the first time! 
+ Another aspect we should point out is that compared to the earlier version, S3 gets an added extensive wilderness adventure section through the mountains before the Lost Caverns can be explored. This runs 9 pages, including 3 pages devoted to a gnome vale (complete with large underground lair maze/complex) intended for use by the PCs as a secure base for rest & rehabilitation between forays. Two of the really interesting differences between this section and the dungeon text is that: (1) while the dungeon areas use boxed text, the wilderness does not, and (2) while the dungeon has parenthetical monster stats mid-paragraph, the newer wilderness areas remove them to separate stat-blocks outside the paragraphs. Personally, I find it really interesting to be able to pinpoint in this one document the moment when monster stat blocks grew too big to comfortably fit within the paragraph text, and obviously had to be moved to a separate dedicated place on each page.
+
+ 1984 (c.) – Dungeonland & Temple of Elemental Evil
+
+ For my last entry, I'm hindered by the fact that there's no published adventure with Gygax as the principal author in the year of 1984. (An earlier version of this article presented a snippet from 1984's Mordenkainen's Fantastic Adventure , which credits Gygax & Kuntz, but we know that was originally a Kuntz creation, and it differs in some key ways from other modules of the same era.) 
+
+ But if we look at adventures by EGG in 1983 and 1985, the overall style is pretty similar, so we can safely interpolate how one of his adventures in 1984 should have looked like. Above I've taken one encounter area from 1983's Dungeonland , and one from 1985's Temple of Elemental Evil , and compared them side-by-side. The Dungeonland adventure (a pastiche on Alice in Wonderland ) is credited to Gary Gyax, and has no other credits listed that I can find, so it seems fair to assign responsibility wholly to him (and the same for the follow-up, The Land Beyond the Magic Mirror ). Temple of Elemental Evil , of course, is credited to Gary Gyagx and Frank Mentzer (with editing platoon of Carmlen, Heard, Johnson, Russell, and Winter); and we know the adventure was primarily loose notes from Gygax's campaign, turned over to Mentzer, who made significant changes when drafting the published text. 
+ Anyway, the format of these 1983-1985 adventures is very similar. Encounter areas tend to be several paragraphs each. Both adventures make use of boxed text, as introduced in the 1982 Tsojcanth dungeon areas. (Interestingly, Temple has a strong tendency to start with some non-boxed info to the DM, and then give a boxed description fairly deep in the encounter text; as shown above, this isn't universal.) Similarly, monster stat blocks are now uniformly removed from the paragraph text, and given as separate lines after the paragraph they're mentioned in, as was done in the Tsojcanth wilderness areas. Dungeonland has a 2-column format, while the Temple uses 3-columns per page. While both keep the tradition of noting treasure near the end of the text, Dungeonland had a formal annotation of a boldfaced "Treasure" label, whereas the later Temple abandoned that technique. (This is a trend I've seen a few times over the years: the more formal one tries to make the structure, the more brittle it is, and the less likely to stand the test of time.) 
+
+ Also worthy of consideration: 1985's Isle of the Ape , which had Gary's name alone on the cover (and he'd mentioned it as a level in his
+ Greyhawk campaign back in the 1979 DMG), with a credit inside for "Development: Bruce A. Heard". The interesting wrinkle here is that monster stats are entirely eliminated from the encounter text pages, and instead removed to a summary table on an extended flap of the module cover. 
+ And another common point among all the adventures of this time frame: The author/designer/publisher feels free (or maybe compelled?) to include some areas with very long descriptive text indeed. Each of the modules considered here have a number of areas with descriptions spanning multiple whole pages of text. Dungeonland sees this with The Long Hall (p. 4-5), Lawn and House (p. 14 and 19-21), Park (p. 21-23), and The Palace (p. 25-27). Isle of the Ape 
+ has an introductory boxed-speech by Tenser that is runs 2 full pages of text to be read verbatim (some 1,600 words!); with multi-page encounters such as Kawibusas' Ambush (p. 10-13), Plateau Area (p. 31-33), The 
+Spheres of Thought (p. 38-39), and The Glowing Pearl Chamber (p. 43-45). The Gygax/Mentzer Temple of Elemental Evil is similar, with an 
+introductory boxed text section that runs more than a full page (about 
+1,300 words), and area descriptions that commonly run many paragraphs or a 
+whole page; e.g.: room 404 is ironically a 20'×30' room with 1,200 words
+ of content text, room 417 has the same dimensions and 1,400 words, and so forth.
+
+ Open Questions
+ If you could set a dial for preferred extent of descriptive text in an adventure you'd pick up and run now, at what year would you set it: 1974, 1976, 1980, 1982, or 1984?
+
+Where do you like your monster stats -- mid-text, after the paragraph, or removed to a separate table or section at the end of the module?
+ And did you like the boxed text innovation, or not?
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 07:00 
+
+17 comments:
+
+ 2017-10-02 
+
+ Tip-Offs in Tamoachan 
+
+So I was reading the "Collector's Edition" of the AD&D Lost Tamoachan module, published by TSR in 1979. This is the Mayan-themed adventure (in-game, "Olman") by Harold Johnson & Jeff Leason, later repackaged as AD&D Dungeon Module C1 in 1980/81. The cover (shown here) says:
+
+ This module was originally used for the Official Advanced Dungeon & Dragons tournament at Origins '79. This special numbered collectors edition (300 copies in print) contains background information, referee's notes, a large four-level map and reference matrices. Pre-rolled characters are included with brief histories for each. LOST TAMOACHAN: "The Hidden Shrine of Lubaantum", is the first in a new line of Collector's Edition modules from TSR. If you find this module intriguing, look for the TSR logo on future publications from The Game Wizards! 
+
+There are many differences between this edition and the later, more mass-market publication of module C1 in 1980/81. For starters: The formatting is much more rudimentary; just run directly off a personal typewriter in a single mono font, from what I can tell. Areas are identified variously by letters or numbers ( names of areas generally match C1, but the numbers do not). There is no separate illustration booklet, and generally just a few illustrations in the module itself. There is no tournament scoring system (which makes me suspect that the system in the later C1 was made just for that publication, and not used at Origins). As an aside: If you're curious, the only other "Collector's Edition" monochrome-and-numbered item was Ghost Tower of Inverness by Allen Hammack (later module C2). Anyway, here are the tidbits that I find the most interesting.
+
+Table Scale of 1" = 5 Feet
+
+Area N, "The Tomb of Pelota", features an aggressively animate rubber ball which challenges adventurers to a classic game of pelota , in a long hallway with goals on either end. This optional encounter includes 5 paragraphs of game rules for running the event. In part, it says:
+
+ The ball moves in increments of 5' or 1 inch on a scaled playing surface. Players must strike as if hitting with their major [sic] to hit AC 5 to connect and then drive the ball the resulting damage in inches along the corridor; in this case always roll for damage, don't use average rolls. To score the character must be within range of the goal and score +4 above the required roll "to hit". If players are within 6 inches, on scale, of the ball they may all swing to hit; if the nearest figures are 12 inches up to two may attempt to hit at -1; and if none are within range only 1 may attempt at -2... The ball moves itself 2-8 spaces each round, [sic] number is generated, but must always hit opposing walls in any round, +1 more wall if moving over 5 spaces... 
+Now, this tactical scene, with all distances given in inches, and the 1" = 5 feet scale is particularly interesting because it's written within the same year (1979) that Gygax is writing in the AD&D DMG, "Each ground scale inch can then be used to equal 3⅓ linear feet" (p. 10). 
+
+On the one hand, when ranges are specified in OD&D/AD&D, they are given in 1" units where officially 1" = 10' indoors, 30' outdoors, but (awkwardly) this should be a separate and distinct consideration (i.e., units-of-account only, not reflecting actual tabletop usage). But when the later module C1 was prepared, this pelota scene (now area #29) was edited to read, "The ball moves in increments of 5' (½")", and all the other references were converted to feet instead of inches, as though the editor wanted to mostly avoid the whole tactical issue (i.e., movement from a PC hit was no longer damage-as-inches, but instead a fixed "15' per blow"). 
+
+Is this the earliest reference in an official D&D product to use of the 1" = 5 feet tactical scale? If we were wildly conspiracy-minded, we might be tempted to allege something outrageous, like that it took an ongoing and concerted cover-up to avoid the rather blatant fact that original D&D scale should have just been 1" = 5 feet all along, the most playable and mathematically direct conversion when playing with 25mm man-to-man figures. 
+
+Treasure in Silver Pieces
+
+Most of the treasure in Lost Tamoachan is valued in units of silver pieces -- not gold, as is customary in official D&D. It seems like most of the treasure in areas #1-11 is valued in gold pieces, while the treasure in areas #12-25 is generally priced in silver pieces (there are exceptions to this assessment). Is it possible the Johnson/Leason originally played their games with a (more historically realistic) silver-standard economy, and partly but incompletely managed to convert that for their Origins tournament module? 
+
+When the later C1 module was prepared, all of these silver treasure valuations were converted by the rules-as-written in AD&D, in that 1 gp = 20 sp should be the base economic unit; that is, all of the silver treasure valuations were divided by 20 or thereabouts. 
+
+Here's an example from the original adventure, area #12, "The Tomb of Tlacaelel":
+
+ The chests hold large heaps of coin necklaces, silver coins pierced and threaded on gut, worth 360 s.p. each... In the first chest are: 10 coin necklaces, 6 pair of jade earplugs, worth 260 s.p. a set; an alabaster stature, worth 500 s.p.; and an agate ring, value 100 s.p.... 
+
+In the later module C1, this becomes area #33:
+
+ These chests hold large heaps of coin necklaces, 360 silver coins pierced and threaded on gut worth a total of 18 g.p., and other assorted valuables... Chest #1: This chest is jammed shut and must be broken open. It holds 10 coin necklaces, 6 pairs of jade earplugs, worth 15 g.p. a set, an alabaster statuette, worth 50 g.p., and an agate ring valued at 5 g.p... 
+Note that standard jewelry treasure in any version of D&D is valued in units of hundreds (ostensibly gold pieces). The original adventure text has treasure on this same order-of-magnitude; but the converted module C1, with jewelry valuation in the single-digits and teens (as seen above), is a complete anomaly. The physically biggest treasure caches become effectively worthless garbage in the AD&D economy and XP system. The only thing that makes sense is that someone was originally running their economy and XP awards in silver-standard units. Again, this echoes the prior section: there is an "obviously correct" scale to D&D pricing values, and it's not really in gold piece units. It took a lot of labor over time to try and continually align the publications with Gygax's early and fundamental errors. 
+
+This is somewhat further confused by the fact that, despite the amount of adventure text dedicated to treasure descriptions (the passage quoted above is just the start of a 10-paragraph presentation of treasure in one room!), treasure is not a factor in the C1 tournament scoring system. Perhaps the most obvious deduction, granted that the the original Lost Tamoachan had no such system included, is that originally the tournament was judged simply on value of treasure taken, and silver units were initially the basis on which that was scored. 
+
+Other Curiosities
+
+Proto-Boxed Text -- Initial descriptions for each area are given, not exactly in boxed text, but in specially quoted and indented passages. Perhaps this marks the first germinal attempt at what would become boxed text? Thanks to commenter Test for asking about this, as it didn't even occur to me when I read it the first time.
+
+Languages -- The pre-generated characters in Lost Tamoachan are given extensive language lists, and these are important at many points of the adventure. Included among them are Latin, Hebrew, "Tolemy (astronomer's script)", "Harney (Hillfolk tongue)", and "Melange (merchant business tongue)". In the later publication these seem to be respectively replaced by the World of Greyhawk setting elements of Suloise, Elven, Old Oeridian, Orcish, and Flan. 
+
+The Mouther -- Lost Tamoachan features (in area #21) the first appearance of the infamous gibbering mouther monster, before it actually was assigned that name. Here, it is simply called the "Mother" throughout -- "'Mother' was once worshipped as the goddess of the earth...". When turned into a more generic monster in C1 (and Monster Manual II ), the "mother" became the "mouther". 
+
+Hopefully you all are using 1" = 5 feet scaling and silver-standard currency at this point. And salutations to you for being so sagacious and tasteful. 
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+15 comments:
+
+ 2017-10-09 
+
+ Classic Stat Block Formatting 
+
+I was writing some stuff recently, and started wrestling with myself over how to present monster statistical notations in the adventure text. Partly this is a result of the formatting in classic TSR modules and texts varying over the years; but of course I want something that satisfies my own intuitions regarding brevity, usability, etc.
+
+The primary difference in styles that caught my attention as I write this is that the earliest adventures included statistics in parenthetical notes within narrative text paragraphs (the contents of course varied, sometimes as minimal as just hit points, but that's a not my main thrust here). Adventures at a later date removed the statistics from inside narrative text, placing them instead outside of each paragraph, in a specialized statistical block. Prominent examples of the early style included the GDQ modules, AD&D rulebooks, B/X rules and B1-2, etc.; examples of the later style would include module T1-4 and products of that era. So I started searching for where the switchover point was. 
+
+Now, here's the discovery that made me think this worth posting about: Gygax's AD&D Dungeon Module S4, The Lost Caverns of Tsojcanth , published in 1982, surprisingly constitutes the exact switchover point all by itself, because it actually includes both styles within the one product! Namely: The original dungeon-based adventure area, the "Lost Caverns" (used in Winter Con V, 1976), maintains the older parenthetical in-paragraph style. But the newly added wilderness encounter areas (which actually appear first in the module) instead use the newer isolated-stat-block style.
+
+Example of the older style in the dungeon areas (S4, p. 14):
+
+Example of the newer style in the wilderness areas (S4, p. 7): 
+
+The 1982-1983 era was clearly a time of great flux in the presentation of D&D rules and adventures. You'll notice in the S4 wilderness example above that the "new style" isolated stat blocks were given before the text, whereas later it would usually be after (a minor modification, I think). The Hickmans' modules I3-5 in 1983 had a very regimented structure of every single paragraph being labelled for either "Play", "Monster", "Treasure", "Character", etc. By 1985, T1-4 kept only the smallest part of that, with a specialized paragraph labelled "Treasure" for each encounter area.
+
+While I'm not very fond of those experiments at hard regimentation (or even "boxed text" descriptions), on reflection I really do like the statistical elements being removed from the text paragraphs, and it's probably the only new formatting idea from that time that was "sticky" and still commonly used today (e.g.: see Bill Webb's Rappan Athuk ). Among the advantages are: allowing the writer to stay in the descriptive "voice" and not get distracted by statistical elements (perhaps more of a problem for some of us than others); easier for the DM to read and parse sensory descriptions in play; better for finalizing paragraphs/orphans separate from stat edits; more attractive on the page; and, if desired, easier to convert a product to other game editions. 
+
+Which style do you prefer?
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+21 comments:
+
+ 2019-05-27 
+
+ Wandering Hommlet 
+
+If a DM considers possibly running the classic Temple of Elemental Evil campaign, one must first answer: Where is Hommlet? Interestingly, its official published location varied quite a lot in those heady early years.
+
+Here's a timeline of relevant publications (all with Gygax's name on them):
+
+ 1979 : The original monochrome version of AD&D Dungeon Module T1: The Village of Hommlet is released. In the first paragraph of the Background (p. 2), it says, "The village... is located some 10 or so leagues southeast of the town of Verbobonc..." This places it in hex #1 of the regional map above (each hex being 10 leagues in distance). 
+
+ 1980 : The World of Greyhawk folio set and Gazetteer are published, including the fabulous continental map by Darlene excerpted above. In the single-paragraph entry on Verbobonc (p. 18), it states, "A temple and fortress were constructed in the wooded hills southeast of the town of Verbobonc, not far from the village of Hommlet. (Look for the VILLAGE OF HOMMLET and the TEMPLE OF ELEMENTAL EVIL modules from TSR)." So: no explicit change, although hex #1 noted above is not depicted with either woods or hills.
+
+ 1981 : The multi-color version of module T1 is released. However, the booklet inside is identical as far as I can tell (it even maintains the same inside logo and 1979 copyright, different from the color cover), so no textual changes in that regard.
+
+ 1983 : The boxed-set version of the World of Greyhawk is produced, with the same map, but a pair of expanded books. The Glossography includes more detailed in-game statistics to various entities, including a section on "Adventure Locales" (p. 30), which gives specific hex coordinates for every TSR module published to date. For the Village of Hommlet (noted with a predicted change in code from T1 to WG1), it says, "The legendary villlage is located in hex O4-98 near Verbobonc". That hex is noted as #2 in the map above -- quite a surprising distance away; not 10 leagues, but rather some 40 leagues away from Verbobonc. And still not very much near the wooded area. 
+
+ 1985 : The supermodule AD&D Official Game Adventure T1-4: The Temple of Elemental Evil is finally published (in the last year of Gygax's tenure with the company; finished with the help of Frank Mentzer). This includes what is mostly a reproduction of the T1 Hommlet module inside; although now the Player's Background section (p. 4) states that it is, "located some 30 leagues southeast of the town of Verbobonc" (not 10 as before). In addition, it comes with a rather sketchy wilderness "Map 1: From Hommlet to Nulb" that depicts Hommlet as being in hex #3 on the map shown above (indeed, 3 hexes, so 30 leagues from Verbobonc). 
+
+That's really quite a bit of wandering for a little village -- the triangle formed by hexes #1, 2, and 3 above is a bit larger than that formed by New York, Philadelphia, and Allentown, PA. 
+
+A secondary issue is: Given Hommlet, where are Nulb and the Temple in relation?
+
+Above is the wilderness map given in the T1-4 adventure. But perhaps I'm getting ahead of the story with that:
+
+ In the original 1979-1981 T1 text, Hommlet and Nulb are set fairly close together. The Background says (p. 2), "The folk of Hommlet tended to ignore Nulb, even though it was but six miles distant." Likewise, the T1 moat house is given as "about two or three miles away", along an overgrown track leading northeast off the Hommlet village map (area 33, text p. 8). The text to those ruins reiterates this, describing travel of "a mile or so" along the overgrown track, and then "two miles of distance" along a somewhat clearer pathway (total time: one hour on horse, two on foot; and doubled for the first trip as the party works to clear it). It concludes this description with, "The track continues past the ruins for many miles -- seven leagues, in fact -- until the temple area is reached." (p. 12) Note that this total of about 8 leagues (24 miles) to the Temple is considerably more than the 6 miles to Nulb in the opening Background. 
+
+ On a related note, the T1 Background speaks of a "Lowroad" leading from Verbobonc, south of the river: "Many days' travel to the east, on the shores of the Lake of Unknown Depths (Nyr Dyv) is the great walled city of Dyvers". This first paragraph seems to be describing the various roads off the edges of the Hommlet village map; the one leading directly east (best matching this description) is labeled "To Nyr Dyv & the Temple". There is no mention in this text of any corresponding "Highroad". 
+
+ The Brief History in the 1980-1983 Greyhawk products (identical in both) spends a rather surprising amount of time focused on the area and action around the Temple. For a piece of text covering the entire history of the whole continent, 3 of its 11 paragraphs are specifically about the battle with the forces of the Temple (clearly, it was foremost in Gygax's mind at the time). Yet even here the location of things is a bit garbled: the Brief History says the battle was, "below the city of Verbobonc" (folio p. 6), while the section on the Kron Hills mentions it as, "the battle above Verbobonc" (p. 23). 
+
+ With the 1985 T1-4 product you get the wilderness map above, but it seems mostly unrelated to any of the descriptions in the text itself. Note that it clearly shows Hommlet and Nulb as being at least 10 leagues (30 miles) distant as the crow flies; if I map and measure all the little twists and turns on the roads, then I count either 16 or 18 leagues (48 or 54 miles) depending on the route. But the Hommlet reproduced background still says Nulb is "6 miles distant" (p. 5), the track out of town still says the moathouse is "2-3 miles" away (p. 14), and the text to the ruins still describes the same "mile", then "two miles", then "seven leagues" to Nulb (p. 21); which again awkwardly implies a total of 24 miles from Hommlet to the Temple.
+
+ Meanwhile, the new Interlude section to T1-4 is also contradictory. The Players' Background says, "Just a half-day's journey afoot (only about two hours' ride), east along
+ the High Road, lies the disreputable community of Nulb, and the Temple 
+hidden in the hills nearby" (p. 27). Per standard AD&D/Greyhawk moves rates, this implies a road distance of about 5 leagues (15 miles). On the other hand, under Notes for the Dungeon Master, it says, "The adventure began in the Village of Hommlet, only about thirty miles west and south of the edge of the Nulb area map" (p. 28). 
+
+ Then the very next thing T1-4 says is, "You can construct your own campaign map by using graph paper of roughly the same parameters as that of the Nulb map, assuming 100 yards to the square. Two sheets of paper to the west and two to the south cover all of the important territory, with Hommlet being located on the High Road, two maps west, one south near the map bottom, but in the southwest quadrant. (The Velverdyva river, by the way, generally remains along the upper portion of the northern map additions...)". By my figures, the described map would only cover about 4 by 6 miles, although the description seems to cover an area at least 30 by 40 miles on the T1-4 wilderness map. Was this particular text accurate to an early placement close to Verbobonc (hex #1), and overlooked when the official T1-4 map was drafted? Or was it simply a total meltdown in someone's arithmetic?
+
+ Other miscellaneous comments about the T1-4 wilderness map: Note that while T1 mentioned only a "Lowroad", the new T1-4 sections have now switched to reference only a "High Road". Whereas T1 showed and spoke about a major road leading due east to the Nyr Dyv, the roads in T1-4 are highly kinked, going far to the south and then far to the north (not very useful for a major east-west highway). The map has no placement for the T1 moathouse or the overgrown track leading northeast off the Hommlet map. The relative location of the Temple seems to have switched sides of the road; in T1 you can go northeast of the main road and reach the Temple, while in T1-4 it is shown south of that road. It's weird that the "Low Road" is along the crests of the hills, while the "High Road" is in the depths of the forests; and also that while the T1-4 text speaks of the "High Road" as the major route to Nulb, on the map it is shown as an "unused trace road" with many points of Danger/Evil along the way. Likewise, none of those Danger/Evil areas are described in the T1-4 text. 
+
+I hope that you'll forgive me for all that detailed nit-picking. But the contradictory nature of the T1-4 wilderness map has bothered me for a long time, I think I've repeated this textual exercise on a number of occasions, and I wanted to document it here so I don't ever do it again. One last complaint I'll levy is how that map seems to imply that the 
+PCs will need several more custom adventuring areas to gain XP between 
+Hommlet and the Temple, when this simply isn't the case; the average 
+danger level of the Moathouse is almost exactly the same as the first 
+level of the Temple dungeon, by my calculations. 
+ For what it's worth, I asked Gygax about this directly on the old ENWorld Q&A forum, when he was still active there. His response (dated 21st June, 2005):
+ 
+ Water long passed over the dam. No point in commenting on it now, although I will say that the high road from Greyhawk to Verbobonc does not go past the temple and through Nulb. 
+ 
+ So, at this point I think I might come to the following conclusion if I were to ever run the T1-4 adventure: just kick that wilderness map entirely to the curb as incoherent, and make my own map in line with the original 1979-1980 descriptions, which had somewhat fewer contradictions. Consider: perhaps Hommlet lies in the plains of Verbobonc, along a "Low Road" that runs generally due east (through wilderness and woods) to the Nyr Dyv. Meanwhile, there could be a "High Road" that loops north of the river and the whole area, through the safety and civilization of knighted Furyondy, and reaches Dyvers that way instead, and from there proceeds to Greyhawk. Note in addition to Gygax's response above, his Gord the Rogue books also speak of the "High Road" running through the center of the City of Greyhawk. In contrast, there's no way to interpret the road on the T1-4 wilderness map as doing the same.
+
+A final thing I'll reflect on (a little bit of back-in-my-day-ism): Just think about the incredible wait time we suffered from the publication of T1 with all of its hints and promises about the soon-to-be-released Temple adventure, until the actual appearance of the T1-4 module. The former was in 1979, and my personal copy of T1-4 actually has a 1987 print date on the inside cover. That spans the time from when I was 9 to when I was 17, or in fact half my life to that point waiting to get the damned thing. There's a reason why some of us have a small part of our brains kinked up over that production.
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+12 comments:
+
+ 2015-05-11 
+
+ HelgaCon VIII – Vault of the Drow 
+
+HelgaCon, the annual mini-convention with my Boston-area friends, was held once again in early April. We rent a house by the seashore on off-season rates and play games all weekend. Actually, the event is now so busy that the house is full and we have overflow attendees staying at a nearby hotel. Pretty cool.
+
+Frequently, this is actually the only time I run D&D games all year long. That's not ideal for someone who blogs weekly about the game, but I'm very grateful for some kind of opportunity to blow the rust off. To some extent, it allows me a greater chance to reflect deeply on the proceedings and how to improve things the next time I play; my house rules have been richly cultivated in the last few years in response.
+
+It's been 6 years now that I've been running the G-D (Giants/Drow) series of adventures annually. Of course, this is Gygax's masterpiece, originally a sequence of tough high-level tournament adventures, the first to be published by TSR back in the day. Many would agree that they constitute the best D&D adventure series of all time -- I might even expand on that, and assert that all by themselves they justify the existence of the D&D game system, as a platform for experiencing this particular campaign. So here we conclude the cycle (I'm unlikely to run Q1 for a few reasons) with module D3, Vault of the Drow . In my opinion, it's the best of the series; Gygax at the pinnacle of his powers, with the richest expression of his gumbo of pulp fantasy a la Vance/Howard/Lieber/Moorcock, et. al., and pieces that only the gaming grandfather could have come up with. ( I am not alone in this opinion. )
+
+I've been running these games for a mix of players: some who started with Red Box D&D; younger players who are more familiar with things like Fate and Dread; and complete newcomers who have never used funny-shaped dice before. It's definitely my favorite way to play these days, and it's delightful to get to revisit these adventures through new eyes, as it were. This year I reached a new record number of registrations for the game, with a full table of 10 players ready to bring nemesis to the Drow. And they bring both quantity and quality; their play performance has been getting sharper each year, and they all come very organized and ready to support and reinforce each other (particularly brand-new players), and really bring some serious hurt on my monsters.
+
+Each year, I've been learning a little better how to fit these sprawling adventures into a tight 4-hour convention block -- and this year I think it finally "clicked". You really have to work on developing and preparing the major set-pieces, the "crown jewels" of the setting in question. For the D1-3 series it's actually pretty straightforward (I say now): each has two lead-in tunnel encounters (say: 1 hour each), and then a major terminal area at the end (estimate: 2 hours). One should almost certainly skip random encounters so as to not miss out on time in the major areas (although there is a loss in both resource-challenge, and texture to the milieu; for example, finding that the major tunnels are patrolled and maintained by Drow, while the secondary passages have more exotic monsters). The G1-3 modules are somewhat more highly coupled (being single sites), and a little trickier to know what to highlight. But one thing I found this year is that it's no bad thing to give lots of detail to earlier important areas, and if you have to improv later areas that you didn't expect players to reach, they don't mind at all. 
+
+So it's possible that this was the best game I've ever run in my life; after 30-odd years of kicking at D&D, I finally ran one game that really felt right . Spoilers, of course, follow.
+
+The Proceedings
+
+ Among their choices for approach tunnels, the party chose the trapped "garden path" (see also: back cover of the color version of the module). The lead invisible scout was detected, charmed , and drained of a level before the rest of the party could engage. But the party was immediately suspicious of the paradise-seeming cave, and using a sword of detect evil proved the case. Wregan the elf hid in the "trees" only to find the illusion disappear around him and instead be was covered with a wave of giant rats. Melee between party, demon, vampire, and waves of bats was fast and furious. The bats and rats were fireballed , the monsters were put down, the temporarily defeated vampire turned to gas a drifted out of sight, and the party moved to put as much distance between him and them as possible.
+
+ Entering the Vault proper, the adventurers first sent a flying wizard to scout the tops of the cliffs on either side as a precaution. Finding nothing but fungus and crystal-strewn open tableland, they cast a sphere of invisibility which covered the entire party and marched down the road forward. Coming to a three-way fork, they took the upward path, coming to the Black Tower. 
+
+ Using their magical stealth, a few of the group's strongest fighters and wizard scouted out the open gate to the tower. Finding a sizable group of Drow guards, the wizard Ezniak let loose an ice storm that filled the first guardroom, felling many of the lesser Drow. The chief jumped up to close and bar the door, but the party's magically giant-strengthened fighters, Boris and Hedron, charged forward one after the other, breaking open the door, smashing the table inside to splinters, and battling the High Bailiff to a standstill. More Drow poured down the stairs while other PCs ran into the tower until the whole first floor was a confused wall-to-wall melee. The main problem was the High Bailiff's extraordinary AC, defending with enchanted sword and dagger. The player of one of the pregenerated PC's, randomly named Atol Daggerbreaker, asked: "Can I try to break his dagger?"; to which the answer seemed like it had to be "yes". So with his warhammer he smashed the magic dagger, and then the sword, and then the High Bailiff finally got the beat-down. 
+
+ Meanwhile outside, a more cautious Jurden the Red Wizard chose to levitate to the top of the tower, thinking it would be abandoned; however he appeared over the battlement right in line with a guard manning a ballista-sized crossbow. "I go down! Down!" cried the player. "Too late, he fires!" I said gleefully. My roll: a natural 1. Saving throw vs. fumble: failed. Result from the critical chart: entangled with weapon; so the bolt snagged the dark elf's belt and he was shot off the roof, Wilhem-screaming ( link ) to earth. 
+
+ Inside, a wall of fire up the tower stairs fried most of the remaining Drow guards. One was charmed and gave the party useful information about travel and customs in the Vault, and the way to the High Priestess of all Drow. A chest containing an invaluable set of green cloaks were procured, which would thereafter allow travel in the Vault with being accosted by Drow patrols; and also a set of weird eye-cusps, and a letter of passage from some entity named "Eclavdra". The wizard Zaki Azeem chose the opportunity to cast animate dead on the fallen dark elves, raising ten zombies under his command, which were also outfit with green cloaks. So enlarged, the group moved on from the tower into the larger expanse of the Vault.
+
+ Here I described the party's further travel in the Vault, entering into the debauched city of Erenhei-Cinlu, and the disturbing practices of the people therein. The group was allowed over the flying bridge to the plateau of the noble families, and directly passed on to the very Egg of Lolth. (This was a sequence which I intentionally planned to accelerate, but I think I gave just enough narration to get an overall sense of the setting; all random encounters and even the Lesser Temple were skipped.)
+
+ The party entered the terrifying, demon-carved, web-shrouded Great Fane of Lolth. On the first floor, the group marched directly through the foyer to the Great Temple Area. The figure of Lolth herself rose before them! So the party launched a vicious barrage of offensive magic: an ice storm, fireball, hold monster , and more (a total of 68 points of damage), all to seeming no effect! (Or was she held ?) Fighters slashed, and the party wizard cast fly , spiraling up around her to investigate. (Eerily, the players perfectly recreated the Jeff Dee illustration of the scene.) Once the ruse was discovered, the dwarven fighter/thief Bellinus noted the weird mural in the rear, but the rest of the party was cautious, and chose to move in a different direction.
+
+ The web-like stairs up were chosen: and the group was ambushed by a giant black widow spider the size of a small horse. Boris was bitten but made his saving throw against the extra-deadly poison, and then with the rest of the party's help he slew the creature.
+
+ On the second level, four Drow guardswomen surprised the party and let loose poisoned bolts. The PCs responded smartly with Ezniak using a ring of human control to charm the whole group, ending the combat, and forcing their agreement to lead the way upward to the High Priestess. 
+
+ Up another three levels to the topmost floor of the temple's pagoda. But the High Priestess was warned by a secret alarm, and an opening flame strike instantly fried all the charmed Drow and the zombie troop leading the way. With the priestess casting spells from an unseen location (through a high peephole on the wall), the PCs pushed into luxurious lounge area with jewel-studded spider-tapestries. A word of power and the tapestries transformed into another 8 gargantuan spiders, scuttling forth with more murderous venom! Fighters struck and dodged, Atol tried to smash through the very wall with his hammer to get at their tormentor, and a few spiders were hemmed in with a wall of fire and magic missiles . Then the infamous Zaki Azeem declared that he was dropping a cloudkill to cover the whole room. The whole table groaned, thinking they'd died to friendly fire, and I turned to the Book of Spells thinking the same thing. But it turned out this was a brilliant ploy; all of the party was too high-level to be affected, while the giant spiders all died to the poison gas. Brilliant. (And the same would be true in any standard edition of the game.)
+
+ Then the High Priestess used her sinister demon staff to conjure a Vrock demon on the party! The response in this case was: a suggestion spell to "protect us". I tried to find some loophole on why this wouldn't work on a demon, but couldn't find any (nor could I after the fact) -- failing both magic resistance and saving throw, the demon stood rooted to the spot, neither attacking for the PCs nor hindering them. The crew then bashed down the High Priestess' inner door and engaged her in melee. She fought back with blindness spells and a magical +5 mace; only a few members of the party could make contact with her back to a corner, and with her AC of -9 (!) the party was almost entirely unable to land blows -- it looked like she might alone turn the tide against them. And then Jurdan nailed her with a feeblemind spell, and failing her saves she was reduced to a drooling incompetent. The players all cheered lustily and finished her off en masse . 
+
+ The party gathered what treasure they could from the queenly riches around them. The secondary priestess was met running up the stairs, and another charm spell turned her too to the party's side. Inquiring as to a way to escape the Fane (one of the victory conditions I'd set for the group), she revealed the hidden tunnel far below in the cellar. Leading them there, the group quickly worked its way back down the stair, along the hidden tunnel, and into the wharf cavern with underground-river going galleys, scores of ghoul and ghast sailors, and much-needed stacks of supplies. One galley was loaded up, and the party sailed off into the darkness on a demon-headed ship surrounded by Drow priestesses and slavering ghouls. 
+
+Findings
+
+ As noted above, choosing to spend preparation time on selected highlights of the adventure really paid off. (And note that Gygax adventures are generally pretty open-ended with demands for DM expansions, with D3 surely the pinnacle of those.) I created illustrations of the outside of the Black Tower and the Great Fane which set the scenes well (above); and also floor maps of the inside of the Black Tower, thinking that was a likely necessary battle to have (in fact, the module text comes close to fully describing the layout; was there a map that was cut for space?). I skipped all random encounters which turned out to be the right thing to do. Based on prior games (which were always short on time), I really did not expect the group to make it all the way to the High Priestess of the Fane, so at that point I was flipping through the book in an ad-hoc fashion trying to interpret her defenses there. The players actually took great joy in my discomfort when I blurted out this fact. (But possibly on a future run I might plan that final encounter out a bit more.)
+
+ Module D3 has some of Gygax's most fantastic descriptive text, but it is tangled up with rules information and material the players should not know -- recall that this is before the invention of "boxed text" which would set the scene for players as they enter a new area. Again, concentrating on the highlight areas, I drafted a page of my own effective "boxed text" for the outer encounter areas: the Garden Path, the Vault, the Black Tower, and the entry to the Egg of Lolth. I surely wouldn't do it for every room, but being able to edit out the essence of Gygax's flowery descriptions, and setting each encounter zone by sharing most of his words with the players, felt right. I think it would be a shame to play through D3 and not get to encounter his descriptive language here. 
+
+ In particular, Paul S. noted after using the "weird cinnabar eye cusps" to see clearly in the Vault, and thus viewing its "true splendor... [as] a dark fairyland", how reminiscent this was of the mystical lenses in Jack Vance's story of Cugel the Clever, "Eyes of the Overworld" ( link ). Asked Paul, "Is what I'm seeing now the real thing, or just a fraudulent illusion? That's creepy!". It's one of those great observations that I smacked my head for being blind to in advance (no pun intended), and wish I'd thought to play up ahead of time.
+
+ Nowadays I am ready to use miniatures in the game, almost only if the players request it for clarity. (This happened in another game last year and it worked out pretty well.) I actually created and brought simple scale battlemaps of the first floor of the Black Tower, and also the "Gatehouse" encounter (outer hex Q²49), but neither of them were used. 
+
+ A lot of Gygax's creations from this era of Advanced D&D have an overwhelming number of special abilities (Drow, Demons, Kuo-Toa, etc.; their descriptions run several pages each) that even I can't keep track of during fast-paced play. So I make the decision to streamline those, too, and try to pick around 3, at most 5, abilities to highlight during play. A few of the Drow minor abilities get snipped out as I do this, but this too feels like a correct decision.
+
+ A possibly more legalistic issue to Drow powers is that if you play them by strict AD&D rules, then they would inherit the powers from other elves in the Player's Handbook ; in particular, 90% resistance to sleep and charm spells. But that resistance doesn't show up anywhere in the OD&D rules that I'm using (even Supplement-I, Greyhawk ), and so that's a power that the Drow here do not have. The players in my game relied quite heavily in more than one place for charm spells against certain Drow, to gain information and guidance; whereas technically as published that would likely not be possible. Truthfully, I didn't mind either the pacing pickup or reduction in wall-of-powers to track. But was the AD&D elf resistance to charm specifically an invention to prevent this stratagem in D1-3? Also, it's fortunate for the players in this regard that the description for Drow says they know the "common tongue", in addition to various underground races (and honestly I didn't even think to consider any language barrier for them during play). 
+
+ On the other hand, all Drow did have both boosted saving throws and magic resistance being checked -- and yet they seemed to routinely fail both every time I checked them. Generally the players in this game had great rolls working in their favor (making almost all their saves), and terrible rolls on the part of my monsters (failing almost all their saves and resistance checks). So certainly that was a helping hand on this particular mission. 
+
+ My Book of Spells finally feels "right". Everything that happens with magical effects feels correct, efficient, quick, and necessary; never skewed or irritating to the proceedings. 
+
+ Keep in mind that at high levels, long-lasting invisibility is both very powerful and widely available (via spells, rings, cloaks, invisibility spheres , etc.). Part of my preparations for high-level is to always consider the interaction of invisible scouts into each area and whether and how they might be discovered, etc. (among the first details in any area description; see back in my D1 game when I was caught flat-footed at the need for that). 
+
+ My expectation was that this would be final appearance of this group of pregenerated PCs and this campaign sequence, and I wouldn't mind ending on a high note in this way (there was a heartwarming round of applause from the players at the end of the game). But at the end there was more than one request to continuing playing with them somehow. One inquiry was to actually go back and re-play module G3 from a few years ago ( link ): that's probably the most physically brutal adventure in the series, and the players were short-handed, so they got mercilessly pasted in that adventure. Another possibility, I think, is to start expanding to other locations in Gygax's underworld; as the PC's ended sailing on the waters of the Pitchy Flow, it seems like a pretty clear opening to adventures in the realms of the Mind Flayers, Kuo-Toa, Sunless Sea, etc. But that's the end of the Gygax-penned adventures for now!
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+17 comments:
+
+ 2013-10-26 
+
+ SciFi Saturday – UPF Ship Names 
+
+The Star Frontiers: Knight Hawks Campaign Book concludes with a treatment of the Second Sathar War, a grand campaign scenario for two players, simulating an all-out war between the UPF and Sathar invaders throughout the Frontier sector of space. This includes a complete "Order of Battle" listing all the ships available to each side at the time of the conflict (upwards of about 100 ships per side; CB p. 55). Below I present a list of ship names for every one of the UPF vessels involved in the campaign:
+
+UPF Ship Name Roster
+
+ Assault Scouts (14) – Stiletto (TM8), Dauntless (TM9), Razor (TM9, Ares91), Scimitar (TM15, Ares91), Dagger (TM15, Ares91), Rapier (TM16, Ares91), Lancet (TM16, Ares91), Avenger (SFKH1), Justifier (SFKH1), Morning Star (SFKH1), Starpacer (SFKH1), Dirk (SFKH1), K'Riss (SFKH4), Doboru (SFKH4), Arrow (Ares95), Remora (Ares95)
+
+ Frigates (7) – Z'Gata (TM8, Ares91), Driadia (TM9, Ares91), Shimmer (TM15, Ares91), Zz' Nakk'T (TM16, Ares91), Z'Yttl (SFKH1), Daring (SFKH1), Flying Cloud (SFKH4), Electron (Ares88), Proton (Ares88)
+
+ Destroyers (5) – Allison May (TM9), Melinda McCoy (SFKH1), Chivalry (Ares88), Faith (Ares88), Arcturon (Ares95)
+
+ Minelayers (3) – Z'Rak't Zoz (TM16), Hiskassan, Siren
+
+ Light Cruisers (8) – Courageous (TM15, SFKH1, Ares91), Honor (Ares88), Glory (Ares91), Audacity, Gallant, Resolution, Valorous, Stoutheart
+
+ Heavy Cruisers (1) – Zamra (Ares91), Grak (Ares91)
+
+ Assault Carriers (3) – McCormick, Kimura, Hakosoar
+
+ Battleships (3) – Admiral Clinton (TM9, CB48, Ares88), Admiral Morgaine (CB48), Admiral Harsevoort (CB48)
+
+Source Key: TM = Tactical Operations Manual (i.e., boardgame rules, with page number); CB = Campaign Book (with page number), SFKH (SFKH official module, with number), Ares ( Dragon magazine Ares section, with issue number). Where no source is given, the names were added by myself (Delta). 
+
+Where did these names come from? First, note that the campaign ship rosters precisely match the number of cardboard counters for each ship type that come in the SFKH boxed set -- so you can just split up all the counters to each player and that represents their total fleets. There is one exception: while the order-of-battle text gives the UPF side just 2 Assault Carriers, the box comes with 3 Assault Carrier counters (A, B, and C). For simplicity, I do give this third carrier to the UPF player (also: at some point I lost an Assault Scout, so they don't get that). 
+
+Given that synchronization, I started by compiling all the ships identified by name in the Tactical Manual, the Campaign Book, official SFKH Modules, and various Dragon/Ares magazine articles -- at that point I was pretty close to having an official name for every ship in the boxed set (excepting fighters, who go without names).
+
+Now, some ship types are given an overabundance of names -- more than exist in the boxed set -- and with some outliers, I've included them all above (e.g.: assault scouts, frigates, and heavy cruisers). Compare to the values in parentheses for the actual number commissioned in the Second Sathar War, and use the extra names for any new ships or replacements. But in other cases, there were some missing ship names that needed to be filled in. So I did an analysis of the existing names and made up some new ones that fit the same character. Generally, for UPF vessels, we see names that are in one of the following categories: (1) synonyms for the word "courage", (2) weapon types, especially small blades, (3) names of people (including non-human aliens), and possibly (4) names of places. (Note that this pretty much closely matches how U.S. Navy ships have been named; frequently using a person or city/state name.) I've followed the same distribution of each for the ones that I added.
+
+Some publications I didn't include above: Ares #17, prior to the fold-in to Dragon magazine, has an article on miniatures variants (basically the same content as the conversion booklet that comes with the miniature packs, here credited to Carl Smith), including a scenario with a battleship Constellation , destroyer Port Yziar , and frigate Klikk-T'llicck . However, this contradicts the key point that the UPF only has 3 battleships (with the names given above), and the article has other details incorrect, so I consider it to be non-canon. Meanwhile, the much later Zebulon's Guide supplement has so many contradictions and misunderstandings inside that it's painful for me to even read it, so I've skipped that, too.
+
+Other notes: Ares86 includes a UPF assault scout named Devastator , duplicating a name previously given for a Sathar destroyer (in SFKH1), so that was not included above. Ares91 has a light cruiser named Courage , which in the interest of clarity has been assumed to be the same as the vessel Courageous (originally from TM15). This scenario also includes two heavy cruisers in the battle, even though the UPF only has one in the entire fleet per the boxed set (but I've included both names above). Ares96 speaks of a UPF frigate called the Hellscar , which seems much more likely the name of a Sathar vessel, and so I've moved it to that list instead. (Perhaps these are more miscommunications due to Sathar saboteurs? Crafty devils.)
+
+With this list, I never have to think about making up a new name, I just
+ pick one from the established list -- for example, that's what I did 
+for my new boardgame scenarios from earlier in the year ( link to the 1st ). I'll treat the Sathar fleet in a separate post next week.
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+2 comments:
+
+Labels:
+ starfrontiers 
+
+ 2012-12-03 
+
+ Spells Through the Ages – Charm Person 
+
+In classic D&D, the 1st-level spell charm person was one of the strongest possible selections for a beginning wizard character (possibly second only to sleep ). It had no hit-die cap, so even the mightiest fighter in the game had about a 50% chance of missing the save and being neutralized by it; and it was possibly indefinite in duration, creating the possibility of nigh-permanent servitors or long-term secret double-agents (as used by certain notable monsters like vampires and ogre mages). Let's see how it evolved over the years:
+
+ Original D&D -- Charm person was not included in the Chainmail fantasy rules, but it was in the earliest version of D&D (for example, before the invention of magic missile ): 
+
+ Charm Person: This spell applies to all two-legged, generally mammalian figures near to or less than man-size, excluding all monsters in the "Undead" class but including Sprites, Pixies, Nixies, Kobolds, Goblins, Orcs, Hobgoblins and Gnolls. If the spell is successful it will cause the charmed entity to come completely under the influence of the Magic-User until such time as the "charm" is dispelled (Dispell Magic). Range: 12". [Vol-1, p. 23] 
+We'll note how potent the spell is, in that "it will cause the charmed entity to come completely under the influence of the Magic-User". It's even referenced prior to the spells section with similar powerful effect: "Monsters can be lured into service if they are of the same basic alignment as the player-character, or they can be charmed and thus ordered to serve" (Vol-1, p. 12). And charm person is ascribed to monsters such as Vampires, Dryads, and Nixies, who can use it to "enslave" victims for a year or more each (Vol-2). As we'll see, later editions will start nerfing that, but I like the clarity and simplicity of play here (what you do is what the M-U says; no weaselly debate over whether it's in your nature or not). In addition, it seems to be effectively unending, at least until someone thinks to cast a "Dispell Magic" on the victim. I find that this spell alone makes solo play in OD&D almost untenable; the first time you encounter any 1st-level magic-user, they can cast charm person , and you'll probably fail your save and be out of the game. Of course, the larger your adventuring party, then the less of a proportional loss any single character will make (and note that Vol-1 recommends a referee to player ratio of about 1:20, and possibly up to 50! [Vol-1, p. 5]). 
+
+ Greyhawk Supplement -- Normally, the OD&D Greyhawk supplement is not something I would check in on individually, but in the midst of its expanded spell list, it effectively errata'd two specific 1st levels spells -- charm person and sleep (indicative of the relative great power and utility of those spells; the only other spell so modified is charm monster , so as to keep the symmetry with charm person ). Here's what it says:
+
+ Charm Person: Intelligence allows the charmed person to eventually free itself from the charm. A check will he made on the following basis, and if a score equal to a save vs. magic is made the charm is broken. Charms do not affect the Undead. 
+
+ Intelligence Check Every 
+
+ up to 6 month 
+
+ 7-9 three weeks 
+
+ 10-11 two weeks 
+
+ 12-15 week 
+
+ 16-17 two days 
+
+ 18 and above day 
+
+ [Sup-I, p. 21] 
+So obviously, the major change here is to downgrade the effect from permanent-until- dispelled , to merely indefinite-until-the-next-save-per-intelligence. It's still potentially long term (especially for those of average intelligence or less), but likely does not last forever.
+
+ Dalluhn Manuscript -- Here's an extra-credit little look at what's called the "Dalluhn Manuscript" or "Beyond This Point Be Dragons" (per the cover), which is highly likely to be an early play copy cribbed from a pre-publication D&D draft. I can't avoid looking at the text here with interest:
+ 
+ Charm Person : This spell applies to all mammalian figures equal to or less than man-size, excluding all monsters in the "Undead" class but including Sprites, Goblins, Orcs, etc. If the spell is successful, it will make the charmed person completely under the influence of the Magic-User for a length a of time equal to 6 plus the level of the Magic-User. Notice that's almost exactly the same language as seen in OD&D ("completely under the influence", etc.). It doesn't try to list every subject monster in the game. But most importantly: it has a very short duration, e.g., just 7 turns for starting-level Magic-User. Is the indefinite duration in OD&D just a typographical accident from leaving that clause out? I wonder. 
+
+ Holmes Basic D&D -- Here's our "transitional" edition before D&D entirely bifurcates from AD&D. Basically it copies the original D&D text, with the Greyhawk errata included. It has the identical range (120 feet underground) and still includes the precise phrase "come completely under the influence of the magic-user". The table to determine later saving throws is identical to the one we see in Greyhawk . (Thus, for brevity, I won't bother to include it here.) 
+
+ Advanced D&D 1E -- In AD&D, this is one of the spells which rather inconveniently gets split into a series of back-references, because what comes first in the book is the very similar druid spell, as follows:
+
+ Charm Person Or Mammal: This spell will affect any single person or mammal it is cast upon. The creature then will regard the druid who cast the spell as a trusted friend and ally to be heeded and protected. The spell does not enable the druid to control the charmed creature as if it were an automaton, but any word or action of the druid will be viewed in its most favorable way. Thus, a charmed creature would not obey a suicide command, but might believe the druid if assured that the only chance to save the druid's life is if the creature holds back an onrushing red dragon for "just a round or two". Note also that the spell does not empower the druid with linguistic capabilities beyond those he or she normally possesses. The duration of the spell is a function of the charmed creature's intelligence, and it is tied to the saving throw. The spell may be broken if a saving throw is made, and this saving throw is checked on a periodic basis according to the creature's intelligence: 
+
+ Intelligence Score Period Between Checks 
+
+ 3 or less 3 months 
+
+ 4 to 6 2 months 
+
+ 7 to 9 1 month 
+
+ 10 to 12 3 weeks 
+
+ 13 to 14 2 weeks 
+
+ 15 to 16 1 week 
+
+ 17 3 days 
+
+ 18 2 days 
+
+ 19 or more 1 day 
+
+ If the druid harms, or attempts to harm, the charmed creature by some overt action, or if a dispel magic (q.v.) is successfully cast upon the charmed creature, the charm will be broken automatically. The spell affects all mammalian animals and persons. The term person includes all bipedal human and humanoid creatures of approximately man-size, or less than man-size, including those affected by the hold person spell (q.v.). If the recipient of the charm person/charm mammal spell makes its saving throw versus the spell, its effect is negated. [PHB, p. 55-56] 
+Then later in the magic-user's section:
+
+ Charm Person: Except as shown above, this spell is the same as the second level druid spell, charm person or mammal (q.v.), but the magic-user can charm only persons, i.e. brownies, dwarves, elves, gnolls, gnomes, goblins, half-elves, halflings, half-orcs, hobgoblins, humans, kobolds, lizard men, nixies, orcs, pixies, sprites, and troglodytes. All other comments regarding spell effects apply with respect to persons. [PHB, p. 65] 
+And like some spells, there is errata-like information in the DMG; first for the druid version:
+
+ Charm Person Or Mammal: If at the same time this spell is cast the subject is struck by any spell, missile or weapon which inflicts damage, the creature will make its saving throw at +1 per point of damage sustained. Naturally, this assumes damage is inflicted by members of the spell caster’s party. 
+
+Remember that a charmed creature’s or person’s priorities are changed as regards the spell-caster, but the charmed one’s basic personality and alignment are not. The spell is not enslave person or mammal. A request that a charmee make itself defenseless or that he/she/it be required to give up a valued item or cast a valuable spell or use a charge on a valued item (especially against the charmee’s former associates or allies) could allow an immediate saving throw to see if the charm is thrown off. In like manner, a charmed figure will not necessarily tell everything he/she/it knows or draw maps of entire areas. A charmed figure can refuse a request, if such refusal is in character and will not directly cause harm to the charmer. Also, a charm spell does not substantially alter the charmee’s feelings toward the charmer’s friends and allies. The charmed person or creature will not react well to the charmer’s allies making suggestions like "Ask him this question..." The charmee is oriented toward friendship and acceptance of the charmer, but this does not mean that he/she/it will put up with verbal or physical abuse from the charmer‘s associates. [DMG p. 43] 
+
+And finally errata for the magic-user version:
+
+ Charm Person: Attacks causing damage upon the subject person will cause a saving throw bonus of +1 per hit point of damage sustained in the round that the charm is cast. [DMG p. 44] 
+(Phew!) The primary new inventions here are several mechanical tinkerings given in an attempt to reduce the spell from the simple and devastating effect originally given in OD&D ("come completely under the influence of the Magic-User"). That is: There is evidence of enormous tension in how powerful the spell is, and the ways in which it has been used by dungeon-delving adventurers in the past (and hence an tremendous increase in the verbosity of the rules text). In this case (specifically in the Druid spell text) we see a switch to having the victim "regard the druid who cast the spell as a trusted friend... not... an automaton... not obey a suicide command...", and more of the same in the DMG expansion. Unfortunately, this new rule opens the door to widespread rules-lawyering, as casting the spell is likely to initiate a prolonged philosophical debate about how a given character treats a "trusted friend and ally" (possibly in opposition to other friends and allies), in what cases they might "refuse a request", how likely they are to be duped into thinking they can stop a dragon for "a round or two", etc. So this would be one of the places where I've found that AD&D makes the game sometimes painfully subjective and argumentative (much like new interpretations of alignment, illusions, etc.) -- so that we might fold this into the greater trend of Silver-Age naturalism, perhaps.
+
+But in addition, there are yet other provisions for breaking the spell, including (a) automatic termination if the caster harms the charmed person, and (b) a generous new saving throw whenever damage is taken from anyone in the caster's party (as per the DMG). The table of intelligence-based saves is also given some refinement, with more categories given, etc. 
+
+Another minor wrinkle is that if look at the OD&D spell, or the druid spell given here, the list of possible target types is open-ended, with a basic and simple rule-of-thumb given to adjudicate it (in OD&D, "all two-legged, generally mammalian figures near to or less than man-size"; in the AD&D Druid spell, "all bipedal human and humanoid creatures of approximately man-size, or less than man-size"). But the magic-user version includes a closed-form list of racial types, without any of the language of "including" or "for example"; thereby apparently restricting the use-cases from any new creatures that might be added to the game. You might reasonably choose to ignore that (i.e., continue to play by the OD&D rule); but it seemed enough of a serious issue to require a Gygax-penned Dragon article expanding the list to those types from the Fiend Folio and beyond -- including, in fact, the rather severe dictum that "players must attempt to remember the list of creatures affected" ( Dragon #90, p. 16)!
+
+Finally, as noted above, the spell is included as an ability for many powerful monster types, including vampires (since OD&D), ogre magi (since Sup-I, Greyhawk ), and even the greatest demons (as of Sup-III, Eldritch Wizardry ). This is a key component for how those evil creatures can survey and subvert nearby human communities on a long-term basis.
+
+ Advanced D&D 2E -- As usual, the 2E spell is basically a direct copy-and-paste from the 1E text, with some minor grammatical editing. The effect is identical with regard to: range and number effected (one); caster status of "trusted friend and ally", with all previous restrictions and ambiguities; immediate termination if the caster harms the charmee; identical table of intelligence-based saves, etc. (Thus I have chosen to forego copying the entirety of the text here.) It does bring back the open-ended effect on creatures types, to wit: "The term person includes any bipedal human, demihuman or humanoid of man-size or smaller, such as brownies, etc." Also, two somewhat interesting corner-case refinements are added at the end (although exhibiting the 2E tendency of being unable to make up its damned mind about a given mechanic): 
+
+ If two or more charm effects simultaneously affect a creature, the result is decided by the DM. This could range from one effect being clearly dominant, to the subject being torn by conflicting desires, to new saving throws that could negate both spells... 
+
+ Note: The period between checks is the time period during which the check occurs. When to roll the check during this time is determined (randomly or by selection) by the DM. The roll is made secretly. [2E PHB] 
+The latter actually does address a question I had looking at the 1E text: "Can't the caster calculate the exact time of the next saving throw, and wait for that moment to cast a new charm person spell or the like?" With this modification, the time of termination becomes unpredictable, and the casting magic-user can no longer manage it automatically like an accountant with a spreadsheet. More generally, I don't see why this couldn't be a regular rule for the system, with long-term spell effects being subject to some amount of unpredictable modification by the DM.
+
+ Dungeons & Dragons 3E -- The major change in 3E is the shortening of the spell from the open-ended duration (as given by the special table for saving throws) to one that is only 1-hour-per-caster-level: 
+
+ Charm Person: Range: Close (25 ft. + 5 ft./2 levels), Target: One person, Duration: 1 hour/level -- This charm makes a humanoid of Medium-size or smaller regard the character as a trusted friend and ally. If the creature is currently being threatened or attacked by the character or the character's allies, however, he receives a +5 bonus on his saving throw. 
+ 
+ The spell does not enable the character to control the charmed person as if the person were an automaton, but the subject perceives the character's words and actions in the most favorable way. The character can try to give the subject orders, but the character must win an opposed Charisma check to convince the subject to do anything he or she wouldn’t ordinarily do. (Retries not allowed.) A charmed person never obeys suicidal or obviously harmful orders. Any act by the character or the character's apparent allies that threatens the charmed person breaks the spell. Note also that the character must speak the person’s language to communicate the character's commands, or else be good at pantomiming. 
+This version is at least somewhat simplified (compared to the behemoth that is the 1E AD&D text), but keeps fundamentally the same wibbly-wobbly restrictions with regard to the text on a "trusted friend and ally", "not... an automaton", "never obeys suicidal orders", etc. In fact, it strengthens them, by now making any threatening act by the caster's allies grounds for automatic termination of the spell (as opposed to granting a saving throw from damage, as in 1E-2E). 
+
+Now, as observed above, the greatest change is in removing the schedule for intelligence-based saves, and replacing it with the much shorter 1-hr/level duration. In some sense, this makes the spell more elegant, by removing the need for the large table, and bringing it in line with the way durations are expressed in most other spells. But unfortunately the effect completely neutralizes the use of the spell for long-term surveillance and espionage, as it had been used in many campaign and adventure plot points up until the time of 3E. In particular, the fact that the 1st-level spell remained on so many major monster lists (ogre magi, demons, etc.), with such a paltry effect, looked downright silly and spawned some bewilderment among players. More generally, this served as a poster-child for the 3E trend of taking 1E spells with long-term campaign usage, and narrowing them to only combat use within a single dungeon crawl. 
+
+On the one hand, 3E did introduce a more heavy-duty spell called dominate person which strips away many of the restrictions built up to this point ("generally force the subject to perform as you desire"). But: (a) it is a 5th-level wizard spell, (b) while it is used for the new vampire ability, it is left out of most other monster ability lists (see above), and (c) the duration is still only 1-day/level, and thus much less than the simple charm available in editions 0-2 (and so still limited for some plot purposes). To access an equivalent indefinite-duration power, you'd actually need to utilize the enslave ritual in the Epic Level Handbook . 
+
+ Moldvay Basic D&D -- Now let's check in on the parallel line of Basic D&D that was published after Holmes, and concurrently with the AD&D line: 
+
+ Charm Person: This spell can be used on any human, or human-like creature (such as bugbears, gnolls, gnomes, goblins, hobgoblins, lizard men, ogres, pixies, or sprites). It will not affect undead, nor creatures larger than an ogre. If the victim fails to make a saving throw vs. Spells, the victim will believe that the spell caster is its "best friend" and will try to defend the caster against any threat (real or imagined). If the caster speaks a language that the charmed creature understands, commands may be given to the victim. Any commands given will usually be obeyed, except that orders against its nature (alignment and habits) may be resisted, and an order to kill itself will be refused. Creatures with above average intelligence (a score of 13-18) may make a new saving throw each day. Creatures with average intelligence (a score of 9-12, which includes the monsters listed above) may save again once per week, and creatures with below average intelligence (a score of 3-8) may save again once each month. (A charm may be removed by a dispel magic spell.) [Moldvay, p. B16] 
+Like the OD&D and Holmes versions, the spell here keeps its open-ended list of creature types, such that the DM can clearly apply it to new types as desired. But unlike those editions, we see that this version has folded in the key ambiguous restrictions first seen in AD&D, re: "best friend", "orders against its nature (alignment and habits) may be resisted", etc. Those restrictions are nicely edited down, however, and they don't specify the auto-termination for caster attacking the charmee, nor extra save for allies causing damage (although they might reasonably be extrapolated by any DM). The long table has also been edited out, being replaced by a very elegant rule of one save per day, week, or month, depending on whether the creature's intelligence is above, equal to, or below average. Once again I'll say that Moldvay has done a very nice job of perceiving the essence of the spell, and he's spent the time to write it up far more elegantly than in other editions. 
+
+ Mentzer Basic D&D -- In the Mentzer version of the rules, the charm person spell (actually the first magic-user spell in the game) fundamentally has the same effect as in Moldvay above. However, it again blooms to a much larger expanse of text, because (a) Mentzer seems to write to a much lower reading level, (b) the details are given more examples as to what does and does not qualify for the language given (including an in-game example boxed paragraph), and (c) the rules are split between player's and DM's books, with most of the content merely hinted at in the former, and then given specifics in the latter. All together it runs 16 paragraphs (which I will forgo here, since I don't have a digital copy and would have to retype the whole thing). 
+
+The one change I can spot in this version is that, like AD&D, it seems to veer back towards suggesting use of a fixed and closed list of creatures types effected. It says (DM's Rulebook p. 14), "You may decide the exact creatures affected, or you may use the list below". It then proceeds to give a separate paragraph for these apparently distinct ruling strategies for the spell; first a list of criteria "if you wish to make your own list", and secondly a closed-form list of "creatures in this set which are subject to Charm Person", ending with the pointer, "NOTE: Some other creatures given in the EXPERT and COMPANION Sets may also be Charmed. They are listed in each set." All in all, Moldvay expressed in a single paragraph the same idea that it takes Mentzer sixteen; or perhaps charitably we might say that Mentzer has had more time to see players wrestling over the ambiguous nature of the rule, and tried to give more detail to adjudicating it (but honestly: it's really the former). 
+
+ Allston Rules Cyclopedia -- Largely the Rules Cyclopedia spell looks like the Mentzer version, again fairly verbose, split between the main spell text with the simple rule for durations a la Moldvay (p. 45) and a "more complex system" given in the DM's Procedures chapter, featuring an alternate table for durations which mostly resembles the one from Greyhawk/AD&D (although with even more categories, almost a separate one for each distinct point of Intelligence; p. 144-145). All together there are 12 paragraphs and 2 separate tables for this one 1st-level spell. Again, I would replicate it here but the text-copy out of my PDF version seems based on broken OCR and therefore prohibitive for me to correct. 
+
+ Summary -- Charm person is a spell that seems to have simultaneously been at war with itself, its designers, editors, players, and referees. The spell that seemed so simple in OD&D was apparently seen as overpowered and abusive in later years (and even I must admit: it pretty much breaks solo play in OD&D all by itself). The text for the spell massively inflated, contracted, and re-inflated in different rulebooks over the years, presenting what must seem like a crushing weight of rules language to the incoming player for the single 1st-level spell -- and frequently split, re-addressed, and errata's in multiple books of the same ruleset. I'm pretty sure that no other 1st-level spell had such an enormous mass of rules text devoted to it over the years (although the phantasmal force illusion, at 2nd or 3rd level, is in the same general class).
+
+As noted above, I've personally been long aggravated by the spell in its AD&D form, with its ambiguous and personality-dependent (even philosophy-dependent) restriction, and the propensity to argue ad nauseum over what a certain character would "ordinarily do". The expectation that such psychological and moral-based debates would be a regular part of D&D play is something that really annoyed me about so-called Silver Age naturalism -- and slowed the pace of many games to a dreadful crawl (and not of the exploring-the-dungeon type). Furthermore, the soft-and-fuzzy "best friends" rule doesn't match any of the fantasy literature I can think of, which in contrast does feature many cases of enchantment in which the heroes are forced into actions they definitely wouldn't normally take, irrespective of their inner desires and motivations.
+
+So, I'm very much a proponent of a short and simple-to-parse rule in any of my RPG gaming; if that means that a certain spell is a very powerful one, then so be it (and in fact it make it more compatible with most fantasy literature, and game-balanced with a very small number of spells memorized by any wizard). If we must modify charm person, then I think the best idea would be a straight duration limitation like most other spells (as I did in OED: Book of Spells , limiting it to a straight 1 week period), or maybe a significant saving-throw bonus, or (if absolutely necessary) boosting it to a higher spell level. Among the many reasons that I'm delighted to play OD&D instead of AD&D is being able to avoid debate over the ubiquitous 1st-level magic-user spell charm person . 
+
+[Illustration by royblumenthal under CC2 .]
+
+Posted by
+
+ Delta 
+
+at
+ 
+ 05:00 
+
+17 comments:
+
+ Next Posts 
+ 
+ Home 
+
+Subscribe to:
+ Posts (Atom) 
+
+ About Me
+
+Delta
+
+ College lecturer in mathematics and computer science, ex-computer game programmer, D&D streamer. 
+ 
+ View my complete profile 
+
+ Testimonial
+
+"Maybe the nerdiest 15 seconds that I've ever listened to in my entire life" -- Luke Gygax
+
+ D&D House Rules in Brief
+
+ Attacks: d20 + HD + AC ≥ 20
+
+ Scale: 1" = 5 ft., 1 round = 10 sec
+
+ Encumbrance: Stone units.
+
+ Money: Silver standard.
+
+ Classes: Clerics removed.
+
+ View more detail 
+
+ Wandering DMs
+
+Our YouTube channel 
+
+Live Chat Sundays 1 PM ET
+
+ OED Games
+
+My game company
+
+ Bluesky
+
+My micro blogger
+
+ GitHub
+
+My code repository
+
+ Add-Ons for OD&D
+
+ Original Edition Delta 
+
+House rules for OD&D
+
+Free download
+
+ OED: Book of Spells, 2E 
+
+Core spells in a concise booklet
+
+Available at Lulu.com
+
+ OED: Book of War 
+
+Mass combat with miniatures
+
+Available at Lulu.com
+
+ OED: Deck of Spells 
+
+Memorization made easy with old-school style spell cards
+
+ Popular Posts
+
+ First Post! Original D&D 
+
+ The Big Mistake in Weapon vs. Armor Adjustments 
+
+ Why Did Natural 20's Become Automatic Hits? 
+
+ What is the Best Combat Algorithm? 
+
+ Testing Balanced Dice 
+
+ Spells Through the Ages – Fireball 
+
+ SciFi Saturday – Boardgame House Rules 
+
+ Critical Hits Tables 
+
+ Damn You, Gygax! Part 4 
+
+ Spells Through The Ages – Contact Other Plane 
+
+ Blog Archive
+
+ ▼ 
+
+2025
+ 
+ (1) 
+
+ ▼ 
+
+February
+ 
+ (1) 
+ 
+ Why Did Natural 20's Become Automatic Hits? 
+
+ ► 
+
+2024
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+2023
+ 
+ (16) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (1) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2022
+ 
+ (14) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (2) 
+
+ ► 
+
+2021
+ 
+ (41) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2020
+ 
+ (35) 
+
+ ► 
+
+November
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2019
+ 
+ (56) 
+
+ ► 
+
+December
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (4) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2018
+ 
+ (73) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (8) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (9) 
+
+ ► 
+
+May
+ 
+ (7) 
+
+ ► 
+
+April
+ 
+ (10) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (7) 
+
+ ► 
+
+2017
+ 
+ (70) 
+
+ ► 
+
+December
+ 
+ (3) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (11) 
+
+ ► 
+
+July
+ 
+ (14) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2016
+ 
+ (60) 
+
+ ► 
+
+October
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (11) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2015
+ 
+ (53) 
+
+ ► 
+
+December
+ 
+ (3) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (7) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+2014
+ 
+ (87) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (8) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (9) 
+
+ ► 
+
+May
+ 
+ (10) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (8) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2013
+ 
+ (79) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (7) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (8) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2012
+ 
+ (75) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (7) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (10) 
+
+ ► 
+
+June
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (13) 
+
+ ► 
+
+2011
+ 
+ (143) 
+
+ ► 
+
+December
+ 
+ (13) 
+
+ ► 
+
+November
+ 
+ (12) 
+
+ ► 
+
+October
+ 
+ (15) 
+
+ ► 
+
+September
+ 
+ (17) 
+
+ ► 
+
+August
+ 
+ (15) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (14) 
+
+ ► 
+
+April
+ 
+ (14) 
+
+ ► 
+
+March
+ 
+ (13) 
+
+ ► 
+
+February
+ 
+ (15) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2010
+ 
+ (80) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (7) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (14) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (2) 
+
+ ► 
+
+May
+ 
+ (13) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (1) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2009
+ 
+ (68) 
+
+ ► 
+
+December
+ 
+ (7) 
+
+ ► 
+
+November
+ 
+ (3) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (8) 
+
+ ► 
+
+March
+ 
+ (5) 
+
+ ► 
+
+February
+ 
+ (9) 
+
+ ► 
+
+January
+ 
+ (16) 
+
+ ► 
+
+2008
+ 
+ (25) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (2) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2007
+ 
+ (21) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (1) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (1) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (9)

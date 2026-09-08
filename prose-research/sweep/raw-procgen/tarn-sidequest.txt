@@ -1,0 +1,195 @@
+ 
+
+ It Was Inevitable: An Interview with Tarn Adams on Dwarf Fortress - Sidequest 
+
+ Facebook 
+
+ Twitter 
+
+ Instagram 
+
+ RSS 
+
+ WWAC 
+
+ Tumblr 
+
+ Mastodon 
+
+ About 
+ 
+ About Us 
+
+ Pitch Us 
+
+ Contributors 
+
+ Comment Policy 
+
+ News 
+
+ Reviews 
+ 
+ Video Game Reviews 
+
+ Tabletop Game Reviews 
+
+ Mobile Game Reviews 
+
+ Features 
+
+ Essays 
+
+ Interviews 
+
+ Select Page 
+
+ It Was Inevitable: An Interview with Tarn Adams on Dwarf Fortress
+
+ by Elvie Mae Parian | Jul 23, 2020 | Interviews , Video Games | 0 comments 
+
+ Dwarf Fortress has established itself as a focus of cult admiration. Though Dwarf Fortress may not be immediately recognizable to the mainstream gaming community, it is a long-standing pillar in PC gaming and its steady popularity among enthusiasts has earned it a place in gaming history. 
+
+ An intricate simulation game, Dwarf Fortress throws you into the responsibility of managing a colony of dwarves in a randomly generated world. Whether your focus is to build a successful, self-sustaining fortress or to simply go on a solo adventure out into the dangerous world, the game progresses through a series of intensely elaborate scenarios and potential obstacles that will inevitably lead to chaos, calamity, and comedy. Dwarf Fortress originated as ASCII freeware, lending itself to getting retranslated and remixed across many early web communities depending on whose hands it landed in. It will soon be seeing a special graphical version in its Steam release .
+
+ I was blessed to have the opportunity to open up a conversation with Tarn Adams, co-founder of Bay 12 Games and developer of Dwarf Fortress , discussing the game’s influence and how time and the changing climate has brought financial hurdles that challenged the game’s ongoing development, having originated as an entirely free project before turning towards a donation-based model.
+
+ Dwarf Fortress began as an ASCII game and continued to embrace this minimalist style until the development of the upcoming graphical version.
+
+ Despite being a very particular and niche game, Dwarf Fortress has a large community and cult following. This community has conceived an immense amount of creative work produced by players who are directly inspired by the game. Can you provide your perspective on the role of video games, whether focusing on Dwarf Fortress specifically or the medium as a whole, and how they can be used as a storytelling tool and even possibly a service?
+
+ That was the main reason we made the game—the storytelling potential—and our design process involved writing stories that we’d like the game to produce, in the same way you might draw several example maps while designing a map generator. This has been part of games of many genres for a long time. Our personal experience grew out of the roguelikes and strategy games, [where] there are even standardized names for these stories, like “YASD” for a Yet-Another-Stupid-Death or “AAR” for After Action Report. Allowing a broader range of stories requires a broader range of systems and mechanics, or at least, that’s been our approach.
+
+ Over in pen-and-paper land, certainly the approach can be completely different, and I imagine that’s true of digital games as well, though I haven’t played a lot of multiplayer games, or single-player games that use a different method to get at emergent stories. There’s also some intriguing crossover; for instance, people have used generated Dwarf Fortress worlds as inspiration for pen-and-paper RPG settings to varying degrees. There’s still a lot of unexplored territory here.
+
+ What were your initial reactions to the growth of the game’s early following? Can you elaborate more on how the Dwarf Fortress ’ community is integral and deeply influential to the game’s development behind the scenes?
+
+ We were amazed. We hadn’t been a part of other communities that had experienced sudden explosive growth, so the possibility hadn’t really occurred to us, especially since we’d been slowly growing an audience of ~200 people over the previous six years.
+
+ With our earlier games, we’d incorporated feedback, and even had some modding spring up.  This was all organized on our forums, and that continued once Dwarf Fortress came out. There were some obvious parts like bug catching and people getting help with the game and giving suggestions, but over time we also set up a place for community story games and other sorts of things that the community came up with. Volunteers have helped us with porting, testing, and the bug tracker. Right now, the community is working on a transcript for the latest podcast episode. They’ve also organized in-person events in previous years. Every month we have a Q&A that also gives us a lot of valuable feedback on development.
+
+ Can you talk about some of the new features to come in upcoming updates, such as a potentially even more complex character system and magic? Do you ever see the game expanding upon and tightening the more political elements, such as waging war across a longer term or even negotiating across groups and nations? Do you ever see the game having mechanics that are more similar to what one would see in more linear strategy-based titles?
+
+ First, of course, we’re going to get the graphics and interface update up on Steam and itch.io . After that, I imagine there’ll be a period where we are adjusting to whatever that new reality is, but the features we had planned seem reasonably independent of that, and our plan is to continue along with that once things stabilize. The first step is to get caught up with some villain features we had delayed once the Steam and itch.io work needed to start. The framework there allows plots to manifest and be tracked over years, so it relates to political elements, certainly. In fact, concurrent with this work is also the army stuff we’d been planning to do, which relates to your second question, ha ha. We’ll see how far we get. There are some issues, in that there’s a larger restructuring necessary to make political subgroups work better, and in particular to make them flexible enough that we can have truly evolving situations that also respond well to player intervention.
+
+ Once that part is handled, we’ll be diving into the myth/magic/map rewrite that we’ve been calling the “Big Wait,” simply because the map rewrite—which is a core part of the myth/magic work—is likely to take a while. Our record is 26 months, I think, between major versions, and I can only hope it won’t take that long—but it is a gigantic project that doesn’t really have many cuttable corners left. But at the end of that, we should have a fully customizable setting generator that’ll take the game places I can’t imagine myself, which should be pretty cool.
+
+ You have cited numerous fantasy texts and tabletop games as having been your primary sources of inspiration. In an old piece for the New York Times , there was commentary on the unhealthy culture that has spawned from the addictive qualities encouraged by many modern games. Can you discuss how these viewpoints have evolved, especially in light of the recurring discourse revolving around microtransactions and pay-to-win systems? In addition, where does this put Dwarf Fortress in this current climate?
+
+ When we got to online auction houses and lootboxes, I feel like I kind of lost some familiarity with all of what was going on, and I have no idea what the latest related innovations are. Seems like a lot of gray areas, but also clear lines being crossed in terms of what people are doing, and how they talk about their players.  And it doesn’t often relate to making the game itself better. There are obligations to others that people have even when securing their living and their health insurance and so forth, if that’s something they have to secure—as we do.  We certainly had to change our own operation in order to secure potential treatment. But that’s some distance, I think, from pondering about how to maximize whale yield or whatever the fuck.
+
+ In a more recent interview with Noclip , you actually do offhandedly mention that you have played several contemporary titles. How have these games resonated with you in particular, and can you elaborate on whether they have influenced your development on Dwarf Fortress at all?
+
+ Ha, yeah, it’s not as if we weren’t inspired and influenced by games as well! This is pretty clear to people that played the games we grew up with, I think, whether that’s the roguelike influence or some of the other procedural-heavy titles. More recently—back when I had a console that wasn’t broken—I was splitting my playing time pretty evenly between PC and console games. Dwarf Fortress development is so far behind the existing plans that I’m not sure I can point at much clear influence recently, though I’m assuming it’s there. But I’ve enjoyed them! Just got through another Factorio binge, as a kind of quarantine balm. The Nemesis-y/Legion-y development has been fun to watch, as it’s playing in the same ballpark we hop around in.
+
+ How has your relationship and time invested with Dwarf Fortress affected your daily life? What were some of the most noteworthy changes and adjustments that had to be made compared to your life prior to your entrance in games development?
+
+ I’d been writing games for as long as I remember, so for the most part it hasn’t felt like an adjustment, just a continuation of the work we’d do after school. But school and the professor job eventually ended, and the game did come to occupy more of my time around 2007-8 when I was able to go full-time. Zach [Adams, co-founder of Bay 12] went full-time some years after, and overall it has been pretty cool, of course, to be able to work on the game instead of doing things we weren’t as enthusiastic about. There does need to be a constant effort to maintain some sort of reasonable balance when the structure of work becomes amorphous, though.
+
+ Why do you think Dwarf Fortress sustains its very proactive following? Why do you think it stands out compared to other experiences?
+
+ There are several reasons why people play the game, whether that’s because of emergent stories, community stories, building megaprojects, or tinkering with systems. And Dwarf Fortress is fairly exceptional in those areas, or at least has enough for people to keep coming back, especially as new stuff continues to come into the game. A lot of players and others following the project are aligned with where we’re taking the game, looking forward to what they think will potentially come out of some of the future changes. There are many people that drift in and out, checking back up with us over the years to see where it’s at.
+
+ Do you ever see Dwarf Fortress ever having a “completed” state?
+
+ Nope! I think at this point the plans that we have have probably outpaced our ability to finish them, so it’s all just a matter of priorities and managing circumstances and whatever else.
+
+ Dwarf Fortress can be downloaded in all its original glory through Bay 12 Games  and wishlisted on the Dwarf Fortress Steam page . One way to participate in the community is through Bay 12’s own hosted forums and by listening to Dwarf Fortress Talk , a podcast hosted by Tarn Adams and other development team members that routinely gives updates and answers questions about the game. 
+
+ Elvie Mae Parian 
+
+ Elvie somehow finds bliss in purposefully complicating the art of storytelling and undertaking the painful practice of animation. If you see her on Twitter at @lvmaeparian , she is doing neither of those things. She currently helps with managing the socials to ensure that the secret recipe will never be revealed.
+
+ Share this:
+
+ Click to share on X (Opens in new window) 
+ X 
+
+ Click to share on Facebook (Opens in new window) 
+ Facebook 
+
+ Click to share on Mastodon (Opens in new window) 
+ Mastodon 
+
+ Click to email a link to a friend (Opens in new window) 
+ Email 
+
+ Click to share on Tumblr (Opens in new window) 
+ Tumblr 
+
+ Like this:
+
+ Like Loading... 
+
+ Related 
+
+ Leave a Reply Cancel reply 
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+
+ Recent Posts
+
+ Postgame.31 – Socks Are Just Little Guys for Your Feet 
+
+ GYGO Cosy: Stardew Valley Gets An Update, The Sims Gets An Official Fanfic 
+
+ Caligula Effect 2: My Body is Filled with Regret 
+
+ GYGO Mobile: Roblox, Epic Games, You Know the Drill 
+
+ Pretentious Game Jam is Authentically Good 
+
+ Popular Posts
+
+ GYGO Cosy: Stardew Valley Gets An Update, The Sims Gets An Official Fanfic by Zainabb Hull 
+
+ Postgame.31 – Socks Are Just Little Guys for Your Feet by Melissa Brinks 
+
+ Caligula Effect 2: My Body is Filled with Regret by Cress 
+
+ Stardew Valley Mods for 2022 (and Beyond) by Tia Kalla 
+
+ Pretentious Game Jam is Authentically Good by Melissa Brinks 
+
+ Recent Comments
+
+ JosDruiventros on Nine Weird-Ass Pokémon Builds from the Competitive World 
+
+ Marcus Beyer on Pasión de las Pasiones: A Latinx Stereotype-Fueled Nightmare 
+
+ Matteoka on How Playing Notpron In 2005 Helped My Programming Career In 2017 
+
+ Ron Knowling on Pasión de las Pasiones: A Latinx Stereotype-Fueled Nightmare 
+
+ Grace Benfell on Final Fantasy VII Remake Misunderstands the Power of Drag 
+
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+
+To find out more, including how to control cookies, see here:
+ 
+ Cookie Policy 
+
+ Facebook 
+
+ Twitter 
+
+ Instagram 
+
+ RSS 
+
+ © 2024 Sidequest - speaking in vector 
+
+ Subscribe 
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website 
+
+ %d 
+

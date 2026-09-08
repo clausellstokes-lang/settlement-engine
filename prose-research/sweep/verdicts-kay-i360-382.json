@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 360,
+   "feature": "edition and house style",
+   "claim": "Kay says he does not deliver a book until it is close to where he wants it and is therefore very lightly edited across his three English-language publishers.",
+   "source": "Guy Gavriel Kay, interviewed by Rodger Turner for SFSite",
+   "url": "https://brightweavings.com/sfsite/",
+   "quote": "so I’m very lightly edited",
+   "page": "answer on publishers' editing"
+  },
+  {
+   "index": 361,
+   "feature": "other: cross-section of a society",
+   "claim": "Kay says he likes to work with cross-sections of a culture or society and so tends to have figures from many different classes.",
+   "source": "Guy Gavriel Kay, quoted in Sandy Auden, 'A Question of Character', UK Sci Fi Channel website",
+   "url": "https://brightweavings.com/sfchannel/",
+   "quote": "cross-sections of a culture or society",
+   "page": "middle of the article"
+  },
+  {
+   "index": 363,
+   "feature": "per-speaker register",
+   "claim": "Kay says characters he thinks of as minor grow in importance because he likes their voice.",
+   "source": "Guy Gavriel Kay, quoted in Sandy Auden, 'A Question of Character', UK Sci Fi Channel website",
+   "url": "https://brightweavings.com/sfchannel/",
+   "quote": "grow in importance because I like their voice",
+   "page": "early in the article, on making characters"
+  },
+  {
+   "index": 364,
+   "feature": "other: telescoping historical time",
+   "claim": "Kay says telescoping the Reconquista's three hundred years into effectively two generations lets him intensify the reader's response by keeping it with one set of characters.",
+   "source": "Guy Gavriel Kay, interviewed by Guy Haley, SFX #93",
+   "url": "https://brightweavings.com/sfx/",
+   "quote": "telescoping events into effectively two generations",
+   "page": "final section of the interview"
+  },
+  {
+   "index": 365,
+   "feature": "other: research must be digested not dumped",
+   "claim": "Kay names as failed fiction writing the book in which great gobbets of raw fact are tucked in like an undigested meal.",
+   "source": "Guy Gavriel Kay, interviewed by James Schellenberg and David M. Switzer, Challenging Destiny #11",
+   "url": "https://brightweavings.com/challengingdestiny/",
+   "quote": "great gobbets of raw fact are tucked into the book",
+   "page": "answer on balancing nonfiction and fiction"
+  },
+  {
+   "index": 371,
+   "feature": "other: history as residue on ordinary lives",
+   "claim": "Kay says that in Sailing to Sarantium he wanted the protagonist to be less central to the great events and to examine how those great events impact ordinary lives.",
+   "source": "Guy Gavriel Kay, chat transcript, Event Horizon 'Flashpoint' hosted by Jim Freund",
+   "url": "https://brightweavings.com/eventhorizon/",
+   "quote": "how those great events can impact on ordinary lives",
+   "page": "early in the transcript, on the premise"
+  },
+  {
+   "index": 372,
+   "feature": "other: worldbuilding consistency as a game",
+   "claim": "Kay says Tolkien would have constructed an elaborate explanation for a map discrepancy as part of his worldbuilding game, and declines to do so himself.",
+   "source": "Guy Gavriel Kay, chat transcript, Event Horizon",
+   "url": "https://brightweavings.com/eventhorizon/",
+   "quote": "as part of his worldbuilding",
+   "page": "answer to Ran on the maps in Lions and Sarantium"
+  },
+  {
+   "index": 373,
+   "feature": "other: know the period before varying it",
+   "claim": "Kay says that a fantasy based on a period is a variation on a theme and that a writer has to know the theme before trying variations.",
+   "source": "Guy Gavriel Kay, interviewed for Deep Magic ezine",
+   "url": "https://brightweavings.com/deepmagic/",
+   "quote": "you have to KNOW the theme before you try variations",
+   "page": "answer on settings and history"
+  },
+  {
+   "index": 374,
+   "feature": "other: intuition described after the fact",
+   "claim": "Kay warns readers to be sceptical when writers present intuitive processes as thought-out planning, saying his own approach was an evolution he discovered rather than a strategy laid out in advance.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History', boingboing.net",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "be skeptical when writers present intuitive processes as thought-out planning",
+   "page": "body, caveat paragraph"
+  },
+  {
+   "index": 375,
+   "feature": "other: no dates or facts on the page",
+   "claim": "Kay names as a risk of his method that readers will never learn the year of the Treaty of Utrecht in his novels and will not have a desire to learn the real facts assuaged.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History', boingboing.net",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "Readers will never learn the year of the Treaty of Utrecht",
+   "page": "body, downsides section"
+  },
+  {
+   "index": 378,
+   "feature": "other: theme over ideology",
+   "claim": "Kay says that in The Lions of Al-Rassan he wanted to explore interactions not ideologies.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History', boingboing.net",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "I wanted to explore interactions not ideologies",
+   "page": "body, Lions section"
+  },
+  {
+   "index": 379,
+   "feature": "other: the reader completes the book",
+   "claim": "Kay says each reader makes the book they read.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History', boingboing.net",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "each reader makes the book they read",
+   "page": "body, A Song for Arbonne section"
+  },
+  {
+   "index": 380,
+   "feature": "other: prescriptive craft rules rejected",
+   "claim": "Kay says his main contribution to the discussion of writing advice is that there are no rules.",
+   "source": "Guy Gavriel Kay, 'Some Writing Advice: Don't Take Others' Advice', LitHub",
+   "url": "https://brightweavings.com/some-writing-advice-dont-take-others-advice/",
+   "quote": "There are no rules",
+   "page": "body, middle"
+  },
+  {
+   "index": 381,
+   "feature": "other: prescriptive craft rules rejected",
+   "claim": "Kay cites, as an instance of the writing-advice industry he is allergic to, that people everywhere tell you not to use italics.",
+   "source": "Guy Gavriel Kay, 'Some Writing Advice', LitHub",
+   "url": "https://brightweavings.com/some-writing-advice-dont-take-others-advice/",
+   "quote": "People everywhere tell you not to use italics",
+   "page": "opening paragraphs"
+  },
+  {
+   "index": 382,
+   "feature": "other: the past rhymes rather than repeats",
+   "claim": "Kay says he writes with the idea that history may not repeat but it rhymes, attributing the line to the psychoanalyst Theodore Reik rather than Mark Twain.",
+   "source": "Guy Gavriel Kay, 'The Big Idea', Whatever (John Scalzi's blog)",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "quote": "history may not repeat, but it rhymes",
+   "page": "body, on Written on the Dark"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 360,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so I’m very lightly edited",
+   "note": "Raw HTML of brightweavings.com/sfsite/ (HTTP 200, browser UA). GGK: “I’m very slow and somewhat obsessive, so have never delivered a book until I’m quite sure it is just about where I want it to be… and so I’m very lightly edited. In theory, one might have expected problems, given three editors in three countries.” The three-publisher limb: the page says “three editors in three countries” and the interviewer names them earlier — “you are one of the few who separate the Canadian, US and UK markets” — with Kay confirming he is published by a house based in each country, so the English-language limb holds from the page itself, though the phrase “English-language” is not on this page (it is Kay’s wording in the Deep Magic interview)."
+  },
+  {
+   "index": 361,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I also like to work with cross-sections of a culture or society",
+   "note": "Raw HTML of brightweavings.com/sfchannel/ (HTTP 200). “I also like to work with cross-sections of a culture or society, so I’ll tend to have figures from many different classes.” Quote verbatim; both limbs on the page."
+  },
+  {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "grow in importance because I like their voice",
+   "note": "Same page, earlier paragraph on creating characters: “Other characters, who I think of as minor to start with, grow in importance because I like their voice.” Quote verbatim; page hint (early, on making characters) is accurate."
+  },
+  {
+   "index": 364,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By telescoping events into effectively two generations",
+   "note": "Raw HTML of brightweavings.com/sfx/ (HTTP 200), final answer of the interview: the Reconquista “took place over a period of 300 years… By telescoping events into effectively two generations it allows me to intensify the emotional and intellectual response to what really happened by bringing it home to the same set of characters.” The reader limb is carried by the page’s next sentences: “whatever is a strength for the author is, by automatic extension, a strength for the reader.”"
+  },
+  {
+   "index": 365,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "great gobbets of raw fact are tucked into the book",
+   "note": "Raw HTML of brightweavings.com/challengingdestiny/ (HTTP 200), answer on the fact/fiction balancing act: “that great gobbets of raw fact are tucked into the book like an undigested meal. You have to get over them in order to get back to the story. That’s failed fiction writing for me.” Quote and every limb verbatim."
+  },
+  {
+   "index": 371,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "examine how those great events can impact on ordinary lives",
+   "note": "Raw HTML of brightweavings.com/eventhorizon/ (HTTP 200). Freund introduces Kay as author “most recently, Sailing to Sarantium” and asks the premise; Kay: “This time I wanted to make the protagonist less central to the great events and at the same time examine how those great events can impact on ordinary lives.”"
+  },
+  {
+   "index": 372,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as part of his worldbuilding “game,” but here you have it straight",
+   "note": "Same transcript, answer to Ran on the differing LIONS and SARANTIUM maps: “Tolkien would have tried to construct some brilliant elaborate ‘explanation’ for the difference, as part of his worldbuilding ‘game,’ but here you have it straight.” The declining limb is the closing clause."
+  },
+  {
+   "index": 373,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you have to KNOW the theme before you try variations",
+   "note": "Raw HTML of brightweavings.com/deepmagic/ (HTTP 200), answer on settings and history: “if you are doing a fantasy based on a period, a variation on a theme, as it were, you have to KNOW the theme before you try variations!” Capitalisation of KNOW matches."
+  },
+  {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "be skeptical when writers present intuitive processes as thought-out planning",
+   "note": "Raw HTML of brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/ (HTTP 200), caveat paragraph: “But here’s a caveat: be skeptical when writers present intuitive processes as thought-out planning. This was an evolution for me, not a strategic concept. I discovered what I was doing… I didn’t lay it out in advance.”"
+  },
+  {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Readers will never learn the year of the Treaty of Utrecht",
+   "note": "Same essay, downsides paragraph: “There are also downsides, or risks, to how I work… Readers will never learn the year of the Treaty of Utrecht in my novels. They will not assuage any desire to ‘learn the real facts’ about a specific period.” Both limbs on the page."
+  },
+  {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I wanted to explore interactions not ideologies",
+   "note": "Same essay, Lions of Al-Rassan section (immediately after “I changed the three religions of our history”): “I wanted to explore interactions not ideologies.” Quote verbatim, book attribution correct."
+  },
+  {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each reader makes the book they read",
+   "note": "Same essay, A Song for Arbonne section: “If they preferred to just treat the book as a tale … well, each reader makes the book they read.” Quote verbatim; section attribution correct."
+  },
+  {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are no rules. That’s my main contribution to this discussion",
+   "note": "Raw HTML of brightweavings.com/some-writing-advice-dont-take-others-advice/ (HTTP 200), middle of the body. “This discussion” is the essay’s subject, writing advice, opened by “I am, more or less, allergic to writing advice.”"
+  },
+  {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "People everywhere tell you not to use italics",
+   "note": "Same essay, second paragraph: “I am, more or less, allergic to writing advice… Writing advice is an industry on steroids. People everywhere tell you not to use italics.” Allergy, industry and italics limbs all in the opening paragraphs."
+  },
+  {
+   "index": 382,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "history may not repeat, but it rhymes",
+   "note": "Raw HTML of whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/ (HTTP 200), the Big Idea essay for Written on the Dark: “A wise man who was not Mark Twain wrote that history may not repeat, but it rhymes. (His name was Theodore Reik and he was a psychoanalyst … but it always seems to be credited to Twain.) I share that thought. I write with that idea in mind.”"
+  }
+ ]
+}

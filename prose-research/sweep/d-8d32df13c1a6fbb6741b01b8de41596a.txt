@@ -1,0 +1,585 @@
+ 
+ In-Depth Review of the 2024 Dungeon Master's Guide | EN World D&D & Tabletop RPG News & Reviews 
+ Menu 
+ News/Columns 
+ All News 
+ Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ Pathfinder 
+ Starfinder 
+ Warhammer 
+ 2d20 System 
+ Year Zero Engine 
+ Industry News 
+ Reviews 
+ Dragon Reflections 
+ White Dwarf Reflections 
+ Columns 
+ Weekly Digests 
+ Weekly News Digest 
+ Freebies, Sales & Bundles 
+ RPG Print News 
+ RPG Crowdfunding News 
+ Game Content 
+ ENterplanetary DimENsions 
+ Mythological Figures 
+ Opinion 
+ Worlds of Design 
+ Peregrine's Nest 
+ RPG Evolution 
+ Other Columns 
+ From the Freelancing Frontline 
+ Monster ENcyclopedia 
+ WotC/TSR Alumni Look Back 
+ 4 Hours w/RSD (Ryan Dancey) 
+ The Road to 3E (Jonathan Tweet) 
+ Greenwood's Realms (Ed Greenwood) 
+ Drawmij's TSR (Jim Ward) 
+ Features 
+ Million Dollar TTRPG Crowdfunders 
+ Most Anticipated Tabletop RPGs Of The Year 
+ Eric Noah's Unofficial D&D 3rd Edition News 
+ Top 5 RPGs Compiled Charts 2004-Present 
+ Adventure Game Industry Market Research Summary (RPGs) V1.0 
+ Ryan Dancey: Acquiring TSR 
+ Q&A With Gary Gygax 
+ TSR, WotC, & Paizo: A Comparative History 
+ D&D Pronunciation Guide 
+ D&D in the Mainstream 
+ About Morrus 
+ Podcast 
+ Community 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Resources 
+ Wiki 
+ Pages 
+ Latest activity 
+ Media 
+ New media 
+ New comments 
+ Downloads 
+ Latest reviews 
+ EN Publishing 
+ Store 
+ EN5ider 
+ Adventures in ZEITGEIST 
+ Awfully Cheerful Engine 
+ What's OLD is NEW 
+ Judge Dredd & The Worlds Of 2000AD 
+ War of the Burning Sky 
+ Level Up: Advanced 5E 
+ EN WORLD+ 
+ Log in 
+ Register 
+ What's new 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Menu
+ Log in
+ Register
+ Install the app 
+ Install 
+ Upgrade your account to EN WORLD+ and remove most of the site ads. 
+ log in or register to remove this ad 
+-->
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ You are using an out of date browser. It may not display this or other websites correctly. You should upgrade or use an alternative browser . 
+ In-Depth Review of the 2024 Dungeon Master's Guide 
+ Category 
+ Dungeons & Dragons 
+ Category 
+ Reviews 
+ Thread starter 
+ Thread starter 
+ brimmels 
+ Start date 
+ Start date 
+ Nov 12, 2024 
+ In terms of rating the 2024 DMG, I like it much more than the 2024 PHB. 
+ Nov 12, 2024 
+ Replies: 76
+ ---->
+ When Wizards of the Coast announced new versions of the Player's Handbook , Dungeon Master's Guide , and Monster Manual for the 10th anniversary of 5E and the 50th anniversary of Dungeons & Dragons itself, it was not met with cheers. Lots of fans thought it was unnecessary, and I was skeptical about two of those books, I did, however, cheer a revised DMG . 
+Honestly, ever since I bought the first edition DMG , I've always considered the book a necessary evil for running games – an attitude that hasn't changed as the editions did. So when Chris Perkins said he wanted to tear apart the 2014 and reorganize it, I crossed my fingers in hope he'd make it at least more tolerable. 
+ 2014 vs. 2024 ​ One of my issues with the various DMGs over the years is that it contains the rules DMs need that aren't in the PHB because they're situation specific, tied to running the game instead of playing, etc., but oddly, it tends not to be organized well or logically. Same goes with information on how to run a game. 
+For example, in the 2014 book, Chapter One was about creating your own world and includes a section on creating your own campaign, but then creating adventures is Chapter Three, and the information on linking adventures into a larger one and campaign tracking doesn't show up until Chapter Nine. Then "Running the Game" is Chapter Eight. Maybe that logic works for some brains, but it doesn't for mine. 
+The 2024 book gets off to a better start for me by making Chapter One “The Basics” and Chapter Two about “Running the Game,” followed by “The DM's Toolbox” in Chapter Three. Chapter Four is “Creating Adventures” and Chapter Five is “Creating Campaigns.” Your mileage may vary, but that flows much better and is more logical. 
+The 2024 DMG also reflects what the Wizards team has heard from players and DMs since 2014 and the large influx of new players 5E has attracted. At the risk of dating myself, back in my day, you learned D&D just as much from other people showing you what to do as you did from reading the books, and in some cases, maybe more. 
+Today, many people come to D&D from watching actual play videos like Critical Role and while that can be very helpful, it's also daunting. It's all too easy to compare yourself to long-time, famous DMs like Matthew Mercer and Deborah Ann Woll, which is a huge mistake. Plus, it's far easier to pick tips on how to play from AP videos than it is to DM. 
+The 2024 DMG aims to address those challenges, pitfalls, and more. So instead of just being a collection of misc. rules with rudimentary “how to DM” material, and information on magic items, gods, and cosmology, this DMG tries to help new DMs gain confidence and provide established DMs information on how to prep efficiently, handle party conflicts, and even the bane of every DM's life – how to schedule games. 
+ Getting Started ​ Every version of the DMG has information on how to run the game. Varying degrees of how to handle players are also included. The 2024 DMG goes deeper so instead of just address what a DM does, will need, examples of play, and how to run a session, it also includes a section that makes it clear that every DM is unique. It's OK to look to actual play DMs or even DMs in your local community as sources of inspiration, but trying to copy them would be frustrating and futile. 
+Time is also spent on “ensuring fun for all.” That includes several things from making sure the DM and players are on the same page so, for example, a DM who wants to tell a grimdark story with a high mortality rate isn't running for a group of players who just want light adventure or roleplaying political intrigue. Any kind of story can be valid – so long as the players and DM are clear about it and onboard for that type of story. 
+So the 2024 DMG doesn't try to push one way to play D&D or a single story style. Instead it advocates for making sure the DM and players are in harmony. Furthering that are sections about Mutual Respect, Respect for the Players, and Respect for the DM. 
+The chapter on “Running the Game” covers everything from mechanical information to good gaming advice. That includes resolving outcomes for a variety of situations (ability checks, attack rolls, aving throws, advantage/disadvantage, etc.) as well as guidance about group size and how to handle narration. Thinking of sharing DMing duties with someone else? It has advice on that, too, as well has how to handle a session when a player can't make it. 
+This chapter also provides advice on how to run the three pillars of D&D – role-playing/social interaction, exploration, and combat. That's very useful in my opinion because a lot of newbie DMs primarily see combat or run pre-made adventures centered around combat, and kind of get stuck in hack-and-slay mode or freeze if players try to initiate other aspects of D&D . This section also addresses consequences (a great source for future encounters and even adventures!), and how to improvise answers and damage. 
+Even if you're an experienced DM, I think you can glean some good material from sections like these. The Wizards team ran their advice and tips past well-known DMs to be sure it worked and get feedback, so it's all tried-and-true material. 
+ DMGs used to have information the effects of “insanity” in a game. Today, that's rather crass and tasteless. The 2014 DMG switched it to a few paragraphs on fear and horror. The 2024 DMG has a half page on “Fear and Mental Stress” that aims to address the topic reasonably and tastefully. 
+The DM's Toolbox has lots of other information that you'll use to varying degrees. For example, the information on alignments (player and monster), chases, death in the game, environmental effects, etc. will likely pop up at some point during a campaign. Siege equipment, firearms, supernatural gifts, etc. might not. It's still handy to have. 
+Another benefit to leading with those three categories of material is that it's the info a DM is likely to use the most or needs to get started. The 2014 DMG especially annoyed me because I always feel like I'm constantly flipping between sections because related topics might be in different sections, and it had a lot of references to other parts of the book. The latter was especially annoying because it never cited a page number, only a section, which could involve several pages that would then need to be skimmed for the material. 
+ Creating Adventures​ One of the things that deters new DMs and contributes to DM burnout regardless of experience is adventure and campaign planning and preparation. Chapters Four and Five tackle these topics with the intent of making the process less daunting, more efficient and streamlined, without sacrificing imagination or creativity. Chapter Four addresses everything from the initial premise, hooking players, bringing it to an end, and adventure rewards. It even includes info on how to plan exploration and social interaction encounters, not just combat. 
+Even better, Chapter Four has five sample adventures, one for level 1, one for level 2, level 3, level 5, and level 7, you can get see how adventures change in scale and scope as the players go up in level. Each of these adventures is rather broad and stripped down to the essentials with the purpose of demonstrating that adventure prep can be done in an hour and doesn't require pages and pages of material – especially if you follow the earlier advice on improvisation. 
+Chapter Five is about creating a campaign, taking a similar step-by-step approach. As with the prior chapter, it explains how to start and end a campaign, Just as important, it explains the various types of fantasy because D&D can span a variety of flavors and tones. 
+This chapter also showcases the first official, commercial D&D setting – Greyhawk. From premise (and how it's different from Forgotten Realms) to core material and a gazetteer, it serves two purposes. First, it's a prime example of what a setting can look like and how to set a campaign in it. Second, it can be the backbone for a DM, especially a new one, to customize and create their version of Greyhawk. It also details the three primary sources of conflict for Greyhawk campaigns – evil dragons, the cult of Iuz, and Elemental Evil – as examples for Greyhawk-set campaigns as well as creating new ones, with suggestions as to how the campaigns can expand as the players level up. For example, 1st through 4th level players would deal with the effects of young evil dragons, facing more challenging ones and their schemes as they level up. 
+ Reference Material ​ The next three chapters contain two sets of key reference material (cosmology and magic items) with the third chapter improving something that was skimpy in the 2014 DMG (strongholds). The cosmology chapter address the D&D multiverse and planar travel, which you might never use, but it's good to have. 
+The magic item chapter always gets use, and the treasure chapter is 117 pages. The rarity of magic items in the 2024 book is the same as that from the 2014 books, but descriptions were revised to be more concise and fun. They also increased the amount of common magic items. 
+I was concerned about the magic item section because the art in the 2014 DMG is one of the things I loved about that book. It was gorgeous and imaginative, sometimes with a touch of whimsy such as slippers of spider climbing that looked like slippers. 
+Some of that art is duplicated here, but much of it is new. The new art is very well done, but its details are often hard to spot because of how it's treated. The best way to explain it is by using an example from photography – the items look like they're poorly lit so they're too dark to fully appreciate the work that went into them. I'm not sure why the art director made that choice, but I think it's a mistake. It definitely doesn't showcase the art well. 
+Or to say it another way, the magic item art in the 2014 book makes it feel like a high-end catalog from a shop in Waterdeep. The art in the 2024 book feels like flipping through old photographs that have dimmed a bit so you can't make out details well. 
+Chapter Eight is about bastions, an expanded version of the skimpy stronghold rules from the prior DMG . It was such a gap in the 2014 version that third-party publishers stepped in to fill it. “Bastions” is a better term instead of “stronghold” because it represents the variety of options presented now. Instead of just a castle or fortress, a bastion can be a guild hall, a theater, a library and research facility, and much more. The bastion rules also work well downtime rules to provide a place for downtime, options for what is done during downtime, and much more. It also introduces “bastion turns” for things that happen at the homebase, events, and the fall of a bastion. 
+ Wrapping Up the Book ​ Appendix A is the Lore Glossary. It's such a brilliant idea, I'm stunned no one thought of it before. It's not flawless. Someone's favorite is bound to be omitted. Still, it's a handy reference guide to cut down on having to google famous names and locations. 
+Appendix B is a collection of maps by Dyson Logos DMs can use as needed to save prep time. The maps are deliberately simple so as to not intimidate DMs who want to draw their own. The maps include dungeons (of course), a dragon's lair, farmstead, manor, ship, etc. but you can mix and match as needed, ignore parts of the maps – whatever works to suit your needs and speed up game prep. 
+The D&D Beyond version of the 2024 DMG cites an Appendix C: Tracking Sheets whereas the physical book sprinkles the tracking sheets throughout the book in logical places. I can understand the reluctance to duplicate content in a physical book, but I wish they had for ease of use. That said, I believe D&D Beyond is going to release a package of the tracker sheets for easy access. 
+ The Good, Bad & In Between ​ I really like the reorganization of the 2024 DMG . It's more logical and its content flows better. I love the expanded material on getting started, building rapport within a group, making sure everyone is on the same page for the type and style of the campaign, DM improvisation, etc. And I love, love, love the lore glossary. Using Greyhawk as a resource and example of how settings can campaigns can be created is an inspired idea. So is including adventure outlines so DMs can see how to do them and how they can build upon each other. The wealth of tracking sheets and the map appendix are very handy DM aids. Both will get a lot of use. 
+One thing I hate is that there aren't any writing credits. Some content is taken word for word from the 2014 DMG , like the chase rules. Some is taken from unused content written for other books (I have industry contacts that confirmed that). Even though Wizards' contracts clearly allow them to use commissioned material whenever and however they want, I think it's a bit disrespectful to exclude writer credits or at least a contributors mention. 
+I love the many tracking sheets. They're really handy. I don't love the design of the tracking sheets. I'd prefer them to be a bit more plain and visually accessible. I still hate that in the print books, art credits are too small and in the seam, making them hard to read. Come on, folks. It's 2024. There are better ways to do it and art credits don't ruin the magic. 
+There was talk of increasing the font size in the books to be more accessible and kinder to aging eyes. I can't find my pica ruler to measure the book's font size, but if it's larger, it's only slightly, and they still don't use black fonts, which would also be more accessible. Digital versions via D&D Beyond can help with font sizes and reading for some people, but not. Those with retinal conditions, for example, can have trouble with light-based devises. 
+The new book is 64 pages larger at 384. That may not seem like a lot, but some of the magic item art is smaller than last time, so it is cramming in a lot of material. 
+I do like that they made a concerted effort for the 2024 DMG to reflect the history of D&D and its various campaign settings. The art includes classic characters like Minsc, Boo, Venger, etc. and images of Ravenloft, Greyhawk, Eberron, etc. 
+ Should I Buy It? ​ One complaint when the 2024 books were announced was “I don't want to buy all new books!” You don't have to, especially for the new DMG . The new PHB tries to entice buyers by presenting new options and revisions that will make people want to buy even though it's completely possible to run a group with characters made from a mix of 2014 and 2024 PHBs . 
+Similarly, the 2024 DMG is designed to encourage purchases through all of that info on how to be a DM or better DM, and the DM tools. But while someone might want both the 2014 and 2024 PHBs because of differences in the content (lists of deities by campaign in the 2014 PHB , and goliath and aasimar player options in the 2024 version), I can't think of a single reason to buy the 2014 DMG if you don't already own it. The art is great, but that alone isn't enough. 
+But should you buy the 2024 DMG if you already own the 2014 one? Maybe, if you find it clumsy, cumbersome, and awkward, it's definitely worth consideration. If you're interested in the sections on building adventures and campaigns, and how to use Greyhawk, either directionally or as inspiration, then it should be higher on your purchase list. 
+What if you're new to the game and don't already own the DMG ? You should absolutely buy it, because the 2024 version is superior in most ways, plus it has the additional material. 
+In terms of rating the 2024 DMG , I like it much more than the 2024 PHB . Both have good content, and I like a lot about how they approach the material. But as I said, I think the new DMG can completely replace the 2014 version, which I can't say about the respective PHBs . 
+Still, the lack of writing credits bothers me. So does the way the magic item art was treated. It's clear the art was beautifully made with fantastic, thoughtful details, but the dark treatment dulls it out. That might seem like nitpicking compared to more important content like information on handling players, establishing rapport and mutual respect, etc., but it does keep it from getting a perfect score. A-. 
+Wide release for the new Dungeon Master's Guide is November 12. 
+ Last edited by a moderator: Nov 12, 2024 
+ -->
+ Reply 
+ Reactions: 
+ evildmguy , clearstream , Quickleaf and 26 others 
+ Click to expand... 
+ log in or register to remove this ad 
+ B 
+ Beth Rimmels 
+ Beth Rimmels is a journalist, editor, and marketing professional. In addition to EN World, her game industry writing has ranged from CityBook VII to The Vampire Codex , as well as Awesome 8's , the multi-setting RPG she is currently designing. She has been a D&D Adventurer's League store organizer and taught a wide range of games at stores and conventions. 
+ 1 
+ 2 
+ 3 
+ … 
+ Go to page 
+ Go 
+ 8 
+ Next 
+ 1 of 8
+ Go to page 
+ Go 
+ Next 
+ Last 
+ Dire Bare 
+ Legend 
+ EN WORLD+ 
+ Nov 12, 2024 
+ #2
+ WotC, and TSR before them, have gone back-and-forth over the decades on how they credit writers, designers, and other contributors. Sometimes, exhaustive lists, other times "WotC Staff" as the sole credit. It seems the company is moving back towards a philosophy that this is a "team effort" and not every contributor needs a credit on the title page. 
+Which sucks. 
+ Reply 
+ Reactions: 
+ Metroido , Fezzwick , Helena Real and 7 others 
+ Scribe 
+ Legend 
+ Nov 12, 2024 
+ #3
+ LOL are those supposed to be Orcs? 
+ Reply 
+ Reactions: 
+ Paragon Lost 
+ D 
+ Demetrios1453 
+ Legend 
+ Nov 12, 2024 
+ #4
+ Scribe said: 
+ LOL are those supposed to be Orcs?
+ Click to expand... 
+There's only one orc that I can see, grinning on the left as the party gets rewards from the elf-queen Yolande. 
+ Reply 
+ Reactions: 
+ Cadence , Whizbang Dustyboots and Bolongo 
+ mach1.9pants 
+ Hero 
+ Nov 12, 2024 
+ #5
+ Scribe said: 
+ LOL are those supposed to be Orcs?
+ Click to expand... 
+They got hunky! 
+ Reply 
+ Reactions: 
+ Fezzwick , Eyes of Nine , Paragon Lost and 2 others 
+ S 
+ sevenbastard 
+ Legend 
+ Nov 12, 2024 
+ #6
+ brimmels said: 
+ Each of these adventures is rather broad and stripped down to the essentials
+ Click to expand... 
+Which is my preference. I don't need to know the back story of every rock, or history of the table cloth. 
+ brimmels said: 
+ Someone's favorite is bound to be omitted
+ Click to expand... 
+Emirikol the Chaotic? Rary the Traitor? I'm sure there are more I just noticed those two on a quick glance. 
+ Reply 
+ Reactions: 
+ FrozenNorth , Neonchameleon and Bolongo 
+ D 
+ Divine2021 
+ Hero 
+ Nov 12, 2024 
+ #7
+ Art seems better than the new PHB. I really do regret buying that book. This looks much better all around. 
+ Reply 
+ Reactions: 
+ Necropolitan , BB Shockwave , Giantrollorc and 2 others 
+ Horwath 
+ Legend 
+ Nov 12, 2024 
+ #8
+ Divine2021 said: 
+ Art seems better than the new PHB. I really do regret buying that book. This looks much better all around.
+ Click to expand... 
+that bar is set so low that you need an excavator to go under it. 
+ Reply 
+ Reactions: 
+ JDR , Ghost2020 , Paragon Lost and 3 others 
+ Distracted DM 
+ Distracted DM 
+ EN WORLD+ 
+ Nov 12, 2024 
+ #9
+ Dire Bare said: 
+ WotC, and TSR before them, have gone back-and-forth over the decades on how they credit writers, designers, and other contributors. Sometimes, exhaustive lists, other times "WotC Staff" as the sole credit. It seems the company is moving back towards a philosophy that this is a "team effort" and not every contributor needs a credit on the title page. 
+Which sucks.
+ Click to expand... 
+My gold standard so far, as far as credits and personalization go, is much of the 3.Xe era. At least the 3.5 books I go back to have art with easily legible credits, the writers are credited, and they even provide their/designer viewpoints on why they do things the way they did them, and how they could be done differently. 
+ Reply 
+ Reactions: 
+ Toriel , maeve , Cadence and 4 others 
+ orial 
+ Explorer 
+ Nov 12, 2024 
+ #10
+ I do like both books. Rules updates, content etc. 
+My only problem is some of the art. Especially the character art in the PHB. Way to much comic style and ‘pink ish’. 
+I miss the ‘gritty’ art style, or is it just me? 
+ Reply 
+ Reactions: 
+ Black Dougal , Someone2345 , ThrorII and 10 others 
+ 1 
+ 2 
+ 3 
+ … 
+ Go to page 
+ Go 
+ 8 
+ Next 
+ 1 of 8
+ Go to page 
+ Go 
+ Next 
+ Last 
+ Post reply
+ Insert quotes…
+ Similar Threads 
+ D&D 5E (2024) 
+ What 2014 settings should get a new 2024 release & what should it get?
+ Kobold Avenger 
+ Jul 6, 2026 
+ *Dungeons & Dragons
+ 8 
+ 9 
+ 10 
+ 11 
+ 12 
+ Replies 
+ 118 
+ Views 
+ 12K 
+ Jul 11, 2026 
+ Azzy 
+ P 
+ D&D General 
+ Practical advice for running 5.5e and 5e PCs side by side
+ Pamphylian 
+ Jul 12, 2026 
+ *Dungeons & Dragons
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ Replies 
+ 67 
+ Views 
+ 9K 
+ Jul 23, 2026 
+ Pamphylian 
+ P 
+ B 
+ D&D Player's Workbook of Epic Adventure and the Dungeon Master's Workbook of Worldbuilding reviews
+ brimmels 
+ May 25, 2026 
+ *Dungeons & Dragons
+ 2 
+ 3 
+ 4 
+ Replies 
+ 34 
+ Views 
+ 15K 
+ May 30, 2026 
+ SothFan 
+ S 
+ D&D 5E (2024) 
+ Switching Subclasses
+ Hatmatter 
+ Jul 27, 2026 
+ *Dungeons & Dragons
+ 2 
+ Replies 
+ 16 
+ Views 
+ 2K 
+ Jul 29, 2026 
+ aco175 
+ D&D General 
+ D&D 5E 2014 & 2024][Roll20 + Discord] The Shattered Crown | Story-Rich Campaign | New Players Welcome
+ obsidiandm 
+ Jul 16, 2026 
+ *Dungeons & Dragons
+ Replies 
+ 1 
+ Views 
+ 1K 
+ Jul 16, 2026 
+ Byrd 
+ Share: 
+ Facebook 
+ X 
+ Bluesky 
+ LinkedIn 
+ Reddit 
+ Pinterest 
+ Tumblr 
+ WhatsApp 
+ Email 
+ Share 
+ Link 
+ Recent & Upcoming Releases 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons) 
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons) 
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ -->
+ -->
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition) 
+ Magical options for spellcasters.
+ Replies (23) 
+ -->
+ -->
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons) 
+ World book for Azeroth
+ Replies (272) 
+ -->
+ -->
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons) 
+ Dark Sun returns in 2027
+ Replies (1967) 
+ -->
+ -->
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons) 
+ Handbook for D&D fighters.
+ Replies (71) 
+ -->
+ -->
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons) 
+ Official D&D Star Wars book
+ Replies (278) 
+ -->
+ -->
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons) 
+ 160-page adventure
+ Replies (269) 
+ -->
+ -->
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons) 
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Forum list
+ Post thread…
+ Related Articles 
+ D&D 5E (2024)   What 2014 settings should get a new 2024 release & what should it get? 
+ Started by Kobold Avenger 
+ Jul 6, 2026 
+ Replies: 118 
+ *Dungeons & Dragons
+ P 
+ D&D General   Practical advice for running 5.5e and 5e PCs side by side 
+ Started by Pamphylian 
+ Jul 12, 2026 
+ Replies: 67 
+ *Dungeons & Dragons
+ B 
+ D&D Player's Workbook of Epic Adventure and the Dungeon Master's Workbook of Worldbuilding reviews 
+ Started by brimmels 
+ May 25, 2026 
+ Replies: 34 
+ *Dungeons & Dragons
+ D&D 5E (2024)   Switching Subclasses 
+ Started by Hatmatter 
+ Jul 27, 2026 
+ Replies: 16 
+ *Dungeons & Dragons
+ D&D General   D&D 5E 2014 & 2024][Roll20 + Discord] The Shattered Crown | Story-Rich Campaign | New Players Welcome 
+ Started by obsidiandm 
+ Jul 16, 2026 
+ Replies: 1 
+ *Dungeons & Dragons
+ Remove ads 
+ Recent & Upcoming Releases 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons) 
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ -->
+ -->
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons) 
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ -->
+ -->
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition) 
+ Magical options for spellcasters.
+ Replies (23) 
+ -->
+ -->
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons) 
+ World book for Azeroth
+ Replies (272) 
+ -->
+ -->
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons) 
+ Dark Sun returns in 2027
+ Replies (1967) 
+ -->
+ -->
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons) 
+ Handbook for D&D fighters.
+ Replies (71) 
+ -->
+ -->
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons) 
+ Official D&D Star Wars book
+ Replies (278) 
+ -->
+ -->
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons) 
+ 160-page adventure
+ Replies (269) 
+ -->
+ -->
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons) 
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Remove ads 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ Light Mode
+ Contact us 
+ Terms and rules 
+ Privacy policy 
+ Help 
+ Home 
+ RSS 
+ Community platform by XenForo ® © 2010-2026 XenForo Ltd. Ignore/Block Essentials by AddonFlare - Premium XF2 Addons 
+ | [XTR] Modal Popups © 2019 XENTR Development | Events Manager by XenCustomize 
+ Discord Integration © Jason Axelrod of
+ 8WAYRUN 
+ XenCarta 2 PRO © Jason Axelrod of
+ 8WAYRUN 
+ Top 

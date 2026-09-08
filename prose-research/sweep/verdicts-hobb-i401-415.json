@@ -1,0 +1,324 @@
+{
+ "name": "hobb",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 401,
+   "feature": "consequence on a household",
+   "claim": "Duits reports that the Dutch translators cut Hobb's clause about the narrator's wet shoes being a misery.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "The entire bit about the wet shoes is left out",
+   "page": "section 6, p.16",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 402,
+   "feature": "place and institution description",
+   "claim": "Duits reports that Stableford calls Hobb's novels elaborately detailed, and illustrates it with her description of the Chyurda mountain people.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012, citing Stableford p.200",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "elaborately detailed",
+   "page": "section 2, p.6",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 403,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb's description of the Chyurda ends on the humblest of them wearing fine furs as if they were homespun.",
+   "source": "Robin Hobb, Assassin's Apprentice p.383, quoted in Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "even the humblest wore fine furs as if they were",
+   "page": "section 2, p.6",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 404,
+   "feature": "translation and register",
+   "claim": "Duits says the Dutch translation Leerling en Meester is written in quite archaic language.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "written in quite archaic language",
+   "page": "section 1, Introduction, p.3",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 405,
+   "feature": "other: word order",
+   "claim": "Duits says the word order of the Dutch translation seems unnatural.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "The word order seems unnatural as well",
+   "page": "section 1, Introduction, p.3",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 406,
+   "feature": "naming and forms of address",
+   "claim": "Duits says that by preserving Lady Patience's name the Dutch translators made the virtue unrecognisable for most Dutch readers.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "the virtue becomes unrecognisable for most Dutch readers",
+   "page": "section 5, p.11",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 407,
+   "feature": "naming and forms of address",
+   "claim": "Duits reports the Dutch translators added information to King Shrewd's name, most likely to clarify the virtue associated with him.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "most likely to clarify the virtue associated with King Shrewd",
+   "page": "section 6, p.13",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf text",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 408,
+   "feature": "civic record register",
+   "claim": "Duits's own Dutch rendering of the first epigraph opens by asserting that a history of the Six Duchies is necessarily a history of its rulers.",
+   "source": "Iris Duits, BA thesis, Utrecht University, April 2012, section 7 'Translation - Passage one'",
+   "url": "https://studenttheses.uu.nl/handle/20.500.12932/11119",
+   "quote": "Een geschiedenis van de Zes Hertogdommen is noodzakelijkerwijs een geschiedenis",
+   "page": "section 7, p.19",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2012-04",
+   "routeHint": "DSpace REST bitstream content endpoint, pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 409,
+   "feature": "civic record register",
+   "claim": "Matthew Oliver says the chapter epigraphs of Assassin's Apprentice are excerpts from a public document, largely a formal history.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), p.45",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "excerpts from a public document, largely a formal history",
+   "page": "p.45",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_ of dc.swosu.edu viewcontent.cgi?article=3044, pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 410,
+   "feature": "civic record register",
+   "claim": "Oliver characterises the voice of Hobb's chapter epigraphs as distant and scholarly.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), p.45",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "written in a distant, scholarly voice",
+   "page": "p.45",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_, pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 411,
+   "feature": "civic record register",
+   "claim": "Oliver calls the official history that opens each chapter dry and impersonal, and says the personal main text feels more authoritative and satisfying than it.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), p.57",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "the dry, impersonal, but objective history beginning the chapter",
+   "page": "p.57",
+   "kind": "analysis",
+   "polarity": "disputes the authority of the record register",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_, pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 412,
+   "feature": "register modulation",
+   "claim": "Oliver says that in the earlier epigraphs Hobb's narrator keeps the style of the epigraphs and of the main text separate, and marks chapter 15 as the point where a poetic lyricism breaches that separation.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "Fitz has largely kept the style of the epigraphs and the main text separate",
+   "page": "section on the 'misted' chapter 15",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_, pypdf",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 413,
+   "feature": "omission as information",
+   "claim": "Oliver says Assassin's Apprentice repeatedly uses sentences that start by telling what a character is not doing.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), section 'Negative Narration'",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "sentences that start by telling what a character is not doing",
+   "page": "section 'Negative Narration'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_, pypdf",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 414,
+   "feature": "omission as information",
+   "claim": "Oliver says that in the early chapters scarcely a page goes by without an obvious example of that negative construction.",
+   "source": "Matthew Oliver, Mythlore 41.1 (Fall/Winter 2022), section 'Negative Narration'",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "quote": "scarcely a page goes by without obvious examples",
+   "page": "section 'Negative Narration'",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2022-10",
+   "routeHint": "Wayback raw capture 20240707045408id_, pypdf",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 415,
+   "feature": "plainness and economy",
+   "claim": "Arnaud Mousnier-Lompré, Hobb's French translator, says her style is very fluid, very clear and very vivid beneath simple appearances.",
+   "source": "Arnaud Mousnier-Lompré, interviewed by Jérôme Vincent, ActuSF, 31 October 2017",
+   "url": "https://www.actusf.com/detail-d-un-article/Interview-de-Arnaud-Mousnier",
+   "quote": "Robin a un style très fluide, très clair et très imagé",
+   "page": "answer to 'Comment définiriez-vous son style ?'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-10-31",
+   "routeHint": "direct curl with browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 401,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The entire bit about the wet shoes is left out",
+   "note": "Raw PDF via DSpace REST bitstream (item 2d2909fb, 45pp). Every limb holds: Duits quotes Hobb's 'My wet shoes were a misery' (AA 323) against Feberwee and Cuijpers's Dutch (246), which drops it. Cite drift only: the quoted sentence sits on printed p.17, its Hobb/Dutch setup on p.16; section 6 is correct."
+  },
+  {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "According to Stableford, Hobb's novels are elaborately detailed",
+   "note": "Verbatim with the (200) page cite intact. The illustration limb holds: Duits writes that an example is the passage where Fitz reaches the Mountain Kingdom and sees the Chyurda, the Mountain people, for the first time. Printed p.6, section 2, both as cited."
+  },
+  {
+   "index": 403,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the description ends on the fine-furs clause — one further sentence closes the block quote after it",
+   "trueWording": "They strode alongside us, mounted as we were",
+   "note": "The quoted words are verbatim on printed p.6 (full form: wore fine furs as if they were no more than homespun, Hobb 383). But the furs clause is second-to-last, not last: the block quote closes with the striding sentence above, ending 'no difficulty keeping up with the horses all day.' Use 'ends on' only of the Chyurda's dress, not of the passage."
+  },
+  {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Leerling en Meester is written in quite archaic language",
+   "note": "Verbatim, with the Dutch title named in the same sentence. Cite drift only: printed p.4, not p.3; section 1 Introduction (pp.3-4) is correct."
+  },
+  {
+   "index": 405,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The word order seems unnatural as well",
+   "note": "Verbatim, same Introduction paragraph as 404 and referring to the same Dutch translation. Cite drift only: printed p.4, not p.3."
+  },
+  {
+   "index": 406,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the virtue becomes unrecognisable for most Dutch readers",
+   "note": "Verbatim; the preceding clause is 'By preserving her name in the Dutch translation', and the two sentences before it establish 'her' as Lady Patience, the only character whose royal status makes her name indicate a virtue. Cite drift only: printed p.12, not p.11; section 5 is correct."
+  },
+  {
+   "index": 407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most likely to clarify the virtue associated with King Shrewd",
+   "note": "Verbatim; the added-information limb is stated twice, 'extra information is added in the Dutch translation' and 'Feberwee and Cuijpers choose to add some information' (Koning Vlijm de Listige for Koning Vlijm). Cite drift: p.13 is right but that page is section 5, Translation criticism - Proper names (pp.10-13); section 6 starts at p.14."
+  },
+  {
+   "index": 408,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Een geschiedenis van de Zes Hertogdommen is noodzakelijkerwijs een geschiedenis",
+   "note": "Verbatim as the opening line of section 7 on printed p.19, under Duits's heading 'De Vroegste Geschiedenis', continuing 'van zijn heersers, de Zieners' — i.e. of its rulers, the Farseers. Appendix A confirms the source text is the novel's opening 'The Earliest History' epigraph (listed as Passage 1: page 1-4), so 'first epigraph' is right; note her passage 1 runs on past the epigraph into the main text."
+  },
+  {
+   "index": 409,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excerpts from a public document, largely a formal history",
+   "note": "Raw PDF via the Wayback capture named in the routeHint (21pp). Verbatim on printed p.45, of 'The chapter epigraphs'; the same page states each chapter begins with a lengthy epigraph selected from a history of the Six Duchies. Page cite correct."
+  },
+  {
+   "index": 410,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written in a distant, scholarly voice",
+   "note": "Verbatim on printed p.45, the tail of the same sentence as 409, modifying the formal history the chapter epigraphs excerpt. Page cite correct. Oliver frames the voice as in-world Fitz's; attributing the epigraphs to Hobb is the outer authorial frame and does not disturb the characterisation."
+  },
+  {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the dry, impersonal, but objective history beginning the chapter",
+   "note": "Verbatim on printed p.57, immediately before the NEGATIVE NARRATION heading. Both limbs hold: the full sentence says the marginalia, that is, the main text, feels more authoritative and satisfying than that history. Nuance for downstream: the sentence is local to the Lady Patience chapter, and Oliver keeps 'but objective' in the descriptor, which the claim drops."
+  },
+  {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "whereas in the earlier epigraphs Fitz has largely kept the style",
+   "note": "Quote verbatim on printed p.62 (twelve-word cap forces the trim; the sentence continues 'of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph'). Chapter 15 limb holds: Oliver locates the blur at the start of the 'misted' section in chapter 15. Two hedges the claim drops — Oliver says 'largely kept', and calls chapter 15 the best example of the blurring rather than its only instance, having already noted ornate style seeping into the 'vision' description."
+  },
+  {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sentences that start by telling what a character is not doing",
+   "note": "Verbatim on printed p.57 under the NEGATIVE NARRATION heading; the source continues 'or feeling', and the claim's 'repeatedly' is carried by the surrounding 'continual insistence' and 'particularly frequent in the early chapters'. Oliver's own coinage for the device is 'negative narration'."
+  },
+  {
+   "index": 414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "scarcely a page goes by without obvious examples",
+   "note": "Verbatim on printed p.57, in the clause 'This is particularly frequent in the early chapters, where...', so the early-chapters limb holds. Oliver then lists three instances from pp.6, 7 and 9 of the novel. Note the kind field says 'measurement': this is an impressionistic frequency claim, not a count."
+  },
+  {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Robin a un style très fluide, très clair et très imagé",
+   "note": "Live page fetched directly with a browser user agent; byline 'Jérôme Vincent - le 31/10/2017' and the question 'Comment définiriez-vous son style ?' both present as cited. The answer continues 'sous des apparences simples', supporting 'beneath simple appearances'. Translator limb confirmed on the same page: ActuSF says he worked on novels by Card, Robin Hobb, Moorcock and Silverberg, and he speaks as a translator ('je traduis... pour l'Atalante')."
+  }
+ ]
+}

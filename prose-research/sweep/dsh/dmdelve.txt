@@ -1,0 +1,899 @@
+Delve format | DMDavid 
+
+ DMDavid 
+
+ Dungeons & Dragons design, advice, tools and inspiration
+
+ Menu 
+ Skip to content 
+ Home 
+
+ Start Here 
+
+ Character Builds 
+
+ Dungeon Masters Tools 
+
+ Dungeon Tiles 
+
+ Poster Maps 
+
+ About 
+
+ Tag Archives: Delve format 
+
+ For Better D&D Fights, Use This 1 Simple Trick That the Designers Won’t Tell You 
+
+ 14 Replies 
+
+ Late in the third edition of Dungeons & Dragons , the design team started presenting each encounter in a 1- or 2-page diagram. By putting everything needed to run an encounter on a page, this “ delve format ” benefited dungeon masters. The format especially suited fourth edition’s focus on tactical combat encounters played on battle maps. It encouraged designers to craft locations that fueled interesting battles.
+
+ Delve format encounter
+
+ While many DMs favored the easy-to-run encounters, the delve format took some heat too. Critics argued that lavishing so much space and attention on encounters encouraged adventure designs that forced players to battle through all those set pieces. The approach led to linear adventures, and it discouraged letting players use diplomacy, stealth, or ingenuity to skip combat. All that sunk cost in maps, stats, and setup tempted DMs to make fights inevitable.
+
+ So in fifth edition, the pendulum swings to the opposite extreme. Today’s adventures avoid framing situations as encounters. Instead DMs get a monster name in bold without any extra detail that might invite combat. Sample fifth-edition design: “This 20-by-20 room has 3 manticores . Fight them or whatever. Doesn’t matter.” I’m paraphrasing.
+
+ But combat remains part of D&D, and such lightweight non-encounters can lead to too many dull battles. Too often, characters and their foes crowd a doorway trading damage until monsters drop. If the designers aimed to make roleplaying interaction and exploration seem more appealing, then mission accomplished!
+
+ Even though the delve format seemed to foster more interesting combat encounters by lavishing more space on them, the key ingredient was rarely the extra text; the key was the map .
+
+ The delve format shined a spotlight on encounter maps and inspired designers to dream bigger than a 20-by-20 room. Better maps led to better battles.
+
+ Fifth edition abandoned the delve format, but it still features maps. Often, the secret to better D&D fights lies in imagining a better location. Not every potential battlefield merits the attention, but many do. I compare drawing the map for a likely battle to piling kindling. If a spark appears, I want fire.
+
+ Designing better maps doesn’t necessarily mean every fight needs to play on a grid of 5-foot squares. But even if your players favor narrative combat, more knotty locations probably mean sketching a rough map of the battlefield and of relative positions. (DMs, your players may not love theater of the mind as much as you do, so check.)
+
+ The 1 simple trick is more of a mindset: When you you map a battleground, start by seeking ways to favor the home team , usually the monster. 
+
+ Smart monsters will seek lairs that benefit them, but even beasts will instinctively seek the best place to ambush prey. From a game perspective, the most engaging fights will come from battlegrounds that let monsters exploit their abilities. Flyers want airspace to rise from reach and perhaps walls, columns, or stalactites to swoop behind. Giants need space to move. Intangible creatures want tight, knotted corridors with walls to phase through.
+
+ Mapping locations that favor the home team makes sense, but DMs seldom do it. Too often we fall into patterns set by the oldest dungeons. Originally, DMs like Dave Arneson and Gary Gygax drew maps, and then populated them by rolling from tables. We came to mock those monster hotels, but just about every DM has started with a map and sprinkled it with picks from the monster manual. Modern dungeons still tend to settle for that pattern. I’ve seen official adventures with beholders in small rooms under low ceilings and even an archmage guarding a hallway. Here’s a super genius who spent a lifetime making space and time his playthings, and somehow he winds up alone in a hall where he can only hope for a high enough initiative to loose a cone of cold before getting beaten to death. (His stats say Int 20, but if he fails to use his turn to teleport far away, I suspect daddy got him into wizard school.)
+
+ This old pattern of drawing a rectangle and posting a few monsters heavily favors the players. The party brings durable heroes who can block attacks, plus spellcasters and sharpshooters who can heap damage on monsters while safely behind the defenders.
+
+ Maps that draw characters into interesting locations make sense for the monsters, and bring more fun. For help designing maps that fuel dramatic battles, see D&D Locations and Tactics that Encourage Dynamic Combat Scenes .
+
+ Sometimes a battlefield that favors the characters can prove even more fun than one that favors the monsters. To work, such locations must invite some bigger advantage than a defensive line at the door. While most fights at a door prove tiresome, if the players cross to such a choke point and then draw their foes there, the battle rewards clever play and brings fun. Often the most exciting battles pit characters against more powerful foes, and then add features that players can use to even the score. Classic adventures like Night’s Dark Terro r and Isle of the Abbey turn this premise into sieges, where players have time to prepare a defense against hordes of foes. Whatever the specifics, players feel clever while they savor the thrill of defying the odds.
+
+ Good maps don’t help if everyone winds up crowding the door. To avoid bottlenecks, flip the usual script: Give the party time to enter a room and scatter before having the monsters intrude. Beyond that, break from the old pattern of thinking of each room as a separate encounter area. Instead, think of encounter areas as clusters of rooms, hallways, and whatever else lies in earshot. As scattered monsters sense intruders, they come from different directions. If the set of rooms includes a route that leads behind the characters, monsters can circle back and give those wizards and archers a taste. For good battles against the leader types who make the players’ first targets, let the leaders move into view on their turns.
+
+ When you map a location for a likely battle, think of the monsters, and then favor the home team.
+
+ Share this:
+ Tweet 
+
+ Email a link to a friend (Opens in new window) 
+ Email 
+
+ This entry was posted in Advice and tagged battle maps , Dave Arneson , Delve format , encounters , Gary Gygax on March 10, 2020 by David Hartlage . 
+
+ My DMs Guild Adventures
+ Search
+
+ Search for: 
+
+ Recent Comments
+ Slinky on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You 
+ Joseph R. on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You 
+ Ilias on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You 
+ Joe on Wizards of the Coast Announces More D&D for Everyone, but Not All of It’s for You 
+ Heightdiff on The Right Monster for the Job: D&D Monsters Listed by Function 
+ Archives
+
+ 2026 
+
+ + 
+ August 
+
+ (1)
+
+ 2025 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ July 
+
+ (1)
+
+ + 
+ April 
+
+ (1)
+
+ + 
+ March 
+
+ (1)
+
+ + 
+ January 
+
+ (2)
+
+ 2024 
+
+ + 
+ December 
+
+ (1)
+
+ + 
+ November 
+
+ (1)
+
+ + 
+ May 
+
+ (1)
+
+ + 
+ April 
+
+ (1)
+
+ + 
+ January 
+
+ (1)
+
+ 2023 
+
+ + 
+ November 
+
+ (2)
+
+ + 
+ September 
+
+ (10)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (1)
+
+ + 
+ June 
+
+ (2)
+
+ + 
+ May 
+
+ (2)
+
+ + 
+ April 
+
+ (2)
+
+ + 
+ March 
+
+ (1)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (2)
+
+ 2022 
+
+ + 
+ December 
+
+ (2)
+
+ + 
+ November 
+
+ (2)
+
+ + 
+ October 
+
+ (1)
+
+ + 
+ September 
+
+ (2)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (2)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (4)
+
+ 2021 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (5)
+
+ + 
+ October 
+
+ (6)
+
+ + 
+ September 
+
+ (8)
+
+ + 
+ August 
+
+ (3)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (5)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (5)
+
+ + 
+ February 
+
+ (5)
+
+ + 
+ January 
+
+ (4)
+
+ 2020 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (4)
+
+ + 
+ September 
+
+ (5)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (5)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (5)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (4)
+
+ 2019 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (4)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (5)
+
+ + 
+ June 
+
+ (10)
+
+ + 
+ May 
+
+ (6)
+
+ + 
+ April 
+
+ (6)
+
+ + 
+ March 
+
+ (4)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (5)
+
+ 2018 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (5)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (4)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (2)
+
+ + 
+ February 
+
+ (2)
+
+ + 
+ January 
+
+ (3)
+
+ 2017 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (4)
+
+ + 
+ September 
+
+ (4)
+
+ + 
+ August 
+
+ (5)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (5)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (4)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (5)
+
+ 2016 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (3)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (2)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (2)
+
+ + 
+ March 
+
+ (2)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (4)
+
+ 2015 
+
+ + 
+ December 
+
+ (3)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (2)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (1)
+
+ + 
+ July 
+
+ (2)
+
+ + 
+ June 
+
+ (3)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (3)
+
+ + 
+ January 
+
+ (5)
+
+ 2014 
+
+ + 
+ December 
+
+ (4)
+
+ + 
+ November 
+
+ (4)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (5)
+
+ + 
+ August 
+
+ (6)
+
+ + 
+ July 
+
+ (6)
+
+ + 
+ June 
+
+ (4)
+
+ + 
+ May 
+
+ (6)
+
+ + 
+ April 
+
+ (4)
+
+ + 
+ March 
+
+ (7)
+
+ + 
+ February 
+
+ (5)
+
+ + 
+ January 
+
+ (6)
+
+ 2013 
+
+ + 
+ December 
+
+ (5)
+
+ + 
+ November 
+
+ (5)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (3)
+
+ + 
+ August 
+
+ (4)
+
+ + 
+ July 
+
+ (4)
+
+ + 
+ June 
+
+ (3)
+
+ + 
+ May 
+
+ (3)
+
+ + 
+ April 
+
+ (3)
+
+ + 
+ March 
+
+ (3)
+
+ + 
+ February 
+
+ (4)
+
+ + 
+ January 
+
+ (7)
+
+ 2012 
+
+ + 
+ December 
+
+ (9)
+
+ + 
+ November 
+
+ (9)
+
+ + 
+ October 
+
+ (5)
+
+ + 
+ September 
+
+ (5)
+
+ DM David 
+
+ DM David 
+
+ Categories
+
+ Adventurers League 
+
+ Advice 
+
+ Character builds 
+
+ Conventions 
+
+ D&D fifth edition 
+
+ D&D fourth edition 
+
+ Dungeon master's tools 
+
+ Inspiration 
+
+ Lair Assault 
+
+ Living Forgotten Realms 
+
+ Miniatures 
+
+ Products 
+
+ Reviews 
+
+ Role-playing game design 
+
+ Role-playing game history 
+
+ Rules 
+
+ Scenarios 
+
+ Uncategorized 
+
+ Meta
+
+ Log in 
+
+ Entries feed 
+
+ Comments feed 
+
+ WordPress.org 
+
+ Subscribe to Blog via Email
+
+ Enter your email address to subscribe to this blog and receive notifications of new posts by email.
+
+ Email Address 
+
+ Subscribe 
+
+ Copyright © 2026 David Hartlage

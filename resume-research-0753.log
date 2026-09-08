@@ -1,0 +1,23 @@
+inflight scanner restarted (pid 57560)
+== in-flight progress (sweep/inflight/SUMMARY.md) ==
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 07:53:04 (inflight-scan.py; every 120 s; the autosave seals this dir)
+
+| sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
+|---|---|---|---|---:|---|---|---|
+| ai | critic |  | result | 11 | — | — | 06:11:37 |
+== sweep state before ==
+{"tolkien":{"claims":874,"verdicts":874,"kept":641,"partial":214},"martin":{"claims":990,"verdicts":990,"kept":763,"partial":107},"dnd":{"claims":1212,"verdicts":1212,"kept":906,"partial":265},"ai":{"claims":1518,"verdicts":1407,"kept":1129,"partial":197},"kay":{"claims":1103,"verdicts":1103,"kept":631,"partial":100},"leguin":{"claims":924,"verdicts":858,"kept":666,"partial":117},"wolfe":{"claims":1255,"verdicts":1255,"kept":766,"partial":217},"hobb":{"claims":696,"verdicts":696,"kept":363,"partial":174}}
+== ai: last run wf_6dd3b009-2b0, prev args args-ai-r11.json -> next tag r12 ==
+{"name": "ai", "tag": "r12", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai-r12.json", "bytes": 11498, "chunks": 12, "toVerify": 179, "findAngles": [], "extraAngles": [], "droppedComplete": ["procgen-baseline"], "baseIndex": null, "verifiedCount": 1407, "cap": 4}
+  flags: {'regrade': True, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 12 angles [] []
+== dnd: last run wf_2c525e43-1f2, prev args args-dnd-r13.json -> next tag r14 ==
+{"name": "dnd", "tag": "r14", "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r14.json", "bytes": 7786, "chunks": 0, "toVerify": 0, "findAngles": [], "extraAngles": [], "droppedComplete": [], "baseIndex": null, "verifiedCount": 1212, "cap": 4}
+  flags: {'regrade': False, 'skipSynth': None, 'nothingToRun': None, 'cap': 4} chunks 0 angles [] []
+
+== PASTE, one Workflow call per sweep (scriptPath = /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/research-workflow-v3.js; args = the JSON of the file named) ==
+  ai -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-ai-r12.json (   11498 bytes)
+  dnd -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/args-dnd-r14.json (    7787 bytes)
+Then: update /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/LAST-RUNS.json with the new runIds/argsFiles/tags; the autosave seals the kit every 5 min.
+⚠ TAG LAW: the tag (r6, r7…) is a LAUNCH COUNTER, not the owner's round. A launch with no findAngles/extraAngles COMPLETES the previous round.
+   The owner's S-BOUND rounds count FIND rounds only: tolkien/martin have none left; dnd/ai one targeted round (the PLACE register / the ARCHIVAL register);
+   kay/leguin/wolfe/hobb one critic-driven top-up; NO further round after those. A file with nothingToRun=true is NOT launched.

@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 585,
+   "feature": "detection and its failures",
+   "claim": "Clarke told NPR that by the time he closed submissions Clarkesworld had received 700 legitimate submissions and 500 machine-written ones.",
+   "source": "Neil Clarke, interviewed by NPR All Things Considered, 24 February 2023",
+   "url": "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
+   "quote": "we had received 700 legitimate submissions and 500 machine-written ones",
+   "page": "third paragraph of the web write-up"
+  },
+  {
+   "index": 586,
+   "feature": "steerability",
+   "claim": "Alex Hern frames the generated quality of chatbot text as a default register that a concerted effort can break the systems out of.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "break the systems out of their default register",
+   "page": "opening section, second paragraph"
+  },
+  {
+   "index": 587,
+   "feature": "lexical tells",
+   "claim": "Hern reports that half a percent of articles on PubMed contain the word delve, 10 to 100 times more than a few years earlier.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "half a percent of all articles on research site PubMed",
+   "page": "section on Jeremy Nguyen's finding"
+  },
+  {
+   "index": 588,
+   "feature": "lexical tells",
+   "claim": "Hern reports that explore, tapestry, testament and leverage appear far more frequently in ChatGPT's output than on the internet at large.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "all appear far more frequently in the system’s output",
+   "page": "paragraph beginning 'According to another dataset'"
+  },
+  {
+   "index": 589,
+   "feature": "counter-evidence",
+   "claim": "Hern reports that delve is much more frequently used in Nigerian business English than in English or American English.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "is much more frequently used in business English than it",
+   "page": "paragraph beginning 'I said “delve” was overused'"
+  },
+  {
+   "index": 590,
+   "feature": "counter-evidence",
+   "claim": "Hern warns that treating AI-ese as a tell makes African English readable as AI-ese.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "If AI-ese sounds like African English, then African English sounds like AI-ese",
+   "page": "paragraph beginning 'And that’s the final indignity'"
+  },
+  {
+   "index": 592,
+   "feature": "discourse-level tells",
+   "claim": "Hern attributes chatbots' fawning obsequiousness to reinforcement learning with human feedback.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "The fawning obsequiousness of a wild language model hammered into",
+   "page": "opening section, paragraph beginning 'Some of the tells are obvious'"
+  },
+  {
+   "index": 593,
+   "feature": "other: marketplace policy",
+   "claim": "DriveThruRPG's storefront filter defines Handcrafted purely in terms of artwork made without AI-generation programs.",
+   "source": "DriveThruRPG help centre, 'Customer Experience with AI-Generated Content Within Titles', 28 October 2024",
+   "url": "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
+   "quote": "Artwork was made by an artist practicing their craft, without",
+   "page": "section 'What do the different filters mean?'"
+  },
+  {
+   "index": 594,
+   "feature": "other: marketplace policy",
+   "claim": "EN World, quoting Gizmodo, reports that from 31 July 2023 the DriveThru marketplaces would not allow content made primarily of AI-generated writing.",
+   "source": "Gizmodo, quoted by Whizbang Dustyboots on EN World, 25 July 2023",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "quote": "of AI-generated writing will not be allowed",
+   "page": "thread opening post, block quotation from Gizmodo"
+  },
+  {
+   "index": 595,
+   "feature": "detection and its failures",
+   "claim": "The OneBookShelf policy, as quoted by Gizmodo, acknowledged enforcement challenges and rested on partners' goodwill.",
+   "source": "OneBookShelf policy text, quoted by Gizmodo, quoted on EN World, 25 July 2023",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "quote": "trust in the goodwill of our partners to offer customers",
+   "page": "thread opening post, block quotation from Gizmodo"
+  },
+  {
+   "index": 596,
+   "feature": "counter-evidence",
+   "claim": "Porter and Machery found non-expert readers identified AI-generated poems at below-chance accuracy.",
+   "source": "Brian Porter and Edouard Machery, Scientific Reports 14, 26133, 14 November 2024",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "participants performed below chance levels in identifying AI-generated poems",
+   "page": "Abstract"
+  },
+  {
+   "index": 597,
+   "feature": "detection and its failures",
+   "claim": "Accuracy in Porter and Machery's discrimination study was 46.6 percent.",
+   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "Observed accuracy was in fact slightly lower than chance (46.6%",
+   "page": "Results, Study 1"
+  },
+  {
+   "index": 598,
+   "feature": "counter-evidence",
+   "claim": "Participants were more likely to judge AI-generated poems human-authored than they were actual human-authored poems.",
+   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "more likely to judge AI-generated poems as human-authored than actual",
+   "page": "Abstract"
+  },
+  {
+   "index": 599,
+   "feature": "cadence and rhythm",
+   "claim": "Rhythm showed the largest effect in Porter and Machery's ratings: AI poems were rated as having much better rhythm than the famous poets' poems.",
+   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "AI-generated poems are rated as having much better rhythm than",
+   "page": "Results, Study 2"
+  },
+  {
+   "index": 600,
+   "feature": "reader and expert judgment",
+   "claim": "Every one of the five AI-generated poems in Porter and Machery's study 2 was rated higher in overall quality than every one of the five human-authored poems.",
+   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "all 5 AI-generated poems are rated more highly in overall quality",
+   "page": "Results, Study 2, discussion of Fig. 2"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 585,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we had received 700 legitimate submissions and 500 machine-written ones",
+   "note": "Raw NPR page (curl, 200, datePublished 2023-02-24, All Things Considered). Quote appears word for word attributed to Neil Clarke: \"By the time we closed on the 20th, around noon, we had received 700 legitimate submissions and 500 machine-written ones,\" he said. Every limb (Clarke; NPR; at the point submissions closed; 700/500) supported."
+  },
+  {
+   "index": 586,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Without a concerted effort to break the systems out of their default register",
+   "note": "Raw Guardian page (curl, 200). Full sentence: \"Without a concerted effort to break the systems out of their default register, the text they spit out is, while grammatically and semantically sound, ineffably generated,\" preceded by \"you'll have noticed a certain quality to the responses generated.\" Both limbs (generated quality; default register breakable by concerted effort) supported."
+  },
+  {
+   "index": 587,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "half a percent of all articles on PubMed contain \"delve\"",
+   "note": "Raw Guardian page. \"When half a percent of all articles on research site PubMed contain the word 'delve' - 10 to 100 times more than did a few years ago - it's hard to conclude anything other than an awful lot of medical researchers using the technology...\" Both the half-percent figure and the 10-to-100x comparison are on the page (in the Jeremy Nguyen passage)."
+  },
+  {
+   "index": 588,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Explore\", \"tapestry\", \"testament\" and \"leverage\" all appear far more frequently",
+   "note": "Raw Guardian page, paragraph beginning \"According to another dataset\": the four words \"all appear far more frequently in the system's output than they do in the internet at large.\" All four words and the comparison limb supported."
+  },
+  {
+   "index": 589,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In Nigeria, \"delve\" is much more frequently used in business English",
+   "note": "Raw Guardian page: \"In Nigeria, 'delve' is much more frequently used in business English than it is in England or the US.\" Claim's \"English or American English\" maps to the page's \"England or the US\"; substance identical."
+  },
+  {
+   "index": 590,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If AI-ese sounds like African English, then African English sounds like AI-ese",
+   "note": "Raw Guardian page, paragraph beginning \"And that's the final indignity.\" The warning limb is carried by the surrounding text (\"Calling people a 'bot' is already a schoolyard insult... how much worse will it get when a significant chunk of humanity sounds like the AI systems they were paid to train?\"), and the article's frame throughout is AI-ese as a tell."
+  },
+  {
+   "index": 592,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fawning obsequiousness... hammered into line through reinforcement learning with human feedback",
+   "note": "Raw Guardian page, paragraph beginning \"Some of the tells are obvious\": \"The fawning obsequiousness of a wild language model hammered into line through reinforcement learning with human feedback marks chatbots out.\" Attribution of the obsequiousness to RLHF is explicit."
+  },
+  {
+   "index": 593,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Handcrafted: artwork made by an artist without AI-generation programs",
+   "note": "Live help.drivethrurpg.com returned Cloudflare 403 (\"Just a moment...\"); recovered via Wayback raw capture https://web.archive.org/web/20251005160536id_/... (200), page dated October 28, 2024. Under \"What do the different filters mean?\": \"Handcrafted -> Artwork was made by an artist practicing their craft, without the use of AI-generation programs.\" The definition mentions artwork only - no writing clause - so the \"purely in terms of artwork\" limb holds."
+  },
+  {
+   "index": 594,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "starting on July 31, content made \"primarily\" of AI-generated writing not allowed",
+   "note": "Raw EN World thread page (curl, 200), opening post by Whizbang Dustyboots dated Jul 25, 2023, block quotation attributed to Gizmodo: \"another update states that starting on July 31, any content that is made of 'primarily' of AI-generated writing will not be allowed.\" The preceding sentence in the same quotation names \"the DriveThru Marketplaces (which includes Dungeon Masters Guild)\" as the policies' subject; the Jul 25 2023 thread date fixes the year."
+  },
+  {
+   "index": 595,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"We acknowledge enforcement challenges... trust in the goodwill of our partners\"",
+   "note": "Raw EN World page, same Gizmodo block quotation: \"'We acknowledge enforcement challenges,' says the policy page on both DMsGuild and Roll20, 'and trust in the goodwill of our partners to offer customers unique works based primarily on human creativity'.\" Both substantive limbs verbatim. On attribution the page names the policy pages as DMsGuild's and Roll20's, and separately identifies Dungeon Masters Guild as \"a subsidiary of OneBookShelf\" that \"officially announced a policy change\" - so \"the OneBookShelf policy\" is supported through that chain rather than by that phrase appearing on the page."
+  },
+  {
+   "index": 596,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "participants performed below chance levels in identifying AI-generated poems",
+   "note": "Raw nature.com article page (curl, 200). Abstract: \"We conducted two experiments with non-expert poetry readers and found that participants performed below chance levels in identifying AI-generated poems (46.6% accuracy...).\" Non-expert-reader limb supported by the same sentence."
+  },
+  {
+   "index": 597,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Observed accuracy was in fact slightly lower than chance (46.6%",
+   "note": "Raw nature.com page, Results / \"Study 1: distinguishing AI-generated from human-written poems\": \"Observed accuracy was in fact slightly lower than chance (46.6%, chi-sq (1, N = 16340) = 75.13, p < 0.0001).\" Figure and study location both as claimed."
+  },
+  {
+   "index": 598,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more likely to judge AI-generated poems as human-authored than actual human-authored poems",
+   "note": "Raw nature.com page, Abstract: \"Notably, participants were more likely to judge AI-generated poems as human-authored than actual human-authored poems (chi-sq (2, N = 16,340) = 247.04, p < 0.0001).\" Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 599,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The largest effect is on \"rhythm\"... much better rhythm than famous poets' poems",
+   "note": "Raw nature.com page, Study 2 results: \"The largest effect is on 'rhythm': AI-generated poems are rated as having much better rhythm than the poems written by famous poets (Welch's t (6694.647) = 35.319, p < 0.0001, Cohen's d = 0.847).\" Both the largest-effect limb and the rhythm comparison are explicit."
+  },
+  {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all 5 AI-generated poems are rated more highly in overall quality",
+   "note": "Raw nature.com page, Study 2, sentence citing Fig. 2: \"This is remarkably consistent; as seen in Fig. 2, all 5 AI-generated poems are rated more highly in overall quality than all 5 human-authored poems.\" Study 2's design (5 real and 5 AI-generated poems per poet, rated on overall quality) is stated in the same section."
+  }
+ ]
+}

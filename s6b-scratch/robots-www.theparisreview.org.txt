@@ -1,0 +1,20 @@
+User-Agent: *
+Disallow: /blog/wp-admin/
+Disallow: /blog/wp-login.php
+Disallow: /blog/wp-includes/
+Disallow: /blog/wp-content/plugins/
+Disallow: /blog/wp-content/cache
+Disallow: /blog/wp-content/themes
+Disallow: /blog/wp-includes/js
+Disallow: /blog/trackback
+Disallow: */trackback
+Disallow: /blog/tag/
+Disallow: /blog/author/
+Disallow: /blog/category/
+Disallow: /search
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /

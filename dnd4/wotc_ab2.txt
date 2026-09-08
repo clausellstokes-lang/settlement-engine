@@ -1,0 +1,93 @@
+ 
+ Adventure Builder: Setting the Hook 
+ Adventure Builder 08/11/2006 
+ Setting the Hook 
+ Part 2 of 6 
+ By Wolfgang Baur 
+ Compare the following two starts to an adventure:
+ "You meet a guy in a bar and he tells you about a dungeon outside town." 
+ "During the midnight watch, someone shoots an arrow into your camp. There's a note attached, written in Elvish." 
+ One is old news, and won't get much of a welcome from players. The other likely will have them asking questions and being drawn into *whatever* follows that arrow: a threat? an offer of parley? an alliance? Regardless, it immediately launches the action and the adventure.
+ The adventure hook is what kicks off the action, and what brings the players into the game. In fiction, it would be called the "inciting incident." Without a strong hook, your adventure becomes a matter of players going through the motions dutifully because "that's where the adventure is this week." With a strong hook, the PCs will be curious and will start planning their actions, aggressively moving the game forward for you. A weak hook means that you'll have to push the action forward with big "Adventure Here" signs.
+ Pick a Motive 
+ There is no one perfect hook, just as there is no perfect lure in fishing. Different fish respond to different flies, jigs, and worms; different groups and even each different player responds best to different rewards and motives. Playing with a group will give you an idea of whether a particular player or character is likely to respond to the pleading penniless merchant, the scholar with a mystery, or the rich landowner offering rich land.
+ The six most common motives are listed here, with a typical NPC comment and sample hooks. 
+ 1) Curiosity: "No one knows what's down there. It's never been explored." This hook works very well for certain players who love the unknown. Lost cities, ancient tombs, hidden mountain valleys, deadly fey forests, maps to Atlantis, all fall into this category. 
+ 2) Fear/Survival: "If you don't stop the raiders at the oasis, we'll all die!" The beauty of this hook is its immediacy. There's a threat, and the heroes have a chance to shine. It doesn't work if it's overplayed, such as telling low-level PCs to fight a demon lord or the like. Typical examples include raiding giants, a swarm of formians or other insects, aboleth or drow slavers, or the clichéd invasion from another plane.
+ 3) Greed: This is the classic hook for simple adventures. "Loot that tomb, and you'll buy able to buy all the magic and supplies you'll ever want!" This hook usually works, but it's a lazy way to start an adventure for most designers. To make it more memorable, at least try to make the treasure under discussion more interesting than gold. This motive also includes wages ("I'll pay you to do this job for me"), although wages are probably the worst of motives for real heroes. Money is useful, but boring. Real heroes just want it to fund their next set of heroics. Typical examples of this hook include a mysterious guide to the city of gold, a long-lost dragon hoard, an unopened tomb of mage-kings, or looting rich princes of the Church. You might also consider an emperor's patronage, a gift from a magic ringmaker's workshop, or even the tried-and-true promise of pirate gold.
+ 4) Heroism: Some people want to be noticed and admired; others just want to do the right thing. For heroes, it's usually about being remembered for their deeds. "Bards will sing of your glory if you just hold the pass for a day." This sort of hook works best for parties that care about what their peers think of them, but it doesn't really work for rogues and tricksters. Typical examples include saving the weak from slavers, holding a fort, bridge or pass against a mob, tournaments of skill, and single combats to the death. This hook type is amazing for certain characters who are looking for a blaze of glory -- you should make sure that a spectacularly good death against swarms of unrelenting evil is available for those who seek it.
+ 5) Loyalty, honor and duty: "The dwarven ancestors smile on those who escort the caravan through the mines." Sometimes, a race, class, or prestige class comes with some underlying assumptions about a code of conduct. You can exploit this to ask a monk to undertake a mission for his sensei, a paladin for his church, or a dwarf for his clan and chieftain. Players can, of course, refuse such quests, but they usually don't, especially if the mission is one their character naturally gravitates toward. The loyal PC pulls everyone else along in their wake. Typical examples include carrying sacred scrolls to a new temple, a pilgrimage, lifting the siege of a clan holding, restoring a bride's honor, or proving the innocence of a relative.
+ 6) Revenge: "They killed your brother and stole your father's sword!" This is best used in a long-running campaign with a recurring villain, and can be neatly connected to existing plot threads. It's even more effective if the crime that calls out for revenge happened when the affected characters were on watch, or in charge. Typical examples include vendettas and revenge killings, kidnappings, capturing a criminal, stealing back the stolen goods or idols, horse or pegasus rustling, and arson.
+ Make It Personal 
+ The best hooks tie in to the existing characters, such as hinting at a holy sword for a paladin, at an ancient lost invocation for a warlock, or at a chance to shine in the eyes of a high priest and congregation for a cleric. If any players have a character background that describes their friends, mentors, or family, you can use that background to make a hook more powerful -- by threatening the character's nearest and dearest. Be ruthless, too -- if the party doesn't act, the threatened danger happens.
+ The hook needs to offer something to the players who are most likely to seize the day and go for it. If your party leader is playing a halfling thief, greed is the right path. If the party leader is a paladin, noble quests and heroism. If you don't know what type of adventure the players want most, ask. They'll be happy to tell you.
+ You can also combine hooks, to suit more than one player's strongest motives. If a paladin and a greedy halfing are the party leaders, you might try "You must destroy the evil temple to lay the spirits to rest -- and their treasury is rumored to be very rich indeed."
+ Make It Concrete and Tough to Refuse 
+ Interested in a wealth of ready-to-use hooks? That's where our Steal This Hook series comes into play, offering adventure hooks for Forgotten Realms , Eberron , even d20 Modern settings. 
+ You want your hooks to be specific, and you want them to be very hard to turn down. Vague, overused, or clichéd hooks don't interest players because they have heard them before. Some overused hooks that lack compelling detail include:Kidnapped princesses and children
+ Meeting a stranger in a tavern
+ Requests from the mayor or head villager
+ Evil insane wizards
+ Sudden invasions of squicky evil things: undead, demons, whatever
+ Finding the map to a dungeon 
+ The hooks that work best are often those that don't REQUIRE the party to respond. Instead, they play to the character's status, power, or skill -- they involve some flattery. Some NPC thinks the heroes, no matter how low their experience level, are worthy of respect, people that will step up in a pinch: in a word, heroes. Their requests or pitch make it clear that they think the PCs are competent and valuable allies. For example:A merchant asks a big favor from an old family friend
+ A dwarf, elf, half-orc, or barbarian tribe or clan asks whether the PC can escort a clan troublemaker into exile. Nobody says no to family.
+ A gnome claims he has a few coins from a long-lost dragon hoard
+ A secret message is smuggled to the party from an innocent prisoner
+ A scholar asks for advice, or help collecting "just a few botanical samples" from his wizard, druid, or bard friend.
+ A paladin asks the party's warriors to help judge a tournament (where a coup is planned)
+ What the second set of hooks has in common is a concrete task or a mystery that encourages further exploration, without falling back on fantasy staples that are worn pretty thin. People respond well to requests for help, to greed, to a chance to win praise or notice, and to the new and unusual. They respond badly to demands, to repetition, and to random desperation. 
+ Stacking Hooks 
+ The first hook isn't necessarily the last hook. In fact, the first hook may be nothing but a way to get the action started. Once the adventure is underway, the PCs may soon learn that what they thought was a bit of tomb-looting can become a matter of survival because they have unleashed a new danger. The effort to escort a dwarven caravan from mines to foundries out of loyalty may become a revenge adventure once it's clear that the foundry has been raided and the clan chieftain killed by giants.
+ Why do I call these hooks rather than plot twists? Because the second hook is available for those times when the party decides to ignore the first one. If they say "Oh, I'll send my henchman on escort duty", that henchman can return from the mission with the news of the dead clan chieftain -- which then becomes the new hook. If that doesn't get the dwarven hero involved, nothing will.
+ Hooks That Fail 
+ Some hooks just don't attract any interest from the players. They ignore the guy in the bar. They don't want to help a group of elves because their new member is a dwarf. They decide to follow up some other clue from a prior adventure, or they're just not drawn in by the shiny bauble you present to them.
+ Don't try to force it. Let it go.
+ Players know when you are pushing them in a certain direction. If the hook's really no good, they resent being pushed into it. If the hook you dreamed up doesn't work, it's better in the long run to let the party ignore it. 
+ But what about the game? If you really want the PCs to choose the adventure you planned, then you need a better hook for it. Make one up and keep the play moving. On the other hand, if you feel comfortable winging it, run a different adventure using existing villains or a simple mission such as travel from point A to point B. The players may find a clue or treasure along the way that leads them back to the main adventure --- possibly without knowing that they're just taking a longer route to it. Or you may find that the hook you make up on the spot intrigues you too -- and that's what you prepare for the next week's session.
+ Be a Ham 
+ Part of a successful hook is just in how you present it. Be a ham; get in touch with your inner circus ringmaster. Don't read a dry lump of text in your everyday tone; try a deeper voice or mimic a gruff dwarven accent, gesture a little around the table, throw down a handful of golden chocolate coins from the candy aisle. Players will respond to your enthusiasm with their own.
+ Conclusion 
+ Most adventures have several hooks written into them to begin with. Knowing which one will work for any given audience helps you ensure that the action starts off strong and that the players keep the action rolling.
+ About the Author 
+ Wolfgang Baur is the author of dozens of adventures, from the "Kingdom of the Ghouls" and "Gathering of Winds" in Dungeon magazine to upcoming releases from Wizards of the Coast. He offers custom-tailored adventures and professional advice to patrons of the Open Design blog .
+ Recent Adventure Builders 
+ Terrain, Hazards, and Traps 
+ 11/03/2006 
+ Structures and Plot 
+ 09/22/2006 
+ Copper Bits and Gleaming Hoards 
+ 09/08/2006 
+ Roleplaying and Switch Encounters 
+ 08/24/2006 
+ Setting the Hook 
+ 08/11/2006 
+ (MORE) 
+ Recent Articles 
+ This Month's Dragon Magazine 
+ 04/26/2007 
+ Chapter 2: Conflict 
+ 09/24/2007 
+ Eastern Classes 
+ 09/18/2007 
+ Crusaders, Swordsages, Warblades 
+ 09/11/2007 
+ Fortress of the Yuan-Ti 
+ 09/04/2007 
+ (MORE) 
+ About Us 
+ Jobs 
+ New to the Game? 
+ Inside Wizards 
+ Find a Store 
+ Press 
+ Help 
+ Sitemap 
+ ©1995- Wizards of the Coast, Inc., a subsidiary of Hasbro, Inc. All Rights Reserved. 
+ Terms of Use - Privacy Statement 
+ Home > Games > D&D > Articles 
+Printer Friendly 
+Email A Friend 
+ Discuss This Article 
+ Download This Article 
+ 

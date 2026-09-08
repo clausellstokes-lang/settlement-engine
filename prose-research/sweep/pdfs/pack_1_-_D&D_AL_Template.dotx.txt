@@ -1,0 +1,58 @@
+
+D&D 5E Template
+Use the styles in this document when formatting your D&D document. Styles are the only way to ensure that your formatting makes it into InDesign during the file-conversion process. Don’t format text by using Word’s standard formatting tools. Styles only!
+Style Guides
+Before you proceed, read DnD House Style Guide.docx, which gives you the nuts and bolts on writing for D&D. If you’re creating a stat block, also read Stat Block Creation.docx.
+Core Body
+Core Body is the foundational style in this document—the one used for most of the body copy in our books. Don’t use Normal. Use Core Body.
+Bold and Italics
+Use the following character styles to apply bold or italics. Two of these styles are serif fonts and two are for sans serif fonts:
+Bold Serif
+Italic Serif
+Bold Sans Serif
+Italic Sans Serif
+Chapter Title
+The Chapter Title style should appear only at the start of a chapter. Don’t use Heading 1 for the title.
+Subchapter Title
+Use Subchapter Title only for chapter-like sections within a chapter, such as the class sections in the Player’s Handbook. In most cases, you should be using Heading 1 instead.
+Heading 1
+Epigraph is used for epigraphs and vignettes. An epigraph shouldn’t be enclosed in quotation marks, unless you’re excerpting a passage from a book and the quotes appear in the original.
+—Epigraph Author, Source
+Heading 1 is the highest-level heading after Chapter Title and Subchapter Title. The headings after Heading 1 should go in sequence: Heading 1, Heading 2, Heading 3, and then Inline Subhead, which functions as our Heading 4. Exceptions to this sequence should be made only by an editor.
+Heading 2
+The handsome horizontal line in a Heading 2 makes it very tempting to use in places where the heading doesn’t belong. Resist that temptation!
+Heading 3
+This Core Metadata style appears under a spell’s name. We use it in magic items and feats too.
+Heading 3 ignores the heading sequence in two cases: the name of a spell or a magic item. Because of this exception, a section of spells or magic items shouldn’t begin with Heading 3.
+Core Hanging. Use the Core Hanging style to include a list of things amid Core Body, especially when each thing begins with text in bold.
+	Inline Subhead. The Inline Subhead character style serves as our Heading 4. Don’t use it for emphasis; use it as the lowest-level heading in the heading hierarchy. Examples of it abound in our books.
+Core Bulleted is the style to use when you want to make a bulleted list amid Core Body. If you want to bold a term at the start of each list item, use the Core Hanging style instead.
+Stat Block Title
+Stat block metadata
+
+Stat Block Data Take a look at stat blocks in the Monster Manual to see how these styles translate into a finished block. The section below uses the Stat Block Ability Score style. We’ve included plus and minus signs for you, since keyboards don’t easily produce the minus sign.
+
+	STR	DEX	CON	INT	WIS	CHA
+	X (+/−X)	X (+/−X)	X (+/−X)	X (+/−X)	X (+/−X)	X (+/−X)
+
+Stat Block Data Notice that there’s no colon after the bold headings in a stat block.
+
+Inline Subhead. The paragraphs below the data section use the Stat Block Body style.
+Stat Block Heading
+Inline Subhead. The Stat Block Heading style above is used for section starts like “Actions” and “Reactions.”
+Stat Block Bulleted—this is the style for a bulleted list in a stat block.
+Stat Block Hanging—use this style for things like spell lists.
+This Boxed Text style is used only for text that a DM is meant to read to the players.
+List Heading
+List Item—the prime example of this style is the section of spell lists in the Player’s Handbook. 
+Sidebar Heading
+Sidebar Body is the style to use for a sidebar’s guts. When making a sidebar, ask yourself whether the sidebar must immediately follow a section of text or whether it can go anywhere on a spread. If it must immediately follow something, don’t make it a sidebar; integrate it into the body copy.
+Sidebar Bulleted—this is the style for creating a bulleted list in a sidebar.
+Table Title
+Table Header
+Table Header
+Table Body is the style for a table’s guts. InDesign supports the import of tables, so a table can be used in Word.
+Table Body
+None of the shading here will transfer into InDesign. Only the styles matter.
+Table Body
+

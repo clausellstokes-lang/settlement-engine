@@ -1,0 +1,44 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i780-820",
+ "lines": 112,
+ "firstTs": "2026-09-06T18:04:34.741Z",
+ "lastTs": "2026-09-06T18:09:54.121Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 25,
+  "WebSearch": 1,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.pnas.org/doi/10.1073/pnas.2006465117",
+  "https://journal.finfar.org/articles/book-review-medievalism-in-a-song-of-ice-and-fire-and-game-of-thrones/",
+  "https://publicmedievalist.com/grimdark-medievalism/",
+  "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+  "https://www.routledge.com/George-RR-Martin-and-the-Fantasy-Form/Young/p/book/9781032093482",
+  "https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/",
+  "https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/",
+  "https://slate.com/culture/2014/11/the-world-of-ice-and-fire-george-r-r-martin-breaks-down-to-believe-in-game-of-thrones.html",
+  "https://atseajournal.com/asoiaf/essays/stealth_exposition.html",
+  "https://atseajournal.com/asoiaf/essays/epithets.html",
+  "https://atseajournal.com/asoiaf/essays/linguistic_anachronism.html",
+  "https://web.archive.org/web/20250710185328id_/https://www.pnas.org/doi/10.1073/pnas.2006465117",
+  "https://web.archive.org/web/20170726070428id_/https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/",
+  "https://atseajournal.com/",
+  "https://potboileruniversity.com/",
+  "https://atseajournal.com/asoiaf/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "ce is a PDF, fetched as binary and text-extracted with pypdf. The three At Sea Journal essays carry no byline of their own, so I fetched their parent index, which is headed \"A Study of Ice and Fire / Erik Germani\" — that is what supports the surname attribution in indices 808, 809, 815, 819 and 820.",
+ "run": "wf_ed535e1b-537",
+ "agent": "ab28490a47c46f30a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-ab28490a47c46f30a.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i780-820.json",
+  "exists": true
+ }
+}

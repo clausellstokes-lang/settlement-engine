@@ -1,0 +1,128 @@
+{
+  "_embedded" : {
+    "bundles" : [ {
+      "uuid" : "4edeb3f8-7c30-420d-ab5b-df759e5557ee",
+      "name" : "THUMBNAIL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "THUMBNAIL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4edeb3f8-7c30-420d-ab5b-df759e5557ee/item"
+        },
+        "bitstreams" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4edeb3f8-7c30-420d-ab5b-df759e5557ee/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4edeb3f8-7c30-420d-ab5b-df759e5557ee/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4edeb3f8-7c30-420d-ab5b-df759e5557ee"
+        }
+      }
+    }, {
+      "uuid" : "149b3c0a-f401-447f-8a22-452273227d93",
+      "name" : "ORIGINAL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "ORIGINAL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/149b3c0a-f401-447f-8a22-452273227d93/item"
+        },
+        "bitstreams" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/149b3c0a-f401-447f-8a22-452273227d93/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/149b3c0a-f401-447f-8a22-452273227d93/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/149b3c0a-f401-447f-8a22-452273227d93"
+        }
+      }
+    }, {
+      "uuid" : "c42ba866-3a5e-45e1-bbaf-79f89b996b62",
+      "name" : "TEXT",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "TEXT",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/c42ba866-3a5e-45e1-bbaf-79f89b996b62/item"
+        },
+        "bitstreams" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/c42ba866-3a5e-45e1-bbaf-79f89b996b62/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/c42ba866-3a5e-45e1-bbaf-79f89b996b62/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/c42ba866-3a5e-45e1-bbaf-79f89b996b62"
+        }
+      }
+    }, {
+      "uuid" : "4227bd56-cf5b-4cb9-aa3c-04af9fbc13bc",
+      "name" : "ORE",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "ORE",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4227bd56-cf5b-4cb9-aa3c-04af9fbc13bc/item"
+        },
+        "bitstreams" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4227bd56-cf5b-4cb9-aa3c-04af9fbc13bc/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4227bd56-cf5b-4cb9-aa3c-04af9fbc13bc/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://helda.helsinki.fi/server/api/core/bundles/4227bd56-cf5b-4cb9-aa3c-04af9fbc13bc"
+        }
+      }
+    } ]
+  },
+  "page" : {
+    "number" : 0,
+    "size" : 20,
+    "totalPages" : 1,
+    "totalElements" : 4
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://helda.helsinki.fi/server/api/core/items/22862122-b482-47e8-b51e-3c0313dd1cd7/bundles"
+    }
+  }
+}

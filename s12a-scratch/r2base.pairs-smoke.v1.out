@@ -1,0 +1,20 @@
+#1 PASS(mechanical) DS-POP-1 :: QUANTITY: nobody [ledger]
+#4 FAIL DS-POP-1 :: QUANTITY: a dozen or so [visitor]
+    - COUNT words LOST (band noun moved?): people
+#11 FAIL DS-WAR-2 :: sovereignty · strained [ledger]
+    - MARKS ["dm-only"] — dm-only: the AFTER inherits the mark and the audience law
+#14 FAIL DS-FTH-4 :: ROOTED [street]
+    - LONGER: 21 → 22 words
+    - PRONOUN CLOSER ADDED (land on the civic noun)
+#17 FAIL DS-SUP-2 :: CAPTURED [ledger]
+    - MARKS ["dm-only"] — dm-only: the AFTER inherits the mark and the audience law
+    - THREE+ SENTENCES (3) — the register is one flowing sentence or two short ones
+    - NOTE: "rather than" removed but the antithesis SHAPE survives (a column moved, not the failure mode)
+    - EXISTENTIAL OPENER ADDED ("There is / It is")
+#23 FAIL DS-GEN-5 :: smoke (route isolated / mountain_pass) [counterforce]
+    - DURATION/TIME words ADDED: every, year
+    - ANTITHESIS SHAPE ADDED: 0 → 1
+#30 FAIL DS-POP-1 :: CANDIDATE KIND: emigration [unfolding]
+    - R4: CUT a word that names a SIBLING pool key: decline  (siblings: QUANTITY: nobody | QUANTITY: a few souls | QUANTITY: a dozen or so | QUANTITY: dozens | QUANTITY: a hundred or so | QUANTITY: several hundred)
+
+corpus loaded: 2734 variants; 1 pass mechanically, 6 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

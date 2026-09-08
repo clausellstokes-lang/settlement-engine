@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 184,
+   "feature": "typographic conventions",
+   "claim": "Magic item and spell names are italicized and feat names capitalized, following the current D&D product style.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "names of magic items and spells should be italicized",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "index": 185,
+   "feature": "page density and length ceiling",
+   "claim": "A Dragon page holds about 750 words and submissions should not exceed 5,000 words.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "A full page of text in DRAGON contains about 750 words",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "index": 186,
+   "feature": "D&D style as acceptance criterion",
+   "claim": "Failure to present information in D&D styles is listed alongside poor writing and imprecise mechanics as a standard rejection reason.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "failure to present information in D&D styles",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "index": 187,
+   "feature": "flavor must stand alone",
+   "claim": "Backgrounds and stories accompanying new rules must be interesting enough to stand alone without their rules element.",
+   "source": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "quote": "interesting enough to stand alone without their rules element",
+   "page": "official editorial guidelines (PDF)"
+  },
+  {
+   "index": 188,
+   "feature": "journalistic directness",
+   "claim": "Steve Winter applied newsroom training to TSR text: game language must be direct and clear, avoiding flowery phrases and clever wordplay.",
+   "source": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "the language needs to be direct and clear",
+   "page": "interview (TSR/WotC editor)"
+  },
+  {
+   "index": 189,
+   "feature": "teach versus reference",
+   "claim": "A rulebook must decide up front whether it teaches newcomers or serves as a reference for people who know the fundamentals; it cannot do both.",
+   "source": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "quote": "I don't believe it can do both.",
+   "page": "interview (TSR/WotC editor)"
+  },
+  {
+   "index": 190,
+   "feature": "documentarian stance",
+   "claim": "Mearls frames the game writer as a documentarian of an imaginary world who focuses on the props of a story: locations, characters, creatures, past events.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "The writer as a documentarian of an imaginary world.",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "index": 191,
+   "feature": "exposition-heavy register",
+   "claim": "Game writing dwells on the kind of exposition that would bore a novel, little of which appears as-is in play.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "the kind of exposition that can make a novel boring",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "index": 192,
+   "feature": "lawyerly mechanics, gapped settings",
+   "claim": "Mechanics demand a lawyerly precision of language while setting text deliberately leaves gaps for the players' imagination.",
+   "source": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "quote": "a lawyerly approach to writing",
+   "page": "interview (5e lead designer)"
+  },
+  {
+   "index": 193,
+   "feature": "shared-language terminology",
+   "claim": "Mearls' 2013 Legends & Lore column: rules terms exist to give abstract concepts a clear shared meaning, so '5th-level wizard' tells everyone what you can do.",
+   "source": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "quote": "D&D is a shared language.",
+   "page": "forum thread quoting designer column"
+  },
+  {
+   "index": 194,
+   "feature": "self-explanatory names over abstract terms",
+   "claim": "Mearls contrasts a self-explanatory descriptor like 'archer' with abstract feat names (Rapid Shot, Precise Shot) that can only be understood by already knowing them.",
+   "source": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "quote": "They don't stand on their own in a meaningful way.",
+   "page": "forum thread quoting designer column"
+  },
+  {
+   "index": 195,
+   "feature": "overwriting and editorial cutting",
+   "claim": "Perkins says he almost always overwrites; his first Dungeon adventure was cut from 28,000 to 16,000 words.",
+   "source": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "I almost always overwrite",
+   "page": "interview"
+  },
+  {
+   "index": 196,
+   "feature": "setting cant and pull-quotes",
+   "claim": "Perkins notes Planescape's slang was mostly absent from Warriors of Heaven and that he missed the pull-quotes that made those products fun to read.",
+   "source": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "quote": "What I miss are the pull-quotes",
+   "page": "interview"
+  },
+  {
+   "index": 197,
+   "feature": "overwriting cautionary tale",
+   "claim": "Perkins recounts a 1992 Dungeon draft of 24,000 words cut to 15,000 as a cautionary tale about overwriting, and pitches Curse of Strahd's register as Gothic horror with a dash of dark fantasy.",
+   "source": "Curse of Strahd Interview with Chris Perkins (Fraternity of Shadows, Feb 2016)",
+   "url": "https://www.fraternityofshadows.com/TheParlor/Curse_Of_Strahd_Interview.html",
+   "quote": "a cautionary tale about overwriting",
+   "page": "interview"
+  },
+  {
+   "index": 198,
+   "feature": "entertaining DM-facing text",
+   "claim": "Perkins: adventures are meant to be read, so DM-facing text should be entertaining and bring a smile to the DM preparing.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "make it entertaining",
+   "page": "official interview transcript"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "names of magic items and spells should be italicized, and feat names should be capitalized",
+   "note": "Paizo PDF extracted with pypdf. Full sentence: 'Article manuscripts should use the current style of D&D game products. For instance, the names of magic items and spells should be italicized, and feat names should be capitalized.' Quote verbatim; every limb (italic items/spells, capitalized feats, current D&D product style) supported."
+  },
+  {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A full page of text in DRAGON contains about 750 words",
+   "note": "Page: 'A full page of text in DRAGON contains about 750 words. Submissions should not exceed 5,000 words or the specified word count for the Familiars article unless the editor specifically responds to a query that a longer article is desired.' Both limbs supported; the 5,000 cap carries an editor-exception the claim omits but does not misstate."
+  },
+  {
+   "index": 186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "failure to present information in D&D styles",
+   "note": "Page (Rejections section): 'Articles are most often rejected because of poor writing quality, imprecise game mechanics, failure to present information in D&D styles, poor formatting and organization, cliched approaches to topics, or differences between the query and the final article.' Quote verbatim; the adjacency to poor writing and imprecise mechanics is exact."
+  },
+  {
+   "index": 187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "interesting enough to stand alone without their rules element",
+   "note": "Page (New Rules): 'Stories, backgrounds, and inspiration for new rules should be interesting enough to stand alone without their rules element.' Quote verbatim. Page says 'should'; the claim says 'must' - a modal strengthening, not an added limb. A parallel sentence for Features rules articles says 'compelling enough to stand alone without the rules content.'"
+  },
+  {
+   "index": 188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the language needs to be direct and clear",
+   "note": "Grognardia interview, answer 2: 'journalists are trained to write for clarity and directness. Flowery phrases and clever wordplay are things to avoid. The same is true in games; the language needs to be direct and clear.' Winter's newsroom background (Iowa State journalism major, city-desk reporter, first TSR hire with professional editing experience) is stated in the same answer."
+  },
+  {
+   "index": 189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't believe it can do both.",
+   "note": "Grognardia answer 5: 'A set of game rules needs to decide up front whether its job is teaching the material to newcomers or serving as a reference manual for people who already know the fundamentals. I don't believe it can do both.' Quote verbatim; every limb supported."
+  },
+  {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the writer as a documentarian of an imaginary world",
+   "note": "SFWA page: 'The one element of game writing that is unique to the craft, in my opinion, is the idea of the writer as a documentarian of an imaginary world. Gaming writing focuses on the props of a story - locations, characters, creatures, past events - as opposed to characters and plot.' Words match verbatim; on the page the phrase is a clause ('the idea of the writer as...'), not a standalone sentence."
+  },
+  {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the kind of exposition that can make a novel boring",
+   "note": "SFWA page: '...but gaming dwells on the kind of exposition that can make a novel boring. Of course, little of that exposition appears as-is in a game. Instead, it's the invisible foundation on which the game stands.' Quote verbatim; both limbs supported. Page's subject noun is 'gaming' inside a paragraph defining game writing."
+  },
+  {
+   "index": 192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's much more of a lawyerly approach to writing.",
+   "note": "SFWA page: 'a world or character can tap into a gamer's imagination to fill in the details. You can't afford that kind of gap in mechanics. An unclear mechanic creates confusion and frustration. It's much more of a lawyerly approach to writing.' Quote verbatim. The gap limb is the page's own contrast; the page frames it as an affordance ('can tap into') rather than using the word 'deliberately'."
+  },
+  {
+   "index": 193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "D&D is a shared language.",
+   "note": "LIVE URL DRIFT: enworld.org/threads/...334907/ now serves a different thread ('Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG'); XenForo resolves by numeric id. Verified on the Wayback raw capture of the identical URL (web.archive.org/web/20200812035704id_/...). Post #1 (Mar 2, 2013) links wizards.com/dnd/Article.aspx?x=dnd/4ll/20130304 and block-quotes: 'D&D is a shared language. The rules serve to make it easier to talk about the game and make stuff happen. They take abstract concepts and give them clear meaning. When we say \"5th-level wizard,\" we know what you can do and how you do it.' Qualifier the claim compresses: the next sentences read 'We know that because we play D&D. Someone who never played the game would be utterly lost' - i.e. shared among players, not literally everyone. Column is titled 'Legend & Lore' (claim writes 'Legends & Lore')."
+  },
+  {
+   "index": 194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They don't stand on their own in a meaningful way.",
+   "note": "Same Wayback capture, same block quote: 'Rapid Shot and Precise Shot are abstract things that aren't really clear. You can only understand them by knowing what they are. They don't stand on their own in a meaningful way. Describing your fighter as an archer, though, makes sense to anyone.' Quote verbatim; every limb supported. The page calls them 'abstract things', not 'feats' - the feat categorization is externally true (3.5e) but is the claim's word, not Mearls'."
+  },
+  {
+   "index": 195,
+   "verdict": "PARTIAL",
+   "trueWording": "asked to trim the 28,000-word adventure to a more manageable 16,000 words",
+   "note": "Quote 'I almost always overwrite' is verbatim ('Anyone who has edited my work knows that I almost always overwrite'), so the first limb holds. The second limb fails on the same page twice. (a) Outcome: 'I was asked to trim the 28,000-word adventure to a more manageable 16,000 words. I was not entirely successful; I think the final adventure came in at 21,000 words, still making it the longest module ever published in DUNGEON Adventures.' It was not cut to 16,000. (b) 'Umbra' (Issue #55) is called 'My first PLANESCAPE adventure', while the page names his first published Dungeon work as 'Wards of Witching Ways,' Issue #11. Cross-check: the Fraternity of Shadows interview in this same chunk has him in Dungeon #38 in 1992, well before #55.",
+   "unsupportedLimb": "his first Dungeon adventure was cut from 28,000 to 16,000 words - the page says he was ASKED to cut to 16,000 but landed at 21,000, and names Issue #11 'Wards of Witching Ways' as his first Dungeon adventure, not #55 'Umbra'"
+  },
+  {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What I miss are the pull-quotes; they made PLANESCAPE products even more fun to read!",
+   "note": "Mimir.net interview: 'Warriors of Heaven is a core AD&D product and does not embrace the narrative style of most PLANESCAPE products. The cant is mostly absent, although I think I managed to slip the occasional \"basher\" and \"leatherhead\" past the editors!' followed by 'What I miss are the pull-quotes; they made PLANESCAPE products even more fun to read!' Quote verbatim; 'cant' is the Planescape slang the claim names."
+  },
+  {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Somewhere in there is a cautionary tale about overwriting.",
+   "note": "Fraternity of Shadows page (header line: 'This interview of Christopher Perkins was conducted in February, 2016 in anticipation of the March 15 release of Curse of Strahd'). Perkins: 'My first draft was 24,000 words, and Barbara asked me to cut it down to 15,000. A couple rewrites later, she was finally happy with it... Somewhere in there is a cautionary tale about overwriting.' The 1992 / Dungeon #38 dating comes from the interviewer's question. Register limb: asked where Curse of Strahd falls between Gothic Horror and Dark Fantasy, he answers 'There's a lot of Gothic horror with a dash of dark fantasy.'"
+  },
+  {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "make it entertaining",
+   "note": "D&D Beyond transcript (title 'Chris Perkins on Writing your own Adventures', page date 2018-04-19; Todd Kenreck is the interviewer): 'adventures that are published, aren't merely meant to be played, they are meant to be read and if you are going to make somebody read something for **** sakes', make it entertaining. Sometimes that means bringing a smile to the DM's face when they're reading it because the DM's thinking, \"Oh, I can't wait till the players get here.\"' Quote verbatim; every limb supported."
+  }
+ ]
+}

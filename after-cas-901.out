@@ -1,0 +1,15 @@
+gate green · tests=31970
+INFO ratchet register totalTests=31970 totalFiles=2489 entries=5
+PASS ratchet register totalTests == the gate line — (31970, '31970')
+CHAIR-VERIFY GREEN
+CAS OK: product=b0cbc67a1 · sealed landing-lighting-2026-09-05 · cars since ca651d54b=283
+ docs/FABLE_RETROVALIDATION_QUEUE.md | 13 +++++++++++++
+ docs/HANDOFF_CURRENT.md             |  6 +++++-
+ docs/OWNER_DECISION_QUEUE.md        |  3 +++
+ 3 files changed, 21 insertions(+), 1 deletion(-)
+  ODQ §901 rows: 1
+  FRQ R-rows: 64  (new R-rows: 64)
+  seat trailer Fable (must be 1): 1
+COLLECT_901_OK tip=20e80a5ef
+DONE:
+  20e80a5ef §901: the lighting consist lands at 25 cars — seven L-HOMES cars, the stripper sweep and the ch

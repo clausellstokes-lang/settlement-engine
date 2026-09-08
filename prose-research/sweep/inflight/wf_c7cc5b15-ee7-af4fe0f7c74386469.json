@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i450-464",
+ "lines": 76,
+ "firstTs": "2026-09-06T17:29:56.998Z",
+ "lastTs": "2026-09-06T17:33:23.119Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "WebFetch": 2,
+  "Bash": 13,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.nybooks.com/articles/2013/11/07/women-and-thrones/",
+  "https://www.newyorker.com/magazine/2011/04/11/just-write-it"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and re-parsed clean. Both sources reached as raw pages (curl with browser user agent, HTTP 200, full article bodies — the WebFetch summarizer output was discarded and not used to form any verdict).",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "af4fe0f7c74386469",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-af4fe0f7c74386469.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i450-464.json",
+  "exists": true
+ }
+}

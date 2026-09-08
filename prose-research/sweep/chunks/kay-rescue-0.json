@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": "rescue-0",
+ "indices": [
+  521,
+  522,
+  524,
+  527,
+  571,
+  573,
+  574,
+  575,
+  576,
+  617,
+  618,
+  619,
+  621,
+  622,
+  624
+ ],
+ "claims": [
+  {
+   "index": 521,
+   "feature": "annalist voice and deep time",
+   "claim": "Olley says almost the entire An Lushan rebellion in Under Heaven - its years of upheaval, victories, losses, alliances and political manoeuvrings - is condensed into an epilogue.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "all of that is condensed into an epilogue",
+   "page": "transcript, section on Under Heaven"
+  },
+  {
+   "index": 522,
+   "feature": "point of view and distance",
+   "claim": "Olley says that rather than building suspense Kay encourages reflection, looking back with the tragic clarity of hindsight rather than forward with bated breath.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "to look back with the tragic clarity of hindsight",
+   "page": "transcript"
+  },
+  {
+   "index": 524,
+   "feature": "place and institution description",
+   "claim": "Olley says Kay shows little interest in hitting the predictable beats of a historical period, focusing instead on the smaller, more personal moments behind the scenes that shape larger events.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "little interest in hitting the predictable beats of the historical period",
+   "page": "transcript"
+  },
+  {
+   "index": 527,
+   "feature": "register modulation",
+   "claim": "Olley says the shift from prose into verse allows a change of register, usually into something more melancholic or portentous.",
+   "source": "Katherine Olley, 'Verse and Prose in Fantasy Literature', University of Oxford Podcasts video lecture, 16 December 2020",
+   "url": "https://writersinspire.org/content/verse-prose-fantasy-literature",
+   "quote": "By allowing for a change in register",
+   "page": "transcript"
+  },
+  {
+   "index": 571,
+   "feature": "plainness and economy",
+   "claim": "Indrapramit Das writes that River of Stars is never showy despite its length and research.",
+   "source": "Indrapramit Das (novelist), Strange Horizons review of River of Stars, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "River of Stars is never showy",
+   "page": "second paragraph"
+  },
+  {
+   "index": 573,
+   "feature": "cadence and rhythm",
+   "claim": "Das writes that Kay's lyrical prose keeps a contemplative calm even during battles and ambushes.",
+   "source": "Indrapramit Das, Strange Horizons, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "Kay’s lyrical prose retains a sense of contemplative calm",
+   "page": "paragraph beginning 'Not only are Shan and Daiyan wonderfully drawn'"
+  },
+  {
+   "index": 574,
+   "feature": "point of view and distance",
+   "claim": "Das notes that some of River of Stars's large cast appear for a single scene before receding.",
+   "source": "Indrapramit Das, Strange Horizons, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "appear for a mere scene before fading back into the narrative",
+   "page": "first paragraph"
+  },
+  {
+   "index": 575,
+   "feature": "concrete sensory noun",
+   "claim": "Das writes that Kay keeps returning the novel to the small moments that lie between the momentous ones.",
+   "source": "Indrapramit Das, Strange Horizons, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "the small moments that linger between the momentous ones",
+   "page": "paragraph beginning 'Any historical period, any story'"
+  },
+  {
+   "index": 576,
+   "feature": "annalist voice and deep time",
+   "claim": "The passage Das quotes from River of Stars opens by saying small events can matter in the unfolding of a world.",
+   "source": "Guy Gavriel Kay, River of Stars p.315, quoted by Indrapramit Das in Strange Horizons, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/review-by-indrapramit-das-for-strange-horizons/",
+   "quote": "Small events can be important in the unfolding, like a pleated sail",
+   "page": "block quotation cited as p. 315"
+  },
+  {
+   "index": 617,
+   "feature": "register modulation",
+   "claim": "Kay says he worries that the diction, style and rhythms of the last book will bleed into the next.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz for the New York Review of Science Fiction, 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "the last book will bleed into the next one, the diction",
+   "page": "answer on script writing as a bridge between books"
+  },
+  {
+   "index": 618,
+   "feature": "register modulation",
+   "claim": "Kay states that the writing changes in every book.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "the writing changes in every book",
+   "page": "answer on style and tone changing between books"
+  },
+  {
+   "index": 619,
+   "feature": "opening sentence",
+   "claim": "Kay says the prologue of Sailing to Sarantium was written as contrasting tiles, one a charioteer and one a senator.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "a strong “tile” of a charioteer, a strong “tile” of a",
+   "page": "answer on the prologue as mosaic"
+  },
+  {
+   "index": 621,
+   "feature": "register modulation",
+   "claim": "Kay says the style of Sailing to Sarantium was influenced by its protagonist being a mosaicist.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "The style of this book, is influenced by the metaphor and",
+   "page": "answer on the prologue as mosaic"
+  },
+  {
+   "index": 622,
+   "feature": "civic record register",
+   "claim": "Kay says the formal brief lives of two troubadours frame A Song for Arbonne to signal that the whole book is a song.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "The formal, brief lives of the two troubadours at the beginning",
+   "page": "answer on style and tone changing between books"
+  },
+  {
+   "index": 624,
+   "feature": "concrete sensory noun",
+   "claim": "Kay says details are critical, and describes asking of each drafted scene what details it needs.",
+   "source": "Guy Gavriel Kay, interviewed by Peter Halasz, NYRSF 2000, reproduced at BrightWeavings",
+   "url": "https://brightweavings.com/nyrsf_halasz/",
+   "quote": "Details are critical.",
+   "page": "answer on layering up a scene"
+  }
+ ]
+}

@@ -1,0 +1,264 @@
+=== #362 [VERIFIED_VERBATIM] pos318
+CLAIM: Kelly says a Wolfe story carries an underlying real story that the point-of-view character does not necessarily understand and that Wolfe expects the reader to deduce.
+TW: there is an *underlying* story, a 'real' story, that the pov character does not necessarily understand, but which Wolfe counts on the reader to being able to deduce
+NOTE: Quote verbatim (including the page's own ungrammatical 'to being able to deduce'). Both limbs -- pov character does not necessarily understand; Wolfe counts on the reader to deduce -- are on the page, and the page generalises it to 'most if not all of his works'.
+
+=== #363 [VERIFIED_VERBATIM] pos319
+CLAIM: Kelly says the fact that the narrator's large house is a brothel emerges in the course of the narration rather than being stated.
+TW: It develops that this large house is a brothel.
+NOTE: Quote verbatim in Kelly's plot summary. The house is the narrator's: the preceding sentence has the narrator living 'with his brother David in a big house in the city of Port-Mimizon'. The limb 'emerges in the course of the narration rather than being stated' is carried by 'It develops that', reinforced by the next paragraph ('describes his surroundings at face value, leaving it up to the reader').
+
+=== #364 [VERIFIED_VERBATIM] pos320
+CLAIM: Kelly, summarising Joan Gordon's 1986 Starmont study, says the novella's theme is underscored by small details in the text such as the house's address.
+TW: Gordon goes on to explain how the novella's theme of denying human individuality is underscored by small details in the text: the address of the house at 666
+NOTE: Quote verbatim; the house-address example ('the address of the house at 666...') is on the page. Attribution limbs confirmed: 'Joan Gordon, author of a thin Starmont Press paperback about Gene Wolfe's works, published way back in 1986'. Minor metadata drift only: the claim's source line says 'Starmont House'; Kelly writes 'Starmont Press'.
+
+=== #365 [VERIFIED_VERBATIM] pos321
+CLAIM: Kelly says it is difficult to find a paragraph anywhere in Wolfe that is not both precise and poetic.
+TW: It is difficult to find a paragraph in any of Wolfe's works that is not both precise and poetic.
+NOTE: Quote verbatim; 'in any of Wolfe's works' supports the claim's 'anywhere in Wolfe'. Sentence sits immediately before the sample paragraph Kelly quotes at random, as the claim's page hint says.
+
+=== #366 [VERIFIED_VERBATIM] pos322
+CLAIM: Macdonald says the things Severian knows that the reader does not are left unexplained because they are the mysteries of his trade.
+TW: the things that Severian knows about that we don't are not explained because they are the mysteries of his trade
+NOTE: Raw page fetched directly (katemacdonald.net, curl 200; title 'Gene Wolfe's The Shadow of the Torturer - Kate Macdonald', 'Published January 9, 2017'). Quote verbatim; every limb on the page, which continues 'and we the readers are not privy to these'.
+
+=== #367 [VERIFIED_VERBATIM] pos323
+CLAIM: Macdonald says Wolfe's new vocabulary is mainly nouns that sound as if made from a familiar root by changing a vowel or suffix.
+TW: His new vocabulary (mainly nouns) sounds as if it was altered by changing a vowel or suffix to make new words from a familiar root.
+NOTE: Quote verbatim and the rest of the sentence supplies the claim's remaining limbs (familiar root, vowel or suffix).
+
+=== #368 [VERIFIED_VERBATIM] pos324
+CLAIM: Macdonald says the meaning of Wolfe's strange words is fairly obvious from context.
+TW: Their meaning is fairly obvious in the context
+NOTE: Quote verbatim, immediately after Macdonald's sample list (cataphract, optimate, armigette, fuligin, etc.), so 'Wolfe's strange words' is the correct referent.
+
+=== #369 [VERIFIED_VERBATIM] pos325
+CLAIM: Macdonald says Wolfe also changes the meaning of real words, giving destrier as her example.
+TW: He also changes the meaning of real words, like destrier, which in his world isn't a horse
+NOTE: Quote verbatim; destrier is given as the example exactly as the claim states.
+
+=== #370 [VERIFIED_VERBATIM] pos326
+CLAIM: Macdonald says Wolfe's frame invites the reader to think about these stories as histories, reports, assessments and commentaries rather than only as story.
+TW: So we don't just read 'story', we also think about these stories as histories, reports, assessments, commentaries
+NOTE: Quote verbatim. The 'frame' limb is supported by the same paragraph: 'For this purportedly post-historic frame narrative Wolfe adds a note at the end... inviting the reader to think about these stories as being the narratives and records of history that have not happened yet.' 'rather than only as story' is the page's own 'we don't just read story'.
+
+=== #371 [VERIFIED_VERBATIM] pos327
+CLAIM: Macdonald says the torture is reported from a very clinical viewpoint.
+TW: Instead, we're told about the event from a very clinical viewpoint, and also an artist's perspective.
+NOTE: Quote verbatim. 'The event' is the torture scene -- the preceding sentence names 'a torture scene'. The claim omits, but does not contradict, the page's added 'and also an artist's perspective'.
+
+=== #372 [VERIFIED_VERBATIM] pos328
+CLAIM: Macdonald says the narration withholds screams, bleeding flesh and details of pain from the torture scenes, so the reader feels no immediate horrified empathy.
+TW: Because we aren't told anything about screams, bleeding flesh, details of pain... we don't feel immediate horrified empathy
+NOTE: Quote verbatim, and the consequence limb ('so the reader feels no immediate horrified empathy') is the same sentence's main clause.
+
+=== #373 [VERIFIED_VERBATIM] pos329
+CLAIM: Macdonald says Wolfe casts casual asides into the reader's path just when attention is expected elsewhere.
+TW: Wolfe is an expert distracter of attention, of casting casual asides down in our path just as we expect to be focusing on something else
+NOTE: Quote verbatim; the 'just when attention is expected elsewhere' limb is the page's 'just as we expect to be focusing on something else'.
+
+=== #374 [VERIFIED_VERBATIM] pos330
+CLAIM: A MetaFilter reader reports that in Shadow of the Torturer the narrator meets a blind man and never mentions that he is blind.
+TW: the narrator encounters a blind man but never mentions he is blind
+NOTE: Raw MetaFilter thread 149475 fetched directly (curl 200). Quote verbatim inside the comment attributed on-page to 'posted by straight at 9:00 AM on May 8, 2015'; the same comment names 'Shadow of the Torturer' as the book. All limbs confirmed.
+
+=== #375 [VERIFIED_VERBATIM] pos331
+CLAIM: A MetaFilter reader disputes the ambiguity reading, arguing Wolfe's unreliability is a puzzle readers assemble from careful cluing rather than genuine epistemic uncertainty.
+TW: "unreliability" as an intricate, hyperrational puzzle, not epistemic uncertainty
+NOTE: RogerB, 8:50 AM May 8 2015, confirmed on raw page: "it has basically nothing to do with unresolvable ambiguity or genuine epistemic uncertainty... it's 'unreliability' as a kind of intricate, hyperrational trick or puzzle for readers, who assemble based on careful cluing the truth that the narrator doesn't know." Quote exact; both limbs (disputes ambiguity reading; puzzle assembled from cluing) supported.
+
+=== #376 [VERIFIED_VERBATIM] pos332
+CLAIM: A MetaFilter reader says the text reveals how horrible Severian is through what still manages to slip through his own narration.
+TW: revealing how horrible he is through what slips through his narration
+NOTE: Pseudoephedrine, 12:29 PM May 8 2015: "Severian is a bad guy... revealing how horrible he is through what still manages to slip through his narration." Quote exact. Page says "his narration"; the claim's "his own narration" is a paraphrase outside the quoted span, not a distinct limb.
+
+=== #377 [VERIFIED_VERBATIM] pos333
+CLAIM: A MetaFilter reader says some Wolfe narrators are sincere recorders of what they experienced who have fundamentally misunderstood the events they record.
+TW: sincere recorders who fundamentally misunderstood the events of the story
+NOTE: byanyothername, 9:00 AM May 8 2015: "Some are sincere recorders of the truth they've experienced, but they've fundamentally misunderstood the events of the story." Quote exact (straight apostrophes on page, matching). Claim's "the events they record" tracks "the events of the story".
+
+=== #378 [VERIFIED_VERBATIM] pos334
+CLAIM: A MetaFilter reader names deliberate frustration of expectations as the Wolfe device more central than unreliable narration.
+TW: even more central than unreliable narration is deliberate frustration of expectations
+NOTE: straight, 9:11 AM May 8 2015: "The thing Wolfe does that I think is even more central than unreliable narration is the deliberate frustration of expectations." Quote exact; the comparative limb ("more central than unreliable narration") is on the page verbatim.
+
+=== #379 [VERIFIED_VERBATIM] pos335
+CLAIM: A MetaFilter reader states that in The Book of the New Sun everything archaic to Severian is rendered as Latin.
+TW: Everything archaic to Severian is rendered as Latin.
+NOTE: Ipsifendus, 8:57 AM May 8 2015. Quote exact, closing the paragraph "About that language..." whose surrounding comment is explicitly about BotNS/Urth, supporting the claim's "in The Book of the New Sun" limb.
+
+=== #380 [VERIFIED_VERBATIM] pos336
+CLAIM: A MetaFilter reader attributes to Wolfe the remark that everything means something but not everything means very much.
+TW: As he has said, "Everything means something, but not everything means very much."
+NOTE: straight, 9:00 AM May 8 2015 (attribution line "posted by straight at 9:00 AM on May 8, 2015"). Quote exact; "he" is Wolfe in context ("the solution to his puzzles"), supporting the attribution-to-Wolfe limb.
+
+=== #381 [VERIFIED_VERBATIM] pos337
+CLAIM: A MetaFilter reader reports that Wolfe, asked by letter about a contradiction in the first pages of Shadow of the Torturer, answered that it was a typo.
+TW: Wolfe's explanation for the contradiction: "Typo."
+NOTE: Ipsifendus, 9:25 AM May 8 2015: "Within the first 2 pages of 'Shadow of the Torturer', there's a contradiction... my wife wrote Wolfe a letter... asking about the contradiction. Wolfe replied by writing me directly... and an explanation for the contradiction: Typo." All limbs (letter, first pages of Shadow of the Torturer, typo answer) supported; the letter was sent by his wife, which the claim does not contradict.
+
+=== #382 [VERIFIED_VERBATIM] pos338
+CLAIM: Ian Sales says the title novella of The Fifth Head of Cerberus opens traditionally, as a childhood memory.
+TW: The novella opens traditionally enough—a childhood memory
+NOTE: iansales post #1, Jun 13 2006. Quote exact (em dash matches). Context paragraph opens "Something is not quite right about the world of 'The Fifth Head Of Cerberus'", so "the novella" is the title novella, supporting that limb.
+
+=== #383 [VERIFIED_VERBATIM] pos339
+CLAIM: Ian Sales says that three paragraphs after that conventional opening the reader learns the narrator's father traded in children.
+TW: three paragraphs later we learn that the narrator's father traded in children
+NOTE: iansales post #1, same sentence as index 382: "The novella opens traditionally enough—a childhood memory—but three paragraphs later we learn that the narrator's father traded in children." Quote exact including the curly apostrophe.
+
+=== #384 [VERIFIED_VERBATIM] pos340
+CLAIM: Ian Sales says the novella 'V.R.T.' consists of excerpts from taped interviews and a field journal, framed by a military officer reading those documents to decide on an incarceration.
+TW: excerpts from taped interviews, field journal, transcripts and prison diary, framed by the officer's reading
+NOTE: iansales post #1: "It consists of excerpts from taped interviews, the field journal, interrogation transcripts and prison diary of Marsch, framed by a narrative describing the military officer reading those documents in order to make a decision on Marsch's incarceration." Quote exact; military officer and incarceration-decision limbs both verbatim.
+
+=== #385 [VERIFIED_VERBATIM] pos341
+CLAIM: Ian Sales says the authorities read a table of bullet-drop figures found in a field guide as meaning Marsch is an assassin.
+TW: figures describe bullet drop; the authorities take this to mean Marsch is an assassin
+NOTE: iansales post #1: the evidence is "a table of figures in the back of a copy of A Field Guide to the Animals of St Anne... The figures apparently describe the amount of drop in trajectory of a bullet for given ranges, and the authorities take this to mean Marsch is an assassin." Quote exact; field-guide and bullet-drop limbs supported.
+
+=== #386 [VERIFIED_VERBATIM] pos342
+CLAIM: Ian Sales says clues in the text, including a library shelf description, suggest the unnamed narrator's surname is Wolfe.
+TW: Clues in the text suggest his surname is Wolfe—the book under 'W' in the library
+NOTE: iansales post #1: "'The Fifth Head Of Cerberus' is the remembrances of an unnamed narrator. Clues in the text suggest his surname is Wolfe—the description of a book by his father appearing under 'W' in the library:" followed by the block-quoted shelf passage. Quote exact; unnamed-narrator and library-shelf limbs both supported.
+
+=== #387 [VERIFIED_VERBATIM] pos343
+CLAIM: A forum analyst says objective outside detail is, in his opinion, at the heart of getting to the bottom of things in Wolfe.
+TW: objective outside detail is usually, in my opinion, at the heart of getting to the bottom of things in Wolfe
+NOTE: felicibusbrevis post #16, Mar 24 2013, written for the Urth list ("I just wrote this little write up for the urth list"); the sentence sits in the "First, my philosophy on Wolfe's stories" paragraph. Quote exact. Only slippage: the page hedges with "usually", which the claim drops; the claim keeps "in his opinion", so no limb is left unsupported.
+
+=== #388 [VERIFIED_VERBATIM] pos344
+CLAIM: The same forum analyst says the embedded aboriginal myth “A Story” is written in a mythic dream prose very different from the first part of the novel.
+TW: that mythic but confusing dream prose... very different than the first part of the novel
+NOTE: felicibusbrevis post #16: "The style of A Story is something Wolfe is very good at – that mythic but confusing dream prose that channels the savage mind without losing sophistication. It is very different than the first part of the novel". Quote exact. "Embedded aboriginal myth" is supported on the same page by post #1 ('"A Story," by John V. Marsch' is a Sainte Anne aboriginal myth, as transcribed by Marsch).
+
+=== #389 [VERIFIED_VERBATIM] pos345
+CLAIM: A reader of Peace reports taking things in at face value and failing to catch the significance of what Wolfe was alluding to.
+TW: just taking things in at face value and failed to catch the significance of what he was alluding to
+NOTE: Fried Egg, thread "Peace (*SPOILERS*)", post #1, Sep 14 2010. Quote exact; "he" is Wolfe in context ("Wolfe's eloquant prose"), supporting the "what Wolfe was alluding to" limb.
+
+=== #390 [VERIFIED_VERBATIM] pos346
+CLAIM: The reader who proposed the Urth list's chapter-by-chapter close reading says he does not believe in trivial trivia in Wolfe.
+TW: I don't believe in trivial trivia, provided one can ask
+NOTE: Wayback raw capture 20210416053640id_ of the pipermail page (live lists.urth.net refused connection on port 80 after 75s). JWillard, Mon Sep 4 04:28:31 PDT 2006, subject '(urth) Close Reading: Torturer Chapter I'. Page: 'As no one has delivered a comprehensive key to the Wolfe opus, I don't believe in trivial trivia, provided one can ask an interesting question or defend an interesting observation about it.' Proposer limb confirmed by the opening paragraph ('it might be interesting to start a close-reading project, beginning at the beginning with Shadow of the Torturer... A chapter every few days or every week'). Locator quibble only: the sentence sits in paragraph 2 of the message body, not paragraph 3; the claim itself does not assert a paragraph.
+
+=== #391 [VERIFIED_VERBATIM] pos347
+CLAIM: The same reader describes his reading posture as walking through Wolfe like a minefield.
+TW: A reminder of why I walk through Wolfe like a minefield
+NOTE: Same Wayback raw capture. Verbatim: 'A reminder of why I walk through Wolfe like a minefield: description of Vodalus, "I could see him through the fog, very tall, slender..."' Same author, same message as 390.
+
+=== #392 [VERIFIED_VERBATIM] pos348
+CLAIM: The same reader treats the hedge word “perhaps” in Severian's narration as a signal that something is being covered.
+TW: Whenever Severian uses a perhaps... I get nervous
+NOTE: Same Wayback raw capture. The item is headed 'Suspicious sentence:' and quotes 'The knife had somehow fallen from the dead man's neck. Perhaps he had pulled it out in his agony.', then: 'Whenever Severian uses a perhaps, or one of its relatives, I get nervous. What other purpose would the line have? Is this someone half-healed by Severian's presence? Something entirely different?' The 'something is being covered' limb rests on the 'Suspicious sentence' heading plus those follow-up questions, which is the passage's plain sense.
+
+=== #393 [VERIFIED_VERBATIM] pos349
+CLAIM: Dan'l Danehy-Oakes calls the first line of Shadow of the Torturer a haunting first line.
+TW: A rather haunting first line, for me.
+NOTE: Wayback raw capture 20210416053708id_ of the 002922 pipermail page (live host unreachable). Dan'l Danehy-Oakes, Tue Sep 5 11:45:40 PDT 2006. Follows his quotation of 'p9. IT IS POSSIBLE I already had some presentiment of my future.', i.e. the first line of Shadow of the Torturer, so both limbs hold.
+
+=== #394 [VERIFIED_VERBATIM] pos350
+CLAIM: Dan'l Danehy-Oakes says the first page of Shadow of the Torturer is full of forward references.
+TW: This first page is full of forward references:
+NOTE: Same Wayback raw capture. Sentence introduces three bulleted forward references (the locked and rusted gate, 'the symbol of my exile', 'a walk I would take, much later'). The clipped quote 'This first page is full of forward' is a verbatim prefix.
+
+=== #395 [VERIFIED_VERBATIM] pos351
+CLAIM: Dan'l Danehy-Oakes says the fight in chapter I is more like a real fight than most in fiction.
+TW: delightfully confused, more like a real fight than most in fiction
+NOTE: Same Wayback raw capture. Full sentence: 'The fight between Vodalus and the volunteers is delightfully confused, more like a real fight than most in fiction.' The 'chapter I' limb holds: the whole message is his chapter-I close reading (subject line and 'Chapter title: "Resurrection and Death"').
+
+=== #396 [VERIFIED_VERBATIM] pos352
+CLAIM: Dan'l Danehy-Oakes argues the explanation Severian himself offers for the coin's binding power does not hold up against a detail the narration supplies.
+TW: Not Vodalus', to be sure; so the magickal explanation he offers simply doesn't wash.
+NOTE: Same Wayback raw capture. Preceding sentences carry the other limbs: 'Nor, I think, does his explanation of the efficacy of the coin in cementing his service ring true. He goes out of his way to point out that soldiers take their oath to the Autarch and are given a coin with the Autarch's picture. Whose picture is on the coin Vodalus gives Severian?' The supplied detail is the narration's Autarch-coin comparison; 'Not Vodalus'' is Danehy-Oakes's own step, which the claim does not misattribute.
+
+=== #397 [VERIFIED_VERBATIM] pos353
+CLAIM: Roy C. Lackey argues that a contradiction about who was handed the pistol, repeated in the appendix to Citadel of the Autarch, is probably Wolfe's own mistake rather than the narrator's.
+TW: The mistake is repeated in the appendix to CITADEL, so the mistake is probably Wolfe's.
+NOTE: Wayback raw capture 20210416053642id_ of the 002935 pipermail page (live host unreachable). Roy C. Lackey, Tue Sep 5 23:34:45 PDT 2006. Contradiction limb: 'Vodalus definitely gave the pistol to Hildegrin. But later, Sev recalls the scene and has Vodalus giving it to Thea.' The 'rather than the narrator's' limb is carried by the contrast with the very next mistake, of which he writes 'That mistake may or may not be Sev's.'
+
+=== #398 [VERIFIED_VERBATIM] pos354
+CLAIM: Gevers says each volume of The Book of the Long Sun opens with a dialogue in which the informed figure yields his information only in oracular or otherwise obscure form.
+TW: a figure possessing privileged information, which he will only yield up in oracular or otherwise obscure form
+NOTE: Live fetch of https://ultan.org.uk/the-reader-as-augur/ (HTTP 200, 110KB), article by Nick Gevers dated 5 September 2000. Full sentence: 'To this end, each opening passage features a dialogue between a more-or-less naive individual and a figure possessing privileged information, which he will only yield up in oracular or otherwise obscure form.' 'Each volume' limb carried by the surrounding paragraph on 'the beginnings and endings of the four volumes'.
+
+=== #399 [VERIFIED_VERBATIM] pos355
+CLAIM: Gevers says the information in each opening passage, and the precise character of its obscurity, amount to terms of reading for the rest of the volume.
+TW: The information and the precise character of its obscurity amount to guidance, to terms of reading, for the remainder of the volume.
+NOTE: Same live Ultan's Library page, the sentence immediately following the one behind claim 398. Verbatim.
+
+=== #400 [VERIFIED_VERBATIM] pos356
+CLAIM: Gevers, using Kim Stanley Robinson's and John Clute's term 'slingshot ending', describes an ending whose momentum of implication carries beyond the text it terminates.
+TW: in what Kim Stanley Robinson and John Clute term a “slingshot ending”, an ending whose momentum of implication carries well beyond the confines of the text it terminates
+NOTE: Same live Ultan's Library page, same paragraph. All limbs verbatim, including the attribution of the term to Robinson and Clute.
+
+=== #401 [VERIFIED_VERBATIM] pos357
+CLAIM: Gevers reads the first words of Lake of the Long Sun as establishing that silent implication can convey as much as any violent confrontation.
+TW: Lake's first words... silent implication can convey as much as any violent confrontation
+NOTE: Same live Ultan's Library page, section on Lake of the Long Sun: 'The tone for this is set by Lake's first words: “Silence fell, abrupt as a shouted command” (p. 13); silent implication can convey as much as any violent confrontation.' The 'first words' limb is explicit.
+
+=== #402 [VERIFIED_VERBATIM] pos358
+CLAIM: Gevers says the opening of Nightside the Long Sun presents signs to two augurs at once, Silk and the reader.
+TW: Within that scope, signs are presented to those augurs, Silk and the reader.
+NOTE: Same live Ultan's Library page, in the discussion of Nightside the Long Sun's opening enlightenment (pp. 9-10, paragraphs one and two). Both the two-augurs limb and the Nightside-opening limb hold.
+
+=== #403 [VERIFIED_VERBATIM] pos359
+CLAIM: Gevers reads a passing description of a boy's frozen grin as an ironic tribute to that character's concealed function as the tetralogy's narrator.
+TW: Horn's grin is “frozen in forever”, an ironic tribute to his craftily concealed and long-term function as Long Sun's narrator.
+NOTE: Same live Ultan's Library page, same paragraph as 402. 'Boy' limb holds: Horn is one of the boy pupils in the basketball game described a paragraph earlier.
+
+=== #404 [VERIFIED_VERBATIM] pos360
+CLAIM: Gevers says that in Exodus From the Long Sun Wolfe's narration becomes spare and unexplanatory, a minefield of hints and implications.
+TW: Wolfe's narration becomes spare, unexplanatory, a minefield of hints and implications
+NOTE: Same live Ultan's Library page, in the volume-four discussion: 'Subplots and intrigues multiply; beliefs and loyalties shift wildly; Wolfe's narration becomes spare, unexplanatory, a minefield of hints and implications, both practical and symbolic.' Volume four is Exodus From the Long Sun, named as Exodus throughout that section ('Exodus concludes with the customary schism and slingshot').
+
+=== #405 [VERIFIED_VERBATIM] pos361
+CLAIM: Gevers says volume three states as its terms of reading the necessity of assembling the text's meaning from numerous seemingly disconnected clues.
+TW: the necessity of assembling the meaning of the text from numerous seemingly disconnected clues
+NOTE: Raw page fetched (HTTP 200, browser UA). Byline 'By Nick Gevers', dated 5 September 2000 (2000-09-05T19:32:56 in the markup), title 'The Reader as Augur'. Quote appears word for word in the Calde section. Page's exact framing: 'Quetzal's remarks offer rich insight ... and state volume three's operating instructions to the reader: the necessity of assembling the meaning of the text from numerous seemingly disconnected clues, the need to trust the narrator no further than necessary'. The instructions are attributed to volume three, so the claim's 'volume three states as its terms of reading' holds; the vehicle is Quetzal's remarks.
+
+=== #406 [VERIFIED_VERBATIM] pos362
+CLAIM: Gevers reads the physical detail of a hastily erected triumphal arch as a sign of the makeshift nature of the new revolutionary regime.
+TW: The augural eye can perceive the 'hastily erected' 'triumphal arch' (p. 379) as a sign of the generally makeshift nature of the revolutionary regime of which Silk is now calde
+NOTE: Quote verbatim in the Calde Epilogue section. Both physical details ('hastily erected', 'triumphal arch', p. 379) and the makeshift-regime reading are on the page; 'new' regime is supported by 'the revolutionary regime of which Silk is now calde' following the uprising.
+
+=== #407 [VERIFIED_VERBATIM] pos363
+CLAIM: Gevers says the narrator's self-identification in the closing section of Exodus forces the reader to re-appraise the whole preceding text.
+TW: After Horn has identified himself as the narrator of Long Sun in the section entitled 'My Defense' (pp. 370-382), thus forcing the reader to re-appraise the whole of the preceding text
+NOTE: Quote verbatim in the Exodus section. Nuance recorded, not a defect: 'My Defense' (pp. 370-382) is followed by a separate two-page 'Afterward' (pp. 382-383) by an unnamed narrator, so the self-identification sits in the concluding section of Horn's narrative rather than the literal final pages; the page frames the whole passage as how 'Exodus concludes'.
+
+=== #408 [VERIFIED_VERBATIM] pos364
+CLAIM: Rich Horton calls the opening sentence of Peace somewhat famous.
+TW: The novel's somewhat famous opening sentence reads
+NOTE: Raw page fetched (HTTP 200). Blog 'Strange at Ecbatan', author Rich Horton, post dated August 18, 2024 - consistent with the cited 'August 2024'. Quote verbatim, immediately preceding the quoted elm-tree sentence.
+
+=== #409 [VERIFIED_VERBATIM] pos365
+CLAIM: Rich Horton says a legend supplied later in Peace lets the reader infer that the fallen elm was planted on the narrator's grave.
+TW: We learn later that Eleanor Bold planted trees on the graves of her friends ... One assumes, then, that the elm tree that has just fallen was planted on Weer's grave
+NOTE: Quote verbatim. Every limb on the page: the legend is supplied later ('We learn later'; 'there is an old legend that when a tree planted on one's grave falls, the ghost ... is released'), and the inference is Horton's own ('One assumes, then').
+
+=== #410 [VERIFIED_VERBATIM] pos366
+CLAIM: Rich Horton infers from that same detail that the narration of Peace comes decades or more after the narrator's death.
+TW: which tells us too that this narration is likely decades if not more after Weer's death
+NOTE: Quote verbatim, in the same sentence as the grave inference, so 'from that same detail' is supported by 'which tells us too'.
+
+=== #411 [VERIFIED_VERBATIM] pos367
+CLAIM: Rich Horton says Peace contains a great many lacunae, with very few of its stories actually coming to an end.
+TW: There are also a great many lacunae. Very few of the stories actually come to an end
+NOTE: Quote verbatim; 'lacunae' is italicised in the markup (<i>lacunae</i>.), which is why a naive tag-strip inserts a space - the rendered sentence is exactly 'There are also a great many lacunae.' The second limb is the immediately following sentence.
+
+=== #412 [VERIFIED_VERBATIM] pos368
+CLAIM: A reader quoting one Peace sentence in full remarks that it is a single sentence and that some are a struggle to get through.
+TW: One sentence, guys. Some of them are a struggle to get through but the effort is so worth it!
+NOTE: Raw page fetched (HTTP 200); post dated 2016-08-20 on Tree Slices. The remark follows two full block quotations of long Peace sentences from p. 15, the second introduced as 'Or this sentence, further down the same page' - so both limbs (quoting a Peace sentence in full; remarking it is a single sentence) are on the page.
+
+=== #413 [VERIFIED_VERBATIM] pos369
+CLAIM: Andy Lee says the narrator's voice constructs the world of a novel by revealing some truths and concealing others.
+TW: only in novels does the voice of the narrator construct it, revealing some truths and concealing others
+NOTE: Raw page fetched (HTTP 200). Byline Andy Lee, Lit & Chess, dated 2026-07-12 in the markup ('Jul 12, 2026'). Quote verbatim; the antecedent of 'it' is 'the world' from the preceding clause about film and television, supporting 'constructs the world of a novel'.
+
+=== #414 [VERIFIED_VERBATIM] pos370
+CLAIM: Andy Lee says Wolfe never shows the reader the monster of Peace directly.
+TW: Wolfe never shows you the monster directly
+NOTE: Quote verbatim, in the paragraph beginning 'What raises Peace from a good mystery yarn', exactly as the claim's page hint states.

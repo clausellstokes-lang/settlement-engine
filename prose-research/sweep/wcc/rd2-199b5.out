@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>403</title>
+    <meta name="description" content="403 Forbidden.">
+    <!-- Default stuff -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-- Preload and load stylesheet -->
+<link rel="preload" href="https://catsarch.com/style-v5.css" as="style">
+<link rel="stylesheet" href="https://catsarch.com/style-v5.css">
+  </head>
+  <body>
+    <header>
+  <h1>Cat's Arch</h1>
+  <p>Error Page</p>
+  <p><a rel="external noreferrer" target=_blank href="http://catsarchywsyuss6jdxlypsw5dc7owd5u5tr6bujxb7o6xw2hipqehyd.onion/">Tor</a> | <a rel="external noreferrer" target=_blank href="http://catsarch.i2p/?i2paddresshelper=vsuWkpa~YHjGkBMjZQzlzEyRpSz-9kJWfbYKF0ASiS--y5aSlr9geMaQEyNlDOXMTJGlLP72QlZ9tgoXQBKJL77LlpKWv2B4xpATI2UM5cxMkaUs~vZCVn22ChdAEokvvsuWkpa~YHjGkBMjZQzlzEyRpSz-9kJWfbYKF0ASiS--y5aSlr9geMaQEyNlDOXMTJGlLP72QlZ9tgoXQBKJL77LlpKWv2B4xpATI2UM5cxMkaUs~vZCVn22ChdAEokvvsuWkpa~YHjGkBMjZQzlzEyRpSz-9kJWfbYKF0ASiS--y5aSlr9geMaQEyNlDOXMTJGlLP72QlZ9tgoXQBKJL77LlpKWv2B4xpATI2UM5cxMkaUs~vZCVn22ChdAEokvvsuWkpa~YHjGkBMjZQzlzEyRpSz-9kJWfbYKF0ASiS--y5aSlr9geMaQEyNlDOXMTJGlLP72QlZ9tgoXQBKJL80GU-Tj98MdZof2u1~8dRTJg02pC1WWbmKixght8IUhBQAEAAcAAA==">I2P</a></p>
+</header>
+    <hr>
+    <main>
+      <h2 class="red">403</h2>
+      <h3>Forbidden</h3>
+      <p>You don't have access to this resource.</p>
+      <p>If you feel this is an error feel free to use the buttons in the footer to contact me! I'm only human, I make mistakes.</p>
+      <p>Please include this error code if you contact me: 0,0,0,0,1,1</p>
+      <p><a href="/">Go back home</a></p>
+    </main>
+    <hr>
+    <!-- $lazy_load_echo is used because these should be loaded immediately on things like error pages where they're in view by default -->
+<footer>
+  <p>Made by Butter Cat</p>
+  <p>
+    <a href=mailto:ButteredCats@protonmail.com>Email</a></li> |
+    <a rel="external noreferrer" target=_blank href="https://keys.openpgp.org/search?q=butteredcats%40protonmail.com">PGP key</a> |
+    <a rel="external noreferrer" target=_blank href=https://codeberg.org/ButteredCats/catsarch-website>HTML Source</a> |
+    <a rel="external noreferrer" target=_blank href="https://codeberg.org/ButteredCats/nginx-config">NGINX Config</a>
+  </p>
+  <!-- Thanks to https://www.anybrowser.org/campaign/abgraphics.html and Bo®is for the any browser,  https://qalle.neocities.org/88x31/ for the pansexual pride and BD inside, https://badge.les.bi/ for the demisexual pride, and many others for the buttons! If I remember the source for others I'll put them here. -->
+  <a rel="external noreferrer" target=_blank href="https://www.anybrowser.org/campaign/"><img  src="https://catsarch.com/images/88x31/anybrowser-v1.gif" alt="Viewable With Any Browser" title="Viewable With Any Browser"></a>
+  <a rel="external noreferrer" target=_blank href="https://www.defectivebydesign.org/what_is_drm"><img  src="https://catsarch.com/images/88x31/drm-v1.webp" alt="Defective by design. Eliminate DRM, Now!" title="Defective by design. Eliminate DRM, Now!"></a>
+  <a rel="external noreferrer" target=_blank href="https://internet.nl/faqs/ipv6/"><img  src="https://catsarch.com/images/88x31/ipv6-v1.png" alt="This site supports IPv6" title="This site supports IPv6"></a>
+  <a rel="external noreferrer" target=_blank href="https://stallman.org/google.html"><img  src="https://catsarch.com/images/88x31/stand-up-to-google-v1.gif" alt="Fight for open web standards. Fight for online privacy. Fight against monopolistic practices. Stand Against Google!" title="Fight for open web standards. Fight for online privacy. Fight against monopolistic practices. Stand Against Google!"></a>
+  <a rel="external noreferrer" target=_blank href="https://tosdr.org/"><img  src="https://catsarch.com/images/88x31/ihavenotread-v1.gif" alt="I have read and agree to the Terms is the biggest lie on the web. Together, we can fix that." title="I have read and agree to the Terms is the biggest lie on the web. Together, we can fix that."></a>
+  <a rel="external noreferrer" target=_blank href="https://torproject.org/"><img  src="https://catsarch.com/images/88x31/tor-v1.png" alt="Get Tor and stay private!" title="Get Tor and stay private!"></a>
+  <a rel="external noreferrer" target=_blank href="https://geti2p.net/"><img  src="https://catsarch.com/images/88x31/i2p-v1.png" alt="Get I2P and browse catsarch.i2p!" title="Get I2P and browse catsarch.i2p!"></a>
+  <img  src="https://catsarch.com/images/88x31/mymom-v1.gif" alt="My Mom!" title="My Mom!">
+  <img  src="https://catsarch.com/images/88x31/fspeech96-v1.gif" alt="Free Speech, Now!" title="Free Speech, Now!">
+  <img  src="https://catsarch.com/images/88x31/catboys-v1.webp" alt="Catboys, Meow!" title="Catboys, Meow!">
+  <img  src="https://catsarch.com/images/88x31/pansexual-v1.png" alt="Be pan, be proud!" title="Be pan, be proud!">
+  <img  src="https://catsarch.com/images/88x31/demisexual-v1.svg" alt="Be demi, be proud!" title="Be demi, be proud!">
+  <img  src="https://catsarch.com/images/88x31/netneutrality-v1.png" alt="I Support Net Neutrality" title="I Support Net Neutrality">
+  <img  src="https://catsarch.com/images/88x31/righttorepair-v1.png" alt="I Support Right To Repair" title="I Support Right To Repair">
+  <img  src="https://catsarch.com/images/88x31/linux-v1.png" alt="Linux, Now!" title="Linux, Now!">
+  <img  src="https://catsarch.com/images/88x31/internet-privacy-v1.gif" alt="Internet Privacy, Now!" title="Internet Privacy, Now!">
+  <img  src="https://catsarch.com/images/88x31/bd-inside-v1.png" alt="I've got that dragon inside me OwO" title="I've got that dragon inside me OwO">
+</footer>
+  </body>
+</html>

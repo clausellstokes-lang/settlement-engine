@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 12,
+ "claims": [
+  {
+   "index": 678,
+   "feature": "homogenisation",
+   "claim": "Scalzi argues that leaving prose quality aside, the sheer repetition of elements across generated submissions is by itself enough to remove the material from serious editorial consideration.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "the sheer repetition of elements will remove the material from serious consideration",
+   "page": "para. beginning \"If this is indeed mostly scamsters\""
+  },
+  {
+   "index": 679,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Scalzi describes AI as a fast, infinite generator of competently-assembled bullshit with no ability to tell truth from nonsense.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "a fast, infinite generator of competently-assembled bullshit",
+   "page": "para. beginning \"But, as it happens, I agree with the text here\""
+  },
+  {
+   "index": 680,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Scalzi frames the gap as one between text that is serviceable on the sentence level and text that is actually good, and says closing it takes so much human work that skipping the generation step would be less work.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "serviceable on the sentence level",
+   "page": "para. beginning \"This estimation, mind you\""
+  },
+  {
+   "index": 681,
+   "feature": "reader and expert judgment",
+   "claim": "Scalzi states in February 2026 that he does not use AI in his published text partly because he writes better than AI can or ever will.",
+   "source": "John Scalzi, novelist, Whatever, 14 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "I write better than",
+   "page": "numbered point 1"
+  },
+  {
+   "index": 682,
+   "feature": "reader and expert judgment",
+   "claim": "Scalzi asserts in February 2026 that there is no statistical model that can create what is uniquely you.",
+   "source": "John Scalzi, novelist, Whatever, 14 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "There is no statistical model that can create what is uniquely you",
+   "page": "numbered point 10, final line before the '- JS' sign-off"
+  },
+  {
+   "index": 683,
+   "feature": "model era drift",
+   "claim": "A commenter using the name Fatman argues on Scalzi's blog that although LLMs have improved considerably at pattern-recognition tasks, more powerful software has so far not led to better machine-generated fiction.",
+   "source": "'Fatman', a reader commenting on John Scalzi's Whatever, 15 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "more powerful software has so far not led to better machine-generated fiction",
+   "page": "comment thread, comment by Fatman timestamped February 15, 2026, 9:50 am"
+  },
+  {
+   "index": 684,
+   "feature": "counter-evidence",
+   "claim": "A commenter using the name Quill argues on Scalzi's blog that AI will be better at writing than Scalzi within roughly two to seven years.",
+   "source": "'Quill', a reader commenting on John Scalzi's Whatever, quoted by another commenter, February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "AI will be better at writing than you are",
+   "page": "comment thread, quoted by Fatman on February 15, 2026"
+  },
+  {
+   "index": 685,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig argues that a generative model does not conjure an answer but an answer-shaped thing, filling the space with the shape of what was asked for.",
+   "source": "Chuck Wendig, novelist, Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "It will conjure not an answer, but an answer-shaped thing",
+   "page": "section beginning \"AI doesn't know anything\""
+  },
+  {
+   "index": 686,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig calls generative AI almost literally a super-fancy lorum ipsum generator.",
+   "source": "Chuck Wendig, novelist, Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "a super-fancy lorum ipsum generator",
+   "page": "section beginning \"AI doesn't know anything\""
+  },
+  {
+   "index": 687,
+   "feature": "reader and expert judgment",
+   "claim": "A commenter using the name bluespiderwort writes on Wendig's post that AI paragraphs have words, sometimes big words, and lots of sentences, but frequently say nothing.",
+   "source": "'bluespiderwort', a reader commenting on Chuck Wendig's Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "The paragraphs have words, sometimes big words",
+   "page": "comment thread below the post"
+  },
+  {
+   "index": 688,
+   "feature": "other: no model of what the draft is doing",
+   "claim": "Sloan reports that when he tried to make Google's Wordcraft AI play detective in a locked-room mystery it had no idea what was happening a few paragraphs in.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "it had no idea what was happening",
+   "page": "section \"Notes on writing with Google's AI\""
+  },
+  {
+   "index": 689,
+   "feature": "abstraction over the concrete",
+   "claim": "Sloan reports that the model knew he was writing a mystery and reached for the appropriate terms and tropes, but that this was nowhere close to sufficient.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "It knew I was writing a mystery",
+   "page": "section \"Notes on writing with Google's AI\""
+  },
+  {
+   "index": 690,
+   "feature": "steerability",
+   "claim": "Sloan reports that the project only worked once he established a fenced-in space for the AI, assigning it a litany of grisly deaths and fantasy character names to riff on rather than any structural role.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "a fenced-in space for the AI",
+   "page": "section \"Notes on writing with Google's AI\""
+  },
+  {
+   "index": 691,
+   "feature": "steerability",
+   "claim": "Sloan reports that the AI did not make a useful or pleasant writing partner because even a state-of-the-art language model cannot presently understand what a fiction writer is trying to accomplish in an evolving draft.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "did not make a useful or pleasant writing partner",
+   "page": "section \"Notes on writing with Google's AI\", third closing thought"
+  },
+  {
+   "index": 692,
+   "feature": "gloss and over-explaining",
+   "claim": "Doctorow refers in passing to the verbosity of chatbot responses as a reason forwarding transcripts imposes on the reader.",
+   "source": "Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026",
+   "url": "https://pluralistic.net/2026/03/02/nonconsensual-slopping/",
+   "quote": "the verbosity of chatbot responses",
+   "page": "para. beginning \"The same is true of your conversations with chatbots\""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Leaving aside the quality of the prose entirely, the sheer repetition of elements will remove the material from serious consideration.",
+   "note": "Raw live page (curl, browser UA, HTTP 200). Quote exact. Editorial framing supported by the same paragraph: 'if you're an editor, you'll see the current AI tropes dozens of times with each new iteration.'"
+  },
+  {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you want a fast, infinite generator of competently-assembled bullshit, AI is your go-to source.",
+   "note": "Raw live page. Quote exact. Second limb supported in the same paragraph: 'it has no ability to differentiate between truth and nonsense.'"
+  },
+  {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The amount of work required by a human to make AI-generated text go from 'serviceable on the sentence level' to 'actually good' is enough that one wonders why one wouldn't just skip the AI-generating text part entirely. It would be less work.",
+   "note": "Raw live page. Quote exact and both limbs (the serviceable/actually-good gap, and skipping the generation step being less work) are in one sentence pair."
+  },
+  {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But mostly, it's because I write better than 'AI' can or ever will, and I can do it with far less energy draw.",
+   "note": "Raw live page, dated 'Posted on February 14, 2026', numbered point 1, which opens 'I don't and won't use \"AI\" in the text of any of my published work.' Page says 'mostly'; the claim's weaker 'partly' is still supported since the post lists several reasons."
+  },
+  {
+   "index": 682,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There is no statistical model that can create what is uniquely you.",
+   "note": "Raw live page. Quote exact, and it is the final sentence of the point-10 closing paragraph, immediately preceding the '- JS' sign-off, as the claim's page hint states."
+  },
+  {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Over the past couple of years, LLMs have improved considerably in performing patter-recognition tasks. ... But more powerful software has so far not led to better machine-generated fiction.",
+   "note": "Raw live page comment thread; comment byline 'Fatman / February 15, 2026, 9:50 am' matches exactly. Quote exact. The pattern-recognition limb is the preceding sentence (original contains the typo 'patter-recognition')."
+  },
+  {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No, John. You do not write better than AI ever will. At some point, perhaps in two years, perhaps in seven, AI will be better at writing than you are.",
+   "note": "Raw live page. Original is Quill's own comment, 'February 15, 2026, 1:01 am'; Fatman re-quotes it verbatim at 9:50 am, so the claim's 'quoted by another commenter' also holds. Note the page hedges ('At some point, perhaps in two years, perhaps in seven'); the claim's 'within roughly two to seven years' is a fair but slightly tighter rendering."
+  },
+  {
+   "index": 685,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is you giving it the parameters of a block of text, and saying, 'Fill this space with the shape of the thing I'm asking about.' It will conjure not an answer, but an answer-shaped thing.",
+   "note": "Live URL soft-404s to the site homepage for non-browser clients (HTTP 200 but wrong document; a nonsense slug returns the same page). Verified on the Wayback raw capture 20260618213915id_ and confirmed identical in captures 20250524060542id_ and 20250530191023id_. Quote exact; both limbs in consecutive sentences."
+  },
+  {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is, almost literally, a super-fancy lorum ipsum generator.",
+   "note": "Wayback raw captures (three, identical). Quote exact including the post's own misspelling 'lorum', and 'almost literally' is Wendig's own wording."
+  },
+  {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The paragraphs have words, sometimes big words, and lots of sentences, but they frequently say nothing.",
+   "note": "Wayback raw captures. Comment byline 'bluespiderwort says:' timestamped 'May 21, 2025 - 6:51 PM' on that post's thread. Quote exact; the full sentence carries the 'lots of sentences, but frequently say nothing' limb."
+  },
+  {
+   "index": 688,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Paragraphs into my nascent mystery, it had no idea what was happening; or at least, not enough of an idea to 'participate' in any meaningful way.",
+   "note": "Raw live page (robinsloan.com, HTTP 200). Quote exact. Supporting limbs on the same page: the story was 'commissioned by Google and produced using a new AI-powered editor called Wordcraft'; Sloan 'liked the idea of giving the AI the role of the detective' in 'some kind of locked-room mystery'."
+  },
+  {
+   "index": 689,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It knew I was writing a mystery; it reached for the appropriate terms and tropes; but that wasn't anywhere close to being sufficient.",
+   "note": "Raw live page. Quote exact and every limb of the claim is in this single sentence."
+  },
+  {
+   "index": 690,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Then, I cracked it, by establishing a fenced-in space for the AI to contribute what it could.",
+   "note": "Raw live page. Quote exact. Next paragraph supplies the assignment limbs: 'very good at riffing', 'This new story called for a litany of grisly deaths, so, I asked the AI to dream up grisly deaths. I asked it, also, to tell me the names of the dead: characters from a fantasy saga.' 'Rather than any structural role' is not phrased that way on the page but is entailed by the abandoned detective role that 'didn't work at all' immediately above."
+  },
+  {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But, third: I have to report that the AI did not make a useful or pleasant writing partner. Even a state-of-the-art language model cannot presently 'understand' what a fiction writer is trying to accomplish in an evolving draft.",
+   "note": "Raw live page. Quote exact, and it is indeed the third of the 'Three thoughts, to close.' Both limbs are consecutive sentences."
+  },
+  {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "forwarding the transcripts of those sessions doubly so (perhaps triply so, given the verbosity of chatbot responses)",
+   "note": "Raw live page (pluralistic.net, HTTP 200), 'No one wants to read your AI slop (02 Mar 2026)', byline Cory Doctorow, March 2, 2026. Quote exact, inside the paragraph that begins 'The same is true of your conversations with chatbots', and it is genuinely a parenthetical aside - 'in passing' is accurate."
+  }
+ ]
+}

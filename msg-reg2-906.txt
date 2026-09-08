@@ -1,0 +1,14 @@
+§906 ANCHOR+VIS landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
+
+Every figure below was predicted in writing (predict-906.log at 2f1f9381f; the PREDICTIONS line of run-registers-906.sh) before a door ran, and
+the doors were taken AFTER the §906 proof (4 failed / 32321 passed / 111 skipped of 32436 — the three banked rows plus the census walker at the
+predicted 23660). The lighting census was re-taken as register car 1 (b64a47e1d): titles 23653 -> 23660 (the anchor car's one it() and the
+visibility car's six, inside three existing files), suiteTitles 6333 -> 6335 (two new describes), files / parked / credited unchanged. The
+observed-shape CLI's plain read matched the frozen inventory exactly (1972 findings, 0 drift lines; walker 44/44) — no src file moved in this
+consist, so NO --write was taken. The writer-reach dry run exited 0 with nothing stale; --write moved frozenAtSha alone
+(21b95511f -> b64a47e1d, the lighting register car); the cohort is unchanged. Mounts (56 mounts / 15 dark; the door's porcelain empty),
+prose-numerics (baseline 225 = live 225, 0 re-keyed, 0 moved) and the tuning inventory (plain walker green) changed nothing.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

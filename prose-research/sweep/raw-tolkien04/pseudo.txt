@@ -1,0 +1,253 @@
+{{Short description|Literary device in Tolkien's fiction}}
+{{good article}}
+{{DISPLAYTITLE:Pseudotranslation in ''The Lord of the Rings''}}
+{{Use dmy dates|date=May 2024}}
+{{use British English|date=May 2024}}
+A [[pseudotranslation]] is a text written as if it had been translated from a foreign language. [[J. R. R. Tolkien]] made use of '''pseudotranslation in ''The Lord of the Rings''''' for two reasons: to help resolve the linguistic puzzle he had accidentally created by using real-world languages within his legendarium, and to lend realism by supporting a [[found manuscript]] conceit [[Editorial framing of The Lord of the Rings|to frame his story]].
+
+Effectively, he pretends to be an editor and translator who has received an ancient manuscript, the ''[[Red Book of Westmarch]]'', written in [[Westron]], the Common Speech of [[Middle-earth]], annotated and edited by many hands, which he decides to translate into English. The manuscript contains names and words from [[Languages constructed by J. R. R. Tolkien|other languages]], some of them related to Westron; he translates those into languages related to English, namely [[Old English]] and [[Old Norse]]. Tolkien wrote in the text of ''[[The Two Towers]]'' that [[Orthanc]] had two meanings, one in [[Sindarin]] and the other, "Cunning Mind", in [[Rohirric]]. The latter meaning is the actual sense of the Old English word, making the multiple [[homonym]]y and [[synonym]]y implausible.
+
+Aspects of the pseudotranslation make actual [[Translating The Lord of the Rings|translation of ''The Lord of the Rings'']] into other languages a challenge. A specific difficulty is the elaborate relationship between some of the real and invented languages used in the book. Westron is supposedly translated as modern English; this stands in relation to [[Rohirric]], an archaic language, which is represented by [[Old English]], and the language of Dale, translated as [[Old Norse]]. The three real languages are related. [[Thomas Honegger]] gives possible solutions that begin to handle this in French and German, but suggests that the small amount of Old English is probably best left untranslated.
+
+== Context ==
+
+{{further|Philology and Middle-earth|Pseudotranslation}}
+
+From his schooldays, [[J. R. R. Tolkien]] was, in the words of his biographer [[John Garth (author)|John Garth]], "effusive about philology"; his schoolfriend Rob Gilson called him "quite a great authority on [[etymology]]".{{sfn|Garth|2003|p=16}} Tolkien was a professional [[Philology|philologist]], a scholar of comparative and historical [[linguistics]]. He was especially familiar with [[Old English]] and related languages. He remarked to the poet and ''[[The New York Times]]'' book reviewer [[Harvey Breit]] that "I am a philologist and all my work is philological"; he explained to his American publisher [[Houghton Mifflin]] that this was meant to imply that his work was "all of a piece, and <em>fundamentally linguistic</em> in inspiration. ... The [[Languages constructed by J. R. R. Tolkien|invention of languages]] is the foundation. The 'stories' were made rather to provide a world for the languages than the reverse. To me a name comes first and the story follows."<ref name="Letter 165" group=T>{{harvnb|Carpenter|2023|loc=#165 to [[Houghton Mifflin]], 30 June 1955 }}</ref>
+
+A [[pseudotranslation]] is a text written as if it had been translated from a foreign language, even though no foreign language original exists. The practice began in medieval [[chivalric romance]], and was common in 16th-century Spain, in works like the {{circa}} 1508 ''[[Amadís de Gaula]]''; it was mocked by [[Cervantes]] in his 1605 ''[[Don Quixote]]''<!--in chapter 49-->.{{sfn|Eisenberg|1982|pp=119–129}}
+
+== Implementation ==
+
+=== An accidental trap ===
+
+In his 1937 children's book ''[[The Hobbit]]'', Tolkien used English as the language of the [[hobbit]] protagonist, [[Bilbo Baggins]], and he was able to converse in this language with the other characters. The [[Dwarves in Middle-earth|Dwarves]] however had names in [[Old Norse language|Old Norse]] forms.{{sfn|Shippey|2005|pp=131-133}} Tolkien took the names of 12 of the 13 dwarves – excluding [[Balin (Middle-earth)|Balin]] – that he used in ''[[The Hobbit]]'' (along with the [[Wizards (Middle-earth)|wizard]] [[Gandalf]]'s name) from the Old Norse ''[[Völuspá]]'' in the ''[[Elder Edda]]''. For example, [[Thorin Oakenshield]] is the leader of the group of Dwarves. The name "Thorin" (''Þorinn'') appears in stanza 12, where it is used for a [[Norse Dwarves|dwarf]], while the name "Oakenshield" (''Eikinskjaldi'') is in stanza 13.{{sfn|Evans|2013b|pp=134–135}}<ref>{{harvnb|Rateliff|2007|loc=Volume 2 ''Return to Bag-End'', Appendix 3}}</ref>
+
+{| style="margin-left: auto; margin-right: auto; border: none;" class="wikitable"
+|+ Tolkien borrowed [[Old Norse]] Dwarf-names for ''[[The Hobbit]]''{{hair space}}{{sfn|Evans|2013b|pp=134–135}}
+|-
+! ''[[Dvergatal]]'' !! Translation (borrowed names in bold) 
+|-
+| <poem>11.... ''Nár ok Náinn Nípingr, Dáinn''
+''Bívurr, Bávurr, Bömburr, Nóri,''
+...
+12. ''"Veggr ok Gandalfr, Vindalfr, Þorinn,''
+''Þrár ok Þráinn, Þekkr, Litr ok Vitr,''</poem>
+| <poem>11.... Nar and '''Nain''', | Niping, '''[[Dain Ironfoot|Dain]]''',
+'''Bifur''', '''Bofur''', | '''Bombur''', '''Nori''',
+...
+12. Vigg and '''[[Gandalf]]''' | Vindalf, '''[[Thorin Oakenshield|Thorin]]''',
+'''Thror''' and '''Thrain''' | Thekk, Lit and Vit,</poem>
+|}
+
+The use of Norse names was left unexplained in ''The Hobbit'', but when some of the same Dwarves reappeared in ''The Lord of the Rings'', it presented an immediate problem: the Dwarves would have had names in their own language, [[Khuzdul]]. Tolkien needed to find a solution that would make names in [[Old Norse|Norse]] and Khuzdul – one real language, one invented – coexist.{{sfn|Fimi|2010|pp=189–191}}
+
+=== Deciding on pseudotranslation ===
+
+When writing ''[[The Lord of the Rings]]'' (1954–55), a sequel to ''The Hobbit'', Tolkien came up with the literary device of [[pseudotranslation]], using real languages to "translate" fictional languages.{{sfn|Turner|2007|p=330}} He pretended to have translated the original language [[Westron]] into English.{{sfn|Shippey|2005|pp=131-133}}
+
+In a 1954 letter, Tolkien stated that the pseudotranslation issue "has given me much thought. It seems seldom regarded by other creators of imaginary worlds, however gifted as narrators (such as [[E. R. Eddison|Eddison]]). But then I am a philologist".<ref name="Letter 144" group=T/> He then stated that "English cannot have been the language of any people of that time",<ref name="Letter 144" group=T/> and explained his pseudotranslation process:{{sfn|Brljak|2010|pp=13–16}} "What I have, in fact done, is to equate the Westron or wide-spread Common Speech of the Third Age with English; and translate everything, including names such as The Shire, that was in the Westron into English terms".<ref name="Letter 144" group=T>{{harvnb|Carpenter|2023|loc=#144 to [[Naomi Mitchison]], 25 April 1954}}</ref>
+
+In Appendix F II "On Translation", Tolkien wrote that "The Westron names were as a rule translations of older names: as Rivendell, Hoarwell, [[Silverlode]], Langstrand".<ref name="Appendix F" group=T/> He went on to explain why he had done this:<ref name="Appendix F" group=T/>
+
+{{blockquote|[I wished to preserve] the contrast between a wide-spread language... and the living remains of far older and more reverend tongues. All names if merely transcribed would seem to modern readers equally remote: for instance, if the Elvish name ''Imladris'' and the Westron [[pseudotranslation|translation]] ''Karningul'' had both been left unchanged.<ref name="Appendix F" group=T/>}}
+
+[[File:1351065-Great Hall, Winchester Castle (2).jpg|thumb|[[Winchester]] as [[Camelot]]: interior of the Great Hall of [[Winchester Castle]], with what has been claimed to be King Arthur's [[Round Table]] ]]
+
+Tolkien gave as a picture of the reason for this approach a sentence mapping Middle-earth to the real world, though with the inclusion of the semi-mythical figure of [[King Arthur]]:<ref name="Appendix F" group=T/>
+
+{{blockquote|But to refer to Rivendell as Imladris was as if one now was to speak of Winchester as Camelot, except that the identity was certain, while in Rivendell there still dwelt [[Elrond|a lord of renown]] far older than Arthur would be, were he still king at Winchester today.<ref name="Appendix F" group=T/>}}
+
+[[Allan Turner (scholar)|Allan Turner]] remarks that this further blurs the already confused distinction between fiction and reality:{{sfn|Turner|2011a|p=18}}
+
+{| style="margin-left: auto; margin-right: auto; border: none;" class="wikitable"
+|+ Turner's analysis of Tolkien's pseudotranslation analogy<ref name="Appendix F" group=T/>{{sfn|Turner|2011a|p=18}}
+|-
+! style="width: 80pt;" | Attribute
+! style="width: 180pt;" | ''The Lord of the Rings'' 
+! style="width: 120pt;" | Analogy
+|-
+| Place || [[Rivendell]] || [[Winchester]]
+|-
+| Located in || Fictional [[Middle-earth]] || England
+|-
+| In language || English, representing [[Westron]] || English
+|-
+| Formerly called || Imladris || [[Camelot]]
+|-
+| Former language || [[Sindarin]] || [[Medieval French]]
+|-
+| In time || An earlier age of Middle-earth || Mythical version of England
+|-
+| Led by || [[Elrond]] || [[King Arthur]]
+|-
+| Status || A living [[Elves in Middle-earth|Elf]]-lord, who founded the place in the [[Second Age]], thousands of years before the [[War of the Ring]], in the fiction || A long-dead King of men, [[Arthurian legend|according to legend]]
+|}
+
+=== Complex implications ===
+
+The device of rendering an ''imaginary'' language with a ''real'' one was carried further by rendering:{{sfn|Shippey|2005|pp=131-133}}
+
+* [[Rohirric]], the language of [[Rohan (Middle-earth)|Rohan]] (related to Westron) by the [[Mercian dialect]] of [[Old English]]{{sfn|Shippey|2005|pp=131-133}}
+* names in the tongue of [[Dale (Middle-earth)|Dale]] by Old Norse forms{{sfn|Shippey|2005|pp=131-133}}
+* names of the [[Kingdom of Rhovanion]] by [[Gothic language|Gothic]] forms, thus mapping the genetic relation of his fictional languages on to the existing historical relations of the [[Germanic languages]].{{sfn|Shippey|2005|pp=131-133}}
+
+Tolkien wrote: "Languages, however, that were related to the Westron presented a special problem. I turned them into forms of speech related to English. Since the Rohirrim are represented as recent comers out of the North, and users of an archaic Mannish language relatively untouched by the influence of [[Eldarin]], I have turned their names into forms like ... Old English."<ref name="Letter 144" group=T/>{{sfn|Brljak|2010|pp=13–16}}
+
+<gallery class=center mode=nolines widths=400 heights=300>
+File:Linguistic Map of Middle-Earth.svg|Tolkien accidentally created a linguistic puzzle by using three different pseudo-translated Germanic languages for peoples in his story.<ref name="Shippey 2005 p131">{{harvnb|Shippey|2005|pp=131–133}}</ref>
+</gallery>
+
+Furthermore, to parallel the [[Celtic languages|Celtic]] [[Substrata (linguistics)|substratum]] in England, he used [[Old Welsh]] names to render the [[Dunlending|Dunlendish]] names of [[Buckland (Middle-earth)|Buckland]] Hobbits (e.g., ''[[Meriadoc Brandybuck|Meriadoc]]'' for ''Kalimac'').<ref name="Appendix F" group=T>{{harvnb|Tolkien|1955}}, Appendix F II, "On Translation"</ref> The device of linguistic mapping allowed Tolkien to avoid having to invent new names in Khuzdul for all his Dwarves, while simultaneously explaining the book's use of Modern English for Westron.{{sfn|Fimi|2010|pp=189–191}} Further, it saved him from having to work out the details of Westron grammar or vocabulary in any detail. He does give some examples of Westron words in Appendix F II to ''The Lord of the Rings'', where he summarizes its origin and role as Middle-earth's ''[[lingua franca]]'':<ref name="Appendix F" group=T/>{{sfn|Hemmi|2010|pp=147–174}}
+
+{{blockquote|The language represented in this history by English was the Westron or 'Common Speech' of the West-lands of Middle-earth in the Third Age. In the course of that age it had become the native language of nearly all the speaking-peoples (save the Elves) who dwelt within the bounds of the old kingdoms of Arnor and Gondor ... At the time of the War of the Ring at the end of the age these were still its bounds as a native tongue. (Appendix F)<ref name="Appendix F" group=T/>}}
+
+Rohirric is represented in ''The Lord of the Rings'' by Old English because Tolkien chose to make the relationship between Rohirric and the Common Speech similar to that of Old English and [[Modern English]].<ref name="Tolkien Rohanese" group=T>{{harvnb|Tolkien|2001|p=8}}</ref>
+
+{{quote box|width=35%|title=[[Rohirric]] and [[Westron]]|[[Merry Brandybuck|Merry]] had ridden by himself just behind the king, saying nothing, and trying to understand the slow sonorous speech of [[Rohan, Middle-earth|Rohan]] that he heard the men behind him using. It was a language in which there seemed to be many words that he knew, though spoken more richly and strongly than in [[the Shire]], yet he could not piece the words together. At times some Rider would lift up his clear voice [[Poetry in The Lord of the Rings#Alliterative verse|in stirring song]], and Merry [[Sound and language in Middle-earth#An aesthetic pleasure|felt his heart leap, though he did not know what it was about]].|"The Muster of Rohan"<ref group=T>{{harvnb|Tolkien|1955|loc=Book 5, ch. 3 "The Muster of Rohan"}}</ref>}}
+
+[[File:Pre-Rohirric, Westron, Gothic, Old English, Modern English.svg|thumb|upright=1.75|center|The mapping of [[Old English]] to Modern English is like the mapping of [[Rohirric]] to [[Westron]], and Tolkien uses the two Germanic languages to represent the two Middle-earth languages.<ref name="Tolkien Rohanese" group=T>{{harvnb|Tolkien|2001|p=8}}</ref> Further, Tolkien uses [[Gothic language|Gothic]] names for the early leaders of the Northmen of Rhovanion, ancestors of Rohan.<ref name="Tolkien Gothic" group=T>{{harvnb|Tolkien|1980|p=311}}</ref>{{sfn|Smith|2020|pp=202–214}} ]]
+
+Tolkien went further, using [[Gothic language|Gothic]] names for the early leaders of the Northmen of [[Rhovanion]], ancestors of Rohan, and for the first Kings of Rohan.<ref name="Tolkien Gothic" group=T/>{{sfn|Smith|2020|pp=202–214}} Gothic was an [[East Germanic languages|East Germanic language]], and as such is a forerunner of Old English, not a direct ancestor.{{sfn|Madoff|1979}} [[Christopher Tolkien]] suggests that his father intended the correspondence between the language families to extend back to the ancestral language of the Northmen.<ref name="Tolkien Gothic" group=T/>
+
+{| class="wikitable" style="margin: 1em auto;"
+|+ Mapping of names of leaders{{sfn|Smith|2020|pp=202–214}}<ref name="Tolkien Gothic" group=T/><ref group=T>{{harvnb|Tolkien|1955|loc=Appendix A: Annals of the Kings and Rulers, II: The House of Eorl}}</ref> 
+|-
+! Realm !! Leader's name !! Etymology !! Meaning !! "Translated from"
+|-
+| Northmen<br/>of [[Rhovanion]] || Vidugavia || [[Latinisation of names|Latinised]] from<br/>[[Gothic language|Gothic]] ''widu'', ''gauja'' || wood-dweller || (Pre-Rohirric)
+|-
+| Northmen<br/>of Rhovanion || Marhwini || [[Gothic language|Gothic]] ''marh'', ''wini'' || horse-friend || (Pre-Rohirric)
+|- 
+| [[Rohan, Middle-earth|Rohan]] || Folcwine || [[Old English]] ''folc'', ''winë'' || folk-friend || Rohirric
+|- 
+| Rohan || [[Éowyn]] || [[Old English]] ''eo[h]'', ''wyn'' || horse-joy || Rohirric
+|}
+
+This solution makes the combination of languages in the book exceptionally complex, presenting a substantial challenge to those [[Translating The Lord of the Rings|translating ''The Lord of the Rings'']] into other languages.<ref name="Smith 2006">{{harvnb|Smith|2006|pp=228–231}}, citing {{harvnb|Turner|2005|loc="Philology and archaism"}}</ref>{{sfn|Honegger|2011b|pp=1–18}} [[Thomas Honegger]] suggests how the language nexus might be translated into French:{{sfn|Honegger|2011b|p=14}}
+
+{| class="wikitable" style="margin-left: auto; margin-right: auto; border: none;" 
+|+ Honegger's proposal for translating the language nexus into French{{sfn|Honegger|2011b|p=14}} 
+|-
+! style="width: 100px;" | Middle-earth language 
+! style="width: 125px;" | Language for French translations 
+! style="width: 200px;" | Notes
+|-
+| Of [[the Shire]] || [[Modern French]] || ''lingua franca'' spoken across Middle-earth except by "a few secluded folk" as in [[Lothlórien]] (and "little and ill by [[Orc]]s")
+|-
+| Of [[Dale (Middle-earth)|Dale]] || [[Picard language|Picard]] || "used by [[Dwarves in Middle-earth|Dwarves]] of that region"
+|-
+| Of [[Rohan, Middle-earth|Rohan]] || [[Medieval Latin|Medieval Vulgar Latin]] || ancestor of French
+|}
+
+Honegger notes that while this type of solution works linguistically, it cannot hope to capture cultural aspects. The people of Rohan, the Rohirrim, speak a Mercian dialect of Old English, and their culture is Anglo-Saxon, despite Tolkien's denial of this in "On Translation". Medieval Latin does nothing to suggest Mercian Anglo-Saxon culture. Honegger suggests that in consequence, the best answer is probably to leave the Old English names and quoted speech untranslated, noting that Tolkien's "Guide to the Names" seems to concur with this approach.{{sfn|Honegger|2011b|p=14}}
+
+== Lost in translation ==
+
+=== Multiple homonyms ===
+
+Tolkien stated in ''[[The Two Towers]]'' that the name [[Orthanc]] had "by design or chance" two meanings. In Sindarin it meant "Mount Fang", while in the language of Rohan he said it meant "Cunning Mind".<ref group=T>{{harvnb|Tolkien|1954|loc=Book 3, chapter 8 "The Road to Isengard"}}</ref> The author [[Robert Foster (author)|Robert Foster]] notes that ''orþanc'' genuinely does mean "cunning" in Old English, so that the [[homonym]] Tolkien had in mind was between Sindarin and Old English, that is, translated or represented Rohirric. Foster comments that since it would be unlikely for a homonym also to exist between these two languages and actual Rohirric, and for the Old English and the Rohirric to be [[synonym]]s as well, Tolkien had made an error.{{sfn|Fimi|2010|pp=191–192}}
+
+<gallery class=center mode=nolines widths=400 heights=250>
+File:Multiple Homonym Error in The Two Towers.svg|In ''[[The Two Towers]]'', Tolkien said [[Isengard|Orthanc]] had meanings in [[Sindarin]] and [[Rohirric]]; but it is also a synonym and homonym in [[Old English]], making Tolkien's claim look like a mistake.{{sfn|Fimi|2010|pp=191–192}}
+</gallery>
+
+=== Multilingual inscription ===
+
+In ''[[The Fellowship of the Ring]]'', the company find Balin's tomb as they cross [[Moria, Middle-earth|Moria]] on their quest. The tomb is inscribed in [[Cirth#Angerthas Moria|Dwarf runes]].<ref name="The Bridge of Khazad-dûm" group=T>{{harvnb|Tolkien|1954a|loc=Book 2, chapter 5 "The Bridge of Khazad-dûm"}}</ref> Transliterated into Latin characters, this is seen to be in Khuzdul and English.<ref>{{cite book |last=Smith |first=Arden R. |author-link=Arden R. Smith |chapter=Invented Languages and Writing Systems |title=A Companion to J. R. R. Tolkien |title-link=A Companion to J. R. R. Tolkien |year=2014 |pages=202–214}}</ref> English, as the real-world language into which Westron was purportedly translated, could not exist in Middle-earth.<ref name="Letter 144" group=T/><!--<ref name="Kales 2010">{{harvnb|Kales|2010|loc=Appendix C}}</ref>--><!----> In the related case of the [[Book of Mazarbul]], which was found lying on Balin's tomb,<ref name="The Bridge of Khazad-dûm" group=T/> Tolkien admitted that he had made a mistake using English in his facsimile document, "an erroneous extension of the general literary treatment",<ref name="Peoples 298" group=T/> since the writing was "supposed to be of the date of the events in the narrative".<ref name="Peoples 298" group=T>{{harvnb|Tolkien|1996|pp=298–299}}</ref>
+
+{| style="margin-left: auto; margin-right: auto; border: none;" class="wikitable"
+|+ Languages used in Balin's tomb inscription
+|-
+! Inscription !! Transcribed inscription !! Notes<!--<ref name="Kales 2010"/>-->
+|-
+| [[File:Balin.jpg|center|frameless]]
+| <poem class=center>BALIN
+
+FUN<sub>d</sub>INUL
+
+UZBADK<sub>h</sub>AZADDÛMU
+
+BALIN SƏN OV FUNDIN LORD OV MORIA</poem>
+| <poem><br/><br/><br/><br/>[[Khuzdul]]
+
+English
+</poem>
+|}
+
+== Supporting the frame story ==
+
+{{main|Editorial framing of The Lord of the Rings}}
+
+A second reason for Tolkien to make use of pseudotranslation was to lend realism by supporting a [[found manuscript]] conceit; this in turn strengthened and lent consistency to the philological way [[Editorial framing of The Lord of the Rings|Tolkien had chosen to frame his story]].{{sfn|Turner|2011a|p=18}} [[Tolkien's frame stories|Tolkien used a frame story]], embedded within the text, to make the story appear to have been written and edited by many hands over a long period of time. He described in detail how Bilbo and [[Frodo Baggins]] wrote their memoirs, transmitted them to others as the ''[[Red Book of Westmarch]]'', and showed how later in-universe editors annotated the material.<ref name="Flieger 2005 Bilbo's book">{{harvnb|Flieger|2005|pp=67–73 "A great big book with red and black letters"}}</ref> Tolkien then appears not as the book's author but as editor and translator, the text as a survival through long ages, and the events depicted as historical.<ref name="Flieger 2005 Bilbo's book"/>{{sfn|Turner|2011a|pp=18–21}} Catherine Butler comments that this was "congenial work" which "suited the philological Tolkien with his many medieval documents".{{sfn|Butler|2013|pp=108–111}}
+
+{| style="margin-left: auto; margin-right: auto; border: none;" class="wikitable"
+|+ [[Found manuscript]] and pseudotranslation supporting [[Tolkien's frame stories|Tolkien's frame story]]<ref name="Flieger 2005 Bilbo's book"/>{{sfn|Turner|2011a|pp=18–21}}
+|-
+! style="width: 120px;" | Time
+! style="width: 350px;" | Events
+! style="width: 150px;" | Notes
+|-
+| [[History of Arda#Years of the Sun|Third Age]] 
+| The quest of [[Erebor]]<br/>[[Bilbo Baggins]] writes his memoirs in [[Westron]].<br/>[[War of the Ring]]
+| Pseudo-history conceit<br/>''[[The Hobbit]]''<br/>Further pseudo-history
+|-
+| Fourth Age 
+| [[Frodo Baggins]] writes his memoirs in Westron.<br/>Others annotate the memoirs: the ''[[Red Book of Westmarch]]''.
+|  ''[[The Lord of the Rings]]''<br/>[[Found manuscript]] conceit
+|-
+| Fifth Age  
+| ... more editing by more hands ...
+| Pseudo-editor conceit
+|-
+| Sixth/Seventh Age 
+| The Tolkien 'editor' "translates" the found manuscript into English (and a little Old Norse and Old English)
+| Pseudo-translator conceit
+|}
+
+== See also ==
+
+* [[Languages constructed by J. R. R. Tolkien]]
+
+== References ==
+
+=== Primary ===
+
+{{reflist|group=T|24em}}
+
+=== Secondary ===
+
+{{reflist|24em}}
+
+== Sources ==
+
+* {{cite journal |last=Brljak |first=Vladimir |title=The Books of Lost Tales: Tolkien as Metafictionist |journal=[[Tolkien Studies]] |volume=7 |issue=1 |date=2010 |doi=10.1353/tks.0.0079 |pages=1–34 }}
+* {{cite book |last=Butler |first=Catherine |chapter=Tolkien and Worldbuilding |year=2013 |editor-last=Hunt |editor-first=Peter |title=J. R. R. Tolkien: The Hobbit and The Lord of the Rings |publisher=[[Palgrave Macmillan]] |isbn=978-1-137-26399-5 |pages=106–120}}
+* {{ME-ref|Letters}}   <!--Carpenter 2023-->
+*{{cite book |last=Eisenberg |first=Daniel |authorlink=:es:Daniel Eisenberg |title=Romanes of Chivalry in the Spanish Golden Age |chapter-url=https://archive.org/details/romancesofchival0000eise/page/118/mode/2up |chapter=The Pseudo-Historicity of the Romances of Chivalry |location=[[Newark, Delaware]] |publisher=[[Juan de la Cuesta Hispanic Monographs]] |year=1982 |isbn=0936388072 |orig-date=1976 |pages=119–129 |others=first published in ''Quaderni Ibero-Americani'', 45–46 (1975–76), pp. 253–259}}
+* {{cite encyclopedia |last=Evans |first=Jonathan |author-link=Jonathan Evans (scholar) |title=Dwarves |editor-last=Drout |editor-first=Michael D. C. |editor-link=Michael D. C. Drout |encyclopedia=[[The J. R. R. Tolkien Encyclopedia]] |year=2013b |orig-year=2007 |publisher=[[Routledge]] |location=Abingdon, England |isbn=978-0-415-86511-1 |pages=134–135}}
+* {{cite book |last=Fimi |first=Dimitra |author-link=Dimitra Fimi |title=Tolkien, Race, and Cultural History: From Fairies to Hobbits |publisher=[[Palgrave Macmillan]] |year=2010 |orig-year=2008 |isbn=978-0-230-21951-9 |oclc=222251097}}
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |year=2005 |title=Interrupted Music: The Making of Tolkien's Mythology |publisher=[[Kent State University Press]]}}
+* {{cite book |last=Garth |first=John |author-link=John Garth (author) |title=Tolkien and the Great War: The Threshold of Middle-earth |title-link=Tolkien and the Great War |publisher=[[HarperCollins]] |year=2003 |isbn=978-0-00711-953-0}}
+* {{cite journal |last=Hemmi |first=Yoko |title=Tolkien's The Lord of the Rings and His Concept of Native Language: Sindarin and British-Welsh |journal=[[Tolkien Studies]] |volume=7 |year=2010 |pages=147–174 |doi=10.1353/tks.0.0063 |s2cid=170366632 |via=[[Project Muse]] |url=https://doi.org/10.1353/tks.0.0063|url-access=subscription }}
+* {{cite book |last=Honegger |first=Thomas |author-link=Thomas Honegger |chapter=The Westron Turned into Modern English: The Translator and Tolkien's Web of Languages |editor-last=Honegger |editor-first=Thomas |title=Translating Tolkien: Text and Film |publisher=[[Walking Tree Publishers]] |year=2011b |isbn=978-3-9521424-9-3 |series=Cormarë series |volume=6 |orig-year=2004 |pages=1–18}}
+* {{cite journal |last=Madoff |first=Mark |title=The Useful Myth of Gothic Ancestry |journal=Studies in Eighteenth-Century Culture |volume=8 |issue=1 |date=1979 |issn=1938-6133 |doi=10.1353/sec.1979.0019 |pages=337–350}}
+* {{ME-ref|HotH}}     <!--Rateliff 2007-->
+* {{ME-ref|ROAD}}     <!--Shippey 2005-->
+* {{cite journal |last=Smith |first=Arden Ray |author-link=Arden R. Smith |title=Translating Tolkien: Philological Elements in "The Lord of the Rings" (review) |journal=[[Tolkien Studies]] |volume=3 |issue=1 |date=2006 |issn=1547-3163 |doi=10.1353/tks.2006.0031 |pages=228–231}}
+* {{cite book |last=Smith |first=Arden R. |author-link=Arden R. Smith |chapter=Invented Languages and Writing Systems |editor-last=Lee |editor-first=Stuart D. |editor-link=Stuart D. Lee |title=[[A Companion to J. R. R. Tolkien]] |date=2020 |orig-year=2014 |publisher=[[Wiley Blackwell]] |isbn=978-1119656029 |oclc=1183854105 |pages=202–214}}
+* {{ME-ref|FOTR}}     <!--Tolkien 1954a-->
+* {{ME-ref|TT}}       <!--Tolkien 1954-->
+* {{ME-ref|ROTK}}     <!--Tolkien 1955-->
+* {{ME-ref|UT}}       <!--Tolkien 1980-->
+* {{ME-ref|POME}}     <!--Tolkien 1996 Peoples-->
+* {{cite journal |last=Tolkien |first=J. R. R. |author-link=J. R. R. Tolkien |title=The Rivers and Beacon-hills of Gondor |editor-last=Hostetter |editor-first=Carl F. |editor-link=Carl F. Hostetter |journal=[[Vinyar Tengwar]] |issue=42 |date=July 2001 |page=8}}
+* {{cite book |last=Turner |first=Allan |author-link=Allan Turner (scholar) |title=Translating Tolkien: Philological Elements in 'The Lord of the Rings' |publisher=[[Peter Lang (publisher)|Peter Lang]] |year=2005 |isbn=3-631-53517-1 |series=Duisburger Arbeiten zur Sprach– und Kulturwissenschaft |volume=59 |location=Frankfurt}}
+* {{cite encyclopedia |last=Turner |first=Allan |author-link=Allan Turner (scholar) |chapter=Language, Theories of: Translation |editor-last=Drout |editor-first=Michael D. C. |editor-link=Michael D. C. Drout |title=[[J.R.R. Tolkien Encyclopedia]] |date=2007 |publisher=[[Routledge]] |isbn=978-1-135-88033-0 |pages=328–330}}
+* {{cite book |last=Turner |first=Allan |author-link=Allan Turner (scholar) |chapter=A Theoretical Model for Tolkien Translation Criticism |editor-last=Honegger |editor-first=Thomas |editor-link=Thomas Honegger |title=Tolkien in Translation |publisher=[[Walking Tree Publishers]] |year=2011a |isbn=978-3-9521424-6-2 |series=Cormarë series |volume=4 |location=Zurich |pages=1–30}}
+
+{{Lord of the Rings}}
+{{Translating Tolkien}}
+
+<!-- Categories -->
+[[Category:Themes of The Lord of the Rings]]

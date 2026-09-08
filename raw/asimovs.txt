@@ -1,0 +1,82 @@
+On February 13, 2023, Neil Clarke,  the editor of Clarkesworld, asked if I was being 
+spammed with an increase in "AI" submissions. He had a chart that showed just how 
+quickly these submissions were growing. I responded, "Yes, yes, yes!" I didn't have a 
+chart, but I knew that my story submissions had grown from 712 in December 2022 
+to 899 in January 2023, and that they were still on their way up. Neil designed and 
+implemented Asimov's and Analog's online submission system. He was working on 
+some projects that would flag suspicious submissions, but it would be a while before 
+these steps could be implemented.  
+On February 20, Neil tweeted that he was temporarily closing Clarkesworld to 
+submissions due to the onslaught of ChatGPT generated subs. My submission rate 
+was lower than Clarkesworld, so I didn't close Asimov's at that time. Yet, my final 
+figure for February submissions was 1088. In an average month, I rarely see more 
+than seven hundred fiction subs. Now, the shortest month of the year had given me 
+a 55 percent increase in "stories," and every single AI submission was dreadful. 
+Neil's tweet went viral and attracted attention across the media landscape. Once 
+he explained that this problem was hitting a number of SF publications, a couple of 
+reporters even tracked me down. F&SF's editor, Sheree Renée Thomas, called on 
+February 21 to ask if she could pass along my contact information to the New York 
+Times. The following day, Neil recommended me to The Verge. 
+I was in a relatively optimistic mood when I spoke to those reporters. I even made 
+a few lighthearted remarks that were quoted in these articles. I wanted to reassure 
+readers, authors, reporters, and the general public that despite the heavy volume 
+of submissions, there was no chance an experienced editor would mistake a Chat-
+GPT sub for a tale created by a human being. My comments appear mostly at the 
+end of NY Time's article "Science Fiction Magazines Battle a Flood of Chatbot-Gen-
+erated Stories" https://www.nytimes.com/2023/02/23/technology/clarkesworld-
+submissions-ai-sci-fi.html. My comments in The Verge Interview, "AI-generated Fic-
+tion is Flooding Literary magazines--but not Fooling Anyone"  
+https://www.theverge.com/2023/2/25/23613752/ai-generated-short-stories-liter-
+ary-magazines-clarkesworld-science-fiction are more extensive.  
+We've taken measures since then to improve our situation. We added language to 
+our guidelines to make it clear that "We will not consider any submissions written, de-
+veloped or assisted by these tools. Attempting to submit these works may result in be-
+ing banned from submitting works in the future." By this statement we mean the use 
+of ChatGPT to generate plot, character, setting, and other story development ideas. 
+We don't mean long-standing tools like spell and grammar checks, dictionaries, or 
+thesauruses.  
+Toward the end of April, we closed Asimov's to submissions for a few days so Neil 
+could upgrade our system. Neil's upgrade doesn't automatically ban anyone nor  
+does it catch all the ChatGPT generated subs. It does flag a lot of suspicious subs, 
+however. This is quite helpful. I'm the only person evaluating the submissions to 
+Asimov's. I want to give the real storytellers as much of my time as possible. I don't 
+want to waste it on the AI-assisted dreck. I still peruse everything and make the  
+actual determination. I have access to a couple of online sites that can detect Chat-
+GPT generated material. There are helpful for validating my suspicions. These  
+sites don't always agree with each other or with me. Ultimately, I make the final 
+call.  
+4 Sheila Williams
+CHATGPT AND ME
+Editorial Sheila Williams
+By now, I've seen hundreds, possibly thousands, of these "stories" and some "non-
+fiction" articles. Although still pretty obvious, the cover letters have improved. In the 
+beginning, most of the letters read like résumé cover letters. Now they tend to claim 
+that the "author" has been working really hard on his or her "story." Despite the com-
+mon assertion that they are long-time readers of the magazine, it's pretty clear that 
+the "authors" of these "stories" had never heard of Asimov's or SF magazines in gen-
+eral until they stumbled upon some "how-to-make-money" online resource.  
+There is absolutely no sign of originality or creativity in ChatGPT-generated  
+works. There's no sense of narrative, no character development, and the "plotting" is 
+practically nonexistent. There is no indication that the "writers" of these works ever 
+read a story, heard some folklore, or watched a TV show. I have never read an origi-
+nal human-authored submission that was as poorly written or as uninteresting as 
+these pieces are.  
+People do worry that the ChatGPT material will improve. That's possible. ChatG-
+PTs are a type of large language models (LLMs) that scrape enormous amounts of 
+words from the internet. The more these LLMs absorb the works of published au-
+thors, the more access they'll have to sophisticated language and ideas. There's a 
+thorny legal problem, however. No one yet knows if the legal rights to the "story" 
+generated by the ChatGPT will belong to the person who asked for it or to the cre-
+ators of the ChatGPT. It's likely that a contract with the person who submitted the 
+"story" would be meaningless.  
+While wading through ChatGPT generated material has been an unhappy experi-
+ence for me, there has been one significant silver lining. My admiration for people 
+who take the time to write stories and send them my way has only grown. Every sin-
+gle person who pens their own story has a unique way of looking at a situation. The 
+creative process that goes into title ideas, settings, and every other aspect of a human-
+generated story continuously tickles me. I will always look forward to reading  
+through the seven hundred real monthly submissions while I hunt for the six or so 
+that I can purchase for publication in Asimov's.
+5
+Asimov's
+Editorial: ChatGPT and Me

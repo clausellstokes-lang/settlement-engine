@@ -1,0 +1,727 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="https://merricb.com/xmlrpc.php" />
+
+	<title>On Using Boxed Text &#8211; Merric&#039;s Musings</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Merric&#039;s Musings &raquo; Feed" href="https://merricb.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Merric&#039;s Musings &raquo; Comments Feed" href="https://merricb.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Merric&#039;s Musings &raquo; On Using Boxed Text Comments Feed" href="https://merricb.com/2019/04/16/on-using-boxed-text/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/merricb.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.1.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://merricb.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='normalize-css'  href='https://merricb.com/wp-content/themes/ephemeris/css/normalize.css?ver=8.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-5-css'  href='https://merricb.com/wp-content/themes/ephemeris/css/fontawesome-all.min.css?ver=5.5.0' type='text/css' media='all' />
+<link rel='stylesheet' id='unsemantic-grid-css'  href='https://merricb.com/wp-content/themes/ephemeris/css/unsemantic.css?ver=1.0.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ephemeris-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i%7CDosis:700&#038;subset=latin' type='text/css' media='all' />
+<link rel='stylesheet' id='ephemeris-style-css'  href='https://merricb.com/wp-content/themes/ephemeris/style.css?ver=5.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://merricb.com/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://merricb.com/wp-content/plugins/jetpack/css/jetpack.css?ver=7.2.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://merricb.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://merricb.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='https://merricb.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://merricb.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://merricb.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='5E Adventure Review: Citadel of Vlaakith' href='https://merricb.com/2019/04/12/5e-adventure-review-citadel-of-vlaakith/' />
+<link rel='next' title='Conquest Games Convention &#8211; midway report' href='https://merricb.com/2019/04/21/conquest-games-convention-midway-report/' />
+<meta name="generator" content="WordPress 5.1.1" />
+<link rel="canonical" href="https://merricb.com/2019/04/16/on-using-boxed-text/" />
+<link rel='shortlink' href='https://wp.me/p8fmzT-2X1' />
+		<!-- Custom Logo: hide header text -->
+		<style id="custom-logo-css" type="text/css">
+			.site-title, .site-description {
+				position: absolute;
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+		</style>
+		<link rel="alternate" type="application/json+oembed" href="https://merricb.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmerricb.com%2F2019%2F04%2F16%2Fon-using-boxed-text%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://merricb.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmerricb.com%2F2019%2F04%2F16%2Fon-using-boxed-text%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//jetpack.wordpress.com'/>
+<link rel='dns-prefetch' href='//s0.wp.com'/>
+<link rel='dns-prefetch' href='//s1.wp.com'/>
+<link rel='dns-prefetch' href='//s2.wp.com'/>
+<link rel='dns-prefetch' href='//public-api.wordpress.com'/>
+<link rel='dns-prefetch' href='//0.gravatar.com'/>
+<link rel='dns-prefetch' href='//1.gravatar.com'/>
+<link rel='dns-prefetch' href='//2.gravatar.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><style type="text/css">@media only screen and (max-width: 1970px) {.site-content .grid-100 .alignwide {margin-left: 0;margin-right: 0;}.site-content .grid-100 .wp-block-table.alignwide {width: 100%;}.site-content .grid-100 figure.alignwide.wp-block-embed.is-type-video {width: 100%;}}</style><style type="text/css">.grid-container { max-width: 1570px; }.entry-header h1 { color: #3a3a3a; }.entry-header h1 a { color: #3a3a3a; }.entry-header h1 a:visited { color: #3a3a3a; }.entry-header h1 a:hover, .entry-header h1 a:active { color: #2c7dbe; }h1, h2, h3, h4, h5, h6 { color: #3a3a3a; }h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: #2c7dbe; }h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { color: #2c7dbe; }h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, h1 a:active, h2 a:active, h3 a:active, h4 a:active, h5 a:active, h6 a:active { color: #344860; }.site-content, .more-link { color: #3a3a3a; }a, .more-link { color: #2c7dbe; }a:visited, .more-link:visited { color: #2c7dbe; }a:hover, a:active, .more-link:hover, .more-link:active { color: #344860; }#footercontainer { background-color: #f9f9f9; }#footercreditscontainer { background-color: #f9f9f9; }.site-credits { color: #9a9a9a; }</style>
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="On Using Boxed Text" />
+<meta property="og:url" content="https://merricb.com/2019/04/16/on-using-boxed-text/" />
+<meta property="og:description" content="Boxed text is used to provide an initial description of an encounter to the DM and players, with the intention that the DM read or paraphrase the information to the players. It has the following be…" />
+<meta property="article:published_time" content="2019-04-16T12:24:00+00:00" />
+<meta property="article:modified_time" content="2019-04-16T12:26:27+00:00" />
+<meta property="og:site_name" content="Merric&#039;s Musings" />
+<meta property="og:image" content="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1.png" />
+<meta property="og:image:width" content="246" />
+<meta property="og:image:height" content="318" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:creator" content="@MerricB" />
+<meta name="twitter:site" content="@MerricB" />
+<meta name="twitter:text:title" content="On Using Boxed Text" />
+<meta name="twitter:image" content="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1.png?w=240" />
+<meta name="twitter:card" content="summary" />
+
+<!-- End Jetpack Open Graph Tags -->
+			<style type="text/css" id="wp-custom-css">
+				
+img.attachment-ephemeris_post_feature_full_width { display:none !important; }
+div#secondary.widget-area {background-color:aliceblue !important; }
+div.entry-content img {padding:5px !important;}
+div.grid-60 { width:100% !important; }
+.main-navigation {float:left; clear:right;}
+td.alist { padding:0px 5px 0px 0px !important; border:0 !important;}
+h1 { font-size: 30px;}
+h2 { font-size: 24px;}
+blockquote p { font-size: 1.1em !important; }
+blockquote { border-left: 0px !important; }
+a { text-decoration: none !important; }			</style>
+		</head>
+
+<body itemscope="itemscope" itemtype="http://schema.org/CreativeWork" class="post-template-default single single-post postid-11347 single-format-standard">
+
+<main class="hfeed site" role="main">
+
+	<div class="visuallyhidden skip-link"><a href="#content" title="Skip to main content">Skip to main content</a></div>
+
+				<div class="top-header">
+			<div class="announcement-bar grid-container">
+				<div class="grid-100 tablet-grid-100 social-header"></div> <!-- /.grid-100.social-header -->			</div>
+		</div>
+
+		<div id="headercontainer">
+			
+			<header id="masthead" class="grid-container site-header" role="banner">
+				<div class="grid-40 tablet-grid-40 mobile-grid-100 site-title"><a href="https://merricb.com/" title="Merric&#039;s Musings" rel="home">Merric&#039;s Musings</a></div> <!-- /.grid-40.site-title --><div class="grid-60 tablet-grid-60 mobile-grid-100"><nav id="site-navigation" class="main-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement"><div class="assistive-text skip-link"><a href="#content" title="Skip to content">Skip to content</a></div><div class="menu-revised-menu-container"><ul id="menu-revised-menu" class="nav-menu"><li id="menu-item-9545" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9545"><a href="https://merricb.com/dungeons-dragons-5e-articles/">Articles</a></li>
+<li id="menu-item-9536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9536"><a href="https://merricb.com/dungeons-dragons-5e/">Adventures</a>
+<ul class="sub-menu">
+	<li id="menu-item-9556" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-9556"><a href="https://merricb.com/2014/08/12/the-great-list-of-dungeons-dragons-5e-adventures/">The Great List of Dungeons &#038; Dragons 5E adventures</a></li>
+	<li id="menu-item-9549" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9549"><a href="https://merricb.com/dungeons-dragons-5e-adventures-by-level/">Dungeons &#038; Dragons 5E Adventures by Level</a></li>
+	<li id="menu-item-9539" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9539"><a href="https://merricb.com/adventure-reports-advice/">Adventure Reports &#038; Advice</a></li>
+</ul>
+</li>
+<li id="menu-item-9537" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9537"><a href="https://merricb.com/reviews/">Reviews</a>
+<ul class="sub-menu">
+	<li id="menu-item-9554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9554"><a href="https://merricb.com/reviews/dd-5e-reviews/">D&#038;D 5E Reviews</a></li>
+	<li id="menu-item-9553" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9553"><a href="https://merricb.com/reviews/add-reviews/">AD&#038;D Reviews</a></li>
+	<li id="menu-item-9552" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9552"><a href="https://merricb.com/reviews/basic-dd-reviews/">Basic D&#038;D Reviews</a></li>
+	<li id="menu-item-9544" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9544"><a href="https://merricb.com/reviews/pathfinder-reviews/">Pathfinder Reviews</a></li>
+	<li id="menu-item-9551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9551"><a href="https://merricb.com/reviews/osr-reviews/">OSR Reviews</a></li>
+</ul>
+</li>
+<li id="menu-item-9538" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9538"><a href="https://merricb.com/articles-for-new-dd-players/">New Players</a></li>
+<li id="menu-item-9540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9540"><a href="https://merricb.com/dd-adventurers-league/">D&#038;D Adventurers League</a>
+<ul class="sub-menu">
+	<li id="menu-item-9542" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9542"><a href="https://merricb.com/dd-adventurers-league/tyranny-of-dragons-season-august-2014-march-2015/">Tyranny of Dragons</a></li>
+	<li id="menu-item-9543" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9543"><a href="https://merricb.com/dd-adventurers-league/elemental-evil-season-march-2015-august-2015/">Elemental Evil</a></li>
+	<li id="menu-item-9548" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9548"><a href="https://merricb.com/curse-of-strahd/">Curse of Strahd</a></li>
+	<li id="menu-item-9550" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9550"><a href="https://merricb.com/dd-adventurers-league/rage-of-demons/">Rage of Demons</a></li>
+	<li id="menu-item-9547" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9547"><a href="https://merricb.com/storm-kings-thunder/">Storm King&#8217;s Thunder</a></li>
+	<li id="menu-item-9870" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9870"><a href="https://merricb.com/dd-adventurers-league/tales-from-the-yawning-portal/">Tales from the Yawning Portal</a></li>
+	<li id="menu-item-9546" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9546"><a href="https://merricb.com/ddaladventures/">D&#038;D Adventures League Adventures</a></li>
+	<li id="menu-item-9555" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-9555"><a href="https://merricb.com/2016/05/16/dd-adventurers-league-adventure-checklist/">D&#038;D Adventurers League adventure checklist</a></li>
+</ul>
+</li>
+<li id="menu-item-11197" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11197"><a href="https://merricb.com/a-kidnapping-in-umbar/">A Kidnapping in Umbar</a></li>
+<li class="menu-item menu-item-search"><a href="#" class="nav-search"><i class="fas fa-search"></i></a></li></ul></div></nav> <!-- /.site-navigation.main-navigation --></div> <!-- /.grid-60 -->			</header> <!-- /#masthead.grid-container.site-header -->
+
+					</div> <!-- /#headercontainer -->
+		<div id="bannercontainer"><div class="banner grid-container"><div class="header-image grid-100"><a href="https://merricb.com/" rel="home"><img src="https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1.jpg" srcset="https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1-300x56.jpg 300w, https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1-768x144.jpg 768w, https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1-1024x192.jpg 1024w, https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1-1142x218.jpg 1142w, https://merricb.com/wp-content/uploads/2018/03/cropped-Banner2-1.jpg 1160w" width="1160" height="218" alt="Merric&#039;s Musings"></a></div> <!-- .header-image.grid-100 --></div> <!-- /.banner.grid-container --></div> <!-- /#bannercontainer -->	
+
+<div id="maincontentcontainer">
+	<div id="content" class="grid-container site-content" role="main">
+
+						<div class="grid-75 tablet-grid-75 mobile-grid-100">
+
+				
+<article itemscope="itemscope" itemtype="http://schema.org/Article" id="post-11347" class="post-11347 post type-post status-publish format-standard has-post-thumbnail hentry category-dd-5e category-design">
+			<header class="entry-header">
+							<h1 class="entry-title">On Using Boxed Text</h1>
+				<div class="header-meta"><span class="publish-date"><i class="far fa-calendar-alt" aria-hidden="true"></i> <a href="https://merricb.com/2019/04/16/on-using-boxed-text/" title="Posted April 16, 2019 @ 10:24 pm" rel="bookmark"><time class="entry-date" datetime="2019-04-16T22:24:00+10:00" itemprop="datePublished">April 16, 2019</time></a></span><address class="publish-author"><i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="author vcard"><a class="url fn n" href="https://merricb.com/author/merricbyahoo-co-uk/" title="View all posts by merricb@yahoo.co.uk" rel="author" itemprop="author">merricb@yahoo.co.uk</a></span></address><span class="post-categories"><a href="https://merricb.com/category/dd-2/dd-5e/" rel="category tag">D&amp;D 5E</a> <a href="https://merricb.com/category/rpgs/design/" rel="category tag">Design</a></span><span class="comments-link"><i class="fas fa-comment" aria-hidden="true"></i> <a href="https://merricb.com/2019/04/16/on-using-boxed-text/#comments" title="Comment on On Using Boxed Text">1 Comment</a></span></div>		<img width="246" height="318" src="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1.png" class="attachment-ephemeris_post_feature_full_width size-ephemeris_post_feature_full_width wp-post-image" alt="" srcset="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1.png 246w, https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1-232x300.png 232w" sizes="(max-width: 246px) 100vw, 246px" />	</header> <!-- /.entry-header -->
+	
+			<div class="entry-content">
+			<p><a href="https://amzn.to/2VOyfMG"><img class="alignright wp-image-11211 size-medium" src="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1-232x300.png" alt="" width="232" height="300" srcset="https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1-232x300.png 232w, https://merricb.com/wp-content/uploads/2019/01/011419_1206_Exploration1.png 246w" sizes="(max-width: 232px) 100vw, 232px" /></a>Boxed text is used to provide an initial description of an encounter to the DM and players, with the intention that the DM read or paraphrase the information to the players.</p>
+<p>It has the following benefits:</p>
+<ul>
+<li>It alerts the DM and players to what&#8217;s important in the room.</li>
+<li>It conveys the author&#8217;s intention for the initial stages of the encounter.</li>
+<li>It can set a mood.</li>
+<li>It reduces prep time for the DM, as they don&#8217;t have to read the entire encounter and synthesise the elements into a room description.</li>
+</ul>
+<p>It has the following problems:</p>
+<ul>
+<li>It assumes that the inhabitants or contents of the room haven&#8217;t changed in response to previous actions by the characters.</li>
+<li>It doesn&#8217;t adapt well to multiple approaches or situations.</li>
+</ul>
+<p>Those problems assume the text is well written. When it isn&#8217;t well written, these issues often arise:</p>
+<ul>
+<li>It&#8217;s too long.</li>
+<li>It has too much irrelevant detail.</li>
+<li>It doesn&#8217;t have enough relevant detail.</li>
+<li>It assumes actions on the part of the characters.</li>
+<li>The players stop listening and miss stuff.</li>
+</ul>
+<p>Even when it&#8217;s well written, the DM might deliver it poorly. And,</p>
+<ul>
+<li>The players stop listening and miss stuff.</li>
+</ul>
+<p>Disengaged players aren&#8217;t good. The general advice I hear about boxed text is that it should be short. Two paragraphs? It&#8217;s probably too long!</p>
+<p>One time that isn&#8217;t the case is when the designer uses it so an NPC can speak. Still, in this case, you don&#8217;t want it to go too long, but having two paragraphs of an NPC talking gives the DM an idea of their voice and can convey initial information to the players. After that, I&#8217;d use dot points for the rest of the conversation, with the DM using them as a guide for the conversation with the players. The boxed set sets up the scene, but from there it&#8217;s up to the group.</p>
+<p>All of this is a subset of the greater debate on how to present encounters. I&#8217;ve been struggling with the Season 8 D&amp;D Adventurers League adventures of late, which use no boxed text, but also have a very structured approach to providing information… which unfortunately often has all the information in the wrong places and scattered across the page.</p>
+<p>Honestly, the answer on whether you use boxed text or not is: It depends. For some encounters, it makes a lot of sense and makes the DM&#8217;s job easier. For other encounters, it&#8217;s just cluttering up space that the DM can handle themselves. My general rule of thumb is that if you&#8217;ve got a room with only a couple of interesting features, such as some orcs training with a dummy hanging from the ceiling, you can probably ignore the boxed text unless there&#8217;s an <em>action</em> on the part of the orcs you want to describe. If the dummy swings back and knocks an orc off-balance, it&#8217;s likely easier to put that into some short, boxed text rather than try to describe it to the DM in general text.</p>
+<p>Once the situation gets more complicated (and especially if some features are hidden from the players at the start), I prefer to use boxed text. The next section describes the hidden details to the DM and gives an idea of how it might be run. That section? Tremendously important!</p>
+<p>Taken another way, consider including these sections when writing an adventure for others:</p>
+<ul>
+<li>A description of what the characters can initially perceive when they enter the room</li>
+<li>A description of what occurs in the room – the &#8220;Play&#8221; of the room, which includes stuff not immediately apparent to the characters</li>
+<li>Fuller descriptions of elements of the room – whether NPCs, traps, features or monsters.</li>
+</ul>
+<p>It doesn&#8217;t have to be boxed text, but the encounter needs to be made easy for the DM to read and run!</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email"><a rel="nofollow noopener noreferrer" data-shared="" class="share-email sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=email" target="_blank" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-print"><a rel="nofollow noopener noreferrer" data-shared="" class="share-print sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-11347" class="share-facebook sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-11347" class="share-twitter sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared="" class="share-tumblr sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-11347" class="share-pinterest sd-button share-icon" href="https://merricb.com/2019/04/16/on-using-boxed-text/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-end"></li></ul></div></div></div>					</div> <!-- /.entry-content -->
+	
+	<footer class="entry-meta">
+							</footer> <!-- /.entry-meta -->
+	</article> <!-- /#post -->
+
+<section id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			One Reply to &ldquo;On Using Boxed Text&rdquo;		</h2>
+
+		<ol class="commentlist">
+					<li id="comment-3233" class="comment even thread-even depth-1">
+			<article id="div-comment-3233" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/fb95a55f6a775404a420c85c6840c1fd?s=100&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fb95a55f6a775404a420c85c6840c1fd?s=200&#038;d=mm&#038;r=g 2x' class='avatar avatar-100 photo' height='100' width='100' />						<b class="fn">Mark</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://merricb.com/2019/04/16/on-using-boxed-text/#comment-3233">
+							<time datetime="2019-04-19T09:23:52+10:00">
+								April 19, 2019 at 9:23 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Completely agree on all points. What published adventure, in your opinion, nailed the boxed text formatting correctly?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/2019/04/16/on-using-boxed-text/?replytocom=3233#respond' data-commentid="3233" data-postid="11347" data-belowelement="div-comment-3233" data-respondelement="respond" aria-label='Reply to Mark'><i class="fas fa-reply" aria-hidden="true"></i> Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol> <!-- /.commentlist -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+							<h3 id="reply-title" class="comment-reply-title">Leave a Reply					<small><a rel="nofollow" id="cancel-comment-reply-link" href="/2019/04/16/on-using-boxed-text/#respond" style="display:none;">Cancel reply</a></small>
+				</h3>
+						<form id="commentform" class="comment-form">
+				<iframe title="Comment Form" src="https://jetpack.wordpress.com/jetpack-comment/?blogid=121872401&#038;postid=11347&#038;comment_registration=0&#038;require_name_email=1&#038;stc_enabled=1&#038;stb_enabled=1&#038;show_avatars=1&#038;avatar_default=mystery&#038;greeting=Leave+a+Reply&#038;greeting_reply=Leave+a+Reply+to+%25s&#038;color_scheme=light&#038;lang=en_US&#038;jetpack_version=7.2.1&#038;show_cookie_consent=10&#038;has_cookie_consent=0&#038;sig=a5c69b27fad04d9f0b0aeca6ef275b6677428dea#parent=https%3A%2F%2Fmerricb.com%2F2019%2F04%2F16%2Fon-using-boxed-text%2F" style="width:100%; height: 430px; border:0;" name="jetpack_remote_comment" class="jetpack_remote_comment" id="jetpack_remote_comment" sandbox="allow-same-origin allow-top-navigation allow-scripts allow-forms allow-popups"></iframe>
+									<!--[if !IE]><!-->
+					<script>
+						document.addEventListener('DOMContentLoaded', function () {
+							var commentForms = document.getElementsByClassName('jetpack_remote_comment');
+							for (var i = 0; i < commentForms.length; i++) {
+								commentForms[i].allowTransparency = false;
+								commentForms[i].scrolling = 'no';
+							}
+						});
+					</script>
+					<!--<![endif]-->
+							</form>
+		</div>
+
+		
+		<input type="hidden" name="comment_parent" id="comment_parent" value="" />
+
+		<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>	<script type="text/javascript">
+        jQuery( document ).ready( function( $ ) {
+            $( '.comment-form, #registerform' ).append( '<input type="hidden" name="js-spam-prevention" value="578ad01d5fa6724174e2e3e2b3c2368e"/>' );
+        } );
+	</script>
+	
+</section> <!-- /#comments.comments-area -->
+<nav role="navigation" class="navigation pagination nav-single"><h2 class="screen-reader-text">Posts navigation</h2><div class="nav-previous"><a href="https://merricb.com/2019/04/12/5e-adventure-review-citadel-of-vlaakith/" rel="prev"><span class="meta-nav"><i class="fas fa-angle-left" aria-hidden="true"></i></span> 5E Adventure Review: Citadel of Vlaakith</a></div><div class="nav-next"><a href="https://merricb.com/2019/04/21/conquest-games-convention-midway-report/" rel="next">Conquest Games Convention &#8211; midway report <span class="meta-nav"><i class="fas fa-angle-right" aria-hidden="true"></i></span></a></div></nav><!-- .navigation pagination nav-single -->
+			</div>
+			<div class="grid-25 tablet-grid-25 mobile-grid-100">
+
+	
+<div id="secondary" class="widget-area" role="complementary">
+	<aside id="custom_html-11" class="widget_text widget widget_custom_html"><h3 class="widget-title">Melbourne D&#038;D AL Conventions</h3><div class="textwidget custom-html-widget"><ul>
+	<li><b><a href="https://www.conquest.asn.au/">Conquest</a></b> - April 19-22, 2019</li>
+	<li><b><a href="http://aus.paxsite.com/">PAX Australia</a></b> - October 11-13, 2019</li>
+<li><b><a href="https://www.arcanacon.org/">Arcanacon</a></b> - January, 2020</li>
+	
+</ul></div></aside><aside id="custom_html-9" class="widget_text widget widget_custom_html"><h3 class="widget-title">New D&#038;D on Amazon</h3><div class="textwidget custom-html-widget"><table>
+	<tr>
+	<td width=50%><a href="https://amzn.to/2Wqj1gJ" target="_blank">
+		<img src="https://merricb.com/wp-content/uploads/2019/03/strangerstarter.jpg" alt="Stranger Things Starter"></a>
+		</td>
+	<td width=50%><a href="https://amzn.to/2UUNUtf" target="_blank">
+		<img src="https://merricb.com/wp-content/uploads/2019/03/saltmarsh.jpg" alt="Ghosts of Saltmarsh">
+		</a>
+		</td></tr>
+	<tr>
+	<td width=50%><a href="https://amzn.to/2BeEi7m" target="_blank">
+		<img src="https://merricb.com/wp-content/uploads/2018/06/dragonheist.png" alt="Waterdeep: Dragon Heist"></a>
+		</td>
+	<td width=50%><a href="https://amzn.to/2MKym7f" target="_blank">
+		<img src="https://merricb.com/wp-content/uploads/2018/06/060318_2301_DelvingUnde1.png" alt="Waterdeep: Dungeon of the Mad Mage">
+		</a>
+		</td></tr>
+</table></div></aside><aside id="categories-5" class="widget widget_categories"><h3 class="widget-title">Categories</h3><form action="https://merricb.com" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform' >
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="66">13th Age</option>
+	<option class="level-0" value="2">A Game of Thrones</option>
+	<option class="level-0" value="67">AD&amp;D</option>
+	<option class="level-0" value="68">AD&amp;D 2E</option>
+	<option class="level-0" value="69">Advanced Squad Leader</option>
+	<option class="level-0" value="70">Amber</option>
+	<option class="level-0" value="71">BattleTech</option>
+	<option class="level-0" value="5">Board Games</option>
+	<option class="level-0" value="6">Books</option>
+	<option class="level-0" value="7">Campaign Coins</option>
+	<option class="level-0" value="8">Comics</option>
+	<option class="level-0" value="9">Curse of Strahd</option>
+	<option class="level-0" value="10">D&amp;D</option>
+	<option class="level-0" value="17">D&amp;D</option>
+	<option class="level-0" value="25">D&amp;D 3E</option>
+	<option class="level-0" value="26">D&amp;D 4E</option>
+	<option class="level-0" value="27">D&amp;D 5E</option>
+	<option class="level-0" value="28">D&amp;D Adventurers League</option>
+	<option class="level-0" value="149">D&amp;D at Guf Ballarat</option>
+	<option class="level-0" value="29">D&amp;D Basic</option>
+	<option class="level-0" value="30">D&amp;D Encounters</option>
+	<option class="level-0" value="33">D&amp;D Miniatures</option>
+	<option class="level-0" value="34">D&amp;D Next</option>
+	<option class="level-0" value="72">Design</option>
+	<option class="level-0" value="36">Doctor Who</option>
+	<option class="level-0" value="37">Dragonlance</option>
+	<option class="level-0" value="38">Eberron</option>
+	<option class="level-0" value="39">Elemental Evil</option>
+	<option class="level-0" value="40">Fantasy and Science Fiction</option>
+	<option class="level-0" value="41">Forgotten Realms</option>
+	<option class="level-0" value="74">Great Battles of History</option>
+	<option class="level-0" value="42">Greyhawk</option>
+	<option class="level-0" value="43">History</option>
+	<option class="level-0" value="76">Initiative</option>
+	<option class="level-0" value="44">Kickstarter</option>
+	<option class="level-0" value="146">LCG</option>
+	<option class="level-0" value="45">Legends of Baldur&#8217;s Gate</option>
+	<option class="level-0" value="46">Life</option>
+	<option class="level-0" value="48">Lost Mine of Phandelver</option>
+	<option class="level-0" value="49">Magic</option>
+	<option class="level-0" value="77">Men of Iron</option>
+	<option class="level-0" value="50">OSR</option>
+	<option class="level-0" value="142">Out of the Abyss</option>
+	<option class="level-0" value="51">Pathfinder</option>
+	<option class="level-0" value="52">Play Advice</option>
+	<option class="level-0" value="53">Primeval Thule</option>
+	<option class="level-0" value="54">Rage of Demons</option>
+	<option class="level-0" value="55">Review</option>
+	<option class="level-0" value="56">RPGs</option>
+	<option class="level-0" value="57">Scourge of the Sword Coast</option>
+	<option class="level-0" value="58">Session Report</option>
+	<option class="level-0" value="145">Shadow of the Demon Lord</option>
+	<option class="level-0" value="59">Star Wars</option>
+	<option class="level-0" value="147">Storm King&#8217;s Thunder</option>
+	<option class="level-0" value="60">Sword Coast Legends</option>
+	<option class="level-0" value="143">Tales of the Yawning Portal</option>
+	<option class="level-0" value="78">Third Reich</option>
+	<option class="level-0" value="144">Tomb of Annihilation</option>
+	<option class="level-0" value="62">Tyranny of Dragons</option>
+	<option class="level-0" value="1">Uncategorized</option>
+	<option class="level-0" value="63">Wargames</option>
+	<option class="level-0" value="148">Waterdeep: Dragon Heist</option>
+	<option class="level-0" value="64">Wilderness</option>
+	<option class="level-0" value="65">X-Wing</option>
+</select>
+</form>
+<script type='text/javascript'>
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "cat" );
+	function onCatChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+			dropdown.parentNode.submit();
+		}
+	}
+	dropdown.onchange = onCatChange;
+})();
+/* ]]> */
+</script>
+
+			</aside>		<aside id="recent-posts-4" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+											<li>
+					<a href="https://merricb.com/2019/04/26/on-the-new-seasonality-rules-for-the-dd-adventurers-league/">On the new Seasonality rules for the D&#038;D Adventurers League</a>
+									</li>
+											<li>
+					<a href="https://merricb.com/2019/04/21/conquest-games-convention-midway-report/">Conquest Games Convention &#8211; midway report</a>
+									</li>
+											<li>
+					<a href="https://merricb.com/2019/04/16/on-using-boxed-text/">On Using Boxed Text</a>
+									</li>
+											<li>
+					<a href="https://merricb.com/2019/04/12/5e-adventure-review-citadel-of-vlaakith/">5E Adventure Review: Citadel of Vlaakith</a>
+									</li>
+											<li>
+					<a href="https://merricb.com/2019/04/01/formatting-encounters/">Formatting Encounters</a>
+									</li>
+					</ul>
+		</aside><aside id="custom_html-7" class="widget_text widget widget_custom_html"><h3 class="widget-title">My Adventures</h3><div class="textwidget custom-html-widget"><p align="center"><a href="http://www.drivethrurpg.com/product/241814/Buried-Temple-of-the-Death-God?affiliate_id=8220"><img  width="200px" src="https://i1.wp.com/merricb.com/wp-content/uploads/2018/05/051518_0844_BuriedTempl1.png?w=1142&ssl=1" alt="Buried Temple of the Death God"><br>Buried Temple of the Death God</a></p>
+<p align="center"><a href="http://www.dmsguild.com/product/180108/Death-in-the-Cornfields?affiliate_id=8220"><img  width="200px" src="https://merricb.com/wp-content/uploads/2017/01/cornfields.gif" alt="Death in the Cornfields"><br>Death in the Cornfields</a></p><p align=center>
+<a href="http://www.dmsguild.com/product/191665/The-Witch-of-Underwillow?affiliate_id=8220"><img alt="The Witch of Underwillow" width="200px" src="https://merricb.com/wp-content/uploads/2016/08/082416_0705_ontheartofi1.png"><br>The Witch of Underwillow</a></p></div></aside><aside id="custom_html-8" class="widget_text widget widget_custom_html"><h3 class="widget-title">My DDAL-legal Adventures</h3><div class="textwidget custom-html-widget"><p align=center><a href="https://www.dmsguild.com/product/265111/CCCBMG43-PHLAN-41-Ghoulies-and-Ghosties?affiliate_id=8220"><img style="border-style:solid; border-width:1px !important;" alt="Ghoulies & Ghosties" width="200px" src="https://merricb.com/wp-content/uploads/2019/03/ghoulies.jpg"><br>Ghoulies and Ghosties</a></p>
+<p align=center><a href="http://www.dmsguild.com/product/189331/CCCBMG09-HULB-13-Hulburg-Rising?affiliate_id=8220"><img style="border-style:solid; border-width:1px !important;" alt="Hulburg Rising" width="200px" src="https://merricb.com/wp-content/uploads/2018/03/hulbris-sm.jpg"><br>Hulburg Rising</a></p>
+<p align=center><a href="http://www.dmsguild.com/product/204803/DDAL0518-The-Mysterious-Isle-5e?affiliate_id=8220"><img style="border-style:solid; border-width:1px !important;" alt="The Mysterious Isle" width="200px" src="https://merricb.com/wp-content/uploads/2018/03/mysteriousisle.jpg"><br>The Mysterious Isle</a></p>
+<p align=center><a href="http://www.dmsguild.com/product/204805/DDAL0519-Eye-of-Xxiphu-5e?affiliate_id=8220"><img style="border-style:solid; border-width:1px !important;" alt="Eye of Xxiphu" width="200px" src="https://merricb.com/wp-content/uploads/2018/03/eyeofxxiphu.jpg"><br>Eye of Xxiphu</a></p></div></aside><aside id="custom_html-6" class="widget_text widget widget_custom_html"><h3 class="widget-title">D&#038;D Products on Amazon</h3><div class="textwidget custom-html-widget"><p align="center"><a href="https://www.amazon.com/MORDENKAINENS-FOES-Accessory-Wizards-Team/dp/0786966246/ref=as_li_ss_il?ie=UTF8&qid=1521692157&sr=8-1&keywords=mordenkainen's+tome+of+foes&linkCode=li1&tag=mersmus-20&linkId=e38759f36e11be8b09efb3e1cc997271" target="_blank"><img border="0" src="https://merricb.com/wp-content/uploads/2018/03/Mordy.jpg" width="200" alt="MordenKainen's Tome of Foes" ></a></p>
+<p align="center"><a href="http://amzn.to/2GSJug8" target="_blank"><img border="0" src="https://merricb.com/wp-content/uploads/2018/02/021918_1044_PlayingaFir1.png" width="200" alt="Player's Handbook" ></a></p>
+<p align="center"><a href="http://amzn.to/2uabFED" target="_blank"><img border="0" src="https://merricb.com/wp-content/uploads/2017/12/122917_1328_RunningTomb1.png" width="200" alt="Tomb of Annihilation" ></a></p>
+<p align="center"><a href="http://amzn.to/2puDRxm" target="_blank"><img border="0" src="https://merricb.com/wp-content/uploads/2016/06/dnd_trpg_volosguidetomonsters_main_cover.jpg" width="200" alt="Tomb of Annihilation" ></a></p></div></aside><aside id="twitter_timeline-4" class="widget widget_twitter_timeline"><h3 class="widget-title">Follow me on Twitter</h3><a class="twitter-timeline" data-height="400" data-theme="light" data-link-color="#f96e5b" data-border-color="#e8e8e8" data-lang="EN" data-partner="jetpack" data-chrome="nofooter transparent" href="https://twitter.com/MerricB" href="https://twitter.com/MerricB">My Tweets</a></aside><aside id="calendar-3" class="widget widget_calendar"><div id="calendar_wrap" class="calendar_wrap"><table id="wp-calendar">
+	<caption>April 2019</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="Monday">M</th>
+		<th scope="col" title="Tuesday">T</th>
+		<th scope="col" title="Wednesday">W</th>
+		<th scope="col" title="Thursday">T</th>
+		<th scope="col" title="Friday">F</th>
+		<th scope="col" title="Saturday">S</th>
+		<th scope="col" title="Sunday">S</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="https://merricb.com/2019/03/">&laquo; Mar</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr><td><a href="https://merricb.com/2019/04/01/" aria-label="Posts published on April 1, 2019">1</a></td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+	</tr>
+	<tr>
+		<td>8</td><td>9</td><td>10</td><td>11</td><td><a href="https://merricb.com/2019/04/12/" aria-label="Posts published on April 12, 2019">12</a></td><td>13</td><td>14</td>
+	</tr>
+	<tr>
+		<td>15</td><td><a href="https://merricb.com/2019/04/16/" aria-label="Posts published on April 16, 2019">16</a></td><td>17</td><td>18</td><td>19</td><td>20</td><td><a href="https://merricb.com/2019/04/21/" aria-label="Posts published on April 21, 2019">21</a></td>
+	</tr>
+	<tr>
+		<td>22</td><td>23</td><td>24</td><td>25</td><td><a href="https://merricb.com/2019/04/26/" aria-label="Posts published on April 26, 2019">26</a></td><td>27</td><td id="today">28</td>
+	</tr>
+	<tr>
+		<td>29</td><td>30</td>
+		<td class="pad" colspan="5">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></aside><aside id="meta-3" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="https://merricb.com/wp-login.php">Log in</a></li>
+			<li><a href="https://merricb.com/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://merricb.com/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside>
+</div> <!-- /#secondary.widget-area -->
+
+</div>
+			
+	</div> <!-- /#content.grid-container.site-content -->
+</div> <!-- /#maincontentcontainer -->
+
+
+					<div id="footercontainer">
+						
+					</div> <!-- /.footercontainer -->
+		<div id="footercreditscontainer">
+						<div class="grid-container site-credits">
+				<div class="grid-100 footer-credits">
+									</div> <!-- /.grid-100 -->
+			</div> <!-- /.grid-container.site-credits -->
+					</div> <!-- /.footercontainer -->
+	
+</main> <!-- /.hfeed.site -->
+
+	<a id="mobile-site-navigation" href="#cd-nav" class="mobile-navigation mobile-nav-trigger">
+		<div class="menu-hamburger">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="mobile-nav-title">MENU</span>
+		</div>
+	</a>
+
+	<div id="cd-nav" class="grid-container cd-nav hide_on_load">
+		<div class="grid-100">
+			<div class="cd-navigation-wrapper">
+				<h2>Navigation</h2>
+
+				<nav role="navigation">
+					<div class="menu-revised-menu-container"><ul id="menu-revised-menu-1" class="mobile-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9545"><a href="https://merricb.com/dungeons-dragons-5e-articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9536"><a href="https://merricb.com/dungeons-dragons-5e/">Adventures</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-9556"><a href="https://merricb.com/2014/08/12/the-great-list-of-dungeons-dragons-5e-adventures/">The Great List of Dungeons &#038; Dragons 5E adventures</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9549"><a href="https://merricb.com/dungeons-dragons-5e-adventures-by-level/">Dungeons &#038; Dragons 5E Adventures by Level</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9539"><a href="https://merricb.com/adventure-reports-advice/">Adventure Reports &#038; Advice</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9537"><a href="https://merricb.com/reviews/">Reviews</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9554"><a href="https://merricb.com/reviews/dd-5e-reviews/">D&#038;D 5E Reviews</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9553"><a href="https://merricb.com/reviews/add-reviews/">AD&#038;D Reviews</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9552"><a href="https://merricb.com/reviews/basic-dd-reviews/">Basic D&#038;D Reviews</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9544"><a href="https://merricb.com/reviews/pathfinder-reviews/">Pathfinder Reviews</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9551"><a href="https://merricb.com/reviews/osr-reviews/">OSR Reviews</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9538"><a href="https://merricb.com/articles-for-new-dd-players/">New Players</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-9540"><a href="https://merricb.com/dd-adventurers-league/">D&#038;D Adventurers League</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9542"><a href="https://merricb.com/dd-adventurers-league/tyranny-of-dragons-season-august-2014-march-2015/">Tyranny of Dragons</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9543"><a href="https://merricb.com/dd-adventurers-league/elemental-evil-season-march-2015-august-2015/">Elemental Evil</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9548"><a href="https://merricb.com/curse-of-strahd/">Curse of Strahd</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9550"><a href="https://merricb.com/dd-adventurers-league/rage-of-demons/">Rage of Demons</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9547"><a href="https://merricb.com/storm-kings-thunder/">Storm King&#8217;s Thunder</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9870"><a href="https://merricb.com/dd-adventurers-league/tales-from-the-yawning-portal/">Tales from the Yawning Portal</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9546"><a href="https://merricb.com/ddaladventures/">D&#038;D Adventures League Adventures</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-post menu-item-9555"><a href="https://merricb.com/2016/05/16/dd-adventurers-league-adventure-checklist/">D&#038;D Adventurers League adventure checklist</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11197"><a href="https://merricb.com/a-kidnapping-in-umbar/">A Kidnapping in Umbar</a></li>
+<li class="menu-item menu-item-search"><a href="#" class="nav-search"><i class="fas fa-search"></i></a></li></ul></div>				</nav>
+			</div><!-- .cd-navigation-wrapper -->
+		</div> <!-- .grid-100 -->
+	</div> <!-- .cd-nav -->
+
+	<div class="search-overlay">
+		<button type="button" class="search-close"><i class="far fa-times-circle"></i></button>
+		<form role="search" method="get" class="search-form" action="https://merricb.com">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s"/>
+	</label>
+	<button type="submit" class="search-submit"><i class="fas fa-search"></i></button>
+<input type='hidden' name='lang' value='en' /></form>
+	</div>
+
+	<div style="display:none">
+	<div class="grofile-hash-map-fb95a55f6a775404a420c85c6840c1fd">
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/merricb.com\/2019\/04\/16\/on-using-boxed-text\/":11347};
+	</script>
+					<div id="sharing_email" style="display: none;">
+		<form action="/2019/04/16/on-using-boxed-text/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="" />
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="" />
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="" />
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off" title="This field is for validation and should not be changed" />
+			
+			<img style="float: right; display: none" class="loading" src="https://merricb.com/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" width="16" height="16" />
+			<input type="submit" value="Send Email" class="sharing_send" />
+			<a rel="nofollow" href="#cancel" class="sharing_cancel" role="button">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+		<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201917'></script>
+<script type='text/javascript' src='https://merricb.com/wp-includes/js/comment-reply.min.js?ver=5.1.1'></script>
+<script type='text/javascript' src='https://merricb.com/wp-content/themes/ephemeris/js/jquery.validate.min.js?ver=1.17.0'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comments_object = {"req":"1","author":"Please enter your name","email":"Please enter a valid email address","comment":"Please add a comment"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://merricb.com/wp-content/themes/ephemeris/js/comment-form-validation.js?ver=1.0.0'></script>
+<script type='text/javascript' src='https://merricb.com/wp-content/themes/ephemeris/js/common.js?ver=0.1.1'></script>
+<script type='text/javascript' src='https://merricb.com/wp-content/plugins/jetpack/_inc/build/twitter-timeline.min.js?ver=4.0.0'></script>
+<script type='text/javascript' src='https://merricb.com/wp-includes/js/wp-embed.min.js?ver=5.1.1'></script>
+<script async="async" type='text/javascript' src='https://merricb.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://merricb.com/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=7.2.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-tumblr', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+
+		<!--[if IE]>
+		<script type="text/javascript">
+			if ( 0 === window.location.hash.indexOf( '#comment-' ) ) {
+				// window.location.reload() doesn't respect the Hash in IE
+				window.location.hash = window.location.hash;
+			}
+		</script>
+		<![endif]-->
+		<script type="text/javascript">
+			(function () {
+				var comm_par_el = document.getElementById( 'comment_parent' ),
+					comm_par = ( comm_par_el && comm_par_el.value ) ? comm_par_el.value : '',
+					frame = document.getElementById( 'jetpack_remote_comment' ),
+					tellFrameNewParent;
+
+				tellFrameNewParent = function () {
+					if ( comm_par ) {
+						frame.src = "https://jetpack.wordpress.com/jetpack-comment/?blogid=121872401&postid=11347&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en_US&jetpack_version=7.2.1&show_cookie_consent=10&has_cookie_consent=0&sig=a5c69b27fad04d9f0b0aeca6ef275b6677428dea#parent=https%3A%2F%2Fmerricb.com%2F2019%2F04%2F16%2Fon-using-boxed-text%2F" + '&replytocom=' + parseInt( comm_par, 10 ).toString();
+					} else {
+						frame.src = "https://jetpack.wordpress.com/jetpack-comment/?blogid=121872401&postid=11347&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en_US&jetpack_version=7.2.1&show_cookie_consent=10&has_cookie_consent=0&sig=a5c69b27fad04d9f0b0aeca6ef275b6677428dea#parent=https%3A%2F%2Fmerricb.com%2F2019%2F04%2F16%2Fon-using-boxed-text%2F";
+					}
+				};
+
+				
+				if ( 'undefined' !== typeof addComment ) {
+					addComment._Jetpack_moveForm = addComment.moveForm;
+
+					addComment.moveForm = function ( commId, parentId, respondId, postId ) {
+						var returnValue = addComment._Jetpack_moveForm( commId, parentId, respondId, postId ),
+							cancelClick, cancel;
+
+						if ( false === returnValue ) {
+							cancel = document.getElementById( 'cancel-comment-reply-link' );
+							cancelClick = cancel.onclick;
+							cancel.onclick = function () {
+								var cancelReturn = cancelClick.call( this );
+								if ( false !== cancelReturn ) {
+									return cancelReturn;
+								}
+
+								if ( ! comm_par ) {
+									return cancelReturn;
+								}
+
+								comm_par = 0;
+
+								tellFrameNewParent();
+
+								return cancelReturn;
+							};
+						}
+
+						if ( comm_par == parentId ) {
+							return returnValue;
+						}
+
+						comm_par = parentId;
+
+						tellFrameNewParent();
+
+						return returnValue;
+					};
+				}
+
+				
+				// Do the post message bit after the dom has loaded.
+				document.addEventListener( 'DOMContentLoaded', function () {
+					var iframe_url = "https:\/\/jetpack.wordpress.com";
+					if ( window.postMessage ) {
+						if ( document.addEventListener ) {
+							window.addEventListener( 'message', function ( event ) {
+								var origin = event.origin.replace( /^http:\/\//i, 'https://' );
+								if ( iframe_url.replace( /^http:\/\//i, 'https://' ) !== origin ) {
+									return;
+								}
+								jQuery( frame ).height( event.data );
+							});
+						} else if ( document.attachEvent ) {
+							window.attachEvent( 'message', function ( event ) {
+								var origin = event.origin.replace( /^http:\/\//i, 'https://' );
+								if ( iframe_url.replace( /^http:\/\//i, 'https://' ) !== origin ) {
+									return;
+								}
+								jQuery( frame ).height( event.data );
+							});
+						}
+					}
+				})
+
+			})();
+		</script>
+
+		<script type='text/javascript' src='https://stats.wp.com/e-201917.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.2.1',blog:'121872401',post:'11347',tz:'10',srv:'merricb.com'} ]);
+	_stq.push([ 'clickTrackerInit', '121872401', '11347' ]);
+</script>
+</body>
+
+</html>
+
+<!--Generated by Endurance Page Cache-->

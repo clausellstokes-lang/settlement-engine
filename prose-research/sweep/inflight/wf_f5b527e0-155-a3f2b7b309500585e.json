@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i486-517",
+ "lines": 85,
+ "firstTs": "2026-09-06T18:08:03.012Z",
+ "lastTs": "2026-09-06T18:13:20.570Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "http://speculiction.blogspot.com/2014/05/review-of-sailing-to-sarantium-by-guy.html",
+  "https://www.tor.com/2016/07/06/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+  "https://fantasyliterature.com/reviews/written-on-the-dark/",
+  "https://lepusdomesticus.livejournal.com/106763.html",
+  "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+  "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com/2016/07/06/altering-the-familiar-tigana-by-guy-gavriel-kay/&output=text&limit=20&fl=timestamp,original,statuscode",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com/2016/07/06/*&limit=20&fl=timestamp,original,statuscode",
+  "http://web.archive.org/cdx/search/cdx?url=fantasyliterature.com/reviews/written-on-the-dark/&limit=20&fl=timestamp,original,statuscode",
+  "http://web.archive.org/cdx/search/cdx?url=fantasyliterature.com/reviews/written-on-the-dark*&limit=20&fl=timestamp,original,statuscode",
+  "https://web.archive.org/web/20181116160422id_/https://www.tor.com/2016/07/06/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+  "https://web.archive.org/web/20250624011037id_/https://fantasyliterature.com/reviews/written-on-the-dark/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All fifteen claims resolved against raw pages, and the checkpoint file is written and re-read clean.",
+ "run": "wf_f5b527e0-155",
+ "agent": "a3f2b7b309500585e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_f5b527e0-155/agent-a3f2b7b309500585e.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i486-517.json",
+  "exists": true
+ }
+}

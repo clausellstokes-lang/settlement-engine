@@ -1,0 +1,831 @@
+ 
+
+ Chat GPT and Research - WikiTree G2G 
+
+ Skip to main content 
+
+ Log In 
+
+ Log In 
+
+ Add 
+
+ Add DNA Info 
+
+ Follow Surnames & Tags 
+
+ How to Add Ancestors 
+
+ How to Invite Family 
+
+ New Free-Space Profile 
+
+ New Person Profile 
+
+ New Project 
+
+ Find 
+
+ Apps 
+
+ Categories 
+
+ Connections 
+
+ E-Cards 
+
+ Find FS Matches 
+
+ Find WT Matches 
+
+ Profiles in Need 
+
+ Projects 
+
+ Relationships 
+
+ Search for a Person 
+
+ Tree Tops 
+
+ Unconnected People 
+
+ Unsourced Profiles 
+
+ Help 
+
+ Accessibility Angels 
+
+ Adoption Angels 
+
+ Ask a Question 
+
+ Calendar of Events 
+
+ Categorizing Profiles 
+
+ Close Account 
+
+ Community Forum (G2G) 
+
+ Contact WT Team 
+
+ Help 
+
+ Honor Code Rules 
+
+ Introduction to WT 
+
+ Mentoring 
+
+ Problems with Members 
+
+ Problems with Policies 
+
+ Search Help Pages 
+
+ Source Rules 
+
+ Style Rules 
+
+ My WikiTree 
+
+ Account Controls 
+
+ Activity Feed 
+
+ Anniversaries 
+
+ Badges 
+
+ Connections 
+
+ Contributions: 
+
+ Close Cousins 
+
+ DNA Confirmation 
+
+ GEDCOMs 
+
+ My Family Tree 
+
+ My Nav Page 
+
+ My Images 
+
+ My Profile 
+
+ Requests 
+
+ Suggestions (WT+) 
+
+ Surnames 
+
+ Thank-Yous: 
+
+ Top Contributions 
+
+ Watchlist 
+
+ First Name 
+
+ Last Name 
+
+ Search WikiTree 
+
+ Advanced Person Search | Search Help Pages 
+
+ Search G2G 
+
+ Search G2G 
+
+G2G:
+ Chat GPT and Research 
+
+ Questions 
+
+ Unanswered 
+
+ Tags 
+
+ Users 
+
+ Ask a Question 
+
+ My Feed 
+
+ G2G Help 
+
+ +10 votes 
+
+ 1.0k views 
+
+ I get messages urging me to try Artificial Intelligence -- Chat GPT. So I asked it, "Who are Rhodri Mawr's Ancestors?"
+
+ Here's the answer it gave me right away. One could do a lot worse! Rhodri Mawr, also known as Rhodri the Great, was a King of Gwynedd in Wales during the 9th century. His ancestry is traced through the royal genealogies of Wales. Rhodri Mawr's paternal ancestry connects him to the House of Cunedda, a prominent royal lineage in medieval Wales. Rhodri Mawr's father was Merfyn Frych, and his grandfather was Gwriad ap Elidyr. Gwriad ap Elidyr is often considered to be the founder of the Merfynion dynasty, to which Rhodri Mawr belonged. The genealogies trace the lineage further back, claiming descent from Cunedda Wledig, a legendary figure who played a significant role in the early history of the Kingdom of Gwynedd. It's important to note that genealogies from this period often include mythical or legendary elements, and the historical accuracy of specific details may be challenging to verify. The information about Rhodri Mawr's ancestry comes from medieval Welsh sources, such as genealogical manuscripts and chronicles. 
+
+WikiTree profile:
+
+ Rhodri ap Merfyn 
+
+ medieval 
+
+ pre-1500 
+
+ research_assistance 
+
+ wales 
+
+ asked 
+
+ Nov 23, 2023 
+
+ in Genealogy Help 
+
+ by 
+
+ Jack Day 
+
+ Owl 
+
+ ( 533k points) 
+
+ Ask it to supply the original sources <wink>
+
+ commented 
+
+ Nov 23, 2023 
+
+ by 
+
+ Bobbie Hall 
+
+ Owl 
+
+ ( 477k points) 
+
+ Its sources are the same as used by Geoffrey of Monmouth: a certain very ancient book written in the British language. 
+
+ commented 
+
+ Nov 23, 2023 
+
+ by 
+
+ Living Mead 
+
+ Owl 
+
+ ( 80.2k points) 
+
+ My question is, can it *find* the sources.
+
+ commented 
+
+ Nov 23, 2023 
+
+ by 
+
+ Bobbie Hall 
+
+ Owl 
+
+ ( 477k points) 
+
+ Bobbie well indeed the tricks we are going to have to learn with AI are probably going to often be about learning to ask the right types of questions. Can you think of a good question?
+
+ commented 
+
+ Nov 23, 2023 
+
+ by 
+
+ Andrew Lancaster 
+
+ Owl 
+
+ ( 158k points) 
+
+ I think I read a little while back about a query sent to AI specifically about sources,. and AI came back with a very impressive list of sources -- all of them totally fabricated, as it turned out.
+
+ commented 
+
+ Nov 23, 2023 
+
+ by 
+
+ Jack Day 
+
+ Owl 
+
+ ( 533k points) 
+
+ We already have "tools" on WikiTree that create unverifiable biographies, especially when it comes to relationships. We have to hold people accountable.
+
+ commented 
+
+ Nov 24, 2023 
+
+ by 
+
+ Robin Lee 
+
+ Owl 
+
+ ( 966k points) 
+
+ Yes, I have done similar experiments and confirmed that you can not trust it for facts. It is a tool which will undoubtedly find uses here but I'm not sure what yet.
+
+One thing I have noticed is that it translates Latin quite well.
+
+ commented 
+
+ Nov 25, 2023 
+
+ by 
+
+ Andrew Lancaster 
+
+ Owl 
+
+ ( 158k points) 
+
+ People might like to look at this question about AI as well.
+
+ commented 
+
+ Nov 26, 2023 
+
+ by 
+
+ John Atkinson 
+
+ Owl 
+
+ ( 737k points) 
+
+ All the above comments are similar to questions I've been having about AI and whether it would be useful for genealogical purposes - especially finding sources. I totally agree that one would have to formulate the right questions.
+
+As far as I see, AI is great if you want easily verifiable facts, but 'rubbish in = rubbish out'; AI is the sum of the input of fallible human beings - and I'd be very wary of using it for short cuts. I can't see it being able to transcribe and make sense of the handwriting mess in some of the 17th century Norfolk (England) parish registers, for example. Nothing beats the satisfaction one gets when rewarded by finding what one's been looking for after hours, days, weeks or years of slow, manual searching.
+
+ commented 
+
+ Jun 20, 2024 
+
+ by 
+
+ Frances Piercy-Reins 
+
+ Owl 
+
+ ( 128k points) 
+
+ Actually I think AI might well be good for things like transcribing, at least eventually. I think it will eventually become very useful for some genealogical tasks. What it can't do is the critical thinking needed to weigh up whether information is correct or not, whenever statements of fact differ or need to be combined carefully.
+
+ commented 
+
+ Jun 20, 2024 
+
+ by 
+
+ Andrew Lancaster 
+
+ Owl 
+
+ ( 158k points) 
+
+ Well, if it's really going to be able to transcribe accurately, no doubt it would be helpful - I guess we'll have to wait and see. And yes, I don't see how it can replace a person's critical thinking.
+
+ commented 
+
+ Jun 20, 2024 
+
+ by 
+
+ Frances Piercy-Reins 
+
+ Owl 
+
+ ( 128k points) 
+
+ Personally, I am very excited about how AI is starting to be used on FamilySearch with the full-text searching (available in the Experiment Labs on your FS home page.) It's taking handwritten documents and transcribing them and indexing them all at once. I believe they are combining this with translation capabilities too. I already found things I would never have found otherwise. I think the future for this is going to revolutionize the way genealogy is done. And I've used the bigger AI programs like ChatGPT to make biographies for my relatives. I tell it I want a bio in a genealogical style and paste in all the sourced research that I have on a person and, poof! It's a good start that I can redo or add to. With one cut and paste move and 10 seconds, I have something that would have taken me a lot longer to do myself. Leaving me more time to do research.
+
+ commented 
+
+ Jun 20, 2024 
+
+ by 
+
+ Lyn Young 
+
+ Owl 
+
+ ( 215k points) 
+
+ Please log in or register to add a comment.
+
+ Please log in or register to answer this question.
+
+ 2 Answers
+
+ +19 votes 
+
+ I asked Chat GTP about the death date a place of an ancestor. It gave me a very plausible date, place and burial location, VA Togus in Maine and veterans cemetery. The answer turned out to be totally made up!
+
+ answered 
+
+ Nov 23, 2023 
+
+ by 
+
+ Darryl Rowles 
+
+ Owl 
+
+ ( 75.4k points) 
+
+ Same. It's been a few months since I tried, but it made up biographical details and made up sources.
+
+ Edit: Some lawyers have learned the hard way. Lawyers have real bad day in court after citing fake cases made up by ChatGPT 
+
+ commented 
+
+ Nov 25, 2023 
+
+ by 
+
+ Kerry Larson 
+
+ Owl 
+
+ ( 252k points) 
+
+ That's a really good example, Kerry. Those lawyers thought that ChatGPT had access to cases they didn't, and couldn't imagine it was all made up. I hope they're disbarred for not verifying their 'sources.'
+
+ commented 
+
+ Nov 26, 2023 
+
+ by 
+
+ Bobbie Hall 
+
+ Owl 
+
+ ( 477k points) 
+
+ Please log in or register to add a comment.
+
+ +7 votes 
+
+ The trick to using ChatGPT is in how you frame the question and you can be quite demanding in how you want the answer presented.
+
+ As an experiment I took your same questions and expanded it thus:
+
+ Who are Rhodri Mawr's Ancestors? Show answers in a table with dates, connections and sources of information.
+
+ Here is a link to the response:
+
+ ChatGPT Answer 
+
+ I can not comment on the quality of the result but I hope you find this little tip useful. Have anyone else tried this?
+
+ answered 
+
+ Jun 20, 2024 
+
+ by 
+
+ Steve Serowka 
+
+ Owl 
+
+ ( 77.4k points) 
+
+ Please log in or register to add a comment.
+
+Related questions
+
+ +1 vote 
+
+ 2 answers 
+
+ Question on Sandde ap (Llywarch) Llywarch Hen (abt.0540-) 
+
+[closed]
+
+ 55 views 
+
+ asked 
+
+ Aug 11 
+
+ in Genealogy Help 
+
+ by 
+
+ Thomas Krauser 
+
+ G2G-10 
+
+ ( 11.3k points) 
+
+ llywarch 
+
+ hen 
+
+ pre-1500 
+
+ medieval 
+
+ wales 
+
+ +2 votes 
+
+ 1 answer 
+
+ Question on Tegog ap Dwyfnerth (abt.0700-) 
+
+ 49 views 
+
+ asked 
+
+ Aug 11 
+
+ in Genealogy Help 
+
+ by 
+
+ Thomas Krauser 
+
+ G2G-10 
+
+ ( 11.3k points) 
+
+ dwyfnerth 
+
+ pre-1500 
+
+ medieval 
+
+ wales 
+
+ cymru 
+
+ +4 votes 
+
+ 1 answer 
+
+ Question on Unknown (UNKNOWN) Unknown (abt.0770-) 
+
+ 94 views 
+
+ asked 
+
+ Aug 11 
+
+ in Genealogy Help 
+
+ by 
+
+ Thomas Krauser 
+
+ G2G-10 
+
+ ( 11.3k points) 
+
+ unknown 
+
+ pre-1500 
+
+ wales 
+
+ medieval 
+
+ +2 votes 
+
+ 0 answers 
+
+ Question on Gwrysnad (Ap Dwywg) ap Dwywg Lyth (abt.0800-) 
+
+ 33 views 
+
+ asked 
+
+ Aug 11 
+
+ in Genealogy Help 
+
+ by 
+
+ Thomas Krauser 
+
+ G2G-10 
+
+ ( 11.3k points) 
+
+ ap 
+
+ dwywg 
+
+ lyth 
+
+ pre-1500 
+
+ wales 
+
+ medieval 
+
+ +5 votes 
+
+ 1 answer 
+
+ Comments on Judaël (Cornouaille) de Cornouaille 
+
+ 45 views 
+
+ asked 
+
+ Jul 29 
+
+ in Genealogy Help 
+
+ by 
+
+ J Decker 
+
+ G2G-2 
+
+ ( 2.3k points) 
+
+ cornouaille 
+
+ de 
+
+ medieval 
+
+ pre-1500 
+
+ wales 
+
+ france 
+
+ +3 votes 
+
+ 1 answer 
+
+ Would posting my "Connection to me", all 23 generations, help this website? Gwerful ferch Owain (-1197) 
+
+ 112 views 
+
+ asked 
+
+ Jul 8 
+
+ in Genealogy Help 
+
+ by 
+
+ Katherine Wright 
+
+ G2G-6 
+
+ ( 6.8k points) 
+
+ ferch 
+
+ owain 
+
+ pre-1500 
+
+ wales 
+
+ medieval 
+
+ +4 votes 
+
+ 1 answer 
+
+ Question on Judicael (Bretagne) ap Hoel (abt.0590-0658) 
+
+ 98 views 
+
+ asked 
+
+ Mar 19 
+
+ in Genealogy Help 
+
+ by 
+
+ Thomas Krauser 
+
+ G2G-10 
+
+ ( 11.3k points) 
+
+ bretagne 
+
+ hoel 
+
+ pre-1500 
+
+ medieval 
+
+ france 
+
+ wales 
+
+ +6 votes 
+
+ 1 answer 
+
+ Looking for the right William de Say in Norman England 
+
+ 134 views 
+
+ asked 
+
+ Sep 16, 2025 
+
+ in Genealogy Help 
+
+ by 
+
+ Jack Day 
+
+ Owl 
+
+ ( 533k points) 
+
+ de 
+
+ say 
+
+ pre-1500 
+
+ medieval 
+
+ england 
+
+ wales 
+
+ +3 votes 
+
+ 0 answers 
+
+ Need to merge these 
+
+ 617 views 
+
+ asked 
+
+ Feb 28, 2025 
+
+ in WikiTree Help 
+
+ by 
+
+ Kelly Smyth 
+
+ Newt 
+
+ ( 220 points) 
+
+ pre-1500 
+
+ arborists 
+
+ gruffydd 
+
+ gruffudd 
+
+ wales 
+
+ medieval 
+
+ +7 votes 
+
+ 5 answers 
+
+ approval to merge 
+
+ 769 views 
+
+ asked 
+
+ Feb 14, 2025 
+
+ in Policy and Style 
+
+ by 
+
+ Living Williams 
+
+ G2G-4 
+
+ ( 4.7k points) 
+
+ pre-1500 
+
+ arborists 
+
+ hywel 
+
+ williams 
+
+ medieval 
+
+ wales 
+
+ Categories
+
+ All categories 
+
+ The Tree House 
+ (54.9k) 
+
+ Appreciation 
+ (21.6k) 
+
+ Genealogy Help 
+ (117k) 
+
+ Photos 
+ (6.3k) 
+
+ Policy and Style 
+ (20.6k) 
+
+ Requests for Project Volunteers 
+ (4.0k) 
+
+ WikiTree Help 
+ (23.0k) 
+
+ WikiTree Tech 
+ (20.8k) 
+
+ Recent Activity 
+
+ Hot Questions 
+
+Powered by Question2Answer 
+
+ WikiTree Home 
+
+ About 
+
+ G2G Forum 
+
+ Help 
+
+ Search 
+
+Important privacy notice & disclaimer: You have a responsibility to use caution when distributing private information. WikiTree protects most sensitive information but only to the extent stated in the Terms of Service and Privacy Policy .
+
+ © 2008 - 2026 The WikiTree Company. Content may be copyrighted by WikiTree community members.
+
+ ... 
+

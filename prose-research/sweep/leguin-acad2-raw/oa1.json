@@ -1,0 +1,1 @@
+{"error":"Rate limit exceeded","message":"Insufficient budget. This request costs $0.001 but you only have $0 remaining. Resets at midnight UTC. Need more? Add funds at https://openalex.org/pricing","retryAfter":16698,"costUsd":0.001,"dailyRemainingUsd":0,"prepaidRemainingUsd":0,"creditsRequired":10,"creditsRemaining":0,"onetimeCreditsRemaining":0}

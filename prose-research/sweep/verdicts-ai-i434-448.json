@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 12,
+ "claims": [
+  {
+   "index": 434,
+   "feature": "micro-moments not stories",
+   "claim": "Joon Sung Park: generative agents are good at believable micro-moments but unlikely to be used to create really fun stories.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "creating these believable, like, micro-moments",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 435,
+   "feature": "pipeline of voices",
+   "claim": "Xalavier Nelson Jr.: eliminating junior writing positions means no mid-levels, no seniors, and no vibrant creative voices later.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "they don't become the vibrant, creative voices",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 436,
+   "feature": "soulless machines",
+   "claim": "Eric Barone: even if AI becomes indistinguishable from the best writers, he wants games made by human beings.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "games made by soulless machines",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 437,
+   "feature": "no thread or resolution",
+   "claim": "AI Dungeon's freeform tales have no recognisable thread or resolution; wrapping up is left to the player.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "no recognizable thread or resolution to any of its freeform tales",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 438,
+   "feature": "player does the heavy lifting",
+   "claim": "Even when a story makes occasional sense, the player is the one doing all the heavy lifting to make it cohere.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "you're the one doing all the heavy lifting",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 439,
+   "feature": "vague witnesses and non-sequiturs",
+   "claim": "A detective scenario became a fever dream of frustratingly vague witnesses and bizarre non-sequiturs, and not in an artfully noirish way.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "frustratingly vague witnesses and bizarre non-sequiturs",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 440,
+   "feature": "continuity errors",
+   "claim": "Told he was stabbed 'again' with no first time; a locked door becomes an open, lockless one.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "stabbed ‘again’ in my sleep (there was no first time)",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 441,
+   "feature": "no memory of premise",
+   "claim": "The bot has little to no memory of what was established or of the initial prompt, so stories hop off the rails unless constantly reminded.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "little to no memory of what you've already established",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 442,
+   "feature": "dead-end loops",
+   "claim": "Stories hit dead-end loops where whatever the player types returns the same reply.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "I keep getting the same reply over and over again",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 443,
+   "feature": "hijacks the protagonist",
+   "claim": "The bot takes control of the player character, swaps characters and hops genres to move things along.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 444,
+   "feature": "abrupt shifts",
+   "claim": "The story could not decide whether the player had witnessed or survived a plane crash before another abrupt shift upended everything.",
+   "source": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl",
+   "url": "https://www.stuff.tv/app-reviews/ai-dungeon/review",
+   "quote": "another abrupt shift that upended everything",
+   "page": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl"
+  },
+  {
+   "index": 445,
+   "feature": "blandness / genericity",
+   "claim": "Professional comedians found LLM comedy output generic and bland, lacking the incisiveness of human-written language.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "the words seem very generic. They lack that incisiveness",
+   "page": ""
+  },
+  {
+   "index": 446,
+   "feature": "no point of view; cannot punch up or down",
+   "claim": "Without a perspective the model cannot calibrate who a joke targets, so it takes no comedic risks.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "It had no perspective, so it couldn’t take any risks",
+   "page": ""
+  },
+  {
+   "index": 447,
+   "feature": "dated, biased comedy tropes",
+   "claim": "Outputs read as stale mid-century material, described by participants as bland and biased tropes.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "cruise ship comedy material from the 1950s",
+   "page": ""
+  },
+  {
+   "index": 448,
+   "feature": "setup without punchline",
+   "claim": "Comedians used the model only for setup and structure because it could not land a punchline.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "just consistently bad",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where these agents are good at are in basically creating these believable, like, micro-moments.",
+   "note": "Raw NPR text transcript fetched (200, browser UA). Park's full line continues 'But they're likely not going to be used to create individual, like, really fun stories.' Both limbs verbatim; Park identified as a Stanford AI researcher."
+  },
+  {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they don't become mid-level... don't become seniors... the vibrant, creative voices",
+   "note": "Verbatim on the raw transcript, full chain intact: 'When we eliminate positions for juniors, then that means that they don't become mid-level, which means they don't become seniors, which means they don't become the vibrant, creative voices and directors of tomorrow.' The 'writing positions' limb is carried by Acovino's preceding line about junior writers being put out of work."
+  },
+  {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want to play games made by human beings... not games made by soulless machines",
+   "note": "Verbatim. Barone's full line supports both limbs: 'the AI might become so good... that it's indistinguishable from the best, you know, human writers' and 'I want to play games made by human beings.' He is identified as the writer/developer of Stardew Valley."
+  },
+  {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's just no recognizable thread or resolution to any of its freeform tales",
+   "note": "Verbatim on the raw TapSmart page. The second limb is directly supported one sentence earlier: 'It's even up you to wrap the story up and purposefully start again' (sic, 'up you' in the original)."
+  },
+  {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's the persistent feeling that you're the one doing all the heavy lifting",
+   "note": "Word-for-word on the page; the only difference is the typographic apostrophe (page: 'you're' with U+2019). The 'occasional sense' limb is the page's own clause. The page hedges it as 'the persistent feeling that', and 'to make it cohere' is the claim's gloss, supported by the adjacent sentences about no thread or resolution and the player having to wrap the story up."
+  },
+  {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a fever dream of frustratingly vague witnesses and bizarre non-sequiturs",
+   "note": "Verbatim. All limbs present: 'On another run, I was a detective on a murder case... And not in an artfully noirish way either.'"
+  },
+  {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stabbed 'again' in my sleep (there was no first time)",
+   "note": "Verbatim including the curly quotes around 'again'. The door limb is separately supported earlier on the same page: 'The locked door I'm presented with at the outset of an apocalyptic scenario suddenly becomes a wide open door without a lock.'"
+  },
+  {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "little to no memory of what you've already established or what the initial prompt is",
+   "note": "Word-for-word on the raw 148Apps page, differing only in the typographic apostrophe (page: 'you've' with U+2019). The second limb is supported later: 'it's not unusual for stories to hop off the rails immediately unless you're there to keep reminding the bot what your story is supposed to be about.'"
+  },
+  {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stories have hit dead end loops where no matter what I type, I keep getting the same reply",
+   "note": "Verbatim; the assigned quote sits inside the page's own dead-end-loop sentence, so both limbs are the source's own words."
+  },
+  {
+   "index": 443,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "hops genres, trades out characters, and even takes control of your character",
+   "note": "Graded SUBSTANCE only because the claim carries an empty quote field, so there is no quotation to check word for word. All three behaviours are on the raw page in one clause: 'a story that hops genres, trades out characters, and even takes control of your character to move things along.' The page frames this positively ('sometimes it's also fun to follow')."
+  },
+  {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "couldn't make up its mind whether I'd witnessed or been a victim of a plane crash",
+   "note": "Verbatim: 'another abrupt shift that upended everything occurred before long.' Recorded difference, not hidden: the page says the AI couldn't decide whether the narrator had 'been a victim of' the crash, where the claim says 'survived' it; the witnessed-versus-in-the-crash contrast and the indecision are the page's own. Page dated 12 January 2020, rating 4 of 5, by Craig Grannell, matching the source line."
+  },
+  {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the words seem very generic. They lack that incisiveness... with human written language",
+   "note": "Verbatim in section 4.1.3 (participant p11). Participants are the study's twenty professional comedians who perform live (abstract and section 1.1). Precision note: the paper counts 'Six participants' who described outputs as 'bland' or 'generic', not all twenty."
+  },
+  {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it really had no idea how to punch up or punch down. It had no perspective",
+   "note": "Verbatim in section 4.4.1 (p6), full quote 'It had no perspective, so it couldn't take any risks in terms of jokes.' The calibration limb is the paper's own framing sentence: 'By contrast, LLMs could not perform such calibration', and the punch-up/punch-down clause supplies 'who a joke targets'."
+  },
+  {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "producing bland and biased comedy tropes, akin to 'cruise ship comedy material from the 1950s'",
+   "note": "Verbatim in the abstract; the participant quote continues ', but a bit less racist' after the quoted fragment. The abstract attributes it to 'most participants', supporting both the mid-century-staleness limb and the bland-and-biased-tropes limb."
+  },
+  {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they only used LLMs for setup and structure... I more often than not provide the punchline",
+   "note": "Verbatim: 'just consistently bad [...] didn't really improve on the jokes' (p10, section 4.1.2). The setup/structure limb is the page's own sentence ('Many participants noted that they only used LLMs for setup and structure generation due to their inability to generate humorous outputs'), and the punchline limb is section 4.1.4's p17 quote. Precision note: the paper says 'many participants', not all comedians."
+  }
+ ]
+}

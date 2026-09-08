@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i1383-1414",
+ "lines": 96,
+ "firstTs": "2026-09-07T04:38:48.705Z",
+ "lastTs": "2026-09-07T04:44:04.987Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 19,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.wargamer.com/dnd/marketplace-dungeon-masters-guild-ai-ban",
+  "https://slyflourish.com/best_llm.html",
+  "https://www.rascal.news/tabletop-industry-veteran-ryan-dancey-loses-alderac-coo-job-after-saying-ai-can-generate-game-ideas-as-good-as-some-of-his-companys-designs/",
+  "https://arxiv.org/html/2410.11698v3",
+  "https://tenfootpole.org/ironspike/?p=9842",
+  "https://tenfootpole.org/ironspike/?p=10508",
+  "https://tenfootpole.org/ironspike/?p=9829",
+  "https://www.rascal.news/ennie-awards-updated-submission-policy-wont-accept-ai-projects-next-year/",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "tly (normalizing only curly quotes and whitespace). Checkpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1383-1414.json` (16,152 bytes, 15 claims / 15 verdicts, index order verified).",
+ "run": "wf_0eb229cc-f75",
+ "agent": "a91a25bf0404a0271",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/405b5e7e-8c4d-4fa3-8d98-bc46b7fbf074/subagents/workflows/wf_0eb229cc-f75/agent-a91a25bf0404a0271.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i1383-1414.json",
+  "exists": true
+ }
+}

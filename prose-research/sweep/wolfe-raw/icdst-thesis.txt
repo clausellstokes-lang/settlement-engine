@@ -1,0 +1,1033 @@
+Bridgewater State University
+Virtual Commons - Bridgewater State University
+Honors Program Theses and Projects Undergraduate Honors Program
+5-10-2016
+An Examination of Gene Wolfe's The Book of the
+New Sun: Literary and Mythological Significance
+Tyler Garvey
+Follow this and additional works at: http://vc.bridgew.edu/honors_proj
+Part of the English Language and Literature Commons
+This item is available as part of Virtual Commons, the open-access institutional repository of Bridgewater State University, Bridgewater, Massachusetts.
+Recommended Citation
+Garvey, Tyler. (2016). An Examination of Gene Wolfe's The Book of the New Sun: Literary and Mythological Significance. In BSU
+Honors Program Theses and Projects. Item 162. Available at: http://vc.bridgew.edu/honors_proj/162
+Copyright © 2016 Tyler Garvey
+ 
+ 
+ 
+An Examination of Gene Wolfe’s The Book of the New Sun: 
+Literary and Mythological Significance 
+ 
+ 
+Tyler Garvey 
+ 
+ 
+Submitted in Partial Completion of the  
+Requirements for Departmental Honors in English 
+ 
+Bridgewater State University 
+ 
+May 10, 2016 
+ 
+ 
+Dr. Matt Bell, Thesis Director 
+Dr. Kathleen Vejvoda, Committee Member 
+Dr. Anne Doyle, Committee Member 
+ 
+ 
+  Garvey  
+ 
+2 
+Gene Wolfe’s The Book of the New Sun is an enigmatic and labyrinthine text that 
+demands that the reader solve its mysteries. Everything is written but little is clear. 
+Powerful symbols are evoked to bewilder and astonish, while the reader is guided by a 
+narrator who forgets nothing and himself suggests a rereading, compelling one to turn 
+back the pages to compare the smallest of details. The imagination quickens at the poetry 
+of this narrator whose sensitivities are at once immediately familiar and surprisingly 
+penetrating, the fantasies found here never suggesting something less than significance. 
+The mysteries to be resolved align themselves in imprecise forms identified with vastly 
+outdated words and phrases; religious devices and hard scientific perspectives are 
+intermingled in the construction of a narrative that would appear to entertain either 
+interpretation. To illuminate the mythological and symbolic power of this text is the 
+purpose of this examination of The Book of the New Sun, responding to a critical reading 
+written by Peter Wright, a reading that touts intentional authorial misleading as the basis 
+of its naturalistic conclusion. 
+Gene Wolfe’s The Book of the New Sun is a science-fantasy series, a genre that 
+combines elements of traditional science fiction and fantasy, of five volumes: a tetralogy 
+composed of The Shadow of the Torturer (1980), The Claw of the Conciliator (1981), 
+The Sword of the Lictor (1982), The Citadel of the Autarch (1983); and a coda titled The 
+Urth of the New Sun (1987). It is a curious and almost occult body of writing, receiving 
+speculation and praise upon its initial release but quickly fading into the background of 
+contemporary literature. This is due largely to its status as a work of science fiction that 
+crosses over into fantasy, its place in genre fiction denying The Book of the New Sun the 
+attention of many readers who are plagued by assumptions, often rightly, of the tropes 
+  Garvey  
+ 
+3 
+and stereotypes that such works perpetuate for the interests of a niche demographic. In 
+his review of the classic science-fiction novel Stranger in a Strange Land (Robert A. 
+Heinlein, 1961), Ronald Lee Cansler offers an accurate depiction of the challenges facing 
+the genre: 
+Once, the term “science fiction” conjured up the image of a thirteen-year-
+old, pimply faced boy charging over a hill in a vacant lot, blasting away at 
+Bug-Eyed-Monsters while wearing a plasticized “space helmet” and toting 
+a chromed “ray gun”. Now, however, science fiction has come of age and 
+does not need to be defended to most readers as a viable and important 
+form of literature…However, science fiction still deserves more attention, 
+both as a literary genre and in relation to individual works. Accordingly, 
+the discussion now turns to science fiction as a literary medium with valid 
+approaches, great and often fulfilled potential for social criticism, and high 
+entertainment value…(98)  
+The image of the little boy reveling in the pure fantasy of childhood in conjunction with 
+one of the garishly illustrated novels of science fiction is sufficient grounds for dismissal 
+for many seeking an engaging reading experience, and unfortunately this causes many 
+accomplished texts to be overlooked. Cansler continues by saying “…I must admit that 
+science fiction has been, is, and shows no indication of becoming anything other than, a 
+minor literary form” (98). This review comes from an issue of the Journal of Popular 
+Culture published in 1972, and so Cansler has been proven correct. So amidst this literary 
+and cultural atmosphere, how is The Book of the New Sun to be regarded, and how have 
+those open to a reading that goes beyond the cover art received it? John Clute, literary 
+  Garvey  
+ 
+4 
+reviewer and vocal supporter of Wolfe and his work, says it best in his review “The Urth 
+and All Its Glory”: 
+[If] Gene Wolfe is to be taken seriously—and however thrilling or 
+pleasing [The Book of the New Sun] may seem, there is simply no point at 
+all in thinking of its author as a creator of mere speculative 
+entertainment—then he must be taken as attempting something analogous 
+to Dante’s supreme effort [The Divine Comedy]. With great urgency, layer 
+after layer, he has created a world radiant with meaning, a novel that 
+makes sense in the end only if it is read as an attempt to represent the 
+Word of God. How intimate—how dizzyingly remote —how comforting 
+or alienating that Word can be, each reader will of course discover. (478) 
+Clute evokes a Judeo-Christian reading here with reference to the Word of God, a reading 
+based on notable evidence, but a theological reading that limits the scope of the entire 
+mythological picture. That being said, Clute’s comparison of Wolfe’s work with Dante’s 
+is high praise, and the assertion of Wolfe’s purpose in writing The Book of the New Sun 
+accurately pinpoints the goal of this 20th-century novel in several parts. In his review Bob 
+Collins notes, “Wolfe’s achievement, though, is nothing less than the mythic conflation 
+of the whole of human drama, something the ‘first reader’ of such a book may sense, but 
+no review can possibly summarize” (478). Clute and Collins both make mention of a 
+“mythic conflation” of sorts taking place beneath the fantastic aesthetic of Wolfe’s 
+writing, and both acknowledge the difficulty of this understanding amidst the “dizzyingly 
+remote” devices Wolfe employs in its enacting. There is strangeness, deceptiveness to 
+this text that inspires a curiosity, a curiosity justified in the properties of its pursuit, those 
+  Garvey  
+ 
+5 
+being a rereading, the study of mythology, the study of science, and an examination of 
+the readers’ own perceptions of themselves and of the world. Somtow Sucharitkul 
+remarks in a review of the third volume:  
+In a very real sense, it is this very familiarity, not the baroque weirdness of 
+its textures, that makes Sword of the Lictor so powerful. For Wolfe never 
+loses sight of his sources, his mythical resonances. It is his classical 
+adherence to that most ancient of literary structures, the finding of self 
+within a journey through fantastical and ever-widening landscapes, that 
+pushes the book beyond eccentricity into greatness. (476) 
+There is an encrypted knowledge to be gleaned from Wolfe’s words, and from a story set 
+in a far future world of myth and fantasy, and as Sucharitkul makes clear, the seeking of 
+this knowledge is joyous because of the readily apparent credibility the text displays. To 
+return briefly to Cansler: “Historically, the extraordinary, the supranatural has been found 
+more worthy of consideration in the telling of great tales than has the mundane existence 
+of trivial lives in the ‘real’ world” (98).  Wolfe knows this well, and so does the boy 
+leading a charge with ray gun in hand, for children have no predisposition to the 
+overwhelming veracity of the perceived world. The Book of the New Sun could not be the 
+thoughtful and poetic work that it is without its fantasy and its willingness to trust in 
+symbols. 
+To best appreciate that symbolic vitality, one must be oriented within Wolfe’s 
+world. The Book of the New Sun introduces Severian, a man who claims perfect and 
+complete memory, recounting his own history years after the events of the novels, writing 
+the narrative entirely in the first person. With his mnemonic condition he assures the 
+  Garvey  
+ 
+6 
+reader that nothing has been left out or corrupted by time and forgetfulness. The story 
+takes place on the world of Urth, a name that is symbolic of the brutalized and culturally 
+barren landscape that Earth has become millions of years in the future. Humankind has 
+journeyed to the stars and beyond, returning to Urth to languish and degenerate, the 
+evidence of the might once displayed serving only to mystify and serve the inhabitants of 
+this world in fashions that betray the purpose of their construction. Derelict spacecrafts 
+are referred to as towers; the cities, the mountains, and the terrain of Urth are adorned 
+with majestic art and objects of achievement standing forlorn and misunderstood, while 
+beneath this cornucopia of humanity the actual beings reassume a simple existence. 
+Culture is not completely absent, but like the advanced knowledge much of it is hidden 
+and coveted by the elite, the extraterrestrial, and the sycophantic. The Commonwealth is 
+the center of the plot, an expanse of mountains, rivers and pampas bordered on either side 
+by the ocean, home to the vast cities of Nessus and Thrax. The prevailing ideology of the 
+Commonwealth is a faith in the Conciliator and the New Sun, a religion centered around 
+a belief that the dying sun that hangs in the sky will be regenerated by a savior who can 
+negotiate the miraculous between the beings that sail between the stars and the humble 
+citizens of Urth. The “old sun” in the sky is a brooding red, weak for lack of energy, the 
+stars of farther galaxies visible in the atmosphere even in the light of day. Its diminished 
+state reflects the people who live under it. The coming of the New Sun will flood the 
+Urth, cleansing it of its impurities and giving rise with the abatement of the deluge to a 
+rejuvenated people and culture. This religion serves to structure the reader’s perception of 
+  Garvey  
+ 
+7 
+the novel, serves as a common thread to tie the wide cast of characters together, and 
+ultimately appears prophetic or disingenuous through the actions of Severian.1 
+Approaching the text of The Book of the New Sun requires great attention to every 
+detail, of which there is an exhaustive supply. The text is riddled with information that 
+sends the reader down many different paths, Wolfe’s extensive use of archaic diction and 
+cryptic description elevating the stifling air of mystery to create an oppressive 
+atmosphere of thought, and a shortness of interpretive breath that leaves the reader 
+gasping for answers. Among Severian’s many extra-narrative musings emerge 
+metafictional insights that offer lenses through which the text can be better observed. 
+Towards the end of The Shadow of the Torturer, Severian discovers that he possesses the 
+Claw of the Conciliator, and this discovery coincides with his and Dorcas’s witnessing 
+the miraculous rising of a flaming cathedral above Nessus. This prompts a philosophical 
+discussion between the two as they journey northward, and compels Severian to relate to 
+Dorcas a story from the brown book he carries, which supposedly contains keys to the 
+universe: 
+Thecla and I used to read them and talk about them, and one of them was 
+that everything, whatever happens, has three meanings. The first is its 
+practical meaning, what the book calls, “the thing the plowman sees.” The 
+cow has taken a mouthful of grass, and it is real grass, and a real cow—
+that meaning is as important and as true as either of the others. The second 
+is the reflection of the world about it. Every object is in contact with all 
+others, and thus the wise can learn of the others by observing the first. 
+                                                 
+1 For a complete summary of The Book of the New Sun that addresses each of the five 
+novels, turn to the Appendix beginning on page 33. 
+  Garvey  
+ 
+8 
+That might be called the soothsayers’ meaning, because it is the one such 
+people use when they prophesy a fortunate meeting from the tracks of 
+serpents or confirm the outcome of a love affair by putting the elector of 
+one suit atop the patroness of another…The third is the transsubstantial 
+meaning. Since all objects have their ultimate origin in the Pancreator, and 
+all were set in motion by him, so all must express his will—which is the 
+higher reality. (Shadow, 190) 
+To summarize then, objects are seen 1) as they appear before the naked eye, by simple 
+observation; 2) through how they interact with the world about them and what 
+significance is held through this interaction; and 3) through how their existence and its 
+actions express the directions and intent of an omniscient will that governs all things. 
+“The Book of the New Sun” is a religious text that exists within the fictional Book of the 
+New Sun that is being examined here, and with that in mind there is a distinction present 
+between Severian’s fictional readers, whom he addresses and may be assumed to be 
+followers of the New Sun, and Wolfe’s readers in reality. This textual layering thus 
+divides The Book of the New Sun into fictional scripture and a work of science fantasy, 
+Severian’s dialogue above reflecting the interpretive practices of traditional exegesis, as 
+exemplified by the early Christian theologian Origen: 
+The individual ought, then, to portray the ideas of holy Scripture in a 
+threefold manner upon his own soul; in order that the simple man may be 
+edified by the “flesh,” as it were, of the Scripture, for so we name the 
+obvious sense; while he who has ascended a certain way [may be edified] 
+by the “soul,” as it were. The perfect man, again, and he who resembles 
+  Garvey  
+ 
+9 
+those spoken of by the apostle…[may receive edification] from the 
+spiritual law, which has a shadow of good things to come. For as man 
+consists of body, and soul, and spirit, so in the same way does Scripture, 
+which has been arranged to be given by God for the salvation of men. 
+(1860) 
+Origen’s writing is in direct correlation with the theory of interpretation found in “The 
+Wonders of Urth and Sky,” the brown book from which Severian lifts the stories 
+explaining keys to universal explanation. With this in mind the reader can comprehend 
+the words he reads on the page, how they resonate with “The Book of the New Sun” as a 
+whole, and the driving purpose of authorial intent and the apotheosis of the New Sun. 
+The fact that the Severian writing this history as a fictional prophet is inhabited by many 
+different minds and personalities by the time he becomes Autarch is even more 
+significant given the nature of biblical authorship. The Bible as it is known likely had 
+several different authors, redactors and scribes working with numerous pieces of writing 
+to compose the unified text familiar to readers today. When it is learned that the Severian 
+as Autarch is a multi-faceted being consisting of all of the previous Autarchs inhabiting 
+Severian’s body, it complicates the narrative perspective, further evidence of this 
+provided by Thecla’s memories interrupting the flow of the text uninhibited at numerous 
+occasions, without warning or indication. The fictitious account then likely has many 
+different authors, as does the Bible, marking the three-fold interpretive method as 
+especially significant. 
+The duality of this text is immediately acknowledged after Severian relates this 
+story and its meta-implications. Speaking for the readers of The Book of the New Sun is 
+  Garvey  
+ 
+10 
+Dorcas, when she responds to what Severian has told her, saying, “It seems to me that 
+what you call the third meaning is very clear. But the second meaning is harder to find, 
+and the first, which ought to be the easiest, is impossible” (Shadow, 191). On a first 
+reading this rings especially true, with places and things being described in deceptive 
+fashion and portentous events broadcasting solutions to a puzzle that is solved 
+backwards. When Wolfe’s meaning does become clear and subsequent explorations 
+illuminate clues and connections that develop the subtext with their unveiling, the objects 
+and seemingly familiar story elements that have seemed innocuous at first begin to raise 
+questions. Rather than denying the previous interpretive method and its religious 
+implication Dorcas’s suggestion builds on it, acknowledging to the actual readers Wolfe’s 
+omnipotence over his own story and urging a further analysis following the initial 
+understanding.  Dividing Dorcas’s perceptive reaction from the asserted ideology of the 
+brown book draws a severe line between approaches to this narrative, clarifying the gray 
+area between miracles and artifice. In his naturalistic reading Peter Wright, a scholar 
+whose work will later be examined in greater detail, utilizes Dorcas’s words to expose the 
+tenuous nature of religious depiction in the text: 
+Dorcas’s perspicacity emphasizes the process of adumbration at work 
+within the human psyche. The people of the Commonwealth are so 
+distanced from the reality of their universe by their need for a 
+transcendental relevance that they cannot apprehend straightforward 
+biological relationships through the imposed veils of superstition, 
+personified by the soothsayers, and organized religious dogma, 
+represented by a belief in the Pancreator. (76) 
+  Garvey  
+ 
+11 
+Several characters certainly display this method of thinking, and this psychology 
+importantly notes the imperfections of religious beliefs and how they can often work to 
+conceal truths that are otherwise self-evident. Wright continues by noting that Wolfe is 
+almost certainly counting on this same psychology affecting a certain reading 
+demographic, remarking that “it seems probable that the reader will undergo the same 
+degree of abstraction from fictive reality as a consequence of his or her corresponding 
+sensitivity to mythic accounts of existence” (77). In this way Wolfe maintains the 
+amorphous conclusions a reader is likely to draw from an initial reading, flirting with two 
+extremes of universal explanation while offering just enough to push the argument in 
+either direction, this argument largely being decided by the readers own predispositions.  
+It is important to note Wolfe’s employment of deception and playful misleading, 
+and that there are several clues to be found which inform the reader that what outcomes 
+they might expect will be resolved in purposefully deviant fashion. The very first chapter 
+would serve to be an outline that might cater to the expectations of the reader, who sees a 
+darkly hooded man with a great sword on the novel’s cover, and could well expect to be 
+entertained by formulaic fantasy. As the pages turn this illusion gives way to the 
+meticulously constructed and original narrative, yet the initial impression does not fade 
+completely, continuing to tug at the imagination of the reader as Dorcas might tug the 
+soiled hem of Severian’s cloak, encouraging with warmth and knowledge what is 
+expected while inviting the unfamiliar. Appropriately it is after Dorcas’s strange 
+emergence that Severian’s narration turns to remark on the materialization of the foreign, 
+a reflection inspired by his bewilderment at the sudden appearance of Dorcas’s floral 
+headdress: 
+  Garvey  
+ 
+12 
+Is it possible the flower came into being only because Dorcas reached for 
+it? In daylight moments, I know as well as the next that such things are 
+impossible; but I am writing by night, and then, when I sat in that boat 
+with the hyacinth less than a cubit from my eyes, I wondered at the dim 
+light and recalled Hildegrin’s remark of a moment before, a remark that 
+implied…that the seeress’s cave, and thus this garden, was on the opposite 
+side of the world. (Shadow, 147) 
+A pale water hyacinth appearing in the hair of a bewildered girl, at her behest, “…the first 
+flower I had seen in the Garden of Endless Sleep…” ( Shadow, 147), flings Severian north 
+of the “waist of the world,” as he would call it, and allows him to share in the strangeness 
+the reader has so far been oppressed by. The Shadow of the Torturer moves like a 
+somnambulist through its opening episodes, crushing its reader with the ancient weight of 
+archaic vocabulary unknown to most dictionaries, with frequent pauses and obscure 
+reflections, and transitions so understated that when a climax comes it peaks and falls 
+seemingly without incident. Wolfe knows what is expected, and this passage in the 
+botanical gardens allows Severian the narrator to admit to the reader that the promised 
+destination is seen through a fog some distance away, separated from the ground below 
+the torturers boots by murky and dangerous waters. Severian uses his own education and 
+the recurring celestial imagery to explain the dizzying task of orientation in The Book of 
+the New Sun: 
+There, [the opposite side of the world], as Master Malrubius had taught us 
+long ago, all was reversed: warmth to the south, cold to the north; light at 
+night, dark by day; snow in summer. The chill I felt would be appropriate 
+  Garvey  
+ 
+13 
+then, for it would be summer soon, with sleet riding the wind; the darkness 
+that stood even between my eyes and the blue flowers of the water 
+hyacinth would be appropriate then too, for it would soon be night, with 
+light already in the sky. (Shadow, 147) 
+The reader understands the opposing climates and time zones as the conventional 
+difference between the Northern and Southern Hemispheres of Earth, and thus Urth, but 
+to Severian it is a greater difference, and serves as an oblique allusion to the persistent 
+duality of interpretation. Severian sits wondering on his side of the world of the mystery 
+of the other, and the reader may sit either with the narrator or in his own craft of thought 
+on the other side of the world, wondering with equal validity at the enigma of an alternate 
+perspective. 
+ The basis for the scientific and purely rationalistic reading of The Book of the New 
+Sun rests largely with Peter Wright’s Attending Daedalus: Gene Wolfe, Artifice and the 
+Reader, an extensive and well-researched work of scholarship. Here Wright illuminates 
+the breadth of Gene Wolfe’s work as an author through the 1990s, dedicating a 
+significant section to the close study of The Book of the New Sun. Wright pays especial 
+attention to Wolfe’s writing style, and the struggle to comprehend it. Wright remarks that 
+“By changing generic codes, subverting traditional literary conventions, employing an 
+unreliable narrator and exploiting the deflective effect of unfamiliar diction, Wolfe 
+creates a text organized specifically to be understood, or at least appreciated, only by 
+those readers who are willing to question their own literary assumptions, pause, reflect, 
+and reread” (166). This observation of Wolfe’s writing rings true, especially the latter 
+half of the statement. Acknowledging these devices of literary artifice, in the fifth chapter 
+  Garvey  
+ 
+14 
+of the book Wright states his interpretation of The Book of the New Sun: “The story of 
+The Urth Cycle describes a human race caught in two complex processes: that of an 
+external cosmological conspiracy masterminded by the Hierogrammates, and that of its 
+own psychological need for lenitive myths” (69). Wright examines these myths and the 
+religious elements of Wolfe’s work to uncover the eugenic engineering of humanity by a 
+race of higher beings, here titled the Hierogrammates, represented in The Urth of the New 
+Sun by the characters Tzadkiel and Apheta, presented as male and female respectively in 
+their primary manifestations and serving to guide Severian in a parental fashion through 
+the orchestrated apotheosis. In his work Lexicon Urthus: A Dictionary for the Urth Cycle, 
+in which the history and usage of Wolfe’s obscure vocabulary is clarified, Michael 
+Andre-Driussi gives the following definition for Hierogrammate: “A sacred scribe, one of 
+a lower order of the Egyptian priesthood; a writer of sacred records, specifically of 
+hieroglyphics” (171). The moniker is appropriate then as the Hierogrammates indeed 
+have a hand in the construction of the solar mythology that shapes The Book of the New 
+Sun, yet Wright sees their role in this construction and the fulfillment of the mythos as 
+strictly selfish, a way in which to ensure their own survival.  
+Acknowledging that Tzadkiel, Apheta and their kind have used Severian and the 
+humans of Urth to prevent their own degeneration leaves the spiritual essence of The 
+Book of the New Sun feeling deceptive. The allusions and symbols that evoke the mythos 
+of Christ, solar deities, and the esoteric practices of early South Americans are found 
+repeatedly throughout the text, forming the base for and the conception of Severian’s 
+apparent apotheosis. As Peter Wright has claimed in his purely secular reading of 
+Wolfe’s series of novels, the trappings of spiritual lore serve only as a mechanism in the 
+  Garvey  
+ 
+15 
+greater engineering of a submissive and ignorant human race, appealing to a deep-seated 
+need for divine presence and prophecy. As he understands Wolfe’s design, “The success 
+of the Hierogrammates’ clandestine strategies depends on their capacity to convince 
+Severian of his own divinity and on the divine nature of their actions. This seduction is 
+effected by Tzadkiel, who nurtures Severian’s faith by assuming the guise of an 
+angel…and who employs suitably inflated, pseudo -religious rhetoric to account for the 
+Hierogrammates’ actions” (79). In Wright’s opinion, the Hierogrammates are effectively, 
+then, the authors of a false scripture and mysticism of Urth. Religion and spirituality have 
+long been used by ruling bodies and governments to establish structure and order among 
+people, its power and mystery providing justification for the peculiar instances of human 
+life. The goal of Tzadkiel and Apheta, as proposed by Wright, is to effectively organize 
+the beings of Urth into generating a representative appropriate for and adaptable to their 
+purposes. Since the objective of the manipulation of those on Urth is to prevent the 
+degeneration of a race, the foretelling of a New Sun and the various instances of 
+theophany in the text are used as tools for selection. It is a bold reading based on a 
+Darwinian, interstellar process of selection that is not without credibility. Wright’s 
+reading is studied and thorough, but not final. To move into a broader interpretation of 
+The Book of the New Sun, a working knowledge of mythological symbolism and its 
+transcendent properties is required.  
+ A reading of The Book of the New Sun that moves beyond the machinations of 
+science-fiction, that views its construction and execution through the mythologies of 
+Gene Wolfe and Severian alike, is greatly aided by Joseph Campbell’s 1949 work, The 
+Hero with a Thousand Faces. To summarize briefly, Campbell’s writing details 
+  Garvey  
+ 
+16 
+episodically the journey of the archetypal hero that is found across all cultures, in all 
+periods of time throughout the world. This structure that Campbell illuminates is known 
+as the monomyth, the one great story of man so much apart of his nature that its retelling 
+is inevitable, albeit taking different forms and figurations internationally. “The standard 
+path of the mythological adventure of the hero is a magnification of the formula 
+represented in the rites of passage: separation-initiation-return: which might be named the 
+nuclear unit of the monomyth” (23): this unit in its simplicity is utterly complete, and 
+essential for the success of a symbolic story. Most evident from reading Campbell is the 
+sheer power of myth, and its connection with dream symbols and human psychology are 
+compelling in their implications. Campbell’s explanation of mythology moves beyond 
+religion and the art of storytelling to something more essentially human, abstract in the 
+forms and characters it adopts but therefore allowing for individual understanding. 
+Campbell states, “It would not be too much to say that myth is the secret opening through 
+which the inexhaustible energies of the cosmos pour into the human cultural 
+manifestation. Religions, philosophies, arts, the social forms of primitive and historic 
+man, prime discoveries in science and technology, the very dreams that blister sleep, boil 
+up from the basic, magic ring of myth” (1). It is an absolute statement, but one that 
+proves invaluable in reading The Book of the New Sun and approaching a working 
+navigation of its structure, symbols, philosophical interludes, and cerebral dream 
+episodes that hang on the page with an arch significance that is yet too obscure to assume 
+any complete picture of clarity. In the opening chapter of The Shadow of the Torturer, 
+Severian makes an observation that touches on this notion: “Certain mystes aver that the 
+real world has been constructed by the human mind, since our ways are governed by the 
+  Garvey  
+ 
+17 
+artificial categories into which we place essentially undifferentiated things, things weaker 
+than our words for them. I understood the principle intuitively that night… ” (Shadow, 
+11). From the beginning Severian insinuates the fact that he has an understanding of 
+concepts and constructs essential to humanity that in their complexity render language 
+astoundingly overwrought. What the mythology that Campbell examines accomplishes in 
+its deceptive simplicity is directly analogous to the religious and mythical systems 
+displayed and cycled in The Book of the New Sun. Severian and therefore Wolfe 
+understand this, and trust the reader to reach this understanding themselves. 
+ Of the multitudinous instances of duality, the incident of the rising cathedral is 
+one that Wolfe establishes in the esoteric sense but then later deconstructs with rational 
+thought. Prefacing this miraculous vision is Severian’s discovery of the Claw of the 
+Conciliator, and the fact that what follows appears so portentous lends it a great 
+significance. As Severian and Dorcas wonder at the Claw, they see the following: 
+“Hanging over the city like a flying mountain in a dream was an enormous building—a 
+building with towers and buttresses and an arched roof. Crimson light poured from its 
+windows. I tried to speak, to deny the miracle even as I saw it; but before I could frame a 
+syllable, the building had vanished like a bubble in a fountain, leaving only a cascade of 
+sparks” (Shadow, 188). The vision is nothing short of spectacular, and it is an instance of 
+theophany that sets the tone of the religious narrative that henceforth becomes more 
+closely woven into the text. In the following novel however, this event is downplayed 
+into the mundane, through passing conversation with a nameless character no less. At the 
+festival in Saltus, Severian questions an elderly woman about the location of the 
+  Garvey  
+ 
+18 
+Pelerines, a religious organization whose temporary abode was the cathedral of the 
+vision. The old woman confirms the rising, but explains it thus: 
+“When my grandson-in-law heard about it, he was fairly struck flat for 
+half a day. Then he pasted up a kind of hat out of paper and held it over 
+my stove, and it went up, and then he thought it was nothing that the 
+cathedral rose, no miracle at all. That shows what it is to be a fool—it 
+never came to him that the reason things were made so was so the 
+cathedral would rise just like it did. He can’t see the Hand in nature.” 
+“He didn’t see it himself?” I asked. “The cathedral, I mean.” 
+She failed to understand. “Oh, he’s seen it when they’ve been through 
+here, at least a dozen times.” (Claw, 229) 
+As the cathedral was made of canvas, its rising into the air could be explained through 
+simple science. As the old woman understands however, this explanation does not 
+discredit the event entirely or mark it as trivial. Unlike Severian, the young man who 
+burned the paper did not witness the cathedral rising himself, and therefore the power of 
+the vision was never presented to him. For Severian the sight is a turning point, and it 
+serves to make whole his relationship with Dorcas. As he explains, “It was only after the 
+vision of that great building hanging, then vanishing, above the city, that I knew I had 
+come to love Dorcas…And because our thoughts were entirely of what we had seen, our 
+spirits embraced without hindrance, each passing through those few seconds of vision as 
+if through a door never previously opened and never to be opened again” (Shadow, 189). 
+The metaphysical interplay of their two “spirits” is significant, and this intimacy inspires 
+the philosophical conversation between them referenced above.   
+  Garvey  
+ 
+19 
+Miracles occur in several instances throughout The Book of the New Sun through 
+the use of the mysterious Claw of the Conciliator, ‘...the most precious of gems” 
+(Shadow, 29). If Severian is a thaumaturge then the Claw is his instrument, although an 
+inconsistent one. Raising those seeming dead back to life and healing severe injuries are 
+actions that it inspires, but it does not perform on every occasion. For each acknowledged 
+success there are a number of failures, and Severian is never sure when he attempts to 
+draw forth its power that he will accomplish what he wishes. The gem itself is revered, a 
+recognized religious relic, yet as with all things in The Book of the New Sun there is 
+another explanation for its revered status and capabilities. Dorcas proposes this theory as 
+to the comprehension of its powers: 
+Severian, when you brought the uhlan back to life it was because the Claw 
+twisted time for him to the point at which he still lived. When you half 
+healed your friend’s wounds, it was because it bent the moment to one 
+when they would be nearly healed. And when you fell into the fen in the 
+Garden of Endless Sleep, it must have touched me or nearly touched me, 
+and for me it became the time in which I had lived, so that I lived again. 
+But I have been dead. For a long, long time I was dead, a shrunken corpse 
+preserved in the brown water. (Sword, 60) 
+So the argument that the Claw is no more than a device through which time is distorted is 
+proposed, and given the fact that movements back and forth through time are possible in 
+this story, it is not without its merit. Peter Wright suggests, “all of the apparently mystical 
+incidents that the artefact propagates can be accounted for rationally by appealing to the 
+physical and scientific laws operative in Wolfe’s fictional heterocosm” (82), Wright 
+  Garvey  
+ 
+20 
+understands the Claw as an enigmatic mechanism functioning within the established 
+system of cross-dimensional travel. The final analysis of the relic Wright offers is that 
+“The Claw’s reanimatory and curative properties arise from its functions as the focal 
+point of a localized time-travel field, directing massive amounts of energy from the White 
+Fountain through Severian. The Claw is, therefore, the locus for a power external to 
+Severian” (83). The energy that the Claw uses does indeed come from an external source, 
+but this examination leaves Severian an unremarkable conductor of the direction of this 
+energy. 
+ Ultimately the Claw is symbolic, and with the knowledge that the greatest role 
+Severian will play will be that of the Conciliator himself, any mechanistic assumptions of 
+the utility of the Claw are irrelevant. Furthering his thinking on the Claw, Wright makes 
+note of an acknowledgement made in The Urth of the New Sun: “When Apheta suggests 
+that the Claw’s ability to channel energy from the White Fountain arises from its 
+immersion in Severian’s blood…there is clearly an equation being drawn between blood 
+and the Claw’s potency” (83). What this observation accomplishes is the glorification of 
+Severian’s blood, and that any phenomena the Claw as an object may be responsible for 
+is rooted in the fact that it was immersed in the life of the Conciliator. Severian comes to 
+realize the futility of attributing the power he has witnessed and stimulated to a mere 
+talisman, for when he comes across the Claw of the Conciliator in a strange place, after 
+already having returned it to the Pelerines, he is able to muse with lucidity on the reality 
+of the eternal, omnipresent divine: 
+What struck me on the beach and it struck me indeed, so that I staggered 
+as at a blow—was that if the Eternal Principle had rested in that curved 
+  Garvey  
+ 
+21 
+thorn I had carried about my neck across so many leagues, and if it now 
+rested in the new thorn (perhaps the same thorn) I had only now put there, 
+then it might rest in anything, and in fact probably did rest in everything, 
+in every thorn on every bush, in every drop of water in the sea. The thorn 
+was a sacred Claw because all thorns were sacred Claws; the sand in my 
+boots was sacred sand because it came from a beach of sacred 
+sand…everything had approached and even touched the Pancreator, 
+because everything had dropped from his hand. Everything was a relic. All 
+the world was a relic. I drew off my boots, that had traveled with me so 
+far, and threw them into the waves that I might not walk shod on holy 
+ground. (Citadel, 367) 
+This often cited passage from The Citadel of the Autarch touches on a great many ideas, 
+one of these being the principle of the entirety in the fragment, the individual piece, 
+which resurfaces frequently throughout The Book of the New Sun. As Campbell suggests, 
+“Because, finally, the All is everywhere, and anywhere may become the seat of power. 
+Any blade of grass may assume, in myth, the figure of the savior and conduct the 
+questing wanderer into the sanctum sanctorum of his own heart” (35). Severian is able to 
+access miraculous energies not through the function of a time-travel device, but through 
+the infinite channel of all of Urth. The White Fountain is indeed the external source of 
+energy, yet it is an intimate part of Severian’s being, and all the world is an outlet for the 
+expression of its power.  
+  Garvey  
+ 
+22 
+ The White Fountain itself is the key by which the Conciliator unlocks the New 
+Sun from within the old. It is a magnificent galactic appearance, immaculate and gravid 
+with the energy of genesis, described with language astronomically abstract: 
+You know of the chasms of space, which some call the Black Pits, from 
+which no speck of matter or gleam of light ever returns. But what you 
+have not known until now is that these chasms have their counterparts in 
+White Fountains, from which matter and energy rejected by a higher 
+universe flow in endless cataract into this one. If you pass—if our race is 
+judged ready to reenter the wide seas of space—such a white fountain will 
+be created in the heart of our sun. (Citadel, 364)   
+So the projection of Master Malrubius explains to Severian, a nebulous description of its 
+origin that ends with the conditions of its desired usage. Additionally it is marked as a 
+boon, a gift to be allowed from him by whom “our race is judged,” namely the 
+Hierogrammate Tzadkiel. Tzadkiel and his kin are powerful, but is the engineering of 
+such a galactic spectacle theirs to initiate and then transfer? Referring to one of the dream 
+episodes occurring in The Shadow of the Torturer, Peter Wright divorces Severian’s 
+agency from the question: 
+As the Hierogrammates’ marionette, Severian is powerless to oppose their 
+schemes, even if he understood them fully, and his relative impotence is 
+suggested by the description of his puppet counterpart as a “dust mote in a 
+sunbeam.” Severian is just such a speck, caught in the swirling events that 
+bring the White Fountain, like a sunbeam, into the heart of the old sun. His 
+inability to gauge his role in the Hierogrammates’ strategies, and his own 
+  Garvey  
+ 
+23 
+self-importance, are mocked at the conclusion of the puppets’ battle when 
+his analogue’s empty victory over “the man of sticks” is celebrated with a 
+derisive “flourish of toy trumpets.” (78) 
+Expanding his theory on the eugenic conspiracy of the Hierogrammates, Wright paints 
+the White Fountain as a device, a boon, that these beings may employ and bestow at will 
+through their advanced technology. Severian only fits in because of his ideal biology, the 
+human genetic material that will be required to sustain the Hierogrammates, and his 
+pseudo-religious quest and journey of personal growth is bleakly reduced to an image of 
+a pawn moving across a chessboard towards a sacrificial maneuver.  
+ To move beyond this interpretation evokes Joseph Campbell’s mythological 
+theory regarding the “World Navel,” a concept that forms “…the symbol of the 
+continuous creation: the mystery of the maintenance of the world through that continuous 
+miracle of vivification which wells within all things” (32). The White Fountain is 
+certainly that, a surging force of light, life, and energy that in its union with a weakening 
+sun might be said to provide “maintenance” to the ultimate source of vitality for the 
+planet Urth. Applying this theory to the White Fountain however would acknowledge 
+that “miracle of vivification which wells within all things,” in direct opposition to 
+Wright’s theory based on the fictional and highly advanced scientific knowledge that 
+could create spontaneously a massive galactic occurrence. Campbell continues by 
+describing the release of this energy at the successful conclusion of a hero’s journey: 
+The torrent pours from an invisible source, the point of entry being the 
+center of the symbolic circle of the universe, the Immovable Spot of the 
+Buddha legend, around which the world may be said to revolve…The tree 
+  Garvey  
+ 
+24 
+of life, i.e., the universe itself, grows from this point. It is rooted in the 
+supporting darkness; the golden sun bird perches on its peak; a spring, the 
+inexhaustible well, bubbles at its foot. (32) 
+Combining with the sun, “the center of the symbolic universe,” the White Fountain 
+murmurs an endless spring at the feet of a “golden sun bird,” which roosts commandingly 
+atop the crest of life energy supported in the wide night of outer space. The winged 
+creature may seem to be the master of this force, and while it does hold rightly an 
+importance, it is ultimately a herald for something greater than itself. 
+ Following his escape from imprisonment in The Claw of the Conciliator, Severian 
+comes across a short, bald, androgynous figure amidst a secret chamber of the House 
+Absolute concealed by convoluted veils. Because Thecla’s mind and memories at this 
+point are also Severian’s own, he recognizes this figure robed in yellow as none other 
+than the Autarch. The ruler of the Commonwealth compels Severian to peer into a 
+massive tome with pages like silvered glass, and an image is revealed to him: 
+As he spoke, something shaped itself in shining air above the open pages. 
+It was neither a woman nor a butterfly, but it partook of both, and just as 
+we know when we look at the painted figure of a mountain in the 
+background of some picture that it is in reality as huge as an island, so I 
+knew that I saw the thing only from far off—its wings beat, I think, 
+against the proton winds of space, and all Urth might have been a mote 
+disturbed by their motion. Then as I had seen it, so it saw me…It paused 
+and turned to me and opened its wings that I might observe them. They 
+were marked with eyes. (Claw, 336) 
+  Garvey  
+ 
+25 
+It is not until The Urth of the New Sun that this entity is revealed to be none other than 
+Tzadkiel, assuming one shape of sex and form among many that he may choose at will. A 
+beast of ethereal flight already then soars through the great sky of space, anticipating its 
+ivory perch on a burgeoning fountain. It is the effect of this image on Severian’s 
+countenance however that asserts his indisputable role, manipulative plots 
+notwithstanding, in the creation and application of the White Fountain, for the Autarch 
+“…handed me a clean cloth as he spoke, and I wiped my brow with it as he told me, 
+because I could feel the moisture running down my face. When I looked at the cloth, it 
+was crimson with blood” (Claw, 337). In meeting with a king and witnessing an 
+emanation of great spiritual portent, Severian is adorned his own crown of thorns and 
+blood flows from the top of his head. It is one of the more overt comparisons Wolfe 
+makes to Christ using Severian, and returning to Campbell’s explanation of the “World 
+Navel” the importance of this imagery here is observed as “…the figure [previously the 
+sun bird] may be that of the cosmic man or woman…seated or standing on this spot, or 
+even fixed to the tree [tree of life] (Attis, Jesus, Wotan); for the hero as the incarnation of 
+God is himself the navel of the world, the umbilical point through which the energies of 
+eternity break into time” (32). Recalling Wright’s own words about the importance of 
+blood regarding the Claw of the Conciliator and the workings of the extraordinary, here is 
+illustrated Severian’s individual significance before becoming Autarch, before judgment 
+by the Hierogrammates, his dripping red life an indication of the independent divinity of 
+the Conciliator.  
+ Wright’s claims are continually brought back to the manipulative plan of the 
+Hierogrammates, a plan that is vague and only briefly explained in The Urth of the New 
+  Garvey  
+ 
+26 
+Sun. Severian attempts to articulate the goal of this plan to Gunnie, a woman who arrived 
+with him on Yesod, yet he has trouble doing so, remarking that “The Hierarchs and their 
+Hierodules—and the Hierogrammates too—have been trying to let us become what we 
+were. What we can be….That’s their justice, their wh ole reason for being. They bring us 
+through the pain we brought them through” (Urth, 159). This explanation expresses the 
+notion that human beings will be brought through a process that will return them to the 
+superior state of their race formerly expressed before Urth regressed, the evidence of 
+greater men already surrounding Severian and those of his generation through the relics 
+of achievements only an interstellar civilization could have hoped to gain. Apheta is 
+present to listen to Severian’s conversation, and she responds with remarks of her own 
+that provide further clarity: 
+You in turn will make us go through what you did. I think you 
+understand…Your race and ours are, perhaps, no more than each other’s 
+reproductive mechanisms. You [Gunnie] are a woman, and so you say you 
+produce your ovum so that there will someday be another woman. But 
+your ovum would say it produces that woman so that someday there will 
+be another ovum. We have wanted the New Sun to succeed as badly as he 
+[Severian] has wanted to himself. More urgently, in all truth. In saving 
+your race he has saved ours; as we have saved ours of the future by saving 
+yours. (Urth, 159-60) 
+Apheta’s comment about human beings and the Hierogrammates sharing a relationship 
+akin to “reproductive mechanisms” becomes especially relevant, and her further 
+comparison between the woman and her ovum is enlightening in the fact that it betrays 
+  Garvey  
+ 
+27 
+the Hierogrammate psychology of the ends proving far more important than the means. 
+This being said, the “ends” being described are not the immediate salvation of Apheta 
+and Tzadkiel, the living generation of Hierogrammates, but the guarantee of a future for 
+the entirety of their race, as well as that of human beings. Describing the ideology in this 
+way lends an additional perspective to the consequences of the coming of the New Sun as 
+well, for it is an aspiration for the greater good. The Hierogrammates and Severian, in 
+addition to the common people of Urth, are aware that many will die with the birth of a 
+New Sun and that Urth will be flooded and renewed through destruction, yet they justify 
+this massive loss of life with what is depicted as the moral high ground. Regarding the 
+Hierogrammates, Wright continues to see their plans as straightforward and selfish: 
+Their apparently altruistic actions towards humanity, their granting of the 
+boon of the New Sun, must be recognized as a Hierogrammate means to a 
+Hierogrammate end; the (comparatively) short-term benefits conferred on 
+Homo sapiens who, in all probability, will be destroyed together with the 
+old universe, are merely the by-products of the Hierogrammates’ 
+determination to ensure their own biological ascent. (72) 
+The fact is, simply, that there is no probability or likelihood of complete human 
+annihilation, as the New Sun arrives as planned and humanity continues, albeit depleted 
+and in a more primitive fashion.  The old sun had to be violently revivified through the 
+White Fountain, and the Urth of the old sun was destroyed as a result, yet the outcome is 
+an Urth under the New Sun, an Urth that may continue. If the old sun had been allowed to 
+sputter into galactic embers, the old Urth would have perished without hope for 
+resurrection, bringing about what would have been the true end of humanity. 
+  Garvey  
+ 
+28 
+ Returning to the allusion Aptheta made to the sexual congruency of humanity and 
+the Hierogrammates, the creation of the White Fountain is remarkable. Wright has 
+asserted that the phenomenon is a boon to be granted through the power of Tzadkiel, yet 
+Wolfe’s description of its forming is framed in a far different setting, that of Apheta’s 
+bedchamber: 
+Her hands, her lips, her eyes, the breasts I pressed—all wondrous; but 
+there was more, perhaps the perfume of her hair. I felt that I breathed an 
+endless night…Lying upon my back, I entered Yesod. Or say, rather, 
+Yesod closed about me. It was only then that I knew I had never been 
+there. Stars in their billions spurted from me, fountains of suns, so that for 
+an instant I felt I knew how universes are born. All folly. Reality displaced 
+it, the kindling of the torch that whips shadows to their corners, and with 
+them all the winged fays of fancy. There was something born between 
+Yesod and Briah when I met with Apheta upon that divan in that circling 
+room, something tiny yet immense that burned like a coal conveyed to the 
+tongue by tongs. That something was myself. (Urth, 145) 
+Briah being the universe in which Urth resides, what Severian feels so intimately as his 
+own being, what is born between one universe and that of Yesod is the White Fountain. 
+Severian describes as “folly” the notion that he understands how universes are born, and 
+this is true, for what is born is not a universe but a galactic seed bearing life, and it must 
+be couched within a solar womb. In his examination of an Irish myth, Campbell states: 
+The bringing together of the two great symbols of the meeting with the 
+goddess [here Apheta] and the fire theft [White Fountain] reveals with 
+  Garvey  
+ 
+29 
+simplicity and clarity the status of the anthropomorphic powers in the 
+realm of myth. They are not ends in themselves, but guardians, 
+embodiments, or bestowers, of the liquor, the milk, the food, the fire, the 
+grace, of indestructible life. (149) 
+Apheta as mother-goddess here evokes an image of the Virgin Mary, in being a necessary 
+vessel for the force of “indestructible life.” The Christian imagery is relevant here as 
+Severian playing the role of Father in creating this force of life is also the Son, for by his 
+own admission what is produced from his union with Apheta is also himself. With 
+Wright’s argument in mind in relation to the above quote from Campbell one might 
+connect the “bestowers” here with the Hierogrammates, granting them superiority in the 
+exchange and causing this creation to be primarily their responsibility. However, with 
+Severian finding himself in the White Fountain, there is no “bestowal” enacted at all, for 
+the force of life that Severian gains from the universe of Yesod is merely himself, the 
+essence of his life made manifest in galactic scale. As the Conciliator, Severian 
+negotiates this essence, this power from a higher world to rejuvenate his own, beholden 
+only to his own will and means.  
+ By offering a solution to The Book of the New Sun that bestows on Gene Wolfe 
+the role of a willful deceiver, the engineer of a puzzle solved only for its own sake, Peter 
+Wright diminishes what the work does accomplish and points to a conclusion that is 
+wholly dissatisfying. Wright claims: 
+It is only by observing how he or she has been deceived and cajoled that 
+the reader comes to appreciate more fully Wolfe’s vision of humanity as a 
+helplessly subjective species dependent on the whim of manipulatory 
+  Garvey  
+ 
+30 
+forces. That reader, in turn, may then recognize his or her position in an 
+analogous system. (167) 
+Here the use of archaic vocabulary and the structure of a plot that shows more than it tells 
+are downgraded to devices of deception, tools to alter the reading experience and, if they 
+are further examined through Wright’s lens, may just show that reader that their own 
+reality is false and wrought with misunderstanding. The crux of this argument circles 
+back to the machinations of the Hierogrammates, beings whose goals are actually aligned 
+with Severian’s own. While it is eventually revealed that they had an influence “Above 
+and beyond the ‘stage’ of the narrative’s plot…played out on Urth,” (70), the argument 
+for their malevolent interference is based on insubstantial, conjectural claims. This 
+argument also denies the mythological thrust of The Book of the New Sun, its utilization 
+of symbols that hold a significant connection with the historical human psyche.  Joseph 
+Campbell writes about how interwoven these symbols are with the human consciousness, 
+and because of this relationship the strength and at times intimidating nature of these 
+symbols: 
+The unconscious sends all sorts of vapors, odd beings, terrors, and 
+deluding images up into the mind—whether in dream, broad daylight, or 
+insanity; for the human kingdom, beneath the floor of the comparatively 
+neat little dwelling that we call our consciousness, goes down into 
+unsuspected Aladdin caves. There not only jewels but also dangerous jinn 
+abide: the inconvenient or resisted psychological powers that we have not 
+thought or dared to integrate into our lives. And they may remain 
+unsuspected, or, on the other hand, some chance word…may touch a 
+  Garvey  
+ 
+31 
+magic spring, and then dangerous messengers begin to appear in the brain. 
+These are dangerous because they threaten the fabric of the security into 
+which we have built ourselves and our family. But they are fiendishly 
+fascinating too, for they carry keys that open the whole realm of the 
+desired and feared adventure of the discovery of the self. Destruction of 
+the world that we have built and in which we live, and of ourselves within 
+it; but then a wonderful reconstruction, of the bolder, cleaner, more 
+spacious, and fully human life—that is the lure, the promise and terror, of 
+these disturbing night visitants from the mythological realm that we carry 
+within. (5)  
+A disturbing vision Wolfe certainly depicts, a sympathetic torturer who from his youth 
+knows little more than death and the destruction of the human body is chosen as the hero 
+of this myth. Severian’s conciliation with entities a universe removed is frightening in its 
+scope, with the drowning of the world the goal of this negotiation these beings cannot 
+help but inspire fear and awe. In the security of logic one might hope to work through this 
+feeling and arrive at a conclusion that firmly situates the fearsome “other” as an enemy, a 
+cold and aloof manipulator drawing the puppet-strings of an already blemished hero 
+towards an end that is wholly tragic. However, as Severian himself comes to realize, the 
+navigation of these fiendishly captivating symbols is a journey that returns to the self. It 
+is a destruction of the barriers that surround the self, a dismantling that is painful and 
+terrifying, yet it ultimately leads to an individual understanding that is greater for the 
+challenges it was forced to undergo.  
+  Garvey  
+ 
+32 
+ Gene Wolfe’s The Book of the New Sun is a significant work that has seen little 
+examination in the decades following its publication, yet the importance and 
+effectiveness of what the text accomplishes is abundantly clear to the curious reader. 
+Wolfe crafts a sophisticated mythology that takes the ancient symbols and archetypes of 
+mankind and flings them far into the future, testing the endurance of these devices in a 
+fantastic setting that calls into question the relevance of images first established in ages 
+past. What is revealed is that these images have indeed endured, the twisting and complex 
+narrative serving not to diminish what has been evoked but to enhance it, the unique and 
+erudite diction Wolfe employs not obfuscating but validating. The Book of the New Sun is 
+simply a beautiful and subtle work that stands boldly in its own literary corner. It 
+incorporates motifs and themes of literature that has come before yet its approach is 
+bravely uncommon. A lesser writer might have struggled with such a volatile creation, 
+but Gene Wolfe performs with cool facility in the crafting of a narrative whose 
+intelligence is willing to trust in the reader’s own.  
+ 
+  
+ 
+  
+ 
+ 
+ 
+ 
+ 
+  Garvey  
+ 
+33 
+Appendix: Summary of The Book of the New Sun 
+ 
+The Shadow of the Torturer begins the narrative of Severian, a man born and 
+raised among the Order of Seekers for Truth and Penitence, a title that the vernacular of 
+his day converts into the “guild of torturers.” His childhood is marked by portentous 
+meetings and dream-like events that seem to have stepped outside of the boundaries of 
+time, culminating in his brief romance with the Chatelaine Thecla, a woman imprisoned 
+by the torturers at the behest of the Autarch, the supreme ruler of the Commonwealth. 
+Unable to bear her agony Severian offers Thecla a swift suicide, and as a result he is 
+exiled from his brotherhood, banished north to Thrax bearing the grand sword Terminus 
+Est to serve as his judicial arm. Severian becomes involved in plots of intrigue, dramatic 
+productions, and religious mystery while passing through the sweeping city of Nessus, 
+and it is here that he unknowingly obtains the Claw of the Conciliator from the visiting 
+order of Pelerines. While preparing to face a challenger in a duel at sunset, Severian 
+raises a young woman named Dorcas from the murky depths of a funerary lake, and she 
+cleaves to him with an ethereal desperation. Severian duels the challenger, the fighters 
+dancing back and forth to avoid the poisoned razor-leaves of the avern plant they battle 
+with, and Severian is mortally wounded, only to miraculously rise seemingly unharmed. 
+Severian performs an execution shortly after and prepares to continue his journey with 
+Dorcas, the two stopping to marvel at a vision of a burning cathedral hovering over 
+Nessus, the “City Imperishable.” Severian and Dorcas reunite with characters previously 
+lost, and the novel concludes with passage through the Piteous Gate. 
+  Garvey  
+ 
+34 
+The Claw of the Conciliator finds Severian continuing his quest, separated from 
+Dorcas and the group of actors who have journeyed with them. Severian is in the village 
+of Saltus to perform several executions, accompanied by the half-mechanical man Jonas. 
+A festival is underway in Saltus to coincide with the ceremonious executions, and here 
+Severian encounters an old antagonist and a mysterious “green man”.  Severian sets the 
+“green man” free from his chains, and he leaves the torturer with bewildering remarks 
+about an Urth that enjoys the light of the New Sun. Severian performs the executions and 
+is led astray by a letter that has been forged to disturb him, the letter leading him through 
+an abandoned mine where the miraculous light of the Claw is displayed. The agents of 
+the revolutionary Vodalus soon after apprehend Severian and Jonas, and a grotesque and 
+symbolic corpse ritual is performed that unites the memories and essence of Thelca with 
+Severian, the two becoming one. Severian and Jonas journey to the House Absolute, 
+fleeing horrid entities from across the stars along the way, and resurrecting a patrolman 
+suffocated by the interstellar darkness. Imprisoned within the high seat of governance, 
+Thecla’s memories lead Severian to an escape that offers Jonas another way out, a 
+pathway between reflecting mirrors that will return him to the wide seas of space. 
+Roaming alone through the House Absolue Severian meets unique attendants and a 
+familiar artist, eventually coming to the Autarch himself, this figure concealed by walls 
+and doors crafted to trick the untrained eye. The Autarch shows Severian a vision, and 
+reunites him with Dorcas and the troupe of theater performers. The play “Eschatology 
+and Genesis” is performed verbatim for the court of royals and guests not from Urth, 
+ending with panic and gunfire. Alone again, Severian and Dorcas conclude the second 
+  Garvey  
+ 
+35 
+novel with a phantasmagoric event in a derelict stone town, communing with witches, a 
+Badger, and the memories of an indigenous civilization.  
+The Sword of the Lictor sees Severian already appointed and situated in Thrax, 
+living with Dorcas as lictor and leman in this “City of Windowless Rooms.” Dorcas has 
+become depressed and aware of forgotten memories, Severian distraught with uncertainty 
+while he uses the Claw to aid a sickly boy and his sister, later attending a masquerade 
+disguised only as himself. Severian again shows mercy to a woman he was to throw from 
+a great height, forcing him to flee his post and the city. Briefly encountering a creature of 
+fire Severian returns to Dorcas, who explains she will return south, while Severian will 
+head into the mountains farther north. Cold and starving Severian braves the carved 
+mountains that bear regal countenance, bringing him to the cabin of Casdoe and her son, 
+a child also named Severian. An encounter with a beast that may speak as a daughter or a 
+husband compels Severian to become the father of the boy of his namesake, and the two 
+brave a steaming rainforest inhabited by hostile sorcerers with painted faces. Following 
+this encounter and its trials, the two Severians brave the foreboding mountain range. 
+They climb the tallest of the peaks shaped in the likeness of a ruler long dead, and 
+reaching the golden ring at his hand little Severian is burnt and killed, leaving the 
+childless father to huddle emaciated and weak next to a two-headed corpse. The corpse 
+arises and is named Typhon, former emperor of Urth, who tempts Severian with wine and 
+feast if he will swear fealty to him on the Claw. Severian overcomes temptation, descends 
+the mountain and comes to a lakeside village. Here he is fed and respected, then drugged 
+and imprisoned. Coming to understand these peoples fear, and passionately seeking the 
+Claw that had been taken from him, Severian leads the lake people to the looming castle 
+  Garvey  
+ 
+36 
+where a giant and his attendant reign. These two are none other than the playwrights with 
+whom Severian is acquainted, and Severian finds not only they but three Hierodules 
+descending from their craft that mounts the spires of the edifice. These beings speak with 
+incredible foreknowledge of Severian’s future, compelling the giant to throw the Claw 
+from the rain soaked parapets. Severian attacks the giant, leading to the destruction of 
+Terminus Est and the sinking of the giant beneath the waters below, leaving Severian to 
+frantically search for the relic of the Conciliator. It is found among broken blue shards, 
+the remains of what was revealed to be only its luminous shell. Severian continues north 
+with renewed resolve. 
+The Citadel of the Autarch opens with an unarmed Severian traversing the borders 
+of the raging war, coming across a dead soldier, the now bare Claw restoring life to him. 
+Severian and his mute new companion stumble through the jungle together, coming down 
+with fever and arriving at a lazaret of the sick and wounded, established by the Pelerines. 
+Severian spends weeks in bed, wounded from his battle, sick and exhausted from his long 
+journey and periods of starvation. While Severian is in the company of his bedmates, 
+soldiers of the Commonwealth and a prisoner of the opposing Ascians, four stories are 
+told to win the fancy of the woman soldier among them. Between the symbolic tales, the 
+soldier Severian revived, now calling himself Miles, comes to speak with his savior and 
+to announce his departure. Severian is certain this man is Jonas come again, returned 
+from the stars wholly human once more. The stories told and Severian recovered, he at 
+last restores the Claw to the altar the Pelerines have erected at the lazaret, euphoric at 
+having accomplished this goal. Severian is asked by a Pelerine who watched him to 
+journey to a known hermit whose home is within the fast closing jaws of the mouth of 
+  Garvey  
+ 
+37 
+war, and following a map through an impossibly morphing terrain Severian finds Master 
+Ash. Ash’s house is separated into stories that exist in different eras of time, eras Ash has 
+been watching closely. Severian is forced to drag Ash unwilling from his home, yet soon 
+after leaving the doorway the man and the house fade into nothing. Aimless Severian 
+joins a militia he comes across, fighting a hellish battle and crippling his leg, which will 
+never fully heal. Bloody and broken on the field Severian is rescued by the Autarch, who 
+shares hidden knowledge. Severian swallows the elixir around the Autarch’s neck, and 
+performs the hated corpse rite. Severian assumes the memories of this Autarch, and 
+thereby all of the memories and personas of the Autarchs of history, a thousand men and 
+women joining him and Thecla in a single body. Severian becomes the ruler of the 
+Commonwealth, and after a few brief episodes in which he revisits his guild and his old 
+friends, a revelation of his true parentage, and a furtive glance at Dorcas among the ruins 
+of her past life, her true self now known, Severian “backs into the throne” to reign.  
+The Urth of the New Sun occurs ten years after Severian’s retelling of his journey in 
+becoming Autarch, and the Severian writing this novel aboard a massive spacecraft, adrift 
+in a space straddling dimensions and time, may not be the same one as before. At the 
+behest of spiritual visions preceding his Autarchy, of a three-legged dog from his youth 
+and a deceased master torturer, Severian travels to Yesod where humanity through him 
+will be judged worthy or unworthy of receiving a New Sun. If Severian fails, as previous 
+Autarchs have, he will be castrated, and he will return to rule a Commonwealth with an 
+uncertain future. Aboard the ship Severian is accompanied by the three Hierodules, 
+people and other beings from across the galaxies, and a strange animal creature called 
+Zak. Through the conflict and resolution revolving around assassination attempts on 
+  Garvey  
+ 
+38 
+Severian, the subduing of rogue crew members, and a fall that seems to lead to Severian’s 
+death, Zak continuously evolves until it is revealed that this creature was only a form 
+chosen by the powerful Hierogrammate Tzadkiel. Eventually the ship reaches Yesod, 
+where Tzadkiel assumes the position of judge in a resplendent and angelic figure. It is 
+revealed that Tzadkiel and his kind want to see Severian succeed as much as he himself 
+does, as the Hierogrammates are dependent on human biology to sustain their own lives 
+and evolve. Severian is tried with vivified figures of characters he as met throughout The 
+Book of the New Sun, some friends and some foes. Throughout Severian is attended by 
+the Hierogrammate Apeta, who guides him through the alien world and offers him 
+shelter. Their coupling produces the White Fountain, the galactic phenomenon by which 
+the old sun will be rejuvenated. Severian is deemed worthy and he returns to Urth, but the 
+Urth he returns to is one in a time centuries before Severian’s own. Here Severian lives 
+the life of the Conciliator, drawing from the power of the White Fountain to establish the 
+mythology he had only heard of through his miraculous deeds of resurrection and 
+healing. Imprisoned by the living Typhon of this time, Severian escapes through the 
+Corridors of Time with Tzadkiel’s aid, returning to his own time hours before the coming 
+deluge and the era of the New Sun. The flood comes and with it destruction. Severian 
+steps back through time once more to foster the primitive civilization of the stone town 
+visited at the end of the second volume. Here he learns that after his fall on the ship is 
+physical body indeed perished, and he has been living as an aquastor, a spirit like those 
+that have visited him before, ever since. Severian moves forward in time again to the time 
+of the New Sun after the flood, and finds a new mythology born of the 
+anthropomorphized deities of himself and the survivors of the flood.
+Works Cited 
+ 
+Andre-Driussi, Michael. Lexicon Urthus: A Dictionary for the Urth Cycle. 2nd ed. 
+Albany, CA: Sirius Fiction, 2008. Print. 
+Campbell, Joseph. The Hero with a Thousand Faces. 3rd ed. Novato, CA: New World 
+Library, 2008. Print. Bollingen Ser. XVII. 
+Cansler, Ronald Lee. “Stranger in a Strange Land: Science Fiction As Literature of 
+Creative Imagination, Social Criticism, and Entertainment.” Journal of Popular 
+Culture 5.4 (Spring 1972): 944-954. Rpt. in Children's Literature Review. Ed. 
+Rebecca Blanchard. Vol. 75. Gale, 2002. Literature Criticism Online. Web. 23 
+Apr. 2016. 
+Clute, John. “The Urth and All Its Glory.” Book World— The Washington Post (30 Jan. 
+1983): 1-2. Rpt. in Contemporary Literary Criticism. Ed. Jean C. Stine and 
+Bridget Broderick. Vol. 25. Detroit: Gale, 1983. Literature Criticism Online. 
+Web. 23 Apr. 2016. 
+Collins, Bob. “Conclusion of the Book of the New Sun.” Fantasy Newsletter 5.11 (Dec. 
+1982): 36. Rpt. in Contemporary Literary Criticism. Ed. Jean C. Stine and Bridget 
+Broderick. Vol. 25. Detroit: Gale, 1983. Literature Criticism Online. Web. 23 
+Apr. 2016. 
+Origen. “Threefold Interpretation.” The English Bible (King James Version): The Old 
+Testament. Ed. Herbert Marks. Norton Critical ed. Vol. 1. New York: Norton, 
+2012. 1859-861. Print. 
+Sucharitkul, Somtow. “A Certain Slant of I.” Fantasy Newsletter 4.12 (Dec. 1981): 16-
+17. Rpt. In Contemporary Literary Criticism. Ed. Jean C. Stine and Bridget 
+  Garvey  
+ 
+40 
+Broderick. Vol. 25. Detroit: Gale, 1983. Literature Criticism Online. Web. 23 
+Apr. 2016. 
+Wolfe, Gene. Shadow and Claw: The First Half of The Book of the New Sun: The 
+Shadow of the Torturer & The Claw of the Conciliator. New York: ORB/Tom 
+Doherty Associates, 1994. Print. 
+Wolfe, Gene. Sword & Citadel: The Second Half of The Book of the New Sun: The Sword 
+of the Lictor & The Citadel of the Autarch. New York: ORB/Tom Doherty 
+Associates, 1994. Print. 
+Wolfe, Gene. The Urth of the New Sun. New York: ORB/Tom Doherty Associates, 1987. 
+Print. 
+Wright, Peter. Attending Daedalus: Gene Wolfe, Artifice, and the Reader. Liverpool: 
+Liverpool UP, 2003. Print. 
+ 

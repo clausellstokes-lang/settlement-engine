@@ -1,0 +1,324 @@
+{
+ "name": "wolfe",
+ "chunk": 23,
+ "claims": [
+  {
+   "index": 1083,
+   "feature": "plainness and economy",
+   "claim": "Michael Bishop called The Shadow of the Torturer immediately accessible to any moderately intelligent reader.",
+   "source": "Michael Bishop, quoted in Peter Wright, 'Mapping a Masterwork', Ultan's Library, 2002",
+   "url": "https://ultan.org.uk/review-botns/",
+   "quote": "an immediately accessible book for anyone with moderate intelligence",
+   "page": "quoted in review",
+   "kind": "relay",
+   "polarity": "disputes",
+   "date": "2002",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1084,
+   "feature": "other: monograph form",
+   "claim": "Allbery reports Borski sets out each theory in a brief essay, some only a few pages long.",
+   "source": "Russ Allbery, review of Robert Borski, Solar Labyrinth: Exploring Gene Wolfe's Book of the New Sun (iUniverse, 2004, 188 pages), eyrie.org",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-595-31729-4.html",
+   "quote": "each basic theory is set forward in a brief essay",
+   "page": "review body",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 1085,
+   "feature": "other: reference apparatus",
+   "claim": "Allbery faults Solar Labyrinth for lacking a plot synopsis or timeline as a memory refresher.",
+   "source": "Russ Allbery, review of Robert Borski, Solar Labyrinth (iUniverse, 2004, 188 pages), eyrie.org",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-595-31729-4.html",
+   "quote": "without a basic plot synopsis or timeline as a memory",
+   "page": "review body",
+   "kind": "reception",
+   "polarity": "disputes",
+   "date": "2004",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1086,
+   "feature": "other: reference apparatus",
+   "claim": "Allbery reports Borski mentions minor characters in passing and expects the reader to remember them.",
+   "source": "Russ Allbery, review of Robert Borski, Solar Labyrinth (iUniverse, 2004), eyrie.org",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-595-31729-4.html",
+   "quote": "expects the reader to remember who he's talking about",
+   "page": "review body",
+   "kind": "reception",
+   "polarity": "disputes",
+   "date": "2004",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1087,
+   "feature": "withheld information and inference",
+   "claim": "Allbery testifies that on reading Borski he felt stupid for having missed obvious clues in Wolfe.",
+   "source": "Russ Allbery, review of Robert Borski, Solar Labyrinth (iUniverse, 2004), eyrie.org",
+   "url": "https://www.eyrie.org/~eagle/reviews/books/0-595-31729-4.html",
+   "quote": "I felt a bit stupid to have missed obvious clues",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1088,
+   "feature": "withheld information and inference",
+   "claim": "John Clute wrote in Strokes that making sense of Gene Wolfe is initially a job of decipherment.",
+   "source": "John Clute, Strokes (1988), p. 163, quoted in Christian Sauve, review of Strokes: Essays and Reviews 1966-1986 (Serconia Press, 1988, 178 pages), 12 September 2004",
+   "url": "https://www.christian-sauve.com/2004/09/strokes-john-clute/",
+   "quote": "Making sense of Gene Wolfe, it seems to me, is initially",
+   "page": "Strokes p. 163",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1089,
+   "feature": "other: collection structure",
+   "claim": "Sauve reports that Strokes ends with a substantial series of pieces about Gene Wolfe.",
+   "source": "Christian Sauve, review of John Clute, Strokes: Essays and Reviews 1966-1986 (Serconia Press, 1988, 178 pages), 12 September 2004",
+   "url": "https://www.christian-sauve.com/2004/09/strokes-john-clute/",
+   "quote": "the book ends with a substantial series of pieces about Gene Wolfe",
+   "page": "review body",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1090,
+   "feature": "archaism",
+   "claim": "Auerbach describes Wolfe's vocabulary as words that appear to be neologisms but are archaic.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "words that appear to be neologisms but are anything but",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1091,
+   "feature": "archaism",
+   "claim": "Auerbach concedes the archaic style's purpose is to evoke strangeness while preserving depth of meaning.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "to evoke strangeness while preserving a depth of meaning",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1092,
+   "feature": "other: prose beauty",
+   "claim": "Auerbach argues the archaic style does not make Wolfe's writing beautiful.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "What it doesn't do is make the writing beautiful",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1093,
+   "feature": "omission as information",
+   "claim": "Auerbach reports that central plot points are skipped over and only referred to in retrospect.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "Central plot points are skipped over and only referred to in retrospect",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1094,
+   "feature": "civic record register",
+   "claim": "Auerbach notes Severian's text is framed as destined for public consumption within his own world.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "destined for public consumption by people in his world",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1095,
+   "feature": "withheld information and inference",
+   "claim": "Auerbach disputes that the reader can derive meaning from the parts because the whole context is missing.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "we do not have the whole context",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1096,
+   "feature": "withheld information and inference",
+   "claim": "Auerbach argues the unresolved unreliability reduces the book to decontextualized apocrypha.",
+   "source": "David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish, 2007",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "he reduces the book to decontextualized apocrypha",
+   "page": "essay body",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1097,
+   "feature": "withheld information and inference",
+   "claim": "A reader replying to Auerbach argues truth can be recovered from what Severian's public could contradict.",
+   "source": "Commenter 'MattD', comment of 28 November 2007 on David Auerbach, 'Gene Wolfe: The Book of the New Sun', Waggish",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "that Severian is writing for would know and be able",
+   "page": "comments",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2007",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "medium"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1083,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an immediately accessible book for anyone with moderate intelligence",
+   "note": "Peter Wright's 'Mapping a Masterwork' (Ultan's Library, 28 Aug 2002), reception paragraph on the paradox of praise, quotes Michael Bishop lauding The Shadow of the Torturer in exactly these words; footnote 2 sources it to Bishop, Thrust, Fall 1980, p.12. Relay chain intact; page continues 'and the ability to read'."
+  },
+  {
+   "index": 1084,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each basic theory is set forward in a brief essay",
+   "note": "Allbery's eyrie.org review (reviewed 2004-09-12), third paragraph; the sentence continues with the 'some only a few pages' limb, so both limbs of the claim hold."
+  },
+  {
+   "index": 1085,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without a basic plot synopsis or timeline as a memory refresher",
+   "note": "Same review, the 'two things that bothered me' paragraph; Allbery says without them the reading may be hard going for friends who read New Sun some time back. Fault-finding limb supported."
+  },
+  {
+   "index": 1086,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "expects the reader to remember who he's talking about",
+   "note": "Same paragraph: Borski mentions characters, including minor ones, constantly in passing; Allbery particularly missed a dramatis personae. Both limbs supported."
+  },
+  {
+   "index": 1087,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I felt a bit stupid to have missed obvious clues",
+   "note": "Fourth paragraph, on the layers Wolfe put into the book. Page hedges with 'In a few places' and 'a bit'; the claim's unqualified 'felt stupid' is a mild flattening, not a break."
+  },
+  {
+   "index": 1088,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quoted at p.163: is initially a job of decipherment",
+   "note": "Sauve's review relays Clute's sentence verbatim with the page cite [P.163], in the paragraph on the younger Clute's intelligibility. Relay only: Strokes itself not consulted, so the page-163 attribution rests on Sauve."
+  },
+  {
+   "index": 1089,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the book ends with a substantial series of pieces about Gene Wolfe",
+   "note": "Sauve review, paragraph on Real Year/Real Decade and other meaty critical thoughts; he adds the pieces help in understanding what Wolfe is trying to achieve."
+  },
+  {
+   "index": 1090,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "words that appear to be neologisms but are anything but",
+   "note": "Auerbach, Waggish, 23 Nov 2007, the 'first, there's the style' paragraph; the same sentence supplies the archaism limb ('drawn directly or indirectly from archaic words and usages, often Latin-derived')."
+  },
+  {
+   "index": 1091,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to evoke strangeness while preserving a depth of meaning",
+   "note": "Same style paragraph: the style 'does, however, serve its purpose', and Auerbach gives Wolfe credit for it, so the concessive framing of the claim is accurate."
+  },
+  {
+   "index": 1092,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What it doesn't do is make the writing beautiful",
+   "note": "Same paragraph, immediately after the strangeness concession; Auerbach calls it one big minus for mainstream acceptance and calls the style clunky."
+  },
+  {
+   "index": 1093,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Central plot points are skipped over and only referred to in retrospect",
+   "note": "Auerbach's plot paragraph, opening the discussion of elision and narrative unreliability; adjacent sentences add misdirection and points never cleared up."
+  },
+  {
+   "index": 1094,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "destined for public consumption by people in his world",
+   "note": "Paragraph on the stability of the text; the sentence pairs this with Wolfe posing as translator of a manuscript that has travelled long and far."
+  },
+  {
+   "index": 1095,
+   "verdict": "PARTIAL",
+   "trueWording": "we can't derive from the whole what the meaning",
+   "unsupportedLimb": "'derive meaning from the parts' inverts the page's direction: Auerbach says the meaning of any particular piece cannot be derived from the whole, not the reverse",
+   "note": "The quoted limb 'we do not have the whole context' is verbatim in the text-stability paragraph, and the missing-context cause is exactly Auerbach's. But the claim reverses part and whole, so the derivation limb as written is not what the page says."
+  },
+  {
+   "index": 1096,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he reduces the book to decontextualized apocrypha",
+   "note": "Text-stability paragraph, closing sentence; the page's grammatical subject is Wolfe, conditioned on our not grasping Severian's words as more than a maybe-true story, which is the unresolved unreliability the claim names. Page adds the gnostic-gospel figure."
+  },
+  {
+   "index": 1097,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that Severian is writing for would know and be able",
+   "note": "Comment by MattD, 28 November 2007, on the Waggish post: some element of the truth can be found from what Severian's public would know and could contradict if he lied. Hedged as 'some element', which the claim's 'truth can be recovered' slightly firms up."
+  }
+ ]
+}
