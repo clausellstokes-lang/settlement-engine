@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b74daab7aa4b67f32a3dfd84938234ab191acac0",
-  "measuredBy": "MEASURE car 1 (Opus 5)",
+  "measuredAtSha": "55d7f696b16e7ea04ee67bb9f7e4245f18ef21e6",
+  "measuredBy": "MEASURE car 2 (Opus 5)",
   "date": "2026-09-08",
-  "note": "car 1 adds one test FILE (tests/property/dossierProseManifest.test.js, 11 titles in 3 describes) and three test helpers; the golden master keeps its titles, its corpus builder having moved to a helper",
-  "files": 2552,
+  "note": "ARCH car 2, the byte ratchets: tests/lint/proseCorpusBytes.test.js is a new credited enforcer file (17 arms) and tests/build/vendorPdfLazy.test.js gains eleven arms in three new describes. No product byte moved.",
+  "files": 2553,
   "parked": 375,
-  "credited": 2177,
-  "titles": 23816,
-  "suiteTitles": 6372
+  "credited": 2178,
+  "titles": 23833,
+  "suiteTitles": 6376
 }
