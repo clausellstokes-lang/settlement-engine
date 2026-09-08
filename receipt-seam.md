@@ -2492,3 +2492,505 @@ index moved".
 
 ## CAR 5 — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 16:5x)
 Re-measured at `ba99d979e` (porcelain 0, runners 0): the census re-take diff 72 lines — 15 rows' `grammars` integers and the section `count` strings that print them, THIN 483 → 482 / COVERED 225 → 226, `producerIndexFiles` 1152 → 1153, no `stamp.files` sha, no predicate/reads/status/rung/rate figure (CONFIRMED) → re-taken by the CHAIR as a register car (a declared INSTRUMENT shift of the classifier's vocabulary, pre-ruled by SITTING §Q). Rulings: (1) the row move ACCEPTED as the consequence of A13; the tier totals moved by one pool each because a variant's grammar count is a tier input — recorded, the tier rule unchanged; (2) `check-pair.mjs` exiting non-zero on a failing pair — ACCEPTED (a gate that could not fail); (3) the two fresh-recomputed tier figures updated at cause in the walker — ACCEPTED as a declared row; (4) A0b NOT-EXECUTABLE on DS-DEF-2 (the tabled key function) — a FINDING carried to car 5b (the `source` column must resolve through table fields) and to the SEAM skeptic; the sitting's wiring-car sizing (agenda §F) notes that tabling a key function blinds A0b unless the arm learns tables — chartered as a cure at the WAVE's first car, not before; (5) the census script's unconditional write — a dry read chartered into 5b; (6) the composed-walk driver hazard (dropping a piece's `slots` manufactures arm D findings) recorded for the taste's driver. Seat: Fable 5.1 — validated.
+
+---
+
+## CAR 5b — THE HOLDER CENSUS: EVERY FACT'S SOURCE, DERIVED AND RESOLVED (SITTING §Q)
+
+Seat: Opus 5 — implementer. Chair: Fable 5.1. Dock `$SC/laneSEAM`, base `da080313d` (the
+chair's register car over car 5's `ba99d979e`). **STATUS: LANDED as two commits.** Porcelain
+0, runners 0, `node_modules` symlinks intact, no build, no golden re-record, zero corpus
+bytes. Every figure below is the tail of a command that ran.
+
+| # | sha | what |
+|---|---|---|
+| 5b | `82eeb534f` | the holder table, the `source` column on all 708 rows, the `--dry` read, the `docblock` withdrawal |
+| 5b-b | `b573bb5f4` | the lighting census re-freezes at 5b's tip, by its own ritual |
+
+### 5b.0 ARRIVAL — executed
+
+```
+$ git -C $SC/laneSEAM log --oneline -1
+da080313d Register (SEAM, at car 5): the wiring census re-taken — the provenance move …
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l      # its own shell, per car 4
+       0
+$ ls $SC/HOLD-VITEST                                                => No such file or directory
+```
+
+### 5b.1 ⭐⭐ THE HOLDER TABLE — 49 ROWS, EVERY ONE CITED TO A PRODUCER THE TREE STILL CARRIES
+
+`src/domain/prose/holderTable.js` (NEW, **410 effective lines against a ceiling of 800**,
+headroom 390) is built in `institutionTable.js:121`'s `COLUMN_SOURCES` shape: a frozen roster
+whose every row carries a spec-grade citation and a `read` flag, with `sourcesAllCited` /
+`uncitedSourcesOf` as the same two arms `sourcesAllRead` / `unreadSourcesOf` are there.
+
+| kind | fields | the producer citations (each re-derived live by the walker) |
+|---|---|---|
+| **treasury** | 4 | `incomeSources` economy/economicState.js:862 · `viable` economy/viability.js:565 · `criticalIssueCount` economy/viability.js:585 · `economicViability` steps/assembleSettlement.js:100 |
+| **market** | 9 | `primaryExports` :801 · `primaryImports` :801 · `localProduction` :811 · `isEntrepot` :867 · `activeChains` :810 (all economy/economicState.js) · `exportPosture` display/dossierViewModel.js:544 · `economicStrengths` resourceGenerator.js:499 · `strategicValue` :500 · `exploitation` :417 |
+| **toll-bar** | 3 | `tradeRouteAccess` steps/resolveConfig.js:195 · `blockaded` worldPulse/foodStockpile.js:417 · `blockadeBypass` :418 |
+| **muster** | 12 | `walls` :84 · `garrison` :88 · `militia` :92 · `mercenary` :98 · `charter` :101 (all institutions/defenseInstitutionBuckets.js) · `force` threatDefensePolicy.js:13 · `magicDependency` defenseGenerator.js:458 · `economicGates` :467 · `besiegedBy` display/warStatus.js:297 · `besiegingTargets` :297 · `ticksToDeploy` display/mobilizationStatus.js:94 · `stretchedThin` display/occupationStatus.js:145 |
+| **watch** | 4 | `watch` institutions/defenseInstitutionBuckets.js:95 · `blackMarketCapture` safetyProfile.js:684 · `criminalCaptureState` power/rulingStructure.js:797 · `safetyProfile` economy/economicState.js:873 |
+| **court** | 9 | `govMultiplier` factionDynamics.js:127 · `governanceFractured` :133 · `breakdown` :179 · `blocs` worldPulse/settlementPolitics.js:992 · `stability` power/rulingStructure.js:702 · `recentConflict` :702 · `termLines` display/treatyDocument.js:362 · `fraying` worldPulse/peaceTermsDocument.js:233 · `yearsRemaining` :230 |
+| **parish** | 2 | `piety` worldPulse/religionState.js:645 · `unaffiliated` :644 |
+| **elders** | 1 | `yearsAgo` historyGenerator.js:289 |
+| **road** | 2 | `terrainType` steps/resolveConfig.js:203 · `monsterThreat` :198 |
+| **office** | 3 | `structuralViolations` steps/assembleSettlement.js:119 · `structuralSuggestions` :120 · `prominentRelationship` narrativeGenerator.js:1113 |
+| **census** | 0 | — |
+| **tradition** | 0 | — |
+
+**THE CITATIONS ARE RE-DERIVED, NEVER BELIEVED.** `producerCitations()` is new in
+`scripts/wiring-census.mjs` — the same AST walk `producerIndex` already made, with the LINE
+kept — and `producerIndex` is now written in terms of it so the two cannot disagree. The
+walker asserts every one of the 49 `cite` strings appears in that live index, with the plant
+beside it (a fabricated line of a real producer file, and an invented token, both refused).
+
+⛔ **THREE ROWS WERE DRAFTED AND WITHDRAWN ON THEIR OWN EVIDENCE**, and they are named in the
+module so the next author does not re-propose them: `granary` (its only writers are a prose
+phrase map at `display/demographicReading.js:145` and a binding counter at
+`worldPulse/demographicsObservation.js:106`), `church` (a `pick()` inside a history strand and
+a classifier regex) and `ledger` (seven writers across the treasury, the peace terms, the
+pantheon and three lifecycles, so the token names no one holder).
+
+### 5b.2 ⭐⭐ THE COUNTS, PER FIELD AND PER ROW, EXECUTED
+
+```
+$ node scripts/wiring-census.mjs --print
+  ── THE SOURCE OF EACH CONSTRUCTION (SITTING §Q) ──────────────────
+  ROWS · LICENSED 114 · OFFICE 3 · SOURCE-UNRESOLVED 591 (of 708); two-source rows 10
+  of the UNRESOLVED rows, 368 carry NO recovered reading at all (the census's own
+    WIRING-UNRESOLVED set: no predicate, so no field, so no source), leaving 223 rows that
+    read a field the holder table does not map
+  FIELDS · LICENSED 191 · OFFICE 5 · SOURCE-UNRESOLVED 415
+    (no mapping 415, no institution in the roster 0)
+  by KIND: muster 61 · market 49 · treasury 22 · court 21 · toll-bar 13 · watch 9 · road 7
+    · elders 5 · office 5 · parish 4
+  holder kinds with NO institution in the shipped roster: tradition
+    treasury   fields  4 · record services  4 (duty-named 4) · roster BACKED
+    muster     fields 12 · record services  1 (duty-named 1) · roster BACKED
+    census     fields  0 · record services  2 (duty-named 2) · roster BACKED
+    parish     fields  2 · record services  3 (duty-named 3) · roster BACKED
+    toll-bar   fields  3 · record services  3 (duty-named 3) · roster BACKED
+    market     fields  9 · record services  2 (duty-named 0) · roster BACKED
+    watch      fields  4 · record services  3 (duty-named 0) · roster BACKED
+    court      fields  9 · record services  6 (duty-named 0) · roster BACKED
+    elders     fields  1 · record services  1 (duty-named 1) · roster BACKED
+    tradition  fields  0 · record services  0 (duty-named 0) · roster EMPTY
+    road       fields  2 · record services  2 (duty-named 2) · roster BACKED
+    office     fields  3 · record services  3 (duty-named 3) · roster BACKED
+```
+
+**THE TWO UNRESOLVED GROUNDS DO NOT SHARE A NUMBER**, because they are different debts: a
+field no mapping row names (415) is a table this car did not widen; a field whose kind has no
+institution anywhere in the shipped roster (0) is a hole no table can close. Collapsing them
+would have hidden the second.
+
+**THE THREE OFFICE ROWS, BY NAME** — the record's own audit of itself and its own register of
+the town's relations, which is exactly the class MOVE-GRAMMAR §4.4.3 says may not be cited:
+
+```
+DS-GEN-7 :: structuralViolations[]     readings.structuralViolations(.length)
+DS-GEN-7 :: structuralSuggestions[]    readings.structuralSuggestions(.length)
+DS-REL-2 :: prominentRelationship present   readings.prominentRelationship
+```
+
+**THE TEN TWO-SOURCE ROWS**, by kind pair: `market + toll-bar` 4 · `muster + watch` 2 ·
+`muster + road` 2 · `court + watch` 2.
+
+**LICENSED ROWS BY BLOCK**: DS-DEF-2 13 · DS-ECO-12 10 · DS-DEF-5 9 · DS-WAR-1 7 · DS-ECO-10 6
+· DS-DEF-11 5 · DS-GEN-9 5 · DS-GEN-11 5 · DS-GEN-12 5 · DS-POW-6 5 · DS-GEN-13 4 · DS-GEN-18 4
+· DS-WAR-2 4 · DS-DEF-6 3 · DS-DEF-9 3 · DS-ECO-6 3 · DS-ECO-11 3 · DS-GEN-6 3 · DS-POW-4 3 ·
+DS-DEF-8 2 · DS-ECO-9 2 · DS-GEN-3 2 · DS-POW-2 2 · DS-POW-7 2 · DS-FTH-1 2 · DS-POW-1 1 ·
+DS-POW-5 1.
+
+### 5b.3 ⭐⭐ THE ROW MOVE IS THE COLUMN AND NOTHING ELSE — ASSERTED, NOT ASSERTED-OF
+
+The fence requires the pre-ruled row move to be proved as exactly one added key. Measured
+against the parent commit's committed file:
+
+```
+$ node -e "<strip `source` from every fresh row, compare with the parent's rows>"
+bytes before 1832122  after 2052050
+ASSERTION - rows with a pre-existing field moved (source stripped): 0
+rows with no parent row: 0   new row keys other than source: (none)
+sections moved: stamp · totals · rows · holders
+totals moved: sourceLicensedRows undefined->114 · sourceOfficeRows undefined->3
+              · sourceUnresolvedRows undefined->591 · sourceTwoSourceRows undefined->10
+stamp producerIndexFiles 1153 -> 1154
+stamp files identical: true      candidateLeaves identical: true
+```
+
+**ZERO pre-existing row fields moved.** The whole delta is the new `source` key on 708 rows,
+four new `totals` integers, the new `holders` section (the ruling, the per-kind census and the
+summary) and the one-file `producerIndexFiles` bump. `stamp.files` and `candidateLeaves` are
+byte-identical. The door is pre-ruled at §Q.4 step 1 and is taken in the same commit as the
+module change, exactly as the fence requires.
+
+### 5b.4 ⭐⭐ A0b's BLINDNESS IS NOT INHERITED — DS-DEF-2's 26 SOURCES, BY NAME
+
+The chair's ADDENDUM 2: *"a tabled key function's rows resolve their holder through the table's
+fields exactly as a literal-key row does, and the receipt prints DS-DEF-2's 26 sources by
+name."* `tableFieldsOf` strips the ` (via …)` suffix and drops every identifier immediately
+followed by `(` — those are the wrapper CALLS, never the reading they wrap.
+
+```
+LICENSED  muster   Beasts & Monsters: plagued, perimeter AND organized     family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: plagued, perimeter but NO force      family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: plagued, NO perimeter and NO force   family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: frontier, credible deterrence        family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: frontier, force without a perimeter  family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: settled, defenses beyond the need    family=? perimeter=? force=muster
+LICENSED  muster   Beasts & Monsters: settled, nothing organized           family=? perimeter=? force=muster
+LICENSED  muster   Invasion & War: walls AND professional garrison         walls=muster garrison=muster militia=muster
+LICENSED  muster   Invasion & War: walls with citizen militia              walls=muster garrison=muster militia=muster
+LICENSED  muster   Invasion & War: walls with NO force                     walls=muster garrison=muster militia=muster
+LICENSED  muster   Invasion & War: force with NO walls                     walls=muster garrison=muster militia=muster
+LICENSED  muster   Invasion & War: militia only                            walls=muster garrison=muster militia=muster
+LICENSED  muster   Invasion & War: neither walls nor force                 walls=muster garrison=muster militia=muster
+UNRESOLVED    -    Internal Security: full legal chain (court AND prison)  court=? prison=?
+UNRESOLVED    -    Internal Security: court without detention              court=? prison=?
+UNRESOLVED    -    Internal Security: detention without process            court=? prison=?
+UNRESOLVED    -    Internal Security: no legal infrastructure              court=? prison=?
+UNRESOLVED    -    Economic Survival: STRONG / ADEQUATE / WEAK / CRITICAL  economicScore=?   (4 rows)
+UNRESOLVED    -    Disasters & Famine: granary AND hospital                granary=? hospital=? church=?
+UNRESOLVED    -    Disasters & Famine: granary AND parish care only        granary=? hospital=? church=?
+UNRESOLVED    -    Disasters & Famine: granary, NO medical provision       granary=? hospital=? church=?
+UNRESOLVED    -    Disasters & Famine: NO reserves, hospital present       granary=? hospital=? church=?
+UNRESOLVED    -    Disasters & Famine: NO reserves, NO medical provision   granary=? hospital=? church=?
+by standing: {"LICENSED":13,"SOURCE-UNRESOLVED":13}
+```
+
+**26 of 26 resolve through REAL FIELDS and not one through an instrument label** — the walker
+asserts exactly that, over 66 sourced field names, none containing `(via `. Arm A0b reads the
+single synthetic label and declares itself not-executable on this block; the source column
+reads the three fields behind it. `ARCH §4.4`'s own worked example, `Invasion & War: walls with
+citizen militia`, sources `{walls: muster, garrison: muster, militia: muster}`.
+
+### 5b.5 ⭐⭐ THE INTERESTED-FACT FIGURES PER TIER ON THE RATE CORPUS — ZERO, AND WHY
+
+```
+$ node $SC/seam5b/rate-holders.mjs docs/content/wiring-census.json …
+RATE corpus · 768 towns · genThrows 0 · 12 s
+LICENSED census rows walked per town: 114
+towns with at least one interested fact: 0
+settlement-wide criminalCaptureState: none 495 · adversarial 194 · equilibrium 64 · corrupted 15
+standing facts ABSENT on every RATE town:
+  captured (no faction states: worldPulse/factionCapture.js:136 reads factionStates)
+  controlled (no world state: worldPulse/brokeragePatronage.js:228 reads a worldState)
+
+tier        towns   (row,town) pairs   holder named   INTERESTED   interested bp
+thorp         128             14592             78            0               0
+hamlet        128             14592              5            0               0
+village       128             14592            640            0               0
+town          128             14592           6497            0               0
+city          128             14592           2741            0               0
+metropolis    128             14592           3284            0               0
+
+per KIND, towns whose roster names a holder / towns where that holder is INTERESTED:
+  treasury 151/0 · muster 0/0 · census 0/0 · parish 166/0 · toll-bar 81/0 · market 140/0
+  watch 173/0 · court 339/0 · elders 13/0 · tradition 0/0 · road 53/0 · office 2/0
+```
+
+⭐ **ZERO IS A MEASUREMENT AND NOT A SILENCE, AND ITS GROUND IS THREE MEASURED FACTS.** A
+headless generated town holds only ONE of the three standing facts per institution, and it
+never fires:
+
+```
+$ node $SC/seam5b/why-no-interest.mjs
+towns 768
+towns where compromisedSecurityInstitutions() answers anything: 0
+corrupt, un-ousted NPCs over the corpus: 178 · carrying a home institution field: 178
+  · homed to a SECURITY institution: 0
+the home values those NPCs carry: Military/Guard 25 · Religious Authorities 24
+  · Merchant Guilds 23 · Craft Guilds 21 · Thieves' Guild 12 · Arcane Orders 12 · …
+$ node $SC/seam5b/why-zero.mjs
+towns with a 'corruption' institution impairment: 0 · with ANY institution impairment: 0
+towns with a corrupt NPC: 134
+```
+
+1. **CAPTURE and PATRON CONTROL are structurally absent** — their readers take `factionStates`
+   and a `worldState`, and a generated town belongs to no world pulse. They are reported
+   ABSENT with the reader that would hold them, never read as `false`.
+2. **No generated town carries an institution impairment at all**, corruption-typed or
+   otherwise: impairments are world-pulse products.
+3. **The covert channel cannot reach a security institution.** 178 corrupt NPCs all carry a
+   home, and every home is a FACTION name (`Military/Guard`, `Religious Authorities`) rather
+   than an institution name, so `compromisedSecurityInstitutions`'s `nameMatches` against `Town
+   watch` or `Garrison` never fires. **That is the sharpest item on the WAVE's list** (§5b.9).
+
+⚠ **AND THE PER-KIND HOLDER COUNTS ARE THE SECOND FINDING.** `muster` and `census` name a
+holder in **0 of 768 towns**: the Citizen militia is the roster's only muster-keeper and it
+instantiates `Emergency defense` and never `Muster training`; the Democratic assembly never
+appears and the Royal seat appears once. The office itself is named in 2 towns of 768.
+
+### 5b.6 ⛔⛔ THE DEFECT THIS CAR CAUSED AND CURED, AND THE GATE THAT FOUND THE SECOND ONE
+
+**1. THE INSTRUMENT MINTED PRODUCER TOKENS OUT OF ITS OWN TABLE, AND FOUR CENSUS ROWS MOVED.**
+The producer index reads every object-literal key under `src/domain/**` as a WRITE of world
+state (car 3f-0's rule, from the other side). The first cut keyed `HOLDER_RECORDS` on the KIND,
+so `court`, `elders`, `parish` and `toll-bar` entered the estate's produced set — and `court`
+is a field the defence desk reads:
+
+```
+rows with a pre-existing field moved (source stripped): 4    # all DS-DEF-2 Internal Security
+absent  {measured 370, default 3, not-produced 60, method-call 18}
+     -> {measured 374, default 3, not-produced 56, method-call 18}
+tokens ONLY holderTable.js writes: … court … (22 in all)
+of those, tokens a census read path names: court
+```
+
+The table is an **ARRAY of rows** now, with the kind as a VALUE, and after the cure the same
+probe reads `of those, tokens a census read path names: (none)` and the stripped-row diff is
+**0**. A new walker arm holds the property with the old shape as its plant, driven through
+`astTokens` itself: `{ court: 1 }` writes `court`, `[{ kind: 'court' }]` writes `kind`.
+
+**2. THE RUIN-FILTER RATCHET CAUGHT THE SAME FILE READING THE RAW ROSTER.**
+`tests/lint/ruinFilterRoster.walker.test.js` reported `holderTable.js: reads the raw
+.institutions roster but neither routes through the ruin filter nor is exempted`. It is not
+ruin-agnostic — a calamity-ruined records office keeps no record — so it is COMPLIANT rather
+than exempt, and the routing is done for the SERVICE ROWS as well as the roster, which is
+`institutionTable.js`'s own measured lesson (its first cut filtered the rows and not the
+columns and 23 orphan service rows entered a column anyway). The discovery set is back to
+**93** and the walker's declared figure did not move: the module no longer names
+`.institutions` at all.
+
+⚠ **THE CURE IS LATENT, NOT LIVE, AND THE MEASUREMENT SAYS SO RATHER THAN THE REASONING.**
+Re-running the RATE probe after the routing gives byte-identical figures (holder counts 151 /
+0 / 0 / 166 / 81 / 140 / 173 / 339 / 13 / 0 / 53 / 2), because no generated town carries a
+ruined institution. The hazard is real and unfired, exactly as car 3f-0's was.
+
+### 5b.7 ⭐ THE TWO CURES THE CHAIR CHARTERED
+
+**1. `--dry`, THE FIFTH MODE.** `censusDry` / `dryLines` answer "what would change?" without
+writing a byte. The script had four modes and none could: `--check` throws on the first
+difference and the bare invocation REWRITES the committed register, which is how car 5 took
+the door by accident. It reports SECTIONS, stamped shas, candidate leaves and ROWS moved — the
+three questions the chair's own re-take rule turns on — and its byte figures are
+`Buffer.byteLength`, not code units (the two readings differ by 1,557 on the shipped file, so
+a lane comparing `.length` with `wc -c` would read a delta that is not there).
+
+```
+$ node scripts/wiring-census.mjs --dry            # before the door, at the parent
+[wiring-census --dry] the committed register is STALE; nothing was written
+  bytes committed 1832122 · fresh 2052034 · delta 219912
+  sections that would move: stamp · totals · rows · holders
+  stamped shas that would move: (none) · candidate leaves unmoved
+  ROWS that would move: 708 (first: DS-DEF-1 :: readiness STRONG · …)
+$ git status --porcelain            # after the dry read: the register is NOT among the files
+$ node scripts/wiring-census.mjs --dry            # at the tip
+[wiring-census --dry] the committed register is CURRENT; nothing was written
+  bytes committed 2052050 · fresh 2052050 · delta 0 · sections (none) · ROWS 0
+```
+
+Both modes are asserted in the walker, the stale limb driven on a doctored copy so no
+committed byte is touched, and `--check` and `--dry` are asserted to answer the same question.
+
+**2. THE `docblock` EVIDENCE KIND IS WITHDRAWN FROM `draft.rows`** (SITTING §P.2-27 EXTENDED;
+the chair's ruling on car 3h §3h.6 item 2). It survives as a REPORT channel only.
+
+| figure | before | after |
+|---|---|---|
+| `draft.rows.length` | 33 | **7** (identifier 3, generator-write 4) |
+| `endpointsWithCandidate` | 14 | **4** |
+| `noCandidate.length` | 75 | **85** |
+| `docblockReports.length` | — | **28** |
+| relation rows that WOULD join under the draft | 4 | **0** |
+
+⭐⭐ **TWENTY-SIX OF THE THIRTY-THREE CANDIDATES RESTED ON A COMMENT LINE, AND SO DID ALL FOUR
+"WOULD JOIN" ROWS.** `condition:famine -> system:food_security`, `condition:famine ->
+system:public_legitimacy`, `condition:boom -> system:public_legitimacy` and `signal:occupied ->
+cause:occupation` each reached at least one endpoint only through a docblock candidate. With
+comments out of the evidence the draft's own join agrees with the shipped one at **0**: car 0's
+F1 now holds at EVERY grade rather than at the ratified grade alone. The non-vacuity control is
+asserted beside it (rows the draft reaches on exactly one endpoint are `> 0`). The plant is a
+fixture comment naming both tokens on one line: `rows []`, `docblockReports 1`, and the same
+pair on a READ PATH still proposes.
+
+### 5b.8 ARM A13's EXECUTABLE VERDICTS, AFTER THE COLUMN LANDED
+
+```
+$ npx vitest run tests/lint/proseComposed.walker.test.js                        ; exit=0
+A13 · the CITATION habit before any budget is set
+  variants naming a record holder: 18 of 2266
+  by block: DS-DEF-1 1 · DS-DEF-11 1 · DS-DEF-7 1 · DS-ECO-12 1 · DS-ECO-5 1 · DS-ECO-9 1 ·
+  DS-GEN-1 1 · DS-GEN-10 1 · DS-GEN-11 2 · DS-GEN-3 1 · DS-POP-1 4 · DS-POP-2 1 · DS-POW-1 2
+  EXECUTABLE VERDICTS (SEAM car 5b): LICENSED 6 · WITHHELD 12
+  by the pool's register standing: LICENSED <- LICENSED 6 · WITHHELD <- SOURCE-UNRESOLVED 12
+ Test Files  1 passed (1)      Tests  66 passed (66)
+```
+
+**Six of the eighteen citing variants stand; twelve are WITHHELD**, every one because the pool
+they sit on is SOURCE-UNRESOLVED — the citation names a record the census cannot license. No
+FAIL: no holder in the register is INTERESTED, which is §5b.5's zero seen from the arms side.
+
+⚠ **THE HOLDER IN THAT WALK IS THE SHIPPED ROSTER'S KEEPER AND NOT THIS TOWN'S, AND THE ARM
+SAYS SO IN ITS OWN COMMENT.** The corpus walk has no settlement, so `holdersOf(kind,
+settlement)` has nothing to resolve against and the register's own `holder` is null by
+construction. The reader names the institution the shipped catalog offers for the kind (a real
+institution of the game, not a placeholder); the town-resolved verdict is the taste's, car 6.
+Without it every licensed pool would read WITHHELD for want of a holder and the tally would
+have measured the walk's own blindness.
+
+### 5b.9 ⚠ WHAT A CITED FACE WOULD NEED THAT THE ENGINE DOES NOT HOLD — THE WAVE'S LIST
+
+Each row is a measurement above, not a worry:
+
+1. ⛔ **A CORRUPT NPC'S HOME IS A FACTION, NOT AN INSTITUTION.** 178 of them across 768 towns,
+   every one homed, none homed to a security institution, so the only per-institution
+   corruption channel a generated town has cannot fire. Until a typed NPC-to-institution edge
+   exists, no fact is INTERESTED at generation time and §Q.3's two faces have no live case.
+2. ⛔ **THE MUSTER ROLL HAS NO KEEPER IN ANY GENERATED TOWN.** `Citizen militia` is the shipped
+   roster's only muster-keeper and it instantiates `Emergency defense`, never `Muster
+   training`. 61 census fields resolve to `muster` — the largest kind — and 0 of 768 towns can
+   name who keeps it.
+3. ⛔ **THE PEOPLE'S OWN RECORD IS UNREACHABLE FROM THE CENSUS.** `census` maps ZERO fields:
+   `readings.populationTrend.band` and `.window` have no producer token at all, because that
+   reading is built in `src/components/new/generalDeskRead.js`, outside the producer index's
+   two trees. The kind is roster-backed (Democratic assembly, Royal seat) and unreachable.
+4. ⛔ **`tradition` HAS NO INSTITUTION ANYWHERE IN THE SHIPPED ROSTER** — the one kind of the
+   twelve with an empty backing. The tradition tables are the engine's own.
+5. ⚠ **THE CLOSED LIST HAS NO STORE-KEEPER.** `granary`, `hospital` and `foodBalance` land
+   SOURCE-UNRESOLVED because the twelve kinds carry no granary or infirmary, and this car
+   refused to mint a thirteenth kind the ruling did not name. Five DS-DEF-2 rows and the whole
+   food family pay for it.
+6. ⚠ **CAPTURE AND PATRON CONTROL NEED A TICKED WORLD.** Both readers take a structure a
+   headless town does not have; the standing prints them ABSENT with the reader named.
+7. ⚠ **A HOLDER IS AN INSTITUTION AND NEVER A PERSON**, because `COLUMN_SOURCES.holderRole` is
+   a hardcoded null and no typed NPC-to-institution edge exists. The DM face names the office,
+   not the officer, and the register carries the reason.
+
+### 5b.10 THE GATES AT THE TIP `b573bb5f4`
+
+```
+$ npx vitest run tests/lint                                                     ; exit=0
+ Test Files  149 passed (149)
+      Tests  2479 passed (2479)
+$ node scripts/check-domain-strict.mjs                                          ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                         ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs                                 ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node scripts/wiring-census.mjs --check                                        ; exit=0
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                                ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node scripts/generate-dossier-state-prose.mjs --check                         ; exit=0
+[dossier-prose] seats: 708 sentence / 0 clause over 708 state pools (not-a-modifier 708)
+[dossier-prose] verified 68 state blocks / 2266 variants across 6 desks, …
+$ npx vitest run tests/property/dossierProseManifest.test.js                    ; exit=0
+      Tests  14 passed (14)          # the DRIFT arm's three lists empty, every figure byte-equal
+$ npx eslint <the eight changed js/mjs/test files>                              ; exit=0  (0 problems)
+$ node <espree literal probe>
+src/domain/prose/holderTable.js     literals:240  em:0  bang:0  toFixed-in-literal:0
+src/domain/prose/wiringCensus.js    literals:242  em:0  bang:0  toFixed-in-literal:1  # BANKED, unmoved
+src/domain/prose/composedWalker.js  literals:295  em:0  bang:0  toFixed-in-literal:0
+$ npx vitest run tests/copy/voiceMechanics.test.js                              ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+$ git status --porcelain | wc -l                                                =>  0
+$ ls -ld node_modules/immer node_modules/seedrandom     # symlinks, never cloned
+```
+
+⭐⭐ **`tests/lint` IS FULLY GREEN — 149 of 149 files and 2,479 of 2,479 assertions.** The
+strict ratchet sits exactly on its ceiling, 1120 / 1120: 410 new effective lines of island
+module added ZERO strict-type errors. The voice E2 red is car 3a's two banked files at the
+counts car 3a measured, byte-identical; this car adds nothing to it (the census module's one
+`toFixed`-in-a-literal is the `JS_METHOD_TAILS` entry, present at `HEAD` and unmoved).
+
+The census module stands at **751 effective lines against 800** (headroom 49) after four
+added lines; `holderTable.js` at **410 against 800** (headroom 390).
+
+### 5b.11 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **THE ROW TAKES THE STRONGEST OF ITS FIELDS, NOT THE WEAKEST.** A citation names the holder
+   of ONE cited fact, so a pool reading three fields of which one has a licensed holder may
+   lawfully cite that holder; a fail-closed row would have refused a citation the ruling
+   licenses. Every field's own standing ships beside it in `fields`, so nothing is lost.
+   **Veto shape:** fail-closed rows, which would read LICENSED on far fewer than 114.
+2. **`holder` AND `standing`'s TOWN HALF ARE NULL IN THE REGISTER, WITH A TYPED REASON.** The
+   census is town-independent; `holdersOf` and `standingOf` answer for a settlement and
+   `sourceOfForTown` composes them. The brief's `{kind, holder, standing}` is the shape arm A13
+   reads, and it is what ships — with `holderReason` from a closed vocabulary beside it.
+   **Veto shape:** stamp a roster-level holder name into the register, which would put a
+   settlement-independent institution into a per-town claim.
+3. **NO THIRTEENTH KIND WAS MINTED.** The closed list is the owner's twelve; a `granary` or an
+   `infirmary` kind would have resolved five DS-DEF-2 rows and the food family, and it is not a
+   lane's to add. Recorded as §5b.9 item 5 rather than taken.
+4. **THE TABLE IS AN ARGUMENT WITH A DEFAULT** (`holderKindOfField(field, sources)`), which is
+   the module's one test seam and exists so the brief's own plant — a table that maps every
+   field to the office — can be driven without editing product code. Car 4's `seatOf` takes
+   `S2_SIGNED` the same way. No caller in `src/` passes it.
+5. **THREE FILES OUTSIDE THE BRIEF'S CHANGE LIST WERE EDITED, EACH BECAUSE THIS CAR FALSIFIED
+   AN ARM.** `tests/lint/proseComposed.walker.test.js` asserted the `source` column ABSENT;
+   `src/domain/prose/composedWalker.js`'s A13 docblock said the column "does not exist yet";
+   `tests/lint/ruinFilterRoster.walker.test.js` carries the reader-count figure this car first
+   moved and then un-moved. Car 4c's precedent (amend a falsified arm at cause, never leave it
+   red) was followed, and the replacement arm is STRONGER in each case: the column is asserted
+   present on every one of the 708 rows rather than absent from all of them.
+6. **NO MUTATION PLANT WAS ADDED, AND THAT IS A MEASUREMENT.** The manifest's TOTALITY rule is
+   over INVARIANT TEST FILES and this car adds none; its LABEL JOIN rule refuses an orphan
+   sweep label, so a plant for `holderTable.js` under the existing
+   `proseWiringCensus.walker.test.js` entry would have RED as a double-claim.
+   `tests/lint/mutationCoverageManifest.test.js` reads `10 passed` unchanged.
+7. **THE SERVICE-NAME LISTS ARE DECLARED IN THE MODULE AND VERIFIED IN THE GATE**, rather than
+   imported from `src/data/institutionServices.js`. Importing the catalog would have put a
+   285-institution data leaf on the census module's import graph for a list of 30 strings; the
+   walker asserts every declared name EXISTS in the shipped catalog and re-derives
+   `rosterBacked` and `dutyNamed` from it, which is the `COLUMN_SOURCES` honesty shape.
+8. **`Record keeping` IS IN NO KIND'S LIST.** It is carried by the Church/Temple, the Lord's
+   steward and the Parish churches alike, so it names the parish and the office in one breath.
+   A kind claiming it would claim a holder it cannot tell apart.
+9. **THREE KINDS DECLARE `dutyNamed: 0`** (market, watch, court) — their record services are
+   real catalog services that `DUTY_SERVICE_KINDS` does not name, because that regex names
+   COUNTING duties. The departure is DECLARED and re-measured by the walker rather than cured
+   by widening the estate's one duty vocabulary.
+
+### 5b.12 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The row takes the STRONGEST of its fields | that a citation names one holder, so one licensed reading licenses the row | §5b.11 item 1 | ⭐⭐ the acceptance shape |
+| `holder` null in the register with a typed reason | that a town-independent register may not name a town's institution, and that A13's contract is met | §5b.11 item 2 | ⭐⭐ |
+| The 49 mapping rows themselves | that each cited producer really is the writer whose record the kind keeps (the walker proves the citation is LIVE; it cannot prove it is APT) | §5b.1 | ⭐⭐ the table is the car |
+| No thirteenth kind for the granary | that the closed list is the owner's and a store-keeper is a sitting row | §5b.9 item 5 | ⭐⭐ |
+| Three files outside the change list amended | that a falsified arm is amended at cause, per car 4c | §5b.11 item 5 | ⭐⭐ |
+| The RATE corpus shows ZERO interested facts | that the three grounds are measured and not a broken probe | §5b.5 | ⭐⭐ the taste (car 6) needs a live case |
+| The producer-token defect and its cure | that an ARRAY of rows is the cure at cause and the new arm is the right guard | §5b.6 item 1 | ⭐⭐ four census rows moved before it |
+| The `docblock` withdrawal taking the "4 would join" to 0 | that the draft's join agreeing with the shipped one is a strengthening | §5b.7 item 2 | ⭐⭐ |
+| The ruin routing, cured with no measurable effect | that a latent cure is right, per car 3f-0 | §5b.6 item 2 | ⭐ |
+| A13's roster-level holder in the corpus walk | that naming the shipped catalog's keeper beats WITHHELD-for-want-of-a-town | §5b.8 | ⭐ car 6 |
+| No mutation plant | that the manifest's own join rule forbids one here | §5b.11 item 6 | ⭐ |
+| `dutyNamed: 0` on three kinds | that declaring the departure beats widening `DUTY_SERVICE_KINDS` | §5b.11 item 9 | ⭐ |
+
+### 5b.13 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+node scripts/wiring-census.mjs --dry          # the register, READ without being written
+node scripts/wiring-census.mjs --print        # the source block, per field and per kind
+npx vitest run tests/lint/proseWiringCensus.walker.test.js    # 69 passed: the holder arms
+npx vitest run tests/lint/proseComposed.walker.test.js        # 66 passed: A13's verdicts
+npx vitest run tests/lint                                     # 149 / 149, 2479 / 2479, NO red
+node scripts/check-domain-strict.mjs                          # 1120 / 1120
+node $SC/seam5b/rate-holders.mjs docs/content/wiring-census.json <out>   # the RATE probe
+node $SC/seam5b/why-no-interest.mjs <out>                     # why the interest reads zero
+```
+
+```
+$ git -C $SC/laneSEAM log --oneline -3
+b573bb5f4 SEAM car 5b-b: the lighting census re-freezes at the holder census's tip, by its ritual
+82eeb534f SEAM car 5b: the holder census — every fact's source derived and resolved, 114
+          LICENSED / 3 OFFICE / 591 SOURCE-UNRESOLVED rows
+da080313d Register (SEAM, at car 5): the wiring census re-taken — the provenance move …
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+```
+
+The lighting refreeze reads `files 2556 -> 2556, parked 375 -> 375, credited 2181 -> 2181,
+titles 24014 -> 24025, suiteTitles 6418 -> 6419`, and the green re-run without
+`LIGHTING_CENSUS_REFREEZE` reads 34 passed (34).
+
+**STATUS: CARS 5b AND 5b-b LANDED at `b573bb5f4`.**
