@@ -36,6 +36,22 @@
  *   5  the per-piece draw; an unfillable fill DROPS that candidate and the walk continues.
  *   6  the face draw and the connective draw.
  *   7  the fill, per piece, from the block's bag.
+ *
+ * ⚠ TWO DECLARED DEPARTURES FROM §4.2 AS WRITTEN, BOTH HARMLESS AND BOTH MEASURED (the seam
+ * fold's P1 and P2; SITTING §R.3 records them here rather than leaving the docblock to assert
+ * an order the code does not keep).
+ *   • STEPS 5 AND 6 RUN 6-THEN-5. `drawConnective` is called at :766, a null phrase
+ *     `continue`s at :769, and `drawPiece` follows at :770 — the connective before the piece.
+ *     It costs nothing because EVERY KEY IS CONTENT-ADDRESSED: a draw that is not spent moves
+ *     no modulus and no later index, so the composed bytes are identical either way. It is
+ *     also unreachable at this tip, since no shipped pool is a modifier. Written down because
+ *     a reader checking the file against §4.2 would otherwise find the deviation and not know
+ *     whether it was intended.
+ *   • STEP 2 NAMES A `RESOLVED` METADATA FILTER THAT DOES NOT EXIST. `admissibleCandidates`
+ *     implements the audience filter, `role`, `attach` and block membership, and `PoolMeta`
+ *     carries no `resolved` key at all, so there is nothing to filter on. Unreachable today
+ *     for the same reason (0 modifier pools). The ARCH sentence is the one that needs the
+ *     amendment; this file states what it does.
  *   8  the arrangement — sentence seat, or (under S2) the clause seat.
  *   9  the frozen unit.
  *  10  coherence is the FREEZE's and the GATE's, NEVER the draw's: a runtime refusal would
