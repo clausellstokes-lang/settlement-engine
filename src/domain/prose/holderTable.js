@@ -61,8 +61,9 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
  * @property {Record<string, ReadonlyArray<{name?: string, institution?: string,
  *   desc?: string}>>} [availableServices]
  * @property {ReadonlyArray<{role?: string, title?: string}>} [npcs]
- * @property {{governingName?: string, factions?: ReadonlyArray<{faction?: string,
- *   isGoverning?: boolean}>}} [powerStructure]
+ * @property {{governingName?: string, criminalCaptureState?: string,
+ *   factions?: ReadonlyArray<{faction?: string, isGoverning?: boolean,
+ *   captureState?: string}>}} [powerStructure]
  */
 
 /**
@@ -87,6 +88,59 @@ export const SOURCE_STANDINGS = Object.freeze(['LICENSED', 'OFFICE', 'SOURCE-UNR
 
 /** The standing a TOWN adds: the holder of this record is a power with an interest in it. */
 export const INTERESTED = 'INTERESTED';
+
+/**
+ * ⭐ THE STATE'S OWN ORGANS — the four kinds a SETTLEMENT-WIDE capture of the ruling structure
+ * reaches, and the only four (SITTING §R c-22, correcting the seam fold's P7).
+ *
+ * ⛔ THE GROUND, AND WHY IT IS FOUR AND NOT TWELVE. Car 5b reported capture "structurally
+ * absent at birth" and measured INTERESTED at 0 on all 768 RATE towns. The figure was right
+ * and the ground was false: every generated town carries `powerStructure.criminalCaptureState`
+ * (`src/generators/power/rulingStructure.js:797` — the very line this table maps to the WATCH),
+ * on the same five-rung ladder `standingOf` already consumes, reading none 495 · adversarial
+ * 194 · equilibrium 64 · corrupted 15 over the corpus, with 79 towns carrying a non-`none`
+ * `captureState` on a faction entry. The car reported the fact ABSENT rather than asking
+ * whether it licenses a per-institution standing.
+ *
+ * It cannot license one for every kind: the fact is SETTLEMENT-wide while a standing asks
+ * about ONE institution, so feeding it straight through would mark every holder in a corrupted
+ * town interested, which is its own error. The chair's ruling draws the line where the fact
+ * actually reaches: a captured ruling structure IS the state, so the OFFICE (the compiler
+ * itself sits under that power), the COURT, the TREASURY and the WATCH are interested parties
+ * in their own records by that fact alone. The muster, the parish, the market, the elders, the
+ * road and the rest keep their own books and are NOT marked by it — for them an interest is a
+ * WORLD-RUN fact and stays measured-zero at birth.
+ * @type {ReadonlyArray<string>}
+ */
+export const STATE_ORGAN_KINDS = Object.freeze(['office', 'court', 'treasury', 'watch']);
+
+/**
+ * THE BIRTH-TIME CAPTURE OF THE RULING STRUCTURE, read from the town and never inferred.
+ *
+ * Both fields are typed and both are optional: a settlement that carries neither answers
+ * `{criminal: null, faction: null, captured: false}` and `standingOf` reports the absence
+ * rather than reading `false`. `captured` is `not none` on either, which is the ladder's own
+ * reading — `adversarial` and `equilibrium` are contested states of the same capture arc, and
+ * a record whose holder is contesting its own capture is exactly the interested party
+ * SITTING §Q.2 names.
+ * @param {HolderSettlement} settlement
+ * @returns {{criminal: string|null, faction: string|null, captured: boolean}}
+ */
+export function capturedRulingStructure(settlement) {
+  const power = settlement?.powerStructure;
+  const criminal = typeof power?.criminalCaptureState === 'string' ? power.criminalCaptureState : null;
+  /** @type {ReadonlyArray<{captureState?: string}>} */
+  const factions = Array.isArray(power?.factions) ? power.factions : [];
+  const captured = factions
+    .map((entry) => (typeof entry?.captureState === 'string' ? entry.captureState : null))
+    .filter((state) => state !== null && state !== 'none');
+  const faction = captured.length ? String(captured[0]) : null;
+  return {
+    criminal,
+    faction,
+    captured: (criminal !== null && criminal !== 'none') || faction !== null,
+  };
+}
 
 /**
  * ⭐ THE MAPPING TABLE — one row per producing FIELD TOKEN, each cited to the writer that
@@ -462,10 +516,14 @@ export const HOLDER_REASONS = Object.freeze({
  * ⛔ `holder` AND `standing`'s TOWN HALF ARE NULL HERE BY CONSTRUCTION, WITH THE REASON. The
  * census is a register over the corpus and knows no settlement; `holdersOf` and `standingOf`
  * below answer for a town, and `sourceOfForTown` composes the two.
+ * ⛔ `stateOrgan` IS OPTIONAL AND IS EMITTED ONLY WHERE IT IS TRUE (SITTING §R c-22), which is
+ * the `readsCount` idiom: an absent key is the answer `no`, and the register's diff stays the
+ * size of the rows the rule actually reaches.
  * @param {{reads?: ReadonlyArray<string>, fieldsRead?: ReadonlyArray<string>}} row
  * @param {Readonly<Record<string, {kind: string, cite: string, read: boolean}>>} [sources]
  * @returns {{kind: string, kinds: string[], fields: Record<string, string>,
- *   holder: null, holderReason: string, standing: string, twoSource: boolean}}
+ *   holder: null, holderReason: string, standing: string, twoSource: boolean,
+ *   stateOrgan?: boolean}}
  */
 export function sourceOfRow(row, sources = HOLDER_SOURCES) {
   const reads = Array.isArray(row?.reads) && row.reads.length
@@ -494,6 +552,12 @@ export function sourceOfRow(row, sources = HOLDER_SOURCES) {
       holderReason: HOLDER_REASONS.TOWN,
       standing: 'LICENSED',
       twoSource: kinds.length > 1,
+      // ⭐ EMITTED ON THE AFFECTED ROWS ONLY (SITTING §R c-22). The register knows no town, so
+      // its `standing` can never read INTERESTED; what it CAN say, and now does, is which rows
+      // a town's captured ruling structure is able to move. A row with no state organ among
+      // its kinds carries no key at all, which is the `readsCount` idiom and keeps the diff to
+      // the rows the rule reaches.
+      ...(kinds.some((k) => STATE_ORGAN_KINDS.includes(k)) ? { stateOrgan: true } : {}),
     };
   }
   if (office.length) {
@@ -505,6 +569,8 @@ export function sourceOfRow(row, sources = HOLDER_SOURCES) {
       holderReason: HOLDER_REASONS.OFFICE,
       standing: 'OFFICE',
       twoSource: false,
+      // The office IS a state organ: the compiler sits under the power that was captured.
+      stateOrgan: true,
     };
   }
   const kindless = resolved.some((r) => r.reason === FIELD_REASONS.NO_INSTITUTION);
@@ -556,16 +622,24 @@ export function holdersOf(kind, settlement) {
  * and no world state, so `captured` (`worldPulse/factionCapture.js:136` reads `factionStates`)
  * and `patron` (`worldPulse/brokeragePatronage.js:228` reads a `worldState`) are absent on
  * every town the RATE corpus builds, and they say so rather than reading `false`.
+ * ⭐ THE FOURTH ARGUMENT IS THE KIND, AND WITHOUT IT THE BIRTH-TIME CAPTURE IS NOT READ AT ALL
+ * (SITTING §R c-22). A settlement-wide capture of the ruling structure reaches the STATE'S OWN
+ * ORGANS and nothing else, so this function cannot decide it from the institution's name: the
+ * caller says which KIND of record is being sourced, and a kind outside `STATE_ORGAN_KINDS`
+ * has the fact recorded as ABSENT-BY-RULE rather than read. A caller that names no kind gets
+ * the pre-5c reading exactly, which is why every existing call site is unmoved.
  * @param {string} institution
  * @param {HolderSettlement} settlement
  * @param {{compromised?: {covert: ReadonlyArray<string>, revealed: ReadonlyArray<string>},
  *   captureState?: string|null, patron?: string|null}} [world]
  *   the realm-level facts a settlement does not carry, supplied by the caller exactly as the
  *   institution table takes its `treatyTerms`: absent means ABSENT, never false
+ * @param {string|null} [kind] the record-holder kind this institution is being asked about
  * @returns {{corrupt: boolean, impaired: boolean, controlled: boolean|null,
- *   captured: boolean|null, marks: string[], absent: string[], interested: boolean}}
+ *   captured: boolean|null, capturedAtBirth: boolean|null, marks: string[], absent: string[],
+ *   interested: boolean}}
  */
-export function standingOf(institution, settlement, world = {}) {
+export function standingOf(institution, settlement, world = {}, kind = null) {
   const name = String(institution || '');
   const compromised = world.compromised || { covert: [], revealed: [] };
   const corrupt = compromised.covert.includes(name) || compromised.revealed.includes(name);
@@ -597,14 +671,41 @@ export function standingOf(institution, settlement, world = {}) {
   if (impaired && !corruptImpairment) marks.push('impaired');
   if (captured === true) marks.push('captured');
   if (controlled === true) marks.push('controlled');
+  // ⭐ THE BIRTH-TIME CAPTURE (SITTING §R c-22). Read for a STATE ORGAN only; for every other
+  // kind the settlement-wide fact is refused BY RULE and the refusal is PRINTED in `absent`,
+  // so a reader can tell "this kind is not reached by it" from "this town does not hold it".
+  const organ = STATE_ORGAN_KINDS.includes(String(kind || ''));
+  /** @type {boolean|null} */
+  let capturedAtBirth = null;
+  if (kind === null) {
+    absent.push('captured-at-birth (the caller named no kind, so the ruling structure was not read)');
+  } else if (!organ) {
+    absent.push(`captured-at-birth (${kind} is not one of the state's own organs: a settlement-wide capture of the ruling structure does not reach a holder that keeps its own books)`);
+  } else {
+    const birth = capturedRulingStructure(settlement);
+    if (birth.criminal === null && birth.faction === null) {
+      absent.push('captured-at-birth (this settlement carries no powerStructure.criminalCaptureState and no faction captureState)');
+    } else {
+      capturedAtBirth = birth.captured;
+      if (capturedAtBirth) {
+        const ground = [
+          birth.criminal && birth.criminal !== 'none' ? `criminalCaptureState ${birth.criminal}` : null,
+          birth.faction ? `faction captureState ${birth.faction}` : null,
+        ].filter(Boolean).join(' + ');
+        marks.push(`captured-at-birth (${ground})`);
+      }
+    }
+  }
   return {
     corrupt,
     impaired,
     controlled,
     captured,
+    capturedAtBirth,
     marks,
     absent,
-    interested: corrupt || corruptImpairment || captured === true || controlled === true,
+    interested: corrupt || corruptImpairment || captured === true || controlled === true
+      || capturedAtBirth === true,
   };
 }
 
@@ -626,10 +727,22 @@ export function sourceOfForTown(row, settlement, world = {}) {
       kind: base.kind, holder: null, standing: base.standing, holders: [], marks: [], absent: [],
     };
   }
-  /** @type {string[]} */
-  const holders = [];
-  for (const kind of base.kinds) holders.push(...holdersOf(kind, settlement));
-  const named = [...new Set(holders)].sort();
+  // ⛔ THE PAIR, NOT THE NAME. A holder is reached THROUGH a kind, and since SITTING §R c-22
+  // the kind decides whether the ruling structure's capture reaches it, so the two travel
+  // together. Deduped on the pair: one institution keeping two kinds' records is asked twice,
+  // once per kind, and may be interested in one and not the other.
+  /** @type {Array<{kind: string, holder: string}>} */
+  const pairs = [];
+  /** @type {Set<string>} */
+  const seen = new Set();
+  for (const kind of base.kinds) {
+    for (const holder of holdersOf(kind, settlement)) {
+      if (seen.has(`${kind}::${holder}`)) continue;
+      seen.add(`${kind}::${holder}`);
+      pairs.push({ kind, holder });
+    }
+  }
+  const named = [...new Set(pairs.map((pair) => pair.holder))].sort();
   if (named.length === 0) {
     return {
       kind: base.kind,
@@ -645,8 +758,8 @@ export function sourceOfForTown(row, settlement, world = {}) {
   /** @type {string[]} */
   const absent = [];
   let interested = false;
-  for (const holder of named) {
-    const standing = standingOf(holder, settlement, world);
+  for (const { kind, holder } of pairs) {
+    const standing = standingOf(holder, settlement, world, kind);
     if (standing.interested) interested = true;
     for (const mark of standing.marks) marks.push(`${holder}: ${mark}`);
     for (const gap of standing.absent) if (!absent.includes(gap)) absent.push(gap);

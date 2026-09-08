@@ -3267,7 +3267,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": true
+        "twoSource": true,
+        "stateOrgan": true
       }
     },
     {
@@ -3342,7 +3343,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": true
+        "twoSource": true,
+        "stateOrgan": true
       }
     },
     {
@@ -5265,7 +5267,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -5326,7 +5329,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -8731,7 +8735,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -8798,7 +8803,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -8865,7 +8871,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -11782,7 +11789,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -11858,7 +11866,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -11928,7 +11937,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -11996,7 +12006,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -12061,7 +12072,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -16411,7 +16423,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -16473,7 +16486,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -18455,7 +18469,8 @@
         "holder": null,
         "holderReason": "the office itself compiles this fact, so no outside record is cited",
         "standing": "OFFICE",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -18514,7 +18529,8 @@
         "holder": null,
         "holderReason": "the office itself compiles this fact, so no outside record is cited",
         "standing": "OFFICE",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -19461,7 +19477,8 @@
         "holder": null,
         "holderReason": "the office itself compiles this fact, so no outside record is cited",
         "standing": "OFFICE",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -21175,7 +21192,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -21229,7 +21247,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -21283,7 +21302,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -21342,7 +21362,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -21398,7 +21419,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -24141,7 +24163,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -24391,7 +24414,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -24687,7 +24711,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -25366,7 +25391,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -25427,7 +25453,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -25494,7 +25521,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -25652,7 +25680,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -26310,7 +26339,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -26395,7 +26425,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": true
+        "twoSource": true,
+        "stateOrgan": true
       }
     },
     {
@@ -26480,7 +26511,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": true
+        "twoSource": true,
+        "stateOrgan": true
       }
     },
     {
@@ -26542,7 +26574,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -26604,7 +26637,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -27005,7 +27039,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -27924,7 +27959,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -34167,7 +34203,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -34240,7 +34277,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -34309,7 +34347,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {
@@ -34376,7 +34415,8 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
-        "twoSource": false
+        "twoSource": false,
+        "stateOrgan": true
       }
     },
     {

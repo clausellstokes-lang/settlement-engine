@@ -46,7 +46,8 @@ import { loadStateLeaves } from '../helpers/dossierCorpus.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DOSSIER_RELATIONS } from '../../src/data/dossierRelations.generated.js';
-import { HOLDER_RECORDS } from '../../src/domain/prose/holderTable.js';
+import { capturedRulingStructure, HOLDER_RECORDS, sourceOfForTown } from '../../src/domain/prose/holderTable.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { FACTION_ROLES } from '../../src/generators/factionRoles.js';
 import * as ROLE_CATALOG from '../../src/generators/npc/factionRoleCatalog.js';
@@ -968,6 +969,76 @@ describe('A13 — the PROVENANCE move, EXECUTABLE since the holder census landed
     // less; it may not quietly cite more before the sitting sets the budget the owner's
     // directive asks the bands for.
     expect(citing).toBeLessThanOrEqual(7);
+  });
+
+  // ── A13's FAIL LIMB, ON A REAL TOWN (SITTING §R c-22; the seam fold's P8) ────────────
+  //
+  // The fold found A13's FAIL limb structurally unreachable: the gate asserts the REGISTER's
+  // standing vocabulary is the closed set {LICENSED, OFFICE, SOURCE-UNRESOLVED}, every one of
+  // which `continue`s before FAIL, and the only plant supplying `INTERESTED` was a synthetic.
+  // The register's vocabulary is still closed and still correct — a register knows no town.
+  // What changed at car 5c is that the TOWN path can now mint INTERESTED from a typed birth
+  // fact, so the limb is reachable on real input and this arm reaches it with one.
+  //
+  // ⚠ THE TOWN AND THE VARIANT ARE BOTH NAMED, AND BOTH ARE SHIPPED. The town is a rateGrid
+  // spec quoted with its seed; the variant is a real citing variant of the real corpus whose
+  // census row resolves to the TREASURY — a state organ. 17 of the 768 RATE towns put this
+  // exact row into INTERESTED, so the arm sits on a measured population and not on a
+  // coincidence.
+  const CAPTURED_TREASURY_TOWN = Object.freeze({
+    config: {
+      settType: 'town',
+      tradeRouteAccess: 'road',
+      monsterThreat: 'random_threat',
+      culture: 'germanic',
+      terrainOverride: 'hills',
+    },
+    seed: 'rate-9-2',
+  });
+
+  it('⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured', () => {
+    const town = generateSettlementPipeline(
+      CAPTURED_TREASURY_TOWN.config, null, { seed: CAPTURED_TREASURY_TOWN.seed, customContent: {} },
+    );
+    expect(capturedRulingStructure(town).criminal, 'the named town\'s ruling structure is corrupted').toBe('corrupted');
+    // A REAL SHIPPED CITING VARIANT, found in the corpus rather than written here.
+    const entry = corpus.find((row) => row.block === 'DS-GEN-11'
+      && row.pool === 'viable: true: the arithmetic closes'
+      && provenanceCount(row.text) > 0);
+    expect(entry, 'the shipped corpus must still carry this citing variant').toBeTruthy();
+    const key = `${entry.block} :: ${entry.pool}`;
+    const censusRow = censusByPool.get(key);
+    expect(censusRow.source.kinds, 'and its holder is the treasury').toEqual(['treasury']);
+    expect(censusRow.source.stateOrgan, 'which is one of the state\'s own organs').toBe(true);
+    const resolved = sourceOfForTown(censusRow, town);
+    expect(resolved.standing, 'so on THIS town the holder is an interested party').toBe('INTERESTED');
+    expect(resolved.holder).toBe('Town hall');
+    expect(resolved.marks.join(' | ')).toMatch(/captured-at-birth/);
+    const sourceOf = () => resolved;
+    const unitOf = (marks) => ({
+      blockId: entry.block,
+      poolKey: entry.pool,
+      text: entry.text,
+      pieces: [{
+        role: 'spine', key, text: entry.text, marks, slots: entry.slots || [],
+      }],
+    });
+    // ⛔ THE FAIL, on real input and with no synthetic standing anywhere in the call.
+    const player = armA13(unitOf(entry.marks || []), { register: 'R1', sourceOf });
+    expect(player.fails.map((f) => f.subject)).toEqual(['an interested holder on the player face']);
+    // AND THE DM FACE, which is the licensed way to state the same fact (SITTING §Q.3).
+    const dm = armA13(unitOf([...(entry.marks || []), 'dm-only']), { register: 'R1', sourceOf });
+    expect(dm.fails).toEqual([]);
+    // ⛔ NON-VACUITY: the SAME variant and the SAME arm on a town whose ruling structure is
+    // NOT captured does not fail, so the FAIL is the town's fact and not the arm's habit.
+    const clean = generateSettlementPipeline(
+      { settType: 'town', tradeRouteAccess: 'random_trade', monsterThreat: 'random_threat', culture: 'arabic', terrainOverride: 'riverside' },
+      null, { seed: 'rate-3-0', customContent: {} },
+    );
+    expect(capturedRulingStructure(clean).captured).toBe(false);
+    const cleanSource = sourceOfForTown(censusRow, clean);
+    expect(cleanSource.standing).not.toBe('INTERESTED');
+    expect(armA13(unitOf(entry.marks || []), { register: 'R1', sourceOf: () => cleanSource }).fails).toEqual([]);
   });
 });
 

@@ -39,9 +39,10 @@ import {
   relationsFromSitting, relationTable, serialise, wilsonBp, wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
 import {
-  fieldSourceOf, FIELD_REASONS, holderCensus, HOLDER_KINDS, holderKindOfField, HOLDER_RECORDS,
-  HOLDER_REASONS, HOLDER_SOURCES, holdersOf, sourceOfForTown, sourceOfRow, sourceSummary,
-  sourcesAllCited, standingOf, tableFieldsOf, uncitedSourcesOf,
+  capturedRulingStructure, fieldSourceOf, FIELD_REASONS, holderCensus, HOLDER_KINDS,
+  holderKindOfField, HOLDER_RECORDS, HOLDER_REASONS, HOLDER_SOURCES, holdersOf, sourceOfForTown,
+  sourceOfRow, sourceSummary, sourcesAllCited, standingOf, STATE_ORGAN_KINDS, tableFieldsOf,
+  uncitedSourcesOf,
 } from '../../src/domain/prose/holderTable.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { DUTY_SERVICE_KINDS } from '../../src/domain/institutions/institutionTable.js';
@@ -1596,6 +1597,125 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
       + `\n  the table ${holderCensus().map((h) => `${h.kind} ${h.fields}`).join(' · ')}\n`);
   });
 
+  // ── THE CAPTURE STANDING (SITTING §R c-22, correcting the seam fold's P7) ────────────
+  //
+  // Car 5b reported capture "structurally absent at birth" and measured INTERESTED at 0 over
+  // all 768 RATE towns. THE FIGURE WAS RIGHT AND THE GROUND WAS FALSE: every generated town
+  // carries `powerStructure.criminalCaptureState` (rulingStructure.js:797 — the very line the
+  // holder table maps to the WATCH), on the same five-rung ladder `standingOf` consumes,
+  // reading none 495 · adversarial 194 · equilibrium 64 · corrupted 15 over the corpus. The
+  // car reported the fact ABSENT rather than asking whether it licenses a per-institution
+  // standing. The chair ruled that it licenses one for the STATE'S OWN ORGANS and for nothing
+  // else, and these arms are that rule, driven on REAL towns rather than on synthetics.
+  //
+  // ⚠ TWO NAMED TOWNS, NOT SAMPLED. Both are rateGrid specs, quoted with their seeds so the
+  // arm reproduces from the file alone. `CAPTURED_TOWN` is the first grid town whose ruling
+  // structure is captured and which keeps a licensed state-organ record; `CLEAN_TOWN` is the
+  // first whose capture reads `none` while it still keeps those records, so a rule that
+  // marked everything would red here rather than passing quietly.
+  const CAPTURED_TOWN = Object.freeze({
+    config: {
+      settType: 'city',
+      tradeRouteAccess: 'random_trade',
+      monsterThreat: 'random_threat',
+      culture: 'norse',
+      terrainOverride: 'coastal',
+    },
+    seed: 'rate-4-0',
+  });
+  const CLEAN_TOWN = Object.freeze({
+    config: {
+      settType: 'town',
+      tradeRouteAccess: 'random_trade',
+      monsterThreat: 'random_threat',
+      culture: 'arabic',
+      terrainOverride: 'riverside',
+    },
+    seed: 'rate-3-0',
+  });
+  const townOf = (spec) => generateSettlementPipeline(spec.config, null, { seed: spec.seed, customContent: {} });
+
+  test('⭐⭐ THE CAPTURE STANDING — the reader is typed, both fields, and it never infers', () => {
+    expect(STATE_ORGAN_KINDS, 'the state\'s own organs, and only these four')
+      .toEqual(['office', 'court', 'treasury', 'watch']);
+    for (const kind of STATE_ORGAN_KINDS) {
+      expect(HOLDER_KINDS, `${kind} must be a holder kind`).toContain(kind);
+    }
+    // ABSENT IS ABSENT. A settlement carrying neither field answers null on both and `false`
+    // on the rollup, and the standing reports the absence rather than reading a `false`.
+    expect(capturedRulingStructure({})).toEqual({ criminal: null, faction: null, captured: false });
+    expect(capturedRulingStructure({ powerStructure: {} })).toEqual({ criminal: null, faction: null, captured: false });
+    // THE LADDER, rung by rung. `none` is not a capture; every other rung is.
+    expect(capturedRulingStructure({ powerStructure: { criminalCaptureState: 'none' } }).captured).toBe(false);
+    for (const rung of ['adversarial', 'equilibrium', 'corrupted', 'capture']) {
+      expect(capturedRulingStructure({ powerStructure: { criminalCaptureState: rung } }).captured,
+        `${rung} is a capture arc`).toBe(true);
+    }
+    // AND THE FACTION FIELD IS THE SECOND READER, on its own.
+    const byFaction = capturedRulingStructure({
+      powerStructure: { criminalCaptureState: 'none', factions: [{ captureState: 'none' }, { captureState: 'corrupted' }] },
+    });
+    expect(byFaction).toEqual({ criminal: 'none', faction: 'corrupted', captured: true });
+  });
+
+  test('⭐⭐ A CAPTURED RULING STRUCTURE MAKES THE STATE ORGANS INTERESTED, AND NO OTHER KIND', () => {
+    const town = townOf(CAPTURED_TOWN);
+    expect(capturedRulingStructure(town).criminal,
+      'the named town\'s ruling structure is on the capture arc').toBe('adversarial');
+    const licensed = census.rows.filter((row) => row.source.standing === 'LICENSED');
+    const interested = licensed.filter((row) => sourceOfForTown(row, town).standing === 'INTERESTED');
+    // ⛔ THE GATE, AND IT IS THE WHOLE RULING: not one row without a state organ among its
+    // kinds is interested, on a town whose ruling structure IS captured.
+    expect(licensed.filter((row) => !row.source.stateOrgan
+      && sourceOfForTown(row, town).standing === 'INTERESTED')).toEqual([]);
+    expect(interested.every((row) => row.source.stateOrgan === true),
+      'every interested row names a state organ').toBe(true);
+    expect(interested.length, 'the licensed rows this captured city makes interested').toBe(16);
+    // THE MARK NAMES ITS GROUND rather than asserting a standing nobody can trace.
+    const one = sourceOfForTown(interested[0], town);
+    expect(one.standing).toBe('INTERESTED');
+    expect(one.marks.join(' | ')).toMatch(/captured-at-birth \(criminalCaptureState adversarial\)/);
+    // ⛔ NON-VACUITY 1 — THE PRE-5c READING, on the same town and the same rows. `standingOf`
+    // without a KIND does not read the ruling structure at all, so a harness that forgot to
+    // pass the kind would measure zero and call the rule dead.
+    for (const holder of one.holders) {
+      const blind = standingOf(holder, town, {});
+      expect(blind.interested, 'no kind named means the birth capture is not read').toBe(false);
+      expect(blind.capturedAtBirth).toBe(null);
+      expect(blind.absent.join(' | ')).toMatch(/captured-at-birth \(the caller named no kind/);
+      // AND THE KIND-GATED REFUSAL IS PRINTED, not silent, for a kind outside the four.
+      expect(standingOf(holder, town, {}, 'market').absent.join(' | '))
+        .toMatch(/market is not one of the state's own organs/);
+      expect(standingOf(holder, town, {}, 'market').interested).toBe(false);
+    }
+    // ⛔ NON-VACUITY 2 — A TOWN THAT IS NOT CAPTURED, which still KEEPS these records. A rule
+    // that marked every holder of a state organ would red here.
+    const clean = townOf(CLEAN_TOWN);
+    expect(capturedRulingStructure(clean).captured, 'the clean town is not on the arc').toBe(false);
+    const held = licensed.filter((row) => sourceOfForTown(row, clean).holder !== null);
+    expect(held.length, 'and it really does keep the records').toBe(62);
+    expect(licensed.filter((row) => sourceOfForTown(row, clean).standing === 'INTERESTED')).toEqual([]);
+  });
+
+  test('the `stateOrgan` column names the rows a captured town can move, and only those', () => {
+    const flagged = census.rows.filter((row) => row.source.stateOrgan === true);
+    // The register knows no town, so its `standing` can never read INTERESTED. What it CAN
+    // say is which rows the rule reaches, and it says it on the affected rows only.
+    expect(flagged.length, 'rows a captured ruling structure can make interested').toBe(40);
+    expect(flagged.filter((row) => row.source.standing === 'LICENSED').length).toBe(37);
+    expect(flagged.filter((row) => row.source.standing === 'OFFICE').length).toBe(3);
+    // RE-DERIVED, never read: the flag is exactly `kinds names a state organ`.
+    const wrong = census.rows.filter((row) => {
+      const kinds = row.source.kinds.length ? row.source.kinds : [row.source.kind].filter(Boolean);
+      const organ = kinds.some((kind) => STATE_ORGAN_KINDS.includes(kind));
+      return organ !== (row.source.stateOrgan === true);
+    }).map((row) => `${row.block} :: ${row.pool}`);
+    expect(wrong, 'the column must equal its own definition').toEqual([]);
+    // ABSENT IS THE ANSWER `no`, the `readsCount` idiom: no row carries `stateOrgan: false`.
+    expect(census.rows.filter((row) => row.source.stateOrgan === false)).toEqual([]);
+    expect(census.rows.length - flagged.length, 'and the rest carry no key at all').toBe(668);
+  });
+
   test('⭐⭐ A TABLED KEY FUNCTION RESOLVES THROUGH THE TABLE\'S OWN FIELDS — A0b\'s blindness is NOT inherited', () => {
     // ⛔ THE FINDING THIS ARM CLOSES (SEAM car 5, §5.8 item 1; the chair's ruling 4 on car 5).
     // Rung 3 writes `"<reader> (via <TABLE> in <file>)"` as the row's whole reading, so arm A0b
@@ -1719,13 +1839,34 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // difference between "not captured" and "the engine holds no capture fact for this town".
     expect(clean.captured, 'no faction states: absent, never false').toBe(null);
     expect(clean.controlled, 'no world state: absent, never false').toBe(null);
-    expect(clean.absent.length).toBe(2);
-    for (const gap of clean.absent) expect(gap).toMatch(/worldPulse\//);
+    expect(clean.capturedAtBirth, 'and no KIND was named, so the ruling structure was not read').toBe(null);
+    // THREE ABSENCES, NOT TWO, SINCE SEAM CAR 5c. The third is the birth-time capture, and it
+    // is absent here for a REASON OF THE CALL rather than of the town: this call names no
+    // kind, and SITTING §R c-22 reads the ruling structure for the state's own organs only.
+    // Two of the three name the worldPulse reader that would hold them; the third names the
+    // rule instead, which is the honest citation for a refusal by rule.
+    expect(clean.absent.length).toBe(3);
+    expect(clean.absent.filter((gap) => /worldPulse\//.test(gap)).length).toBe(2);
+    expect(clean.absent.filter((gap) => /^captured-at-birth/.test(gap)).length).toBe(1);
     // AND WHEN THE CALLER DOES HOLD THEM, they read.
-    const captured = standingOf('Town watch', town, { captureState: 'capture', patron: 'the Salters' });
+    const captured = standingOf('Town watch', town, { captureState: 'capture', patron: 'the Salters' }, 'watch');
     expect(captured.captured).toBe(true);
     expect(captured.controlled).toBe(true);
-    expect(captured.absent, 'nothing is absent once the caller supplies both').toEqual([]);
+    // The fixture town carries no `powerStructure`, so the birth fact is absent FOR THE TOWN
+    // even though the kind is a state organ — and the two absences say which is which.
+    expect(captured.capturedAtBirth, 'this fixture holds no ruling structure at all').toBe(null);
+    expect(captured.absent).toEqual([
+      'captured-at-birth (this settlement carries no powerStructure.criminalCaptureState and no faction captureState)',
+    ]);
+    // ⛔ AND THE KIND GATE, ON THE SAME CALL: give the town a captured ruling structure and a
+    // state organ reads it; the same town asked about the MARKET does not.
+    const underCapture = { ...town, powerStructure: { criminalCaptureState: 'corrupted' } };
+    expect(standingOf('Parish church', underCapture, {}, 'court').capturedAtBirth,
+      'a court sits under the captured power').toBe(true);
+    expect(standingOf('Parish church', underCapture, {}, 'court').interested).toBe(true);
+    expect(standingOf('Parish church', underCapture, {}, 'market').capturedAtBirth,
+      'a market keeps its own books').toBe(null);
+    expect(standingOf('Parish church', underCapture, {}, 'market').interested).toBe(false);
     // ⛔ AND A HOLDER IS AN INSTITUTION, NEVER A NAMED PERSON: the reason is the institution
     // table's own hardcoded null, which this table inherits rather than works around.
     expect(HOLDER_KINDS.includes('holderRole'), 'no kind is a person').toBe(false);
