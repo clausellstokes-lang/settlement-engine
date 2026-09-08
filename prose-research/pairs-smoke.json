@@ -1,9 +1,0 @@
-[
- {"id":1,"before":"Nobody left {settlement} in {season}. That is a small fact and, in a year like this one, not a trivial one.","after":"Nobody left {settlement} in {season}. In a year like this one the rolls would have shown it."},
- {"id":4,"before":"About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.","after":"About a dozen households have moved on. The rest took up their work without much comment."},
- {"id":11,"before":"Foreign coin stirs beneath {settlement}'s internal contests again, and the pledge of non-intervention frays at the edges where the coin lands.","after":"Foreign coin is moving under {settlement}'s quarrels again. The pledge of non-intervention frays wherever the coin lands."},
- {"id":14,"before":"Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly.","after":"Faith in {settlement} is not a choice anyone remembers making. {institution} was here, is here, and the town is arranged around it."},
- {"id":17,"before":"The {chain} still runs and no longer runs for the town. {faction} takes its cut at the point everything must pass, and the cut is an arrangement rather than a theft.","after":"The {chain} still runs, and no longer for the town. {faction} takes its cut where everything must pass. It is an arrangement, not a theft."},
- {"id":23,"before":"{settlement} is remote and not isolated: the road is bad and it is kept, and the keeping is somebody's standing decision.","after":"{settlement} is remote, not isolated. The road is bad and it is kept, and somebody decides that every year."},
- {"id":30,"before":"The town is losing people to the road in organized numbers. This is departure rather than decline, and it has a destination.","after":"The town is losing people to the road in organized numbers. They are leaving together, and they are going somewhere."}
-]
