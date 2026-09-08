@@ -1198,3 +1198,272 @@ that rebase: every one of them is a measurement of the composers at THIS tip, an
 reproducing command is named in §8.2 and §8.4.
 
 Seat: Opus 5 — Fable-unvalidated
+
+---
+
+## CAR 9 — THE FOLD'S CURES: 18 code, 42 receipt corrections, 8 U rows — **LANDED** · shas `8c53ddef1` + `454d478a1` · 2026-09-08 00:4x EDT
+
+Seat: Opus 5 — Fable-unvalidated. Dock `$SC/laneINSTR`, **eleven** commits over `3b1c0eaa5`,
+porcelain 0 and zero untracked after both.
+Inputs read whole and in the chair's order: `skeptic-instr/FOLD.md` (242 lines, 60 cures),
+`s12-sitting/SITTING-RULINGS-912.md` **§L**, the three amended specs (Part B §18,
+CLERK-LAWS §2.4.1 and the §1.2 NOTE, MOVE-GRAMMAR §4.4.1), the five lens files where a
+figure needed its source, and § CAR 8 above. **Where the fold's cure and §L differ, §L wins**
+and the difference is named in the row.
+
+### 9.0 THE HEADLINE
+Every one of the eighteen code cures is BUILT and executed — none discharged by citation,
+including cure 18, which the brief allowed to be discharged and which the check refused (below).
+Zero product bytes moved outside the lane's island. The estate's own ratchets caught one more
+debt during the car (four un-anchored negatives) and it is CURED rather than banked. Three
+new mutation plants (#80–#82) make cure 6's arm non-vacuous by execution, and plant #77 is
+executed for the first time (U1).
+
+| | |
+|---|---|
+| focused suites, sixteen files, on the COMMITTED tree | **329 passed (329)**, 18.28 s |
+| the same twelve before the register refreeze | 274 passed (274), 16.37 s |
+| the six lane walkers alone | **138 passed (138)** (car 8's tip: 118) |
+| eslint over every changed file | EXIT 0 |
+| `node scripts/check-full-typecheck.mjs` | `OK — no type regressions (173 error(s), ceiling 173)` |
+| plants executed, restored `cmp`-identical | **4** (#77 U1, #80, #81, #82) |
+| the register that moved | `tests/lint/.lighting-census-baseline.json` — titles 23,717 → 23,730, suiteTitles 6,352 → 6,354, **files and parked unmoved** (car 9 adds no new test FILE); refrozen by its ritual in car **9b** |
+
+### 9.1 THE EIGHTEEN CODE CURES — each with the arm the fold names and its executed tail
+
+| # | cure | arm | executed tail | verdict |
+|---|---|---|---|---|
+| 1 | the office roster takes the union of every role source | the three crier lines carry no C2 office fail; the census row falls | roster **35 → 249**; candidates called absent **25 → 12**; census `C2 · an office the world does not hold` **3 → 0**; the same three lines still fail on the 35-role ground (present-then-absent) | **DONE** |
+| 2 | armC4 and `bandReadings` locate a quantifier by WORD BOUNDARY | probe4's four sentences as fixtures | `"The wall is old, and all souls are counted here."` **NOTE → FAIL** `C4/a totality over an open column`; T3 and T4 likewise | **DONE** |
+| 3 | `harvestExports` reads a top-level bare string as a pool of one | R4b moves 50 → 53 with a `causeWalk.js` row | **53**, by file `heraldIntegrity.js 18 · causeLifecycleVocabulary.js 32 · causeWalk.js 3`; every other register byte-unchanged | **DONE** |
+| 4 | the chronicle's registers are the loader's stamps (R11 letter · R12 quiet) | every chronicle row carries exactly one; every `letter.*` row R11 | **R12 74 · R11 11 = 85**; all 11 R11 rows are letter rows and no non-letter row is R11; the census heading is now `chronicle (R11 · R12)` | **DONE** |
+| 5 | `refuseEmpty` is DRIVEN | a `toThrow` beside the two existing fail-closed cases | exported and driven: a stub module harvests `[]` and the guard throws `/read ZERO rows/`; one prose row and it falls silent | **DONE** |
+| 6 | a column is `closed` only where every source §1.2 names is read | the flag asserted against the source roster; a sibling plant per column | `COLUMN_SOURCES` published, `closed` DERIVED: `whatItCounts` closed (3 of 3 read — the fired income row and `coinFlows.taxed` are now read), `whatItDoes` **open** (1 of 6), `whatItDoesNotDo` **open** (the `on:false` source does not exist on the data), `holderRole.basis` `'inferred'` → **`'absent'`**; plants #80/#81 red 2 and 1 of 17 | **DONE** |
+| 7 | the ruin filter routes through the service COLUMNS | no column value names an institution outside `liveInstitutions` | **23 rows dropped over 30 settlements**, naming `(arcane underground) · (informal) · (lawless) · (smuggling) · (street gang)`; **0 duty-kind**; plant #82 reds 1 of 17 | **DONE** |
+| 8 | `whoIsExempt` gets a WORLD | the column CLOSES on a treaty toll term | one `treatyTerms` row ⇒ values `['toll exemption on the salt road']`, `closed: true`, `nullEverywhere: false`; without it, empty and open — and `whoIsCounted` is unmoved either way | **DONE** |
+| 9 | `SENSORY_NOUNS` is a partition in the PUBLISHED arrays | a count over the five ARRAYS: entries == distinct | **169 / 166 → 166 / 166**, `duplicates []`; `smoke`, `stone`, `mud` struck from their second bucket. **NO FIGURE MOVED**: R1 spread 0.791, 1.198/100w, textured 0.2352 before and after (the resolver already read all three as `sight`) | **DONE** |
+| 10 | `openShare` stops double-subtracting | a plant carrying both channels, share within [0, 1] | **−1 → 0**, `closed: 1`; and a second figure `namedOpenShare` is added because D8's two halves read different channels | **DONE** |
+| 11 | the `@enforced-by` targets | the estate's enforced-by walker, plus an existence check | `plantLedger.js:37` `plantLedger.walker.test.js` (nonexistent) → `proseMeasures.walker.test.js`; `presenceMeasure.js` gains one; both targets asserted to EXIST | **DONE** |
+| 12 | `moveGrammar.js`'s hand-tagged sample path | the path exists | `tests/fixtures/grammarHandTagged.js` → `tests/fixtures/grammarControls.js`, `HAND_TAGGED` | **DONE** |
+| 13 | arm D keyed per (block, pool); gap (a) per pool | two pools of ONE block with different licences resolve differently | same block, same text, two verdicts: the wide pool passes, the narrow pool fails and the finding names `(block, pool)`; the block key remains the fallback. Gap (a) prints register total **103**, pools with any **89 of 132**, pools with MORE THAN ONE **14**, max **2** | **DONE** |
+| 14 | arm E's fail channel · B2's control · BUDGET/SPREAD failable · the walls | each new control reds when its arm is stubbed | arm E FAILS at the register: **298/708 uniform grammar · 407/708 uniform segments · 79/708 repeated opener** against §4.3's 0.30/0.40/0.030 — control 4 reproduced ON THE ARM to the unit; B2 fires once on a 13-of-40 sequence and stays silent on a fair draw; BUDGET driven in all three outcomes (fail/note/silent), SPREAD asserted on CONTENT (two units exceeding the same rules) instead of `Array.isArray`; walls **4, 5, 7, 8, 9** emit NOT-EXECUTABLE rows with what a detector would need; **wall 10 is DETECTED** (§L item 65's condition met — one arm, one control) | **DONE** |
+| 15 | the QUALIFY arm reads a trailing coordinate inside one sentence | `power.generated.js::DS-POW-5::…#2` must WITHHELD or NOTE | `…::autocrat#2` **PASS → WITHHELD** `Q/a trailing coordinate naming no second field`; the class reads **890 of 2,266** R1 variants, report-only | **DONE** |
+| 16 | the two CLERK-LAWS §2.4.1 guard anchors | present-then-absent, as the existing four | **anchor 6 BUILT** on the shipped gendered R6 lines (121 of 1,662 male-pronoun rows; fails on a contradicting gender, silent on the matching one, NOT-EXECUTABLE with none). **ANCHOR 5 REFUSED WITH ITS MEASUREMENT** — see 9.3 | **DONE (5 refused)** |
+| 17 | the anti-vacuity successor plan | a named replacement-anchor procedure and `failing > 4` as a lowerable floor | a three-step procedure in the docblock; `FAILING_FLOOR = 4` named; `armCandidates()` prints live replacement anchors per arm from the corpus itself | **DONE** |
+| 18 | the composed reading with EVERY reading the caller passes | > 1 composer, > 7 blocks, 0 DORMANT draws | **NOT discharged by citation** (see 9.2). Built: **14 composers · 39 blocks · 287 lines** over 3 towns (car 8's probe: 1 composer, 7 blocks, 29 lines); DORMANT draws **3 → 0** with a materialised ledger | **DONE** |
+
+### 9.2 CURE 18 WAS CHECKED AGAINST CAR 8's `firings.mjs` FIRST, AND THE CHECK REFUSED THE DISCHARGE
+The brief allows cure 18 to be DISCHARGED BY CITATION if car 8's probe already composes the
+six-desk 200-town sequence *with the `politics` reading* and *harvests the general desk's bare
+strings*. Read before building: `firings.mjs` composes the six-desk sequence and walks every
+rung for `(blockId, poolKey)` — and it does **neither** of the two named things.
+
+1. Its power-desk call passes `contenders`, `riskLabel` and `structuralLens`. It does **not**
+   pass `politics`, which `PowerTab.jsx:208` does. Omitting it is not "no politics": with no
+   projection `politicsPresencePoolKey(null, …)` returns the literal key
+   `'layer DORMANT (no ledger materialized)'`.
+2. Its `walk()` returns on any node carrying provenance and ignores strings, so
+   `generalDeskLines`' finished sentences were invisible to it. Measured over 3 towns: **85**
+   bare sentences it could not see against **202** rungs it could.
+
+So cure 18 is **BUILT**, twice over: `tests/fixtures/composedReadingSequence.js` (the gate's
+3-town arm) and `$SC/instr-912/reading-sequence-9.mjs` (the 200-town run).
+
+**⭐ AND THE DORMANT LIMB IS A FACT ABOUT THE WORLD, NOT A PROBE ARTEFACT.** A headless
+generated town carries no politics ledger — the layer is written during play — so passing the
+REAL reading on a fresh world still answers DORMANT. The limb is made executable by giving the
+world the ledger it lacks, to `politicsRead`'s own declared shape: **3 draws fresh, 0
+materialised**, present-then-absent.
+
+**THE K.2 FIGURE, RE-MEASURED (§L item 68).** Over **200 towns and six desks**, 13,505
+provenance rungs + 5,542 bare general-desk sentences = **19,047 lines**, 39 of 68 blocks,
+zero desk throws, n = **29** distinct orders:
+
+```
+V1 share 0.8650 (16,475 of 19,047) · run rate 0.7525 (14,332 of 19,046 pairs)
+```
+
+K.2 carried **0.784 / 0.618** from ONE desk over 7 blocks of 68. **The wave's case is not
+weakened by the correction — it is sharpened**: V1 dominates the whole dossier, not just the
+power desk, against a ceiling of `min(1/29 + 0.10, 1.5/29) = 0.0517` at n = 29. Both figures
+are written into **Part B §18** by exact string replacement of `V1 share ____ · run ____` —
+the one spec edit this car is allowed. ⚠ **OWED TO THE CHAIR:** the sentence's trailing
+parenthetical "(blank until measured — a blank is not a number)" is now stale and is left
+untouched, because the brief licensed exactly one string replacement and no more.
+
+### 9.3 REFUSALS (car 9), each with its measurement
+
+1. **ANCHOR 5 OF CLERK-LAWS §2.4.1 CANNOT SERVE, AND THE ROSTER SAYS SO RATHER THAN LOSING
+   IT.** `RECEIPT_POOLS_DOSSIER_STATE.md:2247` is the `[counterforce]` turtling row under an
+   `economicBase: extraction` header (SITTING A5). Executed against every value of the
+   provenance flag (`true`, `false`, unsupplied): it fires **no arm of this walker at all**.
+   Its defect is a pool-key SCOPE fault — a military-doctrine sentence under an economic-base
+   key (R-DA-19) — and this walker carries no scope arm. **So the C3 class is anchored where
+   it actually lives, and the "zero C3 findings over 3,132 entries" is EXPLAINED rather than
+   left as a suspicion:** the corpus walk supplies no per-block `eventProvenance` flag, so
+   C3's lexical half declares itself NOT-EXECUTABLE on every candidate. Supply the flag and
+   the SAME shipped entries fail — **44 of them, the same 44** the flagless walk reports
+   not-executable — with a present-then-absent control on one of them. The arm is not dark;
+   it was never given its field.
+2. **THE PER-TAB MEASURE IS STILL NOT TAKEN** (Part B §13.2). §L item 71 ratifies the
+   per-REGISTER proxy for the shipped corpus and charters the tab-level form for the kernel
+   lane; no tab is composed headless today, so this car does not build it.
+3. **NINE OF THE FOURTEEN EXEMPLAR FINGERPRINTS CARRY `presence: null`** and the reason, never
+   a fabricated number. The raw texts of dnd-flavor, dnd-rules-srd52, dnd-rules,
+   martin-chronicle, martin-narrative, martin, tolkien-all, tolkien-elevated and tolkien-plain
+   point into the dead scratchpad `d5b9a39f`; **5 are measured** (all Le Guin). Of the TEN
+   LEAF registers, three survive and **seven are gone** — exactly the program's standing row.
+4. **THE THREE PRESENCE KEYS SIT BESIDE `metrics`, NEVER INSIDE IT.** `RATE_METRICS` is the
+   denominator of the owner's BUDGET; moving the three in would take 21 to 24 and silently
+   re-base every BUDGET share the chair measured. `RATE_METRICS.length` is asserted at 21.
+5. **THE CO-OCCURRENCE FLOOR IS STILL THE CHAIR'S** (car 8's refusal 4, unchanged). This car
+   adds no default.
+6. **U6 IS NOT EXECUTED, BY THE LANE'S OWN MEASUREMENT DISCIPLINE.** The brief forbids the
+   whole suite; the fold itself says to run it on the MERGED tree after H3's refreeze. It is
+   declared, not skipped — see 9.5.
+
+### 9.4 THE PLANTS — executed, restored, `cmp`-verified
+Three new standing plants (**#80, #81, #82**) close cure 6's non-vacuity, each with its own
+`meta:` manifest entry (the file's own slot is spent on #77, and the manifest allows one label
+per entry — the idiom the manifest's `_doc` names). Manifest edited **by text** in the dock's
+current serialization: **15 insertions, 0 deletions**, meta 12 → 15, invariants unchanged at
+667.
+
+```
+#80 whatItDoes closed by hand over sourcesAllRead()     => 2 red of 17; restored cmp-identical
+#81 the fired income row stops being read, declaration standing
+                                                        => 1 red of 17 (the positive twin)
+#82 the ruin filter leaves the service COLUMNS          => 1 red of 17
+U1  #77 (car 4's own plant, executed for the FIRST time)
+    persons column closes                               => 4 red of 17; restored cmp-identical
+```
+`md5` before and after every plant identical (`a1670cfbb22b894e2e051d60992ff2aa`), `cmp`
+byte-identical, `git status --porcelain` on the target clean after each restore. ⚠ **A HAZARD
+LEARNED HERE:** a comment appended to the `closed: false,` line of `whoIsCounted` silently
+broke plant #77's perl target. The comment was moved ABOVE the line and the module now says in
+writing why that line's bytes are exact.
+
+### 9.5 THE U ROWS — every one dispositioned
+
+| # | row | disposition |
+|---|---|---|
+| **U1** | plant #77's red | **EXECUTED.** Applied verbatim from the sweep under gate-proof's protocol: **4 red of 17**, `whoIsCounted is OPEN on every tier` by name; restored `cmp`-identical. ⚠ R19 stands: the red proves the ARM, not the comment's consequence — and U8 now measures that consequence directly |
+| **U2** | §4.2's duty integers over "twelve settlements" | **RE-TAKEN ON NAMED SEEDS** and the module's docblock corrected. Seeds `estate-<tier>-0…4` over six tiers (30 settlements): **1,678 instantiated service rows · 1,655 naming a live institution or none · 32 duty-kind · `settlement.services` 0.** The un-named 702 / 697 / 19 and "0 over 20 settlements" are withdrawn |
+| **U3** | R5's "PROBE_ALL deduplicates sentences" | **EXECUTED, AND IT REFUTES THE STATED CAUSE.** The loader reads **374 authored lines, all 374 distinct**, holding **397 sentences, all 397 distinct**. There is nothing to deduplicate on EITHER unit, so PROBE_ALL's 373 does not follow from this corpus by dedup. The receipt's explanation is withdrawn and the disagreement is carried UNRESOLVED (correction 32b) |
+| **U4** | whether PROBE_ALL excludes the three bare strings | **SETTLED BEFORE CURE 3 LANDED.** The loader's 50 came entirely from `heraldIntegrity.js` (18) and `causeLifecycleVocabulary.js` (32); `causeWalk.js` contributed **zero**. PROBE_ALL's R4b file set names a FOURTH file, `heraldCausalVoice.js`, which this loader never reads. The two 50s were an agreement between different rosters, and the three strings appear nowhere in PROBE_ALL. Cure 3 lands and the exact-reproduction claim is withdrawn as a stated one-time shift |
+| **U5** | K.2's tagged/untagged split for arm A | **BUILT AND EXECUTED.** `TAGGED_POOL` — four variants, one `grammar:` tag, ceilings supplied: arm A reads the TAG (histogram `[['V1', 4]]`, share 1.0, one FAIL at n = 4) while the classifier reads MORE THAN ONE order over the same texts, so the test can tell which one the arm used. On the shipped corpus the tagged half is empty and arm A is NOT-EXECUTABLE — report-only, as §L 67 rules |
+| **U6** | the whole `tests/lint` suite before and after | **UNTESTED, DECLARED.** The lane's measurement discipline forbids the whole suite and the fold prescribes running it on the MERGED tree after H3's refreeze, with the split-pattern runner count at 0, expecting exactly the one DOOR 3 red under contention. Twelve focused files are green here (274/274) |
+| **U7** | whether curing an anchor reds the guard | **EXECUTED, AND IT PARTLY CORRECTS THE PREDICTION.** `newsVoice.js:97` cured on the dock (`every household` → `the households`): **2 red of 24**, both by the named message `the breach text is no longer in the corpus: src/domain/display/newsVoice.js:97`. The census bound **does NOT red**: `failing` goes 251 → 250 against `FAILING_FLOOR = 4`. So the "named message" half is confirmed and the "`failing > 4` red" half is a wave-scale prediction, not a one-anchor one. Restored `cmp`-identical (`4b49837d912883c9b48a5007a5f116d8`) |
+| **U8** | whether the over-licence reaches a SENTENCE | **EXECUTED, AND THE ANSWER IS ZERO.** The corpus walked twice against the derived table — once with the three columns closed as car 4 shipped them, once with them open as car 9 cures them: **159 entries fail on both, and ZERO verdicts flip.** R18's law violation is REAL in the module and LATENT in effect at this tip; cure 6 therefore changes no corpus verdict, which is stated here rather than left to be discovered |
+
+### 9.6 THE PROOFS
+```
+$ npx vitest run <the six lane walkers>
+  Test Files  6 passed (6) · Tests 138 passed (138)
+$ npx vitest run <those six + mutationCoverageManifest + tuningRegister + domainAnyCastBaseline
+                  + negativeAssertionAnchor + contractTestAntiVacuity + proseFamilyContract>
+  Test Files  12 passed (12) · Tests 274 passed (274)   Duration 16.37 s
+$ npx vitest run tests/lint/domainStrictBaseline.test.js tests/lint/domainStrictFailClosed.test.js \
+      tests/lint/sizeBaseline.test.js
+  (green, inside the 9-file ratchet run: Test Files 9 passed · Tests 157 passed)
+$ npx eslint src/domain/prose/ src/domain/institutions/institutionTable.js <the five lane walkers> \
+      tests/helpers/dossierCorpus.js tests/fixtures/grammarControls.js \
+      tests/fixtures/composedReadingSequence.js ; echo EXIT=$?
+EXIT=0
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node reading-sequence-9.mjs 200
+  towns 200 of 200 · desk throws none · composers 14 · LINES 19047 · blocks 39 of 68
+  V1 share 0.8650 · run rate 0.7525 · n = 29
+```
+Pre-run gate before EVERY vitest invocation, in its own shell call (car 8's hazard respected):
+`ls $SC/HOLD-VITEST` absent; split-pattern runner count **0**.
+
+**⭐ THE ESTATE'S RATCHETS CAUGHT ONE MORE DEBT, AND IT IS CURED.**
+`negativeAssertionAnchor.walker.test.js` found **four** un-anchored negatives introduced by
+this car (institutionTable :207; proseEntryContradiction :195, :441; proseMoveGrammar :300).
+Three were rewritten as real `expectPresentThenAbsent` pairs and one carries a one-line
+anchored marker with a live pin beside it. Nine ratchets green: 157 passed (157).
+
+### 9.7 THE PROMISE — held
+No product surface, composer, pool text, persisted shape or seed input moved. The two new
+modules-worth of behaviour live inside the same island: `src/domain/prose/*`,
+`src/domain/institutions/institutionTable.js`, the lane's `tests/lint` walkers and
+`tests/fixtures/composedReadingSequence.js`. The materialised politics ledger is a FIXTURE
+built to `politicsRead`'s declared shape and reaches no generator. The exemplar fingerprints
+under `$SC/prose-research/primary/` gain DERIVED NUMBERS ONLY — no passage is stored, and the
+five re-runs are byte-preserving additions (the head of each file is `cmp`-identical).
+
+### 9.8 WHAT A SUCCESSOR CONTINUES FROM
+Dock tip = car 9b (`454d478a1`), porcelain 0, zero untracked, eleven commits over
+`3b1c0eaa5`; the PRODUCT tip has since moved to `f3ab08f51` in another dock and **the rebase
+is the chair's** (FOLD §4 H1–H7), not this lane's. The fold's
+sixty cures are discharged: **18 code (built, none by citation) · 42 receipt (below) · 12 spec
+(the chair's §L, with the ONE Part B blank filled)**. Owed and named: U6 on the merged tree;
+the per-tab presence measure (kernel lane); the seven lost raw exemplar texts (the owner's);
+the co-occurrence floor (the chair's); Part B §18's stale trailing parenthetical.
+
+---
+
+## CAR 9 — CORRECTIONS TO CARS 1–8
+
+Forty-two rows, items 19–60 of FOLD §3b. **Nothing above is edited in place**; each row
+strikes its sentence by reference and states the measured one. A row's figure is the
+executed figure, not the fold's, wherever the two differ and this car re-took it.
+
+| # | section | the superseded sentence | the measured sentence | cure |
+|---|---|---|---|---|
+| 19 | §1.2 | fixture (a) is "§2.4(a) exactly" | §2.4(a) names ONE office fail (the bailiff); the walker returns **two** (bailiff, priest), which an empty office column entails. Drop "exactly". ⭐ Cure 1 does not change this: `TABLE_EMPTY`'s office column is `[]` by construction, so the roster union reaches the corpus census and not this fixture | P1 |
+| 20 | §1.4 | "three crier lines are new C2 breaches"; the census row `3 C2 · an office the world does not hold` | **3 false positives, 0 true.** `historyData.js:119` carries `{role:'Reeve', title:'overseer'}`; `roleCategory.js:34` carries `reeve`. The 35-role ground called **25 of 37** candidates absent; the union calls **12**. The census row is **0** at this tip. ⚠ **SITTING K.6's "the live breaches are SEVEN" loses its three crier lines and returns to A6's FOUR** — an owner-facing row, carried to §11 | R1 |
+| 21 | §1.5 | "the walker gates the instrument, never the corpus" | it gates the corpus's **dirtiness**, through three verbatim breach texts, `failing > FAILING_FLOOR` and `failing < corpus.length / 4` | P2 |
+| 22 | §1.6 | (the C5 limbs, listed) | the C5 **quantifier** limb is ABSENT and now declared: `typedFactsOf` computes `quantifiers` and nothing compares them — not `armC5`, not the C-sibling (which reads `bands` only) | P3 |
+| 23 | §1.6 | (the refusals, listed) | the QUALIFY omission is declared **and cured**: no Q assertion existed in the gate file, and `armQualify` returned early on a one-sentence variant. Cure 15 reads the trailing coordinate; the class now reads 890 of 2,266 R1 variants | R2 |
+| 24 | §1.9 | the modules are "imported today only by a test" | drifted at the tip: `grammarWalker.js:45-46` imports `entryWalker.js` and `entryLexicons.js`. **No product path imports either, so THE PROMISE claim survives intact**; the sentence does not | P4 |
+| 25 | §2.8 | the printed `fails by arm` list includes `A` | it never did at the tip. At the CAR 9 tip the walk prints **`D, F1, F10, F2, F3, F6, G/FEELING, G/FIGURE, G/FORECAST, G/MEANING`** — ten arms, no `A` (arm A is report-only until the wave applies tags), with `F10` new and `E/spread` joining it whenever spread ceilings are supplied | R6 |
+| 26 | §2.5 | "a composed dossier reading, 200 towns, through the SHIPPED composers" | that reading executed **29 lines, 29 of 29 from `powerStateProse`, 7 blocks of 68, 0 from the general desk**. V1 78.4 % / run 0.618 is a **POWER-DESK** figure. Three limits, all now closed by cure 18: the general desk's bare strings were unharvestable, `politics` was omitted, and the general desk was called with `{seed, audience}` only. **DS-POW-7 drew the absence pool in 3 of 3 towns**, the same key on every seed. The corrected sequence reads **14 composers · 39 blocks · 19,047 lines · V1 0.8650 · run 0.7525** | R7, 2c |
+| 27 | §2.6 | the per-paragraph refinement "reproduces the sitting exactly" | every figure reproduces; the WORD does not. SITTING §I reports median **3.5** and the script prints **4** (`ns[floor(n/2)]`, an upper median); the sitting's 0.52 is the **p90 of pooled exceedance depths** and the script's the **median of per-record MAX depths**; ten records carry **40** exceedances, the sitting says 41. Drop "exactly" | P6 |
+| 28 | §2.9 | "every arm carries a control that can fail — four limbs" | four limbs were false and all four are cured. (i) armE had **no fail channel** — `armESpread` adds it and control 4 now reds ON THE ARM at 298/708 · 407/708 · 79/708. (ii) armB2's only control asserted SILENCE and was unreachable below n > 20 — the threshold is the chance floor, as the chair worded it, and a firing control ships. (iii) BUDGET asserted `scored > 10` and SPREAD `Array.isArray` (an empty array passes) — both now assert content, BUDGET in all three outcomes. (iv) arm F implemented **4 of 10** walls — wall 10 is DETECTED and walls 4, 5, 7, 8, 9 emit NOT-EXECUTABLE rows naming what a detector would need | R8 |
+| 29 | §2.9 | arm D is "keyed on (block, pool) as gap (e) requires" | it read `composedFill.get(String(entry.block))` — **block only** — and gap (a) was a register total, not SITTING §J's per-POOL count. Both are cured: arm D keys `(block, pool)` first with the block as a declared fallback, and gap (a) prints per-pool counts (register total 103, pools with any 89 of 132, pools with more than one 14, max 2, over the first 400 variants) | R9 |
+| 30 | §2.9 / refusal 6 | "the classifier reports and does not gate" | three qualifications, and one is now a design rather than an accident: (i) `classifyMoves` feeds a FAIL channel through **arm F** (F1 and F3 are computed from the move sequence), (ii) arm A gated the moment ANY caller supplied `ceilings`, with no tagged/untagged split, and (iii) three assertions turn on classifier output. Cure 14/§L 67 splits the arm: the TAG gates, the classifier reports | P5 |
+| 31 | §3.2 | the R9 singleton-pools cell is a dash | the walker prints an integer every run; the cell is **190**. Re-measured at this tip: R9 rows 805 · pools 196 · distinct 770 · **singleton pools 190** | R10 |
+| 32 | §3.2 | R7's disagreement is caused by "roster (5 of 6 files) **and** predicate" | reading one file FEWER cannot RAISE a count; only the looser predicate explains 2,254 > 2,169. R9's row separately gains the (harmless) omission of `src/copy/support.js`, which exports only `SUPPORT_EMAIL` and `supportMailto()` | R11, P8 |
+| 32b | §3.2 | R5 differs from PROBE_ALL because "PROBE_ALL counts DEDUPLICATED SENTENCES" | **the stated cause is refuted by measurement (U3).** The loader reads 374 authored lines, **all 374 distinct**, holding 397 sentences, **all 397 distinct** — nothing to deduplicate on either unit, so 373 does not follow from this corpus by dedup. The disagreement is real and its cause is UNRESOLVED | U3 |
+| 33 | §3.4 | "each control MUST fire, and each does" | `refuseEmpty` had twelve hits — every call site plus the definition — and **no test in the estate drove it**. Withdrawn as written and CURED: it is exported and driven, throwing on an empty harvest and silent on one prose row | R12 |
+| 34 | §3.5 / refusal 15 | "the chronicle's register label is CORRECTED to R12 … R11 is not loaded" | **withdrawn.** The loader stamps `R11` at `dossierCorpus.js:646/:650/:656` and **11 of the 85 rows carry it** — every one a letter row. §L rules both are the chronicle's registers (R11 the letter, R12 the quiet pool); the census heading is now `chronicle (R11 · R12)` and an arm asserts every row carries exactly one | R13 |
+| 35 | §4.2 / refusal 16 | the `availableServices` finding is "a spec correction" | it is a **field-resolution** finding and **no chair ratification is owed**: CLERK-LAWS §1.2 never names `settlement.services` — its cell reads "the settlement's INSTANTIATED services" and names the menu file. The measurement itself stands | P9 |
+| 36 | §4.2 | 702 / 697 / 19 over "twelve settlements"; "0 over 20 settlements across four tiers" | **withdrawn and RE-TAKEN on named seeds** (`estate-<tier>-0…4`, six tiers, 30 settlements): **1,678 service rows · 1,655 on a live institution or none · 32 duty-kind · `settlement.services` 0**. The module's docblock carries the named figures and the reproducing command | U2 |
+| 37 | §4.3 | the `whoIsExempt` scan is "asserted in the test, not assumed" | **withdrawn for that half.** `nullEverywhere` is `tollExemptions.length === 0`, `tollExemptions` comes only from `world.treatyTerms`, and the test's world was `{bandOf}` alone — so it held for ANY settlement, including one carrying a live exemption. Cure 8 gives the arm a world and a positive twin | R17 |
+| 38 | §4.4 | the column census (six figures) | **re-taken from the shipped gate, twice.** At the pre-cure tip: hamlet live **19** (not 17) · hamlet `whatItCounts` **1** `Record keeping` (not 0) · hamlet `whatItDoes` **23** (not 18) · hamlet `whoIsCounted` **"several hundred"** (not "a hundred or so") · town live **57** (not 55) with `Register of the dead · Tax collection · Toll collection` · city live **48** (not 42) with `Custom commissions` · provenance one value `PRE_SEED`. At the CAR 9 tip, after cures 6 and 7: the same live counts, `whatItDoes` **open**, `whatItDoesNotDo` **open**, and `whatItCounts` widened by the fired income rows — hamlet **1**, town **6** (`Church Tithes · Gate Tolls · Market Taxes · Register of the dead · Tax collection · Toll collection`), city **3** (`Custom commissions · Gate Tolls · Market Taxes`) | R14 |
+| 39 | §4.4 | "a hamlet's duty column is empty, so no count-duty sentence is licensed on a small settlement" | **WITHDRAWN.** At seed `census-hamlet` the hamlet holds `Record keeping`. The design finding the wave would have been priced from is false | R15 |
+| 40 | §4.5 | the duty vocabulary falls 10 → 9, with the nine listed | measured **12 → 11** over the 30 named seeds. Exactly ONE instantiated row is removed by dropping the bare `custom` stem — **`Custom enchanting`** (the "thirteen craft services" is a MENU figure and is not re-taken here). The list of eleven restores `Custom commission` and — materially — **`Tithe and dues`**, the one duty CLERK-LAWS §1.4's Brackwater walk turns on: `Central register · Custom commission · Custom commissions · Customs bypass · Record keeping · Register of the dead · Road register · Tax collection · Tax payment · Tithe and dues · Toll collection`. Residual LATENT admissions confirmed: `Customs brokerage` and `Public record access` both match the shipped predicate and are instantiated on none of the 30 | R16 |
+| 41 | §4.6 | the no-writer fence | not vacuous — but the regex `/settlement\.\w+\s*=[^=]/` catches only a variable **literally named `settlement`**, so a writer through any other binding passes. Declared | P10 |
+| 42 | §4.8 | "the seam is one argument still to be threaded" | **no wire exists at all**: `settlementGround` has zero callers, `entryGround` names `institutionTable` in a COMMENT only (line 32), and the corpus walk uses hand-built `estateGround` columns. ⭐ U8 threads it for the first time, in a probe, to answer the question the seam was blocking | P12, R19 |
+| 43 | §4.7 / §4.4 | (the ruin filter, undeclared for the columns) | the ruin filter was routed for the ROWS and not for the service COLUMNS: **23 rows over 30 settlements** named an institution outside the live roster, **0 duty-kind** (latent), and `census-city`'s `whatItDoes` carried `Arcane services (illicit)`. Cured by cure 7 and covered by plant #82 | P11 |
+| 44 | §5.1 | "177 nouns in five buckets, each noun in exactly one — the spread figure is a partition" | measured **169 entries / 166 distinct**: `smoke` (sight + smell), `stone` and `mud` (sight + touch) were published twice. The resolver already read all three as `sight`, so **no figure was ever double-counted** — but the published list said one thing and the resolver did another, and the gate's partition assertion iterated the RESOLVER and could not fail. Now **166 / 166** with a failable audit. **SENSITIVITY RECORDED:** the OPPOSITE assignment moves R1's spread **0.791 → 0.848 bits**, and *sight* — the bucket the §5.1 finding indicts — absorbs all three | R20 |
+| 45 | §5.1 | "R1 24 % textured against leguin-fiction's 56 %" | a **unit artefact**, and the sign flips at a matched unit. R1's unit is one variant (**2,266 units, 20.6 words**); leguin-fiction's is a paragraph (**16 units, 177.0 words**). Re-chunked to the exemplar's own grain R1 reads **79.3 % (261 units, 179.2 words) against 56.25 %** — the opposite direction. Lines 1 and 3 are **unit-invariant** (1.198 per 100 w and 0.791 bits at every chunking), so the headline survives on 1 and 3 and fails on 2 | R21 |
+| 46 | §2.11 / §5.1 | the presence measure "extends `proseFingerprint.js` with three keys and the fourteen are re-run" | it did neither at the time: the keys lived in a separate module and **0 of 14** fingerprint files carried them. **Now cured** (§L 71): the three keys join `proseFingerprint.js` BESIDE `metrics`, and the fingerprints are re-run **where raw text exists — 5 measured, 9 `null` with the reason**. Added to §10 as a refusal that WAS undeclared | R22 |
+| 47 | §5.1 | Part B §13.2's unit and device set, as stated | proxied, and now declared: line 1 says "per hundred words of the rendered TAB" and line 2 "the share of a TAB's paragraphs", while the walker measures per REGISTER over authored variant pools — **no tab is measured anywhere**. Line 2's device set ("an OBJECT move, a named civic thing resolving to a field, or a comparison as a measurement") is implemented as lexicon-noun-present OR comparison-regex, with **no field resolution**, so line 2 collapses into a near-duplicate of line 1. §L 71 ratifies the per-register proxy and charters the tab form for the kernel lane | P13 |
+| 48 | §5.2 / refusal 19 | "59 is an upper bound on the authoring wave's opportunity" | **WITHDRAWN** (§L 70). It is a count of fields the six composers already read but do not word: distinct held **59**, distinct rendered **8** (`settlement.name` supplies 6 of the 13), and it is per FILE (six rows), not per (block, pool). A generated town carries **41 top-level settlement keys** and the six composers name **9**, so **32 are named by no composer** and are invisible to the scan by construction. The wave sizes from car 8's tier table — **MISSING 58 · THIN 483 · COVERED 225** — and §912.1's condition one is discharged by those tiers. "A key-only fact is not dark" stands and is a good correction | R23, P14 |
+| 49 | §5.3 / refusal 20 / §9 | "A12's 20 is measured as 22 — corrected" | **the CORRECTION is withdrawn; both numbers stand** (§L 69). A12's own measure — the slots the VARIANTS carry — reproduces **exactly 20** at this tip; the lane measured a different quantity (blocks whose composer BAG offers settlement alone) and read **22**; car 8 measured a third (blocks whose every pool names only `{settlement}`) and read **19**. The 20-set and the 22-set overlap in **11**: 9 A12-only, 11 lane-only, and **four of A12's twenty were silently dropped** into the lane's "no bag at all" set. Three questions, three right answers; the wave sizes from car 8's tier table, never from one of the three | R24 |
+| 50 | §9 | `UNMOUNTED_BLOCKS` is "an orthogonal, hand-kept registry" | hand-kept but **not orthogonal**: it lives in the composers' own directory (`src/domain/display/stateProse/dossierMounts.js`) and its docblock says each desk car strikes its blocks as it mounts them, so the 15/15 agreement is close to definitional | P15 |
+| 51 | §5.3 | "at n = 1 arm A is not-executable by construction" | a design INTENTION, not a construction: `armA(orders, unit, admissible, shape)` takes `admissible` as an argument, so n ≤ 2 returns not-executable only if the caller passes the licensed-member count — and arm A's own corpus walk counted **180 realised orders** | P16 |
+| 52 | §6.2 | "a constant open share of 1.00 is exactly the condition D8's walker is designed to fail on" | **WITHDRAWN.** `walkPlantLedger` had **no open-share arm in either direction**; `openShare` was computed at `plantLedger.js:124` and read by nothing; an executed control at open share 0 returned `fails [] · notExec []` and the shipped test asserted that silence as lawful; and the "does not vary across seeds" limb was implemented nowhere — the walker saw one ledger. **CURED** (§L 72(i)): a FAIL arm behind a class-existence guard, and `walkPlantLedgersAcrossSeeds` for the cross-seed limb, both proved on fixtures in both directions | R25 |
+| 53 | §6.2 | the report-only behaviour is licensed by D8's own clause | the behaviour is licensed; the CITATION is wrong twice. SITTING §K.9 **postdates the receipt** and is a ruling *on* it, so it cannot be its independent authority; and Part B §5 D8's Statement carries **no "only once the class exists" proviso** — that sentence is the BRIEF's. §L 72(i) AMENDS D8 in the chair's own words, and the amendment is now CODE | P17 |
+| 54 | §6.1 | (the ledger's figures) | `openShare` **double-subtracted** a plant carrying both an answer and a gap-reason: executed, one such plant measured **−1**, outside [0, 1], which any future arm would have read as a rate. And `plantLedger.js:37` declared `@enforced-by tests/lint/plantLedger.walker.test.js`, **which does not exist**; `presenceMeasure.js` carried none at all. All three cured | 2c |
+| 55 | §7.1 | the six reds are "all four Brackwater tables and the anti-vacuity guard" | loose by one: the six are tables **(a)**, **(b)**, **(d)**, the fixture-discrimination test and the **two** anti-vacuity tests. Table **(c)** stays green **correctly** — its persons column is closed and its expected result is already zero quantifier fails. The "6 of 19" is exact | P18 |
+| 56 | §7.1 / car 7 item 6 | the manifest change is "five added entries" | semantically true and materially incomplete. `invariants` moved **661 → 666**, added exactly 5, removed 0, changed 0 — but the diff moved **5,306 lines on a 2,666-line file**, and the other **5,286 are a pure re-serialization**: indent 2 → 1 space (every other JSON under `scripts/` is 2-space) and `invariants` insertion order → alphabetical. **Undeclared, and not a tool's doing** — no writer for the file exists anywhere in `scripts/`, `tests/`, `src/` or `package.json`. ⭐ Car 9 edits the file **BY TEXT in the dock's current serialization**: 15 insertions, 0 deletions, no re-serialization. (The invariant count reads **667** at the car-8 tip, 666 + car 8's own entry) | P19 |
+| 57 | §8.1 | `vitest.config.js:904` carries `testTimeout: 20000` | the value and the line are exact; **the file does not exist**. It is **`vite.config.js:904`** | P20 |
+| 58 | §8.1 | the arm is "17.76 s in isolation, 89 % of its own ceiling" | **WITHDRAWN.** Two isolation runs on a clean gate measured **3.80 s / 3.79 s** for the whole file, 34/34 green; DOOR 3 costs **2,928 ms ≈ 14.6 %** of the per-test 20,000 ms ceiling. Two compounded errors: `testTimeout` is PER TEST, so a whole-file duration is a category error, and the file figure does not reproduce. The **disposition survives on the attribution arithmetic** (5/2548 = 0.196 %; 21,558 − 42 = 21,516 ms, still over), and the observed 21.5 s implies **~7× contention**, not a hair-trigger arm | R27 |
+| 59 | §10 | (the refusal list, as it stood) | **six refusals added**, each undeclared before: the owner's wiring addendum was neither built nor refused (discharged by car 8); no per-tab measurement is taken; the two CLERK-LAWS §2.4 guard anchors were unasserted (anchor 6 now built, anchor 5 refused with its measurement — 9.3); three columns shipped `closed: true` on partial fills with two of them naming an unread source; R4b under-read three bare-string exports; and the §912.1 census is per FILE rather than per (block, pool). ⭐ Car 9 adds a seventh: **the C3-lexical class reports zero over 3,132 entries because the corpus walk supplies no `eventProvenance` flag** — 44 entries fail the moment it is supplied | R18, R22, R26, R28, 2c |
+| 60 | §11 | (the OWED table, as it stood) | **added:** the owner's wiring census (discharged, car 8) · the anti-vacuity successor plan (discharged, cure 17) · the R11/R12 label ruling (discharged, §L) · the four SITTING re-puts **K.2** (re-measured: 0.8650 / 0.7525), **K.5** (the correction withdrawn; three questions, three answers), **K.8** (withdrawn; the tier table replaces it) and **K.9** (the citation corrected; D8 amended in code). ⭐ **STILL OWED, and new from this car:** (a) **SITTING K.6's "the live breaches are SEVEN" returns to FOUR** — the three crier `reeve` lines are false positives (row 20); (b) U6 on the merged tree; (c) the per-tab presence measure (kernel lane); (d) the seven lost raw exemplar texts (the owner's, on cost and IP); (e) the co-occurrence floor (the chair's); (f) Part B §18's stale trailing parenthetical after the blanks were filled; (g) R5's 374-vs-373 disagreement, whose stated cause is refuted and whose real cause is unknown | §5 of the fold |
+
+**FENCES OBSERVED (car 9).** Changed only: `src/domain/prose/*` (six modules),
+`src/domain/institutions/institutionTable.js`, `tests/helpers/dossierCorpus.js`, the lane's
+five `tests/lint/*.walker.test.js`, `tests/fixtures/grammarControls.js`,
+`tests/fixtures/composedReadingSequence.js` (new), `scripts/mutation-sweep.sh`,
+`scripts/mutation-coverage-manifest.json` (by text), the ONE Part B blank, the five
+`$SC/prose-research/primary/*.fingerprint.json` re-runs, and this receipt. No `--write` on
+writer-reach or the OSR. No product surface, composer, pool text, persisted shape or seed
+input. `git stash`, `git add -A/-u/.`, rebase, amend and push: none.
+
+Seat: Opus 5 — Fable-unvalidated
