@@ -190,6 +190,10 @@
       "pinNote": "⛔ THE ONE REGISTER ENTRY CARRIED BY ARGUMENT RATHER THAN BY A PIN, UNTIL SEAM CAR 5c (the seam fold; SITTING §R cure 4). The argument above is sound and the skeptic could not refute it — but nothing RED if a later car started emitting `seat` on a spine, because the recompute loop walked `mechanisms` only. The pin below is the promotion trigger made executable: the day the count leaves zero, this row must be moved to `mechanisms` with its door and its shift class, and the register says so before the car does.",
       "pin": [
         { "kind": "integer", "over": "pools carrying a seat key", "value": 0 }
+      ],
+      "reserved": [
+        { "key": "seatReason", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:519", "shippedOn": 0, "readBy": "(no module)", "why": "the resolver's closed-vocabulary reason for a SENTENCE seat, emitted on a modifier only and therefore on no shipped pool. It is a diagnostic for the WAVE, not an input: naming it RESERVED here closes the chair's `a reader or named reserved` rule, and the projection contract's stray-key arm reads THIS LIST, so a car that started shipping it on a spine reds by name." },
+        { "key": "seatRow", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:520", "shippedOn": 0, "readBy": "(no module)", "why": "the relation row ids that licensed a CLAUSE seat, emitted on a modifier only and therefore on no shipped pool. Same disposition as `seatReason`: a WAVE diagnostic, reserved rather than read, and held at zero by the stray-key arm." }
       ]
     }
   ]

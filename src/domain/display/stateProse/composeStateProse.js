@@ -96,8 +96,13 @@ import {
  * @property {'addition'|'consequence'|'tension'|'contrast'} [relation] the DECLARED relation
  * @property {'sentence'|'clause'} [seat] modifier only — the seat the LICENCE resolved at
  *   projection; absent is the sentence
- * @property {string} [seatReason] why a sentence, from the resolver's closed vocabulary
- * @property {ReadonlyArray<string>} [seatRow] the relation row ids that licensed a clause
+ * @property {string} [seatReason] RESERVED — why a sentence, from the resolver's closed
+ *   vocabulary. Emitted on a MODIFIER only, so it ships on no pool, and READ BY NO MODULE:
+ *   it is a WAVE diagnostic, named RESERVED on the SHIFT REGISTER beside `seat` (SEAM car 5c,
+ *   SITTING §R cure 5) so that the chair's `a reader or a named reserved` rule has no gap. The
+ *   projection contract's stray-key arm reads that list and holds it at zero shipped pools.
+ * @property {ReadonlyArray<string>} [seatRow] RESERVED — the relation row ids that licensed a
+ *   clause. Same disposition as `seatReason`: modifier-only, unread, reserved, held at zero.
  * @property {number} [readsCount] how many fields the pool's SELECTING BRANCH evaluates, read
  *   from the census; absent where the census recovered no reading
  * @property {'fragment'|'sentence'} [form]

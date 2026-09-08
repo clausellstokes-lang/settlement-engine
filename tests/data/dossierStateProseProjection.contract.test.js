@@ -898,7 +898,21 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     expect([...roles]).toEqual(['spine']);
     expect(META_ROWS.filter((r) => r.meta.attach.length > 0)).toEqual([]);
     // A spine carries no modifier-only or turn-only field, by construction and by assertion.
-    const stray = META_ROWS.filter((r) => ['relation', 'form', 'move', 'explains', 'spines', 'covers']
+    // ⭐ AND THE RESERVED KEYS ARE READ FROM THE REGISTER, NOT RETYPED HERE (SEAM car 5c,
+    // SITTING §R cure 5). `seatReason` and `seatRow` are emitted on a modifier only, ship on
+    // 0 pools and are read by NO module — the one gap in the chair's `a reader or a named
+    // reserved` rule. Naming them on the register closes it, and this arm is what makes the
+    // naming load-bearing: the list is the register's, so a key added there is held here
+    // without a test edit, and a key REMOVED there stops being held, which the floor below
+    // refuses to let happen silently.
+    const RESERVED = SHIFT_REGISTER.notMechanisms.flatMap((n) => (n.reserved || []).map((r) => r.key));
+    expect(RESERVED.sort(), 'the register must still name the reserved keys').toEqual(['seatReason', 'seatRow']);
+    for (const row of SHIFT_REGISTER.notMechanisms.flatMap((n) => n.reserved || [])) {
+      expect(row.readBy, `${row.key} is reserved because nothing reads it; give it a reader or keep it reserved`).toBe('(no module)');
+      expect(typeof row.why, `${row.key} must say why`).toBe('string');
+      expect(row.shippedOn, `${row.key} is reserved, so it ships on no pool`).toBe(0);
+    }
+    const stray = META_ROWS.filter((r) => ['relation', 'form', 'move', 'explains', 'spines', 'covers', ...RESERVED]
       .some((k) => r.meta[k] !== undefined))
       .map((r) => `${r.id} :: ${r.pool}`);
     expect(stray).toEqual([]);
