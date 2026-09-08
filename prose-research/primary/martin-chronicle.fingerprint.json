@@ -141,5 +141,7 @@
     ],
     "sameOpenerAsPreviousRate": 0.0334
   },
-  "runsOfThreeSameLengthBand": 0.2839
+  "runsOfThreeSameLengthBand": 0.2839,
+  "presence": null,
+  "presenceReason": "the raw exemplar text is GONE from this machine — the `files` array points into the dead scratchpad d5b9a39f and 1 of 1 basename(s) do not resolve under primary/raw. Re-obtaining the text is an owner act (cost and IP); the three §13.2 lines are NULL rather than fabricated."
 }

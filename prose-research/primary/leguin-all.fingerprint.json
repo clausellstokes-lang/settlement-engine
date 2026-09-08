@@ -142,5 +142,20 @@
     ],
     "sameOpenerAsPreviousRate": 0.0894
   },
-  "runsOfThreeSameLengthBand": 0.1738
+  "runsOfThreeSameLengthBand": 0.1738,
+  "presence": {
+    "sensoryNounsPerHundredWords": 0.537,
+    "texturedParagraphShare": 0.2189,
+    "senseSpreadEntropy": 1.524,
+    "senseShares": {
+      "sight": 0.6231884057971014,
+      "hearing": 0.21739130434782608,
+      "smell": 0.014492753623188406,
+      "touch": 0.043478260869565216,
+      "taste": 0.10144927536231885
+    },
+    "words": 12859,
+    "paragraphs": 169,
+    "lexicon": "src/domain/prose/presenceMeasure.js SENSORY_NOUNS — 166 nouns in five buckets, a partition"
+  }
 }
