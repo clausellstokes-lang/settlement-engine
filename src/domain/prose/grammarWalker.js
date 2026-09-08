@@ -578,6 +578,12 @@ export function tenGaps(entry) {
  * @property {ThreeNumbers} [three]
  * @property {Map<string, ReadonlyArray<string>>} [composedFill] block → the slots the
  *   composer can fill
+ * @property {Map<string, {status: string, reason?: string, slotsFilled?: ReadonlyArray<string>,
+ *   keyFunction?: string}>} [wiring] car 8's WIRING CENSUS, keyed `block :: pool` — THE
+ *   SOURCE OF TRUTH for arm D and for C-sibling (the owner's 19:01 addendum). ABSENT ⇒ both
+ *   arms behave exactly as they did before car 8, so no green caller reds by the wiring
+ *   alone; PRESENT ⇒ the licence is read per (block, POOL) instead of per block, and a claim
+ *   the wiring does not license is WITHHELD as PRE-EXISTING, never failed.
  * @property {string} [register]
  * @property {Record<string, number>} [admissible] unit → the admissible order count
  * @property {CeilingShape} [ceilings] the owner's ceiling shape; ABSENT ⇒ arms A and B report
@@ -652,6 +658,23 @@ export function walkGrammar(input) {
       });
     }
     // C-SIBLING — imported, never re-written: one definition of a typed fact in the estate.
+    // ⚠ ITS PREMISE IS "same key ⇒ same state", and car 8's census is what makes the premise
+    // checkable. An unrecovered predicate leaves the premise unestablished, so the arm
+    // reports NOT-EXECUTABLE for that pool rather than calling a disagreement a
+    // contradiction. Without a census supplied it behaves exactly as it did before car 8.
+    const wiringRow = input.wiring?.get(String(poolId).includes(' :: ')
+      ? String(poolId)
+      : `${pool[0]?.block} :: ${pool[0]?.pool}`);
+    if (input.wiring && (!wiringRow || wiringRow.status !== 'RESOLVED')) {
+      out.notExecutable.push({
+        arm: 'C-sibling/wiring',
+        unit: poolId,
+        detail: wiringRow
+          ? `${wiringRow.status}: ${wiringRow.reason || 'the selecting predicate was not recovered'}`
+          : 'no wiring census row for this pool',
+      });
+      continue;
+    }
     for (let i = 1; i < pool.length; i++) {
       const mine = typedFactsOf(pool[i]);
       const theirs = typedFactsOf(pool[0]);
@@ -702,6 +725,39 @@ export function walkGrammar(input) {
           unit: entry.id,
           detail: `names {${missing.join('}, {')}}, which this block's composer bag does not offer`,
         });
+      }
+      // ── THE WIRING REFINEMENT (car 8) ──────────────────────────────────────────────
+      // The block-wide bag above is the SUPERSET; the census is keyed on the (block, POOL)
+      // pair, which is where the licence actually lives (`craftSlots` fills {resource} on
+      // one pool of a block and refuses it on another, by design). So a slot the block can
+      // fill somewhere but THIS pool's wiring cannot is a claim the pool is not entitled to
+      // make — WITHHELD as PRE-EXISTING, never failed, because the corpus wrote it before
+      // any rewrite existed to blame.
+      if (input.wiring) {
+        const row = input.wiring.get(`${entry.block} :: ${entry.pool}`);
+        if (!row) {
+          out.notExecutable.push({
+            arm: 'D/wiring',
+            unit: entry.id,
+            detail: `no wiring census row for ${entry.block} :: ${entry.pool} — the census and the corpus disagree about which pools exist`,
+          });
+        } else if (row.status !== 'RESOLVED') {
+          out.notExecutable.push({
+            arm: 'D/wiring',
+            unit: entry.id,
+            detail: `${row.status}: ${row.reason || 'the selecting predicate was not recovered'} — what this pool is entitled to say is unknown, and the walker will not infer it from the pool's name`,
+          });
+        } else {
+          const licensed = row.slotsFilled || [];
+          const unlicensed = named.filter((slot) => !licensed.includes(slot));
+          if (unlicensed.length) {
+            out.withheld.push({
+              arm: 'D/wiring',
+              unit: entry.id,
+              detail: `PRE-EXISTING unlicensed: names {${unlicensed.join('}, {')}}, which this POOL's wiring (${row.keyFunction || 'unnamed key'}) does not fill`,
+            });
+          }
+        }
       }
     }
   }

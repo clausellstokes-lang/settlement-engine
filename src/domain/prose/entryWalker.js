@@ -119,6 +119,12 @@ import {
  *   DECLARES, what its variants NAME, and what the composer actually FILLS for this
  *   (block, pool); `composed: null` ⇒ arm D is NOT-EXECUTABLE
  * @property {ReadonlyArray<ProseEntry>} [siblings] the OTHER variants of this pool cell
+ * @property {{status: string, reason?: string, slotsFilled?: ReadonlyArray<string>,
+ *   predicate?: ReadonlyArray<{field: string, op: string, value: string}>,
+ *   keyFunction?: string}} [wiring] car 8's WIRING CENSUS row for this (block, pool) — the
+ *   predicate that selects the pool and the slots its composer bag fills. ABSENT ⇒ every
+ *   wiring-licensed arm behaves exactly as it did before car 8, so no caller that does not
+ *   pass a census can be reddened by the wiring alone.
  */
 
 /**
@@ -126,7 +132,7 @@ import {
  * renders in the same UI without this module knowing anything about a UI.
  * @typedef {object} Finding
  * @property {string} id the entry's id
- * @property {'C1'|'C2'|'C3'|'C4'|'C5'|'C6'|'D'|'Q'|'X'|'F25'} klass
+ * @property {'C1'|'C2'|'C3'|'C4'|'C5'|'C6'|'D'|'Q'|'X'|'F25'|'W'} klass
  * @property {string} arm the named limb inside the class
  * @property {string} clause the clause the detector fired on
  * @property {string} column the table column consulted, or the field wanted
@@ -661,6 +667,17 @@ function armC5(entry, ground, out) {
       'the ground supplied no sibling variants for this pool cell'));
     return;
   }
+  // ⚠ THE PREMISE C5 RESTS ON IS "same key ⇒ same state", and car 8's census is what makes
+  // that premise checkable. Where the pool's selecting predicate could not be recovered, the
+  // premise is unestablished, so a disagreement between two variants is NOT-EXECUTABLE
+  // rather than a contradiction — the §908 law applied to this arm's own reach. Without a
+  // census the arm behaves exactly as it did before car 8.
+  if (ground.wiring && ground.wiring.status !== 'RESOLVED') {
+    out.notExecutable.push(finding(entry, 'C5', 'sibling coherence (predicate not recovered)',
+      '', '(wiring predicate)', String(ground.wiring.status),
+      'two variants contradict only if ONE predicate selected both; this pool\'s predicate is not recovered, so the premise is unestablished'));
+    return;
+  }
   const mine = typedFactsOf(entry);
   for (const sib of siblings) {
     const theirs = typedFactsOf(sib);
@@ -833,6 +850,42 @@ function armCitation(entry, ground, out) {
 }
 
 /**
+ * ARM W — THE WIRING LICENCE (car 8; the owner's 19:01 addendum made executable).
+ *
+ * The BEFORE's prose is evidence of what the pool was WRITTEN to say; the wiring — the
+ * predicate that selects it and the bag that fills it — is what it is ENTITLED to say. So a
+ * claim the wiring does not license is banked as WITHHELD and labelled PRE-EXISTING, never
+ * failed: at the entry there is no rewrite to blame, and calling a shipped line a failure
+ * would price the corpus's own debt to the wave that is trying to cure it. `walkPair` is
+ * where the distinction becomes a verdict.
+ *
+ * A pool whose predicate car 8 could not recover is NOT-EXECUTABLE and says which reason —
+ * never a pass, and never an inference from the pool's own name (§908's law, and the
+ * owner's "never inferred").
+ * @param {ProseEntry} entry
+ * @param {EntryGround} ground
+ * @param {WalkResult} out
+ */
+function armWiring(entry, ground, out) {
+  const wiring = ground.wiring;
+  if (!wiring) return;
+  const named = [...new Set([...String(entry.text).matchAll(SLOT_RE)].map((m) => m[1]))];
+  if (wiring.status !== 'RESOLVED') {
+    out.notExecutable.push(finding(entry, 'W', 'wiring licence (predicate not recovered)',
+      named.join(', '), '(wiring predicate)', String(wiring.status),
+      wiring.reason || 'the census could not recover this pool\'s selecting predicate, so what it is entitled to say is unknown'));
+    return;
+  }
+  const filled = wiring.slotsFilled || [];
+  const unlicensed = named.filter((slot) => !filled.includes(slot));
+  if (unlicensed.length) {
+    out.withheld.push(finding(entry, 'W', 'PRE-EXISTING unlicensed', unlicensed.join(', '),
+      `(wiring: ${wiring.keyFunction || 'unnamed key'})`, filled.join(', ') || 'nothing',
+      `the sentence names {${unlicensed.join('}, {')}}, which this (block, pool)'s wiring does not fill — a pre-existing unlicensed claim, banked for the wave`));
+  }
+}
+
+/**
  * THE WALKER. One entry, one ground, three channels and the not-executable roster.
  * @param {ProseEntry} entry
  * @param {EntryGround} ground
@@ -861,7 +914,44 @@ export function walkEntry(entry, ground) {
   armQualify(entry, g, out);
   armExhaustivity(entry, g, out);
   armCitation(entry, g, out);
+  armWiring(entry, g, out);
   return out;
+}
+
+/**
+ * C-PAIR — a rewrite's AFTER against its BEFORE, with the WIRING as the yardstick.
+ *
+ * The pair rule the owner stated in one sentence: a claim the wiring does not license is a
+ * PRE-EXISTING unlicensed claim when the BEFORE already carried it, and a rewrite failure
+ * only when the AFTER added it. Everything here is that sentence: walk both, key the
+ * findings by (class, arm, column) so a re-worded clause is still the same claim, and split.
+ *
+ * ⚠ THE GROUND IS ONE GROUND. Both halves are walked against the SAME ground, because a
+ * pair whose two halves were judged against two different worlds measures the worlds.
+ * @param {ProseEntry} before
+ * @param {ProseEntry} after
+ * @param {EntryGround} ground
+ * @returns {{added: Finding[], preExisting: Finding[], cured: Finding[],
+ *   withheldAdded: Finding[], notExecutable: Finding[]}}
+ */
+export function walkPair(before, after, ground) {
+  const a = walkEntry(before, ground);
+  const b = walkEntry(after, ground);
+  /** @param {Finding} f @returns {string} */
+  const claimKey = (f) => `${f.klass}|${f.arm}|${f.column}`;
+  const had = new Set(a.fails.map(claimKey));
+  const now = new Set(b.fails.map(claimKey));
+  const hadWithheld = new Set(a.withheld.map(claimKey));
+  return {
+    added: b.fails.filter((f) => !had.has(claimKey(f))),
+    // A pre-existing FAIL is reported as debt, so the pair instrument stays a pair
+    // instrument (CLERK-LAWS §2.6's A11 PRE-EXISTING pattern).
+    preExisting: b.fails.filter((f) => had.has(claimKey(f)))
+      .map((f) => ({ ...f, arm: `PRE-EXISTING · ${f.arm}` })),
+    cured: a.fails.filter((f) => !now.has(claimKey(f))),
+    withheldAdded: b.withheld.filter((f) => !hadWithheld.has(claimKey(f))),
+    notExecutable: b.notExecutable,
+  };
 }
 
 /**
