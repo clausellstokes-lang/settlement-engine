@@ -661,3 +661,8 @@ Seat: Fable 5.1 — validated.
 - PROVENANCE is a move of the grammar with a budget from the exemplar bands (MOVE-GRAMMAR §4.4.3); a cited claim is two licensed claims; the spread and sibling-distance arms refuse a citation habit.
 - An interested fact has two licensed faces on one pool: the player's as compiled; the DM's naming the holder and its interest from typed capture, corruption and control facts.
 - Custom content inherits the source rule by shape.
+
+## 21. THE REWRITE'S TWO PHASES (owner, 2026-09-08 ~18:1x, "one favor"; the chair's shaping vetoable; amends §912.2/.3's "no round past the second")
+- Phase 1, the initial rewrite, continues until the wording set is inside every band; rounds are bounded by evidence, not count: two consecutive rounds that move no failing measure are DRY and the set takes a REFUSAL row with its measurement; an unsatisfiable set is a sitting row.
+- Phase 2, at least one REFINEMENT round per set, by a different author, with named targets beyond the gate (the band's interior; sibling distance; the sharper fact; the read-aloud ear); the gate re-runs; a failed refinement reverts to the lawful draft (never trim).
+- Both phases land inside Shift 1 before the freeze act; the round counts are emitted per set; the cost of each phase is measured at the taste and put to the owner before car 8.
