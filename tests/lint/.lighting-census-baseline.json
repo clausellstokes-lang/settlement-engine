@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "fab1bfde79f17fbfcdfd025f470073d41130283f",
-  "measuredBy": "MEASURE car 0f (Opus 5)",
+  "measuredAtSha": "b74daab7aa4b67f32a3dfd84938234ab191acac0",
+  "measuredBy": "MEASURE car 1 (Opus 5)",
   "date": "2026-09-08",
-  "note": "car 0f adds two walker test titles and one describe for the alias draft; no new test FILE, so files, parked and credited do not move",
-  "files": 2551,
+  "note": "car 1 adds one test FILE (tests/property/dossierProseManifest.test.js, 11 titles in 3 describes) and three test helpers; the golden master keeps its titles, its corpus builder having moved to a helper",
+  "files": 2552,
   "parked": 375,
-  "credited": 2176,
-  "titles": 23805,
-  "suiteTitles": 6369
+  "credited": 2177,
+  "titles": 23816,
+  "suiteTitles": 6372
 }
