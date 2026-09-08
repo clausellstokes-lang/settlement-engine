@@ -78,7 +78,8 @@
 import { DOSSIER_STATE_PROSE_POWER } from '../../../data/dossierStateProse/power.generated.js';
 import { criminalOpEcon } from '../../criminalOpRole.js';
 import { governanceLedger } from '../../governanceLedger.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { powerStateProseCandidates } from './powerStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 
 /**
@@ -637,7 +638,14 @@ export function powerLadderRung(settlement, reading = {}, options = {}) {
     // ten that never needed one still speak.
     npc: properFill(text(reading.rungs?.[0]?.name)),
   };
-  const line = readStateProse(CORPUS, 'DS-POW-3', key, { ...options, slots });
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3e). The per-faction ladder's whole reading is
+  // the one this entry point was handed, so that is what the candidates leaf is offered.
+  const line = composeStateProse(CORPUS, 'DS-POW-3', {
+    ...options,
+    slots,
+    spineKey: key,
+    candidates: powerStateProseCandidates('DS-POW-3', reading),
+  });
   return legibilityRung(faction, line, []);
 }
 
@@ -867,13 +875,27 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   const slots = { settlement: town, seat: governing };
   const stabilitySlots = { settlement: town, faction: governing };
 
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3e), all six block helpers below. The spine key
+  // is this desk's own key function and every bag is unchanged; the candidates leaf offers
+  // the modifier pools the state earned, and is EMPTY until car 9 authors them. An empty
+  // list composes to the kernel's own draw, which is why the manifest cannot move here.
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-1', poolKey, { ...options, slots })
+    ? composeStateProse(CORPUS, 'DS-POW-1', {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-1', readings),
+    })
     : null);
   /** @param {string|null} poolKey */
   const line2 = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-2', poolKey, { ...options, slots: stabilitySlots })
+    ? composeStateProse(CORPUS, 'DS-POW-2', {
+      ...options,
+      slots: stabilitySlots,
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-2', readings),
+    })
     : null);
   // DS-POW-6 uses {seat} as the governing BODY (like DS-POW-1) and {faction} for the
   // captured house, so it takes BOTH fills — the two roles do not collide in this block.
@@ -882,9 +904,11 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // succession reading already resolved, so no second derivation is made for it.
   /** @param {string|null} poolKey */
   const line7 = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-7', poolKey, {
+    ? composeStateProse(CORPUS, 'DS-POW-7', {
       ...options,
       slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-7', readings),
     })
     : null);
   // DS-POW-5 uses {seat} as the governing BODY, the DS-POW-1 role. {institution}, {route}
@@ -892,8 +916,11 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // anchored liveness drops them without costing a pool.
   /** @param {string|null} poolKey */
   const line5 = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-5', poolKey, {
-      ...options, slots: { settlement: town, seat: governing },
+    ? composeStateProse(CORPUS, 'DS-POW-5', {
+      ...options,
+      slots: { settlement: town, seat: governing },
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-5', readings),
     })
     : null);
   // DS-POW-4 uses {seat} as the OFFICE ("the seat could fall"), the same role DS-POW-1
@@ -921,15 +948,21 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   // MEASURED, not assumed — DESK-TIMEBAND 2026-09-05.
   /** @param {string|null} poolKey */
   const line4 = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-4', poolKey, {
+    ? composeStateProse(CORPUS, 'DS-POW-4', {
       ...options,
       slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-4', readings),
     })
     : null);
   /** @param {string|null} poolKey */
   const line6 = (poolKey) => (poolKey
-    ? readStateProse(CORPUS, 'DS-POW-6', poolKey,
-      { ...options, slots: { settlement: town, seat: governing, faction: governing } })
+    ? composeStateProse(CORPUS, 'DS-POW-6', {
+      ...options,
+      slots: { settlement: town, seat: governing, faction: governing },
+      spineKey: poolKey,
+      candidates: powerStateProseCandidates('DS-POW-6', readings),
+    })
     : null);
 
   const bandKey = legitimacyBandPoolKey(legitimacy.label);

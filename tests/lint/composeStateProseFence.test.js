@@ -74,6 +74,7 @@ const ROUTED_DESKS = Object.freeze([
   { car: '3b', desk: 'stressors' },
   { car: '3c', desk: 'economy' },
   { car: '3d', desk: 'warFaith' },
+  { car: '3e', desk: 'power' },
 ]);
 
 /** The desk composer each routed car wired, repo-relative. */
