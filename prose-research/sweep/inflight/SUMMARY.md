@@ -1,13 +1,7 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 05:11:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 05:17:20 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | result | 0 | — | — | 03:09:17 |
-| ? | other |  | result | 0 | — | — | 03:09:34 |
-| ? | other |  | result | 0 | gate-proof.md | — | 03:11:30 |
-| ? | other |  | result | 0 | — | — | 03:11:36 |
-| ? | other |  | result | 0 | FOLD.md | — | 03:24:25 |
-| ? | other |  | result | 0 | — | — | 03:10:11 |
 | ? | other |  | result | 0 | — | — | 03:11:16 |
 | ? | other |  | result | 0 | judge-1.md | — | 03:49:58 |
 | ? | other |  | result | 0 | _c-dump.mjs, design-C-authoring.md | — | 03:34:17 |
