@@ -47,6 +47,7 @@ MUTATED_FILES=(
   src/domain/prose/wiringCensus.js
   src/domain/prose/wiringBranch.js
   scripts/prose-rate-corpus.mjs
+  scripts/wiring-census.mjs
   src/domain/prose/entryWalker.js
   src/domain/prose/grammarWalker.js
   src/domain/prose/presenceMeasure.js
@@ -1269,6 +1270,22 @@ check_caught "prose-wiring-census/the branch path enters a sibling block it only
 #     => 50 passed.
 perl -0pi -e "s/      const lawful = \(spokeAt\.get\(tier\) \|\| new Set\(\)\)\.has\(rung\.id\);/      const lawful = true;/" scripts/prose-rate-corpus.mjs
 check_caught "prose-wiring-census/every per-tier silence is called lawful and the wave's list empties" scripts/prose-rate-corpus.mjs "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
+
+# 92. MEASURE car 0f — THE ALIAS DRAFT'S IDENTIFIER MATCH IS A CASE- AND SEPARATOR-INSENSITIVE
+#     READING, AND WITHOUT IT THE ONLY STRONG EVIDENCE THE DRAFT HAS DISAPPEARS. SITTING §O.2
+#     chartered a MEASUREMENT of what a normalisation between the relation table's PRODUCER
+#     TOKENS (`system:food_security`, `condition:famine`) and the desks' READ PATHS
+#     (`eco.foodSecurity.stockpile`) would buy. Car 0 measured the raw leaf join at 0 rows on
+#     both endpoints precisely because it compared segments with no case reading; `aliasKey` is
+#     that reading and nothing else. This plant drops the `.toLowerCase()`, so every camelCase
+#     segment loses its capitals to the character filter (`foodSecurity` -> `foodecurity`) and
+#     the three identifier candidates -- including ARCH §5.2's own worked gate edge -- vanish
+#     while the docblock and generator-write rows carry on. The draft still prints, still
+#     answers, and has quietly lost the half a sitting would ratify.
+#     Measured before landing (lane MEASURE, 2026-09-08): planted => 2 red of 52; restored
+#     cmp-exact => 52 passed.
+perl -0pi -e "s/export const aliasKey = \(token\) => String\(token\)\.toLowerCase\(\)\.replace/export const aliasKey = (token) => String(token).replace/" scripts/wiring-census.mjs
+check_caught "prose-wiring-census/the alias draft stops reading case and its identifier evidence disappears" scripts/wiring-census.mjs "npx vitest run tests/lint/proseWiringCensus.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

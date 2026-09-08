@@ -441,6 +441,197 @@ export function relationJoin(rows, censusRows) {
   };
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════════
+// THE ALIAS DRAFT (ARCH car 0f, SITTING §O.2) — MEASURED, AND NOTHING RATIFIED
+//
+// Car 0's F1: over 89 relation endpoints and the desks' read roots the STRICT join is 0
+// rows, the either-endpoint join is 0, and even a leaf-level normalisation reaches 0 on
+// both endpoints. The chair chartered this car to MEASURE what a normalisation would buy:
+// a candidate ALIAS between a PRODUCER TOKEN and a DESK READ ROOT, each row carrying the
+// EVIDENCE that proposes it and a `file:line` a reader can open.
+//
+// ⛔ NOTHING HERE IS RATIFIED AND NOTHING IS WRITTEN INTO ANY LEAF. §O.2: "the aliases are
+// a sitting act (car 7's standing door), then the join lands as a frozen data leaf in the
+// SEAM train". This mode prints a draft and exits. It writes no file, it is not folded into
+// `docs/content/wiring-census.json`, and `relationJoin` above still answers 0.
+//
+// THE FOUR EVIDENCE KINDS, IN THE ORDER A ROW TAKES THE STRONGEST IT HAS:
+//   identifier       the endpoint's leaf and the root's leaf are ONE identifier under a
+//                    case- and underscore-insensitive reading (`food_security` ~ foodSecurity)
+//   reading-builder  a desk-read line that fills the ROOT as a bag key and names the leaf
+//   generator-write  a generator writes the leaf as a key or an assignment, in a file that
+//                    also writes the root: the persisted shape behind both names
+//   docblock         one comment line names both tokens
+// A candidate is a PROPOSAL with a citation, never a join. The receipt prints the rows, the
+// counts, and the endpoints with NO candidate, which are the wiring debt the SEAM and WAVE
+// trains inherit.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/** The evidence kinds a candidate may carry, STRONGEST FIRST. */
+export const EVIDENCE_ORDER = Object.freeze(['identifier', 'reading-builder', 'generator-write', 'docblock']);
+
+/** @param {string} token @returns {string} the case- and separator-insensitive reading */
+export const aliasKey = (token) => String(token).toLowerCase().replace(/[^a-z0-9]/g, '');
+
+/** @param {string} endpoint @returns {string} the endpoint's own leaf token */
+export const endpointLeaf = (endpoint) => {
+  const bare = String(endpoint).replace(/^[a-z]+:/, '').split('::').pop() || '';
+  return bare.split('.').filter(Boolean).pop() || bare;
+};
+
+/**
+ * Index a file set by the identifier tokens each LINE names AND by the tokens it WRITES (an
+ * object key or an assignment target), so a pair test is two Map lookups rather than a scan
+ * per pair.
+ *
+ * ⛔ THE TWO INDEXES ARE NOT ONE, AND THE DIFFERENCE IS THE WHOLE STRENGTH OF THE EVIDENCE.
+ * A first cut proposed an alias whenever two tokens shared a generator line, which produced
+ * `condition:famine -> war` from one line of `economy/foodBalance.js` and 51 rows of that
+ * shape. An alias worth a sitting is "the generator WRITES the endpoint's field, on a line
+ * that names the root" — a write and a mention, never two mentions.
+ * @param {Map<string, string>} sources file to text
+ * @param {(line: string) => boolean} keep which lines count
+ * @returns {{byToken: Map<string, Set<string>>, byWrite: Map<string, Set<string>>, at: Map<string, string>}}
+ */
+export function lineIndex(sources, keep) {
+  /** @type {Map<string, Set<string>>} */
+  const byToken = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const byWrite = new Map();
+  /** @type {Map<string, string>} */
+  const at = new Map();
+  /** @param {Map<string, Set<string>>} index @param {string} token @param {string} id */
+  const add = (index, token, id) => {
+    const key = aliasKey(token);
+    if (!key) return;
+    let seat = index.get(key);
+    if (!seat) { seat = new Set(); index.set(key, seat); }
+    seat.add(id);
+  };
+  for (const [file, text] of sources) {
+    const lines = String(text).split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (!keep(lines[i])) continue;
+      const id = `${file}:${i + 1}`;
+      at.set(id, lines[i].trim());
+      for (const m of lines[i].matchAll(/\b([A-Za-z_$][\w$]*)\b/g)) add(byToken, m[1], id);
+      for (const m of lines[i].matchAll(/(?:^|[{,([\s])([A-Za-z_$][\w$]*)\s*:/g)) add(byWrite, m[1], id);
+      for (const m of lines[i].matchAll(/\.\s*([A-Za-z_$][\w$]*)\s*=[^=]/g)) add(byWrite, m[1], id);
+    }
+  }
+  return { byToken, byWrite, at };
+}
+
+/**
+ * A COMMENT LINE THAT NAMES BOTH TOKENS — the weakest evidence, and the only one where a
+ * mention on each side is all there is to have.
+ * @param {{byToken: Map<string, Set<string>>}} index
+ * @param {string} a
+ * @param {string} b
+ * @returns {string}
+ */
+function sharedMention(index, a, b) {
+  const left = index.byToken.get(a);
+  const right = index.byToken.get(b);
+  if (!left || !right) return '';
+  for (const id of left) if (right.has(id)) return id;
+  return '';
+}
+
+/**
+ * THE DRAFT. Pure: every source arrives as a string, so the walker drives it on a fixture.
+ * @param {{endpoints: ReadonlyArray<string>, roots: ReadonlyArray<string>,
+ *   paths?: ReadonlyArray<string>, builders?: Map<string, string>,
+ *   generators?: Map<string, string>, docs?: Map<string, string>}} input
+ * @returns {{rows: Array<{endpoint: string, readRoot: string, evidence: string, at: string,
+ *   line: string}>, endpointsWithCandidate: number, noCandidate: string[],
+ *   syntheticRootsExcluded: number}}
+ */
+export function aliasDraft(input) {
+  const endpoints = [...new Set(input.endpoints || [])].sort();
+  const allRoots = [...new Set(input.roots || [])].sort();
+  // THE INSTRUMENT'S OWN LABELS ARE NOT JOIN TARGETS (the car-10 cure-4 law, applied here):
+  // the table rung writes `"<reader> (via <TABLE> in <file>)"` as its field, and an alias to
+  // one of those would be an alias to a string this census invented.
+  const roots = allRoots.filter((r) => !r.includes(' (via '));
+  const builders = lineIndex(input.builders || new Map(), (line) => !/^\s*(\*|\/\/)/.test(line));
+  const generators = lineIndex(input.generators || new Map(), (line) => /[A-Za-z_$][\w$]*\s*:|\.\s*[A-Za-z_$][\w$]*\s*=[^=]/.test(line));
+  const docs = lineIndex(input.docs || new Map(), (line) => /^\s*(\*|\/\/)/.test(line));
+  // ONE ROW PER (endpoint, root) PAIR, CARRYING THE STRONGEST EVIDENCE IT HAS. A pair proposed
+  // three times over is one proposal, and a table that printed it three times would read as
+  // three times the ground.
+  /** @type {Map<string, {endpoint: string, readRoot: string, evidence: string, at: string, line: string}>} */
+  const best = new Map();
+  /** @param {{endpoint: string, readRoot: string, evidence: string, at: string, line: string}} row */
+  const offer = (row) => {
+    const key = `${row.endpoint}|${row.readRoot}`;
+    const held = best.get(key);
+    if (held && EVIDENCE_ORDER.indexOf(held.evidence) <= EVIDENCE_ORDER.indexOf(row.evidence)) return;
+    best.set(key, row);
+  };
+  // ⭐ THE SEGMENT GRAIN, WHICH IS WHERE THE IDENTIFIER EVIDENCE ACTUALLY LIVES. `rootOf` cuts
+  // a read path to `eco` or `settlement.config`, and no producer token is ever spelled that
+  // way; the token IS spelled in the middle of the path (`eco.foodSecurity.label` against
+  // `system:food_security`). Car 0's LEAF join missed exactly these because it compared raw
+  // segments with no case or underscore reading, which is the normalisation §O.2 says nobody
+  // has built. Every identifier row carries the READ PATH that proposed it as its citation.
+  for (const path of input.paths || []) {
+    if (String(path).includes(' (via ')) continue;
+    const segments = new Set(String(path).split(/[^A-Za-z_$0-9]+/).filter(Boolean).map(aliasKey));
+    for (const endpoint of endpoints) {
+      const leaf = aliasKey(endpointLeaf(endpoint));
+      if (!leaf || !segments.has(leaf)) continue;
+      offer({
+        endpoint, readRoot: rootOf(path), evidence: 'identifier', at: path, line: path,
+      });
+    }
+  }
+  for (const endpoint of endpoints) {
+    const leaf = aliasKey(endpointLeaf(endpoint));
+    for (const root of roots) {
+      const rootLeaf = aliasKey(String(root).split('.').pop() || root);
+      if (!leaf || !rootLeaf) continue;
+      /**
+       * A line that WRITES `written` and NAMES `named`. The direction is the evidence.
+       * @param {{byToken: Map<string, Set<string>>, byWrite: Map<string, Set<string>>}} index
+       * @param {string} written @param {string} named
+       */
+      const shared = (index, written, named) => {
+        const a = index.byWrite.get(written);
+        const b = index.byToken.get(named);
+        if (!a || !b) return '';
+        for (const id of a) if (b.has(id)) return id;
+        return '';
+      };
+      // A READING BUILDER fills the ROOT and names the endpoint's leaf; a GENERATOR writes the
+      // endpoint's FIELD on a line that names the root. The two directions are opposite on
+      // purpose, and each is the direction its own sentence in §O.2 states.
+      const builderAt = shared(builders, rootLeaf, leaf);
+      const generatorAt = builderAt ? '' : shared(generators, leaf, rootLeaf);
+      const docAt = builderAt || generatorAt ? '' : sharedMention(docs, leaf, rootLeaf);
+      const at = builderAt || generatorAt || docAt;
+      if (!at) continue;
+      const index = builderAt ? builders : (generatorAt ? generators : docs);
+      offer({
+        endpoint,
+        readRoot: root,
+        evidence: builderAt ? 'reading-builder' : (generatorAt ? 'generator-write' : 'docblock'),
+        at,
+        line: index.at.get(at) || '',
+      });
+    }
+  }
+  const rows = [...best.values()].sort((a, b) => EVIDENCE_ORDER.indexOf(a.evidence) - EVIDENCE_ORDER.indexOf(b.evidence)
+    || (a.endpoint < b.endpoint ? -1 : 1) || (a.readRoot < b.readRoot ? -1 : 1));
+  const covered = new Set(rows.map((r) => r.endpoint));
+  return {
+    rows,
+    endpointsWithCandidate: covered.size,
+    noCandidate: endpoints.filter((e) => !covered.has(e)),
+    syntheticRootsExcluded: allRoots.length - roots.length,
+  };
+}
+
 /**
  * THE WILSON 95 % INTERVAL, IN BASIS POINTS. ARCH E-F4: a cell earns hand-written text only
  * when the LOWER bound of its rate clears 5 %, because at 27 of 525 a cell truly at 5 %
@@ -770,11 +961,98 @@ export function printLines(data) {
   return lines;
 }
 
+/**
+ * THE FOUR FILE SETS THE DRAFT READS, DECLARED HERE AND NOWHERE ELSE, so a reader can see
+ * exactly what an alias may be proposed from. Nothing outside them is scanned.
+ * @returns {{builders: Map<string, string>, generators: Map<string, string>, docs: Map<string, string>}}
+ */
+export function draftSources() {
+  /** @type {Map<string, string>} */
+  const builders = new Map();
+  for (const rel of ['src/components/new/generalDeskRead.js', 'src/components/new/economyDeskRead.js']) {
+    builders.set(rel, readFileSync(join(ROOT, rel), 'utf8'));
+  }
+  /** @type {Map<string, string>} */
+  const generators = new Map();
+  for (const abs of jsFilesUnder(join(ROOT, 'src/generators'))) {
+    generators.set(relative(ROOT, abs), readFileSync(abs, 'utf8'));
+  }
+  /** @type {Map<string, string>} */
+  const docs = new Map([...builders]);
+  for (const rel of COMPOSERS) docs.set(rel, readFileSync(join(ROOT, rel), 'utf8'));
+  return { builders, generators, docs };
+}
+
+/**
+ * The draft's own print: the table, the counts, the rows that WOULD join, and the debt.
+ * @param {object} data the built census
+ * @returns {string[]}
+ */
+export function draftLines(data) {
+  const endpoints = [...new Set(data.relations.rows.flatMap((r) => [r.a, r.b]))];
+  /** @type {Set<string>} */
+  const roots = new Set();
+  /** @type {Set<string>} */
+  const paths = new Set();
+  for (const row of data.rows) {
+    for (const path of row.reads || []) { roots.add(rootOf(path)); paths.add(path); }
+  }
+  const draft = aliasDraft({
+    endpoints, roots: [...roots], paths: [...paths].sort(), ...draftSources(),
+  });
+  /** @type {Map<string, Set<string>>} endpoint to the roots proposed for it */
+  const byEndpoint = new Map();
+  for (const row of draft.rows) {
+    let seat = byEndpoint.get(row.endpoint);
+    if (!seat) { seat = new Set(); byEndpoint.set(row.endpoint, seat); }
+    seat.add(row.readRoot);
+  }
+  const joined = data.relations.rows.filter((r) => byEndpoint.has(r.a) && byEndpoint.has(r.b));
+  /** @type {Map<string, number>} */
+  const byDirection = new Map();
+  for (const r of joined) byDirection.set(r.direction, (byDirection.get(r.direction) || 0) + 1);
+  /** @type {Map<string, number>} */
+  const byEvidence = new Map();
+  for (const row of draft.rows) byEvidence.set(row.evidence, (byEvidence.get(row.evidence) || 0) + 1);
+  return [
+    'ALIAS DRAFT · ARCH car 0f · SITTING §O.2 · MEASURED, NOTHING RATIFIED, NO LEAF WRITTEN',
+    `  endpoints ${endpoints.length} · desk read roots ${roots.size}`
+      + ` (${draft.syntheticRootsExcluded} excluded as the instrument's own table labels)`
+      + ` · read paths ${paths.size}`,
+    `  candidate rows ${draft.rows.length} · endpoints with at least one candidate ${draft.endpointsWithCandidate}`
+      + ` · with none ${draft.noCandidate.length}`,
+    `  by evidence: ${[...byEvidence].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(' · ') || '(none)'}`,
+    `  RELATION ROWS THAT WOULD JOIN under this draft: ${joined.length} of ${data.relations.rows.length}`
+      + ` · by direction ${[...byDirection].map(([d, n]) => `${d} ${n}`).join(' · ') || '(none)'}`,
+    `  (the shipped join, unchanged and unratified: STRICT ${data.relations.join.strictBoth})`,
+    ...joined.map((r) => `    WOULD JOIN  ${r.relation} (${r.source}) ${r.a} ${r.direction === 'a->b' ? '->' : '<-'} ${r.b}`),
+    '  ── the draft, the forty strongest candidates ─────────────────────',
+    ...draft.rows
+      .slice(0, 40)
+      .map((r) => `    ${r.endpoint.slice(0, 42).padEnd(42)} -> ${r.readRoot.padEnd(26)} ${r.evidence.padEnd(16)} ${r.at}`),
+    '  ── endpoints with NO candidate: the wiring debt the SEAM and WAVE trains inherit ──',
+    ...chunked(draft.noCandidate, 3).map((line) => `    ${line}`),
+  ];
+}
+
+/**
+ * @param {ReadonlyArray<string>} list
+ * @param {number} per
+ * @returns {string[]}
+ */
+function chunked(list, per) {
+  /** @type {string[]} */
+  const out = [];
+  for (let i = 0; i < list.length; i += per) out.push(list.slice(i, i + per).join(' · '));
+  return out;
+}
+
 /** The entry point. */
 async function main() {
   const argv = process.argv.slice(2);
   const checkOnly = argv.includes('--check');
   const printOnly = argv.includes('--print');
+  const draftOnly = argv.includes('--join-draft');
   const ratesAt = argv.indexOf('--rates');
   /** @type {object|null} */
   let rates = null;
@@ -789,6 +1067,12 @@ async function main() {
   const text = serialise(data);
   if (printOnly) {
     for (const line of printLines(data)) console.log(line);
+    return;
+  }
+  // ⛔ THE DRAFT MODE WRITES NOTHING. It prints and returns before the write below, so a
+  // reader can see by the control flow and not only by the docblock that no leaf moves.
+  if (draftOnly) {
+    for (const line of draftLines(data)) console.log(line);
     return;
   }
   if (checkOnly) {

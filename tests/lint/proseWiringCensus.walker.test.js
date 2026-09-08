@@ -32,8 +32,9 @@ import {
   stringLiterals, tierRows, TIERS, wiringCensus, WIRING_STATUS,
 } from '../../src/domain/prose/wiringCensus.js';
 import {
-  buildCensus, censusCheck, CENSUS_JSON, factMounts, producerIndex, relationsFromSitting,
-  relationTable, serialise, wilsonBp, wilsonFloorCount,
+  aliasDraft, aliasKey, buildCensus, censusCheck, CENSUS_JSON, draftSources, EVIDENCE_ORDER,
+  factMounts, producerIndex, relationsFromSitting, relationTable, serialise, wilsonBp,
+  wilsonFloorCount,
 } from '../../scripts/wiring-census.mjs';
 // ⛔ THE SHIPPED RULE, IMPORTED, NEVER RE-SPELLED HERE (car 0e). The first cut of the per-tier
 // arm kept a second copy of the silence rule in this file, so the fixture proved the copy and
@@ -1087,6 +1088,98 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // will refuse against.
     const licensed = committed.relations.rows.filter((r) => r.relation === 'tension');
     expect(licensed, 'and no source yields a tension row at all today').toEqual([]);
+  });
+});
+
+describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf written', () => {
+  test('a shared identifier proposes exactly ONE candidate, and the case reading is what finds it', () => {
+    // SITTING §O.2 chartered a MEASUREMENT of what a normalisation between the relation
+    // table's PRODUCER TOKENS and the desks' READ PATHS would buy. The draft proposes; it
+    // ratifies nothing and writes no leaf.
+    const one = aliasDraft({
+      endpoints: ['system:food_security'],
+      roots: ['eco'],
+      paths: ['eco.foodSecurity.label'],
+    });
+    expect(one.rows.length, 'one endpoint, one root, one candidate').toBe(1);
+    expect(one.rows[0], 'carrying the read path that proposed it').toEqual({
+      endpoint: 'system:food_security',
+      readRoot: 'eco',
+      evidence: 'identifier',
+      at: 'eco.foodSecurity.label',
+      line: 'eco.foodSecurity.label',
+    });
+    expect(one.noCandidate, 'and nothing is left over').toEqual([]);
+    // ⛔ THE CASE READING IS THE WHOLE MATCH, AND HERE IS THE PAIRED NEGATIVE. `food_security`
+    // and `foodSecurity` are one identifier under a case- and separator-insensitive reading
+    // and two under any other; car 0's LEAF join compared raw segments and reached 0 rows on
+    // both endpoints, which is exactly this.
+    expect(aliasKey('food_security'), 'the reading that joins them').toBe(aliasKey('foodSecurity'));
+    expect('food_security' === 'foodSecurity', 'while the raw tokens are two').toBe(false);
+    expect(aliasDraft({
+      endpoints: ['system:food_security'], roots: ['eco'], paths: ['eco.grainStore.label'],
+    }).rows, 'and a path that shares no segment proposes nothing').toEqual([]);
+    // A PAIR IS ONE PROPOSAL however many paths carry it.
+    const twice = aliasDraft({
+      endpoints: ['system:food_security'],
+      roots: ['eco'],
+      paths: ['eco.foodSecurity.label', 'eco.foodSecurity.stockpile'],
+    });
+    expect(twice.rows.length, 'two paths, one pair, one row').toBe(1);
+  });
+
+  test('the draft over the SHIPPED endpoints and read paths, with its evidence and its debt', () => {
+    const endpoints = [...new Set(committed.relations.rows.flatMap((r) => [r.a, r.b]))];
+    /** @type {Set<string>} */
+    const roots = new Set();
+    /** @type {Set<string>} */
+    const paths = new Set();
+    for (const row of committed.rows) {
+      for (const path of row.reads || []) { roots.add(rootOf(path)); paths.add(path); }
+    }
+    const draft = aliasDraft({
+      endpoints, roots: [...roots], paths: [...paths].sort(), ...draftSources(),
+    });
+    // THE STRUCTURAL HALF, which no unrelated car can move.
+    expect(endpoints.length, 'the relation table\'s endpoints').toBe(89);
+    expect(draft.endpointsWithCandidate + draft.noCandidate.length, 'every endpoint is answered once').toBe(89);
+    expect(new Set(draft.rows.map((r) => `${r.endpoint}|${r.readRoot}`)).size,
+      'one row per pair, never one per citation').toBe(draft.rows.length);
+    for (const row of draft.rows) {
+      expect(EVIDENCE_ORDER, `${row.endpoint} names an evidence kind from the closed list`).toContain(row.evidence);
+      expect(row.at, `${row.endpoint} carries a citation a reader can open`).not.toBe('');
+    }
+    expect(draft.syntheticRootsExcluded, 'the instrument\'s own table labels are not join targets').toBe(15);
+    // ⭐ THE THREE IDENTIFIER ROWS, which are the draft's whole strength and come from the
+    // census's own read paths — including ARCH §5.2's OWN WORKED EDGE, whose gate endpoint
+    // the defence desk reads at `settlement.defenseProfile.economicGates.military`.
+    const identifiers = draft.rows.filter((r) => r.evidence === 'identifier');
+    expect(identifiers.map((r) => `${r.endpoint} -> ${r.readRoot}`)).toEqual([
+      'cause:occupation -> war',
+      'economicGates.military -> settlement.defenseProfile',
+      'system:food_security -> eco',
+    ]);
+    // ⚠ THE REPORT HALF. These counts read the six composers' docblocks and every file under
+    // src/generators/, so a car that edits a generator comment can move them; they are
+    // asserted because they are this car's FINDING and a drift should be seen, not because
+    // they are structural.
+    expect(draft.rows.length, 'candidate rows at this tip').toBe(37);
+    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(15);
+    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(74);
+    /** @type {Set<string>} */
+    const proposed = new Set(draft.rows.map((r) => r.endpoint));
+    const joined = committed.relations.rows.filter((r) => proposed.has(r.a) && proposed.has(r.b));
+    expect(joined.length, 'relation rows that WOULD join under the draft').toBe(4);
+    expect(joined.map((r) => `${r.a} ${r.direction} ${r.b}`)).toEqual([
+      'condition:famine a->b system:food_security',
+      'condition:famine a->b system:public_legitimacy',
+      'condition:boom a->b system:public_legitimacy',
+      'signal:occupied a->b cause:occupation',
+    ]);
+    // ⛔ AND NOTHING IS RATIFIED: the shipped join is still zero, and the draft is in no leaf.
+    expect(committed.relations.join.strictBoth, 'the shipped join is unmoved').toBe(0);
+    expect(Object.keys(committed), 'and the committed census carries no alias table')
+      .not.toContain('aliases');
   });
 });
 
