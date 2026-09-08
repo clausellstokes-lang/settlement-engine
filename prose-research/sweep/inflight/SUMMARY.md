@@ -1,9 +1,9 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 08:17:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-08 08:23:28 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | in-flight | 0 | — | — | 12:11:57 |
-| ? | other |  | in-flight | 0 | — | — | 12:16:48 |
-| ? | other |  | in-flight | 0 | — | — | 12:17:25 |
+| ? | other |  | in-flight | 0 | — | — | 12:22:45 |
+| ? | other |  | in-flight | 0 | — | — | 12:23:23 |
+| ? | other |  | in-flight | 0 | — | — | 12:23:17 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
