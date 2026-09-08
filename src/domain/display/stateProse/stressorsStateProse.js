@@ -517,14 +517,18 @@ export function crisisBannerRung(settlement, banner, options = {}) {
   if (!key) return null;
   const slots = { settlement: properFill(text(settlement?.name)) };
   // The per-banner rung's whole reading IS the banner: this entry point takes no desk
-  // readings, so the candidates leaf is offered the one fact this call site holds.
+  // readings, so the candidates leaf is offered the one fact this call site holds — the
+  // banner ITSELF, never a fresh `{ banner }` wrapper. See the fence's own arm: an object
+  // literal here mints its keys into the wiring census's PRODUCER INDEX, which reads every
+  // object-literal key under src/domain as a write and would silently reclassify the
+  // `absent` column of rows that have nothing to do with this desk.
   return legibilityRung(
     text(banner?.label),
     composeStateProse(CORPUS, 'DS-STR-1', {
       ...options,
       slots,
       spineKey: key,
-      candidates: stressorsStateProseCandidates('DS-STR-1', { banner }),
+      candidates: stressorsStateProseCandidates('DS-STR-1', banner),
     }),
     [],
   );

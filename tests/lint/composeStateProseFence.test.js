@@ -213,6 +213,24 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
       .toEqual(ROUTED_DESKS.map(({ desk }) => `src/domain/display/stateProse/${desk}StateProse.js`
         + ` -> src/domain/display/stateProse/${desk}StateProseCandidates.js`).sort());
     expect(ROUTED_LEAVES.length, 'one leaf per routed desk').toBe(ROUTED_DESKS.length);
+    // ⛔⛔ AND THE SECOND ARGUMENT OF EVERY CANDIDATES CALL IS A BARE IDENTIFIER, NEVER AN
+    // OBJECT LITERAL. This is a MEASURED defect, caught at car 3f and cured before it landed:
+    // the wiring census's PRODUCER INDEX reads every object-literal key under `src/domain/**`
+    // and `src/generators/**` as a WRITE, including a shorthand one. A desk that wrapped its
+    // locals to hand them over (`candidates: fn('DS-DEF-2', { dp, compound, forces })`) minted
+    // those names into the index, and the census's `absent` column moved on rows belonging to
+    // other desks entirely: `measured 370 -> 378`, `not-produced 60 -> 52`, with eight rows
+    // reclassified on `forces` and `structureKey` alone. A desk hands over a reading it
+    // ALREADY HOLDS, under the name it already has.
+    for (const { desk } of ROUTED_DESKS) {
+      const code = codeOnly(read(`src/domain/display/stateProse/${desk}StateProse.js`));
+      const calls = [...code.matchAll(/StateProseCandidates\s*\(\s*[^,]+,\s*([^)]*)\)/g)]
+        .map((m) => m[1].trim());
+      expect(calls.length, `${desk} calls its candidates leaf`).toBeGreaterThan(0);
+      expect(calls.filter((arg) => !/^[A-Za-z_$][\w$]*$/.test(arg)),
+        `${desk} hands its candidates leaf a fresh object literal, which mints producer-index keys`)
+        .toEqual([]);
+    }
     // ⛔ AND THE OTHER SIDE OF THE FENCE, IN THE SAME ARM SO IT CANNOT BE READ ALONE: a desk
     // whose car has not run yet reaches NEITHER the composer nor any leaf. Without this the
     // roster could be satisfied by a tree in which every desk was wired and the scanner had

@@ -45,7 +45,15 @@
  * The Defense desk's modifier candidates for one block, in offer order.
  *
  * @param {string} blockId the block being composed, e.g. 'DS-DEF-11'
- * @param {Record<string, unknown>} readings the desk's own readings for this town
+ * @param {Record<string, unknown>|null|undefined} readings the desk's own readings for
+ *   this town. NULLABLE BY DECLARATION (SEAM car 3f-0): a desk hands over a reading it
+ *   ALREADY HOLDS, under the name it already has, and several of those are nullable at
+ *   their own call sites. The alternative measured worse: a desk that wrapped its locals
+ *   in a fresh object literal to satisfy a narrower type minted every one of those names
+ *   into the wiring census's PRODUCER INDEX, which reads an object-literal key under
+ *   `src/domain/**` as a WRITE, and the census's `absent` column moved on rows belonging
+ *   to other desks. The guard below is the contract, and this type is what makes it live
+ *   rather than a branch the declared type says can never be taken.
  * @returns {ReadonlyArray<StateProseCandidate>} the keys that fired, in offer order
  */
 export function defenseStateProseCandidates(blockId, readings) {
