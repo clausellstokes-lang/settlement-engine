@@ -122,10 +122,14 @@ export function warFaithDeskRungs({
 export function DeskLines({ mount, rungs, testId }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
+  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3d) — the same
+  // cure as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
+  // deliberately one idiom. Two lenses of one position may legitimately draw the SAME line,
+  // and `key={line}` then collides: React drops a paragraph and a lens goes missing.
   return (
     <div data-testid={testId} style={{ margin: '0 0 12px' }}>
-      {lines.map((line) => (
-        <p key={line} style={{
+      {lines.map((line, position) => (
+        <p key={`${mount}::${position}`} style={{
           color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
           margin: '0 0 6px', fontStyle: 'italic',
         }}>{line}</p>

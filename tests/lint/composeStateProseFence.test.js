@@ -73,6 +73,7 @@ const CANDIDATE_LEAVES = Object.freeze([
 const ROUTED_DESKS = Object.freeze([
   { car: '3b', desk: 'stressors' },
   { car: '3c', desk: 'economy' },
+  { car: '3d', desk: 'warFaith' },
 ]);
 
 /** The desk composer each routed car wired, repo-relative. */

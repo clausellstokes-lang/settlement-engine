@@ -109,7 +109,8 @@
  * @enforced-by tests/domain/warFaithStateProseDesk.test.js
  */
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../../data/dossierStateProse/warFaith.generated.js';
-import { readStateProse } from './stateProseKernel.js';
+import { composeStateProse } from './composeStateProse.js';
+import { warFaithStateProseCandidates } from './warFaithStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
 
@@ -799,13 +800,22 @@ export function warFaithStateProse(settlement, readings = {}, options = {}) {
     // `{timeband_*}` forms are DELIBERATELY UNFILLED — see SLOT_FILL_SHAPES.
   };
 
+  // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3d). The spine key is this desk's own key
+  // function, exactly as before; the candidates leaf offers the modifier pools the state
+  // earned, and is EMPTY until car 9 authors them. An empty list composes to the kernel's
+  // own draw, which is why the manifest cannot move on this routing.
   /** @param {string} blockId @param {string|null} poolKey */
   const line = (blockId, poolKey) => (poolKey
-    ? readStateProse(CORPUS, blockId, poolKey, { ...options, slots })
+    ? composeStateProse(CORPUS, blockId, {
+      ...options,
+      slots,
+      spineKey: poolKey,
+      candidates: warFaithStateProseCandidates(blockId, readings),
+    })
     : null);
   /**
    * A paragraph lens: a rung, or NOTHING at all (the DS-ECO-12 shape).
-   * @param {{blockId: string, poolKey: string, angle: string, text: string}|null} l
+   * @param {import('./composeStateProse.js').ComposedUnit|null} l
    */
   const paragraph = (l) => (l ? legibilityRung('', l, []) : null);
 
