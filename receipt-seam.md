@@ -465,3 +465,332 @@ $ git diff --stat 3b22b5c56..HEAD -- src/data/
 
 ## CAR 3a — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 12:2x)
 Re-measured at `84388a185` in laneSEAM (porcelain 0, runners 0, symlinks intact): the focused composer + fence + kernel files `3 passed / 81 tests`; the wiring census re-taken into the tree and restored — the whole delta `producerIndexFiles 1145 → 1152`, one integer, no row, no stamped sha (CONFIRMED); the stale literal at `scripts/wiring-census.mjs:916` read verbatim (CONFIRMED); `git diff 3b22b5c56..HEAD -- src/data/` empty per the lane (not re-run). Rulings: (1) a count-only census drift is a lane's plain re-take, printed; a row/sha drift stays the chair's; 3b-0 turns the literal into a measurement — brief-SEAM-car3b-3g ADDENDUM; (2) the coupling-walker refusal accepted, no row for a display leaf; (3) the four judgment calls accepted; `readsCount` ruled for car 4 (its ADDENDUM). Wrong predictions in §3a.1 noted as the lane's own correction. Seat: Fable 5.1 — validated.
+
+---
+
+## CARS 3b-0 … 3g — ONE DESK EACH THROUGH THE COMPOSER, WITH EMPTY CANDIDATES
+
+Seat: Opus 5 — implementer. Chair: Fable 5.1. Dock `$SC/laneSEAM`, base `84388a185`.
+**STATUS: ALL SEVEN STAGES LANDED**, plus two sub-cars the rituals forced. Porcelain 0,
+runners 0. Every figure below is the tail of a command that ran; nothing is a prediction.
+
+| # | sha | what |
+|---|---|---|
+| 3b-0 | `679b62d43` | the census stamps the candidate leaves as a MEASUREMENT |
+| 3b-0b | `eb51fc27b` | the lighting census re-freezes at 3b-0's tip, by its ritual |
+| 3b | `8ba99f1a9` | the stressors desk (2 sites) |
+| 3c | `3af82baf5` | the economy desk (1 site) + `EconomicsGlance.DeskLines` keyed on the mount |
+| 3d | `2f277844b` | the warFaith desk (1 site) + `WarFaithDesk.DeskLines` keyed on the mount |
+| 3e | `4ce601772` | the power desk (7 sites) |
+| 3f-0 | `4e0b441b9` | no desk mints a producer-index key to feed its candidates call |
+| 3f | `da85aa567` | the defense desk (9 sites) |
+| 3g | `efb5111cd` | the general desk (11 sites) + the six render-body reads memoised |
+
+31 call sites routed, which is §4.1's own count, and at the tip `grep -rn readStateProse src/`
+answers only the kernel's own definition and its one convenience wrapper: no desk calls it.
+
+### THE MANIFEST, AFTER EVERY STAGE — the acceptance this car rests on
+
+`npx vitest run tests/property/dossierProseManifest.test.js` ran at each of the seven tips
+and read `Test Files 1 passed (1) · Tests 14 passed (14)` every time, the DRIFT arm's three
+lists empty (rows added `[]`, removed `[]`, moved `[]`). Every printed figure was byte-equal
+to car 3a's tip at every stage:
+
+```
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 9 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · drawing an AUDIBLE index above 0 because anchoring
+    removed an earlier variant: 217 · strictly below every one of the twelve probes: 18
+```
+
+The six `src/data/dossierStateProse/*.generated.js` leaves never appear in `git status` across
+the nine commits: zero corpus bytes, which is the strongest form of sha-identical.
+
+### THE DESKS' EFFECTIVE LINES, EACH WITH ITS HEADROOM TO 800
+
+| desk | base `84388a185` | tip | headroom |
+|---|---|---|---|
+| stressors | 155 | **166** | 634 |
+| economy | 334 | **338** | 462 |
+| warFaith | 251 | **257** | 543 |
+| power | 275 | **302** | 498 |
+| defense | 454 | **500** | 300 |
+| general | 699 | **721** | **79** |
+
+Measured with eslint's own `max-lines(skipBlankLines, skipComments)`, the instrument
+`tests/lint/sizeBaseline.test.js` uses. No desk is in `scripts/.size-baseline.json` and none
+enters it. The components: OverviewTab 471 → 472 (128) · **EconomicsTab 596 → 596 (4)** ·
+ViabilityTab 289 → 292 (308) · HistoryTab 303 → 307 (293) · RelationshipsTab 260 → 267 (333) ·
+SteadingsSection 78 → 83 (517) · EconomicsGlance 61 (539) · WarFaithDesk 92 (508).
+
+⚠ **A STANDING HAZARD FOR THE NEXT CAR, RECORDED RATHER THAN LEFT TO BE REDISCOVERED:**
+`EconomicsTab.jsx` stood at **596 effective lines against a hard 600 ceiling before this car**
+and stands at 596 after it. Its memo is written in four lines for that reason and the reason
+is in the file. The next car to touch that tab has four lines.
+
+### 3b-0 — THE CENSUS LITERAL BECOMES A MEASUREMENT (the chair's ADDENDUM rule 1)
+
+`scripts/wiring-census.mjs:916` stamped the sentence `candidateLeaves: 'none at this tip: car
+3a lands …'`, which car 3a made false. `candidateLeafIndex()` now DISCOVERS the leaves at the
+tip and stamps each with the sha256 of its bytes. The leaves are deliberately NOT added to
+`STAMPED`: that is a hand-edited path list, and a discovered set kept there would carry the
+same failure mode one level up. The walker asserts the six by name, recomputes every digest
+through a hash the test spells for itself, asserts each leaf still ships `const fired = [];`,
+and convicts the interlock with a moved-leaf plant that reads `stale-bytes`.
+
+THE RE-TAKE, measured before the write and printed here in full — count-only, so a lane's:
+
+```
+$ node <buildCensus + serialise, as the walker does>
+committed 1806768   fresh 1807516   equal false
+13,14c13,21
+<     "candidateLeaves": "none at this tip: car 3a lands src/domain/display/stateProse/*StateProseCandidates.js",
+<     "producerIndexFiles": 1145
+---
+>     "candidateLeaves": {  six leaves, path -> sha256, sorted  },
+>     "producerIndexFiles": 1152
+diff lines: 13
+$ node scripts/wiring-census.mjs
+[wiring-census] wrote docs/content/wiring-census.json — 708 pools, 165 relation rows, 7 stamped files
+$ node scripts/wiring-census.mjs --check
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+```
+
+No census ROW moved and no `stamp.files` sha moved. The interlock that was RED at `84388a185`
+was GREEN at `679b62d43`, and `tests/lint` read `147 passed | 1 failed (2400 passed, 1 failed)`
+with the one red being the lighting census, `titles 23894 → 23895` for the single new arm.
+
+**3b-0b, the lighting refreeze.** The ritual REFUSED a dirty tree — "this census counts the
+WORKING TREE … Commit first, then refreeze at the clean tip" — which is why the refreeze is
+its own commit, exactly as car 3a-b was:
+
+```
+Error: census REFROZEN at 679b62d4380a8c290700cabcbdcd340b47b56864 by SEAM car 3b-0 (Opus 5):
+  files 2555 -> 2555, parked 375 -> 375, credited 2180 -> 2180,
+  titles 23894 -> 23895, suiteTitles 6393 -> 6393.  (fails BY DESIGN)
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js   ; exit=0
+      Tests  34 passed (34)
+```
+
+**NO OTHER STAGE MOVED THE LIGHTING CENSUS.** Cars 3b–3g add and remove no test title: every
+new assertion is folded into an arm that already existed. That was a deliberate choice — six
+more refreeze commits would have been six more register acts for nothing.
+
+### ⛔ THE ONE STRUCTURAL CHANGE THIS CAR MAKES: THE FILL SCANNER LEARNS THE SECOND CALL SHAPE
+
+`tests/helpers/dossierComposedFill.js` anchored on `/\breadStateProse\s*\(/` and read the pool
+key POSITIONALLY. A routed desk stops spelling that. Left alone, the scanner would have
+reported each routed desk's blocks as served by NO bag, and the census — whose `fill` column,
+licence arm and `UNMOUNTED_BLOCKS` second witness all derive from this one reader — would have
+recorded a wiring loss that never happened. The anchor now takes BOTH call shapes and reads the
+pool key from `spineKey` on a composed one; a composed call with no readable `spineKey` is
+REPORTED (`no readable \`spineKey\` in the composed options object`), never guessed.
+
+**THE PROOF THAT IT READS THE SAME TREE** is the census diff after every stage: byte-length
+identical at 1,807,516 and the whole delta a list of sha pairs. Read live through the extended
+scanner at the tip, `fillSites()` answers **96 sites** over the same block sets:
+
+```
+defense    DS-DEF-1 -11 -2 -3 -4 -5 -6 -8 -9
+economy    DS-ECO-1 -10 -11 -12 -2 -3 -6 -8 -9 · DS-SUP-3
+general    DS-GEN-11 -12 -13 -14 -16 -17 -18 -2 -3 -5 -6 -7 -8 -9 · DS-HK-1 · DS-POP-3 · DS-REL-1 -2
+power      DS-POW-1 … -7
+stressors  DS-CND-1 · DS-STR-1 · DS-STR-2
+warFaith   DS-FTH-1 -2 -3 · DS-WAR-1 -2 -3
+```
+
+### ⛔⛔ 3f-0 — THE DEFECT THIS CAR CAUGHT IN ITS OWN FIRST CUT, AND THE RULE IT PRODUCED
+
+The defense desk holds no `readings` object: all nine entry points take `(settlement, options)`
+and derive their own locals. The first cut of car 3f handed the candidates leaf a fresh object
+literal of those locals — `fn('DS-DEF-2', { dp, compound, forces })`. The wiring census's
+PRODUCER INDEX reads every object-literal key under `src/generators/**` and `src/domain/**` as
+a WRITE, **shorthand included** (that shorthand blindness is a defect car 8 had already cured
+in the other direction), so those names became "produced" keys of the estate and the census
+reclassified rows belonging to other desks:
+
+```
+committed 1807516   fresh 1807484   equal false
+"measured":      370 -> 378
+"not-produced":   60 ->  52
+eight rows moved, on `forces` and `structureKey` alone
+```
+
+An instrument reporting a wiring fact no writer ever wrote. **THE RULE: A DESK HANDS OVER A
+READING IT ALREADY HOLDS, UNDER THE NAME IT ALREADY HAS.** Three things landed as 3f-0 so that
+car 3f could be a routing and nothing else:
+
+1. The one call site already shipped in that shape was cured — `crisisBannerRung` passes
+   `banner`, not `{ banner }` (car 3b). It moved NO census row, so the hazard there was LATENT
+   rather than live, and the measurement says so rather than the reasoning.
+2. The fence gained the arm that stops it returning, folded into an existing arm so no test
+   title moved: every routed desk's candidates call takes a BARE IDENTIFIER as its second
+   argument. **PLANT-CONVICTED through the live scanner:** restoring `{ banner }` reds with
+   `expected [ '{ banner }' ] to deeply equal []` (1 failed | 8 passed); restored
+   byte-identical by `cmp` (md5 `7db1c7f71d71f893ae2e0818623317ef`), 9 passed.
+3. **JUDGMENT CALL, RECORDED FOR VETO.** The six leaves' `readings` parameter is widened from
+   `Record<string, unknown>` to `Record<string, unknown>|null|undefined`. Without it the rule
+   cannot be obeyed: `banner` and `settlement` are nullable at their own call sites, and
+   `check-domain-strict` convicted the bare-identifier form —
+   `src/domain/display/stateProse/stressorsStateProse.js: 1 strict errors (baseline 0) — +1`.
+   The narrow type also made the leaf's own fail-closed guard a branch the declared type said
+   could never be taken. **VETO SHAPE:** keep the narrow type and write `reading || {}` at each
+   such call site — an empty literal has no keys, so it mints nothing; it costs one expression
+   per site and puts a wrapper back in front of the reading.
+
+### ⛔ THE REGISTER DOOR THIS CAR REFUSES, WITH ITS MEASUREMENT AT EVERY STAGE
+
+The chair's ADDENDUM: a drift confined to `stamp.producerIndexFiles` and
+`stamp.candidateLeaves` is a lane's plain re-take; **a drift that moves a row or a stamped sha
+stays the chair's.** The six composers ARE stamped files (`STAMPED = [...COMPOSERS,
+dossierMounts.js]`), so every routing stage moves one. Refused at each, and measured at each:
+
+| stage | fresh vs committed | the delta |
+|---|---|---|
+| 3b | 1807516 / 1807516 | 4 diff lines — 1 desk sha |
+| 3c | 1807516 / 1807516 | 8 — 2 desk shas |
+| 3d | 1807516 / 1807516 | 12 — 3 desk shas |
+| 3e | 1807516 / 1807516 | 16 — 4 desk shas |
+| 3f-0 | 1807516 / 1807516 | 20 — 4 desk shas + 6 candidate-leaf shas |
+| 3f | 1807516 / 1807516 | 22 — 5 desk shas + 6 leaf shas |
+| 3g | 1807516 / 1807516 | **24 — all six desk shas + the six leaf shas** |
+
+At the final tip `diff … | grep -v stateProse` prints NOTHING: every changed line is a
+`src/domain/display/stateProse/*` sha, the file is byte-length identical, and no census row,
+fill, total, tier, grain or rate figure moved through six routings. **THE CHAIR'S CURE IS ONE
+COMMAND** at the landing, `node scripts/wiring-census.mjs`, and the twelve shas are the whole
+of it. The six candidate-leaf shas are a lane's under the ADDENDUM but are not separable from
+the same write, so the whole re-take is handed over.
+
+`tests/lint/proseWiringCensus.walker.test.js` therefore reds on ONE arm at every stage tip:
+`the committed file is current: expected 'stale-stamp' to be ''`.
+
+### ⛔ TWO MORE INSTRUMENTS MOVED UNDER CAR 3g, AND BOTH WERE CURED AT CAUSE
+
+1. **`tests/lint/writerReach.walker.test.js`** — `colour on stress is missing from the frozen
+   surfaceReach: expected 'dossier-pdf=N foundry=N web-display=R' to be '… web-display=N'`.
+   BISECTED by execution, not by reading: reverting OverviewTab alone greened it (56 passed),
+   reverting the optional chaining did not (still 1 failed), reverting the `useMemo` around
+   `stresses` did (56 passed). Memoising that list put its `r.stress` read inside a hook
+   callback and the register attributes a read differently there. `stresses` is a pure function
+   of `r`, so `r` alone is a correct dependency: it is a plain const again, with the
+   measurement written beside it and one `eslint-disable-next-line react-hooks/exhaustive-deps`
+   placed where the rule actually reports (before the dependency array, the idiom this file's
+   sibling already uses). No frozen register moved.
+2. **The prose-numerics baseline.** The first cut of the EconomicsTab memo shifted the file by
+   +7 lines and thirteen `.prose-numerics-baseline.json` rows are keyed on LINE:
+   `exact=207 rekeyed=0 relocated=14 FELL=4 NEW=4`. (The four FELL/NEW are not a leak: two
+   identical `{src.percentage}` snippets at 356/358 moved to 363/365 and the tool pairs only
+   unique snippets.) A `--write` re-key is a register door this car does not open, so the EDIT
+   was made LINE-NEUTRAL instead — four lines inserted above the early return, four removed
+   below it, and the baseline's own row list confirms no hit lies between them (EconomicsTab
+   rows are at 195, 203, 356, 358, 497-508, 687, 693). Back to
+   `baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0`.
+
+### THE DM-PAGE ACCEPTANCE — ALL EIGHT FRAMED BLOCKS, EACH WITH ITS ROUTE OR ITS LINE (X-F12)
+
+`DM_FIELD_FRAMED_BY_BLOCK` (`dmFieldProjection.js:85-94`) names eight. Ownership was MEASURED
+through `fillSites()`, not assumed: general 5 · defense 2 · economy 1 · stressors, warFaith and
+power NONE. Every one of them is unchanged by this car; the machine line stays where it was.
+
+**THE TWO MODULE-WIRED (car 3f).** `projectBesideDmField` has nowhere to put a write: it returns
+the DM's string by identity and offers the machine line beside it. Three call sites before this
+car, three after.
+
+| block | field | the route |
+|---|---|---|
+| DS-DEF-1 | `…safetyProfile.guardEffectivenessDesc` | the desk reads the field through `readProsePath(settlement, DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1'])` so it cannot spell the path differently from the registry; all three lenses return `projectBesideDmField(dmField, line?.text ?? null)` — `defenseStateProse.js:583` |
+| DS-DEF-3 | `…safetyProfile.safetyDesc` | both lenses project beside the SAME field — `defenseStateProse.js:1154` and `:1160` |
+
+**THE SIX CONVENTION-HELD**, each named by the component line that keeps the two adjacent:
+
+| block | field | the machine line | the DM's pen |
+|---|---|---|---|
+| DS-ECO-6 (3c) | `…safetyProfile.economicDragDesc` | `economyStateProse.js:1040` returns it as the `shadowEconomy` rung; rendered at `EconomicsTab.jsx:686` through `drawnAtMount('economics.shadowEconomy', …)` | `dragDesc` read at `EconomicsTab.jsx:650`, rendered at `:697` in the same shadow-economy section |
+| DS-GEN-5 (3g) | `arrivalScene` | mount `overview.situation` → `situationLine`, `OverviewTab.jsx:459-462` | `r.arrivalScene`, `OverviewTab.jsx:448` — the SAME `<div>` block, opened at `:447` |
+| DS-GEN-6 (3g) | `settlementReason` | mount `overview.origin` → `originLines`, `OverviewTab.jsx:479-481` | `r.settlementReason`, `OverviewTab.jsx:488-492`, the next block down |
+| DS-GEN-9 (3g) | `history.historicalCharacter` | mount `history.identity` → `identityLines`, `HistoryTab.jsx:120-122` | `historicalCharacter`, `HistoryTab.jsx:101` |
+| DS-GEN-11 (3g) | `economicViability.summary` | mount `viability.verdict` → `verdictLines`, `ViabilityTab.jsx:152-153` | `summaryClean` (the DM's `v.summary`, verdict prefix stripped), `ViabilityTab.jsx:140` — twelve lines above, same panel |
+| DS-REL-2 (3g) | `prominentRelationship.phrasing` | mount `overview.notableConnection` → `connectionLines`, `OverviewTab.jsx:505` | `r.prominentRelationship.phrasing`, `OverviewTab.jsx:498-508` — the same block |
+
+⚠ **A CORRECTION TO CAR 3c's COMMIT BODY, made here because a commit cannot be amended.** That
+body cited the DS-ECO-6 route as `<DeskLines mount="economics.commercialProfile">` at
+`EconomicsTab.jsx:344` and the rung at `economyStateProse.js:975`. **BOTH ARE WRONG.** The rung
+is `shadowEconomy` at `economyStateProse.js:1040` and it renders through
+`drawnAtMount('economics.shadowEconomy', deskProse.shadowEconomy)` at `EconomicsTab.jsx:686`.
+The table above is the measured route; the commit body's version was written from memory and is
+withdrawn.
+
+### `DeskLines`, KEYED ON MOUNT + POSITION (both callers, cars 3c and 3d)
+
+`key={line}` collides whenever two lenses of one position legitimately draw the same line — a
+pool with one variant left after anchoring says the same thing twice — and React then drops a
+paragraph and the reader silently loses a lens. The position is what a line IS at a mount, so
+the position is its identity. `EconomicsGlance.jsx` and `WarFaithDesk.jsx` take the same shape
+because the two renderers are deliberately one idiom.
+
+### THE SIX RENDER-BODY READS, MEMOISED (car 3g, ARCH §4.1 / X-F9)
+
+PlotHooksTab was already memoised. **FIVE OF THE SIX NEEDED THE CALL LIFTED ABOVE AN EARLY
+RETURN**, because a hook may not follow one: `if (!r) return null` (OverviewTab,
+RelationshipsTab), `if (!eco) …` (EconomicsTab), `if (!s?.economicViability) …` (ViabilityTab),
+`if (!r?.history) …` (HistoryTab), `if (!steadings.length && !grade && !ancient) …`
+(SteadingsSection). In RelationshipsTab the two lists the DS-REL-1 desk reads were lifted with
+it and memoised on `(r, liveConflicts)` — both are pure functions of those, which is what makes
+the lift safe and the memo correct rather than merely cheap. No list's CONTENT moves.
+`react-hooks/rules-of-hooks` is an ERROR in this estate's config and eslint is clean at the tip.
+
+### THE GATES AT THE FINAL TIP `efb5111cd`
+
+```
+$ npx vitest run tests/lint                                                 ; exit=1
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > the committed census is byte-identical …
+ Test Files  1 failed | 147 passed (148)
+      Tests  1 failed | 2400 passed (2401)
+
+$ node scripts/check-domain-strict.mjs                                      ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+
+$ node scripts/check-full-typecheck.mjs                                     ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+
+$ node scripts/check-observed-shape-readers.mjs                             ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                            ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+
+$ npx eslint src/domain/display/stateProse/ src/components/new/tabs/ <the tests>
+✖ 2 problems (0 errors, 2 warnings)      # both warnings pre-existing and unmoved:
+                                         # MONSTER_THREAT_TIERS, STRESS_TYPE_MAP unused
+
+$ node <probe-em> src/domain/display/stateProse/generalStateProse.js
+generalStateProse.js  literals:336  em:3  bang:0      # the banked count, unmoved
+$ npx vitest run tests/copy/voiceMechanics.test.js                          ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+```
+
+**THE STRICT RATCHET SITS EXACTLY ON ITS CEILING, 1120 / 1120, AT EVERY ONE OF THE NINE
+COMMITS.** Thirty-one routed call sites, six desks, six components and two renderers added ZERO
+strict-type errors. The voice E2 red is the two banked files at the counts car 3a measured; this
+car adds nothing to it (`em:0 bang:0` in every routed desk but the general one, whose 3 are the
+banked ones).
+
+**THE THREE REDS AT THE TIP, IN ONE LINE EACH.** (a) the census interlock — refused above, one
+command to cure, twelve shas; (b) `voiceMechanics` E2 — two banked files, not this car's;
+(c) nothing else. `tests/lint` is 147 of 148 green and 2,400 of 2,401 assertions pass.
+
+### THE RESUME COMMANDS
+
+```
+npx vitest run tests/property/dossierProseManifest.test.js        # drift [] — the acceptance
+npx vitest run tests/lint/composeStateProseFence.test.js          # the roster: six routed desks
+npx vitest run tests/lint                                         # 1 red: the census interlock
+node scripts/wiring-census.mjs --check                            # the refused door, still stale
+```
+
+**STATUS: CARS 3b-0, 3b-0b, 3b, 3c, 3d, 3e, 3f-0, 3f AND 3g LANDED.**
