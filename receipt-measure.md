@@ -826,3 +826,202 @@ this car, with no exceptions and no batching.
    so a build with no rate half has three tiers and says so by their absence rather than by a
    zero. `--check` is green because the committed rate half is carried through verbatim.
 
+
+---
+
+## CAR 0f — THE RELATION JOIN, MEASURED AS AN ALIAS DRAFT (SITTING §O.2)
+
+Tip after this car: `fab1bfde7` (0f) · `4cdb29b4f` (0f-b, the lighting refreeze) · `23ea93ab6`
+(0g, the anchor ratchet's catch, cured).
+
+### 0f.1 THE MODE, AND WHAT IT REFUSES TO DO
+
+`node scripts/wiring-census.mjs --join-draft` proposes a candidate alias between each of the
+89 PRODUCER TOKENS the relation table names and the desks' read roots. **Nothing is ratified
+and no leaf is written**: the mode prints and RETURNS BEFORE the write, so the control flow
+says it as well as the docblock; `docs/content/wiring-census.json` carries no alias table (the
+walker asserts that, anchored); `--check` is green; and `relationJoin` still answers STRICT 0.
+
+One row per (endpoint, root) pair, carrying the STRONGEST of four evidence kinds and a
+citation a reader can open:
+
+| evidence | the rule | direction |
+|---|---|---|
+| `identifier` | the endpoint's leaf and a SEGMENT of a read path are one identifier under a case- and separator-insensitive reading | — (the read path is the citation) |
+| `reading-builder` | a desk-read line that WRITES the root as a bag key and NAMES the leaf | root written, leaf named |
+| `generator-write` | a generator that WRITES the leaf as a key or an assignment, on a line NAMING the root | leaf written, root named |
+| `docblock` | one comment line names both tokens | — |
+
+### 0f.2 THE DRAFT, EXECUTED
+
+```
+$ node scripts/wiring-census.mjs --join-draft
+ALIAS DRAFT · ARCH car 0f · SITTING §O.2 · MEASURED, NOTHING RATIFIED, NO LEAF WRITTEN
+  endpoints 89 · desk read roots 85 (15 excluded as the instrument's own table labels) · read paths 153
+  candidate rows 37 · endpoints with at least one candidate 15 · with none 74
+  by evidence: docblock 25 · generator-write 9 · identifier 3
+  RELATION ROWS THAT WOULD JOIN under this draft: 4 of 165 · by direction a->b 4
+  (the shipped join, unchanged and unratified: STRICT 0)
+    WOULD JOIN  consequence (a) condition:famine -> system:food_security
+    WOULD JOIN  consequence (a) condition:famine -> system:public_legitimacy
+    WOULD JOIN  consequence (a) condition:boom -> system:public_legitimacy
+    WOULD JOIN  consequence (b) signal:occupied -> cause:occupation
+  ── the draft, the forty strongest candidates ─────────────────────
+    cause:occupation                -> war                        identifier       war.occupation
+    economicGates.military          -> settlement.defenseProfile  identifier       settlement.defenseProfile.economicGates.military
+    system:food_security            -> eco                        identifier       eco.foodSecurity.stockpile
+    cause:underfunded               -> forces                     generator-write  src/generators/structuralValidator.js:588
+    condition:famine                -> name                       generator-write  src/generators/stressNarrative.js:80
+    condition:famine                -> row                        generator-write  src/generators/defenseGenerator.js:608
+    condition:siege                 -> name                       generator-write  src/generators/narrativeText.js:53
+    economicGates.disaster          -> stress                     generator-write  src/generators/history/historyEventStrands.js:42
+    economicGates.military          -> settlement.config          generator-write  src/generators/npc/factionLeaderSecret.js:56
+    economicGates.military          -> stress                     generator-write  src/generators/npcGenerator.js:169
+    signal:occupied                 -> name                       generator-write  src/generators/stressNarrative.js:83
+    system:food_security            -> settlement.config          generator-write  src/generators/defenseGenerator.js:552
+    cause:occupation                -> reading                    docblock         warFaithStateProse.js:192
+    cause:occupation                -> stress                     docblock         generalStateProse.js:1016
+    cause:occupation                -> warBeat                    docblock         warFaithStateProse.js:463
+    condition:boom                  -> events                     docblock         generalStateProse.js:1010
+    condition:siege                 -> warBeat                    docblock         warFaithStateProse.js:463
+    condition:war_exhaustion        -> ledger                     docblock         warFaithStateProse.js:214
+    condition:war_exhaustion        -> reading                    docblock         warFaithStateProse.js:214
+    economicGates.economic          -> name                       docblock         generalStateProse.js:486
+    economicGates.economic          -> row                        docblock         defenseStateProse.js:334
+    economicGates.economic          -> score                      docblock         defenseStateProse.js:334
+    economicGates.economic          -> settlement.config          docblock         defenseStateProse.js:9
+    economicGates.economic          -> settlement.defenseProfile  docblock         defenseStateProse.js:9
+    economicGates.economic          -> stress                     docblock         generalStateProse.js:773
+    economicGates.internal          -> court                      docblock         defenseStateProse.js:321
+    economicGates.internal          -> row                        docblock         defenseStateProse.js:321
+    economicGates.monster           -> readings.tier              docblock         defenseStateProse.js:421
+    economicGates.monster           -> settlement.tier            docblock         defenseStateProse.js:421
+    signal:occupied                 -> stress                     docblock         generalStateProse.js:1016
+    signal:occupied                 -> war                        docblock         warFaithStateProse.js:183
+    system:defense_readiness        -> score                      docblock         defenseStateProse.js:1441
+    system:food_security            -> blockaded                  docblock         defenseStateProse.js:1264
+    system:public_legitimacy        -> breakdown                  docblock         powerStateProse.js:405
+    system:public_legitimacy        -> legitimacy                 docblock         powerStateProse.js:7
+    system:public_legitimacy        -> power                      docblock         powerStateProse.js:7
+    system:public_legitimacy        -> reading                    docblock         powerStateProse.js:843
+```
+
+(37 rows, printed whole: the "top forty" the brief asks for is the entire draft.)
+
+**THE THREE IDENTIFIER ROWS ARE THE DRAFT'S WHOLE STRENGTH**, and one of them is ARCH §5.2's
+OWN WORKED EDGE: `economicGates.military` against the defence desk's
+`settlement.defenseProfile.economicGates.military`. Car 0's LEAF join reached 0 rows on both
+endpoints precisely because it compared RAW segments with no case or underscore reading —
+`food_security` against `foodSecurity` — which is the normalisation §O.2 says nobody has
+built. `aliasKey` is that reading and nothing else, and plant #92 proves it by taking it away.
+
+### 0f.3 THE ENDPOINTS WITH NO CANDIDATE — 74 of 89, the wiring debt the SEAM and WAVE inherit
+
+```
+cause:captured · cause:chain-starved · cause:clergy-scandal · cause:conduct-drift ·
+cause:conversion-pressure · cause:depleted · cause:garrison-drained · cause:levied-away ·
+cause:scandal · cause:secularization · cause:siege-scarred · cause:trade-strangled ·
+condition:alliance_burden · condition:army_deployed · condition:cold_war_sanctions ·
+condition:corruption_exposed · condition:coup_suppressed · condition:custom_crisis ·
+condition:dominant_npc_removed · condition:faction_challenge · condition:flourishing ·
+condition:food_anchor_lost · condition:government_overthrown · condition:magical_instability ·
+condition:occupation_burden · condition:occupation_lifted · condition:occupation_resistance ·
+condition:plague · condition:rebellion · condition:reconstruction ·
+condition:regional_authority_instability · condition:regional_conflict_pressure ·
+condition:regional_criminal_pressure · condition:regional_export_market_loss ·
+condition:regional_import_shortage · condition:regional_information_shock ·
+condition:regional_migration_pressure · condition:regional_protection_gap ·
+condition:regional_religious_pressure · condition:regional_route_disruption ·
+condition:regional_service_disruption · condition:regional_tax_revenue_disruption ·
+condition:reinforcement_cost · condition:relief_burden · condition:siege_lifted ·
+condition:stressor_residual · condition:trade_embargo · condition:trade_realignment ·
+condition:trade_route_cut · condition:vassal_extraction · condition:vassal_trade_coercion ·
+condition:war_drain · condition:war_mobilization · condition:war_pressure ·
+signal:captureState · signal:clergyRevealedTaint · signal:corruptingDeity ·
+signal:deployed · signal:revealedInstitutions · signal:rivalCult ·
+src/generators/defenseGenerator.js::econOutput · src/generators/defenseGenerator.js::economyOutput ·
+src/generators/defenseGenerator.js::instFlags · system:criminal_opportunity ·
+system:economic_capacity · system:faction_power · system:healing_capacity ·
+system:housing_pressure · system:labor_capacity · system:magical_stability ·
+system:religious_authority · system:ruling_authority · system:social_trust ·
+system:trade_connectivity
+```
+
+**The shape of the debt is legible from the list:** the 46 CONDITION ARCHETYPES are named by
+`activeConditions` and no desk reads a settlement field spelled like any of them; the SYSTEM
+VARIABLES are the causal substrate ARCH §5.3 already refuses at the dossier for its 546,887 B
+import cost. What the draft reaches is the handful of tokens the generator PERSISTS under a
+name a desk then reads.
+
+### 0f.4 A FIRST CUT MEASURED AND REPLACED
+
+The first rule proposed an alias whenever two tokens shared a generator LINE. It produced 76
+rows, 51 of them `generator-write`, and among them `condition:famine -> war` from one line of
+`economy/foodBalance.js`. The rule shipped is a **WRITE and a mention, never two mentions**,
+and each direction is the one its own sentence in §O.2 states (a reading builder FILLS the
+root; a generator WRITES the endpoint's field). Rows 76 → 37, `generator-write` 51 → 9. The
+first cut is recorded because a draft that overstates its ground is worse than a thin one.
+
+### 0f.5 THE ARM AND THE PLANT
+
+```
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js
+      Tests  52 passed (52)          (50 -> 52)
+```
+
+The fixture arm the brief asks for: one endpoint, one root, one shared identifier ⇒ EXACTLY
+one candidate carrying the read path that proposed it; a path sharing no segment ⇒ none; two
+paths carrying one pair ⇒ one row, never two. The shipped arm asserts the structural half
+(every endpoint answered once, one row per pair, every row's evidence from the closed list,
+every row citing something) and the report half (37 / 15 / 74 / 4 and the four joining rows by
+name), with the sensitivity declared in the arm itself: the counts read the six composers'
+docblocks and every file under `src/generators/`, so a car editing a generator comment can
+move them.
+
+```
+$ perl … ; md5
+--- plant #92  MUTATED scripts/wiring-census.mjs  dd5d7b159ab6779ab027c75859b9b187 -> 35872b6632816e6454d5b681deb68637
+    RESTORED cmp-identical
+#92 anchor occurrences: 1
+#92 the alias draft stops reading case  => 2 red of 52 · restored => 52 passed
+```
+
+### 0f.6 THE GATES, AND THE RATCHET THAT CAUGHT CAR 0f
+
+```
+$ npx eslint scripts/wiring-census.mjs tests/lint/proseWiringCensus.walker.test.js  ; exit=0
+$ node scripts/check-domain-strict.mjs        [domain-strict] ✓ (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs       [typecheck-ratchet] OK (173, ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs   1972 finding(s), exactly matching.
+$ node $SC/prose-numerics-rekey.mjs .         baseline=225 live=225 … FELL=0 NEW=0
+$ node scripts/wiring-census.mjs --check      verified 708 pools / 2266 variants / 165 relation rows
+$ npx vitest run tests/lint/mutationCoverageManifest.test.js      Tests  10 passed (10)
+
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 0f (Opus 5)' … npx vitest run …LightingContract…
+Error: census REFROZEN at fab1bfde79f17fbfcdfd025f470073d41130283f by MEASURE car 0f (Opus 5):
+  files 2551 -> 2551, parked 375 -> 375, credited 2176 -> 2176,
+  titles 23803 -> 23805, suiteTitles 6368 -> 6369.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js       Tests  34 passed (34)
+
+$ npx vitest run tests/lint                                      ; exit=1  (at 4cdb29b4f)
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js
+  tests/lint/proseWiringCensus.walker.test.js: 1 un-anchored negative assertion(s) at
+  line(s) 1182 (frozen ceiling 0).
+ Test Files  1 failed | 145 passed (146)
+      Tests  1 failed | 2368 passed (2369)
+```
+
+**The ratchet caught car 0f's `expect(Object.keys(committed)).not.toContain('aliases')`** — the
+same shape it caught in car 0c, cured the same way in **car 0g**:
+`expectAbsentWithAnchor(Object.keys(committed), 'aliases', 'relations', …)`, so a drifted
+object reds on the liveness limb before the exclusion limb is read. THE FINAL RUN, at the tip:
+
+```
+$ npx vitest run tests/lint                                      ; exit=0  (at 23ea93ab6)
+ Test Files  146 passed (146)
+      Tests  2369 passed (2369)
+   Duration  110.37s (transform 22.71s, setup 4.67s, import 155.94s, tests 526.09s, environment 22ms)
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+```
+
