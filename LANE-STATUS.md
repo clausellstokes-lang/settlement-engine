@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-08 19:09:01 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 19:15:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE train lands — the composed-prose sequence's cars 0, 1 and 2 as twenty
 
@@ -147,4 +147,4 @@ product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.52 2.71 2.81
+load: 2.71 2.46 2.63
