@@ -399,3 +399,18 @@ React refs are values that are not needed for rendering. Refs should only be acc
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 42449 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] BANKED-ROW MAGNITUDE REFUSED — a permitted red may not GROW:
+  1 banked row measure(s) EXCEED their frozen ceiling:
+    tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+      [files-over-baseline] measured 3 > ceiling 2 (+1) — src/domain files whose Tier-2 em-dash count sits ABOVE the frozen per-file baseline (labelBands.js +5, generalStateProse.js +3 — a producer's authored dashed vocabulary as map keys and parsed delimiters); the shrink-only door cannot raise the baseline and the generator import is forbidden in writing — PATTERN RE-DERIVED 2026-09-05 (§900 gate run 2) against the JSON reporter's failureMessages[0], which carries the arm's custom message lines and NOT the terminal diff block the first pattern was cut against; ceiling unchanged at 2
+
+  ⛔ THE CURE IS TO CUT THE POPULATION, NEVER TO RAISE THE CEILING. This row is already
+    a permitted failure; the ceiling is the only thing still bounding what sits behind it.
+    `--update` will NOT raise it (it re-freezes at the minimum), which is deliberate.
+
+Frozen census is 3 failing test(s), measured at 85cb879286f2fc95893086c0e5fa46a0e96d6f03.
+GATE_END=2026-09-08T01:35:12Z
+TRUE_EXIT=1
+GATE_LOAD_POST=13.11 19.04 18.77
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=908665aafcb772c3ce17308ee7a0c8507e53b5a1
