@@ -44,6 +44,11 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/domain/prose/entryWalker.js
+  src/domain/prose/grammarWalker.js
+  src/domain/prose/presenceMeasure.js
+  src/domain/institutions/institutionTable.js
+  src/domain/display/heraldIntegrity.js
   src/domain/userEdits.js
   src/generators/cascadeGenerator.js
   src/data/stressTypes.js
@@ -1040,6 +1045,47 @@ check_caught "golden-freeze/the exclusion roster loses a spelling while reading 
 #     Restored via `git checkout --` => 6 passed.
 perl -0pi -e "s/'structuralViolations', 'thesis', 'tier',/'structuralViolations', 'thesis', 'tier', 'customContentRoster',/" src/domain/display/publicSafe.js
 check_caught "security/the living-content roster becomes an allowlisted public key" src/domain/display/publicSafe.js "npx vitest run tests/security/livingContentRosterPublicDrop.test.js" "⭐ BEHAVIOURAL: a LIT world really carries a roster, and the default projection drops it"
+
+# 75. INSTR-912 car 1 — THE SAME-ENTRY WALKER'S TOTALITY ARM. The Brackwater lesson is that
+#     only a CLOSED COLUMN licenses a quantifier, and the arm that carries it is one branch
+#     reading `col.closed`. The failure it forecloses is the quiet one: the branch stops
+#     consulting the flag and every "every household", "everyone" and "the only person" in
+#     the estate becomes licensed, while the four Brackwater fixtures go on looking healthy
+#     because they still produce SOME findings. Strike the flag read.
+#     Measured before landing (lane INSTR-912, 2026-09-07): planted => 6 red of 19,
+#     including all four Brackwater tables and the anti-vacuity guard; restored => 19 passed.
+perl -0pi -e 's/    \} else if \(!col\.closed\) \{/    } else if (false) {/' src/domain/prose/entryWalker.js
+check_caught "prose-entry-walker/the totality arm stops reading the column's closed flag" src/domain/prose/entryWalker.js "npx vitest run tests/lint/proseEntryContradiction.walker.test.js --no-file-parallelism"
+
+# 76. INSTR-912 car 2 — THE SEGMENT DEFINITION. Control 4's calibration reproduces PROBE_ALL's
+#     407/708 and 79/708 to the unit, and it can only do that while a SEGMENT means exactly
+#     what check-pair.mjs:43 means by it: a SENTENCE. Drift it to a clause split and the
+#     figures move while every arm still reports something. Measured: planted => 1 red of 42,
+#     naming control 4; restored => 42 passed.
+perl -0pi -e "s/    \.split\(\/\(\?<=\[\.\?!\]\)\\\\s\+\(\?=\[A-Z\\\"'\(\]\)\/\)\.filter\(Boolean\)\.length;/    .split(\/(?<=[.?!;])\\\\s+\/).filter(Boolean).length;/" src/domain/prose/grammarWalker.js
+check_caught "prose-move-grammar/the segment definition drifts from a sentence to a clause" src/domain/prose/grammarWalker.js "npx vitest run tests/lint/proseMoveGrammar.walker.test.js --no-file-parallelism"
+
+# 77. INSTR-912 car 3 — THE LOADERS' EXACTNESS. A register loader that silently reads one row
+#     short turns an honest OWED into a false green: the walker still runs, still reports, and
+#     measures a corpus that is not the corpus. R4b's count is asserted as the integer 50, so
+#     removing one disclosure line must red. Measured: planted => 1 red of 10; restored => 10.
+perl -0pi -e "s/    'What was said is what was so\.',\n//" src/domain/display/heraldIntegrity.js
+check_caught "prose-register-loaders/a disclosure line leaves R4b and the exact count breaks" src/domain/display/heraldIntegrity.js "npx vitest run tests/lint/proseRegisterLoaders.walker.test.js --no-file-parallelism"
+
+# 78. INSTR-912 car 4 — PERSONS ARE NEVER CLOSED. The institution table's one unbreakable
+#     claim is that `whoIsCounted.closed` is false on every settlement forever, because the
+#     population is a number and there is nothing to close. Close it and the Brackwater kicker
+#     becomes licensed everywhere. Measured: planted => 1 red of 12; restored => 12 passed.
+perl -0pi -e "s/        closed: false,\n        values: Object\.freeze\(band \? \[band\] : \[\]\),/        closed: true,\n        values: Object.freeze(band ? [band] : []),/" src/domain/institutions/institutionTable.js
+check_caught "institution-table/the persons column closes and the Brackwater quantifier becomes licensed" src/domain/institutions/institutionTable.js "npx vitest run tests/lint/institutionTable.walker.test.js --no-file-parallelism"
+
+# 79. INSTR-912 car 5 — THE PUBLISHED LEXICON IS A PARTITION. The presence measure's third
+#     line is the spread ACROSS SENSES, and it means nothing unless every counted noun belongs
+#     to exactly one of five buckets. Rename a bucket and the partition silently becomes four
+#     senses while the per-hundred-words figure goes on looking the same. Measured: planted =>
+#     1 red of 9; restored => 9 passed.
+perl -0pi -e "s/  smell: Object\.freeze\(\[/  smellRemoved: Object.freeze([/" src/domain/prose/presenceMeasure.js
+check_caught "prose-presence/a sense leaves the published lexicon and the spread stops being a partition" src/domain/prose/presenceMeasure.js "npx vitest run tests/lint/proseMeasures.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

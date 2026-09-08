@@ -28,6 +28,7 @@ import {
   TABLE_COLUMNS,
 } from '../../src/domain/institutions/institutionTable.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { quantityWords } from '../../src/domain/worldPulse/demographicsHerald.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SOURCE = readFileSync(join(ROOT, 'src/domain/institutions/institutionTable.js'), 'utf8');
@@ -50,11 +51,19 @@ const town = (tier, seed) => generateSettlementPipeline(
   { seed, customContent: {} },
 );
 
+/**
+ * The table asks for the CLOSED QUANTITY VOCABULARY rather than importing it — the Herald owns
+ * it, and importing it moved a FROZEN tuning table's dependent list. The test supplies the
+ * real one, so the band column is measured against the engine's own words.
+ */
+const WORLD = Object.freeze({ bandOf: quantityWords });
+
 describe('the table\'s shape — eleven columns, `closed` per column', () => {
   it('carries exactly the eleven columns CLERK-LAWS §1.2 names, and `closed` is not one of them', () => {
     expect(TABLE_COLUMNS).toHaveLength(11);
+    // anchored: the line above pins the list at eleven, so an emptied roster cannot pass here
     expect(TABLE_COLUMNS).not.toContain('closed');
-    const table = institutionTableOf(town('town', 'table-shape'));
+    const table = institutionTableOf(town('town', 'table-shape'), WORLD);
     for (const column of TABLE_COLUMNS.filter((c) => c !== 'settlement')) {
       expect(table.columns[column], `missing column ${column}`).toBeTruthy();
       expect(typeof table.columns[column].closed).toBe('boolean');
@@ -65,7 +74,7 @@ describe('the table\'s shape — eleven columns, `closed` per column', () => {
   });
 
   it('is FROZEN all the way down — a derived projection nobody can write into', () => {
-    const table = institutionTableOf(town('town', 'table-frozen'));
+    const table = institutionTableOf(town('town', 'table-frozen'), WORLD);
     expect(Object.isFrozen(table)).toBe(true);
     expect(Object.isFrozen(table.columns)).toBe(true);
     expect(Object.isFrozen(table.rows)).toBe(true);
@@ -76,7 +85,7 @@ describe('the table\'s shape — eleven columns, `closed` per column', () => {
 describe('the one thing the table can never say', () => {
   it('`whoIsCounted` is OPEN on every tier, and holds a BAND rather than a roll', () => {
     for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
-      const table = institutionTableOf(town(tier, `open-${tier}`));
+      const table = institutionTableOf(town(tier, `open-${tier}`), WORLD);
       expect(table.columns.whoIsCounted.closed, `${tier} closed its persons column`).toBe(false);
       // A band word, never an enumeration: at most ONE value, and it is a phrase.
       expect(table.columns.whoIsCounted.values.length).toBeLessThanOrEqual(1);
@@ -86,7 +95,7 @@ describe('the one thing the table can never say', () => {
 
   it('the institution column IS closed, because the live roster is the whole set', () => {
     const settlement = town('town', 'closed-roster');
-    const table = institutionTableOf(settlement);
+    const table = institutionTableOf(settlement, WORLD);
     expect(table.columns.institution.closed).toBe(true);
     // Closed means the values ARE the roster — and the ruin filter is what makes that true.
     expect(table.columns.institution.values.length).toBe(table.rows.length);
@@ -102,7 +111,7 @@ describe('the column census, measured across the estate', () => {
     let scanned = 0;
     for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
       for (let i = 0; i < 5; i += 1) {
-        const table = institutionTableOf(town(tier, `estate-${tier}-${i}`));
+        const table = institutionTableOf(town(tier, `estate-${tier}-${i}`), WORLD);
         scanned += 1;
         if (table.columns.whoIsExempt.values.length) exemptHits += 1;
         expect(table.columns.whoIsExempt.nullEverywhere).toBe(true);
@@ -124,7 +133,7 @@ describe('the column census, measured across the estate', () => {
   it('prints the column census beside CLERK-LAWS §1.2\'s own table', () => {
     const rows = [];
     for (const tier of ['hamlet', 'town', 'city']) {
-      const table = institutionTableOf(town(tier, `census-${tier}`));
+      const table = institutionTableOf(town(tier, `census-${tier}`), WORLD);
       rows.push(`  ${tier} — ${table.rows.length} live institutions`);
       for (const c of columnCensus(table)) {
         rows.push(`     ${c.column.padEnd(16)} closed=${String(c.closed).padEnd(5)}`
@@ -159,18 +168,32 @@ describe('the column census, measured across the estate', () => {
 
 describe('the fences the owner reserved — asserted against the module\'s own bytes', () => {
   it('writes nothing: no assignment into a settlement, no persistence import', () => {
+    // THE LIVENESS ANCHOR for every negative in this describe: the blanked source must still
+    // be the module, and must still be reading a settlement. Without it a renamed or emptied
+    // file would satisfy all three refusals below by holding nothing at all.
+    expect(CODE).toMatch(/export function institutionTableOf/);
+    expect(CODE).toMatch(/settlement\?\.population/);
+    // anchored: the two assertions above prove CODE is this module and reads a settlement
     expect(CODE).not.toMatch(/settlement\.\w+\s*=[^=]/);
+    // anchored: CODE is pinned live above; an import line is raw-byte by nature
     expect(SOURCE).not.toMatch(/\bfrom\s+'[^']*(store|persist|saves|localStorage)/i);
+    // anchored: CODE is pinned live above, so an empty read cannot pass this
     expect(CODE).not.toMatch(/\blocalStorage\b|\bindexedDB\b/);
   });
 
   it('adds no `exempt` field and no `bailiff` role — both owner-gated', () => {
     // `whoIsExempt` is a COLUMN NAME and is expected; an `exempt:` KEY would be a writer.
-    expect(CODE).not.toMatch(/\bexempt\s*:/);
-    expect(CODE.toLowerCase()).not.toMatch(/bailiff/);
-    // The blanker must be doing real work, or the fence is a raw-byte scan wearing its coat.
+    // The blanker must be doing real work, or the fence is a raw-byte scan wearing its coat —
+    // so the pair below is the LIVENESS ANCHOR for both refusals: the phrase IS in the source
+    // and is NOT in the blanked code.
     expect(SOURCE).toMatch(/`exempt: true\|false`/);
+    // anchored: SOURCE holds the phrase (line above); its absence here proves the blanker ran
     expect(CODE).not.toMatch(/`exempt: true\|false`/);
+    expect(CODE).toMatch(/whoIsExempt/);
+    // anchored: CODE holds `whoIsExempt` (line above), so an empty read cannot pass this
+    expect(CODE).not.toMatch(/\bexempt\s*:/);
+    // anchored: CODE holds `whoIsExempt` two lines up, so an empty read cannot pass this
+    expect(CODE.toLowerCase()).not.toMatch(/bailiff/);
   });
 
   it('routes the ruin filter rather than re-spelling it', () => {

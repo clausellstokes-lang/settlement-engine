@@ -2584,6 +2584,26 @@
     "tests/generators/generationWorkerIdentity.test.js": {
       "kind": "rationale",
       "rationale": "THE GENERATION-TRANSPORT DORMANCY INSTRUMENT (HORIZON-B2, the generation-worker car). A RATIONALE rather than a sweep plant, and NOT on the shared tests/generators admission ref: that paragraph describes the 97 files the ODQ 764.2 widening made visible, and this file was written after it, so citing it would be a row pointing at a history it has no part in (the densityLaw.test.js precedent in this same tree). ITS OWN REASON IS THAT THE PLANTS ARE EXECUTED IN-SUITE RATHER THAN SWEPT. Every arm of this file drives the REAL pipeline through the REAL generation core and compares byte strings, so a planted regression anywhere in generateSettlementPipeline, carryLockedRosterThroughGenerate, the core, the shell or the client moves a hash and reds it: the clone-boundary arm runs 25 tier x culture rows twice each and diffs settlement AND pipelineHistory; the identity arm compares the core against the direct module entry over the same 25 rows; the end-to-end arm drives the real worker shell through the real client over a transport double that structured-clones in BOTH directions and asserts the outcome is 'worker' rather than a silent in-thread fallback; and the carry arms assert a NON-VACUOUS preservation report (preserved.length >= 1) against the same carry applied outside the core. The file also carries its own sample-coverage arm, so a sample that collapsed onto one tier reds rather than passing quietly. WHY NOT A SWEEP PLANT ANYWAY: scripts/mutation-sweep.sh reverts with the `git checkout --` family that this program's shared-tree protocol forbids build lanes to run, the standing reason already recorded at wcoin2-treasury-conservation-executed-2026-08-30 and at the densityLaw row above. PROMOTION PATH, NAMED: plant a one-field mutation on the object the core returns (src/workers/generationRequest.js): it needs no other lane's file and so cannot red a neighbouring train. Vetoable: replace with a kind:'mutation' plant once the sweep can run from CI or a dedicated single-owner checkout."
+    },
+    "tests/lint/institutionTable.walker.test.js": {
+      "kind": "mutation",
+      "label": "institution-table/the persons column closes and the Brackwater quantifier becomes licensed"
+    },
+    "tests/lint/proseEntryContradiction.walker.test.js": {
+      "kind": "mutation",
+      "label": "prose-entry-walker/the totality arm stops reading the column's closed flag"
+    },
+    "tests/lint/proseMeasures.walker.test.js": {
+      "kind": "mutation",
+      "label": "prose-presence/a sense leaves the published lexicon and the spread stops being a partition"
+    },
+    "tests/lint/proseMoveGrammar.walker.test.js": {
+      "kind": "mutation",
+      "label": "prose-move-grammar/the segment definition drifts from a sentence to a clause"
+    },
+    "tests/lint/proseRegisterLoaders.walker.test.js": {
+      "kind": "mutation",
+      "label": "prose-register-loaders/a disclosure line leaves R4b and the exact count breaks"
     }
   },
   "meta": {

@@ -42,6 +42,7 @@ import {
   loadStateAnnex, loadStateLeaves, poolCells,
 } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /**
  * The estate's OFFICE roster, DERIVED from the two role catalogues rather than transcribed.
@@ -290,9 +291,12 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     for (const breach of BREACHES) {
       const entry = corpus.find((e) => e.text.includes(breach.find));
       const cured = { ...entry, text: entry.text.replace(breach.find, breach.cure) };
-      const arms = walkEntry(cured, withEntryContext(base, {})).fails.map((f) => f.arm);
-      expect(arms, `${breach.where}: the cured text still fails on ${breach.arm}`)
-        .not.toContain(breach.arm);
+      const before = walkEntry(entry, withEntryContext(base, {})).fails.map((f) => f.arm);
+      const after = walkEntry(cured, withEntryContext(base, {})).fails.map((f) => f.arm);
+      // PRESENT-THEN-ABSENT, not a bare absence: the arm must fire on the shipped sentence
+      // AND fall silent on the cured one. A bare "the cure passes" would pass just as
+      // happily if the arm had stopped working altogether.
+      expectPresentThenAbsent(before, after, breach.arm, breach.where);
     }
   });
 

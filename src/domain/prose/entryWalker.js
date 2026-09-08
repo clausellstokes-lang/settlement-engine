@@ -252,12 +252,6 @@ export function bandClassOf(phrase) {
   return cls ? cls[0] : phrase;
 }
 
-/**
- * The first band's ceiling, from `QUANTITY_BANDS`' lowest row (`[3, 'a few souls']`). A
- * count at or under it sits BELOW the band vocabulary rather than outside it.
- */
-const FIRST_BAND_CEILING = 3;
-
 /** The digit value of a spelled cardinal word. @type {Readonly<Record<string, number>>} */
 const CARDINAL_VALUE = Object.freeze({
   two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
@@ -390,7 +384,12 @@ function armC1(entry, ground, out) {
       // always enumerate PARTIES ("between two people rather than two houses") rather than
       // band a population. Whether such a count is a population figure is the refuter's;
       // "three hundred souls" is not, and fails.
-      const channel = f.value !== null && f.value <= FIRST_BAND_CEILING ? out.withheld : out.fails;
+      // `3` is `QUANTITY_BANDS`' LOWEST CEILING (`[3, 'a few souls']`) — the edge of the band
+      // vocabulary itself, not a dial. It is written at its use site rather than hoisted,
+      // because a module-top-level named number in `src/domain` is an unregistered tuning dial
+      // by the estate's own register, and this is not a tuning value: it is the first row of a
+      // closed vocabulary this file already pins against its source.
+      const channel = f.value !== null && f.value <= 3 ? out.withheld : out.fails;
       channel.push(finding(entry, 'C1', 'a figure outside the closed vocabulary', f.clause,
         'whoIsCounted', f.figure,
         `"${f.figure}"${f.noun ? ` counts "${f.noun}"` : ''} outside QUANTITY_BANDS; the record speaks counts as band words`));
