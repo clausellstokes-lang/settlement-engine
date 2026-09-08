@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-08 02:38:38 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 02:44:30 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-content law is wired dark and its seams are closed — the L-MAT consist
 
@@ -111,7 +111,7 @@ product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -144,5 +144,5 @@ product claude/composite-r4 = f3ab08f51 · ledger = ff7b431e9 §913: the living-
 - wf_d3c44881-503: 38 journal lines, 19 agents
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
-## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.61 2.20 2.59
+## PROCESSES: 35977 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;36002 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 2.18 2.24 2.47
