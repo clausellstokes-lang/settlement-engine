@@ -1585,6 +1585,40 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     const summary = sourceSummary(census.rows);
     expect(summary.kindsWithNoInstitution, 'holder kinds with NO institution in the shipped roster')
       .toEqual(['tradition']);
+    // ⭐⭐ THE HEADLINE COUNTS AS INTEGERS (SITTING §R c-19; the schema lens's finding). They
+    // were `console.log`'d beside an assertion on `kindsWithNoInstitution` alone, while the
+    // sitting sizes the authoring wave from all six. The byte interlock stops them moving in a
+    // green tree — but it cannot stop them moving THROUGH a register door with no arm naming
+    // the move, which is exactly what car 5c's two pre-ruled row moves are. The idiom is
+    // DS-DEF-2's own (13 / 13 / 66 have been pinned since car 5b); it was simply not applied
+    // to the corpus totals.
+    //
+    // ⚠ MEASURED AT CAR 5c, AFTER THE CAPTURE STANDING LANDED, AND THEY DID NOT MOVE. These
+    // are SOURCE counts — which record-holder kind a row's fields resolve to — and the capture
+    // standing is a TOWN standing that no register row can carry. The rule moved 40 rows'
+    // `stateOrgan` and not one row's `standing`, so 114 / 3 / 591 and 191 / 5 / 415 are the
+    // same integers car 5b measured, now held.
+    expect(summary.rows, 'ROWS by source standing').toEqual({
+      LICENSED: 114, OFFICE: 3, 'SOURCE-UNRESOLVED': 591,
+    });
+    expect(summary.fields, 'FIELDS by source standing').toEqual({
+      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 415,
+    });
+    expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
+      'and every pool lands in exactly one row standing').toBe(census.rows.length);
+    expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
+      'over this many sourced field entries').toBe(611);
+    expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
+    expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
+    // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
+    // from a kind with no institution behind it, and collapsing them would hide which is which.
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 415, 'no-institution-in-roster': 0 });
+    expect(summary.byKind, 'the licensed field count per kind').toEqual([
+      ['muster', 61], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 13],
+      ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],
+    ]);
+    expect(summary.byKind.reduce((n, [, k]) => n + k, 0),
+      'which must account for every licensed and office field').toBe(summary.fields.LICENSED + summary.fields.OFFICE);
     console.log(`\nSEAM 5b · THE HOLDER CENSUS on the shipped corpus`
       + `\n  ROWS      LICENSED ${summary.rows.LICENSED} · OFFICE ${summary.rows.OFFICE}`
       + ` · SOURCE-UNRESOLVED ${summary.rows['SOURCE-UNRESOLVED']} of ${census.rows.length}`
