@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-07 22:08:53 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-07 22:14:41 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave's instruments are built (lane INSTR-912, seven commits in laneINSTR, no 
 
@@ -142,4 +142,4 @@ product claude/composite-r4 = 3b1c0eaa5 · ledger = c6db41c60 §912.7: the wave'
 - wf_568522f1-e3e: 10 journal lines, 5 agents
 
 ## PROCESSES: 10154 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.69 13.34 16.11
+load: 18.54 12.37 14.13
