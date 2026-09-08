@@ -2454,3 +2454,53 @@ ten before the commit and **0 after**.
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: INSTR-912
+
+### 8. THE TIP
+
+```
+$ git rev-parse HEAD
+2865da54f7067c78357873f02d3101964c30f927
+$ git log --oneline -2
+2865da54f INSTR-912 car 12: the whole-suite proof's four reds — forty-four em dashes leave the island's strings, and so do the twenty-one the brief's arm listing did not name, plus the one exclamation mark hiding in a code comparison
+983a37f26 INSTR-912 car 11b: the lighting census refrozen at car 11's tip — titles 23778 -> 23779, and nothing else moved
+$ git status --porcelain | wc -l
+0
+$ git status --porcelain --untracked-files=all | wc -l
+0
+$ git diff HEAD --stat | wc -l
+0
+$ git rev-list --count f3ab08f51..HEAD
+13
+```
+
+Re-measured at the COMMITTED tip (the working tree is byte-identical to it, so no hook rewrote
+what the gates ran against):
+
+```
+src/domain/institutions/institutionTable.js	literals:142	em:0	bang:0
+src/domain/prose/entryGround.js	literals:5	em:0	bang:0
+src/domain/prose/entryWalker.js	literals:326	em:0	bang:0
+src/domain/prose/grammarWalker.js	literals:279	em:0	bang:0
+src/domain/prose/moveGrammar.js	literals:151	em:0	bang:0
+src/domain/prose/plantLedger.js	literals:49	em:0	bang:0
+src/domain/prose/proseFingerprint.js	literals:54	em:0	bang:0
+src/domain/prose/wiringCensus.js	literals:177	em:0	bang:0
+```
+
+### 9. WHAT IS OWED
+
+1. **The chair's veto on the red-3 cure** (§1): the completeness claim was RE-PHRASED, not tagged.
+   One line either way.
+2. **The two banked E2 files stay red** — `labelBands.js` (em 5) and `generalStateProse.js` (em 3).
+   They are the banked ceiling, not this car's, and the arm will keep naming them until an owner-
+   signed sweep burns them; both are live product prose (`labelBands` is read by three `split('—')`
+   parsers in the tabs and `generalStateProse` writes a strain label that ALREADY carries an em
+   dash into that fold), so neither is a punctuation edit — it is a golden-shift decision.
+3. **The golden master's 525 drift and enforcement-claims' six banked naked claims** are the other
+   two reds of `$SC/whole-914.log` and were not this car's, by the brief.
+4. Probes used, kept for the successor: `$SC/probe-em.mjs` (the ratchet's own espree walk, per file),
+   `$SC/probe-refs.mjs` (mirrored-assertion sweep), `$SC/apply-em.mjs` (the 67 replacements, each
+   asserted to match exactly once before it was applied), `$SC/car12-testslint.log`.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: INSTR-912
