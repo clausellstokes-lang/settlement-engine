@@ -469,7 +469,7 @@ Refuters sample compositions from the manifest and produce FINDINGS, never a pas
 
 | component | today (measured) | after (ESTIMATE) | basis |
 |---|---|---|---|
-| variant records | 505,033 B of 641,410 B; sentence text alone 280,577 B at 124 B/sentence (`read-data.md:390`) | + 3 × 280,577 ≈ 842 KB of face text, ≈ +10 % JSON overhead ⇒ ≈ 1.43 MB | NESTED faces add TEXT only — slots and marks are not repeated; the flat ×4 would be 2,156,509 B (`:390`) |
+| variant records | 505,033 B of 641,410 B; sentence text alone 280,577 B at 124 B/sentence (`read-data.md:390`) | + 3 × 280,577 ≈ 842 KB of face text, ≈ +10 % JSON overhead ⇒ ≈ 1.57 MB | NESTED faces add TEXT only — slots and marks are not repeated; the flat ×4 would be 2,156,509 B (`:390`) |
 | `poolMeta` | 0 | 708 × ≈ 130 B ≈ 92 KB | one small object per pool |
 | modifier + turn pieces | 0 | ≈ 760 pieces × 4 faces × ≈ 124 B ≈ 377 KB + their `poolMeta` | §6.5 |
 | connectives leaf | 0 | < 5 KB | four relations × two forms × a handful of phrases |
