@@ -1025,3 +1025,349 @@ $ git status --porcelain --untracked-files=all | wc -l
        0
 ```
 
+
+---
+
+## CAR 1 — THE MANIFEST AND THE CORPORA (ARCH §3.4, §3.7, §7, §12 row 1)
+
+Tip after this car: `b74daab7a` (car 1) · `710ef8e08` (1b, the lighting refreeze by its ritual).
+
+### 1.1 WHAT WAS BUILT
+
+| file | what |
+|---|---|
+| `tests/helpers/dossierManifest.js` | NEW, **the single writer of the measurement**: the cell, the pool index, the rung walk, `driftRun`, the fixture bytes. Imported by the suite AND by both scripts, so the recorded world and the asserted world cannot diverge. |
+| `tests/helpers/goldenMasterCorpus.js` | NEW: the golden master's 525 configurations and `keyOf`, EXTRACTED verbatim so the DRIFT corpus is the golden's own rows and not a second spelling of them. |
+| `tests/helpers/proseVarietyCorpus.js` | NEW: the VARIETY corpus (`prose-${i}`) and the duplicate-unit measure. |
+| `tests/property/dossierProseManifest.test.js` | NEW, **11 assertions**: the drift arm, the resolution arm, the base-side normalisation, the three controls, the classifier's five verdicts and its order. |
+| `tests/fixtures/dossier-prose-manifest-golden.json` | NEW: 1,050 rows, 141,855 B. |
+| `scripts/prose-manifest-cells.mjs` | NEW: the per-cell table on demand (72,160 rows), never committed. |
+| `scripts/prose-manifest-diff.mjs` | NEW: THE CLASSIFIER, five verdicts tested strongest-first plus ADDED/REMOVED and the index-only count. |
+| `scripts/prose-duplicate-units.mjs` | NEW: the VARIETY run, the duplicate-unit baseline, the repeat census with its refusal. |
+| `scripts/prose-rate-corpus.mjs` | `deskReturns` EXTRACTED from `composeTown` so the six-desk recipe has ONE spelling and can be called at either audience. Behaviour-preserving, proved by bytes below. |
+| `tests/fixtures/.golden-freeze-register.json` | +1 row, `dossier-prose-manifest`, every measured field null. |
+| `scripts/mutation-sweep.sh` + manifest | plants **#93 · #94**, two `meta:` entries, edited BY TEXT. |
+
+### 1.2 THE DRIFT ARM AND THE THREE CONTROLS, EXECUTED
+
+```
+$ npx vitest run tests/property/dossierProseManifest.test.js tests/lint/goldenFreeze.walker.test.js tests/lint/mutationCoverageManifest.test.js
+[dossier-prose-manifest] 525 towns x 2 audiences = 72160 cells in 11 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 6275 of 72160
+[dossier-prose-manifest] audience-divergent cells 36 of 36098 positions · positions on one face only 36
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1071 · drawing an AUDIBLE index above 0 because anchoring
+    removed an earlier variant: 202 · strictly below every one of the twelve probes (the probes'
+    own coupon-collection shortfall, not a finding): 18
+ Test Files  3 passed (3)
+      Tests  111 passed (111)
+```
+
+**THE DRIFT ARM'S `[]` THREE TIMES** — rows added, rows removed, rows moved — plus a fourth
+check the brief did not ask for and the estate's own idiom does: the fixture's BYTES equal
+`sha256(manifestBytes(live))`, so a whitespace-only edit of the fixture convicts too.
+
+**⛔ HOW A CELL'S VARIANT IS IDENTIFIED, AND WHY THE OBVIOUS WAY IS WRONG.** `eligibleVariants`
+filters by audience, by slot ANCHORING and by state DIMENSIONS. A manifest outside the desk
+call can see the first and not the other two, and a first cut that recomputed the draw over the
+AUDIBLE pool disagreed with the shipped draw on **59 of 805 cells** on six towns — the pools
+where a variant names a slot the call site did not fill. The shipped reader identifies the
+variant from the RENDERED SENTENCE against each variant's own template: **unresolved 0,
+ambiguous 0** over 72,160 cells, with the recomputation's disagreement (**6,275**) shipped as a
+printed figure rather than a silence.
+
+**THE MIXED-POOL AUDIENCE ARM.** 12 mixed pools (a `dm-only` variant beside an unmarked one);
+**36** audience-divergent cells over **36,098** positions, every one of them on a mixed pool
+(the leak list is `[]`), all on ONE of the twelve; and **36** positions that exist on one face
+only, which is the audience filter emptying a pool and is counted rather than assumed away.
+
+**THE PAIRED-TOWN COVERT ARM, AND ITS OWN VACUITY, SAID OUT LOUD.** No player cell is drawn
+from a covert pool — because the four covert pools (DS-WAR-1's mobilization ladder) fire on
+**none** of the 525 towns here and carry `rateBp: null` on all four in the committed census,
+i.e. none of the RATE corpus's 768 either. The equality therefore holds because there is
+nothing to suppress, so the SUPPRESSION LOGIC is driven on a synthetic cell pair instead. A
+clean bill about a filter nobody has run is exactly what this receipt refuses to print.
+
+**THE SEEDLESS CONTROL, RE-CUT ON A MEASUREMENT.** ARCH says index 0 everywhere. Measured,
+**202 of 1,071** seedless cells draw an AUDIBLE index above 0 — not a defect: `eligible[0]` is
+the first ELIGIBLE variant, and anchoring removes earlier audible ones. The executable form is
+the ORDERING: compose each town at twelve seeds, and the seedless draw must sit at or below
+every index those probes reach. Exact at any probe count, where an equality would red on chance
+alone (twelve probes miss the lowest index of a three-variant pool once in 130 cells; **18** of
+1,071 did exactly that, printed as the probes' shortfall). The kernel's own law
+(`drawVariant(list, b, p, '') === list[0]`) is driven directly beside it.
+
+### 1.3 THE CLASSIFIER, CONVICTED ON A REAL LEAF — both plants restored `cmp`-exact
+
+`md5` of `src/data/dossierStateProse/defense.generated.js` before and after every plant:
+**`1454b340aea5cab4f1d17c8265859591`**.
+
+**PLANT A — one variant's TEXT edited** (DS-DEF-11 `UNWALLED-SMALL`, the drawn `street`
+variant, one word):
+
+```
+$ node scripts/prose-manifest-diff.mjs cells-base.json cells-plantA.json
+PROSE MANIFEST DIFF · 2683 cells on the tip side
+  REPLACED       cells       0 · towns     0
+  RE-INDEXED     cells       0 · towns     0
+  ADDITIVE       cells       0 · towns     0
+  WORDING-ONLY   cells      40 · towns    20
+  UNCHANGED      cells    2643 · towns    20
+  ADDED          cells       0
+  REMOVED        cells       0
+  ── WORDING-ONLY ──
+    thorp|germanic|plains|road|civilized|golden-master-v3::dm::defense.wallRationale::0
+    thorp|germanic|plains|road|civilized|golden-master-v3::player::defense.wallRationale::0
+    … and 38 more
+```
+
+**WORDING-ONLY on exactly its cells and nothing else** — 40 of 2,683, every one of them
+`defense.wallRationale::0` on the 20 towns at both faces.
+
+⚠ **THE FIRST CUT OF THIS PLANT MUTATED THE WRONG VARIANT AND REPORTED A CLEAN DIFF.** Editing
+the `visitor` variant moved nothing, because on the DRIFT corpus 516 of 525 rows share one seed
+and a pool's hash is therefore ONE hash: every cell of `UNWALLED-SMALL` draws vid 0. That is
+ARCH §3.4's own sentence made visible, and it is why the RE-INDEXED plant below runs on a
+corpus with 60 SEEDS rather than on this one.
+
+**PLANT B — a THIRD variant appended to that two-variant pool**, measured on 8 configurations
+× **60 seeds** = 480 towns, so the pool gets 60 INDEPENDENT draws:
+
+```
+$ node scripts/prose-manifest-diff.mjs cells-plantB-base.json cells-plantB-tip.json
+PROSE MANIFEST DIFF · 61176 cells on the tip side
+  REPLACED       cells       0 · towns     0
+  RE-INDEXED     cells     492 · towns   246
+  ADDITIVE       cells       0 · towns     0
+  WORDING-ONLY   cells       0 · towns     0
+  UNCHANGED      cells   60684 · towns   480
+$ <the pool's own share>
+pool cells 736 · RE-INDEXED 492 · share bp 6685
+distinct seeds carrying the pool 60 · seeds whose draw moved 43 · share bp 7167
+seed-level Wilson 95%: [5923, 8149] bp against the arithmetic 6667 bp
+$ cp <backup> <leaf> ; cmp => RESTORED cmp-identical ; md5 1454b340aea5cab4f1d17c8265859591
+```
+
+**6,685 bp against the P-F1 arithmetic's exact 6,667 bp**, and at the seed grain 43 of 60 with
+a Wilson interval containing 2/3. The arithmetic is exact and worth writing down: for a uniform
+hash `h`, `h mod 6` decides both draws — 2 of the 6 residues hold the variant and 4 move it.
+
+### 1.4 THE VARIETY CORPUS AND THE DUPLICATE-UNIT BASELINE
+
+```
+$ node scripts/prose-duplicate-units.mjs --out $SC/measure/variety-baseline.json
+VARIETY CORPUS · 525 configurations x 8 seeds = 4200 towns x 2 audiences
+  towns 4200 · cells 532689 · 74 s · 18 ms per town
+  cells the rendered sentence did not identify 0 · identified ambiguously 0
+  ── THE DUPLICATE-UNIT BASELINE ───────────────────────────────────
+    unit instances 532689 · instances whose (position, text) pair is seen on more than one town 520632
+    DUPLICATE-UNIT RATE 9774 bp at N = 4200 towns over 8 seeds and 525 configurations
+    distinct (position, text) pairs 51396 · pairs seen on more than one town 39339
+    the ten positions carrying the most unit instances:
+      dm::viability.verdict::0                               units   4200 · duplicated   4200
+      dm::viability.verdict::1                               units   4200 · duplicated   4200
+      dm::daily_life.standingOfLiving|economics.economyTile: units   4200 · duplicated   4190
+      dm::economics.commercialProfile::0                     units   4200 · duplicated   4164
+      dm::economics.commercialProfile::1                     units   4200 · duplicated   4179
+      dm::economics.exportPosture::0                         units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::0                     units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::1                     units   4200 · duplicated   4200
+      dm::resources.groundAndWorkings::2                     units   4200 · duplicated   4200
+      dm::services.catalogStanding::0                        units   4200 · duplicated   4176
+  ── THE REPEAT CENSUS, per (position, pool) ───────────────────────
+    groups 632 · EXECUTABLE 347 · NOT-EXECUTABLE 285 (fewer than 8 independent draws, or a one-variant pool)
+    groups showing fewer than half the distinct texts the chance floor expects: 2
+      dm::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCount: distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
+      player::viability.verdict::1 @@ DS-GEN-11 :: criticalIssueCo distinct 1 of 3 · expected 28829 bp · draws 8 · towns 540
+```
+
+**THE BASELINE IS 9,774 bp AT N = 4,200 TOWNS OVER 8 SEEDS AND 525 CONFIGURATIONS**, and it is
+neither a floor nor a defect rate: two towns in one state cell SHOULD read the same fact, and
+whether they read the same WORDS is what the faces and the pieces will change. Every later car
+states its claim as a delta on this number with the same N and the same seed count.
+
+⚠ **THE TWO REPEAT-CENSUS FINDINGS ARE CANDIDATES, NOT VERDICTS.** The denominator is the
+AUDIBLE pool size, and where slot anchoring narrows eligibility to one variant a `distinct 1 of
+3` row is lawful. They are the same position at two audiences, so it is ONE underlying row.
+
+### 1.5 ⛔ THE DOOR: `recordGolden` IS NOT RUN, AND THAT IS A REFUSAL WITH TWO GREEN ARMS BEHIND IT
+
+The brief instructs every write through `recordGolden` with `GOLDEN_SHIFT_SIGNED` naming the
+chair's enroll record. **Both halves of that are refused BY THE ESTATE at this tip**, and each
+refusal is a green arm in `tests/lint/goldenFreeze.walker.test.js` that a car-1 door write would
+turn red:
+
+1. `while the register is UNFROZEN, no row carries a recorded value` — `frozenAt` is null and
+   the arm collects every row with a `sha256`, `rows` or `ownerRow`. `recordGolden` writes
+   exactly those three in the same atomic act that writes the fixture.
+2. `no signed record has yet been cut — the genesis record is the freeze act's` — while
+   unfrozen, `docs/shift-records/*.json` (non-underscore) must be EMPTY. Cutting the chair's
+   enroll record as a file there reds this arm.
+
+The register's own `_doc` says it in its own words: *"every `sha256`, `rows`, `seedSet`,
+`distinctFloor`, `frozenConstants` and `ownerRow` is null and MUST stay null until the freeze
+act writes it through the door. A lane that fills one of those fields has cut the record without
+the pen."* And the estate has already ruled this exact case once, on `preset-lighting-witness`:
+*"a capture arm routed through the door today would poison this register."*
+
+**WHAT SHIPPED INSTEAD, following that precedent to the letter:**
+
+* the surface is **ENROLLED**, never excluded — `dossier-prose-manifest`, every measured field
+  null, `recordEnv: null`;
+* **the chair's enroll record is quoted VERBATIM in the row's `note`**, so the authority is in
+  the tree where the door will read it on the day the register is armed;
+* `tests/helpers/dossierManifest.js` is the **single writer of the measurement**, imported by
+  the suite and by both scripts, and the suite asserts by sha that the fixture's bytes are
+  exactly `manifestBytes(driftRun().rows)`;
+* the path is **`tests/fixtures/dossier-prose-manifest-golden.json`** — deliberately named so
+  arm 2's `tests/fixtures/*golden*.json` glob CLAIMS it. A carrier named outside that glob is
+  enrolled by the lane's good faith alone, and a later deletion of its row would red nothing.
+  The brief's spelling of the path is the one thing this car changed, and this is why.
+
+```
+$ npx vitest run tests/lint/goldenFreeze.walker.test.js      (green, inside the 111 above)
+```
+
+### 1.6 ⛔⛔ A PRE-EXISTING RED THIS CAR DID NOT CAUSE, AND WILL NOT HIDE
+
+```
+$ npx vitest run tests/property/generatorGoldenMaster.test.js
+ × every config produces byte-identical output to the golden master
+AssertionError: expected [ …(525) ] to deeply equal []
+```
+
+**ALL 525 ROWS OF THE GENERATOR GOLDEN MASTER DRIFT AT THIS DOCK.** Three executed proofs that
+it is not this lane's:
+
+```
+$ node <the ORIGINAL corpus code, taken from `git show HEAD:…`, against the committed manifest>
+ORIGINAL corpus code: rows 525 drift 525
+$ node <the EXTRACTED helper, same manifest>
+EXTRACTED drift 525
+$ node -e "compare the two drift sets"
+drift sets identical: true · 525 vs 525
+$ git diff --stat 8522a17b2..HEAD -- src/generators src/data src/store src/kernel
+(no output: not one byte moved)
+$ git diff --stat 8522a17b2..HEAD -- src/domain
+ src/domain/prose/wiringBranch.js | 292 ++++++
+ src/domain/prose/wiringCensus.js | 513 ++++++++
+```
+
+The extraction is behaviour-preserving to the row; the lane has moved no byte any generator
+reads; the two files it did move under `src/domain` are the fenced prose island, which the
+fence arm proves by bytes no product surface names. The generation output is deterministic
+within a process (checked) and carries no timestamp field, so this is a genuine same-seed shift
+against the committed manifest, standing at the §914 tip. It lives in `tests/property/`, which
+no gate of this lane runs, which is why four cars passed over it unseen. **A re-record is
+owner-signed and the register is unfrozen; it is named here for the chair and nothing more.**
+
+### 1.7 THE ONE-SPELLING REFACTORS, AND THE BYTES THAT PROVE THEM
+
+Two extractions were taken so that this car re-implements nothing the estate already spells:
+
+* `deskReturns` out of `composeTown` (`scripts/prose-rate-corpus.mjs`) — the six-desk recipe at
+  either audience, one spelling. **PROVED BY BYTES:**
+  ```
+  $ node scripts/prose-rate-corpus.mjs --out <after>
+  RATE corpus byte-identical across the composeTown refactor: true
+  rows 267 vs 267 · silences 347 vs 347
+  $ node scripts/wiring-census.mjs --check
+  [wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+  ```
+* the golden's `corpus()` and `keyOf` out of `generatorGoldenMaster.test.js` into a HELPER (not
+  imported from the test file, which would register its cases twice — the `dormancyOracle.js`
+  lesson). **PROVED:** `configs 525 · manifest keys 525 · identical true`, and the drift-set
+  identity above.
+
+### 1.8 THE PLANTS
+
+```
+--- plant #93  MUTATED scripts/prose-manifest-diff.mjs   49dd66c1096f4e5a42b92104a5158889 -> 0ef4c98b9182613a3e2eb7d52a170dd6
+    RESTORED cmp-identical
+--- plant #94  MUTATED tests/helpers/dossierManifest.js  522ef193babdd46c10c711ab4cd1b6b9 -> 15181c5ca0dea2508dc71c48d25cb9d9
+    RESTORED cmp-identical
+#93 the classifier tests wording before replacement  => 1 red of 11 · restored => 11 passed
+#94 the template reader matches everything           => 3 red of 11 · restored => 11 passed
+```
+
+### 1.9 THE GATES, AND A CONTROL-BYTE RED THE ESTATE'S OWN PIN CAUGHT
+
+```
+$ npx eslint <the nine changed and new files>              ; exit=0
+$ node scripts/check-domain-strict.mjs        [domain-strict] OK (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs       [typecheck-ratchet] OK (173, ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs   1972 finding(s), exactly matching.
+$ node $SC/prose-numerics-rekey.mjs .         baseline=225 live=225 … FELL=0 NEW=0
+$ node <espree literal scan>   dossierManifest 43 · proseVarietyCorpus 11 · goldenMasterCorpus 52 · em:0 bang:0 each
+
+$ npx vitest run tests/lint                                ; exit=1  (first run)
+ FAIL tests/lint/controlBytes.test.js
+  tests/helpers/proseVarietyCorpus.js:68:30  raw 0x00 (NUL) at byte offset 3616
+  tests/helpers/proseVarietyCorpus.js:75:30  raw 0x00 (NUL) at byte offset 3839
+ FAIL tests/lint/sovereigntyLightingContract.walker.test.js  (titles 23805 -> 23816)
+      Tests  2 failed | 2367 passed (2369)
+```
+
+The pair separator had been written as a RAW NUL. Cured with the estate's own rule — the byte
+becomes an ESCAPE in a named constant — and the measurement is unmoved, because the separator's
+VALUE did not change; the VARIETY run was re-taken on the shipped bytes anyway and printed the
+same 9,774 bp. ⚠ Worth carrying forward: `scripts/prose-rate-corpus.mjs` has carried four raw
+NULs since car 0, which is why `grep` treats that file as binary and reports no match for text
+plainly inside it.
+
+```
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 1 (Opus 5)' … npx vitest run …LightingContract…
+Error: census REFROZEN at b74daab7aa4b67f32a3dfd84938234ab191acac0 by MEASURE car 1 (Opus 5):
+  files 2551 -> 2552, parked 375 -> 375, credited 2176 -> 2177,
+  titles 23805 -> 23816, suiteTitles 6369 -> 6372.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js      Tests  34 passed (34)
+
+$ npx vitest run tests/lint                                ; exit=0  (at 710ef8e08)
+ Test Files  146 passed (146)
+      Tests  2369 passed (2369)
+   Duration  110.90s
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+```
+
+`tests/lint`'s count is unchanged at 2,369 because the new suite lives in `tests/property/`,
+which is where ARCH §12 row 1 puts it.
+
+### 1.10 THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. **THE DOOR IS NOT RUN** (1.5), with two green arms and the register's own block as the
+   ground, and the `preset-lighting-witness` precedent as the shape.
+2. **THE FIXTURE PATH GAINS `-golden`** so the roster glob claims it (1.5).
+3. **TWO EXTRACTIONS OUTSIDE THE BRIEF'S FILE LIST** — `deskReturns` and the golden corpus —
+   taken because the brief's own "reuse, never re-implement" cannot be met otherwise, each
+   proved byte-identical (1.7).
+4. **THE SEEDLESS CONTROL IS AN ORDERING, NOT AN EQUALITY** (1.2), because `eligible[0]` is not
+   `audible[0]` and an equality would be a coupon-collection flake.
+5. **THE COVERT ARM'S VACUITY IS PRINTED**, and its logic driven on a synthetic cell (1.2).
+6. **`vid` IS THE VARIANT'S AUTHORED POSITION**, which is the ordering car 4's minted `vid` must
+   reproduce on an unchanged corpus; `index` is its position in the AUDIENCE-FILTERED pool,
+   which is the coordinate the two faces can differ on. Both are recorded on every cell.
+
+### 1.11 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+$ git log --oneline -7
+710ef8e08 MEASURE car 1b: the lighting census refrozen at car 1's tip …
+b74daab7a MEASURE car 1: the composed-prose manifest and the three corpora …
+23ea93ab6 MEASURE car 0g: the estate's anchor ratchet caught car 0f's one un-anchored negative …
+4cdb29b4f MEASURE car 0f-b: the lighting census refrozen at car 0f's tip …
+fab1bfde7 MEASURE car 0f: the relation join MEASURED as an ALIAS DRAFT …
+c0269d16f MEASURE car 0e-b: the lighting census refrozen at car 0e's tip …
+0dd711c6a MEASURE car 0e: the `reads` grain re-cut to the SELECTING BRANCH …
+$ git rev-list --count 8522a17b2..HEAD
+      11
+```
+
+`npx vitest run tests/property/dossierProseManifest.test.js` (11) ·
+`node scripts/prose-manifest-cells.mjs --out <scratch>` ·
+`node scripts/prose-manifest-diff.mjs <base> <tip>` ·
+`node scripts/prose-duplicate-units.mjs --out <scratch>` (74 s) ·
+`node scripts/wiring-census.mjs --join-draft`.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
