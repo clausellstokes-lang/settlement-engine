@@ -31,7 +31,8 @@ const { rows, functions, tables } = wc.wiringCensus({
   fillByKeyFunction: byKeyFn,
   unmounted: mounts.UNMOUNTED_BLOCKS,
 });
-const s = wc.censusSummary(rows);
+const heldAll = [...new Set(fill.unrenderedFacts().flatMap((r) => r.held))];
+const s = wc.censusSummary(rows, heldAll);
 console.log(`key functions ${functions} · module key tables ${tables}`);
 console.log(`rows ${s.total} · RESOLVED ${s.resolved} · UNRESOLVED ${s.unresolved}`);
 console.log(`variants ${s.variants} · mean per pool ${s.meanPerPool}`);
@@ -50,9 +51,34 @@ const facts = wc.factIndex(rows);
 console.log(`\nfacts a key function reads: ${facts.length}`);
 for (const f of facts.slice(0, 15)) console.log(`  ${f.fact.padEnd(46).slice(0, 46)} pools ${String(f.pools.length).padStart(3)} variants ${String(f.variants).padStart(4)} grammars ${f.grammars}`);
 
-const held = fill.unrenderedFacts().flatMap((r) => r.held);
+const held = heldAll;
 const tiers = wc.tierRows({ rows, held: [...new Set(held)] });
 const counts = tiers.reduce((m, t) => m.set(t.tier, (m.get(t.tier) || 0) + 1), new Map());
 console.log(`\nTIERS: ${[...counts].map(([k, n]) => `${k} ${n}`).join(' · ')}`);
 for (const t of tiers.filter((x) => x.tier === 'THIN').slice(0, 8)) console.log(`  THIN ${t.block} :: ${t.subject.slice(0, 40)} — ${t.count}`);
 for (const t of tiers.filter((x) => x.tier === 'MISSING').slice(0, 10)) console.log(`  MISSING ${t.subject.slice(0, 60)} — ${t.count}`);
+
+// ── CO-OCCURRENCE BY EXECUTION ─────────────────────────────────────────────────────
+const { readFileSync } = await import('node:fs');
+let fired = null;
+try { fired = JSON.parse(readFileSync('firings.json', 'utf8')); } catch { /* run firings.mjs first */ }
+if (!fired) console.log('\n(no firings.json — run `node firings.mjs 200` first)');
+else {
+  const keys = new Set(fired.firings.flat().map((f) => `${f.block} :: ${f.pool}`));
+  const resolvedFired = [...keys].filter((k) => (rows.find((r) => `${r.block} :: ${r.pool}` === k) || {}).status === 'RESOLVED');
+  console.log(`\nEXECUTION: towns ${fired.towns} · distinct (block,pool) fired ${keys.size} of ${rows.length}`);
+  console.log(`  of those, RESOLVED in the census: ${resolvedFired.length}`);
+  const none = wc.coOccurringPairs({ firings: fired.firings, rows });
+  console.log(`  with NO floor: pairs ${none.pairs.length} · notExecutable ${JSON.stringify(none.notExecutable)}`);
+  for (const floor of [Math.ceil(fired.towns / 2), Math.ceil(fired.towns * 0.9), fired.towns]) {
+    const co = wc.coOccurringPairs({ firings: fired.firings, rows, minTowns: floor });
+    console.log(`  floor ${floor}: ${co.pairs.length} fact pairs co-fire with NO pool keyed on both`);
+  }
+  const co = wc.coOccurringPairs({ firings: fired.firings, rows, minTowns: Math.ceil(fired.towns * 0.9) });
+  for (const p of co.pairs.slice(0, 12)) console.log(`    ${String(p.towns).padStart(4)}  ${p.a.slice(0, 42)}  +  ${p.b.slice(0, 42)}`);
+  const tiers2 = wc.tierRows({ rows, held: [...new Set(held)], pairs: co.pairs });
+  const c2 = tiers2.reduce((m, t) => m.set(t.tier, (m.get(t.tier) || 0) + 1), new Map());
+  console.log(`  TIERS with the pair rows: ${[...c2].map(([k, n]) => `${k} ${n}`).join(' · ')}`);
+}
+console.log(`\nslots with no provider (block HAS a bag): ${s.slotless.length} pools`);
+console.log(`pools whose block has NO bag at all (unmounted): ${s.bagless.length}`);

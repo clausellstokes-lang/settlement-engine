@@ -8,7 +8,7 @@ const D = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2
 const imp = (p) => import(pathToFileURL(`${D}/${p}`).href);
 
 const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
-const { generalDeskLines } = await imp('src/components/new/generalDeskRead.js');
+const general = await imp('src/domain/display/stateProse/generalStateProse.js');
 const { economyDeskRead } = await imp('src/components/new/economyDeskRead.js');
 const power = await imp('src/domain/display/stateProse/powerStateProse.js');
 const defense = await imp('src/domain/display/stateProse/defenseStateProse.js');
@@ -49,7 +49,46 @@ for (let i = 0; i < N; i++) {
   const desk = (name, fn) => {
     try { walk(fn(), found); } catch (e) { deskThrows.set(name, (deskThrows.get(name) || 0) + 1); }
   };
-  desk('general', () => generalDeskLines(s, opts));
+  // GENERAL: `generalDeskLines` returns finished STRINGS, so its rungs carry no provenance
+  // to read. The readings below are its own recipe (generalDeskRead.js:176-243), the
+  // settlement-derived half copied verbatim. The half the TAB supplies out of campaign state
+  // (hookCategories, clockIds, steadings, neighbours, crossEngagements, lifecycleStatus,
+  // ancientRuin, populationTrend, stresses) is ABSENT here — exactly as it is on a tab with
+  // no such ledger — so the pools those fields key cannot fire, and this probe says so
+  // rather than passing `{}` and selecting every absence pool.
+  desk('general', () => {
+    const eco = s.economicState || {};
+    const dp = s.defenseProfile || {};
+    const via = s.economicViability || {};
+    return general.generalStateProse(s, {
+      scores: dp.scores,
+      prosperity: eco.prosperity,
+      safetyLabel: eco.safetyProfile?.safetyLabel,
+      viable: via.viable,
+      readinessLabel: dp.readiness?.label,
+      foodSecurityLabel: eco.foodSecurity?.label,
+      terrainType: s.config?.terrainType,
+      institutions: s.institutions,
+      tradeRouteAccess: s.config?.tradeRouteAccess,
+      isEntrepot: eco.isEntrepot,
+      inst: eco.compound?.inst,
+      conflicts: s.conflicts,
+      structuralViolations: s.structuralViolations,
+      structuralSuggestions: s.structuralSuggestions,
+      coherenceNotes: s.coherenceNotes,
+      govFaction: (s.powerStructure?.factions || []).find((f) => f?.isGoverning)?.faction,
+      tier: s.tier,
+      foodBalance: via.metrics?.foodBalance,
+      history: s.history,
+      prominentRelationship: s.prominentRelationship,
+      relationships: s.relationships,
+      criticalIssueCount: via.metrics?.criticalIssueCount,
+      governingName: s.powerStructure?.governingName,
+      activeChains: eco.activeChains,
+      exploitation: s.resourceAnalysis?.exploitation,
+      primaryImports: eco.primaryImports,
+    }, opts);
+  });
   desk('economy', () => economyDeskRead(s, opts));
   // POWER: the tab's own readings recipe, built from the shipped canonical readers
   // (PowerTab.jsx:198-202) — a desk derives none of its own.

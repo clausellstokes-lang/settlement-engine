@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:12:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-07 23:18:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -11,13 +11,13 @@
 | ? | other |  | result | 0 | — | — | 03:09:34 |
 | ? | other |  | result | 0 | gate-proof.md | — | 03:11:30 |
 | ? | other |  | result | 0 | — | — | 03:11:36 |
-| ? | other |  | in-flight | 0 | — | — | 03:12:33 |
+| ? | other |  | in-flight | 0 | — | — | 03:15:06 |
 | ? | other |  | result | 0 | — | — | 03:10:11 |
 | ? | other |  | result | 0 | — | — | 03:11:16 |
-| ? | other |  | in-flight | 0 | — | — | 03:12:41 |
+| ? | other |  | in-flight | 0 | _c-dump.mjs | — | 03:16:44 |
 | ? | other |  | result | 0 | read-specs.md | — | 03:07:39 |
-| ? | other |  | in-flight | 0 | — | — | 03:12:20 |
-| ? | other |  | in-flight | 0 | — | — | 03:12:33 |
+| ? | other |  | in-flight | 0 | — | — | 03:14:27 |
+| ? | other |  | in-flight | 0 | — | — | 03:14:32 |
 | ? | other |  | result | 0 | read-facts.md | — | 03:12:05 |
 | ? | other |  | result | 0 | — | — | 03:08:57 |
 | ? | other |  | result | 0 | — | — | 03:08:35 |
