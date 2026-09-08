@@ -892,3 +892,19 @@ words them.
 3. **+36 first-paint bytes — a declared behaviour shift.** Real, priced, inside budget by 5,878 B,
    and the lane correctly refused to round it away. **Declare the shift; do NOT declare the cause** —
    the causal explanation and the determinism control are UNTESTED (X22).
+
+### CAR 10 LANDED — `a75faa3a74b47431d1ad6939b0baeee95a9eeb8a` (2026-09-07 20:04 EDT)
+| gate | reading |
+|---|---|
+| parent | `19642a9fce0817213040af0a0815ac5ced09fbbb` — the briefed tip, unmoved under it |
+| dock tip | **`a75faa3a7`** — ten cars over the product tip `3b1c0eaa5` |
+| `git status --porcelain \| wc -l` | **0** (before staging, after staging, after commit) |
+| staged paths | the **8**, listed explicitly; `git add -A/-u/.` never used |
+| trailers | `Seat: Opus 5 — Fable-unvalidated` · `Lane: L-MAT-FIX` · `Co-Authored-By: Claude Opus 5` |
+| the five frozen baselines, after the commit | `0342f68be…` · `8c9ea0c40…` · `c4b5aec83…` · `917027c85…` · `7695cf1d8…` — all unmoved |
+| untracked files | **0** at every boundary — no foreign WIP existed in this dock and none was created |
+
+**REFUSALS: none.** All eight shipped cures resolved against the tip and landed as the fold's
+smallest form; no cure contradicted a measurement. Two things were deliberately NOT done and are
+recorded rather than silently skipped: the two "OBSERVED, NOT CURED" rows above (outside the twenty
+— a cure never widens scope), and the whole-suite run and the build (the chair's, per the brief).
