@@ -101,14 +101,14 @@ car adds columns and moves no measurement. The new columns:
 | `covert` | — | **4** rows (all DS-WAR-1's `war.mobilization` pools) |
 | `objectClass` | — | named on **99 of 708** from a closed list of **10** classes |
 | `sites` | — | **566 of 708** rows carry at least one mount |
-| `attach` / coverage | — | **57** blocks with a RESOLVED spine; DS-GEN-3 42 spines / 7 facts / 10000 bp reached / 7891 bp mean reach; **DS-STR-1 at 0 bp — a block that cannot compose at all** |
+| `attach` / coverage | — | **50** blocks carry a RESOLVED spine; DS-GEN-3 42 spines / 7 facts / 10000 bp reached / 7891 bp mean reach; **26 of the 50 read 0 bp — they cannot attach a modifier to any spine of their own** (F6) |
 | mounts-per-fact | — | spine and modifier, keyed on the producer token; NOT-EXECUTABLE (`null`, never 0) without the desk-fact census |
 | k = 0 | — | **121 of 318** RESOLVED rows; **390** NOT-EXECUTABLE |
 | `customReachable` | — | **22** rows over **8** kinds |
 | relation rows | — | **165** (a 131 · b 28 · c 6 · **d 0, asserted**), all `a->b` |
 | `rateBp` | — | **267 of 708** rows carry one |
 
-### 3. THE FIVE FINDINGS THIS CAR RETURNS, EACH WITH ITS MEASUREMENT
+### 3. THE SIX FINDINGS THIS CAR RETURNS, EACH WITH ITS MEASUREMENT
 
 **F1 — ⛔ NOT ONE RELATION ROW JOINS TWO FIELDS A DESK READS. ARCH §11's empty-table risk
 has materialised, and it is now a number.** The relation table names PRODUCER tokens
@@ -153,6 +153,24 @@ $ grep -rn "\bprison\s*:" src/generators/ src/domain/    # (no output)
 $ grep -rn "\bforces\s*:" src/generators/ src/domain/    # (no output)
 $ grep -rn "\bnavy\s*:"   src/generators/ src/domain/    # (no output)
 ```
+
+**F6 — ⛔⛔ TWENTY-SIX OF THE FIFTY COMPOSABLE BLOCKS CANNOT ATTACH A MODIFIER TO ANY SPINE OF
+THEIR OWN, AND DS-DEF-11 IS ONE OF THEM.** `tests` is every reading the KEY FUNCTION touches
+(car 8's `fieldsRead`), which the brief rules `reads` equal to. On a block whose pools all
+come from ONE key-function ladder every spine therefore carries the SAME read set, so the
+derived attach set of every fact of that block is EMPTY. Measured: **26 of the 50** blocks
+carrying a RESOLVED spine read **0 bp** of spines reached, and the list includes **DS-DEF-11**
+— the owner's own walls block, on which ARCH §6.3 works its entire Phase-1 example — and
+**DS-DEF-2**, on which §6.4 works the fact budget. `country: pressed (walled)` attaching to
+STRAINED is NOT reachable at this grain. The branch grain that would reach it is available
+(`predicate[].field`, the selecting branch's own guard, on the 185 rows that carry one); see
+refusal 4. Asserted in car 0c rather than printed.
+
+The whole dark roster, printed here so the chair does not have to re-derive it: DS-DEF-11 ·
+DS-DEF-2 · DS-DEF-6 · DS-DEF-9 · DS-ECO-1 · DS-ECO-10 · DS-ECO-3 · DS-ECO-6 · DS-ECO-9 ·
+DS-FTH-2 · DS-FTH-3 · DS-GEN-12 · DS-GEN-13 · DS-GEN-14 · DS-GEN-16 · DS-GEN-17 · DS-GEN-18 ·
+DS-GEN-2 · DS-GEN-9 · DS-POP-3 · DS-POW-1 · DS-POW-3 · DS-POW-5 · DS-POW-7 · DS-STR-1 ·
+DS-WAR-3.
 
 ### 4. THE RATE CORPUS — `node scripts/prose-rate-corpus.mjs --out $SC/measure/rate-corpus.json`
 
@@ -390,18 +408,38 @@ sources, the mount registry and the manifest all arrive from the script or the t
 `docs/content/wiring-census.json` is DATA under `docs/`, reachable by no import.
 
 
-### 12. ONE WHOLE `tests/lint` RUN — ZERO REDS
+### 12. THE WHOLE `tests/lint` RUN — AND THE ONE RED THE ESTATE'S OWN RATCHET CAUGHT
+
+The run after car 0b was green at 146 / 2364. The run after **car 0c** was NOT, and the
+ratchet that caught it is the reason the run is taken twice:
+
+```
+$ npx vitest run tests/lint                                     ; exit=1
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > no NEW un-anchored negative
+       assertion anywhere in the test corpus
+  tests/lint/proseWiringCensus.walker.test.js: 1 un-anchored negative assertion(s) at
+  line(s) 859 (frozen ceiling 0).
+ Test Files  1 failed | 145 passed (146)
+      Tests  1 failed | 2363 passed (2364)
+```
+
+Car 0c wrote `expect(dark).not.toContain('DS-GEN-3')` — a bare exclusion that would pass just
+as happily if the attach-coverage derivation returned nothing at all. **Car 0d cures it with
+the estate's own helper rather than an `// anchored:` marker**, because a live sibling exists
+to anchor on: `expectAbsentWithAnchor(dark, 'DS-GEN-3', 'DS-DEF-11', …)`, so a drifted
+collection reds on the liveness limb before the exclusion limb is read. THE FINAL RUN, at the
+tip:
 
 ```
 $ npx vitest run tests/lint                                     ; exit=0
  Test Files  146 passed (146)
       Tests  2364 passed (2364)
-   Duration  101.72s (transform 16.38s, setup 4.31s, import 136.57s, tests 490.51s, environment 15ms)
+   Duration  121.90s (transform 24.95s, setup 4.94s, import 171.91s, tests 581.31s, environment 20ms)
 ```
 
 146 files and **2,364** assertions against car 13's **2,343** — exactly the walker's twenty-one
-new arms and nothing else. Gate check in its own shell call before the run: `HOLD-VITEST`
-absent, split-pattern runner count **0**.
+new arms and nothing else. Gate check in its own shell call before every one of these runs:
+`HOLD-VITEST` absent, split-pattern runner count **0**.
 
 ### 13. THE SWEEP'S OWN PATTERNS, PROVED TO MUTATE
 
@@ -439,14 +477,24 @@ credits.
 ### 15. THE TIP, AND WHAT A SUCCESSOR CONTINUES FROM
 
 ```
-$ git log --oneline -3
+$ git log --oneline -5
+458eebb2f MEASURE car 0d: the estate's anchor ratchet caught car 0c's one un-anchored negative …
+f96eb8fc7 MEASURE car 0c: the attach-coverage finding is asserted rather than printed — twenty-six …
 dd540445c MEASURE car 0b: the lighting census refrozen at car 0's tip — titles 23779 -> 23800 …
 eb73679a6 MEASURE car 0: the census extended — six new columns per row, the census committed …
 8522a17b2 Register (capsule car): the base-state capsule regenerates at the §914 tip …
 $ git status --porcelain --untracked-files=all | wc -l
        0
 $ git rev-list --count 8522a17b2..HEAD
-       2
+       4
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
 $ node scripts/wiring-census.mjs --check
 [wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
 ```
@@ -457,6 +505,11 @@ $ node scripts/wiring-census.mjs --check
 The RATE corpus re-runs with
 `node scripts/prose-rate-corpus.mjs --out <file>` (26 s for both weightings) and is folded
 back with `node scripts/wiring-census.mjs --rates <file>`.
+
+**THE CONSIST: four cars.** `eb73679a6` (the census extended) · `dd540445c` (0b, the lighting
+refreeze by its ritual) · `f96eb8fc7` (0c, the attach-coverage finding asserted) · `458eebb2f`
+(0d, the anchor ratchet's catch, cured). Cars 0c and 0d move no title and no committed byte of
+the JSON, so the lighting census is unmoved at 0b's tuple and `--check` is green at the tip.
 
 **OWED, and none of it this car's by the brief:**
 1. **The base-state capsule and the census-totals register are STALE by 21 runtime tests and
