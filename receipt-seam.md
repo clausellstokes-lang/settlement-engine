@@ -797,3 +797,388 @@ node scripts/wiring-census.mjs --check                            # the refused 
 
 ## CARS 3b–3g — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 14:1x)
 Re-measured at `efb5111cd` (porcelain 0, runners 0): `grep -rn readStateProse src/` outside the kernel = 0 callers (CONFIRMED); the census re-take diff 24 lines, 0 outside `stateProse`, 12 naming the candidates leaves, no row (CONFIRMED) → the chair's register car re-took the census on top of `efb5111cd` (`--check` green). Rulings: (1) the census rule generalised — a stamp-only drift is a lane's plain re-take with the printed proof; a row move is the chair's unless pre-ruled (3h's DS-DEF-2 move is pre-ruled at §P.2-28) — brief-SEAM-car3h ADDENDUM; (2) the fill scanner learning the composed call shape ACCEPTED (the census byte-identical at every stage is the proof it reads the same tree); (3) 3f-0's fence and the `readings` widening ACCEPTED; (4) 3g's two instrument cures at cause ACCEPTED; X-F9's useMemo is UNAPPLIED at OverviewTab's `stresses` (writerReach's inventory moved) — carried to the SEAM skeptic as a row; (5) the DM-page acceptance for the eight framed blocks recorded as named (3c's commit-body citation withdrawn by the lane, corrected in its table); (6) HAZARD: EconomicsTab.jsx 596/600 effective lines — a SURFACES-train risk, noted. Seat: Fable 5.1 — validated.
+
+---
+
+## CAR 3h — THE RUNG-4 KEYS EXPOSED: DS-DEF-2 LEAVES THE DARK SET, ZERO DRIFT
+
+Seat: Opus 5 — implementer. Chair: Fable 5.1. Dock `$SC/laneSEAM`, base `6d94a41ad` (the
+chair's register car on top of car 3g `efb5111cd`). **STATUS: LANDED.** Porcelain 0, runners 0,
+`node_modules` symlinks intact, no build. Every figure below is the tail of a command that ran.
+
+### 3h.0 ARRIVAL — executed
+
+```
+$ git -C $SC/laneSEAM log --oneline -1
+6d94a41ad Register (SEAM, at 3g): the wiring census re-taken — twelve stamped shas moved, no row
+$ git -C $SC/laneSEAM status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ ls $SC/HOLD-VITEST                       => No such file or directory
+```
+
+### 3h.1 WHAT WAS BUILT — four frozen tables, three situation readers, ONE file of product code
+
+`src/domain/display/stateProse/defenseStateProse.js` gains `BEASTS_ROW_POOL` (7 entries),
+`INVASION_ROW_POOL` (6), `ECONOMIC_ROW_POOL` (4) and `DISASTER_ROW_POOL` (5) as MODULE-PRIVATE
+`Object.freeze({...})` tables, plus the three private situation readers `beastsRowSituation`,
+`invasionRowSituation` and `disasterRowSituation`. The four key functions now index a table
+instead of building a key through a local arrow or a band template.
+
+⛔ **THE TABLES ARE NOT EXPORTED, AND THAT IS FORCED RATHER THAN TIDY.**
+`tests/data/dossierStateProseProjection.contract.test.js:426-486` refuses any EXPORTED string
+map in the desk directory that `SLOT_FILL_TABLES` does not name or that a `NOT_A_FILL_TABLE`
+row does not classify — the mechanism that caught `ACCESS_PROSE` and DESK-DEFENSE car 7's two
+mount maps. Exporting these four would have cost four hand-written classification lines in a
+walker for no reader. The census reads the module SOURCE, so private is all it needs, and the
+desk's own three existing maps (`MONSTER_FAMILY_OF`, `TERRAIN_DEFENCE_OF`,
+`CRIMINAL_STRUCTURE_POOL`) are private for the same reason.
+
+### 3h.2 ⭐⭐ THE ACCEPTANCE — KEY IDENTITY, EXECUTED THREE WAYS, ZERO DIFFERENCES
+
+The A/B harness (`$SC/seam3h-keyab.mjs`, lane instrument, never committed) snapshots the five
+key functions' INPUTS, their five KEYS and a sha256 of the WHOLE `defenseThreatProse` return,
+at the base and at the tip, and diffs row by row.
+
+```
+$ node $SC/seam3h-keyab.mjs before.json          # at 6d94a41ad, before any edit
+[key-ab] exhaustive 4743 · RATE towns 768 (threw 0) · DRIFT rows 1050 (threw 0) · 19s
+$ node $SC/seam3h-keyab.mjs after.json           # at the final tip
+[key-ab] exhaustive 4743 · RATE towns 768 (threw 0) · DRIFT rows 1050 (threw 0) · 19s
+FINAL A/B — exhaustive rows differing 0 of 4743
+FINAL A/B — RATE rows differing 0 of 768
+FINAL A/B — DRIFT rows differing 0 of 1050
+```
+
+All five digests are byte-equal across the pair: exhaustive `3cf2fb9e70894a3c`, RATE keys
+`a518931aeea73060`, DRIFT keys `e357988905aeeea9`, RATE desk-output `cde82d7f1dc9ef03`, DRIFT
+desk-output `c873e0194673affc`.
+
+| corpus | rows | key tuples differing | desk-output digests differing |
+|---|---|---|---|
+| RATE (768 towns, `rateGrid()` through `generateSettlementPipeline`) | 768 | **0** | **0** |
+| DRIFT (525 golden configurations × 2 audiences) | **1,050** | **0** | **0** |
+| EXHAUSTIVE domain sweep (the five key functions' whole input domain) | 4,743 | **0** | n/a |
+
+⭐ **THE EXHAUSTIVE SWEEP IS THE ONE THAT CLOSES IT, AND THE CORPORA CANNOT.** 16 threat
+spellings × 11 flag values × 11 flag values for beasts, 11³ for invasion and disasters, 11² for
+internal and 24 score values for economic — every input the five functions can be handed,
+including `null`, `undefined`, `NaN`, `''`, `[]`, `{}`, `'civilized'` and `' frontier '`. The
+sweep reaches **26 of the 26** DS-DEF-2 pool keys; the two shipped corpora together reach 23
+and the null reading. A corpus A/B alone would have left three keys unproven.
+
+**THE MANIFEST, THE ARM THIS CAR RESTS ON:**
+
+```
+$ npx vitest run tests/property/dossierProseManifest.test.js                          ; exit=0
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 9 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · drawing an AUDIBLE index above 0 because anchoring
+    removed an earlier variant: 217 · strictly below every one of the twelve probes: 18
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+```
+
+Every printed figure is byte-equal to car 3a's and to every stage of 3b–3g. The DRIFT arm's
+three lists are empty — rows added `[]`, removed `[]`, moved `[]`. **The manifest drift is
+`[]`.** `git diff --stat HEAD -- src/data/` prints nothing: the six generated leaves never
+appear in `git status`, which is the strongest form of sha-identical.
+
+### 3h.3 ⭐⭐ THE CENSUS: RESOLVED 318 → 340, AND THE PER-ROW RUNG DELTAS
+
+`node scripts/wiring-census.mjs` then `--check`, both green:
+
+```
+[wiring-census] wrote docs/content/wiring-census.json — 708 pools, 165 relation rows, 7 stamped files
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+```
+
+| figure | before | after |
+|---|---|---|
+| `resolved` | **318** | **340** |
+| `unresolved` | 390 | 368 |
+| `resolvedWithPredicate` | 185 | 207 |
+| `resolvedWithCleanPredicate` | 185 | 207 |
+| `keyTables` | 29 | 33 |
+| `syntheticTableFields` / `tableRungRowsWithoutAbsence` | 78 | 100 |
+| `branchGrainRows` / `functionGrainRows` | 287 / 421 | 309 / 399 |
+| `kExecutable` / `kNotExecutable` | 318 / 390 | 340 / 368 |
+| recovery rungs | none 390 · literal 171 · table 78 · template 69 | **none 368 · literal 171 · table 100 · template 69** |
+| the largest UNRESOLVED reason | 248 | **226** |
+
+**UNMOVED, AND EACH IS A CLAIM WORTH THE LINE:** `tiers` (MISSING 34 / THIN 483 / COVERED 225 /
+MISSING-AT-TIER 45), `absent` (measured 370 · default 3 · not-produced 60 · method-call 18),
+`predicatesOverUnreadFields` 99, `objectClassed` 99, `covertRows` 4, `zeroK` 49,
+`grains.branch.zeroK` 49, `grains.function.zeroK` 121, `customReachableRows` 21,
+`relationRowsJoinable` 0, `ratifiedAliases` 3, `modifierEligibleFactsByTab.defense` 5,
+`attachCoverage` 50 blocks.
+
+**THE PER-ROW RUNG DELTAS — 22 rows moved and every one is DS-DEF-2's:**
+
+```
+$ node <index committed vs fresh by `block :: pool`, compare whole rows>
+rows whose JSON moved: 22
+rows OUTSIDE DS-DEF-2 that moved: 0
+```
+
+| reader | rows | rung | `k` | the predicate the census now recovers |
+|---|---|---|---|---|
+| `BEASTS_ROW_POOL` | 7 | none → **table** | null → 2 | `beastsRowSituation(family, perimeter, force) === '<situation>'` |
+| `INVASION_ROW_POOL` | 6 | none → **table** | null → 2 | `invasionRowSituation(walls, garrison, militia) === '<situation>'` |
+| `ECONOMIC_ROW_POOL` | 4 | none → **table** | null → 2 | `scoreBand(economicScore) === 'STRONG'` … `'CRITICAL'` |
+| `DISASTER_ROW_POOL` | 5 | none → **table** | null → 2 | `disasterRowSituation(granary, hospital, church) === '<situation>'` |
+| `internalRowPoolKey` | 4 | literal → **literal (UNMOVED)** | 1 → 1 | its own branch fields, `court` and `prison` |
+
+**DS-DEF-2 is now 26 RESOLVED of 26.**
+
+⛔ **THE RE-TAKE IS THE DECLARED ONE, NOT A STAMP-ONLY RE-TAKE, AND THE ADDENDUM'S TEST SAYS SO
+IN INTEGERS.** `git diff -U0 -- docs/content/wiring-census.json` is **1,156 changed lines**
+(854 insertions, 302 deletions) of which exactly **2 are the `stamp.files` sha pair for
+`defenseStateProse.js`** and **1,154 are row and figure lines**. The census file grows
+1,809,073 → 1,832,119 bytes. Under the chair's generalised rule that is the chair's act — and
+this one is PRE-RULED at SITTING §P.2-28 as the declared purpose of the car, so it is committed
+with the change that moved it rather than refused.
+
+### 3h.4 ⭐⭐ DS-DEF-2 LEAVES THE CANNOT-ATTACH SET
+
+```
+$ node <attachCoverage, committed vs fresh>
+DS-DEF-2 attach  {"spines":4,"facts":2,"spinesReachedBp":0,"meanReachBp":0}
+              -> {"spines":26,"facts":6,"spinesReachedBp":10000,"meanReachBp":8077}
+branch  cannotAttach 22 -> 21     left: DS-DEF-2      joined: (none)
+function cannotAttach 26 -> 25     left: DS-DEF-2      joined: (none)
+what the branch grain buys: DS-DEF-11 DS-DEF-9 DS-ECO-9 DS-POW-3   (unchanged, before and after)
+```
+
+Every spine of the threat assessment can now carry a modifier, on 6 facts where it had 2. ARCH
+§6.4 works its whole fact-budget example on this block and the walker's own comment said the
+cure was "a wiring car, not a grain". This is that car, and the four blocks the branch grain
+buys are untouched by it — the two measurements are independent, which is what makes the second
+one evidence.
+
+### 3h.5 ⛔ THE JUDGMENT CALL: ROW 3 IS NOT TABLED, AND THE COST OF TABLING IT IS MEASURED
+
+The brief's item 1 names FIVE key functions including `internalRowPoolKey`. Four were tabled and
+the fifth was not. **The reason is a loss, not a preference.** Row 3 already resolved on rung 1
+with `reads: ["court","prison"]` — the block's only named fact pair, and the read set SITTING
+§P.2-28 quotes. Rung 3 writes the census's OWN synthetic label into `predicate[].field`,
+`branchReads` and `fieldsRead` alike (car 10, cure 4), and `decorateRows` gives a table row an
+EMPTY absence record by construction. Tabling row 3 would therefore have:
+
+* replaced two named readings with one instrument label — the two facts vanish from `factIndex`,
+  from `spokenToSet` and from the `absent` distribution;
+* moved its four rows from `k = 1` to `k = 2`, which is a fact-budget claim nobody measured;
+* left DS-DEF-2 with SIX synthetic labels and no real reading at all.
+
+The block leaves the dark set either way (26 spines over 5 read sets is enough). So the car took
+the shape that resolves 22 rows and loses nothing, and the walker now PINS the asymmetry: an arm
+asserts `internal.reads` is still `['court','prison']` and its `k` still 1, so a later uniform
+sweep cannot quietly table it. **Veto shape:** table row 3 as well and accept the two lost
+readings, if uniformity across the 256 rung-4 keys is worth more than DS-DEF-2's fact pair.
+
+### 3h.6 ⛔⛔ TWO INSTRUMENTS THIS CAR TRIPPED WITH A COMMENT, BOTH CURED AT CAUSE
+
+Neither is a figure move. Both were caught by execution, and both are recorded because the next
+desk's wiring car will meet them.
+
+**1. THE ISLAND FENCE READS COMMENTS, AND A PRODUCT FILE MAY NOT NAME THE CENSUS MODULE.**
+`proseWiringCensus.walker.test.js`'s arm (e) scans every file under `src/` for the BARE MODULE
+NAME of each of the instrument island's eleven modules and refuses a hit outside
+`src/domain/prose/` — by RAW TEXT, comments included. The first cut of the new docblock cited
+the module by path, and the fence fired:
+
+```
+ × (e) THE FENCE: no src/ file outside the ISLAND names any of its ELEVEN modules
+   expected [ "wiringCensus <- src/domain/display/stateProse/defenseStateProse.js" ] to deeply equal []
+```
+
+That is the fence working exactly as designed: a product surface that has learnt the
+instrument's name is one refactor away from importing it. The cure is the wording — the docblock
+now cites the DIRECTORY and never the module — and the rule is written into the file so the next
+author does not have to rediscover it. All eleven island tokens now read 0 in the desk.
+
+**2. THE ALIAS DRAFT'S `docblock` EVIDENCE KIND MINTS A CANDIDATE FROM ANY COMMENT LINE, AND IT
+MINTED ONE OUT OF TWO ENGLISH WORDS.** `aliasDraft`'s fourth evidence kind indexes composer
+COMMENT lines and proposes an alias wherever one line names a relation endpoint's leaf and a
+census read root's leaf. A sentence of the new docblock ended "there is no silence on this row",
+and the draft answered:
+
+```
+NEW ROW: economicGates.disaster|row  evidence=docblock
+  at src/domain/display/stateProse/defenseStateProse.js:495
+  line: * WHICH DISASTER SITUATION a town is in. Total: there is no silence on this row.
+draft.rows.length: 33 -> 34
+```
+
+An alias candidate between a generator gate and a bare key-function parameter, out of nothing
+but two English words sharing a sentence. ⚠ **AND THE FIRST CURE RE-MINTED IT**: the note
+written to record the artefact named both tokens on one line and the draft proposed the same row
+again, citing the note. The sentence is now spelled so no line carries both, `draft.rows.length`
+is back to **33**, `endpointsWithCandidate` 14, `noCandidate` 75.
+
+⭐ **FOR THE CHAIR, BECAUSE THIS IS A SHAPE THE SITTING HAS ALREADY RULED ON ONCE.** SITTING
+§P.2-27 withdrew every `generator-write` citation that was "a comment, a prose string, a
+template string or an arrow parameter" and re-cut that kind as an AST reading. The identical
+weakness survives in the `docblock` kind, which is comments BY DEFINITION and cannot be re-cut
+the same way. It costs nothing today — `ratifiedAliases` filters to `evidence === 'identifier'`,
+so a docblock row can never ship as a ratified alias — but `draft.rows.length` is a declared
+figure a walker asserts, so **any car that writes a composer comment can move it**, and the row
+it adds looks exactly like evidence. Recorded, not cured: the honest cures are the chair's (drop
+the kind, or require the two tokens to be adjacent rather than co-resident on a line).
+
+### 3h.7 THE DECLARED ROWS UPDATED IN THE WALKER — fourteen, each with its ground
+
+No test title and no `describe` was added or removed, so **the lighting census does not move and
+no refreeze is owed** (`tests/lint` reads 2,401 assertions before and after).
+
+| assertion | before | after | why |
+|---|---|---|---|
+| `summary.resolved` | 318 | 340 | the 22 |
+| `summary.unresolved` | 390 | 368 | the 22 |
+| `resolvedWithPredicate` / `…WithCleanPredicate` | 185 / 185 | 207 / 207 | each table row carries exactly one readable comparison |
+| `summary.syntheticTableFields` | 78 | 100 | the 22 table labels |
+| `census.tables` | 29 | 33 | the four new tables |
+| `branchGrainRows` / `functionGrainRows` | 287 / 421 | 309 / 399 | a table row's field IS its branch |
+| `tableRungRowsWithoutAbsence` | 78 | 100 | the same 22 |
+| `budget.executable` / `notExecutable` / histogram sum | 318 / 390 / 318 | 340 / 368 / 340 | the same 22 |
+| `dark.length` / `grains.function.cannotAttach.length` | 22 / 26 | 21 / 25 | DS-DEF-2 leaves both |
+| `factIndex.length` | 59 | 63 | four new table labels in the inverse |
+| `join.deskRoots` | 85 | 89 | the same four, as roots no endpoint can meet |
+| `draft.syntheticRootsExcluded` | 15 | 19 | the same four, excluded by name |
+| the DS-DEF-2 attach arm | "recovers four of them", ONE ladder, one read set | 26 of 26, FIVE readers, five read sets, `spinesReachedBp` 10000 | rewritten |
+| the two `expectAbsentWithAnchor` anchors | `DS-DEF-2` | `DS-STR-1` | the old anchor left the collection; the new one is a live member on the same path |
+
+⛔ **THE ANCHOR MOVE IS THE ONE TO RE-DERIVE.** `expectAbsentWithAnchor(dark, 'DS-DEF-11',
+'DS-DEF-2', …)` used DS-DEF-2 as its LIVENESS anchor, and this car removed DS-DEF-2 from `dark`.
+Deleting the anchor to get green is what the helper's own message forbids, so the anchor moved to
+`DS-STR-1` — a block the same list still carries, reached by the same derivation, and already
+asserted present two lines below. DS-DEF-2 is now the EXCLUDED member of its own third arm, so
+its departure is asserted rather than merely no longer contradicted.
+
+### 3h.8 THE GATES AT THE TIP
+
+```
+$ npx vitest run tests/lint                                                          ; exit=0
+ Test Files  148 passed (148)
+      Tests  2401 passed (2401)
+
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js                         ; exit=0
+      Tests  58 passed (58)
+$ npx vitest run tests/domain/defenseStateProseDesk.test.js                          ; exit=0
+      Tests  91 passed (91)
+$ npx vitest run tests/property/dossierProseManifest.test.js                         ; exit=0
+      Tests  14 passed (14)
+
+$ node scripts/check-domain-strict.mjs                                               ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                              ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs                                      ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneSEAM                                     ; exit=0
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ npx eslint <the desk, the walker, the desk suite>                                  ; exit=0
+✖ 1 problem (0 errors, 1 warning)   # 'MONSTER_THREAT_TIERS' unused — pre-existing, unmoved
+$ node <espree literal probe> src/domain/display/stateProse/defenseStateProse.js
+defenseStateProse.js  literals:246  em:0  bang:0  toFixed-in-literal:0
+$ npx vitest run tests/copy/voiceMechanics.test.js                                   ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)
+```
+
+⭐⭐ **`tests/lint` IS FULLY GREEN FOR THE FIRST TIME IN THIS TRAIN — 148 of 148 files and 2,401
+of 2,401 assertions.** Cars 3a through 3g each left the census interlock red because the re-take
+was a register door they were refused; this car's door was pre-ruled, so the census moved in the
+same commit as the change that moved it and the interlock closes. **THE STRICT RATCHET SITS
+EXACTLY ON ITS CEILING, 1120 / 1120** — four frozen tables and three readers added ZERO
+strict-type errors. The voice E2 red is the two banked files at the counts car 3a measured; the
+defense desk is not among them and adds nothing to it.
+
+**THE BYTE RATCHET.** `defenseStateProse.js` is **541 effective lines against the 800 ceiling**
+(eslint `max-lines`, `skipBlankLines` + `skipComments`, the instrument `sizeBaseline.test.js`
+uses), up from 500 at the base: **headroom 259**. Raw lines 1,635 → 1,798. The desk is not in
+`scripts/.size-baseline.json` and does not enter it. ⚠ `EconomicsTab.jsx` stands at 596 / 600
+and is **untouched by this car** — it is not in `git status`.
+
+### 3h.9 ⭐ WHAT THIS CAR MEASURED FOR THE CHAIR — the remaining rung-4 work, sized
+
+ARCH §3.6 speaks of "the 256 rung-4 keys"; at this tip, after the 22, the roster is:
+
+```
+$ node <group UNRESOLVED rows by block, excluding the UNMOUNTED reason>
+MOUNTED blocks still carrying rung-4 pools: 29 blocks, 226 pools
+DS-WAR-2 24 · DS-FTH-3 23 · DS-DEF-6 18 · DS-POW-7 18 · DS-FTH-1 13 · DS-HK-1 11 · DS-POW-5 11 ·
+DS-GEN-9 10 · DS-POW-1 10 · DS-STR-2 10 · DS-WAR-1 10 · DS-DEF-3 7 · DS-ECO-8 7 · DS-ECO-9 6 ·
+DS-REL-1 6 · DS-POW-6 6 · DS-CND-1 6 · DS-DEF-4 5 · DS-DEF-1 4 · DS-ECO-3 4 · DS-ECO-10 4 ·
+DS-ECO-11 3 · DS-GEN-8 2 · DS-POW-4 2 · DS-STR-1 2 · DS-DEF-8 1 · DS-GEN-11 1 · DS-POW-2 1 ·
+DS-FTH-2 1
+```
+
+(The other 142 unresolved rows are UNMOUNTED blocks, where there is no composer to expose.)
+
+⚠ **AND THE PER-BLOCK COUNT OVERSTATES THE REACHABLE WORK, WHICH A CHAIR SIZING CARS FROM IT
+SHOULD KNOW.** DS-DEF-6 reads 18, but 13 of those are `DEF6_C3_BLOCKED_POOLS` — pools the desk
+DELIBERATELY never keys, because a landed position on the same tab already speaks the fact. No
+table can resolve a pool no key function produces, so a DS-DEF-6 wiring car reaches FIVE pools
+(the `Logistics & Supply:` family, still built through a local arrow) and the other thirteen stay
+rung 4 until the C3 re-cut the desk's own header describes. Every block's number wants that
+subtraction taken before a car is priced on it.
+
+⚠ **`supplyLogisticsPoolKey` IS THE SAME SHAPE ON THIS LEAF AND WAS LEFT ALONE ON PURPOSE.** It
+builds its five DS-DEF-6 keys through a local arrow exactly as the four cured here did. It is a
+different block with a different chair row, so it is named in the code and here rather than swept
+up: a wiring car that quietly widened its own scope would be the harder thing to review.
+
+### 3h.10 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **Row 3 is not tabled** (§3h.5), with the cost of tabling it measured in three losses.
+2. **The four tables are module-PRIVATE**, forced by the projection contract's exported-string-map
+   guard (§3h.1) and consistent with the desk's three existing maps.
+3. **The situation readers are private too, and the totality binding is by EXECUTION rather than
+   by export.** The desk suite's ALIVENESS arm already sweeps every combination the generator can
+   build and asserts all 26 corpus pools are reached, which convicts both directions: a table
+   value that is not a live pool renders nothing and drops `reached.size` below 26. No new export,
+   no new walker classification line.
+4. **`economicRowPoolKey`'s corpus guard is replaced by the table, and the 1:1 it enforced at
+   runtime is now asserted in the suite.** The shipped function built its key by template and then
+   asked `CORPUS['DS-DEF-2'].pools[key]`; the arm folded into the existing ECONOMIC test now drives
+   every integer score from -20 to 120, requires each to key a LIVE pool, and asserts the reached
+   set equals the corpus's four `Economic Survival:` pools exactly. Behaviour is identical
+   (§3h.2's 24-value score sweep, `null`/`undefined`/`'50'`/`NaN`/`Infinity` included).
+5. **The situation tokens are English phrases, not boolean triples.** They are the census's
+   recovered predicate VALUE, so a reader of the register meets `=== 'walls, no force'` rather
+   than `=== 'w1g0m0'`. **Veto shape:** a canonical encoded token would be shorter and less
+   readable in exactly the register this car exists to fill.
+6. **No new test title anywhere**, so the lighting census is untouched and no refreeze commit is
+   owed. Every new assertion is folded into an arm that already existed — cars 3b–3g's rule.
+
+### 3h.11 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| `internalRowPoolKey` NOT tabled, against the brief's five | that two named readings beat one uniform label, and that the walker's new pin is the right guard | §3h.5 | ⭐⭐ the brief named the row |
+| The declared census re-take (1,154 row lines, 2 stamp lines) | that §P.2-28's pre-ruling covers a move this size | §3h.3 | ⭐⭐ |
+| The `expectAbsentWithAnchor` anchor moved DS-DEF-2 → DS-STR-1 | that the new anchor travels the same path, and that the departure is asserted rather than dropped | §3h.7 | ⭐⭐ |
+| The alias draft's `docblock` kind is comment-sensitive | whether the kind should be dropped or re-cut, as §P.2-27 did to `generator-write` | §3h.6 item 2 | ⭐⭐ any car writing a composer comment can move a declared figure |
+| The island fence reads comments | that citing the directory is the standing rule for product files | §3h.6 item 1 | ⭐ |
+| The four tables private, the readers private | that execution-bound totality is enough without an export | §3h.10 items 2, 3 | ⭐ |
+| `economicRowPoolKey`'s runtime corpus guard replaced by a suite arm | that a roster asserted in the suite beats one enforced invisibly at the draw | §3h.10 item 4 | ⭐ |
+| The rung-4 roster's per-block counts | that a C3-blocked pool is not reachable work, before pricing a desk's wiring car on its number | §3h.9 | ⭐ sizing the next cars |
+
+### 3h.12 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+npx vitest run tests/property/dossierProseManifest.test.js   # drift [] — the acceptance
+npx vitest run tests/lint/proseWiringCensus.walker.test.js   # 58 passed: the declared rows
+npx vitest run tests/domain/defenseStateProseDesk.test.js    # 91 passed
+npx vitest run tests/lint                                    # 148 / 148, 2401 / 2401, NO red
+node scripts/wiring-census.mjs --check                       # the door is closed
+node scripts/check-domain-strict.mjs                         # 1120 / 1120
+node $SC/seam3h-keyab.mjs <out.json>                         # the A/B, re-runnable at any sha
+```
+
+**STATUS: CAR 3h LANDED.**
