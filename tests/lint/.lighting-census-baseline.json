@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "40dbcfc66be4a83207b79abbf2cacbb5c4154fc8",
-  "measuredBy": "MEASURE car 4 (Opus 5)",
+  "measuredAtSha": "22ff295a49866d264e8157280de0653cc1c92b43",
+  "measuredBy": "SEAM car 3a (Opus 5)",
   "date": "2026-09-08",
-  "note": "MEASURE car 4, the reader-corpus derivation arm: TWO new arms in tests/scripts/readerCorpusManifest.test.js (the golden master still IMPORTS the one keyOf and re-spells no second one, anchored on rows.map(keyOf); and that arrow RUN against goldenKeyOf on three real manifest rows), plus one existing arm retitled to name the file the arrow now lives in. Exactly +2 titles, 23841 -> 23843. No test FILE was added; no product byte and no helper byte moved, so the 525-row corpus is bit-identical across the car and the prose-manifest golden keeps the recorder sha it pins.",
-  "files": 2553,
+  "note": "SEAM car 3a lands the composed-prose SEAM, reachable from nothing: two new test files (tests/domain/composeStateProse.test.js, tests/lint/composeStateProseFence.test.js) and 58 new test titles across them and the extended tests/domain/stateProseKernel.test.js. No product surface is lit or darkened; the seven new src files carry no titles.",
+  "files": 2555,
   "parked": 375,
-  "credited": 2178,
-  "titles": 23843,
-  "suiteTitles": 6377
+  "credited": 2180,
+  "titles": 23894,
+  "suiteTitles": 6393
 }
