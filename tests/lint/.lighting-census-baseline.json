@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8c53ddef1224d6adb7c88998128bf790fd78c2fe",
-  "measuredBy": "INSTR-912 car 9 (Opus 5)",
+  "measuredAtSha": "c199f01893869c7f63a72fceed31511e7eead2cd",
+  "measuredBy": "INSTR-912 car 10 (Opus 5)",
   "date": "2026-09-08",
-  "note": "car 9 adds the fold cures arms to five existing lane walkers (no new test FILE): titles and suite titles move, files and parked do not",
+  "note": "car 10 adds no test FILE and no new suite; four lane walkers gain ten test()/it() titles between them (wiring census 21->26, entry contradiction 24->27, move grammar 49->50, institution table 17->18) while THIS census credits +6 — the gap is its own classifier, not a hand-composed figure, and this tuple is the plain re-run of the door",
   "files": 2549,
   "parked": 375,
   "credited": 2174,
-  "titles": 23730,
+  "titles": 23736,
   "suiteTitles": 6354
 }
