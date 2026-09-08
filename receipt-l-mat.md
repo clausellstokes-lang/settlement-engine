@@ -36,7 +36,10 @@ Dock tip: `7d96e2b72`. Porcelain 0.
 ## BUILD LISTINGS (the two the brief asks for; three builds taken, plus one control)
 All builds `sh scripts/gate-mutex.sh --run -- npm run build`, exit 0, ~22 s each.
 
-**Build A — BASE** `3b1c0eaa5`, 11:58:11→10:58:33 EDT. 1,377 emitted files.
+**Build A — BASE** `3b1c0eaa5`, 10:58:11→10:58:33 EDT. 1,377 emitted files. *(the start time read
+`11:58:11` until §913/C18 — a typo, not a measurement; `$SC/lmat/build-base.meta` line 1 reads
+`Mon Sep  7 10:58:11 EDT 2026`. Corrected HERE, in the table, because the X13 row that first caught
+it sits ~500 lines below and a reader of this table never reached it.)*
 **Build B — CAR 1** (source edits, no pin), 11:02:57→11:03:22 EDT. 1,377 emitted files.
 **Build C — DETERMINISM CONTROL**, same tree as B, 11:04:45→11:05:08 EDT.
 
@@ -725,3 +728,167 @@ DROP customDefinitionFingerprint | OLD guarded arm fires = false (SILENTLY GREEN
 ```
 **5 of 5.** The old arm went green on every one of the five regressions it claimed to guard; the
 new one reds on every one. The fold's HIGH is confirmed by execution, not by reading.
+
+### THE EIGHT SHIPPED CURES — cited by SYMBOL, each verified against the tip before editing
+Every fold line number was re-derived at `19642a9fc` before the edit; all eight resolved, and the
+citations below are by symbol because a line number in a fold is a hypothesis.
+
+| # | site (by symbol) | what changed |
+|---|---|---|
+| **C1** | `livingContentRosterPublicDrop.test.js`, the arm "the deeper denylist would strip NOTHING here" — the block commented "Non-vacuity for the census itself" | the guarded `if`/`for` over `CUSTOM_DEFINITION_IDENTITY_KEYS` DELETED; one unconditional `expect(rosterKeys).toEqual(expect.arrayContaining(CUSTOM_DEFINITION_IDENTITY_KEYS))` in its place, with the tautology named and the 5-of-5 measurement recorded beside it |
+| **C2** | `densityCreateBoundary.js`, `PIPELINE_REACHERS['src/store/settlementGenerateAction.js'].why` | the false hydration clause replaced by the Library Load hop (`updateConfig(migrateConfig(data.settlement?._config \|\| data.config))`, `_`-prefix admission) + the CLAMP in `birthConfig`. One string; no logic byte moved |
+| **C3** | `densityLaw.js`, the "⭐ THE FLIP IS NOW ONE LINE" header paragraph | the claim that had been presented as overturned-on-executed-evidence is now itself corrected: the hop hydrates `_`-prefixed keys, and the CLAMP — not an absence — is why the birth is unambiguous |
+| **C4** | `livingContentLaw.js`, the "⛔⛔ THE BLOCKER THAT HELD THIS UNWIRED WAS BYTES" paragraph | car 9's own substitution: no emitted dist file changed SIZE (658 of 1,377 changed BYTES). The third and last home of that wording |
+| **C5** | `livingContentMaterialization.test.js` — the REGISTRY-half comment and the "⛔ THE SEAM MUST BE ARMED" comment | "takes" → "WOULD take" at both, plus the one-sentence tense ground car 9 wrote in the sibling file |
+| **C6** | `publicSafe.js` (the "⚠ THE SERVER TWIN IS NOT LANDED" comment) and `livingContentRosterPublicDrop.test.js` (header, DM-full arm comment, DM-full failure message) | `120/129` → **`121/129`** at all four. The file now agrees with its own two other citations; grep for `120/129` under `src/`+`tests/` returns **0** |
+| **C7** | `livingContentRosterPublicDrop.test.js` header, the "⭐ WHY THE DROP IS THE RULING" paragraph | the line-number citation replaced by the marker — the "⚠ AMENDED (lane L-MAT, O-11 path 2)" paragraph of `livingContentRoster.js` — with the decay recorded so the next hand does not re-commit it |
+| **C8** | `livingContentRoster.js` (the "⛔⛔ READ THIS FIRST" paragraph), `livingContentLawWiring.test.js` (the "⛔⛔ AND THE FACT THAT OUTRANKS" docblock), `livingContentRosterPublicDrop.test.js` (the "⛔⛔ AND THE ONE FACT A LIGHTING ENGINEER MEETS" header) | the self-falsifying occurrence count deleted at all three; the load-bearing fact — **nothing in `src/` calls it** — kept and sharpened |
+
+**Eight files, 67 insertions / 24 deletions.** Five `src/` (four comment-only, one — `publicSafe.js` —
+a single citation digit); three `tests/` (one assertion changed, the rest comment). **No logic byte
+moved anywhere except C1's four lines → one.**
+
+### THE PROOFS — every one executed from the dock, one file at a time, exit captured in-shell
+| gate | result | exit |
+|---|---|---|
+| `tests/security/livingContentRosterPublicDrop.test.js` | **6 passed** | **0** |
+| `tests/domain/livingContentLawWiring.test.js` | **12 passed** | **0** |
+| `tests/domain/livingContentMaterialization.test.js` | **11 passed** | **0** |
+| `tests/lint/negativeAssertionAnchor.walker.test.js` | **9 passed — budgets EXACT** (the walker enforces per-file equality, so green IS the budget claim; C1 replaced a bare loop and moved no row) | **0** |
+| `tests/lint/densityCreateBoundary.walker.test.js` | **14 passed** | **0** |
+| `tests/lint/writerReach.walker.test.js` | **56 passed** | **0** |
+| `tests/lint/observedShapeReaders.walker.test.js` | **44 passed** | **0** |
+| `tests/domain/display/publicSafe.test.js` (touched src, run though not briefed) | **26 passed** | **0** |
+| `npm run typecheck:ratchet` | `OK — no type regressions (173 error(s), ceiling 173)`; baseline md5 `0342f68be…` **identical before and after** | **0** |
+| eslint, all 8 touched files | clean, no output | **0** |
+| whole-suite / build | **NOT RUN** — the chair's, as the brief requires | — |
+
+**No forbidden byte moved.** Diff paths matching lockfiles/baselines/goldens/migrations/applied-head/
+ARCHITECTURE = **0**. The five frozen baselines read `0342f68be…` · `8c9ea0c40…` · `c4b5aec83…` ·
+`917027c85…` · `7695cf1d8…`, each identical to the proof lens's recorded value. Untracked files: **0**
+(no foreign WIP in the dock). Dial still 1; no `--write`, no migration, no golden, no push.
+
+### X-CORRECTIONS X14–X25 (the fold's C9–C20) — THESE SUPERSEDE THE SENTENCES THEY NAME
+The predecessor's text above is left standing, as X12/X13 were. Where a sentence above and a row
+here disagree, **the row here is the fact** — each rests on a lens measurement recorded in
+`$SC/skeptic-913/`, not on a re-reading of the receipt.
+
+- **X14 (C9) — DEF-3, "every non-null record refuses anyway, byte for byte the same outcome" is
+  FALSE.** The shipped DROP is **STRICTER** than the remap it replaced, and the constructible
+  counterexample is named: a settlement-content provenance receipt with **ZERO**
+  `materializedDefinitions` returns `{ok:true}` and is carried back unchanged by the remap
+  (`admitSettlementContentProvenance` caps the array at 2 000 and sets **no minimum**, so a
+  hand-written import file can hold one); the drop deletes it and reports an issue. The RULING is
+  not weakened by this — it is strengthened. Only the sentence was wrong.
+- **X15 (C10) — the remapper import added TWO modules to `web-transitive`, not three** (897 → 899
+  against HEAD): `accountSettlementContentPortability.js` + `settlementContentProvenance.js`. The
+  third, `livingContentLawVersion.js`, is **DEF-1's own edge** and is present at the shipped tip;
+  "three" was the car's total against HEAD, not the remapper's. The neighbouring sentence — closure
+  diff vs HEAD = `livingContentLawVersion.js` alone, 898 = 897 + 1 — stands.
+- **X16 (C11) — the DEF-1 BEFORE row needs "on a DM-shared dossier".** The default public
+  projection is a 40-key **ALLOWLIST** (`_gallery_sanitize_public_json`) naming neither record, so a
+  plain public dossier never carried them; the leak reached the ingest only through the DM-full
+  opt-in. The severity is unchanged — it is the same SQL twin already booked as owed — but the
+  sentence as written over-reached.
+- **X17 (C12) — "inside the executable `why` string A WALKER READS" over-states the instrument.**
+  The walker LENGTH-CHECKS `why`: its only `.why` assertions are `length > 40|60`. **No instrument
+  in the estate reads the CONTENT of any `why` string** — and that is precisely why C2's false
+  sentence survived a whole consist in a sibling `why` without reddening anything. **Recorded as an
+  INSTRUMENT GAP, not a passing nuance:** shipped `why` prose is source DATA that no gate verifies.
+- **X18 (C13) — R-I option 2's "REFUTED" label is STRUCK; the lane's original ground is RESTORED.**
+  The content-addressed id in `makeContentRevision` is a `revisionId ||` **FALLBACK**
+  (`customContentVersioning.js`), and the product's **only** caller
+  (`customContentLocalLedger.js`) passes `revisionId: makeCustomContentUuid()` — `crypto.randomUUID()`.
+  Every revision id the product mints is a random UUID, so **the narrow digest IS blind in the
+  product**, on the product's only minting path. The fixture was faithful, not lying. HIGH: this is
+  an input to an owner-gated persisted-shape decision.
+- **X19 (C14) — "the fact that OUTRANKS all four" is qualified to the DEGENERATE CASE, and
+  "outranks" is dropped.** `buildSettlementContentProvenance` returns null only when environment
+  AND `bindingHash` AND `definitions.length` are ALL empty; a **reviewed environment** — the
+  precondition for a roster existing at all — makes it non-null. The estate's own lit fixture is the
+  counterexample: `livingContentRosterPublicDrop.test.js` asserts BOTH the roster key and the
+  provenance key truthy on one `litSettlement()`. It is one true observation about a degenerate
+  world, not a fact that outranks the four options.
+- **X20 (C15) — DEF-3's `Object.hasOwn` framing hid one BEHAVIOUR DIFFERENCE.** It is not purely
+  instrument-avoidance: a settlement carrying `customContentRoster: null` (key present, value null)
+  is now **deleted AND reported** `settlement_content_record_unmappable`, where a `!= null` read
+  would have left it silent. Harmless — a null carries no source id — but a difference, and it
+  belonged in the row.
+- **X21 (C16) — `node_modules` 455 has a named cause and it is not a package.** `ls -A` 455 / `ls`
+  452; the three hidden entries are `.bin`, `.vite`, `.vite-temp`, and the BASE dock's entry listing
+  is **byte-identical by `diff`**. The 454 → 455 step is a hidden vite cache directory appearing.
+  **No package entered the dock.** The old framing ("recorded, not acted on") left a reader
+  suspecting a dependency had moved.
+- **X22 (C17) — "WHAT THE 36 BYTES ARE — measured, not inferred" is DOWNGRADED, and so is the
+  determinism control.** What is measured is the **LOCATION**: char 125,402 of `engine-core` falls
+  inside its `export{…}` alias list (which begins at 124,583). The **CAUSATION is UNTESTED** — at
+  the tip that leaf's constant lives in the lazy `engine-*` chunk, `engine-core` carries neither the
+  literal nor `customContentRoster`, and `importScrub-*` imports nothing from `engine-core`. The
+  claim that the two tip builds produced identical chunk hashes is likewise **UNTESTED** (a build is
+  outside every lens's fences, and outside this car's). **Declare the shift; do not declare the cause.**
+- **X23 (C18) — the `11:58:11` typo is now fixed IN PLACE** in the BUILD LISTINGS table above, not
+  only in the X13 row ~500 lines below it. A correction a reader never reaches is not a correction.
+- **X24 (C19) — see the DEFERRED row below: F1–F4 were the CURE'S INCOMPLETENESS, not deferrals.**
+- **X25 (C20) — U1's PLANTED md5 `25475df5a41a40a99aeb835ad534a3c5` is CLAIMED, NOT VERIFIED.** It
+  is a hash of a file that never existed in git; reproducing it needs a write into the dock, which
+  every lens's fences and this car's forbid. The CLEAN digest `ad11078ef07775df072388722646f0f9`
+  IS verified (dock, `git show` and worktree all agree), and the 12/2 arm cover is confirmed by
+  derivation — but a successor must not read that one cell as a receipt.
+- **X26 — THE CONSIST TABLE'S GREEN IS EIGHT-OF-NINETEEN RE-VERIFIED, NOT NINETEEN.** Of the 19
+  gates in "THE CONSIST PROOF AT THE COMPOSED TIP", **11 were not re-run by any lens** (the text
+  lens was fenced out by 4 live vitest processes, correctly). Eight were re-run and all matched.
+  Car 10 re-ran five of the nineteen again at its own tip, all matching. The chair's whole-suite
+  proof is what closes the remaining rows.
+
+### ⚠ AN INSTRUMENT FINDING THIS CAR OWES THE NEXT LANE (met while holding the vitest fence)
+`pgrep -f vitest` **MATCHES THE CALLER'S OWN COMMAND LINE.** When the gate check and the
+`npx vitest run …` invocation live in ONE shell command, the shell and each forked subshell carry
+that literal in `argv` and are counted as runners. This car read **9, 8, 12 and 4** "runners" at
+moments when `ps -Ao pid,ppid,command` showed **ZERO** real vitest processes, and a 90-second settle
+loop never converged because the loop itself was what it was counting. It costs a lane only false
+REFUSALS (never a false green), but it burned four launches here.
+**The cure, used for every run above:** put the invocation in a small script and call it, so the
+caller's `argv` carries no literal — `sh run1.sh <file>`, gate checked inside. Read **8 of 8** true
+zeroes afterwards. ⇒ **The fold's own recorded "38 processes six seconds after its own run finished"
+is very likely this artifact rather than 38 live workers.** Recorded so the next lane does not
+re-derive it at the same cost.
+
+### OBSERVED, NOT CURED (outside the twenty — no bytes taken, per "a cure never widens scope")
+1. **The shipped comment "The count is READ OFF THE REAL ROW"** (`livingContentRosterPublicDrop.test.js`,
+   beside the C1 arm) over-sells the same way the fold's row 20 says the receipt sentence did: it is a
+   `toBeGreaterThan` **THRESHOLD** against a derived number, not a read-off count. The fold rated it
+   PARTLY and wrote no cure for it; this car did not widen scope to take one.
+2. **"The key has exactly ONE reader in `src/`"** (same header) is true of one consuming FILE and not
+   site-by-site — there are **three** read sites in `accountImportBody.js`, two of them added by cars
+   7 and 9. The cited paragraph in `livingContentRoster.js` carries the qualifier ("Nothing reads the
+   key for its CONTENT") that this header drops. Fold row 40, PARTLY, no cure written; recorded here
+   so the next hand finds it rather than re-discovering it.
+
+### DEFERRED — car 10 (documented, not bugs to re-find)
+9. **F1–F4 WERE NOT DEFERRALS — THEY WERE THE CURE'S INCOMPLETENESS, and this car closed them.**
+   Cars 9's DEF-10/DEF-11/DEF-13 each cured only the sites their fold enumerated; a tip-wide grep
+   found the false hydration sentence still live in an executable `why` string **in the very file
+   car 9 edited** (F1) and in a paragraph presenting it as earned on executed evidence (F2), the
+   false byte-identical sentence at a third site (F3), and the "false friend" tense in a second
+   seam-arming file (F4). None was in any DEFERRED list, header or row — a successor grepping the
+   false sentence would have found it in shipped source and believed it. **Found by the §913 skeptic
+   pass, cured here as C2–C5.** The lesson is the deferral: **a text cure applied site-by-site from
+   an enumerated list is not a cure until the tip is grepped for the sentence itself.** Survivor
+   greps for all four phrases now return only corrective quotations that name the wording as false.
+
+## FOR THE OWNER
+Three rows, in the fold's corrected form. The first two must not go forward as the receipt above
+words them.
+1. **The DM-full SQL twin — a real gap, client half only.** `_gallery_dm_full_json` still re-issues
+   `customContentRoster` and `customContentProvenance` on every DM-shared dossier read back from the
+   server; the client-side drop landed. Writing the migration is owner-gated. **The citation handed
+   to whoever writes it was WRONG and is now fixed: the function body to amend is migration
+   121/129, not 120** — 120 only calls it. Confirmed independently by two lenses and the fold.
+2. **R-I — do not put this row in front of the owner until BOTH corrections are in it.** (a) The
+   receipt tells the owner the narrow digest is not blind in the product; **it is** — the only
+   minting path passes a random UUID (X18). (b) The "outranking fact" holds **only in the degenerate
+   case**, and the estate's own lit fixture is a counterexample (X19). Any key added to the
+   persisted, hash-validated receipt is a persistence-shape change and stays owner-gated.
+3. **+36 first-paint bytes — a declared behaviour shift.** Real, priced, inside budget by 5,878 B,
+   and the lane correctly refused to round it away. **Declare the shift; do NOT declare the cause** —
+   the causal explanation and the determinism control are UNTESTED (X22).
