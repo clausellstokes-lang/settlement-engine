@@ -1,0 +1,37 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i300-314",
+ "lines": 88,
+ "firstTs": "2026-09-06T17:18:05.275Z",
+ "lastTs": "2026-09-06T17:22:09.732Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 19,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+  "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html:fb2016.html",
+  "http://floggingbabel.blogspot.com/2009/10/explicated-gene-wolfe_07.html:fb2009.html",
+  "https://barach.us/2007/03/03/how-to-read-gene-wolfe/:barach.html",
+  "https://liviajelliot.com/blog/2024/17-podcast-worldbuilding/:livia.html",
+  "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/|reactor.html",
+  "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html|fb2016.html",
+  "http://floggingbabel.blogspot.com/2009/10/explicated-gene-wolfe_07.html|fb2009.html",
+  "https://barach.us/2007/03/03/how-to-read-gene-wolfe/|barach.html",
+  "https://liviajelliot.com/blog/2024/17-podcast-worldbuilding/|livia.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "ve source URLs fetched live (HTTP 200, browser UA) and converted to raw text myself — no summarizer, no Wayback needed, no BLOCKED. Every quotation was checked by exact-substring grep against the normalized raw page text, and I read the full surrounding passage for each to test the non-quoted limbs.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "ad24e208b93098317",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-ad24e208b93098317.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i300-314.json",
+  "exists": true
+ }
+}

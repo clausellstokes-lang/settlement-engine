@@ -1,0 +1,543 @@
+Monsters & More: An In-Depth Review of the 2025 D&D Monster Manual | EN World D&D & Tabletop RPG News & Reviews 
+ Menu 
+ News/Columns 
+ All News 
+ Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ Pathfinder 
+ Starfinder 
+ Warhammer 
+ 2d20 System 
+ Year Zero Engine 
+ Industry News 
+ Reviews 
+ Dragon Reflections 
+ White Dwarf Reflections 
+ Columns 
+ Weekly Digests 
+ Weekly News Digest 
+ Freebies, Sales & Bundles 
+ RPG Print News 
+ RPG Crowdfunding News 
+ Game Content 
+ ENterplanetary DimENsions 
+ Mythological Figures 
+ Opinion 
+ Worlds of Design 
+ Peregrine's Nest 
+ RPG Evolution 
+ Other Columns 
+ From the Freelancing Frontline 
+ Monster ENcyclopedia 
+ WotC/TSR Alumni Look Back 
+ 4 Hours w/RSD (Ryan Dancey) 
+ The Road to 3E (Jonathan Tweet) 
+ Greenwood's Realms (Ed Greenwood) 
+ Drawmij's TSR (Jim Ward) 
+ Features 
+ Million Dollar TTRPG Crowdfunders 
+ Most Anticipated Tabletop RPGs Of The Year 
+ Eric Noah's Unofficial D&D 3rd Edition News 
+ Top 5 RPGs Compiled Charts 2004-Present 
+ Adventure Game Industry Market Research Summary (RPGs) V1.0 
+ Ryan Dancey: Acquiring TSR 
+ Q&A With Gary Gygax 
+ TSR, WotC, & Paizo: A Comparative History 
+ D&D Pronunciation Guide 
+ D&D in the Mainstream 
+ About Morrus 
+ Podcast 
+ Community 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Resources 
+ Wiki 
+ Pages 
+ Latest activity 
+ Media 
+ New media 
+ New comments 
+ Downloads 
+ Latest reviews 
+ EN Publishing 
+ Store 
+ EN5ider 
+ Adventures in ZEITGEIST 
+ Awfully Cheerful Engine 
+ What's OLD is NEW 
+ Judge Dredd & The Worlds Of 2000AD 
+ War of the Burning Sky 
+ Level Up: Advanced 5E 
+ EN WORLD+ 
+ Log in 
+ Register 
+ What's new 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Menu
+ Log in
+ Register
+ Install the app
+ Install 
+ Upgrade your account to EN WORLD+ and remove most of the site ads. 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ You are using an out of date browser. It may not display this or other websites correctly.
+You should upgrade or use an alternative browser .
+Monsters & More: An In-Depth Review of the 2025 D&D Monster Manual
+ Category 
+ Dungeons & Dragons 
+ Category 
+ Reviews 
+ Thread starter 
+ brimmels 
+ Start date 
+ Jan 28, 2025 
+ The revised and expanded Monster Manual completes the 2024 anniversary editions of the D&D core rule books.
+The revised and expanded Monster Manual completes the 2024 anniversary editions of the D&D core rule books. My MM preview has already provided a lot of information on the new bestiary so this review will focus on what I didn't know when I wrote the preview or things that I can elaborate on more clearly. That said, I obviously can't cover every monster, new or revised. Instead, I'm going to try to cover a sampling of what to expect.
+The design imperative behind this revision boils down to a few things. In no particular order, they are:
+Ease of use.
+Greater variety
+More flavor to make the game more fun
+Empowering imagination.
+Improved challenges for players.
+ ​
+ A More DM-Friendly Monster Manual ​ 
+A lot of new people began playing and DMing D&D since 2014. Additionally, Wizards has heard various complaints and suggestions over the last 10 years as to how to make things easier for DMs. A little restructuring and rearranging can help both groups.
+“Ease of Use” plays out in several ways, especially in terms of how material is displayed. For example, every entry starts with a single phrase that gives the DM an efficient characterization of the creature. So the Couatl is “guardian manifestation of the divine” and the Roper is a “tentacled subterranean trapper.” Each entry has a couple of paragraphs of narrative information about the creature's lore or how it behaves, etc., but that one-sentence phrase can be handy when flipping quickly through the book, looking for inspiration.
+After that description is a short box that notes the habitat where the monster can most commonly be found. A wider range of habitats can be found in Appendix B where the book has lists of monsters sorted by habitat, creature type, monster group, and challenge rating. In that same small box is a notation about the treasure generally found with it. That can be a treasure type, such as relics for the aboleth or “any” for gelatinous cubes because they can, theoretically, absorb anything it encounters. Both of these are minor changes, but additions to the original Monser Manual format that can be very useful for DMs.
+Stat blocks were tweaked so DMs can find information faster, which I love. Now Initiative is listed next to AC right at the top. Initiative is also listed as both the initiative modifier, if the DM wants to roll for initiative, and a static number, in case the DM wants to get to combat more quickly. Another example of how the stat block has been tweaked is how attributes are noted. In the 2014 book, it gave the attribute and any modifier that came with it. In the 2025 book, it's the attribute, its modifier, and its save altogether in a clear box.
+Skills, senses, languages, and CR follow, along with immunities, just as they did in the 2014 book. The 2025 book adds an entry for “gear” where relevant. For gear, the entry cites the weapons and maybe the armor the creature has. The actual stats for those weapons continue to be in their usual place under attacks. Still, when describing what the players are seeing, that line earlier in the stat block will save me time.
+Additionally, whereas the 2014 version made spellcasting an option for ancient dragons and relegated that information to a sidebar, in 2025, the spellcasting information for ancient dragons is right there in the stat block for both easy use and to emphasize what makes D&D into D&D . (After all, one thing that distinguishes dragons in D &D is that they generally have shoulders to facilitate the arm movements for spellcasting, so they might as well put that ability right into the stat block).
+ More Variety ​ 
+The 2025 book has more than 500 stat blocks, making it larger than the 2014 MM . That translates to including every monster from 2014 or an equivilant, plus lots of new ones.
+I could make a joke that some of this variety could be described as giving monsters friends, but there is an element of truth to it. So you don't just get the cultist and cultist fantatic like before. Now there is also the cultist hierophant, plus stat blocks for the aberrant cultist, death cultist, elemental cultist, and fiend cultist.
+The NPC professions were expanded by type, as well as members within a type. The 2014 book had 18 stat blocks, whereas 2025 has 39. So now there's both a priest and priest acolyte =, as well as a noble and noble prodigy. As an example, the new book adds 2014 versions of pirates (both as regular CR 1 pirates), plus CR 6 pirate captains, and CR 10 pirate admirals.
+NPC professions aren't the only ones that get that treatment. Vampires get vampire familiars, the satyr revelmaster is added to satyrs, and poltergeists get a proper stat block instead of a variant sidebar like they did in 2014. Cyclops are now split into two types – cyclops oracles and cyclops sentries.
+ Dialing Up the Flavor ​ 
+When comparing entries from the 2014 and 2025 MMs , I was struck by how many 2014 creatures just used conventional weapons. For example, dryads use a club and driders have both bows and long swords. That fine, but a little uninspired.
+The 2025 entries for those creatures step up their game. Driders still get three attacks, but instead of weapons being two of the options (a bite that inflicts venom is the third), they now get foreleg attacks and poison burst as their ranged attack. Yes, if you really like the classic look of the drider wielding bows, you can still run them that way since they do have a drow upper body, but now they have innate spider-themed attacks.
+Similarly, while dryads using a club made a certain amount of sense in 2014 – a hefty fallen tree limb is definitely available – it's rather boring. Now dryads get vine lash and thorn burst, both of which fit the concept and flavor of a dryad much better.
+Similarly, ancient dragons have more “tactical texture” because only the damage-dealing breath weapon has a recharge roll. Being able to use another breath weapon at will, combined with various other changes based on the dragon type, gives the DM more flexibility. That both means more ways to run a combat encounter, as well as more options if the DM doesn't want to kill the party. 
+Quote boxes are another way the new MM adds a bit more flavor and insight. Not every entry gets them, unfortunately, but I love the ones we do get. Sometimes the quote is from the creature in question and other times the quote is about it. The one for the slaadi is “Fight a slaad and lose, the story's over. Fight a slaad and win, there's a thousand more standing in line just to prove they're tougher. – Jeebel Sloom, guide to the plane of Limbo.” My favorite is the one for animal lords: “While I don't deny the compliment, I assure you, I'm more akin to a god than a 'pretty kitty.' – Brother of Shadows, Cat Lord.”
+ Fuel for Imagination ​ 
+Scattered throughout the book are charts and information that are designed to not only add some variables to the creatures, but also to fuel a DM's imagination. The book explicitly gives DMs permission to modify things as needed for their campaign, especially in terms of lore.
+So the Cambion gets a chart of options for how it gained its powers. A table suggests what the dracolich's soul gem could look like. The drider table provides options for how it morphed into a drider. A flumph chart allows a DM to customize the colors of the flumph's appendages depending upon the flumph's emotions.
+The lore/background material is compact – a little too compact for my taste – but also written with the intent to inspire DMs.
+ Better Challenges ​ 
+One of the common complaints the 2014 MM received was that many of the creatures seemed underpowered compared to their CR value, which seemed to confuse the Wizards team at first. What they gradually realized was that if players handled the monster a certain way, it lived it up to its CR value, but if the DMs handled it any other way, it felt underpowered. That has been fixed. Now, no matter how a DM handles a monster, the full force of its CR will be felt. It shouldn't matter if the DM wants to “bring the hurt” or, say, have a metallic dragon make a strong impression before negotiating with the party.
+Another complaint about the 2014 MM was the lack of high level monsters. The 2025 MM changes that, adding apex level predators to every creature type. But the tarrasque still maintains its place as the highest CR creature in D&D at 30. More high-level creatures have been added and existing ones have been tweaked, so things like dragon breath weapons are less predictable. 
+The arch-hag was one of the few apex predators I hadn't mentioned in my preview article. A chart provides ideas for the arch-hag's anathemas or weakness. Arch-hags can make two Spectral Claw attacks in addition to Crackling Wave, with the latter counting as a curse. Then Witch Strike means that any cursed creature within 60 feet of the arch-hag also takes 4d6 lightning damage. As a reaction, the arch-hag can inflict Tongue Twister, which is a type of counterspell. Plus the arch-hag gets legendary actions. If, despite all of that, the arch-hag is reduced to zero HP, it can invoke Spiteful Escape so long as it's not within 30 feet of its anathema. That allows the hag to escape to another plane, while cursing those left behind, and restoring 1 HP to the arch-hag.
+ Revised Organization ​ 
+There isn't an organization system that will please everyone. I've even heard some passionately argue that monsters should be arranged throughout the book by challenge rating.
+The 2014 book was organized by monster family with all demons grouped together, all devils, etc. The problem with that is you have to know that, say, the gelatinous cube is part of the ooze family, and that a dao is a type of genie.
+The new MM is almost purely alphabetical, which I prefer. Dragons are grouped by color so all of the copper dragons are under “c” and all of the red dragons are under “r.” Otherwise, it's purely by alphabetical order. My one quibble is that the primary giant species – frost, cloud, hill, storm, and fire, would work better if they were all listed under “g.” After all, how would a newbie know what types of giants there are to look them up by the type?
+Dinosaurs are now in appendix A with animals. It is logical to put the creatures that existed in with regular ones. Giant animals are also in that appendix. While those aren't realistic, it does make sense to pair them with their regular-sized counterpart.
+And while all of the monsters from the 2014 MM appear in the 2025 MM , some get new names, with a conversion table to make it easy. In most cases, the name change reflects the expansion of the monster family. So “hobgoblin” becomes “hobgoblin warrior” and “centaurs” become “centaur troopers.”
+Other changes correct mistakes. For example, snakes are venomous, not poisonous. Poison is when you eat the toxic substances. If the toxin is delivered by a bite, the creature is venomous. So “poisonous snakes” become “venomous snakes” whether they are regular sized or giant.
+Others, like duergar and drow, are converted to various professions. That goes along with some tweaks to the definition of professions and humanoids.
+The 2025 MM provides a broader definition of humanoids. At the very beginning when highlighting what's new, the section on “versatile groups” notes that “Nonplayer characters now appear alongside other monsters and can represent individuals of any humanoid species.” Then on page 6 it defines humanoids as “...people defined by their roles and possessions, such as mages, pirates, and warriors. They include members of varied species.” By contrast, the 2014 definition of humanoids was wordier but more limited in meaning. So those prior entries were converted to their profession instead of a species entry.
+ Summing It Up ​ 
+I do like the updates and expansions overall. Like most DMs, I always want more creatures, so expanding the members of monster groups and the volume overall is good, especially the addition of high level monsters. In my opinion, the changes designed to make it easier and quicker for the DM to find what they need are very good. I wish I had this layout when I was running adventures for the D&D Adventurer's League.
+Narrative/lore material is compact but effective. Still, I'm the sort who always wants more, despite being well aware of page limitations. The current layout does make more effective use of its space, which is a bit of a necessity since the monster art shows the creatures in action, and that requires more space for art.
+My own personal pet peeve is that this is yet another MM that omits the gemstone dragons. Just as I've always believed that aasimar should have become a playable species at the same time that tieflings did, since they are counterpoints to each other, I've always argued that the neutral gemstone dragons should be part of the core dragons because they fill a gap between the good metallic dragons and evil chromatic dragons. Still, that's my pet peeve – though now that aasimar are a playable background, maybe one day gemstone dragons will get the treatment I think they deserve.
+I really like that the designers emphasized DM inspiration and customization. Similarly, I appreciate the work that went into making each creature more unique and special, such as the dryad and drider examples I cited. The Wizards team also tried hard to emphasize the feel of D&D in the monsters as opposed to ogres, elves, etc. as they appear in folklore or other fantasy entertainment. I think the 2025 MM did a much better job of that than the 2014 one did. 
+Overall, I think the WOTC team did a very good job with the 2025 Monster Manual , despite my quibbles. That makes my rating an A-.
+ The D&D Beyond Master Tier Early Access date is February 4. D&D Beyond Hero Tier Early Access is February 11. The Monster Manual global release date for both physical books and the D&D Beyond store is February 18. 
+ Reply 
+ Reactions: 
+ evildmguy , Ulorian - Agent of Chaos , Queer Venger and 23 others 
+ Click to expand... 
+ log in or register to remove this ad 
+ B 
+ Beth Rimmels 
+ Beth Rimmels is a journalist, editor, and marketing professional. In addition to EN World, her game industry writing has ranged from CityBook VII to The Vampire Codex , as well as Awesome 8's , the multi-setting RPG she is currently designing. She has been a D&D Adventurer's League store organizer and taught a wide range of games at stores and conventions.
+ 1 
+ 2 
+ 3 
+ … 
+Go to page
+ Go 
+ 24 
+ Next 
+ 1 of 24
+Go to page
+ Go 
+ Next 
+ Last 
+ Echohawk 
+Shirokinukatsukami fan
+ EN WORLD+ 
+ Jan 28, 2025 
+ #2
+ brimmels said: 
+ For example, snakes are venomous, not poisonous. Poison is when you eat the toxic substances. If the toxin is delivered by a bite, the creature is venomous. So “poisonous snakes” become “venomous snakes” whether they are regular sized or giant.
+ Click to expand... 
+I like a lot of the changes described here, but I'm not ashamed to admit that this one made me the happiest!
+ Reply 
+ Reactions: 
+ Queer Venger , Jeremy E Grenemyer , Yaarel and 16 others 
+ Reynard 
+aka Ian Eller
+ Jan 28, 2025 
+ #3
+ brimmels said: 
+ One of the common complaints the 2014 MM received was that many of the creatures seemed underpowered compared to their CR value, which seemed to confuse the Wizards team at first. What they gradually realized was that if players handled the monster a certain way, it lived it up to its CR value, but if the DMs handled it any other way, it felt underpowered. That has been fixed. Now, no matter how a DM handles a monster, the full force of its CR will be felt. It doesn't matter if the DM wants to “bring the hurt” or, say, have a metallic dragon make a strong impression before negotiating with the party.​
+ Click to expand... 
+This is an unsupportable statement.
+ Reply 
+ Reactions: 
+ MNblockhead , Enly and Guest 7037866 
+ L 
+ lefthandopal 
+Villager
+ Jan 28, 2025 
+ #4
+ So what you're saying is they finally made a monster manual for the original 5e? Sweet. Can't wait to use it without the new, broken, PHB.
+ Reply 
+ Reactions: 
+ Divine2021 and Micah Sweet 
+ Upper_Krust 
+Legend
+ Jan 28, 2025 
+ #5
+ Two questions. 
+1. Does it have the monsters listed by Challenge Rating somewhere?
+2. What is the bite damage of the Tarrasque...if you are allowed to answer? If you can't, can you say if it's higher than in 2014.
+ Reply 
+ Reactions: 
+ Queer Venger and SlyFlourish 
+ Whizbang Dustyboots 
+Gnometown Hero
+ Jan 28, 2025 
+ #6
+ It feels like the developers of the 2025 Monster Manual learned a lot of good lessons from The Monster Overhaul, which is awesome.
+A rising monstrous tide lifts all boats before the sea monsters inevitably attack the boat, because why were you getting on a boat in a fantasy RPG if you weren't planning on getting attacked by sea monsters?
+ Reply 
+ Reactions: 
+ zottel , theBardic life , Yaarel and 5 others 
+ Reynard 
+aka Ian Eller
+ Jan 28, 2025 
+ #7
+ Whizbang Dustyboots said: 
+ It feels like the developers of the 2025 Monster Manual learned a lot of good lessons from The Monster Overhaul, which is awesome.
+A rising monstrous tide lifts all boats before the sea monsters inevitably attack the boat, because why were you getting on a boat in a fantasy RPG if you weren't planning on getting attacked by sea monsters?
+ Click to expand... 
+I am looking forward to a detailed analysis of the 2024 MM vs ToV MM vs A5E.
+ Reply 
+ Reactions: 
+ Riley , Corinnguard , Audiomancer and 3 others 
+ dave2008 
+Legend
+ Jan 28, 2025 
+ #8
+ Upper_Krust said: 
+ Two questions.
+1. Does it have the monsters listed by Challenge Rating somewhere?
+ Click to expand... 
+I believe this has been answered. IIRC, there will a list by CR, a list by Type, and a list by Environmnet
+ Reply 
+ Reactions: 
+ SirGrotius , Azzy , Whizbang Dustyboots and 1 other person 
+ M 
+ MonsterEnvy 
+Legend
+ Jan 28, 2025 
+ #9
+ Out of curiosity what are the statblocks the Drow became? Lolthite?
+ Reply 
+ U 
+ UngeheuerLich 
+Legend
+ Jan 28, 2025 
+ #10
+ Is there a table to customize NPC statblocks by species?
+ Reply 
+ Reactions: 
+ Henadic Theologian , Micah Sweet and Parmandur 
+ 1 
+ 2 
+ 3 
+ … 
+Go to page
+ Go 
+ 24 
+ Next 
+ 1 of 24
+Go to page
+ Go 
+ Next 
+ Last 
+ Post reply
+ Insert quotes…
+Similar Threads
+ Five Takeaways From the 2025 Monster Manual
+ Christian Hoffer 
+ Apr 13, 2025 
+ *Dungeons & Dragons
+ 30 
+ 31 
+ 32 
+ 33 
+ 34 
+ Replies 
+ 330 
+ Views 
+ 69K 
+ Apr 19, 2025 
+ Arilyn 
+ How the Monsters Have Changed in the 2025 Monster Manual: Azer
+ Christian Hoffer 
+ Feb 11, 2025 
+ *Dungeons & Dragons
+ 2 
+ Replies 
+ 16 
+ Views 
+ 11K 
+ Feb 27, 2025 
+ Erich the Fuzzy 
+ E 
+ T 
+ D&D 5E (2014) 
+ 2024 Monster Manual has better lore than 2014 Monster Manual
+ THEMNGMNT 
+ Mar 17, 2025 
+ *Dungeons & Dragons
+ 12 
+ 13 
+ 14 
+ 15 
+ 16 
+ Replies 
+ 156 
+ Views 
+ 30K 
+ Mar 25, 2025 
+ Micah Sweet 
+ S 
+ D&D General 
+ The Revised Monster Manual was released 1 year ago today! How have you liked facing down and using the new monsters?
+ Sulicius 
+ Feb 19, 2026 
+ *Dungeons & Dragons
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ Replies 
+ 67 
+ Views 
+ 14K 
+ Feb 25, 2026 
+ Sulicius 
+ S 
+ D&D's Lack of 2026 Announcements Actually Follows Precedent
+ Christian Hoffer 
+ Dec 26, 2025 
+ *Dungeons & Dragons
+ 9 
+ 10 
+ 11 
+ 12 
+ 13 
+ Replies 
+ 125 
+ Views 
+ 47K 
+ Feb 27, 2026 
+ Charlaquin 
+ Share: 
+ Facebook 
+ X 
+ Bluesky 
+ LinkedIn 
+ Reddit 
+ Pinterest 
+ Tumblr 
+ WhatsApp 
+ Email 
+ Share 
+ Link 
+ Recent & Upcoming Releases 
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons)
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons)
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition)
+ Magical options for spellcasters.
+ Replies (23) 
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons)
+ World book for Azeroth
+ Replies (271) 
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons)
+ Dark Sun returns in 2027
+ Replies (1967) 
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons)
+ Handbook for D&D fighters.
+ Replies (70) 
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons)
+ Official D&D Star Wars book
+ Replies (278) 
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons)
+ 160-page adventure
+ Replies (269) 
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons)
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Forum list
+ Post thread…
+Related Articles
+ Five Takeaways From the 2025 Monster Manual 
+Started by Christian Hoffer
+ Apr 13, 2025 
+Replies: 330
+ *Dungeons & Dragons
+ How the Monsters Have Changed in the 2025 Monster Manual: Azer 
+Started by Christian Hoffer
+ Feb 11, 2025 
+Replies: 16
+ *Dungeons & Dragons
+ T 
+ D&D 5E (2014) 2024 Monster Manual has better lore than 2014 Monster Manual 
+Started by THEMNGMNT
+ Mar 17, 2025 
+Replies: 156
+ *Dungeons & Dragons
+ S 
+ D&D General The Revised Monster Manual was released 1 year ago today! How have you liked facing down and using the new monsters? 
+Started by Sulicius
+ Feb 19, 2026 
+Replies: 67
+ *Dungeons & Dragons
+ D&D's Lack of 2026 Announcements Actually Follows Precedent 
+Started by Christian Hoffer
+ Dec 26, 2025 
+Replies: 125
+ *Dungeons & Dragons
+ Remove ads 
+ Recent & Upcoming Releases 
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons)
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons)
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition)
+ Magical options for spellcasters.
+ Replies (23) 
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons)
+ World book for Azeroth
+ Replies (271) 
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons)
+ Dark Sun returns in 2027
+ Replies (1967) 
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons)
+ Handbook for D&D fighters.
+ Replies (70) 
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons)
+ Official D&D Star Wars book
+ Replies (278) 
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons)
+ 160-page adventure
+ Replies (269) 
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons)
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Remove ads 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ Light Mode
+ Contact us 
+ Terms and rules 
+ Privacy policy 
+ Help 
+ Home 
+ RSS 
+ Community platform by XenForo ® © 2010-2026 XenForo Ltd. Ignore/Block Essentials by AddonFlare - Premium XF2 Addons 
+ | [XTR] Modal Popups © 2019 XENTR Development | Events Manager by XenCustomize 
+ Discord Integration © Jason Axelrod of
+ 8WAYRUN 
+ XenCarta 2 PRO © Jason Axelrod of
+ 8WAYRUN 
+ Top

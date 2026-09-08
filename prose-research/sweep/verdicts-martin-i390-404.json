@@ -1,0 +1,234 @@
+{
+ "name": "martin",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 390,
+   "feature": "history as construction",
+   "claim": "The book is less a history of House Targaryen than a portrait of how history is constructed in Westeros; readers leave with no definitive account.",
+   "source": "Nerdist",
+   "url": "https://nerdist.com/article/house-of-the-dragon-leaves-out-fire-and-blood-unreliable-history-game-of-thrones/",
+   "quote": "no definitive account of what really happened",
+   "page": "House of the Dragon Misses One of the Best Aspects of Fire & Blood"
+  },
+  {
+   "index": 391,
+   "feature": "sober versus sensational pairing",
+   "claim": "Eustace's account is a sober recollection of the fall; Mushroom's is a deeply sensationalized look at Rhaenyra, and the pairing suits morally complex figures.",
+   "source": "Nerdist",
+   "url": "https://nerdist.com/article/house-of-the-dragon-leaves-out-fire-and-blood-unreliable-history-game-of-thrones/",
+   "quote": "a sober recollection",
+   "page": "House of the Dragon Misses One of the Best Aspects of Fire & Blood"
+  },
+  {
+   "index": 392,
+   "feature": "three reporters contradicting",
+   "claim": "Sara Hess: the book is three separate reporters saying what they think happened and contradicting each other, so nobody in it actually knows.",
+   "source": "Collider (Sara Hess quotes), 25 Sep 2022",
+   "url": "https://collider.com/house-of-the-dragon-fire-and-blood-unreliable-narrator-writer-sara-hess-comments/",
+   "quote": "three separate reporters",
+   "page": "House of the Dragon Writer Reveals How Fire and Blood's Unreliable Narrative Shaped the Series"
+  },
+  {
+   "index": 393,
+   "feature": "history written by men",
+   "claim": "Hess: it is men talking about what they think happened, and they are probably wrong.",
+   "source": "Collider (Sara Hess quotes), 25 Sep 2022",
+   "url": "https://collider.com/house-of-the-dragon-fire-and-blood-unreliable-narrator-writer-sara-hess-comments/",
+   "quote": "they are probably wrong",
+   "page": "House of the Dragon Writer Reveals How Fire and Blood's Unreliable Narrative Shaped the Series"
+  },
+  {
+   "index": 394,
+   "feature": "documentary layering",
+   "claim": "The book layers court documents, royal decrees and Grand Maesters' histories with two first-person eyewitness accounts (Eustace, Mushroom).",
+   "source": "Collider",
+   "url": "https://collider.com/house-of-dragon-fire-and-blood-mushroom-alternate-history/",
+   "quote": "",
+   "page": "House of the Dragon's Alternate History Is More Scandalous Than You Think"
+  },
+  {
+   "index": 395,
+   "feature": "suppressed-source motif",
+   "claim": "Mushroom's testimony was deemed so salacious that King Baelor ordered it burned, a suppressed-source motif familiar from real archives.",
+   "source": "Collider",
+   "url": "https://collider.com/house-of-dragon-fire-and-blood-mushroom-alternate-history/",
+   "quote": "ordered it burned",
+   "page": "House of the Dragon's Alternate History Is More Scandalous Than You Think"
+  },
+  {
+   "index": 396,
+   "feature": "cite-then-flag without rebuttal",
+   "claim": "Gyldayn cites Mushroom claims the text notes as obviously false, yet no follow-up statement blunts them, so the lurid version lingers.",
+   "source": "TV Tropes",
+   "url": "https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories",
+   "quote": "no follow-up statement serves to blunt",
+   "page": "Archmaester Gyldayn's Histories (Literature)"
+  },
+  {
+   "index": 397,
+   "feature": "folklore mixed with record",
+   "claim": "Gyldayn admits not everything written is accurate, that history has mixed with folklore and historians disagree on details.",
+   "source": "TV Tropes",
+   "url": "https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories",
+   "quote": "history has mixed with folklore",
+   "page": "Archmaester Gyldayn's Histories (Literature)"
+  },
+  {
+   "index": 398,
+   "feature": "characters vanish from the record",
+   "claim": "Minor figures simply disappear from the record, plausibly because the chronicler did not think their fates worth writing down.",
+   "source": "TV Tropes",
+   "url": "https://tvtropes.org/pmwiki/pmwiki.php/Literature/ArchmaesterGyldaynsHistories",
+   "quote": "simply disappear from the record",
+   "page": "Archmaester Gyldayn's Histories (Literature)"
+  },
+  {
+   "index": 399,
+   "feature": "authorship split (Gyldayn/Yandel)",
+   "claim": "In The World of Ice and Fire, everything attributed to Gyldayn was written directly by Martin, while Yandel's words were written by Garcia and Antonsson.",
+   "source": "A Wiki of Ice and Fire, 'Gyldayn' (citing r/asoiaf AMA)",
+   "url": "https://awoiaf.westeros.org/index.php/Gyldayn",
+   "quote": "directly written by George R.R. Martin",
+   "page": "Gyldayn - A Wiki of Ice and Fire"
+  },
+  {
+   "index": 400,
+   "feature": "damaged-manuscript conceit",
+   "claim": "The original WOIAF frame had Gyldayn's papers found with pages misplaced, destroyed, or damaged by neglect and fire, the lost-manuscript topos.",
+   "source": "A Wiki of Ice and Fire, 'Gyldayn'",
+   "url": "https://awoiaf.westeros.org/index.php/Gyldayn",
+   "quote": "damaged by neglect and by fire",
+   "page": "Gyldayn - A Wiki of Ice and Fire"
+  },
+  {
+   "index": 401,
+   "feature": "rhetorical question as hedge",
+   "claim": "Gyldayn's line on the dragon Tessarion shows the chronicler's habit of closing an unknowable with a rhetorical question.",
+   "source": "A Wiki of Ice and Fire, 'Gyldayn'",
+   "url": "https://awoiaf.westeros.org/index.php/Gyldayn",
+   "quote": "Who can know the heart of a dragon?",
+   "page": "Gyldayn - A Wiki of Ice and Fire"
+  },
+  {
+   "index": 402,
+   "feature": "compiler's bias on likelihood",
+   "claim": "The frame is a historical summary compiled from primary and secondary sources by Gyldayn, who brings his own bias to the importance and likelihood of events, so the history is fluid.",
+   "source": "Reactor (Stubby the Rocket), Nov 2018",
+   "url": "https://reactormag.com/6-mysteries-to-ponder-when-youve-finished-george-r-r-martins-fire-blood/",
+   "quote": "this history is fluid",
+   "page": "6 Mysteries to Ponder After You've Finished George R. R. Martin's Fire & Blood"
+  },
+  {
+   "index": 403,
+   "feature": "palimpsest dedication",
+   "claim": "WOIAF's dedication to Tommen is written over the half-erased names of Joffrey and Robert, so the document displays its own revision history.",
+   "source": "Chris Lough, Reactor/Tor.com, Oct 2014",
+   "url": "https://reactormag.com/the-world-of-ice-and-fire-george-rr-martin-book-review/",
+   "quote": "not-entirely erased name of Joffrey",
+   "page": "19 Strange Things Hiding in The World of Ice and Fire"
+  },
+  {
+   "index": 404,
+   "feature": "fawning brevity for the reigning house",
+   "claim": "Yandel's page on King Robert is very fawning and very short, the courtier-historian's survival instinct made visible.",
+   "source": "Chris Lough, Reactor/Tor.com, Oct 2014",
+   "url": "https://reactormag.com/the-world-of-ice-and-fire-george-rr-martin-book-review/",
+   "quote": "Yandel knows how this game is played.",
+   "page": "19 Strange Things Hiding in The World of Ice and Fire"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 390,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they walk away with no definitive account of what really happened\"",
+   "note": "Nerdist live fetch (HTTP 200, raw HTML stripped). Page: 'In the end, they walk away with no definitive account of what really happened. In this sense, Fire & Blood is less a history of House Targaryen, and more a portrait of the construction of history in Westeros in the first place.' Quote verbatim; both limbs (portrait-of-construction, no definitive account) on the page."
+  },
+  {
+   "index": 391,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Maester Eustace's account is a sober recollection of House Targaryen's fall\"",
+   "note": "Same Nerdist page. 'Maester Eustace's account is a sober recollection of House Targaryen's fall; Mushroom's is a deeply sensationalized look at Princess Rhaenyra's life in particular. In turn, this is a perfect framework ... because of how morally complex many of the characters are.' Quote verbatim; all three limbs supported. (Nerdist writes 'Maester Eustace'; Collider and canon call him Septon Eustace - the claim says only 'Eustace'.)"
+  },
+  {
+   "index": 392,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It's three separate reporters saying what they think might have happened and contradicts each other\"",
+   "note": "Collider live fetch (HTTP 200). Hess quoted directly; the 'nobody knows' limb is her adjacent quote 'So, nobody in that book actually knows what happened.' Quote fragment 'three separate reporters' verbatim. Two mismatches outside the claim sentence: page headline is 'House of the Dragon: How Fire & Blood's Unreliable Narrative Shaped Series' (chunk's page title differs), and the byline is Shrishty Mishra, published Sep 25, 2022 (date matches)."
+  },
+  {
+   "index": 393,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It's men talking about what they think happened, and they are probably wrong\"",
+   "note": "Same Collider page: '...history is written by the victors, history is written by men. It's men talking about what they think happened, and they are probably wrong,' Hess said. Quote verbatim, attribution to Hess explicit."
+  },
+  {
+   "index": 394,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "court documents and royal decrees, Grand Maesters' histories, two first-person accounts",
+   "note": "Collider 'Mushroom' article, live fetch (HTTP 200). Page: 'made up of \"historical sources\" such as court documents and royal decrees as well as the histories written by the Grand Maesters' of the time. These are filled in with information from two separate first-person accounts from people who were present ... One was from Septon Eustace ... and the other a man named Mushroom, the court jester.' Graded SUBSTANCE rather than VERBATIM only because the claim carries no quote string to match; every limb is on the page. Page says Septon (not Maester) Eustace."
+  },
+  {
+   "index": 395,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"they were ordered burned by King Baelor the Blessed\"",
+   "note": "Same Collider page: 'So salacious, and perverse were these tales that they were ordered burned by King Baelor the Blessed - but luckily, some survived'. The chunk's quote string 'ordered it burned' is NOT word-for-word on the page (grep returns nothing; page reads 'they were ordered burned by'), hence SUBSTANCE not VERBATIM. Salacious + Baelor + burning all supported; 'a suppressed-source motif familiar from real archives' is the researcher's own genre label, not sourced to the page."
+  },
+  {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"no follow-up statement serves to blunt the force of it\"",
+   "note": "TV Tropes blocked live (Cloudflare 'Just a moment...' 403 on a browser UA); reached via Wayback raw capture https://web.archive.org/web/20260322132616id_/... (HTTP 200, 62KB). Under 'Unreliable Narrator': 'He also glosses over his own biases on the subject: e.g. in many places Mushroom is cited as saying something which the narrative notes is obviously false, but no follow-up statement serves to blunt the force of it.' Quote verbatim; 'the lurid version lingers' is a fair reading of 'blunt the force of it'."
+  },
+  {
+   "index": 397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"not everything written is certainly accurate, that history has mixed with folklore\"",
+   "note": "Same Wayback capture: 'Unreliable Narrator: Gyldayn admits that not everything written is certainly accurate, that history has mixed with folklore and historians disagree about the details of some events.' Quote verbatim. The claim drops the page's hedge word 'certainly' ('not everything written is accurate' vs 'not everything written is certainly accurate') - a slight hardening, but the limb is supported."
+  },
+  {
+   "index": 398,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"many more simply disappear from the record\"",
+   "note": "Same Wayback capture, 'What Happened to the Mouse?': 'Some characters go missing in-universe during the story, such as Qarl Correy and Nettles, but many more simply disappear from the record. It's possible that Gyldayn did know the fates of those characters but didn't consider them important enough to write down.' Quote verbatim; the 'plausibly because ... not worth writing down' limb matches 'It's possible that...didn't consider them important enough'."
+  },
+  {
+   "index": 399,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"anything attributed to Gyldayn was directly written by George R.R. Martin\"",
+   "note": "AWOIAF blocked live (Cloudflare 403); reached via Wayback raw capture https://web.archive.org/web/20260801014239id_/... (HTTP 200). 'Behind the Scenes': 'In the real-world book The World of Ice & Fire, anything attributed to Gyldayn was directly written by George R.R. Martin, in the same way that Yandel's words were written by Elio Garcia and Linda Antonsson.' Quote verbatim; footnote [9] is the r/asoiaf AMA with Garcia and Antonsson, matching the chunk's source note."
+  },
+  {
+   "index": 400,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"many pages were misplaced or destroyed, and still others were damaged by neglect and by fire\"",
+   "note": "Same AWOIAF capture: 'In the original text of The World of Ice & Fire ... Yandel discovered other manuscripts by Gyldayn, but many pages were misplaced or destroyed, and still others were damaged by neglect and by fire.' Quote verbatim; the papers-found frame ('sent his papers to Archmaester Gerold ... recently discovered by Maester Yandel') is on the page. 'the lost-manuscript topos' is the researcher's genre label, not a page assertion."
+  },
+  {
+   "index": 401,
+   "verdict": "PARTIAL",
+   "trueWording": "\"Who can know the heart of a dragon?\" - Gyldayn writing about Tessarion",
+   "unsupportedLimb": "that this is the chronicler's HABIT - the page carries exactly one such line (a single entry in its Quotes section) and says nothing about a recurring pattern of closing unknowables with rhetorical questions",
+   "note": "Same AWOIAF capture. The quote and its attribution to Gyldayn writing about Tessarion are verbatim on the page (Quotes section, cited to Fire & Blood, 'The Dying of the Dragons - Rhaenyra Overthrown'). The generalisation to a habit is an inference the page does not evidence, so the claim is graded PARTIAL rather than verified."
+  },
+  {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a historical summary collected from primary and secondary sources by Archmaester Gyldayn\"",
+   "note": "Reactor live fetch (HTTP 200). Under Mystery #4: 'The framing concept behind Fire & Blood is that we are reading a historical summary collected from primary and secondary sources by Archmaester Gyldayn, who brings his own bias to the importance and likelihood of recorded events. So this history is fluid...' Quote 'this history is fluid' verbatim; every limb supported (claim says 'compiled', page says 'collected'). Byline is Stubby the Rocket as stated, but the page reads 'Published on December 7, 2018' - the chunk's 'Nov 2018' is off by a month."
+  },
+  {
+   "index": 403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Tommen's name is written over the not-entirely erased name of Joffrey\"",
+   "note": "Reactor/Tor.com live fetch (HTTP 200), 'By Chris Lough | Published on October 29, 2014' - byline and date match. Item 1: 'A dedication page ... declares the book a gift to King Tommen ... Tommen's name is written over the not-entirely erased name of Joffrey, which itself is written over the not-entirely erased name of Robert.' Quote verbatim; both erased names present."
+  },
+  {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"King Robert's page ... is also very, very fawning. (And very short.)\"",
+   "note": "Same Reactor page, same paragraph: 'King Robert's page in the later section on rulers of Westeros is also very, very fawning. (And very short.) Yandel knows how this game is played.' Quote verbatim including the full stop; 'very fawning and very short' matches (page doubles the intensifier). 'Courtier-historian's survival instinct made visible' is the researcher's gloss on the page's own 'Yandel knows how this game is played.'"
+  }
+ ]
+}

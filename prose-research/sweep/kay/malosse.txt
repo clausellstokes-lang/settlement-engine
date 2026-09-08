@@ -1,0 +1,14 @@
+Loading...
+ Anubis could not load its JavaScript. The server may be overloaded. Please reload the page to try again.
+
+ Ce site utilise Anubis, un outil qui filtre les robots nuisibles.
+
+ Nous vérifions actuellement que vous n’êtes pas un robot.
+
+ En cas de problème, contactez-nous à contact(at)openedition.org
+
+ This site uses Anubis, a tool which filters out harmful bots.
+
+ We’re currently verifying that you’re not a robot.
+
+ If you encounter a problem, please contact us at contact(at)openedition.org

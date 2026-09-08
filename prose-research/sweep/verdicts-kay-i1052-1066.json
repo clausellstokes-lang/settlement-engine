@@ -1,0 +1,323 @@
+{
+ "name": "kay",
+ "chunk": 13,
+ "claims": [
+  {
+   "index": 1052,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A four-star Goodreads reviewer of Under Heaven says Kay's poetic lushness can sound like a bodice-ripper.",
+   "source": "D. Pow, Goodreads review of Under Heaven, 18 Jul 2010 (13 likes)",
+   "url": "https://www.goodreads.com/book/show/7139892-under-heaven",
+   "quote": "a poetic lushness in the language that can sound a bit",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2010-07-18",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1053,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A three-star Goodreads reviewer of Under Heaven states that beautiful prose was not sufficient for her.",
+   "source": "agata, Goodreads review of Under Heaven, 26 Jun 2012 (15 likes)",
+   "url": "https://www.goodreads.com/book/show/7139892-under-heaven",
+   "quote": "beautiful prose is not enough, if you start out promising more",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2012-06-26",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1054,
+   "feature": "cadence and rhythm",
+   "claim": "A five-star Goodreads reviewer of Under Heaven contrasts merely coherent sentences with woven ones and says a well-woven sentence sings.",
+   "source": "Khanh, Goodreads review of Under Heaven, 9 Jan 2011 (367 likes)",
+   "url": "https://www.goodreads.com/book/show/7139892-under-heaven",
+   "quote": "A well-woven sentence speaks to the heart, it sings to the spirit",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2011-01-09",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1055,
+   "feature": "other: competing accounts of one event",
+   "claim": "A Goodreads reviewer of Children of Earth and Sky reports the novel makes the reader read one event two or three times as different characters describe it.",
+   "source": "Mogsy, Goodreads review of Children of Earth and Sky, 15 Jul 2015 (61 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "read about the same event two or three times as multiple characters",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "mentions",
+   "date": "2015-07-15",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1056,
+   "feature": "place and institution description",
+   "claim": "A Goodreads reviewer of Children of Earth and Sky calls the setting richly described through its competing maritime city-states.",
+   "source": "Krell75, Goodreads review of Children of Earth and Sky, 6 May 2025 (78 likes; reviewer's own English rendering below the Italian)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "richly described with its competing maritime city-states",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2025-05-06",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1057,
+   "feature": "plainness and economy",
+   "claim": "A five-star Goodreads reviewer of Children of Earth and Sky credits Kay's clarity of prose with making a complex world accessible.",
+   "source": "Tadiana, Goodreads review of Children of Earth and Sky, 17 May 2016 (138 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "made so accessible by Kay’s clarity of prose",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2016-05-17",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1058,
+   "feature": "metaphor discipline",
+   "claim": "A three-star Goodreads reviewer of Children of Earth and Sky calls the fantasy minimalistic and oblique and credits a disciplined imagination.",
+   "source": "Lyn, Goodreads review of Children of Earth and Sky, 23 Mar 2016 (70 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "The fantasy is minimalistic and oblique",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2016-03-23",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1059,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A three-star Goodreads reviewer of Children of Earth and Sky calls the style repetitive and dense in places.",
+   "source": "tiffany, Goodreads review of Children of Earth and Sky, 18 May 2024 (26 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "the writing style was a bit repetitive and dense at times",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2024-05-18",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1060,
+   "feature": "point of view and distance",
+   "claim": "A five-star Goodreads reviewer of Children of Earth and Sky notes the prose moves between protagonists within a single scene.",
+   "source": "Melissa McShane, Goodreads review of Children of Earth and Sky, 19 Mar 2016 (17 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "a prose style that leaps from one to another, sometimes within",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "mentions",
+   "date": "2016-03-19",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1061,
+   "feature": "other: reader label for the register",
+   "claim": "A Goodreads reviewer relays the novelist Janny Wurts's description of Kay's writing as lyrical nostalgia and endorses it.",
+   "source": "Joshua Thompson relaying Janny Wurts, Goodreads review of Children of Earth and Sky, 1 Mar 2025 (39 likes)",
+   "url": "https://www.goodreads.com/book/show/25938417-children-of-earth-and-sky",
+   "quote": "describe Kay's writing as \"lyrical nostalgia\"",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2025-03-01",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1062,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A dissenting reader in a Goodreads recommendation thread concedes Kay's superior writing and still judges the books more smoke than fire.",
+   "source": "an anonymised member, message 4, Goodreads SciFi and Fantasy Book Club topic, 30 May 2011",
+   "url": "https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start",
+   "quote": "He writes better than I ever could, but for me his",
+   "page": "message 4",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2011-05-30",
+   "routeHint": "browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1063,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "The same reader says Kay's writing flies high only intermittently.",
+   "source": "an anonymised member, message 4, Goodreads SciFi and Fantasy Book Club topic, 30 May 2011",
+   "url": "https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start",
+   "quote": "There are moments his writing really flighs high",
+   "page": "message 4",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2011-05-30",
+   "routeHint": "browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1064,
+   "feature": "withheld information and inference",
+   "claim": "A reporter transcribing the 2021 Tolkien Lecture records Kay taking Walter Bagehot's line against letting daylight in upon magic as the lecture's governing text.",
+   "source": "Guy Gavriel Kay quoting Walter Bagehot, transcribed by Andrew Liptak, Tor.com, 13 May 2021",
+   "url": "https://reactormag.com/jrr-tolkien-guy-gavriel-kay-lecture-just-enough-light-some-thoughts-on-fantasy-and-literature-watch/",
+   "quote": "We must not let in daylight upon magic",
+   "page": "body, Kay's quoted opening",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2021-05-13",
+   "routeHint": "browser user agent on the reactormag redirect of the tor.com post",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  },
+  {
+   "index": 1065,
+   "feature": "withheld information and inference",
+   "claim": "In the same transcribed passage Kay says anyone writing fantasy must contend with the reverberations of that line.",
+   "source": "Guy Gavriel Kay, transcribed by Andrew Liptak, Tor.com, 13 May 2021",
+   "url": "https://reactormag.com/jrr-tolkien-guy-gavriel-kay-lecture-just-enough-light-some-thoughts-on-fantasy-and-literature-watch/",
+   "quote": "needs to contend with the reverberations of Bagehot’s line",
+   "page": "body, Kay's quoted paragraph",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2021-05-13",
+   "routeHint": "browser user agent; the transcription garbles a later clause, so only this span is claimed",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium"
+  },
+  {
+   "index": 1066,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A book club reports that Tigana split its members into two camps rather than a spectrum of opinion.",
+   "source": "Andrew Mather, 'Book Club Discussion: Tigana By Guy Gavriel Kay', The Quill to Live, 17 Mar 2016",
+   "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+   "quote": "more of a splitting into two camps: people who loved it",
+   "page": "post body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2016-03-17",
+   "routeHint": "browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1052,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a poetic lushness in the language that can sound a bit",
+   "note": "Raw Goodreads HTML, __NEXT_DATA__ apolloState Review node. D. Pow, rating 4, likeCount 13, createdAt 1279465225000 = 2010-07-18 — all three metadata limbs match. The quoted span continues in the same sentence with the bodice-ripper comparison the claim reports, and the preceding clause credits Kay with maturity about the sexes, so the remark is a qualification and not a dismissal."
+  },
+  {
+   "index": 1053,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beautiful prose is not enough, if you start out promising more",
+   "note": "apolloState Review node: agata, rating 3, likeCount 15, createdAt 1340728712000 = 2012-06-26. Quote exact. One caveat that does not change the claim: the page nowhere states the reviewer's gender, so 'for her' is inferred from the display name; the review itself is ungendered and the surrounding paragraph names the prose's high points before the verdict."
+  },
+  {
+   "index": 1054,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A well-woven sentence speaks to the heart, it sings to the spirit",
+   "note": "apolloState Review node: Khanh (display name 'Khanh, first of her name, mother of bunnies'), rating 5, likeCount 367, createdAt 1294555610000 = 2011-01-09. Both limbs present: the sentence immediately before draws exactly the contrast the claim reports, between merely slapping words into a coherent sentence and weaving them into a composition."
+  },
+  {
+   "index": 1055,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read about the same event two or three times as multiple characters",
+   "note": "apolloState Review node: Mogsy, likeCount 61, createdAt 2015-07-15. Quote exact and the clause completes with the characters describing it from their perspectives. The claim omits no rating (the review is 3 stars) and the page frames this as an at-times consequence of the multi-POV format, inside a passage about POV imbalance — the claim's 'makes the reader' is slightly firmer than the page's 'at times you also had to'."
+  },
+  {
+   "index": 1056,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "richly described with its competing maritime city-states",
+   "note": "apolloState Review node: Krell75, rating 4, likeCount 78, createdAt 2025-05-06. The source line's structural claim also checks out: the review runs in Italian first and the reviewer's own English rendering follows, and the quote sits in the English half. The full sentence attributes the setting to Renaissance Italy and the Balkans before the quoted words."
+  },
+  {
+   "index": 1057,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "made so accessible by Kay’s clarity of prose",
+   "note": "apolloState Review node: Tadiana, rating 5, likeCount 138, createdAt 2016-05-17. Quote exact including the curly apostrophe. Worth recording for downstream use: the page credits the accessibility to three things, clarity of prose plus insight plus sympathy for individual lives, so the claim isolates one of a triplet rather than the sole cause."
+  },
+  {
+   "index": 1058,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The fantasy is minimalistic and oblique",
+   "note": "apolloState Review node: Lyn, rating 3, likeCount 70, createdAt 2016-03-23. Both limbs sit in one sentence: after the quoted words the reviewer locates the real magic in Kay's inspired writing and his disciplined imagination, which is the second limb the claim reports."
+  },
+  {
+   "index": 1059,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the writing style was a bit repetitive and dense at times",
+   "note": "apolloState Review node: tiffany, rating 3, likeCount 26, createdAt 2024-05-18. Quote exact. Context the disputes polarity should carry: the review opens by self-rating 3.5, blames the density on pages of third-person-omniscient inner monologue, and the same sentence turns to call the writing compelling and surprisingly witty."
+  },
+  {
+   "index": 1060,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a prose style that leaps from one to another, sometimes within",
+   "note": "apolloState Review node: Melissa McShane, rating 5, likeCount 17, createdAt 2016-03-19. The quoted span completes with 'a single scene', so the claim's within-a-scene limb is on the page; the reviewer's point is that this could have been overdone and is not."
+  },
+  {
+   "index": 1061,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "describe Kay's writing as \"lyrical nostalgia\"",
+   "note": "apolloState Review node: Joshua Thompson, rating 5, likeCount 39, createdAt 2025-03-01. Quote exact, and the endorsement limb is explicit — the reviewer says he loves the description. One wording drift too small to downgrade: the page calls Janny Wurts 'the author', not 'the novelist', and the relay is second-hand (the reviewer reports having seen her say it), so Wurts's own wording is not independently evidenced here."
+  },
+  {
+   "index": 1062,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He writes better than I ever could, but for me his",
+   "note": "Raw thread HTML, message 4 anchor, posted 30 May 2011 09:42PM by a deleted user, in the SciFi and Fantasy Book Club topic 'Guy Gavriel Kay: Where should I start?'. Quote exact; the sentence completes with the smoke-versus-fire judgment the claim reports, and the next sentence says Kay comes up to the line of greatness without crossing it."
+  },
+  {
+   "index": 1063,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are moments his writing really flighs high",
+   "note": "Same message 4, same raw fetch. Quote exact, including the poster's typo 'flighs' for 'flies' — reproduce it with a sic or normalise it, but do not present it as clean. The intermittency limb is the clause immediately after, where the poster says those moments did not come often enough for him."
+  },
+  {
+   "index": 1064,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We must not let in daylight upon magic",
+   "note": "Raw reactormag page (the live tor.com redirect target), byline 'By Andrew Liptak', schema datePublished 2021-05-13. Quote exact. Page context supports the framing: it names the Pembroke College Tolkien Lecture and Kay's title 'Just Enough Light: Some Thoughts on Fantasy and Literature', then says Kay moves to the meat of his discussion by citing this line from Walter Bagehot. 'Governing text' is the analyst's compression of 'the meat of his discussion' plus the lecture title's own echo of the daylight image."
+  },
+  {
+   "index": 1065,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "needs to contend with the reverberations of Bagehot’s line",
+   "note": "Same page, same fetch, inside the block quotation of Kay. Quote exact with the curly apostrophe. Scope note: Kay's sentence says anyone in fantasy literature, the fantastic or fantastika as John Clute frames it, so the claim's narrowing to 'anyone writing fantasy' is entailed but narrower than what he said, and the following sentence names writers, scholars and readers together. The routeHint is right that the transcription garbles the clause after this one."
+  },
+  {
+   "index": 1066,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more of a splitting into two camps: people who loved it",
+   "note": "Raw post HTML, title 'Book Club Discussion: Tigana By Guy Gavriel Kay', schema datePublished 2016-03-17, meta author Andrew Mather. Quote exact and the contrast limb is explicit — the same sentence says the book had less of a spectrum of different opinions. The post quantifies it: half the group scored nine or above, the other half below five, averaging seven with nobody happy."
+  }
+ ]
+}

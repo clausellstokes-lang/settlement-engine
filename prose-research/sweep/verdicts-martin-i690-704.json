@@ -1,0 +1,234 @@
+{
+ "name": "martin",
+ "chunk": 24,
+ "claims": [
+  {
+   "index": 690,
+   "feature": "other: form conventionality",
+   "claim": "The 1996 Publishers Weekly review calls A Game of Thrones conventional in form.",
+   "source": "Publishers Weekly (unsigned starred review), A Game of Thrones, 29 July 1996",
+   "url": "https://www.publishersweekly.com/9780553103540",
+   "quote": "Although conventional in form",
+   "page": "review body"
+  },
+  {
+   "index": 691,
+   "feature": "concrete sensory noun",
+   "claim": "Paul Levinson's 1996 Tangent review praises Martin for writing convincingly of tart juices oozing from an apple and of sleet on a mountainside.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "tart juices oozing from an apple as of sleet",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 692,
+   "feature": "concrete sensory noun",
+   "claim": "Levinson's 1996 review says A Game of Thrones is as much an adventure of the senses as of the mind.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "as much an adventure of the senses as it is",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 693,
+   "feature": "place and institution description",
+   "claim": "Levinson's 1996 review calls the settings of A Game of Thrones equally diverse and evocative.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "The settings are equally diverse and evocative.",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 694,
+   "feature": "concrete sensory noun",
+   "claim": "Levinson's 1996 review says the descriptive passages of the Daenerys thread let the reader smell and taste the spice in the wine.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "you can smell the spice, and taste it in every",
+   "page": "paragraph on the dragon thread"
+  },
+  {
+   "index": 695,
+   "feature": "omission as information",
+   "claim": "Levinson's 1996 review argues that the on-page appearance of Martin's cold creatures has far less impact than their suggestion.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "has far less impact than their suggestion",
+   "page": "paragraph on the supernatural"
+  },
+  {
+   "index": 696,
+   "feature": "annalist voice and deep time",
+   "claim": "Levinson's 1996 review says Martin's dragons work better as natural history, their skeletons admired, feared and lamented by characters, than as living hatchlings.",
+   "source": "Paul Levinson, review of A Game of Thrones, Tangent #16, Fall 1996 (reposted by the author)",
+   "url": "https://paullevinson.blogspot.com/2011/03/game-of-thrones-my-fall-2006-review-of.html",
+   "quote": "their skeletons are admired, feared, and lamented by various characters",
+   "page": "paragraph on the supernatural"
+  },
+  {
+   "index": 697,
+   "feature": "point of view and distance",
+   "claim": "Steve Jeffery's 1997 Vector review attributes the episodic feel of A Game of Thrones's later stretches to Martin's alternation of chapters between major viewpoint characters.",
+   "source": "Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19",
+   "url": "https://fanac.org/fanzines/Vector/Vector192.pdf",
+   "quote": "Martin's technique of alternating chapters between a number of major viewpoint characters",
+   "page": "Vector 192, p.19 (PDF page index 18)"
+  },
+  {
+   "index": 698,
+   "feature": "other: apparatus (map, appendix, jacket blurb)",
+   "claim": "Jeffery's 1997 Vector review lists an appendix cast list among the distinguishing features of A Game of Thrones as a fantasy blockbuster.",
+   "source": "Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19",
+   "url": "https://fanac.org/fanzines/Vector/Vector192.pdf",
+   "quote": "an Appendix listing a cast of Cecil B. DeMille",
+   "page": "Vector 192, p.19 (PDF page index 18)"
+  },
+  {
+   "index": 699,
+   "feature": "other: marketing hype versus the book",
+   "claim": "Jeffery's 1997 Vector review rejects the jacket blurb's 'true heir to Tolkien' framing as gushing hype that does the book no favours.",
+   "source": "Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19",
+   "url": "https://fanac.org/fanzines/Vector/Vector192.pdf",
+   "quote": "This sort of gushing hype does no favours to anybody,",
+   "page": "Vector 192, p.19 (PDF page index 18)"
+  },
+  {
+   "index": 700,
+   "feature": "repetition and refrain",
+   "claim": "The 2011 Publishers Weekly review of A Dance with Dragons identifies a few recurring images — the game cyvasse, small rivers flowing into larger ones, and storm-battered ships and armies — running through the book.",
+   "source": "Publishers Weekly (unsigned), A Dance with Dragons, 30 May 2011",
+   "url": "https://www.publishersweekly.com/9780553801477",
+   "quote": "A few images recur in the enormously complex fifth installment",
+   "page": "review body, first sentence"
+  },
+  {
+   "index": 701,
+   "feature": "dialogue register",
+   "claim": "Kirkus's 2011 review calls the dialogue of A Dance with Dragons the usual swords-and-sorcery dialogue and quotes three lines as its evidence.",
+   "source": "Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "the usual swords-and-sorcery dialogue",
+   "page": "review body, paragraph 2"
+  },
+  {
+   "index": 702,
+   "feature": "other: exposition",
+   "claim": "Kirkus's 2011 review describes the exposition in A Dance with Dragons as sometimes seemingly endless.",
+   "source": "Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "the usual blend of exposition, sometimes seemingly endless",
+   "page": "review body, paragraph 2"
+  },
+  {
+   "index": 703,
+   "feature": "cadence and rhythm",
+   "claim": "Kirkus's 2011 review says Tolkien was never as ponderous as Martin.",
+   "source": "Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "Tolkien was never quite so ponderous",
+   "page": "review body, paragraph 2"
+  },
+  {
+   "index": 704,
+   "feature": "other: bodily and scatological detail",
+   "claim": "Kirkus's 2011 review charges Martin with being obsessed with bodily functions of various sorts, quoting two lines as evidence.",
+   "source": "Kirkus Reviews (unsigned), A Dance with Dragons, posted online 26 September 2011",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+   "quote": "so obsessed with bodily functions of various sorts",
+   "page": "review body, paragraph 2"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 690,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "publishersweekly.com/9780553103540 fetched raw (HTTP 200, browser UA). Review body: 'Although conventional in form, the book stands out from similar work by Eddings, Brooks and others by virtue of its superbly developed characters, accomplished prose and sheer bloody-mindedness.' Page metadata 'Reviewed on: 07/29/1996' confirms the 29 July 1996 date; a sidebar entry confirms PW starred it. Quote exact; every limb supported."
+  },
+  {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "paullevinson.blogspot.com post fetched raw (HTTP 200). Header on the post: 'from Tangent Magazine, #16, Fall 1996 ... Reviewed by Paul Levinson'; body: 'Martin writes as convincingly of tart juices oozing from an apple as of sleet on the side of a mountain'. Quote exact; 'sleet on a mountainside' is the page's 'sleet on the side of a mountain'. Levinson notes in the comments that the URL's '2006' is his own typo and the review is 1996."
+  },
+  {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, same sentence's continuation: 'and his book is as much an adventure of the senses as it is of the mind.' Quote exact; claim fully supported."
+  },
+  {
+   "index": 693,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, paragraph 2: 'The settings are equally diverse and evocative.' Quote exact as a full sentence; claim fully supported."
+  },
+  {
+   "index": 694,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, paragraph beginning 'But the dragon thread has other problems.': 'The descriptive passages are marvelous - you can smell the spice, and taste it in every cup of wine Martin renders'. Quote exact. The review never uses the name Daenerys: it calls this 'the dragon thread' and identifies it as the 'Blood of the Dragon' novella following the pretender's sister, given as bride to a 'Ghenghis Khan-type character' — i.e. unambiguously the Daenerys thread, so the claim's label is a naming of what the page describes, not an added assertion."
+  },
+  {
+   "index": 695,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, supernatural paragraph: 'But the actual brief appearance of these cold nightmares-come-true has far less impact than their suggestion.' Quote exact; the 'cold creatures' limb is the page's 'cold, slouching beast[s]' / 'cold nightmares-come-true'."
+  },
+  {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, next sentence: 'Similarly, the dragons work better as natural history - they're believed to have died out over a century before the action begins in this book, and their skeletons are admired, feared, and lamented by various characters who contemplate them - than as actual hatchlings at the end of the novel.' Quote exact; every limb (natural history, skeletons admired/feared/lamented by characters, versus living hatchlings) is on the page."
+  },
+  {
+   "index": 697,
+   "verdict": "PARTIAL",
+   "trueWording": "episodic feel 'underlined by' the chapter alternation, not caused by it",
+   "unsupportedLimb": "the causal attribution: the review attributes the growing episodic quality to the threads developing independently and says the POV alternation 'underlines' it, rather than attributing the episodic feel to the alternation",
+   "note": "fanac.org/fanzines/Vector/Vector192.pdf fetched raw (HTTP 200, 10.99 MB) and text extracted with pypdf; page index 18 carries the running head 'Vector 192 - March/April 1997' and the folio 'page 19', with 'George R.R. Martin / Reviewed by Steve Jeffery / A Game of Thrones'. Full sentence: '...threads start to develop independently towards the end, things become more episodic, underlined by Martin's technique of alternating chapters between a number of major viewpoint characters.' Quote exact; date, reviewer, venue and page all confirmed. Only the causal connective overstates the source."
+  },
+  {
+   "index": 698,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same PDF page: 'A Game of Thrones appears with all the distinguishing features of the fantasy blockbuster, as Book One of A Song of Fire and Ice. Those distinguishing features include a map, cunningly divided into The North and The South, an Appendix listing a cast of Cecil B. DeMille proportions, and the obligatory jacket blurb...'. Quote exact; the appendix cast list is explicitly one of the listed 'distinguishing features of the fantasy blockbuster'."
+  },
+  {
+   "index": 699,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same PDF page: the blurb quoted by Jeffery announces 'the most imaginative, ambitious and compelling fantasy epic since Lord of the Rings' and Martin as yet another 'true heir' to Tolkien; the next paragraph opens 'This sort of gushing hype does no favours to anybody, least of all Martin.' and the paragraph closes 'A Game of Thrones deserves better.' Quote exact (including the trailing comma); the 'no favours to the book' limb is carried by 'deserves better'."
+  },
+  {
+   "index": 700,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "publishersweekly.com/9780553801477 fetched raw (HTTP 200). First sentence: 'A few images recur in the enormously complex fifth installment of Martin's massively multicharacter epic: the chess-like game cyvasse, small rivers flowing into larger ones, ships and armies battered by terrible storms.' Quote exact; all three images and the 2011 date ('Reviewed on: 05/30/2011') confirmed."
+  },
+  {
+   "index": 701,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "kirkusreviews.com raw page fetched (HTTP 200, browser UA). Paragraph 2: 'There's the usual blend of exposition, sometimes seemingly endless, and the usual swords-and-sorcery dialogue:' followed by exactly three quoted lines ('The plunder from Astapor...', 'Two kings to wake the dragon...', 'False friends, treacherous servants...'). 'Review Posted Online: Sept. 26, 2011' confirms the date. Quote exact; the three-lines limb confirmed by count."
+  },
+  {
+   "index": 702,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus page, same sentence: 'There's the usual blend of exposition, sometimes seemingly endless'. Quote exact; claim fully supported."
+  },
+  {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus page: 'Martin has been likened to J.R.R. Tolkien, but Tolkien was never quite so ponderous, and certainly not so obsessed with bodily functions of various sorts'. Quote exact; the comparison's implied second term is Martin, named in the same sentence."
+  },
+  {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus sentence continues '...and certainly not so obsessed with bodily functions of various sorts:' followed by exactly two quoted lines ('The Grand Maester befouled himself in dying...' and 'When you bugger a man you expect a squeal or two.'), then 'Indeed.' Quote exact; the charge lands on Martin by the Tolkien contrast, and the two-lines limb is confirmed by count."
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "kay",
+  "chunk": 9,
+  "claims": [
+    {
+      "index": 711,
+      "feature": "other: revision method",
+      "claim": "Kay says the Silmarillion year taught him that a bad draft was not a death sentence to a work.",
+      "source": "Guy Gavriel Kay, interviewed by Greg Cook for Wonderland, 28 April 2019",
+      "url": "https://gregcookland.com/wonderland/2019/04/28/guy-gavriel-kay/",
+      "quote": "a bad draft was not a death sentence to a work",
+      "page": "answer to the first question, on Tolkien"
+    }
+  ],
+  "verdicts": [
+    {
+      "index": 711,
+      "verdict": "VERIFIED_VERBATIM",
+      "trueWording": "It was a gift to me, understanding that a bad draft was not a death sentence to a work.",
+      "note": "Raw HTML fetched with a browser UA (curl, 64,028 bytes) and stripped to text; no summarizer in the verdict path. Page dated April 28, 2019. The quote appears word for word in Kay's answer to the first question: 'One major specific ‘lesson’ from the Tolkien year was realizing how many false starts and outright errors exist in the early stages of even a masterpiece. It was a gift to me, understanding that a bad draft was not a death sentence to a work. That you just stayed with it, thought more, revised, worked harder.' Every limb holds: the speaker is Kay; the referent is the year in question, which the interviewer's question frames as 'the experience of working on “The Silmarillion”' and the article's preamble fixes as 1974–75 in Oxford helping Christopher Tolkien assemble The Silmarillion. Only nominal difference: the page calls it 'the Tolkien year' / 'that year', not 'the Silmarillion year' — the same year under a different label, tied by the question it answers, so this is not an unsupported limb."
+    }
+  ]
+}

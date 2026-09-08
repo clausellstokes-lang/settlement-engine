@@ -1,0 +1,234 @@
+{
+ "name": "martin",
+ "chunk": 18,
+ "claims": [
+  {
+   "index": 600,
+   "feature": "dialogue register",
+   "claim": "Martin says he can easily write that a character said something in a Dornish accent even though no Dornish accent exists, leaving the audiobook reader to invent one.",
+   "source": "George R.R. Martin, History of Westeros interview (recorded 2022-08-18)",
+   "url": "https://www.historyofwesteros.com/george-rr-martin-in-conversation-how-interviews-grrm/",
+   "quote": "I can easily write so and so said this in a Dornish accent",
+   "page": "transcript, section on Roy Dotrice and audiobooks"
+  },
+  {
+   "index": 601,
+   "feature": "other: avoided vocabulary",
+   "claim": "Martin says he does not think he has ever used the word soul in A Song of Ice and Fire.",
+   "source": "George R.R. Martin, History of Westeros interview (recorded 2022-08-18)",
+   "url": "https://www.historyofwesteros.com/george-rr-martin-in-conversation-how-interviews-grrm/",
+   "quote": "I don’t think I’ve ever used that word",
+   "page": "transcript, listener question about the soul"
+  },
+  {
+   "index": 602,
+   "feature": "repetition and refrain",
+   "claim": "Martin says that where resonances between his histories and his main series arise he tries to veer away from them so as not to feel he is repeating himself.",
+   "source": "George R.R. Martin, History of Westeros interview (recorded 2022-08-18)",
+   "url": "https://www.historyofwesteros.com/george-rr-martin-in-conversation-how-interviews-grrm/",
+   "quote": "I try to veer away from that",
+   "page": "transcript, Parallel Lives question"
+  },
+  {
+   "index": 603,
+   "feature": "civic record register",
+   "claim": "Elio García says The World of Ice and Fire was written by a maester in the Citadel from information he had compiled without having witnessed the events.",
+   "source": "Elio M. García Jr., ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "It was written by a maester in the Citadel based on information that he had",
+   "page": "interview, question on the maester frame"
+  },
+  {
+   "index": 604,
+   "feature": "withheld information and inference",
+   "claim": "García says the maester frame lets the maester be wrong because he is not a personal witness.",
+   "source": "Elio M. García Jr., ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "the maester can be wrong because he’s not a personal witness",
+   "page": "interview, question on the maester frame"
+  },
+  {
+   "index": 605,
+   "feature": "civic record register",
+   "claim": "García says Yandel is sometimes deliberately wrong in The World of Ice and Fire and that they played up how wrong he was.",
+   "source": "Elio M. García Jr., ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "our master Yandel is just wrong",
+   "page": "interview, question on mistakes in the book"
+  },
+  {
+   "index": 606,
+   "feature": "other: invented citations",
+   "claim": "Linda Antonsson says they invented small things such as book titles and maesters for the text to reference.",
+   "source": "Linda Antonsson, ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "we invented small things like book titles, or maesters, to reference",
+   "page": "interview, question on the ratio of Martin's input"
+  },
+  {
+   "index": 607,
+   "feature": "other: word counts",
+   "claim": "Antonsson says Martin wrote over 200,000 words for the Targaryen material of The World of Ice and Fire alone.",
+   "source": "Linda Antonsson, ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "he wrote over 200,000 words for the Targaryen material only",
+   "page": "interview, question on the ratio of Martin's input"
+  },
+  {
+   "index": 608,
+   "feature": "other: word counts",
+   "claim": "Antonsson says The World of Ice and Fire ended up around 180,000 words by plan.",
+   "source": "Linda Antonsson, ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "The book itself ended up around 180,000 words by plan",
+   "page": "interview, question on the ratio of Martin's input"
+  },
+  {
+   "index": 609,
+   "feature": "civic record register",
+   "claim": "García says writing history and geography is not at all the same as creating the interweaving plots of the novels.",
+   "source": "Elio M. García Jr., ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "Writing history and geography is not at all the same",
+   "page": "interview, question on Martin's process"
+  },
+  {
+   "index": 610,
+   "feature": "terminology consistency",
+   "claim": "García says the Ironborn section of The World of Ice and Fire has serious continuity errors because Martin wrote it last and did not cross-check it against the earlier kingdoms.",
+   "source": "Elio M. García Jr., ShadowDance interview (2017-10-16)",
+   "url": "https://web.archive.org/web/20251108032211id_/https://www.shadowdance.info/magazine/interviews/elio-linda-woiaf/",
+   "quote": "there are serious continuity errors between this section and all the others",
+   "page": "interview, question on mistakes in the book"
+  },
+  {
+   "index": 611,
+   "feature": "civic record register",
+   "claim": "Antonsson says the concept of a maester writing The World of Ice and Fire was their suggestion, not Martin's.",
+   "source": "Linda Antonsson, La Garde de Nuit interview (recorded Worldcon Dublin 2019, published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "the concept of the book, the idea that there would be a maester writing it",
+   "page": "transcript, About The World of Ice and Fire"
+  },
+  {
+   "index": 612,
+   "feature": "point of view and distance",
+   "claim": "Antonsson says their maester frame was inspired in part by Martin's idea of a guidebook written by a traveller who would not have perfect knowledge.",
+   "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "a guidebook written by a traveler in the world so that he wouldn’t have a perfect knowledge",
+   "page": "transcript, About The World of Ice and Fire"
+  },
+  {
+   "index": 613,
+   "feature": "opening sentence",
+   "claim": "Antonsson says the preface with the scratched-out names was something they particularly wanted in the book.",
+   "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "the preface with the scratched-out names",
+   "page": "transcript, About The World of Ice and Fire"
+  },
+  {
+   "index": 614,
+   "feature": "omission as information",
+   "claim": "García says Yandel hides certain ugly details because he wants the book to spread and is writing about powerful living people.",
+   "source": "Elio M. García Jr., La Garde de Nuit interview (published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "he has to hide certain details, ugly details",
+   "page": "transcript, on Yandel"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 600,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cuz of course I can easily write so and so said this in a Dornish accent. There's no Dornish accent. So Roy would have to make it up",
+   "note": "Live page fetched raw with a browser UA (HTTP 200). Quote is word for word in the Roy Dotrice/audiobook passage; the page also carries 'There's no Dornish accent' and 'So Roy would have to make it up and say I will make that a Spanish accent', supporting both remaining limbs."
+  },
+  {
+   "index": 601,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "George: Yes. I don't think I've ever used that word, but...",
+   "note": "Raw live page. Verbatim, in answer to the listener question 'do individuals have, or believe in the soul?' set explicitly 'in your world of A Song of Ice and Fire'; Aziz confirms 'No, you haven't'. Every limb supported."
+  },
+  {
+   "index": 602,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Certain similarities are inevitable. If anything, I try to veer away from that, cuz I don't wanna feel like I'm repeating myself.",
+   "note": "Raw live page, Parallel Lives exchange. Verbatim; the question is about parallels between the histories (Fire and Blood) and the main-series characters, and Martin adds 'there are certain resonances in history'. Both limbs supported."
+  },
+  {
+   "index": 603,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It was written by a maester in the Citadel based on information that he had but of course he didn't witness those things and he's compiled together",
+   "note": "Wayback raw capture (id_) fetched, HTTP 200. Verbatim; speaker confirmed as Elio (nearest preceding speaker tag). The 'compiled / did not witness' limb is on the page in the same sentence."
+  },
+  {
+   "index": 604,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So you have a maester writing it and the maester can be wrong because he's not a personal witness.",
+   "note": "Wayback raw capture. Verbatim, Elio speaking, in the passage explaining the benefit of the maester frame (George not 'pinned down to some facts')."
+  },
+  {
+   "index": 605,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some of it was intentional, because our master Yandel is just wrong ... And sometimes we even played up a lot with how wrong he was",
+   "note": "Wayback raw capture. Verbatim ('our master Yandel' is the page's own wording, apparently for maester); Elio speaking. Both limbs -- deliberate wrongness and playing it up -- are on the page."
+  },
+  {
+   "index": 606,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So we didn't really invent anything - we invented small things like book titles, or maesters, to reference.",
+   "note": "Wayback raw capture. Verbatim; speaker confirmed as Linda, in the answer about the ratio of Martin's input."
+  },
+  {
+   "index": 607,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cause he wrote over 200,000 words for the Targaryen material only",
+   "note": "Wayback raw capture. Verbatim, Linda speaking, about the TWOIAF sidebars 'that turned into long novellas'."
+  },
+  {
+   "index": 608,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The book itself ended up around 180,000 words by plan.",
+   "note": "Wayback raw capture. Verbatim, Linda speaking, immediately after the 200,000-word sentence."
+  },
+  {
+   "index": 609,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Writing history and geography is not at all the same as creating these huge interweaving plots that are in the novels.",
+   "note": "Wayback raw capture. Verbatim; nearest preceding speaker tag is Elio. The claim's 'interweaving plots of the novels' matches the page's 'huge interweaving plots that are in the novels'."
+  },
+  {
+   "index": 610,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he did the Ironborn section ... he had the time to go back and cross-check ... but he didn't do it with the Ironborn. So there are serious continuity errors between this section and all the others",
+   "note": "Wayback raw capture, Elio speaking. Quote verbatim; the 'wrote it last' limb ('towards the end of this process, where we really already had to have the manuscript finalized') and the 'no cross-check against earlier kingdoms' limb are both explicit."
+  },
+  {
+   "index": 611,
+   "verdict": "PARTIAL",
+   "trueWording": "And also the concept of the book, the idea that there would be a maester writing it. That was also our suggestion from early on, inspired in part of George that has this idea",
+   "note": "Wayback raw capture (25 mars 2020 publication date confirmed on the page); speaker confirmed as Linda. The quotation is verbatim and 'our suggestion from early on' is on the page, but the page does not say the concept was not Martin's -- it says the suggestion was theirs *inspired in part* by George's own idea of a fallible in-world guidebook narrator. The exclusive negation is the claim's addition.",
+   "unsupportedLimb": "not Martin's -- the page qualifies it as 'inspired in part of George that has this idea'"
+  },
+  {
+   "index": 612,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "inspired in part of George that has this idea, that it is a guidebook written by a traveler in the world so that he wouldn't have a perfect knowledge",
+   "note": "Wayback raw capture, Linda speaking. Verbatim (page spells 'traveler'); the 'inspired in part by Martin's idea' limb is the page's own clause."
+  },
+  {
+   "index": 613,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the introduction, the preface with the scratched-out names and so on, that something we really wanted to have",
+   "note": "Wayback raw capture, Linda speaking. Quote verbatim; 'particularly wanted' matches the page's 'that something we really wanted to have'."
+  },
+  {
+   "index": 614,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he wants the book to spread, and he has to hide certain details, ugly details",
+   "note": "Wayback raw capture, Elio speaking about Yandel. Verbatim; the 'powerful living people' limb is on the page: 'when he's writing about very powerful people like Tywin Lannister, he needs to be careful', with Yandel described as 'a contemporary figure of the story'."
+  }
+ ]
+}

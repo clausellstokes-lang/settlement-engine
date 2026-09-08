@@ -1,0 +1,16 @@
+#ill-1 WITHHELD(R4-BAND) DS-DEF-1 :: readiness WEAK [unfolding]
+    ! R4-BAND: a contrast was cut in a pool with sibling bands "readiness STRONG" | "readiness ADEQUATE" | "readiness CRITICAL"; the band half is the refuter's — mechanical PASS withheld
+    · A11 SPREAD (sentences, pool "readiness WEAK" DS-DEF-1, angles ledger/visitor/unfolding): 2/1/2 → 2/1/2
+#ill-2 WITHHELD(R4-BAND) DS-DEF-1 :: terrain EXPOSED [visitor]
+    ! R4-BAND: a contrast was cut in a pool with sibling bands "terrain FAVOURABLE to the defender"; the band half is the refuter's — mechanical PASS withheld
+    · A11 SPREAD (sentences, pool "terrain EXPOSED" DS-DEF-1, angles visitor/ledger/street): 2/2/1 → 2/2/1
+#ill-3 PASS(mechanical) DS-DEF-1 :: readiness ADEQUATE [street]
+    · A11 SPREAD (sentences, pool "readiness ADEQUATE" DS-DEF-1, angles ledger/visitor/street/threshold): 2/1/1/2 → 2/1/2/2
+    · A11 PRE-EXISTING shared opener in this pool (a debt this pair neither causes nor cures): "{} is" (ledger + threshold)
+#ill-4 PASS(mechanical) DS-DEF-2 :: Invasion & War: walls AND professional garrison [ledger]
+    · A11 SPREAD (sentences, pool "Invasion & War: walls AND professional garrison" DS-DEF-2, angles ledger/visitor/street): 1/1/1 → 2/1/1
+#ill-5 FAIL DS-DEF-1 :: terrain EXPOSED [street]
+    - A11 POOL SPREAD FLATTENED: 2/2/1 → 2/2/2 — every variant of the pool now has the same sentence count where they differed
+    · A11 SPREAD (sentences, pool "terrain EXPOSED" DS-DEF-1, angles visitor/ledger/street): 2/2/1 → 2/2/2
+
+corpus loaded: 2734 variants in 1020 pools; 2 pass mechanically, 2 WITHHELD (R4-BAND — the band half is the refuter's, not a FAIL), 1 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

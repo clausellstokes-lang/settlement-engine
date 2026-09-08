@@ -1,0 +1,7 @@
+#ill-1 PASS(mechanical) DS-DEF-1 :: readiness WEAK [unfolding]
+#ill-2 PASS(mechanical) DS-DEF-1 :: terrain EXPOSED [visitor]
+#ill-3 PASS(mechanical) DS-DEF-1 :: readiness ADEQUATE [street]
+#ill-4 PASS(mechanical) DS-DEF-2 :: Invasion & War: walls AND professional garrison [ledger]
+#ill-5 PASS(mechanical) DS-DEF-1 :: terrain EXPOSED [street]
+
+corpus loaded: 2734 variants; 5 pass mechanically, 0 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

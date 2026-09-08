@@ -1,0 +1,325 @@
+{
+ "name": "wolfe",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 993,
+   "feature": "point of view and distance",
+   "claim": "Wright describes Severian as unreliable, intensely subjective and seemingly incapable of analysing his experiences.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Solar Labyrinth', pp. 166-182",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
+   "quote": "unreliable, intensely subjective and seemingly incapable of analysing his experiences",
+   "page": "pp. 166-182",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 994,
+   "feature": "omission as information",
+   "claim": "Wright applies Borges's figure of a narrator who omits or corrupts events to Wolfe's method.",
+   "source": "Jorge Luis Borges, quoted in Peter Wright, Attending Daedalus (2003), 'Solar Labyrinth'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/solar-labyrinth-metafictional-devices-and-textual-complexity/49656CDCE0E04E7F80E4E4FE4FFC069C",
+   "quote": "a narrator who omitted or corrupted what happened",
+   "page": "pp. 166-182",
+   "kind": "relay",
+   "polarity": "applies",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 995,
+   "feature": "point of view and distance",
+   "claim": "Wright asserts Wolfe's first-person form expedites the reader's trust in the veracity of the document.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'How the Whip Came Back', pp. 104-125",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/how-the-whip-came-back-directing-reader-response/2A2AC1DCBED89BCD79CD247018F62257",
+   "quote": "trust in the veracity of the document",
+   "page": "pp. 104-125",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 996,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe conveys the executioner's guild training as plain practical instruction to the condemned man.",
+   "source": "Gene Wolfe, The Shadow of the Torturer, quoted in Peter Wright, Attending Daedalus (2003), 'How the Whip Came Back'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/how-the-whip-came-back-directing-reader-response/2A2AC1DCBED89BCD79CD247018F62257",
+   "quote": "cautioned him to empty his bladder, which relaxes at",
+   "page": "pp. 104-125",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "1980",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 997,
+   "feature": "omission as information",
+   "claim": "Wright names the introduction of ambiguity and ellipsis as one of four strategies by which Wolfe controls the reader.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'In the House of Gingerbread', pp. 37-48",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/in-the-house-of-gingerbread-interpretative-games-and-the-psychology-of-reader-response/8A7999ECDD3CAC9AECF22E6C964FA277",
+   "quote": "the introduction of ambiguity and ellipsis",
+   "page": "pp. 37-48",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 998,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts Wolfe discloses a narrator's unreliability by juxtaposing conflicting viewpoints.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'In the House of Gingerbread', pp. 37-48",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/in-the-house-of-gingerbread-interpretative-games-and-the-psychology-of-reader-response/8A7999ECDD3CAC9AECF22E6C964FA277",
+   "quote": "either by juxtaposing conflicting viewpoints",
+   "page": "pp. 37-48",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 999,
+   "feature": "withheld information and inference",
+   "claim": "Wright asserts the theatrical motif marks a disjunction between what a Wolfe plot shows and what its story is.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Toy Theatre', pp. 69-85",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/toy-theatre-uncovering-the-story-of-the-urth-cycle/8A95293F693266D39C225BE509844A1E",
+   "quote": "the presence of a disjunction between what is apparent",
+   "page": "pp. 69-85",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1000,
+   "feature": "omission as information",
+   "claim": "Wright asserts the narrator of 'The Toy Theatre' sustains his illusion by not seeing his operator.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Toy Theatre', pp. 69-85",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/toy-theatre-uncovering-the-story-of-the-urth-cycle/8A95293F693266D39C225BE509844A1E",
+   "quote": "in order to sustain the illusion under which he lives",
+   "page": "pp. 69-85",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1001,
+   "feature": "other: intratextual repetition",
+   "claim": "John Clute observed in Strokes that Wolfe's stories and novels reflect one another.",
+   "source": "John Clute, Strokes (1988), p. 160, quoted in Peter Wright, Attending Daedalus (2003), 'Map'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/map-the-multivolume-novels-and-metafictional-cartography/EDEF37F8E56A9DF1C559ABDD4BC47EDE",
+   "quote": "stories and novels reflect one another",
+   "page": "Strokes p. 160, quoted at AD pp. 185-206",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1002,
+   "feature": "other: thematic pattern",
+   "claim": "Clute read the repetitions across Wolfe's oeuvre as responses to the chance of escaping the prison of the self.",
+   "source": "John Clute, Strokes (1988), p. 161, quoted in Peter Wright, Attending Daedalus (2003), 'Map'",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/map-the-multivolume-novels-and-metafictional-cartography/EDEF37F8E56A9DF1C559ABDD4BC47EDE",
+   "quote": "the prison of the self",
+   "page": "Strokes p. 161, quoted at AD pp. 185-206",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "1988",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "medium"
+  },
+  {
+   "index": 1003,
+   "feature": "place and institution description",
+   "claim": "Wright describes Urth's mines as yielding ruins, bones and relics whose purposes are forgotten.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'God and His Man', pp. 49-66",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/god-and-his-man-critical-responses-to-the-urth-cycle/888E54B4D73F5B5D8F93C390C49F8907",
+   "quote": "ruins, bones, obscure relics with forgotten purposes",
+   "page": "pp. 49-66",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1004,
+   "feature": "place and institution description",
+   "claim": "Wright describes Urth's geology as buried under layer after layer of archaeological remains.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'God and His Man', pp. 49-66",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/god-and-his-man-critical-responses-to-the-urth-cycle/888E54B4D73F5B5D8F93C390C49F8907",
+   "quote": "layer after layer of archaeological remains",
+   "page": "pp. 49-66",
+   "kind": "analysis",
+   "polarity": "applies",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1005,
+   "feature": "point of view and distance",
+   "claim": "Wright states The Book of the New Sun is Severian's memoir written 10 years after he becomes Autarch.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'God and His Man', pp. 49-66",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/god-and-his-man-critical-responses-to-the-urth-cycle/888E54B4D73F5B5D8F93C390C49F8907",
+   "quote": "written 10 years after he becomes Autarch",
+   "page": "pp. 49-66",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1006,
+   "feature": "other: genre definition",
+   "claim": "Wolfe defined science fantasy as a science fiction story told with the flavour of fantasy.",
+   "source": "Gene Wolfe, quoted in Peter Wright, Attending Daedalus (2003), 'Last Thrilling Wonder Story', pp. 86-103",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E",
+   "quote": "a science fiction story told with the outlook, the flavour of fantasy",
+   "page": "pp. 86-103",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1007,
+   "feature": "withheld information and inference",
+   "claim": "Wright argues Severian's transformation is chemical assimilation rather than mystical union.",
+   "source": "Peter Wright, Attending Daedalus (2003), 'Last Thrilling Wonder Story', pp. 86-103",
+   "url": "https://www.cambridge.org/core/books/attending-daedalus/last-thrilling-wonder-story-intergeneric-operations/3CC9BC9E09B6B06DA7BE6219A48DC01E",
+   "quote": "not the result of a series of mystical unions",
+   "page": "pp. 86-103",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2003",
+   "routeHint": "Cambridge Core chapter page, fetched live with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 993,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unreliable, intensely subjective and seemingly incapable of analysing his experiences",
+   "note": "Chapter 10 Summary, live Cambridge Core page: the sentence naming Severian as 'just such a narrator' carries the quoted phrase word for word, in Wright's own voice, immediately after the Borges passage."
+  },
+  {
+   "index": 994,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a narrator who omitted or corrupted what happened",
+   "note": "Same Summary paragraph: the words are Bioy Cesares's scheme in the Borges passage Wright quotes, and Wright applies it to Wolfe explicitly ('an analogue of the Borgesian character'), then to Severian. Page attributes the words to Borges's character rather than to Borges speaking directly."
+  },
+  {
+   "index": 995,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "expedites the reader's trust in the veracity of the document",
+   "note": "Chapter 7 Summary, third sentence: 'Wolfe's employment of a first-person narrator' precedes the quoted phrase, so both the first-person limb and the trust-in-veracity limb are on the page."
+  },
+  {
+   "index": 996,
+   "verdict": "PARTIAL",
+   "trueWording": "told him then (as I had been taught)",
+   "note": "Chapter 7 Summary quotes the Agilus scaffold passage; the eleven quoted words appear exactly, and the training limb is carried by the parenthesis and by 'Severian, in his role as headsman'. But the word 'guild' occurs nowhere on this page (checked case-insensitively over the whole fetched document), so the institutional attribution is the claim's own addition.",
+   "unsupportedLimb": "the executioner's GUILD - the page grounds the training only in '(as I had been taught)' and 'his role as headsman', never in a guild"
+  },
+  {
+   "index": 997,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the introduction of ambiguity and ellipsis",
+   "note": "Chapter 3 Summary: the phrase is item two in the list introduced as 'four artful strategies', and the controlling limb is the preceding clause about compelling the reader to endure Wolfe's perception of life."
+  },
+  {
+   "index": 998,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "either by juxtaposing conflicting viewpoints",
+   "note": "Chapter 3 Summary, final sentence: Wolfe 'aids this avoidance by disclosing the unreliability of his narrators in one of two ways', the first being the quoted phrase. The page confines it to the 'less intricate narratives' and pairs it with a second, commoner method; the claim asserts no exclusivity, so no limb fails."
+  },
+  {
+   "index": 999,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a disjunction between what is apparent from a narrative's plot",
+   "note": "Chapter 5 Summary: after quoting Sanders on audience and performance, Wright's clause 'invariably indicates' the quoted disjunction, completed on the page by 'and what is occurring at the level of its story'."
+  },
+  {
+   "index": 1000,
+   "verdict": "PARTIAL",
+   "trueWording": "he 'pretends not to see' his operator",
+   "note": "Chapter 5 Summary carries the quoted clause exactly, but the mechanism on the page is pretence, not blindness: the Joruri gloss it rests on says the operators 'stand in full view of the audience, but the audience pretends not to see them', and the narrator likewise 'pretends not to see' his operator. Flattening that to 'not seeing' inverts the point of the figure.",
+   "unsupportedLimb": "by NOT SEEING his operator - the page says he pretends not to see an operator standing in full view"
+  },
+  {
+   "index": 1001,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe's stories and novels reflect one another",
+   "note": "Chapter 11 Summary: 'John Clute has already acknowledged how' precedes the quoted words, and the block closes with the citation '(Strokes, p. 160)', matching the claim's attribution and page."
+  },
+  {
+   "index": 1002,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pattern of responses to ... the prison of the self",
+   "note": "Chapter 11 Summary: Wright reports that Clute 'believes that the repetitions found in Wolfe's oeuvre represent' the quoted pattern, cited to '(Strokes, p. 161)'. Wright dissents in the next clause, but the claim only reports Clute's reading, which is what the page attributes."
+  },
+  {
+   "index": 1003,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ruins, bones, obscure relics with forgotten purposes",
+   "note": "Chapter 4 Summary: 'Commercial mines sunk into these strata yield fragments of mysterious, lost ages' introduces the quoted list, so the mines limb and the forgotten-purposes limb are both on the page."
+  },
+  {
+   "index": 1004,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "its geology having long succumbed to layer after layer",
+   "note": "Chapter 4 Summary, second sentence: the planet is 'one vast relic', its geology 'having long succumbed to layer after layer of archaeological remains'. The claim's 'buried under' is a fair rendering of 'succumbed to'."
+  },
+  {
+   "index": 1005,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Severian's memoir, written 10 years after he becomes Autarch",
+   "note": "Chapter 4 Summary: 'The Book of the New Sun is' precedes the quoted words, and the sentence continues to the faultless recall that lets him record his youthful experiences. Numeral '10' is the page's own form."
+  },
+  {
+   "index": 1006,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "science fiction story told with the outlook, the flavour of fantasy",
+   "note": "Chapter 6 Summary, opening clause: the page frames the quoted words as 'Wolfe's definition of science fantasy', so the own-words attribution holds; Wright immediately calls the definition ambiguous."
+  },
+  {
+   "index": 1007,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not the result of a series of mystical unions",
+   "note": "Chapter 6 Summary, final sentence: Severian's progression into the manifold is the quoted negation 'but a consequence of an entirely chemical assimilation', which supports both limbs of the claim."
+  }
+ ]
+}

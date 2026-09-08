@@ -1,0 +1,17 @@
+# LANE: DESK-900-CARS — the chair-ruled cars at the §900 composed tip, executed by a lane, before the registers
+⟦Chair: Fable 5.1 · Lane: Opus 5 (`model: "opus"`) · Fable retrovalidation of this act is the chair's own⟧
+⛔ DISPATCH ONLY AFTER `land-desk-prep.sh <§899 CAS>` has composed `$SC/laneDESKINT` and the chair has resolved the two known replay conflicts (pantheon A5 ↔ the roster; anything in `dossierMounts.js` the resolver could not settle). The dock's tip sha is given at dispatch.
+
+## READ FIRST
+`$SC/briefs/_PREAMBLE.md` · `$SC/DESK-LANDING-PLAN.md` (the "Chair cars at the composed tip" list is your work order) · the rulings named per item below.
+
+## THE CARS, one commit each, in this order
+1. **EXPECTED_VOICE** — add `chance_meeting_exposed: null` to `tests/domain/impactKindWalkers.test.js` with the same comment §899's car 5 wrote for `chance_meeting_recorded` (read it). Prove: both arms green; a plant (delete the row) reds the exact-set arm.
+2. **The coupling registry row** — `deploymentReturn.js → irregularForce.js` (INTERIOR→WAR), SEAT-78's handed-up red in `couplingInclusion.walker`: read the walker's own docblock for the row shape and the `CHARTERED_VOLUME_PREFIXES` rule; mint the row verbatim as the walker reserves it to the chair (the chair authorises it here; cite `receipt-seat-78.md`). Prove: the walker green; the row's absence reds it.
+3. **The ninth OSR exemption retires** — `rulings/RULING-OSR-SCHEMA17-DECISIONS.md` §2: declared 9 → 8 with banked 8, one car, the walker's roster arm proving roster == tree. ⛔ Take NO `--write` here (that is register step 3e, the chair's).
+4. **The roster carries the two-kind figures** — if the chair's conflict resolution left anything owed (the receipt `receipt-pantheon-roster.md` names the three consumers, including `scripts/base-state-capsule.mjs`): run `tests/scripts/baseStateCapsule.test.js`, `tests/domain/pantheon.test.js`, `tests/lint/kindPoolFloors.walker.test.js` and prove all three agree on registries 12 / allRows 115 / routedTokens 381 / unvoiced 274 / difference 8.
+5. **`{founder}` re-declared** — `rulings/RULING-FOUNDER-SLOT.md`: the annex slot moves to the producer's descriptive-phrase class; every variant that needs a NAME is marked name-only and withheld; the desk's producer path fills the phrase. Prove with the desk walkers and a plant (a proper-noun fill must be refused).
+6. **DOCKET item 8, re-scoped** — on this dock ECON2's `COMPLEXITY_NOUN` / `SLOT_FILL_TABLES` / §0c-3 closure EXIST. `{good}` (197): measure whether a per-word lowercase (not first-letter-only) yields honest bare-common phrases for ALL 197 (list every exception); if 197/197, wire it. `{chain}` (74 category headings): DO NOT transform — re-declare the slot in the annex as a heading class (Title-Case allowed) and route it through that class; report every variant whose grammar cannot take a heading.
+
+## PROVE IT (vitest allowed on this dispatch — the HOLD will have been lifted; still through the mutex, never during a chair gate)
+Each car's own suites; then `tests/lint/` whole and `tests/domain/` whole at your tip with every red attributed by re-running at the dock's base. No register act (the chair takes all seven register doors afterwards in plan §3 order); record every delta. Commit per step, `Seat: Opus 5 — Fable-unvalidated`, `Lane: DESK-900-CARS`, `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`. Receipt `$SC/receipt-desk-900-cars.md`, PARTIAL header first, RETROVALIDATION ROW last, tip sha last.

@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 205,
+ "firstTs": "2026-09-07T14:57:58.194Z",
+ "lastTs": "2026-09-07T15:12:16.573Z",
+ "tools": {
+  "Bash": 59,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now my own independent evaluation of all receipts.",
+ "run": "wf_7afed34c-ef0",
+ "agent": "a14c0eb2799b4571d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_7afed34c-ef0/agent-a14c0eb2799b4571d.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

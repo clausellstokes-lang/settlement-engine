@@ -1,0 +1,233 @@
+{
+ "name": "kay",
+ "chunk": 20,
+ "claims": [
+  {
+   "index": 300,
+   "feature": "other: summary refused",
+   "claim": "Kay says a major novel can be made to sound trivial, silly or shallow if boiled down to a paragraph of sound bite.",
+   "source": "Guy Gavriel Kay, 'The Big Idea: Guy Gavriel Kay', Whatever (John Scalzi's blog), 2025",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "quote": "can be made to sound trivial, silly, shallow if boiled down",
+   "page": "body, paragraph beginning 'Of course you don't'"
+  },
+  {
+   "index": 301,
+   "feature": "omission as information",
+   "claim": "Pembroke College reports that Kay's Tolkien Lecture discussed the vital importance of the unsaid and the unexplained in fiction.",
+   "source": "Pembroke College, Oxford (report of Kay's Tolkien Lecture 'Just Enough Light'), 2021",
+   "url": "https://www.pmb.ox.ac.uk/news/just-enough-light-guy-gavriel-kay-delivers-jrr-tolkien-lecture",
+   "quote": "the vital importance of the unsaid and the unexplained in fiction",
+   "page": "news item, second paragraph"
+  },
+  {
+   "index": 302,
+   "feature": "withheld information and inference",
+   "claim": "Kay asked in the lecture how comfortable we are in our responses to art with mystery and with not knowing.",
+   "source": "Guy Gavriel Kay, quoted from the 2021 Tolkien Lecture in Pembroke College's report, 2021",
+   "url": "https://www.pmb.ox.ac.uk/news/just-enough-light-guy-gavriel-kay-delivers-jrr-tolkien-lecture",
+   "quote": "how comfortable in our responses to art are we with mystery",
+   "page": "news item, second paragraph (quotation from the lecture)"
+  },
+  {
+   "index": 303,
+   "feature": "opening sentence",
+   "claim": "Kay's hundred-word Sarantine Mosaic Drabble opens with a ten-word sentence.",
+   "source": "Guy Gavriel Kay, 'Aliana in the West' (a 100-word Drabble, (c)2014), reproduced at Bright Weavings, 2025",
+   "url": "https://brightweavings.com/drabbles/",
+   "quote": "She is lying beside her love dreaming of her love.",
+   "page": "'Aliana in the West', first line"
+  },
+  {
+   "index": 304,
+   "feature": "plainness and economy",
+   "claim": "Bright Weavings records that Kay wrote two Drabbles in 2014, a Drabble being a 100 word short story.",
+   "source": "Bright Weavings (Alec Lynch), editorial note on Kay's Drabbles, 2025",
+   "url": "https://brightweavings.com/drabbles/",
+   "quote": "A Drabble is a 100 word short story",
+   "page": "editorial note above the stories"
+  },
+  {
+   "index": 305,
+   "feature": "repetition and refrain",
+   "claim": "That opening sentence of Kay's Drabble repeats the phrase 'her love' twice.",
+   "source": "Guy Gavriel Kay, 'Aliana in the West' (a 100-word Drabble, (c)2014), reproduced at Bright Weavings, 2025",
+   "url": "https://brightweavings.com/drabbles/",
+   "quote": "She is lying beside her love dreaming of her love.",
+   "page": "'Aliana in the West', first line"
+  },
+  {
+   "index": 306,
+   "feature": "register modulation",
+   "claim": "Wolfe says Kay deploys an impressive variety of narrative voices in All the Seas of the World.",
+   "source": "Gary K. Wolfe, review of All the Seas of the World, Locus (May 2022 issue; posted 2022-06-25)",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "Kay deploys an impressive variety of such narrative voices",
+   "page": "body, paragraph beginning 'As usual'"
+  },
+  {
+   "index": 307,
+   "feature": "per-speaker register",
+   "claim": "Wolfe says the occasional shift into first person has something of the effect of hearing a skilled soloist in a symphony.",
+   "source": "Gary K. Wolfe, review of All the Seas of the World, Locus (May 2022 issue; posted 2022-06-25)",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "the occasional shift into first-person has something of the effect",
+   "page": "body, paragraph beginning 'As usual'"
+  },
+  {
+   "index": 308,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe says Kay's devoted readers have come to learn his invented nomenclature for nations, cities and geographical features.",
+   "source": "Gary K. Wolfe, review of All the Seas of the World, Locus (May 2022 issue; posted 2022-06-25)",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "his invented nomenclature for nations, cities, geographical features",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 309,
+   "feature": "plainness and economy",
+   "claim": "Wolfe says that despite an intimidating character list at the front, the on-the-ground tale is a model of clarity and focus.",
+   "source": "Gary K. Wolfe, review of All the Seas of the World, Locus (May 2022 issue; posted 2022-06-25)",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "the on-the-ground tale is a model of clarity and focus",
+   "page": "body, final paragraph"
+  },
+  {
+   "index": 310,
+   "feature": "annalist voice and deep time",
+   "claim": "Wolfe says even secondary figures gain a haunting presence when the reader is offered brief glimpses into their future lives.",
+   "source": "Gary K. Wolfe, review of All the Seas of the World, Locus (May 2022 issue; posted 2022-06-25)",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "brief glimpses into their future lives",
+   "page": "body, paragraph beginning 'As his isolated and exiled figures'"
+  },
+  {
+   "index": 311,
+   "feature": "repetition and refrain",
+   "claim": "Wolfe says the novel reminds the reader more than once that lives pivot on small things and accidents of timing.",
+   "source": "Guy Gavriel Kay's novel All the Seas of the World, quoted by Gary K. Wolfe in Locus, 2022",
+   "url": "https://locusmag.com/2022/06/gary-k-wolfe-reviews-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "Lives change, turn, pivot on small things, accidents of timing",
+   "page": "body, paragraph beginning 'Not uncharacteristically'"
+  },
+  {
+   "index": 312,
+   "feature": "register modulation",
+   "claim": "Whitehead says Kay's measured prose is sometimes minimalist and sometimes ornate.",
+   "source": "Adam Whitehead, review of Written on the Dark, The Wertzone, 2025",
+   "url": "https://thewertzone.blogspot.com/2025/06/written-on-dark-by-guy-gavriel-kay.html",
+   "quote": "his measured prose, sometimes minimalist, sometimes ornate",
+   "page": "body, paragraph beginning 'The traditional strengths of Kay'"
+  },
+  {
+   "index": 313,
+   "feature": "diction (native vs latinate)",
+   "claim": "Whitehead says Kay knows when to deploy words like bludgeons and when like scalpels.",
+   "source": "Adam Whitehead, review of Written on the Dark, The Wertzone, 2025",
+   "url": "https://thewertzone.blogspot.com/2025/06/written-on-dark-by-guy-gavriel-kay.html",
+   "quote": "when to deploy words like bludgeons and when like scalpels",
+   "page": "body, paragraph beginning 'The traditional strengths of Kay'"
+  },
+  {
+   "index": 314,
+   "feature": "civic record register",
+   "claim": "Whitehead says Kay provides a list of historical sources at the end of Written on the Dark.",
+   "source": "Adam Whitehead, review of Written on the Dark, The Wertzone, 2025",
+   "url": "https://thewertzone.blogspot.com/2025/06/written-on-dark-by-guy-gavriel-kay.html",
+   "quote": "Kay provides a list of historical sources at the end",
+   "page": "body, paragraph beginning 'This book is set'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "War and Peace, LOTR or Song of Solomon 'can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite'",
+   "note": "Raw page (whatever.scalzi.com, curl with browser UA, HTTP 200) carries the quote verbatim in Kay's signed Big Idea essay: 'Some of us (well, me?) take the considered view that War and Peace or The Lord of the Rings or Song of Solomon can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite.' 'A major novel' is the claim's generalisation of the three named novels; page says 'a paragraph's worth of sound bite' where the claim says 'a paragraph of sound bite'. All limbs supported."
+  },
+  {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the talk 'went on to discuss the vital importance of the unsaid and the unexplained in fiction'",
+   "note": "Raw pmb.ox.ac.uk news item (HTTP 200) verbatim: 'The talk began with some of Kay's reflections from his time in Oxfordshire ... and went on to discuss the vital importance of the unsaid and the unexplained in fiction.' Item is Pembroke College's own report of the 11 May 2021 eighth annual JRR Tolkien Lecture delivered by Kay. Every limb supported."
+  },
+  {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he grappled with 'how comfortable in our responses to art are we with mystery, with not knowing'",
+   "note": "Same raw pmb.ox.ac.uk page, sentence following the one behind index 301: 'Drawing on quotations from both Tolkien and Bagehot, he grappled with the question of \"how comfortable in our responses to art are we with mystery, with not knowing [and with] the presence of the numinous that we do not fully grasp?\"' Quote verbatim; the page presents it as a direct quotation from Kay's lecture, supporting 'asked in the lecture'."
+  },
+  {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'She is lying beside her love dreaming of her love.' opens the Sarantium Mosaic Drabble",
+   "note": "Raw brightweavings.com/drabbles/ (HTTP 200). The first line of 'Aliana in the West (spoiler for The Sarantine Mosaic) / The Sarantium Mosaic Drabble / (c)2014: Guy Gavriel Kay' is the quoted sentence, verbatim. Counted: She/is/lying/beside/her/love/dreaming/of/her/love = 10 words. Counted the whole Drabble body from the page = exactly 100 words, and the page's editorial note defines a Drabble as 'a 100 word short story'. All limbs supported."
+  },
+  {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'In 2014 Guy Kay wrote two Drabbles ... A Drabble is a 100 word short story'",
+   "note": "Raw brightweavings.com/drabbles/ editorial note above the stories, posted 4 October 2025 by Alec Lynch: 'In 2014 Guy Kay wrote two Drabbles in support of The Pixel Project ... A Drabble is a 100 word short story.' Quote verbatim; both limbs (two Drabbles, 2014, 100-word definition) supported."
+  },
+  {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'She is lying beside her love dreaming of her love.' — 'her love' occurs twice",
+   "note": "Raw brightweavings.com/drabbles/ first line of 'Aliana in the West'. String 'her love' appears exactly twice in that opening sentence (positions 5-6 and 9-10 of ten words). Quotation verbatim; limb supported."
+  },
+  {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'As usual, Kay deploys an impressive variety of such narrative voices'",
+   "note": "Raw locusmag.com review (HTTP 200), paragraph beginning 'As usual'. Quote verbatim. 'Such' refers back to the preceding paragraph's character voices (e.g. Guidanio Cerra's 'haunting and haunted voice'); the review is of All the Seas of the World, so the novel limb holds."
+  },
+  {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the occasional shift into first-person has something of the effect of hearing a skilled soloist in a symphony'",
+   "note": "Raw locusmag.com review, same 'As usual' paragraph, immediately after the index-306 clause. Full sentence continues '(for some reason, I think of oboes or bassoons, but maybe that's just me)'. Quote verbatim; every limb supported."
+  },
+  {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'devotees who have come to learn his invented nomenclature for nations, cities, geographical features'",
+   "note": "Raw locusmag.com review, first body paragraph: '... including both devotees who have come to learn his invented nomenclature for nations, cities, geographical features, and religions, and first-time readers ...' Quote verbatim (page has a soft hyphen inside 'religions' only, outside the quoted span). Claim's 'devoted readers' = page's 'devotees'; the claim omits 'religions', which subtracts nothing from the supported limbs."
+  },
+  {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the catalog ... at first might seem intimidating, the on-the-ground tale is a model of clarity and focus'",
+   "note": "Raw locusmag.com review, final body paragraph: 'While the catalog of these characters offered at the beginning of the novel at first might seem intimidating (at least to me, but then I was terrified by the character list at the beginning of War and Peace), the on-the-ground tale is a model of clarity and focus ...' Quote verbatim; both limbs (intimidating list at the front, clarity and focus) supported."
+  },
+  {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'even the secondary figures gain a haunting presence, especially when we are offered brief glimpses into their future lives'",
+   "note": "Raw locusmag.com review; the sentence sits in the same paragraph as 'As his isolated and exiled figures ...' (Locus runs it as one paragraph beginning 'As usual'). Quote 'brief glimpses into their future lives' verbatim; 'even the secondary figures gain a haunting presence' also verbatim. All limbs supported."
+  },
+  {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "''Lives change, turn, pivot on small things, accidents of timing,'' we are reminded more than once",
+   "note": "Raw locusmag.com review, paragraph beginning 'Not uncharacteristically'. Quote verbatim inside the review's own quotation marks, followed by Wolfe's 'we are reminded more than once' — so both the wording (the novel's) and the 'more than once' limb (Wolfe's) are supported on the page."
+  },
+  {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'his measured prose, sometimes minimalist, sometimes ornate'",
+   "note": "Raw thewertzone.blogspot.com review (HTTP 200), paragraph beginning 'The traditional strengths of Kay are on full display'. Quote verbatim; attribution to Adam Whitehead confirmed by the post's byline. Every limb supported."
+  },
+  {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose 'known [sic] when to deploy words like bludgeons and when like scalpels'",
+   "note": "Raw thewertzone.blogspot.com review, same 'traditional strengths' sentence: '... his measured prose, sometimes minimalist, sometimes ornate, known when to deploy words like bludgeons and when like scalpels.' The supplied quote appears word for word. The page's verb is 'known' (an evident slip for 'knowing'/'knows') and the knowing is grammatically pinned to the prose rather than to Kay; the claim's 'Kay knows' is the same substance, so all limbs hold."
+  },
+  {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Kay provides a list of historical sources at the end of the novel'",
+   "note": "Raw thewertzone.blogspot.com review, paragraph beginning 'This book is set in the much-mentioned land of Ferrieres'. Quote verbatim; 'the novel' is Written on the Dark, the book under review, so the claim's substitution of the title is supported."
+  }
+ ]
+}

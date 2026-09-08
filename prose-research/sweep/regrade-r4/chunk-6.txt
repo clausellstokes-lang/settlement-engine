@@ -1,0 +1,275 @@
+### [230] VERIFIED_VERBATIM  |feature: other: telling vs showing
+CLAIM: Le Guin says showing can be quite static whereas telling always involves moving on.
+QUOTE: telling always involves moving on
+TRUE: Showing can be quite static, after all; but telling always involves moving on.
+NOTE: Raw page. Answer to Paige, final line. Both limbs verbatim.
+
+### [231] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Le Guin describes limited third person as currently practised as a kind of flashlight beam giving a brilliant, narrow, simplifying intensity of vision.
+QUOTE: a kind of flashlight beam
+TRUE: As currently practiced, limited third person is (like the present tense) a kind of flashlight beam — it gives a brilliant, narrow, simplifying intensity of vision.
+NOTE: Raw page. Answer to Patricia. 'a kind of flashlight beam' verbatim; 'as currently practised' and 'brilliant, narrow, simplifying intensity of vision' both on the page.
+
+### [232] VERIFIED_SUBSTANCE  |feature: point of view and distance
+CLAIM: Le Guin tells writers to distrust anybody who says fiction must use only limited third person.
+QUOTE: 
+TRUE: Distrust anybody who says fiction must use only limited third person.
+NOTE: Claim carries no quote field, so no verbatim test applies; the page's own sentence is near-identical: 'Distrust anybody — fellow writer, agent, editor — who tells you that fiction must use only limited third person.' Raw page, answer to Patricia.
+
+### [233] VERIFIED_VERBATIM  |feature: repetition and refrain
+CLAIM: Le Guin tells a writer to indulge the resonances, hints, half-repetitions, echoes and foreshadows that appear as a novel takes shape, calling a novel a living architecture.
+QUOTE: A novel is a living architecture.
+TRUE: ...those resonances, hints, half-repetitions, echoes, foreshadows, reminders... A novel is a living architecture.
+NOTE: Raw page. Answer to Wm Henry opens 'Indulge, indulge! Do it!' and closes with the quoted sentence verbatim; the listed resonances appear in the same order the claim gives.
+
+### [234] VERIFIED_VERBATIM  |feature: other: exposition and description defended
+CLAIM: Le Guin says description without any apparent, overt action can carry a story powerfully forward, and questions the separation of action from description as a false dichotomy.
+QUOTE: description without any apparent, overt action can carry a story
+TRUE: And description without any apparent, overt action can carry a story powerfully, irresistibly forward. ... Is this perhaps another False Dichotomy?
+NOTE: Raw page. Answer to Robby. Quote verbatim; the false-dichotomy limb is supported by 'how do you separate action from description? Is this perhaps another False Dichotomy?'. Claim compresses 'powerfully, irresistibly forward' to 'powerfully forward' — a drop, not a distortion.
+
+### [235] VERIFIED_VERBATIM  |feature: archaism
+CLAIM: Le Guin says she is sick of historical novels and pastiches that are tone-deaf to the morals, the manners, the ideas and above all the language of their period.
+QUOTE: above all the language of the period
+TRUE: I'm sick of historicals and pastiches set in the historical past that are utterly, arrogantly tone-deaf to the morals, the manners, the ideas, the opportunities, and above all the language of the period.
+NOTE: Raw page. Answer to Nilanjana, in parentheses. Quote verbatim; every listed limb present (claim omits 'the opportunities', an omission only).
+
+### [236] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Asked whether invented names need lots of apostrophes, Le Guin dismisses the device with the reply 'What for?'.
+QUOTE: Lots of apostrophes? What for?
+TRUE: Lots of apostrophes? What for?
+NOTE: Raw page. In the T.A. exchange 'with Ursula interlineating in italics', T.A.'s 'Lots of apostrophes?' is answered 'What for?' — verbatim, and the dismissal reading is exactly the interlineation's function.
+
+### [237] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Le Guin says specific features or mannerisms can help fix a minor character in the reader's mind when they turn up again.
+QUOTE: can help fix a minor character in the reader’s mind
+TRUE: Specific features or mannerisms (even absurdly specific ones!) can help fix a minor character in the reader's mind when they turn up again.
+NOTE: Raw page. Answer to Tim. Quote verbatim including 'when they turn up again'; both the 'specific features or mannerisms' and 'minor character' limbs are the page's own words.
+
+### [238] VERIFIED_VERBATIM  |feature: dialogue register
+CLAIM: Le Guin's recommendation for convincing dialogue is to read or speak it aloud, out loud rather than muttered.
+QUOTE: read/speak your dialogue aloud
+TRUE: All I can recommend is to read/speak your dialogue aloud. Not whispering, not muttering, OUT LOUD.
+NOTE: Raw page. Answer to Jacob, introduced as the answer to 'Convincing Dialogue'. Quote verbatim; the 'out loud rather than muttered' limb is the page's 'Not whispering, not muttering, OUT LOUD.'
+
+### [239] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Le Guin gives pronunciation guidelines for her invented names because pronunciation affects the sound and rhythm of a sentence.
+QUOTE: this does affect the sound and rhythm of a sentence
+TRUE: And since this does affect the sound and rhythm of a sentence – and since names are magic in Earthsea – here are some guidelines.
+NOTE: Raw page, 'How do you pronounce the names and words in your books?' section, followed by 'In my invented names and words, usually:' and the letter-by-letter guidelines. Quote verbatim. The page gives a second co-reason ('names are magic in Earthsea'); the claim asserts only the sound-and-rhythm one, which is stated, so no limb is unsupported.
+
+### [240] VERIFIED_VERBATIM  |feature: edition and house style
+CLAIM: In her introduction to the revised Steering the Craft, Le Guin calls the vocabulary of grammar the names of the writer's tools.
+QUOTE: these are the names of the writer’s tools
+TRUE: Yet these are the names of the writer's tools.
+NOTE: Raw page, section headed 'From the Introduction' and opening 'This is a complete revision of the book' (Mariner 2015 revision). Quote verbatim, immediately after 'the technical language of speech and writing, the vocabulary of grammar'.
+
+### [241] VERIFIED_VERBATIM  |feature: edition and house style
+CLAIM: Steering the Craft was first published by Eighth Mountain in 1998 and the revised edition was published by Mariner in 2015.
+QUOTE: first published by Eighth Mountain in 1998
+TRUE: first published by Eighth Mountain in 1998; revised Mariner 2015
+NOTE: Raw HTML of ursulakleguin.com/steering-the-craft fetched (HTTP 200, browser UA). Publication note reads verbatim: 'Steering the Craft was first published by Eighth Mountain in 1998; the revised edition was published by Mariner in 2015.' Both limbs (Eighth Mountain/1998, Mariner/2015) supported; page adds it is currently published by Harper Perennial.
+
+### [242] VERIFIED_VERBATIM  |feature: edition and house style
+CLAIM: 'From Elfland to Poughkeepsie' was a speech given at the Second Annual Science Fiction Writers' Workshop in 1972 and first published by Pendragon Press in 1973 in a limited run of 776 copies.
+QUOTE: in 1973 published it in a limited run of 776 copies
+TRUE: Pendragon Press 'in 1973 published it in a limited run of 776 copies'
+NOTE: Raw HTML of ursulakleguin.com/from-elfland-to-poughkeepsie fetched (HTTP 200). Page: 'the text of a speech Ursula gave at the Second Annual Science Fiction Writers' Workshop in 1972 ... It was the first book published by Pendragon Press (Portland), who in 1973 published it in a limited run of 776 copies.' All three limbs (1972 workshop, Pendragon 1973, 776 copies) supported; page also notes 1975 (1006) and 1978 (2000) reprints.
+
+### [243] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin states as a principle of narrative description that listing is not describing and that only the relevant belongs.
+QUOTE: Listing is not describing. Only the relevant belongs.
+TRUE: 'Listing is not describing. Only the relevant belongs.'
+NOTE: Raw djvu text of the 2015 Mariner edition fetched from archive.org (HTTP 200, 221,397 bytes). Quote appears word for word in chapter 10 'Crowding and Leaping' (chapter numbering confirmed: heading '10. crowding and leaping'), in the paragraph on leaping and description.
+
+### [244] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin says what a writer leaves out is infinitely more than what is left in.
+QUOTE: what you leave out is infinitely more than what you leave in
+TRUE: 'what you leave out is infinitely more than what you leave in'
+NOTE: Same raw djvu text. Full sentence: 'And what you leave out is infinitely more than what you leave in.' Chapter 10, immediately after 'What you leap over is what you leave out.'
+
+### [245] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin says there has to be white space around the word and silence around the voice.
+QUOTE: white space around the word, silence around the voice
+TRUE: 'There's got to be white space around the word, silence around the voice.'
+NOTE: Same raw djvu text. The quoted fragment appears verbatim inside that sentence; the claim's 'there has to be' renders the book's 'There's got to be' — same proposition, chapter 10.
+
+### [246] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Le Guin glosses crowding as never using ten vague words where two exact words will do.
+QUOTE: never to use ten vague words where two exact words will do
+TRUE: 'never to use ten vague words where two exact words will do'
+NOTE: Same raw djvu text. Verbatim, and it is indeed a gloss of crowding: 'Crowding is what Keats meant ... It's what we mean when we exhort ourselves to avoid flabby language and cliches, never to use ten vague words where two exact words will do, always to seek the vivid phrase, the exact word.' Chapter 10.
+
+### [247] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin warns that overcrowded descriptions clog the story and suffocate themselves.
+QUOTE: Overcrowded descriptions clog the story and suffocate themselves.
+TRUE: 'Overcrowded descriptions clog the story and suffocate themselves.'
+NOTE: Same raw djvu text. Verbatim sentence, chapter 10, following the Funes the Memorious reference and preceding the Flaubert/Salammbo aside.
+
+### [248] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Praising Patrick O'Brian's sea battles, Le Guin says everything the reader needs to know is included but nothing more.
+QUOTE: Everything the reader needs to know is included, but nothing more.
+TRUE: 'Everything the reader needs to know is included, but nothing more.'
+NOTE: Same raw djvu text. Verbatim, and the O'Brian attribution limb is supported by the preceding sentence: 'For a magnificent example of action writing, look at any of the sea battles in Patrick O'Brian's Aubrey-Maturin novels.' Chapter 10.
+
+### [249] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Le Guin praises O'Brian's sensory details as intense, brief and precise.
+QUOTE: The sensory details are intense, brief, precise.
+TRUE: 'The sensory details are intense, brief, precise.'
+NOTE: Same raw djvu text. Verbatim, three sentences after the Patrick O'Brian sea-battle sentence, so the praise-of-O'Brian limb is supported by the same passage. Chapter 10.
+
+### [250] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Le Guin says there is no optimum sentence length and that the optimum is variety.
+QUOTE: There is no optimum sentence length. The optimum is variety.
+TRUE: 'There is no optimum sentence length. The optimum is variety.'
+NOTE: Same raw djvu text. Both sentences verbatim in chapter 3 (heading '3. sentence length and complex syntax'), followed by 'The length of a sentence in good prose is established by contrast and interplay with the sentences around it.'
+
+### [251] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Le Guin attributes to teachers, style textbooks, journalists and thriller writers the notion that the only good sentence is a short sentence, and disagrees with it.
+QUOTE: the only good sentence is a short sentence
+TRUE: 'the only good sentence is a short sentence. ... I don't.'
+NOTE: Same raw djvu text. Every limb supported: 'Teachers trying to get kids to write understandably, textbooks of style with their notion of "transparent" style, journalists with their weird rules and superstitions, and bang-pow thriller writers - they've all helped filled a lot of heads with the notion that the only good sentence is a short sentence. A convicted criminal might agree. I don't.' Chapter 3.
+
+### [252] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Le Guin calls it a myth that short-sentence prose is more like the way we speak.
+QUOTE: It’s a myth that short-sentence prose is
+TRUE: 'It's a myth that short-sentence prose is "more like the way we speak."'
+NOTE: Same raw djvu text. Quoted fragment verbatim; the completing phrase 'more like the way we speak' appears on the page in the book's own quotation marks. Chapter 3, after the 'See Spot. See Jane.' example.
+
+### [253] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Le Guin says that in a narrative the chief duty of a sentence is to lead to the next sentence.
+QUOTE: the chief duty of a sentence is to lead to the next
+TRUE: 'In a narrative, the chief duty of a sentence is to lead to the next sentence.'
+NOTE: Same raw djvu text. Verbatim, and it is the opening sentence of chapter 3 ('3. sentence length and complex syntax'), so the 'in a narrative' limb is supported.
+
+### [254] VERIFIED_VERBATIM  |feature: metaphor discipline
+CLAIM: Le Guin says a sentence is not working as a narrative sentence if its similes or metaphors are so dazzling that they stop the reader.
+QUOTE: the proper beauty and power of prose
+TRUE: 'A sentence isn't working as a narrative sentence if ... its similes or metaphors so dazzling, that it stops the reader'
+NOTE: Same raw djvu text. Every limb of the claim is supported verbatim on the page: 'A sentence isn't working as a narrative sentence if its order is so unexpected, or its adjectives and adverbs so striking, or its similes* or metaphors* so dazzling, that it stops the reader, even to say "Ooh!"'. CAVEAT ON THE ATTACHED QUOTE: the claim's quote field, 'the proper beauty and power of prose', is also verbatim on the page but belongs to a different, later sentence ('though every sentence should move with grace, the proper beauty and power of prose is in the work as a whole') and does not by itself evidence the claim. Graded VERIFIED_VERBATIM because both rubric conditions hold (quote word-for-word on page; every limb supported), but the citation should be re-pointed to the sentence given in trueWording. Located in the chapter-2 'Conjunctivitis' passage on killing your darlings, not chapter 3 as the page field states.
+
+### [255] VERIFIED_VERBATIM  |feature: adjective and adverb discipline
+CLAIM: Le Guin says adjectives and adverbs are rich and good and nourishing, and cause obesity in prose only when used lazily or overused.
+QUOTE: ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing.
+TRUE: 'ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing ... cause obesity in prose only when used lazily or overused.'
+NOTE: Same raw djvu text. Both limbs supported. The sidebar's OCR is split across a page break: the opening runs 'ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing. They ... add color, life, immediacy. They cause obesity in prose only when' (line 1695) while its tail 'used lazily or overused.' was OCR'd out of order to line 1661, just under the '5. adjectives and adverbs' chapter heading. Reassembled, the sidebar reads exactly as the claim states. Quote field matches word for word including the drop-cap capitalization.
+
+### [256] VERIFIED_VERBATIM  |feature: adjective and adverb discipline
+CLAIM: Le Guin says narrative prose going a long distance needs more muscle than fat, and recommends a thoughtful, careful choice of adjectives and adverbs.
+QUOTE: needs more muscle than fat
+TRUE: needs more muscle than fat
+NOTE: Both limbs verbatim in ch.5: the 'thoughtful, careful choice of adjectives and adverbs' recommendation and the muscle/fat clause sit in one sentence of the raw djvu text.
+
+### [257] VERIFIED_VERBATIM  |feature: adjective and adverb discipline
+CLAIM: Le Guin's Chastity exercise asks the writer to produce descriptive narrative prose without adjectives or adverbs, using only verbs, nouns, pronouns and articles.
+QUOTE: without adjectives or adverbs
+TRUE: descriptive narrative prose without adjectives or adverbs
+NOTE: 'EXERCISE FIVE: Chastity' verbatim; the page names verbs, nouns, pronouns, and articles as the permitted parts of speech, exactly as claimed.
+
+### [258] VERIFIED_VERBATIM  |feature: adjective and adverb discipline
+CLAIM: Le Guin says the word suddenly seldom means anything at all and is a mere transition device.
+QUOTE: Suddenly seldom means anything at all
+TRUE: Suddenly seldom means anything at all
+NOTE: Verbatim, and the following clause on the page is 'it's a mere transition device, a noise', supporting the second limb.
+
+### [259] VERIFIED_VERBATIM  |feature: repetition and refrain
+CLAIM: Le Guin says stating flatly that repetition is to be avoided goes right against the nature of narrative prose.
+QUOTE: repetition is the central means of achieving rhythm
+TRUE: go right against the nature of narrative prose
+NOTE: Claim sentence is verbatim on the page ('to state flatly that repetition is to be avoided, is to go right against the nature of narrative prose'); the supplied quote also appears verbatim later in the same chapter.
+
+### [260] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: In Le Guin's detached-author point of view, people and places may be exactly described but values and judgments can only be implied indirectly.
+QUOTE: values and judgments can only be implied indirectly
+TRUE: values and judgments can only be implied indirectly
+NOTE: Verbatim in the Detached Author section, preceded on the same line by 'People and places may be exactly described' - both limbs present.
+
+### [261] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Le Guin says that in the detached-author point of view the author never enters a character's mind.
+QUOTE: The author never enters a character’s mind.
+TRUE: The author never enters a character's mind
+NOTE: Verbatim sentence inside the Detached Author definition of ch.7.
+
+### [262] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Le Guin calls the detached-author voice the least overtly and most covertly manipulative of the points of view.
+QUOTE: the least overtly, most covertly manipulative of the points of view
+TRUE: the least overtly, most covertly manipulative of the points of view
+NOTE: Verbatim; the page's subject is the detached-author voice, matching the claim's attribution.
+
+### [263] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin says the world of a science fiction or fantasy story must be created and explained in the story, because the reader has no way of knowing it otherwise.
+QUOTE: must be created and explained in the story
+TRUE: The world of the story must be created and explained in the story
+NOTE: Verbatim in ch.9; the 'no way of knowing' limb is supported two sentences earlier ('information ... that the reader has no way of knowing unless told').
+
+### [264] VERIFIED_VERBATIM  |feature: other: exposition and description defended
+CLAIM: Le Guin says crafty writers break information up, grind it fine, and make it into bricks to build the story with, rather than letting exposition form lumps.
+QUOTE: grind it fine, and make it into bricks
+TRUE: break up the information, grind it fine, and make it into bricks
+NOTE: Verbatim; the preceding sentence, 'Crafty writers (in any genre) don't allow Exposition to form Lumps', supports the lumps limb.
+
+### [265] VERIFIED_VERBATIM  |feature: other: telling vs showing
+CLAIM: Le Guin says the story is not in the plot but in the telling, and that it is the telling that moves.
+QUOTE: The story is not in the plot but in the telling.
+TRUE: The story is not in the plot but in the telling
+NOTE: Verbatim, immediately followed by 'It is the telling that moves.' Located under the subsection heading 'A DISCUSSION OF STORY' in ch.10, exactly as the page field states.
+
+### [266] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Le Guin opens Steering the Craft by saying the sound of the language is where it all begins and that the test of a sentence is whether it sounds right.
+QUOTE: The sound of the language is where it all begins.
+TRUE: The sound of the language is where it all begins
+NOTE: Verbatim opening of the Lit Hub excerpt, followed by 'The test of a sentence is, Does it sound right?'; the page states this is the first chapter of Steering the Craft.
+
+### [267] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Le Guin says pace and movement depend above all on rhythm, and that the primary way to feel and control the rhythm of prose is by hearing it.
+QUOTE: Pace and movement depend above all on rhythm
+TRUE: Pace and movement depend above all on rhythm
+NOTE: Verbatim, followed by 'the primary way you feel and control the rhythm of your prose is by hearing it - by listening to it.'
+
+### [268] VERIFIED_VERBATIM  |feature: diction (native vs latinate)
+CLAIM: Introducing a passage of Zora Neale Hurston, Le Guin says the vocabulary is simple and familiar and that it is above all the rhythm that is powerful and effective.
+QUOTE: the vocabulary is simple and familiar
+TRUE: the vocabulary is simple and familiar
+NOTE: Verbatim in the note that introduces example III (Hurston), followed by "it's above all the rhythm that is powerful and effective". The note reads 'In this one and the next', so it covers Hurston and the following Gloss passage too; the claim does not assert exclusivity, so no limb fails.
+
+### [269] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Le Guin says the sound of the names of places can be intensely expressive, citing Faulkner's Yoknapatawpha County and Tolkien's simple yet deeply evocative Middle-earth.
+QUOTE: his simple yet deeply evocative Middle-earth
+TRUE: his simple yet deeply evocative Middle-earth
+NOTE: Verbatim, in a passage that runs 'names ... can be intensely expressive' then 'Names of places, too: Faulkner's Yoknapatawpha County, Tolkien's haunting Lothlorien or his simple yet deeply evocative Middle-earth.' The 'intensely expressive' predicate is stated of names and extended to place names by 'too'.
+
+### [270] VERIFIED_VERBATIM  |feature: other: prose that stops to be admired
+CLAIM: Le Guin asks whether a novelist who visibly strives for striking or poetical prose, using unusual or archaic words, intensifies what is being said or distracts from it.
+QUOTE: using unusual or archaic words
+TRUE: using unusual or archaic words
+NOTE: Verbatim in the discussion questions; the same question ends 'Does it intensify what it's saying or distract you from it?', supporting the intensify/distract limb, and names 'a novelist or essayist who visibly strives to write striking or poetical prose'.
+
+### [271] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin says that in describing an invented world you have to leave out an enormous amount, and that the leaving-out is half the art.
+QUOTE: the leaving-out is half the art
+TRUE: Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.
+NOTE: Public Books interview fetched raw (curl, browser UA, HTTP 200). Section I 'Names Come First with Me'. Full sentence on page: 'With an invented world, though, you have to describe more than a realist does. Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.' Quote string is character-exact; both limbs (invented world; leaving-out is half the art) supported.
+
+### [272] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin says that with an invented world you have to describe more than a realist does.
+QUOTE: you have to describe more than a realist does
+TRUE: With an invented world, though, you have to describe more than a realist does.
+NOTE: Same raw page, section I. Quote character-exact within that sentence; the claim adds nothing beyond it.
+
+### [273] VERIFIED_VERBATIM  |feature: withheld information and inference
+CLAIM: Le Guin praises Tolkien for telling the reader where they are and what the weather is and leaving the rest up to the reader.
+QUOTE: You know where you are, you know what the weather is
+TRUE: You know where you are, you know what the weather is, from what direction the wind's blowing.
+NOTE: Same raw page, section I. Context: 'Tolkien is really such a master there. You know where you are, you know what the weather is, from what direction the wind's blowing. He tells you what he can about it - but the rest of it's up to you.' Praise of Tolkien, the weather limb and the rest-is-up-to-the-reader limb all present.
+
+### [274] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Le Guin says names come first with her and that she cannot write about a character who does not have the right name.
+QUOTE: Names come first with me.
+TRUE: Names come first with me. I can't write about a character if he or she doesn't have a name. The right name.
+NOTE: Same raw page, section I, in reply to Plotz's question about island names. Quote character-exact; the 'right name' limb is the next sentence.
+
+### [275] VERIFIED_VERBATIM  |feature: translation and register
+CLAIM: Le Guin says Angelica Gorodischer's Kalpa Imperial is written in very simple, pure Spanish because the pieces are storyteller's stories.
+QUOTE: very simple, pure Spanish, because they’re storyteller’s stories
+TRUE: those are in very simple, pure Spanish, because they're storyteller's stories
+NOTE: Lit Hub page fetched raw (HTTP 200); byline 'Euan Monaghan', dated 'April 1, 2016' on the page. Full context: 'And my translation of Angelica Gorodischer, the Kalpa Imperial, I knew very little Spanish then, but those are in very simple, pure Spanish, because they're storyteller's stories, and I could work through them with the dictionary.' Quote character-exact.

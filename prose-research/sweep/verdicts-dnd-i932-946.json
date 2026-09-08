@@ -1,0 +1,327 @@
+{
+ "name": "dnd",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 932,
+   "feature": "other: settlement slot list",
+   "claim": "The 2024 Dungeon Master's Guide defines a settlement with exactly four settlement-level tables, headed Defining Traits, Claims to Fame, Current Calamities and Local Leaders, plus a Settlements by Size table.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "The following tables allow you to flesh out details about a settlement.",
+   "page": "DM's Toolbox, 'Settlements' > 'Settlement Tables and Tracker'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent (section body is free to read); curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 933,
+   "feature": "place and institution description",
+   "claim": "The 2024 DMG asserts that describing a settlement to the players in words is usually enough and no map is required.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "Simply describing the settlement to your players is usually sufficient.",
+   "page": "'Settlements' > sidebar 'Do I Need a Settlement Map?'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 934,
+   "feature": "other: settlement size bands",
+   "claim": "The 2024 DMG's Settlements by Size table gives population ranges of up to 500 for a village, 501-5,000 for a town and 5,001 and higher for a city.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "population ranges for villages, towns, and cities",
+   "page": "'Settlements' > 'Settlements by Size'",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 935,
+   "feature": "other: digits in prose",
+   "claim": "The 2024 DMG writes a price as a numeral inside a running sentence of its own worked example rather than spelling it out.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "(which costs 50 GP) is too expensive an item",
+   "page": "'Settlements', opening paragraphs",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 936,
+   "feature": "dm-facing sentence",
+   "claim": "Every entry on the 2024 DMG's Current Calamities table is a complete sentence in the present tense closed with a full stop.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "Monsters infest the settlement.",
+   "page": "'Settlements' > 'Current Calamities' (1d12)",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 937,
+   "feature": "other: settlement slot list",
+   "claim": "The 2024 DMG's leadership slot, retitled Local Leaders, admits a council rather than only a single ruler as a settlement's leader.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "Respected, fair, and just leader or council",
+   "page": "'Settlements' > 'Local Leaders' (1d12)",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 938,
+   "feature": "concrete sensory noun",
+   "claim": "The 2024 DMG's Defining Traits table is a list of physical, visible features of the built place rather than of its politics or reputation.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "Impressive structure (such as a keep, temple, circle of standing stones",
+   "page": "'Settlements' > 'Defining Traits' (1d20)",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 939,
+   "feature": "other: settlement slot list",
+   "claim": "The 2024 DMG's Settlements section carries no table on relations between the peoples living in a settlement, a slot the 2014 book had as Race Relations.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2024), \"Settlements\" (DM's Toolbox), read on the licensed Roll20 compendium",
+   "url": "https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359",
+   "quote": "",
+   "page": "'Settlements' > 'Settlement Tables and Tracker' (complete list of tables on the page)",
+   "kind": "measurement",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "roll20.net licensed compendium page fetched raw with a browser user agent; curl + HTML strip",
+   "registerHint": "none",
+   "confidence": "medium - an absence claim: the whole section was read and its seven tables enumerated, but absence cannot be quoted"
+  },
+  {
+   "index": 940,
+   "feature": "civic record register",
+   "claim": "Wizards' own free Settlement Tracker sheet records a settlement in nine fields: settlement name, a size band, defining trait, claim to fame, current calamity, local leader, noteworthy people, noteworthy places, and the GP value of the most expensive item for sale.",
+   "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+   "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+   "quote": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE:",
+   "page": "Settlement Tracker, single sheet",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "PDF binary from media.dndbeyond.com (linked from the free /sources/dnd/br-2024/tracking-sheets page), pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 941,
+   "feature": "civic record register",
+   "claim": "On Wizards' Settlement Tracker the four rolled slots are labelled in the singular, where the corresponding DMG table headings are plural.",
+   "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+   "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+   "quote": "DEFINING TRAIT",
+   "page": "Settlement Tracker, slot labels",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "PDF binary from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium - the plural table headings are on a different page (the Roll20 compendium capture)"
+  },
+  {
+   "index": 942,
+   "feature": "civic record register",
+   "claim": "Wizards' Settlement Tracker adds two free-text roster fields, Noteworthy People and Noteworthy Places, that no table in the DMG's Settlements section generates.",
+   "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+   "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+   "quote": "NOTEWORTHY PEOPLE",
+   "page": "Settlement Tracker, lower half",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2024-11-12",
+   "routeHint": "PDF binary from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium - the second limb (no generating table) rests on the Roll20 capture of the section"
+  },
+  {
+   "index": 943,
+   "feature": "other: settlement size bands",
+   "claim": "Wizards' Settlement Tracker records settlement size as one of three tick boxes carrying the population band in numerals.",
+   "source": "Wizards of the Coast, \"Settlement Tracker\" sheet, Dungeon Master's Guide (2024), free PDF on D&D Beyond, (c) 2024",
+   "url": "https://media.dndbeyond.com/compendium-images/br/dmg/settlement-tracker.pdf",
+   "quote": "TOWN (POP. 501–5,000)",
+   "page": "Settlement Tracker, header line",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2024-11-12",
+   "routeHint": "PDF binary from media.dndbeyond.com, pdftotext -layout",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 944,
+   "feature": "place and institution description",
+   "claim": "The 2014 DMG tells the DM to build a settlement around the locations most relevant to the adventure.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "When creating a settlement for your campaign, focus",
+   "page": "ch.5 'Adventure Environments' > 'Settlements', p.112",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", file \"Dungeon Master's Guide_djvu.txt\" (full-book OCR), curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 945,
+   "feature": "omission as information",
+   "claim": "The 2014 DMG warns the DM off naming every street and identifying every building's inhabitants, calling that way madness.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "the inhabitants of every building; that way lies madness.",
+   "page": "ch.5 > 'Settlements', p.112",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 946,
+   "feature": "other: settlement slot list",
+   "claim": "The 2014 DMG's five Random Settlements tables presuppose that the settlement's size and basic form of government have already been fixed elsewhere.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "settlement. They assume that you've already determined",
+   "page": "ch.5 > 'Settlements' > 'Random Settlements', p.112",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 932,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The following tables allow you to flesh out details about a settlement.",
+   "note": "Quote verbatim under 'Settlement Tables and Tracker'. All four headings appear exactly as given (Defining Traits 1d20, Claims to Fame 1d20, Current Calamities 1d12, Local Leaders 1d12), and a Settlements by Size table heads the section. The 'settlement-level' qualifier is doing real work and holds: the section carries two further roll tables, Tavern Names* and Random Shops, but each generates a sub-location inside the settlement, not an attribute of the settlement as a whole. Wizards' own Settlement Tracker corroborates the count by recording exactly those four rolled slots."
+  },
+  {
+   "index": 933,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Simply describing the settlement to your players is usually sufficient.",
+   "note": "Quote verbatim in the sidebar headed 'Do I Need a Settlement Map?', whose opening sentence independently states a settlement does not always require a map. The page then adds that a map is helpful when it matters where buildings are - context the claim's own 'usually' accommodates rather than contradicts."
+  },
+  {
+   "index": 934,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Village Up to 500; Town 501-5,000; City 5,001 and higher",
+   "note": "Quote verbatim in the sentence introducing the table. The three rows carry exactly the bands claimed. The same table also carries a Max. GP Value column (village 20 GP, town 2,000 GP, city 200,000 GP), which the claim does not mention but does not misstate."
+  },
+  {
+   "index": 935,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(which costs 50 GP) is too expensive an item",
+   "note": "Quote verbatim in the second paragraph, inside a worked example opening 'For example, a Potion of Healing...'. The numeral sits in running prose, not in a table, exactly as claimed."
+  },
+  {
+   "index": 936,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'in the present tense' for EVERY entry - row 2 of the 1d12 table opens in the past tense",
+   "trueWording": "A key figure died; murder is suspected.",
+   "note": "Quote verbatim as row 1. Measured all twelve rows: all twelve are complete sentences closed with a full stop, so those two limbs hold. The universal present-tense limb fails on row 2, whose main clause verb 'died' is past (the second clause 'murder is suspected' is present). Eleven of twelve are present tense; the claim should read 'almost every entry' or drop the tense limb."
+  },
+  {
+   "index": 937,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Respected, fair, and just leader or council",
+   "note": "Quote verbatim as row 1 of the Local Leaders 1d12 table; rows 8, 11 and 12 also name a council ('Acrimonious council unable to make decisions', 'Iron-willed and respected leader or council', 'Religious leader or council'). The 'retitled' limb is corroborated from the 2014 source fetched for indices 944-946: the 2014 equivalent is headed 'Ruler's Status' and its row 1 reads 'Respected, fair, and just' with no council offered."
+  },
+  {
+   "index": 938,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'of the built place' - four of the eleven rows are natural or atmospheric, not built",
+   "trueWording": "Lingering fog / Cliffs on one or more sides",
+   "note": "Quote verbatim as the 19-20 row. The claim's central contrast holds completely: measured all eleven rows of the 1d20 table and not one is political or reputational (politics and reputation live in the separate Local Leaders and Claims to Fame tables). But 'built' over-specifies - Lingering fog, Cliffs on one or more sides, Lots of mud, filth, and litter, and Lots of gardens, parks, and greenery are natural or environmental. 'Noise and smoke from smithies and forges' is also audible rather than strictly visible. 'Physical, sensory features of the place' would be true as written."
+  },
+  {
+   "index": 939,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "2024 tables: Size, Traits, Fame, Calamities, Leaders, Taverns, Shops - none relations",
+   "note": "Absence claim, so no quote is possible; graded on a full enumeration of the fetched section. The 2024 Settlements section carries exactly seven tables - Settlements by Size, Defining Traits, Claims to Fame, Current Calamities, Local Leaders, Tavern Names*, Random Shops - and none concerns relations between peoples. The second limb is independently confirmed in the 2014 OCR fetched for indices 944-946, where a d20 table headed 'Race Relations' is the first of the Random Settlements tables. Both limbs stand."
+  },
+  {
+   "index": 940,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GP VALUE OF THE MOST EXPENSIVE ITEM FOR SALE:",
+   "note": "Quote verbatim on the sheet's last line. PDF fetched as binary and read two ways - pdftotext -layout and a 90dpi page render inspected visually. The render confirms exactly the nine fields claimed and no tenth: settlement name, the three-way size band, four titled panels (Defining Trait, Claim to Fame, Current Calamity, Local Leader), the two ruled rosters, and the GP value line. Footer reads TM & (c) 2024 Wizards of the Coast LLC."
+  },
+  {
+   "index": 941,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "DEFINING TRAIT; CLAIM TO FAME; CURRENT CALAMITY; LOCAL LEADER",
+   "note": "Quote verbatim. All four tracker slot labels are singular; the four corresponding DMG headings on the Roll20 capture are plural (Defining Traits, Claims to Fame, Current Calamities, Local Leaders). The claim's own stated weakness - that the plural side sits on a different page - is resolved here because both pages were fetched raw in this pass, so both limbs are directly verified rather than inferred."
+  },
+  {
+   "index": 942,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'that no table in the DMG's Settlements section generates' - the section's Tavern Names and Random Shops tables do generate places",
+   "trueWording": "NOTEWORTHY PEOPLE / NOTEWORTHY PLACES, ruled blank lines",
+   "note": "Quote verbatim; the render confirms both are free-text rosters of seven ruled lines each, unlike the four titled panels above them. The People half of the second limb holds - no table generates noteworthy people. The Places half does not: the same section carries a Tavern Names* table (1d20 x 1d20, two-part names) and a Random Shops table (1d20 shop types), both of which generate places a DM would enter on that roster. True as 'no table dedicated to them' or 'no table generates noteworthy people'."
+  },
+  {
+   "index": 943,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'tick boxes' - the three marks are open circles (radio style), not boxes",
+   "trueWording": "TOWN (POP. 501-5,000) preceded by an open circle",
+   "note": "Quote verbatim including the en dash. The count and the numeral bands hold exactly: three mutually exclusive options reading VILLAGE (POP. UP TO 500), TOWN (POP. 501-5,000), CITY (POP. 5,001+). The shape limb fails on inspection - pdftotext renders the marks as 'l' from an embedded ZapfDingbatsITC subset, and a 90dpi page render shows three unfilled circles, radio-button style, not square tick boxes. The PDF has an AcroForm dictionary but no widget annotations, so these are printed ornaments on a photocopy sheet rather than interactive controls."
+  },
+  {
+   "index": 944,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When creating a settlement for your campaign, focus",
+   "note": "Quote verbatim in the full-book OCR; the sentence completes 'on the locations that are most relevant to the adventure.' Located in the Settlements section of ch.5, and the page foot two screens later reads '112 CHAPTER 5 I ADVENTURE ENVIRONMENTS', confirming the cited page and chapter."
+  },
+  {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the inhabitants of every building; that way lies madness.",
+   "note": "Quote verbatim; the full sentence opens 'Don't worry about naming every street and identifying...'. Both limbs of the claim - every street, every building's inhabitants - are present, as is the madness figure. Immediately follows the passage verified at index 944 on the same page."
+  },
+  {
+   "index": 946,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "settlement. They assume that you've already determined",
+   "note": "Quote verbatim, straight apostrophe in the OCR matching the claim exactly; the sentence completes 'its size and its basic form of government.' The five-table count is confirmed by enumeration: under the 'Random Settlements' heading the OCR carries Race Relations, Ruler's Status, Notable Traits, Known For Its..., and Current Calamity, after which a separate 'Random Buildings' subsection begins. Both limbs hold."
+  }
+ ]
+}

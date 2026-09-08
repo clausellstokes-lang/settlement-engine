@@ -1,0 +1,238 @@
+{{Short description|Fictional language in "Game of Thrones"}}
+{{Infobox language
+|name     = Dothraki
+|nativename = Lekh Dothraki
+|pronunciation = {{IPA|art|ˈdɤθɾaki|}}
+|creator  = [[George R. R. Martin]], [[David J. Peterson]]
+|created     = From 2009
+|setting  = ''[[A Song of Ice and Fire]]'', 2011 series ''[[Game of Thrones]]''
+|fam1     = [[Constructed language]]s
+|fam2     = [[Artistic language]]s
+|fam3     = [[Fictional language]]s
+|iso3 = none
+|glotto=none
+|ietf = [https://www.kreativekorp.com/clcr/ art-x-dothraki]
+|notice=IPA
+}}
+{{wiktionary|Appendix:Dothraki}}
+
+The '''Dothraki language''' is a [[Constructed language|constructed]] [[fictional language]] in [[George R. R. Martin]]'s fantasy novel series ''[[A Song of Ice and Fire]]'' and its television adaptation ''[[Game of Thrones]]''. It is spoken by the Dothraki, a nomadic people in the [[World of A Song of Ice and Fire|series's fictional world]]. The language was developed for the TV series by the language creator [[David J. Peterson]],<ref>{{cite news |url=http://www.thefreelibrary.com/Do+you+speak+Dothraki%3F-a0279261433 |title=Do you speak Dothraki? |date=January 30, 2012 |work=[[The New York Times Upfront]] }}</ref> working off the Dothraki words and phrases in Martin's novels.
+
+{{As of|2011|09}}, the language comprised 3163 words,<ref name="wired">{{cite web |url= https://www.dothraki.com/2011/09/the-header-script/ |title=The Header Script |date=21 September 2011|website=Dothraki.com |access-date=2011-10-03}}</ref> not all of which have been made public. In 2012, 146 newborn girls in the United States were named "Khaleesi", the Dothraki term for the wife of a ''khal'' or ruler, and the title adopted in the series by [[Daenerys Targaryen]].<ref>{{cite news|last=Wattenberg|first=Laura|title=The Ultimate 'Game of Thrones' Baby Name|url=http://www.huffingtonpost.com/laura-wattenberg/the-ultimate-game-of-thrones-baby-name_b_3312750.html |access-date=22 May 2013|newspaper=[[Huffington Post]]|date=22 May 2013}}</ref> Dothraki and [[Valyrian languages|Valyrian]] have been described by ''[[The Economist]]'' as "the most convincing fictional tongues since [[Elvish languages (Middle-earth)|Elvish]]".<ref>{{cite news|title=The complex linguistic universe of "Game of Thrones"|url=https://www.economist.com/news/books-and-arts/21725752-dothraki-and-valyrian-are-most-convincing-fictional-tongues-elvish|date=5 August 2017|access-date=4 August 2017|newspaper=The Economist}}</ref>
+
+==Development==
+[[File:David j peterson 2019 06 03.jpeg|thumb|[[David J. Peterson]], creator of the Dothraki spoken language for ''[[Game of Thrones]]'']]
+
+The Dothraki vocabulary was created by [[David J. Peterson]] well in advance of the adaptation. HBO hired the Language Creation Society to create the language, and after an application process involving over 30 [[List of language inventors|conlangers]], Peterson was chosen to develop the Dothraki language. He delivered over 1700 words to HBO before the initial shooting. Peterson drew inspiration from George R. R. Martin's description of the language, as well as from such languages as [[Estonian language|Estonian]], [[Inuktitut]], [[Turkish language|Turkish]], [[Russian language|Russian]], and [[Swahili language|Swahili]].<ref name=hbo>{{cite web |url=http://dothraki.conlang.org/official-hbo-press-release/ |title=Official HBO Press Release |website=Dothraki.conlang.org |date=April 12, 2010 |access-date=July 27, 2010 |archive-date=July 19, 2019 |archive-url=https://web.archive.org/web/20190719045742/http://dothraki.conlang.org/official-hbo-press-release/ |url-status=dead }}</ref>
+
+David J. Peterson and his development of the Dothraki language were featured on an April 8, 2012 episode of [[CNN]]'s ''[[The Next List]]''.<ref>{{cite web|url=http://whatsnext.blogs.cnn.com/2012/04/06/language-creation-for-game-of-thrones/|title='Game of Thrones' linguist: How to create a language from scratch|website=CNN What's Next|access-date=2017-07-23|archive-url=https://web.archive.org/web/20130911002127/http://whatsnext.blogs.cnn.com/2012/04/06/language-creation-for-game-of-thrones/|archive-date=2013-09-11|url-status=dead}}</ref> He went on to create the [[Valyrian languages]] for season 3 of ''Game of Thrones''.  Peterson and his development of Dothraki were also featured on the January 8, 2017 episode of ''[[To Tell the Truth]]''.
+
+===Language constraints===
+The Dothraki language was developed under two significant constraints.  First, the language had to match the uses already put down in the books. Secondly, it had to be easily pronounceable or learnable by the actors. These two constraints influenced the grammar and phonology of the language: for instance, as in English, there is no [[Phonemic contrast|contrast]] between [[Aspirated consonant|aspirated]] and unaspirated stops.
+
+==Phonology and romanization==
+David Peterson has said, "You know, most people probably don't really know what [[Arabic]] actually sounds like, so to an untrained ear, it might sound like Arabic. To someone who knows Arabic, it doesn't. I tend to think of the sound as a mix between Arabic (minus the distinctive pharyngeals) and [[Spanish language|Spanish]], due to the dental consonants."<ref name=tor>{{cite web |url=https://www.tor.com/blogs/2010/04/creating-dothraki-an-interview-with-david-j-peterson-and-sai-emrys |title= Creating Dothraki - An Interview with David J Peterson and Sai Emrys|website=Tor.com |date = April 22, 2010}}</ref>
+
+Regarding the orthography, the Dothraki themselves do not have a writing system&mdash;nor do many of the surrounding peoples (e.g., the [[Lhazar]]een). If there were to be any written examples of Dothraki in the ''A Song of Ice and Fire'' universe, it would be in a writing system developed in the [[Free Cities (A Song of Ice and Fire)|Free Cities]] and adapted to Dothraki, or in some place like [[Ghis]] or [[Qarth]], which do have writing systems.<ref name="wes.ru">{{cite web |url=http://westeros.ru/?p=3779 |title=Westeros.Ru interview|website=Westeros.ru |date=June 24, 2010}}</ref>
+
+=== Consonants ===
+There are 23 [[consonant]] [[phoneme]]s in the Dothraki language. In the following [[International Phonetic Alphabet|IPA]] chart, each sound in Dothraki is given with the romanization in brackets.
+
+{| class="wikitable" style=text-align:center
+|+ Consonants<ref name="Phonology - Dothraki"/>
+|-
+! colspan=2| 
+! [[Labial consonant|Labial]]
+! [[Dental consonant|Dental]]
+! [[Alveolar consonant|Alveolar]]
+! [[Palatal consonant|Palatal]]
+! [[Velar consonant|Velar]]
+! [[Uvular consonant|Uvular]]
+! [[Glottal consonant|Glottal]]
+|-
+! colspan=2| [[Nasal consonant|Nasal]]
+| {{IPAlink|m}} {{angbr|m}}
+| {{IPAlink|n̪}} {{angbr|n}}
+|
+| 
+|
+|
+|
+|-
+! rowspan=2| [[Plosive]]
+! <small>[[voicelessness|voiceless]]</small>
+|
+| {{IPAlink|t̪}} {{angbr|t}}
+|
+| {{IPAlink|tʃ}} {{angbr|ch}}
+| {{IPAlink|k}} {{angbr|k}}
+| {{IPAlink|q}} {{angbr|q}}
+|
+|-
+! <small>[[voice (phonetics)|voiced]]</small>
+|
+| {{IPAlink|d̪}} {{angbr|d}}
+|
+| {{IPAlink|dʒ}} {{angbr|j}}
+| {{IPAlink|ɡ}} {{angbr|g}}
+|
+|
+|-
+! rowspan=2| [[Fricative]]
+! <small>[[voicelessness|voiceless]]</small>
+| {{IPAlink|f}} {{angbr|f}}
+| {{IPAlink|θ}} {{angbr|th}}
+| {{IPAlink|s}} {{angbr|s}}
+| {{IPAlink|ʃ}} {{angbr|sh}}
+| {{IPAlink|x}} {{angbr|kh}}
+|
+| {{IPAlink|h}} ~ {{IPAlink|ħ}} {{angbr|h}}
+|-
+! <small>[[voice (phonetics)|voiced]]</small>
+| {{IPAlink|v}} {{angbr|v}}
+|
+| {{IPAlink|z}} {{angbr|z}}
+| {{IPAlink|ʒ}} {{angbr|zh}}
+|
+|
+|
+|-
+! colspan=2| [[Approximant consonant|Approximant]]
+| 
+| {{IPAlink|l̪}} {{angbr|l}}
+|
+| {{IPAlink|j}} {{angbr|y}}
+| {{IPAlink|w}} {{angbr|w}}
+|
+|
+|-
+! colspan=2| [[Rhotic consonant|Rhotic]]
+|
+|
+| {{IPAlink|r}} ~ {{IPAlink|ɾ}} {{angbr|r}}
+|
+|
+|
+|
+|}
+
+The letters {{angbr|c}} and {{angbr|x}} do not appear in Dothraki, although {{angbr|c}} appears in the [[digraph (orthography)|digraph]] {{angbr|ch}}.
+
+{{angbr|p}} and {{angbr|b}} seem to appear only in names, as in ''Pono'' and ''Bharbo''. These consonants were used in the past but have since [[Lenition|lenited]] into {{IPA|[f]}} and {{IPA|[v]}}. They can still be used as variants of {{IPA|/f/}} and {{IPA|/v/}}.
+
+Voiceless stops may be [[aspirated consonant|aspirated]]. This does not change word meaning.
+
+The geminates of consonants marked with digraphs have a reduced orthography:
+* {{angbr|kkh}} represents {{IPA|/xː/}} (not {{IPA|/kx/}})
+* {{angbr|tth}} represents {{IPA|/θː/}} (not {{IPA|/tθ/}})
+* {{angbr|ssh}} represents {{IPA|/ʃː/}} (not {{IPA|/sʃ/}})
+* {{angbr|zzh}} represents {{IPA|/ʒː/}} (not {{IPA|/zʒ/}})
+
+=== Vowels ===
+Dothraki has a four vowel system shown below:
+
+{| class="wikitable" style=text-align:center
+!
+! [[Front vowel|Front]]
+! [[Back vowel|Back]]
+|-
+! [[Close vowel|Close]]
+| {{IPAlink|i}} {{angbr|i}}
+|
+|-
+! [[Mid vowel|Mid]]
+| {{IPAlink|e}} {{angbr|e}}
+| {{IPAlink|o}} {{angbr|o}}
+|-
+! [[Open vowel|Open]]
+| {{IPAlink|a}} {{angbr|a}}
+|
+|}
+
+There are no diphthongs.<ref name="Phonology - Dothraki">{{cite web |title=Dothraki Phonology |url=https://wiki.languageinvention.com/index.php?title=Dothraki_Phonology |access-date=July 25, 2022 |website=wiki.languageinvention.com}}</ref><ref>{{cite web|url=https://www.dothraki.com/2011/10/accents-in-dothraki/ |title=» Accents in Dothraki Dothraki |website=Dothraki.com |date=2011-10-07 |access-date=2017-07-23}}</ref>
+
+In the ''A Song of Ice and Fire'' books, {{angbr|u}} never occurs as a vowel, appearing only after {{angbr|q}}, and only in names, as in ''Jhiqui'' and ''Quaro''.
+
+In sequence of multiple vowels, each such vowel represents a separate syllable.  Examples: ''shierak'' {{IPA|[ʃi.eˈɾak]}} ('star'), ''rhaesh'' {{IPA|[ɾhaˈeʃ]}} ('country'), ''khaleesi'' {{IPA|[ˈxa.le.e.si]}} ('queen').
+
+The vowels {{IPA|/i, e, o, a/}} are realized as {{IPA|[e, ɛ, ɔ, ɑ]}} after {{IPA|/q/}}. {{IPA|/o/}} turns into {{IPA|[ɤ]}} after dental consonants.<ref name="dothraki2">{{cite web|url=https://www.dothraki.com/2011/11/qute-noises/ |title=» Qute Noises Dothraki |website=Dothraki.com |date=14 November 2011 |access-date=2017-07-23}}</ref><ref>{{cite web|url=https://www.youtube.com/watch?v=LGxMEbF0eY8 |title=The Art of Language Invention, Episode 7: Romanization Systems |website=[[YouTube]] |date=2015-11-17 |access-date=2017-07-23}}</ref> {{IPA|/o/}} can be pronounced as {{IPA|[u]}} after {{IPA|/ɡ, k, x/}}.<ref name="dothraki2"/>
+
+==Grammar==
+
+===Parts of speech===
+Though [[preposition]]s are also sometimes employed, the language is foremost [[inflectional language|inflectional]]. [[Prefix]]es, [[suffix]]es and [[circumfix]]es are all used. [[Verb]]s [[Grammatical conjugation|conjugate]] in [[infinitive]], [[past tense|past]], [[present tense|present]], [[future tense|future]], two [[imperative mood|imperative]]s and (archaic) [[participle]]; they also agree with [[person (grammar)|person]], [[number (grammar)|number]] and [[polarity (grammar)|polarity]]. [[Noun]]s divide into two classes, [[Animate noun|inanimate]] and [[Animacy|animate]]. They [[Declension|decline]] in five [[Grammatical case|case]]s, [[nominative case|nominative]], [[accusative case|accusative]], [[genitive case|genitive]], [[allative case|allative]] and [[ablative case|ablative]]. Animate nouns also decline according to number.<ref name="dothraki101">{{cite web |url=http://www.makinggameofthrones.com/production-diary/2010/12/15/dothraki-101.html |title=Dothraki 101 post on HBO's Making Game of Throne's blog|website=Makinggameofthrones.com |date=December 15, 2010}}</ref><ref name="Dothraki presentation at LCC4">{{cite web |url=https://conference.conlang.org/lcc4/speakers/djplcc4.pdf |title= Dothraki presentation at Language Creation Conference 4|website=Conference.conlang.org|date=August 22, 2011}}</ref>
+
+===Word order===
+The basic word order is SVO ([[subject–verb–object]]). In a basic sentence, the order of these elements (when all three are present) is as in English: first comes the [[subject (grammar)|subject]] (S), followed by the verb (V), and then the [[object (grammar)|object]] (O).
+
+{{interlinear|indent=3
+|Khal ahhas arakh.
+|{The Khal} sharpened {the arakh}.
+|S V O|}}
+
+When only a subject is present, the subject precedes the verb, as it does in English:
+
+{{interlinear|indent=3
+|Arakh hasa.
+|{The arakh} {is sharp}.
+|S V|}}
+
+In [[noun phrase]]s, there is a specific order as well. The order is as follows:
+
+{{interlinear|indent=3
+|jin ave sekke verven anni m'orvikoon
+|this father very violent of.mine with.a.whip
+|[[demonstrative]] [[noun]] [[adverb]] [[adjective]] [[genitive case|genitive noun]] [[prepositional phrase]]
+|this very violent father of mine with a whip}}
+
+In prepositional phrases, prepositions always precede their noun [[complement (grammar)|complements]].
+
+Further examples of demonstratives include:<ref name="Demonstratives">{{cite web|url=https://www.dothraki.com/2012/02/demonstratives/ |title=Demonstratives |date=28 February 2012 |publisher=Dothraki.com  |access-date=2013-06-16}}</ref>
+
+{{interlinear|indent=3
+|jin arakh
+|this {arakh (type of blade)}|}}
+
+{{interlinear|indent=3
+|rek hrakkares
+|that lion|}}
+
+Further examples of adjectives include:<ref name="Adjectives">{{cite web |title=Dothraki Adjectives |url=https://wiki.languageinvention.com/index.php?title=Dothraki_Adjectives |access-date=July 25, 2022 |website=wiki.languageinvention.com}}</ref>
+
+{{interlinear|indent=3
+|rakh haj
+|boy strong
+|'strong boy'}}
+
+{{interlinear|indent=3
+|alegra ivezh
+|duck wild
+|'wild duck'}}
+
+Adverbs normally are sentence final, but they can also immediately follow the verb. [[Modal particle]]s precede the verb.<ref name="dothraki101"/>
+
+In the episode "[[Andy's Ancestry]]" from the United States television show ''[[The Office (U.S. TV series)|The Office]]'', [[Dwight Schrute]] created the Dothraki phrase "throat rip" by putting "throat" in the [[accusative case|accusative]] and placing it in front of the [[transitive verb]]. Compounds of this sort are a form of [[Incorporation (linguistics)|object incorporation]]. [[David J. Peterson|Peterson]] adopted this technique and called it the "Schrutean compound".<ref name=EW>{{cite magazine |last=Rahman |first=Ray |date=31 May – 7 June 2013 |title=My Weird TV Job: The Guy Who Makes Up Languages for ''Game of Thrones'' and ''Defiance'' |magazine=Entertainment Weekly |issue=#1261/1262 |url=http://www.ew.com/article/2013/05/24/guy-who-makes-languages-game-thrones-and-defiance |archive-url=https://web.archive.org/web/20150408015202/http://www.ew.com/article/2013/05/24/guy-who-makes-languages-game-thrones-and-defiance |archive-date=2015-04-08 |url-status=live}}</ref><ref>{{cite web|url=https://www.dothraki.com/2012/10/dothraki-on-the-office/|title=Dothraki on The Office|website=Dothraki.com|date=5 October 2012|access-date=2017-01-09}}</ref>
+
+==Sample==
+{{interlinear|glossing3=yes|number=ex:
+|Nevakhi vekha ha maan: Rekke, m'aresakea norethi fitte.
+|ˈnevaxi ˈvexa ha maˈan ˈrekːe ˈmaɾesakea ˈnoɾeθi ˈfitːe
+|seat.GEN exist.3SG.PRES for 3SG.ALL there.ACC with.coward.ALL.PL hair.GEN short
+|There is a place for him: There, with the short-haired cowards.<ref name="Dothraki Presentation at WorldCon">{{cite web |url=https://dedalvs.com/dothraki/dothrakireno.pdf |title=Dothraki Presentation at WorldCon 2011|website=Dedalvs.com|access-date=2017-07-23 |date=August 21, 2011}}</ref>}}
+
+==External links==
+* [https://en.wiktionary.org/wiki/Appendix:Dothraki Dothraki] on [[wiktionary:Wiktionary:Main_Page|Wiktionary]]
+
+==References==
+{{Reflist|30em}}
+
+
+{{ASOIAF}}
+{{Constructed languages}}
+
+[[Category:2009 introductions]]
+[[Category:A Song of Ice and Fire]]
+[[Category:Constructed languages introduced in the 2000s]]
+[[Category:Constructed languages]]
+[[Category:Fictional languages]]
+[[Category:Subject–verb–object languages]]

@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 20,
+ "claims": [
+  {
+   "index": 798,
+   "feature": "steerability",
+   "claim": "janus argues the mode collapse he observed is irreducible to an effective decrease in temperature.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "is irreducible to an effective decrease in temperature",
+   "page": "Section on temperature / Attractors"
+  },
+  {
+   "index": 799,
+   "feature": "steerability",
+   "claim": "janus reports it is sometimes possible to avoid mode collapse using prompt engineering.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "possible to avoid mode collapse using prompt engineering",
+   "page": "Section on when mode collapse occurs"
+  },
+  {
+   "index": 800,
+   "feature": "counter-evidence",
+   "claim": "Borji concludes from kernel-density-estimate resampling experiments that the outcomes Shumailov et al. report are a statistical phenomenon and may be unavoidable.",
+   "source": "Ali Borji, 'A Note on Shumailov et al. (2024)', arXiv 2410.12954 v2",
+   "url": "https://arxiv.org/pdf/2410.12954",
+   "quote": "the outcomes reported are a statistical phenomenon and may be unavoidable",
+   "page": "Abstract"
+  },
+  {
+   "index": 801,
+   "feature": "register measured",
+   "claim": "Brooks, Eggert and Peskoff detect as many as 5% of 2,909 English Wikipedia articles created in August 2024 as containing significant AI-generated content.",
+   "source": "Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024",
+   "url": "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+   "quote": "we detect that as many as 5% of 2,909 English",
+   "page": "Figure 1 caption"
+  },
+  {
+   "index": 802,
+   "feature": "detection and its failures",
+   "claim": "Brooks, Eggert and Peskoff report that the Wikipedia articles their detectors flagged are typically of lower quality.",
+   "source": "Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024",
+   "url": "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+   "quote": "Flagged Wikipedia articles are typically",
+   "page": "Abstract"
+  },
+  {
+   "index": 803,
+   "feature": "detection and its failures",
+   "claim": "Shaib et al. state there is no standard method to measure lexical diversity in language-model output.",
+   "source": "Shaib, Govindarajan, Barrow, Sun, Siu, Wallace and Nenkova, arXiv 2403.00553",
+   "url": "https://arxiv.org/pdf/2403.00553",
+   "quote": "there is no standard method to measure",
+   "page": "Abstract"
+  },
+  {
+   "index": 804,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. found temperature only weakly correlated with novelty in a narrative generation task.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, 'Is Temperature the Creativity Parameter of Large Language Models?', ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "temperature is weakly correlated with novelty",
+   "page": "Abstract"
+  },
+  {
+   "index": 805,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. conclude that raising temperature does not enable access to a larger slice of the probability distribution.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "does not enable access to a larger slice of the probability",
+   "page": "Conclusion"
+  },
+  {
+   "index": 806,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. describe the influence of temperature on creativity as far more nuanced and weak than the creativity-parameter claim suggests.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "far more nuanced and weak",
+   "page": "Conclusion"
+  },
+  {
+   "index": 807,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "O'Mahony et al. find that supervised fine-tuning is largely responsible for the drop in next-token prediction diversity.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "We find that SFT is largely responsible for the drop",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 808,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "O'Mahony et al. find the reward-based fine-tuning step causes a dramatic decrease in output diversity not present in its SFT precursor.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "dramatic decrease in output diversity which is not present",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 809,
+   "feature": "register measured",
+   "claim": "O'Mahony et al. observed notably lower diversity for creative-type prompts than factual ones on both of their generation metrics.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "lower diversity for creative type prompts for both metrics",
+   "page": "Section 3.2 and Figure 1"
+  },
+  {
+   "index": 810,
+   "feature": "lexical tells",
+   "claim": "O'Mahony et al. give Llama-2-chat repeating the invented word Frumplenook each time as an example of mode collapse.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "Llama-2-chat repeats the term “Frumplenook” each time",
+   "page": "Section 1, Introduction, citing Appendix A.4"
+  },
+  {
+   "index": 811,
+   "feature": "homogenisation",
+   "claim": "O'Mahony et al. found industrially fine-tuned models to have very poor output diversity results.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "find industrially fine-tuned models to have very poor output diversity results",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 812,
+   "feature": "discourse-level tells",
+   "claim": "The Dramatica Co. asserts that stylistic tells are the easiest AI signals to train away, so removing them does not make the underlying story more human.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "But style tells are the easiest ones to train away.",
+   "page": "opening, after 'The em dash was never the interesting tell'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 798,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"mode collapse\" is irreducible to an effective decrease in temperature",
+   "note": "Raw page reached via Wayback raw capture 20260725093614id_ (live lesswrong.com returned HTTP 429 Vercel checkpoint). Byline and date confirmed on page: 'Mysteries of mode collapse by janus 8th Nov 2022 AI Alignment Forum'. Full sentence: 'Yet it was primarily text-davinci-002's behavior over multiple steps and across different prompts that convinced me that \"mode collapse\" is irreducible to an effective decrease in temperature or any simple modification of that hypothesis.' Quote verbatim; every limb supported. Only unverifiable token is the pronoun 'he' - the page never states janus's gender - which is a stylistic choice, not a factual limb."
+  },
+  {
+   "index": 799,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is sometimes possible to avoid mode collapse using prompt engineering",
+   "note": "Same Wayback raw capture. Page: 'Another observation is that it is sometimes possible to avoid mode collapse using prompt engineering (e.g. the Python interpreter prompt for random numbers, or few shot examples...)'. Quote verbatim, 'sometimes' present, all limbs supported."
+  },
+  {
+   "index": 800,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Our results indicate that the outcomes reported are a statistical phenomenon and may be unavoidable",
+   "note": "Raw PDF fetched from arxiv.org/pdf/2410.12954 and text-extracted. Stamp 'arXiv:2410.12954v2 [cs.LG] 24 Oct 2024', title 'A Note on Shumailov et al. (2024)', author Ali Borji, June 2024. Abstract: 'we investigate the effects of fitting a distribution (through Kernel Density Estimation, or KDE) or a model to the data, followed by repeated sampling from it... Our results indicate that the outcomes reported are a statistical phenomenon and may be unavoidable.' Quote verbatim; the KDE-resampling limb is explicit in the same abstract."
+  },
+  {
+   "index": 801,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we detect that as many as 5% of 2,909 English Wikipedia articles created in August 2024 contain significant AI-generated content",
+   "note": "Raw PDF from aclanthology.org/2024.wikinlp-1.12.pdf. Title 'The Rise of AI-Generated Content in Wikipedia', Brooks/Eggert/Peskoff, Princeton; proceedings header 'First Workshop on Advancing Natural Language Processing for Wikipedia, November 16, 2024, ACL'. Figure 1 caption carries the quote verbatim. Noted for context, not as a defect: the body text states the point estimate as 4.36% and the abstract says 'over 5%', but the claim reproduces the caption's own wording."
+  },
+  {
+   "index": 802,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Flagged Wikipedia articles are typically of lower quality",
+   "note": "Same raw PDF. Abstract, final sentence: 'Flagged Wikipedia articles are typically of lower quality and are often self-promotional or partial towards a specific viewpoint on controversial topics.' Quote verbatim; body Section 5 corroborates ('The quality of articles detected as AI-generated is generally lower on at least two axes')."
+  },
+  {
+   "index": 803,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "High lexical diversity is often desirable, but there is no standard method to measure this property",
+   "note": "Raw PDF from arxiv.org/pdf/2403.00553 (stamp 'arXiv:2403.00553v3 [cs.CL] 18 Feb 2026'), title 'Standardizing the Measurement of Text Diversity', authors Shaib, Govindarajan, Barrow, Sun, Siu, Wallace, Nenkova - matches the cited author list. Quote verbatim in the abstract; 'this property' resolves to lexical diversity, and the abstract's opening sentence ('The diversity across outputs generated by LLMs...') supports the 'in language-model output' limb."
+  },
+  {
+   "index": 804,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We find that temperature is weakly correlated with novelty",
+   "note": "Raw PDF from arxiv.org/pdf/2405.00492 (stamp 'arXiv:2405.00492v1 [cs.CL] 1 May 2024'). Abstract: 'we investigate this claim using a narrative generation task with a predetermined fixed context, model and prompt... We find that temperature is weakly correlated with novelty'. Quote verbatim; the narrative-generation-task limb is in the same abstract."
+  },
+  {
+   "index": 805,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "overall, does not enable access to a larger slice of the probability distribution",
+   "note": "Same raw PDF, closing findings list: 'When generating a limited number of samples, temperature increases the chance to generate more variety, but overall, does not enable access to a larger slice of the probability distribution.' Quote verbatim and it is the stated overall finding. Context worth carrying forward (not an unsupported limb): the same bullet allows that temperature does increase variety when only a limited number of samples is drawn."
+  },
+  {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the influence of temperature on creativity is far more nuanced and weak than the \"creativity parameter\" claim suggests",
+   "note": "Same raw PDF; the phrase occurs three times (abstract, introduction summary, conclusion), each time attached to 'the influence of temperature on creativity'. Quote verbatim; all limbs supported."
+  },
+  {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We find that SFT is largely responsible for the drop in next-token prediction diversity metrics",
+   "note": "Live openreview.net/pdf?id=3pDMYjpOxk returned HTTP 403 (Vercel security checkpoint); recovered as the raw PDF via Wayback capture 20260302103430id_ and text-extracted. Header confirms 'Published at the ICLR 2024 Workshop on Understanding of Foundation Models (ME-FoMo)', title 'Attributing Mode Collapse in the Fine-Tuning of Large Language Models', authors O'Mahony (EleutherAI/Limerick), Grinsztajn (EleutherAI/INRIA), Schoelkopf, Biderman. Quote verbatim, in the final paragraph of Section 1 Introduction; the sentence continues 'with reward-based fine-tuning having only a small additional effect.'"
+  },
+  {
+   "index": 808,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the reward-based fine-tuning step causes a dramatic decrease in output diversity which is not present in its SFT precursor version",
+   "note": "Same Wayback raw PDF, Section 1 Introduction, sentence immediately after the SFT finding. Quote verbatim; every limb supported."
+  },
+  {
+   "index": 809,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a notably lower diversity for creative type prompts for both metrics",
+   "note": "Same Wayback raw PDF, Section 3.2 Model Generation Diversity: 'Observing the curves for self-BLEU for both factual and creative prompts, we see that the DPO models show considerably more \"mode collapse\" at the output generation level than at the token level as in section 3.1, with a notably lower diversity for creative type prompts for both metrics.' Quote verbatim. The 'than factual ones' comparison is carried by the sentence's own factual-vs-creative framing and by Figure 1 (factual left, creative right), plus the conclusion 'we observe a much larger drop in diversity for creative type tasks'; the two metrics are the generation-level self-BLEU and cosine similarity."
+  },
+  {
+   "index": 810,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models are asked to invent a new word, and Llama-2-chat repeats the term “Frumplenook” each time",
+   "note": "Same Wayback raw PDF, Section 1 Introduction: 'we build on janus (2022), who find evidence of \"mode collapse\", defined as an excessive and harmful reduction in output diversity... An example of this is shown in the appendix A.4, where models are asked to invent a new word, and Llama-2-chat repeats the term “Frumplenook” each time.' Quote verbatim (curly quotes as given); 'an example of this' refers to mode collapse, and the Appendix A.4 pointer matches the cited page."
+  },
+  {
+   "index": 811,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we find industrially fine-tuned models to have very poor output diversity results",
+   "note": "Same Wayback raw PDF, Section 1 Introduction. Quote verbatim; corroborated in the discussion ('the industrially fine-tuned Llama-2-chat exhibits a far lower level of diversity across all output level metrics than any of the fine-tuned versions')."
+  },
+  {
+   "index": 812,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But style tells are the easiest ones to train away.",
+   "note": "Live page fetched raw with a browser user agent and stripped to text. Byline 'The Dramatica Co. May 29, 2026'. Opening runs: 'The em dash was never the interesting tell... But style tells are the easiest ones to train away. A model can be prompted out of a favorite word... A rewrite pass can roughen the surface until the sentence looks less machine-made. That does not mean the story underneath has become more human.' Quote verbatim including the sentence-final period, and both limbs - easiest to train away, and removal does not humanise the underlying story - are on the page. Cited page location ('opening, after “The em dash was never the interesting tell”') is exact."
+  }
+ ]
+}

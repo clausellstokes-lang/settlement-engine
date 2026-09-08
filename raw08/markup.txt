@@ -1,0 +1,166 @@
+ 
+ AI Detection Tools Falsely Accuse International Students of Cheating – The Markup 
+ Investigations and Tools 
+ Amazon’s Advantage 
+ Organ Failure 
+ Blacklight 
+ Pixel Hunt 
+ Citizen Browser 
+ Privacy 
+ Languages of Misinformation 
+ Still Loading 
+ Machine Learning 
+ Working for an Algorithm 
+ Search term 
+ About Us 
+ Donate 
+ Awards 
+ Have a Tip? 
+ Team 
+ Show Your Work 
+ Jobs 
+ Newsletters 
+ Events 
+ GitHub 
+ Bluesky 
+ RSS Feed 
+ Facebook 
+ Instagram 
+ X 
+ Mastodon 
+ Skip navigation 
+ Menu
+ The Markup 
+ Donate
+ About Us 
+ Donate 
+ Challenging technology to serve the public good. 
+ AI Detection Tools Falsely Accuse International Students of Cheating 
+ By Tara García Mathewson 
+ August 14, 2023 8:00 a.m. UTC 
+ Viewable online at https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating 
+ Machine Learning AI Detection Tools Falsely Accuse International Students of Cheating 
+ Stanford study found AI detectors are biased against non-native English speakers
+ By 
+ Tara García Mathewson 
+ August 14, 2023 8:00 a.m. UTC 
+ A student on the campus of University of California Los Angeles. 
+ Irfan Khan / Los Angeles Times via Getty Images 
+ Share This Article 
+ Copy Link
+ Republish
+ Taylor Hahn, who teaches at Johns Hopkins University, got an alert while grading a student paper this past spring for a communications course. He had uploaded the assignment to Turnitin, software used by over 16,000 academic institutions across the globe to spot plagiarized text and, since April, to flag AI-generated writing. 
+ Turnitin labeled more than 90 percent of the student’s paper as AI-generated. Hahn set up a Zoom meeting with the student and explained the finding, asking to see notes and other materials used to write the paper. 
+ The Breakdown Machine Learning 
+ How to Buy Ed Tech That Isn’t Evil
+ Four critical questions parents and educators should be asking July 27, 2023 8:00 a.m. UTC 
+ “This student, immediately, without prior notice that this was an AI concern, they showed me drafts, PDFs with highlighter over them,” Hahn said. He was convinced Turnitin’s tool had made a mistake. 
+ In another case, Hahn worked directly with a student on an outline and drafts of a paper, only to have the majority of the submitted paper flagged by Turnitin as AI-generated. 
+ Over the course of the spring semester, Hahn noticed a pattern of these false positives. Turnitin’s tool was much more likely to flag international students’ writing as AI-generated. As Hahn started to see this trend, a group of Stanford computer scientists designed an experiment to better understand the reliability of AI detectors on writing by non-native English speakers. They published a paper last month, finding a clear bias . While they didn’t run their experiment with Turnitin, they found that seven other AI detectors flagged writing by non-native speakers as AI-generated 61 percent of the time. On about 20 percent of papers, that incorrect assessment was unanimous. Meanwhile, the detectors almost never made such mistakes when assessing the writing of native English speakers. 
+ ↩︎ link 
+ AI detectors tend to be programmed to flag writing as AI-generated when the word choice is predictable and the sentences are more simple. As it turns out, writing by non-native English speakers often fits this pattern, and therein lies the problem. 
+ People typically have bigger vocabularies and a better grasp of complex grammar in their first languages. This means non-native English speakers tend to write more simply in English. So does ChatGPT. In fact, it mimics human writing by parsing everything it has ever processed and crafting sentences using the most common words and phrases. Even if AI detectors aren’t specifically trained to flag less complex writing, the tools learn to do so by seeing over and over that AI-generated writing is less complex. 
+ Weixin Liang, one of the authors of the Stanford study, learned Cantonese and Mandarin before English. He was skeptical about claims of near-perfect accuracy with AI detectors and wanted to look more closely at how they worked for students with linguistic backgrounds like his. 
+ The design of many GPT detectors inherently discriminates against non-native authors, particularly those exhibiting restricted linguistic diversity and word choice. Weixin Liang, co-author of Stanford study on AI misclassification 
+ “The design of many GPT detectors inherently discriminates against non-native authors, particularly those exhibiting restricted linguistic diversity and word choice,” Liang said via email. 
+ After ChatGPT debuted in November of last year, many of the nation’s nearly 950,000 international students across the country, like their peers, considered the implications. Educators were panicking about the prospect of students using generative AI to complete assignments. And international students, allowed to study here with education-specific visas, quickly realized their vulnerability in the arms race that sprang up between AI generators and detectors. 
+ Hai Long Do, a rising junior at Miami University in Oxford, Ohio, said it’s scary to think that the hours he spends researching, drafting, and revising his papers could be called into question because of unreliable AI detectors. To him, a native of Vietnam, biased detectors represent a threat to his grades, and therefore his merit scholarship. 
+ “Much worse,” Do said, “is that an AI flag can affect my reputation overall.” 
+ Some international students see additional risks. Colleges and universities routinely advise their international students that charges of academic misconduct can lead to a suspension or expulsion that would undermine their visa status. The threat of deportation can feel like a legitimate fear. 
+ Shyam Sharma is an associate professor at Stony Brook University writing a book about the United States’ approach to educating international students. He says universities routinely fail to support this subgroup on their campuses, and professors often don’t understand their unique circumstances. Sharma sees the continued use of faulty AI detectors as an example of how institutions disregard the nation’s international students. 
+ “Because the victim, right here, is less important,” Sharma said. “The victim here is less worthy of a second thought, or questioning the tool.” 
+ There have been educators, however, who have questioned the tool, discovering, like Hahn, the fallibility of AI detectors and noting the serious consequences of unfounded accusations . As campuses reopen for the fall semester, faculty must consider whether the latest research makes a clearer case for scrapping AI detectors altogether. 
+ In Liang’s paper, his team pointed out that false accusations of cheating can be detrimental to a student’s academic career and psychological well-being. The accusations force students to prove their own innocence. 
+ “Given the potential for mistrust and anxiety provoked by the deployment of GPT detectors, it raises questions about whether the negative impact on the learning environment outweighs the perceived benefits,” they wrote. 
+ If it’s the AI picking up on our language patterns and automatically deciding, I don’t know how I can prevent that. Heewon Yang, NYU senior from South Korea 
+ Diane Larryeu, a native of France, is studying at Cardozo School of Law this year in New York City. Last year, in a common law master’s program near Paris, her friend’s English essay was flagged as being AI-generated, she said. When asked if she was concerned the same might happen to her because, like her friend, English is her second language, her answer was direct: “Of course.” All she can do is hope it can be resolved quickly. “I would just explain to my teacher and hope they understand,” Larryeu said. 
+ OpenAI shut down its AI detector at the end of July because of low accuracy, and Quill.org and CommonLit did the same with their AI Writing Check, saying generative AI tools are too sophisticated for detection. Turnitin, however, has only doubled down on its claims of high accuracy. 
+ Annie Chechitelli, chief product officer for Turnitin, said the company’s tool was trained on writing by English speakers in the U.S. and abroad as well as multilingual students, so shouldn’t have the bias Liang’s paper identified. The company is conducting its own research into whether the tool is less accurate when assessing the writing of non-native English speakers. While that research hasn’t been published yet, Chechitelli said so far it looks like the answer is no. 
+ Credit: YouTube 
+ Caption: 
+ David Adamson, an AI scientist at Turnitin, shows Turnitin’s AI writing-detection capabilities in a video demonstration. Twenty-four out of 24 sentences from this sample essay are flagged to come from ChatGPT. 
+ Still, she admitted the tool ends up learning that more complex writing is more likely to be human, given the patterns across training essays. 
+ Heewon Yang, a rising senior at New York University and a native of South Korea, is frustrated by AI detectors and her vulnerability to them. “If it’s the AI picking up on our language patterns and automatically deciding, I don’t know how I can prevent that,” she said. 
+ That’s why Liang said he is skeptical Turnitin’s detector can avoid the biases his team identified in their paper. 
+ “While Turnitin’s approach seems well-intentioned,” he said by email, “it’s vital to see the results of their ongoing tests and any third-party evaluations to form a comprehensive understanding of their tool’s performance in real-world scenarios.” 
+ Report Deeply and Fix Things 
+ Because it turns out moving fast and breaking things broke some super important things. 
+ Give Now
+ In June, Turnitin updated its software to allow institutions to disable the AI writing indicator , so even though the software will continue to assess the writing for AI, its conclusion won’t be displayed for instructors. As of the end of July, only two percent of Turnitin customer institutions had taken advantage of that option, according to the company. 
+ The University of Pittsburgh was one. In a note to faculty at the end of June, the university’s teaching center said it didn’t support the use of any AI detectors, citing the fact that false positives “carry the risk of loss of student trust, confidence and motivation, bad publicity, and potential legal sanctions.” 
+ While the experience of international students wasn’t at the center of their decision-making, John Radziłowicz, interim director of teaching support at the University of Pittsburgh, said his team tested a handful of available AI detectors and decided false positives were too common to justify their use. He knows faculty are overwhelmed with the idea of students using AI to cheat, but said he has been encouraging them to focus on the potential benefits of AI instead. 
+ “We think that the focus on cheating and plagiarism is a little exaggerated and hyperbolic,” Radziłowicz said. In his view, using AI detectors as a countermeasure creates too much potential to do harm. 
+ ↩︎ link 
+ Have you been falsely accused of cheating? 
+ If an AI detector has mistakenly identified your writing as AI-generated, we want to hear about it. Email tara@themarkup.org . 
+ Read more
+ Your donations power our award-winning reporting and our tools. Together we can do more. Give now. 
+ Donate Now
+ You just read 
+ AI Detection Tools Falsely Accuse International Students of Cheating From the series —
+ Machine Learning 
+ Share This Article 
+ Copy Link
+ Republish
+ Credits 
+ Tara García Mathewson 
+ Investigative Reporter 
+ Design and Graphics 
+ Joel Eastwood 
+ Gabriel Hongsdusit 
+ Video Captioning 
+ Maria Puertas 
+ Dan Phiffer 
+ Engagement 
+ Maria Puertas 
+ Copy Editing and Production 
+ Sabrina Toppa 
+ Editing 
+ Ryan Tate 
+ Sisi Wei 
+ Close
+ Republish 
+ AI Detection Tools Falsely Accuse International Students of Cheating
+ We’re happy to make this story available to republish for free under the conditions of an Attribution–NonCommercial–No Derivatives Creative Commons license. Please adhere to the following: 
+ Notify us: Please email us at republish@themarkup.org to let us know if you’ve republished the story. 
+ Give prominent credit to The Markup and its journalists : Credit our authors at the top of the article and any other byline areas of your publication. 
+ Do not edit the article: The complete, unaltered article text must be published. If you wish to translate the article, please contact us for approval. 
+ Access to the article must remain free: Do not sell access to this article or place it behind a paywall, but you can republish our articles on sites with ads. 
+ Images may not be available for republication: Not all of the imagery used in articles published on our site are licensed under Creative Commons. Some images are from commercial providers who do not allow their images to be republished without permission or payment. If you wish to use any image from our articles, email us at republish@themarkup.org for guidance. 
+ Use the provided HTML to republish this article on your site: Simply copy the HTML that we have provided and publish it as is on your website. The provided HTML snippet includes all text formatting and hyperlinks, the author byline, and credit to The Markup. If the HTML code for The Markup credit image is incompatible with your CMS, let us know if you remove it. 
+ Some placeholder text 
+ Copy HTML
+ The Latest 
+ News 
+ Defense tech has unleashed a new weapons boom in Southern California
+ An analysis of defense contracts charts the rise of defense spending — often in heavily Democratic districts September 2, 2026 8:00 a.m. UTC 
+ Privacy 
+ Brazil gives parents social media controls for their kids. Should the US?
+ California is leading on kids’ data privacy in the U.S. but still lags internationally. July 28, 2026 8:00 a.m. UTC 
+ Artificial Intelligence 
+ Kaiser Permanente nurses say technology is making their jobs — and patient care — worse
+ Call center nurses at the health giant said workplace surveillance tools and AI prioritize speed and cost savings over quality and safety. July 9, 2026 8:00 a.m. UTC 
+ Return to The Markup's homepage 
+ Your contributions help us investigate how technology influences our society.
+ Donate
+ About Us 
+ Our Donors 
+ Ethics Policy 
+ Events 
+ Governance 
+ Jobs 
+ Team 
+ Have a Tip? 
+ Newsletters 
+ A Letter from the President 
+ Awards 
+ Privacy Policy 
+ Terms of Use 
+ GitHub 
+ Bluesky 
+ RSS Feed 
+ Facebook 
+ Instagram 
+ X 
+ Mastodon 
+ 

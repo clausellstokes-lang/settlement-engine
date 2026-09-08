@@ -1,0 +1,59 @@
+L-PROBE dark-arm battery
+  tree    /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT
+  outdir  /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark
+  HEAD    b0cbc67a15baf0997028ab501c7ee09565f93980
+  dirty   0 entr(ies)
+  mode    LIVE CHEAP
+
+── step eager_stop: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/eager-probe.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/stop-eager.json
+eager-probe  VERDICT: LAZY — clear
+  source closure = 235 modules; catalog present = false
+  dist arm: INFORMATIONAL ONLY. No string sentinel identifies the preset...
+TRUE_EXIT_eager_stop=0
+── step c_presence: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/presence-dump.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/c-presence-dump.json
+presence-dump: driving buildObservedCorpus() — 4 seeds x 4 configs + 12 pulse intervals.
+presence-dump: corpus built in 10s
+presence-dump OK  parents=8560 shapes=1299 atOrAbove(MIN_ROWS=40)=337 below=962 digest=c40438c06958 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/c-presence-dump.json
+TRUE_EXIT_c_presence=0
+── step d_census: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/census-probe.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/d-lighting-census.json
+census-probe OK  {"files":2543,"parked":373,"credited":2170,"titles":23653,"suiteTitles":6333}
+  verdict: LIVE == FROZEN (no refreeze owed at this tree)
+TRUE_EXIT_d_census=0
+── step e_rosters: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/rosters.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/e-stability-rosters.json
+  WAR_DEPTH_FLAGS          8
+  ENGINE_WAVE_FLAGS        9
+  ONE_REGEN_FLAGS          9
+  LEGACY_PRESET_IDS        3
+  CL0_PRESET_IDS           4
+  WORLD_ALIVE_PRESET_IDS   3
+  WAVE_DARK_PRESET_IDS     4
+  WAR_DEPTH_FLAGS          litSomewhere=8/8 darkEverywhere=0
+  ENGINE_WAVE_FLAGS        litSomewhere=9/9 darkEverywhere=0
+  ONE_REGEN_FLAGS          litSomewhere=9/9 darkEverywhere=0
+rosters OK  presets=7 digest=324c877763cb -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/e-stability-rosters.json
+TRUE_EXIT_e_rosters=0
+── step f_birth: node --import /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/env-shim.mjs /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/birth-fixtures.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/f-birth-fixtures.json
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+  quiet_local            lit=  9 dark= 16 keys=37 roundTrip=yes hash=ab4d30ce2cd9
+  realistic_regional     lit= 12 dark= 13 keys=37 roundTrip=yes hash=46919e4d4c53
+  dramatic_campaign      lit= 35 dark=  9 keys=56 roundTrip=yes hash=75cfeb96d587
+  static_campaign        lit=  1 dark= 24 keys=36 roundTrip=yes hash=2a81857ca062
+  narrative_campaign     lit= 11 dark= 14 keys=37 roundTrip=yes hash=b1cff1c935db
+  living_realm           lit= 31 dark= 12 keys=55 roundTrip=yes hash=b97fc24dcf25
+  full_simulation        lit= 45 dark= 12 keys=70 roundTrip=yes hash=32728f513ff3
+birth-fixtures OK  presets=7 refusals=0 digest=9a96fababf75 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/f-birth-fixtures.json
+TRUE_EXIT_f_birth=0
+── step g_pulse: node --import /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/env-shim.mjs /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe/pulse-hashes.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/g-pulse-hashes.json --settlements 4
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+  quiet_local            ticks=52 epoch=dark weeks=52 663ms hash=769a2d97545f
+  realistic_regional     ticks=52 epoch=dark weeks=52 697ms hash=9fc2188ffca6
+  dramatic_campaign      ticks=52 epoch=dark weeks=52 1315ms hash=1d5f4308fd49
+  static_campaign        ticks=52 epoch=dark weeks=52 226ms hash=baa456727a52
+  narrative_campaign     ticks=52 epoch=dark weeks=52 340ms hash=cff5f7176185
+  living_realm           ticks=52 epoch=dark weeks=52 936ms hash=c26f8743b436
+  full_simulation        ticks=52 epoch=dark weeks=52 1839ms hash=8dc87fa4fdc6
+pulse-hashes OK  presets=7 distinct=7 / 7 refusals=0 digest=63caf4d935e3 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/901-lightdark/g-pulse-hashes.json
+TRUE_EXIT_g_pulse=0
+
+── --cheap: (a), (b) and (h) were NOT run. They are the vitest, soak and build arms. ──
+TRUE_EXIT=0

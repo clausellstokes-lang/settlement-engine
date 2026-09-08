@@ -1,0 +1,36 @@
+Boxed Text and Monsters — M.T. Black Games
+
+ 0
+
+ Boxed Text and Monsters
+
+ Mar 3
+
+ Written By Craig Schwarze
+
+ Many Dungeons & Dragons adventure creators have strong opinions about boxed text, and I am no exception. Refresher: boxed text is that part of an encounter you read aloud verbatim. A border usually surrounds it, hence the name. We might contrast this with explanatory text, which the DM should not read aloud. 
+One of my strong opinions is that boxed text should never mention any monsters. Outrageous, I know! To see why, let's consider this encounter from one of my favourite adventures, B4 The Lost City: 
+
+ That's a fun little encounter! You can see how this will play out. The party bursts into the room; the lizard looks up, sees them, and then attacks. What's the problem? 
+Ok, what about this. The party doesn't burst into the room; instead, the super stealthy thief sneaks in. See the problem? The boxed text insists that the lizard looks up anyway, no matter how quietly our thief has moved. You might decide the lizard always notices someone entering. But what happens if we use the arcane eye spell or the equivalent to scout the room? 
+You might argue the problem is that the boxed text here assumes the monster reacts to the party in a certain way. Ok, let's run with that. What happens if we change the boxed text so that it makes no such assumptions. For example:
+
+From behind the bed come scuffling sounds, and you see a lizard munching on the body of a humanoid.
+
+ Problem solved? No. Giving the lizard an action to do is an excellent idea--one of the best ways to lend depth to an encounter is to provide the monster something to do when it is discovered. However, baking the action into the boxed text is a problem. Say we look in on the lizard using the arcane eye spell, and we see it munching away on the humanoid and decide to leave it. The party decides to come back a day or a week later and looks in on the room again. Once more, you read out the boxed text, and our lizard is still munching away! Nonsense.
+You may argue that the DM can paraphrase the boxed text on the fly in those situations. But this defeats the purpose of having boxed text in the first place. My alternate suggestion is that we just don't put monsters in the boxed text at all. Put them in the explanatory text below the boxed text, along with other dynamic elements in the encounter.
+Some will say that this is a good reason not to have boxed text at all. I understand the argument, and it is persuasive. However, throughout writing many adventures, I've found that DMs far prefer to have a bit of boxed text in an encounter, even if it is brief. In fact, brevity is an asset. But I'll speak more about that another time. 
+
+ Craig Schwarze
+
+ Previous
+
+ Previous
+
+ Killing Balor: Nostalgic thoughts on Quadratic Wizards and Encounter Balance
+
+ Next
+
+ Next
+
+ When Less is More

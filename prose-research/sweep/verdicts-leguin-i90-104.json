@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 3,
+ "claims": [
+  {
+   "index": 90,
+   "feature": "mother tongue expects an answer",
+   "claim": "The mother tongue is conversation, language as relation whose power is in binding not dividing.",
+   "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+   "url": "https://serendipstudio.org/sci_cult/leguin/",
+   "quote": "Expects an answer. It is conversation",
+   "page": ""
+  },
+  {
+   "index": 91,
+   "feature": "verge of silence and song",
+   "claim": "The mother tongue is always on the verge of silence and often on the verge of song.",
+   "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+   "url": "https://serendipstudio.org/sci_cult/leguin/",
+   "quote": "on the verge of silence and often on the verge of song",
+   "page": ""
+  },
+  {
+   "index": 92,
+   "feature": "native tongue as wedding",
+   "claim": "The third, native tongue of art welds the public father tongue and private mother tongue back together.",
+   "source": "Le Guin, Bryn Mawr Commencement Address (1986), text at Serendip",
+   "url": "https://serendipstudio.org/sci_cult/leguin/",
+   "quote": "wedding and welding back together",
+   "page": ""
+  },
+  {
+   "index": 93,
+   "feature": "structuralist view of language",
+   "claim": "Newell's MA thesis argues that the structuralist view of language revealed in the Earthsea Cycle underlies its depiction of power and balance.",
+   "source": "Daniel Newell, 'The Mother Tongue in a World of Sons: Language and Power in The Earthsea Cycle' (MA thesis, Liberty University 2010) — abstract",
+   "url": "https://digitalcommons.liberty.edu/masters/133/",
+   "quote": "The structuralist view of language",
+   "page": ""
+  },
+  {
+   "index": 94,
+   "feature": "speech-act power of wizards (title-level)",
+   "claim": "A peer-reviewed article frames Earthsea's wizards' language as 'doing things with words' — speech-act power crossed with gender.",
+   "source": "Crossref record: Comoletti & Drout, 'How They Do Things with Words…', Children's Literature 29 (2001): 113–141, DOI 10.1353/chl.0.0786",
+   "url": "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 95,
+   "feature": "rhythm as narrative technique (title-level)",
+   "claim": "A 1992 Extrapolation article treats rhythm as a narrative technique operating 'beyond words' in The Left Hand of Darkness.",
+   "source": "Crossref record: Nora Barry & Mary Prescott, 'Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness', Extrapolation 33.2 (1992): 154–165, DOI 10.3828/extr.1992.33.2.154",
+   "url": "https://api.crossref.org/works?query.bibliographic=Beyond+Words+Impact+of+Rhythm+as+Narrative+Technique+Left+Hand+of+Darkness+Extrapolation+1992&rows=3",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 96,
+   "feature": "scholarly focus: voice and rhythm, not lexis",
+   "claim": "Weyant's secondary bibliography shows the style-adjacent scholarship clusters on narrative voice and structure (Adams 1991; Jose 1991; Castleman 2020), rhythm (Barry & Prescott 1992), and the 'language of realism' in terrain (Pegg 1995) — no stylometric or corpus study is listed.",
+   "source": "Curtis Weyant, The Left Hand of Darkness: Secondary Bibliography",
+   "url": "https://curtisweyant.com/scholarship/le-guin/secondary-bibliography-the-left-hand-of-darkness/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 97,
+   "feature": "retold-legend voice",
+   "claim": "David Mitchell (quoted on the official site) says the book reads like the retelling of a tale first told centuries ago.",
+   "source": "ursulakleguin.com, The Books of Earthsea page (quoting Mitchell)",
+   "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+   "quote": "reads like the retelling of a tale first told centuries ago",
+   "page": ""
+  },
+  {
+   "index": 98,
+   "feature": "grammar vocabulary as craft tool",
+   "claim": "Steering the Craft insists the writer needs grammatical terms to say what is wrong or right in a sentence, likening the untooled writer to a carpenter who cannot tell a hammer from a screwdriver.",
+   "source": "ursulakleguin.com, Steering the Craft page",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "quote": "like a carpenter who doesn't know a hammer from a screwdriver",
+   "page": ""
+  },
+  {
+   "index": 99,
+   "feature": "re-vision without retraction",
+   "claim": "The second trilogy 'sees exactly the same world with different eyes', expanding rather than retracting the earlier books.",
+   "source": "Sharada Bhanu, 'Tehanu: A Return to the Source' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/return-to-source",
+   "quote": "sees exactly the same world with different eyes",
+   "page": ""
+  },
+  {
+   "index": 100,
+   "feature": "plainness and economy",
+   "claim": "Le Guin asserts that plain language is the noblest of all narrative languages.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973; repr. The Language of the Night 1979)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "A plain language is the noblest of all.",
+   "page": "p.8, on epic plainness"
+  },
+  {
+   "index": 101,
+   "feature": "plainness and economy",
+   "claim": "Le Guin asserts that plain language is also the most difficult to write.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It is also the most difficult.",
+   "page": "p.8, immediately after the plain-language claim"
+  },
+  {
+   "index": 102,
+   "feature": "plainness and economy",
+   "claim": "Le Guin calls clarity and simplicity permanent virtues in a narrative.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Clarity and simplicity are permanent virtues in a narrative.",
+   "page": "p.8, on epics and sagas"
+  },
+  {
+   "index": 103,
+   "feature": "plainness and economy",
+   "claim": "Le Guin distinguishes a fake plainness, which she calls flat rather than simple, from real plainness.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It is not really simple, but flat.",
+   "page": "p.8, on the 'Poughkeepsie style'"
+  },
+  {
+   "index": 104,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "everything is direct, concrete, and simple",
+   "page": "p.8, on Tolkien's plain English"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 90,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The mother tongue, spoken or written, expects an answer. It is conversation",
+   "note": "Serendip raw HTML fetched (200, 42.5 KB) and stripped to text. Page: \"The mother tongue, spoken or written, expects an answer. It is conversation, a word the root of which means 'turning together.' The mother tongue is language not as mere communication but as relation, relationship... Its power is not in dividing but in binding, not in distancing but in uniting.\" Every limb (conversation; language as relation; power in binding not dividing) is on the page. Only difference from the supplied quote is the capital E on 'Expects', a fragment artifact."
+  },
+  {
+   "index": 91,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a language always on the verge of silence and often on the verge of song",
+   "note": "Same Serendip page, one fetch. The sentence continues '...It is the language spoken by all children and most women, and so I call it the mother tongue', so the mother-tongue referent in the claim is explicit on the page. Quote appears word for word."
+  },
+  {
+   "index": 92,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is a wedding and welding back together of the alienated consciousness... father tongue... mother tongue",
+   "note": "Same Serendip page. 'wedding and welding back together' is verbatim. The other limbs are all on the page: 'The third language, my native tongue'; the unlearned language is 'any use of language when it is spoken, written, read, heard as art'; and 'the marriage of the public discourse and the private experience' supports the public-father / private-mother framing."
+  },
+  {
+   "index": 93,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The structuralist view of language revealed in Le Guin's Earthsea Cycle informs her depiction of power and balance",
+   "note": "digitalcommons.liberty.edu/masters/133/ fetched live (200, 35 KB); abstract present in the raw HTML. Page metadata confirms Daniel Newell, Master of Arts (MA), Masters Theses 133, 5-2010, Liberty University, keyword 'Structuralism'. Claim's 'underlies' = page's 'informs... and is central to understanding'; the supplied fragment is verbatim."
+  },
+  {
+   "index": 94,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "How They Do Things with Words: Language, Power, Gender, and the Priestly Wizards",
+   "note": "Crossref API queried live (200); top hit score 77.3 is the exact record: Laura B. Comoletti & Michael D. C. Drout, Children's Literature 29(1): 113-141, DOI 10.1353/chl.0.0786, issued 2001, type journal-article, publisher Project MUSE. Graded SUBSTANCE not VERBATIM because the claim's inline phrase 'doing things with words' is a paraphrase of the title's 'How They Do Things with Words', and the claim carries no quote field. 'Speech-act power crossed with gender' is a fair reading of 'Language, Power, Gender'; 'peer-reviewed' is not a Crossref field but is supported in substance by the journal-article record in a scholarly journal."
+  },
+  {
+   "index": 95,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness",
+   "note": "Crossref API queried live (200); top hit is the exact record: Nora Barry & Mary Prescott, Extrapolation 33(2): 154-165, DOI 10.3828/extr.1992.33.2.154, issued 1992-07, type journal-article. Every limb of the claim (1992, Extrapolation, rhythm as narrative technique, 'beyond words', Left Hand of Darkness) is verbatim in the record title/metadata."
+  },
+  {
+   "index": 96,
+   "verdict": "PARTIAL",
+   "trueWording": "Bary, Nora. 'Beyond Words: The Impact of Rhythm as Narrative Technique...' Extrapolation 33 (1992): 154-65",
+   "unsupportedLimb": "'(Barry & Prescott 1992)' as what Weyant's bibliography shows - the page lists that rhythm article under 'Bary, Nora' alone: the surname is misspelled and co-author Mary Prescott is not named there (Crossref, checked at index 95, confirms Barry & Prescott is the true attribution, but this page does not show it)",
+   "note": "curtisweyant.com fetched live (200, 253 KB HTML -> 30 KB text; list runs A-W in both the scholarly and the blog sections, so it is complete, not lazy-loaded). Confirmed on the page: Adams, Rebecca, 'Narrative Voice and Unimaginability of the Utopian Feminine...', Utopian Studies 2.1-2 (1991): 35-47; Jose, Jim, 'Reflections on the Politics of Le Guin's Narrative Shifts', SFS 18.2 (1991): 180-97; Castleman, Samantha, 'Narrative Organization as Cultural Training in the Left Hand of Darkness', Femspec 19.2 (2020): 10-24; Pegg, Barry, 'Down to Earth: Terrain, Territory, and the Language of Realism...', Michigan Academician 27 (1995): 481-92 ('Language of Realism' verbatim). The negative limb also holds: case-insensitive search of the whole page returns 0 hits for 'styl' (so no style/stylistic/stylometry), 0 for 'corpus', 0 for 'quantitative', 0 for 'diction', 0 for 'prose'."
+  },
+  {
+   "index": 97,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "reads like the retelling of a tale first told centuries ago (David Mitchell)",
+   "note": "ursulakleguin.com/the-books-of-earthsea fetched live (200, 161 KB). Quote is word for word with the Mitchell attribution in parentheses. Referent note, not a demotion: on the page the phrase describes 'the timeless and beloved A Wizard of Earthsea' at its 50th anniversary, not the omnibus The Books of Earthsea on whose page it sits; the claim's unspecific 'the book' does not assert otherwise."
+  },
+  {
+   "index": 98,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver",
+   "note": "ursulakleguin.com/steering-the-craft fetched live (200, 114 KB). The 'From the Introduction' block carries both limbs: 'You can't say what's wrong or right in a sentence without the words to describe it. A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver.' preceded by 'the technical language of speech and writing, the vocabulary of grammar... these are the names of the writer's tools.' Supplied quote is verbatim."
+  },
+  {
+   "index": 99,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It sees exactly the same world with different eyes",
+   "note": "ursulakleguin.com/return-to-source fetched live (200, 121 KB). Page: 'Le Guin may have a point when she claims \"The second trilogy changes nothing in the first. It sees exactly the same world with different eyes. Almost, I would say, with two eyes, rather than one.\"' followed by 'she expands and re-visions rather than invalidates, retracts or revokes her earlier writing' - which supports the expanding-not-retracting limb. Attribution nuance, not a demotion: the sentence is Le Guin's own, quoted by Sharada Bhanu on that page; the claim cites the Bhanu page as its source, which is where it appears."
+  },
+  {
+   "index": 100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A plain language is the noblest of all.",
+   "note": "PDF fetched live from digginganddeepening.com (200, 346,717 bytes, application/pdf, 8 pages) and text-extracted with pdfminer; the sentence is on PDF page 8, matching the claim's page field. Quote verbatim. The claim's narrowing to 'narrative languages' is weaker than the page, which says it flatly, and the surrounding sentences are about narrative ('Clarity and simplicity are permanent virtues in a narrative', epics and sagas), so the limb holds."
+  },
+  {
+   "index": 101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is also the most difficult.",
+   "note": "Same PDF, page 8, immediately after 'A plain language is the noblest of all.' - exactly as the claim's page field states. Quote verbatim; 'to write' is the plain referent of the passage on writing plain language."
+  },
+  {
+   "index": 102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Clarity and simplicity are permanent virtues in a narrative.",
+   "note": "Same PDF, page 8, in the paragraph on epics and sagas (Homer, The Song of Roland, the Mabinogion, the Norse sagas) - matching the claim's page field. Quote verbatim, whole sentence."
+  },
+  {
+   "index": 103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a fake plainness. It is not really simple, but flat.",
+   "note": "Same PDF, page 8, on 'the Poughkeepsie style of fantasy... also written in a plain and apparently direct prose. Does that make it equal to Tolkien's? Alas, no. It is a fake plainness. It is not really simple, but flat.' Both limbs (a fake plainness; flat rather than simple) verbatim."
+  },
+  {
+   "index": 104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple",
+   "note": "Same PDF, page 8. Supplied quote verbatim. 'Unstriking' = 'is not striking'. Minor gloss, not a demotion: the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep rather than strictly on items 'in' the vocabulary."
+  }
+ ]
+}

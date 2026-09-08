@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i478-492",
+ "lines": 60,
+ "firstTs": "2026-09-06T11:44:22.925Z",
+ "lastTs": "2026-09-06T11:47:07.404Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 15
+ },
+ "urlsFetched": [
+  "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20",
+  "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+  "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+  "https://www.google.com/",
+  "http://timetravel.mementoweb.org/timemap/link/https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+  "http://web.archive.org/cdx/search/cdx?url=link.springer.com/chapter/10.1007/978-3-030-69299-5_1*&output=text&limit=20&fl=timestamp,original,statuscode",
+  "http://web.archive.org/cdx/search/cdx?url=doi.org/10.1007/978-3-030-69299-5_1&limit=10&fl=timestamp,original,statuscode",
+  "https://api.crossref.org/works/10.1007/978-3-030-69299-5_1"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_800c45f6-c4d",
+ "agent": "ad6b4cc2714496e69",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_800c45f6-c4d/agent-ad6b4cc2714496e69.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i478-492.json",
+  "exists": true
+ }
+}

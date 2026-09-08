@@ -1,0 +1,24 @@
+PREDICTED: totalFiles 2489 -> 2489 (the five cars add no test file), entries 3 -> 3 (the known-failure census: the voice per-file row, enforcement-claims, the golden master — the proof at 6ff3249b9 named exactly those 
+TRUE_EXIT=0
+MEASURED: totalTests=31970 totalFiles=2489 entries=3
+--- totals car:
+PREDICTED: totalFiles 2489 -> 2489 (the five cars add no test file), entries 3 -> 3 (the known-failure census: the voice per-file row, enforcement-claims, the golden master — the proof at 6ff3249b9 
+MEASURED: totalTests=31970 totalFiles=2489 entries=3
+totals: totalTests 31970 -> 31970 · totalFiles 2489 · entries 3 · measuredAt 7765a51fc
+TOTALS CAR 88cac6970 committed; cars over fd36f0298=8; sealed ldefault-2026-09-06
+TOTALS_EXIT=0
+totalTests (from the committed baseline) = 31970
+--- capsule car (ACTIVE at rung 18 — the OSR CLI is open):
+CAPSULE_EXIT=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 2106 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at 88cac697 (20 figures).
+capsule porcelain=[ M docs/implementation/BASE_STATE.json ]
+CAPSULE CAR -> dd5f13218
+CARS=9 · HEAD=dd5f13218 · porcelain=[]
+--- re-stamp the kit at 9 cars:
+  + run-gate-903.sh run-ratchet-903.sh (fill __PREDICTION__)
+kit §903 stamped in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad: after-cas-903.sh collect-903.sh payload-903.template.json msg-903.txt · dock=laneLDEFAULT base=fd36f0298 seal=landing-ldefault-2026-09-06 cars=9 · fill __ROW__/__ROW_BODY__/__CARD__/__CARD_BODY__/__TAIL__/__TAIL_BODY__/__SUBJECT__/__BODY__/__ENROLS__
+2:# run-gate-903.sh — the §903 consist's bare gate (npm run check), stamped by mk-landing-kit.py;
+3:# base fd36f0298. Quiet-window law. ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT:
+SEALED ldefault-2026-09-06 = dd5f13218
+NEXT: launch run-gate-903.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-903.sh, then fill texts-903 (__CARS__=9 __ENTRIES__ __TESTS__ __TOTALS__) and collect.

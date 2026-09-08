@@ -1,0 +1,829 @@
+ 
+ Beyond Fomalhaut: [BLOG] OSR Module O1: Against the Ultra-Minimalism 
+ Thursday, 12 January 2017 
+[BLOG] OSR Module O1: Against the Ultra-Minimalism
+ Don’t write one-page adventures and super-light
+rulesets. 
+ Would you be satisfied with that for a blog post?
+Not likely. And yet, just as new-school games are suffering under the jackboots
+of The Tyranny of Fun, old-school gaming is facing another crisis of treachery,
+the sinister menace of Ultra-Minimalism! It is all true, and here is why you
+should do something about it. 
+ One of the great realisations of old-school
+discussion was that a lot of the accumulated dross in mainstream RPG products
+was superfluous, or downright bad for your games. We all know the stories about
+designers paid by the word (and a pittance at that), of failed novelists and bloated
+game texts released without playtesting. A sizeable segment of RPG publishing
+is by non-players, for non-players. They are gamers, except not really. You
+could say that by now this has turned into its own hobby, until you get the
+creeping realisation that you and a few
+friends of yours might be the only ones remaining who are not pod-people .
+Yet. 
+ Know your enemy
+[Map by the excellent Dyson Logos
+used for illustrative purposes only] 
+ In those dark hours, the classics showed another
+way: of terse simplicity, expressive but functional language, play-oriented
+presentation. Glacial Rift of the Frost
+Giant Jarl was only eight pages plus the detachable colour! Tegel Manor fit into a 24-page booklet
+and a map! Keep on the Borderlands did
+not spend several pages on backstory! You could neatly fit a multiple-session
+adventure into a package you could read, unpack and use in a reasonable amount
+of time – sometimes without any prep, beginning right on the spot. 
+ Now, these are not perfect examples. Many classic
+adventures, even greats like Hidden
+Shrine of Tamoachan , have a low page count because they are presented as
+slabs of unorganised (and sometimes downright chaotic) text. Those Giants modules are so slim because they
+don’t give you the monster stat blocks, and there isn’t space for marginal
+notes. The Village of Hommlet draws
+the portrait of an idyllic rural community by spending much of its time talking
+about random details that don’t really matter in an adventure. And Tegel Manor can have too little going
+on in places. Still, old-school gaming offered a way out of the morass of bad
+prose and non-functional game texts that dominated much of gaming, and did so
+because it rejected game industry standards and circumvented the game
+industry’s business practices (“ quantity
+means quality; the more, the better ”). But this crusade for simplicity lost
+its way. 
+ When people lose sight of their purpose, routines
+can take over. We keep doing something because it used to deliver good results,
+not because we have actually considered the consequences. However, our
+assumptions may be misleading us. We may not need to be doing something
+anymore. In old-school gaming, Ultra-Minimalism is stripping games of their
+flavour, depth and inner complexity, and one-page dungeons are a good exhibit
+of why this is bad for us. 
+ There is nothing originally sinister about one-page
+dungeons. They started as a refreshing gimmick, drawing attention to how little
+you needed to have a good night’s fun, and how good presentation could condense
+vital information (text, maps and stats) into an efficient package. It is like
+that old-school thing, except even more so! The problem comes when this
+structure – this way of doing things – becomes a kind of standard, and
+consciously or not, starts to be applied in places where it doesn’t belong, or
+doesn’t offer the best possible solution. I suspect those big annual contests played
+a role, and common wisdom in online discussions played another. One-page
+dungeons, *.hacks, super-lites (simplifications of already very light systems)
+permeated our thinking. We started to fit our concepts into too small, too
+simple frameworks, and we are limiting our imagination by overdoing it. Some
+ideas don’t fit on an index card. And the resulting adventures are lacking in
+creative drive and falling short of the classics they often try to channel. 
+ The Keep on the Borderlands without The Keep on the Borderlands 
+ Some of the error doesn’t even lie in imitation,
+but championing a bare-bones understanding of design. It doesn’t just matter what gets told, it also matters how it gets told. Gaming is not just
+technology. Layout wizardry and graphical design can make GMing flow better,
+and vastly improve accessibility, but it doesn’t replace style. Zak Smith’s one-page Caves of Chaos is only the Caves
+of Chaos because we so intimately
+know the full module behind it; on its own, it is more or less just a 3e-style
+battlemat. Saved perhaps from its stone-age two-column layout, this version of The Keep on the Borderlands stands as a
+poor lobotomised husk of an adventure. From this perspective, it looks badly
+made and feature-poor, but it is we who have made it that way. 
+ “ Here are
+some basic notes, just apply the rules and add your style ” is a stone soup.
+Style, like a lot of the added value in our gaming, is an ingredient we apply
+subconsciously, from influences we have absorbed. Most of us can get by with very
+few notes, turning even very simple text into fine adventures (although having
+a background to fall back on and plunder is not a bad thing). But when we try
+to convey some of that context to others, we need more; a little piece of
+ourselves. Gygaxian prose, Bob Bledsaw’s quirky humour, or the grotesque
+sensibility and laconic dry wit in M.A.R. Barker’s work offer different visions
+of fantasy worlds, even if they had shared a lot of common ideas. These things,
+even if technically “superfluous” for specific, individual encounters, give
+game materials a voice that speaks to us and sticks in our imagination. 
+ Golden memories of 1607 Cas FTR 5 LE 120 
+ Of course, some of it is very much a question of what . A lot of old-school materials
+offer too little, stripping out detail which matters, or limiting their scope
+to a point where they have nothing to say or can’t realise their own potential.
+Here, we can find ample precedent in the classics, perfectly suited to let us
+draw false conclusions. Indeed, the inhabitants in Keep on the Borderlands didn’t have names, and it has sort of
+helped make the module more adaptable, but this design feature is not the
+reason Keep is remembered: beyond stylistic elements, that has to do with its publication as “the” module
+in the basic set, with its iconic home
+base – wilderness transition – dungeon structure, and with the peculiar way
+the Caves of Chaos is constructed as pockets of concentrated danger that’s just
+the right kind of challenge for a beginning party. Indeed, Wilderlands of High Fantasy had lists of utterly uninteresting,
+featureless citadel and castle stats, but the reason people like the
+Wilderlands lies in the “points of light” concept, the hexcrawl as an
+underlying mini-game, and for the fantastic and wild juxtapositions that go on
+in the more flavourful encounters (“ Here
+is a downed MIG plane next to a patch of giant fungi .” “ This is a bronze-age village exporting pitch
+next to a bunch of Vikings and a colony of 15 ents. ”). There is a reason Huberic
+of Haghill is worth remembering, and those endless, nameless citadels aren’t.
+ Palace of the Vampire Queen , the
+first D&D adventure ever, has a room key that’s mostly “ empty, empty, 16 bats, hunchbacked servant,
+empty, 8 zombies, empty ” repeated over two or three sheets, and nobody
+remembers it anymore because there is nothing else to it. 
+ By applying these lessons too selectively, we lose
+sight of the iconic status or less spoken of added value within these
+supplements. Multiple old-school megadungeon projects suffered because they
+wanted to recreate the pure Castle Greyhawk experience, and produced one too
+many giant rat rooms with dust, scattered bones and 3000 cp. It is not simply
+the talentless and bland of imagination who have fallen into this trap: this
+conscious suppression of one’s own creativity is one of the things that damaged
+ Isle of the Unknown , a setting book
+with a lot of potential (the other being an over-reliance on randomness). There
+are a lot of adventures out there which show flashes of imagination, but fail
+to be interesting because they don’t try hard enough. So it is with so many of
+the two- or three-dollar “humanoid lair” or “small tomb” modules on RPGNow –
+ten or fifteen basic rooms with inhabitants and a little debris here and there,
+a trap, maybe a magical enigma, and that is that. There is little use
+discussing most of these products, because while functional, they stay with
+very small ideas and don’t grow from there. 
+ Third, it is also a matter of rules . Sure, the monstrous character sheets and column-sized stat
+blocks of much of modern D&D are mechanics for their own sake, and putting
+player skill above character skill is one of the great points made by the
+old-school approach. There are lots of ways where clear, simple and concise
+rules can make for a rewarding game experience. Beyond a certain point,
+however, games also start to lose interesting ways of engaging with the fantasy
+world, and you lose some of the payoff of the creative friction among rules,
+participants and setting. By pushing everything into the realm of subjectivity,
+there are no sure points left to anchor a character. Can I hope to climb a
+steep rock? Is there a way to wrestle that guy to the ground? Can I bash down
+the door? (Here is one major point of disagreement between myself and the vast
+majority of modern old-school gamers: I actually like skill systems as long as
+they don’t overstay their welcome – skills offer a very good “interface” to
+navigate an imagined reality.) Some super-lite systems like The Black Hack try to provide a
+sensible answer, but there is still something lacking in them. If you have seen
+one, you have seen all of them. I’d venture regular OD&D and its
+derivatives are minimalistic enough for most of us. White box Swords & Wizardry is already pushing it. Swords & Wizardry Light? Give me a break. 
+ To end on a positive note, I will say there are
+ways out of this trap. Ultra-minimalism does not have to be the standard;
+actually, it would not be too hard to move on towards something better. With a
+little more ambition – say, a “four-page dungeon” or a “ten-page dungeon” – we would
+have a tier of products which can offer a good compromise between brevity and
+complexity. This is the realm of the traditional mini-adventure, or something
+up to Steading of the Hill Giant Chief and
+ Shrine of the Kuo-Toa . You can put a
+fair quantity of interesting stuff in that; a background that twists around the
+adventure; a wilderness section that surrounds the dungeon; an extra dungeon
+level for a rewarding sense of accomplishment. And this can also apply to the
+individual encounters, which do not have to go back to enormous, just add a
+little extra. A “ discarded old boot in a
+pile of refuse ” is not a dungeon encounter. “ A discarded old boot, stamping on a human face – forever ”,
+though... now we are talking business. We can start something there and make it
+rich and memorable. 
+ I am not saying we should
+go back to 1990s TSR standards or the era of the splats. We should just look at
+function again, focus on the things that make for rewarding play – and draw
+reasonable conclusions. 
+Posted by
+ Melan 
+at
+ 15:25 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ the pillory 
+41 comments: 
+ Ynas Midgard 12 January 2017 at 17:17 
+I wholeheartedly agree. If it wasn't for your unique voice in Kard és Mágia modules, I probably never would've looked for more OSR goodness in the first place.
+S&W and LL never really appealed to me exactly because of their blandness. I like Hulks & Horrors for the jokes in the book, Perdition for the cool class abilities, and Ghastly Affair for superb presentation and pairing simplicity with style. I like streamlined rules, but I also like choosing abilities and powers, and I don't mind the tad more complex board gamey stuff as long as they fit the game's aesthetics and pace.
+I think Stonehell is the only module that uses the 1PD "technology" and I actually found good, but it does have backstory, and the more complex rooms are described in detail after the terse key. When I think of ASE, I don't like it because of the simple rooms (like, "imagine this dungeon room but with robots and lasers"), but the cool half-pagers that reek of style. What makes Marlinko memorable for me isn't the brief dungeon rooms, but those little details here and there that add character. Reply Delete 
+ Replies 
+ Reply 
+ ThrowiGames 12 January 2017 at 17:54 
+In my opinion, this article is much ado about nothing; an argument similar to whether I should drive a big truck or a little truck. If I want a small truck, that's what I'm going to get. You can tell me that small trucks ruin the big truck industry, but really, they don't. They fit the needs of some people. Just like short adventures, they fit the needs of players at a particular time or place in the overall story or campaign. There's nothing wrong with a side quest or diversion.
+There's just too much work put into scrutinizing *what* gets made today. What, are we tired of edition wars now that WotC has done something halfway decent, and instead have to move to some other area to complain about? We really have to bash the outpouring of creativity and resurgence of tabletop gaming, focusing on such insignificant details like page count? 
+I'm sure if I search long enough, I'll find articles from similar folks that debate adventures that are too lengthy or have too many pictures and maps. Jesus, guys. Just enjoy the gaming, would ya? Reply Delete 
+ Replies 
+ Melan 13 January 2017 at 08:22 
+Well, I wrote the original "I hate fun" rant, so who knows. .) Delete 
+ Replies 
+ Reply 
+ Reply 
+ Necropraxis 12 January 2017 at 19:04 
+I'm not sure that Zak is really advocating replacing the entire Keep module with a one-page presentation, but rather keeping information design and usability in mind when designing adventures. His own published work certainly uses plenty of prose while trying to avoid walls of text.
+There is a nice sweet spot with modules such as Pod Caverns of the Sinister Shroom that manages to be both relatively usable (or at least not cumbersome) and also communicate a unique vision. Also some of Gus's free modules from Dungeon of Signs are good examples.
+I think you overlook that many one-page dungeons, given the space constraint limiting words, use visuals and other methods to convey creativity. Gorgeous maps may provide demotivating points of comparison for many referees considering creating their own less impressive content, but visuals such as that memorable purple worm one page dungeon can do a good job of getting across a creative vision. Reply Delete 
+ Replies 
+ Cryptid 12 January 2017 at 19:33 
+A. Yes to everything Brendan said.
+B. To put one thing more strongly: I'm pretty certain, in fact, that Zak wasn't advocating replacing the entirety of the module with a single page, but rather showing that it _could_ be done. If nothing, that's an indictment of how boring most of the caves are. Delete 
+ Replies 
+ Reply 
+ Zak Sabbath 13 January 2017 at 06:20 
+I am advocating mostly replacing the Keep with the 3 one-pagers I wrote (plus maybe 2 pages of explanation).
+It's an utterly shit module and none of the prose evokes fuck-all and there is no reason to be attached to it.
+This whole article strikes me as monumentally wrongheaded because:
+Is there really a game-damaging glut of efficient adventures out there? Really? Isle of the Unknown isn't that good but would it really be better if the rainbow playtpus had 8 more lines about it?
+ Delete 
+ Replies 
+ Reply 
+ Zak Sabbath 13 January 2017 at 06:22 
+If you're writing more words than strictly necessary, each word should convey something and frankly none of the "classic" tsr modules have writing good enough to justify the space it takes up on the page. Delete 
+ Replies 
+ Reply 
+ Melan 13 January 2017 at 08:42 
+@Brendan, I certainly appreciate good art and especially good cartography. And you have a point there - they can work together with game texts in exciting and useful ways. Even so, I have to say many of those illustration-focused one-page dungeons are better illustrations of cool things than functional game materials. And they still struggle with the problem that they are usually not living up to their potential. They mostly don't have a satisfying complexity, where things start to combine in unforeseen ways during play; where there are tangents and there is depth. What if the authors of these micro-modules wrote a four- or six-page scenario? What if they put their talents into producing a sixteen-pager? You bring up some great examples yourself - Pod-Caverns and those Dungeon of Signs scenarios (that I ought to read more of). That's what I'd like to see more of. That's my kind of minimalism.
+Of course, sometimes very brief scenarios succeed because they combine efficiency and flavour. Huberic is my favourite example for now, but there are others. But that's not a talent everyone has, and not every scenario has to be Hberic. Some are better off being Pod-Caverns. Some are better off being ASE. And sure, some are just bad, but that's a different issue. Delete 
+ Replies 
+ Reply 
+ Melan 13 January 2017 at 09:00 
+@Zak Sabbath: We will have to differ on Keep.
+Game writing can benefit from terseness (if it is an expressive terseness). But game materials are not just technical writing, they are also a form of personal expression. There is more to them than strict functionality.
+Sometimes a good piece of game text is a single expressive line (the late Bob Bledsaw was particularly good with them). Sometimes it is half a page of rambling that has no immediate relevance, but helps you get into the mindframe to interpret the rest. In Keep on the Borderlands , that half-page is the Realm of Man passage at the beginning. Delete 
+ Replies 
+ Reply 
+ Zak Sabbath 13 January 2017 at 14:45 
+They are a form of personal expression, sure. "Keep" and many classic modules simply do all their expressing in their structure, not in their prose.
+There's a by-no-means-fine line between placing the DM in a state where they receive the poetry of the imagined pseudomythic past and just using too many fucking words to point out you put a bog standard Monster Manual creature in a bog standard room and then asking a DM to put up with that and pay money for it. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Kent 13 January 2017 at 02:29 
+The success of the classic modules you mention may be in part due to their brevity but that brevity is only possible because we understand so much about Gygax implied setting from reading the 1e AD&D rulebooks. No matter by whom, most TSR modules buy into Gygax idea of how to create an adventure world.
+If you are trying to create a different presence for monsters, a different sense of magic, adjust the Reality-Faerie parameter and rebalance the Exploration-Combat quotient then you absolutely need to use *more words*. Reply Delete 
+ Replies 
+ Melan 13 January 2017 at 08:18 
+There may be something to that. The Dungeon Masters Guide (no apostrophes in them days) is a common text with a very strong authorial voice that can make a solid impression on a young mind.
+I have had endless arguments with friends over whether it is genius (a grab-bag of ideas presenting an in-depth way of building complex campaigns) or a disorganised mess (a reference document that doesn't actually help someone run a game). Of course, it is both, but the point I arrived at was that it succeeds by imparting a certain point of view and sensibility. Coincidentally, that couldn't be done in a slim technical document written in a neutral voice. It needed its space. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Psiker 13 January 2017 at 07:38 
+Personally I find all the one page/minimalism stuff far too simple. I need more complexity than that. Reply Delete 
+ Replies 
+ Melan 13 January 2017 at 07:53 
+Coming up shortly: my review of twelve Steve Grod $1 modules. .) Delete 
+ Replies 
+ Reply 
+ Reply 
+ Anonymous 13 January 2017 at 14:46 
+By and large, I think it comes down to the skills and imagination of the individual who spews out that one-page adventure or few paragraphs of text. While we have zillion bland "you can waste another 30 orcs for 50 gold pieces at the left turn"-style dungeons confusing minimalism with primitivism, we also have evocative one-pagers such as the Year of the Dungeon by Tony Dowler, or repositories for quirky idea lists like the Dungeon Dozen (combine 3 tables from the latter and you get the ingredients for an unique adventure, more than likely). Reply Delete 
+ Replies 
+ Melan 14 January 2017 at 10:03 
+The Year of the Dungeon is a great storehouse of idea maps, but it is ultimately not a game text, it is inspiration to make game texts. It fits the "creativity aid, not creativity replacement" philosophy Mythmere was championing, and does that admirably - but as someone who has played in your games based on those maps, I know how much of it needs to be the GM's effort. Same with Dungeon Dozen, or - the big one - the Tome of Adventure Design. These game aids fall under different considerations, and I really don't think they have to do so much with my post. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Settembrini 13 January 2017 at 18:45 
+Preach It, Brother! For me, the Buck stops with AD&D 1e or Classic Traveller. Anything below that is not detailed enough.
+Alas, IIRC, Calithena's vision of going back to od&d was so that a multitude of AD&Ds would bloom, instead of a multitude of retardation. All these hacks and formats have become a "thing", which made me lose interest in the "active" OSR some years ago. Reply Delete 
+ Replies 
+ Reply 
+ Settembrini 13 January 2017 at 18:48 
+BTW, when I look at the Castles table, I instantly kick into Traveller mode and start to be inspired to connect the dots, gimme the map that belongs to, and I'll write you and original adventure from that table! 
+To me, such tables treat the world seriously, and have a beauty of their own, but that might just be me. Reply Delete 
+ Replies 
+ Melan 14 January 2017 at 09:57 
+I would agree if it was an ultra-compressed way to present a significant amount of information. Perhaps Traveller supplements do that (I only own the rules and never played the game, so it is a mystery), but the Wilderlands don't - not this aspect of it. The maps are the largest part of the draw, though, demanding to be populated and explored - with a good combination of utility and aesthetics, but really enhanced by their SCALE, SCALE, SCALE. Even if you don't use all of it. Maybe BECAUSE you don't use all of it. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Urban 13 January 2017 at 19:47 
+As someone who have been into this ultra-minimalism (Pnakotic Ruins campaign around 2009), I suspect that it's very convenient from a RPG designer POW, but from a player perspective it usually lacks depth. Reply Delete 
+ Replies 
+ Melan 14 January 2017 at 09:51 
+I greatly enjoyed the campaign (for anyone interested, my journal is found at http://www.dragonsfoot.org/forums/viewtopic.php?f=26&t=45943 ), but I did have a problem with the laser-sharp focus of the rules. Not that they were bad, but they lacked staying power. I believe our campaign was approximately the right length at eight sessions, and even there, it was stretching things a bit. Delete 
+ Replies 
+ Reply 
+ Anonymous 15 January 2017 at 10:21 
+I really liked the Pnakotic Ruins, with all of its implied surreal threats, looming elder gods, grotesque vegan hippie townspeople and general post-post-post everything approach that almost felt like a Jodorowsky movie put in a D&D setting. What's interesting is that the DM admitted that the raw material for this feel can be summed up in a paragraph, and it comes from his impressions of Southeast Asia - another angle on minimalism, how much of general setting information do you really need? (And how can you communicate your very personal impressions so briefly to be just that effective for others?)
+The system felt usable but too threadbare for me, and the curious add-ons (like the beard table) were like quirkiness just for the sake of being quirky - may be fun or just pretentious, depending on the mood one finds oneself that day. Delete 
+ Replies 
+ Reply 
+ Urban 15 January 2017 at 11:46 
+Yeah, I was not precise enough.
+The rules I used and my RPG ethos was ultra-minimalistic, but my vision and the setting could somehow counterbalance it. But you know, usually it's hard to share vision and attitude. (BTW I'm flattered by your opinions. And yes, Jodorowsky was a great influence, it's nice that Marvin noticed it!).
+I blame the former minimalistic approach for the lack of staying power. And we all know that two of our regular playmates left the campaign because the character options hadnt offered them enough meat. This could also be a disadvantage of the minimalistic approach. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Dyson Logos 14 January 2017 at 08:29 
+This comment has been removed by the author. Reply Delete 
+ Replies 
+ Reply 
+ Dyson Logos 14 January 2017 at 08:32 
+Opening with my earliest published piece clearly labeled as the "enemy" and yet not even getting my name attached to it leaves me with the immediate emotional response to shit-can the whole article without reading it. Reply Delete 
+ Replies 
+ Melan 14 January 2017 at 09:35 
+Hi Dyson,
+I meant no slight against you or your work (which I respect, and which mostly produces maps to which my post was never meant to apply). The map was just the best image search result when I looked for a "one-page dungeon", and I used it without much forethought. For that, I apologise, and will amend my post accordingly. Delete 
+ Replies 
+ Reply 
+ Robin Irwin 14 January 2017 at 21:22 
+Dyson, read the replies...Zac has an interesting post or two. He makes good work, but he doesn't know what the hell he's talking about when he slams the early tsr publications. He wasn't there when it was going down so I don't fault him too much. Delete 
+ Replies 
+ Reply 
+ Brett Slocum 18 January 2017 at 23:44 
+Zac is dead on with the old modules. Most of y'all love them, because you played them when you were a teen or just starting in the hobby. It's like the truism that you always love the music you listened to when you were a teen, even if it's the worst drek hair band ever written. The TSR modules, to me, are by and large terribly written, better used for curing narcolepsy than for playing. And stealing the maps. Delete 
+ Replies 
+ Reply 
+ Melan 19 January 2017 at 08:30 
+Brett, that would fly at a lot of places, but I wasn't even born when many of those modules came out. My formative influences lay elsewhere, and I only discovered the TSR classics in my 20s. I will not discount the power of nostalgia (or even false nostalgia), but to explain away the interest in those modules is the same argument used to question the validity of old-school gaming. It disregards many of the motives we have for enjoying the games we do. Delete 
+ Replies 
+ Reply 
+ Reply 
+ migellito 14 January 2017 at 19:06 
+Yes. Reply Delete 
+ Replies 
+ Reply 
+ Robin Irwin 14 January 2017 at 21:12 
+Create and use whatever the heck you want to GM your game. One page dungeons are a good idea for those of use who have little time to pontificate. The reason why we game is so that we can amuse ourselves during our down time. Don't charge me too much and I will probably buy your work. I say one page dungeons are ok. keep em coming. Reply Delete 
+ Replies 
+ Reply 
+ Settembrini 15 January 2017 at 07:56 
+I do think Melan's message was much kinder in intention: "Embellishment is not all bad and minimalism is not always good. Embellishment often conveys tone and spirit that has been essential in creating a certain mindset neccessary in order to improvise smoothly." Reply Delete 
+ Replies 
+ Reply 
+ Robin Irwin 15 January 2017 at 12:34 
+If I want to be inspired, then works like Blue Medusa (along with similar sources like novels, poems and short stories) are fine. But it's much easier to play with the minimal crap. The fun happens when you get a bunch of creative individuals who mess with the material. Excess verbiage can get in the way during the game. Further, the players usually don't get to, or even want to, listen to most of the sick and twisted stuff anyway. Get the right table of players and you can have as much sick and twisted fun with B2 as you can with Blue Medusa, possibly even more. Same goes for the Judge's Guild products. Reply Delete 
+ Replies 
+ Headless Horse Archer (Premier) 17 January 2017 at 01:22 
+"Excess verbiage can get in the way during the game."
+I don't think anyone argues against that statement. I do think that the essay's point of contention is that many one-page dungeons and other minimalist products (such as some rule systems) draw the line between essential and excess verbiage in the wrong spot, because they misperceive some essential/very useful things as excess, either because they fail to understand what role they play, or out of some uncritical pursuit of the ideal of "minimalism". Delete 
+ Replies 
+ Reply 
+ Reply 
+ Brett Slocum 18 January 2017 at 23:38 
+I find minimalist resources are much easier to use and expand on the fly, than it is to take bloated material and trim it to usable on the fly. Most of the TSR modules were poorly-written bloat with decent maps. I tried reading Village of Hommlet three times and I fell asleep all three times. I ran Expedition to the Barrier Peaks and it took me three weeks to cut it back enough to be usable.
+But really, everyone has likes and dislikes about the games they play. This article really sounds like "if you're writing or using minimalist OSR stuff, you're playing the game wrong". Reply Delete 
+ Replies 
+ Melan 19 January 2017 at 08:45 
+The post does not say that. It makes an argument against ultra-minimalism, not minimalism - and argues that there is a difference. Delete 
+ Replies 
+ Reply 
+ Robin Irwin 30 January 2017 at 13:52 
+There is nothing wrong with "ultra-minimalism". You may write novels when I write haiku. But please do not suggest that I give up my form of expression. Delete 
+ Replies 
+ Reply 
+ Reply 
+ lige 23 January 2017 at 06:30 
+I have to agree things can get too minimal. But as Zach says brevity and purpose to descriptions is a virtue especially if you are trying to run a game. I don't really know how most modern stuff (post 2000) is really used and the massive stat blocks make most things pretty much unreadable. Reply Delete 
+ Replies 
+ Reply 
+ NUlysses 29 January 2017 at 19:59 
+Just a sidenote from another point of view, but I think it greatly reflects Melan's thoughts.
+"If all of the story is there, one might ask, then why bother? Isn't it just indulgence after all? It better not be; if it is, then I have spent a large portion of my life wasting my time. As it happens, I think that in really good stories, the whole is always greater than the sum of its parts. If that were not so, the following would be a perfectly acceptable version of "Hansel and Gretel":
+Hansel and Gretel were two children with a nice father and a nice mother. The nice mother died, and the father married a bitch. The bitch wanted the kids out of the way so she'd have more money to spend on herself. She bullied her spineless, soft-headed hubby into taking Hansel and Gretel into the woods and killing them. The kids' father relented at the last moment, allowing them to live so they could starve to death in the woods instead of dying quickly and mercifully at the blade of his knife. While they were wandering around, they found a house made out of candy. It was owned by a witch who was into cannibalism. She locked them up and told them that when they were good and fat, she was going to eat them. But the kids got the best of her. Hansel shoved her into her own oven. They found the witch's treasure, and they must have found a map, too, because they eventually arrived home. When they got there, Dad gave the bitch the boot and they lived happily ever after. The End.
+I don't know what you think, but for me, that version's a loser. The story is there, but it's not elegant. It's like the Cadillac with the chrome stripped off and the paint sanded down to dull metal. It goes somewhere, but it ain't, you know, boss ."
+(...)
+"Returning to "Hansel and Gretel" for just a moment, you may remember that the wicked stepmother demands that her husband bring her the hearts of the children as proof that the hapless woodcutter has done as she has ordered. The woodcutter demonstrates one dim vestige of intelligence by bringing her the hearts of two rabbits. Or take the famous trail of breadcrumbs Hansel leaves behind, so he and his sister can find their way back. Thinking dude! But when he attempts to follow the backtrail, he finds that the birds have eaten it. Neither- of these bits are strictly essential to the plot, but in another way they make the plot they are great and magical bits of storytelling. They change what could have been a dull piece of 
+work into a tale which has charmed and terrified readers for over a hundred years."
+(Stephen King - The Stand, Author's Note) Reply Delete 
+ Replies 
+ Reply 
+ Unknown 22 February 2017 at 23:04 
+I enjoyed that piece, Melan, but also wish you had (or would like for you to, at some point) discuss the systems and mechanics of these sorts of minimilast and ultra minimilast games, rather than the heavy focus on one page dungeons and modules.
+DMs I know like the variety made available by 1PDs, but also medium-and-longer-length modules. If the party opts to zig when all signs had pointed to them zagging, pulling out a low prep 1PD can fill the gap (though, admittedly, DM improvisational skill will play a role). In other words, it doesn't need to be either/or.
+I want to know more, both experiences and opinions, of the results of both OSR clones and hacks. The appeal of a minimilast system appeals to me--but do combats become boring? Do players, even those who begin feeling refreshed by the simplicity, grow frustrated with the lack of mechanical character options? How does minimilasm affect play experiences. Reply Delete 
+ Replies 
+ Melan 24 February 2017 at 10:43 
+Thanks, Jared! You are right, the majority of this post referred to adventure design (via the specific example of one-page modules), and the points on systems are an afterthought. Not sure if they merit a separate post, since I have a lot less to say about system design. However...
+Going from personal experience, we have played several old school systems of varying complexity over the last decade. For most of our group, the ideal system is a medium-light game like my simplified d20 variant or AD&D without some of its more complex options like weapon vs. AC or its esoteric "yes, but" exceptions. This level of detail gives the players enough reference points to let them get a "feel" for their characters' capabilities, but doesn't require juggling too many rules at once. 
+We also play a dungeon crawl game with an OD&D-based system, and that's about the lowest level of detail we are comfortable with. These minimalist systems offer a liberating speed of play, but multiple people in our group already start to feel they are lacking meaningful character options. None of them are into "charop" or those really elaborate backstories, but they like a little more detail than "I am a fighter and I hit things", and so do I. 
+The same with combat. Overwrought combat rules can produce a frustrating slog that offers nothing of the dynamism you see in a good swashbuckling movie, but once it is all I-hit-you-hit, the action can just as easily get lost in the abstraction. There are ways to spice things up, and I strive to make things interesting, but then we could as well choose a medium-light-complexity game. So yeah, we can confirm your suspicions.
+My puzzlement is at the desire for even lighter, even less detailed systems. When a player character fits on an index card and monster stats are already minimal, why do we need to go further until we essentially do away with almost all the rules? Beyond a certain point, the drive for more simplicity seem rather counter-productive. Delete 
+ Replies 
+ Reply 
+ Reply 
+ Add comment 
+ Load more... 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+Guy with a website. 
+Melan
+ View my complete profile 
+Definitely not a trap 
+Now on tap... 
+Links of Potential Interest 
+ Review Standards 
+ The Alternate Primer for Old School Gaming 
+ What is Fomalhaut? 
+ Catalogue (includes Privacy Policy) 
+ Fomalhaut (old website, various downloads) 
+ Mostly complete bibliography (collected by Guy Fullerton) 
+ Fight On! Magazine (has risen!) 
+ Knockspell Magazine 
+ Old-School Blog List 
+Blog Archive 
+ ► 
+2026
+ (7) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+April
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+2025
+ (14) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (3) 
+ ► 
+August
+ (1) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (1) 
+ ► 
+April
+ (1) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (1) 
+ ► 
+2024
+ (9) 
+ ► 
+December
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (1) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (1) 
+ ► 
+January
+ (2) 
+ ► 
+2023
+ (28) 
+ ► 
+December
+ (2) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (4) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (5) 
+ ► 
+2022
+ (25) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (3) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (2) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (3) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (1) 
+ ► 
+2021
+ (33) 
+ ► 
+December
+ (5) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (3) 
+ ► 
+January
+ (2) 
+ ► 
+2020
+ (27) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (2) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (4) 
+ ► 
+April
+ (3) 
+ ► 
+March
+ (5) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (1) 
+ ► 
+2019
+ (39) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (3) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (4) 
+ ► 
+May
+ (1) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (4) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (3) 
+ ► 
+2018
+ (43) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (4) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (5) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (6) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (3) 
+ ▼ 
+2017
+ (39) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (3) 
+ ► 
+September
+ (3) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (4) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (5) 
+ ► 
+February
+ (2) 
+ ▼ 
+January
+ (6) 
+ [CAMPAIGN JOURNAL] The Inheritance #04: The Abando... 
+ [REVIEW] Tukram’s Tomb 
+ [REVIEW] El Raja Key Archive 
+ [REVIEW] The Phoenix Barony 
+ [BLOG] OSR Module O1: Against the Ultra-Minimalism 
+ [REVIEW] Sunken City 
+ ► 
+2016
+ (28) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (3) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (16) 
+Elsewhere 
+tenfootpole.org 
+The Swan Hollow Intrigue
+Monsters and Manuals 
+The Great North Title Opinion Forming Braintrust Assemble
+World of Ortix 
+As you can see...
+Bat in the Attic 
+Development of the Majestic Fantasy RPG, Part 3
+Streets & Spores 
+Gunderholfen – The Wight of Nharzed (session 31)
+Age of Dusk 
+2026 Reading List – [May-August]
+giantgooseproductions 
+Cloister of the Frog God Play Report #1
+Graphite Prime 
+1E DMG: The Ultimate Dungeon Creator
+Swords & Schlock 
+The Odyssey, 2026.
+Kockák és Koboldok [HU] 
+A Majomemberek Városa II.
+Simulacrum: Exploring OSR Design 
+The Halls of Tizun Thane Remaster
+Zherblog 
+Changes to OSRIC 3.0 from AD&D
+From Kuroth's Quill 
+Castle Greyhawk Four New Dungeon Level Maps Revealed
+Vague Countries 
+Cthulhu Dark: The Watcher in the Valley – Session 3
+Ynas Midgard's RPG Blog 
+26.Q1 Hobby Update
+The Mystical Trash Heap 
+Consolidated AD&D Weapon Characteristics List
+Hidden in Shadows 
+Mapping the pre D&D Dungeon Adventure From May 25 1972, Part 1
+Vorpal Mace II 
+Savage Realms Monthly: November 2025
+Mazirian's Garden 
+The Sacrament of the Minotaur
+A Distant Chime 
+The Road to Splashdown
+Ghri Ziffe 
+Attacking the Whole of the Character Sheet
+Vorpal Mace 
+Public Service Announcement
+Chronicled Scribblings of the Itinerant Overlord 
+AD&D Training Costs: A Common DM Unforced Error
+Explore: Beneath & Beyond 
+Original Scenarios Resurrected XI: The Tower of Mrannor (1980, Andrew 
+Ravenscroft)
+Torchless 
+LOW OPINION: System Matters
+the blogge of castle librarian 
+[Map] Cave of the Demon Idol
+Halal Malal's Guide to Islamic Gaming 
+The OSR is Dead, also 1000 views or something
+At the Mountains of Weirdness 
+Thoughts on (#1): Warhammer Fantasy Roleplay 4th Edition
+Dungeon of Signs 
+Goodbye and Good Luck
+The Sophisticated Barbarian 
+Rocking Thule #1: Ruins of Kal-Ne-Moz
+Unvisible Citadel 
+New Free PDF Module: The Hyqueous Vaults
+Show 10
+Show All
+Simple theme. Powered by Blogger .
+ 

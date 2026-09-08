@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i64-78",
+ "lines": 31,
+ "firstTs": "2026-09-06T09:51:06.772Z",
+ "lastTs": "2026-09-06T09:52:34.370Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 7
+ },
+ "urlsFetched": [
+  "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "https://koboldpress.com/designing-with-style-ability-checks-and-saving-throws/|kobold.html",
+  "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/|enworld.html",
+  "https://half-cover.com/blogs/find-the-path/importance-following-writing-style-dd-manuals/|halfcover.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 10:10am (America/New_York)",
+ "run": "wf_0782e71f-b18",
+ "agent": "a8bbac63afc1e84b4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_0782e71f-b18/agent-a8bbac63afc1e84b4.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i64-78.json",
+  "exists": false
+ }
+}

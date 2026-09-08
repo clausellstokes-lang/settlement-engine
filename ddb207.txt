@@ -1,0 +1,427 @@
+
+ Chris Perkins on Writing your own Adventures | Dungeons & Dragons 
+ Skip to Content 
+ Play D&D 
+ My Characters
+ Create a character 
+ My Campaigns
+ Beta 
+ Maps VTT
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+ Rules Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+ Library Free books View all 
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+ Community Support
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+ Follow Us
+ Featured Article
+ Dungeon Masters: The New D&D Actual Play
+ Marketplace 
+ Open search Toggle mobile navigation Sign in Create Account 
+ Play D&D Back Play D&D 
+ My Characters 
+ Create a character 
+ My Campaigns 
+ Maps VTT 
+ More Tools
+ D&D Beyond Mobile App 
+ Avrae Discord Bot 
+ Browse Homebrew 
+ My Homebrew Collection 
+ My Homebrew Creations 
+ Encounters 
+ My Dice 
+ Rules Back Rules 
+ Browse
+ Classes 
+ Backgrounds 
+ Species 
+ Feats 
+ Spells 
+ Equipment 
+ Magic Items 
+ Monsters 
+ Resources
+ How to Play D&D 
+ D&D Beyond Basic Rules 
+ Rules Glossary 
+ D&D Character Sheets 
+ System Reference Document (SRD) 
+ Unearthed Arcana 
+ Featured
+ Article 
+ Updating Your Campaign to the 5.5e D&D Rules
+ Article 
+ Running Lairs: How to Make the Most of a Monster's Place of Power
+ Library Back Library 
+ Free books
+ Monstrous Compendium Vol. 1: Spelljammer Creatures 
+ Frozen Sick 
+ D&D Beyond Basic Rules 
+ Basic Rules (2014) 
+ Sign in to view your
+library & saved
+favorites.
+ Sign in 
+ Community Back Community 
+ Help Portal 
+ Articles 
+ Support Forum 
+ Changelog 
+ Roadmap 
+ Creator FAQ 
+ Connect
+ Community Update 
+ Forums 
+ Organized Play 
+ Find Players 
+ Discord 
+ Legends of Greyhawk 
+ Follow Us
+ Featured Article
+ Dungeon Masters: The New D&D Actual Play
+ Marketplace 
+ Sign in Create an Account 
+ Home 
+ Posts 
+ Chris Perkins on Writing your own Adventures 
+ Chris Perkins on Writing your own Adventures
+ Chris Perkins on Writing your own Adventures
+ by Todd Kenreck 
+ Apr 19, 2018 
+ Category Icon 
+ Posts 
+ 15 
+ Tags 
+ videos 
+ Dungeon Master Tips 
+ Chris Perkins: I was inspired by the classical TSR modules. When I first picked them up and started to understand what a D&D adventure was, it was based largely on the deconstruction of those. When the magazines came along, and they started publish D&D Adventures in the short format, I had to adapt my style away from the 32 page module sort of structures to their much more condensed, in and out kind of approach to adventure presentation. I think my first bit of advice to anybody who ever decides to write an adventure for someone other than themselves is to analyze and deconstruct the adventures for that edition that have actually been published, whether they're long or short because I think you learn a lot more in the analysis of the adventures than you would just having somebody tell you what makes a good adventure.
+ Which is why I'm here to tell you what makes a good adventure. No. Yeah. I felt like I had lots of help in honing my adventure style because I could just kind of imitate or copy the structure of some of my favorite modules but I also received a lot of guidance from the editors of the magazines. They were instrumental in helping me understand what makes a good adventure, what separates a good adventure from one that's pretty much unpublishable. Before we get too far down this road, I think there are actually two kinds of adventures in my mind. There's the adventure that you're just creating for yourself in which case, it doesn't matter really, what it ends up looking like as long as it serves your needs. Then there's the adventure that you want other people to run. The adventure that you probably want to publish and that's a whole different thing to think about because, if you're just writing an adventure for yourself, you're probably sculpting it for your particular player characters.
+ You're building something that you're hoping is going to bait them into going off on the adventure that you've created and you've thought about; what are the motivations of the characters and what's going to drive them? If you're creating an adventure for other DMs to run, you don't know what party of characters are going to play through it. You don't know what the party composition's going to be or what their motivations are so you are building something that is trying to take into account character motivation without knowing what it is which means that the bait has to be something that is generally applicable like the reason for going on the adventure has to be something that maybe 80 or 90% of players are going to latch onto and that's not always easy to come up with.
+ Apart from those two separations, I think it's probably best not to talk about the home adventure you just make yourself which could literally just be a graph paper map with some notes that you wrote down or might actually sit down and type it up like it's an actual adventure but you're the one running it. Nobody else has to see your spelling mistakes or omissions or the gross plot holes that you left in or just the idiosyncratic nature of the work and your writing. Instead, I think it's probably more beneficial to anybody listening to this to talk about the adventure that is meant to leave your hands and be played by somebody else. We've talked about this in the DMG and other places but an adventure, even the most basic adventure has fundamentally, three things. It has the characters who are going to be going on the adventure and what motivates them so you need the goal of the adventure, why are they going on the quest? You need the place where the adventure happens, which might be a dungeon, it might be a ruin, it might be onboard a ship, it might be in space. Who knows?
+ Then the third thing you need is of course the villains and their goals. Those are kind of the legs upon which adventures stand. Sometimes you can get away with not paying much mind or being a little shallow on one. It could be a very simple location like a tavern. It could be not so much a villain but just a group of monsters that are hanging out in the location. Where you can't really give the short shrift is in the character's motivation. Case and point, let's take the simplest adventure of all time. "There's gold in that thar dungeon. Go get it. Be rich." The classic Monty Hall adventure where the character's only motivation is greed, they hear about a place that's full of treasure and they go there to get the treasure to become rich and more powerful. Unfortunately, in many cases, that is not going to inspire good adventure design or even worse, there will be groups out there that don't want to play it because the simple motivation of greed does not appeal to their characters and possibly, not to the players. If the reason for going on the quest is an instance bounce off point, it doesn't matter how cool the rest of the adventure is. If they go on it at all, they're not going to be terribly interested in it so the players are kind of resisting the adventure the whole way through.
+ You can do really simple things to a simple idea to make the adventure more appealing to a broader group of players. For instance, it could be that the gold in that dungeon was stolen from the town or the temple in the town that was guarding it say. In which case, there is another reason, aside from greed, to go after the travel. Particularly if say, there's a cleric in the party or a paladin in the party who wants to do the right thing. It's not just about greed, it's about getting gold back to the people who had it and who are protecting it. Another possible hook is, there's gold in that thar dungeon but there's an evil warlord over here that knows about it and wants to get the gold to fund his evil military campaign. Now suddenly, you have a motivation of get the gold to keep it out of evil's hands. Just the simple addition of some deeper motivation that's more universally appealing to a larger number of players is going to make the adventure much more successful and frankly, much more memorable because you've either tapped into something the players care about as human beings or you've tapped into something that speaks directly to certain characters of the party.
+ I think where, sometimes we fall down a rabbit hole as designers is trying to make a quest so appealing to all the players in the group and often, that's not necessary. If you've got a group of players who play well together, if you have one or two players who are interested in completing the quest, often the others are happy to come along for the ride and contrive their reasons for going. That's basically why I think that coming up with a good goal is the most important thing that the adventure needs. Good villains and fun locations are also nice to have. There is, with Ravenloft, there's this weird situation where you're kind of dragged into the realm of Barovia. You don't voluntarily go there and so there is a survival instinct that kicks in immediately when you realize you're kind of trapped and that the only way out is to deal with the vampire. You are kind of thrust into danger in that way and that not having control over your fate is one way to go with adventure design.
+ You can just throw characters into a situation and say, "Deal with it." They're having adventures published which have, basically been framed as, "Your characters wake up in prison with none of your gear." Or, "Your characters wake up in a cave with none of your gear. What do you do?" Then it becomes a mission of survival, finding equipment that will save your life and that has merit as an adventure and it's been done. The first time I ever saw it done was an adventure called Module A4 in the Dungeons of the Slave Lords. It was the finale of a series of adventures designed as tournament play adventures where, after the characters are defeated by the villains in the third installment in A4, they wake up in a dungeon abandoned on an island that's gone volcanic and about to explode and they have to get out of the dungeon, get their gear and get off the island before everything goes pear shaped.
+ That can work. It's unusual to just sort of drop characters in a predicament and then have them get out of it but it can be rewarding. You just can't do it all the time or your players ... the only real short coming in an adventure, as far as ... the only thing that sets an adventure up for failure almost immediately is the presumption that the characters have no control. An adventure always has to present characters with meaningful choices and if every adventure starts where they have no say into how their characters got there, then the players are not going to like that over time. It's a novelty but if you play that novelty card too often, it becomes tiresome and frankly, annoying. Similarly, if you're going off on an adventure and everything they encounter has to be solved in a certain way or they just can't move forward, that also feels very unrealistic and unrewarding.
+ If the only way to defeat the villain is to kill them, that's kind of boring and dull and frankly, a lot of players will go to great lengths to prove the adventure wrong when the adventure should have accounted for the possibility that there are other outcomes that are possible. An adventure should not be broken if the characters make the wrong choice. When I was designing adventures early on and I had none of these sort of nuanced ideas of; what makes a good adventure, what makes a bad one, what's likely to work and what's likely not to work, what's going to be popular, what's not? I made all the mistakes of railroading the characters, having the villains do things that they couldn't do within the logic of the system, just to keep them alive or to contrive a way for them to accomplish a goal when it didn't make any sense, even if the players interfered with them. Always making sure the villains got away. Not giving the characters a chance to stop them.
+ It's very easy for somebody who's accustomed to reading novels to write an adventure write a novel and you can't do that because A; you don't know who the protagonists are. That will change every time the adventure's run and B; this is a game with dice rolls and random outcomes. You have to build the adventure with the possibility that your villain will get critical hit four times in a row and die before he even gets through a monologue or before he gets to make an attack. The adventure has to be able to withstand that kind of circumstance and not feel completely unrewarding. A lot of this stuff isn't terribly important though or not as important as just making sure you have good goals. As far as villains go, I got some great advice early on from an editor who told me that; if you want to sell a DM on an adventure idea, you can do one of two things. One; you can take something that seems trite or over done and put a unique spin on it that we haven't seen before or, you can just give us a kick ass map for a location.
+ With regards to the first thing, as I was a young designer trying to break into the industry and get the attention of editors and DMs and get my adventures played, one of the things I picked up very quickly was this idea of the spin and that is, an adventure doesn't always have to introduce something completely new. You don't have to have a new monster to excite players. You can take an existing monster and pair it with another monster, to make it interesting. You could take an existing monster and just tweak it a little to make it interesting. For instance, there was an adventure and it was actually bought for Dungeon Magazine, didn't appear in Dungeon Magazine because it was given to Dragon Magazine, its sister publication as a promotion to promote Dungeon Magazine. It was called The Chasm Bridge and in it, you fight. You're in the underground and you come to this toll bridge in the under dark and there is a wizard there with some ogre companions guarding the bridge and then you have to either talk your way past the wizard, fight your way past the wizard or whatever.
+ The one thing that always struck me as interesting as the wizard, was that he was crippled. He had basically been crippled by a foe in the past and that affected him. It also affects the way that he reacts to things and I thought, "That was a really subtle addition." It's not just a wizard, it is a wizard who has suffered a grievous injury and is basically coping with that injury. That gave that villain more depth than just if he was an ordinary wizard. It's not even a case that it's a power up. He's not a two-headed wizard. He's not a fire giant wizard, which is another spin. He was just this angry, battered, bruised creature but when you see that, when you encounter that, it changes your perspective of who that villain is and maybe gives that villain more sympathy than he deserves. D&D will always breed its own camp and its own humor.
+ Players and DMs will bring human to every adventure whether the adventure intended it or not. We often tell writers, and have in the past, you don't have to go out of your way to be funny because the people around the table are going to bring that to funny. What you need to do is create situations in the adventure that could breed memorable, laughable moments and I spend a great deal of time weighing the balance between serious and silly. If you look at the Monster Manual, it is a balance between serious and silly. There's a lot of silly stuff in there. That's becoming something of a Hallmark for me. Even in Curse of Strahd , which could be completely depressing, there is humor and silliness and there was a lot of that in the original Ravenloft as well, particularly the crypt names in the depths of the castle. They were ludacris and being able to just run with that and come up with even more ludicrous things I think, was a lot of fun.
+ I think it's important because adventures that are published, aren't merely meant to be played, they are meant to be read and if you are going to make somebody read something for **** sakes', make it entertaining. Sometimes that means bringing a smile to the DM's face when they're reading it because the DM's thinking, "Oh, I can't wait till the players get here. They're going to have a good time." There was, I remember reading, I think it was Lost Tomb of Martech , Module I5 and there is one encounter where you come to this shaft and it's got portals at the top and portals at the bottom so if you fall you'll nearly teleport back to the top and just keep falling eternally, falling eternally. One of the things that I guess that had fallen into the shaft was a mummy. You're just at the edge of the shaft and the mummy goes ... down and then ... down again and then ... down again and there was a passage in the text that said, "And woe be to he who is hit by a falling mummy." It doesn't say anything else. There are no rules for being hit by a falling mummy or anything and that just made me laugh and laugh and laugh and laugh and laugh.
+ There's also a book you can find, I think in Martech's tomb or library which is Snow Dwarf and the Seven Wights . W-I-G-H-T.
+ Todd Kenreck: Yeah.
+ Chris Perkins: I thought, "Oh, bad puns."
+ Todd Kenreck: I love wight puns.
+ Chris Perkins: Put puns in your adventure. Put little laughs. Put little Easter eggs in your adventure. Things that you know that the DM will chuckle over because if they come away from reading that adventure, having had a few good laughs, they're much more inclined to run it. Even most serious adventures that I've read, my favorites have little gems of humor embedded in them where you can tell where the writers were having some fun and it was a fun adventure to write. That makes it all more fun to read.
+ Tags 
+ videos 
+ Dungeon Master Tips 
+ 15 
+ Comments
+ HailPrimus 
+ Adventurer
+ Join Date:
+ 1/19/2018
+ Posts:
+ 3
+ Member Details
+ #1 
+ HailPrimus 
+ View User Profile
+ Send Message
+ Posted Apr 19, 2018 
+ Nothing against the interviewer and interviewee, but I dislike these kinds of articles. I enjoy the articles about campaign building and running monsters/PCs. But these ones are honestly unnecessary in my opinion. Maybe you could just link to the video on the same day as an other article? The contents are literally the questions and answers from the video. Sorry for my saltiness, just trying to put my constructive criticism out there.
+ Rollback Post to Revision 
+ RollBack 
+ Coronacht 
+ Adventurer
+ Join Date:
+ 7/1/2017
+ Posts:
+ 1
+ Member Details
+ #2 
+ Coronacht 
+ View User Profile
+ Send Message
+ Posted Apr 19, 2018 
+ Can we please, please get a weekly Perkins "Happy Fun Hour"? Format would be similar to Mearls'.
+ Perkins would give 'under the hood' details about a new adventure floating around in his head. He would discuss the choices he made developing motivation, villain, NPC, location, setting, etc. and walk the audience through good ideas and potential pitfalls in adventure construction. 
+ Imagine if we could go back in time and watch Perkins rationalize choices made in the construction of Curse of Strahd. Priceless.
+ Rollback Post to Revision 
+ RollBack 
+ Eldritch_Song 
+ Gallant
+ Join Date:
+ 3/30/2017
+ Posts:
+ 76
+ Member Details
+ #3 
+ Eldritch_Song 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ Quote from HailPrimus >> 
+ Nothing against the interviewer and interviewee, but I dislike these kinds of articles. I enjoy the articles about campaign building and running monsters/PCs. But these ones are honestly unnecessary in my opinion. Maybe you could just link to the video on the same day as an other article? The contents are literally the questions and answers from the video. Sorry for my saltiness, just trying to put my constructive criticism out there.
+ I'm not exactly sure what you're getting at. The article is a transcript of the video. You're supposed to consume one or the other, not both. Sometimes I'm at work and don't want the distraction of a video, so I'll read the transcript instead.
+ I really enjoyed the video—always love hearing from Chris Perkins.
+ Rollback Post to Revision 
+ RollBack 
+ Conn_Eremon 
+ Ravenspear
+ Join Date:
+ 7/8/2017
+ Posts:
+ 944
+ Member Details
+ #4 
+ Conn_Eremon 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ For what it's worth, I greatly appreciate having a transcript of the video that I can read alongside it.I think both the articles and the videos are best when consumed simultaneously. This isn't a video I'm just putting in the background while I do something else, I'm watching and reading to learn something.
+ Rollback Post to Revision 
+ RollBack 
+ HailPrimus 
+ Adventurer
+ Join Date:
+ 1/19/2018
+ Posts:
+ 3
+ Member Details
+ #5 
+ HailPrimus 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ Alright, so what I'm trying to say isn't that I hate it just because its just a mere transcript of a video. I dislike it because it fills in the slot of a daily week video. I don't like the fact that, instead of an article on how to run a spell, monster, or PC, we just get a transcript of a video. I can respect that people read the transcript rather than watch the video. Heck, I read the summarized version of that week's Critical Role . I'd be fine if these sort of articles would be part of a day's article, or maybe just link to it. I'd much rather read something that was more helpful to a DM's needs. 
+ Rollback Post to Revision 
+ RollBack 
+ Conn_Eremon 
+ Ravenspear
+ Join Date:
+ 7/8/2017
+ Posts:
+ 944
+ Member Details
+ #6 
+ Conn_Eremon 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ I understand and respect your viewpoint. There's no right or wrong here, only personal preferences. My disagreement is just to show that there simply are differing viewpoints.
+ Rollback Post to Revision 
+ RollBack 
+ The_Plundered_Tombs 
+ Swordsman
+ Join Date:
+ 12/18/2017
+ Posts:
+ 396
+ Member Details
+ #7 
+ The_Plundered_Tombs 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ Would it kill someone to edit the transcript slightly? 200 word sentences are not fun to read; I gave up very early in the article.
+ So much as I appreciate having the text to read - I am definitely NOT generation you-tube - just a little bit of extra polish would be appreciated.
+Punctuation is not the process of persuading people to listen to the Sex Pistols and PIL. :)
+ Rollback Post to Revision 
+ RollBack 
+ zymurgy65 
+ Acolyte
+ Join Date:
+ 3/14/2018
+ Posts:
+ 18
+ Member Details
+ #8 
+ zymurgy65 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ I'm not online at home (one of the joys of being poor!) so I find a transcript that I can download at the library and view at home very useful.
+ Rollback Post to Revision 
+ RollBack 
+ DMDrae 
+ Acolyte
+ Join Date:
+ 4/17/2017
+ Posts:
+ 16
+ Member Details
+ #9 
+ DMDrae 
+ View User Profile
+ Send Message
+ Posted Apr 20, 2018 
+ Wonderful stuff. The crippled wizard context is something I'll be running with.
+ Rollback Post to Revision 
+ RollBack 
+ Grokka 
+ Veteran
+ Join Date:
+ 1/12/2018
+ Posts:
+ 18
+ Member Details
+ #10 
+ Grokka 
+ View User Profile
+ Send Message
+ Posted Apr 21, 2018 
+ I really enjoyed this. As a long time GM it was interesting to get the insight into the current design process as well as Chris' perspective. I definitely plan to share some old modules with my son when he is ready to DM so he can build some of the tools and get some perspectives on different ways to run a game and write an adventure. This kind of content seems like it is useful to Dungeon Masters both old and new. Keep it up guys. 
+ Rollback Post to Revision 
+ RollBack 
+ killfang2007 
+ Adventurer
+ Join Date:
+ 5/3/2018
+ Posts:
+ 4
+ Member Details
+ #11 
+ killfang2007 
+ View User Profile
+ Send Message
+ Posted May 21, 2018 
+ Cool
+ Rollback Post to Revision 
+ RollBack 
+ killfang2007 
+ Adventurer
+ Join Date:
+ 5/3/2018
+ Posts:
+ 4
+ Member Details
+ #12 
+ killfang2007 
+ View User Profile
+ Send Message
+ Posted May 21, 2018 
+ It is a basic overview thats it sodium machine.
+ Rollback Post to Revision 
+ RollBack 
+ killfang2007 
+ Adventurer
+ Join Date:
+ 5/3/2018
+ Posts:
+ 4
+ Member Details
+ #13 
+ killfang2007 
+ View User Profile
+ Send Message
+ Posted May 21, 2018 
+ SO TRUE.
+ Rollback Post to Revision 
+ RollBack 
+ killfang2007 
+ Adventurer
+ Join Date:
+ 5/3/2018
+ Posts:
+ 4
+ Member Details
+ #14 
+ killfang2007 
+ View User Profile
+ Send Message
+ Posted May 21, 2018 
+ 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 centuries later still reading.
+ Rollback Post to Revision 
+ RollBack 
+ c0wfunk 
+ Adventurer
+ Join Date:
+ 3/10/2018
+ Posts:
+ 7
+ Member Details
+ #15 
+ c0wfunk 
+ View User Profile
+ Send Message
+ Posted Jul 3, 2019 
+ Personally I can’t generally digest video content because life so I love transcript articles.
+ Rollback Post to Revision 
+ RollBack 
+ To post a comment, please login or register a new account.
+ Delete 
+ Undelete 
+ Spam 
+ Not Spam 
+ Merge 
+ Apply To Selected 
+ Clear Selected 
+ Posts Quoted: 
+ Reply 
+ Clear All Quotes 
+ Our Terms of Service and Privacy Notice have recently been updated to provide greater clarity as to how disputes are handled and transparency regarding the collection and use of personal data. Please review them here: Terms of Service , Privacy Notice . By continuing to use the services, you agree to the new Terms.
+ Support
+ Help Portal 
+ Support Forum 
+ System Status 
+ Do Not Sell or Share My Personal Information 
+ Your Privacy Choices 
+ Cookie Notice 
+ System Reference Document (SRD) 
+ About
+ Contact Us 
+ Careers 
+ Wizards of the Coast 
+ Credits 
+ Find us on social media
+ Download the D&D Beyond App
+ © 2017- 2024 Wizards of the Coast LLC | All Rights Reserved
+ Dungeons & Dragons, D&D Beyond, D&D, Wizards of the Coast, the dragon ampersand, and all other Wizards of the Coast product names, campaign settings, their respective logos, and The World's Greatest Roleplaying Game are © and trademark Wizards of the Coast in the U.S.A. and other countries. © 2024 Wizards.
+ Privacy Policy
+ Terms of Service

@@ -1,0 +1,17 @@
+=== CROSS-CHECK vs the refuter / dossier §3 (n=2,734 dossier variants) ===
+my n: 2729  (X1 raw 2734, admission dropped 5 )
+1-seg: 2030 (refuter 2030)  2-seg: 688 (691)  3+: 11 (11)
+rather than: occurrences 294 (no published counterpart) · variants containing it 288 (dossier 288 — this is the figure §2c ruled correct) rate 0.106
+abstract closers: 141 (dossier 128, 4.4%) rate 0.041
+its own: 96 (70)  whatever: 53 (49)  enough to: 116 (97)  kind/sort of: 29 (29)  quiet: 59 (37)
+nobody/no one/nothing: 512 (333)  still: 158 (149)  yet: 63 (61)  already: 26 (26)
+gloss tail ", which": 175 (dossier 123-149)
+2nd-sentence That/This/It: 90 (dossier 80)
+pools uniform in seg count: 0.57 of 786 pools (dossier 407/708 = 0.575)
+pools repeated 2-word opener: 0.123 (dossier 79/708 = 0.112)
+
+R1 wps: {"mean":16.8,"sd":7.2,"p10":7,"p50":17,"p90":26,"under8":0.13,"over30":0.021} (dossier state: mean 16.7 sd 7.2 p10 7 p90 26 under8 0.13)
+R1 semicolon count: 385 (386)   R2 semicolon: 168 (169)
+R2 share segments >30w: 0.491 (dossier causal: 0.49)
+R1 tells: {"resilien":1,"stands as":1,"weight of":3,"realm":7,"speaks to":1,"journey":2,"linger":1,"the very":1}  R2 tells: {"realm":1,"the very":2,"journey":2,"tension":1,"stands as":1}
+R1 digits: 0 R2 digits: 0 R1 question rate: 0 R1 emDash: 0

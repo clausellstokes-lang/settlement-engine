@@ -1,0 +1,7 @@
+Desk landing (fix car D): the banked voice row's magnitude is re-derived against the message the runner actually measures — the gate fails closed where the update run only HELD
+
+The Tier-2 voice per-file row entered the census (car 3544f35ef) with a `count` magnitude whose pattern `^\+\s+"?src/domain/` was cut against the TERMINAL diff block (`+   "src/domain/…"`), but the runner measures the JSON reporter's `failureMessages[0]`, which carries the arm's custom message lines (`src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0`, one per drifted file) and no diff block. The `--update` run at 39ccf56ba printed "1 magnitude ceiling(s) HELD" and passed; the gate run at edef0b219 REFUSED the same row: "the pattern matched NOTHING in the live failure message — an unmeasured magnitude is an UNKNOWN one". Per the runner's own instruction the pattern is re-derived against the live message (`^src/domain/\S+: baseline em:\d+ bang:\d+ .* current em:\d+ bang:\d+$`, multiline count) and re-frozen in the same act; `measureMagnitude` over the captured message returns 2 against the unchanged ceiling 2. Meta-test 94/94. Law recorded: a magnitude pattern is cut against the runner's captured message (`--reporter=json` `failureMessages`), never the terminal diff, and "HELD" in an update run is a warning to read, not a pass.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

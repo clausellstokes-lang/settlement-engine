@@ -1,0 +1,11 @@
+import { pathToFileURL } from 'node:url';
+const D='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6';
+const imp=(p)=>import(pathToFileURL(D+'/'+p).href);
+const {generateSettlementPipeline}=await imp('src/generators/generateSettlementPipeline.js');
+const m=await imp('src/components/new/generalDeskRead.js');
+console.log('exports:', Object.keys(m));
+const s=generateSettlementPipeline({settType:'town',culture:'germanic',terrain:'grassland',tradeRouteAccess:'road'},null,{seed:'occ-0',customContent:{}});
+const seed=String(s._seed??s.id??'');
+const r=m.generalDeskLines(s,{seed,audience:'dm'});
+console.log('type', typeof r, Array.isArray(r)?('len '+r.length):Object.keys(r||{}).slice(0,20));
+console.log(JSON.stringify(r).slice(0,600));

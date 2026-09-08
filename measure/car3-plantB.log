@@ -1,0 +1,5 @@
+     × no prose LEAF is in the first-paint module graph 7ms
+     × NO module in the first-paint graph imports a prose leaf 103ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  2 failed | 38 passed | 14 skipped (54)

@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i105-119",
+ "lines": 69,
+ "firstTs": "2026-09-06T16:57:12.135Z",
+ "lastTs": "2026-09-06T17:01:53.397Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+  "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "https://lareviewofbooks.org/article/we-read-things-differently/",
+  "https://blog.ayjay.org/peace-peace/",
+  "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and read back (15 claims, 15 verdicts, indices aligned). All five source pages were reached as raw text on the live URLs with HTTP 200 — no summarizer, no Wayback fallback needed, no BLOCKED verdicts.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "ac481d54ad1f89269",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-ac481d54ad1f89269.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i105-119.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,9 @@
+§912.6: the owner strikes the blind DM panel — there are no game masters to convene, so the beta launch is the panel; the pre-launch acceptance of the rewrite is the checkers at the freeze, the refuters by sample (findings, never a pass) and the owner's walk
+
+Verbatim (2026-09-07 ~20:10): "We don't have real game masters so just skip that step. Our real game master will just come from the beta launch at the end of everything." Part B §13.6 and the dossier §6.4 are superseded; the beta should be able to capture what the panel would have told us (a feedback surface, owner-gated, scheduled with the beta). The sequence: the instrument cars → the wave → the authoring wave → the walk → the stress test, tuning and freeze → the beta. Zero product bytes.
+
+Enrols: none — a ledger-only owner-directive row (§912.6); no Opus car landed in this act.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

@@ -1,0 +1,94 @@
+ 
+ Gems of the D&D Dungeon Master's Guide: SlyFlourish.com 
+ Sly Flourish 
+ New to Sly Flourish? Start Here or subscribe to the newsletter . Listen to articles on Readings and Reflections . 
+ Preorder Rise of the Lazy Gamemaster ! 
+ Gems of the D&D Dungeon Master's Guide 
+ by Mike on 1 March 2021 
+ The Dungeon Master's Guide is an under-appreciated and undervalued tome of useful information and tools for D&D Dungeon Masters. Today we're going to look at some of the the Dungeon Master's Guide ' hidden gems. 
+ How to Read the Dungeon Master's Guide 
+ The organization of the Dungeon Master's Guide is puzzling and, I'd argue, not the best way to parse the job of being a dungeon master. Instead of reading it front to back, I suggest starting with part 2, followed by part 3, and then part 1. This puts adventure building ahead of worldbuilding and content about the outer planes; useful information best left to the end of the book. 
+ DM Advice 
+ The DMG contains lots of useful advice for dungeon masters spread widely throughout the book. Here are some of its most useful gems: 
+ Core Assumptions (Chapter 1, "The Big Picture", pg 9) . Useful to understand what a default D&D world looks like. Your own world may vary from this but it's useful to understand what a default world looks like in D&D and how it works with the default mechanics, spells, and magic items of the rest of the game. 
+ Start Small (Chapter 1, "Creating a Campaign", pg 25) . Good advice buried in a worldbuilding section; this section helps DMs recognize that the most important parts of a campaign are the parts surrounding the characters. 
+ Chapter 2: Creating a Multiverse (pg 43-68) . While not directly practical in most D&D campaigns, the flavor of the multiverse can fill in the details of many ancient tombs or wizard towers. The imagery and iconography of the planes can teach the players a lot about what lurks outside of their known world. 
+ Mapping a Wilderness (Chapter 5, pg 108) . This section actually offers excellent advice for running pointcrawls without ever using the term. 
+ Useful DM Tools and Inspiration 
+ Starting at Higher Levels (Chapter 1, "Tiers of Play", pg 38) . How much gold should characters have if they start at a higher level? How many magic items in a high-magic campaign? This table has you covered. 
+ Dungeon Hazards (Chapter 5, "Mapping a Dungeon", pg 105) . Brown molds, green slime, and webs all help fill dungeons with interesting terrain we might otherwise forget. 
+ Airborne and Waterborne Vehicles (Chapter 5, "Unusual Environments", "The Sea", pg 118) . Are the characters looking to buy a sailing ship or airship? This section has the basics covered. 
+ Traps and damage (Chapter 5, "Traps", pg 121) . The core rules for building your own traps. Mix it with the random trap generator on page 297. 
+ Downtime Activities (Chapter 6, pg 127-131) . Excellent additions to the downtime activities offered in the Player's Handbook . You can expand these further with the downtime activities in Xanathar's Guide to Everything . 
+ Epic boons (Chapter 7, 231-232) . Looking to give your characters a nice powerful boost without a physical item? Epic boons are your answer. 
+ Advantage and Disadvantage (Chapter 8, "Using Ability Scores", pg 239) . A great section that goes beyond the basics of advantage and disadvantage. Instead it shows DMs how to use these powerful tools to improvise situations in any given scene. 
+ Inspiration (Chapter 8, "Using Ability Scores", pg 240-241) . I often hear complaints about inspiration. This section offers many different ways you can handle giving out inspiration, some of which you can use together. 
+ Tracking Initiative (Chapter 8, "Combat", pg 247) . Lots of options for tracking and recording initiative for new DMs. 
+ Tracking Monster Hit Points (Chapter 8, "Combat", pg 247) . Includes my favorite method of assigning an interesting in-world physical characteristic to monsters to help identify them. 
+ Bloodied rule (Chapter 8, "Combat", "Tracking Monster Hit Points", pg 248) . Yes, "bloodied" exists in 5e! While it isn't a mechanical condition anymore, you can still describe a creature being bloodied and this section tells you how. 
+ Monsters and Critical Hits (Chapter 8, "Combat", pg 248) . Describes how to handle a monster's critical hit when using average damage; a common question. 
+ Improvising Damage (Chapter 8, "Combat", pg 249) . An excellent set of tables to help you improvise damage from a falling bookcase to tumbling into a vortex into the elemental plane of fire. 
+ Adjudicating Areas of Effect (Chapter 8, "Combat", pg 249) . Guidelines for running areas of effect using the "theater of the mind". One of my favorite sections. See running Theater of the Mind combat for more. 
+ Handling Mobs (Chapter 8, "Combat", pg 250) . A table to determine how many monsters might successfully hit (or make a saving throw) given the monster's attack bonus (or save bonus) and the target's armor class (or save DC). It's missing a discussion on pooling damage across a large number of monsters but it still gets us close to being able to fight an unlimited number of monsters. See horde rules for more. 
+ Ability Options (Chapter 9, pg 263-264) . Looking to simplify D&D's skill system? This section has lots of options including background or class based proficiency bonuses. I doubt anyone uses these optional rules but they could make for a much simpler version of D&D in which you get your proficiency bonus to attribute checks based on your character's class or background. 
+ Hero points (Chapter 9, "Ability Options", pg 264) . A mechanic used in the Eberron Oracle of War campaign that stacks on top of inspiration. If you want another way to boost characters, here's an answer. 
+ Initiative Variants (Chapter 9, "Combat Options", pg 270) . Lots of alternative methods for running initiative. 
+ Acton Options (Chapter 9, "Combat Options", pg 271) . A favorite of many; this section describes optional combat actions characters might take including disarming, tumbling, or climbing up on monsters. Lots of neat options a DM might use given the circumstances of a battle. 
+ Cleaving Through Creatures (Chapter 9, "Combat Options", pg 272) . A great way to make a melee character feel like Conan, cleaving options let damage carry over from one slain enemy into another. A great circumstantial rule when fighting lots of monsters. 
+ Monster Features (Chapter 9, "Creating a Monster", pg 280-281) . A huge list of monster features you can apply to custom monsters of your choice. Goes hand-in-hand with the Monster Statistics by Challenge Rating table on page 274. 
+ NPC Features (Chapter 9, "Creating a Monster", pg 282) . An overlooked table that offers options to build variant NPCs of different races. The skeleton and zombie ones in particular give you a huge range of undead versions of existing monsters. Mix these with the race-less NPCs in the Monster Manual . A few more of them would have really helped. 
+ Monsters with Classes (Chapter 9, "Creating a Monster", pg 283) . Want to give a fire giant a few classes of barbarian? This section tells you how to add character class features to your monsters to shake things up. 
+ Maps (Appendix C, pg 310-315) . A wonderful selection of about ten maps including one I designed myself for Vault of the Dracolich ! If you ever need a town, cave, or dungeon map, this section has what you need. 
+ Awesome Random Tables to Inspire Your Game 
+ The DMG is also packed with great tables to inspire your game. Easily overlooked, these tables can help you build truly fantastic adventures and campaigns. Next time you're starting to prep your game, give some of these tables a roll and see what comes up. 
+ World-shaking Events (Chapter 1, "Campaign Events", pg 27-32) 
+ Dungeon and Wilderness Goals (Chapter 3, "Adventure Types", pg 73) 
+ All the adventure building tables in Chapter 3, "Adventure Types", page 74 and 75. 
+ Event-based Goals (Chapter 3, "Adventure Types", pg 76) 
+ Framing Events (Chapter 3, "Adventure Types", pg 79) 
+ Villain Schemes and Methods (Chapter 4, "Villains", pg 94-95) 
+ Dungeon & Exotic Locations (Chapter 5, "Dungeons", pg 99) 
+ Dungeon Origin Details (Chapter 5, "Dungeons", pg 100-101) 
+ Monuments & Weird Locales (Chapter 5, "Mapping a Wilderness", pg 108-109) 
+ Current Calamity (Chapter 5, "Settlement", pg 112) 
+ Tavern Name Generator (Chapter 5, "Settlement", pg 113) 
+ Carousing (Chapter 6, "Downtime Activities", pg 128) 
+ Magic item special features (Chapter 7, "Magic Items", pg 142-143) 
+ Magic Item Table B (rare consumables) and F (uncommon permanent magic items) (Chapter 7, "Magic Items", pg 144 and 146) 
+ Madness Effects (short term) (Chapter 8, "Madness", pg 259) 
+ Chamber Purpose (Appendix A, "Stocking a Dungeon", pg 292-295) 
+ Random traps (Appendix A, "Stocking a Dungeon", pg 297) 
+ Random tricks (Appendix A, "Stocking a Dungeon", pg 298) 
+ The DMG: Your D&D Toolbox 
+ Easily overlooked, the Dungeon Master's Guide is a fantastic resource to help you fine tune your game and inspire your own games. Every six months or so, pull it out and skim it page by page to remind yourself what you can find within its pages. Inside you'll find limitless inspiration for your own fantastic adventures. 
+ Related Articles 
+ Running Out of the Abyss Chapter 3: The Darklake 
+ Notable Sections of the 2024 D&D Dungeon Master's Guide 
+ Gems of the Tales of the Valiant Game Master's Guide 
+ Share this article using this link: https://slyflourish.com/gems_of_the_dmg.html 
+ Subscribe to Sly Flourish 
+ Subscribe to the weekly Sly Flourish newsletter and receive a free adventure generator PDF! 
+ Subscribe 
+ You successfully signed up for the Sly Flourish newsletter! 
+ Get More from Sly Flourish 
+ Articles 
+ Newsletter 
+ Bookstore 
+ Patreon 
+ Podcast 
+ YouTube 
+ Sly Flourish's Books 
+ City of Arches 
+ Return of the Lazy Dungeon Master 
+ Lazy DM's Companion 
+ Lazy DM's Workbook 
+ Forge of Foes 
+ Fantastic Lairs 
+ Ruins of the Grendleroot 
+ Fantastic Adventures 
+ Fantastic Locations 
+ Have a question or want to contact me? Check out Sly Flourish's Frequently Asked Questions . 
+ This work is released under a Creative Commons Attribution-NonCommercial 4.0 International license. It allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, for noncommercial purposes only by including the following statement in the new work: 
+ This work includes material taken from SlyFlourish.com by Michael E. Shea available under a Creative Commons Attribution-NonCommercial 4.0 International license. 
+ This site may use affiliate links to Amazon and DriveThruRPG. Thanks for your support! 
+ 

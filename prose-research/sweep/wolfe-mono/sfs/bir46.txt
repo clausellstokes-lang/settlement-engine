@@ -1,0 +1,597 @@
+Reviews: November 1988 
+
+ Science Fiction Studies 
+
+ #46 = Volume 15, Part 3 = November 1988
+
+ BOOKS IN REVIEW 
+ Where's the Theory? 
+
+ Frank Sadler. The
+ Unified Ring: Narrative Art and the Science-Fiction Novel . 
+ ["Studies in Speculative Fiction," No. 11.] Ann Arbor, MI: UMI Research Press,
+ 1984. 117pp. $37.95. 
+
+ I wanted to like this book a great deal more than I was able to. Since studying the
+ narrative techniques of SF strikes me as a worthwhile undertaking, it was very
+ disappointing to discover that Sadler's book doesn't live up to the promise of his title. 
+
+ He argues that novelists, like all members of a culture, are influenced by their age's
+ conception of the nature of the universe, and that such conceptions necessarily shape
+ their art, not only in content but in form. Thus when the conception of the universe
+ undergoes a dramatic change-- as it did in the 20th century under the impact of modern
+ mathematical physics, especially the theories of relativity, probability, and
+ uncertainty--one would expect a change in artistic techniques to reflect this changed
+ understanding of reality. This observation, as Sadler admits, suggests: 
+
+ that the value of the novelist's art lies directly in his keeping abreast of
+ the newer theories of reality. And, perhaps, there are other values of art, and other
+ theories in which this type of argument would be foreign. Nevertheless, it would seem safe
+ to assume...that one standard or criterion that may be used to judge the credibility of
+ any fictional system is the degree to which its narrative devices (techniques) are
+ appropriate or inappropriate to the world view, both implicit and explicit, which exists
+ in the novel. (p. 11) 
+
+ In order to demonstrate this point, Sadler proposes to examine three "recent"
+ SF novels (at least recent in 1974 when he completed this doctoral dissertation) in light
+ of contemporary mathematical physics: relativity in Samuel R. Delany's The Einstein
+ Intersection (1967); probability theory in Brian Aldiss's Report on Probability A
+ (1968); and time in Kurt Vonnegut's Slaughterhouse-Five (1969). In fact, the
+ two chapters on Aldiss and Vonnegut are effective close readings of those texts (though
+ not of great theoretical interest), and would make quite satisfactory journal articles,
+ but I can see no excuse whatever for publishing this book in its entirety, especially not
+ in 1984. Sadler's general thesis--that prevailing world-view affects works of art--seems
+ comparatively trivial; and his prose is pedestrian, his tone defensive, and the entire
+ project seriously dated. 
+
+ And therein, I suspect, lies the key to most of the problems with this text: that it
+ essentially reprints a ten-year-old dissertation. If we picture the author as a graduate
+ student in English literature in the early 1970s, trying to persuade his doctoral
+ committee that one could, indeed, write a genuinely scholarly study of a scorned genre
+ like SF, then the defensiveness of his tone makes some sense. This context also would
+ explain his otherwise incomprehensibly respectful bows in the direction of "organic
+ form" as the key criterion for evaluating literary structure, and his attempts to
+ update the term by including in it the new perceptions of nature found in mathematical
+ physics. 
+
+ Further, it could explain Sadler's choice of texts, in particular his inclusion of The
+ Einstein Intersection . Delany's novel is clearly of high literary merit and, equally
+ clearly, is concerned with the difference between the Einsteinian and the G ö delian
+ universe, but more on a thematic than on a structural level. Sadler works strenuously to
+ persuade us otherwise, but the very effort betrays him: he has to work too hard to make
+ the novel fit his model. First, he devotes the bulk of the chapter to discussions of
+ relativity and the connections between physics and fiction rather than to Delany's novel;
+ next, he defines "form" in a notably metaphorical and unhelpful way (adopting
+ Charles Olson's definition: "FORM IS NEVER MORE THAN AN EXTENSION OF CONTENT").
+ Finally, his argument rests on two features of the text: that Delany intersperses his
+ novel with passages from the journal he kept while he was writing it, and that Spider in a
+ set-piece explains to Lobey the significance of the differences between Einstein and
+ G ö del. 
+
+ It seems likely to me that Delany's novel does reflect the world created by modern
+ physics, but Sadler's argument does not persuade me that this reflection is on the level
+ of structure, or that--even if he were right--this fact tells us anything very important
+ about The Einstein Intersection . If I had been reading for myself rather than for
+ review, I would have stopped with this chapter, and would thus have missed the far more
+ sensible and productive discussions of Aldiss and Vonnegut, where the scientific models
+ really do operate on a structural level and where Sadler's analysis contributes to our
+ understanding of the novels. 
+
+ Consider, though: ten years later, other more suitable texts have become
+ available--Joanna Russ's The Female Man , several of Delany's subsequent
+ experiments, Ursula Le Guin's The Left Hand of Darkness and The Dispossessed ,
+ Stanislaw Lem's Solaris , just to name some of the most obvious examples, all of
+ them with sufficient literary merit to justify their inclusion in such a study. Choosing
+ one of these other texts might have helped Sadler write a much more compelling analysis.
+ And yet, rather than taking advantage of the ten-year gap between the dissertation and its
+ publication to make such a crucial improvement, Sadler sticks with his original choice. 
+
+ Moreover, as we compare the chapter on Delany with those on Aldiss and Vonnegut, a more
+ problematic aspect of Sadler's argument appears, one which goes to the heart of his
+ theoretical point. Occasionally he admits that most SF does not employ the narrative
+ techniques he describes; he himself points out that, while many SF writers address the
+ issues of contemporary science thematically, few of them indulge in formal experimentation
+ (not that this concession prevents Sadler from generalizing about "SF" in other
+ places as if most SF texts did use such narrative techniques). 
+
+ This contradiction would be unimportant except that Sadler's model implies that not
+ just SF novels, but all modern--perhaps we should call them
+ "experimental" novels--to the extent that they are truly of their own time,
+ should demonstrate the same structural reflections of contemporary physics that he finds
+ in selected SF texts. He says that he is not making any "special claim for science
+ fiction" (p. 19). But if there is nothing "special" about SF in this
+ regard, then Sadler's claim to be contributing to SF theory is incoherent on its face. 
+
+ I suspect that the reason Sadler's analyses of Aldiss and Vonnegut are so much more
+ satisfactory than of Delany is that Report on Probability A and Slaughterhouse-Five
+ are structurally much more like experimental novels than like most SF--far more so
+ than The Einstein Intersection . Sadler, despite his announced goal here, lacks a
+ critical vocabulary to talk about the narrative structures of SF, only he doesn't seem to
+ have recognized that fact. He is still trying to adapt the ordinary language of literary
+ criticism (and, in "organic form," an outdated language at that) to a
+ paraliterary genre, and it proves inadequate to the task. 
+
+ I would, perhaps, be more tolerant of this muddle-headed addition to the lists of SF
+ criticism if Sadler had not prefaced it with a statement of breathtaking arrogance,
+ implicitly designed to justify publishing such a dated study. "In the ten years since
+ the preponderance of this book was first written," he observes, "little has
+ taken place to warrant optimism about the future of science-fiction criticism. What had
+ been published, for the most part, continues to be rather traditional in its examination
+ of the science-fiction novel." This is a statement with which many of us could
+ readily agree, despite its self-serving quality--and despite our wry recognition that the
+ pot is here calling the kettle black. However, he goes on to take the community of SF
+ critics to task for not incorporating recent developments in "semiotics and
+ deconstructionist theory" (not to mention for ignoring the work of Robert Scholes)
+ and to shake his head gravely, dubious of future reform. He then concludes with a fatuous
+ remark about the value of art, and trumps it by adding: "My method is somewhat
+ eclectic and personal. I offer no apologies for it. It is, in one sense, intellectual,
+ while in another, truly creative." 
+
+ Alas, it is neither intellectual nor creative, and has nothing of value to say about
+ either narrative art or the SF novel as a form. It is hard to know who to be most
+ irritated with--Sadler for his arrogance, or UMI for publishing this volume. 
+
+ -- Kathleen L. Spencer Millsaps College 
+
+ A Modern Dystopia 
+
+ Leon Stover. The
+ Prophetic Soul: A Reading of H.G. Wells's Things to Come. Jefferson,
+ NC & London: McFarland & Co., 1987. 301pp. $39.95 
+
+ Although Things to Come was H.G. Wells's most ambitious venture into
+ film-making, scholars and critics have never paid it more than superficial attention. At
+ the time of its original release (1936), it earned the dubious distinction of becoming (in
+ Michael Korda's words) "an instant box-office failure"; and with the passing of
+ the years film aficionados have generally written it off (along with Fritz Lang's Metropolis ,
+ which Wells heartily detested) as a spectacular but ludicrous SF "dinosaur,"
+ or even worse, they have dismissed it as a movie whose sole significance was that it
+ provided the inspiration for Arthur Bliss's memorable score. 
+
+ At long last we have a serious reading of the film. The Prophetic Soul contains
+ Leon Stover's close analysis of Things to Come , a rich collection of stills from
+ the movie, and two appendixes providing previously unpublished items of extraordinary
+ interest: "Whither Mankind?" (1934), Wells's film treatment privately published
+ for circulation among the production staff of London Films, and the so-called release (or
+ cutting continuity) script prepared after the film's completion but containing some
+ material actually omitted from the released version. Neither of these appendix items
+ should be confused with the novel The Shape of Things to Come (1933), on which
+ the film is partly based, or with the book Things to Come , a film scenario in
+ literary form published by Wells in 1935. 
+
+ I have only two objections to this otherwise admirable contribution to Wells
+ scholarship. Mr. Stover has a tendency to repeat (and sometimes paraphrase) himself. Some
+ judicious pruning could have shortened his commentary by about a third of its length
+ without any significant loss of content. He has also short-changed the aesthetic aspects
+ of the film in order to focus on its ideological significance. This will worry film
+ specialists; but Wells scholars will probably find Mr. Stover's revelations to be ample
+ compensation for that limitation. 
+
+ The Prophetic Soul starts out by correcting some popular misconceptions about
+ the film. Stover dismisses the notion that "the film is nothing more than a crude
+ prophecy of space flight derived from Jules Verne" (p. xv). He reminds us of Wells's
+ memo to his film's production staff (originally published in the 1935 scenario): "As
+ a general rule you may take it that whatever Lange [sic] did in Metropolis is the
+ exact opposite of what is wanted here" (p. xv). More important, he points out that Things
+ to Come is not just another adaptation of a Wells novel or a director's (William
+ Cameron Menzies') transmutation of Wells's scenario. It was shot from an original
+ screenplay and was entirely Wells's in conception and realization. Except for the change
+ of title (from Wells's preferred "Whither Mankind?") and the omission of a few
+ brief scenes in the 2036 sequences, the film was in every respect what Wells intended it
+ to be. Raymond Massey, who played the film's two heroes, John and Oswald Cabal, observed
+ that "No writer for the screen ever had or ever will have such authority as H.G.
+ Wells possessed in the making of Things to Come " (p. xvii). 
+
+ It is but a short step from Massey's "insider" observation to Stover's
+ impressive claim--are you ready for it?--that the film was nothing less than the
+ culmination of Wells's socio-political visions--a claim that he fully substantiates by
+ documenting its crucial place in the evolution of Wells's thought and by providing a
+ scene-by-scene reading of the film--an analytic process which may be aptly described as
+ "double exposure." Drawing heavily on his two appendixes and upon two published
+ works on which (according to Wells himself) the film was based--i.e., The Work, Wealth
+ and Happiness of Mankind (1931) and The Shape of Things to Come --Stover
+ exposes the film's underlying "political religion" and its sources, both of
+ which have escaped previous commentators; then he exposes the anti-humanist implications
+ of that ideology, which he dubs "Wellsism." A passage in "Whither
+ Mankind?" reveals that "Wellsism" was originally conceived in terms of a
+ drama of three contesting universal forces, represented in Hindu theology as Brahma the
+ Creator (whom Wells identified with the Poietic or scientific-creative mind), Siva the
+ Destroyer (identified with the Kinetic or administrative-managerial capacity), and Vishnu
+ the Possessor (identified with the "dull and base" masses). This conception is
+ never made explicit in the released film, but Stover summarizes it thus: 
+
+ Like Plato's philosopher, John Cabal hand picks his teachers and soldiers, himself a
+ shining example to them of both rational wisdom [Brahma] and the courage to use force
+ [Siva]. He gathers into his Air Dictatorship those few exceptional men and women of the
+ Poietic and the Kinetic type that exist in the world, ruling it in his image over the
+ intellectually Dull and morally Base who comprise the rest of humanity [Vishnu]. This he
+ does for mankind's own good in spite of its fierce resistance. But in time all opposition
+ to his Puritan Tyranny ceases. Cabal brings Siva the Destroyer to the side of Brahma the
+ Creator for the permanent holding down of Vishnu the Possessor. In monopolizing all
+ instruments of force in the creative name of the Social Idea, he achieves a lasting
+ victory over those craven desires that animate the common man. (pp. 21-22)
+
+ A unique kind of socialist, Wells was distrustful and contemptuous of the common man
+ and his naive complacency (which he termed Everydayism). As Stover explains, the Utopia
+ Wells depicts in Things to Come shows his ideal to have been neither democratic
+ socialism nor Marxist-Leninist communism but statism in its most absolute form. Taking his
+ cue from Saint-Simon's vision of a ruling elite of industrialists, Wells envisages a world
+ revolution removing all power from the people and vesting it instead in a
+ scientific-managerial elite. In its perfected form--which is never shown in the film--the
+ Wellsian world state, under the totalitarian guidance of this elite class, would become a
+ completely unified social organism in which there would be no place for individualism.
+ Quoting and commenting on Wells's ideal, Stover clarifies the picture: 
+
+ The world citizen [of 2036 A.D.] is taught a scientific creed that calls for the 
+ 'merger of one's romantic individual life into the deathless life of the species'.... John
+ Cabal affirms this credo in the concluding part of his address [to the World Council],
+ thereby making merger immortality the official creed of the world socialist state.
+
+ Certainly it is Wells's credo. 'Socialism is to me,' he says, 
+ 'no more and no less than
+ the awakening of a collective consciousness in humanity.' This means, he goes on, 
+ 'I would
+ oppose the conception of the Whole to the self-seeking of the Individual.' The Individual
+ is to sink his ego into the immortal state-monster, and so 'live in the species and find
+ his happiness there,' rejoicing in 'the idea of a racial well-being embodied in an
+ organized state.' (pp. 68-69) 
+
+ If Stover's reading is sound--and I can discern no significant flaws in his overall
+ interpretation-- then Wells's ultimate antidote for the racial degeneracy prophesied in The
+ Time Machine was to turn the planet into a kind of human anthill and then extend its
+ boundaries into outer space. The Martians in Olaf Stapledon's Last and First Men demonstrate
+ that kind of collective consciousness as an evolutionary dead end. Stapledon 
+ looked forward to the attainment of collective consciousness in the human race; 
+ but he envisaged that super-faculty as a development that would co-exist with rather than negate the
+ individual spirit. How ironic--and how depressing--that Wells, who started out by
+ rediscovering the unique, should ultimately hold up for our admiration a
+ "Utopia" dedicated to the suppression of unique egos such as his own! 
+
+ -- Harry M. Geduld Indiana University 
+
+ Orwell's Purposes 
+
+ George Slusser, Colin Greenland, & Eric S. Rabkin,
+ eds. Storm Warnings: Science Fiction
+ Confronts the Future . Carbondale & Edwardsville: Southern
+ Illinois UP, 1987. 278pp. $29.95 
+
+ To misunderstand or to misstate an author's intentions is surely not a rarity in
+ criticism, but in the case of George Orwell's 1984 it is especially significant
+ and warrants particular attention. This attention is afforded in several essays
+ anthologized in Storm Warnings . The collection, dealing with the status and
+ future of SF, addresses this problem of misunderstanding in several essays relating to 1984
+ and its author. A principle question raised by many of the earliest commentators on
+ 1984 had to do, in fact, with its intention. Is it a warning, admonishing us to
+ mend our ways before the totalitarian bogeyman gets us, or is it a prophecy, foretelling
+ our inevitable fate? To examine the 1984 -oriented essays in Storm Warnings is
+ to be struck by the importance and pervasiveness of this question. 
+
+ In his essay "Coming Up on 1984 " Frederik Pohl offers much salient
+ observation about Orwell's development from empathizer with his fellow unfortunates in the
+ world to activist seeking a political remedy for the inequities he saw about him. Pohl
+ finds 1984 to be Orwell's worst book, and in contrast to Down and Out in
+ Paris and London , with its fresh vivacity, his point is well taken. Down and Out ,
+ the four early novels, and the first part of The Road to Wigan Pier do show
+ Orwell at his best, recording the real pains of real life as Bozo the Screever, John
+ Flory, Dorothy Hare, Gordon Comstock, George Bowling, and the Wigan coal miners lived it. 
+
+ Homage to Catalonia also is a fine book, capturing much of life's agony,
+ exaltation and vitality, but it is more than that. Herein one sees Orwell's long-held
+ respect and sympathy for the common man move to a resolve to work to establish a political
+ base founded upon democratic socialism and to oppose the threat of Stalin's
+ totalitarianism, which he saw darken the skies of Spain in 1937. Orwell's earlier sympathy
+ for the deprived lower classes had grown into commitment to political action. The fate of
+ the attacks upon Stalinism embodied in Homage to Catalonia and later in Animal
+ Farm should have warned Orwell that his message, whether in realistic or oblique
+ form, would be misunderstood. Homage to Catalonia was remaindered, and Animal
+ Farm found a publisher only after some two dozen refusals. Typical of the insightful
+ rejections was T.S. Eliot's, who lauded the artistry of the book and saw that it would
+ make money, but also that it opposed the political temper of the moment. Animal Farm was
+ finally published by Secker and Warburg and, sure enough, was an instant popular success,
+ the first two printings selling out almost immediately, and the BOMC selling a half
+ million copies. And just as surely, the success of the book was accompanied by many
+ critics' misreadings of its purpose. Even its publisher found it to be an attack upon
+ socialism and socialist parties, all this regardless of the fact that even a casual
+ reading of the allegory makes it crystal clear that Orwell's attack is directed
+ particularly against totalitarian forces--German and British certainly, but Stalinist
+ Russian especially. So, with terrible irony, the first financial rewards came to Orwell at
+ a time when they brought least happiness, and were a result of his deeply felt ideas being
+ misunderstood. 
+
+ Animal Farm is a well-planned, gracefully written allegory, understandably a
+ perennially dependable seller. But however readable and successful it is, the fact remains
+ that the thrust of Orwell's message has been consistently and deliberately misunderstood.
+ How effectively can it achieve its intentions if its readers persist in practicing
+ "blackwhite," the readiness to believe that black is white if party discipline
+ demands it? 
+
+ Blackwhite is the main cause of 1984 's failure to communicate its message that
+ totalitarian forces are so great a threat to us. Pohl is quite justified in his evaluation
+ of 1984 : it is Orwell's worst book. However, one would err in attributing the
+ failure of the book to communicate to its shortcomings as a work of art. One can infer
+ directly from Pohl's observations on Homage to Catalonia and Animal Farm that
+ realism, vividness, and windowpane prose do not guarantee that a book will be understood.
+ Rather, readers are far more likely to succumb to the blandishments of what is facile,
+ safe, and expedient. 
+
+ Colin Greenland's essay, "Images of Nineteen Eighty-Four : Fiction and
+ Prediction," addresses the question of intention more directly. He asserts that 1984
+ is not a prophecy but a satire on the elements which Orwell saw in 1948 and
+ which Greenland finds in the Britain of 1984: superpowers in uneasy confrontation, rampant
+ militarism, kitsch, equivocating national leaders and growing taste of nations for power
+ rather than as sources for care and opportunity. Furthermore, Greenland finds that
+ misinterpretation of 1984 is a deliberate, calculated attempt to throw a red
+ herring across the path of understanding. By suggesting that the thrust of 1984 is
+ its attack upon debasement of language, the London Times , speaking for the
+ Establishment, opposes pluralism of thought in economics, religion, morality, and
+ politics. Greenland's understanding of 1984 's purpose affirms that the novel is
+ not dead prophecy, but vital, pertinent satire. The view of T.A. Shippey, set forth in
+ "Variations in Newspeak: The Open Question of Nineteen Eighty-Four ," is
+ antithetical to Greenland's, for Shippey finds debasement of language to be the paramount
+ concern in Orwell's dystopia. His analysis of the novel demonstrates that its real climax
+ is reached when Winston Smith comes to believe that his recollections of olden days are
+ "false" memories. And, of course, along with the memories goes the language that
+ would preserve them. Elizabeth Maslen's "One Man's Tomorrow Is Another's Today: The
+ Reader's World and Its Impact on Nineteen Eighty-Four " discusses some
+ implications of the choice imposed upon writers who, because they write in a free society,
+ may write either realistically or obliquely. Orwell, as one of these who could choose,
+ selected futuristic fiction for his vehicle. With this decision Orwell opts for the
+ freedom of his audience and imposes upon them the responsibility to decide and learn for
+ themselves. John Huntington's "Orwell and the Uses of the Future" points out how
+ the Goldstein tract, that sociological study incorporated into 1984 , resembles an
+ "anticipation," a Wellsian prophecy disguised as a dispassionate, strictly
+ logical description, thus effectively encouraging readers to resign themselves to the
+ inevitable. One wishes that the many pertinent observations in this timely, interesting
+ collection had focused more specifically upon the central question of purpose. 
+
+ -- Philip J. Snyder Kent State University 
+
+ Christian Theology in Fantasy 
+
+ Martha C. Sammons. "A Better Country": The Worlds of Religious Fantasy and
+ Science Fiction. ["Contributions to the Study of Science Fiction
+ and Fantasy," No. 32.] Westport, CT: Greenwood Press, 1988. 168pp. $35.00 
+
+ One cannot read Martha Sammons' book without perceiving the depth and thoroughness of
+ her research on the subject of Christian fantasy. There is, indeed, very little that she
+ has missed, either in the literature itself or in the criticism. (The one big exception is
+ Charles Williams, whose novels are not even mentioned.) Here one can find useful
+ information about critical questions (the Lewis-Tolkien debate concerning artistic
+ creativity in the development of secondary worlds, for instance) and about works of
+ Christian fantasy themselves (many difficult to obtain or by authors not well known). She
+ deals with works by more than 40 authors, concentrating on C.S. Lewis, J.R.R. Tolkien,
+ George MacDonald, and Madeline L'Engle. The bibliography and index are useful. So her work
+ is a veritable "wordhord" of information and thus a real contribution to the
+ study of fantasy. 
+
+ Yet there are problems. She says her aim is "to explore why fantasy is used to
+ convey theological principles, and the forms and methods used to achieve various
+ effects" (p. 4). This implies that she is writing a critical work rather than putting
+ together a body of information for reference. Furthermore, it promises an explanation of
+ purpose and of the implication of particular forms and methods. The book ends with a
+ sentence which seems to fulfill that promise: "This similarity between fantasy and
+ the Gospels, perhaps more than any other, gives this genre its legitimacy and true
+ purpose" (p. 151). Perhaps the theses ought to contain the word "Christian"
+ somewhere. I think I could be persuaded to accept the final conclusion about Christian
+ fantasy, but what goes on between theses and conclusion does not persuade me; in fact, the
+ evidence presented does not seem to be very coherent, to lead toward, or to support the
+ conclusion. 
+
+ The key questions may well be the place of didacticism in literature and how primarily
+ didactic works are to be evaluated. A number of the sources she quotes (and one might
+ mention in passing that she quotes so widely and extensively, especially from C.S. Lewis,
+ that one begins to doubt how well she has assimilated her material) imply that religious
+ fantasy is essentially didactic. Yet the book never comes directly to this conclusion and
+ it skirts the collateral questions: Who does this literature teach? How does it teach?
+ Does didacticism sometimes or often undercut literary effectiveness? Sammons does not
+ ignore these questions, but she does not grapple with them directly and certainly does not
+ present her evidence so as to clearly support or confirm such assertions as she makes
+ about them. 
+
+ Presentation of evidence may well be the book's most serious deficiency. Consider one
+ example. She says "The writer must also get the characters in and out of the
+ secondary world effectively and credibly" (p. 64). This uncontroversial assertion is
+ followed by three fairly extended examples. However, none of the examples is analyzed so
+ as to demonstrate how it is effective or credible. This reader wants to know the basis for
+ judging whether an event is effective or credible. 
+
+ Given the body of data Sammons has collected, this book is disappointing. The
+ individual parts offer fascinating possibilities which never come to fruition. 
+
+ -- Robert Reilly Rider College 
+
+ Madness in their Method 
+
+ Donald E. Morse, ed. The Fantastic in World Literature and the Arts. 
+ ["Contributions to the Study of Science Fiction and Fantasy," No. 28.] Westport, 
+ CT: Greenwood Press, 1987. 272pp. Donald Palumbo, ed . 
+ Spectrum of the Fantastic. ["Contributions...,"
+ &c. No. 31.] Same publisher, 1988. 286pp. $45.00 each 
+
+ Among the more characteristic products of the now extensive "Contributions"
+ series from Greenwood are the Selected Essays from the annual Conference on the Fantastic
+ in the Arts, of which Donald Morse and Donald Palumbo have now edited the fifth and sixth
+ volumes respectively. It is no accident that we are seeing these volumes of proceedings so
+ regularly since the president of the organization sponsoring the conference is also the
+ editor of the Greenwood series. It is also high time, I think, for a hard-headed
+ assessment of exactly what value these contributions have beyond their obvious one of
+ helping to sustain the conference. Anyone with a commitment to the systematic study of SF,
+ however, is apt to recoil from such an assessment once it is clear how wide-ranging, even
+ naive, these volumes, which are characteristic of the conference, really are. Perhaps
+ Morse gives us the best preview in the introduction to his volume when he observes with no
+ qualification that SF is only a "stepchild" of fantasy. At the very least, I
+ must say that the books here are problematic in their intentions and scope so that any
+ reviewer would be remiss just to catalogue the contents and to make a blanket
+ recommendation for libraries. This overall enterprise with regard to the
+ "fantastic" needs commenting on, and I trust I will not be the only reviewer to
+ do so. 
+
+ First of all, even a cursory look at the contents of these volumes or at the ubiquitous
+ promotional material for the annual conference will indicate that all of literature and
+ art seem to fall under the purview of the fantastic here--from Dante to Asimov and from
+ Canadian film to the surrealist Max Ernst to Wuthering Heights . In the Morse
+ volume, for example, the reader is asked to consider significant amounts of Latin American
+ fiction along with Tolkien, Vinge, and Gene Wolfe as well as to appreciate methodologies
+ ranging from linguistics to a kind of mock film criticism. The Palumbo volume has even
+ less focus. There we find Emily Bront ë , two Dante essays, and some drama criticism
+ ranging from Ionesco to a piece titled "Two Sides of Paradise: The Eden Myth
+ According to Kirk and Spock." Further, none of the essays is developed to an adequate
+ length. Most seem still like conference papers. There are 16 contributions to the Morse
+ volume and 23 to the Palumbo, not counting prefaces and introductions by the editors. The
+ impression I get from such profuseness is that everyone involved (many of the contributors
+ are graduate students) genuinely thinks that new ground is being broken. 
+
+ But this open-faced enthusiasm and eclecticism seems to me the essence of the
+ conservative. These people keep everything and, furthermore, suggest to me that they are
+ trying to hold onto the impossible ideal of the Renaissance Man that most of us have
+ wistfully missed since the 18th century when the term was coined. Theory about
+ "wholeness of being" from phenomenology and from Eastern religion, as it is
+ evoked in particular in the essays by Peter Malekin in each collection, also saturates
+ both of these volumes so that, if one were to absorb it all, the spiritual effect of the
+ fantastic would surely be fantastic. But like an armchair Lt. Henry somehow infected with
+ Hemingway's skepticism, I found myself continually writing in the margins, "Wouldn't
+ it be lovely." Ironically, the editors of these volumes and the organizers of the
+ conference think they are at the forefront of a movement to stake out new academic
+ enterprises. But since nothing from the past is outside of their consideration, I hardly
+ think that their methodology is radical at all; by trying to be all things to all people,
+ the fantastic becomes, indeed, rootless. 
+
+ Here my bias toward "scientific" methodology comes into play so that what
+ strikes me most about these two volumes is their treatment of method. By suggesting that
+ we revise our studies (those of us who work with SF and fantasy) into such global
+ eclecticism, the fantasists would destroy the discoveries of the last couple of centuries
+ about the value of skepticism and the practicality of partial knowledge. Indeed, they
+ would urge us all to be Renaissance Men. But the SF enterprise of careful, skeptical
+ category-making needs to be protected not only because it is one fraternity of scholars'
+ as opposed to another's but also because we have learned the practical value of careful
+ and limited categories. The most appropriate example of this practicality, or the absence
+ of it, that I can use at this time comes from the organization of these volumes
+ themselves. In fact, the editors (or perhaps Greenwood Press) continually stumble over
+ their own poor categories. Palumbo's book contains a section of three essays labeled
+ "Comparative Studies," but clearly outside of that section are several essays
+ that deal with comparative literature. The lead essay in the volume, in fact, compares
+ Dante and Chaucer but appears in a section labeled "Poetry." This problem is
+ everywhere, contagious, throughout both collections of essays. Everyone wants to talk
+ about everything all at once. 
+
+ Obviously, I seem to be lapsing into Enlightenment scorn over the enthusiasm of these
+ "diseases of the imagination"; and I could continue to evoke authorities, from
+ 18th-century science on down to our own day, in order to suggest a sane and moderate sense
+ of skepticism for these confr è res of the fantastic. But instead I will conclude
+ with a caution about the "madness" inherent in fanatics who sacrifice the sense
+ of clear categories in favor of transports to "wholeness" that comes from Bram
+ Stoker (who, of course, is mentioned in these volumes). The following passage, however, is
+ not quoted in Sharon Russell's essay on the Vampire Film. I came across it while rereading
+ Dracula in the fine new illustrated edition from Unicorn Press and thought of the
+ intention of these "wholistic" volumes to be more omnipotent than is possible.
+ Stoker's Dr. Seward is writing about Renfield, and I can only hope that a future conference
+ on the fantastic will consider his dilemma: "...in his sublime self-feeling the
+ difference between myself and attendant seemed to him as nothing....These infinitesimal
+ distinctions between man and man are too paltry for an Omnipotent Being." 
+
+ -- Donald M. Hassler Kent State University 
+
+ Not What You're Looking For 
+
+ H.W. Hall, ed. Science
+ Fiction and Fantasy Reference Index, 1878-1985 . Detroit: Gale
+ Research Co., 1987. 2 vols. 1460pp. $175.00 
+
+ Hal Hall, in his Preface to the first of these two folio-size tomes, tells us that they
+ record "[m]ore than 19,000 individual books, articles, essays, news reports, and
+ audiovisual items...indexed by over 42,000 author and subject citations," all of them
+ bearing on SF and/or "fantasy and horror/supernatural/weird fiction" (p. ix).
+ The last figure does not quite tally with Gale's information sheet, which breaks down the
+ entries (as the Preface does not) into 16,000 by author and 27,000 by subject. Whatever
+ the exact number, it seems impressive, however much it may owe to Hall's listing of
+ virtually every "news report" (or so it appears) from Locus and 
+ Science Fiction
+ Chronicle . The ostensible selling points of this bibliography, then--$175 worth in US
+ funds--are these: it gives the impression of being the only source that one need consult
+ to find out what has been written on a given subject; and it anatomizes the secondary
+ literature far more extensively than any of its competitors. 
+
+ Neither of those seeming advantages accounts for the nearly 600 pages comprising the
+ volume headed Author Entries . Nor does Hall otherwise explain why he chose this
+ mode of proceeding rather than following the MLA's example of providing an index by author
+ to numbered citations by subject. (Hall, by the way, has no such system of numbers.) To be
+ sure, he did in principle have a rationale available to him: the third of his project
+ given over to listings by "author" (viz., critic) would have been justifiable as
+ a dictate of consistency if he had recorded with some degree of completeness the
+ contributions of those who are also writers of SF&F. That, however, is far from being
+ the case: to take what I hope is the most egregious instance, H.G. Wells is credited with
+ only three pieces (out of a possible 25, at the minimum), and these three do not even
+ include his "Preface to The Scientific Romances ...." 
+
+ No bibliographer, of course, can credibly claim to have overlooked nothing. But given
+ the would-be virtues of Hall which I have mentioned, the number of items that he leaves
+ out constitutes a significant deficiency, and one which is all the greater by reason of
+ his not clearly spelling out what he has omitted or why. So far as I can see, his express
+ acknowledgments about the limits and limitations of his bibliography are two. He says that
+ he has "not fully analyzed" the contents of the bibliographies published by G.K.
+ Hall (p. x); and he admits that coverage of foreign-language criticism is rather cursory.
+ What he means by the former qualification my reader can guess from my subsequent remarks.
+ In the area of foreign-language material, he has relied on David Samuelson for information
+ about work up to 1981 and on Luk de Vos thereafter. Of the two, Samuelson appears to have
+ been the more thorough, but that is relatively speaking. The subject entry for Jules
+ Verne, for instance, lists 98 items by my count; and of the 22 of these in foreign
+ languages, only one is post-1981 (and it is an Italian translation from English). In other
+ words, if the Verne is a fair sample, Hall's volumes ignore just about 95% of the
+ pertinent criticism ("2600 articles" on Verne had been published as of 1982,
+ according to William Butcher: see his "Handle with Care" in SFS No. 44). 
+
+ In the area of English-language criticism, the omissions--it perhaps goes without
+ saying--are not nearly as quantitatively formidable. They are, however, many of them
+ unexpected and unaccountable. To start with my own entry (as the one on which I can
+ pronounce with some authority), Hall understandably overlooks an essay on A Tale of a
+ Tub as SF (and all the more understandably since it appeared in English Studies
+ in Canada [1984]); but he also leaves out an article on Wells in Texas Studies in
+ Literature (1978), my prefatory essay to the first edition (1976) of Anatomy of
+ Wonder (which also does not figure among the entries for the subject
+ "Definitions"), and H.G. Wells: Early Writings in Science and Science
+ Fiction (1975). And while he does make a practice of noting reprints, often giving
+ them a separate entry (in line with what I consider to be the extravagance of his entire
+ first volume), he does not inform his readers that my SFS article on Borges can also be
+ found in H.G. Wells and Modern Science Fiction (1977) or that a new edition of Into
+ the Unknown was issued by the University of California Press in 1983. 
+
+ The fact that, by my unsystematic examination, my case is far from being unique will
+ probably not trouble most would-be users of the Author Entries volume, who may
+ have even less occasion to consult it than I would (in my editorial capacity, I mean). The
+ problem is that the oversights apply as well to Subject Entries . Under
+ "Nuclear War" (and also under "Atomic Bomb"), for instance, someone
+ relying on Hall will not find Bruce Franklin's Countdown to Midnight (1984) or Paul Brians' "Nuclear War and Science Fiction, 1945-59" (also 1984); the subject
+ entry for Karel Č apek does not mention, inter alia, the important study by William E.
+ Harkins, even though that book is called Karel 
+ Č apek (1962); and the subject
+ entry for C.S. Lewis omits an essay collection bearing his name as its subtitle (edited by
+ Peter J. Schakel, 1977). What I found even more disturbing, however, were omissions of
+ items listed in the Tymn-Schlobin bibliographies of SF&F criticism. Checking a portion
+ of "The Year's Scholarship in Science Fiction and Fantasy: 1977" ( Extrapolation ,
+ 20 [1979]:238ff.), I discovered that about ten per cent of its entries are missing from
+ the Hall volumes, something which is all the more surprising in view of the 11-line
+ paragraph in Hall's Preface which concludes with his assertion that "this volume
+ [sic]...is much more comprehensive than the combined Year's Scholarship bibliographies"
+ (p. ix). 
+
+ Compared with its lack of comprehensiveness, certain other aspects of the Subject
+ Entries volume appear as annoyances rather than as serious handicaps. Nevertheless,
+ anyone who has not yet seen this Hall bibliography should know that the "27,000"
+ subject citations (a figure, by the way, which I for one am unwilling to verify) do not
+ accommodate any individual titles as such. And not only is there no independent entry,
+ say, for The Dispossessed ; it is also the case that all writings about Le Guin
+ (for example) appear in one or another of no fewer than three alphabetical listings by
+ title: books; articles whose title begins with a book-title (usually, but not necessarily,
+ of a book by the subject-author); and other articles. Moreover (and as might be
+ anticipated from the absence of any numbering system), there are no cross-references. 
+
+ I am sure that I am not alone in devoutly wishing for the kind of bibliography of
+ secondary literature that Hall promises in his Preface and is certainly capable of
+ producing: one that would bring together and add to our previous information, which it
+ would thus make readily accessible in one place. It therefore pains me to say that this Science
+ Fiction and Fantasy Reference Index is not it. 
+
+ -- RMP 
+
+ Back to Home

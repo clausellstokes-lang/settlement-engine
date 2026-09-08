@@ -1,0 +1,23 @@
+{
+ "role": "finder",
+ "name": "ai",
+ "angle": "critics-direct",
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T09:51:39.398Z",
+ "lastTs": "2026-09-06T09:51:39.955Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've reached your Fable limit. Switch to another model, or manage usage credits at claude.ai/settings/usage?from=cc_cli_limit_message, to continue.",
+ "run": "wf_ff38fa41-dfb",
+ "agent": "aa2c77a5eb936bc5e",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/subagents/workflows/wf_ff38fa41-dfb/agent-aa2c77a5eb936bc5e.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-critics-direct.json",
+  "claims": 106,
+  "complete": false,
+  "mtime": "08:26:12"
+ }
+}

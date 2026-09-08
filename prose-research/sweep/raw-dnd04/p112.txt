@@ -1,0 +1,617 @@
+ 
+ Five Keys to Punchier Prose - Pelgrane Press Ltd 
+ Skip to content 
+ Login / Register 
+ Search for: 
+ Wishlist 
+ Cart / $ 0.00 
+ No products in the cart.
+ Return to shop 
+ Cart 
+ No products in the cart.
+ Return to shop 
+ Articles 
+ ALL ARTICLES 
+ SEE PAGE XX 
+ GAMES 
+ 13TH AGE 
+ ASHEN STARS 
+ CTHULHU CONFIDENTIAL 
+ DRACULA DOSSIER 
+ THE DYING EARTH 
+ THE ESOTERRORISTS 
+ THE FALL OF DELTA GREEN 
+ FEAR ITSELF 
+ THE GAEAN REACH 
+ HILLFOLK 
+ MUTANT CITY BLUES 
+ NIGHT'S BLACK AGENTS 
+ SWORDS OF THE SERPENTINE 
+ TIMEWATCH 
+ TRAIL OF CTHULHU 
+ THE YELLOW KING 
+ WRITERS 
+ ADAM GAUNTLETT 
+ ROB HEINSOO 
+ KENNETH HITE 
+ ROBIN D. LAWS 
+ KEVIN KULP 
+ WADE ROCKETT 
+ GARETH RYDER-HANRAHAN 
+ TOPICS 
+ 13TH SAGE 
+ GAME DESIGN 
+ GM ADVICE 
+ GUMSHOE 
+ GUMSHOE ONE-2-ONE 
+ KEN AND ROBIN TALK ABOUT STUFF 
+ RIPPED FROM THE HEADLINES 
+ SCENARIO HOOKS 
+ LATEST ARTICLES 
+ View from the Pelgrane Nest - Back to School Edition 
+ September 1, 2026
+ Some of you and/or your offspring are back at school already, but the Great Pelgrane [...] 
+ Ken and Robin Talk About Stuff: Hominy Jim 
+ August 28, 2026
+ In the latest episode of their balsamic podcast, Ken and Robin talk PCs vs barriers, [...] 
+ The Top of Your Class 
+ August 24, 2026
+ Players of the art student investigators from Yellow King: Paris might wonder which of their [...] 
+ Call for Playtesters: The Dreadful Hare 
+ August 24, 2026
+ Pelgrane Press cordially invites you to playtest scenarios for Merryshire Detective Club. These include "Slaying [...] 
+ Ken and Robin Talk About Stuff: Yanking Beards and Stealing Money 
+ August 21, 2026
+ In the latest episode of their winsome, brookside podcast, Ken and Robin talk finding stuff [...] 
+ Ken and Robin Talk About Stuff: Old Tornado Hand 
+ August 14, 2026
+ In the latest episode of their over-easy podcast, Ken and Robin talk Gen Con, scene [...] 
+ Ken and Robin Talk About Stuff: Supervising Sub-Eviscerator 
+ August 7, 2026
+ In the latest episode of their labyrinthine, drop-ceiling podcast, Ken and Robin talk handing the [...] 
+ Ken and Robin Talk About Stuff: Supervising Sub-Eviscerator 
+ August 7, 2026
+ In the latest episode of their labyrinthine, drop-ceiling podcast, Ken and Robin talk handing the [...] 
+ See Page XX - July 2026 
+ July 31, 2026
+ Products 
+ GUMSHOE 
+ ASHEN STARS 
+ THE ESOTERRORISTS 
+ THE FALL OF DELTA GREEN 
+ FEAR ITSELF 
+ MUTANT CITY BLUES 
+ NIGHT'S BLACK AGENTS 
+ SWORDS OF THE SERPENTINE 
+ TIMEWATCH 
+ TRAIL OF CTHULHU 
+ THE YELLOW KING 
+ GUMSHOE ONE-2-ONE 
+ ALTEREGOMANIA 
+ CTHULHU CONFIDENTIAL 
+ NIGHT'S BLACK AGENTS: SOLO OPS 
+ THE PARAGON BLADE 
+ D20 GAMES 
+ 13TH AGE 
+ LOREFINDER 
+ OWL HOOT TRAIL 
+ DRAMASYSTEM GAMES 
+ HILLFOLK 
+ PAGE TURNERS 
+ OTHER GAMES 
+ #FEMINISM 
+ THE DYING EARTH 
+ THE GAEAN REACH 
+ HONEY & HOT WAX 
+ KEN WRITES ABOUT STUFF 
+ SEVEN WONDERS 
+ SKULDUGGERY 
+ SUBURBAN CONSUMPTION OF THE MONSTROUS 
+ OTHER PRODUCTS 
+ GIFT VOUCHERS 
+ MERCHANDISE 
+ MUSIC 
+ FICTION 
+ THE BIRDS 
+ STONE SKIN PRESS 
+ GAMEPLAYWRIGHT 
+ BEATING THE STORY 
+ THE BONES: US AND OUR DICE 
+ FRIENDLY LOCAL GAME STORE 
+ HAMLET'S HIT POINTS 
+ THINGS WE THINK ABOUT GAMES 
+ THE WHITE BOX ESSAYS 
+ THE PARAGON BLADE 
+ GUMSHOE One-2-One fantasy
+COLOUR HARDBACK AVAILABLE NOW
+ Community 
+ About Us 
+ Contact Us 
+ See Page XX 
+ TTRPG FAQ & GLOSSARY 
+ See Page XX 
+ Five Keys to Punchier Prose
+ Posted on February 1, 2012 October 26, 2021 by Beth Lewis 
+ By Robin D. Laws
+ Although I'm not a line developer or editor for the GUMSHOE line, the Head Pelgrane occasionally asks me to comment on manuscripts in progress. Over time I've been able to see certain issues crop up in the work of multiple authors. This process has improved not only those books, but my own work. It's easier to see problematic material in someone else's draft than in your own. Manuscript review has also crystallized my thoughts on how GUMSHOE, and particularly its scenarios, might be refined and better presented. While revising our internal writer's guidelines to reflect these developing insights, we thought we'd open them up to a general audience by presenting key selections in this and next month's installment of See P. XX.
+ Let's reverse the universe's usual polarity by moving from the general to the specific--from tips to punch up any piece of writing, to those applicable to roleplaying scenario writing, and finally to the finer points of GUMSHOE.
+ Punching Up Any Piece of Writing
+ These rules will stand you in good stead in most fiction or non-fiction writing. Exceptions pertain in particular fields: scientific papers demand the passive voice, for example.
+ You may groan at the familiarity of certain examples, but they show up repeatedly in the work of skilled professional writers, and so bear repeated hammering.
+ You'll note that I advise writers to take these steps during revision. Stopping your first draft to wrestle with sentence structure kills momentum and may plunge you into the chill waters of self-doubt and frustration. Tackle this stuff later, when spotting and fixing errors fosters a sense of accomplishment. Eventually you'll internalize these tricks and instinctively perform them during the writing phase.
+ Passive Voice
+ Avoid the passive voice , in which you obscure the object of an action by turning it into the subject of the sentence.
+ The sanity of the Congressman was destroyed by mi-go. 
+ By de-emphasizing the person, force, thing or shambling horror, performing the action, you weaken your sentence's impact.
+ If you're writing a business press release or apologizing for a politician, you may omit the real subject of the sentence entirely:
+ Mistakes were made. 
+ The sanity of the Congressman was destroyed. 
+ Here you're fudging on purpose, removing culpability and attributing the action to some unnamed force. You mi-go apologist, you!
+ When revising your manuscript, and you see any variation of the verb "to be" followed by a past participle, reconfigure it.
+ Mi-go destroyed the Congressman's sanity. 
+ I made mistakes. 
+ As with any general writing tip, you may find specific reason to violate this dictum. Dialogue justifies all manner of prose sins. Perhaps mi-go always speak in the passive. I wouldn't put it past them. The overall point remains--only do this when you can justify it.
+ Weak Verbs
+ Here's an issue I used to conflate with passive voice before I started reviewing other people's manuscripts and got corrected on it. When reviewing your manuscript, look for instances of the verb "to be" and its variations--"is," "are", "was" and "am." Most sentences pair these with an additional verb.
+ The sheepbots are grazing on the hill. 
+ The vampire was sucking her blood. 
+ Wherever you can do so without weirdly contorting your sentence's rhythm or syntax, reconfigure to drop the "to be" and rely entirely on the more vivid paired verb.
+ The sheepbots grazed on the hill. 
+ The vampire sucked her blood. 
+ You may be using "to be" to indicate timing--it suggests an ongoing action, rather than one that has already completed itself. Do this only when absolutely necessary--often the exact sequence of events proves less important than the stronger punch of the single action verb.
+ Over-reliance on "to be" becomes a special temptation when writing in the abstract mode found in the essay, or in rules text.
+ The second edition is better organized than the first. 
+ Use of weak verbs is a sign of a beginning writer. 
+ This rule is the key to GUMSHOE. 
+ By replacing instances of "to be" whenever possible, you'll accumulate a repertoire of stronger, more precise substitute verbs.
+ We reorganized this edition for superior ease of reference. 
+ Use of weak verbs reveals the hand of the beginning writer. 
+ To understand GUMSHOE, absorb this key rule. 
+ Paring "of the"
+ Sentences including the word pairing "of the" can often be tightened by replacing them with an apostrophe.
+ He hires the crew to repatriate the mantle of the king. 
+ Becomes:
+ He hires the crew to repatriate the king's mantle. 
+ Consider this issue wherever it appears, but don't treat it as an iron-clad rule. You may want to leave an "of the" as is:
+ for rhythm
+ to maintain formality
+ when emulating an older style
+ to preserve thought order by ensuring that a sentence ends on a particular clause.
+ Sometimes the apostrophe version strikes the reading ear as jarringly direct.
+ Roleplaying Syntax
+ The following issues prose issues apply specifically (or at least particularly) to the roleplaying form.
+ Deprecation of the "will"
+ Though often mentioned, this issue continues to bedevil scenarios, which are written in a strange conditional future tense. In a sentence describing an action which a PC or GMC may or may not take, you may find yourself reflexively inserting the word "will":
+ If the agents reach the safe house, Keletny will burn the car. 
+ Should scavengers get past the drop door, the mutants will scramble for the hidden exit. 
+ You can do yourself, and your editors, no better favor than to train yourself out of this habit. In this construction, "will" is totally unnecessary, and thus deadens the sentence's impact:
+ If the agents reach the safe house, Keletny burns the car. 
+ Should scavengers get past the drop door, the mutants scramble for the hidden exit. 
+ Plurals Are Pluralistic
+ In the future hypothetical voice of roleplaying writing you often find yourself constructing sentences around players and/or their characters whose genders are unknown to you. More inconveniently still, grammar predates feminism, rendering all attempts at gender inclusivity awkward in one way or another.
+ GUMSHOE uses the conceit that the hypothetical unknown GM is female and the players male. As a side benefit, this sometimes clarifies sentences featuring multiple pronouns.
+ Even better, when you can, turn the subject plural to avoiding assuming gender for your hypothetical subject.
+ The character can leave his pistol at the door, or leave it on the ship. 
+ Becomes:
+ Characters can leave their pistols at the door, or leave them on the ship. 
+ Next month : We move beyond prose issues to navigate you past scenario design pitfalls, general and GUMSHOE.
+ This entry was posted in See Page XX and tagged GUMSHOE , how to write good , tips , writing . 
+ Beth Lewis 
+ Open Call for Artists 
+ View from the Pelgrane's Nest 
+ Categories 
+ 13th Age (441)
+ Ashen Stars (88)
+ Ballad Hunters (10)
+ Birds (656)
+ Cthulhu Confidential (5)
+ Dying Earth (38)
+ Esoterrorists (88)
+ Fall of Delta Green (65)
+ Fear Itself (59)
+ Gameplaywright (10)
+ General (346)
+ Gumshoe (145)
+ GUMSHOE One-2-One (32)
+ Hillfolk (83)
+ KWAS (9)
+ Merryshire Detective Club (16)
+ Mutant City Blues (42)
+ NBA Solo Ops (2)
+ News (1,933)
+ Night's Black Agents (190)
+ Owl Hoot Trail (8)
+ Page Turners (24)
+ Paragon Blade (5)
+ Products (76)
+ See Page XX (1,000)
+ Seven Wonders (3)
+ Skulduggery (23)
+ Stone Skin Press (13)
+ Style (5)
+ Swords of the Serpentine (57)
+ The Gaean Reach (20)
+ TimeWatch (22)
+ Trail of Cthulhu (338)
+ Yellow King Roleplaying Game (154)
+ Tag Cloud 
+ 13 True Ways 
+ 13th age 
+ 13th Sage 
+ 31 Nights of Dractober 
+ Art 
+ Ashen Stars 
+ Bookhounds of London 
+ Character Builds 
+ conventions 
+ dracula dossier 
+ dreamhounds of paris 
+ Dying Earth 
+ esoterrorists 
+ Eternal Lies 
+ fall of delta green 
+ Fear Itself 
+ game design 
+ Gareth Ryder-Hanrahan 
+ gm advice 
+ GUMSHOE 
+ GUMSHOE One-2-One 
+ Hillfolk 
+ Ken and Robin Talk About Stuff 
+ Kenneth Hite 
+ Kevin Kulp 
+ kickstarter 
+ Mutant City Blues 
+ news 
+ night's black agents 
+ playtesting 
+ RDL 
+ review 
+ Rob Heinsoo 
+ robin d laws 
+ scenario hooks 
+ See Page XX 
+ Swords of the Serpentine 
+ The Fall of Delta Green 
+ thrill of dracula 
+ TimeWatch 
+ Trail of Cthulhu 
+ video 
+ view from the pelgrane's nest 
+ Wade Rockett 
+ Yellow King RPG 
+ Archives 
+ Archives 
+ Select Month 
+ September 2026 (1) 
+ August 2026 (10) 
+ July 2026 (19) 
+ June 2026 (10) 
+ May 2026 (11) 
+ April 2026 (11) 
+ March 2026 (10) 
+ February 2026 (14) 
+ January 2026 (11) 
+ December 2025 (10) 
+ November 2025 (13) 
+ October 2025 (11) 
+ September 2025 (12) 
+ August 2025 (13) 
+ July 2025 (11) 
+ June 2025 (12) 
+ May 2025 (12) 
+ April 2025 (13) 
+ March 2025 (12) 
+ February 2025 (11) 
+ January 2025 (11) 
+ December 2024 (12) 
+ November 2024 (5) 
+ October 2024 (5) 
+ September 2024 (5) 
+ August 2024 (6) 
+ July 2024 (6) 
+ June 2024 (7) 
+ May 2024 (12) 
+ April 2024 (14) 
+ March 2024 (14) 
+ February 2024 (11) 
+ January 2024 (16) 
+ December 2023 (17) 
+ November 2023 (16) 
+ October 2023 (13) 
+ September 2023 (7) 
+ August 2023 (4) 
+ July 2023 (6) 
+ June 2023 (6) 
+ May 2023 (3) 
+ April 2023 (8) 
+ March 2023 (20) 
+ February 2023 (13) 
+ January 2023 (4) 
+ December 2022 (8) 
+ November 2022 (15) 
+ October 2022 (14) 
+ September 2022 (10) 
+ August 2022 (9) 
+ July 2022 (9) 
+ June 2022 (11) 
+ May 2022 (10) 
+ April 2022 (13) 
+ March 2022 (16) 
+ February 2022 (14) 
+ January 2022 (11) 
+ December 2021 (14) 
+ November 2021 (8) 
+ October 2021 (12) 
+ September 2021 (9) 
+ August 2021 (8) 
+ July 2021 (8) 
+ June 2021 (11) 
+ May 2021 (14) 
+ April 2021 (19) 
+ March 2021 (14) 
+ February 2021 (16) 
+ January 2021 (11) 
+ December 2020 (9) 
+ November 2020 (12) 
+ October 2020 (44) 
+ September 2020 (46) 
+ August 2020 (47) 
+ July 2020 (40) 
+ June 2020 (24) 
+ May 2020 (29) 
+ April 2020 (23) 
+ March 2020 (32) 
+ February 2020 (24) 
+ January 2020 (14) 
+ December 2019 (10) 
+ November 2019 (16) 
+ October 2019 (13) 
+ September 2019 (12) 
+ August 2019 (7) 
+ July 2019 (17) 
+ June 2019 (17) 
+ May 2019 (15) 
+ April 2019 (13) 
+ March 2019 (12) 
+ February 2019 (14) 
+ January 2019 (16) 
+ December 2018 (15) 
+ November 2018 (16) 
+ October 2018 (13) 
+ September 2018 (14) 
+ August 2018 (5) 
+ July 2018 (15) 
+ June 2018 (25) 
+ May 2018 (17) 
+ April 2018 (21) 
+ March 2018 (20) 
+ February 2018 (17) 
+ January 2018 (24) 
+ December 2017 (17) 
+ November 2017 (7) 
+ October 2017 (30) 
+ September 2017 (18) 
+ August 2017 (17) 
+ July 2017 (23) 
+ June 2017 (25) 
+ May 2017 (21) 
+ April 2017 (15) 
+ March 2017 (21) 
+ February 2017 (20) 
+ January 2017 (13) 
+ December 2016 (25) 
+ November 2016 (21) 
+ October 2016 (19) 
+ September 2016 (25) 
+ August 2016 (18) 
+ July 2016 (21) 
+ June 2016 (19) 
+ May 2016 (25) 
+ April 2016 (26) 
+ March 2016 (18) 
+ February 2016 (22) 
+ January 2016 (18) 
+ December 2015 (17) 
+ November 2015 (23) 
+ October 2015 (63) 
+ September 2015 (19) 
+ August 2015 (26) 
+ July 2015 (17) 
+ June 2015 (22) 
+ May 2015 (24) 
+ April 2015 (28) 
+ March 2015 (30) 
+ February 2015 (19) 
+ January 2015 (22) 
+ December 2014 (21) 
+ November 2014 (26) 
+ October 2014 (24) 
+ September 2014 (26) 
+ August 2014 (23) 
+ July 2014 (24) 
+ June 2014 (25) 
+ May 2014 (29) 
+ April 2014 (26) 
+ March 2014 (26) 
+ February 2014 (28) 
+ January 2014 (32) 
+ December 2013 (30) 
+ November 2013 (20) 
+ October 2013 (33) 
+ September 2013 (28) 
+ August 2013 (22) 
+ July 2013 (32) 
+ June 2013 (16) 
+ May 2013 (32) 
+ April 2013 (23) 
+ March 2013 (22) 
+ February 2013 (27) 
+ January 2013 (28) 
+ December 2012 (29) 
+ November 2012 (18) 
+ October 2012 (33) 
+ September 2012 (21) 
+ August 2012 (32) 
+ July 2012 (27) 
+ June 2012 (33) 
+ May 2012 (28) 
+ April 2012 (35) 
+ March 2012 (26) 
+ February 2012 (29) 
+ January 2012 (21) 
+ December 2011 (29) 
+ November 2011 (31) 
+ October 2011 (29) 
+ September 2011 (19) 
+ August 2011 (24) 
+ July 2011 (30) 
+ June 2011 (20) 
+ May 2011 (27) 
+ April 2011 (32) 
+ March 2011 (26) 
+ February 2011 (27) 
+ January 2011 (16) 
+ December 2010 (18) 
+ November 2010 (11) 
+ October 2010 (34) 
+ September 2010 (24) 
+ August 2010 (4) 
+ July 2010 (39) 
+ June 2010 (18) 
+ May 2010 (25) 
+ April 2010 (21) 
+ March 2010 (17) 
+ February 2010 (12) 
+ January 2010 (27) 
+ December 2009 (6) 
+ November 2009 (19) 
+ October 2009 (5) 
+ September 2009 (6) 
+ August 2009 (3) 
+ July 2009 (6) 
+ June 2009 (5) 
+ May 2009 (5) 
+ April 2009 (12) 
+ March 2009 (5) 
+ February 2009 (11) 
+ January 2009 (11) 
+ December 2008 (4) 
+ November 2008 (4) 
+ October 2008 (11) 
+ September 2008 (5) 
+ August 2008 (4) 
+ July 2008 (6) 
+ June 2008 (5) 
+ May 2008 (5) 
+ April 2008 (5) 
+ March 2008 (5) 
+ February 2008 (6) 
+ January 2008 (4) 
+ December 2007 (4) 
+ November 2007 (5) 
+ October 2007 (7) 
+ September 2007 (3) 
+ August 2007 (4) 
+ July 2007 (5) 
+ June 2007 (5) 
+ May 2007 (5) 
+ April 2007 (6) 
+ March 2007 (4) 
+ February 2007 (5) 
+ January 2007 (6) 
+ December 2006 (5) 
+ November 2006 (5) 
+ October 2006 (5) 
+ September 2006 (3) 
+ August 2006 (5) 
+ July 2006 (5) 
+ June 2006 (5) 
+ May 2006 (4) 
+ April 2006 (3) 
+ March 2006 (1) 
+ February 2006 (5) 
+ January 2006 (6) 
+ December 2005 (4) 
+ November 2005 (5) 
+ October 2005 (5) 
+ September 2005 (3) 
+ August 2005 (4) 
+ July 2005 (4) 
+ June 2005 (5) 
+ May 2005 (5) 
+ March 2005 (2) 
+ February 2005 (19) 
+ February 2004 (9) 
+ January 2004 (31) 
+ About us 
+ We are a UK-based tabletop roleplaying game company, publishing character-focused, story-driven RPGs.
+ Follow us 
+ Address 
+ Pelgrane Press Ltd,
+Spectrum House,
+9 Bromell's Road,
+Clapham Common,
+London SW4 0BN,
+United Kingdom
+ About 
+ F.A.Q. 
+ Terms & Conditions 
+ Delivery & Returns 
+ Privacy Policy 
+ Your Order Status 
+ Contact Us 
+ Copyright 2026 © Pelgrane Press Ltd 
+ Search for: 
+ Articles 
+ All articles 
+ See Page XX 
+ Products 
+ GUMSHOE 
+ Ashen Stars 
+ The Esoterrorists 
+ The Fall of Delta Green 
+ Fear Itself 
+ Mutant City Blues 
+ Night's Black Agents 
+ Swords of the Serpentine 
+ TimeWatch 
+ Trail of Cthulhu 
+ The Yellow King 
+ GUMSHOE One-2-One 
+ Alteregomania 
+ Cthulhu Confidential 
+ Night's Black Agents: Solo Ops 
+ The Paragon Blade 
+ d20 Games 
+ 13th Age 
+ Lorefinder 
+ Owl Hoot Trail 
+ Other Games 
+ #Feminism 
+ The Dying Earth 
+ The Gaean Reach 
+ Hillfolk 
+ Honey & Hot Wax 
+ Ken Writes About Stuff 
+ Seven Wonders 
+ Skulduggery 
+ Suburban Consumption of the Monstrous 
+ Other Products 
+ Gift Vouchers 
+ Music 
+ Merchandise 
+ Fiction 
+ The Birds 
+ Stone Skin Press 
+ Gameplaywright 
+ Community 
+ About Us 
+ Contact Us 
+ See Page XX 
+ TTRPG FAQ & GLOSSARY 
+ Login / Register 
+ This site uses cookies to offer you a better browsing experience. By browsing this website, you agree to our use of cookies. 
+ More info 
+ Accept 
+ 

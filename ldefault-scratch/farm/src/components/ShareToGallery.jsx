@@ -1,0 +1,695 @@
+/**
+ * ShareToGallery.jsx — Publish / unpublish a saved settlement.
+ *
+ * Mounts in the dossier toolbar for owned, persisted settlements. When
+ * the dossier hasn't been saved yet, the button shows a soft-disabled
+ * "save first" hint. Once published, swaps to an "unshare" affordance
+ * plus a copyable /gallery/{slug} link.
+ *
+ * Visibility:
+ *   - Hidden for anonymous users (they have no saved row to publish).
+ *   - Hidden in readOnly mode (PublicDossierView, etc.).
+ *
+ * The slug + is_public state is round-tripped to the server via the
+ * helpers in src/lib/gallery.js — this component owns no truth.
+ */
+
+import { useMemo, useState } from 'react';
+import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save, Link2 } from 'lucide-react';
+import { useStore } from '../store/index.js';
+import {
+  publishSettlement, unpublishSettlement, updateGalleryMetadata,
+  shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
+} from '../lib/gallery.js';
+import UnlistedShareBar from './gallery/UnlistedShareBar.jsx';
+import { t } from '../copy/index.js';
+import { validateDossier } from '../domain/validation/consistency.js';
+import { resolveTerrain } from '../domain/resolveTerrain.js';
+import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
+import { settlementWarStatus } from '../domain/display/warStatus.js';
+import { computeAliveness } from '../lib/galleryAliveness.js';
+import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
+import CoverImageField from './gallery/CoverImageField.jsx';
+import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
+import Button from './primitives/Button.jsx';
+import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
+
+const MUTED = swatch['#6B5340'];
+const _BODY  = swatch['#4A3B22'];
+
+function publicUrlFor(slug) {
+  const path = `/gallery?slug=${encodeURIComponent(slug)}`;
+  if (typeof window === 'undefined') return path;
+  return `${window.location.origin}${path}`;
+}
+
+function isCampaignCanonized(campaignState) {
+  if (!campaignState) return true;
+  return Boolean(
+    campaignState.phase === 'canon' ||
+    campaignState.canonizedAt ||
+    campaignState.worldState?.canonizedAt
+  );
+}
+
+export function suggestedTagsFor(settlement = {}) {
+  // Read the attributes the engine actually persists (config.terrainType via
+  // resolveTerrain, the governing faction name, config.culture) — the old paths
+  // (config.terrain, powerStructure.governmentType, viability.stability) were
+  // never written, so every suggested-tag list silently dropped them.
+  return [
+    settlement.tier,
+    resolveTerrain(settlement.config),
+    settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
+    settlement.config?.culture,
+    settlement.powerStructure?.government || settlement.powerStructure?.governingName,
+    settlement.config?.nearbyResources?.[0],
+  ].filter(Boolean).slice(0, 6);
+}
+
+function Field({ label, htmlFor, children }) {
+  return (
+    // eslint-disable-next-line jsx-a11y/label-has-for -- generic wrapper; association is via the htmlFor prop wired at each call site, which the static rule can't verify.
+    <label htmlFor={htmlFor} style={{ display: 'grid', gap: 4, minWidth: 0 }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+export default function ShareToGallery({
+  saveId,
+  isPublic: isPublicProp,
+  publicSlug: slugProp,
+  // V-20 UNLISTED SHARING — optional round-trip of the party-link state from the
+  // saved row. Callers that don't thread it still work (the unlisted state is
+  // entered via the button; persistence-across-reload is the light follow-on).
+  visibility: visibilityProp = 'public',
+  unlistedSlug: unlistedSlugProp = null,
+  campaignState = null,
+  settlement = null,
+  galleryDescription = '',
+  galleryTitle = '',
+  galleryImageUrl = '',
+  galleryImageAlt = '',
+  galleryTags = [],
+  galleryShareNarrated = false,
+  galleryShareDm = false,
+  galleryImportable = false,
+  galleryMemberOverrides = null,
+  onSaved = null,
+}) {
+  const auth = useStore(s => s.auth);
+  const updateSavedSettlement = useStore(s => s.updateSavedSettlement);
+  // The public gallery strips every AI overlay (sanitizePublicSettlement in
+  // lib/gallery.js), so a published dossier is always the RAW simulation. Read
+  // the save's AI data so we can say plainly when the prose won't be included.
+  const liveAiData = useStore(s => (saveId ? (s.savedSettlements || []).find(x => x.id === saveId)?.aiData : null));
+  // §S4 — the campaign this save belongs to, for the public-safe realm-arc digest
+  // and the live at-war facet (which the gallery row cannot recompute on its own).
+  const owningCampaign = useStore(s => {
+    if (!saveId) return null;
+    return (s.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(saveId))) || null;
+  });
+  const allSaves = useStore(s => s.savedSettlements);
+
+  const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
+  const [slug, setSlug]         = useState(slugProp || null);
+  // V-20 unlisted (party-link) state.
+  const [isUnlisted, setIsUnlisted]   = useState(visibilityProp === 'unlisted');
+  const [unlistedSlug, setUnlistedSlug] = useState(unlistedSlugProp || null);
+  const [unlistedCopied, setUnlistedCopied] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
+  const [description, setDescription] = useState(galleryDescription || '');
+  // Gallery display title (migration 147) — empty falls back to the settlement
+  // name at the server chokepoint (the 148 tile-rows coalesce).
+  const [title, setTitle] = useState(galleryTitle || '');
+  const [imageUrl, setImageUrl] = useState(galleryImageUrl || '');
+  const [imageAlt, setImageAlt] = useState(galleryImageAlt || '');
+  const [tagsInput, setTagsInput] = useState((galleryTags?.length ? galleryTags : suggestedTagsFor(settlement)).join(', '));
+  const [busy, setBusy]         = useState(false);
+  const [error, setError]       = useState(null);
+  const [copied, setCopied]     = useState(false);
+  const [savedDetails, setSavedDetails] = useState(false);
+  // Opt-in: publish the AI-narrated dossier instead of the raw simulation.
+  const [shareNarrated, setShareNarrated] = useState(Boolean(galleryShareNarrated));
+  // Opt-in: publish the full DM view (secrets, hooks, notes, compass) unstripped.
+  const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
+  // Opt-in: let other users import (clone) this public dossier into their library.
+  const [importable, setImportable] = useState(Boolean(galleryImportable));
+  // Per-member (per-NPC) visibility overrides (migration 092/093). Each NPC
+  // inherits the settlement shareDm flag unless explicitly overridden here; we
+  // store ONLY the deltas so the column stays minimal and un-overridden members
+  // keep following the settlement flag as it changes.
+  const [memberOverrides, setMemberOverrides] = useState(() => (
+    galleryMemberOverrides && typeof galleryMemberOverrides === 'object' && !Array.isArray(galleryMemberOverrides)
+      ? galleryMemberOverrides
+      : {}
+  ));
+  const canonReady = isCampaignCanonized(campaignState);
+  // §S4 — derive the public-safe realm-arc digest from the owning campaign's LIVE
+  // war/pantheon ledgers. Empty for a no-war/no-deity campaign (the field is then
+  // omitted). This is a DERIVED scalar, never the raw chronicle.
+  const realmArcSummary = useMemo(() => {
+    if (!owningCampaign) return '';
+    const ids = new Set((owningCampaign.settlementIds || []).map(String));
+    const settlements = (allSaves || [])
+      .filter(sv => ids.has(String(sv.id)))
+      .map(sv => ({ id: sv.id, name: sv.name || sv.settlement?.name, settlement: sv.settlement }));
+    return buildRealmArcSummary({
+      worldState: owningCampaign.worldState,
+      regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+      settlements,
+    });
+  }, [owningCampaign, allSaves]);
+  // Gallery facet snapshot (migration 063). Read from the REAL settlement
+  // attributes (not the owner tags): culture + prosperity + patron deity from the
+  // persisted data, and the live at-war flag from the owning campaign's war
+  // ledger. Captured here so the gallery row can filter on them without
+  // recomputing live campaign state. Empty/absent ⇒ omitted (the column nulls).
+  const facets = useMemo(() => {
+    const warStatus = owningCampaign
+      ? settlementWarStatus({
+          settlementId: saveId,
+          worldState: owningCampaign.worldState,
+          regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+        })
+      : null;
+    return {
+      facetCulture: settlement?.config?.culture || '',
+      facetProsperity: settlement?.economicState?.prosperity || '',
+      facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
+      facetAtWar: warStatus?.atWar === true,
+      // GALLERY-2 phase 2 (migration 147): the aliveness snapshot — pulse-history
+      // depth + world age band from the owning campaign's LIVE worldState (the
+      // same "cannot recompute" posture as atWar). null when campaign-less.
+      facetAliveness: computeAliveness(owningCampaign),
+    };
+  }, [owningCampaign, saveId, settlement]);
+  const metadata = useMemo(() => ({
+    description,
+    title,
+    imageUrl,
+    imageAlt,
+    tags: tagsInput,
+    shareNarrated,
+    shareDm,
+    importable,
+    memberOverrides,
+    realmArcSummary,
+    ...facets,
+  }), [description, title, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
+
+  const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
+  const hasDailyLife = !!(liveAiData?.aiDailyLife);
+  const aiKinds = [hasNarrative && 'narrative', hasDailyLife && 'daily-life'].filter(Boolean).join(' and ');
+  // Shown when an AI overlay exists, so the user knows the gallery publishes
+  // the raw simulation, not the narrated version.
+  const aiOverlayNote = aiKinds ? (
+    <div style={{
+      width: '100%', display: 'flex', alignItems: 'flex-start', gap: 6,
+      padding: '7px 9px', marginTop: SP.xs,
+      border: `1px solid ${BORDER2}`,
+      background: CARD_ALT, color: BODY,
+      fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
+    }}>
+      {shareNarrated && hasNarrative
+        ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />
+        : <Lock size={12} style={{ marginTop: 1, flexShrink: 0, color: MUTED }} />}
+      <span>
+        {shareNarrated && hasNarrative
+          ? <>The gallery will show your <strong>AI-narrated dossier</strong>. Viewers see the refined prose; DM-private content (secrets, hooks, notes) is still removed.</>
+          : <>The gallery shows the <strong>raw simulation</strong>. Your AI {aiKinds} prose stays private and is not included in the public dossier.</>}
+      </span>
+    </div>
+  ) : null;
+
+  if (!auth?.user) return null;
+  if (!saveId) {
+    return (
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        padding: '6px 10px',
+        background: 'transparent', color: MUTED,
+        fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
+      }}>
+        <Lock size={12} /> Save first to share publicly
+      </div>
+    );
+  }
+
+  async function handlePublish() {
+    if (!canonReady) {
+      setError(t('errors.shareCanonFirst', { action: t('canon.startWorldClock') }));
+      return;
+    }
+    // Trust gate (feature doc §1b): never publish a dossier whose facts
+    // contradict across surfaces — public content must be internally consistent.
+    const { blocking } = validateDossier(settlement);
+    if (blocking.length > 0) {
+      setError(t('errors.publishBlocked', {
+        count: blocking.length,
+        issues: blocking.length === 1 ? 'issue' : 'issues',
+        details: blocking.map(b => b.description).join(' · '),
+      }));
+      return;
+    }
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await publishSettlement(saveId, metadata);
+      setSlug(newSlug);
+      setIsPublic(true);
+      // Best-effort: update the cached saved-settlement row so other
+      // surfaces (Settlements panel, AccountPage) see the new state
+      // without a refetch. updateSavedSettlement may not be defined
+      // in older builds — fall through silently if so.
+      try {
+        updateSavedSettlement?.(saveId, {
+          is_public: true,
+          public_slug: newSlug,
+          gallery_description: description,
+          gallery_title: title,
+          gallery_image_url: imageUrl,
+          gallery_image_alt: imageAlt,
+          gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+          gallery_share_dm: shareDm,
+          gallery_share_narrated: shareNarrated,
+          gallery_importable: importable,
+          gallery_member_overrides: memberOverrides,
+        });
+      } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Publish failed');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleSaveDetails() {
+    if (!saveId) return;
+    setBusy(true);
+    setError(null);
+    setSavedDetails(false);
+    try {
+      await updateGalleryMetadata(saveId, metadata);
+      // Patch the cached save with EVERY field just persisted — including the two
+      // share toggles, which were previously omitted. This keeps the cached save
+      // truthful for the surfaces that re-render ShareToGallery straight from it
+      // (OutputContainer / SettlementDetail) without waiting for a cloud refetch.
+      // (This patch is NOT what fixed the disappearing gallery card — that card
+      // gates on public_slug, which the Object.assign merge always preserves; the
+      // reload below is what fixes it. This is plain cache hygiene.)
+      updateSavedSettlement?.(saveId, {
+        gallery_description: description,
+        gallery_title: title,
+        gallery_image_url: imageUrl,
+        gallery_image_alt: imageAlt,
+        gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
+        gallery_share_dm: shareDm,
+        gallery_share_narrated: shareNarrated,
+        gallery_importable: importable,
+        gallery_member_overrides: memberOverrides,
+      });
+      setSavedDetails(true);
+      setTimeout(() => setSavedDetails(false), 1600);
+      // Contextual refresh: only the gallery-detail owner card passes onSaved,
+      // which re-fetches the public dossier in place so the live view reflects
+      // the new narrated / DM-visibility choices. (A full page reload would land
+      // on a fresh gallery URL with no saves hydrated, dropping the owner card —
+      // see GalleryDetail.) The dossier/settlement editor usages omit onSaved.
+      onSaved?.();
+    } catch (e) {
+      setError(e.message || 'Gallery details could not be saved');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleUnpublish() {
+    setBusy(true); setError(null);
+    try {
+      await unpublishSettlement(saveId);
+      setIsPublic(false);
+      try {
+        updateSavedSettlement?.(saveId, { is_public: false });
+      } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Unpublish failed');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function handleCopy() {
+    if (!slug || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    navigator.clipboard.writeText(publicUrlFor(slug))
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => { /* clipboard refused; nothing to do */ });
+  }
+
+  // ── V-20 UNLISTED SHARING (party link) ────────────────────────────────────
+  async function handleShareUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await shareSettlementUnlisted(saveId);
+      setUnlistedSlug(newSlug);
+      setIsUnlisted(true);
+      setIsPublic(false); // sharing unlisted removes it from the public gallery
+      try { updateSavedSettlement?.(saveId, { is_public: false, visibility: 'unlisted', unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not create the unlisted link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleRotateUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await rotateSettlementUnlistedSlug(saveId);
+      setUnlistedSlug(newSlug);
+      try { updateSavedSettlement?.(saveId, { unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not rotate the link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleStopUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      await revokeSettlementUnlisted(saveId);
+      setIsUnlisted(false);
+      setUnlistedSlug(null);
+      try { updateSavedSettlement?.(saveId, { visibility: 'public', unlisted_slug: null }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not stop the unlisted share');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function handleCopyUnlisted() {
+    if (!unlistedSlug || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    navigator.clipboard.writeText(publicUrlFor(unlistedSlug))
+      .then(() => {
+        setUnlistedCopied(true);
+        setTimeout(() => setUnlistedCopied(false), 2000);
+      })
+      .catch(() => { /* clipboard refused */ });
+  }
+
+  const detailsForm = detailsOpen && (
+    <div style={{
+      width: '100%',
+      display: 'grid',
+      gap: SP.sm,
+      padding: SP.sm,
+      border: `1px solid ${BORDER2}`,
+      background: CARD_ALT,
+      marginTop: SP.xs,
+    }}>
+      {hasNarrative && (
+        <label htmlFor="share-to-gallery-narrated" style={{
+          display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+          padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
+        }}>
+          <input
+            id="share-to-gallery-narrated"
+            type="checkbox"
+            aria-label="Publish the AI-narrated version"
+            checked={shareNarrated}
+            onChange={event => setShareNarrated(event.target.checked)}
+            style={{ marginTop: 2, flexShrink: 0 }}
+          />
+          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+            <strong style={{ color: INK }}>Publish the AI-narrated version</strong> instead of the raw simulation. Viewers see your refined prose; DM-private content is stripped unless you enable the option below. Save details (or re-share) to apply.
+          </span>
+        </label>
+      )}
+      {/* Owner opt-in: expose the full DM-private layer publicly. Off by default. */}
+      <label htmlFor="share-to-gallery-dm" style={{
+        display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, background: CARD,
+      }}>
+        <input
+          id="share-to-gallery-dm"
+          type="checkbox"
+          aria-label="Reveal DM-private content"
+          checked={shareDm}
+          onChange={event => setShareDm(event.target.checked)}
+          style={{ marginTop: 2, flexShrink: 0 }}
+        />
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
+          <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
+          <span>
+            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
+          </span>
+        </span>
+      </label>
+      {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
+      <label htmlFor="share-to-gallery-importable" style={{
+        display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+        padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
+      }}>
+        <input
+          id="share-to-gallery-importable"
+          type="checkbox"
+          aria-label="Allow others to import this settlement"
+          checked={importable}
+          onChange={event => setImportable(event.target.checked)}
+          style={{ marginTop: 2, flexShrink: 0 }}
+        />
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
+        </span>
+      </label>
+      {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the
+          settlement has no member NPCs. Each member defaults to the settlement's
+          DM-reveal and import flags; a per-member toggle overrides just that NPC. */}
+      <GalleryMemberVisibility
+        settlement={settlement}
+        shareDm={shareDm}
+        importable={importable}
+        memberOverrides={memberOverrides}
+        setMemberOverrides={setMemberOverrides}
+      />
+      <Field label="Gallery title (blank uses the settlement name)" htmlFor="share-to-gallery-title">
+        <input
+          id="share-to-gallery-title"
+          aria-label="Gallery title (blank uses the settlement name)"
+          value={title}
+          maxLength={120}
+          onChange={event => setTitle(event.target.value)}
+          placeholder={settlement?.name || 'Settlement name'}
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
+      <Field label="Public description">
+        <GalleryDescriptionEditor value={description} onChange={setDescription} />
+      </Field>
+      <Field label="Cover image">
+        <CoverImageField
+          value={imageUrl}
+          onChange={setImageUrl}
+          ownerId={auth?.user?.id}
+          settlementId={saveId}
+          alt={imageAlt || settlement?.name || ''}
+        />
+      </Field>
+      <Field label="Image alt (description for screen readers)" htmlFor="share-to-gallery-image-alt">
+        <input
+          id="share-to-gallery-image-alt"
+          aria-label="Image alt (description for screen readers)"
+          value={imageAlt}
+          onChange={event => setImageAlt(event.target.value)}
+          placeholder={settlement?.name ? `Image for ${settlement.name}` : 'Image description'}
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
+      <Field label="Gallery tags" htmlFor="share-to-gallery-tags">
+        <input
+          id="share-to-gallery-tags"
+          aria-label="Gallery tags"
+          value={tagsInput}
+          onChange={event => setTagsInput(event.target.value)}
+          placeholder="frontier, high magic, unstable"
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
+      {isPublic && (
+        <Button
+          variant="gold"
+          size="sm"
+          icon={<Save size={12} />}
+          onClick={handleSaveDetails}
+          busy={busy}
+          style={{ justifySelf: 'start' }}
+        >
+          {savedDetails ? 'Saved' : 'Save gallery details'}
+        </Button>
+      )}
+    </div>
+  );
+
+  // V-20 UNLISTED state — party link: copy + rotate (revoke) + stop sharing.
+  if (isUnlisted && unlistedSlug) {
+    return (
+      <UnlistedShareBar
+        copied={unlistedCopied}
+        busy={busy}
+        error={error}
+        onCopy={handleCopyUnlisted}
+        onRotate={handleRotateUnlisted}
+        onStop={handleStopUnlisted}
+      />
+    );
+  }
+
+  // Published state — show "Public" badge + copy link + unshare.
+  if (isPublic && slug) {
+    return (
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: SP.sm,
+        flexWrap: 'wrap', fontFamily: sans, width: '100%',
+      }}>
+        <span style={{
+          display: 'inline-flex', alignItems: 'center', gap: 5,
+          padding: '4px 9px',
+          background: 'transparent', color: GREEN,
+          border: `1px solid ${GREEN}`,
+          fontSize: FS.xs, fontWeight: 700,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+        }}>
+          <Globe size={11} /> Public
+        </span>
+        <Button
+          variant="gold"
+          size="sm"
+          onClick={handleCopy}
+          title="Copy public URL"
+          icon={copied ? <Check size={12} /> : <Copy size={12} />}
+        >
+          {copied ? 'Copied' : 'Copy link'}
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setDetailsOpen(open => !open)}
+          icon={<ImageIcon size={12} />}
+        >
+          Gallery details
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleUnpublish}
+          busy={busy}
+        >
+          {busy ? 'Working…' : 'Unshare'}
+        </Button>
+        {error && (
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 4,
+            fontSize: FS.xs, color: RED,
+          }}>
+            <AlertCircle size={11} /> {error}
+          </span>
+        )}
+        {aiOverlayNote}
+        {/* Chronicle disclosure must also reach owners who published BEFORE
+            the public chronicle existed — the gallery projects it at read
+            time, so their event log is visible retroactively. */}
+        <span style={{ flexBasis: '100%', fontSize: FS.xs, color: INK, opacity: 0.75 }}>
+          Your settlement's event chronicle (event titles and summaries) is publicly
+          visible on the gallery page. Unshare to remove it.
+        </span>
+        {detailsForm}
+      </div>
+    );
+  }
+
+  // Private state — publish button.
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm,
+      flexWrap: 'wrap', fontFamily: sans, width: '100%',
+    }}>
+      <Button
+        variant="gold"
+        size="sm"
+        onClick={handlePublish}
+        busy={busy}
+        disabled={!canonReady}
+        title="Make this dossier readable to anyone with the link"
+        icon={<Globe size={12} />}
+      >
+        {busy ? 'Publishing…' : 'Share to gallery'}
+      </Button>
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={handleShareUnlisted}
+        busy={busy}
+        icon={<Link2 size={12} />}
+      >
+        Unlisted link
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setDetailsOpen(open => !open)}
+        icon={<ImageIcon size={12} />}
+      >
+        Details
+      </Button>
+      {error && (
+        <span style={{
+          display: 'inline-flex', alignItems: 'center', gap: 4,
+          fontSize: FS.xs, color: RED,
+        }}>
+          <AlertCircle size={11} /> {error}
+        </span>
+      )}
+      <span style={{
+        fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+      }}>
+        {canonReady
+          ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
+          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}
+      </span>
+      {aiOverlayNote}
+      {detailsForm}
+    </div>
+  );
+}

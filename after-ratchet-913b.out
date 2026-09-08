@@ -1,0 +1,24 @@
+PREDICTED (second pass, after car 12): totalTests 32024 unchanged (car 12 adds no it() title), totalFiles 2491 unchanged, entries 3 unchanged, measuredAtSha moves to HEAD; the voiceMechanics magnitude [files-over-baselin
+TRUE_EXIT=0
+MEASURED: totalTests=32024 totalFiles=2491 entries=3
+--- totals car:
+PREDICTED (second pass, after car 12): totalTests 32024 unchanged (car 12 adds no it() title), totalFiles 2491 unchanged, entries 3 unchanged, measuredAtSha moves to HEAD; the voiceMechanics magnitude
+MEASURED: totalTests=32024 totalFiles=2491 entries=3
+totals: totalTests 31982 -> 32024 · totalFiles 2491 · entries 3 · measuredAt fd4a56a14
+TOTALS CAR c54cf2385 committed; cars over 3b1c0eaa5=19; sealed lmat-2026-09-07
+TOTALS_EXIT=0
+totalTests (from the committed baseline) = 32024
+--- capsule car (ACTIVE at rung 18 — the OSR CLI is open):
+CAPSULE_EXIT=0
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 8319 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[base-state-capsule] wrote docs/implementation/BASE_STATE.json stamped at c54cf238 (20 figures).
+capsule porcelain=[ M docs/implementation/BASE_STATE.json ]
+CAPSULE CAR -> f3ab08f51
+CARS=20 · HEAD=f3ab08f51 · porcelain=[]
+--- re-stamp the kit at 20 cars:
+  + run-gate-913.sh run-ratchet-913.sh (fill __PREDICTION__)
+kit §913 stamped in /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad: after-cas-913.sh collect-913.sh payload-913.template.json msg-913.txt · dock=laneLMAT base=3b1c0eaa5 seal=landing-lmat-2026-09-07 cars=20 · fill __ROW__/__ROW_BODY__/__CARD__/__CARD_BODY__/__TAIL__/__TAIL_BODY__/__SUBJECT__/__BODY__/__ENROLS__
+5:D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT
+23:[ "$CARS" = "20" ] || { echo "REFUSED: expected 20 cars over $BASE, found $CARS"; exit 7; }
+SEALED lmat-2026-09-07 = f3ab08f51
+NEXT: launch run-gate-913.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-913.sh, then fill texts-913 (__CARS__=20 __ENTRIES__ __TESTS__ __TOTALS__) and collect.

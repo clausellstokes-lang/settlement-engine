@@ -1,0 +1,100 @@
+ 
+ AI isn’t very good at history, new paper finds | TechCrunch 
+ Disrupt 2026: OpenAI, Anthropic, Replit, and more take over 6 industry stages. 25% off tickets now 
+ Back by popular demand: Save up to $300 on Disrupt 
+ Close 
+ TechCrunch Desktop Logo 
+ TechCrunch Mobile Logo 
+ Search Submit 
+ Site Search Toggle 
+ Mega Menu Toggle 
+ Topics 
+ Latest 
+ AI 
+ Amazon 
+ Apps 
+ Biotech & Health 
+ Climate 
+ Cloud Computing 
+ Commerce 
+ Crypto 
+ Enterprise 
+ EVs 
+ Fintech 
+ Fundraising 
+ Gadgets 
+ Gaming 
+ Google 
+ Government & Policy 
+ Hardware 
+ Instagram 
+ Layoffs 
+ Media & Entertainment 
+ Meta 
+ Microsoft 
+ Privacy 
+ Robotics 
+ Security 
+ Social 
+ Space 
+ Startups 
+ TikTok 
+ Transportation 
+ Venture 
+ More from TechCrunch
+ Staff 
+ Events 
+ Startup Battlefield 
+ StrictlyVC 
+ Newsletters 
+ Podcasts 
+ Videos 
+ Partner Content 
+ TechCrunch Brand Studio 
+ Contact Us 
+ Image Credits: metamorworks / Getty Images 
+ AI 
+ AI isn’t very good at history, new paper finds 
+ Charles Rollet 
+ 7:01 AM PST · January 19, 2025 
+ AI might excel at certain tasks like coding or generating a podcast . But it struggles to pass a high-level history exam, a new paper has found. 
+ A team of researchers has created a new benchmark to test three top large language models (LLMs) — OpenAI’s GPT-4, Meta’s Llama, and Google’s Gemini — on historical questions. The benchmark, Hist-LLM, tests the correctness of answers according to the Seshat Global History Databank, a vast database of historical knowledge named after the ancient Egyptian goddess of wisdom.  
+ The results, which were presented last month at the high-profile AI conference NeurIPS, were disappointing, according to researchers affiliated with the Complexity Science Hub (CSH), a research institute based in Austria. The best-performing LLM was GPT-4 Turbo, but it only achieved about 46% accuracy — not much higher than random guessing.  
+ “The main takeaway from this study is that LLMs, while impressive, still lack the depth of understanding required for advanced history. They’re great for basic facts, but when it comes to more nuanced, PhD-level historical inquiry, they’re not yet up to the task,” said Maria del Rio-Chanona, one of the paper’s co-authors and an associate professor of computer science at University College London. 
+ The researchers shared sample historical questions with TechCrunch that LLMs got wrong. For example, GPT-4 Turbo was asked whether scale armor was present during a specific time period in ancient Egypt. The LLM said yes, but the technology only appeared in Egypt 1,500 years later.  
+ Why are LLMs bad at answering technical historical questions, when they can be so good at answering very complicated questions about things like coding? Del Rio-Chanona told TechCrunch that it’s likely because LLMs tend to extrapolate from historical data that is very prominent, finding it difficult to retrieve more obscure historical knowledge. 
+ For example, the researchers asked GPT-4 if ancient Egypt had a professional standing army during a specific historical period. While the correct answer is no, the LLM answered incorrectly that it did. This is likely because there is lots of public information about other ancient empires, like Persia, having standing armies. 
+ “If you get told A and B 100 times, and C 1 time, and then get asked a question about C, you might just remember A and B and try to extrapolate from that,” del Rio-Chanona said. 
+ The researchers also identified other trends, including that OpenAI and Llama models performed worse for certain regions like sub-Saharan Africa, suggesting potential biases in their training data. 
+ The results show that LLMs still aren’t a substitute for humans when it comes to certain domains, said Peter Turchin, who led the study and is a faculty member at CSH.  
+ But the researchers are still hopeful LLMs can help historians in the future. They’re working on refining their benchmark by including more data from underrepresented regions and adding more complex questions. 
+ “Overall, while our results highlight areas where LLMs need improvement, they also underscore the potential for these models to aid in historical research,” the paper reads. 
+ Topics 
+ AI , AI , benchmarks , hallucinations , LLMs , research , TC 
+ When you purchase through links in our articles, we may earn a small commission . This doesn’t affect our editorial independence. 
+ Charles Rollet 
+ Senior Reporter 
+ Charles Rollet was a senior reporter at TechCrunch. His investigative reporting led to U.S. government sanctions against four tech companies, including China’s largest AI firm. Prior to joining TechCrunch, Charles covered the surveillance industry for IPVM. Charles is based in San Francisco, where he enjoys hiking with his dogs. You can contact Charles securely on Signal at charlesrollet.12 or +1-628-282-2811. 
+ View Bio 
+ October 13 – 15 
+ San Francisco 
+ Don’t miss out . The startup community will gather to answer a pivotal question: How do you build sustainably in the AI era? 
+ REGISTER NOW 
+ Most Popular 
+ Hikers rescued after using Google Gemini for planning 
+ Anthony Ha 
+ Feds launch investigation into Tesla’s Cybercab deployment 
+ Sean O'Kane 
+ Kirsten Korosec 
+ Tesla is asking people if they want to buy and run Cybercab fleets 
+ Kirsten Korosec 
+ Norway considers ban on camera-enabled wearable ‘pervert glasses’ 
+ Zack Whittaker 
+ Uber is laying off 10% of staff, or 3,300 people 
+ Ram Iyer 
+ AfterQuery reportedly becomes Y Combinator’s fastest-ever unicorn, now valued at $3.2B 
+ Julie Bort 
+ MapQuest’s app surges to No. 1 in Navigation after refusing to rename Lake Ontario 
+ Sarah Perez 
+ Loading the next article 
+ Error loading the next article 

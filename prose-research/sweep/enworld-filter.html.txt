@@ -1,0 +1,605 @@
+
+DriveThruRPG's New AI-Content Filter | EN World D&D & Tabletop RPG News & Reviews
+Menu
+News/Columns
+All News
+Dungeons & Dragons
+Level Up: Advanced 5th Edition
+Pathfinder
+Starfinder
+Warhammer
+2d20 System
+Year Zero Engine
+Industry News
+Reviews
+Dragon Reflections
+White Dwarf Reflections
+Columns
+Weekly Digests
+Weekly News Digest
+Freebies, Sales & Bundles
+RPG Print News
+RPG Crowdfunding News
+Game Content
+ENterplanetary DimENsions
+Mythological Figures
+Opinion
+Worlds of Design
+Peregrine's Nest
+RPG Evolution
+Other Columns
+From the Freelancing Frontline
+Monster ENcyclopedia
+WotC/TSR Alumni Look Back
+4 Hours w/RSD (Ryan Dancey)
+The Road to 3E (Jonathan Tweet)
+Greenwood's Realms (Ed Greenwood)
+Drawmij's TSR (Jim Ward)
+Features
+Million Dollar TTRPG Crowdfunders
+Most Anticipated Tabletop RPGs Of The Year
+Eric Noah's Unofficial D&D 3rd Edition News
+Top 5 RPGs Compiled Charts 2004-Present
+Adventure Game Industry Market Research Summary (RPGs) V1.0
+Ryan Dancey: Acquiring TSR
+Q&A With Gary Gygax
+TSR, WotC, & Paizo: A Comparative History
+D&D Pronunciation Guide
+D&D in the Mainstream
+About Morrus
+Podcast
+Community
+Forums & Topics
+Forum List
+Latest Posts
+Forum list
+*Dungeons & Dragons
+Level Up: Advanced 5th Edition
+D&D Older Editions, OSR, & D&D Variants
+*Tabletop General
+*Pathfinder & Starfinder
+EN Publishing
+*Geek Talk & Media
+Chat/Discord
+Resources
+Wiki
+Pages
+Latest activity
+Media
+New media
+New comments
+Downloads
+Latest reviews
+EN Publishing
+Store
+EN5ider
+Adventures in ZEITGEIST
+Awfully Cheerful Engine
+What's OLD is NEW
+Judge Dredd & The Worlds Of 2000AD
+War of the Burning Sky
+Level Up: Advanced 5E
+EN WORLD+
+Log in
+Register
+What's new
+Forums & Topics
+Forum List
+Latest Posts
+Forum list
+*Dungeons & Dragons
+Level Up: Advanced 5th Edition
+D&D Older Editions, OSR, & D&D Variants
+*Tabletop General
+*Pathfinder & Starfinder
+EN Publishing
+*Geek Talk & Media
+Chat/Discord
+ Menu
+ Log in
+ Register
+Install the app
+Install
+Upgrade your account to EN WORLD+ and remove most of the site ads.
+log in
+ or 
+ register 
+to remove this ad
+-->
+Community
+General Tabletop Discussion
+*Tabletop General
+JavaScript is disabled. For a better experience, please enable JavaScript in your browser before proceeding.
+You are using an out of date browser. It may not display this or other websites correctly.
+You should upgrade or use an 
+alternative browser
+.
+DriveThruRPG's New AI-Content Filter
+Category
+ Industry
+Thread starter
+Thread starter
+Morrus
+Start date
+Start date
+Oct 29, 2024
+Full AI is prohibited, but partial AI is allowed.
+Oct 29, 2024
+Replies: 39
+ ---->
+DriveThruRPG
+, the largest online platform for the sale of TTRPG PDFs and print-on-demand titles, has added a new browsing option which allows customers to filter out AI-generated content.
+By default AI content is set as viewable. The new setting allows you to choose between 
+Handcrafted
+ (no AI involved), 
+Contains AI-Generated Content
+ (part of the product is AI), and 
+Creation Method Not Chosen By Publisher. 
+The filter is found in the user account settings under Additional Preferences.
+DTRPG's AI-Generated Content Policy (
+as of July 2023
+) requires sellers to indicate whether AI was used in the product, and will not accept "standalone artwork products that utilize AI-generated tools to make content." Additionally they will not accept "commercial content primarily written by AI language generators." However, titles partially created by AI are permitted.
+Where a 
+community content program
+ (such as DMs Guild, Storyteller's Vault, Cypher System Creator, and so on), the AI policy is set by the publisher who owns the program.
+Many TTRPG publishers, including Wizards of the Coast (although WotC's policy seem at odds with CEO Chris Cock's 
+own statements
+), EN Publishing, Kobold Press, and more, have declared AI policies which exclude the use of AI art or text in their own products. WotC's previous communications director Greg Tito 
+cited WotC's stance on AI
+ as "..one of the major reasons I left. People above me just didn't understand that basic concept."
+On the flip side, many artists are being 
+accused on social media
+ of using AI when they haven't, with people using any imperfection in an art piece as evidence of AI creation.
+​
+Reply
+Reactions:
+pukunui
+, 
+schneeland
+, 
+EthanSental
+ and 7 others
+Click to expand...
+log in or 
+ register 
+to remove this ad
+Morrus is the owner of EN World and EN Publishing, creator of the 
+ENnies
+, creator of the 
+What's OLD is NEW (WOIN)
+, 
+Simply6
+, and 
+Awfully Cheerful Engine
+ game systems, publisher of 
+Level Up: Advanced 5th Edition
+, and co-host of the weekly 
+Morrus' Unofficial Tabletop RPG Talk
+ podcast. He has been a game publisher and RPG community administrator for over 20 years, and has been reporting on TTRPG and D&D news for over two decades.
+1
+2
+3
+4
+Next
+ 1 of 4
+Go to page
+Go
+ Next 
+Last
+Jadeite
+Hero
+Oct 29, 2024
+ #2
+Sadly, this doesn't seem to work on the legacy version, so I have to chose between their, in my opinion, inferior new version and seeing slop. But at least it's kind of an option, now.
+Reply
+Reactions:
+Ruin Explorer
+, 
+GreatestHonor
+, 
+DonoZen
+ and 4 others
+Ringtail
+World Traveller (She/Her)
+Oct 29, 2024
+ #3
+This is a breath of fresh air, but I feel like "Creation Method Not Chosen By Publisher" might just allow people to side-step this. 
+Still, if it even reduces the amount of AI I see on DriveThru I'm happy.
+Reply
+Reactions:
+Ruin Explorer
+, 
+GreatestHonor
+, 
+Theory of Games
+ and 9 others
+Parmandur
+Book-Friend, he/him
+Oct 29, 2024
+ #4
+Good, I appreciate the ability to filter unethical material. Better if it were not available for sale.
+Reply
+Reactions:
+pukunui
+, 
+GreatestHonor
+, 
+Theory of Games
+ and 4 others
+Morrus
+Well, that was fun
+Staff member
+Oct 29, 2024
+ #5
+Ringtail said:
+ This is a breath of fresh air, but I feel like "Creation Method Not Chosen By Publisher" might just allow people to side-step this.
+Still, if it even reduces the amount of AI I see on DriveThru I'm happy.
+Click to expand...
+I assume it’s because there are tens of thousands of pre-existing products on the site which were uploaded before the AI flag option was added to the upload process.
+Reply
+Reactions:
+ReshiIRE
+, 
+Golden Bee
+, 
+pukunui
+ and 20 others
+G
+Guest 85555
+Guest
+Oct 29, 2024
+ #6
+Ringtail said:
+ This is a breath of fresh air, but I feel like "Creation Method Not Chosen By Publisher" might just allow people to side-step this.
+Still, if it even reduces the amount of AI I see on DriveThru I'm happy.
+Click to expand...
+To Morrus' point, there are a lot of books that were published before AI was a big thing that likely haven't been updated. You have to go in an individually change each product. I just did most of mine but have a small line that I still need to get to this week. My catalog isn't huge, but still it is a step by step process. I can imagine if someone has dozens or hundreds of books, it could be a bit for them to get to all of them. 
+Just another observation, when you put a book up on Drivethru, the option to select the creation method is not super obvious. It is mixed in with the pull down tags for things like genre. I imagine a lot of people might not be aware of the filter and may not see the button for it 
+I suppose another thing is the language. The term handcrafted made me think twice before selecting it (because to me it implies no digital elements). I hear a term like hand crafted and my brain imagines someone using no digital tools, working with ink, pencils, paper and paint. A lot of artists work in digital format and it took a bit for me to be confident this was strictly about AI. I think it would honestly be better if the category were just "No AI used in creation" (or something similarly clear)
+Reply
+Reactions:
+pukunui
+, 
+tenkar
+, 
+doctorhook
+ and 1 other person
+Sacrosanct
+Legend
+Oct 29, 2024
+ #7
+They've had this filter for a while now.
+Reply
+Reactions:
+MacDhomnuill
+G
+Guest 85555
+Guest
+Oct 29, 2024
+ #8
+Sacrosanct said:
+ They've had this filter for a while now.
+Click to expand...
+Sure but not everyone knows about. I learned about it a few weeks ago I think, and I took my time learning about it before making any changes to my products (and then I needed to set aside time to make those changes)
+Reply
+Reactions:
+stadi
+ and 
+Dire Bare
+Rabulias
+the Incomparably Shrewd and Clever
+EN WORLD+
+Oct 29, 2024
+ #9
+Morrus said:
+ I assume it’s because there are tens of thousands of pre-existing products on the site which were uploaded before the AI flag option was added to the upload process.
+Click to expand...
+My thoughts exactly. Heck, there are many products there that predate generative AI itself.
+Reply
+Reactions:
+Theory of Games
+Dire Bare
+Legend
+EN WORLD+
+Oct 29, 2024
+ #10
+A step in the right direction. DriveThru and the DMs Guild have an awful lot of content with AI-generated visual art, which I'd rather not support.
+Now if they could just finish updating their website and improve the UI . . . this might become a truly useful filter!
+Reply
+Reactions:
+pukunui
+, 
+EthanSental
+, 
+MacDhomnuill
+ and 3 others
+1
+2
+3
+4
+Next
+ 1 of 4
+Go to page
+Go
+ Next 
+Last
+ Post reply
+ Insert quotes…
+Similar Threads
+ RPG Crowdfunding News – Deadlands, Ultimate Horrors, Forgotten Foes, and more
+Egg Embry
+Aug 12, 2026
+ *Tabletop General
+2
+Replies
+14
+Views
+4K
+Aug 17, 2026
+Lalato
+ Ken Whitman creates bizarre AI-powered biographies of TTRPG designers
+Morrus
+May 12, 2026
+ *Tabletop General
+27
+28
+29
+30
+31
+Replies
+303
+Views
+52K
+May 31, 2026
+Cordwainer Fish
+ RPG Crowdfunding News – Secrets of Enduril, Machines of Bone & Blood, D&D EN5ider, and more
+Egg Embry
+Jun 24, 2026
+ *Tabletop General
+Replies
+7
+Views
+5K
+Jul 7, 2026
+500 Toads
+ RPG Crowdfunding News – Outgunned, The Book of Unnumbered Worlds, The Bad Year, and more
+Egg Embry
+Jun 3, 2026
+ *Tabletop General
+2
+Replies
+18
+Views
+9K
+Jun 5, 2026
+Eyes of Nine
+ RPG Crowdfunding News – Deathbringer, Sly Flourish, Gary's Appendix, and more
+Egg Embry
+Jul 15, 2026
+ *Tabletop General
+3
+4
+5
+6
+7
+Replies
+67
+Views
+18K
+Aug 3, 2026
+Deset Gled
+Share:
+Facebook
+X
+Bluesky
+LinkedIn
+Reddit
+Pinterest
+Tumblr
+WhatsApp
+Email
+Share
+Link
+Recent & Upcoming Releases
+ -->
+ -->
+ September 16
+ 2026
+Arcana Unleashed
+ (Dungeons & Dragons)
+ Rulebook featuring "high magic" options, including a host of new spells.
+Replies (307)
+ -->
+ -->
+ September 16
+ 2026
+Arcana Unleashed: Deadfall
+ (Dungeons & Dragons)
+ Adventure book featuring Red Wizards of Thay.
+Replies (187)
+ -->
+ -->
+ October 1
+ 2026
+Secrets of the Tome (A5E)
+ (Level Up: Advanced 5th Edition)
+ Magical options for spellcasters.
+Replies (23)
+ -->
+ -->
+ November 3
+ 2026
+Dungeons & Dragons: World of Warcraft
+ (Dungeons & Dragons)
+ World book for Azeroth
+Replies (272)
+ -->
+ -->
+ January 30
+ 2027
+Dark Sun
+ (Dungeons & Dragons)
+ Dark Sun returns in 2027
+Replies (1967)
+ -->
+ -->
+ March 6
+ 2027
+Steel & Skill: The Complete Fighter's Field Guide
+ (Dungeons & Dragons)
+ Handbook for D&D fighters.
+Replies (71)
+ -->
+ -->
+ June 15
+ 2027
+Star Wars: Season of Rebellion
+ (Dungeons & Dragons)
+ Official D&D Star Wars book
+Replies (278)
+ -->
+ -->
+ July 31
+ 2027
+Greyhawk: Crown of the Witch Queen
+ (Dungeons & Dragons)
+ 160-page adventure
+Replies (269)
+ -->
+ -->
+ December 31
+ 2027
+Melf's Guide to Greyhawk: The Shield Lands
+ (Dungeons & Dragons)
+ Greyhawk book written by Luke Gygax.
+Replies (380)
+ Forum list
+ Post thread…
+Related Articles
+RPG Crowdfunding News – Deadlands, Ultimate Horrors, Forgotten Foes, and more
+Started by Egg Embry
+Aug 12, 2026
+Replies: 14
+ *Tabletop General
+Ken Whitman creates bizarre AI-powered biographies of TTRPG designers
+Started by Morrus
+May 12, 2026
+Replies: 303
+ *Tabletop General
+RPG Crowdfunding News – Secrets of Enduril, Machines of Bone & Blood, D&D EN5ider, and more
+Started by Egg Embry
+Jun 24, 2026
+Replies: 7
+ *Tabletop General
+RPG Crowdfunding News – Outgunned, The Book of Unnumbered Worlds, The Bad Year, and more
+Started by Egg Embry
+Jun 3, 2026
+Replies: 18
+ *Tabletop General
+RPG Crowdfunding News – Deathbringer, Sly Flourish, Gary's Appendix, and more
+Started by Egg Embry
+Jul 15, 2026
+Replies: 67
+ *Tabletop General
+Remove ads
+Recent & Upcoming Releases
+ -->
+ -->
+ September 16
+ 2026
+Arcana Unleashed
+ (Dungeons & Dragons)
+ Rulebook featuring "high magic" options, including a host of new spells.
+Replies (307)
+ -->
+ -->
+ September 16
+ 2026
+Arcana Unleashed: Deadfall
+ (Dungeons & Dragons)
+ Adventure book featuring Red Wizards of Thay.
+Replies (187)
+ -->
+ -->
+ October 1
+ 2026
+Secrets of the Tome (A5E)
+ (Level Up: Advanced 5th Edition)
+ Magical options for spellcasters.
+Replies (23)
+ -->
+ -->
+ November 3
+ 2026
+Dungeons & Dragons: World of Warcraft
+ (Dungeons & Dragons)
+ World book for Azeroth
+Replies (272)
+ -->
+ -->
+ January 30
+ 2027
+Dark Sun
+ (Dungeons & Dragons)
+ Dark Sun returns in 2027
+Replies (1967)
+ -->
+ -->
+ March 6
+ 2027
+Steel & Skill: The Complete Fighter's Field Guide
+ (Dungeons & Dragons)
+ Handbook for D&D fighters.
+Replies (71)
+ -->
+ -->
+ June 15
+ 2027
+Star Wars: Season of Rebellion
+ (Dungeons & Dragons)
+ Official D&D Star Wars book
+Replies (278)
+ -->
+ -->
+ July 31
+ 2027
+Greyhawk: Crown of the Witch Queen
+ (Dungeons & Dragons)
+ 160-page adventure
+Replies (269)
+ -->
+ -->
+ December 31
+ 2027
+Melf's Guide to Greyhawk: The Shield Lands
+ (Dungeons & Dragons)
+ Greyhawk book written by Luke Gygax.
+Replies (380)
+Remove ads
+Community
+General Tabletop Discussion
+*Tabletop General
+ Light Mode
+Contact us
+Terms and rules
+Privacy policy
+Help
+Home
+RSS
+Community platform by XenForo
+®
+© 2010-2026 XenForo Ltd.
+Ignore/Block Essentials by 
+AddonFlare - Premium XF2 Addons
+ | 
+[XTR] Modal Popups
+ © 2019 XENTR Development
+ | 
+Events Manager by XenCustomize
+Discord Integration
+ © Jason Axelrod of
+8WAYRUN
+XenCarta 2 PRO
+ © Jason Axelrod of
+8WAYRUN
+Top

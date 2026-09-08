@@ -1,0 +1,6 @@
+#ts-4 PASS(mechanical) DS-GEN-14 :: GROWN-UNRECORDED [elder]
+    · A11 SPREAD (sentences, pool "GROWN-UNRECORDED" DS-GEN-14, angles elder/street): 1/1 → 2/1
+#ts-5 PASS(mechanical) DS-GEN-14 :: GROWN-UNRECORDED [street]
+    · A11 SPREAD (sentences, pool "GROWN-UNRECORDED" DS-GEN-14, angles elder/street): 1/1 → 1/1
+
+corpus loaded: 2734 variants in 1020 pools; 2 pass mechanically, 0 WITHHELD (R4-BAND — the band half is the refuter's, not a FAIL), 0 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

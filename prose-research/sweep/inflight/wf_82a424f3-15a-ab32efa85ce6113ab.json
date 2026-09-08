@@ -1,0 +1,18 @@
+{
+ "role": "critic",
+ "name": "leguin",
+ "angle": null,
+ "tag": null,
+ "lines": 5,
+ "firstTs": "2026-09-06T12:27:09.832Z",
+ "lastTs": "2026-09-06T12:27:10.433Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 12:20pm (America/New_York)",
+ "run": "wf_82a424f3-15a",
+ "agent": "ab32efa85ce6113ab",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_82a424f3-15a/agent-ab32efa85ce6113ab.jsonl",
+ "journal": "failed",
+ "checkpointFile": null
+}

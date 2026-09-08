@@ -1,0 +1,4038 @@
+
+<!DOCTYPE html>
+<html lang="en" data-navbar-cached="1">
+<head>
+  <meta name=“facebook-domain-verification” content=“lb07chyng6etwkpmjwu29mkje960mx” />
+  <!-- Google Tag Manager -->
+  <script id="gtmScript" nonce=''>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=RyNPjkDTh-LgK4oo5gJi6A&gtm_preview=env-1&gtm_cookies_win=x';
+  var n=d.querySelector('[nonce]');n&&j.setAttribute('nonce',n.nonce||n.getAttribute('nonce'));f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MKL9HM6');</script>
+<!-- End Google Tag Manager -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    <meta name="description" content="Greyhawk Gazetteer is one of the Rules in D&amp;D 2024. " />
+  
+
+  <title>Greyhawk Gazetteer | D&amp;D 2024 | Roll20 Compendium</title>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+    
+    document.querySelector("html").setAttribute("data-theme", "light");
+    
+    Object.defineProperty(window, "ROLL20_ENV", { value: "production", writable: false });
+  </script>
+
+
+  <!-- Main layout CSS used for every page -->
+  
+    <link rel="stylesheet" href="
+      /v3/assets/css/compendium2024.css?1788463787" type="text/css" />
+  
+
+  <link rel="stylesheet" href="/v2/css/colors.css" />
+  <link rel="stylesheet" href="
+    /v3/assets/js/libs/@fortawesome/fontawesome-free/css/all.min.css?1788463788" type="text/css" />
+
+  <!-- Specific Book and Expansion Styles -->
+  
+    <link rel="stylesheet" href="
+      /v3/assets/css/compendium/books/dnd5e.css?1788463787" type="text/css" />
+  
+  
+    <link rel="stylesheet" href="
+      /v3/assets/css/compendium/expansions/expansion-33359.css?1788463787" type="text/css" />
+  
+
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  
+
+  
+
+  <!-- Loading Jquery no matter what env -->
+  <script type="text/javascript" src="
+    /v3/assets/js/libs/jquery/dist/jquery.min.js?1788463788"></script>
+  <script type="text/javascript" src="
+    /v3/assets/js/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1788463788"></script>
+  <script type="text/javascript" src="/v2/js/underscore.js?1788463787"></script>
+  <script type="text/javascript" src="
+    /v3/resources/custom/navbar.js?1788463788"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+
+  
+
+  
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    const stripe = Stripe("pk_live_1vH03GH31ZvT2lI7yU8bcClq9jDHOPU4OlnsWqZKu2s4Vs014SXpmjsjnRv37wD8PhLLkYj1YcLSxVDbdzba2HZiQ00qGgUFDqB");
+    const elements = stripe.elements();
+  </script>
+
+  
+    <script type='text/javascript'>
+      clickChapter = ({ chapterIndex, chapterName, hasIntroChapter = false }) => {
+        const indexMod = hasIntroChapter ? 0 : 1
+        const chapters = [ ...document.getElementsByClassName("page__chapters__chapter selected") ];
+        chapters?.forEach((element) => element.classList.remove("selected"));
+
+        document.getElementById(`page-chapters-${chapterIndex}`).classList.add("selected");
+        const selectedChapterNumber = document.getElementById(`index-page-selected-chapter-number`);
+        selectedChapterNumber.innerHTML = (parseInt(chapterIndex) + indexMod).toString();
+
+        document.getElementById("index-page-chapter-title").innerHTML = chapterName;
+
+        const chapterPages = [ ...document.getElementsByClassName(`page__chapter-page-container`) ];
+
+        const unselectedChapterPages = chapterPages?.filter((element) => element.dataset.chapterIndex !== chapterIndex);
+        unselectedChapterPages?.forEach((element) => element.classList.add("hidden"));
+
+        const selectedChapterPages = chapterPages?.filter((element) => element.dataset.chapterIndex === chapterIndex);
+        selectedChapterPages?.forEach((element) => element.classList.remove("hidden"));
+      };
+
+      clickViewMore = () => {
+        const cardList = document.querySelector(".compendium2024__related-content__card-list");
+        cardList.classList.add("expanded");
+        document.getElementById("compendium-page-view-more-marketing-ctas").classList.add("hidden");
+      };
+    </script>
+  
+
+  
+  
+		
+			<link rel="stylesheet" href="/static-fallback/nav-bar/master/assets/main-BBcCYivi.css" />
+		
+	
+</head>
+
+<body>
+<a href="#mainContent" class="skip-link">Skip to Main Content</a>
+<!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKL9HM6&gtm_auth=RyNPjkDTh-LgK4oo5gJi6A&gtm_preview=env-1&gtm_cookies_win=x"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  
+  <!-- some pages use the full width of the page (i.e. Characters) but others are more constrained (i.e. v2 pages), so setting width as "full" or "reg" we can make the navbar span the full width or 1440px based on which page the user is on -->
+<style>
+.reg{
+  display: flex;
+  justify-content: center;
+}
+.reg .navbar-placeholder{
+  max-width: 1440px;
+}
+.full .navbar-placeholder{
+  width: 100%;
+}
+.navbar-placeholder{
+  background-color: var(--color-navbar-background);
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 2px -2px rgba(31, 41, 55, 0.1)
+}
+.left-side-placeholder{
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-direction: row;
+}
+.right-side-placeholder {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: row;
+}
+.left-side-placeholder p{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  position: unset;
+  font-weight: 700;
+  margin-left: 0;
+  color: var(--color-item);
+}
+.left-side-placeholder p {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+.arrow-svg {
+  height: 24px;
+}
+.placeholder-subscribe-light{
+  background: linear-gradient(to left, #CC8900 40%, #664400);
+  border: none !important;
+  text-transform: none;
+  color: var(--color-filled-button-text);
+  border-radius: 8px;
+}
+.placeholder-subscribe-dark{
+  background: linear-gradient(to left, #CC8900 40%, #664400);
+  border: none !important;
+  text-transform: none;
+  color: var(--color-filled-button-text);
+  border-radius: 8px;
+}
+.navbar-mobile-placeholder{
+  display: none;
+}
+@media (max-width: 991px) {
+  .navbar-placeholder{
+    display: none;
+  }
+  .navbar-mobile-placeholder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-navbar-background);
+    height: 60px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 2px -2px rgba(31, 41, 55, 0.1)
+  }
+}
+@media (max-width: 1325px){
+  .left-side-placeholder{
+    gap: 1rem;
+  }
+}
+@media (max-width: 1255px){
+  .left-side-placeholder p, .left-side-placeholder .btn{
+    font-size: 14px;
+  }
+}
+</style>
+
+
+<div id="new-navbar" class="full" data-dark-mode="false" data-subscriber="false" data-role="" data-app-url="https://app.roll20.net" data-marketplace-url="https://marketplace.roll20.net" data-landing-url="https://roll20.net" data-display-name="" data-account-notifications-count="" data-site-notifications-count="0" data-logged-in="false" data-pub-id="false" data-compendium-tools="false" data-env="production" style="width: 100%; position: relative; z-index: 2000;">
+<!-- The navbar Vue app will mount here. To prevent a flashing of no navbar, a static navbar with no functionality exists in this div and will be replaced upon mount (about a second in, so hopefully the user doesn't notice anything) -->
+  
+    <div class="navbar-placeholder">
+      <div class="left-side-placeholder">
+        <img src="/images/roll20-logo-light.svg" alt="Roll20 Logo" height="30">
+        <p>Play Now<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Join a Game<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Characters<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Shop<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Tools<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Compendium<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <p>Community<img src="/images/arrow-light.svg" alt="Arrow" height="30" class="arrow-svg"></p>
+        <button class="btn placeholder-subscribe-light">Subscribe</button>
+      </div>
+      <div class="right-side-placeholder">
+        <img src="/images/bell-light.svg" alt="Search" class="arrow-svg">
+        <p>Sign In<img src="/images/arrow-grey-light.svg" alt="Arrow" class="arrow-svg"></p>
+      </div>
+    </div>
+  
+  <div class="navbar-mobile-placeholder">
+    <img src="/images/roll20-logo-light.svg" alt="Roll20 Logo" height="30">
+    <img src="/images/hamburger-light.svg" alt="Hamburger Menu" height="30">
+
+  </div>
+
+</div>
+
+  
+
+  <script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+  var gads = document.createElement('script');
+  gads.async = true;
+  gads.type = 'text/javascript';
+  var useSSL = 'https:' == document.location.protocol;
+  gads.src = (useSSL ? 'https:' : 'http:') +
+  '//www.googletagservices.com/tag/js/gpt.js';
+  var node = document.getElementsByTagName('script')[0];
+  node.parentNode.insertBefore(gads, node);
+  })();
+  </script>
+
+  <script type='text/javascript'>
+  googletag.cmd.push(function() {
+  googletag.defineSlot('/34541132/Leaderboard-Compendium', [728, 90], 'dfp-1349444251840-1').addService(googletag.pubads());
+  googletag.pubads().enableSingleRequest();
+  googletag.enableServices();
+  });
+  </script>
+
+<script type='text/javascript'>
+	Object.defineProperty(window, "LANGUAGE", { value: "" , writable: false });
+</script>
+
+</div>
+
+  <div class="compendium2024 dnd5e expansion-33359">
+    
+      <dialog id="unowned-content-modal" class="unowned-content">
+  <div class="unowned-content__header">Unlock to Continue Reading</div>
+  <p class="unowned-content__text">
+    Purchase this content to gain full access. By purchasing this content, you will unlock items for the virtual tabletop as well.
+  </p>
+  <div class="unowned-content__card">
+    <a href=https://marketplace.roll20.net/browse/bundle/31885/dandd-dungeon-masters-guide-2024 target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://s3.amazonaws.com/files.d20.io/marketplace/4184382/7Ge8JdeV_rHZUPX4gtk_NA/med.png?1731006466960)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Dungeon Master's Guide (2024)</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Core Games</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  </div>
+  <div class="unowned-content__buttons">
+    
+      <a class="action-btn action-btn__secondary" href="https://app.roll20.net/login?backto=https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359">
+        Already have an account? Sign In
+      </a>
+      <a class="action-btn action-btn__primary" target="_self" autofocus href="https://app.roll20.net/create-account?backto=https://roll20.net/compendium/dnd5e/Rules:Greyhawk%20Gazetteer?expansion=33359">
+        <span class="roll20Icon">plus</span>
+        <span>Sign Up to Unlock Content</span>
+      </a>
+    
+  </div>
+
+</dialog>
+
+<script>
+  // Open Dilog
+  const dialog = document.querySelector("#unowned-content-modal");
+  dialog.showModal();
+  // Disable Closing
+  dialog.addEventListener("cancel", (e) => {
+    console.log("canceling", e);
+    e.preventDefault();
+  });
+  // Disable pressing ESC to close dialog.
+  document.addEventListener("keydown", e => {
+    if (e.code === "Escape") {
+      e.preventDefault();
+    }
+  });
+
+  // Disable scrolling on the page
+  const body = document.querySelector("body");
+  body.style.overflow = "hidden";
+
+  document.querySelector("#paywall__go-back-btn").addEventListener("click", () => {
+    history.back();
+  });
+</script>
+    
+    
+      <div class="top-nav false" id="top-navigation-bar">
+  <div class="top-nav__icons">
+    <a class="icon-btn home" href="https://roll20.net/compendium/dnd5e">
+      <div class="roll20Icon home__icon">library</div>
+    </a>
+    <div style="position: relative">
+      <button class="icon-btn book-switcher dropdown-toggle" id="book-switcher" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 40 28">
+          <g clip-path="url(#a)">
+            <path fill-rule="evenodd" d="M14.37.6H29.7v21.38c-.03.5-.66.48-1.32.46H14.15a1.68 1.68 0 0 0 0 3.35H29v-1.78h1.3v2.27c0 .41-.33.75-.74.75H14.2c-2.02.38-3.02-.74-3.02-2.4V3.78A3.19 3.19 0 0 1 14.37.6Zm-12 22.82A15.43 15.43 0 0 1 7.77 1.8v3.47a12.5 12.5 0 0 0-3.23 16.15l1.52-1.39c.2-.16.39-.22.57-.17.5.12.5.7.5 1.1 0 1.15.3 4.42.32 5a.63.63 0 0 1-.73.67c-.6-.07-3.97-.67-5.06-.78-.38-.04-.88-.12-.95-.59-.03-.19.05-.37.23-.55l1.41-1.3Zm35.4-17.27a15.44 15.44 0 0 1-5.3 21.25v-3.53a12.48 12.48 0 0 0 3.08-15.8l-1.53 1.3c-.2.16-.4.21-.58.16-.5-.14-.47-.72-.46-1.12.03-1.14-.16-4.42-.17-5a.63.63 0 0 1 .75-.65c.6.1 3.95.79 5.04.94.38.05.87.14.93.61.02.19-.06.37-.25.55l-1.5 1.29ZM13.92 3.27h.45c.24 0 .43.2.43.42V19.7c0 .23-.2.42-.43.42h-.45a.43.43 0 0 1-.42-.42v-16c0-.24.2-.43.42-.43Zm.23 21.2h13.64c.14 0 .25.1.25.25v.15c0 .14-.11.25-.25.25H14.14a.25.25 0 0 1-.25-.25v-.15c0-.14.11-.25.25-.25Zm0-1.3h13.64a.25.25 0 0 1 .25.25v.15c0 .14-.11.25-.25.25H14.14a.25.25 0 0 1-.25-.25v-.15c0-.14.11-.25.25-.25Z" clip-rule="evenodd" />
+          </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#fff" d="M0 .6h40v26.8H0z" />
+            </clipPath>
+          </defs>
+        </svg>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right book-switcher" aria-labelledby="book0switcher">
+        <div class="book-switcher__container">
+          <div class="search book-switcher__search">
+            <label for="book-switcher-search-input">
+              <span class="roll20Icon search-icon">search</span>
+              <input id="book-switcher-search-input" placeholder="Search for content..." />
+            </label>
+            <button class="cancel-icon invisible" id="book-switcher-cancel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Zm-5.58-4.42a.6.6 0 0 1 0 .84L12.85 12l3.57 3.58a.6.6 0 0 1-.84.84L12 12.85l-3.58 3.57a.6.6 0 0 1-.84-.84L11.15 12 7.58 8.42a.6.6 0 1 1 .84-.84L12 11.15l3.58-3.57a.6.6 0 0 1 .84 0Z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-nav__icons">
+    <div class="search">
+      <label for="compendium-search-input">
+        <span class="roll20Icon search-icon">search</span>
+        <input id="compendium-search-input" placeholder="Search for anything..." />
+      </label>
+      <button class="cancel-icon invisible" id="compendium-search-cancel-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Zm-5.58-4.42a.6.6 0 0 1 0 .84L12.85 12l3.57 3.58a.6.6 0 0 1-.84.84L12 12.85l-3.58 3.57a.6.6 0 0 1-.84-.84L11.15 12 7.58 8.42a.6.6 0 1 1 .84-.84L12 11.15l3.58-3.57a.6.6 0 0 1 .84 0Z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    <button class="icon-btn toggle-toc" id="table-of-contents-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 40 40">
+        <path d="M11.67 11.67c0-.92.74-1.67 1.66-1.67h20a1.67 1.67 0 1 1 0 3.33h-20c-.92 0-1.66-.74-1.66-1.66Zm0 8.33c0-.92.74-1.67 1.66-1.67h20a1.67 1.67 0 1 1 0 3.34h-20c-.92 0-1.66-.75-1.66-1.67Zm0 8.33c0-.92.74-1.66 1.66-1.66h20a1.67 1.67 0 1 1 0 3.33h-20c-.92 0-1.66-.75-1.66-1.67ZM8.33 11.67a1.67 1.67 0 1 1-3.33 0 1.67 1.67 0 0 1 3.33 0Zm0 8.33A1.67 1.67 0 1 1 5 20a1.67 1.67 0 0 1 3.33 0Zm0 8.33a1.67 1.67 0 1 1-3.33 0 1.67 1.67 0 0 1 3.33 0Z" />
+      </svg>
+    </button>
+  </div>
+  
+    <div class="toc closed hidden">
+  <div class="toc__container">
+    <div class="toc__title">
+      <div>Table of Contents</div>
+      <button id="toc__close" class="roll20Icon">cancel</button>
+    </div>
+    <div class="toc__expansion">
+      <div class="expansion-switcher false">
+  
+    <div>Dungeon Master's Guide (2024)</div>
+  
+</div>
+
+<script>
+  $(".expansion-select").on("change", function() {
+    window.location = $(this).val();
+  });
+</script>
+    </div>
+    
+    <div class="toc__body">
+      <ol class="toc__chapters">
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>The Basics</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:The Basics?expansion=33359">
+                      The Basics
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:What Does a DM Do?expansion=33359">
+                      What Does a DM Do
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Things You Need?expansion=33359">
+                      Things You Need
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Preparing a Session?expansion=33359">
+                      Preparing a Session
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:How to Run a Session?expansion=33359">
+                      How to Run a Session
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Example of Play?expansion=33359">
+                      Example of Play
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Every DM Is Unique?expansion=33359">
+                      Every DM Is Unique
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Ensuring Fun for All?expansion=33359">
+                      Ensuring Fun for All
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Running the Game</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Running the Game?expansion=33359">
+                      Running the Game
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Know Your Players?expansion=33359">
+                      Know Your Players
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Group Size?expansion=33359">
+                      Group Size
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Multiple DMs?expansion=33359">
+                      Multiple DMs
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Narration?expansion=33359">
+                      Narration
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Resolving Outcomes?expansion=33359">
+                      Resolving Outcomes
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Running Social Interaction?expansion=33359">
+                      Running Social Interaction
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Running Exploration?expansion=33359">
+                      Running Exploration
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Running Combat?expansion=33359">
+                      Running Combat
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Character Advancement?expansion=33359">
+                      Character Advancement
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>DM&#39;s Toolbox</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:DM&#39;s Toolbox?expansion=33359">
+                      DM&#39;s Toolbox
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Alignment?expansion=33359">
+                      Alignment
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Chases?expansion=33359">
+                      Chases
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating a Background?expansion=33359">
+                      Creating a Background
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating a Creature?expansion=33359">
+                      Creating a Creature
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating a Magic Item?expansion=33359">
+                      Creating a Magic Item
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating a Spell?expansion=33359">
+                      Creating a Spell
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Curses and Magical Contagions?expansion=33359">
+                      Curses and Magical Contagions
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Death?expansion=33359">
+                      Death
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Doors?expansion=33359">
+                      Doors
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Dungeons?expansion=33359">
+                      Dungeons
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Environmental Effects?expansion=33359">
+                      Environmental Effects
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Fear and Mental Stress?expansion=33359">
+                      Fear and Mental Stress
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Firearms and Explosives?expansion=33359">
+                      Firearms and Explosives
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Gods and Other Powers?expansion=33359">
+                      Gods and Other Powers
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Hazards?expansion=33359">
+                      Hazards
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Marks of Prestige?expansion=33359">
+                      Marks of Prestige
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Mobs?expansion=33359">
+                      Mobs
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Nonplayer Characters?expansion=33359">
+                      Nonplayer Characters
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Poison?expansion=33359">
+                      Poison
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Renown?expansion=33359">
+                      Renown
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Settlements?expansion=33359">
+                      Settlements
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Siege Equipment?expansion=33359">
+                      Siege Equipment
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Supernatural Gifts?expansion=33359">
+                      Supernatural Gifts
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Traps?expansion=33359">
+                      Traps
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Creating Adventures</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating Adventures?expansion=33359">
+                      Creating Adventures
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Step-by-Step Adventures?expansion=33359">
+                      Step-by-Step Adventures
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Lay Out the Premise?expansion=33359">
+                      Lay Out the Premise
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Draw In the Players?expansion=33359">
+                      Draw In the Players
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Plan Encounters?expansion=33359">
+                      Plan Encounters
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Bring It to an End?expansion=33359">
+                      Bring It to an End
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Adventure Rewards?expansion=33359">
+                      Adventure Rewards
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Adventure Examples?expansion=33359">
+                      Adventure Examples
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Creating Campaigns</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Creating Campaigns?expansion=33359">
+                      Creating Campaigns
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Step-by-Step Campaigns?expansion=33359">
+                      Step-by-Step Campaigns
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Your Campaign Journal?expansion=33359">
+                      Your Campaign Journal
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Campaign Premise?expansion=33359">
+                      Campaign Premise
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Campaign Start?expansion=33359">
+                      Campaign Start
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Plan Adventures?expansion=33359">
+                      Plan Adventures
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Ending a Campaign?expansion=33359">
+                      Ending a Campaign
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Greyhawk?expansion=33359">
+                      Greyhawk
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Important Names?expansion=33359">
+                      Important Names
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Greyhawk&#39;s Premise?expansion=33359">
+                      Greyhawk&#39;s Premise
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Free City of Greyhawk?expansion=33359">
+                      Free City of Greyhawk
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a class=current href="https://roll20.net/compendium/dnd5e/Rules:Greyhawk Gazetteer?expansion=33359">
+                      Greyhawk Gazetteer
+                    </a>
+                  </span>
+                  
+                    <ul class="subheaders">
+                      
+                        <li><a href="#The Big Picture" data-anchor="The Big Picture">The Big Picture</a></li>
+                      
+                        <li><a href="#Living History" data-anchor="Living History">Living History</a></li>
+                      
+                        <li><a href="#Central Flanaess" data-anchor="Central Flanaess">Central Flanaess</a></li>
+                      
+                        <li><a href="#Battle of Emridy Meadows" data-anchor="Battle of Emridy Meadows">Battle of Emridy Meadows</a></li>
+                      
+                        <li><a href="#The Rise of Iuz" data-anchor="The Rise of Iuz">The Rise of Iuz</a></li>
+                      
+                        <li><a href="#Central Flanaess Culture" data-anchor="Central Flanaess Culture">Central Flanaess Culture</a></li>
+                      
+                        <li><a href="#Central Flanaess Adventures" data-anchor="Central Flanaess Adventures">Central Flanaess Adventures</a></li>
+                      
+                        <li><a href="#Central Flanaess Locations" data-anchor="Central Flanaess Locations">Central Flanaess Locations</a></li>
+                      
+                        <li><a href="#Eastern Flanaess" data-anchor="Eastern Flanaess">Eastern Flanaess</a></li>
+                      
+                        <li><a href="#Shar" data-anchor="Shar">Shar</a></li>
+                      
+                        <li><a href="#Eastern Flanaess Culture" data-anchor="Eastern Flanaess Culture">Eastern Flanaess Culture</a></li>
+                      
+                        <li><a href="#Eastern Flanaess and Its Neighbors" data-anchor="Eastern Flanaess and Its Neighbors">Eastern Flanaess and Its Neighbors</a></li>
+                      
+                        <li><a href="#Eastern Flanaess Adventures" data-anchor="Eastern Flanaess Adventures">Eastern Flanaess Adventures</a></li>
+                      
+                        <li><a href="#Eastern Flanaess Locations" data-anchor="Eastern Flanaess Locations">Eastern Flanaess Locations</a></li>
+                      
+                        <li><a href="#Northern Flanaess" data-anchor="Northern Flanaess">Northern Flanaess</a></li>
+                      
+                        <li><a href="#Baklunish Nomads" data-anchor="Baklunish Nomads">Baklunish Nomads</a></li>
+                      
+                        <li><a href="#The North Kingdoms" data-anchor="The North Kingdoms">The North Kingdoms</a></li>
+                      
+                        <li><a href="#The Hunting Lands" data-anchor="The Hunting Lands">The Hunting Lands</a></li>
+                      
+                        <li><a href="#Northern Flanaess and Its Neighbors" data-anchor="Northern Flanaess and Its Neighbors">Northern Flanaess and Its Neighbors</a></li>
+                      
+                        <li><a href="#Northern Flanaess Adventures" data-anchor="Northern Flanaess Adventures">Northern Flanaess Adventures</a></li>
+                      
+                        <li><a href="#Northern Flanaess Locations" data-anchor="Northern Flanaess Locations">Northern Flanaess Locations</a></li>
+                      
+                        <li><a href="#Old Keoland" data-anchor="Old Keoland">Old Keoland</a></li>
+                      
+                        <li><a href="#Old Keoland Culture" data-anchor="Old Keoland Culture">Old Keoland Culture</a></li>
+                      
+                        <li><a href="#Old Keoland and Its Neighbors" data-anchor="Old Keoland and Its Neighbors">Old Keoland and Its Neighbors</a></li>
+                      
+                        <li><a href="#Old Keoland Adventures" data-anchor="Old Keoland Adventures">Old Keoland Adventures</a></li>
+                      
+                        <li><a href="#Old Keoland Locations" data-anchor="Old Keoland Locations">Old Keoland Locations</a></li>
+                      
+                        <li><a href="#Western Flanaess" data-anchor="Western Flanaess">Western Flanaess</a></li>
+                      
+                        <li><a href="#Western Flanaess Culture" data-anchor="Western Flanaess Culture">Western Flanaess Culture</a></li>
+                      
+                        <li><a href="#Western Flanaess and Its Neighbors" data-anchor="Western Flanaess and Its Neighbors">Western Flanaess and Its Neighbors</a></li>
+                      
+                        <li><a href="#Western Flanaess Adventures" data-anchor="Western Flanaess Adventures">Western Flanaess Adventures</a></li>
+                      
+                        <li><a href="#Western Flanaess Locations" data-anchor="Western Flanaess Locations">Western Flanaess Locations</a></li>
+                      
+                    </ul>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Cosmology</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Cosmology?expansion=33359">
+                      Cosmology
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:The Planes?expansion=33359">
+                      The Planes
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Planar Travel?expansion=33359">
+                      Planar Travel
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Planar Adventuring?expansion=33359">
+                      Planar Adventuring
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Tour of the Multiverse?expansion=33359">
+                      Tour of the Multiverse
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Abyss?expansion=33359">
+                      Abyss
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Acheron?expansion=33359">
+                      Acheron
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Arborea?expansion=33359">
+                      Arborea
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Arcadia?expansion=33359">
+                      Arcadia
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Astral Plane?expansion=33359">
+                      Astral Plane
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Beastlands?expansion=33359">
+                      Beastlands
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Bytopia?expansion=33359">
+                      Bytopia
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Carceri?expansion=33359">
+                      Carceri
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Demiplanes?expansion=33359">
+                      Demiplanes
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Elemental Plane of Air?expansion=33359">
+                      Elemental Plane of Air
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Elemental Plane of Earth?expansion=33359">
+                      Elemental Plane of Earth
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Elemental Plane of Fire?expansion=33359">
+                      Elemental Plane of Fire
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Elemental Plane of Water?expansion=33359">
+                      Elemental Plane of Water
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Elysium?expansion=33359">
+                      Elysium
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Ethereal Plane?expansion=33359">
+                      Ethereal Plane
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Far Realm?expansion=33359">
+                      Far Realm
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Feywild?expansion=33359">
+                      Feywild
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Gehenna?expansion=33359">
+                      Gehenna
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Hades?expansion=33359">
+                      Hades
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Limbo?expansion=33359">
+                      Limbo
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Material Plane?expansion=33359">
+                      Material Plane
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Mechanus?expansion=33359">
+                      Mechanus
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Mount Celestia?expansion=33359">
+                      Mount Celestia
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Negative Plane?expansion=33359">
+                      Negative Plane
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Nine Hells?expansion=33359">
+                      Nine Hells
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Outlands?expansion=33359">
+                      Outlands
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Pandemonium?expansion=33359">
+                      Pandemonium
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Para-elemental Planes?expansion=33359">
+                      Para-elemental Planes
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Positive Plane?expansion=33359">
+                      Positive Plane
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Shadowfell?expansion=33359">
+                      Shadowfell
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Sigil, City of Doors?expansion=33359">
+                      Sigil, City of Doors
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Ysgard?expansion=33359">
+                      Ysgard
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Treasure</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Treasure?expansion=33359">
+                      Treasure
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Treasure Themes?expansion=33359">
+                      Treasure Themes
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Coins?expansion=33359">
+                      Coins
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Trade Bars?expansion=33359">
+                      Trade Bars
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Trade Goods?expansion=33359">
+                      Trade Goods
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Gemstones?expansion=33359">
+                      Gemstones
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Art Objects?expansion=33359">
+                      Art Objects
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Magic Items?expansion=33359">
+                      Magic Items
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Random Magic Items?expansion=33359">
+                      Random Magic Items
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Arcana Tables?expansion=33359">
+                      Arcana Tables
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Armaments Tables?expansion=33359">
+                      Armaments Tables
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Implements Tables?expansion=33359">
+                      Implements Tables
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Relics Tables?expansion=33359">
+                      Relics Tables
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Bastions</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Bastions?expansion=33359">
+                      Bastions
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Gaining a Bastion?expansion=33359">
+                      Gaining a Bastion
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Bastion Turns?expansion=33359">
+                      Bastion Turns
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Bastion Map?expansion=33359">
+                      Bastion Map
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Basic Facilities?expansion=33359">
+                      Basic Facilities
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Special Facilities?expansion=33359">
+                      Special Facilities
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Bastion Events?expansion=33359">
+                      Bastion Events
+                    </a>
+                  </span>
+                  
+                </li>
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Bastions:Fall of a Bastion?expansion=33359">
+                      Fall of a Bastion
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Lore Glossary</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Lore Glossary?expansion=33359">
+                      Lore Glossary
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+          <li class="toc__chapter">
+            <button class="chapter-title">
+              <span>Credits</span><span class="chevron roll20Icon">chevronDown</span></button>
+            <ul class="toc__sections">
+              
+                <li>
+                  <span class="section-title">
+                    <a false href="https://roll20.net/compendium/dnd5e/Rules:Credits?expansion=33359">
+                      Credits
+                    </a>
+                  </span>
+                  
+                </li>
+              
+              
+            </ul>
+          </li>
+        
+      </ol>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    // Auto open the TOC on correct chapter. Offset varies when there is a chapter 0 (only some books have this)
+    $(".toc__chapters").accordion({
+      collapsible: true,
+      active: 4,
+      animate: 200,
+      icons: false,
+      header: "button",
+      heightStyle: 'min-content'
+    });
+
+    $('.toc a').click(ev => {
+      if(window.innerWidth < 768)
+        closeToc();
+    })
+
+    $('.toc .subheaders a').click(ev => {
+      ev.preventDefault();
+      const targetName = ev.target.dataset.anchor;
+      const target = document.getElementsByName(targetName)[0];
+      if(target)
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+    })
+
+    $('#toc__close').click(closeToc);
+  });
+</script>
+
+  
+  
+</div>
+
+<script type="text/javascript">
+  function autocomplete(el, options = {}) {
+    const defaultOptions = {
+      onQuery: null, onNavigate: null, onSelect: null, onRender: null, debounce: 100, autoSelect: true, defaults: false, onDefaults: null
+    };
+
+    const opt = { ...defaultOptions, ...options };
+    let box;
+    let cur = opt.autoSelect ? 0 : -1;
+    let items = [];
+    let val;
+    let req;
+    let defaults = opt.defaults;
+
+    // Disable browser's default autocomplete behaviour on the input.
+    el.autocomplete = "off";
+
+    // Attach all the events required for the interactions in one go.
+    [ "input", "keydown", "blur" ].forEach(k => el.addEventListener(k, handleEvent));
+
+    function handleEvent(e) {
+      if (e.type === "keydown" && !handleKeydown(e)) {
+        return;
+      }
+
+      if (e.type === "blur") {
+        destroy();
+        return;
+      }
+
+      if (e.target.value === "" && !defaults) {
+        destroy();
+        val = null;
+        return;
+      }
+
+      if (e.target.value === val && box) {
+        return;
+      }
+
+      val = e.target.value;
+
+      // Clear (debounce) any existing pending requests and queue
+      // the next search request.
+      clearTimeout(req);
+      req = setTimeout(query, opt.debounce);
+    }
+
+    function handleKeydown(e) {
+      if (!box) {
+        return (e.keyCode === 38 || e.keyCode === 40) ? true : false;
+      }
+
+      switch (e.keyCode) {
+        case 38:
+          return navigate(-1, e); // Up arrow.
+        case 40:
+          return navigate(1, e); // Down arrow
+        case 9: // Tab
+          e.preventDefault();
+          select(cur);
+          destroy();
+          return;
+          case 13: // Enter
+          // select(cur); Do not auto select, otherwise it will search the first entry and not what was typed.
+          // destroy();
+          return;
+        case 27: // Escape.
+          destroy();
+          return;
+      }
+    }
+
+    async function query() {
+      if (!val && !defaults) {
+        return;
+      }
+
+      items = !val && defaults ? opt.onDefaults() : await opt.onQuery(val);
+      if (!items?.length) {
+        destroy();
+        return;
+      }
+
+      if (!box) {
+        createBox();
+      }
+
+      renderResults();
+    }
+
+    function createBox() {
+      box = document.createElement("div");
+      Object.assign(box.style, {
+        'min-width': window.getComputedStyle(el.parentElement.parentElement).width,
+        position: "absolute",
+        // left: `auto`,
+        top: `${el.offsetTop + el.offsetHeight + 14}px`
+      });
+
+      box.classList.add("autocomp");
+      el.parentNode.insertBefore(box, el.nextSibling);
+    }
+
+    function renderResults() {
+      box.innerHTML = "";
+
+      items.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.classList.add("autocomp__item");
+
+        // If there's a custom renderer callback, use it, else, simply insert the value/text as-is.
+        opt.onRender ? div.appendChild(opt.onRender(item)) : div.innerText = item;
+        if (idx === cur) {
+          div.classList.add("autocomp__sel");
+        }
+
+        div.addEventListener("mousedown", () => select(idx));
+        box.appendChild(div);
+      });
+    }
+
+    function navigate(direction, e) {
+      e.preventDefault();
+
+      // Remove the previous item's highlight;
+      const prev = box.querySelector(`:nth-child(${cur + 1})`);
+      prev && prev.classList.remove("autocomp-sel");
+
+      // Increment the cursor and highlight the next item, cycled between [0, n].
+      cur = (cur + direction + items.length) % items.length;
+      box.querySelector(`:nth-child(${cur + 1})`).classList.add("autocomp-sel");
+    }
+
+    async function select(idx) {
+      if (!opt.onSelect) {
+        return;
+      }
+
+      val = await opt.onSelect(items[idx]);
+      el.value = val;
+    }
+
+    function destroy() {
+      items = [];
+      cur = opt.autoSelect ? 0 : -1;
+      if (box) {
+        box.remove();
+        box = null;
+      }
+    }
+
+    return { handleEvent, handleKeydown, query, createBox, renderResults, navigate, select, destroy };
+  }
+
+</script>
+<script>
+
+  // TODO: refresh the token.
+  window.hydra_expires_at = "";
+  window.hydra_refresh_token = "";
+
+  // NOTE: UI elements
+  let toc, mainContainer,compendiumBody, tocButton, tocClose;
+  let compendiumSearchInput, compendiumSearchClearButton;
+  let bookSwitcherSearchInput, bookSwitcherClearButton, bookSwitcherToggle;
+
+  // NOTE: Scoped autocomplete variables
+  let switchableExpansionBooks = [];
+  let defaultSwitchableExpansionBooks = [];
+  // TODO: Add other 2024 expansion books here when we have them. (Monster Manual 2024, DM's Guide 2024)
+  // Max 6 items here.
+  const defaultSwitchableExpansionBookIds = [
+    5, // "Player's Handbook",
+    7583, // "Dungeon Master's Guide",
+    2, //"Monster Manual",
+    32231, //"Player's Handbook (2024)",
+    33335, //"Free Basic Rules (2024)"
+    33359, //"Dungeon Master's Guide (2024)"
+    34653, //"Monster Manual (2024)"
+  ];
+  let currentExpansionBook = null;
+  let currentPublisher = null;
+  let logosByPublisher = {};
+  let handleBookSwitcherEvent;
+
+  jQuery(function(){
+    mainContainer = document.querySelector(".compendium2024");
+    compendiumBody = document.querySelector(".compendium2024__body");
+    compendiumSearchInput = document.querySelector("#compendium-search-input");
+    compendiumSearchClearButton = document.querySelector("#compendium-search-cancel-icon");
+
+    bookSwitcherSearchInput = document.querySelector("#book-switcher-search-input");
+    bookSwitcherClearButton = document.querySelector("#book-switcher-cancel-icon");
+    bookSwitcherToggle = document.querySelector("#book-switcher");
+
+    /// NOTE: TOC items are optional
+    toc = document.querySelector(".toc");
+    tocButton = document.querySelector(".toggle-toc");
+    tocClose = document.querySelector("#toc__close");
+
+    if (tocButton) tocButton.addEventListener("click", toggleToc);
+    if (tocClose) tocClose.addEventListener("click", closeToc);
+
+    compendiumSearchInput.addEventListener("input", (event) => toggleClearButton(event, compendiumSearchClearButton));
+    bookSwitcherSearchInput.addEventListener("input", (event) => toggleClearButton(event, bookSwitcherClearButton));
+
+    compendiumSearchClearButton.addEventListener("click", () => clearSearchText(compendiumSearchInput, compendiumSearchClearButton));
+    bookSwitcherClearButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        clearSearchText(bookSwitcherSearchInput, bookSwitcherClearButton);
+        handleBookSwitcherEvent({ target: { value: '' }});
+    });
+
+    bookSwitcherToggle.addEventListener("click", () => setTimeout(() => handleBookSwitcherEvent({ target: { value: '' }}), 500));
+
+    compendiumSearchInput.addEventListener('keypress', handleSearchEnter);
+    const fromListings = "false".toLowerCase() === 'true';
+    if(!fromListings && localStorage.getItem('compendium_toc_open')){
+      toc.classList.remove('hidden');
+      openTocClasses()
+    }
+  })
+
+  // Does not wait for animations by default. Used when page first loads.
+  function openTocClasses(){
+    toc.classList.remove("closed");
+    tocButton.classList.add("active");
+    mainContainer.classList.add("toc-open");
+    compendiumBody.classList.add("toc-open", "drawer-open");
+    localStorage.setItem('compendium_toc_open', 'true')
+  }
+
+  function openToc() {
+    if(!toc) return;
+    toc.classList.remove('hidden');
+    setTimeout(() => {
+      openTocClasses()
+    }, 50)
+  }
+
+  function closeToc() {
+    if(!toc) return;
+    toc.classList.add("closed");
+    tocButton.classList.remove("active");
+    mainContainer.classList.remove("toc-open");
+    compendiumBody.classList.remove("toc-open", "drawer-open");
+    localStorage.removeItem('compendium_toc_open')
+    setTimeout(() => {
+      toc.classList.add('hidden');
+    }, 250)
+  }
+
+  function toggleToc() {
+    if(!toc) return;
+    if (toc.classList.contains("closed")) openToc();
+    else closeToc();
+  }
+
+  function toggleClearButton(event, clearButton) {
+    if (event.target.value?.length || 0 > 0) {
+      clearButton.classList.remove("invisible");
+    } else {
+      clearButton.classList.add("invisible");
+    }
+  }
+
+  function clearSearchText(searchInput, clearButton) {
+      searchInput.value = "";
+      clearButton.classList.add("invisible");
+  }
+
+  const handleSearchEnter = function(e){
+    if (e.key === 'Enter') {
+      const searchTerm = e.target.value;
+      const url = `https://roll20.net/compendium/dnd5e/v2/search/${searchTerm}`;
+      window.location = url;
+    }
+  }
+
+  const headers = new Headers({
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+  });
+  const loadLogos = async() => {
+      try {
+          const response = await fetch("/compendium/expansion-logos", {
+              method: "GET",
+              headers,
+          });
+          logosByPublisher = await response.json();
+      }
+      catch(error) {
+          console.error('Unable to fetch expansion logos', { error })
+      }
+  }
+  const loadBookList = async () => {
+      try {
+          const response = await fetch("/compendium/book-list/3", {
+              method: "GET",
+              headers,
+          });
+          const payload = await response.json();
+          switchableExpansionBooks = payload.map((expansion) => {
+              const payload = {
+                  id: expansion.id,
+                  name: expansion.name,
+                  cost: expansion.cost,
+                  free: expansion.free,
+                  logo: logosByPublisher[expansion.publisher]
+              };
+              const viewingCurrentExpansion = expansion.id.toString() === "33359";
+
+              if (viewingCurrentExpansion)
+                  currentPublisher = expansion.publisher || "Wizards of the Coast";
+
+              if (!viewingCurrentExpansion && defaultSwitchableExpansionBookIds.includes(expansion.id))
+                  defaultSwitchableExpansionBooks.push(payload);
+
+              return payload;
+          });
+          const expansionId = '33359';
+          currentExpansionBook = expansionId ?
+              {
+                id: "33359",
+                name: "Dungeon Master's Guide (2024)",
+                current: true,
+                logo: logosByPublisher[currentPublisher],
+              } : null;
+      }
+      catch(error) {
+          console.error('Unable to fetch book list for book 3', { error })
+      }
+  }
+  const getExpansionCompendiumUrl = async (expansionId) => {
+      try {
+          const response = await fetch(`/compendium/expansion-compendium-url/${expansionId}`, {
+              method: "GET",
+              headers
+          });
+          const { url } = await response.json();
+          return url;
+      }
+      catch(error) {
+          console.error(`Unable to fetch expansion compendium url for expansion ${expansionId}`, { error })
+      }
+  }
+  loadLogos().then(loadBookList);
+  loadDefaultSwitchableExpansionBooks = () => {
+      return currentExpansionBook ? [currentExpansionBook, ...defaultSwitchableExpansionBooks] : [...defaultSwitchableExpansionBooks];
+  };
+  const { handleEvent } = autocomplete(document.querySelector('#book-switcher-search-input'), {
+      debounce: 250,
+      defaults: true,
+      onDefaults: loadDefaultSwitchableExpansionBooks,
+      onQuery: async value => {
+          if ((value?.length || 0) <= 0) {
+            return loadDefaultSwitchableExpansionBooks();
+          }
+          const filtered = [...switchableExpansionBooks].filter((expansion) => {
+              return expansion.id.toString() !== "33359" && expansion.name.toLowerCase().includes(value.toLowerCase())
+          }).slice(0, 6);
+          return currentExpansionBook ? [
+              currentExpansionBook,
+              ...filtered
+          ] : filtered;
+      },
+      onSelect: async item => {
+          if (item.current) return item.name;
+          window.location = await getExpansionCompendiumUrl(item.id);
+          return item.name;
+      },
+      onRender: item => {
+          const link = document.createElement("a");
+          link.title = item.name;
+          const contents = document.createElement("span");
+          if (item.logo) {
+              const logo = document.createElement("span");
+              const logoImg = document.createElement("img");
+              logo.classList.add("item__logo");
+              logoImg.src = item.logo;
+              logo.appendChild(logoImg);
+              contents.appendChild(logo);
+          }
+          if (item.current) {
+              contents.classList.add('current');
+              const itemTitle = document.createElement("span");
+              itemTitle.classList.add("item__current-long-title");
+              itemTitle.innerHTML = item.name;
+              contents.appendChild(itemTitle);
+              const checkMark = document.createElement('span');
+              checkMark.classList.add('item__checkmark')
+              checkMark.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                <path d="M1.5 6.55518L6.0975 11.1527" stroke="#E6E6E6" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.09766 11.1525L16.5002 0.75" stroke="#E6E6E6" stroke-width="1.2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>`;
+              contents.appendChild(checkMark);
+              link.appendChild(contents);
+              return link;
+          }
+          else {
+              const itemTitle = document.createElement("span");
+              itemTitle.classList.add("item__long-title");
+              itemTitle.innerHTML = item.name;
+              contents.appendChild(itemTitle);
+              if (!item.cost?.toLowerCase().includes('free')) {
+                  const itemCost = document.createElement("span");
+                  itemCost.innerHTML = item.cost;
+                  itemCost.classList.add("item__cost");
+                  // itemCost.classList.add(item.cost.toLowerCase().includes('free') ? "item__free" : "item__cost");
+                  contents.appendChild(itemCost);
+              }
+              link.appendChild(contents);
+              return link;
+          }
+      }
+  });
+  handleBookSwitcherEvent = handleEvent;
+
+  autocomplete(document.querySelector('#compendium-search-input'), {
+    debounce: 250,
+    onQuery: async val => {
+      if ((val?.length || 0) < 3) return [];
+
+      // GRAPHQL VERSION
+      const query = `{
+         ruleSystem(shortName: "dnd5e") {
+          searchPages(queryTerm: "${val}", nameOnly: true) {
+            legacyPageId
+            name,
+            category {
+              name
+            }
+            book {
+              name,
+              itemId,
+            }
+            publisher {
+              name,
+              logoUrl,
+            }
+          }
+        }
+      }`;
+      const payload = JSON.stringify({ query, variables: null }, null, 1);
+      const res = await fetch("https://compendium.production.roll20preflight.net/graphql?", {
+        method: "POST",
+        body: payload,
+        headers: new Headers({
+          "Authorization": "Bearer ",
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        })
+      });
+      const jsonRes = await res.json();
+      return jsonRes.data.ruleSystem.searchPages.filter(item => item && item.name && item.category && item.book).slice(0, 6).map(item => {
+        const categoryAndPage = `${item.category.name}:${item.name.replace('&', '&amp;')}`;
+        const url = `https://roll20.net/compendium/dnd5e/${categoryAndPage}?expansion=${item.book.itemId}`
+        return {        
+          url,
+          name: item.name,
+          formattedName: item.name.replace(new RegExp(val, "i"), match => `<span class="highlight">${match}</span>`),
+          book: item.book.name,
+          logo: item.publisher?.logoUrl
+        }
+      });
+    },
+    onSelect: item => {
+      window.location = item.url;
+      return item.name;
+    },
+    onRender: item => {
+      const link = document.createElement("a");
+      const contents = document.createElement("span");
+      link.href = item.url;
+      if (item.logo) {
+        const logo = document.createElement("span");
+        const logoImg = document.createElement("img");
+        logo.classList.add("item__logo");
+        logoImg.src = item.logo;
+        logo.appendChild(logoImg);
+        contents.appendChild(logo);
+      }
+      const itemTitle = document.createElement("span");
+      itemTitle.classList.add("item__title");
+      itemTitle.innerHTML = item.formattedName;
+      contents.appendChild(itemTitle);
+      const sourceBook = document.createElement("span");
+      sourceBook.classList.add("item__book");
+      sourceBook.appendChild(document.createTextNode(`${item.book}`));
+      contents.appendChild(itemTitle);
+      contents.appendChild(sourceBook);
+      link.appendChild(contents);
+      return link;
+    }
+  });
+</script>
+
+    
+    <div class="compendium2024__body ">
+      
+      <div class="compendium2024__main">
+        <div class="page Rules">
+  <div class="page__header">
+    <div>
+      <h1 class="page__title">Greyhawk Gazetteer</h1>
+      
+        <h2 class="page__category">Rules</h2>
+      
+    </div>
+
+    
+      <div class="page__buttons">
+        
+          <a id="create-character-cta" class="action-btn action-btn__secondary" href="https://app.roll20.net/characters/create/dnd2024byroll20" target="_blank">
+            <span class="roll20Icon">plus</span>
+            <span>Create Character</span>
+          </a>
+        
+        
+      </div>
+    
+
+    <div id="expansion-switcher__body" class="hidden">
+      <label class="expansion-switcher-label" for="expansion-select">Source</label>
+      <div><div class="expansion-switcher false">
+  
+    <div>Dungeon Master's Guide (2024)</div>
+  
+</div>
+
+<script>
+  $(".expansion-select").on("change", function() {
+    window.location = $(this).val();
+  });
+</script></div>
+    </div>
+
+  </div>
+  <div class="page__body">
+    
+      
+			
+			
+			<p>The poster map in this book shows the entire region of the Flanaess, with the Free City of Greyhawk near the center. As characters venture beyond the confines of the city and its surrounding lands, you can use the map and the information on these pages to inspire your own adventures and world details.</p>
+            <hr>
+            <a name="h-The%20Big%20Picture"></a><h2>The Big Picture</h2>
+            <p>To understand the Greyhawk of today (the year 576 in the Common Year), it is helpful to picture the Flanaess about 200 years ago. At that time, the Great Kingdom of Aerdy stretched from the Vast Swamp to the Rakers, and from the Solnor Ocean to the Yatil and Lortmil Mountains. Between the Lortmil Mountains and the Crystalmists was the Kingdom of Keoland, mimicking the Great Kingdom in its imperialist approach. To the west of the mountains, the Baklunish nations—survivors of the Invoked Devastation—stood much as they do now. And to the north, nomadic peoples (the Chakyik, the Wegwiur, the rovers of the Hunting Lands) and the North Kingdoms were, as now, independent of the politics of the south.</p>
+            <p>The contraction of the two southern realms over the last two centuries is the primary force that has shaped the modern Flanaess. First, the provinces of Perrenland, Veluna, and Furyondy—far from the overking’s throne in Rauxes—declared their independence from the Great Kingdom. When Nyrond joined them (in 356 CY), the stage was set for the slow disintegration of the Great Kingdom and the ongoing rebellion that dominates the eastern part of the Flanaess to this day.</p>
+            <p>The beginning of Aerdy’s decline marked the high-water mark of Keoland’s expansionist policies, as it held sway from the Pomarj to the borders of Ket. Aided by Celene, rebels in the Ulek region strove to curb the kingdom’s warlike ways, and the accession of King Tavish IV in 453 CY marked a dramatic shift in royal policy. The Yeomanry and the Ulek states were granted autonomy, the Gran March and Sterich became semi-independent while remaining loyal to the crown, and the diverse peoples of this region coexist in relative peace once again.</p>
+            <p>With this big picture in mind, you can think of the Flanaess beyond the Free City of Greyhawk as five major regions, each with its own store of adventure possibilities waiting to be explored:</p>
+            <p style="margin-left: 25px;"><strong>Central Flanaess.</strong> Diverse peoples clash against Iuz and the forces of Elemental Evil.</p>
+            <p style="margin-left: 25px;"><strong>Eastern Flanaess.</strong> The remnants of the Great Kingdom struggle to determine the fate of the lands in the overking’s wicked clutches.</p>
+            <p style="margin-left: 25px;"><strong>Northern Flanaess.</strong> In vast wilderness expanses populated by indigenous folk, one’s mettle is tested by the environment and roving dragons.</p>
+            <p style="margin-left: 25px;"><strong>Old Keoland.</strong> The former provinces of Keoland contend against evil monsters from the western mountains, including dragons and giants.</p>
+            <p style="margin-left: 25px;"><strong>Western Flanaess. </strong>The Baklunish peoples and nations navigate complex political relationships.</p>
+            
+            
+            <blockquote>
+<a name="h-Living%20History"></a><h4>Living History</h4>
+<p>Greyhawk has a long history of ancient empires and more recent wars, but the only relevant details of this history are those that feature in your adventures. Highlight significant in-world details by revealing them in the course of your adventures. Use the following techniques to share lore with your players:</p>
+<p style="margin-left: 25px;"><strong>Echoes of the Past.</strong> Features like a crater in the side of a mountain, a defaced statue in the town square, or a holiday celebrating a local hero provide concrete touchstones to past events. The characters might learn that a ruin they’re exploring was destroyed in a catastrophic battle or natural disaster.</p>
+<p style="margin-left: 25px;"><strong>Historical Records.</strong> Written historical details might appear anywhere in an adventure: glyphs on ancient dungeon walls, books in a library, files in a royal vault, or tapestries depicting key events. Use such set dressing to share important details. Summarize what lengthy works say, and focus on the most plot-worthy parts.</p>
+<p style="margin-left: 25px;"><strong>Scholarly Expertise.</strong> Characters who have proficiency in the Arcana, History, or Religion skill can be fonts of useful information. When it would be helpful for a group to know something about the setting, ask such characters to make an Intelligence check using the relevant skill, then share plot-relevant details if their roll warrants it.</p>
+<p style="margin-left: 25px;"><strong>Magical Footnotes.</strong> Spells such as <em>Contact Other Plane</em>, <em>Legend Lore</em>, and <em>Speak with Dead</em> allow characters to learn information while leaving you control of the particulars.</p>
+<p style="margin-left: 25px;"><strong>Primary Sources.</strong> Personify the past through a tragic ghost, an otherworldly guardian, an artificial intelligence, an ancient sage, or another long-lived individual. Such NPCs give you a way to share relevant information and respond to questions from the party. If the characters miss an important detail, this NPC can reinforce details in a way books and recollected facts can’t.</p>
+<p>Any one of these methods is useful for revealing a few details. You can combine them to share nuanced histories and help players feel like they’re digging into a rich and realistic history.</p>
+</blockquote>
+            
+            
+            
+            
+            
+            
+            <img style="width: 100%;" src="https://files.d20.io/images/413916203/H9Q1BiL_DRQIeEgBTBRETQ/original.png?1729254734">
+            <hr>
+            <div class="two-columns grow-left">
+                <div class="column" style="text-align:center">
+                    <img style="width: 100%;" src="https://files.d20.io/images/413916340/s4WtT-ho1B4RX0JdbBQkOA/original.png?1729254860">
+                    <i>The holy days of Rao are occasions for joyful processions and festivals in Veluna.</i>
+                </div>
+                <div class="column">
+            <a name="h-Central%20Flanaess"></a><h2>Central Flanaess</h2>
+            <p>The rich soil and pleasant climate of the region between the Nyr Dyv and the Yatil Mountains—combined with healthy trade relations between these realms and their neighbors to the east, south, and west—make this a strong and prosperous region.</p>
+            <a name="h-Battle%20of%20Emridy%20Meadows"></a><h3>Battle of Emridy Meadows</h3>
+            <p>Seven years ago, knights and soldiers from Furyondy, the Archclericy of Veluna, the Viscounty of Verbobonc, and the elven kingdom of Celene formed an alliance to repel an evil horde that had gathered in the grassy fields south of the Velverdyva River. This clash of armies—arguably the greatest seen in Eastern Oerik—was called the Battle of Emridy Meadows. The forces of evil were smashed, and their remnants were driven back into the dungeons under their stronghold, the Temple of Elemental Evil. The forces of good, under the command of Prince Thrommel IV of Furyondy, besieged the temple, which fell in a fortnight. Only a few of the temple’s wicked leaders escaped, and it is suspected that these individuals were responsible for the subsequent kidnapping of the prince.</p>
+                </div>
+            </div>
+            <p>Prince Thrommel was engaged to marry Lady Jolene, a priest from a prominent noble family of Veluna. Their marriage would have united Furyondy and Veluna as a single entity, with the canon of Veluna ruling in matters spiritual and the king of Furyondy ruling in matters temporal. This combined state, with its powerful elf allies in Celene, could wage a steady war against the evil plaguing Eastern Oerik. The prince’s disappearance has stalled these plans.</p>
+            <a name="h-The%20Rise%20of%20Iuz"></a><h3>The Rise of Iuz</h3>
+            <p>Iuz is the offspring of the demon lord Graz’zt and a human archmage named Iggwilv. For ages, he ruled the lands from the Howling Hills to Lake Whyestil, naming his domain after himself. These lands are so despoiled and dangerous that the otherwise fierce nomads of the Hunting Lands and Wegwiur pass through the Cold Marshes rather than enter the merest edge of Iuz’s realm.</p>
+            <p>Iuz’s evil reign was interrupted by a sixty-five-year imprisonment in the dungeon under Castle Greyhawk. During his absence, the Kingdom of Furyondy and its allies prospered, while the land of Iuz was overrun with evil bandits and monsters. Iuz’s absence turned him into a legend and attracted a host of new followers, whose misplaced faith invested him with the power of a demigod.</p>
+            <p>Upon winning his freedom, Iuz had no trouble reclaiming his homeland. He forged tenuous alliances with the leaders of the Bandit Kingdoms and the Horned Society, whom he controls through terror. With their aid, he aims to destroy his neighbors and lay waste to the Free City of Greyhawk.</p>
+            <p>Since the resurgence of Iuz, the northern quarter of the Vesve Forest and the eastern part of the Howling Hills have become filled with marauders and monsters. While the Wegwiur battle Iuz’s forces in the Howling Hills, scouts and troops from Furyondy join forces with Highfolk’s defenders to drive out the Vesve Forest’s evil inhabitants.</p>
+            <a name="h-Central%20Flanaess%20Culture"></a><h3>Central Flanaess Culture</h3>
+            <p>The culture of the Central Flanaess is a result of the long imposition of the Great Kingdom’s rule over a variety of peoples living in close proximity. These peoples, by and large, share the Great Kingdom’s practical, hardworking values, and they rely on the family and local community, rather than the might of nations and armies. They have a strong egalitarian streak unlike the Great Kingdom’s strict social hierarchy, and (beyond the domains of Iuz and the Horned Society) they have little tolerance for would-be tyrants or aloof nobility. Amid a large number of free cities and confederations, the monarchies of Furyondy and Celene are far more democratic in practice than those in other regions.</p>
+            <p>Typical dress in the Central Flanaess includes a tunic of varying length, sometimes worn with close-fitting trousers. A cape or cloak, usually featuring patterns of ovals or diamonds, completes the ensemble. The cuisine of the Central Flanaess uses rice and potatoes alongside cheese and meat that is typically boiled or roasted.</p>
+            <a name="h-Central%20Flanaess%20Adventures"></a><h3>Central Flanaess Adventures</h3>
+            <p>The dual threats of Iuz and Elemental Evil present abundant opportunities for adventure in the Central Flanaess (see <a href="https://roll20.net/compendium/dnd5e/Rules:Greyhawk%27s%20Premise?expansion=33359#Greyhawk%20Conflicts" target="_blank">“Greyhawk Conflicts”</a> in this chapter). This region is particularly appropriate for campaigns flavored with epic fantasy, supernatural horror, or war (see <a href="https://roll20.net/compendium/dnd5e/Rules:Campaign%20Premise?expansion=33359#Flavors%20of%20Fantasy" target="_blank">“Flavors of Fantasy”</a> in this chapter). This region is also home to many of the most famous dungeons and ruins of Greyhawk, including those described in the sections that follow.</p>
+            <p><em><strong>Ghost Tower of Inverness.</strong></em> Ages ago, an archmage raised the mighty fortress of Inverness from the very rock of the Abbor-Alz. In the great inner tower of the keep, he hid his most prized possession: the Soul-Gem. Legend says this great white diamond fell from the sky and glowed with the brilliance of the sun, and its magic could drag mortal souls screaming from their bodies and trap them. The fortress was ruined long ago, but on foggy nights the great central tower still appears.</p>
+            <p><em><strong>Lost Caverns of Tsojcanth.</strong></em> The archmage Iggwilv is said to have acquired much of her prowess from the hidden magic she discovered within the Lost Caverns of Tsojcanth (pronounced SAWJ-kahn). In these caverns she conducted experiments and rituals to increase her powers. One of these rituals led to her downfall, though, when she accidentally freed the demon lord Graz’zt from the prison where she had bound him. Though Graz’zt fled to the Abyss, Iggwilv was weakened and forced to abandon the caverns, but a secret cache of her treasure is said to remain. The Lost Caverns of Tsojcanth are detailed in <em>Quests from the Infinite </em><em>Staircase</em>.</p>
+            <p><em><strong>Maure Castle.</strong></em> Maure Castle is a forlorn and foreboding place surrounded by boggy ground and scraggly trees. Rumors suggest that a tome holding eldritch lore of unimaginable evil is held within, guarded by a powerful demon.</p>
+            <p><em><strong>Temple of Elemental Evil.</strong></em> The Temple of Elemental Evil, built long ago, spawned hordes of bloodthirsty monsters that ravaged the lands between Celene and Veluna. As far as anyone in the area knows, the temple is currently abandoned and has not posed a threat since the Battle of Emridy Meadows in 569 CY, but the forces of good in the region keep vigilant against any sign that the temple and its cults might arise once more.</p>
+            <a name="h-Central%20Flanaess%20Locations"></a><h5>Central Flanaess Locations</h5>
+<table class="table table-bordered">
+<thead><tr>
+<th>Location  </th>
+<th>Ruler  </th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Celene<br>
+</td>
+<td>Queen Yolande (elf)<br>
+</td>
+<td>Elven monarchy with large gnome and halfling populations<br>
+</td>
+</tr>
+<tr>
+<td>Dyvers (Free City)<br>
+</td>
+<td>Magister Thymantia Gortoz (aasimar)<br>
+</td>
+<td>Important port and trading center with a powerful navy<br>
+</td>
+</tr>
+<tr>
+<td>Furyondy, the Kingdom of<br>
+</td>
+<td>King Belvor IV (human)<br>
+</td>
+<td>Former province of the Great Kingdom, among the first to claim independence<br>
+</td>
+</tr>
+<tr>
+<td>Highfolk (Free City)<br>
+</td>
+<td>Mayor Talisyr (appears as an elf)<br>
+</td>
+<td>Fortified city with large population of elves; the mayor is a disguised adult silver dragon<br>
+</td>
+</tr>
+<tr>
+<td>Horned Society, the<br>
+</td>
+<td>Nine hierarchs (mostly humans and hobgoblins)<br>
+</td>
+<td>Theocracy ruled by devil worshipers allied with Iuz, supported by mercenaries enforcing their tyrannical rule<br>
+</td>
+</tr>
+<tr>
+<td>Iuz<br>
+</td>
+<td>Iuz (cambion demigod)<br>
+</td>
+<td>The monster-infested domain of the demonic dictator, steeped in wickedness<br>
+</td>
+</tr>
+<tr>
+<td>Nyr Dyv<br>
+</td>
+<td>—</td>
+<td>The Lake of Unknown Depths; home to barge dwellers<br>
+</td>
+</tr>
+<tr>
+<td>Perrenland<br>
+</td>
+<td>Voorzitter Yrenda Schwartzen (human)<br>
+</td>
+<td>Fiercely independent confederation of canons<br>
+</td>
+</tr>
+<tr>
+<td>Pomarj, the<br>
+</td>
+<td>—</td>
+<td>Lawless peninsula; home to bandits and marauders<br>
+</td>
+</tr>
+<tr>
+<td>Shield Lands, the<br>
+</td>
+<td>Various allied nobles<br>
+</td>
+<td>Independent alliance of nobles protected by the Knights of Holy Shielding, led by Knight Commander Aleshh Kaarth (dragonborn) and fortified by Furyondy and Urnst<br>
+</td>
+</tr>
+<tr>
+<td>Veluna, the Archclericy of<br>
+</td>
+<td>Canon Hazen (human)<br>
+</td>
+<td>Theocracy ruled by priests of Rao, a divine beacon of justice and hope<br>
+</td>
+</tr>
+<tr>
+<td>Verbobonc (Free City and Viscounty)<br>
+</td>
+<td>Viscountess Wilfrick Rejjin (human)<br>
+</td>
+<td>Vassal state of Veluna; site of the Temple of Elemental Evil<br>
+</td>
+</tr>
+<tr>
+<td>Wild Coast, the<br>
+</td>
+<td>Various burgomasters, lord mayors, and others<br>
+</td>
+<td>Free territory with self-governing settlements; haven for outcasts and dissidents<br>
+</td>
+</tr>
+</tbody>
+</table>
+            <hr>
+            <a name="h-Eastern%20Flanaess"></a><h2>Eastern Flanaess</h2>
+            <p>Once a powerful force for order and good, the Great Kingdom of Aerdy has declined over the last century to a state of utter decadence. The reigning overking—Ivid V, patriarch of the House of Naelax—is rumored to have fiendish advisers as well as a noble court infested with evil. Ruling from the Malachite Throne in Rauxes, Ivid commands an unmatched army currently embroiled in two wars at once: one against the Kingdom of Nyrond and the Prelacy of Almor, and the other against the Iron League (consisting of Idee, Irongate, the Lordship of the Isles, Onnwal, and Sunndi). To pay for these costly wars, the overking has imposed heavy taxes on his subjects, further diminishing his popularity.</p>
+            <p>Aerdiaak, Ahlissa, Medegia, and Rel Astra are provinces and fiefs of the Great Kingdom. The Sea Baronies are vassal states that provide most of the kingdom’s navy.</p>
+            <a name="h-Shar"></a><h3>Shar</h3>
+            <p>Fanatical Suloise militarists called the Scarlet Order founded the Hidden Empire of Shar, which is closed to outsiders. The order controls the peninsula west of the Tilva Strait, as far north as the Vast Swamp. See <a href="https://roll20.net/compendium/dnd5e/Rules:Greyhawk%27s%20Premise?expansion=33359#Factions%20and%20Organizations" target="_blank">“Factions and Organizations”</a> in this chapter for more about the Scarlet Order.</p>
+            <a name="h-Eastern%20Flanaess%20Culture"></a><h3>Eastern Flanaess Culture</h3>
+            <p>The culture of the Eastern Flanaess is largely that of the ancient Aerdi tribe of humans that conquered the region and established the Great Kingdom almost 800 years ago. The Aerdi valued common sense, hard work, and knowing one’s place in a strict social order. Having claimed their position of power through conquest, they put great emphasis on military power and martial skill. These values persist throughout the region, reinforced in the Great Kingdom by strict laws and even stricter social mores.</p>
+            <p>These same values persist in many of the lands resisting the overking’s reign. Nyrond and Almor, in particular, share the stratified social structure of the Great Kingdom, with their king and prelate remaining distant from the common people they rule. The independent states of the Iron League are more egalitarian, sharing that trait with the peoples of the Central Flanaess.</p>
+            <p>Typical clothing in the Eastern Flanaess is a tunic of varying length, often worn with trousers, with a cape or cloak. The fabrics of the east are often patterned with checks or plaids, with different patterns often relating to the wearer’s lineage. Eastern cuisine pairs rice and potatoes with a variety of meats, especially seafood.</p>
+            <a name="h-Eastern%20Flanaess%20and%20Its%20Neighbors"></a><h3>Eastern Flanaess and Its Neighbors</h3>
+            <p>The Duchy and County of Urnst bridge the regions of the Central and Eastern Flanaess. Once part of the Great Kingdom’s province of Nyrond, they declared their independence from the Great Kingdom and the new Kingdom of Nyrond at the same time, achieving their separation from Nyrond with minimal bloodshed. While the people of Urnst distrust the king of Nyrond, they don’t hate him like they do the overking.</p>
+            <p>The proximity of the Nyr Dyv, the Cairn Hills, and the Shield Lands means the Urnst lands can’t ignore the rising threat of Iuz or the politics of the Free City of Greyhawk. At the same time, Nyrond stands as a buffer between Urnst and the Great Kingdom, but the overking’s threat still looms. The duke and countess of Urnst believe that a united Urnst will stand more strongly against pressures from east and west, which they hope to achieve through the marriage of Countess Belissica Gellor to Byron Lorinar, eldest son of Duke Jalken Lorinar.</p>
+            <a name="h-Eastern%20Flanaess%20Adventures"></a><h3>Eastern Flanaess Adventures</h3>
+            <p>The story of the Eastern Flanaess is a tale of scrappy rebels—Nyrond, Almor, and the Iron League—defying the overwhelming power of a corrupt and decadent empire. This story lends itself to campaigns exploring themes of supernatural horror (in the fiend-haunted courts of the overking), swashbuckling (in the cities across the region as well as the eastern seas), and war (see <a href="https://roll20.net/compendium/dnd5e/Rules:Campaign%20Premise?expansion=33359#Flavors%20of%20Fantasy" target="_blank">“Flavors of Fantasy”</a> in this chapter).</p>
+            
+            <div class="two-columns grow-left">
+                <div class="column">
+            
+            <p><em><strong>Havens of Unrest.</strong></em> Those who despise and challenge the Great Kingdom’s oppression—outlaws both good and bad—find refuge in borderlands just beyond the reach of the overking’s soldiers. These include the woods and swamp near Rel Astra (the eastern reaches of the Grandwood Forest and the Lone Heath) and the Hestmark Highlands east of Sunndi. The outlaws in the Grandwood include significant numbers of elves and halflings as well as humans, while those in the Hestmark Highlands include dwarves and gnomes.</p>
+            <p><em><strong>Tomb of Horrors.</strong></em> Deep within the Vast Swamp is the sinister Tomb of Horrors—a labyrinthine crypt filled with terrible traps, strange and ferocious monsters, and rich and magical treasures. Somewhere within rests the demilich Acererak, who ruled much of the region long ago. The demilich is said to take perverse pleasure in devouring adventurers’ souls.</p>
+            <p>The Tomb of Horrors is detailed in <em>Tales from the Yawni</em><em>ng Portal</em>.</p>
+            <p><em><strong>Troll Fens.</strong></em> The chilly mists of the Troll Fens, located against the shoulders of the Griff Mountains and the Rakers at the head of the Yol River, cloak a place of unnameable horrors. As the name implies, the fens are infested with particularly large and vicious trolls. The Pale carefully hedges the place with watchtowers and keeps, and strong patrols ride the verges of the southern end of the Troll Fens to watch for unwelcome visits from the monsters dwelling within.</p>
+                </div>
+                <div class="column" style="text-align:center">
+                    <img style="width: 100%;" src="https://files.d20.io/images/413916620/j8eoYOwDzElcdJ1-43j6xA/original.png?1729255133">
+            <i>The Tomb of Horrors lies deep within the Vast Swamp.</i>
+                </div>
+            </div>
+            <br>
+            <a name="h-Eastern%20Flanaess%20Locations"></a><h5>Eastern Flanaess Locations</h5>
+<table class="table table-bordered">
+<thead><tr>
+<th>Location  </th>
+<th>Ruler  </th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Aerdiaak<br>
+</td>
+<td>Herzog Varz Grenell (human)<br>
+</td>
+<td>North province of the Great Kingdom, ruled by a cousin of the overking; its court is rife with debauchery and intrigue<br>
+</td>
+</tr>
+<tr>
+<td>Ahlissa<br>
+</td>
+<td>Herzogin Seprenna Calyn (human)<br>
+</td>
+<td>South province of the Great Kingdom, ruled by a cousin of the overking; embroiled in war with the Iron League<br>
+</td>
+</tr>
+<tr>
+<td>Almor, the Prelacy of<br>
+</td>
+<td>Prelate Xanther Klimstyn (human)<br>
+</td>
+<td>Theocracy ruled by a priest of Pelor who declared independence when the Great Kingdom descended into evil<br>
+</td>
+</tr>
+<tr>
+<td>Bone March, the<br>
+</td>
+<td>—</td>
+<td>Fallen territory of the Great Kingdom, now held by armies from Almor and Nyrond<br>
+</td>
+</tr>
+<tr>
+<td>Celadon Forest<br>
+</td>
+<td>—</td>
+<td>Ancient forest protected by druidic circles and fey<br>
+</td>
+</tr>
+<tr>
+<td>Flinty Hills and Gamboge Forest<br>
+</td>
+<td>—</td>
+<td>Home to several independent communities with no great love for Nyrond or the Pale<br>
+</td>
+</tr>
+<tr>
+<td>Great Kingdom, the<br>
+</td>
+<td>Overking Ivid V (human)<br>
+</td>
+<td>Unspeakably evil monarchy<br>
+</td>
+</tr>
+<tr>
+<td>Idee<br>
+</td>
+<td>Count Vasiliek Donsten (human)<br>
+</td>
+<td>Independent fiefdom; member of the Iron League<br>
+</td>
+</tr>
+<tr>
+<td>Irongate (Free City)<br>
+</td>
+<td>Mayor Unthera Selvich (appears as a dwarf)<br>
+</td>
+<td>Thriving metropolis; member of the Iron League; the mayor is a disguised adult bronze dragon<br>
+</td>
+</tr>
+<tr>
+<td>Lordship of the Isles, the<br>
+</td>
+<td>Princess Ronthal III (human)<br>
+</td>
+<td>Independent principality; member of the Iron League<br>
+</td>
+</tr>
+<tr>
+<td>Medegia, the See of<br>
+</td>
+<td>Holy Censor Starvik Jerel (human)<br>
+</td>
+<td>Theocratic fiefdom ruled by a priest whose power is rumored to come from pacts with archdevils<br>
+</td>
+</tr>
+<tr>
+<td>Nyrond, the Kingdom of<br>
+</td>
+<td>King Dunstan I (human)<br>
+</td>
+<td>Center of resistance to the Great Kingdom<br>
+</td>
+</tr>
+<tr>
+<td>Onnwal<br>
+</td>
+<td>The Raven of Onnwal, Zyl Grayshadow (dwarf)<br>
+</td>
+<td>Independent state; member of the Iron League<br>
+</td>
+</tr>
+<tr>
+<td>Pale, the Theocracy of the<br>
+</td>
+<td>Supreme Prelate Ogon Tillit (human)<br>
+</td>
+<td>Theocracy ruled by a priest of Pholtus<br>
+</td>
+</tr>
+<tr>
+<td>Rel Astra, City of<br>
+</td>
+<td>Constable Mayor Drax (orc)<br>
+</td>
+<td>Independent fief plotting in secret against the Great Kingdom, hoping to ally with Medegia or the Sea Baronies<br>
+</td>
+</tr>
+<tr>
+<td>Sea Baronies, the<br>
+</td>
+<td>Four sea barons, including High Admiral Kalashe Asperdi (human)<br>
+</td>
+<td>Independent island fiefdoms that serve as the Great Kingdom’s navy<br>
+</td>
+</tr>
+<tr>
+<td>Shar, the Hidden Empire of<br>
+</td>
+<td>Father of Obedience Korenth Zan (human?)<br>
+</td>
+<td>Isolated order of Suloise militants whose spies operate across the Flanaess<br>
+</td>
+</tr>
+<tr>
+<td>Spindrift Isles, the<br>
+</td>
+<td>The Council of Five (on the northern islands) and the Council of Seven (on the southern island)<br>
+</td>
+<td>Independent islands that keep watchful eyes on aggressive island neighbors<br>
+</td>
+</tr>
+<tr>
+<td>Sunndi<br>
+</td>
+<td>Steward Valenta (elf)<br>
+</td>
+<td>Independent fiefdom; member of the Iron League<br>
+</td>
+</tr>
+<tr>
+<td>Tenh, the Duchy of<br>
+</td>
+<td>Duchess Ehliyah Raynar III (human)<br>
+</td>
+<td>Independent fiefdom allied with Nyrond for defense against Iuz<br>
+</td>
+</tr>
+<tr>
+<td>Urnst, the County of<br>
+</td>
+<td>Countess Belissica Gellor (human)<br>
+</td>
+<td>Independent fiefdom<br>
+</td>
+</tr>
+<tr>
+<td>Urnst, the Duchy of<br>
+</td>
+<td>Duke Jalken Lorinar (human)<br>
+</td>
+<td>Independent fiefdom<br>
+</td>
+</tr>
+<tr>
+<td>Vast Swamp, the<br>
+</td>
+<td>—</td>
+<td>Morass separating the Tilvanot Peninsula and Shar from the rest of the East<br>
+</td>
+</tr>
+</tbody>
+</table>
+            <hr>
+            <a name="h-Northern%20Flanaess"></a><h2>Northern Flanaess</h2>
+            <p>The northern region of the Flanaess includes three distinct areas populated by different peoples: the Baklunish horse riders of the Chakyik and the Wegwiur, the Suloise people of the North Kingdoms, and the Flan nomads of the Hunting Lands.</p>
+            <a name="h-Baklunish%20Nomads"></a><h3>Baklunish Nomads</h3>
+            <p>The Chakyik and Wegwiur—called Tiger Nomads and Wolf Nomads, respectively, by their neighbors—are horse riders of Baklunish descent who dwell on the steppes north of the Yatil Mountains and Lake Quag. The climate in the steppes and pine forests ranges from cool to frigid. Both peoples maintain scattered trading outposts that welcome visitors from neighboring and distant lands.</p>
+            <p>The steppe nomads have a rich storytelling tradition that reinforces a strong sense of clan identity and family line within the clan. Their tales include stories not only of heroes within their clans, but also of heroic horses, and the nomads trace equine lineages as carefully as their own. These nomads maintain the traditions of their people, many of which can be traced back to the ancient Baklunish empire.</p>
+            <p>The Baklunish nomads favor bright pastel colors in gowns and robes. When traveling or at war, though, they prefer more rugged gear of leather and hide.</p>
+            
+            <div class="two-columns grow-left">
+                <div class="column" style="text-align:center">
+                    <img style="width: 100%;" src="https://files.d20.io/images/413916979/pLS7N5-w0WD1VznuBZY3_A/original.png?1729255402">
+            <i>Adventurers in the North Kingdoms help a frost giant’s pet mammoth find its way home.</i>
+                </div>
+                <div class="column">
+            <a name="h-The%20North%20Kingdoms"></a><h3>The North Kingdoms</h3>
+            <p>Three kingdoms of related peoples occupy the Thillonrian Peninsula in the northeast of the Flanaess—a beautiful subarctic landscape of high mountains, coniferous forests, and deep fjords. The kingdoms are named for the three distinct tribal lines that inhabit them: the Cruski (whose name means “ice”), the Fruzti (“frost”), and the Schnai (“snow”).</p>
+            <p>The Schnai are strong and numerous. When Queen Ingrid of the Schnai has a mind to raid the isles of the Sea Baronies or the coasts of Aerdiaak and the Great Kingdom, she calls upon the king of the Fruzti and the queen of the Cruski to join her army. King Hundgred of the Fruzti has no choice but to honor his oath to the Schnai, while Queen Tharla of the Cruski rarely turns down a chance to attack her enemies. At other times, the Cruski raid the Fruzti, the Schnai, or the Hold of Stonefist.</p>
+            <p>As their distinct kingdoms suggest, the people of the North Kingdoms value their connection to their clan lineage. They preserve a love of learning from their distant ancestors of the Suel Imperium, and they value knowledge of the natural world as highly as they do the skills of hunting, sailing, and warfare. Their clothing includes shirts and pants made of wool, augmented with furs, capes, mittens, and warm boots. They often wear large pins, brooches, or emblems in their cloaks as a sign of wealth or accomplishment.</p>
+                </div>
+            </div>
+            
+            <a name="h-The%20Hunting%20Lands"></a><h3>The Hunting Lands</h3>
+            <p>The People of the Hunting Lands (called Rovers of the Barrens by their neighbors) have a history of raiding the outskirts of Furyondy, the Bandit Kingdoms, Tenh, and Wegwiur, which hasn’t won them many allies. The nomads’ legendary dominance of the north has faded, as the forces of Iuz and the Horned Society wage steady war against them while raiders from the Hold of Stonefist prey on the Hunting Lands farther east. Many of the Rovers’ mightiest warriors—the Wardogs—have perished in battles against all these relentless foes.</p>
+            <p>The people of the Hunting Lands value a close connection to the natural world. They view nature as an entity to be respected, not controlled, and their myths and legends teach the value of accepting nature’s bounty as a gift that evokes gratitude. They wear clothes made entirely of animal skins, including belts, capes, robes, and slippers, and decorate their skin with paints and tattoos.</p>
+            <a name="h-Northern%20Flanaess%20and%20Its%20Neighbors"></a><h3>Northern Flanaess and Its Neighbors</h3>
+            <p>The regions of the north exist on the fringes of other regions of the Flanaess. Three realms are the primary points of intersection between the Northern Flanaess and neighboring areas.</p>
+            <p><em><strong>Bandit Kingdoms.</strong></em> The Bandit Kingdoms is a lawless frontier between the Hunting Lands in the north, the Horned Society and the Shield Lands in the Central Flanaess, and the Duchy of Tenh in the east. No single bandit lord is powerful enough to conquer the whole territory, and the combined strength of all is often required to defend against retaliation by neighboring states for the bandit lords’ aggression. At least one of the bandit lords, Renfus the Mottled (ruler of Stoink), is wholly in the service of Iuz.</p>
+            <p><em><strong>Ratik.</strong></em> As a former province of the Great Kingdom, Ratik rides the boundary between the northern and eastern regions of the Flanaess. Without the protection of the Great Kingdom, Ratik has been forced to defend itself against frequent raids from the North Kingdoms and the Sea Baronies, as well as attacks from mountain-dwelling monsters. Baron Lexnol Haarkof’s emissaries hope to forge an alliance with the North Kingdoms and redirect the berserkers’ aggressions toward the Hold of Stonefist.</p>
+            <p><em><strong>Wegwiur.</strong></em> Wolf-Mother Bargra Yefkos of the Wegwiur Hordes is preoccupied with the threat of Iuz, and she meets frequently with clan leaders and Perrenlander mercenaries to strategize. The Wegwiur consider their territory to extend to the Dulsi River, so they fiercely defend the western Howling Hills from the incursion of the hideous monsters that serve Iuz. Several large battles between Wegwiur and the forces of Iuz have taken place in that area.</p>
+            <a name="h-Northern%20Flanaess%20Adventures"></a><h3>Northern Flanaess Adventures</h3>
+            <p>The cold north is an ideal location for a campaign featuring themes of sword-and-sorcery fantasy (see <a href="https://roll20.net/compendium/dnd5e/Rules:Campaign%20Premise?expansion=33359#Flavors%20of%20Fantasy" target="_blank">“Flavors of Fantasy”</a> in this chapter). The peoples of the Northern Flanaess battle giants, dragons, and other horrific monsters in equally dangerous environments, while remaining suspicious of the decadence of the cities and nations of the south.</p>
+            <a name="h-Northern%20Flanaess%20Locations"></a><h5>Northern Flanaess Locations</h5>
+<table class="table table-bordered">
+<thead><tr>
+<th>Location  </th>
+<th>Ruler  </th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Arn, the Archbarony of<br>
+</td>
+<td>Archbaron of Arn (identity unknown)<br>
+</td>
+<td>Remote and little-known region located near a ruined castle with monster-filled dungeons<br>
+</td>
+</tr>
+<tr>
+<td>Bandit Kingdoms, the<br>
+</td>
+<td>Four to six bandit lords<br>
+</td>
+<td>Feuding kingdoms ruled by greedy bandit lords with private armies<br>
+</td>
+</tr>
+<tr>
+<td>Barren Wastes, the<br>
+</td>
+<td>—</td>
+<td>Harsh, despoiled land where dragons roam and sometimes go to die<br>
+</td>
+</tr>
+<tr>
+<td>Chakyik<br>
+</td>
+<td>Lord Agul Krusef (human)<br>
+</td>
+<td>Land of the Tiger Nomads—horse riders with scattered trading outposts<br>
+</td>
+</tr>
+<tr>
+<td>Hunting Lands, the<br>
+</td>
+<td>Overlord-Protector Yhareen Sakarr (tiefling)<br>
+</td>
+<td>Home to Flan nomads, known to their neighbors as the Rovers of the Barrens<br>
+</td>
+</tr>
+<tr>
+<td>North Kingdom of the Cruski, the<br>
+</td>
+<td>Queen Tharla of the Cruski (human)<br>
+</td>
+<td>Fierce, seafaring berserkers of the North Kingdoms<br>
+</td>
+</tr>
+<tr>
+<td>North Kingdom of the Fruzti, the<br>
+</td>
+<td>King Hundgred of the Fruzti (human)<br>
+</td>
+<td>Weakest of the three North Kingdoms, having suffered great losses battling in the Bone March<br>
+</td>
+</tr>
+<tr>
+<td>North Kingdom of the Schnai, the<br>
+</td>
+<td>Queen Ingrid of the Schnai (human)<br>
+</td>
+<td>Strongest and most populated of the North Kingdoms<br>
+</td>
+</tr>
+<tr>
+<td>Ratik, the Barony of<br>
+</td>
+<td>Baron Lexnol Haarkof (human)<br>
+</td>
+<td>Former province of the Great Kingdom trying to ally with the North Kingdoms<br>
+</td>
+</tr>
+<tr>
+<td>Stonefist, The Hold of<br>
+</td>
+<td>King Sevvord Redbeard of the Hold (human)<br>
+</td>
+<td>Monarchy founded by a bandit leader who attracted malcontents from many nations<br>
+</td>
+</tr>
+<tr>
+<td>Wegwiur<br>
+</td>
+<td>Wolf-Mother Bargra Yefkos (human)<br>
+</td>
+<td>Land of the Wolf Nomads—horse riders engaged in war against Iuz<br>
+</td>
+</tr>
+</tbody>
+</table>
+            <hr>
+            <a name="h-Old%20Keoland"></a><h2>Old Keoland</h2>
+            <p>United by their shared history as part of the ancient Kingdom of Keoland, the marches and fiefdoms between the Lortmil Mountains and the higher mountains to the west gather diverse populations of many different species in relative peace with each other. Even the long-standing feud between Keoland and the Hold of the Sea Princes might be drawing to an end under the leadership of Keoland’s current ruler, King Kimbertos Skotti. The region enjoys a warm, mild climate but faces many threats from monstrous foes.</p>
+            <a name="h-Old%20Keoland%20Culture"></a><h3>Old Keoland Culture</h3>
+            <p>Old Keoland is a diverse region of the Flanaess where different cultures have mingled for many centuries. Keolish folk often garden, maintain close family ties, have a down-to-earth nature, and love storytelling.</p>
+            <p>The clothes worn in Old Keoland tend toward loose-fitting shirts and wide-legged pants, voluminous cloaks for cold or wet weather, and sturdy boots. This region’s cuisine represents a fusion of Central Flan dishes of rice, potato, and meat with some spices and seasonings brought from the west, creating unique flavors.</p>
+            <a name="h-Old%20Keoland%20and%20Its%20Neighbors"></a><h3>Old Keoland and Its Neighbors</h3>
+            <p>The long chain of the Lortmil Mountains forms a natural barrier between Old Keoland and the region of the Central Flanaess. The mountains contain some of the richest gem and precious metal deposits in Eastern Oerik. The humans, dragonborn, dwarves, gnomes, halflings, goblinoids, goliaths, and orcs that live in these mountains and their foothills are subjects of the realms that surround the mountain range, but they often band together to deal with greater threats on both sides of the mountains.</p>
+            <div class="two-columns grow-left">
+                <div class="column" style="text-align:center">
+                    <img style="width: 100%;" src="https://files.d20.io/images/413917179/IE7z92BYzOROxZAgsqNIGQ/original.png?1729255576">
+            <i>Beneath the beautiful surface of the Hellfurnaces lie endless hidden evils.</i>
+                </div>
+                <div class="column">
+            <a name="h-Old%20Keoland%20Adventures"></a><h3>Old Keoland Adventures</h3>
+            <p>One reason for the amicable relations among the nations of Old Keoland is the danger posed by dragons, giants, and other monsters found throughout the region. That makes this region particularly well suited to a heroic fantasy campaign (see <a href="https://roll20.net/compendium/dnd5e/Rules:Campaign%20Premise?expansion=33359#Flavors%20of%20Fantasy" target="_blank">“Flavors of Fantasy”</a> in this chapter). The most dangerous places include those described below.</p>
+            <p><em><strong>Barrier Peaks.</strong></em> These forbidding highlands are home to strange monsters. “Expedition to the Barrier Peaks,” an adventure in <em>Quests from the Infinite Staircase</em>, explores the origin of these monsters.</p>
+            <p><em><strong>Crystalmist Mountains.</strong></em> Giants, white dragons, and other monsters frequently descend from the Crystalmist Mountains into Geoff and Sterich, searching for food and plunder. An ancient tunnel stretches from the western end of the Yeomanry into the Sea of Dust, attracting many adventurers to explore its lengths.</p>
+            <p><em><strong>Dim Forest.</strong></em> Though elves inhabit the western part of the Dim Forest, the eastern part is wild and prowled by monsters, including green dragons.</p>
+            
+                </div>
+            </div>
+            <p><em><strong>Hellfurnaces.</strong></em> The Hellfurnaces are a volcanically active extension of the Crystalmist Mountains populated with threats including fire giants and red dragons. Beneath the mountains are labyrinths that connect to the Underdark, wherein lie hidden cities, strongholds, and temples harboring terrible evil.</p>
+            <p><em><strong>Jotens.</strong></em> Hill giants, manticores, and wyverns from the Jotens regularly threaten the tranquility of both Sterich and the Yeomanry.</p>
+            <p><em><strong>Rushmoors.</strong></em> Hungry black dragons, otyughs, and other monsters haunt the Rushmoors.</p>
+            
+            <a name="h-Old%20Keoland%20Locations"></a><h5>Old Keoland Locations</h5>
+<table class="table table-bordered">
+<thead><tr>
+<th>Location  </th>
+<th>Ruler  </th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Bissel, the March of<br>
+</td>
+<td>Margrave Imran Rendulkar (human)<br>
+</td>
+<td>Bone of contention between Keoland, Veluna, and Ket<br>
+</td>
+</tr>
+<tr>
+<td>Geoff, the Grand Duchy of<br>
+</td>
+<td>Grand Duchess Owena Blackthorn (human)<br>
+</td>
+<td>Isolated fiefdom with a long history of battling giants in the nearby mountains<br>
+</td>
+</tr>
+<tr>
+<td>Gran March, the<br>
+</td>
+<td>Commandant Magnus Onyxbeard (dwarf)<br>
+</td>
+<td>Nominal vassal of Keoland and ally with Bissel; the commandant is elected from among the March’s noble houses<br>
+</td>
+</tr>
+<tr>
+<td>Hold of the Sea Princes, the<br>
+</td>
+<td>Prince Zygmund III of Monmurg (human)<br>
+</td>
+<td>Independent oligarchy of sea traders founded by buccaneers; now a powerful naval force<br>
+</td>
+</tr>
+<tr>
+<td>Keoland, the Kingdom of<br>
+</td>
+<td>King Kimbertos Skotti (human)<br>
+</td>
+<td>Heart of the Old Keoland region, surrounded by friendly neighbors that swear fealty to Keoland’s monarch<br>
+</td>
+</tr>
+<tr>
+<td>Lortmil Mountains, the<br>
+</td>
+<td>—</td>
+<td>Natural border between the Old Keoland region and the Central Flanaess<br>
+</td>
+</tr>
+<tr>
+<td>Sterich, the March of<br>
+</td>
+<td>Marquise Quercha Emondav (human)<br>
+</td>
+<td>Nominal vassal state of Keoland, but its ruler is more like a sister than a vassal to the king of Keoland<br>
+</td>
+</tr>
+<tr>
+<td>Ulek, the County of<br>
+</td>
+<td>Countess Lewenn Richfield (human)<br>
+</td>
+<td>Former vassal of Keoland<br>
+</td>
+</tr>
+<tr>
+<td>Ulek, the Duchy of<br>
+</td>
+<td>Duke Grenowin (elf)<br>
+</td>
+<td>Former vassal of Keoland with a large population of elves<br>
+</td>
+</tr>
+<tr>
+<td>Ulek, the Principality of<br>
+</td>
+<td>Princess Olynn Corond (dwarf)<br>
+</td>
+<td>Fiefdom with a significant navy; its princess commands the respect of many dwarves beyond Ulek<br>
+</td>
+</tr>
+<tr>
+<td>Valley of the Mage, the<br>
+</td>
+<td>The Mage of the Valley (identity unknown)<br>
+</td>
+<td>Secluded refuge of an ancient archmage; current inhabitants unknown<br>
+</td>
+</tr>
+<tr>
+<td>Yeomanry, the<br>
+</td>
+<td>Freeholder Vyndi Skyspear (goliath)<br>
+</td>
+<td>Independent republic governed by an elected freeholder<br>
+</td>
+</tr>
+</tbody>
+</table>
+            <hr>
+            <a name="h-Western%20Flanaess"></a><h2>Western Flanaess</h2>
+            <p>Survivors of the Invoked Devastation that destroyed the ancient Baklunish empire settled the temperate prairies, forests, and coastal lands of the Western Flanaess about a thousand years ago. Largely separated from the rest of the Flanaess by the Yatils, the Barrier Peaks, and the Crystal­mist Mountains, these realms are a stronghold of Baklunish cultures.</p>
+            <p>The nations of Ekbir, Tusmit, and Zeif represent the heart of the region, and two rivers—the Blashikmund and the Tuflik—form natural borders between them. Although the nations currently enjoy peaceful relations, Tusmit profits by playing its political neighbors against each other—Ekbir against Zeif, Zeif against the Ulakandar nomads, the Ulakandar nomads against Ket, and so forth. Pasha Qharlan Sylba of Tusmit is careful to keep his name well clear of these schemes so he can avoid embroiling Tusmit in open warfare. But Tusmit’s spies are currently causing discord by spreading rumors that Zeif is planning to invade Ekbir. Ekbir’s sultan believes the rumors are true and is readying his army.</p>
+            <p>Sultan Naxas Murad of Zeif is a reclusive man, a great philosopher, and a stern father figure to the rulers of Ekbir and Tusmit. Over the years, advisers and family members have urged Naxas to expand Zeif’s borders through military conquest, but he refuses to do so, citing failed land grabs by kingdoms through history as proof that imperial expansion across the Flanaess rarely ends well.</p>
+            <a name="h-Western%20Flanaess%20Culture"></a><h3>Western Flanaess Culture</h3>
+            <p>The culture of the Western Flanaess preserves many of the ways and traditions of the ancient Baklunish empire. Enormous value is placed on the virtues of hospitality and generosity, particularly almsgiving and pious donations to temples and clergy. Since the fall of their ancient empire, the people of the Western Flanaess have demonstrated more interest in trade—as a way of amassing power and wealth, but also as a means of connecting and coexisting with neighbors—than in imperial expansion or military domination.</p>
+            <p>The clothing favored by the people of the Western Flanaess features bright patterns in vibrant colors, worn in flowing gowns, robes, and long coats worn with breeches. Their cuisine is renowned for its rich flavors and spiciness.</p>
+            <a name="h-Western%20Flanaess%20and%20Its%20Neighbors"></a><h3>Western Flanaess and Its Neighbors</h3>
+            <p>Ket is the crossroads between the Western Flanaess and the rest of the continent, nestled between the Yatil Mountains and Barrier Peaks. Though it was founded by Baklunish settlers, Ket’s proximity to both Bissel (and the lands of Old Keoland) and Veluna (and the Central Flanaess) makes it a vibrant, multicultural land rich from extensive trade. Its culture reflects the breadth of its trade, including sizable populations of dragonborn and tieflings and displaying a fusion of Baklunish and Oeridian influence. This mixture is visible in the title of its ruler, which is a combination of a Baklunish title (bey) and an Oeridian one (graf). The beygraf is a noble chosen by the lords of Lopolla’s wealthiest, most influential families. Many of these lords also serve as generals in the Kettish military. The current beygraf, Zoltana Lhaz, is a skilled diplomat who so far has balanced the interests of different forces both inside her nation and among her neighbors.</p>
+            <a name="h-Western%20Flanaess%20Adventures"></a><h3>Western Flanaess Adventures</h3>
+            <p>The political and mercantile intrigue among Ekbir, Tusmit, and Zeif provides abundant adventure opportunities for characters in the Western Flanaess. A campaign focused around intrigue or mystery (see <a href="https://roll20.net/compendium/dnd5e/Rules:Campaign%20Premise?expansion=33359#Flavors%20of%20Fantasy" target="_blank">“Flavors of Fantasy”</a> in this chapter) works particularly well in this region.</p>
+            <p>Of course, the Western Flanaess has its fair share of monsters, dungeons, and ruins as well. The ruins of the Baklunish Empire in the Dry Steppes, and those of the Suel Imperium in the Sea of Dust, attract plenty of adventurers as well as villains hoping to claim the magical knowledge that caused the terrible catastrophes leading to the fall of those empires. Ket and Ull, too, suffer from the depredations of the monsters in the Barrier Peaks and the Yatil Mountains, just as their eastern neighbors do.</p>
+            <a name="h-Western%20Flanaess%20Locations"></a><h5>Western Flanaess Locations</h5>
+<table class="table table-bordered">
+<thead><tr>
+<th>Location  </th>
+<th>Ruler  </th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Dry Steppes, the<br>
+</td>
+<td>—</td>
+<td>Desert where the Baklunish empire once stood<br>
+</td>
+</tr>
+<tr>
+<td>Ekbir, the Sultanate of<br>
+</td>
+<td>Sultan Xargun II (aasimar)<br>
+</td>
+<td>Monarchy in an uneasy peace with its neighbors, bracing for a rumored invasion from Zeif<br>
+</td>
+</tr>
+<tr>
+<td>Ket<br>
+</td>
+<td>Beygraf Zoltana Lhaz (human)<br>
+</td>
+<td>Crossroads region<br>
+</td>
+</tr>
+<tr>
+<td>Plains of the Ulakandar, the<br>
+</td>
+<td>Various Ulakandar clan leaders<br>
+</td>
+<td>Land of the Ulakandar nomads, who roam between the Dry Steppes and the border of Zeif<br>
+</td>
+</tr>
+<tr>
+<td>Sea of Dust, the<br>
+</td>
+<td>—</td>
+<td>Wasteland where the Suel Imperium once stood<br>
+</td>
+</tr>
+<tr>
+<td>Tusmit, the Pashalik of<br>
+</td>
+<td>Pasha Qharlan Sylba (human)<br>
+</td>
+<td>Monarchy profiting by playing its neighbors against each other<br>
+</td>
+</tr>
+<tr>
+<td>Ull<br>
+</td>
+<td>Orakhan Drasika Borinok (human)<br>
+</td>
+<td>Independent fiefdom founded by Ulakandar nomads who settled the land<br>
+</td>
+</tr>
+<tr>
+<td>Zeif, the Sultanate of<br>
+</td>
+<td>Sultan Naxas Murad (human)<br>
+</td>
+<td>Monarchy ruled by a reclusive philosopher who resists his advisers’ call to imperial expansion<br>
+</td>
+</tr>
+</tbody>
+</table>
+    
+    <div class="clearfix"></div>
+  </div>
+
+  
+
+  
+    <div id="related-content">
+      <div class="compendium2024__caption-container">
+  <div class="compendium2024__caption-line"></div>
+</div>
+<div class="compendium2024__related-content">
+  <div class="compendium2024__related-content__title">Related Content</div>
+  <div class="compendium2024__related-content__card-list">
+    
+      <a href=https://marketplace.roll20.net/browse/bundle/31887/dandd-core-rulebook-bundle-2024 target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/3970529/F_hjWLAuwz0TkrcIf3BxUw/med.png?1718712581469)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Core Rulebook Bundle (2024) </div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Core Games</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$89.97</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/31886/dandd-monster-manual-2024 target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/3970553/eSl_kYvOlaY7CTj_VKdJcg/med.png?1718712698817)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Monster Manual (2024) </div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Bestiaries</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/14415/dandd-mordenkainen-presents-monsters-of-the-multiverse target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/2436241/2bh5VOMHHTAbHafTbD6LEA/med.png?1652721311232)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Mordenkainen Presents: Monsters of the Multiverse</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Rules Expansions</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/15575/dandd-curse-of-strahd target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/3977000/dafVzdTIILuozTjInO_vEA/med.png?1719247876490)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Curse of Strahd</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;Adventures&nbsp;&nbsp;Long Campaigns</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$24.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/14725/dandd-ravenloft-bundle target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/2256724/rk_Mdv98NH0XpwXnjrTiVQ/med.png?1644021157711)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Ravenloft Bundle</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Rules Expansions</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$46.73</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/8331/dandd-tashas-cauldron-of-everything target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/1491409/PCOFl9ow7e7kIxkOA_T_tw/med.jpg?1605631127775)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Tasha's Cauldron of Everything</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Rules Expansions</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/3844/dandd-xanathars-guide-to-everything target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/684854/msnS8Fu7S5z8ocWWWFvyqA/med.jpg?1547067561845)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Xanathar's Guide to Everything</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;RPG Rulebooks&nbsp;&nbsp;Rules Expansions</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+      <a href=https://marketplace.roll20.net/browse/bundle/25040/dandd-phandelver-and-below-the-shattered-obelisk target="_blank"
+  class="marketplace-item__card"
+  style="background-image: url(https://files.d20.io/marketplace/3556595/-U1Rbzbz21NOKOLKLnQT9A/med.png?1695133254960)"
+>
+  <div class="marketplace-item__card-body">
+    <div class="marketplace-item__card-title">D&amp;D Phandelver and Below: The Shattered Obelisk</div>
+    <div class="marketplace-item__card-tags">Games&nbsp;&nbsp;Adventures&nbsp;&nbsp;Short Campaigns</div>
+    <div class="marketplace-item__card-footer">
+      <div class="marketplace-item__card-publisher">Wizards of the Coast</div>
+      
+        <div class="marketplace-item__card-cost">$29.99</div>
+      
+    </div>
+  </div>
+</a>
+    
+
+  
+  </div>
+</div>
+<div class="compendium2024__view-more" id="compendium-page-view-more-marketing-ctas">
+  <div class="compendium2024__view-more__link" onclick="clickViewMore()" target="_blank">
+    View More Related Content
+    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="currentColor">
+      <path d="M3.5 6L9.5 12L15.5 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div>
+
+    </div>
+  
+</div>
+
+<script>
+  $(function() {
+    sessionStorage.setItem('lastCompendiumPage', window.location.href);
+
+    const headers = $(".page__body").find("h1, h2, h3, h4, h5, h6");
+    // Add header anchors
+    headers.each((_index, header) => {
+      header.setAttribute("name", header.innerText);
+    });
+
+    $(document).ready(function() {
+      // Scroll to Anchor on page load
+
+      setTimeout(() => {
+        const targetName = decodeURIComponent(window.location.hash?.substring(1) || '');
+        if(targetName){
+          const target = document.getElementsByName(targetName)[0];
+          if (target)
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+        }
+      }, 500)
+
+      const accordions = $('.accordion')?.toArray() || [];
+      accordions.forEach((accordion) => {
+        try {
+          const subheaderName = accordion.children[1].getInnerHTML();
+          accordion.children[0].setAttribute("name", subheaderName);
+        }
+        catch(e) {
+          console.error('Forcing generated a tags to have correct name attribute failed', e)
+        }
+        accordion.addEventListener("click", () => {
+          accordion.classList.toggle("active");
+          const panel = accordion.nextElementSibling;
+          panel.classList.toggle('active');
+        });
+      })
+    });
+
+    try {
+        const headersMapping = new Map();
+        const tocSubHeaders = $('.toc .subheaders a')?.toArray() || [];
+        const pageHeaders = $('.page__body').find('h1, h2, h3, h4, h5, h6')?.toArray() || [];
+        pageHeaders.forEach((header) => {
+            tocSubHeaders.forEach(link => {
+                if (link.getHTML() === header.getHTML()) {
+                    headersMapping.set(header.getHTML(), link);
+                }
+            })
+        })
+        const updateTableOfContentsVisibleLinks = () => {
+            pageHeaders.forEach((header) => {
+                const link = headersMapping.get(header.getHTML())
+                if (link) link.parentElement.style.display = $(header).is(':visible') ? 'list-item' : 'none';
+                else console.warn('Link not found in headers mapping', { name: header.getHTML() })
+            })
+        }
+        // NOTE: There are race conditions about when toc items are setup and when the media queries are registered.
+        // The magic sauce seems to be calling this as soon as possible, and a second time once the page is fully loaded.
+        // Also have to subscribe to window resize events to update table of contents links when the compendium container size changes.
+        updateTableOfContentsVisibleLinks();
+        window.addEventListener("load", updateTableOfContentsVisibleLinks);
+        window.onresize = updateTableOfContentsVisibleLinks;
+    } catch(e) {
+        console.error('Unable to update table of contents links with responsive page headers', e);
+    }
+
+    // Trigger TOC updates when scrolling past headers
+    document.onscrollend = () => {
+      const currentHeader = headers.get().reverse().find(header => {
+        const topOffset = header.getBoundingClientRect().top;
+        return topOffset < 100;
+      });
+      $(".toc .subheaders a").removeClass("current");
+      if (currentHeader) {
+        const tocHeader = $(".toc .subheaders").find(`[data-anchor='${currentHeader.getAttribute("name")}']`);
+        tocHeader.addClass("current");
+      }
+    };
+  });
+</script>
+
+      </div>
+    </div>
+    
+      <div class="bottom-nav" id="bottom-navigation-bar">
+  <div class="bottom-nav__link">
+    <div class="nav-tooltip left">
+      <div class="nav-tooltip__content">
+        <div class="nav-tooltip__header">
+          
+            Section 11
+          
+        </div>
+        <div class="nav-tooltip__body">
+          
+            Free City of Greyhawk
+          
+        </div>
+      </div>
+      <div class="arrow-down"></div>
+    </div>
+    
+      <a href="https://roll20.net/compendium/dnd5e/Rules:Free City of Greyhawk?expansion=33359" false>
+        <div class="roll20Icon">chevronLeft</div>
+        <div class="link__long">
+          
+            Previous Section
+          
+        </div>
+        <div class="link__short">
+          Previous
+        </div>
+      </a>
+    
+  </div>
+  <div class="nav__logo">
+    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" fill="currentColor"
+     viewBox="10.1 39.84 786.1 82.85">
+  <path class="cls-1"
+        d="M50.7,66.4c-4.4-3.9-9.7-5.3-15.4-5.4-5.7,0-11.3,0-17-.2-2.9,0-5.7-.8-8.2-2.5v.9h.1c.8,3.6,2.8,6.3,5.6,8.3,1.7,1.3,2.4,2.8,2.4,4.8v25.6c0,1.7-.6,3-2.2,3.8-1.4.7-2.7,1.5-4,2.3-.2,0-.3.2-.6.4h22.2c1.8,0,3.7,0,5.5-.3,6.6-.9,11.8-4.1,15.4-9.7,2.7-4.2,3.6-8.8,3.2-13.8-.4-5.6-2.7-10.4-7-14.2ZM44.7,86.8c-1.1,4.3-4,6.7-8.4,7-2,0-3.9,0-6,0v-22.3c3,0,5.9-.4,8.8.7,2.9,1,4.7,3.2,5.5,6.1.8,2.8.9,5.7,0,8.5Z"></path>
+  <path class="cls-1"
+        d="M152.5,61.2h0c-8,0-16,0-24.2,0,1.5,1,2.9,1.9,4.3,2.7,1.6.9,2.2,2.2,2.2,3.9v10.4c0,.2,0,.4-.1.6-.3-.3-.5-.4-.6-.6-5.7-5.5-11.3-11.1-17-16.6-.3-.2-.7-.5-1-.5h-28c-.8,0-1.6.2-2.3.9,1.8,1.5,1.8,3.4,1.8,5.5v20c0,.8,0,1.6-.2,2.3-.4,2.4-1.5,4.2-4,4.9-1.5.4-2.9.4-4.4,0-2.4-.5-3.9-2-4.4-4.4-.2-1-.3-2-.3-3,0-6.6,0-13.3,0-19.9,0-2,.2-3.8,1.6-5.3,0,0,0,0,0-.4-.8-.2-1.6-.5-2.4-.5h-17.1c-.2,0-.4,0-.8,0,1.5,1,2.9,1.9,4.3,2.7,1.6.9,2.2,2.2,2.2,3.9,0,6.1,0,12.1,0,18.2,0,2.4.2,4.9.7,7.3.9,4.5,3.9,7.6,7.8,9.6,6.8,3.5,13.8,3.4,20.7,0,3.6-1.8,6-4.7,7.4-8.5.8-2.2,1-4.6,1-6.9,0-6.3,0-12.6,0-18.9,0-2.3.6-4,2.8-5.1,1.7-.9,1.6-.9,3.3,0,1.9,1.2,2.6,2.8,2.6,4.9v29.8c0,1.6-.7,2.7-2.1,3.5-1.4.7-2.7,1.6-4,2.4-.2,0-.3.2-.5.4h24.5c-1.3-.8-2.4-1.6-3.6-2.1-2.5-1.1-3.3-3-3.2-5.6,0-5.2,0-10.4,0-15.7v-1c8.9,8.7,17.6,17.2,26.5,25.9v-39.1c.1-1.1.5-2,1.4-2.6,1.1-.7,2.3-1.4,3.4-2,.4-.8,1-1.1,1.7-1.4Z"></path>
+  <path class="cls-1"
+        d="M595.2,96.9c-4.6-11.7-9.3-23.4-13.9-35.2-.2-.4-.3-.8-.9-.8h-15.8c-.2,0-.4,0-.7,0,1,.9,1.8,1.7,2.7,2.5,1.2,1.1,1.2,1.3.6,2.7-3.4,8.3-6.9,16.5-10.3,24.8-.8,2-1.7,4-2.6,6.3-3.5-4.5-6.9-8.7-10.3-13,.2-.2.3-.2.4-.3,4-2.6,6-6.4,5.7-11.2-.3-5-2.8-8.5-7.4-10.4-2.3-.9-4.7-1.2-7.1-1.2h-22.5c1.3.8,2.5,1.7,3.7,2.3,2.2,1.1,3,2.8,2.8,5.1v28.3c0,.6,0,1.2,0,1.8,0,1.2-.6,2.2-1.6,2.8-1.5.9-2.9,1.8-4.4,2.6-.2,0-.4.2-.6.4h25.2c-.3-.2-.4-.2-.5-.3-1.4-.8-2.8-1.6-4.3-2.5s-2.1-2.1-2.1-3.8v-9.1c0-.2,0-.4,0-.8.5.3.9.5,1.3.8l1.5,1.5c3.8,4.6,7.6,9.1,11.3,13.7.3.4.6.5,1.1.5h23.1c-1.1-1-2.1-1.9-3.2-2.7-.8-.7-1-1.5-.6-2.5s.4-1,.6-1.5c.2-.6.5-.8,1.1-.8h12.7q2.3,0,3.1,2.2c.3.9.2,1.7-.5,2.4-.5.6-1.1,1.1-1.6,1.7-.4.4-.8.8-1.3,1.3h22.6c-1.4-1.1-2.6-2.1-3.9-3-1.6-1.4-2.7-2.9-3.4-4.7ZM538.1,75.7c-.5,2.6-1.8,3.8-4.5,4.1-.7,0-1.5,0-2.3,0v-10.3c1.6.2,3.1.3,4.6.7,1.7.4,2.4,1.6,2.4,3.3s0,1.5-.2,2.2ZM570.6,86.5c1.4-3.5,2.8-6.9,4.2-10.6,1.3,3.6,2.6,7.1,3.9,10.6h-8.1Z"></path>
+  <path class="cls-1"
+        d="M515.3,80.6c-.7-8.1-4.8-13.9-12.1-17.5-3.3-1.6-6.8-2.1-10.4-2.1-5.6,0-11.2,0-16.8-.2-2.8,0-5.5-.7-7.9-2.2-.1,0-.2,0-.6-.3.4,1.2.6,2.3,1.1,3.3,1.1,2.6,3.1,4.6,5.3,6.3.6.5,1.1,1.2,1.5,1.9.3.6.3,1.4.3,2.1v26.1c0,1.6-.6,2.9-2.1,3.7-1.4.7-2.7,1.6-4,2.4-.2,0-.3.2-.6.4h23.2c1.5,0,3,0,4.5-.3,5.4-.7,9.9-3,13.5-7,4.1-4.8,5.7-10.4,5.1-16.6ZM502.2,87c-1.1,4.1-4.2,6.7-8.5,6.9-1.9,0-3.8,0-5.9,0v-22.2h.1c2.3,0,4.7-.2,6.9.1,4,.6,6.5,3.1,7.4,7,.8,2.7.7,5.5,0,8.2Z"></path>
+  <path class="cls-1"
+        d="M269.3,64c-5.7-3.5-12-4.3-18.6-3.1-5.7,1.1-10.5,3.9-14,8.6-3.6,4.9-4.7,10.4-4,16.4.6,5.5,3,10,7.2,13.6,4.6,4,10.1,5.5,17,5.6,1,0,2.9-.2,4.7-.6,10.5-2.2,17.5-10.4,18.1-20.1.6-8.8-2.9-15.7-10.4-20.4ZM263,92.5c-5,4.1-16.2,3.2-17.8-7-.4-2.4-.3-4.7.4-7,1.6-5.5,5.9-7.7,11-7.5,2.8,0,5.4,1,7.5,3,2.4,2.4,3.2,5.4,3.2,9.1s-1.2,6.8-4.3,9.4Z"></path>
+  <path class="cls-1"
+        d="M681.8,67.4c-4.8-4.9-10.9-6.9-18.3-7-.9,0-2.5.2-4,.4-5.8,1-10.7,3.6-14.3,8.3-3.8,5-5.1,10.6-4.3,16.7,1,7.9,5.2,13.6,12.4,17,5,2.3,10.2,2.8,15.6,1.9,10.5-1.8,18.2-9.8,19-20,.6-6.6-1.4-12.5-6.1-17.3ZM671.9,91.9c-3.4,3.1-7.4,3.6-11.6,2.2-4.1-1.3-6.2-4.5-6.8-8.6-.5-2.9-.3-5.8,1-8.5,1.6-3.7,4.6-5.6,8.6-5.9,1.9-.2,3.8,0,5.6.7,4.3,1.6,6.4,5,6.9,9.4,0,.5,0,1,0,1.5-.3,3.5-1.2,6.7-3.8,9.2Z"></path>
+  <path class="cls-1"
+        d="M304.5,61c.3.2.5.3.6.4,1.4.9,2.8,1.8,4.2,2.6,1.1.7,1.6,1.6,1.6,2.8,0,3.8.1,7.6.1,11.5s-.1,0-.1.2c-.2-.2-.4-.4-.6-.6-5.6-5.5-11.3-11-16.9-16.5-.3-.3-.8-.5-1.2-.5h-12.9c-.2,0-.4,0-.8,0,1.5,1,2.9,2,4.3,2.9,1.2.8,1.7,2,1.8,3.4v30.8c0,1.6-.6,2.8-2,3.5s-2.7,1.6-4.1,2.4c-.2,0-.3.2-.5.4h24.4c-1.7-1-3.2-2-4.8-2.9-1.3-.7-1.8-1.8-1.9-3.2v-18.3c8.8,8.6,17.5,17.1,26.4,25.8v-38.6c0-1.5.6-2.6,2-3.4.8-.5,1.6-1,2.4-1.4.8-.5,1.6-.9,2.6-1.4-8.4,0-16.4,0-24.6,0Z"></path>
+  <path class="cls-1"
+        d="M737,61h-24.4c.3.2.5.4.8.5,1.4.9,2.8,1.8,4.1,2.6.9.6,1.4,1.4,1.5,2.5,0,.5,0,1.1,0,1.6v10.3c-.3-.3-.5-.4-.6-.6-5.7-5.5-11.3-11.1-16.9-16.6-.4-.4-.8-.6-1.4-.6h-13.4v.2c1.4.9,2.7,1.9,4.1,2.8,1.2.8,1.7,1.9,1.8,3.3,0,.7,0,1.4,0,2.1v27.1c0,.8,0,1.5,0,2.3,0,1.2-.6,2.2-1.7,2.8-1.5.8-2.9,1.7-4.4,2.6-.2,0-.3.2-.6.4h24.4c-1.6-1-3.1-1.9-4.6-2.7-1.6-.8-2.2-2.1-2.2-3.7v-17.9c8.9,8.7,17.6,17.2,26.4,25.8v-36.9c0-.8,0-1.5,0-2.3,0-1.1.5-2,1.5-2.6,1.6-.9,3.2-1.8,4.8-2.8.2,0,.4,0,.6-.2Z"></path>
+  <path class="cls-1"
+        d="M191.1,101.2c-.7-.9-1-1.9-1-3v-12.6c0-1,.2-1.9.9-2.8.3-.4.5-.7.9-1.3-.9-.2-1.7-.5-2.5-.5h-17.4c-.2,0-.4,0-.7,0,1.7,1,3.2,2,4.8,2.9,1,.6,1.6,1.4,1.7,2.6.1,2.4.1,4.9.2,7.3,0,.5-.2.7-.7.8-2.1.5-4.2.5-6.3.3-4.2-.5-7.2-3.1-8.2-7.2-.6-2.5-.7-5-.3-7.6.7-4.7,3.8-7.9,8.4-8.7,4.5-.7,8.8,0,12.8,2.1,1.7.8,3.3,1.9,4.9,2.9h0c-.5-4.4-.9-8.7-1.4-13,0-.5-.3-.6-.6-.7-.9-.2-1.7-.4-2.6-.6-5.1-1.2-10.2-1.9-15.4-1-5.9,1-10.8,3.6-14.5,8.4-3.6,4.7-4.9,10-4.4,15.8.4,5.2,2.3,9.7,6,13.4,4.6,4.7,10.3,6.7,16.7,6.9,4.9,0,9.7-.6,14.4-1.9,1.6-.5,3.3-.9,5-1.4-.2-.5-.4-.9-.7-1.2Z"></path>
+  <path class="cls-1"
+        d="M636.7,96.9c0-3.6,0-7.1,0-10.7,0-1.8.3-3.3,1.5-4.7,0,0,0-.2.3-.5-.9-.2-1.7-.5-2.5-.5h-17.3c-.2,0-.4,0-.8,0,1.7,1,3.2,2,4.8,2.9,1,.6,1.6,1.5,1.7,2.6,0,2.4,0,4.8.2,7.2,0,.6-.2.9-.8,1-1.8,0-3.7.4-5.5.3-4.6-.2-7.8-2.9-8.9-7.3-.5-2.1-.6-4.2-.4-6.3.4-5.9,4.6-9.9,10.5-10.1,5.1,0,9.7,1.3,14,4.1.6.4,1.2.8,1.8,1.2,0,0,0-.2,0-.2-.5-4.3-.9-8.7-1.4-13,0-.2-.3-.6-.6-.6-1.7-.4-3.5-.8-5.2-1.2-4.3-.8-8.5-1.2-12.9-.4-14.3,2.4-21.3,15.5-18.1,28.1,2.4,9.5,10.7,15.7,20.9,16.3,4.7.3,9.4-.3,14-1.5,2.2-.5,4.3-1.2,6.6-1.8-.2-.3-.3-.5-.4-.6-1.4-1.2-1.7-2.7-1.6-4.4Z"></path>
+  <path class="cls-1"
+        d="M221.1,93.9c-3.2,0-6.5,0-9.7,0h-.8v-6.3h.9c2.9,0,5.8,0,8.7,0,1.9,0,3.6.2,4.7,2.1h.1v-13.5c-.9.3-1.8.8-2.7.8-3.8,0-7.7,0-11.6,0v-5.3c.1,0,.2,0,.3,0h10.9c1.6,0,2.9.5,4.1,1.5.7.6,1.4,1.1,2.2,1.6v-.9c-.4-4-.8-8.1-1.2-12.1-.1-.6-.2-.8-.9-.8h-33.3c-.2,0-.4,0-.7,0,1.7,1.1,3.3,2.1,4.9,3.1,1,.6,1.4,1.5,1.5,2.6,0,.7.1,1.5.1,2.2v27.6c0,.7,0,1.5-.1,2.2-.1,1.1-.5,1.9-1.4,2.5-1.3.7-2.5,1.5-3.7,2.2-.5.3-.9.5-1.5.9h36c1.1-4.8,2.1-9.5,3.2-14.5-.8.6-1.5,1-2,1.4-2.4,2.1-5.1,2.8-8,2.7Z"></path>
+  <path class="cls-1"
+        d="M349.9,77.5c-2.6-.8-5.3-1.4-7.9-2.2-.9-.3-1.9-.6-2.7-1.2-1.4-.9-1.2-2.6.2-3.3.3-.2.6-.3.9-.4,1.9-.5,3.8-.4,5.6,0,3.8.7,7.2,2.3,10.5,4.3.2,0,.5.3.8.5-.1-1-.1-1.9-.2-2.8-.2-3.1-.3-6.3-.5-9.4,0-.5-.2-.7-.7-.9-1.2-.3-2.5-.6-3.7-.9-4.3-.9-8.6-1.6-13-.9-3.1.5-6,1.6-8.3,3.9-2.2,2.2-3.2,5-3.6,8-.6,4.4,1.5,9,5.4,11.3,1.3.8,2.7,1.4,4.2,1.9,2.7,1,5.5,1.8,8.2,2.8,1.1.4,2.1,1,2.9,1.9,1.1,1.4.9,4.3-1.6,4.8-1.8.4-3.6.3-5.3,0-3.1-.6-5.7-2.4-8.2-4.3-1.6-1.2-3.3-2.5-5-3.8v1c.3,4.6.5,9.1.8,13.7.1,2-.2,1.6,1.6,2,3.3.7,6.6,1.3,10,1.7,3.8.4,7.6,0,11.3-1.3,9-3.4,12.1-13.9,6.2-21.3-2.3-2.4-5-4-7.9-5Z"></path>
+  <path class="cls-1"
+        d="M758.1,77.5c-2.5-.8-5-1.3-7.5-2.1-1.1-.3-2.2-.7-3.2-1.3-1.4-.8-1.2-2.5,0-3.3.3-.2.6-.3.9-.4,1.5,0,3.1-.4,4.6-.2,3.7.3,7,1.8,10.1,3.6.7.4,1.4.8,2.2,1.3v-1.6c-.2-3.4-.4-6.8-.6-10.3,0-.7-.2-1-.9-1.2-2.6-.5-5.2-1.2-7.9-1.6-3.9-.6-7.7-.6-11.5.5-9.3,2.7-11,13.2-7.7,18.5,1.6,2.6,3.8,4.2,6.6,5.3,3,1.1,6,2.1,9,3.2,1.1.4,2.2.9,3.1,1.6,1.1.8,1.4,2.1,1,3.4-.3,1.2-1.3,1.7-2.4,1.9-1.9.3-3.8.3-5.7-.2-2.9-.8-5.3-2.4-7.6-4.2-1.6-1.2-3.2-2.5-5-3.8,0,.9,0,1.6,0,2.3.2,4.2.4,8.4.7,12.5,0,1.5,0,1.6,1.6,1.9,3.3.6,6.7,1.3,10.1,1.7,3.8.4,7.6,0,11.3-1.3,8.9-3.4,12-13.7,6.3-21.1-2-2.4-4.7-4.1-7.7-5.1Z"></path>
+  <path class="cls-1"
+        d="M416.4,98.5c-.3.5-.6,1-.9,1.4-2.2,3.4-4.9,6.3-8.7,7.9-3.6,1.6-7.5.7-10.2-2.1-2.4-2.6-3.2-5.7-3-9.1.3-4.1,2-7.6,4.6-10.8.6-.8,1.3-1.5,2-2.3-3-1-5.3.3-7.5,2.2.1-2.2.7-4.1,1.8-5.9-3.9,1.7-7.3,4-10.4,7,0-.5-.1-1,0-1.4.3-1.7.6-3.3.8-5,.1-.7.1-1.3-.4-1.9-4,2.1-8.8,9.6-8.6,13.5.5-.5,1-.9,1.5-1.3.2-.2.6-.3.8-.2.2,0,.2.5.2.8s-.1.6-.2.8c-.8,2.6-1.4,5.2-1.5,7.8-.3,6,1.3,11.4,5.5,15.9.2.2.3.4.4.7l.2-.2c-.1-.7-.3-1.4-.4-2.1-.1-.5-.2-1.2.5-1.5.7-.2.9.4,1.3.8,1.3,1.6,2.7,3.2,4.4,4.3,5.3,3.4,11,4.2,17,2.9,5.2-1.2,9.3-4.1,12.7-8.1,2-2.4,3.7-5.1,5.1-8-.5-.5-1-.9-1.5-1.3-1.7-1.6-3.6-3.2-5.5-4.8Z"></path>
+  <path class="cls-1"
+        d="M446.6,96.3c.3,0,.5.2.8.3,3.2,1.4,4.4,4.9,2.7,7.6-1.6,2.4-5.7,3.4-8.2,2.7,4-3.7,1.7-10.4-1.3-11.6,0,.2.1.4.1.5.5,2.4-1.2,4.7-3.7,4.9-1.4,0-2.6-.6-3.6-1.4-3.2-2.6-6.4-5.3-9.6-7.8-.8-.6-1.8-1-2.8-1.3-.9-.2-1.9-.2-2.8-.3-.8,0-1.2-.5-1.4-1.2-.2-.6-.3-1.2-.4-1.8-.3-1.4-1.1-2.1-2.5-2.3-.6,0-1.1,0-1.7-.2-1.4-.2-2.7-.5-3.4-1.8-.2-.4-.3-.9-.5-1.4-.5,1.8-.4,3.3.9,4.5.7.7,1.5,1.3,2.3,1.9.9.7,1.5,1.6,1.5,2.8,0,2.7,1.3,4.8,3.4,6.4,2.5,2,4.9,4,7.3,6,1.8,1.4,2.7,3.3,2.6,5.6,0,1,0,1.9-.1,2.9-.4,4.1,1.5,7.5,5,9,.2,0,.5.2.9.3-1.9-3.4-1.8-7.3.3-8.3,0,0,0,.3.1.4.7,4.4,2.9,7.7,7.2,9.2,4.9,1.7,9.4.6,13.5-2.6.4-.3.7-.7,1.1-1.1-3.8.4-6.7-.3-8.2-1.8,2.2.2,4.3,0,6.3-.8,4-1.6,6.7-5.2,6.7-9.1-.2-6.9-7-10.8-12.5-10.2Z"></path>
+  <path class="cls-1"
+        d="M383,76.6c2.5,0,3.7,1.6,3.4,4.1-.1,1-.3,2-.5,3.1,3.1-2.6,6.3-4.6,10.1-5.8-1.2-.2-2.4-.4-3.7-.7,3.2-3,7-3.8,11.1-3.5-4.5,1-6.4,1.6-6.9,2.5,1.2.3,2.3.6,3.7.9-2.5,1.3-4.3,3.1-5.4,5.7,1.5-.9,3-1.1,4.5-.9,2.4.2,4,1.7,4.2,4,.1,1.6-.5,3-1.6,4.2-.1,0-.2.2-.5.5,1.2,0,2.1-.2,3.3-.4-.5.6-.8,1.2-1.2,1.6-.4.5-.9.8-1.4,1.3,2.9,0,6.8-2.3,7.2-4.1h-.5c-1.8,0-2.2-.4-1.9-2.2s.2-1.3.4-2c-.2.2-.3.3-.5.3-.4,0-.8.3-1.1.2-.3,0-.4-.6-.5-1s0-.8.1-1.2c.2-.8.6-1.6.9-2.6-1.2-.2-2.3-.4-3.5-.5v-.2c1.5-.2,2.9-.6,4.4-.7,1.4,0,2.9,0,4.3,0,1,0,1.3.7,1,1.6-.2.7-.5,1.3-.8,2,.9,0,1.7,0,2.6.2,3.2.5,3.9,1.4,3.8,4.6,3-1.2,5.1-6.9,4.3-9.3-.6,1-1.4,1.8-2.6,2.2,0-1.1-.5-1.7-1.4-2.2-.2,0-.4-.5-.4-.7.2-1.9-.3-3.7-1.4-5.2-1.2-1.6-2.5-3.1-3.9-4.5-1.6-1.7-3.5-3.3-5.1-5.1-1.5-1.7-2.6-3.6-2.9-5.9,0-.3-.1-.6-.1-1-1,1.9-1.2,3.8-.9,5.6.1.6.4,1.2.9,1.6,1.4,1.4,3,2.7,4.4,4.2,1.3,1.4,2.5,3,3.7,4.5.2.2.2.5.3.6-1.4-1.4-2.8-2.9-4.3-4.4-1.7-1.6-3.4-3.1-5-4.8-1.7-1.8-3.1-3.8-3.6-6.3-.1-.6-.1-1.1-.2-1.7-.3.3-.5.6-.7,1-1,2.5-1.2,5-.9,7.7.1,1,.5,1.7,1.4,2.3,1.3.8,2.3,2,3,3.4.1.2.2.5.3.7-1.2-1.4-2.6-2.4-4.1-3.3s-2-1.2-3-1.8c-2.2-1.3-4.3-2.8-5.5-5.2h-.1c-.4,1.4-.5,3.3.7,5.8-2-.2-4-.3-6-.5v.2c.1,0,.3.2.4.3,1,1,2.1,2,2.9,3.1.7.9.5,1.6-.5,2.3-.7.5-1.5.9-2.2,1.3-1.8,1.1-3.6,2.1-5.4,3.2-.4.2-.7.6-1,.8,1.3.1,2.6,0,3.9,0ZM412.7,77.2c-1.9,0-3.2-1.2-3.7-3.7,1.3.2,3,1.9,3.7,3.7Z"></path>
+  <path class="cls-1"
+        d="M388.9,64.9c-.7-3.3-.2-7,1.1-8.6,1.3,4.1,4,6.8,7.1,8.2v-5.5c0-.9.3-1.8.2-2.7-.1-1.3-.1-2.6.3-3.9.8-2.7,3.1-4.5,5.8-4.6,2.8-.1,4.9,1.4,5.9,4.1.3.9.5,1.9.5,2.9.1,2.3-.6,4.5-1.8,6.4,2,2.8,4.7,4.8,7.2,7.3,3.1-4.5,5.4-9.2,4.9-14.8-.5-5.5-3.2-9.7-8.3-12.1-3.5-1.7-7.3-2-11.2-1.6-7.5.7-14.1,6.5-14.8,14.2-.3,3.5.2,6.9,2.4,9.8,0,.3.4.5.7.9Z"></path>
+  <path class="cls-1"
+        d="M446.7,70.7c-1.3.3-2.5.7-3.7,1-.4,0-.8,0-1.2-.2.1-.4.2-.9.4-1.2.3-.4.8-.7,1.3-1,.3-.2.7-.4,1-.6-2,0-3.6.9-5.1,2-1.1.8-2.1,1.7-3.2,2.6-.6.4-1.3,1.3-2,.7s.2-1.4.6-2c.2-.3.4-.6.7-1.1-4,2.2-8.8,8.4-9.4,11.9,4.8-5,10.5-8.1,17.5-8.3-9.4,1.5-15.7,7.6-21.1,14.6,2,1.5,3.9,2.9,5.8,4.4.1-.3.2-.5.3-.7,2-4.3,4.4-8.3,7.5-11.9,1.8-2.1,4.2-3.2,7-3.4,2.1-.2,4.1.2,5.7,1.4,4-2.3,8.3-3.1,12.8-2.6q.1,0,.2-.2c-1.4-1-2.6-2.1-4.1-3-3.5-2.2-7.1-3.2-11-2.4Z"></path>
+  <path class="cls-1"
+        d="M789.1,74.5c.7-.6,1-1.5,1-2.7s-.4-2.3-1.2-2.9c-.8-.6-2-1-3.6-1h-5.2v13.6h2.1v-5.8h2.2l3.7,5.8h2.3l-3.9-6c1,0,1.9-.4,2.6-1ZM784.4,73.9h-2.2v-4.3h2.8c.4,0,.7,0,1.1,0,.4,0,.7,0,1,.3.3,0,.5.4.7.6.2.3.3.6.3,1.1s0,1-.3,1.3-.5.5-.8.7c-.3,0-.7.2-1.1.3-.6,0-1,0-1.5,0Z"></path>
+  <path class="cls-1"
+        d="M795.3,70.1c-.6-1.4-1.5-2.6-2.5-3.7-1.1-1-2.3-1.8-3.7-2.4-1.4-.6-2.9-.9-4.5-.9s-3.1.3-4.5.9c-1.4.6-2.7,1.4-3.7,2.4s-1.9,2.3-2.5,3.7-.9,2.9-.9,4.6.3,3.2.9,4.6c.6,1.4,1.5,2.6,2.5,3.7s2.3,1.9,3.7,2.4c1.4.6,2.9.9,4.5.9s3.1-.3,4.5-.9c1.4-.6,2.6-1.4,3.7-2.4,1.1-1,1.9-2.3,2.5-3.7s.9-3,.9-4.6-.3-3.2-.9-4.6ZM793.4,78.6c-.5,1.2-1.2,2.3-2,3.1-.9.9-1.9,1.6-3,2.1-1.2.5-2.4.8-3.7.8s-2.6-.3-3.8-.8-2.2-1.2-3-2.1c-.9-.9-1.5-1.9-2-3.1-.5-1.2-.7-2.5-.7-3.9s.2-2.7.7-3.9,1.2-2.2,2-3.1c.9-.9,1.9-1.6,3-2.1,1.2-.5,2.4-.8,3.8-.8s2.6.3,3.7.8c1.2.5,2.2,1.2,3,2.1.9.9,1.5,1.9,2,3.1.5,1.2.7,2.5.7,3.9,0,1.4-.2,2.7-.7,3.9Z"></path>
+</svg>
+  </div>
+  <div class="bottom-nav__link">
+    <div class="nav-tooltip right">
+      <div class="nav-tooltip__content">
+        <div class="nav-tooltip__header">
+          
+            Chapter 6
+          
+        </div>
+        <div class="nav-tooltip__body">
+          
+            Cosmology
+          
+        </div>
+      </div>
+      <div class="arrow-down"></div>
+    </div>
+    
+      <a href="https://roll20.net/compendium/dnd5e/Rules:Cosmology?expansion=33359" false>
+        <div class="link__long">
+          Next Chapter
+        </div>
+        <div class="link__short">
+          Next
+        </div>
+        <div class="roll20Icon">chevronRight</div>
+      </a>
+    
+  </div>
+</div>
+
+    
+  </div>
+
+<script type="text/javascript">
+	$(function() {
+		setTimeout(function(){
+			if($(".obs_container").length > 0) {
+				// GA Event Tracking
+				ga('send', {
+					'hitType': 'event',
+					'eventCategory': 'obsAdvert',
+					'eventAction': 'topbar',
+					'eventLabel': ''
+				});
+			}
+		}, 0);
+
+		$(".localtimeme-short").each(function() {
+			let time = parseInt($.trim($(this).text()), 10);
+			let d = new Date(time*1000);
+			$(this).attr("data-timestamp", d.getTime());
+
+			let mytimezone = "";
+			if(d.toLocaleString) {
+				mytimezone = d.toLocaleString('en', {timeZoneName: 'short'}).split(' ').pop();
+			}
+			const options = { month: 'long', hour:'numeric', minute:'numeric', day: 'numeric', timeZoneName: 'short' };
+			$(this).text(d.toLocaleDateString('en-EN', options));
+		});
+	});
+
+	$("#roll20-top .loginform button").on("click", function() {
+		console.log("click");
+		var $form = $(this).parents("form");
+		$form.attr("action", $form.attr("action") + "?backto=" + escape(window.location));
+		$form.submit();
+		return false;
+	});
+
+	$(".topbarnotifications .notification button").on("click", function() {
+		var notid = $(this).attr("data-notification-id");
+		var othis = this;
+
+		$.getJSON("https://app.roll20.net/notifications/dismiss/" + notid + "/?callback=?", function(data) {
+			if(notid == "all") {
+				$(othis).parents(".notifications").fadeOut();
+				$(".alertcount").html("");
+				$(".topbarnotifications .dropdown-menu").remove();
+				$(".topbarnotifications.nav-item-messages").html("<a href='https://app.roll20.net/private_message/inbox/' class='nav-link'><i class='fas fa-envelope'></i></a>");
+				return;
+			}
+			if($(othis).attr("href")) {
+				window.location = "https://app.roll20.net" + $(othis).attr("href");
+			}
+			else {
+				$(othis).parents(".notification").fadeOut();
+				var $count = $(othis).parents(".notifications").find("a .count");
+				var current = parseInt($.trim($count.text()), 10);
+				current = current - 1;
+				if(current < 0) current = 0;
+				$count.text(current);
+				countdown = parseInt($(".alertcount").html(), 10)
+				$(".alertcount").html(countdown - 1);
+				if(countdown < 2) {
+					$(othis).parents(".notifications").fadeOut();
+					$(".alertcount").html("");
+					$(".topbarnotifications .dropdown-menu").remove();
+					$(".topbarnotifications.nav-item-messages").html("<a href='https://app.roll20.net/private_message/inbox/' class='nav-link'><i class='fas fa-envelope'></i></a>");
+					return;
+				}
+			}
+		});
+		return false;
+	});
+
+	$(".topbarsitenotifications .newalerts").on("click", function() {
+		
+	});
+
+	$("#navbar-notifications__see-more-btn").on("click", function() {
+		window.location = "https://app.roll20.net/sitenotifications";
+	});
+
+	$("#menu-mobile-site-alerts").on("click", function(e) {
+		e.preventDefault();
+		window.location = "https://app.roll20.net/sitenotifications";
+	});
+
+	$("#remove-admin-menu").on("click", function() {
+		$("#menu-adminhalla").remove();
+		$("ul.dropdown-menu[aria-labelledby='menu-adminhalla']").remove();
+		$(".logo img").prop("style", "");
+	});
+
+	
+		if(window.dataLayer) {
+			dataLayer.push({ 'event': 'start_pw'});
+		}
+	
+</script>
+<style>
+	.bottom-banner {
+		background-color: #fff;
+		position: fixed;
+		bottom: 40px;
+		z-index: 9999;
+		width: calc(100% - 30px);
+		margin-left: 15px;
+		box-shadow: 0px 0px 16px #888888;
+		display: flex;
+		align-items:center;
+		justify-content: space-around;
+	}
+
+	.bottom-banner-css-version-v2{
+		border-left: 15px solid #ec008c;
+	}
+	.bottom-banner-css-version-v3{
+		border-left: 15px solid #35c8f5;
+	}
+	.bottom-banner-css-version-v2 .bottom-banner__button{
+		background-color: #35c8f5;
+	}
+	.bottom-banner-css-version-v3 .bottom-banner__button{
+		background-color: #ec008c;
+	}
+
+	.bottom-banner--hidden {
+		display:none;
+	}
+
+	.bottom-banner__message {
+		padding: 1em;
+		float: left;
+		font-size: 12px;
+		line-height: 1.4;
+	}
+
+	.bottom-banner__dismiss-icon {
+		float: right;
+		padding:10px;
+		color: #d1d1d1;
+		cursor: pointer;
+		align-self: flex-start;
+	}
+	.bottom-banner__dismiss-icon:hover {
+		color: #333333;
+	}
+
+	.bottom-banner__button, .bottom-banner__button:hover, .bottom-banner__button:visited, .bottom-banner__button:active {
+		float:right;
+		font-size: 16px;
+		line-height: 1.6;
+		border-radius: 4px;
+		padding: 7px 15px 7px 15px;
+		color: #fff !important;
+		transition: all .25s linear;
+		text-decoration: none;
+	}
+	.bottom-banner__button:hover {
+		color: #fff;
+	}
+
+	.cookie-modal--hidden {
+		display: none;
+		position: fixed;
+		z-index: 10001;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	}
+
+	.cookie-modal-content {
+		background-color: var(--color-surface1);
+		margin: 20% auto;
+		padding: 20px;
+		width: 40%;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+    .cookie-modal-content h3 {
+        display: inline-block;
+	}
+
+	.cookie-modal-css-version-v3 {
+		padding-top: 16px;
+	}
+
+	.cookie-modal_switch .switch{
+        display: inline-block;
+        float: right;
+        margin-top: 30px;
+		width: 60px;
+	}
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 26px;
+	}
+
+	.switch input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #8492A6;
+		-webkit-transition: .3s;
+		transition: .3s;
+	}
+
+	.slider:after {
+		content: "Off";
+		position: absolute;
+		top: 50%;
+		right: 11px;
+		transform: translateY(-50%);
+		color: #fff;
+		font-family: helvetica;
+		font-weight: bold;
+		font-size: 13px;
+	}
+
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 20px;
+		width: 20px;
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		-webkit-transition: .3s;
+		transition: .3s;
+	}
+
+	input:checked + .slider {
+		background-color: #00853C;
+	}
+
+	input:disabled + .slider {
+		cursor: no-drop;
+		background-color: #C2C7D1;
+	}
+
+	input:disabled + .slider:before {
+		background-color: #DFE2E7;
+	}
+
+	input:focus + .slider {
+		box-shadow: 0 0 5px #2196F3;
+	}
+
+	input:checked + .slider:before {
+		-webkit-transform: translateX(33px);
+		-ms-transform: translateX(33px);
+		transform: translateX(33px);
+	}
+
+	input:checked + .slider:after {
+		content: "On";
+		right: auto;
+		left: 11px;
+	}
+
+	/* Rounded sliders */
+	.slider.round {
+		border-radius: 26px;
+		width: 60px;
+	}
+
+	.slider.round:before {
+		border-radius: 50%;
+	}
+	.close {
+		float: right;
+		font-size: 20px;
+		font-weight: bold;
+		line-height: 18px;
+		color: var(--color-grayscale1);
+		text-shadow: 0 1px 0 #ffffff;
+		opacity: 0.2;
+		filter: alpha(opacity=20);
+	}
+	.close:hover {
+		color: var(--color-grayscale1);
+		text-decoration: none;
+		opacity: 0.4;
+		filter: alpha(opacity=40);
+		cursor: pointer;
+	}
+</style>
+
+<!--googleoff: all-->
+<div id="gdpr-notification" class="bottom-banner bottom-banner--hidden bottom-banner-css-version-v3">
+	<div class="bottom-banner__message">
+		Roll20 uses cookies to improve your experience on our site. Cookies enable you to enjoy certain features, social sharing functionality, and tailor message and display ads to your interests on our site and others. They also help us understand how our site is being used. By continuing to use our site, you consent to our use of cookies. Update your cookie preferences <a href='#' id='banner-link-preferences'>here</a>.
+	</div>
+	<span class="bottom-banner__dismiss-icon" id="gdpr-notification-dismiss-button" aria-label="Close Cookie Toast" role="button" tabindex="0">&times;</span>
+</div>
+
+<div id="cookie-modal" class="cookie-modal--hidden">
+
+  <!-- Modal content -->
+  <div class="cookie-modal-content cookie-modal-css-version-v3">
+    <span class="close" id="cookie-modal-dismiss">&times;</span>
+	<h3>Cookie Preferences</h3>
+	<span class="cookie-modal_switch">
+		<label class="switch">
+		<span class="sr-only">Accept cookies</span>
+		<input class="feature_toggle" id="cookie-modal-input" type="checkbox">
+		<span class="slider round"></span>
+	</span>
+	<hr>
+
+    We use Cookies to help personalize and improve Roll20. For more information on our use of non-essential Cookies, visit our Privacy Policy <a href=https://roll20.zendesk.com/hc/articles/360037770793-Terms-of-Service-and-Privacy-Policy target='_blank'>here.</a>
+  </div>
+
+</div>
+<!--googleon: all-->
+
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum.js" type="text/javascript">
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-31040388-1"></script>
+<script type="text/javascript" nonce="">
+	// Google analytics function to send events via analytics.js
+	// Remove after everything has been switched to gtag
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	// Google analytics function to send events via gtag.js
+	function gtag(){dataLayer.push(arguments);}
+
+	initializeOldGoogleAnalytics();
+	initializeNewGoogleAnalytics();
+
+	window['ga-disable-UA-31040388-1'] = true;
+
+	var gdprCookie = getCookie("gdpr_accepts_cookies");
+
+	if (gdprCookie != undefined) {
+		gdprCookie == "true" ? gdprCookie = true : gdprCookie = false;
+	};
+
+	var gdprBanner = document.getElementById("gdpr-notification");
+	var gdprBannerDissmissButton = document.getElementById("gdpr-notification-dismiss-button");
+	var gdprLoggedIn = false;
+	var gdprAccountAcceptsCookies = null;
+
+	var cookieModal = document.getElementById("cookie-modal");
+	var cookieModalClose = document.getElementById("cookie-modal-dismiss");
+	var cookieModalSwitch = document.getElementById("cookie-modal-input");
+
+	var bannerLinkPreferences = document.getElementById("banner-link-preferences");
+
+	bannerLinkPreferences.onclick = function () {
+ 		cookieModal.style.display = 'block';
+		hideGDPRBanner();
+ 	}
+
+	function setGDPRCookie(value, expirationInDays) {
+		var date = new Date();
+		date.setTime(date.getTime() + expirationInDays * 24 * 60 * 60 * 1000); //convert to milleseconds
+		var expires = "expires="+ date.toUTCString();
+		document.cookie = "gdpr_accepts_cookies=" + value + ";" + expires + ";path=/"+ ";domain=.roll20.net";
+	}
+
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return undefined;
+	}
+
+	function checkGdprStatus() {
+		if (gdprLoggedIn == true) {
+			checkAccountGdprCookieSettings();
+		} else {
+			checkPublicGdprCookieSettings();
+		}
+	}
+
+	function checkAccountGdprCookieSettings() {
+		var cookieExists = getCookie("gdpr_accepts_cookies");
+
+		switch(cookieExists){
+			case "true":
+				acceptCookies();
+				break
+			case "false":
+				denyCookies();
+				break
+			case undefined:
+				showGDPRBanner();
+				acceptCookies();
+				break
+		}
+	}
+
+	function checkPublicGdprCookieSettings() {
+		console.log('Not logged in - checking cookie GDPR status');
+		const in_discord = false;
+		if (gdprCookie == undefined) {
+			console.log("No GPDR Cookie Detected");
+			// If a user is logging in from the discord activity, we want to deny our cookies by default so we don't show the cookie banner. Later, we can figure out a better way to handle instead of denying out of the gate (so we have analytics, for example), but for MVP, this works
+			if(in_discord){
+				denyCookies();
+			}else{
+				showGDPRBanner();
+				acceptCookies();
+			}
+
+		} else if (gdprCookie == true){
+			console.log("GDPR Cookie Detected");
+			acceptCookies();
+		}
+	}
+
+	// Options object for google analytics based on the current account
+	function getAnalyticsConfigOptions() {
+		
+			return {'cookieDomain': 'auto'}
+		
+	}
+
+	// Not impacted by GDPR - just connects our account
+	// Remove after everything has been switched to gtag
+	function initializeOldGoogleAnalytics() {
+		ga('create', 'UA-31040388-1', getAnalyticsConfigOptions());
+	}
+
+	// Not impacted by GDPR - just connects our account
+	function initializeNewGoogleAnalytics() {
+		window.dataLayer = window.dataLayer || [];
+
+		gtag('js', new Date());
+
+		// Universal analytics
+		gtag('config', 'UA-31040388-1', { ...getAnalyticsConfigOptions(), send_page_view: false });
+		// Google Analytics 4
+		gtag('config', 'G-SZLSVQPSWG', { ...getAnalyticsConfigOptions(), send_page_view: false });
+	}
+
+	function turnOnGoogleAnalytics() {
+		window['ga-disable-UA-31040388-1'] = false;
+		ga('send', 'pageview');
+		if(window.dataLayer) {
+			dataLayer.push({'event': 'optedIn'});
+		}
+	}
+
+	var showGDPRBanner = function () {
+		gdprBanner.classList.remove("bottom-banner--hidden");
+	}
+
+	var hideGDPRBanner = function () {
+		gdprBanner.classList.add("bottom-banner--hidden");
+	}
+
+	var updateUserAccount = function(account_id, value) {
+		var xhr = new XMLHttpRequest();
+		// need to get the below working for marketplace, compendium, landing (only works for app)
+		xhr.open("PATCH", '/accounts/'+account_id, true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+		var cookieValue = "account[gdpr_accepts_cookies]=" + value;
+		xhr.send(cookieValue);
+	}
+
+	var acceptCookies = function () {
+		setGDPRCookie(true, 365);
+		
+
+		turnOnGoogleAnalytics();
+		turnOnDataDogRUM();
+		// hideGDPRBanner();
+		document.getElementById("cookie-modal-input").checked = true;
+	}
+
+	var denyCookies = function () {
+		setGDPRCookie(false, 365);
+		
+	}
+
+	var toggleCookie = function () {
+		var switchChecked = document.getElementById("cookie-modal-input").checked;
+		setGDPRCookie(switchChecked, 365);
+
+		
+	}
+
+	var showCookieModal = function (){
+		cookieModal.style.display = "block";
+	}
+	var closeCookieModal = function (){
+		cookieModal.style.display = "none";
+	}
+
+	if (gdprCookie == true || gdprAccountAcceptsCookies == true){
+		document.getElementById("cookie-modal-input").checked = true;
+	}
+
+	gdprBannerDissmissButton.addEventListener("click", hideGDPRBanner);
+	cookieModalClose.addEventListener("click", closeCookieModal);
+	cookieModalSwitch.addEventListener("click", toggleCookie);
+
+	checkGdprStatus();
+
+	function vttSampleRate() {
+		const sampleRate = 0;
+		if (sampleRate > 5) return sampleRate;
+		return 5;
+	}
+
+	function experiment({ chatTech }) {
+		const experimentsEnabled =false;
+		return experimentsEnabled && chatTech === 'simple-peer';
+	}
+
+	function staging({ hostName }) {
+		return hostName === 'roll20staging.net';
+	}
+
+	function ddSampleRate(opts) {
+		if (experiment(opts)) return 100;
+		return staging(opts) ? 100 : vttSampleRate();
+	}
+
+	function turnOnDataDogRUM () {
+		var tmplMeta = {
+			chatTech: '',
+			hostName: 'roll20.net',
+			version: '26.9.3.1',
+		};
+		var sampleRate = ddSampleRate(tmplMeta);
+		window.DD_RUM && window.DD_RUM.init({
+			applicationId: '95ddf222-5b92-4a62-803a-185cdd723c8b',
+			clientToken: 'pub3fb1f7cf273c5d345be974e50be0dfda',
+			site: 'datadoghq.com',
+			service:'d20app',
+			sampleRate,
+			trackInteractions: true,
+			version: tmplMeta.version,
+		});
+	}
+</script>
+
+<script type="text/javascript">
+    // Sets a browser cookie, but only allows true or false flags
+    function setCookie(name, value, expirationInDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + expirationInDays * 24 * 60 * 60 * 1000); //convert to milleseconds
+        const expires = `expires=${date.toUTCString()}`;
+        if (value == true || value == false) {  
+            document.cookie = `${name}=${value};${expires};path=/;domain=.roll20.net`;
+        } else if (name == "subscriptionGiftPurchaseInfo"){
+            // it is a gift subscription and we need some actual values
+            let amount = value.substring(
+                value.indexOf("=") + 1,
+                value.lastIndexOf("|")
+            )
+            let giftToId = value.split('|giftToId=')[1];
+            document.cookie = `subscriptionGiftPurchaseInfo=true|amount=${amount*100}|giftToId=${giftToId};${expires};path=/;domain=.roll20.net`;
+        }else {
+            return undefined;
+        }
+    }
+
+    // Gets a browser cookie value
+    function getCookie(cname) {
+        let name = cname + '=';
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return undefined;
+    }
+
+    function checkCookieFlag(name) {
+        let flag = getCookie(name);
+        if (flag != undefined) {
+            flag == 'true' ? flag = true : flag = false;
+        }
+        return flag;
+    }
+</script>
+<script type="text/javascript">
+function getS3Endpoint(
+	url,
+) {
+	if (!url || typeof url !== 'string') return '';
+
+	return url
+		.replace('s3.amazonaws.com/files.d20.io', 'files.d20.io')
+		.replace('s3.amazonaws.com/files.staging.d20.io', 'files.staging.d20.io')
+		.replace('s3.amazonaws.com/files-d20-io', 'files.d20.io')
+		.replace('s3.amazonaws.com/files-staging-d20-io', 'files.staging.d20.io');
+}
+
+window.d20ext = window.d20ext || {};
+window.d20ext.utils = window.d20ext.utils || {};
+window.d20ext.utils.getS3Endpoint = getS3Endpoint;
+</script>
+<script type="text/javascript">
+  // This is at the bottom because it needs to run AFTER TopNav ready listener
+  jQuery(function(){
+    console.log('SESH', sessionStorage.getItem("in_iframe") )
+    if (sessionStorage.getItem("in_iframe") === "1") {
+      console.log('IN IFRAME. bottom')
+      const hiddenIframeElements = [
+        "#compendium2024-banner-notification",
+        "#header",
+        "#top-navigation-bar",
+        "#create-character-cta",
+        "#related-content"
+      ];
+      $(hiddenIframeElements.join(",")).hide();
+      $(".compendium2024__body, .compendium2024").removeClass("toc-open");
+      // Show the alternative expansion switcher
+      $('#expansion-switcher__body').removeClass('hidden');
+      // Remove new-tab from inner anchors
+      document.querySelectorAll('.compendium2024 a').forEach(link=> {
+        if(link.href && !link.href?.includes('marketplace.roll20')) link.removeAttribute("target");
+        if(link.href && link.href?.includes('/compendium/')) {
+          if(link.href.includes('?expansion')) link.href += '&iframe=true';
+          else link.href += '?iframe=true';
+        }
+      });
+    }
+  });
+</script>
+  <script type="module" src="/static-fallback/nav-bar/master/assets/main-DdX-qBPE.js"></script>
+</body>
+</html>

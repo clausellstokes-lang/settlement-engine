@@ -1,0 +1,151 @@
+{{infobox|Draft |There is a guideline draft at [[User:LPfi/AI guidelines]]. Most of the discussion below is on another draft (now deleted), but the linked one seemed to get more support an can probably be used as basis for further discussion. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 12:24, 9 August 2026 (UTC)
+}}
+
+== Discussion on AI policy ==
+
+I would like to bring forward any proposal for a suitable AI policy going forward [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 12:52, 16 May 2026 (UTC)
+
+:@[[User:Ikan Kekek|Ikan Kekek]] @[[User:Sbb1413|Sbb1413]] 
+:Your thoughts? [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 14:16, 16 May 2026 (UTC)
+:I guess the draft guideline can be summed up like this, "You can use AI on Wikivoyage, but any use of AI must be disclosed. Repeated failures to disclose AI use may be treated as disruptive editing, which may lead to blocks from editing." '''[[User:Sbb1413|Sbb1413]]''' (he) ([[User talk:Sbb1413|talk]] • [[Special:Contributions/Sbb1413|contribs]]) 14:34, 16 May 2026 (UTC)
+::I think referring to disruptive editing is good. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 15:15, 16 May 2026 (UTC)
+
+Some comments:
+* If we are to have a Definitions section, it should contain no guidelines, as that makes the structure unclear. Cf [[User:LPfi/AI guidelines]].
+* History, culture, climate etc. are things I absolutely don't want an AI to handle. We want those to be described as relevant to the traveller and in our style. There are lots of subtle decisions made when writing such sections. An Understand that looks complete but misrepresents or misses important points can be as bad as telling about a train that doesn't run or a restaurant that isn't there. The latter are things that the reader should know can change.
+* AI allows fast creation of content. We cannot put the burden of verification on other editors.
+* The wording on fact checking is quite vague. The contributor needs more robust advice.
+* The tasks labelled as "mechanical" can be problematic.
+** Translations can contain massive text volumes, where the style may not be right and errors can have been introduced – machine translations are nowhere near perfect.
+** Spelling and grammar corrections involve the choice of language variant, and "correcting" that can be highly disruptive. "Language refinement" is even more problematic: we don't want the AI's style forced upon us.
+* A human editor being accountable helps only as long as the editor is indeed part of the community. We cannot leave corrections to be the responsibility of a long-gone pass-by editor.
+* We have had one user who posted AI generated comments (that I know of). The style was highly disruptive, mostly by using flowery language. Disclosure of the tool helps as little as the "I was drunk" excuse. The only AI uses I see as potentially beneficial in discussions are:
+** writing help, such as spelling and grammar aids, perhaps translation, and physical help such as speech-to-text tools;
+** as a research tool; and
+** summaries posted as part of a comment, such as a table or graph of recent edits, where those are the subject of the thread.
+* I don't have any opinion yet on the merits of different forms of disclosure or requirements of disclosure.
+–[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 15:51, 16 May 2026 (UTC)
+
+:I'm opposed to AI edits, period. Since it's probably not possible to ban all AI edits, my opinion is that any noticeable or questionable AI edit should be banned from the site. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 16:17, 16 May 2026 (UTC)
+::{{re|Globetrotter30}} FYI, draft pages shouldn't be hosted in projectspace since it can give the illusion that they're actual policies or guidelines. Unless anyone has any objections, I'm going to move this into your userspace tomorrow. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 04:47, 17 May 2026 (UTC)
+:::Oh, ok, I didn't know that. 
+:::Thanks, [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 10:17, 17 May 2026 (UTC)
+::::Done (since you're aware). Coming back to this discussion, my thoughts are similar to Ikan's, but I would like to carve out an exception for technical spaces (which includes templates, modules, abuse filters, etc.). //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 10:58, 17 May 2026 (UTC)
+:::::Thanks for moving it to the userspace and what would be in this exception? [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 12:47, 17 May 2026 (UTC)
+:::::I see some technical uses for AI, but the exception would need to be carefully worded. One issue is the potential for [[:w:vibe coding|vibe coding]], which can produce odd problems. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 17:01, 19 May 2026 (UTC)
+::::::With vibe coding specifically: it is an issue if you're not careful enough, but they are instances where we wouldn't want the output on the basis that they're bad, not because they were AI-generated. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 10:19, 21 May 2026 (UTC)
+:::::::Just to provide an example: [[Module:Countries.json]] was initially generated by Gemini. The list wasn't perfect, and some of the Wikidata items I had to fix later on. However, if you told me I couldn't use AI at all, it would've taken me a LOT longer to write the whole list. Now looking at the module, you probably couldn't tell if it were AI-generated unless you looked into the history because it's been significantly modified since. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 10:22, 21 May 2026 (UTC)
+::::::::I added a section on 'vibe coding', which is classed under 'Fair use of AI'.
+::::::::"*Light AI‑assisted phrasing adjustments (‘vibe coding’) are permitted only when they do not alter tone, meaning, or Wikivoyage’s traveller‑focused style. This must be disclosed once again using an AIDisclaimer template."
+::::::::Thanks, [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 12:42, 21 May 2026 (UTC)
+:::::::::Vibe coding isn't about phrasing adjustments, but on letting the AI create computer code, such as modules in Python or complicated Mediawiki templates. AI can be helpful, when used by people who review the code and understand the logic and every line of it. The danger is about inexperienced coders – who wouldn't get involved with modules otherwise – having the AI write code that they don't understand, of a complexity where they cannot parse the underlaying logic. Such code can become a maintenance headache, especially if it sits around long enough that people get to depend on it. I am not against allowing AI use, such that SHB describes, but the guidelines should set a high threshold. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 14:05, 21 May 2026 (UTC)
+
+== A complication ==
+
+Only in the US & not the Supreme Court there, but [https://arstechnica.com/tech-policy/2023/08/us-judge-art-created-solely-by-artificial-intelligence-cannot-be-copyrighted/ US judge: Art created solely by artificial intelligence cannot be copyrighted].
+
+So what happens if someone uploads AI-created material here or to Commons? The software assigns copyright to the contributor; is that invalid or illegal? [[User:Pashley|Pashley]] ([[User talk:Pashley|talk]]) 19:05, 16 May 2026 (UTC)
+
+:The legal situation is unclear – we don't know what AI-assisted contributions might be copyright protected – but material not under copyright gets uploaded all the time. I get attributed for deleting a comma or adding a phone number, and Commons has templates for non-eligible files, such as <nowiki>{{</nowiki>[[commons:template:textlogo|textlogo]]}} and <nowiki>{{</nowiki>[[commons:template:PD-USGov|PD-USGov]]}}. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 20:11, 16 May 2026 (UTC)
+
+== 2nd refinement ==
+
+I have refined this a 2nd time, and other editors. Any further suggestions on this?
+
+Thanks, [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 10:39, 17 May 2026 (UTC)
+
+== Who will identify AI content? ==
+
+One practical question we still need to settle is who will ''actually'' identify AI‑assisted edits once this policy is in place???? [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 13:31, 17 May 2026 (UTC)
+
+:Right, and the practical answer some years down the road may be no-one, but I think that in any case, a policy dealing with identifiably AI-produced content is still important. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 13:33, 17 May 2026 (UTC)
+::AIs will also in the future output text that is unsuitable for Wikivoyage, at least if badly prompted. I think there really isn't necessary to be sure it is AI generated, it just needs to be low-quality or disrupting in a way that text by well-intentioned newbies not using AI wouldn't be. "Clearly AI like" is a better description than "Clearly AI generated", but that should be in a guideline on disruptive editing. Perhaps [[Wikivoyage:How to handle unwanted edits]] could have something about this. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 17:10, 18 May 2026 (UTC)
+:I am bad at detecting AI use.  There was a study a while ago that said people who don't use AI have about a 50–50 chance of guessing whether a piece of sample text was AI generated, and I think I'm actually worse than that.  I found something unencyclopedically [[wikt:puffy|puffy]] at the English Wikipedia the other day, and I thought that it might be AI generated.  A quick trip through the page history showed that it was written 22 years ago, aka about 19 years before AI text generators were generally available.
+:I am, therefore, not a candidate to detect whether a given article has been generated with AI.  But what I can do is tell the difference between good writing and bad, and that leads me to say that perhaps we should be more concerned about high-speed editing (especially high-speed article creation) than about trying to convince someone that their alleged use of a chatbot is improper.  People can (and will) argue about whether the new article was AI-generated.  They can't really argue about whether they created more than 10 new articles within 24 hours.  (Ten is just an example.  The number should be however many we think we can realistically check in a day, assuming that a couple of people are doing this occasionally; RecentChanges indicates that we currently average just a few non-redirect new articles each day.) [[User:WhatamIdoing|WhatamIdoing]] ([[User talk:WhatamIdoing|talk]]) 23:34, 4 September 2026 (UTC)
+::I have quite some experience picking out AI candidacies at U4C elections for the past 2 years, but it is a lot easier to detect AI when you know it's coming from just one person (over say, a history of edits from multiple users). //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 01:02, 5 September 2026 (UTC)
+
+== Template warning AI use: discuss here ==
+
+[[Template:AIWarning]]
+
+I have made this template [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 12:52, 19 May 2026 (UTC)
+
+== Template disclaiming AI use: discuss here ==
+
+[[Template:AIDisclaimer]]
+
+I have made this template [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 16:33, 19 May 2026 (UTC)
+
+:I'm not sure it's appropriate to use first-person voice ("I...")  Content is shared by the community, not owned by any one person. [[User:Mrkstvns|Mrkstvns]] ([[User talk:Mrkstvns|talk]]) 14:03, 20 May 2026 (UTC)
+::"This following section includes unreviewed content created or influenced by artificial intelligence (AI). It may contain inaccuracies, outdated details, or wording that does not match Wikivoyage’s traveller‑focused style.
+::Readers should check the details in this section for themselves before relying on any of it.
+::This content is being or will be reviewed."
+::There isn't any instance of "I" in this...
+::Are you referring to the AI disclosure template?
+::Thanks, [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 14:06, 20 May 2026 (UTC)
+
+[moved from template talk]:<br/>
+Until reviewed, the edit should stay in userspace. I don't want this kind of templates in articles seen by ordinary readers. See [[User:LPfi/AI guidelines#AI-assisted article text]] for my view on this. The template could be used for drafts in userspace though. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 17:09, 19 May 2026 (UTC)
+
+== Template disclosing AI use: discuss here ==
+
+[[Template:AIDiscloser]]
+
+I have made this template. [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 14:07, 20 May 2026 (UTC)
+
+:I assume this template is intended to be used on user pages. Its documentation should include a request to specify what kinds of AI tools are used, how and for what purposes. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 10:20, 21 May 2026 (UTC)
+
+== Merger of User:LPfi/AI guidelines into this draft policy ==
+
+Before, I didn't see @[[User:LPfi|LPfi]]'s draft policy coming into this I suggest a possible merger into this draft policy.
+
+Thanks, [[User:Globetrotter30|Globetrotter30]] ([[User talk:Globetrotter30|talk]]) 14:31, 21 May 2026 (UTC)
+
+:They are different in structure and in what they allow or recommend. I think it is clearer to make decisions on what guidelines we want while there are separate proposals, so that merits of each can be discussed. Of course, if you agree with me or find some of my structure or phrasing good, feel free to amend yours accordingly. If somebody objects to a specific edit, then that point can be discussed. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 16:17, 21 May 2026 (UTC)
+
+: I'd say LPfi's draft is much superior to this one. It looks to me as though we could just move it to main space & delete this, but that needs discussion. In particular, is there anything here that needs merging there? [[User:Pashley|Pashley]] ([[User talk:Pashley|talk]]) 11:59, 3 June 2026 (UTC)
+
+== Assistive technology ==
+
+The page currently includes a section [[User:Globetrotter30/AI guidelines#Using assistive technology]] which reads:
+
+: If you use AI-assisted technology like speech‑to‑text, screen readers, and accessibility aids, you must clearly disclose this on your talk page, using [[Template:AIDiscloser|AIDiscloser]] template:
+
+I would delete the section. Using such technology is quite a different thing than inserting AI-generated text. I cannot see that knowing that a contributor uses such an aid is of any value to other editors, let alone enough to justify the intrusion on the user's privacy. [[User:Pashley|Pashley]] ([[User talk:Pashley|talk]]) 11:41, 3 June 2026 (UTC)
+
+:Agreed massively – that's one fine way to ''lose'' editors. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 11:50, 3 June 2026 (UTC)
+
+::I agree that users should be freely allowed to use these tools, but perhaps on a different page we can still have guidelines on their usage. Speech-to-text is great but also needs proofreading after using it. It's not as problematic as AI but it can be like those auto-generated closed captions/subtitles you sometimes see on videos which get certain words horribly wrong. [[User:DaGizza|<span style="color:teal">Gizza</span>]]<sup> (<i>[[User_talk:DaGizza|<span style="color:teal">roam</span>]]</i>)</sup> 08:33, 3 September 2026 (UTC)
+:::I agree. Users who use any sort of assistive technology including autocorrection need to do their best to proofread the results. The autocompletion software on my iPhone very frequently changes what I type to make it wrong and stupid, and its voice recognition feature is even worse and often seems determined to turn me into an illiterate. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 10:01, 3 September 2026 (UTC)
+::::Agree wholeheartedly with this sentiment. The automatic incorrectors that Google has pushed out in my Chromebook must have been written by Germans because not only do they efficiently introduce wrong and stupid words, they also like to capitalize every single noun. Aggravating. [[User:Mrkstvns|Mrkstvns]] ([[User talk:Mrkstvns|talk]]) 15:24, 3 September 2026 (UTC)
+:::The people who are using speech-to-text may be doing so precisely because they can't effectively proofread it, even if they try to (e.g., severe dyslexia).  Lots of ordinary, non-disabled people struggle with mistakes like ''they're'' vs ''there''.  I don't think we have any reason to believe that AI-assisted versions are worse than the non-AI-assisted versions. [[User:WhatamIdoing|WhatamIdoing]] ([[User talk:WhatamIdoing|talk]]) 17:55, 3 September 2026 (UTC)
+::::Doing your best to proofread is just that. I have two cousins who are dyslexic and therefore spell unpredictably. I think most of us understand that English spelling is absurd and English grammar can be difficult. All we ask is for people to contribute in good faith. To what extent spellcheck, God forbid grammar check, and voice recognition are or are not AI, I have no idea, and it is probably beside the point. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 21:25, 3 September 2026 (UTC)
+:::::Agreed massively on this. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 01:23, 4 September 2026 (UTC)
+:::::AFAICT the answer is that all "spilling chuckers", "grammar manglers", etc. either have some small amount of AI now, or will add it soon.  It's very difficult for most people to describe the difference between an acceptable level of assistance and taking over when they're using the software themselves; trying to divine whether someone else did/didn't stray into improper use is much harder.   [[User:WhatamIdoing|WhatamIdoing]] ([[User talk:WhatamIdoing|talk]]) 23:16, 4 September 2026 (UTC)
+::::::I agree but still think that some recommendations for best practices could be a good idea. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 23:38, 4 September 2026 (UTC)
+:::::::The challenge is that the same words are read by two very different groups:
+:::::::* the newcomers, who might appreciate knowing that we think A and B are okay, but C and D are bad, and
+:::::::* the rule enforcers, who may not be able to distinguish accurately between B and C, but who may be inclined to yell at the newcomers for "C", even when the newcomer is pretty certain (and certainly intended) that they only did "B".
+:::::::I have a lot of experience with policy writing, but even I'm not sure how to draw that line in a way that minimizes contributor loss and needless drama. [[User:WhatamIdoing|WhatamIdoing]] ([[User talk:WhatamIdoing|talk]]) 01:33, 5 September 2026 (UTC)
+::::::::I take your point. In thinking about that, my preliminary phrasing idea would be to state that this is a recommendation of best practices and not a call to make assumptions about how people are editing, with the suggestion that any questions about that be gentle. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 05:12, 5 September 2026 (UTC)
+:::::::::Gentle, or maybe focused on objective facts about the product as submitted, rather than the process by which it might or might not have been achieved.  In other words, I'd rather see "Um, the link to that hotel's website doesn't work" or "Have you been to this place yourself?  I can't find any corroboration of the 'famous ice cream shop on the beach' " than "Did you use AI?" [[User:WhatamIdoing|WhatamIdoing]] ([[User talk:WhatamIdoing|talk]]) 00:23, 6 September 2026 (UTC)
+
+== New try ==
+I think we should try to get an official consensus on AI guidelines, and I propose [[User:LPfi/AI guidelines]] as a base for the discussion ([[Special:Permalink/5325753|the draft as of time of posting]]). I think it got some support in the last round, although it wasn't really discussed. 
+
+I assume AI assistance is used by many contributors in their normal workflow in other contexts, and such use will be more common as time passes. Thus, forbidding all AI tools when working with Wikivoyage might feel like disallowing the use of a spellchecker – actually, many spellcheckers might already be AI-assisted. We need to carefully consider ''what'' use is detrimental for Wikivoyage and concentrate on disallowing that, and to advise on additional measures needed when using AI.
+
+One AI use not touched on in the draft is using AI for formatting (such as listingifying bullet lists). I suppose that use is or will be important for some editors, but I don't want to try to include a badly thought out section on it. I hope a section can be added later, when the issues currently in the draft have been discussed.
+
+–[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 09:33, 1 September 2026 (UTC)
+
+:I think as [[User:LPfi/AI guidelines]] stand, it's looking good. It primarily targets the two most disruptive forms of AI, which are articles/mass text outright added by AI, and also people using AI in discussions. It still permits using AI for technical matters, cleaning up syntax, and does allow it for research provided you actually check the text, which is good. I'd support moving this out of userspace as-is. Any problems or issues that may rise can always be tweaked later. //<span style="font-family:Helvetica Neue; font-size: 14px; font-weight: 200">[[User:SHB2000|<span style="color:#0b6487">shb</span>]] <small>([[User talk:SHB2000|t]] &#124; [[Special:Contributions/SHB2000|c]] &#124; [[m:User:SHB2000|m]])</small></span> 09:43, 1 September 2026 (UTC)
+:Nice work. My personal feeling is that we have a blanket ban on LLM generated content. This is of course impossible to police but at least it will give us something to point to if we suspect a user of uploading LLM slop. [[User:Sgroey|Sgroey]] ([[User talk:Sgroey|talk]]) 02:14, 2 September 2026 (UTC)
+:I said in the Pub that I support the guidelines as currently phrased (after some significant edits I made), but there is actually one point I'd argue with. Suggesting a limit of one comment per day (or, unspecifically, "no more than a few" at most) in a discussion thread is overly restrictive. Maybe no more than one long or four short comments, as a rule of thumb? Though I'm sure we can find examples of my posting more than 4 replies to a thread in a single day. [[User:Ikan Kekek|Ikan Kekek]] ([[User talk:Ikan Kekek|talk]]) 04:42, 3 September 2026 (UTC)
+::I think "at most a few" is good as rule of thumb. There may be times when more are no problem, but if one want broader community feedback, a thread growing by several replies daily from one or a few users, it soon gets hard to grip for somebody noting the discussion a few days later. We all get carried away sometimes, and for things that don't need wide participation, a fast pace may indeed be ideal. The guideline should refer to [[Wikivoyage: Using talk pages]], where the issues can be discussed in more detail. I now [[Special:Diff/5341354/5341598|did that change]], removing the explicit limit. The talk page guideline should be amended as needed. –[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 10:43, 3 September 2026 (UTC)
+:::I like this new guideline. The only question remain is whether someone should need to mention that they have used AI to generate draft or make substantial edits by disclosing through the edit summary (I don't think we would care as much for minor AI usage like spelling and grammar check). [[User:OhanaUnited|<b style="color: #0000FF;">OhanaUnited</b>]][[User talk:OhanaUnited|<b style="color: green;"><sup>Talk page</sup></b>]] 17:24, 4 September 2026 (UTC)
+::::I think that one should have a discussion before doing major AI-assisted work, such as listingifying bullet lists (there was such an initiative discussed in the Pub not too long ago, although I assume there was no intention to use AI this time) or creating articles for all cities in some region. The latter is kind of covered in the current first sentence in [[User:LPfi/AI guidelines#AI-assisted article text]] and the paragraphs that follow, the former in [[User:LPfi/AI guidelines#AI-assisted copy editing]]. There is no requirement on disclosure, but on discussions about one's plans and on workflow.
+::::I don't believe in disclosure requirements as such. Most problematic edits will still come from people who didn't read the guidelines or didn't care. If the edits are OK, then we mostly don't care either, if they aren't, ''that's'' the problem, not the lack of disclosure. The guideline tries to help people not to do edits that get reverted and that get them blocked (or that otherwise cause disruption).
+::::An edit-summary is unhelpful unless it points to a page with further information. Many gadgets add such a note, and I would recommend anybody starting an AI-edit project doing the same. A general note, even a quite detailed one ("using Mistral x.y"), is quite worthless as it says little on how careful the editor has been. We shouldn't need to review the edits more than in general patrolling, even less ponder whether there was some problem in the prompting (if the prompt is disclosed) – that's the original editor's duty.
+::::The last issue is that there is no good definition on "using AI" for our purposes. Was Google's AI used in the background research? Was the spellchecker AI-based? Did you reformat listings prepared in a text document into wikitext listing format using AI (instead of using an Emacs macro, or a text-processor export feature, which may at some point start using AI)? Did you ask an AI to improve your draft prose? Are these things we consider important to disclose? Should each of them be listed in the edit summary?
+::::–[[User:LPfi|LPfi]] ([[User talk:LPfi|talk]]) 19:29, 4 September 2026 (UTC)

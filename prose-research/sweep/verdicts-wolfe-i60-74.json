@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 60,
+   "feature": "narrator discovered mid-draft",
+   "claim": "For about half the first draft of Long Sun Wolfe did not know who was writing it, considered Maytera Marble, settled on Horn and rewrote accordingly.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "I didn't know who was writing",
+   "page": ""
+  },
+  {
+   "index": 61,
+   "feature": "third person would be dead on the page",
+   "claim": "He chose Short Sun's interwoven narrators because telling it in third person would have been dead on the page; the difficulty was balancing storylines.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "it would have been dead there on the page",
+   "page": ""
+  },
+  {
+   "index": 62,
+   "feature": "secondary narrators reconstruct honestly but fallibly",
+   "claim": "Daisy, principal writer of the Whorl chapters, strings others' accounts into plausible incidents and has deliberately falsified nothing, leaving errors to ignorance not intent.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "She has deliberately falsified nothing.",
+   "page": ""
+  },
+  {
+   "index": 63,
+   "feature": "telltale signs answer the riddle",
+   "claim": "Asked directly whether Pig is a godling, Wolfe says certainly, since there are telltale signs all through the book.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "There are telltale signs all through the book.",
+   "page": ""
+  },
+  {
+   "index": 64,
+   "feature": "the reader is expected to get it",
+   "claim": "He is surprised readers missed the inhumi secret (they prey on us because we prey on each other), which he thought everyone would get.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "I thought that everyone would get it",
+   "page": ""
+  },
+  {
+   "index": 65,
+   "feature": "Chekhov's gun, 'only when it's funny'",
+   "claim": "Wolfe cites Roger Rabbit slipping the handcuffs 'only when it's funny' as the law binding writers: a gun on the wall in Act I must be fired.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "No, only when it's funny.",
+   "page": ""
+  },
+  {
+   "index": 66,
+   "feature": "story built backward from an ending image",
+   "claim": "He constructs a clued short story from one or more ideas and an ending image, answering the questions that image raises before writing.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "I have one or more ideas, and an ending",
+   "page": ""
+  },
+  {
+   "index": 67,
+   "feature": "limpid simplicity and baroque density (Gevers)",
+   "claim": "Gevers characterizes Wolfe's range as writing alternately with limpid simplicity and formidable baroque density of diction, in the service of oblique many-layered fictions.",
+   "source": "SF Site Jan 2002 (Gevers, introduction)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "a formidable baroque density of diction",
+   "page": ""
+  },
+  {
+   "index": 68,
+   "feature": "selective ambiguity",
+   "claim": "Ambiguity is necessary in some of his stories and not in others; where present it contributes richness, but he doubts thematic closure is never attainable.",
+   "source": "Infinity Plus 2003",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intgw.htm",
+   "quote": "Ambiguity is necessary in some of my stories, not in all.",
+   "page": ""
+  },
+  {
+   "index": 69,
+   "feature": "outsider narrator licenses explanation",
+   "claim": "The Knight's narrator is a contemporary American because Wolfe needed someone from outside who would not have grown up hearing of the Aelf and Angrborn.",
+   "source": "Infinity Plus 2003",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intgw.htm",
+   "quote": "who would not have heard about the Aelf",
+   "page": ""
+  },
+  {
+   "index": 70,
+   "feature": "refusal to explicate origins",
+   "claim": "Asked how he came to write dimly-seen higher powers behind human events, Wolfe answers only 'No comment', leaving discovery to the reader.",
+   "source": "Infinity Plus 2003",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intgw.htm",
+   "quote": "No comment.",
+   "page": ""
+  },
+  {
+   "index": 71,
+   "feature": "do not dumb down pivotal events",
+   "claim": "Wolfe holds that people's pivotal life events as they actually occurred would not be believed, and that literature should not dumb reality down but smart it up.",
+   "source": "Baber 1994 interview",
+   "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
+   "quote": "we don't dumb it down",
+   "page": ""
+  },
+  {
+   "index": 72,
+   "feature": "selective rottenness as character model",
+   "claim": "Real complex character comes from people who are rotten only selectively, nice to their drinking buddies, unlike utopian or dystopian casts.",
+   "source": "Baber 1994 interview",
+   "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
+   "quote": "most rotten people are only rotten selectively",
+   "page": ""
+  },
+  {
+   "index": 73,
+   "feature": "paper is paper: the concrete credo",
+   "claim": "Against a materialist correspondent Wolfe insists a piece of paper is a piece of paper and cheese is cheese, the animal-level knowing that living and, by implication, fiction require.",
+   "source": "Baber 1994 interview",
+   "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
+   "quote": "It is paper. It is cheese.",
+   "page": ""
+  },
+  {
+   "index": 74,
+   "feature": "write a book, not a genre",
+   "claim": "He defends mixing private eyes and witches in one SF novel because such people exist; he is not trying to write genres.",
+   "source": "Baber 1994 interview",
+   "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
+   "quote": "I'm not trying to write genres",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 60,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"For about half the first draft, I didn't know who was writing The Book of the Long Sun, and considered various characters -- Maytera Marble, for example. I finally settled on Horn, and did the rewrites with that in mind.\"",
+   "note": "Every limb verbatim on the SF Site page (Wayback 20020703232613): half the first draft, not knowing the writer, Maytera Marble as a considered candidate, settling on Horn, rewrites done with that in mind."
+  },
+  {
+   "index": 61,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I could have done everything in third person, but it would have been dead there on the page. The chief difficulty was balancing the stories -- not letting one storyline run away with the book.\"",
+   "note": "Quote verbatim. The interviewer's question frames the approach as the interweaving of past/present with uncertain narrator identities, so 'interwoven narrators' is the question's own wording. Minor nuance: Wolfe's primary stated reason is 'that was what I had to do to tell the story'; the third-person remark is his supporting contrast, exactly as the claim renders it."
+  },
+  {
+   "index": 62,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Daisy is the principal writer of the storyline back on the Whorl... She has done her best to string the incidents together and make everything plausible. She has deliberately falsified nothing.\"",
+   "note": "Quote and the first three limbs verbatim. The last limb ('errors to ignorance not intent') is the direct entailment of the question it answers -- 'Have Hoof, Hide, Daisy, and Vadsig got major details wrong, deliberately, or out of ignorance?' -- but note that Wolfe does not concede the one alleged error: on the godling's size he replies 'he is far too large if he is structured along familiar lines, but who said he was?'"
+  },
+  {
+   "index": 63,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Q: \"Is Pig a godling?\" GW: \"Certainly. There are telltale signs all through the book.\"",
+   "note": "Direct question, direct answer, both verbatim; the interviewer's bracketed '[Hooray! But...]' confirms it was one of the deliberately blunt questions."
+  },
+  {
+   "index": 64,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If human beings did not prey on one another, the inhumi could not prey on us. That's all. It isn't complicated, and I thought that everyone would get it.\"",
+   "note": "Quote verbatim; the parenthetical restates Wolfe's conditional as a causal, which the page supports. Surprise is carried by the following sentence: 'Maybe the thought of human beings not preying on their own kind is just too foreign.'"
+  },
+  {
+   "index": 65,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Roger: \"No, only when it's funny.\" -- \"That is a profound expression of the law that governs all writers and performers... If there's a gun on the wall in Act I, it must be fired before the end of the play.\"",
+   "note": "All three limbs verbatim: the Roger Rabbit handcuffs anecdote, the line as the law binding writers and performers, and the Act I gun."
+  },
+  {
+   "index": 66,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I have one or more ideas, and an ending -- a space ship takes off, and the blast fries someone who's been waiting outside. Who was that?... When I had answered those questions, I could write the story, and I did.\"",
+   "note": "Verbatim, in answer to a question about his 'precisely-honed tales, with their wealth of subtle clues' and specifically 'In Glory Like Their Star'; 'clued' is the interviewer's descriptor, which Wolfe accepts ('Thanks. Thank you!') before giving the method."
+  },
+  {
+   "index": 67,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he possesses an extraordinary stylistic breadth, writing alternately with limpid simplicity and with a formidable baroque density of diction; and all this in the service of oblique, many-layered, endlessly surprising and beautifully structured fictions.\"",
+   "note": "Verbatim in Gevers's own introduction (bylined 'An interview with Nick Gevers', Copyright 2002 Nick Gevers); attribution to Gevers rather than Wolfe is correct. The same paragraph is reproduced verbatim in the 2003 Infinity Plus introduction."
+  },
+  {
+   "index": 68,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Ambiguity is necessary in some of my stories, not in all. In those, it certainly contributes to the richness of the story. I doubt that thematic closure is never attainable.\"",
+   "note": "All three limbs verbatim on the live infinityplus.co.uk page, answering Gevers's question about whether thematic closure is never attainable. Wolfe's 'I doubt that thematic closure is never attainable' is reproduced with its double negative intact."
+  },
+  {
+   "index": 69,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I felt I needed to bring in someone from outside, who would not have heard about the Aelf and Angrborn from childhood.\"",
+   "note": "Verbatim, answering 'Why did you choose to make the narrator of The Knight a contemporary American?'; 'from childhood' is the page's wording for 'grown up hearing of'. Wolfe prefaces it with 'I've no good answer' before giving the reason."
+  },
+  {
+   "index": 70,
+   "verdict": "PARTIAL",
+   "trueWording": "GW: \"No comment.\"",
+   "unsupportedLimb": "'leaving discovery to the reader' -- the page records only the two-word refusal and gives no reason for it",
+   "note": "The question limb is exact: Jordan asks about 'a dimly-seen conflict or at least interaction of \"higher powers\" that is in part \"behind\" the human events' and 'how you came to think of writing this way'; the answer is 'No comment.' verbatim. But the page attaches no motive to the refusal. The nearest support is Gevers's introduction ('they will speak for themselves, or not at all'), which is the interviewer's characterisation of Wolfe generally, not Wolfe's account of this answer -- so the reader-discovery limb is the claim-writer's gloss, not the source's."
+  },
+  {
+   "index": 71,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"if you were to tell me the pivotal events of your life, as they actually occurred, I wouldn't believe you\" / \"Let's write literature in which we don't dumb it down. Let's 'smart' it up.\"",
+   "note": "Both limbs verbatim in the Baber interview (Wayback 20060208231553). The 'smart it up' sentence puts 'smart' in quotation marks on the page."
+  },
+  {
+   "index": 72,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"most rotten people are only rotten selectively. They're not lousy and rotten to their kids, or they are, but they're nice to their drinking buddies.\"",
+   "note": "Quote and the drinking-buddies limb verbatim. The utopian/dystopian contrast is the immediately preceding text ('Utopias in the utopian novels work because everyone is good and reasonable'; 'The dystopian novel... Everybody is lousy and rotten in all their relationships'), and the complex-character limb is Wolfe's next answer: Q 'So the goal is to make complex character?' GW 'I think that's what real human character is.'"
+  },
+  {
+   "index": 73,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the one thing that we really can't get along without is the realization that a piece of paper is a piece of paper... That's what you've got to do to live on the animal level.\" / \"Knowing what it is. It is paper. It is cheese.\"",
+   "note": "Quote verbatim; the correspondent is verbatim 'a materialist philosophy student who used to write to me', and the cheese figure is the mouse's 'I know cheese'. The fiction application is flagged by the claim itself as 'by implication' and is contextual: the materialism exchange grows out of Wolfe calling literary realism 'a dumbed-down part of reality'. The page never states the fiction consequence outright."
+  },
+  {
+   "index": 74,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I'm not trying to write genres, I'm trying to write a book.\"",
+   "note": "Verbatim, and both existence defences are on the page for Free Live Free: 'there are real private eyes. Look in the phone book' and 'I've had witches give me their business cards... They're real people.'"
+  }
+ ]
+}

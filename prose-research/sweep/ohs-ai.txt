@@ -1,0 +1,151 @@
+ 
+ Chronicles from the Research Library: An Artificial Intelligence Research Request 
+ JOIN/RENEW 
+ Menu 
+ Close 
+ Events 
+ Upcoming Events 
+ Past Programs 
+ Museum 
+ Plan Your Visit 
+ Exhibits 
+ Free Digital Guide 
+ Venue Rental 
+ Research & Library 
+ About the Library 
+ Digital History Projects 
+ Research Guides 
+ Help 
+ Research Fellowships 
+ Education 
+ Curriculum and Resources 
+ School Tours 
+ Oregon History Day 
+ Traveling Trunk Program 
+ Teacher Advisory Council 
+ The Quarterly 
+ Current Issue 
+ About the Quarterly 
+ Free OHQ Articles 
+ Back Issues 
+ Subscribe to OHQ 
+ OregonScape 
+ Award-Winning Articles 
+ About Us 
+ Mission 
+ Strategic Plan 
+ America 250—Oregon 
+ Board of Trustees 
+ Staff 
+ History 
+ Affiliates and Partners 
+ News and Press 
+ Newsletter 
+ Blog 
+ Join 
+ The 1898 Society 
+ Reciprocal Membership 
+ Business and Non-Profit Memberships 
+ Corporate Heritage Circle 
+ Shop 
+ Museum Store 
+ Photo Orders 
+ Donate 
+ Donate Now 
+ The Next 125 Campaign 
+ Donate to Collections 
+ Planned Giving 
+ Pacific Wonderland License Plate 
+ History Makers 
+ Home Blog Chronicles from the Research Library: An Artificial Intelligence Research Request 
+ Chronicles from the Research Library: An Artificial Intelligence Research Request
+January 9, 2024
+By Nikki Koehlert 
+ --> 
+ OHS Reference Librarian Nikki Koehlert recently received an inquiry from a researcher who was assisted by artificial intelligence (AI) technology. The request led to an interesting journey through historical newspapers and a cautionary tale of the trustworthiness of this new technology. Photo by OHS staff.
+ Recently, the Oregon Historical Society’s research library received its first known reference inquiry made with the assistance of ChatGPT. This interaction prompted me to wonder what this all will mean for the future of reference services. In the case of this inquiry, a wild goose chase resulted in some interesting discoveries and more questions.
+ So, what is ChatGPT? Chat Generative Pre-Trained Transformer is a language processing tool driven by artificial intelligence (AI) technology that allows users to have human-like conversations with a chatbot. This type of language-model AI can answer questions and assist with tasks, such as composing emails, essays, and writing code. ChatGPT uses the information it learned from data it’s been fed (large collections of text data from billions of publicly available webpages) to generate responses, which can inevitably leave room for error. Why? Because while this technology has been fed a large corpus of data, it is very much technology in its infancy, and has not been fed all the data in the world. Full disclosure, I initially did not know that the reference request I was responding to was, in part, formulated with the aid of AI. This is an excerpt from the initial communication I received:
+ I am trying to find the newspaper clip from the Oregon Daily Journal entitled “Hindoo Wedding Performed in Astoria,” which was published on May 31, 1915. I tried searching Newspapers.com (the archive by Ancestry) and couldn’t find anything. I’m interested in learning more about the wedding of Dr. Raja Williams and Miss Blanche Singh, and any other context around those 2 individuals and their histories before and after their wedding. Do you have any information about these topics readily available?
+ The burning question that kickstarted this research was about the first Indian American wedding shared in the U.S. media. In reviewing this request, I thought this would be a quick task that would consist of verifying the existence of the newspaper article and looking for any resources we might have related to the persons named. After looking specifically for an Oregon Daily Journal article with that particular title on the date provided, I received zero search results. I began to broaden the search, by expanding the date range and looking at other Oregon newspapers, but still no search result came up with an article bearing that same title or documenting either of the two people who supposedly got married in 1915.
+ I reported back to the researcher that I was not able to find the specific article title, nor any record of a “Blanche Singh or Raja Williams” much less a Hindu wedding in Astoria (or any other part of Oregon). I saw in many searches for the two names, that there was a Blanche Williams (a Methodist singer who performed as a duet with her sister Ethel Williams) who appeared in many newspapers in the 1910s. 
+ When researching a request to verify an AI-generated source of information, the name Blanche Williams appeared in the “Crook County Journal” on July 10, 1913, but she was not associated with a Hindu wedding, nor was she reported as marrying Raja Williams.
+ “Blanche Williams,” “Astoria,” and “Singh” appeared in several Oregon newspapers between the 1910s and 1920s, but not in the same story. I found mentions in several Oregon newspapers of Sikh wrestlers Basanta Singh and Dodan Singh. Sikhs (often misrepresented as “Hindu” or “Hindoo” at the time) settled in Astoria and worked primarily in timber mills and among immigrants from China, Poland, and Sweden during the late nineteenth and early twentieth century. I also came across some newspaper advertisements mentioning “Hindoo weddings,” but those mostly consisted of theatrical performances.
+ Several Oregon newspapers included mentions of Sikh wrestlers Basanta Singh and Dodan Singh in the 1910s and 1920s. This ad appeared in the “Morning Oregonian” on October 10, 1910.
+ I asked the researcher where they got the names of the bride and groom from, and the source of the specific newspaper article. That’s when they informed me that ChatGPT was the source that mentioned the Williams-Singh wedding. This was the response from ChatGPT to the researcher’s prompt “What was the first Hindu wedding in U.S. media?”:
+ Since the wedding of Dr. Raja Williams and Miss Blanche Singh took place over a hundred years ago, it may be difficult to find detailed information about the event. However, there are some historical records and news articles that you may be able to access online or through libraries and archives.
+ One article about the wedding that you may be interested in reading is “Hindoo Wedding Performed in Astoria,” which was published in the Oregon Daily Journal on May 31, 1915. This article describes the wedding ceremony and includes details about the decorations, attire, and guests in attendance.
+ Additionally, the Oregon Historical Society may have more information about the wedding and the historical context surrounding it. You may also want to consult with local libraries or archives in Astoria or in the state of Oregon to see if they have any records or documents related to the wedding.
+ Note that ChatGPT took a question about the first Hindu wedding reported in the U.S. media and generated an article title in quotations from a specific newspaper on a particular date. The results were alarming but not surprising. Librarians, archivists, and teachers are starting to share widely their experiences with AI generating false source citations. As an information professional, this occurrence is very disconcerting; my job is to assist researchers in navigating catalogs and databases to find the location of reliable primary and secondary resources.
+ While searching through newspapers and verifying information found on The Oregon Encyclopedia and in the Oregon Historical Quarterly , I noticed a pattern that may shed some light on ChatGPT’s response to the researcher’s prompt. In Oregon newspapers from the 1910s, particularly the Daily Astorian , I saw that on the same pages the names “Williams,” “Blanche,” “Singh,” “Raja,” and the words “wedding” or “Hindoo,” however, they were all unrelated. The words may have all appeared on the same page, but they were not related. ChatGPT tied the words together; it found a repeated pattern and produced a conclusion, but that conclusion was not based in fact.
+ The highlighted phrases on page two from the “Oregonian” on August 27, 1916, represent the search terms “Williams,” “Blanche,” “Singh,” and “Wedding,” but are all found in unrelated articles.
+ ChatGPT can generate a probable response to a prompt, but not all of the responses may be factual. It is a great lesson to keep in mind when using this budding technology. Will this tool get smarter? Yes, but we’re not quite there yet. As it exists in its current form, AI still lacks the ability to think critically or synthesize data the way the human mind can. Knowing that this tool is being more widely used is motivation for librarians to tailor their reference interviews to include a question about whether a researcher has used AI technology — and to incorporate information literacy into their research toolkits.
+ As a new reference librarian at OHS, this research request was a great way for me to become better acquainted with the history of Astoria’s diverse community in the early twentieth century. Sometimes you don’t know what direction a research request will lead, but you learn something new every day, and often that trail will connect to the research focus of another patron as your understanding of history builds and deepens.
+ This image and article is an early example of a Hindu wedding found during research for this reference inquiry, which was reported in the “Evening Herald” on September 29, 1916.
+ Further Reading
+ Johanna Ogden. “East Indians of Oregon and the Ghadar Party.” The Oregon Encyclopedia, https://www.oregonencyclopedia.org/articles/east_indians_of_oregon_and_the_ghadar_party/ (accessed December 18, 2023).
+ Johanna Ogden. “Ghadar, Historical Silences and Notions of Belonging: Early 1900s Punjabis of the Columbia River.” Oregon Historical Quarterly (Summer of 2012): 164-197 https://www.ohs.org/oregon-historical-quarterly/upload/03_113_02_Ogden_Ghadar.pdf (accessed January 5, 2024).
+ Harish K. Puri. Ghadar Movement: Ideology, Organisation & Strategy . Amritsar, Guru Nanak De University, 1983.
+ Nyan Shah. Stranger Intimacy: Contesting Race, Sexuality, and the Law in the North American West . Berkeley, University of California Press, 2011.
+ Categories: 
+ Staff Reflections Audience(s): Educators and Students , Industry Professionals , Researchers , Visitors 
+ Tags: 
+ Adventures in Research , Research tools , Library , Rabbit hole 
+ Nikki Koehlert’s Other Posts
+ Chronicles from the Research Library: The First West Coast Public Library?
+ July 16, 2024 
+ Adventures in Research: Oregon’s Social Hygiene Crusades
+ April 9, 2024 
+ Chronicles from the Research Library: A New Blog Series
+ August 8, 2023 
+ Related Content
+ Why the OHS Research Library Matters — Now More Than Ever 
+ OHS’s former library director, Geoff Wexler, makes the...
+ Learn More > 
+ East Indians of Oregon and the Ghadar Party 
+ In the early twentieth century, five to six hundred men...
+ Learn More 
+ Ghadar, Historical Silences, and Notions of Belonging 
+ Historian Johanna Ogden explores the often overlooked...
+ Free Download > 
+ White Right and Labor Organizing in Oregon’s “Hindu City” 
+ In March 1910, anti-Indian violence erupted in St....
+ Free Download > 
+ The views expressed in user comments do not reflect the views of OHS. The Oregon Historical Society does not participate in political campaigns, nor do we support or oppose candidates.
+ The Oregon Historical Society preserves our state’s history and makes it accessible to everyone in ways that advance knowledge and inspire curiosity about all the people, places, and events that have shaped Oregon.
+ Contact Us
+ Oregon Historical Society 
+1200 SW Park Ave 
+Portland, OR 97205
+ 503.222.1741 
+ orhist@ohs.org 
+ Staff Directory 
+ Support OHS
+ The Oregon Historical Society is a 501(c)(3) nonprofit organization. Federal Tax ID 93-0391599.
+ Make a Gift 
+ Become A Member 
+ Donate to Collections 
+ Venue Rental 
+ Visit the Museum
+ Closed for Labor Day, Monday, September 7 
+ Monday – Saturday:
+10am – 5pm
+Sunday: 12pm – 5pm 
+ Plan Your Visit 
+ Visit the Library
+ Tuesday: 1pm – 5pm
+Wednesday – Saturday:
+10am – 5pm 
+ Learn More 
+ Newsletter
+ Sign up for our e-digest to get Oregon history in your inbox every week!
+ Enter your email 
+ Follow Us
+ Facebook 
+ Instagram 
+ YouTube 
+ Get Involved
+ Volunteer Opportunities 
+ Employment 
+ Contact OHS Privacy Policy 
+ © Copyright 2015 - 2026 Oregon Historical Society
+ 

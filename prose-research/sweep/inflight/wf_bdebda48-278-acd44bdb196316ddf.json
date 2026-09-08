@@ -1,0 +1,22 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 171,
+ "firstTs": "2026-09-07T14:56:18.835Z",
+ "lastTs": "2026-09-07T15:14:49.650Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 42,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "The refutation is written. Returning verdicts.",
+ "run": "wf_bdebda48-278",
+ "agent": "acd44bdb196316ddf",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/8de5f153-f375-48fb-803c-ec578a273a4a/subagents/workflows/wf_bdebda48-278/agent-acd44bdb196316ddf.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

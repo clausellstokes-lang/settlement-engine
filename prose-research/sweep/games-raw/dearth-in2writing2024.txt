@@ -1,0 +1,259 @@
+The Dearth of the Author in AI-Supported Writing
+Max Kreminski
+Santa Clara University
+Santa Clara, California, USA
+mkreminski@scu.edu
+ABSTRACT
+We diagnose and briefly discuss the dearth of the author : a condi-
+tion that arises when AI-based creativity support tools for writing
+allow users to produce large amounts of text without making a
+commensurate number of creative decisions, resulting in output
+that is sparse in expressive intent. We argue that the dearth of
+the author helps to explain a number of recurring difficulties and
+anxieties around AI-based writing support tools, but that it also
+suggests an ambitious new goal for AI-based CSTs.
+CCS CONCEPTS
+• Applied computing → Arts and humanities.
+KEYWORDS
+creativity support tools, large language models, creative homoge-
+nization
+1 THE DEARTH OF THE AUTHOR
+What’s the point of writing? Sometimes we write to learn, or write
+to think, or write for solitary enjoyment—but when the process
+of writing results in a piece of writing that’s meant to be shared
+and read by others, what is this piece of writing for? We assert
+that in most cases, a piece of writing is meant primarily to convey
+its author’s expressive intent: to communicate information, invoke
+feelings, or otherwise express to the reader a set of ideas and sen-
+timents that the author intends to share. Indeed, this assumption
+forms the basis of the expressive communication framework [20]
+that has been used to evaluate AI-based creativity support tools
+(CSTs) [7, 10, 25] in the past.
+The process of writing can thus be viewed as a process ofdecision-
+making by the author. Authors of fiction must decide on character
+names and personalities and appearances, on details of setting
+and background, on the balance between action and introspection,
+on moment-to-moment emotional tone; authors of argumentative
+essays must decide on the points they want to argue, on the evidence
+they want to use in support of each point, on the order in which to
+introduce this evidence; authors in general must decide on what
+words they want to use in what places to get their ideas across. A
+piece of writing that contains fifteen hundred words can be thought
+of as the result of at least fifteen hundred decisions: perhaps a bit
+fewer when some of these words are “forced choices” that could not
+be exchanged for another due to rules of grammar, but usually many
+more due to the need for decisions beyond simple word choices in
+composing any useful or interesting piece.
+Historically, an author could not compose a substantive piece
+of writing without making the vast majority of these decisions
+directly.1 Thus the whole of every piece of writing could be taken
+as reflecting its author’s intent: the relationship between the length
+of a written piece and the number of decisions that its author had
+to make was relatively fixed, and an author could not lengthen a
+piece of writing without deciding what specific words to add.
+But we suddenly find that this is no longer the case. In particular,
+when authors use AI-based CSTs to expand a small amount of input
+text (such as a one-sentence instruction) to a large amount of output
+text (such as a complete written story or essay), theydelegate many
+of the creative decisions involved in producing the larger output
+to the CST—resulting in a piece of writing with an unusually low
+ratio of human decision-making to output length. In other words,
+the expressive intent of the author is underspecified relative to the
+amount of text that is generated, and the resulting piece of writing
+is unusually sparse in terms of expressive intent per word.
+We refer to this unusual situation as the dearth of the author :
+the naïvely AI-augmented author is not absent or dead, but their
+intent is stretched so thinly over their writing that they may feel
+barely present. In lieu of authorial intent, creative decisions are
+made by the CST to which the author has delegated portions of
+the writing process; simple LLM-based CSTs like ChatGPT make
+these decisions by approximating highly probable choices that a
+certain set of raters might also score well [23], while other CSTs
+lean on knowledge encoded in handcrafted rulesets [16], in large
+human-constructed databases of common-sense knowledge [11],
+or in more specialized corpuses of text [21]. Across the full range of
+AI-based CSTs for writing [18], the greater the discrepancy between
+the size of a minimum viable user input and the size of the output
+piece of writing, the more the naïve user’s results tend to exhibit
+the dearth.
+2 SOME IMPLICATIONS OF THE DEARTH
+Despite its simplicity, the dearth of the author helps to explain
+many of the disparate anxieties and difficulties around AI-based
+writing assistants. We briefly discuss a few of its implications here.
+Homogenization of writing. Several recent studies of AI-based
+CSTs have found either direct [2, 3, 8, 24] or indirect [4, 14] evidence
+that these tools can exert a homogenizing effect on the creative
+outputs produced by different users: in other words, different users
+of the same CST may produce more similar outputs than they
+would without the CST. Homogenization effects can be explained
+by authors’ delegation of creative decision-making to a tool that
+makes similar creative decisions in similar usage scenarios, with
+greater degrees of homogenization resulting from tools that make
+a greater proportion of creative decisions directly.
+1Though some words might be drawn verbatim from quotations, and in rare cases
+some might be chosen via mechanistic, aleatoric, or automatic writing processes, such
+as those adopted by the Oulipo movement [22].
+Limited feelings of ownership. Recent studies have also found
+that users of AI-based CSTs for writing tend to experience a limited
+sense of ownership of or responsibility for the outputs of their
+interaction with the CST [9, 19]. This is similarly explained by the
+delegation of creative decisions to the CST: delegating a greater
+proportion of creative decisions to the CST seems likely to result in
+a commensurately lower feeling of ownership toward the resulting
+text, as seen both in Draxler et al. [9] and in the stronger sense of
+ownership reported by users of a narrower CST [16].
+Rhetorical confusion. The typical outputs of AI-supported cre-
+ative processes are often referred to as “soulless”. Simultaneously,
+users who build highly intentful creative processes around AI-based
+CSTs—sometimes considering and discarding many dozens of AI
+outputs before accepting one as complete [ 6]—are perplexed by
+these assertions. The dearth of the author helps explain both phe-
+nomena. The term “soullessness” reflects the sparseness of intent
+in the outputs that are easiest to create with many AI-based tools,
+and that therefore dominate most non-enthusiasts’ impressions;
+meanwhile, the high-intent nature of some AI artists’ processes
+may not be immediately apparent to onlookers, because AI tools
+permit the creation of comparably sized outputs from much smaller
+specifications of intent.
+Greater impacts on inexperienced writers. Experienced writ-
+ers tend to have an ear for evocative language and a strong aversion
+to cliché, both of which are components of a sophisticated sense of
+taste built up over many years of paying close attention to language.
+These writers are readily able to identify problems in AI-generated
+text [5], and are often unwilling to simply accept creative decisions
+made by the machine when these decisions conflict with their own
+sensibilities [21]. Novice writers, on the other hand, may tend to
+treat the machine as a creative authority [2] and delegate a greater
+proportion of their creative decisions—a form of algorithmic loaf-
+ing [13] that is likely to result in a stronger sense of dearth.
+The value of underdetermination. Different AI-based CSTs
+for writing vary widely in the nature of their output and their abil-
+ity to make a large proportion of the decisions involved in writing
+on the user’s behalf. When the outputs of a CST take the form of
+“sparks” [12], plot outlines [ 16], questions [15], or critiques [ 26]
+rather than output-ready prose, the user cannot as easily delegate
+creative decisions about the integration of these elements into a
+complete piece of writing—leaving open a space of underdetermina-
+tion [1], or perhaps evencreative struggle [27], into which expressive
+intent must flow.
+3 REVERSING THE DEARTH
+The dearth of the author arises when the ratio of authorial intent
+to output text length is small. AI-based CSTs that make creative
+decisions on the author’s behalf tend to decrease this ratio. But
+AI-based CSTs can also increase this ratio by leading the author to
+make a greater number of meaningful creative decisions per unit of
+text produced, drawing out unexpressed elements of the author’s
+intent and provoking them to refine this intent further [ 15, 17].
+CSTs that do this well enough may even bring about an unexpected
+alternative condition: an abundance of the author , in which
+every word of a piece has been considered more carefully and from
+more different angles than the author could otherwise manage or
+afford. The question of how exactly to design CSTs to support this
+abundance—we contend—is one of the biggest and most potentially
+impactful research questions that faces the field of AI-based writing
+support today.
+ACKNOWLEDGMENTS
+This work was supported by Hackworth Grant GR102981, “Investi-
+gating Homogenization of Imagination by Generative AI Models”,
+from the Markkula Center for Applied Ethics. Some of the ideas
+discussed here were initially formulated in response to discussions
+held at Stochastic Labs during the summer of 2022; thanks to all who
+participated in these discussions, and in particular to Joel Simon
+and Kyle Steinfeld.
+REFERENCES
+[1] Lea Albaugh, Scott E Hudson, Lining Yao, and Laura Devendorf. 2020. Investi-
+gating underdetermination through interactive computational handweaving. In
+Conference on Designing Interactive Systems . 1033–1046.
+[2] Barrett R Anderson, Jash Hemant Shah, and Max Kreminski. 2024. Homoge-
+nization Effects of Large Language Models on Human Creative Ideation. arXiv
+preprint arXiv:2402.01536 (2024).
+[3] Kenneth C Arnold, Krysta Chauncey, and Krzysztof Z Gajos. 2020. Predictive text
+encourages predictable writing. InProceedings of the 25th International Conference
+on Intelligent User Interfaces . 128–138.
+[4] Advait Bhat, Saaket Agashe, Parth Oberoi, Niharika Mohile, Ravi Jangir, and
+Anirudha Joshi. 2023. Interacting with Next-Phrase Suggestions: How Suggestion
+Systems Aid and Influence the Cognitive Processes of Writing. In Proceedings of
+the 28th International Conference on Intelligent User Interfaces . 436–452.
+[5] Tuhin Chakrabarty, Philippe Laban, Divyansh Agarwal, Smaranda Muresan, and
+Chien-Sheng Wu. 2023. Art or Artifice? Large Language Models and the False
+Promise of Creativity. arXiv preprint arXiv:2309.14556 (2023).
+[6] Minsuk Chang, Stefania Druga, Alexander J Fiannaca, Pedro Vergani, Chinmay
+Kulkarni, Carrie J Cai, and Michael Terry. 2023. The Prompt Artists. InProceedings
+of the 15th Conference on Creativity and Cognition . 75–87.
+[7] John Joon Young Chung, Shiqing He, and Eytan Adar. 2021. The intersection of
+users, roles, interactions, and technologies in creativity support tools. InDesigning
+Interactive Systems Conference 2021 . 1817–1833.
+[8] Anil R Doshi and Oliver Hauser. 2023. Generative artificial intelligence enhances
+creativity. A vailable at SSRN (2023).
+[9] Fiona Draxler, Anna Werner, Florian Lehmann, Matthias Hoppe, Albrecht
+Schmidt, Daniel Buschek, and Robin Welsch. 2024. The AI Ghostwriter Effect:
+When Users Do Not Perceive Ownership of AI-Generated Text But Self-Declare
+as Authors. ACM Transactions on Computer-Human Interaction 31, 2 (2024).
+[10] Jonas Frich, Lindsay MacDonald Vermeulen, Christian Remy, Michael Mose
+Biskjaer, and Peter Dalsgaard. 2019. Mapping the landscape of creativity support
+tools in HCI. In Proceedings of the 2019 CHI Conference on Human Factors in
+Computing Systems.
+[11] Katy Ilonka Gero and Lydia B Chilton. 2019. Metaphoria: An algorithmic compan-
+ion for metaphor creation. In Proceedings of the 2019 CHI Conference on Human
+Factors in Computing Systems .
+[12] Katy Ilonka Gero, Vivian Liu, and Lydia Chilton. 2022. Sparks: Inspiration
+for science writing using language models. In Designing Interactive Systems
+Conference. 1002–1019.
+[13] Isa Inuwa-Dutse, Alice Toniolo, Adrian Weller, and Umang Bhatt. 2023. Algorith-
+mic loafing and mitigation strategies in Human-AI teams. Computers in Human
+Behavior: Artificial Humans 1, 2 (2023), 100024.
+[14] Maurice Jakesch, Advait Bhat, Daniel Buschek, Lior Zalmanson, and Mor Naaman.
+2023. Co-writing with opinionated language models affects users’ views. In
+Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems .
+[15] Max Kreminski, John Joon Young Chung, and Melanie Dickinson. 2024. Intent
+Elicitation in Mixed-Initiative Co-Creativity. In Joint Proceedings of the ACM IUI
+Workshops.
+[16] Max Kreminski, Melanie Dickinson, Noah Wardrip-Fruin, and Michael Mateas.
+2022. Loose Ends: a mixed-initiative creative interface for playful storytelling.
+In Proceedings of the AAAI Conference on Artificial Intelligence and Interactive
+Digital Entertainment, Vol. 18. 120–128.
+[17] Max Kreminski and Michael Mateas. 2021. Reflective creators. In International
+Conference on Computational Creativity . 309–318.
+[18] Mina Lee, Katy Ilonka Gero, John Joon Young Chung, Simon Buckingham Shum,
+Vipul Raheja, Hua Shen, Subhashini Venugopalan, Thiemo Wambsganss, David
+Zhou, Emad A. Alghamdi, Tal August, Avinash Bhat, Madiha Zahrah Choksi,
+Senjuti Dutta, Jin L.C. Guo, Md Naimul Hoque, Yewon Kim, Simon Knight,
+2
+Seyed Parsa Neshaei, Antonette Shibani, Disha Shrivastava, Lila Shroff, Agnia
+Sergeyuk, Jessi Stark, Sarah Sterman, Sitong Wang, Antoine Bosselut, Daniel
+Buschek, Joseph Chee Chang, Sherol Chen, Max Kreminski, Joonsuk Park, Roy
+Pea, Eugenia Ha Rim Rho, Zejiang Shen, and Pao Siangliulue. 2024. A Design
+Space for Intelligent and Interactive Writing Assistants. InProceedings of the 2024
+CHI Conference on Human Factors in Computing Systems (Honolulu, HI, USA)
+(CHI ’24). Association for Computing Machinery, New York, NY, USA.
+[19] Mina Lee, Percy Liang, and Qian Yang. 2022. CoAuthor: Designing a human-
+AI collaborative writing dataset for exploring language model capabilities. In
+Proceedings of the 2022 CHI Conference on Human Factors in Computing Systems .
+[20] Ryan Louie, Jesse Engel, and Cheng-Zhi Anna Huang. 2022. Expressive Commu-
+nication: Evaluating Developments in Generative Models and Steering Interfaces
+for Music Creation. In 27th International Conference on Intelligent User Interfaces .
+405–417.
+[21] Piotr Mirowski, Kory W Mathewson, Jaylen Pittman, and Richard Evans. 2023.
+Co-Writing Screenplays and Theatre Scripts with Language Models: Evaluation
+by Industry Professionals. In Proceedings of the 2023 CHI Conference on Human
+Factors in Computing Systems .
+[22] Nick Montfort and Noah Wardrip-Fruin. 2003. Six Selections by the Oulipo. In
+The New Media Reader, Noah Wardrip-Fruin and Nick Montfort (Eds.). MIT Press,
+147–148.
+[23] Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela
+Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, John Schul-
+man, Jacob Hilton, Fraser Kelton, Luke Miller, Maddie Simens, Amanda Askell,
+Peter Welinder, Paul F Christiano, Jan Leike, and Ryan Lowe. 2022. Training
+language models to follow instructions with human feedback. In Advances in
+Neural Information Processing Systems , Vol. 35. 27730–27744.
+[24] Vishakh Padmakumar and He He. 2023. Does Writing with Language Models
+Reduce Content Diversity? arXiv preprint arXiv:2309.05196 (2023).
+[25] Ben Shneiderman. 2007. Creativity support tools: accelerating discovery and
+innovation. Commun. ACM 50, 12 (2007), 20–32.
+[26] Jessi Stark, Anthony Tang, Young-Ho Kim, Joonsuk Park, and Daniel Wigdor.
+2023. Can AI Support Fiction Writers Without Writing For Them? In Proceedings
+of the Second Workshop on Intelligent and Interactive Writing Assistants .
+[27] David Zhou and Sarah Sterman. 2023. Creative Struggle: Arguing for the Value
+of Difficulty in Supporting Ownership and Self-Expression in Creative Writing.
+(2023).
+3

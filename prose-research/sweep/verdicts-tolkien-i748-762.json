@@ -1,0 +1,236 @@
+{
+ "name": "tolkien",
+ "chunk": 8,
+ "claims": [
+  {
+   "index": 748,
+   "feature": "Rohirric as Old English distance",
+   "claim": "Honegger explains that Tolkien equated Rohirric with Old English to keep linguistic distance while suggesting kinship, a choice translators cannot easily mirror.",
+   "source": "Translating Tolkien: Text and Film (Cormarë 6) — Nagel and Honegger chapters (epdf mirror)",
+   "url": "https://epdf.pub/translating-tolkien-text-and-film-cormare-series-no-6.html",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 749,
+   "feature": "reader verdict: register equated with ours",
+   "claim": "SpacePub readers objected that 'Chef' equates the hobbits' social circumstances with ours and that 'Penner', 'Imbissbude' and 'Stuss erzählen' break immersion, while supporters praised readability and regional differentiation of hobbit, Rohirric and Elvish speech.",
+   "source": "Der Herr der Ringe — die neue Übersetzung beurteilt (SpacePub forum archive)",
+   "url": "https://www.spacepub.net/archive/index.php/t-6815.html",
+   "quote": "Imbissbude",
+   "page": ""
+  },
+  {
+   "index": 750,
+   "feature": "reader poll on register",
+   "claim": "In the SF-Fan thread all twelve poll votes called the Krege translation an absolute failure, and one reader said the Middle-earth medieval atmosphere was gone, replaced by soap-opera modernity.",
+   "source": "Herr der Ringe — Krege-Übersetzung (SF-Fan forum)",
+   "url": "https://forum.sf-fan.de/viewtopic.php?p=17102",
+   "quote": "die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre",
+   "page": ""
+  },
+  {
+   "index": 751,
+   "feature": "archaic language as intended device",
+   "claim": "Literaturschock readers argued Tolkien's archaic language is used deliberately as a stylistic device, so modernisation destroys the novel, citing 'Chef' and an alleged 'beim Fundbüro' as anachronisms.",
+   "source": "Tolkiens Der Herr der Ringe — Carroux vs. Krege (Literaturschock forum)",
+   "url": "https://literaturschock-forum.de/forum/thread/429-tolkiens-der-herr-der-ringe-carroux-vs-krege/?pageNo=2",
+   "quote": "altertümliche Sprache gezielt als Stilmittel verwendet wird",
+   "page": ""
+  },
+  {
+   "index": 752,
+   "feature": "reader verdict blog",
+   "claim": "Redaktion42 holds that Carroux keeps elevated, formal dialogue across all characters while Krege's naturalistic hobbit speech brought jarring modern vocabulary, and that the 2012 edition struck out the first edition's sins.",
+   "source": "Welche Herr der Ringe-Übersetzung ist die beste? (redaktion42)",
+   "url": "https://redaktion42.com/2013/01/02/welche-herr-der-ringe-ubersetzung-ist-die-beste/",
+   "quote": "die Sünden der ersten Übersetzung herausgestrichen",
+   "page": ""
+  },
+  {
+   "index": 753,
+   "feature": "fan preference for archaic register",
+   "claim": "The Deutsche Tolkien Gesellschaft states Carroux's translation is the more popular among many Tolkien fans, and Klett-Cotta reissued it in a 2019 boxed set.",
+   "source": "Drei Mal Carroux im Schuber (Deutsche Tolkien Gesellschaft)",
+   "url": "https://www.tolkiengesellschaft.de/31199/drei-mal-carroux-im-schuber/",
+   "quote": "bei vielen Tolkienfans die beliebtere",
+   "page": ""
+  },
+  {
+   "index": 754,
+   "feature": "divided readership",
+   "claim": "Twenty years after Krege the two translations still split German fans like almost no other topic, per the DTG's 2021 panel announcement.",
+   "source": "20 Jahre nach Krege: Was taugen die deutschen Übersetzungen? (Deutsche Tolkien Gesellschaft)",
+   "url": "https://www.tolkiengesellschaft.de/45883/20-jahre-nach-krege-was-taugen-die-deutschen-uebersetzungen/",
+   "quote": "spalten die Fans wie kaum ein anderes Thema",
+   "page": ""
+  },
+  {
+   "index": 755,
+   "feature": "uniform register criticised by retranslator",
+   "claim": "Krege criticised Carroux for using a similar linguistic style for the speech of both elves and hobbits despite the marked differences in the original.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "similar linguistic style for the speech of both elves and hobbits",
+   "page": ""
+  },
+  {
+   "index": 756,
+   "feature": "non-standard grammar as class marker",
+   "claim": "Domènech's Spanish rendered working-class hobbits in grammatically correct Spanish, losing Tolkien's double negatives, altered agreement and subject duplication.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "grammatically correct Spanish",
+   "page": ""
+  },
+  {
+   "index": 757,
+   "feature": "three-language hierarchy",
+   "claim": "Tolkien's scheme maps Modern English to Westron, Old English to Rohirric and Old Norse to Dale, and Honegger suggests leaving Old English passages untranslated is probably best.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "probably best",
+   "page": ""
+  },
+  {
+   "index": 758,
+   "feature": "nomenclature not to be translated freely",
+   "claim": "Tolkien objected as strongly as possible to free translation of his nomenclature, writing the Guide after the Dutch and Swedish versions.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "as strongly as is possible",
+   "page": ""
+  },
+  {
+   "index": 759,
+   "feature": "embroidered description",
+   "claim": "Tolkien called Bilbo's wealth 'a legend' and Ohlmarks added that his travels were legendary too, an instance of embroidering every description.",
+   "source": "Guide to the Names in The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Guide_to_the_Names_in_The_Lord_of_the_Rings",
+   "quote": "propensity for embroidering every description",
+   "page": ""
+  },
+  {
+   "index": 760,
+   "feature": "fronting as archaism",
+   "claim": "Tolkien's archaic fronting ('Weapons they have laid at your doors') cannot be done in French and is unmarked in German, so its archaic effect is lost in translation.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "Weapons they have laid at your doors",
+   "page": "Archaism"
+  },
+  {
+   "index": 761,
+   "feature": "idiolect",
+   "claim": "Gollum's non-standard syntax and plurals like 'pocketses' resist translation; Ledoux's French diminishes both Gollum's and the Gaffer's peculiarities.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "pocketses",
+   "page": "Idiolect"
+  },
+  {
+   "index": 762,
+   "feature": "mixed register in revision",
+   "claim": "Livnit's Hebrew used a high Biblical register, and Lottem's revision mixed in technical modern Hebrew to an odd result.",
+   "source": "Translating The Lord of the Rings (Wikipedia)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "odd result",
+   "page": "Hebrew"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 748,
+   "verdict": "PARTIAL",
+   "trueWording": "linguistic transposition (e.g. Rohirric = Old English)",
+   "unsupportedLimb": "the stated purpose — keeping linguistic distance while suggesting kinship",
+   "note": "Raw epdf.pub page fetched (612 KB HTML, 359 KB text). Honegger's chapter abstract is present verbatim: 'reproduce the relationship between the various languages of Middle-earth by means of linguistic transposition (e.g. Rohirric = Old English, Language of Dale = Old Norse)' and 'poses an additional challenge to every translator' — which supports the equation limb and the translators-cannot-easily-mirror limb. But the mirror's OCR text of that chapter breaks off mid-sentence on p.6 (thou/ye excursus) and jumps to Nagel's chapter at p.93+, so the rationale limb (distance while suggesting kinship) is nowhere on the reachable text: zero hits for 'kinship', 'archaic', 'Old High German', 'Medieval Latin', 'Éomer' inside the chapter. The page's DOWNLOAD PDF link (epdf.pub/download/...) returns the same HTML, not a PDF, so no fuller text is reachable by that route."
+  },
+  {
+   "index": 749,
+   "verdict": "PARTIAL",
+   "trueWording": "'Penner', 'Chef', 'Imbißbude' werfen den Leser aus der Welt des Buches",
+   "unsupportedLimb": "'Stuss erzählen' as part of the immersion-breaking objection",
+   "note": "Raw archive page fetched and decoded from its declared ISO-8859-1. Poster 'Hmpf' (ex-member of the DTG working group on the Krege translation) writes that 'Chef' as address for Frodo means 'damit werden die sozialen Umstände der Hobbits den unseren gleichgesetzt' — the equates-social-circumstances limb, exact. The same post lists '\"Penner\", \"Chef\", sogar \"Imbißbude\"' as words that 'den Leser völlig aus der Welt des Buches werfen' — immersion, exact. Supporter limb exact too: 'Reiner' praises 'gelungene Optimierung der Lesbarkeit' / 'endlich ein lesbarer Herr der Ringe' and 'Man merkt deutlich, dass die Sprache im Auenland anders ist als bei den Reitern von Rohan und die Sprache der Elben ist wieder eine Andere.' The failing limb: 'Stuss erzählen' occurs exactly once on the page, in Reiner's PRO-Krege post ('Eher der Kritk auszusetzen sind da Begriffe wie Stuss erzählen ... die sind dann vielleicht weniger aus der Zeit der Entstehung'), i.e. flagged as un-period, not as immersion-breaking and not by an objector. Also note the quote token 'Imbissbude' matches verbatim only in a later pro-Krege post ('Weder fande ich dieses Wort noch Imbissbude in irgendeiner Weise schlimm'); the objecting post spells it 'Imbißbude'."
+  },
+  {
+   "index": 750,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre",
+   "note": "Raw phpBB page (thread p.2) fetched. Poll block reads: 'besser als die Carroux-Übersetzung 0 Keine Stimmen / genauso gut wie die Carroux-Übersetzung 0 Keine Stimmen / absolut mißlungen 12 100% / Insgesamt abgegebene Stimmen: 12' — all twelve votes call it an absolute failure. Kringel (12 Feb 2004): 'Die Stimmung ist nicht mehr die Mittelerde-Mittelalter-Atmosphäre, die ich kenne und liebe ... sondern eine GZSZ-Stimmung, das einfach \"zu modern\" klingt' — GZSZ is the German daily soap, so 'soap-opera modernity' is exact. Quote matches word for word; only the sentence-initial capital differs ('Die' on the page vs 'die' in the claim)."
+  },
+  {
+   "index": 751,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"altertümliche\" Sprache gezielt als Stilmittel verwendet wird",
+   "note": "Raw forum page (thread 429, page 2) fetched. Kringel, post #24: 'ein Roman wie \"Der Herr der Ringe\", in dem \"altertümliche\" Sprache gezielt als Stilmittel verwendet wird, braucht keine \"Modernisierung\". Im Gegenteil - derartige Bestrebungen zerstören den gesamten Roman' — every limb of the claim is supported, and the quoted words are on the page in exactly that order; graded SUBSTANCE only because the source puts quotation marks round 'altertümliche', so a strict string match on the claim's quote fails. 'Chef' cited by melanie, post #26 ('Schon allein weil Frode dauernd mit \"Chef\" angeredet wird'); the 'beim Fündburo' line is cited by Wendy, post #33 ('Ich hoffe Aragorn holt uns bald beim Fundbüro ab'), and sandhofer #34 doubts it as one of those 'urban legends' while Kringel #35 insists it is real — so 'alleged' is right."
+  },
+  {
+   "index": 752,
+   "verdict": "PARTIAL",
+   "trueWording": "beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen",
+   "unsupportedLimb": "that redaktion42 (the post's author) holds Carroux keeps one elevated register across all characters and that Krege gave hobbits naturalistic speech — that judgement is a reader's comment on the page, not the blog's",
+   "note": "Raw post fetched. Quote exact, in the blog author's own text about the 2012 reissues: 'Im Jahre 2012 wurden sowohl die Carroux- als auch die Krege-Übersetzung überarbeitet und neu veröffentlicht ... beim Krege wurden die Sünden der ersten Übersetzung herausgestrichen.' The author also supports the jarring-modern-vocabulary limb ('Die Sprache wurde an die moderne Zeit angepasst und es fanden sich ... zu viele flapsige Übersetzungen darin. So wurde Master Frodo (Englisch) mit Chef übersetzt. Nein, das geht nicht.'). But the register contrast the claim attributes to redaktion42 appears only in the reblogged comment by R. M. Beyer: 'Und doch atmet man Staub, wenn man erst einmal die altertümliche Dialogsprache liest. Da spricht der Bauer wie der König. Das ist bei Krege deutlich besser gelöst. Er gab vor allem den Hobbits eine natürlichere Sprache, wenn sich dort auch einige unpassende Begriffe finden wie z.B. „Chef“ und „Firma“.' The blog post itself never says Carroux levels all characters into one formal register."
+  },
+  {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Die Übersetzung von Margaret Carroux ist bei vielen Tolkienfans die beliebtere",
+   "note": "Raw DTG article fetched (Tobias M. Eckrich, 26 August 2019). Quote exact. Boxed-set limb exact too: 'hat Klett-Cotta nach Jahren eine dreibändige Herr der Ringe Ausgabe in der Übersetzung von Margaret Carroux veröffentlicht' / 'Jetzt gibt es wieder eine dreibändige Ausgabe im Schuber', published alongside the 24 August 2019 Howe book, ISBN 978-3-608-96429-5, Übersetzung: Margaret Carroux."
+  },
+  {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "spalten die Fans wie kaum ein anderes Thema",
+   "note": "Raw DTG announcement fetched (Maria Zielenbach, 15 October 2021, panel of 20 October 2021), headline '20 Jahre nach Krege: Was taugen die deutschen Übersetzungen?'. Body: 'Kann man sich in der deutschsprachigen Tolkien-Szene bewegen und nicht schonmal über „Carroux vs. Krege“ diskutiert haben? Vermutlich nicht! Die beiden deutschsprachigen Übersetzungen des Herrn der Ringe spalten die Fans wie kaum ein anderes Thema.' Krege dated on the page to 2000, so 'twenty years after' holds."
+  },
+  {
+   "index": 755,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "criticised by Wolfgang Krege ... for using a similar linguistic style",
+   "note": "URL 'Guide to the Names in The Lord of the Rings' is a hard redirect to 'Translating The Lord of the Rings#Tolkien's \"Guide to the Names...\"'; raw wikitext of the redirect target fetched via ?action=raw. Lead: 'Margaret Carroux's careful German version was criticised by Wolfgang Krege, who made a new translation, for using a similar linguistic style for the speech of both elves and hobbits, despite the marked differences in the original'. Quote exact; both limbs exact."
+  },
+  {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "renders the speech of ... working-class hobbits in grammatically correct Spanish",
+   "note": "Same redirect target, raw wikitext. Spanish (Domènech) 1977–80 section, citing Sandra Bayona: the translation 'often renders the speech of characters such as working-class hobbits in grammatically correct Spanish, where Tolkien used non-standard English'; the listed non-standard forms include 'duplicating the subject (\"Mr. Drogo, he married...\")', 'double negatives (\"Talking won't mend nothing\")' and 'altered subject-verb agreement'; the translation 'either omits these effects altogether, or, as with double negatives, renders them accurately in standard Spanish'. All three named features and the loss limb are on the page."
+  },
+  {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "small amount of Old English is probably best left untranslated",
+   "note": "Same redirect target, raw wikitext, lead paragraph: 'Westron, the common speech of Middle-earth, is \"translated\" as modern English; this stands in relation to Rohirric, an archaic language, which is represented by Old English, and the language of Dale, translated as Old Norse ... Thomas Honegger gives possible solutions for this in French and German, but suggests that the small amount of Old English is probably best left untranslated.' Body repeats it: 'the best answer is probably to leave the Old English names and quoted speech untranslated'. Quote exact; every limb exact."
+  },
+  {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I object as strongly as is possible to the 'translation' of the nomenclature",
+   "note": "Same redirect target, raw wikitext. Blockquote from Letters #190 (to Rayner Unwin, 3 July 1956) on Schuchart's Dutch version: 'In principle I object as strongly as is possible to the \"translation\" of the nomenclature at all (even by a competent person).' The Guide section opens 'Frustrated by his experience with Schuchart's Dutch and Ohlmarks's Swedish translations, Tolkien asked that...', and the lead dates the Guide to 1967, after the Dutch (1956–57) and Swedish (1959–61) versions — so the after-Dutch-and-Swedish limb holds. Note the source objects to translating the nomenclature 'at all', which is if anything stronger than the claim's 'free translation'."
+  },
+  {
+   "index": 759,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien calls Bilbo's wealth 'a legend'; Ohlmarks added his travels were legendary",
+   "note": "Same redirect target, raw wikitext, Swedish (Ohlmarks) section: 'A much more widespread issue was Ohlmarks's \"propensity for embroidering every description\". Thus, Beregond notes, Tolkien calls Bilbo's wealth \"a legend\"; Ohlmarks went beyond Tolkien's text to assert that \"his travels are sägonomsusade (‘legendary’) as well.\"' Quote exact; all limbs exact (the judgement is Beregond's, reported by the article)."
+  },
+  {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cannot be done in French ... in German ... doesn't give an archaic effect",
+   "note": "Raw wikitext of Translating The Lord of the Rings, 'Archaism' section: 'Allan Turner gives the example of fronting, where Tolkien puts the object at the start of a sentence rather than after the verb: \"Weapons they have laid at your doors\". Turner points out that this cannot be done in French, while in German it remains a common construction and doesn't give an archaic effect.' Quote exact; French, German-unmarked and lost-effect limbs all exact."
+  },
+  {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the translation \"diminishes the peculiarities\" of both Gaffer Gamgee and Gollum",
+   "note": "Raw wikitext, 'Idiolect' section plus the French (Ledoux) 1972–73 section. Idiolect: Gollum's 'simple but ungrammatical syntax', 'Gollum's incorrect plurals, subject-verb agreement, and verb tenses impact translation', with 'pocketses' given as the example of excessive pluralisation (the word appears twice on the page, also inside the Ledoux comparison). Ledoux section, citing Ferré: 'Ferré comments that the translation \"diminishes the peculiarities\" of the speech of both Gaffer Gamgee and of Gollum'. Quote exact; both limbs exact."
+  },
+  {
+   "index": 762,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creating an \"odd\" result",
+   "note": "Raw wikitext, Hebrew section. Livnit's high register: 'older Tolkien fans like Livnit's \"old, traditional, and literary Hebrew\" full of mythological, \"mostly Biblical\" terms ... Such language gave the translation an impressively \"high register\"'. Lottem: 'Lottem, charged with editing Livnit's version, mixed his preferred, rather technical, modern Hebrew with Livnit's \"archaic and rich diction\", creating an \"odd\" result.' Every limb supported; graded SUBSTANCE rather than VERBATIM only because the claim's quote 'odd result' is not a contiguous string on the page — the source quotes the single word \"odd\"."
+  }
+ ]
+}

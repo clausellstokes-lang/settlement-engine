@@ -1,0 +1,11 @@
+#ctl-1 PASS(mechanical) DS-DEF-1 :: readiness WEAK [unfolding]
+#ctl-2 PASS(mechanical) DS-DEF-1 :: terrain EXPOSED [visitor]
+#ctl-3 PASS(mechanical) DS-DEF-1 :: readiness ADEQUATE [street]
+#ctl-4 PASS(mechanical) DS-DEF-2 :: Invasion & War: walls AND professional garrison [ledger]
+#ctl-5 PASS(mechanical) DS-DEF-1 :: terrain EXPOSED [street]
+#ctl-6 FAIL CAUSAL :: * [visitor]
+    - MARKS ["receiving"]
+#ctl-7 PASS(mechanical) DS-DEF-1 :: terrain EXPOSED [ledger]
+#ctl-8 PASS(mechanical) DS-DEF-1 :: strategic value LOW [counterforce]
+
+corpus loaded: 2734 variants; 7 pass mechanically, 1 fail (a mechanical pass is NOT a claim-preservation verdict — that is the refuter's job)

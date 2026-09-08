@@ -1,0 +1,38 @@
+[
+ {
+  "id": "ts-1",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "ledger",
+  "index": 0,
+  "grammar": "V5 INSTITUTION → PRESENT",
+  "before": "What governs {settlement} calls itself the {seat}, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake.",
+  "after": "The {seat} is what governs {settlement}, a title precise about the town's size and its pretensions, and one outsiders routinely mistake.",
+  "claims": ["the governing body's title is {seat}", "the title is precise about the town's size", "the title is precise about the town's pretensions", "outsiders routinely mistake it"],
+  "rule": "V5 (the institution opens; licensed by {seat}); R-DA-03 the ' in a way ... mistake' tail becomes a coordinate clause on the same claim; canonical-at-zero: index 0 keeps its claims and its slot set; word order and a rationed phrase spent, no claim"
+ },
+ {
+  "id": "ts-2",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "visitor",
+  "index": 1,
+  "grammar": "V1 PRESENT",
+  "before": "A stranger who addresses the {seat} at {settlement} by any other title is corrected, politely and immediately.",
+  "after": "A stranger who gives the {seat} at {settlement} any other title is corrected at once, and politely.",
+  "claims": ["a stranger who uses another title is corrected", "the correction is polite", "the correction is immediate"],
+  "rule": "V1 (the plain civic fact, one move); a light cut only (word order; 'addresses ... by' → 'gives'); the claim set unchanged; the pool's opener spread kept (A stranger / The {seat} / The hall)"
+ },
+ {
+  "id": "ts-3",
+  "block": "DS-POW-5",
+  "pool": "governing body name: a SLOT, never a baked noun",
+  "angle": "street",
+  "index": 2,
+  "grammar": "V4 OBJECT → PRESENT",
+  "before": "The town at {settlement} calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise.",
+  "after": "The hall at {settlement} goes by its proper title in public and something shorter everywhere else. Both usages are precise.",
+  "claims": ["the proper title is used in public", "a shorter form is used everywhere else", "both usages are precise"],
+  "rule": "V4 (the object opens — the hall, which the BEFORE already names; the licence is the {seat}'s own building, a question for the refuter and the walker's arm D); the ', and both usages' tail becomes its own sentence (R-DA-03); the town remains the implicit user (the street standpoint) — the refuter tests whether dropping the explicit agent drops a claim"
+ }
+]

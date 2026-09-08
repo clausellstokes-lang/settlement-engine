@@ -1,0 +1,235 @@
+{
+ "name": "ai",
+ "chunk": 2,
+ "claims": [
+  {
+   "index": 284,
+   "feature": "undue significance and legacy",
+   "claim": "Generic sentences inflate importance by asserting legacy, pivotal moments and broader trends the sources do not support.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "marking a pivotal moment in the evolution of regional statistics",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 285,
+   "feature": "promotional travel-brochure register",
+   "claim": "Superlatives and brochure adjectives (nestled, breathtaking, vibrant) leak into what should be neutral description.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Nestled within the breathtaking region of Gonder in Ethiopia",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 286,
+   "feature": "participial gloss tail",
+   "claim": "Sentences end in a present-participle clause asserting significance with no supporting substance.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "further enhancing its significance as a dynamic hub",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 287,
+   "feature": "vague attribution",
+   "claim": "Claims are hung on undefined authorities (industry reports, experts, some critics) instead of named sources.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Industry reports suggest",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 288,
+   "feature": "canned notability emphasis",
+   "claim": "Text characterises the independence and reach of its coverage instead of stating what happened.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 289,
+   "feature": "outline-like closer",
+   "claim": "Formulaic 'Despite X, faces challenges... future prospects' paragraphs close sections with vague solutions.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Despite its success, the Panama Canal faces challenges",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 290,
+   "feature": "AI-vocabulary density",
+   "claim": "Abnormal concentration of delve, pivotal, underscore, testament, enduring, tapestry within a short span.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "enduring testament to the influence",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 291,
+   "feature": "copula avoidance",
+   "claim": "Plain 'is/are' is replaced by serves as, functions as, stands as, marks.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "serves as LAAA's exhibition space for contemporary art",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 292,
+   "feature": "vague connection wording",
+   "claim": "'Associated with', 'in connection with' replaces a named relation between people and events.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "being associated with leadership",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 293,
+   "feature": "negative parallelism",
+   "claim": "'Not only X but also Y' and 'not X but Y' contrasts recur far above human frequency.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "not only a work of self-representation, but a visual document",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 294,
+   "feature": "title treated as proper noun",
+   "claim": "Lead sentences treat a list or descriptive title as if it named an entity.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "EuroGames editions is the chronological list",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 295,
+   "feature": "templated Awards and recognition section",
+   "claim": "A near-ubiquitous 'Awards and recognition' section appears in generated biographies regardless of subject.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 296,
+   "feature": "rule of three",
+   "claim": "Items are grouped in threes for rhythm rather than because the record has three.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 297,
+   "feature": "em-dash overuse",
+   "claim": "Em dashes separate clauses at an abnormally high rate.",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  },
+  {
+   "index": 298,
+   "feature": "section-summary recap",
+   "claim": "A redundant sentence summarising the section it closes (a 2022-2024 marker now mostly gone).",
+   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "",
+   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLM writing often puffs up the importance of the subject",
+   "note": "Raw wikitext + rendered page fetched (action=raw and action=render, live, 200). Quote 'marking a pivotal moment in the evolution of regional statistics' occurs exactly once in the rendered text, in the Statistical Institute of Catalonia example under the section 'Undue emphasis on significance, legacy, and broader trends'. Limbs: inflate importance = 'LLM writing often puffs up the importance of the subject matter by adding statements about how arbitrary aspects of the topic represent or contribute to a broader topic'; legacy/pivotal moments/broader trends = the section title plus its words-to-watch box ('is a testament/reminder', 'a crucial/pivotal/vital/significant/key role/moment', 'reflects broader'). The 'sources do not support' limb is supported page-wide rather than in this section: the sibling Superficial analyses section says 'For the purpose of Wikipedia, such comments are usually synthesis or unattributed opinions' and that RAG chatbots attach them to named sources 'regardless of whether those sources say anything close'."
+  },
+  {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs have serious problems keeping a neutral tone",
+   "note": "Quote 'Nestled within the breathtaking region of Gonder in Ethiopia' occurs exactly once in the rendered page, in the June 2023 Alamata (woreda) example under 'Promotional and advertisement-like language' (shortcuts WP:AIPUFFERY/WP:AIPEACOCK). Limbs: neutral-description failure = 'LLMs have serious problems keeping a neutral tone. Even when prompted to use an encyclopedic style, their output will often tend toward advertisement-like writing, or like the prose of a travel guide'; 'nestled' and 'vibrant' are both in that section's words-to-watch box, 'breathtaking' appears in the example itself. One nuance the claim does not carry: the page adds that newer LLMs are 'more subtly positive and tend to avoid obviously superlative statements like \"the best\"', so the strict-superlative reading is time-bound; the peacock/puffery reading is squarely supported."
+  },
+  {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attaching a present participle phrase at the end of sentences",
+   "note": "Quote 'further enhancing its significance as a dynamic hub' occurs once, in the June 2023 Douera example under 'Superficial analyses'. Every limb is on the page: 'AI chatbots tend to insert superficial analysis of information, often in relation to its significance, recognition, or impact. This is often done by attaching a present participle (\"-ing\") phrase at the end of sentences'; the no-substance limb = 'such comments are usually synthesis or unattributed opinions'."
+  },
+  {
+   "index": 287,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Words to watch: Industry reports, Experts argue, Some critics argue",
+   "note": "The exact quotation 'Industry reports suggest' does NOT appear on the page (0 occurrences in the rendered text); only the bare phrase 'Industry reports' appears, once, in the words-to-watch box of 'Vague attributions and overgeneralization of opinions' (WP:AIWEASEL), alongside 'Observers have cited', 'Experts argue' and 'Some critics argue'. The claim itself is fully supported in other words: 'AI chatbots tend to attribute opinions or claims to some vague authority-a practice called weasel wording... They may present views from one or two sources as widely held... mention the existence or opinion of multiple \"reviewers\" or \"scholars\" while only citing one person.' Graded SUBSTANCE, not VERBATIM, solely because the trailing verb 'suggest' is the sweep's, not the page's."
+  },
+  {
+   "index": 288,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "focus is placed on characteristics of the sources themselves",
+   "note": "No quotation was supplied, so this is graded on substance against the raw page. Section 'Canned emphasis on notability, attribution, and media coverage' (WP:OVERATTRIBUTION/WP:AIATTR) supports both limbs: 'LLMs act as if the best way to prove that a subject is notable is to hit readers over the head with claims of notability, often by detailing sources that a subject has been covered in and specifying what kind of sources they are'; and 'the focus is placed on characteristics of the sources themselves: their contents, their availability/unavailability in public searching, and their classification in relation to the media landscape and the article's subject.' Independence and reach specifically: words-to-watch 'independent coverage', 'local/regional/national/[country name] media outlets', 'trade publications', and the November 2025 example 'profiled in multiple high-quality, independent, and widely-read outlets'."
+  },
+  {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Despite its [positive words], [subject] faces challenges...",
+   "note": "Quote 'Despite its success, the Panama Canal faces challenges' occurs once, in the March 2025 Panama Canal example under 'Outline-like conclusions about challenges and future prospects' (WP:FACESCHALLENGES). The formula limb is stated in the page's own words: 'a \"Challenges\" section, which typically begins with a sentence like \"Despite its [positive/promotional words], [article subject] faces challenges...\" and ends with either a vaguely positive assessment of the article subject, or speculation about how ongoing or potential initiatives could benefit the subject'; 'Future Prospects' is named as a companion section, and the vague-solutions limb matches the highlighted tail of the same example ('Future investments in technology... could enhance the canal's efficiency'). Small wording difference only: the page says such paragraphs 'usually appear at the end of articles', where the claim says they close sections."
+  },
+  {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "where there is one, there are likely others",
+   "note": "Quote 'enduring testament to the influence' occurs once, in the May 2025 Somali people example under 'High density of \"AI vocabulary\" words' (WP:AIVOCAB). All six words the claim names are in that section's words-to-watch box: delve, pivotal, underscore, testament, enduring, tapestry (tapestry and landscape flagged 'as an abstract noun'). The density/short-span limb: 'They often co-occur in LLM output: where there is one, there are likely others' and 'an edit (post-2022) introducing lots of them, lots of times, is one of the strongest tells for AI use.' The page also time-slices the vocabulary (delve is listed only in the 2023-mid-2024 GPT-4 band), which the claim does not distinguish."
+  },
+  {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "replaces copulas is or are with serves as a",
+   "note": "Quote 'serves as LAAA's exhibition space for contemporary art' occurs once, on the 'after' side of the Los Angeles Art Association text-diff under 'Avoidance of basic copulatives (\"is\"/\"are\" phrases)' (WP:AINOCOPULA/WP:AIREPRESENTS). Body: 'LLM-generated text often replaces simple constructions that use copulas such as is or are with constructions such as serves as a or mark the.' All four substitutes the claim names appear in the words-to-watch box: 'serves as/stands as/marks/functions as/operates as/represents [a]'."
+  },
+  {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "allude vaguely to the two subjects being associated with each other",
+   "note": "Quote 'being associated with leadership' occurs once, inside the page's own illustrative example under 'Vague expression of connection or association' (WP:AICONNECT/WP:AIASSOCIATION): 'In 2017, sources identified John Doe as being associated with leadership of ExampleCorp'. Both phrases the claim names are in that section's words-to-watch box: 'in connection with/to ...', 'connected with/to', 'in association with ...', 'associated with'. Replacing a named relation: 'Rather than directly stating a connection or relationship between two subjects (e.g., \"In 2017, John Doe was the CEO of ExampleCorp\")...'. The page frames the parties generically as 'two subjects' rather than the claim's 'people and events', though its example set includes a person-to-event instance ('organised in connection with celebrations of the 50th anniversary of Pakistan')."
+  },
+  {
+   "index": 293,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'recur far above human frequency' - the page asserts no frequency comparison against human writers, and explicitly says the construction is common among human writers",
+   "trueWording": "common among human writers, but stereotypically an AI sign",
+   "note": "Quote 'not only a work of self-representation, but a visual document' occurs once, in the April 2025 Self-portrait (Yayoi Kusama) example under 'Negative parallelisms' (WP:AIPARALLEL); both named shapes have their own subsections, 'Not just X, but also Y' and 'Not X, but Y', and the body says 'It is common for LLMs to use parallel constructions involving \"not\", \"but\", or \"however\" such as \"Not only ... but ...\"'. The quantitative limb fails: the page makes no above-human frequency claim and states the opposite nuance - 'While it is common among human writers (especially in \"common misconceptions\" or \"myths busted\" listicles), it is stereotypically an \"AI sign.\"' Note the page's first shape is worded 'Not just X, but also Y', not the claim's 'Not only X but also Y' (the latter does appear in the body text)."
+  },
+  {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lead defines the title as if a standalone real-world entity",
+   "note": "Quote 'EuroGames editions is the chronological list' occurs once, in the July 2025 EuroGames editions example under 'Leads treating Wikipedia lists or broad article titles as proper nouns'. Body supports both limbs: 'In AI-generated articles about topics with a title that is not a proper name, such as a list, the first sentence of the lead may introduce or define the article's title as if it were a standalone real-world entity.'"
+  },
+  {
+   "index": 295,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "'Awards and recognition' is nearly ubiquitous in AI generated articles",
+   "note": "No quotation supplied; graded on substance. The page's '\"Awards and recognition\" section' section says: 'An \"Awards and recognition\" section is particularly common (indeed, also simply a \"Recognition\" section)... While human editors may also include sections about a subject's legacy or impact... the specific wording of \"Awards and recognition\" is nearly ubiquitous in AI generated articles.' Two wording gaps that do not defeat the claim: the page says AI-generated ARTICLES, not biographies specifically (biographies are a subset of that), and 'regardless of subject' is the claim's gloss on 'nearly ubiquitous' rather than page wording."
+  },
+  {
+   "index": 296,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLMs overuse the rule of three",
+   "note": "No quotation supplied; graded on substance. The 'Rule of three' section (WP:RO3) states: 'LLMs overuse the rule of three. This can take different forms, from \"adjective, adjective, adjective\" to \"short phrase, short phrase, and short phrase\". LLMs often use this structure to make superficial analyses appear more comprehensive.' The claim's 'for rhythm rather than because the record has three' is a fair gloss of overuse plus 'stylistic flourishes' ('This sign is stronger when it appears in contexts where most people would not bother to include such stylistic flourishes, like edit summaries'), but the page never phrases the contrast in terms of what the record contains."
+  },
+  {
+   "index": 297,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "uses them more often than nonprofessional human-written text of the same genre",
+   "note": "No quotation supplied; graded on substance. Section 'Overuse of em dashes' (WP:AIDASH): 'LLM output uses them more often than nonprofessional human-written text of the same genre, and uses them in places where humans are more likely to use commas, parentheses, colons, or (misused) hyphens and en dashes' - which supports both the rate limb and the clause-separation limb. Two qualifications the page carries and the claim does not: the baseline is NONPROFESSIONAL human writing of the same genre, and a maintenance box dated September 2026 says the sign 'seems to be less common in current LLM output' and should probably move to Historical indicators, citing a July 2026 Economist piece that 'of contemporary models only Claude used em dashes more than professional writers, and ChatGPT used them less.' The page also notes it is 'most useful... in combination with other indicators, not by itself' and is 'much more common on discussion pages than in article text'."
+  },
+  {
+   "index": 298,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the '2022-2024' date window - the page attaches no date range to section summaries (the dated heading 'Didactic disclaimers (November 2022-2024)' is a different sign)",
+   "trueWording": "older LLMs often ended sections by summarizing and restating",
+   "note": "No quotation supplied; graded on substance against the raw page. The 'Section summaries' subsection (WP:CONCLUSION/WP:INCONCLUSION) supports the descriptive limb: 'When generating longer outputs (such as when told to \"write an article\"), older LLMs often added sections titled \"Conclusion\" or similar, and often ended paragraphs or sections by summarizing and restating its core idea', with words to watch 'In summary', 'In conclusion', 'Overall'. The 'now mostly gone' limb is supported by its placement under '== Historical indicators ==': 'The following indicators were common in text generated by older AI models, but are much less frequent in newer models... Dates are approximate.' But no 2022-2024 window is given for THIS sign - the page's only such heading window belongs to 'Didactic disclaimers (November 2022-2024)', and the section-summary examples are drawn from 2023 and 2024 revisions."
+  }
+ ]
+}

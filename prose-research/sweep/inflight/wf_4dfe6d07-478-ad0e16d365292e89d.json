@@ -1,0 +1,47 @@
+{
+ "role": "finder",
+ "name": "hobb",
+ "angle": "close",
+ "tag": null,
+ "lines": 70,
+ "firstTs": "2026-09-06T11:45:38.439Z",
+ "lastTs": "2026-09-06T11:47:08.155Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 1,
+  "WebSearch": 5,
+  "WebFetch": 18
+ },
+ "urlsFetched": [
+  "https://www.sffchronicles.com/threads/47675/",
+  "https://www.goodreads.com/topic/show/190789-august-09-discussion-assassin-s-apprentice-character-the-narrator-f",
+  "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+  "https://paceamorelibri.wordpress.com/2019/02/18/book-review-assassins-apprentice-by-robin-hobb/",
+  "https://wetranscripts.livejournal.com/121439.html",
+  "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/how-to-write-compelling-characters-panel-dragonsteel-nexus-2024",
+  "https://fantasy-faction.com/2013/robin-hobb-interview-part-two",
+  "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+  "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+  "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+  "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+  "https://www.lemon8-app.com/mygaybookcase/7216380295170556421?region=us",
+  "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+  "https://lexlingua.livejournal.com/33522.html",
+  "https://forum.malazanempire.com/topic/3961-the-liveship-traders-series-by-robin-hobb/",
+  "https://hearwritenow.com/reviews/fantasy/liveship/",
+  "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Let me record the first batch's findings and fire the next wave of searches in parallel, aiming at reddit, Tor.com, video essays, Hobb's own blog, and the specific consequence device.",
+ "run": "wf_4dfe6d07-478",
+ "agent": "ad0e16d365292e89d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_4dfe6d07-478/agent-ad0e16d365292e89d.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-close.json",
+  "claims": 109,
+  "complete": true,
+  "mtime": "12:23:27"
+ }
+}

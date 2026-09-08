@@ -1,0 +1,236 @@
+{
+ "name": "ai",
+ "chunk": 6,
+ "claims": [
+  {
+   "index": 1110,
+   "feature": "other: mechanism of blandness",
+   "claim": "Meister, Wiher, Pimentel and Cotterell propose that text perceived as human-like carries an information content within a small interval around the entropy of natural language.",
+   "source": "Clara Meister, Gian Wiher, Tiago Pimentel and Ryan Cotterell, 'On the probability-quality paradox in language generation', ACL 2022 (arXiv v1, 31 Mar 2022)",
+   "url": "https://arxiv.org/abs/2203.17217",
+   "quote": "high-quality text usually has information content close to",
+   "page": "section 4.2, Results"
+  },
+  {
+   "index": 1111,
+   "feature": "other: mechanism of blandness",
+   "claim": "Meister and colleagues state that low-information strings may be seen as boring and uninformative, giving the low-probability end of the paradox a communicative rather than statistical reading.",
+   "source": "Clara Meister, Gian Wiher, Tiago Pimentel and Ryan Cotterell, 'On the probability-quality paradox in language generation', ACL 2022 (arXiv v1, 31 Mar 2022)",
+   "url": "https://arxiv.org/abs/2203.17217",
+   "quote": "be seen as boring and uninformative",
+   "page": "section 1, Introduction"
+  },
+  {
+   "index": 1113,
+   "feature": "other: mechanism of blandness",
+   "claim": "Welleck and colleagues argue that the maximum-likelihood objective itself is at fault for degeneration, not merely the decoding rule laid over it.",
+   "source": "Sean Welleck, Ilia Kulikov, Stephen Roller, Emily Dinan, Kyunghyun Cho and Jason Weston, 'Neural Text Generation with Unlikelihood Training', ICLR 2020 (arXiv v2, 26 Sep 2019)",
+   "url": "https://arxiv.org/abs/1908.04319",
+   "quote": "the likelihood objective itself is at fault",
+   "page": "Abstract"
+  },
+  {
+   "index": 1123,
+   "feature": "other: mechanism of blandness",
+   "claim": "Zhang and colleagues identify typicality bias in human preference data, the annotator's systematic preference for familiar text, as a data-level driver of mode collapse.",
+   "source": "Jiayi Zhang, Simon Yu, Derek Chong, Anthony Sicilia, Michael R. Tomz, Christopher D. Manning and Weiyan Shi, 'Verbalized Sampling: How to Mitigate Mode Collapse and Unlock LLM Diversity', arXiv v4, 15 Jul 2026",
+   "url": "https://arxiv.org/abs/2510.01171",
+   "quote": "typicality bias in preference data",
+   "page": "Abstract"
+  },
+  {
+   "index": 1140,
+   "feature": "other: generic superlative in the evaluative close",
+   "claim": "A guidebook on Lviv closed by inviting the reader to an unforgettable adventure in one of Eastern Europe's most captivating destinations, a passage the reporters quote as characteristic of the books.",
+   "source": "Text of an AI-suspected Lviv guidebook (May 2023), quoted by The New York Times, 5 August 2023",
+   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+   "quote": "an unforgettable adventure in one of Eastern Europe’s most captivating destinations",
+   "page": "section on troubling omissions"
+  },
+  {
+   "index": 1141,
+   "feature": "other: material omission in place description",
+   "claim": "That Lviv guidebook, published in May 2023, fails to mention the war.",
+   "source": "Seth Kugel and Stephen Hiltner, The New York Times, 5 August 2023",
+   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+   "quote": "also fails to mention the war",
+   "page": "section on troubling omissions"
+  },
+  {
+   "index": 1142,
+   "feature": "other: material omission in place description",
+   "claim": "A Moscow guidebook published in July 2023 makes no mention of Russia's ongoing war with Ukraine.",
+   "source": "Seth Kugel and Stephen Hiltner, The New York Times, 5 August 2023",
+   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+   "quote": "makes no mention of Russia’s ongoing war with Ukraine",
+   "page": "section on troubling omissions"
+  },
+  {
+   "index": 1143,
+   "feature": "other: the missing particular (first-hand observation)",
+   "claim": "Rick Steves said that writing a good guidebook requires being in the field.",
+   "source": "Rick Steves quoted in The New York Times, 5 August 2023",
+   "url": "https://www.nytimes.com/2023/08/05/travel/amazon-guidebooks-artificial-intelligence.html",
+   "quote": "you’ve got to be there in the field to write one",
+   "page": "section headed 'You've got to be there in the field'"
+  },
+  {
+   "index": 1146,
+   "feature": "other: refusal to let AI write history and place sections",
+   "claim": "A Wikivoyage administrator said in the AI-policy discussion that history, culture and climate are sections he absolutely does not want an AI to handle.",
+   "source": "User:LPfi, Wikivoyage talk:AI guidelines, 16 May 2026",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
+   "quote": "History, culture, climate etc. are things I absolutely don't want",
+   "page": "section 'Discussion on AI policy'"
+  },
+  {
+   "index": 1147,
+   "feature": "other: plausible completeness that omits the important",
+   "claim": "The same editor argued that a background section which looks complete but misses important points is as bad as a factual error about a train service.",
+   "source": "User:LPfi, Wikivoyage talk:AI guidelines, 16 May 2026",
+   "url": "https://en.wikivoyage.org/wiki/Wikivoyage_talk:AI_guidelines",
+   "quote": "as bad as telling about a train that doesn't run",
+   "page": "section 'Discussion on AI policy'"
+  },
+  {
+   "index": 1151,
+   "feature": "other: human prose preferred for style",
+   "claim": "The Wikivoyage draft guideline opens by telling contributors that prose is nearly always better written by them, for style.",
+   "source": "User:LPfi/AI guidelines, English Wikivoyage draft marked experimental, revision of September 2026",
+   "url": "https://en.wikivoyage.org/wiki/User:LPfi/AI_guidelines",
+   "quote": "The prose is nearly always better written by you, for style",
+   "page": "lead"
+  },
+  {
+   "index": 1156,
+   "feature": "other: generic epithet in place description",
+   "claim": "A travel writer following a ChatGPT itinerary quotes the model's own place words as charming backstreets and authentic souvenir shops, flagging them as the robot's phrasing.",
+   "source": "Thom Brown, Intrepid Times, 2 January 2026",
+   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+   "quote": "“charming backstreets” and “authentic souvenir shops” (the robot’s words",
+   "page": "afternoon of the ChatGPT day"
+  },
+  {
+   "index": 1157,
+   "feature": "other: invented particular",
+   "claim": "The dishes ChatGPT recommended at the restaurant it named did not exist on that restaurant's menu.",
+   "source": "Thom Brown, Intrepid Times, 2 January 2026",
+   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+   "quote": "the food suggestions offered by my artificial master do not exist",
+   "page": "evening of the ChatGPT day"
+  },
+  {
+   "index": 1159,
+   "feature": "other: exhaustion of the particular",
+   "claim": "The writer reports that the model, kept to one small district, seemed to run out of ideas and told him to watch locals buying coffee.",
+   "source": "Thom Brown, Intrepid Times, 2 January 2026",
+   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+   "quote": "it seems to have run out of ideas",
+   "page": "comparison section after the Lonely Planet day"
+  },
+  {
+   "index": 1160,
+   "feature": "other: the missing particular (institutional fact)",
+   "claim": "The human guidebook supplied an institutional particular about a named cathedral that the model's itinerary did not, that it was set to transform into a planetarium in the 1960s.",
+   "source": "Thom Brown, Intrepid Times, 2 January 2026, on Lonely Planet's Estonia, Latvia & Lithuania",
+   "url": "https://intrepidtimes.com/2026/01/chatgpt-vs-lonely-planet-tallinn-day-trip/",
+   "quote": "set to transform into a planetarium in the 1960s",
+   "page": "Sunday, the Lonely Planet day"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"high-quality text usually has information content close to\" H(q); section 4.2",
+   "note": "arXiv abs page + ar5iv full text of 2203.17217 fetched raw (curl, browser UA). Quote is word-for-word in section 4.2 Results. The claim's substance is the paper's stated 'expected information hypothesis' in section 1/3.2: text perceived as human-like should have information content within a small interval around the entropy of natural language strings. All four authors and the 31 Mar 2022 submission date confirmed on the abs page."
+  },
+  {
+   "index": 1111,
+   "verdict": "PARTIAL",
+   "trueWording": "Introduction: \"low-information strings may be seen as boring and uninformative\"",
+   "unsupportedLimb": "\"the low-probability end of the paradox\" - the paper places boring/uninformative strings at the LOW-INFORMATION extreme, which (information = negative log-probability) is the HIGH-probability end; the low-probability end is the one it calls \"hard to process\"",
+   "note": "Quote verbatim in section 1, Introduction, immediately after 'At one extreme, strings with more-than-expected information may be hard to process... At the other extreme, low-information strings may be seen as boring and uninformative.' The communicative framing limb IS supported (the passage rests on 'the goal of human communication is to transmit messages efficiently and reliably'), but the claim attaches the quote to the wrong end of the paradox."
+  },
+  {
+   "index": 1113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Abstract: \"we show that the likelihood objective itself is at fault\"",
+   "note": "arxiv.org/abs/1908.04319 fetched raw. Quote word-for-word in the abstract. Both limbs supported: the abstract first says post-hoc fixes 'in particular top-k and nucleus sampling' do not address the poor token-level probabilities, then blames the likelihood objective itself - i.e. the objective, not merely the decoding rule. Dateline confirms v2, 26 Sep 2019; all six authors listed."
+  },
+  {
+   "index": 1123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Abstract: \"typicality bias in preference data, whereby annotators systematically favor familiar text\"",
+   "note": "arxiv.org/abs/2510.01171 fetched raw. Quote word-for-word. Every limb supported by the abstract: it is named 'a fundamental, pervasive data-level driver' of mode collapse, defined as annotators systematically favouring familiar text. Dateline confirms v4, last revised 15 Jul 2026."
+  },
+  {
+   "index": 1140,
+   "verdict": "PARTIAL",
+   "trueWording": "Quote exact, but framed under \"troubling omissions\", not as close or characteristic",
+   "unsupportedLimb": "(a) that the guidebook \"closed by\" this passage - the article gives no position in the book, saying only that it 'encourages readers to'; (b) that the reporters quote it 'as characteristic of the books' - it appears in the troubling-omissions-and-outdated-information paragraph, not in any discussion of house style",
+   "note": "NYT live URL returned 403; recovered via Wayback raw capture web.archive.org/web/20260207205925id_/. The quoted words appear verbatim (curly apostrophe in 'Europe's'): the Lviv guidebook 'encourages readers to \"pack your bags and get ready for an unforgettable adventure in one of Eastern Europe's most captivating destinations.\"' Nothing on the page locates it at the book's end or calls it typical."
+  },
+  {
+   "index": 1141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"published in May, also fails to mention the war\" (Lviv, Ukraine)",
+   "note": "Same Wayback raw capture. Sentence reads 'And a guidebook on Lviv, Ukraine, published in May, also fails to mention the war...'. Article is dated 5 August 2023, so 'published in May' is May 2023. Bylines Seth Kugel and Stephen Hiltner confirmed at the foot of the page."
+  },
+  {
+   "index": 1142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"makes no mention of Russia's ongoing war with Ukraine\" (Moscow, July)",
+   "note": "Same Wayback raw capture. 'A guidebook on Moscow published in July under the name Rebecca R. Lim ... makes no mention of Russia's ongoing war with Ukraine and includes no up-to-date safety information.' July = July 2023 given the 5 August 2023 dateline. Quote word-for-word (curly apostrophe)."
+  },
+  {
+   "index": 1143,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"you've got to be there in the field to write one\"",
+   "note": "Same Wayback raw capture. Attributed to 'The real Mr. Steves' - i.e. Rick Steves, as distinguished throughout from the fabricated 'Mike Steves' - and used as the section heading ‘You've Got to Be There in the Field’. Full sentence: 'And I think you've got to be there in the field to write one.'"
+  },
+  {
+   "index": 1146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"History, culture, climate etc. are things I absolutely don't want\" AI handling",
+   "note": "Raw wikitext fetched via action=raw. Quote word-for-word in section '== Discussion on AI policy ==', in LPfi's bulleted comment signed 15:51, 16 May 2026 (UTC). Administrator limb checked independently: the MediaWiki users API returns groups ['sysop','*','user','autoconfirmed'] for LPfi on en.wikivoyage."
+  },
+  {
+   "index": 1147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"as bad as telling about a train that doesn't run\"",
+   "note": "Same raw wikitext, same LPfi comment: 'An Understand that looks complete but misrepresents or misses important points can be as bad as telling about a train that doesn't run or a restaurant that isn't there.' 'Understand' is Wikivoyage's background section, so the paraphrase holds; note the source hedges with 'can be as bad as' where the claim states it flatly."
+  },
+  {
+   "index": 1151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The prose is nearly always better written by you, for style\"",
+   "note": "Raw wikitext of User:LPfi/AI guidelines fetched via action=raw. The page opens with {{experimental}}, then 'Be very careful if you use artificial intelligence (AI). The prose is nearly always better written by you, for style and to avoid potential copyright and plagiarism issues.' So 'opens by', 'for style' and 'marked experimental' all hold; the source adds copyright/plagiarism as a second reason. Revision date checked via the revisions API: latest edits 2026-09-03, consistent with 'revision of September 2026'."
+  },
+  {
+   "index": 1156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"charming backstreets\" and \"authentic souvenir shops\" (the robot's words, not mine)",
+   "note": "intrepidtimes.com fetched raw (HTTP 200, no paywall); datePublished 2026-01-02, byline Thom Brown. Quote word-for-word in the ChatGPT-day afternoon passage: 'it tells me to continue exploring these \"charming backstreets\" and \"authentic souvenir shops\" (the robot's words, not mine) until it's time to hit a hilltop viewpoint for the sunset at 4 pm.' The parenthesis is the flagging limb."
+  },
+  {
+   "index": 1157,
+   "verdict": "PARTIAL",
+   "trueWording": "Menu was Pegasus's, the host's alternative after ChatGPT's pick was full",
+   "unsupportedLimb": "\"at the restaurant it named ... that restaurant's menu\" - the ChatGPT-named restaurant could not seat him; the menu lacking the dishes belongs to Pegasus, a place the host recommended instead",
+   "note": "Quote verbatim: 'Naturally, the food suggestions offered by my artificial master do not exist on the menu.' But the preceding sentences read: 'the restaurant recommended by ChatGPT is overflowing with diners. They can't fit me in... The host... recommends some alternatives, leading to a place called Pegasus...'. So the page does not support the dishes being absent from the ChatGPT-named restaurant's own menu."
+  },
+  {
+   "index": 1159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"run out of ideas, ordering me to observe locals grabbing coffee\"",
+   "note": "Quote word-for-word in the post-Lonely-Planet comparison passage: 'While ChatGPT is determined to confine me to the boundaries of Tallinn's 800-year-old stone walls... At one point, it seems to have run out of ideas, ordering me to observe locals grabbing coffee.' Confinement to the Old Town, the exhaustion and the coffee-watching order are all on the page."
+  },
+  {
+   "index": 1160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"set to transform into a planetarium in the 1960s\" (Alexander Nevsky Cathedral)",
+   "note": "Quote word-for-word in the Sunday Lonely Planet section: 'the ornate mushroom-domed Alexander Nevsky Cathedral, which Lonely Planet tells me was set to transform into a planetarium in the 1960s, but controversially remains a Russian Orthodox church.' The 'model's itinerary did not' limb is supported two sentences later: 'I'm amazed ChatGPT didn't suggest them.'"
+  }
+ ]
+}

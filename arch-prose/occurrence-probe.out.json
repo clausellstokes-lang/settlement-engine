@@ -1,0 +1,205 @@
+{
+ "N": 25,
+ "cells": [
+  [
+   "DS-GEN-5::ordinary (route road and the default)",
+   25
+  ],
+  [
+   "DS-GEN-3::prosperity: Moderate / Modest",
+   6
+  ],
+  [
+   "DS-GEN-3::economicViability.viable: true",
+   24
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Lightly Defended",
+   3
+  ],
+  [
+   "DS-GEN-3::scores.military: ADEQUATE",
+   7
+  ],
+  [
+   "DS-GEN-3::scores.monster: WEAK",
+   4
+  ],
+  [
+   "DS-GEN-3::scores.internal: WEAK",
+   11
+  ],
+  [
+   "DS-GEN-3::scores.economic: WEAK",
+   9
+  ],
+  [
+   "DS-GEN-3::scores.magical: CRITICAL",
+   11
+  ],
+  [
+   "DS-GEN-3::foodSecurity.label: Secure",
+   17
+  ],
+  [
+   "DS-GEN-12::OPEN-GROUND",
+   25
+  ],
+  [
+   "DS-GEN-13::NO-MARKET",
+   9
+  ],
+  [
+   "DS-GEN-17::BARE",
+   9
+  ],
+  [
+   "DS-GEN-11::viable: true: the arithmetic closes",
+   24
+  ],
+  [
+   "DS-GEN-11::THE FIRST-SURVEY QUALIFICATION",
+   25
+  ],
+  [
+   "DS-GEN-14::GROWN-UNRECORDED",
+   25
+  ],
+  [
+   "DS-GEN-3::prosperity: Comfortable / Prosperous",
+   15
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Defensible",
+   2
+  ],
+  [
+   "DS-GEN-3::scores.monster: ADEQUATE",
+   3
+  ],
+  [
+   "DS-GEN-3::scores.economic: ADEQUATE",
+   2
+  ],
+  [
+   "DS-GEN-3::scores.magical: WEAK",
+   3
+  ],
+  [
+   "DS-GEN-7::structuralSuggestions[]",
+   11
+  ],
+  [
+   "DS-GEN-13::MARKET-OPEN",
+   16
+  ],
+  [
+   "DS-GEN-17::GARRISONED",
+   6
+  ],
+  [
+   "DS-GEN-2::intensity: moderate",
+   7
+  ],
+  [
+   "DS-GEN-3::scores.economic: STRONG",
+   11
+  ],
+  [
+   "DS-GEN-3::scores.magical: ADEQUATE",
+   8
+  ],
+  [
+   "DS-GEN-3::safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   6
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Well-Defended",
+   8
+  ],
+  [
+   "DS-GEN-3::scores.military: STRONG",
+   11
+  ],
+  [
+   "DS-GEN-3::foodSecurity.label: Pressured",
+   7
+  ],
+  [
+   "DS-GEN-17::ADMINISTERED",
+   10
+  ],
+  [
+   "DS-GEN-3::scores.monster: STRONG",
+   10
+  ],
+  [
+   "DS-GEN-3::scores.internal: ADEQUATE",
+   10
+  ],
+  [
+   "DS-GEN-3::prosperity: Struggling / Poor",
+   4
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Vulnerable",
+   7
+  ],
+  [
+   "DS-GEN-3::scores.military: CRITICAL",
+   6
+  ],
+  [
+   "DS-GEN-3::scores.monster: CRITICAL",
+   8
+  ],
+  [
+   "DS-GEN-2::intensity: low",
+   11
+  ],
+  [
+   "DS-GEN-3::scores.military: WEAK",
+   1
+  ],
+  [
+   "DS-GEN-2::intensity: high",
+   1
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Fortress",
+   3
+  ],
+  [
+   "DS-GEN-3::scores.magical: STRONG",
+   3
+  ],
+  [
+   "DS-GEN-3::safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   3
+  ],
+  [
+   "DS-GEN-3::economicViability.viable: false",
+   1
+  ],
+  [
+   "DS-GEN-3::defenseProfile.readiness.label: Undefended",
+   2
+  ],
+  [
+   "DS-GEN-3::scores.internal: CRITICAL",
+   4
+  ],
+  [
+   "DS-GEN-3::scores.economic: CRITICAL",
+   3
+  ],
+  [
+   "DS-GEN-3::foodSecurity.label: Deficit × Active Famine",
+   1
+  ],
+  [
+   "DS-GEN-11::viable: false: the arithmetic does not close",
+   1
+  ]
+ ]
+}

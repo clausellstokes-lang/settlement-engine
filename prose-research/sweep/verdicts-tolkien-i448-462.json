@@ -1,0 +1,238 @@
+{
+ "name": "tolkien",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 448,
+   "feature": "annals versus Tales as two modes",
+   "claim": "Tolkien told Waldman that the Rings of Power and the Downfall of Númenor were dealt with annalistically and in two Tales or Accounts, naming a two-mode scheme of compressed annal and expanded tale.",
+   "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Letter 131",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+   "quote": "dealt with annalistically, and in two Tales or Accounts",
+   "page": "p. 8"
+  },
+  {
+   "index": 449,
+   "feature": "Anglo-Saxon Chronicle model",
+   "claim": "Tolkien's annals are modelled on the Anglo-Saxon Chronicle, with entries opening 'Here' or 'In this year', and his Old English versions use the early West Saxon dialect of the Chronicle's earliest parts.",
+   "source": "Himring, 'Fingon's rescue of Maedhros in Old English' (Silmarillion Writers' Guild)",
+   "url": "https://www.silmarillionwritersguild.org/node/1854/single?page=0",
+   "quote": "early West Saxon (second half of the ninth century)",
+   "page": "notes"
+  },
+  {
+   "index": 450,
+   "feature": "annalistic compression",
+   "claim": "The Silmarillion uses a compressed style in which events are briefly documented as if in annals recording history and legend, with minimal dialogue, which makes it feel more distant and difficult.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+   "quote": "as if in annals recording history and legend",
+   "page": "§ The Silmarillion"
+  },
+  {
+   "index": 451,
+   "feature": "varying styles as a depth factor",
+   "claim": "Drout, Hitotsubashi and Scavera identify four factors behind the impression of depth, the fourth being different texts written in varying styles as if by different hands.",
+   "source": "Wikipedia, 'Literary devices in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+   "quote": "Different texts written in varying styles",
+   "page": "§ Impression of depth"
+  },
+  {
+   "index": 452,
+   "feature": "multiple-manuscripts device",
+   "claim": "Sipahi highlights the Prologue's device of multiple manuscripts, redactions and translations of the Red Book as the framework that establishes authenticity, while Brooke-Rose dismissed the genealogies and histories as unnecessary to the narrative.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "",
+   "page": "§ Factors; § Reception"
+  },
+  {
+   "index": 453,
+   "feature": "history true or feigned",
+   "claim": "Bowman shows Tolkien blurring the line between story and history in the Appendices, following his stated preference for history, true or feigned.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "quote": "history, true or feigned",
+   "page": "§ History, true or feigned"
+  },
+  {
+   "index": 454,
+   "feature": "record names its own scribes",
+   "claim": "The Tale of Aragorn and Arwen is attributed within the frame to Barahir, grandson of Faramir, writing after Aragorn's death, with an abbreviated version entered in the Thain's Book by Findegil.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "quote": "written after Aragorn's death by Barahir",
+   "page": "§ Frame story"
+  },
+  {
+   "index": 455,
+   "feature": "embedded first-person witnesses in annals",
+   "claim": "Barkley argues the main part of the Tale is narrated by Aragorn and Armstrong considers Arwen as narrator after his death, so the annal admits embedded first-person witnesses within an editorial frame.",
+   "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+   "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+   "quote": "narrated by Aragorn",
+   "page": "§ Analysis"
+  },
+  {
+   "index": 456,
+   "feature": "historian's narrative style",
+   "claim": "Appendix A reads like a real history because its narrative style is that of a historian summarising primary documents rather than a novelist.",
+   "source": "Tolkien Geek, 'Appendix A (Part One)'",
+   "url": "https://tolkiengeek.blogspot.com/2006/02/appendix-part-one.html",
+   "quote": "reads like a real history",
+   "page": "main text"
+  },
+  {
+   "index": 457,
+   "feature": "appendices as guidebook",
+   "claim": "The Appendices function as a guidebook to the relics of Middle-earth's history and, in Tolkien's own words quoted by Gray, played a very large part in readers' pleasure.",
+   "source": "Richard Gray, 'The Read Goes Ever On: Appendices' (The Reel Bits)",
+   "url": "https://thereelbits.com/2021/11/25/the-read-goes-ever-on-appendices/",
+   "quote": "a guidebook to those relics",
+   "page": "main text"
+  },
+  {
+   "index": 458,
+   "feature": "modern words in nineteenth-century structures",
+   "claim": "Siepmann's corpus comparison finds Tolkien uses roughly twice the nineteenth-century key words of his baseline and sets modern words inside nineteenth-century structural patterns so that common English words are rendered strange.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+   "quote": "common English words are rendered strange",
+   "page": "pp. 3–4"
+  },
+  {
+   "index": 459,
+   "feature": "per-character registers",
+   "claim": "Kullmann's character-by-character stylistics finds Gandalf and Frodo the most flexible registers, Sam the most evolving, Gimli and Legolas the most traditional, and Merry and Pippin speaking common English as reality-based touchstones.",
+   "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+   "quote": "reality-based touchstones",
+   "page": "p. 8"
+  },
+  {
+   "index": 460,
+   "feature": "names generate story",
+   "claim": "Shippey reports Tolkien's working rule that one should always start with a name, because a name produces a story, which underlies the place-name etymologies that open and close his civic records.",
+   "source": "Tom Shippey, 'J.R.R. Tolkien and Philology' (Tolkien Estate)",
+   "url": "https://www.tolkienestate.com/scholarship/tom-shippey-j-r-r-tolkien-and-philology/",
+   "quote": "Give me a name and it produces a story",
+   "page": "main text"
+  },
+  {
+   "index": 461,
+   "feature": "register modulation / narrator intrusion",
+   "claim": "The fox's thoughts in Fellowship ch. 3 are a failure of tone, an intrusive narrator jarring the reader after ch. 2's seriousness.",
+   "source": "Michael Drout, Wormtalk, 'How to Critique Tolkien's Prose Style' (2007-04-12)",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "moving us back towards the intrusive narrator of The Hobbit",
+   "page": ""
+  },
+  {
+   "index": 462,
+   "feature": "ornamental vs functional archaism",
+   "claim": "'thrawn' is decorative archaism, whereas eyot, laving, louver and dwimmerlaik are precise technical words with a function.",
+   "source": "Drout, Wormtalk 2007-04-12",
+   "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+   "quote": "merely an ornamental archaism",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 448,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien: \"dealt with annalistically, and in two Tales or Accounts\" (Letters 151)",
+   "note": "Raw PDF reached via Wayback (live viewcontent.cgi 403s). Quote verbatim on PDF sheet 10 = article p. 8: 'Tolkien writes that The Rings of Power and the Downfall of Numenor are \"dealt with annalistically, and in two Tales or Accounts\" (Letters 151)'. Schuerer does NOT read this as two modes: he says 'These tales or accounts are perhaps the annals collected in the section \"The Tale of Years of the Second Age\"', i.e. he identifies the tales WITH the annals rather than opposing compressed annal to expanded tale.",
+   "unsupportedLimb": "naming a two-mode scheme of compressed annal and expanded tale"
+  },
+  {
+   "index": 449,
+   "verdict": "PARTIAL",
+   "trueWording": "annals clearly inspired by Anglo-Saxon Chronicle; dialect early West Saxon",
+   "note": "Quote verbatim: 'The dialect of these annals is the early West Saxon (second half of the ninth century) of traditional Old English textbooks and of the earliest parts of the Anglo-Saxon Chronicle'; also 'The style of Tolkien's annals ... is clearly inspired by the Anglo-Saxon Chronicle'. The opening-formula limb is only shown by one example, never stated as a convention: the AB I year-2 entry reads 'Here Fingon son of Fingolfin healed the feud...' / OE 'Her Fingon Fingolfines sunu...' cribbed as 'Here (this year)'. The page never writes 'In this year', and the other displayed entry opens 'Tha weartd' ('Then was').",
+   "unsupportedLimb": "that annal entries open 'Here' or 'In this year' as a convention"
+  },
+  {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "compressed style; events briefly documented as if in annals",
+   "note": "Wikitext, section 'The Silmarillion': 'written in a compressed style, in which events are briefly documented as if in [[annals]] recording history and legend' (cited to Bratman 2000). Minimal dialogue: 'Many chapters have little in the way of dialogue'. Distant: Shippey, 'a more distant and mythic work'. Difficult: 'making the work feel more difficult' (Turner). Note the page distributes the causation across three sources rather than deriving distance/difficulty from the annalistic mode."
+  },
+  {
+   "index": 451,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "writing different texts in varying styles",
+   "note": "Substance exact: 'The effect was constructed on at least four factors, namely the enormous scale ... the apparently casual and incomplete mentions ... multiple inconsistent accounts, as in real history; and writing different texts in varying styles' (sfn Drout|Hitotsubashi|Scavera|2014, pp. 167-211). Not VERBATIM because the supplied quote 'Different texts written in varying styles' is a reordering; the page says 'writing different texts in varying styles' (that exact phrasing is also on the companion 'Impression of depth' article, which additionally heads a section 'Varying styles'). Page says 'at least four factors', not exactly four."
+  },
+  {
+   "index": 452,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "details the various copies, redactions, and translations of the Red Book",
+   "note": "No quote supplied, so verbatim grading not applicable. Sipahi limb supported under Factors > 'Multiple accounts, apparent contradictions': 'Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue ... and then details the various copies, redactions, and translations that were made of the fictive Red Book of Westmarch' (page says 'copies', claim says 'manuscripts'). Brooke-Rose limb supported under Reception: she 'attacked \"the histories and genealogies\" as not \"in the least necessary to the narrative\"'. Caveat: 'establishes authenticity' is the article's lead-level framing of the whole depth effect ('attractively authentic'), not something the page attributes to Sipahi."
+  },
+  {
+   "index": 453,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To Bowman, this blurs the line between story and history",
+   "note": "Section is literally headed '\"History, true or feigned\"'. Body: 'To Bowman, this blurs the line between story and history, something that as she notes Tolkien much preferred, whether \"true or feigned\"', with the Foreword footnote 'I much prefer history, true or feigned, with its varied applicability...'. The instance analysed (Aragorn naming Arwen Tinuviel, comparing himself with Beren) sits inside Appendix A, so the 'in the Appendices' limb holds."
+  },
+  {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written after Aragorn's death by Barahir, grandson of Faramir and Eowyn",
+   "note": "Frame-story sentence verbatim: 'the frame story is that the tale was written after Aragorn's death by Barahir, grandson of Faramir and Eowyn, and that an abbreviated version of the tale was included in the copy of the Thain's Book made by Findegil.' Page's own Tolkien footnote adds 'The full tale is stated to have been written by Barahir, grandson of the Steward Faramir, some time after the passing of the King.' Only nuance: Findegil made the copy of the Thain's Book into which the abbreviated version was added."
+  },
+  {
+   "index": 455,
+   "verdict": "PARTIAL",
+   "trueWording": "considers the main part narrated by Aragorn; Armstrong: Arwen narrator",
+   "note": "Both attributions verbatim: Barkley 'considers the main part of the tale to have been narrated by Aragorn'; footnote: Armstrong 'examines the implications of one of the narrators of the tale being Arwen as she related the story after Aragorn's death'. The page frames this as narrative voice / point of view and never says the narration is first-person, nor calls the text an annal; the editorial frame is real (Pezzini's 'scribal glosses, later notes, and editorial references') but the synthesis limb is the claimant's, not the page's.",
+   "unsupportedLimb": "so the annal admits embedded first-person witnesses within an editorial frame"
+  },
+  {
+   "index": 456,
+   "verdict": "PARTIAL",
+   "trueWording": "Appendix A reads like a real history; historian summarizing primary documents",
+   "note": "Live page reached. Sentence: 'Appendix A reads like a real history and Tolkien's narrative style is that of an historian who is summarizing information that he derived from primary documents.' Quote verbatim and the historian/primary-documents limb verbatim, but the post 'novel'/'novelist' contrast does not appear anywhere on the page (the only hit for 'author' is a commenter), and the page joins the two clauses with 'and', not a causal 'because'.",
+   "unsupportedLimb": "rather than a novelist (the page never contrasts historian with novelist)"
+  },
+  {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Appendices are something of a guidebook to those relics",
+   "note": "Both limbs verbatim on the live page. Gray: 'So by this measure, the Appendices are something of a guidebook to those relics, still within the framing device of the fictional Red Book of Westmarch'. Tolkien (Jan 1961 letter to Allen & Unwin, quoted by Gray): 'the Appendices have played a very large part in reader's pleasure, in turning library readers into purchasers...'. Page hedges with 'something of a'; page writes 'reader's pleasure' (singular possessive)."
+  },
+  {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "modern words placed within 19th-century structural patterns; rendered strange",
+   "note": "Raw PDF via Wayback (live dc.swosu.edu viewcontent.cgi 403s), Mythlore 41.1 pp. 279-280 (PDF sheet 5). 'Concerning 19th-century terminology, he had a propensity to use about twice the number of key words.' Baseline limb supported: Siepmann compares to 'curated sets of 19th- and 20th-century writings ... 30 and 94 million words', key = 'outstandingly frequent compared to the baseline corpus'. Quote verbatim: 'while the words were modern, they were placed within 19th-century structural patterns of speech, such that common English words are rendered strange to the eye of the reader.' Chapter explicitly Siepmann's."
+  },
+  {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gandalf and Frodo most flexible; Merry and Pippin reality-based touchstones",
+   "note": "Same PDF, p. 284 (sheet 10), on the penultimate chapter 'Language and Character' and its '\"character by character\" stylistics of direct speech': 'Gandalf and Frodo are found to be the most flexible. Sam undergoes the most evolution. Gimli and Legolas represent the most traditional registers for their typology. Merry and Pippen use common English language as befitting their role of reality-based touchstones.' Quote verbatim. Attribution nuance: this sentence says 'the author', with Kullmann named as the author of the immediately preceding chapters; the review spells it 'Pippen'."
+  },
+  {
+   "index": 460,
+   "verdict": "PARTIAL",
+   "trueWording": "I always in writing, always start with a name",
+   "note": "Live page reached. Quote verbatim as a pull-quote: 'I always in writing, always start with a name. Give me a name and it produces a story.' - but the page credits it to 'Tolkien, audio interview by Denys Gueroult, 1965', not to Shippey's reporting; Shippey's own prose says only that names are the widest 'survivor-genre', 'full of buried information', and that Tolkien 'took deep personal interest in names, and was always ready to consider their etymologies'. The application limb is absent from the page entirely.",
+   "unsupportedLimb": "which underlies the place-name etymologies that open and close his civic records"
+  },
+  {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a failure of tone ... and jarring to the readers",
+   "note": "Live blogspot post reached. Verbatim: 'the narrator's giving us the thoughts (in English) of a fox in Chapter 3 of The Fellowship of the Ring. I think this is a failure of tone (moving us back towards the intrusive narrator of The Hobbit) and jarring to the readers, who, after getting through all of the cute hobbit-business and small jokes of Chapter 1, have all of a sudden entered into a much more serious world in Chapter 2 (The Shadow of the Past).' Every limb present. Drout later concedes 'an irrational dislike' of the fox passage."
+  },
+  {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "thrawn seems merely an ornamental archaism; eyot, laving give technical description",
+   "note": "Same post, verbatim: 'the \"thrawn\" trees: everything up to that point is good, but \"thrawn\" seems to me merely an ornamental archaism. You could make the argument that it provides additional color, but I wouldn't necessarily accept it as giving an important technical description the way that eyot, laving, louver, dwimmerlaik, etc., do in other places.' Both limbs supported; the judgment is hedged as Drout's own ('seems to me'), and commenters dispute it (one notes 'thrawn' is current Scots)."
+  }
+ ]
+}

@@ -1,0 +1,603 @@
+ 
+ Mark Lawrence: AI writing results 
+Mark Lawrence
+ Click my name to navigate this blog.
+ Thursday, 14 September 2023 
+AI writing results
+ I put out interim results with 100+ votes on each of the 10 pieces. The results below are after roughly tripling those numbers. The polls with the least number of votes at time of writing has 374, and the one with the most has 911. The extra votes shuffled the ratings up and down a little. They also reached the statistical threshold to identify three more of the pieces (obviously the margins here are fairly fine if 150 votes weren't sufficient to reveal the difference but 450 votes were (those extra 300 coming in after the truth had been made available). Of the additional pieces identified: one was correctly decided to be written by an AI, one was correctly decided to be written by a person, and one piece written by a person was incorrectly identifed as AI-written. Read about the experiment here. I want to say a quick word on "statistical significance": If you ask 100 people to answer a question like "do you like oranges, yes or no?" and the result is 49 to 51, that is not a statistically significant difference on which we can say that the larger population from which this 100 were drawn have a majority against oranges. The population might slightly favour oranges and still many times you could randomly draw 100 people who would say yes 49 times and no 51 times. They might quite often say yes 47 times and no 53 times... There is a mathematics which allows us to tell whether a difference is big enough to be taken seriously, and I have applied it here. So the figure below shows the results for the first 8 pieces of fiction, with the last 2 off to the side since these late-comers didn't quite match with the stated conditions. Note: i) The people voting on this included MANY writers, so we should expect better judgement from them on writing matters than we would expect from the general readership or general public. ii) Publishing the star ratings on "quality" of the pieces live may have polarised results. I.e people seeing a piece was getting lots of 1* ratings might then have let that sway their opinion and said the piece was AI-written (and even rated it lower because of that). Main observations: i) After a minimum of 100 votes per poll the voters were only able to come to a statistically significant opinion on 4 of original 8 posts. This has since moved to 7 of the 8 (with a minumum of 370 votes per poll) but this shows how "on a knife's edge" many of these decisions were. ii) In 5 of the 7 cases in which there was a statistically significant opinion it was the correct opinion. But the number of votes requires show that for a great many voters the exercise was mostly a coin toss. iii) The two cases where the readers (as a whole) were wrong - were deciding that an AI-written piece was human-written, and deciding that a human-written piece was AI-written. iv) after a mimimum 100 votes 5 of the 8 cases were undecided or incorrectly decided. After a minimum 370 votes 3 of the 8 cases were undecided or incorrecly decided. v) The 2nd highest rated piece was AI-written (incorrectly believed to be human-written) vi) The 2nd and 3rd highest rated pieces were AI-written. I list the pieces below, indicating AI or human - I've given the authors the option of remaining anonymous and some of them haven't got back to me on that at the time of writing, so I'll fill them in as they answer. 1 - Kian N. Ardalan 2 - AI written 3 - AI written 4 - Amy Hopkins 5 - Human written - wants to be anonymous 6 - Mazarkis Williams 7 - AI written 8 - AI written (I asked for 19th century language, clearly unpopular choice!) ------------- 9 - T. Frohock 10 - T.S Davies Conclusion: Given that these pieces were written by authors with thousands of sales (two self-published, two with traditional publishing deals as well), and that many of the people voting are also writers... the inability to decide on the majority of these examples is worrying. Moreover two of the top three rated pieces are AI written (a very small margin on the 3rd, likely not significantly ahead (or behind) human-written pieces 1 & 10). AI art has come from laughable to contest-winning in about 2 years. Where AI writing is in that process I don't know, and I also don't know how much better either the art or the writing will get, or how fast it will happen. But I would say that there is definite cause to worry that in a few short years AI could be writing entire books that people might like as much or better than human-written ones. And it won't take a year per book to write them. These pieces of flash fiction appeared in seconds. On the flip side, whilst there's cause to worry, it is also not a guarantee. Writing a book is a lot harder than writing flash fiction. AI may run out of steam on the way towards that goal. What seems highly likely is that some authors (I won't be one of them) will generate description, fight scenes, dialogue etc using AI, then edit it into their work either to save time or to compensate weaknesses in their writing. We are living in "interesting times". Take care. 3 examples of AI art to the prompt "Prince of Thorns" generated one year apart in 2021, 2022, and 2023 Join my Patreon. Join my 3-emails-a-year mailing list. . 
+Posted by
+ Mark Lawrence 
+at
+ 06:22 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+ 9 comments: 
+ Anonymous 14 September 2023 at 12:59 Ahah, the last two were soooo obviously AI, it was laughable! Loved this idea though, super cool (: Reply Delete Replies Reply Max 14 September 2023 at 13:06 Surprised that so many got #2 wrong. It seemed very vague to me, what with the »with voices like yours, things can get better.« What special voice does the character have? Definitely felt like an AI trying to write something profound, but failing miserably. Reply Delete Replies Reply Anonymous 14 September 2023 at 13:23 "I know a lot of writers that use subtext, and they're all cowards.". Garth would be pleased with the AI work. Reply Delete Replies Reply Anonymous 27 September 2023 at 03:29 Story number 5 is so underrated. It was my favorite out of all of them. It didn't adhere strongly to the prompt, but it was the one that evoked the most emotion in me. Maybe people thought a human couldn't choose to use the main prompt as a passing detail, so they thought it was an AI forgetting the prompt. Reply Delete Replies Vicky 17 August 2025 at 01:56 I agree, 5 was my favourite by far! Really it was the only one that evoked emotion in me at all. Loved the subtle rhyming lilt of the dialogue, I think it's the first time I've seen rhyming dialogue used loosely yet intentionally, and I think it was done to wonderful, fairytale-esque effect. I was so excited to find out in the interim results post which author wrote it, but they're anonymous 😭 Delete Replies Reply Anonymous 17 August 2025 at 07:19 I have it on reasonably good authority that story #5 was written by Michael R. Fletcher (Manifest Delusions, Obsidian Path, etc.). Delete Replies Reply Vicky 10 September 2025 at 15:58 Ooh, thank you @Anonymous! Delete Replies Reply Reply Anonymous 2 October 2023 at 08:37 Truly flabbergasted by the performance of #2. That is not a well written story. Very glad to see my favourites were all human, but concerning that others were enticed by the AI's simplistic nonsense prose. Something I noticed quickly was that the AI pieces all introduced the dragon in the opening statement, and did so in a similar manner. Story #5 uses a similar technique, which I imagine might have misled some into voting for it as AI. Reply Delete Replies Reply Anonymous 21 July 2025 at 17:48 I thought number two was fantastic and still do. I know many authors that write this was and not necessarily ai. It was trained after humans at the end of the day Reply Delete Replies Reply Add comment Load more... 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ Total Pageviews 
+ Followers 
+ Blog Archive 
+ ► 
+2026
+ (11) 
+ ► 
+August
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (2) 
+ ► 
+January
+ (2) 
+ ► 
+2025
+ (29) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (4) 
+ ► 
+August
+ (4) 
+ ► 
+July
+ (3) 
+ ► 
+June
+ (1) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (3) 
+ ► 
+February
+ (2) 
+ ► 
+2024
+ (25) 
+ ► 
+December
+ (6) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (2) 
+ ► 
+September
+ (1) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (1) 
+ ► 
+January
+ (1) 
+ ▼ 
+2023
+ (38) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (5) 
+ ▼ 
+September
+ (6) 
+ Page 1 Critique 
+ Which is my most successful trilogy? 
+ AI writing results 
+ So ... is AI writing any good? 
+ Conventional 
+ Finalists for SPFBO 9 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (7) 
+ ► 
+April
+ (2) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (1) 
+ ► 
+2022
+ (36) 
+ ► 
+December
+ (2) 
+ ► 
+November
+ (1) 
+ ► 
+October
+ (2) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (6) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (4) 
+ ► 
+May
+ (4) 
+ ► 
+April
+ (3) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (3) 
+ ► 
+2021
+ (39) 
+ ► 
+December
+ (3) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (3) 
+ ► 
+September
+ (3) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (4) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (2) 
+ ► 
+February
+ (5) 
+ ► 
+January
+ (3) 
+ ► 
+2020
+ (30) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (2) 
+ ► 
+October
+ (2) 
+ ► 
+September
+ (3) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (2) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (4) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (3) 
+ ► 
+January
+ (2) 
+ ► 
+2019
+ (58) 
+ ► 
+December
+ (8) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (6) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (6) 
+ ► 
+July
+ (4) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (10) 
+ ► 
+April
+ (4) 
+ ► 
+March
+ (1) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (2) 
+ ► 
+2018
+ (65) 
+ ► 
+December
+ (4) 
+ ► 
+November
+ (8) 
+ ► 
+October
+ (4) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (6) 
+ ► 
+June
+ (10) 
+ ► 
+May
+ (2) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (6) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (7) 
+ ► 
+2017
+ (93) 
+ ► 
+December
+ (8) 
+ ► 
+November
+ (6) 
+ ► 
+October
+ (9) 
+ ► 
+September
+ (6) 
+ ► 
+August
+ (7) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (9) 
+ ► 
+April
+ (7) 
+ ► 
+March
+ (11) 
+ ► 
+February
+ (9) 
+ ► 
+January
+ (11) 
+ ► 
+2016
+ (100) 
+ ► 
+December
+ (13) 
+ ► 
+November
+ (7) 
+ ► 
+October
+ (13) 
+ ► 
+September
+ (8) 
+ ► 
+August
+ (10) 
+ ► 
+July
+ (4) 
+ ► 
+June
+ (4) 
+ ► 
+May
+ (7) 
+ ► 
+April
+ (8) 
+ ► 
+March
+ (10) 
+ ► 
+February
+ (9) 
+ ► 
+January
+ (7) 
+ ► 
+2015
+ (97) 
+ ► 
+December
+ (12) 
+ ► 
+November
+ (14) 
+ ► 
+October
+ (9) 
+ ► 
+September
+ (7) 
+ ► 
+August
+ (6) 
+ ► 
+July
+ (5) 
+ ► 
+June
+ (6) 
+ ► 
+May
+ (9) 
+ ► 
+April
+ (8) 
+ ► 
+March
+ (9) 
+ ► 
+February
+ (6) 
+ ► 
+January
+ (6) 
+ ► 
+2014
+ (77) 
+ ► 
+December
+ (6) 
+ ► 
+November
+ (9) 
+ ► 
+October
+ (4) 
+ ► 
+September
+ (5) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (8) 
+ ► 
+June
+ (2) 
+ ► 
+May
+ (9) 
+ ► 
+April
+ (5) 
+ ► 
+March
+ (5) 
+ ► 
+February
+ (10) 
+ ► 
+January
+ (9) 
+ ► 
+2013
+ (91) 
+ ► 
+December
+ (12) 
+ ► 
+November
+ (8) 
+ ► 
+October
+ (9) 
+ ► 
+September
+ (6) 
+ ► 
+August
+ (5) 
+ ► 
+July
+ (7) 
+ ► 
+June
+ (9) 
+ ► 
+May
+ (8) 
+ ► 
+April
+ (6) 
+ ► 
+March
+ (9) 
+ ► 
+February
+ (5) 
+ ► 
+January
+ (7) 
+ ► 
+2012
+ (72) 
+ ► 
+December
+ (6) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (11) 
+ ► 
+September
+ (4) 
+ ► 
+August
+ (3) 
+ ► 
+July
+ (9) 
+ ► 
+June
+ (5) 
+ ► 
+May
+ (7) 
+ ► 
+April
+ (6) 
+ ► 
+March
+ (7) 
+ ► 
+February
+ (4) 
+ ► 
+January
+ (7) 
+ ► 
+2011
+ (14) 
+ ► 
+December
+ (5) 
+ ► 
+November
+ (3) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (2) 
+ ► 
+August
+ (3) 
+ About Me 
+Mark Lawrence
+ View my complete profile 
+Powered by Blogger .
+ 

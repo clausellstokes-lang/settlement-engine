@@ -1,0 +1,13 @@
+§904 L-UI-MAT landing (register car 2): writer-reach re-takes its provenance at the tip; no other register moved
+
+Every figure below was predicted in writing in run-registers-904.sh before a door ran, and the doors were taken AFTER the
+§904 proof. The observed-shape CLI's plain read matched the frozen inventory exactly (1972 findings) with no execution
+input named — src/lib/flagRegistry.js, which both cars of this consist edited, is a SCANNED source and provenanceDriftOf
+skips the scanned half — so NO --write was taken and the walker's plain run is 44/44. The writer-reach dry run
+exited 0 with nothing stale (judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326, reviewable 526); --write moved frozenAtSha alone (a7ca033a6 → 21b95511f, the lighting register car; cohort 1322 → 1322, 0 stale folded out, 0 registered rows newly lit, detector digest unchanged) and nothing else (no writer string changed in either
+car). Mounts (56 mounts / 15 dark, the door's porcelain empty), prose-numerics (baseline 225 = live 225, 0 re-keyed, 0 moved) and the tuning inventory (plain walker 75/75) changed nothing; the
+lighting census was re-taken as register car 1 with no movement in any figure.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

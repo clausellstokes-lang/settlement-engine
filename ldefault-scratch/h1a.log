@@ -1,0 +1,34 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 61128 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT
+
+ ❯ tests/domain/simulationRulesPreset.stability.test.js (26 tests | 1 failed) 21ms
+     × a dark birth keeps the profile VIRTUAL (the CL-0 constitutional law) 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/simulationRulesPreset.stability.test.js > new-campaign birth seam — one address, dark today, proven live > a dark birth keeps the profile VIRTUAL (the CL-0 constitutional law)
+AssertionError: expected 28 to be 7 // Object.is equality
+
+- Expected
++ Received
+
+- 7
++ 28
+
+ ❯ tests/domain/simulationRulesPreset.stability.test.js:570:64
+    568|     // This is the price of naming a successor, asserted rather than r…
+    569|     const lit = newCampaignSimulationRules(DEFAULT_SIMULATION_PRESET_I…
+    570|     expect(Object.keys(lit).length - Object.keys(born).length).toBe(7);
+       |                                                                ^
+    571|   });
+    572|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 32 passed (33)
+   Start at  05:44:45
+   Duration  2.63s (transform 284ms, setup 47ms, import 1.50s, tests 1.19s, environment 0ms)
+

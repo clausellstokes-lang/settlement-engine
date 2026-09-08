@@ -1,0 +1,146 @@
+{
+ "name": "martin",
+ "chunk": "reverify-r2",
+ "indices": [
+  56,
+  57,
+  58,
+  75,
+  106,
+  118,
+  119,
+  120,
+  312
+ ],
+ "claims": [
+  {
+   "index": 56,
+   "feature": "Kenning-like titles",
+   "claim": "Volume titles are two-content-word action-plus-interaction compounds resembling Old English and Old Norse kennings.",
+   "source": "Łukasz Neubauer, Studia Anglica Posnaniensia 57.1, 2022",
+   "url": "https://pressto.amu.edu.pl/index.php/stap/article/view/35011",
+   "quote": "kenning-like phrases for the titles of his novels",
+   "page": "",
+   "routeHints": [
+    "the galley PDF: https://pressto.amu.edu.pl/index.php/…/article/download/35011/30243/74735 (the landing page carries only title/abstract; the strings are in the PDF — extract its text)"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 57,
+   "feature": "Alliteration in titles",
+   "claim": "Four of nine titles and two subtitles alliterate, a device common in early Germanic verse.",
+   "source": "Łukasz Neubauer, Studia Anglica Posnaniensia 57.1, 2022",
+   "url": "https://pressto.amu.edu.pl/index.php/stap/article/view/35011",
+   "quote": "four (and two) use alliteration",
+   "page": "",
+   "routeHints": [
+    "as #56"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 58,
+   "feature": "Germanic war-trope diction",
+   "claim": "Title imagery draws on the conventional stock of war themes used by Germanic verse-makers.",
+   "source": "Łukasz Neubauer, Studia Anglica Posnaniensia 57.1, 2022",
+   "url": "https://pressto.amu.edu.pl/index.php/stap/article/view/35011",
+   "quote": "the rather conventional stock of themes and tropes",
+   "page": "",
+   "routeHints": [
+    "as #56"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 75,
+   "feature": "POV chapter naming",
+   "claim": "Each chapter is titled with and narrated from the perspective of its POV character.",
+   "source": "Lucia Sladiková, BA thesis, Masaryk University, 2015",
+   "url": "https://is.muni.cz/th/p5fu7/thesis.pdf",
+   "quote": "the character after whom they are named",
+   "page": "",
+   "routeHints": [
+    "Wayback capture 20230806053623 of the URL of record (the live page is a 117-byte meta-refresh stub)"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_VERBATIM"
+  },
+  {
+   "index": 106,
+   "feature": "redundant time markers",
+   "claim": "Elapsed-time markers are stated even where context already supplies them.",
+   "source": "At Sea Journal (anonymous, undated)",
+   "url": "https://atseajournal.com/asoiaf/essays/imprecision.html",
+   "quote": "",
+   "page": "Imprecise sentences",
+   "routeHints": [
+    "both verifiers say the page argues the REVERSE of the claim — if so the verdict is CONTRADICTED, not NOT_FOUND"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  },
+  {
+   "index": 118,
+   "feature": "character leitmotifs",
+   "claim": "Like Wagner, Martin gives each character recurring phrases that function as leitmotifs, kept close like dragons' eggs.",
+   "source": "Lev Grossman, Time, 2011-07-07",
+   "url": "https://time.com/archive/6911691/george-r-r-martins-dance-with-dragons-a-masterpiece-worthy-of-tolkien/",
+   "quote": "",
+   "page": "George R.R. Martin's Dance with Dragons: A Masterpiece Worthy of Tolkien",
+   "routeHints": [
+    "content.time.com mirror of the 7 July 2011 Grossman review",
+    "https://levgrossman.com (the review reposted)",
+    "the Wayback id_ raw capture of the time.com URL (availability API first)",
+    "the Time print issue via a library database"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_SUBSTANCE"
+  },
+  {
+   "index": 119,
+   "feature": "voice per storyline",
+   "claim": "Each storyline is written in its own voice, each playing off the others.",
+   "source": "Lev Grossman, Time, 2011-07-07",
+   "url": "https://time.com/archive/6911691/george-r-r-martins-dance-with-dragons-a-masterpiece-worthy-of-tolkien/",
+   "quote": "",
+   "page": "George R.R. Martin's Dance with Dragons: A Masterpiece Worthy of Tolkien",
+   "routeHints": [
+    "as #118"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_SUBSTANCE"
+  },
+  {
+   "index": 120,
+   "feature": "deft prose",
+   "claim": "Grossman rates the prose itself as deft and a pleasure in its own right, not merely a vehicle for plot.",
+   "source": "Lev Grossman, Time, 2011-07-07",
+   "url": "https://time.com/archive/6911691/george-r-r-martins-dance-with-dragons-a-masterpiece-worthy-of-tolkien/",
+   "quote": "",
+   "page": "George R.R. Martin's Dance with Dragons: A Masterpiece Worthy of Tolkien",
+   "routeHints": [
+    "as #118"
+   ],
+   "reverify": true,
+   "previousVerdict": "VERIFIED_SUBSTANCE"
+  },
+  {
+   "index": 312,
+   "feature": "cross-chapter refrain",
+   "claim": "A phrase like 'Only the cold' recurs across Jon's death-adjacent moments to bind them.",
+   "source": "asoiafanalysis (Lyanna Spearwife), 2015",
+   "url": "https://asoiafanalysis.wordpress.com/",
+   "quote": "Only the cold",
+   "page": "",
+   "routeHints": [
+    "judge at the post permalink \"Jon's death: On further thinking...\" (2015-08-03), not the rotating blog homepage"
+   ],
+   "reverify": true,
+   "previousVerdict": "NOT_FOUND"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "role": "finder",
+ "name": "hobb",
+ "angle": "academic",
+ "tag": null,
+ "lines": 51,
+ "firstTs": "2026-09-06T11:45:38.439Z",
+ "lastTs": "2026-09-06T11:47:08.157Z",
+ "tools": {
+  "ToolSearch": 1,
+  "WebSearch": 10,
+  "WebFetch": 6
+ },
+ "urlsFetched": [
+  "https://elliottrwi.com/research/hobb-bibliography/",
+  "https://en.wikipedia.org/wiki/Farseer_trilogy",
+  "https://en.wikipedia.org/wiki/Robin_Hobb",
+  "https://en.wikipedia.org/wiki/Tawny_Man_trilogy",
+  "https://en.wikipedia.org/wiki/Liveship_Traders",
+  "https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now the parallel opening searches on the academic angle.",
+ "run": "wf_4dfe6d07-478",
+ "agent": "ae0549a984873ebe7",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_4dfe6d07-478/agent-ae0549a984873ebe7.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-academic.json",
+  "claims": 73,
+  "complete": true,
+  "mtime": "12:23:27"
+ }
+}

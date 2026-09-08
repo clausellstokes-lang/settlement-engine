@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i270-284",
+ "lines": 60,
+ "firstTs": "2026-09-06T17:16:24.483Z",
+ "lastTs": "2026-09-06T17:19:45.540Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 13,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+  "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+  "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+  "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All four sources fetched raw. Now writing the checkpoint.",
+ "run": "wf_22752bb0-128",
+ "agent": "a0ccab1aa3d946235",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a0ccab1aa3d946235.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i270-284.json",
+  "exists": true
+ }
+}

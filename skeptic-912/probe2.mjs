@@ -1,0 +1,10 @@
+const D='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLMAT';
+const { migrateSettlementConfig } = await import(`${D}/src/lib/settlementConfigMigration.js`);
+const { isAllowedConfigKey } = await import(`${D}/src/store/configSlice.js`);
+const { materializesLivingContent, LIVING_CONTENT_LAW_CONFIG_KEY, ROSTER_LIVING_CONTENT_LAW_VERSION } = await import(`${D}/src/domain/content/livingContentLawVersion.js`);
+const saved = { settType:'town', culture:'germanic', [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION };
+const migrated = migrateSettlementConfig(saved);
+console.log('key', LIVING_CONTENT_LAW_CONFIG_KEY, 'litVersion', ROSTER_LIVING_CONTENT_LAW_VERSION);
+console.log('survives migrateConfig:', Object.hasOwn(migrated, LIVING_CONTENT_LAW_CONFIG_KEY), '=', migrated[LIVING_CONTENT_LAW_CONFIG_KEY]);
+console.log('isAllowedConfigKey:', isAllowedConfigKey(LIVING_CONTENT_LAW_CONFIG_KEY));
+console.log('materializesLivingContent(migrated):', materializesLivingContent(migrated));

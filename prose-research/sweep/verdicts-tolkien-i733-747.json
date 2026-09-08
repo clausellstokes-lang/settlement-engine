@@ -1,0 +1,235 @@
+{
+ "name": "tolkien",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 733,
+   "feature": "error density in a modernised text",
+   "claim": "A Deutsche Tolkien Gesellschaft project team found hundreds of smaller and larger errors in Krege's translation, which Weinreich attributes to a rush job ahead of the Jackson films.",
+   "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+   "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+   "quote": "hunderte kleinerer und größerer Fehler",
+   "page": ""
+  },
+  {
+   "index": 734,
+   "feature": "ambivalent lexis",
+   "claim": "Weinreich prefers Krege's 'Kunde' to Carroux's 'Bursche' for Farmer Maggot's 'fellow' (the Black Rider) because the modern word carries the original's ambivalence.",
+   "source": "Anmerkungen zu den deutschen Übersetzungen des HdR (Frank Weinreich, polyoinos)",
+   "url": "http://polyoinos.net/tolk_stuff/translation.htm",
+   "quote": "Kunde",
+   "page": ""
+  },
+  {
+   "index": 735,
+   "feature": "archaism as deliberate foreignisation",
+   "claim": "Held's thesis finds Carroux foreignises through the archaic deferential 'Ihr' and at places awkward syntax, so that to a German reader her text may read like a translation from Middle High German.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "at places awkward syntax",
+   "page": "ch. 4, pp. 26-27"
+  },
+  {
+   "index": 736,
+   "feature": "preserved archaic/modern contrast",
+   "claim": "Krege uses modern German but preserves archaism where Tolkien contrasts archaic and modern speech, for example when Théoden first meets the hobbits at Isengard.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "",
+   "page": "ch. 4, p. 27"
+  },
+  {
+   "index": 737,
+   "feature": "modern lexis ages fast",
+   "claim": "Krege's 'modern' words such as 'Halunke' no longer read as modern in 2021, while Nagel in 2004 objected to 'speziell' as ruining Butterbur's simple speech.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "speziell",
+   "page": "ch. 4, p. 27"
+  },
+  {
+   "index": 738,
+   "feature": "modernisation as skopos",
+   "claim": "Nagel, quoted by Held, holds that Krege approached the book as a modernisation of Tolkien's text for what he believed was a new generation of readers.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "a modernisation of Tolkien's text",
+   "page": "ch. 4, p. 27"
+  },
+  {
+   "index": 739,
+   "feature": "rustic dialect rendering",
+   "claim": "Tolkien's Butterbur speaks an old-fashioned rural dialect; Krege gives him vernacular ('Dalli, dalli!' for 'Double sharp!') while Carroux translates verbatim ('Schneller, schneller!').",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "Double sharp!",
+   "page": "ch. 4, p. 28"
+  },
+  {
+   "index": 740,
+   "feature": "idiom insertion changes character",
+   "claim": "Krege repeatedly introduces German idioms where the English had none, turning Gandalf's 'I shall roast him' into 'wasch' ich ihm den Kopf' with oral contractions in a written letter, which loses the literal threat and alters Gandalf.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "wasch' ich ihm den Kopf",
+   "page": "ch. 4, p. 28"
+  },
+  {
+   "index": 741,
+   "feature": "domestication vs foreignisation",
+   "claim": "Held concludes Krege is domesticating and dynamically equivalent while Carroux is foreignising and formally equivalent, so Krege's version shifts character perception more (Gollum and the Black Riders more or less animalistic, Galadriel's title and standing).",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "often minuscule",
+   "page": "ch. 6-7"
+  },
+  {
+   "index": 742,
+   "feature": "compound archaism kept",
+   "claim": "Both translations keep Tolkien's foreignised compound 'sister-son' as 'Schwestersohn' rather than 'Neffe'.",
+   "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+   "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+   "quote": "Schwestersohn",
+   "page": "ch. 4, p. 28"
+  },
+  {
+   "index": 743,
+   "feature": "assimilating the alien",
+   "claim": "Nagel's chapter reports Krege defending his version as 'assimilating the alien' where Carroux merely rendered the text, and concludes that Krege's language for younger readers sometimes fails to convey the voice the author intended.",
+   "source": "Review: Translating Tolkien: Text and Film (Mythopoeic Society)",
+   "url": "https://mythsoc.org/reviews/translating-tolkien-text-and-film.htm",
+   "quote": "assimilating the alien",
+   "page": ""
+  },
+  {
+   "index": 744,
+   "feature": "five functions of 'thou'",
+   "claim": "Honegger shows Tolkien's 'thou' carries five functions (poetry, archaism, contempt, emotion, familiarity) that German du/Sie and French tu/vous cannot reproduce.",
+   "source": "Review: Translating Tolkien: Text and Film (Mythopoeic Society)",
+   "url": "https://mythsoc.org/reviews/translating-tolkien-text-and-film.htm",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 745,
+   "feature": "word connotation in register",
+   "claim": "Stenström notes the Swedish 'älvor' for elves imports unwanted fairy connotations.",
+   "source": "Review: Translating Tolkien: Text and Film (Mythopoeic Society)",
+   "url": "https://mythsoc.org/reviews/translating-tolkien-text-and-film.htm",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 746,
+   "feature": "vernacular substitution (Prancing Pony)",
+   "claim": "Nagel's Prancing Pony example shows Krege shifting Butterbur from an elderly innkeeper to a younger colloquial speaker, e.g. 'Penner' where Carroux had 'Faultier'.",
+   "source": "Translating Tolkien: Text and Film (Cormarë 6) — Nagel and Honegger chapters (epdf mirror)",
+   "url": "https://epdf.pub/translating-tolkien-text-and-film-cormare-series-no-6.html",
+   "quote": "Penner",
+   "page": ""
+  },
+  {
+   "index": 747,
+   "feature": "modernisation as new uniformity",
+   "claim": "Nagel argues Krege's modernisation paradoxically creates a new uniformity by narrowing vocabulary range and simplifying archaic constructions.",
+   "source": "Translating Tolkien: Text and Film (Cormarë 6) — Nagel and Honegger chapters (epdf mirror)",
+   "url": "https://epdf.pub/translating-tolkien-text-and-film-cormare-series-no-6.html",
+   "quote": "",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "hunderte kleinerer und groesserer Fehler",
+   "note": "Raw page (curl, browser UA over http; WebFetch failed TLS). Verbatim: 'Eine genaue Textanalyse zeigte hunderte kleinerer und groesserer Fehler', immediately after 'die Fehler, die ein Projektteam der Deutschen Tolkiengesellschaft entdeckte'. Rush-job limb also explicit: Krege got 'einen Eilauftrag' and 'musste nun mit heisser Nadel stricken' because of 'die nahende Veroeffentlichung der Verfilmung von Peter Jackson'. Page signed F.W. / (c) Frank Weinreich."
+  },
+  {
+   "index": 734,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege redet von 'Kunde' - das finde ich eigentlich besser",
+   "note": "Raw page: 'So bezeichnet Bauer Maggot, den Nazgul, der sich bei ihm nach Frodo erkundigt, im Original als \"fellow\", was Carroux als \"Bursche\" wiedergibt. Krege redet von \"Kunde\" - das finde ich eigentlich besser, da die ambivalente Bedeutung des \"fellow\" in einen moderneren Begriff gepackt wurde, der diese Ambivalenz traegt.' Page says Nazgul rather than 'Black Rider'; same referent."
+  },
+  {
+   "index": 735,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by using archaic language (e.g. the archaic deferential Ihr pronoun) and at places awkward syntax",
+   "note": "PDF downloaded (browser UA) and text-extracted with pypdf; p.26: 'Carroux's translation shows a sort of foreignization ... by using archaic language (e.g. the archaic deferential Ihr pronoun) and at places awkward syntax.' p.27: 'Carroux's translation may read like a \"translation\" from Middle High German into modern German, and thus foreignized' - addressed to 'a potential target reader, who is not familiar with the SL English'."
+  },
+  {
+   "index": 736,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "he preserves the archaism where a contrast ... was made, e.g. Theoden meeting the Hobbits in Isengard",
+   "note": "Claim carries no quote, so graded on substance. p.27 verbatim: 'he uses a, for the time of publication in 2000, modern German (though he preserves the archaism where a contrast between archaic and modern speech was made in Tolkien's text, e.g. in the first meeting of Theoden and the Hobbits in Isengard).' Every limb supported."
+  },
+  {
+   "index": 737,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Nagel in 2004 criticizes the use of 'speziell' by Krege as it ruins the simple speech of Butterbur",
+   "note": "p.27: 'words like \"Halunke\" (412) are not used in the German of 2021; but Nagel in 2004 criticizes the use of \"speziell\" by Krege as it ruins the simple speech of Butterbur (\"Verschiedene Interpretationen\" 96)'. Quote 'speziell' appears verbatim; the framing sentence is 'This \"modern\" aspect of Krege's language does not hold up well to a reader in 2021.'"
+  },
+  {
+   "index": 738,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not merely as a translation, but as a modernisation of Tolkien's text",
+   "note": "p.27 quotes Nagel: '[I]t would appear that Wolfgang Krege approached his translation not merely as a translation, but as a modernisation of Tolkien's text to make it acceptable ... for what he believed to be a \"new\" generation of readers' (\"New One\" 28). Quote verbatim; attribution to Nagel via Held correct. (Same sentence is independently present in Nagel's own chapter, p.28 of Cormare 6.)"
+  },
+  {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege gives Butterbur a vernacular manner of speech, with expressions like 'Dalli, dalli!'",
+   "note": "p.28: 'in Tolkien's text, Butterbur speaks a form of a rural English dialect in an old-fashioned form ...; while Carroux, as usual, tries to translate verbatim with a similar syntax, Krege gives Butterbur a vernacular manner of speech, with expressions like \"Dalli, dalli!\" (174; Tolkien: \"Double sharp!\" 153; Carroux: \"Schneller, schneller!\" 193).' All three renderings and the 'verbatim' characterisation of Carroux are on the page."
+  },
+  {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wenn er's vergisst, wasch' ich ihm den Kopf",
+   "note": "p.28 table (Tolkien 170 / Carroux I:213 / Krege 193) gives 'If he forgets, I shall roast him.' against Krege's 'Wenn er's vergisst, wasch' ich ihm den Kopf.' Surrounding text: 'he repeatedly replaces idioms or introduces an idiomatic phrase when the English text did not include one'; it 'lose[s] the ... very real possibility that Gandalf meant it verbatim (thus changing the perception of the character Gandalf, also considering the fact that Krege lets Gandalf use oral forms (\"er's\"; \"wasch'\") in a written letter)'. Every limb supported."
+  },
+  {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege was found to be domesticating and dynamically equivalent ... Carroux ... foreignizing ... and formally equivalent",
+   "note": "Ch.6 'Analysis: Results' (p.66): 'While Carroux's differences compared to Tolkien are often minuscule, Krege's differences ... changed how human or how animalistic the readers may perceive Gollum or the Black Riders to be and changed Galadriel's social standing in Elvish society, as titles were translated differently'; and 'Krege was found to be domesticating and dynamically equivalent in his translation, while Carroux was foreignizing ... and formally equivalent.' Quote 'often minuscule' verbatim."
+  },
+  {
+   "index": 742,
+   "verdict": "PARTIAL",
+   "trueWording": "some 'foreignized' forms already existing in the ST prevail (e.g. 'Schwestersohn' ... instead of using 'Neffe')",
+   "note": "Quote 'Schwestersohn' is on p.28, but inside a sentence whose subject is Krege alone: 'it can be said that Krege's translation falls under the translation tradition of domestication, even though some \"foreignized\" forms already existing in the ST prevail (e.g. \"Schwestersohn\" as translation of \"sister-son\" instead of using \"Neffe\")'. 'Schwestersohn'/'Neffe' occur exactly once in the whole 81-page thesis (grep-confirmed); Carroux's rendering of 'sister-son' is never stated. The only other mention (p.26) is Turner on Tolkien's own compounds.",
+   "unsupportedLimb": "that BOTH translations keep 'Schwestersohn' - the page states it only of Krege"
+  },
+  {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "trueWording": "Nagel's chapter, entitled 'The New One Wants to Assimilate the Alien'",
+   "note": "Raw review page (curl) verified. Second limb fully supported: 'Krege's attempts to produce a more \"modern\" translation, using language calculated to appeal to a younger readership, sometimes has the result that it does not fully convey the voice intended by the author.' Krege's own defence as the page reports it is different wording: he 'claims that his work is closer to the original as it did not simply render the text from one language to another, but took account of Tolkien's source material'. The exact string 'assimilating the alien' is absent (inflection differs, attribution differs).",
+   "unsupportedLimb": "that Krege defended his version as 'assimilating the alien' - on this page the phrase is Nagel's chapter title, not Krege's words, and appears only as 'Assimilate the Alien'"
+  },
+  {
+   "index": 744,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "five different uses ... these cannot adequately replicate Tolkien's nuanced use of thou",
+   "note": "No quote supplied, so graded on substance. Raw page: Honegger 'tracks the use of thou ... suggesting that it has five different uses: in poetry or songs; archaic, in formal or formulaic speech; as an expression of contempt; as an indicator of high emotion, or an expression of familiarity or emotional closeness'; and 'although many modern languages have distinction in pronominal address, such as the French tu vs. vous and the German du vs. Sie, these cannot adequately replicate Tolkien's nuanced use of thou and you'. All five functions and both language pairs match."
+  },
+  {
+   "index": 745,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "'elves' as 'aelvor,' a word which apparently has the connotation of 'fairy'",
+   "note": "No quote supplied. Raw page: 'Stenstrom is critical of many of Zetterholm's choices, including \"elves\" as \"aelvor,\" a word which apparently has the connotation of \"fairy.\"' The criticism carries the 'unwanted' sense. Context limb not in the claim: this is Zetterholm's Swedish Hobbit, not the LotR translation."
+  },
+  {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Penner' / dosser ... acceptable in young persons' speech, but not expected in the language of an elderly innkeeper",
+   "note": "epdf.pub mirror fetched live with a browser UA; a naive tag-stripper silently ate this chapter (stray '<' in the OCR), so the page was re-parsed with html.parser - Nagel ch.1 IS present in full. Sect.4 'AN INTRODUCTORY EXAMPLE: THE PRANCING PONY', Excerpt 1: OV 'Where are you, you woolly-footed slow-coach?' / OT (Carroux) 'du wollfuessiges Faultier?' / NT (Krege) 'du flaumfuessiger Penner?', with the comment quoted at left. Both 'Penner' and 'Faultier' verbatim; the elderly-innkeeper-to-young-speech shift is stated explicitly."
+  },
+  {
+   "index": 747,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creating stylistic levelling; modernisation 'in fact a reduction of vocabulary'",
+   "note": "No quote supplied. Nagel ch.1 (p.26): the omissions 'simply narrow down the tone of passage as given in OV ..., creating stylistic levelling not too far removed from what Wolfgang Krege might have meant by OT's \"uniform\" language' - i.e. the paradox that modernisation reproduces the uniformity Krege charged the old version with. Vocabulary limb: 'such \"modernisation\" (in fact a reduction of vocabulary and stylistic level)'. Simplification limb: 'a tendency of simplifying speech patterns'; 'simplified sentence structure'; conclusion cites 'NT's syntactic simplification' and 'NT's over-simplification of OV's lexical structures and stylistic devices'. 'New uniformity' is Nagel's inference-by-comparison rather than his phrase, hence SUBSTANCE not VERBATIM."
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+471 yearlyPopulations / finalPopulations: exit=1 LIVENESS_ANCHOR_message=True
+472 yearlyDiedFlags / finalDiedFlags: exit=1 LIVENESS_ANCHOR_message=True
+518 realmDemography / realmSelfSufficiency (both-blinded): exit=1 LIVENESS_ANCHOR_message=True
+519 motion / motionRenamedForControl: exit=1 LIVENESS_ANCHOR_message=True
+590 realmDemography / realmSelfSufficiency (pre-P4): exit=1 LIVENESS_ANCHOR_message=True
+723 OBSERVER 0.0025 / MOTION_FLOOR_01: exit=1 LIVENESS_ANCHOR_message=True
+724 ENVELOPE 0.0025 / MOTION_FLOOR_01: exit=1 LIVENESS_ANCHOR_message=True
+ALL SEVEN ANCHORS PROVED BREAKABLE

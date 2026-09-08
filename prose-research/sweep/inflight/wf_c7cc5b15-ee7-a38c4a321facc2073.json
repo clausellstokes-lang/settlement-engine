@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i480-494",
+ "lines": 65,
+ "firstTs": "2026-09-06T17:29:56.999Z",
+ "lastTs": "2026-09-06T17:34:00.517Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://ordinary-times.com/2011/08/08/review-a-dance-with-dragons-by-george-r-r-martin/",
+  "https://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/",
+  "https://web.archive.org/web/20160722111429id_/http://thinkprogress.org:80/alyssa/2011/07/15/270611/on-a-dance-with-dragons/",
+  "https://web.archive.org/web/20260811064930id_/http://tigerbeatdown.com/2011/08/26/enter-ye-myne-mystic-world-of-gayng-raype-what-the-r-stands-for-in-george-r-r-martin/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "a38c4a321facc2073",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a38c4a321facc2073.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i480-494.json",
+  "exists": true
+ }
+}
