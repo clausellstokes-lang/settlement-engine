@@ -1,0 +1,21 @@
+PROOF_HEAD=983a37f267cb1e7951954528c77e5074a3d84aff start 02:45:29 load=2.97 2.40 2.51
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 36461 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneINSTR2
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 19209ms
+     × every config produces byte-identical output to the golden master 19206ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 2 failed) 1252ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 10ms
+     × the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it 15ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 4503ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 15ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 20ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 12ms
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
