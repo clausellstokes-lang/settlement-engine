@@ -248,3 +248,9 @@ Seat: Fable 5.1 — the S12 judgment seat; ratified by the Fable chair at the ne
 | §2.4 the three Brackwater fixtures | a FOURTH is owed — rows `closed: true` at the ROW while the COLUMN is false — the only table that discriminates per-column from per-row (SITTING B.4.7) |
 | §3 as "adopted whole" by Part B §9 | adopted with two amendments: the chronicle's floor is a LIVE fallback until the ratchet lands; the ladder's neutral-noun interim is a declared B-CLAIM breach the owner signs or refuses (SITTING B.4.3) |
 | §4 "the walker must exist before the taste sample is cut" | the sample proceeds on the existing instruments (check-pair.mjs + the refuter + printed claim sets); the walker's receipt on the sample is OWED and is the instrument lane's first product (SITTING §F.4, vetoable) |
+
+### §2.4.1 — THE GUARD ROSTER, AMENDED (chair, 2026-09-07 23:2x; SITTING §L.2 item 63)
+The anti-vacuity guard anchors on SIX shipped breaches, present-then-absent: the four the lane shipped (`newsVoice.js:97` C4 totality; `RECEIPT_POOLS_DOSSIER_STATE.md:5233` C2; `factionDynamics.js:466`; the fourth as shipped) plus `RECEIPT_POOLS_DOSSIER_STATE.md:2247` (C3-lexical) and the shipped gendered R6 lines (C3 arm a). A wave car that cures an anchor names its replacement anchor in the same car and lowers the `failing > 4` floor deliberately (the successor procedure lives in the walker's docblock; INSTR car 9, cure 17).
+
+### §1.2 — NOTE (chair, 2026-09-07; SITTING §L.2 items 61–62)
+`whatItCounts` sources the settlement's INSTANTIATED services, which the code resolves as `availableServices` (no field is named here; no ratification was owed). A column is `closed: true` only when every source this table names for it is read by the code; `whatItCounts`, `whatItDoes`, `whatItDoesNotDo` are `closed: false` until then; `holderRole`'s basis is `'absent'` while its value is a hardcoded null.

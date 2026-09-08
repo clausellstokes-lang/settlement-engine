@@ -2,8 +2,9 @@
 Seat: Opus 5 — Fable-unvalidated
 Lane: INSTR-912 · dock `$SC/laneINSTR` (detached at the product tip) · opened 2026-09-07 18:43 EDT (`date`)
 Brief: `$SC/briefs/brief-INSTR-912.md`
-Status: **COMPLETE for this dispatch.** All six cars landed, plus a seventh (the gate repair
-the estate's own ratchets demanded). Dock tip `74a1aa0e8`, porcelain 0.
+Status: **COMPLETE for this dispatch.** All six briefed cars landed, plus a seventh (the gate
+repair the estate's own ratchets demanded) and an EIGHTH (the wiring census — the owner's
+19:01 addendum, owed by car 1, extended by his 21:50 two-way map). Dock tip below, porcelain 0.
 
 | # | car | sha | proof |
 |---|-----|-----|-------|
@@ -14,6 +15,8 @@ the estate's own ratchets demanded). Dock tip `74a1aa0e8`, porcelain 0.
 | 5+6 | the measures and D8's ledger walker | `9d257ca7d` | 9 green |
 | 7 | the gate repair (six ratchets cured, five mutations planted and proved) | `e3e56f94a` | 205 green over nine walkers |
 | 7b | the lighting census refrozen by its own ritual | `74a1aa0e8` | 34 green |
+| 8 | THE WIRING CENSUS (the owner's 19:01 + 21:50 addenda) | `0b05e3a7a` | 21 green |
+| 8b | the lighting census refrozen by its own ritual | `27c24522c` | 34 green |
 
 ## 0. ARRIVAL CHECK — CONFIRMED
 ```
@@ -883,5 +886,315 @@ landed and every focused proof is green. What is OWED, and to whom:
 
 The instruments are ready for the wave: the entry walker gates claims, the grammar walker
 reports order, seven registers load, the table licenses, and the measures size the work.
+
+---
+
+## CAR 8 — THE WIRING CENSUS (the owner's 19:01 addendum + the 21:50 two-way map) — **LANDED** · shas `0b05e3a7a` + `27c24522c` · 2026-09-07 23:27 EDT
+
+### 8.0 THE PREBUILT-MAP SEARCH, done first and reported as the addendum asked
+The addendum says: *look for a prebuilt map and say what you found; do not re-derive by hand
+what one of them already prints, and do not invent one where none exists.* Executed, six
+places, and the answer is that **five halves of the map exist and the join between them did
+not**:
+
+| candidate | what it already prints | what it does NOT hold |
+|---|---|---|
+| `dossierMounts.js` | the mount registry: which block renders at which POSITION, at which rung, and `UNMOUNTED_BLOCKS` (15) | nothing about which STATE selects which pool |
+| car 3's loaders (`tests/helpers/dossierCorpus.js`) | every (block, pool, variant) — 68 / 708 / 2,266 | the predicate; the loaders read the corpus, never the reader |
+| car 5's `unrenderedFacts()` | per composer: the facts HELD, RENDERED, KEY-ONLY (72 / 13 / 59) | which POOL a key-only fact chooses — the census's whole subject |
+| `tests/helpers/dossierComposedFill.js` | the composer's bag per call site (96 sites, 53 of 68 blocks) | the pool KEY the bag is served under |
+| the annex headers | a human pool DESCRIPTION per block | a predicate. ⛔ THE POOL KEY STRINGS ARE HUMAN-READABLE PREDICATES ("COMBINATION C2: a high rung on a narrow approach") AND USING THEM AS THE PREDICATE IS THE ONE THING THE OWNER FORBADE. They are used here as the LABEL and never as the ground |
+| `check-pair.mjs` | the pair arms | no field-to-pool wiring at all (R-DA-20's measured gap) |
+
+So the census is a JOIN, not a new derivation: the loaders give the rows, the composers'
+SOURCE gives the predicate, the composed-fill census gives the slots, car 5's census gives
+the held facts, and `dossierMounts` gives the honest reason a pool has no predicate at all.
+
+### 8.1 What was built (3 files new, 3 extended; zero product bytes moved)
+| file | what it is |
+|---|---|
+| `src/domain/prose/wiringCensus.js` | the census: the four-rung recovery ladder, the two-way index, the three tiers, the co-occurrence measure, the summary |
+| `tests/lint/proseWiringCensus.walker.test.js` | the gate — **21 assertions** |
+| `tests/fixtures/wiringFixtures.js` | the controls as DATA: five fixture composers, three variant sets, a firing record |
+| `tests/helpers/dossierComposedFill.js` | EXTENDED: `composerSources()`, `composedFillByKeyFunction()`; its `balanced` now re-exports the census's `balancedSlice` (ONE bracket reader in the estate, not two) |
+| `src/domain/prose/grammarWalker.js` | arm D and C-sibling take the census as an INPUT |
+| `src/domain/prose/entryWalker.js` | arm **W** (the wiring licence), C5's premise gate, and **`walkPair`** — C-pair, which did not exist |
+
+**THE RECOVERY LADDER, DECLARED IN ORDER** (the module's header carries it in full):
+1. **LITERAL** — a `…PoolKey` body returns the key as a string; the predicate is that
+   branch's own guard, split into `{field, op, value}` rows. **167 pools.**
+2. **TEMPLATE** — the body returns `` `posture ${status}` `` and the pool is "posture peace";
+   the pattern binds the hole and `status` resolves to a reading. **69 pools.**
+3. **TABLE** — a module-level `const NAME = { '<value>': '<pool key>' }` plus the expression
+   that indexes it. **74 pools.**
+4. **Everything else is `WIRING-UNRESOLVED` with a MEASURED reason. 398 pools.**
+
+### 8.2 THE CENSUS SUMMARY — reproducible by ONE command
+```
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js --reporter=verbose
+WIRING CENSUS · beside the composed-fill census · R1 at this tip
+  pools 708 · RESOLVED 310 · WIRING-UNRESOLVED 398
+  variants 2266 · mean/pool 3.20 · histogram 2->33 3->547 4->96 5->17 6->15
+  recovery rungs: none 398 · literal 167 · table 74 · template 69
+  key functions 118 · module key tables 28
+  the ten largest UNRESOLVED reasons:      [there are TWO, and they are exhaustive]
+     256  no pool-key function returns this key as a literal, no template of one binds it,
+          and no module-level key table names it
+     142  the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so
+          no predicate selects this pool
+  slots with NO provider (the block has a bag): 65 pools
+    DS-DEF-4 :: capture none/adversarial/equilibrium/corrupted/capture — {seat}
+    DS-DEF-6 :: Medical Readiness: Clergy care — {institution}
+    DS-DEF-6 :: Logistics & Supply: Granary with road supply — {route}
+    DS-DEF-9 :: magicDependency true, with a NAMED dependent chain — {good}
+  pools whose block has NO bag at all (unmounted): 140
+  predicates over a field no composer holds: 158
+    DS-DEF-1 :: terrain FAVOURABLE to the defender — text(terrain) (via TERRAIN_DEFENCE_OF)
+    DS-DEF-2 :: Internal Security: full legal chain (court AND prison) — court · prison
+  status by block (the twelve with the most unresolved):
+    DS-WAR-5 0/31 · DS-FTH-3 0/25 · DS-WAR-2 4/24 · DS-DEF-2 4/22 · DS-DEF-10 0/21
+    DS-DEF-6 3/18 · DS-POW-7 2/18 · DS-POP-1 0/17 · DS-FTH-1 8/13 · DS-DEF-7 0/11
+    DS-HK-1 0/11 · DS-POW-5 1/11
+  COMPOSED FILL (the sibling census this one sits beside):
+    blocks with a composer bag 53 of 68 · call sites 96
+```
+**THE VARIANT COLUMN IS FIRST-CLASS, and it reproduces the owner's figures to the unit**
+(the 21:50 ruling — every semantic variant gets a family of FOUR wordings and nothing is
+ever trimmed, so the tier table sizes that authoring too): **2,266 variants over 708 pools,
+mean 3.20, histogram 2→33 · 3→547 · 4→96 · 5→17 · 6→15**, which sums back to 2,266 and rolls
+up to 2,266 across all 68 blocks. Reproduced from the leaves, not copied.
+
+⭐ **AND THE HISTOGRAM'S OWN CONSEQUENCE, WHICH IS A FINDING: THE MINIMUM POOL IS TWO.** The
+THIN tier's "a pool with one variant" limb fires on **ZERO of 708** — R1 has no pool of one.
+(R6 is the register where NL-8b's "a pool of one is not a pool" is half the register — car
+3's 546 singletons of 1,104. The two are different registers and the census says so.)
+
+### 8.3 THE MAP READ THE OTHER WAY — fact → text, and the three tiers
+```
+facts a key function conjoins: 44        (each with its pools, variants and grammars)
+  axis                                   pools  20 · variants  60 · grammars 29
+  `${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF)
+                                         pools   6 · variants  24 · grammars 12
+  condition.severity                     pools   4 · variants  12 · grammars  7
+  conflict.intensity                     pools   3 · variants  15 · grammars  7
+  …
+TIERS · MISSING 58 · THIN 483 · COVERED 225
+  THIN 483 = one-variant 0 · one-grammar 298 · settlement-only slots 440
+  MISSING 58 = held facts with NO pool keyed on them (readings.activeChains,
+    readings.ancientRuin, readings.clockIds, readings.coherenceNotes, readings.conflicts,
+    readings.criticalIssueCount, readings.crossEngagements, readings.exploitation,
+    readings.foodBalance, readings.foodSecurityLabel, …)
+```
+**THE THIRD MEASUREMENT OF THE SETTLEMENT-ONLY NEIGHBOURHOOD, with its method stated so the
+chair can diff rather than reconcile.** SITTING A12 read 20 of 68; car 5 measured **22** by
+resolving each composer BAG; this car measures **19 blocks whose EVERY pool names only
+`{settlement}` in its variants**, and **57 of 68 blocks with at least one such pool**, by
+reading the VARIANTS' own slots. Three different questions — what the bag offers, what the
+sentences name, what the sitting counted — and three different right answers. Nothing is
+reconciled by hand; the list is printed by the walker.
+`DS-DEF-1 · DS-DEF-2 · DS-DEF-3 · DS-DEF-5 · DS-DEF-8 · DS-ECO-3 · DS-ECO-7 · DS-ECO-8 ·
+DS-ECO-9 · DS-FTH-2 · DS-GEN-10 · DS-GEN-12 · DS-GEN-17 · DS-GEN-3 · DS-GEN-5 · DS-GEN-6 ·
+DS-POP-3 · DS-WAR-3 · DS-WAR-4`
+
+### 8.4 CO-OCCURRENCE BY EXECUTION — 200 towns through the SHIPPED composers
+`$SC/instr-912/firings.mjs`, the addendum's own instruction (measure by EXECUTION, never by
+reading) and the taste sample's hazard honoured (never `{}` readings).
+```
+$ node firings.mjs 200
+towns 200 of 200 (generator throws 0) | firings 13,486 | mean 67.4 firings/town
+desk throws: none
+distinct (block,pool) keys fired: 181 of 708      # ← the finding, before any pair is counted
+distinct blocks fired: 39 of 68
+$ node probe-census8.mjs
+EXECUTION: towns 200 · of the 181 fired keys, RESOLVED in the census: 122
+  with NO floor: pairs 0 · notExecutable ["no `minTowns` floor supplied — …"]
+  floor 100: 168 fact pairs co-fire with NO pool keyed on both
+  floor 180: 105
+  floor 200:  91          # co-fire on EVERY town of the sample
+     200  axis + court · axis + politics.blocs · axis + readings.viable ·
+     200  axis + readings.exportPosture.status · axis + marker.yearsAgo · …
+  TIERS with the pair rows: MISSING 163 · THIN 483 · COVERED 225
+```
+**ALL SIX COMPOSERS ARE REACHED, each through its OWN shipped recipe** — `economyDeskRead`
+verbatim; the power readings from `PowerTab.jsx:198-202`'s canonical readers; defense's eight
+entry points exactly as `DefenseTab.jsx:94-120` calls them (they take no readings object at
+all); stressors from `OverviewTab.jsx:148-175`; war/faith from `FaithTab.jsx:218-225`. Zero
+composer throws over 200 towns.
+
+**FOUR REFUSALS INSIDE THIS MEASUREMENT, each with its measurement.**
+1. **`generalDeskLines` returns finished STRINGS**, so its rungs carry no provenance to read.
+   The probe calls `generalStateProse` with the desk-read's OWN readings recipe
+   (`generalDeskRead.js:176-243`), settlement-derived half copied verbatim.
+2. **Nine of that recipe's fields are the TAB's, out of campaign state** (hookCategories,
+   clockIds, steadings, neighbours, crossEngagements, lifecycleStatus, ancientRuin,
+   populationTrend, stresses). They are ABSENT here — exactly as on a tab with no such ledger
+   — so the pools they key cannot fire, and this receipt does not present 181 as a ceiling.
+3. **The WAR half of DS-WAR-* needs a `worldState` no generator writes.** Measured, not
+   assumed: `worldStressor` and the war reading are both null at birth. DS-WAR-5's 31 pools
+   are 0/31 resolved AND never fired — two independent readings of the same darkness.
+4. **The floor is the CHAIR'S, not this instrument's.** `coOccurringPairs` returns
+   NOT-EXECUTABLE without a `minTowns` argument and the walker proves it does. Three floors
+   are printed so the chair can pick one; the module has no default and never will.
+
+### 8.5 THE CONTROLS — every one executed, every one fires, every cure silences it
+```
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js
+  Test Files  1 passed (1)
+       Tests  21 passed (21)
+```
+| control | what it must do | measured |
+|---|---|---|
+| **(c1)** a pool whose key function has no branch selecting it | UNRESOLVED, never guessed from the name | struck branch ⇒ `MOOD: restive` flips RESOLVED → WIRING-UNRESOLVED with its reason; **its sibling is unmoved** (or the control proved only that the census can break) |
+| **(c1b)** the predicate that IS recovered | the branch's own field, op and value | `{field: 'readings.reading.mood', op: '===', value: 'calm'}` — and the field is RE-ROOTED on the caller's path, which is what joins this census to car 5's |
+| **(c1c)** rungs 2 and 3 | reach a key rung 1 cannot see, without adding guessing | template ⇒ `{war.status === 'peace'}`; table ⇒ the map's own key `coastal`; a key NEITHER names ⇒ UNRESOLVED |
+| **(c2)** a variant naming a slot the bag never fills | a FINDING, not a crash | `expectPresentThenAbsent` on `{seat}`: present before, absent after, **with the bag byte-identical between the two** |
+| **(c3)** a predicate over a field no composer holds | a finding; and NOT-EXECUTABLE with no held set | 1 finding named · 0 once the root is named as held · 0 and `predicateArmExecutable: false` when nothing is supplied |
+| **(d)** ANTI-VACUITY | red on zero RESOLVED **or** zero UNRESOLVED | the mixed fixture reads 1/1; an all-resolved fixture reads 0 unresolved; an all-unresolved fixture reads 0 resolved — three distinguishable readings, not one |
+| **(e)** THE FENCE | no `src/` file outside `src/domain/prose/` imports the census | the byte scan over `src/` returns **exactly** `['src/domain/prose/wiringCensus.js']` — an equality, so the scan cannot be blind and pass |
+| **co-occurrence** | no floor ⇒ NOT-EXECUTABLE; a floor above the sample ⇒ silent; a pair some pool conjoins ⇒ never MISSING | all four measured |
+| **the readers** | a reader gone dark reports zero | 118 key functions / 28 tables on the estate; 1 / 0 on fixtures built to hold one and none |
+
+### 8.6 THE WALKERS TAKE THE CENSUS AS THE SOURCE OF TRUTH — one control each
+- **Grammar walker, arm D.** Without a census the block-wide bag licenses `{seat}`; WITH the
+  census, THIS POOL's wiring does not, and the claim is banked **WITHHELD as
+  `PRE-EXISTING unlicensed`** — the owner's sentence made executable. `fails` is unchanged at
+  zero: **nothing already green goes red by the wiring alone.** An UNRESOLVED row makes the
+  arm NOT-EXECUTABLE (`D/wiring`), never a pass.
+- **Grammar walker, C-sibling.** Its premise is "same key ⇒ same state". A conflicting
+  sibling pair fails as before with no census; with an UNRESOLVED census row the arm reports
+  `C-sibling/wiring` NOT-EXECUTABLE instead, because the premise is unestablished.
+- **Entry walker, arm W.** Silent with no census; with one, the unlicensed slot is WITHHELD
+  as `PRE-EXISTING unlicensed` and `fails` is identical to the un-wired walk.
+- **Entry walker, C-PAIR — `walkPair`, which did not exist before this car.** A totality the
+  AFTER buys reads as `added` (1, preExisting 0); the same fault in BOTH halves reads as
+  `preExisting` labelled `PRE-EXISTING · …` (added 0); a rewrite that removes it is credited
+  as `cured`. This is CLERK-LAWS §2.6's proposed v3 composition, built.
+
+### 8.7 REFUSALS (car 8), each with its measurement
+1. **398 of 708 pools are WIRING-UNRESOLVED, and that is the instrument's finding rather
+   than its shortfall.** 142 are pools of the 15 UNMOUNTED blocks — no composer reads them,
+   so no predicate CAN select them; 256 are keys built where a static read cannot follow
+   (a corpus-derived key table like `poolsByToken`, a key assembled in a non-key function, a
+   key literal that appears in no composer source at all). Every one carries its reason and
+   **none is inferred from the pool's own name**, which is the one thing the owner forbade.
+2. **The annex's pool DESCRIPTIONS are not parsed into predicates.** They are prose about
+   the pool. Using them would be exactly the inference the addendum rules out; they are
+   available as the LABEL and this census does not read them at all.
+3. **`predicatesOverUnreadFields` is NOT-EXECUTABLE without car 5's held facts, and the
+   walker proves it.** A first cut compared the predicate's field against the key function's
+   own `fieldsRead` — a comparison that CANNOT fail by construction, because every predicate
+   row is built from a chain the reader already found in the body. It reported 74 rows of its
+   own bookkeeping and would have reported a clean zero once that was fixed. It now compares
+   each predicate's ROOT against what the composers hold, which fires: **158**.
+4. **The co-occurrence arm runs in a PROBE, not in the gate.** 200 towns is 5.6 s of
+   generation; the estate already has one lint arm sitting at 89 % of its own timeout under
+   contention (§8.1). The walker proves `coOccurringPairs` on fixtures with four controls;
+   the executed figures are in §8.4 and are reproducible by `node firings.mjs 200`.
+5. **`tests/helpers/dossierComposedFill.js` no longer defines its own bracket reader.** Car 8
+   needed the same reader over the same sources; a second copy is the fork car 3 refused for
+   R16. The helper now re-exports `wiringCensus.balancedSlice` under its original name, so
+   every existing caller is unchanged and both instruments read brackets one way. Proved by
+   the two walkers that consume the helper staying green (61 assertions).
+6. **Arm W and C-PAIR are new arms, and the brief presupposed they existed.** The brief says
+   "C-pair / C-sibling of the entry walker take the census as an input"; car 1 built C1–C6,
+   D, Q, X and F25 and **no pair arm at all** (CLERK-LAWS §2.6 left it as a proposal). Rather
+   than report the row not-executable, this car built `walkPair` to the §2.6 spec, because it
+   is exactly where the owner's PRE-EXISTING/added distinction becomes a verdict.
+
+### 8.8 THE PROOFS
+```
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js ; echo EXIT=$?
+  Test Files  1 passed (1)
+       Tests  21 passed (21)
+EXIT=0
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js tests/lint/proseMoveGrammar.walker.test.js \
+      tests/lint/proseEntryContradiction.walker.test.js tests/lint/proseRegisterLoaders.walker.test.js \
+      tests/lint/proseMeasures.walker.test.js
+  Test Files  5 passed (5)
+       Tests  101 passed (101)          # the two walkers this car edited are unmoved
+$ npx eslint src/domain/prose/wiringCensus.js src/domain/prose/entryWalker.js \
+      src/domain/prose/grammarWalker.js tests/lint/proseWiringCensus.walker.test.js \
+      tests/fixtures/wiringFixtures.js tests/helpers/dossierComposedFill.js ; echo EXIT=$?
+EXIT=0
+$ npx tsc --noEmit -p tsconfig.json 2>&1 | grep -E 'domain/prose|wiringCensus'
+                                          # (no output)
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ npx vitest run tests/lint/tuningRegister.walker.test.js tests/lint/domainAnyCastBaseline.test.js \
+      tests/lint/negativeAssertionAnchor.walker.test.js tests/lint/mutationCoverageManifest.test.js \
+      tests/lint/contractTestAntiVacuity.walker.test.js tests/lint/domainStrictBaseline.test.js \
+      tests/lint/domainStrictFailClosed.test.js tests/lint/sizeBaseline.test.js
+  BEFORE the manifest entry: Test Files 1 failed | 7 passed · Tests 1 failed | 148 passed
+  AFTER:                     Test Files 8 passed (8) · Tests 149 passed (149)
+```
+**THE FINAL RUN, on the COMMITTED tree (both cars landed):**
+```
+$ npx vitest run <the five lane prose walkers + institutionTable + mutationCoverageManifest
+                  + tuningRegister + domainAnyCastBaseline + negativeAssertionAnchor
+                  + contractTestAntiVacuity + sovereigntyLightingContract>
+  Test Files  12 passed (12)
+       Tests  275 passed (275)
+```
+Pre-run gate before every vitest invocation: `ls $SC/HOLD-VITEST` absent; split-pattern
+runner count 0. ⚠ ONE HAZARD RE-LEARNED: the gate must run in its OWN shell call. Run in the
+same compound command as the vitest invocation, the caller's own cmdline carries the literal
+word and `pgrep -f` counts it — one check read **61** with zero runners live. §0.1's split
+pattern defeats the pattern, not the co-location.
+
+### 8.9 THE PLANTED MUTATION — executed, restored, `cmp`-verified
+Sweep entry **#79** (`scripts/mutation-sweep.sh`), manifest entry keyed on the new walker.
+```
+the plant: the census's fallthrough answers RESOLVED instead of WIRING-UNRESOLVED
+  planted  => 5 red of 21 — the anti-vacuity split (310/398), control c1's UNRESOLVED pool,
+              control d's mixed fixture, the grammar walker's D/wiring arm, C-sibling's gate
+  restored => cmp byte-identical; 21 passed
+```
+It is the right plant because the three rung readers go on working under it: the row count,
+the variant histogram and the fill census all stay correct while the census silently stops
+distinguishing what it READ from what it did not — the quietest false green an instrument of
+this shape can have.
+
+### 8.10 THE PROMISE — held
+`drawVariant` is byte-unchanged and imports nothing from this car. No pool length, key, order
+or index moved; no corpus byte moved; no seed input touched. `wiringCensus.js` reads no file
+(every source arrives as a string), holds no state, and the fence arm proves by bytes that
+nothing under `src/` outside `src/domain/prose/` imports it.
+
+### 8.11 WHAT THE CHAIR GETS, AND WHAT IS OWED
+| for the wave | the figure | where |
+|---|---|---|
+| pools the wiring can license | **310** of 708 | §8.2 |
+| pools whose predicate is unrecoverable, with reasons | **398** (142 unmounted · 256 unfollowable) | §8.2 |
+| slots a pool names that its wiring cannot fill | **65** pools (plus 140 in blocks with no bag at all) | §8.2 |
+| predicates over a field no composer holds | **158** | §8.2 |
+| MISSING (held facts with no pool) | **58**; **163** with the co-firing pairs at the 90 % floor | §8.3, §8.4 |
+| THIN | **483** = 0 one-variant · 298 one-grammar · 440 settlement-only | §8.3 |
+| COVERED | **225** | §8.3 |
+| pools that FIRE at all, over 200 towns of one config | **181** of 708 | §8.4 |
+| the co-occurrence FLOOR | **the chair's** — three are printed, none is defaulted | §8.4 |
+
+### 8.12 CAR 8b — THE LIGHTING CENSUS, REFROZEN BY ITS OWN RITUAL (sha `27c24522c`)
+One new lint walker file moves the estate's file count, so the register is REGENERATED — its
+own file forbids a hand-composed figure and the ritual refuses a dirty tree.
+```
+$ LIGHTING_CENSUS_REFREEZE='INSTR-912 car 8 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 0b05e3a7a by INSTR-912 car 8 (Opus 5):
+  files 2548 -> 2549 · parked 375 -> 375 · credited 2173 -> 2174
+  titles 23696 -> 23717 · suiteTitles 6346 -> 6352
+  (this run fails BY DESIGN so a refreeze can never read as a passing gate)
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+  Tests  34 passed (34)          # the plain green the ritual's docblock asks for
+```
+**`parked` did not move and `credited` rose by one** — the new walker's titles are CREDITED,
+unlike two of car 7's five, which register their `it()`s inside a `for` loop over a control
+roster and are parked as run-control. Nothing was reshaped to earn the credit.
+
+### 8.13 What a successor continues from
+**Dock tip `27c24522c`, porcelain 0, zero untracked, nine commits over `3b1c0eaa5`.** ⚠ The
+PRODUCT tip has since moved to `f3ab08f51` in another dock; this dock stays on its own tip and
+**the rebase is the chair's**, not this lane's. The census's figures will need a re-run after
+that rebase: every one of them is a measurement of the composers at THIS tip, and the
+reproducing command is named in §8.2 and §8.4.
 
 Seat: Opus 5 — Fable-unvalidated
