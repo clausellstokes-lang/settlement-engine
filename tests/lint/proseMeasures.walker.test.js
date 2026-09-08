@@ -13,11 +13,14 @@
  * @see src/domain/prose/plantLedger.js
  */
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
-  hasTextureDevice, presenceOf, SENSE_OF_NOUN, SENSORY_NOUNS,
+  bucketAudit, hasTextureDevice, presenceOf, SENSE_OF_NOUN, SENSORY_NOUNS,
 } from '../../src/domain/prose/presenceMeasure.js';
 import {
-  plantIdOf, plantLedgerOf, REQUIRED_FIELDS, walkPlantLedger,
+  plantIdOf, plantLedgerOf, REQUIRED_FIELDS, walkPlantLedger, walkPlantLedgersAcrossSeeds,
 } from '../../src/domain/prose/plantLedger.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -26,6 +29,8 @@ import {
   loadHeraldDisclosure, loadInstitutionGazetteer, loadNpcLadder, loadStateLeaves,
 } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites, unrenderedFacts } from '../helpers/dossierComposedFill.js';
+import { composedReadingSequence, DORMANT_POOL_KEY } from '../fixtures/composedReadingSequence.js';
+import { classifyMoves, orderIdOf } from '../../src/domain/prose/moveGrammar.js';
 
 /** @param {string} tier @param {string} seed */
 const town = (tier, seed) => generateSettlementPipeline(
@@ -37,14 +42,43 @@ const town = (tier, seed) => generateSettlementPipeline(
 );
 
 describe('CAR 5(a) — the presence measure, three lines, reported', () => {
-  it('publishes a closed, sense-partitioned lexicon', () => {
+  it('publishes a closed, sense-partitioned lexicon — counted over the ARRAYS, where it can fail', () => {
     const senses = Object.keys(SENSORY_NOUNS);
     expect(senses).toEqual(['sight', 'hearing', 'smell', 'touch', 'taste']);
     const total = senses.reduce((a, s) => a + SENSORY_NOUNS[s].length, 0);
     expect(total).toBeGreaterThan(150);
-    // A noun resolves to exactly ONE sense, so the spread is a partition and not a double
-    // count — the figure line 3 exists to produce is meaningless otherwise.
-    for (const noun of Object.keys(SENSE_OF_NOUN)) expect(senses).toContain(SENSE_OF_NOUN[noun]);
+    // ⛔ THE OLD ASSERTION ITERATED `SENSE_OF_NOUN`'s VALUES AND COULD NOT FAIL. That map has
+    // one value per key by construction, so "every noun resolves to one of five senses" is
+    // true of ANY lexicon, duplicated or not — and the lexicon WAS duplicated: 169 published
+    // entries over 166 distinct nouns, with `smoke` (sight + smell), `stone` and `mud`
+    // (sight + touch) in two buckets each. The count over the ARRAYS is the same question
+    // asked where it can be answered wrongly, and it read 169 against 166.
+    const audit = bucketAudit();
+    expect(audit.entries).toBe(audit.distinct);
+    expect(audit.duplicates).toEqual([]);
+    console.log(`\nSENSORY LEXICON · ${audit.entries} entries / ${audit.distinct} distinct — `
+      + `${Object.entries(audit.perBucket).map(([k, v]) => `${k} ${v}`).join(' · ')}\n`);
+    // The resolver still agrees with the arrays, which is what makes the audit relevant to
+    // the figure rather than a fact about a list.
+    for (const [sense, nouns] of Object.entries(SENSORY_NOUNS)) {
+      for (const noun of nouns) expect(SENSE_OF_NOUN[noun]).toBe(sense);
+    }
+    expect(Object.keys(SENSE_OF_NOUN)).toHaveLength(audit.distinct);
+  });
+
+  it('every module in the measures pair names the walker that enforces it, and the target EXISTS', () => {
+    // ⛔ `plantLedger.js:37` DECLARED `@enforced-by tests/lint/plantLedger.walker.test.js`,
+    // WHICH DOES NOT EXIST — an enforced-by pointing at nothing is worse than none, because
+    // a reader stops looking. `presenceMeasure.js` carried none at all.
+    const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
+    for (const module of ['src/domain/prose/plantLedger.js', 'src/domain/prose/presenceMeasure.js']) {
+      const source = readFileSync(join(root, module), 'utf8');
+      const match = /@enforced-by\s+(\S+)/.exec(source);
+      expect(match, `${module} carries no @enforced-by`).toBeTruthy();
+      expect(match[1]).toBe('tests/lint/proseMeasures.walker.test.js');
+      // The target must exist — the whole point of the correction.
+      expect(() => readFileSync(join(root, match[1]), 'utf8')).not.toThrow();
+    }
   });
 
   it('refuses a PROPER-NOUN SLOT as texture — a name is not a thing seen', () => {
@@ -94,8 +128,13 @@ describe('CAR 5(b) — the unrendered-facts census, the number the authoring wav
       + `  TOTAL: holds ${held} · renders as a word ${rendered} · key-only ${held - rendered}`
       + ` (${((held - rendered) / held * 100).toFixed(0)}%)\n`
       + '  ⚠ A KEY-ONLY FACT IS NOT DARK. It chooses which authored sentence the reader meets,\n'
-      + '    so it reaches the reader as a CHOICE and never as a WORD. The figure is therefore an\n'
-      + '    UPPER bound on the authoring wave\'s opportunity, not a count of facts nobody can see.\n');
+      + '    so it reaches the reader as a CHOICE and never as a WORD.\n'
+      + '  ⛔ AND IT IS NOT AN UPPER BOUND ON THE WAVE\'S OPPORTUNITY — that framing is WITHDRAWN\n'
+      + '    (SITTING §L.2 item 70; Part B §18). This is a PER-FILE reach census over six composer\n'
+      + '    sources: a generated town carries 41 top-level settlement keys and the six composers\n'
+      + '    name 9, so 32 top-level keys are named by no composer and are invisible to this scan\n'
+      + '    by construction. The wave sizes from car 8\'s TIER TABLE (MISSING 58 · THIN 483 ·\n'
+      + '    COVERED 225), and §912.1\'s condition one is discharged by those tiers, not by this.\n');
     expect(rows).toHaveLength(6);
     expect(held).toBeGreaterThan(50);
     expect(rendered).toBeGreaterThan(0);
@@ -141,6 +180,62 @@ describe('CAR 5(c) — the licensed level-1 members per block, on the COMPOSED f
   });
 });
 
+describe('CAR 9 — THE COMPOSED READING SEQUENCE, with every reading the shipped caller passes', () => {
+  it('reaches MORE THAN ONE COMPOSER and MORE THAN SEVEN BLOCKS — the sequence SITTING K.2 was priced from did neither', () => {
+    const run = composedReadingSequence(3);
+    console.log(`\nCOMPOSED READING SEQUENCE · 3 towns, six desks\n`
+      + `  composers reached: ${run.composers.length} — ${run.composers.join(', ')}\n`
+      + `  provenance rungs ${run.rungs.length} · bare general-desk sentences ${run.bare.length}`
+      + ` · LINES ${run.lines.length}\n`
+      + `  distinct blocks fired: ${run.blocks.length} of 68\n`
+      + `  draws from the DORMANT pool key: ${run.dormantDraws}\n`
+      + `  desk throws: ${Object.keys(run.deskThrows).length ? JSON.stringify(run.deskThrows) : 'none'}\n`);
+    // The first cut executed 29 lines, ALL 29 from `powerStateProse`, over 7 blocks of 68.
+    expect(run.composers.length).toBeGreaterThan(1);
+    expect(run.blocks.length).toBeGreaterThan(7);
+    // The general desk's BARE STRINGS are harvested — the half a provenance walk cannot see.
+    expect(run.bare.length).toBeGreaterThan(0);
+    expect(run.composers).toContain('generalDeskLines (bare strings)');
+    // Nothing throws: a sequence that swallowed a desk error would report a short reading as
+    // a finding about the corpus.
+    expect(run.deskThrows).toEqual({});
+  });
+
+  it('the DORMANT draw is a fact about the WORLD, and the limb is executable in both directions', () => {
+    // A headless generated town carries no politics ledger — the layer is written during
+    // play — so DS-POW-7 draws the absence pool on every seed even with the REAL reading
+    // passed. That is the product's state, not the probe's artefact, and the only way to
+    // show the pool key moves is to give the world the ledger it lacks.
+    const fresh = composedReadingSequence(3);
+    const materialised = composedReadingSequence(3, { materialisePolitics: true });
+    expect(fresh.dormantDraws).toBe(3);
+    // anchored: the line above proves the pool IS drawn, so the zero below is the ledger's
+    // doing and not a dead arm
+    expect(materialised.dormantDraws).toBe(0);
+    expect(DORMANT_POOL_KEY).toContain('DORMANT');
+  });
+
+  it('re-measures SITTING K.2\'s V1 share and run rate on the SIX-DESK sequence', () => {
+    const run = composedReadingSequence(3);
+    const orders = run.lines.map((t) => orderIdOf(classifyMoves(t)) || classifyMoves(t).join('→'));
+    const v1 = orders.filter((o) => String(o).split('|').includes('V1')).length;
+    let repeats = 0;
+    for (let i = 1; i < orders.length; i += 1) if (orders[i] === orders[i - 1]) repeats += 1;
+    const share = v1 / orders.length;
+    const runRate = repeats / (orders.length - 1);
+    console.log(`\nK.2 RE-MEASURED · 3 towns (the 200-town run is $SC/instr-912/reading-sequence-9.mjs)\n`
+      + `  V1 share ${share.toFixed(4)} (${v1} of ${orders.length}) · run rate ${runRate.toFixed(4)}\n`
+      + `  distinct orders n = ${new Set(orders).size}\n`
+      + `  K.2 carried 0.784 / 0.618 from ONE desk over 7 blocks; the 200-town six-desk figures\n`
+      + `  are 0.8650 / 0.7525 over 19,047 lines and are now in Part B §18.\n`);
+    // The finding survives the correction and is SHARPER: V1 dominates the whole dossier,
+    // not just the power desk. The bound is asserted loosely because the wave will move it.
+    expect(share).toBeGreaterThan(0.5);
+    expect(runRate).toBeGreaterThan(0.5);
+    expect(new Set(orders).size).toBeGreaterThan(3);
+  });
+});
+
 describe('CAR 6 — D8\'s ledger walker, and the class it is waiting for', () => {
   it('derives a stable, report-only plant id and never persists it', () => {
     const plant = { text: 'The roll is short by four names.', source: 'the hall', category: 'tension' };
@@ -150,32 +245,80 @@ describe('CAR 6 — D8\'s ledger walker, and the class it is waiting for', () =>
   });
 
   it('FIRES on both D8 breaches when the class exists — the control that must red', () => {
-    const both = plantLedgerOf(
-      [{ text: 'a', source: 's', category: 'c', answerable: true }],
-      { answers: { [plantIdOf({ text: 'a', source: 's', category: 'c' })]: 'the answer' },
-        gapReasons: { [plantIdOf({ text: 'a', source: 's', category: 'c' })]: 'the reason' } },
-    );
-    const neither = plantLedgerOf([{ text: 'b', source: 's', category: 'c', answerable: true }]);
+    const id = (text) => plantIdOf({ text, source: 's', category: 'c' });
+    const plant = (text) => ({ text, source: 's', category: 'c', answerable: true });
+    const both = plantLedgerOf([plant('a')], {
+      answers: { [id('a')]: 'the answer' }, gapReasons: { [id('a')]: 'the reason' },
+    });
+    const neither = plantLedgerOf([plant('b')]);
     expect(walkPlantLedger(both).fails[0]).toMatch(/BOTH an answer and a gap-reason/);
     expect(walkPlantLedger(neither).fails[0]).toMatch(/NEITHER an answer nor a gap-reason/);
-    // And it stays silent on the lawful shape.
-    const ok = plantLedgerOf(
-      [{ text: 'c', source: 's', category: 'c', answerable: true }],
-      { answers: { [plantIdOf({ text: 'c', source: 's', category: 'c' })]: 'answered' } },
-    );
-    expect(walkPlantLedger(ok).fails).toEqual([]);
-    expect(ok.openShare).toBe(0);
+    // ⛔ AND THE OPEN SHARE ON THAT SAME PLANT USED TO READ −1. `(answerable − answered −
+    // withGap)` subtracts a plant carrying BOTH channels twice, so a single such plant put
+    // the share outside [0, 1] — a number any future arm would have read as a rate. It is
+    // counted CLOSED ONCE, and the double-channel defect is reported by the arm above rather
+    // than smuggled into the arithmetic.
+    expect(both.openShare).toBeGreaterThanOrEqual(0);
+    expect(both.openShare).toBeLessThanOrEqual(1);
+    expect(both.closed).toBe(1);
+    // THE LAWFUL SHAPE: two plants, one answered and one named OPEN with a reason. Every arm
+    // silent — which is what makes the fails above findings rather than noise.
+    const lawful = plantLedgerOf([plant('c'), plant('d')], {
+      answers: { [id('c')]: 'answered' }, gapReasons: { [id('d')]: 'why it stays open' },
+    });
+    expect(walkPlantLedger(lawful).fails).toEqual([]);
+    expect(lawful.openShare).toBe(0);
+    expect(lawful.namedOpenShare).toBe(0.5);
+  });
+
+  it('D8\'s OPEN-SHARE arm ships behind a CLASS-EXISTENCE GUARD, and fails once the class exists', () => {
+    // Part B §18 / SITTING §L.2 item 72(i): the walker REPORTS while no plant class exists in
+    // the shipped corpus and FAILS on a zero or constant open share once any plant is
+    // authored. Car 6 claimed a constant share was "exactly the condition D8's walker is
+    // designed to fail on" and the walker had no open-share arm in either direction; an
+    // executed control at open share 0 returned `fails []`. It is code now, not a sentence.
+    const id = (text) => plantIdOf({ text, source: 's', category: 'c' });
+    const plant = (text) => ({ text, source: 's', category: 'c', answerable: true });
+    // GUARD SHUT — no answerable plant: the arm is silent AND says why.
+    const noClass = plantLedgerOf([{ text: 'z', source: 's', category: 'c' }]);
+    expect(walkPlantLedger(noClass).fails).toEqual([]);
+    expect(walkPlantLedger(noClass).notExecutable).toHaveLength(1);
+    // GUARD OPEN, NOTHING NAMED OPEN: the arm FAILS.
+    const nothingOpen = plantLedgerOf([plant('c')], { answers: { [id('c')]: 'answered' } });
+    expect(nothingOpen.namedOpenShare).toBe(0);
+    expect(walkPlantLedger(nothingOpen).fails.join(' ')).toMatch(/nothing is named OPEN/);
+    // THE CROSS-SEED LIMB, which one ledger cannot see and car 6 reported as though it had.
+    const seedA = plantLedgerOf([plant('c'), plant('d')], {
+      answers: { [id('c')]: 'a' }, gapReasons: { [id('d')]: 'w' },
+    });
+    const seedB = plantLedgerOf([plant('e'), plant('f')], {
+      answers: { [id('e')]: 'a' }, gapReasons: { [id('f')]: 'w' },
+    });
+    const seedC = plantLedgerOf([plant('g'), plant('h'), plant('i')], {
+      answers: { [id('g')]: 'a', [id('h')]: 'b' }, gapReasons: { [id('i')]: 'w' },
+    });
+    // CONSTANT across seeds → FAIL.
+    expect(walkPlantLedgersAcrossSeeds([seedA, seedB]).fails.join(' ')).toMatch(/on all 2 seeds/);
+    // VARYING across seeds → a note, never a fail.
+    expect(walkPlantLedgersAcrossSeeds([seedA, seedC]).fails).toEqual([]);
+    expect(walkPlantLedgersAcrossSeeds([seedA, seedC]).notes.join(' ')).toMatch(/varies across 2 seeds/);
+    // FEWER THAN TWO LEDGERS CARRYING THE CLASS → NOT-EXECUTABLE, never a pass.
+    expect(walkPlantLedgersAcrossSeeds([noClass, noClass]).notExecutable).toHaveLength(1);
+    expect(walkPlantLedgersAcrossSeeds([noClass, noClass]).fails).toEqual([]);
   });
 
   it('over the SHIPPED product it reports NOT-EXECUTABLE and names the three missing fields', () => {
     /** @type {number[]} */
     const shares = [];
+    /** @type {Array<ReturnType<typeof plantLedgerOf>>} */
+    const ledgers = [];
     let plants = 0;
     let answerable = 0;
     for (const tier of ['village', 'town', 'city']) {
       for (let i = 0; i < 3; i += 1) {
         const settlement = town(tier, `d8-${tier}-${i}`);
         const ledger = plantLedgerOf(collectPlotHooks(settlement, {}));
+        ledgers.push(ledger);
         plants += ledger.rows.length;
         answerable += ledger.answerable;
         shares.push(ledger.openShare === null ? 1 : ledger.openShare);
@@ -187,6 +330,12 @@ describe('CAR 6 — D8\'s ledger walker, and the class it is waiting for', () =>
         expect(walk.notExecutable[0]).toContain('answerable');
       }
     }
+    // The cross-seed limb over the same nine towns: NOT-EXECUTABLE, because none of the nine
+    // carries the class at all. It is the same §908 law one level up.
+    const across = walkPlantLedgersAcrossSeeds(ledgers);
+    expect(across.fails).toEqual([]);
+    expect(across.notExecutable).toHaveLength(1);
+    expect(across.notExecutable[0]).toContain('cross-seed limb');
     console.log('\nD8 PLANT LEDGER · nine settlements over three tiers\n'
       + `  plants enumerated:            ${plants}\n`
       + `  plants carrying \`answerable\`: ${answerable}\n`

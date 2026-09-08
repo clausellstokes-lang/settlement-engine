@@ -238,6 +238,15 @@ export const CHAIR_CEILINGS = Object.freeze({
   ratioCap: 1.5,
   runFloor: 0.05,
   successorCeiling: 0.50,
+  // ARM E's REGISTER-LEVEL CEILINGS, quoted from MOVE-GRAMMAR §4.3's own recommendation row
+  // ("pools uniform in grammar ≤ 0.30 (test this); pools uniform in segment count R1 0.576 →
+  // ≤ 0.40; repeated opener R1 0.112 → ≤ 0.030"). They are the CALLER's numbers, supplied
+  // here so control 4 can red on the arm instead of on two helper functions.
+  spread: Object.freeze({
+    uniformGrammar: 0.30,
+    uniformSegments: 0.40,
+    repeatedOpener: 0.030,
+  }),
 });
 
 /** The chair's three numbers, as VALUES a caller supplies — never as constants a walker bakes. */
@@ -278,6 +287,44 @@ export const ARM_D_CONTROL = Object.freeze({
   passes: 'The {seat} at {settlement} keeps its own rolls.',
   fails: 'The {institution} at {settlement} keeps its own rolls.',
 });
+
+/**
+ * ARM D's (BLOCK, POOL) CONTROL — gap (e), which the code keyed on the BLOCK alone while its
+ * own comment said otherwise.
+ *
+ * TWO POOLS OF ONE BLOCK WITH DIFFERENT LICENCES, which is the shape the estate actually
+ * ships: `craftSlots` fills `{resource}` on one pool of `DS-GEN-18` and refuses it on
+ * another. Keyed by block, ONE bag is a superset of both and licenses a claim the narrower
+ * pool cannot make; keyed by (block, pool) the two resolve differently, and that difference
+ * is the whole of gap (e).
+ * @type {Readonly<{block: string, wide: string, narrow: string, text: string,
+ *   wideBag: ReadonlyArray<string>, narrowBag: ReadonlyArray<string>}>}
+ */
+export const ARM_D_PAIR_CONTROL = Object.freeze({
+  block: 'DS-BLOCK',
+  wide: 'wide-pool',
+  narrow: 'narrow-pool',
+  text: 'The {resource} out of {settlement} moves by cart.',
+  wideBag: Object.freeze(['settlement', 'resource']),
+  narrowBag: Object.freeze(['settlement']),
+});
+
+/**
+ * U5's FIXTURE — arm A reads the TAG on a tagged pool and the classifier only reports
+ * (SITTING K.2 as §L.2 item 67 rules it).
+ *
+ * Every variant carries `grammar:` and every one carries the SAME tag, so the tagged share is
+ * 1.0 and any ceiling fails it. The TEXTS are deliberately varied enough that the classifier
+ * reads more than one order — so a walker scoring the classifier instead of the tag produces
+ * a different histogram, and the test can tell which one arm A used.
+ * @type {ReadonlyArray<{id: string, text: string, grammar: string, block: string, pool: string}>}
+ */
+export const TAGGED_POOL = Object.freeze([
+  Object.freeze({ id: 't0', text: 'The granary stands half full.', grammar: 'V1', block: 'DS-TAG', pool: 'p' }),
+  Object.freeze({ id: 't1', text: 'The toll bar is manned, and it has been since the bridge was rebuilt.', grammar: 'V1', block: 'DS-TAG', pool: 'p' }),
+  Object.freeze({ id: 't2', text: 'There is no watch here.', grammar: 'V1', block: 'DS-TAG', pool: 'p' }),
+  Object.freeze({ id: 't3', text: 'The quay is busy because the river runs deep at the ford.', grammar: 'V1', block: 'DS-TAG', pool: 'p' }),
+]);
 
 /**
  * C-SIBLING's control: two variants of one cell banding ONE noun two ways. A pool whose

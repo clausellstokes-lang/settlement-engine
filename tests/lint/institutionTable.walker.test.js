@@ -24,9 +24,10 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import {
-  columnCensus, DUTY_SERVICE_KINDS, institutionTableOf, instantiatedServices, officesOf,
-  TABLE_COLUMNS,
+  COLUMN_SOURCES, columnCensus, DUTY_SERVICE_KINDS, firedDutyIncome, institutionTableOf,
+  instantiatedServices, officesOf, OPEN_BY_LAW, sourcesAllRead, TABLE_COLUMNS, unreadSourcesOf,
 } from '../../src/domain/institutions/institutionTable.js';
+import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { quantityWords } from '../../src/domain/worldPulse/demographicsHerald.js';
 
@@ -163,6 +164,146 @@ describe('the column census, measured across the estate', () => {
     expect(offices.length).toBeGreaterThan(3);
     const seat = String(settlement.powerStructure?.governingName || '');
     if (seat) expect(offices).toContain(seat);
+  });
+});
+
+describe('THE HONESTY RULE — a column is `closed` only where every source the spec names is read', () => {
+  it('derives every `closed` flag from the source roster, so a closed column with an unread source cannot exist', () => {
+    const table = institutionTableOf(town('town', 'closure-honesty'), WORLD);
+    /** @type {string[]} */
+    const offenders = [];
+    for (const column of TABLE_COLUMNS.filter((c) => c !== 'settlement')) {
+      if (table.columns[column].closed && !sourcesAllRead(column)) {
+        offenders.push(`${column} is closed with ${unreadSourcesOf(column).length} unread source(s): ${unreadSourcesOf(column).join(' · ')}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+    // ANTI-VACUITY: the implication above is trivially satisfied by a table that closes
+    // nothing, so the roster must actually distinguish. Some columns close and some do not.
+    const closed = TABLE_COLUMNS.filter((c) => c !== 'settlement').filter((c) => table.columns[c].closed);
+    expect(closed.length).toBeGreaterThan(0);
+    expect(closed.length).toBeLessThan(TABLE_COLUMNS.length - 1);
+    // Every column declares at least one source, with a citation a reader can check.
+    for (const column of TABLE_COLUMNS.filter((c) => c !== 'settlement')) {
+      expect(COLUMN_SOURCES[column], `no source roster for ${column}`).toBeTruthy();
+      expect(COLUMN_SOURCES[column].length).toBeGreaterThan(0);
+      for (const row of COLUMN_SOURCES[column]) {
+        expect(typeof row.read).toBe('boolean');
+        // `NL-4` is a legitimate citation and is four characters; the bar is "a citation
+        // exists and is not a stub", not a word count.
+        expect(row.cite.length).toBeGreaterThan(3);
+      }
+    }
+  });
+
+  it('holds the three partially-filled columns OPEN, and names what is unread on each', () => {
+    const table = institutionTableOf(town('town', 'closure-open'), WORLD);
+    // SITTING §L.2 item 62: over-licensing a quantifier is the forbidden direction.
+    expect(table.columns.whatItDoes.closed).toBe(false);
+    expect(table.columns.whatItDoesNotDo.closed).toBe(false);
+    // `holderRole`'s BASIS names what the code does — `absent`, never `inferred` over a null.
+    expect(table.columns.holderRole.closed).toBe(false);
+    expect(table.columns.holderRole.basis).toMatch(/^absent —/);
+    // anchored: the line above pins the basis string live, so an emptied basis cannot pass
+    expect(table.columns.holderRole.basis).not.toMatch(/inferred licence|basis: 'inferred'/);
+    expect(table.rows.every((r) => r.holderBasis === 'absent')).toBe(true);
+    // anchored: the rows above prove the table is populated, so these are not empty reads
+    expect(unreadSourcesOf('whatItDoes').length).toBeGreaterThan(0);
+    expect(unreadSourcesOf('whatItDoesNotDo').length).toBeGreaterThan(0);
+    expect(table.columns.whatItDoes.basis).toContain('UNREAD:');
+    expect(table.columns.whatItDoesNotDo.basis).toContain('UNREAD:');
+    // And the two columns the LAW holds open stay open whatever their roster says.
+    expect(Object.keys(OPEN_BY_LAW)).toContain('whoIsCounted');
+    expect(table.columns.whoIsCounted.closed).toBe(false);
+  });
+
+  it('CLOSES `whatItCounts` because it now reads the FIRED INCOME ROW — a positive twin, not a flag', () => {
+    // The source is read, and the proof is that a settlement carrying ONLY an income duty
+    // reaches the column. Without the read this is empty; with it, it holds the duty.
+    const bare = institutionTableOf({
+      id: 'twin', institutions: [], npcs: [], availableServices: {},
+      economicState: { incomeSources: [{ source: 'Church Tithes' }, { source: 'Wool & Textile Trade' }] },
+    }, WORLD);
+    expect(bare.columns.whatItCounts.values).toEqual(['Church Tithes']);
+    expect(bare.columns.whatItCounts.closed).toBe(true);
+    // PRESENT-THEN-ABSENT: the same table with no income rows holds nothing, so the twin
+    // proves the READ and not merely the filter.
+    const without = institutionTableOf({
+      id: 'twin', institutions: [], npcs: [], availableServices: {},
+    }, WORLD);
+    expect(without.columns.whatItCounts.values).toEqual([]);
+    expect(firedDutyIncome({ economicState: { incomeSources: [{ source: 'Market Taxes' }] } })).toEqual(['Market Taxes']);
+    // The plural stems are the repair the second source exposed: the SAME service names, and
+    // three income sources that a singular-only filter refused.
+    expect(DUTY_SERVICE_KINDS.test('Market Taxes')).toBe(true);
+    expect(DUTY_SERVICE_KINDS.test('Tax collection')).toBe(true);
+    expect(DUTY_SERVICE_KINDS.test('Church Tithes')).toBe(true);
+    expect(DUTY_SERVICE_KINDS.test('Gate Tolls')).toBe(true);
+    // and still refuses the craft service the bare `custom` stem admitted
+    expect(DUTY_SERVICE_KINDS.test('Custom enchanting')).toBe(false);
+    expect(DUTY_SERVICE_KINDS.test('Wool & Textile Trade')).toBe(false);
+  });
+
+  it('routes the RUIN FILTER through the service COLUMNS, and the filter is measured doing work', () => {
+    let orphans = 0;
+    /** @type {string[]} */
+    const leaks = [];
+    /** @type {Set<string>} */
+    const dropped = new Set();
+    let scanned = 0;
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      for (let i = 0; i < 5; i += 1) {
+        const settlement = town(tier, `estate-${tier}-${i}`);
+        const table = institutionTableOf(settlement, WORLD);
+        scanned += 1;
+        orphans += table.orphanServices.length;
+        for (const row of table.orphanServices) dropped.add(row.split(' @ ')[1]);
+        const live = new Set(liveInstitutions(settlement).map((inst) => String(inst?.name || '').trim()));
+        const named = new Set(instantiatedServices(settlement)
+          .filter((row) => row.institution && !live.has(row.institution)).map((row) => row.name));
+        for (const value of [...table.columns.whatItDoes.values, ...table.columns.whatItCounts.values]) {
+          // An income duty is settlement-wide and names no institution, so it is exempt.
+          if (named.has(value) && !firedDutyIncome(settlement).includes(value)) leaks.push(`${tier}-${i}: ${value}`);
+        }
+      }
+    }
+    console.log(`\nINSTITUTION TABLE · ruin filter through the COLUMNS, over ${scanned} settlements`
+      + `\n  service rows dropped: ${orphans}`
+      + `\n  the institutions they named: ${[...dropped].sort().join(' · ')}\n`);
+    expect(scanned).toBe(30);
+    // The measured fault, now cured: 23 rows over 30 settlements named an institution the
+    // live roster does not hold — `(lawless)`, `(informal)`, `(street gang)`,
+    // `(arcane underground)`, `(smuggling)`. Zero were duty-kind, so the class was latent.
+    expect(orphans).toBe(23);
+    expect([...dropped].some((name) => /lawless|informal|street gang|arcane underground|smuggling/i.test(name))).toBe(true);
+    // anchored: the line above proves the filter dropped real rows, so an empty leak list
+    // cannot be an empty scan
+    expect(leaks).toEqual([]);
+  });
+
+  it('gives the `whoIsExempt` arm a WORLD, so its emptiness stops being asserted about nothing', () => {
+    const settlement = town('town', 'exempt-twin');
+    // The negative as it shipped: `nullEverywhere` held for ANY settlement, because the
+    // test's world never supplied `treatyTerms` and `tollExemptions` reads only that.
+    const without = institutionTableOf(settlement, WORLD);
+    expect(without.columns.whoIsExempt.values).toEqual([]);
+    expect(without.columns.whoIsExempt.nullEverywhere).toBe(true);
+    expect(without.columns.whoIsExempt.closed).toBe(false);
+    // THE POSITIVE TWIN: one treaty toll-exemption term, and the column CLOSES on it. Remove
+    // the arm and this reds — which is what makes the negative above a measurement.
+    const withTerm = institutionTableOf(settlement, {
+      ...WORLD,
+      treatyTerms: [
+        { kind: 'toll exemption', route: 'the salt road', from: 'Brackwater' },
+        { kind: 'tribute', route: 'the salt road' },
+      ],
+    });
+    expect(withTerm.columns.whoIsExempt.values).toEqual(['toll exemption on the salt road']);
+    expect(withTerm.columns.whoIsExempt.closed).toBe(true);
+    expect(withTerm.columns.whoIsExempt.nullEverywhere).toBe(false);
+    // And it is a ROUTE's exemption from a TOLL, never a person's from a count: the persons
+    // column is unmoved by it, which is the whole Brackwater lesson.
+    expect(withTerm.columns.whoIsCounted.closed).toBe(false);
   });
 });
 

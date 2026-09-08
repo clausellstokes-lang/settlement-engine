@@ -26,8 +26,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
-  armA, armE, armF, armG, armThreeNumbers, armsB, ceilingFor, entropyOf, openerOf,
-  openingShape, runCeilingFor, segmentCount, tenseOf, walkGrammar,
+  armA, armE, armESpread, armF, armF10, armG, armThreeNumbers, armsB, ceilingFor, entropyOf,
+  openerOf, openingShape, runCeilingFor, segmentCount, tenseOf, walkGrammar, wallScopeCensus,
 } from '../../src/domain/prose/grammarWalker.js';
 import {
   classifyMoves, GRAMMAR_TAG_CONTRACT, LEVEL1_ORDERS, NON_MOVES, orderIdOf, readGrammar, WALLS,
@@ -35,8 +35,9 @@ import {
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../../src/domain/prose/proseFingerprint.js';
 import { typedFactsOf } from '../../src/domain/prose/entryWalker.js';
 import {
-  ARM_CONTROLS, ARM_D_CONTROL, CHAIR_CEILINGS, CHAIR_THREE_NUMBERS, C_SIBLING_CONTROL,
-  fairDraw, HAND_TAGGED, OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE, SYNTHETIC_BANDS,
+  ARM_CONTROLS, ARM_D_CONTROL, ARM_D_PAIR_CONTROL, CHAIR_CEILINGS, CHAIR_THREE_NUMBERS,
+  C_SIBLING_CONTROL, fairDraw, HAND_TAGGED, OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE,
+  SYNTHETIC_BANDS, TAGGED_POOL,
 } from '../fixtures/grammarControls.js';
 import { loadCausalLeaf, loadStateLeaves, poolCells } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
@@ -108,6 +109,41 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(repeatedOpener / cells.size).toBeCloseTo(0.112, 3);
   });
 
+  it('CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says', async () => {
+    // ⛔ THE CALIBRATION ABOVE IS NOT THE CONTROL. It re-measures 407/708 and 79/708 through
+    // `segmentCount` and `openerOf` — two helpers — while MOVE-GRAMMAR §4.4 control 4 says
+    // today's R1 leaves must RED on ARM E. Arm E had no fail channel at all, so the control
+    // was being met by a different instrument. `armESpread` is that channel, and this is the
+    // control executed on the arm.
+    const leaves = await loadStateLeaves();
+    const report = walkGrammar({
+      corpus: leaves, cells: poolCells(leaves), register: 'dossier', ceilings: CHAIR_CEILINGS,
+    });
+    const spreadFails = report.fails.filter((f) => f.arm === 'E/spread');
+    console.log(`\nCONTROL 4 · arm E over the R1 leaves\n${spreadFails.map((f) => `  RED  ${f.detail}`).join('\n')}\n`);
+    expect(spreadFails.length).toBeGreaterThan(0);
+    expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/uniformSegments/);
+    expect(spreadFails.map((f) => f.detail).join(' ')).toMatch(/repeatedOpener/);
+    // The arm reads the SAME pools the calibration counted, to the unit.
+    const figures = /** @type {any} */ (report.figures.spread);
+    expect(figures.pools).toBe(708);
+    expect(Math.round(figures.uniformSegmentShare * 708)).toBe(407);
+    expect(Math.round(figures.repeatedOpenerShare * 708)).toBe(79);
+  });
+
+  it('ARM E is NOT-EXECUTABLE without spread ceilings — never a pass on a number it invented', () => {
+    const rows = [{ pool: 'p', uniformGrammar: true, uniformSegments: true, dup: 1 }];
+    const bare = armESpread(rows, 'no-ceilings', { slack: 0.1, ratioCap: 1.5, runFloor: 0.05, successorCeiling: 0.5 });
+    expect(bare.fails).toEqual([]);
+    expect(bare.notExecutable.map((x) => x.arm)).toEqual(['E/spread']);
+    // anchored: the same rows WITH ceilings do fail, so the silence above is the missing
+    // number and not a dead arm
+    expect(armESpread(rows, 'ceilinged', CHAIR_CEILINGS).fails.length).toBeGreaterThan(0);
+    // and a clean register passes both
+    const clean = Array.from({ length: 100 }, (_, i) => ({ pool: `p${i}`, uniformGrammar: false, uniformSegments: false, dup: 0 }));
+    expect(armESpread(clean, 'clean', CHAIR_CEILINGS).fails).toEqual([]);
+  });
+
   it('CONTROL 5 (POSITIVE) — a fair draw over n orders passes every arm', () => {
     const n = 6;
     const sequence = fairDraw(n, 600);
@@ -120,10 +156,31 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     expect(Number(b.figures.runRate)).toBeLessThan(Number(b.figures.runCeiling));
   });
 
-  it('CONTROL B2 — adjacency is judged at the CHANCE FLOOR, so a fair draw is not reported as a loop', () => {
-    const b = armsB(fairDraw(4, 400, 99), 'control-b2', 4, CHAIR_CEILINGS);
-    expect(b.notes.filter((note) => note.arm === 'B2')).toEqual([]);
-    expect(Number(b.figures.chanceFloor)).toBeCloseTo(0.25, 6);
+  it('CONTROL B2 — silent on a fair draw, and it FIRES on a sequence above the chance floor', () => {
+    // ⛔ THE SILENT HALF WAS THE WHOLE CONTROL, AND IT COULD NOT HAVE FAILED. B2's note used
+    // to need `runRate > 2/n` AND `runRate <= 1/n + 2 SE` — an empty window unless n > 20.
+    // The chair's own wording is "no adjacent same order ABOVE the chance floor", and at the
+    // floor the window is reachable. Both halves are asserted here.
+    const fair = armsB(fairDraw(4, 400, 99), 'control-b2-silent', 4, CHAIR_CEILINGS);
+    expect(fair.notes.filter((note) => note.arm === 'B2')).toEqual([]);
+    expect(Number(fair.figures.chanceFloor)).toBeCloseTo(0.25, 6);
+    // A sequence that repeats a little more than chance: 4 orders, 40 pairs, 13 repeats
+    // (32.5% against a 25% floor) — above the floor and inside B1's 1/n + 2 SE ceiling
+    // (0.387 at these numbers), which is exactly the window the old `2/n` threshold made
+    // empty.
+    /** @type {string[]} */
+    const loop = [];
+    let k = 0;
+    for (let i = 0; i < 41; i += 1) {
+      if (i > 0 && i % 3 === 0) loop.push(loop[i - 1]);
+      else { loop.push(`O${k % 4}`); k += 1; }
+    }
+    const b = armsB(loop, 'control-b2-fires', 4, CHAIR_CEILINGS);
+    const fired = b.notes.filter((note) => note.arm === 'B2');
+    expect(fired.length).toBe(1);
+    expect(Number(b.figures.runRate)).toBeGreaterThan(Number(b.figures.chanceFloor));
+    expect(Number(b.figures.runRate)).toBeLessThanOrEqual(Number(b.figures.runCeiling));
+    expect(b.fails.filter((f) => f.arm === 'B1')).toEqual([]);
   });
 
   it('CONTROL H — n ≤ 2 declares NOT-EXECUTABLE and never a pass', () => {
@@ -179,6 +236,37 @@ describe('arm D and C-sibling — the controls the sitting owed', () => {
     expect(fails.fails.filter((f) => f.arm === 'D')).toHaveLength(1);
   });
 
+  it('arm D resolves TWO POOLS OF ONE BLOCK differently — gap (e), keyed on (block, pool)', () => {
+    const { block, wide, narrow, text, wideBag, narrowBag } = ARM_D_PAIR_CONTROL;
+    // The map the estate's own resolver would build once it is keyed per pool: one block,
+    // two pools, two licences.
+    const composedFill = new Map([
+      [`${block} :: ${wide}`, wideBag],
+      [`${block} :: ${narrow}`, narrowBag],
+      // The BLOCK-wide bag is the superset, and it is what the walker used to read for both.
+      [block, wideBag],
+    ]);
+    const onWide = walkGrammar({
+      corpus: [{ id: 'w', text, block, pool: wide }], composedFill, register: 'dossier',
+    });
+    const onNarrow = walkGrammar({
+      corpus: [{ id: 'n', text, block, pool: narrow }], composedFill, register: 'dossier',
+    });
+    // SAME BLOCK, SAME TEXT, TWO VERDICTS — which is the whole of gap (e).
+    expect(onWide.fails.filter((f) => f.arm === 'D')).toEqual([]);
+    expect(onNarrow.fails.filter((f) => f.arm === 'D')).toHaveLength(1);
+    expect(onNarrow.fails.find((f) => f.arm === 'D').detail).toContain('(block, pool)');
+    // anchored: the pair above proves the per-pool key is read; this proves the BLOCK key is
+    // still the fallback, so a caller holding only block-level bags keeps working.
+    const blockOnly = walkGrammar({
+      corpus: [{ id: 'b', text, block, pool: 'a-pool-the-map-does-not-carry' }],
+      composedFill,
+      register: 'dossier',
+    });
+    expect(blockOnly.fails.filter((f) => f.arm === 'D')).toEqual([]);
+    expect(blockOnly.notExecutable.filter((f) => f.arm === 'D')).toEqual([]);
+  });
+
   it('arm D declares NOT-EXECUTABLE when no bag is supplied, never a pass', () => {
     const r = walkGrammar({ corpus: [{ id: 'x', text: 'The {institution} keeps the rolls.', block: 'B' }] });
     expect(r.fails.filter((f) => f.arm === 'D')).toEqual([]);
@@ -197,6 +285,98 @@ describe('arm D and C-sibling — the controls the sitting owed', () => {
   });
 });
 
+describe('THE WALLS WITH NO DETECTOR — declared, never silent (MOVE-GRAMMAR §4.4.1)', () => {
+  it('emits a NOT-EXECUTABLE row for every undetected wall, with what a detector would need', () => {
+    const rows = wallScopeCensus('dossier');
+    expect(rows.map((r) => r.arm).sort()).toEqual(['F4', 'F5', 'F7', 'F8', 'F9']);
+    for (const row of rows) {
+      expect(row.detail).toContain('NOT-EXECUTABLE');
+      expect(row.detail).toContain('Wanted:');
+      expect(row.detail).toMatch(/IN SCOPE HERE|out of this register/);
+    }
+    // ⭐ WALL 10 IS ABSENT FROM THE ROSTER BECAUSE IT NOW HAS A DETECTOR. SITTING §L.2 item
+    // 65 charters one "if it is one arm with one control", and the opener shape already
+    // computed the token, so the wall is a count plus an adjacency over one pool.
+    // anchored: the roster is pinned to five named arms above, so an empty roster cannot pass
+    expect(rows.map((r) => r.arm)).not.toContain('F10');
+    // and wall 10 IS in the WALLS list — it is absent from the roster because it is detected,
+    // not because the wall went away.
+    expect(WALLS.map((w) => w.id)).toContain(10);
+    expect(armF10([
+      { id: 'a', text: '{settlement} keeps its own rolls.' },
+      { id: 'b', text: '{settlement} pays its toll at the bridge.' },
+    ], 'detector-live').length).toBeGreaterThan(0);
+    // and the roster reaches a whole walk
+    const report = walkGrammar({ corpus: [{ id: 'x', text: 'The granary stands half full.' }], register: 'dossier' });
+    expect(report.notExecutable.filter((x) => /^F\d+$/.test(x.arm)).map((x) => x.arm).sort())
+      .toEqual(['F4', 'F5', 'F7', 'F8', 'F9']);
+  });
+
+  it('WALL 10 fires on more than one settlement-token opener in a pool, and on two adjacent', () => {
+    const v = (id, text) => ({ id, text });
+    const one = armF10([v('a', '{settlement} keeps its own rolls.'), v('b', 'The hall keeps the rolls.')], 'pool-1');
+    expect(one).toEqual([]);
+    const two = armF10([
+      v('a', '{settlement} keeps its own rolls.'),
+      v('b', 'The hall keeps the rolls.'),
+      v('c', '{settlement} pays its toll at the bridge.'),
+    ], 'pool-2');
+    expect(two).toHaveLength(1);
+    expect(two[0].arm).toBe('F10');
+    expect(two[0].detail).toContain('at most one per pool');
+    const adjacent = armF10([
+      v('a', '{settlement} keeps its own rolls.'),
+      v('b', '{settlement} pays its toll at the bridge.'),
+    ], 'pool-3');
+    // Two openers AND two adjacent: the count row and the adjacency row are different rows.
+    expect(adjacent).toHaveLength(2);
+    expect(adjacent.map((f) => f.detail).join(' ')).toContain('never two adjacent');
+  });
+});
+
+describe('ARM A gates the TAG and reports the classifier (SITTING K.2, §L.2 item 67) — U5\'s fixture', () => {
+  it('reads the TAG on a tagged pool: the tagged half FAILS and the untagged half only reports', () => {
+    const tagged = walkGrammar({
+      corpus: TAGGED_POOL,
+      register: 'dossier',
+      ceilings: CHAIR_CEILINGS,
+      admissible: { 'dossier · level 1': 4 },
+    });
+    const level1 = /** @type {any} */ (tagged.figures.level1);
+    // Arm A read the TAG: four variants, one tag, share 1.0 against a 0.35 ceiling at n = 4.
+    expect(level1.tagged).toBe(4);
+    expect(level1.untagged).toBe(0);
+    expect(level1.taggedHistogram).toEqual([['V1', 4]]);
+    const aFails = tagged.fails.filter((f) => f.arm === 'A');
+    expect(aFails).toHaveLength(1);
+    expect(aFails[0].value).toBe(1);
+    // ⭐ THE PROOF THAT IT READ THE TAG AND NOT THE CLASSIFIER: the classifier reads MORE
+    // than one order over these four texts, so a walker scoring the classifier would have
+    // found a lower top share and no fail at all.
+    const classified = new Set(TAGGED_POOL.map((v) => classifyMoves(v.text).join('→')));
+    expect(classified.size).toBeGreaterThan(1);
+    // The classifier's disagreement with the tag is REPORTED, in the channel that never gates.
+    expect(tagged.withheld.some((w) => w.arm === 'A/tag')).toBe(true);
+    expect(tagged.fails.some((f) => f.arm === 'A/tag')).toBe(false);
+  });
+
+  it('is REPORT-ONLY on the shipped corpus, because the tag is applied to nothing', async () => {
+    const leaves = (await loadStateLeaves()).slice(0, 300);
+    const report = walkGrammar({
+      corpus: leaves, register: 'dossier', ceilings: CHAIR_CEILINGS,
+    });
+    // No tagged variant exists, so the gating half has n = 0 and declares itself
+    // NOT-EXECUTABLE rather than passing an empty set.
+    expect(report.fails.filter((f) => f.arm === 'A')).toEqual([]);
+    expect(report.notExecutable.some((x) => x.arm === 'A')).toBe(true);
+    // The untagged half still measures and prints, in the note channel.
+    const level1 = /** @type {any} */ (report.figures.level1);
+    expect(level1.untagged).toBe(300);
+    expect(level1.tagged).toBe(0);
+    expect(/** @type {any} */ (level1.untaggedFigures).histogram.length).toBeGreaterThan(1);
+  });
+});
+
 describe('the owner\'s three numbers as arms (§912.3)', () => {
   /** A unit whose prose is bland enough to sit inside every synthetic band. */
   const inside = [
@@ -211,13 +391,32 @@ describe('the owner\'s three numbers as arms (§912.3)', () => {
     'Grain moves out; the market fills; the quay is busy; the road is kept; the bridge stands.',
   ];
 
-  it('BUDGET fails a unit exceeding more than a third of the soft rules and reports one above a sixth', () => {
+  it('BUDGET FAILS above a third and NOTES above a sixth — both channels driven, on bands built to drive them', () => {
+    // ⛔ THE FIRST CUT ASSERTED `scored > 10` AND `exceeded.length > 0` AND NOTHING ELSE, so
+    // it could not tell a BUDGET fail from a BUDGET note from silence. The arm has three
+    // outcomes and all three are driven here, each on a band set chosen to produce it.
+    const metrics = Object.keys(fingerprint(outside).metrics);
+    /** @param {number} howMany bands narrowed to a point the unit cannot sit inside */
+    const bandsExceeding = (howMany) => Object.fromEntries(metrics.map((m, i) => [
+      m, i < howMany ? { lo: -2, hi: -1 } : { lo: -1e6, hi: 1e6 },
+    ]));
+    const total = metrics.length;
+    // ABOVE A THIRD → FAIL.
+    const fail = armThreeNumbers(outside, bandsExceeding(Math.ceil(total / 2)), CHAIR_THREE_NUMBERS, 'budget-fail');
+    expect(fail.fails.filter((f) => f.arm === 'BUDGET')).toHaveLength(1);
+    expect(Number(fail.fails.find((f) => f.arm === 'BUDGET').value)).toBeGreaterThan(1 / 3);
+    // BETWEEN A SIXTH AND A THIRD → NOTE, never a fail.
+    const note = armThreeNumbers(outside, bandsExceeding(Math.round(total * 0.25)), CHAIR_THREE_NUMBERS, 'budget-note');
+    expect(note.fails.filter((f) => f.arm === 'BUDGET')).toEqual([]);
+    expect(note.notes.filter((n) => n.arm === 'BUDGET')).toHaveLength(1);
+    // BELOW A SIXTH → silent on BUDGET (the PERFECTION arm speaks instead at zero).
+    const quiet = armThreeNumbers(outside, bandsExceeding(1), CHAIR_THREE_NUMBERS, 'budget-quiet');
+    expect(quiet.fails.filter((f) => f.arm === 'BUDGET')).toEqual([]);
+    expect(quiet.notes.filter((n) => n.arm === 'BUDGET')).toEqual([]);
+    // And the original synthetic-band control still exceeds something, so it remains a control.
     const r = armThreeNumbers(outside, SYNTHETIC_BANDS, CHAIR_THREE_NUMBERS, 'outside');
-    const scored = Number(/** @type {any} */ (r.figures).scored);
-    const exceeded = /** @type {any[]} */ (/** @type {any} */ (r.figures).exceeded);
-    expect(scored).toBeGreaterThan(10);
-    // The control is only a control if it actually exceeds something.
-    expect(exceeded.length).toBeGreaterThan(0);
+    expect(Number(/** @type {any} */ (r.figures).scored)).toBeGreaterThan(10);
+    expect(/** @type {any[]} */ (/** @type {any} */ (r.figures).exceeded).length).toBeGreaterThan(0);
   });
 
   it('DEPTH fails past 0.5 band-widths and exempts a DECLARED defining feature', () => {
@@ -263,9 +462,28 @@ describe('the owner\'s three numbers as arms (§912.3)', () => {
     expect(r.notExecutable[0].arm).toBe('three-numbers');
   });
 
-  it('SPREAD names WHICH rules a unit exceeds, so uniform imperfection is visible', () => {
-    const r = armThreeNumbers(outside, SYNTHETIC_BANDS, CHAIR_THREE_NUMBERS, 'spread');
-    expect(Array.isArray(/** @type {any} */ (r.figures).spread)).toBe(true);
+  it('SPREAD names WHICH rules a unit exceeds, and TWO UNITS EXCEEDING THE SAME RULES ARE VISIBLE AS SUCH', () => {
+    // ⛔ `expect(Array.isArray(spread)).toBe(true)` PASSES ON AN EMPTY ARRAY, so the old
+    // assertion held on a walker whose SPREAD figure had gone dark. §912.3 item 4 says the
+    // walker prints WHICH rules each pool exceeds so that uniform imperfection — every pool
+    // breaking the same rules — is visible as the template it is. That is a claim about
+    // CONTENT, and it is asserted on content here.
+    const metrics = Object.keys(fingerprint(outside).metrics);
+    const pinned = [metrics[0], metrics[1]];
+    const bands = Object.fromEntries(metrics.map((m) => [
+      m, pinned.includes(m) ? { lo: -2, hi: -1 } : { lo: -1e6, hi: 1e6 },
+    ]));
+    const a = armThreeNumbers(outside, bands, CHAIR_THREE_NUMBERS, 'spread-a');
+    const b = armThreeNumbers(inside, bands, CHAIR_THREE_NUMBERS, 'spread-b');
+    const spreadA = /** @type {string[]} */ (/** @type {any} */ (a.figures).spread);
+    const spreadB = /** @type {string[]} */ (/** @type {any} */ (b.figures).spread);
+    expect(spreadA).toEqual([...pinned].sort());
+    // UNIFORM IMPERFECTION: two different units exceeding exactly the same rules.
+    expect(spreadB).toEqual(spreadA);
+    // anchored: the two lines above prove the figure carries names; this proves it is not a
+    // constant — a unit inside every band exceeds nothing and its spread is empty.
+    const none = armThreeNumbers(outside, Object.fromEntries(metrics.map((m) => [m, { lo: -1e6, hi: 1e6 }])), CHAIR_THREE_NUMBERS, 'spread-none');
+    expect(/** @type {string[]} */ (/** @type {any} */ (none.figures).spread)).toEqual([]);
   });
 });
 
@@ -350,7 +568,10 @@ describe('the ten instrument gaps (SITTING §J) — all reported, none gating', 
 
   it('prints the register-level gap census over the shipped corpus', async () => {
     const leaves = await loadStateLeaves();
-    const report = walkGrammar({ corpus: leaves.slice(0, 400), register: 'dossier' });
+    const sample = leaves.slice(0, 400);
+    // The cells are supplied because gap (a) is now the PER-POOL count and a walk with no
+    // pools can only report a register total — the very shape the gap was re-cut away from.
+    const report = walkGrammar({ corpus: sample, cells: poolCells(sample), register: 'dossier' });
     const gaps = /** @type {any} */ (report.figures.gaps);
     expect(gaps.closeKinds.length).toBeGreaterThan(1);
     expect(gaps.openingShapes.length).toBeGreaterThan(2);
@@ -359,8 +580,17 @@ describe('the ten instrument gaps (SITTING §J) — all reported, none gating', 
       + `  opening shapes: ${gaps.openingShapes.map(([k, v]) => `${k}=${v}`).join(' ')}\n`
       + `  close kinds:    ${gaps.closeKinds.map(([k, v]) => `${k}=${v}`).join(' ')}\n`
       + `  tenses:         ${gaps.tenses.map(([k, v]) => `${k}=${v}`).join(' ')}\n`
-      + `  settlement-token openers: ${gaps.settlementOpeners} · contrast shapes: ${gaps.contrastShapes}`
-      + ` · bare relatives: ${gaps.bareRelatives} · appositives: ${gaps.appositives}\n`);
+      + `  settlement-token openers (gap (a), PER POOL): register total ${gaps.settlementOpeners.registerTotal}`
+      + ` · pools with any ${gaps.settlementOpeners.poolsWithAny} of ${gaps.settlementOpeners.poolsMeasured}`
+      + ` · pools with MORE THAN ONE ${gaps.settlementOpeners.poolsWithMoreThanOne}`
+      + ` (wall 10's own subject) · most in one pool ${gaps.settlementOpeners.maxInOnePool}\n`
+      + `  contrast shapes: ${gaps.contrastShapes} · bare relatives: ${gaps.bareRelatives}`
+      + ` · appositives: ${gaps.appositives}\n`);
+    // GAP (a) IS THE PER-POOL COUNT SITTING §J ASKED FOR, not the register total the walk
+    // used to print — and the per-pool shape is what wall 10 fails on.
+    expect(typeof gaps.settlementOpeners.registerTotal).toBe('number');
+    expect(gaps.settlementOpeners.poolsMeasured).toBeGreaterThan(0);
+    expect(gaps.settlementOpeners.byPool.every((row) => row.openers > 0)).toBe(true);
   });
 });
 

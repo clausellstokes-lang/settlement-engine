@@ -59,8 +59,17 @@ const FACTION_DYNAMICS = join(ROOT, 'src/generators/factionDynamics.js');
  * @property {string[]} siblings
  */
 
-/** @param {string} label @param {unknown[]} rows @returns {void} */
-function refuseEmpty(label, rows) {
+/**
+ * THE THIRD FAIL-CLOSED PATH, and the one no test drove.
+ *
+ * ⛔ IT WAS EXPORTED FOR EXACTLY THAT REASON. `git grep refuseEmpty` returned twelve hits —
+ * every call site plus this definition — and no test in the estate ran it, while the file's
+ * own docblock claimed "each control MUST fire, and each does". A guard nobody has ever seen
+ * fire is a guard nobody has measured; that is the false-green class the docblock invokes,
+ * committed by the docblock itself.
+ * @param {string} label @param {unknown[]} rows @returns {void}
+ */
+export function refuseEmpty(label, rows) {
   if (!Array.isArray(rows) || rows.length === 0) {
     throw new Error(`dossierCorpus: the ${label} loader read ZERO rows — the home moved or the parser went dark`);
   }
@@ -565,7 +574,36 @@ export function harvestExports({
     if (!(name in module)) {
       throw new Error(`dossierCorpus.harvestExports: ${rel} exports no \`${name}\` — the loader's roster is stale, which is the address lie one level up`);
     }
-    walk(module[name], [name], 0);
+    // ⛔ A TOP-LEVEL BARE STRING IS A POOL OF ONE, AND THE WALK USED TO DROP IT SILENTLY.
+    // `walk` returns immediately on a non-object node, so an export that IS a prose string —
+    // `causeWalk.js`'s `NO_DEEPER_MEMORY`, `LEDGER_DARK_LINE` and `REDACTED_HOP` — was named
+    // in the roster, found present, and then harvested to nothing. The object branch already
+    // treats a lone prose VALUE as a pool of one (NL-8b: a pool of one is not a pool, and
+    // that is the finding); the top level did not, so the drop was a silent shortfall rather
+    // than a declared predicate. Three lines left R4b that way, and the register's count read
+    // 50 = 53 − 3 while presenting itself as an exact reproduction.
+    const node = module[name];
+    if (isProse(node)) {
+      const text = String(node);
+      const line = lineOf(text);
+      out.push({
+        id: `${register}::${name}::single#0`,
+        text,
+        block: name,
+        pool: '*',
+        poolId: `${register}::${name}::single`,
+        idx: 0,
+        angle: '',
+        marks: [],
+        slots: [...new Set([...text.matchAll(/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g)].map((m) => m[1]))],
+        file: rel,
+        ...(line ? { line } : {}),
+        register,
+        siblings: [],
+      });
+      continue;
+    }
+    walk(node, [name], 0);
   }
   return out;
 }

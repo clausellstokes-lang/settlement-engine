@@ -78,6 +78,9 @@ import { CONTRAST_SHAPES } from './entryLexicons.js';
  *   is one and a half — the 13:22 bar)
  * @property {number} runFloor the floor under arm B1's slack
  * @property {number} successorCeiling arm B3's per-row successor ceiling
+ * @property {{uniformGrammar?: number, uniformSegments?: number, repeatedOpener?: number}}
+ *   [spread] arm E's register-level ceilings (MOVE-GRAMMAR §4.3's recommended 0.30 / 0.40 /
+ *   0.030). ABSENT ⇒ `armESpread` is NOT-EXECUTABLE rather than passing on a number of its own
  */
 
 /**
@@ -279,11 +282,18 @@ export function armsB(sequence, unit, admissible, shape) {
       ceiling: runCeiling,
     });
   }
-  if (runRate > chanceFloor + chanceFloor && runRate <= (runCeiling ?? Infinity)) {
+  // ⚠ B2 IS JUDGED AT THE CHANCE FLOOR, NOT AT TWICE IT, AND THE DIFFERENCE IS WHETHER THE
+  // ARM CAN EVER SPEAK. The chair's own correction reads "no adjacent same order ABOVE the
+  // chance floor" (SITTING B.3 / R-DA-17; a fair draw must PASS, control 5). The first cut
+  // required `runRate > 2/n` AND `runRate <= 1/n + 2 SE`, a window that is empty unless
+  // 2 SE > 1/n — i.e. unless n > 20 on any sample this estate walks. So B2's only control
+  // asserted SILENCE and could not have failed. At the floor the window is (1/n, 1/n + 2 SE]
+  // and is reachable at every n, which is what makes the control below a control.
+  if (runRate > chanceFloor && runRate <= (runCeiling ?? Infinity)) {
     out.notes.push({
       arm: 'B2',
       unit,
-      detail: `adjacency ${(runRate * 100).toFixed(1)}% is above twice the chance floor ${(chanceFloor * 100).toFixed(1)}% but inside B1's ceiling`,
+      detail: `adjacency ${(runRate * 100).toFixed(1)}% is above the chance floor ${(chanceFloor * 100).toFixed(1)}% but inside B1's ceiling`,
       value: runRate,
     });
   }
@@ -346,6 +356,74 @@ export function armE(pool, unit) {
   return out;
 }
 
+/**
+ * ARM E's FAIL CHANNEL — the register-level spread, against MOVE-GRAMMAR §4.3's own ceilings.
+ *
+ * ⛔ WITHOUT THIS, ARM E COULD NOT FAIL AT ALL, AND CONTROL 4 WAS BEING MET BY A DIFFERENT
+ * INSTRUMENT. `armE` reports per pool and emits notes only; MOVE-GRAMMAR §4.4 control 4 says
+ * today's R1 leaves must RED **on arm E**, and the gate satisfied it by re-measuring
+ * 407/708 and 79/708 through `segmentCount` and `openerOf` directly — a calibration of the
+ * two helpers, not of the arm. §4.3's red condition for E is a per-pool shape with a
+ * REGISTER-level number beside it (pools uniform in grammar ≤ 0.30; uniform in segment count
+ * ≤ 0.40; repeated opener ≤ 0.030), so the roll-up is where the arm can fail, and this is it.
+ *
+ * ⭐ THE THREE CEILINGS ARE THE CALLER'S, LIKE EVERY OTHER NUMBER IN THIS FILE. With no
+ * `spread` shape supplied the arm is NOT-EXECUTABLE — never a pass, and never a number this
+ * walker invented (the tuning register's rule, learned once already in `ceilingFor`).
+ * @param {ReadonlyArray<{pool: string, uniformGrammar: boolean, uniformSegments: boolean,
+ *   dup: number}>} poolRows
+ * @param {string} unit
+ * @param {CeilingShape} [shape]
+ * @returns {GrammarReport}
+ */
+export function armESpread(poolRows, unit, shape) {
+  /** @type {GrammarReport} */
+  const out = {
+    figures: {}, fails: [], withheld: [], notes: [], notExecutable: [],
+  };
+  const n = poolRows.length;
+  const shares = {
+    uniformGrammar: n ? poolRows.filter((p) => p.uniformGrammar).length / n : null,
+    uniformSegments: n ? poolRows.filter((p) => p.uniformSegments).length / n : null,
+    repeatedOpener: n ? poolRows.filter((p) => p.dup > 0).length / n : null,
+  };
+  const counts = {
+    uniformGrammar: poolRows.filter((p) => p.uniformGrammar).length,
+    uniformSegments: poolRows.filter((p) => p.uniformSegments).length,
+    repeatedOpener: poolRows.filter((p) => p.dup > 0).length,
+  };
+  out.figures = { unit, pools: n, ...shares, counts };
+  if (n === 0) {
+    out.notExecutable.push({ arm: 'E/spread', unit, detail: 'no measurable pool — a spread over nothing is not a spread' });
+    return out;
+  }
+  const ceilings = shape?.spread;
+  if (!ceilings) {
+    out.notExecutable.push({
+      arm: 'E/spread',
+      unit,
+      detail: 'no spread ceilings supplied — MOVE-GRAMMAR §4.3 recommends 0.30 uniform grammar,'
+        + ' 0.40 uniform segment count and 0.030 repeated opener, and this walker bakes none of them',
+    });
+    return out;
+  }
+  for (const key of /** @type {const} */ (['uniformGrammar', 'uniformSegments', 'repeatedOpener'])) {
+    const ceiling = ceilings[key];
+    const share = shares[key];
+    if (!Number.isFinite(ceiling) || share === null) continue;
+    if (share > Number(ceiling)) {
+      out.fails.push({
+        arm: 'E/spread',
+        unit,
+        detail: `${counts[key]} of ${n} pools (${(share * 100).toFixed(1)}%) — ${key} above the ceiling ${(Number(ceiling) * 100).toFixed(1)}%`,
+        value: share,
+        ceiling: Number(ceiling),
+      });
+    }
+  }
+  return out;
+}
+
 // ── ARM F · the walls, SCOPED ───────────────────────────────────────────────────────
 
 /**
@@ -390,6 +468,78 @@ export function armF(entry, moves, register) {
     fails.push({ arm: 'F2', unit: entry.id, detail: 'a bare future indicative where the edge must be subjunctive (wall 2)' });
   }
   return fails;
+}
+
+/**
+ * WALL 10, DETECTED — "the settlement token opens at most one variant per pool, never two
+ * adjacent" (dossier-scoped).
+ *
+ * ⭐ IT IS BUILT RATHER THAN DECLARED NOT-EXECUTABLE BECAUSE THE CHAIR'S CONDITION IS MET:
+ * SITTING §L.2 item 65 charters a wall-10 detector "if it is one arm with one control", and
+ * it is — the opener shape gap (f) already computes the token, so the wall is a count and an
+ * adjacency over one pool. Its raw material is 103 of 400 variants. The remaining five
+ * undetected walls emit NOT-EXECUTABLE rows instead (`wallScopeCensus`).
+ * @param {ReadonlyArray<GrammarEntry>} pool in the pool's own order
+ * @param {string} unit
+ * @returns {GrammarFinding[]}
+ */
+export function armF10(pool, unit) {
+  /** @type {GrammarFinding[]} */
+  const fails = [];
+  const opens = pool.map((v) => openingShape(String(v.text || '')) === 'settlement-token');
+  const count = opens.filter(Boolean).length;
+  if (count > 1) {
+    fails.push({
+      arm: 'F10',
+      unit,
+      detail: `${count} of ${pool.length} variants open on the settlement token — the wall allows at most one per pool (wall 10)`,
+      value: count,
+      ceiling: 1,
+    });
+  }
+  for (let i = 1; i < opens.length; i += 1) {
+    if (opens[i] && opens[i - 1]) {
+      fails.push({ arm: 'F10', unit, detail: `variants ${i - 1} and ${i} both open on the settlement token — never two adjacent (wall 10)` });
+    }
+  }
+  return fails;
+}
+
+/**
+ * THE WALLS WITH NO DETECTOR, DECLARED RATHER THAN SILENT (§908's law; MOVE-GRAMMAR §4.4.1).
+ *
+ * Arm F implements walls 1, 2, 3, 6 per entry and wall 10 per pool. Walls 4, 5, 7, 8 and 9
+ * have no detector and no control, and a walk that simply never mentioned them reads as a
+ * register in which they hold. Each in-scope undetected wall gets a row saying what a
+ * detector would need.
+ * @param {string} register
+ * @returns {GrammarFinding[]}
+ */
+export function wallScopeCensus(register) {
+  const DETECTED = new Set([1, 2, 3, 6, 10]);
+  /** @type {Record<number, string>} */
+  const NEEDS = {
+    4: 'a DEED→BILL adjacency test inside one sentence, on the Herald\'s units (out of this walk\'s register)',
+    5: 'the sibling pool key or band that names the rejected alternative — the wiring census supplies the key, the REJECTED alternative is not typed anywhere',
+    7: 'a typed "standing fact the table could act on" predicate on the last move; the move vocabulary marks no move as a reaction point',
+    8: 'a GESTURE count on a Herald headline (out of this walk\'s register)',
+    9: 'a per-SECTION RECALL count and a per-SURFACE LIMIT count on the chronicle (out of this walk\'s register)',
+  };
+  // ⚠ EVERY UNDETECTED WALL IS DECLARED, IN SCOPE OR NOT, and the row says which. Filtering
+  // by scope would leave walls 4, 8 and 9 mentioned NOWHERE — this walker only ever runs the
+  // dossier register — which is the same silence the census exists to break, one level up.
+  return WALLS
+    .filter((wall) => !DETECTED.has(wall.id))
+    .map((wall) => {
+      const inScope = wall.scope.includes('*') || wall.scope.includes(register);
+      return {
+        arm: `F${wall.id}`,
+        unit: register,
+        detail: `NOT-EXECUTABLE — wall ${wall.id} ("${wall.wall}") has no detector and no control`
+          + `; scope ${wall.scope.join('/')}${inScope ? ' (IN SCOPE HERE)' : ' (out of this register)'}`
+          + `. Wanted: ${NEEDS[wall.id]}`,
+      };
+    });
 }
 
 // ── ARM G · the non-moves ───────────────────────────────────────────────────────────
@@ -628,25 +778,63 @@ export function walkGrammar(input) {
     };
   });
 
-  // ARM A over the register, at level 1.
+  // ── ARM A AT LEVEL 1, SPLIT ON THE TAG (SITTING K.2, as §L.2 item 67 rules it) ─────
+  // Arm A GATES tagged orders and REPORTS untagged ones. The classifier agrees with a
+  // hand-tagged sample on 0.75–0.83, so it cannot fail a pool on one reading; the authored
+  // `grammar:` tag can, because it is the author's own declaration. So the tagged half reads
+  // the TAG (never the classifier) and its ceiling breaches are FAILS; the untagged half is
+  // classified and its breaches are demoted to notes under `A/untagged`. Today the tag is
+  // applied to nothing (refusal 9), so the tagged half is empty and arm A is report-only on
+  // the shipped corpus — which the NOT-EXECUTABLE row it emits at n = 0 says out loud.
+  const isTagged = (r) => typeof r.entry.grammar === 'string' && r.entry.grammar !== '';
+  const tagged = perEntry.filter(isTagged);
+  const untagged = perEntry.filter((r) => !isTagged(r));
   const orders = perEntry.map((r) => r.orderId || r.moves.join('→'));
-  absorb(armA(orders, `${register} · level 1`, input.admissible?.[`${register} · level 1`], input.ceilings));
+  const taggedOrders = tagged.map((r) => String(r.entry.grammar));
+  const untaggedOrders = untagged.map((r) => r.orderId || r.moves.join('→'));
+  absorb(armA(taggedOrders, `${register} · level 1 · TAGGED`,
+    input.admissible?.[`${register} · level 1`], input.ceilings));
+  const reported = armA(untaggedOrders, `${register} · level 1 · untagged (report-only)`,
+    input.admissible?.[`${register} · level 1`], input.ceilings);
+  // The untagged half never fails: its breaches become notes carrying the same detail, so
+  // the distribution is visible and the classifier still does not gate.
+  out.notes.push(...reported.fails.map((f) => ({ ...f, arm: 'A/untagged' })));
+  out.notes.push(...reported.notes);
+  out.notExecutable.push(...reported.notExecutable.map((f) => ({ ...f, arm: 'A/untagged' })));
   out.figures.level1 = {
     orderHistogram: [...tally(orders)].sort((a, b) => b[1] - a[1]),
     // The INDEX-0 histogram: a default that is one order everywhere is fault 9 by the back
     // door (§3.2's own note).
     indexZeroHistogram: [...tally(perEntry.filter((r) => r.entry.idx === 0).map((r) => r.orderId || r.moves.join('→')))]
       .sort((a, b) => b[1] - a[1]),
-    untagged: perEntry.filter((r) => !r.entry.grammar).length,
+    untagged: untagged.length,
+    tagged: tagged.length,
+    taggedHistogram: [...tally(taggedOrders)].sort((a, b) => b[1] - a[1]),
+    untaggedFigures: reported.figures,
   };
 
   // ARM E per pool, plus C-sibling's typed-fact coherence.
   const cells = input.cells || new Map();
   /** @type {Array<{pool: string, uniformGrammar: boolean, uniformSegments: boolean, dup: number}>} */
   const poolRows = [];
+  /** @type {Array<{pool: string, openers: number, size: number}>} */
+  const openerRows = [];
   for (const [poolId, pool] of cells) {
     const e = armE(pool, poolId);
     absorb(e);
+    // WALL 10, per pool — the settlement token opens at most one variant and never two
+    // adjacent. Detected here rather than declared not-executable (SITTING §L.2 item 65).
+    if (WALLS.find((w) => w.id === 10)?.scope.includes(register)) {
+      out.fails.push(...armF10(pool, poolId));
+    }
+    // GAP (a), PER POOL — SITTING §J asked for the per-POOL count and the walk reported a
+    // register TOTAL, which cannot show a pool that opens three of its four variants on the
+    // town's name inside a register whose total looks unremarkable.
+    openerRows.push({
+      pool: String(poolId),
+      openers: pool.filter((v) => openingShape(String(v.text || '')) === 'settlement-token').length,
+      size: pool.length,
+    });
     const f = /** @type {{uniformGrammar?: boolean, uniformSegments?: boolean,
      *   dupOpeners?: ReadonlyArray<[string, number]>}} */ (e.figures);
     if (typeof f.uniformGrammar === 'boolean') {
@@ -696,13 +884,27 @@ export function walkGrammar(input) {
     uniformSegmentShare: measurable ? poolRows.filter((p) => p.uniformSegments).length / measurable : null,
     repeatedOpenerShare: measurable ? poolRows.filter((p) => p.dup > 0).length / measurable : null,
   };
+  // ARM E's FAIL CHANNEL — the register roll-up against §4.3's ceilings (control 4's own
+  // condition: today's R1 leaves must RED on arm E).
+  absorb(armESpread(poolRows, `${register} · spread`, input.ceilings));
+  // THE WALLS WITH NO DETECTOR — declared once per walk, never per entry.
+  out.notExecutable.push(...wallScopeCensus(register));
 
   // ARM D — the licence, keyed on (block, pool) as gap (e) requires.
   if (!input.composedFill) {
     out.notExecutable.push({ arm: 'D', unit: register, detail: 'no composed fill supplied' });
   } else {
     for (const entry of corpus) {
-      const row = input.composedFill.get(String(entry.block));
+      // ⭐ KEYED PER (BLOCK, POOL) FIRST, BLOCK SECOND — gap (e) as the comment always
+      // claimed and the code never did. `craftSlots` fills {resource} on one pool of a block
+      // and refuses it on another BY DESIGN, so a block-wide bag is a SUPERSET and licensing
+      // against it passes a claim this pool is not entitled to make. A caller that only has
+      // block-level bags keeps working: the block key is the fallback and the finding says
+      // which key answered.
+      const pairKey = `${entry.block} :: ${entry.pool}`;
+      const pairRow = input.composedFill.get(pairKey);
+      const row = pairRow === undefined ? input.composedFill.get(String(entry.block)) : pairRow;
+      const keyedBy = pairRow === undefined ? 'block' : '(block, pool)';
       // The resolver returns `{slots, conditional, sites}` and a fixture hands a bare array;
       // both are read, because an instrument that only accepts its own shape makes a fixture
       // impossible to write by hand.
@@ -723,7 +925,7 @@ export function walkGrammar(input) {
         out.fails.push({
           arm: 'D',
           unit: entry.id,
-          detail: `names {${missing.join('}, {')}}, which this block's composer bag does not offer`,
+          detail: `names {${missing.join('}, {')}}, which the composer bag keyed by ${keyedBy} does not offer`,
         });
       }
       // ── THE WIRING REFINEMENT (car 8) ──────────────────────────────────────────────
@@ -809,8 +1011,19 @@ export function walkGrammar(input) {
   }
 
   // The ten gaps, as a register-level census.
+  const openerPools = openerRows.filter((r) => r.openers > 0);
   out.figures.gaps = {
-    settlementOpeners: perEntry.filter((r) => r.gaps.settlementOpener).length,
+    // GAP (a) — SITTING §J's PER-POOL count, with the register total kept beside it under a
+    // name that says what it is. A register total cannot show wall 10's shape; a per-pool
+    // count can, and it is the same figure `armF10` fails on.
+    settlementOpeners: {
+      registerTotal: perEntry.filter((r) => r.gaps.settlementOpener).length,
+      poolsMeasured: openerRows.length,
+      poolsWithAny: openerPools.length,
+      poolsWithMoreThanOne: openerRows.filter((r) => r.openers > 1).length,
+      maxInOnePool: openerRows.reduce((a, r) => Math.max(a, r.openers), 0),
+      byPool: openerPools.sort((a, b) => b.openers - a.openers).slice(0, 20),
+    },
     closeKinds: [...tally(perEntry.map((r) => String(r.gaps.closeKind)))].sort((a, b) => b[1] - a[1]),
     openingShapes: [...tally(perEntry.map((r) => String(r.gaps.openingShape)))].sort((a, b) => b[1] - a[1]),
     tenses: [...tally(perEntry.map((r) => String(r.gaps.tense)))].sort((a, b) => b[1] - a[1]),

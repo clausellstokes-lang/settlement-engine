@@ -24,6 +24,8 @@
  * argue with the list.
  *
  * PURE, HEADLESS. Nothing here runs at the draw.
+ *
+ * @enforced-by tests/lint/proseMeasures.walker.test.js
  */
 import { log2Det } from '../../kernel/detMath.js';
 
@@ -32,6 +34,19 @@ import { log2Det } from '../../kernel/detMath.js';
  * smelled, touched or tasted, in the estate's own civic register. A noun appears in exactly
  * ONE bucket: the sense it is most directly met through, so the spread figure is a partition
  * rather than a double count.
+ *
+ * ⚠ THE PARTITION IS ASSERTED OVER THESE ARRAYS, NOT OVER THE RESOLVER, AND THAT COST A
+ * CORRECTION. Three nouns — `smoke` (sight + smell), `stone` and `mud` (sight + touch) — were
+ * PUBLISHED in two buckets each: 169 entries over 166 distinct nouns. `SENSE_OF_NOUN` already
+ * resolved all three to `sight` (the first declared bucket), so no counted figure was ever
+ * double-counted — but the published list said one thing and the resolver did another, and the
+ * gate's own partition assertion iterated the RESOLVER's values and therefore could not fail.
+ * The three duplicates are struck from the later buckets, which is the module's own rule
+ * applied ("the sense it is most directly met through": a plume, a wall and a rut are met by
+ * eye first). MEASURED, both sides: the strike moves no figure at all (R1 spread 0.791 bits,
+ * 1.198 nouns/100w, textured 0.2352 before and after), because the resolver already read them
+ * as sight. The OPPOSITE assignment — moving all three to smell/touch — would move R1's
+ * spread 0.791 → 0.848 bits, and that sensitivity is recorded rather than taken.
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const SENSORY_NOUNS = Object.freeze({
@@ -52,13 +67,13 @@ export const SENSORY_NOUNS = Object.freeze({
     'quiet', 'noise', 'din', 'whistle', 'knock', 'tramp', 'hoofbeat', 'hoofbeats',
   ]),
   smell: Object.freeze([
-    'smoke', 'tar', 'pitch', 'tallow', 'dung', 'tannery', 'brine', 'rot', 'mould', 'incense',
+    'tar', 'pitch', 'tallow', 'dung', 'tannery', 'brine', 'rot', 'mould', 'incense',
     'malt', 'yeast', 'sweat', 'stench', 'reek', 'perfume', 'resin',
   ]),
   touch: Object.freeze([
-    'frost', 'ice', 'mud', 'grit', 'splinter', 'damp', 'draught', 'heat', 'cold', 'wet',
+    'frost', 'ice', 'grit', 'splinter', 'damp', 'draught', 'heat', 'cold', 'wet',
     'wool', 'leather', 'hide', 'hides', 'linen', 'cloth', 'iron', 'nail', 'nails', 'chain',
-    'chains', 'stone', 'plank', 'planks', 'straw',
+    'chains', 'plank', 'planks', 'straw',
   ]),
   taste: Object.freeze([
     'bread', 'ale', 'beer', 'wine', 'salt', 'grain', 'meal', 'porridge', 'cheese', 'fish',
@@ -67,8 +82,10 @@ export const SENSORY_NOUNS = Object.freeze({
 });
 
 /**
- * A noun's sense bucket. A noun that appears in two lists resolves to the FIRST bucket in
- * declaration order, so the partition is total and stable rather than accidental.
+ * A noun's sense bucket. The published arrays are a partition (`SENSORY_NOUNS`' own note), so
+ * no noun reaches this map twice today; the FIRST-bucket-wins fold is kept as the fail-safe
+ * that made the duplicates harmless when they existed, and `bucketAudit()` is what proves the
+ * partition rather than this map, which cannot fail.
  * @type {Readonly<Record<string, string>>}
  */
 export const SENSE_OF_NOUN = Object.freeze(Object.fromEntries(
@@ -76,6 +93,39 @@ export const SENSE_OF_NOUN = Object.freeze(Object.fromEntries(
     .flatMap(([sense, nouns]) => nouns.map((noun) => [noun, sense]))
     .reverse(),
 ));
+
+/**
+ * THE PARTITION, MEASURED OVER THE PUBLISHED ARRAYS — the figure the gate asserts.
+ *
+ * ⭐ IT COUNTS THE ARRAYS, NEVER `SENSE_OF_NOUN`. A count over the resolver is a tautology: the
+ * map has one value per key by construction, so an assertion over it passes on any lexicon,
+ * duplicated or not. Counting the published entries against the distinct nouns is the same
+ * question asked where it can be answered wrongly — `entries !== distinct` reds, and it read
+ * 169 against 166 before the three dual-bucket nouns were struck.
+ * @returns {{entries: number, distinct: number, duplicates: Array<{noun: string,
+ *   buckets: string[]}>, perBucket: Record<string, number>}}
+ */
+export function bucketAudit() {
+  /** @type {Map<string, string[]>} */
+  const where = new Map();
+  /** @type {Record<string, number>} */
+  const perBucket = {};
+  let entries = 0;
+  for (const [sense, nouns] of Object.entries(SENSORY_NOUNS)) {
+    perBucket[sense] = nouns.length;
+    entries += nouns.length;
+    for (const noun of nouns) {
+      if (!where.has(noun)) where.set(noun, []);
+      /** @type {string[]} */ (where.get(noun)).push(sense);
+    }
+  }
+  return {
+    entries,
+    distinct: where.size,
+    duplicates: [...where].filter(([, b]) => b.length > 1).map(([noun, buckets]) => ({ noun, buckets })),
+    perBucket,
+  };
+}
 
 /**
  * A LICENSED TEXTURE DEVICE, for line 2. A paragraph counts once if it holds any of these.
