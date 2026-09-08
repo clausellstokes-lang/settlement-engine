@@ -125,12 +125,14 @@
     },
     {
       "id": "comparator-and-band-rule",
-      "mechanism": "the salience comparator and the band it ranks within: band descending, then the seeded permutation ascending, then an ascending CODE-UNIT comparison of the candidate key",
-      "shift": "a declared row — a comparator change re-orders candidates and so changes which modifier seats",
+      "mechanism": "the salience comparator AND THE BAND RULE it ranks within: the band is the count of three signals (the norm-leaf departure bit, the tension-or-contrast relation, the persisted change flag); then band descending, then the seeded permutation ascending, then an ascending CODE-UNIT comparison of the candidate key",
+      "shift": "a declared row — a comparator change re-orders candidates and so changes which modifier seats, and a BAND RULE change does the same one step earlier by re-scoring them",
       "door": "src/domain/display/stateProse/composeStateProse.js",
       "idiom": "never a locale API anywhere a draw is ordered (the lint ban in the composer's fence)",
+      "note": "⛔ THE BAND RULE WAS UNPINNED UNTIL SEAM CAR 5c (the seam fold's R3; SITTING §R cure 3). The row was named `comparator-and-band-rule` while its only pin covered the salience DRAW KEY and the comparator's TIE-BREAK; `bandOf` and `departureBit` appeared in ZERO pins register-wide, so a car that made `consequence` count toward the band, or added a fourth signal, would have re-ordered every multi-candidate rung for every existing world with this register GREEN and the shift undeclared — the one thing the register exists to make impossible. Pin 1 now carries the combining rule verbatim: the tension signal's own test, the three-signal sum, and the departure bit's threshold. Pin 2 holds the LEAF side of the same rule, so the mitigation the schema lens measured (no rung has two candidates today) is itself a measurement rather than an assurance.",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::salience::${row.key}`", "return a.key < b.key ? -1 : 1;"] }
+        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::salience::${row.key}`", "return a.key < b.key ? -1 : 1;", "const tension = row.meta.relation === 'tension' || row.meta.relation === 'contrast' ? 1 : 0;", "return departureBit(norms, blockId, row.key) + tension + row.change;", "return row && row.departure === 1 ? 1 : 0;"] },
+        { "kind": "integer", "over": "pools whose DECLARED relation contributes the band's tension signal (relation tension or contrast)", "value": 0 }
       ]
     },
     {

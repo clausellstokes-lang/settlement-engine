@@ -1012,6 +1012,14 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
         META_ROWS.filter((r) => r.meta.attach.length > 0).length,
         digestOver((r) => r.meta.attach.join('|')),
       ],
+      // ⛔ THE BAND RULE'S LEAF SIDE (SEAM car 5c, the fold's R3). Index 0 is the `source` pin
+      // that carries the combining rule verbatim; the loop returns on it before it reads this
+      // table, so the hole at index 0 is deliberate and a later car that changed pin 0's kind
+      // would be told 'nothing recomputes it' rather than passing silently.
+      'comparator-and-band-rule': [
+        undefined,
+        META_ROWS.filter((r) => r.meta.relation === 'tension' || r.meta.relation === 'contrast').length,
+      ],
       'fact-and-position-budget': [{ ...COMPOSITION_BOUNDS }],
       'registry-id': [META_ROWS.filter((r) => r.meta.role === 'turn').length],
       'instance-key': [META_ROWS.filter((r) => INDEX_PAIRED_BLOCKS.includes(r.id) && r.meta.attach.length > 0).length],
