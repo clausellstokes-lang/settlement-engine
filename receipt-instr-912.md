@@ -1470,9 +1470,9 @@ Seat: Opus 5 — Fable-unvalidated
 
 ---
 
-## CAR 10 — THE SECOND FOLD'S CURES: 14 code, 32 receipt corrections, the firings re-run, the tiers re-printed — **LANDED** · shas `CAR10SHA` + `CAR10BSHA` · 2026-09-08 01:5x EDT
+## CAR 10 — THE SECOND FOLD'S CURES: 14 code, 32 receipt corrections, the firings re-run, the tiers re-printed — **LANDED** · shas `c199f0189` + `ee403e8ab` · 2026-09-08 01:5x EDT
 
-Seat: Opus 5 — Fable-unvalidated. Dock `$SC/laneINSTR`, **twelve/thirteen** commits over
+Seat: Opus 5 — Fable-unvalidated. Dock `$SC/laneINSTR`, **thirteen** commits over
 `3b1c0eaa5`, porcelain 0 and zero untracked after both.
 Inputs read whole and in the chair's order: `skeptic-instr2/FOLD.md` (273 lines, 46 cures),
 `s12-sitting/SITTING-RULINGS-912.md` **§M**, the three lens files (`census.md`, `cures.md`,
@@ -1502,7 +1502,7 @@ The one-time shift is declared here and every new figure is asserted as an integ
 | mutations executed, restored `cmp`-identical | **9** (#77, #79, #80, #81, #82, the new #83 and #84, and the two in-flight reverts of cures 2 and 15) |
 | eslint over every changed file | EXIT 0 |
 | `node scripts/check-full-typecheck.mjs` | `OK — no type regressions (173 error(s), ceiling 173)` |
-| the register that moved | `tests/lint/.lighting-census-baseline.json` — titles and suiteTitles only (car 10 adds no test FILE); refrozen by its ritual in car **10b** |
+| the register that moved | `tests/lint/.lighting-census-baseline.json` — **titles 23,730 -> 23,736 only**; `files` 2549, `parked` 375, `credited` 2174 and `suiteTitles` 6354 all unmoved (car 10 adds no test FILE and no new suite). Refrozen by the door's own ritual in car **10b**, then the plain re-run: 34 passed (34) |
 
 ### 10.1 THE FOURTEEN CODE CURES — each with the arm the fold names and its executed tail
 
@@ -1657,10 +1657,13 @@ by plant** (correction 46), and no plant in the consist proves it.
 5. **U6 IS STILL NOT EXECUTED, BY THE LANE'S OWN MEASUREMENT DISCIPLINE.** The brief forbids
    the whole suite; the fold prescribes it on the MERGED tree after H3's refreeze. Fourteen
    focused files are green here, one at a time — see 10.6.
-6. **ONE DECLARED DEVIATION FROM "ONE FILE AT A TIME".** The anchor ratchet and the file it
-   flagged were re-run together once (36 passed), to see the ratchet clear on the same tree
-   that produced the flag. Both were then re-run **individually** and both tallies below are
-   from those single-file runs.
+6. **TWO DECLARED DEVIATIONS, BOTH SMALL AND BOTH NAMED.** (i) The anchor ratchet and the file
+   it flagged were re-run together once (36 passed), to see the ratchet clear on the same tree
+   that produced the flag; both were then re-run **individually** and both tallies below are
+   from those single-file runs. (ii) The two CONFIRMING re-runs of
+   `proseWiringCensus.walker.test.js` on the committed tree followed one another inside a
+   single gate check rather than one each — sequential shell calls with no runner alive
+   between them, but the rule says a check per invocation and this was two invocations.
 
 ### 10.6 THE PROOFS — every focused file run ALONE, with the gate check in its own shell call
 
@@ -1705,8 +1708,27 @@ are inside the same island, and the fence arm now proves by BYTES that no `src/`
 island modules (2,199 files scanned, breaches `[]`). `wiringCensus.js` still reads no file and
 holds no state; every source it measures arrives as a string from the test helper.
 
-### 10.8 WHAT A SUCCESSOR CONTINUES FROM
-Dock tip = car 10b, porcelain 0, zero untracked, **thirteen** commits over `3b1c0eaa5`; the
+### 10.8 CAR 10b — THE LIGHTING CENSUS, REFROZEN BY ITS OWN RITUAL (sha `ee403e8ab`)
+Car 10 adds no test FILE and no new suite, so four of the tuple's five figures do not move.
+```
+$ LIGHTING_CENSUS_REFREEZE='INSTR-912 car 10 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at c199f0189 by INSTR-912 car 10 (Opus 5):
+  files 2549 -> 2549 · parked 375 -> 375 · credited 2174 -> 2174
+  titles 23730 -> 23736 · suiteTitles 6354 -> 6354
+  (this run fails BY DESIGN so a refreeze can never read as a passing gate)
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+  Tests  34 passed (34)          # the plain green the ritual's docblock asks for
+```
+⚠ **A GAP RECORDED RATHER THAN RECONCILED.** The four lane walkers gain **ten** `test()`/`it()`
+titles between them (26, 27, 50, 18 against 21, 24, 49, 17) and this census credits **six**.
+The difference is the census's own AST classifier — it credits a file's titles only where the
+file is not parked and the opener resolves — and it is written into the baseline's `note` for a
+successor rather than explained away here. The tuple is the door's plain re-run: no figure in it
+was written by a person, and a hand-composed one would red the re-run above.
+
+### 10.9 WHAT A SUCCESSOR CONTINUES FROM
+Dock tip = car 10b (`ee403e8ab`), porcelain 0, zero untracked, **thirteen** commits over `3b1c0eaa5`; the
 PRODUCT tip has since moved to `f3ab08f51` in another dock and **the rebase is the chair's**
 (FOLD-2 §5, H1–H9), not this lane's. FOLD-2's forty-six cures are discharged: **14 code (built,
 every arm executed) · 32 receipt (below) · 9 spec (the chair's §M, already written into Part B
