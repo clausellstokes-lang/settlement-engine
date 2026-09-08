@@ -1371,3 +1371,406 @@ $ git rev-list --count 8522a17b2..HEAD
 
 Seat: Opus 5 — Fable-unvalidated
 Lane: MEASURE
+
+---
+
+## CAR 2 — THE BYTE RATCHETS
+
+Shas: **`55d7f696b`** (car 2) and **`fcd98a3db`** (car 2b, the lighting refreeze).
+Thirteen commits over `8522a17b2`. Zero product bytes: nothing under `src/` moved.
+
+### 0. ARRIVAL — the three conditions, executed
+
+```
+$ date
+Tue Sep  8 07:36:45 EDT 2026
+$ ls $SC/HOLD-VITEST
+ls: .../scratchpad/HOLD-VITEST: No such file or directory
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ git log -3 --format='%H %s'   (dock $SC/laneMEASURE)
+710ef8e08a97b2517f229892fe25b846307f4799 MEASURE car 1b: the lighting census refrozen …
+b74daab7aa4b67f32a3dfd84938234ab191acac0 MEASURE car 1: the composed-prose manifest …
+23ea93ab6b8d7e003df8c082cdc8f111509abf3b MEASURE car 0g: the estate's anchor ratchet …
+$ git rev-list --count 8522a17b2..HEAD
+11
+$ git status --porcelain -uall | wc -l
+       0
+```
+
+The gate check was re-taken **in its own shell call before every one of the eight vitest
+runs below**; `HOLD-VITEST` absent and runner count **0** each time.
+
+### 1. WHAT WAS BUILT (2 new, 3 extended; 688 insertions, 0 deletions)
+
+| file | what |
+|---|---|
+| `scripts/.prose-byte-baseline.json` | NEW: raw + gzip per SOURCE leaf, the frozen genesis, the apportioned ceilings, the declared-row array, and four docblock keys carrying the idiom |
+| `tests/lint/proseCorpusBytes.test.js` | NEW: **17 assertions** in four suites |
+| `tests/build/vendorPdfLazy.test.js` | EXTENDED: **+11 arms** in three suites (41 `it(` sites → 52) |
+| `scripts/mutation-sweep.sh` | plant **#95** + one `MUTATED_FILES` row |
+| `scripts/mutation-coverage-manifest.json` | one `invariants` entry, edited BY TEXT (5 insertions, 0 deletions, no re-serialization) |
+
+### 2. THE MEASUREMENT THE WHOLE CAR RESTS ON — the seven leaves at this tip
+
+```
+$ node -e "<statSync + gzipSync level 9 over the seven leaves>"
+   111827    21248   5.2629 src/data/dossierStateProse/defense.generated.js
+    90212    18293   4.9315 src/data/dossierStateProse/economy.generated.js
+   182518    31752   5.7482 src/data/dossierStateProse/general.generated.js
+    81802    15328   5.3368 src/data/dossierStateProse/power.generated.js
+    59298    12961   4.5751 src/data/dossierStateProse/stressors.generated.js
+   115753    22048   5.2500 src/data/dossierStateProse/warFaith.generated.js
+   210260    36700   5.7292 src/data/dossierCausalProse.generated.js
+SIX raw 641410 gzip(sum per-leaf) 121630 ratio 5.2735
+node v24.12.0 zlib 1.3.1-470d3a2
+```
+
+⭐ **§10's two headline figures REPRODUCE EXACTLY**: the six state leaves are 641,410 raw
+and 121,630 gzip, and the ratio is 5.2735, which is §10's 5.27 : 1. The causal leaf is
+210,260 B, also §10's figure. Nothing in this car's arithmetic rests on a number the
+document asserts without a measurement behind it.
+
+### 3. THE CEILING APPORTIONMENT, PRINTED (§10's arithmetic, re-derived in the test)
+
+`ceilingRaw = round(2,800,000 × genesis.raw ÷ 641,410)`; `ceilingGzip = round(ceilingRaw ÷ 4.5)`.
+
+```
+$ node -e "<the apportionment>"
+pre-remainder sum 2800000 delta 0
+defense    raw  111827 share 17.4346% ceilRaw  488168 ceilGzip 108482 headroom x 4.3654
+economy    raw   90212 share 14.0646% ceilRaw  393810 ceilGzip  87513 headroom x 4.3654
+general    raw  182518 share 28.4557% ceilRaw  796761 ceilGzip 177058 headroom x 4.3654
+power      raw   81802 share 12.7535% ceilRaw  357097 ceilGzip  79355 headroom x 4.3654
+stressors  raw   59298 share  9.2449% ceilRaw  258858 ceilGzip  57524 headroom x 4.3654
+warFaith   raw  115753 share 18.0466% ceilRaw  505306 ceilGzip 112290 headroom x 4.3654
+SUM ceilRaw 2800000 SUM ceilGzip 622222 largest= general
+band check 500000..650000: true
+```
+
+The rounded shares sum to **exactly 2,800,000 with no remainder to allocate**, which the
+test asserts rather than tolerates, and the gzip ceilings sum to **622,222**, inside
+§10's stated 0.5–0.65 MB over-the-wire band. Every leaf carries the same **4.3654×**
+headroom; a leaf that grows out of proportion to the rest still reds.
+
+**THE CAUSAL LEAF TAKES NO HEADROOM** (ceiling = its own 210,260 / 36,700). Three grounds,
+one of them measured in §5 below: §11 refuses wording sets on the causal register in wave
+one; §12 car 13 is owner-gated ("wire or retire"); and the leaf reaches no emitted chunk
+at all.
+
+### 4. THE RELINK LAW, THEN THE ONE CHARTERED BUILD
+
+```
+$ ls -la node_modules/immer node_modules/seedrandom
+lrwxr-xr-x@ 1 cstokes  wheel  59 Sep  8 04:57 node_modules/immer -> /Users/cstokes/Desktop/settlement-engine/node_modules/immer
+lrwxr-xr-x@ 1 cstokes  wheel  64 Sep  8 04:57 node_modules/seedrandom -> /Users/cstokes/Desktop/settlement-engine/node_modules/seedrandom
+$ npx vite build
+dist/assets/data-lazy-pqPyi0JA.js    939.52 kB │ gzip: 272.28 kB
+dist/assets/vendor-pdf-BU3i_b40.js 1,623.20 kB │ gzip: 578.98 kB
+✓ built in 16.42s
+```
+
+Both bundled packages are SYMLINKS, so the dock cannot bundle either twice. `dist/` did
+not exist before this build. **ONE build was taken and one is all the car needed**: no
+byte this car wrote is under `src/` or `vite.config.js`, so the emitted output is
+independent of every edit made after it. The chunk hash `data-lazy-pqPyi0JA` is the SAME
+hash §10 cites from its own dock, which is the determinism this file's wave-5b note
+measured, observed across two machines and two tips.
+
+### 5. THE CLOSURE, THE CHUNK, AND THE MEMBERSHIP — one command
+
+```
+$ node $SC/measure/car2-dist.mjs
+── THE FIRST-PAINT CLOSURE ───────────────────────────
+     5349     2605     2237   content-identity-CFIG6Vg0.js
+   114865    33963    28103   data-DuZw95wO.js
+   126461    40464    34507   engine-core-XHMkqsoo.js
+   570296   180108   148886   index-B4_qfDfz.js
+    10457     4264     3773   kernel-CznyAwqE.js
+     4228     1756     1575   vendor-icons-BhnrOqvz.js
+   193156    60438    52140   vendor-react-BQxSgP9l.js
+    17310     7224     6534   vendor-state-CBu5u-4u.js
+ENTRY index-B4_qfDfz.js
+CLOSURE files 8 · raw 1042122 / 1048000 (margin 5878) · gzip 330822 / 337000 (margin 6178) · brotli 277755 / 283000 (margin 5245)
+
+── THE data-lazy CHUNKS ──────────────────────────────
+   939520   271305   data-lazy-pqPyi0JA.js
+data-lazy chunks 1 · raw 939520 · gzip 271305 · ratio 3.4630
+eager data chunks: data-DuZw95wO.js, data-lazy-pqPyi0JA.js
+
+── PROSE LEAF MEMBERSHIP (fingerprint derived from the leaf source) ──
+src/data/dossierStateProse/defense.generated.js    carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierStateProse/economy.generated.js    carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierStateProse/general.generated.js    carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierStateProse/power.generated.js      carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierStateProse/stressors.generated.js  carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierStateProse/warFaith.generated.js   carriers: data-lazy-pqPyi0JA.js · in-closure: none
+src/data/dossierCausalProse.generated.js           carriers: NONE · in-closure: none
+```
+
+**THE CLOSURE FIGURE IS 1,042,122 RAW OVER EIGHT FILES, 5,878 B UNDER 1,048,000** — the
+brief's §914 figure to the byte, re-measured here rather than quoted. ⚠ **§10's own
+1,042,086 / 5,914 is 36 B LOW at this tip**; the brief's number is the correct one and
+§10's should be corrected, not the other way round. gzip 330,822 (6,178 spare) and
+Brotli 277,755 (5,245 spare) are both further from red than the ratification note above
+`CLOSURE_GZIP_BUDGET_BYTES` records (332,064 / 278,569 at the substrate coupling).
+
+⛔⛔ **A MEASURED CORRECTION TO §10: THE CAUSAL LEAF DOES NOT RIDE THE data-lazy CHUNK.**
+It reaches NO emitted chunk at all.
+
+```
+$ grep -rn "causalDossierProse" src | grep -v '^src/domain/display/stateProse/causalDossierProse.js'
+src/domain/display/stateProse/economyStateProse.js:66:  * … comes through causalDossierProse.js, which
+src/domain/display/stateProse/stateProseKernel.js:52:  * filtered by causalDossierProse.js rather than here.
+src/domain/prose/moveGrammar.js:155:    'tests/data/dossierStateProseProjection.contract.test.js: …'
+$ grep -l 'JF-CPL-1a' dist/assets/*.js ; grep -l 'DOSSIER_CAUSAL_PROSE' dist/assets/*.js
+(no output from either)
+```
+
+Every mention in `src/` is a COMMENT. The reader has no product importer, so
+`DOSSIER_CAUSAL_PROSE` ships **zero bytes to any reader today**. §10 states it "rides the
+`data-lazy-*` chunk"; it does not. §12 car 13 is owner-gated, so BOTH futures are lawful,
+and the membership arm accepts either (dark, or wired into `data-lazy`) while refusing the
+one state that never is: first paint.
+
+⚠ A trap the arms had to handle and the file already documents for `engine-` / `engine-core-`:
+`/^data-[A-Za-z0-9_-]+\.js$/` **matches `data-lazy-…` too**. The eager-data arm uses
+`/^data-(?!lazy-)…/`.
+
+### 6. THE FINGERPRINTS ARE DERIVED, SO CAR 8 CANNOT ROT THEM
+
+A pinned sentence would die the first time the rewrite wave touched its leaf, and a
+membership guard whose marker matches nothing passes forever. Each leaf's fingerprint is
+re-derived every run: its longest quote-free, backslash-free `"text"` value, which
+minification preserves verbatim.
+
+```
+$ node -e "<derive and cross-check the seven fingerprints>"
+defense   safe-texts  44 len 184      power     safe-texts   9 len 136
+economy   safe-texts 103 len 189      stressors safe-texts 133 len 168
+general   safe-texts  39 len 161      warFaith  safe-texts 102 len 160
+causal    safe-texts  18 len 231
+--- uniqueness across the seven leaf SOURCES ---
+OK (each of the seven) => itself only
+```
+
+`power.generated.js` yields only NINE candidates, which is the thin end and is why the
+anti-vacuity arm asserts a fingerprint exists, is over 40 characters, and is unique to its
+leaf, with the failure message naming the cure (widen the safe-character class, never drop
+the leaf).
+
+### 7. THE PLANTS
+
+**PLANT A — a kilobyte into a leaf (the standing sweep plant #95).** Executed from the
+COMMITTED sweep line, extracted verbatim by `sed` and run standalone, so the plant cannot
+report CLEAR because its own anchor rotted:
+
+```
+$ grep -cF "It is receding. What remains is the damage rather than the danger." src/data/dossierStateProse/stressors.generated.js
+1
+$ md5 -q src/data/dossierStateProse/stressors.generated.js
+bc8ee1ea0d9bd8f6ef63dba9da9d7ba6
+$ bash <line 1335 of scripts/mutation-sweep.sh, verbatim>
+planted size 60408          (delta +1110 B; the leaf still parses, 3 blocks exported)
+$ npx vitest run tests/lint/proseCorpusBytes.test.js
+ FAIL  > RAW is EXACT: above fails, below demands the row be lowered
+ + "src/data/dossierStateProse/stressors.generated.js: grew to 60408 raw bytes, over the
+ +  committed 59298. Append a declared row to scripts/.prose-byte-baseline.json naming the
+ +  car and the delta, and move this number onto 60408."
+      Tests  1 failed | 16 passed (17)
+$ git checkout -- … ; md5 -q … ; cmp … 
+bc8ee1ea0d9bd8f6ef63dba9da9d7ba6     RESTORED cmp-identical
+$ npx vitest run tests/lint/proseCorpusBytes.test.js      Tests  17 passed (17)
+```
+
+⭐ **THE GZIP ARM DID NOT FIRE, AND THAT IS THE INSTRUMENT'S SHAPE, NOT A GAP.** The plant's
+payload is repetitive, so gzip moved only **+64 B against a 129 B band** (13,025 vs the
+committed 12,961). That is precisely why RAW is the exact ruler and gzip is the wire-cost
+record: a compressed ratchet cannot see the corpus growth this design exists to bound.
+
+**PLANT B — an eager static import of a leaf, caught with NO BUILD.** Appended one line to
+`src/store/settlementSlice.js`, an eager module by vite's own derivation:
+
+```
+$ md5 -q src/store/settlementSlice.js                       5d861e48bd629a55e172b487c7629b6f
+$ printf … >> src/store/settlementSlice.js                  (import DOSSIER_STATE_PROSE_GENERAL)
+$ node -e "<read EAGER_FIRST_PAINT_MODULES>"
+leaf now eager: true · eager module count 264   (263 before)
+$ npx vitest run tests/build/vendorPdfLazy.test.js          (no VERIFY_DIST, no build needed)
+     × no prose LEAF is in the first-paint module graph 7ms
+     × NO module in the first-paint graph imports a prose leaf 104ms
+AssertionError: prose leaf/leaves src/data/dossierStateProse/general.generated.js entered the
+eager graph. vite's isEagerData is DERIVED from that graph, so the whole corpus re-files into
+the first-paint data chunk against 5,878 B of closure margin (the FP-G16 cultureProfiles
+mechanism, four times the size). Find the eager importer and route it through a lazy surface.
+      Tests  2 failed | 38 passed | 13 skipped (53)
+$ git checkout -- src/store/settlementSlice.js ; md5 -q ; cmp
+5d861e48bd629a55e172b487c7629b6f     RESTORED cmp-identical
+```
+
+Two arms fire, in the UNGATED half, naming the culprit — which is the half that stops the
+regression at source-edit time rather than at the post-build re-run.
+
+### 8. THE TWO SIZE CONSUMERS ARE BYTE-UNTOUCHED (sha pins, plus a structural arm)
+
+```
+$ for f in scripts/.size-baseline.json tests/lint/sizeBaseline.test.js eslint.config.js; …
+scripts/.size-baseline.json
+  base 8522a17b2  a3f07c4833ac9060655fac92e965379894e5a0fb3ad36a2239775dd669a5c102
+  tip  710ef8e08  a3f07c4833ac9060655fac92e965379894e5a0fb3ad36a2239775dd669a5c102
+  worktree        a3f07c4833ac9060655fac92e965379894e5a0fb3ad36a2239775dd669a5c102
+tests/lint/sizeBaseline.test.js
+  base / tip / worktree   715d64e386a540442566ac60350d05ce0aa25e432fcf11abd42220242fbb344e
+eslint.config.js
+  base / tip / worktree   11c19f863006d7cf36a7940830d8e9cdb600c52714c7364b42685c41a94f034a
+$ git diff --stat 8522a17b2 -- scripts/.size-baseline.json tests/lint/sizeBaseline.test.js eslint.config.js
+(no output)
+```
+
+⚠ **A SHA PIN IS THE RECEIPT'S JOB AND NOT THE TEST'S, DELIBERATELY.** Freezing those two
+files by sha inside a test would forbid the ratchet-downs that instrument exists to
+receive, so the receipt carries the car-2 fact and the test carries the DURABLE property
+instead: it extracts `ceilingFor()`'s seven layer regexes **from the size-baseline test's
+own source** (never a replica) and asserts that none of them matches any prose leaf, with
+an anti-vacuity arm proving the extraction is live on `src/App.jsx`,
+`src/domain/explanation.js` and `src/store/settlementSlice.js`.
+
+```
+$ node -e "<the extraction the test performs>"
+extracted 7 rules
+  /^src\/components\/.*\.jsx$/ · /^src\/components\/.*\.js$/ · /^src\/[^/]+\.jsx$/
+  /^src\/[^/]+\.js$/ · /^src\/generators\/.*\.js$/ · /^src\/domain\/.*\.js$/
+  /^src\/(store|pdf|lib|hooks|utils)\/.*\.(js|jsx)$/
+prose leaves covered: false (all three probes)   anchors covered: true (all three)
+```
+
+⚠ A first draft of the extraction used `(?:[^/\\]|\\.)+` for the pattern body and silently
+found only **5 of 7** rules, because `[^/]` in two of them contains an unescaped `/`. The
+anchor arm is what exposed it: `src/App.jsx` came back uncovered. A five-rule reader would
+have passed the non-overlap claim while blind to the two src-root rules.
+
+### 9. THE GATES
+
+```
+$ npx eslint tests/lint/proseCorpusBytes.test.js tests/build/vendorPdfLazy.test.js   ; exit=0
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node $SC/prose-numerics-rekey.mjs $SC/laneMEASURE
+baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0
+$ node $SC/measure/voice-scan.mjs <the two JS files>       (espree over every string literal)
+tests/lint/proseCorpusBytes.test.js  literals 161 · em 6 · bang 0 · toFixed 0
+tests/build/vendorPdfLazy.test.js    literals 425 · em 30 · bang 0 · toFixed 0
+  (base vendorPdfLazy: literals 293 · em 24 — so this car added 6: three suite titles, three failure messages)
+$ npx vitest run tests/lint/mutationCoverageManifest.test.js     Tests  10 passed (10)
+```
+
+Zero exclamation marks, zero `toFixed`, zero float interpolation. On the em dashes see the
+judgment calls below.
+
+```
+$ npx vitest run tests/lint                     ; exit=1  (first run, both reds predicted)
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js
+   proseCorpusBytes.test.js: 1 un-anchored negative assertion(s) at line(s) 362 (frozen ceiling 0)
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js
+   the estate's file count moved: expected 2553 to be 2552
+      Tests  2 failed | 2384 passed (2386)
+```
+
+The anchor red is **THE MARKER RULE biting exactly as that walker's own docblock warns**: an
+`// anchored:` marker was written above a four-line `expect(…)`, so the line abutting the
+`.not.toContain` was the message argument, not the marker. Cured the way the estate's own
+`tradeLinks.js` site does it — the assertion collapsed onto one line with the marker
+directly above it, and the reason kept in a separate comment above that. The census red is
+car 2b's, below.
+
+```
+$ npx vitest run tests/lint                     ; exit=0  (at fcd98a3db)
+ Test Files  147 passed (147)
+      Tests  2386 passed (2386)
+   Duration  103.30s
+$ npx vitest run tests/build/vendorPdfLazy.test.js
+      Tests  40 passed | 13 skipped (53)
+$ VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js
+      Tests  53 passed (53)
+$ git status --porcelain --untracked-files=all | wc -l
+       0
+$ git check-ignore -v dist
+.gitignore:2:dist/	dist
+```
+
+147 files and **2,386** assertions against car 1's 146 / 2,369 — exactly the one new file
+and its seventeen arms, and nothing else. `tests/build/` is not in `tests/lint`, which is
+why the eleven arms there do not appear in that count.
+
+### 10. CAR 2b — THE LIGHTING CENSUS, REFROZEN BY ITS OWN RITUAL (sha `fcd98a3db`)
+
+```
+$ LIGHTING_CENSUS_REFREEZE='MEASURE car 2 (Opus 5)' LIGHTING_CENSUS_NOTE='…' \
+    npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 55d7f696b16e7ea04ee67bb9f7e4245f18ef21e6 by MEASURE car 2 (Opus 5):
+  files 2552 -> 2553, parked 375 -> 375, credited 2177 -> 2178,
+  titles 23816 -> 23833, suiteTitles 6372 -> 6376.
+  This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate.
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js      Tests  34 passed (34)
+```
+
+The whole move is `tests/lint/proseCorpusBytes.test.js`: one file, one credited file, its
+17 `test()` titles and 4 `describe()` titles. `tests/build/` is PARKED (375, unmoved), which
+is why the eleven new arms and three new describes in `vendorPdfLazy.test.js` are correctly
+uncounted here — the two figures moving by exactly one is the check on that reading.
+
+### 11. THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. **THE 2.8 MB CEILING IS APPORTIONED OVER THE SIX STATE LEAVES, NOT ALL SEVEN.** §10's
+   arithmetic runs on "the six real leaves" (base 638,800 pretty-printed), so spreading it
+   over seven would have set every state leaf's ceiling BELOW the document's own predicted
+   ceiling and reded car 8 before it finished — the opposite of "set from the CEILING so
+   car 8 cannot breach it". The causal leaf takes its own zero-headroom row instead (§3).
+2. **GZIP IS A 1 % BAND, NOT AN EQUALITY**, because gzip output is a function of the zlib
+   build as well as the payload, and this estate has already ruled that a ratchet which
+   reds on a toolchain upgrade has stopped measuring the payload. The band is tighter than
+   the ~5 % platform margin the file's own transfer budgets carry for that hazard, and it
+   costs no coverage because RAW is exact. Plant A's +64 B is the demonstration.
+3. **THE SIZE-CONSUMER PROOF IS SPLIT**: a sha pin in the receipt (the car-2 fact) and a
+   structural, re-derived arm in the test (the durable property). A sha pin inside a test
+   would freeze a burn-down ledger that exists to be ratcheted down (§8).
+4. **TWO FILES OUTSIDE THE BRIEF'S LIST WERE TOUCHED** — `scripts/mutation-sweep.sh` and
+   `scripts/mutation-coverage-manifest.json` — because `tests/lint/` is an ENFORCER DIR, so
+   the new file is enumerated by `mutationCoverage.shared.mjs` and owes a mutation or a
+   rationale the moment it lands. §12 row 2 anticipates this ("`mutationCoverageManifest`
+   if a plant is owed"); a plant is owed and #95 is it. Cars 0 and 1 took the same exception.
+5. **THE DATA-LAZY ROW IS A CEILING PLUS A FLOOR, NOT AN EQUALITY.** Many lanes legitimately
+   move that chunk; an exact row would be a nuisance gate measuring other people's work. The
+   floor (500,000) is what keeps the ceiling from being vacuous: a collapse reds too.
+6. **NO PLATFORM MARGIN WAS ADDED TO THE DATA-LAZY CEILINGS.** The allowance is ~2.16 MB
+   raw against the few hundred bytes of cross-environment Rollup drift the wave-5b note
+   measures; a margin here would spend headroom no measurement asks for.
+7. **THE EM DASHES IN SUITE TITLES WERE KEPT.** The car moves ZERO `src/` bytes, so the
+   voice rule's subject is untouched; `vendorPdfLazy.test.js` already carried 24 em dashes
+   in literals before this car and car 0 added 12 of its own to
+   `proseWiringCensus.walker.test.js`. Matching the file is house voice; the count is
+   printed in §9 so a chair who disagrees can act on a number.
+8. **THE CAUSAL MEMBERSHIP ARM ACCEPTS BOTH FUTURES.** Asserting "in no chunk" would have
+   made this car forbid what §12 car 13 reserves to the owner.
+
+### 12. THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+$ git log --oneline -3
+fcd98a3db MEASURE car 2b: the lighting census refrozen at car 2's tip by its own ritual …
+55d7f696b MEASURE car 2: the byte ratchets — the composed-prose corpus gets the first ruler …
+710ef8e08 MEASURE car 1b: the lighting census refrozen at car 1's tip by its own ritual …
+$ git rev-list --count 8522a17b2..HEAD
+13
+```
+
+`npx vitest run tests/lint/proseCorpusBytes.test.js` (17) ·
+`npx vite build && VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js` (53) ·
+`node $SC/measure/car2-dist.mjs` (the closure, the chunk and the membership in one command).
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: MEASURE
