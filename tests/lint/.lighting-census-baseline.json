@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "55d7f696b16e7ea04ee67bb9f7e4245f18ef21e6",
-  "measuredBy": "MEASURE car 2 (Opus 5)",
+  "measuredAtSha": "3e2a644ec799834228fe95ce88679128210ba316",
+  "measuredBy": "MEASURE car 3 (Opus 5)",
   "date": "2026-09-08",
-  "note": "ARCH car 2, the byte ratchets: tests/lint/proseCorpusBytes.test.js is a new credited enforcer file (17 arms) and tests/build/vendorPdfLazy.test.js gains eleven arms in three new describes. No product byte moved.",
+  "note": "ARCH car 3, the MEASURE fold cures: five new arms in tests/lint/proseWiringCensus.walker.test.js and three in tests/property/dossierProseManifest.test.js. No test FILE was added and no product byte moved. CORRECTION to car 2 note, carried per SITTING P.2: vendorPdfLazy.test.js gained eleven arms in TWO new describes, not three (measured at both ends of that consist: describe( 5 at 8522a17b2, 7 at fcd98a3db); every NUMBER in the car-2 tuple was correct.",
   "files": 2553,
   "parked": 375,
   "credited": 2178,
-  "titles": 23833,
-  "suiteTitles": 6376
+  "titles": 23841,
+  "suiteTitles": 6377
 }
