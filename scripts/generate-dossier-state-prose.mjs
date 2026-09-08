@@ -40,7 +40,7 @@ import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/d
 import {
   CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
   assertFaces, assertPoolDeclaration, isDeclarationLine, parseConnectives, readDeclarations,
-  vidsOf,
+  seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
@@ -686,7 +686,10 @@ function derivedAttach({ pools, declaredRoleByPool, censusOf, field }) {
 /**
  * @param {Array<object>} blocks
  * @param {{meta?: {censusOf: Function, edgesFrom: Function, shapeOf: Function,
- *   clauseOpeners: ReadonlyArray<string>}}} [options] when `meta` is given the block carries
+ *   clauseOpeners: ReadonlyArray<string>, relationRows: ReadonlyArray<object>,
+ *   aliasOf: Map<string, string>,
+ *   tally: {sentence: number, clause: number, reasons: Record<string, number>}}}}
+ *   [options] when `meta` is given the block carries
  *   `poolMeta` and every variant carries its `vid`. The CAUSAL register takes no `meta`: its
  *   pools are not in the wiring census, §11 refuses wording sets on it in wave one, and its
  *   byte ceiling equals its own genesis bytes (the prose byte baseline's `_causalLeafGround`),
@@ -759,6 +762,24 @@ function projectBlocks(blocks, options = {}) {
               field,
             }));
         const row = meta.censusOf(b.id, p.key);
+        // ⭐⭐ THE SEAT LICENCE (car 4d). Asked HERE, where the census's `reads`, the relation
+        // rows and the ratified aliases are all in hand, and frozen onto the pool — because
+        // `reads` never ships (ARCH §16) and a composer that reads it is naming a field its
+        // own input cannot carry. `seatMeta` emits the two keys only on a modifier; `seatOf`
+        // answers for EVERY pool so the tally below is over all 708 and not over the seven
+        // that happen to carry one.
+        const licenceInput = {
+          role,
+          relation: p.declared.relation,
+          attach,
+          reads: p.declared.reads,
+          censusOf: (key) => meta.censusOf(b.id, key),
+          relationRows: meta.relationRows,
+          aliasOf: meta.aliasOf,
+        };
+        const licence = seatOf(licenceInput);
+        meta.tally[licence.seat] += 1;
+        meta.tally.reasons[licence.reason] = (meta.tally.reasons[licence.reason] || 0) + 1;
         poolMeta[p.key] = {
           role,
           variantCount: p.variants.length,
@@ -773,6 +794,7 @@ function projectBlocks(blocks, options = {}) {
           // there, unchanged.
           ...(row && row.reads.length ? { readsCount: row.reads.length } : {}),
           ...(p.declared.relation ? { relation: p.declared.relation } : {}),
+          ...seatMeta(licenceInput),
           ...(p.declared.form ? { form: p.declared.form } : {}),
           ...(p.declared.move ? { move: p.declared.move } : {}),
           attach,
@@ -881,6 +903,18 @@ function edgesFrom(from, to) {
   ];
 }
 
+/**
+ * The RATIFIED ALIASES as a lookup, read HERE rather than at the relations leaf below because
+ * the SEAT LICENCE (car 4d) needs them while the blocks are being projected: an alias is what
+ * turns a producer token into the desk read root it is the same fact as (SITTING §P.2-27).
+ * @type {Map<string, string>}
+ */
+const RATIFIED_ALIASES = new Map(
+  (census.ratifiedAliases?.rows || []).map((r) => [r.endpoint, r.readRoot]),
+);
+/** The seat tally, filled as the blocks project and printed with the other census lines. */
+const SEAT_TALLY = { sentence: 0, clause: 0, reasons: /** @type {Record<string, number>} */ ({}) };
+
 /** §7b, read before the blocks: the face refusals need the clause lists. */
 const connectives = parseConnectives(stateSrc);
 const CLAUSE_OPENERS = Object.values(connectives.lists)
@@ -921,6 +955,9 @@ const stateData = projectBlocks(stateBlocks, {
     edgesFrom,
     shapeOf: (slot) => slotShapes.shapeOf(slot),
     clauseOpeners: CLAUSE_OPENERS,
+    relationRows: census.relations?.rows || [],
+    aliasOf: RATIFIED_ALIASES,
+    tally: SEAT_TALLY,
   },
 });
 const causalData = projectBlocks(causalBlocks);
@@ -1117,6 +1154,17 @@ emitted.push({
 
 // Every bound live string landed as a reference, and none survived as a literal.
 assertLiveStringsBound(emitted);
+
+/**
+ * ⭐ THE SEAT CENSUS (car 4d) — one line, over every state pool, with the reason each took.
+ * "No clause can seat today" is this tally and not a sentence in a header: the day an alias
+ * makes the first `consequence` authorable, this line moves and the SHIFT REGISTER's `seat`
+ * row stops being a named non-mechanism.
+ */
+const seatLine = Object.entries(SEAT_TALLY.reasons).sort()
+  .map(([reason, n]) => `${reason} ${n}`).join(' · ');
+console.log(`[dossier-prose] seats: ${SEAT_TALLY.sentence} sentence / ${SEAT_TALLY.clause} clause`
+  + ` over ${SEAT_TALLY.sentence + SEAT_TALLY.clause} state pools (${seatLine})`);
 
 if (checkOnly) {
   for (const e of emitted) {

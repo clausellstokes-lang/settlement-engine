@@ -180,6 +180,11 @@
       "id": "grammar and vid on a variant",
       "what": "the `[grammar: Vn]` tag and the minted `vid`",
       "why": "per-variant DATA that no reader of the draw consults. `variantIsAnchored` reads `slots`, `variantIsAudible` reads `marks`, and neither reads `grammar` or `vid` (GRAMMAR_TAG_CONTRACT.seedSafe). `vids` IS a row above, because a RENUMBERING is refused; carrying the number is not."
+    },
+    {
+      "id": "seat",
+      "what": "poolMeta.seat and its seatReason / seatRow — the SEAT LICENCE, resolved at projection from the wiring census's reads, the 165 relation rows and the three ratified aliases (SEAM car 4d), and read by the composer in place of the spine's primary field",
+      "why": "IT IS NOT A MECHANISM OF THIS REGISTER AT THIS TIP, and that is a measurement rather than a judgment: the licence resolves to `sentence` on all 708 pools with the reason `not-a-modifier` on every one, so no value of it reaches a draw at all. It is not a modulus, not a key, not an ordering and not an eligibility test — `drawVariant` reads `blockId` and `poolKey` and never a pool's fields (ARCH §2.1) — and what it decides is ARRANGEMENT: which of two seats a modifier takes, and which connective list the joint is drawn from. ⛔ IT BECOMES SHIFT-CLASS THE DAY THE FIRST `consequence` ROW IS LICENSED. A pool moving from `sentence` to `clause` moves the connective draw onto a different list and re-arranges the unit, so the car that lands an alias joining a relation endpoint to a desk read root promotes this row to a mechanism with its pin, its door and its shift class — and the register says so here rather than in a lane's receipt. Until then: the join is 0 of 165 (car 0's F1, re-derived in the projection contract), no shipped pool declares `role: modifier`, and the key is emitted nowhere, because an ABSENT seat reads in the composer as the sentence."
     }
   ]
 }

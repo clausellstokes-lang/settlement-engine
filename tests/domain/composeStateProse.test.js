@@ -59,6 +59,7 @@ import { generalStateProseCandidates } from '../../src/domain/display/stateProse
 import { powerStateProseCandidates } from '../../src/domain/display/stateProse/powerStateProseCandidates.js';
 import { stressorsStateProseCandidates } from '../../src/domain/display/stateProse/stressorsStateProseCandidates.js';
 import { warFaithStateProseCandidates } from '../../src/domain/display/stateProse/warFaithStateProseCandidates.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { driftRun } from '../helpers/dossierManifest.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
 
@@ -336,7 +337,7 @@ describe('the composer — salience, and the comparator law (ARCH §4.3)', () =>
         gamma: [{ angle: 'plain', text: 'Gamma holds.' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['a', 'b'] },
+        [SPINE]: { role: 'spine', readsCount: 2 },
         alpha: modifierMeta(metaOver.alpha),
         beta: modifierMeta(metaOver.beta),
         gamma: modifierMeta(metaOver.gamma),
@@ -410,7 +411,7 @@ describe('the composer — salience, and the comparator law (ARCH §4.3)', () =>
         B: [{ angle: 'plain', text: 'Bee holds.' }],
         a: [{ angle: 'plain', text: 'Ay holds.' }],
       },
-      poolMeta: { [SPINE]: { role: 'spine', reads: ['x', 'y'] }, B: modifierMeta(), a: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine', readsCount: 2 }, B: modifierMeta(), a: modifierMeta() },
     });
     const unit = composeFixture(corpus, { candidates: [{ key: 'a' }, { key: 'B' }], seed: '' });
     expect(unit.pieces[1].key, 'seedless, the code-unit-first key seats').toBe('B');
@@ -442,7 +443,7 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
       open: [{ angle: 'plain', text: 'The granary is thin.' }],
     },
     poolMeta: {
-      [SPINE]: { role: 'spine', reads: ['walls'] },
+      [SPINE]: { role: 'spine' },
       covert: modifierMeta(),
       open: modifierMeta(),
     },
@@ -483,7 +484,7 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
         plain: [{ angle: 'plain', text: 'The road is open.' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
+        [SPINE]: { role: 'spine' },
         graded: modifierMeta(),
         plain: modifierMeta(),
       },
@@ -506,7 +507,7 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
         good: [{ angle: 'plain', text: 'Good.' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
+        [SPINE]: { role: 'spine' },
         elsewhere: modifierMeta({ attach: ['some other spine'] }),
         unroled: { role: 'spine' },
         detached: modifierMeta({ attach: [] }),
@@ -536,7 +537,7 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
         free: [{ angle: 'plain', text: 'The road is open.' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
+        [SPINE]: { role: 'spine' },
         // The anchored pool is given a departure bit so it OUTRANKS the free one and the
         // drop is genuinely the thing being tested rather than the ranking.
         anchored: modifierMeta(),
@@ -560,8 +561,8 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
 });
 
 describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () => {
-  /** A block whose spine declares `reads` of the given length. */
-  function boundedCorpus(reads, extra = {}) {
+  /** A block whose spine's SELECTING BRANCH reads this many fields. */
+  function boundedCorpus(readsCount, extra = {}) {
     return fixtureCorpus({
       pools: {
         one: [{ angle: 'plain', text: 'One holds.' }],
@@ -569,7 +570,7 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
         ...(extra.pools || {}),
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads },
+        [SPINE]: { role: 'spine', ...(readsCount === null ? {} : { readsCount }) },
         one: modifierMeta(extra.one),
         two: modifierMeta(extra.two),
       },
@@ -577,24 +578,67 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
   }
 
   const BOTH = [{ key: 'one' }, { key: 'two' }];
-  /** A relation table that licenses a clause joint from the spine's field to `two`'s. */
+  /** The connective leaf a clause joint needs; the SEAT itself is frozen on the pool. */
   const CLAUSE_LEAVES = {
-    relations: { 'walls|muster': [{ relation: 'consequence', source: 'fixture', direction: 'a→b' }] },
     connectives: { ...CONNECTIVES, consequence: { clause: [', so'] } },
   };
+  const CLAUSE_TWO = { two: { relation: 'consequence', seat: CLAUSE_SEAT } };
 
-  it('THE FACT BUDGET is `3 - |spine.reads|`, and a three-fact spine takes none', () => {
+  it('THE FACT BUDGET is `3 - readsCount`, and a three-fact spine takes none', () => {
     const clause = { ...CLAUSE_LEAVES };
-    const two = boundedCorpus(['walls'], { two: { relation: 'consequence', reads: ['muster'] } });
-    const three = boundedCorpus(['walls', 'x', 'y'], { two: { relation: 'consequence', reads: ['muster'] } });
-    const pair = boundedCorpus(['walls', 'x'], { two: { relation: 'consequence', reads: ['muster'] } });
-    expect(composeFixture(two, { candidates: BOTH, leaves: clause }).pieces.length,
+    expect(composeFixture(boundedCorpus(1, CLAUSE_TWO), { candidates: BOTH, leaves: clause }).pieces.length,
       'a one-fact spine takes two modifiers').toBe(3);
-    expect(composeFixture(pair, { candidates: BOTH, leaves: clause }).pieces.length,
+    expect(composeFixture(boundedCorpus(2, CLAUSE_TWO), { candidates: BOTH, leaves: clause }).pieces.length,
       'a two-fact spine takes one').toBe(2);
-    expect(composeFixture(three, { candidates: BOTH, leaves: clause }).pieces.length,
+    expect(composeFixture(boundedCorpus(3, CLAUSE_TWO), { candidates: BOTH, leaves: clause }).pieces.length,
       'a three-fact spine takes none').toBe(1);
+    expect(composeFixture(boundedCorpus(5, CLAUSE_TWO), { candidates: BOTH, leaves: clause }).pieces.length,
+      'and the eleven five-fact spines the census found take none either').toBe(1);
     expect(COMPOSITION_BOUNDS.facts, 'the ceiling the budget is spent against').toBe(3);
+  });
+
+  it('AN ABSENT COUNT IS ONE FACT — the 368 pools the census recovered nothing for', () => {
+    // ABSENT, NOT ZERO (the norm leaf's own rule, applied here): a pool the census could not
+    // resolve has no measurable reading, and reading it as ZERO would hand a three-modifier
+    // budget to the very pools nobody has wired.
+    expect(composeFixture(boundedCorpus(null, CLAUSE_TWO), { candidates: BOTH, leaves: { ...CLAUSE_LEAVES } })
+      .pieces.length, 'absent reads as one fact, so the budget is two').toBe(3);
+  });
+
+  it('⛔ THE PLANT: the budget spends `readsCount` and NEVER a `reads` array (car 4d)', () => {
+    // `PoolMeta` has no `reads` key — the authoring half never ships (ARCH §16) — so a
+    // composer that reads one is naming a field its own input cannot carry. This fixture
+    // carries BOTH: a three-entry `reads` that would answer a budget of ZERO, and the
+    // census's own `readsCount: 1` that answers TWO. A composer reading the array seats
+    // nothing; the shipped one seats both modifiers.
+    const planted = fixtureCorpus({
+      pools: {
+        one: [{ angle: 'plain', text: 'One holds.' }],
+        two: [{ angle: 'plain', text: 'Two holds.' }],
+      },
+      poolMeta: {
+        [SPINE]: { role: 'spine', readsCount: 1, reads: ['walls', 'gate', 'muster'] },
+        one: modifierMeta(),
+        two: modifierMeta({ relation: 'consequence', seat: CLAUSE_SEAT }),
+      },
+    });
+    expect(composeFixture(planted, { candidates: BOTH, leaves: { ...CLAUSE_LEAVES } }).pieces.length,
+      'the projected integer wins over the phantom array').toBe(3);
+    // AND THE CONTROL, so the arm is not simply blind to `readsCount`: move the integer to
+    // three and the same fixture seats nothing.
+    const bound = fixtureCorpus({
+      pools: {
+        one: [{ angle: 'plain', text: 'One holds.' }],
+        two: [{ angle: 'plain', text: 'Two holds.' }],
+      },
+      poolMeta: {
+        [SPINE]: { role: 'spine', readsCount: 3, reads: [] },
+        one: modifierMeta(),
+        two: modifierMeta({ relation: 'consequence', seat: CLAUSE_SEAT }),
+      },
+    });
+    expect(composeFixture(bound, { candidates: BOTH, leaves: { ...CLAUSE_LEAVES } }).pieces.length,
+      'and a three-fact count closes the budget whatever the array says').toBe(1);
   });
 
   it('DEPTH IS NEVER FOUR: two seats exist and no third is reachable', () => {
@@ -607,11 +651,11 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
         four: [{ angle: 'plain', text: 'Four holds.' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: [] },
+        [SPINE]: { role: 'spine' },
         one: modifierMeta(),
-        two: modifierMeta({ relation: 'consequence', reads: ['muster'] }),
+        two: modifierMeta({ relation: 'consequence', seat: CLAUSE_SEAT }),
         three: modifierMeta(),
-        four: modifierMeta({ relation: 'consequence', reads: ['muster'] }),
+        four: modifierMeta({ relation: 'consequence', seat: CLAUSE_SEAT }),
       },
     });
     const unit = composeFixture(corpus, {
@@ -631,14 +675,14 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
         [SPINE]: [{ angle: 'ledger', text: 'The walls stand. The gate is watched.' }],
         one: [{ angle: 'plain', text: 'One holds.' }],
       },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, one: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine' }, one: modifierMeta() },
     });
     expect(composeFixture(corpus, { candidates: [{ key: 'one' }] }).pieces.length,
       'a two-sentence spine seats nothing at the sentence').toBe(1);
     // The control: the same modifier seats behind a one-sentence spine.
     expect(composeFixture(fixtureCorpus({
       pools: { one: [{ angle: 'plain', text: 'One holds.' }] },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, one: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine' }, one: modifierMeta() },
     }), { candidates: [{ key: 'one' }] }).pieces.length).toBe(2);
   });
 
@@ -649,8 +693,8 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
         two: [{ angle: 'plain', text: 'the muster is thin' }],
       },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
-        two: modifierMeta({ relation: 'consequence', form: 'fragment', reads: ['muster'] }),
+        [SPINE]: { role: 'spine' },
+        two: modifierMeta({ relation: 'consequence', form: 'fragment', seat: CLAUSE_SEAT }),
       },
     });
     expect(composeFixture(ranked, { candidates: [{ key: 'two' }], leaves: CLAUSE_LEAVES })
@@ -658,8 +702,8 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
     const clean = fixtureCorpus({
       pools: { two: [{ angle: 'plain', text: 'the muster is thin' }] },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
-        two: modifierMeta({ relation: 'consequence', form: 'fragment', reads: ['muster'] }),
+        [SPINE]: { role: 'spine' },
+        two: modifierMeta({ relation: 'consequence', form: 'fragment', seat: CLAUSE_SEAT }),
       },
     });
     expect(composeFixture(clean, { candidates: [{ key: 'two' }], leaves: CLAUSE_LEAVES }).text,
@@ -668,14 +712,21 @@ describe('the composer — the bound: facts, seats, capacity (ARCH §4.4)', () =
 });
 
 describe('the composer — relations, seats and connectives (ARCH §4.5)', () => {
-  const corpus = fixtureCorpus({
+  /** The fixture modifier, seated however the projector resolved it. */
+  const withSeat = (over) => fixtureCorpus({
     pools: { m: [{ angle: 'plain', text: 'the muster is thin' }] },
     poolMeta: {
-      [SPINE]: { role: 'spine', reads: ['walls'] },
-      m: modifierMeta({ relation: 'consequence', form: 'fragment', reads: ['muster'] }),
+      [SPINE]: { role: 'spine' },
+      m: modifierMeta({ relation: 'consequence', form: 'fragment', ...over }),
     },
   });
+  const corpus = withSeat({});
   const CLAUSE_LIST = { ...CONNECTIVES, consequence: { clause: [', so'] } };
+  /** A relation table that WOULD license every joint in the fixture, if anything read it. */
+  const LICENSING = {
+    'walls|muster': [{ relation: 'consequence', source: 'd', direction: 'a→b' }],
+    'muster|walls': [{ relation: 'consequence', source: 'd', direction: 'b→a' }],
+  };
 
   it('⛔ NO CLAUSE CAN SEAT ON THE SHIPPED CORPUS, because the relation table is empty', () => {
     // ARCH §16 item 9 / car 0's F1: none of the engine's 165 relation rows joins a desk read
@@ -686,10 +737,10 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     const unit = composeFixture(corpus, { candidates: [{ key: 'm' }] });
     expect(unit.pieces.filter((piece) => piece.seat === CLAUSE_SEAT), 'no joint seats')
       .toEqual([]);
-    // A `consequence` with no licensing row is not refused — it seats as an ADDITION at the
-    // sentence, which is where a cause belongs (§4.5), AND ITS RELATION CHANGES WITH ITS
-    // SEAT: `consequence` has one list and it is the clause list, so a fallback that kept
-    // the declared relation would find no list and silently fail to seat at all.
+    // A `consequence` the projector could not license is not refused — it seats as an
+    // ADDITION at the sentence, which is where a cause belongs (§4.5), AND ITS RELATION
+    // CHANGES WITH ITS SEAT: `consequence` has one list and it is the clause list, so a
+    // fallback that kept the declared relation would find no list and fail to seat at all.
     expect(unit.pieces[1].seat, 'it falls to the sentence seat').toBe(SENTENCE_SEAT);
     expect(unit.pieces[1].relation, 'and it seats AS an addition').toBe('addition');
     // ⚠ THE FIXTURE'S TEXT IS A FRAGMENT, which is why the unit reads oddly here: the annex
@@ -698,28 +749,92 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     expect(unit.text).toBe('The walls stand. the muster is thin');
   });
 
-  it('a row in the SPINE-TO-MODIFIER direction licenses the clause; the other way does not', () => {
-    const forward = {
-      relations: { 'walls|muster': [{ relation: 'consequence', source: 'd', direction: 'a→b' }] },
-      connectives: CLAUSE_LIST,
-    };
-    const backward = {
-      relations: { 'walls|muster': [{ relation: 'consequence', source: 'd', direction: 'b→a' }] },
-      connectives: CLAUSE_LIST,
-    };
-    const mirrored = {
-      relations: { 'muster|walls': [{ relation: 'consequence', source: 'd', direction: 'b→a' }] },
-      connectives: CLAUSE_LIST,
-    };
-    const seatOf = (leaves) => {
-      const piece = composeFixture(corpus, { candidates: [{ key: 'm' }], leaves }).pieces[1];
+  it('⭐ THE SEAT IS READ OFF THE POOL, and an explicit `sentence` is the same as none', () => {
+    const seated = (over) => {
+      const piece = composeFixture(withSeat(over), {
+        candidates: [{ key: 'm' }], leaves: { connectives: CLAUSE_LIST },
+      }).pieces[1];
       return `${piece.seat}/${piece.relation}`;
     };
-    expect(seatOf(forward), 'spine to modifier: the clause').toBe(`${CLAUSE_SEAT}/consequence`);
-    expect(seatOf(backward), 'modifier to spine is a CAUSE, and a cause seats as an addition')
-      .toBe(`${SENTENCE_SEAT}/addition`);
-    expect(seatOf(mirrored), 'the pair keyed the other way round, direction b to a, is the same edge')
+    expect(seated({ seat: CLAUSE_SEAT }), 'a licensed pool takes the clause')
       .toBe(`${CLAUSE_SEAT}/consequence`);
+    expect(seated({ seat: SENTENCE_SEAT, seatReason: 'no-row' }), 'an unlicensed one is an addition')
+      .toBe(`${SENTENCE_SEAT}/addition`);
+    expect(seated({}), 'and an ABSENT seat reads exactly as the sentence')
+      .toBe(`${SENTENCE_SEAT}/addition`);
+  });
+
+  it('⛔⛔ THE PLANT (car 4d): the composer NEVER re-asks the licence from a `reads` field', () => {
+    // ARCH §5.2 fixes the licence on the spine's PRIMARY field — the first entry of `reads` —
+    // and `reads` never ships (ARCH §16). Until car 4d `seatFor` read `spineMeta.reads[0]`
+    // anyway. This fixture hands the composer EVERYTHING that reader wanted: a spine whose
+    // `reads` names `walls`, a modifier whose `reads` names `muster`, a relation table with
+    // the licensing row in both spellings, and the clause list to draw from — and NO
+    // projected `seat`. A composer that re-asks seats the clause; the shipped one seats the
+    // sentence, because the licence is not its question.
+    const planted = fixtureCorpus({
+      pools: { m: [{ angle: 'plain', text: 'the muster is thin' }] },
+      poolMeta: {
+        [SPINE]: { role: 'spine', reads: ['walls'] },
+        m: modifierMeta({ relation: 'consequence', form: 'fragment', reads: ['muster'] }),
+      },
+    });
+    const piece = composeFixture(planted, {
+      candidates: [{ key: 'm' }],
+      leaves: { relations: LICENSING, connectives: CLAUSE_LIST },
+    }).pieces[1];
+    expect(`${piece.seat}/${piece.relation}`, 'the phantom field licenses nothing')
+      .toBe(`${SENTENCE_SEAT}/addition`);
+    // AND THE CONTROL: the same fixture with the SEAT frozen on it does take the clause, so
+    // the arm is not a composer that has simply stopped seating clauses.
+    const licensed = composeFixture(withSeat({ seat: CLAUSE_SEAT }), {
+      candidates: [{ key: 'm' }], leaves: { connectives: CLAUSE_LIST },
+    }).pieces[1];
+    expect(`${licensed.seat}/${licensed.relation}`).toBe(`${CLAUSE_SEAT}/consequence`);
+  });
+
+  it('⛔ A LICENSED CLAUSE IS STILL WITHHELD while `consequence.clause` stands empty', () => {
+    // The two halves of a joint are INDEPENDENT and the corpus proves it: car 4 froze
+    // `consequence.clause` at length 0 against a floor of 3 (OWED in the leaf's own header),
+    // so even a pool the projector licensed cannot seat — `drawConnective` answers null and
+    // the candidate is DROPPED, which is the withheld path and not a silent empty joint.
+    expect(CONNECTIVES.consequence.clause, 'the shipped clause list is empty and OWED').toEqual([]);
+    const licensed = withSeat({ seat: CLAUSE_SEAT });
+    expect(composeFixture(licensed, { candidates: [{ key: 'm' }] }).pieces.length,
+      'licensed, and withheld for want of a joint').toBe(1);
+    // AND THE CONTROL: author one joint and the same licensed pool seats at the clause.
+    const unit = composeFixture(licensed, {
+      candidates: [{ key: 'm' }], leaves: { connectives: CLAUSE_LIST },
+    });
+    expect(unit.pieces.length).toBe(2);
+    expect(unit.text).toBe('The walls stand, so the muster is thin.');
+  });
+
+  it('⭐ THE RELATION LEAF IS NOT READ AT RENDER — every unit is identical with and without it', () => {
+    // ARCH §4.1 gives the composer three leaves and car 4d leaves it reading two: the licence
+    // moved to projection, where the census makes the spine's primary field visible at all.
+    // The roster stays at three because it is the architecture's (the chair's row on the
+    // receipt), so the independence is ASSERTED here rather than left as a paragraph in the
+    // module header — a re-added read reds on this arm over the whole seed sweep.
+    const cases = [
+      { what: 'unlicensed', corpus: withSeat({}) },
+      { what: 'clause-seated', corpus: withSeat({ seat: CLAUSE_SEAT }) },
+      { what: 'addition', corpus: withSeat({ relation: 'addition', form: 'sentence' }) },
+    ];
+    const cells = cases.flatMap((row) => SWEEP_SEEDS.map((seed) => ({ ...row, seed })));
+    const failures = collectSeedFailures(cells, (cell) => {
+      const bare = composeFixture(cell.corpus, {
+        candidates: [{ key: 'm' }], seed: cell.seed, leaves: { connectives: CLAUSE_LIST },
+      });
+      const withTable = composeFixture(cell.corpus, {
+        candidates: [{ key: 'm' }],
+        seed: cell.seed,
+        leaves: { connectives: CLAUSE_LIST, relations: LICENSING },
+      });
+      expect(withTable, `${cell.what} at seed ${cell.seed || 'seedless'}`).toEqual(bare);
+    });
+    expectNoSeedFailures(failures, 'the relation table changes no composed unit');
+    expect(cells, 'the sweep really ran').toHaveLength(cases.length * SWEEP_SEEDS.length);
   });
 
   it('a relation whose list is EMPTY cannot seat, and says so by not seating', () => {
@@ -727,7 +842,7 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     // relation's would put a claim in the joint that the edge does not license.
     const tense = fixtureCorpus({
       pools: { t: [{ angle: 'plain', text: 'The road is closed.' }] },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, t: modifierMeta({ relation: 'tension' }) },
+      poolMeta: { [SPINE]: { role: 'spine' }, t: modifierMeta({ relation: 'tension' }) },
     });
     expect(CONNECTIVES.tension.sentence, 'the shipped tension list').toEqual([]);
     expect(composeFixture(tense, { candidates: [{ key: 't' }] }).pieces.length).toBe(1);
@@ -742,7 +857,7 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
   it('a ONE-PHRASE list takes NO HASH, and a longer one draws on key 4', () => {
     const one = fixtureCorpus({
       pools: { m2: [{ angle: 'plain', text: 'The road is open.' }] },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, m2: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine' }, m2: modifierMeta() },
     });
     const spy = vi.spyOn(Math, 'imul');
     try {
@@ -778,7 +893,7 @@ describe('the composer — the arrangement (ARCH §4.2 step 8)', () => {
   function opener(phrase, text, over = {}) {
     const corpus = fixtureCorpus({
       pools: { m: [{ angle: 'plain', text, ...over }] },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, m: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine' }, m: modifierMeta() },
     });
     return composeFixture(corpus, {
       candidates: [{ key: 'm' }],
@@ -807,14 +922,11 @@ describe('the composer — the arrangement (ARCH §4.2 step 8)', () => {
     const corpus = fixtureCorpus({
       pools: { m: [{ angle: 'plain', text: 'the muster is thin' }] },
       poolMeta: {
-        [SPINE]: { role: 'spine', reads: ['walls'] },
-        m: modifierMeta({ relation: 'consequence', form: 'fragment', reads: ['muster'] }),
+        [SPINE]: { role: 'spine' },
+        m: modifierMeta({ relation: 'consequence', form: 'fragment', seat: CLAUSE_SEAT }),
       },
     });
-    const leaves = {
-      relations: { 'walls|muster': [{ relation: 'consequence', source: 'd', direction: 'a→b' }] },
-      connectives: { ...CONNECTIVES, consequence: { clause: [', so'] } },
-    };
+    const leaves = { connectives: { ...CONNECTIVES, consequence: { clause: [', so'] } } };
     const unit = composeFixture(corpus, { candidates: [{ key: 'm' }], leaves });
     expect(unit.text).toBe('The walls stand, so the muster is thin.');
     expect(unit.pieces[1].seat).toBe(CLAUSE_SEAT);
@@ -831,7 +943,7 @@ describe('the composer — turns (ARCH §4.2 step 1, §5.3)', () => {
       covertTurn: [{ angle: 'ledger', text: 'The seam is bought.', marks: ['dm-only'] }],
     },
     poolMeta: {
-      [SPINE]: { role: 'spine', reads: [] },
+      [SPINE]: { role: 'spine' },
       turn: {
         role: 'turn', explains: 'levy-paid-walls', spines: [SPINE], covers: ['covered'],
       },
@@ -912,7 +1024,7 @@ describe('the composer — the POSITION BUDGET (ARCH §4.4)', () => {
       ...Array.from({ length: 10 }, (_, i) => [`m${i}`, [{ angle: 'plain', text: `Mod ${i}.` }]]),
     ]),
     poolMeta: Object.fromEntries([
-      ...Array.from({ length: 10 }, (_, i) => [`s${i}`, { role: 'spine', reads: [] }]),
+      ...Array.from({ length: 10 }, (_, i) => [`s${i}`, { role: 'spine' }]),
       ...Array.from({ length: 10 }, (_, i) => [`m${i}`, modifierMeta({ attach: [`s${i}`] })]),
     ]),
   });
@@ -958,7 +1070,7 @@ describe('the composer — the POSITION BUDGET (ARCH §4.4)', () => {
         shared: [{ angle: 'plain', text: 'The levy is heavy.' }],
       },
       poolMeta: {
-        ...Object.fromEntries(Array.from({ length: 4 }, (_, i) => [`s${i}`, { role: 'spine', reads: [] }])),
+        ...Object.fromEntries(Array.from({ length: 4 }, (_, i) => [`s${i}`, { role: 'spine' }])),
         shared: modifierMeta({ attach: ['s0', 's1', 's2', 's3'] }),
       },
     });
@@ -988,7 +1100,7 @@ describe('the composer — what it must NOT do', () => {
     // lane cannot "improve" the composer into a filter without a red.
     const corpus = fixtureCorpus({
       pools: { echo: [{ angle: 'plain', text: 'The walls stand.' }] },
-      poolMeta: { [SPINE]: { role: 'spine', reads: [] }, echo: modifierMeta() },
+      poolMeta: { [SPINE]: { role: 'spine' }, echo: modifierMeta() },
     });
     const unit = composeFixture(corpus, { candidates: [{ key: 'echo' }] });
     expect(unit.text, 'the composer states it twice, and the gate is what refuses that')

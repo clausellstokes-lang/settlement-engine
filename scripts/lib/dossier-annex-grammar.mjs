@@ -384,6 +384,143 @@ export function assertPoolDeclaration(input) {
 }
 
 /**
+ * ⭐⭐ THE SEAT LICENCE, ASKED WHERE THE CENSUS IS VISIBLE (SEAM car 4d; ARCH §4.4, §4.5, §5.2).
+ *
+ * ⛔ WHY IT LIVES HERE AND NOT IN THE COMPOSER, which is the whole point of the car. ARCH §5.2
+ * fixes the licence as "the row for the spine's PRIMARY field — the first entry of `reads` —
+ * times the modifier's field", and ARCH §16 keeps `reads` in the census JSON, which never
+ * ships. So the composer was asking a question its own input could not answer: it read
+ * `spineMeta.reads[0]` on a `PoolMeta` that has no `reads` key, got `undefined` on every pool
+ * that will ever exist, and degraded INTO the correct answer only because the table joins
+ * nothing today. A field name a module cannot license is a claim, not code. The licence is
+ * therefore resolved at PROJECTION, where the census, the relation rows and the ratified
+ * aliases are all in hand, and frozen onto the pool as a seat.
+ *
+ * ⛔ AND THE POOL-LEVEL ANSWER IS THE `every`-GRAIN, NOT THE `some`-GRAIN, which is the one
+ * judgment this function makes. `assertPoolDeclaration` above asks the AUTHORING question —
+ * "can this modifier seat anywhere?" — and one licensed spine is enough for it. A frozen
+ * `seat` is read by the composer against WHATEVER spine drew, so it may say `clause` only
+ * when EVERY (spine, modifier) pair the pool's attach set names carries a licensing row. A
+ * mixed attach set answers `sentence`/`no-row` and loses a lawful clause on the licensed
+ * spine; the veto shape is a per-pair map, which costs a key per pair and is recorded on the
+ * receipt.
+ *
+ * @param {string} endpoint a relation-table endpoint (a PRODUCER token, `condition:plague`)
+ * @param {string} readPath a desk READ path from the wiring census
+ * @param {Map<string, string>} aliasOf the RATIFIED aliases, endpoint -> desk read root
+ * @returns {boolean} whether the endpoint and the read path are the same fact
+ */
+export function endpointReads(endpoint, readPath, aliasOf) {
+  if (!endpoint || !readPath) return false;
+  // A ratified alias REPLACES the endpoint with the read root it is the same fact as
+  // (SITTING §P.2-27); an endpoint with no alias may already be a read path itself.
+  const root = aliasOf && aliasOf.has(endpoint) ? aliasOf.get(endpoint) : endpoint;
+  return readPath === root || readPath.startsWith(`${root}.`);
+}
+
+/**
+ * Every relation row that runs FROM one desk read path TO another, in READ space.
+ *
+ * The leaf keys a pair once and carries the direction on the row (ARCH §2.3), so a row under
+ * `${b}|${a}` whose direction is `b→a` runs a→b just as a `a→b` row under `${a}|${b}` does;
+ * both are read, and both mean "the engine computes `to` from `from`".
+ * @param {ReadonlyArray<{a: string, b: string, relation: string, source: string,
+ *   direction: string}>} rows the census's own relation rows
+ * @param {Map<string, string>} aliasOf
+ * @param {string} from the spine's PRIMARY field
+ * @param {string} to the modifier's field
+ * @returns {Array<{a: string, b: string, relation: string, source: string, direction: string}>}
+ */
+export function seatEdges(rows, aliasOf, from, to) {
+  return (Array.isArray(rows) ? rows : []).filter((row) => {
+    const forward = row.direction === 'a->b' || row.direction === 'a→b';
+    const head = forward ? row.a : row.b;
+    const tail = forward ? row.b : row.a;
+    return endpointReads(head, from, aliasOf) && endpointReads(tail, to, aliasOf);
+  });
+}
+
+/**
+ * ⭐ THE RESOLUTION, one answer per pool, with the reason it took.
+ *
+ * The reasons are a closed vocabulary and every one of them is PRINTED by the projector, so
+ * "no clause seats today" is a tally over 708 pools rather than a sentence in a header:
+ *
+ *   `not-a-modifier`  a spine or a turn: it is the seat, it does not take one
+ *   `not-consequence` a modifier whose relation is `addition`, `tension` or `contrast` —
+ *                     the sentence seat is its own by the register card, no licence needed
+ *   `no-field`        a `consequence` modifier with no READS line (the gate refuses it too)
+ *   `no-pair`         a `consequence` modifier naming no spine at all
+ *   `no-primary`      a named spine whose census row recovered no reading
+ *   `no-row`          a named pair with no relation row from the spine's primary field
+ *   `s2-unsigned`     LICENSED, and the clause seat does not exist yet (ARCH §13 row 6)
+ *   `row`             licensed and seated: `rows` names the row ids that licensed it
+ *
+ * ⚠ THE LICENCE IS ASKED BEFORE S2, deliberately. S2 is a signature, not a measurement, and
+ * reporting `s2-unsigned` on a pool that has no row would hide car 0's F1 behind an owner
+ * row. A pool reads `no-row` when it has no row, whatever S2 says.
+ * @param {object} input
+ * @param {string} input.role
+ * @param {string} [input.relation] the DECLARED relation
+ * @param {ReadonlyArray<string>|null} [input.attach] the spine keys this pool may attach to
+ * @param {ReadonlyArray<string>} [input.reads] the pool's own declared READS
+ * @param {(key: string) => {reads: string[]}|null} input.censusOf
+ * @param {ReadonlyArray<{a: string, b: string, relation: string, source: string,
+ *   direction: string}>} input.relationRows
+ * @param {Map<string, string>} input.aliasOf
+ * @param {boolean} [input.s2] defaults to the module's own S2 flag
+ * @returns {{seat: 'sentence'|'clause', reason: string, rows: string[]}}
+ */
+export function seatOf(input) {
+  const { role, relation, attach, reads, censusOf, relationRows, aliasOf } = input;
+  const s2 = input.s2 === undefined ? S2_SIGNED : input.s2;
+  const no = (reason) => ({ seat: /** @type {'sentence'} */ ('sentence'), reason, rows: [] });
+  if (role !== 'modifier') return no('not-a-modifier');
+  if ((relation || 'addition') !== 'consequence') return no('not-consequence');
+  const field = Array.isArray(reads) ? reads[0] : '';
+  if (!field) return no('no-field');
+  const pairs = Array.isArray(attach) ? attach : [];
+  if (pairs.length === 0) return no('no-pair');
+  /** @type {string[]} */
+  const ids = [];
+  for (const spineKey of pairs) {
+    const spineRow = censusOf(spineKey);
+    const primary = spineRow && spineRow.reads ? spineRow.reads[0] : '';
+    if (!primary) return no('no-primary');
+    const licensing = seatEdges(relationRows, aliasOf, primary, field)
+      .filter((row) => row.relation === 'consequence');
+    if (licensing.length === 0) return no('no-row');
+    for (const row of licensing) {
+      const id = `${row.source}:${row.a}|${row.b}`;
+      if (!ids.includes(id)) ids.push(id);
+    }
+  }
+  ids.sort();
+  if (!s2) return { seat: 'sentence', reason: 's2-unsigned', rows: ids };
+  return { seat: 'clause', reason: 'row', rows: ids };
+}
+
+/**
+ * ⭐ THE EMITTED FRAGMENT — exactly the keys the projector spreads into a pool's `poolMeta`.
+ *
+ * ⛔ A SPINE TAKES NO `seat` KEY, and that is the estate's own grain rather than a saving.
+ * `relation`, `form`, `move`, `readsCount`, `explains`, `spines` and `covers` are all emitted
+ * only where the pool has one — "a pool with no row is ABSENT, not zero" — and an ABSENT seat
+ * reads in the composer as the sentence, which is what a pool that cannot take a seat takes.
+ * Writing `seat: 'sentence'` onto all 708 shipped spines would add ≈ 47 KB across the six
+ * leaves that says only what `role` already says. The veto shape is the unconditional key.
+ * @param {Parameters<typeof seatOf>[0]} input
+ * @returns {{seat?: string, seatReason?: string, seatRow?: string[]}}
+ */
+export function seatMeta(input) {
+  if (input.role !== 'modifier') return {};
+  const licence = seatOf(input);
+  return licence.seat === 'clause'
+    ? { seat: licence.seat, seatRow: licence.rows }
+    : { seat: licence.seat, seatReason: licence.reason };
+}
+
+/**
  * The face sub-rows of one variant, refused where §2.5's table refuses them.
  * @param {object} input
  * @param {string} input.label

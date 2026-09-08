@@ -84,14 +84,24 @@ import {
  * @property {ReadonlyArray<ComposedPiece>} pieces
  */
 /**
- * The frozen render half of a pool's metadata (ARCH §2.3). Car 4 projects it; until then
- * every pool reads as the default and the composer behaves as the kernel does.
+ * The frozen render half of a pool's metadata (ARCH §2.3), projected by car 4 and 4d.
+ *
+ * ⛔ EVERY FIELD HERE IS ONE THE LEAF ACTUALLY CARRIES. The authoring half — `tests`, `reads`,
+ * `predicate`, `rate` — lives in the wiring census JSON and NEVER ships (ARCH §16), so this
+ * typedef may not name it and this module may not read it. Car 4d deleted the two readers
+ * that did (`seatFor`'s primary field and `factBudget`'s array) and replaced them with the
+ * two keys the projector resolves from the census in their place: `seat` and `readsCount`.
  * @typedef {object} PoolMeta
  * @property {'spine'|'modifier'|'turn'} [role]
- * @property {'addition'|'consequence'|'tension'|'contrast'} [relation]
+ * @property {'addition'|'consequence'|'tension'|'contrast'} [relation] the DECLARED relation
+ * @property {'sentence'|'clause'} [seat] modifier only — the seat the LICENCE resolved at
+ *   projection; absent is the sentence
+ * @property {string} [seatReason] why a sentence, from the resolver's closed vocabulary
+ * @property {ReadonlyArray<string>} [seatRow] the relation row ids that licensed a clause
+ * @property {number} [readsCount] how many fields the pool's SELECTING BRANCH evaluates, read
+ *   from the census; absent where the census recovered no reading
  * @property {'fragment'|'sentence'} [form]
  * @property {ReadonlyArray<string>} [attach]
- * @property {ReadonlyArray<string>} [reads] the field paths the pool's branch tests
  * @property {ReadonlyArray<string>} [spines] turn only
  * @property {ReadonlyArray<string>} [covers] turn only
  */
@@ -190,6 +200,16 @@ export const PROSE_NORMS = Object.freeze({});
  * or `tension` joint anywhere on the shipped corpus, every joint stands at the `addition`
  * floor, and NO CLAUSE CAN SEAT — which the suite asserts on the shipped corpus rather than
  * leaving as a claim.
+ *
+ * ⚠⚠ AND AFTER CAR 4d THIS COMPOSER DOES NOT READ IT, WHICH IS A ROW FOR THE CHAIR RATHER
+ * THAN A LANE'S CLEANUP. The licence the table answers is now resolved at projection, where
+ * the census makes the spine's primary field visible at all, and arrives as `poolMeta.seat`;
+ * so of ARCH §4.1's three leaves the composer reads two. The constant, the `ProseLeaves`
+ * member and the frozen three-specifier roster are KEPT because §4.1's dependency roster is
+ * the architecture's and "a fourth dependency is a chair conversation, not an edit" cuts both
+ * ways. The independence is not left as this paragraph: `composeStateProse.test.js` composes
+ * every fixture twice — once with an empty table and once with a table that would license
+ * every joint in it — and asserts the two units are identical, so a re-added read reds.
  * @type {Readonly<Record<string, ReadonlyArray<{relation: string, source: string,
  *   direction: 'a→b'|'b→a'}>>>}
  */
@@ -484,32 +504,24 @@ function rankCandidates(rows, norms, blockId, spineKey, seed) {
 }
 
 /**
- * Every typed provenance edge between two field paths, in the ORDERED direction: the rows of
- * `${a}|${b}` that run `a→b`, plus the rows of `${b}|${a}` that run `b→a`. Both spellings
- * are read because the leaf keys a pair once and carries the direction on the row (§2.3), so
- * asking "does an edge run from the spine's field to the modifier's" must read both.
- * @param {Readonly<Record<string, ReadonlyArray<{relation: string, source: string,
- *   direction: string}>>>} relations
- * @param {string} from
- * @param {string} to
- * @returns {ReadonlyArray<{relation: string, source: string, direction: string}>}
- */
-function edgesFrom(relations, from, to) {
-  if (!from || !to) return [];
-  const forward = (relations[`${from}|${to}`] || []).filter((row) => row.direction === 'a→b');
-  const backward = (relations[`${to}|${from}`] || []).filter((row) => row.direction === 'b→a');
-  return [...forward, ...backward];
-}
-
-/**
- * THE SEAT A RELATION ADMITS, AND THE RELATION IT ACTUALLY SEATS AS (ARCH §4.4, §4.5, S2).
+ * ⭐⭐ THE SEAT A POOL TAKES, AND THE RELATION IT ACTUALLY SEATS AS (ARCH §4.4, §4.5, S2).
  *
  * The sentence seat takes `addition`, `tension` and `contrast` — each its own sentence, the
  * register card to the letter. The CLAUSE seat takes `consequence` ALONE, and only where the
  * relation table carries a row from the spine's PRIMARY field to the modifier's field: a
  * consequence is the standing cost of the first fact.
  *
- * ⛔ AND A CONSEQUENCE THAT CANNOT TAKE THE CLAUSE SEATS AS AN `addition`, WHICH IS A CHANGE
+ * ⛔ THE LICENCE IS READ, NEVER RE-ASKED HERE, AND THAT IS CAR 4d's WHOLE RULING. ARCH §5.2
+ * fixes the licence on the spine's PRIMARY FIELD — the first entry of its `reads` — and ARCH
+ * §16 keeps `reads` in the wiring census, which never ships. Until car 4d this function read
+ * `spineMeta.reads[0]` on a `PoolMeta` that has no `reads` key: it got `undefined` on every
+ * pool that will ever exist and degraded INTO the correct answer only because the relation
+ * table joins nothing today. A module may not carry a field name it cannot license. The
+ * licence is resolved at PROJECTION, where the census, the relation rows and the ratified
+ * aliases are all visible (`scripts/lib/dossier-annex-grammar.mjs` `seatOf`), and arrives
+ * here as one frozen key.
+ *
+ * ⛔ AND A CONSEQUENCE THAT DID NOT TAKE THE CLAUSE SEATS AS AN `addition`, WHICH IS A CHANGE
  * OF RELATION AND NOT ONLY OF SEAT. §4.5: a row running modifier→spine is a CAUSE, and a
  * cause "seats here — the edge licenses the adjacency, the empty opener adds no claim". So
  * the effective relation is what the CONNECTIVE is drawn from, and it must be `addition`:
@@ -518,26 +530,19 @@ function edgesFrom(relations, from, to) {
  * to seat at all. That is exactly what happened the first time this ran, on the fixture, and
  * it is why the pair is returned together rather than the seat alone.
  *
- * ⛔ NO CLAUSE CAN SEAT ON THE SHIPPED CORPUS, and that is measured rather than asserted:
- * `PROSE_RELATIONS` is empty because none of the engine's 165 relation rows joins a desk read
- * root (§16 item 9). So every candidate the corpus can produce today seats as an `addition`
- * at the sentence, and the clause limb is exercised by fixture until the alias table lands.
- * @param {Readonly<Record<string, ReadonlyArray<{relation: string, source: string,
- *   direction: string}>>>} relations
- * @param {PoolMeta} spineMeta
+ * ⛔ AN ABSENT `seat` IS THE SENTENCE, which is what every pool that ships today reads: the
+ * projector emits the key only on a `role: 'modifier'` pool and there are none (car 4d's
+ * tally: 708 sentence / 0 clause, every one `not-a-modifier`).
  * @param {PoolMeta} meta
  * @returns {{seat: 'sentence'|'clause', relation: string}}
  */
-function seatFor(relations, spineMeta, meta) {
+function seatFor(meta) {
   const declared = meta.relation || 'addition';
-  if (declared !== 'consequence') return { seat: SENTENCE_SEAT, relation: declared };
-  const primary = Array.isArray(spineMeta.reads) ? spineMeta.reads[0] : '';
-  const field = Array.isArray(meta.reads) ? meta.reads[0] : '';
-  const admits = edgesFrom(relations, primary || '', field || '')
-    .some((row) => row.relation === 'consequence');
-  return admits
-    ? { seat: CLAUSE_SEAT, relation: 'consequence' }
-    : { seat: SENTENCE_SEAT, relation: 'addition' };
+  if (meta.seat === CLAUSE_SEAT) return { seat: CLAUSE_SEAT, relation: 'consequence' };
+  return {
+    seat: SENTENCE_SEAT,
+    relation: declared === 'consequence' ? 'addition' : declared,
+  };
 }
 
 /**
@@ -586,17 +591,22 @@ function clauseFits(text) {
  * evaluates. A one-fact spine takes two modifiers, a two-fact spine one, a three-fact spine
  * none — which is how the hand-paid conjunction explosion is never re-paid through modifiers.
  *
- * ⚠ AN OPEN SCHEMA ROW, RECORDED RATHER THAN GUESSED. ARCH §2.3's shipped `PoolMeta` carries
- * NO `reads` field — the authoring half (`tests`, `reads`, `predicate`) lives in the census
- * JSON and never ships, and §4.4 nevertheless spends the budget on `|spine.reads|`. Until car
- * 4 rules whether the leaf carries a reads COUNT, an absent `reads` is read as ONE fact,
- * which is the modal spine (91 of 118 key functions read one fact) and the reading that
- * leaves the budget at its documented default of two. Named for the chair on the receipt.
+ * ⛔ IT SPENDS `readsCount`, THE PROJECTED INTEGER, AND NOT A `reads` ARRAY (car 4d). This is
+ * the second reader of the same phantom: `PoolMeta` has no `reads` key — the authoring half
+ * lives in the wiring census and never ships (ARCH §16) — so until car 4d this function read
+ * `undefined` on every pool and answered TWO for all 708, including the 49 whose branch reads
+ * three fields or more. Car 4 landed `readsCount` from the census for exactly this and no
+ * reader was wired to it; car 4d wires it. The measured spread over the 340 pools the census
+ * resolved: 212 read one, 79 two, 26 three, 12 four, 11 five.
+ *
+ * AN ABSENT COUNT IS ONE FACT, which is the modal spine (91 of 118 key functions read one)
+ * and the reading that leaves the budget at its documented default of two. It is the reading
+ * the 368 WIRING-UNRESOLVED pools take, and it is ABSENT rather than zero on purpose.
  * @param {PoolMeta} spineMeta
  * @returns {number}
  */
 function factBudget(spineMeta) {
-  const reads = Array.isArray(spineMeta.reads) ? spineMeta.reads.length : 1;
+  const reads = typeof spineMeta.readsCount === 'number' ? spineMeta.readsCount : 1;
   return Math.max(0, COMPOSITION_BOUNDS.facts - reads);
 }
 
@@ -729,7 +739,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
   for (const row of ranked) {
     if (budget <= 0) break;
     if (!seats.sentence && !seats.clause) break;
-    const { seat, relation } = seatFor(leaves.relations, spineMeta, row.meta);
+    const { seat, relation } = seatFor(row.meta);
     if (!seats[seat]) continue;
     if (seat === CLAUSE_SEAT && !clauseFits(text)) continue;
     const phrase = drawConnective(

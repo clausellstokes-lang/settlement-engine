@@ -35,7 +35,8 @@ import {
 import {
   INDEX_PAIRED_BLOCKS, MODIFIER_MOVES, POOL_ROLES, RELATIONS, S2_SIGNED,
   applyDeclaration, assertCensusCurrent, assertFaces, assertPoolDeclaration,
-  isDeclarationLine, parseConnectives, readDeclarations, turnKeyStanding, vidsOf,
+  endpointReads, isDeclarationLine, parseConnectives, readDeclarations, seatMeta, seatOf,
+  turnKeyStanding, vidsOf,
 } from '../../scripts/lib/dossier-annex-grammar.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COVERT_SOURCES } from '../../src/domain/prose/wiringCensus.js';
@@ -1548,5 +1549,214 @@ describe('SEAM car 4 — the 68 STATE-KEY lines, transcribed against the branch 
     expect(total).toBeGreaterThanOrEqual(110);
     expect(agreeing.length).toBeGreaterThanOrEqual(16);
     expect(darkBlock.length + readsOther.length).toBe(total - agreeing.length);
+  });
+});
+
+// ── SEAM CAR 4d — THE SEAT LICENCE, RESOLVED AT PROJECTION ───────────────────────────────
+// The composer used to ask the relation table itself, keyed on `spineMeta.reads[0]` — a field
+// `PoolMeta` has never carried, because the authoring half lives in the wiring census and
+// never ships (ARCH §16). The licence is now resolved HERE, where the census, the 165 relation
+// rows and the three ratified aliases are all visible, and frozen onto the pool as a `seat`.
+
+/** The alias lookup the resolver joins through, read off the committed leaf. */
+const ALIAS_OF = new Map(DOSSIER_RELATION_ALIASES.map((r) => [r.endpoint, r.readRoot]));
+/** A resolver input for one shipped pool, from the two committed files. */
+function shippedSeatInput(row) {
+  return {
+    role: (row.meta || {}).role,
+    relation: (row.meta || {}).relation,
+    attach: (row.meta || {}).attach,
+    reads: (CENSUS_BY_POOL.get(`${row.id} :: ${row.pool}`) || {}).reads,
+    censusOf: (key) => CENSUS_BY_POOL.get(`${row.id} :: ${key}`) || null,
+    relationRows: CENSUS.relations.rows,
+    aliasOf: ALIAS_OF,
+  };
+}
+
+/** The synthetic pair the fixture arms drive: one census row each side, one relation row. */
+const FIXTURE_ROWS = Object.freeze([Object.freeze({
+  a: 'condition:blight', b: 'system:food_security', relation: 'consequence',
+  source: 'a', direction: 'a->b',
+})]);
+const FIXTURE_CENSUS = Object.freeze({
+  'walls: standing': { reads: ['condition:blight'] },
+  'muster: short': { reads: ['eco.foodSecurity.stockpile'] },
+  'purse: short': { reads: ['court'] },
+});
+/** @param {object} over */
+function seatInput(over = {}) {
+  return {
+    role: 'modifier',
+    relation: 'consequence',
+    attach: ['walls: standing'],
+    reads: ['eco.foodSecurity.stockpile'],
+    censusOf: (key) => FIXTURE_CENSUS[key] || null,
+    relationRows: FIXTURE_ROWS,
+    aliasOf: new Map([['system:food_security', 'eco']]),
+    s2: true,
+    ...over,
+  };
+}
+
+describe('SEAM car 4d — the seat licence, computed where the census is visible', () => {
+  it('⭐⭐ EVERY SHIPPED POOL SEATS AT THE SENTENCE, WITH ITS REASON, over all 708', () => {
+    const tally = {};
+    const modifiers = [];
+    const carrying = [];
+    for (const row of META_ROWS) {
+      const licence = seatOf(shippedSeatInput(row));
+      tally[`${licence.seat}/${licence.reason}`] = (tally[`${licence.seat}/${licence.reason}`] || 0) + 1;
+      if ((row.meta || {}).role === 'modifier') modifiers.push(`${row.id} :: ${row.pool}`);
+      if ((row.meta || {}).seat !== undefined) carrying.push(`${row.id} :: ${row.pool}`);
+    }
+    // The tally the projector prints, re-derived from the two committed files rather than
+    // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 708 });
+    expect(META_ROWS).toHaveLength(708);
+    // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
+    // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
+    expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
+    expect(carrying, 'so no shipped pool carries a seat key').toEqual([]);
+  });
+
+  it('⭐ THE FIXTURE: a census row, a relation row and one ratified alias seat the CLAUSE', () => {
+    const licence = seatOf(seatInput());
+    expect(licence.seat).toBe('clause');
+    expect(licence.reason).toBe('row');
+    expect(licence.rows, 'and it names the row that licensed it')
+      .toEqual(['a:condition:blight|system:food_security']);
+    // AND THE EMITTED FRAGMENT is the two keys the projector spreads, and nothing else.
+    expect(seatMeta(seatInput())).toEqual({
+      seat: 'clause', seatRow: ['a:condition:blight|system:food_security'],
+    });
+  });
+
+  it('⛔ THE SAME PAIR WITH THE ALIAS REMOVED IS `no-row` — the join is what licenses it', () => {
+    const bare = seatOf(seatInput({ aliasOf: new Map() }));
+    expect({ seat: bare.seat, reason: bare.reason }).toEqual({ seat: 'sentence', reason: 'no-row' });
+    expect(seatMeta(seatInput({ aliasOf: new Map() })))
+      .toEqual({ seat: 'sentence', seatReason: 'no-row' });
+    // And an alias to the WRONG root does not license it either: the alias must name the read
+    // root the endpoint is the same fact as, not merely exist.
+    const wrong = seatOf(seatInput({ aliasOf: new Map([['system:food_security', 'war']]) }));
+    expect(wrong.reason).toBe('no-row');
+  });
+
+  it('⛔ THE `every`-GRAIN: one unlicensed spine in the attach set closes the clause', () => {
+    // `assertPoolDeclaration` asks the AUTHORING question — can this modifier seat anywhere —
+    // and one licensed spine satisfies it. A FROZEN seat is read against whatever spine drew,
+    // so it may say `clause` only when every pair the attach set names carries a row.
+    const mixed = seatOf(seatInput({ attach: ['walls: standing', 'purse: short'] }));
+    expect({ seat: mixed.seat, reason: mixed.reason })
+      .toEqual({ seat: 'sentence', reason: 'no-row' });
+    // The control: both spines licensed, and the pool takes the clause on one row id.
+    const both = seatOf(seatInput({
+      attach: ['walls: standing', 'purse: short'],
+      relationRows: [...FIXTURE_ROWS,
+        { a: 'court', b: 'system:food_security', relation: 'consequence', source: 'c', direction: 'a->b' }],
+    }));
+    expect(both.seat).toBe('clause');
+    expect(both.rows).toEqual([
+      'a:condition:blight|system:food_security', 'c:court|system:food_security',
+    ]);
+  });
+
+  it('the DIRECTION is read off the row, in both spellings of the pair', () => {
+    const mirrored = seatOf(seatInput({
+      relationRows: [{
+        a: 'system:food_security', b: 'condition:blight', relation: 'consequence',
+        source: 'a', direction: 'b->a',
+      }],
+    }));
+    expect(mirrored.seat, 'the pair keyed the other way with direction b to a is the same edge')
+      .toBe('clause');
+    const backward = seatOf(seatInput({
+      relationRows: [{ ...FIXTURE_ROWS[0], direction: 'b->a' }],
+    }));
+    expect(backward.reason, 'a row running modifier to spine is a CAUSE and licenses nothing')
+      .toBe('no-row');
+    const wrongRelation = seatOf(seatInput({
+      relationRows: [{ ...FIXTURE_ROWS[0], relation: 'tension' }],
+    }));
+    expect(wrongRelation.reason, 'and a `tension` row does not license a `consequence` clause')
+      .toBe('no-row');
+  });
+
+  it('the reason vocabulary is CLOSED, and every branch of it is driven', () => {
+    const reason = (over) => seatOf(seatInput(over)).reason;
+    expect(reason({ role: 'spine' })).toBe('not-a-modifier');
+    expect(reason({ role: 'turn' })).toBe('not-a-modifier');
+    expect(reason({ relation: 'addition' })).toBe('not-consequence');
+    expect(reason({ relation: undefined })).toBe('not-consequence');
+    expect(reason({ reads: [] })).toBe('no-field');
+    expect(reason({ attach: [] })).toBe('no-pair');
+    expect(reason({ attach: null })).toBe('no-pair');
+    expect(reason({ attach: ['nobody'] })).toBe('no-primary');
+    expect(reason({ relationRows: [] })).toBe('no-row');
+    expect(reason({})).toBe('row');
+    // ⛔ S2 IS ASKED LAST, so a pool with no row reads `no-row` whatever the signature says.
+    const unsigned = seatOf(seatInput({ s2: false }));
+    expect({ seat: unsigned.seat, reason: unsigned.reason })
+      .toEqual({ seat: 'sentence', reason: 's2-unsigned' });
+    expect(unsigned.rows, 'and it still names what licensed it, so the row is not lost')
+      .toEqual(['a:condition:blight|system:food_security']);
+    expect(seatOf(seatInput({ s2: false, relationRows: [] })).reason).toBe('no-row');
+    // The default is the module's own flag, which is where the owner's signature lands.
+    expect(seatOf({ ...seatInput(), s2: undefined }).reason)
+      .toBe(S2_SIGNED ? 'row' : 's2-unsigned');
+  });
+
+  it('a SPINE takes no `seat` key at all — absent is the sentence, not zero', () => {
+    expect(seatMeta(seatInput({ role: 'spine' }))).toEqual({});
+    expect(seatMeta(seatInput({ role: 'turn' }))).toEqual({});
+    expect(seatMeta(seatInput({ relation: 'tension' })))
+      .toEqual({ seat: 'sentence', seatReason: 'not-consequence' });
+  });
+
+  it('an endpoint reads a path when it IS the read root or a dotted descendant of it', () => {
+    const aliases = new Map([['economicGates.military', 'settlement.defenseProfile']]);
+    expect(endpointReads('economicGates.military', 'settlement.defenseProfile', aliases)).toBe(true);
+    expect(endpointReads('economicGates.military', 'settlement.defenseProfile.walls', aliases)).toBe(true);
+    expect(endpointReads('economicGates.military', 'settlement.defenseProfileX', aliases),
+      'and a shared prefix that is not a dotted segment is NOT the same fact').toBe(false);
+    expect(endpointReads('economicGates.military', 'settlement', aliases),
+      'nor is the parent of the root').toBe(false);
+    expect(endpointReads('court', 'court.seat', new Map()),
+      'an endpoint with no alias may already be a read path').toBe(true);
+    expect(endpointReads('', 'court', new Map())).toBe(false);
+    expect(endpointReads('court', '', new Map())).toBe(false);
+  });
+
+  it('the SHIFT REGISTER names `seat` a NON-mechanism, and says what promotes it', () => {
+    const row = SHIFT_REGISTER.notMechanisms.find((n) => n.id === 'seat');
+    expect(row, '`seat` must be named on the register').toBeTruthy();
+    expect(row.why, 'with the measurement that makes it one today').toMatch(/708/);
+    expect(row.why).toMatch(/not a modulus/i);
+    // ⛔ AND THE PROMOTION CONDITION IS WRITTEN DOWN, so the day it moves nobody has to
+    // re-derive whether it was ever a mechanism.
+    expect(row.why).toMatch(/SHIFT-CLASS/);
+    expect(row.why).toMatch(/0 of 165/);
+    // The two register halves agree: it is named NOT a mechanism and it is not a mechanism.
+    // ANCHORED on `attach-set`, the mechanism row that governs the OTHER half of how a
+    // modifier reaches a spine, so an empty mechanism roster cannot pass as an exclusion.
+    expectAbsentWithAnchor(
+      SHIFT_REGISTER.mechanisms.map((m) => m.id), 'seat', 'attach-set',
+      'the shift register\'s mechanism roster',
+    );
+  });
+
+  it('⛔ ON THE COMMITTED FILES THE JOIN IS STILL ZERO — car 0 F1, re-derived here', () => {
+    // Every one of the 165 rows, asked in READ space through the three ratified aliases: none
+    // has BOTH endpoints landing on a path a desk reads. This is the measurement that makes
+    // "no clause can seat today" a number rather than a sentence in a header.
+    const readPaths = [...new Set(CENSUS.rows.flatMap((r) => r.reads || []))];
+    const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
+    const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
+    const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
+    expect(CENSUS.relations.rows).toHaveLength(165);
+    expect(joining, 'no row joins on both endpoints').toEqual([]);
+    // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
+    expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);
+    expect(readPaths.length, 'and the read roster is the census\'s own').toBeGreaterThanOrEqual(157);
   });
 });
