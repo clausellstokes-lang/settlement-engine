@@ -1064,6 +1064,58 @@ describe('THE COMPOSED WALK — the exhaustive block re-walk, and the sampled wa
     expect(empty.findings.notExecutable.map((f) => f.arm)).toEqual(['block-re-walk']);
   });
 
+  // ⛔ THE DRIVER'S OWN OPTIONS REACH THE ARMS (the seam fold's 4b; SITTING §R cure 2). Until
+  // car 5c `reWalkBlock` called `walkComposed(unit, ground)` with no third argument, so A3
+  // read `options.siblingKeys` as `[]` and FAILED 'no sibling names the alternative' on every
+  // contrast-carrying unit of a re-walked block — findings manufactured by the harness, not
+  // by the corpus. DS-DEF-11 carries no contrast shape, which is the only reason it was
+  // latent; this fixture carries one on purpose, so the defect cannot go latent again.
+  const CONTRAST_BLOCK = Object.freeze([
+    {
+      blockId: 'DS-FIX-9',
+      poolKey: 'readiness: thin',
+      text: 'The town turns out its own people rather than paying a garrison.',
+      pieces: [{ role: 'spine', key: 'readiness: thin', text: 'The town turns out its own people rather than paying a garrison.' }],
+    },
+    {
+      blockId: 'DS-FIX-9',
+      poolKey: 'readiness: paid garrison',
+      text: 'The gate is held by a paid garrison the town does not muster itself.',
+      pieces: [{ role: 'spine', key: 'readiness: paid garrison', text: 'The gate is held by a paid garrison the town does not muster itself.' }],
+    },
+  ]);
+
+  it('⭐ a block carrying a CONTRAST re-walks WITHOUT a manufactured A3 fail, because the options reach the arm', () => {
+    const walked = reWalkBlock(CONTRAST_BLOCK, ground, {
+      landing: 'garrison: paid',
+      siblingKeys: ['readiness: paid garrison', 'readiness: thin'],
+    });
+    const a3 = (list) => list.filter((f) => f.arm === 'A3');
+    expect(walked.walked).toBe(2);
+    // THE LINE THE PLANT REDS. Remove the `options` third argument from `reWalkBlock`'s call
+    // to `walkComposed` and A3 sees no sibling set at all: this REPORT becomes a
+    // NOT-EXECUTABLE row and the next assertion's empty FAIL list is the only survivor.
+    expect(a3(walked.findings.reports).map((f) => f.subject)).toEqual(['licensed by a sibling key']);
+    expect(a3(walked.findings.fails), 'no A3 fail may be manufactured by the driver').toEqual([]);
+    // The second unit carries no contrast shape at all, so its A3 row is the arm's OTHER
+    // not-executable limb. What must NOT appear here is '(sibling keys)': the set was supplied.
+    expect(a3(walked.findings.notExecutable).map((f) => f.subject)).toEqual(['(contrast shape)']);
+  });
+
+  it('⛔ AND A CALLER THAT BRINGS NO SIBLING SET GETS NOT-EXECUTABLE, never a FAIL', () => {
+    // An ABSENT sibling set is an input nobody supplied; an EMPTY one is a fact about the
+    // block. A3 answers differently to each, which is what stops the honest FAIL below from
+    // ever being reachable by accident.
+    const blind = reWalkBlock(CONTRAST_BLOCK, ground, { landing: 'garrison: paid' });
+    const a3Blind = blind.findings.notExecutable.filter((f) => f.arm === 'A3');
+    expect(a3Blind.map((f) => f.subject).sort()).toEqual(['(contrast shape)', '(sibling keys)']);
+    expect(blind.findings.fails.filter((f) => f.arm === 'A3')).toEqual([]);
+    // THE HONEST FAIL SURVIVES, and it is reached only by supplying the empty set on purpose.
+    const declared = reWalkBlock(CONTRAST_BLOCK, ground, { landing: 'garrison: paid', siblingKeys: [] });
+    expect(declared.findings.fails.filter((f) => f.arm === 'A3').map((f) => f.subject))
+      .toEqual(['no sibling names the alternative']);
+  });
+
   it('the SAMPLE is a deterministic stride over the sorted addresses, reproducible from N alone', () => {
     const units = corpus.map((entry) => ({
       blockId: entry.block, poolKey: entry.pool, id: entry.id, text: entry.text, pieces: [],

@@ -527,7 +527,18 @@ export function armA3(unit, options) {
       'the unit carries no contrast shape, so wall 5 has nothing to license'));
     return out;
   }
-  const siblings = options.siblingKeys || [];
+  // ⛔ AN ABSENT SIBLING SET IS AN INPUT THE CALLER DID NOT BRING; AN EMPTY ONE IS A FACT
+  // ABOUT THE BLOCK, AND COLLAPSING THE TWO IS HOW A DRIVER MANUFACTURES ITS OWN FAILS.
+  // The seam fold's 4b (SITTING §R): `reWalkBlock` dropped its options, this arm read `[]`,
+  // and every contrast-carrying unit of a re-walked block reported a breach of wall 5 that
+  // the corpus never committed. The §908 law settles it — a row keyed on an input nobody
+  // supplied declares itself NOT-EXECUTABLE instead of answering.
+  if (!options.siblingKeys) {
+    emit(out, row(id, 'A3', 'NOT-EXECUTABLE', '(sibling keys)', shapes[0][0].trim(),
+      'the caller supplied no sibling set at all, so wall 5 has nothing to read against; an EMPTY set is a different answer and fails below'));
+    return out;
+  }
+  const siblings = options.siblingKeys;
   if (!siblings.length) {
     emit(out, row(id, 'A3', 'FAIL', 'no sibling names the alternative', shapes[0][0].trim(),
       'wall 5 licenses a contrast only where a sibling pool key or band names the rejected alternative, and this block holds no sibling'));
@@ -989,9 +1000,21 @@ export function sampleOf(units, n) {
  * new pool joins the sibling set every existing variant is verdicted against. So a landing
  * re-walks the block WHOLE — every variant of every spine pool, not a sample — and the sample
  * stays for the composed units.
+ * ⛔ THE OPTIONS REACH THE ARMS. Until SEAM car 5c this function called `walkComposed(unit,
+ * ground)` with no third argument, so a caller's `siblingKeys`, `relations`, `primaryOf`,
+ * `fieldOf`, `register` and `sourceOf` were dropped at the door and A2, A3 and A13 answered
+ * about the DRIVER rather than about the block (the seam fold's 4b, SITTING §R). A3 was the
+ * visible one: it read `options.siblingKeys` as `[]` and FAILed 'no sibling names the
+ * alternative' on every contrast-carrying unit. A3 now distinguishes an absent sibling set
+ * from an empty one, so a caller that brings nothing gets NOT-EXECUTABLE and never a
+ * manufactured FAIL; and this function hands the arms what it was given.
  * @param {ReadonlyArray<ComposedUnitRow>} units every unit the block can compose
  * @param {import('./entryWalker.js').EntryGround} ground
- * @param {{landing?: string}} [options] the modifier key whose landing occasioned the re-walk
+ * @param {{landing?: string, relations?: Readonly<Record<string, ReadonlyArray<{relation: string,
+ *   direction: string}>>>, primaryOf?: (key: string) => string, fieldOf?: (key: string) => string,
+ *   siblingKeys?: ReadonlyArray<string>, register?: string,
+ *   sourceOf?: (key: string) => {kind: string, holder: string|null, standing: string}|null}}
+ *   [options] the modifier key whose landing occasioned the re-walk, and the arms' own ground
  * @returns {{walked: number, verdicts: Record<string, number>, findings: ComposedResult}}
  */
 export function reWalkBlock(units, ground, options = {}) {
@@ -1007,7 +1030,7 @@ export function reWalkBlock(units, ground, options = {}) {
     return { walked: 0, verdicts, findings };
   }
   for (const unit of all) {
-    const result = walkComposed(unit, ground);
+    const result = walkComposed(unit, ground, options);
     verdicts[composedVerdictOf(result)] += 1;
     mergeResults(findings, result.composed);
   }
