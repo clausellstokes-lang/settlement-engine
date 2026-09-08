@@ -443,6 +443,10 @@ export function institutionTableOf(settlement, world = {}) {
     const name = text(inst?.name);
     const own = services.filter((s) => s.institution === name);
     const status = text(inst?.status).toLowerCase();
+    // `Array.isArray` is declared `arg is any[]`, so the guard WIDENS the row's own typed
+    // `impairments` shape to `any[]` and the map below loses it. Naming the shape the roster
+    // row already declares is this file's idiom (the `InstitutionRow` typedef), not a cast.
+    /** @type {ReadonlyArray<{type?: string}>} */
     const impairments = Array.isArray(inst?.impairments) ? inst.impairments : [];
     return Object.freeze({
       institution: name,

@@ -435,7 +435,12 @@ export function armESpread(poolRows, unit, shape) {
 export function armF(entry, moves, register) {
   /** @type {GrammarFinding[]} */
   const fails = [];
-  const inScope = (wall) => wall.scope.includes('*') || wall.scope.includes(register);
+  // `find` answers `wall | undefined`, and the file already reads that answer with `?.` at
+  // arm E's wall-10 gate: no such wall is not in scope. Same reading, said once more.
+  /** @param {{scope: ReadonlyArray<string>} | undefined} wall */
+  const inScope = (wall) => Boolean(wall
+    && (wall.scope.includes('*') || wall.scope.includes(register)));
+  /** @param {number} id */
   const wall = (id) => WALLS.find((w) => w.id === id);
   const text = String(entry.text || '');
   // Wall 1 — STATE precedes CAUSE where both appear (estate-wide).
@@ -786,6 +791,7 @@ export function walkGrammar(input) {
   // classified and its breaches are demoted to notes under `A/untagged`. Today the tag is
   // applied to nothing (refusal 9), so the tagged half is empty and arm A is report-only on
   // the shipped corpus — which the NOT-EXECUTABLE row it emits at n = 0 says out loud.
+  /** @param {{entry: GrammarEntry}} r */
   const isTagged = (r) => typeof r.entry.grammar === 'string' && r.entry.grammar !== '';
   const tagged = perEntry.filter(isTagged);
   const untagged = perEntry.filter((r) => !isTagged(r));
@@ -814,6 +820,7 @@ export function walkGrammar(input) {
   };
 
   // ARM E per pool, plus C-sibling's typed-fact coherence.
+  /** @type {Map<string, GrammarEntry[]>} */
   const cells = input.cells || new Map();
   /** @type {Array<{pool: string, uniformGrammar: boolean, uniformSegments: boolean, dup: number}>} */
   const poolRows = [];
@@ -841,7 +848,10 @@ export function walkGrammar(input) {
       poolRows.push({
         pool: poolId,
         uniformGrammar: f.uniformGrammar,
-        uniformSegments: f.uniformSegments,
+        // A NARROWING, NOT A COERCION: `armE` writes both flags into ONE object literal and
+        // its only other exit (a pool of one) writes no figures at all, so a boolean
+        // `uniformGrammar` proves the sibling beside it is a boolean too.
+        uniformSegments: f.uniformSegments === true,
         dup: (f.dupOpeners || []).length,
       });
     }

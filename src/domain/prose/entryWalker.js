@@ -252,6 +252,7 @@ export function bandReadings(text) {
   const t = lower(text);
   /** @type {Array<{phrase: string, noun: string, clause: string}>} */
   const out = [];
+  /** @type {string[]} */
   const claimed = [];
   for (const phrase of BAND_BY_LENGTH) {
     if (!holds(t, phrase)) continue;
@@ -381,11 +382,16 @@ export function figureReadings(text) {
  */
 function armC1(entry, ground, out) {
   const bands = bandReadings(entry.text);
+  /** @type {Map<string, Array<{phrase: string, noun: string, clause: string}>>} */
   const byNoun = new Map();
   for (const b of bands) {
     const key = b.noun || '';
-    if (!byNoun.has(key)) byNoun.set(key, []);
-    byNoun.get(key).push(b);
+    // GET-OR-CREATE, because a typed Map's `get` returns `T | undefined` and this loop must
+    // not read through that. Re-setting a key a Map already holds does NOT move it, so the
+    // noun order the loop below walks is still first-arrival order: the same tallies.
+    const list = byNoun.get(key) || [];
+    list.push(b);
+    byNoun.set(key, list);
   }
   for (const [noun, list] of byNoun) {
     const classes = [...new Set(list.map((b) => bandClassOf(b.phrase)))];

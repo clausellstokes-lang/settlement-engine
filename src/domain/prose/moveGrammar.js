@@ -166,7 +166,14 @@ export const GRAMMAR_TAG_CONTRACT = Object.freeze({
 /** A slot reference is a typed field reference and the classifier reads it as one. */
 const SLOT_RE = /\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g;
 
-/** Which move does a slot NAME suggest? The slot is a field, so this is a licensing read. */
+/**
+ * Which move does a slot NAME suggest? The slot is a field, so this is a licensing read.
+ *
+ * TYPED AS AN OPEN RECORD BECAUSE THE READ IS OPEN. `SLOT_RE` matches any identifier, so a
+ * slot this table does not name is a real input: the read answers `undefined` and the
+ * `filter(Boolean)` beside it drops the row. A `keyof typeof` cast would deny that input.
+ * @type {Readonly<Record<string, string>>}
+ */
 const SLOT_MOVE = Object.freeze({
   good: 'OBJECT', resource: 'OBJECT', asset: 'OBJECT', ruin: 'OBJECT',
   institution: 'INSTITUTION', seat: 'INSTITUTION', govFaction: 'INSTITUTION',
