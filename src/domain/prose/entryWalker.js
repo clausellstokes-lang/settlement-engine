@@ -970,11 +970,32 @@ export function walkEntry(entry, ground) {
 export function walkPair(before, after, ground) {
   const a = walkEntry(before, ground);
   const b = walkEntry(after, ground);
+  // ⛔ THE CLAIM KEY CARRIES THE FINDING'S **SITE** (CLERK-LAWS §2.6.1; INSTR-912 car 10,
+  // cure 9). Keyed on `(class, arm, column)` alone, an AFTER that adds a genuinely NEW fault
+  // of a class the BEFORE already carried read `added 0` and inflated the inherited-debt
+  // count from one to two — measured, on a pair whose AFTER buys a SECOND totality over the
+  // same open column. §2.6's rule is "a rewrite may not ADD a FAIL", and a class-only key
+  // cannot see one. `clause` is the site: the clause the detector fired on, which survives a
+  // re-wording of the rest of the entry (the property the class-only key was reaching for)
+  // while distinguishing two faults of one class inside one entry.
+  //
+  // ⚠ THIS IS THE INSTRUMENT THE REWRITE WAVE IS JUDGED BY (FOLD-2 hazard H9). Left as it
+  // was, every same-class regression the wave introduced would have read as inherited debt.
   /** @param {Finding} f @returns {string} */
-  const claimKey = (f) => `${f.klass}|${f.arm}|${f.column}`;
+  const claimKey = (f) => `${f.klass}|${f.arm}|${f.column}|${String(f.clause || '').trim()}`;
   const had = new Set(a.fails.map(claimKey));
   const now = new Set(b.fails.map(claimKey));
   const hadWithheld = new Set(a.withheld.map(claimKey));
+  // NOT-EXECUTABLE IS THE UNION OF BOTH HALVES. A limb the BEFORE could not execute is a
+  // limb the pair did not judge, whether or not the AFTER happens to reach it; reporting the
+  // AFTER's alone dropped a BEFORE-only row in silence.
+  const notExecutable = [...b.notExecutable];
+  const seen = new Set(b.notExecutable.map(claimKey));
+  for (const f of a.notExecutable) {
+    if (seen.has(claimKey(f))) continue;
+    seen.add(claimKey(f));
+    notExecutable.push(f);
+  }
   return {
     added: b.fails.filter((f) => !had.has(claimKey(f))),
     // A pre-existing FAIL is reported as debt, so the pair instrument stays a pair
@@ -983,7 +1004,7 @@ export function walkPair(before, after, ground) {
       .map((f) => ({ ...f, arm: `PRE-EXISTING · ${f.arm}` })),
     cured: a.fails.filter((f) => !now.has(claimKey(f))),
     withheldAdded: b.withheld.filter((f) => !hadWithheld.has(claimKey(f))),
-    notExecutable: b.notExecutable,
+    notExecutable,
   };
 }
 

@@ -543,6 +543,109 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     expect(unresolved.withheldAdded).toEqual([]);
   });
 
+  it('C-PAIR sees an ADDED fault of a class the BEFORE already carried (CLERK-LAWS §2.6.1)', () => {
+    // ⛔ THE DEFECT THIS ARM CLOSES (INSTR-912 car 10, cure 9; FOLD-2 P8/H9). `claimKey` was
+    // `(class, arm, column)` with no text and no offset, so an AFTER that bought a SECOND
+    // totality over the SAME open column read `added 0 · preExisting 2` — the pair instrument
+    // the rewrite wave is judged by, unable to see the one thing §2.6 forbids. Executed here
+    // in the shape the fold names: BEFORE 1 fail, AFTER 2 fails of one class and one column.
+    const ground = { scope: 'estate', columns: { whoIsCounted: { closed: false, values: [] } } };
+    const before = { id: 'p#0', text: 'The watch at {settlement} keeps the gate, and every household is counted.', slots: ['settlement'] };
+    const after = {
+      id: 'p#0',
+      text: 'The watch at {settlement} keeps the gate, and every household is counted. All souls are counted here.',
+      slots: ['settlement'],
+    };
+    expect(walkEntry(before, ground).fails, 'the BEFORE carries exactly one totality').toHaveLength(1);
+    const afterFails = walkEntry(after, ground).fails;
+    expect(afterFails, 'and the AFTER carries two').toHaveLength(2);
+    expect(new Set(afterFails.map((f) => `${f.klass}|${f.arm}|${f.column}`)).size,
+      'of ONE class, arm and column — which is what a class-only key cannot split').toBe(1);
+    const pair = walkPair(before, after, ground);
+    expect(pair.added, 'the second totality is ADDED, not inherited').toHaveLength(1);
+    expect(pair.preExisting, 'and the first is the debt').toHaveLength(1);
+    expect(pair.added[0].clause, 'the site is what tells them apart').toMatch(/All souls are counted here/);
+    // THE PAIRED POSITIVE: the same entry against itself must still read as pure debt, or the
+    // site-bearing key has simply made every finding look new.
+    const inherited = walkPair(after, after, ground);
+    expect(inherited.added, 'a rewrite that changes nothing adds nothing').toHaveLength(0);
+    expect(inherited.preExisting).toHaveLength(2);
+    expect(walkPair(after, before, ground).cured, 'and removing one is credited once').toHaveLength(1);
+    // NOT-EXECUTABLE IS THE UNION OF BOTH HALVES: a limb only the BEFORE reaches is a limb
+    // the pair did not judge, and reporting the AFTER's alone dropped it in silence.
+    const duty = { id: 'p#1', text: 'The hall at {settlement} collects the toll on the salt road.', slots: ['settlement'] };
+    const plain = { id: 'p#1', text: 'The hall at {settlement} stands beside the road.', slots: ['settlement'] };
+    const armsOf = (result) => result.notExecutable.map((f) => `${f.klass}|${f.arm}`);
+    expectPresentThenAbsent(
+      armsOf(walkEntry(duty, ground)),
+      armsOf(walkEntry(plain, ground)),
+      'C2|duty predicate (no service rows given)',
+      'the BEFORE-only not-executable limb',
+    );
+    expect(armsOf(walkPair(duty, plain, ground)), 'and the pair keeps it')
+      .toContain('C2|duty predicate (no service rows given)');
+  });
+
+  it('THE FOUR PROBE-4 SENTENCES — a quantifier is located at its own word boundary', () => {
+    // ⛔ THE ARM CAR 9 OWED AND DID NOT BUILD (INSTR-912 car 10, cure 12; FOLD-2 P9). The code
+    // cure — one `locate()` for `armC4` and `bandReadings`, word-boundary on both halves —
+    // shipped in car 9 with no fixture, so reverting it left the walker 24/24 green. These are
+    // the four shapes `probe4.mjs` measured: one clean, and three where the quantifier's
+    // letters occur EARLIER inside another word (`wall`, `company`, `not`), which is where
+    // `holds()` (word-boundary) and `indexOf()` (substring) disagreed and a FAIL degraded to
+    // a NOTE. Measured over the shipped corpus: 69 of 3,132 entries carried a mis-located
+    // quantifier (70 occurrences).
+    const ground = { scope: 'estate', columns: { whoIsCounted: { closed: false, values: [] } } };
+    const armsOf = (text) => walkEntry({ id: `probe4::${text.slice(0, 12)}`, text, slots: [] }, ground)
+      .fails.map((f) => `${f.klass}/${f.arm}`);
+    // (1) the clean baseline; (2) `all` inside `wall`; (3) `any` inside `company`; (4) `no`
+    // inside `not`. Before the cure only (1) read FAIL; the other three degraded to NOTE
+    // `a quantifier over an unnamed column`, because the governed noun was read from the
+    // wrong offset and no column resolved.
+    const PROBE_4 = [
+      'All souls are counted here.',
+      'The wall is old, and all souls are counted here.',
+      'The company keeps its hall, and any household may be counted.',
+      'The roll is not kept, and no households are counted.',
+    ];
+    for (const text of PROBE_4) {
+      expect(armsOf(text), `${text} — the quantifier is located at ITS OWN word`)
+        .toContain('C4/a totality over an open column');
+    }
+    // NON-VACUITY, as a REMOVAL PAIR: strike the quantifier out of the hardest of the four
+    // and the arm falls silent on the same sentence. Without this the four assertions above
+    // would be satisfied by an arm that fires on every sentence in the estate.
+    expectPresentThenAbsent(
+      armsOf('The wall is old, and all souls are counted here.'),
+      armsOf('The wall is old, and the souls are counted here.'),
+      'C4/a totality over an open column',
+      'the quantifier itself',
+    );
+  });
+
+  it('THE QUALIFY ARM on the shipped `DS-POW-5::autocrat` variant — a trailing coordinate', async () => {
+    // ⛔ THE SECOND ARM CAR 9 OWED (INSTR-912 car 10, cure 13; FOLD-2 P12). Cure 15's code —
+    // `armQualify` reading a trailing coordinate inside ONE sentence, where it used to return
+    // early on `sentences.length < 2` — shipped with no assertion naming it, so stubbing the
+    // whole semicolon limb left the walker 24/24 green. The variant is the brief's own named
+    // control, read from the SHIPPED corpus rather than transcribed.
+    const ground = estateGround({ officeRoster: deriveOfficeRoster() });
+    const leaves = await loadStateLeaves();
+    const target = leaves.find((e) => /DS-POW-5/.test(e.id) && /autocrat#2$/.test(e.id));
+    expect(target, 'the named variant is still in the corpus').toBeTruthy();
+    const walk = walkEntry(target, ground);
+    expect(verdictOf(walk), 'a claim the ground cannot settle is WITHHELD, never a pass').toBe('WITHHELD');
+    expect(walk.withheld.filter((f) => f.klass === 'Q').map((f) => f.arm))
+      .toContain('a trailing coordinate naming no second field');
+    // NON-VACUITY, on the corpus itself: the class is report-only and must be a MINORITY of
+    // R1, or "every variant is withheld" would satisfy the line above.
+    const carrying = leaves.filter((e) => walkEntry(e, ground).withheld
+      .some((f) => f.klass === 'Q' && /trailing coordinate/.test(f.arm)));
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(329);
+    expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
+    console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
+  });
+
   it('finds the breaches the sitting did NOT name, and prints the corpus census', async () => {
     const base = estateGround({ officeRoster: deriveOfficeRoster() });
     const leaves = await loadStateLeaves();

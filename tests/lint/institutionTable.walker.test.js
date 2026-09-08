@@ -30,6 +30,7 @@ import {
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { quantityWords } from '../../src/domain/worldPulse/demographicsHerald.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SOURCE = readFileSync(join(ROOT, 'src/domain/institutions/institutionTable.js'), 'utf8');
@@ -242,6 +243,47 @@ describe('THE HONESTY RULE — a column is `closed` only where every source the 
     // and still refuses the craft service the bare `custom` stem admitted
     expect(DUTY_SERVICE_KINDS.test('Custom enchanting')).toBe(false);
     expect(DUTY_SERVICE_KINDS.test('Wool & Textile Trade')).toBe(false);
+  });
+
+  it('READS THE THIRD SOURCE: `coinFlows.taxed` reaches the basis, present-then-absent', () => {
+    // ⛔ THE COLUMN CLOSED ON A SOURCE NO ARM COULD SEE (INSTR-912 car 10, cure 11; FOLD-2
+    // P10). `whatItCounts.closed` is DERIVED from "every source CLERK-LAWS §1.2 names is
+    // read", and its third source — `treasury.coinFlows.taxed` — reaches only a `basis`
+    // STRING that nothing asserted. On every generated settlement the ABSENT branch is taken
+    // (the treasury is a world-pulse structure no generator writes), so replacing the read
+    // with `NaN` left the walker 17/17 green: `closed === true` — the over-licensing
+    // direction §L.2 item 62 forbids — rested on a read whose removal no arm could detect.
+    // The PRESENT branch is the only place the read is observable, so that is where the arm
+    // goes. Sweep plant #84 executes it.
+    const withTreasury = institutionTableOf({
+      id: 'coin', institutions: [], npcs: [], availableServices: {},
+      treasury: { coinFlows: { taxed: 42 } },
+    }, WORLD);
+    const without = institutionTableOf({
+      id: 'coin', institutions: [], npcs: [], availableServices: {},
+    }, WORLD);
+    expect(withTreasury.columns.whatItCounts.basis, 'the magnitude the source carries is READ and reported')
+      .toContain('treasury.coinFlows.taxed = 42');
+    expect(without.columns.whatItCounts.basis, 'and its absence is reported as absence, never as silence')
+      .toContain('treasury.coinFlows.taxed absent on this settlement');
+    expectPresentThenAbsent(
+      withTreasury.columns.whatItCounts.basis,
+      without.columns.whatItCounts.basis,
+      '= 42',
+      'the third source\'s own value',
+    );
+    // A ZERO IS A READING, NOT AN ABSENCE. `Number.isFinite(0)` is true, and a source that
+    // read `0` as "absent" would be unable to distinguish an untaxed town from an unwritten
+    // treasury — the exact confusion the `basis` exists to prevent.
+    expect(institutionTableOf({
+      id: 'coin', institutions: [], npcs: [], availableServices: {},
+      treasury: { coinFlows: { taxed: 0 } },
+    }, WORLD).columns.whatItCounts.basis).toContain('treasury.coinFlows.taxed = 0');
+    // AND THE COLUMN'S FLAG IS UNMOVED EITHER WAY: this arm proves the READ, not a licence.
+    expect(withTreasury.columns.whatItCounts.closed).toBe(true);
+    expect(without.columns.whatItCounts.closed).toBe(true);
+    expect(sourcesAllRead('whatItCounts'), 'all three sources declared read').toBe(true);
+    expect(COLUMN_SOURCES.whatItCounts.length, 'and there are three of them').toBe(3);
   });
 
   it('routes the RUIN FILTER through the service COLUMNS, and the filter is measured doing work', () => {
