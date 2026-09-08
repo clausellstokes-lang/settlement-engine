@@ -2,14 +2,25 @@
  * readerCorpusManifest.test.js — the reader corpus is composed from the golden key.
  *
  * SCOPE AT THIS TIP. This file now covers BOTH halves of the corpus law. The KEY DERIVATION
- * half (arms 1-8) proves `scripts/lib/golden-corpus-key.mjs` is the same derivation the golden
- * test performs and round-trips every row of the real 525-row manifest. The COMPOSITION half
- * (arms 9-14, added by the documents car) proves the roster is well formed against that
+ * half (arms 1-10) proves `scripts/lib/golden-corpus-key.mjs` is the same derivation the golden
+ * corpus performs and round-trips every row of the real 525-row manifest. The COMPOSITION half
+ * (arms 11-16, added by the documents car) proves the roster is well formed against that
  * manifest, that a composed region is the soak's region, that the whole document set renders
  * REPRODUCIBLY, and that a broken advance is refused rather than rendered around.
  *
  * IT EXTENDS THIS FILE RATHER THAN ADDING ANOTHER, deliberately: a new test file reds three
  * censuses at landing, and the composition arms belong to the same law as the key arms.
+ *
+ * WHERE THE DERIVATION LIVES, AND WHY THIS FILE FOLLOWED IT (MEASURE car 4). The golden key's
+ * arrow was a private const inside `tests/property/generatorGoldenMaster.test.js` until MEASURE
+ * car 1 moved it, with the 525 rows, into `tests/helpers/goldenMasterCorpus.js` — the corpus had
+ * gained a second reader, and a second SPELLING of a corpus is how two instruments come to
+ * disagree about which world they measured while both report green. The derivation arm went on
+ * reading the OLD file, matched nothing, and reported `false`. A guard that reads a law from a
+ * file the law has left is not a weaker guard; it is no guard at all. Arms 2-4 are the
+ * single-source triple that replaces it: the arrow read WHERE IT NOW LIVES, the golden master
+ * proven to IMPORT that one arrow rather than re-spell a second, and the two derivations RUN
+ * against each other on real manifest rows — text, wiring, and behaviour.
  *
  * WHAT THIS FILE CANNOT PROVE, STATED SO NOBODY MISTAKES ITS GREEN FOR THE WHOLE BAR. The
  * three tab SURFACES need a stubbed store installed through a resolver alias the corpus CLI
@@ -31,6 +42,10 @@ import {
   configFromGoldenKey,
   manifestRows,
 } from '../../scripts/lib/golden-corpus-key.mjs';
+// THE ONE ARROW ITSELF, imported rather than re-spelled — the same discipline arm 3 enforces
+// on the golden master. A test that hand-copied the key derivation to check the key derivation
+// would be comparing a transcription against a transcription.
+import { keyOf } from '../helpers/goldenMasterCorpus.js';
 import {
   LAUNCH_POSTURE_PRESETS,
   PREVIEW_OVERLAY,
@@ -58,6 +73,9 @@ import { DEFAULT_SIMULATION_PRESET_ID } from '../../src/domain/worldPulse/simula
 
 const MANIFEST_PATH = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
 const GOLDEN_TEST_PATH = resolve(process.cwd(), 'tests', 'property', 'generatorGoldenMaster.test.js');
+// ⛔ THE FILE THE ARROW NOW LIVES IN. Read the derivation where it IS, not where it was: the
+// golden test imports `keyOf` from here, and arm 3 is what keeps that true.
+const GOLDEN_KEY_SOURCE_PATH = resolve(process.cwd(), 'tests', 'helpers', 'goldenMasterCorpus.js');
 
 const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf-8'));
 
@@ -70,17 +88,72 @@ describe('the reader corpus is composed from the golden key', () => {
     expect(GOLDEN_KEY_SEPARATOR).toBe('|');
   });
 
-  it('the derivation is the golden test own arrow, read from its source and compared field for field', () => {
-    // THE POINT OF THIS ARM: the golden test's private `keyOf` is the authority for this
-    // law, and this module only transcribes it. If a future car changes the golden's key
-    // — adds a seventh field, reorders two — this arm reds HERE, at the transcription,
-    // rather than letting every consumer silently read a corpus keyed differently from
-    // the manifest they compare it against.
-    const source = readFileSync(GOLDEN_TEST_PATH, 'utf-8');
+  it('the derivation is the corpus helper own arrow, read from its source and compared field for field', () => {
+    // THE POINT OF THIS ARM: the corpus helper's `keyOf` is the authority for this law, and
+    // this module only transcribes it. If a future car changes the golden's key — adds a
+    // seventh field, reorders two — this arm reds HERE, at the transcription, rather than
+    // letting every consumer silently read a corpus keyed differently from the manifest they
+    // compare it against.
+    //
+    // ⛔ IT READS `tests/helpers/goldenMasterCorpus.js`, NOT THE GOLDEN TEST, because that is
+    // where MEASURE car 1 moved the arrow. Pointed at the old file this arm matched nothing
+    // and reported `false` — the failure mode of every source-reading guard, and the reason
+    // arm 3 exists to pin the arrow's home rather than trusting this path to stay true.
+    const source = readFileSync(GOLDEN_KEY_SOURCE_PATH, 'utf-8');
     const arrow = /const keyOf = \(c\) => \[([^\]]+)\]\.join\('\|'\);/.exec(source);
     expect(Array.isArray(arrow)).toBe(true);
-    const fields = arrow[1].split(',').map((part) => part.trim().replace(/^c\./, ''));
+    // ⚠ EXACTLY ONE TRAILING COMMA IS STRIPPED, AND THE REGEX IS NOT WIDENED. A JS array
+    // literal may carry one dangling comma and the helper's multi-line spelling does; naively
+    // splitting on it yields a SEVENTH, empty field and reds on a difference that is not one.
+    // Stripping it once is the array literal's own grammar, not a loosening: a seventh REAL
+    // field still splits to `extra` and reds, a hole (`[c.a, , c.b]`) still splits to an empty
+    // field and reds, and a reordering still reds. Both were measured before this line landed.
+    const inner = arrow[1].trim().replace(/,$/, '');
+    const fields = inner.split(',').map((part) => part.trim().replace(/^c\./, ''));
     expect(fields).toEqual([...GOLDEN_KEY_FIELDS]);
+  });
+
+  it('the golden master imports that one arrow instead of spelling a second one', () => {
+    // ⛔ THE FORK THIS FORBIDS, AND WHY IT IS A SEPARATE ARM. Arm 2 reads the arrow from the
+    // helper and would stay green forever if the golden master quietly re-added a private
+    // `const keyOf` of its own: the manifest would then be keyed by an arrow NOTHING in this
+    // file reads, and the two would agree right up to the day one of them gained a field.
+    // Before MEASURE car 1 the golden test WAS that private const, so this is not a
+    // hypothetical shape — it is the shape the estate just left.
+    const goldenSource = readFileSync(GOLDEN_TEST_PATH, 'utf-8');
+    expect(goldenSource, 'the golden master must import `keyOf` from the corpus helper')
+      .toMatch(/import \{[^}]*\bkeyOf\b[^}]*\} from '\.\.\/helpers\/goldenMasterCorpus\.js';/);
+    // ANCHORED: a bare `not.toContain` would pass just as happily on a golden test that had
+    // drifted away entirely. `rows.map(keyOf)` is the liveness anchor — it is the golden's own
+    // corpus-coverage arm, it travels the same file, and it MUST be there.
+    expectAbsentWithAnchor(
+      goldenSource,
+      'const keyOf =',
+      'rows.map(keyOf)',
+      'the golden master must import the one arrow, never re-spell a second',
+    );
+  });
+
+  it('the helper own arrow and this module derivation agree on three real manifest rows', () => {
+    // Arms 2 and 3 compare the derivations as TEXT and as WIRING. This one RUNS them: a
+    // transcription that reads right and computes differently is precisely what a source
+    // comparison cannot see, and the manifest is the only witness that matters.
+    const keys = Object.keys(manifest);
+    const sample = [keys[0], keys[Math.floor(keys.length / 2)], keys[keys.length - 1]];
+    // LIVENESS: three REAL rows, not three invented ones — an empty sample would make every
+    // comparison below vacuously true.
+    expect(sample.length).toBe(3);
+    expect(sample.every((key) => typeof key === 'string' && key in manifest)).toBe(true);
+    const disagree = [];
+    for (const key of sample) {
+      const config = configFromGoldenKey(key);
+      if (keyOf(config) !== goldenKeyOf(config)) {
+        disagree.push(`${key}: helper ${keyOf(config)} vs module ${goldenKeyOf(config)}`);
+      }
+      // And both must land back on the manifest's own key, so neither can drift together.
+      if (keyOf(config) !== key) disagree.push(`${key}: the helper arrow does not reproduce it`);
+    }
+    expect(disagree).toEqual([]);
   });
 
   it('every key in the real manifest carries exactly six fields and round-trips unchanged', () => {
