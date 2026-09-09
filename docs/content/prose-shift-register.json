@@ -63,19 +63,19 @@
     {
       "id": "connective-list-length",
       "mechanism": "the length of each (relation, seat) phrase list, which is the modulus of the joint draw `${seed}::${blockId}::${spineKey}::joint::${modifierKey}`",
-      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat.",
       "door": "the connectives leaf's pinned header and §7b's own pin column",
-      "idiom": "the sitting authors the two OWED lists (ARCH §12 car 7); growth after that is a declared row here",
+      "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
-        { "kind": "map", "over": "the length of each list in src/data/dossierConnectives.generated.js", "value": { "consequence.clause": 0, "tension.sentence": 0, "contrast.sentence": 1, "addition.sentence": 1 } }
+        { "kind": "map", "over": "the length of each list in src/data/dossierConnectives.generated.js", "value": { "consequence.clause": 3, "tension.sentence": 3, "contrast.sentence": 3, "addition.sentence": 3 } }
       ]
     },
     {
       "id": "norm-bit",
       "mechanism": "the DEPARTURE bit per pool, which is one of the three signals of the salience BAND and so decides which candidate is ranked first",
-      "shift": "a declared row — a bit crossing the line is a CHAIR FINDING first, then a declared row",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat.",
       "door": "src/data/proseNorms.generated.js, projected from the census's RATE corpus",
-      "idiom": "the bit is FROZEN at the pool's birth car (P-F4); a rate re-measured by an unrelated car would re-order installed worlds without anyone intending it, which is why the leaf carries a BIT and the census keeps the rate as a REPORT",
+      "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
         { "kind": "integer", "over": "the number of pools carrying a measured bit", "value": 271 },
         { "kind": "integer", "over": "the number of those bits that read 1", "value": 72 },
@@ -86,9 +86,9 @@
     {
       "id": "attach-set",
       "mechanism": "the set of spines a modifier may attach to, which decides which candidates exist at a rung and therefore what the salience ranking ranks",
-      "shift": "a declared ADDITIVE row per block (the classifier prints ADDITIVE, never RE-INDEXED: a new pool moves nothing existing)",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat.",
       "door": "the projection contract, against poolMeta.attach",
-      "idiom": "EMPTY on every pool at this tip, by construction: every shipped pool is a spine and a spine's attach set is empty. Car 9 authors the first non-empty one",
+      "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
         { "kind": "integer", "over": "the number of pools whose attach set is non-empty", "value": 0 },
         { "kind": "digest", "algo": "sha256", "over": "poolMeta.attach per pool, joined by pipes", "value": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59" }
@@ -97,9 +97,9 @@
     {
       "id": "draw-formula",
       "mechanism": "the variant draw itself: the key material and the selection rule. LANDED as the INDEX-STABLE DRAW at REWRITE car 8a-1 — the ARGMAX of `hashKey(${seed}::${blockId}::${poolKey}::v${vid})` over the eligible set, ties to the lower vid, with the shipped `% eligible.length` kept as the FALLBACK for a pool whose members carry no stable id (the causal register is that corpus, and so moved no read at all)",
-      "shift": "1 — the REWRITE + FACES freeze. §13 row 22 / SITTING §N.2's index-stable draw landed ONCE, at car 8a-1, ahead of the wording sets; the one-time re-index it costs is declared in `reIndexed` below",
+      "shift": "a declared row of its own — a longer list re-rolls every joint already drawn on it; a list of length one takes no hash at all. ⛔ THE 8a-9 GROWTH (0/0/1/1 -> 3/3/3/3) RE-ROLLED NOTHING, and that is a measurement rather than an argument: no shipped pool declares `role: modifier`, so the composer draws no joint on any town and the classifier printed every one of the 73,284 cells UNCHANGED. The two former OWED lists are still UNLICENSED — `seatOf` answers `not-consequence` on all 708 pools — so having the words is not having a seat.",
       "door": "src/domain/display/stateProse/stateProseKernel.js, and the classifier (scripts/prose-manifest-diff.mjs over two runs of scripts/prose-manifest-cells.mjs), whose RE-INDEXED count is the owner's veto surface and is declared in `reIndexed` below",
-      "idiom": "owner-signed once on the classifier's per-cell diff. The chair measured 75.71 per cent of reads re-rolling on one append under `% length` against 24.17 per cent under the argmax; car 8a-1 re-measured on the shipped three-variant corpus (547 pools x 2,000 seeds, 1,094,000 reads) at 74.99 against 25.01 per cent, and pinned the PROPERTY the percentages are only evidence for: ZERO reads move between two OLD wordings, against 546,952 under the modulus",
+      "idiom": "the sitting authored all four to their floor of three at REWRITE car 8a-9 (S12; SITTING §T.2) as PUBLIC-COPY DRAFTS, SIGNED AT THE WALK (§13 row 27); growth after that is a declared row here",
       "pin": [
         { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["const digest = avalanche32(fnv1a32(`${parent}::v${vid}`));", "if (digest > bestHash || (digest === bestHash && vid < bestVid)) {", "if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];"] }
       ],

@@ -6337,19 +6337,33 @@ adjacency itself, which is exactly what `contrast` and `addition` assert.
 already drawn on it. Growth is a DECLARED row on `docs/content/prose-shift-register.json` and never
 an edit; a list at length one takes no hash at all.
 
-**⛔ TWO FLOORS ARE OWED, AND THAT IS A MEASUREMENT.** `consequence.clause` and `tension.sentence`
-stand at length 0 against a floor of three. None of the engine's 165 relation rows joins two fields
-a desk reads (car 0's F1, ARCH §16 item 9), so no `consequence` and no `tension` joint is
-LICENSED anywhere on the shipped corpus today; a list authored ahead of its licence would be prose
-nothing could lawfully draw. The sitting authors them (ARCH §12 car 7), and the clause seat itself
-waits on S2.
+**⛔ ALL FOUR STAND AT THEIR FLOORS SINCE REWRITE car 8a-9 (S12; SITTING §T.2), AS PUBLIC-COPY
+DRAFTS.** The four lists are DRAFTED here and SIGNED AT THE WALK (§13 row 27 — the connectives'
+copy is the owner's). Until then they are DATA behind the shipped draw and change no rendered
+byte, which the manifest classifier is what proves: no shipped pool declares `role: modifier`, so
+no joint of any list is drawn on any town, and growing a list from one to three re-rolls nothing
+because nothing was ever rolled.
+
+**⛔ AND THE TWO THAT WERE OWED ARE STILL UNLICENSED, WHICH IS A DIFFERENT THING FROM UNWRITTEN.**
+None of the engine's 165 relation rows joins two fields a desk reads (car 0's F1, ARCH §16
+item 9), so no `consequence` and no `tension` joint can be SEATED anywhere on the shipped corpus
+today, and the clause seat itself waits on S2. Having the words ready is not having the licence:
+`seatOf` still answers `not-consequence` on all 708 pools and the composer still cannot reach
+either list. What the floors buy is that the day a licence exists the writers are not also
+inventing the joinery.
+
+**WHAT EACH LIST IS FOR, in the register's own terms.** A `consequence` joint rides ON the
+sentence and carries its own comma; the other three OPEN a second sentence and the composer
+capitalises them, so each carries its comma at the end. The EMPTY OPENER is adjacency itself and
+stays a member of `addition` and `contrast` — the plainest joint the record has, and the one the
+owner's own worked line uses.
 
 | relation | seat | floor | pin | joints, in order |
 |---|---|---|---|---|
-| `consequence` | `clause` | 3 | 0 | *(OWED: the sitting authors the joints)* |
-| `tension` | `sentence` | 3 | 0 | *(OWED: the sitting authors the openers)* |
-| `contrast` | `sentence` | 1 | 1 | `EMPTY-OPENER` |
-| `addition` | `sentence` | 1 | 1 | `EMPTY-OPENER` |
+| `consequence` | `clause` | 3 | 3 | `, so` · `, and so` · `, leaving` |
+| `tension` | `sentence` | 3 | 3 | `Against that,` · `Even so,` · `At the same time,` |
+| `contrast` | `sentence` | 3 | 3 | `EMPTY-OPENER` · `Instead,` · `In its place,` |
+| `addition` | `sentence` | 3 | 3 | `EMPTY-OPENER` · `Beside that,` · `Also,` |
 
 **WHAT A JOINT MAY NEVER CARRY.** An em dash; a `which` tail (wall 6); a digit or a percent
 (T-F14, and §0d's digit ban read across the join). Each is a projector error naming the joint.

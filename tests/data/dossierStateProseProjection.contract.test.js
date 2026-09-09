@@ -1263,22 +1263,50 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
 });
 
 describe('SEAM car 4 — the three leaves, at their floors', () => {
-  it('CONNECTIVES: the four reachable pairs, the two OWED floors, and no fifth key', () => {
+  it('CONNECTIVES: the four reachable pairs, all four AT THEIR FLOORS, and no fifth key', () => {
     expect(Object.keys(DOSSIER_CONNECTIVES).sort()).toEqual([...RELATIONS].sort());
     const pairs = Object.entries(DOSSIER_CONNECTIVES)
       .flatMap(([rel, bySeat]) => Object.keys(bySeat).map((seat) => `${rel}.${seat}`)).sort();
     expect(pairs).toEqual(['addition.sentence', 'consequence.clause', 'contrast.sentence', 'tension.sentence']);
-    expect(DOSSIER_CONNECTIVES.consequence.clause).toEqual([]);
-    expect(DOSSIER_CONNECTIVES.tension.sentence).toEqual([]);
-    // ⛔ THE EMPTY OPENER IS A PHRASE, and a list of one takes no hash at all (§2.4 key 4).
-    expect(DOSSIER_CONNECTIVES.contrast.sentence).toEqual(['']);
-    expect(DOSSIER_CONNECTIVES.addition.sentence).toEqual(['']);
-    // The floors are OWED, and the leaf's own header is what a reader meets: assert it says so
-    // rather than leaving the emptiness to read as a design.
+    // ⭐⭐ ALL FOUR REACHED THEIR FLOOR OF THREE AT REWRITE car 8a-9 (S12; SITTING §T.2), AS
+    // PUBLIC-COPY DRAFTS signed at the walk (§13 row 27). Asserted VERBATIM rather than by
+    // length, because they are copy: a reader of this file should meet the joints themselves.
+    expect(DOSSIER_CONNECTIVES.consequence.clause).toEqual([', so', ', and so', ', leaving']);
+    expect(DOSSIER_CONNECTIVES.tension.sentence)
+      .toEqual(['Against that,', 'Even so,', 'At the same time,']);
+    // ⛔ THE EMPTY OPENER IS A PHRASE and STAYS A MEMBER of the two lists that assert adjacency
+    // itself — S12 in terms. It leads each list, so a reader meets the plainest joint first.
+    expect(DOSSIER_CONNECTIVES.contrast.sentence).toEqual(['', 'Instead,', 'In its place,']);
+    expect(DOSSIER_CONNECTIVES.addition.sentence).toEqual(['', 'Beside that,', 'Also,']);
+    // ⛔ THE WALLS, ON EVERY JOINT OF EVERY LIST: no em dash, no `which` tail, no digit, no
+    // percent. The projector refuses each by name; asserted here too so the leaf itself is
+    // held rather than only the parse that produced it.
+    const joints = Object.values(DOSSIER_CONNECTIVES).flatMap((bySeat) => Object.values(bySeat).flat());
+    expect(joints.length, 'four lists of three').toBe(12);
+    expect(joints.filter((j) => /[\u2014\u2013]/.test(j)), 'an em dash in a joint').toEqual([]);
+    expect(joints.filter((j) => /\bwhich\b/i.test(j)), 'a `which` tail (wall 6)').toEqual([]);
+    expect(joints.filter((j) => /[0-9%]/.test(j)), 'a digit or a percent (T-F14)').toEqual([]);
+    // AND THE SEAT'S OWN SHAPE: a CLAUSE joint carries its comma at the FRONT (it rides on the
+    // spine's own sentence); a SENTENCE opener carries it at the END (the composer capitalises
+    // the opener and down-cases the modifier after it). A joint on the wrong side of its comma
+    // would compose a sentence the composer never intended.
+    for (const joint of DOSSIER_CONNECTIVES.consequence.clause) {
+      expect(joint.startsWith(', '), `${joint}: a clause joint opens on its own comma`).toBe(true);
+    }
+    for (const [rel, bySeat] of Object.entries(DOSSIER_CONNECTIVES)) {
+      if (rel === 'consequence') continue;
+      for (const joint of bySeat.sentence) {
+        if (joint === '') continue;
+        expect(joint.endsWith(','), `${joint}: a sentence opener closes on its own comma`).toBe(true);
+        expect(/^[A-Z]/.test(joint), `${joint}: and opens on a capital`).toBe(true);
+      }
+    }
+    // The leaf's own header is what a reader meets: assert it says what the lists now are, and
+    // that the two former OWED lists are still UNLICENSED — a different thing from unwritten.
     const header = readFileSync(resolve(ROOT, 'src/data/dossierConnectives.generated.js'), 'utf8')
       .split('\nexport const')[0];
-    expect(header).toContain('consequence.clause 0 (floor 3, OWED)');
-    expect(header).toContain('tension.sentence 0 (floor 3, OWED)');
+    expect(header).toContain('consequence.clause 3 · tension.sentence 3');
+    expect(header).toContain('STILL UNLICENSED');
   });
 
   it('NORMS: a bit per FIRED pool, frozen, and absent where the corpus never fired', () => {
@@ -1622,8 +1650,13 @@ describe('SEAM car 4 — §7b, the connectives section, and its own refusals', (
   it('reads the shipped section into the shipped leaf, byte for byte', () => {
     const parsed = parseConnectives(readFileSync(STATE_DOC, 'utf8'));
     expect(parsed.lists).toEqual(DOSSIER_CONNECTIVES);
+    // ⭐ NO LIST IS OWED SINCE REWRITE car 8a-9: all four stand at their floor of three. `owed`
+    // is `joints.length < floor`, so an empty list here would mean a floor drafted and then
+    // lost, which is the one direction S12 refuses.
     expect(parsed.pins.filter((p) => p.owed).map((p) => `${p.relation}.${p.seat}`).sort())
-      .toEqual(['consequence.clause', 'tension.sentence']);
+      .toEqual([]);
+    expect(parsed.pins.map((p) => p.floor), 'and every floor is still three').toEqual([3, 3, 3, 3]);
+    expect(parsed.pins.map((p) => p.pin), 'each pin measures its own list').toEqual([3, 3, 3, 3]);
   });
 
   it('CLEAN CONTROL plus PLANTS: a fifth relation, an unreachable seat, and a missing pair', () => {

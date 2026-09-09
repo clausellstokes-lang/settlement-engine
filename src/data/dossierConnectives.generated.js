@@ -3,30 +3,47 @@
 // The comma and the word that join a modifier to its spine live HERE and nowhere else: never
 // inside a variant's own text (T-F1). FOUR REACHABLE (relation, seat) pairs; a fifth is a
 // projector error. The empty string IS the empty opener: adjacency, adding no claim.
-// PINNED LENGTHS: consequence.clause 0 (floor 3, OWED) · tension.sentence 0 (floor 3, OWED) · contrast.sentence 1 · addition.sentence 1.
+// PINNED LENGTHS: consequence.clause 3 · tension.sentence 3 · contrast.sentence 3 · addition.sentence 3.
 // A list length is a mechanism of the SHIFT REGISTER (docs/content/prose-shift-register.json):
 // a longer list changes the modulus of every joint drawn on it, so growth is a DECLARED row.
-// The two OWED lists stand empty because no engine relation row joins two fields a desk reads
-// (car 0 F1), so no consequence or tension joint is authorable at this tip; ARCH §12 car 7
-// authors them at the sitting.
+// ALL FOUR STAND AT THEIR FLOORS since REWRITE car 8a-9, as PUBLIC-COPY DRAFTS signed at the
+// walk (§13 row 27). They are DATA behind the shipped draw and move no rendered byte: no
+// shipped pool declares `role: modifier`, so no joint of any list is drawn on any town, and
+// growing a list from one to three re-rolls nothing because nothing was ever rolled.
+// THE TWO THAT WERE OWED ARE STILL UNLICENSED, which is a different thing from unwritten: no
+// engine relation row joins two fields a desk reads (car 0 F1), so `seatOf` answers
+// `not-consequence` on all 708 pools and the composer cannot reach either list. What the
+// floors buy is that the day a licence exists the writers are not also inventing the joinery.
 // Regenerate with `npm run gen:dossier-prose`; the gate runs it with --check.
 
 /** @type {Readonly<Record<string, object>>} */
 export const DOSSIER_CONNECTIVES = /* #__PURE__ */ Object.freeze({
   "consequence": {
-    "clause": []
+    "clause": [
+      ", so",
+      ", and so",
+      ", leaving"
+    ]
   },
   "tension": {
-    "sentence": []
+    "sentence": [
+      "Against that,",
+      "Even so,",
+      "At the same time,"
+    ]
   },
   "contrast": {
     "sentence": [
-      ""
+      "",
+      "Instead,",
+      "In its place,"
     ]
   },
   "addition": {
     "sentence": [
-      ""
+      "",
+      "Beside that,",
+      "Also,"
     ]
   }
 });

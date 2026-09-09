@@ -1121,9 +1121,14 @@ emitted.push({
     `PINNED LENGTHS: ${connectivePins}.`,
     'A list length is a mechanism of the SHIFT REGISTER (docs/content/prose-shift-register.json):',
     'a longer list changes the modulus of every joint drawn on it, so growth is a DECLARED row.',
-    'The two OWED lists stand empty because no engine relation row joins two fields a desk reads',
-    '(car 0 F1), so no consequence or tension joint is authorable at this tip; ARCH §12 car 7',
-    'authors them at the sitting.',
+    'ALL FOUR STAND AT THEIR FLOORS since REWRITE car 8a-9, as PUBLIC-COPY DRAFTS signed at the',
+    'walk (§13 row 27). They are DATA behind the shipped draw and move no rendered byte: no',
+    'shipped pool declares `role: modifier`, so no joint of any list is drawn on any town, and',
+    'growing a list from one to three re-rolls nothing because nothing was ever rolled.',
+    'THE TWO THAT WERE OWED ARE STILL UNLICENSED, which is a different thing from unwritten: no',
+    'engine relation row joins two fields a desk reads (car 0 F1), so `seatOf` answers',
+    '`not-consequence` on all 708 pools and the composer cannot reach either list. What the',
+    'floors buy is that the day a licence exists the writers are not also inventing the joinery.',
   ]),
   label: `${connectives.pins.length} (relation, seat) lists, `
     + `${connectives.pins.reduce((n, r) => n + r.pin, 0)} joints, `
