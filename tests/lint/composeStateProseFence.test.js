@@ -331,15 +331,59 @@ describe('the composer\'s locale-API ban (ARCH §4.1, P-F7)', () => {
   });
 });
 
+/**
+ * ⛔⛔ THE ONE CANDIDATES LEAF THAT MAY IMPORT, AND EXACTLY WHAT (TASTE car M-3).
+ *
+ * "IMPORT NOTHING" WAS TRUE WHILE EVERY LIST WAS EMPTY, and it stops being the right rule the
+ * moment a predicate is authored: a candidate function answers about the world, and the world
+ * is read by modules. ARCH §6.3 makes `compromisedSecurityInstitutions` the reading of
+ * DS-DEF-11's two `watch:` pools, and ARCH §5.3 gates that read on a MEASURED closure with a
+ * refusal above the 293,079 B precedent — measured at 6 files / 150,985 B (52 per cent) and
+ * ADMITTED, and re-measured on every run by
+ * `tests/lint/proseTasteCorruption.walker.test.js`. So the fence narrows rather than lifts: a
+ * leaf may import the modules NAMED HERE and nothing else, one row per leaf.
+ *
+ * ⚠ `./defenseStateProse.js` IS A CYCLE, DECLARED. The desk imports its candidates leaf and
+ * the leaf reads `measuredMonsterFamily` back from the desk. The alternative was a SECOND home
+ * for the family map — the drift class the estate refuses everywhere else — and both entry
+ * orders are driven in `proseTasteCandidates.walker.test.js`. It costs no bundle byte: the
+ * leaf is imported ONLY by that desk.
+ *
+ * ⛔ AND THE TABLE IS EMPTY AT THIS TIP, WHICH IS THE POINT (REWRITE car 8a-3). The taste's
+ * dock carries that row because it landed DS-DEF-11's candidate function; this car lands the
+ * taste's INSTRUMENTS and refuses its seven candidate functions to 8b with the desk sections
+ * they serve, so every one of the six leaves still imports nothing. The row is deliberately
+ * NOT parked here as a standing permission: the arm below asserts the licence is exact in BOTH
+ * directions, so a licence for an import nobody makes reds exactly as loudly as an import
+ * nobody licensed. 8b lands the row and the function it licenses in one commit, or neither.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const LICENSED_LEAF_IMPORTS = Object.freeze({});
+
 describe('the six candidates leaves are PURE HEADLESS LEAVES (ARCH §4.1, M-F7)', () => {
-  test('all six exist and import NOTHING', () => {
+  test('all six exist and import ONLY what is licensed by name', () => {
     const importing = CANDIDATE_LEAVES
-      .map((leaf) => `${leaf}: ${specifiersIn(read(leaf)).join(', ')}`)
-      .filter((row) => !row.endsWith(': '));
-    expect(importing, 'a candidates leaf that grew a dependency').toEqual([]);
+      .map((leaf) => ({ leaf, specifiers: specifiersIn(read(leaf)) }))
+      .filter(({ leaf, specifiers }) => specifiers
+        .some((spec) => !(LICENSED_LEAF_IMPORTS[leaf] || []).includes(spec)))
+      .map(({ leaf, specifiers }) => `${leaf}: ${specifiers.join(', ')}`);
+    expect(importing, 'a candidates leaf that grew an UNLICENSED dependency').toEqual([]);
     expect(CANDIDATE_LEAVES.length, 'one leaf per desk').toBe(6);
     for (const leaf of CANDIDATE_LEAVES) {
       expect(read(leaf).length, `${leaf} is empty`).toBeGreaterThan(200);
+    }
+    // ⭐ AND THE LICENCE IS EXACT IN BOTH DIRECTIONS: a leaf the licence does not name imports
+    // NOTHING, and a leaf it does name imports exactly what it names — no more, and no fewer,
+    // so a licence row for an import somebody removed reds here rather than standing as a dead
+    // permission. The count is DERIVED from the licence table so the two move together, and
+    // pinned as an integer beside it so a table that emptied itself cannot pass silently.
+    const pure = CANDIDATE_LEAVES.filter((leaf) => specifiersIn(read(leaf)).length === 0);
+    expect(pure.length, 'leaves that import nothing at all, derived from the licence table')
+      .toBe(CANDIDATE_LEAVES.length - Object.keys(LICENSED_LEAF_IMPORTS).length);
+    expect(pure.length, 'and the integer at this tip: no candidate function has landed yet').toBe(6);
+    for (const [leaf, licensed] of Object.entries(LICENSED_LEAF_IMPORTS)) {
+      expect(specifiersIn(read(leaf)).sort(), `${leaf} imports exactly its licence`)
+        .toEqual([...licensed].sort());
     }
   });
 

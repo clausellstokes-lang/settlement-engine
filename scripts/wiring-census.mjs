@@ -42,8 +42,8 @@ import { join, relative } from 'node:path';
 import { parse } from 'espree';
 
 import {
-  attachSets, censusSummary, customReachable, factBudget, factIndex, rootOf, tierRows,
-  TIERS, WIRING_STATUS, wiringCensus,
+  attachSets, censusSummary, customReachable, factBudget, factIndex, modifierRows, rootOf,
+  spineRows, tierRows, TIERS, WIRING_STATUS, wiringCensus,
 } from '../src/domain/prose/wiringCensus.js';
 import { holderCensus, sourceSummary } from '../src/domain/prose/holderTable.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS } from '../src/domain/display/stateProse/dossierMounts.js';
@@ -51,7 +51,8 @@ import { CONDITION_ARCHETYPE_TEMPLATES } from '../src/domain/activeConditions.js
 import { canonicalAffectedSystems } from '../src/domain/worldPulse/stressorsCore.js';
 import { CAUSE_SIGNAL } from '../src/domain/worldPulse/causeVocabulary.js';
 import { CUSTOM_CONTENT_MANIFEST } from '../src/domain/content/customContentManifest.js';
-import { loadStateLeaves, ROOT } from '../tests/helpers/dossierCorpus.js';
+import { loadStateLeaves, ROOT, STATE_ANNEX } from '../tests/helpers/dossierCorpus.js';
+import { readAnnexDeclarations } from './lib/dossier-annex-grammar.mjs';
 import {
   COMPOSERS, composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites,
   unrenderedFacts,
@@ -928,10 +929,26 @@ export async function buildCensus(options = {}) {
     // NO NARROWS LINE EXISTS AT THIS TIP. `reads === tests` on every one of the 708 rows;
     // the mechanism is proved by the walker's fixture rather than by a shipped row.
     narrows: new Map(),
+    // ⭐ THE ANNEX'S OWN DECLARATION, FOR MODIFIER POOLS ONLY (TASTE car M-2). A modifier's
+    // predicate lives in its desk's candidate leaf, so no rung of the ladder can recover its
+    // reading; without this the row carries no `tests` and the projector refuses the pool's
+    // own `READS:` line against an empty set. See CensusInput's `declared` note for why the
+    // reading is AUTHOR-DECLARED, what says so on the row (`rung: 'annex'`), and where the
+    // executable cross-check lives.
+    declared: readAnnexDeclarations(readFileSync(STATE_ANNEX, 'utf8')),
   });
   const held = [...new Set(unrenderedFacts().flatMap((r) => r.held))];
-  const summary = censusSummary(census.rows, held);
-  const tiers = tierRows({ rows: census.rows, held });
+  // ⭐⭐ EVERY CORPUS FIGURE BELOW IS COMPUTED OVER THE SPINE ROWS, AND THAT IS WHAT KEEPS
+  // EVERY PINNED INTEGER OF THIS REGISTER MEANING WHAT IT WAS PINNED TO MEAN (TASTE car M-2).
+  // A modifier row is a row of the census and is NOT a spine of its block: counting one as a
+  // spine makes DS-DEF-11 read nine spines where it has five, and the attach coverage the
+  // authoring wave is sized from would count a modifier as a site a modifier can attach to.
+  // The modifier rows are carried in `rows` and counted on their own line (`totals.modifierRows`
+  // and the `modifiers` section), so a reader adding the two gets `rows.length` exactly.
+  const spines = spineRows(census.rows);
+  const modifiers = modifierRows(census.rows);
+  const summary = censusSummary(spines, held);
+  const tiers = tierRows({ rows: spines, held });
   // ⭐ THE FOURTH TIER (SITTING §O.5). A per-tier silence the RATE corpus cannot explain by
   // the rung choosing another value class at that size is an AUTHORING WAVE row, and it
   // joins the tier table rather than living in a second list nobody reads. It arrives ONLY
@@ -948,21 +965,21 @@ export async function buildCensus(options = {}) {
       count: `fired on ${s.firedOverall} towns overall and on 0 at ${s.tier}; its rung said nothing there`,
     });
   }
-  const attach = attachSets(census.rows);
+  const attach = attachSets(spines);
   const facts = unrenderedFacts();
   /** @type {Map<string, string[]>} the facts each DESK holds, keyed as the mount registry names it */
   const deskFacts = new Map(facts.map((r) => [r.file.replace(/^.*\/(\w+)StateProse\.js$/, '$1'), r.held]));
-  const mountsPerFact = factMounts(census.rows, DOSSIER_MOUNTS, deskFacts);
-  const budget = factBudget(census.rows);
+  const mountsPerFact = factMounts(spines, DOSSIER_MOUNTS, deskFacts);
+  const budget = factBudget(spines);
   // THE SHADOW ROWS carry the FUNCTION-WIDE grain and nothing else differs, so the pair of
   // figure sets below differs by exactly the ruling and by nothing this script chose.
-  const shadow = census.rows.map((row) => ({ ...row, reads: row.fieldsRead }));
+  const shadow = spines.map((row) => ({ ...row, reads: row.fieldsRead }));
   const grains = {
-    branch: grainFigures(census.rows, DOSSIER_MOUNTS, deskFacts),
+    branch: grainFigures(spines, DOSSIER_MOUNTS, deskFacts),
     function: grainFigures(shadow, DOSSIER_MOUNTS, deskFacts),
   };
-  const custom = customReachable(census.rows, CUSTOM_CONTENT_MANIFEST.categories);
-  const sources = sourceSummary(census.rows);
+  const custom = customReachable(spines, CUSTOM_CONTENT_MANIFEST.categories);
+  const sources = sourceSummary(spines);
   const relations = relationTable();
   const rateRows = options.rates?.rows || [];
   const rateBy = new Map(rateRows.map((r) => [`${r.block} :: ${r.pool}`, r]));
@@ -980,7 +997,7 @@ export async function buildCensus(options = {}) {
   //
   // ⛔ STILL NOT A LEAF. The relations leaf is SEAM car 4's; this is the census RECORDING what
   // the sitting ratified, so the leaf has one source and the walker can convict it.
-  const readPathsForAlias = [...new Set(census.rows.flatMap((r) => r.reads || []))].sort();
+  const readPathsForAlias = [...new Set(spines.flatMap((r) => r.reads || []))].sort();
   const ratifiedAliasRows = aliasDraft({
     endpoints: [...new Set(relations.rows.flatMap((r) => [r.a, r.b]))],
     roots: [...new Set(readPathsForAlias.map((p) => rootOf(p)))],
@@ -998,7 +1015,7 @@ export async function buildCensus(options = {}) {
     },
     totals: {
       pools: summary.total,
-      blocks: new Set(census.rows.map((r) => r.block)).size,
+      blocks: new Set(spines.map((r) => r.block)).size,
       variants: summary.variants,
       resolved: summary.resolved,
       unresolved: summary.unresolved,
@@ -1020,29 +1037,48 @@ export async function buildCensus(options = {}) {
       tierSilences: (options.rates?.tierSilences || []).length,
       tierSilencesLawful: (options.rates?.tierSilences || []).filter((s) => s.verdict === 'LAWFUL').length,
       narrowsRefused: census.refusals.length,
-      narrowedRows: census.rows.filter((r) => r.narrowed).length,
-      covertRows: census.rows.filter((r) => r.covert).length,
-      objectClassed: census.rows.filter((r) => r.objectClass !== null).length,
-      mountedRows: census.rows.filter((r) => (r.sites || []).length > 0).length,
-      absent: absentTotals(census.rows),
+      narrowedRows: spines.filter((r) => r.narrowed).length,
+      covertRows: spines.filter((r) => r.covert).length,
+      objectClassed: spines.filter((r) => r.objectClass !== null).length,
+      mountedRows: spines.filter((r) => (r.sites || []).length > 0).length,
+      absent: absentTotals(spines),
       zeroK: budget.zeroK,
       kExecutable: budget.executable,
       kNotExecutable: budget.notExecutable,
-      branchGrainRows: census.rows.filter((r) => r.readsGrain === 'branch').length,
-      functionGrainRows: census.rows.filter((r) => r.readsGrain === 'function').length,
+      branchGrainRows: spines.filter((r) => r.readsGrain === 'branch').length,
+      functionGrainRows: spines.filter((r) => r.readsGrain === 'function').length,
       customReachableRows: custom.rows.length,
       relationRows: relations.rows.length,
-      relationRowsJoinable: relationJoin(relations.rows, census.rows).strictBoth,
+      relationRowsJoinable: relationJoin(relations.rows, spines).strictBoth,
       ratifiedAliases: ratifiedAliasRows.length,
-      tableRungRowsWithoutAbsence: census.rows.filter((r) => r.rung === 'table').length,
+      tableRungRowsWithoutAbsence: spines.filter((r) => r.rung === 'table').length,
       modifierEligibleFactsByTab: mountsPerFact.byTab,
       sourceLicensedRows: sources.rows.LICENSED,
       sourceOfficeRows: sources.rows.OFFICE,
       sourceUnresolvedRows: sources.rows['SOURCE-UNRESOLVED'],
       sourceTwoSourceRows: sources.twoSourceRows,
+      // ⭐ THE MODIFIER ROWS, COUNTED ON THEIR OWN LINE (TASTE car M-2). Every integer above
+      // is measured over the SPINE rows, so `pools + modifierRows === rows.length` exactly and
+      // nothing is hidden by the filter that keeps those integers stable.
+      modifierRows: modifiers.length,
     },
     rows: census.rows,
-    factIndex: factIndex(census.rows),
+    // ⭐ THE MODIFIER SECTION. A modifier pool is the estate's first non-spine, and it is
+    // carried here so a reader meets it once, whole, rather than by grepping `rows` for a
+    // `role`. `rung: 'annex'` on every one of them says the reading is AUTHOR-DECLARED and
+    // that the executable cross-check is the candidate leaf's own arm.
+    modifiers: {
+      ruling: 'ARCH §2.3, §2.5: a MODIFIER pool declares its ROLE and its one READS path in the'
+        + ' annex, and its selecting predicate lives in its desk\'s *StateProseCandidates.js'
+        + ' leaf. No rung of the wiring ladder can recover it, so the row is taken from the'
+        + ' annex declaration and says so (rung `annex`). It is NOT a spine of its block and no'
+        + ' spine-shaped figure of this register counts it.',
+      rows: modifiers.map((r) => ({
+        block: r.block, pool: r.pool, reads: r.reads, covert: r.covert,
+        objectClasses: r.objectClasses, source: r.source, variants: r.variants,
+      })),
+    },
+    factIndex: factIndex(spines),
     mountsPerFact,
     attachCoverage: attach.map(({ byFact: _byFact, ...rest }) => rest),
     attachByFact: attach,
@@ -1059,7 +1095,7 @@ export async function buildCensus(options = {}) {
       census: holderCensus(),
       summary: sources,
     },
-    relations: { ...relations, join: relationJoin(relations.rows, census.rows) },
+    relations: { ...relations, join: relationJoin(relations.rows, spines) },
     ratifiedAliases: {
       ruling: 'SITTING §P.2-27: the three `identifier` rows are RATIFIED as aliases; the four'
         + ' "would join" rows and every `generator-write` citation that is a comment, a prose'

@@ -487,7 +487,14 @@ export function callArguments(src, fn) {
  * @property {'RESOLVED'|'WIRING-UNRESOLVED'} status
  * @property {string} reason why, when UNRESOLVED
  * @property {string} keyFunction the function that produces the key, or ''
- * @property {'literal'|'template'|'table'|'none'} rung which rung of the ladder answered
+ * @property {'literal'|'template'|'table'|'annex'|'none'} rung which rung of the ladder answered
+ * @property {'spine'|'modifier'|'turn'} [role] the pool's declared ROLE (ARCH §2.3), absent on
+ *   every shipped pool because every shipped pool is a spine. A row whose role is `modifier`
+ *   is NOT a spine of its block, so every corpus figure derived over SPINES excludes it: the
+ *   attach sets, the fact budget, the mounts-per-fact table, the tiers and the summary all
+ *   read the spine rows alone, and the modifier rows are counted in their own line. That is
+ *   what keeps every pinned integer of this register meaning what it was pinned to mean on
+ *   the day the estate's first modifier pool is born.
  * @property {number} variants
  * @property {number} grammars distinct move orders across the pool's variants
  * ── ARCH car 0's columns, written by `decorateRows` in the census's second pass ──
@@ -527,6 +534,20 @@ export function callArguments(src, fn) {
  * @property {Map<string, NarrowsLine>} [narrows] the chair-ruled NARROWS lines, `block :: pool` keyed
  * @property {Set<string>} [produced] every leaf key some writer in the estate writes
  * @property {ReadonlyArray<{mount: string, tab: string, blockId: string}>} [mounts] the mount registry
+ * @property {Map<string, {role: string, reads: ReadonlyArray<string>}>} [declared] the ANNEX's
+ *   own typed declaration per `block :: pool` (ARCH §2.5's `ROLE:` and `READS:` lines). It
+ *   exists for ONE class of pool: a MODIFIER, whose selecting predicate lives in its desk's
+ *   `*StateProseCandidates.js` leaf and not in a pool-key function, so none of the ladder's
+ *   three rungs can ever answer for it and the row would read WIRING-UNRESOLVED with no
+ *   reading at all. The projector then refuses the pool's own `READS:` line against an empty
+ *   `tests`, which is a deadlock rather than a finding.
+ *
+ *   ⛔ THE READING IS AUTHOR-DECLARED AND THE ROW SAYS SO. `rung: 'annex'` is a FOURTH rung
+ *   and it is weaker than the other three by construction: nothing in this module verified
+ *   it against code. The executable cross-check is the candidate leaf's own arm (TASTE car
+ *   M-3), which asserts that every field a candidate function reads is a field its annex row
+ *   declares and no other. The veto shape is a full AST rung over the candidate leaves —
+ *   a second key-recovery ladder for a second call shape — priced on the receipt.
  */
 
 /**
@@ -578,7 +599,7 @@ export function wiringCensus(input) {
     const filled = [...(input.fill?.get(block) || [])].sort();
     for (const [pool, variants] of poolMap) {
       const row = censusRow({
-        block, pool, variants, filled, prepared, tables, unmounted,
+        block, pool, variants, filled, prepared, tables, unmounted, declared: input.declared,
       });
       // THE PER-CALL-SITE REFINEMENT, applied once the ladder has named the key function.
       const perSite = row.keyFunction ? input.fillByKeyFunction?.get(`${block} :: ${row.keyFunction}`) : undefined;
@@ -613,7 +634,8 @@ export function wiringCensus(input) {
  *   filled: string[],
  *   prepared: Map<string, {fn: KeyFunction, forms: KeyForm[], aliases: Map<string, string>,
  *     readAliases: Map<string, string>, args: Map<string, string[]>}>,
- *   tables: Map<string, KeyTable[]>, unmounted: Set<string>}} args
+ *   tables: Map<string, KeyTable[]>, unmounted: Set<string>,
+ *   declared?: Map<string, {role: string, reads: ReadonlyArray<string>}>}} args
  * @returns {CensusRow}
  */
 function censusRow(args) {
@@ -639,6 +661,29 @@ function censusRow(args) {
     variants: variants.length,
     grammars: orders.size,
   };
+  // ── RUNG 0 — THE ANNEX'S OWN DECLARATION, FOR A MODIFIER AND FOR NOTHING ELSE ──────
+  // A modifier's selecting predicate is its desk's candidate function, which returns no pool
+  // key as a literal and binds no template and sits in no key table, so rungs 1 to 3 answer
+  // WIRING-UNRESOLVED on it BY CONSTRUCTION. This rung is asked FIRST and only for a pool the
+  // caller hands over as `role: modifier`; a spine can never reach it, so no shipped row can
+  // move through it. The row carries `role` so every spine-shaped figure of this register can
+  // exclude it, and `rung: 'annex'` so a reader can see at a glance that nothing verified the
+  // reading against code (see the `declared` note on CensusInput).
+  const annex = args.declared instanceof Map ? args.declared.get(`${block} :: ${pool}`) : undefined;
+  if (annex && annex.role === 'modifier') {
+    const reads = [...new Set(annex.reads || [])].sort();
+    return {
+      ...base,
+      role: 'modifier',
+      predicate: [],
+      branchReads: reads,
+      fieldsRead: reads,
+      status: WIRING_STATUS.RESOLVED,
+      reason: '',
+      keyFunction: '',
+      rung: 'annex',
+    };
+  }
   // RUNG 1 and RUNG 2 — the key function's own forms.
   for (const {
     fn, forms, aliases, readAliases, args: callArgs,
@@ -985,6 +1030,38 @@ export function rootOf(field) {
   const parts = String(field).split('.');
   if ((parts[0] === 'readings' || parts[0] === 'settlement') && parts.length > 1) return `${parts[0]}.${parts[1]}`;
   return parts[0];
+}
+
+/**
+ * ⭐ THE SPINE ROWS — the population every corpus figure of this register is computed over.
+ *
+ * ⛔ WHY A FILTER AND NOT A NEW SET OF FIGURES (TASTE car M-2). Every integer this register
+ * publishes — RESOLVED 340, the tiers, the attach coverage, the fact budget, the
+ * mounts-per-fact table, the holder standings — was measured on a corpus in which every pool
+ * was a SPINE, because no modifier pool had ever existed. The day the first one is born those
+ * integers must keep meaning what they were pinned to mean, or every pin in the walker becomes
+ * a re-record nobody reads and the register stops being a ratchet. So a modifier row is a row
+ * of the census and is NOT a spine of its block: it is carried in `rows`, it is counted on its
+ * own line, and it is excluded from every spine-shaped derivation by this one function.
+ *
+ * The alternative measured worse and is recorded rather than argued: leaving modifier rows in
+ * `attachSets` makes DS-DEF-11 read NINE spines where it has five, and the attach coverage the
+ * authoring wave is sized from would count a modifier as a site a modifier can attach to.
+ * @param {ReadonlyArray<CensusRow>} rows
+ * @returns {CensusRow[]}
+ */
+export function spineRows(rows) {
+  return (rows || []).filter((row) => (row.role || 'spine') !== 'modifier');
+}
+
+/**
+ * The MODIFIER rows, the complement of `spineRows` — counted on their own line so that a
+ * reader adding the two gets `rows.length` and nothing is hidden by a filter.
+ * @param {ReadonlyArray<CensusRow>} rows
+ * @returns {CensusRow[]}
+ */
+export function modifierRows(rows) {
+  return (rows || []).filter((row) => (row.role || 'spine') === 'modifier');
 }
 
 /**

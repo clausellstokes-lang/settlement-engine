@@ -66,6 +66,8 @@ import { coupContenders, coupRiskLabel } from '../src/domain/rulingPowerCoup.js'
 import { deriveAllActiveConditions } from '../src/domain/activeConditions.js';
 import { faithPanelModel } from '../src/components/settlement/faithPanelModel.js';
 import { settlementBlocs } from '../src/domain/display/politicsRead.js';
+import { defenseStateProseCandidates } from '../src/domain/display/stateProse/defenseStateProseCandidates.js';
+import { generalStateProseCandidates } from '../src/domain/display/stateProse/generalStateProseCandidates.js';
 
 /** The four threat choices the configuration panel offers, `random_threat` included. */
 export const THREAT_AXIS = Object.freeze(['random_threat', 'heartland', 'frontier', 'plagued']);
@@ -216,31 +218,25 @@ export function economyDeskOptions(settlement, opts) {
 }
 
 /**
- * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
- * ONE SPELLING, and every caller of a composed town goes through it.
- *
- * ⛔ EXTRACTED FROM `composeTown` AT ARCH CAR 1 AND NOT RE-TYPED THERE. The RATE corpus reads
- * these returns for the (block, pool) keys that FIRED; the composed-prose manifest reads the
- * SAME returns for each rung's provenance and text, at two audiences. A second spelling of a
- * fourteen-argument reading bag is how one instrument comes to measure a different world than
- * its sibling while both report green — the taste sample's `{}`-readings hazard, one level up.
- * `composeTown` below is unchanged in behaviour: it walks what this returns.
+ * ⭐ THE GENERAL DESK'S READING BAG, ONE SPELLING (TASTE car M-3). `deskReturns` composes with
+ * it and the taste's candidate census calls the desk's candidate leaf with it; a second copy
+ * of a twenty-argument bag is exactly how one instrument comes to measure a different world
+ * than its sibling while both report green. Extracted verbatim from `deskReturns`, which now
+ * calls it.
  * @param {object} s the generated settlement
- * @param {{seed: string, audience: string}} opts
- * @param {(name: string, error: unknown) => void} [onThrow] called per desk that threw
- * @returns {Array<{desk: string, value: unknown}>} in call order
+ * @returns {Record<string, unknown>}
  */
-export function deskReturns(s, opts, onThrow) {
-  /** @type {Array<{desk: string, value: unknown}>} */
-  const out = [];
-  const desk = (name, fn) => {
-    try { out.push({ desk: name, value: fn() }); } catch (error) { if (onThrow) onThrow(name, error); }
-  };
+export function generalReadings(s) {
   const eco = s.economicState || {};
   const dp = s.defenseProfile || {};
   const via = s.economicViability || {};
-  desk('general', () => general.generalStateProse(s, {
+  return {
     scores: dp.scores,
+    // ⭐ THE ECONOMIC-UPKEEP GATE (TASTE car M-3). `generalDeskRead.js` hands it over, so this
+    // recipe hands it over: a corpus walk that composed the general desk WITHOUT it would
+    // measure a world where DS-GEN-3's `purse: short` can never fire, which is the {} readings
+    // hazard this whole function exists to close.
+    economicGates: dp.economicGates,
     prosperity: eco.prosperity,
     safetyLabel: eco.safetyProfile?.safetyLabel,
     viable: via.viable,
@@ -266,7 +262,31 @@ export function deskReturns(s, opts, onThrow) {
     activeChains: eco.activeChains,
     exploitation: s.resourceAnalysis?.exploitation,
     primaryImports: eco.primaryImports,
-  }, opts));
+  };
+}
+
+/**
+ * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
+ * ONE SPELLING, and every caller of a composed town goes through it.
+ *
+ * ⛔ EXTRACTED FROM `composeTown` AT ARCH CAR 1 AND NOT RE-TYPED THERE. The RATE corpus reads
+ * these returns for the (block, pool) keys that FIRED; the composed-prose manifest reads the
+ * SAME returns for each rung's provenance and text, at two audiences. A second spelling of a
+ * fourteen-argument reading bag is how one instrument comes to measure a different world than
+ * its sibling while both report green — the taste sample's `{}`-readings hazard, one level up.
+ * `composeTown` below is unchanged in behaviour: it walks what this returns.
+ * @param {object} s the generated settlement
+ * @param {{seed: string, audience: string}} opts
+ * @param {(name: string, error: unknown) => void} [onThrow] called per desk that threw
+ * @returns {Array<{desk: string, value: unknown}>} in call order
+ */
+export function deskReturns(s, opts, onThrow) {
+  /** @type {Array<{desk: string, value: unknown}>} */
+  const out = [];
+  const desk = (name, fn) => {
+    try { out.push({ desk: name, value: fn() }); } catch (error) { if (onThrow) onThrow(name, error); }
+  };
+  desk('general', () => general.generalStateProse(s, generalReadings(s), opts));
   desk('economy', () => economyDeskRead(s, economyDeskOptions(s, opts)));
   desk('power', () => {
     let contenders = null;
@@ -293,6 +313,35 @@ export function deskReturns(s, opts, onThrow) {
     const model = faithPanelModel(s);
     return warFaith.warFaithStateProse(s, { faith: model, hasPatron: !!model.hasEmbed }, opts);
   });
+  return out;
+}
+
+/**
+ * ⭐ THE MODIFIER PREDICATES THAT HELD ON THIS TOWN (TASTE car M-4; ARCH §4.3).
+ *
+ * ⛔ WHY THIS IS A SECOND READING AND NOT A LINE IN THE PROVENANCE WALK. The norm leaf's
+ * DEPARTURE bit is frozen "from the MODIFIER PREDICATE's own firing rate on the RATE corpus"
+ * (ARCH §4.3, P-F4) — a property of the FACT. The provenance walk sees what SEATED, which is
+ * the predicate ANDed with the attach set, the audience filter, the salience ranking and two
+ * budgets: on the taste's own pools the two readings differ by a factor of twenty
+ * (`purse: short` is a candidate on 510 towns of 768 and seats on 25). Freezing the bit from
+ * the seated rate would make a fact's notability depend on what the page had room for.
+ *
+ * The four desks with no authored modifier are not called at all, and the walker asserts that
+ * their leaves answer `[]` rather than this function assuming it.
+ * @param {object} s the generated settlement
+ * @returns {Array<{block: string, pool: string}>}
+ */
+export function modifierCandidates(s) {
+  /** @type {Array<{block: string, pool: string}>} */
+  const out = [];
+  const readings = generalReadings(s);
+  for (const block of ['DS-DEF-11', 'DS-DEF-2']) {
+    for (const row of defenseStateProseCandidates(block, s)) out.push({ block, pool: row.key });
+  }
+  for (const row of generalStateProseCandidates('DS-GEN-3', readings)) {
+    out.push({ block: 'DS-GEN-3', pool: row.key });
+  }
   return out;
 }
 
@@ -325,6 +374,11 @@ export function composeTown(spec, deskThrows) {
     threat: String(s.config?.monsterThreat),
     route: String(s.config?.tradeRouteAccess),
     fired,
+    // ⛔ CARRIED APART FROM `fired`, DELIBERATELY. `fired` is the SPINE that drew, and the
+    // pair distribution and the per-tier silence findings are computed over it; folding the
+    // modifier candidates in would move both of those figures for a reason that has nothing
+    // to do with either. The rate TABLE reads both; everything else reads `fired`.
+    modifiers: modifierCandidates(s),
     bare: bare.length,
   };
 }
@@ -366,7 +420,11 @@ export function rateTable(run) {
   /** @type {Map<string, {total: number, tiers: Map<string, number>}>} */
   const counts = new Map();
   for (const town of run.towns) {
-    for (const key of new Set(town.fired.map((f) => `${f.block} ${f.pool}`))) {
+    // THE SPINES THAT DREW *AND* THE MODIFIER PREDICATES THAT HELD (TASTE car M-4). A
+    // modifier has no spine to draw, so its rate is its predicate's; see `modifierCandidates`
+    // for why that is the reading the norm bit must be frozen from.
+    const keys = [...town.fired, ...(town.modifiers || [])];
+    for (const key of new Set(keys.map((f) => `${f.block} ${f.pool}`))) {
       let seat = counts.get(key);
       if (!seat) { seat = { total: 0, tiers: new Map() }; counts.set(key, seat); }
       seat.total += 1;

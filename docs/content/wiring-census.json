@@ -121,7 +121,8 @@
     "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
     "sourceUnresolvedRows": 591,
-    "sourceTwoSourceRows": 10
+    "sourceTwoSourceRows": 10,
+    "modifierRows": 0
   },
   "rows": [
     {
@@ -38768,6 +38769,10 @@
       }
     }
   ],
+  "modifiers": {
+    "ruling": "ARCH §2.3, §2.5: a MODIFIER pool declares its ROLE and its one READS path in the annex, and its selecting predicate lives in its desk's *StateProseCandidates.js leaf. No rung of the wiring ladder can recover it, so the row is taken from the annex declaration and says so (rung `annex`). It is NOT a spine of its block and no spine-shaped figure of this register counts it.",
+    "rows": []
+  },
   "factIndex": [
     {
       "fact": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",

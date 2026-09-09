@@ -110,6 +110,63 @@ export const GRAMMAR_TAG_RE = /^grammar:\s*(V[1-8])$/;
 /** A pool key that is a bare number (P-F12) — it collides with a variant row's own numbering. */
 export const NUMERIC_POOL_KEY_RE = /^\d+$/;
 
+/**
+ * ⭐ THE DECLARATIONS, READ OUT OF THE ANNEX BY THE CENSUS (TASTE car M-2).
+ *
+ * ⛔ WHY THE CENSUS NEEDS THEM AT ALL, AND WHY THIS IS NOT A SECOND PARSER. A MODIFIER pool's
+ * selecting predicate lives in its desk's `*StateProseCandidates.js` leaf, so no rung of the
+ * wiring census's ladder can recover its reading and the row would carry no `tests` — against
+ * which the projector then refuses the pool's own `READS:` line. The census therefore reads
+ * the annex's declaration for exactly that class of pool. This is a NARROW scan and not a
+ * second annex grammar: it finds the `**ROLE:**` lines and walks BACKWARD to the nearest bold
+ * label and the nearest block header, which is well defined because a declaration line can
+ * only ever follow the pool it declares. The projector's own parse stays the one that decides
+ * what a pool IS; the walker asserts the two agree on every pool that declares a role.
+ *
+ * @param {string} src the state annex
+ * @returns {Map<string, {block: string, pool: string, role: string, reads: string[],
+ *   relation: string, move: string, form: string, attach: string[]|null}>} `block :: pool` keyed
+ */
+export function readAnnexDeclarations(src) {
+  const lines = String(src).split('\n');
+  /** @type {Map<string, {block: string, pool: string, role: string, reads: string[],
+   *   relation: string, move: string, form: string, attach: string[]|null}>} */
+  const out = new Map();
+  let block = '';
+  let label = '';
+  /** @type {{block: string, pool: string, role: string, reads: string[], relation: string,
+   *   move: string, form: string, attach: string[]|null}|null} */
+  let open = null;
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    const header = line.match(/^###\s+(DS-[A-Z]+-\d+)\b/);
+    if (header) { block = header[1]; label = ''; open = null; continue; }
+    const bold = line.match(/^\*\*((?:(?!\*\*).)+)\*\*\s*$/);
+    if (bold && !/^[A-Z-]+[:.]$/.test(bold[1].trim())) {
+      label = bold[1].replace(/`/g, '').replace(/\s+/g, ' ').trim();
+      open = null;
+      continue;
+    }
+    if (!isDeclarationLine(line)) continue;
+    if (!block || !label) continue;
+    if (!open) {
+      open = {
+        block, pool: label, role: 'spine', reads: [], relation: '', move: '', form: '', attach: null,
+      };
+      out.set(`${block} :: ${label}`, open);
+    }
+    for (const decl of readDeclarations(line)) {
+      if (decl.tag === 'ROLE') open.role = decl.tokens[0] || 'spine';
+      if (decl.tag === 'READS') open.reads = decl.tokens;
+      if (decl.tag === 'RELATION') open.relation = decl.tokens[0] || '';
+      if (decl.tag === 'MOVE') open.move = decl.tokens[0] || '';
+      if (decl.tag === 'FORM') open.form = decl.tokens[0] || '';
+      if (decl.tag === 'ATTACH') open.attach = /^derived\b/.test(decl.body) ? null : decl.tokens;
+    }
+  }
+  return out;
+}
+
 /** @param {string} line @returns {boolean} */
 export function isDeclarationLine(line) {
   const m = String(line).match(/^\*\*([A-Z-]+):\*\*/);
@@ -229,6 +286,42 @@ export function turnKeyStanding(id) {
 }
 
 /**
+ * ⭐⭐ THE AUTHORING MARKER, AND THE ONE FLAG THAT ADMITS IT (TASTE car 6, ARCH §12 row 6).
+ *
+ * The taste's seven modifier pools land their TYPED LINES before a word of their prose exists,
+ * because the writers author against a LICENCE CARD that can only be printed once the pool has
+ * a census row, and the pool only has a census row once its annex declaration exists. The
+ * placeholder each pool carries in the meantime is one `[plain]` row whose whole text is this
+ * marker and the pool key.
+ *
+ * ⛔ AND THE SHIPPED BUILD REFUSES IT BY NAME. A placeholder that could ship is a placeholder
+ * that ships: the projector throws on the marker unless it was invoked with `--taste`, which
+ * nothing in the product's own gate, npm script or CI ever passes. The refusal names the pool
+ * and the marker, so the day someone runs the ordinary projector over a taste annex they are
+ * told exactly which rows are unwritten rather than being handed a leaf full of brackets.
+ */
+export const AUTHORING_MARKER = '\u27E6TO-AUTHOR\u27E7';
+
+/**
+ * Refuse a variant whose text carries the authoring marker, unless the taste flag is set.
+ * @param {string} label
+ * @param {ReadonlyArray<{text: string, index: number}>} variants
+ * @param {boolean} taste
+ * @param {(message: string) => void} [waive] called instead of throwing, under the flag
+ */
+export function assertNoAuthoringMarker(label, variants, taste, waive) {
+  for (const v of variants || []) {
+    if (!String(v.text).includes(AUTHORING_MARKER)) continue;
+    const message = `variant ${v.index} carries the authoring marker ${AUTHORING_MARKER}:`
+      + ' the pool\'s wording set has not been written. The marker is admitted ONLY under'
+      + ' `node scripts/generate-dossier-state-prose.mjs --taste`, which the shipped build'
+      + ' never passes (TASTE car 6, ARCH §12 row 6)';
+    if (!taste) refuse(label, message);
+    if (waive) waive(`${label}: ${message}`);
+  }
+}
+
+/**
  * Every cross-field refusal of §2.5's table for ONE pool, against the block it sits in and
  * the census's reading of it.
  *
@@ -242,12 +335,17 @@ export function turnKeyStanding(id) {
  * @param {(a: string, b: string) => Array<{relation: string, direction: string}>} input.edgesFrom
  * @param {Set<string>} input.blockPoolKeys
  * @param {Record<string, string>} input.declaredRoleByPool
+ * @param {boolean} [input.taste] the `--taste` flag: the dock-only relaxations of TASTE car 6
+ * @param {(message: string) => void} [input.waive] where a relaxed refusal is PRINTED instead
  */
 export function assertPoolDeclaration(input) {
   const {
     blockId, poolKey, variants, declared, censusOf, isCovert, edgesFrom,
     blockPoolKeys, declaredRoleByPool,
   } = input;
+  const taste = Boolean(input.taste);
+  /** @param {string} message */
+  const waive = (message) => { if (input.waive) input.waive(message); };
   const label = `DOSSIER_STATE ${blockId} :: ${poolKey}`;
   const role = declared.role || 'spine';
 
@@ -351,7 +449,7 @@ export function assertPoolDeclaration(input) {
   // ── ATTACH ───────────────────────────────────────────────────────────────────────
   if (Array.isArray(declared.attach) && (role === 'modifier' || role === 'turn')) {
     const field = Array.isArray(declared.reads) ? declared.reads[0] : '';
-    const ownClass = row ? row.objectClass : null;
+    const ownClasses = row ? (row.objectClasses || (row.objectClass ? [row.objectClass] : [])) : [];
     const classes = new Set();
     for (const spineKey of declared.attach) {
       if (!blockPoolKeys.has(spineKey)) {
@@ -359,7 +457,16 @@ export function assertPoolDeclaration(input) {
           + ' — a cross-block attach is wave two\'s reservoir act and names its site in the act (P-F9)');
       }
       const spineRow = censusOf(spineKey);
-      if (spineRow && field && spineRow.tests.includes(field)) {
+      // ⛔ THE BRANCH GRAIN, NOT THE FUNCTION-WIDE ONE (TASTE car M-2). §2.5's own refusal row
+      // reads "a spine whose BRANCH `tests` the modifier's field", and SITTING §O.1 ruled the
+      // branch grain for exactly this question; `censusOf().tests` is the FUNCTION-WIDE union
+      // and `.reads` is the selecting branch's own. Read against the function-wide set,
+      // `wallRationalePoolKey`'s WALLED-STRAINED "tests" `config.monsterThreat` — a field its
+      // branch returns before ever reaching — and the whole DS-DEF-11 country modifier of ARCH
+      // §6.3 is refused at a site the architecture specifies. Zero shipped rows move: no
+      // shipped pool declares `role: modifier`, so this guard has never run on the corpus.
+      const spineTests = spineRow ? (spineRow.reads || spineRow.tests) : [];
+      if (spineRow && field && spineTests.includes(field)) {
         refuse(label, `ATTACH \`${spineKey}\`, whose selecting branch already tests \`${field}\``
           + ' — a modifier may not restate or negate the fact its spine was chosen by (§4.6)');
       }
@@ -368,10 +475,32 @@ export function assertPoolDeclaration(input) {
           + ' every row of that list shares one salience key, so the rank is a total tie.'
           + ' Modifiers are refused there until Shift 2 lands the instance key (P-F7)');
       }
-      if (spineRow && ownClass && spineRow.objectClass === ownClass) {
-        refuse(label, `ATTACH \`${spineKey}\`: the spine's key and the modifier's key name the`
-          + ` same civic object class \`${ownClass}\`, which is a restatement the field guard`
-          + ' cannot see (T-F12)');
+      // ⛔ THE REFUSAL READS THE SETS, NOT THE FIRST CLASS (TASTE car M-2, closing the
+      // projector half of the MEASURE fold's cure 9). The census emits `objectClasses` because
+      // a key can name two civic objects and first-wins hid it; the refusal here still compared
+      // `objectClass` to `objectClass`, so `granary AND hospital` beside a `care` modifier was
+      // admitted on the projector side exactly as the fold said it must not be. Two keys
+      // collide when their class SETS intersect.
+      const spineClasses = spineRow ? (spineRow.objectClasses || (spineRow.objectClass ? [spineRow.objectClass] : [])) : [];
+      const shared = ownClasses.filter((k) => spineClasses.includes(k));
+      if (shared.length > 0) {
+        const message = `ATTACH \`${spineKey}\`: the spine's key and the modifier's key name the`
+          + ` same civic object class \`${shared.join('` `')}\`, which is a restatement the field`
+          + ' guard cannot see (T-F12)';
+        // ⛔⛔ WAIVED UNDER `--taste`, PRINTED, AND NEVER SILENT. The taste measured that this
+        // key-string proxy refuses FOUR of the seven attach sites ARCH §6.3-§6.5 specifies, and
+        // that three of them collide on a POLARITY MARKER the sibling rule T-F3 requires the
+        // key to carry (`country: pressed (walled)` shares `wall` with every DS-DEF-11 spine)
+        // while the fourth collides on the building/stock conflation inside the `store` class
+        // (`stores: short` beside `granary AND hospital`, the very site §8.3's own worked card
+        // names). Renaming the pools to dodge the proxy is the failure the guard exists to
+        // catch, and re-cutting the closed class list from a never-landed dock would move
+        // shipped rows on a rule the chair froze. So the taste WAIVES it behind the same flag
+        // that admits the authoring marker, prints every waiver with the class it collided on,
+        // and hands the sitting the measurement. The real guard on the real text — arm A1 over
+        // `typedFactsOf` — runs on every composed unit in the taste harness regardless.
+        if (!taste) refuse(label, message);
+        waive(`${label}: ${message}`);
       }
       if (spineRow) for (const cls of spineRow.objectClasses || []) classes.add(cls);
     }
