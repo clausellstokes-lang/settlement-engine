@@ -1,0 +1,13 @@
+PROSE landing fixes: two more structural separators go back, and the one wizard-news signature is re-signed at its address
+
+The census-totals run refused on reds the sealed car's cure had reached: (1) `stateSlicers.js` composes a
+settlement-namespaced chip title `<Town> — <Section>` that the V-26a pin (`interviewCampaignScope.test.js`) reads by
+shape — a separator, not prose: restored; (2) `governanceNarrative.test.js:72` pinned the cured colon form of a stability
+band the fix car had already restored in the source: the pin follows the source; (3) `narrativeTempo.js:500`'s wizard-news
+row keeps its address and moves only its signature (6498a01695d46731 -> eeced77054e13a05), because the cure re-punctuated
+text inside the entry literal the signature hashes — the walker's own EXACT RE-SIGN precedent. Proofs: the two suites
+13/13 and the walker green, under the gate mutex.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

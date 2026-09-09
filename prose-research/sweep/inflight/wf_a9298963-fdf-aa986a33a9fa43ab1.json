@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i274-288",
+ "lines": 45,
+ "firstTs": "2026-09-06T18:13:04.246Z",
+ "lastTs": "2026-09-06T18:15:50.261Z",
+ "tools": {
+  "Read": 2,
+  "ToolSearch": 1,
+  "Bash": 5,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "m states a clean split), 285 (the guide's exception is \"an informal context,\" broader than the claim's \"conversational web writing\"), and 274 (the second limb sits on p.7, not the cited p.6) — but in each case the claim is supported or stricter than the source, not unsupported, so none is a PARTIAL.",
+ "run": "wf_a9298963-fdf",
+ "agent": "aa986a33a9fa43ab1",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-aa986a33a9fa43ab1.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i274-288.json",
+  "exists": true
+ }
+}

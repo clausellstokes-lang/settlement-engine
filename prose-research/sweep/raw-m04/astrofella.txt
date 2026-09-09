@@ -1,0 +1,385 @@
+
+ George RR Martin’s prose style – Affixes, compound and combination words | Books & Boots 
+ About 
+ Books & Boots Reflections on books and art 
+ George RR Martin’s prose style – Affixes, compound and combination words 
+ Abstract 
+ George R.R. Martin’s phenomenally successful series of sword-and-dragons fantasy novels, A Song of Ice and Fire , is distinguished not only by its pseudo-medieval setting, subject matter, characterisation and plot lines, but by a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French or other languages, or foreign loan words, or the ‘neo-classical’ coinages which entered the English language from the 17th century onwards. 
+ Instead, his style shows a high frequency of words of Anglo-Saxon origin, a tendency which is particularly conspicuous in his use of compound and combination words. 
+ First, I shall define the types of compound word available in English; then examine how Martin uses them, highlighting his reliance almost exclusively on forms with Anglo-Saxon roots; then conclude that the lexical choices he makes are as important as the subject matter of the stories in creating the novels’ brutal, archaic worldview. 
+ Introduction 
+ English, being a flexible, almost uninflected language, has instead of inflexion a large number of ways of combining words or particles to change meanings. Chief among these is the affix , using phonemes added to the root or stem of a word to change its meaning. Added before a word affixes are prefixes, added after a word they are suffixes (these are the commonest two types of affix in English though Wikipedia has a beguiling table of ten types of positional categories of affix ). 
+ Affixes can be derivational or inflectional . Inflectional affixes changing the grammatical function of an existing word without changing the root meaning e.g. adding an -s at the end of a verb makes it third person singular, or to a noun makes it a plural. Derivational means the combination creates a completely new word e.g. ‘speech’ + the suffix ‘-less’ = ‘speechless’, a new word. 
+ 1. The prefix 
+ A prefix is an affix which is placed before the root of a word. In the study of languages a prefix is also called a preformative because it alters the form of the words to which it is affixed. Being such a wonderfully mongrel language, English takes prefixes from many other languages, just a few examples (This list of prefixes and the list of suffixes below are from an excellent article by Dr Lim Chin Lam in The Star of Malaysia newspaper) [1]: 
+ English: be-, in-, out-, over-, under-, un- 
+ Latin: ab-, ad-, inter-, intra-, post-, pre-, re-, sub-, super- 
+ Greek: a-, ana-, dia-, endo-, exo-, epi-, hyper-, hypo- 
+ German: über-* 
+ In English, all prefixes are derivational i.e. adding them to a stem creates a new word. Examples of derivatives formed with some of the prefixes listed above are: incoming, underachieve, interrelate, relay, subhuman, dialogue, epilogue, überbabe. 
+ Wikipedia has an impressive list of some 1,060 English prefixes . (It also has an entry for a completely separate category, a table of Number prefixes , listing over 80 examples.) (It is significant for my argument that Wikipedia divides the prefixes into two categories, native and neoclassical , following the work of the Hans Marchand .) 
+ 2. The suffix 
+ Suffixes are affixes positioned at the ending of words or stems. Like prefixes, suffixes can be derivative (added to the stem to make a new word) but unlike prefixes, suffixes can also be inflectional (adding -s to make a plural or -ed to make a past tense). English incorporates suffixes from multiple sources, for example: 
+ English: -ful, -let, -some 
+ Latin: -able, -ate, -ion, -ous, -ure 
+ Greek: -ic, -ist, -osis 
+ French: -enne, –eur, -euse, -ise, -trix 
+ Examples of derivatives formed with the suffixes listed above would include: helpful, handsome, endurable, resonate, institution, carnivorous, plastic, metamorphosis, executrix. 
+ Wikipedia has a list of some 609 English suffixes . 
+ 3. Combining words [2] 
+ Then there are certain words or stems of words which, like prefixes and suffixes, can be used in combination with other words or word-stems but have this big difference from affixes – they can also be used in combination with other affixes or among themselves . These are called combining forms . A combining form may join with: 
+ an independent word (mini- + skirt) 
+ an affix (cephal- + -ic) 
+ or another combining form (photo- + -graphy) 
+ Combining forms are thus distinct from affixes, which can be added to either a free word or a combining form but not solely to another affix. Combining forms are overwhelmingly of Latin or Greek origin and were imported into the language from the 16th century onwards as scholars revived ancient learning and revelled in the power of neo-classical morphemes to create huge numbers of (often technical) new terms. Using Marchand’s term we can categorise all the Latin and Greek formations as neoclassical. 
+ Latin-derived 
+ word beginnings: bi-, demi-, mini-, multi-, oleo-, omni-, petro-, quadri-, radio-, semi- 
+ word endings: -colour, -form, -mony, -ped, -vorous 
+ Greek-derived 
+ word beginnings: amphi-, arch-, astro-, dys-, eu-, hemi-, hetero-, homo-, litho-, macro-, micro- oligo-, poly- 
+ word endings: –arch, -cracy, -crat, -graph, –logue, –logy, -meter, -nomy, –path, -phagous, -phile, -phobe 
+ Examples of combining forms doing what affixes can’t do i.e. combining with another combining form, would be: bi+ped, astro+nomy, micro+scopy, mono+logue, oli+garch. The result feels and sounds very technical , scientific, academic. 
+ There are three types of combining forms : 
+ Forms borrowed from Greek or Latin which are derivatives of independent nouns, adjectives, or verbs in those languages. These combining forms often replace the corresponding English word when used in the formation of learned/scientific/jargon coinages (eg cardio- to replace ‘heart’, -phile to replace ‘lover’) and generally appear only in combination with other combining forms of Greek or Latin origin (we say bibliophile not bookphile, to maintain the consistency of the learned style, the technical register of the word ). 
+ A form extracted from an existing Greek or Latin free word and used as a bound form , typically maintaining the meaning of the free word or some facet of it. E.g. heli-, mini-, para-, -aholic, -gate, -orama. 
+ The compounding form of a free-standing English word. Such a combining form usually has only a single, restricted sense of the free word (and may differ from the word phonetically). E.g. -proof, -wide, -worthy, -land, -man. 
+ Complicated though the analysis of combining forms can become, the basic idea is that they are a) a more flexible type of affix b) overwhelmingly Greek or Latin in origin, and c) that they create almost a parallel version of English , for use among the learned professions, medicine, law, academia et al. 
+ A sociological interpretation might be that they serve to exclude the uninitiated from specialist areas of knowledge and are designed to maintain privilege among a learnèd élite. 
+ 4. Compound words 
+ English (like its parent German) allows its users to combine freestanding words to make new ones, and English is very rich in these compound words . Compound words, in order for the results to be manageable, tend to combine two short, often monosyllabic, words. Typical English compound words would be: 
+ afternoon, birthmark, blackberry, heartbeat, rainbow, shopkeeper, seaweed, sunshine. 
+ Having defined the terms ‘prefix’, ‘suffix’, ‘combining form’ and ‘compound word’, it’s time to explore the way they are deployed by George R.R. Martin in his Song of Fire and Ice series of novels. 
+ GRRM’s PRACTICE 
+ 1. George R.R. Martin’s use of prefixes 
+ Consider the common Latin or Greek prefixes listed by Dr Lam [note 2]: 
+ Latin: ab-, ad-, inter-, intra-, post-, pre-, re-, sub-, super- 
+ Greek: a-, ana-, dia-, endo-, exo-, epi-, hyper-, hypo- 
+ Almost none of these are found in Martin’s work. There are hardly if any words starting ab, sub, super, post… Their absence speaks volumes. 
+ There are obviously exceptions. ‘Re’ is common in words like return or reply, recite, restore. In Feast For Crows I came across the word ‘intermittent’ which stood out like a sore thumb. Enemies have to ‘submit’. In chapters about the High Septon and his religious court, official-sounding words like ‘fornication’ and ‘adultery’ are freely used. But in hundreds of other pages there are only a handful of examples of neo-classical prefixes. 
+ Instead, Martin uses almost exclusively English (i.e. Anglo-Saxon) prefixes. Common examples are ‘un-‘ and ‘be-‘ forms. 
+ bedraggled, bedeck, betray, behead, behest, beneath 
+ uncertain, uneasy, unlucky, unmoved, unruly, unship, untaken 
+ And sometimes Martin goes to the other extreme from using neoclassical prefixes, delving beyond common speech into archaic native forms: for example, he conspicuously deploys the archaic prefix ‘a-‘ to denote position: atop, abed, ahorse (the form survives in a handful of English useages such as astern, adrift). 
+ 2. George R.R. Martin’s use of s uffixes 
+ Of the six hundred or so available English suffixes, Martin overwhelmingly uses forms which convey a deep sense of their Anglo-Saxon provenance. To readers with a feel for the language these usages convey a richness and historical depth to the individual words and the surrounding contexts. Notably common in his lexicon are: 
+ -craft (from Old English – cræft ‘art or skill in’) type of skill e.g. statecraft, warcraft, witchcraft. 
+ -dom (from the Old English -dōm meaning ‘state, condition, power, dominion, authority, property, right, office, quality’) e.g. kingdom. 
+ -en (from the Old English -en meaning ‘made of, consisting of, having the qualities of’) applied to nouns to form adjectives: oak > oaken, ash > ashen, earth > earthen, wood > wooden, frozen, broken. 
+ -ful (from the Old English, to form adjectives from nouns, adjectives implying a thorough and certain possession of the quality of that noun) e.g. hurtful, sorrowful, bashful, beautiful, mournful. 
+ – hood (from the Old English -hād ) a) the condition of being the thing the suffix is attached to e.g. childhood, parenthood, manhood b) a group sharing a condition or state e.g. knighthood, priesthood, brotherhood. 
+ -less (from the Old English -lēas , from lēas meaning ‘devoid of’) lacking the quality of the stem e.g. breathless, loveless, helpless. 
+ -ling (from Old English -ling meaning either a) ‘a younger, smaller or inferior version of what is denoted by the original noun’, or b) the derived sense indicating possession of or connection with a quality) eg duckling, wildling (cf Tolkien’s use of ‘halfling’ to describe the hobbits). 
+ -ly (from the Old English -līċ – ‘like’) converts a noun into an adjective (sick > sickly). 
+ -ly (from the Old English -līċe ) converts an adjective into an adverb (quick > quickly). 
+ -ness (from the Old English -nis, -nes, ‘-ness’) a) this is added to adjectives to form the noun of the quality the original adjective describes e.g. calmness, richness, kindness, darkness, coldness, fairness, wickedness, thickness. 
+ -ship (from the Old English -sciepe , ‘state’) a property or state of being the thing to which the suffix is attached e.g. kingship, leadership, horsemanship, lordship, fellowship. 
+ -some (from the Old English -sum, ‘ -some, same as’) characterized by some specific condition or quality e.g. quarrelsome, handsome, fearsome, toothsome. 
+ -ward(s) (from the Old English -weard, -weardes) a) forming adverbs denoting course or direction – northwards, backwards b) forming adjectives, as in ‘a backward look’. 
+ -lit moonlit, sunlit 
+ -light dawnlight, sunlight, moonlight, candlelight, lamplight. 
+ 3. George R.R. Martin’s use of c ombining forms 
+ Insofar as combining forms are generally Greek and Latin in origin they are rare in GRRM. Maester Colemon says ‘intercession’ on page 691 of A Feast for Crows but then, he is a maester, a learnèd man, and so it is in character. ‘Intermittent’ is a standout usage earlier in the novel. 
+ ‘Fornication’ is used in the chapter where princess Margaery is accused by the religious order of the septons: again it is deployed to convey technocratic and legalistic mindset of medieval religious inquisitors. In the final chapter of Feast for Crows , which is about the educated maesters of Oldtown, there are a number of Latinate words like ‘penetrate’, ‘complement’, ‘complaint’. 
+ But against the overwhelming backdrop of Saxon vocabulary which characterises the novels, the rare use of technocratic neoclassical combining words is very conspicuous, and emphasises Martin’s craft in deploying them carefully to distinguish scenes where he wants to accentuate the legalistic or learnèd character of the speaker or context of the setting. 
+ Their presence in selected settings highlights the absence of the thousands of neoclassical combining words which are in common usage in modern English, but carefully omitted from these texts. 
+ 4. George R.R. Martin’s use of compound words 
+ English (like its parent German) allows its users to combine words to make new ones. The following compound words are found in the fourth Ice and Fire novel, A Feast For Crows . Given the subject matter of the novel, it is no surprise that they show an overwhelming tendency to use Anglo-Saxon or archaic source words to form compound words which describe mostly medieval, warlike or feudal concepts: 
+ aftertaste, applecake, barefoot, bathhouse, battleground, bearksin, bedchamber, bedwarmer, beeswax, birthright, bloodshed, breastplate, chainmail, cobblestone, collarbone, cookpot, cupbearer, deadfall, dockside, doorstep, doorway, downfall, drawbridge, driftwood, evenfall, facedown, featherbed, figurehead, fingertip, fingernail, firepit, fishpond, fishwife, flagship, foodstuff, footsore, footstep, freedman, freedwoman, gatehouse, gemstone, grandson, greybeard, greyhound, guardsman, halfpenny, hallway, handmaiden, hardness, headlong, helpmate, henceforth, highborn, hilltop, hindquarters, hoarfrost, honeycomb, household, huntsman, kettledrum, lakeshore, lambswool, lifetime, limestone, longship, longsword, lowborn, lovesick, lukewarm, maidenhead, midday, moonstone, nakedness, oarsman, oathbreaker, offshoot, outlaw, overnight, oxcart, piebald, pinecone, raindrop, roughspun, saddlebag, sealskin, selfsame, sheepskin, sinkhole, snowdrift, stableboy, strawberry, stronghold, sunset, sweetbread, swordbelt, threadbare, turnpike, twoscore, underfoot, warhammer, waterline, waycastle, whalebone, wheelhouse, whetstone, whirlpool, whitecap, whitewash, wildfire, windburnt. 
+ Some of the examples above are more obscure than others: there is a spectrum from the everyday (barefoot, rainbow, chestnut) to the rarely used (highborn, firepit, cookpot) to the probaby-made-up (waycastle, windburnt, evenfall). But you get my point: there are lots of them. 
+ The technique of word combination offers plentiful opportunities to invent new words for authors who have are dealing with a context and have a prose style which can accommodate them; and Martin uses this facility to coin scores of wonderful and evocative neologisms: 
+ archmaester, bannermen (minor families loyal to a great lord), beastling, cookfire, crannogman , doeskin, dragonglass, dreamwine, firewine, foeman, godswood (holy wood where the magic weir trees grow), godsworn, greenseer (wise man of the Children of the Forest), greensick (seasick), greensight (second sight of the greenseers), hardbread, innkeep, ironborn (inhabitant of the western Iron isles), lichyard, kingsmoot (meeting to decide a king), mansmell, pricklefish, ravencraft, riverlands, sailcloth, sellsword (mercenary), sellsail, shadowcat , shavepate, skinchanger (who can change into an animal), smallclothes, smallfolk (ordinary people) sourleaf, sterncastle, stoneborn, stormland, strongwine, stumbletongue, sweetling (term of endearment), sweetmilk, undertunic, wallwalk, waterskin, waterhelm, weirwood (the holy trees), westermen, woodharp, 
+ Some are variations on ideas which nearly but don’t quite exist in our world (firewine), but many go beyond our world to describe new ideas and new things which he has invented for the novels, from the relatively mundane (riverlands, westermen, smallclothes) to the evocative (ironborn, sellsword, ravencraft), to the genuinely visionary and inspired (weirwood, greensight, skinchanger). 
+ Martin’s use of compound words is just one of the verbal techniques he uses to reinforce the otherness of his fantasy world. The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld, the greater the sense of the richness and completeness of his fantasy world. 
+ Westeros not only has its own geography and history, its own peoples and religions, it also has its own form of English which deploys multiple techniques to create an integrated sense of its otherness and unity. 
+ Some examples 
+ I’ve chosen the examples above to show the overwhelming Saxon character of GRRM’s prose, consisting as they do, of short, mostly one-syllable words of old English origin. The Anglo-Saxon affixes and combination words don’t dominate to the exclusion of more regular forms, but they are there on every page, playing their part. 
+ And they feel that much more ubiquitous because there are so few words sourced from Latin, Greek or French, few if any neoclassical affixes, no foreign combining forms. The result is to make his prose feel archaic. 
+ The white wolf raced through a black wood, beneath a pale cliff as tall as the sky. The moon ran with him, slipping through a tangle of bare branches overhead , across the star ry sky. (D&D, p.52) 
+ Just ahead, the elk wove between the snowdrifts with his head down, his huge rack of antlers crusted with ice. The ranger sat a stride his broad back, grim and silent. Coldhands was the name that the fat boy Sam had given him, for though the ranger’s face was pale, his hands were black and hard as iron, and cold as iron too. The rest of him was wrapped in layers of wool and boiled leather and ringmail , his features shadowed by his hooded cloak and a black wool en scarf about the lower half of his face. (D&D, p.69) 
+ The drumming seemed to be coming from the wolfswood beyond the Hunter’s Gate. They are just outside the walls . Theon made his way along the wallwalk, one more man amongst a score doing the same. ( After The Feast , p.91) 
+ Other tidings were of greater interest. Robett Glover was in the city and had been trying to raise men, with little success. Lord Manderly had turned a deaf ear to his pleas. White Harbour was weary of war, he was reported to have said. That was bad. The Ryswells and the Dustins had surprised the ironmen on the Fever River and put their longships to the torch. That was worse. (D&D, p.230) 
+ In these examples, there are words of Latin or French origin (city, success, report, surprise) but they are far outnumbered by Old English words – deliberately archaic words (tidings, weary, plea), short stocky Saxon words (raise, deaf, ear, war, bad), Martin’s distinctive Saxon compound words (ironmen, longships) and archaic/poetic phraseology (‘put x to the torch’ ). 
+ Neoclassical words are there – but outnumbered in feel, rhythm and pattern by the dominant native forms . 
+ CONCLUSION 
+ Systematically, George R.R. Martin selects from the enormous available range of English prefix- and suffix-words, combining words and compound words, only ones of pronounced, strong and rich Anglo-Saxon origin. 
+ Latinate words or affixes, present to some extent in most English prose, are mostly excluded or only deployed for effect in the context of legal or religious or courtly matters. In the 770 pages of Feast of Crows I noticed only one really Latinate word, ‘intermediate’. 
+ By contrast Anglo-Saxon words, adjectives, adverbs and compound words dominate the prose, perfectly matching or creating a perfect vehicle for, a story so dominated by its medieval, archaic subject matter. 
+ Told to write a piece of fiction set in medieval times, most of us would follow the style established by Sir Walter Scott and popularised by Hollywood and get our knights and squires to dot their speech with cod-medievalisms like ‘prithee’ and ‘Zounds’ and ‘my liege’, and sometimes Martin does drop into this hokey phraseology. 
+ But my intention has been to show that the strong sense the reader gets from Martin’s novels of a fully-imagined, alternative, medieval fantasy world derives not from a handful of obvious stock phrases, but from Martin’s deep and systematic deployment of a carefully filtered and defined, rich, evocative and highly pleasurable, Anglo-Saxon vocabulary. 
+ References 
+ [1] This list of prefixes and the list of suffixes below are from an excellent article by Dr Lim Chin Lam in The Star of Malaysia. 
+ [2] The section on combining forms fuses thoughts from Dr Lam with the article on the subject in Dictionary.com 
+ [3] George RR Martin interview in The Atlantic magazine 
+ Throughout there is heavy reliance on the relevant articles on Wikipedia. 
+ Checking of word derivation was done with the Online Etymological Dictionary 
+ The application of these definitions to the work of George R.R. Martin is entirely my own. 
+ Related reviews 
+ 2000 A Storm of Swords 1: Steel and Snow by George R. R. Martin 
+2000 A Storm of Swords 2: Blood and Gold by George R. R. Martin 
+2005 A Feast for Crows by George R. R. Martin 
+2011 A Dance With Dragons 1: Dreams and Dust by George R.R. Martin 
+2011 A Dance With Dragons 2: After The Feast by George R.R. Martin 
+— George R.R. Martin’s prose style: Affixes, compound and combination words 
+— Sexual violence in the fiction of George R.R. Martin 
+ Rate this: Share this: 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Share on X (Opens in new window) 
+ X 
+ Share on Tumblr (Opens in new window) 
+ Tumblr 
+ Share on Pinterest (Opens in new window) 
+ Pinterest 
+ Share on WhatsApp (Opens in new window) 
+ WhatsApp 
+ Email a link to a friend (Opens in new window) 
+ Email 
+ More 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+ Like Loading... 
+ Related 
+ 2 Comments 
+ by Simon on March 8, 2013 
+ • Permalink 
+ Posted in Books , English literature , Fantasy 
+ Tagged A Clash of Kings , A Dance with Dragons , A Feast for Crows , A Game of Thrones , A Storm of Swords , affix , combination word , criticism , literary criticism , native , neoclassical , prefix , suffix 
+ Posted by Simon on March 8, 2013 
+ https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/ 
+ Previous Post Steve Reich: Radio Rewrite @ the Royal Festival Hall Next Post Lichtenstein: A Restrospective @ Tate Modern 
+ Leave a comment 
+ 2 Comments 
+ rainmaninjapan / 
+ December 9, 2015 
+ Not sure how accurate this is, as I read the books over a year ago (and subsequently forgot everything that wasn’t annoying about the prose). 
+ Just writing to say, this is quality content. 
+ Reply 
+ Some notes on George RR Martin’s prose style | Books & Boots 
+ Leave a comment Cancel reply 
+ Δ 
+ This site uses Akismet to reduce spam. Learn how your comment data is processed. 
+ Search for: 
+ Follow 
+ Enter your email address to follow this blog and receive notifications of new posts by email. 
+ Email Address: 
+ Follow Books and Boots 
+ Join 743 other subscribers 
+ Topics Africa 
+ America 
+ ancient Rome 
+ art 
+ book 
+ British Empire 
+ British Museum 
+ China 
+ Christianity 
+ comedy 
+ Communism 
+ drama 
+ Egypt 
+ English literature 
+ exhibition 
+ Feminism 
+ fiction 
+ First World War 
+ France 
+ Freud 
+ Germany 
+ Great War 
+ H.G. Wells 
+ history 
+ Hitler 
+ humour 
+ imperialism 
+ India 
+ installation 
+ Ireland 
+ Italy 
+ James Joyce 
+ Japan 
+ Julius Caesar 
+ literary criticism 
+ Literature 
+ London 
+ love 
+ murder 
+ narrative 
+ Nazis 
+ New York 
+ novel 
+ Oscar Wilde 
+ Painting 
+ Paris 
+ photography 
+ Play 
+ poetry 
+ Politics 
+ religion 
+ Roman Empire 
+ Rome 
+ Royal Academy 
+ Rudyard Kipling 
+ Russia 
+ Samuel Beckett 
+ Satire 
+ science fiction 
+ sculpture 
+ Second World War 
+ sex 
+ Shakespeare 
+ short stories 
+ Slavery 
+ South Africa 
+ Soviet Union 
+ Stalin 
+ suicide 
+ Surrealism 
+ Tate Britain 
+ theatre 
+ thriller 
+ Virginia Woolf 
+ war Categories 
+ Adventure (151)
+ Africa (120)
+ America (118)
+ American literature (55)
+ Ancient history (145)
+ Anglo Saxon (24)
+ Antisemitism (5)
+ Archaeology (4)
+ Architecture (28)
+ Art (658)
+ Australia (11)
+ Autobiography (32)
+ Biography (87)
+ Biology (10)
+ Black art (6)
+ Books (779)
+ British Empire (24)
+ Buddhism (4)
+ Cartoon (14)
+ Chemistry (4)
+ Childrens (23)
+ China (21)
+ Christianity (77)
+ Classical music (21)
+ Comedy (202)
+ Communism (36)
+ Concert (15)
+ Contemporary classical music (21)
+ Cosmology (4)
+ Crime (32)
+ Crusades (9)
+ Design (7)
+ Detective stories (70)
+ drawing (7)
+ English literature (195)
+ Environment (11)
+ Essays (41)
+ European History (177)
+ Evolution (4)
+ Exhibition (621)
+ fabric (1)
+ fairy tale (3)
+ Fantasy (33)
+ Fashion (6)
+ Feminism (51)
+ Film (26)
+ Flowers (4)
+ France (64)
+ French literature (55)
+ German literature (12)
+ Germany (28)
+ Graphic novel (3)
+ Great War (81)
+ History (498)
+ Holocaust (15)
+ Horror (13)
+ humour (1)
+ Illustration (18)
+ imperialism (31)
+ India (9)
+ Ireland (12)
+ Irish literature (49)
+ Islamic terrorism (8)
+ Italy (4)
+ Japan (21)
+ Jazz (1)
+ Latin America (14)
+ Latin literature (3)
+ Law (4)
+ Literary criticism (107)
+ Literature (176)
+ Marxism (10)
+ Mathematics (6)
+ Mexico (14)
+ Middle Ages (74)
+ Middle East (16)
+ Museum (14)
+ Music (1)
+ Mythology (18)
+ Nature (8)
+ Noir (18)
+ Novel (727)
+ Novella (12)
+ Old English (23)
+ Opera (1)
+ Painting (77)
+ Philosophy (58)
+ Photography (148)
+ Play (139)
+ Poetry (104)
+ Politics (129)
+ Prints (14)
+ Psychoanalysis (19)
+ Psychology (6)
+ queer (3)
+ Radio (3)
+ Rock music (6)
+ Russia (19)
+ Russian literature (18)
+ Saga (39)
+ Satire (3)
+ Science (29)
+ Science Fiction (132)
+ Sculpture (66)
+ Second World War (111)
+ Sex (43)
+ Short stories (185)
+ Slavery (48)
+ Spain (3)
+ Spy novel (71)
+ Sweden (4)
+ Theatre (149)
+ Theology (4)
+ Thriller (239)
+ Tragedy (2)
+ Translation (94)
+ Travel writing (25)
+ Turkey (3)
+ TV (11)
+ Uncategorized (12)
+ Vietnam War (7)
+ Walks (14)
+ War (269)
+ World War One (20)
+ Blog at WordPress.com. 
+ Comment 
+ Reblog 
+ Subscribe 
+ Subscribed 
+ Books & Boots 
+ Join 743 other subscribers 
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ Books & Boots 
+ Subscribe 
+ Subscribed 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ %d 

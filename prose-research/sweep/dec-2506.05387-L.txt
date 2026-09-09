@@ -1,0 +1,1877 @@
+Advancing Decoding Strategies: Enhancements
+in Locally Typical Sampling for LLMs
+
+Jaydip Sen [0000-0002-4120-8700], Saptarshi Sengupta [0000-0003-1114-343X], Subhasis
+Dasgupta [0000-0002-9000-4704] 1
+
+
+Abstract. This chapter explores advancements in decoding strategies for large lan-
+guage models (LLMs), focusing on enhancing the Locally Typical Sampling (LTS)
+algorithm. Traditional decoding methods, such as top-k and nucleus sampling, often
+struggle to balance fluency, diversity, and coherence in text generation. To address
+these challenges, Adaptive Semantic-Aware Typicality Sampling (ASTS) is pro-
+posed as an improved version of LTS, incorporating dynamic entropy thresholding,
+multi-objective scoring, and reward-penalty adjustments. ASTS ensures contextu-
+ally coherent and diverse text generation while maintaining computational effi-
+ciency. Its performance is evaluated across multiple benchmarks, including story
+generation and abstractive summarization, using metrics such as perplexity,
+MAUVE, and diversity scores. Experimental results demonstrate that ASTS outper-
+forms existing sampling techniques by reducing repetition, enhancing semantic
+alignment, and improving fluency.
+
+
+Keywords: Locally Typical Sampling, Adaptive Semantic-Aware Typicality Sam-
+pling (ASTS), Decoding Strategies, Large Language Models (LLMs), Entropy-
+Based Sampling, Multi-Objective Scoring.
+
+
+1 Introduction
+
+
+The field of natural language generation (NLG) has witnessed remarkable advance-
+ments, driven largely by the development of large-scale pre-trained language mod-
+
+
+
+
+Jaydip Sen1 (Corresponding Author), Saptarshi Sengupta 2, Subhasis Dasgupta3
+1,3
+    Praxis Business School, Kolkata, India, 2San Jose State University, San Jose, CA, USA
+E-mail: jaydip.sen@acm.org (J.S.), saptrashi.sengupta@sjsu.edu (S.S.G), subhasis@praxis.ac.in
+(S.D.G)
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs        2
+
+els such as GPT [1-2], BERT [3], and T5 [4]. These models have achieved unprec-
+edented levels of fluency and coherence, enabling diverse applications ranging from
+conversational agents to creative text generation. Despite these successes, balancing
+diversity and coherence in text generation remains a critical research problem. Tra-
+ditional deterministic methods such as greedy decoding [5] and beam search [6],
+often yield repetitive and uncreative outputs. Conversely, stochastic methods such
+as top-𝑘 sampling [7] and nucleus (top-𝑝) sampling [8], while improving diversity,
+sometimes compromise semantic coherence and relevance.
+  To address these limitations, locally typical sampling was introduced as a prom-
+ising alternative [9]. This approach selects tokens based on their relative probabili-
+ties within a localized context, focusing on those that contribute significantly to the
+expected entropy of the output distribution. By dynamically filtering tokens to bal-
+ance predictability and diversity, locally typical sampling has demonstrated its po-
+tential to produce text that is both contextually coherent and linguistically diverse
+[10]. However, the current implementation of the algorithm is not without its draw-
+backs. Challenges such as handling long-tail distributions, dynamic adjustments in
+high-entropy contexts, and computational inefficiencies in large vocabulary spaces
+highlight the need for further refinement.
+  Motivation: In real-world applications, the utility of text generation systems is
+often constrained by their ability to generate responses that are not only syntacti-
+cally correct but also semantically meaningful and engaging. Existing sampling
+methods, including locally typical sampling, have struggled to consistently meet
+these criteria across diverse use cases. The primary motivations for this work are as
+follows.
+  Enhance coherence and fluency of the generated text: While locally typical sam-
+pling has shown improvements over traditional methods, it occasionally produces
+incoherent or less meaningful tokens when the context is ambiguous or highly di-
+verse. A more refined approach is required to ensure that generated text adheres to
+the contextual cues provided by the preceding tokens.
+  Improving diversity without sacrificing relevance: Ensuring diversity in the gen-
+erated text is critical for applications such as storytelling, creative writing, and chat-
+bot systems. However, achieving this without introducing irrelevant or nonsensical
+tokens remains a significant challenge. Modifications to locally typical sampling
+must address this trade-off.
+  Adapting to high entropy context: In scenarios with high uncertainty, such as an-
+swering open-ended questions or generating creative content, existing methods of-
+ten struggle to adapt dynamically. Enhancing the algorithm to better handle such
+contexts can greatly expand its applicability.
+  Reducing computational complexity: The practical deployment of text generation
+systems requires algorithms that are computationally efficient. Existing sampling
+methods, including locally typical sampling, involve repetitive probability recalcu-
+lations, making them less suitable for real-time applications. Optimizing this aspect
+is essential for wider adoption.
+  Contributions: This chapter presents an enhanced and modified version of the lo-
+cally typical sampling algorithm that addresses the challenges mentioned earlier.
+3                                                                            Sen et al.
+
+The proposed scheme offers significant improvements in performance and applica-
+bility as evidenced from the experimental results. The contributions of the current
+work are as follows.
+  Design of a novel selection strategy: A refined token selection mechanism is pro-
+posed that incorporates additional contextual factors, such as semantic similarity
+and syntactic alignment, alongside probability thresholds. This ensures that the se-
+lected tokens not only preserve entropy but also align more closely with the context.
+  Dynamic entropy thresholding: To address the variability in entropy across differ-
+ent contexts, the algorithm introduces a dynamic thresholding mechanism that
+adapts in real time based on the uncertainty of the token distribution. This leads to
+more context-aware generation.
+  Handling long-tail distributions: A key innovation is the development of an adap-
+tive filtering technique that prioritizes tokens in the long-tail distribution without
+compromising coherence. This significantly improves diversity, especially in crea-
+tive and open-ended tasks.
+  Increased computational efficiency: The proposed algorithm incorporates optimi-
+zations, such as reduced recalculations and parallelized token filtering, to achieve
+lower computational overhead, making it suitable for large-scale and real-time ap-
+plications.
+  Comprehensive performance evaluation: A robust experimental framework is de-
+signed to evaluate the proposed algorithm across multiple benchmarks, including
+conversational agents, story generation, and summarization tasks. The results
+demonstrate superior performance compared to traditional and state-of-the-art sam-
+pling methods.
+  Significance of the work: This chapter addresses a critical gap in the field of NLG)
+by introducing a method that seamlessly integrates coherence, diversity, and com-
+putational efficiency. The proposed enhancements to the locally typical sampling
+algorithm not only advance the state-of-the-art in text generation but also pave the
+way for broader applications in AI-driven communication systems. By striking an
+optimal balance between predictability and creativity, this work contributes to the
+ongoing efforts to develop language models that are more human-like in their out-
+put.
+  The chapter is organized as follows. Section 2 presents a review of related work,
+discussing existing decoding strategies for LLMs, their capabilities, and limitations.
+Section 3 provides the necessary background on the Locally Typical Sampling al-
+gorithm, explaining its theoretical foundations and key characteristics. Section 4
+introduces the proposed Adaptive Semantic-aware Typicality Sampling (ASTS) al-
+gorithm, detailing its improvements over the standard approach. Section 5 presents
+the experimental results, offering a comprehensive analysis of the performance of
+the ASTS algorithm. Finally, Section 6 concludes the chapter by summarizing key
+findings and highlighting potential directions for future research.
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs    4
+
+2 Related Work
+
+
+The field of autoregressive decoding in LLMs has witnessed substantial advance-
+ments in recent years, driven by the need for generating coherent, diverse, and con-
+textually relevant text. Traditional approaches, such as beam search, greedy decod-
+ing, and top-sampling, have served as foundational techniques for text generation.
+However, these methods often exhibit limitations in balancing diversity and flu-
+ency, motivating the development of alternative strategies. Notable advancements
+include top-𝑝 sampling (also called nucleus sampling), which dynamically adjusts
+the sampling space, contrastive decoding, which integrates multiple scoring func-
+tions for better output control, and energy-based models (EBMs) that leverage prob-
+abilistic frameworks for robust text generation. Additionally, reinforcement learn-
+ing (RL)-based optimizations and mixture-of-expert frameworks have shown
+promise in enhancing decoding efficiency and quality.
+  In this section, some of the well-known decoding techniques, including their
+strengths, limitations, and recent improvements are discussed to provide a compre-
+hensive overview of the state-of-the-art in LLM decoding.
+  Autoregressive decoding advancements: Autoregressive decoding is a founda-
+tional approach in natural language generation tasks, where models generate text
+sequentially, one token at a time, based on previously generated tokens [11-14].
+This method ensures that the generated output is coherent and contextually relevant,
+as each token depends on the cumulative history of the sequence. It highlights the
+functionality of LLMs, which rely on autoregressive frameworks to produce fluent
+and contextually aware responses. While autoregressive decoding has proven effec-
+tive in generating high-quality text, it often suffers from computational inefficien-
+cies due to its inherently sequential nature, where each token must be generated
+before moving to the next. This limitation has spurred extensive research into opti-
+mizing autoregressive decoding, focusing on enhancing the decoding speed while
+maintaining the quality of generated texts.
+  Speculative decoding: Speculative decoding aims at accelerating text generation
+in LLMs by addressing the inherent inefficiencies of traditional autoregressive de-
+coding [15-19]. In standard methods, tokens are generated sequentially, which can
+be computationally intensive and time-consuming, especially for long sequences.
+Speculative decoding mitigates this bottleneck by leveraging auxiliary mechanisms,
+such as smaller models or predictive heuristics, to propose multiple candidate to-
+kens or sequences in parallel. These speculative outputs are then validated or refined
+by the primary model, ensuring both speed and quality in text generation. This
+method capitalizes on the predictive power of LLMs while significantly reducing
+latency, making it particularly appealing for real-time applications. As a result,
+speculative decoding has gained traction as a practical and efficient solution for
+scaling autoregressive decoding.
+  Contrastive decoding: Contrastive decoding is an advanced decoding technique
+used in LLMs to enhance the quality and diversity of generated outputs [20-24].
+The method builds upon the principle of contrastive learning, which encourages the
+model to distinguish between different candidate outputs by contrasting them
+5                                                                            Sen et al.
+
+against one another. In the context of decoding, contrastive decoding aims to im-
+prove the generated sequence by emphasizing more informative, coherent, and con-
+textually appropriate choices, while minimizing less relevant or redundant outputs.
+This approach often involves comparing the likelihoods of multiple candidate se-
+quences and selecting the one that best aligns with the intended goal, such as coher-
+ence, diversity, or task-specific performance.
+  Adaptive-draft verification: It is an emerging paradigm in text generation for
+LLMs that seeks to enhance the efficiency and quality of generated outputs by iter-
+atively refining preliminary drafts [25-28]. Unlike traditional decoding methods that
+produce outputs in a single-pass process, adaptive-draft verification operates in a
+two-stage framework. In the first stage, the model generates an initial draft, often
+focusing on broad fluency and relevance. In the second stage, this draft undergoes
+a verification process, during which it is assessed and adjusted to better align with
+the desired characteristics such as coherence, factual accuracy, or stylistic con-
+straints. This approach enables a dynamic interaction between generation and eval-
+uation, allowing the model to adaptively revise outputs in response to specific feed-
+back or criteria. By integrating adaptive mechanisms, this approach has the potential
+to significantly improve the reliability and adaptability of LLMs in tasks like open-
+ended text generation, summarization, and domain-specific applications.
+  Top-𝑘 sampling and its variants: Top-𝑘 sampling is a widely used decoding strat-
+egy for LLM text generation that aims to enhance the diversity and quality of gen-
+erated outputs by restricting token selection to the top-𝑘 most probable candidates
+at each step [7]. In this method, the model calculates the probability distribution
+over the vocabulary, and only the 𝑘 tokens with the highest probabilities are con-
+sidered for sampling, while the rest are set to zero. This approach effectively elim-
+inates low-probability tokens, reducing the risk of generating incoherent or irrele-
+vant text. Variants of Top-𝑘 sampling, such as dynamic top-𝑘 and adaptive-𝑘
+sampling, extend this idea by dynamically adjusting the value of 𝑘 based on con-
+textual factors, such as the entropy of the probability distribution or the stage of
+generation [29-33]. These variants allow the decoding process to balance diversity
+and precision more effectively, adapting to the complexity of the task or input
+prompt. By narrowing down the token pool to relevant options, Top-𝑘 sampling and
+its variants ensure greater control over text generation while avoiding issues like
+repetitive or nonsensical outputs. This technique is particularly beneficial in appli-
+cations where maintaining fluency and contextual alignment is critical, such as di-
+alogue systems, creative writing, and summarization.
+  Locally typical sampling: It is an advanced decoding technique in LLMs designed
+to enhance text generation by balancing diversity and coherence [9-10]. Traditional
+sampling methods might produce either overly deterministic or excessively random
+outputs. Locally typical sampling, however, overcomes this shortcoming by gener-
+ating tokens based on the local context and statistical properties of the surrounding
+tokens. The method relies on the concept of typicality, where tokens that are likely
+under the current context are sampled, but it also allows for controlled exploration
+of less likely candidates to promote diversity. This results in more fluent and con-
+textually appropriate outputs, while still allowing for the creative exploration of
+language. Local typical sampling aims to improve the efficiency of LLM inference
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs    6
+
+by producing high-quality, relevant text, and is increasingly applied in tasks like
+machine translation, text completion, and conversational agents.
+  Mixture-of-Expert decoding: Mixture-of-Expert (MoE) decoding is a technique in
+LLMs that utilizes a dynamic mixture of specialized experts to improve the effi-
+ciency and performance of text generation [34-37]. In MoE models, a set of expert
+sub-models are trained to focus on specific aspects of language or tasks, and during
+decoding, only a subset of these experts is activated, depending on the input context.
+This approach allows for more efficient computation, as not all experts are needed
+for every generation step, and the model can leverage the expertise of the most rel-
+evant experts for a given context. MoE decoding enhances the capability of LLMs
+by enabling them to combine the strengths of various experts, resulting in higher-
+quality outputs while reducing computational costs. By dynamically selecting the
+most suitable experts for each generation task, MoE decoding can improve text co-
+herence, fluency, and relevance. This makes it especially useful for complex text
+generation tasks such as document generation, dialogue systems, and multilingual
+text generation.
+  Distillation-driven decoding: Distillation-driven decoding in LLMs refers to the
+process of leveraging knowledge distillation techniques to optimize and accelerate
+the decoding phase of text generation [23, 38-41]. Knowledge distillation tradition-
+ally involves transferring knowledge from a large, complex teacher model to a
+smaller, more efficient student model. The student model retains most of the origi-
+nal model’s performance while being faster and less resource-intensive. In the con-
+text of decoding, distillation-driven methods aim to refine the decoding process by
+using distilled models. This results in faster generation with less computational cost
+without sacrificing output quality. These decoding techniques can involve distilling
+not only the final predictions but also intermediate layers or attention patterns from
+the teacher model. This allows the student model to mimic the nuanced decision-
+making process of the original, larger model. Distillation-driven decoding has be-
+come an essential approach in optimizing LLMs for real-time applications.
+  Parallel decoding techniques: Parallel decoding for LLMs refers to methods de-
+signed to speed up the autoregressive generation process by leveraging parallelism
+during text generation [42-45]. Traditionally, LLMs generate text in a sequential
+manner, where each token is generated based on the previous ones, leading to high
+computational costs and slower inference times. Parallel decoding techniques aim
+to overcome these limitations by allowing multiple tokens to be generated simulta-
+neously or in a non-sequential manner. These methods attempt to balance the trade-
+off between maintaining the quality of the generated text and reducing the overall
+time complexity, often by utilizing multiple processing units or by reorganizing the
+decoding process.
+   Contrastive divergence approaches: Contrastive Divergence Approaches for
+LLM text generation focus on leveraging an iterative optimization process to refine
+the quality of generated text by aligning the model's predictions with desired target
+distributions [20-22, 46-48]. Rooted in the principles of energy-based modeling,
+contrastive divergence minimizes the difference between the data distribution and
+the model distribution by iteratively updating model parameters through gradient-
+based learning. This is achieved by comparing samples generated by the model with
+samples from the target distribution, gradually reducing the "divergence" between
+7                                                                           Sen et al.
+
+the two. For text generation, this method encourages the model to produce outputs
+that are both high-quality and closely aligned with specified criteria, such as gram-
+maticality, coherence, or adherence to task-specific requirements. Contrastive di-
+vergence approaches are particularly effective for fine-tuning LLMs in low-re-
+source or highly constrained settings, enabling efficient learning of complex
+generative distributions.
+  Mask-predict algorithms: Mask-predict algorithms have emerged as an alternative
+to traditional autoregressive decoding methods for text generation in LLMs [49-50].
+These algorithms leverage a non-autoregressive framework where a sequence is it-
+eratively refined through masked tokens. Initially, a partial or noisy output is gen-
+erated, and masked tokens are predicted and updated in parallel across multiple it-
+erations, reducing decoding latency compared to strictly sequential approaches. By
+iteratively focusing on refining uncertain or incomplete parts of the text, mask-pre-
+dict algorithms strike a balance between speed and generation quality. These algo-
+rithms provide a promising direction for scalable and adaptive text generation.
+  RL-based decoding optimization: RL-based decoding optimizations for LLM text
+generation focus on improving generation quality by aligning the output with spe-
+cific objectives beyond traditional likelihood maximization [51-54]. These methods
+treat decoding as a sequential decision-making process, where RL techniques are
+used to optimize rewards. The rewards are computed based on desired attributes,
+such as coherence, fluency, factual accuracy, or task-specific goals. By leveraging
+reward values computed from external evaluation metrics or human preferences,
+RL-based approaches guide the model toward generating outputs. Unlike purely
+heuristic or rule-based decoding strategies, RL-based methods can adapt dynami-
+cally during generation, learning from feedback to refine decoding strategies. This
+paradigm not only enhances the effectiveness of LLMs in complex generation tasks
+but also provides a flexible framework for incorporating diverse optimization crite-
+ria.
+  Low-resource decoding: Low-resource decoding for LLM text generation focuses
+on optimizing the generation process in scenarios where computational resources,
+training data, or both are limited [55-57]. This approach emphasizes lightweight
+methods to maintain the quality of generated text while reducing the reliance on
+extensive hardware or vast datasets. Techniques for low-resource decoding often
+involve efficient sampling strategies, parameter pruning, or knowledge distillation
+to streamline the model's operation without significantly compromising perfor-
+mance. These methods are particularly important for making LLMs accessible in
+settings with restricted resources, such as deployment on edge devices or in low-
+bandwidth environments. By striking a balance between computational efficiency
+and text generation quality, low-resource decoding enables broader adoption of
+LLMs across diverse applications and environments.
+  Dynamic threshold decoding: Dynamic threshold decoding is a technique in LLM
+text generation that aims to balance the trade-off between generation quality and
+computational efficiency by adjusting the decoding threshold dynamically during
+inference [58-59]. The threshold refers to a criterion or cutoff that is used during
+the token selection process in text generation. Rather than using a fixed threshold
+for token selection, dynamic threshold decoding adapts the threshold based on fac-
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs      8
+
+tors such as the current state of the generation process, model confidence, and re-
+source constraints. This method can significantly improve efficiency by reducing
+unnecessary token sampling and avoiding computational overhead, while still main-
+taining high-quality text generation. It leverages the model's understanding of the
+task to determine when more cautious or more exploratory decoding is needed, mak-
+ing it a flexible approach suitable for various LLM applications.
+   Efficient beam search modifications: Efficient beam search modifications have
+emerged as a critical area of research in LLM text generation to enhance both the
+quality of generated text and the computational efficiency of decoding [45, 60-62].
+Beam search, a widely used decoding strategy, explores multiple candidate se-
+quences in parallel to identify the most likely output. However, the standard ap-
+proach is often computationally expensive and prone to issues like repetitive text or
+lack of diversity in generated outputs. Efficient modifications focus on optimizing
+the trade-off between accuracy and speed by incorporating techniques such as dy-
+namic beam size adjustment, early stopping criteria, or pruning low-probability can-
+didates. Additionally, innovations like guided beam search, which leverages auxil-
+iary information or constraints, and diverse beam search, which aims to enhance
+output diversity, have further improved the applicability of beam search for LLMs.
+These modifications not only make decoding faster but also ensure that the gener-
+ated text aligns better with contextual or task-specific requirements.
+  Entropy-aware sampling: Entropy-aware Sampling is a text generation technique
+used in LLMs to improve the quality and diversity of generated text by considering
+the entropy of the token distribution during the sampling process [63-65]. Entropy,
+in this context, measures the uncertainty or unpredictability in the probability dis-
+tribution of the next token, where high entropy indicates a more uncertain or diverse
+distribution and low entropy reflects a more confident prediction. In entropy-aware
+sampling, tokens are selected not just based on their probabilities but also by con-
+sidering the entropy of the distribution. This helps to strike a balance between se-
+lecting highly probable tokens, which improve fluency, and exploring less probable
+tokens to introduce diversity and creativity in the generated text. By adjusting the
+sampling process in this way, entropy-aware sampling can enhance both the coher-
+ence and novelty of the generated sequences, particularly in open-ended generation
+tasks.
+  Energy-based models in decoding: Energy-based Models (EBMs) in decoding for
+LLM text generation offer a framework to assess and optimize the quality of gener-
+ated outputs by associating each potential output sequence with an energy score [66-
+67]. These scores represent how well a sequence aligns with the underlying data
+distribution or task-specific constraints, with lower energy indicating higher com-
+patibility. EBMs are often used to guide decoding by either re-ranking candidate
+outputs generated through other methods or directly generating sequences through
+energy minimization techniques. By leveraging flexible energy functions, this ap-
+proach enables better control over attributes like fluency, relevance, and diversity
+in text generation. The integration of EBMs in decoding has proven particularly
+effective in scenarios where explicit constraints or additional signal (e.g., retrieval-
+augmented knowledge) must be incorporated to refine generation quality.
+  Multi-layer integration for decoding: Multi-layer integration for decoding is a
+technique used in LLMs that combines outputs from multiple layers of the model
+9                                                                                Sen et al.
+
+during the text generation process to improve the quality of the generated sequences
+[68-69]. Traditionally, LLMs use the final layer's representation for generating to-
+kens, but multi-layer integration leverages information from several layers within
+the model's architecture. This approach allows for a more enriched representation
+of the input, as different layers capture different types of linguistic and semantic
+information. By integrating outputs from multiple layers, the model can combine
+both low-level and high-level features. This leads to more accurate and contextually
+appropriate text generation. This technique has been shown to enhance the overall
+performance of LLMs, particularly in tasks requiring deeper understanding and
+more coherent generation over long sequences.
+  The existing approaches to controllable text generation primarily rely on enhanc-
+ing pre-trained language models with explicit conditioning mechanisms, fine-tuning
+strategies, or tailored decoding techniques. While these methods have demonstrated
+success in specific applications, challenges such as scalability, computational over-
+head, and balancing control with naturalness persist. The work presented in this
+chapter specifically focuses on advancing the “Locally Typical Sampling” ap-
+proach, which has shown promise in maintaining contextual relevance while ensur-
+ing diversity. By addressing the limitations of this method and introducing a more
+efficient and optimized version, we aim to enhance its applicability for real-world
+scenarios, bridging the gap between theoretical innovation and practical deploy-
+ment.
+
+Table 1. Summary of advanced decoding techniques for enhanced LLM text generation
+
+    Category           Description           Key Benefits & Applications             Ref
+                  Sequential generation      Coherent and contextually rel-
+                  where each token de-       evant text generation, ideally
+Autoregressive    pends on previously        suited for general LLM appli-
+                                                                                    [11-14]
+decoding          generated tokens, en-      cations like dialogue systems,
+                  suring coherence and       summarization, and creative
+                  context.                   writing.
+                  Accelerates genera-        Reduced latency with quality
+                  tion by proposing          text generation, suited for real-
+Speculative       multiple candidate to-     time applications like conver-
+                                                                                    [15-19]
+decoding          kens in parallel, re-      sational agents and interactive
+                  fined by the primary       systems.
+                  model.
+                  Enhances output            Improves coherence, diversity,
+                  quality by contrasting     and relevance. Suitable for
+Contrastive       candidate outputs and      tasks demanding diverse and
+                                                                                    [20-24]
+decoding          emphasizing coher-         high-quality outputs like crea-
+                  ent, contextually ap-      tive writing and question an-
+                  propriate choices.         swering.
+Adaptive draft    Iterative two-stage        Enhanced coherence, factual
+                                                                                    [25-28]
+verification      process where a draft      accuracy, and stylistic control.
+ Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+ 10
+
+  Category                Description           Key Benefits & Applications           Ref
+                    is generated and re-        Suitable for open-ended gener-
+                    fined for better align-     ation, summarization, and do-
+                    ment with desired           main-specific applications.
+                    characteristics.
+                    Restrict token selec-       Maintain fluency while im-
+                    tion to the to-k most       proving diversity. Suitable for
+Top-𝑘    sam-       probable candidates,        dialogue systems, creative
+                                                                                       7,
+pling and its       with dynamic or             writing, and summarization.
+                                                                                    [29-33]
+variants            adaptive variants for
+                    better contextual bal-
+                    ance
+                    Balances diversity          Produces fluent and contextu-
+                    and coherence by se-        ally appropriate outputs. Suita-
+Locally typical
+                    lecting tokens based        ble for machine translation,        [9-10]
+sampling
+                    on local context and        text completion, and conversa-
+                    typicality.                 tional agents.
+                    Activates only rele-        Higher-quality outputs with
+                    vant expert sub-mod-        reduced computational costs.
+Mixture-of-
+                    els during decoding         Suitable for multilingual text
+Expert decod-                                                                       [34-37]
+                    leveraging special-         generation, document genera-
+ing
+                    ized knowledge dy-          tion, and dialogue systems.
+                    namically.
+                    Uses knowledge dis-         Faster generation with mini-
+                    tillation to optimize       mal performance loss. Suitable
+Distillation-       and accelerate the de-      for real-time applications and
+                                                                                      23,
+driven decod-       coding phase, trans-        resource-constrained deploy-
+                                                                                    [38-41]
+ing                 ferring knowledge           ments.
+                    from large models to
+                    smaller models.
+                    Speed up generation         Significant reduction in time
+                    up allowing multiple        complexity. Suitable for scala-
+Parallel decod-
+                    token to be generated       ble text generation for large       [42-45]
+ing techniques
+                    simultaneously or           datasets and real-time systems.
+                    non-sequentially.
+                    Iteratively refines         High-quality task-aligned out-
+                    generated text by           puts. Suitable for low-resource
+Contrastive di-     aligning predictions        fine-tuning, constrained set-
+                                                                                    [20-22],
+vergence ap-        with desired target         tings, and specific generative
+                                                                                    [46-48]
+proaches            distributions using         tasks.
+                    energy-based model-
+                    ing.
+ 11                                                                           Sen et al.
+
+  Category             Description         Key Benefits & Applications           Ref
+                 Generates and refines     Reduced latency with main-
+                 sequences iteratively     tained or improved quality.
+Mask-predict     by predicting masked      Suitable for machine transla-
+                                                                               [49-50]
+algorithms       tokens, enabling non-     tion, text editing, and scalable
+                 autoregressive decod-     text generation tasks.
+                 ing.
+                 Treats decoding as a      Customizable output optimiza-
+                 decision-making pro-      tion. Suitable for alignment
+RL-based de-
+                 cess, using rewards       with user preferences and
+coding optimi-                                                                 [51-54]
+                 for attributes like co-   task-specific objectives.
+zation
+                 herence, fluency, or
+                 task-specific goals.
+                 Optimizes generation      Enables LLMs in low-resource
+                 for scenarios with        settings. Suitable for edge de-
+Low-resource     limited computational     vices, low-bandwidth environ-
+                                                                               [55-57]
+decoding         resources or training     ments, and resource-con-
+                 data by using light-      strained applications.
+                 weight methods.
+                 Adapts the token se-      Balances quality and effi-
+                 lection threshold dy-     ciency dynamically. Suitable
+Dynamic          namically during in-      for applications requiring flex-
+threshold de-    ference, based on         ible and adaptive decoding,         [58-59]
+coding           model confidence          such as dialogue systems.
+                 and resource con-
+                 straints.
+                 Optimize beam             Improved accuracy, reduced
+                 search by adjusting       redundancy, and computa-
+Efficient beam   beam size, pruning        tional efficiency. Suitable for
+                                                                                 45,
+search modifi-   low-probability can-      long-text generation, summari-
+                                                                               [60-62]
+cations          didates, or introduc-     zation, and multilingual gener-
+                 ing guided and di-        ation.
+                 verse search methods.
+                 Controls token selec-     Improves diversity in outputs
+                 tion using entropy        while maintaining logical con-
+Entropy-based    thresholds to balance     sistency in responses. Suitable
+                                                                               [63-65]
+decoding         randomness and co-        for conversational AI, story
+                 herence in generated      generation, and automated
+                 text.                     summarization tasks.
+Energy-based     Use energy functions      Ensures coherent and contex-
+decoding mod-    to evaluate and rank      tually relevant text generation     [66-67]
+els              sequences by mini-        with fewer implausible out-
+ Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+ 12
+
+  Category                Description            Key Benefits & Applications         Ref
+                    mizing energy for se-        puts. Suitable for neural ma-
+                    lecting optimal out-         chine translation, text summa-
+                    puts.                        rization, and dialogue systems.
+                    Hierarchical attention       Enables better coherence in
+                    mechanisms and cas-          generated outputs and handles
+                    cading decoding lay-         long-range dependencies in se-
+Multilayer in-
+                    ers are used to en-          quences. Commonly applied
+tegration for                                                                       [68-69]
+                    hance coherence and          in dialogue systems, story gen-
+decoding
+                    manage long-range            eration, and code synthesis.
+                    dependencies effec-
+                    tively.
+
+
+
+
+ 3 Locally Typical Sampling
+
+
+ Locally Typical Sampling is a decoding method for probabilistic language models
+ for LLMs that enhances the coherence and human-likeness of generated text. Pro-
+ posed by Meister et al. [9], the technique seeks to improve upon traditional methods
+ like random sampling and beam search by integrating a notion of typicality that
+ focuses on token generation based on local context. In this method, instead of sam-
+ pling from the entire probability distribution of the next token, the model samples
+ tokens that are more typical or probable in the local context defined by the preceding
+ tokens. This ensures that the generation stays coherent and relevant. This approach
+ not only helps mitigate the risk of deterministic or repetitive outputs but also ensures
+ more efficient and contextually appropriate text generation. This section elaborates
+ on the theoretical foundations and mathematical concepts related to the method. It
+ particularly focuses on concepts such as entropy, probability distributions, and to-
+ ken selection mechanisms in the context of Locally Typical Sampling.
+
+
+ 3.1 Probabilistic Decoding in LLMs
+
+ LLMs generate text by predicting the probability distribution 𝑃(𝑥𝑡 |𝑥<𝑡 ) over a vo-
+ cabulary 𝑉 where 𝑥𝑡 is the token at the time step 𝑡, and 𝑥<𝑡 are preceding tokens.
+ This distribution is calculated using a SoftMax function:
+
+                                                 exp (𝑧𝑡 )
+                               𝑃(𝑥𝑡 |𝑥<𝑡 ) = ∑                                         (1)
+                                                𝑣∈𝑉 exp (𝑧𝑣 )
+13                                                                            Sen et al.
+
+  In (1), 𝑧𝑡 is the logits output by the model for the token 𝑡. Various decoding strat-
+egies utilize this probability distribution differently to generate coherent, contextu-
+ally relevant sequences. Probabilistic decoding in LLMs plays a pivotal role in
+transforming the raw probability distributions into coherent, meaningful text.
+
+
+3.2 Entropy in Language Modeling
+
+Entropy, a fundamental concept in information theory, quantifies the average un-
+certainty or randomness in a probability distribution. In the context of language
+modeling, entropy serves as a measure of how uncertain a model is when predicting
+the next token in a sequence. For a given conditional probability distribution over
+the vocabulary, the entropy is given by (2)
+
+                          𝐻(𝑃) = − ∑𝑥∈𝑉 𝑃(𝑥)𝑙𝑜𝑔𝑃(𝑥)                                (2)
+
+  In (2), 𝑃(𝑥) is the probability of token 𝑥 over the vocabulary set 𝑉. Entropy pro-
+vides insight into the model’s confidence. A high entropy value indicates greater
+uncertainty, suggesting the model considers many possible next tokens as plausible.
+On the other hand, a low entropy value implies strong confidence in a smaller subset
+of tokens.
+  Token-level entropy: At each time step, the entropy of the conditional distribution
+reveals how predictable the next token is. The token-level entropy can vary across
+a sequence. For example, at the start of a sentence, entropy may be higher due to
+greater ambiguity, while it tends to decrease as the context grows and the model
+narrows down probable completions.
+  Sequence-level entropy: Beyond token-level uncertainty, the entropy of an entire
+sequence can be evaluated. For a sequence, the total entropy is the sum of the en-
+tropies across all tokens. This cumulative measure captures the overall uncertainty
+in generating a complete sequence and helps evaluate model performance across
+different contexts.
+  Entropy plays a critical role in various decoding strategies and their optimization.
+In Locally Typical Sampling, those tokens are selected whose probabilities lie close
+to the entropy of the distribution. This approach ensures that generated tokens align
+with the contextual uncertainty, avoiding overly deterministic or highly random pre-
+dictions.
+
+
+3.3 Typicality
+
+Typicality is a concept that evaluates how representative a token is within the con-
+text of the probability distribution over the vocabulary. It bridges the gap between
+probability-based selection (choosing the most likely token) and entropy-based di-
+versity (ensuring variety in generated tokens).
+   For a given token 𝑡, its negative log-probability −𝑙𝑜𝑔𝑝(𝑡) indicates how surpris-
+ing or unexpected 𝑡 is, while the entropy 𝐻(𝑝) measures the average uncertainty of
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+14
+
+the entire probability distribution 𝑝. The difference between these two terms cap-
+tures the typicality deviation as given by (3).
+
+                           𝐷(𝑡) = | − 𝑙𝑜𝑔𝑝(𝑡) − 𝐻(𝑝)|                              (3)
+
+  In other words, a token is typical if its probability is consistent with the overall
+uncertainty of the distribution. If a token’s probability deviates too much from the
+average uncertainty, it is either too predictable (commonplace) or too surprising
+(outlier).
+
+
+3.4 Local Typicality
+
+While typicality measures global alignment with the entropy 𝐻(𝑝), local typicality
+refines this concept by introducing a threshold 𝜀. A token 𝑡 is considered locally
+typical if it satisfies (4).
+
+                         𝐷(𝑡) = |−𝑙𝑜𝑔𝑝(𝑡) − 𝐻(𝑝)| ≤ 𝜀                              (4)
+
+  In (4), ε is a hyperparameter that defies the allowable deviation from typicality. A
+small ε enforces stricter typicality, ensuring that tokens closely align with the en-
+tropy. This leads to coherent and predictable outputs but may reduce diversity. On
+the other hand, a large ε permits greater deviations, allowing for more surprising or
+unexpected tokens. This increases diversity but may sacrifice coherence.
+
+
+3.5 Locally Typical Sampling
+
+Locally Typical Sampling is a method of token selection that balances predictability
+and diversity in text generation. This approach ensures that the generated token
+aligns with the predicted probability distribution and the local contextual entropy.
+  Calculation of Local Probability Thresholds: The algorithm first computes a
+range of acceptable token probabilities based on the local entropy of the distribu-
+tion. The probability range R is defined in (5).
+
+                       𝑅 = {𝑥 ∈ 𝑉: 𝛼 ≤ −𝑙𝑜𝑔𝑃(𝑥|𝑥<𝑡 ) ≤ 𝛽                           (5)
+
+  In (5), 𝑉 is the vocabulary, 𝑃(𝑥|𝑥<𝑡 ) is the conditional probability of token 𝑥
+given the preceding context 𝑥<𝑡 , −𝑙𝑜𝑔𝑃(𝑥|𝑥<𝑡 ) is the negative log-probability,
+which measures how surprising token 𝑥 is, and α, β, are the bounds derived from
+the local entropy 𝐻𝑙𝑜𝑐𝑎𝑙 .
+  The bounds α and β define the range of typical tokens. The lower bound α excludes
+tokens that are excessively probable, i.e., these tokens are too predictable. The upper
+bound β, on the other hand, excludes tokens that are excessively improbable, i.e.,
+too surprising. The range ensures that only tokens with probabilities consistent with
+the local entropy 𝐻𝑙𝑜𝑐𝑎𝑙 are considered for sampling.
+15                                                                           Sen et al.
+
+  Sampling within the typical set: Once the typical set 𝑅 is determined, a token 𝑥𝑡 is
+sampled randomly from this subset. The sampling is performed using normalized
+probabilities with R using (6).
+                                            𝑃(𝑥𝑡 |𝑥<𝑡 )
+                             𝑃𝑅 (𝑥𝑡 ) = ∑                                          (6)
+                                        𝑥∈𝑅 𝑃(𝑥|𝑥<𝑡 )
+
+
+  The algorithm ensures that the selected token aligns with the contextual entropy
+of the model, and the tokens that are too predictable or too surprising are excluded
+from the sampling process.
+  In summary, the working of the Locally Typical Sampling algorithm has two in-
+tuitions: contextual entropy alignment and the trade-off between coherence and di-
+versity in the generated text.
+  The local entropy 𝐻𝑙𝑜𝑐𝑎𝑙 reflects the uncertainty of the model’s prediction in the
+current context. By setting the bounds (𝛼, 𝛽) around 𝐻𝑙𝑜𝑐𝑎𝑙 , the algorithm dynami-
+cally adjusts the range of tokens considered typical based on the model’s confi-
+dence.
+  Tokens that are overly predictable (e.g., common filler words) or excessively im-
+probable (e.g., nonsensical words) are excluded. This ensures the output is neither
+too monotonous nor erratic.
+
+
+3.6 Strengths of Locally Typical Sampling
+
+Locally Typical Sampling has several strengths, which make it superior to many
+other decoding algorithms. Locally Typical Sampling yields text which are more
+coherent, diverse, and adaptable.
+  Coherence: Locally Typical Sampling ensures that the generated tokens align with
+the predicted distribution and the contextual entropy, leading to semantically and
+syntactically meaningful outputs.
+  Diversity: By sampling from a subset of typical tokens rather than the top-𝑘 or
+nucleus, this method introduces a controlled level of variation in the generated text.
+  Adaptability: The bounds (α, β) dynamically adapt to the model’s confidence,
+making the method robust across different contexts.
+  Efficiency: Locally Typical Sampling algorithm is efficient in execution since the
+complexity of identifying the probability range 𝑅 is 𝑂(|𝑉|. log|𝑉|), where 𝑉 is the
+vocabulary set. The algorithmic complexity of Locally Typical Sampling is compa-
+rable to nucleus and top-𝑘 sampling.
+  Meister et al. demonstrate several properties and performance results of Locally
+Typical Sampling [9]. The authors observe through experiments that Locally Typi-
+cally Sampling outperforms top-𝑘 and nucleus sampling in reducing degenerate rep-
+etitions and improving efficiency. Human raters are found to prefer text generated
+via Locally Typical Sampling due to its naturalness and fluency. Moreover, the ap-
+proach is less sensitive to hyperparameter settings compared to nucleus and top-𝑘
+sampling, making it easier to apply across tasks.
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+16
+
+4 Adaptive Semantic-Aware Typicality Sampling
+
+Despite its efficiency and capability to produce coherent and human-like text, Lo-
+cally Typical Sampling has certain limitations that necessitate further refinement to
+meet the evolving demands of natural language generation tasks. One major draw-
+back is its reliance solely on probability alignment with local entropy. While this
+approach is effective in reducing degenerate repetitions, it does not inherently ac-
+count for semantic coherence or contextual relevance, particularly in complex tasks
+like storytelling or abstractive summarization. Moreover, the use of fixed entropy
+thresholds (α, β) across all contexts may fail to adapt to varying levels of uncertainty
+and model confidence, potentially excluding relevant tokens or including outliers.
+Another limitation is its lack of an explicit mechanism to balance coherence with
+diversity. This can result in outputs that, while being coherent, lack creativity or
+contain repeated patterns.
+  The above shortcomings motivate the development of an advanced Locally Typi-
+cal Sampling algorithm that addresses these issues through dynamic entropy thresh-
+olds, multi-objective scoring, and a reward-penalty mechanism. By integrating se-
+mantic similarity and contextual embeddings into the token selection process, the
+proposed algorithm ensures greater contextual coherence and relevance. The intro-
+duction of adaptive thresholds allows the algorithm to dynamically adjust to differ-
+ent levels of uncertainty, enhancing robustness across diverse tasks. Furthermore,
+the inclusion of diversity and relevance rewards, coupled with temperature scaling,
+provides finer control over the trade-off between predictability and creativity,
+thereby producing outputs that are both engaging and logically consistent. This en-
+hanced framework builds upon the strengths of Locally Typical Sampling while
+overcoming its limitations, paving the way for a more versatile and effective text
+generation strategy.
+
+
+4.1 Dynamic Entropy Thresholds
+
+Dynamic entropy thresholds are an enhancement to the Locally Typical Samling
+and an important feature of the proposed Adaptive Semantic-Aware Typicality
+Sampling (ASTS). This feature enables ASTS to adaptively refine the set of tokens
+considered for sampling based on the context-dependent uncertainty of the model’s
+predictions. In the original Locally Typical Sampling algorithm, fixed thresholds
+(α, β) define the range of typical tokens based on their alignment with the local
+entropy 𝐻(𝑌𝑡 |𝑌<𝑡 ). While effective in many cases, this static approach may fail in
+situations where the model’s uncertainty varies significantly across different con-
+texts or sequences. For example, in highly predictable contexts, such as syntacti-
+cally constrained sentences, the entropy is lower, and a narrow range of token prob-
+abilities should suffice. Conversely, in ambiguous contexts with multiple valid
+continuations, the entropy is higher, and broader thresholds are necessary to capture
+diverse yet coherent options.
+17                                                                            Sen et al.
+
+  Dynamic entropy thresholds address this limitation by dynamically adjusting the
+bounds 𝛼𝑡 and 𝛽𝑡 based on the entropy and its variance over the sequence. Specifi-
+cally, the thresholds are computed using (7) and (8).
+
+                           𝛼𝑡 = 𝐻(𝑌𝑡 |𝑌<𝑡 ) − 𝑘1 . 𝜎𝐻                              (7)
+
+                           𝛽𝑡 = 𝐻(𝑌𝑡 |𝑌<𝑡 ) + 𝑘2 . 𝜎𝐻                               (8)
+
+  In (7) and (8), 𝐻(𝑌𝑡 |𝑌<𝑡 ) represents the current entropy, 𝜎𝐻 is the standard devia-
+tion of entropy across prior tokens, and 𝑘1 , 𝑘2 are scaling factors that control the
+strictness of the thresholds. The incorporation of 𝜎𝐻 allows the thresholds to dy-
+namically expand or contract based on how much the model’s uncertainty fluctu-
+ates. For instance, in contexts with stable entropy, narrower thresholds suffice, fo-
+cusing on the most contextually typical tokens. In contrast, in high-variance
+scenarios, broader thresholds are used to accommodate the increased uncertainty
+and avoid prematurely excluding valid options.
+  The adaptive mechanism ensures that the sampling process is responsive to the
+underlying characteristics of the context, improving both coherence and diversity.
+It mitigates the risk of excluding relevant tokens in ambiguous contexts or selecting
+highly predictable tokens in deterministic situations. By tailoring the typical set 𝑅
+to the specific entropy profile of each timestep, dynamic entropy thresholds enhance
+the robustness and versatility of the algorithm, making it well-suited for diverse
+natural language generation tasks, such as creative writing, summarization, and di-
+alogue systems. Moreover, the flexibility provided by scaling factors 𝑘1 and 𝑘2 al-
+lows fine-tuning of the algorithm to optimize performance for specific use cases,
+enabling a balanced trade-off between precision and creativity in the generated text.
+
+
+4.2 Multi-Objective Scoring
+
+The proposed ASTS algorithm introduces a multi-objective scoring framework that
+simultaneously optimizes coherence, diversity, and semantic alignment during the
+token selection process. Unlike Locally Typical Sampling which relies on probabil-
+ities or entropy alignment, the multi-objective scoring mechanism ensures that the
+generated text maintains a balance between logical consistency, novelty, and con-
+textual relevance. This results in more robust and human-like outputs.
+   The multi-objective scoring framework assigns a composite score to each candi-
+date token 𝑥𝑡 at timestep 𝑡 based on three key factors: coherence (i.e., typicality),
+diversity, and semantic alignment (i.e., contextual coherence).
+   Coherence: It measures how well the token 𝑥𝑡 aligns with the local entropy of the
+distribution, ensuring that it is “typical” in the current context. The coherence of a
+token 𝑥𝑡 is computed by (9).
+
+             𝐶𝑜ℎ𝑒𝑟𝑒𝑛𝑐𝑒(𝑥𝑡 ) = 1 − |𝑙𝑜𝑔𝑃(𝑥𝑡 |𝑌<𝑡 ) − 𝐻(𝑌𝑡 |𝑌<𝑡 )                     (9)
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+18
+
+  In (9), log 𝑃(𝑥𝑡 |𝑌<𝑡 ) is the negative log-probability of 𝑥𝑡 , and 𝐻(𝑌𝑡 |𝑌<𝑡 ) is the
+conditional entropy at timestep 𝑡.
+  Diversity: It encourages selecting tokens that are less frequent or repetitive, avoid-
+ing monotony and increasing the novelty of the generated text. The diversity of a
+token 𝑥𝑡 is computed using (10).
+                                                     1
+                        𝐷𝑖𝑣𝑒𝑟𝑠𝑖𝑡𝑦(𝑥𝑡 ) =                                            (10)
+                                             𝐹𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦(𝑥𝑡 )+𝜀
+
+
+  In (10), 𝐹𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦(𝑥𝑡 ) is the count of 𝑥𝑡 in the prior sequence 𝑌<𝑡 , and 𝜀 is a
+small constant to prevent division by zero.
+  Semantic Alignment (Contextual Coherence): It ensures the token is semantically
+coherent with the preceding context 𝑌<𝑡 by measuring the cosine similarity between
+the token’s embedding and the context embedding. Given the token embedding
+𝐸(𝑥𝑡 ), and the contextual embedding 𝐸(𝑌<𝑡 ) for a token 𝑥𝑡 , its semantic alignment
+(SA) is given by (11).
+
+                                                         𝐸(𝑥 ).𝐸(𝑌<𝑡 )
+                𝑆𝐴(𝑥𝑡 ) = cos(𝐸(𝑥𝑡 ), 𝐸(𝑌<𝑡 )) = ‖𝐸(𝑥 𝑡                             (11)
+                                                           𝑡 )‖.‖𝐸(𝑌<𝑡 )‖
+
+
+
+  Computation of the Composite Objective Score: Each token 𝑥𝑡 in the locally typ-
+ical set 𝑅 is assigned a composite score 𝑆(𝑥𝑡 ) that combines the three objectives of
+coherence, diversity, and semantic alignment using (12).
+
+     𝑆(𝑥𝑡 ) = 𝜆1 . 𝐶𝑜ℎ𝑒𝑟𝑒𝑛𝑐𝑒 (𝑥𝑡 ) + 𝜆2 . 𝑆𝐴(𝑥𝑡 ) + 𝜆3 . 𝐷𝑖𝑣𝑒𝑟𝑠𝑖𝑡𝑦(𝑥𝑡 )             (12)
+
+  In (12), 𝜆1 , 𝜆2 , 𝜆3 are the weights controlling the relative importance of coherence,
+semantic alignment (SA), and diversity, respectively. These hyperparameters are
+tuned based on the specific task (e.g., prioritizing coherence for summarization or
+diversity for creative writing). In the following, a detailed discussion on the three
+components of the multi-objective optimization function is given.
+  Coherence parameter (𝜆1 ): By aligning with local entropy, coherence ensures that
+tokens are neither too surprising nor too predictable. A high value of 𝜆1 , i.e., a high
+coherence score favors tokens that are typical for the current context, thereby re-
+ducing the likelihood of nonsensical or highly random outputs.
+  Semantic alignment parameter (𝜆2 ): Semantic alignment ensures that the chosen
+token aligns with the preceding context’s meaning and theme. A high value of 𝜆2
+yields a token that has a higher semantic alignment with the preceding context. This
+is particularly crucial for tasks requiring semantic flow, such as storytelling or dia-
+logue generation, where maintaining logical progression is the key objective.
+  Diversity parameter (𝜆3 ): Diversity incentivizes exploration of less frequent to-
+kens, adding creativity and avoiding repetition. A high value of 𝜆3 generates more
+diverse tokens yielding a high diversity score. The diversity component is particu-
+larly valuable for avoiding degenerate patterns or repetitive loops, which are com-
+mon in probabilistic text generation.
+19                                                                            Sen et al.
+
+4.3 Reward-Penalty Adjustment
+
+The reward-penalty adjustment step refines the token probabilities by incorporating
+a scoring mechanism that prioritizes desirable attributes (e.g., semantic alignment,
+relevance, etc.) while penalizing undesirable ones (e.g., repetitive tokens). The step
+adjusts the original probabilities of tokens to encourage the selection of contextually
+coherent, diverse, and relevant options.
+  The Composite Objective Score Computation in (11) and the Reward-Penalty Ad-
+justment are sequential but distinct steps within the proposed ASTS algorithm.
+These steps serve complementary purposes: the composite score (𝑆(𝑥𝑡 ) determines
+the intrinsic desirability of each token based on coherence, diversity, and semantic
+alignment, while the reward-penalty adjustment dynamically modifies the token
+probabilities to integrate task-specific priorities and penalize undesired behaviors
+such as repetitions.
+  The reward-penalty adjustment modifies the token probabilities 𝑃(𝑥𝑡 |𝑌<𝑡 ) by in-
+corporating additional considerations such as: (i) task-specific relevance, (ii) se-
+mantic alignment to boost coherence further, and (iii) repetition penalties to dis-
+courage redundancy. This adjustment re-scales probabilities dynamically based on
+the reward 𝑅(𝑥𝑡 ), fine-tuning the likelihood of each token while retaining the in-
+trinsic ranking established by 𝑆(𝑥𝑡 ). The adjusted probability for each token 𝑥𝑡 is
+given by (13):
+
+               𝑃′ (𝑥𝑡 |𝑌<𝑡 ) = 𝑃(𝑥𝑡 |𝑌<𝑡 ). exp (𝑅(𝑥𝑡 ) − 𝑃(𝑥𝑡 ))                 (13)
+
+  In (13), 𝑃(𝑥𝑡 |𝑌<𝑡 ) is the original probability of token 𝑥𝑡 given in the context 𝑌<𝑡
+as predicted by the language model, 𝑅(𝑥𝑡 ) is the reward score capturing desirable
+traits of the token, and exp (𝑅(𝑥𝑡 ) − 𝑃(𝑥𝑡 )) is the exponential adjustment based on
+the reward and original probability.
+  The adjustment modifies the likelihood of tokens in proportion to how they align
+with the reward score 𝑅(𝑥𝑡 ). Tokens with higher 𝑅(𝑥𝑡 ) will have their probabilities
+boosted, while tokens with lower 𝑅(𝑥𝑡 ) are de-emphasized.
+  The reward score 𝑅(𝑥𝑡 ) combines three components: semantic alignment, rele-
+vance and repetition penalty using (14).
+
+           𝑅(𝑥𝑡 ) = µ1 . 𝑆𝐴(𝑥𝑡 , 𝑌<𝑡 ) + µ2 . 𝑅𝑒𝑙𝑣(𝑥𝑡 ) − µ3 . 𝑅𝑃(𝑥𝑡 )            (14)
+
+  In (14), SA, Relv, and RP denote semantic alignment, relevance, and repetition
+penalty, respectively. µ1 , µ2 , and µ3 are the weights for each component, controlling
+their relative importance.
+  Semantic alignment parameter (µ1 ): This ensures the token aligns semantically
+with the preceding context. The semantic alignment (SA) of the current token is
+computed using (15).
+
+                    𝑆𝐴(𝑥𝑡 , 𝑌<𝑡 ) = cos (𝐸(𝑥𝑡 ), 𝐸(𝑌<𝑡 ))                         (15)
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+20
+
+  In (15), 𝐸(𝑥𝑡 ) is the embedding of the token 𝑥𝑡 , 𝐸(𝑌<𝑡 ) is the contextual embed-
+ding of the prior sequence 𝑌<𝑡 , cos (. , . ) is the cosine similarity function. High sim-
+ilarity increases 𝑅(𝑥𝑡 ) in (14), boosting the probability of tokens that are semanti-
+cally coherent with the context.
+  Relevance parameter (µ2 ): This captures how relevant the token 𝑥𝑡 is to the over-
+all task or goal (e.g., maintaining the topic, focusing on key entities). In summari-
+zation tasks, relevance can be derived from overlap with important keywords. In
+dialogue generation, relevance may prioritize tokens that align with the conversa-
+tional flow or response intent. High relevance increases 𝑅(𝑥𝑡 ) in (14), favoring to-
+kens that are contextually meaningful and aligned with the task.
+  Repetition penalty parameter (µ3 ): This penalizes tokens that have already ap-
+peared frequently in the prior context, reducing redundancy, and increasing diver-
+sity. The repetition penalty for the token 𝑥𝑡 is computed using (16).
+
+                                        𝐹𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦(𝑥𝑡 )
+                            𝑅𝑃(𝑥𝑡 ) =                                                (16)
+                                                |𝑌<𝑡 |
+
+
+  In (16), RP(𝑥𝑡 ) is the repetition penalty of the token 𝑥𝑡 , 𝐹𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦(𝑥𝑡 ) is the
+count of 𝑥𝑡 in the prior context 𝑌<𝑡 , |𝑌<𝑡 | is the length of the prior context. High
+repetition decreases 𝑅(𝑥𝑡 ), suppressing tokens that are overused in the sequence.
+
+
+4.4 Normalize Probabilities
+
+This step ensures that the adjusted probabilities computed in (13) for the tokens in
+the locally typical set (𝑅) form a valid probability distribution by normalizing them
+so that their sum is 1. It is a crucial step that occurs after applying the reward-penalty
+adjustments. Without normalization, the probabilities could become skewed, and
+the sampling process might not correctly reflect the intended weighting.
+  The normalized probabilities for each token 𝑥𝑡 ∈ 𝑅 are computed using (17).
+
+                                                𝑃′ (𝑥𝑡 |𝑌<𝑡 )
+                           𝑃𝑅′ (𝑥𝑡 |𝑌<𝑡 ) = ∑     ′                                  (17)
+                                             𝑥∈𝑅 𝑃 (𝑥|𝑌<𝑡 )
+
+
+  In (17), 𝑃′ (𝑥𝑡 |𝑌<𝑡 ) is the adjusted probability of the token 𝑥𝑡 after applying the
+reward-penalty adjustments, ∑𝑥∈𝑅 𝑃′ (𝑥|𝑌<𝑡 ) is the normalization factor, ensuring
+that the sum of probabilities over all tokens in 𝑅 equals 1.
+  Using (17), this step modifies the adjusted probabilities 𝑃′ (𝑥𝑡 |𝑌<𝑡 ) to create a
+valid probability distribution 𝑃𝑅′ (𝑥𝑡 |𝑌<𝑡 ), which is used in the subsequent steps of
+the proposed ASTS algorithm.
+
+
+4.5 Temperature Scaling
+
+The temperature scaling step is crucial in the proposed ASTS algorithm because it
+provides fine-grained control over the balance between determinism and diversity in
+21                                                                              Sen et al.
+
+token selection. While the reward-penalty adjustment and probability normalization
+ensures that the probabilities reflect both intrinsic token quality and task-specific
+goals, these steps alone cannot dynamically modulate the sharpness or flatness of the
+probability distribution. Temperature scaling addresses this by adjusting the influ-
+ence of high- and low-probability tokens, enabling the algorithm to adapt to different
+text generation requirements. For tasks requiring precision and coherence, lower
+temperatures focus on the most likely tokens, while higher temperatures promote
+creativity and novelty, making the step essential for tailoring outputs to specific ap-
+plications.
+    Using (18), temperature scaling modifies the normalized probabilities
+𝑃𝑅′ (𝑥𝑡 |𝑌<𝑡 ) computed in earlier in (17).
+                                                         1
+                                              ′
+                                             𝑃𝑅 (𝑥𝑡 |𝑌<𝑡 ) ⁄𝑇
+                         𝑃𝑅′′ (𝑥𝑡 |𝑌<𝑡 ) =                1                         (18)
+                                             ∑𝑥∈𝑅(𝑥|𝑌<𝑡 ) ⁄𝑇
+
+
+  In (18), 𝑃𝑅′ (𝑥𝑡 |𝑌<𝑡 ) is the normalized probability of the token 𝑥𝑡 after the reward-
+penalty adjustment phase, 𝑇 is the temperature parameter that controls the sharpness
+                                         1
+of the distribution, and ∑𝑥∈𝑅(𝑥|𝑌<𝑡 ) ⁄𝑇 is the normalization factor ensuring that the
+adjusted probabilities form a valid distribution.
+  Low temperature (𝑇 < 1) increases the impact of high-probability tokens by
+sharpening the distribution. In such situations, the probabilities of less likely tokens
+decrease making the output more deterministic. This setting is suitable for tasks
+where coherence and precision are paramount.
+  High temperature (𝑇 > 1) flattens the probability distribution, increasing the
+chances of sampling less likely tokens. This encourages diversity and novelty in the
+output. This suitable is useful for creative or exploratory tasks where variation is
+desired.
+  Neutral temperature (𝑇 = 1) leaves the distribution unchanged. This default set-
+ting is used when no additional modulation is required.
+
+
+4.5 Sampling the Next Token
+
+The final step in the ASTS algorithm is to select the next token 𝑥𝑡 from the refined
+probability distribution obtained after the temperature scaling step. This step con-
+verts the carefully adjusted and normalized probabilities into an actual choice of a
+token, enabling the model to continue generating text. The sampling process is in-
+herently stochastic, ensuring flexibility and creativity while remaining guided by the
+structure refinements applied in earlier steps.
+
+
+4.6 An Illustrative Example of Text Generation Using ASTS
+
+In this section, a step-by-step example of text generation is illustrated using the ASTS
+algorithm. The example demonstrates how the algorithm selects tokens for a sen-
+tence by progressing through the phases of adaptive entropy thresholding, composite
+scoring, reward-penalty adjustment, temperature-scaling, and sampling.
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+22
+
+  Suppose the prompt is “The AI system is designed to.” The objective is to generate
+a continuation for this context using ASTS. The detailed steps are explained in the
+following.
+  Step 1: Adaptive Entropy Thresholding: The algorithm begins by dynamically
+identifying the locally typical set 𝑅, ensuring that the selected tokens are contextu-
+ally relevant and aligned with the model’s uncertainty.
+  A simplified Vocabulary V is taken as the following:
+
+     𝑉 = {"analyze", "optimize", "𝑓𝑢𝑛𝑐𝑡𝑖𝑜𝑛", "tasks", "𝑑𝑎𝑡𝑎", "𝑒𝑟𝑟𝑜𝑟𝑠", "solve"}
+
+  The Probabilities (𝑃(𝑥|𝑌<𝑡 )) from the Language Model are as follows:
+
+       {“analyze” : 0.175, “optimize” : 0.172, “function” : 0.170, “tasks” : 0.165,
+                   “data” : 0.120, “errors” : 0.100, “solve” : 0.098}
+
+  The Entropy 𝐻(𝑌𝑡 |𝑌<𝑡 ) is computed as follows in (19).
+
+                  𝐻 = − ∑𝑥∈𝑉 𝑃(𝑥|𝑌<𝑡 ) ∗ 𝑙𝑜𝑔𝑃(𝑥|𝑌<𝑡 ) = 1.92                       (19)
+
+  The entropies of the individual tokens are as follows: “analyze”: 0.175*-
+log(0.175) = 0.305, “optimize”: 0.172*-log(0.172) = 0.303, “function”: 0.170*-
+log(0.170) = 0.301, “tasks”: 0.165*-log(0.165) = 0.297, “data”: 0.120*-log(0.120)
+= 0.254, “error”: 0.100*-log(0.100) = 0.230, “solve”: 0.098*-log(0.098) = 0.228.
+  The negative-log probabilities −𝑙𝑜𝑔𝑃(𝑥|𝑌<𝑡 ) of the tokens are as follows: “ana-
+lyze”: -log(0.175) = 1.74, “optimize”: -log(0.172) = 1.76, “function”: -log(0.170) =
+1.77, “tasks”: -log(0.165) = 1.80, “data”: -log(0.120) = 2.12, “error”: -log(0.100) =
+2.30, “solve”: -log(0.098) = 2.33.
+  Using dynamic entropy thresholds (𝛼, 𝛽) where 𝛼 = 𝐻 − 𝑘1 . 𝜎𝐻 and 𝛽 = 𝐻 +
+𝑘2 . 𝜎𝐻 , where 𝑘1 = 0.3, 𝑘2 = 0.3, and 𝜎𝐻 = 0.6, the values of 𝛼 and 𝛽 are derived
+as follows: 𝛼 = 1.92 − 0.3 ∗ 0.6 = 1.74, 𝛽 = 1.92 + 0.3 ∗ 0.6 = 2.10.
+  The typical set 𝑅 is now constructed choosing the tokens whose negative-log
+probability      values are inside the interval [𝛼, 𝛽] as: {“analyze,” “opti-
+mize", "function", "tasks"}.
+  Step 2: Composite Objective Scoring: Each token in 𝑅 is assigned a composite
+score 𝑆(𝑥) based on coherence, semantic alignment, and diversity. Using the Co-
+herence Score 𝐶(𝑥) = 1 − |𝑙𝑜𝑔𝑃(𝑥|𝑌<𝑡 ) − 𝐻|, Semantic Alignment Score
+                                                               1
+𝑆𝐴(𝑥) = cos (𝐸(𝑥), 𝐸(𝑌<𝑡 )), Diversity Score 𝐷(𝑥) =                     , the Compo-
+                                                               𝐹𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦(𝑥)+𝜀
+site Score 𝑆(𝑥) is computed as: 𝑆(𝑥) = 𝜆1 . 𝐶(𝑥) + 𝜆2 . 𝑆𝐴(𝑥) + 𝜆3 . 𝐷(𝑥) . Using
+𝜆1 = 0.4, 𝜆2 = 0.4, 𝜆3 = 0.2, the composite scores 𝑆(𝑥) for the tokens in 𝑅 are
+computed in Table 1. In Table 1, 𝐶(𝑥), 𝑆𝐴(𝑥), 𝐷(𝑥), and 𝑆(𝑥) denote Coherence
+Score, Semantic Alignment Score, Diversity Score, and Composite Score, respec-
+tively. While C(x) values are computed based on the actual entropy values, SA(x)
+and D(x) values are illustrative only in Table 1.
+23                                                                                       Sen et al.
+
+Table 1. The computation of the composite scores for the tokens in the typical set R
+
+
+               Token              C(x)          SA(x)          D(x)           S(x)
+            “analyze”             0.82           0.90          1.00           0.89
+            “optimize”            0.84           0.88          0.80           0.85
+            “function”            0.85           0.75          1.00           0.84
+            “tasks”               0.88           0.80          0.85           0.84
+
+  Step 3: Reward-Penalty Adjustment: The probabilities are adjusted to incorpo-
+rate task-specific rewards and penalties. The value of the Reward Function 𝑅(𝑥) is
+computed as follows: 𝑅(𝑥) = µ1 . 𝑆𝐴(𝑥) + µ2 . 𝑅𝑒𝑙𝑣(𝑥) − µ3 . 𝑅𝑒𝑝(𝑥), where SA,
+Relv, and Rep represent Semantic Alignment, Relevance, and Repetition Penalty,
+respectively. Using the hyperparameter values µ1 = 0.5, µ2 = 0.3, and µ3 = 0.2,
+the Reward Function 𝑅(𝑥) values are computed and presented in Table 2. In Table
+2, 𝑆𝐴(𝑥), 𝑅𝑒𝑙𝑣(𝑥), 𝑅𝑒𝑝(𝑥), and 𝑅(𝑥) denote Semantic Alignment Score, Rele-
+vance Score, Repetition Penalty Factor, and Reward Function Score, respectively.
+
+Table 2. The computation of the reward function values for the tokens in the typical set R
+
+
+               Token             SA(x)         Relv(x)        Rep(x)          R(x)
+            “analyze”             0.90          0.80           0.10           0.83
+            “optimize”            0.88          0.85           0.15           0.81
+            “function”            0.75          0.70           0.05           0.74
+            “tasks”               0.80          0.65           0.20           0.70
+
+  The adjusted 𝑃′ (𝑥|𝑌<𝑡 ) for the tokens are now computed based on their original
+probabilities 𝑃(𝑥), Composite Scores 𝑆(𝑥) computed in Table 1, and Reward Func-
+tion 𝑅(𝑥) values computed in Table 2 as follows: 𝑃′ (𝑥|𝑌<𝑡 ) =
+𝑃(𝑥|𝑌<𝑡 ). exp (𝑆(𝑥) + 𝑅(𝑥)).
+
+Table 3. The computation of the adjusted probabilities for the tokens in the typical set R
+
+
+             Token          Original 𝑷(𝒙)                Adjusted 𝑷′ (𝒙)
+          “analyze”             0.175             0.175 * exp(0.89 + 0.83) = 0.45
+          “optimize”            0.172             0.172 * exp(0.85 + 0.81) = 0.42
+          “function”            0.170             0.170 * exp(0.84 + 0.74) = 0.39
+          “tasks”               0.165             0.165 * exp(0.84 + 0.70) = 0.37
+
+ Step 4: Normalize the Probabilities: The 𝑃′ (𝑥|𝑌<𝑡 ) values for the tokens com-
+puted in Table 3 are now normalized so that they follow a probability distribution
+                          𝑃′ (𝑥|𝑌<𝑡 )
+using 𝑃𝑅′′ (𝑥|𝑌<𝑡 ) = ∑       ′         . The normalization factor ∑𝑥∈𝑅 𝑃′ (𝑥|𝑌<𝑡 = 0.45 +
+                         𝑥∈𝑅 𝑃 (𝑥|𝑌<𝑡
+0.42 + 0.39 + 0.37 = 1.63. Table 4 exhibits the normalized probabilities for the
+tokens.
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+24
+
+
+Table 4. The computation of the adjusted probabilities for the tokens in the typical set R
+
+
+             Token         Adjusted 𝑷′ (𝒙)                Normalized 𝑷′′ (𝒙)
+          “analyze”             0.45                       0.45/1.63 = 0.28
+          “optimize”            0.42                       0.42/1.63 = 0.26
+          “function”            0.39                       0.39/1.63 = 0.24
+          “tasks”               0.37                       0.37/1.63 = 0.22
+
+  For the sake of simplicity, the neutral setting of Temperature T = 1 is used here.
+This leaves the probability distribution unchanged and the normalized 𝑃′′ (𝑥) values
+are used in the sampling process.
+  Step 5: Sampling of the Tokens: In the final step, stochastic sampling is per-
+formed from the final probability distribution where the tokens “analyze”, “opti-
+mize”, “function”, and “tasks” have 28%, 26%, 24%, and 22% chances, respectively
+for being chosen as the next token. Two example generated text sequences are: (i)
+“The AI system was designed to analyze complex datasets.” and (ii) The AI system
+was designed to optimize operational efficiency.”
+  This example demonstrates how the ASTS algorithm generates high-quality, con-
+textually relevant text by dynamically adjusting token probabilities through adap-
+tive entropy thresholds, multi-objective scoring, reward-penalty adjustments, and
+temperature scaling. The stochastic sampling ensures diversity and creativity while
+maintaining coherence with the context.
+
+
+
+5 Performance Results and Analysis
+
+To ensure a fair and direct comparison between Locally Typical Sampling and
+ASTS, the same experimental setup described in the Locally Typical Sampling pa-
+per of Meister et al. [9] has been followed precisely. By maintaining identical model
+architectures, datasets, hyperparameter configurations, and evaluation metrics, an
+unbiased assessment of the relative performance of the two algorithms is provided.
+This approach ensures that any observed differences in results are solely attributable
+to variations in decoding strategies rather than experimental inconsistencies.
+  Following [9], the Hugging Face framework [70] has been employed for con-
+sistency and reproducibility of the algorithms. The Mirostat implementation has
+been sourced from its original paper [71]. Mirostat is an adaptive sampling algo-
+rithm that dynamically adjusts entropy to maintain a target perplexity level in text
+generation. Unlike Locally Typical Sampling, which selects tokens based on a fixed
+range of conditional entropy, Mirostat continuously modifies randomness based on
+past token selections, making it context-aware.
+25                                                                            Sen et al.
+
+  The metrics employed for experiments and comparative analysis include perplex-
+ity, MAUVE, Zipf coefficient, REP score, and Diversity.
+
+
+5.1 Metrics Used in Performance Evaluation
+
+  Several metrics are used to provide a comprehensive view of the trade-off between
+diversity and coherence in text generation. The metrics employed for experiments
+and comparative analysis include perplexity, MAUVE, Zipf coefficient, REP score,
+and Diversity. In this section, these metrics are discussed in detail. Prior research
+indicates that human-like text exhibits perplexity within a specific range rather than
+simply minimizing or maximizing this metric [72-75]. Consequently, in the current
+study, the difference between generated and reference text perplexity was reported
+to assess naturalness.
+  Perplexity (PPL) is a widely used metric in NLP that quantifies how well a lan-
+guage model predicts a given text. It measures the uncertainty of the model in gen-
+erating the next token, with lower perplexity indicating better fluency and coherence
+in the generated text. Perplexity is computed as the exponential of the average neg-
+ative log-likelihood of the predicted tokens, given by (20):
+                                  1
+                  𝑃𝑃𝐿 = exp (− ∑𝑁
+                                𝑖=1 𝑙𝑜𝑔𝑃(𝑤𝑖 |𝑤1:𝑖−1 )                            (20)
+                                  𝑁
+
+
+  In (20), 𝑁 is the total number of words in the sequence, 𝑃(𝑤𝑖 |𝑤𝑖−1 ) represents the
+model’s probability of predicting token 𝑤𝑖 given the preceding words. Lower PPL
+values indicate that the model assigns higher probabilities to the correct tokens,
+meaning it is more confident and fluent in generating text. However, excessively
+low perplexity may indicate overfitting or lack of diversity. On the other hand, high
+perplexity suggests poor coherence or high randomness. This makes perplexity a
+crucial metric for evaluating language model performance, though it is often used
+alongside other measures like MAUVE and diversity scores for a more comprehen-
+sive assessment.
+  Following the approach of Meister et al. [9], perplexity was measured in two
+cases. PPL(g) is the perplexity of the generated text under the same model that was
+used to generate it. PPL(i), on the other hand, is the perplexity of the generated text
+under an independent language model that was not find-tuned on the same dataset.
+Specifically, GPT-2 large [2] is used as the independent model. This measures how
+well an external, unbiased model perceives the fluency and likelihood of the gener-
+ated text.
+  MAUVE score is a metric designed to evaluate the quality of text generation by
+comparing the distribution of generated text with that of human-written text [72-
+73]. Unlike traditional metrics such as BLEU [76] or ROUGE [77], which focus on
+token-level similarity, MAUVE leverages divergence measures between probabil-
+ity distributions to assess how closely a model’s outputs resemble natural language.
+It computes the difference between the probability distributions of human-written
+and machine-generated texts using f-divergences, particularly a combination of KL-
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+26
+
+divergence in both directions, ensuring robustness to both overconfidence and un-
+derconfidence in token probabilities. The method involves estimating probability
+densities using pre-trained language models and then measuring how well the two
+distributions align across multiple scales. A higher MAUVE score indicates that the
+generated text is more like human language in terms of coherence, diversity, and
+fluency, making it a powerful tool for evaluating large language models.
+  REP score, introduced in [78], is a metric designed to quantify the degree of rep-
+etition in the generated text. It measures how frequently the same n-grams appear
+within a given sequence, and hence, it helps to identify degenerate text generation
+patterns where models produce redundant or looping outputs. REP is computed as
+the average fraction of repeated n-grams over a predefined sequence length, with
+lower values indicating a more diverse and natural text. Specifically, 𝑅𝐸𝑃/𝑙 is used,
+where 𝑙 represents different segment lengths, capturing repetition at varying scales.
+Following Welleck et al. [78], 𝑙 is chosen as 16, 32, or 128 tokens. A higher REP
+score suggests excessive repetition and poor linguistic diversity, while a lower REP
+score indicates a more varied and human-like output, making it a crucial metric for
+evaluating the effectiveness of sampling strategies in text generation.
+  Zipf’s score is computed based on a linguistic principle introduced in [79]. It
+measures the distribution of word frequencies in a text and assesses how closely it
+follows Zif’s law, which states that the frequency of a word is inversely proportional
+to its rank in a corpus. In natural language, a small number of words occur very
+frequently, while most words appear rarely, forming a power-law distribution.
+Zipf’s score is computed by fitting a power-law function to the frequency distribu-
+tion of words in a generated text and comparing it to the expected Zipfian distribu-
+tion observed in human-written text. A higher Zipf coefficient suggests an unnatural
+overuse of rare words. An optimal Zipf score ensures a natural balance between
+frequent and rare words, making it a valuable metric for evaluating the diversity and
+realism of language model outputs.
+  Diversity score is a metric used to assess the lexical variety in the generated text
+by measuring the proportion of unique n-grams relative to the total number of n-
+grams. It helps evaluate whether a language model produces repetitive outputs or
+maintains a rich and varied vocabulary. The n-gram diversity metric (D) is com-
+puted as the average fraction of unique n-grams over all n-grams in a text for 𝑛 ∈
+{1, 2, 3, 4}, using (21).
+
+                                     𝐶𝑜𝑢𝑛𝑡 𝑜𝑓 𝑢𝑛𝑖𝑞𝑢𝑒 𝑛_𝑔𝑟𝑎𝑚𝑠
+                         𝐷 = ∑4𝑛=1                                                 (21)
+                                      𝑇𝑜𝑡𝑎𝑙 𝑐𝑜𝑢𝑛𝑡 𝑜𝑓 𝑛_𝑔𝑟𝑎𝑚𝑠
+
+
+  A higher diversity score indicates greater lexical variety and lower redundancy,
+making the text more natural and engaging. Conversely, a lower score suggests ex-
+cessive repetition, which is often undesirable in creative and long-form text gener-
+ation. By balancing fluency and diversity, this metric plays a crucial role in evalu-
+ating the effectiveness of different decoding strategies in language models.
+27                                                                                       Sen et al.
+
+5.2 Performance Evaluation and Results
+
+  For story generation, the medium and large versions of GPT-2 [2] were fine-tuned
+on the WritingPrompts dataset [80]. Furthermore, the medium checkpoint fine-
+tuned on WikiText-103 [81] was used to produce text for entropy-based analysis.
+For abstractive summarization, BART [82] fine-tuned on the CNN/DailyMail da-
+taset [83] was utilized. All reported metrics were computed on the respective test
+sets to ensure consistency.
+  Story Generation: Based on a preliminary hyperparameter sweep using
+MAUVE, Meister et al. [9] observed that Mirostat with 𝜏 = 3.0, and locally typical
+sampling with 𝜏 = 0.2 were the best for story generation. These parameters are
+used to compare the performance of the candidate algorithms. Table 5 presents the
+story generation performance results. In Table 5, an upward arrow (↑) signifies that
+a higher value for the metric is preferred, whereas a downward arrow (↓) indicates
+that a lower value is more desirable. MAUVE measures the similarity between gen-
+erated text and human-written text. Since the reference text is itself the standard for
+comparison, it does not require a MAUVE score. This explains why there is no entry
+under the MAUVE column for the Reference row.
+
+Table 5. Automatic quality and diversity metrics for story generation task on the WritingPrompts
+dataset. The best results among the decoding strategies are highlighted in bold red, where Perplex-
+ity (PPL) and Zipf’s coefficient, the optimal values are determined based on their deviation from
+the corresponding measurements on (Reference) human-written text.
+
+                                     Task: Story Generation
+         Token          PPL(g)      PPL(i)     MAUVE ↑      REP ↓         Zipf      Diversity ↑
+     Reference           16.33      26.71          --        0.28         1.09         0.85
+     Mirostat (τ=0.5)     8.14      23.53         0.93       0.34         1.30         0.83
+     LTS (τ=0.2)         14.25      23.51         0.78       0.30         1.27         0.84
+     LTS(τ=0.95)         11.59      11.77         0.96       0.31         1.21         0.84
+     ASTS                16.75      27.40         0.97       0.25         1.08         0.88
+
+  The results in Table 5 demonstrate that the ASTS algorithm has unique strengths
+across key evaluation metrics, including perplexity (PPL), MAUVE, REP, Zip’s
+coefficient, and diversity, for story generation tasks. Perplexity (PPL) measures
+how predictable the next word is in a generated text. The best-performing algorithm
+should have PPL values closest to the human-written reference: 𝑃𝑃𝐿(𝑔) = 16.33
+and 𝑃𝑃𝐿(𝑖) = 26.71. ASTS achieved 𝑃𝑃𝐿(𝑔) = 16.75 and 𝑃𝑃𝐿(𝑖) = 27.40,
+which are the closest to the reference values, ensuring its text generation maintains
+the right balance between fluency and unpredictability. The superior MAUVE score
+of 0.97 for ASTS confirms that its generated text closely follows the natural distri-
+bution of human writing, balancing both coherence and diversity. LTS with 𝜏 =
+0.95 performs significantly well but does not reach ASTS’s level, likely due to its
+more controlled sampling mechanism, which restricts linguistic variety. By dynam-
+ically adjusting entropy thresholds, ASTS prevents the overuse of high-probability
+tokens, leading to greater linguistic variety and more engaging storytelling. The low
+REP score of ASTS highlights its ability to produce a more natural, free-flowing
+narrative without falling into repetitive cycles. Furthermore, ASTS achieves the
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+28
+
+highest diversity score of 0.88 indicating that its text contains the widest range of
+unique words and phrases. The combination of adaptive sampling and dynamic en-
+tropy thresholding ensures that ASTS does not over-prioritize frequent tokens, lead-
+ing to a broader vocabulary distribution. In other words, the high diversity score of
+ASTS enhances narrative engagement, ensuring that each generated story contains
+a mix of frequent and rare words, improving realism. Finally, ASTS achieved the
+Zipf score of 1.08, making it the closest to the Reference Zipf value of 1.09. Zipf’s
+coefficient assesses the distribution of word frequencies, where lower values indi-
+cate a more natural balance between common and rare words. Zipf’s score measures
+the balance between common and rarer words, with values closest to the reference
+being the best. By closely matching the natural word frequency distribution, ASTS
+produces the most human-like word usage, making it the best method for Zipf.
+  In [9], the authors investigated the robustness of Locally Typical Sampling with
+respect to variations in the hyperparameter 𝜏. The study compared the sensitivity of
+top-k sampling, nucleus sampling, and Locally Typical Sampling by adjusting their
+respective hyperparameters - 𝑘, 𝑛, and 𝜏 – and analyzing the corresponding changes
+in repetition scores REP. The results demonstrated that REP is significantly less
+sensitive to 𝜏 compared to 𝑘 and 𝑛, indicating that Locally Typical Sampling main-
+tains stable repetition levels across a broad range of 𝜏 values. While top-k and nu-
+cleus sampling were found to be highly sensitive to hyperparameter selection, often
+leading to degenerate repetition in story generation, Locally Typical Sampling con-
+sistently produced text with REP values close to those observed in human-written
+stories across various 𝜏 values. This suggests that Locally Typical Sampling offers
+greater robustness in controlling repetition compared to traditional stochastic de-
+coding methods. However, as exhibited in Fig 1, when comparing ASTS to Locally
+Typical Sampling, it has been found that ASTS exhibits even greater stability in
+repetition control, with REP values consistently lower than the reference human
+text. This highlights the superior adaptability of ASTS in dynamically regulating
+token selection, ensuring that text remains diverse and engaging while avoiding rep-
+etition across a wide range of 𝜏 values.
+  The story generation results indicate that ASTS outperforms all other decoding
+algorithms because it optimally balances fluency, coherence, diversity, and human-
+like naturalness. Its ability to dynamically adjust entropy thresholds ensures that it
+produces well-structured, diverse, and engaging narratives, leading to the best per-
+formance across all key evaluation metrics.
+29                                                                                        Sen et al.
+
+
+
+
+Fig 1. Effect of the hyperparameter τ on Repetition Score (REP) across different sampling strategies
+in Story Generation. ASTS if found to be least sensitive to the choice of the hyperparameter value,
+yielding the lowest REP score consistently.
+
+  Abstractive Summarization: Abstractive summarization aims to generate con-
+cise, human-like summaries that capture the essential meaning of a given text while
+rephrasing the content rather than simply extracting key sentences. The effective-
+ness of different decoding strategies is evaluated based on their ability to produce
+summaries that are both fluent and informative while maintaining coherence and
+diversity. For the abstractive summarization task, the performance of the ASTS al-
+gorithm is compared with the Locally Typical Sampling (LTS) to determine which
+approach best balances readability, factual consistency, and linguistic variation. The
+evaluation is conducted using standard summarization benchmarks, and the results
+are analyzed across key metrics including perplexity (PPL), MAUVE, REP score,
+Zipf’s coefficient, and diversity. To ensure consistency with the story generation
+tasks, the same 𝜏 values for the Locally Typical Sampling algorithm are used when
+comparing its performance with ASTS in abstractive summarization.
+
+Table 6. Automatic quality and diversity metrics for abstractive summarization task on the
+CNN/DailyMail dataset. The best results among the decoding strategies are highlighted in bold
+red, where Perplexity (PPL) and Zipf’s coefficient, the optimal values are determined based on
+their deviation from the corresponding measurements on (Reference) human-written text.
+
+                                Task: Abstractive Summarization
+        Token          PPL(g)      PPL(i)     MAUVE ↑      REP ↓          Zipf     Diversity ↑
+     Reference          10.29       34.21          --       0.13          0.76        0.97
+     LTS (τ=0.2)         3.80       62.33         0.72      0.14          0.91        0.97
+     LTS(τ=0.95)         3.86       56.67         0.96      0.15          0.92        0.97
+     ASTS                8.94       38.74         0.99      0.12          0.78        0.97
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+30
+
+
+
+
+Fig 2. Effect of the hyperparameter τ on Repetition Score (REP) across different sampling strategies
+in Abstractive Summarization. ASTS if found to be least sensitive to the choice of the hyperparam-
+eter value, yielding the lowest REP score consistently.
+
+  The results exhibited in Table 6 indicate that the ASTS algorithm outperforms the
+Locally Typical Sampling in abstractive summarization tasks. The perplexity values
+𝑃𝑃𝐿(𝑔) and 𝑃𝑃𝐿(𝑖) achieved by ASTS are closest to the reference values. This
+implies that ASTS maintains a balanced perplexity and ensures fluent yet varied
+summarization. Furthermore, ASTS achieves the highest MAUVE score of 0.99
+confirming that it balances coherence and diversity more effectively and produces
+natural, fluent, and human-like summaries. The lowest REP score of 0.12 for ASTS
+demonstrates the effectiveness of its dynamic adjustment of entropy thresholds
+which prevents repetitive phrase selection. This makes its summaries more readable
+and informative compared to Locally Typical Sampling. ASTS achieves a Zipf
+value of 0.78, which is closest to the reference value 0.76, indicating that its main-
+tains a natural balance of vocabulary usage. Finally, ASTS achieves the highest di-
+versity score of 0.97, ensuring the broadest range of word choices. Higher diversity
+ensures that ASTS produces more engaging and informative summaries.
+  Fig 2 exhibits REP scores across different hyperparameter (𝜏) values for Locally
+Typical Sampling and ASTS in abstractive summarization tasks. The reference text
+maintains a constant REP of 0.13, representing the natural level of repetition in hu-
+man-written summaries. Locally Typical Sampling shows higher sensitivity to the
+hyperparameter values, with REP increasing from 0.130 (𝜏 = 0.10) to a peak of
+0.175 (𝜏 = 0.8) before slightly decreasing at 𝜏 = 1.0. This suggests that Locally
+Typical Sampling becomes increasingly repetitive at higher 𝜏 values, indicating a
+higher risk of redundant phrasing in summarization tasks. In contrast, ASTS main-
+tains consistently lower REP values across all 𝜏 settings, with only a slight increase
+from 0.120 (𝜏 = 0.1) to 0.140 (𝜏 = 0.8), before returning closer to the reference at
+𝜏 = 1.0. This demonstrates that ASTS is significantly less sensitive to the hyperpa-
+rameter settings and maintains better repetition control. This ensures more concise
+and diverse summarization compared to Locally Typical Sampling.
+31                                                                          Sen et al.
+
+  Overall, ASTS produces summaries with less redundancy and greater stability
+across different 𝜏 values, making it a more robust and reliable decoding strategy for
+abstractive summarization.
+
+
+
+6    Conclusion
+
+This chapter presented Adaptive Semantic-Aware Typicality Sampling (ASTS), an
+enhanced decoding strategy designed to improve the effectiveness of Locally Typ-
+ical Sampling for large language models (LLMs). The proposed modifications ad-
+dress key challenges in probabilistic text generation, such as maintaining coherence,
+balancing diversity, and optimizing computational efficiency. Through the integra-
+tion of dynamic entropy thresholding, multi-objective scoring, and reward-penalty
+adjustments, ASTS introduces a more refined and context-aware approach to token
+selection. This leads to improved fluency and semantic alignment.
+  A comprehensive evaluation of ASTS was conducted across multiple bench-
+marks, including story generation and abstractive summarization, using standard
+metrics such as perplexity (PPL), MAUVE score, REP score, Zipf’s coefficient, and
+diversity measures. The results demonstrated that ASTS consistently outperforms
+existing decoding strategies, including nucleus sampling, top-k sampling, and the
+original Locally Typical Sampling algorithm. ASTS successfully reduces repetition,
+improves linguistic variation, and ensures a more natural and human-like text gen-
+eration process. The ability to dynamically adjust entropy thresholds based on local
+context allows ASTS to adapt more effectively to the varying levels of uncertainty
+in text generation. This makes ASTS particularly well-suited for complex genera-
+tive tasks.
+  Contributions: The primary contributions of ASTS, as demonstrated through em-
+pirical analysis and experimental results are summarized as follows:
+  1. Dynamic entropy thresholding: Unlike static thresholding methods used in
+       Locally Typical Sampling, ASTS dynamically adjusts entropy thresholds
+       based on contextual variations. This dynamic adjustment of entropy thresh-
+       olds allows for a more flexible and adaptive selection of tokens resulting in
+       generated text that maintains coherence while allowing for controlled diver-
+       sity.
+  2. Multi-objective scoring mechanism: The introduction of a composite scoring
+       function that considers coherence, diversity, and semantic alignment enables
+       ASTS to produce more contextually relevant outputs while avoiding deter-
+       ministic or excessively random text generation.
+  3. Reward-penalty adjustment: By incorporating a reward function that priori-
+       tizes semantic coherence and relevance while penalizing excessive repetition,
+       ASTS mitigates common issues observed in conventional probabilistic de-
+       coding methods.
+  4. Improved performance across benchmarks: Experimental results demon-
+       strate that ASTS achieves a lower REP score (reduced repetition), higher
+Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+32
+
+      MAUVE scores (indicating improved similarity to human-written text), and
+      optimal Zipf’s coefficients (ensuring a natural balance between common and
+      rare words). These results confirm that ASTS enhances both the quality and
+      diversity of generated text.
+  5. Robustness to hyperparameter sensitivity: Unlike nucleus sampling and top-
+      k sampling, which are highly sensitive to hyperparameter selection, ASTS
+      exhibits greater stability across different values of its tuning parameters. The
+      sensitivity of ASTS to its hyperparameters is found to be even lower than
+      Locally Typical Sampling. This makes it a more reliable choice for real-world
+      applications where precise tuning may not always be feasible.
+  Limitations: Despite its strengths, ASTS has the following limitations that merit
+further research and refinement.
+  1. Computational complexity: The additional steps introduced in ASTS, such as
+      multi-objective scoring and reward-penalty adjustments, increase computa-
+      tional overhead compared to simpler sampling methods. While ASTS has
+      been optimized to minimize redundant computations, further efficiency im-
+      provements are necessary to make it more suitable for real-time applications.
+      Exploring model pruning techniques [84-85], approximate nearest neighbor
+      search for semantic alignment [86-88], or low-rank matrix factorization meth-
+      ods [89-90] could help reduce computational costs.
+  2. Performance in domain-specific applications: While ASTS has shown strong
+      performance in open-ended text generation tasks such as storytelling and
+      summarization, its effectiveness in more constrained domains, such as legal,
+      financial, or medical text generation, requires further investigation. Domain
+      adaptation techniques, including task-specific fine-tuning and transfer learn-
+      ing, could enhance ASTS’s performance in specialized contexts.
+  3. Handling extremely high-entropy contexts: In situations where text genera-
+      tion involves significant uncertainty, such as creative writing or open-ended
+      question answering, ASTS may still occasionally struggle to balance coher-
+      ence and diversity. Enhancing the adaptive thresholding mechanism to dy-
+      namically scale based on longer-range dependencies within a sequence may
+      improve performance in such situations.
+  Future research directions: Given the promising results of ASTS, several ave-
+nues for future research can be explored to further enhance its capabilities as dis-
+cussed in the following.
+  1. Integration with reinforcement learning: RL-based decoding strategies could
+      be combined with ASTS to optimize text generation based on task-specific
+      reward functions. By leveraging RL-based fine-tuning, ASTS could dynami-
+      cally adjust its sampling strategies to prioritize factual accuracy, readability,
+      or user-specific preferences in applications such as chatbot development and
+      personalized content generation.
+  2. Hybrid decoding approaches: ASTS could be integrated with contrastive de-
+      coding or retrieval-augmented generation (RAG) techniques to refine the to-
+      ken selection based on external knowledge sources [91-92]. Such a hybrid
+      approach could be particularly beneficial for tasks requiring factual con-
+      sistency, such as news summarization and question answering.
+ 33                                                                                Sen et al.
+
+   3.   Low-resource adaptation: The efficiency of ASTS could be further improved
+        by developing lightweight variants tailored for deployment in resource-con-
+        strained environments, such as mobile devices or embedded systems. Tech-
+        niques such as quantization, knowledge distillation, and sparsity-based opti-
+        mizations could be explored to reduce the computational footprint of ASTS
+        while maintaining its effectiveness.
+   4. Personalized and adaptive text generation: Developing adaptive mechanisms
+        that allow ASTS to learn from user interactions and generate text that aligns
+        with specific stylistic or contextual preferences could be an interesting re-
+        search direction. This would be particularly useful in applications such as AI-
+        assisted writing tools, content recommendation systems, and dialogue-based
+        AI assistants.
+   5. Cross-lingual and multilingual expansion: Extending ASTS to support mul-
+        tilingual text generation could enhance its applicability in diverse linguistic
+        contexts. Exploring the behavior of entropy-based sampling across different
+        languages and linguistic structures would provide valuable insights into opti-
+        mizing ASTS for global applications.
+   Summary conclusion: The development of ASTS is an advancement in decoding
+ strategies in LLM. It addresses some key challenges in text generation while main-
+ taining a balance between coherence, diversity, and computational efficiency.
+ Through extensive experimental validation, ASTS has been demonstrated to im-
+ prove upon some of the notable existing methods, making it a viable choice for real-
+ world applications in natural language generation. While certain limitations remain,
+ ongoing research in hybrid approaches, reinforcement learning, and computational
+ optimizations is expected to further refine ASTS.
+
+
+
+ References
+
+[1] Radford, A., Narasimhan, K., Salimans, T., Sutskever, I.: Improving Language Under-
+    standing by Generative Pre-Training. OpenAI Research Paper. (2018)
+[2] Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., Sutskever, I.: Language Models
+    are Unsupervised Multitask Learners. (2019)
+[3] Devlin, J., Chang, M. W., Lee, K., Toutanova, K.: BERT: Pre-Training of Deep Bidirec-
+    tional Transformers for Language Understanding. In: Proceedings of the 2019 Confer-
+    ence of the North American Chapter of the Association for Computational Linguistics:
+    Human Language Technologies, Vol 1, Long and Short Papers, pp. 4171–4186. DOI:
+    https://doi.org/10.18653/v1/N19-1423 (2019)
+[4] Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W.,
+    Liu, P. J. Exploring the Limits of Transfer Learning with a Unified Text-to-Text Trans-
+    former. Journal of Machine Learning Research, Vol 21, No 140, 1–67. DOI:
+    https://doi.org/10.48550/arXiv.1910.10683 (2019)
+[5] Sutskever, I., Vinyals, O., Le, Q. V. Sequence to Sequence Learning with Neural Net-
+    works. In: Proceedings of the 28th International Conference on Neural Information Pro-
+    cessing Systems, Vol 2, pp. 3104-3112. DOI: https://doi.org/10.48550/arXiv.1409.3215
+    (2014)
+  Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+  34
+ [6] Koehn, P., Och, F. J., Marcu, D. Statistical Phrase-Based Translation. In: Proceedings of
+     the 2003 Human Language Technology Conference of the North American Chapter of
+     the Association for Computational Linguistics, Vol 1, pp. 48-54. DOI:
+     https://doi.org/10.3115/1073445.107346 (2003)
+ [7] Fan, A., Lewis, M., Dauphin, Y.: Hierarchical Neural Story Generation. In: Proceedings
+     of the 56th Annual Meeting of the Association for Computational Linguistics, Long Pa-
+     pers, pp. 889-898. DOI: https://doi.org/10.48550/arXiv.1805.04833 (2018)
+ [8] Holtzman, A., Buys, J., Du, L., Forbes, M., Choi, Y.: The Curious Case of Neural Text
+     Degeneration. In: Proceedings of the 8th International Conference on Learning Represen-
+     tations (ICLR’20). DOI: https://doi.org/10.48550/arXiv.1904.09751 (2020)
+ [9] Meister, C., Pimentel, T., Wiher, G., Cotterell, R.: Locally Typical Sampling. In: Trans-
+     actions of the Association for Computational Linguistics, Vol 11, pp. 102-121, MIT
+     Press, Cambridge, MA, USA. DOI: https://doi.org/10.1162/tacl_a_00536 (2023)
+[10] Shi, C., Yang, H., Cai, D., Zhang, Z., Wang, Y., Yang, Y., Lam, W. A Thorough Exam-
+     ination of Decoding Methods in the Era of LLMs. In: Proceedings of the 2024 Conference
+     on Empirical Methods in Natural Language Processing, pp. 8601–8629. DOI:
+     https://doi.org/10.18653/v1/2024.emnlp-main.489 (2024)
+[11] Liu, M., Zeng, A., Wang, B., Zhang, P., Tang, J., Dong, Y. APAR: LLMs Can Do Auto-
+     Parallel Auto-Regressive Decoding. DOI: https://doi.org/10.48550/arXiv.2401.06761
+     (2024)
+[12] Bergner, B., Skliar, A., Royer, A., Blankevoort, T., Asano, Y., Bejnordi, B. E.: Think
+     Big, Generate Quick: LLM-to-SLM for Fast Autoregressive Decoding.
+     arXiv:2402.16844. DOI: https://doi.org/10.48550/arXiv.2402.16844 (2024)
+[13] Jaiswal, A., Hu, B., Yin, L., Ro, Y., Liu, S., Chen, T., Akella, A.: FFN-SkipLLM: A
+     Hidden Gem for Autoregressive Decoding with Adaptive Feed Forward Skipping. In:
+     Proceedings of the 2024 Conference on Empirical Methods in Natural Language Pro-
+     cessing, pp. 16943-16956. DOI: https://doi.org/10.18653/v1/2024.emnlp-main.941
+     (2024)
+[14] You, H., Fu, Y., Wang, Z., Yazdanbakhsh, A., Lin, Y. (C.).: When Linear Attention
+     Meets Autoregressive Decoding: Towards More Effective and Efficient Linearized Large
+     Language Models. In: Proceedings of the 41st International Conference on Machine
+     Learning, pp. 57350-57366, DOI: https://doi.org/10.48550/arXiv.2406.07368 (2024)
+[15] Liu, X., Hu, L., Bailis, P., Cheung, A., Deng, Z., Stoica, I., Zhang, H.: Online Speculative
+     Decoding. arXiv:2310.07177. DOI: https://doi.org/10.48550/arXiv.2310.07177 (2023)
+[16] Xia, H., Yang, Z., Dong, Q., Wang, P., Li, Y., Ge, T., Liu, T., Li, W., Sui, Z.: Unlocking
+     Efficiency in Large Language Model Inference: A Comprehensive Survey of Speculative
+     Decoding. In: Findings of the Association for Computational Linguistics, ACL 2024, pp.
+     7655-7671. DOI: https://doi.org/10.18653/v1/2024.findings-acl.456 (2024)
+[17] Jeon, W., Gagrani, M., Goel, R., Park, J., Lee, M., Lott, C.: Recursive Speculative De-
+     coding: Accelerating LLM Inference via Sampling Without Replacement.
+     arXiv:2402.14160. DOI: https://doi.org/10.48550/arXiv.2402.14160 (2024)
+[18] Li, M., Chen, X., Holtzman, A., Chen, B., Lin, J., Yih, W., Lin, X. V.: Nearest Neighbor
+     Speculative Decoding for LLM Generation and Attribution. arXiv:2405.19325. DOI:
+     https://doi.org/10.48550/arXiv.2405.19325 (2024)
+[19] Wen, Z., Gui, S., Feng, Y.: Speculative Decoding with CTC-based Draft Model for LLM
+     Inference Acceleration. DOI: https://doi.org/10.48550/arXiv.2412.00061 (2024)
+[20] Li, X. L., Holtzman, A., Fried, D., Liang, P., Eisner, J., Hashimoto, T., Zettlemoyer, L.,
+     Lewis, M.: Contrastive Decoding: Open-ended Text Generation as Optimization. In: Pro-
+     ceedings of the 61st Annual Meeting of the Association for Computational Linguistic,
+     Vol 1, Long Papers, pp. 12286-12312. DOI: https://doi.org/10.18653/v1/2023.acl-
+     long.687 (2023)
+  35                                                                                  Sen et al.
+
+[21] Zhao, Z., Monti, E., Lehmann, J., Assem, H.: Enhancing Contextual Understanding in
+     Large Language Models through Contrastive Decoding. In: Proceedings of the 2024 Con-
+     ference on North American Chapter of the Association for Computational Linguistics:
+     Human Language Technologies, Vol 1, Long Paper, pp. 4225-4237, Mexico City, Mex-
+     ico. DOI: https://doi.org/10.18653/v1/2024.naacl-long.237 (2024)
+[22] O'Brien, S., Lewis, M.: Contrastive Decoding Improves Reasoning in Large Language
+     Models. arXiv:2309.09117. DOI: https://doi.org/10.48550/arXiv.2309.09117 (2023)
+[23] Phan, P., Tran, H., Phan, L.: Distillation Contrastive Decoding: Improving LLMs Rea-
+     soning with Contrastive Decoding and Distillation. arXiv:2402.14874. DOI:
+     https://doi.org/10.48550/arXiv.2402.14874 (2023)
+[24] Chang, H.-S., Peng, N., Bansal, M., Ramakrishna, A., Chung, T.: Explaining and Im-
+     proving Contrastive Decoding by Extrapolating the Probabilities of a Huge and Hypo-
+     thetical LM. In: Proceedings of the 2024 Conference on Empirical Methods in Natural
+     Language Processing, pp. 8503-8526. DOI: https://doi.org/10.18653/v1/2024.emnlp-
+     main.484 (2024)
+[25] Zhang, J., Wang, J., Li, H., Shou, L., Chen, K., Chen, G., Mehrotra, S.: Draft & Verify:
+     Lossless Large Language Model Acceleration via Self-Speculative Decoding. In: Pro-
+     ceedings of the 62nd Annual Meeting of the Association for Computational Linguistics,
+     Vol 1, Long Papers, pp. 11263-11282. DOI: https://doi.org/10.18653/v1/2024.acl-
+     long.607 (2024)
+[26] Wang, J., Su, Y., Li, J., Xia, Q., Ye, Z., Duan, X., Wang, Z., Zhang, M. OPT-Tree: Spec-
+     ulative Decoding with Adaptive Draft Tree Structure. arXiv:2406.17276. DOI:
+     https://doi.org/10.48550/arXiv.2406.17276 (2024)
+[27] Liu, X., Lei, B., Zhang, R., Xu, D.: Adaptive Draft-Verification for Efficient Large Lan-
+     guage Model Decoding. DOI: https://doi.org/10.48550/arXiv.2407.12021 (2024)
+[28] Liu, T., Li, Y., Lv, Q., Liu, K., Zhu, J., Hu, W.: Parallel Speculative Decoding with Adap-
+     tive Draft Length. arXiv:2408.11850. DOI: https://doi.org/10.48550/arXiv.2408.11850
+     (2024)
+[29] Wiher, G., Meister, C., Cotterell, R.: On Decoding Strategies for Neural Text Generators.
+     arXiv:2203.15721. DOI: https://doi.org/10.48550/arXiv.2203.15721 (2022)
+[30] Xu, J., Xiong, C., Savarese, S., Zhou, Y.: Best-k Search Algorithm for Neural Text Gen-
+     eration. In: Proceedings of the 61st Annual Meeting of the ACL, Vol 1, Long Papers, pp.
+     12385-12401. DOI: https://doi.org/10.18653/v1/2023.acl-long.692 (2020)
+[31] Martínez-Murillo, I., Moreda, P., & Lloret, E.: Towards an efficient approach for con-
+     trollable text generation. In: Proceedings of the 1st International Workshop on Multilin-
+     gual, Multimodal, and Multitask Language Generation, pp. 26-31, European Association
+     for Machine Translation. (2023)
+[32] Shao, C., Meng, F., Liu, Y., & Zhou, J.: Language Generation with Strictly Proper Scor-
+     ing Rules. In: Proceedings of the 41st International Conference on Machine Learning
+     (ICML’24). DOI: https://doi.org/10.48550/arXiv.2405.18906 (2024)
+[33] Liang, X., Wang, H., Wang, Y. Z., Song, S., Yang, J., Niu, S., Hu, J., Liu, D., Yao, S.,
+     Xiong, F., Li, Z.: Controllable Text Generation for Large Language Models: A Survey.
+     arXiv:2408.12599. DOI: https://doi.org/10.48550/arXiv.2408.12599 (2024)
+[34] Sukhbaatar, S., Golovneva, O., Sharma, V., Xu, H., Lin, X. V., Rozière, B., Kahn, J., Li,
+     D., Yih, W.-T., Weston, J., Li, X. Branch-Train-MiX: Mixing Expert LLMs into a Mix-
+     ture-of-Experts LLM. DOI: https://doi.org/10.48550/arXiv.2403.07816 (2024)
+[35] Yun, L., Zhuang, Y., Fu, Y., Xing, E. P., Zhang, H.: Toward Inference-Optimal Mixture-
+     of-Expert Large Language Models. DOI: https://doi.org/10.48550/arXiv.2404.02852
+     (2024)
+[36] Zhu, T., Qu, X., Dong, D., Ruan, J., Tong, J., He, C., Cheng, Y.: LLaMA-MoE: Building
+     Mixture-of-Experts from LLaMA with Continual Pre-Training. arXiv:2406.16554. DOI:
+     https://doi.org/10.48550/arXiv.2406.16554 (2024)
+  Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+  36
+[37] Li, Z., Zhou, T.: Your Mixture-of-Experts LLM is Secretly an Embedding Model for
+     Free. arXiv:2410.10814. DOI: https://doi.org/10.48550/arXiv.2410.10814 (2024)
+[38] Zhang, C., Yang, Y., Li, Q., Wang, J., Song, D.: Task-Agnostic Distillation of Encoder-
+     Decoder Language Models. In: Proceedings of the 2024 Joint International Conference
+     on Computational Linguistics, Language Resources and Evaluation (LREC-
+     COLING’24), pp. 15629-15639. (2024)
+[39] Gu, Y., Dong, L., Wei, F., Huang, M.: MiniLLM: Knowledge distillation of large lan-
+     guage models. In: Proceedings of the International Conference on Learning Representa-
+     tion (ICLR’24). arXiv:2306.08543. DOI: https://doi.org/10.48550/arXiv.2306.08543
+     (2023)
+[40] Zhou, Y., Lyu, K., Rawat, A. S., Menon, A. K., Rostamizadeh, A., Kumar, S., Kagy, J.-
+     F., Agarwal, R.: DistillSpec: Improving Speculative Decoding via Knowledge Distilla-
+     tion. arXiv:2310.08461. DOI: https://doi.org/10.48550/arXiv.2310.08461 (2023)
+[41] Goel, R., Gagrani, M., Jeon, W., Park, J., Lee, M., Lott, C.: Direct Alignment of Draft
+     Model for Speculative Decoding with Chat-Fine-Tuned LLMs. In: Proceedings of the
+     ICLR’24 Workshop on Understanding of Foundation Models (ME-FoMo).
+     arXiv:2403.00858. DOI: https://doi.org/10.48550/arXiv.2403.00858 (2024)
+[42] Ning, X., Lin, Z., Zhou, Z., Wang, Z., Yang, H., Wang, Y.: Skeleton-of-Thought: Prompt-
+     ing LLMs for Efficient Parallel Generation. In: ICLR’24 Poster Track,
+     arXiv:2307.15337. DOI: https://doi.org/10.48550/arXiv.2307.15337 (2024)
+[43] Wu, P., Liu, J., Gong, Z., Wang, Q., Li, J., Wang, J., Cai, X., Zhao, D.: Parallel Decoding
+     via Hidden Transfer for Lossless Large Language Model Acceleration.
+     arXiv:2404.12022. DOI: https://doi.org/10.48550/arXiv.2404.12022 (2024)
+[44] Sun, C., Zhang, H., Lin, Z., Zhang, J., Zhang, F., Wang, Z., Chen, B., Song, C., Zhang,
+     D., Gai, K., Xiong, D.: Decoding at the Speed of Thought: Harnessing Parallel Decoding
+     of Lexical Units for LLMs. In: Proceedings of the 2024 Joint International Conference
+     on Computational Linguistics, Language Resources and Evaluation (LREC-
+     COLING’24), pp. 4476-4487. (2024)
+[45] Vilnis, L., Zemlyanskiy, Y., Murray, P., Passos, A., Sanghai, S.: Arithmetic Sampling:
+     Parallel Diverse Decoding for Large Language Models. In: Proceedings of ICML’23,
+     arXiv:2210.15458. DOI: https://doi.org/10.48550/arXiv.2210.15458 (2023)
+[46] Zheng, C., Ke, P., Zhang, Z., Huang, M.: Click: Controllable Text Generation with Se-
+     quence Likelihood Contrastive Learning. In: Findings of the Association for Computa-
+     tional Linguistics, pp. 1022-1040. DOI: https://doi.org/10.18653/v1/2023.findings-acl.65
+     (2023)
+[47] An, C., Feng, J., Lv, K., Kong, L., Qiu, X., & Huang, X.: CoNT: Contrastive Neural Text
+     Generation. In: Proceedings of the 36th Conference on Neural Information Processing
+     Systems (NeurIPS’22). DOI: https://doi.org/10.48550/arXiv.2205.14690 (2022)
+[48] Teng, Z., Chen, C., Zhang, Y., & Zhang, Y.: Contrastive Latent Variable Models for
+     Neural Text Generation. In: Proceedings of the 38th Conference on Uncertainty in Artifi-
+     cial Intelligence, Vol 180, pp. 1928-1938. (2022)
+[49] Ghazvininejad, M., Levy, O., Liu, Y., Zettlemoyer, L.: Mask-Predict: Parallel Decoding
+     of Conditional Masked Language Models. In: Proceedings of the 2019 Conference on
+     Empirical Methods in Natural Language Processing and the 9 th International Joint Con-
+     ference on Natural Language Processing (EMNLP-IJCNLP), pp. 6114–6123. DOI:
+     https://doi.org/10.18653/v1/D19-1633 (2019)
+[50] Ghazvininejad, M., Levy, O., Zettlemoyer, L.: Semi-Autoregressive Training Improves
+     Mask-Predict Decoding. DOI: https://doi.org/10.48550/arXiv.2001.08785 (2020)
+[51] Chang, J. D., Brantley, K., Ramamurthy, R., Misra, D., Sun, W.: Learning to Generate
+     Better than Your LLM. DOI: https://doi.org/10.48550/arXiv.2306.11816 (2023)
+  37                                                                                  Sen et al.
+
+[52] Mudgal, S., Lee, J., Ganapathy, H., Li, Y., Wang, T., Huang, Y., Chen, Z., Cheng, H.-T.,
+     Collins, M., Strohman, T., Chen, J., Beutel, A., Beirami, A.: Controlled Decoding from
+     Language Models. In: Proceedings of the International Conference on Machine Learning
+     (ICML’24). DOI: https://doi.org/10.48550/arXiv.2310.17022 (2024)
+[53] Yang, G., Chen, J., Lin, W., Byrne, B.: Direct Preference Optimization for Neural Ma-
+     chine Translation with Minimum Bayes Risk Decoding. In: Proceedings of the 2024 Con-
+     ference of the North American Chapter of the Association for Computational Linguistics:
+     Human Language Technologies, Vol 2: Short Papers, pp. 391-398. Association for Com-
+     putational Linguistics. DOI: https://doi.org/10.18653/v1/2024.naacl-short.34 (2024)
+[54] Wen, M., Liao, J., Deng, C., Wang, J., Zhang, W., Wen, Y.: Entropy-Regularized Token-
+     Level Policy Optimization for Language Agent Reinforcement. arXiv:2402.06700. DOI:
+     https://doi.org/10.48550/arXiv.2402.06700 (2024)
+[55] Hedderich, M. A., Lange, L., Adel, H., Strötgen, J., Klakow, D.: A Survey on Recent
+     Approaches for Natural Language Processing in Low-Resource Scenarios. In: Proceed-
+     ings of the 2021 Conference of the North American Chapter of the Association for Com-
+     putational Linguistics: Human Language Technologies (NAACL-HLT), pp. 2545–2568.
+     DOI: https://doi.org/10.18653/v1/2021.naacl-main.201 (2021)
+[56] Park, C., Yang, Y., Park, K., & Lim, H.: Decoding Strategies for Improving Low-Re-
+     source Machine Translation. Electronics, Vol 9, No 10, Article ID: 1562. DOI:
+     https://doi.org/10.3390/electronics9101562 (2020)
+[57] Xu, M., Zhang, J., Xu, L., Silamu, W., Li, Y.: Correlation-Guided Decoding Strategy for
+     Low-Resource Uyghur Scene Text Recognition. Complex & Intelligent Systems, Vol 11,
+     Article No: 57. DOI: https://doi.org/10.1007/s40747-024-01689-5 (2025)
+[58] Tuli, S., Lin, C.-H., Hsu, Y.-C., Jha, N. K., Shen, Y., Jin, H.: DynaMo: Accelerating
+     Language Model Inference with Dynamic Multi-Token Sampling. In: Proceedings of the
+     2024 Conference of the North American Chapter of the Association for Computational
+     Linguistic: Human Language Technologies, Vol 1, Long Papers. DOI:
+     https://doi.org/10.18653/v1/2024.naacl-long.182 (2024)
+[59] Mamou, J., Peregs, O., Korats, D., Berchanskys, M., Timor, N., Wasserblats, M.,
+     Schwartzp, R.: Dynamic Speculation Lookahead Accelerates Speculative Decoding of
+     Large Language Models. DOI: https://doi.org/10.48550/arXiv.2405.04304 (2024)
+[60] Pascual, D., Egressy, B., Bolli, F., & Wattenhofer, R.: Directed Beam Search: Plug-and-
+     Play Lexically Constrained Language Generation. arXiv:2012.15416. DOI:
+     https://doi.org/10.48550/arXiv.2012.15416 (2020)
+[61] Grosse, J., Wu, R., Rashid, A., Hennig, P., Poupart, P., Kristiadi, A.: Uncertainty-Guided
+     Optimization on Large Language Model Search Trees. arXiv:2407.03951. DOI:
+     https://doi.org/10.48550/arXiv.2407.03951 (2024)
+[62] Qin, Z., He, Z., Prakriya, N., Cong, J., Sun, Y.: Dynamic-Width Speculative Beam De-
+     coding for Efficient LLM Inference. DOI: https://doi.org/10.48550/arXiv.2409.16560
+     (2024)
+[63] Qiu, Z., Ou, Z., Wu, B., Li, J., Liu, A., King, I.: Entropy-Based Decoding for Retrieval-
+     Augmented Large Language Models. DOI: https://doi.org/10.48550/arXiv.2406.17519
+     (2024)
+[64] Wang, R., Li, J., Li, P.: InfoDiffusion: Information Entropy Aware Diffusion Process for
+     Non-Autoregressive Text Generation. In: Findings of the Association for Computational
+     Linguistics, pp. 13757-13770. DOI: https://doi.org/10.18653/v1/2023.findings-
+     emnlp.919 (2023)
+[65] Arora, K., O’Donnell, T. J., Precup, D., Weston, J., Cheung, J. C. K.: The Stable Entropy
+     Hypothesis and Entropy-Aware Decoding: An Analysis and Algorithm for Robust Natu-
+     ral Language Generation. DOI: https://doi.org/10.48550/arXiv.2302.06784 (2023)
+  Advancing Decoding Strategies: Enhancements in Locally Typical Sampling for LLMs
+  38
+[66] Qin, L., Welleck, S., Khashabi, D., Choi, Y.: COLD Decoding: Energy-based Con-
+     strained Text Generation with Langevin Dynamics. Advances in Neural Information Pro-
+     cessing Systems (NeurIPS’22), 35, 10656-10668. arXiv:2202.11705. DOI:
+     https://doi.org/10.48550/arXiv.2202.11705 (2023)
+[67] Liu, X., Khalifa, M., Wang, L.: BOLT: Fast Energy-based Controlled Text Generation
+     with Tunable Biases. In: Proceedings of the 61st Annual Meeting of the Association for
+     Computational Linguistics (ACL’23), pp. 186-200. arXiv:2305.12018. DOI:
+     https://doi.org/10.48550/arXiv.2305.12018 (2023)
+[68] Zhang, K., Zhao, J., Chen, R.: KOALA: Enhancing Speculative Decoding for LLM via
+     Multi-Layer Draft Heads with Adversarial Learning. arXiv:2408.08146. DOI:
+     https://doi.org/10.48550/arXiv.2408.08146 (2024)
+[69] He, T., Tan, X., Xia, Y., He, D., Qin, T., Chen, Z., Liu, T.-Y.: Layer-Wise Coordination
+     between Encoder and Decoder for Neural Machine Translation. In: Proceedings of the
+     32nd Conference on Neural Information Processing Systems (NIPS’18), Montreal, Can-
+     ada, pp. 7955-7965. (2018)
+[70] Wolf, T. et al.: Transformers: State-of-the-Art Natural Language Processing. In: Proceed-
+     ings of the 2020 Conference on Empirical Methods in Natural Language Processing: Sys-
+     tem Demonstrations, pp. 38-45, Association for Computational Linguistics. DOI:
+     https://doi.org/10.18653/v1/2020.emnlp-demos.6 (2020)
+[71] Basu, S., Ramachandran, G.S., Keskar, N.S, Varshney, L.R.: Mirostat: A Neural Text
+     Decoding Algorithm that Directly Controls Perplexity. In: Proceedings of ICLR 2021.
+     DOI: https://doi.org/10.48550/arXiv.2007.14966 (2020)
+[72] Pillutla, K., Liu, L., Thickstun, J., Welleck, S., Swayamdipta, S., Zellers, R., Oh, S., Choi,
+     Y., Harchaoui, Z.: MAUVE Scores for Generative Models: Theory and Prac-tice. Journal
+     of      Machine        Learning       Research,      Vol    24,      No       1-92.      DOI:
+     https://doi.org/10.48550/arXiv.2212.14578 (2022)
+[73] Pillutla, K., Swayamdipta, S., Zellers, R., Thickstun, J., Welleck, S., Choi, Y., Harchaoui,
+     Z.: MAUVE: Measuring the Gap between Neural Text and Human Text Using Diver-
+     gence Frontiers. In: Proceedings of the 35th International Conference on Neural Infor-
+     mation Processing Systems (NIPS’21), Article No: 368, pp. 4816-4828. (2021)
+[74] Zhang H., Duckworth D., Ippolito, D., Neelakantan, A.: Trading Off Diversity and Qual-
+     ity in Natural Language Generation. In: Proceeding of the Workshop on Human Evalua-
+     tion of NLP Systems (HumEval’21), pp. 25-33. Association for Computational Linguis-
+     tics. (2021)
+[75] Nadeem, M., He, T., Cho, K., Glass, J.: A Systematic Characterization of Sampling Al-
+     gorithms for Open-Ended Language Generation. In: Proceedings of the 1st Con-ference
+     of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th
+     International Joint Conference on Natural Language Processing, pp. 334-346, Associa-
+     tion for Computational Linguistics. DOI: https://doi.org/10.18653/v1/2020.aacl-main.36
+     (2020)
+[76] Papineni, K., Roukos, S., Ward, T., Zhu, W.-J.: BLEU: A Method for Automatic Evalu-
+     ation of Machine Translation. In: Proceedings of the 40th Annual Meeting on Association
+     for Computational Linguistics, pp. 311-318, July 7-12, 2002, Philadelphia, Pennsylvania,
+     USA. DOI: https://doi.org/10.3115/1073083.107313 (2002)
+[77] Lin, C.-Y.: ROUGE: A Package for Automatic Evaluation of Summaries. Text Summa-
+     rization Branches Out, pp. 74-81. Association for Computational Linguistics. (2004)
+[78] Welleck S., Kulikov, I., Roller, S., Dinan, E., Cho, K., Weston, J.: Neural Text Genera-
+     tion with Unlikelihood Training. In: Proceedings of the 8th International Conference on
+     Learning Representation (ICLR’20), Addis Ababa, Ethiopia. (2020)
+[79] Zipf, G.K.: Human Behavior and the Principle of Least Effort. Addison-Wesley Press.
+     (1949)
+  39                                                                                  Sen et al.
+
+[80] Fan, A., Lewis, M., Dauphin, Y.: Hierarchical Neural Story Generation. In: Proceedings
+     of the 56th Annual Meeting of the Association for Computational Linguistics, Vol1, Long
+     Papers, pp. 889-898, Melbourne, Australia. Association for Computational Linguistics.
+     DOI: https://doi.org/10.18653/v1/P18-1082 (2018)
+[81] Merity, S., Xiong, C., Bradbury, J., Socher, R.: Pointer Sentinel Mixture Models. In: Pro-
+     ceedings of the 5th International Conference on Learning Representation. DOI:
+     https://doi.org/10.48550/arXiv.1609.07843 (2016)
+[82] Lewis, M. et al.: BART: Denoising Sequence-to-Sequence Pre-Training for Natural Lan-
+     guage Generation, Translation, and Comprehension. In: Proceedings of the 58 th Annual
+     Meeting of the Association for Computational Linguistics, pp. 7871-7880. Association
+     for Computational Linguistics. DOI: https://doi.org/10.18653/v1/2020.acl-main.703
+     (2020)
+[83] Nallapati, R., Zhou, B., dos Santos, C., Gulcehre, C., Xiang, B.: Abstractive Text Sum-
+     marization Using Sequence-to-Sequence RNNs and Beyond. In: Proceedings of the 29 th
+     SIGNLL Conference on Computational Natural Language Learning, pp. 280-290, Berlin,
+     Germany. DOI: https://doi.org/10.18653/v1/K16-1028 (2016)
+[84] Cheng, H., Zhang, M., Shi, J.Q.: A Survey on Deep Neural Network Pruning: Taxonomy,
+     Comparison, Analysis, and Recommendations. IEEE Transactions on Pattern Analysis
+     and Machine Intelligence, Vol 46, No 12, pp. 10558-10578. DOI:
+     https://doi.org/10.1109/TPAMI.2024.3447085 (2024)
+[85] Xie, Y., Luo, Y., She, H., Xiang, Z.: Neural Network Model Pruning without Additional
+     Computation and Structure Requirements. In: Proceedings of the 26 th International Con-
+     ference on Computer Supported Cooperative Work in Design (CSCWD’23) pp. 1734-
+     1740. DOI: https://doi.org/10.1109/CSCWD57460.2023.10152777 (2023)
+[86] Peng, Y., Choi, B., Chan, T.N., Yang, J., Xu, J.: Efficient Approximate Nearest Neighbor
+     Search in Multi-Dimensional Databased. In: Proceedings of the ACM on Management of
+     Data, Vol 1, No 1, Article No 54, pp. 1-27. DOI: https://doi.org/10.1145/3588908 (2023)
+[87] Engels, J., Landrum, B., Yu, S., Dhulipala, L., Shun, J.: Approximate Nearest Neighbor
+     Search with Window Filters. In: Proceedings of the 41st International Conference on Ma-
+     chine Learning (ICML’24), Article No 497, pp. 12469-12490 (2024)
+[88] Yang, M., Li, W., Jin, J., Zhong, X., Wang, X., Shen, Z., Jia, W., Wang, W.: Effective
+     and General Distance Computation for Approximate Nearest Neighbor Search.
+     arXiv:2404.16322. DOI: https://doi.org/10.48550/arXiv.2404.16322 (2024)
+[89] Chi, Y., Lu, Y.M., Chen, Y.: Nonconvex Optimization Meets Low-Rank Matrix Factor-
+     ization: An Overview. IEEE Transactions on Signal Processing, Vol 67, No 20, pp. 5239-
+     5269. DOI: https://doi.org/10.1109/TSP.2019.2937282 (2019)
+[90] Jiang, F., Oskarsson, M., Astrom, K.: On the Minimal Problems of Low-Rank Matrix
+     Factorization. In: 2015 IEEE Conference on Computer Vision and Pattern Recognition
+     (CVPR), pp. 2549-2557. DOI: https://doi.org/10.1109/CVPR.2015. (2025)
+

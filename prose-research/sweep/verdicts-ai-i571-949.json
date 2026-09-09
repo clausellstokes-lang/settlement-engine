@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 571,
+   "feature": "tidy endings",
+   "claim": "Sudowrite's own marketing names a preference for happy endings as a defect of general-purpose models.",
+   "source": "Sudowrite, Muse product page (vendor marketing copy)",
+   "url": "https://www.sudowrite.com/muse",
+   "quote": "Basic AI loves happy endings",
+   "page": "comparison section heading"
+  },
+  {
+   "index": 591,
+   "feature": "reflexive antithesis",
+   "claim": "Hern names the tendency to offer both sides of an argument in a single response as one of the less noticeable tells of generated text.",
+   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "quote": "A tendency to offer both sides of an argument in",
+   "page": "opening section, paragraph beginning 'Other tells are less noticeable'"
+  },
+  {
+   "index": 661,
+   "feature": "reflexive antithesis",
+   "claim": "Coagulopath, quoted by nostalgebraist, lists R1's endless not-thing-x-but-thing-y parallelisms among the model's recognisable repetitive habits.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "not thing x, but thing y",
+   "page": "section \"Background: R1\", quoted point 7"
+  },
+  {
+   "index": 670,
+   "feature": "reflexive antithesis",
+   "claim": "Guo argues that the it's-not-X-it's-Y parallelism is a legitimate rhetorical device but that AI uses it constantly and reflexively in situations where it adds nothing.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "AI uses it constantly, reflexively, in situations where it adds nothing",
+   "page": "section \"Parallelism (It's Not X, It's Y)\""
+  },
+  {
+   "index": 817,
+   "feature": "tidy endings",
+   "claim": "The Dramatica Co. asserts the danger is competent AI fiction sharing one underlying shape it names as tidy, explicit, causally legible, emotionally annotated and thematically over-secured.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "tidy, explicit, causally legible, emotionally annotated, and thematically over-secured",
+   "page": "section 'The Cluster Is the Warning'"
+  },
+  {
+   "index": 832,
+   "feature": "tidy endings",
+   "claim": "StoryScope measured protagonist-driven resolutions in 69% of AI stories against 46% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "more protagonist-driven resolutions (69% vs. 46%)",
+   "page": "§4.1 'Human authors subvert linearity'"
+  },
+  {
+   "index": 842,
+   "feature": "tidy endings",
+   "claim": "StoryScope's per-model fingerprints record Gemini as producing the tidiest endings and extended denouements.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Gemini produces the tidiest endings, extended denouements",
+   "page": "§5 'Gemini, DeepSeek, and Kimi are triplets'"
+  },
+  {
+   "index": 881,
+   "feature": "tidy endings",
+   "claim": "The WikiProject names as a tell that many LLM-generated Wikipedia articles include a Challenges section built on a rigid formula and ending in a vaguely positive assessment.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Many LLM-generated Wikipedia articles include a \"Challenges\" section",
+   "page": "section 'Outline-like conclusions about challenges and future prospects'"
+  },
+  {
+   "index": 890,
+   "feature": "reflexive antithesis",
+   "claim": "The WikiProject names as a tell parallel constructions involving not, but or however, such as not only X but also Y and it is not just X, it's Y.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "It is common for LLMs to use parallel constructions involving",
+   "page": "section 'Negative parallelisms', subsection 'Not just X, but also Y'"
+  },
+  {
+   "index": 891,
+   "feature": "reflexive antithesis",
+   "claim": "The WikiProject records the reversed form X rather than Y as particularly common in Grok output.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Grok output is particularly idiosyncratic",
+   "page": "section 'Negative parallelisms', subsection 'X rather than Y'; the quotation is from the AI-vocabulary section of the same page"
+  },
+  {
+   "index": 941,
+   "feature": "homogenisation",
+   "claim": "Sato describes the dozen-plus spam obituaries about one dead woman as detached and near-identical to each other, differing only by a few reordered words.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "The obituaries are detached and nearly identical to one another",
+   "page": "body, section on the Vastag/Mazur obituaries"
+  },
+  {
+   "index": 943,
+   "feature": "lexical tells",
+   "claim": "Sato characterises the generated obituary articles as written in a nondescript gravitas built out of unnatural phrasing.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "written with a nondescript gravitas, using unnatural phrasing",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 944,
+   "feature": "lexical tells",
+   "claim": "Sato names the phrases 'indelible mark' and 'untimely demise' as the unnatural phrasing carrying that gravitas.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "the “indelible mark” a person has left, or their “untimely demise,”",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 945,
+   "feature": "abstraction over the concrete",
+   "claim": "Sato reports that the generated obituaries carry that elevated phrasing while containing no actual detail about the dead person's life.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "but without any actual detail about their life",
+   "page": "body, section on The Thaiger"
+  },
+  {
+   "index": 949,
+   "feature": "homogenisation",
+   "claim": "Sato reports that one site's death stories follow a shared structure and sometimes reuse identical vague phrases about different deceased people.",
+   "source": "Mia Sato, The Verge, 12 Feb 2024",
+   "url": "https://www.theverge.com/24065145/ai-obituary-spam-generative-clickbait",
+   "quote": "sometimes using identical vague phrases about the deceased",
+   "page": "body, section on The Thaiger"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 571,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Basic AI loves happy endings.",
+   "note": "Raw HTML fetched with a browser UA, 200. The heading appears verbatim (with a period) in the Basic-AI-vs-Muse comparison strip, paired with 'Muse will write anything - no filters.' The page's term is 'Basic AI', exemplified in the adjacent column by a named ChatGPT refusal, which carries the claim's 'general-purpose models' limb."
+  },
+  {
+   "index": 591,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "offer both sides of an argument in a single response",
+   "note": "Raw Guardian page, 200; byline 'Alex Hern', dateline 'Tue 16 Apr 2024'. The quoted string appears verbatim inside the paragraph opening 'Other tells are less noticeable in isolation', which lists it with an aversion to single-sentence replies and flawless spelling as 'robotic writing'. Every limb supported."
+  },
+  {
+   "index": 661,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its endless \"not thing x, but thing y\" parallelisms",
+   "note": "Raw tumblr page, 200. In the 'Background: R1' section the post introduces 'a selection from Coagulopath's 7-point description of R1's style', and quoted point 7 is headed 'repetitive writing' and includes the phrase verbatim alongside the italicised-last-word habit. Attribution, section and point number all match."
+  },
+  {
+   "index": 670,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI uses it constantly, reflexively, in situations where it adds nothing",
+   "note": "Raw ignorance.ai page, 200; byline 'Charlie Guo', dated 'Oct 22, 2025'. Under the heading 'Parallelism (It's Not X, It's Y)' the page first concedes it is 'a perfectly legitimate rhetorical device', then the quoted sentence follows (page prefixes 'But'). Both limbs of the claim supported."
+  },
+  {
+   "index": 817,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tidy, explicit, causally legible, emotionally annotated, and thematically over-secured",
+   "note": "Raw dramatica.com page, 200; byline 'The Dramatica Co.', dated May 29, 2026. In the section 'The Cluster Is the Warning' the page frames the danger as AI producing a vast amount of competent fiction sharing one underlying shape, then gives the quoted five-term list verbatim. Section name and every limb match."
+  },
+  {
+   "index": 832,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more protagonist-driven resolutions (69% vs. 46%)",
+   "note": "Raw arXiv HTML for 2604.03136v6, 200. The string appears verbatim in section 4.1 ('What core narrative choices separate human from AI writing?'), in the paragraph headed 'Human authors subvert linearity.' The sentence reads 'AI stories exhibit tighter causal chains, more protagonist-driven resolutions (69% vs. 46%)', fixing 69% to AI and 46% to human as the claim states."
+  },
+  {
+   "index": 842,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gemini produces the tidiest endings, extended denouements",
+   "note": "Raw arXiv HTML for 2604.03136v6, 200. The string appears verbatim in section 5, 'Pinpointing each source's writing style', in the paragraph headed 'Gemini, DeepSeek, and Kimi are triplets'. The paper continues 'and the bleakest settings (88% tagged bleak and oppressive)', which the claim does not assert. Per-model fingerprint framing is the paper's own."
+  },
+  {
+   "index": 881,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Many LLM-generated Wikipedia articles include a \"Challenges\" section",
+   "note": "Raw Wikipedia page fetched 2026-09-07, 200. Quote verbatim in the section 'Outline-like conclusions about challenges and future prospects'. The page gives the formula (opens 'Despite its [positive/promotional words]...'; 'usually appear at the end of articles with a rigid outline structure'), supporting 'rigid formula'. Note the page's ending is a disjunction: 'ends with either a vaguely positive assessment... or speculation about how ongoing or potential initiatives could benefit the subject' - the claim names the first disjunct only, which the page does support."
+  },
+  {
+   "index": 890,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "parallel constructions involving \"not\", \"but\", or \"however\"",
+   "note": "Raw Wikipedia page, 200. In section 'Negative parallelisms', subsection 'Not just X, but also Y', the page reads 'It is common for LLMs to use parallel constructions involving \"not\", \"but\", or \"however\" such as \"Not only ... but ... \" or \"It is not just ..., it's ...\"' - the supplied quote is verbatim and both named example forms match the claim exactly."
+  },
+  {
+   "index": 891,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "a construction particularly common in Grok output",
+   "note": "Raw Wikipedia page, 200. The claim IS supported, but not by the supplied quote. The support is in section 'Negative parallelisms', subsection 'X rather than Y': 'This pattern may also be reversed, a construction particularly common in Grok output.' The supplied quote 'Grok output is particularly idiosyncratic' does appear verbatim, but in the AI-vocabulary section about overused words (causal, empirical, correlate, underscore) - a different finding. Graded SUBSTANCE rather than VERBATIM because the quotation does not evidence the sentence it is attached to; any downstream use must cite the 'X rather than Y' sentence, not this one."
+  },
+  {
+   "index": 941,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The obituaries are detached and nearly identical to one another",
+   "note": "Raw Verge page, 200; byline Mia Sato, 'Feb 12, 2024'. Quote verbatim; the page continues 'with a few words moved around and repeating inaccurate details, like where Mazur lived', carrying the reordered-words limb. The dozen-plus limb rests on 'The Verge identified over a dozen websites that published articles about Mazur's death' plus 'numerous bogus obituaries about Mazur'; Beth Mazur is the one dead woman. The claim's 'differing only by' is marginally tighter than the page, which also cites repeated inaccuracies."
+  },
+  {
+   "index": 943,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written with a nondescript gravitas, using unnatural phrasing",
+   "note": "Raw Verge page, 200. Verbatim in the section on The Thaiger: 'The obituary articles are written with a nondescript gravitas, using unnatural phrasing like...'. Both limbs (nondescript gravitas; built out of unnatural phrasing) are the page's own construction."
+  },
+  {
+   "index": 944,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the \"indelible mark\" a person has left, or their \"untimely demise\"",
+   "note": "Raw Verge page, 200. The two phrases appear verbatim (with curly quotation marks in the source) in the same Thaiger sentence, introduced by 'using unnatural phrasing like', which is exactly the relation the claim asserts."
+  },
+  {
+   "index": 945,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but without any actual detail about their life",
+   "note": "Raw Verge page, 200. Verbatim clause closing the same Thaiger sentence, so the contrast the claim draws (elevated phrasing yet no detail about the dead person) is the page's own sentence structure. The next sentence reinforces it: the articles 'lack quotes from family or friends of the deceased and do not cite outside reporting.'"
+  },
+  {
+   "index": 949,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sometimes using identical vague phrases about the deceased",
+   "note": "Raw Verge page, 200. Verbatim in the Thaiger section: 'The stories follow a similar structure, sometimes using identical vague phrases about the deceased.' The 'one site' is named as The Thaiger and the deceased are described as different individuals (illness deaths, student suicides, minors in car accidents), supporting the 'different deceased people' limb."
+  }
+ ]
+}

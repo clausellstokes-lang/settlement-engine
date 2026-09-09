@@ -1,0 +1,1361 @@
+
+===== PAGE 1 =====
+Translating Robin Hobb’s Assassin’s Apprentice
+       BA Thesis English Language and Culture, Utrecht University
+______________________________________________________
+_____________________________________________________________
+       Author: Iris Duits 
+       Student no.: 3539385
+       First reader: Cees Koster
+       Second reader: Roselinde Supheert
+       April 2012
+===== PAGE 2 =====
+Table of Contents
+_____________________________________________________________
+1. Introduction 3
+2. Description of author and novels 5
+3. Issues when translating fantasy literature 7
+4. Proper names 9
+5. Translation criticism - Proper names 10
+6. Translation criticism - Translation strategies 14
+7. Translation - Passage one 19
+8. Translation - Passage two 23
+9. Translation - Passage three 26
+Bibliography 30
+Appendix A: Source text passages 32
+Appendix B: Passages in translation by Feberwee and Cuijpers 39
+_____________________________________________________________
+2
+===== PAGE 3 =====
+1. Introduction
+Fantasy literature has become increasingly popular over the years. Writers such as J.K. 
+Rowling have successfully introduced the genre to the greater public, who in turn have 
+embraced the genre eagerly. The popularity of the genre has led to an increase in fantasy 
+writers and fantasy novels. Megan Lindholm, writing under the pseudonym Robin Hobb, is 
+one of these new writers who benefited from the increased interest in the genre. Her first 
+novel, Assassin’s Apprentice, was published in 1995. She writes about the ruling family of 
+the Farseers, who have to defend their kingdom against threats from outside. Hobb’s 
+writing style, as well as the perspective of the novels, make it easy to sympathise with the 
+main character, FitzChivalry. In the beginning, Fitz is just a young boy, but throughout the 
+novels he grows up and ages, while facing many problems. The fantasy aspects, such as 
+the ability to bond with animals or the power to influence people’s minds, are very 
+appealing. 
+ I read Assassin’s Apprentice when I was about 15 years old. Although I had read 
+some fantasy novels before, this one was different to me. It immediately grabbed hold of 
+me and I could not put it down. I purchased the rest of the trilogy and finished it within a 
+week. I was not only impressed by Hobb’s writing style, but also by her use of the English 
+language. My grades for English had always been quite high, but they improved after I 
+started reading Robin Hobb. It could even be argued that these novels are the reason for 
+me currently being a student of English Language and Culture. The way Hobb plays with 
+the English language and how she makes you sympathise with her characters is 
+beautifully done. Over the years, I have reread Hobb’s novels a great many times. 
+Although the initial wonder can never be truly matched, I still find her novels delightful and 
+I continue to discover new and interesting features whenever I reread them.
+ Having to choose a text to translate was not very difficult for me. Not only was I 
+highly impressed by this text, but it also has a Dutch translation already, which is not very 
+3
+===== PAGE 4 =====
+good. I desperately tried to make my friends read the translation, so they would 
+understand my passion for Hobb’s novels. None of them, however, made it past the fifth 
+chapter. It was too dull, or too complex to continue reading. I could not believe how they 
+could say this and started reading the translation myself, which led me to agree with my 
+friends. The Dutch translation of Assassin’s Apprentice, called Leerling en Meester is 
+written in quite archaic language. The novel loses its flow and graciousness, and becomes 
+rather strange. The language used does not come across as natural in Dutch, as it seems 
+too formal most of the time. The word order seems unnatural as well, up to a point where 
+your mind changes the word order while you read to make sense of it all. Indeed, reading 
+Leerling en Meester takes too much effort to enjoy. 
+ It may seem a little arrogant to think that I can do a better job. This might not even 
+be the case, since my analysis of the translation problems of this text could show that the 
+Dutch translation by Feberwee and Cuijpers is as good as it gets. However, this is not the 
+case, since my analysis shows that some of their changes are not necessary and 
+undesirable, since information is lost. In order to write my own translation, I will first carry 
+out research on the topic of fantasy literature and the translation of such literature. I will 
+also look at some other problems, such as how to translate proper names. Proper names 
+have an important role in this novel, so translating them well is very important. I believe 
+that the most important change in my translation will be the sentence structure and word 
+order. I hope my translation will read fluently and that it will feel like a truly Dutch text.
+ To try and do so, I have chosen three passages to translate. The first passage is the 
+start of the first chapter, since that is where a novel has to grab hold of its readers. The 
+second passage is a passage with a great amount of action as well as description, where 
+Fitz is by himself and has to fight of a group of Forged ones. The final passage includes 
+two dialogues, one between Fitz and the Fool and one between Fitz and Prince Verity. 
+This final passage also involves many proper names, which offers a fine opportunity for 
+4
+===== PAGE 5 =====
+translating these as well. Hopefully, my efforts will yield a translation that retains the flow of 
+the original text, and is able to captivate the reader in the same way. 
+2. Description of author and novels
+The author of Assassin’s Apprentice is Megan Lindholm, who writes under the pseudonym 
+Robin Hobb. In the The Encyclopedia of Fantasy, Clute and Grant describe Megan 
+Lindholm as “a restless and varied fantasist, [who] possesses real talents which may be 
+coming into full focus in the latest trilogy,” meaning the Farseer trilogy, of which Assassin’s 
+Apprentice is part one (583). Clute and Grant categorise Assassin’s Apprentice as 
+“dynastic fantasy,” which are fantasy series set in a fantasyland, in which a hero founds 
+and/or defends a nation or land (583). Dynastic fantasies avoid metamorphosis, leaving 
+the fantasyland and the characters intact so that the series can be extended, sometimes 
+indefinitely (Clute and Grant 305). Megan Lindholm has written two other trilogies based 
+on the Farseer world and is currently working on a tetralogy, which also features the 
+Farseer world (Robinhobb.com). Her novels have been translated in a number of 
+languages, such as French, German, Hungarian and Dutch. 
+ In the Farseer trilogy, the main character is FitzChivalry Farseer, bastard son of 
+Prince Chivalry. He is raised at Buckkeep, the residence of the royal family. He is secretly 
+trained to become an assassin by Chade, the King’s current assassin. In this occupation 
+Fitz has to perform numerous tasks for his king. He is also trained in the Skill, an elusive 
+talent possessed only by few. The Skill allows people to see into the minds of others and 
+influence their thoughts. The land that is ruled by the Farseer family, the Six Duchies, is 
+attacked constantly by Raiders from the Outislands. They plunder and destroy small towns 
+across the coast and Forge the inhabitants of these towns. Forging turns people into 
+zombies, humans that have forgotten who they are and are only interested in surviving. 
+They attack their families and each other for food or clothing. In these troubled times, Fitz 
+5
+===== PAGE 6 =====
+matures. Prince Verity uses his Skill to confuse the Raiders, but it costs him a great 
+amount of energy. King Shrewd decides that it is time for Prince Verity to marry, to give the 
+people of the Six Duchies heart. Verity’s half brother Prince Regal is asked to find and 
+court a wife for him, since Verity is too busy defending the kingdom. In the end, Verity has 
+to marry Princess Kettricken of the Mountain Kingdom, but is unable to attend the 
+ceremony himself. His half brother will attend the marriage in his stead. Fitz is ordered to 
+secretly murder the Princess’ brother, so that Princess Kettricken, and indirectly the Six 
+Duchies, will rule the Mountain Kingdom after her father dies. Prince Regal, however, 
+reveals this plot to Princess Kettricken and her brother Rurisk. In the end, Fitz is almost 
+killed by Regal’s men, but manages to survive. After this first novel, the story continues 
+until Prince Verity is King. The second trilogy shows the perspective of the Raiders, while 
+the third trilogy again shows the Farseer family, who ally with dragons to defeat the 
+Raiders. The tetralogy focuses on these dragons and is set in the Rain Wilds, which 
+borders on the Six Duchies.
+  According to Stableford, Hobb’s novels are “elaborately detailed” (200). An 
+example of this can be found in the following passage in which Fitz travels to the Mountain 
+Kingdom and sees the Chyurda, the Mountain people, for the first time:
+ Physically, most of them were Chyurda, and were as I had expected them to be; a 
+ tall, pale people, light of hair and eye, and some with hair as red as a fox. They 
+ were a brawny people, the women as well as the men. All seemed to carry a bow or 
+ a sling, and they were obviously more comfortable on foot than on horseback. They 
+ dressed in wool and leather, and even the humblest wore fine furs as if they were 
+ no more than homespun. They strode alongside us, mounted as we were, and 
+ seemed to have no difficulty keeping up with the horses all day. (Hobb 383)
+Since these novels fall into the category of immersive fantasy, details are needed to 
+describe the fantasyland in which the story takes place (Stableford 214). Immersive 
+6
+===== PAGE 7 =====
+fantasy is fantasy in which “we sit on the protagonist’s shoulder and while we have access 
+to their eyes and ears, we are not provided with an explanatory narrative ... We do not 
+enter into the immersive fantasy, we are assumed to be of it” (Mendlesohn). In other 
+words, in immersive fantasy the reader is supposedly part of the fantasy world and 
+elaborate details enable the reader to see the fantasyland as if it were a real place. 
+3. Issues when translating fantasy literature
+One major issue when translating fantasy literature is the proper translation of culture. The 
+same problem occurs when translating novels that are set in the real world, but with these 
+novels it is usually possible to either choose to adapt culture-specific elements (CSEs) to 
+the target culture or to preserve these elements (Aixelá 200-203). Often something exists 
+in the target culture which is similar to the cultural element in the source culture. It is then 
+possible to replace the CSE from the source culture with a CSE from the target culture so 
+that readers will understand what is mentioned (Grit 193). If a similar CSE does not exist in 
+the target culture, translators can explain the CSE to make readers from the target culture 
+understand what is meant (Grit 192-193). When making these choices, it is also important 
+to be aware of the fact that translations can be naturalising or exoticising (Holmes 186). A 
+naturalising translation will adapt CSEs to the target culture as much as possible, so that 
+readers will not encounter foreign elements in the text. An exoticising translation will 
+incorporate foreign CSEs to make clear to the readers that they are reading a foreign text, 
+based on a different culture than their own.
+ Fantasy literature automatically falls into the exoticising category, since fantasy is 
+meant to show the reader another world with different possibilities. The exoticising 
+elements are introduced by the author of the source text and they have to be retained in 
+translation. This means that CSEs that are introduced in the source text might not have an 
+equivalent in the target language, since the CSE could be made up by the author. It is 
+7
+===== PAGE 8 =====
+therefore almost impossible, and also undesirable, to produce a naturalising translation of 
+a fantasy text. Translators have to keep this in mind when translating, so they retain the 
+foreign elements in the target text. CSEs can not be adapted to the target culture, so they 
+have to be preserved and explained when necessary. Usually, the source text will explain 
+these CSEs as well, so translators do not have to add information in their translation. 
+ Another important issue to take into consideration when translating fantasy literature 
+is the analysis of the source text. Analysing the source text is important for all translations, 
+not just those of fantasy literature. However, with fantasy literature a translator cannot trust 
+his assumptions and ideas about the world, since the fantasy world might not comply with 
+these notions. Because of this, a thorough analysis is even more important. Translators 
+have to carefully examine the novel to learn about the fantasy world and the abilities 
+people or creatures have in this world. Magic, for instance, is a common characteristic of 
+the fantasy genre. The use of magic has to “feel believable, consistent and logic to the 
+reader and that sense must be retained in translation” (Kok 11). The translation of magical 
+acts should be consistent, so that readers can form a clear image of what happens when 
+this particular magic is used. As a translator, it is very important to analyse these details 
+before translating, to make sure that the translation is consistent. 
+ A final important feature to analyse is the fantasy world itself. Translators have to 
+form a mental picture they can use when describing different parts of the fantasy 
+surroundings. Drawing maps will help create a sense of order and control for the translator. 
+Sometimes these maps are provided in the form of illustrations, but at other times the 
+translator might have to draw these maps him-/herself, based on the text. A thorough 
+analysis is needed to make sure the maps and the descriptions are accurate. Especially 
+with immersive fantasy like Hobb’s, the details matter since the reader has to feel like he 
+or she is part of the fantasy world.
+8
+===== PAGE 9 =====
+4. Proper names
+In Assassin’s Apprentice, many proper names occur. These proper names offer a difficulty 
+when they have to be translated. The names of the royal family indicate a virtue that the 
+royals are supposedly bound to, so it is important to translate these names well in order for 
+the target audience to understand what virtues are intended. In the English version, the 
+virtues are simply named, for instance with Prince Chivalry and King Shrewd. 
+ Many different strategies for translating proper names exist, as indicated by Van der 
+Zee in her thesis. Proper names can be preserved, a strategy which is often used for 
+names that do not have a specific connotation in the source language. It is also possible to 
+preserve the name, but also offer additional information, so that the connotation of the 
+name is preserved as well. This strategy is often used “[to bridge] a difference in 
+‘knowledge’ between the reader of the source text and the reader of the target text” (Van 
+Coillie 125). Proper names can also be phonetically or morphologically changed, so that 
+the names become easier to pronounce and look more like names from the target culture. 
+Proper names can also be replaced with an exonym, which is a counterpart of the name in 
+the target language, such as John in English and Jan in Dutch. This method “integrates 
+the names into the target language culture, enabling them to function in a comparable 
+manner” (van Coillie 127). Proper names can also be left out entirely, as long as their 
+reference function is maintained, for instance by using a more general term such as ‘the 
+boy’ or ‘him’ instead of ‘Fitz’. Proper names can also be recreated to produce similar 
+effects. Finally, proper names can be replaced by a name with a different or additional 
+connotation. Nord notes that “translators do not always use the same techniques with all 
+the proper names of a particular text they are translating” (183). It is therefore possible to 
+use different strategies within the same translation.
+ In the case of Hobb’s novel, different options seem viable. Preserving the names 
+seems unnatural, since the virtues are named in English and would not be clear for the 
+9
+===== PAGE 10 =====
+Dutch target audience. Preserving the name while giving additional information is a 
+possibility, since the virtues can then be explained when the names are mentioned for the 
+first time. This would make their meaning clear to Dutch readers, but it is quite a major 
+change compared to the original text, since information is added by the translator. Lady 
+Patience, for instance, would become something like: “Vrouwe Patience, geduldig van 
+aard”. Simply changing names phonetically or morphologically offers no real solution, 
+since the virtue then still remains unclear. Except for Thomas, the proper names used by 
+Hobb have no exonym in Dutch, so that strategy also offers no solution. The only 
+possibilities seem to be to either translate the virtues into Dutch, or to preserve them but 
+explain them to the reader. Either of these strategies is viable and offers a clear 
+translation. Perhaps preservation makes the text seem more foreign. Simply translating 
+the names creates uncommon names, but this also happens in the source text. Lady 
+Patience or Vrouwe Geduld are probably equally weird. 
+5. Translation criticism - Proper names
+English nameDutch 
+translation
+Strategy used 
+by Feberwee 
+and Cuijpers
+Effect on the reader
+Thomas Tom Exonym Similar to source text (ST), 
+although Thomas could have 
+been preserved as well.
+Burrich Burrich Preservation Probably similar to ST, no 
+known connotations
+Lady PatienceVrouwe PatiencePreservation Virtue becomes obscure in 
+translation
+Galen Galen Preservation Probably similar to ST, no 
+known connotations
+Chade Chade Preservation Probably similar to ST, although 
+link to ‘shade’ is lost in Dutch
+Fedwren Fedwren Preservation Probably similar to ST, no 
+known connotations
+10
+===== PAGE 11 =====
+Prince ChivalryPrins Chevalric Morphological 
+and phonetical 
+change
+Virtue becomes obscure in 
+translation
+Prince Verity Prins Veritas Morphological 
+change
+Virtue becomes obscure in 
+translation
+Prince Regal Prins Regaal Phonetical 
+change
+Virtue becomes obscure in 
+translation
+FitzChivalry 
+Farseer
+FitzChevalric 
+Ziener
+Morphological 
+and phonetical 
+change and 
+translation
+Clearly linked to Prince 
+Chivalry, but information is lost 
+in direct translation of ‘Fitz’
+Hands Manus Recreation Similar to ST, since the 
+connotations are kept
+Mistress HastyVrouwe GezwindTranslation Similar to ST
+King Shrewd Koning Vlijm de 
+Listige
+Translation and 
+adding 
+information
+Probably similar to ST, maybe 
+even more clear or intense 
+because of the repetition
+Molly 
+Nosebleed
+Mollie 
+Bloedneus
+Translation and 
+phonetical 
+change
+Similar to ST
+The Fool De nar Translation, but 
+without the 
+capital letter
+Probably less identiﬁable as a 
+person, more seen as a 
+character or even an object
+Nosy Snoet Translation Similar to ST
+Slink Sluip Translation Similar to ST
+Vixen Vosje Replacement / 
+Translation
+Different connotations in Dutch, 
+less mean and ﬁerce in 
+translation
+Sooty Zwartvoet Replacement Creates a different picture 
+(speckled horse vs. horse with 
+black hoofs) 
+Smithy Roetje Replacement Creates a different picture
+             Table 5. The translation of proper names in Leerling en Meester and their effect on the reader
+In their translation of Assassin’s Apprentice, Feberwee and Cuijpers use many different 
+methods to deal with proper names. One exonym is found in the translation of Thomas into 
+Tom. They could have retained Thomas as well, since it is quite a common name in Dutch. 
+11
+===== PAGE 12 =====
+They probably chose to use Tom because the pronunciation of Tom is similar to Thomas, 
+whereas the pronunciation of Thomas in Dutch has a long vowel. 
+ The strategy of preservation is used with a number of characters, such as Burrich, 
+Lady Patience, Galen, Chade and Fedwren. For most characters, this is not a problem 
+since their names are not meant to indicate a specific virtue. Lady Patience is the only 
+character with a royal status and therefore a name that indicates her virtue. By preserving 
+her name in the Dutch translation, the virtue becomes unrecognisable for most Dutch 
+readers. Something similar happens with the preservation of Chade. His name is closely 
+related to the word ‘shade’, which is probably clear for English readers and this is used by 
+the Fool to divert the attention in the course of the novel. “‘Do you know Chade?’ I asked 
+abruptly ... ‘Shade or sunlight, I know when to keep a grip on my tongue’” (Hobb 239). Fitz 
+is not supposed to talk about Chade in public, so the Fool cleverly plays on the likeness to 
+‘shade’. The pun is translated using Chade and schaduw, but the link is unclear in Dutch. 
+“‘Ken je Chade?’ vroeg ik plotseling ... ‘In schaduw of zonlicht, ik weet wanneer ik mijn 
+tong in bedwang moet houden’” (Hobb 186-187). Depending on how Chade is pronounced 
+in Dutch, it might sound similar to ‘schaduw’, but the clever solution of the Fool most likely 
+goes unnoticed. 
+ Another method that is frequently employed by Feberwee and Cuijpers is changing 
+the proper names either morphologically, phonetically or both. This method is mainly used 
+in the translation of the names of the princes. Royal names are supposed to indicate a 
+virtue and this virtue might not be clear by simply changing the morphology or phonetics of 
+the name. Prince Chivalry is translated into Prins Chevalric, making the connection to 
+chivalry very obscure for most Dutch readers. Prince Verity is translated as Prins Veritas, 
+which might be clear to Dutch readers familiar with Latin. For most Dutch readers, 
+however, the virtue is lost in translation. Prince Regal becomes Prins Regaal, also making 
+the virtue more obscure in Dutch. The point of these names is, as explained in the first 
+12
+===== PAGE 13 =====
+chapter of the novel, to indicate the virtue that each royal child is bound to. Through these 
+translations, the virtues become obscure, so that most Dutch readers will not grasp the full 
+meaning of these names. 
+ A special case is the name of the protagonist, FitzChivalry Farseer. He is the 
+bastard son of Prince Chivalry, which is indicated by ‘Fitz’, which is the Anglo-Norman 
+word for ‘son’ (Oxford English Dictionary). FitzChivalry therefore means ‘son of Chivalry’. 
+Feberwee and Cuijpers translate this as FitzChevalric Ziener. They leave the ‘Fitz’ in place, 
+but the connotation of this is lost since Dutch does not have this word. Since ‘Chevalric’ is 
+present in his name, it is clear that Fitz has a connection with him, but the link is less clear 
+in the Dutch version. 
+ In Feberwee and Cuijpers’ translation, recreation of a proper name is also used. A 
+stableboy called Hands is translated into Manus, giving the connotation of ‘manusje van 
+alles,’ which means he is able to perform many small tasks. This fits the character Hands 
+very well, since he indeed is used throughout the novel for small tasks in and around the 
+keep or on journeys. 
+ Some of the proper names in the story are simply translated directly into Dutch, 
+such as Mistress Hasty, King Shrewd, Molly Nosebleed and the Fool. These are translated 
+as Vrouwe Gezwind, Koning Vlijm de Listige, Mollie Bloedneus and de nar. With the name 
+of the King, extra information is added in the Dutch translation, since simply Koning Vlijm 
+would have been sufficient. Feberwee and Cuijpers choose to add some information, most 
+likely to clarify the virtue associated with King Shrewd. This probably helps Dutch readers 
+understand, but it is unclear why the translation of royal names is so inconsistent. The 
+virtues of the princes are lost almost entirely, while the virtue of the king is emphasised, to 
+be extra clear. Another choice made by Feberwee and Cuijpers is to delete the capital in 
+the Fool’s name. By translating it without a capital, he is seen less as a person and more 
+13
+===== PAGE 14 =====
+as a role. In English, the Fool is clearly as much a name as a role that the character fulfils, 
+but the idea of a name is lost in the translation.  
+ Direct translation of proper names can also be seen in the translation of animal 
+names. For instance, Nosy and Slink are translated as Snoet and Sluip. However, quite a 
+number of animal names are replaced by another name with different connotations 
+altogether. Vixen, Burrich’s watchdog, is translated as Vosje. In English, vixen means 
+female fox, but it is also associated with an ill-tempered quarrelsome woman (Oxford 
+English Dictionary). In the Dutch translation, this connotation is lost entirely. Vosje clearly 
+indicates the female fox part, but the ill-tempered part is lost. In the original novel, it is 
+clear from the start that Vixen can be mean if she has to protect something. She is to be 
+feared by those with the wrong intentions and can lash out fiercely. Vosje, on the other 
+hand, makes her seem sweet, mainly because of the -je suffix, which is used to indicate 
+the diminutive in Dutch. Another problem occurs in the translation of Sooty and Smithy. 
+Here Feberwee and Cuijpers probably mixed up the names, since Sooty becomes 
+Zwartvoet and Smithy becomes Roetje. The word ‘soot’ means ‘roet’ in Dutch. It would 
+therefore make more sense to translate Sooty into Roetje. Sooty is described as having 
+black specks all over her body, so Zwartvoet is quite an awkward translation. Smithy is 
+chosen as a strong name for a “tenacious and alert dog” (Assassin’s Apprentice 238). 
+These characteristics are not present in the name Roetje, which makes the dog seem 
+sweeter than he seems in English. Something like Smit, Smitje, or even preserving Smithy 
+might be a better solution. 
+ 
+6. Translation criticism - Translation strategies
+Chesterman states that translation is about making changes (243). When a translator 
+encounters a sentence that is not easy to translate, the translator has to make a change in 
+14
+===== PAGE 15 =====
+order to create a natural sounding sentence. Chesterman classifies different strategies 
+which can be used when translating a text. His strategies are divided into syntactic, 
+semantic and pragmatic strategies, all divided into many sub-strategies. Chesterman’s 
+work can be used by translators as a toolbox, so they know what strategies are available 
+to them. Chesterman’s work is descriptive instead of prescriptive, so it does not serve as a 
+guideline for translators, telling them which strategy should be used. When translating a 
+text, it is important to make the right choices, since that will lead to a fluent and 
+understandable target text. In line with Skopos theory, the target text is most important 
+since that is the one readers will have to read. Before this theory emerged, it was generally 
+thought that a translation had to be as true to the source text as possible. The faithfulness 
+of translation mattered instead of the final product, the translation itself. Skopos theory 
+changed this and translation became more goal-oriented (Hulst 238). Naturally it is also 
+important to stay as close to the source text as possible, but this should not lead to texts 
+that do not feel right to the translator and/or the target audience. In line with this is “Honig 
+and Kußmaul’s ‘der notwendige Grad der Differenzierung’” which indicates that a 
+translation has to be as precise as necessary, instead of as precise as possible (Hulst 
+238).
+  Feberwee and Cuijpers sometimes create sentences in Dutch that are more 
+complex than necessary. In the introduction of the first chapter, this is not yet a major 
+problem, since this part almost reads like an encyclopaedia, offering factual information on 
+the Six Duchies. Even in English, the language seems a bit archaic, and long, complex 
+sentences occur. It is therefore not that problematic for Feberwee and Cuijpers to use a 
+similar style in Dutch. However, Feberwee and Cuijpers do not change their style in the 
+rest of their translation. Particularly in the first chapter, they continue to use complicated 
+sentences, for no apparent reason. For instance, Feberwee and Cuijpers translate “I have 
+spoiled another leaf of the fine stuff, in what I suspect is a futile endeavour” (Assassin’s 
+15
+===== PAGE 16 =====
+Apprentice 1) into “Weer een prachtig vel bedorven bij wat - naar ik vermoed - een 
+vergeefs pogen zal blijken te zijn” (Leerling en Meester 1). The phrase “een vergeefs 
+pogen zal blijken te zijn” is more complicated than necessary, mainly because of the 
+auxiliary verbs. The English sentence is clear and to the point, whereas the Dutch 
+sentence seems formal and wordy. In my own translation I have translated this sentence 
+as “Ik heb weer een blad van het goede papier verspild, bij wat mij voorkomt als een 
+vergeefse onderneming.” The sentence still is a bit formal, but it is more to the point and 
+uses less auxiliary verbs.
+ I n  Assassin’s Apprentice, Hobb writes: “There were three of them” (324), which is 
+translated by Feberwee and Cuijpers as “Ze waren met hun drieën” (...). It is possible to 
+use ‘hun’ in this context, but the word ‘hun’ is becoming more and more stigmatised in 
+Dutch. In speech, ‘hun’ is often used ungrammatically, since ‘hun’ is a Dutch possessive 
+pronoun, but it is often used as a personal pronoun (Genootschap Onze Taal). Sentences 
+like “Hun hebben dat gezegd” instead of “Zij hebben dat gezegd” are used frequently 
+nowadays, especially by young people. Feberwee and Cuijpers use ‘hun’ properly here, 
+but because of the stigmatisation of the word it might be better to leave it out, especially 
+since there is an easy alternative, namely “Ze waren met zijn drieën.” This has exactly the 
+same meaning and is not stigmatised in Dutch. 
+ On the one hand, Feberwee and Cuijpers sometimes leave out part of the English 
+sentences. Leaving parts out is one of Chesterman’s pragmatic strategies, namely PR3 
+(259). A translator can leave certain parts out, according to Chesterman, if the information 
+in the source text has no clear equivalent in the target language and the information is not 
+necessary to understand what is meant (259). However, Feberwee and Cuijpers leave out 
+parts that can easily be translated into Dutch, so it is unclear why they leave out these 
+parts. For instance, Hobb writes “I was hungry, cold, and tired. My wet shoes were a 
+misery, but I had no thought of stopping,” (323) which is translated by Feberwee and 
+16
+===== PAGE 17 =====
+Cuijpers as “Ik had honger, ik had het koud en ik was moe. Maar ik dacht niet aan 
+opgeven” (246). The entire bit about the wet shoes is left out, and the sentence is started 
+with “maar,” which is as uncommon in Dutch as it is to start a sentence with “but” in 
+English. This is not a strict rule when it comes to literature, but it is not the most elegant 
+solution. Parts of sentences are left out more often by Feberwee and Cuijpers, for instance 
+at the start of chapter fifteen. Here Hobb writes about speaking to the Elderlings and says: 
+ But, if incredibly gifted with the Skill, a man can aspire to speak directly to the 
+ Elderlings, those who are below only the gods themselves. Few have ever dared to 
+ do so, and of those who did, even fewer attained what they asked. For it is said, 
+ one may ask of the Elderlings, but the answer they give may not be to the question 
+ you ask, but to the one you should have asked. And the answer to that question 
+ may be one a man cannot hear and live. For when one speaks to the Elderlings, 
+ then is the sweetness of using the Skill stronger and most perilous. (265)
+Feberwee and Cuijpers translate this as: “En dan is er nog het talent dat grenst aan het 
+ongelooflijke en dat in staat is contact te leggen met de Ouderlingen, die rechtstreeks 
+onder de goden staan. Slechts weinigen hebben dat ooit aangedurfd, want wie spreekt 
+met de Ouderlingen ervaart de verlokkende zoetheid van het Vermogen in haar sterkste 
+en gevaarlijkste vorm (205). Again, a few lines are left out about the questions and 
+answers one receives from the Elderlings, and that the answers can even kill a man. 
+These are vital details about the Elderlings that readers should be aware of since the 
+Elderlings are part of the story later on. The start of every chapter is in italics and offers 
+encyclopaedic information on the Six Duchies, so every detail is needed to form a proper 
+image of the fantasy world. It therefore remains unclear why Feberwee and Cuijpers chose 
+to leave these parts out.
+ On the other hand, however, Feberwee and Cuijpers add extra sentences to their 
+translation, adding information that is not part of the original text. Chesterman states that it 
+17
+===== PAGE 18 =====
+is sometimes necessary to add information, for instance when relevant information for 
+readers of the target text is not found in the source text (259). The translator can then add 
+a word or phrase to include this information in his text. The adding of information by 
+Feberwee and Cuijpers happens in the first chapter, where Hobb writes: “My memories 
+reach back to when I was six years old. Before that, there is nothing” (Assassin’s 
+Apprentice 2). In Leerling en Meester, Feberwee and Cuijpers write: “Mijn herinneringen 
+gaan terug tot mijn zesde jaar. Daarvoor is er niets, slechts een peilloze diepte waarin mijn 
+geest nooit heeft weten door te dringen, hoezeer ik ook mijn best heb gedaan. Voor die 
+dag op Maansoog is er niets” (3). They translate the original quite accurately, but after 
+‘niets,’ they add a great amount of information that is simply not there in the original text. 
+The reason for this could be that this extra bit of information was present in the 
+manuscript, but was cut out of the novel. If Feberwee and Cuijpers then used the 
+manuscript for their translation, they would have included this bit.
+ All in all, Feberwee and Cuijpers make a great number of changes in their 
+translation of Assassin’s Apprentice. As Chesterman states, change is inevitable in 
+translation since languages differ. However, this does not mean that translators can just 
+change whatever they like. They have to adhere to the original as much as possible and 
+only change words or phrases when a direct translation creates an irregular sentence. So 
+while it is vital to change the original when no other solution is present, it is also important 
+to stay as close to the original as possible. Since Feberwee and Cuijpers leave out details 
+that matter later on in the story, I am not convinced that all their changes are necessary 
+and desirable. Their translation is not as terrible as I initially thought, but the fact that they 
+leave out important details in their translation impoverishes the story. Especially since this 
+information is easy to translate and truly offers extra insight, it is too bad that Feberwee 
+and Cuijpers chose to exclude it.
+18
+===== PAGE 19 =====
+7. Translation - Passage one
+De Vroegste Geschiedenis
+Een geschiedenis van de Zes Hertogdommen is noodzakelijkerwijs een geschiedenis van 
+zijn heersers, de Zieners. Een volledige vertelling zou terug moeten gaan tot voor de 
+stichting van het Eerste Hertogdom, en als deze namen bewaard waren gebleven, zou de 
+geschiedenis ons vertellen over Buiteneilanders die plunderden vanaf de Zee en als 
+piraten een kust binnenvielen die gematigder en zachter was dan de ijzige stranden van 
+de Buiteneilanden. Maar we kennen de namen niet van deze vroegste voorvaderen.
+ En over de eerste echte koning is weinig meer bekend dan zijn naam en een paar 
+buitensporige legenden. Nemer1 heette hij, een eenvoudige naam, en misschien is met 
+zijn naam de traditie begonnen om dochters en zonen van zijn geslacht namen te geven 
+die hun levens en bestaan zouden bepalen. In volksverhalen wordt beweert dat deze 
+namen met een nieuwgeborene werden verbonden door magie, en dat de koninklijke 
+nakomelingen niet in staat waren om tegen de deugden wiens naam zij droegen in te 
+gaan. Overhandigd door vuur, ondergedompeld in zout water en getoond aan de wind2; zo 
+werden de namen verbonden met deze kinderen. Zo wordt het ons verteld. Een mooie 
+veronderstelling, en misschien dat dit ritueel ooit heeft bestaan, maar de geschiedenis 
+toont ons dat dit niet altijd voldoende was om een kind aan de deugd waarnaar het 
+vernoemd werd te binden...
+19
+1 I decided to translate the proper names of the royal family into Dutch instead of preserving them, 
+to make sure that it is clear for Dutch readers which virtues the royals are bound to. In this 
+instance, Taker becomes Nemer, since ‘to take’ means almost the same in English as ‘nemen’ 
+means in Dutch. 
+2 In the original novel, this phrase shows a clear repetition. I wanted to preserve this repetition, 
+which made it necessary to choose speciﬁc verbs in my translation. The most difﬁcult verb to 
+translate in this respect is ‘passed,’ since it has many different meanings and in English, this is 
+clear. In Dutch, however, there is no similar verb that holds the same meanings, so a choice has to 
+be made. The English phrase is “Passed through ﬁre,” which can be interpreted in two ways. Either 
+someone has passed through ﬁre, or someone was passed through ﬁre. I think the second option 
+is more likely, since this act was performed to seal a name to a child, so it was probably done with 
+babies. A baby cannot pass through ﬁre on its own, so it is passed through the ﬁre. The closest 
+translation I can think of in Dutch is ‘doorgeven,’ but to adhere to the formality of this passage 
+something like ‘overhandigen’ might be better.
+===== PAGE 20 =====
+Mijn pen hapert, valt uit mijn knokkelige greep en laat een kronkelend spoor van inkt 
+achter op Fedwren’s papier. Ik heb weer een blad van het goede papier verspild, bij wat 
+mij voorkomt als een vergeefse onderneming. Ik vraag me af of ik deze geschiedenis kan 
+schrijven, of dat elke pagina een heimelijke bitterheid vertoond waarvan ik dacht dat deze 
+al lang verdwenen was. Ik zie mezelf als genezen van alle wrok, maar als mijn pen het 
+papier raakt, vloeit de pijn van een jongen als bloed naar buiten met de inkt, totdat ik het 
+gevoel heb dat elke zorgvuldig gevormde zwarte letter een korst over een eeuwenoude 
+bloedrode wond vormt. 
+  Zowel Fedwren als Vrouwe Geduld 3 waren zo vol met enthousiasme als ze over 
+een geschreven geschiedenis van de Zes Hertogdommen spraken dat ik mezelf 
+wijsmaakte dat het schrijven van zo’n geschiedenis de moeite waard zou zijn. Ik 
+overtuigde mezelf ervan dat de inspanning mijn gedachten van de pijn af zou leiden en 
+zou helpen de tijd voorbij te laten gaan. Maar elke historische gebeurtenis die ik bekijk 
+wekt enkel persoonlijke, duistere gevoelens van eenzaamheid en verlies op. Ik ben bang 
+dat ik hier helemaal mee moet stoppen, en anders zal ik moeten terugkijken op alles dat 
+mij heeft gevormd tot wat ik nu ben. En daarom begin ik opnieuw, en opnieuw, maar altijd 
+realiseer ik me dat ik over mijn eigen begin schrijf in plaats van het begin van dit land. Ik 
+weet niets eens aan wie ik mezelf probeer te verklaren. Mijn leven is een web van 
+geheimen geweest, geheimen die zelfs nu nog niet veilig gedeeld kunnen worden. Moet ik 
+ze allemaal op mooi papier schrijven, terwijl ze alleen vuur en as zullen voortbrengen? 
+Misschien.
+20
+3 The proper name Fedwren has no clear meaning and since he does not belong to the royal 
+family, I decided to preserve this name. With Patience, who is royalty, a simple translation seems 
+best. However, just translating into ‘Fedwren and Geduld’ seems awkward, so I decided to add 
+‘vrouwe’ to indicate that Geduld is a name. I think this makes it easier for Dutch readers to realise 
+that this woman is probably royalty, since her name clearly indicates a virtue. In the course of the 
+novel, she is often referred to as ‘Lady Patience’ so adding ‘vrouwe’ here is not a too much 
+change. The only drawback is that this makes Patience seems like a surname, while it is actually a 
+ﬁrst name. However, the explanation at the start of the chapter makes this a possible translation.
+===== PAGE 21 =====
+ Mijn herinneringen gaan terug tot mijn zesde jaar. Daarvoor is er niets. Maar op die 
+dag beginnen de herinneringen plotseling, met een helderheid en gedetailleerdheid die me 
+overweldigt. Soms is het te volledig, en vraag ik me af of het echt mijn herinnering is. 
+Herinner ik het me echt, of zijn het de eindeloze verhalen van legioenen keukenmeiden, 
+reeksen koksjongens en kuddes staljongens, waarmee ze mijn aanwezigheid 
+verklaarden? Misschien heb ik het verhaal zo vaak gehoord, van zoveel verschillende 
+bronnen, dat ik het me nu herinner als een echte herinnering van mezelf. Is de 
+gedetailleerdheid het resultaat van een zesjarige die alles om zich heen in zich opneemt? 
+Of zou de volledigheid van de herinnering veroorzaakt worden door de stralende 
+bedekking van het Talent, en de medicijnen die een man neemt om zijn verslaving eraan 
+onder controle te houden, medicijnen die pijnen en verlangens van zichzelf meebrengen? 
+Dat laatste is zeer goed mogelijk. Misschien zelfs hoogstwaarschijnlijk. Ik hoop dat dat niet 
+het geval is.
+ De herinnering is bijna fysiek; de koude grijsheid van de verdwijnende dag, de 
+meedogenloze regen die me doorweekt, de ijzige keien van de straten van een vreemde 
+stad, zelfs de eeltige ruigheid van de enorme hand die mijn kleine handje vastgreep. Soms 
+verwonder ik me over die greep. De hand was hard en ruig, mijn hand erin gevangen. En 
+toch was hij warm, en niet onvriendelijk, zoals hij mijn hand vasthield. Slechts ferm. Hij liet 
+me niet uitglijden op de ijzige straten, maar hij liet me ook niet ontsnappen aan mijn lot. Hij 
+was zo onverbiddelijk als de ijskoude grijze regen, die een ijslaag vormde over de 
+vertrapte sneeuw op het kiezelpad voor de enorme houten deuren van een versterkt 
+gebouw dat als een vesting in de stad stond. 
+ De deuren waren hoog, niet enkel voor een zesjarige jongen, maar hoog genoeg 
+om reuzen door te laten, hoog genoeg om zelfs de magere oude man die boven mij 
+uittorende zich klein te laten voelen. Ik vond ze er vreemd uitzien, alhoewel ik me niet kan 
+herinneren wat voor soort deur of onderkomen dan gewoon zou zijn. Enkel dat deze, met 
+21
+===== PAGE 22 =====
+houtsnijwerk4 en hangend aan zwarte ijzeren scharnieren, versierd met een hertenkop en 
+een klopper van glimmend brons, mijn ervaringen te boven gingen. Ik herinner me dat de 
+sneeuwbrij mijn kleren had doorweekt, zodat mijn voeten en benen nat en koud waren. En 
+toch kan ik me niet herinneren dat ik ver had gelopen door deze laatste winterse vloek, of 
+dat ik was gedragen. Nee, het begint daar, precies voor de deuren van vesting, met mijn 
+kleine hand gevangen in die van de grote man.
+ Het is bijna als een poppenkast die begint. Ja, zo zie ik het voor me. De gordijntjes 
+gaan open, en daar staan we voor die grote deur5. De oude man tilde de bronzen klopper 
+op en sloeg er mee, een keer, twee keer, drie keer, op de plaat die zijn kloppen 
+weerkaatste. En toen, ergens naast het podium, klonk er een stem. Niet van binnen de 
+deuren, maar van achter ons, daar waar we vandaan gekomen waren. ‘Vader, alstublieft,’ 
+smeekte de vrouwenstem. Ik draaide me om om naar haar te kijken, maar het was weer 
+gaan sneeuwen, een kanten sluier die wimpers en mouwen bedekte. Ik kan me niet 
+herinneren dat ik iemand zag. Ik kan met zekerheid zeggen dat ik niet vocht om los te 
+komen uit de greep van de oude man, of dat ik ‘moeder, moeder!’ riep. In plaats daarvan 
+stond ik, als een toeschouwer, en hoorde het geluid van laarzen in de vesting en het 
+openmaken van de grendel aan de binnenkant.
+ Ze schreeuwde nog een keer. Ik kan de woorden nog precies horen, de wanhoop in 
+een stem die ik nu als jong zou bestempelen. ‘Vader, alstublieft, ik smeek het u!’ Een rilling 
+ging door de hand die de mijne vastgreep, maar of dat kwam door angst of door een 
+22
+4 In the English passage, the door is carved. There is no Dutch verb that holds the same meaning, 
+so translating the verb with a verb would lead to a translation such as ‘gekerfd’ which does not hold 
+the same meaning. That is why I chose to translate this as ‘met houtsnijwerk’ which brings to mind 
+the correct picture.
+5 In the English version, this sentence is in the past tense. In English, this works quite well, but in 
+Dutch it seems more natural to put this sentence in the present tense, like the two sentences that 
+come before it. The present tense immediately calls to mind an image, enabling readers to imagine 
+what happens. When written in the past tense (De gordijntjes gingen open, en daar stonden we 
+voor die grote deur), the sentence seems more passive. Something that has happened is 
+described, while a translation in the present tense makes it seem like the story starts here. First 
+Fitz describes the current situation in detail, and after this sentence, his memory starts. I think that 
+is what is intended here, so therefore I changed the tense of this sentence.
+===== PAGE 23 =====
+andere emotie, zal ik nooit weten. Zo snel als een zwarte kraai een stukje gevallen brood 
+grijpt, bukte de oude man en griste een bevroren stuk vuil ijs van de grond. Stilzwijgend 
+wierp hij het, met veel kracht en woede, en ik dook in elkaar. Ik kan me geen kreet 
+herinneren, noch het geluid van getroffen vlees. Wat ik me wel herinner is hoe de deuren 
+openzwaaide naar buiten, waardoor de oude man vlug achteruit moest stappen en mij met 
+zich meetrok.
+ En dan het volgende: de man die de deur opende was geen dienstbode, zoals ik 
+misschien zou verwachten als ik dit verhaal slechts had gehoord. Nee, mijn herinnering 
+laat me een soldaat zien, een krijger, een beetje grijs geworden en met een buik meer 
+gevormd door vet dan door spieren, geen goed gemanierde dienstbode. Hij nam zowel de 
+oude man als mij helemaal op met de geoefende argwaan van een soldaat, en stond toen 
+stil, wachtend tot wij zouden verklaren wat we kwamen doen.
+8. Translation - Passage two
+De wind was meedogenloos, en mijn zoute, natte kleding plakte en schuurde. Ik was 
+hongerig, koud, en moe. Mijn natte schoenen waren een ellende, maar ik dacht er geen 
+moment aan om te stoppen. Ik draafde als een wolf, constant om me heen kijkend, met 
+mijn oren gespitst op geluid achter me. Het ene moment was de weg leeg en zwart voor 
+me. Het volgende moment doemden er mannen op uit de duisternis. Twee voor me, en 
+toen ik me omdraaide, ook een achter me. De kletsende golven hadden het geluid van 
+hun voetstappen verhuld, en vanachter de wolken liet de maan6 me slechts glimpen van 
+hen zien terwijl ze dichterbij kwamen. Ik ging met mijn rug tegen de massieve muur van 
+een pakhuis staan, hield mijn staf gereed, en wachtte.
+23
+6 In the English version, it says “the dodging moon” which could be translated as “de ontwijkende 
+maan”. This seems weird, however, since it makes the moon seem like a living thing. The meaning 
+of this phrase is probably something like a moon behind clouds, that only shows itself every once 
+in a while. An “ontwijkende maan” would not be clear enough in my opinion, so I decided to add 
+some information here. 
+===== PAGE 24 =====
+ Ik zag ze komen, stil en sluipend. Dat verbaasde me, want waarom schreeuwden 
+ze niet gewoon, waarom kwam niet de hele bemanning kijken hoe ik gepakt zou worden? 
+Maar deze mannen hielden elkaar net zo goed in gaten als ze mij in de gaten hielden. Ze 
+jaagden niet als een bende, maar ieder van hen hoopte dat de anderen zouden sterven 
+terwijl ze mij probeerden te doden, waardoor de buit voor het oprapen zou liggen. 
+Gesmedenen7, geen kapers. 
+ Een vreselijke kou welde in me op. Ik wist zeker dat het kleinste geluid van een 
+knokpartij de kapers zou laten komen. Dus als de Gesmedenen me niet zouden doden, 
+deden de kapers dat wel. Hoe dan ook, als alle wegen naar de dood leiden heeft het geen 
+zin om langs welke weg dan ook te rennen. Ik zou de dingen nemen zoals ze kwamen. Zij 
+waren met z’n drieën. Een had een mes. Maar ik had een staf, en was getraind om die te 
+gebruiken. Ze waren dun, haveloos, minstens zo hongerig als ik, en net zo koud. Eentje 
+was, dacht ik, de vrouw van de nacht ervoor. Toen ze doodstil naderbij kwamen, meende 
+ik dat zij zich ook bewust waren van de kapers en ze net zo erg vreesden als ik. Het was 
+niet slim om te denken aan de wanhoop die ze er evengoed toe dreef om mij aan te 
+vallen. In de volgende adem vroeg ik me af of de Gesmedenen wanhoop of wat dan ook 
+voelden. Misschien waren ze te afgestompt om het gevaar te zien.
+ Alle heimelijke, geheimzinnige kennis die Schaduw me had bijgebracht, al Hod’s 
+beestachtig elegante strategieën voor het vechten tegen twee of meer tegenstanders 
+sloeg ik in de wind. Want terwijl de eerste twee binnen mijn bereik stapten, voelde ik de 
+24
+7 Feberwee and Cuijpers translate this as ‘ontzielden,’ which is quite a nice translation since it 
+describes exactly what is wrong with these people. The only problem with it is that the ﬁrst Forged 
+ones lived in a little town called Forge, which explains why they are called Forged ones. With 
+‘ontzielden’ this falls away, since the town is not called ‘Ontziel’ but ‘Smidse’ in the translation. 
+Since the town is famous for its iron ore, changing the name of the town into ‘Ontziel’ would be 
+weird. The link between the town and the condition is referred to quite often in the novel, so I think 
+it is important to preserve a link between them in translation. Therefore I chose to translate ‘Forged 
+ones’ quite literally to ‘Gesmedenen’. The condition of these people is described earlier in the 
+novel, so Dutch readers will understand what is wrong with them, even if their condition is not 
+clearly mentioned in their name. Also, I chose to translate ‘Gesmedenen’ with a capital letter so 
+that it clearly is a name given to certain people.
+===== PAGE 25 =====
+kleine warmte van Smithy8 wegsijpelen uit mijn greep. ‘Smithy!’ fluisterde ik, een 
+wanhopige smeekbede aan hem om hoe dan ook bij me te blijven. Ik kon bijna zien hoe 
+het puntje van zijn staart bewoog in een laatste poging tot kwispelen. Toen knapte de 
+draad en het vonkje verdween. Ik was alleen.
+ Een zwarte vloed van kracht raasde als een waanzinnige door me heen. Ik stapte 
+naar voren, stootte het eind van mijn staf diep in het gezicht van een man, trok hem snel 
+terug en zwaaide er vervolgens zo hard mee dat ik dwars door de onderkaak van de 
+vrouw sloeg. Simpel hout sneed de onderkant van haar gezicht weg, zo krachtig was mijn 
+klap. Ik sloeg haar nogmaals terwijl ze viel en het voelde alsof ik een gevangen haai sloeg 
+met een knuppel. De derde stormde recht op me af, waarschijnlijk denkend dat hij dan niet 
+geraakt zou kunnen worden door mijn staf. Het kon me niet schelen. Ik liet mijn stok vallen 
+en worstelde met hem. Hij was vel over been en hij stonk. Ik duwde hem op zijn rug, en 
+toen hij in mijn gezicht uitademde rook ik rottend vlees. Met vingers en tanden rukte ik aan 
+hem, net zo onmenselijk als hij was. Zij hadden me van Smithy weggehouden terwijl hij 
+stervende was. Het kon me niet schelen wat ik met de man deed, als het maar pijn deed. 
+Hij beantwoordde mijn geweld. Ik sleurde zijn gezicht over de keien, ik duwde mijn duim in 
+zijn oog. Hij liet zijn tanden in mijn pols zinken, en klauwde mijn wang open. En toen hij 
+uiteindelijk ophield met vechten tegen mijn wurggreep, sleepte ik hem naar de zeedijk en 
+gooide zijn lichaam op de rotsen. Ik stond daar hijgend, mijn vuisten nog gebald. Ik keek 
+woest naar de kapers, ze uitdagend om te komen, maar de nacht was stil, op de golven en 
+de wind en het zachte gorgelen van de vrouw terwijl ze stierf na. Of de kapers hadden ons 
+niet gehoord, of ze waren te bezorgd om gezien te worden als ze geluiden in de nacht 
+onderzochten. Ik wachtte in de wind tot iemand de moeite zou nemen om me te 
+25
+8 I preserved the name Smithy in my translation, since it is a name for an alert and tenacious dog. 
+Simply ‘Smit’ is too short in my opinion, and ‘Smitje’ makes him seem too cute and friendly. 
+Therefore I decided to keep the English ‘Smithy’ in my translation, which I think is a happy medium.  
+===== PAGE 26 =====
+vermoorden. Niets bewoog. Een leegheid ging door me heen, mijn razernij verdringend. 
+Zo veel dood in één nacht, en zo weinig betekenis, behalve voor mij. 
+9. Translation - Passage three
+Ik keek de omwindsels nog een laatste keer na voordat ik de kist meenam naar de 
+binnenplaats, toen ik de Nar9 achter me hoorde.
+‘Ik heb dit voor je meegenomen.’
+Ik draaide me om en zag hem in de deuropening van mijn kamer staan. Ik had de deur 
+niet eens horen open gaan. Hij bood me een leren tasje met een trekkoord aan. ‘Wat is 
+het?’ vroeg ik, en probeerde zowel de bloemen als de pop uit mijn stem te houden.
+‘Zeezuivering.’
+Ik tilde mijn wenkbrauwen op. ‘Een laxatief? Als huwelijkscadeau? Misschien dat 
+sommigen dat gepast zouden vinden, maar de kruiden die ik meeneem kunnen worden 
+geplant in de bergen. Ik denk niet dat ...’
+‘Het is geen huwelijkscadeau. Het is voor jou.’
+Ik accepteerde de buidel met gemengde gevoelens. Het was een ongewoon sterk 
+laxeermiddel. ‘Fijn dat je aan me hebt gedacht. Maar ik ben gewoonlijk niet erg vatbaar 
+voor reizigerskwaaltjes, en ...’
+‘Je loopt gewoonlijk, als je op reis gaat, niet het gevaar om vergiftigd te worden.’
+‘Is er iets dat je me wilt vertellen?’ Ik probeerde mijn stem luchtig en plagerig te laten 
+klinken. Ik miste de Nar’s normale bijtende uitdrukkingen en bespottingen in dit gesprek.
+26
+9 I decided to translate the Fool’s name with a capital, since it is clearly a name in the English 
+version. Feberwee and Cuijpers leave out the capital letter, even though the Fool is written with a 
+capital letter in the English version. This might have something to do with the fact that it is more 
+common to use a capital in English, for instance with titles such as ‘the President’. However, in this 
+instance I think the capital is used to indicate that the Fool is a name as well as a title. Therefore I 
+chose to translate the Fool with a capital in Dutch. In English, the determiner is used whenever the 
+Fool is mentioned, so he becomes ‘de Nar’ in Dutch, with the determiner as well. 
+===== PAGE 27 =====
+‘Alleen dat het verstandig is om weinig te eten, of helemaal niets, van maaltijden die je niet 
+zelf hebt klaargemaakt.’
+‘Op alle banketten en feesten die gehouden zullen worden?’
+‘Nee hoor. Alleen op degene die je wenst te overleven.’ Hij draaide zich om om weg te 
+gaan.
+‘Het spijt me,’ zei ik snel. ‘Het was niet mijn bedoeling om binnen te dringen. Ik was op 
+zoek naar jou, en ik had het zo warm, en de deur was niet op slot, dus ging ik naar binnen. 
+Ik wilde niet neuzen.’
+Hij stond met zijn rug naar me toe en draaide zich niet om toen hij vroeg, ‘En vond je het 
+amusant?’ ‘Ik-’ Ik kon niets verzinnen om te zeggen, wist niet hoe ik hem ervan kon 
+overtuigen dat wat ik gezien had in mijn hoofd zou blijven. Hij zette twee stappen en trok 
+de deur achter zich dicht. Ik flapte eruit, ‘Ik zou graag willen dat er een plek is die zoveel 
+op mij lijkt als die plek op jou lijkt. Een plek die ik net zo geheim zou houden.’
+De deur stopte een handbreedte voor hij dicht was. ‘Neem mijn advies aan, dan overleef 
+je deze reis misschien. Als je de motieven van een man overweegt, onthou dan dat je zijn 
+tarwe niet met jouw korenmaat moet meten. Hij gebruikt misschien een heel andere 
+maatstaaf10.’ 
+En de deur sloot en de Nar was verdwenen. Maar zijn laatste woorden waren cryptisch en 
+frustrerend genoeg om mij het gevoel te geven dat hij me misschien vergaf voor mijn 
+inbreuk. 
+ Ik propte de zeezuivering in mijn buis, ook al wilde ik het niet hebben, bang om het 
+nu achter te laten. Ik wierp een blik door mijn kamer, maar hij was kaal en efficiënt als 
+27
+10 The English proverb is made up by Robin Hobb. Since it does not exist in English, it will not have 
+a Dutch counterpart. This makes it necessary to either translate Hobb’s proverb, or to replace it by 
+a Dutch proverb with the same meaning. I chose to translate Hobb’s proverb, since it is meant to 
+be cryptic so it should not be an existing proverb. In a translation of Hobb’s proverb, the word 
+bushel offers some translational problems, since it is a standard in English, which also exist in 
+Dutch but it is quite an unknown standard. I therefore used a more general term, namely 
+“korenmaat”.
+===== PAGE 28 =====
+altijd. Vrouwe Haastig had ervoor gezorgd dat mijn bagage werd ingepakt, omdat ze mij 
+niet vertrouwde met mijn nieuwe kledingstukken. Het was me opgevallen dat de 
+doorgestreepte hertenbok op mijn borst was vervangen door een hertenbok met zijn gewei 
+omlaag, klaar om aan te vallen. ‘Prins Waarheid heeft de opdracht gegeven,’ was alles wat 
+ze zei toen ik ernaar vroeg. ‘Ik vind het zelf mooier dan de doorgestreepte bok, en jij?’
+‘Ik denk van wel,’ antwoordde ik, en dat was dat. Een naam en een wapen. Ik knikte naar 
+mezelf, tilde mijn kist met kruiden en geschriften op mijn schouder en ging naar beneden 
+om me aan te sluiten bij de karavaan. 
+ Terwijl ik de trappen afliep, kwam ik Waarheid tegen die omhoog liep. Op het eerste 
+gezicht herkende ik hem nauwelijks, omdat hij de trap opklom als een wrevelige oude 
+man. Ik stapte opzij om hem erdoor te laten en herkende hem toen hij mijn kant opkeek. 
+Het is vreemd om een bekende op die manier te zien, als een vreemde. Ik zag hoe zijn 
+kleren om hem heen hingen, en het borstelige, donkere haar dat ik me herinnerde was 
+bezaaid met grijs. He glimlachte afwezig naar me, en toen, alsof hij het zich opeens 
+herinnerde, liet hij me stoppen.
+‘Vertrek je naar het Bergrijk? Voor de huwelijksceremonie?’
+‘Ja.’
+‘Wil je me een plezier doen, jongen?’
+‘Natuurlijk,’ zei ik, van mijn stuk gebracht door de roest in zijn stem. 
+‘Spreek positief over me tegen haar. Waarheidsgetrouw, natuurlijk, ik vraag je niet om te 
+liegen. Maar spreek positief over me. Ik heb altijd geloofd dat je positief over me dacht.’
+‘Dat is zo,’ zei ik tegen zijn rug terwijl hij doorliep. ‘Dat is zo, meneer.’ Maar hij draaide zich 
+niet om en antwoordde niet, en ik voelde me ongeveer zoals toen de Nar me achterliet.
+De binnenplaats was een krioelende massa van mensen en dieren. Er waren deze keer 
+geen karren; de wegen naar de bergen waren berucht vanwege hun kwaliteit, en er was 
+besloten dat lastdieren voldoende zouden moeten zijn in het belang van de snelheid. Het 
+28
+===== PAGE 29 =====
+was geen optie voor het koninklijke gevolg om te laat te zijn voor het huwelijk; het was al 
+erg genoeg dat de bruidegom er niet bij zou zijn.
+ De schapen en runderen waren dagen eerder al vertrokken. De verwachting was 
+dat onze reis twee weken zou duren, en er waren drie weken voor uitgetrokken. Ik zorgde 
+ervoor dat de cederhouten kist werd bevestigd op een lastdier en ging toen naast Roetje 
+staan en wachtte af. Zelfs op de geplaveide binnenplaats hing een dikke laag stof in de 
+hete zomerlucht. Ondanks al het zorgvuldige geregel dat eraan vooraf was gegaan, leek 
+de karavaan chaotisch. Ik ving een glimp op van Sevrens, Vorst’s favoriete lakei. Vorst had 
+hem een maand geleden teruggestuurd naar Boktoren, met specifieke instructies voor 
+bepaalde kledingstukken die hij gemaakt wilde hebben. Sevrens werd gevolgd door 
+Manus11, terwijl hij aarzelde en protesteerde over iets, en wat het ook was, Manus leek er 
+niet veel geduld voor te hebben. Toen Vrouwe Haastig me de laatste instructies over het 
+onderhoud van mijn nieuwe kledingstukken gaf, had ze onthuld dat Sevrens zo veel 
+nieuwe kledingstukken, hoeden en accessoires voor Vorst meenam dat hij drie lastdieren 
+toegewezen had gekregen om ze te vervoeren. Ik bedacht me dat de verzorging van deze 
+drie dieren waarschijnlijk aan Manus was toegewezen, want hoewel Sevrens een 
+uitstekende lakei was, was hij angstig rond grote dieren. Rowd, Vorst’s werkman, doemde 
+achter hen op, humeurig en ongeduldig. Op een van zijn brede schouders droeg hij nog 
+een hutkoffer, en misschien dat het laden van dit extra onderdeel de reden was van 
+Sevrens’ gepieker. Ik verloor ze al snel uit het oog in de menigte.
+29
+11 In English, the boy is called Hands. Feberwee and Cuijpers translate this as ‘Manus,’ since in 
+Dutch the phrase ‘Manusje-van-alles’ exists, which means the same as a jack-of-all-trades means 
+in English. This ﬁts perfectly with the role Hands fulﬁls so it offers the right connotations. Simply 
+translating Hands into ‘Handen’ of ‘Hands’ seems unnatural and too straightforward. I therefore 
+chose to use the same translation as Feberwee and Cuijpers.
+===== PAGE 30 =====
+Bibliography
+Aixelá, Javier Franco. “Cultuurspecifieke Elementen in Vertalingen.” Denken over Vertalen: 
+ Tekstboek Vertaalwetenschap.  Ed. Ton Naaijkens, Cees Koster, Henri Bloemen and 
+ Caroline Meijer. Nijmegen: Uitgeverij Vantilt, 2004. 197-212. Print. 
+Chesterman, Andrew. “Vertaalstrategieën: een Classificatie.” Denken over Vertalen: 
+ Tekstboek Vertaalwetenschap.  Ed. Ton Naaijkens, Cees Koster, Henri Bloemen and 
+ Caroline Meijer. Nijmegen: Uitgeverij Vantilt, 2004. 243-262. Print.
+Clute, John, and John Grant, eds. The Encyclopedia of Fantasy. New York: St Martin’s 
+ Press, 1997. Print.
+Coillie, Jan van. “Character Names in Translation – A Functional Approach.” Children’s 
+ Literature in Translation: Challenges and Strategies. Eds. Jan Van Coillie and 
+ Walter P. Verschueren. Manchester: St. Jerome, 2006. 123-39. Print.
+“Fitz.” Oxford English Dictionary (OED). 2nd ed. 1989. Web. 6 June 2012.
+Grit, Diederik. “Het Vertalen van Realia.” Denken over Vertalen: Tekstboek 
+ Vertaalwetenschap. Ed. Ton Naaijkens, Cees Koster, Henri Bloemen and Caroline 
+ Meijer. Nijmegen: Uitgeverij Vantilt, 2004. 189-196. Print.
+Hobb, Robin. Assassin’s Apprentice. London: Voyager, 1996. Print.
+Hobb, Robin. Leerling en Meester. Trans. Erica Feberwee and Peter Cuijpers. Amsterdam: 
+ Meulenhoff, 1998. Print.
+Hobb, Robin. Leerling en Meester. Trans. Peter Cuijpers. Amsterdam: De Boekerij, 2004. 
+ Print.
+Hobb, Robin. Robin Hobb. N.p., n.d. Web. 22 Feb. 2012. <http://www.robinhobb.com>.
+Holmes, James S. “De Brug bij Bommel Herbouwen” Denken over Vertalen: 
+ Tekstboek Vertaalwetenschap.  Ed. Ton Naaijkens, Cees Koster, Henri Bloemen and 
+ Caroline Meijer. Nijmegen: Uitgeverij Vantilt, 2004. 183-188. Print. 
+30
+===== PAGE 31 =====
+Hulst, Jacqueline. “Het Product Centraal: Criteria en Methoden voor de Evaluatie van 
+ Vertalingen. ” Denken over Vertalen: Tekstboek Vertaalwetenschap. Ed. Ton 
+ Naaijkens, Cees Koster, Henri Bloemen and Caroline Meijer. Nijmegen: Uitgeverij 
+ Vantilt, 2004. 235-248. Print. 
+“Hun/Hen.” Genootschap Onze Taal. Genootschap Onze Taal, n.d. Web. 5 Apr. 2012.
+Kok, Marlies. “The Boundaries of Imagination”. Thesis. University of Utrecht, 2011. Web. 
+ 10 Mar. 2012.
+Mendlesohn, Farah. “Rhetorics of Fantasy.” Off Cuts. N.p. 2003. Web. 4 June 2012.
+Nord, Christiane. “Proper Names in Translations for Children: Alice in Wonderland as a 
+ Case in Point”. Meta: Translators’ Journal 48.1 (2003): 182-96. Web. 8 Mar. 2012.
+Stableford, Brian. Historical Dictionary of Fantasy Literature. Lanham: The Scarecrow 
+ Press, 2005. Print.
+“Vixen.” Oxford English Dictionary (OED). 2nd ed. 1989. Web. 18 Mar. 2012.
+Zee, Silvie van der. “Harry Potter goes Dutch.” Thesis. University of Utrecht, 2011. Web. 11 
+ Mar. 2012
+31
+===== PAGE 32 =====
+Appendix A: Source text passages
+Passage 1: page 1-4
+The Earliest History
+A history of the Six Duchies is of necessity a history of its ruling family, the Farseers. A 
+complete telling would reach back beyond the founding of the First Duchy, and if such 
+names were remembered, would tell us of Outislanders raiding from the Sea, visiting as 
+pirates a shore more temperate and gentler than the icy beaches of the Out Islands. But 
+we do not know the names of these earliest forebears.
+ And of the first real king, little more than his name and some extravagant legends 
+remain. Taker his name was, quite simply, and perhaps with that naming began the 
+tradition that daughters and sons of his lineage would be given names that would shape 
+their lives and beings. Folk beliefs claim that such names were sealed to the newborn 
+babes by magic, and that these royal offspring were incapable of betraying the virtues 
+whose names they bore. Passed through fire and plunged through salt water and offered 
+to the winds of the air; thus were names sealed to these chosen children. So we are told. 
+A pretty fancy, and perhaps once there was such a ritual, but history shows us this was not 
+always sufficient to bind a child to the virtue that named it...
+My pen falters, then falls from my knuckly grip, leaving a worm’s trail of ink across 
+Fedwren’s paper. I have spoiled another leaf of the fine stuff, in what I suspect is a futile 
+endeavour. I wonder if I can write this history, or if on every page there will be some 
+sneaking show of a bitterness I thought long dead. I think myself cured of all spite, but 
+when I touch pen to paper, the hurt of a boy bleeds out with the sea-spawned ink, until I 
+suspect each carefully formed black letter scabs over some ancient scarlet wound.
+ Both Fedwren and Patience were so filled with enthusiasm whenever a written 
+account of the history of the Six Duchies was discussed that I persuaded myself the writing 
+of it was a worthwhile effort. I convinced myself that the exercise would turn my thoughts 
+aside from my pain and help the time to pass. But each historical event I consider only 
+awakens my own personal shades of loneliness and loss. I fear I will have to set this work 
+aside entirely, or else give in to reconsidering all that has shaped what I have become. And 
+so I begin again, and again, but always find that I am writing of my own beginnings rather 
+than the beginnings of this land. I do not even know to whom I try to explain myself. My life 
+32
+===== PAGE 33 =====
+has been a web of secrets, secrets that even now are unsafe to share. Shall I set them all 
+down on fine paper, only to create from them flame and ash? Perhaps.
+ My memories reach back to when I was six years old. Before that, there is nothing. 
+But on that day they suddenly begin, with a brightness and detail that overwhelms me. 
+Sometimes it is too complete, and I wonder if it is truly mine. Am I recalling it from my own 
+mind, or from dozens of retellings by legions of kitchen maids and ranks of scullions and 
+herds of stable-boys as they explained my presence to each other? Perhaps I have heard 
+the story so many times, from so many sources, that I now recall it as an actual memory of 
+my own. Is the detail the result of a six-year-old’s open absorption of all that goes on 
+around him? Or could the completeness of the memory be the bright overlay of the Skill, 
+and the later drugs a man takes to control his addiction to it, the drugs that bring on pains 
+and cravings of their own? The last is most possible. Perhaps it is even probable. One 
+hopes it is not the case.
+ The remembrance is almost physical; the chill greyness of the fading day, the 
+remorseless rain that soaked me, the icy cobbles of the strange town’s streets, even the 
+callused roughness of the huge hand that gripped my small one. Sometimes I wonder 
+about that grip. The hand was hard and rough, trapping mine within it. And yet it was 
+warm, and not unkind, as it held mine. Only firm. It did not let me slip on the icy streets, but 
+it did not let me escape my fate, either. It was as implacable as the freezing grey rain that 
+glazed the trampled snow and ice of the gravelled pathway outside the huge wooden 
+doors of the fortified building that stood like a fortress within the town itself. 
+ The doors were tall, not just to a six-year-old boy, but tall enough to admit giants, to 
+dwarf even the rangy old man who towered over me. And they looked strange to me, 
+although I cannot summon up what type of door or dwelling would have looked familiar. 
+Only that these, carved and bound with black iron hinges, decorated with a buck’s head 
+and knocker of gleaming brass, were beyond my experience. I recall that slush had 
+soaked through my clothes, so that my feet and legs were wet and cold. And yet, again, I 
+cannot recall that I had walked far through winter’s last curses, nor that I had been carried. 
+No, it all starts there, right outside the doors of the stronghouse, with my small hand 
+trapped inside the tall man’s.
+ Almost, it is like a puppet show beginning. Yes, I can see it thus. The curtains 
+parted, and there we stood before that great door. The old man lifted the brass knocker 
+and banged it down, once, twice, thrice, on the plate that resounded to his pounding. And 
+then, from off-stage, a voice sounded. Not from within the doors, but from behind us, back 
+the way we had come. ‘Father, please,’ the woman’s voice begged. I turned to look at her, 
+33
+===== PAGE 34 =====
+but it had begun to snow again, a lacy veil that clung to eyelashes and coatsleeves. I can’t 
+recall that I saw anyone. Certainly, I did not struggle to break free of the old man’s grip on 
+my hand, nor did I call out, ‘Mother, Mother!’ Instead I stood, a spectator, and heard the 
+sound of boots within the keep, and the unfastening of the door hasp within. 
+ One last time she called. I can still hear the words perfectly, the desperation in a 
+voice that now would sound young to my ears. ‘Father, please, I beg you!’ A tremor shook 
+the hand that gripped mine, but whether of anger or some other emotion, I shall never 
+know. As swift as a black crow seizes a bit of dropped bread, the old man stooped and 
+snatched up a frozen chunk of dirty ice. Wordlessly he flung it, with great force and fury, 
+and I cowered where I stood. I do not recall a cry, nor the sound of struck flesh. What I do 
+remember is how the doors swung outward, so that the old man had to step hastily back, 
+dragging me with him. 
+ And there is this: the man who opened the door was not house-servant, as I might 
+imagine if I had only heard this story. No, memory shows me a man-at-arms, a warrior, 
+gone a bit to grey and with a belly more of hard suet than muscle, but not some mannered 
+house-servant. He looked both the old man and me up and down with a soldier’s practised 
+suspicion, and then stood there silently, waiting for us to state our business. 
+Passage 2: page 323-325
+The wind was relentless, and my salt-wet clothing clung and chafed. I was hungry, cold, 
+and tired. My wet shoes were a misery, but I had no thought of stopping. I trotted like a 
+wolf, my eyes continually shifting, my ears keen for any sound behind me. One moment, 
+the road was empty and black before me. In the next, the darkness had turned to men. 
+Two before me, and when I spun about, another behind me. The slapping waves had 
+covered the sound of their feet, and the dodging moon offered me only glimpses of them 
+as they closed the distance around me. I set my back to the solid wall of a warehouse, 
+readied my staff, and waited. 
+ I watched them come, silent and skulking. I wondered at that, for why did they not 
+raise a shout, why did not the whole crew come to watch me taken? But these men 
+watched one another as much as they watched me. They did not hunt as a pack, but each 
+hoped the others would die killing me and leave the bounty for the picking. Forged ones, 
+not raiders.
+ A terrible coldness welled up in me. The least sound of a scuffle would bring the 
+raiders, I was sure. So if the Forged ones did not finish me, the raiders would. However, 
+34
+===== PAGE 35 =====
+when all roads lead to death, there is no point in running down any of them. I would take 
+things as they came. There were three of them. One had a knife. But I had a staff, and was 
+trained to use it. They were thin, ragged, at least as hungry as I, and as cold. One, I think, 
+was the woman from the night before. As they closed on me, so silently, I guessed they 
+were aware of the raiders and feared them as much as I. It was not good to consider the 
+desperation that would prompt them still to attack me. Then in the next breath, I wondered 
+if Forged ones felt desperation or anything else. Perhaps they were too dulled to realise 
+the danger.
+ All of the stealthy arcane knowledge Chade had given me, all of Hod’s brutally 
+elegant strategies for fighting two or more opponents, went to the wind. For as the first two 
+stepped into my range, I felt the tiny warmth that was Smithy ebbing in my grasp. ‘Smithy!’ 
+I whispered, a desperate plea that he somehow stay with me. I all but saw a tail tip stir in a 
+last effort at a wag. Then the thread snapped and the spark blinked out. I was alone. 
+ A black flood of strength surged through me like a madness. I stepped out, thrust 
+the end of my staff deep into a man’s face, drew it quickly back, and continued a swing 
+that went through the woman’s lower jaw. Plain wood sheared the lower half of her face 
+away, so forceful was my blow. I whacked her again as she fell, and it was like hitting a 
+netted shark with a fish-bat. The third drove into me solidly, thinking, I suppose, to be 
+inside my staff’s range. I didn’t care. I dropped my stick and grappled with him. He was 
+bony and he stank. I drove him onto his back, and his expelled breath in my face stank of 
+carrion. Fingers and teeth, I tore at him, as far from human as he was. They had kept me 
+from Smithy as he was dying. I did not care what I did to him so long as it hurt him. He 
+reciprocated. I dragged his face along the cobbles, I pushed my thumb into an eye. He 
+sank his teeth into my wrist, and clawed my cheek bloody. And when at last he ceased to 
+fight against my strangling grip, I dragged him to the sea-wall and threw his body down 
+onto the rocks. I stood panting, my fists still clenched. I glared toward the raiders, daring 
+them to come, but the night was still, save for the waves and wind and the soft gargling of 
+the woman as she died. Either the raiders had not heard, or they were too concerned with 
+their own stealth to investigate sounds in the night. I waited in the wind for someone to 
+care enough to come and kill me. Nothing stirred. An emptiness washed through me, 
+supplanting my madness. So much death in one night, and so little significance save to 
+me. 
+35
+===== PAGE 36 =====
+Passage 3: page 374-376
+I was checking their wrappings a final time before taking the chest down to the courtyard 
+when I heard the Fool behind me.
+‘I brought you this.’
+I turned to find him standing just inside the door of my room. I hadn’t even heard the door 
+open. He was proffering a leather drawstring bag. ‘What is it?’ I asked, and tried not to let 
+him hear either the flowers or the doll in my voice.
+‘Seapurge’.
+I raised my eyebrows. ‘A cathartic? As a marriage gift? I suppose some would find it 
+appropriate, but the herbs I am taking can be planted and grown in the mountains. I do not 
+think ...’
+‘It is not a wedding gift. It is for you.’
+I accepted the pouch with mixed feelings. It was an exceptionally powerful purge. ‘Thank 
+you for thinking of me. But I am not usually prone to travellers’ ailments, and ...’
+‘You are not usually, when you travel, in danger of being poisoned.’
+‘Is there something you’d like to tell me?’ I tried to make my tone light and bantering. I 
+missed the Fool’s usual wry faces and mockeries from this conversation.
+‘Only that you’d be wise to eat lightly, or not at all, of any food you do not prepare yourself.’
+‘At all the feasts and festivities that will be there?’
+‘No. Only at the ones you wish to survive.’ He turned to go.
+‘I’m sorry,’ I said hastily. ‘I didn’t mean to intrude. I was looking for you, and I was so hot, 
+and the door wasn’t latched, so I went in. I didn’t mean to pry.’
+His back was to me and he didn’t turn back as he asked, ‘And did you find it amusing?’
+‘I-’ I could not think of anything to say, of any way to assure him that what I had seen there 
+would stay only within my own mind. He took two steps and was closing the door. I blurted, 
+‘ It made me wish there were a place as much me as that place is you. A place I would 
+keep as secret.’
+The door halted a handbreadth short of closed. ‘Take some advice, and you may survive 
+this trip. When considering a man’s motives, remember you must not measure his wheat 
+with your bushel. He may not be using the same standard at all.’
+And the door closed and the Fool was gone. But his last words had been cryptic and 
+frustrating enough that I thought perhaps he had forgiven me my trespass.
+ I stuffed the seapurge into my jerkin, not wanting it, but afraid to leave it now. I 
+glanced about my room, but as always it was a bare and practical place. Mistress Hasty 
+36
+===== PAGE 37 =====
+had seen to my packing, not trusting me with my new garments. I had noticed that the 
+barred buck on my crest had been replaced with a buck with his antlers lowered to charge. 
+‘Verity ordered it,’ was all she said when I asked about it. ‘I like it better than the barred 
+buck myself. Don’t you?’
+‘I suppose so,’ I replied, and that had been the end of it. A name and a crest. I nodded to 
+myself, shouldered my chest of herbs and scrolls, and went down to join the caravan.
+ As I was coming down the steps, I encountered Verity coming up. At first I scarcely 
+knew him, for he was ascending like a crabbed old man. I stepped out of his way to let him 
+pass, and then knew him as he glanced at me. It is a strange thing to see a once-familiar 
+man like that, encountered as a stranger. I marked how his clothes hung on him now, and 
+the bushy dark hair I remembered had a peppering of grey. He smiled absently at me, and 
+then, as if it had suddenly occurred to him, he stopped me.
+‘You’re leaving for the Mountain Kingdom? For the wedding ceremony?’
+‘Yes.’
+‘Do me a favour, boy?’
+‘Of course,’ I said, taken aback by the rust in his voice.
+‘Speak well of me to her. Truthfully, mind you, I’m not asking for lies. But speak well of me. 
+I’ve always thought that you thought well of me.’
+‘I do,’ I said to his retreating back. ‘I do, sir.’ But he didn’t turn or make a reply, and I felt 
+much as I had when the Fool left me. 
+The courtyard was a milling of folk and animals. There were no carts this time; the roads 
+into the mountains were notoriously bad, and it had been decided that pack animals would 
+have to suffice for the sake of swiftness. It would not do for the royal entourage to be late 
+for the wedding; it was bad enough that the groom was not attending.
+ The flocks and herds had been sent on days before. It was expected that our trip 
+would take two weeks, and three had been allowed for it. I saw to fastening the cedar 
+chest onto a pack animal, and then stood beside Sooty and waited. Even in the cobbled 
+courtyard, dust stirred thick in the hot summer air. Despite all the careful planning that had 
+gone into it, the caravan seemed chaotic. I glimpsed Sevrens, Regal’s favourite valet. 
+Regal had sent him back to Buckkeep a month ago, with specific instructions about certain 
+garments he wished created. Sevrens was following Hands, dithering and expostulating 
+about something, and whatever it was, Hands was not looking patient about it. When 
+Mistress Hasty had been giving me final instructions on the care of my new garments, she 
+had divulged that Sevrens was taking enough new garments, hats and accoutrements for 
+Regal that he had been allotted three pack animals to carry them. I imagined that caring 
+37
+===== PAGE 38 =====
+for the three animals had fallen to Hands, for Sevrens was an excellent valet, but timid 
+around the larger animals. Rowd, Regal’s ready man, hulked after both of them, looking ill-
+tempered and impatient. On one wide shoulder he carried yet another trunk, and perhaps 
+the loading of this additional item was what was fretting Sevrens. I soon lost sight of them 
+in the crowd. 
+38
+===== PAGE 39 =====
+Appendix B: Passages in translation by Feberwee and Cuijpers
+Passage 1
+De vroegste geschiedenis
+De geschiedschrijving van het Koninkrijk van de Zes Hertogdommen is onontkoombaar 
+ook de geschiedenis van het huis dat de Hertogdommen bestuurde: het geslacht der 
+Zieners. Om volledig te zijn zou deze geschiedschrijving moeten teruggaan tot voor de 
+stichting van het Eerste Hertogdom, en wanneer de namen niet door de vergetelheid 
+waren opgeslokt, zou de geschiedenis ons vertellen over de bewoners van de 
+Buiteneilanden die vanuit zee het land binnenvielen: piraten die de kusten plunderden van 
+een streek die aanzienlijk milder en gematigder was dan de ijzige stranden van hun 
+vaderland. Maar de namen van die vroegste voorzaten zijn ons niet bekend. 
+En van de eerste echte koning is ons behalve zijn naam weinig meer gebleven dan wat 
+buitenissige legenden. Nemer heette hij, een eenvoudige naam, en misschien begon met 
+hem de traditie dat de zonen en dochters van het geslacht een naam kregen die van 
+doorslaggevende invloed zou zijn op hun levensloop en op de ontwikkeling van hun 
+karakter. Onder het volk heerste de overtuiging dat dergelijke namen door magische 
+rituelen onlosmakelijk met de nieuwgeborenen werden verbonden, en dat de koninklijke 
+nakomelingen niet bij machte waren de deugden waarvan ze de naam droegen, geweld 
+aan te doen. De borelingen werden gedoopt met vuur, onderdompeling in zout water en 
+blootstelling aan de wind; aldus werd een onverbrekelijke band gesmeed tussen hen en 
+de naam die hun was gegeven. Zo vertelt ons de overlevering. Een mooi beeld, en 
+misschien heeft een dergelijk ritueel inderdaad ooit bestaan, maar uit de geschiedenis 
+blijkt maar al te duidelijk dat dit niet altijd voldoende was om een kind te binden aan de 
+deugd waarnaar het was genoemd...
+Mijn pen hapert en valt uit mijn knokige hand, zodat de inkt een wormspoor trekt over 
+Fedwrens papier. Weer een prachtig vel bedorven bij wat - naar ik vermoed - een vergeefs 
+pogen zal blijken te zijn. Ik betwijfel of ik in staat zal zijn deze geschiedenis op schrift te 
+stellen, zonder dat bitterheid mijn woorden zal kleuren. Een bitterheid waarvan ik meende 
+dat deze reeds lang was gestorven. Ik verkeerde in de stellige overtuiging dat ik alle wrok 
+had afgelegd, maar zodra mijn pen het papier raakt, vloeit met de inkt van 
+zeezwamvlokken de gekwetstheid van de jongeling mee, zodat elke zorgvuldig 
+39
+===== PAGE 40 =====
+neergeschreven, zwarte letter verandert in een korst, waaronder een oude, bloedende 
+wond schuilgaat. 
+Zowel Fedwren als Patience raakten steeds weer zo in vervoering, wanneer het idee van 
+een geschreven geschiedenis van de Zes Hertogdommen ter sprake kwam, dat ik mezelf 
+ervan wist te overtuigen dat het schrijven daarvan de moeite van de inspanning waard zou 
+zijn. Ik hield mezelf voor dat een dergelijke bezigheid mijn gedachten zou afleiden van 
+mijn pijn en me zou helpen de dagen door te komen. Maar bij elke historische gebeurtenis 
+die mijn pen zou moeten beschrijven, ontwaken slechts de schimmen van eenzaamheid 
+en verlies die sluimeren in mijn geest. Ik vrees dat ik dit werk nooit zal kunnen voltooien, 
+tenzij ik eerst in het reine ben gekomen met alles wat me heeft gevormd en gemaakt tot 
+wie ik ben. En dus begin ik telkens opnieuw, en telkens weer kom ik tot de slotsom dat ik 
+mijn eigen vroegste geschiedenis beschrijf in plaats van het ontstaan van mijn land. 
+Zonder te weten tot wie ik me daarbij richt. Mijn leven was een web van geheimen. 
+Geheimen die zelfs nu bij anderen nog niet veilig zouden zijn. Moet ik ze aan dit prachtige 
+papier toevertrouwen, wetend dat er slechts vuur en vernietiging uit kunnen voortkomen? 
+Misschien.
+Mijn herinneringen gaan terug tot mijn zesde jaar. Daarvoor is er niets, slechts een peilloze 
+diepte waarin mijn geest nooit heeft weten door te dringen, hoezeer ik ook mijn best heb 
+gedaan. Voor die dag op Maansoog is er niets. Maar dan ineens beginnen de 
+herinneringen, met een overrompelende helderheid en gedetailleerdheid. Soms lijken ze 
+bijna te compleet, en ik vraag me af of de beelden die ik zie, wel herinneringen zijn. Of ze 
+werkelijk uit mijn geheugen naar boven komen, dan wel het product zijn van de talloze 
+mailen dat ik mijn geschiedenis en de reden van mijn aanwezigheid aan het hof heb horen 
+bespreken door keukenmeiden, koksmaten en staljongens. Misschien is de 
+gedetailleerdheid van mijn herinneringen niets anders dan het resultaat van de gretigheid, 
+waarmee een kind van zes alles om zich heen in zich opneemt. Of zou de volledigheid van 
+de beelden die ik me herinner een eerste teken zijn van het Vermogen? Een duidelijk 
+bewijs van een gave die een mens later doet grijpen naar middelen om de verslaving 
+daaraan beheersbaar te houden; middelen die op hun beurt weer leiden tot andere 
+kwellingen en verlangens. Dat laatste is heel goed mogelijk, misschien zelfs waarschijnlijk. 
+Ik kan alleen maar hopen dat het niet zo is.
+De herinnering is bijna tastbaar: de kille grijsheid van de wegstervende dag, de 
+onbarmhartige regen, de ijzige kasseien van de straten in de vreemde stad, zelfs de 
+eeltige ruwheid van de reusachtige hand die me meetrok. Soms denk ik er met 
+verwondering aan terug. Het was een harde, ruwe hand die me in zijn greep gevangen 
+40
+===== PAGE 41 =====
+hield, maar tegelijkertijd warm en niet onvriendelijk. De hand behoedde me voor uitglijden 
+op de bevroren keien, maar zorgde er tegelijkertijd voor dat ik mijn lot niet kon ontgaan. De 
+hand was even onvermurwbaar als de kille, grijze regen die een dun laagje ijs legde over 
+de grinderige weg van aangestampte sneeuw en bevroren modder naar de reusachtige 
+deuren van het fort, dat zich als een burcht boven de stad verhief. De deuren waren hoog, 
+niet alleen voor een jongetje van zes. Zo hoog dat ze moeiteloos een reus zouden kunnen 
+doorlaten; zo hoog dat zelfs de lange, magere man die boven me uittorende, er nietig door 
+leek. Bovendien kwamen ze me vreemd voor, hoewel ik niet zou weten wat voor soort 
+deur - of wat voor type behuizing - me vertrouwd zou hebben geleken. Ik weet alleen dat 
+deze rijk bewerkte en aan zwarte, ijzeren scharnieren opgehangen deuren, versierd met 
+de kop van een hertebok en een glimmend koperen klopper, in niets leken op de dingen 
+die tot op dat moment deel hadden uitgemaakt van mijn bestaan. Ik herinner me nog dat ik 
+doornat was, en dat ik koude benen en voeten had. Maar ik herinner me niet dat ik lange 
+tijd door de late winterkou had gelopen, of dat ik gedragen was. Nee, de herinneringen 
+beginnen allemaal daar, voor de poort van die burcht, met mijn knuistje in de grote hand 
+van die grote man. Het lijkt wel het begin van een poppenkastvoorstelling. Zo zie ik het nu 
+voor me: de gordijntjes gaan open, en daar staan we dan.
+De oude man die mijn hand in de zijne hield, hief de koperen klopper en liet deze 
+dreunend neerkomen; een keer, twee keer, drie keer. Toen klonk er een stem. Niet vanuit 
+de burcht, maar van ergens achter ons, op het pad waarover we waren gekomen. ‘Vader... 
+Alstublieft,’ smeekte een vrouwenstem. Ik draaide me om, maar het was weer gaan 
+sneeuwen: een kanten sluier van witte vlokken die aan wimpers en mouwen bleven 
+hangen. Ik kan me niet herinneren dat ik iemand zag. Wat ik wel weet, is dat ik niet 
+worstelde om los te komen uit de greep van de oude man, of luidkeels ‘Moeder, moeder’ 
+riep. In plaats daarvan bleef ik slechts toeschouwer terwijl binnen in de burcht het geluid 
+van laarzen weerklonk, en van een grendel die opzij werd geschoven.
+Een laatste kreet van de vrouw. De woorden klinken nog altijd duidelijk in mijn herinnering, 
+en weer hoor ik de wanhoop in een stem die ik nu jong zou noemen. ‘Vader, alstublieft, ik 
+smeek u.’ De hand die de mijne vasthield, trilde even. Maar ik zal nooit weten of dat was 
+van woede of van een andere emotie. Vlug als een kraai die een stukje brood oppikt, 
+bukte de oude man zich naar een klomp bevroren modder. Razend en met grote kracht, 
+maar zonder een woord te zeggen, smeet hij de klomp ijs de nacht in. Verschrikt dook ik 
+ineen, maar ik herinner me niet dat ik een kreet hoorde, of een geluid alsof het brok ijs 
+doel trof. Wat ik me wel herinner, is dat op dat moment de deuren openzwaaiden. De man 
+moest haastig een stap achteruit doen, en trok mij mee.
+41
+===== PAGE 42 =====
+Er is nog iets dat ik me duidelijk herinner: de man die de deuren opendeed, was geen 
+bediende, zoals ik had kunnen denken wanneer ik dit verhaal alleen maar van horen 
+zeggen had. Nee, ik herinner me een gewapende man: een al wat oudere krijgen met een 
+buik die verried dat hij van lekker eten hield. Geen welgemanierde huisknecht. Hij nam ons 
+zwijgend en enigszins wantrouwend op en wachtte af tot we hem de reden van onze 
+komst zouden onthullen. 
+Passage 2
+Er stond nog altijd een harde wind. Mijn zilte, natte kleren plakten aan mijn lichaam en 
+schuurden over mijn huid. Ik had honger, ik had het koud en ik was moe. Maar ik dacht 
+niet aan opgeven. Mijn blikken gingen waakzaam heen en weer, ik hield mijn oren 
+gespitst. Verlaten en donker lag de weg voor me, maar het volgende moment doemden er 
+twee mannen op uit de duisternis. Toen ik me met een ruk omdraaide, zag ik dat er ook 
+een achter me stond. Door het geklots van de golven had ik hun voetstappen niet 
+gehoord. Terwijl de maan weer achter een wolk verdween, werd de afstand tussen ons 
+steeds kleiner. Ik duwde mijn rug tegen de muur van een pakhuis, hield mijn stok in 
+gereedheid en wachtte af.
+Zwijgend en ineengedoken kwamen ze op me af. Waarom schreeuwden ze niet? Waarom 
+riepen ze hun makkers niet? Maar deze mannen jaagden niet als groep. Ze hoopten ieder 
+voor zich dat de anderen het gevecht niet zouden overleven, zodat ze de buit voor zich 
+alleen hadden. Dit waren geen Kapers, dit waren ontzielden.
+Een gruwelijke kilte nam bezit van me. Het minste of geringste geluid zou de Kapers 
+waarschuwen. Dus als de ontzielden me niet doodden, zouden de Rode Kapers het wel 
+doen. Maar als alle wegen leiden naar de dood, is vluchten zinloos. Ik moest de dingen 
+nemen zoals ze kwamen. Ze waren met hun drieën. Een had een mes. Maar ik had een 
+stok, en ik wist hoe ik die moest gebruiken. Ze waren mager, haveloos en minstens zo 
+hongerig en koud als ik. In een van hen herkende ik de vrouw van de vorige avond. 
+Zwijgend sloten ze me in. Ze deden het stilletjes, dus ik vermoedde dat ook zij zich bewust 
+waren van de Kapers in de nabijheid. Ik dacht maar liever niet na over de wanhoop die ze 
+moesten voelen omdat ze me niettemin aanvielen. Maar een tel later vroeg ik me af of 
+ontzielden wel zoiets als wanhoop of andere gevoelens kenden. Misschien waren ze te 
+versuft om het gevaar te beseffen.
+Maar meteen daarna werd alle esoterische kennis die ik van Chade had opgestoken... Alle 
+uitgekiende vechterstactieken van Hod... Kortom, alles wat ik had geleerd, als door de 
+42
+===== PAGE 43 =====
+wind weggevoerd. Want terwijl de eerste van mijn belagers binnen het bereik van mijn stok 
+kwam voelde ik Roetjes zwakke warmte uit mijn geest wegebben. ‘Roetje!’ fluisterde ik in 
+een wanhopige bede dat hij bij me zou blijven. Maar ik zag alleen zijn staartje nog 
+bewegen in een laatste poging om te kwispelen. Toen knapte de draad, de vonk doofde en 
+ik was alleen. 
+Een zwarte golf van kracht sloeg als een vlaag van krankzinnigheid door me heen. Ik 
+stormde naar voren en boorde het uiteinde van mijn stok in het gezicht van een van de 
+twee mannen. In een vloeiende beweging trok ik de stok weer terug en haalde ik uit naar 
+de vrouw; met zoveel kracht dat de onderste helft van haar gezicht werd weggeslagen. 
+Terwijl ze viel sloeg ik haar nogmaals, alsof ik met een visknuppel een haai te lijf ging, 
+gevangen in een net. Toen kwam de derde op me af. Mijn stok kon ik niet gebruiken. 
+Daarvoor was hij al te dichtbij. Dus ik gooide mijn wapen weg en ging hem met mijn blote 
+handen te lijf. Zijn benige lichaam verspreidde een afschuwelijke geur. Toen ik hem op zijn 
+rug had gewerkt stonk zijn adem die langs mijn gezicht streek naar dood vlees. De manier 
+waarop ik hem met mijn vuisten en nagels bewerkte, was nauwelijks menselijk te noemen. 
+Maar ze hadden me bij de stervende Roetje vandaan gehouden, dus het kon me niet 
+schelen wat ik hem aandeed, zolang het maar pijnlijk was. Ik sleepte zijn gezicht over de 
+keien, duwde mijn duim in zijn oog. Hij zette zijn tanden in mijn pols en klauwde mijn wang 
+tot bloedens toe open. Toen hij eindelijk verslapte in mijn worggreep, sleepte ik hem naar 
+de muur langs de haven en gooide ik zijn lichaam van de rotsen.
+Hijgend en met gebalde vuisten loerde ik in de richting van de Kapers. Ik daagde hen bijna 
+uit tot een gevecht, maar de nacht was stil. Het geklots van de golven, de wind en het 
+zachte gereutel van de stervende vrouw waren de enige geluiden. Een gevoel van leegte 
+nam bezit van me en verdreef mijn krankzinnige woede.
+Passage 3
+Ik was net bezig de verpakking nog een laatste keer te controleren, toen de nar 
+binnenkwam.
+‘Ik heb iets voor je.’
+Ik draaide me om. Hij stond in de deuropening met een leren buidel. ‘Wat is dat?’ Ik deed 
+mijn best de bloemen en de pop niet in mijn stem te laten doorklinken. 
+‘Zeepruimen.’
+Ik trok mijn wenkbrauwen op. ‘Een purgeermiddel als huwelijksgeschenk? Misschien 
+vinden sommigen dat gepast, maar de kruiden die ik meeneem, kunnen in de bergen 
+geplant en gekweekt worden. Dus ik denk niet...’
+43
+===== PAGE 44 =====
+‘Het is geen huwelijksgeschenk. Het is voor jou.’
+Ik accepteerde de buidel met gemengde gevoelens. Zeepruimen waren een uitzonderlijk 
+krachtig purgeermiddel. ‘Dank je wel. Maar ik heb meestal geen last van reisziekte en ...’
+‘Je loopt ook meestal geen gevaar om te worden vergiftigd.’
+‘Probeer je me iets duidelijk te maken?’ Ik probeerde mijn stem luchtig en nonchalant te 
+laten klinken. 
+‘Alleen dat je er verstandig aan doet om licht te eten, of beter nog, om helemaal niets te 
+eten dat je niet zelf hebt klaargemaakt.’
+‘Bij alle festiviteiten?’
+‘Nee. Alleen bij de festiviteiten die je wilt overleven.’ Hij draaide zich om en wilde 
+weglopen.
+‘Neem me niet kwalijk,’ zei ik haastig. ‘Ik wilde niet nieuwsgierig zijn. Maar ik was naar je 
+op zoek... En ik had het zo warm... En de deur was niet op slot, en dus ben ik naar binnen 
+gegaan.’
+Hij stond met zijn rug naar me toe. ‘En, vond je het vermakelijk?’
+‘Ik...’ Ik wist niet wat ik moest zeggen, of hoe ik hem ervan moest overtuigen dat wat ik had 
+gezien bij mij veilig was. Hij deed twee stappen de gang op en wilde de deur al 
+dichttrekken. ‘Ik wou dat ik ook een kamer had die zo duidelijk mijn stempel droeg. Dan 
+zou ik hem ook geheim houden,’ flapte ik eruit.
+De deur bleef een handbreed open staan. ‘Neem mijn woorden ter harte. Misschien lukt 
+het je dan de reis te overleven. Wanneer je probeert je te verplaatsen in iemand 
+beweegredenen, moet je altijd goed voor ogen houden dat je zijn tarwe niet met jouw 
+schepel moet meten. Het zou best eens kunnen zijn dat hij heel andere maatstaven 
+hanteert.’ De deur viel dicht en de nar was verdwenen. Maar na die raadselachtige, 
+verwarrende woorden kwam ik tot de conclusie dat hij me mijn overtreding had vergeven.
+ Met tegenzin stopte ik de zeepruimen in mijn wambuis en wierp ik een laatste blik 
+op mijn kamer. Mevrouw Gezwind had mijn spullen gepakt, omdat ze bang was dat ik mijn 
+nieuwe kleren niet zorgvuldig genoeg zou behandelen. Het was me opgevallen dat de 
+doorgestreepte hertebok op mijn borst was vervangen door een hertebok met zijn kop 
+gebogen, klaar voor de aanval. ‘Opdracht van Veritas,’ was alles wat ze zei toen ik ernaar 
+vroeg. ‘Ik vind dit mooier dan de doorgestreepte hertebok, en jij?’
+ ‘Ja dat zal wel,’ zei ik. Daarmee was het onderwerp afgedaan. Een naam en een 
+wapen. Ik knikte peinzend, nam mijn kist met kruiden en perkamentrollen op mijn schouder 
+en liep de trap af om me bij de stoet te voegen. 
+44
+===== PAGE 45 =====
+ Terwijl ik de trap afdaalde kwam Veritas me tegemoet. Aanvankelijk herkende ik 
+hem nauwelijks, want hij liep als een sombere, oude man. Pas toen ik een stap opzij deed 
+om hem te laten passeren herkende ik hem. Zijn kleren slobberden om hem heen en zijn 
+borstelige, donkere haar begon te verkleuren tot peper-en-zout. Hij glimlachte afwezig, 
+maar alsof er ineens een gedachte bij hem opkwam, legde hij zijn hand op mijn arm. 
+‘Je gaat naar het Bergrijk? Voor de eerste fase van de huwelijksplechtigheid?’
+‘Ja.’
+‘Wil je iets voor me doen, jongen?’
+‘Natuurlijk.’ Ik was geschokt door de gebroken klank van zijn stem. 
+‘Doe een goed woordje voor me bij de prinses. Ik vraag je niet om te liegen. Maar probeer 
+me niet al te slecht af te schilderen. Ik heb altijd gedacht dat je me welgezind was.’ Hij liep 
+alweer door.
+‘Dat is ook zo,’ zei ik tegen zijn rug. ‘Dat ben ik ook, heer.’ Maar hij draaide zich niet meer 
+om.
+ Op de binnenplaats was het een drukte van belang. Mensen en dieren krioelden 
+door elkaar heen. Deze keer zou er niet met wagens worden gereisd. De bergwegen 
+waren berucht om hun slechte conditie, dus met het oog op snelheid was er gekozen voor 
+lastdieren. Het koninklijke gevolg mocht tenslotte niet te laat komen voor de bruilloft. Het 
+was al erg genoeg dat de bruidegom er niet bij zou zijn.
+ De kudden waren al dagen eerder op pad gestuurd. Naar verwachting zou de reis 
+twee weken in beslag nemen. Ik controleerde of de cederhouten kist goed was 
+vastgesjord en liep toen naar Zwartvoet. Ondanks alle voorbereidingen maakte de stoet 
+een chaotische indruk. Te midden van alle drukte ontdekte ik Sevrens, Regaals 
+persoonlijke bediende. Regaal had hem een maand geleden teruggestuurd naar de 
+Hertenhorst, met gedetailleerde instructies over de gewaden die hij nodig had. Sevrens 
+liep nerveus achter Manus aan, die een ongeduldige indruk maakte. Toen mevrouw 
+Gezwind me de laatste aanwijzingen had gegeven over de zorg voor mijn nieuwe 
+kledingstukken, had ze verteld dat Sevrens zoveel nieuwe kleren meenam, compleet met 
+hoeden en accessoires, dat er drie lastdieren nodig waren om ze te dragen. Ik 
+veronderstelde dat de zorg voor de dieren aan Manus was toegewezen, want hoewel 
+Sevrens een uitstekende bediende was, kon hij slecht met dieren overweg. Rowd, 
+Regaals manusje-van-alles, liep in zijn volle lengte achter het tweetal aan. Nors en 
+ongeduldig, met op zijn schouders een houten kist. Misschien kwam het door dit extra stuk 
+bagage dat Sevrens zo geagiteerd was.
+45

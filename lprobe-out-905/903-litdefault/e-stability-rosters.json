@@ -1,0 +1,782 @@
+{
+  "instrument": "lprobe/rosters.mjs",
+  "output": "(e) the stability rosters, and the roster x preset matrix at the DARK tree",
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLDEFAULT",
+  "takenAt": "2026-09-07T01:21:34.633Z",
+  "source": "tests/domain/simulationRulesPreset.stability.test.js",
+  "presetIds": [
+    "quiet_local",
+    "realistic_regional",
+    "dramatic_campaign",
+    "static_campaign",
+    "narrative_campaign",
+    "living_realm",
+    "full_simulation"
+  ],
+  "rosters": {
+    "WAR_DEPTH_FLAGS": [
+      "defenderAttritionEnabled",
+      "warEconomyDrainEnabled",
+      "warSupplyQualityEnabled",
+      "defenderResolveEnabled",
+      "allyDefenseEnabled",
+      "warForageEnabled",
+      "warLevyEnabled",
+      "warDispositionEnabled"
+    ],
+    "ENGINE_WAVE_FLAGS": [
+      "momentumEnabled",
+      "navalEnabled",
+      "interventionEnabled",
+      "settlementLifecycleEnabled",
+      "peaceEngineEnabled",
+      "supplyWebWarfareEnabled",
+      "upswingArcsEnabled",
+      "resourceDynamicsEnabled",
+      "constructiveFlowsEnabled"
+    ],
+    "ONE_REGEN_FLAGS": [
+      "distancePricedNewsEnabled",
+      "reframeEnabled",
+      "provenanceLedgerEnabled",
+      "urbanFabricEnabled",
+      "npcGrowthEnabled",
+      "spatialConsequenceEnabled",
+      "npcLadderEnabled",
+      "traditionsEnabled",
+      "roadsEnabled"
+    ],
+    "LEGACY_PRESET_IDS": [
+      "quiet_local",
+      "realistic_regional",
+      "dramatic_campaign"
+    ],
+    "CL0_PRESET_IDS": [
+      "static_campaign",
+      "narrative_campaign",
+      "living_realm",
+      "full_simulation"
+    ],
+    "WORLD_ALIVE_PRESET_IDS": [
+      "dramatic_campaign",
+      "living_realm",
+      "full_simulation"
+    ],
+    "WAVE_DARK_PRESET_IDS": [
+      "quiet_local",
+      "static_campaign",
+      "narrative_campaign"
+    ]
+  },
+  "rosterSizes": {
+    "WAR_DEPTH_FLAGS": 8,
+    "ENGINE_WAVE_FLAGS": 9,
+    "ONE_REGEN_FLAGS": 9,
+    "LEGACY_PRESET_IDS": 3,
+    "CL0_PRESET_IDS": 4,
+    "WORLD_ALIVE_PRESET_IDS": 3,
+    "WAVE_DARK_PRESET_IDS": 3
+  },
+  "matrix": {
+    "WAR_DEPTH_FLAGS": [
+      {
+        "flag": "defenderAttritionEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "warEconomyDrainEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "warSupplyQualityEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "defenderResolveEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "allyDefenseEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "warForageEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "warLevyEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      },
+      {
+        "flag": "warDispositionEnabled",
+        "isRealBooleanRuleKey": true,
+        "defaultValue": false,
+        "perPreset": {
+          "quiet_local": false,
+          "realistic_regional": false,
+          "dramatic_campaign": false,
+          "static_campaign": false,
+          "narrative_campaign": false,
+          "living_realm": false,
+          "full_simulation": true
+        },
+        "litIn": [
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [
+          "quiet_local",
+          "realistic_regional",
+          "dramatic_campaign",
+          "static_campaign",
+          "narrative_campaign",
+          "living_realm"
+        ],
+        "absentFrom": []
+      }
+    ],
+    "ENGINE_WAVE_FLAGS": [
+      {
+        "flag": "momentumEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "navalEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "interventionEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "settlementLifecycleEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "peaceEngineEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "supplyWebWarfareEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "upswingArcsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "resourceDynamicsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "constructiveFlowsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      }
+    ],
+    "ONE_REGEN_FLAGS": [
+      {
+        "flag": "distancePricedNewsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "reframeEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "provenanceLedgerEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "urbanFabricEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "npcGrowthEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "spatialConsequenceEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "npcLadderEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "traditionsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      },
+      {
+        "flag": "roadsEnabled",
+        "isRealBooleanRuleKey": false,
+        "defaultValue": null,
+        "perPreset": {
+          "quiet_local": "absent",
+          "realistic_regional": true,
+          "dramatic_campaign": true,
+          "static_campaign": "absent",
+          "narrative_campaign": "absent",
+          "living_realm": true,
+          "full_simulation": true
+        },
+        "litIn": [
+          "realistic_regional",
+          "dramatic_campaign",
+          "living_realm",
+          "full_simulation"
+        ],
+        "explicitlyDarkIn": [],
+        "absentFrom": [
+          "quiet_local",
+          "static_campaign",
+          "narrative_campaign"
+        ]
+      }
+    ]
+  },
+  "litCounts": {
+    "WAR_DEPTH_FLAGS": {
+      "flags": 8,
+      "litSomewhere": 8,
+      "darkEverywhere": 0
+    },
+    "ENGINE_WAVE_FLAGS": {
+      "flags": 9,
+      "litSomewhere": 9,
+      "darkEverywhere": 0
+    },
+    "ONE_REGEN_FLAGS": {
+      "flags": 9,
+      "litSomewhere": 9,
+      "darkEverywhere": 0
+    }
+  },
+  "digest": "72b18dc96100d4226a129776535c66ba0745b930860b56fb23f52696d1e4383d"
+}

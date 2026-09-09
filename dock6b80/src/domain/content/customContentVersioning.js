@@ -1,0 +1,246 @@
+/**
+ * Immutable custom-content definition/revision primitives.
+ *
+ * A definition is stable identity and lifecycle. A revision is immutable
+ * authored meaning. Runtime consumers may project the current head into the
+ * historical flat item shape, but edits always append a revision and compare
+ * the caller's expected head before advancing the definition.
+ */
+
+import {
+  detachContentJson,
+  fingerprintContent,
+  isPlainContentRecord,
+} from './contentFingerprint.js';
+
+export const CONTENT_REVISION_SCHEMA_VERSION = 1;
+
+// This is the conservative admission fallback used before the generated
+// category manifest is loaded. The manifest may narrow fields further; it may
+// never expand the durable write lane with an unknown category.
+export const AUTHORABLE_CONTENT_CATEGORIES = Object.freeze([
+  'institutions',
+  'services',
+  'resources',
+  'stressors',
+  'tradeGoods',
+  'factions',
+  'deities',
+  'traditions',
+]);
+
+const CATEGORY_SET = new Set(AUTHORABLE_CONTENT_CATEGORIES);
+const METADATA_KEYS = new Set([
+  'id',
+  'definitionId',
+  'revisionId',
+  'revisionNumber',
+  'contentHash',
+  'createdAt',
+  'updatedAt',
+  'archivedAt',
+  'reviewedLifecycleVersion',
+  'isCustom',
+  '_schemaVersion',
+  'packEntryId',
+  'sourceDefinitionId',
+  'sourceRevisionId',
+  'commandReceipt',
+]);
+
+/**
+ * @typedef {Record<string, unknown>} ContentRecord
+ * @typedef {(category:string, item:ContentRecord) =>
+ *   boolean | {ok:boolean, errors?:string[]}} ContentAdmission
+ * @typedef {{
+ *   definitionId:string,
+ *   category:string,
+ *   data:ContentRecord,
+ *   revisionNumber?:number,
+ *   parentRevisionId?:string|null,
+ *   createdAt?:string|null,
+ *   revisionId?:string|null,
+ *   admitItem?:ContentAdmission|null,
+ * }} ContentRevisionInput
+ * @typedef {ContentRecord & {
+ *   id:string,
+ *   localUid?:unknown,
+ *   createdAt?:unknown,
+ *   updatedAt?:unknown,
+ *   archivedAt?:unknown,
+ * }} ContentDefinition
+ * @typedef {ContentRecord & {
+ *   id:string,
+ *   revisionNumber:number,
+ *   contentHash:string,
+ *   data:ContentRecord,
+ *   createdAt?:unknown,
+ * }} ContentRevision
+ */
+
+/** @param {unknown} category */
+export function isAuthorableContentCategory(category) {
+  return typeof category === 'string' && CATEGORY_SET.has(category);
+}
+
+/**
+ * Strip persistence projection fields from authored data before hashing.
+ *
+ * `localUid` intentionally remains: it is a durable dependency address, not a
+ * database projection field.
+ *
+ * @param {unknown} item
+ * @returns {ContentRecord}
+ */
+export function authoredDataOf(item) {
+  if (!isPlainContentRecord(item)) {
+    throw new TypeError('Custom content must be a plain object.');
+  }
+  const record = /** @type {ContentRecord} */ (item);
+  const data = /** @type {ContentRecord} */ ({});
+  for (const [key, value] of Object.entries(record)) {
+    if (!METADATA_KEYS.has(key)) data[key] = value;
+  }
+  return /** @type {ContentRecord} */ (detachContentJson(data));
+}
+
+/**
+ * Conservative record admission. A generated manifest validator can be passed
+ * as `admitItem`; this base wall still rejects unknown categories and nameless
+ * or non-object records before that validator runs.
+ *
+ * @param {unknown} category
+ * @param {unknown} item
+ * @param {{ admitItem?: ContentAdmission|null }} [options]
+ * @returns {{ok:boolean, errors:string[]}}
+ */
+export function validateVersionedContent(category, item, options = {}) {
+  /** @type {string[]} */
+  const errors = [];
+  if (!isAuthorableContentCategory(category)) {
+    errors.push(`Unsupported custom-content category "${String(category || '')}".`);
+  }
+  const record = isPlainContentRecord(item)
+    ? /** @type {Record<string, unknown>} */ (item)
+    : null;
+  if (!record) {
+    errors.push('Custom content must be a plain object.');
+  } else if (!String(record.name || '').trim()) {
+    errors.push('Custom content needs a name.');
+  }
+  if (errors.length || typeof options.admitItem !== 'function') {
+    return { ok: errors.length === 0, errors };
+  }
+
+  const result = options.admitItem(
+    /** @type {string} */ (category),
+    /** @type {Record<string, unknown>} */ (record),
+  );
+  if (result === true) return { ok: true, errors: [] };
+  if (result === false) {
+    return { ok: false, errors: ['The category manifest rejected this item.'] };
+  }
+  return {
+    ok: result?.ok === true,
+    errors: Array.isArray(result?.errors)
+      ? result.errors.map(String)
+      : result?.ok === true
+        ? []
+        : ['The category manifest rejected this item.'],
+  };
+}
+
+/**
+ * Hash only behavior-bearing revision content.
+ *
+ * @param {string} category
+ * @param {Record<string, unknown>} data
+ */
+export function contentRevisionHash(category, data) {
+  return fingerprintContent({
+    schemaVersion: CONTENT_REVISION_SCHEMA_VERSION,
+    category,
+    data: authoredDataOf(data),
+  });
+}
+
+/**
+ * Construct one immutable local/domain revision record.
+ *
+ * Database revision ids are generated by PostgreSQL. Local/offline ids are
+ * content-addressed and definition-qualified, so retries converge.
+ */
+/**
+ * @param {ContentRevisionInput} input
+ */
+export function makeContentRevision({
+  definitionId,
+  category,
+  data,
+  revisionNumber = 1,
+  parentRevisionId = null,
+  createdAt = null,
+  revisionId = null,
+  admitItem = null,
+}) {
+  if (!definitionId || typeof definitionId !== 'string') {
+    throw new TypeError('A definition id is required.');
+  }
+  const admitted = validateVersionedContent(category, data, { admitItem });
+  if (!admitted.ok) throw new TypeError(admitted.errors.join(' '));
+  const cleanData = authoredDataOf(data);
+  const contentHash = contentRevisionHash(category, cleanData);
+  const number = Number(revisionNumber);
+  if (!Number.isInteger(number) || number < 1) {
+    throw new TypeError('Revision number must be a positive integer.');
+  }
+  return Object.freeze({
+    schemaVersion: CONTENT_REVISION_SCHEMA_VERSION,
+    id: revisionId || `revision:${definitionId}:${number}:${contentHash.slice(0, 16)}`,
+    definitionId,
+    category,
+    revisionNumber: number,
+    parentRevisionId: parentRevisionId || null,
+    contentHash,
+    data: Object.freeze(cleanData),
+    createdAt: createdAt || null,
+  });
+}
+
+/**
+ * Project a definition head into the legacy flat-item contract consumed by the
+ * generator and Compendium. Revision metadata stays explicit so the next edit
+ * can perform expected-head compare-and-swap.
+ */
+/**
+ * @param {ContentDefinition|null|undefined} definition
+ * @param {ContentRevision|null|undefined} revision
+ */
+export function projectDefinitionHead(definition, revision) {
+  if (!definition || !revision) return null;
+  return Object.freeze({
+    ...revision.data,
+    id: definition.id,
+    definitionId: definition.id,
+    revisionId: revision.id,
+    revisionNumber: revision.revisionNumber,
+    contentHash: revision.contentHash,
+    localUid: definition.localUid || revision.data?.localUid || null,
+    isCustom: true,
+    createdAt: definition.createdAt || revision.createdAt || null,
+    updatedAt: revision.createdAt || definition.updatedAt || null,
+    archivedAt: definition.archivedAt || null,
+    _schemaVersion: CONTENT_REVISION_SCHEMA_VERSION,
+  });
+}
+
+/**
+ * Exact CAS predicate shared by local fallback tests and command preflight.
+ */
+/**
+ * @param {unknown} actualRevisionId
+ * @param {unknown} expectedRevisionId
+ */
+export function expectedHeadMatches(actualRevisionId, expectedRevisionId) {
+  return String(actualRevisionId || '') === String(expectedRevisionId || '');
+}

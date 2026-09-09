@@ -1,0 +1,536 @@
+ 
+
+ Dungeon Mastering 101: Mastering the Boxed Text – Dungeon Master's Workshop 
+
+ Skip to content 
+
+ Dungeon Master's Workshop 
+
+ Homebrew content for 5th edition Dungeons & Dragons
+
+ Arcane Emporium 
+
+ Arcane Emporium, Vols. 11-15 
+
+ Arcane Emporium, Vol. 15 
+
+ Arcane Emporium, Vol. 14 
+
+ Arcane Emporium, Vol. 13 
+
+ Arcane Emporium, Vol. 12 
+
+ Arcane Emporium, Vol. 11 
+
+ Arcane Emporium, Vols. 6-10 
+
+ Arcane Emporium, Vol. 10 
+
+ Arcane Emporium, Vol. 9 
+
+ Arcane Emporium, Vol. 8 
+
+ Arcane Emporium, Vol. 7 
+
+ Arcane Emporium, Vol. 6 
+
+ Arcane Emporium, Vols. 1-5 
+
+ Arcane Emporium, Vol. 5 
+
+ Arcane Emporium, Vol. 4 
+
+ Arcane Emporium, Vol. 3 
+
+ Arcane Emporium, Vol. 2 
+
+ Arcane Emporium, Vol. 1 
+
+ Player Resources 
+
+ Character Options 
+
+ New Prestige Class: the Blood Mage 
+
+ May The 4th Be With You: The Jedi (5E) 
+
+ Player Tips 
+
+ Things You Didn’t Know About D&D 5E 
+
+ Things You Didn’t Know About D&D 5E: Ability Checks 
+
+ Things You Didn’t Know About D&D 5e: Calculating AC 
+
+ Things You Didn’t Know About D&D: Multiclass Spellcasting 
+
+ Things You Didn’t Know About D&D 5e: Preparing Spells 
+
+ Things You Didn’t Know About D&D 5E: The Surprise Round 
+
+ Things You Didn’t Know About D&D 5E: Hiding In Combat 
+
+ Things You Didn’t Know About D&D 5E: Warlocks and their Patrons 
+
+ Roleplaying Long-Lived Races 
+
+ How To Write A Character Backstory 
+
+ DM’s Corner 
+
+ D&D Tips 
+
+ Combat 
+
+ D&D Tips: Describing Combat & Hit Points 
+
+ D&D Tips: Describing Combat & Hit Points, Part 2 
+
+ Skills 
+
+ D&D Tips: Handling Skill Checks & Failures 
+
+ D&D Tips: Truth In Social Interaction Checks 
+
+ D&D Tips: Using (Passive) Skills 
+
+ Spellcasting 
+
+ D&D Tips: Bonus Action Spells 
+
+ D&D Tips: Spellcasting Components and Focuses 
+
+ D&D Tips: Multiclassing Like A Pro 
+
+ Dungeon Mastering 101 
+
+ Dungeon Mastering 101: Building an Encounter 
+
+ Dungeon Mastering 101: Designing a Quest, Part 1 
+
+ Dungeon Mastering 101: Designing A Quest, Part 2 
+
+ Editorials 
+
+ The Role of Metagaming 
+
+ No, Healing Word Is Not Overpowered 
+
+ Fixing Spell Components: Keep Your Flavour, Mike Mearls, I Don’t Like It 
+
+ Dear Adventurers League, It’s Not Me, It’s Definitely You: A Break-Up Letter From Players 
+
+ Tomb of Annihilation 
+
+ Tomb of Annihilation: Handling Jungle Travel 
+
+ Tomb of Annihilation: Improving Acererak 
+
+ Tomb of Annihilation: Playing Acererak 
+
+ Tomb of Annihilation: Ras Nsi, Revised 
+
+ Variants 
+
+ Crafting and Selling Magic Items, Revised 
+
+ Xanathar’s: The Checkpoint System 
+
+ Advanced Death Rules 
+
+ A Guide to D&D Coins 
+
+ Products 
+
+ Adventures 
+
+ Adventure: Ghost of the Mere 
+
+ Adventure: Lucid Dreams 
+
+ Adventure: Temple of the Primordials 
+
+ Adventure: Trouble on the Stone Trail 
+
+ Supplements 
+
+ New Supplement: Expanded Lifestyles 
+
+ Tomb of Annihilation: Ras Nsi, Revised 
+
+ Tomb of Annihilation: The Lost Treasures of Omu 
+
+ New Prestige Class: the Blood Mage 
+
+ The Sending Stone 
+
+ Reviews 
+
+ Review: The Witch of Underwillow 
+
+ Review: Izzy’s Slightly Used Airships 
+
+ Dungeon Master Review: Murder In Baldur’s Gate 
+
+ Review: Mordenkainen’s Tome of Foes 
+
+ About 
+
+ Posts
+
+ Dungeon Mastering 101: Mastering the Boxed Text
+
+ September 27, 2019 
+
+ The Archmage 
+
+ Leave a comment 
+
+ The players are on the edge of their seats. The passage is collapsing behind them, but they know the resolution of the story is just up ahead. They push on, feeling the rush as their characters make Athletics checks to outrun the falling debris. Suddenly, they are out of the passage and in the next chamber. The DM clears his throat as he flips the page in his book. Then, in a calm voice, he begins to read.
+
+ The urgency of the situation fades as a long-winded description of the chamber leads into a loquacious soliloquy by the villain, and the excitement of the players turns to frustration at the tedium of having to endure the obtuse pontification of a lunatic in desperate need of a swift execution. Everyone knows where this is going, there are no revelations hidden in the script of this unwanted cutscene. The players aren’t even listening; they’re just waiting to roll initiative.
+
+ For many DMs, this is the kind of scene featured in nightmares that leave you waking up in a cold sweat. The Dungeon Master should be providing a fun experience, not boring the players! But at the same time, occasions will arise when a brief summary isn’t sufficient to convey all the information and the DM needs to take a minute to set the scene. This has led to the use of the dreaded boxed text.
+
+ In this article, we’ll examine the nature and use of boxed text to help you to use this feature to enhance your game, rather than to slow it down.
+
+ Sponsored
+
+ Before you read on, we ask that you help support Dungeon Master’s Workshop by whitelisting us on AdBlock. Revenue from ads helps maintain this website, and we don’t run annoying ads that play sound or pop up. Alternatively, you can become a patron on our Patreon and read on guilt free! 
+
+ The Boxed Text War
+
+ Much ink has been spilled in the infamous Boxed Text War, the debate among adventure writers and Dungeon Masters regarding the effective use of the so-called boxed text—the narrative segments generally included in discrete boxes which usually feature some elegant prose, novel-style dialogue, and perhaps even a significant (and lengthy) event. Proponents of boxed text emphasize that it takes work off the Dungeon Master for the adventure writer’s vision to be directly and unequivocally written into the text, resulting in fewer gaps to fill in and less description to develop (or to extemporize, if the DM overlooked this part of the adventure while preparing) to run the adventure. Opponents, meanwhile, decry boxed text as an intrusion into the flow of the game, a kind of cutscene as one might find in video games but which doesn’t belong in a shared narrative experience like D&D. They point to the dangers of pushing the players to a passive role, undermining their sense of agency in the game.
+
+ This is a debate that has gone back decades, ever since boxed text was introduced in The Hidden Shrine of Tamoachan (1979). Hidden Shrine was the inaugural adventure in the C-series of adventure modules (“C” indicating “competition”), where multiple tables under multiple DMs would attempt to complete the adventure’s various objectives within a strict time limit. The DM would fill in a score card as the players went through the adventure, adding or subtracting points based on the party’s performance.
+
+ Given the importance of a level playing field in such a competition, Hidden Shrine was written with boxed texts to ensure consistent descriptions were given for the adventure’s 50+ rooms, including all their various features that offered a chance for parties to gain or lose points. Everyone had the opportunity to lose a point for “wasting time and effort on [the] algae” in room 8, or have an equal chance of gaining 5 points by “discovering and destroying [the] heart” in room 30. No one could blame the DM for sabotaging or giving unfair hints through the room descriptions because every table’s descriptions were exactly the same.
+
+ This innovation has since taken on a different purpose, offering an easy read-aloud summary for DMs who ignored or were unable to—as each and every adventure clearly directs— read the module several times before playing , and who therefore couldn’t familiarize themselves with important details for each scene. Many stumbling descriptions by overburdened or inexperienced DMs have been avoided by the presence of helpful boxed text.
+
+ However, somewhere along the way in adventure design, a trend began where boxed text transcended simple room descriptions that could be conveniently read aloud, becoming elaborate essays in prose writing, with the content seeming more and more as though it belonged in a novel. This shift has even come to include conventions which don’t translate well to the format of a roleplaying game. To put it another way, where once the boxed text was aimed at the players, it now seems aimed at the Dungeon Master, who is encouraged to “paraphrase as needed” to make the boxed text work at the table—something that may require a complete overhaul.
+
+ A particularly egregious example of this comes from Out of the Abyss , the second time the party is taken to meet King Bruenor Battlehammer:
+
+ “I’ve told the allies ye met tonight what ye told me,” he says. “l invited them here to learn what is happening, to share what we know, and to get their backing for what it is l propose. Ye have braved the Underdark and lived to tell the tale. Ye know, better than anyone, what it is we face, but we need to know more.
+
+ “The Zhentarim have a stake in a secret Underdark trading post called Mantol-Derith. If ye can get them on our side, they’ll guide ye there, where ye can meet with one of their agents, Ghazrim DuLoc. He can provide ye with a map to Gravenhollow. It’s a legendary place built by the stone giants long ago, said to contain all the knowledge of the depths. If there’s answers to be found for what has happened, ye might find them there. If ye are willing to go back, that is.
+
+ “I don’t propose to send ye into the dark unprepared, and I hope ye make an impression on those gathered here so they’ll support our cause and your mission. From all we seen and heard, there’s no one better to do what needs be done.
+
+ “So, what say ye?”
+
+ Right off the bat, we have potentially the silliest convention to ever make it into adventure writing: structuring the narrative like it’s a book. Anyone who has ever read Shakespeare (or any other stageplay or television/movie script) will have seen how a script meant to be read aloud is formatted. It doesn’t include things like “he says”, and the first thing an experienced Dungeon Master is likely to do is move that to the beginning of the passage or even just drop it so that the transition into the dialogue is that much easier. If the DM adjusts their voice or even adopts an accent, it will be manifestly clear that Bruenor is speaking to the party without any need to directly say it.
+
+ Secondly, no Dungeon Master will ever make it through all of this without having to pause and repeat at least three of these names. Maybe even spell them for players taking notes. The first words after this boxed text read “Paraphrase Bruenor’s speech as needed to handle interjections by the characters”, and that’s exactly what’s going to happen 99 percent of the time. The boxed text stands little to no chance of being read as written, and so there’s really no reason for it to be formatted this way. And because it isn’t actually all that easy to paraphrase a paragraph on the fly, this convention is actually counterproductive to helping Dungeon Masters.
+
+ A much more effective method of providing this information is a series of bullet points laying out these key considerations. Being able to easily switch between the various points would make the entire scene feel less constrained. This was the method used when introducing Sildar, an important NPC in the Lost Mine of Phandelver adventure, which provides a much smoother interaction that encourages players to engage the NPC, ask questions, and be active participants.
+
+ But that’s a dialogue-based boxed text. What about a boxed text describing a scene?
+
+ Location-based boxed texts are generally more reasonable to read aloud, as they are directed to a general audience, requiring little adjustment—if any at all—for the DM to convey to their players. The biggest drawback to them is that they are immutable, and sometimes don’t account for things that have been altered by player actions. Creatures mentioned might have moved elsewhere to respond to a disturbance, furniture described might have been blasted apart when the wizard threw a fireball into the room prior to entry, and scripted events may have been defeated or bypassed. For all the reasons that boxed text is difficult to paraphrase, it is also difficult to adjust without preparation.
+
+ These concerns reflect a deeper flaw with the concept of boxed text which goes beyond troublesome conventions and strays into the limitations of adventure design. One of the most vocal critics of boxed text, James Introcasto, was one of the designers of Waterdeep: Dragon Heist , a module which showed a clear struggle between boxed text descriptions and less constrained formats. While most important areas in the adventure are given the boxed text treatment, minor areas are often described differently. A bookstore receives a short paragraph description that is written to be more easily paraphrased; a great hall in a noble villa has multiple bullet points describing the furnishings, the sounds, and the bodies on the floor; and other rooms and areas clearly show the influence of other competing philosophies all trying to find the best way to set the scene.
+
+ There is certainly something to be said for less constrained descriptions. They tend to feel much more engaging, and don’t so completely remove players from active roles even as the DM is embarking on a miniature lecture. Note how Dungeon Master extraordinaire Matthew Mercer transitions seamlessly from the regular back-and-forth between player and DM with Laura Bailey into a description of a magnificent dwarven city in “Arrival at Kraghammer”, the first episode of Critical Role.
+
+ The description seems to be delivered naturally, in a conversational tone with no shift in cadence. One would assume it was entirely extemporaneous if it weren’t for the occasional downward glance by Matthew Mercer as he checks a few notes. The players are drawn in because the description feels addressed to them instead of the empty air and engages the characters with their arrival at a scene. In short, the players aren’t being subjected to the pretensions of a novelist intruding in their fantasy, but rather are being engaged with a new scene to explore. While we don’t have access to Matthew Mercer’s notes for this part of the game, we have seen his notes for other game sessions clearly showing that he prepares for this kind of description by creating bullet point notes similar to those described above in Waterdeep: Dragon Heist .
+
+ Of course, what is most functional isn’t always what people like, and this was certainly the case with the new approach to room descriptions. Many people spoke out against the method, citing many reasons to dislike it, including a strong preference for eloquent descriptions which convey the intended tone much more effectively than minimalist bullet points, or which elevate the narrative to a professional level that the DM doesn’t have time to develop on their own. Some DMs even lamented the loss of the mental break they had been able to take with the boxed text—material they could simply read instead of having to invent. And so, as of Baldur’s Gate: Descent into Avernus , we are back with full boxed text descriptions.
+
+ Using Boxed Text Your Way
+
+ With the history of boxed text and its current context established, let’s get into some recommendations for using this feature to its greatest benefit to your game.
+
+ The most important thing to understand about boxed text is that it’s a tool. Like any tool, it can’t do the work on its own, it has to be used by someone, and if you rely on it too heavily it can eventually become a crutch. You need to take the boxed text and make it yours rather than submit to its authority. It will only perform as well as you use it.
+
+ Read the boxed text beforehand and be critical about whether it will suffice for your needs. Adjust it as much or as little as you like; don’t be afraid to embellish or revise in order to emphasize points that draw your players’ attentions. And don’t shy away from shifting text from third-person objective (“A 200-foot waterfall cascades down…”) to second-person subjective (“You see a majestic waterfall hundreds of feet in height…”) if your players tend to lose focus, as it will help them feel engaged. If you write your own boxed text for your home adventures, don’t feel the need to match it to the style in official publications if you’re just going to have to paraphrase it later.
+
+ It will also help you to spend a bit of time getting familiar with reading the boxed text in a natural way. Practice reading some of the text aloud between sessions if you can so that you can learn the pronunciation and how to match the pace of the text to the cadence of your regular speech. Great writing is worth its weight in gold, but the art of good reading is priceless, and something everyone should endeavour to develop as it has so many benefits even outside the game. Well-written and well-delivered flavour text can provide the deepest immersion and enjoyment to your audience.
+
+ Don’t Overdo It
+
+ If you are writing your own adventures, try to limit the length of the boxed text. Aside from introductory passages, it’s rare that a boxed text that includes a paragraph break isn’t already too long by half. This is especially the case with villain appearances, where players are less interested in the extended ruminations of their foe than in getting on with vanquishing them. If you really want the villain to go on about their plan and their motivations, consider breaking it into statements that can be made in about six seconds—the average length of a round—and drop the phrases in during the fight to slowly reveal the villain’s plan. You may also find that this helps you learn to write more clearly.
+
+ Another issue to consider if you are writing boxed text is whether you are ultimately forcing the players to endure what they know to be a farce. Back in the ’80s, official publications were chock full of cutscenes with treacherous NPCs who feigned at being sympathetic until the party dropped its guard, villains whose interminable monologues practically dealt psychic damage to character and player alike, and other overdone conventions that essentially trained a generation of murderhobos whose first instinct was to stab anything and everything that crossed their path before it could injure, rob, or bore them to death. Uninhibited usage of boxed texts ultimately poisoned the well for many players, and we have only in the past few years managed to move past this tragic chapter in the game’s history with the massive influx of new players with Fifth Edition. If just one of them heeds the warnings herein against abusing boxed texts, every word of this article will have been worth it.
+
+ Putting It All Together
+
+ Boxed text is a surprisingly polarizing topic, adored or loathed by many with surprisingly few who profess indifference. They have come a long way since their inception as a way to level the field in competitive play, becoming a powerful tool for improving or sabotaging the hobby. For all the opposition to the use of boxed text, there is even greater opposition to shifting to alternatives, whether because they aren’t as easy to follow, because they don’t contribute as well to building the mood, or because of some other reason arising from the particular style of a DM.
+
+ If you do use boxed text, there are many ways to improve your use of the feature or make the content more seamlessly integrated into your game, addressing the most oft-cited issues by DMs who struggle with it. While they require a little preparation, the rewards are well worth the time investment.
+
+ Do you have another suggestion for handling exposition and setting development? Another solution to the failings of boxed text? We’d love to hear your thoughts in the comments below! 
+
+ Sponsored
+
+ Share this:
+
+ Share on X (Opens in new window) 
+ X 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+
+ Related 
+
+ Posted in: Dungeon Mastering 101 
+
+ Post navigation
+
+ ← Party Feigns Astonishment At Death of NPC With Sean Bean’s Voice 
+ Reimagining Counterspell → 
+
+ Leave a Reply Cancel reply 
+ Your email address will not be published. Required fields are marked * 
+ Comment * 
+ Name * 
+
+ Email * 
+
+ Website 
+
+ Type in the text displayed above 
+
+ Notify me of follow-up comments by email. 
+ Notify me of new posts by email. 
+
+ Δ 
+
+ Search for: 
+
+ Recent Posts
+
+ WotC Concedes the OGL Fight, Releases Entire SRD 5.1 under Creative Commons 
+
+ Response to the OGL 1.2 Survey 
+
+ Reviewing WotC’s OGL Statement 
+
+ Dungeon Master’s Workshop and OGL 1.1 
+
+ Complete Arcane (5.5E) 
+
+ Recent Comments
+ Paul Sager on Skills Revised: Specializations 
+ RMS on Orcs Aren’t People: Denouncing Racism in the D&D Community 
+ RMS on Orcs Aren’t People: Denouncing Racism in the D&D Community 
+ The Archmage on Orcs Aren’t People: Denouncing Racism in the D&D Community 
+ Evi on Orcs Aren’t People: Denouncing Racism in the D&D Community 
+ Buy our content on Dungeon Masters Guild!
+ Become a patron on Patreon!
+ Sponsored
+
+ Categories
+
+ 5.5e 
+
+ Arcane Emporium 
+
+ Arcane Emporium, Vols. 1-5 
+
+ Arcane Emporium, Vols. 11-15 
+
+ Arcane Emporium, Vols. 6-10 
+
+ Character Options 
+
+ D&D Tips 
+
+ DM's Corner 
+
+ Dungeon Mastering 101 
+
+ Dungeons & Dragons 
+
+ Editorials 
+
+ Monster Spotlight 
+
+ Player Resources 
+
+ Player Tips 
+
+ Reviews 
+
+ Skills 
+
+ Spellcasting 
+
+ Sponsored 
+
+ The Sending Stone 
+
+ Things You Didn't Know About D&D 5E 
+
+ Tomb of Annihilation 
+
+ Tools 
+
+ Uncategorized 
+
+ Variants 
+
+ Archives
+
+ January 2023 
+
+ December 2022 
+
+ October 2022 
+
+ July 2022 
+
+ February 2022 
+
+ January 2022 
+
+ December 2021 
+
+ November 2021 
+
+ October 2021 
+
+ September 2021 
+
+ July 2021 
+
+ April 2021 
+
+ October 2020 
+
+ September 2020 
+
+ August 2020 
+
+ July 2020 
+
+ June 2020 
+
+ May 2020 
+
+ April 2020 
+
+ March 2020 
+
+ February 2020 
+
+ November 2019 
+
+ October 2019 
+
+ September 2019 
+
+ August 2019 
+
+ July 2019 
+
+ June 2019 
+
+ May 2019 
+
+ April 2019 
+
+ March 2019 
+
+ February 2019 
+
+ January 2019 
+
+ December 2018 
+
+ November 2018 
+
+ October 2018 
+
+ September 2018 
+
+ August 2018 
+
+ July 2018 
+
+ June 2018 
+
+ May 2018 
+
+ April 2018 
+
+ March 2018 
+
+ February 2018 
+
+ January 2018 
+
+ December 2017 
+
+ November 2017 
+
+ October 2017 
+
+ September 2017 
+
+ August 2017 
+
+ July 2017 
+
+ June 2017 
+
+ May 2017 
+
+ April 2017 
+
+ March 2017 
+
+ February 2017 
+
+ January 2017 
+
+ December 2016 
+
+ March 2016 
+
+ September 2015 
+
+ August 2015 
+
+ Meta
+
+ Log in 
+
+ Entries feed 
+
+ Comments feed 
+
+ WordPress.org 
+
+ Copyright © 2026 Dungeon Master's Workshop
+
+ We are using cookies to give you the best experience on our website.
+ You can find out more about which cookies we are using or switch them off in settings .
+
+ Accept 
+
+ Close GDPR Cookie Settings 
+
+ Privacy Overview 
+
+ Strictly Necessary Cookies 
+
+ Powered by GDPR Cookie Compliance 
+
+ Privacy Overview 
+
+ This website uses cookies so that we can provide you with the best user experience possible. Cookie information is stored in your browser and performs functions such as recognising you when you return to our website and helping our team to understand which sections of the website you find most interesting and useful.
+
+ Strictly Necessary Cookies 
+
+ Strictly Necessary Cookie should be enabled at all times so that we can save your preferences for cookie settings.
+
+ Enable or Disable Cookies 
+
+ Enabled 
+ Disabled 
+
+ Enable All 
+ Save Settings 
+

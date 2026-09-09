@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i284-298",
+ "lines": 91,
+ "firstTs": "2026-09-06T17:26:31.147Z",
+ "lastTs": "2026-09-06T17:33:04.614Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 18,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing?action=raw",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=render"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "kpoint file written and read back (15 claims, 15 verdicts, indices matched). All 15 claims share one URL, fetched once as raw text by two routes on the live host (`?action=raw` wikitext, 220 KB, and `?action=render` HTML stripped to text, 1.17 MB) — no summarizer, no Wayback needed, nothing blocked.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "a1cf10b377d6d322d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a1cf10b377d6d322d.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i284-298.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,4 @@
+# tripwire evaluation — aggregate research-lit-4s, 1 case receipt(s)
+  FINDING  research-lit-4s-300y-4s-seed1 · capacity_realm_load — realm load 0.4787 outside the plateau window [0.6, 1.05]
+
+FIRED: 1 deterministic finding(s) over 1 cell(s); 0 host-observability note(s)

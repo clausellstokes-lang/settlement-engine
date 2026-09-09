@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i195-209",
+ "lines": 64,
+ "firstTs": "2026-09-06T17:04:44.592Z",
+ "lastTs": "2026-09-06T17:07:44.624Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://annkroeker.com/2015/10/24/writing-quotes-ursula-le-guin-on-adjectives-and-adverbs/",
+  "https://wouldthatimight.blogspot.com/2018/07/le-guin-steering-craft-chapter-five.html",
+  "http://0tralala.blogspot.com/2026/01/steering-craft-by-ursula-le-guin.html",
+  "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsea2lemg/",
+  "https://www.dailykos.com/stories/2023/1/12/2146773/-Write-On-Crowding-and-Leaping-according-to-LeGuin"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "wser user agent via curl; no summarizer, no Wayback needed). Every one of the 15 quotations is present word for word after apostrophe/quote normalization, and each claim's limbs check out in context — including the two reactormag comment-thread claims, whose wpDiscuz thread ships in the served HTML.",
+ "run": "wf_5e5c7e72-458",
+ "agent": "ac164a1870fc503a4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_5e5c7e72-458/agent-ac164a1870fc503a4.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i195-209.json",
+  "exists": true
+ }
+}

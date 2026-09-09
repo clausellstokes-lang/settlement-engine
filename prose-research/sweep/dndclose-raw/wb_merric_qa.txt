@@ -1,0 +1,269 @@
+Boxed Text Q&A - Merric's Musings
+
+ Menu
+
+ Boxed Text Q&A
+
+ by Merric Blackman
+
+ September 23, 2020 
+
+ No Comments 
+
+ AD&D, D&D, D&D, D&D 5E, Design, Play Advice 
+
+I recently participated on a panel on boxed text in PAX Online. Before that, I asked some of my twitter followers questions that they had about the use of box text. We did not get to most of those questions, so I am using this article to answer them!
+
+A reminder: I am in favour of boxed text, when used well!
+
+“Would your approach to writing boxed text be different if Patrick Stewart was going to be the one reading to the players?” – @JaysNDragons
+
+Maybe. Honestly, I make the assumption that the DM knows how to read boxed text. This is not always a good assumption – it took me a long time to get better at reading from a text without sounding like a schoolkid in church reading from the bible.
+
+But you have to start somewhere. And this is one of the things that individual DMs can do to improve their DMing: practise reading boxed text! Record yourself. Listen to how you sound.
+
+Even without boxed text, DMs tend to read passages from the book, and they can be dreadful at it. So, practise! You will get better!
+
+From a boxed text skeptic trying to keep an open mind: “What is the best example of boxed text you’ve seen in a module?” – @Allanzandros
+
+That is actually a very hard question to answer. The boxed text I remember as a DM is not often the best – there are some glorious passages in Gygax’s adventures which are incredible evocative, but are very long and do not work that well at the table.
+
+There are also a few types of boxed text. One type is used in the middle of play to describe an area, and needs to be relatively short and informative. The other is meant to set the scene (or end an adventure) and so should be as evocative as possible. Both Gary Gygax and Tracy Hickman were very good at these.
+
+My all-time favourite evocative piece of boxed text is the ending of Pharaoh by Tracy Hickman, of which I have an excerpt below:
+
+The sand in the air drifts slowly to the earth below in silence and all is as it was. Yet not quite, for the silence is not complete. Down below, as yet unseen through the settling dust, lifts the cool sound of running water. The clearing air soon reveals a cracked pool, now overflowing with spring-clear water, and a long dead channel, taking, at each step, its own parched drink before passing the flowing river on. It will take time to heal this land, but there will be blossoms in the spring, for Athis has returned from her exile—and with her comes life.
+Tracy and Laura Hickman, Pharaoh, TSR 1982.
+
+But that is a special case. Looking through the latest D&D release, Rime of the Frostmaiden, I can find several excellent examples of boxed text. 
+
+Consider this:
+
+Peering through the gap in a collapsed wall, you see a fifteen-foot-square infimary in disarray, with an operating table in the middle of the room. Leather straps extend from one side of the table into the air above its surface, and fasten to the other side. The shape suggests that something or someone invisible is lashed to the table.
+Icewind Dale: RIme of the Frostmaiden, Wizards of the Coast 2020
+
+There are a few things there (use of you) that some do not recommend, but I think it is excellent at giving an overview of the area and focusing the characters on the major point of interest in the room.
+
+Just a note: If the room is too complicated to describe in boxed text, it is likely too complicated!
+
+And what is the worst? – @MTBlack@2579
+
+There are so many examples!
+
+For humour’s sake, I take this example from The Forest Oracle.
+
+A group of seven men approaches. They are following the road east, and are making good time, neither tarrying nor running. Their faces are expressionless. One is dressed as a cleric of some sort, and another is dressed as a traveling drummer. The others could be peasants or serfs going from one location to another for the harvest season. Each carries some sort of weapon. It is plain that they are not soldiers by their haphazard way of walking. They do not seem to be joking loudly or singing as they advance.
+Carl Smith, The Forest Oracle, TSR 1984
+
+There are far worse examples out there, but this one falls into the trap of overdescribing. In fact, there are several parts of the text that are nicely evocative, but it is not content with just describing the scene but also assuming what the characters think of it!
+
+The last line is priceless. “They do not seem to be joking loudly or singing as they advance”. You could use that as the last line of every boxed text you read out, and in 9999 of 10000 cases, it would be true!
+
+How does one measure the success of the boxed text? Qualitatively, Quantitatively. – @WisePapaGrant
+
+It is easy to measure the non-success of boxed text. If your players fall asleep or completely fail to understand what you have just said, you have failed!
+
+The purpose of boxed text is to distill the ideas of what may be a complicated encounter down into a form which the DM can easily relay to the players without having to do the work themselves. It is a guide for both the DM and players of what is immediately important.
+
+So, after a passage of boxed text, the players should have between one to three items they can immediately interact with, and have an idea of the area they are doing it in. You do not need to be that specific – shorter is better for attention span – but as long as they have an idea of what they can do next, it is a success.
+
+When writing box text, what are some common mistakes authors make? – @mysterywisc
+
+The number one problem is the boxed text is too long. The related problem is too much irrelevant detail.
+
+In some cases it comes down to making the area itself too complcated. If there are twenty things to interact with, describing them all individually just takes too long.
+
+Assumption of action is another common problem, which is when you describe the characters doing something that, in the game, they are not doing. (It seems that there is assumption of action above in my example of good boxed text, but that is text triggered by an action). 
+
+Related to that is assumption of inaction. This happens when you describe an ongoing scene. A common one is a sacrifice. You describe the cultists, how they are chanting, and how the high priest lifts his dagger, performs the sacrifice, and does something unspeakable afterwards. Meanwhile, the players start shouting at you in the middle of the text about how they stop the high priest! That is assumption of inaction: except in specific cases, do not describe actions that take time to complete!
+
+How much should boxed text give away? To me, sometimes its too assumptive. – @SwampRob
+
+As much as needed for the players to have an idea of what is going on!
+
+Here is another example from Rime of the Frostmaiden:
+
+This tower reaches upward like a talon, its stonework studded in chiseled runes. A blue light shines from its highest window.
+Icewind Dale: Rise of the Frostmaiden, WIzards of the Coast 2020
+
+That has a little bit of evocative text — “upward like a talon” — and two immediate areas of interest, the runes and the blue light. That gets the players attention and gives them things to interact with.
+
+It is entirely too easy to give too much detail. You can save that for individual sections in the text that the DM references when the players look more closely at the area. 
+
+That seems enough for one blog post! I will get to the other questions asked in the near future. If you have a question about boxed text you would like to ask, tag me on Twitter or email me at merricb@yahoo.co.uk – I will try to include them in a later article!
+
+ PrevPreviousAdventures in Greyhawk – The Company Goes South 
+
+ NextLair Design – Sleeping Dragon’s WakeNext 
+
+ Leave a Reply Cancel reply
+
+ This site uses Akismet to reduce spam. Learn how your comment data is processed.
+
+ Share on facebook
+
+ Facebook 
+
+ Share on twitter
+
+ Twitter 
+
+ Share on linkedin
+
+ LinkedIn 
+
+ Recent Posts
+
+ AD&D Adventure Review: The Glacial Rift of the Frost Giant Jarl
+
+ On Opening Scenes of Organised Play Adventures
+
+ AD&D Adventure Review – Conan: Against Darkness!
+
+ Running Descent into Avernus part 11: Starting the Path of Devils
+
+ Thoughts about Skills in Dungeons & Dragons
+
+ Categories
+Categories
+ Select Category
+ 13th Age (2)
+ A Game of Thrones (1)
+ AD&D (108)
+ AD&D 2E (11)
+ Advanced Squad Leader (46)
+ Amber (2)
+ BattleTech (25)
+ Board Games (189)
+ Books (62)
+ Call of Cthulhu (1)
+ Campaign Coins (1)
+ Comics (5)
+ Curse of Strahd (36)
+ D&D (976)
+ D&D (57)
+ D&D 3E (54)
+ D&D 4E (150)
+ D&D 5E (691)
+ D&D Adventurers League (231)
+ D&D at Guf Ballarat (4)
+ D&D Basic (33)
+ D&D Encounters (31)
+ D&D Essentials Kit (1)
+ D&D Miniatures (70)
+ D&D Next (47)
+ Descent into Avernus (17)
+ Design (201)
+ Doctor Who (11)
+ Dragonlance (2)
+ Dreams of the Red Wizards (2)
+ Eberron (6)
+ Elemental Evil (30)
+ Esper Genesis (1)
+ Fantasy and Science Fiction (39)
+ Forgotten Realms (28)
+ Ghosts of Saltmarsh (6)
+ Great Battles of History (6)
+ Greyhawk (45)
+ History (5)
+ Initiative (7)
+ Kickstarter (6)
+ LCG (1)
+ Legends of Baldur’s Gate (1)
+ Life (160)
+ Lost Mine of Phandelver (13)
+ Magic (11)
+ Men of Iron (1)
+ Murder in Baldur’s Gate (2)
+ Mystic Odysseys of Theros (1)
+ OSR (5)
+ Out of the Abyss (1)
+ Pathfinder (31)
+ Pathfinder 2 (1)
+ Play Advice (145)
+ Primeval Thule (4)
+ Rage of Demons (11)
+ Review (510)
+ Rime of the Frostmaiden (2)
+ Roll20 (3)
+ RPGs (84)
+ Runequest (1)
+ Scourge of the Sword Coast (5)
+ Session Report (340)
+ Shadow of the Demon Lord (2)
+ Spectaculars (1)
+ Star Wars (18)
+ Storm King’s Thunder (7)
+ Sword Coast Legends (1)
+ Tales of the Yawning Portal (4)
+ Third Reich (1)
+ Tomb of Annihilation (13)
+ Tyranny of Dragons (53)
+ Uncategorized (986)
+ Wargames (66)
+ Waterdeep: Dragon Heist (14)
+ Wilderness (3)
+ X-Wing (1)
+
+ D&D on Amazon
+
+ As an Amazon Associate I earn from qualifying purchases.
+
+My Adventures
+
+Buried Temple of the Death God
+
+Death in the Cornfields
+
+The Witch of Underwillow
+
+My DDAL-legal Adventures
+
+Ghoulies and Ghosties
+
+Hulburg Rising
+
+The Mysterious Isle
+
+Eye of Xxiphu
+
+Follow me on Twitter
+My Tweets
+ September 2020
+
+ M
+ T
+ W
+ T
+ F
+ S
+ S
+
+ 123456
+
+ 78910111213
+
+ 14151617181920
+
+ 21222324252627
+
+ 282930
+
+Meta
+
+ Log in
+
+ Entries feed
+
+ Comments feed
+
+ WordPress.org
+
+ September 23, 2020 
+
+ ,
+ 11:31 am 
+
+ ,
+
+ AD&D, D&D, D&D, D&D 5E, Design, Play Advice

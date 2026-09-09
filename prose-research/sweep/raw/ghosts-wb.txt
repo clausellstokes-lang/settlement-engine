@@ -1,0 +1,528 @@
+ 
+ Ghosts - Believer Magazine 
+ Skip to content 
+ -->
+ B 
+ Home 
+ hamburger 
+ Open Main Navigation 
+ Discover 
+ Open Issue Navigation 
+ logger 
+ The Logger 
+ 0 
+ Items in cart 
+ shop 
+ Open shop navigation 
+ Search 
+ Open search menu 
+ × Close menu 
+ Departments -->
+ Reviews 
+ Essays 
+ Interviews 
+ See All 
+ 1057
+ [name] => Writers
+ [slug] => writers
+ [term_group] => 0
+ [term_taxonomy_id] => 1057
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 214
+ [filter] => raw
+ [term_order] => 44
+)
+ -->
+ Writers 
+ 1069
+ [name] => Actors
+ [slug] => actors
+ [term_group] => 0
+ [term_taxonomy_id] => 1069
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 44
+ [filter] => raw
+ [term_order] => 37
+)
+ -->
+ Actors 
+ 1092
+ [name] => Musicians
+ [slug] => musicians
+ [term_group] => 0
+ [term_taxonomy_id] => 1092
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 120
+ [filter] => raw
+ [term_order] => 41
+)
+ -->
+ Musicians 
+ 1105
+ [name] => Artists
+ [slug] => artists
+ [term_group] => 0
+ [term_taxonomy_id] => 1105
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 124
+ [filter] => raw
+ [term_order] => 38
+)
+ -->
+ Artists 
+ 1106
+ [name] => Filmmakers
+ [slug] => filmmakers
+ [term_group] => 0
+ [term_taxonomy_id] => 1106
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 53
+ [filter] => raw
+ [term_order] => 40
+)
+ -->
+ Filmmakers 
+ 1107
+ [name] => Thinkers
+ [slug] => thinkers
+ [term_group] => 0
+ [term_taxonomy_id] => 1107
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 59
+ [filter] => raw
+ [term_order] => 43
+)
+ -->
+ Thinkers 
+ 1110
+ [name] => Comedians
+ [slug] => comedians
+ [term_group] => 0
+ [term_taxonomy_id] => 1110
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 18
+ [filter] => raw
+ [term_order] => 39
+)
+ -->
+ Comedians 
+ 1112
+ [name] => Policy Makers
+ [slug] => policy-makers
+ [term_group] => 0
+ [term_taxonomy_id] => 1112
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 3
+ [filter] => raw
+ [term_order] => 42
+)
+ -->
+ Policy Makers 
+ 2290
+ [name] => Chefs
+ [slug] => chefs
+ [term_group] => 0
+ [term_taxonomy_id] => 2290
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 1
+ [filter] => raw
+ [term_order] => 7
+)
+ -->
+ Chefs 
+ 3045
+ [name] => Conversations with Contributors
+ [slug] => conversations-with-contributors
+ [term_group] => 0
+ [term_taxonomy_id] => 3045
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 969
+ [count] => 0
+ [filter] => raw
+ [term_order] => 3
+)
+ -->
+ Conversations with Contributors 
+ Comics 
+ The Field 
+ Poetry 
+ Columns 
+ Schema 
+ Departments 
+ See All 
+ 967
+ [name] => Beings
+ [slug] => beings
+ [term_group] => 0
+ [term_taxonomy_id] => 967
+ [taxonomy] => article_types
+ [description] => Profiles of widely unknown individuals
+ [parent] => 966
+ [count] => 36
+ [filter] => raw
+ [term_order] => 33
+)
+ -->
+ Beings 
+ 974
+ [name] => Objects
+ [slug] => objects
+ [term_group] => 0
+ [term_taxonomy_id] => 974
+ [taxonomy] => article_types
+ [description] => Reviews of everyday items
+ [parent] => 966
+ [count] => 60
+ [filter] => raw
+ [term_order] => 35
+)
+ -->
+ Objects 
+ 975
+ [name] => Places
+ [slug] => places
+ [term_group] => 0
+ [term_taxonomy_id] => 975
+ [taxonomy] => article_types
+ [description] => Reports from mundane sites
+ [parent] => 966
+ [count] => 26
+ [filter] => raw
+ [term_order] => 36
+)
+ -->
+ Places 
+ 979
+ [name] => Instructions
+ [slug] => instructions
+ [term_group] => 0
+ [term_taxonomy_id] => 979
+ [taxonomy] => article_types
+ [description] => A series of essential advice
+ [parent] => 966
+ [count] => 10
+ [filter] => raw
+ [term_order] => 34
+)
+ -->
+ Instructions 
+ 1947
+ [name] => Words
+ [slug] => words
+ [term_group] => 0
+ [term_taxonomy_id] => 1947
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 966
+ [count] => 3
+ [filter] => raw
+ [term_order] => 11
+)
+ -->
+ Words 
+ 1951
+ [name] => Sounds
+ [slug] => sounds
+ [term_group] => 0
+ [term_taxonomy_id] => 1951
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 966
+ [count] => 1
+ [filter] => raw
+ [term_order] => 10
+)
+ -->
+ Sounds 
+ 2099
+ [name] => Animals
+ [slug] => animals
+ [term_group] => 0
+ [term_taxonomy_id] => 2099
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 966
+ [count] => 1
+ [filter] => raw
+ [term_order] => 9
+)
+ -->
+ Animals 
+ 2194
+ [name] => Tools
+ [slug] => tools
+ [term_group] => 0
+ [term_taxonomy_id] => 2194
+ [taxonomy] => article_types
+ [description] => 
+ [parent] => 966
+ [count] => 6
+ [filter] => raw
+ [term_order] => 8
+)
+ -->
+ Tools 
+ The Magazine 
+ About 
+ Shop 
+ Contact 
+ Masthead 
+ Advertising 
+ Newsletter 
+ LOG IN 
+ SUBSCRIBE 
+ From this Issue 
+ An Interview with Andrew Garfield 
+ Esmé Weijun Wang 
+ Hold On 
+ Angie Kang 
+ Yellow Faces 
+ JS Wu 
+ I Can’t Wait to Get Started 
+ Amber Husain 
+ Latest Issues 
+ March April 2022 
+ December 2021 January 2022 
+ October November 2021 
+ Summer 2021 
+ April May 2021 
+ More 
+ Get it in your mailbox. 
+ subscribe now 
+ × Close menu 
+ Looking for something? 
+ Type something to see the thing you're actually looking for 
+ The Shop 
+ View Cart(0) 
+ Home 
+ Open Main Navigation 
+ Open Issue Navigation 
+ The Logger 
+ 0 
+ Items in cart 
+ Open shop navigation 
+ Open search menu 
+ Departments -->
+ Reviews 
+ Essays 
+ Interviews 
+ See All
+ Writers 
+ Actors 
+ Musicians 
+ Artists 
+ Filmmakers 
+ Thinkers 
+ Comedians 
+ Policy Makers 
+ Chefs 
+ Conversations with Contributors 
+ Comics 
+ The Field 
+ Poetry 
+ Columns 
+ Schema 
+ Departments 
+ See All
+ Beings 
+ Objects 
+ Places 
+ Instructions 
+ Words 
+ Sounds 
+ Animals 
+ Tools 
+ The Magazine 
+ About 
+ Shop 
+ Contact 
+ Masthead 
+ Advertising 
+ Newsletter 
+ LOG IN 
+ SUBSCRIBE 
+ From this Issue 
+ An Interview with Andrew Garfield 
+ Esmé Weijun Wang 
+ Hold On 
+ Angie Kang 
+ Yellow Faces 
+ JS Wu 
+ I Can’t Wait to Get Started 
+ Amber Husain 
+ Latest Issues 
+ March April 2022 
+ December 2021 January 2022 
+ October November 2021 
+ Summer 2021 
+ April May 2021 
+ More 
+ Get it in your mailbox. 
+ Subscribe Now 
+ Looking for something? 
+ Type something to see the thing you're actually looking for 
+ The Shop 
+ View Cart(0) 
+ -->
+ donate 
+ Donate 
+ Scroll 
+ Ghosts 
+ Share 
+ Share via Facebook 
+ Share via Twitter 
+ Copy link to clipboard 
+ Share via text message 
+ August 9th, 2021 
+ I didn’t know how to write about my sister’s death—so I had AI do it for me. 
+ by Vauhini Vara 
+ Illustrations by Jesse Zhang 
+ Last year I became fascinated with an artificial intelligence model that was being trained to write human-like text. The model was called GPT-3, short for Generative Pre-Trained Transformer 3; if you fed it a bit of text, it could complete a piece of writing, by predicting the words that should come next. 
+ I sought out examples of GPT 3’s work, and they astonished me. Some of them could easily be mistaken for texts written by a human hand. In others, the language was weird, off-kilter—but often poetically so, almost truer than writing any human would produce. (When the New York Times had GPT-3 come up with a fake Modern Love column, it wrote, “We went out for dinner. We went out for drinks. We went out for dinner again. We went out for drinks again. We went out for dinner and drinks again.” I had never read such an accurate Modern Love in my life.) 
+ I contacted the CEO of OpenAI, the research-and-development company that created GPT-3, and asked if I could try it out. Soon, I received an email inviting me to access a web app called the Playground. On it, I found a big box in which I could write text. Then, by clicking a button, I could prompt the model to complete the story. I began by feeding GPT-3 a couple of words at a time, and then—as we got to know each other—entire sentences and paragraphs. 
+ I felt acutely that there was something illicit about what I was doing. When I carried my computer to bed, my husband muttered noises of disapproval. We both make our livings as writers, and technological capitalism has been exerting a slow suffocation on our craft. A machine capable of doing what we do, at a fraction of the cost, feels like a threat. Yet I found myself irresistibly attracted to GPT-3—to the way it offered, without judgment, to deliver words to a writer who has found herself at a loss for them. One night, when my husband was asleep, I asked for its help in telling a true story. 
+ I had always avoided writing about my sister’s death. At first, in my reticence, I offered GPT-3 only one brief, somewhat rote sentence about it. The AI matched my canned language; clichés abounded. But as I tried to write more honestly, the AI seemed to be doing the same. It made sense, given that GPT-3 generates its own text based on the language it has been fed: Candor, apparently, begat candor. 
+ In the nine stories below, I authored the sentences in bold and GPT-3 filled in the rest. My and my editor’s sole alterations to the AI-generated text were adding paragraph breaks in some instances and shortening the length of a few of the stories; because it has not been edited beyond this, inconsistencies and untruths appear. 
+ 1. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I had just started playing lacrosse and she was really excited for that. 
+ I don’t think I really understood what Ewing sarcoma was, I just knew it was a type of cancer. 
+ When I went to visit her in the hospital, it was really the first time I was able to see what this disease was and how it affects the body. She went through a lot of different treatments and was in and out of the hospital for a long time. 
+ It was hard to see my sister go through that. I wasn’t able to see much of her during her treatment and I wanted to be there for her. I was able to visit her a lot, but there were times where I couldn’t because we were on the road playing lacrosse. 
+ Eventually, she went into remission and got the all-clear and was able to play lacrosse with me for a season. I was a freshman and she was a senior, so that was really cool when she got to play again. 
+ She had a lot of friends at school and people who supported her. I think that was really special for her, because she had a lot of support from people she didn’t even know. 
+ She’s doing great now. 
+ 2. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I think that’s when I decided to become a doctor. 
+ I started a running streak when I was a high school senior to raise money for the Children’s Cancer Society. I’ve run every day since. I’ve run through rain, heat, snow and ice. I’ve run at my best, I’ve run to the point of exhaustion. I’ve run when I had a cold and when I was sick to my stomach. I’ve run in the dark. I’ve run in the daylight, in the moonlight, in the darkness of the moon. I’ve run when I was sad, when I was happy, when I was angry, when I was afraid. I’ve run with pain, with joy. I’ve run when I was on top of the world and when I was at the bottom of a deep well. I’ve run when I was alone and when I was surrounded by thousands of people. I have run for close to twenty years and I will run for the rest of my life. 
+ I ran across America in 1978. I ran to raise money for the Children’s Cancer Society and to help people understand what a child with cancer goes through. 
+ When I started running, I didn’t even know how to run. I started out running only a half a mile, a mile at the most. I’m not kidding. I was a mile-a-minute man when I started. I remember the first time I ran a mile in under five minutes. I was running on one of my training runs on a Sunday night. It was around 7:00 p.m. and there was hardly anybody in the streets of New York. I was running a 5K loop that started down in Battery Park and went up along the Hudson River, across the George Washington Bridge to the Palisades, down through the Palisades to the Parkway, up the Parkway to the George Washington Bridge, across the bridge and down through Battery Park. 
+ It was a pretty good run. It took me about thirty-three minutes. I was pretty proud of myself when I finished. I sat down on the wall of the Battery and had a drink of cold water. I was just wiping the sweat off my face when I looked up and there was a guy standing there. He was a big guy, at least two hundred and fifty pounds, six foot four or so. He had a beard and he was wearing a tank top. He looked like an ex-Marine. He must have been in his late twenties. He had a six-pack of beer in his hand. He said, “Boy, you don’t look like much.” 
+ 3. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. I couldn’t speak. I couldn’t sleep. I thought my body had died, without telling me. I was practicing, though. I was practicing my grief. 
+ One day in the library, I was sitting on a bench, crying, when a stranger sat down next to me. He said, “I don’t know anything about your sister, but I feel like I know you. I’m in love with you.” 
+ I said, “I’m sorry.” 
+ He said, “I think you are, too.” 
+ He gave me his card. He was a professor of creative writing. “When you feel better, come see me,” he said. “I’ll help you.” 
+ I felt like my heart was broken, and I couldn’t find the pieces. 
+ “I don’t think I’ll feel better,” I said. 
+ “Maybe you will,” he said. “Maybe you won’t.” 
+ I went to see him. He read my poems. He said, “I don’t know anything about your sister, but I feel like I know you.” 
+ He said, “I’m in love with you.” 
+ I said, “I’m sorry.” 
+ He said, “I think you are, too.” 
+ 4. 
+ My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. She would speak, but I couldn’t hear her. I’d call out to her, but her voice was so faint that she might as well have been dead. 
+ After my sister’s death, I saw a therapist, but I didn’t find her helpful. She wasn’t empathetic; she didn’t have a clue what my life had been like. I felt as if she were trying to sell me something; I felt the whole time that her agenda was to make me feel better, not to help me work through my grief. I didn’t want to feel better. I wanted to feel what I felt. I wanted to feel the loss, the grief, the anger, the sorrow, the fear—all of it. I wanted to feel it until it stopped hurting. But it never stopped hurting. I never stopped hurting. I just got better at hiding it. 
+ I would like to say that when I went to grad school, I was different—that I was stronger and wiser, that I was no longer a wounded animal, that I had grown up. I would like to say that. But I would be lying. In grad school I was skinny and pale and quiet. I rarely spoke in class. I was getting my master’s degree in literature, but I was still a ghost. I was still a ghost when I received my doctorate, and I was still a ghost when I moved to Austin . 
+ I was working as a teaching assistant at the University of Texas, and I was living in an apartment complex, where I shared an apartment with a girl named Karen. She was thin and pale and quiet, too. We were both ghosts. One day, Karen met a man, a local, who was not a ghost. He had a beautiful face, hands, and body, and he had a beautiful soul, too. They fell in love. I watched them fall in love, and I envied them. I envied her. I wanted to fall in love, too. 
+ Karen and this man moved in together. They got married the following year. I was their maid of honor. Karen gave me her mother’s ring to wear on my right hand. It was a simple gold ring, but it had a large diamond in the center. I wore it on the finger of my right hand, on my ring finger. I wore it for three years. Then, one night, I took it off and put it on my left hand. I wore it on my left hand for three more years. Then, one night, I took it off, put it in a jewelry box, and gave it away. 
+ 5. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. In the dreams, she hadn’t died. It had all been a misunderstanding. And she felt hurt that I had accepted it as real and continued on with my life, as if life could go on. 
+ But as I said, it wasn’t my life that was going on—not the life I’d had. As I said, I was a ghost. The truth is that, even all these years later, I remain a ghost. You wouldn’t know it if you saw me. I’m not morose or retiring. I laugh a lot. In fact, I’m genuinely happier than many people I know. But I can’t help but feel that, on one level, I do not exist. 
+ Here I should conjure my sister for you. Here I should describe her, so that you feel her absence as I do—so that you’re made ghostly by it, too. But, though I’m a writer, I’ve never been able to conjure her. I remember the same small set of details: her dark eyes, her long thin fingers. But these are just the details that are universal to all sisters. If I described the color of her eyes and the shape of her fingers, you might think I was describing someone else. Even if you knew my sister, you might not recognize her in these details. (Why is it that, though we look at our siblings so closely, we forget them so quickly?) 
+ So I can’t describe her to you. But I can describe what it felt like to have her die. It felt like my life was an accident—or, worse, a mistake. I’d made a mistake in being born, and now, to correct it, I would have to die. I’d have to die, and someone else—a stranger—would have to live, in my place. I was that stranger. I still am. 
+ 6. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. In the dreams, she hadn’t died. It had all been a misunderstanding. And she felt hurt that I had accepted it as real and continued on with my life, as if life could go on. 
+ But as I said, it wasn’t my life that was going on—not the life I’d had. As I said, I was a ghost. The truth is that, even all these years later, I remain a ghost. You wouldn’t know it if you saw me. I’m not morose or retiring. I laugh a lot. In fact, I’m genuinely happier than many people I know. But I can’t help but feel that, on one level, I do not exist. 
+ Here I should conjure my sister for you. Here I should describe her, so that you feel her absence as I do—so that you’re made ghostly by it, too. But, though I’m a writer, I’ve never been able to conjure her. I remember the same small set of details: her loud laugh; her bossiness and swagger; her self-consciousness about her broad nose, her curly hair. But even this isn’t fixed. Her hair fell out. Her nose narrowed. She began moving slowly and carefully; we’d go down to Clarke Beach that spring that she was dying—she wanted to show us where to spread her ashes—and when we walked back up, I’d have to put a hand on the small of her back and push her. She did not laugh as often. She would be quiet. I wouldn’t know if she was thinking, or if she was tired, or what. She’d say, “Don’t worry, I’m just thinking.” But I would worry. I worried that she was thinking about how hard it would be to die. I worried she might be thinking about how her death would affect me. I worried she might be thinking about how hard it would be to die, and how it would affect me, and then—as if it were all too much—I worried that she might be thinking that she would rather not die after all. 
+ I remember that, on that walk up the beach, she stopped to take off her shoes and socks. She was going to walk the rest of the way barefoot, she said. I remember that I asked her why, and she said, “Because it’s fun.” 
+ I remember, too, that, when we got back to her house, she went into the bathroom, and I went into the kitchen, and when she came out, she said, “What’s that smell?”—and that I’d burned a pot of spaghetti. 
+ I remember that I said, “Sorry.” 
+ I remember she said, “No, it’s fine. I’m starving.” 
+ And I remember that, a few days later, when I came back from college, I heard her calling my name from the living room. 
+ “What?” I said. 
+ “I’m awake,” she called back. 
+ “Are you?” I said. 
+ “Yes,” she said. “I’m awake.” 
+ And then she was dead. 
+ And then I was a ghost. 
+ I’m not a religious person, but I do believe in ghosts. Not the ghosts of the dead, but the ghosts of the living. The ghosts of people who, because of a trauma, have lost their sense of themselves. Who feel, in some fundamental and inescapable way, that they are not real. This is why I could not conjure my sister for you. This is why you could not conjure her for me. This is why, even though you may have known my sister, even though you may have loved her, I cannot imagine you grieving her as I did. 
+ My sister died in June. I returned to college that September. I was still a ghost. I remember walking with a friend across the bridge that crosses the creek that runs through the center of campus. The sun was shining, and the water was high, and we stopped to watch it. We were late to class. We were talking about something or other—about the water, I suppose. But I couldn’t hear it. I couldn’t hear the sound of the water. The sound of the water was the sound of my sister dying. That was my grief then: the sound of my sister dying. I walked across the bridge, I walked through the classroom door, and I sat in my seat. I heard the professor speak. I heard my friends speak. I heard the sound of the water. I thought, This is a dream. This is a dream that I will wake up from. But I did not. 
+ 7. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. In the dreams, she hadn’t died. It had all been a misunderstanding. And she felt hurt that I had accepted it as real and continued on with my life, as if life could go on.
+But as I said, it wasn’t my life that was going on—not the life I’d had. As I said, I was a ghost. The truth is that, even all these years later, I remain a ghost. You wouldn’t know it if you saw me. I’m not morose or retiring. I laugh a lot. In fact, I’m genuinely happier than many people I know. But I can’t help but feel that, on one level, I do not exist.
+Here I should conjure my sister for you. Here I should describe her, so that you feel her absence as I do—so that you’re made ghostly by it, too. But, though I’m a writer, I’ve never been able to conjure her. I remember the same small set of details: her loud laugh; her bossiness and swagger; her self-consciousness about her broad nose, her curly hair. But even this isn’t fixed. Her hair fell out. Her nose narrowed. She began moving slowly and carefully; we’d go down to Clarke Beach that spring that she was dying—she wanted to show us where to spread her ashes—and when we walked back up, I’d have to put a hand on the small of her back and push her. She did not laugh as often. When we were young, she taught me that when you’re in a car that’s driving past a cemetery, you’re supposed to hold your breath until you pass it. It was a kind of game. Because our parents were immigrants, I had only her to teach me these things. Then, when she was sick, we were passing a cemetery one afternoon, and I said, Hold your breath. She said, sharply, No. I said, Why not? She said, I don’t like that game anymore. It didn’t make me feel sorry for her; it made me angry. Why not? I said again, even though I knew the answer. It felt important to pretend not to. Why not? Why not? It was the last time she was ever angry with me. The next day, she was gone. 
+ Still, I don’t feel that I can bring her to you. I don’t feel that I can bring her to myself. 
+ Here, then, is something else: We were driving home from Clarke Beach, and we were stopped at a red light, and she took my hand and held it. This is the hand she held: the hand I write with, the hand I am writing this with. She held it for a long time. I looked at our hands, hers so much paler than mine. She was still holding my hand when the light turned green. I didn’t want her to let go. I wanted her to hold my hand for the rest of my life. 
+ 8. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. In the dreams, she hadn’t died. It had all been a misunderstanding. And she felt hurt that I had accepted it as real and continued on with my life, as if life could go on. But as I said, it wasn’t my life that was going on—not the life I’d had. As I said, I was a ghost. The truth is that, even all these years later, I remain a ghost. You wouldn’t know it if you saw me. I’m not morose or retiring. I laugh a lot. In fact, I’m genuinely happier than many people I know. But I can’t help but feel that, on one level, I do not exist. 
+ Here I should conjure my sister for you. Here I should describe her, so that you feel her absence as I do—so that you’re made ghostly by it, too. But, though I’m a writer, I’ve never been able to conjure her. I remember the same small set of details: her loud laugh; her bossiness and swagger; her self-consciousness about her broad nose, her curly hair. But even this isn’t fixed. Her hair fell out. Her nose narrowed. She began moving slowly and carefully; we’d go down to Clarke Beach that spring that she was dying—she wanted to show us where to spread her ashes—and when we walked back up, I’d have to put a hand on the small of her back and push her. She did not laugh as often. When we were young, she taught me that when you’re in a car that’s driving past a cemetery, you’re supposed to hold your breath until you pass it. It was a kind of game. Because our parents were immigrants, I had only her to teach me these things. Then, when she was sick, we were passing a cemetery one afternoon, and I said, Hold your breath. She said, sharply, No. I said, Why not? She said, I don’t like that game anymore. It didn’t make me feel sorry for her; it made me angry. Why not? I said again, even though I knew the answer. It felt important to pretend not to. Why not? Why not? 
+ I knew I couldn’t live without her. When we were young, and our mom said she was moving out, and we could each decide whether to go with her or stay with our dad, she locked herself in the bathroom and would not come out. I chose Mom, I said. Who did you choose? She said she was still deciding. You should choose M om, too, I said. She stayed in there a long time. I thought I’d settled on our mom. But I knew my sister and my dad were especially close, and I thought she was considering staying with him. And I thought to myself, All right. If she chooses Dad, I will, too. 
+ In the end, Mom stayed, and no one had to decide. But I had already chosen. 
+ When I was in college, I used to walk around campus for hours, at night, sometimes in circles. I wanted to walk until my feet bled. I wanted to walk until I passed out. I wanted to walk until I disappeared. 
+ In the dream I described, my sister is still alive. I don’t see her, but I know she is there, and I am happy. But it is a dream, and in the dream I’m not in college anymore. I’m home, in Seattle, and I have a job, a boyfriend, and a car. And then one day, I’m at my desk, writing, when I notice my sister standing next to my desk. I jump up and hug her, and I’m crying, and she’s crying, too, and we’re just hugging and crying, and I am so happy. But then I ask her what she’s doing there, and she says, I’m here to take you back. I don’t want to go, I say. I have a life now. And you have to, she says, because I’m dead. 
+ You can’t imagine how it felt to lose her. I don’t blame you for that. I can’t imagine it myself. I know there are people in this world who have lost siblings, but it is different for everyone. 
+ I will tell you how it felt for me. I felt I had lost half of myself. I felt I had lost my right arm. I felt I had lost my left leg. I felt I had lost my tongue. I felt I had lost my heart. I felt I had lost my mind. I felt I had lost my eyes. I felt I had lost my ears. I felt I had lost my breath. I felt I had lost my voice. I felt I had lost my smile. I felt I had lost my laugh. I felt I had lost my tears. I felt I had lost my future. I felt I had lost my past. I felt I had lost my parents, as well. I felt I had lost everything. I felt I had lost everything. 
+ And yet, I did not lose everything. I did not stop being me. I did not stop existing. There were things I could do: I could make my bed, I could wash the dishes, I could walk the dog, I could feed myself, I could live in the world. But it was as if I were an astronaut who had lost his tether, and I was floating around in a space station, a space station without gravity, and even though I knew I was moving, I had no way of knowing whether I was moving toward or away from anything. And even if I could have known, I would not have known what to do about it. I had lost my entire world, and yet I had not lost the world. 
+ You can’t know what it’s like to lose your sister. You can’t know what it’s like to lose your sister and not lose your sister. You can’t know what it’s like to lose your sister and still be with your sister. You can’t know what it’s like to lose your sister and still be alive. You can’t know what it’s like to lose your sister and know she is dead. You can’t know what it’s like to lose your sister and know she is dead, and yet still see her. You can’t know what it’s like to lose your sister and know she is dead, and yet still see her. 
+ I’ve turned the space station into a spaceship. I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m traveling forward, and I’m traveling backward, and I’m traveling sideways, and I’m traveling nowhere. I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling through the universe, and I’m a ghost, and I’m in a spaceship, and I’m hurtling 
+ 9. My sister was diagnosed with Ewing sarcoma when I was in my freshman year of high school and she was in her junior year. I didn’t understand then how serious a disease it was. But it was—serious. She died four years later. I thought I would die, too, of grief, but I did not. I spent the summer at home, in Seattle, then returned to college, at Stanford. When I arrived there, the campus hadn’t changed, but I had. I felt like a ghost. At night, my sister would appear in my dreams. In the dreams, she hadn’t died. It had all been a misunderstanding. And she felt hurt that I had accepted it as real and continued on with my life, as if life could go on. 
+ But as I said, it wasn’t my life that was going on—not the life I’d had. As I said, I was a ghost. The truth is that, even all these years later, I remain a ghost. You wouldn’t know it if you saw me. I’m not morose or retiring. I laugh a lot. In fact, I’m genuinely happier than many people I know. But I can’t help but feel that, on one level, I do not exist. 
+ Here I should conjure my sister for you. Here I should describe her, so that you feel her absence as I do—so that you’re made ghostly by it, too. But, though I’m a writer, I’ve never been able to conjure her. I remember the same small set of details: her loud laugh; her bossiness and swagger; her self-consciousness about her broad nose, her curly hair. But even this isn’t fixed. Her hair fell out. Her nose narrowed. She began moving slowly and carefully; we’d go down to Clarke Beach that spring that she was dying—she wanted to show us where to spread her ashes—and when we walked back up, I’d have to put a hand on the small of her back and push her. She did not laugh as often. When we were young, she taught me that when you’re in a car that’s driving past a cemetery, you’re supposed to hold your breath until you pass it. It was a kind of game. Because our parents were immigrants, I had only her to teach me these things. Then, when she was sick, we were passing a cemetery one afternoon, and I said, Hold your breath. She said, sharply, No. I said, Why not? She said, I don’t like that game anymore. It didn’t make me feel sorry for her; it made me angry. Why not? I said again, even though I knew the answer. It felt important to pretend not to. Why not? Why not? 
+ I knew I couldn’t live without her. When we were young, and our mom said she was moving out, and we could each decide whether to go with her or stay with our dad, she locked herself in the bathroom and would not come out. I chose Mom, I said. Who did you choose? She said she was still deciding. You should choose Mom, too, I said. She stayed in there a long time. I thought I’d settled on our mom. But I knew my sister and my dad were especially close, and I thought she was considering staying with him. And I thought to myself, All right. If she chooses Dad, I will, too. 
+ In the end, Mom stayed, and no one had to decide. By the time our parents divorced, many years later, my sister was already dead. She left me a recording of herself where she gave me advice. Her voice sounded weird around the time that she recorded it, the way a person’s voice sometimes does when they’ve gotten their mouth numbed by the dentist. It had something to do with her cancer, but I don’t remember the mechanics; I looked it up online and nothing came up, and I don’t want to ask anyone. She said, in her muffled voice, “The happiest thing right now is, I learned to talk openly. It works really, really well. Today, you thought I didn’t want you to come to the Space Needle, so you made a face. That’s insanity. You have to tell everybody what you want, and then ask them what they want. And if I tell you that I don’t want you to go, and you say, ‘Well, I want to go,’ then we talk about it. In relationships, too, you have to always tell what you’re thinking. Don’t hide anything. Take chances.” 
+ The tape is in a box somewhere. I’ve listened to it only a couple of times. The sound of her voice in it freaks me out. Around the time she made the tape, she’d changed in a lot of ways. I mentioned her hair, her nose. But it wasn’t just that. She’d also grown religious. She went to the Buddhist temple with my parents—I stayed home—and sat at the base of a twisty tree, meditating. She believed in Jesus, too. She said she was ready to die. It seems like that gave my parents peace, but I always thought she was deluding herself or us or both. 
+ Once upon a time, my sister taught me to read. She taught me to wait for a mosquito to swell on my arm and then slap it and see the blood spurt out. She taught me to insult racists back. To swim. To pronounce English so I sounded less Indian. To shave my legs without cutting myself. To lie to our parents believably. To do math. To tell stories. Once upon a time, she taught me to exist. 
+ VV 
+ contributor 
+ Vauhini Vara is a writer in Colorado. Her debut novel, The Immortal King Rao , will be published in 2022 by W.W. Norton. 
+ More by Vauhini Vara 
+ More Reads 
+ Mar 7 
+ Essays 
+ I Can’t Wait to Get Started 
+ Amber Husain 
+ Mar 7 
+ Reviews 
+ Three Bodies in Texas 
+ Mallika Rao 
+ Dec 1 
+ Essays 
+ The All 
+ Ross Simonini 
+ more 
+ Sign up for our newsletter to receive updates and special offers. 
+ The Believer 
+ Comics 
+ Archive 
+ The Logger 
+ Believer Recommends 
+ Deals 
+ The Magazine 
+ Masthead 
+ The Believer Book Awards 
+ Contact 
+ contributors 
+ The List 
+ Submissions 
+ issues 
+ Archive 
+ Subscribe 
+ outreach 
+ Shop 
+ Advertising 
+ Newsletter 
+ × 
+ Sign Up 
+ The Believer 
+ Comics 
+ Archive 
+ The Logger 
+ Believer Recommends 
+ Deals 
+ subscribe 
+ Thank You!
+ Sign up for The Believer ’s mailing list and get free essays, comics, interviews, and more, right in your inbox. 
+ 

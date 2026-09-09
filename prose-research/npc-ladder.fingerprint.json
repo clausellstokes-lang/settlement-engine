@@ -1,0 +1,145 @@
+{
+  "label": "npc-ladder",
+  "files": [
+    "npc-ladder.txt"
+  ],
+  "paragraphs": 1659,
+  "sentences": 1688,
+  "wordsPerSentence": {
+    "mean": 22.6,
+    "sd": 4,
+    "p10": 19,
+    "p50": 22,
+    "p90": 28,
+    "shareUnder8": 0.0047,
+    "shareOver30": 0.0421,
+    "neighbourVariation": 0.167
+  },
+  "sentencesPerParagraph": 1.02,
+  "punctuation": {
+    "semicolonRate": 0.5308,
+    "colonRate": 0.1357,
+    "emDashRate": 0,
+    "questionRate": 0,
+    "exclamationRate": 0,
+    "parenthesisRate": 0.0006
+  },
+  "shapes": {
+    "antithesisRate": 0.0071,
+    "triadRate": 0.0545,
+    "participialOpenerRate": 0,
+    "whichTailRate": 0.0071,
+    "doubledAdjectiveRate": 0.0107,
+    "adverbsPerSentence": 0.09,
+    "thereIsOpenerRate": 0.1096,
+    "dialogueShare": 0
+  },
+  "closers": {
+    "abstractNounRate": 0.0776,
+    "pronounRate": 0.0586,
+    "topClosers": [
+      [
+        "arrangement",
+        63
+      ],
+      [
+        "it",
+        48
+      ],
+      [
+        "them",
+        38
+      ],
+      [
+        "now",
+        26
+      ],
+      [
+        "not",
+        22
+      ],
+      [
+        "again",
+        19
+      ],
+      [
+        "over",
+        19
+      ],
+      [
+        "first",
+        14
+      ],
+      [
+        "him",
+        11
+      ],
+      [
+        "door",
+        9
+      ],
+      [
+        "ended",
+        9
+      ],
+      [
+        "alone",
+        9
+      ]
+    ]
+  },
+  "openers": {
+    "topOpeners": [
+      [
+        "the",
+        1115
+      ],
+      [
+        "it",
+        185
+      ],
+      [
+        "with",
+        146
+      ],
+      [
+        "when",
+        74
+      ],
+      [
+        "what",
+        39
+      ],
+      [
+        "a",
+        25
+      ],
+      [
+        "under",
+        13
+      ],
+      [
+        "trade",
+        8
+      ],
+      [
+        "every",
+        7
+      ],
+      [
+        "since",
+        7
+      ],
+      [
+        "scarcity",
+        5
+      ],
+      [
+        "an",
+        4
+      ]
+    ],
+    "sameOpenerAsPreviousRate": 0.3442
+  },
+  "runsOfThreeSameLengthBand": 0.282
+}

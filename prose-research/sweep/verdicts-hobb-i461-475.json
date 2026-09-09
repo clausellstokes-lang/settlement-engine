@@ -1,0 +1,325 @@
+{
+ "name": "hobb",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 461,
+   "feature": "register modulation",
+   "claim": "Hobb refuses to substitute a Megan Lindholm story for a Robin Hobb one because the style and the topic choice of the two by-lines differ enough that one cannot stand in for the other.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "differ enough that I do not like to offer one",
+   "page": "opening paragraph",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 462,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb says the way to convince a reader she knows dragons is to know the physical detail of raising chickens or roofing a house.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "the details of raising chickens or putting a roof on a house",
+   "page": "section on the move to Alaska",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 463,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb states she believes not only in research but in trying to experience a thing before writing it, so as to include its physical details.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "not just in research, but in attempting to experience the things",
+   "page": "section on the move to Alaska",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 464,
+   "feature": "point of view and distance",
+   "claim": "Hobb says she decided to write the first Farseer book in the first person and to attempt a completely different sort of voice and telling.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "to attempt a completely different sort of voice and telling",
+   "page": "section on writing Chivalry's Bastard",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 465,
+   "feature": "other: pseudonym as a licence to change style",
+   "claim": "Hobb describes the Robin Hobb by-line as a way to escape limits she had placed on herself rather than limits an editor imposed.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "escape the limits that I had placed on myself",
+   "page": "section on choosing the name Robin Hobb",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 466,
+   "feature": "place and institution description",
+   "claim": "Describing her own Tacoma neighbourhood in her own non-fiction, Hobb enumerates the civic institutions reachable on foot as a bare list.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "a theatre, a grocery store, a library, the post office",
+   "page": "section on living in Tacoma",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 467,
+   "feature": "other: figures in a place description",
+   "claim": "Hobb gives her city's population as about 193,000 and its median age as 33 when introducing Tacoma to a foreign readership.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "Our population is about 193,000 people, median age 33",
+   "page": "section on living in Tacoma",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 468,
+   "feature": "consequence on a household",
+   "claim": "Hobb reports that during her midlist years her household kept poultry and a garden and raised a couple of pigs for slaughter each year.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "each year we raised a couple of pigs for slaughter",
+   "page": "section on the midlist years near Roy, Washington",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 469,
+   "feature": "other: composition method",
+   "claim": "Hobb's stated writing advice is to aim at a scene rather than a book on any given day.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "think that today you will write a scene",
+   "page": "closing advice",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 470,
+   "feature": "other: character over plot",
+   "claim": "Hobb says the piece that won her an A in her only creative-writing class was long on character and short on plot, and that she knew it was not a story.",
+   "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+   "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+   "quote": "long on character and short on plot",
+   "page": "section on Denver University",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2004",
+   "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 471,
+   "feature": "per-speaker register",
+   "claim": "Hobb characterises the Megan Lindholm voice, against the Robin Hobb one, as more snarky, more sarcastic and less optimistic.",
+   "source": "Alison Flood interviewing Robin Hobb, The Guardian, 28 July 2017",
+   "url": "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+   "quote": "little more snarky, a little more sarcastic, a little less optimistic",
+   "page": "section on choosing the pen name",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-07-28",
+   "routeHint": "live page fetched with a browser user agent; canonical is 2017/jul/28",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 472,
+   "feature": "withheld information and inference",
+   "claim": "Hobb describes her narrator Fitz as cagey, a man who does not always admit the full truth about anything.",
+   "source": "Alison Flood interviewing Robin Hobb, The Guardian, 28 July 2017",
+   "url": "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+   "quote": "Fitz is cagey, he doesn’t always admit the full truth",
+   "page": "section on choosing the pen name",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-07-28",
+   "routeHint": "live page fetched with a browser user agent; the page uses curly apostrophes",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 473,
+   "feature": "other: discovery over outline",
+   "claim": "Hobb says the Fool had exactly one sentence in the outline of the first book before becoming a major character.",
+   "source": "Alison Flood interviewing Robin Hobb, The Guardian, 28 July 2017",
+   "url": "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+   "quote": "the Fool had exactly one sentence in the outline",
+   "page": "section on the Fool",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-07-28",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 474,
+   "feature": "other: plausibility over spectacle",
+   "claim": "Hobb defines good fantasy as lowering the reader's threshold of disbelief so nothing blocks the reader out.",
+   "source": "Alison Flood interviewing Robin Hobb, The Guardian, 28 July 2017",
+   "url": "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+   "quote": "lowering the threshold of disbelief so the reader can step right",
+   "page": "early in the interview",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-07-28",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 475,
+   "feature": "other: plausibility over spectacle",
+   "claim": "Hobb says silly is a more dangerous fault in fantasy than impossible.",
+   "source": "Alison Flood interviewing Robin Hobb, The Guardian, 28 July 2017",
+   "url": "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+   "quote": "And I think silly is more dangerous than impossible",
+   "page": "early in the interview",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2017-07-28",
+   "routeHint": "live page fetched with a browser user agent",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "differ enough that I do not like to offer one",
+   "note": "Raw Wayback capture (200, 4,993 words). Opening paragraph: she declines the substitute Jussi offered, then gives the two by-lines' style and topic as the reason, with a restaurant simile. Both limbs on the page."
+  },
+  {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the details of raising chickens or putting a roof on a house",
+   "note": "Paragraph after the Alaska section, on hands-on experience and suspension of disbelief; the dragons half of the sentence is the recounting of dragons' habits. Quote is contiguous on the page."
+  },
+  {
+   "index": 463,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not just in research, but in attempting to experience the things",
+   "note": "Same paragraph, immediately after the chickens sentence; the page continues that this is so as to include the physical details in the stories. Every limb supported."
+  },
+  {
+   "index": 464,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the first Farseer book' - the page names the book only by its working title, Chivalry's Bastard, and never calls it a Farseer book",
+   "trueWording": "to attempt a completely different sort of voice and telling",
+   "note": "Quote is verbatim in the pen-name section, alongside her decision to write it in the first person; the Farseer identification is an outside inference. The page's only Farseer mentions are the later tenth book set in a different universe and Fitz and the Fool."
+  },
+  {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "escape the limits that I had placed on myself",
+   "note": "Quote verbatim in the paragraph on reactions to the name change. The 'not an editor' limb is carried by the earlier Gypsy paragraph, which says it was she binding herself to a style and not any editorial pressure."
+  },
+  {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a theatre, a grocery store, a library, the post office",
+   "note": "Tacoma/Proctor District paragraph: the list is what she can walk to from her home, continuing 'and various retail stores'. Bare-list form and the neighbourhood framing both on the page."
+  },
+  {
+   "index": 467,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Our population is about 193,000 people, median age 33",
+   "note": "Tacoma paragraph, verbatim. The foreign-readership limb is the piece's own header: written for Alienisti, Finncon 2004."
+  },
+  {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each year we raised a couple of pigs for slaughter",
+   "note": "Midlist paragraph: the same sentences name Roy, Washington, the mid-list years as Megan Lindholm, chickens, ducks, geese, pigeons and a garden. All limbs supported."
+  },
+  {
+   "index": 469,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "think that today you will write a scene",
+   "note": "Closing advice paragraph; the contrast limb is the preceding sentence, that deciding to sit down and write a book is the mistake. Framed on the page as her best advice."
+  },
+  {
+   "index": 470,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the piece that won her an A' - the page gives the A as a course grade and only says the instructor praised the piece; it also scopes the class to the one she took at Denver University",
+   "trueWording": "long on character and short on plot",
+   "note": "Quote verbatim in the Denver paragraph, and 'not a story, because nothing really happened' is on the page. The grade attribution and the unrestricted 'her only creative-writing class' are the widened limbs."
+  },
+  {
+   "index": 471,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "little more snarky, a little more sarcastic, a little less optimistic",
+   "note": "Live Guardian page fetched raw with a browser UA (200). Pen-name section: the voice she was writing in was very different from Megan Lindholm, who is thus described; the page adds 'less emotional', which the claim omits without distortion."
+  },
+  {
+   "index": 472,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fitz is cagey, he doesn’t always admit the full truth",
+   "note": "Same quoted run, ending 'about anything, but he really says what he's feeling'. The narrator limb is supported earlier: the book is told in Fitz's voice."
+  },
+  {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Fool had exactly one sentence in the outline",
+   "note": "Fool paragraph, opening 'When I first began writing the book'; the same quote ends with him becoming one of the major characters. The book is Assassin's Apprentice, named on the page as her first as Robin Hobb."
+  },
+  {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lowering the threshold of disbelief so the reader can step right",
+   "note": "Paragraph after the Martin 'diamonds' line; the quote continues into the book and not feeling blocked out. Attribution on the page is 'Good fantasy, Hobb believes', with the definition itself in her words."
+  },
+  {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And I think silly is more dangerous than impossible",
+   "note": "Closing sentence of the same quoted run, verbatim; the fantasy framing is the sentence it caps, about what would block a reader out."
+  }
+ ]
+}

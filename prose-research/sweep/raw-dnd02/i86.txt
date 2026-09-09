@@ -1,0 +1,438 @@
+ 
+ D&D 5E (2014) - Design Philosophy of 5e | EN World D&D & Tabletop RPG News & Reviews 
+ Menu 
+ News/Columns 
+ All News 
+ Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ Pathfinder 
+ Starfinder 
+ Warhammer 
+ 2d20 System 
+ Year Zero Engine 
+ Industry News 
+ Reviews 
+ Dragon Reflections 
+ White Dwarf Reflections 
+ Columns 
+ Weekly Digests 
+ Weekly News Digest 
+ Freebies, Sales & Bundles 
+ RPG Print News 
+ RPG Crowdfunding News 
+ Game Content 
+ ENterplanetary DimENsions 
+ Mythological Figures 
+ Opinion 
+ Worlds of Design 
+ Peregrine's Nest 
+ RPG Evolution 
+ Other Columns 
+ From the Freelancing Frontline 
+ Monster ENcyclopedia 
+ WotC/TSR Alumni Look Back 
+ 4 Hours w/RSD (Ryan Dancey) 
+ The Road to 3E (Jonathan Tweet) 
+ Greenwood's Realms (Ed Greenwood) 
+ Drawmij's TSR (Jim Ward) 
+ Features 
+ Million Dollar TTRPG Crowdfunders 
+ Most Anticipated Tabletop RPGs Of The Year 
+ Eric Noah's Unofficial D&D 3rd Edition News 
+ Top 5 RPGs Compiled Charts 2004-Present 
+ Adventure Game Industry Market Research Summary (RPGs) V1.0 
+ Ryan Dancey: Acquiring TSR 
+ Q&A With Gary Gygax 
+ TSR, WotC, & Paizo: A Comparative History 
+ D&D Pronunciation Guide 
+ D&D in the Mainstream 
+ About Morrus 
+ Podcast 
+ Community 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Resources 
+ Wiki 
+ Pages 
+ Latest activity 
+ Media 
+ New media 
+ New comments 
+ Downloads 
+ Latest reviews 
+ EN Publishing 
+ Store 
+ EN5ider 
+ Adventures in ZEITGEIST 
+ Awfully Cheerful Engine 
+ What's OLD is NEW 
+ Judge Dredd & The Worlds Of 2000AD 
+ War of the Burning Sky 
+ Level Up: Advanced 5E 
+ EN WORLD+ 
+ Log in 
+ Register 
+ What's new 
+ Forums & Topics 
+ Forum List 
+ Latest Posts 
+ Forum list 
+ *Dungeons & Dragons 
+ Level Up: Advanced 5th Edition 
+ D&D Older Editions, OSR, & D&D Variants 
+ *Tabletop General 
+ *Pathfinder & Starfinder 
+ EN Publishing 
+ *Geek Talk & Media 
+ Chat/Discord 
+ Menu
+ Log in
+ Register
+ Install the app
+ Install 
+ Upgrade your account to EN WORLD+ and remove most of the site ads. 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ You are using an out of date browser. It may not display this or other websites correctly.
+You should upgrade or use an alternative browser .
+ D&D 5E (2014) Design Philosophy of 5e
+ Thread starter 
+ Thaumaturge 
+ Start date 
+ Jun 25, 2014 
+ 1 
+ 2 
+ 3 
+ … 
+ Go to page
+ Go 
+ 12 
+ Next 
+ 1 of 12
+ Go to page
+ Go 
+ Next 
+ Last 
+ Thaumaturge 
+ Wandering. Not lost. (She/her)
+ Jun 25, 2014 
+ #1
+ Please do not use this thread to continue the SRW (Short Rest War) also known as the SWW (Second Wind War). You have pleanty of threads to fight that war. Here , here , here , and elsewhere. Not here . Please.
+Mike Mearls mentions in the Starter Set Unboxing video ( here , discussion starts around 46:15—specific comments around 48:00) they are making the design decision to "not going to try and make rules that will stop people who wanted to be bored from, like, doing boring things." 
+There are multiple ways to look at this design ethos. I think we've had a couple of editions that were constructed very much with the rules lawyer and a careful, exact reading of the rules at their forefront. For this edition they chose, deliberately, to not design that way. To let real people make real rulings that impact their own play instead of trying to nail down a specific style of play through exact language.
+I think a benefit of this is it allows them to state things more plainly and use more natural language. A negative of this ethos is, certainly, that people trained by the previous two editions will see gaping holes in certain rules. And those people, myself included, will see various places for exploit potential.
+I mentioned in another thread, one Not to Be Named, that economists theorize people are good at maximizing their own enjoyment. I appreciate the 5e designers giving us the leeway to make rulings for our tables that maximize enjoyment to our own particular tastes. 
+ [MENTION=12037]ThirdWizard[/MENTION] made a good counter point:
+ ThirdWizard said: 
+ So, I play World of Warcraft. The WoW devs are pretty open about development and player incentives and all that good stuff that comes part and parcel for MMOs. And, one of the things they note is that many players of their game will do things that they absolutely hate for even a slight advancement or increase in productivity. And we're talking hours of misery here. And, they will feel as if they are required to do these things, even if the advantage is fairly small, even if it is a 1% increase in productivity. The game has had to start playing nanny, putting limits on acquisition of advantage through boring gameplay, in order to protect the players from themselves.
+Now, I'm going to surmise that there is quite some overlap in mentality from the MMO to some PnP RPG players. We're all nerds, after all, and the propensity to min/max started before the ability to do so in video games was a thing. What the takeaway here is that some people will play in a way that they dislike in order to pull out a small advantage. In other words, even if someone absolutely hates the idea of multiple short rests in a row, they may give up their preferred playstyle entirely and play a session that they hate because they see a mechanical advantage in doing so.
+ Click to expand... 
+Do people like a more "human-centric" approach? Do people require exact rules because it's our nature? Do people eat enough ice cream?
+Discuss. 
+Edit: As a side note, I just got enough xp to finally get the title I've always wanted. No more xp people! This is perfect. 
+Thaumaturge.
+ Last edited: Jun 25, 2014 
+ Reply 
+ Reactions: 
+ PinkRose and Tony Semana 
+ log in or register to remove this ad 
+ J 
+ jadrax 
+ Adventurer
+ Jun 25, 2014 
+ #2
+ The advantage that tabletop has over a computer game is the world is pretty much infinite in scope.
+In the computer game, you eventually get to a point where you have exhausted every opportunity for advancement except boring ones. With an average DM that should never occur in tabletop.
+ Reply 
+ N 
+ Nagol 
+ Unimportant
+ Jun 25, 2014 
+ #3
+ My biggest problem is natural language gives rise to varying interpretations. 
+Varying across groups is fine. What happens in one group has little impact in another. But, the interpretations vary across individuals inside of a group. 
+Some will argue that is what we have GMs for -- so their voice acts as consistent interpretation. The difficulty with this is I don't want to be parsing every rule looking for alternative interpretations and puzzling out how it works in my campaign and what variances, if any, exist in my players' previous experience so I can bring attention to them.
+ Reply 
+ ExploderWizard 
+ Hero
+ Jun 25, 2014 
+ #4
+ What I see in a less tightly specific rules design is flexibility. A game that is capable of bending and stretching is less likely to shatter on contact with actual play. 
+The true message behind a more open design is that the game belongs to YOU, those that run and play it. People enjoy different experiences from their games and it is difficult if not impossible to present a single vision in a tight design that provides for these different experiences. 
+Some players actually resent being given the freedom to make the game their own because that comes with a certain responsibility. In an MMO you simply play the game that is delivered. One does not have to put up with such inflexibility with a tabletop game. 
+A basic simple core with many tweakable options is a reasonable strategy.
+ Reply 
+ Thaumaturge 
+ Wandering. Not lost. (She/her)
+ Jun 25, 2014 
+ #5
+ jadrax said: 
+ The advantage that tabletop has over a computer game is the world is pretty much infinite in scope.
+In the computer game, you eventually get to a point where you have exhausted every opportunity for advancement except boring ones. With an average DM that should never occur in tabletop.
+ Click to expand... 
+That's a good point. I think another difference between a TTRPG (Tabletop RPG) and a CRPG (Computer RPG) is that the former is played in person (or face to face via internet magic) with other people. If one or two people are trying to maximize every bonus to the detriment of others' enjoyment, I am skeptical the group won't bring the outliers in line with group expectations.
+ Nagol said: 
+ The difficulty with this is I don't want to be parsing every rule looking for alternative interpretations and puzzling out how it works in my campaign and what variances, if any, exist in my players' previous experience so I can bring attention to them.
+ Click to expand... 
+I don't either, but I won't I'll simply play the game. When a player tries to do something and it becomes apparent we have different interpretations of the rule, then we'll discuss it and make a ruling. I'm totally fine with being reactive instead of proactive in this regard.
+Thaumaturge(ist).
+ Reply 
+ Umbran 
+ Mod Squad
+ Staff member 
+ EN WORLD+ 
+ Jun 25, 2014 
+ #6
+ Thaumaturge said: 
+ I mentioned in another thread, one Not to Be Named, that economists theorize people are good at maximizing their own enjoyment.
+ Click to expand... 
+Not in the long term, we aren't. To do so, we'd need to be able to manage risks in the long term, as risks are those nasty things that can impact our enjoyment. Humans are pretty demonstrably short-sighted.
+This connects pretty well to ThirdWizard's observation - you can think of a small increase in productivity like a small decrease in risk. We can overvalue these small changes, and therefore put too much effort into them.
+This cuts both ways. People making their own rulings are apt to miss long-term impacts, and run afoul of the law of unintended consequences. But, those who depend on a great stock of rules from others can turn into the WoW players ThirdWizard mentions, going to great effort working with rules to reap little reward from doing so.
+Basically - neither way is perfect.
+ Reply 
+ Reactions: 
+ howandwhy99 
+ ThirdWizard 
+ First Post
+ Jun 25, 2014 
+ #7
+ Personally, I think the spirit of the rules is by far more important than the letter of them. Others disagree. ENWorld was pretty heavily centered around RAW back in the day, with the Rules forums devoted pretty strongly to finding RAW interpretations. Even when that RAW was silly, people would fall back on a kind of RAW is RAW philosophy. Those were heady days, and I have to say I was somewhat caught up in the echo-chamber back then. But, back then I was pretty steeped in 3e D&D, and my mindset was based on what I was reading on ENWorld.
+Nowadays, I consider FATE Core to be the height of rules-heavy that I would want to run/play. Anything more than that, and I'm a bit off put. Personally, playing Dungeon World has been the biggest single eye opener for me in terms of freedom in rules interpretations and the importance of acknowledging the spirit of the rules. For those that don't know, in Dungeon World, everything is resolved by 2d6+STAT. Lower than a 6, something bad happens. 7-9, you succeed with a cost. 10+ you succeed well. That's it. No target numbers. Sometimes, the DM might not even say you have to roll, you might just succeed based on the style of game that the group is going for, or a roll might be impossible and you should either find something else to do or fail heartily.
+So, going back to D&D from this mindset, I see the rules in a different light. I like to think the rules don't exist so that I know what I can do. The genre determines what I can or cannot do. The rules just determine the feedback I get when I try to do those things. And, the DM as the interpreter of the rules, determines how to utilize them in response. This creates sort of an ebb and flow of PC action to DM adjudication.
+Yes, that places more responsibility on the side of the DM, but this if this is something embraced by 5e, then it is something I can really get behind.
+ Reply 
+ Reactions: 
+ Sound of Azure , Sadras , Lanefan and 1 other person 
+ Agamon 
+ Hero
+ Jun 25, 2014 
+ #8
+ I can't speak for others, except to say that , yes, there are people that like to dive under the hood of a game and tweak the engine of the to be the fastest muscle machine in the neighborhood. That's not abnormal by any stretch, and I certainly understand that way of thinking.
+There are also people that like to make choices, not to be the best, but want mechanics that back up their thematic choices. Nothing wrong with that either, I totally understand that, as I would have put myself in that camp 15 years ago.
+But I like the design concept of 5e. Of the base game anyway (if the DMG is as powerful as implied, the above types might get what they want out of the game, too). I'm more of a rulings, not rules GM. The holes that others see aren't a problem for me. I already run games off the cuff, making a ruling during play if it isn't covered in the rules is alright with me.
+ Reply 
+ J 
+ Johnny Champion 
+ First Post
+ Jun 25, 2014 
+ #9
+ Thaumaturge said: 
+ I think a benefit of this is it allows them to state things more plainly and use more natural language. A negative of this ethos is, certainly, that people trained by the previous two editions will see gaping holes in certain rules. And those people, myself included, will see various places for exploit potential.
+Do people like a more "human-centric" approach? Do people require exact rules because it's our nature? Do people eat enough ice cream?
+ Click to expand... 
+IMHO, after a 30 year hiatus and missing the entire min/maxing of 3.x and 4th editions, I clearly look forward to 5th to allow us to play a form of D&D that has simple rules; this will allow common sense and a DM's judgement to be the final arbiter. All of this so the story line drives the campaign, and encounters hopefully, though enjoyable, will be an aid to that end. If the story drives the campaign, and not the hard rules, most players can enjoy their PCs with some negative stats, but interesting backgrounds, and not search for that combination that the rules didn't anticipate.
+This probably didn't answer the OP's question though.... 
+ Reply 
+ Reactions: 
+ CSwizzy and SigmaOne 
+ C 
+ Cybit 
+ First Post
+ Jun 25, 2014 
+ #10
+ Thaumaturge said: 
+ That's a good point. I think another difference between a TTRPG (Tabletop RPG) and a CRPG (Computer RPG) is that the former is played in person (or face to face via internet magic) with other people. If one or two people are trying to maximize every bonus to the detriment of others' enjoyment, I am skeptical the group won't bring the outliers in line with group expectations.
+I don't either, but I won't I'll simply play the game. When a player tries to do something and it becomes apparent we have different interpretations of the rule, then we'll discuss it and make a ruling. I'm totally fine with being reactive instead of proactive in this regard.
+Thaumaturge(ist).
+ Click to expand... 
+I wonder whether those advantages of playing in person are why WotC is pushing down this road. IMO, the main advantage a TTRPG has over a CRPG or a video game is you do have a human arbiter who can make decisions to cover the corner cases with the spirit of the rules rather than the letter of the rule, as well as the ability to make things up to fit their players rather than trying to create everything they hope the players can think of. (think I said that last part kind of awkwardly, but basically you aren't constrained by the developer game world). 
+If WotC believes that, it makes sense that in some cases, they are willing to push the "DM arbritrates" over "have rule to cover every situation". Going down that path; the heavy emphasis on DM teaching and examples for DMs to use makes even more sense - rather than having rules try to cover for newbie DMs, have the DMG and the rules show DMs how to arbitrate well and move forward. It's a nice change of pace from 3E and 4E IMO, and I feel it is a better long-term play to teach DMs how to, well, DM, rather than giving them a tight set of rules and no tools beyond experience to handle situations not covered by the rules.
+ Reply 
+ 1 
+ 2 
+ 3 
+ … 
+ Go to page
+ Go 
+ 12 
+ Next 
+ 1 of 12
+ Go to page
+ Go 
+ Next 
+ Last 
+ Post reply
+ Insert quotes…
+ Similar Threads
+ D&D General 
+ An Observation about 5e
+ GothmogIV 
+ Jul 22, 2026 
+ *Dungeons & Dragons
+ 8 
+ 9 
+ 10 
+ 11 
+ 12 
+ Replies 
+ 113 
+ Views 
+ 12K 
+ Jul 30, 2026 
+ Doctor Futurity 
+ P 
+ D&D General 
+ Edition Design Philosophies as Seen Through Magic Items
+ Pamphylian 
+ Mar 25, 2026 
+ *Dungeons & Dragons
+ 2 
+ 3 
+ 4 
+ Replies 
+ 30 
+ Views 
+ 6K 
+ Mar 28, 2026 
+ Pamphylian 
+ P 
+ D&D General 
+ Horror is hard
+ Deset Gled 
+ Jul 8, 2026 
+ *Dungeons & Dragons
+ 37 
+ 38 
+ 39 
+ 40 
+ 41 
+ Replies 
+ 400 
+ Views 
+ 40K 
+ Aug 6, 2026 
+ Sorinth 
+ S 
+ S 
+ D&D General 
+ What is D&D?
+ SothFan 
+ May 30, 2026 
+ *Dungeons & Dragons
+ 46 
+ 47 
+ 48 
+ 49 
+ 50 
+ Replies 
+ 491 
+ Views 
+ 50K 
+ Jun 19, 2026 
+ Voranzovin 
+ V 
+ P 
+ D&D General 
+ Practical advice for running 5.5e and 5e PCs side by side
+ Pamphylian 
+ Jul 12, 2026 
+ *Dungeons & Dragons
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ Replies 
+ 67 
+ Views 
+ 9K 
+ Jul 23, 2026 
+ Pamphylian 
+ P 
+ Share: 
+ Facebook 
+ X 
+ Bluesky 
+ LinkedIn 
+ Reddit 
+ Pinterest 
+ Tumblr 
+ WhatsApp 
+ Email 
+ Share 
+ Link 
+ Recent & Upcoming Releases 
+ September 16
+ 2026
+ Arcana Unleashed 
+ (Dungeons & Dragons)
+ Rulebook featuring "high magic" options, including a host of new spells.
+ Replies (307) 
+ September 16
+ 2026
+ Arcana Unleashed: Deadfall 
+ (Dungeons & Dragons)
+ Adventure book featuring Red Wizards of Thay.
+ Replies (187) 
+ October 1
+ 2026
+ Secrets of the Tome (A5E) 
+ (Level Up: Advanced 5th Edition)
+ Magical options for spellcasters.
+ Replies (23) 
+ November 3
+ 2026
+ Dungeons & Dragons: World of Warcraft 
+ (Dungeons & Dragons)
+ World book for Azeroth
+ Replies (271) 
+ January 30
+ 2027
+ Dark Sun 
+ (Dungeons & Dragons)
+ Dark Sun returns in 2027
+ Replies (1967) 
+ March 6
+ 2027
+ Steel & Skill: The Complete Fighter's Field Guide 
+ (Dungeons & Dragons)
+ Handbook for D&D fighters.
+ Replies (68) 
+ June 15
+ 2027
+ Star Wars: Season of Rebellion 
+ (Dungeons & Dragons)
+ Official D&D Star Wars book
+ Replies (278) 
+ July 31
+ 2027
+ Greyhawk: Crown of the Witch Queen 
+ (Dungeons & Dragons)
+ 160-page adventure
+ Replies (269) 
+ December 31
+ 2027
+ Melf's Guide to Greyhawk: The Shield Lands 
+ (Dungeons & Dragons)
+ Greyhawk book written by Luke Gygax.
+ Replies (380) 
+ Remove ads 
+ Community 
+ General Tabletop Discussion 
+ *Dungeons & Dragons 
+ Light Mode
+ Contact us 
+ Terms and rules 
+ Privacy policy 
+ Help 
+ Home 
+ RSS 
+ Community platform by XenForo ® © 2010-2026 XenForo Ltd. Ignore/Block Essentials by AddonFlare - Premium XF2 Addons 
+ | [XTR] Modal Popups © 2019 XENTR Development | Events Manager by XenCustomize 
+ Discord Integration © Jason Axelrod of
+ 8WAYRUN 
+ XenCarta 2 PRO © Jason Axelrod of
+ 8WAYRUN 
+ Top 

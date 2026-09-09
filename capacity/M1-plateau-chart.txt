@@ -1,0 +1,62 @@
+# THE 300-YEAR LIT PLATEAU CHART, AS NUMBERS
+receipt kind=whole_world_soak schemaVersion=5 years=300 settlements=4
+seed=realm-scale-research-lit-4s-300y-4s-seed1
+subsystems.rules.demographicsEnabled = true   <- the LIT overlay reached the world
+passed = true
+
+## Population at each 25-year mark (the curve)
+settlement      y1    y25    y50    y75   y100   y125   y150   y175   y200   y225   y250   y275   y300
+soak-a       15196   8065   6823   7613   6840   7299   8319   7543   6576   7492   8620   9765  10869
+soak-b        3457     58     58     81     91    119    202    312    562    567    606    853   1017
+soak-c        1263    647    510    306    420    392    324    293    327    267    277    236    244
+soak-d         585      0     24     44    189     22     38     23    187    240    270    228    159
+REALM        20501   8770   7415   8044   7540   7832   8883   8171   7652   8566   9773  11082  12289
+
+## settlementShapeOf, term by term (why every shape is "other")
+   plateau requires |final - centuryAgo| <= 0.05 * |final|
+   runaway  requires final > centuryAgo * RUNAWAY_MULTIPLE
+  soak-a   start  15196  y200   6576  y250   8620  y300  10869
+           |y300-y200| = 4293.0  vs 5% of y300 = 543.5  ->  NOT plateau (drift is 7.9x the window)
+           died=false  series length=300  SHAPE = other
+  soak-b   start   3457  y200    562  y250    606  y300   1017
+           |y300-y200| = 455.0  vs 5% of y300 = 50.9  ->  NOT plateau (drift is 8.9x the window)
+           died=false  series length=300  SHAPE = other
+  soak-c   start   1263  y200    327  y250    277  y300    244
+           |y300-y200| = 83.0  vs 5% of y300 = 12.2  ->  NOT plateau (drift is 6.8x the window)
+           died=false  series length=300  SHAPE = other
+  soak-d   start    585  y200    187  y250    270  y300    159
+           |y300-y200| = 28.0  vs 5% of y300 = 8.0  ->  NOT plateau (drift is 3.5x the window)
+           died=false  series length=300  SHAPE = other
+
+## the realm-load reading the tripwire fired on
+{
+  "schemaVersion": 1,
+  "kind": "realm_demography",
+  "settlements": 4,
+  "population": 12289,
+  "capacity": 26292,
+  "bound": 25674,
+  "realmPressure01": 0.4674,
+  "loadRatio01": 0.4787,
+  "foodKnownSettlements": 4,
+  "binding": {
+    "granary": 2,
+    "walls": 2
+  },
+  "ladder": {
+    "viable": 4,
+    "failing": 0,
+    "evacuating": 0,
+    "remnant_occupied": 0,
+    "remnant_empty": 0
+  }
+}
+
+## trough and recovery (does the curve turn back up?)
+  soak-a   min   6026 at year  29   y300  10869   recovered +4843
+  soak-b   min      0 at year   8   y300   1017   recovered +1017
+  soak-c   min    224 at year 271   y300    244   recovered +20
+  soak-d   min      0 at year   4   y300    159   recovered +159
+
+## last 50 years, realm total (is it still moving at the horizon?)
+  y250=9773  y255=10028  y260=10302  y265=10579  y270=10795  y275=11082  y280=11122  y285=11370  y290=11656  y295=11979  y300=12289

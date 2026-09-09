@@ -1,0 +1,116 @@
+{
+ "towns": 768,
+ "walked": 768,
+ "rows": [
+  {
+   "key": "DS-DEF-11 :: country: pressed (walled)",
+   "candidate": 514,
+   "attached": 338,
+   "seated": 338,
+   "rateBp": 6693,
+   "byTier": {
+    "thorp": 87,
+    "hamlet": 88,
+    "village": 86,
+    "town": 85,
+    "city": 83,
+    "metropolis": 85
+   },
+   "cells": {
+    "WALLED-STRAINED": 338
+   }
+  },
+  {
+   "key": "DS-DEF-11 :: country: pressed (unwalled)",
+   "candidate": 514,
+   "attached": 124,
+   "seated": 124,
+   "rateBp": 6693,
+   "byTier": {
+    "thorp": 87,
+    "hamlet": 88,
+    "village": 86,
+    "town": 85,
+    "city": 83,
+    "metropolis": 85
+   },
+   "cells": {
+    "UNWALLED-SMALL": 122,
+    "UNWALLED-LARGE": 2
+   }
+  },
+  {
+   "key": "DS-DEF-11 :: watch: bought (revealed)",
+   "candidate": 0,
+   "attached": 0,
+   "seated": 0,
+   "rateBp": 0,
+   "byTier": {},
+   "cells": {}
+  },
+  {
+   "key": "DS-DEF-11 :: watch: bought (covert)",
+   "candidate": 0,
+   "attached": 0,
+   "seated": 0,
+   "rateBp": 0,
+   "byTier": {},
+   "cells": {}
+  },
+  {
+   "key": "DS-DEF-2 :: stores: short",
+   "candidate": 120,
+   "attached": 37,
+   "seated": 37,
+   "rateBp": 1563,
+   "byTier": {
+    "thorp": 25,
+    "village": 19,
+    "metropolis": 17,
+    "town": 16,
+    "city": 19,
+    "hamlet": 24
+   },
+   "cells": {
+    "Disasters & Famine: granary AND hospital": 37
+   }
+  },
+  {
+   "key": "DS-DEF-2 :: stores: import-fed",
+   "candidate": 308,
+   "attached": 114,
+   "seated": 114,
+   "rateBp": 4010,
+   "byTier": {
+    "hamlet": 49,
+    "village": 47,
+    "town": 47,
+    "city": 53,
+    "metropolis": 58,
+    "thorp": 54
+   },
+   "cells": {
+    "Disasters & Famine: granary AND hospital": 114
+   }
+  },
+  {
+   "key": "DS-GEN-3 :: purse: short",
+   "candidate": 510,
+   "attached": 25,
+   "seated": 25,
+   "rateBp": 6641,
+   "byTier": {
+    "thorp": 60,
+    "hamlet": 49,
+    "village": 28,
+    "town": 117,
+    "city": 128,
+    "metropolis": 128
+   },
+   "cells": {
+    "scores.military: WEAK": 21,
+    "scores.military: CRITICAL": 4
+   }
+  }
+ ]
+}

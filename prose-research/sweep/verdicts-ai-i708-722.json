@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 14,
+ "claims": [
+  {
+   "index": 708,
+   "feature": "adjective and adverb discipline",
+   "claim": "The study reports that participants sometimes simplified sentence structure or removed flowery language, giving the example of cutting a phrase about a spirit whose generosity knew no bounds down to an amazing man.",
+   "source": "Baumler et al., University of Maryland, arXiv:2604.24444, April 2026",
+   "url": "https://arxiv.org/html/2604.24444v1",
+   "quote": "participants sometimes simplified sentence structure or removed flowery language",
+   "page": "Section 6.4"
+  },
+  {
+   "index": 709,
+   "feature": "counter-evidence",
+   "claim": "The same study observed that other participants added cliched expressions during post-editing, which the authors take as evidence that such language was not uniformly viewed as uncharacteristic.",
+   "source": "Baumler et al., University of Maryland, arXiv:2604.24444, April 2026",
+   "url": "https://arxiv.org/html/2604.24444v1",
+   "quote": "while others added clich",
+   "page": "Section 6.4"
+  },
+  {
+   "index": 710,
+   "feature": "reader and expert judgment",
+   "claim": "The study found a gap between perceived stylistic authenticity and model-measured similarity: post-edited text was often perceived by its own editor as representative of their personal style despite remaining detectable LLM stylistic traces.",
+   "source": "Baumler et al., University of Maryland, arXiv:2604.24444, April 2026",
+   "url": "https://arxiv.org/html/2604.24444v1",
+   "quote": "despite remaining detectable LLM stylistic traces",
+   "page": "Abstract"
+  },
+  {
+   "index": 711,
+   "feature": "abstraction over the concrete",
+   "claim": "The study's exploratory results suggest that adoption of the post-editing workflow is limited less by the effort of adjusting style than by a perceived lack of interesting or original content in the LLM-generated drafts.",
+   "source": "Baumler et al., University of Maryland, arXiv:2604.24444, April 2026",
+   "url": "https://arxiv.org/html/2604.24444v1",
+   "quote": "a perceived lack of interesting or original content in LLM-generated drafts",
+   "page": "Section 6.5, (Why) Do Participants Like to Post-Edit?"
+  },
+  {
+   "index": 712,
+   "feature": "register measured",
+   "claim": "Liang and colleagues measured LLM-assisted writing across four institutional registers from January 2022 to September 2024, on a corpus of 687,241 consumer complaints, 537,413 corporate press releases, 304.3 million job postings and 15,919 United Nations press releases.",
+   "source": "Weixin Liang, Yaohui Zhang, Mihai Codreanu, Jiayu Wang et al., Stanford and UW, arXiv:2502.09747, February 2025",
+   "url": "https://arxiv.org/html/2502.09747v1",
+   "quote": "687,241 consumer complaints, 537,413 corporate press releases",
+   "page": "Abstract"
+  },
+  {
+   "index": 713,
+   "feature": "register measured",
+   "claim": "The study estimates that LLM-assisted content in United Nations press releases rose from 3.1% in Q1 2023 to 10.1% in Q3 2023 and reached 13.7% by Q3 2024.",
+   "source": "Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025",
+   "url": "https://arxiv.org/html/2502.09747v1",
+   "quote": "reaching 13.7% by Q3 2024",
+   "page": "Section on LLM Adoption in United Nations Press Releases"
+  },
+  {
+   "index": 714,
+   "feature": "register measured",
+   "claim": "The study estimates LLM-modified content in Newswire corporate press releases peaked at 24.3% in December 2023 and stabilised at 23.8% through September 2024.",
+   "source": "Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025",
+   "url": "https://arxiv.org/html/2502.09747v1",
+   "quote": "peaking at 24.3% in December 2023 and stabilizing at 23.8%",
+   "page": "Results, corporate press releases"
+  },
+  {
+   "index": 715,
+   "feature": "register measured",
+   "claim": "The study reports the consumer-complaint estimate rising from a baseline algorithm false positive rate of 1.5% to 15.3% by August 2023, with only a modest increase to 17.7% through August 2024.",
+   "source": "Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025",
+   "url": "https://arxiv.org/html/2502.09747v1",
+   "quote": "rose sharply from a baseline algorithm false positive rate of 1.5% to 15.3%",
+   "page": "Results, consumer complaint domain"
+  },
+  {
+   "index": 716,
+   "feature": "homogenisation",
+   "claim": "Liang and colleagues state explicitly that their study did not directly measure homogenization, and only point to prior academic research as a reason to expect similar effects in job postings.",
+   "source": "Liang, Zhang, Codreanu, Wang et al., arXiv:2502.09747, February 2025",
+   "url": "https://arxiv.org/html/2502.09747v1",
+   "quote": "our study did not directly measure homogenization",
+   "page": "Discussion, job postings"
+  },
+  {
+   "index": 717,
+   "feature": "other: what a human editor sees first",
+   "claim": "Chakrabarty and colleagues hired professional writers to edit LLM-generated paragraphs and found the writers agree on undesirable idiosyncrasies in LLM-generated text, which the authors formalised into a seven-category taxonomy.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "these writers agree on undesirable idiosyncrasies in LLM-generated text",
+   "page": "Abstract"
+  },
+  {
+   "index": 718,
+   "feature": "other: what a human editor sees first",
+   "claim": "The seven edit categories the study's professional writers converged on are Cliche, Unnecessary/Redundant Exposition, Purple Prose, Poor Sentence Structure, Lack of Specificity and Detail, Awkward Word Choice and Phrasing, and Tense Inconsistency.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "",
+   "page": "Table 3 and Section 4.4, Final Taxonomy for Fine-Grained Edits"
+  },
+  {
+   "index": 719,
+   "feature": "other: what a human editor sees first",
+   "claim": "The LAMP corpus consists of 1,057 LLM-generated paragraphs edited by professional writers according to that taxonomy.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "1,057 LLM-generated paragraphs edited by professional writers",
+   "page": "Abstract"
+  },
+  {
+   "index": 720,
+   "feature": "other: what a human editor sees first",
+   "claim": "Eighteen professional writers produced 8035 fine-grained edits on those responses.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "resulting in 8035 fine-grained edits",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 721,
+   "feature": "steerability",
+   "claim": "The models in that study were explicitly prompted to be original and were instructed not to use ornamental language and to focus on nuance, simplicity, and subtext, yet their output still drew the seven categories of expert edits.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "Do not use ornamental language and focus on nuance, simplicity, and subtext",
+   "page": "Section 4.1, Collecting Instruction and Response Pairs (prompt quoted in text; full prompt in Appendix A Table 13)"
+  },
+  {
+   "index": 722,
+   "feature": "discourse-level tells",
+   "claim": "Of the 50 most common part-of-speech templates in the study's LLM-generated responses, 15 templates do not occur as frequently in the original human-written seed paragraphs.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "15 templates do not occur as frequently in original human-written seed paragraphs",
+   "page": "Section 5.3, Are there any specific stylistic idiosyncrasies in LLM generated responses?"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "participants sometimes simplified sentence structure or removed flowery language (e.g., changing “an amazing spirit, one whose generosity knew no bounds” to “an amazing man”)",
+   "note": "§6.4 of arXiv:2604.24444v1 (27 Apr 2026, Baumler, Bao, Nghiem, Yang, Carpuat, Daumé III, Univ. of Maryland) carries the quoted clause word for word, including the exact eulogy example the claim paraphrases. Fetched raw HTML with a browser UA (HTTP 200, 372 KB)."
+  },
+  {
+   "index": 709,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "while others added clichéd expressions such as “She will forever be a part of our lives,” suggesting this language was not uniformly viewed as uncharacteristic",
+   "note": "Same sentence in §6.4, immediately after the 708 clause. Both limbs — other participants ADDING clichés during post-editing, and the authors' inference that such language was not uniformly seen as uncharacteristic — are on the page verbatim."
+  },
+  {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We find a gap between perceived stylistic authenticity and model-measured stylistic similarity, with post-edited text often perceived as representative of participants’ personal style despite remaining detectable LLM stylistic traces",
+   "note": "Abstract, final sentence, matches the claim limb for limb; the quoted fragment appears word for word. §6.3 corroborates the mechanism (perceived self-similarity of post-edited text no lower than control despite LUAR showing it closer to LLM text)."
+  },
+  {
+   "index": 711,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These exploratory results (expanded in §B.6) suggest that potential adoption of post-editing may be limited less by the effort required (e.g., adjusting style) and more by a perceived lack of interesting or original content in LLM-generated drafts",
+   "note": "Closing sentence of §6.5 “(Why) Do Participants Like to Post-Edit?” — the quoted fragment is verbatim, and the page also marks the finding as exploratory, as the claim does."
+  },
+  {
+   "index": 712,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Our dataset includes 687,241 consumer complaints, 537,413 corporate press releases, 304.3 million job postings, and 15,919 United Nations (UN) press releases",
+   "note": "Abstract of arXiv:2502.09747v1 (13 Feb 2025); all four counts, the four-domain scope and the Jan 2022–Sep 2024 window are verbatim, as is the quoted fragment. Authors confirmed on the page: Weixin Liang, Yaohui Zhang, Mihai Codreanu (Stanford Economics), Jiayu Wang (UW), Hancheng Cao, James Zou. Note the paper's own word is “domains”, not “institutional registers” — a framing gloss, not a factual limb."
+  },
+  {
+   "index": 713,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The initial phase was marked by a rapid increase from 3.1% in Q1 2023 to 10.1% in Q3 2023. This was followed by a slower, incremental rise, reaching 13.7% by Q3 2024",
+   "note": "Results section on UN press releases, and repeated in the Fig. 1(d) caption as “(Q1 2023: 3.1% to Q3 2023: 10.1%), followed by a more gradual increase to 13.7% by Q3 2024”. Every figure in the claim is on the page."
+  },
+  {
+   "index": 714,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Newswire saw rapid growth, peaking at 24.3% in December 2023 and stabilizing at 23.8% through September 2024",
+   "note": "Results, corporate press releases — the quoted fragment is verbatim in the body text (the Fig. 1(b) caption states the same numbers as “reaching 24.3% by December 2023, stabilizing at 23.8% through September 2024”)."
+  },
+  {
+   "index": 715,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rose sharply from a baseline algorithm false positive rate of 1.5% to 15.3% by August 2023. This rapid growth plateaued, with only a modest increase to 17.7% observed through August 2024",
+   "note": "Results, consumer complaint domain (CFPB). The quoted fragment is verbatim and the “only a modest increase to 17.7%” limb is the paper's own wording."
+  },
+  {
+   "index": 716,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While our study did not directly measure homogenization, prior research on the homogenization of LLM-generated content in academia [12, 13] suggests that similar effects could occur in job postings",
+   "note": "Discussion of job postings. Quoted fragment verbatim; both limbs — the explicit non-measurement disclaimer and the appeal to prior academic research as the only basis for expecting the effect in job postings — are supported."
+  },
+  {
+   "index": 717,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we hired professional writers to edit paragraphs... We first found these writers agree on undesirable idiosyncrasies in LLM-generated text, formalizing it into a seven-category taxonomy",
+   "note": "Abstract of arXiv:2409.14509v3 (26 Sep 2024); authors on the page are Tuhin Chakrabarty, Philippe Laban and Chien-Sheng Wu, all Salesforce AI Research. The paragraphs edited are the LLM-generated ones curated as the LAMP corpus, so the claim's “LLM-generated paragraphs” limb holds."
+  },
+  {
+   "index": 718,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cliché / Unnecessary–Redundant Exposition / Purple Prose / Poor Sentence Structure / Lack of Specificity and Detail / Awkward Word Choice and Phrasing / Tense Inconsistency",
+   "note": "All seven names appear verbatim, both as the §4.4.1–§4.4.7 subsection headings and as the Final Category column of Table 3, in exactly the claim's order. The claim carried an empty quote field, so the verbatim grade rests on the seven category names themselves matching the page word for word."
+  },
+  {
+   "index": 719,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we curated the LAMP corpus: 1,057 LLM-generated paragraphs edited by professional writers according to our taxonomy",
+   "note": "Abstract, second contribution; the quoted fragment is verbatim and §5.1 repeats “18 writers who edited 1,057 LLM-generated paragraphs”."
+  },
+  {
+   "index": 720,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These responses... are further edited by 18 professional writers using the above-mentioned taxonomy, resulting in 8035 fine-grained edits",
+   "note": "Introduction (§1) contribution bullet; the quoted fragment is verbatim. §5.1 corroborates: “18 writers who edited 1,057 LLM-generated paragraphs, gathering about 8 edits per paragraph, totaling 8,035 fine-grained edits.”"
+  },
+  {
+   "index": 721,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The prompt further specifies: “Try your best to be original, avoiding clichés or overused tropes. Do not use ornamental language and focus on nuance, simplicity, and subtext”",
+   "note": "§4.1, with the full prompt repeated per venue in Appendix A Table 13 — the quoted sentence is verbatim in both places. The second limb holds too: those same 1,057 responses are the ones the 18 writers edited into 8,035 edits spanning the seven-category taxonomy (§4.5, Fig. 5(a))."
+  },
+  {
+   "index": 722,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We looked at the 50 most common templates in LLM-generated responses and found that 15 templates do not occur as frequently in original human-written seed paragraphs",
+   "note": "§5.3 “Are there any specific stylistic idiosyncrasies in LLM generated responses?” — quoted fragment verbatim; the page also confirms the templates are part-of-speech templates compared against the original human-written seed paragraphs."
+  }
+ ]
+}

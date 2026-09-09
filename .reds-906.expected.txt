@@ -1,0 +1,4 @@
+tests/copy/voiceMechanics.test.js
+tests/docs/enforcement-claims.test.js
+tests/lint/sovereigntyLightingContract.walker.test.js
+tests/property/generatorGoldenMaster.test.js

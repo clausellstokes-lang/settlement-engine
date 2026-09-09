@@ -1,0 +1,234 @@
+{
+ "name": "ai",
+ "chunk": 22,
+ "claims": [
+  {
+   "index": 829,
+   "feature": "gloss and over-explaining",
+   "claim": "StoryScope measured narrators explicitly explaining the story's theme in 77% of AI stories versus 52% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Narrators explicitly explain the story’s theme 77% of the time",
+   "page": "§4.1 'AI over-explains its themes'"
+  },
+  {
+   "index": 830,
+   "feature": "no subtext",
+   "claim": "StoryScope characterises the AI pattern as over-determination in which the model spells out meaning rather than trusting the reader to infer it.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "AI spells out meaning rather than trusting the reader to infer it",
+   "page": "§4.1"
+  },
+  {
+   "index": 831,
+   "feature": "discourse-level tells",
+   "claim": "StoryScope measured AI dialogue serving philosophical debate in 59% of AI stories against 34% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 833,
+   "feature": "discourse-level tells",
+   "claim": "StoryScope measured 79% of AI stories carrying no subplots against 57% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "far fewer subplots (79% “no subplots” vs. 57%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 834,
+   "feature": "counter-evidence",
+   "claim": "StoryScope measured AI stories conveying emotion through physical sensations and bodily metaphors in 81% of cases against 38% for humans, so on this corpus the AI writing is the more bodily-concrete of the two.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "conveys emotion through physical sensations and bodily metaphors (81% vs. 38% human)",
+   "page": "§4.1 'AI over-writes the body and senses'"
+  },
+  {
+   "index": 835,
+   "feature": "counter-evidence",
+   "claim": "StoryScope measured human authors using explicit emotion labels 29% of the time against 8% for AI.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Humans use explicit emotion labels 29% of the time versus just 8%",
+   "page": "§4.1"
+  },
+  {
+   "index": 836,
+   "feature": "concrete sensory noun",
+   "claim": "StoryScope measured smell-based imagery in 82% of AI stories against 57% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "deploys more smell-based imagery (82% vs. 57%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 837,
+   "feature": "abstraction over the concrete",
+   "claim": "StoryScope measured humans referencing specific texts and authors at 47% against 24% for AI, which sticks to vague allusions and avoids naming real brands, places or works.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Humans reference specific texts and authors at nearly double the AI rate",
+   "page": "§4.1 'Human authors engage the outside world'"
+  },
+  {
+   "index": 838,
+   "feature": "point of view and distance",
+   "claim": "StoryScope measured direct address to the reader in 28% of human stories against 7% of AI stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "address the reader directly more frequently (28% vs. 7%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 839,
+   "feature": "detection and its failures",
+   "claim": "StoryScope reports that discourse-level narrative features alone reach 93.2% macro-F1 at human-versus-AI detection, without any stylistic signal.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Narrative features alone achieve 93.2% macro-F1",
+   "page": "Abstract"
+  },
+  {
+   "index": 840,
+   "feature": "steerability",
+   "claim": "After span-level rewriting that removes surface AI artifacts such as cliche and purple prose, StoryScope's narrative classifier lost only 1.6 macro-F1 points on edited Gemini stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "a drop of only 1.6 points",
+   "page": "§4.2 'Surface editing barely affects narrative detection'"
+  },
+  {
+   "index": 841,
+   "feature": "homogenisation",
+   "claim": "StoryScope measured 24.7% of human stories falling in the corpus-wide rarest ten per cent of narrative-feature space against 7.1% of AI stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "24.7% of all human",
+   "page": "rarity analysis, mean Euclidean distance to 25 nearest neighbours"
+  },
+  {
+   "index": 843,
+   "feature": "register measured",
+   "claim": "StoryScope's human comparison corpus is 10,272 short stories extracted from Books3, so its register is published literary fiction and not any archival or record register.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "We extract 10,272 human-written stories from Books3",
+   "page": "§3, dataset construction"
+  },
+  {
+   "index": 844,
+   "feature": "other: continuity across a long text",
+   "claim": "Chuck Wendig asserts that generative AI is not good at sustaining anything with continuity, which he treats as essential to longer-form writing.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "It also isn’t good at sustaining anything with continuity.",
+   "page": "'two key problems with Gen AI in writing', problem 1"
+  },
+  {
+   "index": 845,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig asserts that generative AI is not there to get things right but to make things look right.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "it’s here to make things look right",
+   "page": "problem 1, 'It really just sucks'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 829,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Narrators explicitly explain the story's theme 77% of the time, versus 52%",
+   "note": "Raw arXiv HTML (curl, 459KB) §4.1 'AI over-explains its themes': quote exact; both figures and the AI/human assignment match."
+  },
+  {
+   "index": 830,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The pattern is one of over-determination: AI spells out meaning",
+   "note": "Raw arXiv HTML §4.1: 'The pattern is one of over-determination: AI spells out meaning rather than trusting the reader to infer it.' Quote exact; the over-determination framing is the page's own word."
+  },
+  {
+   "index": 831,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
+   "note": "Raw arXiv HTML §4.1, same paragraph as the 77%/52% sentence. Quote exact; 59% AI / 34% human confirmed."
+  },
+  {
+   "index": 833,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far fewer subplots (79% 'no subplots' vs. 57%)",
+   "note": "Raw arXiv HTML §4.1 'Human authors subvert linearity'. Quote exact including the curly quotes; 79% AI / 57% human confirmed."
+  },
+  {
+   "index": 834,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "note": "Raw arXiv HTML §4.1 'AI over-writes the body and senses'. Quote exact. The counter-evidence limb is the page's own reading: heading plus 'AI renders fear as a tightening chest, cold sweat' vs humans naming feelings."
+  },
+  {
+   "index": 835,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Humans use explicit emotion labels 29% of the time versus just 8% for AI",
+   "note": "Raw arXiv HTML §4.1, closing sentence of the body/senses paragraph. Quote exact; direction (humans higher) confirmed."
+  },
+  {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deploys more smell-based imagery (82% vs. 57%)",
+   "note": "Raw arXiv HTML §4.1. Quote exact; the 82% is AI, 57% human, matching the claim."
+  },
+  {
+   "index": 837,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Humans reference specific texts and authors at nearly double the AI rate (47% vs. 24%)",
+   "note": "Raw arXiv HTML §4.1 'Human authors engage the outside world'. Quote exact; the second limb is near-verbatim on the page: 'AI generally sticks to vague allusions and avoids naming real brands, places, or works.'"
+  },
+  {
+   "index": 838,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "address the reader directly more frequently (28% vs. 7%)",
+   "note": "Raw arXiv HTML §4.1. Quote exact; 28% human / 7% AI confirmed by the sentence subject ('Humans break the fourth wall far more often... and address the reader')."
+  },
+  {
+   "index": 839,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Narrative features alone achieve 93.2% macro-F1 for human vs. AI detection",
+   "note": "Raw arXiv HTML abstract, quote exact. 'Discourse-level' is the paper's own gloss (§1: 'Discourse-level narrative features ... which we refer to simply as narrative features throughout'); 'without any stylistic signal' matches §4 'withholding all stylistic features'."
+  },
+  {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "93.9% macro-F1 edited vs 95.5% original, a drop of only 1.6 points",
+   "note": "Raw arXiv HTML §4.2 'Surface editing barely affects narrative detection'. Quote exact. Every limb holds: LAMP is Chakrabarty et al. (2025)'s span-level rewriting framework, its artifact categories include cliché and purple prose, and it was applied to 278 Gemini-generated stories."
+  },
+  {
+   "index": 841,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "24.7% of all human stories fall in the top 10% rarest corpus-wide, vs 7.1% of AI",
+   "note": "Raw arXiv HTML rarity analysis. Quote fragment '24.7% of all human' exact (the sentence wraps a line). Rarity is defined there as mean Euclidean distance to a story's 25 nearest neighbours in narrative feature space, matching the claim's page hint."
+  },
+  {
+   "index": 843,
+   "verdict": "PARTIAL",
+   "trueWording": "We extract 10,272 human-written stories from Books3, from short story anthologies",
+   "note": "Raw arXiv HTML §3 'Data.': quote exact, and 'human-written short stories' plus 'we identify and extract stories from short story anthologies identified via running Gemini 2.5 Flash over titles and blurbs in Books3' supports the corpus limb. But the paper never characterises the corpus's register: it says nothing about 'literary fiction' (grep for 'literary fiction'/'genre' returns nothing descriptive of the human corpus, only Table 4's word-count summary), and makes no contrast with archival or record registers. That inference is the claim author's, not the page's.",
+   "unsupportedLimb": "that the corpus register is published literary fiction and not an archival or record register"
+  },
+  {
+   "index": 844,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It also isn't good at sustaining anything with continuity",
+   "note": "Live URL returns HTTP 200 but serves the Terribleminds blog index, not the post (soft 404). Recovered via Wayback raw capture https://web.archive.org/web/20240417102659id_/... : quote exact, in problem 1 ('It sucks') of 'two key problems with Gen AI in writing', post dated April 1, 2024. The longer-form limb is on the page: 'Continuity is really important for writing — in an article, in an essay, and especially in longer-form material.'"
+  },
+  {
+   "index": 845,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gen AI isn't here to get things right, it's here to make things look right",
+   "note": "Same Wayback raw capture, problem 1 'It really just sucks'. Quote exact and both limbs are one sentence on the page, continuing 'which is a very different thing.'"
+  }
+ ]
+}

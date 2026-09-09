@@ -1,0 +1,237 @@
+ The perils of letting AI plan your next trip 
+ Skip to content 
+ Home 
+ News 
+ Sport 
+ Business 
+ Technology 
+ Health 
+ Culture 
+ Arts 
+ Travel 
+ Earth 
+ Audio 
+ Video 
+ Live 
+ Documentaries 
+ Site search 
+ Home 
+ News 
+ Sport 
+ Business 
+ Technology 
+ Health 
+ Culture 
+ Arts 
+ Travel 
+ Earth 
+ Audio 
+ Video 
+ Live 
+ Documentaries 
+ Weather 
+ Newsletters 
+ The perils of letting AI plan your next trip
+ 29 September 2025 Share Save Add as preferred on Google 
+ Lynn Brown 
+ Serenity Strull 
+ Travellers using AI to help create their itineraries are urged to be extra vigilant and verify everything (Credit: Serenity Strull) 
+ An imagined town in Peru, an Eiffel tower in Beijing: travellers are increasingly using tools like ChatGPT for itinerary ideas – and being sent to destinations that don't exist. 
+ Miguel Angel Gongora Meza, founder and director of Evolution Treks Peru , was in a rural Peruvian town preparing for a trek through the Andes when he overheard a curious conversation. Two unaccompanied tourists were chatting amicably about their plans to hike alone in the mountains to the "Sacred Canyon of Humantay". 
+ "They [showed] me the screenshot, confidently written and full of vivid adjectives, [but] it was not true. There is no Sacred Canyon of Humantay!" said Gongora Meza. "The name is a combination of two places that have no relation to the description. The tourist paid nearly $160 (£118) in order to get to a rural road in the environs of Mollepata without a guide or [a destination]."
+ What's more, Gongora Meza insisted that this seemingly innocent mistake could have cost these travellers their lives. "This sort of misinformation is perilous in Peru," he explained. "The elevation, the climatic changes and accessibility [of the] paths have to be planned. When you [use] a program [like ChatGPT], which combines pictures and names to create a fantasy, then you can find yourself at an altitude of 4,000m without oxygen and [phone] signal."
+ In just a few years, artificial intelligence (AI) tools like ChatGPT, Microsoft Copilot and Google Gemini have gone from a mere novelty to an integral part of trip planning for millions of people. According to one survey , 30% of international travellers are now using generative AI tools and dedicated travel AI sites such as Wonderplan and Layla to help organise their trips.
+ While these programs can offer valuable travel tips when they're working properly, they can also lead people into some frustrating or even dangerous situations when they're not. This is a lesson some travellers are learning when they arrive at their would-be destination, only to find they've been fed incorrect information or steered to a place that only exists in the hard-wired imagination of a robot.
+ Dana Yao and her husband recently experienced this first-hand. The couple used ChatGPT to plan a romantic hike to the top of Mount Misen on the Japanese island of Itsukushima earlier this year. After exploring the town of Miyajima with no issues, they set off at 15:00 to hike to the montain's summit in time for sunset, exactly as ChatGPT had instructed them.
+ "That's when the problem showed up," said Yao, a creator who runs a blog about traveling in Japan , "[when] we were ready to descend [the mountain via] the ropeway station. ChatGPT said the last ropeway down was at 17:30, but in reality, the ropeway had already closed. So, we were stuck at the mountain top."
+ Getty Images 
+ AI often gives travellers inaccurate and untrue information. Sometimes it even makes up destinations entirely (Credit: Getty Images) 
+ A 2024 BBC article reported that Layla briefly told users that there was an Eiffel Tower in Beijing and suggested a marathon route across northern Italy to a British traveller that was entirely unfeasible. "The itineraries didn't make a lot of logical sense," the traveller said. "We'd have spent more time on transport than anything else."
+ According to a 2024 survey , 37% of those surveyed who used AI to help plan their travels reported that it could not provide enough information, while around 33% said their AI-generated recommendations included false information.
+ These issues stem from how AI generates its answers. According to Rayid Ghani , a distinguished professor in machine learning at Carnegie Melon University, while programs like ChatGPT may seem to be giving you rational, useful advice, the way it gets this information means you can never be completely sure whether it's telling you the truth.
+ "It doesn't know the difference between travel advice, directions or recipes," Ghani said. "It just knows words. So, it keeps spitting out words that make whatever it's telling you sound realistic, and that's where lot of the underlying issues come from."
+ Large language models like ChatGPT work by analysing massive collections of text and putting together words and phrases that, statistically, feel like appropriate responses. Sometimes this provides perfectly accurate information. Other times, you get what AI experts call a "hallucination", as these tools just make things up. But since AI programs present their hallucinations and factual responses the same way, it's often difficult for users to distinguish what's real from what's not.
+ In the case of the "Sacred Canyon of Humantay", Ghani believes the AI program likely just put together a few words that seemed approriate to the region. Similarly, analysing all that data doesn't necessarily give a tool like ChatGPT a useful understanding of the physical world. It could easily mistake a leisurely 4,000m walk through a city for an 4,000m climb up the side of a mountain – and that's before the issue of actual misinformation comes into play.
+ Getty Images 
+ Several governments have AI regulations in the works that will help identify misinformation before it goes viral (Credit: Getty Images) 
+ A recent Fast Company article recounted an incident where a couple made the trek to a scenic cable car in Malaysia that they had seen on TikTok, only to find that no such structure existed. The video they'd watched had been entirely AI generated, either to drum up engagement or for some other strange purpose.
+ Incidents like this are part of a larger trend of AI implementations that may subtly – or not so subtly – alter our sense of the world. A recent example came in August, when content creators realised YouTube had been using AI to alter their videos without permission by subtly "editing" things like the clothing, hair and faces of real people in the videos. Netflix landed in hot water for its own use of AI in early 2025, after efforts to "remaster" old sitcoms left surreal distortions in the faces of beloved 1980s and '90s television stars. As AI is increasingly used to make these kinds of small changes without our knowledge, the lines between reality and a polished AI dreamworld may be starting to blur for travellers too.
+ Javier Labourt , a licensed clinical psychotherapist and advocate for the way travel can help boost our overall mental health and sense of connection, worries the proliferation of these issues could counteract the very benefits travel can offer in the first place. He feels that travel offers a unique opportunity for people to interact with those they might not otherwise meet and learn about different cultures firsthand – all of which can lead to greater empathy and understanding. But when AI hallucinations feed users misinformation, it offers a false narrative about a place before travellers even leave home.
+ More like this: 
+ • The seven travel trends that will shape 2025 
+ • Bollywood stars fight for personality rights amid deepfake surge 
+ • How has the digital nomad trend evolved over the years? 
+ There are currently attempts to regulate how AI presents information to users, including several proposals from the EU and US to include watermarks or other distinguishing features so viewers know when something has been altered or generated by AI. But according to Ghani, it's an uphill battle: "There is a lot of work going on around misinformation: How do you detect it? How do you help people [identify] it? [But] mitigation is a more reliable solution today than prevention."
+ If these kinds of regulations do pass, they could make it easier for travellers to detect AI-generated images or videos. But new rules aren't likely to help you when an AI chatbot makes something up in the middle of a conversation. Experts, including Google CEO Sundar Pichai, have said hallucinations may be an "inherent feature" of large language models like ChatGPT, or Google's Gemini. If you're going to use AI, that means the only way to protect yourself is to stay vigilant.
+ One thing Ghani suggests is to be specific as possible in your queries and verify absolutely everything. However, he acknowledges the unique problem travel poses to this method, as travellers are often asking about destinations that they're unfamiliar with. But if an AI tool gives you a travel suggestion that sounds a little too perfect, double check it. In the end, Ghani says the time spent verifying AI information can in some cases make the process just as laborious as planning the old-fashioned way.
+ For Labourt, the key to travelling well – with or without AI – is keeping an open mind and being adaptable when things go wrong. "Try to shift the disappointment [away from] being cheated by someone," he suggested. "If you are there, how will you turn this [around]? You're already on a cool trip, you know?"
+ -- 
+ For timely, trusted tech news from global correspondents to your inbox, sign up to the Tech Decoded newsletter , while The Essential List delivers a handpicked selection of features and insights twice a week. 
+ For more Travel stories from the BBC, follow us on Facebook and Instagram . 
+ Thoughtful Travel 
+ Artificial intelligence 
+ Technology 
+ Features 
+ Watch 
+ The million-dollar global spectacle of Esports World Cup
+ Tech Now goes behind-the-scenes to explore the tournament bringing together the world's top gamers in Paris.
+ Tech Now 
+ How AI-powered drones are transforming warfare
+ BBC Tech Now finds out how the battlefield is evolving as autonomous drones take on a growing role.
+ Tech Now 
+ Training the immune system to fight cancer
+ Tech Now meets a firm developing treatments to target cancer cells and stop them returning.
+ Tech Now 
+ Is tech ruining the World Cup?
+ Is World Cup tech taking the human magic out of football?
+ Technology 
+ Am I an AI deepfake?
+ AI fakery has been used to scam people out of large sums of money and even attempt to sway elections.
+ Technology 
+ The game-changing tech transforming the World Cup
+ Tech Now visits FIFA HQ in Zurich to find out how AI-powered balls and smart tracking are transforming football.
+ Tech Now 
+ The Finnish shipyard making the world's toughest icebreakers
+ Tech Now heads to Finland to meet the engineers designing icebreaker ships navigating through Arctic sea ice.
+ Tech Now 
+ Lego’s new smart brick
+ Tech Now experiences Lego's new Smart Brick, designed to bring physical play to next level.
+ Tech Now 
+ Fixing fashion's erratic sizing problem
+ Tech Now meets a startup trying to fix one of the fashion industry's biggest blind spots, inconsistent sizing.
+ Tech Now 
+ The tactile tech giving deaf runners a fair start
+ A gold‑medalist has developed a vibrating starting block to give deaf athletes clearer, fairer race starts.
+ TechXplore 
+ These futuristic screens help you navigate Tokyo
+ In Tokyo, BBC TechXplore tests live translation and AI-powered displays that makes the city more navigable.
+ TechXplore 
+ The wearable tech that lets spectators feel the match
+ At Tokyo's Deaflympics, deaf Judo fans aren't just watching the matches, they're feeling them, thanks to Hapbeat.
+ TechXplore 
+ Meet MOFO: will.i.am's rapping AI toy
+ BBC Tech Now takes us inside CES 2026 to meet musician will.i.am and his AI toy, MOFO.
+ Tech Now 
+ The gadgets set to change your daily health and wellness
+ Tech Now test out new gadgets disrupting the health industry at CES 2026 in Las Vegas.
+ Tech Now 
+ What's it like to meet your own avatar?
+ Musician KT Tunstall meets her avatar as Tech Now explores music’s virtual future.
+ Tech Now 
+ How early filmmakers invented the internet’s funniest trend
+ Discover how quirky clips paved the way for viral humour, proving randomness never goes out of style.
+ Technology 
+ Is this how AI might eliminate humanity?
+ A new research paper predicts AI autonomy by 2027 could lead to human extinction within a decade.
+ Tech Now 
+ The best-case scenario for AI in schools
+ Amid fears about the use of AI in classrooms, American educator Sal Khan lays out an optimistic future.
+ Artificial Intelligence 
+ Explaining how a touchscreen works with a sausage
+ British mathematician Hannah Fry digs into the science of touchscreens.
+ Science 
+ What it takes to write like Agatha Christie
+ We explore how technology is reviving the renowned fiction writer's legacy.
+ Tech Now 
+ More from the BBC 
+ 4 hrs ago 
+ The smoky plant goo that Finns can't stop eating
+ Once used to waterproof boats and treat infections, this smoky plant byproduct is now used to flavour everything from schnapps to bread. But how does it taste?
+ 4 hrs ago 
+ 8 hrs ago 
+ The bears cooling off in a California pool
+ As bear encounters increase across Southern California, the couple share videos of their furry visitors and reveal how they are co-existing with these wild animals.
+ 8 hrs ago 
+ 19 hrs ago 
+ Berlin is being blackmailed by hackers, mayor says
+ Kai Wegner says the German capital and city-state would not cave in to a ransom demand for data stolen in a cyber-attack.
+ 19 hrs ago 
+ 1 day ago 
+ What we know after the big Grand Theft Auto 6 preview
+ The official look at the blockbuster video game leaves fans and critics impressed.
+ 1 day ago 
+ 1 day ago 
+ Five reasons why the 'Gen Z Friends' is impossible
+ The legacy of Friends can be seen in a new wave of US sitcoms about twenty-something pals hitting the small screen. But, unlike the classic show, they're struggling to make a mark.
+ 1 day ago 
+ Home 
+ News 
+ Sport 
+ Business 
+ Technology 
+ Health 
+ Culture 
+ Arts 
+ Travel 
+ Earth 
+ Audio 
+ Video 
+ Live 
+ Documentaries 
+ Weather 
+ BBC Shop 
+ BritBox 
+ BBC in other languages 
+ The BBC is in multiple languages
+ Read the BBC In your own language
+ BBC News Brasil 
+ BBC News Mundo (Spanish) 
+ BBC News မြန်မာ (Burmese) 
+ BBC News 中文 (Chinese) 
+ BBC News Indonesia 
+ BBC News 코리아 (Korean) 
+ BBC News ไทย (Thai) 
+ BBC News Tiếng Việt (Vietnamese) 
+ BBC News Azərbaycanca (Azeri) 
+ BBC News Magyarul (Hungarian) 
+ BBC News Кыргыз Кызматы (Kyrgyz) 
+ BBC News Polska (Polish) 
+ BBC News România (Romanian) 
+ BBC News Русская служба (Russian) 
+ BBC News na srpskom (Serbian) 
+ BBC News Україна (Ukrainian) 
+ BBC News O'zbek (Uzbek) 
+ BBC News عربي (Arabic) 
+ BBC News فارسی (Persian) 
+ BBC News Türkçe (Turkish) 
+ BBC News বাংলা (Bengali) 
+ BBC News دری (Dari) 
+ BBC News ગુજરાતી (Gujarati) 
+ BBC News हिन्दी (Hindi) 
+ BBC News मराठी (Marathi) 
+ BBC News नेपाली (Nepali) 
+ BBC News සිංහල (Sinhala) 
+ BBC News پښتو (Pashto) 
+ BBC News ਪੰਜਾਬੀ (Punjabi) 
+ BBC News Afaan Oromoo 
+ BBC News አማርኛ (Amharic) 
+ BBC News Afrique (French) 
+ BBC News Hausa 
+ BBC News Gaelic NAIDHEACHDAN 
+ BBC News Ìgbò 
+ BBC News Japanese 日本語 
+ BBC News Gahuza 
+ BBC News Pidgin 
+ BBC News Somali 
+ BBC News Swahili 
+ BBC News தமிழ் (Tamil) 
+ BBC News తెలుగు (Telugu) 
+ BBC News ትግርኛ (Tigrinya) 
+ BBC News اردو (Urdu) 
+ BBC News Yorùbá 
+ BBC News World Service 
+ Follow BBC on:
+ Terms of Use 
+ Subscription Terms 
+ About the BBC 
+ Privacy Policy 
+ Cookies 
+ Accessibility Help 
+ Contact the BBC 
+ Advertise with us 
+ Do not share or sell my info 
+ BBC.com Help & FAQs 
+ Content Index 
+ Set Preferred Source 
+ Copyright 2026 BBC. All rights reserved. The BBC is not responsible for the content of external sites. Read about our approach to external linking. 
+ 

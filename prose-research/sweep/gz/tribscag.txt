@@ -1,0 +1,398 @@
+D&D 5e Forgotten Realms Reviews Thoughts & Things 
+
+Sword Coast Adventurer’s Guide – Review 
+
+ Michael Long 
+
+November 9, 2015 
+
+ 1 
+
+ I have been reading Wizard of the Coast’s new D&D Book: Sword Coast Adventurer’s Guide (SCAG), and overall I really like it. It’s a nice addition to my growing collection of 5th edition books. To be honest, when I first got the book, I just skipped to the back portion of the book where there were mechanics to see what is new. And then I decided to give the book a good read through, and I am glad that I did.
+
+ I realize for some people this is just another Splat book. Some of you aren’t playing Forgotten Realms, and what can be used in your campaigns is minimal. There is a section at the end that has instructions/ideas for converting some of the Class options to other D&D campaign worlds; Dragonlance, Ebberon, Greyhawk,and Homemade Worlds. I think that the primary purpose of the book is as a player resource for inspiration with the people and places of the Sword Coast. 
+
+ Mike Schley ‘s cartography is top notch, and I wish the Sword Coast map was an insert, because I found myself continually flipping back and forth. There were also sections cut off the map during editing. Fortunately, Mike has his map for sale for people like me that want more.
+
+ Jared Blando ‘s cartography also has to be appreciated. The maps that he has done look like something that the players would find in the Forgotten Realms. The maps could easily be made as a player prop for your game. That’s what I plan to do with them. I show an example of Baldur’s Gate map later.
+
+ Here is the blurb from Wizards about the book:
+
+ WELCOME TO THE SWORD COAST —a region of Faerûn that comprises shining paragons of civilization and culture, perilous locales fraught with dread and evil, and encompassing them all, a wilderness that offers every explorer vast opportunity and simultaneously promises great danger.
+
+ While the Sword Coast Adventurer’s Guide is a valuable resource for Dungeon Masters, it was crafted with players and their characters foremost in mind. There is a plethora of new character options to intrigue and inspire every member of the adventuring party.
+
+ For use with the fifth edition Player’s Handbook , Monster Manual , and Dungeon Master’s Guide , the Sword Coast Adventurer’s Guide provides the setting, story, and character options needed to participate in a game anywhere along the Sword Coast of the Forgotten Realms.
+
+ And the book does what it sets out to do; it keeps “the players and their characters foremost in mind.” 
+
+ Chapter 1: Welcome to the Realms
+
+ Chapter 1 mainly has general overview about the people, culture and religion of the Sword Coast. There is another map that gives a general overview of the Sword Coast (a Jared Blando style map). This is a good introductory section that gives a history of the Faerûn and the Sword Coast, and gives extensive details on the current Deities. There are just a lot of details on the Deities that goes to the point of being excessive in my opinion. This may be my least favorite section, but I can see the need to include it. There might some player’s that may like to have all of the details for a Deity their character follows. And even though a laundry list of Deities are given, not all of the Deities are detailed in the book, only the most prominent. Also, in Chapter 2, Deities are given some more time during each Races’ description.
+
+ Chapter 2: The Sword Coast and the North
+
+ Chapter 2 goes through the Forgotten realms as a Player Character. The chapter helps identify the areas presented in Chapter 1 and the campaign map, with a closeup of some of the areas from Mike Schley’s Overall map along with rough detailed city maps. I really liked this section, because there are a lots of good reading material here. It can give a player ideas about their background and rumors that they may have heard.
+
+ This section is fairly large narrative that I enjoyed reading. Chapter 2 is fairly large taking up a third of the book, and I found myself flipping from this section back to the beginning of the book to look at the large detailed map. For the player, there is just enough detail to use in their character background story. As an example, maybe you have decided that character comes for the Lower City of Baldur’s Gate. Then you could read a few paragraphs about the Lower City, and decide that you grew up in a merchants home. Read about the rest of Baldur’s Gate and you can get a fairly quick character build in a short amount of time.
+
+ Chapter 3: Races of the Realms
+
+ Chapter 3 gets into mechanics of the different races in the Forgotten Realms. It’s not a large section, and a lot of it is the same as what you find the PHB. This chapter does show the slight differences in FR races, and gives you rules that that can be used by the players in creating a new player character. I think that all the different playable races are nice, but it’s all just a rehash or mixing up of the same ideas. This section’s race additions shouldn’t overwhelm your game with a ton of differences from the Player’s Handbook. They have presented just enough details to supplement a starting character some unique flavor for a Forgotten Realms game along with details on a race’s religion. Here are the player character races & subraces from the Sword Coast:
+
+ Dwarves; Shield, Gold, Gray ( new mechanics ).
+
+ Elves; Moon, Sun, Wood, Drow, (Also there is a sidebar for a few legendary Elf races; Avariel, Lythari, Sea, Star and Wild)
+
+ Halflings; Lightfoot, Strongheart, Ghostwise ( new mechanics )
+
+ Humans; several new human ethnicities in Faerûn with languages listed for all in a sidebar
+
+ Dragonborn; details on origins
+
+ Gnomes; Forest, Rock and Deep ( new mechanics )
+
+ Half-Elves; several variants for a Half Elf ( new mechanics) 
+
+ Half-Orcs; some good details
+
+ Tieflings; several variants for a Tiefling ( new mechanics) 
+
+ Aasimar; are listed as a sidebar with rules found in the DMG
+
+ Chapter 4: Classes
+
+ Chapter 4 is all about the Classes. This is where you will find a lot of Crunch . There are several introduced class features along with some new spells.
+
+ Barbarian
+
+ I’ve already gone over some of this in another article: D&D 5e Character Optimization – Barbarian , but for consistency I’ll include some of what I said here.
+
+ Path of the Battlerager: A new Barbarian primal path that is limited to Dwarves. I think it’s okay, but not exceptionally great. Spiked armor is introduced as a purchasable item in the Forgotten Realms. I can see a lot of people trying out this class feature, but I’d rather stick with a Totem Warrior. Reckless Abandon gives this primal path a supercharge!
+
+ Path of the Totem Warrior : This primal path has been enhanced with two new animals. Elk & Tiger. Those aren’t game breaking additions, but there are better choices. I liked the cross-referencing for Uthgardt Totems: Black Lion, Black Raven, Blue Bear, Gray Wolf, Great Worm, Griffon, Red Tiger, Sky Pony, Thunderbeast, and Tree Ghost. I think that is pretty cool!
+
+ Bards, Druids, & Rangers
+
+ There are many beefy paragraphs about Bards in the Forgotten Realms, but there isn’t any new crunch. The three new FR Bardic colleges all refer to the PHB for rules. There are some new named musical instruments that give flavor for your campaign.
+
+ Just like the Bard, three Druid Circles are give a Forgotten Realm renaming with some nice flavor. Moonwells are introduced that can give or take away hit points,based on the drinker’s behavior. Also allows Druids to gather and cast commune and scrying spells. Monks and Rangers get the same treatment.
+
+ Rangers have a short section, and it gives details if you choose Ranger with character race of Human, Elf, Halfling or Dwarf. It just a short paragraph for each race and is geared toward a Ranger’s devotion to a particular ideal or Deity.
+
+ Clerics
+
+ A new Divine Domain is introduced for the Cleric with spells that are very Wizardly. Seems like a good fit if you have a small campaign with only a few players and someone wants to play a Wizard and you also need a Cleric.
+
+ Arcana Domain Spells : A good selection of Wizard spells for this Domain, mostly utilitarian.
+
+ Channel Divinity: Arcane Abjuration – So you get to turn Celestial, Elemental, Fey or Fiend creatures.
+
+ Spell Breaker : remove the effects of the spell when you heal.
+
+ Potent Spellcasting : Bonus damage with Cleric cantrips after 8th level.
+
+ Arcane Mastery : This seems worth it at 17th level. You get to choose 4 Spells from Wizard Spell list (1 each from 6th, 7th, 8th, & 9th level) that count as Cleric spells, and they’re always prepared. NOICE!! 
+
+ Fighters
+
+ And some new crunch for the Fighter: Purple Dragon Knight . But there’s a restriction and the player has to be a Cormyr Knight. This isn’t a bad archetype and gives an alternative for a Player to play a character that is closer to Knight if they don’t want to play a Paladin.
+
+ Monk
+
+ The monk is giving two new monastic traditions. Way of the Long Death and Way of the Sun Soul . They are about the same strength and breadth as the Way of the Shadow from the PHB. They are a nice addition, and can add a different flavor to someone choosing to play a Monk.
+
+ Paladins
+
+ Here we have a list of vitures that Paladins should be following. Very specific and helpful for a Player to roleplay a paladin. The tenets look like the Boy Scout law to me: A Scout is Trustworthy, Loyal, Helpful, Friendly, Courteous, Kind, Obedient, Cheerful, Thrifty, Brave, Clean, and Reverent. 😉
+
+ A new Sacred Oath is introduced: Oath of the Crown . This looks like a Paladin rebuttal to the Purple Dragon Knight option that was given to the Fighter. And adds some more tenets that the Paladin should be following. Looks like some good options for a player that wants to play a Paladin that is closer to the idea of a Knight.
+
+ Rogues
+
+ The Rogue gets two new Archetypes in this section. I think the Rogue really wins with the Swashbuckler archetype. The Swashbuckler doesn’t lose much power when this archetype is chosen, and gains a lot at 3rd level when sneak attacks are practically automatic if at melee attack range. There is a sidebar on two-weapon fighting and the Swashbuckler which is handy for a player to effectively play that character in combat.
+
+ The Mastermind is interesting and may serve the party well as a controller (you can see the Mastermind in the SCAG Previews ). The mastermind has some out of combat skills along with a few that are helpful in combat.
+
+ Sorcerers
+
+ A new Sorcerous Origin is given. Storm Sorcery . Neat option to get out of melee attack range, or get to something that is out of reach. The origin centers around weather. There is a nice level 18 class feature that gives immunity, flight speed, ability to allow your party to fly with you at 18th level. I like it.
+
+ Warlocks
+
+ The section on Warlocks gives a nice listing of the patrons in the realms and also a new player choice on Otherworldly Patron: The Undying . It gives some of the same spells as the Death Domain Cleric found in the DMG (page 96), but with class features focused on Undying.
+
+ Wizards
+
+ A new Arcane tradition is introduced for Wizards that are Elves or Half-Elves: Bladesinging . I really like this Arcane tradition. Especially because some new spells are introduced along with it.
+
+ Booming Blade
+
+ Green-Flame Blade
+
+ Lightning Lure
+
+ Sword Burst
+
+ A sword wielding wizard just sounds awesome to me. This has to be my favorite addition to the new class options that are introduced in the Sword Coast Adventurer’s Guide.
+
+ Chapter 5 Backgrounds
+
+ So there are a lot of new backgrounds introduced in this chapter. And the chapter before this one was so intense, that this one seems like a nice slow easy Sunday drive. I do like the Far Traveler background, but there isn’t too much surprise in this section.
+
+ City Watch
+
+ Clan Crafter
+
+ Cloistered Scholar
+
+ Courtier
+
+ Faction Agent
+
+ Far Traveler
+
+ Inheritor
+
+ Knight of the Order
+
+ Mercenary Veteran
+
+ Urban Bounty Hunter
+
+ Uthgardt Tribe Member
+
+ Waterdhavian Noble
+
+ You might see some redundancy in the backgrounds like the Waterdhavian Noble, Clan Crafter, Cloistered Scholar, Uthgardt Tribe Member & Mercenary Veteran since the PHB already has some generic options. But this gives some nice flavor for players with characters in the Forgotten Realms.
+
+ Conclusion
+
+ I am pretty positive after reading through the book the first time. There are a few things that I would change, like adding a fold-out map insert, but there is a lot that I liked. I will be able to use this for my characters that I have playing in the Forgotten Realms, for the campaigns that I run, and I think that a select audience will also enjoy this book. If you are running or playing a game in the Forgotten Realms, I would recommend picking up this book for your group. There are a lot of resources for the Forgotten Realms Campaign setting, and this has a good introductory for a new player that hasn’t played in the Realms. It also gives a lot of nice flavor for a DM running a 5th edition game along with some useful mechanics for players. This book helps insure the DM and the Players are on the same page with the common knowledge of the FR campaign setting.
+
+ If you aren’t running or playing in a FR game, then you’ll need to make that decision. There is a section on conversion to other campaigns, and this book could give some inspiration if you are just starting to build your own campaign world. Also, the player options and backgrounds are not universal in their flavor, but could give a player some options that they were looking to add. If you’re on the fence, then go by a book store and thumb through it and see if it’s too your liking.
+
+ It was fun going through the book and putting together a review. I want to thank you for reading, and I hope that you find this article helpful.
+
+ Thanks again for reading,
+
+ -Michael
+
+ Links
+
+ Mike Schley Northwest Faerûn; 5th Edition (Artist’s Print
+
+[ http://mikeschley.zenfolio.com/p923843744/h5e9b9fd7#h5e9b9fd7 ]
+
+ Jared Blando Faerûn Map
+
+[ http://theredepic.bigcartel.com/product/the-world-of-faerun-map-digital-download ]
+
+ Wizards: Sword Coast Adventurer’s Guide
+
+[ http://dnd.wizards.com/products/tabletop-games/rpg-products/sc-adventurers-guide] 
+
+ Amazon: Sword Coast Adventurer’s Guide
+
+[ http://amzn.to/1XYHdlF ]
+
+ Tags D&D 5e SCAG Sword Coast Adventurer's Guide 
+
+ Previous Article Dragonlance in 5th Edition – Player Options 
+
+ Next Article 5 Star Trek TNG Episodes for D&D ... 
+
+ Michael Long 
+ Keep in mind, I probably wrote this really late and I now want to change everything... unless you like it. Then I wouldn't change a thing. ;)
+
+ Related Posts
+
+D&D Acquisitions Incorporated Book Available Today 
+
+ DM Shawn 
+
+June 18, 2019 
+
+Unearthed Arcana: Bard Colleges Breakdown 
+
+ Brandes Stoddard 
+
+November 14, 2016 
+
+ -->
+
+ D&D 5e Reviews
+
+ Bigby Presents: Glory of the Giants 
+
+ Dragonlance – Shadow of the Dragon Queen 
+
+ Mordenkainen Presents: Monsters of the Multiverse 
+
+ Fizban’s Treasury of Dragons Breakdown 
+
+ Strixhaven: A Curriculum of Chaos 
+
+ The Wild Beyond the Witchlight 
+
+ Van Richten’s Guide to Ravenloft 
+
+ Candlekeep Mysteries 
+
+ Tasha’s Cauldron of Everything 
+
+ Icewind Dale: Rime of the Frostmaiden 
+
+ Mythic Odysseys of Theros 
+
+ Explorer’s Guide to Wildemount 
+
+ Eberron: Rising from the Last War 
+
+ Baldur’s Gate: Descent into Avernus 
+
+ Ghosts of Saltmarsh 
+
+ Guildmasters’ Guide to Ravnica 
+
+ Waterdeep: Dungeon of the Mad Mage 
+
+ Waterdeep: Dragon Heist 
+
+ Mordenkainen’s Tome of Foes 
+
+ Xanathar’s Guide to Everything 
+
+ Volo’s Guide to Monsters 
+
+ Sword Coast Adventurer’s Guide 
+
+ Tomb of Annihilation 
+
+ Tales from the Yawning Portal 
+
+ Storm King’s Thunder 
+
+ Curse of Strahd 
+
+ Rage of Demons: Out of the Abyss 
+
+ Elemental Evil: Princes of the Apocalypse 
+
+ Tyranny of Dragons 
+
+ WHAT IS TRIBALITY?
+
+ Tribality.com is an ENnie nominated website which provides a collection of advice, homebrews, tools, research, news and other fun tabletop RPG stuff for Gamemasters and Players.
+
+ ABOUT CONTACT 
+
+ REQUEST AN ARTICLE 
+
+ WRITE FOR TRIBALITY 
+
+ ADVERTISE ON TRIBALITY 
+
+ Publishing!! 
+
+ TRIBALITY PUBLISHING
+
+ -->
+
+ Tribality Publishing takes our best received content and ideas and develops books. We publish via DriveThruRPG and Kickstarter. You can view our current digital titles at:
+
+ TRIBALITY PUBLISHING 
+
+ gambling sites not on GamStop 
+
+ casinos not on gamstop 
+
+ nightrush 
+
+ Tags
+
+ D&D 5e 
+ D&D 
+ rpg 
+ dm 
+ world-building 
+ dungeon-master 
+ homebrew 
+ unearthed-arcana 
+ character 
+ pathfinder 
+ monsters 
+ dmg 
+ adventure-design 
+ D&D5E 
+ D&D 4e 
+ combat 
+
+ pay by phone bill casino not on gamstop 
+
+ Bonus Bez Depozytu 
+
+ gambling sites not on GamStop 
+
+ non gamstop casinos 
+ D&D Quotes 
+
+ Recent Comments
+
+ digicamfx 
+
+ Dark Sun Returns to Dungeons & Dragons in 2027 
+
+ Dark Sun has always stood out because Athas feels so different from the usual fantasy setting — the scarcity of water and metal, environmental collapse, psionics, and the focus on survival give it a very distinct identity. I’m especially curious... 
+
+ one week ago 
+
+ Wyvern 
+
+ UA 2025: The Psion Breakdown 
+
+ I'm assuming it was a typo and not intentional, but the irony of Spear the Dying made me laugh. 
+
+ last year 
+
+ Wyvern 
+
+ UA 2025: The Psion Breakdown 
+
+ A couple more incomplete sentences: "... amazing for use with a Dominated " and "...you don’t have to use Telepathic Connection for basic "
+RE wild talents, the introduction says that "a character who... 
+
+ last year 
+
+ Wyvern 
+
+ UA 2025: The Psion Breakdown 
+
+ Thoughts so far:
+- It looks like your comments on Psionic Backlash got cut off: "This one is real " Real what?
+- You might find Psionic Guards more palatable if you think of it as a subconscious response. Sure, the... 
+
+ last year 
+
+ Brandes Stoddard 
+
+ UA 2025: The Psion Breakdown 
+
+ I certainly agree with you that Soulknife telepathy is a lot better. =)
+I get the theme of the mental intrusion detection system, I just don't like the setup that you can fail a save, spend a PE die, and not only pass the save but be immune to... 
+
+ last year 
+
+ --> 
+
+ Tribality Publishing
+
+ Tribality Publishing is now producing titles so that you can use our ideas directly into your games. You can view our current digital titles at:
+
+ TRIBALITY PUBLISHING 
+
+ Follow us
+
+ Copyright 2023 Tribality.com. All rights reserved. Privacy Policy . Website by Ellsworth Media .
+
+ We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it. Ok

@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i431-445",
+ "lines": 122,
+ "firstTs": "2026-09-06T19:27:03.483Z",
+ "lastTs": "2026-09-06T19:34:11.968Z",
+ "tools": {
+  "ToolSearch": 1,
+  "Bash": 31,
+  "Write": 2,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://sbcreations.blogspot.com/p/traduzione-robin-hobb.html",
+  "https://web.archive.org/web/20231020191431id_/https://vestnik-philology.mgu.od.ua/archive/v52/part_2/43.pdf",
+  "https://archive-ouverte.unige.ch/unige:18417",
+  "https://archive-ouverte.unige.ch/unige:18417/ATTACHMENT01",
+  "https://archive-ouverte.unige.ch/downloader/vital/pdf/tmp/unige_18417/fulltext",
+  "https://access.archive-ouverte.unige.ch/access/metadata/6864df9c-3410-40b9-b86e-bd84aea32320/download"
+ ],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/claims-in.json",
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-in.json"
+ ],
+ "lastAssistantText": "All three sources retrieved as raw text. Now writing the checkpoint.",
+ "run": "wf_ab3eea15-df4",
+ "agent": "af78e9143f611503d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-af78e9143f611503d.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i431-445.json",
+  "exists": true
+ }
+}

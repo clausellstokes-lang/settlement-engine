@@ -1,0 +1,207 @@
+ A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games - ACL Anthology 
+ ACL Anthology 
+ About Announcements 
+ Communication channels 
+ Related work 
+ Copyright 
+ Credits 
+ Volunteer 
+ Development 
+ Feedback 
+ Using Author directory 
+ Citing papers 
+ Links in the Anthology 
+ Data access 
+ All FAQs 
+ Details
+ Anthology identifiers 
+ Names 
+ ORCID iDs 
+ DOIs 
+ Verified authors 
+ Contributions Submissions 
+ Corrections 
+ Maintain author pages 
+ Attachments 
+ GitHub 
+ A Framework for Exploring Player Perceptions of LLM -Generated Dialogue in Commercial Video Games 
+ Nader Akoury ,
+ Qian Yang ,
+ Mohit Iyyer 
+ Correct Metadata for 
+ Use this form to create a GitHub issue with structured data describing the correction. You will need a GitHub account.
+Once you create that issue, the correction will be reviewed by a staff member.
+ ⚠️ Mobile Users: Submitting this form to create a new issue will only work with github.com, not the GitHub Mobile app.
+ Important : The Anthology treat PDFs as authoritative. Please use this form only to correct data
+that is out of line with the PDF. See our corrections
+guidelines if you need to change the PDF.
+ Title 
+ Adjust the title. Retain tags such as
+<fixed-case>. 
+ Authors 
+ Adjust author names and order to match the
+PDF. 
+ Add Author Abstract 
+ Correct abstract if needed. Retain XML formatting tags such as <tex-math>. You may use <b>...</b> for bold , <i>...</i> for italic , <u>...</u> for underline , <sc>...</sc> for small-caps , <tt>...<tt> for typewriter text , <url>...</url> for URLs, <a href=...> for hyperlinks, and <par/> for paragraph breaks. 
+ Verification against PDF 
+ Ensure that the new title/authors match the snapshot below. (If there
+is no snapshot or it is too small, consult the PDF .) 
+ Authors concatenated from the text boxes above: 
+ ALL author names match the snapshot above—including
+middle initials, hyphens, and accents. 
+ Create GitHub issue for staff review 
+ Abstract
+ The growing capabilities of large language models (LLMs) have inspired recent efforts to integrate LLM-generated dialogue into video games. However, evaluation remains a major challenge: how do we assess the player experience in a commercial game augmented with LLM-generated dialogue? To explore this question, we introduce a dynamic evaluation framework for the dialogue management systems that govern the task-oriented dialogue often found in roleplaying video games. We first extract dialogue from the widely-acclaimed role-playing game Disco Elysium: The Final Cut , which contains 1.1M words of dialogue spread across a complex graph of utterances where node reachability depends on game state (e.g., whether a certain item is held). Using this dataset, we have GPT-4 perform dialogue infilling to generate grounded utterances based on game state represented via code. In a statistically robust study of 28 players recruited from the r/DiscoyElysium subreddit, the LLM outputs are evaluated against the game designers’ writing via both preference judgments and free-form feedback using a web interface that recreates the game’s core conversation functionality. Overall, the game designers’ prose is significantly preferred to GPT-4 generations, with participants citing reasons such as improved logical flow and grounding with the game state. To spur more principled future research in this area, we release our web interface and tools to enable researchers to build upon our work. https://pl.aiwright.dev 
+ Anthology ID: 2023.findings-emnlp.151 Volume: Findings of the Association for Computational Linguistics: EMNLP 2023 Month: December Year: 2023 Address: Singapore Editors: Houda Bouamor ,
+ Juan Pino ,
+ Kalika Bali Venue: Findings SIG: Publisher: Association for Computational Linguistics Note: Pages: 2295–2311 Language: URL: https://aclanthology.org/2023.findings-emnlp.151/ DOI: 10.18653/v1/2023.findings-emnlp.151 Bibkey: akoury-etal-2023-framework Cite (ACL): Nader Akoury, Qian Yang, and Mohit Iyyer. 2023. A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games . In Findings of the Association for Computational Linguistics: EMNLP 2023 , pages 2295–2311, Singapore. Association for Computational Linguistics. Cite (Informal): A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games (Akoury et al., Findings 2023) Copy Citation: BibTeX 
+ Markdown 
+ MODS XML 
+ Endnote 
+ More
+options… PDF: https://aclanthology.org/2023.findings-emnlp.151.pdf 
+ PDF 
+ Cite 
+ Search 
+ Fix data 
+ Export citation
+ BibTeX 
+ MODS XML 
+ Endnote 
+ Preformatted 
+ @inproceedings{akoury-etal-2023-framework,
+ title = "A Framework for Exploring Player Perceptions of {LLM}-Generated Dialogue in Commercial Video Games",
+ author = "Akoury, Nader and
+ Yang, Qian and
+ Iyyer, Mohit",
+ editor = "Bouamor, Houda and
+ Pino, Juan and
+ Bali, Kalika",
+ booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+ month = dec,
+ year = "2023",
+ address = "Singapore",
+ publisher = "Association for Computational Linguistics",
+ url = "https://aclanthology.org/2023.findings-emnlp.151/",
+ doi = "10.18653/v1/2023.findings-emnlp.151",
+ pages = "2295--2311",
+ abstract = "The growing capabilities of large language models (LLMs) have inspired recent efforts to integrate LLM-generated dialogue into video games. However, evaluation remains a major challenge: how do we assess the player experience in a commercial game augmented with LLM-generated dialogue? To explore this question, we introduce a dynamic evaluation framework for the dialogue management systems that govern the task-oriented dialogue often found in roleplaying video games. We first extract dialogue from the widely-acclaimed role-playing game \textit{Disco Elysium: The Final Cut}, which contains 1.1M words of dialogue spread across a complex graph of utterances where node reachability depends on game state (e.g., whether a certain item is held). Using this dataset, we have GPT-4 perform \textit{dialogue infilling} to generate grounded utterances based on game state represented via code. In a statistically robust study of 28 players recruited from the r/DiscoyElysium subreddit, the LLM outputs are evaluated against the game designers' writing via both preference judgments and free-form feedback using a web interface that recreates the game{'}s core conversation functionality. Overall, the game designers' prose is significantly preferred to GPT-4 generations, with participants citing reasons such as improved logical flow and grounding with the game state. To spur more principled future research in this area, we release our web interface and tools to enable researchers to build upon our work. \url{https://pl.aiwright.dev}"
+} Download as
+File 
+ Copy to Clipboard 
+ <?xml version="1.0" encoding="UTF-8"?>
+<modsCollection xmlns="http://www.loc.gov/mods/v3">
+<mods ID="akoury-etal-2023-framework">
+ <titleInfo>
+ <title>A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games</title>
+ </titleInfo>
+ <name type="personal">
+ <namePart type="given">Nader</namePart>
+ <namePart type="family">Akoury</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">author</roleTerm>
+ </role>
+ </name>
+ <name type="personal">
+ <namePart type="given">Qian</namePart>
+ <namePart type="family">Yang</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">author</roleTerm>
+ </role>
+ </name>
+ <name type="personal">
+ <namePart type="given">Mohit</namePart>
+ <namePart type="family">Iyyer</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">author</roleTerm>
+ </role>
+ </name>
+ <originInfo>
+ <dateIssued>2023-12</dateIssued>
+ </originInfo>
+ <typeOfResource>text</typeOfResource>
+ <relatedItem type="host">
+ <titleInfo>
+ <title>Findings of the Association for Computational Linguistics: EMNLP 2023</title>
+ </titleInfo>
+ <name type="personal">
+ <namePart type="given">Houda</namePart>
+ <namePart type="family">Bouamor</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">editor</roleTerm>
+ </role>
+ </name>
+ <name type="personal">
+ <namePart type="given">Juan</namePart>
+ <namePart type="family">Pino</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">editor</roleTerm>
+ </role>
+ </name>
+ <name type="personal">
+ <namePart type="given">Kalika</namePart>
+ <namePart type="family">Bali</namePart>
+ <role>
+ <roleTerm authority="marcrelator" type="text">editor</roleTerm>
+ </role>
+ </name>
+ <originInfo>
+ <publisher>Association for Computational Linguistics</publisher>
+ <place>
+ <placeTerm type="text">Singapore</placeTerm>
+ </place>
+ </originInfo>
+ <genre authority="marcgt">conference publication</genre>
+ </relatedItem>
+ <abstract>The growing capabilities of large language models (LLMs) have inspired recent efforts to integrate LLM-generated dialogue into video games. However, evaluation remains a major challenge: how do we assess the player experience in a commercial game augmented with LLM-generated dialogue? To explore this question, we introduce a dynamic evaluation framework for the dialogue management systems that govern the task-oriented dialogue often found in roleplaying video games. We first extract dialogue from the widely-acclaimed role-playing game Disco Elysium: The Final Cut, which contains 1.1M words of dialogue spread across a complex graph of utterances where node reachability depends on game state (e.g., whether a certain item is held). Using this dataset, we have GPT-4 perform dialogue infilling to generate grounded utterances based on game state represented via code. In a statistically robust study of 28 players recruited from the r/DiscoyElysium subreddit, the LLM outputs are evaluated against the game designers’ writing via both preference judgments and free-form feedback using a web interface that recreates the game’s core conversation functionality. Overall, the game designers’ prose is significantly preferred to GPT-4 generations, with participants citing reasons such as improved logical flow and grounding with the game state. To spur more principled future research in this area, we release our web interface and tools to enable researchers to build upon our work. https://pl.aiwright.dev</abstract>
+ <identifier type="citekey">akoury-etal-2023-framework</identifier>
+ <identifier type="doi">10.18653/v1/2023.findings-emnlp.151</identifier>
+ <location>
+ <url>https://aclanthology.org/2023.findings-emnlp.151/</url>
+ </location>
+ <part>
+ <date>2023-12</date>
+ <extent unit="page">
+ <start>2295</start>
+ <end>2311</end>
+ </extent>
+ </part>
+</mods>
+</modsCollection>
+ Download as
+File 
+ Copy to Clipboard 
+ %0 Conference Proceedings
+%T A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games
+%A Akoury, Nader
+%A Yang, Qian
+%A Iyyer, Mohit
+%Y Bouamor, Houda
+%Y Pino, Juan
+%Y Bali, Kalika
+%S Findings of the Association for Computational Linguistics: EMNLP 2023
+%D 2023
+%8 December
+%I Association for Computational Linguistics
+%C Singapore
+%F akoury-etal-2023-framework
+%X The growing capabilities of large language models (LLMs) have inspired recent efforts to integrate LLM-generated dialogue into video games. However, evaluation remains a major challenge: how do we assess the player experience in a commercial game augmented with LLM-generated dialogue? To explore this question, we introduce a dynamic evaluation framework for the dialogue management systems that govern the task-oriented dialogue often found in roleplaying video games. We first extract dialogue from the widely-acclaimed role-playing game Disco Elysium: The Final Cut, which contains 1.1M words of dialogue spread across a complex graph of utterances where node reachability depends on game state (e.g., whether a certain item is held). Using this dataset, we have GPT-4 perform dialogue infilling to generate grounded utterances based on game state represented via code. In a statistically robust study of 28 players recruited from the r/DiscoyElysium subreddit, the LLM outputs are evaluated against the game designers’ writing via both preference judgments and free-form feedback using a web interface that recreates the game’s core conversation functionality. Overall, the game designers’ prose is significantly preferred to GPT-4 generations, with participants citing reasons such as improved logical flow and grounding with the game state. To spur more principled future research in this area, we release our web interface and tools to enable researchers to build upon our work. https://pl.aiwright.dev
+%R 10.18653/v1/2023.findings-emnlp.151
+%U https://aclanthology.org/2023.findings-emnlp.151/
+%U https://doi.org/10.18653/v1/2023.findings-emnlp.151
+%P 2295-2311 Download as
+File 
+ Copy to Clipboard 
+ Markdown (Informal)
+ [A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games](https://aclanthology.org/2023.findings-emnlp.151/) (Akoury et al., Findings 2023)
+ A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games (Akoury et al., Findings 2023)
+ ACL
+ Nader Akoury, Qian Yang, and Mohit Iyyer. 2023. A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games . In Findings of the Association for Computational Linguistics: EMNLP 2023 , pages 2295–2311, Singapore. Association for Computational Linguistics.
+ Copy Markdown to
+Clipboard 
+ Copy ACL to
+Clipboard 
+ACL materials are Copyright © 1963–2026 ACL; other materials are copyrighted by their respective copyright holders. Materials prior to 2016 here are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 International License . Permission is granted to make copies for the purposes of teaching and research. Materials published in or after 2016 are licensed on a Creative Commons Attribution 4.0 International License .
+ The ACL Anthology is managed and built by the ACL Anthology team of volunteers.
+ Site last built on 05 September 2026 at 23:01 UTC with commit cc6f507 . 
+ 

@@ -1,0 +1,32 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i255-269",
+ "lines": 67,
+ "firstTs": "2026-09-06T17:16:24.483Z",
+ "lastTs": "2026-09-06T17:19:58.284Z",
+ "tools": {
+  "Read": 3,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://www.robinhobb.com/blog/posts/40869",
+  "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+  "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+  "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+  "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and re-read back. All five sources fetched live at HTTP 200 as raw text (no summarizer, no blocked host, no recovery routes needed), and all 15 quotes matched as exact substrings after smart-quote normalisation.",
+ "run": "wf_22752bb0-128",
+ "agent": "a68e7ed80b58da9a4",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a68e7ed80b58da9a4.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i255-269.json",
+  "exists": true
+ }
+}

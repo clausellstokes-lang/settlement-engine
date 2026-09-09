@@ -1,0 +1,8 @@
+arm             generation
+tree            /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLUIMAT
+rows            600
+errors          0
+distinctRaw     600 / 600
+distinctStable  600 / 600
+corpusSha       5cb485db0a05721ca681672e414bee337dc47b4529c1c3b8878c7412d1959816
+VERDICT         UNFLOORED — no register row named 'generation-corpus-golden'. The distinct figure above is MEASURED but NOT ASSERTED, so this run proves the corpus ran, not that it discriminates. Record a distinctFloor through the signed door before treating this as a passing instrument.

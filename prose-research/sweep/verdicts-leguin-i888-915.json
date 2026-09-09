@@ -1,0 +1,233 @@
+{
+ "name": "leguin",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 888,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says a novel gains its power less from the sound of any single sentence than from the pacing and rhythm of paragraphs and chapters.",
+   "source": "Ursula K. Le Guin, \"Reciprocity of Prose and Poetry\" (1983), in Dancing at the Edge of the World (1989)",
+   "url": "https://ebin.pub/dancing-at-the-edge-of-the-world-thoughts-on-words-women-places-9780802135292.html",
+   "quote": "the pacing and rhythm of paragraphs and chapters",
+   "page": "\"Reciprocity of Prose and Poetry\", p.109"
+  },
+  {
+   "index": 897,
+   "feature": "plainness and economy",
+   "claim": "Le Guin praises a book she admires by calling its prose of unobtrusive excellence.",
+   "source": "Ursula K. Le Guin, blog 51, \"The Narrative Gift as a Moral Conundrum\", 2011",
+   "url": "https://www.ursulakleguin.com/blog/51-the-narrative-gift-as-a-moral-conundrum",
+   "quote": "The prose is of unobtrusive excellence.",
+   "page": "blog post body"
+  },
+  {
+   "index": 900,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the sound and rhythm of prose is so different from poetry, being in a way much coarser.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, excerpted from Ursula K. Le Guin: Conversations on Writing (Tin House, 2018), published at Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "the sound in the rhythm of prose, it is so different from poetry",
+   "page": "the poetry conversation, answer on Woolf and sound"
+  },
+  {
+   "index": 901,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the rhythms of a prose work are a very long beat.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, Conversations on Writing (Tin House, 2018), excerpt at Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "long beat, the rhythms of a prose work",
+   "page": "the poetry conversation, answer on Woolf and sound"
+  },
+  {
+   "index": 902,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says that, besides the long beat of the whole work, the sentence has its rhythms too.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, Conversations on Writing (Tin House, 2018), excerpt at Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "Of course, the sentence has its rhythms too.",
+   "page": "the poetry conversation, answer on Woolf and sound"
+  },
+  {
+   "index": 903,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the deeper meaning that poetry shares with music is carried by the rhythm and the beat, the music of the sound.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, Conversations on Writing (Tin House, 2018), excerpt at Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "it is the rhythm and the beat, the music of the sound that carries it",
+   "page": "the poetry conversation, answer on Macaulay and Swinburne"
+  },
+  {
+   "index": 904,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says she does not think syllabically but rhythmically.",
+   "source": "Ursula K. Le Guin in conversation with David Naimon, Conversations on Writing (Tin House, 2018), excerpt at Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "quote": "I don’t think syllabically, I think rhythmically.",
+   "page": "the poetry conversation, answer on haiku"
+  },
+  {
+   "index": 905,
+   "feature": "register modulation",
+   "claim": "Maslen argues that recording a diversity of understandings and ways of speaking inside a text written in a single language is the principal problem confronting Le Guin as a writer.",
+   "source": "Rob Maslen, \"Towards an Archaeology of the Future: Theodora Kroeber and Ursula K Le Guin\", Foundation: The Review of Science Fiction No. 67 (Summer 1996), text at The Anarchist Library",
+   "url": "https://theanarchistlibrary.org/library/rob-maslen-towards-an-archaeology-of-the-future-theodora-kroeber-and-ursula-k-le-guin",
+   "quote": "recording a diversity of different understandings and ways of speaking",
+   "page": "essay body, section on Semley's necklace"
+  },
+  {
+   "index": 906,
+   "feature": "civic record register",
+   "claim": "Le Guin describes Annals of the Parish as the annual records of a parish minister, kept and dated year by year for 50 years, from 1760 to 1810.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "kept and dated year by year for 50 years",
+   "page": "essay body, paragraph on the book's form"
+  },
+  {
+   "index": 907,
+   "feature": "point of view and distance",
+   "claim": "Le Guin calls the annalist narrator of that book a very old-fashioned narrator, and therefore reliable.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "a very old-fashioned narrator, and therefore reliable",
+   "page": "essay body, paragraph on Mr. Balwhidder"
+  },
+  {
+   "index": 909,
+   "feature": "omission as information",
+   "claim": "Le Guin says that in these annals violence is witnessed without participation.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "Violence is witnessed without participation",
+   "page": "essay body, paragraph on the riot at the kirk"
+  },
+  {
+   "index": 910,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin says the annalist leaves it up to the reader to hear what is being told, to imagine it and to feel it.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "It’s left up to us to hear what’s being told",
+   "page": "essay body, paragraph on the riot at the kirk"
+  },
+  {
+   "index": 911,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says all the material the reader needs to hear, imagine and feel the scene is in those few words, in their choice and in their cadence.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "in those few words, in their choice and in their cadence",
+   "page": "essay body, paragraph on the riot at the kirk"
+  },
+  {
+   "index": 912,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says Galt's prose works like poetry because every word tells.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "Galt’s prose works like poetry: every word tells",
+   "page": "essay body, paragraph on the riot at the kirk"
+  },
+  {
+   "index": 915,
+   "feature": "place and institution description",
+   "claim": "Le Guin says intimate knowledge of one small community may yield psychological and anthropological insights of universal value.",
+   "source": "Ursula K. Le Guin, \"B-Sides: John Galt's Annals of the Parish\", Public Books, 23 January 2017",
+   "url": "https://www.publicbooks.org/b-sides-john-galts-annals-parish/",
+   "quote": "may yield psychological and anthropological insights of universal value",
+   "page": "essay body, paragraph on small-town novels"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 888,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less from the sense and sound of any sentence or paragraph",
+   "note": "Raw full text of the book scan at ebin.pub; quote 'the pacing and rhythm of paragraphs and chapters' appears verbatim in 'Reciprocity of Prose and Poetry', on the page carrying the running head RECIPROCITY OF PROSE AND POETRY 109 (OCR 'log'), confirming p.109. The subject is the large-scale work the Silas Marner passage came from. Nuance recorded, not a defect: the page's small-unit side is 'any sentence or paragraph' (and includes 'sense' as well as sound), and the large-unit side also names the shape and pace of the actions described; the claim's narrower 'any single sentence' is contained within it."
+  },
+  {
+   "index": 897,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The prose is of unobtrusive excellence.",
+   "note": "ursulakleguin.com blog 51 fetched live; sentence appears verbatim in the paragraph praising a book that 'brilliantly demonstrates a narrative gift in the service of clear thought, honest feeling, and passionate integrity' (unnamed in that paragraph; contrasted with Kathryn Stockett's The Help). Admiration limb is explicit. CITATION CORRECTION: the page dates the post May 2012 (Reading, Seeing ii), not 2011."
+  },
+  {
+   "index": 900,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so different from poetry, because it's in a way much coarser",
+   "note": "lithub.com fetched live; quote appears verbatim in Le Guin's answer to the Woolf-and-sound question. The 'much coarser' limb is on the page but split across markup spans ('coarse'+'r'), so it renders correctly in a browser and is only invisible to a naive substring grep; verified in the raw HTML. Page's wording is 'the sound in the rhythm of prose', not 'sound and rhythm'."
+  },
+  {
+   "index": 901,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a very long beat, the rhythms of a prose work",
+   "note": "lithub.com, same answer on Woolf and sound; quote 'long beat, the rhythms of a prose work' verbatim. Page order is inverted from the claim (predicate first) but both limbs hold."
+  },
+  {
+   "index": 902,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Of course, the sentence has its rhythms too.",
+   "note": "lithub.com, same answer; sentence verbatim and immediately follows the long-beat sentence, so the claim's 'besides the long beat of the whole work' framing is supported by adjacency."
+  },
+  {
+   "index": 903,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the rhythm and the beat, the music of the sound",
+   "note": "lithub.com; quote verbatim in the answer to the Macaulay/Swinburne question, locator correct. Page says the deeper meaning 'is where poetry approaches music' where the claim says 'shares with music' - same substance."
+  },
+  {
+   "index": 904,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't think syllabically, I think rhythmically.",
+   "note": "lithub.com; verbatim (curly apostrophe on the page) in the answer about haiku and why the syllable count gives her no form. Locator correct."
+  },
+  {
+   "index": 905,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is the principal problem that confronts a writer",
+   "note": "theanarchistlibrary.org fetched live; page header confirms Rob Maslen, Foundation: The Review of Science Fiction No. 67, Summer 1996. Quote 'recording a diversity of different understandings and ways of speaking' verbatim, in the Semley's-necklace section, within the clause 'for her, as for her mother Theodora Kroeber ... is the principal problem that confronts a writer, whether she is an archaeologist or a novelist'. Le Guin limb supported by the antecedent 'for her'; the page frames it as a writer's problem generally, and the claim's omitted tail is 'rooted in a particular time and place'."
+  },
+  {
+   "index": 906,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "kept and dated year by year for 50 years",
+   "note": "publicbooks.org fetched live; the whole sentence names the annual records of Mr. Balwhidder, minister of the parish of Dalmailing in Ayrshire, and the 1760-1810 span. Every limb verbatim."
+  },
+  {
+   "index": 907,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a very old-fashioned narrator, and therefore reliable",
+   "note": "publicbooks.org; sentence opens the Mr. Balwhidder paragraph verbatim, and the following sentences ('He will not, he cannot, mislead you') confirm the reliability limb."
+  },
+  {
+   "index": 909,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Violence is witnessed without participation",
+   "note": "publicbooks.org; verbatim, italicised in the paragraph beginning 'Whatever his annals tell of greed, cruelty, or hate', immediately preceding the account of the riot at the kirk (the claim's locator points one paragraph later than the sentence sits, which does not touch any limb)."
+  },
+  {
+   "index": 910,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's left up to us to hear what's being told",
+   "note": "publicbooks.org; quote verbatim, continuing 'to imagine it, to feel it'. The page states it in the passive with no agent named; the agent named in the surrounding argument is Galt ('Galt tells without showing'), acting through his annalist narrator, whose own restraint ('All he says about it is...') is the mechanism - so the claim's 'the annalist leaves it up to the reader' is a supported gloss, not a page phrase."
+  },
+  {
+   "index": 911,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in those few words, in their choice and in their cadence",
+   "note": "publicbooks.org; the page reads 'And all the material we need in order to hear, imagine, feel the scene is in those few words, in their choice and in their cadence.' Every limb verbatim; claim shifts 'we' to 'the reader'."
+  },
+  {
+   "index": 912,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Galt's prose works like poetry: every word tells",
+   "note": "publicbooks.org; verbatim (italicised). The page joins the two limbs with a colon where the claim says 'because'; the colon carries the same causal force and the following quoted line illustrates it."
+  },
+  {
+   "index": 915,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "may yield psychological and anthropological insights of universal value",
+   "note": "publicbooks.org; the sentence 'Intimate knowledge of one small community may yield psychological and anthropological insights of universal value.' closes the small-town-novels paragraph (Cranford, Casterbridge, Lark Rise, Gopher Prairie, Holt). Locator correct, every limb verbatim."
+  }
+ ]
+}

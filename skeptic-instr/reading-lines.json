@@ -1,0 +1,165 @@
+[
+ {
+  "seed": "instr-912-seq-0",
+  "name": "Weichfeld",
+  "lines": [
+   {
+    "block": "DS-POW-1",
+    "pool": "Approved",
+    "text": "The Town Council at Weichfeld governs with a modest edge in its favour; where it asks it is generally given, and the exceptions are few enough that the clerks can name them."
+   },
+   {
+    "block": "DS-POW-1",
+    "pool": "breakdown dominated by PROSPERITY, favourable",
+    "text": "The Town Council's standing at Weichfeld rests on the town's prosperity, which makes it exactly as durable as the prosperity is and no more."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "stable matched",
+    "text": "What is settled at Weichfeld is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "recentConflict present",
+    "text": "Nobody at Weichfeld needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "riskLabel: Holding",
+    "text": "The Town Council at Weichfeld holds because Town Council is still the heavier of the two, and the weighing is done again every season."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "legitimacyHold: public backing hardens the hold",
+    "text": "The town is behind whoever sits at Weichfeld, and a ruler with the town behind them can do things a ruler without it cannot attempt."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "council",
+    "text": "The town's business goes to a body rather than a person, and everybody has learned how long a body takes."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "governing body name: a SLOT, never a baked noun",
+    "text": "What governs Weichfeld calls itself the Town Council, and the name is precise about the town's size and pretensions in a way outsiders routinely mistake."
+   },
+   {
+    "block": "DS-POW-7",
+    "pool": "layer DORMANT (no ledger materialized)",
+    "text": "The hall at Weichfeld is not organized into sides. The factions sit as factions, and nothing binds any two of them into anything larger."
+   }
+  ]
+ },
+ {
+  "seed": "instr-912-seq-1",
+  "name": "Neubrücke",
+  "lines": [
+   {
+    "block": "DS-POW-1",
+    "pool": "Approved",
+    "text": "The Guild Council's standing at Neubrücke is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
+   },
+   {
+    "block": "DS-POW-1",
+    "pool": "breakdown dominated by PROSPERITY, favourable",
+    "text": "Neubrücke credits the Guild Council with the good years whether or not the Guild Council earned them; the prosperity is the whole of the argument in its favour."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "stable matched",
+    "text": "What is settled at Neubrücke is the hall and only the hall; the town's steadiness is a statement about who answers, and not about what the answers will be."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "recentConflict present",
+    "text": "Nobody at Neubrücke needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+   },
+   {
+    "block": "DS-POW-6",
+    "pool": "operation role criminal revenue stream (unclassified)",
+    "text": "A stranger at Neubrücke is told there is money in the town that does not come from the market, and is told no more than that."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "riskLabel: Holding",
+    "text": "Guild Council outweighs everyone who wants the Guild Council at Neubrücke, and the wanting is on the record. The hold is real and it is not comfortable."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "legitimacyHold: public backing hardens the hold",
+    "text": "Public backing at Neubrücke is hardening the Guild Council's grip; what would be a contest elsewhere is an inconvenience here."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "mixed",
+    "text": "Nothing at Neubrücke governs cleanly. The Guild Council is an arrangement between kinds of power, and it decides at the pace of whichever of them is least willing."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "governing body name: a SLOT, never a baked noun",
+    "text": "A stranger who addresses the Guild Council at Neubrücke by any other title is corrected, politely and immediately."
+   },
+   {
+    "block": "DS-POW-7",
+    "pool": "layer DORMANT (no ledger materialized)",
+    "text": "A stranger at Neubrücke cannot work out who is aligned with whom, and the reason is that nobody is."
+   }
+  ]
+ },
+ {
+  "seed": "instr-912-seq-2",
+  "name": "Schwarzhain",
+  "lines": [
+   {
+    "block": "DS-POW-1",
+    "pool": "Approved",
+    "text": "The Guild Council's standing at Schwarzhain is good and is doing work. The margin is what lets it spend goodwill on the decisions the town would otherwise refuse it."
+   },
+   {
+    "block": "DS-POW-1",
+    "pool": "breakdown dominated by PROSPERITY, favourable",
+    "text": "Schwarzhain credits the Guild Council with the good years whether or not the Guild Council earned them; the prosperity is the whole of the argument in its favour."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "stable matched",
+    "text": "A stranger doing business at Schwarzhain needs one name and gets one answer, and can plan a season ahead on the strength of it."
+   },
+   {
+    "block": "DS-POW-2",
+    "pool": "recentConflict present",
+    "text": "Nobody at Schwarzhain needs the trouble explained to them; it is recent enough that the town simply refers to it and moves on."
+   },
+   {
+    "block": "DS-POW-6",
+    "pool": "operation role criminal revenue stream (unclassified)",
+    "text": "There is somebody at Schwarzhain who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "riskLabel: Holding",
+    "text": "The Guild Council at Schwarzhain holds because Guild Council is still the heavier of the two, and the weighing is done again every season."
+   },
+   {
+    "block": "DS-POW-4",
+    "pool": "legitimacyHold: public backing hardens the hold",
+    "text": "There are people at Schwarzhain who would move on the Guild Council and do not, because moving on a ruler the town is behind costs more than the seat is worth."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "mixed",
+    "text": "What holds the Guild Council at Schwarzhain together is that no part of it can rule alone, and that is a stable arrangement exactly until one part can."
+   },
+   {
+    "block": "DS-POW-5",
+    "pool": "governing body name: a SLOT, never a baked noun",
+    "text": "The town at Schwarzhain calls the hall by its proper title in public and something shorter everywhere else, and both usages are precise."
+   },
+   {
+    "block": "DS-POW-7",
+    "pool": "layer DORMANT (no ledger materialized)",
+    "text": "A stranger at Schwarzhain cannot work out who is aligned with whom, and the reason is that nobody is."
+   }
+  ]
+ }
+]

@@ -1,0 +1,21 @@
+{
+ "role": "regrade",
+ "name": "kay",
+ "angle": null,
+ "tag": "regrade-r8",
+ "lines": 114,
+ "firstTs": "2026-09-06T23:52:14.908Z",
+ "lastTs": "2026-09-07T00:00:50.379Z",
+ "tools": {
+  "Bash": 20,
+  "Read": 10
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "in Tigana, and more than 150 focalizations\"\n- #212 Patton (13→9): \"the lapidary fashion in which narratival episodes were laid\"\n- #216 Rettino (14→8): \"it adopts the authority of the club-story teller\"\n\n(A sixth quote over twelve words exists, #991, French, Cabon — not on your list, left untouched.)",
+ "run": "wf_d76e605d-6d1",
+ "agent": "ac4447390b45e5c71",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-ac4447390b45e5c71.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

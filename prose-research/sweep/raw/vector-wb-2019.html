@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>Under Heaven</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Karla:b:latin,latin-ext","Noto+Serif:r,i,b,bi:latin,latin-ext"]}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s0.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active code, .wf-active kbd, .wf-active pre, .wf-active samp{font-family:"Noto Serif",serif}.wf-active body{font-family:"Noto Serif",serif}.wf-active button, .wf-active input, .wf-active select{font-family:"Noto Serif",serif}.wf-active textarea{font-family:"Noto Serif",serif}.wf-active blockquote{font-family:"Noto Serif",serif}.wf-active code, .wf-active kbd, .wf-active pre, .wf-active tt, .wf-active var{font-family:"Noto Serif",serif}.wf-active .button, .wf-active .more-link, .wf-active button:not(.menu-toggle), .wf-active input[type="button"], .wf-active input[type="reset"], .wf-active input[type="submit"], .wf-active .posts-navigation .nav-links a, .wf-active #content #infinite-handle span button{font-family:"Noto Serif",serif}.wf-active input[type="email"], .wf-active input[type="password"], .wf-active input[type="search"], .wf-active input[type="text"], .wf-active input[type="url"], .wf-active textarea{font-family:"Noto Serif",serif}.wf-active .post-navigation{font-family:"Noto Serif",serif}.wf-active .main-navigation{font-family:"Noto Serif",serif}.wf-active .entry-content, .wf-active .entry-summary, .wf-active .page-content{font-family:"Noto Serif",serif}.wf-active .entry-content .subtitle{font-family:"Noto Serif",serif}.wf-active #comments{font-family:"Noto Serif",serif}.wf-active .comment-form label{font-family:"Noto Serif",serif}.wf-active .comment-form span.required{font-family:"Noto Serif",serif}.wf-active .widget_recent_entries span.post-date{font-family:"Noto Serif",serif}.wf-active .site-description{font-family:"Noto Serif",serif}.wf-active .site-posted-on time{font-family:"Noto Serif",serif}.wf-active .page-header:not(.page-header-light) .taxonomy-description{font-family:"Noto Serif",serif}.wf-active .light-text{font-family:"Noto Serif",serif}.wf-active .site-info{font-family:"Noto Serif",serif}.wf-active .sticky-label{font-family:"Noto Serif",serif}.wf-active .post-details, .wf-active .post-details a{font-family:"Noto Serif",serif}.wf-active .page-links{font-family:"Noto Serif",serif}.wf-active .post-edit-link{font-family:"Noto Serif",serif}.wf-active .post-author-card .author-description{font-family:"Noto Serif",serif}.wf-active #tinymce h1, .wf-active #tinymce h2, .wf-active #tinymce h3, .wf-active #tinymce h4, .wf-active #tinymce h5, .wf-active #tinymce h6, .wf-active .comment-content h1, .wf-active .comment-content h2, .wf-active .comment-content h3, .wf-active .comment-content h4, .wf-active .comment-content h5, .wf-active .comment-content h6, .wf-active .entry-content h1, .wf-active .entry-content h2, .wf-active .entry-content h3, .wf-active .entry-content h4, .wf-active .entry-content h5, .wf-active .entry-content h6, .wf-active .entry-summary h1, .wf-active .entry-summary h2, .wf-active .entry-summary h3, .wf-active .entry-summary h4, .wf-active .entry-summary h5, .wf-active .entry-summary h6, .wf-active .widget_text h1, .wf-active .widget_text h2, .wf-active .widget_text h3, .wf-active .widget_text h4, .wf-active .widget_text h5, .wf-active .widget_text h6{font-family:"Karla",sans-serif;font-style:normal;font-weight:700}.wf-active h1{font-style:normal;font-weight:700}.wf-active h2{font-style:normal;font-weight:700}.wf-active h3{font-style:normal;font-weight:700}.wf-active h4{font-style:normal;font-weight:700}.wf-active h5{font-style:normal;font-weight:700}.wf-active h6{font-style:normal;font-weight:700}.wf-active blockquote h1, .wf-active blockquote h2, .wf-active blockquote h3, .wf-active blockquote h4{font-family:"Karla",sans-serif;font-weight:700;font-style:normal}.wf-active div#jp-relatedposts h3.jp-relatedposts-headline em{font-family:"Karla",sans-serif;font-style:normal;font-weight:700}.wf-active .comment-reply-title, .wf-active .comments-title{font-family:"Karla",sans-serif;font-weight:700;font-style:normal}.wf-active .image-post-title{font-family:"Karla",sans-serif;font-weight:700;font-style:normal}.wf-active .page-header:not(.page-header-light) h1{font-style:normal;font-weight:700}.wf-active .entry-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:700}.wf-active #post-cover-image .cover-meta .single-post-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:700}.wf-active #hero-header .site-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:700}.wf-active .site-header .site-title{font-style:normal;font-weight:700}.wf-active .site-header .site-description{font-style:normal;font-weight:700}</style>
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly92ZWN0b3ItYnNmYS5jb20%3D"
+		+ "&wpcomid=253356"
+		+ "&time=1563526891";
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s2.wp.com' />
+<link rel='dns-prefetch' href='//s1.wp.com' />
+<link rel='dns-prefetch' href='//vectoreditors.wordpress.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Feed" href="https://vector-bsfa.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Comments Feed" href="https://vector-bsfa.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title=" &raquo; Under Heaven Comments Feed" href="https://vector-bsfa.com/2010/08/18/under-heaven/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s2.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1556893897h&ver=5.2.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJydUu1uwjAMfKEZb5MA7ce0Z0lb0xrypcQR4u3npnRosOUHUhXZju/OvhTPEfrghbygKxBtGdlnTGSN0AAxZLnLNn3OL/g3zPKJMh5JoulPULOfdva9LYNeawEHzoKdDbWrSyZdMMvF0saxfxBY2Q/FWsgsBDSwsB+vuljnUqIsUDkX+vtqa/A+JNK6i0bmDqcChiw5bWvBXNytqDmcdOumP+eo3dB1MVHOoKfj4kAmFWriRvKUWC/+CR+wCyXG0iH7gSLp4QU0Vz8mSvB+9fsJ4Px+1dCnZPU3WKShmrFQMPogy1Jr0LYjgA5ghIP/lcDBGk4taCIdfdRwrHvc0hn05T7fttuPnX6v++M3iPArcQ==?cssminify=yes' type='text/css' media='all' />
+<style id='independent-publisher-2-style-inline-css' type='text/css'>
+#hero-header { background: url("https://vectoreditors.files.wordpress.com/2017/09/cropped-heading_hardy8.jpg") no-repeat center; background-size: cover; background-attachment: scroll; }
+</style>
+<link rel='stylesheet' id='print-css-1-1' href='https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&cssminify=yes' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9i9EKwjAMRX/IGgfbYA/it2SlayNpUpoMf198EBmKT/dcOAceLUQVT+JQ99B4zyQGGJ1UVuwfOkezE/zWm5qHjZE6WMFOkt/7rzKNhBxYsx7PV+Ql1WRQRsisK/JLuNXrMM2XcV6GZbo/AcVpSbo=?cssminify=yes' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj+EKAiEQhF8oT+Lw6E/0LOZtsqarudpRT59C/eg4ChaWYT9mZuWSBJLxdQaWrs2tQn681+B4J38BIqDNusAQkD6wiVSASmdT5BKAWVvYuIZ4Rg+iMuQGUGkxl7jmQhXJV4vEMoNvUbPoriu14f79CNIdYfmLOShJm6vIwPjsnU/huFfqMKppUqN7ATNIcHo='></script>
+<link rel='stylesheet' id='all-css-0-2' href='https://s0.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1530132353h&cssminify=yes' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vectoreditors.wordpress.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Science Fiction Foundation Masterclass&nbsp;2011' href='https://vector-bsfa.com/2010/08/17/science-fiction-foundation-masterclass-2011/' />
+<link rel='next' title='Short Story Club&nbsp;2' href='https://vector-bsfa.com/2010/08/20/short-story-club-2/' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://vector-bsfa.com/2010/08/18/under-heaven/" />
+<link rel='shortlink' href='https://wp.me/p13Uo-FS' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fvector-bsfa.com%2F2010%2F08%2F18%2Funder-heaven%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fvector-bsfa.com%2F2010%2F08%2F18%2Funder-heaven%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Under Heaven" />
+<meta property="og:url" content="https://vector-bsfa.com/2010/08/18/under-heaven/" />
+<meta property="og:description" content="Casting around for a way to start to convey what Guy Gavriel Kay gets up to in Under Heaven, I found myself thinking of another recent fantasy novel. Jo Walton&#8217;s Lifelode (2009) is a rather d…" />
+<meta property="article:published_time" content="2010-08-18T13:41:06+00:00" />
+<meta property="article:modified_time" content="2010-08-18T13:41:06+00:00" />
+<meta property="og:image" content="http://farm5.static.flickr.com/4101/4903969423_9417362f2d_d.jpg" />
+<meta property="og:image:width" content="158" />
+<meta property="og:image:height" content="220" />
+<meta property="og:image:alt" content="Under Heaven cover" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Under Heaven" />
+<meta name="twitter:card" content="summary" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel='openid.server' href='https://vectoreditors.wordpress.com/?openidserver=1' />
+<link rel='openid.delegate' href='https://vectoreditors.wordpress.com/' />
+<link rel="search" type="application/opensearchdescription+xml" href="https://vector-bsfa.com/osd.xml" title="" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f6f6f6" />
+<link rel="pingback" href="https://vector-bsfa.com/xmlrpc.php">		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="WordPress.com" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://vector-bsfa.com/feed/;icon-uri=https://vectoreditors.files.wordpress.com/2017/08/cropped-vector-placekeeper-3.png?w=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico" /><meta name="description" content="Casting around for a way to start to convey what Guy Gavriel Kay gets up to in Under Heaven, I found myself thinking of another recent fantasy novel. Jo Walton&#039;s Lifelode (2009) is a rather different kind of book, one that does not attract adjectives like “sumptuous” so readily -- it is, for not quite&hellip;" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f6f6f6; }
+</style>
+	<link rel="amphtml" href="https://vector-bsfa.com/2010/08/18/under-heaven/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="https://vectoreditors.files.wordpress.com/2017/08/cropped-vector-placekeeper-3.png?w=32" sizes="32x32" />
+<link rel="icon" href="https://vectoreditors.files.wordpress.com/2017/08/cropped-vector-placekeeper-3.png?w=192" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://vectoreditors.files.wordpress.com/2017/08/cropped-vector-placekeeper-3.png?w=180" />
+<meta name="msapplication-TileImage" content="https://vectoreditors.files.wordpress.com/2017/08/cropped-vector-placekeeper-3.png?w=270" />
+</head>
+
+<body class="post-template-default single single-post postid-2596 single-format-standard custom-background wp-embed-responsive mp6 customizer-styles-applied group-blog has-header-image highlander-enabled highlander-light">
+
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<div id="hero-header" class="site-hero-section">
+		<header id="masthead" class="site-header" role="banner">
+			<div class="inner">
+				<div class="site-branding">
+					
+												<p class="site-title"><a href="https://vector-bsfa.com/" rel="home"></a></p>
+										</div><!-- .site-branding -->
+
+				
+									<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" id="primary-menu-button">
+						Menu					</button><!-- .menu-toggle -->
+				
+			</div><!-- .inner -->
+		</header><!-- #masthead -->
+	</div>
+
+				<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div class="menu-top-level-menu-container"><ul id="primary-menu" class="menu"><li id="menu-item-5607" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-5607"><a href="https://vector-bsfa.com/">About</a></li>
+<li id="menu-item-4915" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-4915"><a href="https://vector-bsfa.com/torque-control/">Blog</a></li>
+<li id="menu-item-7130" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7130"><a href="https://vector-bsfa.com/highlights/">Highlights</a></li>
+<li id="menu-item-4919" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4919"><a href="https://vector-bsfa.com/current-issue/">Magazine</a></li>
+<li id="menu-item-4938" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4938"><a href="https://vector-bsfa.com/submit/">Submit</a></li>
+<li id="menu-item-4907" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-4907"><a href="https://vector-bsfa.com/contact/">Contact</a>
+<ul class="sub-menu">
+	<li id="menu-item-4936" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4936"><a href="https://vector-bsfa.com/masthead/">Masthead</a></li>
+	<li id="menu-item-4937" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4937"><a href="https://vector-bsfa.com/subscribe/">Subscribe</a></li>
+</ul>
+</li>
+</ul></div>		</nav><!-- .main-navigation -->
+	
+	
+	
+	<div id="content-wrapper" class="content-wrapper">
+		<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-2596" class="post-2596 post type-post status-publish format-standard hentry category-books category-fantasy category-review tag-china tag-fantasy tag-guy-gavriel-kay tag-review">
+			<header class="entry-header">
+			<h1 class="entry-title">Under Heaven</h1>		</header><!-- .entry-header -->		<div class="entry-meta">
+			<span class="byline">
+				<a href="https://vector-bsfa.com/author/niallh/" title="Posts by Niall" rel="author">Niall</a>			</span>
+							<span class="cat-links">
+					<a href="https://vector-bsfa.com/category/books/" rel="category tag">Books</a>, <a href="https://vector-bsfa.com/tag/fantasy/" rel="category tag">Fantasy</a>, <a href="https://vector-bsfa.com/tag/review/" rel="category tag">review</a>				</span><!-- .cat-links -->
+			
+			
+			<span class="published-on">
+				<time class="entry-date published updated" datetime="2010-08-18T14:41:06+00:00">August 18, 2010</time>			</span>
+
+					</div><!-- .entry-meta -->
+	
+	<div class="entry-content">
+		<p><img src="https://i0.wp.com/farm5.static.flickr.com/4101/4903969423_9417362f2d_d.jpg" width="158" height="220" alt="Under Heaven cover" align="left" hspace="10" vspace="10">Casting around for a way to start to convey what Guy Gavriel Kay gets up to in <em>Under Heaven</em>, I found myself thinking of another recent fantasy novel. Jo Walton&#8217;s <em>Lifelode</em> (2009) is a rather different kind of book, one that does not attract adjectives like “sumptuous” so readily &#8212; it is, for not quite enough of its length, a beautifully low-key rural-domestic fantasy, set in a world in which time moves faster, and life is more wild, the further East you travel. Perhaps partly in response to this flux, and the effect it has on people as they travel, the characters in Walton&#8217;s novel have a word to describe someone who is being utterly, characteristically, themselves: truly embodying a quality. No such word exists within the world of <em>Under Heaven</em>, and for a reader looking in from outside the reason seems clear: it is unthinkable that any character in Kay’s novel could act in any way other than to be utterly, characteristically, themselves.</p>
+<p>The daunting clarity of Kay&#8217;s vision extends beyond the individual. It&#8217;s probably well-known by now that <em>Under Heaven</em> tells a story inspired by events that took place in China&#8217;s Tang Dynasty &#8212; it&#8217;s certainly not a secret, since a letter to readers at the start of the Roc ARC sets out to justify this choice. And in fact, I’d argue that any solid understanding of the novel must confront and absorb at least the implications of Kay’s approach. (A deep reading would consider the details of the execution as well, but that’s not something I’m competent to attempt.) <em>Under Heaven</em>’s debt to history is heavier than most epic fantasy seeks, and evident in its choice of setting, story and characters, most of which have real counterparts; even if you don’t accept Kay’s <a href="http://www.guardian.co.uk/books/booksblog/2009/aug/20/novelists-real-life-characters">assertion</a> that this is a more <em>moral</em> strategy than straightforward history would be, it’s worth recognising how it shapes the narrative and tone of the novel. Precisely because it is a fantasy novel, and not a historical novel, Kay’s creation can be what you might call a platonic ideal of Tang China: a world of heart-stopping beauty, home to humans capable of astonishing subtlety and cruelty, all described with precision and thoroughness. Or to use Walton’s term, <em>Under Heaven</em> seems raensome.</p>
+<p>This affect &#8212; magic but little mystery &#8212; is familiar from the other Kay novel I&#8217;ve read, <em>The Lions of Al-Rassan</em> (1995), and from what I gather it’s an increasingly prominent feature of his work. But it seems particularly useful here, given the particular history being reworked, in defusing the notion of inscrutability. Characters outside the empire of Kitai &#8212; Kay&#8217;s Tang &#8212; are liable to find its citizens as baffling as Western stereotypes assert in our world, complaining of &#8220;the breeding and courtesy” that Kitai citizens “donned like a cloak&#8221; (29). A courtesan known as Spring Rain, brought to the very heart of Kitai from Western lands, reflects that she could study her masters until she was &#8220;bent like an ox-cart wheel&#8221; without understanding them, &#8220;or how the Celestial Empire dominates the world they know&#8221; (148). And Kay’s superlative-rich style risks beauty fatigue; there are more than a few moments when it seems the extravagance of his vision might be better expressed as one of the poems whose cultural importance he so openly admires.</p>
+<p>But we readers are led into the minds the outsiders cannot know: so we can appreciate how the elaborate dances of the Kitai Court are designed to both channel and restrain human responses, how they perpetuate themselves and how human passions, like water from a dammed river, may find a new course. It is an article of faith within Kitai that it represents &#8220;the most civilized empire the world had ever known&#8221; (79). The intertwined superiority and fear that this attitude breeds snake into every character&#8217;s heart, surfacing in the superstitious caricaturisation of the world beyond Kitai; or in the tendency to philosophise about changes in &#8220;the world&#8221;, as though Kitai were the whole of it. The empire is a weight; a lot of characters spend a lot of time being angry under its burden, or exhausted by the attempt to negotiate the elaborate formalities of their society.</p>
+<p>Our guide in this, the figure to which the novel most consistently returns, is so far as I can tell one of the characters that Kay creates from whole cloth. Shen Tai is the second son of a dead general; a man of deep passions and firm convictions. When we meet him he is embarked on a ritual mourning whose duration and ambition would be absurd if not rendered within Kay&#8217;s stately narrative. He has travelled to the edge of the empire and beyond, to the site of a great battle &#8212; a place whose extraordinary beauty is thrown into relief by the numberless bones that litter it &#8212; to bury the dead of both sides. As the novel opens, two things happen that will draw Tai back East, to the heart of the Empire. The first is that he escapes an assassination attempt for which there is no clear motive. The second is that a princess of Kitai&#8217;s past opponents, ostensibly as a token of her admiration for Tai’s work, gifts him two hundred and fifty quality horses &#8212; &#8220;Heavenly Horses&#8221;, as they are known, bigger and stronger than any Imperial stock &#8212; instantly, and unwelcomely, making him a player in the Emperor&#8217;s court.</p>
+<p>Although the assassination attempt initially provides the more urgent narrative impetus, in the end it&#8217;s the existence of the horses that shapes the story told in <em>Under Heaven</em> as much or more than the actions of any individual characters, providing the new angle on the well-known story. It’s an interesting frame; it keeps some of what might be expected to be big set-piece events off-stage, but I think Kay is less interested in capturing those than he is in describing the feel of a moment of historical possibility. What’s significant about the gift of horses is that it positions Tai as someone able “to play a role in the balance of power towards the end of a long reign” (139). Certainly, Tai himself seems crafted to play this role: his connectedness allows him to slide in and out of the levels of society, while his initial innocence enables him to serve as our guide. It is easy to follow him. But more than that, both Kay&#8217;s letter-to-reader and the text of the novel are at pains to point out that creating a fantasy of history such as this is inherently an act that creates possibility. That is, the novel does successfully open up a space between what was and what might happen: enable a sense that, in contrast to the fatalism on display from some in the Kitai court, lives can and do fork, and that there can be, for better or worse, other worlds.</p>
+<p>At this point I should probably specify that the historical event from which Kay weaves his story, the narrative through which Tai and his horses ghost, is the eighth century An Shi rebellion, in which a powerful governor of humble ancestry attempted to usurp the ruling dynasty, resulting in nearly a decade of strife and the deaths &#8212; as much from famine and disease as anything else &#8212; of several tens of millions of people. To set this out is not a spoiler, not just because Kay acknowledges the inspiration, but because of that possibility space, which refreshes the seeming inevitability of history.</p>
+<p>But the relationship goes deeper. Kay is scrupulous about emphasising that <em>Under Heaven</em> is a story. We are, he writes, pattern-seeking creatures, and this shapes our approach to history: we are liable to abstract it, to simplify it, to <em>use</em> it for our own ends. Put another way, the creation of a possibility space &#8212; the creation of story from history &#8212; creates meaning. The novelistic attention to coincidence becomes an illustration of such: &#8220;Only a patient historian with access to records is likely to discover such links,&#8221; Kay writes; only &#8220;someone shaping a story for palace or marketplace &#8230; would note these conjunctions and judge them worth the telling&#8221; (542). And for all that Kitai is no less concrete than a description of the historical Tang would be, for all that the overlap between the two is not nearly small enough for Kitai to be taken as entirely independent &#8212; for all that <em>Under Heaven</em>’s raensomeness inescapably makes it a novel “about” Tang China in a way that it is not a novel “about” any specific Tang figures &#8212; it is still an abstraction, still a <em>use</em> of history. <em>Under Heaven</em> aims to extract the essence of a time and a place, such that it becomes “universalized in powerful ways”: but it tells you it’s doing it, and argues that if all history is story, there can be no final, specific truth, only degrees and directions of universalization.</p>
+<p>Such an argument requires a carefully controlled narrative, and Kay’s control of his narrative is very good indeed; may be the best thing about the book, in fact. He works diligently not just to create but to maintain the spaces he claims, particularly in <em>Under Heaven</em>’s final third, when it is confirmed that the novel is a threnody for a culture at the height of its power choosing to diminish. As the implied narrator becomes a real narrator, and the focus gradually pulls back from the story’s present, we are reminded that this telling is only one among an endless series of interpretations and reinterpretations. It’s a hugely moving and fascinating gambit: never in the novel is the potency of historiography clearer, never the distinction between story and history more important, never the tension between the transparency of Kay’s created characters and the unattainability of the people who really lived more palpable. It is, in many ways, a tremendous achievement.</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-2596" class="share-facebook sd-button share-icon no-text" href="https://vector-bsfa.com/2010/08/18/under-heaven/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://vector-bsfa.com/2010/08/18/under-heaven/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-2596" class="share-twitter sd-button share-icon no-text" href="https://vector-bsfa.com/2010/08/18/under-heaven/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer" data-shared="" class="share-tumblr sd-button share-icon no-text" href="https://vector-bsfa.com/2010/08/18/under-heaven/?share=tumblr" target="_blank" title="Click to share on Tumblr"><span></span><span class="sharing-screen-reader-text">Click to share on Tumblr (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow noopener noreferrer" data-shared="" class="share-email sd-button share-icon no-text" href="https://vector-bsfa.com/2010/08/18/under-heaven/?share=email" target="_blank" title="Click to email this to a friend"><span></span><span class="sharing-screen-reader-text">Click to email this to a friend (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-253356-2596-5d3186ebd1e16' data-src='//widgets.wp.com/likes/index.html?ver=20190321#blog_id=253356&amp;post_id=2596&amp;origin=vectoreditors.wordpress.com&amp;obj_id=253356-2596-5d3186ebd1e16&amp;domain=vector-bsfa.com' data-name='like-post-frame-253356-2596-5d3186ebd1e16'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>	</div><!-- .entry-content -->
+
+	<div class="entry-footer">
+		<ul class="post-tags light-text"><li>Tagged</li><li><a href="https://vector-bsfa.com/tag/china/" rel="tag">china</a></li><li><a href="https://vector-bsfa.com/tag/fantasy/" rel="tag">Fantasy</a></li><li><a href="https://vector-bsfa.com/tag/guy-gavriel-kay/" rel="tag">guy gavriel kay</a></li><li><a href="https://vector-bsfa.com/tag/review/" rel="tag">review</a></li></ul><!-- .post-tags -->	</div><!-- .entry-footer -->
+
+	<div class="entry-author-wrapper">
+			<div class="entry-author author-avatar-show">
+				<div class="author-avatar">
+					</div><!-- .author-avatar -->
+		
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Niall</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+						<a class="author-link" href="https://vector-bsfa.com/author/niallh/" rel="author">
+				View all posts by Niall			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+		<div class="site-posted-on">
+			<strong>Published</strong>
+			<time class="entry-date published updated" datetime="2010-08-18T14:41:06+00:00">August 18, 2010</time>		</div><!-- .site-posted-on -->
+	</div>
+</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://vector-bsfa.com/2010/08/17/science-fiction-foundation-masterclass-2011/" rel="prev"><span class="meta-nav screen-reader-text">Previous Post</span> Science Fiction Foundation Masterclass&nbsp;2011</a></div><div class="nav-next"><a href="https://vector-bsfa.com/2010/08/20/short-story-club-2/" rel="next"><span class="meta-nav screen-reader-text">Next Post</span> Short Story Club&nbsp;2</a></div></div>
+	</nav>
+			
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			3 thoughts on &ldquo;<span>Under Heaven</span>&rdquo;		</h2><!-- .comments-title -->
+
+		
+		<ol class="comment-list">
+					<li id="comment-77434" class="comment even thread-even depth-1 highlander-comment">
+			<article id="div-comment-77434" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href='http://www.steelypips.org/weblog/' rel='external nofollow' class='url'>Kate Nepveu</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://vector-bsfa.com/2010/08/18/under-heaven/#comment-77434">
+							<time datetime="2010-08-18T16:14:35+00:00">
+								August 18, 2010 at 4:14 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Interesting comment regarding Orientalism. (Here&#8217;s a <a href="http://dhobikikutti.dreamwidth.org/2010/08/01/" rel="nofollow">dissenting view</a>.) I think I am unlikely to read this one because Kay&#8217;s characteristic style seems likely to be an aggravation in this context, and also I may be developing an allergy to his prose style and his treatment of women.</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-77468" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment">
+			<article id="div-comment-77468" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href='http://betweentwobooks.blogspot.com' rel='external nofollow' class='url'>Yagiz [Between Two Books]</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://vector-bsfa.com/2010/08/18/under-heaven/#comment-77468">
+							<time datetime="2010-08-19T00:42:11+00:00">
+								August 19, 2010 at 12:42 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>@Kate &#8211; But the treatment of woman is not his, it&#8217;s the era&#8217;s.</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-77487" class="comment byuser comment-author-niallh bypostauthor even thread-even depth-1 highlander-comment">
+			<article id="div-comment-77487" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+												<b class="fn"><a href='https://vectoreditors.wordpress.com/' rel='external nofollow' class='url'>Niall</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://vector-bsfa.com/2010/08/18/under-heaven/#comment-77487">
+							<time datetime="2010-08-19T07:34:25+00:00">
+								August 19, 2010 at 7:34 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Kate: Unsurprisingly, there are a lot of details I disagree with in that post, even before you get to the value-judgment assertions. (One that irritated me: the tense shifts are not &#8220;bizarre&#8221;, the sections with women viewpoint characters [i.e. not just Li Mei] are in present tense, compared to sections with male viewpoint characters in past tense. A reader might dislike or disagree with the effects this creates, but there&#8217;s nothing bizarre about it.) But as the review suggests, I don&#8217;t think charges of incomprehensibility or mystification really stand up. Exoticisation perhaps a bit more so, but as you say the elevated register is characteristic of Kay&#8217;s work, not something specific to his depiction of Kitai, and even within the book Li Mei&#8217;s journey beyond the borders makes that clear.</p>
+<p>I do think there&#8217;s an essay to be written exploring the moral side of Kay&#8217;s approach to fiction in the context of cultures, as opposed to &#8212; as he tends to emphasise when he talks about it &#8212; individual people. But I don&#8217;t think I&#8217;m the person to write it.</p>
+<p>Yagiz: Well, yes and no; this strikes me as another essay topic. I think Kay is reasonably successful at depicting the types of women he chooses to depict. At the same time, he depicts a quite limited range of women (and sexuality). Saying he&#8217;s focusing only on a particular stratum of society from which women are largely excluded at this time in this place only gets you so far; there are a couple of lower-class male characters, even if they only appear for a chapter or two, for which there are no female counterparts.</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2010/08/18/under-heaven/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://vector-bsfa.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="6fbb3bd144" /><input type="hidden" name="_wp_http_referer" value="/2010/08/18/under-heaven/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" class="nascar-signin-link"
+                   title="Login via Guest">
+									</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" class="nascar-signin-link"
+                   title="Login via WordPress.com">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></g></svg>				</a>
+			</li>
+			<li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" class="nascar-signin-link"
+                   title="Login via Twitter">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"/></g></svg>				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" class="nascar-signin-link"
+                   title="Login via Facebook">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"/></g></svg>				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+						<p class="comment-form-posting-as pa-wordpress">
+			<strong></strong>
+			You are commenting using your WordPress.com account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Google photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+						<p class="comment-form-posting-as pa-googleplus">
+			<strong></strong>
+			You are commenting using your Google account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" x="0px" y="0px" viewBox="0 0 60 60" ><path fill="#519bf7" d="M56.3,30c0,-1.6 -0.2,-3.4 -0.6,-5h-3.1H42.2H30v10.6h14.8C44,39.3 42,42 39.1,43.9l8.8,6.8C53,46 56.3,39 56.3,30z" /><path fill="#3db366" d="M30,57.5c6.7,0 13.1,-2.4 17.9,-6.8l-8.8,-6.8c-2.5,1.6 -5.6,2.4 -9.1,2.4c-7.2,0 -13.3,-4.7 -15.4,-11.2l-9.3,7.1C9.8,51.3 19.1,57.5 30,57.5z" /><path fill="#fdc600" d="M5.3,42.2l9.3,-7.1c-0.5,-1.6 -0.8,-3.3 -0.8,-5.1s0.3,-3.5 0.8,-5.1l-9.3,-7.1C3.5,21.5 2.5,25.6 2.5,30S3.5,38.5 5.3,42.2z" /><path fill="#f15b44" d="M40.1,17.4l8,-8C43.3,5.1 37,2.5 30,2.5C19.1,2.5 9.8,8.7 5.3,17.8l9.3,7.1c2.1,-6.5 8.2,-11.1 15.4,-11.1C33.9,13.7 37.4,15.1 40.1,17.4z" /></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+						<p class="comment-form-posting-as pa-twitter">
+			<strong></strong>
+			You are commenting using your Twitter account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"/></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+						<p class="comment-form-posting-as pa-facebook">
+			<strong></strong>
+			You are commenting using your Facebook account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" ><rect x="0" fill="none" width="24" height="24"/><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"/></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p><p class="post-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog"  style="display: inline;">Notify me of new posts via email.</label></p></div>
+
+<style type="text/css">
+#respond .comment-form-avatar { display: none !important; }
+#respond .comment-form-fields { margin-left: 0 !important; }
+#respond .comment-form-cookies-consent { margin-left: 0 !important; }
+</style>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='2596' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b651286a66" /></p>
+<input type="hidden" name="genseq" value="1563526891" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="107"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+		</div><!-- #content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+						<div class="site-info">
+				<a href="https://wordpress.com/?ref=footer_custom_svg" title="Create a website or blog at WordPress.com"><svg style="fill: currentColor; position: relative; top: 1px;" width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="title" role="img">
+				<desc id="title">Create a website or blog at WordPress.com</desc>
+				<path d="M12.5225848,4.97949746 C13.0138466,5.87586309 13.2934037,6.90452431 13.2934037,7.99874074 C13.2934037,10.3205803 12.0351007,12.3476807 10.1640538,13.4385638 L12.0862862,7.88081544 C12.4453251,6.98296834 12.5648813,6.26504621 12.5648813,5.62667922 C12.5648813,5.39497674 12.549622,5.17994084 12.5225848,4.97949746 L12.5225848,4.97949746 Z M7.86730089,5.04801561 C8.24619178,5.02808979 8.58760099,4.98823815 8.58760099,4.98823815 C8.9267139,4.94809022 8.88671369,4.44972248 8.54745263,4.46957423 C8.54745263,4.46957423 7.52803983,4.54957381 6.86996227,4.54957381 C6.25158863,4.54957381 5.21247202,4.46957423 5.21247202,4.46957423 C4.87306282,4.44972248 4.83328483,4.96816418 5.17254589,4.98823815 C5.17254589,4.98823815 5.49358462,5.02808979 5.83269753,5.04801561 L6.81314716,7.73459399 L5.43565839,11.8651647 L3.14394256,5.04801561 C3.52312975,5.02808979 3.86416859,4.98823815 3.86416859,4.98823815 C4.20305928,4.94809022 4.16305906,4.44972248 3.82394616,4.46957423 C3.82394616,4.46957423 2.80475558,4.54957381 2.14660395,4.54957381 C2.02852925,4.54957381 1.88934333,4.54668493 1.74156477,4.54194422 C2.86690406,2.83350881 4.80113651,1.70529256 6.99996296,1.70529256 C8.638342,1.70529256 10.1302017,2.33173369 11.2498373,3.35765419 C11.222726,3.35602457 11.1962815,3.35261718 11.1683554,3.35261718 C10.5501299,3.35261718 10.1114609,3.89113285 10.1114609,4.46957423 C10.1114609,4.98823815 10.4107217,5.42705065 10.7296864,5.94564049 C10.969021,6.36482346 11.248578,6.90326506 11.248578,7.68133501 C11.248578,8.21992476 11.0413918,8.84503256 10.7696866,9.71584277 L10.1417574,11.8132391 L7.86730089,5.04801561 Z M6.99996296,14.2927074 C6.38218192,14.2927074 5.78595654,14.2021153 5.22195356,14.0362644 L7.11048207,8.54925635 L9.04486267,13.8491542 C9.05760348,13.8802652 9.07323319,13.9089317 9.08989995,13.9358945 C8.43574834,14.1661896 7.73285573,14.2927074 6.99996296,14.2927074 L6.99996296,14.2927074 Z M0.706448182,7.99874074 C0.706448182,7.08630113 0.902152921,6.22015756 1.25141403,5.43749503 L4.25357806,13.6627848 C2.15393732,12.6427902 0.706448182,10.4898387 0.706448182,7.99874074 L0.706448182,7.99874074 Z M6.99996296,0.999 C3.14016476,0.999 0,4.13905746 0,7.99874074 C0,11.8585722 3.14016476,14.999 6.99996296,14.999 C10.8596871,14.999 14,11.8585722 14,7.99874074 C14,4.13905746 10.8596871,0.999 6.99996296,0.999 L6.99996296,0.999 Z" id="wordpress-logo-simplified-cmyk" stroke="none" fill=“currentColor” fill-rule="evenodd"></path>
+			</svg></a>
+				
+							</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #content-wrapper -->
+</div><!-- #page -->
+
+<!--  -->
+	<div style="display:none">
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/vectoreditors.wordpress.com\/public.api\/connect\/?action=request&domain=vector-bsfa.com","logoutURL":"https:\/\/vectoreditors.wordpress.com\/wp-login.php?action=logout&_wpnonce=a0d3db9fc3","homeURL":"https:\/\/vector-bsfa.com\/","postID":"2596","gravDefault":"mystery","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1551752381j'></script>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/vector-bsfa.com\/2010\/08\/18\/under-heaven\/":2596};
+	</script>
+					<div id="sharing_email" style="display: none;">
+		<form action="/2010/08/18/under-heaven/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input type="email" name="target_email" id="target_email" value="" />
+
+			
+				<label for="source_name">Your Name</label>
+				<input type="text" name="source_name" id="source_name" value="" />
+
+				<label for="source_email">Your Email Address</label>
+				<input type="email" name="source_email" id="source_email" value="" />
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off" title="This field is for validation and should not be changed" />
+			
+			<div
+				class="g-recaptcha"
+				data-sitekey="6LcmyE0UAAAAALID28yVNg7pFCodGaArJzHitez_"
+				data-theme="light"
+				data-type="image"
+				data-tabindex="0"></div>
+			<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en" async></script>
+			
+			<img style="float: right; display: none" class="loading" src="https://s2.wp.com/wp-content/mu-plugins/post-flair/sharing/images/loading.gif" alt="loading" width="16" height="16" />
+			<input type="submit" value="Send Email" class="sharing_send" />
+			<a rel="nofollow" href="#cancel" class="sharing_cancel" role="button">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"253356","siteName":"vector-bsfa.com","siteURL":"https:\/\/vector-bsfa.com","icon":"<img alt='' src='https:\/\/vectoreditors.files.wordpress.com\/2017\/08\/cropped-vector-placekeeper-3.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/independent-publisher-2","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fvector-bsfa.com%2F2010%2F08%2F18%2Funder-heaven%2F&signup_flow=account&domain=vector-bsfa.com","themeURL":"https:\/\/wordpress.com\/theme\/independent-publisher-2\/","xhrURL":"https:\/\/vector-bsfa.com\/wp-admin\/admin-ajax.php","nonce":"64f5f9917e","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"e5a7617d01\" \/>","referer":"https:\/\/vector-bsfa.com\/2010\/08\/18\/under-heaven\/","canFollow":"1","feedID":"73384809","statusMessage":"","customizeLink":"https:\/\/vectoreditors.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fvectoreditors.wordpress.com%2F2010%2F08%2F18%2Funder-heaven%2F","postID":"2596","shortlink":"https:\/\/wp.me\/p13Uo-FS","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/vector-bsfa.com\/2596","statsLink":"https:\/\/wordpress.com\/stats\/post\/2596\/vector-bsfa.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Independent Publisher 2","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 6,292 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fvector-bsfa.com%2F2010%2F08%2F18%2Funder-heaven%2F&signup_flow=account&domain=vector-bsfa.com\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJydUMtOxDAM/CG8gYVK9ID4FJRN3NZt4mTtpMvnkx5YIRAV7MXPmbE85pLBJS7IxcxqPK7kML8fZr0zX1axQg51JFYTaEE154oVJ8s+oHwHlwljg+R6MsQeM7bABVofSCcUOG6n2K402kKJb+P/srpNTBfKEIgXGJKrCgP9sOAPQsTOqBPKBS7ZpbjjovWRGE5WTLRaUFoFaUUR8u3IdfZPhSLWLbpHcpvhG+la7aEX0ogFHg/35m17bkiy91ROWmAIlsToZIV4/MyN9BpfHrruqe/75+44fwBDVOvh'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-tumblr', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20190321#ver=20190321' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script src="//stats.wp.com/w.js?60" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'253356','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'253356','v':'wpcom','tz':'0','user_id':'0','post':'2596','subd':'vectoreditors'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGNrd29+Smw0TDhnZmRTK0hlRi9QSGh6bi9GXVhBJWIlZlR5U1JMLU8/MkNtblkvY1dldi1Cdz1FW1N6S0NteFFsTTZdcCVqdmgvLFhfenh5LDhvTmx3RWZoQ29YRjVJWm89LW42X3ZoTjVPWElVN2FQbUYsel9lY1BENyZsdlo4JVJyNEtHYXFQN2h0bjRkOG5sb0cyS213bjguOHxOaG9nTVRDbEFlSTRsOWpIaFpzT256UU5JZ19BMkwrXzlXUnwsWWRVeFBNajZleWZFTUpPdndFZVpSa19kaix2MHlJPytzUVJheEJwQ0FVY095SFldXyVxZTNFZWh1UlFmS2VMQWlTazBabWJ6YWR1blM4bkkvYWM0SQ=='}]);
+_stq.push([ 'clickTrackerInit', '253356', '2596' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+</html>

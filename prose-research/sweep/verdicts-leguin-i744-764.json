@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 11,
+ "claims": [
+  {
+   "index": 744,
+   "feature": "place and institution description",
+   "claim": "Hubble notes that the field notes are held by the envoy, giving the document a stated chain of custody.",
+   "source": "Nick Hubble, The BSFA Review, 2020",
+   "url": "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+   "quote": "These notes are in the possession of Genly Ai",
+   "page": "paragraph after the block quote"
+  },
+  {
+   "index": 745,
+   "feature": "place and institution description",
+   "claim": "The Back of the Book runs to about a fifth of the pages of Always Coming Home and presents cultural lore.",
+   "source": "Wikipedia relaying Le Guin, Always Coming Home (1985)",
+   "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+   "quote": "about a fifth of the number of pages, presents cultural lore",
+   "page": "section 'Summary'"
+  },
+  {
+   "index": 746,
+   "feature": "civic record register",
+   "claim": "The Back of the Book is described as carrying the attributions or annotations an ethnographic fieldworker would make.",
+   "source": "Wikipedia relaying Le Guin, Always Coming Home (1985)",
+   "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+   "quote": "attributions or annotations that an ethnographic fieldworker might make",
+   "page": "section 'Summary'"
+  },
+  {
+   "index": 747,
+   "feature": "place and institution description",
+   "claim": "Each attributed Kesh text carries a provenance line naming the teller, her town and the recipient.",
+   "source": "Le Guin, Always Coming Home (1985), item headings relayed by Wikipedia",
+   "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+   "quote": "As told by Little Bear Woman of Sinshan to the Editor",
+   "page": "section 'Summary', list of texts attributed to Little Bear Woman"
+  },
+  {
+   "index": 748,
+   "feature": "place and institution description",
+   "claim": "A map inside Always Coming Home is captioned with the person who gave it to the Editor.",
+   "source": "Le Guin, Always Coming Home (1985), item heading relayed by Wikipedia",
+   "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+   "quote": "given to the Editor by Little Bear Woman of Sinshan",
+   "page": "section 'Summary'"
+  },
+  {
+   "index": 749,
+   "feature": "plainness and economy",
+   "claim": "Pandora states the Kesh population as a seven-word sentence containing no number.",
+   "source": "Le Guin, Always Coming Home (1985), quoted by Wikipedia with a citation",
+   "url": "https://en.wikipedia.org/wiki/Always_Coming_Home",
+   "quote": "There are not too many of them",
+   "page": "section 'Setting'"
+  },
+  {
+   "index": 753,
+   "feature": "civic record register",
+   "claim": "A student reader observes that the field-notes chapter could have been written as straightforward declarative sentences but is not.",
+   "source": "Tori Koontz, comment on Michael Newbury's Science Fiction course blog, Middlebury College, 2019",
+   "url": "https://sites.middlebury.edu/sciencefiction2017/2019/10/09/le-guin/",
+   "quote": "which could just as easily be written in straight-forward, declarative sentences",
+   "page": "comment of 9 October 2019"
+  },
+  {
+   "index": 754,
+   "feature": "place and institution description",
+   "claim": "A student reader describes the field-notes chapter as proceeding outward from the individual to the interpersonal to the social.",
+   "source": "Cole Easton, comment on Michael Newbury's Science Fiction course blog, Middlebury College, 2019",
+   "url": "https://sites.middlebury.edu/sciencefiction2017/2019/10/09/le-guin/",
+   "quote": "from the individual level, to the pairing level/interpersonal level, to the social",
+   "page": "comment of 9 October 2019"
+  },
+  {
+   "index": 755,
+   "feature": "place and institution description",
+   "claim": "Kathy Weissman lists the topics of the Earthsea appendix as history, language, royal dynasties and dragons.",
+   "source": "Kathy Weissman, review of Tales from Earthsea, Bookreporter.com, 2001",
+   "url": "https://www.bookreporter.com/reviews/tales-from-earthsea-the-earthsea-cycle-book-5",
+   "quote": "covers topics such as history, language, royal dynasties, and dragons",
+   "page": "penultimate paragraph"
+  },
+  {
+   "index": 757,
+   "feature": "civic record register",
+   "claim": "Le Guin describes 'The Matter of Seggri' as a compendium of reports on the society of one world.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "is a compendium of reports on the society of a world",
+   "page": "paragraph on 'The Matter of Seggri'"
+  },
+  {
+   "index": 758,
+   "feature": "place and institution description",
+   "claim": "Le Guin places the Seggri documents in the archives of the Historians of Hain.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "These documents are from the archives of the Historians of Hain",
+   "page": "paragraph on 'The Matter of Seggri'"
+  },
+  {
+   "index": 760,
+   "feature": "point of view and distance",
+   "claim": "Le Guin identifies the first voice of The Left Hand of Darkness as a Mobile of the Ekumen making a report.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "the first voice is that of a Mobile of the Ekumen",
+   "page": "paragraph on The Left Hand of Darkness"
+  },
+  {
+   "index": 761,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin defines the Ekumen in six words as a non-directive, information-gathering consortium of worlds.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "a non-directive, information-gathering consortium of worlds",
+   "page": "paragraph on the League of Worlds"
+  },
+  {
+   "index": 762,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin's Hainish historians are described as knowing that events keep happening and will happen again.",
+   "source": "Ursula K. Le Guin, Foreword to The Birthday of the World (2001)",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "quote": "know that it keeps happening and will happen again",
+   "page": "second paragraph"
+  },
+  {
+   "index": 764,
+   "feature": "place and institution description",
+   "claim": "The introduction to 'Unchosen Love' is signed with an address chain running from farmhold through village and watershed to the planet.",
+   "source": "Ursula K. Le Guin, 'Unchosen Love' introduction, excerpted on the author's official site",
+   "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+   "quote": "of Inanan Farmhold of Tag Village on the Southwest Watershed",
+   "page": "'Unchosen Love', Introduction byline"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These notes are in the possession of Genly Ai",
+   "note": "vector-bsfa.com fetched live (HTTP 200, browser UA). Byline reads 'Reviewed by Nick Hubble', BSFA Review, 24 Dec 2020. Quote is verbatim in the paragraph immediately after the block quote, which also names the notes as those of Ong Tot Oppong and calls Genly Ai an ambassador from the Ekumen (page word is 'ambassador', not 'envoy'); the custody statement is explicit on the page."
+  },
+  {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "about a fifth of the number of pages, presents cultural lore",
+   "note": "en.wikipedia.org/wiki/Always_Coming_Home fetched live. Quote verbatim in the 'Summary' section, in the sentence beginning with the title of 'The Back of the Book'. Both limbs (proportion of pages, cultural lore) are on the page."
+  },
+  {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attributions or annotations that an ethnographic fieldworker might make",
+   "note": "Same 'Summary' sentence as index 745, continuing 'with the format and ...'. Verbatim; the ethnographic-fieldworker limb is stated, not inferred."
+  },
+  {
+   "index": 747,
+   "verdict": "PARTIAL",
+   "trueWording": "As told by Little Bear Woman of Sinshan to the Editor",
+   "note": "Quote is verbatim in the 'Summary' list of items Pandora attributes to Little Bear Woman, but it is the only entry of the five with the full provenance line. The three poems are credited only 'By Little Bear Woman' with a page number and no town and no recipient; the map entry names the giver and the Editor but not a teller. The universal 'Each attributed Kesh text' is therefore not supported.",
+   "unsupportedLimb": "that EVERY attributed Kesh text carries teller + town + recipient"
+  },
+  {
+   "index": 748,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "given to the Editor by Little Bear Woman of Sinshan",
+   "note": "Verbatim in the 'Summary' list entry for the Kesh map of the watershed of Sinshan Creek. The caption-names-the-giver limb is explicit."
+  },
+  {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are not too many of them",
+   "note": "Verbatim on the page in the setting discussion of Kesh population size, introduced as Pandora observing the key difference from the reader's society, with a footnote citation. Counted: seven words, no numeral."
+  },
+  {
+   "index": 753,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "could just as easily be written in straight-forward, declarative sentences",
+   "note": "sites.middlebury.edu fetched live. Quote sits inside the comment signed 'Tori Koontz October 9, 2019 at 11:42 pm' (verified by segmenting the seven comments); the same comment names the chapter as structured in the form of field notes and continues 'Instead we see ... a slew of narrative devices', which carries the 'but is not' limb. The post is Michael Newbury's Science Fiction course blog and Koontz's comment refers to class the next day, supporting 'student reader'."
+  },
+  {
+   "index": 754,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "individual level, to the pairing level/interpersonal level, to the social",
+   "note": "Quote is verbatim and sits inside the comment signed 'Cole Easton October 9, 2019 at 10:13 pm' (verified by comment segmentation), which opens on 'The Question of Sex', the field-notes chapter. The page continues '... to the social level, to the history-shaping level'; the claim's three named levels are all present, it simply stops short of the fourth."
+  },
+  {
+   "index": 755,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "covers topics such as history, language, royal dynasties, and dragons",
+   "note": "bookreporter.com fetched live. Quote verbatim in the paragraph naming the appendix 'A Description of Earthsea'; page is signed 'Reviewed by Kathy Weissman on May 4, 2001'. All four topics are the page's own list."
+  },
+  {
+   "index": 757,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is a compendium of reports on the society of a world",
+   "note": "ursulakleguin.com foreword page fetched live with a browser user agent (HTTP 200, 124KB) despite the site's robots.txt bar on named agents. Quote verbatim in the paragraph on 'The Matter of Seggri', which continues 'called Seggri written by various observers over a period of many years'."
+  },
+  {
+   "index": 758,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These documents are from the archives of the Historians of Hain",
+   "note": "Verbatim, the sentence immediately following the index-757 sentence in the same 'Matter of Seggri' paragraph."
+  },
+  {
+   "index": 760,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first voice is that of a Mobile of the Ekumen",
+   "note": "Verbatim in the paragraph on the 1969 novel The Left Hand of Darkness, which continues 'a traveller, making a report back to the Stabiles, who stay put on Hain' and then names Genly Ai. The report limb is on the page."
+  },
+  {
+   "index": 761,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a non-directive, information-gathering consortium of worlds",
+   "note": "Verbatim in the paragraph that starts from the League of Worlds of the first three sf novels and says it morphs into the Ekumen. The definition is six words as claimed, counting each hyphenated compound as one."
+  },
+  {
+   "index": 762,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "know that it keeps happening and will happen again",
+   "note": "Verbatim in the paragraph about asking the Hainish, whose historians know a lot of what happened; the page then likens them to Ecclesiastes. Locator note: this falls a paragraph or two later than the claim's 'second paragraph', but the wording is exact and the Hainish-historians limb is explicit."
+  },
+  {
+   "index": 764,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "of Inanan Farmhold of Tag Village on the Southwest Watershed",
+   "note": "ursulakleguin.com excerpt page fetched live with a browser user agent (HTTP 200, 132KB). Quote verbatim in the byline under the heading 'Unchosen Love / Introduction', signed 'By Heokad'd Arhe of ...' and running on '... of the Budran River on Okets on the Planet O.', so the chain from farmhold to planet is complete on the page."
+  }
+ ]
+}

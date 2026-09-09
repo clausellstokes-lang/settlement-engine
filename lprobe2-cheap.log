@@ -1,0 +1,19 @@
+=== 899-control @ 38474a59e (laneLPROBEBASE) start 21:19:20
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:19:46
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+=== 900-desk @ 04bb92d19 (laneDESKTIP) start 21:19:46
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:20:15
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+=== 901-lightdark @ b0cbc67a1 (laneLIGHTINT) start 21:20:15
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:20:44
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+=== 902-osr18 @ fd36f0298 (laneOSR18) start 21:20:44
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:21:14
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+=== 903-litdefault @ dd5f13218 (laneLDEFAULT) start 21:21:14
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:21:42
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+=== 904-tip @ 6582958ce (laneLUIMAT) start 21:21:42
+    TRUE_EXIT=0 porcelain_before=0 porcelain_after=0 end 21:22:11
+TRUE_EXIT_eager_stop=0 TRUE_EXIT_c_presence=0 TRUE_EXIT_d_census=0 TRUE_EXIT_e_rosters=0 TRUE_EXIT_f_birth=0 TRUE_EXIT_g_pulse=0 
+ALL_DONE 21:22:11

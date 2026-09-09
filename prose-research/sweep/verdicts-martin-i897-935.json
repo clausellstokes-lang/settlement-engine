@@ -1,0 +1,233 @@
+{
+ "name": "martin",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 897,
+   "feature": "other: mosaic structure",
+   "claim": "Martin describes the Wild Cards non-mosaic volumes as stories threaded by an interstitial narrative he calls beads on a string.",
+   "source": "George R.R. Martin, interview reprinted at WildCardsWorld from SFFWorld",
+   "url": "https://www.wildcardsworld.com/intervew/interview-with-george-r-r-martin-from-sff-world/",
+   "quote": "which we sometimes call the beads on a string",
+   "page": "answer on the mosaic form"
+  },
+  {
+   "index": 902,
+   "feature": "cadence and rhythm",
+   "claim": "Publishers Weekly reports that the book's dramatic or salacious passages last only a few pages before returning to brisk summary.",
+   "source": "Publishers Weekly, review of Fire & Blood",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "they only last a few pages before a return to brisk summary",
+   "page": "review body"
+  },
+  {
+   "index": 904,
+   "feature": "register modulation",
+   "claim": "Chris Lough describes Fire & Blood as written in a dry, staid, objective tone unlike the Song of Ice and Fire novels.",
+   "source": "Chris Lough, review of Fire & Blood, Tor.com",
+   "url": "https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/",
+   "quote": "featuring a dry, staid, objective tone",
+   "page": "review body"
+  },
+  {
+   "index": 914,
+   "feature": "register modulation",
+   "claim": "Martin insists Fire & Blood is not a novel but essentially a popular history, an entirely different literary form.",
+   "source": "George R.R. Martin, PW interview 'Imaginary History'",
+   "url": "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+   "quote": "what’s essentially a popular history",
+   "page": "first answer"
+  },
+  {
+   "index": 920,
+   "feature": "other: research method",
+   "claim": "BookPage reports that Elio Garcia and Linda Antonsson read 10,000 pages of the novels to extract every reference to history, myth and legend.",
+   "source": "BookPage, 'George R.R. Martin: History is written in blood'",
+   "url": "https://www.bookpage.com/interviews/17465-george-r-r-martin-fiction/",
+   "quote": "they pored over 10,000 pages of novels",
+   "page": "feature body"
+  },
+  {
+   "index": 923,
+   "feature": "stylometry",
+   "claim": "The same reading reports a lexical density score between 4 and 4.5 for A Game of Thrones.",
+   "source": "A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "A Game of Thrones has a score between 4 and 4.5",
+   "page": "section on lexical density and readability"
+  },
+  {
+   "index": 924,
+   "feature": "stylometry",
+   "claim": "The same reading gives A Game of Thrones an Automated Readability Index score of sixth grade.",
+   "source": "A.R. Rivera, 'A Brief Linguistic Exam of A Song Of Ice And Fire'",
+   "url": "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+   "quote": "The ARI score for A Game of Thrones is sixth-grade",
+   "page": "section on lexical density and readability"
+  },
+  {
+   "index": 926,
+   "feature": "stylometry",
+   "claim": "A conference abstract announces a corpus of the first four ASOIAF novels rendered searchable in full for stylistic analysis.",
+   "source": "Matthew Voice (University of Sheffield), abstract 'Writing Westeros: a Corpus Linguistic Study', Nine Worlds Academia",
+   "url": "https://nineworldsacademia.wordpress.com/2014/08/15/writing-westeros-a-corpus-linguistic-study-of-a-song-of-ice-and-fire/",
+   "quote": "the first four books of ASOIAF are rendered searchable in their entirety",
+   "page": "abstract"
+  },
+  {
+   "index": 927,
+   "feature": "opening sentence",
+   "claim": "Graham Oliver counts roughly twenty main characters and one source of tension introduced within the first five chapters of A Game of Thrones.",
+   "source": "Graham Oliver, 'How to Write Like George R. R. Martin', Fiction Advocate",
+   "url": "https://www.fictionadvocate.com/2015/01/28/how-to-write-like-george-r-r-martin/",
+   "quote": "a source of tension (Others) and 20 or so main characters",
+   "page": "section 1, 'Keep it simple. Then build.'"
+  },
+  {
+   "index": 928,
+   "feature": "omission as information",
+   "claim": "The same critic argues Martin pairs exposition with dramatic incident so that background arrives without stalling the reader.",
+   "source": "Graham Oliver, 'How to Write Like George R. R. Martin', Fiction Advocate",
+   "url": "https://www.fictionadvocate.com/2015/01/28/how-to-write-like-george-r-r-martin/",
+   "quote": "By pairing the exposition with the dramatic, you reduce the chances",
+   "page": "section 1"
+  },
+  {
+   "index": 930,
+   "feature": "adjective and adverb discipline",
+   "claim": "Prosecraft's automated scan of A Knight of the Seven Kingdoms measures ly-adverbs at 0.46% of the text, which it places in the 3rd percentile of its library.",
+   "source": "Prosecraft (Shaxpir), book page for A Knight of the Seven Kingdoms, captured 2018",
+   "url": "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+   "quote": "0.46%",
+   "page": "book-info-metrics table"
+  },
+  {
+   "index": 931,
+   "feature": "adjective and adverb discipline",
+   "claim": "Prosecraft measures all adverbs in A Knight of the Seven Kingdoms at 2.26% of the text, which it places in the 9th percentile of its library.",
+   "source": "Prosecraft (Shaxpir), book page for A Knight of the Seven Kingdoms, captured 2018",
+   "url": "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+   "quote": "2.26%",
+   "page": "book-info-metrics table"
+  },
+  {
+   "index": 932,
+   "feature": "adjective and adverb discipline",
+   "claim": "Prosecraft measures non-ly adverbs in A Knight of the Seven Kingdoms at 1.80% of the text, which it places in the 34th percentile of its library, far higher than the same book's 3rd-percentile ly-adverb rank.",
+   "source": "Prosecraft (Shaxpir), book page for A Knight of the Seven Kingdoms, captured 2018",
+   "url": "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+   "quote": "1.80%",
+   "page": "book-info-metrics table"
+  },
+  {
+   "index": 934,
+   "feature": "other: passive voice",
+   "claim": "Prosecraft measures passive voice in A Knight of the Seven Kingdoms at 7.74% of the text, the 43rd percentile of its library.",
+   "source": "Prosecraft (Shaxpir), book page for A Knight of the Seven Kingdoms, captured 2018",
+   "url": "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+   "quote": "7.74%",
+   "page": "book-info-metrics table"
+  },
+  {
+   "index": 935,
+   "feature": "stylometry",
+   "claim": "Prosecraft states that its vividness model was trained by analysing hundreds of millions of words from thousands of different authors.",
+   "source": "Prosecraft (Shaxpir), book page for A Knight of the Seven Kingdoms, captured 2018",
+   "url": "http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/",
+   "quote": "analyzed hundreds of millions of words, from thousands of different authors",
+   "page": "clippings description"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 897,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beads on a string: stories plus interlinking interstitial narrative",
+   "note": "Live fetch, 200. Page verbatim: 'So we begin with two books of stories with an interlinking interstitial narrative, which we sometimes call the beads on a string. Where each story is a bead and the interstitial is the string that ties them all together. There are two volumes of that, with the third being the true mosaic novel.' Speaker is Martin in the SFFWorld interview reprinted at WildCardsWorld; the two non-mosaic volumes of the triad are exactly what he is describing. Every limb supported."
+  },
+  {
+   "index": 902,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dramatic/salacious sections last a few pages, then brisk summary",
+   "note": "Live fetch, 200. PW review of Fire & Blood (Bantam, ISBN 978-1-5247-9628-0, reviewed 11/19/2018) reads verbatim: 'Brief sections are dramatic (“the golden dragon devoured the queen in six bites”) or salacious (“it aroused the princess to watch the men disporting with one another”), and there are entertaining snatches of dialogue and detailed depictions of battles, but they only last a few pages before a return to brisk summary.' Quote exact; publication and book both correct."
+  },
+  {
+   "index": 904,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Different prose style from the novels; dry, staid, objective tone",
+   "note": "Live tor.com returned HTTP 403; recovered via Wayback raw capture https://web.archive.org/web/20200116004102id_/https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/ (raw HTML, not a summarizer). Byline 'Chris Lough', Wed Nov 21 2018. Verbatim: 'Fire & Blood is also written in a different style of prose than the primary Song of Ice and Fire novels; featuring a dry, staid, objective tone...'. Both limbs (the tone, and the contrast with the ASOIAF novels) supported."
+  },
+  {
+   "index": 914,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not a novel; an entirely different form from popular history",
+   "note": "Live fetch, 200. 'Imaginary History: PW Talks With George R.R. Martin', by Lenny Picker, Jul 16 2018. Martin verbatim: 'The important thing, as I keep stressing, is that it’s not a novel... they’re getting the latest Ice and Fire novel, which is an entirely different literary form than what’s essentially a popular history.' Quote exact. Note the page phrases the contrast the other way round (the novel is the different form from the popular history), but the claim's substance — F&B is not a novel, it is essentially a popular history, a different literary form — is fully carried."
+  },
+  {
+   "index": 920,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Co-writers pored over 10,000 pages, pulling out all such references",
+   "note": "Live fetch, 200. BookPage, 'George R.R. Martin: History is written in blood', interview by Cat Acree, December 2014. Verbatim: 'Elio M. García and Linda Antonsson, founders of the fan site Westeros.org... As co-writers, they pored over 10,000 pages of novels, pulling out all references to history, myths and legends.' Every limb supported; the book is The World of Ice and Fire."
+  },
+  {
+   "index": 923,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A Game of Thrones scores between 4 and 4.5, quite low",
+   "note": "Live fetch, 200. A.R. Rivera, 'A Brief Linguistic Exam of ‘A Song Of Ice And Fire’', 09/10/2023. Verbatim in the lexical-density paragraph: 'A Game of Thrones has a score between 4 and 4.5, which is quite low, compared to the first Harry Potter book...'. The preceding sentence establishes the metric is lexical density, so the claim's 'lexical density score' limb is supported."
+  },
+  {
+   "index": 924,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ARI score for A Game of Thrones is sixth-grade, 11-12 years old",
+   "note": "Live fetch, 200. Same Rivera post. Verbatim: 'The readability factor is determined by the Automated Readability Index (ARI)... The ARI score for A Game of Thrones is sixth-grade, or 11-12 years old (medium.com).' The page itself sources the figure to medium.com, but the claim only asserts that this reading gives that score, which it does."
+  },
+  {
+   "index": 926,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First four ASOIAF books rendered searchable in their entirety",
+   "note": "Live fetch, 200. Nine Worlds Academia 2014 abstract, 'Writing Westeros: a Corpus Linguistic Study of A Song of Ice and Fire', Matthew Voice, University of Sheffield. Verbatim: 'With the aid of contemporary software, the first four books of ASOIAF are rendered searchable in their entirety, and quantifiable patterns of language can be extracted.' The stylistic-analysis limb is carried by 'Breaking down the means of stylistic analysis and characterisation' later in the same abstract."
+  },
+  {
+   "index": 927,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One source of tension and ~20 main characters in five chapters",
+   "note": "Live fetch, 200. Fiction Advocate, 'How to Write Like George R. R. Martin', Jan 28 2015, signed 'Graham Oliver is a graduate student in Austin, Texas.' Verbatim in section 1 ('Keep it simple. Then build.'): 'Martin has introduced a source of tension (Others) and 20 or so main characters within the first five chapters.' The A Game of Thrones limb is explicit two sentences earlier. Every limb supported."
+  },
+  {
+   "index": 928,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Pairing exposition with the dramatic reduces losing the reader",
+   "note": "Live fetch, 200. Same Graham Oliver piece, end of section 1. Verbatim: 'By pairing the exposition with the dramatic, you reduce the chances of losing the reader.' The 'without stalling the reader' limb is supported by the immediately preceding sentence: 'the plot points allow for exposition to happen seamlessly, without losing the reader’s interest.'"
+  },
+  {
+   "index": 930,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "0.46% ly-adverbs, 3rd percentile of all books in our library",
+   "note": "prosecraft.io is defunct (curl returned exit 0 bytes / no connection). Recovered via Wayback raw capture https://web.archive.org/web/20181027143335id_/http://prosecraft.io/library/george-r-r-martin/a-knight-of-the-seven-kingdoms/ — a 2018 capture, matching the citation. Metrics block reads: '0.46% ly-adverbs / 3rd PERCENTILE of all the books in our library'. Book page is A Knight of the Seven Kingdoms by George R. R. Martin, 104,449 total words, 'this is a SHAXPIR project'. All limbs supported."
+  },
+  {
+   "index": 931,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "2.26% all adverbs, 9th percentile of all books in our library",
+   "note": "Same Wayback raw capture (20181027143335). Metrics block reads: '2.26% all adverbs / 9th PERCENTILE of all the books in our library'. Both the percentage and the percentile limbs are exact."
+  },
+  {
+   "index": 932,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1.80% non-ly-adverbs, 34th percentile; ly-adverbs at 3rd",
+   "note": "Same Wayback raw capture. Metrics block reads: '1.80% non-ly-adverbs / 34th PERCENTILE of all the books in our library', and separately '0.46% ly-adverbs / 3rd PERCENTILE'. The comparative limb ('far higher than the same book’s 3rd-percentile ly-adverb rank') is a direct arithmetic reading of two figures both present on the same page, so it is supported rather than inferred from outside."
+  },
+  {
+   "index": 934,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "7.74% passive voice, 43rd percentile of all books in our library",
+   "note": "Same Wayback raw capture. Metrics block reads: '7.74% passive voice / 43rd PERCENTILE of all the books in our library'. Both limbs exact."
+  },
+  {
+   "index": 935,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Analyzed hundreds of millions of words from thousands of authors",
+   "note": "Same Wayback raw capture, in the 'clippings from this book' block: 'We’ve analyzed hundreds of millions of words, from thousands of different authors, training our linguistic models to recognize the most vivid words in the English language… the words that create the most intense sensory experiences: colors, textures, sounds, flavors, and aromas.' The 'vividness model' limb is supported — the same sentence names vividness as what the models are trained to recognize, and the page reports a 62.82% vividness metric."
+  }
+ ]
+}

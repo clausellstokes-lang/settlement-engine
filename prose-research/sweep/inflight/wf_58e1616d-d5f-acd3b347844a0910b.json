@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "wolfe",
+ "angle": null,
+ "tag": "i45-59",
+ "lines": 70,
+ "firstTs": "2026-09-06T16:52:41.114Z",
+ "lastTs": "2026-09-06T16:56:53.388Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 14,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+  "https://www.locusmag.com/2002/Issue09/GaimanWolfe.html",
+  "https://locusmag.com/2011/03/gene-wolfe-engineering-the-future/",
+  "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": " line and Severian's war-geography passage rests on direct adjacency (his reply to that quoted passage), which the note states.\n\nRaw text extracts are kept at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/raw/`.",
+ "run": "wf_58e1616d-d5f",
+ "agent": "acd3b347844a0910b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-acd3b347844a0910b.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i45-59.json",
+  "exists": true
+ }
+}

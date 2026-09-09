@@ -1,0 +1,272 @@
+src/domain/worldPulse/applyWorldPulse.js(584,11): error TS2322: Type 'Record<string, unknown> | { offererId: string; targetId: string; accepted: boolean; decision: "refuse" | "accept"; inheritedDemand: { decisionId: string; desiredAction: "peace" | "continue"; actorId: string; targetId: string; }; ... 4 more ...; receipt: Record<...>; }' is not assignable to type '{ offererId: string; targetId: string; receipt: Record<string, unknown>; termination?: { receipt?: Record<string, unknown>; }; }'.
+  Type 'Record<string, unknown>' is missing the following properties from type '{ offererId: string; targetId: string; receipt: Record<string, unknown>; termination?: { receipt?: Record<string, unknown>; }; }': offererId, targetId, receipt
+src/domain/worldPulse/applyWorldPulse.js(593,11): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(594,11): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(601,11): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(602,11): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(670,9): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(671,9): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(678,9): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(679,9): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(707,57): error TS2339: Property 'length' does not exist on type 'unknown'.
+src/domain/worldPulse/applyWorldPulse.js(975,57): error TS2345: Argument of type 'SimSettlement' is not assignable to parameter of type 'RulingPowerSettlement'.
+  The types of 'powerStructure.stability' are incompatible between these types.
+    Type 'string | number' is not assignable to type 'string'.
+      Type 'number' is not assignable to type 'string'.
+src/domain/worldPulse/applyWorldPulse.js(1021,57): error TS2345: Argument of type 'SimSettlement' is not assignable to parameter of type 'RulingPowerSettlement'.
+  The types of 'powerStructure.stability' are incompatible between these types.
+    Type 'string | number' is not assignable to type 'string'.
+      Type 'number' is not assignable to type 'string'.
+src/domain/worldPulse/armyTransitKernel.js(149,24): error TS2339: Property 'filter' does not exist on type 'unknown'.
+src/domain/worldPulse/armyTransitKernel.js(684,94): error TS2339: Property 'envoyIntent' does not exist on type 'DeploymentRecord'.
+src/domain/worldPulse/autoAdjudication.js(243,13): error TS2339: Property 'memberBirths' does not exist on type 'AdvanceResultLike'.
+src/domain/worldPulse/autoAdjudication.js(249,12): error TS2339: Property 'memberBirths' does not exist on type 'AdvanceResultLike'.
+src/domain/worldPulse/beliefMap.js(323,74): error TS2339: Property 'trim' does not exist on type 'unknown'.
+src/domain/worldPulse/disinformationPlant.js(338,24): error TS2352: Conversion of type '{ commission: { target?: { kind: string; errandId: string; npcId: string; pictureId: string; episodeKey: string; subjectId: string; field: string; direction: string; commissionerId: string; purpose: string; }; receipt: { ...; }; }; }' to type 'DisinfoRecord' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ commission: { target?: { kind: string; errandId: string; npcId: string; pictureId: string; episodeKey: string; subjectId: string; field: string; direction: string; commissionerId: string; purpose: string; }; receipt: { ...; }; }; }' is missing the following properties from type 'DisinfoRecord': liarId, subjectId, audienceId, assertedBand, and 3 more.
+src/domain/worldPulse/dispositionLedger.js(772,26): error TS2322: Type '{ id: string; channel: any; fromBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; toBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; fromStock01: number; ... 7 more ...; kind: string; }[]' is not assignable to type '{ kind: "band_crossing" | "reversal"; id: string; channel: string; fromBand: string; toBand: string; fromStock01: number; toStock01: number; direction: "up" | "down"; source: "decay" | "outcome" | "mixed"; sourceKinds: string[]; sourceEventIds: string[]; outcomeKinds: string[]; tick: number; }[]'.
+  Type '{ id: string; channel: any; fromBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; toBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; fromStock01: number; ... 7 more ...; kind: string; }' is not assignable to type '{ kind: "band_crossing" | "reversal"; id: string; channel: string; fromBand: string; toBand: string; fromStock01: number; toStock01: number; direction: "up" | "down"; source: "decay" | "outcome" | "mixed"; sourceKinds: string[]; sourceEventIds: string[]; outcomeKinds: string[]; tick: number; }'.
+    Types of property 'kind' are incompatible.
+      Type 'string' is not assignable to type '"band_crossing" | "reversal"'.
+src/domain/worldPulse/envoyDiplomacy.js(553,38): error TS2339: Property 'map' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyDiplomacy.js(789,49): error TS2339: Property 'length' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyDiplomacy.js(850,78): error TS2339: Property 'carriedTermSheet' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyDiplomacy.js(900,80): error TS2339: Property 'relationshipKey' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrand.js(250,29): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrand.js(251,29): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrand.js(263,44): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandEncounterWriter.js(133,30): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandEncounterWriter.js(134,30): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandEncounterWriter.js(191,85): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandEncounterWriter.js(595,47): error TS2339: Property 'lastChangedTick' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandEncounterWriter.js(602,87): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandParlay.js(55,25): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandParlay.js(56,25): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandRecords.js(734,33): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandRecords.js(735,36): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyErrandRecords.js(748,33): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(89,16): error TS2339: Property 'find' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(478,55): error TS2339: Property 'encounteredTick' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(479,27): error TS2339: Property 'encounteredTick' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(482,19): error TS2339: Property 'kind' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(486,32): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(496,30): error TS2339: Property 'venueRef' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(498,34): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(499,36): error TS2339: Property 'interceptorId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(500,35): error TS2339: Property 'interceptorId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(501,29): error TS2339: Property 'armyId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(502,30): error TS2339: Property 'venueId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(508,19): error TS2339: Property 'privateGoal' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(509,70): error TS2339: Property 'armyId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(525,19): error TS2339: Property 'privateGoal' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(526,78): error TS2339: Property 'armyId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(531,32): error TS2339: Property 'armyId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(535,39): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(563,32): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(564,34): error TS2339: Property 'interceptorId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(565,33): error TS2339: Property 'interceptorId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(566,27): error TS2339: Property 'armyId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyInterceptionStage.js(567,28): error TS2339: Property 'venueId' does not exist on type 'unknown'.
+src/domain/worldPulse/envoyNegotiationPictureBuilder.js(151,5): error TS2559: Type '{ worldState: any; }' has no properties in common with type '{ byId?: Map<string, unknown>; settlements?: unknown[]; regionalGraph?: { edges?: unknown[]; }; }'.
+src/domain/worldPulse/envoyPulse.js(79,27): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(iterable?: Iterable<readonly [any, any]>): Map<any, any>', gave the following error.
+    Argument of type 'any[][]' is not assignable to parameter of type 'Iterable<readonly [any, any]>'.
+      The types returned by '[Symbol.iterator]().next(...)' are incompatible between these types.
+        Type 'IteratorResult<any[], any>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+          Type 'IteratorYieldResult<any[]>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+            Type 'IteratorYieldResult<any[]>' is not assignable to type 'IteratorYieldResult<readonly [any, any]>'.
+              Type 'any[]' is not assignable to type 'readonly [any, any]'.
+                Target requires 2 element(s) but source may have fewer.
+  Overload 2 of 4, '(entries?: readonly (readonly [any, any])[]): Map<any, any>', gave the following error.
+    Argument of type 'any[][]' is not assignable to parameter of type 'readonly (readonly [any, any])[]'.
+      Type 'any[]' is not assignable to type 'readonly [any, any]'.
+        Target requires 2 element(s) but source may have fewer.
+src/domain/worldPulse/envoyPulse.js(433,37): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(iterable?: Iterable<readonly [any, any]>): Map<any, any>', gave the following error.
+    Argument of type '(string | Record<string, unknown>)[][]' is not assignable to parameter of type 'Iterable<readonly [any, any]>'.
+      The types returned by '[Symbol.iterator]().next(...)' are incompatible between these types.
+        Type 'IteratorResult<(string | Record<string, unknown>)[], any>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+          Type 'IteratorYieldResult<(string | Record<string, unknown>)[]>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+            Type 'IteratorYieldResult<(string | Record<string, unknown>)[]>' is not assignable to type 'IteratorYieldResult<readonly [any, any]>'.
+              Type '(string | Record<string, unknown>)[]' is not assignable to type 'readonly [any, any]'.
+                Target requires 2 element(s) but source may have fewer.
+  Overload 2 of 4, '(entries?: readonly (readonly [any, any])[]): Map<any, any>', gave the following error.
+    Argument of type '(string | Record<string, unknown>)[][]' is not assignable to parameter of type 'readonly (readonly [any, any])[]'.
+      Type '(string | Record<string, unknown>)[]' is not assignable to type 'readonly [any, any]'.
+        Target requires 2 element(s) but source may have fewer.
+src/domain/worldPulse/informationStatecraft.js(511,51): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(536,38): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(553,102): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(555,28): error TS2304: Cannot find name 'BeliefRecord'.
+src/domain/worldPulse/informationStatecraft.js(651,28): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(661,28): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(695,18): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(916,28): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(1003,33): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(1374,40): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(1385,34): error TS2552: Cannot find name 'BeliefRecord'. Did you mean 'seatBeliefRecord'?
+src/domain/worldPulse/informationStatecraft.js(1388,30): error TS2304: Cannot find name 'BeliefRecord'.
+src/domain/worldPulse/lineageClaim.js(264,50): error TS2339: Property 'map' does not exist on type 'unknown'.
+src/domain/worldPulse/npcDmVerbs.js(365,5): error TS2739: Type 'Readonly<{ verb: "assign"; wnpcId: string; rulingId: string; hostSettlementId: string; sinceTick: number; record: Record<string, unknown>; wasPlaced: boolean; assignmentTransit: Record<string, unknown>; assignmentTargetSettlementId: string; assignmentTick: number; edges: readonly any[]; }>' is missing the following properties from type 'DmVerbUndo': envoyPriorErrands, envoyEvictedErrands, envoyKilledAtTick
+src/domain/worldPulse/npcDmVerbs.js(590,5): error TS2739: Type 'Readonly<{ foreignGuestHoldClosure?: Record<string, unknown>; envoyPriorErrands?: readonly Record<string, unknown>[]; envoyEvictedErrands?: readonly Record<string, unknown>[]; envoyKilledAtTick?: number; verb: "kill"; ... 6 more ...; edges: readonly Record<...>[]; }>' is missing the following properties from type 'DmVerbUndo': assignmentTransit, assignmentTargetSettlementId, assignmentTick
+src/domain/worldPulse/npcDmVerbs.js(807,5): error TS2740: Type 'Readonly<{ foreignGuestHoldClosure?: Record<string, unknown>; foreignGuestPriorErrand?: Record<string, unknown>; foreignGuestReleasedErrand?: Record<string, unknown>; foreignGuestReleaseTick?: number; ... 13 more ...; edges: readonly Record<...>[]; }>' is missing the following properties from type 'DmVerbUndo': assignmentTransit, assignmentTargetSettlementId, assignmentTick, envoyPriorErrands, and 2 more.
+src/domain/worldPulse/npcLadderKernel.js(304,18): error TS2352: Conversion of type '({ warDemand: _duplicateDemand, ...rest }: SeatTransition) => { id: string; fromRulerId: string; toRulerId: string; cause: string; tick: number; authorityEpoch?: string; installerFactionId?: string; installerFactionName?: string; governingFactionId?: string; governingFactionName?: string; }' to type 'SeatTransition' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+src/domain/worldPulse/npcLadderKernel.js(304,37): error TS2349: This expression is not callable.
+  Type 'SeatTransition' has no call signatures.
+src/domain/worldPulse/npcLadderKernel.js(637,13): error TS2353: Object literal may only specify known properties, and 'faction' does not exist in type '{ id?: unknown; name?: unknown; }'.
+src/domain/worldPulse/npcVerdictPulse.js(90,60): error TS2339: Property 'kind' does not exist on type 'object'.
+src/domain/worldPulse/npcVerdictPulse.js(92,20): error TS2339: Property 'npcId' does not exist on type 'unknown'.
+src/domain/worldPulse/npcVerdictPulse.js(93,21): error TS2339: Property 'npcId' does not exist on type 'unknown'.
+src/domain/worldPulse/npcVerdictPulse.js(107,43): error TS2339: Property 'npcId' does not exist on type 'unknown'.
+src/domain/worldPulse/npcVerdictPulse.js(135,40): error TS2339: Property 'name' does not exist on type 'unknown'.
+src/domain/worldPulse/occupation.js(1275,9): error TS2353: Object literal may only specify known properties, and 'sourceEventId' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; }'.
+src/domain/worldPulse/occupation.js(1283,9): error TS2353: Object literal may only specify known properties, and 'sourceEventId' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; }'.
+src/domain/worldPulse/peaceTerms.js(464,64): error TS2339: Property 'reimbursementClaims' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(465,28): error TS2339: Property 'reimbursementClaims' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(469,52): error TS2339: Property 'expenditurePressure01' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(470,29): error TS2339: Property 'joinAnchor' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(473,47): error TS2339: Property 'expenditurePressure01' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(474,40): error TS2339: Property 'joinAnchor' does not exist on type '{ departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+src/domain/worldPulse/peaceTerms.js(522,72): error TS2339: Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; relationshipPatches: any[]; } | { dispositionDeltas?: { id: string; ... 4 more ...; sourceEventId: string; }[]; ... 5 more ...; settlementAction: { ...; }; }'.
+  Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; relationshipPatches: any[]; }'.
+src/domain/worldPulse/peaceTerms.js(523,53): error TS2339: Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; relationshipPatches: any[]; } | { dispositionDeltas?: { id: string; ... 4 more ...; sourceEventId: string; }[]; ... 5 more ...; settlementAction: { ...; }; }'.
+  Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; relationshipPatches: any[]; }'.
+src/domain/worldPulse/peaceTerms.js(614,49): error TS2339: Property 'id' does not exist on type 'unknown'.
+src/domain/worldPulse/peaceTerms.js(642,68): error TS2339: Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; } | { dispositionDeltas?: { id: string; channel: string; outcome: unknown; magnitude: number; sourceKind: string; sourceEventId: string; }[]; ... 5 more ...; settlementActions: Record<...>...'.
+  Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; }'.
+src/domain/worldPulse/peaceTerms.js(643,49): error TS2339: Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; } | { dispositionDeltas?: { id: string; channel: string; outcome: unknown; magnitude: number; sourceKind: string; sourceEventId: string; }[]; ... 5 more ...; settlementActions: Record<...>...'.
+  Property 'dispositionDeltas' does not exist on type '{ worldState: Record<string, unknown>; settlementUpdates: Record<string, unknown>[]; changed: boolean; coalitionEvidence: any[]; }'.
+src/domain/worldPulse/peaceTerms.js(811,35): error TS2345: Argument of type '{ id: string; channel: "diplomatic"; outcome: "win" | "loss"; magnitude?: number; }[]' is not assignable to parameter of type 'TreatyDispositionDelta[]'.
+  Property 'sourceKind' is missing in type '{ id: string; channel: "diplomatic"; outcome: "win" | "loss"; magnitude?: number; }' but required in type 'TreatyDispositionDelta'.
+src/domain/worldPulse/peaceTerms.js(819,33): error TS2345: Argument of type '{ id: string; channel: "diplomatic"; outcome: "win" | "loss"; magnitude?: number; }[]' is not assignable to parameter of type 'TreatyDispositionDelta[]'.
+  Property 'sourceKind' is missing in type '{ id: string; channel: "diplomatic"; outcome: "win" | "loss"; magnitude?: number; }' but required in type 'TreatyDispositionDelta'.
+src/domain/worldPulse/peaceTerms.js(890,29): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/domain/worldPulse/peaceTerms.js(892,29): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/domain/worldPulse/peaceTerms.js(895,26): error TS2339: Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTerms.js(898,26): error TS2339: Property 'members' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'members' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTerms.js(964,42): error TS2339: Property 'departingId' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'departingId' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTerms.js(967,41): error TS2339: Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTerms.js(1049,25): error TS2339: Property 'departingId' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'departingId' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTerms.js(1050,25): error TS2339: Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; } | { departingName: string; enemyName: string; departingId: string; enemyId: string; callerId: string; abandoned: string[]; members: string[]; }'.
+  Property 'abandoned' does not exist on type '{ departingName: string; enemyName: string; }'.
+src/domain/worldPulse/peaceTermsCoalition.js(187,43): error TS2322: Type '{ multiplier: number; interpretation: string; }' is not assignable to type '{ multiplier: number; interpretation: "grievance" | "balanced" | "prudence"; }'.
+  Types of property 'interpretation' are incompatible.
+    Type 'string' is not assignable to type '"grievance" | "balanced" | "prudence"'.
+src/domain/worldPulse/peaceTermsCoalition.js(190,48): error TS2322: Type '{ multiplier: number; interpretation: string; }' is not assignable to type '{ multiplier: number; interpretation: "grievance" | "balanced" | "prudence"; }'.
+  Types of property 'interpretation' are incompatible.
+    Type 'string' is not assignable to type '"grievance" | "balanced" | "prudence"'.
+src/domain/worldPulse/peaceTermsCoalition.js(191,54): error TS2339: Property 'dispositionChannelsEnabled' does not exist on type 'unknown'.
+src/domain/worldPulse/pulseKernel.js(1301,5): error TS2353: Object literal may only specify known properties, and 'authorityVerdicts' does not exist in type '{ worldState?: Record<string, unknown>; snapshot?: { byId?: Map<string, unknown>; regionalGraph?: { edges?: unknown[]; }; }; pIndex?: unknown; tick?: unknown; sunkCostPressureFor?: (attackerId: string, targetId: string, deployment: Record<...>) => number; }'.
+src/domain/worldPulse/pulseKernel.js(1312,51): error TS2538: Type 'unknown' cannot be used as an index type.
+src/domain/worldPulse/pulseKernel.js(1313,36): error TS2538: Type 'unknown' cannot be used as an index type.
+src/domain/worldPulse/pulseKernel.js(2679,78): error TS2322: Type '{ id: string; channel: any; fromBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; toBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; fromStock01: number; ... 7 more ...; kind: string; }[] | DispositionTransition[]' is not assignable to type 'DispositionTransition[]'.
+  Type '{ id: string; channel: any; fromBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; toBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; fromStock01: number; ... 7 more ...; kind: string; }[]' is not assignable to type 'DispositionTransition[]'.
+    Type '{ id: string; channel: any; fromBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; toBand: "restrained" | "measured" | "settled" | "marked" | "dominant"; fromStock01: number; ... 7 more ...; kind: string; }' is not assignable to type 'DispositionTransition'.
+      Types of property 'kind' are incompatible.
+        Type 'string' is not assignable to type '"band_crossing" | "reversal"'.
+src/domain/worldPulse/settlementStrategy.js(850,32): error TS2339: Property 'booksPublicReason' does not exist on type '{ reason?: string; }'.
+src/domain/worldPulse/settlementStrategy.js(850,73): error TS2339: Property 'booksPublicReason' does not exist on type '{ reason?: string; }'.
+src/domain/worldPulse/settlementStrategy.js(851,46): error TS2339: Property 'dispositionReasons' does not exist on type '{ reason?: string; }'.
+src/domain/worldPulse/settlementStrategy.js(852,31): error TS2339: Property 'dispositionReasons' does not exist on type '{ reason?: string; }'.
+src/domain/worldPulse/settlementStrategy.js(869,36): error TS2339: Property 'deployments' does not exist on type '{ spatialCanonVersion?: unknown; simulationRules?: Record<string, unknown>; spatialLedgers?: unknown; warPosture?: unknown; relationshipStates?: unknown; }'.
+src/domain/worldPulse/settlementStrategy.js(1033,14): error TS2339: Property 'warLayerEnabled' does not exist on type '{ settlementStrategyEnabled?: boolean; dispositionChannelsEnabled?: boolean; }'.
+src/domain/worldPulse/settlementStrategy.js(1034,14): error TS2339: Property 'warTerminationEnabled' does not exist on type '{ settlementStrategyEnabled?: boolean; dispositionChannelsEnabled?: boolean; }'.
+src/domain/worldPulse/settlementStrategy.js(1035,14): error TS2339: Property 'peaceEngineEnabled' does not exist on type '{ settlementStrategyEnabled?: boolean; dispositionChannelsEnabled?: boolean; }'.
+src/domain/worldPulse/settlementStrategy.js(1036,14): error TS2339: Property 'coalitionLedgerEnabled' does not exist on type '{ settlementStrategyEnabled?: boolean; dispositionChannelsEnabled?: boolean; }'.
+src/domain/worldPulse/settlementStrategy.js(1265,52): error TS2339: Property 'callerId' does not exist on type '{ partyId: string; targetId: string; decision: "exit" | "stay"; }'.
+src/domain/worldPulse/tradeWar.js(566,9): error TS2353: Object literal may only specify known properties, and 'sourceEventId' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; }'.
+src/domain/worldPulse/tradeWar.js(571,11): error TS2353: Object literal may only specify known properties, and 'sourceEventId' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; }'.
+src/domain/worldPulse/warAllianceRisk.js(17,91): error TS2339: Property 'truthRelationshipFor' does not exist on type '{ rows: { relationshipKey: string; aId: string; bId: string; state: Record<string, unknown>; }[]; observerId: string; enemyId: string; worldState: Record<string, unknown>; strengthFor: (id: string) => number; excludeIds?: string[]; }'.
+src/domain/worldPulse/warCoalitionDecision.js(120,11): error TS2353: Object literal may only specify known properties, and 'truthRelationshipFor' does not exist in type '{ rows: { relationshipKey: string; aId: string; bId: string; state: Record<string, unknown>; }[]; observerId: string; enemyId: string; worldState: Record<string, unknown>; strengthFor: (id: string) => number; excludeIds?: string[]; }'.
+src/domain/worldPulse/warCoalitionEvidence.js(76,35): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarCoalitionReceiptKind'.
+src/domain/worldPulse/warCoalitionEvidence.js(77,29): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarCoalitionReceiptKind'.
+src/domain/worldPulse/warCoalitionEvidence.js(78,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarCoalitionReceiptKind'.
+src/domain/worldPulse/warCoalitionEvidence.js(131,35): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarCoalitionReceiptKind'.
+src/domain/worldPulse/warCoalitionEvidence.js(134,23): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarCoalitionReceiptKind'.
+src/domain/worldPulse/warCoalitionGraph.js(34,97): error TS1005: '}' expected.
+src/domain/worldPulse/warCoalitionPulse.js(121,26): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/domain/worldPulse/warCoalitionSettlement.js(489,21): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/domain/worldPulse/warCoalitionSettlement.js(586,33): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/domain/worldPulse/warCosts.js(311,34): error TS2741: Property 'actorId' is missing in type '{}' but required in type '{ actorId: unknown; deployment?: Record<string, unknown>; worldState?: Record<string, unknown>; snapshot?: { byId?: Map<string, unknown>; regionalGraph?: { edges?: unknown[]; }; }; }'.
+src/domain/worldPulse/warCosts.js(372,29): error TS2365: Operator '+' cannot be applied to types 'unknown' and 'number'.
+src/domain/worldPulse/warCosts.js(377,68): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/domain/worldPulse/warDeployment.js(649,15): error TS2353: Object literal may only specify known properties, and 'sourceEventId' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; sourceConquestId?: string; }'.
+src/domain/worldPulse/warDeployment.js(672,13): error TS2353: Object literal may only specify known properties, and 'sourceEventIds' does not exist in type '{ id: string; outcome: "win" | "loss"; magnitude?: number; sourceConquestId?: string; }'.
+src/domain/worldPulse/warPeaceDecision.js(113,38): error TS2339: Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warPeaceDecision.js(222,94): error TS2339: Property 'relationshipType' does not exist on type 'unknown'.
+src/domain/worldPulse/warPeaceDecision.js(227,53): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/domain/worldPulse/warPeaceDecision.js(228,51): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/domain/worldPulse/warPeaceDecision.js(230,5): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/domain/worldPulse/warPeaceDecision.js(241,15): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(iterable?: Iterable<readonly [any, any]>): Map<any, any>', gave the following error.
+    Argument of type 'unknown[][]' is not assignable to parameter of type 'Iterable<readonly [any, any]>'.
+      The types returned by '[Symbol.iterator]().next(...)' are incompatible between these types.
+        Type 'IteratorResult<unknown[], any>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+          Type 'IteratorYieldResult<unknown[]>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+            Type 'IteratorYieldResult<unknown[]>' is not assignable to type 'IteratorYieldResult<readonly [any, any]>'.
+              Type 'unknown[]' is not assignable to type 'readonly [any, any]'.
+                Target requires 2 element(s) but source may have fewer.
+  Overload 2 of 4, '(entries?: readonly (readonly [any, any])[]): Map<any, any>', gave the following error.
+    Argument of type 'unknown[][]' is not assignable to parameter of type 'readonly (readonly [any, any])[]'.
+      Type 'unknown[]' is not assignable to type 'readonly [any, any]'.
+        Target requires 2 element(s) but source may have fewer.
+src/domain/worldPulse/warPeaceDecision.js(245,53): error TS2339: Property 'get' does not exist on type 'unknown'.
+src/domain/worldPulse/warPeaceDecision.js(413,53): error TS2339: Property 'get' does not exist on type 'unknown'.
+src/domain/worldPulse/warRulingsNews.js(255,21): error TS2345: Argument of type 'string' is not assignable to parameter of type 'WarRulingReceiptKind'.
+src/domain/worldPulse/warTermination.js(530,3): error TS2339: Property 'authorityVerdicts' does not exist on type '{ worldState?: Record<string, unknown>; snapshot?: { byId?: Map<string, unknown>; regionalGraph?: { edges?: unknown[]; }; }; pIndex?: unknown; tick?: unknown; sunkCostPressureFor?: (attackerId: string, targetId: string, deployment: Record<...>) => number; }'.
+src/domain/worldPulse/warTermination.js(776,24): error TS2339: Property 'rivalTriumph01' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rivalTriumph01' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(913,25): error TS2339: Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(913,68): error TS2339: Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(924,17): error TS2339: Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(924,44): error TS2339: Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(925,17): error TS2339: Property 'rulerName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(925,48): error TS2339: Property 'rulerName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rulerName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(928,17): error TS2339: Property 'patronId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'patronId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(928,46): error TS2339: Property 'patronId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'patronId' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(929,17): error TS2339: Property 'patronName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'patronName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(929,50): error TS2339: Property 'patronName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'patronName' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(930,60): error TS2339: Property 'rivalTriumphBand' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; } | { ...; }'.
+  Property 'rivalTriumphBand' does not exist on type '{ factionName?: string; factionId?: string; actorId: string; opponentId: string; authoritySignature: string; interestKind: string; settlementWeight01: number; seatWeight01: number; patronWeight01: number; ... 7 more ...; peaceBias01: number; }'.
+src/domain/worldPulse/warTermination.js(957,7): error TS2353: Object literal may only specify known properties, and 'trajectory' does not exist in type '{ attackerId: string; targetId: string; suePressure01: number; dissolvedCauseTypes: string[]; decidingTerm: string; bands: { cause: string; cost_to_continue: string; cost_to_stop: string; momentum: string; }; receipt: Record<...>; }'.
+src/domain/worldPulse/warTermination.js(1039,23): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(iterable?: Iterable<readonly [any, any]>): Map<any, any>', gave the following error.
+    Argument of type 'unknown[][]' is not assignable to parameter of type 'Iterable<readonly [any, any]>'.
+      The types returned by '[Symbol.iterator]().next(...)' are incompatible between these types.
+        Type 'IteratorResult<unknown[], any>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+          Type 'IteratorYieldResult<unknown[]>' is not assignable to type 'IteratorResult<readonly [any, any], any>'.
+            Type 'IteratorYieldResult<unknown[]>' is not assignable to type 'IteratorYieldResult<readonly [any, any]>'.
+              Type 'unknown[]' is not assignable to type 'readonly [any, any]'.
+                Target requires 2 element(s) but source may have fewer.
+  Overload 2 of 4, '(entries?: readonly (readonly [any, any])[]): Map<any, any>', gave the following error.
+    Argument of type 'unknown[][]' is not assignable to parameter of type 'readonly (readonly [any, any])[]'.
+      Type 'unknown[]' is not assignable to type 'readonly [any, any]'.
+        Target requires 2 element(s) but source may have fewer.
+src/lib/founderChairRequest.js(76,33): error TS2322: Type '{ canWrite: boolean; state: string; since: any; daysLeft: any; }' is not assignable to type 'ChairRequestStanding'.
+  Types of property 'state' are incompatible.
+    Type 'string' is not assignable to type '"unknown" | "none" | "open" | "cooling"'.
+src/lib/founderChairRequest.js(85,40): error TS2322: Type '{ canWrite: boolean; state: string; since: any; daysLeft: any; }' is not assignable to type 'ChairRequestStanding'.
+  Types of property 'state' are incompatible.
+    Type 'string' is not assignable to type '"unknown" | "none" | "open" | "cooling"'.
+src/lib/founderChairRequest.js(88,5): error TS2322: Type '{ canWrite: boolean; state: string; since: any; daysLeft: any; }' is not assignable to type 'ChairRequestStanding'.
+  Types of property 'state' are incompatible.
+    Type 'string' is not assignable to type '"unknown" | "none" | "open" | "cooling"'.
+src/lib/foundersHall.js(72,12): error TS2365: Operator '>=' cannot be applied to types 'number' and 'string | number'.
+src/lib/foundersHall.js(74,15): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/lib/foundersHall.js(125,44): error TS2322: Type 'string' is not assignable to type '"admin" | "developer"'.

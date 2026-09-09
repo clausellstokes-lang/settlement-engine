@@ -1,0 +1,33 @@
+[
+ {
+  "id": "ts-4",
+  "block": "DS-GEN-14",
+  "pool": "GROWN-UNRECORDED",
+  "angle": "elder",
+  "index": 0,
+  "grammar": "V8 PRESENT → GAP (the declared gap, in the record, never the opener)",
+  "before": "Nobody wrote down the beginning of {settlement}; the town simply proved convenient, and convenience compounded.",
+  "after": "{settlement} proved convenient, and convenience compounded. Nobody set down its beginning.",
+  "claims": [
+   "the beginning is not recorded (the GAP — licensed by the typed key GROWN-UNRECORDED, a not-held provenance by construction)",
+   "the town proved convenient",
+   "convenience compounded (growth by accretion)"
+  ],
+  "rule": "R-DA-08: the absence sentence lands INSIDE the existing variant, REPLACING its opener position (never the opener; flat; the record's gap, not the world's); the semicolon staple becomes a period (A′-R2); 'simply' (a rationed word) spent; the COUNT word 'nobody' kept so the mechanical arm reads no count change; index 0 keeps its claims"
+ },
+ {
+  "id": "ts-5",
+  "block": "DS-GEN-14",
+  "pool": "GROWN-UNRECORDED",
+  "angle": "street",
+  "index": 1,
+  "grammar": "V8 PRESENT → GAP",
+  "before": "{settlement} was never founded so much as agreed to, one household at a time.",
+  "after": "{settlement} was agreed to, one household at a time, and never founded.",
+  "claims": [
+   "there was no founding act — 'never founded' names the SIBLING band (FOUNDED-YOUNG / FOUNDED-OLD), so the contrast is licensed and KEPT (R-DA-02 / R4)",
+   "the town accreted household by household"
+  ],
+  "rule": "R-DA-08 / V8: the GAP moves off the opener to the close ('and never founded' — the record's absence of a founding act, stated flat); the sibling-licensed contrast is KEPT (the chair's FIRST cut, 'No founding is on record', FAILED check-pair's R4 arm for cutting the sibling word 'founded' — the checker was right; kept as pairs-gap-2026-09-07.cut1-FAILED-R4.json); 'never' retained (a DURATION word neither added nor lost); word order spent, no claim"
+ }
+]

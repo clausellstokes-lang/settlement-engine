@@ -1,0 +1,626 @@
+ 
+ [Review] B2 Keep on the Borderlands (D&D Basic); Crucible - Age of Dusk 
+ Skip to content 
+ Age of Dusk 
+ A blog that only kills animals.
+ Menu 
+ Home 
+ About Prince 
+ Appendix N 
+ For New Readers 
+ Reviewing Standards 
+ Reviews 
+ [Review] B2 Keep on the Borderlands (D&D Basic); Crucible
+ Posted on January 26, 2019 April 5, 2020 by Prince 
+ [Adventure] 
+ B2 Keep on the Borderlands (1979) 
+Gary Gygax (TSR)
+Level 1
+ Bold adventurers from the Realm set off for the Borderlands to seek their fortune. It is these adventurers who, provided they survive the challenge, carry the battle to the enemy. Such adventurers meet the forces of Chaos in a testing ground where only the fittest will return to relate the tale. Here, these individuals will become skilled in their profession, be it fighter or magic-user, cleric or thief. They will be tried in the fire of combat, those who return, hardened and more fit. True, some few who do survive 
+ the process will turn from Law and good and serve the masters of Chaos, but most will remain faithful and ready to fight chaos wherever it threatens to infect the Realm. 
+ - Gary Gygax, Keep on the Borderlands, P.6 
+ The Borderlands. Where the forces of Law and Civilization reel and are thrust back. Where Chaos yet reigns supreme in blood-drenched darkness and savagery and chips away at the bulwark of civilization. Only the blood of heroes can stem the tide. A place of wilderness, the end of sanity, a call…to Greatness! Today we examine the most well-known of such modules.
+ Keep on the Borderlands by Gary Gygax for Basic DnD is one of the most well-known, highly celebrated, most-frequently imitated module of all time. It is a natural successor to B1 in Search of the Unknown and like Terminator 2 or the Wrath of Khan, the sequel is superior to the original. If IsOtU sought to teach you how to run a dungeon, Keep on the Borderlands seeks to teach you how to run what is essentially a campaign in miniature, adding a surrounding wilderness area as well as a 'homebase' from whence the party can sally forth and fight the loathsome inhabitants of the Caverns of Chaos. If your players had made it through In Search of The Unknown without a scratch Beware! This is where the training wheels come off.
+ The premise of Keep on the Borderlands is straightforward and masculine like a right hook: Mankind's realm is a few points of light surrounded by ignorance and savagery. The PCs have travelled to the last keep on the border in order to push back the darkness, one stinking-no-good humanoid at a time! It's like Howard's Beyond the Black River meeting The Hobbit.
+ B2 is interesting because of the insight it gives into how DnD was played in the dawn age, when it still drank ale instead of wine and wore mud-caked plate-mail to the ball. Forget the 4 party standard of the current era. Keep on the Borderlands is made for 6-9 characters of 1st level, with ample opportunity to hire sellswords and retainers in the keep. Parties of less then that MUST have access to mercenaries. Note the key word 'access'. The module will never force you to rely on aid or pick a particular option. Keep is one of the most even-handed modules I have ever seen. It is all about giving players a fair challenge, and allowing them to hang themselves by their own rope if they don't learn.
+ Also forget half-hearted tussling with elemental creatures by firing off nine spells per round in search of MacGuffins to give to a female enchantress so she can free her people. B2 is about pitched battles of up to 30 creatures at a time [1] in cramped corridors, butchering humanoids by the tribe, the foul designs of men corrupted by a formless malevolence, depravity and betrayal. Yet it never descends into grimdark territory either, with plenty of NPCs being portrayed as virtuous, fond of ale or likable. There is some room for levity with the encounters, with some being quirky or odd [2]. It's an odd style, very muted, more reminiscent of AD&D then Basic [3].
+ B2 serves its purpose as an introductory module fairly well, doing a good job of conveying what use its disparate elements should be put to and how to go about it, as well as giving a short recap on combat and adventuring procedures. The text might be somewhat dry for today's attention deficient audience, lacking the bulletpoints and colorful diagrams needed to keep their dopamine levels up, but anyone bereft of a smartphone until the age of at least 12 should be able to cope. While the GMing advice and procedures from E.G.G. himself might be almost unconscious knowledge to the average OSR neckbeard, I'll be damned if the mere act of reading it didn't tighten a few screws and worked out a few chinks in my GMing style.
+ The module proper begins with the Keep. For all the characterization of Gygax as a player-killing homophobe with a troglodyte's disdain for the noble arte of ROLEUHPLAYINGUE the recommendation to have the characters introduce themselves as the Men-at-arms give a "state-your-name-and-business" followed by a short interview with the Bailiff in the courtyard is actually a great way to help new characters find their feet and practice a bit of roleplaying. Keep gives the PCs some time to find their feet in the keep, do some shopping and get stuck in before setting out, which is commendable.
+ The first major roadblock to your enjoyment of the Keep proper rears its ugly head. The keep is desperately in need of an overview, troop roster and a general strategy in case the keep is attacked. Instead the keep is described as a series of rooms, with text conveyed in thick blocks, describing the structure, inhabitants (each with stats), treasure and services they offer, in haphazard order. Some kind of key on the map of the keep itself would have been immensely helpful. This counts for the Caverns as a whole! Text is described in THICK BLOCKS of creatures, treasures and tactics with no rhyme or reason that makes it IMPOSSIBLE to quickly assimilate what is going on and why. USE BULLET POINTS.
+ That being said, the Keep represents a dynamic environment, with multiple things going on. Almost every building has some treasure stashed away somewhere, a Gygaxian design flourish that originated from a time when players were less docile and would routinely try to steal everything that was not nailed down. Help can be hired, but crucially, not all help can be trusted! One ally within the keep is secretly a Chaos Worshipper and not all adventuring companions are Lawful! Crucially, the module also rewards proper roleplaying and gaining people's trust WITHIN the keep by hinting at this treachery. There is even a sort of sub-questing system. Characters can get invited into the Inner Keep and meet with the Castellan if they achieve recognition (by either returning with a lot of loot for a gift to the keep, bring back a valuable prisoner or something similar) and can be sent on honest to god missions with a levy of soldiers (again, unless they piss off the guy, Gygax notes).
+ The Keep, and by extension the adventure, is very much described in terms of components that can be interacted with, with the wider existential, political or metaphysical implications left to the GM to interpret. The organization of the Keep is not a feudal one, and nowhere is there mention of nobles. Instead you get the impression of a professional army, with 1st and even 0th level troops wearing state-sponsored plate or chainmail that they would never be able to afford for the pay they would draw [4]. But it also feels like a living, breathing place, complete with a church, merchant caravans, guilds, a tavern, a money-lender, a chance for them to be in a tavern, prices for drinks listed etc.
+ Speaking of which, there is also a shitton of magic items in the Keep, let alone the Caverns of Chaos? You know how people bemoan the commodification and proliferation of magic in later editions of DnD? Turns out there is nothing wrong with cramming a module full of magic items, it's how you present them that counts! Even a lowly Bailiff carries a weapon+1 in the keep, but you can't buy a magic item anywhere. The keep is chuckfull too, its almost as if magic items make their way from the untamed lands of Chaos into the world of civilization, like a reversed gold rush.
+ The wilderness proper is a throwback grid-map with one incredibly irritating feature that I will gripe about. As soon as you get within 6 squares of a numbered encounter, you have a 1 in 6 chance of running across it if you camp outside, with the chance increasing by 1 for each square you get closer to it. Color-coding or in some way delineating the encounter distance on the map would have helped immensely. Curiously for a wilderness area, there are no random encounters in the wilderness.
+ The map is pretty sophisticated otherwise, using lines to indicate a change in elevation, and making the actual Caves of Chaos decently challenging to find. The module even goes so far as to recommend pointing the players in the right direction if they wander off the map, possibly using some sort of traveller, talking animal or some "other helper [5]"
+The actual encounters are few but good: A deranged hermit, raiders spying on the caves, a tribe of evil lizardmen etc. There is a Versimilitude to the encounters, a gygaxian naturalism to borrow a term, that makes them blend in seamlessly with the fantastic milieu. Nothing feels out of place or contrived. Intelligent opponents use tactics (a feature that will be seen in the Caves too). Gygax left a little room on the map for the GM to place a dungeon of his own design, named the Dungeons of the Unknown, which is honestly fine with me. I'd be lazy and find some OSR adventure to throw in there [6]. Bonus points for good suggestions in the comments section, my money is on Maze of Nuromen.
+ The Caves proper are situated in a ravine and consist of seven partially interconnected caverns across different altitudes containing disparate and warring tribes of humanoids. Again, Gygax knows how to set the scene. Everyone hates boxed text but that's right Grognards. E.G.G. was a boxed text spammer!
+ […]The sunlight is dim, the air dank, there is an oppressive feeling here - as if something evil is watching and waiting to pounce upon you. There are bare, dead trees here and there, and upon one a vulture perches and gazes hungrily at you. A flock of ravens rise croaking from the ground, the beat of their wings and their cries magnified by 
+ the terrain to sound loud and horrible. Amongst the litter of rubble, boulders, and dead wood scattered about on the ravine floor, you can see bits of gleaming ivory and white - 
+ closer inspection reveals that these are bones and skulls of men, animals, and other things,. . . 
+ You know that you have certainly discovered the Caves Of Chaos. 
+ You tell em Gygax! There is even a note on how the vegetation grows more twisted and unnatural as you approach the Caverns. A clear delineation between the mortal realm and the Mythical Underworld you are about to penetrate!
+ The caves themselves are mostly hewn rock, no sprawling nonlinear mazes but definitely branching passageways where it is possible to get trapped or take a wrong turn. Some of the humanoid caverns are connected to others by way of secret doors (since the tribes hate eachother by and large). With seven points of entry, it allows for nonlinear exploration.
+ The inhabitants of the Caverns are the tribes of kobolds, goblins, hobgoblins, orcs, bugbears and gnolls that inhabit the place, kept together, presumably, by the Chaos Worshippers at the top. Or perhaps they are merely drawn to the very evil of the place itself. We have seen these creatures before even then (they are iconic), but where B2 separates itself from B1 is mainly in the degree of organization.
+ Humanoids are organized on both the tactic and the strategic level. Tips are given to have the humanoids adjust to any tactics the PCs might employ (like burning oil, frequent retreats, stealth etc.), each tribe has a fallback option in case it loses its chieftain, use of sentries, alarms, traps and ambushes. Tribes will resort to moving in with other tribes once they lose a chieftain. Each tribe fights differently! Kobolds use trained Giant Rats! Orcs will attempt to place a crossbow ambush! Goblins will sound the alarm and will attempt to bribe a nearby Ogre to help them (That Can himself be bribed by quick-thinking players!). If you compare the organization and intelligence between this and a 3e lair the difference is SHOCKING. It is also brutal. This is not a fight between professional soldiers. This is a war between peoples. Female humanoids will fight as a last resort and the young do not attack nor give XP, but you know how this is going to go. Stay not thy hand brother, for t'is impossible to sin against these abominations!
+ There are so many great design choices here. There are areas that function as subtly-telegraphed death-traps, meaning the party will have to learn when to get the FUCK OUTTA DODGE or find itself up against an Owlbear, Minotaur or a fuckton of Orcs. It is very likely the players will attack the caverns in quick Raids only to make a retreat when the rest of the tribe is alerted. Some caverns have prisoners you can rescue, again with some turning upon you if rescued. It's good stuff.
+ If I were to make another lamentable observation, if only for an opportunity missed in what is a terrific adventure by any metric, the possibility of faction play is discussed as an option for clever players but is never really explored as more then a vague suggestion.
+ Vanilla does not mean boring. There is some gruesome imagery of violence, darkness
+and savagery in the lower caverns and the Shrine of Evil Chaos takes the cake. Check this out:
+ A faint, foul draft issues from the 20' wide cave mouth which is the entrance to this 
+ place. The worn path through the copse of obscenely twisted and oddly bloated trees gives those approaching along its length an eerie sense of unease, and as soon as they enter the cave mouth a dim awareness of lurking evil will pervade their senses. Red strata intertwines with bulging black veins running through the hewn rock walls beyond the entrance. The wide corridors and chambers are deathly still. A faint groaning 
+ sound, and a shrill piping may be occasionally heard, barely perceptible even if the party is absolutely silent and listening. 
+ That, ladies and gentlemen, is terrifying, like you are sneaking into Satan's basement itself. The temple proper is all good shit, with cursed relics, priests garbed in black and red, the living dead and blood-stained altars. The final showdown is a place of almost palpable evil, with bone furniture, mesmerizing shapes and leering demonic idols.
+ A point often remarked upon in this module is the use of amulets to increase the turn resistance of the various undead encountered in the temple. I personally do not see how it is different from, say, having monsters wear armor or a ring of protection but I will blame it for starting the wretched writing practice of taking monsters with classic vulnerabilities and then equipping them with the exact combination of items they need to counteract those vulnerabilities. Something best used in moderation.
+ Treasure is meticulously described gem-inlaid object the arts, foodstuffs that can be carted off and sold in bulk, sable cloaks, the occasional copperware/gemstones worth so and so and a staggering amount of coinage of various metals. Far more noteworthy is how the treasure is used: Treasure placement is almost always given careful consideration, with intelligent monsters hiding their treasure whilst mere animals leave it strewn across their lair. It's very easy to miss treasure if one is not meticulous.
+ The area is well furnished, and a small chest of drawers contains a sack with 50 platinum pieces tied shut with a rope of climbing . 
+ It's subtle and easy to miss, rewarding thoroughness and prompting the use of spells like Detect Magic. Magic items are all book standard and fairly simple, which I would argue is a feature, not a bug. Like the monsters, treasure is book standard because the module seeks to convey the proper utilization of the different components that make up Dungeons and Dragons in as clear a fashion as possible. Adding off-beat, innovative or nonclassical elements would only blur B2's lessons.
+ B2 remains a classic and well worth getting and running even today, if the dozens and dozens of imitators are any indication, capable of astounding not as much through its content but through its structure and context. It illustrates what a good chunk of DnD, not all of it but a significant chunk, is about and explores that scenario with a thoroughness, intelligence and depth that is nothing short of breathtaking. There is almost nothing that is really lacking or superfluous in Caves, the amount of cavern entrances is just right, dangers are almost always telegraphed or can be anticipated by thinking on one's feet [7] and the challenges presented, while relentlessly difficult, can be overcome with the right combination of cunning, strategy, bravery and pluck!
+ B2's presentation is its one Achilles heel: preoccupied with listing the contents of rooms in autistic detail and conveying its room contents in thick, indigestible chunks, language is the one section where B2 really shows its age. The encyclopedic room content format can add depth but most of it is going to end up on the cutting room floor. Give the GM tools to improvise some good concealed NPC treasure and focus on the dungeon instead.
+ The one area where B2 falls short compared to later, equally familiar modules is its sense of wonder. Compared to later modules like the Forgotten Temple of Tharizdun or Expedition to the Barrier Peaks or even In Search of the Unknown, B2 is relatively mundane, the Temple of Evil Chaos nonwithstanding. This lack of embellishment means it is easy to get at the underlying structure of the campaign and makes it effective as a playing aid but might not capture the imagination of jaded OSRites as well as other modules have.
+ Despite its soccer-mom trappings, B2 is a staple of oldskool gaming that illustrates many of its foundational principles with admirable depth. It is such a robust scenario with hundreds of possible permutations that should serve as required reading to anyone wanting to dip his toe into the fetid mire of OSR design. Unsuprisingly, Gygax is a true master of the craft. Rating it anything less then a 9 out of 10 would be a disgrace. Keep is good, but its not AS good as some of Gygax's later modules.
+ [1] The Eponymous Temple of Evil Chaos has a gong that will summon 10 skeletons and 10 zombies into the temple to aid the evil High Priest and his 2 Acolytes.
+[2] A bugbear trying to trick you into taking a bite of shiskebab only to use the skewers as a weapon or an Orc spying on the party from a small window in a wall of alcoves containing severed heads are good examples.
+[3] Considering AD&D would be Gygax's lovechild this is hardly surprising.
+[4] The subsequent placement of the Keep in Mystara's Grand Duchy of Karameikos would make all the more sense given its adventuring origins and lack of an established aristocracy.
+[5] I made a wandering OSR luminary d8 table in case anyone needs something off the cuff:
+ 1. Indignant Patrick Stuart
+2. Nonplussed Venger Satanis wearing something purple (50% makes indecent proposal for 25 gp, 25% asks for review, 25% both)
+3. Drunk James Raggi in the act of burning pile of She Bleeds softcovers (50% chance will throw himself on the flames "no rest for Raggi and Chaipraditkul, we will burn like heathen kings etc. etc.")
+4. Terrified Kiel Chenier
+5. Hungry Were-lobster Jordan Peterson (Al CE, 5 HD D 1-8, MV 180 Spec Mass Charm 1/day) in search of Kiel Chenier
+6. Nothing but mirthless cackling, flogging molly and the scent of black bush to turn you away
+7. Drunk Prince in the act of burning pile of She Bleeds softcovers (50% will throw himself on the flames to impress audience, 50% will actually finish his fucking adventure)
+8. Lonely Zak (will entreat party to stay, will accuse them of lying if refused, 10% actually Kent in Zak disguise)
+ [6] I think when I ran it the last time I put something called the Shrine of the Unknown Gods there, but it was pretty small.
+[7] With the exception of the classic Wight in the Tomb (at level 2-3?!?) FUCK YOU GAYGAX
+ Share this:
+ Share on X (Opens in new window) 
+ X 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Like Loading... 
+ Related 
+ Posted in Reviews Tagged ***** , Adventure , DnD Basic , Gygax , Lvl 1 - 3 , What Gary would have Wanted 
+ Post navigation
+ [Review] Alpha Blue (Core Rules); A game best played with one hand… 
+ [Review] THOT Audition (Alpha Blue); Ultratelluric Tarantino 
+ 47 thoughts on " [Review] B2 Keep on the Borderlands (D&D Basic); Crucible " 
+ Thief of Whispers says: 
+ January 26, 2019 at 12:29 pm 
+ Dope ass review as usual. It's nice to hear a review of one of the classics, though I myself have never played it. Reading this makes ask one question though. How do you think this would be to run in Stars Without Number?
+ Like Like 
+ Reply 
+ PrinceofNothing says: 
+ January 26, 2019 at 12:55 pm 
+ Thanks man. I am thinking of using more illustrations in my reviews ah la Bryce and Melan.
+ [Classics]
+ I can heartily recommend it if you are into GMing and adventure writing, which you are. You can always learn to add more flavor, but the structure of the thing is RIDDLED with good OSR practices and helps you get what a Sandbox is all about.
+ [SWN]
+ I am going to guess poorly but its an interesting thought experiment. The module is not equipped to accomodate SWN's use of vehicles, gunnery emplacements, projectile weaponry and grenades. It would be kind of awesome to make something in the vein of B2 as a SWN lair assault against space pirates or primitive cannibal natives or something. You'd probably have to increase the distance between the keep and the caves quite a bit, add an opportunity for vehicle use (which we did relatively seldom) and you would have to spacify all the treasure. Coins become Credsticks, expensive foodstuffs can become containers of bio-memetic gel, gemstones can become holo-sculptures etc. etc.
+ Like Like 
+ Reply 
+ Zoid ZZX says: 
+ January 28, 2019 at 5:37 pm 
+ "Hard Light" adventure for SWN 1e is something like B2. Kinda.
+ Like Like 
+ PrinceofNothing says: 
+ January 28, 2019 at 11:06 pm 
+ Looks like it's going to be FTL-Februari. Fuck it, I'm game.
+ Like Like 
+ Grützi says: 
+ January 26, 2019 at 3:30 pm 
+ [SWN conversion]
+"True dat" to everything Prince said about vehicles, travel distances, loot and so on.
+ You could turn up the exploration and mystery vibe quite a bit:
+Trough some natural (or unatural) event a new region of space has opened up (a nebula or something).
+Only two problems … nobody knows whats in there and there is only one way to jump (spike drill?). So the locale powers put up a spacestation at the entrance to the new region and pay generously every explorer willing to bring news of whats happening there.
+ One thing that came to my mind instantly was the "home base in the wilderness" thing that the keep has going on (being the one safe place youhave there). In SWN your group will most likely have a ship, so they don't really need a home base that much (the ship being theirs) … yeah, i know, youneed to refuel, recharge and so on … but if things get sticky you have your ship and can jump away.
+So to modify that "home base" thingy you could make a caravan in space. Your ship is part of a multi ship expedition into a new region. The heavy carriers will be your safe port, but they keep moving. Your crew will ecplore the new region with short jumps and bring home the news of whats out there
+ Like Like 
+ Reply 
+ Venger Satanis says: 
+ January 27, 2019 at 2:26 am 
+ I was just thinking, that new and dangerous area of the galaxy could inhibit hyperspace travel for some reason (nebula radiation). That would limit the freedom of movement that starships are used to.
+ Sounds like an Alpha Blue opportunity! Anyone want to write it, or do I have to do everything myself?
+ Like Like 
+ Thief of Whispers says: 
+ January 27, 2019 at 3:14 am 
+ I think I might try my hand at a conversion. The keep could function as a solid FOB, while the party could take the place of mercenaries or professional soldiers sent to pacify the natives and alien races. You could add IED's, dug in positions for the monsters filled with weapon emplacements, the chaos cults could be serving a malevolent AI, a mad psychic, or even a eugenics cult. Hell that could be where the "magic" weapons and items come from, as just the mad experiments of an unbraked AI
+ Like Like 
+ PrinceofNothing says: 
+ January 27, 2019 at 9:46 am 
+ [SWN Keep] 
+ You have my blessing. I'd replace all the humanoids with mercenaries, bandits, barbarian tribes possibly with gene-enhancements, I love the evil tech-cult idea so that stays. There is an opportunity to do something interesting here, I don't think I've ever seen a naturalistic Space Lair assault done right, complete with automatic turrets, a small armed vehicle, landmines and so on. You'd have to strip out a lot that doesn't work but it might be cool man.
+ Like Like 
+ Thief of Whispers says: 
+ January 27, 2019 at 9:57 am 
+ Amen to that. I'll have to dust off some of the old Corporal's course I took, but this starting to seem like a bit of a "Space Afghanistan" that could explore some neat moral and ethical quandaries while also being a bad ass Lair assault. Less "Prime Directive" and more starship troopers
+ Like Like 
+ PrinceofNothing says: 
+ January 27, 2019 at 11:08 am 
+ "The only moral quandry on Tarsis V son *takes a long draw on cigar* is do I fly in my mechanized infantry after the artillery barrage *exhales thick cloud of pungent smoke*, or during? We ain't leavin this radioactive garbage-dump of a planet until every last man, women and child of those apostate machine-worshippers is reduced to his component atoms. Now I don't give a rookie's chance in an Uncharted Jump how many of you apes I have to lose to landmines, pathogens and hocus-pocus voodoo pre-tech magic tricks. We are the 56th Siegfridian Stellar Expeditionary Force. And as St. Crohn is my witness, we are GOING to take those Caves."
+ Like Liked by 1 person 
+ Gwarh says: 
+ February 8, 2019 at 6:35 am 
+ There's that new stars without numbers magic book. You could use that if your thinking of using the SWN engine/rules as a fantasy game.
+ Or if you meant converting it to sci-fi I'd run it in a hive city with the caves asxa multi gang infested underhive, with an evil nihilist psionic cult as twist on the fantasy chaos cultists
+ The keep would be a safe part of the give with a police presence and patrol. The Wildernrss on the way to the caves would be lawless slums but not as bad as bad as the underhive/caves of chaos bit.
+ Doing it with gangs of different alien races would really lend itself to faction vs faction infighting and potential by the players to bribe a gang for help. All sorts of interaction backstabbing and bloodshed could be had. Unless the psychic nihlists got wind of what the players were up to and they sent out lieutenant or two to mind control the gang leaders back into cooperating with each other.
+ Like Like 
+ Reply 
+ Gwarh says: 
+ February 8, 2019 at 6:37 am 
+ Sorry for the poor grammar and odd words in my main post. Typed it on a phone with the damn auto correct interference.
+ Like Like 
+ Thief of Whispers says: 
+ February 8, 2019 at 8:05 am 
+ That would be even more fun. The cyberpunk/ city crawl with the PC's as bounty hunters or cops trying to bring down some of the massive ganger presence in the city. Hell you could use the Codex of the Black Sun to give it a shadowrun feel with the magic system, but not as campy.
+Hell, you can easily use real world analogues instead of the orcs and goblins. Vice Lords, Latin Kings, Gangster Disciples, Aryan Brotherhood, Outlaw Motorcycle clubs. The psychic nihilists could be major cartels or sticking with the mad A.I. theory. I'm just a little unsure how wandering monsters would be done. Would they be mutants, escaped bio-projects, experiments of the A.I. cult, or something else? 
+ Like Like 
+ Grützi says: 
+ January 26, 2019 at 3:04 pm 
+ [Review]
+Well written review that pinpoints the few problems one could have with that it. Always nice to see a classic living up to the hype and getting the credit it deserves.
+ [Playing the thing]
+As luck would have it a friend of mine recently started a group playing the keep, so I have some pretty fresh impressions of the thing 🙂
+He would master the whole thing as written, no twists and so on but he would use AD&D 1ed rules.
+Our group was five strong … human fighter, human cleric, humanmagic-user, elvish thief and elvish assassin.
+Pretty standard beginning: traveled together, left the realm of man, got to the keep, introductions, into the tavern we went, heard some rumors … lizarrdfolk in the south was attacking traders near the swamp. Hired some mercenaries and off we went.
+Wiped the lizards from the map (the assassin took care of the little ones …), got some neat loot and returned to the keep for rest. Had some unhatched lizardeggs with us, tried to sell them but no one wanted them so we made a deal with the owner of the local tavern. Now we have a beting pool going which egg is going to hatch first … what happens then? We'll get to that problem when it becomes urgent 😛
+All in all a pretty nice start. The place feels alive and lived in, always something going on … yet the players can decide what they want to do … sandbox paradise 😉
+ [DM advice]
+This thing really should be required reading for everyone who wants to DM anything ever … 
+ [Dungeon of the Unknown]
+I would use a little dungeon a friend of mine made some months back.
+ https://oocrpg.blogspot.com/2018/04/curious-dungeon-1-temple-of-oyraka.html 
+"The temple of Oyraka" is an old, half submerged temple of the lizardfolk, where their gods and one of their heroes was worshipped.
+Some nice puzzles, a very neat artifact and some background one the lizardfolk. I think you could use it as a counterpart to the caves of chaos (there is a statue of light depicting a god in the temple for example).
+And you could use it to give the lizards in the swamp a bit of background … degenerated remnants of an older civilization that one was high and mighty in these lands … thing like this
+ Like Like 
+ Reply 
+ PrinceofNothing says: 
+ January 27, 2019 at 10:05 am 
+ [Keep]
+ Sounds suspiciously like you guys are having a good time. Almost like the keep is just an excellent sandbox format with a plethora of hooks, interactive components, hints and dynamic encounters. 
+ [Req Reading]
+ I always hesitate before throwing something like that out there, this approach is incompatible with a lot of systems and I don't want to scare any Fate players, but I'd definitely put it on that list for anyone who wants to get into the OSR. 
+ [DoU]
+ You followed my challenge! 
+ I like that it's submerged, though that would make it difficult to put on a hill (you can always figure something out like placing it deep under water). A little heavy on the magic and the puzzles but pretty decent for something thrown together for fun. 
+ [Background]
+ It's interesting, almost no one I know besides myself cares that much about background. I try to imply or give little hints and have answers ready in case a PC thinks to figure it out but for the most part, an Orc is an Orc. I like the imagery though, you could even go full on WHF and throw hints in there of a battle between order worshipping Lizardmen and the Hordes of Chaos. It makes the place come alive.
+ Like Like 
+ Reply 
+ Grützi says: 
+ January 27, 2019 at 12:24 pm 
+ [Keep]
+ Yeah I couldn't believe it myself at first 😛
+ One of the players is a heavy PF fandboy and watching his reactions to some of the things there was nearly as funny as playing the Keep itself:
+ - we had to roll for our characters ("no point buy?!")
+ - class restrictions ("eyeroll")
+ - we couldn't go directly to the castelan ("But we are heroes!")
+ - Our DM had to pause for a moment and think about a name for the owner of the tavern
+ - The plot didn't jump directly into our faces the moment we entered the Keep
+ Fun times, fun times…
+ [Req Reading]
+ Yeah, you are right …
+ But one could argue, that even if you don't want to do it the OSR style, reading the Keep will not hurt you.
+ I for once like reading or hearing differing opinions … I mean you can get ideas from everywhere so maybe somethings in it for you 😉
+ [DoU]
+ Of course 😉
+ And it's nice to give Bardo and his blog a bit of attention.
+ The difference in style (emphasis on magic and puzzles) could work really well to give the party a breather from all the deadly exploring in and around the caves of chaos.
+ [Background]
+ A well written background can enrich your adventure in so many ways.
+ Giving the DM a good background enables him to improvise things better, that is, more in line with the rest of the adventure. It also helps him understand the adventure better in most cases.
+ Like Bryce over at tenfootpole always says, too much ist shit, but the right amount can work wonders.
+ (and of course, the background doesn't need to be smack in the middle of the adventure … an appendix will do just fine)
+ All of the above is only the part for the DM of course … How and how much the players get to know of the background is an entirely different thing.
+ I immensly enjoy the bits and hints style, where the background stays … well … in the background (no immense monolith with a wall of text on it) but clever and observant players can pierce it together.
+ Like you said: I rather have a background which gives me an answer (or helps me improvise a fitting one) when a player asks one of those questions, than not having that and poorly improvising something which may ruins part of the adventure.
+ That was also one of the things i liked about The red prophet rises the one time I dm'ed it
+ Like Like 
+ Reply 
+ PrinceofNothing says: 
+ January 27, 2019 at 8:05 pm 
+ [keepd20]
+ That heroes at level 1 shit pisses me off when I see it but whenever I play 5e and I have some fat mayor blabbing his ass about me having to save his starving village I act in the exact same fashion. I am level 5 damn you. I should already be sent to die in ancient jungles left unexplored! Let this village burn say I.
+ I don't mind railroading as much with set-up, I mind railroading with execution. I hate scenarios where there is ONE way to go about things and ONE WAY only. 
+ [RPR]
+ So now I am curious, how did it go? Red Prophet Rises is like my baby and me (and I'm sure Aaron) are dying to see how that went.
+ Like Like 
+ Grützi says: 
+ January 27, 2019 at 9:17 pm 
+ [Railroading]
+A good, strong setup can kick off a game in incredibly satisfying ways. And in such cases the players will turn a blind eye towards the railroad.
+Railroading with execution is shit … 100% with you on that.
+ [Respect for heroes]
+…must be earned … so a lvl 1 schlump will get nothing, a level 5 schlump will get something 😉
+If the respect has been earned a good Dm should let his npcs act that way … as long as it makes sense.
+ [RPR]
+Red Prophet went very well.
+Group was hired by a wealthy merchant to protect his trade routes and to eliminate the threat of Khazra.
+They sneaked to the canyon, killed a scouting party, disguised themselves and snuck in at night. From there they explored the caves to the north ( basically everything from 1 to 21), meet Ludvag, struck a deal with him to kill Khazra while Ludvag would create a distraction. Then they snuck to Khazra, fought him, killed him and left the canyon very quickly while Ludvag took control of the camp.
+ The second level wasn't even touched, but this was planed as a short one-shot (some of the regular group couldn't make it, but the rest wanted to play). Plus, the second level is pretty detached from the camp above … so it was really easy to simply omit it ( I see that as a feature, not a bug .. to be clear)
+ All in all a good evening of fun. The group had to think on their feet inside the canyon and tried to solve many problems without fighting.
+ Like Like 
+ PrinceofNothing says: 
+ January 28, 2019 at 8:01 pm 
+ [RPR]
+ Glad to hear you guys had fun, interesting to see a sort of commando raid turn out well enough to actually take out Khazra in the commotion and its cool you managed to utilize the rival chieftain element. Putting in a faction element really spiced it up. Y'all didn't rescue the Horse?
+ Your experience essentially echoes Melan's take on RPR. He called the second level good but superfluous and in retrospect I sorta agree with him…maybe. You can still use the pit somewhere else so yeah. On the one hand I am glad that the module at least achieved its goal of being Conan the Barbarian + Metal Gear Solid but on the other hand I secretly hoped it would turn into a gigantic pitched battle with Khazra summoning the Bull of Heaven. 
+ Awesome that you guys liked it, its my first module (and it will not be my last!).
+ Like Like 
+ Grützi says: 
+ January 28, 2019 at 8:32 pm 
+ [RPR]
+Yeah, it was great fun for everyone.
+When my players saw, that Ludvag wasn't really khazras loyal follower, but had plans of his own, they instantly jumped on that and began to use it.
+ They freed the horse in the commotion following khazras defeat … but they didn't really rescue it.
+ I don't think the pitched battle will happen in many playtroughs … it depends heavily on the players style and, like you said, the whole thing screams "infiltrate me stealthily" at the players.
+ It's a damn fine module … and i plan to play trough it completely if i ever find the time and the right group of players 😉
+ If i ever publish something and it's only half as good as RPR i wouldn't mind 😉
+ Like Liked by 1 person 
+ Melan says: 
+ January 26, 2019 at 5:40 pm 
+ The Keep' reputation as a bland, hackneyed adventure* comes more from its imitators than the original material. This is a curious case where the followers didn't learn the right kind of lessons. There are a lot of B2 wannabes, but most of them lack either the small flourishes which add to the vanilla base, or the complexity of the structure which connects the individual components into something bigger. The humanoid battle plans, back room connections and pieces of colourful description, or the keep's depth may not have been properly exploited by many teenage GMs, but they are right there in the text. This is also why Zak's one-page take on the adventure creates a caricature - a grotesque simplification of the TRVE B2 experience.
+ Keep on the Borderlands died thanks to those caricatures - not just the anti-D&D screeds, but sadly, the myriad loving homages, too.** I have read several of these B2 wannabes, and they always amount to
+a) a Keep analog with nothing to offer except backstory and supplies;
+b) a wilderness with a few random encounters;
+c) a final dungeon amounting to the scope of one or two lairs from the Caves of Chaos - taking the naturalism, and not the fantastic.
+The B2 structure looks deceivingly simple - home base, connecting texture, adventure site - but if it is so primitive and easy, how come we have seen so few good imitators? Right now, the best KotB-style adventure out there is Judges Guild's "Thieves of Fortress Badabaskor", a.k.a. "The Keep on the Borderlands For Assholes", and it came out two years before B2 did.
+________________
+* "The Keep on the Borderlands (KotB) literally serves as exhibit A in the great case against Dungeons and Dragons. Rife with crimes against logic, coherence and good roleplaying, a reviewer can only look at this product the same way that a traffic cop looks at a ten car pile-up: with an eye on how this happened and who's to blame." -- From the now classic RPGNet review found at https://www.rpg.net/reviews/archive/classic/rev_1250.phtml 
+** Not the first case of an early masterwork disappearing below the weight of its own influence. Could KotB be the Birth of a Nation of adventure modules? (Complete with the original sin of chaotic evil humanoid babies, even!)
+ Like Liked by 1 person 
+ Reply 
+ Tamás Illés says: 
+ January 26, 2019 at 7:20 pm 
+ "Keep on the Borderlands for Assholes", that's a good one, and quite fitting. There is plenty of room for players to be assholes (my players are actively working on causing Chaos by angering the various factions against each other), and for the DM too (the players are about to descend to the dragon level).
+ Like Liked by 1 person 
+ Reply 
+ PrinceofNothing says: 
+ January 27, 2019 at 10:50 am 
+ Yo Melan!
+ [Hackneyed and boring]
+ I must shamefully admit that I read both your article on Zak's obscene lobot-B2 and the subsequent exchange of commentary and it influenced my review. His statement that B2 is ONLY structurally interesting is verifiably false (as I demonstrated above). If one wants to convince everyone one has 'the next thing' in DnD the classic progressive approach means the past must be besmirched and ridiculed. The Reinassance did it to the middle ages, D&D 4e did it to old DnD, and quelle suprise, yet another hipster does it to prop up his own works. 
+ A module that has been played with relish for decades criticized by a artist who is known for his works not being played even by his biggest adherents. 'It's great but I would never use it myself its too weird,' is the rallying crie of the Zakite (Zak'ier?). A pygmy erecting Bable Spires against the Mandate of Heaven. Arrogant fools. Greatness cannot be extinguished by Mummery.
+ [B2 Clones]
+ I have yet to seriously delve into the copy-cat OSR, I got into reviewing and reading a lot of material when people starting veering off from the classic model, when it became time to experiment and build-up what has been erected, rather then reaffirm what made the old shit great. 
+ [B2's Legacy]
+ I think it's a process that inevitably takes place when a hobby becomes more mainstream. Modules get dumbed down, the frame of reference blurs, increasingly divergent playstyles must be accommodated until you get a fun but relatively shallow game like 5e (my apologies to anyone who is into 5e, I play in a 5e game and its true sadly).
+ [Fortress of Badabaskor]
+ Sounds like I need to do more Judges Guild. I read two Tegel Manor homages already but no Keep. Thieves you say?
+ [Mike Mearls review]
+ Yikes, that is one hell of a hack job. Is that by THE Mike Mearls? No wonder he spends his time coming up with gender-fluid elves or manfully defending the honor of female gamers instead of making a better game. Classic Dünning-Kroeger non-review.
+ To summarize his points:
+1. NPCs don't have names in Keep therefore the module is bad. [But the NPCs have motivations and character traits. Classic conflation of surface elements with the underlying structure. Stupid.] 
+ 2. Humanoids live together and they can't. There are no toilets in the keep. Monsters don't like eachother which is bad. I am easily confused and talk of abstract concepts bores me. 
+ [Non-point. Hostile humanoids can band together under strong leadership (which is what Gygax implies with his chaotic evil temple). Are detailed descriptions of lavatory facilities a requirement for Mike, possibly as a result of his extended childhood potty training (It's in the pot Mike, not on the lid etc. etc.)?]
+ 3. Smug ironic remark. 
+ [Gamma] 
+ After that he goes all like 'So just what the heck is the point?' and berates the TSR marketing department for bundling it in with the Basic set and is all like 'How many people picked up the D&D basic set, fiddled with it for a bit, and then dropped it altogether because they didn't know anything better then the Keep was out there?' Not a lot Mike. Basic did pretty well. 
+ Although I will ABSOLUTELY be retro-cloning his 'Think about it.' to end my reviews with as though he has just delivered some profound insight into the nature of gaming that is privy only to big-brained RPG-philosophers such as himself.
+ Like Like 
+ Reply 
+ Venger Satanis says: 
+ January 26, 2019 at 8:49 pm 
+ Gygax was probably the best failed novelist the RPG industry has ever seen! So, don't try boxed text at home, kids. Leave it to the professionals.
+ Like Like 
+ Reply 
+ PrinceofNothing says: 
+ January 27, 2019 at 10:52 am 
+ Boxed Text CAN be good if you are either just getting started or keep it to a few sentences. 
+ Think about it.
+ Like Like 
+ Reply 
+ Pingback: [Review] B3 Palace of the Silver Princess (DnD Basic); Enigma - Age of Dusk 
+ Pingback: [Review] Beastmaker Mountain (AD&D 1e 3PP); The Real Deal - Age of Dusk 
+ Pingback: [Review] B5 Horror on the Hill (DnD Basic); B1 + B2 - Age of Dusk 
+ Pingback: [Review] The Necropolis of Nuromen (Blueholme); Successor - Age of Dusk 
+ Pingback: [Review] B12 Queen's Harvest (DnD Basic); Night & Day - Age of Dusk 
+ Pingback: [Blather] D&D and Colonialism; A Refutation for the Historically Illiterate - Age of Dusk 
+ Jonathan Becker says: 
+ September 19, 2020 at 3:50 pm 
+ "Beyond the Black River" meets "The Hobbit" may be the best (and succinct) description of B2 that I've ever read. Just reading that phrase makes me want to run the adventure again for the upteenth time.
+: )
+ Like Like 
+ Reply 
+ PrinceofNothing says: 
+ September 19, 2020 at 4:50 pm 
+ Oh yeah it's a gooder. I've run it once or twice but never all the way through. My current B/X group is a little too high level and I want to run them through B10 if they survive B12, but any other chance I might just take.
+ Like Like 
+ Reply 
+ Pingback: [Review] IW1 Journey to the Inside Out (S&W); Vestigial - Age of Dusk 
+ Artur says: 
+ January 15, 2021 at 10:33 am 
+ Dungeons of the Unknow? B1
+ Like Like 
+ Reply 
+ Pingback: [Review] I6 Ravenloft (AD&D); First Heretic - Age of Dusk 
+ Pingback: [Review] The Complete Barrowmaze (LL) Pt. I; Shell - Age of Dusk 
+ Pingback: [Review] WG5 Mordekainen's Fantastic Adventure (AD&D); Left-Hand Path - Age of Dusk 
+ Pingback: 2022 5-star rating spring-cleanup - Age of Dusk 
+ Pingback: [No-Artpunk] #9 Perlammo Salt Mines - Age of Dusk 
+ Pingback: [Review] AX1 - The Sinister Stone of Sakkara (ACKs); Coverage - Age of Dusk 
+ Pingback: [Review] AX 3 - Capitol of the Borderlands (ACKS); Panta Rhei - Age of Dusk 
+ Pingback: [Review] Journey into Malebolge Pt. I (~ADnD 3PP); Behemoth - Age of Dusk 
+ Pingback: [OSR] The Road to Hell; OSR Design Principles - Age of Dusk 
+ Pingback: [Review] Magic-Eater (Lotfp); Lair Assault - Age of Dusk 
+ Pingback: Writing Better Adventures: Outline - skulltower 
+ Pingback: On the OSR - Age of Dusk 
+ Leave a comment Cancel reply 
+ Δ 
+ Search
+ Search for: 
+ Follow Blog via Email 
+ Enter your email address to follow this blog and receive notifications of new posts by email.
+ Email Address: 
+ Follow 
+ Join 404 other subscribers 
+ History
+ August 2026 (2)
+ July 2026 (1)
+ June 2026 (3)
+ May 2026 (3)
+ April 2026 (4)
+ March 2026 (1)
+ February 2026 (6)
+ January 2026 (7)
+ December 2025 (9)
+ November 2025 (3)
+ October 2025 (2)
+ September 2025 (4)
+ August 2025 (2)
+ July 2025 (4)
+ June 2025 (2)
+ May 2025 (4)
+ April 2025 (1)
+ March 2025 (2)
+ February 2025 (2)
+ January 2025 (8)
+ December 2024 (5)
+ November 2024 (6)
+ October 2024 (10)
+ September 2024 (8)
+ August 2024 (3)
+ July 2024 (5)
+ June 2024 (4)
+ May 2024 (4)
+ April 2024 (6)
+ March 2024 (7)
+ February 2024 (6)
+ January 2024 (5)
+ December 2023 (10)
+ November 2023 (12)
+ October 2023 (14)
+ September 2023 (12)
+ August 2023 (10)
+ July 2023 (10)
+ June 2023 (4)
+ May 2023 (11)
+ April 2023 (9)
+ March 2023 (10)
+ February 2023 (11)
+ January 2023 (16)
+ December 2022 (11)
+ November 2022 (14)
+ October 2022 (19)
+ September 2022 (17)
+ August 2022 (13)
+ July 2022 (8)
+ June 2022 (13)
+ May 2022 (9)
+ April 2022 (8)
+ March 2022 (7)
+ February 2022 (12)
+ January 2022 (11)
+ December 2021 (8)
+ November 2021 (7)
+ October 2021 (7)
+ September 2021 (20)
+ August 2021 (5)
+ July 2021 (10)
+ June 2021 (10)
+ May 2021 (9)
+ April 2021 (6)
+ March 2021 (11)
+ February 2021 (8)
+ January 2021 (14)
+ December 2020 (12)
+ November 2020 (7)
+ October 2020 (8)
+ September 2020 (11)
+ August 2020 (11)
+ July 2020 (13)
+ June 2020 (7)
+ May 2020 (9)
+ April 2020 (9)
+ March 2020 (12)
+ February 2020 (9)
+ January 2020 (6)
+ December 2019 (2)
+ November 2019 (1)
+ October 2019 (12)
+ September 2019 (8)
+ August 2019 (5)
+ July 2019 (1)
+ June 2019 (2)
+ May 2019 (3)
+ April 2019 (5)
+ March 2019 (7)
+ February 2019 (8)
+ January 2019 (10)
+ December 2018 (5)
+ November 2018 (7)
+ October 2018 (3)
+ September 2018 (4)
+ August 2018 (4)
+ July 2018 (5)
+ June 2018 (7)
+ May 2018 (9)
+ April 2018 (9)
+ March 2018 (11)
+ February 2018 (7)
+ January 2018 (8)
+ December 2017 (4)
+ November 2017 (7)
+ October 2017 (7)
+ September 2017 (4)
+ August 2017 (7)
+ July 2017 (4)
+ June 2017 (5)
+ May 2017 (3)
+ April 2017 (8)
+ March 2017 (8)
+ February 2017 (6)
+ January 2017 (6)
+ December 2016 (4)
+ November 2016 (4)
+ October 2016 (3)
+ September 2016 (8)
+ August 2016 (4)
+ July 2016 (7)
+ June 2016 (9)
+ May 2016 (8)
+ April 2016 (5)
+ March 2016 (9)
+ February 2016 (4)
+ January 2016 (3)
+ December 2015 (4)
+ November 2015 (9)
+ October 2015 (7)
+ September 2015 (10)
+ August 2015 (13)
+ July 2015 (13)
+ June 2015 (5)
+ Tags
+ * 
+ ** 
+ *** 
+ **** 
+ ***** 
+ 5e 
+ 5what? 
+ Actual Play? Scandalous! 
+ Actual Play Bitches 
+ AD&D 
+ AD&D 1e 
+ AD&D 2e 
+ Adventure 
+ Age of Dusk 
+ anthology 
+ Artpunk Crusade 
+ Beholder magazine 
+ Bestiary 
+ Blood for the fucking Blood God 
+ Bookfagging 
+ Books'n'shit 
+ Breaking News 
+ Campaign Setting 
+ Carcosa 
+ Casus Belli 
+ Core Game 
+ Cosmic Horror 
+ D20 
+ delicious controversy 
+ DnD Basic 
+ Dungeon 
+ Dungeon Magazine 
+ Epic 
+ Essay 
+ Fookin Vampires 
+ Fully functional with multiple techniques 
+ gnashing of teeth 
+ Graetest Gaem Evar? 
+ Haunted House 
+ Historical 
+ Horror 
+ i dont even 
+ Labyrinth Lord 
+ Lamentations of the Flame Princess 
+ Level 10+ 
+ Lvl 1 - 3 
+ Lvl 4 - 6 
+ Lvl 7 - 10 
+ Lvl 10+ 
+ Megadungeon 
+ meh 
+ Mythical 
+ NGR 
+ No Artpunk 
+ NO ARTPUNK CONTEST 
+ OD&D 
+ Oh no its 2e! 
+ OSE 
+ OSR 
+ Planar jaunt 
+ Ranting 
+ Review 
+ Role Aids 
+ sandbox 
+ Setting 
+ Shiny and Chrome 
+ Silly 
+ Sorcery-related Shenanigans 
+ Sourcebook 
+ Space the Final Frontier 
+ Sword & Sorcery 
+ Tombcrawl 
+ WARHAMMER FANTASY 
+ weird 
+ white dwarf Categories
+ Categories 
+ Select Category 
+ Actual Play (98) 
+ Age of Dusk (47) 
+ Booktalk (26) 
+ Carcosa (16) 
+ Cauldron (2) 
+ Essay (6) 
+ Hagiography (4) 
+ Interview (5) 
+ No Artpunk (59) 
+ Ranting (49) 
+ Reviews (596) 
+ Setting Spotlight (4) 
+ Stuff I wrote (21) 
+ Translations (6) 
+ Uncategorized (262) 
+ Top Posts & Pages
+ 2026 Reading List - [May-August] 
+ Reviews 
+ [Review] Stonehell Pt. I (LL): Down Night-Haunted Halls; Overlord 
+ [Review] Troika! (Core rules); Artpunk Prime 
+ [Review] In the Shadow of Tower Silveraxe (OSE); Standard Template Construct 
+ Prince on 2026 Reading List - [May-August] September 5, 2026 Historically, the Night Lords are probably most reminiscent of Hitler's Dirlewanger brigade; a unit recruited from convicted criminals sent to…
+ Simulated Knave on 2026 Reading List - [May-August] September 4, 2026 The trilogy is very solid, though I think it does gloss over a bit of how horrible they are. It's…
+ Prince on 2026 Reading List - [May-August] September 2, 2026 It makes sense that after this one they turned a bold new leaf and did a massive space opera with…
+ The Heretic on 2026 Reading List - [May-August] September 2, 2026 I remember reading the Black Fleet Rising trilogy. The only interesting thing about it was Luke's search for his mother,…
+ Prince on 2026 Reading List - [May-August] September 2, 2026 Lear the Giant King ey? Ill have to check that one out. My game has been going relatively slowly, with…
+ ALL BLOG POSTS AND COMMENTS COPYRIGHT (c) 2015-2023 Prince of Nothing. All Rights Reserved. Reproduction Without Written Permission is Prohibited. Powered by WordPress.
+ Blog at WordPress.com. 
+ Comment 
+ Reblog 
+ Subscribe 
+ Subscribed 
+ Age of Dusk 
+ Join 404 other subscribers
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ Age of Dusk 
+ Subscribe 
+ Subscribed 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ Loading Comments... 
+ Write a Comment... 
+ Email (Required) 
+ Name (Required) 
+ Website 
+ %d 

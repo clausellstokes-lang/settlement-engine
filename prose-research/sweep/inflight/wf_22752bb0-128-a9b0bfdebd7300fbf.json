@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "hobb",
+ "angle": null,
+ "tag": "i225-239",
+ "lines": 104,
+ "firstTs": "2026-09-06T17:11:41.772Z",
+ "lastTs": "2026-09-06T17:16:16.911Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 24,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+  "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
+  "https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
+  "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written and read back (15 claims, 15 verdicts). Returning the verdicts.",
+ "run": "wf_22752bb0-128",
+ "agent": "a9b0bfdebd7300fbf",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_22752bb0-128/agent-a9b0bfdebd7300fbf.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-hobb-i225-239.json",
+  "exists": true
+ }
+}

@@ -1,0 +1,66 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneB6
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js (10 tests | 2 failed) 25ms
+     × a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers [] 6ms
+     × NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > a row keyed on an ABSENT field is NOT-EXECUTABLE and names the field — it never answers []
+AssertionError: expected [ …(3) ] to deeply equal [ …(2) ]
+
+- Expected
++ Received
+
+@@ -7,6 +7,11 @@
+    {
+      "class": "deterministic",
+      "id": "capacity_floor_thaw",
+      "reason": "requires receipt.yearlyPopulations, receipt.yearlyDiedFlags — absent from this receipt",
+    },
++   {
++     "class": "deterministic",
++     "id": "capacity_realm_load",
++     "reason": "requires receipt.behavioral.yearly[last].realmDemography — absent from this receipt",
++   },
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:267:33
+    265|     const blind = evaluateTripwires(asTheWriterShipsIt);
+    266|     expect(blind.findings).toEqual([]);
+    267|     expect(blind.notExecutable).toEqual([
+       |                                 ^
+    268|       { id: 'capacity_plateau', class: 'deterministic', reason: REASON…
+    269|       { id: 'capacity_floor_thaw', class: 'deterministic', reason: REA…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/soak-harness/tripwireRegistry.test.js > the tripwire registry > NO ROW MAY KEY ON A FIELD THE RECEIPT WRITER DOES NOT WRITE — the class, banked and shrink-only
+AssertionError: expected [ 'capacity_plateau', …(1) ] to deeply equal [ 'capacity_plateau', …(2) ]
+
+- Expected
++ Received
+
+  [
+    "capacity_plateau",
+    "capacity_floor_thaw",
+-   "capacity_realm_load",
+  ]
+
+ ❯ tests/soak-harness/tripwireRegistry.test.js:459:72
+    457|     // and requiredness were one fact while the writer was blind; they…
+    458|     // this is the direction that matters — a blind row must announce …
+    459|     expect([...new Set(legacyReach.unreachable.map((row) => row.id))])…
+       |                                                                        ^
+    460|       TRIPWIRES.filter((row) => Array.isArray(row.requires)).map((row)…
+    461|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 8 passed (10)
+   Start at  03:21:32
+   Duration  218ms (transform 46ms, setup 31ms, import 42ms, tests 25ms, environment 0ms)
+

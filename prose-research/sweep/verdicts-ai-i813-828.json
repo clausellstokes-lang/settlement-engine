@@ -1,0 +1,235 @@
+{
+ "name": "ai",
+ "chunk": 21,
+ "claims": [
+  {
+   "index": 813,
+   "feature": "steerability",
+   "claim": "The Dramatica Co. asserts that asking a model for ambiguity returns ambiguity as surface texture rather than as a structural consequence of the story.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "ambiguity as a texture rather than as a structural consequence",
+   "page": "section 'Put the Narrative First'"
+  },
+  {
+   "index": 814,
+   "feature": "steerability",
+   "claim": "The Dramatica Co. asserts that prompting away AI punctuation leaves the model's narrative habits intact.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "prompt away the punctuation and still leave the machine’s narrative habits intact",
+   "page": "section 'Put the Narrative First'"
+  },
+  {
+   "index": 815,
+   "feature": "no subtext",
+   "claim": "Mohammad Siam, replying on X to Ethan Mollick's StoryScope post, wrote that AI explains where humans imply.",
+   "source": "Mohammad Siam, X reply, 27 May 2026, relayed verbatim by the Dramatica Blog",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI explains. Humans imply.",
+   "page": "pull-quote in 'AI Likes the Clean Line'"
+  },
+  {
+   "index": 816,
+   "feature": "discourse-level tells",
+   "claim": "Ethan Mollick, posting on X about the StoryScope preprint, used the phrase 'AI narrative tells' for the layer beneath stylistic tells.",
+   "source": "Ethan Mollick, X, 27 May 2026, relayed as a pull-quote by the Dramatica Blog",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI narrative tells",
+   "page": "pull-quote after the 'Paper Finds Structure, Not Just Style' lead-in"
+  },
+  {
+   "index": 818,
+   "feature": "other: what a human editor sees first",
+   "claim": "Alex Mahadevan, director of Poynter's MediaWise, told the Reuters Institute that most editors shown AI-generated text shake their heads because it is empty.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "they will shake their heads, because it is empty",
+   "page": "section 4"
+  },
+  {
+   "index": 819,
+   "feature": "gloss and over-explaining",
+   "claim": "Mahadevan told the Reuters Institute his dead giveaway for AI writing is a lot of words that do not say anything.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "it's a lot of words that don't say anything",
+   "page": "section 4"
+  },
+  {
+   "index": 820,
+   "feature": "abstraction over the concrete",
+   "claim": "Mahadevan named ChatGPT's tendency to make broad, sweeping, emotional statements as the feature of AI writing he finds most jarring in journalism.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "make broad, sweeping, emotional statements",
+   "page": "section 4"
+  },
+  {
+   "index": 821,
+   "feature": "homogenisation",
+   "claim": "Mahadevan predicted that heavy reliance on AI writing would make every news homepage blur into the same voice.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "every homepage blurs into the same voice",
+   "page": "section 4"
+  },
+  {
+   "index": 822,
+   "feature": "homogenisation",
+   "claim": "Mahadevan asserted the AI default style smooths out dialects, activist language and the ways specific communities actually talk.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "smooth out dialects, activist language and ways specific communities actually talk",
+   "page": "section 4"
+  },
+  {
+   "index": 823,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Dr Tom S. Juzek of Florida State University told the Reuters Institute that ChatGPT broke the link readers used to make between quality of form and quality of content.",
+   "source": "Tom S. Juzek (Florida State University) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "quality of form and quality of content, and ChatGPT broke that",
+   "page": "section 4"
+  },
+  {
+   "index": 824,
+   "feature": "steerability",
+   "claim": "Juzek and Ward re-ran reinforcement learning from human feedback with their own recruited testers and found that those testers preferred outputs containing AI buzzwords.",
+   "source": "Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "their testers did prefer outputs that contained AI buzzwords",
+   "page": "section 2"
+  },
+  {
+   "index": 825,
+   "feature": "model era drift",
+   "claim": "In Juzek and Ward's RLHF replication the participants who otherwise favoured AI buzzwords tended not to prefer texts containing 'delve' and 'nuanced'.",
+   "source": "Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "tended not to prefer texts containing ‘delve’ and ‘nuanced’",
+   "page": "section 4"
+  },
+  {
+   "index": 826,
+   "feature": "detection and its failures",
+   "claim": "Mahadevan said he is concerned that readers fixate on quick heuristics to identify AI writing.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "I do get concerned that we fixate on these quick heuristics",
+   "page": "section 3"
+  },
+  {
+   "index": 827,
+   "feature": "counter-evidence",
+   "claim": "The Reuters Institute reports that so far there is not much evidence that homogenisation of language is happening.",
+   "source": "Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "there’s not much evidence that homogenisation is happening",
+   "page": "section 3"
+  },
+  {
+   "index": 828,
+   "feature": "lexical tells",
+   "claim": "Dr Karolina Rudnicka of the University of Gdansk told the Reuters Institute that ChatGPT and Grammarly avoid slang, contractions, colloquial language and the passive voice when reviewing drafts.",
+   "source": "Karolina Rudnicka (University of Gdansk) reported by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "They also avoid slang, contractions",
+   "page": "section 1"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 813,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ask for ambiguity and receive ambiguity as a texture",
+   "note": "Raw page fetched (HTTP 200, browser UA). Quote appears word for word in 'Put the Narrative First': 'You can ask for ambiguity and receive ambiguity as a texture rather than as a structural consequence.' Byline 'The Dramatica Co., May 29, 2026' confirms attribution and year. Claim's 'surface texture' and 'of the story' are glosses the surrounding argument (surface vs structure) supports."
+  },
+  {
+   "index": 814,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prompt away the punctuation, narrative habits stay intact",
+   "note": "Raw page. Verbatim in the same paragraph of 'Put the Narrative First': 'You can prompt away the punctuation and still leave the machine's narrative habits intact.' Framed there as why 'make it sound more human' is the wrong repair. Every limb supported."
+  },
+  {
+   "index": 815,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI explains. Humans imply.",
+   "note": "Raw page. Pull-quote in 'AI Likes the Clean Line' reads exactly 'AI explains. Humans imply.' attributed 'Mohammad Siam, X, May 27, 2026', introduced as one of 'The replies under Mollick's post'. Chain of custody is the blog's relay of the X reply, which the claim's source field states explicitly; the X post itself was not independently reached, and the claim does not assert it was."
+  },
+  {
+   "index": 816,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the paper is looking at AI narrative tells",
+   "note": "Raw page. Pull-quote 'AI narrative tells' attributed 'Ethan Mollick, X, May 27, 2026', with body text: 'Ethan Mollick pointed to the more important layer in a fresh X post about StoryScope... His framing was simple: the paper is looking at AI narrative tells, not merely stylistic ones.' Supports both 'about the StoryScope preprint' (April 2026 arXiv) and 'the layer beneath stylistic tells'. Locator nit only: the pull-quote sits BEFORE the 'The Paper Finds Structure, Not Just Style' heading, not after it; the claim sentence is unaffected."
+  },
+  {
+   "index": 818,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most editors will shake their heads, because it is empty",
+   "note": "Raw page (Marina Adami, 9 December 2025). Section 4 verbatim: 'If you put AI-generated text in front of most editors, they will shake their heads, because it is empty.' Speaker identity confirmed earlier: 'Alex Mahadevan is a journalist and director of MediaWise, the Poynter Institute's digital media literacy programme.' All limbs supported."
+  },
+  {
+   "index": 819,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The dead giveaway for me is just that",
+   "note": "Raw page, section 4, same quoted block as 818: 'The dead giveaway for me is just that it's a lot of words that don't say anything.' Verbatim and fully attributed to Mahadevan."
+  },
+  {
+   "index": 820,
+   "verdict": "PARTIAL",
+   "trueWording": "one of the features of AI writing that Mahadevan finds most jarring",
+   "note": "Raw page, section 4. The quotation is verbatim: ChatGPT's tendency to 'make broad, sweeping, emotional statements', with the example 'AI in journalism isn't just a tool, it's a revolution.' But the source frames it as ONE OF several: 'one of the features of AI writing that Mahadevan finds most jarring isn't punctuation or vocabulary, but especially ChatGPT's tendency to...'. The claim's definite singular ('the feature ... he finds most jarring') asserts an exclusivity the page does not.",
+   "unsupportedLimb": "the definite/superlative framing 'the feature of AI writing he finds most jarring' — the page says 'one of the features'"
+  },
+  {
+   "index": 821,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every homepage blurs into the same voice",
+   "note": "Raw page, section 4, verbatim: 'If journalists lean on that, local crime stories start to read like police press releases, climate coverage starts to echo corporate sustainability reports and every homepage blurs into the same voice.' The 'heavy reliance' limb is carried by the preceding sentence: 'Mahadevan worries that an over-reliance on AI writing will lead to...'. News-homepage reading is correct in context."
+  },
+  {
+   "index": 822,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That default style also tends to smooth out dialects",
+   "note": "Raw page, section 4, verbatim within Mahadevan's quote: 'That default style also tends to smooth out dialects, activist language and ways specific communities actually talk, which is bad for fair and equitable coverage.' 'Default style' refers to the AI writing style under discussion. Minor hedge loss only: the source says 'tends to smooth out'; the claim states 'smooths out' flatly — an idiomatic paraphrase of a tendency, not a change of substance."
+  },
+  {
+   "index": 823,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "people were too quick to make the link",
+   "note": "Raw page, section 4, verbatim: Juzek — 'In the past, people were too quick to make the link between quality of form and quality of content, and ChatGPT broke that.' Identity confirmed: 'Dr Tom S. Juzek, assistant professor of computational linguistics at Florida State University.' Wording note (not a limb failure): the source says 'people', not specifically 'readers'; the passage is about reassessing quality markers in writing, so the narrowing is benign."
+  },
+  {
+   "index": 824,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their testers did prefer outputs that contained AI buzzwords",
+   "note": "Raw page, section 2, verbatim: 'The researchers tried to replicate reinforcement learning from human feedback themselves for a base model, recruiting English-speaking testers from the Global South... Their research found that their testers did prefer outputs that contained AI buzzwords.' Confirms the re-run, the own-recruited testers, and the preference finding."
+  },
+  {
+   "index": 825,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "while overall favouring AI buzzwords, tended not to prefer 'delve'",
+   "note": "Raw page, section 4, verbatim: 'In Juzek and Ward's experiments, recruiting humans to mimic reinforcement learning from human feedback, they note that their participants, while overall favouring AI buzzwords, tended not to prefer texts containing 'delve' and 'nuanced', possibly because they're so often talked about as hallmarks of ChatGPT.' The 'who otherwise favoured AI buzzwords' limb is explicitly supported."
+  },
+  {
+   "index": 826,
+   "verdict": "PARTIAL",
+   "trueWording": "I do get concerned that we fixate on these quick heuristics",
+   "note": "Raw page, section 3, quotation verbatim: \"'I do get concerned that we fixate on these quick heuristics to identify AI,' he said, as most of them, like specific words, aren't definitive proof.\" But the source's subject is 'we' — Mahadevan speaking as a media-literacy educator about the general discourse, in a passage addressed to journalists and fact-checkers — not 'readers'. The following sentence about AI images also shows the object is 'AI' broadly, not AI writing alone.",
+   "unsupportedLimb": "the actor: the source says 'we fixate', not that readers fixate — and 'to identify AI' generally, not AI writing specifically"
+  },
+  {
+   "index": 827,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So far, there's not much evidence that homogenisation is happening",
+   "note": "Raw page, section 3, verbatim: 'So far, there's not much evidence that homogenisation is happening, but Juzek is among those concerned.' The 'of language' limb is carried by the preceding sentence: '...will lead to a homogenisation of language.' Attribution to the Reuters Institute piece is correct — this is Adami's own reporting line, not a quoted source."
+  },
+  {
+   "index": 828,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They also avoid slang, contractions, colloquial language and passive voice",
+   "note": "Raw page, section 1, verbatim: 'When asked to review drafts, ChatGPT and the AI writing tool Grammarly both remove the phrase 'in order to'... They also avoid slang, contractions (like 'gonna' and 'wanna'), colloquial language and passive voice.' 'They' = ChatGPT and Grammarly, in the review-drafts context, so every limb holds. Identity confirmed: 'Dr Karolina Rudnicka, assistant professor in the faculty of languages at the University of Gdansk, Poland.'"
+  }
+ ]
+}

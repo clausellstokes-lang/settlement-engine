@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i634-648",
+ "lines": 56,
+ "firstTs": "2026-09-06T18:39:16.735Z",
+ "lastTs": "2026-09-06T18:42:13.491Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 10,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+  "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+  "https://tenfootpole.org/ironspike/?page_id=1201"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All quotes checked against the raw pages. Now writing the checkpoint file.",
+ "run": "wf_a9298963-fdf",
+ "agent": "aa402785183bad93b",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-aa402785183bad93b.jsonl",
+ "journal": "result",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i634-648.json",
+  "exists": true
+ }
+}

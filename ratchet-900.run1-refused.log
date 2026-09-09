@@ -1,0 +1,23 @@
+  probe: load=3.14 workers=0 streak=1 waited=0s
+  probe: load=3.07 workers=0 streak=2 waited=60s
+  probe: load=3.20 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=460a63bca6196936692311592815ab6f1d37dd47
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED: entries 3 -> 3 (ALL STAY: enforcement-claims debt; the owner-gated generator golden master; the Tier-2 voice per-file row, banked as debt with files-over-baseline ceiling 2 and measured at 2 files) · totalFiles 2470 -> about 2484 BY ANALOGY ONLY (the lighting census moved +14, 2523 -> 2537, and the ratchet's file count differs from the census by a fixed convention: 2470 vs 2523 at §899) · totalTests REFUSED IN ADVANCE (the 102-car proof collected 32,331 incl. 111 skipped; the ratchet's own convention decides) · no new known failure expected: the 102-car whole-suite proof's 22 reds were all register-class (now re-taken), banked, or a load timeout re-run green (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 72688 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] --update REFUSED: these failing tests are not in the census, and
+  `--update` NEVER BANKS A NEW REGRESSION:
+    tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers
+    tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+    tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the lit-dial arm every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name
+    tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the lit-dial arm the dial-gated set is DOUBLY CONTROLLED: the pack is not a dial and neither is the producer set, and the uncontrolled reading fires the STOP
+    tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the register doors convict what they cannot verify a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal
+
+Fix them. If one is genuinely deferred debt, add it BY HAND with its full attribution
+(subsystem, cause, introducedAt, class) — that hand edit is the point: an unattributed
+entry is a defect being laundered into debt.
+TRUE_EXIT=1
+MEASURED: totalTests=31511 totalFiles=2470 entries=3
+RATCHET_PORCELAIN_POST=[0]
+RATCHET_DONE=1

@@ -1,0 +1,275 @@
+### [184] VERIFIED_VERBATIM  |feature: other: sentence-level focus
+CLAIM: Simon Guerrier characterises Steering the Craft as focusing on what you put in each sentence rather than on structure.
+QUOTE: her focus is on what you put in each sentence
+TRUE: Rather than start with the structure then fill in the gaps, her focus is on what you put in each sentence
+NOTE: Live page (HTTP 200) at the given 2026/01 URL; post dated Friday, January 30, 2026, on 'Nothing Tra La La?', 'The blog of writer and producer Simon Guerrier'. Quote exact; the 'rather than on structure' limb is carried by the same sentence's opening clause.
+
+### [185] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Simon Guerrier glosses Le Guin's 'crowding and leaping' chapter as when to provide lots of detail and where to skip through it.
+QUOTE: when to provide lots of detail and where to skip through it
+TRUE: what she calls “crowding and leaping” — when to provide lots of detail and where to skip through it
+NOTE: Live page (HTTP 200). Quote exact, and it sits at the end of the sentence listing the book's chapters ('The chapters cover the sound of your writing spoken aloud, punctuation and grammar, ... and what she calls “crowding and leaping”'). All limbs hold.
+
+### [186] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Novelist Jo Walton says A Wizard of Earthsea has never a wasted word and that all the words are right.
+QUOTE: There's never a wasted word, and all the words are right.
+TRUE: There’s never a wasted word, and all the words are right.
+NOTE: Live page (HTTP 200, reactormag.com, the Tor.com post republished). Quote exact (curly apostrophe on page) in the prose paragraph: 'how gorgeous the prose is. There’s never a wasted word, and all the words are right. It’s like poetry.' By Jo Walton, published October 4, 2011.
+
+### [187] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Jo Walton calls A Wizard of Earthsea one of the best books for reading aloud.
+QUOTE: This is one of the best books for reading aloud
+TRUE: This is one of the best books for reading aloud
+NOTE: Live page (HTTP 200). Quote exact, in the same prose paragraph, continuing '—I read it aloud several times when my son was of an age to like a chapter at bedtime.' 'This' refers to A Wizard of Earthsea.
+
+### [188] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Jo Walton attributes her memory of the Earthsea map to Le Guin's names rather than to the map's quality.
+QUOTE: Le Guin is so wonderful with names
+TRUE: not because it’s an especially good map but because Le Guin is so wonderful with names
+NOTE: Live page (HTTP 200). Quote exact in the opening paragraph: 'I could draw the map from memory, and the reason for this isn’t because it’s an especially good map but because Le Guin is so wonderful with names—Selidor, Iffish, Havnor...'. Both limbs (memory attributed to names, not map quality) hold.
+
+### [189] VERIFIED_VERBATIM  |feature: register modulation
+CLAIM: Jo Walton calls A Wizard of Earthsea one of the very few fantasy novels that succeeds in feeling like a legend.
+QUOTE: succeeds in feeling like a legend
+TRUE: It’s also one of the very few fantasy novels that succeeds in feeling like a legend.
+NOTE: Live page (HTTP 200). Quote exact, second sentence of the opening paragraph. All limbs hold.
+
+### [190] VERIFIED_VERBATIM  |feature: naming and forms of address
+CLAIM: Le Guin's FAQ, quoted in the comment thread, says a name's pronunciation affects the sound and rhythm of a sentence.
+QUOTE: it does have an effect on the sound and rhythm
+TRUE: since it does have an effect on the sound and rhythm of a sentence
+NOTE: Live page (HTTP 200); the wpDiscuz comment thread (26 comments) is present in the served HTML. Comment by '(still) Steve Morrison' introduces it as 'Le Guin’s FAQ agrees with you about pronunciation; this is what she says:' and quotes the FAQ, whose subject is how to pronounce a made-up name. Every limb holds.
+
+### [191] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: One reader dissents in the comment thread, saying the prose was visibly beautiful but the style left them cold.
+QUOTE: I could see how beautiful the prose was, but the style
+TRUE: I could see how beautiful the prose was, but the style left me cold.
+NOTE: Live page (HTTP 200), comment thread. Quote exact; the same comment opens 'I found that the ‘legend’ quality worked against the story for me. It took a few weeks of steady perseverance to get through.' — a clear dissent from Walton's praise. Claim limbs all hold. One source-field wrinkle worth recording: the comment is not anonymous, it carries the handle 'PamAdams'.
+
+### [192] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin defines the crowding-and-leaping problem as what details are included and what omitted.
+QUOTE: It has to do with what details are included, what omitted.
+TRUE: It has to do with what details are included, what omitted.
+NOTE: Live page (HTTP 200, www.dailykos.com, no block). Quote exact inside the block quotation of Steering the Craft chapter 10 by diarist 'not a lamb'; two sentences later 'I call it Crowding and Leaping', so the defines-limb holds.
+
+### [193] VERIFIED_VERBATIM  |feature: omission as information
+CLAIM: Le Guin says there has to be white space around the word and silence around the voice.
+QUOTE: white space around the word, silence around the voice
+TRUE: There’s got to be white space around the word, silence around the voice.
+NOTE: Live page (HTTP 200). Quote exact, in the leaping paragraph of the block quotation: 'But leaping is just as important. What you leap over is what you leave out.'
+
+### [194] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin states that listing is not describing and that only the relevant belongs.
+QUOTE: Listing is not describing. Only the relevant belongs.
+TRUE: Listing is not describing. Only the relevant belongs.
+NOTE: Live page (HTTP 200). Quote exact, immediately following the white-space sentence in the leaping paragraph.
+
+### [195] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Le Guin glosses crowding as never using ten vague words where two will do and always seeking the exact word.
+QUOTE: never to use ten vague words where two will do
+TRUE: never to use ten vague words where two will do, always to seek the vivid phrase, the exact word
+NOTE: Live page (HTTP 200). Quote exact in the crowding paragraph; the second limb is carried by the clause that follows it, 'always to seek the vivid phrase, the exact word'.
+
+### [196] VERIFIED_VERBATIM  |feature: other: narrative coherence by semirepetition
+CLAIM: Le Guin's crowding means keeping the story interconnected with itself, rich with echoes forward and backward.
+QUOTE: keeping it interconnected with itself, rich with echoes forward and backward
+TRUE: By crowding, I mean keeping the story full ... keeping it interconnected with itself, rich with echoes forward and backward
+NOTE: Live page (HTTP 200). Quote exact at the close of the crowding paragraph; 'By crowding, I mean' opens the sentence, so the crowding-means limb holds.
+
+### [197] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Le Guin's revision advice is to crowd in the first draft, then cut and recombine until what is left is what counts.
+QUOTE: cut and recombine until what's left is what counts
+TRUE: Tactically speaking, I'd say go ahead and crowd in the first draft -- put everything in. Then in revising decide what counts and what tells; then cut and recombine until what's left is what counts. Leap boldly.
+NOTE: Raw page fetched (HTTP 200, browser UA). Block quote from Steering the Craft ch.10 in a Daily Kos diary by 'not a lamb'; the quoted fragment is verbatim (page uses a typographic apostrophe in "what's"; words identical). Both limbs -- crowd in the first draft, then cut and recombine -- are on the page in that order.
+
+### [198] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: The chapter's exercise halves a passage's word count while keeping the narrative clear and the sensory impact vivid.
+QUOTE: keeping the narrative clear and the sensory impact vivid
+TRUE: and then cut the word count by half, while "keeping the narrative clear and the sensory impact vivid."
+NOTE: Raw page fetched. The blogger reports the ch.10 exercise: choose a past passage (~400 words) and cut the word count by half. 'Halves the word count' and the quoted proviso are both explicit and verbatim.
+
+### [199] VERIFIED_VERBATIM  |feature: other: scope of the craft book
+CLAIM: The Blue Garret's reviewer lists the book's topics as sound and syntax, adjectives and adverbs, verb tense and point of view.
+QUOTE: how to adjust sound and syntax, how to marshal adjectives and adverbs
+TRUE: Le Guin covers many of the expected topics - how to adjust sound and syntax, how to marshal adjectives and adverbs, how to control verb tense and point of view
+NOTE: Raw page fetched. Review by Kristen Tate on thebluegarret.com (Jun 23, 2019). Quote verbatim; the full topic list in the claim (sound/syntax, adjectives/adverbs, verb tense, point of view) matches the sentence exactly.
+
+### [200] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Novelist Matt Bell analyses a Rocannon's World sentence for the parallel construction of its two rhyming word-sets.
+QUOTE: hear the parallel construction of the two rhyming sets
+TRUE: hear the parallel construction of the two rhyming sets of steel and wheel and of tractor and reactor
+NOTE: Raw page fetched. Bylined 'By Matt Bell', Reactor (formerly Tor.com), Aug 24 2021. The sentence analysed is explicitly from 'her 1966 debut Rocannon's World'. Quote verbatim; 'two rhyming word-sets' = 'the two rhyming sets'.
+
+### [201] VERIFIED_VERBATIM  |feature: other: sentence architecture
+CLAIM: Matt Bell analyses the same sentence as built on two progressions that expand its scale as it goes.
+QUOTE: See the two progressions expanding its scale as it goes
+TRUE: What an exquisitely well-built sentence! See the two progressions expanding its scale as it goes, its scope expanding from hundred to thousands of worlds
+NOTE: Raw page fetched. Same Rocannon's World sentence as index 213 (adjacent clauses of one sentence). Quote verbatim; 'expand its scale as it goes' is the page's own wording.
+
+### [202] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Matt Bell describes Le Guin's worldbuilding method as working from the big picture down to the minutiae of local life.
+QUOTE: working from the big picture down to the minutiae of local life
+TRUE: I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life
+NOTE: Raw page fetched. Quote verbatim, and the surrounding clause makes it worldbuilding method, matching the claim's framing.
+
+### [203] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Matt Bell says Le Guin fills books with pleasurable details, citing the Gethenian implement for cracking ice on a drink.
+QUOTE: filling books with pleasurable details
+TRUE: filling books with pleasurable details like the "common table implement" on Gethen "with which you crack the ice that has formed on your drink between drafts"
+NOTE: Raw page fetched. Quote verbatim; the Gethenian ice-cracking table implement is cited immediately after, exactly as the claim says.
+
+### [204] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Matt Bell ties Le Guin's ecologies and cultures to the unique geographies evoked in her hand-drawn maps.
+QUOTE: her well-made ecologies and cultures tied to the unique geographies evoked
+TRUE: I loved Le Guin's worldbuilding, with her well-made ecologies and cultures tied to the unique geographies evoked in her hand-drawn maps
+NOTE: Raw page fetched. Quote verbatim and the 'hand-drawn maps' limb continues the same clause on the page.
+
+### [205] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: George Saunders says that for him rhythm appears by way of a lot of editing rather than by plan.
+QUOTE: rhythm is something that appears (and surprises me) by way
+TRUE: For the most part, for me, rhythm is something that appears (and surprises me) by way of a lot of editing.
+NOTE: Raw page fetched (Substack, HTTP 200). Quote verbatim in Saunders's answer. The 'rather than by plan' limb is supported by the immediately preceding sentence: writers who 'start out with some idea about a rhythm they want to attain (a plan, or schematic vision)... but that's not true for me.'
+
+### [206] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: A reader paraphrasing a Le Guin interview reports her saying prose rhythms are so subtle and have to be irregular.
+QUOTE: The rhythms are so subtle and have to be irregular.
+TRUE: But the rhythm of prose is something that not very many people have studied. The rhythms are so subtle and have to be irregular.
+NOTE: Raw page fetched. Quote verbatim, and it sits inside the reader's question, which opens 'In an interview with author Ursula Le Guin' and reports her in paraphrase -- both limbs (reader paraphrase; Le Guin interview) supported.
+
+### [207] VERIFIED_VERBATIM  |feature: register modulation
+CLAIM: A Story Grid editor says the voice of A Wizard of Earthsea gives it an almost biblical rhythm.
+QUOTE: The voice she uses gives it an almost biblical rhythm.
+TRUE: She does a fantastic job of presenting the story with this mystical air about it. The voice she uses gives it an almost biblical rhythm.
+NOTE: Raw page fetched. Spoken by Valerie in the transcript; page states 'Your Writers' Room editors are Valerie Francis... and Leslie Watts', so the 'Story Grid editor' limb is supported. Quote verbatim, about A Wizard of Earthsea.
+
+### [208] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: A Story Grid editor argues the editorial omniscient point of view creates a huge emotional gap between reader and protagonist.
+QUOTE: creates a huge emotional gap between the reader and protagonist
+TRUE: I think this editorial omniscient POV is the hardest to pull off... This POV choice creates a huge emotional gap between the reader and protagonist.
+NOTE: Raw page fetched. Quote verbatim in Valerie's section; she names the POV 'editorial omniscient' two sentences earlier, so the claim's POV limb is supported.
+
+### [209] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Leslie Watts's Story Grid analysis labels the novel's point of view Editorial Omniscient.
+QUOTE: Point of View: Editorial Omniscient
+TRUE: 3. What is the point of view / narrative device? Point of View: Editorial Omniscient
+NOTE: Raw page fetched. Article bylined 'By Leslie Watts'; the label appears verbatim in the Editor's Six Core Questions analysis, question 3, for A Wizard of Earthsea.
+
+### [210] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin says Tolkien's references to places, people and events that are not part of the immediate story give the reader a conviction of the reality of the immediate scene.
+QUOTE: a conviction of the reality of the immediate scene
+TRUE: Tolkien's references to places, people, events (often of long ago) that are not part of the immediate story: these give the reader a conviction of the reality of the immediate scene
+NOTE: Raw page fetched from ursulakleguin.com. Open letter 'Plausibility in Fantasy' to Alexei Mutovkin, signed 'Ursula Le Guin 2005'. Quote verbatim; every limb (Tolkien; places/people/events; not part of the immediate story; conviction of reality) is in the one sentence.
+
+### [211] VERIFIED_VERBATIM  |feature: annalist voice and deep time
+CLAIM: Le Guin describes the mechanism as showing the immediate scene to be part of a much greater landscape and a long history of which it is only a glimpse.
+QUOTE: part of a much greater landscape, a long history
+TRUE: because it is shown to be part of a much greater landscape, a long history, a whole world of which it is only a glimpse
+NOTE: Raw page fetched, same letter and same sentence as 223. Quote verbatim. The claim compresses the page's three-item list by dropping 'a whole world', but attaches 'of which it is only a glimpse' exactly as the page does; no limb is unsupported.
+
+### [212] VERIFIED_VERBATIM  |feature: withheld information and inference
+CLAIM: Le Guin says she has often named events or places in her fantasies that she did not yet know anything about, which were merely words when she wrote them.
+QUOTE: when I wrote them, merely words
+TRUE: “in my fantasies, I have often mentioned events or places which I didn’t yet know anything about … These were, when I wrote them, merely words — ‘empty’ nouns.”
+NOTE: Raw HTML fetched live (HTTP 200), tags stripped. Quote exact. Page says 'mentioned' where the claim says 'named'; the page's own gloss '“empty” nouns' plus the named example (the later exploits of Ged in A Wizard of Earthsea) supports 'named'. Page locator confirmed.
+
+### [213] VERIFIED_VERBATIM  |feature: concrete sensory noun
+CLAIM: Le Guin asserts that the more exact and factual the detail in a fantasy story, the more plausible the imagined world will be.
+QUOTE: Exact and vivid words make an exact and vivid world.
+TRUE: “The more realistic, exact, ‘factual’ detail in a fantasy story … the more plausible the world will be. … Exact and vivid words make an exact and vivid world.”
+NOTE: Quote exact, and it is the sentence immediately following the claim sentence in the same paragraph beginning 'Then there is detail' — locator confirmed. Both limbs (exact/factual detail; greater plausibility) on the page.
+
+### [214] VERIFIED_VERBATIM  |feature: other: internal coherence
+CLAIM: Le Guin names coherence as the touchstone of plausibility in imaginative fiction.
+QUOTE: The touchstone to plausibility in imaginative fiction is probably coherence.
+TRUE: “The touchstone to plausibility in imaginative fiction is probably coherence.”
+NOTE: Quote exact, in the paragraph before the closing two — locator confirmed. One nuance recorded, not a downgrade: Le Guin hedges with 'probably', which the claim drops; no limb of the claim is otherwise unsupported. The page continues 'Fantasy, which creates a world, must be strictly coherent to its own terms.'
+
+### [215] VERIFIED_VERBATIM  |feature: other: internal coherence
+CLAIM: Le Guin says what constitutes plausibility in fantasy is the coherence of the story and its consistent self-reference.
+QUOTE: What constitutes plausibility in fantasy is the coherence of the story
+TRUE: “What constitutes plausibility in fantasy is the coherence of the story, its consistent self-reference.”
+NOTE: Quote exact and both limbs (coherence; consistent self-reference) are the one sentence, in the paragraph on fantasy's 'contract with the reader' — locator confirmed. Essay dated 2005 on the page.
+
+### [216] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin objects that a preindustrial fantasy setting is no justification for a world having no economics and no social justice.
+QUOTE: no economics and no social justice
+TRUE: “It may resemble mediaeval Europe in being preindustrial — but that doesn’t justify its having no economics and no social justice.”
+NOTE: Quote exact, inside Assumption 2 ('Fantasy Land is the Middle Ages') — locator confirmed. Speech header on the page confirms Children’s Literature Breakfast, BookExpo America, Chicago, 4 June 2004.
+
+### [217] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin says she feels like setting off fireworks whenever she finds a fantasy set in a genuinely imagined society and culture.
+QUOTE: genuinely imagined society and culture instead of this lazy-minded
+TRUE: “Whenever I find a fantasy that is set in a genuinely imagined society and culture … I feel like setting off fireworks.”
+NOTE: Quote exact (page continues 'recycled hokum'), in Assumption 2 — locator confirmed. Both limbs (genuinely imagined society and culture; fireworks) supported.
+
+### [218] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin defines a society's technology as how it copes with physical reality, and lists food, clothing, power sources, what people build with and what they build, and their medicine.
+QUOTE: how people get and keep and cook food
+TRUE: “Its technology is how a society copes with physical reality: how people get and keep and cook food, how they clothe themselves, what their power sources are … what they build with and what they build, their medicine.”
+NOTE: Quote exact. Every listed item in the claim — food, clothing, power sources, what they build with and what they build, medicine — appears in that one sentence, in the paragraph the locator names.
+
+### [219] VERIFIED_VERBATIM  |feature: place and institution description
+CLAIM: Le Guin defines technology as the active human interface with the material world.
+QUOTE: Technology is the active human interface with the material world.
+TRUE: “Technology is the active human interface with the material world.”
+NOTE: Quote exact and it does stand as its own one-sentence paragraph, as the locator says. Essay dated 2005 on the page.
+
+### [220] VERIFIED_VERBATIM  |feature: other: exposition and description defended
+CLAIM: Le Guin says that thanks to 'show don't tell' she finds writers in her workshops who are afraid to describe the world they have invented.
+QUOTE: They’re afraid to describe the world they’ve invented.
+TRUE: “Thanks to ‘show don’t tell,’ I find writers in my workshops who think exposition is wicked. They’re afraid to describe the world they’ve invented.”
+NOTE: Quote exact (curly apostrophes match). The claim compresses two consecutive sentences; both are on the page. It is the third body paragraph, as the locator says. Page footer confirms first publication as 'When to Bend, When to Break', Los Angeles Times, 05 January 2003.
+
+### [221] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Le Guin argues the narrator's voice, disparaged as omniscient, is the most intimate voice of all rather than a distancing one.
+QUOTE: it’s the most intimate voice of all
+TRUE: “the narrator’s voice (ponderously described as ‘omniscient’) distances the story — whereas it’s the most intimate voice of all”
+NOTE: Quote exact. The 'disparaged as omniscient' limb is carried by the page's 'ponderously described as “omniscient”'; the 'rather than a distancing one' limb by the page's 'whereas'. Fourth body paragraph — locator confirmed. Note the belief is attributed to the writers Le Guin is arguing against, which is how the claim reads it.
+
+### [222] VERIFIED_VERBATIM  |feature: point of view and distance
+CLAIM: Le Guin says the same fear of distancing leads writers to abandon the narrative past tense for the tight-focused present tense, and answers that distance lends enchantment.
+QUOTE: But distance lends enchantment
+TRUE: “The same fear of ‘distancing’ leads writers to abandon the narrative past tense … for the tight-focused, inflexible present tense. But distance lends enchantment…”
+NOTE: Quote exact; every limb (same fear of distancing; abandoning narrative past tense; tight-focused present tense; distance lends enchantment) is in those two consecutive sentences of the fourth paragraph.
+
+### [223] VERIFIED_VERBATIM  |feature: cadence and rhythm
+CLAIM: Le Guin says writing is made of words that are bodily, and that the rhythms of words are bodily rhythms.
+QUOTE: the rhythms of words are bodily rhythms
+TRUE: “writing … is made of words, and words are bodily … and the rhythms of words are bodily rhythms.”
+NOTE: Quote exact, in the paragraph beginning 'I use bodily similes not mechanical ones' — locator confirmed. Both limbs (words are bodily; rhythms of words are bodily rhythms) in one sentence. Page dated c. 2007.
+
+### [224] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Le Guin says many contemporary writers avoid complex sentences and write what she calls Macho Staccato.
+QUOTE: avoid complex sentences and write what I call Macho Staccato
+TRUE: “Many contemporary writers avoid complex sentences and write what I call Macho Staccato.”
+NOTE: Quote exact and it opens Le Guin's answer to the questioner named Joe — attribution confirmed on the page. Page header: originally posted at Book View Café, 7 September 2015.
+
+### [225] VERIFIED_VERBATIM  |feature: sentence length variation
+CLAIM: Le Guin says the ideal is flexibility, a balance of different sentence lengths depending on what the sentences do.
+QUOTE: The ideal is flexibility, a balance of different sentence lengths
+TRUE: “The ideal is flexibility, a balance of different sentence lengths, longer and shorter sentences depending on what they do, what they’re about.”
+NOTE: Quote exact, in the answer to Michael — attribution confirmed. The claim's 'depending on what the sentences do' limb is the page's 'depending on what they do, what they’re about'.
+
+### [226] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Le Guin says a poet's desire to make words vivid, exact and as few as possible carries over into writing prose.
+QUOTE: as exact and accurate, and as few as possible
+TRUE: “the poet’s desire to make the words vivid, as exact and accurate, and as few as possible, telling much briefly”
+NOTE: Quote exact. 'Carries over into writing prose' is supported by the preceding sentence ('the poet’s ear … will carry over into writing prose') and the elliptical 'And so may the poet’s desire…'. Two nuances recorded, neither a downgrade: Le Guin hedges with 'may', and the answer is a single joint reply under the heading 'POETRY AND FICTION — Two questions' to Joseph and Deepthi, not to Deepthi alone.
+
+### [227] VERIFIED_VERBATIM  |feature: plainness and economy
+CLAIM: Le Guin warns that narrative written by a poet is sometimes both over-elliptic and over-written, too aware of itself.
+QUOTE: over-elliptic and over-written
+TRUE: Narrative written by a poet is sometimes both over-elliptic and over-written — too aware of itself, not interested enough in telling the story.
+NOTE: Raw page fetched (HTTP 200, browser UA). Quote 'over-elliptic and over-written' present word for word in the joint answer to Joseph and Deepthi; 'too aware of itself' follows verbatim.
+
+### [228] VERIFIED_VERBATIM  |feature: other: passive voice
+CLAIM: Quoting her own Steering the Craft, Le Guin says that where the passive voice belongs we ought to use it freely, calling it one of the lovely versatilities of the verb.
+QUOTE: It is one of the lovely versatilities of the verb.
+TRUE: Where it does belong, we ought to use it freely. It is one of the lovely versatilities of the verb.
+NOTE: Raw page. Answer to Christy explicitly quotes Steering the Craft 'On p. 56-57'; both limbs ('we ought to use it freely', 'one of the lovely versatilities of the verb') appear verbatim.
+
+### [229] VERIFIED_VERBATIM  |feature: other: telling vs showing
+CLAIM: Le Guin says that whatever writing schools teach, stories are not shown but told.
+QUOTE: stories are not shown, but told
+TRUE: No matter what sacred laws the Moseses of the Iowa School of Writing handed down... stories are not shown, but told.
+NOTE: Raw page. Answer to Paige. Quote verbatim; the 'whatever writing schools teach' limb is carried by the Iowa School of Writing clause immediately preceding it.

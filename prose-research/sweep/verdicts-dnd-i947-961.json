@@ -1,0 +1,326 @@
+{
+ "name": "dnd",
+ "chunk": 5,
+ "claims": [
+  {
+   "index": 947,
+   "feature": "other: settlement slot list",
+   "claim": "The 2014 DMG's settlement slots are five tables headed Race Relations, Ruler's Status, Notable Traits, Known For Its, and Current Calamity.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "its size and its basic form of government.",
+   "page": "ch.5 > 'Random Settlements', p.112 (table headings on the page)",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 948,
+   "feature": "other: table heading form",
+   "claim": "The 2014 DMG heads its reputation slot as a sentence stem with an ellipsis that the rolled result completes.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Known For Its ...",
+   "page": "ch.5 > 'Random Settlements', p.112",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "herald-pools",
+   "confidence": "high"
+  },
+  {
+   "index": 949,
+   "feature": "dm-facing sentence",
+   "claim": "The entries on the 2014 DMG's Current Calamity table are unpunctuated noun phrases rather than sentences.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Undead stirring in cemeteries",
+   "page": "ch.5 > 'Random Settlements' > 'Current Calamity', p.112",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "herald-pools",
+   "confidence": "high"
+  },
+  {
+   "index": 950,
+   "feature": "place and institution description",
+   "claim": "The 2014 DMG tells the DM drawing a settlement map to ignore the placement of every building and concentrate on major features.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "concentrate instead on the major features.",
+   "page": "ch.5 > 'Mapping a Settlement', p.114",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 951,
+   "feature": "naming and forms of address",
+   "claim": "The 2014 DMG advises naming a city's wards after the dominant trade, a geographical characteristic, or a dominant site, offering Tannery Square, Riverside and the Lords' Quarter as its own examples.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "the kinds of trades that dominate the neighborhood",
+   "page": "ch.5 > 'Mapping a Settlement', p.114",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 952,
+   "feature": "other: settlement slot list",
+   "claim": "The 2014 DMG opens its settlement guidance with a question list whose second sensory question asks what the place looks, smells and sounds like.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "What does it look, smell, and sound like?",
+   "page": "ch.1 'A World of Your Own' > 'Settlements', p.15",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 953,
+   "feature": "concrete sensory noun",
+   "claim": "The 2014 DMG asserts that sensory details are what bring a settlement to life for the players.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Sensory details help bring a settlement to life and",
+   "page": "ch.1 > 'Settlements' > 'Atmosphere', p.17",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 954,
+   "feature": "place and institution description",
+   "claim": "The 2014 DMG tells the DM to fix one defining factor for a settlement's personality and extrapolate the rest of the description from it.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Settle on a single defining factor that sums up a",
+   "page": "ch.1 > 'Settlements' > 'Atmosphere', p.17",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 955,
+   "feature": "plainness and economy",
+   "claim": "The 2014 DMG rules that a settlement the party only rests and resupplies in needs no more than a brief description.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "of this sort needs no more than a brief description.",
+   "page": "ch.1 > 'Settlements' > 'Local Color', p.15",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 956,
+   "feature": "omission as information",
+   "claim": "The 2014 DMG instructs the DM to create only the settlement features the campaign will actually need and let the place grow later.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "you put into it. Create only the features of a settlement",
+   "page": "ch.1 > 'Settlements' > 'Purpose', p.15",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 957,
+   "feature": "edition and house style",
+   "claim": "The 2014 DMG explicitly licenses the DM to disregard its own settlement advice where it conflicts with the DM's vision.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Disregard any advice here that runs counter to",
+   "page": "ch.1 > 'Settlements', p.15",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "index": 958,
+   "feature": "civic record register",
+   "claim": "Each settlement size in the 2014 DMG is written as a five-field labelled record: Population, Government, Defense, Commerce and Organizations.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Organizations: A village might contain one or two",
+   "page": "ch.1 > 'Settlements' > 'Size' (Village, Town, City), pp.16-17",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 959,
+   "feature": "other: digits in prose",
+   "claim": "In the 2014 DMG the city population threshold is spelled out in words inside the running prose.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Cities that hold more than twenty-five thousand people",
+   "page": "ch.1 > 'Settlements' > 'Size' > City, p.17",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 960,
+   "feature": "other: digits in prose",
+   "claim": "The same 2014 DMG city entry gives the same population figure in numerals in its labelled Population field, a few lines above the spelled-out sentence.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "Population: Up to about 25,000",
+   "page": "ch.1 > 'Settlements' > 'Size' > City, p.17",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 961,
+   "feature": "other: digits in prose",
+   "claim": "The 2014 DMG's Forgotten Realms currency example carries two coin values as numerals inside one sentence of running prose.",
+   "source": "Wizards of the Coast, Dungeon Master's Guide (2014, 5th edition)",
+   "url": "https://archive.org/download/dungeon-masters-guide/Dungeon%20Master%27s%20Guide_djvu.txt",
+   "quote": "worth 50 gp in Waterdeep and 30 gp",
+   "page": "ch.1 > 'Settlements' > 'Currency' > 'Example: The Forgotten Realms', p.19",
+   "kind": "own-words",
+   "polarity": "applies",
+   "date": "2014-12-09",
+   "routeHint": "archive.org item \"dungeon-masters-guide\", _djvu.txt full-book OCR, curl direct",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 947,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "its size and its basic form of government.",
+   "note": "Raw OCR of the archive.org _djvu.txt (1,207,785 bytes, HTTP 200, curl direct). Quote exact at the head of 'Random Settlements'. The section carries exactly five tables in this order before the p.112 footer and the next section ('Random Buildings'): Race Relations, Ruler's Status, Notable Traits, Known For Its ..., Current Calamity. All five headings match the claim."
+  },
+  {
+   "index": 948,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Known For Its ...",
+   "note": "Quote exact, including the ellipsis, as the table heading. Its d20 column is headed 'Feature' and every result is a completing noun ('Delicious cuisine', 'Rude people', 'Piety', 'Gambling', 'Patriotism'), so the heading does read as a stem the rolled result finishes. Both limbs supported."
+  },
+  {
+   "index": 949,
+   "verdict": "PARTIAL",
+   "trueWording": "Undead stirring in cemeteries",
+   "note": "The quote is exact and is itself a noun phrase, and no entry carries terminal punctuation, so 'unpunctuated' holds. But the generalisation over the table fails: at least five of the twenty results are subject-verb clauses, not noun phrases - 'New cult seeks converts', 'Important figure died (murder suspected)', 'Powerful wizard has moved into town', 'Scandal threatens powerful families', 'Religious sects struggle for power'. Two more carry parenthetical punctuation ('Plague or famine (sparks riots)', 'Economic depression (trade disrupted)'). The table's register is 'unpunctuated fragment', which covers both shapes; 'noun phrase' does not.",
+   "unsupportedLimb": "the entries are noun phrases rather than sentences - several are unpunctuated finite clauses"
+  },
+  {
+   "index": 950,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "concentrate instead on the major features.",
+   "note": "Quote exact. The sentence opens 'Mapping a Settlement' and reads, in full, that when you draw a settlement map you should not worry about the placement of every building and should concentrate instead on the major features. The claim's 'ignore' is a fair rendering of the book's 'don't worry about'; every limb is on the page."
+  },
+  {
+   "index": 951,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the kinds of trades that dominate the neighborhood",
+   "note": "Quote exact. The same paragraph in 'Mapping a Settlement' tells the DM to give wards names reflecting their personalities, which identify the trades, a geographical characteristic, or a dominant site - and all three of the claim's cited examples are the book's own, in its own parentheses: Tannery Square (with Temple Row), Riverside (with Hilltop), and the Lords' Quarter."
+  },
+  {
+   "index": 952,
+   "verdict": "PARTIAL",
+   "trueWording": "What does it look, smell, and sound like?",
+   "note": "Quote exact, and the list does open the ch.1 'Settlements' guidance ('Consider the following questions as you create any settlement in your world'). But the position is wrong. The bullets run: purpose in your game; how big / who lives there; look, smell, sound; who governs; defenses; goods and services; temples and organizations; fantastic elements; why characters should care - nine in all. The sensory question is third, not second, and it is the list's only sensory question, so 'second sensory question' fails on either reading.",
+   "unsupportedLimb": "'second' - the sensory question is the third bullet in the list, and the only sensory one"
+  },
+  {
+   "index": 953,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sensory details help bring a settlement to life",
+   "note": "Quote exact under the 'Atmosphere' subhead; the sentence continues that they vividly communicate the settlement's personality to your players, so the 'for the players' limb is the book's own. One calibration for downstream use: the DMG hedges with 'help bring', where the claim says 'are what bring'. The assertion is the book's; the exclusivity is not, so do not quote the claim as though the DMG said sensory details alone do the work."
+  },
+  {
+   "index": 954,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Settle on a single defining factor that sums up a",
+   "note": "Quote exact; the sentence completes with the settlement's personality and an instruction to extrapolate from there, and the paragraph then demonstrates it - a canal city like Venice yields sights, sounds, smells and the feel of humidity; a fog-shrouded city yields cold mist, muffled hooves, the smell of rain. Both limbs, the single factor and the extrapolation, are supported."
+  },
+  {
+   "index": 955,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "of this sort needs no more than a brief description.",
+   "note": "Quote exact, and the preceding sentence in 'Local Color' supplies the antecedent the claim depends on: a settlement that serves as a place where the characters stop to rest and to buy supplies. 'A settlement of this sort' is that settlement, so the rest-and-resupply limb is the book's own."
+  },
+  {
+   "index": 956,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Create only the features of a settlement",
+   "note": "Quote exact (the claim's longer form, carrying the tail of the previous sentence, also matches the OCR byte for byte). Under 'Purpose'. The passage continues that you create the features you know you'll need, with notes on general features, then allow the place to grow organically as the adventurers interact with more of it - so the 'let the place grow later' limb is supported too."
+  },
+  {
+   "index": 957,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Disregard any advice here that runs counter to",
+   "note": "Quote exact; the sentence completes with the DM's vision for a settlement, and the sentence before it frames the whole section as guidelines to help you build the settlement you want. The licence is explicit and it is scoped to this settlement section, exactly as claimed."
+  },
+  {
+   "index": 958,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Organizations: A village might contain one or two",
+   "note": "Quote exact. Checked all three size entries, not just the quoted one: Village, Town and City each carry the same five labelled fields in the same order - Population, Government, Defense, Commerce, Organizations - before their running prose. The record shape holds across the set, so the 'each settlement size' limb is confirmed rather than inferred from one entry."
+  },
+  {
+   "index": 959,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cities that hold more than twenty-five thousand people",
+   "note": "Quote exact, in the running prose beneath the City record, in a sentence saying such cities are extremely rare before naming Waterdeep, Sharn and the Free City of Greyhawk. The threshold is spelled out in words in prose, as claimed."
+  },
+  {
+   "index": 960,
+   "verdict": "PARTIAL",
+   "trueWording": "Population: Up to about 25,000",
+   "note": "Quote exact, in the City entry's labelled Population field, and the numeral/word contrast the claim is really about is real: the same 25,000 figure appears as digits in the field and as words in the prose, on the same page and in the same entry. The proximity limb overstates it. Between them stand the Government, Defense, Commerce and Organizations fields plus two full paragraphs of prose - about thirty printed lines, not a few. Worth noting for the register work: the field states a ceiling ('Up to about 25,000') and the prose sentence a floor ('more than twenty-five thousand'), so they are the same figure doing opposite duty.",
+   "unsupportedLimb": "'a few lines above' - roughly thirty lines, four labelled fields and two paragraphs separate them"
+  },
+  {
+   "index": 961,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "worth 50 gp in Waterdeep and 30 gp",
+   "note": "Quote exact. The sentence, about Waterdeep's harbor moon, completes with 'elsewhere', so both coin values sit as numerals inside one sentence of running prose under 'Example: The Forgotten Realms'. The surrounding paragraphs do the same repeatedly (the toal at 2 gp, Silverymoon's electrum moon at 1 gp / 1 ep, the eclipsed moon at 5 ep / 2 ep), so the pattern is the section's habit, not a one-off."
+  }
+ ]
+}

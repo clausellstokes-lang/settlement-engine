@@ -1,0 +1,7 @@
+PROOF_HEAD=983a37f267cb1e7951954528c77e5074a3d84aff start 02:45:14 load=2.16 2.22 2.45
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+TYPECHECK_EXIT=0 02:45:29

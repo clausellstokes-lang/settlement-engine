@@ -1,0 +1,24 @@
+{
+ "role": "critic",
+ "name": "dnd",
+ "angle": null,
+ "tag": null,
+ "lines": 96,
+ "firstTs": "2026-09-07T01:54:01.250Z",
+ "lastTs": "2026-09-07T02:10:32.683Z",
+ "tools": {
+  "Bash": 16,
+  "Read": 8,
+  "Write": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/critic-dnd.md"
+ ],
+ "lastAssistantText": "AL template; DMs Guild content guidelines via Wayback; dndbeyond post 1393.\n11. Second-seat sample of 60 random VERIFIED_VERBATIM rows to estimate hidden PARTIALs.\n12. Decisions for section 6: a level map for the \"opens with\" rules, years without digits, one bold rule, one rating, the clerk's voice.",
+ "run": "wf_f191dac2-82a",
+ "agent": "a406e99cc4cb5b63d",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/df942c1b-a1a2-4594-ba90-9241ff864ccd/subagents/workflows/wf_f191dac2-82a/agent-a406e99cc4cb5b63d.jsonl",
+ "journal": "result",
+ "checkpointFile": null
+}

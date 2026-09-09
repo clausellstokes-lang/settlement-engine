@@ -1,0 +1,234 @@
+{
+ "name": "wolfe",
+ "chunk": 13,
+ "claims": [
+  {
+   "index": 195,
+   "feature": "omission as information",
+   "claim": "Aramini reports as general critical consensus that Wolfe leaves certain resolutions out of the text for the reader to infer.",
+   "source": "Marc Anthony Aramini, 'Does It Mean? Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, University of Nevada Las Vegas, May 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "Wolfe leaves out certain resolutions which are left to the reader",
+   "page": "Introduction"
+  },
+  {
+   "index": 196,
+   "feature": "withheld information and inference",
+   "claim": "Aramini reports Peter Wright's contrary position that many details in Wolfe's primary narrative are distractions rather than clues.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), summarised by Marc Aramini in his UNLV dissertation, 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "many of the details included in the primary narrative",
+   "page": "Introduction"
+  },
+  {
+   "index": 197,
+   "feature": "other: documentary frame",
+   "claim": "Aramini reports Wright's finding that Wolfe's translator persona makes deliberate mistranslations and substitutions inside the Latro books.",
+   "source": "Peter Wright, Attending Daedalus (Liverpool University Press, 2003), p. 188, quoted by Marc Aramini in his UNLV dissertation, 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "explicit mistranslations and substitutions by the translator Wolfe",
+   "page": "chapter on the Latro novels"
+  },
+  {
+   "index": 198,
+   "feature": "omission as information",
+   "claim": "A passage of Wolfe's own fiction reproduced in Aramini's dissertation states that what is not said can be important but what is said matters more.",
+   "source": "Gene Wolfe, The Sword of the Lictor, p. 182, quoted within Peter Wright's argument as reproduced in Marc Aramini's UNLV dissertation, 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "What is not said can be important",
+   "page": "chapter on critical reception"
+  },
+  {
+   "index": 199,
+   "feature": "annalist voice and deep time",
+   "claim": "Aramini argues that Wolfe builds his Latro narrative on the Herodotean model of an account that blends history, myth and rumour.",
+   "source": "Marc Anthony Aramini, UNLV dissertation, May 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "blends history, myth, and rumor",
+   "page": "chapter on the Latro novels"
+  },
+  {
+   "index": 200,
+   "feature": "civic record register",
+   "claim": "A passage of Wolfe's The Wizard Knight reproduced in Aramini's dissertation describes a past that survives only as memories and as records nobody reads or can read.",
+   "source": "Gene Wolfe, The Wizard Knight, p. 39, quoted in Marc Aramini's UNLV dissertation, 2019",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "quote": "records nobody reads, and records nobody can read",
+   "page": "chapter on archetypes"
+  },
+  {
+   "index": 201,
+   "feature": "per-speaker register",
+   "claim": "Clute reports that the large cast of The Book of the Short Sun speaks in dozens of distinct dialects and accents, each rendered with care.",
+   "source": "John Clute, 'It Is Becoming to Grapple with This Book', Excessive Candour column, Science Fiction Weekly issue 197, 29 January 2001",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "quote": "dozens of different dialects and accents spoken by the huge cast",
+   "page": "section 'A Complex Yet Rewarding Finish'"
+  },
+  {
+   "index": 202,
+   "feature": "withheld information and inference",
+   "claim": "Clute identifies Wolfe's refusal to restate a difficult story in easy terms as one of the things the reader must struggle with.",
+   "source": "John Clute, Science Fiction Weekly issue 197, 29 January 2001",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "quote": "refusal to unpack in easy terms",
+   "page": "section 'A Complex Yet Rewarding Finish'"
+  },
+  {
+   "index": 203,
+   "feature": "concrete sensory noun",
+   "claim": "Clute locates the moral quality of Wolfe's central character in the details rather than in any statement about him.",
+   "source": "John Clute, Science Fiction Weekly issue 197, 29 January 2001",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "quote": "that goodness is in the details",
+   "page": "section 'A Complex Yet Rewarding Finish'"
+  },
+  {
+   "index": 204,
+   "feature": "plainness and economy",
+   "claim": "Clute argues that every word in Wolfe's stories is deliberate, so that no sentence can be slurred over by the reader.",
+   "source": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "every word he wrote was meant",
+   "page": "paragraph on the 1970s stories"
+  },
+  {
+   "index": 205,
+   "feature": "metaphor discipline",
+   "claim": "Clute states that Wolfe did not write metaphors into his text, or wrote only metaphors to which a literal meaning could be attached.",
+   "source": "John Clute, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "Wolfe did not create metaphors in his text",
+   "page": "paragraph on the 1970s stories"
+  },
+  {
+   "index": 206,
+   "feature": "metaphor discipline",
+   "claim": "Clute says the nearest Wolfe normally comes to metaphor is letting one of his characters tell a lie.",
+   "source": "John Clute, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "the closest Wolfe normally gets to metaphor is when he",
+   "page": "paragraph on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 207,
+   "feature": "other: literal over thematic",
+   "claim": "Clute argues Wolfe wrote neither thematics nor allegory but the thing itself.",
+   "source": "John Clute, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "he did not write allegory, he wrote the thing itself",
+   "page": "paragraph on the 1970s stories"
+  },
+  {
+   "index": 208,
+   "feature": "other: literal over thematic",
+   "claim": "Clute says Wolfe's stories cannot be paraphrased for meaning because they only make sense once the manner of their telling is understood.",
+   "source": "John Clute, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "stories that only make sense when it is understood how",
+   "page": "paragraph on academic reception"
+  },
+  {
+   "index": 209,
+   "feature": "plainness and economy",
+   "claim": "Clute describes the surface of The Fifth Head of Cerberus as a fluent and seemingly translucent style.",
+   "source": "John Clute, SCI FI Wire, 6 April 2009",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "quote": "written in a fluent, seemingly translucent style",
+   "page": "paragraph on The Fifth Head of Cerberus"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe leaves out certain resolutions which are left to the reader to infer",
+   "note": "Aramini, Introduction (p.7-8 of the PDF text): 'this absence certainly does resonate with the general consensus that Wolfe leaves out certain resolutions which are left to the reader to infer.' Quote verbatim; 'general critical consensus' limb supported by the words 'the general consensus'."
+  },
+  {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wright insists many primary-narrative details are actually distractions",
+   "note": "Same Introduction passage: 'However, Wright insists that many of the details included in the primary narrative in Wolfe's fiction are somehow actually distractions'. Quote verbatim; the 'contrary' limb is carried by 'However', and 'rather than clues' by the quoted Wright text calling the allusions 'largely external to the text and of little use to an understanding of the narrative' and by Aramini's earlier 'distractions and misdirections'."
+  },
+  {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "explicit mistranslations and substitutions by the translator Wolfe",
+   "note": "Latro chapter (PDF text ~p.41): 'He also notes that these explicit mistranslations and substitutions by the translator Wolfe \"[draw] attention to the gap between the signifier and what is signified...\" (188).' Quote verbatim, attributed to Wright at p.188 as the claim states; the page's adjective is 'explicit' where the claim says 'deliberate' — same substance (Wolfe writing as the scrolls' translator, with Soldier in the Mist p. xi cited just above)."
+  },
+  {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What is not said can be important -- but what is said is more important",
+   "note": "Inside the block quotation from Wright: 'What is not said can be important -- but what is said is more important. (Sword, p. 182)'. Quote verbatim and the Sword of the Lictor p.182 citation is on the page. Location note only: the passage sits in the dissertation's Introduction, not a separate 'chapter on critical reception'."
+  },
+  {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Herodotus's account blends history, myth, and rumor; Wolfe takes much the same approach",
+   "note": "Latro chapter (~p.65): 'the approach Herodotus takes to his historical account blends history, myth, and rumor, even tying the war with Persia into the oral tradition of Homer, and Wolfe seems to take much the same approach in forging Latro's story.' Quote verbatim; every limb supported."
+  },
+  {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the past is only memories, and records nobody reads, and records nobody can read",
+   "note": "Quoted from The Knight (volume one of The Wizard Knight), cited '(39)' after an earlier '(Wolfe, Knight 33)', in the chapter whose next sentences turn to Jung's archetypes. Quote verbatim; 'survives only as memories and records' matches 'the past is only memories, and records nobody reads, and records nobody can read.'"
+  },
+  {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "dozens of different dialects and accents spoken by the huge cast, all meticulously rendered",
+   "note": "Clute 2001, section 'A Complex Yet Rewarding Finish': 'There is much to struggle with--the learnings of Silk; the dozens of different dialects and accents spoken by the huge cast, all meticulously rendered...'. Quote verbatim; 'each rendered with care' is the page's 'all meticulously rendered'."
+  },
+  {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe's refusal to unpack in easy terms a tale inherently difficult to tell",
+   "note": "Same sentence, inside the list introduced by 'There is much to struggle with--': '...Wolfe's refusal to unpack in easy terms a tale which is inherently difficult to tell'. Quote verbatim; both limbs (the refusal, and its being one of the things to struggle with) are on the page."
+  },
+  {
+   "index": 203,
+   "verdict": "PARTIAL",
+   "trueWording": "we know that Silk is indeed good. And that goodness is in the details",
+   "note": "Quote 'that goodness is in the details' is verbatim in the section 'A Complex Yet Rewarding Finish', and the goodness-in-the-details limb holds. But the page draws no contrast with statement: the same sentence flatly states 'we know that Silk, on the other hand, is indeed good', and the column also quotes Hoof's plain 'Father was good' and Clute's own earlier 'one of the most luminously good figures in 20th century literature'. The 'rather than in any statement about him' limb is the verifier's addition, not Clute's.",
+   "unsupportedLimb": "rather than in any statement about him"
+  },
+  {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every word he wrote was meant; no slurring over of sentences",
+   "note": "Clute 2009, the paragraph on learning to read Wolfe in the 1970s: 'The first thing to understand, I thought then (and now), was that every word he wrote was meant. There could be no slurring over of sentences in the reader's mind.' Quote verbatim; both limbs on the page."
+  },
+  {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe did not create metaphors in his text -- or only metaphors with a literal meaning attached",
+   "note": "Same paragraph: 'As Wolfe did not create metaphors in his text-or if he only created metaphors to which a literal meaning, a literal architectonic, could be attached-there were no easy copouts for the reader'. Quote verbatim; the claim's disjunction matches the page's."
+  },
+  {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the closest Wolfe normally gets to metaphor is when he allows one of his protagonists to tell a lie",
+   "note": "In the Fifth Head of Cerberus paragraph, as the claim's page field says. Quote verbatim. The page says 'one of his protagonists' where the claim says 'one of his characters' — a broadening of the same statement, not a different one."
+  },
+  {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he did not write thematics, he did not write allegory, he wrote the thing itself",
+   "note": "1970s paragraph: '...he did not write thematics, he did not write allegory, he wrote the thing itself.' The claim's quote is a contiguous verbatim substring, and the 'neither thematics nor allegory' limb is the clause immediately before it."
+  },
+  {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you cannot abstract themes from stories that only make sense when it is understood how they have been told",
+   "note": "The paragraph on academics shunning Wolfe: 'because you cannot strip-mine Gene Wolfe for \"meaning,\" you cannot abstract themes from stories that only make sense when it is understood how they have been told.' Quote verbatim; the 'cannot be paraphrased for meaning' limb is supported here and by the earlier 'no schizo paraphrasing of what he said into story and meaning'."
+  },
+  {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written in a fluent, seemingly translucent style that may distract the reader",
+   "note": "'\"The Fifth Head of Cerberus\", which is all about guarding (and attempting to escape from) the hell within, is written in a fluent, seemingly translucent style that may distract the reader from realizing that it can only be understood when every word is adhered to literally.' Quote verbatim; 'surface' is fair for a style that 'may distract the reader' from the literal reading beneath it. Clute is describing the novella of that name, the collection's opening story."
+  }
+ ]
+}

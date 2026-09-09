@@ -1,0 +1,233 @@
+{
+ "name": "wolfe",
+ "chunk": 20,
+ "claims": [
+  {
+   "index": 300,
+   "feature": "withheld information and inference",
+   "claim": "Keeley says a small detail in one volume of The Book of the New Sun frequently presages a large revelation in a later one.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "a small detail in one book frequently presages a large revelation",
+   "page": "advice 5"
+  },
+  {
+   "index": 301,
+   "feature": "plainness and economy",
+   "claim": "Novelist Michael Swanwick rates Wolfe's prose as good as prose gets, in a beginners' guide first printed in F&SF in 2007.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "his prose is as good as prose gets",
+   "page": "essay, para 3"
+  },
+  {
+   "index": 302,
+   "feature": "withheld information and inference",
+   "claim": "Swanwick says Wolfe is notorious for never explaining his stories, so no reader can tell where interpretation stops.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Gene Wolfe is notorious for never explaining his stories",
+   "page": "essay, on 'A Solar Labyrinth'"
+  },
+  {
+   "index": 303,
+   "feature": "withheld information and inference",
+   "claim": "Swanwick's first rule for reading Wolfe is to look for hidden implications.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Look for hidden implications.",
+   "page": "essay, the three rules"
+  },
+  {
+   "index": 304,
+   "feature": "concrete sensory noun",
+   "claim": "Swanwick's second rule for reading Wolfe is to pay serious attention to the obvious, citing Poe's purloined letter.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Remember Poe’s purloined letter, and pay serious attention to the obvious.",
+   "page": "essay, the three rules"
+  },
+  {
+   "index": 305,
+   "feature": "omission as information",
+   "claim": "Swanwick tells the reader of the story 'Memorare' to look up the prayer of that name to see what Wolfe left out of it.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "look up the prayer to see what Wolfe left out",
+   "page": "essay, on 'Memorare'"
+  },
+  {
+   "index": 306,
+   "feature": "plainness and economy",
+   "claim": "Swanwick warns that a Wolfe story's surface meaning cannot be ignored merely because the story also has deeper levels.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "simply because a story has deeper levels, its surface meaning can be",
+   "page": "essay, after the Solar Labyrinth section"
+  },
+  {
+   "index": 307,
+   "feature": "withheld information and inference",
+   "claim": "Swanwick says Wolfe always leaves room in his work for more than one interpretation.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Wolfe always leaves room for multiple interpretations in his work.",
+   "page": "essay, on 'Memorare'"
+  },
+  {
+   "index": 308,
+   "feature": "concrete sensory noun",
+   "claim": "Swanwick points to the engineering detail of the suits and cenotaphs in 'Memorare' as craftsmanship on the story's surface.",
+   "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Note the careful engineering of the suits and cenotaphs.",
+   "page": "essay, on 'Memorare'"
+  },
+  {
+   "index": 309,
+   "feature": "other: authorial statement of method",
+   "claim": "Wolfe, quoted by Swanwick from his short essay 'What I Know About Writing (in no particular order)', wrote that an interesting work of art comes close to saying the opposite of what it says.",
+   "source": "Gene Wolfe, 'What I Know About Writing (in no particular order)', quoted by Michael Swanwick",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "quote": "Almost any interesting work of art comes close to saying the opposite",
+   "page": "essay, mid-piece"
+  },
+  {
+   "index": 310,
+   "feature": "withheld information and inference",
+   "claim": "Swanwick says annotation pays off on Wolfe because he puts more into his works than almost any other writer.",
+   "source": "Michael Swanwick, 'The Explicated Gene Wolfe', Flogging Babel, 2009",
+   "url": "http://floggingbabel.blogspot.com/2009/10/explicated-gene-wolfe_07.html",
+   "quote": "so much more into his works than almost any other writer",
+   "page": "body, para 3"
+  },
+  {
+   "index": 311,
+   "feature": "omission as information",
+   "claim": "Swanwick likens Wolfe's buried details to programmers' Easter eggs, not needed for enjoying the story.",
+   "source": "Michael Swanwick, 'The Explicated Gene Wolfe', Flogging Babel, 2009",
+   "url": "http://floggingbabel.blogspot.com/2009/10/explicated-gene-wolfe_07.html",
+   "quote": "not necessary for your enjoyment of the experience",
+   "page": "body, after the fuligin example"
+  },
+  {
+   "index": 312,
+   "feature": "withheld information and inference",
+   "claim": "John Barach reports Wolfe's own statement that he gives a clue only once.",
+   "source": "John Barach, 'How to Read Gene Wolfe', Kata Iwannhn blog, 2007",
+   "url": "https://barach.us/2007/03/03/how-to-read-gene-wolfe/",
+   "quote": "he gives a clue only once",
+   "page": "body, para 6"
+  },
+  {
+   "index": 313,
+   "feature": "omission as information",
+   "claim": "Ada Palmer's foreword to the Tor Essentials Shadow & Claw, quoted by Livia J. Elliot, says reading for world-building requires retaining information without context.",
+   "source": "Ada Palmer, foreword to Shadow & Claw (Tor Essentials), quoted by Livia J. Elliot, 2024",
+   "url": "https://liviajelliot.com/blog/2024/17-podcast-worldbuilding/",
+   "quote": "Reading for world-building requires retaining information without context",
+   "page": "transcript, quoting the foreword"
+  },
+  {
+   "index": 314,
+   "feature": "omission as information",
+   "claim": "Author Livia J. Elliot says Wolfe often gives information about the world without context.",
+   "source": "Livia J. Elliot, 'The Puzzle Left Behind', Books Undone ep. 010 transcript, 2024",
+   "url": "https://liviajelliot.com/blog/2024/17-podcast-worldbuilding/",
+   "quote": "give information about the world without context",
+   "page": "transcript, after the Palmer quotation"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a small detail in one book frequently presages a large revelation in a later one",
+   "note": "Raw page fetched (HTTP 200, live URL). Matthew Keeley, 'The Best Way to Approach The Book of the New Sun', Reactor, published December 4, 2017. Quote is word-for-word inside the fifth piece of advice ('...Read quickly (but not too quickly)'), in a paragraph explicitly about the volumes of The Book of the New Sun, so 'one volume ... a later one' is exactly the page's sense ('one book' = one volume of the four)."
+  },
+  {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and his prose is as good as prose gets",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the catalogue of Wolfe's virtues. The page supports every substantive limb: 'an essay I wrote for a special GW issue of The Magazine of Fantasy and Science Fiction back in 2007', 'meant to be a sort of beginners' guide', essay titled 'The Wolf in the Labyrinth', byline 'Posted by Michael Swanwick' / 'Essay copyright 2007 by Michael Swanwick'. The page never itself calls Swanwick a novelist (only implies he is a writer); that descriptor is external but uncontested."
+  },
+  {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's no telling at what point interpretation ends and invention begins",
+   "note": "Raw page fetched. Quote verbatim; the full page sentence is 'Gene Wolfe is notorious for never explaining his stories, so there's no telling at what point interpretation ends and invention begins,' which supports the second limb ('no reader can tell where interpretation stops') in the page's own words. Occurs in the 'A Solar Labyrinth' section as the claim's page hint states."
+  },
+  {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1. Look for hidden implications.",
+   "note": "Raw page fetched. Verbatim as the first of the three numbered rules, introduced as 'three simple rules for enjoying his work' in an essay posted under the title 'How to Read Gene Wolfe'; 'first rule for reading Wolfe' is exactly the page's framing."
+  },
+  {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "2. Remember Poe's purloined letter, and pay serious attention to the obvious.",
+   "note": "Raw page fetched. Verbatim (curly apostrophe in 'Poe's' as quoted) as rule 2 of the three rules. Both limbs — second rule, and the Poe purloined-letter citation — are on the page."
+  },
+  {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I suggest you look up the prayer to see what Wolfe left out",
+   "note": "Raw page fetched. Verbatim inside the parenthesis in the closing 'Memorare' discussion: 'When a story is titled \"Memorare\" (I suggest you look up the prayer to see what Wolfe left out)...', which supports 'the prayer of that name'."
+  },
+  {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simply because a story has deeper levels, its surface meaning can be ignored with impunity",
+   "note": "Raw page fetched. Verbatim; full page sentence: 'it's a very big mistake to think that simply because a story has deeper levels, its surface meaning can be ignored with impunity.' It sits immediately after the 'A Solar Labyrinth' section, as the page hint says. The page phrases the rule generally ('a story'), but the surrounding argument is entirely about reading Wolfe."
+  },
+  {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe always leaves room for multiple interpretations in his work.",
+   "note": "Raw page fetched. Verbatim, in the 'Memorare' section, right after Swanwick offers his own symbolic reading and says 'you don't have to accept my version of what's going on.'"
+  },
+  {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Note the careful engineering of the suits and cenotaphs. Note the craftsmanship.",
+   "note": "Raw page fetched. Verbatim. The preceding sentence — 'The surface story, sufficient in itself, is an extremely good science fiction adventure' — supports 'craftsmanship on the story's surface', and 'Note the craftsmanship.' follows immediately."
+  },
+  {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Almost any interesting work of art comes close to saying the opposite of what it really says.",
+   "note": "Raw page fetched. Quote verbatim; the page attributes it to Wolfe's 'short essay titled, with disarming modesty, \"What I Know About Writing (in no particular order)\"'. The claim's paraphrase drops 'really' from 'what it really says', which does not change the sense; the quoted fragment itself is exact."
+  },
+  {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such efforts are particularly rewarding when applied to Wolfe's oeuvre",
+   "note": "Raw page fetched (HTTP 200), 'The Explicated Gene Wolfe', Flogging Babel, Oct 2009. Quote verbatim: '...because he puts so much more into his works than almost any other writer.' The page's word for the payoff limb is 'scholarship, both true and faux' being 'particularly rewarding'; the post's subject is annotation works (Lexicon Urthus, The Wizard Knight Companion), so 'annotation pays off' is the page's sense in other words. Sentence sits in the fifth paragraph, not the third."
+  },
+  {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the literary equivalent of what programmers call \"Easter eggs\" ... not necessary for your enjoyment",
+   "note": "Raw page fetched. Verbatim. Full page sentence, immediately after the fuligin / selective-black example: 'it's the literary equivalent of what programmers call \"Easter eggs,\" hidden messages or treats placed into games or programs for the lucky (or canny) person to find, which are not necessary for your enjoyment of the experience.' Both limbs on the page."
+  },
+  {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he slips in clues and, as he has himself said, he gives a clue only once",
+   "note": "Raw page fetched (HTTP 200). Kata Iwannhn, 'How to Read Gene Wolfe', dated March 3, 2007, 'Posted by John Barach'. Quote verbatim, and 'as he has himself said' supports the limb that this is Wolfe's own statement reported by Barach. In the eighth paragraph rather than the sixth."
+  },
+  {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reading for world-building requires retaining information without context: a term, a place, a coin",
+   "note": "Raw page fetched (HTTP 200). Verbatim inside the block quotation of Palmer's foreword. The page supports the attribution limbs: 'my Tor Essentials edition has a Foreword written by Ada Palmer (author of the Terra Ignota series)' about Shadow & Claw, quoted by Livia J. Elliot, transcript dated 3 Oct 2024."
+  },
+  {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "authors (and in this case, Gene Wolfe), will often give information about the world without context",
+   "note": "Raw page fetched. Verbatim substring, and it is Elliot's own sentence ('As I see it, Palmer is saying that...'), positioned immediately after the Palmer block quotation exactly as the page hint states. Byline 'Livia J. Elliot', 'Books Undone | Episode 010 | Transcript', 3 Oct 2024 — all on the page."
+  }
+ ]
+}

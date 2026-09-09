@@ -1,0 +1,847 @@
+ 
+ Designing with Style: Ability Checks and Saving Throws - Kobold Press 
+ Skip to content 
+ Store 
+ Quick Links 
+ Where to Start Monster Overview Virtual Table Tops Kobold Press Merch On Sale All Products 
+ My Account 
+ Create Account Login Logout Reset Password My Downloads 
+ Store Search 
+ Search for: 
+ Kickstarter Blog 
+ Articles Archive Submissions 
+ Contact Account About 
+ About Kobold Press The Kobold Team Kobold Creates Black Flag Roleplaying Midgard Organized Play Frequently Asked Questions Errata Forums 
+ Tools 
+ Labyrinth World Archive Midgard Map Encounter Builder Search 5E Kobold Press Monsters Search ToV Kobold Press Monsters Search Kobold Adventures 
+ Cart 
+ Store 
+ Quick Links 
+ Where to Start Monster Overview Virtual Table Tops Kobold Press Merch On Sale All Products 
+ My Account 
+ Create Account Login Logout Reset Password My Downloads 
+ Store Search 
+ Search for: 
+ Kickstarter Blog 
+ Articles Archive Submissions 
+ Contact Account About 
+ About Kobold Press The Kobold Team Kobold Creates Black Flag Roleplaying Midgard Organized Play Frequently Asked Questions Errata Forums 
+ Tools 
+ Labyrinth World Archive Midgard Map Encounter Builder Search 5E Kobold Press Monsters Search ToV Kobold Press Monsters Search Kobold Adventures 
+ Cart 
+ Home / Delve into the Depths in the Kobold Blog / Designing with Style: Ability Checks and Saving Throws 
+ Designing with Style: Ability Checks and Saving Throws 
+ By 
+ Hannah Rose 
+ / May 31, 2019 / Articles , Designing with Style 
+ The Designing with Style series breaks down the official 5th-edition style guide to help designers create content that’s well-written, polished, and precise. The exact language for rules and mechanics is extremely specific for a reason: to avoid ambiguity, the enemy of elegant design and easy play. 
+ Understanding the style guide is the key to creating content that’s usable, elegant, and professional. Adventures expect player characters to use ability checks and saving throws to interact with the world, and these mechanics are some of the best examples of highly specific language in D&D. 
+ Ability Checks 
+ Describing an ability check is so often botched that it falls under the “Common Pitfalls” section of the official D&D House Style Guide (emphasis mine): 
+ “Don’t mistake making an ability check, a saving throw, or other roll with succeeding on it. The following sentence gets it right: “You must succeed on a DC 15 Strength check to clamber up the wall.” Don’t write, “You must make a DC 15 Strength check to clamber up the wall,” unless that sentence is immediately followed by a description of what happens on a success or failure.” 
+ As described in the example above, an adventure can call for a generic Strength check, but you could also require a more specific Strength (Athletics) check. At the risk of stating the obvious, it’s worth noting that skill checks are always written as [Ability Score] ([Skill]). 
+ Do. “You must succeed on a DC 12 Intelligence (History) check to recall the story of the gazebo.” 
+ Don’t. “You must succeed on a DC 12 History check to recall the story of the gazebo.” 
+ What about the part regarding “a description of what happens on a success or failure”? There’s standard language for that too. If the consequences for failure are complicated or go beyond “not success,” you can use one of the following options. Pick the one that works best for the situation you are trying to describe. 
+ Option 1. “You must succeed on a DC 15 Strength check to clamber up the wall. On a failure, you slip and fall into molten lava, taking 18d10 fire damage.” 
+ Option 2. “You must make a DC 15 Strength check. On a success, you reach the top of the cliff safely. On a failure, you slip and fall into molten lava, taking 18d10 fire damage.” 
+ Checks with Multiple Options 
+ If you want to describe a situation where characters can succeed with more than one ability or skill check, you can use one of the following options. Pick the format most appropriate for your situation. 
+ Option 1. “You must succeed on a DC 19 Strength (Athletics) or Dexterity (Acrobatics) check to escape the ogre’s over-enthusiastic hug.” 
+ Option 2. “You must succeed on a DC 12 Charisma (Deception or Persuasion) check to convince the guard that you have permission to attend the coronation.” 
+ Option 3. “You must succeed on a DC 15 Wisdom (Survival) check or a DC 18 Intelligence (Nature) check to determine that the mushrooms are poisonous.” 
+ If there are more than two possible skills to use in a situation, you probably want to pick at most two for the sake of brevity and elegance. A GM can always allow a character to try another skill if appropriate. 
+ Non-Standard Checks 
+ Occasionally, you might want to describe a non-standard skill check, like a Strength (Intimidation) check instead of a Charisma (Intimidation) check. In this case, the character would add their Strength bonus instead of their Charisma bonus to the check. The language is the same, but this is a great example of why specifying the ability score before the check is important. This should be done sparingly in formal adventure writing, but it’s also a fun option for your home game. 
+ Saving Throws 
+ As with ability checks, the key to describing a saving throw is to keep in mind conditions of success and failure . 
+ Do. “To avoid falling off the cliff, you must make a successful DC 15 Dexterity saving throw.” 
+ Don’t. “To avoid falling off the cliff, you must make a DC 15 Dexterity saving throw.” 
+ Again, you can describe success and failure outcomes separately if appropriate. For example, you could say, “Any character who reads the cursed tome must make a DC 17 Wisdom saving throw. On a success, they learn the location of the lich’s phylactery. On a failure, they take 4d6 psychic damage and are incapacitated for 1d4 hours.” 
+ Are you ready to make those Intelligence (Style Guide) checks with advantage? What other style conventions do you find confusing? Roll some Charisma (Persuasion) checks in the comments to suggest topics for future posts. 
+ Tags: #dnd , #dnd5e 
+ ← Previous Post Next Post → 
+ Related Posts 
+ Project Black Flag Friday: Core Fantasy Roleplay 
+ February 24, 2023 
+ The Mischievous Art of Monster Infighting 
+ October 23, 2014 
+ Midgard Icons: The Blood King 
+ February 26, 2020 
+ You’re Cursed! 
+ October 12, 2012 
+ Saints of Midgard: St. Regina of the Bow 
+ December 17, 2021 
+ Your Whispering Homunculus—10 Guaranteed Cure-Alls 
+ November 24, 2015 
+ 15 thoughts on “Designing with Style: Ability Checks and Saving Throws” 
+ Victoria Freemonte May 31, 2019 at 11:19 am 
+ Excellent article. It’s a useful guide not only for writing but also for describing things while playing. 
+ Hannah Rose May 31, 2019 at 1:24 pm 
+ Thank you! Sometimes we’re a little less formal with language when playing, but it can definitely be helpful for clarity! 
+ DaveN May 31, 2019 at 11:44 am 
+ Nice article! Loved the specificity of Ability(Skill), genuinely helpful and well-written article. 
+ Hannah Rose May 31, 2019 at 1:26 pm 
+ Thank you very much! 
+ Marc Radle May 31, 2019 at 12:21 pm 
+ Excellent stuff! 
+ Hannah Rose May 31, 2019 at 1:30 pm 
+ Thank you, Mark! That means a lot coming from you! 
+ Beth Ball June 1, 2019 at 3:43 am 
+ I love this post! Thank you! This was the first time I understood why you have the ability and then the specific skill in parentheses after! I always end up doing it backwards in drafts and have to go back and do it again, but now I’ll be able to remember! 
+Thank you for the specific examples and clear, beautifully written post! 
+ I would love to see a post on mechanically elegant and creative creature design, if that would be interesting! 
+ Hannah Rose June 4, 2019 at 2:48 pm 
+ I’m so glad this helped, and thank you! I’ll add a note on creature design to my plans for future posts. 
+ Jesse Jordan June 1, 2019 at 3:01 pm 
+ Incredibly useful tips for someone (like me) trying to refine their technical writing/design skill set! 
+ Hannah Rose June 4, 2019 at 2:49 pm 
+ Thank you! 
+ Bob June 16, 2019 at 8:54 pm 
+ Unless youre a noob you know what make a DC 15 Athletics check means. 
+ J. K. Ahonen June 19, 2019 at 3:06 am 
+ Very helpful and well written post. Much appreciated! 
+ Hannah Rose June 27, 2019 at 6:07 pm 
+ Thank you very much! Glad you enjoyed it. 
+ Frank Sapene June 30, 2019 at 9:12 pm 
+ I’m enjoying your articles. Direct to the point with great examples. Please continue! 
+ Frank (from Panama) 
+ Hannah Rose July 11, 2019 at 10:42 pm 
+ Thank you very much! Let me know what you think of the thieves’ tools one, please! 
+ Comments are closed. 
+ Recent Posts 
+ Memoirs of a Lich: Gods – September 4, 2026 
+ Writing a Better Homebrew Campaign: When Your World Mirrors Ours – August 31, 2026 
+ Memoirs of a Lich: Gear – August 28, 2026 
+ Trapmaster: Spike-Eating Pit Trap – August 26, 2026 
+ Writing a Better Homebrew Campaign: Linear and Nonlinear Worlds – August 24, 2026 
+ Get the News and Get Loot! 
+ Enter to win a $65 gift certificate! Sign up to get the Kobold Courier in your inbox weekly!
+ Delve Into The Tunnels Delve Into The Tunnels 
+ Select Month 
+ September 2026 (1) 
+ August 2026 (12) 
+ July 2026 (14) 
+ June 2026 (12) 
+ May 2026 (14) 
+ April 2026 (13) 
+ March 2026 (13) 
+ February 2026 (13) 
+ January 2026 (12) 
+ December 2025 (18) 
+ November 2025 (18) 
+ October 2025 (23) 
+ September 2025 (22) 
+ August 2025 (21) 
+ July 2025 (24) 
+ June 2025 (21) 
+ May 2025 (22) 
+ April 2025 (23) 
+ March 2025 (21) 
+ February 2025 (20) 
+ January 2025 (23) 
+ December 2024 (17) 
+ November 2024 (21) 
+ October 2024 (25) 
+ September 2024 (21) 
+ August 2024 (21) 
+ July 2024 (22) 
+ June 2024 (20) 
+ May 2024 (24) 
+ April 2024 (24) 
+ March 2024 (21) 
+ February 2024 (24) 
+ January 2024 (27) 
+ December 2023 (14) 
+ November 2023 (20) 
+ October 2023 (25) 
+ September 2023 (27) 
+ August 2023 (24) 
+ July 2023 (21) 
+ June 2023 (23) 
+ May 2023 (28) 
+ April 2023 (22) 
+ March 2023 (25) 
+ February 2023 (23) 
+ January 2023 (25) 
+ December 2022 (18) 
+ November 2022 (21) 
+ October 2022 (32) 
+ September 2022 (25) 
+ August 2022 (19) 
+ July 2022 (13) 
+ June 2022 (13) 
+ May 2022 (13) 
+ April 2022 (13) 
+ March 2022 (14) 
+ February 2022 (12) 
+ January 2022 (13) 
+ December 2021 (14) 
+ November 2021 (13) 
+ October 2021 (14) 
+ September 2021 (14) 
+ August 2021 (13) 
+ July 2021 (13) 
+ June 2021 (13) 
+ May 2021 (13) 
+ April 2021 (14) 
+ March 2021 (16) 
+ February 2021 (12) 
+ January 2021 (15) 
+ December 2020 (18) 
+ November 2020 (14) 
+ October 2020 (17) 
+ September 2020 (18) 
+ August 2020 (15) 
+ July 2020 (14) 
+ June 2020 (8) 
+ May 2020 (12) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (15) 
+ December 2019 (13) 
+ November 2019 (11) 
+ October 2019 (14) 
+ September 2019 (13) 
+ August 2019 (13) 
+ July 2019 (14) 
+ June 2019 (12) 
+ May 2019 (14) 
+ April 2019 (13) 
+ March 2019 (13) 
+ February 2019 (12) 
+ January 2019 (13) 
+ December 2018 (12) 
+ November 2018 (12) 
+ October 2018 (14) 
+ September 2018 (12) 
+ August 2018 (14) 
+ July 2018 (13) 
+ June 2018 (13) 
+ May 2018 (11) 
+ April 2018 (13) 
+ March 2018 (13) 
+ February 2018 (14) 
+ January 2018 (14) 
+ December 2017 (14) 
+ November 2017 (13) 
+ October 2017 (13) 
+ September 2017 (13) 
+ August 2017 (15) 
+ July 2017 (13) 
+ June 2017 (15) 
+ May 2017 (15) 
+ April 2017 (12) 
+ March 2017 (14) 
+ February 2017 (13) 
+ January 2017 (15) 
+ December 2016 (15) 
+ November 2016 (14) 
+ October 2016 (16) 
+ September 2016 (15) 
+ August 2016 (22) 
+ July 2016 (18) 
+ June 2016 (14) 
+ May 2016 (12) 
+ April 2016 (13) 
+ March 2016 (24) 
+ February 2016 (19) 
+ January 2016 (15) 
+ December 2015 (24) 
+ November 2015 (13) 
+ October 2015 (22) 
+ September 2015 (22) 
+ August 2015 (23) 
+ July 2015 (25) 
+ June 2015 (23) 
+ May 2015 (22) 
+ April 2015 (25) 
+ March 2015 (25) 
+ February 2015 (22) 
+ January 2015 (25) 
+ December 2014 (24) 
+ November 2014 (22) 
+ October 2014 (24) 
+ September 2014 (21) 
+ August 2014 (23) 
+ July 2014 (20) 
+ June 2014 (21) 
+ May 2014 (20) 
+ April 2014 (24) 
+ March 2014 (19) 
+ February 2014 (22) 
+ January 2014 (28) 
+ December 2013 (27) 
+ November 2013 (22) 
+ October 2013 (27) 
+ September 2013 (24) 
+ August 2013 (26) 
+ July 2013 (27) 
+ June 2013 (27) 
+ May 2013 (27) 
+ April 2013 (25) 
+ March 2013 (23) 
+ February 2013 (26) 
+ January 2013 (33) 
+ December 2012 (26) 
+ November 2012 (29) 
+ October 2012 (28) 
+ September 2012 (23) 
+ August 2012 (33) 
+ July 2012 (33) 
+ June 2012 (27) 
+ May 2012 (32) 
+ April 2012 (31) 
+ March 2012 (38) 
+ February 2012 (21) 
+ January 2012 (24) 
+ December 2011 (24) 
+ November 2011 (24) 
+ October 2011 (23) 
+ September 2011 (22) 
+ August 2011 (27) 
+ July 2011 (31) 
+ June 2011 (38) 
+ May 2011 (23) 
+ April 2011 (22) 
+ March 2011 (25) 
+ February 2011 (21) 
+ January 2011 (26) 
+ December 2010 (29) 
+ November 2010 (28) 
+ October 2010 (28) 
+ September 2010 (31) 
+ August 2010 (40) 
+ July 2010 (36) 
+ June 2010 (32) 
+ May 2010 (28) 
+ April 2010 (28) 
+ March 2010 (26) 
+ February 2010 (24) 
+ January 2010 (27) 
+ December 2009 (34) 
+ November 2009 (29) 
+ October 2009 (21) 
+ September 2009 (18) 
+ August 2009 (22) 
+ July 2009 (23) 
+ June 2009 (17) 
+ May 2009 (25) 
+ April 2009 (24) 
+ March 2009 (15) 
+ February 2009 (11) 
+ January 2009 (16) 
+ December 2008 (19) 
+ November 2008 (16) 
+ October 2008 (18) 
+ September 2008 (6) 
+ August 2008 (8) 
+ July 2008 (4) 
+ June 2008 (9) 
+ May 2008 (5) 
+ April 2008 (3) 
+ March 2008 (1) 
+ February 2008 (1) 
+ January 2008 (10) 
+ October 2007 (1) 
+ July 2007 (1) 
+ Article Categories Article Categories 
+ Select Category 
+ 13th Age 
+ Adventurer’s Field Guide 
+ Alternative Adventures 
+ Announcements 
+ Arcane Adventures 
+ Archetypes 
+ Articles 
+ Ask Jiro 
+ Ask the Oracle 
+ Backgrounds 
+ Bards with Class 
+ Behind the Spells 
+ Beyond Damage Dice 
+ Beyond the Audience 
+ Bigger Bads 
+ Black Flag 
+ Boss Fights 
+ Collection Of Curiosities 
+ Con Report 
+ Contest 
+ Cult Activity 
+ Deck of Many More Things 
+ Deep Magic 
+ Demon Cults & Secret Societies 
+ Design Diary 
+ Designing with Style 
+ Dirty Jobs 
+ Divine Purpose 
+ Dos and Don’ts 
+ Downtime 
+ Dungeon 23 
+ Dungeon Tables 
+ Dungeons & Doggos 
+ Editorials 
+ Expanding Codex 
+ Explainer 
+ Feats 
+ Featured 
+ Fistful of Lead 
+ Folk Magic 
+ Friday Funny 
+ From the Archives 
+ From the Ashes 
+ From the Deck of a Sandship 
+ Front Page 
+ Game Changer 
+ Get Started! 
+ Gift Guide 
+ GM Like an Author 
+ Good Riddance! 
+ Green Maiden 
+ Haunted Items 
+ Havens of the Holy 
+ Heritage of Heroes 
+ Heroes of Nuria Natal 
+ Hometown Hazards 
+ How to GM 
+ Howling Tower 
+ Hungry Undead 
+ Improv Proficiency 
+ In The Press 
+ Inbar’s Guide to the Northlands 
+ interview 
+ Into the Wilderness 
+ Introducing Players to RPGs 
+ Isekai’d! 
+ Kickstarter 
+ Kobold Dispatch 
+ Kobold FAQ 
+ Kobold Playtest 
+ Kobold Roundup 
+ Labyrinth Locales 
+ Let’s Build! 
+ Ley Lines 
+ Lineages 
+ Living Locations 
+ Magic Academy 
+ Magic Items 
+ Magical Meals 
+ Magical Wastelands 
+ Magludias Fynch 
+ Make It! 
+ Map Packs 
+ Mastering the Mechanics 
+ Medieval Urbanism 
+ Memoirs of a Lich 
+ Midgard 
+ Midgard 10 
+ Midgard Alchemy 
+ Midgard Expanded 
+ Midgard Ley Magic 
+ Midgard Maps 
+ Midgard Monday 
+ Midgard Monster Lore 
+ Midgard Notebook 
+ Monster Match 
+ Monster Mix 
+ Monster Weaknesses 
+ Monsters 
+ Monstrous Crits 
+ Musings from an Empty Tankard 
+ Narrative Game Tricks 
+ NPC Webs 
+ Of Godly Might 
+ On the Road 
+ One-on-One Roleplaying 
+ Open Design Podcast 
+ OSR Vibe 
+ Out of the Frying Pan 
+ Pack Tactics 
+ Paladin Orders 
+ Parties of Interest 
+ Planar Adventures 
+ Play with Class 
+ Pop Psychology 
+ Potion Commotion 
+ Preview 
+ Pulp Adventure 
+ Q&A 
+ Quantum Ogre 
+ Races of Midgard 
+ Random Encounters 
+ Ratatosk 
+ Reach for the Stars 
+ Real Steel 
+ Reviews 
+ Rider Monsters 
+ Rise of the Mimic Moon 
+ Rogue’s Gallery 
+ RPG Blog Carnival 
+ Saints of Midgard 
+ Scarlet Citadel 
+ Shades of Magic 
+ Shops of Zobeck 
+ Shoulders of Giants 
+ Sidetreks 
+ Skill Challenges 
+ Smell My Feet 
+ Southlands 
+ Spare Parts 
+ Spell Check 
+ Sporting Goods 
+ State of Play 
+ Streaming 
+ Subclasses 
+ Tables 
+ Tales of the Valiant 
+ Terrors of the Dragon Empire 
+ The 4th Pillar 
+ The Amber Bazaar 
+ The Art of Skirmishing 
+ The Far Side of the Table 
+ The Sorcery Stop 
+ Tome Unbound 
+ Tome Unleashed 
+ Tome Unrestricted 
+ Tools of War 
+ Tour of the Empire 
+ Trapmaster 
+ Traps 
+ Treasure Trove 
+ TV to Tabletop 
+ Uncategorized 
+ Under the City 
+ Unlocking the Vault 
+ Video Games 
+ VTT Tips 
+ Wallpapers 
+ Warlock 
+ Warlock’s Apprentice 
+ Wastes Wednesday 
+ Wild West 
+ Wizard’s Playbook 
+ Writing a Better Homebrew Campaign 
+ You Find Yourself in… 
+ Your Whispering Homunculus 
+ Cunning Traps #dnd 
+ #dnd5e 
+ #MidgardMonday 
+ #monster 
+ #monsters 
+ #OpenDnD 
+ #pathfinder 
+ 4e D&D 
+ 5E 
+ 13th Age 
+ adventure 
+ advice 
+ AGE 
+ class 
+ contest 
+ conventions 
+ Deep Magic 
+ DnD 
+ Feats 
+ Friday Funny 
+ heritage 
+ Howling Tower 
+ interview 
+ Kickstarter 
+ Labyrinth 
+ lineage 
+ magic 
+ magic items 
+ Midgard 
+ Midgard Monday 
+ monster 
+ monsters 
+ news 
+ open design 
+ Real Steel 
+ review 
+ rpg 
+ sneak peek 
+ Southlands 
+ Tales of the Valiant 
+ Thppgrg 
+ ToV 
+ trap 
+ weapons 
+ Your Whispering Homunculus 
+ Join the Kobold Courier and Earn Loot! 
+ Your subscription could not be saved. Please try again.
+ Your subscription has been successful.
+ Enter to win a $65 gift certificate! Sign up to get the Kobold Courier in your inbox weekly! 
+ Enter your email address to subscribe 
+ Provide your email address to subscribe. For e.g [email protected] 
+ SUBSCRIBE
+ Store 
+ Quick Links 
+ Where to Start Monster Overview Virtual Table Tops Kobold Press Merch On Sale All Products 
+ My Account 
+ Create Account Login Logout Reset Password My Downloads 
+ Store Search 
+ Search for: 
+ Kickstarter Blog 
+ Articles Archive Submissions 
+ Contact Account About 
+ About Kobold Press The Kobold Team Kobold Creates Black Flag Roleplaying Midgard Organized Play Frequently Asked Questions Errata Forums 
+ Tools 
+ Labyrinth World Archive Midgard Map Encounter Builder Search 5E Kobold Press Monsters Search ToV Kobold Press Monsters Search Kobold Adventures 
+ Cart 
+ Search for: 
+ Contact the Kobolds 
+ Kobold Press 
+PO Box 2811 
+Kirkland, WA 98083 
+ Kobold Game Studio Ltd PO Box 38600 North Vancouver Stn Metropolitan BC V7M 3N1 
+ Support request: support.koboldpress.com 
+ View our Conditions of Use and Privacy Policy . 
+ Search The Site 
+ Search for: 
+ Delve into the Tunnels Delve into the Tunnels 
+ Select Month 
+ September 2026 (1) 
+ August 2026 (12) 
+ July 2026 (14) 
+ June 2026 (12) 
+ May 2026 (14) 
+ April 2026 (13) 
+ March 2026 (13) 
+ February 2026 (13) 
+ January 2026 (12) 
+ December 2025 (18) 
+ November 2025 (18) 
+ October 2025 (23) 
+ September 2025 (22) 
+ August 2025 (21) 
+ July 2025 (24) 
+ June 2025 (21) 
+ May 2025 (22) 
+ April 2025 (23) 
+ March 2025 (21) 
+ February 2025 (20) 
+ January 2025 (23) 
+ December 2024 (17) 
+ November 2024 (21) 
+ October 2024 (25) 
+ September 2024 (21) 
+ August 2024 (21) 
+ July 2024 (22) 
+ June 2024 (20) 
+ May 2024 (24) 
+ April 2024 (24) 
+ March 2024 (21) 
+ February 2024 (24) 
+ January 2024 (27) 
+ December 2023 (14) 
+ November 2023 (20) 
+ October 2023 (25) 
+ September 2023 (27) 
+ August 2023 (24) 
+ July 2023 (21) 
+ June 2023 (23) 
+ May 2023 (28) 
+ April 2023 (22) 
+ March 2023 (25) 
+ February 2023 (23) 
+ January 2023 (25) 
+ December 2022 (18) 
+ November 2022 (21) 
+ October 2022 (32) 
+ September 2022 (25) 
+ August 2022 (19) 
+ July 2022 (13) 
+ June 2022 (13) 
+ May 2022 (13) 
+ April 2022 (13) 
+ March 2022 (14) 
+ February 2022 (12) 
+ January 2022 (13) 
+ December 2021 (14) 
+ November 2021 (13) 
+ October 2021 (14) 
+ September 2021 (14) 
+ August 2021 (13) 
+ July 2021 (13) 
+ June 2021 (13) 
+ May 2021 (13) 
+ April 2021 (14) 
+ March 2021 (16) 
+ February 2021 (12) 
+ January 2021 (15) 
+ December 2020 (18) 
+ November 2020 (14) 
+ October 2020 (17) 
+ September 2020 (18) 
+ August 2020 (15) 
+ July 2020 (14) 
+ June 2020 (8) 
+ May 2020 (12) 
+ April 2020 (13) 
+ March 2020 (13) 
+ February 2020 (12) 
+ January 2020 (15) 
+ December 2019 (13) 
+ November 2019 (11) 
+ October 2019 (14) 
+ September 2019 (13) 
+ August 2019 (13) 
+ July 2019 (14) 
+ June 2019 (12) 
+ May 2019 (14) 
+ April 2019 (13) 
+ March 2019 (13) 
+ February 2019 (12) 
+ January 2019 (13) 
+ December 2018 (12) 
+ November 2018 (12) 
+ October 2018 (14) 
+ September 2018 (12) 
+ August 2018 (14) 
+ July 2018 (13) 
+ June 2018 (13) 
+ May 2018 (11) 
+ April 2018 (13) 
+ March 2018 (13) 
+ February 2018 (14) 
+ January 2018 (14) 
+ December 2017 (14) 
+ November 2017 (13) 
+ October 2017 (13) 
+ September 2017 (13) 
+ August 2017 (15) 
+ July 2017 (13) 
+ June 2017 (15) 
+ May 2017 (15) 
+ April 2017 (12) 
+ March 2017 (14) 
+ February 2017 (13) 
+ January 2017 (15) 
+ December 2016 (15) 
+ November 2016 (14) 
+ October 2016 (16) 
+ September 2016 (15) 
+ August 2016 (22) 
+ July 2016 (18) 
+ June 2016 (14) 
+ May 2016 (12) 
+ April 2016 (13) 
+ March 2016 (24) 
+ February 2016 (19) 
+ January 2016 (15) 
+ December 2015 (24) 
+ November 2015 (13) 
+ October 2015 (22) 
+ September 2015 (22) 
+ August 2015 (23) 
+ July 2015 (25) 
+ June 2015 (23) 
+ May 2015 (22) 
+ April 2015 (25) 
+ March 2015 (25) 
+ February 2015 (22) 
+ January 2015 (25) 
+ December 2014 (24) 
+ November 2014 (22) 
+ October 2014 (24) 
+ September 2014 (21) 
+ August 2014 (23) 
+ July 2014 (20) 
+ June 2014 (21) 
+ May 2014 (20) 
+ April 2014 (24) 
+ March 2014 (19) 
+ February 2014 (22) 
+ January 2014 (28) 
+ December 2013 (27) 
+ November 2013 (22) 
+ October 2013 (27) 
+ September 2013 (24) 
+ August 2013 (26) 
+ July 2013 (27) 
+ June 2013 (27) 
+ May 2013 (27) 
+ April 2013 (25) 
+ March 2013 (23) 
+ February 2013 (26) 
+ January 2013 (33) 
+ December 2012 (26) 
+ November 2012 (29) 
+ October 2012 (28) 
+ September 2012 (23) 
+ August 2012 (33) 
+ July 2012 (33) 
+ June 2012 (27) 
+ May 2012 (32) 
+ April 2012 (31) 
+ March 2012 (38) 
+ February 2012 (21) 
+ January 2012 (24) 
+ December 2011 (24) 
+ November 2011 (24) 
+ October 2011 (23) 
+ September 2011 (22) 
+ August 2011 (27) 
+ July 2011 (31) 
+ June 2011 (38) 
+ May 2011 (23) 
+ April 2011 (22) 
+ March 2011 (25) 
+ February 2011 (21) 
+ January 2011 (26) 
+ December 2010 (29) 
+ November 2010 (28) 
+ October 2010 (28) 
+ September 2010 (31) 
+ August 2010 (40) 
+ July 2010 (36) 
+ June 2010 (32) 
+ May 2010 (28) 
+ April 2010 (28) 
+ March 2010 (26) 
+ February 2010 (24) 
+ January 2010 (27) 
+ December 2009 (34) 
+ November 2009 (29) 
+ October 2009 (21) 
+ September 2009 (18) 
+ August 2009 (22) 
+ July 2009 (23) 
+ June 2009 (17) 
+ May 2009 (25) 
+ April 2009 (24) 
+ March 2009 (15) 
+ February 2009 (11) 
+ January 2009 (16) 
+ December 2008 (19) 
+ November 2008 (16) 
+ October 2008 (18) 
+ September 2008 (6) 
+ August 2008 (8) 
+ July 2008 (4) 
+ June 2008 (9) 
+ May 2008 (5) 
+ April 2008 (3) 
+ March 2008 (1) 
+ February 2008 (1) 
+ January 2008 (10) 
+ October 2007 (1) 
+ July 2007 (1) 
+ Kobold Press on Social Media 
+ Store 
+ About 
+ Kickstarters 
+ Blog 
+ Contact 
+ Kobold Press and the Kobold Press logo are registered trademarks and Open Design, Tales of the Valiant, the Tales of the Valiant logo, and Midgard are trademarks of Open Design LLC. © 2026. All rights reserved. 
+ Start typing and press enter to search 
+ Search... 
+ Win $65 for the Kobold Store! 
+ Name 
+ Email 
+ Subscribe 
+ Get Kobold news, updates, and cool links around the Web in your inbox weekly. Plus, enter for a weekly drawing for a $65 gift certificate to the Kobold Store! 
+ Scroll to Top 
+ 

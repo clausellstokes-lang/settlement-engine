@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "cohort": 4000,
+    "DOWN_DECAY": 0.002,
+    "RUST_MAX_ERROR": 0.35
+  },
+  "A": {
+    "halfWeeks": 347,
+    "halfYears": 6.7,
+    "fullWeeks": 2536,
+    "fullYears": 48.8
+  },
+  "B": {
+    "peace (no threat)": {
+      "footing": 0,
+      "r26": 0,
+      "r104": 0,
+      "r260": 0
+    },
+    "1 war front nearby": {
+      "footing": 0.15,
+      "r26": 0.67,
+      "r104": 0.99,
+      "r260": 1
+    },
+    "front + occupation": {
+      "footing": 0.27,
+      "r26": 0.87,
+      "r104": 1,
+      "r260": 1
+    },
+    "fully encircled": {
+      "footing": 0.3,
+      "r26": 0.9,
+      "r104": 1,
+      "r260": 1
+    },
+    "peaceDecayFrom08At104wk": 0.65
+  },
+  "C": {
+    "0/5": 0.55,
+    "1/5": 0.633,
+    "2/5": 0.716,
+    "3/5": 0.798,
+    "4/5": 0.881,
+    "5/5": 0.964
+  },
+  "D": {
+    "sizing:exp1": {
+      "meanAbs": 0,
+      "max": 0
+    },
+    "sizing:exp0.5": {
+      "meanAbs": 0.051,
+      "max": 0.101
+    },
+    "sizing:exp0": {
+      "meanAbs": 0.176,
+      "max": 0.35
+    },
+    "peace:lawful:exp1": {
+      "meanAbs": 0,
+      "max": 0
+    },
+    "peace:lawful:exp0.3": {
+      "meanAbs": 0.095,
+      "max": 0.19
+    },
+    "peace:chaotic-devout:exp1": {
+      "meanAbs": 0.295,
+      "max": 0.6
+    },
+    "peace:chaotic-devout:exp0.3": {
+      "meanAbs": 0.377,
+      "max": 0.75
+    }
+  }
+}

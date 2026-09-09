@@ -1,0 +1,236 @@
+{
+ "name": "dnd",
+ "chunk": 28,
+ "claims": [
+  {
+   "index": 574,
+   "feature": "stylometry",
+   "claim": "Garcia read and compared more than 5,500 pages of D&D and Pathfinder rulebook text across editions for his 2017 study.",
+   "source": "Antero Garcia, Mind, Culture, and Activity 24(3), 2017",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "more than 5,500 pages",
+   "page": "Method / Context for study, p. 236"
+  },
+  {
+   "index": 575,
+   "feature": "edition and house style",
+   "claim": "The 1989 AD&D second edition defended its exclusive male pronoun as clear, concise and familiar in written material.",
+   "source": "David 'Zeb' Cook, AD&D 2nd ed. (1989) p. 9, quoted by Antero Garcia (2017)",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "clear, concise, and familiar",
+   "page": "Gender construction and representation in D&D, p. 238"
+  },
+  {
+   "index": 576,
+   "feature": "edition and house style",
+   "claim": "Garcia reports that D&D rulebooks stopped explaining their pronoun choice from the third edition (2000) onward.",
+   "source": "Antero Garcia, Mind, Culture, and Activity 24(3), 2017",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "Explanations about pronouns would cease with later editions",
+   "page": "p. 238"
+  },
+  {
+   "index": 577,
+   "feature": "place and institution description",
+   "claim": "The 5e Player's Handbook tells the reader that nine human ethnic groups are widely recognized in the Forgotten Realms.",
+   "source": "D&D 5e Player's Handbook (2014) p. 30, quoted by Antero Garcia (2017)",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "nine human ethnic groups are widely recognized",
+   "page": "p. 240"
+  },
+  {
+   "index": 578,
+   "feature": "place and institution description",
+   "claim": "The same 5e passage frames material culture and physical characteristics as varying by region.",
+   "source": "D&D 5e Player's Handbook (2014) p. 30, quoted by Antero Garcia (2017)",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "change wildly from region to region",
+   "page": "p. 240"
+  },
+  {
+   "index": 579,
+   "feature": "other: named trait paragraph",
+   "claim": "The 5e half-orc entry carries a bolded named paragraph, 'Grudging Acceptance', describing how half-orcs are received by others.",
+   "source": "D&D 5e Player's Handbook (2014) p. 41, quoted by Antero Garcia (2017)",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "quote": "Grudging Acceptance",
+   "page": "p. 240"
+  },
+  {
+   "index": 580,
+   "feature": "edition and house style",
+   "claim": "Gygax described Holmes's contribution to the 1977 Basic Set as the rewriting and editing that extracted a beginner's set from existing D&D texts.",
+   "source": "Gary Gygax, Dragon #14 (May 1978), compiled by Zach Howard, Zenopus Archives, 2013",
+   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+   "quote": "the rewriting and editing necessary to extract a",
+   "page": "May 1978 entry"
+  },
+  {
+   "index": 581,
+   "feature": "edition and house style",
+   "claim": "Gygax said TSR decided the original booklets needed a clarified introductory piece for a wider readership.",
+   "source": "Gary Gygax, Dragon #35 (March 1980), compiled by Zach Howard, Zenopus Archives, 2013",
+   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+   "quote": "clarified, introductory piece was needed",
+   "page": "March 1980 entry"
+  },
+  {
+   "index": 582,
+   "feature": "edition and house style",
+   "claim": "An RPGA interviewer in 1981 characterised Holmes's Basic Set as easier reading than the original set and Mentzer's as understandable by anyone willing to read it.",
+   "source": "RPGA interviewer (presumed Frank Mentzer), Polyhedron #1 (1981), compiled by Zach Howard",
+   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+   "quote": "a little bit easier",
+   "page": "Summer of 1981 entry"
+  },
+  {
+   "index": 583,
+   "feature": "edition and house style",
+   "claim": "Gygax judged Holmes's editorial work on the Basic Set favourably in a 2005 forum reply.",
+   "source": "Gary Gygax, EN World post 22 Feb 2005, compiled by Zach Howard",
+   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+   "quote": "fine bit of editing with the set",
+   "page": "2/22/05 entry"
+  },
+  {
+   "index": 584,
+   "feature": "civic record register",
+   "claim": "Trammell argues the aim of the orientalist register is encyclopedic knowledge of an imagined other.",
+   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
+   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+   "quote": "produce encyclopedic knowledge about an imagined and exotic other",
+   "page": "image caption, section on Orientalist texts"
+  },
+  {
+   "index": 585,
+   "feature": "place and institution description",
+   "claim": "Trammell criticises the reductionism by which one sourcebook is written as if a whole culture could be contained by a single text.",
+   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
+   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+   "quote": "contained by a single text",
+   "page": "Comeliness and Honor section"
+  },
+  {
+   "index": 586,
+   "feature": "place and institution description",
+   "claim": "Trammell shows Oriental Adventures gives elite occupations far more specific named detail than commoner ones.",
+   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
+   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+   "quote": "the culture of the common people is barely distinguishable",
+   "page": "non-weapon proficiencies section"
+  },
+  {
+   "index": 587,
+   "feature": "stylometry",
+   "claim": "A reader commenting on Trammell's essay attributes Oriental Adventures' authorship to David Cook on the evidence of its diction and style.",
+   "source": "Commenter on Aaron Trammell, Analog Game Studies, comment thread",
+   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+   "quote": "Judging from the diction and style of the writing",
+   "page": "comments"
+  },
+  {
+   "index": 588,
+   "feature": "dm-facing sentence",
+   "claim": "Merwin advises putting information useful to the DM but not for players into an appendix.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Outlines and Frameworks', D&D Beyond, 9 Oct 2019",
+   "url": "https://www.dndbeyond.com/posts/623-lets-design-an-adventure-outlines-and-frameworks",
+   "quote": "not meant to be seen by the players",
+   "page": "outline checklist"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 574,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In total, I read and compared more than 5,500 pages of text across the versions of the game.",
+   "note": "T&F returned 403 to a browser UA and its Wayback captures (abs and full) carry only the paywalled abstract; the raw full text was reached through the Internet Archive capture of an academia.edu copy of the same article (web.archive.org/web/20201004125159id_/https://www.academia.edu/39684237/...), which carries the journal running heads. Quote 'more than 5,500 pages' is verbatim. Pathfinder is one of the 12 editions in the study's Table 1 and its 575-page Core Rulebook is named in the same paragraph, so the 'D&D and Pathfinder' limb holds. One metadata correction: the sentence falls after the running head 'MIND, CULTURE, AND ACTIVITY 237', i.e. on p. 237, not p. 236 as the chunk's page field says; the claim sentence itself asserts no page."
+  },
+  {
+   "index": 575,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Centuries of use have neutered the male pronoun. In written material it is clear, concise, and familiar. Nothing else is.",
+   "note": "Same recovered full text. Garcia quotes Cook (1989) p. 9 in a block quote: 'The male pronoun (he, him, his) is used exclusively throughout the AD&D game rules... In written material it is clear, concise, and familiar.' Quote 'clear, concise, and familiar' verbatim; every limb (1989, 2nd edition, exclusive male pronoun, defence, written material) is on the page."
+  },
+  {
+   "index": 576,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Explanations about pronouns would cease with later editions of D&D, starting with the third (Wizards of the Coast, 2000).",
+   "note": "Same recovered full text; the sentence immediately follows the Cook block quote. Quote verbatim, all limbs supported including the 2000 date."
+  },
+  {
+   "index": 577,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the Forgotten Realms, nine human ethnic groups are widely recognized, though over a dozen others are found in more localized areas of Faerun. (PHB p. 30)",
+   "note": "Same recovered full text. Garcia block-quotes the 5e PHB p. 30. Quote verbatim; 'nine', 'widely recognized' and 'Forgotten Realms' all present."
+  },
+  {
+   "index": 578,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The material culture and physical characteristics of humans can change wildly from region to region (p. 30).",
+   "note": "Same recovered full text. This sentence is the lead-in Garcia quotes from PHB p. 30 and is followed by 'It continues,' then the nine-ethnic-groups block, so 'the same 5e passage' holds."
+  },
+  {
+   "index": 579,
+   "verdict": "PARTIAL",
+   "trueWording": "Grudging Acceptance: Each half-orc finds a way to gain acceptance from those who hate orcs.",
+   "note": "Same recovered full text. 'Grudging Acceptance' is verbatim and Garcia introduces the block with 'half-orcs have been largely despised by others' (PHB p. 41), so the named paragraph and the reception limb hold. The typographic limb 'bolded' is not attested: the recovered page carries no bold markup and no statement about how the heading is set (it may well be bold in the printed PHB, but the cited source does not say so).",
+   "unsupportedLimb": "bolded — the article quotes the paragraph as plain running text and never describes its typography"
+  },
+  {
+   "index": 580,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the rewriting and editing necessary to extract a beginner's set of D&D from the basic set and its supplements",
+   "note": "Live page fetched raw (HTTP 200). May 1978 entry, Dragon #14 Sorcerer's Scroll: Holmes 'was interested in undertaking the first stage of the project - the rewriting and editing necessary to extract a beginner's set of D&D from the basic set and its supplements. The result of his labors is the \"Basic Set\" of D&D'. Quote verbatim; the page's own preamble dates the Basic Set to 1977."
+  },
+  {
+   "index": 581,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it was decided that a simplified, clarified, introductory piece was needed",
+   "note": "Live page, March 1980 entry (Dragon #35, 'What's ahead for TSR?'): 'As we realized that \"Original\" D&D (the first three booklets and the supplements) wasn't anywhere near adequate for the needs of the readership it was attracting, it was decided that a simplified, clarified, introductory piece was needed.' Quote verbatim; 'wider readership' renders 'the readership it was attracting'."
+  },
+  {
+   "index": 582,
+   "verdict": "PARTIAL",
+   "trueWording": "The version written by J. Eric Holmes was a little bit easier, and now the latest version is easily understandable by anyone willing just to spend the time to read it",
+   "note": "Live page, Summer of 1981 entry (Polyhedron #1 p. 5, RPGA interview with Gygax, interviewer 'presumably Frank Mentzer'). Quote 'a little bit easier' verbatim, and the contrast with the first set 'for hard-core gamers' supports the easier-than-the-original limb. The page nowhere attributes the latest version to Mentzer.",
+   "unsupportedLimb": "Mentzer's — the interviewer says only 'the latest version'; Mentzer is named merely as the presumed interviewer, and the latest Basic Set in summer 1981 was Moldvay's, not Mentzer's 1983 revision"
+  },
+  {
+   "index": 583,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To cut to the chase, I thought that Eric did a fine bit of editing with the set.",
+   "note": "Live page, 2/22/05 entry, EN World forum post archived at greyhawkonline. Quote verbatim; date (2005), forum reply, favourable judgment and the Basic Set referent all supported."
+  },
+  {
+   "index": 584,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The goal of orientalism is to produce encyclopedic knowledge about an imagined and exotic other.",
+   "note": "Live page fetched raw (HTTP 200), Aaron Trammell, 11 January 2016, Vol. III No. I. Quote verbatim, in an image caption just before the 'Comeliness and Honor' heading. The claim's word 'register' stands in for the article's 'orientalism'; the essay elsewhere ties this to form and style ('written in a comprehensive and exhaustive style that mimics the form of an encyclopedia'), so the register framing is supported rather than added."
+  },
+  {
+   "index": 585,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This mode of reductionism encourages players to imagine eastern culture as if it could be contained by a single text",
+   "note": "Live page, Comeliness and Honor section. Quote verbatim. The 'one sourcebook' limb is carried by the next sentence: 'Oriental Adventures represents a complex and multifaceted set of cultural interests through a single and singular set of game mechanics.'"
+  },
+  {
+   "index": 586,
+   "verdict": "PARTIAL",
+   "trueWording": "the culture of the common people is barely distinguishable from that of the Western common folk",
+   "note": "Live page, non-weapon proficiencies section. Quote verbatim, and 'the distinction of specificity between those proficiencies known by nobles and those by commoners' supports the elite-versus-commoner specificity limb (Calligraphy, Falconry, Flower Arranging, Noh, Tea Ceremony against Agriculture, Cooking, Fishing, Hunting). But the compared items are proficiencies, not occupations, and by count the common list is the longer of the two (17 entries against 12) - the article's point is specificity, not quantity.",
+   "unsupportedLimb": "occupations — the page contrasts non-weapon proficiencies (skills), Court Proficiencies against Common Proficiencies, not occupations"
+  },
+  {
+   "index": 587,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Judging from the diction and style of the writing plus the similarities between the rules advanced here ... this sounds not only feasible but likely.",
+   "note": "Live page, comment by 'Randy G', 8 September 2016, in the essay's comment thread. Quote verbatim. The commenter reports Cook's own statement that he wrote the bulk of the book and finds it likely on the evidence of diction and style plus rules similarities with 2e AD&D."
+  },
+  {
+   "index": 588,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any information that could be of use to the DM, but is not meant to be seen by the players, can be included in an appendix.",
+   "note": "Live page fetched raw (HTTP 200), byline 'by Shawn Merwin', dated Oct 9, 2019. Quote verbatim, in the 'Handouts, Maps, and Appendices' section rather than an outline checklist per se; the claim's substance is exact."
+  }
+ ]
+}

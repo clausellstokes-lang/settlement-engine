@@ -1,0 +1,204 @@
+ 
+ 
+ Wikipedia 
+ enwiki 
+ https://en.wikipedia.org/wiki/Main_Page 
+ MediaWiki 1.47.0-wmf.18 
+ first-letter 
+ 
+ Media 
+ Special 
+ 
+ Talk 
+ User 
+ User talk 
+ Wikipedia 
+ Wikipedia talk 
+ File 
+ File talk 
+ MediaWiki 
+ MediaWiki talk 
+ Template 
+ Template talk 
+ Help 
+ Help talk 
+ Category 
+ Category talk 
+ Portal 
+ Portal talk 
+ Draft 
+ Draft talk 
+ MOS 
+ MOS talk 
+ TimedText 
+ TimedText talk 
+ Module 
+ Module talk 
+ Event 
+ Event talk 
+ 
+ 
+ 
+ Impression of depth in The Lord of the Rings 
+ 0 
+ 64202200 
+ 
+ 1335220174 
+ 1335187034 
+ 2026-01-28T01:19:57Z 
+ 
+ Premeditated Chaos 
+ 31530 
+ 
+ 
+ Removing link(s) because [[Wikipedia:Articles for deletion/Historical document]] closed as delete ([[WP:XFDC#4.0.16|XFDcloser]]) 
+ 1335220174 
+ wikitext 
+ text/x-wiki 
+ {{good article}}
+{{Short description|Literary device in Tolkien's fiction}}
+{{Italic title|string=The Lord of the Rings}}
+{{Use British English|date=May 2021}}
+{{Use dmy dates|date=November 2022}}
+The '''impression of depth in ''The Lord of the Rings''''' is an aesthetic effect deliberately sought by its author, [[J. R. R. Tolkien]]. It was intended to give the reader the feeling that the work had "deep roots in the past",<!--<ref name="Monsters Sir Gawain" group=T/>--> and hence that it was attractively authentic.
+
+The effect was constructed on at least four factors, namely the enormous scale of ''[[The Lord of the Rings]]'' and the amount of background detail, including [[Tolkien's maps|maps]] and [[Tolkien's Middle-earth family trees|genealogies]]; the apparently casual and incomplete mentions of this background; multiple inconsistent accounts, as in real history; and writing different texts in varying styles.
+
+Scholars have noted some of [[Tolkien and the medieval|Tolkien's medieval antecedents]] in the effect, such as ''[[Beowulf]]'' and ''[[Sir Gawain and the Green Knight]]''. [[Fantasy]] authors such as [[Ursula K. Le Guin]] and [[J. K. Rowling]] have to an extent followed Tolkien in using the technique.
+
+==Effect==
+[[File:Gawain and the Green Knight.jpg|thumb|upright|Tolkien admired the impression of depth in ''[[Sir Gawain and the Green Knight]]''.<ref name="Monsters Sir Gawain" group=T>{{harvnb|Tolkien|1983|p=72, "Sir Gawain and the Green Knight"}}</ref> Illustration from the medieval manuscript]]
+
+{{further|Literary devices in The Lord of the Rings}}
+
+In an essay, [[J. R. R. Tolkien|Tolkien]] praised the 14th-century English [[chivalric romance]] ''[[Sir Gawain and the Green Knight]]'' for its "deep roots in the past, deeper even than its author was aware".<ref name="Monsters Sir Gawain" group=T/> In his opinion, this enabled it to survive even the severe test of being a set text for students; it deserved "close and detailed attention, and after that ... careful consideration, and re-consideration".<ref name="Monsters Sir Gawain" group=T/> In an aside, he went on to discuss what that meant:{{sfn|Shippey|2005|pp=351-352}}
+
+{{quote|It is an interesting question: what is this flavour, this atmosphere, this virtue that such ''rooted'' works have, and which compensates for the inevitable flaws and imperfect adjustments that must appear, when plots, motives, symbols, are rehandled and pressed into the service of the changed minds of a later time, used for the expression of ideas quite different from those which produced them.<ref name="Monsters Sir Gawain" group=T/>}}
+
+In a letter, Tolkien provided at least part of his own view of the impression of depth in ''[[The Lord of the Rings]]'', namely that<ref name="Letter 247" group=T>{{harvnb|Carpenter|2023|loc=Letter #247 to Colonel Worskett, 20 September 1963 }}</ref>{{sfn|Shippey|2005|pp=259-261}}
+
+{{quote|Part of the attraction of the L.R. is, I think, due to the glimpses of a large history in the background: an attraction like that of viewing far off an unvisited island, or seeing the towers of a distant city gleaming in a sunlit mist.<ref name="Letter 247" group=T/>}}
+
+Tolkien noted further that this effect would be difficult to attain in the [[Tolkien's legendarium|legendarium]] that lay behind ''The Lord of the Rings'', "unless new unattainable vistas are again revealed".<ref name="Letter 247" group=T/> He added that "many of the older legends are purely 'mythological', and nearly all are grim and tragic".<ref name="Letter 247" group=T/>
+
+The scholar of English literature Katarzyna Ferdynus comments that{{sfn|Ferdynus|2016|pp=32-42}}
+
+{{quote|the pseudo-mediaeval reality of ''The Lord of the Rings'' is full of dim echoes of the ancient past, the old glorious days remembered and praised by many of the inhabitants ... the [[The Fellowship of the Ring#Members|Fellowship]] constantly encounters the relics of the past, as they travel through long-forgotten countries, the ruins of old cities, fortresses and watchtowers, forests and rivers that once witnessed important historical events. In their dialogues they constantly refer to legends, they [[Poetry in The Lord of the Rings|sing or recite old ballads and poems]], and they narrate stories whenever there is an opportunity. 'As night f[alls] and the light of the fire beg[ins] to shine out brightly' they listen to the 'histories and legends of long ago, of [[Elves (Middle-Earth)|Elves]] and [[Men (Middle-earth)|Men]] and the good and evil deeds of the Elder Days'.<ref group=T>{{harvnb|Tolkien|1954a}}, book 1, ch. 11 "A Knife in the Dark"</ref> Those numerous references create the striking impression of the depth of time".{{sfn|Ferdynus|2016|pp=32-42}}}}
+
+[[Tom Shippey]], a Tolkien scholar, writes that depth is "the one literary quality, to say no more, which most certainly distinguishes Tolkien from his many imitators" [[Tolkien's impact on fantasy|in fantasy]],{{sfn|Shippey|2005|pp=364-365}} and that behind the visible text lay "a coherent, consistent, deeply fascinating world about which he had no time [then] to speak".{{sfn|Shippey|2005|pp=259-261}}{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+
+==Precedents==
+{{see|Interlacing in The Lord of the Rings|Beowulf and Middle-earth}}
+
+This quality of depth, that Tolkien valued highly, he found especially in ''[[Beowulf]]'', but also in other works that he admired, such as [[Virgil]]'s ''[[Aeneid]]'', [[Shakespeare]]'s ''[[Macbeth]]'', ''[[Sir Orfeo]]'', and ''[[Grimms' Fairy Tales]]''.{{sfn|Shippey|2005|pp=259-261}} Scholars such as [[Gergely Nagy (scholar)|Gergely Nagy]] have identified other texts well known to Tolkien that provide a strong impression of depth, including [[Thomas Malory]]'s ''[[Le Morte d'Arthur]]'' and [[Geoffrey Chaucer]]'s ''[[Troilus and Criseyde]]''. ''Beowulf'' contains numerous digressions into other stories which have functions other than advancing the story, in Adrien Bonjour's words rendering "the background of the poem extraordinarily alive",{{sfn|Nagy|2003|pp=239-258}}{{efn|Nagy cites {{cite book |last=Bonjour |first=Adrien |title=The Digressions in 'Beowulf' |date=1950 |publisher=[[Basil Blackwell]] |url=https://books.google.com/books?id=sfhDAAAAYAAJ}}}} and providing contrasts and examples that repeatedly illuminate the key points of the main story.{{sfn|Nagy|2003|pp=239-258}} Tolkien stated in ''[[The Monsters and the Critics]]'' that ''Beowulf''<ref name="Beowulf Monsters" group=T/>
+
+{{quote|must have succeeded admirably in creating in the minds of the poet's contemporaries the illusion of surveying a past, pagan but noble and fraught with a deep significance - a past that itself had depth and reached backward into a dark antiquity of sorrow. This impression of depth is an effect and a justification of the use of episodes and allusions to old tales, mostly darker, more pagan, and desperate than the foreground".<ref name="Beowulf Monsters" group=T>{{harvnb|Tolkien|1983|p=27, "The Monsters and the Critics"}}</ref>}}
+
+==Factors==
+
+Scholars have identified four factors that help to build the impression of depth:{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+
+# the enormous scale and detail of Tolkien's [[Middle-earth]] background{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+# the apparently casual and incomplete mentions of this background in the text, as if it were something taken for granted{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+# the multiple accounts, containing gaps and inconsistencies, as if it were a real body of historical documents{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+# the multiple styles in which the various texts are written, as if by different hands.{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+
+===Vast backcloths===
+[[File:Downfall of Númenor.svg|thumb|upright=1.5|The backdrop to ''The Lord of the Rings'' encompassed [[Cosmology of Middle-earth|cosmological myths]] on a grand scale.{{sfn|Shippey|2005|pp=324-328}}]]
+
+Tolkien alluded to the first factor with the phrase "vast backcloths":<ref name="Letter 131" group=T>{{harvnb|Carpenter|2023|loc=Letter #131 to [[Milton Waldman]], late in 1951 }}</ref>
+
+{{quote|once upon a time I had a mind to make a body of more or less connected legend, ranging from the large and cosmogonic, to the level of romantic fairy-story--the larger founded on the lesser in contact with the earth, the lesser drawing splendour from the vast backcloths--which I could dedicate simply to: [[England in Middle-earth|to England]]; to my country.<ref name="Letter 131" group=T/>}}
+
+The Tolkien scholar [[Michael Drout]], with colleagues, notes that the vastness was not an exaggeration, given that it encompassed ''[[The Silmarillion]]'' and much of the multi-volume [[Tolkien's legendarium|legendarium]] edited by Tolkien's son [[Christopher Tolkien|Christopher]], not to mention the many "further drafts, partially edited copies, riders, cancelled pages, and even lost texts"{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}} behind even those lengthy works.{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}} Shippey adds that [[Tolkien's maps]], too, lend an "air of solidity and extent" to the work, providing "repeated implicit assurances of the existence of the things they label, and of course of their nature and history too".{{sfn|Shippey|2005|pp=115-118}}
+
+===Casual mentions===
+
+{{quote|I remember well the splendour of their banners ... It recalled to me the glory of the Elder Days and the hosts of [[Beleriand]], so many great princes and captains were assembled. And yet not so many, nor so fair, as when [[Thangorodrim]] was broken...|Elrond alluding to the War of Wrath at the end of the [[First Age]], and the [[Last Alliance of Elves and Men]] in the [[Second Age]], at "[[The Council of Elrond]]"<ref group=T>{{harvnb|Tolkien|1954a}}, book 2, ch. 2 "[[The Council of Elrond]]"</ref>}}
+
+Mentions of background stories and events in ''The Lord of the Rings'' take many forms. These include [[Poetry in Lord of the Rings|songs and poems interspersed in the text]], such as of [[Beren and Lúthien]] sung by [[Aragorn]]; mentions of objects like the prized [[Silmarils]], by the Hobbit [[Sam Gamgee]]; and people from past ages like the [[Elf (Middle-earth)|Elven]]-[[Metalsmith|smith]] [[Celebrimbor]], described by the Elf-lord [[Elrond]].{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}{{sfn|Shippey|2005|pp=259-261}} All these mentions made use of existing but at the time unpublished texts. Similarly, the lady of [[Rohan (Middle-earth)|Rohan]], [[Éowyn]], does not just give [[Merry Brandybuck]] a horn; she gives him an ancient silver horn "from the Hoard of [[Scatha the Worm]]". The mentions give the reader the feeling that Middle-earth is far larger than the parts described in the story, and that it had "a deep history" much older than the War of the Ring.{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}} 
+
+Nagy analyses the effect of such mentions in the case of Sam's fight with the giant spider [[Shelob]] during his and [[Frodo Baggins|Frodo]]'s dangerous struggle to enter the Dark Lord [[Sauron]]'s evil land of [[Mordor]].{{sfn|Nagy|2003|pp=239-258}} Sam desperately slashes at Shelob's underside after she has stung Frodo:
+
+{{quote|The blade scored it with a dreadful gash, but those hideous folds could not be pierced by any strength of men, not though Elf or Dwarf should forge the steel or the hand of Beren or of Túrin wield it.<ref name="Choices of Master Samwise" group=T>{{harvnb|Tolkien|1954}}, book 4, ch. 10, "The Choices of Master Samwise"</ref>}}
+
+The invocation of the [[First Age]] hero [[Túrin Turambar]], Nagy writes, "becomes a reflection of Túrin slaying [[Glaurung]]" the dragon.{{sfn|Nagy|2003|pp=239-258}} He states that Glaurung's allegiance to the original Dark Lord, [[Morgoth]], reinforces the link with evil already suggested by the descent of Shelob from the first and greatest of all the evil giant spiders, [[Ungoliant]], who destroyed the [[Two Trees of Valinor]] in ''The Silmarillion'',<ref group=T>{{harvnb|Tolkien|1977|loc="Quenta Silmarillion", ch. 8 "Of the Darkening of Valinor"}}</ref> and that Túrin's feud with the dragon is mirrored by Sam's feud with the spider, begun by its attack on Sam's master, Frodo. Nagy comments that "the dimension of the scene is [thus] greatly increased".{{sfn|Nagy|2003|pp=239-258}}
+
+{| class="wikitable" style="margin: 1em auto;"
+|+ [[Gergely Nagy (scholar)|Gergely Nagy]]'s analysis of depth in Sam's fight with Shelob{{sfn|Nagy|2003|pp=239-258}}
+|-
+! !! Surface !! Depth via [[Ungoliant]] backstory !! Depth via [[Túrin Turambar|Túrin]] backstory
+|-
+| '''Story''' || [[Sam Gamgee|Sam]] fights [[Shelob]] || ||
+|-
+| '''Mentions''' || || "But none could rival her, Shelob the Great, last child of Ungoliant to trouble the unhappy world"<ref name="Shelob's Lair" group=T>{{harvnb|Tolkien|1954}}, book 4, ch. 9, "Shelob's Lair"</ref> || "those hideous folds could not be pierced by any strength of men, not though [[Elf (Middle-earth)|Elf]] or [[Dwarf (Middle-earth)|Dwarf]] should forge the steel or the hand of [[Beren]] or of Túrin wield it"<ref name="Choices of Master Samwise" group=T/>
+|-
+| '''[[Protagonist]]''' || Sam || || [[Túrin Turambar|Túrin]] 
+|-
+| '''[[Antagonist]]''' || Shelob the giant spider || [[Ungoliant]] the first giant spider || [[Glaurung]] the dragon
+|-
+| '''Link with evil''' || The Dark Lord [[Sauron]]'s tacit acceptance of Shelob as an unwitting gatekeeper || Ungoliant's service to the fallen [[Valar|Vala]] Melkor, who became Morgoth || Glaurung's allegiance to the first Dark Lord, [[Morgoth]]
+|-
+| '''[[Feud]]''' || Sam avenges Shelob's attack on [[Frodo]] || Ungoliant hates all light, destroys the [[Two Trees of Valinor]] that shine silver and gold{{efn|A further deep connection here is that the light of the Two Trees is contained in the [[Phial of Galadriel]] that [[Frodo]] and Sam use in the battle with Shelob.{{sfn|Dickerson|2006|p=7}}}} || Túrin ends his long feud with Glaurung
+|}
+
+===Multiple accounts, apparent contradictions===
+[[File:Polo Bridle Pelham.JPG|thumb|upright|Apparent contradiction: Tolkien stated that Elves rode without saddle or harness of any kind, but gives [[Glorfindel]]'s horse both [[Bit (horse)|bit]] and [[bridle]] (modern bit and bridle shown).]]
+
+Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue to ''The Lord of the Rings'', where the narrator explains that "many of their traditions, up to that time still mainly [[Oral tradition|oral]], were collected and written down",<ref group=T>{{harvnb|Tolkien|1954a}}, "Prologue", "Note on the Shire Records"</ref>{{sfn|Sipahi|2016|pp=93-95}} and then details the various copies, redactions, and translations that were made of the fictive ''[[Red Book of Westmarch]]''. ''Beowulf'' is similarly written as if its audience knew of the historic characters already.{{sfn|Sipahi|2016|pp=93-95}}{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}} The ''[[Poetic Edda]]'' is a compilation of numerous older sources.{{sfn|Sipahi|2016|pp=93-95}}
+
+Apparent contradictions, Drout notes, tend to give readers the impression of a real and complex history, since they may assume that an omniscient author can make a fictional story wholly consistent. Among the examples he gives are that Tolkien stated that Elves rode without either a [[saddle]] or a harness, but the Elf-lord [[Glorfindel]]'s horse is described as having both [[Bit (horse)|bit]] and [[bridle]], and Glorfindel says he will shorten his horse's [[stirrup]]s for the Hobbit [[Frodo Baggins|Frodo]].<ref group=T>{{harvnb|Tolkien|1954a}}, book 1, ch. 12 "Flight to the Ford"</ref>{{efn|In a letter written after the publication of ''The Lord of the Rings'', Tolkien writes that "actually ''bridle'' was casually and carelessly used for what I suppose should have been called a ''headstall''... Glorfindel's horse would have an ornamental ''headstall'', carrying a plume, and with the straps studded with jewels and small bells; but Glor[findel] would certainly not use a ''bit''. I will change ''bridle and bit'' to ''headstall''."<ref group=T>{{harvnb|Carpenter|2023|loc=letter 211 to Rhona Beare, 14 October 1958 }}</ref>}} In another case, Tolkien intentionally did not edit away the contradiction between [[Tom Bombadil]]'s claim that he was "Eldest ... here before the river and the trees; Tom remembers the first raindrop and the first acorn",<ref group=T>{{harvnb|Tolkien|1954a}}, book 1, ch. 7 "In the House of Tom Bombadil"</ref> and Gandalf's description of the [[Ent]] [[Treebeard]] that "Treebeard is Fangorn, the guardian of the forest; he is the oldest of the Ents, the oldest living thing that still walks beneath the Sun upon this Middle-earth".<ref group=T>{{harvnb|Tolkien|1954}}, book 3, ch. 5, "The White Rider"</ref>{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}}
+
+===Varying styles===
+{{further|Poetry in The Lord of the Rings}}
+
+The characters from each part of Middle-earth speak and act in a way that is characteristic of that place, as with the [[Rohirrim]].{{sfn|Sipahi|2016|pp=93-95}} Sipahi notes, too, that all four factors tend to occur together, again as seen in the account of the Rohirrim. In addition, their language and names--all taken from [[Old English]]--lend further depth by linking back to the [[medieval]] period in the real primary world.{{sfn|Sipahi|2016|pp=93-95}}
+
+== Reception ==
+
+The critic and experimental novelist [[Christine Brooke-Rose]] attacked "the histories and [[Tolkien's Middle-earth family trees|genealogies]]" as not "''in the least'' necessary to the narrative",{{sfn|Brook-Rose|1981|p=247}} thus demonstrating in Shippey's view her ignorance of Tolkien's creation of depth. He notes that she guessed wrongly that Tolkien would have translated all the "runic and other messages inside the narrative",{{sfn|Brook-Rose|1981|p=247}} as, he suggests, almost all other authors would have done, but that Tolkien did not, as he saw [[Poetry in The Lord of the Rings#Glimpses of another world|a value in the sound of untranslated language]].{{sfn|Shippey|2005|pp=364-365, where Shippey points also to pp. 129, 203, and notes 5 and 10 on pp. 441-441}}
+
+Later fantasy authors such as [[Ursula K. Le Guin]] made use of the device of giving pseudo-references to create depth; in the ''[[Earthsea]]'' novels, she alluded to tales of Elfarran, Morred, and the Firelord, which she wrote many years later.{{sfn|Drout|Hitotsubashi|Scavera|2014|pp=167-211}} The scholar Katherine Sas writes that [[J. K. Rowling]] scaled down Tolkien's impression of depth but applied all four factors involved to her book ''[[Harry Potter and the Prisoner of Azkaban]]''.{{sfn|Sas|2019|loc=Article 9}}
+
+== See also ==
+
+* [[Non-narrative elements in The Lord of the Rings|Non-narrative elements in ''The Lord of the Rings'']]
+
+== Notes ==
+
+{{notelist}}
+
+== References ==
+
+=== Primary ===
+
+{{reflist|group=T|28em}}
+
+=== Secondary ===
+{{reflist|28em}}
+
+=== Sources ===
+
+{{refbegin}}
+* {{cite book |last=Brook-Rose |first=Christine |title=A rhetoric of the unreal : studies in narrative and structure, especially of the fantastic |publisher=[[Cambridge University Press]] |year=1981 |isbn=978-0-521-22561-8 | oclc=7197513}}
+* {{ME-ref|Letters}}
+* {{cite book |last=Dickerson |first=Matthew |author-link=Matthew T. Dickerson |title=Ents, Elves, and Eriador: The Environmental Vision of J.R.R. Tolkien |url=https://books.google.com/books?id=lwidpxMe-AIC&pg=PA7 |year=2006 |publisher=[[University Press of Kentucky]] |isbn=978-0-8131-7159-3}}
+* {{cite journal |last1=Drout |first1=Michael D. C. |author-link=Michael Drout |last2=Hitotsubashi |first2=Namiko |last3=Scavera |first3=Rachel |title=Tolkien's Creation of the Impression of Depth |journal=Tolkien Studies |volume=11 |issue=1 |year=2014 |pages=167-211 |issn=1547-3163 |doi=10.1353/tks.2014.0008 |s2cid=170851865 }}
+* {{cite journal |last=Ferdynus |first=Katarzyna |title=The Shadow of the Past. The Lord of the Rings and the Gothic Novel |journal=New Horizons in English Studies |date=2016 |volume=1 |issue=1 |pages=32-42 |doi=10.17951/nh.2016.1.32 <!--url= REDUNDANT, DOI link gives free access, see next parameter-->|doi-access=free }}
+* {{cite book |last=Nagy |first=Gergely |author-link=Gergely Nagy (scholar) |chapter=The great chain of reading: (inter-)textual relations and the technique of mythopoesis in the Turin Story |editor-last=Chance |editor-first=Jane |editor-link=Jane Chance |title=Tolkien the Medievalist |chapter-url=https://books.google.com/books?id=PQSpu0lU8K4C&pg=PT279 |year=2003 |publisher=[[Routledge]] |isbn=978-1-134-43970-6 |at=Part 4, ch. 15, pp. 239-258}}
+* {{cite journal |last=Sas |first=Katherine |year=2019 |title=A Sense of Darker Perspective: How the Marauders Convey Tolkien's 'Impression of Depth' in Harry Potter and the Prisoner of Azkaban |journal=[[Mythlore]] |volume=38 |issue=1 |at=Article 9 |url=https://dc.swosu.edu/mythlore/vol38/iss1/9}}
+* {{cite book |last=Shippey |first=Tom |author-link=Tom Shippey |title=[[The Road to Middle-Earth]] |date=2005 |edition=Third |orig-year=1982 |publisher=[[HarperCollins]] |isbn=978-0261102750}}
+* {{cite book |last=Sipahi |first=Peri |title='A Mighty Matter of Legend': Tolkien's Rohirrim. A Source Study |url=https://books.google.com/books?id=9lR4DwAAQBAJ&pg=PA93 |year=2016 |publisher=Tectum Wissenschaftsverlag |isbn=978-3-8288-6568-6}}
+* {{ME-ref|FOTR}}
+* {{ME-ref|TT}}
+* {{ME-ref|Silm}}
+* {{ME-ref|Monsters}}
+{{refend}}
+
+{{The Lord of the Rings}}
+
+[[Category:Literary devices in the Lord of the Rings]] 
+ mnpcez1n7vjsaqqvoz2tuyl7fepabg8 
+ 
+ 
+ 

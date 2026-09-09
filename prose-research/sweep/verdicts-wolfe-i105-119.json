@@ -1,0 +1,238 @@
+{
+ "name": "wolfe",
+ "chunk": 7,
+ "claims": [
+  {
+   "index": 105,
+   "feature": "found-manuscript translator apparatus",
+   "claim": "The Latro books frame the scrolls through a translator who notes the narrator's limited ability to write and the haste of composition, layering unreliability.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "limited ability to write",
+   "page": ""
+  },
+  {
+   "index": 106,
+   "feature": "depth by omission",
+   "claim": "Wolfe's density comes from what he leaves out rather than elaborate description; suggestion through omission gives the prose its depth.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "what Wolfe's leaves out that gives it its depth",
+   "page": ""
+  },
+  {
+   "index": 107,
+   "feature": "cut-back prose with exotic nouns",
+   "claim": "The sentences are clear, cut back and almost Hemingwayesque, while exotic nouns like 'burginot' estrange without obscuring.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "cut back and simplified, almost Hemmingwayesque",
+   "page": ""
+  },
+  {
+   "index": 108,
+   "feature": "narrator who knows nothing",
+   "claim": "Wolfe's narrators often know little, placing them in the reader's position; 'Tracking Song' opens by telling its narrator he knows nothing.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "You know nothing.",
+   "page": ""
+  },
+  {
+   "index": 109,
+   "feature": "unexplained detail implies a larger world",
+   "claim": "Wolfe takes Heinlein's 'the door dilated' further, using unexplained background details to imply worlds, and leaves questions half-answered as a feature.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "takes this to the next level",
+   "page": ""
+  },
+  {
+   "index": 110,
+   "feature": "encoder and decoder (Wright)",
+   "claim": "Peter Wright's Attending Daedalus casts Wolfe as encoder and the reader as decoder of labyrinthine conundrums, with the element of choice as his principal device for confounding the reader.",
+   "source": "LARB 2013 (quoting Wright)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Wolfe's principal device for confounding the reader",
+   "page": ""
+  },
+  {
+   "index": 111,
+   "feature": "first misinterpreted narrative",
+   "claim": "Wright records that no reviewer recognised Weer's deathly state, making Peace Wolfe's first misinterpreted narrative.",
+   "source": "LARB 2013 (quoting Wright)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Wolfe's first misinterpreted narrative",
+   "page": ""
+  },
+  {
+   "index": 112,
+   "feature": "as many readings as readers",
+   "claim": "The reviewer maintains the novel contains as many readings as readers and resists the reading that Wolfe aims to confound.",
+   "source": "LARB 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "as many readings perhaps as there are readers",
+   "page": ""
+  },
+  {
+   "index": 113,
+   "feature": "cascading metaphor in the cosmic register",
+   "claim": "Peace's first section collapses SF's cosmic perspective into religious ecstasy and cascades from metaphor to metaphor; no one else writes like that.",
+   "source": "LARB 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "cascading from metaphor to metaphor",
+   "page": ""
+  },
+  {
+   "index": 114,
+   "feature": "author claims kinship with his ghost",
+   "claim": "Wolfe is quoted as saying of Weer that they have similar souls, against readings of Weer as the devil.",
+   "source": "LARB 2013 (Wolfe quoted)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "we have similar souls",
+   "page": ""
+  },
+  {
+   "index": 115,
+   "feature": "unfinished stories as evasions",
+   "claim": "Weer leaves stories unfinished and declines to narrate the visit to Gold's farm, later revealing he murdered the librarian; the reader must sift the evidence.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "the reader has to sift the evidence",
+   "page": ""
+  },
+  {
+   "index": 116,
+   "feature": "interpolated tales comment on the frame",
+   "claim": "The embedded tales comment in various ways on the events Weer narrates, and the reader must decide which ones do.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "comment in various ways on the events",
+   "page": ""
+  },
+  {
+   "index": 117,
+   "feature": "memory palace with lost rooms",
+   "claim": "Weer lives in a rambling memory palace of his own making whose rooms he can temporarily or permanently lose access to.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "a rambling memory palace of his own making",
+   "page": ""
+  },
+  {
+   "index": 118,
+   "feature": "lie in dialogue, not in narration",
+   "claim": "Wolfe's characters will lie in dialogue but not in narration, so narrative statements can be trusted while speech cannot.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "characters will lie in dialogue but not in narration",
+   "page": ""
+  },
+  {
+   "index": 119,
+   "feature": "narration stops just before a death",
+   "claim": "Weer's narration stops just before a character dies and resumes later, so murders are inferred from absence, a 'shadow narrative'.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "stops just before a character dies",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 105,
+   "verdict": "PARTIAL",
+   "trueWording": "Latro writes with limited ability per the scrolls' translator",
+   "note": "Raw page (aidanmoher.com, HTTP 200). Verbatim: 'he is an otherwise uneducated mercenary with limited ability to write (per the \"translator\" of the found scrolls) ... and who would have been writing his recollections in haste in often difficult circumstances'. The parenthetical attributes only the writing-ability limb to the translator; the haste is Gerwel's own inference. Translator-framed scrolls and layered unreliability ('Latro is unreliable on many levels') are supported.",
+   "unsupportedLimb": "the translator, rather than the essayist, noting the haste of composition"
+  },
+  {
+   "index": 106,
+   "verdict": "PARTIAL",
+   "trueWording": "Wolfe's prose is not dense; omission gives it its depth",
+   "note": "Raw page (murrayewing.co.uk, HTTP 200). Verbatim: \"It's what Wolfe's leaves out that gives it its depth.\" But the preceding sentences read 'I don't think Wolfe's prose is particularly dense. In fact, it's quite cut back and simplified'. The page attributes DEPTH, not density, to omission, and the 'rather than elaborate description' limb is supported ('cut back and simplified').",
+   "unsupportedLimb": "that the prose has density - the page explicitly denies Wolfe's prose is particularly dense"
+  },
+  {
+   "index": 107,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sentences clear, cut back, Hemmingwayesque; exotic nouns give alien tinge",
+   "note": "Raw page (murrayewing.co.uk). Verbatim: 'it's quite cut back and simplified, almost Hemmingwayesque'; 'he generally only uses exotic nouns. The meanings of his sentences are quite clear, they're just given an alien tinge by having, for instance, a helmet referred to as as burginot' and 'you can often guess the rough meaning of the noun by its context, without having to resort to a dictionary' - estrangement without obscurity. Page spelling 'Hemmingwayesque' and 'burginot' both match the claim."
+  },
+  {
+   "index": 108,
+   "verdict": "PARTIAL",
+   "trueWording": "'The key to Wolfe's narrators ... is this passage from Tracking Song'",
+   "note": "Raw page (murrayewing.co.uk). 'You know nothing.' is verbatim, as the first words of a block quotation introduced only as 'this passage from \"Tracking Song\"'. The knowing-little limb is fully supported: they're 'unreliable' mainly because they know so little' and amnesiac narrators are 'putting them in exactly the same position as the reader'.",
+   "unsupportedLimb": "that the passage OPENS 'Tracking Song' and is addressed to its narrator - the page gives it no position in the story and names no addressee"
+  },
+  {
+   "index": 109,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe just takes Heinlein's unexplained detail to the next level",
+   "note": "Raw page (murrayewing.co.uk). Verbatim: 'ever since Robert A Heinlein wrote \"the door dilated\" -- an unexplained background detail that (literally) opened a portal through which the reader could imagine an entire futuristic world. Wolfe just takes this to the next level.' Half-answered questions as a feature: 'those half-answered, or unanswered, questions are part of Wolfe's worlds, just as they're part of ours.'"
+  },
+  {
+   "index": 110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe encoder, reader decoder; choice confounds the reader",
+   "note": "Raw page (lareviewofbooks.org, HTTP 200, full article present). Verbatim: 'Wolfe is \"encoder\" and reader \"decoder of elliptical yet elegantly labyrinthine conundrums\" - or, as Wright says later ... \"This element of choice is Wolfe's principal device for confounding the reader.\"' Source named earlier as 'Peter Wright's Attending Daedalus'. Minor context: the second Wright quote is glossed as being about The Book of the New Sun, but its own wording says 'Wolfe's principal device'."
+  },
+  {
+   "index": 111,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "No reviewer recognised Weer's deathly state; first misinterpreted narrative",
+   "note": "Raw page (lareviewofbooks.org). Verbatim, attributed to Wright: 'as Wright points out, \"no reviewer recognised Weer's deathly state ... and the ghost's story quickly became Wolfe's first misinterpreted narrative.\"' Both limbs (Wright as recorder; Peace as the first misinterpreted narrative) supported."
+  },
+  {
+   "index": 112,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Many readings as readers; disagrees Wolfe's goal is confounding",
+   "note": "Raw page (lareviewofbooks.org). Verbatim: 'this novel contains many readings, as many readings perhaps as there are readers, which is as it should be' (prefaced 'I would maintain'). Resistance limb verbatim too: 'I vehemently disagree that Wolfe's goal is to confound the reader.'"
+  },
+  {
+   "index": 113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First section collapses SF's cosmic view with religion, ecstatically",
+   "note": "Raw page (lareviewofbooks.org). Verbatim: 'Just in the first section, \"Alden Dennis Weer,\" look how Wolfe collapses the cosmic perspective of science fiction with that of religion in an ecstatic description'; and after the second excerpt, 'And the passage goes on, cascading from metaphor to metaphor. No one else writes like that.' All three limbs supported."
+  },
+  {
+   "index": 114,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe has said of Weer, 'we have similar souls'",
+   "note": "Raw page (lareviewofbooks.org). Verbatim: 'But Gene Wolfe is not evil, nor is he sympathetic with the devil, and Wolfe has said of Weer, \"we have similar souls.\"' The sentence stands in the reviewer's resistance to Borski's reading that 'Alden Dennis Weer may be the Devil incarnate', so the 'against readings of Weer as the devil' limb holds."
+  },
+  {
+   "index": 115,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Weer withholds the Gold's trip; reader sifts evidence; Weer killed her",
+   "note": "Raw page (blog.ayjay.org, HTTP 200). Verbatim: 'the reader has to sift the evidence to figure out what really happened' - said of Severian, then explicitly extended: 'The same is true of Weer's narration in Peace.' Also 'Often he leaves stories unfinished'; 'He explicitly says that he will not tell us what happened when he and the librarian Lois Arbuthnot visited a farm outside of town'; Weer's own line 'the trip Lois and I made to Gold's'; 'later it becomes pretty clear what happened: Weer killed her.'"
+  },
+  {
+   "index": 116,
+   "verdict": "PARTIAL",
+   "trueWording": "Interpolated tales comment on events Weer narrates and people he knew",
+   "note": "Raw page (blog.ayjay.org). Verbatim: 'The various interpolated tales in Peace comment in various ways on the events that Weer narrates and the people that he knew.' Jacobs then supplies his own identifications ('one story about a princess and her suitors clearly mirrors Aunt Olivia'; a tale 'I think is meant to describe to Weer his own situation') without saying the reader must decide. The nearest reader-task line, 'we are left to draw inferences', is about Weer's unfinished stories, not about which tales comment.",
+   "unsupportedLimb": "that the reader must decide WHICH tales comment on the frame - the page asserts no such reader task and instead states its own examples"
+  },
+  {
+   "index": 117,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Rambling memory palace of his own making; rooms lost temporarily or permanently",
+   "note": "Raw page (blog.ayjay.org). Verbatim and contiguous: 'He clearly lives, or \"lives,\" in a rambling memory palace of his own making, each room of which is related to some season of his life. But the palace is not complete, and he can temporarily or permanently lose access to some of its rooms.' Every limb supported."
+  },
+  {
+   "index": 118,
+   "verdict": "PARTIAL",
+   "trueWording": "Key rule: characters lie in dialogue but not in narration",
+   "note": "Raw page (the-solute.com, HTTP 200). The rule is verbatim (capitalised on the page): '(Key rules: Characters will lie in dialogue but not in narration.)'. The page supports only the narrower point that the narration does not fabricate - 'he is not making up events which did not happen, though his perspective is heavily biased' - and wallflower's method is to check 'if he's being honest about the what and the why', i.e. narration is not to be trusted wholesale.",
+   "unsupportedLimb": "that narrative statements can therefore be TRUSTED - the same page says 'when a Wolfe narrator lies to you or tricks you' and calls Weer's narration 'essentially utter manipulation', biased and evasive"
+  },
+  {
+   "index": 119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stops just before a death, resumes after; narrative defined by what isn't narrated",
+   "note": "Raw page (the-solute.com). Verbatim: 'he often stops just before a character dies and resumes some time after, beginning with Bobby Black and ending with his secretary.' Inference-from-absence limb: 'crafting a narrative that's largely defined by what isn't narrated' and 'especially important if it's the last time he mentions a character, because that's the sign he doesn't want to tell us ... something'. The term appears hyphenated on the page - 'What's the shadow-narrative of his life' (also 'Shadow Life', 'Shadow Plot')."
+  }
+ ]
+}

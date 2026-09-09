@@ -1,0 +1,792 @@
+<!doctype html>
+<html class="no-js" lang="en-GB">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-itunes-app" content="app-id=471303191">
+	<meta property="fb:pages" content="162000207162388" />
+
+	<!-- InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+<script type="text/javascript" async=true>
+(function() {
+  var host = window.location.hostname;
+  var element = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  var url = 'https://cmp.inmobi.com'
+    .concat('/choice/', '-5YVebLkDwEMf', '/', host, '/choice.js?tag_version=V3');
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  element.async = true;
+  element.type = 'text/javascript';
+  element.src = url;
+
+  firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        if(args[0] === 'init' && typeof args[3] === 'object') {
+          args[3] = Object.assign(args[3], { tag_version: 'V3' });
+        }
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            if (event && event.source && event.source.postMessage) {
+              event.source.postMessage(returnMsg, '*');
+            }
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  makeStub();
+
+  function makeGppStub() {
+    const CMP_ID = 10;
+    const SUPPORTED_APIS = [
+      '2:tcfeuv2',
+      '6:uspv1',
+      '7:usnatv1',
+      '8:usca',
+      '9:usvav1',
+      '10:uscov1',
+      '11:usutv1',
+      '12:usctv1'
+    ];
+
+    window.__gpp_addFrame = function (n) {
+      if (!window.frames[n]) {
+        if (document.body) {
+          var i = document.createElement("iframe");
+          i.style.cssText = "display:none";
+          i.name = n;
+          document.body.appendChild(i);
+        } else {
+          window.setTimeout(window.__gpp_addFrame, 10, n);
+        }
+      }
+    };
+    window.__gpp_stub = function () {
+      var b = arguments;
+      __gpp.queue = __gpp.queue || [];
+      __gpp.events = __gpp.events || [];
+
+      if (!b.length || (b.length == 1 && b[0] == "queue")) {
+        return __gpp.queue;
+      }
+
+      if (b.length == 1 && b[0] == "events") {
+        return __gpp.events;
+      }
+
+      var cmd = b[0];
+      var clb = b.length > 1 ? b[1] : null;
+      var par = b.length > 2 ? b[2] : null;
+      if (cmd === "ping") {
+        clb(
+          {
+            gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+            cmpStatus: "stub", // possible values: stub, loading, loaded, error
+            cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+            signalStatus: "not ready", // possible values: not ready, ready
+            supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+            cmpId: CMP_ID, // IAB assigned CMP ID, may be 0 during stub/loading
+            sectionList: [],
+            applicableSections: [-1],
+            gppString: "",
+            parsedSections: {},
+          },
+          true
+        );
+      } else if (cmd === "addEventListener") {
+        if (!("lastId" in __gpp)) {
+          __gpp.lastId = 0;
+        }
+        __gpp.lastId++;
+        var lnr = __gpp.lastId;
+        __gpp.events.push({
+          id: lnr,
+          callback: clb,
+          parameter: par,
+        });
+        clb(
+          {
+            eventName: "listenerRegistered",
+            listenerId: lnr, // Registered ID of the listener
+            data: true, // positive signal
+            pingData: {
+              gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+              cmpStatus: "stub", // possible values: stub, loading, loaded, error
+              cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+              signalStatus: "not ready", // possible values: not ready, ready
+              supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+              cmpId: CMP_ID, // list of supported APIs
+              sectionList: [],
+              applicableSections: [-1],
+              gppString: "",
+              parsedSections: {},
+            },
+          },
+          true
+        );
+      } else if (cmd === "removeEventListener") {
+        var success = false;
+        for (var i = 0; i < __gpp.events.length; i++) {
+          if (__gpp.events[i].id == par) {
+            __gpp.events.splice(i, 1);
+            success = true;
+            break;
+          }
+        }
+        clb(
+          {
+            eventName: "listenerRemoved",
+            listenerId: par, // Registered ID of the listener
+            data: success, // status info
+            pingData: {
+              gppVersion: "1.1", // must be “Version.Subversion”, current: “1.1”
+              cmpStatus: "stub", // possible values: stub, loading, loaded, error
+              cmpDisplayStatus: "hidden", // possible values: hidden, visible, disabled
+              signalStatus: "not ready", // possible values: not ready, ready
+              supportedAPIs: SUPPORTED_APIS, // list of supported APIs
+              cmpId: CMP_ID, // CMP ID
+              sectionList: [],
+              applicableSections: [-1],
+              gppString: "",
+              parsedSections: {},
+            },
+          },
+          true
+        );
+      } else if (cmd === "hasSection") {
+        clb(false, true);
+      } else if (cmd === "getSection" || cmd === "getField") {
+        clb(null, true);
+      }
+      //queue all other commands
+      else {
+        __gpp.queue.push([].slice.apply(b));
+      }
+    };
+    window.__gpp_msghandler = function (event) {
+      var msgIsString = typeof event.data === "string";
+      try {
+        var json = msgIsString ? JSON.parse(event.data) : event.data;
+      } catch (e) {
+        var json = null;
+      }
+      if (typeof json === "object" && json !== null && "__gppCall" in json) {
+        var i = json.__gppCall;
+        window.__gpp(
+          i.command,
+          function (retValue, success) {
+            var returnMsg = {
+              __gppReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: i.callId,
+              },
+            };
+            event.source.postMessage(msgIsString ? JSON.stringify(returnMsg) : returnMsg, "*");
+          },
+          "parameter" in i ? i.parameter : null,
+          "version" in i ? i.version : "1.1"
+        );
+      }
+    };
+    if (!("__gpp" in window) || typeof window.__gpp !== "function") {
+      window.__gpp = window.__gpp_stub;
+      window.addEventListener("message", window.__gpp_msghandler, false);
+      window.__gpp_addFrame("__gppLocator");
+    }
+  };
+
+  makeGppStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+</script>
+<!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+
+<style id="sfn-cmp-privacy-fix">
+@media (max-width: 480px) {
+  #qc-cmp2-persistent-link,
+  .qc-cmp2-container .qc-cmp2-persistent-link {
+    right: auto !important;
+    left: 0 !important;
+    bottom: 60px !important;
+  }
+}
+</style>
+<script>
+(function () {
+  function repositionPrivacyLink() {
+    if (window.innerWidth > 480) return;
+    var link = document.getElementById('qc-cmp2-persistent-link');
+    if (!link) return;
+    link.style.setProperty('right', 'auto', 'important');
+    link.style.setProperty('left', '0', 'important');
+    link.style.setProperty('bottom', '60px', 'important');
+  }
+
+  new MutationObserver(repositionPrivacyLink).observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+  window.addEventListener('resize', repositionPrivacyLink);
+  document.addEventListener('DOMContentLoaded', repositionPrivacyLink);
+  window.addEventListener('load', repositionPrivacyLink);
+})();
+</script>
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165741212-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165741212-1');
+</script>
+  
+  <!-- Standard -->
+<meta name="description" content="We speak to Robin Hobb about the origins of her name, her favourite character to write for (there have been many) and swapping between Hobb and Lindholm" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@SciFiNow" />
+<meta name="twitter:title" content="Author Robin Hobb talks Megan Lindholm and epic fantasy" />
+<meta name="twitter:description" content="We speak to Robin Hobb about the origins of her name, her favourite character to write for (there have been many) and swapping between Hobb and Lindholm" />
+<meta name="twitter:image" content="https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg" />
+
+<!-- Facebook -->
+<meta property="fb:app_id" content="376681245726119" />
+<meta property="article:publisher" content="https://www.facebook.com/SciFiNow" />
+<meta property="og:site_name" content="SciFiNow" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Author Robin Hobb talks Megan Lindholm and epic fantasy" />
+<meta property="og:url" content="https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/" />
+<meta property="og:description" content="We speak to Robin Hobb about the origins of her name, her favourite character to write for (there have been many) and swapping between Hobb and Lindholm" />
+<meta property="og:image" content="https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg" />
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v23.9 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Author Robin Hobb talks Megan Lindholm and epic fantasy - SciFiNow</title>
+	<link rel="canonical" href="https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#article","isPartOf":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/"},"author":{"name":"Jodie Tyley","@id":"https://www.scifinow.co.uk/#/schema/person/dc538b07565729d5ea0a61c90f2da71c"},"headline":"Author Robin Hobb talks Megan Lindholm and epic fantasy","datePublished":"2012-05-30T17:16:46+00:00","dateModified":"2012-05-31T08:13:20+00:00","mainEntityOfPage":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/"},"wordCount":1858,"commentCount":4,"publisher":{"@id":"https://www.scifinow.co.uk/#organization"},"image":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#primaryimage"},"thumbnailUrl":"https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg","keywords":["Robin Hobb"],"articleSection":["Interviews"],"inLanguage":"en-GB","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#respond"]}]},{"@type":"WebPage","@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/","url":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/","name":"Author Robin Hobb talks Megan Lindholm and epic fantasy - SciFiNow","isPartOf":{"@id":"https://www.scifinow.co.uk/#website"},"primaryImageOfPage":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#primaryimage"},"image":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#primaryimage"},"thumbnailUrl":"https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg","datePublished":"2012-05-30T17:16:46+00:00","dateModified":"2012-05-31T08:13:20+00:00","breadcrumb":{"@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#breadcrumb"},"inLanguage":"en-GB","potentialAction":[{"@type":"ReadAction","target":["https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/"]}]},{"@type":"ImageObject","inLanguage":"en-GB","@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#primaryimage","url":"https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg","contentUrl":"https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg","width":497,"height":388},{"@type":"BreadcrumbList","@id":"https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.scifinow.co.uk/"},{"@type":"ListItem","position":2,"name":"Author Robin Hobb talks Megan Lindholm and epic fantasy"}]},{"@type":"WebSite","@id":"https://www.scifinow.co.uk/#website","url":"https://www.scifinow.co.uk/","name":"SciFiNow - The Worlds Best Sci-Fi, Fantasy and Horror","description":"SciFiNow: The home of science fiction, fantasy and horror. Whether you love books, movies, TV or comics, join us and get the latest news, reviews and competitions","publisher":{"@id":"https://www.scifinow.co.uk/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.scifinow.co.uk/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-GB"},{"@type":"Organization","@id":"https://www.scifinow.co.uk/#organization","name":"SciFiNow","url":"https://www.scifinow.co.uk/","logo":{"@type":"ImageObject","inLanguage":"en-GB","@id":"https://www.scifinow.co.uk/#/schema/logo/image/","url":"https://www.scifinow.co.uk/wp-content/uploads/2020/07/SFN-logo-1.jpg","contentUrl":"https://www.scifinow.co.uk/wp-content/uploads/2020/07/SFN-logo-1.jpg","width":600,"height":600,"caption":"SciFiNow"},"image":{"@id":"https://www.scifinow.co.uk/#/schema/logo/image/"},"sameAs":["https://facebook.com/scifinow","https://x.com/SciFiNow","https://www.youtube.com/channel/UCzZiC_sZdNZsdP4Rskmoudg","https://www.instagram.com/scifinowagram/"]},{"@type":"Person","@id":"https://www.scifinow.co.uk/#/schema/person/dc538b07565729d5ea0a61c90f2da71c","name":"Jodie Tyley","image":{"@type":"ImageObject","inLanguage":"en-GB","@id":"https://www.scifinow.co.uk/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/448a227b9e2e44833a6d8200de0a8bf3?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/448a227b9e2e44833a6d8200de0a8bf3?s=96&d=mm&r=g","caption":"Jodie Tyley"},"url":"https://www.scifinow.co.uk/author/jodietyley/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//wms.assoc-amazon.co.uk' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='stylesheet' href='https://www.scifinow.co.uk/wp-content/plugins/catch-infinite-scroll/public/css/catch-infinite-scroll-public.css' type='text/css' media='all' />
+<link rel='stylesheet' href='https://www.scifinow.co.uk/wp-content/plugins/yet-another-related-posts-plugin/style/styles_thumbnails.css' type='text/css' media='all' />
+<style id='yarpp-thumbnails-inline-css' type='text/css'>
+.yarpp-thumbnails-horizontal .yarpp-thumbnail {width: 130px;height: 170px;margin: 5px;margin-left: 0px;}.yarpp-thumbnail > img, .yarpp-thumbnail-default {width: 120px;height: 120px;margin: 5px;}.yarpp-thumbnails-horizontal .yarpp-thumbnail-title {margin: 7px;margin-top: 0px;width: 120px;}.yarpp-thumbnail-default > img {min-height: 120px;min-width: 120px;}
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:400,700%7COswald:400,300,700' type='text/css' media='all' />
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' href='https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/styles/main.css' type='text/css' media='all' />
+<link rel='stylesheet' href='https://www.scifinow.co.uk/wp-content/plugins/mailin/css/mailin-front.css' type='text/css' media='all' />
+<!--n2css--><!--n2js--><script type="text/javascript" src="https://www.scifinow.co.uk/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/plugins/links-auto-replacer/public/js/lar-public.js" id="links-auto-replacer-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/plugins/sticky-menu-or-anything-on-scroll/assets/js/jq-sticky-anything.min.js" id="stickyAnythingLib-js"></script>
+<script type="text/javascript" id="ai-js-js-extra">
+/* <![CDATA[ */
+var MyAjax = {"ajaxurl":"https:\/\/www.scifinow.co.uk\/wp-admin\/admin-ajax.php","security":"8fe77880eb"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/plugins/advanced-iframe/js/ai.min.js" id="ai-js-js"></script>
+<script type="text/javascript" id="sib-front-js-js-extra">
+/* <![CDATA[ */
+var sibErrMsg = {"invalidMail":"Please fill out valid email address","requiredField":"Please fill out required fields","invalidDateFormat":"Please fill out valid date format","invalidSMSFormat":"Please fill out valid phone number"};
+var ajax_sib_front_object = {"ajax_url":"https:\/\/www.scifinow.co.uk\/wp-admin\/admin-ajax.php","ajax_nonce":"d1abef2ac5","flag_url":"https:\/\/www.scifinow.co.uk\/wp-content\/plugins\/mailin\/img\/flags\/"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/plugins/mailin/js/mailin-front.js" id="sib-front-js-js"></script>
+<link rel="https://api.w.org/" href="https://www.scifinow.co.uk/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.scifinow.co.uk/wp-json/wp/v2/posts/23874" /><link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.scifinow.co.uk/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.scifinow.co.uk%2Finterviews%2Finterview-author-robin-hobb-a-k-a-megan-lindholm%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.scifinow.co.uk/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.scifinow.co.uk%2Finterviews%2Finterview-author-robin-hobb-a-k-a-megan-lindholm%2F&#038;format=xml" />
+		<meta property="fb:pages" content="162000207162388 " />
+		<style> .lar_social_share_icon{
+ 				margin: 2px;
+ 				}</style><script type="text/javascript" src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+<script type="text/javascript">
+  window.Brevo = window.Brevo || [];
+  window.Brevo.push(['init', {"client_key":"2bewlmhjfdft4o7bma51xih0","email_id":null,"push":{"customDomain":"https:\/\/www.scifinow.co.uk\/wp-content\/plugins\/mailin\/"},"service_worker_url":"wonderpush-worker-loader.min.js?webKey=a3c84796aefb48d6466ba6ae55320cc2c46931c279151aaab5bf15a01a16d548","frame_url":"brevo-frame.html"}]);
+</script><script type="text/javascript" src="https://cdn.by.wonderpush.com/sdk/1.1/wonderpush-loader.min.js" async></script>
+<script type="text/javascript">
+  window.WonderPush = window.WonderPush || [];
+  window.WonderPush.push(['init', {"customDomain":"https:\/\/www.scifinow.co.uk\/wp-content\/plugins\/mailin\/","serviceWorkerUrl":"wonderpush-worker-loader.min.js?webKey=a3c84796aefb48d6466ba6ae55320cc2c46931c279151aaab5bf15a01a16d548","frameUrl":"wonderpush.min.html","webKey":"a3c84796aefb48d6466ba6ae55320cc2c46931c279151aaab5bf15a01a16d548"}]);
+</script><link rel="icon" href="https://www.scifinow.co.uk/wp-content/uploads/2020/08/cropped-Black_Planet-SciFiNow-1-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="https://www.scifinow.co.uk/wp-content/uploads/2020/08/cropped-Black_Planet-SciFiNow-1-192x192.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.scifinow.co.uk/wp-content/uploads/2020/08/cropped-Black_Planet-SciFiNow-1-180x180.jpg" />
+<meta name="msapplication-TileImage" content="https://www.scifinow.co.uk/wp-content/uploads/2020/08/cropped-Black_Planet-SciFiNow-1-270x270.jpg" />
+
+
+
+
+
+
+
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+  
+
+
+
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/22044013737/scifinow.co.uk/boxout_ad_1', ['fluid'], 'div-gpt-ad-1600088389148-0').addService(googletag.pubads());
+    googletag.defineSlot('/22044013737/scifinow.co.uk/boxout_ad_2', ['fluid'], 'div-gpt-ad-1600100888567-0').addService(googletag.pubads());
+    googletag.defineSlot('/22044013737/scifinow.co.uk/boxout_ad_3', ['fluid'], 'div-gpt-ad-1600100945921-0').addService(googletag.pubads());
+    googletag.defineSlot('/22044013737/scifinow.co.uk/1x1', [1, 1], 'div-gpt-ad-1600029471513-0').addService(googletag.pubads());
+    googletag.defineSlot('/22044013737/scifinow.co.uk/970x250', [970, 250], 'div-gpt-ad-1601323441206-0').addService(googletag.pubads());
+	googletag.defineSlot('/22044013737/scifinow.co.uk/728x90', [728, 90], 'div-gpt-ad-1629396335881-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+<script>
+</script>
+	
+<script src="https://www.anrdoezrs.net/am/101232498/include/joined/impressions/page/am.js"></script>	
+
+</head>  <body class="post-template-default single single-post postid-23874 single-format-standard interview-author-robin-hobb-a-k-a-megan-lindholm sidebar-primary">
+    <!--[if lt IE 9]>
+      <div class="alert alert-warning">
+        You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.      </div>
+    <![endif]-->
+    
+<script>
+  window.fbAsyncInit = function() {
+	FB.init({
+	  appId  : '376681245726119',
+	  xfbml  : true,
+	  version: 'v2.4'
+	});
+  };
+  (function(d, s, id){
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+<header class="banner">
+	<div class="container">
+		<a class="logo" href="https://www.scifinow.co.uk/"><span class="sr-only">SciFiNow Home</span></a>
+
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#primary_nav" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="https://www.scifinow.co.uk/"><i class="fa fa-home"></i><span class="sr-only">Home</span></a>
+			</div>
+			<div id="social_nav" class="pull-right">
+	  			<ul class="nav">
+	  				<li><a class="fb" target="_blank" href="https://www.facebook.com/SciFiNow"><i class="fa fa-facebook"></i><span class="sr-only">Facebook Page</span></a></li>
+	  				<li><a class="tw" target="_blank" href="https://twitter.com/SciFiNow"><i class="fa fa-twitter"></i><span class="sr-only">Twitter Page</span></a></li>
+	  				
+	  				<li class="visible-lg"><a class="yt" target="_blank" href="https://www.youtube.com/channel/UCzZiC_sZdNZsdP4Rskmoudg"><i class="fa fa-youtube-play"></i><span class="sr-only">Youtube Page</span></a></li>
+	  				<li class="visible-lg"><a class="rss" target="_blank" href="https://www.scifinow.co.uk/feed/"><i class="fa fa-rss"></i><span class="sr-only">RSS Feed</span></a></li>
+	  				
+	  				<li class="dropdown hidden-lg"><a class="dropdown-toggle more" data-toggle="dropdown" data-target="#"><i class="fa fa-ellipsis-h"></i><span class="sr-only">More Social Options</span></a>
+						<ul class="dropdown-menu">
+							<li><a class="yt" target="_blank" href="https://www.youtube.com/channel/UCzZiC_sZdNZsdP4Rskmoudg"><i class="fa fa-youtube-play"></i><span class="sr-only">Youtube Page</span></a></li>
+	  						<li><a class="rss" target="_blank" href="https://www.scifinow.co.uk/feed/"><i class="fa fa-rss"></i><span class="sr-only">RSS Feed</span></a></li>
+						</ul>
+					</li>
+	  				
+	  				<li><a class="sch" href="#"><i class="fa fa-search"></i><span class="sr-only">Search SciFiNow</span></a></li>					
+	  			</ul>
+	  		</div>
+			<div class="collapse navbar-collapse" id="primary_nav">
+	  			<ul id="menu-main-menu" class="nav navbar-nav"><li class="menu-news"><a href="https://www.scifinow.co.uk/category/news/">News</a></li>
+<li class="current-post-ancestor active current-post-parent menu-interviews"><a href="https://www.scifinow.co.uk/category/interviews/">Interviews</a></li>
+<li class="menu-reviews"><a href="https://www.scifinow.co.uk/type/quote/">Reviews</a></li>
+<li class="menu-competitions"><a href="https://www.scifinow.co.uk/category/competitions/">Competitions</a></li>
+<li class="menu-videos"><a href="https://www.scifinow.co.uk/category/videos/">Videos</a></li>
+<li class="lowercase menu-top-10"><a href="https://www.scifinow.co.uk/category/top-tens/">TOP 10</a></li>
+<li class="menu-events"><a href="https://www.scifinow.co.uk/category/events/">Events</a></li>
+<li class="menu-subscribe"><a href="https://www.scifinow.co.uk/subscribe/">Subscribe</a></li>
+<li class="menu-scifinow-shop"><a href="https://www.scifinow.co.uk/?page_id=128972">SciFiNow Shop</a></li>
+<li class="menu-about-us"><a href="https://www.scifinow.co.uk/about-us/">About Us</a></li>
+</ul>	  		</div>
+	  		<div id="search-reveal">
+				<form method="get" class="search-form form-inline"
+	action="https://www.scifinow.co.uk/">
+	<label class="sr-only">Search for:</label>
+	<div class="input-group">
+		<input type="search" value="" name="s"
+			class="search-field form-control"
+			placeholder="Search SciFiNow &#8211; Science Fiction, Fantasy and Horror"
+			required> <span class="input-group-btn">
+			<button type="submit" class="search-submit btn btn-default">Search</button>
+		</span>
+	</div>
+</form>
+			</div>
+		</div>
+	</nav>
+	<nav class="navbar navbar-inverse hidden-xs">
+		<div class="container">
+				  		<ul id="menu-product-menu" class="nav navbar-nav"><li class="menu-books"><a href="https://www.scifinow.co.uk/category/books/">Books</a></li>
+<li class="menu-cinema"><a href="https://www.scifinow.co.uk/category/cinema/">Cinema</a></li>
+<li class="menu-comics"><a href="https://www.scifinow.co.uk/category/comics/">Comics</a></li>
+<li class="menu-dvd-blu-ray"><a href="https://www.scifinow.co.uk/category/dvd-and-bluray/">DVD &amp; Blu-Ray</a></li>
+<li class="menu-tv"><a href="https://www.scifinow.co.uk/category/tv/">TV</a></li>
+<li class="menu-videogames"><a href="https://www.scifinow.co.uk/category/videogames/">Videogames</a></li>
+<li class="menu-on-demand"><a href="https://www.scifinow.co.uk/category/on-demand/">On-Demand</a></li>
+<li class="menu-anime"><a href="https://www.scifinow.co.uk/category/anime/">Anime</a></li>
+<li class="menu-privacy-policy"><a rel="privacy-policy" href="https://www.scifinow.co.uk/privacy-policy/">Privacy Policy</a></li>
+<li class="menu-basket"><a href="https://www.scifinow.co.uk/basket/">Basket</a></li>
+</ul>	</div>
+	</nav>
+</header>
+
+<div class="container" style="text-align:center;margin-top:25px;">
+		  
+			 
+		
+	<!-- Google tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WQCT9YM9ER">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WQCT9YM9ER');
+</script>
+	
+
+	
+
+</div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content row">
+        <main class="main" id="main">
+                    
+          
+
+	<article class="maincontent post-23874 post type-post status-publish format-standard has-post-thumbnail hentry category-interviews tag-robin-hobb" itemscope itemtype="http://schema.org/Article" id="main-content">
+	
+		<header>
+			
+							<h1 class="entry-title" itemprop="headline">Author Robin Hobb talks Megan Lindholm and epic fantasy</h1>
+							
+			<p>We speak to Robin Hobb about the origins of her name, her favourite character to write for (there have been many) and swapping between Hobb and Lindholm</p>
+			
+			<p class="post-meta">
+				By <a href="https://www.scifinow.co.uk/author/jodietyley/" rel="author" itemprop="author">Jodie Tyley</a>		      	<i class="fa fa-clock-o"></i>
+<time class="updated" datetime="2012-05-30T17:16:46+00:00" itemprop="datePublished">30-05-12</time>
+<i class="fa fa-eye"></i> 17,184<!-- <i class="fa fa-comment"></i> <span class="fb-comments-count" data-href="https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/"></span> -->
+		    </p>
+	      	<div class="fb-like" data-href="https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+<div data-text="Check out SciFiNow, Author Robin Hobb talks Megan Lindholm and epic fantasy" data-url="https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/" id="shareme">
+
+	<a class="facebook" href="#"><i class="fa fa-facebook"></i><span class="sr-only">Share on Facebook</span></a>
+	<a class="twitter" href="#"><i class="fa fa-twitter"></i><span class="sr-only">Share via Twiter</span></a>
+	<a class="googleplus" href="#"><i class="fa fa-google-plus"></i><span class="sr-only">Share on Google Plus</span></a>
+	<a class="stumbleupon" href="#"><i class="fa fa-stumbleupon"></i><span class="sr-only">Add to your Stumbleupon Likes</span></a>
+	<a class="email" href="/cdn-cgi/l/email-protection#56692523343c3335226b153e33353d763923227605353f103f1839217a761723223e3924760439343f38761e3934347622373a3d25761b33313738761a3f38323e393a3b763738327633263f35763037382237252f703439322f6b3e222226256c79792121217825353f303f38392178353978233d793f38223324203f332125793f38223324203f33217b3723223e39247b2439343f387b3e3934347b377b3d7b377b3b333137387b3a3f38323e393a3b79"><i class="fa fa-at"></i><span class="sr-only">Share via Email</span></a>
+	
+</div>
+	      	<span class="featured_image_scroll"><img width="497" height="388" src="https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg" class="attachment-large size-large" alt="" itemprop="image" decoding="async" fetchpriority="high" srcset="https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance.jpg 497w, https://www.scifinow.co.uk/wp-content/uploads/2012/05/theinheritance-300x234.jpg 300w" sizes="(max-width: 497px) 100vw, 497px" /></span>	      	
+	    </header>
+	
+		
+		<div class="entry-content " itemprop="articleBody">
+		
+	      <p><strong>Is there a book in your backlog that you’re particularly proud of, and any that stand out as being a particular challenge?</strong></p>
+<p>Every book I’ve ever written is a milepost for me in my life.  From my first book as Megan Lindholm (<strong>Harpy’s Flight)</strong> to my most recently completed book, <strong>Blood of Dragons</strong>, each book represents who I was at that time and what I was thinking about.  <strong>Wizard of the Pigeons</strong> for example, was my first venture into urban fantasy.  I wrote <strong>Cloven Hooves</strong> entirely in First Person, Present Tense (something I will NEVER attempt again!)  In <strong>Assassin’s Apprentice</strong>, I came to know Fitz and the Fool for the first time.  <strong>The Liveship Traders trilogy</strong> took me to Bingtown and the Pirate Isles, both magical places for me.  And in <strong>The Chronicles of the Rain Wilds</strong>, I’ve returned to a setting that I love.  Each one of my books has a special place with me.<strong>    </strong>When I leaf through an older book, I’m often surprised at what I wrote, until I think about who I was and where I was in my life at that time.</p>
+<p><strong>Did you deliberately choose the name Robin for its androgynous quality, and why?</strong></p>
+<p>Absolutely, yes, I did.   It was the pseudonym that was first used on The Farseer Trilogy, a tale written from the first person perspective of a young man.  I liked the idea of a deliberately androgynous name that let readers assume whatever made them feel comfortable about the author’s gender.  It was one way of lowering the ‘threshold of disbelief’ that we all step over when we enter a fantasy world.</p>
+<p><strong>What inspired you to take on the realms of dragons and spiralling universes?</strong></p>
+<p>I became caught up in a current of Story, and that was where it swept me.  That statement can sound affected and cutesy, but that’s not how it’s intended.  I feel that when a writer has characters and a world, and follows those characters and lets events unfold, the story will grow in the strongest direction.   In the Realm of the Elderlings, I wanted the sense that we had entered a world that had a tremendous amount of history, much of it obscured by a cataclysm in the past.  I wanted it to unfold slowly, and I wanted it to be a world of ancient wonders and magic.  Somehow, that led to the dragons.  Both kinds.</p>
+<p><strong>Do you use maps and charts to help write the books?</strong></p>
+<p>The geography exists in my mind as I’m writing, but the actual maps come mostly after the writing is done.  There has to be logic to geography, of course.  So sometimes, after the story is written and I’m considering where the characters have been and what they’ve done, other geographic  features fall into place.   Rivers must have a source and flow down hill.  If there is a desert, there is a reason why that desert exists.   In some cases, when I’ve wanted a particular feature, such as Key and Keyhole Island, I went looking for actual incidents in our world of that type of place. Then  I looked at the features surrounding it, so it would make sense and have a context.  So, for that particular bit, as a writer I had a chart/map of that island.  If I recall correctly, I sent it in with the manuscript but the editor decided not to use it.  It was, however, very helpful to me as a writer.</p>
+<p><strong>What is your favourite kind of character or creature that you enjoy writing for, and why?</strong></p>
+<p>Let’s see, I think that I most enjoy writing for humans, though cats seem to enjoy napping on my manuscripts as well.  Okay, I know that wasn’t what you meant by that question!  When I’m writing from the point of view of a person, or a dragon, or a cat, at that moment I’m in that creature’s skin.  I do my best to see the world through that character’s eyes, and react to what is going on from that character’s self interest.  In our own lives, none of us are minor characters. Each of us has a particular set of priorities that determine how we view every situation. My dog  sees life from his own immediate point of view, and will care far less about what is on television as opposed to how much butter is on the popcorn.  So if I’m writing from the dog’s point of view, I’m going to be writing from his sensory input as he smells the butter and popcorn and gauges the human’s attitude toward sharing it.  While the human on the couch watching the television may  not even be thinking of those things.  As long as the character has an interesting perspective, be it feline or draconian or human, I enjoy writing.  Villains are just as engaging as heroes.</p>
+<p><strong>You seem to favour the trilogy format of writing, why is that?</strong></p>
+<p>Actually, I just like really long and complex stories.  I think that readers do, also.  Often the decision of whether to publish those stories as one part or two or three parts comes from the editor.  The first book I wrote that was too long was <strong>The Reindeer People</strong> by Megan Lindholm.  That was my first experience of having one story split into two volumes.  More recently, <strong>Dragon Keeper</strong> and <strong>Dragon Haven</strong> were written as a single manuscript.  But the manuscript was way over length and I turned it in late as well, so it wound up being two separate books.  And when it came to <strong>City of Dragons</strong> and <strong>Blood of Dragons</strong>, again, I wrote that as a single tale.  And it was very long, so an editorial decision was made to divide it into two volumes.  As Lindholm, all my books were written as stand alone stories.  Even when I’m writing a story in three parts, like the Liveships or The Tawny Man, I try to make each volume stand alone, with a beginning, a middle and an end.</p>
+<p><strong>The rate at which you publish novels is impressive; is it out of an obligation to your readers to work at this pace or something else?</strong></p>
+<p>I sign a contract for each book, and I try to keep my word.  It’s a balancing act between being creative and keeping my word  to my editor.  I know that when I’m late, I throw a monkey wrench into a lot of peoples’ lives and work days, so I try not to do that.  Sometimes I’ve been late, however, and sometimes I’ve been VERY late.  And often it had been Herculean editorial effort that has concealed that from the readership.   I appreciate that, and I try not to abuse it.  I do know this about myself.  If I dismissed deadlines as optional,  I’d never finish a book.  I always want to do one more re-write, to add one more scene or tack just a few more chapters onto the end of the tale.  I would happily revise forever and never turn the book in.  So by telling myself that I must make that deadline and focusing on it, I actually manage to finish the book.</p>
+<p><strong>How do you strike the balance between high concepts and characterisation without falling into the trap of one being overshadowed by the other?</strong></p>
+<p>I think they go hand in hand, actually, if we are using ‘high concept’ in the same way.  To me, a story in which there is a high concept is one in which there is something significant going on.  There may be humour in such a story, and it may even be light hearted, but I don’t think you can have characters that readers will love and care about in a trivial or slap-stick story.  Nor do I think you can build characters in a void.  If the whole story is about waiting in a room while a clock ticks, it would be very difficult for me to make you care about my character, unless I were doing extensive flashbacks and making the reader believe that perhaps that ticking clock is a bomb.</p>
+<p><strong>What’s been the biggest challenge you’ve come across in all your years of writing?</strong></p>
+<p>Self discipline.  I still have problems with it.  There you are, alone at home.  You know you need to be getting at least 2000 good words a day.  So you sit down at the desk.  And then get up and start a load of laundry.  Why not?  It can be sloshing while you get your writing done.  But before you go back to the desk, you get a cup of coffee.  And while you are in the kitchen, might as well make a sandwich as it’s nearly lunch time anyway.    You get the idea.  It can be really hard to make myself go sit in front of that keyboard and get started.  Once I’m in the story and with the character, then it’s a different situation.  I’m happy to skip a meal or two, and let the laundry mildew in the washer if something particularly compelling is going on in the story.   But that sitting down and letting go of my ‘real life’ to take the plunge into story can be very hard sometimes.</p>
+<p><strong>The Inheritance sees stories from both of your pseudonyms; is it easy to slip into the different voices?</strong></p>
+<p>Oh, very easy.  To me, Lindholm writes very differently from Hobb.  And one voice or the other will always be better for telling that particular story.  I think that if I took a Lindholm story and rewrote it in the Hobb voice, it would seem like a completely different sort of story.</p>
+<p><strong>What do you think of the current state of science fiction and fantasy? Is there anything you would like to see more/less of?</strong></p>
+<p>SF and Fantasy seem to ebb and flow with the times.  I think that SF was more optimistic when I first began reading it, but maybe that was simply what I was choosing to read.  I miss the tales of generational ships and planetary colonies and space stations.    I also wish that there were more fiction magazines.  So many of the old magazines have fallen by the wayside, and each used to offer a different slice of the genre.  I’m always surprised when I meet readers who are unaware that magazines of short fantasy and SF even exist.  I think my two long time favourites are Asimov’s and The Magazine of Fantasy and Science Fiction.   I still miss Amazing and Fantastic, however.  I feel that some of the best work done in the genres is done in the short forms.  I know there are on-line magazines, but I like putting those digest sized magazines up on the shelf after I’ve finished reading them.</p>
+<p><em><strong> City Of Dragons is out now, and Blood Of Dragons is due in 2013.</strong><br />
+</em></p>
+<p>&nbsp;</p>
+<div class='yarpp yarpp-related yarpp-related-website yarpp-related-none yarpp-template-thumbnails'>
+<!-- YARPP Thumbnails -->
+<h3>Related posts:</h3>
+<p>No related posts.</p>
+</div>
+<div style="width:100%; height:50px; margin-bottom: 30px;"><div style="float:left; display:inline; width:50%; text-align:left;"><a href="https://www.scifinow.co.uk/interviews/alcatraz-season-2-showrunners-reveal-what-could-have-been/" rel="prev"><div class="previous_button">< Previous</div></a></div><div style="float:left; display:inline; width:50%; text-align:right;"><a href="https://www.scifinow.co.uk/interviews/grimm-season-2-will-see-nick-come-into-his-own/" rel="next"><div class="next_button">Next ></div></a></div></div><div class='yarpp yarpp-related yarpp-related-website yarpp-related-none yarpp-template-thumbnails'>
+<!-- YARPP Thumbnails -->
+<h3>Related posts:</h3>
+<p>No related posts.</p>
+</div>
+	    </div>
+	    
+	    
+		<footer>
+		  Tags: <a href="https://www.scifinow.co.uk/tag/robin-hobb/" rel="tag">Robin Hobb</a>
+	    </footer>
+    
+  </article>
+  
+    
+	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+	<!-- 
+	eval(unescape('%66%75%6e%63%74%69%6f%6e%20%68%39%61%66%38%65%35%31%32%37%66%28%73%29%20%7b%0a%09%76%61%72%20%72%20%3d%20%22%22%3b%0a%09%76%61%72%20%74%6d%70%20%3d%20%73%2e%73%70%6c%69%74%28%22%31%33%37%34%32%31%34%36%22%29%3b%0a%09%73%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%30%5d%29%3b%0a%09%6b%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%31%5d%20%2b%20%22%35%34%39%33%34%36%22%29%3b%0a%09%66%6f%72%28%20%76%61%72%20%69%20%3d%20%30%3b%20%69%20%3c%20%73%2e%6c%65%6e%67%74%68%3b%20%69%2b%2b%29%20%7b%0a%09%09%72%20%2b%3d%20%53%74%72%69%6e%67%2e%66%72%6f%6d%43%68%61%72%43%6f%64%65%28%28%70%61%72%73%65%49%6e%74%28%6b%2e%63%68%61%72%41%74%28%69%25%6b%2e%6c%65%6e%67%74%68%29%29%5e%73%2e%63%68%61%72%43%6f%64%65%41%74%28%69%29%29%2b%30%29%3b%0a%09%7d%0a%09%72%65%74%75%72%6e%20%72%3b%0a%7d%0a'));
+	eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%68%39%61%66%38%65%35%31%32%37%66%28%27') + '%3b%6d%6f%75%61%6b%62%25%77%7b%60%39%24%6f%70%7d%77%3a%29%28%67%6b%7b%66%60%6c%72%6a%62%6e%65%28%64%6a%69%26%3c%76%67%69%60%66%6a%22%26%69%64%69%6c%3e%26%64%68%76%6c%63%22%26%74%66%76%66%6f%68%6f%69%63%34%25%61%73%73%6a%26%29%65%76%67%6a%61%6b%68%72%62%62%77%39%2b%6d%6b%24%27%65%65%6e%67%68%3a%27%67%6c%6d%70%63%75%26%29%6f%65%6f%60%6d%70%29%3e%24%24%36%74%71%25%20%71%6e%61%70%61%23%39%26%25%35%79%7f%22%38%0a%0f%38%26%6a%62%74%66%69%6c%39%0d%0c%0a%0f%38%60%65%76%67%6a%61%29%74%72%65%3a%27%6c%7d%77%74%3c%28%2b%7f%6e%64%63%68%73%6d%6c%74%76%28%64%6b%64%28%22%26%69%64%69%6c%3e%26%70%71%26%29%74%63%74%68%69%68%60%6d%63%3b%25%65%7c%73%6f%24%27%63%76%68%6e%61%64%68%76%6d%62%72%3b%25%6b%6b%2b%23%65%6a%6e%63%67%3a%22%65%62%6b%70%6c%71%26%26%6f%61%60%60%68%72%27%38%24%2b%32%74%7e%25%24%7e%6e%64%72%6f%25%39%29%21%35%76%7f%26%37%0a%0a%3a%28%6c%62%7b%62%69%63%3913742146%37%34%39%37%30%36%37' + unescape('%27%29%29%3b'));
+	// -->
+	</script>
+	<noscript><i>Javascript required</i></noscript>
+
+        </main><!-- /.main -->
+                  <aside class="sidebar">
+            <section class="widget-mpu1">
+  <div id="sticky-mpu">
+	<!-- /22044013737/scifinow.co.uk/boxout_ad_1 -->
+	<div id='div-gpt-ad-1600088389148-0'>
+	  <script>
+	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1600088389148-0'); });
+	  </script>
+	</div>
+	  
+	<div id='div-gpt-ad-1600100888567-0'>
+	  <script>
+	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1600100888567-0'); });
+	  </script>
+	</div>
+	<div id='div-gpt-ad-1600100945921-0'>
+	  <script>
+	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1600100945921-0'); });
+	  </script>
+	</div>
+  	<div id="ci_300x600"></div>
+  	<div id="ci_300x250"></div>
+  	<div id="ci_160x600"></div> 	  
+	  
+</div>
+
+</section>
+
+
+
+          </aside><!-- /.sidebar -->
+              </div><!-- /.content -->
+    </div><!-- /.wrap -->
+    		<!-- Quantcast Tag -->
+		<script type="text/javascript">
+			var _qevents = _qevents || [];
+
+			(function() {
+				var elem = document.createElement('script');
+				elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+				elem.async = true;
+				elem.type = "text/javascript";
+				var scpt = document.getElementsByTagName('script')[0];
+				scpt.parentNode.insertBefore(elem, scpt);
+			})();
+
+			_qevents.push({
+				qacct:"p--5YVebLkDwEMf",
+				source:"wp"
+			});
+		</script>
+
+		<noscript>
+		<div style="display:none;">
+			<img src="//pixel.quantserve.com/pixel/p--5YVebLkDwEMf.gif" border="0" height="1" width="1" alt="Quantcast"/>
+		</div>
+		</noscript>
+		<!-- End Quantcast tag -->
+		<link rel='stylesheet' href='https://www.scifinow.co.uk/wp-content/plugins/yet-another-related-posts-plugin/style/related.css' type='text/css' media='all' />
+<script type="text/javascript" id="stickThis-js-extra">
+/* <![CDATA[ */
+var sticky_anything_engage = {"element":"#sticky-mpu","topspace":"0","minscreenwidth":"0","maxscreenwidth":"999999","zindex":"1","legacymode":"","dynamicmode":"","debugmode":"","pushup":"","adminbar":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/plugins/sticky-menu-or-anything-on-scroll/assets/js/stickThis.js" id="stickThis-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js" id="bootstrap-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js" id="images_loaded-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.2/packery.pkgd.min.js" id="packery-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js" id="infinitescroll-js"></script>
+<script type="text/javascript" src="https://wms.assoc-amazon.co.uk/20070822/GB/js/link-enhancer-common.js?tag=scifinowmag-21" id="amazonlinks-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/mustache.min.js" id="mustache-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/jquery.sharrre.min.js" id="sharrre-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/main.js" id="sage_js-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/more-content.js" id="morecontent-js"></script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/jquery.sticky.js" id="sticky-js"></script>
+<script type="text/javascript" id="scifinow-post-view-beacon-js-extra">
+/* <![CDATA[ */
+var scifinowPostView = {"postId":"23874","restUrl":"https:\/\/www.scifinow.co.uk\/wp-json\/scifinow\/v1\/post-view","nonce":"a876abeb95"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.scifinow.co.uk/wp-content/themes/scifinow_v3/assets/scripts/post-view-beacon.js" id="scifinow-post-view-beacon-js"></script>
+	
+	<script src="https://cdn.tagdeliver.com/cipt/17313.js" async="async"></script>
+    	<!-- /22044013737/scifinow.co.uk/1x1 -->
+	<div id='div-gpt-ad-1600029471513-0' style='width: 1px; height: 1px;'>
+	  <script>
+	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1600029471513-0'); });
+	  </script>
+	</div>
+	  <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a36efd105a7fd0cc',t:'MTc4ODcxMzU5Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  
+  	
+</html>

@@ -1,0 +1,10 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 33747 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTINT
+
+
+ Test Files  1 passed (1)
+      Tests  29 passed (29)
+   Start at  19:49:07
+   Duration  2.09s (transform 149ms, setup 22ms, import 344ms, tests 1.62s, environment 0ms)
+

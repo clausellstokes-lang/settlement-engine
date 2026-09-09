@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 4,
+ "claims": [
+  {
+   "index": 835,
+   "feature": "withheld information and inference",
+   "claim": "Baur says the expected arc of play should be stated explicitly to players rather than kept coy.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "you should be explicit about it. Don’t be coy",
+   "page": "exchange on player expectations"
+  },
+  {
+   "index": 851,
+   "feature": "boxed text form",
+   "claim": "Noonan reports that a DM reading boxed text holds player attention for two sentences and no further.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you’re the DM, you get two sentences. Period.",
+   "page": "section 'Undercover Insight #1: Boxed Text = MEGO'"
+  },
+  {
+   "index": 852,
+   "feature": "boxed text form",
+   "claim": "Noonan's hypothesis was that boxed text longer than a paragraph probably is not worth reading aloud.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "boxed text longer than a paragraph probably isn’t worth reading",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 853,
+   "feature": "boxed text form",
+   "claim": "Noonan observed players repeatedly missing the actual data inside the boxed text, such as room dimensions and exits.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "players were missing the actual data in the boxed text",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 856,
+   "feature": "cadence and rhythm",
+   "claim": "Noonan concludes that oration is inherently harder to concentrate on than conversation.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "oration is inherently harder to concentrate on than conversation",
+   "page": "section 'Undercover Insight #1', factor 2"
+  },
+  {
+   "index": 857,
+   "feature": "dm-facing sentence",
+   "claim": "Noonan notes DMs are by and large reading the boxed text cold, from a script never uttered aloud before.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "DMs are, by and large, reading the boxed text cold",
+   "page": "section 'Undercover Insight #1', factor 1"
+  },
+  {
+   "index": 858,
+   "feature": "edition and house style",
+   "claim": "Writing in 2005, the authors say boxed text in adventures used to be a lot longer than it was then.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "used to be a lot longer than it is today",
+   "page": "'Tangent Alert!' comparing Sons of Gruumsh with Return to the Keep on the Borderlands"
+  },
+  {
+   "index": 859,
+   "feature": "boxed text form",
+   "claim": "The authors advise the DM to ditch boxed text and use his own words for the initial description of the room.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "use your own words for the initial description of the room",
+   "page": "closing section"
+  },
+  {
+   "index": 861,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos dates boxed and read-aloud text to the 1e period of published adventures.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "During the 1e days, we saw the advent of “boxed” or “read-aloud” text",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 862,
+   "feature": "boxed text form",
+   "claim": "Dyson attributes boxed text to tournament use, whose goal was to standardize the experience for each play group.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "the goal being to standardize the game experience for each play group",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 866,
+   "feature": "omission as information",
+   "claim": "Jara argues setting and rules frame the game because they invariably imply reductions of the imagined world.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "reductions of the imagined world",
+   "page": "Conclusion"
+  },
+  {
+   "index": 867,
+   "feature": "civic record register",
+   "claim": "Jara treats the information a game setting gives as otherwise purely factual, to which intra-textual framing devices add diegetic meaning.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "factual information given by the game setting",
+   "page": "Conclusion"
+  },
+  {
+   "index": 1052,
+   "feature": "withheld information and inference",
+   "claim": "Kim Mohan, D&D's longest-serving editor, praises Ed Greenwood's prose for leaving the reader feeling that fifty words are held back behind every word given.",
+   "source": "Kim Mohan, quoted by Ramanan Sivaranjan reporting the D&D podcast interview, 2013",
+   "url": "https://save.vs.totalpartykill.ca/blog/kim-mohan/",
+   "quote": "you feel like he’s holding fifty in reserve",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 1053,
+   "feature": "plainness and economy",
+   "claim": "Mohan says that of every ten words Ed Greenwood supplies, three or four could probably have been kept back.",
+   "source": "Kim Mohan, quoted by Ramanan Sivaranjan reporting the D&D podcast interview, 2013",
+   "url": "https://save.vs.totalpartykill.ca/blog/kim-mohan/",
+   "quote": "for every ten that he gives you he probably could",
+   "page": "body, second paragraph"
+  },
+  {
+   "index": 1057,
+   "feature": "edition and house style",
+   "claim": "The D&D house style guide circulated to Guild creators is numbered version 1.08a and carries a 2018 Wizards of the Coast copyright line.",
+   "source": "Wizards of the Coast, D&D Style Guide: Writing and Editing v1.08a",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Version 1.08a ©2018 Wizards of the Coast",
+   "page": "running footer, every page"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 835,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you should be explicit about it. Don't be coy",
+   "note": "Live page (koboldpress.com, transcript dated July 21, 2025) fetched raw with a browser UA. Quote appears word for word in Wolfgang Baur's speaking turn, immediately after '...or whatever it is that the expected arc is'. Speaker label 'Wolfgang' confirms Baur; both limbs (state the expected arc explicitly, do not be coy) are on the page."
+  },
+  {
+   "index": 851,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you're the DM, you get two sentences. Period.",
+   "note": "Live wizards.com URL 302s to the modern Nuxt D&D site; recovered via Wayback raw capture 20140530180347id_. Quote verbatim in 'Undercover Insight #1: Boxed Text = MEGO'; the next sentence ('Beyond that, your players are stacking dice...') supports 'and no further'. The first-person observer is Noonan ('the Dave wanders around technique'; author bio names David Noonan)."
+  },
+  {
+   "index": 852,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text longer than a paragraph probably isn't worth reading",
+   "note": "Same Wayback capture. Verbatim in 'Undercover Insight #1', introduced by 'My hypothesis was that...' — the hypothesis limb is explicit. 'Aloud' is the article's own frame (boxed read-aloud text the DM reads to players)."
+  },
+  {
+   "index": 853,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "players were missing the actual data in the boxed text",
+   "note": "Same Wayback capture, 'Undercover Insight #1'. Full sentence begins 'Time after time,' (supports 'repeatedly') and continues '- basic stuff, like room dimensions, how many doors exit the room, and number of monsters' (supports dimensions and exits)."
+  },
+  {
+   "index": 856,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "oration is inherently harder to concentrate on than conversation",
+   "note": "Same Wayback capture, numbered factor 2 of the two secondary factors: '...tells me that oration is inherently harder to concentrate on than conversation.' Verbatim, and it is stated as the conclusion drawn from the loud-room observation."
+  },
+  {
+   "index": 857,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "DMs are, by and large, reading the boxed text cold",
+   "note": "Same Wayback capture, numbered factor 1. Quote verbatim; the second limb is the following sentence, which says even a dynamic DM reads from a script he or she has never uttered aloud before."
+  },
+  {
+   "index": 858,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "used to be a lot longer than it is today",
+   "note": "Same Wayback capture; article header reads 'Design & Development 09/16/2005'. The 'Tangent Alert!' passage carries the quote verbatim, then contrasts the short Sons of Gruumsh box with the long first room of 1999's Return to the Keep on the Borderlands, exactly as the claim's page note says."
+  },
+  {
+   "index": 859,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ditch the boxed text and use your own words",
+   "note": "Same Wayback capture, closing 'Beyond the door, you see a format change...' section: 'Or better yet, ditch the boxed text and use your own words for the initial description of the room.' Claim's quoted fragment is verbatim; advice is addressed to the DM, phrased second person."
+  },
+  {
+   "index": 861,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "During the 1e days, we saw the advent of “boxed”",
+   "note": "Live dysonlogos.blog page fetched raw (HTTP 200). Second paragraph of the post reads in full: 'During the 1e days, we saw the advent of “boxed” or “read-aloud” text.' Verbatim including the curly quotes; the 1e-period dating limb is explicit."
+  },
+  {
+   "index": 862,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to standardize the game experience for each play group",
+   "note": "Same live page, same paragraph 2, immediately after the 861 sentence: 'I tend to blame this on the tournament usage of the original published adventures – the goal being to standardize the game experience for each play group, regardless of the DM.' Both limbs (tournament use, standardizing per play group) verbatim; 'attributes' renders the source's hedged 'I tend to blame'."
+  },
+  {
+   "index": 866,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "frame it as they invariably imply reductions of the imagined world",
+   "note": "PDF fetched from journals.uu.se (4.5 MB, HTTP 200) and text-extracted. Conclusion, p. 51: 'I have argued that setting and rules not only provide the structural basis to the game but that they also frame it as they invariably imply reductions of the imagined world'. Article is Jara, 'A Closer Look at the (Rule-)Books: Framings and Paratexts in Tabletop Role-playing Games', IJRP Issue 4."
+  },
+  {
+   "index": 867,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "add diegetic meaning to the otherwise purely factual information",
+   "note": "Same PDF, Conclusion: 'the rulebook's intra-textual framing devices serve to add diegetic meaning to the otherwise purely factual information given by the game setting.' Claim's quoted fragment verbatim; both limbs (intra-textual framing devices; setting information as otherwise purely factual) present."
+  },
+  {
+   "index": 1052,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you feel like he's holding fifty in reserve",
+   "note": "Live save.vs.totalpartykill.ca page fetched raw (6 KB, whole post visible). Body sentence: 'For every word that he gives you, you feel like he's holding fifty in reserve.' Post by Ramanan Sivaranjan, June 16, 2013, reporting the D&D podcast interview. The 'longest-serving editor' descriptor rests on the page's own hedged wording ('apparently no one... has worked on Dungeons and Dragons longer', 'managing editor at TSR and then Wizards of the Coast') — supported in substance, but the source says 'apparently'."
+  },
+  {
+   "index": 1053,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "for every ten … he probably could have kept three or four",
+   "note": "Same live page, same quoted passage, sentence immediately following 1052's: 'And for every ten that he gives you he probably could have kept three or four.' The claim's fragment is verbatim inside it; 'ten words' is the antecedent from the preceding sentence about words Greenwood gives."
+  },
+  {
+   "index": 1057,
+   "verdict": "PARTIAL",
+   "trueWording": "Version 1.08a ©2018 Wizards of the Coast",
+   "note": "PDF fetched raw from cyborgsandmages.wordpress.com (402 KB, HTTP 200) and text-extracted: the quoted string is the running footer on all 11 pages, verbatim, so the version-number and 2018-copyright limbs are confirmed (PDF metadata also shows Author: Kim Mohan, created 2019-01-23). But 'guild' occurs zero times in the extracted text, as do 'creator' and 'freelance' — the document nowhere says it was circulated to Guild creators; that limb comes from the hosting blog's framing, not the page.",
+   "unsupportedLimb": "circulated to Guild creators"
+  }
+ ]
+}

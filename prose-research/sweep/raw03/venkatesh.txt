@@ -1,0 +1,187 @@
+ 
+Rhythm: A Writing Lesson from Tolkien | The Old Pearl Bed 
+ Skip to primary content 
+ The Old Pearl Bed 
+ Reflections on Reading and Living 
+ Search 
+ Main menu 
+ Home About 
+ Post navigation 
+ ← Previous 
+ Next → 
+ Rhythm: A Writing Lesson from Tolkien 
+ Posted on January 13, 2017 by Krishnan Venkatesh 
+ All great prose has rhythm. This may at first be a puzzling claim because most people associate rhythm with poetry and not prose. But surely all things that exist in time -- not only living things, but also planets and weather -- follow some kind of rhythm. All language has rhythm, and the rhythms of verse are codified as meter. Moreover, not all poetry is verse, just as not all verse is poetry. Tolkien -- for whom English poetry spanning a thousand years was lifelong bread and butter -- draws from various kinds of meter for the prose of his novels. If you are used to the forms of English poetry from Beowulf to Milton, you will immediately feel different kinds of meter pulsing through his sentences. What do I mean by "different kinds of meter"? 
+ In English literature poets practice mainly two metrical traditions, and Tolkien's prose draws from both of them. In what follows, I'll be simplifying a complex topic but will use a few technical terms from standard metrical analysis. What matters is not knowing the terms, but actually hearing what is happening in the style and becoming more sensitive to good writing. 
+ In many languages -- such as Greek and Latin -- meter depends on the classifying of syllables into "long" or "short." While many teachers of English poetry talk about "long syllables" and "short syllables," in fact English is made up of "stressed" and "unstressed" rather than "long" and "short." For example, the syllables in cónvict and convíct are the same length, but the stresses fall differently; similarly, the difference between your Frénch teacher (the one who teaches you French) and your French téacher (the one from France) is a matter of stress, not length. English meter is based on the rhythmic patterning of stressed and unstressed syllables. Most classical English verse is based on a unit of one unstressed followed by one stressed syllable ( indéed , my fríend, redúce ), called iambic ; and a line will consist of a regular number of these units, traditionally and irrationally called feet . The meter of Shakespeare, Milton, and Wordsworth is generally a ten syllable line made up of five iambic feet; this is called iambic pentameter ( And só, my fríends, I bíd you áll farewéll). An iambic line can have any number of feet, but iambic pentameter will have ten, with sometimes an unstressed eleventh syllable. Indeed, there are permissable variations whereby, for dramatic emphasis or emotional effect, strict iambic can be deviated from while the line as a whole still falls within the bounds of iambic: the first foot can be reversed (síckness ), both syllables in a foot can be stressed or unstressed ( Mád Máx, in the) , and there can be that unstressed extra syllable. Síckness, my Lórd, sláms shút the dóor of pléasure . When you are accustomed to hearing a steady iambic pulse, the variations give more nuance and expressiveness to the verse. 
+ Tolkien -- a master of many styles -- makes iambic the dominant rhythm of his martial style. Take this passage from chapter 8 of The Two Towers , "The Stairs of Cirith Ungol": 
+ …the Wraith-king turned and spurred his horse and rode across the bridge, and all his dark host followed him. Maybe the elven-hoods defied his unseen eyes, and the mind of his small enemy; being strengthened, had turned aside his thought. But he was in haste. Already the hour had struck, and at his great Master's bidding he must march with war into the West. 
+ Soon he had passed, like a shadow into shadow, down the winding road, and behind him still the black ranks crossed the bridge. So great an army had never issued from that vale since the days of Isildur's might; no host so fell and strong in arms had yet assailed the fords of Anduin; and yet it was but one and not the greatest of the hosts that Mordor now sent forth. 
+ Frodo stirred. And suddenly his heart went out to Faramir. 'The storm has burst at last,' he thought. `This great array of spears and swords is going to Osgiliath. Will Faramir get across in time? He guessed it, but did he know the hour? And who can now hold the fords when the King of the Nine Riders comes? And other armies will come. I am too late. All is lost. I tarried on the way. All is lost. Even if my errand is performed, no one will ever know. There will be no one I can tell. It will be in vain.' Overcome with weakness he wept. And still the host of Morgul crossed the bridge. 
+ You can already hear the iambic through most of this. Look what happens when I set this out as verse: 
+ …the Wráith-king túrned and spúrred his hórse and róde 
+ acróss the brídge, and áll his dárk host fóllowed hím. 
+ Máybe the élven-hóods defíed his únseen éyes, 
+ and the mind of his small enemy, being strengthened, 
+ had túrned asíde his thóught. But hé was in haste. 
+ Already the hour had struck, and at his great Master's bidding he 
+ must márch with wár intó the Wést. 
+ Sóon he had pássed, like a shadow into shadow, 
+ dówn the winding road, and behínd him stíll 
+ the bláck ránks cróssed the brídge. So gréat an ármy 
+ had néver íssued fróm that vále 
+ since the days of Isildur's might; 
+ no hóst so féll and stróng in árms had yét 
+ assáiled the fórds of Ánduín; and yét 
+ it wás but óne and nót the gréatest óf 
+ the hósts that Mórdor nów sent fórth. 
+ Frodo stirred. 
+ And súddenly his héart went óut to Fáramír. 
+ 'The stórm has búrst at lást,' he thóught. 
+ `This gréat arráy of spéars and swórds is góing 
+ to Ósgilíath. Will Fáramír get across in time? 
+ He guessed it, but did he know the hour? 
+ And who can now hold the fords 
+ when the King of the Nine Riders comes? 
+ And other armies will come. 
+ I am too late. All is lost. 
+ I tarried on the way. All is lost. 
+ Even if my errand is performed, no one will ever know. 
+ There will be no one I can tell. 
+ It will be in vain.' 
+ Overcome with weakness he wept. 
+ And stíll the hóst of Mórgul cróssed the brídge. 
+ Not to get too detailed about this, I placed accent marks over those sections that felt to me to be obviously iambic; you can decide for yourselves about the rest. Already you can see that many lines are straightforwardly iambic pentameter, and feel how powerful it is when, towards the end of this passage, after about ten non-iambic lines in which Frodo muses and vacillates, we return to perfectly regular iambic pentameter: And stíll the hóst of Mórgul cróssed the brídge. The iambic is sometimes like a drumbeat, marking the relentless forward drive of the action. 
+ Besides the iambic, Tolkien's "martial" style has another mode. Between chapters 5 and 6 of Book 5 ("The Ride of the Rohirrim" and "The Battle of the Pelennor Fields") we witness an extraordinary stylistic transformation from "straightforwardly martial" to "ecstatically martial." Every lover of Tolkien is struck by the mad power of these chapters. As with the passage above, the foundation is strongly iambic. We are given information clearly and rigorously as the movements of the actors gain speed and the narrative tension gradually tightens: 
+ The leading company rode off as swiftly as they could, for it was still deep dark, whatever change Wídfara might forebode. Merry was riding behind Dernhelm, clutching with the left hand while with the other he tried to loosen his sword in its sheath. He felt now bitterly the truth of the old king's words: in such a battle what would you do Meriadoc? Just this,' he thought: 'encumber a rider, and hope at best to stay in my seat and not be pounded to death by galloping hoofs!'It was no more than a league to where the out-walls had stood. They soon reached them; too soon for Merry. Wild cries broke out, and there was some clash of arms, but it was brief. The orcs busy about the walls were few and amazed, and they were quickly slain or driven off. Before the ruin of the north-gate in the Rammas the king halted again. The first éored drew up behind him and about him on either side. Dernhelm kept close to the king, though Elfhelm's company was away on the right. Grimbold's men turned aside and passed round to a great gap in the wall further eastward. (111) 
+ You can see this more clearly if I set some of it out in verse form, this time with "feet" marked out: 
+ The léad|ing cóm|pany | róde óff | as swíft| ly 
+ as they cóuld|, for ít | was stíll | déep dárk, 
+ whatév|er chánge | Wídfar|a míght | forebóde. 
+ Mérry | was ríd|ing be|hínd Dérn|helm, clútch|ing 
+ with the | léft hánd | while with | the óth|er 
+ he tríed | to lóos|en his swórd | in its shéath. 
+ He félt | now bítt|erly | the trúth | of the óld | kíng's wórds: 
+ in súch | a bát|tle whát | would yóu | do Mér|iadóc? 
+ Just thís,'| he thóught:| 'encúm|ber a ríd|er, 
+ and hópe | at bést | to stáy | in my séat | and nót 
+ be póund|ed to déath | by gál|loping hóofs!' 
+ If you now read the rest of the paragraph aloud, can you hear the mainly iambic beat beneath the variations? If you can, you will be doubly amazed by the way the style then changes into something elevated, incantatory, almost trance-like: 
+ With that he seized a great horn from Guthláf his banner-bearer, and he blew such a blast upon it that it burst asunder. And straightway all the horns in the host were lifted up in music, and the blowing of the horns of Rohan in that hour was like a storm upon the plain and a thunder in the mountains. 
+ Ride now, ride now! Ride to Gondor! 
+ Suddenly the king cried to Snowmane and the horse sprang away. Behind him his banner blew in the wind, white horse upon a field of green, but he outpaced it. After him thundered the knights of his house, but he was ever before them. Éomer rode there, the white horsetail on his helm floating in his speed, and the front of the first éored roared like a breaker foaming to the shore, but Théoden could not be overtaken. Fey he seemed, or the battle-fury of his fathers ran like new tire in his veins, and he was borne up on Snowmane like a god of old, even as Oromë the Great in the battle of the Valar when the world was young. His golden shield was uncovered, and lo! it shone like an image of the Sun, and the grass flamed into green about the white feet of his steed. For morning came, morning and a wind from the sea; and the darkness was removed, and the hosts of Mordor wailed, and terror took them, and they fled, and died, and the hoofs of wrath rode over them. And then all the host of Rohan burst into song, and they sang as they slew, for the joy of battle was on them, and the sound of their singing that was fair and terrible came even to the City. (112-13) 
+ What exactly has happened stylistically? This style is clearly different from the previous "martial iambic," but how? The difference is in the rhythm. 
+ This new rhythm is in fact the alliterative meter of Anglo-Saxon poetry, the field in which Tolkien was a great scholar. Here, the line can be of any syllabic length, but it has four main stressed syllables, of which at least three are alliterated; and the line has a central break, on either side of which fall two of the stressed syllables. Here are two examples, translated into modern English, from the 8th and the 14th centuries. You will notice that in the later sample the line is not as tightly restricted to four stresses, and that the effect is of a "bursting" energy that is more like Tolkien's language: 
+ Then was breaking of bucklers, shipmen advanced 
+ Bold to the battle; sharp spears pierced 
+ Life-house of doomed men. Wistan hastened 
+ Hurston's son, and strove with the Danes. 
+ Three he slew. in the stress of battle 
+ Ere Wigeom's son was slain in the war. 
+ The strife was stern, the warriors were steadfast, 
+ Bold in battle; fighters fell 
+ Weary with wounds. Death covered earth. 
+( Battle of Maldon , 289-97, tr.J.B.Trapp) 
+ At the first cry wild creatures quivered with dread. 
+ The deer in distraction darted down to the dales 
+ Or up to the high ground. but eagerly they were 
+ Driven back by the beaters, who bellowed lustily. 
+ They let the harts with high-branching heads have their freedom, 
+ And the brave bucks, too, with their broad antlers, 
+ For the noble prince had expressly prohibited 
+ Meddling with male deer in the months of close season… 
+ Lo! the arrows' slanting flight as they were loosed! 
+ A shaft flew forth at every forest turning, 
+ The broad head biting. on the brown flank. 
+ They screamed as the blood streamed out, sank dead on the sward, 
+ Always harried by hounds hard on their heels. 
+ ( Gawain and the Green Knight , 47, tr. Brian Stone) 
+ Now here is Tolkien's passage, set out as verse: 
+ Súddenly the kíng críed to Snówmane 
+ and the hórse spráng awáy. 
+ Behínd him his bánner bléw in the wínd, 
+ whíte hórse upon a fíeld of gréen, 
+ but hé outpáced it. 
+ Áfter him thúndered the kníghts of his hóuse, 
+ but he was éver befóre them. Éomer róde there, 
+ the whíte hórsetail on his hélm flóating in his spéed, 
+ and the frónt of the fírst éored 
+ róared like a bréaker fóaming to the shóre, 
+ but Théoden could nót be óvertáken. 
+ Féy he séemed, or the báttle-fury of his fáthers 
+ rán like néw fíre in his véins, 
+ and he was bórne úp on Snówmáne 
+ like a gód of óld, even as Óromë the Gréat 
+ in the báttle of the Válar when the wórld was yóung. 
+ His gólden shíeld was uncóvered, 
+ and ló! it shóne like an ímage of the Sún, 
+ and the gráss flámed into gréen about the whíte féet of his stéed. 
+ For mórning came, mórning, and a wínd from the séa; 
+ and the dárkness was remóved, and the hósts of Mórdor wáiled, 
+ and térror tóok them, and they fléd, and díed, 
+ and the hóofs of wráth róde óver them. 
+ And then áll the hóst of Róhan búrst 
+into sóng, and they sáng as they sléw, 
+for the jóy of báttle was ón them, 
+ and the sóund of their sínging that was fáir and térrible 
+cáme éven to the Cíty. 
+ The family resemblance is obvious. Tolkien's mastery of the two martial rhythms is gentle, tactful: he does not beat you over the head with it, and the poetic associations of his rhythms do not undermine the fluidity of the prose -- but they do add rich layers of experience to those who can notice. 
+ In the paragraph I haven't discussed, beginning With that he séized…, observe how gently and carefully Tolkien makes the transition from iambic to Old English rhythm. I can set it out as mainly iambic: 
+ With thát | he séized | a gréat | hórn 
+ from Guthláf | his bán|ner-béar|er, and | he bléw | súch 
+ a blást | upón |it thát | it búrst | asún|der. 
+ And stráight|way áll | the hórns | in the hóst 
+ were líft|ed úp |in mús|ic, ánd 
+ the blów|ing of the hórns | of Róh|an ín | that hóur 
+ was líke | a stórm | upón | the pláin 
+ and a thúnd|er ín | the móunt|ains. 
+And I can also set it out as Old English alliterative meter: 
+ With thát he séized 
+ a gréat hórn from Guthláf his bánner-béarer, 
+ and he bléw such a blást upon it that it búrst asúnder. 
+ And stráightway 
+ áll the hórns in the hóst were lífted úp in músic, 
+ and the blówing of the hórns of Róhan in that hóur 
+ was like a stórm upon the pláin and a thúnder in the móuntains. 
+This double-meter is how Tolkien effects an effortless, organic transition from one mode to the other. His artistry turns out to be delicate and subtle. 
+ Although it is not necessarily the case that an author consciously adopts specific rhythms, it is likely that a scholar and philologist like Tolkien would have been minutely aware of what he was doing. As Aristotle put it, art does not deliberate: the artist just "knows" what has to happen here and now. But that knowing is informed by decades of impassioned study and attention to detail. Tolkien edited a number of Old and Middle English texts, including The Battle of Maldon and Gawain and the Green Knight; he knew these traditions intimately, and by the time he wrote his novels they were in his marrow. One of the greatest pleasures of reading someone like Tolkien is gaining an appreciation of the broader literary conversation that his books are part of, and watching how he has learned from his teachers. He is a great writer of prose partly because he is a great reader of poetry. Rivers of poetry flow through his veins. 
+ The lesson for those of us who write, and who seek to develop skill with rhythm and with all the possible motions of language? Read great writers, read the old poets; read them aloud, slowly, and notice what they do. 
+ Share this: 
+ Share on X (Opens in new window) 
+ X 
+ Share on Facebook (Opens in new window) 
+ Facebook 
+ Like Loading... 
+ Related 
+ This entry was posted in Heroism , Lord of the Rings , Return of the King , Tolkien , Uncategorized , Writing by Krishnan Venkatesh . Bookmark the permalink .
+ Leave a comment Cancel reply 
+ Δ 
+ Create a free website or blog at WordPress.com. 
+ Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+To find out more, including how to control cookies, see here:
+ Cookie Policy 
+ Comment 
+ Reblog 
+ Subscribe 
+ Subscribed 
+ The Old Pearl Bed 
+ Join 82 other subscribers 
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ The Old Pearl Bed 
+ Subscribe 
+ Subscribed 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ Loading Comments... 
+ Write a Comment... 
+ Email (Required) 
+ Name (Required) 
+ Website 
+ %d 
+ Design a site like this with WordPress.com Get started 

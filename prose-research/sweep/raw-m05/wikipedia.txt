@@ -1,0 +1,76 @@
+{{short description|2018 book by George R. R. Martin}}
+{{distinguish|Fire and Blood (Game of Thrones)}}
+{{Use mdy dates|date=October 2018}}
+{{infobox book
+| name          = Fire & Blood
+| image         = Fire & Blood (2018) hardcover.jpg
+| caption = First edition cover
+| author        = [[George R. R. Martin]]
+| illustrator   = [[Doug Wheatley]]
+| country       = United States
+| language      = English
+| series        = ''[[A Song of Ice and Fire]]''
+| genre         = [[Fantasy]]
+| publisher     = [[Bantam Books]]
+| release_date  = November 20, 2018<ref name="date"/>
+| media_type    = 
+| pages         = 736
+| isbn          = 978-1-524-79628-0
+| preceded_by   = {{ubl|[[The Sons of the Dragon]] {{no italic|(}}[[The Book of Swords]]{{no italic|)}}|[[The Rogue Prince]] {{no italic|(}}[[Rogues (anthology)|Rogues]]{{no italic|)}}|[[The Princess and the Queen]] {{no italic|(}}[[Dangerous Women (anthology)|Dangerous Women]]{{no italic|)}}}}
+| followed_by   = 
+}}
+'''''Fire & Blood''''' is a [[fantasy book]] by American writer [[George R. R. Martin]], with illustrations by [[Doug Wheatley]]. It tells the history of [[House Targaryen]], the dynasty that ruled the Seven Kingdoms of [[Westeros]] for nearly three centuries in the [[backstory]] of his ''[[A Song of Ice and Fire]]'' series.<ref>{{cite web|publisher=Not A Blog|via=[[LiveJournal]]|url=http://grrm.livejournal.com/360936.html|title=The Rogues Are Coming...|author=Martin, George R.R.|date=March 12, 2014|access-date=November 17, 2021|archive-date=March 17, 2014|archive-url=https://web.archive.org/web/20140317065531/http://grrm.livejournal.com/360936.html}}</ref> Although originally planned for publication after the completion of the series,<ref>{{cite web|publisher=Not A Blog|via=[[LiveJournal]]|url=http://grrm.livejournal.com/347757.html?thread=18471789#t18471789|title=The Dangerous Women Are Coming|author=Martin, George R.R.|date=December 2, 2013|access-date=November 17, 2021|archive-date=November 7, 2015|archive-url=https://web.archive.org/web/20151107024543/http://grrm.livejournal.com/347757.html?thread=18471789}}</ref> Martin revealed his intent to publish the history in two volumes as the material had grown too large. The first volume was released on November 20, 2018.<ref  name="date"/> He plans to write the second volume, titled ''Blood & Fire'', after completing ''[[The Winds of Winter]]'', the sixth book of the ''A Song of Ice and Fire'' series.
+
+The second half of the first volume (an expanded version of ''[[The Rogue Prince]]'' and ''[[The Princess and the Queen]]'') has been adapted into the [[HBO]] series ''[[House of the Dragon]]'', a prequel to ''[[Game of Thrones]]''.<ref>{{Cite web |date=2024-07-09 |title=House of the Dragon writers praised by George RR Martin for season 2 change |url=https://www.independent.co.uk/arts-entertainment/tv/news/george-rr-martin-otto-helaena-house-of-the-dragon-b2576380.html |access-date=2024-07-21 |website=The Independent |language=en}}</ref> Additionally, the first chapters are set to be adapted into a [[feature film]] titled ''Game of Thrones: Aegon's Conquest'', expected to be released in 2027 or later.<ref>{{cite web |url=https://variety.com/2026/film/news/game-of-thrones-movie-aegons-conquest-1236722027/ |title='Game of Thrones' Movie Gets Title: Aegon's Conquest |website=[[variety.com|Variety]] |first=Jordan |last=Moreau |date=2026-04-14 |access-date=2026-04-15}}</ref>
+
+==Publication history==
+In 2014, more than 200,000 words were removed from the manuscript of Martin's companion book ''[[The World of Ice & Fire]]'' and were incorporated into ''Fire & Blood''.<ref>{{cite web|url=http://grrm.livejournal.com/372179.html?thread=19140563#t19140563|title=Ten Thousand Ships|website=[[LiveJournal]]|date=20 May 2014|access-date=23 August 2026|language=en|last1=Martin|first1=George R. R.|author-link1=George R. R. Martin}}</ref> In February 2018, [[Elio M. García Jr.]], Martin's co-author for ''The World of Ice & Fire'', reported that he had spoken with Martin at the [[75th World Science Fiction Convention]]—held in August 2017 in [[Helsinki]]—about the first volume of ''Fire & Blood''. According to García, in addition to the never-published material developed for ''The World of Ice & Fire'', Martin also wrote entirely new material for the book, having "worked on just fleshing out a bit" the long reign of King [[Jaehaerys I Targaryen]], which was previously only mentioned in "Heirs of the Dragon", an unpublished text that Martin [[Abridgement|abridged]] to form the novelette "[[The Rogue Prince]]".<ref>{{cite AV media |people=Elio M. García Jr. |date=22 February 2018 |title=Westeros.org Discussed... Worldcon |url=https://m.youtube.com/watch?v=ICCNGb_cpcY&ra=m |language=en |publisher=Westeros.org |time=5:19 |access-date=23 August 2026|via=YouTube}}</ref> On July 22, 2017, Martin stated on his blog that the material for ''Fire & Blood'' had grown so large that the decision had been made to publish the histories of the Targaryen kings in two volumes. The first volume, titled ''Fire & Blood'', covers the history of Westeros from Aegon's Conquest up to and through the [[Regent|regency]] of the [[boy king]] [[Aegon III Targaryen]].<ref name=swords>{{cite web|last1=Martin|first1=George R. R.|date=22 July 2017|url=http://grrm.livejournal.com/544709.html|website=[[LiveJournal]] |title=The Swords are Drawn|access-date=23 August 2026|language=en}}</ref> The book was released on November 20, 2018.<ref  name="date">{{cite web|url=http://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/|title=''Fire & Blood'': On The Way|date=25 April 2018|last1=Martin|first1=George R. R.|website=georgerrmartin.com|access-date=23 August 2026|language=en}}</ref><ref name=excerpt/>
+
+==Contents==
+Rather than a novel, ''Fire & Blood'' takes the form of a scholarly treatise about the Targaryen dynasty written by a historian within the world of ''A Song of Ice and Fire'', Archmaester Gyldayn.<ref name="independent" /><ref name="times" /><ref>{{cite web|url=https://www.polygon.com/23057740/read-fire-blood-house-of-the-dragon|website=Polygon|title=This summer, be free of the need to read Fire & Blood|last=McNutt|first=Myles|date=May 9, 2022|accessdate=September 22, 2022}}</ref> Gyldayn cites a variety of fictional [[primary source]]s for the historical events he describes, whose accounts sometimes conflict with each other, reflecting medieval methods of [[historiography]] and thus making Gyldayn an [[unreliable narrator]] from the reader's perspective.<ref>{{cite web|website=Polygon|url=https://www.polygon.com/23292279/house-of-the-dragon-mushroom-canon|title=House of the Dragon is missing its source material's most fun character|last=Goslin|first=Austen|date=August 18, 2022|accessdate=September 22, 2022}}</ref><ref>{{cite web|url=https://www.medievalists.net/2022/08/historiography-outsiders-house-of-the-dragon/|website=Medievalists.net|title=Badgering on Mushroom: Historiography and Outsiders in House of the Dragon|last=Mondschein|first=Ken|date=August 27, 2022 |accessdate=September 22, 2022}}</ref>
+
+* "Aegon's Conquest" describes Aegon I's conquest of the [[Seven Kingdoms (A Song of Ice and Fire)|Seven Kingdoms]] of [[Westeros]].<ref name=youtube>Youtube: [https://www.youtube.com/watch?v=Y71PCIgeKZg Westeros.org Discusses... Fire & Blood], (Retrieved on July 27)</ref> More or less the same version was published in ''The World of Ice & Fire''.<ref name=excerpt>{{cite web|url=http://georgerrmartin.com/notablog/2018/09/27/a-fire-blood-excerpt-just-for-you/|title=A FIRE & BLOOD Excerpt just for YOU! - Not a Blog|website=georgerrmartin.com}}</ref>
+* "Reign of the Dragon – The Wars of King Aegon I" and "Three Heads Had the Dragon – Governance Under King Aegon I" follow Aegon I's reign after his Conquest. While his reign is briefly glossed over in ''The World of Ice & Fire'', no parts of the chapters have been published before.
+* "The Sons of the Dragon" focuses on the lives of Aegon I's sons, Aenys I and Maegor I, ending with Maegor's death and the ascension of Aenys's son Jaehaerys I Targaryen to the throne. An [[Abridgement|abridged]] novella [[The Sons of the Dragon|of the same name]] was previously released in October 2017 in the anthology ''[[The Book of Swords]]''.<ref name=history>Not a Blog: [http://grrm.livejournal.com/519773.html A Bit More (Fake) History (January 31, 2017)]</ref>
+* The long reign of Jaehaerys I is described over seven chapters.
+* "Heirs of the Dragon – A Question of Succession" focuses on the succession crisis following the deaths of Jaehaerys' sons and the eventual reign of his grandson [[Viserys I]]. The novella ''[[The Rogue Prince]]'', previously published in the anthology ''[[Rogues (anthology)|Rogues]]'' in 2014, uses the majority of this text,<ref name=reddit>r/asoiaf.com: [https://www.reddit.com/r/asoiaf/comments/5qh7aa/spoilers_extended_the_possibilities_for_grrms_new/dczqsou/ (Spoilers Extended) The Possibilities for GRRM's New Novella in the Book of Swords Anthology]</ref> which was adapted in the first season of [[HBO]]'s ''[[House of the Dragon]]''.
+* "The Dying of the Dragons" is split into six chapters and focuses on the Dance of the Dragons, the succession war between [[Rhaenyra Targaryen]] and her younger half-brother [[Aegon II Targaryen|Aegon II]]. An abridged version was included in ''[[The Princess and the Queen]]'',<ref name="PQ">Not A Blog: [http://grrm.livejournal.com/331218.html The Princess and the Queen (August 31, 2013)]</ref> which was published in the anthology ''[[Dangerous Women (anthology)|Dangerous Women]]'' in 2013. These chapters form the primary basis of ''House of the Dragon''.
+* "Aftermath – The Hour of the Wolf" describes the aftermath of the Dance and the ascension of Rhaenyra's young son Aegon III to the throne, while the book's four final chapters cover the early period of Aegon III's reign, when the realm was ruled by his regents.
+
+''Fire & Blood'' is illustrated in a similar fashion to ''[[Tales of Dunk and Egg|A Knight of the Seven Kingdoms]]''. The book contains more than seventy-five black and white illustrations by [[Doug Wheatley]].<ref>Not a Blog: [https://grrm.livejournal.com/562606.html?thread=26508718#t26508718 Hugo Nominations Open (Feb 7th, 2018) &ndash; comment (Feb 14th, 2018)]</ref><ref  name="date"/>
+
+==Reception==
+[[Hugo Rifkind]] of ''[[The Times]]'' described it as "interminable, self-indulgent crap."<ref name="times">{{cite web|url=https://www.thetimes.com/culture/books/article/review-fire-and-blood-by-george-rr-martin-a-dire-prequel-to-game-of-thrones-g92frxmgx|title=Review: Fire & Blood by George R. R. Martin — a dire prequel to Game of Thrones|work=[[The Times]]|author=Rifkin, Hugo|date=November 17, 2018|access-date=November 24, 2018}}{{subscription required}}</ref> Roisin O'Connor of ''[[The Independent]]'' faulted the book for its dry tone and stated that reading it feels like "you've been assigned a mildly interesting, but often tedious, piece of homework".<ref name="independent">{{cite web|url=https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html|title=Fire and Blood, George R. R. Martin, review: New Game of Thrones book is exhaustive but often tedious|work=The Independent|author=O'Connor, Roisin|date=November 20, 2018|access-date=November 24, 2018}}</ref> ''[[Publishers Weekly]]'' stated that "Martin's evocative storytelling style and gift for gripping narrative are mostly absent from this dry history".<ref>{{cite web|url=https://www.publishersweekly.com/978-1-5247-9628-0|title=Fire & Blood|work=Publishers Weekly| date=November 20, 2018 |access-date=November 24, 2018}}</ref>
+
+Conversely, [[Dan Jones (writer)|Dan Jones]] of ''[[The Sunday Times]]'' praised the book, calling it "a masterpiece of popular historical fiction".<ref>{{cite web|url=https://www.thetimes.com/culture/books/article/review-fire-blood-by-george-rr-martin-the-game-of-thrones-prequel-is-a-masterpiece-of-popular-historical-fiction-h5bxs8njq|title=Review: Fire & Blood by George R. R. Martin — the Game of Thrones prequel is a masterpiece of popular historical fiction|work=The Sunday Times|author=Jones, Dan|date=November 18, 2018|access-date=November 24, 2018}}{{subscription required}}</ref> Similarly, Chris Lough of ''[[Tor.com]]'' described the book as "... the best ''Song of Ice and Fire'' book in 18 years",<ref>{{cite web|url=https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/|title=Fire & Blood is the Best Song of Ice and Fire Book in 18 Years. But Will Anyone Read It?|work=Tor.com|author=Lough, Chris|date=November 21, 2018|access-date=November 24, 2018|url-status=dead|archive-url=https://web.archive.org/web/20181124220153/https://www.tor.com/2018/11/21/grrm-fire-and-blood-review/|archive-date=November 24, 2018}}</ref> a comparison to ''[[A Storm of Swords]]''.
+
+==Adaptations==
+The [[HBO]] series ''[[House of the Dragon]]'', a prequel to ''[[Game of Thrones]]'', is based on material from ''Fire & Blood'', which covers the Dance of Dragons civil war. The show is produced by Martin, Vince Gerardis, [[Ryan Condal]], and [[Miguel Sapochnik]] (also showrunner).<ref>{{cite web |last1=Patten |first1=Dominic |last2=Andreeva |first2=Nellie |title='Game Of Thrones' Prequel ''House of the Dragon'' Gets Straight To Series Order From HBO |url=https://deadline.com/2019/10/game-of-thrones-new-series-house-of-the-dragons-targaryen-hbo-max-greenlight-1202771886/ |website=[[Deadline Hollywood]]|date=October 29, 2019}}</ref>
+
+On April 14, 2026, [[Warner Bros.]] announced a film under the working title ''Game of Thrones: Aegon's Conquest'' at [[CinemaCon]] in [[Las Vegas]]. The film is set to be written by [[Beau Willimon]] and is expected to be released in 2027 or later.<ref>{{cite web |url=https://variety.com/2026/film/news/game-of-thrones-movie-aegons-conquest-1236722027/ |title='Game of Thrones' Movie Gets Title: Aegon's Conquest |website=[[variety.com|Variety]] |first=Jordan |last=Moreau |date=2026-04-14 |access-date=2026-04-15}}</ref>
+
+==References==
+{{reflist}}
+
+{{ASOIAF}}
+{{George R. R. Martin}}
+
+{{Authority control}}
+
+{{DEFAULTSORT:Fire and Blood (novel)}}
+[[Category:2018 American novels]]
+[[Category:2018 English-language novels]]
+[[Category:2018 fantasy novels]]
+[[Category:American fantasy novels]]
+[[Category:Novels by George R. R. Martin]]
+[[Category:A Song of Ice and Fire books]]
+[[Category:Novels about death]]
+[[Category:Novels about dragons]]
+[[Category:Fiction about incest]]
+[[Category:Novels about magic (supernatural)]]
+[[Category:Fiction about politics]]
+[[Category:Family saga novels]]
+[[Category:Bantam Books books]]
+[[Category:Prequel novels]]
+[[Category:American novels adapted into television shows]]
+[[Category:American fantasy novels adapted into films]]

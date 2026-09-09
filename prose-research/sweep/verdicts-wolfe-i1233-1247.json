@@ -1,0 +1,325 @@
+{
+ "name": "wolfe",
+ "chunk": 33,
+ "claims": [
+  {
+   "index": 1233,
+   "feature": "archaism",
+   "claim": "The pastiche writer names his own failure mode as bland modern writing wearing a superficial old-fashioned sound, and plans to read early memoir-form books instead.",
+   "source": "u/5777777777, r/genewolfe, 2021-12-27",
+   "url": "https://www.reddit.com/r/genewolfe/comments/rpsv1l/i_think_im_getting_better_at_writing_in_wolfes/",
+   "quote": "into just bland modern writing with a superficial",
+   "page": "reply to u/Mummelpuffin",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2021-12-27",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1234,
+   "feature": "place and institution description",
+   "claim": "A first-time reader reports the torturers' guild behaving like any other bureaucratic institution when it closes ranks over a scandal.",
+   "source": "u/thecomicguybook, r/genewolfe, 'A touching moment in Chapter 13 of The Shadow of the Torturer', 2020-03-30",
+   "url": "https://www.reddit.com/r/genewolfe/comments/frv3k7/a_touching_moment_in_chapter_13_of_the_shadow_of/",
+   "quote": "guild act like any other bureaucratic institution",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03-30",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1235,
+   "feature": "civic record register",
+   "claim": "The same reader describes the guild as matter of fact about servicing its clients.",
+   "source": "u/thecomicguybook, r/genewolfe, 2020-04-03",
+   "url": "https://www.reddit.com/r/genewolfe/comments/frv3k7/a_touching_moment_in_chapter_13_of_the_shadow_of/",
+   "quote": "matter of fact about servicing their clients",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-04-03",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1236,
+   "feature": "withheld information and inference",
+   "claim": "A host of the ReReading Wolfe podcast says a first reader has already passed things he did not know were important, which is why the podcast is built on rereading.",
+   "source": "u/mummifiedstalin, a host of the ReReading Wolfe podcast, r/genewolfe, 2020-03-31",
+   "url": "https://www.reddit.com/r/genewolfe/comments/frv3k7/a_touching_moment_in_chapter_13_of_the_shadow_of/",
+   "quote": "even know were important and have probably",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03-31",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1237,
+   "feature": "point of view and distance",
+   "claim": "The same host describes the Alzabo Soup podcast's method as holding that the reader should be skeptical of the narration.",
+   "source": "u/mummifiedstalin, a host of the ReReading Wolfe podcast, r/genewolfe, 2020-03-30",
+   "url": "https://www.reddit.com/r/genewolfe/comments/frv3k7/a_touching_moment_in_chapter_13_of_the_shadow_of/",
+   "quote": "you should be skeptical of his narration",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03-30",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1238,
+   "feature": "counter-evidence",
+   "claim": "A close reader argues against reading every anomaly in a late novel as a plant, proposing instead that some clues fell behind the desk in a rushed production.",
+   "source": "u/Holly-Crystal-Hawks, r/genewolfe, 'Interlibrary Loan--The Case Against the Out of Order Theory', 2021-01-07",
+   "url": "https://www.reddit.com/r/genewolfe/comments/kscbvl/interlibrary_loanthe_case_against_the_out_of/",
+   "quote": "let a few clues fall behind the desk",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2021-01-07",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1239,
+   "feature": "other: falsification test for a planted clue",
+   "claim": "She proposes a test: a genuine planted clue would be present in every edition, so a discrepancy that appears only in the audiobook is a production error.",
+   "source": "u/Holly-Crystal-Hawks, r/genewolfe, 2021-01-07",
+   "url": "https://www.reddit.com/r/genewolfe/comments/kscbvl/interlibrary_loanthe_case_against_the_out_of/",
+   "quote": "they would be universal across all versions",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "applies",
+   "date": "2021-01-07",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1240,
+   "feature": "other: physical object as evidence",
+   "claim": "Aramini reads a physical detail — a map torn from one book and pushed into another the wrong way round — as evidence in the puzzle.",
+   "source": "Marc Aramini (u/aramini), r/genewolfe, comment on the same thread, 2021-01-08",
+   "url": "https://www.reddit.com/r/genewolfe/comments/kscbvl/interlibrary_loanthe_case_against_the_out_of/",
+   "quote": "The map was torn out of a book and shoved into another",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "applies",
+   "date": "2021-01-08",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1241,
+   "feature": "naming and forms of address",
+   "claim": "A reader tracks a repeated self-introduction formula about the spelling of a name across four late novels, and notes that only in the last is the letter capitalised.",
+   "source": "u/Holly-Crystal-Hawks, r/genewolfe, 'Names, Corridors, Windows, and Doors', 2021-07-26",
+   "url": "https://www.reddit.com/r/genewolfe/comments/oof804/names_corridors_windows_and_doors_the_sorcerers/",
+   "quote": "always capitalizes his use",
+   "page": "comment listing four quoted passages with page numbers",
+   "kind": "reader",
+   "polarity": "applies",
+   "date": "2021-07-26",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1242,
+   "feature": "point of view and distance",
+   "claim": "A reader places Severian in the line of unreliable narrative voices running through Moby-Dick, Ulysses and Lolita.",
+   "source": "u/WaysofReading, r/genewolfe, 'Notes Toward an Analysis of the Book of The New Sun', 2024-08-15",
+   "url": "https://www.reddit.com/r/genewolfe/comments/1et7cug/notes_toward_an_analysis_of_the_book_of_the_new/",
+   "quote": "unreliable narrative voices and characters in Moby-Dick, Ulysses, and Lolita",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-08-15",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1243,
+   "feature": "per-speaker register",
+   "claim": "A reader argues that the absorbed personalities never produce a hybrid voice; the reader senses only the one narrator.",
+   "source": "u/PatrickMcEvoyHalston, r/genewolfe, comment, 2024-08-19",
+   "url": "https://www.reddit.com/r/genewolfe/comments/1et7cug/notes_toward_an_analysis_of_the_book_of_the_new/",
+   "quote": "We never sense a hybrid; just Severian",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2024-08-19",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1244,
+   "feature": "place and institution description",
+   "claim": "A reader likens the structure to games whose story is carried by clues found in architecture and in brief item descriptions.",
+   "source": "u/kuenjato, r/genewolfe, comment, 2024-08-18",
+   "url": "https://www.reddit.com/r/genewolfe/comments/1et7cug/notes_toward_an_analysis_of_the_book_of_the_new/",
+   "quote": "with clues found in architecture, visual clues as well as brief item descriptions",
+   "page": "comment",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-08-18",
+   "routeHint": "reddit RSS route: append /.rss?limit=100 to the thread URL",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1245,
+   "feature": "withheld information and inference",
+   "claim": "Polansky says the narrative is riddled with ambiguities and contradictions and with holes the reader is encouraged to investigate.",
+   "source": "Daniel Polansky, 'The Mysteries of Gene Wolfe's Peace (and Why They Keep Me Up at Night)', Reactor (Tor.com), 2015-10-20",
+   "url": "https://reactormag.com/the-mysteries-of-gene-wolfes-peace-and-why-they-keep-me-up-at-night/",
+   "quote": "riddled with ambiguities and contradictions, with holes we are encouraged",
+   "page": "body, after the section break",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-10-20",
+   "routeHint": "wayback raw capture https://web.archive.org/web/20251118073408id_/<url>",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1246,
+   "feature": "omission as information",
+   "claim": "Polansky states that the narrator's sins are hidden from him as much as from the reader and can be identified only by the scars they leave in his memory.",
+   "source": "Daniel Polansky, 'The Mysteries of Gene Wolfe's Peace (and Why They Keep Me Up at Night)', Reactor (Tor.com), 2015-10-20",
+   "url": "https://reactormag.com/the-mysteries-of-gene-wolfes-peace-and-why-they-keep-me-up-at-night/",
+   "quote": "they can be identified by the scars they leave in his memory",
+   "page": "body, after the section break",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2015-10-20",
+   "routeHint": "wayback raw capture https://web.archive.org/web/20251118073408id_/<url>",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1247,
+   "feature": "withheld information and inference",
+   "claim": "Polansky holds that a reader ignorant of the author's reputation could miss the subtle clues entirely and still be moved by the book.",
+   "source": "Daniel Polansky, 'The Mysteries of Gene Wolfe's Peace (and Why They Keep Me Up at Night)', Reactor (Tor.com), 2015-10-20",
+   "url": "https://reactormag.com/the-mysteries-of-gene-wolfes-peace-and-why-they-keep-me-up-at-night/",
+   "quote": "to miss the subtle clues with which the book is filled",
+   "page": "body, paragraph on the first reviews",
+   "kind": "reception",
+   "polarity": "asserts",
+   "date": "2015-10-20",
+   "routeHint": "wayback raw capture https://web.archive.org/web/20251118073408id_/<url>",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 1233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"into just bland modern writing with a superficial\"",
+   "note": "Reddit RSS raw. Comment t1_hq77dob by u/5777777777, 2021-12-27T22:08, answering u/Mummelpuffin. The full clause ends with an \"old fashioned\" sound. Memoir limb supported in the same comment: the plan names Augustine, Marcus Aurelius, Caesar."
+  },
+  {
+   "index": 1234,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"guild act like any other bureaucratic institution\"",
+   "note": "Reddit RSS raw. Opening post t3_frv3k7, 2020-03-30. First-reader limb supported (poster is at chapter 15, about 40% through, asks for no spoilers). Closing-ranks limb supported by the preceding sentence about the guild covering its own trail and protecting one of its own."
+  },
+  {
+   "index": 1235,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"matter of fact about servicing their clients\"",
+   "note": "Reddit RSS raw. Comment t1_fmbd3n3 by u/thecomicguybook, 2020-04-03T14:24 — the same user who wrote the opening post, so 'the same reader' holds."
+  },
+  {
+   "index": 1236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"even know were important and have probably\"",
+   "note": "Reddit RSS raw. Comment t1_flz5mve by u/mummifiedstalin, 2020-03-31T00:54. Host limb supported by his aside that 'those other guys (by which I mean me)' named the podcast ReReading Wolfe. The page gives that naming as the consequence of the rereading point, which is what the claim renders as 'built on rereading'."
+  },
+  {
+   "index": 1237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"you should be skeptical of his narration\"",
+   "note": "Reddit RSS raw. Comment t1_fly0as4, 2020-03-30T18:32. 'The AS guys' resolves to the Alzabo Soup podcast named in the opening post. Worth carrying downstream: he immediately adds that one might also be skeptical of what they do with that skepticism."
+  },
+  {
+   "index": 1238,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"let a few clues fall behind the desk\"",
+   "note": "Reddit RSS raw. Opening post t3_kscbvl, 2021-01-07. The thread title is the case against the Out of Order theory, supporting the 'argues against' limb; the rushed-production limb is supported by the surrounding argument about a near-final draft and an audibly rushed audio production."
+  },
+  {
+   "index": 1239,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"they would be universal across all versions\"",
+   "note": "Reddit RSS raw. Same opening post; the clause opens 'if those were clues to follow'. The audiobook limb is supported by the two audiobook-only errors she reports and attributes to rushed production."
+  },
+  {
+   "index": 1240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"The map was torn out of a book and shoved\"",
+   "note": "Reddit RSS raw. Comment t1_gin9po9 by u/aramini, continuing 'into another one in the wrong direction' inside a chain of theory notes, so the evidence limb holds. DATE DISCREPANCY: the page timestamps this comment 2021-01-09T11:04 UTC, not the 2021-01-08 in the record (aramini has other comments dated 01-08); the quoted sentence occurs exactly once in the thread. The identity 'Marc Aramini' is not stated on the page."
+  },
+  {
+   "index": 1241,
+   "verdict": "PARTIAL",
+   "trueWording": "exact: \"always capitalizes his use\" of the E, versus A Borrowed Man",
+   "note": "Reddit RSS raw. Comment t1_h6nah0y by u/Holly-Crystal-Hawks, 2021-07-26T23:40, opening 'More structural Wolfey mirrors'. The quotation is verbatim, but the count and the capitalisation limb both drift: the comment quotes five passages from THREE novels (The Sorcerer's House pg. 243; A Borrowed Man pg. 202 and 227; Interlibrary Loan pg. 85 and 237), and its capitalisation point is a contrast between Interlibrary Loan and A Borrowed Man only — the Sorcerer's House passage also prints a capital E. Two of the five passages spell a third party's name (Murrey, Carole) rather than the speaker's, so the formula is not purely self-introduction.",
+   "unsupportedLimb": "'across four late novels' and 'only in the last is the letter capitalised' — the page shows three novels in five passages, and the capitalisation contrast is drawn only between Interlibrary Loan and A Borrowed Man"
+  },
+  {
+   "index": 1242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"unreliable narrative voices and characters in Moby-Dick, Ulysses, and Lolita\"",
+   "note": "Live reddit RSS raw. Opening post t3_1et7cug by u/WaysofReading, 2024-08-15T21:40. Note the author's own verb: Severian builds a text in ways that CONTRAST with those 'similarly divergent and unreliable' voices — membership in the family rides on 'similarly' and on his parenthetical that the book is on par with those texts, while the contrast is about manner."
+  },
+  {
+   "index": 1243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"We never sense a hybrid; just Severian\"",
+   "note": "Reddit RSS raw. Comment t1_liv69oh by u/PatrickMcEvoyHalston, 2024-08-19T12:44. Qualifier to carry downstream: the sentence continues that when Severian is sick a Thecla is in charge of the mind — one voice at a time rather than a blend, not literally one voice throughout. He adds that the other autarchs read as resources to be mined, or background voices."
+  },
+  {
+   "index": 1244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"clues found in architecture, visual clues as well as brief item\"",
+   "note": "Reddit RSS raw. Comment t1_lirxrfc by u/kuenjato, 2024-08-18T21:07; the clause ends 'item descriptions, etc.' The games limb is supported upthread, where the same user names the FromSoftware catalogue, Dark Souls and Bloodborne."
+  },
+  {
+   "index": 1245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"riddled with ambiguities and contradictions, with holes we are encouraged\"",
+   "note": "Live reactormag.com HTML, raw (byline 'By Daniel Polansky', published October 20, 2015). The sentence sits in the paragraph after the snorkelling-over-Atlantis line and continues about riddles that can never quite be solved."
+  },
+  {
+   "index": 1246,
+   "verdict": "PARTIAL",
+   "trueWording": "exact: \"identified by the scars they leave in his memory\"",
+   "note": "Live reactormag.com HTML, raw. The hidden-from-Weer limb is supported by the first half of the same sentence, which says the sins and shames are hidden from Weer as much as from the reader. But the page carries no exclusivity: it says they CAN be identified by the scars, never that this is the only route. The 'only' is the record's addition, not the source's.",
+   "unsupportedLimb": "'can be identified ONLY by the scars' — the page says merely that they can be identified by them, with no exclusivity"
+  },
+  {
+   "index": 1247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "exact: \"to miss the subtle clues with which the book is filled\"",
+   "note": "Live reactormag.com HTML, raw. In the paragraph about the book's first reviews; the page's condition is being ignorant of Wolfe's reputation as a genre genius, and the sentence ends with the reader still walking away touched by the book."
+  }
+ ]
+}

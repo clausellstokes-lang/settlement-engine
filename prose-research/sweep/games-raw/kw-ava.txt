@@ -1,0 +1,157 @@
+
+Project AVA: Exploring GenAI's Promising Future in Game Production | Keywords Studios Limited
+ Skip to main content
+ Back to previous page
+ -->
+ Services
+ AI & Technology
+ Project Spotlights
+ About Us
+ Careers
+ Contact Us
+ Search
+ Select Language
+ EN
+ English
+ Français Canadien
+ 日本語
+ 简体中文
+ Open Menu
+ Back 
+ Create 
+ Game Development Services
+ Audio Development
+ Game Art Services
+ Globalize 
+ QA Testing Services
+ Game Localization Services
+ Toy Translation Services
+ Engage 
+ Marketing Services
+ Player Engagement
+ Media & Entertainment 
+ Accessibility Services
+ Post-Sound & Music Services
+ Content Localization
+ Can’t find what you’re looking for? 
+ Search 
+ Back 
+ AI & Technology 
+ AI Solutions
+ Helpshift
+ Research & Development 
+ Project KARA
+ Learn more about AI Solutions at Keywords Studios 
+ AI 
+Solutions 
+ Can’t find what you’re looking for? 
+ Search 
+ Back 
+ See all Case Studies 
+ Project Spotlights
+ Leveling Up Console Support: A Game-Changing QR Code Experience
+ Dune: Awakening Trailers Generate 14M+ Views – A Marketing Case Study
+ Can’t find what you’re looking for? 
+ Search 
+ Back 
+ Global Offer 
+ Leadership
+ Awards
+ Responsible Business
+ Locations & Studios
+ Corporate
+ News & Events 
+ News
+ Events
+ Supercharged Newsletter
+ Inclusive Keywords Studios
+ Can’t find what you’re looking for? 
+ Search 
+ Back 
+ Browse careers 
+ My shortlist
+ Employee Spotlights
+ Read our employee spotlights 
+ Employee spotlights
+ Can’t find what you’re looking for? 
+ Search 
+ 2024
+ AI
+ Thought Leadership
+ Project AVA: Exploring GenAI's Promising Future in Game Production
+ Author:
+ Stephen Peacock, Head of Games AI at Keywords Studios
+ Date Published:
+ 24/05/2024
+ I’ve spent much of the last decade evangelising the adoption of machine learning (ML) and deep learning (DL) in game production, working with internal and external teams building solutions to real problems, like in-game toxicity and player churn. In a previous role my team explored (and found) ways to apply advanced computer vision, natural language processing, and transformers to many challenges teams face while making, launching, and running a game, but was it production ready, beneficial AI? From my perch in the cloud, I couldn’t tell.
+This leads me to the here and now, at Keywords Studios and Project AVA and why the project's existence at Keywords Studios factored into my decision to join (in August 2023) and build an AI Center of Excellence here. I hope to spot, understand, and support beneficial AI by getting closer to the game creators, the battle-tested GenHI (generative human intelligence) that built our industry. 
+Project AVA was an Electric Square (A Keywords Studio) initiated and led GenAI Research game, built in collaboration with seven other Keywords studios. Over the course of six months in 2023, the twenty-plus contributors identified multiple areas where GenAI can provide meaningful assistance already, and gained valuable insights into how it might shape game production in the future. I'll share what I learned as a supporting observer in this article.
+Project AVA began in April 2023, shortly after GenAI first captured public attention. Three seasoned game developers from Electric Square proposed they try and build a "shippable game using Generative AI". The goal was to emulate the realities of AAA game production as closely as possible and to gain deeper insights that could not have been achievable through quick, out-of-context technology tests. 
+ Innovation at Keywords Studios
+ For your game today, for the yet-to-be imagined games of tomorrow: imagine more for the future with Innovation at Keywords, our ever-evolving global portfolio of research programmes.
+ Imagine more
+ Like most in the industry, the team was new to GenAI but experts in game development. With the optimistic naivety of anyone diving into over-hyped technology, they set out to answer three questions:
+Could GenAI generate a meaningful percentage of the code and assets for them?
+Could GenAI hit a level of quality they would consider shippable?
+Could they build a game our lawyers would consider shippable? (special thanks to the Keywords Studios legal team for all their support)
+The team of three quickly discovered the technology's limitations, it couldn't write all the code or create great narrative. Clearly, they needed to add humans, so with the support of other studio heads worldwide, the small team expanded to include domain experts for every discipline. This additional expertise allowed them to push the GenAI tools on code, design, narrative, art, and audio. Across every discipline, creators leaned into the project with open minds, brought together from around the world by their curiosity.
+Despite designing the game around the understood limitations of GenAI at that time: a relatively simple, single-player, narrative-driven 2D game, GenAI eventually failed to generate a significant portion of the code or planned assets, but valuable lessons were learnt in every domain, and more broadly across Keywords Studios:
+Useful today: The team identified several areas where GenAI could provide meaningful support to the domain experts, such as concept art iteration, first drafts of dialogue, helping with storyline brainstorming, and on the code side, ChatGPT proved to be a valuable aid for seasoned game developers trying to familiarise themselves with UE4 quickly. As the tools evolved and the team's prompt engineering skills improved, the range of tasks where GenAI could add value grew, highlighting the importance of continual exploration.
+Evaluating AI from not just a technical, but also an ethical, and legal perspective is crucial. The Electric Square team learned the importance of asking the right questions early on and identifying potential red flags. During the evaluation process, we found many GenAI tools lacked the basics for enterprise adoption, such as SLAs, or the training data set transparency we needed to be informed consumers. Others lacked scalable infrastructure, or the human bandwidth to support a "pilot" beyond a few days. The AI Center of Excellence is currently collaborating with our privacy, legal, IT and InfoSec teams to build an evaluation framework future teams can use to speed up, and de-risk the process of AI tool selection.
+Jamie Campbell, Global Head of Innovation at Keywords Studios talks Innovation
+" data-navigation-link="block-b09xK3A2MFc2dVpiREtYaXoyU0s2dz09">
+ Jamie Campbell, Global Head of Innovation at Keywords Studios talks Innovation
+ Read more
+ -->
+ Accelerating Collaborative Innovation at Keywords Studios
+ Jamie Campbell, Global Head of Innovation at Keywords Studios, explains how our Innovation strategy positions us for continued success in creating ground-breaking and immersive solutions for our clients.
+ Discover More 
+ "You can't step into the same river twice because it is not the same river, and you're not the same person." – Heraclitus
+Model evolution: This poses a significant challenge for production teams and the solution builders vying for their business. The non-deterministic output and continuous evolution of these learning models means you can't use the same tool twice, especially if that tool is based on a SaaS (Software as a Service) foundation model. This unpredictability is particularly problematic for game development, where projects span years, not days or weeks. Before AVA, I had not appreciated the scale of this challenge, it doesn't show up in the limited trials vendors run to gather user feedback, or studios run to test new software, but in a six month project it was unmissable. We're still trying to think this one through, and are far from having great answers yet, but the first step in avoiding a trap is to know of its existence. The games industry will need to develop strategies to deliver style consistency across multi-year projects; model locking and training data versioning perhaps, style alignment tooling for sure, and we need to challenge AI tool builders to improve creative control and predictability.
+Model bias: This is a concern that teams must be aware of when integrating GenAI into production pipelines. Just as companies strive to minimise human biases through hiring practices and training, it is essential to recognise and address the biases inherent in AI models. These biases can manifest in unexpected ways: generating images of astronauts that weren't young, white, and male, for example, took real effort. Only by proactively identifying and mitigating model bias can studios ensure that their use of GenAI aligns with their values and contributes to creating inclusive and respectful game experiences. However, aligning models with societal values and historical accuracies won't eliminate this challenge for game developers; it could even make it worse. What if I'm trying to use GenAI to make Wolfenstein 4? Will a responsibly aligned, historically accurate AI refuse to help?
+AVA gave us a snapshot of GenAI capability in the last half of 2023. While much has changed in the 42 "AI years" since then, the individual and organisational experiences gained during Project AVA form the foundation for future projects. 
+By supporting studios like Electric Square and R&D projects like AVA, the AI CoE is gathering and sharing knowledge that will allow Keywords Studios to harness GenAI's potential as it matures.
+To learn more about our AI work across Keywords Studios, contact us via the form below.
+ Contact Us Today
+ Get started
+ Contact us
+ Get in touch with our service teams to imagine more for your IP.
+The Power of Partnership: Our Clients
+" data-navigation-link="block-L09McGJ4cEVlNFVMWG8wc1RQeGxyUT09">
+ The Power of Partnership: Our Clients
+ -->
+ Create
+ Game Development
+ Art Services
+ Audio Development
+ Globalize
+ QA Testing Services
+ Localization
+ Engage
+ Marketing Services
+ Player Engagement
+ See Also
+ Media & Entertainment
+ Embedded Services
+ Careers
+ News
+ Events
+ Locations & Studios
+ Case Studies
+ Contact Us
+ Partner with us
+ Media Enquiries
+ Let's stay connected
+ Keywords Studios
+ Terms of Use
+ Company Directory
+ Privacy Notice
+ Applicant Privacy Notice
+ Cookie Notice
+ Terms and Conditions
+ Prevention of Modern Slavery
+ Global Policies
+ Accessibility Statement
+ Change my cookie preferences
+ © 2023 - 2026 Keywords Studios Limited. Country of Incorporation: England & Wales.
+Principal place of business: Ground Floor, The Hive, Carmanhall Road, Sandyford Business Park, Dublin 18, D18 Y2C9

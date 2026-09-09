@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 11,
+ "claims": [
+  {
+   "index": 319,
+   "feature": "overview granularity",
+   "claim": "Each part of an adventure gets a one-to-two-sentence overview entry tied to a Story Objective.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "its own entry of one to two sentences describing the part",
+   "page": ""
+  },
+  {
+   "index": 320,
+   "feature": "NPC block: 'What They Want' and 'NPC Snapshot'",
+   "claim": "NPCs get a physical/backstory paragraph, then two single-sentence inline entries: What They Want and an NPC Snapshot retitled to a two-word epithet.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "can be titled “Stoic Guardian”",
+   "page": ""
+  },
+  {
+   "index": 321,
+   "feature": "area information structure",
+   "claim": "Location text is organized under Area Information with inline subheads such as Dimensions and Terrain and Lighting.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Dimensions and Terrain.",
+   "page": ""
+  },
+  {
+   "index": 322,
+   "feature": "bold for keyed game objects",
+   "claim": "Bold in running text is reserved for creatures and significant keyed objects such as traps and secret doors, used judiciously.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Use boldface judiciously.",
+   "page": ""
+  },
+  {
+   "index": 323,
+   "feature": "sidebar role in adventures",
+   "claim": "Adventure sidebars give background that helps run a location and, except Playing the Pillars, avoid directly applicable rules content.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "shouldn’t provide directly applicable information",
+   "page": ""
+  },
+  {
+   "index": 324,
+   "feature": "Playing the Pillars",
+   "claim": "Encounters can carry a Combat / Exploration / Social triad of suggestions.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Playing the Pillars.",
+   "page": ""
+  },
+  {
+   "index": 325,
+   "feature": "content warning and sensitivity credit",
+   "claim": "The 2023 AL template carries a CONTENT WARNING line on the cover and a Sensitivity Lead in the credits.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Sensitivity Lead: TBD",
+   "page": ""
+  },
+  {
+   "index": 326,
+   "feature": "style references for adventures",
+   "claim": "The adventure format defers to Chicago 17th and Merriam-Webster's Collegiate 11th for grammar and punctuation.",
+   "source": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 327,
+   "feature": "boxed text style definition",
+   "claim": "The Word template defines the Boxed Text style solely for text a DM reads to the players.",
+   "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "text that a DM is meant to read to the players",
+   "page": ""
+  },
+  {
+   "index": 328,
+   "feature": "epigraph rule",
+   "claim": "Epigraphs are not enclosed in quotation marks unless quoting a book that had them.",
+   "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "An epigraph shouldn’t be enclosed in quotation marks",
+   "page": ""
+  },
+  {
+   "index": 329,
+   "feature": "sidebar test",
+   "claim": "A sidebar that must immediately follow a passage is not a sidebar; integrate it into body copy.",
+   "source": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "don’t make it a sidebar",
+   "page": ""
+  },
+  {
+   "index": 330,
+   "feature": "profanity",
+   "claim": "WotC's content standards forbid profanity in D&D products absent special approval.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Don’t use profanity.",
+   "page": ""
+  },
+  {
+   "index": 331,
+   "feature": "rating register",
+   "claim": "D&D is described as mostly G-rated, sliding toward PG for mature themes or graphic violence; PG-13 products (Rick & Morty) need approval.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "D&D is, for the most part, a G-rated game.",
+   "page": ""
+  },
+  {
+   "index": 332,
+   "feature": "stereotypes",
+   "claim": "Standards forbid attaching traits to all members of a people, culture, religion, or sexuality.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Don’t attach specific traits or attributes to all members",
+   "page": ""
+  },
+  {
+   "index": 333,
+   "feature": "glamorization of evil",
+   "claim": "Villains may be sympathetic but their evil must be called out as wrong; evil heroes are avoided.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "their evil should be called out as awful and wrong",
+   "page": ""
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each part gets one-to-two sentences; \"This is Story Objective A.\"",
+   "note": "Overview template, DC Adventure Format v1.3 p.'Adventure Primer': Parts 1-4 each read \"Each part of the adventure should have its own entry of one to two sentences describing the part. This is Story Objective A/B/C/D.\" A margin comment adds \"Each part should have a Story Objective entry that describes the objective as a single sentence.\" Quote verbatim; both limbs supported."
+  },
+  {
+   "index": 320,
+   "verdict": "PARTIAL",
+   "trueWording": "NPC Snapshot \"is titled accordingly\"; examples \"Stoic Guardian\", \"Ruthless Conqueror\"",
+   "note": "Quote verbatim. The NPC block is exactly as claimed: an opening paragraph giving \"a brief glimpse into the NPC's backstory and physical appearance,\" then \"What They Want. This single-sentence paragraph...\" and \"NPC Snapshot. This single-sentence paragraph... and is titled accordingly.\" The document states only that the Snapshot is retitled to suit the NPC; it never prescribes a length. Both worked examples happen to be two words, so \"two-word\" is induced from the examples, not a stated rule.",
+   "unsupportedLimb": "the epithet is specifically two words - the page says only \"titled accordingly\" and gives two examples that happen to be two words"
+  },
+  {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Area Information entries: Dimensions and Terrain, Lighting, Sounds and Smells",
+   "note": "Quote \"Dimensions and Terrain.\" appears twice - in the worked example under an Area Information heading (followed by Lighting) and in the margin comment \"Area Information breaks down the area itself. There are usually three standard entries here: Dimensions and Terrain... Lighting... Sounds and Smells.\" Inline-subhead limb supported: \"If under a heading 3, use inline subheads without the Area/Creature Information headings.\""
+  },
+  {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Creature names and keyed objects such as traps or secret doors are bold",
+   "note": "Quote \"Use boldface judiciously.\" verbatim, in: \"names of creatures or other significant game objects such as traps or secret doors are in bold. Use boldface judiciously. With the exception of creature names, it usually applies to important objects that are keyed on the map.\" Every limb supported, including the keyed-object restriction."
+  },
+  {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sidebar gives background to help run the location; Playing the Pillars excepted",
+   "note": "Quote verbatim: \"It should provide the DM with background information that may help run the location or event. With the exception of Playing the Pillars (see example, below), it shouldn't provide directly applicable information.\" The page's prohibition is on directly applicable *information*, which is broader than the claim's \"rules content\" and so entails it."
+  },
+  {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Playing the Pillars. Suggestions for this encounter:\" then Combat, Exploration, Social",
+   "note": "Quote verbatim in the worked encounter, followed by Combat / Exploration / Social entries. The optionality in \"can carry\" is supported by the margin comment \"If you include this entry, each pillar of play should be represented\" and \"99% of the time, these entries should be under a Creature Information heading.\""
+  },
+  {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Cover: \"CONTENT WARNING: $\"; credits: \"Sensitivity Lead: TBD\"",
+   "note": "Quote verbatim. The cover block runs Adventure Title / Subtitle / description / \"A Two/Four -Hour Adventure for Tier $ Characters.\" / \"CONTENT WARNING: $\", then the Credits list containing \"Sensitivity Lead: TBD\" among Writer, Editor, Graphic Design. File metadata confirms the 2023 dating: created 2023-11-07 by Claire Hoffman, last modified 2023-11-16 by Ma'at Crook."
+  },
+  {
+   "index": 326,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Consult Chicago 17th; preferred dictionary Merriam-Webster's Collegiate 11th",
+   "note": "No quote was supplied with the claim, so the verbatim grade cannot apply; the substance is stated almost word for word on the first page: \"Consult The Chicago Manual of Style (17th edition) if you have questions about punctuation, grammar, and other matters of writing style. Our preferred dictionary is Merriam-Webster's Collegiate Dictionary (11th edition).\""
+  },
+  {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"This Boxed Text style is used only for text that a DM is meant to read to the players.\"",
+   "note": "Quote verbatim in the style-demonstration line of the .dotx. \"Solely\" matches the page's \"only\". Metadata confirms the source: dc:creator \"Crawford, Jeremy\", created 2019-09-30, modified 2019-10-08."
+  },
+  {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Unless excerpting a book where the quotes appear in the original",
+   "note": "Quote verbatim: \"An epigraph shouldn't be enclosed in quotation marks, unless you're excerpting a passage from a book and the quotes appear in the original.\" Both limbs supported."
+  },
+  {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\"",
+   "note": "Quote verbatim under Sidebar Body: \"ask yourself whether the sidebar must immediately follow a section of text or whether it can go anywhere on a spread. If it must immediately follow something, don't make it a sidebar; integrate it into the body copy.\" Both limbs supported."
+  },
+  {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Profanity. Don't use profanity.\" plus \"not without approval\"",
+   "note": "Quote verbatim in the standards list. The approval carve-out limb is supported by the RATING section: \"D&D products can violate certain standards, but not without approval,\" and \"PG-rated content allows things we normally don't, such as nudity and profanity.\""
+  },
+  {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "G-rated, slides toward PG; Rick & Morty PG-13 needed approval",
+   "note": "Quote verbatim. Every limb on the page: \"When it deals with mature themes or features scenes of graphic violence, it slides toward being a PG-rated experience\" and \"The Rick & Morty boxed set, which contains profanity and glamorizes substance abuse, is an example of just such a product. It is rated PG-13,\" following \"can violate certain standards, but not without approval.\""
+  },
+  {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"...to all members of a particular people, culture, religion, or sexuality.\"",
+   "note": "Quote verbatim under the Stereotypes standard, which opens \"Avoid stereotypes.\" All four categories in the claim appear on the page."
+  },
+  {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Villains can be sympathetic, but their evil should be called out as awful and wrong. Avoid depicting evil heroes.\"",
+   "note": "Quote verbatim under Glamorization of Evil. Both limbs on the page, including the evil-heroes limb."
+  }
+ ]
+}

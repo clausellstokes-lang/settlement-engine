@@ -1,0 +1,233 @@
+{
+ "name": "dnd",
+ "chunk": 37,
+ "claims": [
+  {
+   "index": 709,
+   "feature": "edition and house style",
+   "claim": "Justin Alexander says the delve format artificially isolates the encounter from its context and so defeats its own purpose.",
+   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "quote": "it artificially isolates the “encounter”",
+   "page": "Are We Really This Stupid?, 'Isolated Encounters'"
+  },
+  {
+   "index": 710,
+   "feature": "dm-facing sentence",
+   "claim": "Justin Alexander asks publishers to trust DMs rather than pre-programming every monster's behaviour in the text.",
+   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "quote": "publishers can put a little more trust in DMs",
+   "page": "Are We Really This Stupid?, 'Encounters on the Fly'"
+  },
+  {
+   "index": 711,
+   "feature": "other: key format",
+   "claim": "Brendan of Necropraxis describes the dominant published format as areas written out in lengthy proper English prose.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "Areas are described in lengthy, proper english prose.",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 712,
+   "feature": "other: read-play gap",
+   "claim": "Brendan of Necropraxis grants that well-written prose modules are pleasurable to read.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "pleasurable to read (if well-written)",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 713,
+   "feature": "other: read-play gap",
+   "claim": "Brendan of Necropraxis says the same prose modules are cumbersome to use in play.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "quite cumbersome to use in play",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 714,
+   "feature": "plainness and economy",
+   "claim": "Brendan of Necropraxis objects that Courtney Campbell's outline key, though usable, lacks poetry.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "it lacks poetry",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 715,
+   "feature": "dm-facing sentence",
+   "claim": "Brendan of Necropraxis keeps running prose but bolds the features the referee needs immediately.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "I bold the immediately relevant features.",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 716,
+   "feature": "boxed text form",
+   "claim": "Brendan of Necropraxis faults boxed text for separating a thing's first impression from its elaboration further down the page.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "separated the initial impression (“treasure chest”) from elaboration",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 717,
+   "feature": "other: seen in a glance",
+   "claim": "Brendan of Necropraxis says the aim of bolding is that the referee can take in the area with a glance.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "take in the area with a glance",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 718,
+   "feature": "plainness and economy",
+   "claim": "On his worked example Brendan of Necropraxis reports the text that must be read is cut by more than half without degrading the prose.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "cut down by more than half",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 719,
+   "feature": "boxed text form",
+   "claim": "Reviewing a 2006 DCC module, Gabor Lux says much boxed text and follow-up writing are expended to say relatively little.",
+   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
+   "quote": "much boxed text and followup writing are expended to say relatively little",
+   "page": "Halls of the Minotaur review"
+  },
+  {
+   "index": 720,
+   "feature": "other: read-play gap",
+   "claim": "Gabor Lux reports that the same module played better at the table than it read on the page.",
+   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
+   "quote": "It really did play better than it reads",
+   "page": "Halls of the Minotaur review"
+  },
+  {
+   "index": 721,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch's rule in a 2026 review is that read-aloud should never be long.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Read-aloud should never be long",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 722,
+   "feature": "other: read-aloud delivery",
+   "claim": "Bryce Lynch says long read-aloud makes players lose focus and reach for their phones.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Long read-aloud causes players to loose focus",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 723,
+   "feature": "edition and house style",
+   "claim": "Bryce Lynch says long passages set in italics are cognitively hard to read.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Long italics is hard to read, cognitively.",
+   "page": "Swan Hollow Intrigue review"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 709,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First, it artificially isolates the “encounter”.",
+   "note": "Raw HTML fetched live (HTTP 200, browser UA), stripped to text. Section 'ISOLATED ENCOUNTERS': quote word for word; the 'defeats its own purpose' limb is carried by the next sentence, 'This tends to fatally sabotage the entire point of the delve format to begin with', and the context limb by 'Attempting to isolate a tactical encounter from the context in which that tactical encounter occurs'. Post dated January 10th, 2011."
+  },
+  {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think publishers can put a little more trust in DMs.",
+   "note": "Same raw page, section 'ENCOUNTERS ON THE FLY'. Quote verbatim inside 'I think publishers can put a little more trust in DMs (and, as DMs, we can put a little more trust in ourselves).' The pre-programming limb is supported throughout: the boardgame is 'forced to provide a “program” for each monster', the delve encounters have monsters 'pre-selected, pre-positioned, and pre-programmed', and the Helga example is offered against 'a pregenerated tactical map ... with accompanying text telling the DM' where to place minis."
+  },
+  {
+   "index": 711,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Areas are described in lengthy, proper english prose.",
+   "note": "Raw page fetched live (HTTP 200). Quote verbatim. 'Dominant published format' limb supported by the same paragraph: 'The most common style in published modules (and also probably the oldest ...) is the dreaded wall of text' and 'Unfortunately, this has become the accepted format for modules.' Post is by Necropraxis/Brendan (he signs comments 'Brendan Post author')."
+  },
+  {
+   "index": 712,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Modules in this format can be pleasurable to read (if well-written).",
+   "note": "Quote verbatim as a substring of that sentence on the raw page; the concessive framing ('can be ... but are quite cumbersome') matches the claim's 'grants'."
+  },
+  {
+   "index": 713,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but are quite cumbersome to use in play",
+   "note": "Quote verbatim on the raw page, in the same sentence as the concession verified at 712, and about the same wall-of-text prose modules ('They just don’t work very well in play')."
+  },
+  {
+   "index": 714,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Two, it lacks poetry.",
+   "note": "Quote verbatim. Usability limb: 'This method works admirably in terms of direct, in-game usability. However ... it has two flaws.' The page names the format only as 'Courtney’s “set design” hierarchical outline format', hyperlinked to hackslashmaster.blogspot.com/2012/06/on-set-design.html (Courtney Campbell's Hack & Slash); the surname itself is not printed on the page, so the expansion rests on that link, not on page text."
+  },
+  {
+   "index": 715,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I am writing new area keys, I bold the immediately relevant features.",
+   "note": "Quote verbatim. 'Keeps running prose' limb supported: the approach 'can be applied to existing modules without requiring rewriting', the worked Tower of Mouths example is bolded prose, and the saving is claimed 'without degrading the quality of the prose' — explicitly set against outline formats, which he says are unpleasant to read."
+  },
+  {
+   "index": 716,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text is also flawed because it separated the initial impression ... from elaboration",
+   "note": "Quote verbatim including the curly quotes around “treasure chest”. 'Further down the page' limb supported by the parenthesis that follows: 'the contents are usually buried somewhere three paragraphs down the page, with no obvious connective element'."
+  },
+  {
+   "index": 717,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A referee can take in the area with a glance",
+   "note": "Quote verbatim, in the paragraph reading the bolded Tower of Mouths example — 'the immediately important features are clearly offset' — so the 'aim of bolding' limb is the sentence's own subject."
+  },
+  {
+   "index": 718,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The amount of text that must be read ... has been cut down by more than half without degrading the quality of the prose.",
+   "note": "Quote verbatim. Every limb present in that one sentence: text that must be read, cut by more than half, no degrading of prose quality; and it is stated of the worked Tower of Mouths (Matt Finch, Knockspell 3) example, with the caveat that this was 'already a rather short description, and the savings yielded are usually greater'."
+  },
+  {
+   "index": 719,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "much boxed text and followup writing are expended to say relatively little",
+   "note": "Raw page fetched live (HTTP 200). Quote is word for word once the source's mid-sentence line wrapping is normalized: 'It always feels like the encounters are overwritten – much boxed text and followup writing are expended to say relatively little'. Module identified on the page as 'DCC #35A: Halls of the Minotaur (2006) by Harley Stroh', review dated 20 March 2018. Byline reads 'Melan'; 'Gabor Lux' is not printed on the page."
+  },
+  {
+   "index": 720,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It really did play better than it reads",
+   "note": "Quote verbatim on the same raw page. The table/page contrast is explicit: the review says it 'will also contrast how the module reads vs. how it was run by our GM', the play was a convention DCC game, and 'Fairly standard areas took on a character they didn’t have in the text I read later.'"
+  },
+  {
+   "index": 721,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read-aloud should never be long and italics should never be long.",
+   "note": "Raw page fetched live (HTTP 200). Quote verbatim as the first half of that sentence. Post 'The Swan Hollow Intrigue', posted September 5, 2026 by Bryce Lynch, reviewing Dylan Hyatt's Shadowdark adventure — date and reviewer as claimed."
+  },
+  {
+   "index": 722,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Long read-aloud causes players to loose focus and pull out their phones.",
+   "note": "Quote verbatim, including the page's 'loose' for 'lose'. Both limbs — losing focus and reaching for phones — are in that one sentence, reinforced by 'They don’t pay attention.'"
+  },
+  {
+   "index": 723,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Long italics is hard to read, cognitively.",
+   "note": "Quote verbatim on the same raw page, immediately after the read-aloud sentence; the claim's 'long passages set in italics' matches the antecedent 'There are long stretches of read-aloud, in italics.'"
+  }
+ ]
+}

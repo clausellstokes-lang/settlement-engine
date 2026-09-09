@@ -1,0 +1,1 @@
+{"rowsChanged": 31, "added": 0, "removed": 0, "gainWorldBookN": 30, "gainWorldBookR": 1, "tierOld": "-  \"tier on config\": \"campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=N\",", "tierNew": "+  \"tier on config\": \"campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R\","}

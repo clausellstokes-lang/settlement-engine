@@ -1,0 +1,332 @@
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+
+import { buildObservedCorpus, OBSERVED_SCALAR_FIELDS, scalarObservationsOf } from '../../scripts/lib/observed-shape-corpus.mjs';
+import {
+  PROSE_FAMILY_PROTECTED_SUBSTRATE,
+  compareProseFamilyRows,
+  deriveProseFamilyContract,
+  proseFamilyRowsSha256,
+  validateProseFamilyBaseline,
+} from '../../scripts/lib/prose-family-contract.mjs';
+import { NEWS_VOICE_PROTECTED_SUBSTRATE } from '../../scripts/lib/news-voice-contract.mjs';
+import { PREDICATES, makeContext } from '../../scripts/lib/premortem-triggers.mjs';
+import * as canonEventModule from '../../src/domain/events/prepareCanonEvent.js';
+import * as chronicleModule from '../../src/lib/chronicle.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const clone = (value) => JSON.parse(JSON.stringify(value));
+const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+const normalizedPath = (row) => row.path.map((part) => (part.kind === 'index' ? '[]' : part.value))
+  .reduce((out, part) => (part === '[]' ? `${out}[]` : out ? `${out}.${part}` : part), '');
+const projectionOf = (rows) => rows.map((row) => [normalizedPath(row), row.value])
+  .sort((left, right) => codepoint(JSON.stringify(left), JSON.stringify(right)));
+const replace = (rows, target, update) => rows.map((row) => (row === target ? update(row) : row));
+const familyTotal = (contract, family) => contract.familyTotals.find((row) => row.family === family);
+const EXPECTED_PROSE_SUBSTRATE = [
+  'scripts/lib/observed-shape-corpus.mjs', 'scripts/lib/prose-family-contract.mjs',
+  'src/domain/events/applyEvent.js', 'src/domain/events/eventPipeline.js',
+  'src/domain/events/prepareCanonEvent.js', 'src/domain/events/registry.js',
+  'src/domain/region/graph.js', 'src/domain/region/propagation.js',
+  'src/domain/worldPulse/advanceInterval.js', 'src/domain/worldPulse/provenanceKernel.js',
+  'src/domain/worldPulse/pulseKernel.js', 'src/domain/worldPulse/warTermination.js',
+  'src/domain/worldPulse/worldState.js', 'src/lib/chronicle.js',
+  'tests/lint/.prose-family-contract-baseline.json',
+];
+const EXPECTED_UNION = [
+  'scripts/lib/news-headline-contract.mjs', 'scripts/lib/news-voice-contract.mjs',
+  'scripts/lib/observed-shape-corpus.mjs', 'scripts/lib/prose-family-contract.mjs',
+  'src/domain/events/applyEvent.js', 'src/domain/events/eventPipeline.js',
+  'src/domain/events/prepareCanonEvent.js', 'src/domain/events/registry.js',
+  'src/domain/region/graph.js', 'src/domain/region/propagation.js',
+  'src/domain/region/wizardNews.js', 'src/domain/worldPulse/advanceInterval.js',
+  'src/domain/worldPulse/applyWorldPulse.js', 'src/domain/worldPulse/npcAgency.js',
+  'src/domain/worldPulse/provenanceKernel.js', 'src/domain/worldPulse/pulseKernel.js',
+  'src/domain/worldPulse/warTermination.js', 'src/domain/worldPulse/worldPulseFeedCuration.js',
+  'src/domain/worldPulse/worldState.js', 'src/lib/chronicle.js',
+  'tests/lint/.news-headline-contract-baseline.json', 'tests/lint/.news-voice-baseline.json',
+  'tests/lint/.prose-family-contract-baseline.json',
+];
+
+let baseline; let scalarRows; let scalarMeta; let live; let second; let canonRoad; let chronicleRoad;
+
+describe('four durable prose-family exact-totality contract', () => {
+  beforeAll(async () => {
+    baseline = validateProseFamilyBaseline(JSON.parse(readFileSync(
+      join(ROOT, 'tests/lint/.prose-family-contract-baseline.json'), 'utf8',
+    )));
+    const prepareSpy = vi.spyOn(canonEventModule, 'prepareAuthoritativeCanonEvent');
+    const createSpy = vi.spyOn(chronicleModule, 'createChronicleEntry');
+    const appendSpy = vi.spyOn(chronicleModule, 'appendChronicleEntry');
+    const corpus = await buildObservedCorpus({ scalarFields: OBSERVED_SCALAR_FIELDS });
+    const canonIndex = prepareSpy.mock.calls.findIndex(([input]) => input?.event?.id === 'osr.canon.cut-route');
+    const createIndex = createSpy.mock.calls.findIndex(([input]) => input?.triggeredBy === 'observed-shape-corpus');
+    const entry = createSpy.mock.results[createIndex]?.value;
+    const appendIndex = appendSpy.mock.calls.findIndex(([, candidate]) => candidate === entry);
+    canonRoad = { input: prepareSpy.mock.calls[canonIndex]?.[0], result: prepareSpy.mock.results[canonIndex]?.value };
+    chronicleRoad = { createInput: createSpy.mock.calls[createIndex]?.[0], entry,
+      appendList: appendSpy.mock.calls[appendIndex]?.[0], appendEntry: appendSpy.mock.calls[appendIndex]?.[1],
+      appended: appendSpy.mock.results[appendIndex]?.value };
+    prepareSpy.mockRestore(); createSpy.mockRestore(); appendSpy.mockRestore();
+    scalarRows = corpus.scalarObservations; scalarMeta = corpus.scalarMeta;
+    live = deriveProseFamilyContract(scalarRows, scalarMeta);
+    second = deriveProseFamilyContract(scalarRows, scalarMeta);
+  }, 900_000);
+
+  it('A1 reconstructs the exact four-family AO-0 corpus twice from one build', () => {
+    expect(second).toEqual(live);
+    expect(live.corpus).toEqual(baseline.corpus);
+    expect(live).toMatchObject({ familyTotals: baseline.familyTotals, totals: baseline.totals });
+    const roots = [...new Set(scalarRows.map((row) => `${row.root}:${row.rootOrdinal}`))];
+    expect(roots).toEqual([
+      ...[...Array(12).keys()].map((index) => `pulseResult:${index}`),
+      'worldState:12', 'wizardNews:13', 'canonEventResult:14', 'aiChronicle:15',
+    ]);
+    expect(live.rows.some((row) => /wizardNews/i.test(row.path))).toBe(false);
+    expect(live.rows.some((row) => /(?:^|\.)(?:id|time|timestamp|createdAt|updatedAt|editedAt|appliedAt)(?:\[\]|\.|$)/.test(row.path))).toBe(false);
+  });
+
+  it('A2 rejects malformed selector axes while retaining nulls and projected nested gaps', () => {
+    const narrative = scalarRows.find((row) => row.root === 'canonEventResult'
+      && row.path.at(-1)?.value === 'narrativeSummary');
+    expect(narrative).toBeTruthy();
+    const selectedFamily = (row) => (
+      (row.root === 'canonEventResult' && row.path[0]?.value === 'nextEventLog')
+      || (row.root === 'worldState' && row.path[0]?.value === 'pulseHistory')
+      || (row.root === 'pulseResult' && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog')
+      || row.root === 'aiChronicle'
+    );
+    const nullHomes = new Map();
+    for (const row of scalarRows.filter((candidate) => candidate.value === null && selectedFamily(candidate))) {
+      const path = normalizedPath(row); nullHomes.set(path, (nullHomes.get(path) || 0) + 1);
+    }
+    expect(Object.fromEntries([...nullHomes].sort(([left], [right]) => codepoint(left, right)))).toEqual({
+      'pulseHistory[].consequenceOutcomes[].type': 5,
+      // WAR LANDING (§876): 148 → 150, and it is the SAME reading of the same arm a third time —
+      // the impact digest carries two more records because `5a529f100`'s upheaval gates author
+      // two more public beats, and the null-VALUE census follows the records that produced them.
+      // ⭐ THE OTHER FOUR NULL HOMES ARE UNCHANGED, INCLUDING THE RUMOUR-SEED LANE THAT MOVED LAST
+      // TIME. Four of five homes standing still is what keeps this a null-RETENTION arm and not a
+      // corpus-size arm — a cause that moved every home would prove nothing about retention.
+      'pulseHistory[].impactDigest[].channelType': 150,
+      'pulseHistory[].mechanicalOutcomes[].type': 4,
+      // TE36 (ODQ §271): 30 → 19. The retired bare-decline outcomes were seeding rumours;
+      // the null-VALUE census follows the outcomes that produced them. Every other null home
+      // is unchanged, so this arm still measures null RETENTION and not corpus size.
+      // T8 · SHIFT (§858 + §860): 19 → 17, and it is the SAME reading of the same arm — car 2's
+      // metronome cure takes one rumour out of all four ledgers, so the rumour-seed lane authors
+      // two fewer records across the twelve roots and the null census follows them. The other
+      // four null homes are again unchanged, which is what keeps this a RETENTION arm.
+      'pulseHistory[].mechanicalRumorSeeds[].channelType': 17,
+      'pulseHistory[].selectedOutcomes[].type': 1,
+    });
+    const pathEdit = (row, index, value) => ({ ...row, path: row.path.map((part, offset) => (
+      offset === index ? value(part) : part
+    )) });
+    const regional = scalarRows.find((row) => row.root === 'pulseResult'
+      && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
+    const movedRegional = scalarRows.map((row) => (row.rootOrdinal === regional.rootOrdinal
+      && row.path[2]?.value === regional.path[2].value ? pathEdit(row, 2, (part) => ({ ...part, value: 999 })) : row));
+    const invalid = [
+      [...scalarRows, clone(narrative)],
+      replace(scalarRows, narrative, (row) => pathEdit(row, row.path.length - 1, (part) => ({ ...part, extra: true }))),
+      replace(scalarRows, narrative, (row) => pathEdit(row, 1, (part) => ({ ...part, value: 1 }))),
+      replace(scalarRows, narrative, (row) => pathEdit(row, row.path.length - 1, () => ({ kind: 'field', value: 'narrative.Summary' }))),
+      replace(scalarRows, narrative, (row) => ({ ...row, value: ' ' })),
+      replace(scalarRows, narrative, (row) => ({ ...row, value: 1 })),
+      scalarRows.filter((row) => row.root !== 'aiChronicle'),
+      [...scalarRows, { root: 'campaign', rootOrdinal: 16, path: [{ kind: 'field', value: 'summary' }], value: 'fifth' }],
+      movedRegional,
+    ];
+    for (const candidate of invalid) expect(() => deriveProseFamilyContract(candidate, scalarMeta)).toThrow();
+    const nested = scalarRows.find((row) => row.root === 'worldState'
+      && row.path.some((part) => part.value === 'rollExplanations'));
+    expect(nested).toBeTruthy();
+    expect(() => deriveProseFamilyContract(scalarRows.filter((row) => row !== nested), scalarMeta)).not.toThrow();
+  });
+
+  it('A3 freezes all 63 identities counts bytes digest and movement polarities', () => {
+    expect(live.rows).toEqual(baseline.rows);
+    expect(compareProseFamilyRows(live.rows, baseline.rows)).toBe(true);
+    // TE36 (ODQ §271): 8280 → 8274, six bytes, and they are DIGITS not identities — the
+    // row array still holds exactly 63 paths and only their counts shrank.
+    // T8 · SHIFT (§858 + §860): 8274 → 8271, three bytes, DIGITS again — 26 of the 63 rows moved
+    // and not one path was added or removed, so the array is three characters shorter.
+    // ⚠⚠ WAR LANDING (§876): 8271 → 8271, AND THE BYTE PIN IS THEREFORE BLIND HERE. 25 rows moved
+    // their counts and the digit-width changes cancel to exactly zero, so this assertion would
+    // have passed unchanged over a real movement. It is kept because a coincidence is not a
+    // licence to delete a pin — but the DIGEST below is the arm that actually convicts, and this
+    // is the first re-record in which the two disagree about whether anything happened.
+    expect(Buffer.byteLength(JSON.stringify(live.rows))).toBe(8271);
+    // TE36 (ODQ §271): the digest follows the counts it hashes. It is re-recorded here and in
+    // prose-family-contract.mjs's EXPECTED_ROWS_SHA256 together, which is what keeps the
+    // test-side and library-side denominators from ever disagreeing.
+    expect(live.rowsSha256).toBe('4cf433b2d508986fad5a1afdb8c2bd700751186411e87c179d39b927ff849a39');
+    const counted = live.rows.findIndex((row) => row.occurrences > row.distinctValues);
+    const movements = [
+      [...clone(live.rows), { family: 'timeline', path: 'zz', field: 'type', distinctValues: 1, occurrences: 1 }],
+      clone(live.rows).map((row, index) => (index === counted ? { ...row, occurrences: row.occurrences + 1 } : row)),
+      clone(live.rows).map((row, index) => (index === counted ? { ...row, occurrences: row.occurrences - 1 } : row)),
+      clone(live.rows).slice(1),
+      clone(live.rows).map((row, index) => (index === live.rows.length - 1 ? { ...row, path: 'zz' } : row)),
+    ];
+    for (const candidate of movements) expect(() => compareProseFamilyRows(candidate, baseline.rows)).toThrow(/new|grown|shrunk|vanished|sorted/);
+    const counterfeit = clone(baseline); counterfeit.rows = counterfeit.rows.slice(7);
+    counterfeit.familyTotals[0] = { family: 'chronicle', identities: 0, distinctValues: 0, occurrences: 0 };
+    // TE36 (ODQ §271): 1301/5878 → 1236/5253. This counterfeit must stay INTERNALLY
+    // CONSISTENT — it slices off the seven `chronicle` rows and must still add up — or the
+    // validator rejects it at "baseline totals disagree with rows" and never reaches the
+    // IMMUTABILITY guard this arm exists to prove. The seven come straight off the new
+    // totals (1071 − 7, 5206 − 7), so the arithmetic tracks the re-record rather than
+    // being re-chosen.
+    // WAR LANDING (§876): 1064/5199 → 1067/5263, the same seven off the new totals (1074 − 7,
+    // 5270 − 7). `chronicle` is byte-identical at 7/7/7 for the third re-record running, which is
+    // why this counterfeit's arithmetic keeps tracking with a single subtraction.
+    counterfeit.totals = { families: 3, identities: 56, distinctValues: 1067, occurrences: 5263 };
+    counterfeit.rowsSha256 = proseFamilyRowsSha256(counterfeit.rows);
+    expect(() => validateProseFamilyBaseline(counterfeit)).toThrow(/immutable/);
+    for (const mutate of [
+      (row) => { row.rowsSha256 = '0'.repeat(64); },
+      (row) => { row.rows[0].extra = true; },
+      (row) => { row.rows.splice(1, 0, clone(row.rows[0])); },
+      (row) => { [row.rows[0], row.rows[1]] = [row.rows[1], row.rows[0]]; },
+    ]) { const candidate = clone(baseline); mutate(candidate); expect(() => validateProseFamilyBaseline(candidate)).toThrow(); }
+  });
+
+  it('A4 closes the one authoritative timeline road at 4 8 12', () => {
+    expect(familyTotal(live, 'timeline')).toEqual({ family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 });
+    const timeline = scalarRows.filter((row) => row.root === 'canonEventResult');
+    expect(timeline).toHaveLength(12);
+    const values = new Map(timeline.map((row) => [normalizedPath(row), row.value]));
+    expect(values.get('nextEventLog[].event.type')).toBe('CUT_TRADE_ROUTE');
+    expect(values.get('nextEventLog[].event.cause')).toBe('player_action');
+    expect(values.get('nextEventLog[].narrativeSummary')).toEqual(expect.stringMatching(/\S/));
+    expect([...values.keys()].some((path) => /flavor|rename|destroy|table/i.test(path))).toBe(false);
+    expect(canonRoad.input).toMatchObject({ phase: 'canon', eventLog: [], now: '2026-01-01T00:00:00.000Z',
+      event: { id: 'osr.canon.cut-route', type: 'CUT_TRADE_ROUTE', targetId: 'Observed North Road', payload: {}, cause: 'player_action' } });
+    expect(canonRoad.result).toMatchObject({ ok: true }); expect(canonRoad.result.nextEventLog).toHaveLength(1);
+    expect(projectionOf(scalarObservationsOf([{ name: 'canonEventResult', value: { nextEventLog: canonRoad.result.nextEventLog } }], { fields: OBSERVED_SCALAR_FIELDS })))
+      .toEqual(projectionOf(timeline));
+  });
+
+  it('A5 closes twelve pulse-history records and pins overlapping headline aliases', () => {
+    // TE36 (ODQ §271): 1286/5665 → 1221/5076. IDENTITIES HOLD AT 50 — no prose path was
+    // gained or lost; the lit corpus simply authors fewer outcomes once bare decline is
+    // retired to demographicsKernel.
+    // T8 · SHIFT (§858 + §860): 1198/5076 → 1048/5018, and IDENTITIES HOLD AT 50 again. The two
+    // halves are attributable by single-variable control: with car 1's two src files restored to
+    // the landing base this family reads 1057/5063, so cars 2+3 own −141 distinct / −13
+    // occurrences (car 3's relabel re-spells the `reasons[]` vocabularies; car 2's dedup removes
+    // records) and car 1 owns the remaining −9 / −45.
+    // WAR LANDING (§876): 1048/5018 → 1051/5075, and IDENTITIES HOLD AT 50 for the third
+    // re-record running. This time the halves are not split at all: a five-arm control puts the
+    // WHOLE movement on `5a529f100` (T4 SEAT-2b) and measures ZERO from every other pick and from
+    // all three WAR mini-window cars — including W-MEM's `publishRuling` funnel, which the lane
+    // brief named as the cause and which this corpus never reaches.
+    expect(familyTotal(live, 'pulseHistory')).toEqual({ family: 'pulseHistory', identities: 50, distinctValues: 1051, occurrences: 5075 });
+    const history = scalarRows.filter((row) => row.root === 'worldState');
+    expect([...new Set(history.map((row) => row.path[1].value))]).toEqual([...Array(12).keys()]);
+    const headline = (home) => live.rows.find((row) => row.path === `pulseHistory[].${home}[].headline`);
+    expect(headline('selectedOutcomes')).toMatchObject({ distinctValues: 78, occurrences: 153 });
+    // TE36: the two lanes that carried the retired family move; `selectedOutcomes` above does
+    // NOT, because ordinary population drift was already `state_only` and never selected.
+    // mechanical distinctValues RISES (24 → 29) while its occurrences fall — the retired
+    // family was repetitive, so removing it leaves a shorter and more varied lane.
+    // T8 · SHIFT: 29/56 → 28/54 and 73/186 → 73/184. `selectedOutcomes` above is UNMOVED at
+    // 80/151 for the third re-record running — the two lanes that move are the two the corruption
+    // and rumour work authors into, and the lane that never carried either holds still.
+    // ⭐ WAR LANDING (§876): THE LANE THAT HELD STILL FOR THREE RE-RECORDS IS THE ONE THAT MOVES
+    // MOST, and that inversion is the cleanest signature in this file that the cause is a new one.
+    // `selectedOutcomes` 80/151 → 78/153 (the public lane the upheaval gates author into);
+    // `mechanicalOutcomes` 28/54 → 28/53, losing one occurrence and no spelling; and
+    // `consequenceOutcomes` 73/184 → 72/184, losing one spelling and no occurrence — the exact
+    // mirror image, and between them the arithmetic of a re-deal rather than of a gain or a loss.
+    expect(headline('mechanicalOutcomes')).toMatchObject({ distinctValues: 28, occurrences: 53 });
+    expect(headline('consequenceOutcomes')).toMatchObject({ distinctValues: 72, occurrences: 184 });
+  });
+
+  it('A6 reaches the regional audit log while proving its selected prose zero', () => {
+    // TE36 (ODQ §271): 201 → 165 and 109 → 73. Both identities and their distinct-value
+    // counts are UNCHANGED (2 and 7): the regional audit log records the same KINDS of change,
+    // 36 fewer times, because 36 of its entries were the retired population-decline outcomes.
+    // T8 · SHIFT (§858 + §860): 165 → 169 and 73 → 74, and this family moves UP where every other
+    // family moved down. It is CAR 1 ALONE — with car 1's two src files restored to the landing
+    // base this family reads the frozen 2/7/165 exactly, cars 2 and 3 notwithstanding. The
+    // corruption-onset shift §858 priced puts one more audited event into the regional log and one
+    // more distinct change KIND with it, so distinctValues rises 7 → 8 for the first time here.
+    // ⭐ WAR LANDING (§876): 169 → 176 and `distinctValues` HOLDS AT 8. TE36 held both identities
+    // and distinct while occurrences fell; T8 moved both; this time the audit log records the same
+    // EIGHT kinds of change, seven more times. That is the shape of a re-deal — `5a529f100`'s
+    // legitimacy-sensitivity table moving WHICH seats are fragile WHEN, never how many kinds of
+    // thing can happen — and it is the same claim the car's own redistribution invariant makes,
+    // measured here from the far side of the estate rather than from inside the gate.
+    expect(familyTotal(live, 'regionalLog')).toEqual({ family: 'regionalLog', identities: 2, distinctValues: 8, occurrences: 176 });
+    expect(scalarMeta).toMatchObject({ regionalEventLog: 77, regionalEventLogUnique: 77 });
+    const regional = scalarRows.filter((row) => row.root === 'pulseResult'
+      && row.path[0]?.value === 'regionalGraph' && row.path[1]?.value === 'eventLog');
+    expect([...new Set(regional.map((row) => row.rootOrdinal))]).toEqual([...Array(12).keys()]);
+    expect(new Set(regional.map((row) => `${row.rootOrdinal}|${row.path[2].value}`)).size).toBe(77);
+    expect(live.rows.filter((row) => row.family === 'regionalLog')).toEqual([
+      // TE36: `changes[].kind` is BYTE-IDENTICAL at 6/92 — the retired outcomes carried a
+      // sourceEvent but no graph change, so only the second row moves. That asymmetry is the
+      // cleanest evidence in this file that the retirement was surgical.
+      // T8 · SHIFT: this time BOTH rows move and in the SAME direction — 6/92 → 7/95 and 1/73 →
+      // 1/74. The asymmetry is gone because the added event is the opposite kind of event to the
+      // one TE36 retired: it carries a graph change AND a sourceEvent, so it lands in both rows.
+      // WAR LANDING (§876): both rows move up again — 7/95 → 7/99 and 1/74 → 1/77 — and NEITHER
+      // distinct count moves. Three added events carry a graph change and a sourceEvent each, and
+      // four graph changes between them; no new KIND of change appears in either row, which is
+      // what separates "the same world, dealt differently" from "a new kind of thing happening".
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].changes[].kind', field: 'kind', distinctValues: 7, occurrences: 99 },
+      { family: 'regionalLog', path: 'regionalGraph.eventLog[].sourceEvent.type', field: 'type', distinctValues: 1, occurrences: 77 },
+    ]);
+    const prose = new Set(['headline', 'narrativeSummary', 'reason', 'reasons', 'summary', 'summaryText', 'thesis', 'triggeredBy']);
+    expect(live.rows.filter((row) => row.family === 'regionalLog' && prose.has(row.field))).toEqual([]);
+  });
+
+  it('A7 closes the pure Chronicle create-and-append road at 7 7 7', () => {
+    expect(familyTotal(live, 'chronicle')).toEqual({ family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 });
+    const chronicle = scalarRows.filter((row) => row.root === 'aiChronicle');
+    expect(chronicle).toHaveLength(7);
+    expect(Object.fromEntries(chronicle.map((row) => [normalizedPath(row), row.value]))).toEqual({
+      '[].reason': 'progression', '[].aiSettlement.thesis': 'Observed settlement thesis',
+      '[].aiDailyLife.summary': 'Observed daily life summary', '[].triggeredBy': 'observed-shape-corpus',
+      '[].mode': 'full', '[].thesis': 'Observed settlement thesis', '[].summaryText': 'Observed settlement thesis',
+    });
+    expect(chronicle.some((row) => ['id', 'createdAt'].includes(row.path.at(-1)?.value))).toBe(false);
+    expect(scalarRows.some((row) => row.root === 'campaign')).toBe(false);
+    expect(chronicleRoad.createInput).toEqual({ reason: 'progression',
+      aiSettlement: { thesis: 'Observed settlement thesis' }, aiDailyLife: { summary: 'Observed daily life summary' },
+      triggeredBy: 'observed-shape-corpus', mode: 'full' });
+    expect(chronicleRoad.appendList).toEqual([]); expect(chronicleRoad.appendEntry).toBe(chronicleRoad.entry);
+    expect(chronicleRoad.appended).toEqual([chronicleRoad.entry]);
+    expect(projectionOf(scalarObservationsOf([{ name: 'aiChronicle', value: chronicleRoad.appended }], { fields: OBSERVED_SCALAR_FIELDS })))
+      .toEqual(projectionOf(chronicle));
+  });
+
+  it('A8 reconciles hazard premortem mutation and lighting governance', () => {
+    expect(Object.isFrozen(PROSE_FAMILY_PROTECTED_SUBSTRATE)).toBe(true);
+    expect(PROSE_FAMILY_PROTECTED_SUBSTRATE).toEqual(EXPECTED_PROSE_SUBSTRATE); expect(PROSE_FAMILY_PROTECTED_SUBSTRATE).toHaveLength(15);
+    const hazardRegistry = JSON.parse(readFileSync(join(ROOT, 'scripts/hazard-registry.json'), 'utf8'));
+    const hazard = hazardRegistry.classes.find((row) => row.id === 'HZ-CROSSHOME');
+    expect(Object.keys(hazard)).toHaveLength(10);
+    expect({ classes: hazardRegistry.classes.length, status: hazard.status, acceptedReason: hazard.acceptedReason, instances: hazard.instances, inChain: hazard.enforcer.inChain })
+      .toEqual({ classes: 29, status: 'MACHINERY', acceptedReason: null, instances: 53, inChain: true });
+    expect(hazard.enforcer.paths).toEqual(expect.arrayContaining([
+      'tests/lint/proseFamilyContract.walker.test.js', 'scripts/lib/prose-family-contract.mjs',
+      'tests/lint/.prose-family-contract-baseline.json',
+    ]));
+    const predicate = PREDICATES.find((row) => row.id === 'cross-home-voice-substrate-touched');
+    const context = makeContext({ root: ROOT, rev: null });
+    const union = [...new Set([...NEWS_VOICE_PROTECTED_SUBSTRATE, ...PROSE_FAMILY_PROTECTED_SUBSTRATE])].sort(codepoint);
+    expect(union).toEqual(EXPECTED_UNION); expect(union).toHaveLength(23); expect(predicate.population(context).items).toEqual(EXPECTED_UNION);
+    expect(predicate.sources).toEqual(['scripts/lib/news-voice-contract.mjs', 'scripts/lib/prose-family-contract.mjs']);
+    expect(predicate.run(context, predicate.synthetic(context))).toHaveLength(1);
+    const mutation = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8')).invariants['tests/lint/proseFamilyContract.walker.test.js'];
+    expect(mutation).toMatchObject({ kind: 'mutation', label: 'corpus-coverage/chronicle summaryText projection deleted' });
+    expect(readFileSync(join(ROOT, 'tests/lint/sovereigntyLightingContract.walker.test.js'), 'utf8'))
+      .toContain('files: 2412, parked: 365, credited: 2047, titles: 19984, suiteTitles: 5638');
+  });
+});

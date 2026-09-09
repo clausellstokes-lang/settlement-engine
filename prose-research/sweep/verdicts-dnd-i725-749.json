@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 0,
+ "claims": [
+  {
+   "index": 725,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch says one well written specific sentence is worth more than a page of details.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "one well written specific sentence is worth more",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 726,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch defines specificity as terse, so that it does not interrupt the DM scanning the page.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "It is terse, meaning it doesn’t get in the way",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 727,
+   "feature": "dm-facing sentence",
+   "claim": "Bryce Lynch says the specific sentence communicates to the DM exactly the vibe to aim for.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "It communicates exactly the vibe the DM should be going for.",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 728,
+   "feature": "adjective and adverb discipline",
+   "claim": "Bryce Lynch says a single parenthetical adjective on a random-encounter entry tells the DM a great deal.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "That (dubious) in parens tells us a lot.",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 729,
+   "feature": "adjective and adverb discipline",
+   "claim": "Bryce Lynch says quick adjectives and adverbs describing an NPC work where a paragraph of italic read-aloud for the same NPC fails.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "quick adjectives/adverbs used to describe NPCs hit so well",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 730,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch's verdict on exposition in an adventure text is that more is not better.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "More is not better.",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 733,
+   "feature": "civic record register",
+   "claim": "Gus L says a game text made entirely of fruitful voids becomes at best a prose poem shaped like an instruction manual or gazetteer.",
+   "source": "Gus L, 'Maxims of the OSR', All Dead Generations, 2023",
+   "url": "https://alldeadgenerations.blogspot.com/2023/08/maxims-of-osr.html",
+   "quote": "a mediocre at best prose poem in the form",
+   "page": "Maxims of the OSR, 'Roleplaying not Roll Playing'"
+  },
+  {
+   "index": 735,
+   "feature": "concrete sensory noun",
+   "claim": "The room text Bryce Lynch holds up as the model is a string of verbless sensory noun phrases, quoted in his review.",
+   "source": "module text by Nikoline quoted in Bryce Lynch's review, tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10550",
+   "quote": "Sickly stench; grease and putrescence.",
+   "page": "Lions of Tell Arn Part 2 review, quoted room 28"
+  },
+  {
+   "index": 740,
+   "feature": "other: key format",
+   "claim": "David Hartlage reports that Gygax's own Castle Greyhawk key usually gave each room a one-line note.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "he usually wrote a 1-line note for each room",
+   "page": "How much description, opening"
+  },
+  {
+   "index": 741,
+   "feature": "edition and house style",
+   "claim": "David Hartlage says Gygax's generous location descriptions in G1 set the pattern for virtually every adventure that followed.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "Gary’s longer descriptions set the pattern for virtually every adventure to follow.",
+   "page": "How much description, 'Gary Gygax sets the standard'"
+  },
+  {
+   "index": 742,
+   "feature": "place and institution description",
+   "claim": "David Hartlage argues longer descriptions spare the DM inventing details, whose first ideas tend toward the obvious.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "the ideas that spring to mind first will steer toward the obvious",
+   "page": "How much description, 'Longer descriptions'"
+  },
+  {
+   "index": 744,
+   "feature": "edition and house style",
+   "claim": "David Hartlage says the custom of long descriptions makes authors write even when they have nothing to add.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "encourages authors to write something even when they have little",
+   "page": "How much description, 'Longer descriptions'"
+  },
+  {
+   "index": 745,
+   "feature": "omission as information",
+   "claim": "David Hartlage says an avalanche of description buries the details that would actually reach play.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "An avalanche of description does more than squander page count.",
+   "page": "How much description, 'Matching description to a location's purpose'"
+  },
+  {
+   "index": 746,
+   "feature": "place and institution description",
+   "claim": "David Hartlage says a location's description should be as long as the way players will actually engage that location.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "The length of descriptions should match the way players will engage",
+   "page": "How much description, 'The ideal dungeon description'"
+  },
+  {
+   "index": 749,
+   "feature": "place and institution description",
+   "claim": "David Hartlage's test for cutting a description is whether it is the first thing a typical DM would imagine anyway.",
+   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "the first thing a typical DM would imagine at the table",
+   "page": "How much description, 'The ideal dungeon description'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 725,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one well written specific sentence is worth more than a page",
+   "note": "Raw page fetched with a browser UA (HTTP 200). Sentence sits in the details-vs-specifics paragraph of the Swan Hollow Intrigue review, prefaced by the picture/thousand-words comparison; 'of details' closes it. Every limb holds."
+  },
+  {
+   "index": 726,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is terse, meaning it doesn't get in the way",
+   "note": "Same paragraph, defining Specificity against detail; the sentence continues about scanning an adventure and not pausing mid-game. Claim's 'the page' is the page of an adventure being scanned, and the DM is the reader throughout the paragraph."
+  },
+  {
+   "index": 727,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It communicates exactly the vibe the DM should be going for.",
+   "note": "Closing sentence of the details-vs-specifics paragraph, immediately after the one-sentence/page-of-details line. Quotation word for word."
+  },
+  {
+   "index": 728,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That (dubious) in parens tells us a lot.",
+   "note": "Next paragraph, on the Quack selling a (dubious) potion of healing. The page calls the table 'a wandering traveller table for one of the inns' rather than 'random-encounter table'; that is a naming difference, the entry is a rolled table entry and the parenthetical adjective limb is exact."
+  },
+  {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quick adjectives/adverbs used to describe NPCs hit so well",
+   "note": "Same paragraph; the contrast limb is the following sentence, where a long section of italics read-aloud per NPC meant to convey personality is said to fail. Both limbs on the page."
+  },
+  {
+   "index": 730,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "More is not better.",
+   "note": "Stands as its own sentence inside the paragraph on long bouts of exposition and irrelevant detail, so the claim's framing as a verdict on exposition is the page's own context."
+  },
+  {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mediocre at best prose poem in the form of",
+   "note": "Post is '7 Maxims of the OSR', section III 'Role Playing not Roll Playing', final sentence of the fruitful-voids paragraph: when such voids are everywhere one has no game, but that prose poem, shaped as an instruction manual or gazetteer. 'Made entirely of' maps to the page's 'when they are everywhere'. Byline renders via script, but Gus L answers as blog author throughout the comments."
+  },
+  {
+   "index": 735,
+   "verdict": "PARTIAL",
+   "trueWording": "Sickly stench; grease and putrescence.",
+   "note": "Quotation is exact: Bryce quotes room 28 'Lower Hydra Nest' from Nikoline's Lions of Tell Arn Part 2 and does hold the writing up as the model ('That IS the goal of good writing'). But the entry he quotes is not verbless throughout - after the two noun phrases it runs a ledge line and then a finite-verb clause about water and blood dripping from above, and the ledge line is spatial rather than sensory. The neighbouring model rooms he praises open with finite verbs too (room 29's detritus thickens).",
+   "unsupportedLimb": "'a string of verbless sensory noun phrases' - the same quoted room 28 entry ends in a finite-verb clause (water and blood dripping from above) and includes a non-sensory ledge/exit line"
+  },
+  {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he usually wrote a 1-line note for each room",
+   "note": "Opening paragraph of the post (the tag archive renders the article in full). Page frames it as Gygax's first dungeon under Castle Greyhawk, notes shared with co-DM Rob Kuntz. Claim's limbs hold."
+  },
+  {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gary's longer descriptions set the pattern for virtually every adventure",
+   "note": "Section 'Gary Gygax sets the standard'; the preceding sentences name G1 Steading of the Hill Giant Chief (1978) and generous descriptions for every location, so the G1 limb is on the page. Quoted sentence closes with 'to follow'."
+  },
+  {
+   "index": 742,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ideas that spring to mind first will steer toward the obvious",
+   "note": "Section 'Longer descriptions'. The preceding sentence supplies the first limb: longer descriptions free DMs from needing to invent details at the table. The quoted clause continues about the most familiar and blandest ideas."
+  },
+  {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "encourages authors to write something even when they have little to add",
+   "note": "Section 'Longer descriptions', on the padded taxidermist's-bedroom entry. Noting the wording gap honestly: the page says 'encourages' and 'little to add' where the claim says 'makes' and 'nothing to add'; the very next sentence carries the stronger form, saying the format makes authors feel obligated to describe an empty closet's shelves and pegs, so both limbs are supported in substance."
+  },
+  {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An avalanche of description does more than squander page count.",
+   "note": "Section 'Matching description to a location's purpose'; the next sentence (with a typo in the original) says it buries great details that might actually enter play, and the Victor Wachter example follows. Both limbs on the page."
+  },
+  {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The length of descriptions should match the way players will engage",
+   "note": "Section 'The ideal dungeon description'; sentence ends 'a location', followed by the widow's-salon versus Tomb of Horrors contrast. Claim's paraphrase matches."
+  },
+  {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first thing a typical DM would imagine at the table",
+   "note": "Section 'The ideal dungeon description', final paragraph: if your kitchen description reads that way, you may as well rely on the typical imagination - which is the cutting test the claim describes."
+  }
+ ]
+}
