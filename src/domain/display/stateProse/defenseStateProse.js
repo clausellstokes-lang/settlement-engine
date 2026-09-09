@@ -375,9 +375,11 @@ export function measuredMonsterFamily(monsterThreat) {
  * k = 1 to k = 2 on a claim nobody measured. A wiring car that made four rows less legible to
  * buy uniformity is not this one. Say "veto" to table it anyway.
  *
- * ⚠ AND THE SAME SHAPE SURVIVES ELSEWHERE ON THIS LEAF, RECORDED RATHER THAN SWEPT UP:
- * `supplyLogisticsPoolKey` (DS-DEF-6) still builds its five keys through a local arrow. It is
- * a different block with a different chair row, so it is named here and left for its own car.
+ * ⭐ THE SAME SHAPE ELSEWHERE ON THIS LEAF WAS RECORDED HERE RATHER THAN SWEPT UP, AND ITS
+ * OWN CAR HAS SINCE LANDED. `supplyLogisticsPoolKey` (DS-DEF-6) built its five keys through a
+ * local arrow; REWRITE car 8b-W tabled it, together with DS-DEF-1's readiness bands, DS-DEF-3's
+ * two label tables and DS-DEF-4's capture ladder. A note naming a defect and its owner is worth
+ * writing only if somebody later reads it, so this one records that somebody did.
  *
  * ⛔⛔ AND THE INSTRUMENT MAY NOT BE NAMED HERE, WHICH IS WHY THIS BLOCK TALKS AROUND IT.
  * The census walker's island fence scans every file under `src/` for the BARE MODULE NAME of
@@ -1515,6 +1517,39 @@ export const DEF6_FACT_SPOKEN_AT = Object.freeze({
 });
 
 /**
+ * DS-DEF-6 lens 5's key table — the reserve against the way supply arrives, five situations.
+ *
+ * ⚠ THE SITUATION TOKENS ARE ENGLISH PHRASES AND NOT AN ENCODED TRIPLE, on SEAM car 3h's
+ * ruling: they are the recovered predicate's VALUE, so a reader of the register meets
+ * `=== 'no reserves, port open'` rather than a canonical code nobody can read at a glance.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SUPPLY_LOGISTICS_ROW_POOL = Object.freeze({
+  'granary, port': 'Logistics & Supply: Granary + port',
+  'granary, isolated': 'Logistics & Supply: Granary in isolation',
+  'granary, road supply': 'Logistics & Supply: Granary with road supply',
+  'no reserves, port open': 'Logistics & Supply: No reserves, port open',
+  'no reserves, landlocked': 'Logistics & Supply: No reserves, landlocked',
+});
+
+/**
+ * WHICH SUPPLY SITUATION a town is in. Total over a PRESENT trade access, which the key
+ * function checks before it asks.
+ *
+ * ⚠ THE PRODUCER'S OWN ASYMMETRY IS MIRRORED, NOT TIDIED: the reserve branch splits on the
+ * INSTITUTION flag and the empty branch on the CONFIG value. See the key function below.
+ * @param {boolean} granary @param {boolean} port @param {string} access
+ * @returns {string}
+ */
+function supplyLogisticsSituation(granary, port, access) {
+  if (granary) {
+    if (port) return 'granary, port';
+    return access === 'isolated' ? 'granary, isolated' : 'granary, road supply';
+  }
+  return access === 'port' ? 'no reserves, port open' : 'no reserves, landlocked';
+}
+
+/**
  * DS-DEF-6 lens 5 — LOGISTICS & SUPPLY: the reserve read against the way supply arrives.
  *
  * ⚠ THE PRODUCER'S ASYMMETRY IS MIRRORED, NOT TIDIED. `deriveSupportingCapabilities`
@@ -1533,19 +1568,22 @@ export const DEF6_FACT_SPOKEN_AT = Object.freeze({
  * shipped world: `steps/resolveConfig.js` writes `tradeRouteAccess` into every effective
  * config, so a GENERATED settlement always carries one. RAISED, NOT CURED at the producer.
  *
+ * ⭐⭐ AND ITS KEY TABLE IS EXPOSED HERE, WHICH SEAM CAR 3h NAMED AND LEFT FOR THIS ONE. That
+ * car cured the four DS-DEF-2 rows built through a LOCAL ARROW and wrote down, in the code and
+ * on its receipt, that this function is the same shape on a different block and belongs to its
+ * own car. This is that car. A local arrow's template binds its holes to a local, so nothing
+ * the estate's wiring register (the instrument island under `src/domain/prose/`, which no
+ * product file may name) can resolve to a reading; the table's key is the SITUATION, and the
+ * recovered predicate is an exact `if and only if` over it.
+ *
  * @param {boolean} granary @param {boolean} port @param {unknown} tradeAccess
  * @returns {string|null}
  */
 export function supplyLogisticsPoolKey(granary, port, tradeAccess) {
   const access = text(tradeAccess);
   if (!access) return null;
-  /** @param {string} tail */
-  const key = (tail) => `Logistics & Supply: ${tail}`;
-  if (granary) {
-    if (port) return key('Granary + port');
-    return access === 'isolated' ? key('Granary in isolation') : key('Granary with road supply');
-  }
-  return access === 'port' ? key('No reserves, port open') : key('No reserves, landlocked');
+  const pool = SUPPLY_LOGISTICS_ROW_POOL[supplyLogisticsSituation(granary, port, access)];
+  return typeof pool === 'string' ? pool : null;
 }
 
 /**
