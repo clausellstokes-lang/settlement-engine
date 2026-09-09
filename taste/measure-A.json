@@ -1,7 +1,7 @@
 {
- "arm": "draft",
- "round": 4,
- "at": "2026-09-09T05:58:55",
+ "arm": "A",
+ "round": 0,
+ "at": "2026-09-09T07:09:33",
  "projection": {
   "ok": true,
   "waivers": [
@@ -61,13 +61,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 24,
@@ -208,9 +210,9 @@
      {
       "vid": 1,
       "faces": [
-       13,
-       13,
        10,
+       11,
+       8,
        14
       ]
      },
@@ -218,7 +220,7 @@
       "vid": 2,
       "faces": [
        9,
-       12,
+       10,
        10,
        11
       ]
@@ -227,8 +229,8 @@
       "vid": 3,
       "faces": [
        11,
+       11,
        13,
-       12,
        10
       ]
      }
@@ -544,13 +546,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 48,
@@ -971,27 +975,27 @@
      {
       "vid": 1,
       "faces": [
-       9,
+       8,
+       15,
        10,
-       10,
-       10
+       13
       ]
      },
      {
       "vid": 2,
       "faces": [
        8,
-       10,
        9,
-       11
+       11,
+       10
       ]
      },
      {
       "vid": 3,
       "faces": [
        12,
-       12,
-       12,
+       9,
+       13,
        9
       ]
      }
@@ -1364,13 +1368,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 96,
@@ -1800,19 +1806,19 @@
      {
       "vid": 2,
       "faces": [
-       12,
        8,
-       19,
-       11
+       8,
+       18,
+       18
       ]
      },
      {
       "vid": 3,
       "faces": [
-       13,
-       9,
-       19,
-       13
+       10,
+       10,
+       16,
+       9
       ]
      }
     ]
@@ -2202,13 +2208,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 96,
@@ -2629,18 +2637,18 @@
      {
       "vid": 1,
       "faces": [
-       10,
-       17,
        11,
-       9
+       18,
+       9,
+       12
       ]
      },
      {
       "vid": 2,
       "faces": [
        11,
-       9,
-       14,
+       10,
+       12,
        8
       ]
      },
@@ -2649,7 +2657,7 @@
       "faces": [
        14,
        10,
-       9,
+       13,
        17
       ]
      }
@@ -2757,13 +2765,13 @@
      "exceeded": 13,
      "exceededShare": 0.619,
      "deepest": {
-      "metric": "closers.abstractNounRate",
-      "depth": 8.6,
-      "side": "over"
+      "metric": "wordsPerSentence.neighbourVariation",
+      "depth": 1.597,
+      "side": "under"
      },
-     "meanDistanceFromMedian": 0.903,
+     "meanDistanceFromMedian": 0.486,
      "budgetOk": true,
-     "depthOk": false,
+     "depthOk": true,
      "perfectionSuspect": false
     },
     {
@@ -3010,14 +3018,8 @@
      "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
     }
    ],
-   "inBand": false,
-   "failing": [
-    {
-     "measure": "band depth · closers.abstractNounRate (over)",
-     "value": "8.6 band-widths on 1 of 12 face(s)",
-     "band": "DEPTH at most 1.75 band-widths on every face"
-    }
-   ]
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-2",
@@ -3044,13 +3046,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 36,
@@ -3287,8 +3291,8 @@
      {
       "vid": 1,
       "faces": [
-       10,
-       19,
+       12,
+       21,
        9,
        8
       ]
@@ -3298,7 +3302,7 @@
       "faces": [
        17,
        12,
-       20,
+       19,
        10
       ]
      },
@@ -3307,8 +3311,8 @@
       "faces": [
        8,
        10,
-       16,
-       17
+       17,
+       14
       ]
      }
     ]
@@ -3631,13 +3635,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 36,
@@ -3874,27 +3880,27 @@
      {
       "vid": 1,
       "faces": [
-       13,
+       12,
+       9,
        8,
-       8,
-       8
+       12
       ]
      },
      {
       "vid": 2,
       "faces": [
        12,
-       9,
-       9,
-       10
+       10,
+       12,
+       15
       ]
      },
      {
       "vid": 3,
       "faces": [
-       9,
+       8,
        13,
-       10,
+       12,
        9
       ]
      }
@@ -4219,13 +4225,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 72,
@@ -4462,28 +4470,28 @@
      {
       "vid": 1,
       "faces": [
-       13,
-       11,
+       14,
        12,
-       13
+       13,
+       11
       ]
      },
      {
       "vid": 2,
       "faces": [
-       11,
        12,
+       8,
        11,
-       10
+       11
       ]
      },
      {
       "vid": 3,
       "faces": [
-       14,
        12,
        12,
-       12
+       13,
+       11
       ]
      }
     ]
@@ -4787,8 +4795,8 @@
   "totalUnits": 408,
   "n": 408,
   "exhaustive": true,
-  "msPerUnit": 0.625,
-  "exhaustiveMs": 255,
+  "msPerUnit": 0.225,
+  "exhaustiveMs": 92,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
   "verdicts": {
@@ -4835,5 +4843,5 @@
   "tieBp": 0,
   "note": ""
  },
- "seconds": 30
+ "seconds": 11
 }

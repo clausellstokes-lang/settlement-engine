@@ -63,6 +63,14 @@ const state = new Map(POOLS.map((p) => [p.dir, { p, inBand: false, dry: 0, refus
 const spentAtStart = budget.spent()
 let round = 0
 let draftCommit = null
+// A SUCCESSOR SESSION cannot resume by run id: pass args.fromDraft = { commit, rounds: {dir: n}, inBand: [dirs], refused: {dir: feedback} } to skip the draft phase and start at Refine from the committed draft in laneTASTE.
+const FROM = (args && args.fromDraft) ? args.fromDraft : null
+if (FROM) {
+  draftCommit = String(FROM.commit)
+  for (const [dir, st] of state) { st.rounds = Number((FROM.rounds || {})[dir] || 0); st.inBand = (FROM.inBand || []).includes(dir); if ((FROM.refused || {})[dir]) { st.refused = true; st.feedback = String(FROM.refused[dir]) } }
+  round = MAX_ROUNDS
+  log('resuming from the committed draft ' + draftCommit + ': in band ' + [...state.values()].filter((s) => s.inBand).length + ' · refused ' + [...state.values()].filter((s) => s.refused).length)
+}
 while (round < MAX_ROUNDS) {
   round += 1
   const open = [...state.values()].filter((s) => !s.inBand && !s.refused)
@@ -83,7 +91,7 @@ while (round < MAX_ROUNDS) {
   }
   log('after round ' + round + ': in band ' + [...state.values()].filter((s) => s.inBand).length + ' · refused ' + [...state.values()].filter((s) => s.refused).length + ' · open ' + [...state.values()].filter((s) => !s.inBand && !s.refused).length)
 }
-if (round >= MAX_ROUNDS) log('SILENT CAP AVOIDED: the draft phase stopped at the hard cap of ' + MAX_ROUNDS + ' rounds with ' + [...state.values()].filter((s) => !s.inBand && !s.refused).length + ' pool(s) still open - reported, not hidden')
+if (!FROM && round >= MAX_ROUNDS) log('SILENT CAP AVOIDED: the draft phase stopped at the hard cap of ' + MAX_ROUNDS + ' rounds with ' + [...state.values()].filter((s) => !s.inBand && !s.refused).length + ' pool(s) still open - reported, not hidden')
 const draftTokens = budget.spent() - spentAtStart
 const lawful = [...state.values()].filter((s) => s.inBand)
 const allSets = [...state.values()].filter((s) => s.rounds > 0)

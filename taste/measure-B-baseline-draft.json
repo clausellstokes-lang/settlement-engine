@@ -1,7 +1,7 @@
 {
- "arm": "draft",
- "round": 4,
- "at": "2026-09-09T05:58:55",
+ "arm": "B",
+ "round": 0,
+ "at": "2026-09-09T07:13:07",
  "projection": {
   "ok": true,
   "waivers": [
@@ -61,13 +61,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 24,
@@ -544,13 +546,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 48,
@@ -1364,13 +1368,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 96,
@@ -2202,13 +2208,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 96,
@@ -3044,13 +3052,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 36,
@@ -3631,13 +3641,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 36,
@@ -4219,13 +4231,15 @@
      3,
      4
     ],
-    "refineA": false,
-    "refineB": false,
+    "refineA": true,
+    "refineB": true,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
      "draft-round-3.md",
-     "draft-round-4.md"
+     "draft-round-4.md",
+     "refine-A.md",
+     "refine-B.md"
     ]
    },
    "units": 72,
@@ -4787,8 +4801,8 @@
   "totalUnits": 408,
   "n": 408,
   "exhaustive": true,
-  "msPerUnit": 0.625,
-  "exhaustiveMs": 255,
+  "msPerUnit": 0.205,
+  "exhaustiveMs": 84,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
   "verdicts": {
@@ -4835,5 +4849,5 @@
   "tieBp": 0,
   "note": ""
  },
- "seconds": 30
+ "seconds": 10
 }
