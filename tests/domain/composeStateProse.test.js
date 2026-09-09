@@ -249,17 +249,26 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
     expect(run.rows.size, 'and the table is the full DRIFT corpus').toBe(1050);
   }, 300_000);
 
-  it('⚠ THE CELL ARM CANNOT TELL `vid` FROM `index` AT THIS TIP, and here is the measurement', () => {
+  it('⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed at car 8a-1', () => {
     // ⛔ A LIMIT OF THE ARM ABOVE, FOUND BY EXECUTING IT AND REPORTED RATHER THAN PAPERED
     // OVER. `vid` is the position AS AUTHORED and `index` the position in the
     // AUDIENCE-FILTERED pool, and the two can only differ when a `dm-only` variant sits
-    // BEFORE the drawn one on the player face. On this corpus that never happens: ZERO of
-    // the recorded cells have vid != index, so the per-cell equality above would also pass
-    // for a composer that confused the two coordinates.
+    // BEFORE the drawn one on the player face. Until REWRITE car 8a-1 that never happened on
+    // this corpus: ZERO recorded cells had vid != index, so the per-cell equality above would
+    // also have passed for a composer that confused the two coordinates. The arm was written
+    // with the sentence "the day a car makes a player face draw past a covert variant it reds
+    // here", and this is the receipt for that day.
     //
-    // WHY, measured here rather than asserted: the corpus ships twelve MIXED pools, and the
-    // DRIFT run reaches only a few of them — on which the player's audible list is a prefix
-    // of the authored one (or a single survivor), so the two coordinates coincide.
+    // ⭐ WHAT CLOSED IT, EXACTLY. The index-stable draw (kernel law 6) is an argmax over each
+    // variant's stable id rather than `hash % length`, so it re-drew every pool once. On
+    // `DS-POW-1 :: governanceFractured true` — four variants of which the THIRD is `dm-only` —
+    // the player's draw moved to the fourth authored variant, which sits at audible index 2
+    // and authored index 3. That is 36 cells of the DRIFT run whose two coordinates now
+    // disagree, and the per-cell equality arm above is sensitive to the confusion for the
+    // first time.
+    //
+    // The corpus ships twelve MIXED pools and the DRIFT run still reaches only a few of them,
+    // so the figure remains small and is PINNED IN BOTH DIRECTIONS rather than floored.
     const apart = run.cells.filter((cell) => cell.vid !== cell.index);
     /** @type {Map<string, {n: number, covert: number[]}>} */
     const mixedPools = new Map();
@@ -276,10 +285,16 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       + ` ${apart.length} of ${run.cells.length} · mixed pools in the corpus ${mixedPools.size}`
       + ` · reached by the DRIFT run ${reached.length} (${reached.join(' | ') || 'none'})\n`);
     expect(mixedPools.size, 'the corpus really does hold mixed pools').toBe(12);
-    // PINNED IN BOTH DIRECTIONS. Today it is 0, so this arm records a KNOWN BLIND SPOT; the
-    // day a car makes a player face draw past a covert variant it reds here, and whoever
-    // reads the red learns that the cell arm has just become sensitive to the confusion.
-    expect(apart.length, 'cells that would tell the two coordinates apart').toBe(0);
+    // PINNED IN BOTH DIRECTIONS, and no longer at zero. A fall back to 0 means the estate
+    // lost the discrimination again and the arm above went blind; a rise means another pool's
+    // player face started drawing past a covert variant, which is a draw movement somebody
+    // owes a declared row for.
+    expect(apart.length, 'cells that would tell the two coordinates apart').toBe(36);
+    // And the cells are exactly the pool the draw moved, named rather than counted.
+    expect([...new Set(apart.map((cell) => `${cell.block} :: ${cell.pool}`))])
+      .toEqual(['DS-POW-1 :: governanceFractured true']);
+    expect([...new Set(apart.map((cell) => `vid ${cell.vid} / index ${cell.index}`))])
+      .toEqual(['vid 3 / index 2']);
     // SO THE DISCRIMINATION IS DRIVEN SYNTHETICALLY, on the shape the corpus cannot supply.
     // Without this, nothing in the estate would refuse a composer that recorded `index` as
     // the authored position.

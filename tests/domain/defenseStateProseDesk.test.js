@@ -850,10 +850,18 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
     // settlement name — `{settlement}`, filled in every variant — where the seat is missing
     // and the naming variant is the one that drops. If the fill pipeline broke, the anchor is
     // absent BEFORE the brace question is asked.
-    const named = defenseCriminalProse(underworld({ government: 'Grand Merchant Oligarchy', criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+    //
+    // ⚠ THE SEED IS CHOSEN, NOT ARBITRARY, and it moved from `seat-a` to `seat-c` at REWRITE
+    // car 8a-1. `capture capture` holds three variants and only the first names `{seat}`, so
+    // this arm needs a seed whose draw REACHES that variant; the index-stable draw (kernel
+    // law 6) re-drew every pool once, and `seat-a` now lands on the third. Choosing a seed
+    // that still travels the path is what the anchor helper asks for in its own words — the
+    // alternative, deleting the anchor to get green, is the vacuity it exists to refuse. The
+    // arm's claim is unchanged: a filled `{seat}` leaves no brace behind.
+    const named = defenseCriminalProse(underworld({ government: 'Grand Merchant Oligarchy', criminalCaptureState: 'capture' }), null, { seed: 'seat-c', audience: 'dm' });
     expectAbsentWithAnchor(named.capture.sentence, '{', 'Grand Merchant Oligarchy', 'named seat: open brace');
     expectAbsentWithAnchor(named.capture.sentence, '}', 'Grand Merchant Oligarchy', 'named seat: close brace');
-    const unnamed = defenseCriminalProse(underworld({ government: undefined, criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+    const unnamed = defenseCriminalProse(underworld({ government: undefined, criminalCaptureState: 'capture' }), null, { seed: 'seat-c', audience: 'dm' });
     expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '{', 'Thornwall', 'unnamed seat: open brace');
     expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '}', 'Thornwall', 'unnamed seat: close brace');
     // The generator's own field is where the name comes from.

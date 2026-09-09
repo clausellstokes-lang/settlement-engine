@@ -10,7 +10,7 @@
  * It is a PURE, HEADLESS LEAF: no imports, no state, no clock, no RNG. Composition
  * lives display-side and nothing here is persisted — dark, the page is byte-identical.
  *
- * ── THE FIVE LAWS THIS FILE ENFORCES ────────────────────────────────────────────────
+ * ── THE SIX LAWS THIS FILE ENFORCES ─────────────────────────────────────────────────
  *
  * 1. ANCHORED LIVENESS (the spec's item 3, and the reason this is a kernel rather than
  *    a lookup). A variant renders ONLY when every slot it names has a real fill. A
@@ -45,6 +45,13 @@
  *    STATE_MARK_DIMENSIONS. This is the only law in the file that protects a TRUTH
  *    CLAIM rather than a surface, and it is the reason `marks` is read twice.
  *
+ * 6. THE INDEX-STABLE DRAW (ARCH §13 row 22, SIGNED at SITTING §N.2). The variant draw is
+ *    the ARGMAX of a per-variant key over the eligible set, keyed on the annex-frozen `vid`
+ *    rather than `% eligible.length`, so that appending a wording moves about a quarter of
+ *    a pool's reads and every one of them moves TO the new wording rather than between two
+ *    old ones. See `drawVariant`, which carries the measurement, the tie rule, and the
+ *    reason the modulus survives for a corpus that carries no stable ids.
+ *
  * ⚠ `marks` IS AN UNTYPED BAG CARRYING THREE DISTINCT SEMANTICS, and a reader that
  * knows only one of them fails silently rather than loudly. They are: the AUDIENCE mark
  * (`dm-only`, law 2); the STATE DIMENSION words (law 5); and, in the causal register
@@ -70,6 +77,11 @@
  * @property {ReadonlyArray<string>} [wordings] FACES 1..n — the same claim set, the same
  *   `{slot}` set and the same marks BY CONSTRUCTION (ARCH §2.3). Absent on every variant
  *   the corpus ships today, which is why `drawFace` below takes no hash at all.
+ * @property {number} [vid] THE STABLE ID — the annex row number, frozen at SEAM car 4 and
+ *   pinned on `docs/content/prose-shift-register.json`. It is what law 6's draw hashes on,
+ *   and it is OPTIONAL on this type because the causal register (R2) carries none: §13 row
+ *   14 keeps `vid` in the STATE schema alone, and `drawVariant` falls back to the modulus
+ *   exactly where this property is absent.
  */
 /**
  * One corpus block — a dossier surface or a closed ladder.
@@ -292,9 +304,73 @@ export function fillSlots(text, slots) {
 }
 
 /**
+ * THE STABLE ID OF ONE VARIANT, or `null` where it carries none. The `vid` is the annex row
+ * number frozen at SEAM car 4 (`docs/content/prose-shift-register.json`, row `vids`): a new
+ * variant takes the NEXT number, nothing is renumbered and nothing is deleted, and the
+ * projector throws on a renumbering. It is the only field of a variant that names it across a
+ * rewrite, which is what makes it the draw key below.
+ *
+ * ⛔ ZERO IS A REAL ID AND THE TEST FOR IT IS `>= 0`. Seven shipped pools lead with a
+ * `canonical` row numbered 0 (DS-ECO-3 x3, DS-ECO-6 x2, DS-ECO-7 x2 — the same seven ARCH
+ * §16 item 5 names as single-faced by refusal), so those pools number 0..n-1 while the other
+ * 701 number 1..n. A truthiness test, or a `> 0` test, reads those seven ids as ABSENT and
+ * drops exactly those seven pools back onto the modulus draw while the other 701 move — a
+ * silent split of the corpus into two draw regimes, which is the failure this comment is
+ * here to stop somebody re-introducing. Driven: the sweep in the kernel's test names all
+ * seven by block and pool.
+ * @param {StateProseVariant|null|undefined} variant
+ * @returns {number|null}
+ */
+function stableVid(variant) {
+  const vid = variant ? variant.vid : undefined;
+  return Number.isInteger(vid) && vid >= 0 ? vid : null;
+}
+
+/**
  * The deterministic draw. The key binds the seed to the POOL IDENTITY, so two pools
  * read on one page with one seed do not draw the same index, and the same pool read
  * twice in one render draws the same sentence.
+ *
+ * ── LAW 6: THE INDEX-STABLE DRAW (ARCH §13 row 22, SIGNED at SITTING §N.2) ────────────
+ *
+ * The draw is the ARGMAX of `hashKey(${seed}::${blockId}::${poolKey}::v${vid})` over the
+ * eligible set, NOT `hash(parent) % eligible.length`. The two differ only in what an
+ * APPENDED wording costs, and that difference is the whole reason the rewrite wave can
+ * grow the corpus at all:
+ *
+ *   under `% length`   appending a fourth wording to a three-wording pool re-rolls about
+ *                      three quarters of that pool's reads on every world, and a read that
+ *                      moves usually moves BETWEEN TWO OLD WORDINGS, which no reader can
+ *                      tell from a rewrite of the sentence they had.
+ *   under the argmax   about one quarter moves, and EVERY read that moves moves TO THE NEW
+ *                      wording. Nothing already drawn is disturbed by the arrival of a
+ *                      sibling it did not lose to.
+ *
+ * The owner's standing rule is NEVER TRIM, quadruple everything: a pool must be able to
+ * grow forever, one wording at a time, at the minimum disturbance. The price is one extra
+ * one-time re-index, taken at Shift 1 where every sentence is being rewritten anyway; the
+ * classifier prints RE-INDEXED per cell and the owner's veto stands on that record.
+ *
+ * ⛔ A FACT NEVER MOVES. The eligible SET is untouched by this function: the audience
+ * filter, the anchoring filter and the state-dimension filter have already run, and the
+ * argmax only chooses among members the old draw could equally have chosen. Same pool,
+ * same claim set, a different member of it.
+ *
+ * ⛔ WHY THE MODULUS SURVIVES AS A FALLBACK, AND WHY THAT IS NOT TWO REGIMES. A pool
+ * whose members carry no `vid` has NO stable id, so there is nothing append-safe to hash
+ * on; keying such a pool on a position inside the already-filtered `eligible` array would
+ * be exactly as unstable as the modulus while looking stable, which is worse than the
+ * modulus. The causal register (`dossierCausalProse.generated.js`) is that corpus today:
+ * it carries no `vid` on any variant, and it draws through this same function, so the
+ * fallback is what keeps this car's promise of ZERO moved reads there. The six STATE
+ * leaves carry a `vid` on all 2,266 variants, the shift register's `vids` digest is the
+ * door that keeps them, and `tests/domain/stateProseKernel.test.js` asserts by sweep that
+ * the shipped state corpus never reaches the fallback line, so a leaf that silently lost
+ * its ids would red rather than quietly revert to the unstable draw.
+ *
+ * Ties are broken by the LOWER vid, so a 32-bit collision is decided by the annex and not
+ * by the order the audience filter happened to leave behind.
+ *
  * @param {ReadonlyArray<StateProseVariant>} eligible
  * @param {string} blockId
  * @param {string} poolKey
@@ -304,7 +380,21 @@ export function fillSlots(text, slots) {
 export function drawVariant(eligible, blockId, poolKey, seed) {
   if (!Array.isArray(eligible) || eligible.length === 0) return null;
   if (!seed) return eligible[0];
-  return eligible[avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length];
+  const parent = `${seed}::${blockId}::${poolKey}`;
+  let best = eligible[0];
+  let bestVid = stableVid(best);
+  if (bestVid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];
+  let bestHash = avalanche32(fnv1a32(`${parent}::v${bestVid}`));
+  for (let i = 1; i < eligible.length; i += 1) {
+    const variant = eligible[i];
+    const vid = stableVid(variant);
+    if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];
+    const digest = avalanche32(fnv1a32(`${parent}::v${vid}`));
+    if (digest > bestHash || (digest === bestHash && vid < bestVid)) {
+      best = variant; bestHash = digest; bestVid = vid;
+    }
+  }
+  return best;
 }
 
 /**

@@ -47,6 +47,12 @@
  * unobservable filter. Every cell still carries `drawAgrees` — whether the audible-pool
  * recomputation would have chosen the same variant — because the gap between the two is the
  * anchoring filter's own footprint, and it is a printed figure rather than a silence.
+ *
+ * ⚠ The first sentence of that paragraph is now HISTORY: since REWRITE car 8a-1 `drawVariant`
+ * selects by ARGMAX over each variant's stable id (law 6) rather than by `hash % length`. The
+ * REASON the variant is identified from the rendered sentence is unchanged and is the whole
+ * point — this module still cannot see the slot bag — but `poolIndex` must carry `vid` for
+ * the `drawAgrees` re-derivation to be about the same draw the page took. See there.
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -79,16 +85,32 @@ export const textDigest = (text) => sha256(String(text)).slice(0, 16);
 
 /**
  * Every pool of the R1 leaves, keyed `block :: pool`, variants in AUTHORED ORDER.
- * @returns {Promise<Map<string, Array<{idx: number, text: string, angle: string, marks: string[], slots: string[]}>>>}
+ *
+ * ⛔ `vid` IS CARRIED AND IS NOT DECORATION. `cellsOfTown` re-derives the draw over the
+ * AUDIBLE pool to measure the anchoring filter's footprint (`drawAgrees`), and since law 6
+ * the draw is an ARGMAX over the stable id: a pool shape that dropped `vid` would send that
+ * re-derivation down `drawVariant`'s modulus fallback and measure the difference between two
+ * DRAWS instead of the difference between two POOLS. Driven at car 8a-1 over the DRIFT run's
+ * 73,284 cells: 5,966 under the modulus draw at 29ec62425; 47,227 under law 6 with `vid`
+ * stripped, which is the nonsense figure; 3,914 under law 6 with it carried. The footprint
+ * genuinely SHRANK, and for a reason the draw makes obvious — dropping a slot-unanchored
+ * variant moves the argmax only when that variant was the winner, where the modulus re-rolls
+ * on any change of length at all.
+ * @returns {Promise<Map<string, Array<{idx: number, vid: number|undefined, text: string, angle: string, marks: string[], slots: string[]}>>>}
  */
 export async function poolIndex() {
-  /** @type {Map<string, Array<{idx: number, text: string, angle: string, marks: string[], slots: string[]}>>} */
+  /** @type {Map<string, Array<{idx: number, vid: number|undefined, text: string, angle: string, marks: string[], slots: string[]}>>} */
   const out = new Map();
   for (const entry of await loadStateLeaves()) {
     const key = `${entry.block} :: ${entry.pool}`;
     const seat = out.get(key) || [];
     seat.push({
-      idx: entry.idx, text: entry.text, angle: entry.angle, marks: entry.marks, slots: entry.slots,
+      idx: entry.idx,
+      vid: entry.vid,
+      text: entry.text,
+      angle: entry.angle,
+      marks: entry.marks,
+      slots: entry.slots,
     });
     out.set(key, seat);
   }

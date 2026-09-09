@@ -1,5 +1,5 @@
 /**
- * stateProseKernel.test.js — LANE P-2: the reader's five laws, proven.
+ * stateProseKernel.test.js — LANE P-2: the reader's six laws, proven.
  *
  * The kernel is small and everything it does is load-bearing, so each law gets a pin
  * that FAILS when the law is removed rather than a pin that merely exercises the happy
@@ -19,6 +19,10 @@
  *      where the corpus and the reader can be read against each other. Splitting it that
  *      way is deliberate: the defect was a disagreement between the annex's STATE-KEY and
  *      the projection's pool key, and neither file alone can see both halves.
+ *   6. THE INDEX-STABLE DRAW (REWRITE car 8a-1) — pinned as the PROPERTY that motivated
+ *      it rather than as a percentage: appending a wording moves no read between two old
+ *      wordings, and the shipped modulus is re-spelled in the same arm so the contrast is
+ *      measured in one run instead of quoted from a receipt.
  *
  * The corpus is read live from the projected desk leaves, not from a fixture: a pin
  * over an invented pool would prove the kernel works on prose that does not ship.
@@ -50,6 +54,30 @@ import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generate
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+
+/**
+ * The hash pair, re-spelled here so every key this file checks is checked against an
+ * INDEPENDENT fold rather than against the kernel's own. Module scope because both the
+ * face arms (ARCH §2.6) and the law-6 draw arms need it, and two copies of a reference
+ * fold in one file is two things that can drift apart.
+ * @param {string} key
+ * @returns {number}
+ */
+function referenceHash(key) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  let x = h >>> 0;
+  x ^= x >>> 16;
+  x = Math.imul(x, 0x85ebca6b);
+  x ^= x >>> 13;
+  x = Math.imul(x, 0xc2b2ae35);
+  x ^= x >>> 16;
+  return x >>> 0;
+}
 
 /**
  * DS-ECO-8's rungs, SPLIT BY REACHABILITY (lane PT, 2026-08-03).
@@ -491,22 +519,6 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
     .flatMap(([blockId, block]) => Object.entries(block.pools)
       .map(([poolKey, pool]) => ({ desk, blockId, poolKey, pool }))));
 
-  /** The hash pair, re-spelled here so the key can be checked against an INDEPENDENT fold. */
-  function referenceHash(key) {
-    let h = 0x811c9dc5;
-    for (let i = 0; i < key.length; i++) {
-      h ^= key.charCodeAt(i);
-      h = Math.imul(h, 0x01000193) >>> 0;
-    }
-    let x = h >>> 0;
-    x ^= x >>> 16;
-    x = Math.imul(x, 0x85ebca6b);
-    x ^= x >>> 13;
-    x = Math.imul(x, 0xc2b2ae35);
-    x ^= x >>> 16;
-    return x >>> 0;
-  }
-
   it('⭐ A ONE-FACE VARIANT NEVER HASHES, counted on the hash pair itself', () => {
     const spy = vi.spyOn(Math, 'imul');
     try {
@@ -632,8 +644,326 @@ describe('the state-prose reader — the wording face (ARCH §2.6)', () => {
     expect(hashKey(`s::B::P::w`)).toBe(referenceHash('s::B::P::w'));
     expect(hashKey(''), 'the empty key is still a digest').toBe(referenceHash(''));
     // And it is the pair the DRAW uses, proven through `drawVariant` rather than restated.
-    const pool = Array.from({ length: 7 }, (_, i) => ({ text: `v${i}` }));
-    expect(drawVariant(pool, 'B', 'P', 'sx').text)
-      .toBe(pool[referenceHash('sx::B::P') % 7].text);
+    // Law 6 changed WHAT the draw does with the digest (an argmax over per-variant keys,
+    // not a modulus over the parent key) and changed NOTHING about which digest it is, so
+    // this arm now re-spells the argmax against the independent fold. A pool with no `vid`
+    // still takes the modulus, and that limb is spelled out too: both branches of the draw
+    // are held against `referenceHash`, or a second fold could enter through the one this
+    // arm stopped looking at.
+    const idless = Array.from({ length: 7 }, (_, i) => ({ text: `v${i}` }));
+    expect(drawVariant(idless, 'B', 'P', 'sx').text, 'the fallback limb: a modulus')
+      .toBe(idless[referenceHash('sx::B::P') % 7].text);
+    const withIds = Array.from({ length: 7 }, (_, i) => ({ text: `v${i}`, vid: i + 1 }));
+    const winner = withIds.reduce((best, variant) => (
+      referenceHash(`sx::B::P::v${variant.vid}`) > referenceHash(`sx::B::P::v${best.vid}`)
+        ? variant : best));
+    expect(drawVariant(withIds, 'B', 'P', 'sx').text, 'the law-6 limb: an argmax')
+      .toBe(winner.text);
+  });
+});
+
+/**
+ * LAW 6 — THE INDEX-STABLE DRAW (ARCH §13 row 22; SIGNED at SITTING §N.2; REWRITE car 8a-1).
+ *
+ * The draw moved from `hash(seed::block::pool) % eligible.length` to the ARGMAX of
+ * `hash(seed::block::pool::v<vid>)` over the eligible set. Three properties decide whether
+ * that was worth a one-time re-index, and all three are measured here rather than quoted:
+ *
+ *   UNIFORMITY     the new draw must still spread a pool's reads evenly, or the rewrite
+ *                  wave's later wordings are read by fewer towns than its earlier ones.
+ *   APPEND-SAFETY  the reason the change exists. Appending a fourth wording must move about
+ *                  a QUARTER of the pool's reads, and every read that moves must move TO
+ *                  the new wording. The shipped modulus is measured beside it in the same
+ *                  arm, because "about a quarter" means nothing without the "about three
+ *                  quarters" it replaced.
+ *   IDENTITY       the same call twice is the same variant (A4), which is THE PROMISE at
+ *                  the level this function owns.
+ *
+ * And one arm that is not a property of the draw at all but of the CORPUS: the shipped
+ * state leaves must never reach the modulus fallback, or a leaf that lost its `vid`s would
+ * quietly revert to the unstable draw and no reader would see it happen.
+ */
+describe('the state-prose reader — law 6, the index-stable draw', () => {
+  /** The six state leaves, whole, read live. */
+  const STATE_POOLS = [
+    ['economy', DOSSIER_STATE_PROSE_ECONOMY], ['power', DOSSIER_STATE_PROSE_POWER],
+    ['defense', DOSSIER_STATE_PROSE_DEFENSE], ['warFaith', DOSSIER_STATE_PROSE_WAR_FAITH],
+    ['stressors', DOSSIER_STATE_PROSE_STRESSORS], ['general', DOSSIER_STATE_PROSE_GENERAL],
+  ].flatMap(([desk, corpus]) => Object.entries(corpus)
+    .flatMap(([blockId, block]) => Object.entries(block.pools)
+      .map(([poolKey, pool]) => ({ desk, blockId, poolKey, pool }))));
+
+  /** 10,000 fixed seeds: a deterministic pin, never a sample that can drift run to run. */
+  const SEEDS = Object.freeze(Array.from({ length: 10_000 }, (_, i) => `uniformity-seed-${i}`));
+
+  /**
+   * The SHIPPED draw as it stood at 29ec62425, re-spelled so the append-safety arm can
+   * measure the old world and the new one in the same run. A contrast quoted from a
+   * receipt is a contrast nobody can re-derive.
+   * @param {ReadonlyArray<object>} eligible
+   * @param {string} blockId @param {string} poolKey @param {string} seed
+   * @returns {object}
+   */
+  function modulusDraw(eligible, blockId, poolKey, seed) {
+    return eligible[referenceHash(`${seed}::${blockId}::${poolKey}`) % eligible.length];
+  }
+
+  it('⭐ THE SHIPPED STATE CORPUS NEVER REACHES THE MODULUS FALLBACK', () => {
+    // The fallback exists for the causal register, which carries no `vid` on any variant
+    // (§13 row 14: a reader, no caller). It must never be the state corpus's branch: a leaf
+    // that lost its ids would revert to the unstable draw silently, and the whole value of
+    // row 22 would leak away one regeneration at a time. Measured on the live leaves.
+    const idless = STATE_POOLS.flatMap(({ desk, blockId, poolKey, pool }) => pool
+      .map((variant, at) => ({ at, vid: variant.vid }))
+      .filter((row) => !Number.isInteger(row.vid) || row.vid < 0)
+      .map((row) => `${desk} :: ${blockId} :: ${poolKey} #${row.at} vid=${String(row.vid)}`));
+    expect(idless.slice(0, 5), 'a shipped state variant with no stable id').toEqual([]);
+    // ⛔ AND THE INVARIANT THE ARGMAX ACTUALLY RESTS ON: within one pool the ids are
+    // DISTINCT. Two variants sharing an id share a draw key, so the pool's reads would
+    // collapse onto whichever the tie rule happened to keep and the other would become
+    // unreachable prose. The projector's `vids` digest pins the values; this pins the
+    // property that makes them usable as a key.
+    const collisions = STATE_POOLS
+      .filter(({ pool }) => new Set(pool.map((v) => v.vid)).size !== pool.length)
+      .map(({ desk, blockId, poolKey }) => `${desk} :: ${blockId} :: ${poolKey}`);
+    expect(collisions.slice(0, 5), 'two variants of one pool sharing an id').toEqual([]);
+    // Non-vacuity on both axes: the sweep found the corpus ARCH counts, and the ids it
+    // found are the annex row numbers rather than a constant somebody defaulted in.
+    const variants = STATE_POOLS.reduce((sum, row) => sum + row.pool.length, 0);
+    expect(STATE_POOLS.length, 'the pools swept').toBeGreaterThanOrEqual(708);
+    expect(variants, 'the variants swept').toBeGreaterThanOrEqual(2266);
+    // The ids are the ANNEX ROW NUMBERS: contiguous from the pool's first row, in order.
+    // 701 pools number from 1; the seven that lead with a `canonical` row number from 0,
+    // and naming them here is what stops a later reader "tidying" the zero away.
+    const misNumbered = STATE_POOLS
+      .filter(({ pool }) => pool.some((v, at) => v.vid !== pool[0].vid + at))
+      .map(({ desk, blockId, poolKey }) => `${desk} :: ${blockId} :: ${poolKey}`);
+    expect(misNumbered.slice(0, 5), 'a pool whose ids are not its annex rows').toEqual([]);
+    const zeroLed = STATE_POOLS.filter(({ pool }) => pool[0].vid === 0)
+      .map(({ blockId, poolKey }) => `${blockId} :: ${poolKey}`);
+    expect(zeroLed.sort(), 'the seven canonical-led pools, named').toEqual([
+      'DS-ECO-3 :: ADEQUATE',
+      'DS-ECO-3 :: SHORTAGE × trade-dependent',
+      'DS-ECO-3 :: SURPLUS × trade-dependent',
+      'DS-ECO-6 :: TIER: minor shadow activity (≥3)',
+      'DS-ECO-6 :: TIER: significant off-book activity (≥15)',
+      'DS-ECO-7 :: CATALOG',
+      'DS-ECO-7 :: TALLIES',
+    ]);
+  });
+
+  it('⭐ THE CAUSAL REGISTER STILL TAKES THE MODULUS, so this car moved none of its reads', () => {
+    // The other side of the same coin, and the reason this car can claim ZERO moved reads
+    // outside the state corpus. R2 carries no ids, so `drawVariant` must agree with the
+    // pre-cure draw on it, seed for seed, over every family and arm.
+    const drift = [];
+    let draws = 0;
+    for (const [familyId, family] of Object.entries(DOSSIER_CAUSAL_PROSE)) {
+      for (const [poolKey, pool] of Object.entries(family.pools || {})) {
+        if (!Array.isArray(pool) || pool.length === 0) continue;
+        for (const seed of ['a', 'world-7', 'zz', 'wizard_news.4.applied.evt4']) {
+          draws += 1;
+          if (drawVariant(pool, familyId, poolKey, seed)
+            !== modulusDraw(pool, familyId, poolKey, seed)) {
+            drift.push(`${familyId} :: ${poolKey} :: seed "${seed}"`);
+          }
+        }
+      }
+    }
+    expect(drift).toEqual([]);
+    expect(draws, 'and the sweep found the register').toBeGreaterThanOrEqual(4 * 78);
+  });
+
+  it('⭐ UNIFORM ON THE THREE-VARIANT CORPUS: chi-square 4.20 on 5,470,000 reads', () => {
+    // §N.2's reference figures are 33.30 / 33.35 / 33.35 per cent, POOLED over the corpus.
+    // MEASURED here at this tip over 547 three-variant pools x 10,000 fixed seeds:
+    // 33.312 / 33.375 / 33.313 per cent, deepest departure from one third 0.0413 pp,
+    // chi-square 4.201 on 2 degrees of freedom.
+    //
+    // ⛔ TWO FLOORS THIS ARM REFUSES TO USE, both of which car 8a's brief asked for and
+    // both of which a PERFECTLY UNIFORM draw fails about as often as it passes.
+    //
+    //   "every pool within 2 SE" — 547 pools is 1,641 share measurements, and the largest
+    //   of 1,641 standard normal deviations is about 3.4 SE by construction. Measured:
+    //   3.43 SE, at economy :: DS-ECO-11 :: TERRAIN: Forest. Passing that floor would mean
+    //   the draw was suspiciously FLAT, which is a different defect, not a healthy one.
+    //
+    //   "the pooled share within 2 SE" — at n = 5,470,000 the 2 SE band is 0.081 pp wide
+    //   and there are three shares in it, so a uniform draw lands outside about one time
+    //   in seven. It did, on the first run of this arm: 33.375 per cent against a band
+    //   ending at 33.374.
+    //
+    // What replaces them is the textbook test the two were reaching for — a chi-square
+    // goodness-of-fit at the pooled grain, held at the 0.001 critical value — plus an
+    // absolute tolerance in percentage points, which is the thing a reader actually cares
+    // about, and a per-pool ceiling loose enough to be a uniform draw's tail and far
+    // tighter than any real bias: a draw favouring low ids reads TENS of SE out.
+    const CHI2_CRITICAL_DF2_P001 = 13.816;
+    const pools = STATE_POOLS.filter((row) => row.pool.length === 3);
+    // Tallied by the pool's own SLOT, not by the id value, so that the seven pools whose
+    // annex rows run 0..2 pool with the 540 whose rows run 1..3 instead of splitting the
+    // three cells into five.
+    const tally = [0, 0, 0];
+    const perPoolSE = Math.sqrt((1 / 3) * (2 / 3) / SEEDS.length) * 100;
+    let maxZ = 0;
+    let maxAt = '';
+    for (const { desk, blockId, poolKey, pool } of pools) {
+      const local = [0, 0, 0];
+      for (const seed of SEEDS) {
+        const at = pool.indexOf(drawVariant(pool, blockId, poolKey, seed));
+        local[at] += 1;
+        tally[at] += 1;
+      }
+      for (let at = 0; at < 3; at += 1) {
+        const z = Math.abs((local[at] / SEEDS.length) * 100 - 100 / 3) / perPoolSE;
+        if (z > maxZ) { maxZ = z; maxAt = `${desk} :: ${blockId} :: ${poolKey} slot ${at}`; }
+      }
+    }
+    const reads = pools.length * SEEDS.length;
+    const expected = reads / 3;
+    const chi2 = tally.reduce((sum, seen) => sum + ((seen - expected) ** 2) / expected, 0);
+    const deepest = Math.max(...tally.map((seen) => Math.abs((seen / reads) * 100 - 100 / 3)));
+    expect(chi2, `the pooled goodness of fit over ${reads} reads`)
+      .toBeLessThan(CHI2_CRITICAL_DF2_P001);
+    expect(deepest, 'the deepest pooled departure from one third, in points').toBeLessThan(0.15);
+    expect(maxZ, `the deepest per-pool deviation, at ${maxAt}`).toBeLessThan(4.5);
+    // Non-vacuity on both axes: the sweep found the corpus, and it reached every slot.
+    expect(pools.length, 'three-variant pools swept').toBeGreaterThanOrEqual(500);
+    expect(tally.filter((seen) => seen === 0), 'an unreachable slot').toEqual([]);
+  });
+
+  it('⭐ APPEND-SAFE: a fourth wording moves about a QUARTER, and every mover moves TO it', () => {
+    // THE ROW'S GROUND, and the reason the modulus is measured in the same loop. On the
+    // shipped `% length` draw an appended wording re-rolls about three quarters of a pool's
+    // reads and most movers land on a DIFFERENT OLD wording, which reads to a player as the
+    // sentence they had being rewritten. Under law 6 a mover can only land on the newcomer.
+    // 2,000 of the 10,000 seeds: 547 pools x 2,000 seeds x 4 draws is already 4.4 million
+    // draws, and the property below is exact rather than statistical, so more seeds buy
+    // wall-clock rather than confidence.
+    const APPEND_SEEDS = SEEDS.slice(0, 2000);
+    const pools = STATE_POOLS.filter((row) => row.pool.length === 3);
+    let stableMoved = 0;
+    let stableToNew = 0;
+    let modulusMoved = 0;
+    let modulusToNew = 0;
+    let reads = 0;
+    const betweenOld = [];
+    for (const { desk, blockId, poolKey, pool } of pools) {
+      // A LAWFUL APPEND: the NEXT annex row, which is 4 on the 540 pools numbered 1..3 and
+      // 3 on the seven numbered 0..2. Planting a fixed 4 everywhere would leave a hole in
+      // the seven and measure a corpus the annex idiom forbids.
+      const nextVid = pool[pool.length - 1].vid + 1;
+      const planted = {
+        angle: 'ledger', text: 'the planted fourth wording', slots: [], vid: nextVid,
+      };
+      const grown = [...pool, planted];
+      for (const seed of APPEND_SEEDS) {
+        reads += 1;
+        const wasStable = drawVariant(pool, blockId, poolKey, seed);
+        const nowStable = drawVariant(grown, blockId, poolKey, seed);
+        if (wasStable !== nowStable) {
+          stableMoved += 1;
+          if (nowStable === planted) stableToNew += 1;
+          else betweenOld.push(`${desk} :: ${blockId} :: ${poolKey} :: v${wasStable.vid} -> v${nowStable.vid}`);
+        }
+        const wasMod = modulusDraw(pool, blockId, poolKey, seed);
+        const nowMod = modulusDraw(grown, blockId, poolKey, seed);
+        if (wasMod !== nowMod) {
+          modulusMoved += 1;
+          if (nowMod === planted) modulusToNew += 1;
+        }
+      }
+    }
+    // ⛔ THE PROPERTY, not the percentage: NOT ONE read moves between two old wordings.
+    expect(betweenOld.slice(0, 5), 'a read that moved between two OLD wordings').toEqual([]);
+    expect(stableMoved, 'and every mover moved to the new wording').toBe(stableToNew);
+    const stableShare = (stableMoved / reads) * 100;
+    const modulusShare = (modulusMoved / reads) * 100;
+    const modulusToNewShare = (modulusToNew / modulusMoved) * 100;
+    // About a quarter: 1/(n+1) at n = 3 is 25 %. MEASURED at this tip over 1,094,000
+    // reads: law 6 moves 25.01 %, all 273,643 of them to the new wording, none between two
+    // old ones. The band is generous because it is a property of the hash rather than a
+    // tuned constant.
+    expect(stableShare).toBeGreaterThan(23);
+    expect(stableShare).toBeLessThan(27);
+    // And the contrast the row rests on, MEASURED in the same loop: the modulus moves
+    // 74.99 % of the reads, and only 33.33 % of THOSE land on the newcomer, so 546,952
+    // reads move between two old wordings that this car's draw leaves alone. Both halves
+    // pinned, or "about a quarter" is a number with nothing to be better than.
+    expect(modulusShare).toBeGreaterThan(70);
+    expect(modulusShare).toBeLessThan(80);
+    expect(modulusToNewShare).toBeLessThan(40);
+    expect(reads, 'the reads measured').toBeGreaterThanOrEqual(500 * APPEND_SEEDS.length);
+  });
+
+  it('⭐ A4 — the same call twice is the same variant, and the audience filter cannot move it', () => {
+    // THE PROMISE at the level this function owns. The second half is the point of keying
+    // on `vid` rather than on a position: dropping a `dm-only` variant from the front of a
+    // pool shifts every later INDEX, and under the modulus that alone re-rolls the read.
+    const pool = [
+      { angle: 'ledger', text: 'one', slots: [], vid: 1 },
+      { angle: 'street', text: 'two', slots: [], vid: 2 },
+      { angle: 'visitor', text: 'three', slots: [], vid: 3 },
+    ];
+    expectNoSeedFailures(collectSeedFailures(['a', 'world-7', 'zz'], (seed) => {
+      const first = drawVariant(pool, 'DS-X-1', 'P', seed);
+      expect(drawVariant(pool, 'DS-X-1', 'P', seed), 'repeat-call identity').toBe(first);
+    }), 'the same call twice draws the same variant');
+    // The filter arm: the SAME three variants reached through a pool that also holds a
+    // covert one draw the same sentence, because the key never mentions a position.
+    const withCovert = [
+      { angle: 'ledger', text: 'covert', slots: [], vid: 4, marks: ['dm-only'] },
+      ...pool,
+    ];
+    const drift = [];
+    for (let i = 0; i < 400; i++) {
+      const seed = `filter-${i}`;
+      const plain = drawVariant(pool, 'DS-X-1', 'P', seed);
+      const filtered = drawVariant(
+        eligibleVariants(withCovert, { slots: {}, audience: AUDIENCE_PLAYER }),
+        'DS-X-1', 'P', seed,
+      );
+      if (plain.vid !== filtered.vid) drift.push(`seed "${seed}": v${plain.vid} vs v${filtered.vid}`);
+    }
+    expect(drift.slice(0, 5), 'a covert sibling moved a player read').toEqual([]);
+  });
+
+  it('⭐ SEEDLESS IS STILL CANONICAL-AT-ZERO, and takes no argmax (law 4 survives law 6)', () => {
+    const pool = [
+      { angle: 'ledger', text: 'one', slots: [], vid: 1 },
+      { angle: 'street', text: 'two', slots: [], vid: 2 },
+    ];
+    expectNoSeedFailures(collectSeedFailures(['', null, undefined], (seedless) => {
+      expect(drawVariant(pool, 'B', 'P', seedless).text, 'index 0 of the eligible list')
+        .toBe('one');
+    }), 'all three spellings of no seed read index 0');
+    const spy = vi.spyOn(Math, 'imul');
+    try {
+      drawVariant(pool, 'B', 'P', '');
+      expect(spy.mock.calls.length, 'and a seedless draw takes no hash at all').toBe(0);
+      drawVariant(pool, 'B', 'P', 's');
+      expect(spy.mock.calls.length, 'while the same witness sees the argmax run')
+        .toBeGreaterThan(0);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it('⭐ A FACT NEVER MOVES: the drawn variant is a member of the same eligible set as before', () => {
+    // The car's own fence. Law 6 chooses differently INSIDE a set it does not touch, so on
+    // every shipped state pool and every seed the newly drawn variant must be one the
+    // shipped draw could also have returned. Proven as set membership rather than argued.
+    const escapes = [];
+    let checks = 0;
+    for (const { desk, blockId, poolKey, pool } of STATE_POOLS) {
+      const members = new Set(pool);
+      for (const seed of ['a', 'b', 'world-7', 'Thornwall::1', 'zz', '19']) {
+        checks += 1;
+        const drawn = drawVariant(pool, blockId, poolKey, seed);
+        if (!members.has(drawn)) escapes.push(`${desk} :: ${blockId} :: ${poolKey} :: "${seed}"`);
+      }
+    }
+    expect(escapes).toEqual([]);
+    expect(checks, 'the draws checked').toBeGreaterThanOrEqual(708 * 6);
   });
 });

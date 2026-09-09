@@ -401,8 +401,15 @@ describe('THE MAP, total in both directions', () => {
 describe('⛔ the occupier-holdings SLOT-ROLE INVERSION', () => {
   test('the pool speaks from the OCCUPIED town\'s chair: {counterpart} holds, {settlement} is held', () => {
     const war = warReadings('thornwall', OCCUPIED_WORLD);
+    // ⚠ A LOCAL SEED, AND IT MOVED AT REWRITE car 8a-1. The direction is demonstrated by
+    // NAMES — Eastmarch as the holder, Thornwall as a place held — so this arm needs the one
+    // variant of `occupierHoldings.stretchedThin` that fills BOTH slots. The index-stable
+    // draw (kernel law 6) re-drew every pool once and the file's shared `thornwall` seed now
+    // lands on the counterforce variant, which names the settlement alone and could not carry
+    // the assertion. The seed is overridden HERE rather than on the shared `DM` constant, so
+    // this arm's need does not silently re-draw every other arm in the file.
     const desk = warFaithStateProse({ id: 'thornwall', name: 'Thornwall', config: {} },
-      { settlementId: 'thornwall', war }, DM);
+      { settlementId: 'thornwall', war }, { ...DM, seed: 'thornwall-b' });
     const line = desk.warHoldings.sentence;
     // Eastmarch holds three towns, two of them resisted ⇒ stretchedThin.
     expect(war.occupierPosition.stretchedThin).toBe(true);
@@ -538,7 +545,19 @@ describe('the faith desk over a settlement the pulse actually built', () => {
     expect(desk.creedLegitimacy.provenance.poolKey)
       .toBe(`LEGITIMACY: ${model.ranks.find((d) => d.isPatron).band.label}`);
     // The creed name reached the slot: the sentence names the deity the pulse seated.
-    expect(desk.creedStanding.sentence).toContain('Vaelith');
+    //
+    // ⚠ ON ITS OWN SEED, AND THAT SEED MOVED AT REWRITE car 8a-1. Only ONE of the three
+    // variants of `STANDING: ascendant` fills `{creed}`; the other two say "the creed" and
+    // "this faith" in their own words, which is the pool degrading exactly as the annex
+    // intends. The index-stable draw (kernel law 6) re-drew every pool once and the file's
+    // shared `thornwall` seed now lands on a slot-free variant, so the slot question is asked
+    // on a seed that reaches the naming variant. The desk above keeps its own seed because
+    // every other assertion in this arm reads a POOL KEY, which no seed can move.
+    const named = warFaithStateProse(settlement, { faith: model, hasPatron: true },
+      { ...DM, seed: 'thornwall-b' });
+    expect(named.creedStanding.provenance.poolKey, 'the same pool, a different draw')
+      .toBe('STANDING: ascendant');
+    expect(named.creedStanding.sentence).toContain('Vaelith');
   });
 
   test('the patron fall is keyed on the FLAGGED record\'s own cause token', () => {

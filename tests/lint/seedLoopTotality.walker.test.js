@@ -275,7 +275,11 @@ const FROZEN_BARE_SEED_LOOPS = Object.freeze({
   'tests/domain/rumorPhrasePools.test.js': 3,
   'tests/domain/settlementStrategy.test.js': 3,
   'tests/domain/simulationSpine.test.js': 1,
-  'tests/domain/stateProseKernel.test.js': 1,
+  // 'tests/domain/stateProseKernel.test.js': 1 — BANKED at REWRITE car 8a-1. The law-6 arms
+  // adopted collectSeedFailures + expectNoSeedFailures, which exempts the file whole, so the
+  // scan reads 0 there and the row is deleted rather than lowered. Shrink-only, as the header
+  // requires: a row left at 1 over a converted file is an inventory that has stopped being an
+  // inventory.
   'tests/domain/warMachineObeysPolitics.test.js': 2,
   'tests/kernel/proseHash.test.js': 1,
   'tests/pdf/countersealStructuredPath.test.js': 1,

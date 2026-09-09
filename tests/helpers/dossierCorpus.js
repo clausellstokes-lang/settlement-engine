@@ -50,6 +50,12 @@ const FACTION_DYNAMICS = join(ROOT, 'src/generators/factionDynamics.js');
  * @property {string} pool
  * @property {string} poolId
  * @property {number} idx
+ * @property {number} [vid] the leaf's STABLE ID, R1 only. `idx` is the variant's position in
+ *   the pool array and moves when anything is inserted before it; `vid` is the annex row
+ *   number, which never moves, and it is what `drawVariant` keys the index-stable draw on
+ *   (law 6). They differ by one on the 701 pools numbered from 1 and coincide on the seven
+ *   led by a `canonical` row numbered 0, so a reader that wants the DRAW's coordinate must
+ *   take this field and never `idx`.
  * @property {string} angle
  * @property {string[]} marks
  * @property {string[]} slots
@@ -99,6 +105,7 @@ export async function loadStateLeaves() {
             pool,
             poolId: `${file}::${block}::${pool}`,
             idx,
+            vid: v.vid,
             angle: v.angle || '',
             marks: Array.isArray(v.marks) ? [...v.marks] : [],
             slots: Array.isArray(v.slots) ? [...v.slots] : [],

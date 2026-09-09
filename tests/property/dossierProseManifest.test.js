@@ -281,9 +281,29 @@ describe('the two controls no one-audience manifest can see', () => {
     // live mixed pool — `DS-ECO-6 :: TIER: minor shadow activity (≥3)`, 309 positions — could
     // not differ by construction. The whole non-vacuity of this control rested on ONE pool and
     // the recipe blinded the other.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(345);
+    //
+    // ⭐ 345 BECAME 309 AT REWRITE car 8a-1, A DECLARED CONSEQUENCE OF THE INDEX-STABLE DRAW
+    // (law 6), and the cause is exactly one draw. `DS-POW-1 :: governanceFractured true` holds
+    // four variants of which ONE is covert (v3). Under the shipped modulus the DM read that
+    // covert variant and the player read v1, so the faces differed; under the argmax the DM's
+    // winner over the four is v4, which the player can also see, so the faces agree. The
+    // remaining 309 are `DS-ECO-6 :: TIER: minor shadow activity (≥3)`, whose three covert
+    // variants leave the player exactly one eligible line, so its faces differ by
+    // construction and no draw rule can make them agree.
+    //
+    // ⚠ AND THE THING A READER OF THIS PIN MUST KNOW: 345, 309 and 36 ARE NOT THAT MANY
+    // INDEPENDENT FACTS. Every configuration of the DRIFT corpus carries the same `_seed`
+    // (`golden-master-v3`) and the draw key is `${seed}::${blockId}::${poolKey}`, so one pool
+    // has ONE drawn variant across all 525 towns and a per-pool count is a town count wearing
+    // a draw's clothes. The 36 DS-POW-1 positions were one coin landing one way and are now
+    // one coin landing the other. So this control's breadth — "over this many of the twelve
+    // mixed pools" — is re-rolled by ANY change to the draw, and it fell from two pools to one
+    // here without anything about the audience filter moving at all. Widening it needs the
+    // recorder's `--seeds` family rather than DRIFT, which is a car of its own; recorded here
+    // so the next reader inherits the finding instead of re-deriving it.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(309);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
-      'over this many of the twelve mixed pools').toBe(2);
+      'over this many of the twelve mixed pools').toBe(1);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
     // check above runs only over positions present on BOTH faces, so a position that exists on
     // one face alone was skipped and merely printed. The two directions are not the same fact:

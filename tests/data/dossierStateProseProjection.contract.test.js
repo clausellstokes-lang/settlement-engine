@@ -1084,6 +1084,55 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
     expect(META_ROWS.reduce((n, r) => n + r.meta.variantCount, 0)).toBe(pinned);
   });
 
+  it('⭐ PRINTS THE ONE-TIME RE-INDEX — the owner\'s veto surface for Shift 1\'s draw half', () => {
+    // SITTING §N.2 signed the index-stable draw and left the owner a veto that "stands until
+    // that record is signed". The record is the classifier's per-cell diff across the draw
+    // change, and it lives on the register's `draw-formula` row because that is the mechanism
+    // that moved. It is DECLARED rather than pinned: no arm here can recompute it, since it
+    // takes a DRIFT run at two different shas, and a number nobody can recompute must at
+    // least be printed and held to its own arithmetic rather than left to be believed.
+    const row = SHIFT_REGISTER.mechanisms.find((m) => m.id === 'draw-formula');
+    const rec = row.reIndexed;
+    expect(rec, 'the draw-formula row must carry its declared re-index').toBeTruthy();
+    const classes = rec.byClass;
+    const moved = classes['RE-INDEXED'];
+    const pct = (n) => `${((n / rec.cells) * 100).toFixed(2)} %`;
+    process.stdout.write(`\n[re-index] REWRITE car 8a-1 over ${rec.corpus}, base ${rec.baseSha}\n`
+      + `  cells ${rec.cells}\n`
+      + `  RE-INDEXED   ${String(moved).padStart(6)}  ${pct(moved)}   <- the one-time cost\n`
+      + `  UNCHANGED    ${String(classes.UNCHANGED).padStart(6)}  ${pct(classes.UNCHANGED)}\n`
+      + `  REPLACED     ${String(classes.REPLACED).padStart(6)}  <- a FACT would have moved\n`
+      + `  WORDING-ONLY ${String(classes['WORDING-ONLY']).padStart(6)}   ADDITIVE ${classes.ADDITIVE}`
+      + `   ADDED ${classes.ADDED}   REMOVED ${classes.REMOVED}\n`
+      + `  dm ${rec.byAudience.dm.reIndexed} of ${rec.byAudience.dm.cells}`
+      + ` · player ${rec.byAudience.player.reIndexed} of ${rec.byAudience.player.cells}\n`
+      + `  blocks touched ${rec.blocksTouched} · untouched ${rec.blocksUntouched}`
+      + ` · deepest ${rec.deepest} · shallowest ${rec.shallowest}\n`
+      + `  ${rec.measuredBy}\n`);
+    // ⛔ THE FENCE THE CAR IS SIGNED AGAINST, asserted and not merely printed. A draw change
+    // may re-index; it may NOT replace a pool, rewrite a sentence, add a piece, or change the
+    // roster. Any of those in this record would mean the car did something else as well.
+    expect({
+      REPLACED: classes.REPLACED,
+      'WORDING-ONLY': classes['WORDING-ONLY'],
+      ADDITIVE: classes.ADDITIVE,
+      ADDED: classes.ADDED,
+      REMOVED: classes.REMOVED,
+    }, 'a draw change may only RE-INDEX').toEqual({
+      REPLACED: 0, 'WORDING-ONLY': 0, ADDITIVE: 0, ADDED: 0, REMOVED: 0,
+    });
+    // The arithmetic: the classes partition the cells, and the audiences do too.
+    const summed = Object.values(classes).reduce((a, b) => a + b, 0);
+    expect(summed, 'the classes must partition the cells').toBe(rec.cells);
+    expect(rec.byAudience.dm.cells + rec.byAudience.player.cells).toBe(rec.cells);
+    expect(rec.byAudience.dm.reIndexed + rec.byAudience.player.reIndexed).toBe(moved);
+    // And a floor under the record itself: a re-index of nothing would mean the draw did not
+    // actually change, and a re-index of everything would mean it was not a draw change.
+    expect(moved).toBeGreaterThan(0);
+    expect(moved).toBeLessThan(rec.cells);
+    expect(rec.blocksUntouched, 'a block the draw change did not reach at all').toBe(0);
+  });
+
   it('names readsCount as NOT a mechanism, by name and with its reason (the ADDENDUM)', () => {
     const row = SHIFT_REGISTER.notMechanisms.find((n) => n.id === 'readsCount');
     expect(row, 'readsCount must be named on the register as a NON-mechanism').toBeTruthy();

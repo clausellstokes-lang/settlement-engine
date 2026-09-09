@@ -95,13 +95,29 @@
     },
     {
       "id": "draw-formula",
-      "mechanism": "the variant draw itself: the key material and the modulus",
-      "shift": "1 — under §13 row 22 the index-stable draw lands ONCE, in car 8a, with the rewrite",
-      "door": "src/domain/display/stateProse/stateProseKernel.js",
-      "idiom": "owner-signed once on the classifier's per-cell diff; the chair measured 75.71 per cent of reads re-rolling on one append under `% length` against 24.17 per cent under the index-stable argmax",
+      "mechanism": "the variant draw itself: the key material and the selection rule. LANDED as the INDEX-STABLE DRAW at REWRITE car 8a-1 — the ARGMAX of `hashKey(${seed}::${blockId}::${poolKey}::v${vid})` over the eligible set, ties to the lower vid, with the shipped `% eligible.length` kept as the FALLBACK for a pool whose members carry no stable id (the causal register is that corpus, and so moved no read at all)",
+      "shift": "1 — the REWRITE + FACES freeze. §13 row 22 / SITTING §N.2's index-stable draw landed ONCE, at car 8a-1, ahead of the wording sets; the one-time re-index it costs is declared in `reIndexed` below",
+      "door": "src/domain/display/stateProse/stateProseKernel.js, and the classifier (scripts/prose-manifest-diff.mjs over two runs of scripts/prose-manifest-cells.mjs), whose RE-INDEXED count is the owner's veto surface and is declared in `reIndexed` below",
+      "idiom": "owner-signed once on the classifier's per-cell diff. The chair measured 75.71 per cent of reads re-rolling on one append under `% length` against 24.17 per cent under the argmax; car 8a-1 re-measured on the shipped three-variant corpus (547 pools x 2,000 seeds, 1,094,000 reads) at 74.99 against 25.01 per cent, and pinned the PROPERTY the percentages are only evidence for: ZERO reads move between two OLD wordings, against 546,952 under the modulus",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length"] }
-      ]
+        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["const digest = avalanche32(fnv1a32(`${parent}::v${vid}`));", "if (digest > bestHash || (digest === bestHash && vid < bestVid)) {", "if (vid === null) return eligible[avalanche32(fnv1a32(parent)) % eligible.length];"] }
+      ],
+      "reIndexed": {
+        "_doc": "THE ONE-TIME RE-INDEX, DECLARED. This is the record §N.2 makes the owner's veto stand on: `the classifier prints RE-INDEXED per cell at Shift 1 and the owner's veto stands until that record is signed`. It cannot be a `pin`, because nothing here is recomputable from the leaves — it takes a DRIFT run at two shas — so it is a declared row that the contract test PRINTS and holds to its own arithmetic.",
+        "car": "REWRITE car 8a-1",
+        "baseSha": "29ec62425",
+        "corpus": "DRIFT — 525 configurations x 2 audiences",
+        "measuredBy": "node scripts/prose-manifest-cells.mjs --out <file> at each sha, then node scripts/prose-manifest-diff.mjs <base> <tip>",
+        "cells": 73284,
+        "byClass": { "REPLACED": 0, "RE-INDEXED": 43685, "ADDITIVE": 0, "WORDING-ONLY": 0, "UNCHANGED": 29599, "ADDED": 0, "REMOVED": 0 },
+        "indexOnly": 0,
+        "byAudience": { "dm": { "cells": 36660, "reIndexed": 21994 }, "player": { "cells": 36624, "reIndexed": 21691 } },
+        "blocksTouched": 40,
+        "blocksUntouched": 0,
+        "deepest": "DS-GEN-5 and DS-STR-1, both 100.00 per cent of their cells",
+        "shallowest": "DS-GEN-18, 0.47 per cent",
+        "note": "REPLACED 0 is the car's own fence, EXECUTED on every cell: not one changed POOL, so no fact moved. A cell is RE-INDEXED when the same pool's same eligible set yielded a different member, which is exactly what the draw rule changed and is the only thing it changed. WORDING-ONLY 0 and ADDITIVE 0 say the same from the other side: no sentence was rewritten and no piece was added by this car."
+      }
     },
     {
       "id": "face-draw-key",
