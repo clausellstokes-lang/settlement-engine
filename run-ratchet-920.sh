@@ -1,7 +1,7 @@
 #!/bin/sh
 # run-ratchet-920.sh — census totals at the §920 consist tip (stamped). Quiet-window law; exits captured.
 # ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneRW-DEF
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneRW-DEFW
 cd $D || exit 9
 STREAK=0; WAITED=0
 while [ $STREAK -lt 3 ]; do

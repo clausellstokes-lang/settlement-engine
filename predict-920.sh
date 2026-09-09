@@ -3,7 +3,7 @@
 # never guessed). Same five reads as predict-906.log: OSR plain read, writer-reach dry, the FARMED lighting probe, the lighting register, prose-numerics dry.
 # Refuses a dirty dock (the lane may still be editing). Zero writes into the tree (the probe farms). Chair, 2026-09-06 22:40.
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
-D=${1:-$SC/laneRW-DEF}; cd "$D" || exit 9
+D=${1:-$SC/laneRW-DEFW}; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty ($(git status --porcelain -uall | wc -l | tr -d ' ') entries) — the lane is still editing"; exit 8; }
 echo "PREDICT_HEAD=$(git rev-parse HEAD) cars_over_f73bdbf16=$(git rev-list --count f73bdbf16..HEAD) start $(date '+%H:%M:%S') load=$(uptime | sed 's/.*averages: //')"
 echo "--- OSR plain read (read-only):"; node scripts/check-observed-shape-readers.mjs 2>&1 | head -1; echo "OSR_DRY_EXIT=$?"

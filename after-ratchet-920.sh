@@ -5,7 +5,7 @@
 # re-stamp of the kit at the FINAL car count, then the train seal. No owed-ledger car at §920 (entries predicted 3). The gate is
 # launched SEPARATELY (run-gate-920.sh). Every exit captured; refuses on anything unexpected. POSIX sh.
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
-D=$SC/laneRW-DEF; LOG=$SC/ratchet-920.run.log; BASE=f73bdbf16d3f7a57c18d7fd57b0478b953043a73; SEAL=rewrite-8b-defense-2026-09-09
+D=$SC/laneRW-DEFW; LOG=$SC/ratchet-920.run.log; BASE=f73bdbf16d3f7a57c18d7fd57b0478b953043a73; SEAL=rewrite-8b-defense-2026-09-09
 EXP_FILES=$1; EXP_ENTRIES=$2
 [ -n "$EXP_FILES" ] && [ -n "$EXP_ENTRIES" ] || { echo "usage: <expected-totalFiles> <expected-entries> (read them off the SEAMD line first)"; exit 9; }
 [ -s "$LOG" ] && grep -q '^TRUE_EXIT=' "$LOG" || { echo "REFUSED: the ratchet log carries no TRUE_EXIT (the run has not finished)"; exit 9; }
@@ -27,7 +27,7 @@ Seat: Fable 5.1 — validated
 Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>" && echo "CAPSULE CAR -> $(git rev-parse --short HEAD)"; else echo "capsule unchanged — no car"; fi
 cd "$D"
 N=$(git rev-list --count $BASE..HEAD); echo "CARS=$N · HEAD=$(git rev-parse --short HEAD) · porcelain=[$(git status --porcelain -uall | tr '\n' ' ')]"
-echo "--- re-stamp the kit at $N cars:"; python3 $SC/mk-landing-kit.py 920 laneRW-DEF $BASE landing-rewrite-8b-defense-2026-09-09 $N 2>&1 | tail -2
+echo "--- re-stamp the kit at $N cars:"; python3 $SC/mk-landing-kit.py 920 laneRW-DEFW $BASE landing-rewrite-8b-defense-2026-09-09 $N 2>&1 | tail -2
 grep -q "^GATE_CARS=\|cars=$N\|EXPECT.*$N" $SC/run-gate-920.sh || grep -n "$N" $SC/run-gate-920.sh | head -2
 git update-ref refs/preserve/$SEAL "$(git rev-parse HEAD)" && echo "SEALED $SEAL = $(git rev-parse --short refs/preserve/$SEAL)"
 echo "NEXT: launch run-gate-920.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-920.sh, then fill texts-920 (__CARS__=$N __ENTRIES__ __TESTS__ __TOTALS__) and collect."

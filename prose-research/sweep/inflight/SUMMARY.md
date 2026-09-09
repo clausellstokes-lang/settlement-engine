@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 14:55:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 15:03:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -106,21 +106,38 @@
 | ? | other |  | result | 0 | — | — | 15:36:43 |
 | ? | other |  | result | 0 | refine.md | — | 17:38:30 |
 | ? | other |  | failed | 0 | — | — | 17:18:42 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:24 |
+| ? | other |  | in-flight | 0 | — | — | 19:01:48 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:12 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:23 |
+| ? | other |  | in-flight | 0 | — | — | 19:01:39 |
+| ? | other |  | in-flight | 0 | — | — | 19:01:56 |
+| ? | other |  | in-flight | 0 | — | — | 19:03:46 |
+| ? | other |  | in-flight | 0 | — | — | 19:00:22 |
 | ? | other |  | result | 0 | — | — | 17:57:47 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 17:57:46 |
 | ? | other |  | result | 0 | — | — | 18:01:20 |
 | ? | other |  | result | 0 | — | — | 18:23:47 |
 | ? | other |  | result | 0 | refine.md | — | 18:42:14 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:06 |
 | ? | other |  | result | 0 | refine.md | — | 18:48:45 |
 | ? | other |  | result | 0 | refine.md | — | 18:52:01 |
 | ? | other |  | result | 0 | — | — | 18:25:58 |
 | ? | other |  | result | 0 | — | — | 18:00:17 |
 | ? | other |  | result | 0 | refine.md | — | 18:43:41 |
 | ? | other |  | result | 0 | — | — | 18:31:48 |
-| ? | other |  | in-flight | 0 | — | — | 18:55:46 |
+| ? | other |  | in-flight | 0 | — | — | 19:00:45 |
+| ? | other |  | in-flight | 0 | — | — | 19:00:52 |
+| ? | other |  | result | 0 | — | — | 18:59:12 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 18:05:03 |
 | ? | other |  | result | 0 | refine.md | — | 18:49:41 |
 | ? | other |  | result | 0 | — | — | 18:11:54 |
+| ? | other |  | in-flight | 0 | — | — | 19:03:45 |
+| ? | other |  | in-flight | 0 | — | — | 19:03:10 |
+| ? | other |  | in-flight | 0 | — | — | 19:01:50 |
+| ? | other |  | in-flight | 0 | — | — | 19:03:30 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:03 |
+| ? | other |  | in-flight | 0 | — | — | 19:02:33 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
 | ? | other |  | result | 0 | refine.md | — | 17:06:35 |
 | ? | other |  | result | 0 | — | — | 17:10:01 |

@@ -1,9 +1,9 @@
 #!/bin/sh
-# proof-920.sh — the §920 whole-suite PROOF at the REWRITE tip (EXPECT_CARS cars over f73bdbf16: the lane cars) IN laneRW-DEF
+# proof-920.sh — the §920 whole-suite PROOF at the REWRITE tip (EXPECT_CARS cars over f73bdbf16: the lane cars) IN laneRW-DEFW
 # itself (the lane is done): typecheck:ratchet FIRST (TYPECHECK_EXIT=), then the whole suite under the mutex with NO filter (PROOF_EXIT=).
 # Every exit captured in-shell. Read `python3 chair-tools/reds-by-block.py whole-920.log` after. Drafted 2026-09-07 03:08 from proof-908.sh by substitution (chair, session b43943b4); a QUIET-WINDOW probe precedes the suite (S12 runs no vitest; the skeptic pass must be COMPLETE first).
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
-D=$SC/laneRW-DEF; cd "$D" || exit 9
+D=$SC/laneRW-DEFW; cd "$D" || exit 9
 [ -f $SC/HOLD-VITEST ] || { echo "REFUSED: write $SC/HOLD-VITEST first (no lane vitest during the proof)"; exit 8; }
 EXPECT_CARS=${EXPECT_CARS:?set EXPECT_CARS to the dock car count after the REWRITE lane reports}
 [ "$(git rev-list --count f73bdbf16d3f7a57c18d7fd57b0478b953043a73..HEAD)" = "$EXPECT_CARS" ] || { echo "REFUSED: expected $EXPECT_CARS cars over f73bdbf16, found $(git rev-list --count f73bdbf16d3f7a57c18d7fd57b0478b953043a73..HEAD)"; exit 8; }

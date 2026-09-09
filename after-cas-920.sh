@@ -2,7 +2,7 @@
 # after-cas-920.sh — ONE command from a green gate log to the §920 ledger act (stamped by mk-landing-kit.py). POSIX sh. Guard + consequence together.
 set -e
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
-D=$SC/laneRW-DEF; REPO=/Users/cstokes/Desktop/settlement-engine
+D=$SC/laneRW-DEFW; REPO=/Users/cstokes/Desktop/settlement-engine
 BASE=f73bdbf16d3f7a57c18d7fd57b0478b953043a73; LOG=$SC/gate-920.log
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2)
 [ "$TE" = "0" ] || { echo "⛔ gate TRUE_EXIT=$TE (from the LOG) — stop"; exit 1; }

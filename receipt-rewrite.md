@@ -3203,9 +3203,9 @@ consisted.
 
 ## CAR 8b-W-5 — THE LICENCE CARD'S TABLE-RUNG LEAF
 
-**STATUS: PARTIAL — the cure is written and proved, the commit and the lighting refreeze are not
-yet on the tip.** (Header written before the work landed, per the lane's own rule; the closing
-STATUS line at the end of this section is the one that binds.)
+**STATUS: LANDED at `f2da5a3ee`.** (This header was written PARTIAL before the work landed, per
+the lane's own rule, and updated when it did; the closing STATUS line of '8b-W-5.10 carries the
+figures.)
 
 Seat: Opus 5 (Fable-unvalidated). Lane: REWRITE-8b. Dock: `$SC/laneRW-DEFW`, base `290f86ee0`.
 
@@ -3376,3 +3376,53 @@ this car's:
    lane's plain re-take by the register's own ritual, on the precedent of
    `cc22f1d72 REWRITE car 8a-13-lighting`. It is measured at the CAR'S OWN TIP on a clean tree,
    so it lands as a second commit and never as an amend.
+
+### 8b-W-5.8 THE LIGHTING REFREEZE, BY ITS OWN RITUAL
+
+```
+$ LIGHTING_CENSUS_REFREEZE='REWRITE car 8b-W-5 (Opus 5 — Fable-unvalidated)' \
+  LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+Error: census REFROZEN at 62ae09bbf059cac3c3e9f542fa827064f84ff8e9 by REWRITE car 8b-W-5
+(Opus 5 — Fable-unvalidated): files 2563 -> 2563, parked 375 -> 375, credited 2188 -> 2188,
+titles 24169 -> 24176, suiteTitles 6452 -> 6453.
+
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js     # THE PROOF
+  Test Files  1 passed (1)
+       Tests  34 passed (34)
+```
+
+Measured at the car's own tip on a porcelain-0 tree, and landed as a SECOND commit — the ritual
+writes `measuredAtSha: HEAD`, so it cannot precede the car and must never be folded into it by an
+amend.
+
+### 8b-W-5.9 THE WHOLE LINT SUITE, AND THE TIP
+
+```
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint
+  Test Files  155 passed (155)
+       Tests  2606 passed (2606)          # 2599 before the car, +7 titles
+```
+
+```
+$ git -C $SC/laneRW-DEFW log --oneline 290f86ee0..HEAD
+f2da5a3ee REWRITE car 8b-W-5-lighting: the lighting census re-freezes at the car's tip, by its own ritual
+62ae09bbf REWRITE car 8b-W-5: the licence card names the table row, not the file — every table-rung pool's claim line cured
+$ git -C $SC/laneRW-DEFW status --porcelain | wc -l
+       0
+```
+
+### 8b-W-5.10 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The file is cited in **backticks**, not in the brief's parentheses | that the four parts are the same four, and that this is what takes the claim line's `js)` to zero | §8b-W-5.2 | ⭐⭐ a deliberate departure from the brief's worked sentence |
+| The `reads:` and `predicate:` lines were **left verbatim**, so `js)` totals 244 and not 0 | that a measurement line's contract is fidelity, and that re-rendering it is a second car | §8b-W-5.5 | ⭐⭐ the acceptance figure the car did not meet, and why |
+| The echo note's new sentence for a table rung | that "keyed on the whole reading, truncated at the file's first dot" is what `rootOf` actually does to a via-form read, and that the census's own `mountsPerFact` really holds those truncated keys | §8b-W-5.2 | ⭐ a card line rewritten, not just repaired |
+| The lighting refreeze as a lane act | that a titles-only drift caused by the car's own arms is a plain re-take, on the `cc22f1d72` precedent | §8b-W-5.8 | ⭐ a register act outside the brief's fences |
+
+**STATUS: CAR 8b-W-5 LANDED at `f2da5a3ee`** (the cure at `62ae09bbf`). Two commits, one lib, one
+walker, one register baseline; no product file and no build. `tests/lint` 155/155 and 2606/2606;
+check-domain-strict 1120/1120; typecheck ratchet 173/173; manifest cells identical by digest at
+73,284 cells. Porcelain 0 and runners 0.
