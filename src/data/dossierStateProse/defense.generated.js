@@ -5226,60 +5226,60 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-THREATENED": [
         {
           "angle": "ledger",
-          "text": "A {defwork} stands to {settlement}'s name.",
+          "text": "{settlement} has the {defwork} standing to its name.",
           "slots": [
-            "defwork",
-            "settlement"
+            "settlement",
+            "defwork"
           ],
           "vid": 1,
           "wordings": [
-            "The town of {settlement} is possessed of a {defwork}.",
-            "Among the defenses of {settlement} the {defwork} holds its place.",
-            "At {settlement} the {defwork} is an item of the town's own defensive work."
+            "The item of fortification {settlement} shows is the {defwork}.",
+            "In the {defwork} stands {settlement}'s fixed defense.",
+            "Under the head of defense {settlement} holds the {defwork}."
           ]
         },
         {
           "angle": "street",
-          "text": "{settlement} has a {defwork} standing.",
+          "text": "The work of defense at {settlement} is the {defwork}.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 2,
           "wordings": [
-            "A fixture of {settlement} is the {defwork}.",
-            "With the town at {settlement} goes a {defwork}.",
-            "The {defwork} of {settlement} belongs to the town."
+            "What goes with {settlement} is the {defwork}.",
+            "With the {defwork} for a fixture, {settlement} is walled.",
+            "For fortification {settlement} has the {defwork}."
           ]
         },
         {
           "angle": "visitor",
-          "text": "The fortification of {settlement} is a {defwork}.",
+          "text": "The fortification of {settlement} is the {defwork}.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 3,
           "wordings": [
-            "Walled by a {defwork}, {settlement} stands.",
-            "Fixed defense at {settlement} takes the form of a {defwork}.",
-            "The walled place at {settlement} has its {defwork}."
+            "Fortified, {settlement} has the {defwork} as its fabric.",
+            "Fixed defense at {settlement} takes its shape in the {defwork}.",
+            "The standing work at {settlement} is the {defwork}."
           ]
         }
       ],
       "WALLED-QUIET": [
         {
           "angle": "visitor",
-          "text": "{settlement} keeps a {defwork}, and it stands.",
+          "text": "{settlement} keeps a {defwork}, and the {defwork} stands.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 1,
           "wordings": [
-            "A {defwork} stands at {settlement}.",
-            "The {defwork} that {settlement} keeps stands.",
-            "At {settlement} a {defwork} is up, and up it remains."
+            "The {defwork} at {settlement} is a work that stands.",
+            "At {settlement} stands a {defwork}.",
+            "A {defwork} stands at {settlement}, and it goes on standing."
           ]
         },
         {
@@ -5291,38 +5291,38 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "A {defwork} is up at {settlement}, and it holds.",
-            "The {defwork} {settlement} has, it has standing.",
-            "What {settlement} has is a {defwork}, and it is up."
+            "A {defwork} at {settlement} is up.",
+            "What {settlement} has is a {defwork}, up and standing.",
+            "The {defwork} {settlement} has is standing."
           ]
         },
         {
           "angle": "ledger",
-          "text": "Entered as standing, the {defwork} stands.",
+          "text": "Set down as standing, the {defwork} stands.",
           "slots": [
             "defwork"
           ],
           "vid": 3,
           "wordings": [
-            "A {defwork} is carried, and carried as standing.",
-            "The {defwork} is entered standing.",
-            "What is entered is a {defwork}, and it is entered standing."
+            "The {defwork} stands as entered.",
+            "A {defwork} is entered, and entered as it stands.",
+            "The {defwork} is carried as standing."
           ]
         }
       ],
       "WALLED-STRAINED": [
         {
           "angle": "ledger",
-          "text": "The {defwork} at {settlement} is the town's. Its muster is paid short of the upkeep.",
+          "text": "The {defwork} at {settlement} is the town's. Its muster is paid short of upkeep.",
           "slots": [
             "defwork",
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "At {settlement} the {defwork} is a work the town owns. The outlay against its muster falls under the charge.",
-            "The {defwork} is {settlement}'s own. What the town's muster costs runs past its funding.",
-            "The {defwork} is held by the town at {settlement}. What it sets aside for the muster does not reach the wage."
+            "At {settlement} the {defwork} is the town's own work. The outlay on its muster does not cover what the upkeep comes to.",
+            "The {defwork} is {settlement}'s own. Its muster costs more than the town pays.",
+            "The town at {settlement} owns the {defwork}. Its muster's wage falls short."
           ]
         },
         {
@@ -5334,65 +5334,65 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "At {settlement} the town is walled with the {defwork}. The account for its muster's pay is one the town has not answered.",
-            "The town at {settlement}, the {defwork} its own, has the muster's wage unsettled.",
-            "The town at {settlement} owns the {defwork}. What the muster's upkeep comes to is a charge not made good."
+            "At {settlement} the town is walled with the {defwork}. Its muster's pay is an account the town has not answered.",
+            "The town at {settlement}, the {defwork} its own, has the muster's hire unsettled.",
+            "The town at {settlement} holds the {defwork}. Provision for its muster is not made good."
           ]
         }
       ],
       "UNWALLED-SMALL": [
         {
           "angle": "street",
-          "text": "{settlement} is no larger than a village. The place stands without a wall.",
+          "text": "{settlement} is no larger than a village. No wall closes the place.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "Village size is as far as {settlement} goes. Nothing walls the place.",
-            "The size of {settlement} stops short of a town. The place goes unwalled.",
-            "A village is the size {settlement} keeps. The place holds no wall."
+            "Village size is where {settlement} stops. The place goes unwalled.",
+            "A village is the whole of {settlement}. No wall rings it.",
+            "The size of {settlement} reaches no further than a village. It is not a walled place."
           ]
         },
         {
           "angle": "visitor",
-          "text": "The village that {settlement} amounts to has no wall.",
+          "text": "The most that stands at {settlement} is an unwalled village.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "No bigger than a village, {settlement} is a place without a wall.",
-            "A village at its largest, {settlement} keeps no wall.",
-            "What stands at {settlement} is a village and no wall."
+            "A village at the largest, {settlement} is a place without a wall.",
+            "What {settlement} amounts to is a village with no wall to it.",
+            "The village {settlement} runs to is unwalled."
           ]
         }
       ],
       "UNWALLED-LARGE": [
         {
           "angle": "counterforce",
-          "text": "Past village size, {settlement} carries no wall.",
+          "text": "Past village weight, {settlement} carries no wall.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "The town is no village, and nothing walls {settlement}.",
-            "Larger than any village, {settlement} stands open.",
-            "Ranked with the towns, {settlement} is not walled."
+            "No wall encloses {settlement}, a town at the least.",
+            "Larger than any village, {settlement} lies unwalled.",
+            "Ranked a town and above, {settlement} is not walled."
           ]
         },
         {
           "angle": "ledger",
-          "text": "By weight {settlement} is a town or larger, and it holds no wall.",
+          "text": "By weight {settlement} is a town or larger, and unwalled.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "No circuit runs about {settlement}, a town at least in weight.",
-            "Entered among the towns, {settlement} has no walls.",
-            "Weight enough for a town stands to {settlement}, and no wall does."
+            "The rank of {settlement} is a town's or more, and no wall stands about the town.",
+            "No circuit of wall runs about {settlement}, and the town is counted above the villages.",
+            "Town weight attaches to {settlement}, and no wall does."
           ]
         }
       ]

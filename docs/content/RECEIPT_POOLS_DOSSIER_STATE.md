@@ -5969,62 +5969,62 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The enclosure mechanism is engine-native TWICE OVER, and both halves are structural reads of live fields: the threat side (walls score against the threat axes) and the purse side (the upkeep gate, whose asymmetry between stone and wages is the generator's own recorded rule, not an authored flourish). The one historical clause this block might want — WHEN the wall was raised — has NO backing fact at this tip and is deliberately absent; it arrives with the fabric epochs (CT-1b). R-DST-A: `DS-DEF-5` is the armed-forces SURFACE and `DS-DEF-10` the arms LADDER; this block is the why-frame for the fortification fact alone and composes BESIDE them, never over the same cell twice. `UNWALLED-LARGE` is the mandatory `[counterforce]` arm (§0b): the engine records a gate, so the dossier must be able to say the wall did NOT get built.
 
 **`WALLED-THREATENED`**
-1. `[ledger]` A {defwork} stands to {settlement}'s name.
-   - `[face]` The town of {settlement} is possessed of a {defwork}.
-   - `[face]` Among the defenses of {settlement} the {defwork} holds its place.
-   - `[face]` At {settlement} the {defwork} is an item of the town's own defensive work.
-2. `[street]` {settlement} has a {defwork} standing.
-   - `[face]` A fixture of {settlement} is the {defwork}.
-   - `[face]` With the town at {settlement} goes a {defwork}.
-   - `[face]` The {defwork} of {settlement} belongs to the town.
-3. `[visitor]` The fortification of {settlement} is a {defwork}.
-   - `[face]` Walled by a {defwork}, {settlement} stands.
-   - `[face]` Fixed defense at {settlement} takes the form of a {defwork}.
-   - `[face]` The walled place at {settlement} has its {defwork}.
+1. `[ledger]` {settlement} has the {defwork} standing to its name.
+   - `[face]` The item of fortification {settlement} shows is the {defwork}.
+   - `[face]` In the {defwork} stands {settlement}'s fixed defense.
+   - `[face]` Under the head of defense {settlement} holds the {defwork}.
+2. `[street]` The work of defense at {settlement} is the {defwork}.
+   - `[face]` What goes with {settlement} is the {defwork}.
+   - `[face]` With the {defwork} for a fixture, {settlement} is walled.
+   - `[face]` For fortification {settlement} has the {defwork}.
+3. `[visitor]` The fortification of {settlement} is the {defwork}.
+   - `[face]` Fortified, {settlement} has the {defwork} as its fabric.
+   - `[face]` Fixed defense at {settlement} takes its shape in the {defwork}.
+   - `[face]` The standing work at {settlement} is the {defwork}.
 
 **`WALLED-QUIET`**
-1. `[visitor]` {settlement} keeps a {defwork}, and it stands.
-   - `[face]` A {defwork} stands at {settlement}.
-   - `[face]` The {defwork} that {settlement} keeps stands.
-   - `[face]` At {settlement} a {defwork} is up, and up it remains.
+1. `[visitor]` {settlement} keeps a {defwork}, and the {defwork} stands.
+   - `[face]` The {defwork} at {settlement} is a work that stands.
+   - `[face]` At {settlement} stands a {defwork}.
+   - `[face]` A {defwork} stands at {settlement}, and it goes on standing.
 2. `[elder]` The {defwork} stands; {settlement} has it up.
-   - `[face]` A {defwork} is up at {settlement}, and it holds.
-   - `[face]` The {defwork} {settlement} has, it has standing.
-   - `[face]` What {settlement} has is a {defwork}, and it is up.
-3. `[ledger]` Entered as standing, the {defwork} stands.
-   - `[face]` A {defwork} is carried, and carried as standing.
-   - `[face]` The {defwork} is entered standing.
-   - `[face]` What is entered is a {defwork}, and it is entered standing.
+   - `[face]` A {defwork} at {settlement} is up.
+   - `[face]` What {settlement} has is a {defwork}, up and standing.
+   - `[face]` The {defwork} {settlement} has is standing.
+3. `[ledger]` Set down as standing, the {defwork} stands.
+   - `[face]` The {defwork} stands as entered.
+   - `[face]` A {defwork} is entered, and entered as it stands.
+   - `[face]` The {defwork} is carried as standing.
 
 **`WALLED-STRAINED`**
-1. `[ledger]` The {defwork} at {settlement} is the town's. Its muster is paid short of the upkeep.
-   - `[face]` At {settlement} the {defwork} is a work the town owns. The outlay against its muster falls under the charge.
-   - `[face]` The {defwork} is {settlement}'s own. What the town's muster costs runs past its funding.
-   - `[face]` The {defwork} is held by the town at {settlement}. What it sets aside for the muster does not reach the wage.
+1. `[ledger]` The {defwork} at {settlement} is the town's. Its muster is paid short of upkeep.
+   - `[face]` At {settlement} the {defwork} is the town's own work. The outlay on its muster does not cover what the upkeep comes to.
+   - `[face]` The {defwork} is {settlement}'s own. Its muster costs more than the town pays.
+   - `[face]` The town at {settlement} owns the {defwork}. Its muster's wage falls short.
 2. `[unfolding]` The {defwork} of {settlement} is in the town's hands. Upkeep for its muster is a term unmet.
-   - `[face]` At {settlement} the town is walled with the {defwork}. The account for its muster's pay is one the town has not answered.
-   - `[face]` The town at {settlement}, the {defwork} its own, has the muster's wage unsettled.
-   - `[face]` The town at {settlement} owns the {defwork}. What the muster's upkeep comes to is a charge not made good.
+   - `[face]` At {settlement} the town is walled with the {defwork}. Its muster's pay is an account the town has not answered.
+   - `[face]` The town at {settlement}, the {defwork} its own, has the muster's hire unsettled.
+   - `[face]` The town at {settlement} holds the {defwork}. Provision for its muster is not made good.
 
 **`UNWALLED-SMALL`**
-1. `[street]` {settlement} is no larger than a village. The place stands without a wall.
-   - `[face]` Village size is as far as {settlement} goes. Nothing walls the place.
-   - `[face]` The size of {settlement} stops short of a town. The place goes unwalled.
-   - `[face]` A village is the size {settlement} keeps. The place holds no wall.
-2. `[visitor]` The village that {settlement} amounts to has no wall.
-   - `[face]` No bigger than a village, {settlement} is a place without a wall.
-   - `[face]` A village at its largest, {settlement} keeps no wall.
-   - `[face]` What stands at {settlement} is a village and no wall.
+1. `[street]` {settlement} is no larger than a village. No wall closes the place.
+   - `[face]` Village size is where {settlement} stops. The place goes unwalled.
+   - `[face]` A village is the whole of {settlement}. No wall rings it.
+   - `[face]` The size of {settlement} reaches no further than a village. It is not a walled place.
+2. `[visitor]` The most that stands at {settlement} is an unwalled village.
+   - `[face]` A village at the largest, {settlement} is a place without a wall.
+   - `[face]` What {settlement} amounts to is a village with no wall to it.
+   - `[face]` The village {settlement} runs to is unwalled.
 
 **`UNWALLED-LARGE`**
-1. `[counterforce]` Past village size, {settlement} carries no wall.
-   - `[face]` The town is no village, and nothing walls {settlement}.
-   - `[face]` Larger than any village, {settlement} stands open.
-   - `[face]` Ranked with the towns, {settlement} is not walled.
-2. `[ledger]` By weight {settlement} is a town or larger, and it holds no wall.
-   - `[face]` No circuit runs about {settlement}, a town at least in weight.
-   - `[face]` Entered among the towns, {settlement} has no walls.
-   - `[face]` Weight enough for a town stands to {settlement}, and no wall does.
+1. `[counterforce]` Past village weight, {settlement} carries no wall.
+   - `[face]` No wall encloses {settlement}, a town at the least.
+   - `[face]` Larger than any village, {settlement} lies unwalled.
+   - `[face]` Ranked a town and above, {settlement} is not walled.
+2. `[ledger]` By weight {settlement} is a town or larger, and unwalled.
+   - `[face]` The rank of {settlement} is a town's or more, and no wall stands about the town.
+   - `[face]` No circuit of wall runs about {settlement}, and the town is counted above the villages.
+   - `[face]` Town weight attaches to {settlement}, and no wall does.
 
 ---
 
