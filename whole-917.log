@@ -147,3 +147,16 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
 [ai-spend-alarm] dispatch failed (not fatal): network down
 Not implemented: HTMLMediaElement's pause() method
 Not implemented: HTMLMediaElement's load() method
+vendored lib tinymce/plugins/__exact_set_probe__.js ships under public/map/libs/ but is NOT pinned in VENDOR-MANIFEST.json — it would reach production un-verified. Audit the bytes for advisories, add a manifest entry, then re-pin: node scripts/validate-map-fork.mjs --update-manifest
+vendored lib pinned in manifest is missing on disk: flatqueue.js
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest
+VENDOR-MANIFEST.json has no `libs` to verify — refusing to pass with the supply-chain check vacuous. Re-pin the vendored libs: node scripts/validate-map-fork.mjs --update-manifest
+
+[dossier-prose-manifest] 525 towns x 2 audiences = 73284 cells in 40 s
+[dossier-prose-manifest] cells whose audible-pool recomputation would draw differently: 5966 of 73284
+[dossier-prose-manifest] audience-divergent positions 345 of 36660 · DM-only positions 36 · player-only 0
+[dossier-prose-manifest] covert pools 4 · DM cells drawn from one 0 · player cells 0
+[dossier-prose-manifest] seedless cells 1087 · drawing an AUDIBLE index above 0 because anchoring removed an earlier variant: 217 · strictly below every one of the twelve probes (the probes' own coupon-collection shortfall, not a finding): 18
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
