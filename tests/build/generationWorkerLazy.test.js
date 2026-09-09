@@ -49,6 +49,16 @@
  * HORIZON-B2 refused to write this arm without a build — rightly (a pin with no receipt is the
  * false-instrument class) — and the landing that built paid it.
  *
+ * ⭐ RE-MINTED BY THE CHAIR AT THE §917 LANDING (Fable chair, 2026-09-09; the LIGHT lane's control
+ * builds at dd0b68c0d / f88d6bc54, receipt-light.md § CAR 3): 1,404,242 -> 1,404,493 bytes. The
+ * reason, measured and not argued: lighting the living-content dial puts an irreducible 245 B into
+ * this worker (the seam's loader, the emitted `import(`, the await) and the rest of §917 put 6 B in
+ * — a build with the lazy edge removed entirely still read 1,404,248 B, above the §900 ceiling — so
+ * no transport-side shave could clear it; the alternative (inlining the roster, +55,465 B) is the
+ * regression this ceiling exists to refuse. The capability is the owner's order ("land everything lit
+ * on"); the rise is declared here, in the ledger row, and is vetoable. The ceiling stays
+ * MONOTONE-DOWN from this value.
+ *
  * @enforced-by this test
  */
 
@@ -65,7 +75,7 @@ const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
 const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
 const SENTINEL = 'settlementforge:generation:worker-v1';
 /** Measured 1,404,242 B at f6545dcd9 (build-900-chair.log); monotone-down — see the docblock. */
-export const WORKER_BUNDLE_CEILING_BYTES = 1404242;
+export const WORKER_BUNDLE_CEILING_BYTES = 1404493;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
