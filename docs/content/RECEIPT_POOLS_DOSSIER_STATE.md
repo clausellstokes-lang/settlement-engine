@@ -5970,17 +5970,17 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`WALLED-THREATENED`**
 1. `[ledger]` {settlement} has the {defwork} standing to its name.
-   - `[face]` The item of fortification {settlement} shows is the {defwork}.
-   - `[face]` In the {defwork} stands {settlement}'s fixed defense.
+   - `[face]` The town of {settlement} is possessed of a {defwork}.
+   - `[face]` Among the defenses of {settlement} the {defwork} holds its place.
    - `[face]` Under the head of defense {settlement} holds the {defwork}.
-2. `[street]` The work of defense at {settlement} is the {defwork}.
+2. `[street]` {settlement} has a {defwork} standing.
    - `[face]` What goes with {settlement} is the {defwork}.
-   - `[face]` With the {defwork} for a fixture, {settlement} is walled.
+   - `[face]` With the town at {settlement} goes a {defwork}.
    - `[face]` For fortification {settlement} has the {defwork}.
-3. `[visitor]` The fortification of {settlement} is the {defwork}.
-   - `[face]` Fortified, {settlement} has the {defwork} as its fabric.
-   - `[face]` Fixed defense at {settlement} takes its shape in the {defwork}.
-   - `[face]` The standing work at {settlement} is the {defwork}.
+3. `[visitor]` The fortification of {settlement} is a {defwork}.
+   - `[face]` Walled by a {defwork}, {settlement} stands.
+   - `[face]` Fixed defense at {settlement} takes the form of a {defwork}.
+   - `[face]` The walled place at {settlement} has its {defwork}.
 
 **`WALLED-QUIET`**
 1. `[visitor]` {settlement} keeps a {defwork}, and the {defwork} stands.
@@ -6020,9 +6020,9 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 1. `[counterforce]` Past village weight, {settlement} carries no wall.
    - `[face]` No wall encloses {settlement}, a town at the least.
    - `[face]` Larger than any village, {settlement} lies unwalled.
-   - `[face]` Ranked a town and above, {settlement} is not walled.
+   - `[face]` Ranked with the towns, {settlement} is not walled.
 2. `[ledger]` By weight {settlement} is a town or larger, and unwalled.
-   - `[face]` The rank of {settlement} is a town's or more, and no wall stands about the town.
+   - `[face]` No circuit runs about {settlement}, a town at least in weight.
    - `[face]` No circuit of wall runs about {settlement}, and the town is counted above the villages.
    - `[face]` Town weight attaches to {settlement}, and no wall does.
 

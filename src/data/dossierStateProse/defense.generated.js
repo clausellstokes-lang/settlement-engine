@@ -5233,14 +5233,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The item of fortification {settlement} shows is the {defwork}.",
-            "In the {defwork} stands {settlement}'s fixed defense.",
+            "The town of {settlement} is possessed of a {defwork}.",
+            "Among the defenses of {settlement} the {defwork} holds its place.",
             "Under the head of defense {settlement} holds the {defwork}."
           ]
         },
         {
           "angle": "street",
-          "text": "The work of defense at {settlement} is the {defwork}.",
+          "text": "{settlement} has a {defwork} standing.",
           "slots": [
             "settlement",
             "defwork"
@@ -5248,22 +5248,22 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 2,
           "wordings": [
             "What goes with {settlement} is the {defwork}.",
-            "With the {defwork} for a fixture, {settlement} is walled.",
+            "With the town at {settlement} goes a {defwork}.",
             "For fortification {settlement} has the {defwork}."
           ]
         },
         {
           "angle": "visitor",
-          "text": "The fortification of {settlement} is the {defwork}.",
+          "text": "The fortification of {settlement} is a {defwork}.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 3,
           "wordings": [
-            "Fortified, {settlement} has the {defwork} as its fabric.",
-            "Fixed defense at {settlement} takes its shape in the {defwork}.",
-            "The standing work at {settlement} is the {defwork}."
+            "Walled by a {defwork}, {settlement} stands.",
+            "Fixed defense at {settlement} takes the form of a {defwork}.",
+            "The walled place at {settlement} has its {defwork}."
           ]
         }
       ],
@@ -5379,7 +5379,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "No wall encloses {settlement}, a town at the least.",
             "Larger than any village, {settlement} lies unwalled.",
-            "Ranked a town and above, {settlement} is not walled."
+            "Ranked with the towns, {settlement} is not walled."
           ]
         },
         {
@@ -5390,7 +5390,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "The rank of {settlement} is a town's or more, and no wall stands about the town.",
+            "No circuit runs about {settlement}, a town at least in weight.",
             "No circuit of wall runs about {settlement}, and the town is counted above the villages.",
             "Town weight attaches to {settlement}, and no wall does."
           ]
