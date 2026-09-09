@@ -101,6 +101,50 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
       + ` audiences = ${run.cells.length} cells in ${run.seconds} s\n`);
   }, 120_000);
 
+  test('⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described', () => {
+    // ⛔ WHY THIS ARM EXISTS (REWRITE car 8a-11, SITTING §U c-3; the fold's R-1, MEDIUM). The
+    // audience-divergence pin below carried, as an inherited comment a future reader was told
+    // to trust, the sentence "Every configuration of the DRIFT corpus carries the same
+    // `_seed`". It is false, and it was the stated ground for routing a widening of that
+    // control to a car of its own. A sentence about the corpus that nothing re-derives goes
+    // stale the first time the corpus moves; this is the tally, derived from the run.
+    //
+    // The extra three seeds are DELIBERATE, not drift: `tests/helpers/goldenMasterCorpus.js`
+    // appends the base configuration under `gm-seed-a/b/c` so that seed sensitivity is locked
+    // by the golden master too.
+    /** @type {Map<string, {cells: number, towns: Set<string>}>} */
+    const bySeed = new Map();
+    for (const cell of run.cells) {
+      const town = cell.cell.split('::')[0];
+      const seed = town.slice(town.lastIndexOf('|') + 1);
+      if (!bySeed.has(seed)) bySeed.set(seed, { cells: 0, towns: new Set() });
+      const seat = bySeed.get(seed);
+      seat.cells += 1;
+      seat.towns.add(town);
+    }
+    const tally = Object.fromEntries([...bySeed]
+      .map(([seed, seat]) => [seed, { cells: seat.cells, towns: seat.towns.size }]));
+    expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
+      'golden-master-v3': { cells: 72_108, towns: 516 },
+      'gm-seed-a': { cells: 394, towns: 3 },
+      'gm-seed-b': { cells: 390, towns: 3 },
+      'gm-seed-c': { cells: 392, towns: 3 },
+    });
+    // The two halves must close against the figures every other arm here reads.
+    expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
+    expect(Object.values(tally).reduce((n, r) => n + r.towns, 0)).toBe(run.towns);
+    // AND FROM THE CORPUS ITSELF, so the tally is not a property of this run alone: the
+    // configurations carry the same four seeds in the same proportions.
+    const configSeeds = {};
+    for (const config of goldenCorpus()) {
+      const seed = String(config._seed);
+      configSeeds[seed] = (configSeeds[seed] || 0) + 1;
+    }
+    expect(configSeeds, 'the golden master\'s own configurations, by seed').toEqual({
+      'golden-master-v3': 516, 'gm-seed-a': 3, 'gm-seed-b': 3, 'gm-seed-c': 3,
+    });
+  }, 120_000);
+
   test('EVERY CELL RESOLVES TO A VARIANT, and the resolution is not a guess', () => {
     // The cell's variant is identified from the RENDERED SENTENCE against the pool's own
     // templates, because `eligibleVariants` filters by slot ANCHORING and by state DIMENSIONS
@@ -308,15 +352,24 @@ describe('the two controls no one-audience manifest can see', () => {
     // construction and no draw rule can make them agree.
     //
     // ⚠ AND THE THING A READER OF THIS PIN MUST KNOW: 345, 309 and 36 ARE NOT THAT MANY
-    // INDEPENDENT FACTS. Every configuration of the DRIFT corpus carries the same `_seed`
-    // (`golden-master-v3`) and the draw key is `${seed}::${blockId}::${poolKey}`, so one pool
-    // has ONE drawn variant across all 525 towns and a per-pool count is a town count wearing
-    // a draw's clothes. The 36 DS-POW-1 positions were one coin landing one way and are now
-    // one coin landing the other. So this control's breadth — "over this many of the twelve
-    // mixed pools" — is re-rolled by ANY change to the draw, and it fell from two pools to one
-    // here without anything about the audience filter moving at all. Widening it needs the
-    // recorder's `--seeds` family rather than DRIFT, which is a car of its own; recorded here
-    // so the next reader inherits the finding instead of re-deriving it.
+    // INDEPENDENT FACTS. **516 of the 525 configurations share `golden-master-v3`; nine carry
+    // one of `gm-seed-a`, `gm-seed-b` and `gm-seed-c`** (three towns each, deliberately —
+    // `tests/helpers/goldenMasterCorpus.js:116-121`, "a few extra seeds on the base config").
+    // The draw key is `${seed}::${blockId}::${poolKey}`, so across the 516 that share a seed a
+    // pool has ONE drawn variant however many towns read it, and a per-pool count over them is
+    // a town count wearing a draw's clothes. The 36 DS-POW-1 positions were one coin landing
+    // one way and are now one coin landing the other. So this control's breadth — "over this
+    // many of the twelve mixed pools" — is re-rolled by ANY change to the draw, and it fell
+    // from two pools to one here without anything about the audience filter moving at all.
+    //
+    // ⛔ THE SENTENCE THIS REPLACES WAS FALSE, AND IT WAS LOAD-BEARING (REWRITE car 8a-11,
+    // SITTING §U c-3; the fold's R-1 and NEW-5). It read "Every configuration of the DRIFT
+    // corpus carries the same `_seed`" and concluded that widening this control "needs the
+    // recorder's `--seeds` family rather than DRIFT, which is a car of its own" — under the
+    // words "recorded here so the next reader inherits the finding instead of re-deriving it",
+    // which is what made an error load-bearing. DRIFT already carries a small seed family, so
+    // no new recorder mode is owed; ADDENDUM 1 ruling 8's routing of that widening to a
+    // CAPACITY-train car is WITHDRAWN. The tally is a driven arm below, not a sentence.
     expect(differ.length, 'positions where the two faces draw differently').toBe(309);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
       'over this many of the twelve mixed pools').toBe(1);
