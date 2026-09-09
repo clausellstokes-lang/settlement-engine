@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 97,
+ "firstTs": "2026-09-09T04:41:12.833Z",
+ "lastTs": "2026-09-09T04:45:53.063Z",
+ "tools": {
+  "Bash": 26,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading all the voice documents and the licence card.",
+ "run": "wf_2dff77d0-392",
+ "agent": "ae00e67fb493b82da",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_2dff77d0-392/agent-ae00e67fb493b82da.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

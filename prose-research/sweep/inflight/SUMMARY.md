@@ -1,8 +1,8 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 00:41:29 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 00:49:30 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | in-flight | 0 | — | — | 04:41:27 |
+| ? | other |  | in-flight | 0 | — | — | 04:47:55 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:55:10 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:12:31 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:34:33 |
@@ -16,9 +16,9 @@
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:25:50 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:24:37 |
 | ? | other |  | result | 0 | — | — | 03:41:15 |
-| ? | other |  | in-flight | 0 | — | — | 04:41:28 |
+| ? | other |  | in-flight | 0 | — | — | 04:45:21 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:19 |
-| ? | other |  | in-flight | 0 | — | — | 04:41:28 |
+| ? | other |  | in-flight | 0 | — | — | 04:48:18 |
 | ? | other |  | result | 0 | — | — | 03:10:18 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:24 |
 | ? | other |  | result | 0 | — | — | 04:41:11 |
@@ -29,10 +29,10 @@
 | ? | other |  | result | 0 | — | — | 04:27:35 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:58:18 |
 | ? | other |  | result | 0 | — | — | 04:28:08 |
-| ? | other |  | in-flight | 0 | — | — | 04:41:27 |
-| ? | other |  | in-flight | 0 | — | — | 04:41:29 |
+| ? | other |  | in-flight | 0 | — | — | 04:45:53 |
+| ? | other |  | in-flight | 0 | — | — | 04:46:13 |
 | ? | other |  | result | 0 | — | — | 03:14:43 |
-| ? | other |  | in-flight | 0 | — | — | 04:41:20 |
+| ? | other |  | in-flight | 0 | — | — | 04:48:11 |
 | ? | other |  | result | 0 | lifecycle-holes.md | — | 02:30:55 |
 | ? | other |  | result | 0 | — | — | 02:34:48 |
 | ? | other |  | result | 0 | FOLD.md | — | 02:40:16 |
