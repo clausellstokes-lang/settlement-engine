@@ -2110,7 +2110,12 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     // 768, so DS-ECO-2's three FOOD pools could never fire in this corpus, and DS-SUP-3's
     // impaired-house lens could not either. This is the corpus every rate figure below is read
     // from, so it is also the reason the departure line and the per-tier table moved.
-    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(271);
+    // ⛔ 271 -> 276 AT TASTE car M-4. The rate table now measures MODIFIER PREDICATES
+    // beside the spines that drew (ARCH §4.3 freezes the norm bit from the predicate's
+    // own rate, not from what seated), so the taste's five firing modifier pools each
+    // gained a row. The two `watch:` pools gained NONE: they fire on 0 of 768 towns and
+    // a pool with no row is ABSENT, not zero.
+    expect(rate.rows.length, 'pools that fired somewhere on the grid').toBe(276);
     // The one-config 200-town probe reached 181; the grid reaches more, which is the point.
     expect(rate.rows.length, 'more than the single-configuration probe could reach').toBeGreaterThan(181);
   });
@@ -2252,7 +2257,7 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
     expect(committed.rate.departureReport.lineBp, 'the departure line is a REPORT at 10 %').toBe(1000);
     expect(committed.rate.departureReport.uncommon, 'the departure bits at the report line').toBe(72);
     expect(committed.rate.departureReport.uncommon
-      + committed.rate.departureReport.common, 'over every fired pool').toBe(271);
+      + committed.rate.departureReport.common, 'over every fired pool').toBe(276);
   });
 
   test('the wizard-default weighting ships as a REPORT column beside every rate', () => {

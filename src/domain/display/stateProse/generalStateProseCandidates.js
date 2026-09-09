@@ -52,8 +52,8 @@
  * @returns {boolean}
  */
 function purseIsShort(readings) {
-  const gates = /** @type {{military?: unknown}|null|undefined} */ (
-    /** @type {any} */ (readings).economicGates);
+  // ⛔ THE CAST IS FROM `unknown` AND NEVER THROUGH `any` — see the defense leaf's twin.
+  const gates = /** @type {{military?: unknown}|null|undefined} */ (readings.economicGates);
   const gate = gates?.military;
   return typeof gate === 'number' && Number.isFinite(gate) && gate < 1;
 }

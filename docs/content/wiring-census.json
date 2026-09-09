@@ -11,9 +11,9 @@
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
     },
     "candidateLeaves": {
-      "src/domain/display/stateProse/defenseStateProseCandidates.js": "1e3ccc0de2f6b6a9b271e593619a1acb91f448aecc7cb0453d1afa07eeca5141",
+      "src/domain/display/stateProse/defenseStateProseCandidates.js": "cdb882afb0ff436d36b3ceac297c0c06490282195a57f3bf8900bec5e5593fa5",
       "src/domain/display/stateProse/economyStateProseCandidates.js": "23867dd06dee7ad16f390ff0841cdde9e910b6f119bb3197eb62b4035d120383",
-      "src/domain/display/stateProse/generalStateProseCandidates.js": "e86774a9c86b0aa73955beaaac9bd8c2360ac72bfe4db842f9d4e9bd67127e3e",
+      "src/domain/display/stateProse/generalStateProseCandidates.js": "1d8402a92e2f53fa5ff9e4c3465247dc307994ee189130da1072c9d19533af33",
       "src/domain/display/stateProse/powerStateProseCandidates.js": "43366c4d3932ae35f1f4a52e51fbb91d0379c0addf333258c28cee328098b9ea",
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"

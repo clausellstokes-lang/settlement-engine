@@ -54,8 +54,11 @@ import { measuredMonsterFamily } from './defenseStateProse.js';
  * @returns {boolean}
  */
 function countryIsPressed(readings) {
-  const config = /** @type {{monsterThreat?: unknown}|null|undefined} */ (
-    /** @type {any} */ (readings).config);
+  // ⛔ THE CAST IS FROM `unknown` AND NEVER THROUGH `any`. The readings bag is declared
+  // `Record<string, unknown>`, so `readings.config` is already `unknown` and a cast to the
+  // shape this function reads is a NARROWING; an any-cast on the bag would be an
+  // any-hole, and `domainAnyCastBaseline` allows a new file exactly zero of those.
+  const config = /** @type {{monsterThreat?: unknown}|null|undefined} */ (readings.config);
   const family = measuredMonsterFamily(config?.monsterThreat);
   return family === 'plagued' || family === 'frontier';
 }
@@ -68,7 +71,7 @@ function countryIsPressed(readings) {
  */
 function foodSecurityLabel(readings) {
   const eco = /** @type {{foodSecurity?: {label?: unknown}|null}|null|undefined} */ (
-    /** @type {any} */ (readings).economicState);
+    readings.economicState);
   const label = eco?.foodSecurity?.label;
   return typeof label === 'string' ? label : '';
 }
