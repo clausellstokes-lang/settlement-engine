@@ -1,8 +1,8 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 00:57:31 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 01:05:33 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | in-flight | 0 | — | — | 04:47:55 |
+| ? | other |  | result | 0 | draft-round-4.md | — | 05:02:06 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:55:10 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:12:31 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:34:33 |
@@ -16,9 +16,9 @@
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:25:50 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:24:37 |
 | ? | other |  | result | 0 | — | — | 03:41:15 |
-| ? | other |  | in-flight | 0 | — | — | 04:57:24 |
+| ? | other |  | result | 0 | — | — | 04:57:56 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:19 |
-| ? | other |  | in-flight | 0 | — | — | 04:55:59 |
+| ? | other |  | result | 0 | — | — | 05:01:17 |
 | ? | other |  | result | 0 | — | — | 03:10:18 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:24 |
 | ? | other |  | result | 0 | — | — | 04:41:11 |
@@ -27,12 +27,13 @@
 | ? | other |  | result | 0 | — | — | 04:01:46 |
 | ? | other |  | result | 0 | — | — | 03:14:54 |
 | ? | other |  | result | 0 | — | — | 04:27:35 |
+| ? | other |  | in-flight | 0 | — | — | 05:05:23 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:58:18 |
 | ? | other |  | result | 0 | — | — | 04:28:08 |
-| ? | other |  | in-flight | 0 | — | — | 04:57:11 |
-| ? | other |  | in-flight | 0 | — | — | 04:57:12 |
+| ? | other |  | result | 0 | draft-round-4.md | — | 05:01:23 |
+| ? | other |  | result | 0 | draft-round-4.md | — | 05:03:40 |
 | ? | other |  | result | 0 | — | — | 03:14:43 |
-| ? | other |  | in-flight | 0 | — | — | 04:54:07 |
+| ? | other |  | result | 0 | — | — | 05:01:09 |
 | ? | other |  | result | 0 | lifecycle-holes.md | — | 02:30:55 |
 | ? | other |  | result | 0 | — | — | 02:34:48 |
 | ? | other |  | result | 0 | FOLD.md | — | 02:40:16 |
