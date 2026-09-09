@@ -708,3 +708,119 @@ it is not re-found as a new finding, and so it can be measured on purpose by who
 
 ## CAR 2 — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 23:1x)
 Re-measured at `ef3ee6cbd` (13 cars over 8961388ce; porcelain 0): the reconciliation module now names the law key (CONFIRMED by grep); the lane's whole `tests/lint` 148/149 with the one refused writer-reach digest (the chair's door). Rulings: (1) A1's extension to the `settlement._config` echo — ACCEPTED as within C1's ground (a boundary that drops a record drops every echo of the marker that claims it; the arm proved the first cut insufficient); (2) A2 REFUSED by the lane on a true ground — the census date is UTC written by the ritual itself (`sovereigntyLightingContract.walker.test.js:744`), so `2026-09-09` is not stale; SITTING §S c-3 is AMENDED: the numeral stands, and whether the ritual writes local days is a one-line instrument change for a later register car, not taken; (3) the dark-dial mint arm landed through the version leaf under `vi.resetModules` with no runtime switch — ACCEPTED; (4) the observation that nothing on the reconciliation path touches `settlement._config`, so whether a source export's `_seed` survives that boundary is unmeasured — a PROMISE-adjacent row for the sitting agenda (§G) and a small arm in the next boundary car; (5) the §917 test-census prediction is `totalFiles 2503`, `totalTests` derived (+17 by the lane's count, never predicted). Seat: Fable 5.1 — validated.
+
+# § CAR 3 — THE WORKER BUNDLE (three cars over `dd0b68c0d`; chair, SITTING §S c-5)
+
+Dock `$SC/laneLIGHT`, base `dd0b68c0d`. Shas:
+
+| car | sha | what |
+|---|---|---|
+| 3a | `3bb6853c4` | the two worker shells arm the SEAM'S loader; the walker's declared table + the aggregate arm |
+| 3b | `f4433c943` | the single-chunk arm retired and replaced by the declared-lazy-edge arm + the module-worker arm |
+| register | `f88d6bc54` | the lighting census refrozen by ritual, titles 24,048 → 24,049 |
+
+## THE BUILDS — every figure from `npx vite build` in this dock
+
+The build is byte-stable: a control rebuild of the UNTOUCHED tip reproduced the
+gate's own hashes and sizes exactly (`generation.worker-1YsDAmwr.js`,
+1,404,524 B), so the deltas below are the edit and not build noise.
+
+| build | generation.worker | its lazy chunk | customContentPreview.worker |
+|---|---|---|---|
+| tip `dd0b68c0d` (control) | **1,404,524 B** | `livingContentRoster-D2HjP6Oc.js` 55,471 B | 1,627,972 B |
+| after the shave (3a) | **1,404,493 B** (−31 B) | `livingContentRoster-CE43XTKG.js` 55,465 B | 1,627,941 B (−31 B) |
+| measurement only: lazy edge REMOVED entirely | **1,404,248 B** | none emitted | — |
+
+The preview worker **has no ceiling test** — said plainly, as the brief asked.
+
+## ⛔⛔ THE CEILING: STOPPED, WITH THE NUMBER, AND THE RE-MINT IS THE CHAIR'S
+
+`WORKER_BUNDLE_CEILING_BYTES = 1,404,242` (minted at `f6545dcd9`, §900).
+At this tip, after the shave: **1,404,493 B — over by 251 B.** The arm is left
+RED and the constant is UNTOUCHED.
+
+⭐ AND THE THIRD BUILD IS WHY THE SHAVE COULD NEVER HAVE CLOSED IT. With the
+lazy edge removed from the shell ENTIRELY — no import, no await, nothing of car
+1a left — the worker still measures **1,404,248 B, six bytes ABOVE the §900
+ceiling**. So the §917 tip weighs more than the §900 tip for reasons that are not
+the arming at all, and no amount of transport-side shaving can reach 1,404,242.
+
+The composition of the 282 B the gate reported, now decomposed by measurement:
+
+* **+6 B** — other §917 work, present with no lazy edge at all.
+* **+245 B** — the lazy edge as it now stands: the seam's loader, the emitted
+  dynamic import, and the await. Irreducible while the roster is behind a seam,
+  and removing it is not available: the seam THROWS on a v2 world whose payload
+  was never loaded, and the dial is lit.
+* **+31 B** — the create boundary's module, which car 3a removed.
+
+## ⛔ THE BRIEF'S "SHARED CHUNK" PREMISE IS REFUTED BY THE BUILD
+
+The brief expected the roster chunk to be shared with the main graph, and step 3
+(b) would have asserted it. It is not shared. Vite bundles every worker entry as
+its own rollup build, so this dist emits the same source module **three times**,
+each referenced by exactly one bundle (measured by scanning every `.js` in
+`dist/assets` for each hashed name):
+
+| chunk | bytes | referenced by |
+|---|---|---|
+| `livingContentRoster-Be-TAUWP.js` | 1,788 | `engine-Dh3R46GK.js` (the main graph) |
+| `livingContentRoster-CE43XTKG.js` | 55,465 | `generation.worker-BuvTfkDK.js` only |
+| `livingContentRoster-C9dEfpoI.js` | 1,094 | `customContentPreview.worker-4AiUKc4T.js` only |
+
+The sizes differ because each build carries whatever of the roster's closure its
+own bundle does not already hold. So the generation worker pays a **55,465 B
+second cold fetch inside the user's wait** on a lit path — a real product fact,
+not a byte-accounting one, and the chair's row rather than a lane's. The arm was
+written to the measurement: it pins that the chunk exists, that the worker
+bundle alone names it, and that its payload is NOT ALSO inlined into the bundle
+(the sentinel pair), instead of asserting a sharing that does not happen.
+
+## THE `import(` LIST AT THE TIP
+
+```
+advanceInterval.worker-B6MKQvud.js       (none)
+customContentPreview.worker-4AiUKc4T.js  import("./livingContentRoster-C9dEfpoI.js")
+generation.worker-BuvTfkDK.js            import("./livingContentRoster-CE43XTKG.js")
+pdfRender.worker-0X-9M_FS.js             (none)
+```
+
+## THE NEW ARM'S PLANTS — four, executed, each convicting a different way
+
+1. **A second dynamic import in the shell, rebuilt.** `import("./customContentManifest-C68AZo4i.js")` joined the roster edge; the count arm red: *"the worker bundle carries 2 dynamic import(s); WORKER_LAZY_EDGES declares 1."*
+2. **`{ type: 'module' }` dropped from `generationClient.js`.** The module-worker arm red: *"A classic worker cannot execute the import( the bundle now carries."*
+3. **A second `await` in `loadGenerationLawPayloads()`.** The walker's new aggregate arm red: *"the aggregate awaits 2 payload loader(s) (loadLivingContentRoster, loadSomeSecondPayload) … A second payload here is invisible to both workers."*
+4. **The worker reverted to the aggregate.** The per-row arm red on its declared literal: *"src/workers/generation.worker.js no longer contains await loadLivingContentRoster()"* — the table is a declaration, not a loophole.
+
+Plus in-test controls: the target scanner on one edge, two edges and none; the
+loose opening scanner refusing `reimport(x)`; the module-worker pattern anchored
+against a classic construction; and, in the walker, both needles proved
+non-interchangeable IN BOTH DIRECTIONS (the default needle must not match a
+seam-armed body, and the seam needle must not match an aggregate-armed one).
+
+## THE GATES AT CAR 3's TIP `f88d6bc54` (porcelain 0)
+
+* **whole `tests/lint`**: **149 files / 2,492 tests, ALL GREEN.**
+* **whole `tests/build`** (`VERIFY_DIST=1`, fresh build): **53 of 54 files, 471 of 472 tests green.** The single red is the ceiling arm above — the declared STOP. The retired single-chunk red is CURED.
+* **`npm run lint`**: 0 errors (31 warnings, all pre-existing).
+* **`typecheck:ratchet`**: OK, 173 errors against a ceiling of 173.
+* **`typecheck:domain:strict`**: OK, 1,120 errors against a ceiling of 1,120.
+* **OSR (`check:observed-shape-readers`)**: `1972 finding(s), exactly matching the frozen inventory` — EXACT, no `--write`.
+* **first-paint static closure**: 8 chunks, **1,042,172 B** against the 1,048,000 B budget — unmoved by this car, which is entirely worker-side.
+
+## THE REGISTER DOORS
+
+* **lighting census**: moved BY RITUAL (`f88d6bc54`), titles 24,048 → 24,049.
+  ⭐ Two `it`s were added and the census moved by ONE: car 3b's arm sits inside
+  `describe.runIf(DIST_EXISTS)`, and `runIf` is a NON_FOCUSING modifier in that
+  walker's closed grammar, so its titles are never live. The register's note
+  records that so the arithmetic is not spent twice.
+* **OSR**: read exact, not written.
+* **every other `--write`**: not touched.
+
+## PROSE CORRECTED RATHER THAN LEFT FALSE
+
+`livingContentSeam.js` claimed the aggregate was its only caller and
+`densityCreateBoundary.js` claimed the two shells called the aggregate; both are
+now false and both were rewritten, with the byte reason and the walker that
+holds it. `livingContentRoster.js`'s cure paragraph was corrected the same way.
