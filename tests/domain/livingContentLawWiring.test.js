@@ -97,6 +97,10 @@ import {
 } from '../../src/lib/accountSettlementContentPortability.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import {
+  customContentReferencePack,
+  identifyCustomContentPack,
+} from '../fixtures/customContentReferencePack.js';
+import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
 import { buildLivingContentRoster } from '../../src/domain/content/livingContentRoster.js';
@@ -667,5 +671,95 @@ describe('NO MIGRATION — a law-1 world stays law-1 on every path, on the LIT b
       expect(Object.hasOwn(projected, ROSTER_KEY)).toBe(false);
       expect(projected.name).toBe(dark.name);
     }
+  });
+});
+
+/**
+ * ⭐⭐ THE IMPORT BOUNDARIES, ON A WORLD THE LIT PRODUCT ACTUALLY MINTED (lane
+ * LIGHT car 1e).
+ *
+ * ⛔ WHY THIS IS NOT A DUPLICATE OF L-MAT-FIX'S CARS 7-9. Those cars cured three
+ * live holes (gallery ingest, the reconciliation path, undo/versionHistory) and
+ * their arms are green — re-run at dial 2 by this lane and recorded in the
+ * receipt. But every one of them drives a HAND-BUILT roster onto a hand-built
+ * settlement, because on the day they were written the product could not mint
+ * one: the dial was dark and, more to the point, the loader had no caller. What
+ * no arm in the estate had was a world the PRODUCT minted, through `birthConfig`
+ * on a lit build with a reviewed environment, carried into a boundary. This is
+ * that arm, and it is what makes "the boundaries handle a real roster" a
+ * measurement instead of an inference from a fixture's shape.
+ *
+ * The account remap and the reconciliation drop are deliberately NOT re-driven
+ * here: they need an archive receipt and an ingest envelope respectively, and
+ * both already have suites that build them properly
+ * (`accountSettlementContentPortability.test.js`, `importReconciliation.test.js`).
+ * Re-spelling either fixture here would be a second, drifting copy of a boundary
+ * that is already held.
+ */
+describe('the import boundaries, on a world the LIT product minted', () => {
+  /** A world minted the way the product mints one: through the create boundary,
+   *  on the shipped dial, with a reviewed environment that really holds living
+   *  content. */
+  const mintLitWorld = () => generateSettlementPipeline(
+    birthConfig({ ...CONFIG }),
+    null,
+    {
+      seed: 'lgt-holes-lit-product',
+      customContent: identifyCustomContentPack(customContentReferencePack()),
+    },
+  );
+
+  it('⭐ the product really mints one — the anti-vacuity half, and it is first', () => {
+    const world = mintLitWorld();
+    expect(
+      world.config[LIVING_CONTENT_LAW_CONFIG_KEY],
+      'the create boundary did not mint the lit law, so every arm below is about a world the'
+      + ' product cannot make',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(
+      world[ROSTER_KEY],
+      'a lit birth with the reference pack produced NO roster. Either the seam is unarmed or the'
+      + ' pack stopped carrying living content, and either way the boundary arms below are'
+      + ' asserting that nothing was dropped from nothing.',
+    ).toBeTruthy();
+    // …and the roster really records the four living-content buckets, so the
+    // boundaries below are carrying a real record and not an empty husk.
+    expect(Object.keys(world[ROSTER_KEY].buckets).sort())
+      .toEqual(['deities', 'factions', 'stressors', 'traditions']);
+    expect(world.customContentProvenance).toBeTruthy();
+  });
+
+  it('⛔ GALLERY INGEST drops the roster, the provenance receipt AND the foreign birth law', () => {
+    // DEF-1. A dossier carries no archive, so no id in that roster can be
+    // honestly re-addressed into the importing account; and the birth law of
+    // someone else's world must not decide anything in this one.
+    const world = mintLitWorld();
+    const scrubbed = scrubGalleryImportLivingContent(JSON.parse(JSON.stringify(world)));
+    expect(Object.hasOwn(scrubbed, ROSTER_KEY)).toBe(false);
+    expect(Object.hasOwn(scrubbed, 'customContentProvenance')).toBe(false);
+    expect(scrubbed.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    // A DROP, NOT A DEMOLITION: the town itself arrives intact.
+    expect(scrubbed.name).toBe(world.name);
+    expect(scrubbed.config.settType).toBe(world.config.settType);
+  });
+
+  it('⛔ BOTH PUBLIC PROJECTIONS drop both records off a real lit world', () => {
+    const world = mintLitWorld();
+    for (const [label, options] of [['default', undefined], ['DM-full', { full: true }]]) {
+      const projected = toPublicSafe(world, options);
+      expect(Object.hasOwn(projected, ROSTER_KEY), `${label}: the roster leaked`).toBe(false);
+      expect(
+        Object.hasOwn(projected, 'customContentProvenance'),
+        `${label}: the provenance receipt leaked`,
+      ).toBe(false);
+    }
+    // ⚠ RECORDED, NOT CURED: the DM-full projection DOES carry the law marker on
+    // the config. That is a build fact about the world ("born under law 2"), not
+    // an account-scoped identifier, and the gallery INGEST above drops it on the
+    // way back in, so no importing world inherits a foreign birth law from it.
+    // Written down because the next reader of these arms will notice the
+    // asymmetry and should meet the reason rather than re-derive it.
+    expect(toPublicSafe(world, { full: true }).config[LIVING_CONTENT_LAW_CONFIG_KEY])
+      .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
   });
 });

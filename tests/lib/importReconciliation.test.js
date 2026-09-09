@@ -502,7 +502,9 @@ describe('serialized-session admission', () => {
  * declared rather than cured, on the ground that no world carries a roster while
  * the dial is dormant; that ground was false here of all places, because this
  * path's input is an import FILE, which is exactly where a roster comes from
- * without any dial.
+ * without any dial. (The dial was LIT on 2026-09-08, lane LIGHT, which retires
+ * that ground a second time and changes nothing here: the cure never rested on
+ * it, and this boundary's input is still a file.)
  */
 describe('DEF-3 — reconciliation drops what it cannot re-address', () => {
   const FOREIGN_ROSTER = Object.freeze({

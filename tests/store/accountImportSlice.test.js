@@ -1061,8 +1061,16 @@ describe('importAccountData — restore semantics (§359.10)', () => {
 //   • a legacy content-PACK envelope leaves the map at its empty
 //     archiveBacked:false default until Phase 8, AFTER the settlement loop, so
 //     the remap resolves nothing and MUST degrade to drop-with-warning.
-// A settlement carrying a roster cannot occur while the dial is dormant; these
-// arms drive the shape explicitly, exactly as the law's own fixtures do.
+// ⚠ THIS COMMENT SAID "A settlement carrying a roster cannot occur while the dial
+// is dormant", AND THE DIAL WAS LIT ON 2026-09-08 (lane LIGHT). The correction is
+// not simply that it can occur now: the sentence named the wrong mechanism. What
+// decides whether a world carries a roster is the run's REVIEWED ENVIRONMENT, not
+// the dial. A lit world generated with no living-content definition writes no key
+// at all (measured at the lighting: 0 of 525 golden rows, 0 of 768 RATE towns),
+// and a DARK build could always meet a roster through an import FILE, which is
+// this file's whole subject. These arms drive the shape explicitly, exactly as
+// the law's own fixtures do, and that is unchanged by the dial in either
+// position.
 describe('importAccountData — the living-content roster (O-11 path 2)', () => {
   const sourceContent = {
     name: 'Haunted Glassworks',
