@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "d0dc0884ec62cf03f4e67ae3e7e9a523226e5a0c",
-  "measuredBy": "lane TASTE (Opus 5)",
+  "measuredAtSha": "63d0a711e8a03b4fd79408a99c3a80073dccfd79",
+  "measuredBy": "lane TASTE (Opus 5), car M-9b",
   "date": "2026-09-09",
-  "note": "TASTE cars M-1..M-8 add six tests/lint walker files and their titles; the dock is never landed",
+  "note": "TASTE car M-9/M-9b add eleven arms to tests/lint/proseTasteMeasure.walker.test.js (the site-of-a-finding plants, the two-grain reconciliation, the NOT-EXECUTABLE limb of the Q vocabulary report); no test FILE is added and the dock is never landed",
   "files": 2562,
   "parked": 375,
   "credited": 2187,
-  "titles": 24083,
-  "suiteTitles": 6439
+  "titles": 24094,
+  "suiteTitles": 6441
 }
