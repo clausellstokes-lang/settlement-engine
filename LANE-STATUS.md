@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-08 20:55:59 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 21:03:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE train lands — the composed-prose sequence's cars 0, 1 and 2 as twenty
+product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM train lands — the composed-prose sequence's cars 3a through 5b as thirty
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **CAP-TRIP-907(§907 charter; lands on a chair gate → §908)** dock `laneB6` HEAD 3b1c0eaa5 · 18 cars over 4243bdc61 · porcelain 0 · last commits:
@@ -111,7 +111,7 @@ product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -146,5 +146,5 @@ product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE
 - wf_d3c44881-503: 38 journal lines, 19 agents
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
-## PROCESSES: 12571 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;12573 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 15.42 19.83 23.57
+## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 2.07 7.18 15.73
