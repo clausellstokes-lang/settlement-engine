@@ -866,10 +866,6 @@ export function claimsField(text, field, vocabulary = {}) {
 function armQualify(entry, ground, out) {
   const raw = String(entry.text).split(/(?<=[.?!])\s+(?=[A-Z"'(])/).filter((s) => s.trim() !== '');
   const declared = Array.isArray(entry.slots) ? entry.slots : [];
-  /**
-   * @param {string} segment the candidate qualifier
-   * @param {string} shape the arm's own name for the shape it found
-   */
   // ⭐⭐ THE THIRD LICENCE, AND THE ARM'S CURE AT CAUSE (REWRITE car 8a-6; SITTING §H rule 3
   // and the chair's M-9 ruling 4: "ARM Q IS DEFECTIVE, not merely short of vocabulary").
   //
@@ -886,6 +882,10 @@ function armQualify(entry, ground, out) {
   // of a column or the line was short of a fact.
   const reads = Array.isArray(entry.reads) ? entry.reads : [];
   const vocabulary = entry.vocabulary || {};
+  /**
+   * @param {string} segment the candidate qualifier
+   * @param {string} shape the arm's own name for the shape it found
+   */
   const consider = (segment, shape) => {
     const text = segment.trim();
     if (!text) return;

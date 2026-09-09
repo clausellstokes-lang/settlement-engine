@@ -323,7 +323,12 @@ export function fillSlots(text, slots) {
  */
 function stableVid(variant) {
   const vid = variant ? variant.vid : undefined;
-  return Number.isInteger(vid) && vid >= 0 ? vid : null;
+  // ⛔ THE NARROWING IS WRITTEN OUT rather than left to `Number.isInteger`, which the strict
+  // domain typecheck does not read as a type guard: `typeof vid === 'number'` is what tells it
+  // the value is no longer `undefined`, and `Number.isInteger` still carries the integer half
+  // of the test. `>= 0` and never `> 0` — vid 0 is a real id on seven shipped pools (car 8a-1).
+  if (typeof vid !== 'number' || !Number.isInteger(vid) || vid < 0) return null;
+  return vid;
 }
 
 /**

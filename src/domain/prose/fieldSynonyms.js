@@ -90,6 +90,19 @@ export const HOLDER_KIND_NOUN_ROWS = Object.freeze([
 ]);
 
 /**
+ * ⛔ EVERY FROZEN HOLDER KIND HAS ITS NOUNS, asserted at module load rather than in a test, so
+ * a kind added to `HOLDER_KINDS` cannot ship mute. It throws rather than warning: a synonym
+ * table that silently covers eleven of twelve kinds is an arm quietly blind on the twelfth.
+ */
+const missingKinds = HOLDER_KINDS.filter(
+  (kind) => !HOLDER_KIND_NOUN_ROWS.some((row) => row.kind === kind),
+);
+if (missingKinds.length) {
+  throw new Error(`fieldSynonyms: HOLDER_KINDS gained ${missingKinds.join(', ')} with no record`
+    + ' noun; give each a row or the arms are blind on it');
+}
+
+/**
  * THE VOCABULARY FOR ONE CENSUS ROW: every noun its read fields may be named by, keyed by
  * field path, in the shape `claimsField` takes as its third argument.
  *
@@ -120,19 +133,6 @@ export function fieldSynonymsFor(row) {
  * @param {ReadonlyArray<object>} rows
  * @returns {Record<string, string[]>}
  */
-/**
- * ⛔ EVERY FROZEN HOLDER KIND HAS ITS NOUNS, asserted at module load rather than in a test, so
- * a kind added to `HOLDER_KINDS` cannot ship mute. It throws rather than warning: a synonym
- * table that silently covers eleven of twelve kinds is an arm quietly blind on the twelfth.
- */
-const missingKinds = HOLDER_KINDS.filter(
-  (kind) => !HOLDER_KIND_NOUN_ROWS.some((row) => row.kind === kind),
-);
-if (missingKinds.length) {
-  throw new Error(`fieldSynonyms: HOLDER_KINDS gained ${missingKinds.join(', ')} with no record`
-    + ' noun; give each a row or the arms are blind on it');
-}
-
 export function fieldSynonymTable(rows) {
   /** @type {Record<string, Set<string>>} */
   const merged = {};
