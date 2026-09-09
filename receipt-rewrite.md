@@ -29,7 +29,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 |---|---|---|---|
 | 8a-1 | the index-stable draw (§N.2) | **`f4005cccd`** | **LANDED** |
 | 8a-2 | passage shapes — the licensed fourth draw + the distribution report | **`39c88b02d`** | **LANDED** |
-| 8a-3 | the taste's instruments landed by name, without the annex rows | — | pending |
+| 8a-3 | the taste's instruments landed by name, without the annex rows | **`83e8acf17`** | **LANDED** |
 | 8a-4 | `armThread` + the kinship tiebreak | — | pending |
 | 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | — | pending |
 | 8a-6 | the arm-Q cure + the field-synonym table | — | pending |
@@ -486,3 +486,173 @@ is the `--shapes` surface; the gate reaches it by handing it a corpus.
    and any draw change re-rolls it. The audience-divergence control lost half its breadth to that.
 4. **`tests/copy/voiceMechanics.test.js` is RED at the §917 product tip** and not from this car.
 
+
+---
+
+## 8a-3 — THE TASTE'S INSTRUMENTS LANDED BY NAME, WITHOUT THE ANNEX ROWS
+
+**LANDED `83e8acf17`** over `39c88b02d`. Second seat (Opus 5 — Fable-unvalidated), continuing
+the lane under the chair's ADDENDUM 1. Eleven cherry-picks, every one `git cherry-pick -n` and
+re-staged BY FILE; a refused file dropped with `git show HEAD:<path> > <path>` (tracked) or
+`git rm -f` (added by the pick) — `git checkout --` was never run.
+
+### THE FIRST THING RUN, as ADDENDUM 1 required
+
+    node scripts/generate-dossier-state-prose.mjs --check     exit 0   (before any pick)
+    node scripts/generate-dossier-state-prose.mjs --check     exit 0   (after all eleven)
+
+⭐ **THE RECON'S FEAR DOES NOT HOLD, EXECUTED.** M-2's parser cure (a pending bold label opens
+its pool on EVERY pool of a block, not only the first) and its norm-denominator change
+(`census.rows.length` → `census.totals.pools`) move **ZERO projected bytes** with the annex
+untouched. `--check` is green on both sides and `node scripts/generate-dossier-state-prose.mjs
+--taste` re-wrote the six leaves byte-identically (`git status --porcelain src/data` empty).
+
+### THE FILES TAKEN AND REFUSED, PER CHERRY-PICK
+
+| pick | sha | TAKEN | REFUSED |
+|---|---|---|---|
+| M-1 | `3844a5d8f` | `scripts/lib/prose-licence-card.mjs`, `scripts/prose-licence-card.mjs`, `tests/lint/proseLicenceCard.walker.test.js` | — (3 of 3) |
+| M-2 | `1af673d07` | `scripts/lib/dossier-annex-grammar.mjs`, `src/domain/prose/wiringCensus.js`, `scripts/wiring-census.mjs`, `scripts/generate-dossier-state-prose.mjs`, `tests/lint/proseLicenceCard.walker.test.js`, `tests/lint/proseWiringCensus.walker.test.js`, `scripts/mutation-coverage-manifest.json` (the licence-card entry only) | `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, `docs/content/prose-shift-register.json`, `docs/content/wiring-census.json`, `src/data/dossierStateProse/defense.generated.js`, `src/data/dossierStateProse/general.generated.js`, `tests/lint/proseTasteAnnex.walker.test.js` (+ its mutation entry), `tests/lint/proseComposed.walker.test.js`, `tests/lint/proseEntryContradiction.walker.test.js`, `tests/lint/proseMoveGrammar.walker.test.js` |
+| M-3 | `69eb79415` | `scripts/prose-rate-corpus.mjs`, `scripts/taste-candidates.mjs`, `src/domain/display/stateProse/legibilityRung.js`, `tests/helpers/dossierManifest.js`, `tests/property/dossierProseManifest.test.js`, `scripts/mutation-coverage-manifest.json` | `src/components/new/generalDeskRead.js`, `src/domain/display/stateProse/generalStateProse.js` (ADDENDUM 1 ruling 4), `defenseStateProseCandidates.js`, `generalStateProseCandidates.js`, `tests/lint/proseTasteCandidates.walker.test.js` (+ its mutation entry) |
+| M-4 | `b37df9ec3` | `scripts/prose-rate-corpus.mjs` (the norm bit from the PREDICATE's rate) | `src/data/proseNorms.generated.js`, `docs/content/prose-shift-register.json`, `docs/content/wiring-census.json`, `tests/lint/proseTasteAnnex.walker.test.js` |
+| M-5 | `e5f3f6a98` | all 4 | — |
+| M-6 | `c4c2468d2` | all 3 | — |
+| M-7 | `f86bd505c` | all 3 | — |
+| M-8b | `93844e1c3` | `tests/lint/composeStateProseFence.test.js`, `tests/lint/proseWiringCensus.walker.test.js` | `docs/content/wiring-census.json`, `defenseStateProseCandidates.js`, `generalStateProseCandidates.js` |
+| M-8d | `2dd07e72a` | both | — |
+| M-9 | `4c786100c` | both | — |
+| M-9b | `63d0a711e` | both | — |
+
+**23 files taken · 15 distinct files refused.** Conflicts arose on four picks (M-2, M-4, M-8b on
+data files; all resolved to HEAD content by restore-and-stage, then `git cherry-pick --quit`).
+
+### ⛔⛔ THE CAR'S OWN FINDING — THE HARNESS CALLED AN ABSENT POOL **PASS**, AND IT IS CURED AT CAUSE
+
+Reproduced by execution before it was cured, on the tree this car creates:
+
+    node -e '… measure({arm:"probe", round:0, base:null, variety:0}) …'
+    {"at":"DS-DEF-11 :: country: pressed (walled)","verdict":"PASS","why":"","units":0,
+     "inBand":false,"walk":{"FAIL":0,"WITHHELD":0,"PASS":0}}          × all seven pools
+
+`TASTE_POOLS` is a list of NAMES on the licence card; the pools those names point at are ANNEX
+ROWS. In a tree with the instruments and without the rows every name resolves to `undefined`,
+`variants` falls back to `[]`, `unitsOfPool` answers `[]`, the walk over an empty unit set
+returns three zeros, and the verdict line — `verdicts.FAIL > 0 ? 'FAIL' : (WITHHELD > 0 ?
+'WITHHELD' : 'PASS')` — **reads PASS with an empty `why`**. The gate would not have passed it
+(`inBandOf` puts `band position: no face was measured` in `failing`, so `inBand` is false), but
+the WORD a reader sees was PASS and the reason column was blank. TASTE car M-9 built
+`withheldPoolRow` to stop exactly this class of lie for an UNWRITTEN set; an **ABSENT** set fell
+through the guard.
+
+`absentPoolRow` is that guard's other half, built to the same shape: `verdict:
+'NOT-EXECUTABLE'`, the reason spelled out, every measure `null` rather than zero, and one
+`failing` row so no arithmetic can round it up to lawful. Two branches feed it — a pool the
+corpus does not carry (answered FIRST, before any branch that would read an empty variant list)
+and a pool that exists but composes no unit because its attach set is empty.
+
+### THE THREE INSTRUMENTS LANDED WITH ARMS **NOT-EXECUTABLE**, EACH ASSERTING THE CAUSE
+
+The estate's rule is that an arm with an absent input declares NOT-EXECUTABLE and never `[]`.
+Each of these asserts a fact that CAN be false, not a fact about an empty collection:
+
+| walker | arms | what it asserts instead |
+|---|---|---|
+| `proseTasteCorruption` | the paired-town equality, the DM-divergence and the REVEALED arms | `COVERT_CANDIDATE_LANDED === false`, read off `defenseStateProseCandidates.js`'s own source. The equality arm would otherwise have read green forever while proving nothing: two pages that were never going to differ are byte-equal for free |
+| `proseTasteMeasure` | 5 (the cartesian count, the tie rate, the whole-measure drive, the half-written rule, the fixture-shape comparison) | `TASTE_POOLS_LANDED === false`, and on the drive: every row `verdict: NOT-EXECUTABLE`, `walk` null, `band` null, exactly one `failing` row |
+| `proseWiringCensus` | the modifier-side object-class SET | `modifierRows(committed.rows).length === 0` |
+
+⚠ **THE ONE ARM THIS CAR COULD NOT KEEP ARMED, NAMED:** `proseTasteMeasure`'s "THE FIXTURE IS
+THE SHIPPED SHAPE" compares the M-9 fixture's piece rows against a REAL unit from
+`unitsOfPool('DS-DEF-11', 'watch: bought (revealed)')`. With no such pool the fixture's shape is
+asserted only against itself. Owed to 8b, recorded here rather than papered over.
+
+### THE SPINE/MODIFIER PARTITION IS PROVED ON A PLANT, BECAUSE ZERO CONVICTS NOTHING
+
+`spineRows` could return its argument unfiltered and every integer in
+`proseWiringCensus.walker.test.js` would still be green at a modifier population of 0. A new
+arm plants four rows (no role · `spine` · `modifier` · `turn`) and asserts the filter drops
+exactly the modifier, the complement names exactly it, and the two partition the input. The
+shipped corpus is then asserted as the degenerate case of that same partition.
+
+The taste's pins were RE-CUT to the product's state rather than carried: 715 → **708**, the
+modifier count 7 → **0**, `ids.size` 715 → **708**, `committed.rows.length` 715 → **708**,
+`rate.rows.length` 276 → **271** (twice). Each carries a comment naming what the taste read and
+why this tree reads otherwise.
+
+### THE CENSUS RE-TAKEN, BY THE CENSUS RULE (the brief pre-rules it at item 3)
+
+    node scripts/wiring-census.mjs --dry
+    [wiring-census --dry] the committed register is STALE; nothing was written
+      bytes committed 2053167 · fresh 2053619 · delta 452
+      sections that would move: totals · modifiers
+      stamped shas that would move: (none) · candidate leaves unmoved
+      ROWS that would move: 0
+
+    node scripts/wiring-census.mjs --write   → 708 pools, 165 relation rows, 7 stamped files
+
+The whole committed diff is **6 insertions / 1 deletion**: `totals.modifierRows: 0` and a new
+`modifiers` section carrying its ruling and an empty `rows: []`. Zero rows, zero shas.
+
+### ⛔ THE ZERO-BYTE FENCE, EXECUTED ON EVERY CELL
+
+A read-only base dock `$SC/rw8aBASE` was cut at `39c88b02d` (`sh mkdock.sh rw8aBASE 39c88b02d`,
+porcelain 0, symlinked node_modules) so the classifier had a base tree to record.
+
+    node scripts/prose-manifest-cells.mjs --out cells-8a2.json    (at 39c88b02d)  exit 0
+    node scripts/prose-manifest-cells.mjs --out cells-8a3.json    (at the tip)    exit 0
+    node scripts/prose-manifest-diff.mjs cells-8a2.json cells-8a3.json            exit 0
+
+    PROSE MANIFEST DIFF · 73284 cells on the tip side
+      REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0
+      UNCHANGED cells 73284 · towns 525 · ADDED 0 · REMOVED 0
+
+Both sides also read `drawAgrees` **3914** and "variant not identified 0 · ambiguous 0", so the
+M-3 recorder change (the composed-unit reader) moved no one-piece cell, which is the property
+its own comment claims.
+
+### EXECUTED ACCEPTANCE
+
+| gate | command | result |
+|---|---|---|
+| projector | `node scripts/generate-dossier-state-prose.mjs --check` | exit 0 |
+| `--taste` is DARK | `node scripts/generate-dossier-state-prose.mjs --taste` | `--taste was passed and NO refusal needed waiving.` |
+| `taste-candidates` | `node scripts/taste-candidates.mjs` | exit 0, 768 towns, all seven pools 0/0/0 — the instrument runs with nothing to measure |
+| `tests/lint` WHOLE | `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,546 tests passed / 1 failed** |
+| typecheck | `npx tsc --noEmit -p tsconfig.full.json` | **173 errors, 0 in any file this car touched** (base 173) |
+| eslint | `npx eslint <the 21 touched js/mjs files>` | **exit 0, no output** |
+| runners | own shell, before every vitest | **0**, every time |
+| porcelain | after the commit | **0** |
+
+⚠ **A CORRECTION TO THIS COMMIT'S OWN MESSAGE, RECORDED RATHER THAN AMENDED.** The message says
+`tests/lint` reads "153 files passed / 1 · 2,559 passed / 1". The FILE count is right; the TEST
+count is not — the whole-suite run that produced 2,559 was taken BEFORE the last two cures (the
+three negative-anchor conversions in the corruption walker and the tightened measure arm), and
+the number was carried forward rather than re-read. The executed figure at `83e8acf17` is
+**2,546 passed / 1 failed**, from the run above. Nothing else in the message is affected; the
+commit is not amended because amend is forbidden in this lane.
+
+### The one red, DECLARED and unchanged in kind
+
+`tests/lint/sovereigntyLightingContract.walker.test.js` — now the estate's FILE count as well as
+its titles (`expected 2562 to be 2557`; this car adds five test files and removes one). Carried
+to 8a-10 by ADDENDUM 1 ruling 7: the refreeze ritual refuses a dirty tree.
+
+### The judgment calls, recorded for veto
+
+1. **`proseTasteCandidates.walker.test.js` REFUSED WHOLE, not landed NOT-EXECUTABLE.** ADDENDUM
+   1 ruling 5 left this to the lane per arm. Measured: **8 of its 9 arms red** on a tree without
+   the seven candidate functions, and the ninth ("both limbs of one roster pass") passes
+   vacuously. A walker whose entire subject is absent is a shell, and the estate's own rule is
+   that an instrument must have something to measure. It goes to 8b with the functions it walks.
+2. **The `LICENSED_LEAF_IMPORTS` table lands EMPTY** rather than carrying the taste's
+   DS-DEF-11 row. The arm asserts the licence is exact in BOTH directions, so a permission for
+   an import nobody makes reds as loudly as an import nobody licensed — parking the row would
+   have disarmed the half that matters. 8b lands the row and the function in one commit or
+   neither. The pure-leaf count is DERIVED from the table and pinned as an integer beside it.
+3. **The M-2 walker deltas to proseComposed / proseEntryContradiction / proseMoveGrammar were
+   refused whole rather than re-cut.** Unlike `proseWiringCensus`, whose delta is a MECHANISM
+   (`spineRows`) plus pins, those three are nothing but the annex's own counts (2273 / 715 /
+   5247 / 2037) and an `AUTHORING_MARKER` filter over a corpus that carries no marker. Landing
+   them would have added three filters that can never fire.
+4. **`absentPoolRow` answers BEFORE the marker branch.** A pool that does not exist is not an
+   unwritten one, and every branch below reads a variant list that would be empty.
