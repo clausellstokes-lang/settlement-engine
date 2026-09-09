@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 97,
+ "firstTs": "2026-09-09T03:41:17.260Z",
+ "lastTs": "2026-09-09T03:44:01.713Z",
+ "tools": {
+  "Bash": 18,
+  "Read": 8
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now ARCH sections 2.5 and 8.3.",
+ "run": "wf_2dff77d0-392",
+ "agent": "ad5d41cf5bcef588a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_2dff77d0-392/agent-ad5d41cf5bcef588a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
