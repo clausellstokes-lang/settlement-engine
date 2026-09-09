@@ -20,6 +20,25 @@ import {
 } from '../../src/lib/importReconciliation.js';
 import { MAX_IMPORT_BYTES } from '../../src/lib/accountImport.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+// ⭐ THE LIT PRODUCT'S OWN MINT, so the arm at the foot of this file drives a
+// world this build really makes rather than a hand-built shape. The pipeline is
+// synchronous and the roster payload sits behind a lazy seam, so the create
+// boundary's async edge is awaited at module scope exactly as production awaits
+// it on every module that can reach the pipeline.
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import {
+  DEFAULT_LIVING_CONTENT_LAW_VERSION,
+  LIVING_CONTENT_LAW_CONFIG_KEY,
+  ROSTER_LIVING_CONTENT_LAW_VERSION,
+  resolveLivingContentLawVersion,
+} from '../../src/domain/content/livingContentLawVersion.js';
+import {
+  customContentReferencePack,
+  identifyCustomContentPack,
+} from '../fixtures/customContentReferencePack.js';
+
+await loadGenerationLawPayloads();
 
 function sourceSettlement(id, name, settlementPatch = {}, entryPatch = {}) {
   return {
@@ -571,6 +590,107 @@ describe('DEF-3 — reconciliation drops what it cannot re-address', () => {
     expect(reported.every(issue => /carries no content archive/.test(issue.message))).toBe(true);
     expect(reported.some(issue => /living-content roster/.test(issue.message))).toBe(true);
     expect(reported.some(issue => /custom-content provenance/.test(issue.message))).toBe(true);
+  });
+
+  // ⭐⭐ THE ARM THIS BOUNDARY DID NOT HAVE, AND THE MARKER IT DID NOT STRIP
+  // (lane LIGHT car 2a, 2026-09-08, chair ruling C1 over the LIGHT fold's one
+  // NEW finding). Every arm above drives a HAND-BUILT record, which is all that
+  // could be driven on the day they were written: the dial was dormant, so no
+  // world the product minted carried a birth-law marker at all, and a marked
+  // world could only arrive from a hand-lit build. Since the lighting EVERY
+  // world the product mints carries `_livingContentLawVersion`, and the roster
+  // beside it only when the source run's reviewed environment held living
+  // content — so the ORDINARY reconciled import is marker-carrying and
+  // roster-less, which is exactly the state `importScrub.js:115-121` forbids: a
+  // world that says it was born under the roster law while carrying no roster.
+  // This arm drives the real thing through the real admission.
+  test('⭐ a world the LIT PRODUCT minted arrives with no roster AND no foreign birth law', async () => {
+    const world = generateSettlementPipeline(
+      birthConfig({
+        settType: 'town',
+        culture: 'germanic',
+        terrainOverride: 'plains',
+        tradeRouteAccess: 'crossroads',
+        monsterThreat: 'civilized',
+      }),
+      null,
+      {
+        seed: 'lgt-reconcile-lit-product',
+        customContent: identifyCustomContentPack(customContentReferencePack()),
+      },
+    );
+    // ⛔ ANTI-VACUITY, AND IT IS FIRST. If the product stopped minting the marker
+    // this arm would pass by asserting that nothing was stripped from nothing.
+    expect(
+      world.config[LIVING_CONTENT_LAW_CONFIG_KEY],
+      'the create boundary did not mint the lit law, so the strip below is asserting nothing',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(
+      world.customContentRoster,
+      'a lit birth with the reference pack produced NO roster: either the seam is unarmed or the'
+      + ' pack stopped carrying living content',
+    ).toBeTruthy();
+
+    const text = exportText({
+      settlements: [{
+        id: 's-1',
+        name: 'Ashford',
+        tier: 'town',
+        settlement: JSON.parse(JSON.stringify(world)),
+      }],
+    });
+    // …and the ENVELOPE really carried all three in, which is the second half of
+    // the liveness anchor: this file's subject is what admission removes.
+    const inbound = JSON.parse(text).settlements[0].settlement;
+    expect(inbound.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(inbound._config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(inbound.customContentRoster).toBeTruthy();
+
+    const { session } = await admittedSession(text);
+    const persisted = session.proposals[0].normalizedInput.settlement;
+
+    // THE TOWN ARRIVES WHOLE — a strip, not a rejection.
+    expect(persisted.name).toBe(world.name);
+    expect(persisted.config).toBeTruthy();
+    expect(persisted.config.settType).toBe(world.config.settType);
+
+    // THE FOREIGN BIRTH LAW IS GONE, on the key and on the resolved law both: an
+    // absent marker resolves to v1 through the leaf's CLOSED membership test, so
+    // the imported copy says what it is rather than claiming a scope it cannot
+    // show.
+    expect(
+      Object.hasOwn(persisted.config, LIVING_CONTENT_LAW_CONFIG_KEY),
+      'the reconciled world kept a FOREIGN account\'s birth-law marker. With the roster dropped'
+      + ' two lines below, that is a world claiming it was born under the roster law while'
+      + ' carrying no roster — permanently, because nothing downstream re-mints one.',
+    ).toBe(false);
+    expect(resolveLivingContentLawVersion(persisted.config))
+      .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+
+    // ⭐ AND THE MARKER'S SECOND ECHO, MEASURED RATHER THAN ASSUMED AWAY. A
+    // generated world carries the law on `config` AND on the authoring `_config`
+    // — those are the only two paths in the whole settlement that move between
+    // law 1 and law 2. The gallery importer needs no second strip because
+    // `gallery.js` deletes `_config` wholesale as a regeneration hazard; THIS
+    // boundary has no such delete, measured on the first cut of this very arm,
+    // which passed on `config` and failed here. A world whose resolved config
+    // says v1 while its authoring config still says v2 tells the same lie one
+    // level down, and `_config` is what `SaveToLibraryButton` persists as a
+    // save's regeneration input.
+    expect(persisted._config, 'the authoring config was demolished, not stripped').toBeTruthy();
+    expect(
+      Object.hasOwn(persisted._config, LIVING_CONTENT_LAW_CONFIG_KEY),
+      'the reconciled world kept the foreign birth law on its AUTHORING config after the'
+      + ' resolved one was cleaned',
+    ).toBe(false);
+
+    // …and both records still go, with their two messages and no third.
+    expect(persisted.customContentRoster).toBeUndefined();
+    expect(persisted.customContentProvenance).toBeUndefined();
+    const reported = session.unsupported.filter(
+      issue => issue.code === 'settlement_content_record_unmappable',
+    );
+    expect(reported).toHaveLength(2);
   });
 
   test('a settlement carrying NEITHER record reports nothing and is byte-stable', async () => {

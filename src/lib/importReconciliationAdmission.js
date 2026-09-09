@@ -28,6 +28,11 @@ import {
   sourceIdOf,
   utf8Size,
 } from './importReconciliationShared.js';
+// The law marker's ONE spelling, read from the dependency-free leaf that declares
+// it rather than re-typed in a strip — the same edge `importScrub.js` takes for
+// the same act on the other archive-less importer. The leaf imports nothing, so
+// this edge costs no closure.
+import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../domain/content/livingContentLawVersion.js';
 
 /** @typedef {import('./importReconciliationTypes.js').ImportReconciliationIngest} ImportReconciliationIngest */
 /** @typedef {import('./importReconciliationTypes.js').ImportReconciliationSession} ImportReconciliationSession */
@@ -403,10 +408,14 @@ function selectedCampaignMechanics(ingest, selected) {
 }
 
 /**
- * ⭐ DROP THE TWO SOURCE-ACCOUNT CUSTOM-CONTENT EXACTNESS RECORDS ON THE
- * RECONCILED ENTRY (lane L-MAT-FIX, DEF-3). Mutates `entry.settlement` in place
- * and returns one message per record removed, for the caller's `unsupported`
- * list.
+ * ⭐ DROP THE TWO SOURCE-ACCOUNT CUSTOM-CONTENT EXACTNESS RECORDS — AND THE
+ * FOREIGN WORLD'S BIRTH-LAW MARKER — ON THE RECONCILED ENTRY (lane L-MAT-FIX,
+ * DEF-3; the marker added by lane LIGHT car 2a, 2026-09-08, on the chair's
+ * ruling C1). Mutates `entry.settlement` in place and returns one message per
+ * RECORD removed, for the caller's `unsupported` list. The marker is stripped
+ * SILENTLY, and the asymmetry is the point: a dropped record is something the
+ * importer loses and must be told about, while the marker is a claim about
+ * someone else's world that this account was never entitled to inherit.
  *
  * ⛔ WHY ANYTHING HAPPENS HERE AT ALL. `prepareSettlementEntry` preserves
  * `customContentRoster` and `customContentProvenance` verbatim, and this slice
@@ -428,6 +437,46 @@ function selectedCampaignMechanics(ingest, selected) {
  * ingest drops both. Curing one here and not the other would leave two records
  * that agree everywhere else disagreeing about exactly one path, which is a
  * shape a future reader cannot distinguish from an oversight.
+ *
+ * ⭐⭐ AND THE THIRD STRIP: THE FOREIGN BIRTH LAW, ON THE RULE THIS MODULE'S
+ * OWN HEADER ALREADY CITES. `importScrub.js:115-121` states it for the sibling
+ * archive-less importer, in its own words: an ingest that kept the marker would
+ * import "a world that says it was born under the roster law while carrying no
+ * roster — a world that lies about its own scope, permanently, because nothing
+ * downstream re-mints a roster". Both boundaries are archive-less, both take a
+ * FOREIGN account's world, and this one dropped the roster while leaving the
+ * claim that produced it — the exact state that paragraph forbids.
+ *
+ * ⛔ AND WHY BOTH ECHOES, MEASURED ON THIS PATH. The marker rides a generated
+ * world twice — the RESOLVED `settlement.config` and the AUTHORING
+ * `settlement._config` — and those two are the only paths in a whole settlement
+ * that move between law 1 and law 2. `scrubGalleryImportLivingContent` needs one
+ * strip because `gallery.js`'s `stripImportConfidential` already deletes
+ * `_config` wholesale on that path, as a regeneration hazard; nothing deletes it
+ * here, which was measured on the first cut of this cure's own arm — it passed on
+ * `config` and failed on `_config`. Cleaning one echo and leaving the other tells
+ * the same lie one level down, and `_config` is what a save persists as its
+ * regeneration input (`SaveToLibraryButton.jsx`), so it is the echo a future
+ * re-birth would read.
+ *
+ * ⛔ AND WHY IT IS NOT CONDITIONAL ON EITHER RECORD. The marker rides on every
+ * world the product mints since the dial was lit (2026-09-08), while the roster
+ * is written only when the source run's reviewed environment held a living-content
+ * definition — measured at the lighting: 0 of 525 golden rows and 0 of 768 RATE
+ * towns carry the roster under law 2. So the ordinary reconciled import is
+ * marker-carrying and roster-less, which is precisely the lying shape; a strip
+ * gated on the records would never fire on it. The three strips are therefore
+ * three independent presence tests, not one compound act.
+ *
+ * ⚠ THE ACCOUNT PATH'S CARVE-OUT DOES NOT REACH HERE, AND `importScrub.js`
+ * SAYS WHY. That carve-out exists because the account path is the user's OWN
+ * estate moving between their OWN accounts, where the roster is REMAPPED through
+ * an archive receipt and the marker is a saved world's immutable birth law.
+ * Reconciliation is archive-less and CROSS-ACCOUNT — the gallery shape — and it
+ * has just dropped the roster two paragraphs above, so keeping the marker would
+ * leave the denial attached to nothing. Reclassifying the imported copy as v1 is
+ * the honest act, and it is a reclassification of a COPY: the source account's
+ * own world is untouched by an import.
  *
  * ⛔ AND WHY A DROP RATHER THAN THE ACCOUNT IMPORTER'S REMAP — MEASURED, NOT
  * ASSUMED. Both records are keyed on `customDefinition*` identifiers belonging to
@@ -494,6 +543,28 @@ function dropReconciledSettlementContentRecords(entry) {
       'This import carries no content archive, so the source account\'s '
       + 'living-content roster could not be re-addressed. It was removed.',
     );
+  }
+
+  // THE FOREIGN BIRTH LAW, on BOTH of the marker's echoes, in the shape
+  // `importScrub.js:158-166` already ships for the same act rather than a second
+  // one invented here. No message: see the headline above for why the asymmetry
+  // with the two records is deliberate.
+  for (const echo of ['config', '_config']) {
+    const bag = settlement[echo];
+    if (
+      !bag
+      || typeof bag !== 'object'
+      || Array.isArray(bag)
+      || !Object.hasOwn(bag, LIVING_CONTENT_LAW_CONFIG_KEY)
+    ) continue;
+    const {
+      // The underscore-prefixed binding is the intentional drop of a foreign
+      // world's birth-law marker; the lint config already admits that name shape,
+      // so no disable directive is needed (and an unused one is itself a warning).
+      [LIVING_CONTENT_LAW_CONFIG_KEY]: _livingContentLawVersion,
+      ...rest
+    } = /** @type {Record<string, any>} */ (bag);
+    settlement[echo] = rest;
   }
 
   return dropped;
