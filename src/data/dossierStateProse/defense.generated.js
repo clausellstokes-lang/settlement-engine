@@ -5318,7 +5318,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "Funding for the muster at {settlement} falls short of its wage, and the {defwork} holds.",
+            "The roll at {settlement} sets a wage above what the muster is paid, and the {defwork} holds.",
             "The pay due the muster is not made up at {settlement}. The town has its {defwork}.",
             "At {settlement} the muster is not paid to its full wage, and the {defwork} is in place."
           ]

@@ -5993,7 +5993,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
    - `[face]` The wage roll at {settlement} is not met. The town's {defwork} is in place.
    - `[face]` Wages at {settlement} run short of the roll, and the {defwork} stands.
 2. `[unfolding]` Pay for {settlement}'s muster stands open on the roll, and the {defwork} is up.
-   - `[face]` Funding for the muster at {settlement} falls short of its wage, and the {defwork} holds.
+   - `[face]` The roll at {settlement} sets a wage above what the muster is paid, and the {defwork} holds.
    - `[face]` The pay due the muster is not made up at {settlement}. The town has its {defwork}.
    - `[face]` At {settlement} the muster is not paid to its full wage, and the {defwork} is in place.
 
