@@ -820,6 +820,15 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
       .toEqual([...CRIMINAL_CAPTURE_STATES].map((s2) => `capture ${s2}`).sort());
     for (const state of CRIMINAL_CAPTURE_STATES) {
       expect(criminalCapturePoolKey(state)).toBe(`capture ${state}`);
+      // ⛔ AND EVERY VALUE OF THE TABLE IS A LIVE POOL (REWRITE car 8b-W). The key is built by
+      // a module-private table now rather than by a template over a local, so the register can
+      // read the mapping; the price of a table is that a pool the corpus stopped carrying
+      // would go quiet at the draw, which this half refuses.
+      expect(DEF4_POOLS[`capture ${state}`], `corpus has no pool for ${state}`).toBeTruthy();
+    }
+    // An Object.prototype key is not a capture state, and the lookup is read as a string.
+    for (const inherited of ['constructor', 'toString', '__proto__', 'valueOf']) {
+      expect(criminalCapturePoolKey(inherited), inherited).toBeNull();
     }
     const structurePools = Object.keys(DEF4_POOLS).filter((k) => k.startsWith('structure '));
     expect(structurePools).toHaveLength(RECOGNISED_CRIMINAL_STRUCTURES.length + 1);

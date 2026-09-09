@@ -885,10 +885,34 @@ const CRIMINAL_STRUCTURE_POOL = Object.freeze({
   diffuse: 'structure diffuse',
 });
 
+/**
+ * DS-DEF-4 lens 2's key table — the producer's five capture states, one pool each.
+ *
+ * ⭐⭐ THE FIFTH ROW EXPOSED BY THIS CAR, AND THE LADDER'S OWN REFUSAL IS WHY IT WAS NEEDED.
+ * The shipped key was a TEMPLATE over a local, `` `capture ${state}` `` where
+ * `const state = text(captureState)`, and the estate's wiring register (the instrument island
+ * under `src/domain/prose/`, which no product file may name) deliberately refuses to hop from
+ * a local to the first PARAMETER its initialiser names: taking that hop resolves fifty more
+ * pools estate-wide and makes fifty predicates FALSE, because a local so often holds a LOOKUP
+ * of its argument rather than the argument. So the hole bound to nothing, the template
+ * recovered nothing, and all five pools read rung 4. A table cannot lie that way: its key is
+ * the value the branch actually selects on, and here that value is the producer's own token.
+ *
+ * ⚠ THE EXPORTED ROSTER IS DERIVED FROM THIS TABLE rather than written twice, exactly as
+ * `RECOGNISED_CRIMINAL_STRUCTURES` is derived from the structure table above. Two spellings of
+ * one vocabulary is the drift this desk's own label-trap rule exists to refuse.
+ * @type {Readonly<Record<string, string>>}
+ */
+const CRIMINAL_CAPTURE_POOL = Object.freeze({
+  none: 'capture none',
+  adversarial: 'capture adversarial',
+  equilibrium: 'capture equilibrium',
+  corrupted: 'capture corrupted',
+  capture: 'capture capture',
+});
+
 /** The producer's five capture states, exported so the suite can bind them both ways. */
-export const CRIMINAL_CAPTURE_STATES = Object.freeze([
-  'none', 'adversarial', 'equilibrium', 'corrupted', 'capture',
-]);
+export const CRIMINAL_CAPTURE_STATES = Object.freeze(Object.keys(CRIMINAL_CAPTURE_POOL));
 
 /** Every structure key this desk recognises, exported for the same both-ways binding. */
 export const RECOGNISED_CRIMINAL_STRUCTURES = Object.freeze(Object.keys(CRIMINAL_STRUCTURE_POOL));
@@ -911,8 +935,8 @@ export function criminalStructurePoolKey(structureKey) {
  * @param {unknown} captureState @returns {string|null}
  */
 export function criminalCapturePoolKey(captureState) {
-  const state = text(captureState);
-  return CRIMINAL_CAPTURE_STATES.includes(state) ? `capture ${state}` : null;
+  const pool = CRIMINAL_CAPTURE_POOL[text(captureState)];
+  return typeof pool === 'string' ? pool : null;
 }
 
 /**
