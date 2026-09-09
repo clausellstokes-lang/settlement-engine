@@ -41,14 +41,14 @@
  "digests": {
   "corpusMeta": "2ef657c8f5a9218ab81c47dc0bc66756055cffcaef2ab01edad1a8e630b37ca1",
   "inventory": "40856b9ba70142af926f44985a1f8cc9cb979fb833b6e3a7d6bdcde914f1d763",
-  "manifests": "1e2b4b1cf77d7806b270ca0a1d492b2b9729614b1fcf1cf23c3051f1b53086c4",
+  "manifests": "2465b97327574a7abb296ba974589864b59c2ebf0289e26b94ceefb220bf7874",
   "migrationReview": "18f64e22297327451588ed1d17bb96327c5ddb47174b60b4c92fbdfdbf10e178",
   "rowTags": "820c468615ac0421b401e29aee3ef223517294215a8b9f3b82130f5e814480f5",
-  "scanStats": "66819fa939134b37637e0b6611d7d0553ab679b422c5e25cd87c8780ac5f0316",
-  "sentinel": "bdd7182f9160767817d7fea8d3f9a93daf4295fc741562468e4ecf58fa3d56ba"
+  "scanStats": "a40bf295fcff4ea65700880483c8542ad8eb751e982ef18f37bb43eb82ea1665",
+  "sentinel": "167b9fef2a09591136e6f983c9651df6ada4222db6411bb0dec3e43bea718f78"
  },
- "frozen": "2026-09-08",
- "frozenAtSha": "80258971828ef9abd83af24cd03f6830c98a5e42",
+ "frozen": "2026-09-09",
+ "frozenAtSha": "455ec96a4abace0ae7eb68d09e419820bacd5b5d",
  "identities": 1397,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2307,7 +2307,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a1c7fb4d06c32eb81442ef638c801abc0dbf89ebfd641acf99f96667dc73787f",
+   "digest": "a55a085fb295fc7cb75af827853d3627ac91311a0bc2422337e716d56598df3f",
    "entries": [
     {
      "mode": "100644",
@@ -8745,8 +8745,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/composeStateProse.js",
-     "sha256": "c427ff3ece3b4c489ff84953f98342602daf799bdac0f12ba329a2347798da46",
-     "size": 42173,
+     "sha256": "b34adb7ce3803c9f0e25e4916f4535411d3bc1f98882cdab4596a3e7ad08bb91",
+     "size": 45141,
      "type": "file"
     },
     {
@@ -9759,6 +9759,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/composedWalker.js",
+     "sha256": "9b4740c66a6f035aedca8e4ebd22c48e74d4a522082391702d9802b7ba172db7",
+     "size": 54522,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/entryGround.js",
      "sha256": "265e2c2d099ebc033dfd06622318f864b816b6efafa6f53ce696498d72d28b50",
      "size": 5440,
@@ -9787,9 +9794,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/holderTable.js",
+     "sha256": "03795eddf9f9e62524f01eeb9ee91d078bcee9b739b26125a3814823137db5f9",
+     "size": 47441,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/moveGrammar.js",
-     "sha256": "e11cbb0f7fe4c4a659829de1de35484bc431c9a92680d387cceac0e97ad1a5c7",
-     "size": 20330,
+     "sha256": "191cf4cd2f6e5c634e83d9ad947f2fcd5f353e3592638e00eb9bc7b7276b2858",
+     "size": 25092,
      "type": "file"
     },
     {
@@ -9823,8 +9837,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/wiringCensus.js",
-     "sha256": "d103f336d4ec6a67865cab50a4a3df4ee9b3aa20868a3a6c63831e76af83c4ef",
-     "size": 76237,
+     "sha256": "b2036c86a1da77f061166a8b9b6f7d37529490a494253c911f9439deab98f55d",
+     "size": 77164,
      "type": "file"
     },
     {
@@ -17867,7 +17881,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "dba9da7d7edae8abae7a8cef71f295644184d1605d9cf756e63e8029392f4042",
+   "digest": "39ec8b2304e1530966894c84573946d860384eaa366d2d748cf3de829564614e",
    "entries": [
     {
      "mode": "100644",
@@ -24116,8 +24130,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/composeStateProse.js",
-     "sha256": "c427ff3ece3b4c489ff84953f98342602daf799bdac0f12ba329a2347798da46",
-     "size": 42173,
+     "sha256": "b34adb7ce3803c9f0e25e4916f4535411d3bc1f98882cdab4596a3e7ad08bb91",
+     "size": 45141,
      "type": "file"
     },
     {
@@ -25130,6 +25144,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/composedWalker.js",
+     "sha256": "9b4740c66a6f035aedca8e4ebd22c48e74d4a522082391702d9802b7ba172db7",
+     "size": 54522,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/entryGround.js",
      "sha256": "265e2c2d099ebc033dfd06622318f864b816b6efafa6f53ce696498d72d28b50",
      "size": 5440,
@@ -25158,9 +25179,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/holderTable.js",
+     "sha256": "03795eddf9f9e62524f01eeb9ee91d078bcee9b739b26125a3814823137db5f9",
+     "size": 47441,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/moveGrammar.js",
-     "sha256": "e11cbb0f7fe4c4a659829de1de35484bc431c9a92680d387cceac0e97ad1a5c7",
-     "size": 20330,
+     "sha256": "191cf4cd2f6e5c634e83d9ad947f2fcd5f353e3592638e00eb9bc7b7276b2858",
+     "size": 25092,
      "type": "file"
     },
     {
@@ -25194,8 +25222,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/wiringCensus.js",
-     "sha256": "d103f336d4ec6a67865cab50a4a3df4ee9b3aa20868a3a6c63831e76af83c4ef",
-     "size": 76237,
+     "sha256": "b2036c86a1da77f061166a8b9b6f7d37529490a494253c911f9439deab98f55d",
+     "size": 77164,
      "type": "file"
     },
     {
@@ -33231,7 +33259,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "e402f066eb2ac5e3e387c440ffbed5b9dd89cb7763f8913ef9cdee41529693d1",
+   "digest": "34333fcc3aef835dda77089d928a482b5119f5dd8b4bf9448600c466d5736dde",
    "entries": [
     {
      "mode": "100644",
@@ -39599,8 +39627,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/composeStateProse.js",
-     "sha256": "c427ff3ece3b4c489ff84953f98342602daf799bdac0f12ba329a2347798da46",
-     "size": 42173,
+     "sha256": "b34adb7ce3803c9f0e25e4916f4535411d3bc1f98882cdab4596a3e7ad08bb91",
+     "size": 45141,
      "type": "file"
     },
     {
@@ -40613,6 +40641,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/composedWalker.js",
+     "sha256": "9b4740c66a6f035aedca8e4ebd22c48e74d4a522082391702d9802b7ba172db7",
+     "size": 54522,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/entryGround.js",
      "sha256": "265e2c2d099ebc033dfd06622318f864b816b6efafa6f53ce696498d72d28b50",
      "size": 5440,
@@ -40641,9 +40676,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/prose/holderTable.js",
+     "sha256": "03795eddf9f9e62524f01eeb9ee91d078bcee9b739b26125a3814823137db5f9",
+     "size": 47441,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/prose/moveGrammar.js",
-     "sha256": "e11cbb0f7fe4c4a659829de1de35484bc431c9a92680d387cceac0e97ad1a5c7",
-     "size": 20330,
+     "sha256": "191cf4cd2f6e5c634e83d9ad947f2fcd5f353e3592638e00eb9bc7b7276b2858",
+     "size": 25092,
      "type": "file"
     },
     {
@@ -40677,8 +40719,8 @@
     {
      "mode": "100644",
      "path": "src/domain/prose/wiringCensus.js",
-     "sha256": "d103f336d4ec6a67865cab50a4a3df4ee9b3aa20868a3a6c63831e76af83c4ef",
-     "size": 76237,
+     "sha256": "b2036c86a1da77f061166a8b9b6f7d37529490a494253c911f9439deab98f55d",
+     "size": 77164,
      "type": "file"
     },
     {
@@ -48980,21 +49022,21 @@
   }
  },
  "scanStats": {
-  "files": 2194,
-  "reads": 126982,
-  "resolved": 9689,
-  "unresolved": 117293
+  "files": 2196,
+  "reads": 127331,
+  "resolved": 9696,
+  "unresolved": 117635
  },
  "scannerProvenance": {
   "detectorDigest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
-  "executionTreeDigest": "a1c7fb4d06c32eb81442ef638c801abc0dbf89ebfd641acf99f96667dc73787f",
-  "scanTreeDigest": "dba9da7d7edae8abae7a8cef71f295644184d1605d9cf756e63e8029392f4042",
-  "sourceTreeDigest": "e402f066eb2ac5e3e387c440ffbed5b9dd89cb7763f8913ef9cdee41529693d1",
+  "executionTreeDigest": "a55a085fb295fc7cb75af827853d3627ac91311a0bc2422337e716d56598df3f",
+  "scanTreeDigest": "39ec8b2304e1530966894c84573946d860384eaa366d2d748cf3de829564614e",
+  "sourceTreeDigest": "34333fcc3aef835dda77089d928a482b5119f5dd8b4bf9448600c466d5736dde",
   "unscannedInputDigest": "12baefce51b8ad614fa31bdbab19bd14e6e3d65a04cf1eba5ba568debdc39330"
  },
  "schema": 18,
  "sentinel": {
-  "resolvedReads": 9689,
+  "resolvedReads": 9696,
   "totalKeys": 6532,
   "usableShapes": 337
  },
