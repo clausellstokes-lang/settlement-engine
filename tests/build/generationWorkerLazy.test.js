@@ -17,6 +17,26 @@
  *   5. the protocol leaf really is import-free, which is what lets it be
  *      co-located into every chunk that needs it at zero cost.
  *
+ * ⭐⭐ AND THE PRODUCTION ARM BELOW NO LONGER SAYS "ONE CHUNK", BECAUSE THE BUILD
+ * SAID OTHERWISE (lane LIGHT, car 3b). It used to assert that the emitted worker
+ * carried NO `import(` at all, on the stated premise that "vite inlines a worker
+ * entry's dynamic imports". That premise was false for this repo the moment the
+ * worker's graph could reach one: `vite.config.js` sets `worker: { format: 'es' }`
+ * so a worker entry is a real ES build that CODE-SPLITS, and the client builds
+ * this worker with `{ type: 'module' }`, which is exactly what lets the emitted
+ * `import(` execute. Measured at `dd0b68c0d`: the worker emits
+ * `livingContentRoster-*.js` at 55,465 B beside a 1,404,493 B bundle.
+ *
+ * ⛔ THE OTHER HALF OF THAT PREMISE WAS FALSE TOO, AND IT IS WORTH WRITING DOWN
+ * RATHER THAN INHERITING: the split chunk is NOT shared with the main graph.
+ * Vite bundles every worker entry as its OWN rollup build, so the same source
+ * module is emitted three times in this dist under three hashes (the main graph's
+ * at 1,788 B via `engine-*.js`, this worker's at 55,465 B, the preview worker's
+ * at 1,094 B), and each is referenced by exactly one bundle. The sizes differ
+ * because each build carries whatever of the roster's closure its own bundle does
+ * not already hold. That is a duplicate on disk, it is what a per-entry worker
+ * build costs, and the arm below pins the shape rather than wishing it away.
+ *
  * The dist arms are `describe.runIf(distExists)` in the estate's idiom: a stale
  * or missing dist can only UNDER-report, and the post-build `VERIFY_DIST=1`
  * re-run is what makes them binding. The unconditional anti-vacuity `it` below
@@ -48,6 +68,58 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 export const WORKER_BUNDLE_CEILING_BYTES = 1404242;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
+
+/**
+ * ⭐ THE WORKER'S DECLARED LAZY EDGES — the FROZEN table the production arm holds
+ * the emitted bundle to (lane LIGHT, car 3b).
+ *
+ * `module` is the SOURCE module's basename as it survives into the emitted
+ * specifier (`./livingContentRoster-CE43XTKG.js`), so the row is stable across
+ * content hashes and names the thing a reader can actually find in `src/`.
+ * `payloadSentinel` is an export name of that module which minification keeps:
+ * it must be present in the split chunk and ABSENT from the worker bundle, which
+ * is how "split out" is told apart from "split out AND inlined as well", the byte
+ * regression the retired single-chunk arm existed to catch.
+ *
+ * Adding a row is a byte decision, not a formality: every row is one more cold
+ * fetch sitting inside the user's generation wait.
+ *
+ * @type {ReadonlyArray<{module: string, payloadSentinel: string, why: string}>}
+ */
+const WORKER_LAZY_EDGES = Object.freeze([
+  Object.freeze({
+    module: 'livingContentRoster',
+    payloadSentinel: 'LIVING_CONTENT_ROSTER_SCHEMA_VERSION',
+    why: 'the living-content roster rides `livingContentSeam.js`\'s dynamic import, and the '
+      + 'worker shell awaits the seam\'s loader before it runs a request because a Web Worker '
+      + 'evaluates its own copy of the graph and a main-thread load does not arm this seam. '
+      + 'The edge cannot become static: the seam is what keeps the roster and its whole '
+      + 'content-manifest closure out of eager engine-core on the MAIN thread.',
+  }),
+]);
+
+/** Every dynamic import a bundle carries, opaque ones included (`import(name)`). */
+const dynamicImportOpenings = (code) => code.match(/\bimport\s*\(/g) || [];
+
+/** The literal `./chunk-HASH.js` specifiers a bundle imports dynamically. */
+function dynamicImportTargets(code) {
+  const out = [];
+  const re = /\bimport\s*\(\s*["']\.\/([^"']+)["']\s*\)/g;
+  let match;
+  while ((match = re.exec(code)) !== null) out.push(match[1]);
+  return out;
+}
+
+/** `livingContentRoster-CE43XTKG.js` → `livingContentRoster`. */
+const sourceModuleOf = (chunkFile) => chunkFile.replace(/-[A-Za-z0-9_-]+\.js$/, '');
+
+/**
+ * The client must build this worker as a MODULE worker. A classic worker cannot
+ * execute the `import(` the arm above permits, so this is not style: it is the
+ * runtime precondition of the declared lazy edge.
+ */
+const MODULE_WORKER_CONSTRUCTION =
+  /new Worker\(\s*new URL\(\s*['"]\.\.\/workers\/generation\.worker\.js['"],\s*import\.meta\.url\s*\),\s*\{\s*type:\s*['"]module['"]\s*\}\s*\)/;
 
 /** Relative-specifier static imports, the customContentPreviewLazy idiom. */
 function staticImports(code) {
@@ -193,17 +265,103 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     ).toEqual([]);
   });
 
-  it('exactly one generation.worker bundle is emitted, and it is a single chunk because vite inlines a worker entry\'s dynamic imports', () => {
+  it('exactly one generation.worker bundle is emitted, and it carries exactly the lazy edges WORKER_LAZY_EDGES declares', () => {
     const bundles = readdirSync(ASSETS).filter(f => /^generation\.worker-.*\.js$/.test(f));
     expect(bundles.length).toBe(1);
     const code = readFileSync(join(ASSETS, bundles[0]), 'utf8');
-    // Vite compiles a worker entry with its dynamic imports INLINED (no
-    // `worker.rollupOptions` is configured), so the whole graph is one file.
-    // The sibling customContentPreview worker in the same build is the
-    // precedent. If this ever becomes 2, a code split appeared inside the
-    // worker and a second cold fetch now sits inside the user's wait.
-    expect(code.match(/\bimport\s*\(/g) || []).toEqual([]);
+
+    // ── NON-VACUITY, ON BOTH SCANNERS, BEFORE ANYTHING IS COUNTED ────────────
+    // A count-shaped arm whose scanner cannot see a dynamic import reports every
+    // bundle clean, and a table-shaped arm whose table is empty asserts nothing.
+    expect(WORKER_LAZY_EDGES.length).toBeGreaterThan(0);
+    const PLANT_ONE = 'const a=1;import("./livingContentRoster-AAAAAAAA.js");';
+    const PLANT_TWO = `${PLANT_ONE}import("./somethingElse-BBBBBBBB.js");`;
+    const PLANT_NONE = 'const a=1;reimport(x);const b="./livingContentRoster-AAAAAAAA.js";';
+    expect(dynamicImportTargets(PLANT_ONE)).toEqual(['livingContentRoster-AAAAAAAA.js']);
+    expect(dynamicImportTargets(PLANT_TWO).length).toBe(2);
+    expect(dynamicImportOpenings(PLANT_NONE)).toEqual([]);
+    expect(dynamicImportTargets(PLANT_NONE)).toEqual([]);
+    expect(sourceModuleOf('livingContentRoster-AAAAAAAA.js')).toBe('livingContentRoster');
+
+    // ── (a) THE COUNT EQUALS THE TABLE ───────────────────────────────────────
+    // Openings are counted with the LOOSE form so an `import(someName)` whose
+    // specifier is computed cannot slip past a literal-only scanner; the second
+    // assertion is what makes the loose count readable, by requiring every
+    // opening to have resolved to a literal chunk specifier.
+    const openings = dynamicImportOpenings(code);
+    const targets = dynamicImportTargets(code);
+    expect(
+      openings.length,
+      `the worker bundle carries ${openings.length} dynamic import(s); WORKER_LAZY_EDGES `
+      + `declares ${WORKER_LAZY_EDGES.length}. Every one of them is a cold fetch inside the `
+      + 'user\'s generation wait: declare it with its reason, or take it out.',
+    ).toBe(WORKER_LAZY_EDGES.length);
+    expect(
+      targets.length,
+      'a dynamic import in the worker bundle has no literal chunk specifier, so this arm '
+      + 'cannot tell which chunk it fetches',
+    ).toBe(openings.length);
+    expect(
+      targets.map(sourceModuleOf).sort(),
+      `the worker's lazy edges are ${targets.join(', ')}`,
+    ).toEqual(WORKER_LAZY_EDGES.map(edge => edge.module).sort());
+    // The worker entry is still a leaf in the STATIC graph: an emitted static
+    // edge would be a chunk the browser fetches before the worker can run at all.
     expect(staticImports(code)).toEqual([]);
+
+    // ── (b) EACH TARGET IS A REAL CHUNK, AND IT IS NOT ALSO INLINED ──────────
+    for (const edge of WORKER_LAZY_EDGES) {
+      const target = targets.find(file => sourceModuleOf(file) === edge.module);
+      expect(target, `no emitted chunk for declared edge ${edge.module}`).toBeTruthy();
+      expect(
+        existsSync(join(ASSETS, target)),
+        `the worker imports ${target}, which is not in dist/assets: the fetch would 404 `
+        + 'inside the user\'s wait',
+      ).toBe(true);
+      const chunk = readFileSync(join(ASSETS, target), 'utf8');
+      // Anchored: the sentinel is proved present in the chunk it names FIRST, so
+      // the absence below is a fact about the worker bundle and not about a
+      // needle that stopped matching anything anywhere.
+      expect(
+        chunk.includes(edge.payloadSentinel),
+        `${edge.payloadSentinel} is not in ${target} — the sentinel is stale, and the `
+        + 'duplication check under it proves nothing',
+      ).toBe(true);
+      expect(
+        code.includes(edge.payloadSentinel),
+        `${edge.module} is split into ${target} AND inlined into the worker bundle: the `
+        + 'bytes are paid twice and the split buys nothing',
+      ).toBe(false);
+      // Measured at dd0b68c0d and pinned because it is the shape, not a wish: a
+      // worker entry is its own rollup build, so this chunk belongs to this
+      // worker alone. The main graph carries its own copy under another hash.
+      const referrers = readdirSync(ASSETS)
+        .filter(file => file.endsWith('.js') && file !== target)
+        .filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(target));
+      expect(
+        referrers,
+        `${target} is referenced by ${referrers.join(', ') || 'nothing'} — this chunk is the `
+        + 'worker build\'s own and only the worker bundle should name it',
+      ).toEqual([bundles[0]]);
+    }
+  });
+
+  it('the client builds this worker with { type: \'module\' }, which is what lets the declared lazy edge run', () => {
+    const client = source('src/lib/generationClient.js');
+    // Anchored both ways: the pattern must match the shipped construction, and
+    // must NOT match a classic worker, or "module" would be true of every string.
+    expect(
+      MODULE_WORKER_CONSTRUCTION.test(client),
+      'generationClient.js no longer constructs generation.worker.js with { type: \'module\' }. '
+      + 'A classic worker cannot execute the import( the bundle now carries, so every generation '
+      + 'would die on the seam load rather than on anything the user did.',
+    ).toBe(true);
+    expect(
+      MODULE_WORKER_CONSTRUCTION.test(
+        'new Worker(new URL(\'../workers/generation.worker.js\', import.meta.url))',
+      ),
+      'the pattern matches a CLASSIC worker construction, so it proves nothing about the type',
+    ).toBe(false);
   });
 
   it('the sentinel ships outside first paint, in the generation lane\'s chunk and in the worker bundle', () => {
