@@ -339,3 +339,66 @@ It runs the whole suite, which this lane's fences forbid. **Predicted delta, cou
 the executed per-file figures: +1 test file, +15 tests.** (livingContentPromiseBytes +5 in a new
 file; livingContentLawWiring +7; densityCreateBoundary.walker +2; livingContentRosterPublicDrop
 +1.) `tests/lint/testRatchet.test.js` itself is green at 94 passed.
+
+---
+
+## CAR 1g — THE ONE STRICT RED LIGHTING PRODUCED (`990a7860a`)
+
+`check-domain-strict` at the tip, verbatim:
+
+```
+src/domain/content/livingContentLaw.js(191,10): error TS2367: This comparison appears to be
+unintentional because the types '2' and '1' have no overlap.
+[domain-strict] strict-type regressions in the domain kernel (fix or annotate; do not widen the
+baseline): src/domain/content/livingContentLaw.js: 1 strict errors (baseline 0) — +1
+```
+
+The comparison is the mint's DORMANT branch, which is what keeps the revert one line; TypeScript
+inferred the LITERAL type of whatever the dial holds and convicted it as dead. Cured by
+`@type {number}` on the dial, argued at the line: **a dial's declared type must be the SPACE of
+law versions and never today's setting.** The sibling density dial needs no annotation only
+because it sits at the default, where its two literals overlap; it will need this the day it is
+lit, and the note says so. The baseline was NOT widened.
+
+---
+
+## THE GATES AT THE LANE TIP `990a7860a`
+
+| gate | result |
+|---|---|
+| whole `tests/lint` | **1 failed / 2490 passed (2491)** across **148 passed / 1 failed (149)** files — the ONE failure is the refused writer-reach register digest (R1) |
+| `check-domain-strict` | **exit 0** — "no strict-type regressions (1120 errors, ceiling 1120)" |
+| `check-full-typecheck` (tsconfig.full.json) | **exit 0** — "no type regressions (173 error(s), ceiling 173)" |
+| OSR `check-observed-shape-readers` (read only) | **exit 0** — "1972 finding(s), exactly matching the frozen inventory"; drift lines 0; **no write** |
+| prose-numerics re-key (dry) | **exit 0** — `baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0` |
+| writer-reach plain (dry) | **exit 0** — `WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526)`, identical to the baseline; baseline file untouched |
+| lighting census walker (plain, post-refreeze) | **34 passed** |
+| the cast walker `tests/lint/domainAnyCastBaseline.test.js` | green inside the whole `tests/lint` run |
+| the byte ratchets `tests/lint/sizeBaseline.test.js`, `tests/lint/proseCorpusBytes.test.js` | green inside the whole `tests/lint` run |
+| first-paint byte budget `tests/build/vendorPdfLazy.test.js` | **27 passed / 27 skipped** |
+| `eslint src/ tests/ scripts/` | **exit 0** — 0 errors, 31 warnings, **none on any file this lane touched** |
+| `tests/lint/testRatchet.test.js` | 94 passed |
+| porcelain | **0** |
+| vitest runners at return | **0** |
+
+⚠ **NOT RUN, AND WHY:** `node scripts/check-test-ratchet.mjs --update` (the census totals) runs the
+WHOLE SUITE, which this lane's fences forbid; it is the chair's ratchet ritual. No vite build was
+taken (the fence), so no `dist/` chunk-membership read was possible — the eager-closure proof is
+the two vite derivations plus the excision-list read.
+
+---
+
+## THE CARS, FINAL
+
+| car | sha |
+|---|---|
+| 1a the loader's caller | `04c37d83f` |
+| 1b the dial lit | `35fa42980` |
+| 1c THE PROMISE by bytes | `807de3eef` |
+| 1d no migration | `4c95c926f` |
+| 1e the three holes at dial 2 | `fc546fd2e` |
+| 1f the lit walkers | `5faa1c4b9` |
+| register: the lighting census | `48c001cc8` |
+| 1g the strict annotation | `990a7860a` |
+
+Dock tip `990a7860a`, 8 cars over `8961388ce`, porcelain 0.
