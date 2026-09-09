@@ -3084,28 +3084,28 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "purse: short": [
         {
           "angle": "plain",
-          "text": "The purse at {settlement} falls short of the standing charge of its defences.",
+          "text": "The purse at {settlement} falls short of the standing charge on its defences.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "What {settlement} lays out on its defences runs under their upkeep.",
-            "Against what its defences come to, the means at {settlement} run thin.",
-            "Coin set aside at {settlement} does not reach the keeping of its defences."
+            "What {settlement} lays out on its defences does not run to their upkeep.",
+            "Against what its defences come to, {settlement}'s means run thin.",
+            "Coin set aside at {settlement} for its defences does not reach their keeping."
           ]
         },
         {
           "angle": "plain",
-          "text": "The charge of keeping {settlement}'s defences is not met in full.",
+          "text": "The charge of keeping {settlement}'s defences is met in part.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "What the defences at {settlement} take in their upkeep outruns the coin.",
+            "What the defences at {settlement} take in their keeping outruns the coin laid by.",
             "Above the purse at {settlement} stands the upkeep of its defences.",
-            "The keeping of {settlement}'s defences runs dearer than its purse."
+            "The keeping of {settlement}'s defences runs dearer than its purse bears."
           ]
         },
         {
@@ -3116,9 +3116,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "For the keeping of its defences, {settlement} does not find the charge.",
-            "Short of its upkeep is how the paid defence at {settlement} stands.",
-            "Between the purse and the keeping of its defences, {settlement} stands short."
+            "For the keeping of its defences, {settlement} does not find the charge in full.",
+            "The paid defence at {settlement} stands short of its upkeep.",
+            "Between the purse and the keeping of its defences, {settlement} is found short."
           ]
         }
       ]

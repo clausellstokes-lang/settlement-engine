@@ -2727,18 +2727,18 @@ supplies the ancestry.
 **READS:** `settlement.economicState.foodSecurity.label`
 **RELATION:** `addition`
 **ATTACH:** `Disasters & Famine: granary AND hospital`
-1. `[plain]` More is eaten at {settlement} than the town takes in.
-   - `[face]` What is raised on {settlement}'s ground and what is carried to it fall short of what the town eats.
-   - `[face]` Consumption at {settlement} outruns what the town draws in.
-   - `[face]` Food at {settlement} runs behind the town's eating.
-2. `[plain]` Out of what is raised and what is carried in, the town at {settlement} is not fed.
-   - `[face]` Nothing {settlement} raises or takes in is enough to feed the town.
-   - `[face]` Taken together with what is brought to it, what {settlement} raises does not come to the feeding of the town.
-   - `[face]` Provision at {settlement} does not answer what the town eats.
-3. `[plain]` At {settlement} the town is short of food.
-   - `[face]` Want of food is where the town at {settlement} stands.
-   - `[face]` Enough food for the town lies beyond what {settlement} raises and beyond what it takes in.
-   - `[face]` In the matter of food the town at {settlement} does not keep level with its own eating.
+1. `[plain]` More is eaten at {settlement} than is raised there and carried in.
+   - `[face]` What is raised at {settlement} together with what is carried to it does not reach what the town eats.
+   - `[face]` Consumption at {settlement} outruns what it raises and takes in.
+   - `[face]` Food at {settlement} comes slower than it goes.
+2. `[plain]` Out of what is raised and what is carried in, the town at {settlement} stands unfed.
+   - `[face]` Nothing {settlement} raises or takes in is enough to keep the town fed.
+   - `[face]` Added to what is carried in, what {settlement} raises does not come to the feeding of the town.
+   - `[face]` Provision at {settlement} answers for less than the town eats.
+3. `[plain]` At {settlement} the town goes short of food.
+   - `[face]` Want of food is the condition {settlement} lives under.
+   - `[face]` Enough food for the town lies beyond the sum of what {settlement} raises and what it takes in.
+   - `[face]` In the matter of food the town at {settlement} does not keep pace with its own eating.
 
 **`stores: import-fed`**
 **ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
@@ -5402,18 +5402,18 @@ shared letter would collide.*
 **READS:** `readings.economicGates.military`
 **RELATION:** `addition`
 **ATTACH:** `scores.military: CRITICAL` `scores.military: WEAK`
-1. `[plain]` The purse at {settlement} falls short of the standing charge of its defences.
-   - `[face]` What {settlement} lays out on its defences runs under their upkeep.
-   - `[face]` Against what its defences come to, the means at {settlement} run thin.
-   - `[face]` Coin set aside at {settlement} does not reach the keeping of its defences.
-2. `[plain]` The charge of keeping {settlement}'s defences is not met in full.
-   - `[face]` What the defences at {settlement} take in their upkeep outruns the coin.
+1. `[plain]` The purse at {settlement} falls short of the standing charge on its defences.
+   - `[face]` What {settlement} lays out on its defences does not run to their upkeep.
+   - `[face]` Against what its defences come to, {settlement}'s means run thin.
+   - `[face]` Coin set aside at {settlement} for its defences does not reach their keeping.
+2. `[plain]` The charge of keeping {settlement}'s defences is met in part.
+   - `[face]` What the defences at {settlement} take in their keeping outruns the coin laid by.
    - `[face]` Above the purse at {settlement} stands the upkeep of its defences.
-   - `[face]` The keeping of {settlement}'s defences runs dearer than its purse.
+   - `[face]` The keeping of {settlement}'s defences runs dearer than its purse bears.
 3. `[plain]` The defences at {settlement} are kept on a purse short of their standing upkeep.
-   - `[face]` For the keeping of its defences, {settlement} does not find the charge.
-   - `[face]` Short of its upkeep is how the paid defence at {settlement} stands.
-   - `[face]` Between the purse and the keeping of its defences, {settlement} stands short.
+   - `[face]` For the keeping of its defences, {settlement} does not find the charge in full.
+   - `[face]` The paid defence at {settlement} stands short of its upkeep.
+   - `[face]` Between the purse and the keeping of its defences, {settlement} is found short.
 
 ---
 
@@ -6049,72 +6049,72 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **READS:** `settlement.config.monsterThreat`
 **RELATION:** `addition`
 **ATTACH:** `WALLED-STRAINED`
-1. `[plain]` On the books the country about {settlement} is entered at the beset grade.
-   - `[face]` Beset is the grade {settlement}'s own country takes in the town's standing record.
-   - `[face]` Around {settlement} the country is marked beset in the entry.
-   - `[face]` Entered beset, the country about {settlement} keeps that grade wherever the books are kept.
-2. `[plain]` Beset country about {settlement} stands as the ordinary state.
-   - `[face]` About {settlement} the country is harried in the plain course of things.
-   - `[face]` For the country about {settlement}, beset is the common case.
-   - `[face]` Harried is the country about {settlement} in the case that stands.
-3. `[plain]` Settled is a grade the country about {settlement} does not reach.
-   - `[face]` Outside the settled grade the country about {settlement} is held in the record.
-   - `[face]` The country about {settlement} misses the settled grade on the town's books.
-   - `[face]` A settled grade the country about {settlement} does not carry.
+1. `[plain]` On the books the country about {settlement} is carried at the beset grade.
+   - `[face]` Beset is the grade entered against {settlement}'s country.
+   - `[face]` Around {settlement} the country is booked beset in the entry.
+   - `[face]` Entered beset, the country about {settlement} stands so on the record.
+2. `[plain]` Beset country about {settlement} is the rule that holds.
+   - `[face]` About {settlement} the country stands harried in the common course.
+   - `[face]` For the country about {settlement}, beset is the ordinary footing.
+   - `[face]` Harried is the country about {settlement} in the run of things.
+3. `[plain]` Settled is a grade the country about {settlement} does not make.
+   - `[face]` In the town's return the country about {settlement} is marked short of settled.
+   - `[face]` The country about {settlement} misses the settled grade.
+   - `[face]` A settled grade the country about {settlement} does not take.
 
 **`country: pressed (unwalled)`**
 **ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
 **READS:** `settlement.config.monsterThreat`
 **RELATION:** `addition`
 **ATTACH:** `UNWALLED-LARGE` `UNWALLED-SMALL`
-1. `[plain]` The country that lies around {settlement} is dangerous ground.
-   - `[face]` Rough country runs up against {settlement} and holds hard ground.
-   - `[face]` About {settlement} the ground is hard and the country dangerous.
-   - `[face]` Trouble in the country around {settlement} is the ordinary state.
-2. `[plain]` The ground about {settlement} is not quiet ground.
-   - `[face]` Hard country lies about {settlement} where quiet would otherwise stand.
-   - `[face]` Around {settlement} the country does not answer to quiet.
-   - `[face]` Danger stands in the ground about {settlement}, and quiet does not.
-3. `[plain]` The threat about {settlement} stands as a present condition of the country.
-   - `[face]` Danger of the continuing kind is the plain condition of {settlement}'s country.
-   - `[face]` Live danger sits in the country around {settlement} and does not lift.
-   - `[face]` In the country about {settlement} the danger is present.
+1. `[plain]` The country about {settlement} is dangerous ground, and dangerous ground near at hand.
+   - `[face]` Dangerous country runs right up to {settlement}, and the danger does not thin on the way in.
+   - `[face]` About {settlement} the ground is dangerous and the country harried.
+   - `[face]` Trouble in the country around {settlement} is a matter of course.
+2. `[plain]` The ground about {settlement} is not quiet ground, nor near to quiet.
+   - `[face]` Danger sits in the country about {settlement} where quiet would sit.
+   - `[face]` Around {settlement} the country stands a long way from quiet ground.
+   - `[face]` Of the ground about {settlement} the standing condition is danger, with quiet nowhere near.
+3. `[plain]` The threat about {settlement} is a present condition of the country, and a condition that holds.
+   - `[face]` What the country around {settlement} holds is danger, and danger of the continuing kind.
+   - `[face]` The danger in the country around {settlement} is live, and it does not slacken.
+   - `[face]` In the country about {settlement} the danger is present and stays present.
 
 **`watch: bought (revealed)`**
 **ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `INSTITUTION`
 **READS:** `compromised.revealed`
 **RELATION:** `addition`
 **ATTACH:** `WALLED-QUIET` `WALLED-STRAINED` `WALLED-THREATENED`
-1. `[plain]` The purchase of the watch in {settlement} is a public fact.
-   - `[face]` Public standing holds the purchase of {settlement}'s watch.
-   - `[face]` Among the public business {settlement} carries in the open, the purchase of the watch is a plain item.
-   - `[face]` Of the watch in {settlement}, the purchase is common dealing, carried on the public side of the town's affairs.
-2. `[plain]` The bought obedience of {settlement}'s watch runs in the town's plain sight.
-   - `[face]` A bought allegiance in {settlement}'s watch lies uncovered.
-   - `[face]` Where the watch of {settlement} owes its obedience is a matter open to the ordinary hearing of the town.
-   - `[face]` Under open notice a purchase has the ordering of {settlement}'s watch.
-3. `[plain]` A watch that has been bought is kept by {settlement} in open view.
-   - `[face]` In {settlement} the bought watch is under open notice.
-   - `[face]` The keeping of a bought watch sits inside the ordinary business of {settlement}, and inside the town's plain dealing.
-   - `[face]` Kept in the town's open sight, the watch of {settlement} carries a purchase.
+1. `[plain]` The purchase of the watch in {settlement} is a fact the town holds in public.
+   - `[face]` Under overt sale the watch of {settlement} sits.
+   - `[face]` Among the open matters of {settlement} is the purchase of the watch.
+   - `[face]` Of {settlement}'s watch the purchase is open dealing, set down where the town sets down the common run of its affairs.
+2. `[plain]` The obedience of the watch in {settlement} is bought, and bought unhidden.
+   - `[face]` A purchased allegiance lies bare in {settlement}'s watch.
+   - `[face]` Where the watch of {settlement} owes its obedience is open to the ordinary hearing of the town.
+   - `[face]` Under public notice a purchase holds {settlement}'s watch.
+3. `[plain]` A bought watch is kept in {settlement}, and the keeping of the watch is in the open.
+   - `[face]` Uncovered in {settlement} is the keeping of a bought watch.
+   - `[face]` The keeping of a bought watch is, in {settlement}, part of the ordinary business done before the town.
+   - `[face]` Kept in the town's plain sight, {settlement}'s watch answers its purchase.
 
 **`watch: bought (covert)`**
 **ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `INSTITUTION`
 **READS:** `compromised.covert`
 **RELATION:** `addition`
 **ATTACH:** `WALLED-QUIET` `WALLED-STRAINED` `WALLED-THREATENED`
-1. `[plain · dm-only]` The watch {settlement} keeps is bought out of public sight.
-   - `[face]` Another interest holds the watch in {settlement}, and holds it well clear of the town's common dealing.
-   - `[face]` Bought without public notice, the watch of {settlement} answers a buyer.
-   - `[face]` Away from the town's talk, {settlement}'s watch is bought.
-2. `[plain · dm-only]` Under a covert arrangement a buyer has the watch of {settlement}.
-   - `[face]` A covert bargain keeps the watch of {settlement} bought.
-   - `[face]` The purchase that stands behind {settlement}'s watch stays out of the town's public word.
-   - `[face]` Beyond common knowledge {settlement} carries a bought watch.
-3. `[plain · dm-only]` In {settlement} the watch is bought, and the town hears nothing of the buying.
-   - `[face]` To a purchaser the watch of {settlement} is sold, unannounced.
-   - `[face]` The sale of {settlement}'s watch stands, and stands unspoken.
-   - `[face]` Who holds {settlement}'s watch is not a public matter, and the purchase runs outside the town's hearing.
+1. `[plain · dm-only]` The watch {settlement} keeps is bought without the town's knowledge.
+   - `[face]` Bought out of the town's view, the watch of {settlement} is a buyer's watch.
+   - `[face]` A buyer holds the watch in {settlement}, and holds it unseen by the town whose watch it is.
+   - `[face]` Beyond the town's notice, {settlement}'s watch is bought.
+2. `[plain · dm-only]` Unknown to the town, the watch of {settlement} has a buyer.
+   - `[face]` Out of the town's sight stands the bargain that keeps {settlement}'s watch bought.
+   - `[face]` Outside the town's ken, the purchase behind {settlement}'s watch holds.
+   - `[face]` Under cover a buyer has the say over {settlement}'s watch.
+3. `[plain · dm-only]` A bought watch is kept in {settlement}, and the town is told nothing of the buying.
+   - `[face]` Bought is the watch of {settlement}, and the town has not heard as much.
+   - `[face]` Unaware, {settlement} keeps a watch that is bought.
+   - `[face]` Who holds {settlement}'s watch is not known in the town, and the buying goes unspoken.
 
 ---
 
