@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 15:09:53 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 15:15:55 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -108,9 +108,12 @@
 | ? | other |  | failed | 0 | — | — | 17:18:42 |
 | ? | other |  | failed | 0 | — | — | 19:07:57 |
 | ? | other |  | failed | 0 | — | — | 19:08:08 |
-| ? | other |  | in-flight | 0 | — | — | 19:01:48 |
+| ? | other |  | failed | 0 | — | — | 19:10:35 |
+| ? | other |  | failed | 0 | — | — | 19:10:36 |
+| ? | other |  | failed | 0 | — | — | 19:10:35 |
 | ? | other |  | failed | 0 | — | — | 19:09:40 |
 | ? | other |  | failed | 0 | — | — | 19:07:58 |
+| ? | other |  | failed | 0 | — | — | 19:10:37 |
 | ? | other |  | failed | 0 | draft-round-1.md | — | 19:09:16 |
 | ? | other |  | failed | 0 | — | — | 19:07:57 |
 | ? | other |  | failed | 0 | — | — | 19:09:13 |
@@ -137,11 +140,14 @@
 | ? | other |  | result | 0 | — | — | 18:11:54 |
 | ? | other |  | failed | 0 | — | — | 19:08:19 |
 | ? | other |  | failed | 0 | — | — | 19:08:22 |
+| ? | other |  | failed | 0 | — | — | 19:11:24 |
 | ? | other |  | failed | 0 | — | — | 19:08:16 |
-| ? | other |  | in-flight | 0 | — | — | 19:03:10 |
+| ? | other |  | failed | 0 | — | — | 19:10:42 |
+| ? | other |  | failed | 0 | — | — | 19:11:24 |
 | ? | other |  | failed | 0 | — | — | 19:08:20 |
 | ? | other |  | failed | 0 | — | — | 19:08:17 |
 | ? | other |  | failed | 0 | — | — | 19:08:23 |
+| ? | other |  | failed | 0 | — | — | 19:11:26 |
 | ? | other |  | failed | 0 | — | — | 19:08:18 |
 | ? | other |  | failed | 0 | — | — | 19:08:21 |
 | ? | other |  | failed | 0 | — | — | 19:08:21 |
@@ -158,7 +164,7 @@
 | ? | other |  | failed | 0 | — | — | 19:08:20 |
 | ? | other |  | failed | 0 | — | — | 19:08:22 |
 | ? | other |  | failed | 0 | — | — | 19:08:51 |
-| ? | other |  | in-flight | 0 | — | — | 19:02:03 |
+| ? | other |  | failed | 0 | — | — | 19:11:23 |
 | ? | other |  | failed | 0 | — | — | 19:08:18 |
 | ? | other |  | failed | 0 | — | — | 19:08:35 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
