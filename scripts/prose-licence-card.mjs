@@ -24,6 +24,7 @@ import url from 'node:url';
 
 import { isCovertPath, rootOf } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes } from './lib/dossier-slot-shapes.mjs';
+import { readAnnexDeclarations } from './lib/dossier-annex-grammar.mjs';
 import { licenceCardLines } from './lib/prose-licence-card.mjs';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
@@ -42,6 +43,27 @@ export const TASTE_POOLS = Object.freeze([
   Object.freeze({ block: 'DS-DEF-2', pool: 'stores: import-fed', dir: 'def2-stores-importfed' }),
   Object.freeze({ block: 'DS-GEN-3', pool: 'purse: short', dir: 'gen3-purse-short' }),
 ]);
+
+/**
+ * WHICH DESK LEAF A BLOCK'S MODIFIER PREDICATES ARE AUTHORED IN, by the block-id prefix the
+ * projector's own DESKS table uses. The card names it so a writer can read the predicate
+ * rather than be told it exists.
+ * @type {Readonly<Record<string, string>>}
+ */
+const DESK_LEAF_OF = Object.freeze({
+  'DS-ECO': 'src/domain/display/stateProse/economyStateProseCandidates.js',
+  'DS-SUP': 'src/domain/display/stateProse/economyStateProseCandidates.js',
+  'DS-POW': 'src/domain/display/stateProse/powerStateProseCandidates.js',
+  'DS-DEF': 'src/domain/display/stateProse/defenseStateProseCandidates.js',
+  'DS-WAR': 'src/domain/display/stateProse/warFaithStateProseCandidates.js',
+  'DS-FTH': 'src/domain/display/stateProse/warFaithStateProseCandidates.js',
+  'DS-STR': 'src/domain/display/stateProse/stressorsStateProseCandidates.js',
+  'DS-CND': 'src/domain/display/stateProse/stressorsStateProseCandidates.js',
+  'DS-GEN': 'src/domain/display/stateProse/generalStateProseCandidates.js',
+  'DS-REL': 'src/domain/display/stateProse/generalStateProseCandidates.js',
+  'DS-POP': 'src/domain/display/stateProse/generalStateProseCandidates.js',
+  'DS-HK': 'src/domain/display/stateProse/generalStateProseCandidates.js',
+});
 
 /** The six generated desk leaves, by their module path. */
 const LEAF_MODULES = Object.freeze([
@@ -73,8 +95,14 @@ export async function cardMachine() {
   const corpus = await loadCorpus();
   const rows = new Map(census.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
   const facts = new Map((census.mountsPerFact?.rows || []).map((r) => [r.field, r]));
+  const annexText = readFileSync(path.join(ROOT, 'docs/content/RECEIPT_POOLS_DOSSIER_STATE.md'), 'utf8');
+  // ⭐ THE ANNEX'S OWN DECLARATION, so the card can say whether an attach set was DERIVED or
+  // NARROWED BY HAND. The projected `poolMeta.attach` carries the RESULT and not the route,
+  // and a writer told "derived" about a hand-narrowed set is being told the block's shape
+  // decided something an author decided.
+  const declared = readAnnexDeclarations(annexText);
   const shapes = mergeSlotShapes([
-    parseSlotShapes(readFileSync(path.join(ROOT, 'docs/content/RECEIPT_POOLS_DOSSIER_STATE.md'), 'utf8'), 'RECEIPT_POOLS_DOSSIER_STATE.md §0c/§0c-2'),
+    parseSlotShapes(annexText, 'RECEIPT_POOLS_DOSSIER_STATE.md §0c/§0c-2'),
     parseSlotShapes(readFileSync(path.join(ROOT, 'docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md'), 'utf8'), 'RECEIPT_POOLS_CAUSAL_DOSSIER.md §0c'),
   ]);
   /** @param {string} block @param {string} pool */
@@ -103,6 +131,8 @@ export async function cardMachine() {
       factRow: facts.get(field ? rootOf(field) : '') || null,
       spineRows: (meta.attach || []).map((k) => rows.get(`${block} :: ${k}`)).filter(Boolean),
       covertPath: field ? isCovertPath(field) : false,
+      declaredAttach: declared.get(`${block} :: ${pool}`)?.attach ?? null,
+      candidateLeaf: DESK_LEAF_OF[block.split('-').slice(0, 2).join('-')] || '',
     });
   };
   return { cardFor, corpus, census };

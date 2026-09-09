@@ -62,6 +62,56 @@ export const REFUSED_CLAIMS = Object.freeze([
 const text = (value) => (value === null || value === undefined ? '' : String(value));
 
 /**
+ * The producer-token ROOT of a read path, spelled as `wiringCensus.rootOf` spells it. It is
+ * re-spelled rather than imported because this lib is PURE and takes no estate dependency; the
+ * walker asserts the two agree on every taste pool.
+ * @param {string} field @returns {string}
+ */
+export function rootOfPath(field) {
+  const parts = String(field).split('.');
+  if ((parts[0] === 'readings' || parts[0] === 'settlement') && parts.length > 1) return `${parts[0]}.${parts[1]}`;
+  return parts[0];
+}
+
+/**
+ * WHY THE PREDICATE LINE IS EMPTY, WHEN IT IS. A SPINE's predicate is recovered from its key
+ * function; a MODIFIER has none to recover, because its predicate is the candidate function in
+ * its desk's leaf and the census records the READING rather than the test (the `annex` rung).
+ * Saying "none recovered" on a modifier would read as a gap where it is a grain.
+ * @param {string} role
+ * @param {{reason?: string, rung?: string}|null|undefined} row
+ * @param {string} [candidateLeaf]
+ * @returns {string}
+ */
+export function predicateAbsence(role, row, candidateLeaf) {
+  if (role === 'modifier') {
+    return `authored in ${candidateLeaf || 'the desk\'s *StateProseCandidates.js leaf'} and NOT`
+      + ' recovered here: a modifier has no key-function branch, so the census records its'
+      + ' READING (the `annex` rung) and the leaf holds the test';
+  }
+  return `(none recovered: ${row?.reason || 'the pool has no key-function branch'})`;
+}
+
+/**
+ * HOW THE ATTACH SET WAS ARRIVED AT — derived, or narrowed by hand in the annex. A writer told
+ * "derived" about a hand-narrowed set is being told the block's shape decided something an
+ * author decided.
+ * @param {string} role
+ * @param {ReadonlyArray<string>|null|undefined} declaredAttach the annex's ATTACH tokens, or
+ *   null where the line reads `derived`
+ * @returns {string}
+ */
+export function attachDerivation(role, declaredAttach) {
+  if (role !== 'modifier') return 'n/a';
+  if (Array.isArray(declaredAttach)) {
+    return `NARROWED BY HAND in the annex: the ATTACH line names ${declaredAttach.length} key(s)`
+      + ' and the derivation is not consulted';
+  }
+  return 'DERIVED: every RESOLVED spine of this block whose selecting branch does NOT test this'
+    + ' pool\'s field (ARCH §2.5, E-F1); no cap, because the echo bound is per fact';
+}
+
+/**
  * One predicate row as the census records it, rendered as the writer reads it.
  * @param {{field: string, op: string, value: unknown}} row
  * @returns {string}
@@ -215,6 +265,9 @@ export function sourceText(source) {
  * @param {object|null} input.factRow the census's `mountsPerFact` row for this pool's field
  * @param {ReadonlyArray<object>} input.spineRows the census rows of this pool's attach spines
  * @param {boolean} [input.covertPath] whether the pool's own field is on the covert list
+ * @param {ReadonlyArray<string>|null} [input.declaredAttach] the annex's ATTACH tokens, or null
+ *   where the line reads `derived`
+ * @param {string} [input.candidateLeaf] the desk leaf a modifier's predicate is authored in
  * @returns {string[]}
  */
 export function licenceCardLines(input) {
@@ -243,20 +296,27 @@ export function licenceCardLines(input) {
   for (const extra of reads.slice(1)) lines.push(`              ${extra}`);
   lines.push(`              (absent ⇒ no candidate; a modifier is silent, never "false")`);
   const predicate = (row?.predicate || []).map(predicateText);
-  lines.push(`  predicate:  ${predicate.length ? predicate.join('  AND  ') : `(none recovered: ${row?.reason || 'the pool has no key-function branch'})`}`);
+  lines.push(`  predicate:  ${predicate.length ? predicate.join('  AND  ') : predicateAbsence(role, row, input.candidateLeaf)}`);
   lines.push(`  bag:        ${bagText(blockSlots, shapeOf)}`);
+  // ⛔ THE DECLARED PALETTE IS NOT THE OFFERED ONE, and a face naming a slot the call site
+  // never fills renders a literal `{route}` on a page. The census's `slotsFilled` is what the
+  // composer's bag actually offers at this block's call sites; arm D gates it, and the writer
+  // is told before the gate rather than by it.
+  lines.push(`              FILLED at this block's call sites: ${(row?.slotsFilled || []).length
+    ? (row.slotsFilled).map((s) => `{${s}}`).join(' ')
+    : '(none: the composer offers this block no bag)'}`
+    + `${(row?.slotsWithoutProvider || []).length
+      ? ` · NAMED BUT NEVER FILLED: ${row.slotsWithoutProvider.map((s) => `{${s}}`).join(' ')}` : ''}`);
   lines.push(`  relation:   ${relation || '(a spine takes no relation)'}   ← ${relationWhy({
     relation, seatRows: meta.seatRow || [], seatReason: meta.seatReason || '',
   })}`);
   lines.push(`  seat/form:  ${seat} / ${form}      move: ${move}     angle: ${angles.join(' ') || '(none)'}`);
   lines.push(`  attach:     ${attach.length ? attach.map((k) => `\`${k}\``).join(' ') : '(empty: a spine takes no attach set)'}`);
-  lines.push(`              ${role === 'modifier'
-    ? (Array.isArray(meta.attachDeclared)
-      ? 'explicitly narrowed in the annex (ATTACH names the keys)'
-      : 'derived: every RESOLVED spine of this block whose selecting branch does NOT test this'
-        + ' pool\'s field (ARCH §2.5, E-F1); no cap, because the echo bound is per fact')
-    : 'n/a'}`);
+  lines.push(`              ${attachDerivation(role, input.declaredAttach)}`);
   lines.push(`  echo:       ${echoText(factRow, field)}`);
+  lines.push(`              the echo table is keyed on the PRODUCER-TOKEN ROOT`
+    + `${field ? ` \`${rootOfPath(field)}\`` : ''}, which is coarser than this pool's own read`
+    + `${field ? ` \`${field}\`` : ''}: a mount counted there may be reading a sibling field of the same root`);
   lines.push(`  covert:     ${covert ? `YES — every variant carries \`dm-only\` (T-F5); unmarked variants: ${unmarked}` : 'no'}`);
   lines.push(`  source:     ${sourceText(row?.source)}`);
   lines.push(`  may claim:  ${mayClaimText({ reads: row?.reads || [], predicate: row?.predicate || [] })}`);
