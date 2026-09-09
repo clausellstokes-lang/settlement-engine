@@ -133,27 +133,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "terrain FAVOURABLE to the defender": [
         {
           "angle": "visitor",
-          "text": "The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.",
+          "text": "The ground at {settlement} favours whoever holds the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Whatever comes at {settlement} must first cross ground that is hard going for an attacker.",
+            "Rough country about {settlement} is unbuilt defence.",
+            "From any side, the way in to {settlement} is the defender's ground."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "{settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.",
+          "text": "Part of the defence at {settlement} stands to the account of the site.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The site enters the reckoning at {settlement} on the defender's side.",
+            "In its siting, {settlement} has the better of the country.",
+            "Counted into what holds {settlement} is the ground under the town."
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.",
+          "text": "Any attempt on {settlement} contends with the country before it contends with anybody.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "To come at {settlement} is harder than to hold the place.",
+            "The country about {settlement} stands in the way of any force that comes.",
+            "Nothing comes at {settlement} on level terms."
+          ]
         }
       ],
       "terrain EXPOSED": [
@@ -300,9 +315,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,

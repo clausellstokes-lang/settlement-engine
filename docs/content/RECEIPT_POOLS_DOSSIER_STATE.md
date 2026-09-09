@@ -2544,9 +2544,18 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 
 **terrain FAVOURABLE to the defender**
-1. `[visitor]` The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
-2. `[ledger]` {settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.
-3. `[counterforce]` The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.
+1. `[visitor]` The ground at {settlement} favours whoever holds the town.
+   - `[face]` Whatever comes at {settlement} must first cross ground that is hard going for an attacker.
+   - `[face]` Rough country about {settlement} is unbuilt defence.
+   - `[face]` From any side, the way in to {settlement} is the defender's ground.
+2. `[ledger]` Part of the defence at {settlement} stands to the account of the site.
+   - `[face]` The site enters the reckoning at {settlement} on the defender's side.
+   - `[face]` In its siting, {settlement} has the better of the country.
+   - `[face]` Counted into what holds {settlement} is the ground under the town.
+3. `[counterforce]` Any attempt on {settlement} contends with the country before it contends with anybody.
+   - `[face]` To come at {settlement} is harder than to hold the place.
+   - `[face]` The country about {settlement} stands in the way of any force that comes.
+   - `[face]` Nothing comes at {settlement} on level terms.
 
 **terrain EXPOSED**
 1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
