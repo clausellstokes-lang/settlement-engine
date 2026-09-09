@@ -146,7 +146,15 @@ export function walkRungs(node, out, depth = 0) {
   const p = rung.provenance;
   if (p && typeof p.blockId === 'string' && typeof p.poolKey === 'string' && typeof rung.sentence === 'string') {
     out.push({
-      blockId: p.blockId, poolKey: p.poolKey, angle: String(p.angle ?? ''), text: rung.sentence,
+      blockId: p.blockId,
+      poolKey: p.poolKey,
+      angle: String(p.angle ?? ''),
+      text: rung.sentence,
+      // ⭐ THE COMPOSER'S OWN PIECES, CARRIED THROUGH (TASTE car M-3). `legibilityRung` now
+      // puts them on the provenance (ARCH §4.1); the cell builder reads them for a COMPOSED
+      // unit and keeps the template identification for the one-piece unit every shipped rung
+      // is. See `cellsOfTown` for why the split is exactly there.
+      pieces: Array.isArray(/** @type {any} */ (p).pieces) ? /** @type {any} */ (p).pieces : null,
     });
     return;
   }
@@ -182,23 +190,42 @@ export function cellsOfTown(settlement, input) {
     );
     const chosen = candidates[0] || null;
     const drawn = drawVariant(audible, rung.blockId, rung.poolKey, input.seed);
-    const vid = chosen ? chosen.idx : null;
-    const index = chosen ? audible.indexOf(chosen) : null;
+    // ⭐⭐ A COMPOSED UNIT IS IDENTIFIED BY THE COMPOSER, A ONE-PIECE UNIT BY ITS TEXT
+    // (TASTE car M-3), and the split is exactly there for a measured reason.
+    //
+    // The template reader identifies a cell's variant from the RENDERED SENTENCE, which is
+    // the right instrument for a one-piece unit and CANNOT WORK on a composed one: a unit
+    // that grew a modifier renders TWO variants concatenated, no single pool template matches
+    // it, and the cell would record `vid: null` and classify RE-INDEXED — the classifier's own
+    // STOP verdict — on every town a modifier reached. The composer already computed the
+    // answer (`composedPieceOf` writes `vid` as the position AS AUTHORED and `index` as the
+    // position in the AUDIENCE-FILTERED pool, which are this recorder's own two coordinates,
+    // by construction), so a composed unit reads it rather than guessing at it.
+    //
+    // ⛔ AND THE ONE-PIECE PATH IS LEFT EXACTLY AS IT WAS, so not one shipped cell moves: the
+    // committed fixture was recorded through the template reader and stays comparable to the
+    // byte. The agreement of the two readings on a one-piece unit is asserted rather than
+    // assumed (tests/property/dossierProseManifest.test.js), which is what makes this a
+    // narrowing of the reader's job and not a second world beside it.
+    const composed = Array.isArray(rung.pieces) && rung.pieces.length > 1 ? rung.pieces : null;
+    const spinePiece = composed ? composed.find((piece) => piece.role === 'spine') : null;
+    const vid = spinePiece ? spinePiece.vid : (chosen ? chosen.idx : null);
+    const index = spinePiece ? spinePiece.index : (chosen ? audible.indexOf(chosen) : null);
     cells.push({
       cell: `${input.key}::${input.audience}::${mount}::${rungIndex}`,
       block: rung.blockId,
       pool: rung.poolKey,
       vid,
       index,
-      face: 0,
+      face: spinePiece ? spinePiece.face : 0,
       angle: rung.angle,
-      pieces: [{
+      pieces: composed || [{
         role: 'spine', key: rung.poolKey, vid, index, face: 0,
       }],
       textSha: textDigest(rung.text),
-      resolved: Boolean(chosen),
-      ambiguous: candidates.length > 1,
-      drawAgrees: Boolean(chosen) && drawn === chosen,
+      resolved: Boolean(chosen) || Boolean(spinePiece),
+      ambiguous: !composed && candidates.length > 1,
+      drawAgrees: composed ? true : (Boolean(chosen) && drawn === chosen),
     });
   }
   return cells;

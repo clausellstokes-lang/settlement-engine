@@ -216,31 +216,25 @@ export function economyDeskOptions(settlement, opts) {
 }
 
 /**
- * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
- * ONE SPELLING, and every caller of a composed town goes through it.
- *
- * ⛔ EXTRACTED FROM `composeTown` AT ARCH CAR 1 AND NOT RE-TYPED THERE. The RATE corpus reads
- * these returns for the (block, pool) keys that FIRED; the composed-prose manifest reads the
- * SAME returns for each rung's provenance and text, at two audiences. A second spelling of a
- * fourteen-argument reading bag is how one instrument comes to measure a different world than
- * its sibling while both report green — the taste sample's `{}`-readings hazard, one level up.
- * `composeTown` below is unchanged in behaviour: it walks what this returns.
+ * ⭐ THE GENERAL DESK'S READING BAG, ONE SPELLING (TASTE car M-3). `deskReturns` composes with
+ * it and the taste's candidate census calls the desk's candidate leaf with it; a second copy
+ * of a twenty-argument bag is exactly how one instrument comes to measure a different world
+ * than its sibling while both report green. Extracted verbatim from `deskReturns`, which now
+ * calls it.
  * @param {object} s the generated settlement
- * @param {{seed: string, audience: string}} opts
- * @param {(name: string, error: unknown) => void} [onThrow] called per desk that threw
- * @returns {Array<{desk: string, value: unknown}>} in call order
+ * @returns {Record<string, unknown>}
  */
-export function deskReturns(s, opts, onThrow) {
-  /** @type {Array<{desk: string, value: unknown}>} */
-  const out = [];
-  const desk = (name, fn) => {
-    try { out.push({ desk: name, value: fn() }); } catch (error) { if (onThrow) onThrow(name, error); }
-  };
+export function generalReadings(s) {
   const eco = s.economicState || {};
   const dp = s.defenseProfile || {};
   const via = s.economicViability || {};
-  desk('general', () => general.generalStateProse(s, {
+  return {
     scores: dp.scores,
+    // ⭐ THE ECONOMIC-UPKEEP GATE (TASTE car M-3). `generalDeskRead.js` hands it over, so this
+    // recipe hands it over: a corpus walk that composed the general desk WITHOUT it would
+    // measure a world where DS-GEN-3's `purse: short` can never fire, which is the {} readings
+    // hazard this whole function exists to close.
+    economicGates: dp.economicGates,
     prosperity: eco.prosperity,
     safetyLabel: eco.safetyProfile?.safetyLabel,
     viable: via.viable,
@@ -266,7 +260,31 @@ export function deskReturns(s, opts, onThrow) {
     activeChains: eco.activeChains,
     exploitation: s.resourceAnalysis?.exploitation,
     primaryImports: eco.primaryImports,
-  }, opts));
+  };
+}
+
+/**
+ * THE SIX DESKS, CALLED BY THEIR SHIPPED RECIPES (INSTR-912 car 9's corrected sequence) —
+ * ONE SPELLING, and every caller of a composed town goes through it.
+ *
+ * ⛔ EXTRACTED FROM `composeTown` AT ARCH CAR 1 AND NOT RE-TYPED THERE. The RATE corpus reads
+ * these returns for the (block, pool) keys that FIRED; the composed-prose manifest reads the
+ * SAME returns for each rung's provenance and text, at two audiences. A second spelling of a
+ * fourteen-argument reading bag is how one instrument comes to measure a different world than
+ * its sibling while both report green — the taste sample's `{}`-readings hazard, one level up.
+ * `composeTown` below is unchanged in behaviour: it walks what this returns.
+ * @param {object} s the generated settlement
+ * @param {{seed: string, audience: string}} opts
+ * @param {(name: string, error: unknown) => void} [onThrow] called per desk that threw
+ * @returns {Array<{desk: string, value: unknown}>} in call order
+ */
+export function deskReturns(s, opts, onThrow) {
+  /** @type {Array<{desk: string, value: unknown}>} */
+  const out = [];
+  const desk = (name, fn) => {
+    try { out.push({ desk: name, value: fn() }); } catch (error) { if (onThrow) onThrow(name, error); }
+  };
+  desk('general', () => general.generalStateProse(s, generalReadings(s), opts));
   desk('economy', () => economyDeskRead(s, economyDeskOptions(s, opts)));
   desk('power', () => {
     let contenders = null;

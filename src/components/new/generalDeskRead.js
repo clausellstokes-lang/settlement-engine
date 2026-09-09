@@ -177,6 +177,13 @@ export function generalDeskLines(settlement, options = {}) {
     r,
     {
       scores: dp.scores,
+      // ⭐ THE ECONOMIC-UPKEEP GATE, HANDED OVER (TASTE car M-3; ARCH §6.5). DS-GEN-3's
+      // `purse: short` modifier reads it, and the desk cannot reach for a field it is not
+      // handed — the reading bag is the desk's whole input by construction. The gate SPINES on
+      // the defense tab (DS-DEF-11's WALLED-STRAINED) and MODIFIES here, which is the echo
+      // bound's own permitted shape and the architecture's worked example of a fact that
+      // travels between tabs.
+      economicGates: dp.economicGates,
       prosperity: eco.prosperity,
       safetyLabel: eco.safetyProfile?.safetyLabel,
       viable: via.viable,

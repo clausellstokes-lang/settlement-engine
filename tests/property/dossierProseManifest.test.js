@@ -221,14 +221,30 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // M-F6. There is no `pieces` and no `face` in the shipped shape; the recorder synthesises
     // both, and car 3a asserts the composer's `pieces` for an EMPTY candidate list is
     // identical to this synthesis. Recorded so that assertion has something to be identical to.
+    // ⛔ THE POPULATION IS THE ONE-PIECE CELLS, AND THE COMPOSED ONES ARE COUNTED APART
+    // (TASTE car M-3). This arm was written when no modifier could seat anywhere, so "every
+    // cell is one spine piece" and "the synthesis is well formed" were the same sentence. In
+    // the taste's dock seven modifier pools fire, and a cell that GREW a piece is the ADDITIVE
+    // movement the classifier is there to certify — not a defect of the normalisation. The
+    // property the arm actually holds is unchanged and is asserted on both halves: whatever
+    // the piece count, the SPINE piece is the cell's own pool at the cell's own coordinates.
+    const composed = run.cells.filter((c) => c.pieces.length > 1);
     const odd = run.cells.filter((c) => c.face !== 0
-      || c.pieces.length !== 1
+      || c.pieces.length < 1
       || c.pieces[0].role !== 'spine'
       || c.pieces[0].key !== c.pool
       || c.pieces[0].vid !== c.vid
       || c.pieces[0].index !== c.index
       || c.pieces[0].face !== 0);
-    expect(odd.map((c) => c.cell), 'every cell is one spine piece at face 0').toEqual([]);
+    expect(odd.map((c) => c.cell), 'every cell opens on ITS OWN spine piece at face 0').toEqual([]);
+    // AND EVERY EXTRA PIECE IS A MODIFIER OF THE SAME BLOCK, seated at the sentence.
+    const strays = composed.flatMap((c) => c.pieces.slice(1)
+      .filter((piece) => piece.role !== 'modifier' || piece.seat !== 'sentence')
+      .map(() => c.cell));
+    expect(strays, 'a composed cell grows MODIFIERS and nothing else').toEqual([]);
+    console.log(`\n[manifest] one-piece cells ${run.cells.length - composed.length}`
+      + ` · composed cells ${composed.length} of ${run.cells.length}`
+      + ` (the taste's seven modifier pools; the classifier calls every one of them ADDITIVE)\n`);
   }, 120_000);
 });
 

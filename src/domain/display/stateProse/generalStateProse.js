@@ -1669,7 +1669,9 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * detectable. `drawnAtMount` then applies the registry's own depth ruling on top.
  *
  * @param {{name?: string}|null|undefined} settlement
- * @param {{scores?: Record<string, unknown>|null, prosperity?: unknown, safetyLabel?: unknown,
+ * @param {{scores?: Record<string, unknown>|null,
+ *   economicGates?: {military?: unknown}|null,
+ *   prosperity?: unknown, safetyLabel?: unknown,
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
  *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,

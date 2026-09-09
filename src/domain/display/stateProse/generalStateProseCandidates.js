@@ -19,10 +19,16 @@
  * the block — and the composer's audience and attach filters would be asked to do a job the
  * desk never did. Each row below is one authored call to one pool's own predicate.
  *
- * ⭐ REACHABLE FROM NOTHING AT THIS CAR. The list is EMPTY: car 3a lands the seam, cars 3b–3g
- * route the desks through the composer with empty candidate lists, and car 9 authors the
- * modifiers block by block off the census's CUT list. An empty list composes to the kernel's
- * own draw, which is what makes the routing provable by a manifest that cannot move.
+ * ⭐ ONE POOL FIRES HERE, AND IT IS THE TASTE'S (TASTE car M-3; ARCH §6.5). Cars 3b-3g routed
+ * the desks through the composer with an EMPTY list, and car 9 authors the wave's modifiers
+ * off the census's CUT list; this dock authors the one the taste measures.
+ *
+ * ⛔ AND IT NEEDED A READING THE DESK WAS NOT BEING HANDED. ARCH §6.5 says in terms that
+ * `purse: short` "needs `economicGates` in the general desk's readings — a caller line at
+ * `generalDeskRead.js`", and that caller line is this car's. The gate SPINES on the defense
+ * tab (DS-DEF-11's WALLED-STRAINED reads it) and is free to MODIFY on overview, which is
+ * exactly what the echo bound permits and what makes this the architecture's own worked
+ * example of a fact that travels between tabs.
  *
  * The desk composes at 11 of the 31 routed call sites (car 3g), the largest desk of the six.
  *
@@ -30,7 +36,27 @@
  *
  * @enforced-by tests/domain/composeStateProse.test.js
  * @enforced-by tests/lint/composeStateProseFence.test.js
+ * @enforced-by tests/lint/proseTasteCandidates.walker.test.js
  */
+
+/**
+ * DS-GEN-3's purse predicate: the economic-upkeep GATE on the military stack, PRESENT and
+ * below one.
+ *
+ * ⛔ PRESENT IS HALF THE PREDICATE, AND THE HALF THAT IS EASY TO DROP. `defenseGenerator.js`
+ * writes `economicGates.military` only under `hasAnyDefense`, so an absent gate is ABSENCE and
+ * not 1.0; a bare `< 1` on `undefined` is false by luck rather than by reading, and the same
+ * guard is what makes the census call this read `measured` rather than `default`. The shipped
+ * `wallRationalePoolKey` spells it the same way and this is deliberately its twin.
+ * @param {Record<string, unknown>} readings the general desk's own readings bag
+ * @returns {boolean}
+ */
+function purseIsShort(readings) {
+  const gates = /** @type {{military?: unknown}|null|undefined} */ (
+    /** @type {any} */ (readings).economicGates);
+  const gate = gates?.military;
+  return typeof gate === 'number' && Number.isFinite(gate) && gate < 1;
+}
 
 /**
  * One modifier pool the state earned, as the composer takes it.
@@ -62,8 +88,11 @@ export function generalStateProseCandidates(blockId, readings) {
   // FAIL-CLOSED: a caller with no block or no readings gets silence, never a guess.
   if (!blockId || !readings || typeof readings !== 'object') return Object.freeze(fired);
   // ── THE EXPLICIT CALLS ────────────────────────────────────────────────────────────
-  // One line per modifier pool, authored by car 9 against the census's own predicate, e.g.
-  //   if (blockId === 'DS-GEN-3' && musterIsShort(readings)) fired.push({ key: 'muster: short', change: 0 });
-  // EMPTY AT THIS CAR, by design, and asserted empty by the suite.
+  // One line per modifier pool, against the pool's own annex-declared READS path and nothing
+  // else. The composer filters by audience and by the pool's attach set; a second copy of
+  // `poolMeta.attach` here would be a second home for the same set.
+  if (blockId === 'DS-GEN-3' && purseIsShort(readings)) {
+    fired.push({ key: 'purse: short', change: 0 });
+  }
   return Object.freeze(fired);
 }
