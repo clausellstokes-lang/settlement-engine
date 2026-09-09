@@ -232,9 +232,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "Seizing the town would repay the effort.",
+            "This town would repay the effort of taking it.",
             "The town is worth the taking.",
-            "Reckoned for the taking, the town comes out worth it."
+            "Enough lies in the town to warrant an attempt on it."
           ]
         },
         {
@@ -275,7 +275,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "The worth of taking {settlement} is nothing.",
             "Little at {settlement} would repay the taking.",
-            "Taking {settlement} would gain nothing."
+            "Nothing would be gained at {settlement}."
           ]
         },
         {
@@ -285,7 +285,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "The pickings in the town would be slim.",
-            "Anything carried out of the town would not be worth the carrying.",
+            "No load worth the hauling would come out of the town.",
             "Nothing worth taking away is kept in the town."
           ]
         }

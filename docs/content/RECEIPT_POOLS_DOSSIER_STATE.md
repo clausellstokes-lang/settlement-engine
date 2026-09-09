@@ -2577,9 +2577,9 @@ margin *arm*. They are different fields on different rows and both are kept;
    - `[face]` What {settlement} has is worth an attempt on it.
    - `[face]` The gain in taking {settlement} would not be small.
 2. `[street]` What the town sits on is worth having.
-   - `[face]` Seizing the town would repay the effort.
+   - `[face]` This town would repay the effort of taking it.
    - `[face]` The town is worth the taking.
-   - `[face]` Reckoned for the taking, the town comes out worth it.
+   - `[face]` Enough lies in the town to warrant an attempt on it.
 3. `[visitor]` A place worth wanting is what {settlement} is.
    - `[face]` The taking of {settlement} would be worth the doing.
    - `[face]` High worth attaches to {settlement}.
@@ -2593,10 +2593,10 @@ margin *arm*. They are different fields on different rows and both are kept;
 2. `[ledger]` What {settlement} holds does not make it a prize.
    - `[face]` The worth of taking {settlement} is nothing.
    - `[face]` Little at {settlement} would repay the taking.
-   - `[face]` Taking {settlement} would gain nothing.
+   - `[face]` Nothing would be gained at {settlement}.
 3. `[street]` The town has nothing in it worth taking.
    - `[face]` The pickings in the town would be slim.
-   - `[face]` Anything carried out of the town would not be worth the carrying.
+   - `[face]` No load worth the hauling would come out of the town.
    - `[face]` Nothing worth taking away is kept in the town.
 
 ---
