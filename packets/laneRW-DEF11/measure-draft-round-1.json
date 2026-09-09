@@ -1,7 +1,7 @@
 {
  "arm": "draft",
- "round": 2,
- "at": "2026-09-09T16:17:48",
+ "round": 1,
+ "at": "2026-09-09T16:03:20",
  "roster": {
   "pools": 5,
   "why": "--pools named 5 pool(s) by hand"
@@ -1209,12 +1209,12 @@
    "block": "DS-DEF-11",
    "pool": "WALLED-STRAINED",
    "dir": "ds-def-11-walled-strained",
-   "verdict": "WITHHELD",
+   "verdict": "PASS",
    "why": "",
    "variants": 2,
    "faces": [
-    4,
-    4
+    1,
+    1
    ],
    "attach": [],
    "rateBp": 5924,
@@ -1225,24 +1225,15 @@
     "refineB": false,
     "files": []
    },
-   "units": 8,
+   "units": 2,
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 1,
-     "PASS": 7
+     "WITHHELD": 0,
+     "PASS": 2
     },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "arm": "A13",
-      "subject": "a holder with no institution",
-      "value": "WALLED-STRAINED: muster",
-      "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it"
-     }
-    ],
-    "findingCount": 1
+    "findings": [],
+    "findingCount": 0
    },
    "lengths": {
     "form": "sentence",
@@ -1251,19 +1242,13 @@
      {
       "vid": 1,
       "faces": [
-       13,
-       16,
-       14,
-       12
+       18
       ]
      },
      {
       "vid": 2,
       "faces": [
-       14,
-       15,
-       16,
-       17
+       23
       ]
      }
     ]
@@ -1271,46 +1256,34 @@
    "siblings": [
     {
      "vid": 1,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0,
+     "notExecutable": 1,
      "spread": {
-      "pairs": 6,
-      "minOverlapBp": 0,
-      "maxOverlapBp": 3333,
-      "medianOverlapBp": 1714,
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 3,
-      "nearest": {
-       "a": 0,
-       "b": 3,
-       "sameOpener": false,
-       "sameSegments": true,
-       "overlapBp": 3333
-      },
-      "why": ""
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
      }
     },
     {
      "vid": 2,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0,
+     "notExecutable": 1,
      "spread": {
-      "pairs": 6,
-      "minOverlapBp": 1111,
-      "maxOverlapBp": 2500,
-      "medianOverlapBp": 1714,
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
       "sameOpenerPairs": 0,
-      "sameSegmentPairs": 3,
-      "nearest": {
-       "a": 1,
-       "b": 3,
-       "sameOpener": false,
-       "sameSegments": true,
-       "overlapBp": 2500
-      },
-      "why": ""
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
      }
     }
    ],
@@ -1345,159 +1318,18 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 2,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
        "sentences": 2,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 13,
+       "exceededShare": 1,
        "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
+        "metric": "punctuation.semicolonRate",
+        "depth": 3.33,
+        "side": "over"
        },
-       "meanDistanceFromMedian": 0.502,
+       "meanDistanceFromMedian": 0.863,
        "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
+       "depthOk": false,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -1509,61 +1341,14 @@
      "executable": true,
      "sentences": 1,
      "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
      "exceeded": 1,
      "exceededShare": 0.125,
      "deepest": {
-      "metric": "shapes.participialOpenerRate",
-      "depth": 28.24,
+      "metric": "shapes.whichTailRate",
+      "depth": 26.027,
       "side": "over"
      },
-     "meanDistanceFromMedian": 3.854,
+     "meanDistanceFromMedian": 3.536,
      "budgetOk": true,
      "depthOk": false,
      "perfectionSuspect": false,
@@ -1576,11 +1361,11 @@
        "exceeded": 1,
        "exceededShare": 0.125,
        "deepest": {
-        "metric": "shapes.participialOpenerRate",
-        "depth": 28.24,
+        "metric": "shapes.whichTailRate",
+        "depth": 26.027,
         "side": "over"
        },
-       "meanDistanceFromMedian": 3.854,
+       "meanDistanceFromMedian": 3.536,
        "budgetOk": true,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -1588,112 +1373,18 @@
       },
       "corpus": {
        "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 2,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
        "sentences": 2,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
        "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
+       "exceeded": 13,
+       "exceededShare": 1,
        "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
+        "metric": "punctuation.semicolonRate",
+        "depth": 3.33,
+        "side": "over"
        },
-       "meanDistanceFromMedian": 0.502,
+       "meanDistanceFromMedian": 0.863,
        "budgetOk": false,
-       "depthOk": true,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 10,
-       "scored": 13,
-       "exceeded": 10,
-       "exceededShare": 0.769,
-       "deepest": {
-        "metric": "shapes.antithesisRate",
-        "depth": 0.257,
-        "side": "under"
-       },
-       "meanDistanceFromMedian": 0.502,
-       "budgetOk": false,
-       "depthOk": true,
+       "depthOk": false,
        "perfectionSuspect": false,
        "grain": "corpus"
       }
@@ -1701,57 +1392,46 @@
     }
    ],
    "provenance": {
-    "citations": 1,
-    "a13": 1
+    "citations": 0,
+    "a13": 0
    },
    "corpusBand": {
     "executable": true,
-    "sentences": 10,
+    "sentences": 2,
     "scored": 13,
-    "exceeded": 10,
-    "exceededShare": 0.769,
+    "exceeded": 13,
+    "exceededShare": 1,
     "deepest": {
-     "metric": "shapes.antithesisRate",
-     "depth": 0.257,
-     "side": "under"
+     "metric": "punctuation.semicolonRate",
+     "depth": 3.33,
+     "side": "over"
     },
-    "meanDistanceFromMedian": 0.502,
+    "meanDistanceFromMedian": 0.863,
     "budgetOk": false,
-    "depthOk": true,
+    "depthOk": false,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 117,
+   "corpusWords": 41,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 8
+     "PASS": 2
     },
     "findings": [],
     "findingCount": 0,
     "byLabel": []
    },
-   "inherited": [
-    {
-     "label": "A13 · a holder with no institution",
-     "arm": "A13",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-STRAINED",
-     "clause": "WALLED-STRAINED: muster",
-     "description": "the holder kind resolves to no institution in this town's roster, so the cited record has nobody keeping it",
-     "count": 1
-    }
-   ],
-   "inheritedCount": 1,
-   "spineWithheld": true,
+   "inherited": [],
+   "inheritedCount": 0,
+   "spineWithheld": false,
    "qVocabulary": [],
    "inBand": false,
    "failing": [
     {
-     "measure": "band depth · shapes.participialOpenerRate (over)",
-     "value": "28.24 band-widths on 1 of 8 face(s)",
+     "measure": "band depth · shapes.whichTailRate (over)",
+     "value": "26.027 band-widths on 1 of 2 face(s)",
      "band": "DEPTH at most 1.75 band-widths on every face"
     }
    ]
@@ -2317,17 +1997,17 @@
   }
  ],
  "walk": {
-  "totalUnits": 27,
-  "n": 27,
+  "totalUnits": 21,
+  "n": 21,
   "exhaustive": true,
-  "msPerUnit": 0.14814814814814814,
+  "msPerUnit": 0.19047619047619047,
   "exhaustiveMs": 4,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
-  "sampleSha": "f19f27aaa465c0b9254b1ac329f3849d5832eaabae298a2dda3340face87cce1",
+  "sampleSha": "259a5e49a3d89d7cbd4020861755aa8a7a87b15ad602ffd7857b96762ef1ab80",
   "verdicts": {
    "FAIL": 0,
-   "WITHHELD": 8,
-   "PASS": 19
+   "WITHHELD": 9,
+   "PASS": 12
   }
  },
  "manifest": {
