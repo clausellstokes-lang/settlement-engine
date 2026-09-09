@@ -2788,7 +2788,7 @@ test-side files), so this is the banked E2 ratchet and not this car's.
 
 ## CAR 8b-W — THE DEFENSE DESK'S WIRING
 
-**STATUS: PARTIAL — in flight.** Seat: Opus 5 — Fable-unvalidated. Chair: Fable 5.1 (session
+**STATUS: LANDED at `290f86ee0`, seven commits over `f73bdbf16`.** Seat: Opus 5 — Fable-unvalidated. Chair: Fable 5.1 (session
 67af10e4). Dock `$SC/laneRW-DEFW`, base `f73bdbf16` (the §919 CAS). Chartered by ADDENDUM 4 of
 `brief-REWRITE-car8b-defense.md`; the shape is SEAM car 3h's (the key table exposed, key identity
 proven over the 768 RATE towns, the 1,050 DRIFT rows and an exhaustive input sweep, zero drift on
@@ -2807,4 +2807,394 @@ $ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
 $ ps -r -o pid,pcpu,comm | head          # the machine idle: one zsh at 0.0 %
 ```
 
-(sections filled per commit below)
+### 8b-W.1 THE CONSIST — SEVEN COMMITS, FOUR BLOCKS, THREE REGISTER ACTS
+
+| # | sha | what | pools RESOLVED |
+|---|---|---|---|
+| 8b-W-1 | `00041fadd` | DS-DEF-1 wired — `READINESS_ROW_POOL` | **4** |
+| 8b-W-2 | `ef05978ab` | DS-DEF-3 wired — `PUBLIC_ORDER_ROW_POOL` + `FIRST_SURVEY_ROW_POOL` | **7** |
+| 8b-W-3 | `677e8b12a` | DS-DEF-4 wired — `CRIMINAL_CAPTURE_POOL` | **5** |
+| 8b-W-4 | `41f7a5b6b` | DS-DEF-6 wired — `SUPPLY_LOGISTICS_ROW_POOL` | **5** |
+| register 1 | `2bdf2eefb` | the wiring census re-taken; the two projected leaves regenerated; the walker's declared rows | 22 rows moved |
+| register 2 | `c3bd63354` | the observed-shape inventory re-frozen on its drifted input (shrink-only) | — |
+| register 3 | `290f86ee0` | the prose byte ratchet's declared row for the regenerated leaf | — |
+
+### 8b-W.2 ⭐⭐ THE DEBT, ANSWERED BLOCK BY BLOCK — 21 of the 62, AND THE OTHER 41 NAMED
+
+`node scripts/wiring-census.mjs` at the tip against `git show f73bdbf16:docs/content/wiring-census.json`:
+
+| block | pools | RESOLVED before | after | UNRESOLVED after | why the rest stay |
+|---|---|---|---|---|---|
+| DS-DEF-1 | 8 | 4 | **8** | **0** | — |
+| DS-DEF-3 | 7 | 0 | **7** | **0** | — |
+| DS-DEF-4 | 9 | 4 | **9** | **0** | — |
+| DS-DEF-6 | 21 | 3 | **8** | **13** | all thirteen are `DEF6_C3_BLOCKED_POOLS`, BLOCKED by ruling — no key function produces them, so no table can reach them |
+| DS-DEF-7 | 11 | 0 | 0 | **11** | the block is UNMOUNTED (`dossierMounts.UNMOUNTED_BLOCKS`): no composer reads it, so no predicate selects any pool of it |
+| DS-DEF-8 | 4 | 3 | 3 | **1** | `multiple stresses, one posture shown` is `DEF8_UNREACHABLE_POOLS` — DECLARED DARK because it asserts a ranking nothing computes |
+| DS-DEF-10 | 21 | 0 | 0 | **21** | UNMOUNTED, as DS-DEF-7 |
+
+⛔ **THE 41 THAT REMAIN ARE NOT WIRING DEBT AND A SECOND WIRING CAR WOULD NOT MOVE ONE OF THEM.**
+32 of them (DS-DEF-7's eleven, DS-DEF-10's twenty-one) are in UNMOUNTED blocks: there is no
+composer to expose a table FROM, so the act that lights them is the RESERVOIR act or a new
+dossier surface, both of which move rendered bytes and are the chair's. 13 are C3-blocked by a
+landed ruling and one is declared dark. Wiring around any of them would be answering a finding
+with the wrong cure. Every one is printed above with its own `reason` from the census.
+
+⭐ THE SIZING SEAM CAR 3h HANDED THE CHAIR HELD EXACTLY. §3h.9 warned that a per-block count
+overstates reachable work and that DS-DEF-6 reaches five pools, not eighteen. Measured here: five.
+
+### 8b-W.3 ⭐⭐ THE ACCEPTANCE — KEY IDENTITY, EXECUTED THREE WAYS
+
+The A/B harness (`$SC/rw8bw-keyab.mjs`) and the BASE CONTROL (`$SC/rw8bw-basecontrol.mjs`, which
+imports the desk AT `f73bdbf16` beside the desk at the tip and sweeps both) are lane instruments,
+never committed.
+
+```
+$ node $SC/rw8bw-keyab.mjs $SC/rw8bw-before.json     # at f73bdbf16, before any edit
+[key-ab] exhaustive 1915 · RATE towns 768 (threw 0) · DRIFT rows 1050 (threw 0) · 23s
+$ node $SC/rw8bw-keyab.mjs $SC/rw8bw-tip.json       # at 290f86ee0
+[key-ab] exhaustive 1915 · RATE towns 768 (threw 0) · DRIFT rows 1050 (threw 0) · 19s
+$ node $SC/rw8bw-abdiff.mjs $SC/rw8bw-before.json $SC/rw8bw-tip.json
+FINAL A/B — exhaustive rows differing 2 of 1915
+FINAL A/B — RATE keys rows differing 0 of 768
+FINAL A/B — RATE desk-output rows differing 0 of 768
+FINAL A/B — DRIFT keys rows differing 0 of 1050
+FINAL A/B — DRIFT desk-output rows differing 0 of 1050
+$ node $SC/rw8bw-basecontrol.mjs
+[base-control] f73bdbf16 vs the working tree — 2179 inputs swept, 8 differ
+```
+
+| corpus | rows | key tuples differing | desk-output digests differing |
+|---|---|---|---|
+| RATE (768 towns through `generateSettlementPipeline`) | 768 | **0** | **0** |
+| DRIFT (525 configurations × 2 audiences) | **1,050** | **0** | **0** |
+| EXHAUSTIVE sweep of the five key functions' own domains | 1,915 / 2,179 | **2 / 8, DECLARED** | n/a |
+
+Four of the five digests are byte-equal across the pair (RATE keys `60a319aaae91a43a`, DRIFT keys
+`4772fdd350302253`, RATE desk-output `e1ed0d7bc0cd683f`, DRIFT desk-output `f061441e0c07dda3`).
+The exhaustive digest moved, `733665fb96d9d733` → `e8093d4f8d1a0594`, and the eight rows behind it
+are enumerated below rather than summarised.
+
+### 8b-W.4 ⛔⛔ THE ONE DECLARED NARROWING — EIGHT INPUTS, ALL OF THEM DS-DEF-3's, ALL UNREACHABLE
+
+`publicOrderPoolKey`'s roster was `CORPUS['DS-DEF-3'].pools[label]`, and a plain object answers
+that question for strings nobody meant it to. The table is the roster now, read as a string or
+not at all, so eight inputs that returned a pool key return SILENCE:
+
+```
+BASE: publicOrder|COMPOUND override (a crisis stress has rewritten the label)|COMPOUND override (…)
+ TIP: publicOrder|COMPOUND override (a crisis stress has rewritten the label)|null
+BASE: publicOrder|First-Survey qualification (the reading is a first look)|First-Survey qualification (…)
+ TIP: publicOrder|First-Survey qualification (the reading is a first look)|null
+BASE: publicOrder|constructor|constructor          TIP: null
+BASE: publicOrder|toString|toString                TIP: null
+BASE: publicOrder|__proto__|__proto__              TIP: null
+BASE: publicOrder|hasOwnProperty|hasOwnProperty    TIP: null
+BASE: publicOrder|valueOf|valueOf                  TIP: null
+BASE: publicOrder|isPrototypeOf|isPrototypeOf      TIP: null
+```
+
+⭐ **IT IS A STRICT IMPROVEMENT AND IT IS UNREACHABLE, AND BOTH HALVES ARE MEASURED.** On the
+first two the shipped desk routed the public-order BANNER to a framing pool or to the compound
+pool's own name; on the other six it routed it to a pool named for the inheritance chain. All
+eight are nonsense output, and none can be produced: over the 768 towns of the RATE corpus
+`safetyProfile.js` writes **30 distinct labels** (`Moderate` 509, `Dangerous` 24, `Dangerous —
+Famine Conditions` 20, …) and not one is a member of the eight. Both corpora read 0 differing.
+Pinned by an arm in the desk suite so the narrowing cannot be quietly reversed OR quietly widened.
+**Veto shape:** carry all seven corpus pool keys in the table and accept a predicate that says the
+banner fires when the label IS the pool's own name, if bit-identity on unreachable inputs is worth
+more than a predicate that is true.
+
+The other four key functions are IDENTICAL on every input of the sweep, `constructor` and
+`__proto__` included: `posturePoolKey` and `supplyLogisticsPoolKey` guard before they look up,
+and `criminalCapturePoolKey`'s old `Array.includes` roster and its new table agree everywhere.
+
+### 8b-W.5 ⭐⭐ ZERO RENDERED BYTES — THE CLASSIFIER, END TO END
+
+```
+$ node scripts/prose-manifest-cells.mjs --out $SC/rw8bw-cells-base.json      # at f73bdbf16
+  towns 525 · rows 1050 · cells 73284 · 10 s
+$ node scripts/prose-manifest-cells.mjs --out $SC/rw8bw-cells-final.json    # at 290f86ee0
+  towns 525 · rows 1050 · cells 73284 · 9 s
+$ node scripts/prose-manifest-diff.mjs $SC/rw8bw-cells-base.json $SC/rw8bw-cells-final.json
+PROSE MANIFEST DIFF · 73284 cells on the tip side
+  REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0
+  UNCHANGED cells 73284 · towns 525 · ADDED 0 · REMOVED 0
+  (of the UNCHANGED, cells whose audience-filtered INDEX moved: 0)
+```
+
+**UNCHANGED 73,284 of 73,284, which is the acceptance figure ADDENDUM 4 names.** Not one cell of
+525 towns × 2 audiences moved across seven commits.
+
+⚠ **TWO PROJECTED LEAVES DID MOVE, AND THE DIFFERENCE IS THE POINT.** `poolMeta.readsCount` is
+projected FROM the census, so re-taking the census obliges the projector to write one line per
+newly RESOLVED pool — SEAM car 3h owed no such regeneration only because `poolMeta` landed after
+it, at car 4. Classified line by line, every changed line of both leaves is a `readsCount` line:
+
+```
+$ git diff -U0 -- src/data/ | <strip markers, classify by JSON key> | sort | uniq -c
+  23 KEY:readsCount
+```
+
+21 added in `defense.generated.js` (each newly RESOLVED pool, `readsCount: 1`) and one CHANGED in
+`general.generated.js` (`DS-GEN-6 :: isolated`, 3 → 1). No `text`, no `vid`, no `angle`, no
+`marks`, no `slots`.
+
+### 8b-W.6 ⭐⭐ THE TWENTY-SECOND ROW: A FALSE ATTRIBUTION CURED, WITH ITS NEGATIVE CONTROL
+
+The census re-take moved 22 rows and only 21 are the four blocks'. The twenty-second is
+`DS-GEN-6 :: isolated`, and it is a CURE this car did not set out to make:
+
+```
+SAME-STATUS MOVE: DS-GEN-6 :: isolated | rung literal -> table
+  kf supplyLogisticsPoolKey -> ORIGIN_POOL_OF_ROUTE | k 0 -> 2
+  reads ["granary","port","settlement.config.tradeRouteAccess"]
+     -> ["text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"]
+```
+
+⛔ **THE MECHANISM, WHICH IS A CLASS AND NOT AN ACCIDENT.** The register's rung-1 reader takes
+every STRING LITERAL in a key function's body as a candidate key, and a COMPARISON VALUE is a
+string literal. The defence desk's `supplyLogisticsPoolKey` compared `access === 'isolated'`, and
+`isolated` is also the NAME of a DS-GEN-6 pool — so a general-desk pool resolved against a
+defence-desk function and carried THREE of that function's parameter names as its read set, at
+k = 0. Tabling the function moved that comparison into a helper the reader does not scan, and the
+row now resolves through its own desk's `ORIGIN_POOL_OF_ROUTE`.
+
+**EXECUTED, WITH THE NEGATIVE CONTROL THAT MAKES IT A FINDING** (`$SC/rw8bw-crossdesk.mjs`, which
+maps every key function and module table to its composer and asks which RESOLVED rows are keyed by
+another desk's):
+
+```
+$ node $SC/rw8bw-crossdesk.mjs $SC/laneRW-DEFW /tmp/base-census.json   # the census AT f73bdbf16
+[cross-desk] RESOLVED rows attributed to a key function of ANOTHER desk: 1
+    DS-GEN-6 :: isolated — rung literal, keyed by supplyLogisticsPoolKey in defenseStateProse.js
+      reads ["granary","port","settlement.config.tradeRouteAccess"]
+$ node $SC/rw8bw-crossdesk.mjs $SC/laneRW-DEFW                          # the census at the tip
+[cross-desk] RESOLVED rows attributed to a key function of ANOTHER desk: 0
+```
+
+⭐ **FOR THE CHAIR: THE CLASS IS EMPTY TODAY AND NOTHING PREVENTS IT REFILLING.** Any key function
+whose branch compares against a bare word that some other block also uses as a pool name mints the
+same false row, and it looks exactly like a resolution. The honest cure is the register's, not a
+desk's: rung 1 should take a literal only where it is RETURNED, not merely present in the body.
+Recorded, not cured — it is a change to the ladder and it belongs to the module's own car.
+
+### 8b-W.7 THE DECLARED ROWS UPDATED IN THE WALKER — thirty figures, each with its ground
+
+`tests/lint/proseWiringCensus.walker.test.js` reads **78 passed** after; the desk suite **91
+passed**; the projection contract **77 passed**. No test title and no `describe` was added or
+removed — proved by count rather than by the green:
+
+```
+tests/domain/defenseStateProseDesk.test.js          base=109  tip=109
+tests/lint/proseWiringCensus.walker.test.js         base=95   tip=95
+tests/data/dossierStateProseProjection.contract.test.js  base=88  tip=88
+```
+
+so **the lighting census does not move and no refreeze is owed** (`sovereigntyLightingContract.walker.test.js`
+34 passed).
+
+| assertion | before | after | why |
+|---|---|---|---|
+| `summary.resolved` / `unresolved` | 340 / 368 | **361 / 347** | the 21 |
+| `resolvedWithPredicate` / `…Clean` | 207 / 207 | **229 / 229** | the 21 plus DS-GEN-6's cure |
+| `syntheticTableFields`, `tableRungRowsWithoutAbsence` | 100 | **122** | the same 22 table labels |
+| `census.tables` | 33 | **38** | the five new tables |
+| `factIndex.length` | 63 | **68** | one synthetic label per new table |
+| `branchGrainRows` / `functionGrainRows` | 309 / 399 | **330 / 378** | a table row's field IS its branch |
+| `absent.measured`, and the four-label partition | 370, 451 | **367, 448** | DS-GEN-6 gave back three false measured paths |
+| `attachCoverage.length` | 50 | **51** | DS-DEF-3 had no RESOLVED spine and now has seven |
+| `dark.length` / `grains.function.cannotAttach` | 21 / 25 | **20 / 24** | DS-DEF-6 leaves both: a second read set on the block |
+| `budget.zeroK`, `grains.branch.zeroK` / `function.zeroK` | 49, 49 / 121 | **48, 48 / 120** | DS-GEN-6 alone; all 21 new rows land at k = 2 |
+| `budget.executable` / `notExecutable` / histogram sum | 340 / 368 / 340 | **361 / 347 / 361** | the 21 |
+| `custom.rows.length` and `byKind` | 21; services 6, resources 6, institutions 5, tradeGoods 2 | **25**; **7, 7, 6, 3** | four newly RESOLVED predicates a custom definition can reach |
+| `join.deskRoots` | 89 | **94** | five more roots no relation endpoint can meet |
+| `join.leafEither` | 2 | **3** | see below |
+| `draft.syntheticRootsExcluded` | 19 | **24** | the same five, excluded by name |
+| holders `fields` SOURCE-UNRESOLVED, total, `rowsWithNoReading` | 415, 611, 368 | **444, 640, 347** | +31 −2: the holder reader lifts the ARGUMENT NAMES out of each rung-3 label (one each for DEF-1/-3/-4, THREE for DEF-6's three-parameter reader); DS-GEN-6 gives two back. Not one field changed STANDING |
+| the projection contract's `readsCount` split | 340 / 368 | **361 / 347** | it IS the census's split |
+
+⭐ **`leafEither` 2 → 3 IS WORTH ITS OWN LINE, BECAUSE IT SHOWS WHAT A TABLE RUNG BUYS AND WHAT IT
+DOES NOT.** The third row is `signal:captureState -> cause:captured`. Rung 3's label carries the
+key function's own PARAMETER NAME inside it (`text(captureState) (via …)`) and the LEAF normaliser
+splits the label into segments, so the relation endpoint now touches a desk read. DS-DEF-4's
+capture pools really are about that signal, so the touch is true rather than an artefact — but
+`strictEither` is still **0**, because the STRICT join reads the label's ROOT, which is the label.
+A wiring car buys the leaf-level reach and does not buy the strict one. **THE FINDING "NOT ONE
+RELATION ROW JOINS TWO FIELDS A DESK READS" IS UNMOVED.**
+
+### 8b-W.8 THE LICENCE CARDS — one newly resolved pool per block, and a defect in the card
+
+Each of the four prints a `predicate` line and a `may claim` line, which is ADDENDUM 4's test:
+
+```
+$ node scripts/prose-licence-card.mjs DS-DEF-1 'readiness STRONG'
+  predicate:  scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js) === STRONG
+$ node scripts/prose-licence-card.mjs DS-DEF-3 'Very Safe'
+  predicate:  publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js) === Very Safe
+$ node scripts/prose-licence-card.mjs DS-DEF-4 'capture equilibrium'
+  predicate:  text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js) === equilibrium
+$ node scripts/prose-licence-card.mjs DS-DEF-6 'Logistics & Supply: Granary + port'
+  predicate:  supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js) === granary, port
+```
+
+⛔⛔ **AND EVERY ONE OF THEM SAYS THIS, WHICH THE SECOND WRITING PASS WILL READ:**
+
+```
+  may claim:  that `js)` (=== STRONG) holds, as a STANDING fact of the record
+```
+
+The card's `may claim` line names the read's LAST DOT-SEGMENT, and a rung-3 label ends in
+`defenseStateProse.js)`. ⭐ **INHERITED, NOT INTRODUCED — MEASURED WITH A CONTROL.** The same
+command run against the census AT `f73bdbf16`, for a pool the base ALSO carried on the table rung,
+prints the identical line:
+
+```
+$ node scripts/prose-licence-card.mjs DS-DEF-1 'terrain FAVOURABLE to the defender'   # tip
+  may claim:  that `js)` (=== Mountain) holds, as a STANDING fact of the record
+$ <the same, with docs/content/wiring-census.json restored to f73bdbf16>              # base
+  may claim:  that `js)` (=== Mountain) holds, as a STANDING fact of the record
+```
+
+⚠ **WHAT THIS CAR CHANGES IS ITS BLAST RADIUS: 33 tables to 38, and the 21 pools whose writers
+will read these cards next.** The cure is one expression in `scripts/lib/prose-licence-card.mjs`:
+a rung-3 read is a synthetic label, so the card should print its READER (`scoreBand(readinessScore)`)
+and never the last segment of a file name. NOT CURED HERE — it is the licence-card instrument,
+owned by `tests/lint/proseLicenceCard.walker.test.js`, and a wiring car that quietly widened its
+own scope is the harder thing to review (SEAM car 3h's own rule about `supplyLogisticsPoolKey`).
+⭐ It should land BEFORE the seven blocks' second writing pass.
+
+### 8b-W.9 THE GATES AT THE TIP — every acceptance figure ADDENDUM 4 names
+
+```
+$ sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint                         ; exit=0
+ Test Files  155 passed (155)          Tests  2599 passed (2599)
+
+$ sh scripts/gate-mutex.sh --run -- npx vitest run tests/ui                           ; exit=0
+ Test Files  157 passed (157)          Tests  989 passed (989)
+
+$ npx vitest run tests/copy/voiceMechanics.test.js                                    ; exit=1
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+      Tests  1 failed | 18 passed (19)      # THE INHERITED TWO FILES, and nothing added
+
+$ npx vitest run tests/data/dossierStateProseProjection.contract.test.js              ; exit=0
+      Tests  77 passed (77)
+$ npx vitest run tests/lint/proseWiringCensus.walker.test.js                          ; exit=0
+      Tests  78 passed (78)
+$ npx vitest run tests/domain/defenseStateProseDesk.test.js                           ; exit=0
+      Tests  91 passed (91)
+$ npx vitest run tests/property/dossierProseManifest.test.js                           ; exit=0
+      Tests  15 passed (15)
+
+$ node scripts/check-domain-strict.mjs                                                ; exit=0
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs                                               ; exit=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/check-observed-shape-readers.mjs                                       ; exit=0
+observed-shape readers: 1972 finding(s), exactly matching the frozen inventory.
+$ node scripts/wiring-census.mjs --check                                              ; exit=0
+[wiring-census] verified 708 pools / 2266 variants / 165 relation rows against 7 stamped files
+$ node scripts/generate-dossier-state-prose.mjs --check                               ; exit=0
+[dossier-prose] verified 68 state blocks / 2266 variants across 6 desks, 78 causal families
+$ npx eslint <the desk, the three test files>                                         ; exit=0
+✖ 1 problem (0 errors, 1 warning)   # 'MONSTER_THREAT_TIERS' unused — pre-existing, unmoved
+$ node <espree literal probe>  base vs tip
+/tmp/base-desk.js  literals 240 em 0 bang 0 digit 21 digit-that-is-not-a-block-id 0
+the tip           literals 268 em 0 bang 0 digit 19 digit-that-is-not-a-block-id 0
+```
+
+⭐ **THE STRICT RATCHET SITS EXACTLY ON ITS CEILING, 1120 / 1120** — five frozen tables and three
+readers added ZERO strict-type errors. **THE BYTE RATCHET:** the desk is **576 effective lines
+against the 800 ceiling** (headroom 224), raw 1,798 → 1,949.
+
+### 8b-W.10 ⛔ THE FOURTH REGISTER DOOR THE CHARTER DID NOT NAME, AND WHY IT WAS OPENED
+
+`tests/lint` red on `proseCorpusBytes.test.js` after the register commit:
+
+```
+src/data/dossierStateProse/defense.generated.js: grew to 155118 raw bytes, over the committed
+154593. Append a declared row to scripts/.prose-byte-baseline.json naming the car and the delta,
+and move this number onto 155118.
+```
+
+ADDENDUM 4 names three register doors (the census re-take, the lighting census, OSR shrink-only)
+and the byte ratchet is not among them — but the growth is FORCED by a door that IS named, and the
+ratchet's own message names the act. **+525 bytes is 21 `readsCount` lines at exactly 25 bytes
+each**, which the arithmetic confirms to the byte. It was declared through the ratchet's own
+GROWTH door (car, leaf, fromRaw, toRaw, gzipAfter, reason) and never by widening a ceiling: the
+leaf sits at 155,118 of its 488,168, and gzip is 23,039 before and after — a metadata line
+repeated twenty-one times compresses to nothing. `general.generated.js` needs no row: its one
+changed line is the same length and its gzip moved 2 bytes inside the arm's own 1 % band.
+**Recorded as a judgment call for veto: a chair who reads the byte ratchet as owner-gated should
+strike this commit and re-cut it.**
+
+### 8b-W.11 THE JUDGMENT CALLS, EACH RECORDED FOR VETO
+
+1. **The DS-DEF-3 narrowing** (§8b-W.4) — eight unreachable inputs go from a nonsense pool key to
+   silence. Measured, enumerated, pinned by an arm; veto shape stated.
+2. **Every table is module-PRIVATE**, forced by the projection contract's exported-string-map
+   guard (`tests/data/dossierStateProseProjection.contract.test.js:603`), which refuses an exported
+   string map `SLOT_FILL_TABLES` does not name — SEAM car 3h's judgment 2, unchanged. The exported
+   `CRIMINAL_CAPTURE_STATES` roster is an ARRAY and is derived from its table rather than spelled a
+   second time, on `RECOGNISED_CRIMINAL_STRUCTURES`' precedent.
+3. **The lookup is read as a STRING or not at all** (`typeof pool === 'string'`), which closes the
+   `Object.prototype` half of the narrowing at cause. ⚠ `TERRAIN_DEFENCE_OF` and `TERRAIN_PRIZE_OF`
+   still index a free-form producer word WITHOUT that guard and are named in the code rather than
+   swept up: they are a different row of DS-DEF-1 and this car did not touch their function.
+4. **The situation tokens are English phrases, not encoded triples** — SEAM car 3h's judgment 5,
+   applied to `publicOrderSituation`, `firstSurveySituation` and `supplyLogisticsSituation`.
+5. **The byte ratchet's declared row** (§8b-W.10).
+6. **The licence card's `js)` leaf is recorded and not cured** (§8b-W.8), and it is the one item
+   here that should land before the second writing pass.
+7. **No new test title anywhere**, so the lighting census is untouched and no refreeze commit is
+   owed. Every new assertion is folded into an arm that already existed.
+8. **DS-DEF-2's exposure docblock was CORRECTED rather than left to decay**: it said
+   `supplyLogisticsPoolKey` was waiting for its own car, and the car has landed.
+
+### 8b-W.12 RETROVALIDATION ROW (for the Fable chair)
+
+| what was judged | what the chair must re-derive | receipts | priority |
+|---|---|---|---|
+| The DS-DEF-3 narrowing, 8 inputs | that all eight are unreachable, and that silence beats a nonsense pool key | §8b-W.4 | ⭐⭐ the only behaviour change in the car |
+| The byte ratchet's declared row | that a door forced by a named door may be opened by the lane | §8b-W.10 | ⭐⭐ a register act the charter did not name |
+| The licence card's `may claim: that \`js)\`` | whether it lands before the second writing pass, and whose car it is | §8b-W.8 | ⭐⭐ every 8b writer of these 62 pools reads it |
+| DS-GEN-6's false attribution cured, and the class refilling | that rung 1 taking a comparison literal as a key is the register's cure, not a desk's | §8b-W.6 | ⭐⭐ a resolution that looked exactly like evidence |
+| `leafEither` 2 → 3 | that the third touch is true and that `strictEither` 0 keeps the finding | §8b-W.7 | ⭐ |
+| holders `fields` 415 → 444 | that lifting parameter names out of a rung-3 label is the reader working | §8b-W.7 | ⭐ |
+| The 41 pools left UNRESOLVED | that 32 UNMOUNTED + 13 C3-blocked + 1 declared dark is not wiring debt | §8b-W.2 | ⭐ sizing the second writing pass |
+
+### 8b-W.13 THE TIP, AND THE COMMANDS THAT RECOMPUTE THIS CAR
+
+```
+node $SC/rw8bw-basecontrol.mjs                               # the base control, at any sha
+node $SC/rw8bw-keyab.mjs <out.json>                          # the A/B over both corpora
+node scripts/prose-manifest-cells.mjs --out <f> && node scripts/prose-manifest-diff.mjs <base> <f>
+npx vitest run tests/lint                                    # 155 / 155, 2599 / 2599
+npx vitest run tests/ui                                      # 157 / 157, 989 / 989
+node scripts/wiring-census.mjs --check                       # the door is closed
+node scripts/check-domain-strict.mjs                         # 1120 / 1120
+```
+
+```
+$ git -C $SC/laneRW-DEFW log --oneline f73bdbf16..HEAD
+290f86ee0 Register (REWRITE 8b-W): the prose byte ratchet's declared row for the regenerated leaf
+c3bd63354 Register (REWRITE 8b-W): the observed-shape inventory re-frozen on its drifted input
+2bdf2eefb Register (REWRITE 8b-W): the wiring census re-taken — 22 rows moved, RESOLVED 340 to 361
+41f7a5b6b REWRITE car 8b-W-4: DS-DEF-6 wired — 5 pools RESOLVED
+677e8b12a REWRITE car 8b-W-3: DS-DEF-4 wired — 5 pools RESOLVED
+ef05978ab REWRITE car 8b-W-2: DS-DEF-3 wired — 7 pools RESOLVED
+00041fadd REWRITE car 8b-W-1: DS-DEF-1 wired — 4 pools RESOLVED
+$ git -C $SC/laneRW-DEFW status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ ls -ld node_modules/immer node_modules/seedrandom
+lrwxr-xr-x  node_modules/immer -> /Users/cstokes/Desktop/settlement-engine/node_modules/immer
+lrwxr-xr-x  node_modules/seedrandom -> .../node_modules/seedrandom      # symlinks, never cloned
+```
+
+**STATUS: CAR 8b-W LANDED at `290f86ee0`.** Seven commits, one product file, two register
+baselines, two projected leaves and three test files; no build; porcelain 0 and runners 0.
+The seven blocks' second writing pass runs on docks cut at the consist tip AFTER this car is
+consisted.
