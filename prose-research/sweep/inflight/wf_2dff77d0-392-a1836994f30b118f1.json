@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 155,
+ "firstTs": "2026-09-09T06:56:09.903Z",
+ "lastTs": "2026-09-09T07:00:33.927Z",
+ "tools": {
+  "Bash": 37,
+  "Read": 10
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I need the fingerprint's per-face rate metrics (the shapes that score 0-or-1 on a single sentence) before I write, and the taste-measure's lengths band. Both are independent.",
+ "run": "wf_2dff77d0-392",
+ "agent": "a1836994f30b118f1",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_2dff77d0-392/agent-a1836994f30b118f1.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
