@@ -189,16 +189,25 @@ export function lawfulPassageShapes(unit, facts = {}) {
   }
 
   // ── 3 · the clause seat ──────────────────────────────────────────────────────────
-  // S2 is SIGNED (§N.1) but its connective list is EMPTY: `composeStateProse.js` authors
-  // `consequence.clause` as `[]`, so `drawConnective` answers null and no clause joint can be
-  // seated on any world. The shape is therefore WITHHELD rather than refused on this unit's
-  // own facts, and the distinction matters — a shape nobody can reach is an owed list, not an
-  // unlawful arrangement, and 8a item 9 is the car that drafts the list.
+  // S2 is SIGNED (§N.1). The WITHHELD branch is for a corpus whose `consequence.clause` list
+  // is EMPTY: `drawConnective` then answers null and no clause joint can be seated on any
+  // world, so the shape is withheld rather than refused on this unit's own facts. That
+  // distinction matters — a shape nobody can reach is an owed list, not an unlawful
+  // arrangement.
+  //
+  // ⚠ IT IS NOT THIS TREE'S CONDITION ANY MORE, and the reason the sentence used to say so is
+  // worth keeping (REWRITE car 8a-11, SITTING §U c-5). Car 8a-9 authored the leaf's four lists
+  // to their floor of three, and until 8a-11 the COMPOSER still carried its own floor constant
+  // at 0, so this `why` named "the connectives leaf" for a condition that was true only of the
+  // constant, and named 8a item 9 as the future cure for a condition 8a item 9 had already
+  // ended. The composer reads the leaf now, `clauseJointsExist` is TRUE on the shipped tree,
+  // and what refuses shape 3 here is the ordinary fact below: no modifier is seated at the
+  // clause seat, because `seatOf` answers `not-consequence` on all 708 pools.
   if (clauseSeated) lawful.push('clause-seat');
   else if (facts.clauseJointsExist === false) {
     refused.push({
       shape: 'clause-seat',
-      why: 'WITHHELD: the connectives leaf carries no consequence.clause joint at all, so no world can seat one (8a item 9 drafts the list to its floor of three)',
+      why: 'WITHHELD: the composer\'s connective lists carry no consequence.clause joint at all, so no world can seat one',
     });
   } else {
     refused.push({ shape: 'clause-seat', why: 'no modifier is seated at the clause seat' });

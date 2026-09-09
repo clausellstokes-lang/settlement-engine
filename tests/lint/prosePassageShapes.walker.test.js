@@ -131,19 +131,40 @@ describe('passage shapes — LICENSED BY THE COMPOSITION, never rescued by it', 
       .toMatch(/colours the order it is put in/);
   });
 
-  it('⛔ SHAPE 3 IS WITHHELD ON THE LIVE LEAF, and the leaf is read rather than described', () => {
-    // S2 is SIGNED but its list is EMPTY, so no world can seat a clause joint. The emptiness
-    // is READ FROM THE SHIPPED LEAF here, so the day 8a item 9 drafts the list to its floor
-    // this arm moves with it instead of describing a corpus that no longer exists.
-    expect(CONNECTIVES.consequence.clause, 'the consequence.clause list at this tip').toEqual([]);
-    const lawful = lawfulPassageShapes(unitWith(ADDITION), {
+  it('⛔ SHAPE 3 IS REFUSED FOR WANT OF A SEAT, and WITHHELD for want of a joint — read, not described', () => {
+    // ⚠ THIS ARM'S PREMISE MOVED AT REWRITE car 8a-11, WHICH IS WHY IT READS THE LEAF (SITTING
+    // §U c-5). It used to assert `CONNECTIVES.consequence.clause` was `[]` and call the
+    // withholding the shipped state. That was true of the composer's own floor CONSTANT and
+    // stopped being true of the LEAF at car 8a-9, and for one whole car the two disagreed with
+    // nothing saying so. The composer reads the leaf now, so the shipped list is three and the
+    // two refusals are told apart here rather than conflated.
+    expect(CONNECTIVES.consequence.clause, 'the consequence.clause list at this tip')
+      .toEqual([', so', ', and so', ', leaving']);
+
+    // (i) THE SHIPPED CONDITION: joints exist, so what refuses shape 3 is the SEAT — no
+    // modifier is seated at the clause seat, because `seatOf` answers `not-consequence` on all
+    // 708 pools.
+    const shipped = lawfulPassageShapes(unitWith(ADDITION), {
       ...CARRIES, jointPhrase: '', clauseJointsExist: CONNECTIVES.consequence.clause.length > 0,
     });
     // anchored: the next line reads this refusal's `why`, and the LIVE CONTROL below seats a clause and gets the shape back
-    expect(lawful.lawful).not.toContain('clause-seat');
-    expect(lawful.refused.find((r) => r.shape === 'clause-seat').why).toMatch(/^WITHHELD/);
-    // THE LIVE CONTROL: a unit that DID seat a clause makes the shape lawful, so the refusal
-    // above is about the leaf and not about the function being unable to say yes.
+    expect(shipped.lawful).not.toContain('clause-seat');
+    expect(shipped.refused.find((r) => r.shape === 'clause-seat').why)
+      .toBe('no modifier is seated at the clause seat');
+
+    // (ii) THE WITHHELD BRANCH IS STILL REACHABLE AND STILL SAYS THE RIGHT THING, driven on a
+    // corpus whose list is empty. A branch nobody can reach is a claim; this one is driven.
+    const starved = lawfulPassageShapes(unitWith(ADDITION), {
+      ...CARRIES, jointPhrase: '', clauseJointsExist: false,
+    });
+    const why = starved.refused.find((r) => r.shape === 'clause-seat').why;
+    expect(why).toMatch(/^WITHHELD/);
+    expect(why, 'and it names the COMPOSER\'S lists, which is where the emptiness would be')
+      .toContain('the composer\'s connective lists');
+
+    // (iii) THE LIVE CONTROL: a unit that DID seat a clause makes the shape lawful, so both
+    // refusals are about the unit and the leaf rather than about the function being unable to
+    // say yes.
     const seated = lawfulPassageShapes(
       unitWith({ role: 'modifier', key: 'M', seat: 'clause', relation: 'consequence' }),
       { ...CARRIES, jointPhrase: ', and so', clauseJointsExist: true },

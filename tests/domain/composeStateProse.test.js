@@ -52,6 +52,7 @@ import {
 import {
   STATE_MARK_DIMENSIONS, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { DOSSIER_CONNECTIVES } from '../../src/data/dossierConnectives.generated.js';
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { defenseStateProseCandidates } from '../../src/domain/display/stateProse/defenseStateProseCandidates.js';
 import { economyStateProseCandidates } from '../../src/domain/display/stateProse/economyStateProseCandidates.js';
@@ -579,8 +580,14 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
     const answered = composeFixture(partitioned, {
       candidates: [{ key: 'graded' }], dimensions: { severity: 'major' },
     });
+    // ⚠ THE OPENER IS DRAWN FROM THE LEAF, which is why this string carries one: REWRITE car
+    // 8a-11 wired `CONNECTIVES` to `src/data/dossierConnectives.generated.js`, whose
+    // `addition.sentence` list has stood at its floor of three since 8a-9. The subject of this
+    // arm is the DIMENSION, and the opener is the composer working; the list's LENGTH is the
+    // SHIFT REGISTER's `connective-list-length` mechanism and the twelve joints are the
+    // owner's copy, signed at the walk (§13 row 27), so a copy act moves this line with it.
     expect(answered.text, 'answered: it speaks the value it names')
-      .toBe('The walls stand. A major wave.');
+      .toBe('The walls stand. Also, a major wave.');
   });
 
   it('refuses a candidate that is not a modifier, not attached, or not in the block', () => {
@@ -633,8 +640,10 @@ describe('the composer — the candidate stage is AUDIENCE-FIRST (ARCH §4.2 ste
     const unfilled = composeFixture(corpus3, {
       candidates: [{ key: 'anchored' }, { key: 'free' }], leaves,
     });
+    // The drawn `addition` opener rides in front of the seated candidate; see the dimension
+    // arm above for why this string carries one since REWRITE car 8a-11.
     expect(unfilled.text, 'the top-ranked candidate dropped, the next one seated')
-      .toBe('The walls stand. The road is open.');
+      .toBe('The walls stand. Also, the road is open.');
     const filled = composeFixture(corpus3, {
       candidates: [{ key: 'anchored' }, { key: 'free' }],
       slots: { counterpart: 'Highfen' },
@@ -831,7 +840,7 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     // ⚠ THE FIXTURE'S TEXT IS A FRAGMENT, which is why the unit reads oddly here: the annex
     // refuses `FORM: fragment` under a sentence seat (§2.5's FORM row), so this row could
     // not ship. What is being driven is the SEAT decision, not a shippable sentence.
-    expect(unit.text).toBe('The walls stand. the muster is thin');
+    expect(unit.text).toBe('The walls stand. Beside that, the muster is thin');
   });
 
   it('⭐ THE SEAT IS READ OFF THE POOL, and an explicit `sentence` is the same as none', () => {
@@ -878,21 +887,38 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     expect(`${licensed.seat}/${licensed.relation}`).toBe(`${CLAUSE_SEAT}/consequence`);
   });
 
-  it('⛔ A LICENSED CLAUSE IS STILL WITHHELD while `consequence.clause` stands empty', () => {
-    // The two halves of a joint are INDEPENDENT and the corpus proves it: car 4 froze
-    // `consequence.clause` at length 0 against a floor of 3 (OWED in the leaf's own header),
-    // so even a pool the projector licensed cannot seat — `drawConnective` answers null and
-    // the candidate is DROPPED, which is the withheld path and not a silent empty joint.
-    expect(CONNECTIVES.consequence.clause, 'the shipped clause list is empty and OWED').toEqual([]);
+  it('⛔ AN EMPTY `consequence.clause` LIST WITHHOLDS A LICENSED CLAUSE — and the shipped list is no longer empty', () => {
+    // The two halves of a joint are INDEPENDENT, and this arm drives that independence from
+    // BOTH sides.
+    //
+    // ⚠ THE PREMISE MOVED, AND SAYING SO IS THE POINT (REWRITE car 8a-11, SITTING §U c-5).
+    // This arm used to read `CONNECTIVES.consequence.clause` as `[]` and call it "empty and
+    // OWED". That was true of the composer's own FLOOR CONSTANT and it stopped being true of
+    // the LEAF at car 8a-9, which authored all four lists to their floor of three; the two
+    // homes then disagreed for a whole car with nothing saying so. The composer now READS the
+    // leaf, so the shipped clause list stands at three and the withheld path has to be driven
+    // on an INJECTED empty list rather than on the shipped one.
+    expect(CONNECTIVES.consequence.clause, 'the shipped clause list, at its floor since 8a-9')
+      .toEqual([', so', ', and so', ', leaving']);
     const licensed = withSeat({ seat: CLAUSE_SEAT });
-    expect(composeFixture(licensed, { candidates: [{ key: 'm' }] }).pieces.length,
-      'licensed, and withheld for want of a joint').toBe(1);
-    // AND THE CONTROL: author one joint and the same licensed pool seats at the clause.
+    // (i) THE WITHHELD PATH, on an injected empty list: `drawConnective` answers null and the
+    // candidate is DROPPED, which is a withholding and not a silent empty joint.
+    const starved = composeFixture(licensed, {
+      candidates: [{ key: 'm' }],
+      leaves: { connectives: { ...CONNECTIVES, consequence: { clause: [] } } },
+    });
+    expect(starved.pieces.length, 'licensed, and withheld for want of a joint').toBe(1);
+    // (ii) THE CONTROL, on ONE authored joint: the same licensed pool seats at the clause.
     const unit = composeFixture(licensed, {
       candidates: [{ key: 'm' }], leaves: { connectives: CLAUSE_LIST },
     });
     expect(unit.pieces.length).toBe(2);
     expect(unit.text).toBe('The walls stand, so the muster is thin.');
+    // (iii) AND ON THE SHIPPED LEAF the licensed pool seats too, drawing one of the three.
+    const shipped = composeFixture(licensed, { candidates: [{ key: 'm' }] });
+    expect(shipped.pieces.length, 'the shipped list seats it').toBe(2);
+    expect(CONNECTIVES.consequence.clause.map((j) => `The walls stand${j} the muster is thin.`),
+      'and the joint it drew is one of the leaf\'s own three').toContain(shipped.text);
   });
 
   it('⭐ THE RELATION LEAF IS NOT READ AT RENDER — every unit is identical with and without it', () => {
@@ -922,15 +948,57 @@ describe('the composer — relations, seats and connectives (ARCH §4.5)', () =>
     expect(cells, 'the sweep really ran').toHaveLength(cases.length * SWEEP_SEEDS.length);
   });
 
+  it('⭐⭐ ONE HOME: the composer\'s connective lists ARE the leaf, not a copy of it', () => {
+    // ⛔ THE TWO-HOMES DEFECT THIS CLOSES (REWRITE car 8a-11, SITTING §U c-5). Car 3a landed
+    // ahead of car 4, so the composer carried the four lists as its own FLOOR CONSTANTS. Car
+    // 8a-9 authored the leaf to its floors of three and the constant stayed at 1/1/0/0, so for
+    // one whole car the estate held the connectives in two places that DISAGREED, with nothing
+    // able to say so — and `scripts/prose-shape-report.mjs` printed a refusal naming "the
+    // connectives leaf" for a condition that was true only of the constant, 408 times on the
+    // taste corpus, in the report the sitting reads when it rules on shape 3.
+    //
+    // IDENTITY, NOT DEEP EQUALITY. Two objects that happen to match today are two homes that
+    // will disagree tomorrow; `toBe` is what makes a second copy impossible rather than merely
+    // currently absent.
+    expect(CONNECTIVES, 'the composer reads the leaf itself').toBe(DOSSIER_CONNECTIVES);
+    // The four reachable (relation, seat) pairs, and the floors the SHIFT REGISTER pins.
+    expect(Object.keys(CONNECTIVES).sort()).toEqual([...RELATIONS].sort());
+    expect({
+      'consequence.clause': CONNECTIVES.consequence.clause.length,
+      'tension.sentence': CONNECTIVES.tension.sentence.length,
+      'contrast.sentence': CONNECTIVES.contrast.sentence.length,
+      'addition.sentence': CONNECTIVES.addition.sentence.length,
+    }, 'the `connective-list-length` mechanism, unmoved by this cure').toEqual({
+      'consequence.clause': 3,
+      'tension.sentence': 3,
+      'contrast.sentence': 3,
+      'addition.sentence': 3,
+    });
+    // ⛔ AND THE FENCE THE READ DOES NOT BREACH: the leaf is one of ARCH §4.1's OWN three, so
+    // this widened the composer's import list by a licensed name and by nothing else.
+    expect(CAR_4_LEAF_SPECIFIERS[0]).toBe('../../../data/dossierConnectives.generated.js');
+  });
+
   it('a relation whose list is EMPTY cannot seat, and says so by not seating', () => {
-    // `tension.sentence` ships empty: there is no authored opener, and borrowing another
-    // relation's would put a claim in the joint that the edge does not license.
+    // Borrowing another relation's opener would put a claim in the joint that the edge does
+    // not license, so an empty list withholds rather than falling back.
+    //
+    // ⚠ AS ABOVE, THE SHIPPED LIST IS NO LONGER THE EMPTY ONE: `tension.sentence` stood empty
+    // in the composer's floor constant and has stood at three in the leaf since car 8a-9, and
+    // REWRITE car 8a-11 made the composer read the leaf. What still stops a `tension` modifier
+    // seating on any town is that no shipped pool declares one, which is a different fact and
+    // is asserted where it belongs (the projection contract's `role: modifier` count of 0).
     const tense = fixtureCorpus({
       pools: { t: [{ angle: 'plain', text: 'The road is closed.' }] },
       poolMeta: { [SPINE]: { role: 'spine' }, t: modifierMeta({ relation: 'tension' }) },
     });
-    expect(CONNECTIVES.tension.sentence, 'the shipped tension list').toEqual([]);
-    expect(composeFixture(tense, { candidates: [{ key: 't' }] }).pieces.length).toBe(1);
+    expect(CONNECTIVES.tension.sentence, 'the shipped tension list, at its floor since 8a-9')
+      .toEqual(['Against that,', 'Even so,', 'At the same time,']);
+    // THE WITHHELD PATH, driven on an injected empty list.
+    expect(composeFixture(tense, {
+      candidates: [{ key: 't' }],
+      leaves: { connectives: { ...CONNECTIVES, tension: { sentence: [] } } },
+    }).pieces.length, 'an empty list withholds rather than borrowing').toBe(1);
     // The control: give the leaf one opener and the same pool seats.
     const seated = composeFixture(tense, {
       candidates: [{ key: 't' }],
@@ -1188,8 +1256,10 @@ describe('the composer — what it must NOT do', () => {
       poolMeta: { [SPINE]: { role: 'spine' }, echo: modifierMeta() },
     });
     const unit = composeFixture(corpus, { candidates: [{ key: 'echo' }] });
+    // The restatement is stated twice WITH the drawn opener in front of it, which is if
+    // anything the sharper reading of the same point: the composer joins whatever it is handed.
     expect(unit.text, 'the composer states it twice, and the gate is what refuses that')
-      .toBe('The walls stand. The walls stand.');
+      .toBe('The walls stand. Beside that, the walls stand.');
     expect(unit.pieces.length).toBe(2);
   });
 

@@ -77,6 +77,13 @@ import {
   hashKey,
   variantIsAudible,
 } from './stateProseKernel.js';
+// ⭐ THE FIRST OF ARCH §4.1's THREE FROZEN LEAVES, WIRED (REWRITE car 8a-11, SITTING §U c-5).
+// It is not a lexicon and it is not `src/domain/prose/`: it is this composer's own data leaf,
+// named in `CAR_4_LEAF_SPECIFIERS` below since car 3a. MEASURED before it landed with
+// `scripts/lib/module-closure.mjs`: the closure moves 2 files / 74,847 B to 3 files / 76,893 B,
+// so the edge costs ONE file and 2,046 bytes, against the four files and 150,231 bytes a
+// lexicon import was priced at and refused at car 8a-4. The leaf imports nothing itself.
+import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.js';
 
 /**
  * One piece of a composed unit — the provenance row a manifest cell carries.
@@ -170,19 +177,20 @@ export const COMPOSITION_BOUNDS = Object.freeze({
 });
 
 /**
- * ⭐ THE THREE FROZEN LEAVES THIS COMPOSER WILL IMPORT, AND WHY IT IMPORTS NONE OF THEM YET.
+ * ⭐ THE THREE FROZEN LEAVES THIS COMPOSER MAY IMPORT — ONE OF THEM WIRED, TWO NOT.
  *
  * ARCH §4.1 gives the composer exactly four dependencies: the kernel, and the three
  * generated leaves — the connective phrase lists, the notability bits and the relation
- * table. Car 4 projects all three. This car lands ahead of car 4 on purpose (the sequence is
- * 3a then 4, so the seam can be proven byte-identical BEFORE the schema moves), so the three
- * files do not exist in the tree yet and an `import` of one would not resolve.
+ * table. Car 3a landed ahead of car 4 on purpose (the sequence is 3a then 4, so the seam can
+ * be proven byte-identical BEFORE the schema moves), so all three were carried as their own
+ * FLOOR VALUES and each was to be swapped for its import at ONE site, deleting nothing else,
+ * because every reader below already reads a leaf's shape rather than a literal.
  *
- * They are therefore carried here as their own FLOOR VALUES — the exact shapes ARCH §2.3
- * says the leaves ship with: four connective lists of which two hold the empty opener, no
- * norm bits, no relation rows. Car 4 replaces each constant with its import and deletes
- * nothing else, because every reader below already reads the leaf's shape rather than a
- * literal.
+ * ⭐ CONNECTIVES IS NOW THAT SWAP (REWRITE car 8a-11, SITTING §U c-5): `CONNECTIVES` is the
+ * leaf. The other two are STILL floors and each for its own measured reason, not for want of a
+ * car: `proseNorms.generated.js` carries no departure bit, and `dossierRelations.generated.js`
+ * is empty because none of the engine's 165 relation rows joins a desk read root (car 0's F1),
+ * which is also why car 4d left this composer reading two of the three at all.
  *
  * ⛔ THE SPECIFIERS ARE NAMED HERE RATHER THAN IN THE FENCE TEST so the allowlist and the
  * code cannot drift apart: the fence asserts this module's import list is a subset of the
@@ -197,19 +205,39 @@ export const CAR_4_LEAF_SPECIFIERS = Object.freeze([
 ]);
 
 /**
- * The connective lists, at their floor. FOUR REACHABLE (relation, seat) pairs and no others:
- * `contrast` and `addition` are the empty opener — adjacency itself, adding no claim — and
- * `tension` and the clause `consequence` are empty until the annex authors them, which means
- * a `tension` modifier cannot seat at all today and says so out loud rather than borrowing
- * somebody else's phrase.
- * @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<string>>>>>}
+ * ⭐⭐ THE CONNECTIVE LISTS — READ FROM THE LEAF, ONE HOME (REWRITE car 8a-11, SITTING §U c-5).
+ *
+ * ⛔ THE DEFECT THIS ENDS, AND IT LASTED ONE CAR. Until this cure the composer carried the
+ * lists as its own FLOOR VALUES, which is what car 3a landed them as because the leaf did not
+ * exist yet. Car 8a-9 then authored the leaf to its floors of three and the constant stayed
+ * where it was, so the estate held the four lists in TWO HOMES that disagreed —
+ * `addition.sentence` 1 against 3, `contrast.sentence` 1 against 3, `tension.sentence` 0
+ * against 3, `consequence.clause` 0 against 3 — with no instrument saying so, and every
+ * sentence written about "the leaf" by the readers of this constant became false about the
+ * leaf inside the same car that wrote it. `scripts/prose-shape-report.mjs` printed one such
+ * refusal 408 times on the taste corpus.
+ *
+ * FOUR REACHABLE (relation, seat) pairs and no others; a fifth is a projector error. The
+ * EMPTY OPENER keeps its place at the head of the two lists that assert adjacency itself.
+ *
+ * ⛔ NOTHING RENDERED MOVES BY THIS READ, and that is a measurement rather than an argument:
+ * no shipped pool declares `role: modifier`, so the composer draws no joint on any town, the
+ * attach set is empty on all 708, and the classifier prints every one of the 73,284 cells
+ * UNCHANGED. The list LENGTH is the modulus of the joint draw and it is already a DECLARED
+ * mechanism on the SHIFT REGISTER (`connective-list-length`, pinned 3/3/3/3 over this leaf), so
+ * the day a modifier attaches the draw is the mechanism the register already names.
+ *
+ * ⚠ THE NARROWING, AND WHY IT IS A CAST RATHER THAN A WIDER TYPE HERE. The projector emits
+ * every generated leaf under one generic annotation (`Record<string, object>`), so the leaf
+ * cannot state the nested shape and this module must. It is NOT an `any` cast — the estate's
+ * `domainAnyCastBaseline` walker holds those at zero — and the shape it asserts is the one the
+ * projection contract MEASURES on the leaf itself: four relation keys, one seat key each, a
+ * list of strings under it, checked in `tests/data/dossierStateProseProjection.contract.test.js`
+ * against `RELATIONS` and the four pinned floors.
  */
-export const CONNECTIVES = Object.freeze({
-  addition: Object.freeze({ sentence: Object.freeze(['']) }),
-  contrast: Object.freeze({ sentence: Object.freeze(['']) }),
-  tension: Object.freeze({ sentence: Object.freeze([]) }),
-  consequence: Object.freeze({ clause: Object.freeze([]) }),
-});
+export const CONNECTIVES = /** @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<string>>>>>} */ (
+  DOSSIER_CONNECTIVES
+);
 
 /**
  * `${blockId}::${poolKey}` -> the DEPARTURE bit, frozen at the pool's birth car (P-F4). A

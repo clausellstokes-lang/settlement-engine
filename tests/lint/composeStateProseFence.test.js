@@ -190,10 +190,23 @@ describe('the composer\'s import fence (ARCH §4.1, car 3a)', () => {
     const allowed = new Set([KERNEL, ...CAR_4_LEAF_SPECIFIERS]);
     expect(specifiers.filter((s) => !allowed.has(s)), 'an unlicensed import in the composer')
       .toEqual([]);
-    // TODAY it is exactly the kernel: the three leaves do not exist until car 4 and the
-    // composer carries their floors as constants instead. Pinned exactly, so the day one is
+    // TODAY it is the kernel AND THE CONNECTIVES LEAF. Pinned exactly, so the day another is
     // imported this line moves with it and a reader sees the seam widen.
-    expect(specifiers, 'the composer\'s whole import list at this car').toEqual([KERNEL]);
+    //
+    // ⭐ THE ONE THAT WIDENED IT, AND WHY IT IS A CURE (REWRITE car 8a-11, SITTING §U c-5).
+    // Car 3a landed ahead of car 4, so all three leaves were carried as FLOOR CONSTANTS and
+    // this line read `[KERNEL]`. Car 8a-9 then authored the connectives leaf to its floors of
+    // three while the composer's constant stayed at 1/1/0/0, so the estate held the lists in
+    // TWO HOMES that disagreed, and every sentence written about "the leaf" by a reader of the
+    // constant became false about the leaf. The composer now reads the leaf ARCH §4.1 names.
+    // MEASURED before it landed (`scripts/lib/module-closure.mjs`): the closure moves 2 files /
+    // 74,847 B to 3 / 76,893 B — one file, 2,046 bytes — against the four files and 150,231
+    // bytes a `src/domain/prose/` lexicon was priced at and refused at car 8a-4. The other two
+    // leaves are still floors, each for its own measured reason.
+    expect(specifiers, 'the composer\'s whole import list at this car')
+      .toEqual([KERNEL, CAR_4_LEAF_SPECIFIERS[0]]);
+    expect(CAR_4_LEAF_SPECIFIERS[0], 'and the one that widened it is the CONNECTIVES leaf')
+      .toBe('../../../data/dossierConnectives.generated.js');
     expect(CAR_4_LEAF_SPECIFIERS.length, 'and the licensed roster is three, frozen').toBe(3);
   });
 

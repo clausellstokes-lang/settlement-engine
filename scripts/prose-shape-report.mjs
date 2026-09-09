@@ -56,6 +56,11 @@ const pct = (n, d) => (d === 0 ? '   n/a' : `${((n / d) * 100).toFixed(2)} %`);
  */
 export function shapeReport(corpus) {
   const pools = attachBearingPools(corpus);
+  // ⭐ READ FROM THE COMPOSER, WHICH SINCE REWRITE car 8a-11 IS THE LEAF ITSELF (SITTING §U
+  // c-5). Until that cure the composer carried its own floor constant at 0 while the leaf
+  // stood at three, so this line answered NO and the refusal printed below named "the leaf"
+  // for a condition that was true only of the constant — 408 times on the taste corpus, in the
+  // report the sitting reads when it rules on shape 3. One home now, and the answer is yes.
   const clauseJointsExist = (CONNECTIVES.consequence.clause || []).length > 0;
   /** @type {Record<string, number>} */
   const marginal = Object.fromEntries(PASSAGE_SHAPES.map((s) => [s, 0]));
@@ -123,6 +128,7 @@ export function shapeReport(corpus) {
     applicable,
     draws,
     clauseJointsExist,
+    clauseJoints: (CONNECTIVES.consequence.clause || []).length,
     marginal,
     conditional: [...conditional].map(([lawfulSet, seat]) => ({ lawfulSet, ...seat })),
     refusals,
@@ -142,7 +148,9 @@ function print(r) {
   lines.push('PASSAGE-SHAPE DISTRIBUTION (REWRITE car 8a-2; owner ruling (c) of 2026-09-08)');
   lines.push(`  attach-bearing pools ${r.poolsWithAttach} · composable units ${r.units}`
     + ` · units WITH a shape question ${r.applicable} · draws ${r.draws}`);
-  lines.push(`  consequence.clause joints exist: ${r.clauseJointsExist ? 'yes' : 'NO — shape 3 is WITHHELD'}`);
+  lines.push(`  consequence.clause joints exist: ${r.clauseJointsExist
+    ? `yes, ${r.clauseJoints} of them — shape 3 waits on a CLAUSE SEAT, not on a joint`
+    : 'NO — shape 3 is WITHHELD for want of a joint'}`);
   if (r.units === 0) {
     lines.push('');
     lines.push('  ⛔ THE TABLE IS EMPTY, AND THE EMPTINESS IS THE MEASUREMENT.');
