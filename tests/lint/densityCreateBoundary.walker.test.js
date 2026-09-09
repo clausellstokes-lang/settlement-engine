@@ -147,6 +147,70 @@ function pipelineReachers() {
       .test(stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'))));
 }
 
+/** ⭐ THE CALLS THAT CONSUME THE LOADED PAYLOAD (lane LIGHT car 2c, on the fold's
+ *  cure A3). Written as CALL forms — `name(` — so an import binding or a
+ *  destructure of a dynamic import is never mistaken for a call: every one of
+ *  the seven awaiters names its consumer in an import line ABOVE the await, and
+ *  a bare-symbol needle would therefore report the await "preceded" by the very
+ *  line that brought the consumer into scope. */
+const PAYLOAD_CONSUMER_CALLS = Object.freeze([
+  'generateSettlementPipeline(',
+  'composeInstantWorld(',
+  'runGeneration(',
+  'runGenerationRequest(',
+  'forgeContentSample(',
+  'forgeContentRuntimeComparison(',
+]);
+
+const PAYLOAD_AWAIT_CALL = 'await loadGenerationLawPayloads(';
+
+/**
+ * ⭐ DOES AN AWAIT OF THE PAYLOAD LOADER PRECEDE A CONSUMER CALL INSIDE ITS OWN
+ * FUNCTION BODY? (lane LIGHT car 2c.)
+ *
+ * ⛔ WHY A PRESENCE TEST WAS NOT ENOUGH, MEASURED BY THE LANE'S OWN SKEPTIC PASS.
+ * This arm used to assert only that the literal `await loadGenerationLawPayloads(`
+ * appeared SOMEWHERE in each named awaiter's file. Two regressions keep that
+ * green and take generation down: an await MOVED below the pipeline call, and an
+ * await moved into a branch that the live path skips. Neither deletes a
+ * character the old scan looked for.
+ *
+ * THE SCAN. Start at the await and walk FORWARD with a relative brace depth of
+ * zero. A consumer call found while the depth is still >= 0 was reached after
+ * the await without the await's own block having closed — the same body, or a
+ * block nested inside it, which is the live path either way. The moment the
+ * depth would go below zero, the enclosing body has ended and everything after
+ * it belongs to a different body, so the await did not arm this consumer.
+ *
+ * ⚠ IT ASKS FOR ONE SATISFYING AWAIT, NOT ALL OF THEM. A module may arm the seam
+ * in a helper as well as on its live edge; requiring every occurrence to be
+ * followed by a consumer would convict the helper. The per-row presence arm and
+ * the outage arm hold the other half.
+ *
+ * The code passed in is already comment- and string-stripped, so no brace inside
+ * a string or a comment can move the depth.
+ */
+function awaitPrecedesConsumer(code) {
+  for (
+    let at = code.indexOf(PAYLOAD_AWAIT_CALL);
+    at !== -1;
+    at = code.indexOf(PAYLOAD_AWAIT_CALL, at + 1)
+  ) {
+    let depth = 0;
+    for (let i = at + PAYLOAD_AWAIT_CALL.length; i < code.length; i += 1) {
+      const ch = code[i];
+      if (ch === '{') { depth += 1; continue; }
+      if (ch === '}') {
+        depth -= 1;
+        if (depth < 0) break;
+        continue;
+      }
+      if (PAYLOAD_CONSUMER_CALLS.some(call => code.startsWith(call, i))) return true;
+    }
+  }
+  return false;
+}
+
 function mintsIn(rel) {
   const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
   return MINT_SYMBOLS.some(sym => new RegExp(`\\b${sym}\\b`).test(code));
@@ -269,7 +333,7 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
   // and a worker evaluates its own copy of the seam, so a main-thread load does
   // not arm it.
   it('⭐ every reacher declares who awaits the lazy generation-law payload, and they really do', () => {
-    const AWAIT_CALL = 'await loadGenerationLawPayloads(';
+    const AWAIT_CALL = PAYLOAD_AWAIT_CALL;
     // ANTI-VACUITY, FIRST AND ON THE MATCHER ITSELF. An absence-shaped scan whose
     // needle never matches anything reports every tree clean.
     expect(
@@ -281,7 +345,55 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
       'the needle matches a line that does NOT await the loader — it proves nothing',
     ).toBe(false);
 
+    // ⭐ AND THE SAME CONTROL ON THE ORDERING SCANNER, IN THE SHAPES THIS ESTATE
+    // ACTUALLY SHIPS (lane LIGHT car 2c). A control that cannot exercise the
+    // shipped shape hides the defect it was written for, so all four of these are
+    // the real shapes of the seven awaiters: a worker shell's `try`, and a
+    // pre-branch await above two branches.
+    const SHAPE_WORKER_OK = 'self.onmessage = async (event) => {\n'
+      + '  try {\n'
+      + '    await loadGenerationLawPayloads();\n'
+      + '    const result = runGenerationRequest(request);\n'
+      + '  } catch (error) { report(error); }\n};';
+    const SHAPE_WORKER_MOVED = 'self.onmessage = async (event) => {\n'
+      + '  try {\n'
+      + '    const result = runGenerationRequest(request);\n'
+      + '    await loadGenerationLawPayloads();\n'
+      + '  } catch (error) { report(error); }\n};';
+    const SHAPE_BRANCHES_BELOW = 'async function run(config) {\n'
+      + '  await loadGenerationLawPayloads();\n'
+      + '  if (isRealm) {\n'
+      + '    const { settlements } = composeInstantWorld({ seed });\n'
+      + '  } else {\n'
+      + '    const dossier = generateSettlementPipeline(config, null, { seed });\n'
+      + '  }\n}';
+    const SHAPE_AWAIT_IN_DEAD_BRANCH = 'async function run(config) {\n'
+      + '  if (needsPayload) {\n'
+      + '    await loadGenerationLawPayloads();\n'
+      + '  }\n'
+      + '  const bundle = composeInstantWorld({ seed });\n}';
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_OK),
+      'the ordering scanner cannot see the shipped worker shape it is written for',
+    ).toBe(true);
+    expect(
+      awaitPrecedesConsumer(SHAPE_BRANCHES_BELOW),
+      'the ordering scanner cannot see an await that arms BOTH branches below it, which is'
+      + ' ConstructionPanel.jsx\'s shipped shape',
+    ).toBe(true);
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_MOVED),
+      'the ordering scanner passes an await MOVED BELOW the pipeline call — the exact'
+      + ' regression the old presence test could not see',
+    ).toBe(false);
+    expect(
+      awaitPrecedesConsumer(SHAPE_AWAIT_IN_DEAD_BRANCH),
+      'the ordering scanner passes an await parked in a branch that closes before the'
+      + ' pipeline call, which arms nothing on the live path',
+    ).toBe(false);
+
     const offenders = [];
+    const consumersSeen = new Set();
     for (const [rel, row] of Object.entries(PIPELINE_REACHERS)) {
       const named = row.payloadAwaitedBy;
       if (!Array.isArray(named) || named.length === 0) {
@@ -296,18 +408,38 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
         } catch { offenders.push(`${rel}: ${awaiter} does not exist`); continue; }
         if (!code.includes(AWAIT_CALL)) {
           offenders.push(`${rel}: ${awaiter} no longer awaits the payload`);
+          continue;
+        }
+        // ⭐ THE ORDERING HALF (cure A3). Presence is not arming.
+        if (!awaitPrecedesConsumer(code)) {
+          offenders.push(`${rel}: ${awaiter} awaits the payload, but NOT before the generation `
+            + 'call in the same function body — the await was moved below it, or into a branch '
+            + 'the live path does not take');
+        }
+        for (const call of PAYLOAD_CONSUMER_CALLS) {
+          if (code.includes(call)) consumersSeen.add(call);
         }
       }
     }
     expect(
       offenders,
       'a module that can reach generateSettlementPipeline has lost the await that loads the '
-      + 'generation laws\' lazy payloads. On a world whose config carries the living-content '
+      + 'generation laws\' lazy payloads, or no longer takes it BEFORE the generation call. '
+      + 'On a world whose config carries the living-content '
       + 'law that is not a degraded world, it is NO world: the seam throws '
       + '"[livingContentSeam] v2 world, roster payload not loaded" out of the pipeline. '
-      + 'Restore the await, or move the row\'s payloadAwaitedBy to whatever module owns it '
-      + 'now. Offenders: '
+      + 'Restore the await above the call, or move the row\'s payloadAwaitedBy to whatever '
+      + 'module owns it now. Offenders: '
       + `${offenders.join(' | ')}`,
+    ).toEqual([]);
+    // ⛔ AND THE NEEDLE LIST ITSELF IS HELD TO THE TREE. A consumer that gets
+    // renamed silently stops being a consumer, and every awaiter would then pass
+    // the ordering scan by arming nothing at all.
+    expect(
+      PAYLOAD_CONSUMER_CALLS.filter(call => !consumersSeen.has(call)),
+      'a declared payload-consumer call is named by NO awaiter. Either it was renamed — in '
+      + 'which case the ordering scan above is now blind to that module — or it is a stale '
+      + 'needle that should be removed with its reason.',
     ).toEqual([]);
   });
 
