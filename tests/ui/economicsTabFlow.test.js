@@ -19,6 +19,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { drawnMembers } from '../helpers/drawnProse.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
 
 const e = React.createElement;
@@ -102,17 +104,14 @@ const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
  * mount is actually in the DOM rather than behind a collapsed header.
  */
 const SPEAKING = {
-  // ⛔ RE-SEEDED at car 8a-12. Both pins below are LIVENESS ANCHORS on a DRAWN member of a
-  // pool, and which member a pool draws is a function of this `_seed`
-  // (`stateProseKernel.js` `drawVariant`, keyed `seed::blockId::poolKey`) — so car 8a-1's
-  // index-stable draw (ARCH §13 row 22, SIGNED at SITTING §N.2) moved DS-ECO-9's member
-  // without moving one byte of the corpus, the desk or the gate this file exists to prove.
-  // The act is the anchor helper's own instruction — "choose an anchor that still travels
-  // this path — do not delete the anchor to get green": a seed under the NEW draw that draws
-  // both anchored members. Measured, not invented: `economyDeskRead` was driven over
-  // candidate seeds and this was the first that held (22 candidates). `id` and `saveId` stay
-  // `forge_town` — only `_seed` reaches the draw. The DESK-ECON2 fixture further down carries
-  // NO seed at all and is canonical-at-zero, so no draw rule can move it.
+  // Both pins below are LIVENESS ANCHORS on a DRAWN member of a pool, and which member a pool
+  // draws is a function of this `_seed` (`stateProseKernel.js` `drawVariant`) — which is why
+  // car 8a-1's index-stable draw moved DS-ECO-9's member without moving one byte of the
+  // corpus, the desk or the gate this file exists to prove, and why car 8a-12 had to search
+  // this seed. Since car 8a-13 both anchors are COMPUTED from this seed through the shipped
+  // read path (`tests/helpers/drawnProse.js`), so the seed is no longer load-bearing and the
+  // next draw change moves the member and the anchor together. `id` and `saveId` stay
+  // `forge_town` — only `_seed` reaches the draw.
   id: 'forge_town', name: 'Forge Town', _seed: 'forge_town-b', tier: 'town',
   economicState: {
     prosperity: 'Comfortable', economicComplexity: 'a market town', tradeAccess: 'road',
@@ -130,9 +129,21 @@ const SPEAKING = {
   },
 };
 
-/** The DS-ECO-1 header sentence and the DS-ECO-9 food-security sentence this town draws. */
-const HEADER_SENTENCE = 'There is nothing striking about Forge Town';
-const FOOD_SENTENCE = 'Forge Town cannot feed itself';
+/**
+ * The DS-ECO-1 header sentence and the DS-ECO-9 food-security sentence this town draws,
+ * computed through the shipped read path at this fixture's seed (car 8a-13).
+ *
+ * ⚠ THE BAG IS THE ECONOMY DESK'S ONE SHARED BAG, and only two of its seams have a fill on
+ * this town: `{settlement}` and `{access}` (`ACCESS_NOUN.road`). `{complexity}` is UNFILLED
+ * because `COMPLEXITY_NOUN` is keyed on the producer's eleven display strings and this
+ * fixture's `'a market town'` is not one of them — which is the desk's own §0c-3 refusal, and
+ * dropping the variants that name it is what makes this pool's draw what it is.
+ */
+const ECO_SLOTS = Object.freeze({ settlement: 'Forge Town', access: 'road' });
+const { HEADER_SENTENCE, FOOD_SENTENCE } = drawnMembers({
+  HEADER_SENTENCE: { blockId: 'DS-ECO-1', poolKey: 'COMBINATION C3: the middle rungs' },
+  FOOD_SENTENCE: { blockId: 'DS-ECO-9', poolKey: 'DEFICIT' },
+}, { leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS });
 
 describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier', () => {
   test('a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH', () => {
@@ -241,16 +252,33 @@ const GROUND = {
   },
 };
 
-/** The canonical-at-zero sentence each mounted position draws over GROUND. */
-const GROUND_LINES = Object.freeze({
-  terrain: 'Thornwall sits on ground that grows things without argument',
-  strengths: 'Thornwall has more than one thing it is good at',
-  worth: 'What Thornwall is worth to anybody else is a separate question',
-  workings: "There is timber in Thornwall's country worth real money",
-  catalog: 'Thornwall keeps no house of healing at a size where one is assumed',
-  posture: 'Thornwall sells several things outward and depends on none of them alone',
-  standing: 'Thornwall runs a reliable surplus',
-});
+/**
+ * The canonical-at-zero sentence each mounted position draws over GROUND, computed through the
+ * shipped read path with NO SEED — kernel law 4, which is a real and stable answer and not a
+ * fallback (car 8a-13).
+ *
+ * ⚠ WHY THESE ARE COMPUTED TOO, when no draw rule can move a seedless read. A draw rule
+ * cannot, but the REWRITE can: NEVER TRIM lets a pool GROW and Shift 1 rewrites the wordings
+ * themselves, and index 0's own text moving is exactly as fatal to a literal pin as a re-index
+ * was. The `{resource}` and `{institution}` fills ride the exploitation lens's per-lens
+ * override; `{access}` is the shared bag's, and `{good}` and `{complexity}` have no fill on
+ * this town (`bareCommonFill` refuses a title-cased export, and the fixture carries no
+ * `economicComplexity`) — that refusal is part of what each pool's eligible set is.
+ */
+const GROUND_SLOTS = Object.freeze({ settlement: 'Thornwall', access: 'road' });
+const GROUND_LINES = Object.freeze(drawnMembers({
+  terrain: { blockId: 'DS-ECO-11', poolKey: 'TERRAIN: Plains' },
+  strengths: { blockId: 'DS-ECO-11', poolKey: 'ECONOMIC STRENGTHS: the roster is populated' },
+  worth: { blockId: 'DS-ECO-11', poolKey: "STRATEGIC VALUE: the generator's assessment, framed" },
+  workings: {
+    blockId: 'DS-ECO-11',
+    poolKey: 'EXPLOITATION: unexploited, exportValue: high',
+    slots: { ...GROUND_SLOTS, resource: 'timber', institution: 'Sawmill' },
+  },
+  catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
+  posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
+  standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
+}, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
 
 describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
   test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
@@ -259,14 +287,16 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     cleanup();
     const pub = render(e(ResourcesTab, { settlement: GROUND, publicDossier: true }));
     const pubText = pub.container.textContent;
-    for (const [lens, line] of Object.entries({
+    // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
+    // moved rather than the first.
+    expectNoSeedFailures(collectSeedFailures(Object.entries({
       terrain: GROUND_LINES.terrain,
       strengths: GROUND_LINES.strengths,
       worth: GROUND_LINES.worth,
       workings: GROUND_LINES.workings,
-    })) {
-      expectPresentThenAbsent(privText, pubText, line, `resources.groundAndWorkings :: ${lens}`);
-    }
+    }), ([lens, line]) => expectPresentThenAbsent(
+      privText, pubText, line, `resources.groundAndWorkings :: ${lens}`,
+    )), 'all four resources lenses draw privately and none reaches a public dossier');
     // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
     // generator's own strategic-value line are the page's and are not corpus prose.
     expect(pubText).toContain('Plains');

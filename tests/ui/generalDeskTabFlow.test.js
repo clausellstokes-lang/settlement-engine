@@ -39,40 +39,45 @@ import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { calamityFill } from '../../src/domain/display/stateProse/generalStateProse.js';
 
 const e = React.createElement;
 afterEach(cleanup);
 
 /**
- * ⛔ WHY FIVE FIXTURES BELOW CARRY A SUFFIXED `_seed` (REWRITE car 8a-12, and the rule for the
- * next seat that finds one of these red).
+ * ⭐ EVERY ANCHOR IN THIS FILE IS A FUNCTION OF THE SEED (REWRITE car 8a-13), and the rule for
+ * the next seat that finds one of them red.
  *
- * Every sentence pinned in this file is a LIVENESS ANCHOR on a DRAWN member of a pool — the
- * `before` half of `expectPresentThenAbsent`, which exists so the "and it is gone publicly"
- * half cannot pass over an empty page. WHICH member a pool draws is a function of the
- * fixture's `_seed` (`stateProseKernel.js` `drawVariant`, keyed `seed::blockId::poolKey`), so
- * a change to the DRAW RULE moves the drawn member without moving one byte of the corpus, the
- * desk or the gate — and every anchor here reds at once while the thing they guard is
- * perfectly well.
+ * Every sentence pinned here is a LIVENESS ANCHOR on a DRAWN member of a pool — the `before`
+ * half of `expectPresentThenAbsent`, which exists so the "and it is gone publicly" half cannot
+ * pass over an empty page. WHICH member a pool draws is a function of the fixture's `_seed`
+ * and of the draw rule (`stateProseKernel.js` `drawVariant`, keyed
+ * `seed::blockId::poolKey::v<vid>`), so a change to EITHER moves the drawn member without
+ * moving one byte of the corpus, the desk or the paid-surface gate these arms exist to prove.
+ * When the anchors were LITERAL SENTENCES, every one of them went red at that moment while
+ * the thing they guard was perfectly well — twice, measured: car 8a-1 re-seeded three desk
+ * pins by hand and car 8a-12 re-seeded SIXTEEN here (nine printed, seven hidden behind a `for`
+ * loop that throws on the first).
  *
- * That is exactly what car 8a-1's index-stable draw did (ARCH §13 row 22, SIGNED at SITTING
- * §N.2; RE-INDEXED 43,685 of 73,284 cells = 59.61 %). The act is the one 8a-1 took in three
- * desk suites and the anchor helper states in its own words — "choose an anchor that still
- * travels this path — do not delete the anchor to get green": a seed under the NEW draw that
- * still draws the anchored member. NOTHING here is deleted, no assertion is loosened to a
- * substring that would pass vacuously, and no `src/` byte moved.
+ * So the literals are gone. Each anchor below is now computed at test time through the SHIPPED
+ * READ PATH — `composeStateProse` over the block, the pool, the audience and the slot bag the
+ * desk itself uses (`tests/helpers/drawnProse.js`) — and a re-index, a rewrite of a wording or
+ * an appended wording that wins the draw moves the member and the anchor TOGETHER. What the
+ * arm asserts is unchanged in force: this block, at this pool, over this state, reaches the
+ * rendered DOM privately and is silent on a free dossier.
  *
- * ⚠ THE SEEDS ARE MEASURED, NOT INVENTED, and the odd-looking ones are odd for a reason. A
- * fixture's seed must satisfy EVERY pin drawn off it at once — `SPEAKING` carries eight
- * independent pools — so the seed was searched for by driving `generalDeskLines` over
- * candidate seeds until one drew all of them (SPEAKING took 111,965 candidates; the others
- * between 22 and 121). Any seed the search returns is as good as any other; the suffix is a
- * coordinate, not a name.
+ * ⚠ THIS IS NOT "ASK THE DESK AND CHECK IT ANSWERED". The test still names the block, the
+ * pool and the fills — the whole semantic claim — and computes from the CORPUS, while the
+ * render comes from the DESK; the two meet only at the assertion. A desk that stopped drawing
+ * the pool, lost a fill, or drew a different pool still reds on the liveness half.
  *
- * ⚠ AND THEY WILL MOVE AGAIN, BY DESIGN. Under the index-stable draw, appending a wording to
- * a pool moves about 1/n of that pool's reads — so the REWRITE's own NEVER-TRIM growth will
- * re-roll some of these anchors on the block cars. A red here is that, until proved
- * otherwise: re-seed it, never delete it.
+ * ⚠ THE SUFFIXED `_seed`s ARE HISTORY, NOT MACHINERY. They were searched at car 8a-12 to make
+ * the old LITERALS hold (SPEAKING's cost 111,965 candidates, because eight independent pools
+ * had to be satisfied at once). They are kept because other arms in this file — the patron-end
+ * exclusion, the `Felix` slice, the DS-REL-2 pair count — are calibrated on the members these
+ * seeds draw; they no longer carry the anchors, and no future car needs to search another one.
  */
 
 /**
@@ -84,11 +89,12 @@ afterEach(cleanup);
  * would render BARE and dimension-less on every settlement ever generated.
  */
 const SPEAKING = Object.freeze({
-  // ⛔ RE-SEEDED at car 8a-12 (see the block above), and this is the fixture the note is
-  // about: EIGHT pools are pinned off this one seed — the seven of the Overview loop and
-  // DS-POP-3 through `COUNTED`, which spreads this record — so the seed had to draw all
-  // eight. `id` stays `steinmark`: the ledger lookups and the rendered NAME are keyed on it,
-  // and only `_seed` reaches the draw (`generalDeskRead.js`: `String(r?._seed ?? r?.id)`).
+  // The seed reaches the draw and nothing else (`generalDeskRead.js`:
+  // `String(r?._seed ?? r?.id)`); `id` stays `steinmark` because the ledger lookups and the
+  // rendered NAME are keyed on it. EIGHT pools are pinned off this one seed — the seven of the
+  // Overview loop and DS-POP-3 through `COUNTED` — and since car 8a-13 every one of their
+  // anchors is computed from this same seed rather than transcribed, so the seed may be
+  // changed freely without searching for one that satisfies all eight at once.
   id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-16jm', tier: 'town',
   prominentRelationship: {
     npc1: 'Mugain', npc2: 'Felix', type: 'Outstanding Debt',
@@ -126,17 +132,41 @@ const SPEAKING = Object.freeze({
 });
 
 /**
- * The exact corpus sentences this town draws, one per BLOCK, read off the shipped corpus
- * through the desk. Written out rather than derived in the assertion: a test that asked the
- * desk what it would say and then checked the desk said it proves nothing.
+ * The corpus sentence this town draws at each Overview position, computed through the shipped
+ * read path at this fixture's seed. The BLOCK, the POOL and the FILLS are the claim; which
+ * wording of that pool wins the draw is the corpus's business and follows it.
+ *
+ * ⚠ THE SLOT BAGS ARE THE DESK'S OWN, not a superset, and the difference is load-bearing: a
+ * bag with one extra fill makes a variant the desk considers UNANCHORED eligible here, which
+ * moves the draw and reds the arm. (Measured while this car was written — adding
+ * `timeband_age` to DS-GEN-14's bag drew a different member than the desk's.) `issue` and
+ * `stakes` arrive through `phraseFill`, which lower-cases them; `govFaction` rides DS-GEN-7's
+ * bag and is named by no variant of the pool below.
  */
-const GROUND = 'Nothing in Steinmark is level for long';           // DS-GEN-12
-const MARKET = 'the stalls came to the stopping';                   // DS-GEN-13
-const INSTITUTIONS = 'Steinmark is administered, visibly';          // DS-GEN-17
-const HEALTH = 'The arithmetic of Steinmark does not close';        // DS-GEN-3
-const CONFLICT = "Steinmark's clerks have stopped filing anything"; // DS-GEN-2
-const WARNING = 'that a town of this shape should not be able to keep'; // DS-GEN-7
-const CONNECTION = 'has one tie that matters more than the others';          // DS-REL-2
+const SPEAKING_SLOTS = Object.freeze({ settlement: 'Steinmark' });
+const {
+  GROUND, MARKET, INSTITUTIONS, HEALTH, CONFLICT, WARNING, CONNECTION,
+} = drawnMembers({
+  GROUND: { blockId: 'DS-GEN-12', poolKey: 'HIGH-GROUND' },
+  MARKET: { blockId: 'DS-GEN-13', poolKey: 'MARKET-OPEN' },
+  INSTITUTIONS: { blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED' },
+  HEALTH: { blockId: 'DS-GEN-3', poolKey: 'economicViability.viable: false' },
+  CONFLICT: {
+    blockId: 'DS-GEN-2',
+    poolKey: 'intensity: high',
+    slots: {
+      ...SPEAKING_SLOTS,
+      faction: 'The Guild', faction2: 'The Council',
+      issue: 'labor control', stakes: 'market licensing',
+    },
+  },
+  WARNING: {
+    blockId: 'DS-GEN-7',
+    poolKey: 'structuralViolations[]',
+    slots: { ...SPEAKING_SLOTS, govFaction: 'The Council' },
+  },
+  CONNECTION: { blockId: 'DS-REL-2', poolKey: 'prominentRelationship present' },
+}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS });
 
 /** @param {boolean} publicDossier */
 const renderTab = (publicDossier) => render(e(OverviewTab, {
@@ -151,7 +181,11 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     const priv = renderTab(false);
     cleanup();
     const pub = renderTab(true);
-    for (const [sentence, label] of [
+    // ⛔ COLLECT-THEN-ASSERT (car 8a-13). A bare `for` over pins throws on the FIRST one, so
+    // the §919 whole-suite proof printed nine failing sentences over SIXTEEN moved pins and
+    // the seven behind them were invisible. Every position now runs and the roster travels
+    // with the true count (tests/helpers/seedFailures.js).
+    expectNoSeedFailures(collectSeedFailures([
       [GROUND, 'DS-GEN-12 the ground (overview.ground)'],
       [MARKET, 'DS-GEN-13 the market (overview.market)'],
       [INSTITUTIONS, 'DS-GEN-17 the roster (overview.institutions)'],
@@ -159,7 +193,9 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
       [WARNING, 'DS-GEN-7 the coherence warning (overview.warnings)'],
       [CONNECTION, 'DS-REL-2 the notable connection (overview.notableConnection)'],
-    ]) expectPresentThenAbsent(priv, pub, sentence, `the general desk at ${label}`);
+    ], ([sentence, label]) => expectPresentThenAbsent(
+      priv, pub, sentence, `the general desk at ${label}`,
+    )), 'every Overview position draws privately and is silent on a public dossier');
   });
 
   test('the gate takes the CORPUS SENTENCES ONLY — every datum on the page survives it', () => {
@@ -265,9 +301,8 @@ describe('THE FIXTURE IS SHAPED LIKE A REAL TOWN (the desk law\'s trap 4)', () =
  * difference is exactly why DS-GEN-1 stays dark while DS-GEN-9 speaks.
  */
 const CHRONICLED = Object.freeze({
-  // RE-SEEDED at car 8a-12 (see the block above): four history pins ride this seed —
-  // DS-GEN-9's identity and marker, DS-GEN-14 and DS-GEN-16 — and the doubled-article arm
-  // anchors on the DS-GEN-16 one, so all four had to hold together.
+  // Four history pins ride this seed — DS-GEN-9's identity and marker, DS-GEN-14 and
+  // DS-GEN-16 — and each is computed from it since car 8a-13 rather than transcribed.
   id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-w', tier: 'town',
   history: {
     age: 285,
@@ -292,10 +327,45 @@ const CHRONICLED = Object.freeze({
   },
 });
 
-const IDENTITY = 'The oldest part of Steinmark still shows what the town was for';  // DS-GEN-9
-const MARKER = 'The Great Fire is a decade old and still on Steinmark\'s books';    // DS-GEN-9
-const FOUNDED = 'built to a plan that life has been editing for generations';        // DS-GEN-14
-const RECORD = 'lately reminded what can happen to towns';                           // DS-GEN-16
+/**
+ * The history chapter's four anchors, computed at CHRONICLED's seed.
+ *
+ * ⚠ THE MARKER'S BAG IS THE DESK'S `markerSlots` AND ITS DIMENSION IS ANSWERED. DS-GEN-9's
+ * `event type: *` pools partition themselves by the demoted `anchor` dimension (kernel law 5),
+ * so a read that does not answer it is UNREADABLE rather than "readable with everything" — the
+ * fixture's marker event carries `anchored: true`. The two timebands are the ladder's own
+ * words for this record: `heraldCausalGrammar`'s `a_decade` band at the event's twelve years
+ * (predicate `a decade old`, since `a decade on`) and `older_than_bearers` at the town's 285
+ * (predicate only — its adverbial column is null, which is why `timeband_since` is absent from
+ * the identity bag).
+ */
+const CHRONICLED_SLOTS = Object.freeze({ settlement: 'Steinmark' });
+const MARKER_SLOTS = Object.freeze({
+  ...CHRONICLED_SLOTS,
+  event: 'The Great Fire', timeband_age: 'a decade old', timeband_since: 'a decade on',
+});
+/** The `{calamity}` seam's fill, taken from the desk's own reader rather than transcribed. */
+const CALAMITY = calamityFill('The Great Fire');
+const RECORD_SLOTS = Object.freeze({
+  ...CHRONICLED_SLOTS, calamity: CALAMITY, timeband_age: 'a decade old',
+});
+const {
+  IDENTITY, MARKER, FOUNDED, RECORD,
+} = drawnMembers({
+  IDENTITY: {
+    blockId: 'DS-GEN-9',
+    poolKey: 'founding',
+    slots: { ...CHRONICLED_SLOTS, timeband_age: 'older than its bearers' },
+  },
+  MARKER: {
+    blockId: 'DS-GEN-9',
+    poolKey: 'event type: disaster',
+    slots: MARKER_SLOTS,
+    dimensions: { anchor: 'anchored' },
+  },
+  FOUNDED: { blockId: 'DS-GEN-14', poolKey: 'FOUNDED-OLD' },
+  RECORD: { blockId: 'DS-GEN-16', poolKey: 'ANCHORED-RECENT', slots: RECORD_SLOTS },
+}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS });
 
 /** @param {boolean} publicDossier */
 const renderHistory = (publicDossier) => render(e(HistoryTab, {
@@ -308,12 +378,14 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     cleanup();
     const pub = renderHistory(true);
-    for (const [sentence, label] of [
+    expectNoSeedFailures(collectSeedFailures([
       [IDENTITY, 'DS-GEN-9 the founding line (history.identity)'],
       [MARKER, 'DS-GEN-9 the marker event (history.identity)'],
       [FOUNDED, 'DS-GEN-14 founded once, grown since (history.founded)'],
       [RECORD, 'DS-GEN-16 what the record carries (history.record)'],
-    ]) expectPresentThenAbsent(priv, pub, sentence, `the general desk at ${label}`);
+    ], ([sentence, label]) => expectPresentThenAbsent(
+      priv, pub, sentence, `the general desk at ${label}`,
+    )), 'every history position draws privately and is silent on a public dossier');
   });
 
   test('the gate takes the corpus sentences ONLY — the record itself survives it', () => {
@@ -329,12 +401,26 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     // Filling {calamity} with the event name verbatim printed "The The Economic Divide".
     // This is that defect as a rendered-output assertion rather than a note.
     const priv = renderHistory(false);
-    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a calamity sentence
-    // ANCHORED: the same render really did draw a calamity sentence, so the absence above
-    // is the fix holding rather than the block having fallen silent.
+    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a corpus sentence from the calamity pool
+    // ANCHORED: the same render really did draw the record line, so the absence above is the
+    // fix holding rather than the block having fallen silent.
     expect(priv).toContain(RECORD);
     // And no unfilled seam survived into the page.
     expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(RECORD) two lines up proves the page carries corpus prose at all
+    // ⛔ AND THE DEFECT'S REAL SUBJECT IS NOT LEFT TO SEED LUCK (car 8a-13). Only TWO of
+    // ANCHORED-RECENT's three wordings name `{calamity}` at all, so which of them the render
+    // above happens to draw decides whether the DOM arm touches the seam. Every wording of the
+    // pool is therefore filled from the desk's own reader and checked directly — a member
+    // appended tomorrow is covered the day it lands.
+    const filled = poolMemberTexts({
+      leaf: 'general', blockId: 'DS-GEN-16', poolKey: 'ANCHORED-RECENT', slots: RECORD_SLOTS,
+    });
+    expect(CALAMITY, 'the calamity fill went undefined — the seam would drop, not double')
+      .toBe('great fire');
+    expectNoSeedFailures(collectSeedFailures(filled, (text) => {
+      expect(text, 'a doubled article in a filled seam').not.toMatch(/\b(the|a|an)\s+(the|a|an)\b/i); // anchored: `filled` comes from poolMemberTexts, which throws rather than returning an empty roster, and the toBe on CALAMITY above proves the seam really carried a fill
+      expect(text, 'an unfilled seam').not.toMatch(/\{[a-z_]+\}/i); // anchored: same roster, same CALAMITY fill proof two lines up
+    }), `every wording of DS-GEN-16 :: ANCHORED-RECENT fills cleanly (${filled.length} of 3)`);
   });
 
   test('the ROUTER threads publicDossier to the history tab', () => {
@@ -351,7 +437,7 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
  * which is where the producer writes it and NOT where the corpus title abbreviates it to.
  */
 const UNVIABLE = Object.freeze({
-  // RE-SEEDED at car 8a-12 (see the block above): DS-GEN-11's three lenses ride this seed.
+  // DS-GEN-11's three lenses ride this seed, and each anchor is computed from it (car 8a-13).
   id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-c',
   economicViability: {
     viable: false,
@@ -364,9 +450,14 @@ const UNVIABLE = Object.freeze({
   },
 });
 
-const VERDICT = 'Steinmark\'s outgoings stand above everything its land and its custom bring in'; // DS-GEN-11
-const CONTRADICTIONS = 'things about this town that cannot all be true';                          // DS-GEN-11
-const FIRST_SURVEY = 'The town was read once, carefully';                                        // DS-GEN-11
+/** DS-GEN-11's three lenses, each read through the same one-slot bag `rung()` hands them. */
+const { VERDICT, CONTRADICTIONS, FIRST_SURVEY } = drawnMembers({
+  VERDICT: { poolKey: 'viable: false: the arithmetic does not close' },
+  CONTRADICTIONS: { poolKey: 'criticalIssueCount: critical contradictions on the record' },
+  FIRST_SURVEY: { poolKey: 'THE FIRST-SURVEY QUALIFICATION' },
+}, {
+  leaf: 'general', blockId: 'DS-GEN-11', seed: UNVIABLE._seed, slots: { settlement: 'Steinmark' },
+});
 
 describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () => {
   test('all three DS-GEN-11 lenses reach the DOM privately and none reach a public dossier', () => {
@@ -377,10 +468,12 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
     const pub = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: true,
     })).container.textContent;
-    for (const [sentence, label] of [
+    expectNoSeedFailures(collectSeedFailures([
       [VERDICT, 'the verdict'], [CONTRADICTIONS, 'the contradiction count'],
       [FIRST_SURVEY, 'the first-survey caveat'],
-    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`);
+    ], ([sentence, label]) => expectPresentThenAbsent(
+      priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`,
+    )), 'all three DS-GEN-11 lenses draw privately and none reaches a public dossier');
     // The DATUM survives the gate: the headline and the pill keep their own words.
     expect(pub).toContain('NOT COHERENT');
     expect(pub).toContain('2 critical');
@@ -463,7 +556,15 @@ const FORGE = Object.freeze({
   history: {},
 });
 
-const CRAFT = 'keeps Smelter on a supply that has failed upstream'; // DS-GEN-18 STALLED
+/**
+ * DS-GEN-18's STALLED line. ⛔ `{resource}` IS NOT IN THE BAG, and its absence is the desk's
+ * own refusal rather than an omission: `upstreamMissing[]` holds CHAIN IDS, so the one variant
+ * naming the slot is dropped by anchored liveness and the pool speaks through the other.
+ */
+const CRAFT = drawnMember({
+  leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: FORGE._seed,
+  slots: { settlement: 'Forge Town', institution: 'Smelter' },
+});
 
 describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free viewer', () => {
   // The tab reads the owning campaign's worldState for its live-flow section. The store is
@@ -536,8 +637,8 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
  * the ruin). The fixture is shaped like `satellitesLedger.js`'s own `SatelliteRecord`.
  */
 const FALLEN = Object.freeze({
-  // RE-SEEDED at car 8a-12 (see the block above): DS-GEN-8's three surfaces — the remnant
-  // grade, the ancient ruin and the forced steading — ride this seed. `id` stays `ashfall`
+  // DS-GEN-8's three surfaces — the remnant grade, the ancient ruin and the forced steading —
+  // ride this seed, and each anchor is computed from it (car 8a-13). `id` stays `ashfall`
   // because `SteadingsSection` resolves the campaign's satellites ledger by it.
   id: 'ashfall', name: 'Ashfall', _seed: 'ashfall-27',
   lifecycleStatus: 'relic_ruin',
@@ -562,9 +663,27 @@ const LEDGER = Object.freeze([{
   },
 }]);
 
-const REMNANT = 'The rolls close on a departure and not on a disaster';  // DS-GEN-8 relic_ruin
-const RUIN = 'Ashfall has grown up in its shadow';                        // DS-GEN-8 ancient ruin
-const STEADING = 'Brackenfold exists because Ashfall decided it should';  // DS-GEN-8 forced
+/**
+ * DS-GEN-8's three surfaces. Each takes its OWN bag, exactly as the desk builds them: the
+ * remnant banner rides the base bag, the ruin banner adds the older place's name and the two
+ * timebands its twelve years put on the ladder, and each steading card adds its own name.
+ */
+const { REMNANT, RUIN, STEADING } = drawnMembers({
+  REMNANT: { poolKey: 'lifecycleStatus: relic_ruin' },
+  RUIN: {
+    poolKey: 'history.ancientRuin present',
+    slots: {
+      settlement: 'Ashfall', ruin: 'Ecserys',
+      timeband_since: 'a decade on', timeband_age: 'a decade old',
+    },
+  },
+  STEADING: {
+    poolKey: "steading row: provenance: 'forced'",
+    slots: { settlement: 'Ashfall', steading: 'Brackenfold' },
+  },
+}, {
+  leaf: 'general', blockId: 'DS-GEN-8', seed: FALLEN._seed, slots: { settlement: 'Ashfall' },
+});
 
 describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free viewer', () => {
   const campaignsBefore = useStore.getState().campaigns;
@@ -581,11 +700,13 @@ describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free v
     const priv = renderSteadings(false);
     cleanup();
     const pub = renderSteadings(true);
-    for (const [sentence, label] of [
+    expectNoSeedFailures(collectSeedFailures([
       [REMNANT, 'the remnant grade'],
       [RUIN, 'the ancient ruin'],
       [STEADING, 'the forced steading'],
-    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-GEN-8 ${label} (overview.steadings)`);
+    ], ([sentence, label]) => expectPresentThenAbsent(
+      priv, pub, sentence, `DS-GEN-8 ${label} (overview.steadings)`,
+    )), 'all three DS-GEN-8 surfaces draw privately and none reaches a public dossier');
     // ⛔ THE PRESERVE-VERBATIM CLAUSES SURVIVE. The annex marks two phrases as the
     // never-resolve-a-fate law and the DM's invitation rendered as prose; no variant may
     // drop either, and the section's own authored banner carries them too.
@@ -625,9 +746,9 @@ describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free v
  * so a render that drew the patron line here would be fluent and false.
  */
 const LINKED = Object.freeze({
-  // RE-SEEDED at car 8a-12 (see the block above): DS-REL-1's three pins ride this seed, and
-  // so does the arm that the OTHER end's sentence never appears — that one is an exclusion
-  // whose anchor is the client-end draw, so it holds only while the client end still draws.
+  // DS-REL-1's three pins ride this seed, and so does the arm that the OTHER end's sentence
+  // never appears — that one is an exclusion whose anchor is the client-end draw, so it holds
+  // only while the client end still draws. All four follow the draw since car 8a-13.
   id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-v', history: {},
   neighbourNetwork: [{
     id: 'n1', name: 'Thornmere', neighbourName: 'Thornmere', neighbourTier: 'town',
@@ -641,10 +762,30 @@ const LINKED = Object.freeze({
   }],
 });
 
-const TIE = 'Ask in Steinmark who decides a thing';                       // DS-REL-1 client
-const PATRON_LINE = 'Thornmere looks to Steinmark';                        // DS-REL-1 patron (must NOT appear)
-const CONTACTS = 'Mugain in Steinmark keeps a standing tie in Thornmere';  // DS-REL-1 npc contacts
-const ENGAGEMENT = 'it belongs to a few people on each side';              // DS-REL-1 engagements
+/**
+ * DS-REL-1's three drawn lines, plus the WHOLE patron pool as the thing that must not appear.
+ *
+ * ⭐ THE EXCLUSION IS OVER EVERY MEMBER, NOT ONE OF THEM (car 8a-13). The old pin named a
+ * single patron sentence, so a draw that moved — or a wording appended under NEVER TRIM —
+ * would have left the arm asserting the absence of a sentence the page was never going to
+ * print anyway. `poolMemberTexts` fills all three and the arm refuses all three.
+ */
+const LINK_SLOTS = Object.freeze({
+  settlement: 'Steinmark', counterpart: 'Thornmere', npc: 'Mugain',
+});
+const { TIE, CONTACTS } = drawnMembers({
+  TIE: { poolKey: 'client' },
+  CONTACTS: { poolKey: 'cross-settlement NPC contacts' },
+}, { leaf: 'general', blockId: 'DS-REL-1', seed: LINKED._seed, slots: LINK_SLOTS });
+const ENGAGEMENT = drawnMember({
+  leaf: 'general', blockId: 'DS-REL-1', poolKey: 'cross-settlement engagements',
+  seed: LINKED._seed,
+  slots: { settlement: 'Steinmark', counterpart: 'Thornmere', faction: 'The Guild' },
+});
+/** Every wording of the OTHER end's standing — none of which may reach this town's page. */
+const PATRON_LINES = poolMemberTexts({
+  leaf: 'general', blockId: 'DS-REL-1', poolKey: 'patron', slots: LINK_SLOTS,
+});
 
 describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free viewer', () => {
   const campaignsBefore = useStore.getState().campaigns;
@@ -663,13 +804,17 @@ describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free v
     const priv = renderRels(false);
     cleanup();
     const pub = renderRels(true);
-    for (const [sentence, label] of [
+    expectNoSeedFailures(collectSeedFailures([
       [TIE, 'the standing (this town is the CLIENT)'],
       [CONTACTS, 'the named people'],
       [ENGAGEMENT, 'the cross-settlement engagement'],
-    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-REL-1 ${label} (relationships.network)`);
-    // ⛔⛔ THE ARM, DRIVEN IN THE DOM: the OTHER end's sentence must not appear on this page.
-    expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(PATRON_LINE); // anchored: expectPresentThenAbsent above proves this render drew the CLIENT end of the same tie
+    ], ([sentence, label]) => expectPresentThenAbsent(
+      priv, pub, sentence, `DS-REL-1 ${label} (relationships.network)`,
+    )), 'both tie lenses and the engagement draw privately and none reaches a public dossier');
+    // ⛔⛔ THE ARM, DRIVEN IN THE DOM: NO wording of the other end's standing may appear.
+    expectNoSeedFailures(collectSeedFailures(PATRON_LINES, (line) => {
+      expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(line); // anchored: expectPresentThenAbsent above proves this render drew the CLIENT end of the same tie
+    }), `no wording of DS-REL-1 :: patron reaches the client end's page (${PATRON_LINES.length} of 3)`);
     // ⛔ AND THE FAR END'S PERSON IS NEVER NAMED INSIDE THIS TOWN'S WALLS by the corpus line.
     expect(priv.slice(priv.indexOf(CONTACTS), priv.indexOf(CONTACTS) + CONTACTS.length + 90))
       .not.toContain('Felix'); // anchored: the slice is taken around CONTACTS, which expectPresentThenAbsent above proves is present
@@ -695,7 +840,14 @@ const COUNTED = Object.freeze({
   ...SPEAKING,
   populationHistory: [820, 900, 960, 1010],
 });
-const DIRECTION = 'there are more people here than the older rolls describe'; // DS-POP-3 RISING-OPEN
+/** DS-POP-3's RISING-OPEN reading, and every wording of the LEVEL default it must not print. */
+const DIRECTION = drawnMember({
+  leaf: 'general', blockId: 'DS-POP-3', poolKey: 'RISING-OPEN',
+  seed: COUNTED._seed, slots: { settlement: 'Steinmark' },
+});
+const LEVEL_LINES = poolMemberTexts({
+  leaf: 'general', blockId: 'DS-POP-3', poolKey: 'LEVEL', slots: { settlement: 'Steinmark' },
+});
 
 describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer and an unread ring', () => {
   /** @param {object} settlement @param {boolean} publicDossier */
@@ -719,7 +871,11 @@ describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer
     // on the band's sign alone, LEVEL would fire here and print "the roll holds where it is".
     const out = renderPop(SPEAKING, false);
     expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION); // anchored: the toContain(GROUND) below proves the rest of the desk drew on this very render
-    expect(out, 'the LEVEL default reached the page').not.toContain('roll holds where it is'); // anchored: same render, same GROUND anchor below
+    // ⛔ EVERY LEVEL WORDING, not one of them (car 8a-13): the block's whole default pool is
+    // refused, so an appended wording is covered the day it lands.
+    expectNoSeedFailures(collectSeedFailures(LEVEL_LINES, (line) => {
+      expect(out, 'the LEVEL default reached the page').not.toContain(line); // anchored: same render, same GROUND anchor below
+    }), `no wording of DS-POP-3 :: LEVEL reaches an unread ring (${LEVEL_LINES.length} of 2)`);
     // NON-VACUITY: the rest of the desk drew on this very render.
     expect(out).toContain(GROUND);
   });

@@ -92,6 +92,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { mustExtract } from '../helpers/sourceContract.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { drawnMember } from '../helpers/drawnProse.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const src = (rel) => readFileSync(resolve(ROOT, rel), 'utf8');
@@ -1425,9 +1426,16 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     const line = drawCraft(stalled);
     expectSentence(line, 'STALLED');
     expect(line, 'the chain\'s own ground was described as a delivery that failed')
-      .not.toMatch(/iron ore deposits/i); // anchored: expectSentence above proves this render drew a real STALLED sentence, and the toContain on the next line proves it is the ledger variant
-    // The variant naming the slot is dropped and the `ledger` variant carries the pool.
-    expect(line).toContain('a supply that has failed upstream');
+      .not.toMatch(/iron ore deposits/i); // anchored: expectSentence above proves this render drew a real STALLED sentence, and the equality on the next lines proves it is the variant that names no {resource}
+    // The variant naming the slot is dropped and the pool speaks through the one that does
+    // not. ⭐ ASSERTED THROUGH THE SHIPPED READ PATH, not through a transcribed fragment
+    // (car 8a-13): the same bag WITHOUT `{resource}` is what makes the drop happen, so the
+    // corpus's own answer to that bag is the honest right-hand side, and a rewrite of the
+    // surviving wording moves the desk's line and this anchor together.
+    expect(line).toBe(drawnMember({
+      leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: 'craft',
+      slots: { settlement: 'Thornwall', institution: 'Smelter' },
+    }));
     // The token itself must never reach a reader through any seam of this block.
     expect(fillShapeViolation(mergedShapes().shapeOf('resource'), 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');
   });

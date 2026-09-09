@@ -32,6 +32,7 @@ import { describe, expect, test } from 'vitest';
 
 import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { drawnMember } from '../helpers/drawnProse.js';
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -402,25 +403,31 @@ describe('⛔ the occupier-holdings SLOT-ROLE INVERSION', () => {
   test('the pool speaks from the OCCUPIED town\'s chair: {counterpart} holds, {settlement} is held', () => {
     const war = warReadings('thornwall', OCCUPIED_WORLD);
     // ⚠ A LOCAL SEED, AND IT MOVED AT REWRITE car 8a-1. The direction is demonstrated by
-    // NAMES — Eastmarch as the holder, Thornwall as a place held — so this arm needs the one
+    // NAMES — Eastmarch as the holder, Thornwall as a place held — so this arm needs a
     // variant of `occupierHoldings.stretchedThin` that fills BOTH slots. The index-stable
     // draw (kernel law 6) re-drew every pool once and the file's shared `thornwall` seed now
     // lands on the counterforce variant, which names the settlement alone and could not carry
     // the assertion. The seed is overridden HERE rather than on the shared `DM` constant, so
     // this arm's need does not silently re-draw every other arm in the file.
+    const seed = 'thornwall-b';
     const desk = warFaithStateProse({ id: 'thornwall', name: 'Thornwall', config: {} },
-      { settlementId: 'thornwall', war }, { ...DM, seed: 'thornwall-b' });
+      { settlementId: 'thornwall', war }, { ...DM, seed });
     const line = desk.warHoldings.sentence;
     // Eastmarch holds three towns, two of them resisted ⇒ stretchedThin.
     expect(war.occupierPosition.stretchedThin).toBe(true);
     expect(line).toContain('Eastmarch');
     expect(line).toContain('Thornwall');
     // THE DIRECTION IS THE WHOLE POINT: the holder is named as the one whose grip is thin,
-    // and the town is named as a PLACE it holds. The corpus's own sentence says so.
-    expect(line).toBe(
-      'Eastmarch holds more than it can garrison properly, and Thornwall is one of the'
-      + ' places where the thinness shows.',
-    );
+    // and the town is named as a PLACE it holds. The corpus's own sentence says so — and it
+    // says so through the SHIPPED READ PATH rather than through a transcription of it
+    // (car 8a-13), so the next re-index or rewrite moves the desk's line and this anchor
+    // together instead of reddening an arm about a direction that has not changed.
+    expect(line).toBe(drawnMember({
+      leaf: 'warFaith', blockId: 'DS-WAR-1', poolKey: 'occupierHoldings.stretchedThin',
+      seed, slots: { settlement: 'Thornwall', counterpart: 'Eastmarch' },
+    }));
+    // …and the NAMES are what the toContain pair above proves are in it, so the equality is a
+    // direction claim and not merely "the desk agrees with itself".
   });
 
   test('feeding it THIS TOWN\'S OWN holdings would name the wrong side — the reading is not used', () => {
