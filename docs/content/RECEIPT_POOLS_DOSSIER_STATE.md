@@ -5983,22 +5983,28 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
    - `[face]` The walled place at {settlement} has its {defwork}.
 
 **`WALLED-QUIET`**
-1. `[visitor]` {settlement} keeps a {defwork}, and the {defwork} stands.
+1. `[visitor]` {settlement} keeps a {defwork}, and it stands.
    - `[face]` A {defwork} stands at {settlement}.
-   - `[face]` Standing at {settlement} is a {defwork}.
-   - `[face]` The {defwork} at {settlement} is up, and stays up.
+   - `[face]` The {defwork} that {settlement} keeps stands.
+   - `[face]` At {settlement} a {defwork} is up, and up it remains.
 2. `[elder]` The {defwork} stands; {settlement} has it up.
-   - `[face]` At {settlement} a {defwork} stands, and goes on standing.
+   - `[face]` A {defwork} is up at {settlement}, and it holds.
    - `[face]` The {defwork} {settlement} has, it has standing.
-   - `[face]` A {defwork} is up at {settlement}, and stays so.
+   - `[face]` What {settlement} has is a {defwork}, and it is up.
 3. `[ledger]` Entered as standing, the {defwork} stands.
-   - `[face]` Standing work: the {defwork} stands.
-   - `[face]` The {defwork} is carried, and carried standing.
+   - `[face]` A {defwork} is carried, and carried as standing.
+   - `[face]` The {defwork} is entered standing.
    - `[face]` What is entered is a {defwork}, and it is entered standing.
 
 **`WALLED-STRAINED`**
-1. `[ledger]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
-2. `[unfolding]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+1. `[ledger]` The {defwork} at {settlement} is the town's. Its muster is paid short of the upkeep.
+   - `[face]` At {settlement} the {defwork} is a work the town owns. The outlay against its muster falls under the charge.
+   - `[face]` The {defwork} is {settlement}'s own. What the town's muster costs runs past its funding.
+   - `[face]` The {defwork} is held by the town at {settlement}. What it sets aside for the muster does not reach the wage.
+2. `[unfolding]` The {defwork} of {settlement} is in the town's hands. Upkeep for its muster is a term unmet.
+   - `[face]` At {settlement} the town is walled with the {defwork}. The account for its muster's pay is one the town has not answered.
+   - `[face]` The town at {settlement}, the {defwork} its own, has the muster's wage unsettled.
+   - `[face]` The town at {settlement} owns the {defwork}. What the muster's upkeep comes to is a charge not made good.
 
 **`UNWALLED-SMALL`**
 1. `[street]` {settlement} is no larger than a village. The place stands without a wall.

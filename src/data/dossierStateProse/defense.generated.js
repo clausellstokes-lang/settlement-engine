@@ -5270,7 +5270,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-QUIET": [
         {
           "angle": "visitor",
-          "text": "{settlement} keeps a {defwork}, and the {defwork} stands.",
+          "text": "{settlement} keeps a {defwork}, and it stands.",
           "slots": [
             "settlement",
             "defwork"
@@ -5278,8 +5278,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 1,
           "wordings": [
             "A {defwork} stands at {settlement}.",
-            "Standing at {settlement} is a {defwork}.",
-            "The {defwork} at {settlement} is up, and stays up."
+            "The {defwork} that {settlement} keeps stands.",
+            "At {settlement} a {defwork} is up, and up it remains."
           ]
         },
         {
@@ -5291,9 +5291,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "At {settlement} a {defwork} stands, and goes on standing.",
+            "A {defwork} is up at {settlement}, and it holds.",
             "The {defwork} {settlement} has, it has standing.",
-            "A {defwork} is up at {settlement}, and stays so."
+            "What {settlement} has is a {defwork}, and it is up."
           ]
         },
         {
@@ -5304,8 +5304,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "Standing work: the {defwork} stands.",
-            "The {defwork} is carried, and carried standing.",
+            "A {defwork} is carried, and carried as standing.",
+            "The {defwork} is entered standing.",
             "What is entered is a {defwork}, and it is entered standing."
           ]
         }
@@ -5313,21 +5313,31 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-STRAINED": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.",
-          "slots": [
-            "settlement",
-            "defwork"
-          ],
-          "vid": 1
-        },
-        {
-          "angle": "unfolding",
-          "text": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
+          "text": "The {defwork} at {settlement} is the town's. Its muster is paid short of the upkeep.",
           "slots": [
             "defwork",
             "settlement"
           ],
-          "vid": 2
+          "vid": 1,
+          "wordings": [
+            "At {settlement} the {defwork} is a work the town owns. The outlay against its muster falls under the charge.",
+            "The {defwork} is {settlement}'s own. What the town's muster costs runs past its funding.",
+            "The {defwork} is held by the town at {settlement}. What it sets aside for the muster does not reach the wage."
+          ]
+        },
+        {
+          "angle": "unfolding",
+          "text": "The {defwork} of {settlement} is in the town's hands. Upkeep for its muster is a term unmet.",
+          "slots": [
+            "defwork",
+            "settlement"
+          ],
+          "vid": 2,
+          "wordings": [
+            "At {settlement} the town is walled with the {defwork}. The account for its muster's pay is one the town has not answered.",
+            "The town at {settlement}, the {defwork} its own, has the muster's wage unsettled.",
+            "The town at {settlement} owns the {defwork}. What the muster's upkeep comes to is a charge not made good."
+          ]
         }
       ],
       "UNWALLED-SMALL": [
@@ -5424,8 +5434,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 2,
         "faceCounts": [
-          1,
-          1
+          4,
+          4
         ],
         "vids": [
           1,
