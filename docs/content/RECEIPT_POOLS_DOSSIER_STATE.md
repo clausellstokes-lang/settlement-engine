@@ -2593,9 +2593,18 @@ supplies the ancestry.
 **PDF PARITY:** parity (`viewModel.js` defense slice).
 
 **`Beasts & Monsters`: `plagued`, perimeter AND organized force**
-1. `[ledger]` The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
-2. `[street]` Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.
-3. `[unfolding]` What {settlement} has built is holding against the pressure and is being spent doing it; the posture is survivable, and survivable is the most that can be said of it here.
+1. `[ledger]` The country about {settlement} is thick with creatures, and the town holds its wall with people of its own.
+   - `[face]` On the town's own entry {settlement} stands in plagued country, behind a wall its people hold.
+   - `[face]` Plagued is the country {settlement} sits in, and its wall does not stand without people.
+   - `[face]` Creatures are thick about {settlement}, and the people of the town keep hold of its wall.
+2. `[street]` A wall about {settlement} is up, and the town's own people hold it where the creatures are thick.
+   - `[face]` The wall about {settlement} is up and held, in country thick with creatures.
+   - `[face]` Creatures run thick where {settlement} sits, and the wall the town keeps is held by its people.
+   - `[face]` At {settlement} the wall is up with people on it, and the country about the town is plagued.
+3. `[unfolding]` The town at {settlement} goes on keeping people on its wall, in country that goes on thick with creatures.
+   - `[face]` Held by the town's own people, the wall at {settlement} stands where the creatures run thick.
+   - `[face]` In plagued country {settlement} keeps its people on the wall.
+   - `[face]` Where the country about {settlement} runs with creatures, the town's people go on keeping the wall up.
 
 **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
 1. `[ledger]` {settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night.
@@ -2613,9 +2622,18 @@ supplies the ancestry.
 3. `[counterforce]` Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter**
-1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
-2. `[visitor]` A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.
-3. `[street]` The town can answer trouble and cannot prevent it, and the difference costs it something every season.
+1. `[ledger]` {settlement} keeps armed people against a frontier country. The town has no perimeter.
+   - `[face]` The country outside {settlement} is frontier, and the answer to it is a standing force. No wall rings the town.
+   - `[face]` At {settlement} the country beyond is frontier and the town sets no wall against it. The strength it keeps instead stands on the muster roll.
+   - `[face]` Armed people are kept at {settlement} against a frontier country. They stand behind no line.
+2. `[visitor]` A stranger reaching {settlement} out of the country finds soldiers there and no wall around the town.
+   - `[face]` Whoever comes in off the country finds {settlement} armed and unwalled, its soldiers on open ground.
+   - `[face]` A traveller out of the country meets the muster of {settlement} and passes no wall coming in.
+   - `[face]` Strangers walk into {settlement} out of the country and pass no wall, and the force is met inside.
+3. `[street]` The town keeps armed people against the country and keeps no line.
+   - `[face]` What comes out of the country is met by the muster here, not kept out at a line.
+   - `[face]` Soldiers answer the country here and no wall does.
+   - `[face]` Against the country this town sets a force and no perimeter.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need**
 1. `[counterforce]` There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.

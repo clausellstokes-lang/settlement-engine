@@ -376,27 +376,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: plagued, perimeter AND organized force": [
         {
           "angle": "ledger",
-          "text": "The country around {settlement} is thick with creatures and the town has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.",
+          "text": "The country about {settlement} is thick with creatures, and the town holds its wall with people of its own.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "On the town's own entry {settlement} stands in plagued country, behind a wall its people hold.",
+            "Plagued is the country {settlement} sits in, and its wall does not stand without people.",
+            "Creatures are thick about {settlement}, and the people of the town keep hold of its wall."
+          ]
         },
         {
           "angle": "street",
-          "text": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
+          "text": "A wall about {settlement} is up, and the town's own people hold it where the creatures are thick.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The wall about {settlement} is up and held, in country thick with creatures.",
+            "Creatures run thick where {settlement} sits, and the wall the town keeps is held by its people.",
+            "At {settlement} the wall is up with people on it, and the country about the town is plagued."
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "What {settlement} has built is holding against the pressure and is being spent doing it; the posture is survivable, and survivable is the most that can be said of it here.",
+          "text": "The town at {settlement} goes on keeping people on its wall, in country that goes on thick with creatures.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Held by the town's own people, the wall at {settlement} stands where the creatures run thick.",
+            "In plagued country {settlement} keeps its people on the wall.",
+            "Where the country about {settlement} runs with creatures, the town's people go on keeping the wall up."
+          ]
         }
       ],
       "Beasts & Monsters: plagued, perimeter but NO force to hold it": [
@@ -476,25 +491,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: frontier, force without a perimeter": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.",
+          "text": "{settlement} keeps armed people against a frontier country. The town has no perimeter.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The country outside {settlement} is frontier, and the answer to it is a standing force. No wall rings the town.",
+            "At {settlement} the country beyond is frontier and the town sets no wall against it. The strength it keeps instead stands on the muster roll.",
+            "Armed people are kept at {settlement} against a frontier country. They stand behind no line."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.",
+          "text": "A stranger reaching {settlement} out of the country finds soldiers there and no wall around the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Whoever comes in off the country finds {settlement} armed and unwalled, its soldiers on open ground.",
+            "A traveller out of the country meets the muster of {settlement} and passes no wall coming in.",
+            "Strangers walk into {settlement} out of the country and pass no wall, and the force is met inside."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town can answer trouble and cannot prevent it, and the difference costs it something every season.",
+          "text": "The town keeps armed people against the country and keeps no line.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "What comes out of the country is met by the muster here, not kept out at a line.",
+            "Soldiers answer the country here and no wall does.",
+            "Against the country this town sets a force and no perimeter."
+          ]
         }
       ],
       "Beasts & Monsters: settled, defenses beyond the need": [
@@ -1015,9 +1045,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1079,9 +1109,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
