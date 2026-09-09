@@ -2522,10 +2522,22 @@ margin *arm*. They are different fields on different rows and both are kept;
 **PDF PARITY:** parity.
 
 **readiness `STRONG`**
-1. `[visitor]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
-2. `[ledger]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
-3. `[street]` The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.
-4. `[counterforce]` Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.
+1. `[visitor]` {settlement} reads from the road in as a town well defended, and defended past sufficiency.
+   - `[face]` On the way in, {settlement} is a town in strong defensive order, and in more of it than the ordinary case would take.
+   - `[face]` A traveller finds {settlement} defended in earnest, and finds the defense past what would merely do.
+   - `[face]` Seen from outside, {settlement} is a town of real defensive strength, well past the ordinary.
+2. `[ledger]` The defensive standing of {settlement} is entered as strong, and strong is the highest mark the scale carries.
+   - `[face]` Taken together, what {settlement} keeps against attack stands strong, and stands above the mark that would merely cover the town.
+   - `[face]` Well clear of merely sufficient, {settlement} is entered strong on this head.
+   - `[face]` Strong is what {settlement} comes to under defense, and no mark above it is written.
+3. `[street]` Defense at {settlement} is strong and to spare.
+   - `[face]` Strong defense is what {settlement} keeps, and it keeps more than the plain measure.
+   - `[face]` The work of defending {settlement} is well done, and done beyond what would do.
+   - `[face]` In matters of defense {settlement} is in good order, and the order is not the bare kind.
+4. `[counterforce]` Set against whatever might be attempted, {settlement} stands in strength and stands with margin.
+   - `[face]` An attempt on {settlement} would be an attempt on a strong defense, well found and not thinly held.
+   - `[face]` Against outside pressure, the defense of {settlement} holds strong, and holds with something to spare.
+   - `[face]` Whatever might be brought against {settlement} would be met, and met by a defense of real depth.
 
 **readiness `ADEQUATE`**
 1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
@@ -2534,34 +2546,88 @@ margin *arm*. They are different fields on different rows and both are kept;
 4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
 
 **readiness `WEAK`**
-1. `[ledger]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
-2. `[visitor]` What a stranger notices at {settlement} is how much of the perimeter has nobody on it, and how normal the town seems to find that.
-3. `[unfolding]` {settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.
+1. `[ledger]` The defense of {settlement} is thin.
+   - `[face]` What {settlement} has standing to its defense is an arrangement that falls short of adequate.
+   - `[face]` Set down under readiness, {settlement} is entered weak.
+   - `[face]` Against pressure {settlement} has slender provision.
+2. `[visitor]` As a defended place, {settlement} stands thin.
+   - `[face]` Taken whole, {settlement} amounts to a thinly defended town.
+   - `[face]` Before any threat is named, what {settlement} has to its defense is slight.
+   - `[face]` Whatever else {settlement} is, its defense is weak.
+3. `[unfolding]` From one day to the next, the defense at {settlement} is thin.
+   - `[face]` Slight is what stays at {settlement} by way of defense.
+   - `[face]` At {settlement} the defense is weak now and weak in the ordinary run of things.
+   - `[face]` A thin defense is what {settlement} carries as its ordinary condition.
 
 **readiness `CRITICAL`**
-1. `[ledger]` {settlement} is effectively undefended. There is no arrangement here that would slow a serious attempt on the town by more than the time it takes to walk in.
-2. `[street]` The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.
-3. `[visitor]` A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.
+1. `[ledger]` Readiness at {settlement} stands at the floor.
+   - `[face]` What {settlement} holds to its defense comes to nothing.
+   - `[face]` Graded for readiness, {settlement} takes the lowest mark the scale carries.
+   - `[face]` Undefended is what {settlement} amounts to.
+2. `[street]` The town has no defense at all.
+   - `[face]` Nothing the town keeps answers as a defense.
+   - `[face]` Whatever else the town holds, it holds no defense.
+   - `[face]` The town's defense runs to nothing.
+3. `[visitor]` A stranger comes to the middle of {settlement} and meets no defense on the way.
+   - `[face]` Arriving at {settlement}, a stranger finds the town undefended.
+   - `[face]` What a stranger walks into at {settlement} is a town with no defense.
+   - `[face]` Nothing at {settlement} stands in a stranger's way.
 
 **terrain FAVOURABLE to the defender**
-1. `[visitor]` The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.
-2. `[ledger]` {settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.
-3. `[counterforce]` The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.
+1. `[visitor]` The way into {settlement} climbs, and the climb counts for the town.
+   - `[face]` The country falls away below {settlement}, and the town is the better placed for it.
+   - `[face]` The approach to {settlement} is uphill work, and the work falls to whoever is coming.
+   - `[face]` The ground stands higher at {settlement} than in the country around it, and the height is the town's to keep.
+2. `[ledger]` The terrain at {settlement} carries part of the defense, and level ground would carry less.
+   - `[face]` The site of {settlement} is worth something to the defense on its own account, and open country would be worth less.
+   - `[face]` Part of the defense at {settlement} is in the lie of the land, and a flat site would be the poorer for it.
+   - `[face]` Ground of this kind is worth more to {settlement} than flat country would be.
+3. `[counterforce]` Anything that came against {settlement} would come uphill, and the slope is the town's.
+   - `[face]` The climb is what stands in the way of anything reaching {settlement}, and the town holds the far end of it.
+   - `[face]` A force pressing {settlement} would press uphill, and the town would be above it.
+   - `[face]` Steep ground stands between {settlement} and anything below it.
 
 **terrain EXPOSED**
-1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
-2. `[ledger]` The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.
-3. `[street]` The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.
+1. `[visitor]` Open ground reaches {settlement} from every side.
+   - `[face]` The way in to {settlement} crosses ground without cover or defile.
+   - `[face]` From any quarter, the approach to {settlement} runs over open country.
+   - `[face]` The country about {settlement} carries no rise and no hollow.
+2. `[ledger]` The site of {settlement} holds no advantage of ground.
+   - `[face]` Standing on open ground, {settlement} takes no strength from the land.
+   - `[face]` The land at {settlement} lies open from end to end.
+   - `[face]` Nothing in the site of {settlement} rises or narrows.
+3. `[street]` No hill and no narrows lie anywhere about {settlement}.
+   - `[face]` The town stands on open ground at {settlement}.
+   - `[face]` The ground at {settlement} has neither bank nor fold.
+   - `[face]` What the ground gives {settlement} is open country and no more.
 
 **strategic value HIGH**
-1. `[ledger]` {settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.
-2. `[street]` The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.
-3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.
+1. `[ledger]` The value of what {settlement} holds is high.
+   - `[face]` A prize is what {settlement} comes to.
+   - `[face]` Possession of {settlement} would be worth the having.
+   - `[face]` The gain in taking {settlement} would be large.
+2. `[street]` What the town sits on is worth taking.
+   - `[face]` The town holds a prize.
+   - `[face]` A thing of value is what the place keeps.
+   - `[face]` The place would be worth the taking.
+3. `[visitor]` A stranger comes into {settlement} and comes into a place worth taking.
+   - `[face]` What a newcomer walks into at {settlement} is a place of value.
+   - `[face]` A traveller at {settlement} stands inside something worth having.
+   - `[face]` Arrival at {settlement} is arrival at a prize.
 
 **strategic value LOW**
-1. `[counterforce]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.
-2. `[ledger]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
-3. `[street]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
+1. `[counterforce]` Nothing at {settlement} would answer as plunder.
+   - `[face]` Spoil is not what {settlement} holds.
+   - `[face]` A seizure at {settlement} would carry off nothing of worth.
+   - `[face]` What could be taken from {settlement} would not be much.
+2. `[ledger]` The strategic worth of {settlement} stands low.
+   - `[face]` As a prize {settlement} counts for little.
+   - `[face]` Small return would come of taking {settlement}.
+   - `[face]` No part of {settlement} would be worth a taking.
+3. `[street]` The town keeps nothing that would be worth taking.
+   - `[face]` What is in the town is not worth coming after.
+   - `[face]` Nothing worth having is to be found in the town.
+   - `[face]` Small gain would come of a taking here.
 
 ---
 
