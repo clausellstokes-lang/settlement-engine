@@ -74,6 +74,49 @@ export function rootOfPath(field) {
 }
 
 /**
+ * ⭐ A TABLE-RUNG READ, PARSED (REWRITE car 8b-W-5).
+ *
+ * ⛔ THE DEFECT THIS EXISTS TO KILL. A census read is one of TWO shapes, and only one of them
+ * is a field. A LITERAL-rung pool reads a dotted path (`settlement.defenseProfile.economicGates
+ * .military`) whose last segment is its leaf. A TABLE-rung pool reads a whole selecting
+ * expression, spelled `<reader> (via <TABLE> in <file>)`, which has no leaf at all: splitting it
+ * on `.` and taking the last segment yields the tail of the FILE NAME. Every line that treated
+ * the second shape as the first printed the file's extension where a writer's claim belonged,
+ * and a writer reads the card as the licence.
+ *
+ * WHAT A TABLE-RUNG POOL ACTUALLY CLAIMS. Not that a field holds a value: that a READER,
+ * applied to its arguments, selects one ROW of a named table. So the parse keeps all four parts
+ * the census spelled, and the card says the row.
+ *
+ * @param {string} read one entry of the census row's `reads`, or a predicate row's `field`
+ * @returns {{reader: string, args: string|null, table: string, file: string}|null} null where
+ *   the read is a plain dotted path, which is the caller's signal to keep its own old form
+ */
+export function parseTableRungRead(read) {
+  const whole = /^(.+) \(via ([A-Za-z0-9_$]+) in ([A-Za-z0-9_./-]+)\)$/.exec(String(read ?? ''));
+  if (!whole) return null;
+  const reader = whole[1];
+  // A reader may be a CALL (`scoreBand(readinessScore)`) or a bare key expression (`head`,
+  // `token`, or a template literal). The arguments are what a writer needs to see to know what
+  // the row was selected BY, so they are recovered where they exist and null where they do not.
+  const call = /^([A-Za-z0-9_$.?]+)\((.*)\)$/.exec(reader);
+  return { reader, args: call ? call[2] : null, table: whole[2], file: whole[3] };
+}
+
+/**
+ * HOW A READ NAMES ITSELF ON A CARD LINE THAT SPEAKS OF FIELDS. A dotted path IS a field and
+ * prints as itself, byte for byte as it always has. A table-rung read is not a field, so it
+ * names the thing it really is: the row of a table, and the reader that selects it.
+ * @param {string} read
+ * @returns {string}
+ */
+export function readAsField(read) {
+  const rung = parseTableRungRead(read);
+  if (!rung) return String(read);
+  return `the row of \`${rung.table}\` selected by \`${rung.reader}\``;
+}
+
+/**
  * WHY THE PREDICATE LINE IS EMPTY, WHEN IT IS. A SPINE's predicate is recovered from its key
  * function; a MODIFIER has none to recover, because its predicate is the candidate function in
  * its desk's leaf and the census records the READING rather than the test (the `annex` rung).
@@ -210,10 +253,26 @@ export function mayClaimText({ reads, predicate }) {
   // one (DS-DEF-11 WALLED-STRAINED reads the wall first and discriminates on the pay gate).
   const field = (predicate || [])[0]?.field || (reads || [])[0] || '';
   if (!field) return 'nothing: the census recovered no reading, so no claim is licensed';
-  const leaf = field.split('.').slice(-1)[0];
-  const values = (predicate || []).map((p) => `${p.op} ${text(p.value)}`).filter((v) => v.trim());
+  // ⛔ THE TWO SHAPES ARE NOT ONE SHAPE (car 8b-W-5). A dotted path has a leaf; a table-rung
+  // reading has a ROW. Taking `split('.').slice(-1)` of the second printed `js)` as the claim
+  // on every one of the census's table-rung pools, and the writers read that as their licence.
+  const rung = parseTableRungRead(field);
+  /** The equality rows of THIS reading: for a table rung they ARE the row the reader selects. */
+  const isRow = (p) => Boolean(rung) && p.field === field && (p.op === '===' || p.op === '==');
+  const rowsSaid = (predicate || []).filter(isRow).map((p) => text(p.value)).filter((v) => v.trim());
+  const values = (predicate || []).filter((p) => !isRow(p))
+    .map((p) => `${p.op} ${text(p.value)}`).filter((v) => v.trim());
   const said = values.length ? ` (${values.join(' AND ')})` : '';
-  return `that \`${leaf}\`${said} holds, as a STANDING fact of the record`;
+  if (!rung) {
+    const leaf = field.split('.').slice(-1)[0];
+    return `that \`${leaf}\`${said} holds, as a STANDING fact of the record`;
+  }
+  const named = rowsSaid.length
+    ? `the row${rowsSaid.length > 1 ? 's' : ''} ${rowsSaid.map((v) => `\`${v}\``).join(' AND ')}`
+    : 'a row';
+  const how = rung.args === null ? `the key \`${rung.reader}\`` : `the reader \`${rung.reader}\``;
+  return `that ${how} selects ${named} of \`${rung.table}\` in \`${rung.file}\`${said},`
+    + ' as a STANDING fact of the record';
 }
 
 /**
@@ -227,9 +286,38 @@ export function mayClaimText({ reads, predicate }) {
 export function mayNotText({ spineFields, objectClass }) {
   const rows = [...REFUSED_CLAIMS];
   if (objectClass) rows.push(`another civic object of the class \`${objectClass}\``);
-  const fields = [...new Set(spineFields || [])].sort();
+  // ⛔ THE SPINE'S READS ARE RAW CENSUS READINGS AND NOT ALL OF THEM ARE FIELDS (car 8b-W-5).
+  // Dedupe and sort on the RAW reading so a dotted set prints byte for byte as it always has,
+  // then name each one as what it is: a table-rung spine tests a ROW OF A TABLE, and telling a
+  // writer to keep off `... in defenseStateProse.js)` names a file where a refusal belongs.
+  const fields = [...new Set(spineFields || [])].sort().map(readAsField);
   if (fields.length) rows.push(`any field the attached spine tests (${fields.join(' · ')})`);
   return rows.join(', ');
+}
+
+/**
+ * THE ECHO LINE'S SECOND HALF: how the echo table's KEY relates to this pool's own reading.
+ *
+ * ⛔ WHY A TABLE RUNG NEEDS ITS OWN SENTENCE. `factMounts` keys the echo table on
+ * `wiringCensus.rootOf(read)`, which splits on `.` — so a dotted read keys on its producer
+ * token and a TABLE-RUNG read keys on its whole reading truncated at the file's first dot. The
+ * key is consistent on both sides and the bound is executable either way, but calling the
+ * second one a "producer-token root" prints a FILE NAME where the card promises a field, and
+ * the coarseness a writer must watch for is a sibling ROW rather than a sibling field.
+ * @param {string} field this pool's first read, or `''`
+ * @returns {string}
+ */
+export function echoKeyNote(field) {
+  const rung = field ? parseTableRungRead(field) : null;
+  if (rung) {
+    return 'the echo table is keyed on this pool\'s WHOLE table-rung reading (truncated at the'
+      + ` file's first dot) and NOT on a producer-token root, so every pool that selects a row`
+      + ` of \`${rung.table}\` shares ONE echo key: a mount counted there may be a sibling ROW`
+      + ' of the same table';
+  }
+  return 'the echo table is keyed on the PRODUCER-TOKEN ROOT'
+    + `${field ? ` \`${rootOfPath(field)}\`` : ''}, which is coarser than this pool's own read`
+    + `${field ? ` \`${field}\`` : ''}: a mount counted there may be reading a sibling field of the same root`;
 }
 
 /**
@@ -314,9 +402,7 @@ export function licenceCardLines(input) {
   lines.push(`  attach:     ${attach.length ? attach.map((k) => `\`${k}\``).join(' ') : '(empty: a spine takes no attach set)'}`);
   lines.push(`              ${attachDerivation(role, input.declaredAttach)}`);
   lines.push(`  echo:       ${echoText(factRow, field)}`);
-  lines.push(`              the echo table is keyed on the PRODUCER-TOKEN ROOT`
-    + `${field ? ` \`${rootOfPath(field)}\`` : ''}, which is coarser than this pool's own read`
-    + `${field ? ` \`${field}\`` : ''}: a mount counted there may be reading a sibling field of the same root`);
+  lines.push(`              ${echoKeyNote(field)}`);
   lines.push(`  covert:     ${covert ? `YES — every variant carries \`dm-only\` (T-F5); unmarked variants: ${unmarked}` : 'no'}`);
   lines.push(`  source:     ${sourceText(row?.source)}`);
   lines.push(`  may claim:  ${mayClaimText({ reads: row?.reads || [], predicate: row?.predicate || [] })}`);

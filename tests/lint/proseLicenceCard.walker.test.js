@@ -21,16 +21,17 @@
  *
  * @enforced-by this file
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { ROOT } from '../helpers/dossierCorpus.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import {
-  CARD_LINES, REFUSED_COLUMNS, bagText, echoText, licenceCardLines, mayClaimText, predicateText,
-  readsLines, relationWhy, sourceText,
+  CARD_LINES, REFUSED_COLUMNS, bagText, echoKeyNote, echoText, licenceCardLines, mayClaimText,
+  mayNotText, parseTableRungRead, predicateText, readAsField, readsLines, relationWhy, sourceText,
 } from '../../scripts/lib/prose-licence-card.mjs';
+import { cardMachine } from '../../scripts/prose-licence-card.mjs';
 
 /** The committed register the card is projected from. */
 const CENSUS = JSON.parse(readFileSync(join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
@@ -191,5 +192,169 @@ describe('a plant that edits the census row moves the card line BY NAME', () => 
 
   it('may-claim refuses to invent a claim when the census recovered nothing', () => {
     expect(mayClaimText({ reads: [], predicate: [] })).toContain('no claim is licensed');
+  });
+});
+
+/**
+ * ⭐ A TABLE-RUNG READ IS NOT A DOTTED PATH, AND THE CARD MAY NOT PRETEND IT IS
+ * (REWRITE car 8b-W-5; the defect car 8b-W found and the chair confirmed).
+ *
+ * THE DEFECT THESE ARMS EXIST TO KEEP DEAD. The census records a read in one of TWO shapes. A
+ * LITERAL-rung pool reads a dotted path, and its last segment is the field it claims. A
+ * TABLE-rung pool reads a whole selecting expression, `<reader> (via <TABLE> in <file>)`, which
+ * has NO leaf: split it on `.` and the last segment is the tail of the file name. The card
+ * derived its claim with `field.split('.').slice(-1)[0]` for both, so on all one hundred
+ * twenty-two of the census's table-rung pools it printed
+ *
+ *     may claim:  that `js)` (=== STRONG) holds, as a STANDING fact of the record
+ *
+ * and the REWRITE's writers and refuters read exactly that line as their licence.
+ *
+ * ⛔ THE TWO PLANTS, AND WHY THEY ARE SHAPED THIS WAY.
+ *   (a) OVER EVERY POOL, NOT A SAMPLE. The defect was invisible at the anchor pool, because
+ *       `DS-DEF-11 :: WALLED-STRAINED` reads a dotted path and printed correctly throughout. A
+ *       sample that happens to be literal-rung proves nothing, so the sweep below builds the
+ *       SHIPPED card for every row of the census and refuses a claim subject that ends in `)`
+ *       or is `js`. Its anti-vacuity guard is the table-rung count: if the sweep stops seeing
+ *       table-rung pools the arm reds rather than passing over an empty set.
+ *   (b) THE DOTTED FORM IS PINNED BY BYTES. A cure that fixed the table rung by moving the
+ *       literal rung would be a different defect wearing this one's clothes, so the three cards
+ *       the chair named are pinned line for line. `DS-DEF-11`'s whole card was proved identical
+ *       by `cmp` at 1711 bytes across the cure; these are the two lines the cure could reach.
+ */
+describe('a table-rung pool is licensed to claim a ROW OF A TABLE, never a file name', () => {
+  /** @type {{cardFor: (block: string, pool: string) => string[]}} */
+  let machine;
+  beforeAll(async () => { machine = await cardMachine(); });
+
+  /** Census rows whose first read is a table-rung reading. */
+  const TABLE_RUNG = CENSUS.rows.filter((r) => parseTableRungRead((r.reads || [])[0] || ''));
+
+  /**
+   * THE BARE CLAIM SUBJECT — the token the card asserts holds, in the dotted form's own
+   * sentence `that \`<leaf>\` … holds`. A cured table-rung claim does NOT match: its sentence
+   * begins `that the reader \`…\` selects the row …`, and the backticks in it name a reader, a
+   * row, a table and a file rather than a subject. So a table-rung pool reaching this at all is
+   * the defect, and a dotted pool reaching it with a `)` or `js` is the defect too.
+   * @param {string[]} lines @returns {string}
+   */
+  const claimSubject = (lines) => {
+    const line = lines.find((l) => l.startsWith('  may claim:')) || '';
+    return line.match(/^ {2}may claim: {2}that `([^`]*)`/)?.[1] || '';
+  };
+
+  it('the census carries BOTH read shapes, and the old idiom really did print `js)`', () => {
+    expect(TABLE_RUNG.length, 'the census still holds table-rung pools').toBeGreaterThan(0);
+    expect(CENSUS.rows.length - TABLE_RUNG.length, 'and dotted-read pools beside them').toBeGreaterThan(0);
+    // THE NEGATIVE CONTROL. The arms below are pointed at a real defect and not at a shape that
+    // never existed: the cured idiom's predecessor, run here on a live census reading, still
+    // yields the nonsense the writers were handed.
+    const read = TABLE_RUNG[0].reads[0];
+    expect(read.split('.').slice(-1)[0]).toBe('js)');
+    expect(parseTableRungRead(read)).not.toBeNull();
+  });
+
+  it('EVERY pool in the census prints a claim subject that is neither `js` nor a call tail', () => {
+    let built = 0;
+    let tableRung = 0;
+    /** @type {string[]} */
+    const offenders = [];
+    for (const row of CENSUS.rows) {
+      const lines = machine.cardFor(row.block, row.pool);
+      built += 1;
+      const subject = claimSubject(lines);
+      if (subject.endsWith(')') || subject === 'js') offenders.push(`${row.block} :: ${row.pool} -> \`${subject}\``);
+      if (parseTableRungRead((row.reads || [])[0] || '')) {
+        tableRung += 1;
+        const claim = lines.find((l) => l.startsWith('  may claim:')) || '';
+        if (!claim.includes('selects the row') && !claim.includes('selects a row')) {
+          offenders.push(`${row.block} :: ${row.pool} -> the claim does not name a table row`);
+        }
+      }
+      // AND THE ECHO NOTE, which derived its root from the same idiom and printed the file.
+      const note = lines.find((l) => l.includes('the echo table is keyed on')) || '';
+      if (/PRODUCER-TOKEN ROOT `[^`]*(?:\(via |\.js)/.test(note)) {
+        offenders.push(`${row.block} :: ${row.pool} -> the echo root names a file`);
+      }
+    }
+    expect(offenders).toEqual([]);
+    expect(built, 'every census row has a card in the projected corpus').toBe(CENSUS.rows.length);
+    // ANTI-VACUITY: the sweep saw the shape it exists to police, at the census's own count.
+    expect(tableRung, 'the sweep saw every table-rung pool').toBe(TABLE_RUNG.length);
+  });
+
+  it('pins the three cards the chair named, line for line', () => {
+    const lineAt = (block, pool, prefix) => machine.cardFor(block, pool)
+      .find((l) => l.trimStart().startsWith(prefix));
+    // The two table-rung cards: the claim names the reader, the row, the table and the file.
+    expect(lineAt('DS-DEF-2', 'Invasion & War: walls AND professional garrison', 'may claim:'))
+      .toBe('  may claim:  that the reader `invasionRowSituation(walls, garrison, militia)`'
+        + ' selects the row `walls, professional garrison` of `INVASION_ROW_POOL` in'
+        + ' `defenseStateProse.js`, as a STANDING fact of the record');
+    expect(lineAt('DS-DEF-1', 'readiness STRONG', 'may claim:'))
+      .toBe('  may claim:  that the reader `scoreBand(readinessScore)` selects the row `STRONG`'
+        + ' of `READINESS_ROW_POOL` in `defenseStateProse.js`, as a STANDING fact of the record');
+    expect(lineAt('DS-DEF-2', 'Invasion & War: walls AND professional garrison', 'the echo table'))
+      .toBe('              the echo table is keyed on this pool\'s WHOLE table-rung reading'
+        + ' (truncated at the file\'s first dot) and NOT on a producer-token root, so every pool'
+        + ' that selects a row of `INVASION_ROW_POOL` shares ONE echo key: a mount counted there'
+        + ' may be a sibling ROW of the same table');
+    // ⛔ THE DOTTED CARD DOES NOT MOVE BY ONE BYTE. Both lines exactly as they shipped.
+    expect(lineAt(BLOCK, POOL, 'may claim:'))
+      .toBe('  may claim:  that `military` (< 1) holds, as a STANDING fact of the record');
+    expect(lineAt(BLOCK, POOL, 'the echo table'))
+      .toBe('              the echo table is keyed on the PRODUCER-TOKEN ROOT `forces`, which is'
+        + ' coarser than this pool\'s own read `forces.walls.present`: a mount counted there may'
+        + ' be reading a sibling field of the same root');
+  });
+
+  it('parses every read shape the census spells, and refuses to parse a dotted path', () => {
+    const shapes = new Set(CENSUS.rows.flatMap((r) => r.reads || []).filter((p) => p.includes(' (via ')));
+    expect(shapes.size, 'the census spells table-rung readings').toBeGreaterThan(0);
+    for (const shape of shapes) {
+      const rung = parseTableRungRead(shape);
+      expect(rung, `the card parses the reading ${shape}`).not.toBeNull();
+      expect(shape, 'and every part it recovered is the census\'s own text')
+        .toBe(`${rung.reader} (via ${rung.table} in ${rung.file})`);
+    }
+    // A CALL keeps its arguments; a bare key expression reports none rather than inventing ().
+    expect(parseTableRungRead('scoreBand(readinessScore) (via R in f.js)').args).toBe('readinessScore');
+    expect(parseTableRungRead('head (via SAFETY_POOL_OF in generalStateProse.js)').args).toBeNull();
+    expect(parseTableRungRead('settlement.defenseProfile.economicGates.military')).toBeNull();
+    expect(readAsField('settlement.defenseProfile.economicGates.military'))
+      .toBe('settlement.defenseProfile.economicGates.military');
+  });
+
+  it('a table-rung SPINE in an attach set is refused as a table row, not as a file', () => {
+    // ⛔ A PLANT, BECAUSE NO POOL REACHES IT TODAY. No modifier at this tip attaches to a
+    // table-rung spine, so the `may NOT` clause would have printed `... defenseStateProse.js)`
+    // as "a field the attached spine tests" the first day one did. The plant is that day.
+    const read = 'invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)';
+    const planted = mayNotText({ spineFields: [read], objectClass: null });
+    expect(planted).toContain('the row of `INVASION_ROW_POOL` selected by');
+    // anchored: the line above proves this same string carries the cured clause, over the same call
+    expect(planted).not.toContain('defenseStateProse.js)');
+    // and the dotted set is untouched, in the census's own spelling and order
+    expect(mayNotText({ spineFields: ['settlement.tier', 'forces.walls.present'], objectClass: null }))
+      .toContain('any field the attached spine tests (forces.walls.present · settlement.tier)');
+  });
+
+  it('the echo note tells a table rung its key is the TABLE and a dotted read its root', () => {
+    expect(echoKeyNote('forces.walls.present')).toContain('PRODUCER-TOKEN ROOT `forces`');
+    const rung = echoKeyNote('scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)');
+    expect(rung).toContain('every pool that selects a row of `READINESS_ROW_POOL` shares ONE echo key');
+    expect(rung).not.toContain('PRODUCER-TOKEN ROOT'); // anchored: the line above proves this same note live
+    expect(rung).not.toContain('defenseStateProse'); // anchored: the same note, proved present two lines up
+    expect(echoKeyNote('')).toContain('PRODUCER-TOKEN ROOT,');
+  });
+
+  it('a claim with no recovered row says so rather than inventing one', () => {
+    const read = 'text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)';
+    expect(mayClaimText({ reads: [read], predicate: [] }))
+      .toBe('that the reader `text(terrain)` selects a row of `TERRAIN_PRIZE_OF` in'
+        + ' `defenseStateProse.js`, as a STANDING fact of the record');
+    // a non-equality test on a table rung keeps its operator rather than being read as a row
+    expect(mayClaimText({ reads: [read], predicate: [{ field: read, op: '!==', value: 'x' }] }))
+      .toContain('selects a row of `TERRAIN_PRIZE_OF` in `defenseStateProse.js` (!== x),');
   });
 });
