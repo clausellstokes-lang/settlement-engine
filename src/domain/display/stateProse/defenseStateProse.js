@@ -131,10 +131,54 @@ export const SLOT_FILL_SHAPES = Object.freeze({
  */
 export const SLOT_FILL_TABLES = Object.freeze({});
 
-/** The pool that qualifies the reading as a first look. See the docblock for its basis. */
-const FIRST_SURVEY_POOL = 'First-Survey qualification (the reading is a first look)';
-/** The pool for a label a crisis has rewritten. */
-const COMPOUND_POOL = 'COMPOUND override (a crisis stress has rewritten the label)';
+/**
+ * ── ⭐⭐ DS-DEF-3's TWO KEY TABLES — THE LABEL BANNER LEAVES THE FOURTH RUNG ──────────
+ *
+ * All seven of this block's pools were rung 4, and the cause was not one the ladder could
+ * climb: `publicOrderPoolKey` returned a LOCAL VARIABLE (the label itself) or a module const,
+ * and `firstSurveyPoolKey` returned a module const. A key that is never written as a literal
+ * at the point it is returned is invisible to a reader of the source, so the estate's wiring
+ * register (the instrument island under `src/domain/prose/`, which no product file may name)
+ * reported all seven as "no key function returns this key as a literal" — a true report that
+ * leaves ARCH §8.2 refusing the block a list row until its wiring lands. These two tables are
+ * that wiring: each maps a named SITUATION to the pool the corpus wrote for it, so the
+ * recovered predicate is an exact `if and only if` rather than an inference off a pool name.
+ *
+ * ⛔ THE TABLE IS NOW THE ROSTER, AND IT IS NARROWER THAN THE CORPUS LOOKUP IT REPLACES —
+ * MEASURED, DECLARED, AND STRICTLY AN IMPROVEMENT. The shipped function asked
+ * `CORPUS['DS-DEF-3'].pools[label]` whether the corpus carried a pool of that name, and a
+ * plain object answers that question for strings nobody meant it to: the two pool keys that
+ * are NOT labels (the COMPOUND and First-Survey rows), and every `Object.prototype` key
+ * (`constructor`, `toString`, `hasOwnProperty`, …). On those eight inputs the shipped desk
+ * routed the banner to a framing pool or to a pool key of its own inheritance chain; this
+ * table returns silence. UNREACHABLE FROM THE PRODUCER, measured rather than argued: over the
+ * 768 towns of the RATE corpus `safetyProfile.js` writes 30 distinct labels and not one of
+ * them is any of the eight. The narrowing is declared on the receipt with a veto shape.
+ *
+ * ⚠ AND THE LOOKUP IS READ AS A STRING OR NOT AT ALL, which is what closes the inheritance
+ * half above. `TERRAIN_DEFENCE_OF` and `TERRAIN_PRIZE_OF` two blocks below still index on a
+ * free-form producer word without that guard; they are a different block's rows and are named
+ * here rather than swept up.
+ * @type {Readonly<Record<string, string>>}
+ */
+const PUBLIC_ORDER_ROW_POOL = Object.freeze({
+  'Very Safe': 'Very Safe',
+  Safe: 'Safe',
+  Moderate: 'Moderate',
+  Unsafe: 'Unsafe',
+  Dangerous: 'Dangerous',
+  'a crisis has rewritten the label': 'COMPOUND override (a crisis stress has rewritten the label)',
+});
+
+/**
+ * DS-DEF-3's framing pool, keyed on the one situation that selects it. A table of one entry
+ * is still the honest shape: the pool's predicate is "there is a reading to qualify", and the
+ * register can now read that sentence off the source instead of reporting a silence.
+ * @type {Readonly<Record<string, string>>}
+ */
+const FIRST_SURVEY_ROW_POOL = Object.freeze({
+  'a reading is present': 'First-Survey qualification (the reading is a first look)',
+});
 
 /** @param {unknown} value @returns {string} */
 function text(value) {
@@ -166,26 +210,44 @@ export function isCompoundSafetyLabel(safetyLabel) {
 }
 
 /**
+ * WHICH PUBLIC-ORDER SITUATION a town is in. A crisis-rewritten label is its own situation;
+ * a clean one is named by the label the producer wrote; an absent reading is `''`.
+ * @param {unknown} safetyLabel @returns {string}
+ */
+function publicOrderSituation(safetyLabel) {
+  const label = text(safetyLabel);
+  if (!label) return '';
+  return isCompoundSafetyLabel(label) ? 'a crisis has rewritten the label' : label;
+}
+
+/**
  * DS-DEF-3's label pool key. A compound label goes to the COMPOUND pool; a clean label to
- * its own; anything the corpus does not carry renders NOTHING rather than falling into a
+ * its own; anything the table does not carry renders NOTHING rather than falling into a
  * neighbouring band, because a safety band is a claim about whether the streets are safe.
  * @param {unknown} safetyLabel @returns {string|null}
  */
 export function publicOrderPoolKey(safetyLabel) {
-  const label = text(safetyLabel);
-  if (!label) return null;
-  if (isCompoundSafetyLabel(label)) return COMPOUND_POOL;
-  return CORPUS['DS-DEF-3'].pools[label] ? label : null;
+  const pool = PUBLIC_ORDER_ROW_POOL[publicOrderSituation(safetyLabel)];
+  return typeof pool === 'string' ? pool : null;
 }
 
 /**
- * DS-DEF-3's first-survey qualification. It applies whenever there is a reading to qualify:
- * `safetyLabel` is written at generation and has no world-pulse writer, so it is never
- * re-judged and the qualification is always true of it.
+ * WHETHER THERE IS A READING TO QUALIFY at all. `safetyLabel` is written at generation and
+ * has no world-pulse writer, so it is never re-judged and the qualification is always true of
+ * a town that has one.
+ * @param {unknown} safetyLabel @returns {string}
+ */
+function firstSurveySituation(safetyLabel) {
+  return text(safetyLabel) ? 'a reading is present' : '';
+}
+
+/**
+ * DS-DEF-3's first-survey qualification. It applies whenever there is a reading to qualify.
  * @param {unknown} safetyLabel @returns {string|null}
  */
 export function firstSurveyPoolKey(safetyLabel) {
-  return text(safetyLabel) ? FIRST_SURVEY_POOL : null;
+  const pool = FIRST_SURVEY_ROW_POOL[firstSurveySituation(safetyLabel)];
+  return typeof pool === 'string' ? pool : null;
 }
 
 /**

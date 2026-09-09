@@ -106,6 +106,22 @@ describe('the defense desk — the label vocabulary is the producer\'s', () => {
     expect(publicOrderPoolKey('Placid')).toBeNull();
     expect(publicOrderPoolKey('')).toBeNull();
     expect(publicOrderPoolKey(undefined)).toBeNull();
+    // ⛔ THE EIGHT INPUTS THE CORPUS-ROSTER GUARD ANSWERED AND THE KEY TABLE DOES NOT
+    // (REWRITE car 8b-W, declared). Until this car the roster was `CORPUS[DEF3].pools[label]`,
+    // and a plain object answers that question for the block's two NON-label pool keys and for
+    // every `Object.prototype` key — so a label of `constructor` routed the banner to a pool
+    // named for the inheritance chain. The table is the roster now and the lookup is read as a
+    // string or not at all, so all eight are SILENCE. None is reachable from the producer: over
+    // the RATE corpus's 768 towns `safetyProfile.js` writes 30 distinct labels and no member of
+    // this list. Pinned so the narrowing cannot be quietly reversed OR quietly widened.
+    for (const key of Object.keys(DEF3_POOLS).filter((k) => !CLEAN_LABELS.includes(k))) {
+      expect(publicOrderPoolKey(key), `${key} is a pool key, never a label`).toBeNull();
+    }
+    for (const inherited of ['constructor', 'toString', '__proto__', 'hasOwnProperty', 'valueOf']) {
+      expect(publicOrderPoolKey(inherited), `${inherited} is inherited, never a label`).toBeNull();
+      expect(firstSurveyPoolKey(inherited), 'the framing lens reads presence, not the word')
+        .toBe('First-Survey qualification (the reading is a first look)');
+    }
   });
 
   it('a crisis-rewritten label goes to COMPOUND, detected by the dash and not a name list', () => {
