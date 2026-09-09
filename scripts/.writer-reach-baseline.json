@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "455ec96a4abace0ae7eb68d09e419820bacd5b5d",
+ "frozenAtSha": "ef3ee6cbd4e0b48355daad2d2c269d79e554cbbd",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,7 +23,7 @@
   "transitionCount": 14496
  },
  "shapesDigest": "44fc73f1b012b60c5aaf7b290fe4917edd89a2493f35016b849d7136752077a8",
- "detectorDigest": "849e49799616249830b30f1b20af486a8244c7386afbdb29fe33865181dfa2a1",
+ "detectorDigest": "705d2de1fbe73ce23d669a2e4733babcad8fe189075a59b168a157c4dca5c34b",
  "verdictDigest": "77df6a58785fd638c2f1961d5d9209f7a7da5e1e25bee66766d3b436f3067d67",
  "surfaceRoots": {
   "web": [
@@ -101,7 +101,7 @@
   "nGrades": 882106,
   "resolvedReceivers": 6681
  },
- "registerDigest": "ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0",
+ "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
  "reviewableDarkCount": 526,
  "darkUnregistered": [
