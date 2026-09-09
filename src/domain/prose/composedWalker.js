@@ -91,7 +91,7 @@ import { classifyMoves, composedOrderIdOf } from './moveGrammar.js';
 
 /** THE ROSTER — every arm this module owns, so a walker cannot silently drop one. */
 export const COMPOSED_ARMS = Object.freeze([
-  'A0b', 'A1', 'A2', 'A3', 'A5', 'A6', 'A9', 'A11', 'A13', 'C7',
+  'A0b', 'A1', 'A2', 'A3', 'A5', 'A6', 'A9', 'A11', 'A13', 'C7', 'Thread',
 ]);
 
 /** @returns {ComposedResult} an empty result, so every arm starts from the same shape */
@@ -801,6 +801,80 @@ export function armA11(rows) {
   return out;
 }
 
+// ── Thread · subject continuity between adjacent sentences ──────────────────────────
+
+/**
+ * ⭐⭐ ARM THREAD (SITTING §T.4 adopting agenda C″; the owner, 2026-09-08 ~21:4x) — ADJACENT
+ * SENTENCES OF A COMPOSED UNIT MUST CONNECT.
+ *
+ * A sentence connects to the one before it by CARRYING A NOUN FORWARD (a shared content word,
+ * on the estate's one stop list), or it is THE PASSAGE'S ONE TURN OUTWARD, which is licensed
+ * only in the LAST position and only once. Anything else is a MID-PASSAGE SHIFT: the line has
+ * stopped and started somewhere else, and the reader is handed nothing to hold.
+ *
+ * ⛔ REPORT, NOT FAIL, UNTIL 8b's FIRST BATCH (the brief's item 4, SITTING §T.4 in terms). The
+ * arm is landed with its plants so it is armed the day the first desk section is authored;
+ * gating on it before a single composed unit exists would gate on nothing. Every verdict —
+ * `carried`, `turn-outward` AND `broken` — is emitted, because ruling (c)'s distribution table
+ * asks for THE THREAD VERDICTS and a table that printed only the failures could not tell a
+ * corpus that threads from one that never had two sentences to thread.
+ *
+ * ⛔ ONE TURN, AND IT IS LAST. A second disconnect in the same unit is `broken` even if it is
+ * final: "the one turn outward" is one. At the bound in force today (two sentences, one joint)
+ * a unit has exactly one adjacent pair and the second sentence IS last, so `broken` is
+ * unreachable on a lawful unit and reachable at once on a unit that exceeds the bound — which
+ * is the shape the refuters' two thread findings at the taste took (a mid-passage tail that
+ * hands nothing back; a doubled fact after the line has stopped).
+ *
+ * ⛔ AND IT IS NOT AN ECHO RULE. A11 counts FACTS; this arm counts NOUNS, and a noun carried
+ * deliberately for the thread is the thing this arm ASKS for. The two are asserted apart in
+ * the walker so neither can be quietly turned into the other.
+ *
+ * ⛔ THE SPLIT IS `entryWalker.sentencesOf`, THE ESTATE'S ONE SPLITTER, and the difference from
+ * a local one matters: it neutralises `{slot}` markers first, so a fill can never manufacture
+ * a sentence break. C″ names "a shared head noun OR SLOT", and the slot half needs no separate
+ * reading here because this arm walks a COMPOSED unit, whose slots are already FILLED by step 7
+ * — a shared `{seat}` reaches this arm as the seat's own filled noun, which `contentWords`
+ * reads like any other. An UNFILLED row walked by hand would lose that half, and the walker
+ * says so rather than leaving it to be discovered.
+ *
+ * @param {ComposedUnitRow} unit
+ * @returns {ComposedResult}
+ */
+export function armThread(unit) {
+  const out = emptyResult();
+  const id = addressOf(unit);
+  const sentences = sentencesOf(unit && unit.text);
+  if (sentences.length < 2) {
+    emit(out, row(id, 'Thread', 'NOT-EXECUTABLE', '(adjacent pairs)', String(sentences.length),
+      'a unit of fewer than two sentences has no adjacent pair, so there is no thread to read'));
+    return out;
+  }
+  let turns = 0;
+  for (let at = 1; at < sentences.length; at += 1) {
+    const before = sentences[at - 1];
+    const here = sentences[at];
+    const shared = contentWords(here).filter((word) => contentWords(before).includes(word)).sort();
+    const last = at === sentences.length - 1;
+    if (shared.length > 0) {
+      emit(out, row(id, 'Thread', 'REPORT', `carried at sentence ${at + 1}`, shared.join(' '),
+        'the sentence carries a noun forward from the one before it, which is the thread holding'));
+      continue;
+    }
+    turns += 1;
+    if (last && turns === 1) {
+      emit(out, row(id, 'Thread', 'REPORT', `turn-outward at sentence ${at + 1}`, here.slice(0, 48),
+        'the passage turns outward once, in the last position, which the thread rule licenses'));
+      continue;
+    }
+    emit(out, row(id, 'Thread', 'REPORT', `broken at sentence ${at + 1}`, here.slice(0, 48),
+      last
+        ? 'a SECOND turn outward: the one turn the thread rule licenses has already been spent'
+        : 'a MID-PASSAGE subject shift: the sentence hands nothing back and is not the last'));
+  }
+  return out;
+}
+
 // ── A13 · the PROVENANCE move ───────────────────────────────────────────────────────
 
 /** The three standings the holder census answers with; the two that do not license a citation. */
@@ -945,6 +1019,9 @@ export function walkComposed(unit, ground, options = {}) {
   mergeResults(composed, armA2(unit, options));
   mergeResults(composed, armA3(unit, options));
   mergeResults(composed, armA13(unit, options));
+  // ⛔ THREAD LAST, AND REPORT-ONLY. Its rows never reach `composedVerdictOf` (REPORT is not a
+  // channel that verdict reads), so landing it changes no pool's verdict at any tip before 8b.
+  mergeResults(composed, armThread(unit));
   return {
     entry: walkEntry(composedEntryOf(unit, { register: options.register }), ground),
     composed,

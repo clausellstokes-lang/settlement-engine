@@ -289,11 +289,25 @@ describe('the legibility rungs', () => {
     expect(desk.prosperityHeader.glance).toBe('Comfortable');
     expect(desk.prosperityHeader.sentence).toBeTruthy();
     expect(desk.prosperityHeader.detail).toContainEqual({ label: 'Approach', value: 'the crossroads' });
-    expect(desk.prosperityHeader.provenance).toEqual({
+    // ⛔ `pieces` RIDES THE PROVENANCE SINCE REWRITE car 8a-3 (TASTE car M-3's instrument half;
+    // ARCH §4.1 in terms: "`legibilityRung.sentence` stays one string; `provenance` grows
+    // `pieces` INSIDE the object `drawnAtMount` strips on a glance row"). The composed-prose
+    // manifest's ADDITIVE verdict was UNREACHABLE THROUGH THE SHIPPED INSTRUMENT before it,
+    // because the recorder synthesised a one-piece array on every cell whatever the composer
+    // did. The three IDENTITY fields are what this desk arm is about and they are asserted
+    // exactly; the piece row is asserted beside them as the ONE spine piece a bare unit has,
+    // so the arm still refuses a fourth key rather than loosening to a subset match.
+    expect(Object.keys(desk.prosperityHeader.provenance).sort())
+      .toEqual(['angle', 'blockId', 'pieces', 'poolKey']);
+    expect(desk.prosperityHeader.provenance).toMatchObject({
       blockId: 'DS-ECO-1',
       poolKey: 'COMBINATION C3: the middle rungs',
       angle: expect.any(String),
     });
+    expect(desk.prosperityHeader.provenance.pieces, 'a bare spine composes exactly one piece')
+      .toEqual([{
+        role: 'spine', key: 'COMBINATION C3: the middle rungs', vid: 1, index: 1, face: 0,
+      }]);
     expect(desk.granaryTile.glance).toBe('stocked');
     expect(desk.granaryTile.sentence).toContain('spring');
     expect(desk.foodTile.glance).toBe('Surplus +900');

@@ -35,11 +35,15 @@ import {
 import {
   INDEX_PAIRED_BLOCKS, MODIFIER_MOVES, POOL_ROLES, RELATIONS, S2_SIGNED,
   applyDeclaration, assertCensusCurrent, assertFaces, assertPoolDeclaration,
-  endpointReads, isDeclarationLine, parseConnectives, readDeclarations, seatMeta, seatOf,
-  turnKeyStanding, vidsOf,
+  endpointReads, isDeclarationLine, kinSpines, parseConnectives, readDeclarations, seatMeta,
+  seatOf, turnKeyStanding, vidsOf,
 } from '../../scripts/lib/dossier-annex-grammar.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { COVERT_SOURCES } from '../../src/domain/prose/wiringCensus.js';
+// ⭐ THE ESTATE'S ONE STOP LIST, driven here exactly as the projector drives it (REWRITE car
+// 8a-4). A test that spelled its own vocabulary would be checking `kinSpines` against a third
+// list, and the whole point of resolving kinship at projection is that there is one.
+import { contentWords } from '../../src/domain/prose/composedWalker.js';
 import { DOSSIER_CONNECTIVES } from '../../src/data/dossierConnectives.generated.js';
 import { DOSSIER_PROSE_NORMS } from '../../src/data/proseNorms.generated.js';
 import { DOSSIER_RELATIONS, DOSSIER_RELATION_ALIASES } from '../../src/data/dossierRelations.generated.js';
@@ -912,7 +916,12 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
       expect(typeof row.why, `${row.key} must say why`).toBe('string');
       expect(row.shippedOn, `${row.key} is reserved, so it ships on no pool`).toBe(0);
     }
-    const stray = META_ROWS.filter((r) => ['relation', 'form', 'move', 'explains', 'spines', 'covers', ...RESERVED]
+    // ⭐ `kin` JOINS THE MODIFIER-ONLY LIST AT REWRITE car 8a-4 and is NOT reserved, because
+    // the composer reads it: it is the kinship head of the salience comparator, named on the
+    // SHIFT REGISTER's `comparator-and-band-rule` row with its own zero-pin. It is emitted
+    // only where non-empty and only a modifier has an attach set, so a spine carrying one
+    // would mean the projector had resolved a thread for a pool that attaches to nothing.
+    const stray = META_ROWS.filter((r) => ['relation', 'form', 'move', 'explains', 'spines', 'covers', 'kin', ...RESERVED]
       .some((k) => r.meta[k] !== undefined))
       .map((r) => `${r.id} :: ${r.pool}`);
     expect(stray).toEqual([]);
@@ -1038,6 +1047,11 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
       'comparator-and-band-rule': [
         undefined,
         META_ROWS.filter((r) => r.meta.relation === 'tension' || r.meta.relation === 'contrast').length,
+        // ⭐ THE KINSHIP HEAD'S LEAF SIDE (REWRITE car 8a-4). `kin` is the comparator's first
+        // input and it must ship on NOTHING: only a modifier has an attach set, and every one
+        // of the 708 pools is a spine. The day it moves, a modifier pool has been born and the
+        // comparator has an input it did not have before — which is exactly a declared row.
+        META_ROWS.filter((r) => Array.isArray(r.meta.kin) && r.meta.kin.length > 0).length,
       ],
       'fact-and-position-budget': [{ ...COMPOSITION_BOUNDS }],
       'registry-id': [META_ROWS.filter((r) => r.meta.role === 'turn').length],
@@ -1854,5 +1868,74 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);
     expect(readPaths.length, 'and the read roster is the census\'s own').toBeGreaterThanOrEqual(157);
+  });
+});
+
+describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITTING §T.4, agenda C″)', () => {
+  // THE ESTATE'S OWN STOP LIST, not a second one: the same function the composed walker and
+  // `passageShapes.js` read, which is the whole reason the resolution happens at PROJECTION
+  // (ARCH §4.1 refuses a `src/domain/prose/` import in the composer).
+  const kin = (pools, attach, variants) => kinSpines({
+    pools, attach, variants, contentWordsOf: contentWords,
+  });
+  const v = (...faces) => ({ text: faces[0], wordings: faces.slice(1) });
+
+  it('a spine every face threads with is KIN, and the answer names it', () => {
+    const pools = { 'wall: kept': [v('The wall is kept out of the purse.')] };
+    expect(kin(pools, ['wall: kept'], [v('The purse was emptied by the muster.')]))
+      .toEqual(['wall: kept']);
+  });
+
+  it('⛔ ONE FACE THAT SHARES NOTHING BREAKS THE KINSHIP — the answer cannot depend on a draw', () => {
+    // The load-bearing plant. `kin` is read by the comparator BEFORE the face draw, so a
+    // kinship that held on some faces and not others would make the ORDER of composition a
+    // function of which face the seeded face-draw happened to take: two towns on the same
+    // seed would seat different modifiers for a reason no instrument prints. Face 2 of the
+    // modifier shares nothing, and that is enough.
+    const pools = { 'wall: kept': [v('The wall is kept out of the purse.')] };
+    const threaded = [v('The purse was emptied by the muster.')];
+    const partly = [v('The purse was emptied by the muster.', 'Coin went elsewhere entirely.')];
+    expect(kin(pools, ['wall: kept'], threaded), 'the control threads').toEqual(['wall: kept']);
+    expect(kin(pools, ['wall: kept'], partly), 'and one silent face withdraws it').toEqual([]);
+  });
+
+  it('⛔ A SHARED STOP WORD IS NOT A THREAD — `town` and `settlement` are the dossier\'s subject', () => {
+    const pools = { 'wall: kept': [v('The town keeps its wall.')] };
+    expect(kin(pools, ['wall: kept'], [v('The town has a market.')]),
+      'two sentences about the town share nothing a reader would call a thread').toEqual([]);
+    // THE PAIRED POSITIVE, over the same pair: add one real noun and the thread appears.
+    expect(kin(pools, ['wall: kept'], [v('The town has a market beside the wall.')]))
+      .toEqual(['wall: kept']);
+  });
+
+  it('⛔ AN EMPTY SIDE IS NEVER VACUOUSLY KIN, on either side of the pair', () => {
+    // `every` over an empty list is TRUE, so both emptiness cases have to be answered
+    // outright or a pool with no variants would thread with everything.
+    expect(kin({ 'wall: kept': [] }, ['wall: kept'], [v('The purse is thin.')]),
+      'a spine pool with no variant threads with nothing').toEqual([]);
+    expect(kin({ 'wall: kept': [v('The purse is thin.')] }, ['wall: kept'], []),
+      'and a modifier with no variant threads with nothing').toEqual([]);
+    expect(kin({}, ['no such spine'], [v('The purse is thin.')]),
+      'and an attach naming a pool the block does not carry is not kin').toEqual([]);
+  });
+
+  it('the answer is the THREADING SUBSET of `attach`, sorted', () => {
+    const pools = {
+      'wall: kept': [v('The wall is kept out of the purse.')],
+      'harvest: short': [v('The harvest came in light.')],
+      'muster: thin': [v('The muster is thin at the purse.')],
+    };
+    expect(kin(pools, ['muster: thin', 'harvest: short', 'wall: kept'],
+      [v('The purse was emptied twice over.')]))
+      .toEqual(['muster: thin', 'wall: kept']);
+  });
+
+  it('⛔ AND IT SHIPS ON NOTHING, which is why this car moves no generated byte', () => {
+    // Only a MODIFIER has an attach set and every one of the 708 shipped pools is a spine, so
+    // the projector's `kin.length ? { kin } : {}` never fires. Asserted over the leaves rather
+    // than reasoned, and pinned a second time on the SHIFT REGISTER's comparator row.
+    expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
+      .toEqual([]);
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(708);
   });
 });

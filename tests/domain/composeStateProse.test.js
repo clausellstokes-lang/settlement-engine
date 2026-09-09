@@ -367,6 +367,76 @@ describe('the composer — salience, and the comparator law (ARCH §4.3)', () =>
     return seat ? seat.key : null;
   }
 
+  it('⭐⭐ KINSHIP OUTRANKS THE BAND — a subject shift is forced last, whatever it scores', () => {
+    // SITTING §T.4 adopting agenda C″: "the modifier sharing the spine's subject noun sits
+    // nearest the spine, and a subject shift is forced last REGARDLESS of band". `kin` is the
+    // projector's frozen answer to that question (`kinSpines`), and the comparator reads it
+    // ahead of the band. THE PLANT IS THE HARD CASE ON PURPOSE: the two pools that turn
+    // outward carry BOTH of the other signals and would win the band outright.
+    const threaded = rankingCorpus({
+      alpha: { kin: [], relation: 'contrast' },
+      beta: { kin: [], relation: 'contrast' },
+      gamma: { kin: [SPINE] },
+    });
+    const candidates = [{ key: 'alpha', change: 1 }, { key: 'beta', change: 1 }, { key: 'gamma' }];
+    /** @type {Set<string|null>} */
+    const seated = new Set();
+    for (let i = 0; i < 40; i += 1) seated.add(seatedKey(threaded, candidates, `kin-${i}`));
+    expect([...seated], 'the pool that threads seats, though the other two outscore it 2-0')
+      .toEqual(['gamma']);
+    // ⛔ THE CONTROL, AND IT IS THE ONE THAT MATTERS: the SAME corpus with the kinship lists
+    // removed hands the seat back to the band, so the arm above is kinship biting and not the
+    // fixture's key order. Without it a comparator that ignored `kin` entirely would pass.
+    const blind = rankingCorpus({
+      alpha: { relation: 'contrast' }, beta: { relation: 'contrast' }, gamma: {},
+    });
+    /** @type {Set<string|null>} */
+    const byBand = new Set();
+    for (let i = 0; i < 40; i += 1) byBand.add(seatedKey(blind, candidates, `kin-${i}`));
+    expect([...byBand].sort(), 'with no kinship declared the band decides, and gamma never seats')
+      .toEqual(['alpha', 'beta']);
+  });
+
+  it('⛔ AN ABSENT `kin` LIST IS KIN — the corpus that never carried the signal orders as before', () => {
+    // FAIL-OPEN, and it is why this car moves no cell of the shipped manifest: every one of
+    // the 708 pools is a spine with no `kin` key, so `kinOf` answers 1 for all of them and the
+    // comparator falls straight through to the band. An implementation that read a missing
+    // list as "not kin" would read the WHOLE estate as a subject shift.
+    const plain = rankingCorpus();
+    const candidates = [{ key: 'alpha' }, { key: 'beta' }, { key: 'gamma' }];
+    /** @type {Set<string|null>} */
+    const level = new Set();
+    for (let i = 0; i < 40; i += 1) level.add(seatedKey(plain, candidates, `absent-${i}`));
+    expect([...level].sort(), 'no pool declares `kin`, so the seeded permutation still reaches all three')
+      .toEqual(['alpha', 'beta', 'gamma']);
+    // AND AN EMPTY LIST IS NOT AN ABSENT ONE: `kin: []` says the projector ASKED and found no
+    // thread, which is the opposite answer and must not read the same.
+    const declaredNone = rankingCorpus({
+      alpha: { kin: [] }, beta: { kin: [] }, gamma: { kin: [SPINE] },
+    });
+    /** @type {Set<string|null>} */
+    const withEmpty = new Set();
+    for (let i = 0; i < 40; i += 1) withEmpty.add(seatedKey(declaredNone, candidates, `absent-${i}`));
+    expect([...withEmpty], 'an empty list is a measured NO and loses to a measured YES').toEqual(['gamma']);
+  });
+
+  it('⛔ `kin` IS PER SPINE — a thread with SOME OTHER spine buys nothing here', () => {
+    // The list names the attach spines this pool threads with, so a pool that threads with a
+    // spine the reader is not reading is a subject shift at THIS one. A membership test that
+    // asked "is the list non-empty" instead of "does it contain this spine" would pass every
+    // other arm in this file and fail exactly here.
+    const elsewhere = rankingCorpus({
+      alpha: { kin: ['spine: some other'] },
+      beta: { kin: ['spine: some other'] },
+      gamma: { kin: [SPINE] },
+    });
+    const candidates = [{ key: 'alpha' }, { key: 'beta' }, { key: 'gamma' }];
+    /** @type {Set<string|null>} */
+    const seated = new Set();
+    for (let i = 0; i < 40; i += 1) seated.add(seatedKey(elsewhere, candidates, `other-${i}`));
+    expect([...seated], 'only a thread with the spine being read counts').toEqual(['gamma']);
+  });
+
   it('the BAND wins before the seed does — three signals, each an integer', () => {
     // DEPARTURE off the norm leaf, TENSION off the pool's own relation, CHANGE off the
     // desk's typed flag. A candidate carrying any of them outranks one carrying none,

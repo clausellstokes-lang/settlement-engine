@@ -32,7 +32,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
-  armA0b, armA1, armA11, armA13, armA3, armA5, armA6, armA9, armC7,
+  armA0b, armA1, armA11, armA13, armA3, armA5, armA6, armA9, armC7, armThread,
   claimTokensOf, claimsField, composedEntryOf, composedOrderOf, composedVerdictOf,
   COMPOSED_ARMS, provenanceCount, reWalkBlock, sampleOf, siblingDistance, walkComposed,
 } from '../../src/domain/prose/composedWalker.js';
@@ -183,7 +183,7 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
-    expect([...COMPOSED_ARMS].sort()).toEqual(['A0b', 'A1', 'A11', 'A13', 'A2', 'A3', 'A5', 'A6', 'A9', 'C7']);
+    expect([...COMPOSED_ARMS].sort()).toEqual(['A0b', 'A1', 'A11', 'A13', 'A2', 'A3', 'A5', 'A6', 'A9', 'C7', 'Thread']);
   });
 
   it('THE SHIPPED STATE the not-executable arms rest on, asserted rather than assumed', () => {
@@ -785,6 +785,106 @@ describe('A11 — one fact backs a modifier at one mount per page-set, and never
     const out = armA11(rows);
     expect(out.fails).toEqual([]);
     expect(out.notExecutable.map((f) => f.subject)).toEqual(['(modifier rows)']);
+  });
+});
+
+describe('⭐⭐ Thread — adjacent sentences of a composed unit must connect (SITTING §T.4, C″)', () => {
+  const SPINE = 'The wall is kept up out of the town\'s own purse.';
+  /** @param {string[]} sentences @returns {any} a unit whose TEXT is the reader's own */
+  const unitOf = (...sentences) => ({
+    id: 'DS-DEF-11 :: WALLED-STRAINED', blockId: 'DS-DEF-11', poolKey: 'WALLED-STRAINED',
+    text: sentences.join(' '), pieces: [],
+  });
+  /** @param {any} out @returns {string[]} */
+  const subjects = (out) => out.reports.map((f) => f.subject);
+
+  it('CONTROL 1 — a CARRIED noun passes, and the carried word is named', () => {
+    const out = armThread(unitOf(SPINE, 'The purse is thin because the muster was paid twice.'));
+    expect(out.fails, 'the arm is REPORT-only until 8b\'s first batch').toEqual([]);
+    expect(subjects(out)).toEqual(['carried at sentence 2']);
+    expect(out.reports[0].value, 'and it prints WHAT was carried, not only that something was')
+      .toContain('purse');
+  });
+
+  it('CONTROL 2 — a LAST-POSITION turn outward passes: the one turn the rule licenses', () => {
+    const out = armThread(unitOf(SPINE, 'Beyond the gate the country is pressed.'));
+    expect(out.fails).toEqual([]);
+    expect(subjects(out)).toEqual(['turn-outward at sentence 2']);
+  });
+
+  it('⛔ PLANT 1 — a MID-PASSAGE shift that hands nothing back is BROKEN', () => {
+    // The refuters' own finding at the taste: a tail that hands nothing back. The third
+    // sentence carries the thread again, so the break is unambiguously the SECOND one's.
+    const out = armThread(unitOf(SPINE, 'Beyond the gate the country is pressed.',
+      'The country sends nothing back.'));
+    expect(subjects(out)).toEqual(['broken at sentence 2', 'carried at sentence 3']);
+    expect(out.reports[0].description, 'and the reason names the position, not only the noun')
+      .toContain('MID-PASSAGE');
+  });
+
+  it('⛔ PLANT 2 — a SECOND turn outward is BROKEN even in the last position', () => {
+    // "the one turn outward" is ONE. A unit that turns twice has stopped twice, and the
+    // last-position licence has already been spent.
+    //
+    // ⚠ A MEASURED PROPERTY OF THE RULE, recorded here because the plant is what shows it:
+    // the second-turn branch is NEVER REACHABLE ON ITS OWN. A turn is licensed only in the
+    // LAST position, so a first turn anywhere else is already a mid-passage break — which
+    // makes this plant necessarily carry BOTH failures, and makes "broken, broken" the
+    // honest expectation rather than "licensed, then broken". The two are told apart by the
+    // reason, which is why the reason is asserted and not only the count.
+    const out = armThread(unitOf(SPINE, 'Beyond the gate the country is pressed.',
+      'Harvest ships upriver by autumn.'));
+    expect(subjects(out)).toEqual(['broken at sentence 2', 'broken at sentence 3']);
+    expect(out.reports[0].description, 'the first is the mid-passage shift').toContain('MID-PASSAGE');
+    expect(out.reports[1].description, 'and the second has spent the one licence')
+      .toContain('SECOND turn outward');
+  });
+
+  it('CONTROL 3 — carry, then the turn LAST: the three-sentence shape the rule licenses', () => {
+    // The paired positive for PLANT 2, on a unit of the same length: the same three positions,
+    // one word carried at the first join, and the turn moved to the end.
+    const out = armThread(unitOf(SPINE, 'The purse was emptied by the muster.',
+      'Beyond the gate the country is pressed.'));
+    expect(subjects(out)).toEqual(['carried at sentence 2', 'turn-outward at sentence 3']);
+    expect(out.fails, 'and none of it gates, at this car').toEqual([]);
+  });
+
+  it('NOT-EXECUTABLE on a bare spine, which is every unit the estate composes today', () => {
+    const out = armThread(unitOf(SPINE));
+    expect(out.reports, 'a one-sentence unit reports no thread verdict at all').toEqual([]);
+    expect(out.notExecutable.map((f) => f.subject)).toEqual(['(adjacent pairs)']);
+    expect(out.notExecutable[0].value, 'and it says how many sentences it found').toBe('1');
+  });
+
+  it('⛔ THE SPLIT IS THE ESTATE\'S OWN, so a filled slot cannot manufacture a break', () => {
+    // `entryWalker.sentencesOf` neutralises `{slot}` markers before it splits, which is why a
+    // pool key or a filled abbreviation cannot be read as a sentence end. Driven rather than
+    // trusted: the same two sentences with a slot in the first still read as ONE pair.
+    const out = armThread(unitOf('The wall of {settlement} is kept up out of the purse.',
+      'The purse is thin.'));
+    expect(subjects(out)).toEqual(['carried at sentence 2']);
+  });
+
+  it('⛔⛔ A11 COUNTS FACTS AND Thread COUNTS NOUNS — the deliberate echo is not a violation', () => {
+    // The owner's note on C″, made executable: "the echo bound counts FACTS, not nouns; a
+    // deliberate noun echo for the thread is not an echo violation". The plant is the exact
+    // pair the thread rule ASKS for — two sentences sharing the noun `muster` — and A11 must
+    // read it as clean because the two rows carry DIFFERENT facts.
+    const threaded = unitOf(SPINE, 'The muster is short, and the purse is why.');
+    expect(subjects(armThread(threaded)), 'Thread rewards the shared noun')
+      .toEqual(['carried at sentence 2']);
+    const echo = armA11([
+      { fact: 'walls', key: 'wall: kept', role: 'spine', mount: 'defense.posture' },
+      { fact: 'muster', key: 'muster: short', role: 'modifier', mount: 'defense.posture' },
+    ]);
+    expect(echo.fails, 'and A11 says nothing, because the two rows are two FACTS').toEqual([]);
+    // THE PAIRED POSITIVE, so the line above is A11 keying on `fact` and not A11 asleep: the
+    // SAME two rows with one fact between them fail at once.
+    const same = armA11([
+      { fact: 'muster', key: 'wall: kept', role: 'spine', mount: 'defense.posture' },
+      { fact: 'muster', key: 'muster: short', role: 'modifier', mount: 'defense.posture' },
+    ]);
+    expect(same.fails.map((f) => f.subject)).toEqual(['the fact already spines']);
   });
 });
 

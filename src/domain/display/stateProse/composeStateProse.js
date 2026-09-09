@@ -123,6 +123,13 @@ import {
  *   from the census; absent where the census recovered no reading
  * @property {'fragment'|'sentence'} [form]
  * @property {ReadonlyArray<string>} [attach]
+ * @property {ReadonlyArray<string>} [kin] modifier only — the subset of `attach` this pool
+ *   THREADS with, resolved at projection (`kinSpines`, scripts/lib/dossier-annex-grammar.mjs)
+ *   and frozen. A spine in this list shares a content word with every face of every variant of
+ *   this pool, so a reader who has just read that spine meets a familiar noun. It ships on no
+ *   pool at this tip because only a modifier has an attach set; an ABSENT list reads in the
+ *   comparator as KIN (fail-open), so a corpus that never carried the signal orders exactly as
+ *   it did before this car.
  * @property {ReadonlyArray<string>} [spines] turn only
  * @property {ReadonlyArray<string>} [covers] turn only
  */
@@ -478,26 +485,57 @@ function bandOf(norms, blockId, row) {
 }
 
 /**
- * ⭐ THE COMPARATOR LAW (ARCH §4.3, P-F7), written once so it can be pointed at.
+ * ⭐ THE COMPARATOR LAW (ARCH §4.3, P-F7; the KINSHIP head added at REWRITE car 8a-4 under
+ * SITTING §T.4, adopting agenda C″), written once so it can be pointed at.
  *
- * Band descending; within a band the SEEDED PERMUTATION, ascending by the digest of key 5;
- * equal digests broken by ascending CODE-UNIT comparison of the candidate key. The input
- * array's order is NEVER consulted — the desk's call order is a fact about the desk's source
- * file, not about the town — and a suite arm shuffles the input to prove it.
+ * KINSHIP descending; then band descending; within a band the SEEDED PERMUTATION, ascending by
+ * the digest of key 5; equal digests broken by ascending CODE-UNIT comparison of the candidate
+ * key. The input array's order is NEVER consulted — the desk's call order is a fact about the
+ * desk's source file, not about the town — and a suite arm shuffles the input to prove it.
+ *
+ * ⛔⛔ WHY KINSHIP SITS ABOVE THE BAND AND NOT INSIDE IT, WHICH LOOKS LIKE THE OPPOSITE OF WHAT
+ * WAS ADOPTED. C″ asks for two things: "the modifier sharing the spine's subject noun sits
+ * nearest the spine" (a tiebreak INSIDE a band) and "a subject shift is forced last REGARDLESS
+ * of band". With one bit those are one rule, because a candidate that is not kin is exactly a
+ * candidate that shifts the subject: sorting kin first satisfies the second sentence outright
+ * and the first as its consequence. Two bits — "kin" and "shifts" — would have been a
+ * distinction with no signal behind it, and the register would have carried a mechanism nobody
+ * could measure.
+ *
+ * ⛔ AN ABSENT SIGNAL IS KIN. `kinOf` answers 1 where a pool declares no `kin` list, so a
+ * corpus that never carried the field orders exactly as it did before this car — which is why
+ * this change moves no cell of the shipped manifest, proven rather than asserted.
  *
  * ⛔ `a < b`, NEVER `localeCompare` AND NEVER `Intl`. A locale collation reads the host's
  * ICU tables, so two devices order the same two non-ASCII keys differently and the same seed
  * composes two different units. The ban is enforced from three sides: eslint over
  * `src/domain/**`, the estate's own source scan, and this module's fence test.
- * @param {{band: number, order: number, key: string}} a
- * @param {{band: number, order: number, key: string}} b
+ * @param {{kin?: 0|1, band: number, order: number, key: string}} a
+ * @param {{kin?: 0|1, band: number, order: number, key: string}} b
  * @returns {number}
  */
 function compareSalience(a, b) {
+  const aKin = a.kin === 0 ? 0 : 1;
+  const bKin = b.kin === 0 ? 0 : 1;
+  if (aKin !== bKin) return bKin - aKin;
   if (a.band !== b.band) return b.band - a.band;
   if (a.order !== b.order) return a.order - b.order;
   if (a.key === b.key) return 0;
   return a.key < b.key ? -1 : 1;
+}
+
+/**
+ * THE KINSHIP BIT for one candidate against one spine — an array lookup on a FROZEN list, and
+ * deliberately nothing more. The lexical work was done once at projection where the estate's
+ * one stop list lives; doing it here would need an import ARCH §4.1 refuses (measured at 4
+ * files and 150,231 B onto a 70,252 B closure) or a second vocabulary that drifts.
+ * @param {PoolMeta} meta
+ * @param {string} spineKey
+ * @returns {0|1}
+ */
+function kinOf(meta, spineKey) {
+  if (!meta || !Array.isArray(meta.kin)) return 1;
+  return meta.kin.includes(spineKey) ? 1 : 0;
 }
 
 /**
@@ -512,12 +550,14 @@ function compareSalience(a, b) {
  * @param {string} blockId
  * @param {string} spineKey
  * @param {string} seed
- * @returns {Array<{key: string, meta: PoolMeta, change: 0|1, band: number, order: number}>}
+ * @returns {Array<{key: string, meta: PoolMeta, change: 0|1, kin: 0|1, band: number,
+ *   order: number}>}
  */
 function rankCandidates(rows, norms, blockId, spineKey, seed) {
   return rows
     .map((row) => ({
       ...row,
+      kin: kinOf(row.meta, spineKey),
       band: bandOf(norms, blockId, row),
       order: seed ? hashKey(`${seed}::${blockId}::${spineKey}::salience::${row.key}`) : 0,
     }))
@@ -841,6 +881,11 @@ export function composeStateProseMount(corpus, blockId, rungs, options = {}) {
       : undefined;
     return {
       at,
+      // ⛔ THE RUNG'S OWN KINSHIP IS ITS TOP CANDIDATE'S (REWRITE car 8a-4). A rung whose best
+      // modifier threads with its spine outranks one whose best modifier turns outward, which
+      // is the position budget spending its two seats where the passage will read as one. A
+      // rung with no candidate at all is filtered out below and never compared.
+      kin: top ? top.kin : 1,
       band: top ? top.band : -1,
       order: top ? top.order : 0,
       key: top ? top.key : '',

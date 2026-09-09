@@ -39,9 +39,13 @@ import { isCovertPath } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 import {
   CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
-  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine,
+  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine, kinSpines,
   parseConnectives, readDeclarations, seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
+// ⭐ THE ESTATE'S ONE STOP LIST, read HERE and never in the composer (ARCH §4.1 refuses a
+// `src/domain/prose/` import there; `kinSpines`'s docblock carries the measurement). A script
+// is outside `src/`, so the island fence — which scans `src/` alone — is untouched.
+import { contentWords } from '../src/domain/prose/composedWalker.js';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -837,6 +841,17 @@ function projectBlocks(blocks, options = {}) {
           ...(p.declared.form ? { form: p.declared.form } : {}),
           ...(p.declared.move ? { move: p.declared.move } : {}),
           attach,
+          // ⭐⭐ `kin` — THE THREAD RULE'S TYPED HALF (REWRITE car 8a-4; SITTING §T.4 / C″),
+          // resolved beside the seat licence for the same reason: the `reads`, the relation
+          // rows and the aliases are all in hand HERE, and the composer may read neither a
+          // lexicon nor `src/domain/prose/`. Emitted only where non-empty, and only a MODIFIER
+          // has an attach set, so it ships on none of the 708 spines and moves no leaf byte.
+          ...(() => {
+            const kin = kinSpines({
+              pools: b.pools, attach, variants: p.variants, contentWordsOf: contentWords,
+            });
+            return kin.length ? { kin } : {};
+          })(),
           ...(p.declared.explains ? { explains: p.declared.explains } : {}),
           ...(p.declared.spines ? { spines: p.declared.spines } : {}),
           ...(p.declared.covers ? { covers: p.declared.covers } : {}),
