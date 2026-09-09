@@ -2299,3 +2299,16 @@ fresh recording mid-car at 8a-11-4**. Four independent recordings, one digest: n
    order of magnitude are the finding and both hold; the byte figures are a moment's measurement
    and the ledger should carry the ratio.
 
+
+---
+
+## CAR 8a-12 — THE NINE ANCHORS RE-SEEDED
+
+**PARTIAL — in flight.** Seat: Opus 5 — Fable-unvalidated. Dock `laneREWRITE`, from `b005886ef`.
+Chartered by ADDENDUM 4 (chair, 2026-09-09 09:2x) over the §919 whole-suite proof
+(`whole-919.log`: 32,919 passed · 14 failed; five expected reds, NINE new ones, all in
+`tests/ui/`). Every new red is a LIVENESS ANCHOR on a DRAWN SENTENCE that the SIGNED
+index-stable draw of 8a-1 now draws differently under the tests' own seeds. The act follows
+8a-1's own ("THREE PRE-EXISTING PINS ON DRAWN TEXT, RE-SEEDED NOT DELETED"): a new seed that
+still draws the anchored member. **No anchor is deleted, no assertion weakened, no `src/` byte
+moved.** Sections below are filled as each step's command exits.
