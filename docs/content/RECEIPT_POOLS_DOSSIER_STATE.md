@@ -2555,7 +2555,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 4. `[threshold]` The defense at {settlement} stands at its own limit, and the limit is where the cover ends.
    - `[face]` Cover at {settlement} runs to its edge, and no part of it runs past.
    - `[face]` Provision at {settlement} reaches the common trouble and stops there.
-   - `[face]` Everything {settlement} keeps in defense answers the ordinary case, and nothing answers past it.
+   - `[face]` All that {settlement} keeps in defense answers the ordinary case, and nothing answers past it.
 
 **readiness `WEAK`**
 1. `[ledger]` The defense of {settlement} is thin.

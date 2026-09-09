@@ -118,7 +118,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Cover at {settlement} runs to its edge, and no part of it runs past.",
             "Provision at {settlement} reaches the common trouble and stops there.",
-            "Everything {settlement} keeps in defense answers the ordinary case, and nothing answers past it."
+            "All that {settlement} keeps in defense answers the ordinary case, and nothing answers past it."
           ]
         }
       ],
