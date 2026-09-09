@@ -1555,8 +1555,8 @@ beside the correction, because a receipt whose errors are erased cannot be audit
 | # | cure | sha | status |
 |---|---|---|---|
 | 8a-11-1 | a-1 (§U c-4) the `>= 0` guard's green instrument | **`f81b95c28`** | **LANDED** |
-| 8a-11-2 | a-2 (§U c-1) the gate's packet target, namespaced and refusing | — | IN FLIGHT |
-| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | — | not started |
+| 8a-11-2 | a-2 (§U c-1) the gate's packet target, namespaced and refusing | **`2f68fdd95`** | **LANDED** |
+| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | — | IN FLIGHT |
 | 8a-11-4 | a-4 (§U c-5) one home for the connective lists | — | not started |
 | 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | — | not started |
 | 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | — | not started |
@@ -1618,4 +1618,72 @@ the arm compares the two draws SEED BY SEED. A count test would have passed unde
 | `tests/lint/sovereigntyLightingContract.walker.test.js` | **34 passed** — the kernel's test file is PARKED, so no title moved and no ritual is owed by this commit |
 | projector `--check` | exit 0 |
 | runners / porcelain | 0 / 0 |
+
+---
+
+### 8a-11-2 — CURE a-2 (§U c-1): THE GATE'S PACKET IS NAMESPACED BY DOCK AND REFUSES A FOREIGN RUN
+
+**LANDED `2f68fdd95`** over `f81b95c28`. Two files. Zero reader-facing bytes.
+⛔ **This is the cure that BLOCKS 8b**, which runs arms A and B concurrently by design.
+
+### WHAT LANDED
+
+`packetDirFor` · `packetTargetFor` · `packetRefusal`, all three exported so the walker drives
+them without writing a byte. `PACKETS` is now documented as what it always was — the writers'
+SHARED, READ-ONLY packet root, listed by `roundsOf` and written by nothing.
+
+| flag | what it names |
+|---|---|
+| (default) | `<scratch>/packets/<dock>/measure-<arm>.json` |
+| `$PACKETS` | the DIRECTORY |
+| `--out` | the whole PATH (8b passes it per arm as belt and braces, §U c-1) |
+
+⛔ **THE JUDGMENT CALL, RECORDED FOR VETO — the default is NOT `<dock>/.packets/`.** ADDENDUM 3
+offered that shape "or as the header decides". An untracked directory inside the worktree reads
+as `?? .packets/` in `git status --porcelain`, and porcelain 0 between commits is the law every
+gate run in this program is held to — so that shape would have broken, on every dock, the check
+the cure exists to protect. The namespace sits BESIDE the docks and the dock's own directory
+name is the namespace. `.gitignore` is untouched.
+
+### THE REFUSAL, EXECUTED END TO END IN THIS DOCK
+
+| run | result |
+|---|---|
+| `--arm cure8a11 --round 2 --pools "…WALLED-STRAINED,…WALLED-QUIET"` | **wrote** `…/packets/laneREWRITE/measure-cure8a11.json`, **17,248 B**, exit 0 |
+| `--arm cure8a11 --round 0 --pools "…WALLED-STRAINED"` | ⛔ **REFUSED, exit 1** — *"the packet at this path is a LATER measurement — it carries arm "cure8a11" round 2 written at 2026-09-09T12:13:40, and this run is arm "cure8a11" round 0. Pass --out to name your own path."* · the file was still **17,248 B** afterwards |
+| `--arm other --round 9 --out <that same path>` | ⛔ **REFUSED** — *"belongs to another run — it carries arm "cure8a11" round 2 …"* |
+| `--arm cure8a11 --round 3` | **wrote**, exit 0 — the workflow's own next round is never refused |
+| `git status --porcelain` after all four | the dock is untouched by the write |
+
+⭐ The first of those is EXACTLY the incident: a bare `--round 0` probe against a live round-4
+draft packet, which is how laneTASTE's measurement was destroyed. It now exits 1.
+
+### THE WALKER'S TWO NEW ARMS
+
+1. **namespaced by dock** — two arms in one tree are two paths sharing one directory; two DOCKS
+   are two directories (`/tmp/scratch/laneONE` → `/tmp/scratch/packets/laneONE`); the target is
+   never `PACKETS` and never inside the dock; `--out` and `$PACKETS` each override their half.
+   `process.env.PACKETS` is deleted and restored inside the arm so the environment cannot
+   decide the answer.
+2. **a foreign packet is refused** — both refusal shapes convicted by their message, plus four
+   CONTROLS so the refusal is not merely total: a re-run of the same round, the next round, no
+   file at all, and a file with no header all return `null`.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/lint/proseWaveGate.walker.test.js` | **43 passed** (41 before) |
+| `tests/data/dossierStateProseProjection.contract.test.js` | **77 passed** |
+| `tests/lint/mutationCoverageManifest.test.js` | green |
+| eslint (2 files) | exit 0 |
+| `check-full-typecheck` / `check-domain-strict` | **173/173** · **1,120/1,120** |
+| runners / porcelain | 0 / 0 |
+
+⛔ **DECLARED RED, carried to this car's ritual commit** (the same shape car 8a used): the
+lighting census reads **titles 24,158 → 24,160** for the two new `it()` blocks, and the refreeze
+ritual REFUSES A DIRTY TREE. ⚠ Measured on the way: `tests/domain/` is PARKED and `tests/lint/`
+is CREDITED — 8a-11-1's new arm moved no title and these two moved +2.
+⛔ **INHERITED RED, unchanged**: `tests/copy/voiceMechanics.test.js`, `labelBands.js` em 5 and
+`generalStateProse.js` em 3, identical at the §917 tip.
 
