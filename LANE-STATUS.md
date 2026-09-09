@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 14:34:17 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 14:40:51 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -146,7 +146,7 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
 - wf_b6204819-335: 72 journal lines, 36 agents
 - wf_e49b0611-dbb: 13 journal lines, 7 agents
 - wf_e70e2f5c-7fb: 21 journal lines, 12 agents
-- wf_f9cf9a1d-188: 48 journal lines, 26 agents
+- wf_f9cf9a1d-188: 49 journal lines, 26 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.51 3.73 4.44
+load: 1.61 2.35 3.49

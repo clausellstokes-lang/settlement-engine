@@ -3,6 +3,41 @@
  "dock": "laneRW-DEF6",
  "pools": [
   {
+   "pool": "Logistics & Supply: Granary + port",
+   "dir": "ds-def-6--logistics-supply-granary-port",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Logistics & Supply: Granary in isolation",
+   "dir": "ds-def-6--logistics-supply-granary-in-isolation",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Logistics & Supply: Granary with road supply",
+   "dir": "ds-def-6--logistics-supply-granary-with-road-supply",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Logistics & Supply: No reserves, port open",
+   "dir": "ds-def-6--logistics-supply-no-reserves-port-open",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Logistics & Supply: No reserves, landlocked",
+   "dir": "ds-def-6--logistics-supply-no-reserves-landlocked",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
    "pool": "Naval Defense: Naval force",
    "dir": "ds-def-6--naval-defense-naval-force",
    "role": "spine",
@@ -37,12 +72,7 @@
   "Legal Infrastructure: None (WIRING-UNRESOLVED)",
   "Medical Readiness: Hospital present (WIRING-UNRESOLVED)",
   "Medical Readiness: Clergy care (WIRING-UNRESOLVED)",
-  "Medical Readiness: None (WIRING-UNRESOLVED)",
-  "Logistics & Supply: Granary + port (WIRING-UNRESOLVED)",
-  "Logistics & Supply: Granary in isolation (WIRING-UNRESOLVED)",
-  "Logistics & Supply: Granary with road supply (WIRING-UNRESOLVED)",
-  "Logistics & Supply: No reserves, port open (WIRING-UNRESOLVED)",
-  "Logistics & Supply: No reserves, landlocked (WIRING-UNRESOLVED)"
+  "Medical Readiness: None (WIRING-UNRESOLVED)"
  ],
  "maxRounds": 6
 }

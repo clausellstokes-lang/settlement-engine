@@ -29,14 +29,43 @@
    "role": "spine",
    "status": "RESOLVED",
    "variants": 3
+  },
+  {
+   "pool": "capture none",
+   "dir": "ds-def-4--capture-none",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "capture adversarial",
+   "dir": "ds-def-4--capture-adversarial",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "capture equilibrium",
+   "dir": "ds-def-4--capture-equilibrium",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "capture corrupted",
+   "dir": "ds-def-4--capture-corrupted",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "capture capture",
+   "dir": "ds-def-4--capture-capture",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
   }
  ],
- "wiringDebt": [
-  "capture none (WIRING-UNRESOLVED)",
-  "capture adversarial (WIRING-UNRESOLVED)",
-  "capture equilibrium (WIRING-UNRESOLVED)",
-  "capture corrupted (WIRING-UNRESOLVED)",
-  "capture capture (WIRING-UNRESOLVED)"
- ],
+ "wiringDebt": [],
  "maxRounds": 6
 }

@@ -9,12 +9,12 @@
 # amendment) are the CHAIR's register car after the last block, never inside a block car.
 set -e
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
-BASE=f73bdbf16; D=$SC/laneRW-DEF; ANNEX=docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
-[ -d "$D" ] || sh $SC/mkdock.sh laneRW-DEF $BASE
+D=$SC/laneRW-DEFW; ANNEX=docs/content/RECEIPT_POOLS_DOSSIER_STATE.md   # THE CONSIST DOCK IS THE WIRING CAR'S LINEAGE (8b-W, 8b-W-5 land first)
+[ -d "$D" ] || { echo "REFUSED: the consist dock laneRW-DEFW must exist (the wiring car's dock)"; exit 8; }
 cd "$D"; [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: consist dock dirty"; exit 8; }
 for B in "$@"; do
   BD=$SC/$B; BLOCK=$(python3 -c "import re,sys;print(re.sub(r'^laneRW-','DS-',sys.argv[1]).replace('DEF','DEF-'))" "$B")
-  TIP=$(git -C "$BD" rev-parse --short HEAD); N=$(git -C "$BD" rev-list --count $BASE..HEAD)
+  BASE=$(git -C "$BD" merge-base HEAD "$(git -C "$D" rev-parse HEAD)"); TIP=$(git -C "$BD" rev-parse --short HEAD); N=$(git -C "$BD" rev-list --count $BASE..HEAD)
   echo "=== $B ($BLOCK) tip $TIP · $N commits over $BASE"
   [ -z "$(git -C "$BD" status --porcelain -uall)" ] || { echo "REFUSED: $B dirty"; exit 8; }
   git -C "$BD" diff $BASE..HEAD -- "$ANNEX" > $SC/rewrite/consist-$B.annex.diff
@@ -38,4 +38,4 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 MSG
   echo "  -> $(git rev-parse --short HEAD) · porcelain $(git status --porcelain -uall | wc -l | tr -d ' ')"
 done
-echo "CONSIST at $(git rev-parse --short HEAD): $(git rev-list --count $BASE..HEAD) cars over $BASE"
+echo "CONSIST at $(git rev-parse --short HEAD): $(git rev-list --count f73bdbf16..HEAD) cars over f73bdbf16"
