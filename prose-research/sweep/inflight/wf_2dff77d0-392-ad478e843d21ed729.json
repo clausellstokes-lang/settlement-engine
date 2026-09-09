@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 55,
+ "firstTs": "2026-09-09T06:42:51.251Z",
+ "lastTs": "2026-09-09T06:43:45.462Z",
+ "tools": {
+  "Bash": 9,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll begin by locating the voice documents and the draft.",
+ "run": "wf_2dff77d0-392",
+ "agent": "ad478e843d21ed729",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/5540cfd2-eea9-4469-ba34-6514b54a83ff/subagents/workflows/wf_2dff77d0-392/agent-ad478e843d21ed729.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 02:37:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 02:43:49 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -6,11 +6,16 @@
 | ? | other |  | result | 0 | — | — | 06:02:34 |
 | ? | other |  | result | 0 | refine-A.md | — | 06:26:31 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:55:10 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:48 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:38 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:48 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:45 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:12:31 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:34:33 |
 | ? | other |  | result | 0 | refine-A.md | — | 06:17:52 |
 | ? | other |  | result | 0 | — | — | 03:15:40 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:20:15 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:41 |
 | ? | other |  | result | 0 | — | — | 06:19:51 |
 | ? | other |  | result | 0 | — | — | 04:07:50 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:59:17 |
@@ -24,7 +29,7 @@
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:19 |
 | ? | other |  | result | 0 | — | — | 05:01:17 |
 | ? | other |  | in-flight | 0 | — | — | 05:19:37 |
-| ? | other |  | in-flight | 0 | — | — | 06:37:18 |
+| ? | other |  | result | 0 | refine-A.md | — | 06:42:49 |
 | ? | other |  | result | 0 | — | — | 03:10:18 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:24 |
 | ? | other |  | result | 0 | — | — | 04:41:11 |
@@ -39,6 +44,7 @@
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:18:03 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:58:18 |
 | ? | other |  | result | 0 | — | — | 04:28:08 |
+| ? | other |  | in-flight | 0 | — | — | 06:43:49 |
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:01:23 |
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:03:40 |
 | ? | other |  | result | 0 | — | — | 03:14:43 |
