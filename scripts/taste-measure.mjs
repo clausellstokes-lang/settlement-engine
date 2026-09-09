@@ -41,7 +41,7 @@ import url from 'node:url';
 
 import { estateGround, withEntryContext } from '../src/domain/prose/entryGround.js';
 import {
-  armA5, claimsField, composedVerdictOf, provenanceCount, sampleOf, walkComposed,
+  armA0b, armA5, claimsField, composedVerdictOf, provenanceCount, sampleOf, walkComposed,
 } from '../src/domain/prose/composedWalker.js';
 import { AUTHORING_MARKER } from './lib/dossier-annex-grammar.mjs';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../src/domain/prose/proseFingerprint.js';
@@ -610,6 +610,13 @@ export function censusSynonymTable(census) {
  * brings. So this function asks the question the sitting needs answered and changes no arm: for
  * each inherited Q finding, do the clause's own words map to a field the SPINE declares it reads,
  * under the census's synonym table? The arm is car 5's and the cure is the REWRITE's or a 5d.
+ * ⛔ AND IT DECLARES ITSELF NOT-EXECUTABLE RATHER THAN ANSWERING NO. Where the census recovered
+ * no reading for the spine, or recovered its own SYNTHETIC TABLE LABEL instead of a field path
+ * (DS-DEF-2's four key functions were tabled at SEAM car 3h, so its spine's only reading is
+ * `disasterRowSituation(...) (via DISASTER_ROW_POOL ...)`), no text can claim it and "maps to no
+ * field" would read as a negative answer to a question that was never askable. THE RULE IS NOT
+ * RE-IMPLEMENTED HERE: `armA0b` owns both limbs and this function asks IT, so the one place the
+ * synthetic-label rule lives stays the one place it lives.
  * @param {ReadonlyArray<{klass: string, clause: string, spineKey: string, count: number}>} inherited
  * @param {(key: string) => ReadonlyArray<string>} readsOf
  * @param {{table: Record<string, ReadonlyArray<string>>, why: string}} vocabulary
@@ -620,6 +627,20 @@ export function qVocabularyReport(inherited, readsOf, vocabulary) {
   for (const row of inherited || []) {
     if (row.klass !== 'Q') continue;
     const reads = readsOf(row.spineKey) || [];
+    const asked = armA0b({ id: row.spineKey, text: row.clause, reads });
+    if (asked.notExecutable.length) {
+      rows.push({
+        clause: row.clause,
+        spineKey: row.spineKey,
+        count: row.count,
+        reads: [...reads],
+        mapped: [],
+        executable: false,
+        verdict: `NOT-EXECUTABLE: ${asked.notExecutable[0].description}`,
+        synonymTable: vocabulary.why || 'a word-level synonym table ships and was applied',
+      });
+      continue;
+    }
     /** @type {string[]} */
     const mapped = [];
     for (const field of reads) {
@@ -632,6 +653,7 @@ export function qVocabularyReport(inherited, readsOf, vocabulary) {
       count: row.count,
       reads: [...reads],
       mapped,
+      executable: true,
       verdict: mapped.length
         ? 'the clause DOES name a field the spine declares it reads, so the arm and the census disagree'
         : 'the clause names no field the spine declares it reads, under the vocabulary the census supplies',
@@ -1040,7 +1062,9 @@ export function tableLines(out) {
     for (const row of pool.qVocabulary) {
       lines.push(`     arm Q vocabulary REPORT (no arm changed): "${quoted(row.clause)}" against spine`
         + ` \`${row.spineKey}\` reads [${row.reads.join(', ') || 'none recovered'}]`);
-      lines.push(`       ${row.mapped.length ? `maps to ${row.mapped.join(' · ')}` : 'maps to no field'} — ${row.verdict}`);
+      lines.push(row.executable
+        ? `       ${row.mapped.length ? `maps to ${row.mapped.join(' · ')}` : 'maps to no field'} — ${row.verdict}`
+        : `       ${row.verdict}`);
       lines.push(`       ${row.synonymTable}`);
     }
     const lens = pool.lengths.rows.flatMap((r) => r.faces);

@@ -487,5 +487,44 @@ describe('⭐ ARM Q\'S VOCABULARY IS REPORTED AND NO ARM IS CHANGED', () => {
     // which is the case that says the arm and the census disagree rather than the writer erring.
     expect(report[1].mapped).toEqual(['settlement.config.monsterThreat (as "threat")']);
     expect(report[1].verdict).toContain('DOES name a field');
+    expect(report.every((r) => r.executable)).toBe(true);
   });
+
+  it('⛔ DECLARES ITSELF NOT-EXECUTABLE where no text could claim the census reading', () => {
+    const table = { table: {}, why: 'none ships' };
+    const q = (spineKey) => [{
+      klass: 'Q', clause: 'and wages do not.', spineKey, count: 1,
+    }];
+    // THE SYNTHETIC TABLE LABEL — DS-DEF-2's own shipped reading since SEAM car 3h. A report
+    // that answered "maps to no field" here would be a negative answer to a question that was
+    // never askable, which is exactly the shape the §908 law refuses.
+    const synthetic = qVocabularyReport(q('Disasters & Famine: granary AND hospital'), () => ['disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)'], table);
+    expect(synthetic[0].executable).toBe(false);
+    expect(synthetic[0].verdict).toContain('NOT-EXECUTABLE');
+    expect(synthetic[0].verdict).toContain('synthetic table label');
+    expect(synthetic[0].mapped).toEqual([]);
+    // AND A SPINE THE CENSUS RECOVERED NO READING FOR AT ALL.
+    const none = qVocabularyReport(q('WALLED-STRAINED'), () => [], table);
+    expect(none[0].executable).toBe(false);
+    expect(none[0].verdict).toContain('NOT-EXECUTABLE');
+    // ⛔ THE CONTROL: a real field path IS executable, so the limb above is not swallowing
+    // every row it is handed.
+    const real = qVocabularyReport(q('WALLED-STRAINED'), () => ['settlement.defenseProfile.economicGates.military'], table);
+    expect(real[0].executable).toBe(true);
+  });
+
+  it('the report on the SHIPPED corpus says NOT-EXECUTABLE on exactly the tabled block', async () => {
+    // ⛔ THE SHIPPED SHAPE, NOT A FIXTURE: DS-DEF-2's spine reads a table label and DS-DEF-11's
+    // read field paths, so a report that answered the same way on both would be blind.
+    const out = await measure({
+      arm: 'walker-arm-q', round: 0, base: null, variety: 0, exemplars: EXEMPLAR_DIR,
+    });
+    const rows = out.pools.flatMap((p) => (p.qVocabulary || []).map((r) => ({ block: p.block, ...r })));
+    if (rows.length === 0) return; // every pool unwritten: nothing inherited to report on
+    const def2 = rows.filter((r) => r.block === 'DS-DEF-2');
+    const rest = rows.filter((r) => r.block !== 'DS-DEF-2');
+    expect(def2.length, 'DS-DEF-2 carries inherited Q findings to report on').toBeGreaterThan(0);
+    expect(def2.every((r) => r.executable === false)).toBe(true);
+    expect(rest.every((r) => r.executable === true)).toBe(true);
+  }, 120_000);
 });
