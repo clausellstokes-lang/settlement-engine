@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 13:13:44 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 13:20:16 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -138,11 +138,11 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 67af10e4-7386-48d4-8cd3-b2985d4885c2 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_183dda09-702: 77 journal lines, 39 agents
+- wf_183dda09-702: 188 journal lines, 94 agents
 - wf_3b79f7ff-928: 8 journal lines, 4 agents
 - wf_73595d81-51d: 18 journal lines, 9 agents
-- wf_7e1abdf4-c9a: 35 journal lines, 18 agents
-- wf_b6204819-335: 58 journal lines, 32 agents
+- wf_7e1abdf4-c9a: 48 journal lines, 24 agents
+- wf_b6204819-335: 67 journal lines, 34 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.93 2.12 2.24
+load: 2.06 2.25 2.27
