@@ -1557,8 +1557,8 @@ beside the correction, because a receipt whose errors are erased cannot be audit
 | 8a-11-1 | a-1 (§U c-4) the `>= 0` guard's green instrument | **`f81b95c28`** | **LANDED** |
 | 8a-11-2 | a-2 (§U c-1) the gate's packet target, namespaced and refusing | **`2f68fdd95`** | **LANDED** |
 | 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | **`1f7c8565d`** | **LANDED** |
-| 8a-11-4 | a-4 (§U c-5) one home for the connective lists | — | IN FLIGHT |
-| 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | — | not started |
+| 8a-11-4 | a-4 (§U c-5) one home for the connective lists | **`872497837`** | **LANDED** |
+| 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | — | IN FLIGHT |
 | 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | — | not started |
 | 8a-11-7 | a-7 the rename's provenance record | — | not started |
 | 8a-11-8 | a-9 (§U c-6) the RE-INDEXED veto surface gains machine standing | — | not started |
@@ -1742,6 +1742,121 @@ roster car 8a-5 already caught drifting once.
 | `check-full-typecheck` / `check-domain-strict` | **173/173** · **1,120/1,120** |
 | `wiring-census --dry` | CURRENT · delta 0 · ROWS 0 |
 | `check-observed-shape-readers` | **1,972**, exactly the frozen inventory |
+| projector `--check` | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+---
+
+### 8a-11-4 — CURE a-4 (§U c-5): ONE HOME FOR THE CONNECTIVE LISTS
+
+**LANDED `872497837`** over `1f7c8565d`. Six files, **+208 / −59**. Zero reader-facing bytes.
+
+`CONNECTIVES` in `composeStateProse.js` is now `DOSSIER_CONNECTIVES`, BY IDENTITY. The import is
+the FIRST of the three names ARCH §4.1 licensed and `CAR_4_LEAF_SPECIFIERS` has held since car
+3a, so the fence widened by a licensed name and by nothing else.
+
+### THE CLOSURE COST, MEASURED BEFORE IT LANDED
+
+    node --input-type=module -e "closureCost(composeStateProse.js, dossierConnectives.generated.js)"
+      hostFiles 2 · hostBytes 74,847        (without the edge)
+      withFiles 3 · withBytes 76,893        (with it)
+      the edge: +1 file · +2,046 B          the leaf imports nothing itself
+
+Against the **+4 files / +150,231 B onto a 70,252 B closure** a `src/domain/prose/` lexicon was
+priced at and REFUSED at car 8a-4. (The host figure moved 70,252 → 74,847 because the kernel and
+the composer have both grown across this train; the comparison is the edge, not the host.)
+
+### ⛔ ZERO READER-FACING BYTES, EXECUTED ON EVERY CELL
+
+    node scripts/prose-manifest-cells.mjs --out cells-5c7eadb18.json   (in $SC/skepRW3 @ 5c7eadb18,
+                                                                       porcelain 0 before and after)
+    node scripts/prose-manifest-cells.mjs --out cells-8a11-4.json      (this tree)
+    node scripts/prose-manifest-diff.mjs  <base> <tip>                 exit 0
+
+    PROSE MANIFEST DIFF · 73284 cells on the tip side
+      REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0
+      UNCHANGED cells 73284 · towns 525 · ADDED 0 · REMOVED 0 · index-only 0
+
+### ⚠ A BEHAVIOUR SHIFT ON SYNTHETIC FIXTURES, DECLARED RATHER THAN LEFT TO RIDE
+
+The composer's `addition.sentence` list moved from ONE opener to THREE, so four fixture arms in
+`tests/domain/composeStateProse.test.js` now compose an opener in front of the seated modifier.
+Nothing shipped moves (0 of 708 pools are modifiers), but the arms did:
+
+| arm | before | after |
+|---|---|---|
+| a pool partitioned by an UNANSWERED dimension | `The walls stand. A major wave.` | `The walls stand. Also, a major wave.` |
+| DROPS a candidate whose slot has no fill | `The walls stand. The road is open.` | `The walls stand. Also, the road is open.` |
+| NO CLAUSE CAN SEAT ON THE SHIPPED CORPUS | `The walls stand. the muster is thin` | `The walls stand. Beside that, the muster is thin` |
+| COHERENCE IS NOT THE DRAW'S | `The walls stand. The walls stand.` | `The walls stand. Beside that, the walls stand.` |
+
+Each carries the reason beside it: the opener is the leaf's, the list LENGTH is the SHIFT
+REGISTER's `connective-list-length` mechanism, and the twelve joints are the owner's copy signed
+at the walk (§13 row 27) — so a copy act moves these four lines with it, deliberately.
+
+⛔ **TWO ARMS HAD THEIR PREMISE MOVED AND ARE RE-CUT AT CAUSE**, not re-pinned:
+
+- *"A LICENSED CLAUSE IS STILL WITHHELD while `consequence.clause` stands empty"* — the shipped
+  list is no longer empty. The withheld path is now driven on an **INJECTED empty list**; the
+  shipped list is asserted at `[', so', ', and so', ', leaving']`; and a third limb drives the
+  SHIPPED leaf and asserts the composed text is one of the leaf's own three arrangements.
+- *"a relation whose list is EMPTY cannot seat"* — same shape for `tension.sentence`, and the
+  arm now names the fact that actually stops a tension modifier seating on any town (no pool
+  declares one), which lives in the projection contract.
+
+### THE SENTENCES THAT WERE FALSE, NOW TRUE
+
+| file | before | after |
+|---|---|---|
+| `src/domain/prose/passageShapes.js` | `WITHHELD: the connectives leaf carries no consequence.clause joint at all … (8a item 9 drafts the list to its floor of three)` | `WITHHELD: the composer's connective lists carry no consequence.clause joint at all, so no world can seat one` — and on the shipped tree the refusal printed is the ordinary `no modifier is seated at the clause seat` |
+| `scripts/prose-shape-report.mjs` | `consequence.clause joints exist: NO — shape 3 is WITHHELD` | `consequence.clause joints exist: yes, 3 of them — shape 3 waits on a CLAUSE SEAT, not on a joint` |
+
+⭐ **THE SITTING'S TABLE IS OTHERWISE UNMOVED**, driven on the taste corpus at this tip:
+
+    attach-bearing pools 7 · units 408 · units WITH a shape question 408 · draws 26112
+    MARGINAL     spine-then-sentence 23907 91.56 % · sentence-then-spine 2205 8.44 % · clause-seat 0
+    CONDITIONAL  lawful={1} n 21824 100.00 %  ·  lawful={1,2} n 4288  48.58 % / 51.42 %
+    DUPLICATE-UNIT RATE  fixed 9844 bp · licensed draw 9818 bp
+    RELATION addition 408 100.00 %   ·   CONSTRUCTION V1 339 83.09 %
+    REFUSALS  408 clause-seat :: no modifier is seated at the clause seat   <- the corrected one
+              341 sentence-then-spine :: the added face carries no noun into the spine
+
+Every figure is the fold's, to the digit; only the 408 refusals' ground changed, and it changed
+from false to true.
+
+### THE ARM §U c-5 ASKS FOR
+
+`⭐⭐ ONE HOME: the composer's connective lists ARE the leaf, not a copy of it` — **identity**
+(`toBe`), never deep equality, because two objects that match today are two homes that will
+disagree tomorrow. It pins the four floors 3/3/3/3 beside it (the `connective-list-length`
+register row, UNMOVED by this cure) and re-asserts the licensed specifier.
+
+### ⚠ A FOLD PREDICTION MEASURED FALSE, RECORDED
+
+FOLD §4 item 3 predicted that re-wording the WITHHELD `why` would MOVE the `passage-shape`
+register row and that the register act had to land in the same commit. **It does not.** That
+row's two source pins are the closed-set line and `export const SHIPPED_SHAPE = …`, both
+untouched, and the contract test re-reads both from disk and passes. No register act is owed by
+this commit. (§4 item 4's prediction about `comparator-and-band-rule` is answered at 8a-11-6.)
+
+### ⛔ ONE STRICT ERROR, CURED AT CAUSE
+
+`check-domain-strict` red once: the projector emits every generated leaf under one generic
+annotation (`Readonly<Record<string, object>>`), which does not satisfy the composer's nested
+type. Cured with a TYPED narrowing cast carrying its reason — never an `any` (the estate holds
+those at zero, and `domainAnyCastBaseline` is green) and never by widening the baseline.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `composeStateProse.test.js` · `prosePassageShapes.walker` · `composeStateProseFence` · the projection contract · `domainAnyCastBaseline` | **167 passed** over five files |
+| `proseWiringCensus.walker` · `proseComposed.walker` · `observedShapeReaders.walker` | **224 passed** with the voice file's inherited red beside them |
+| classifier, 5c7eadb18 → this tree | **UNCHANGED 73,284 · every class 0** |
+| eslint (6 files) | exit 0 |
+| `check-full-typecheck` / `check-domain-strict` | **173/173** · **1,120/1,120** |
+| `wiring-census --dry` | CURRENT · ROWS 0 |
+| `check-observed-shape-readers` | **1,972** |
 | projector `--check` | exit 0 |
 | runners / porcelain | 0 / 0 |
 
