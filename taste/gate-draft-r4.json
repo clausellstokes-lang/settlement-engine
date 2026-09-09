@@ -1,0 +1,69 @@
+{
+ "commit": "4935b86c3b5fa55a063531a057ca78138a029543",
+ "pools": [
+  {
+   "dir": "def11-country-walled",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "WAIVED (--taste, standing T-F12, unchanged this round): DOSSIER_STATE DS-DEF-11 :: country: pressed (walled): ATTACH `WALLED-STRAINED`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)"
+   ],
+   "moved": false
+  },
+  {
+   "dir": "def11-country-unwalled",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "WAIVED (--taste, standing T-F12, unchanged this round): DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-LARGE`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
+    "WAIVED (--taste, standing T-F12, unchanged this round): DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-SMALL`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)"
+   ],
+   "moved": false
+  },
+  {
+   "dir": "def11-watch-revealed",
+   "inBand": true,
+   "failing": [],
+   "refusals": [],
+   "moved": false
+  },
+  {
+   "dir": "def11-watch-covert",
+   "inBand": false,
+   "failing": [
+    {
+     "measure": "band depth \u00b7 closers.abstractNounRate (over) \u2014 variant 2, face 0, the `[plain \u00b7 dm-only]` line \"Under a covert arrangement a buyer has the watch of {settlement}.\"",
+     "value": "8.6 band-widths on 1 of 12 face(s)",
+     "band": "DEPTH at most 1.75 band-widths on every face"
+    }
+   ],
+   "refusals": [],
+   "moved": false
+  },
+  {
+   "dir": "def2-stores-short",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "WAIVED (--taste, standing T-F12, unchanged this round): DOSSIER_STATE DS-DEF-2 :: stores: short: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)"
+   ],
+   "moved": false
+  },
+  {
+   "dir": "def2-stores-importfed",
+   "inBand": true,
+   "failing": [],
+   "refusals": [
+    "WAIVED (--taste, standing T-F12, unchanged this round): DOSSIER_STATE DS-DEF-2 :: stores: import-fed: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)"
+   ],
+   "moved": false
+  },
+  {
+   "dir": "gen3-purse-short",
+   "inBand": true,
+   "failing": [],
+   "refusals": [],
+   "moved": false
+  }
+ ]
+}

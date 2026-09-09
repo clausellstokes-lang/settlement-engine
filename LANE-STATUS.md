@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 03:21:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 03:28:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT train lands — the living-content dial lit for every new world on the ow
 
@@ -139,7 +139,7 @@ product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT t
 
 ## WORKFLOW RUNS of chair session 5540cfd2-eea9-4469-ba34-6514b54a83ff (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_02541175-e31: 8 journal lines, 4 agents
-- wf_2dff77d0-392: 106 journal lines, 57 agents
+- wf_2dff77d0-392: 112 journal lines, 58 agents
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 - wf_568522f1-e3e: 10 journal lines, 5 agents
 - wf_655b3257-ac5: 8 journal lines, 4 agents
@@ -149,4 +149,4 @@ product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT t
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.66 1.92 3.18
+load: 3.77 3.84 3.77
