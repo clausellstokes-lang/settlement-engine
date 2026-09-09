@@ -19,33 +19,55 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness STRONG": [
         {
           "angle": "visitor",
-          "text": "{settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.",
+          "text": "A traveller coming in by road meets a defended place, and the approaches to {settlement} are watched. The works are kept up, and nothing in the arrangement is patched together.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The approaches are watched and the works are in repair. Nothing at {settlement} has been thrown up in a hurry, and the town reads as defended from the road.",
+            "No part of the defence at {settlement} is makeshift, and the approaches are under watch. A stranger coming in by road reads a held town and works that are kept.",
+            "The road offers a stranger the look of a defended place at {settlement}, and none of it is hasty work. The approaches are watched, and the works are sound."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.",
+          "text": "What {settlement} can field and what it has built are both in good order. Threatening the town would take real effort, and the town knows as much.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The force {settlement} fields is in good order, and so is the fabric it has raised. An attempt on the town would be dear work, and nobody in it thinks otherwise.",
+            "In what it can field and in what it has built, {settlement} is sound. Threatening it would be no light undertaking, and the town understands the cost.",
+            "The fielded strength and the built defence at {settlement} stand equally sound. Any move against the town would cost real effort, and the town carries that in its reckoning."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.",
-          "slots": [],
-          "vid": 3
-        },
-        {
-          "angle": "counterforce",
-          "text": "Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.",
+          "text": "Attack is not much on the town's mind at {settlement}, and complacency is not the reason. The arrangements are in place, and nothing else is doing the work.",
           "slots": [
             "settlement"
           ],
-          "vid": 4
+          "vid": 3,
+          "wordings": [
+            "Nobody at {settlement} spends much of the day expecting an attack, and complacency has no part in it. The arrangements stand, and the town relies on nothing else instead.",
+            "The thought of attack comes up seldom at {settlement}, and not for want of care. What the town has arranged is standing, and nothing else is set in its place.",
+            "Little of the day at {settlement} goes on the prospect of attack, and that is not ease of mind. The town leans on no substitute, and its arrangements are in order."
+          ]
+        },
+        {
+          "angle": "counterforce",
+          "text": "At present nothing presses {settlement}, and the quiet is not luck. A town set this well is not worth the price of an attempt.",
+          "slots": [
+            "settlement"
+          ],
+          "vid": 4,
+          "wordings": [
+            "Chance has no share in the quiet at {settlement}, and nothing is pressing the town at present. A place set this well is not worth the cost of a try.",
+            "Quiet holds at {settlement}. None of it is luck, and an attempt on a town in this condition costs more than it returns.",
+            "Nothing stands against {settlement} at present. A town arranged to this standard is not worth the outlay, and the quiet owes nothing to accident."
+          ]
         }
       ],
       "readiness ADEQUATE": [
@@ -200,49 +222,79 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "strategic value HIGH": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.",
+          "text": "What {settlement} holds is worth taking, and that is the whole of the town's defensive problem. The town must be worth more to keep than it is to seize.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A prize stands at {settlement}, and the defence of the place is that one reckoning. It must come out for the town and against whoever would take it.",
+            "Something at {settlement} is worth the taking, and there the town's whole defensive problem lies. Its worth to the town must stand above its worth as a spoil.",
+            "Another would want what {settlement} has, and the town's defence has no other question in it. The town must count for more in its own hands than in another's."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.",
+          "text": "The town is aware of what it sits on, and aware that others are aware. That awareness runs underneath a great deal of what it decides.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Knowing the worth of the town is ordinary here, and so is knowing that the worth is noted abroad. Most of what the town settles is settled in that light.",
+            "Nothing about what the place is worth is lost on the town, nor is the attention it draws from outside. Much of what the town chooses is chosen with both in view.",
+            "The measure of the place is taken here, and the town knows it is taken elsewhere as well. A great deal of what the town decides rests on that knowledge."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.",
+          "text": "A stranger understands within a day why anybody would want {settlement}, and shortly afterwards why the town is so careful about who it offends.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A day at {settlement} is enough for a stranger to see why the place is wanted. A little longer is enough for the same stranger to see why the town chooses its quarrels with care.",
+            "Inside a day a stranger sees what draws others to {settlement}. Soon after, the same stranger sees why the town is sparing with its offence.",
+            "Why anybody would want {settlement} is plain to a stranger by the end of a day. Why the town is careful whom it offends is plain to the same stranger not long after."
+          ]
         }
       ],
       "strategic value LOW": [
         {
           "angle": "counterforce",
-          "text": "Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.",
+          "text": "Nothing at {settlement} would repay an attempt on the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The taking of {settlement} would be a bad bargain.",
+            "More would be spent on an attempt at {settlement} than the place is worth.",
+            "Whoever came for {settlement} would come for little."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "{settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.",
+          "text": "No prize stands at {settlement}.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Among places worth having, {settlement} does not figure.",
+            "The value of {settlement} to anybody outside it is small.",
+            "For all that {settlement} holds, the gain in having it is poor."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.",
+          "text": "The town is not the kind of place anybody takes.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "What the town has, nobody else wants.",
+            "Nothing here would pay for the coming.",
+            "What would be got here would not answer for the work."
+          ]
         }
       ]
     },
@@ -251,10 +303,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 4,
         "faceCounts": [
-          1,
-          1,
-          1,
-          1
+          4,
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -347,9 +399,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -363,9 +415,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
