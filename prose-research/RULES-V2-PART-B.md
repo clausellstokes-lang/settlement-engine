@@ -681,3 +681,6 @@ The refinement round covers every wording set: a lawful face that sits just abov
 
 ## 21.3 ONE EFFORT, THE CEILING FOR EVERY SET (owner, 2026-09-08 ~21:3x)
 An unlawful set is pushed toward the ceiling as far as one effort allows, exactly as a lawful one is; the law is the shape of the ceiling, so a face at the ceiling is lawful by definition and the two aims are one aim. Where one effort must choose between a sharper wording and a licensed one, the licensed one wins, because an unlawful face never ships. There is no second refinement pass: the gate keeps or reverts, and a set that cannot be made lawful is banked. Whether a second pass is ever added is a sitting decision on the taste's numbers.
+
+## 21.4 THE DENSITY LAW (owner, 2026-09-08 ~22:2x)
+"The muster roll is the watch's own, and the watch is bought" stands as first written. A reader's question about a lawful, compressed line is not a verdict against it; compression and idiom that reward the reader are part of the ceiling; the read-aloud ear means the line lands when read, never that it is made plainer. Refiners never trade density for plainness; "unclear" is not a refuter's finding unless a law is broken; a refinement that made a lawful line plainer with no law behind the change is the regression.
