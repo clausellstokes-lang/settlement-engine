@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 04:00:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 04:06:01 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -70,7 +70,7 @@
 | ? | other |  | result | 0 | — | — | 07:42:23 |
 | ? | other |  | result | 0 | — | — | 07:40:53 |
 | ? | other |  | result | 0 | TASTE-TABLE.md | — | 07:56:27 |
-| ? | other |  | in-flight | 0 | — | — | 07:59:51 |
+| ? | other |  | result | 0 | TASTE-TABLE.verify.md | — | 08:03:16 |
 | ? | other |  | result | 0 | — | — | 07:38:18 |
 | ? | other |  | result | 0 | — | — | 07:39:45 |
 
