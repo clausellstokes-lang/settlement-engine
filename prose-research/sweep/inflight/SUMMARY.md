@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:53:24 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:59:25 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -106,11 +106,11 @@
 | ? | other |  | result | 0 | — | — | 15:36:43 |
 | ? | other |  | result | 0 | refine.md | — | 17:38:30 |
 | ? | other |  | failed | 0 | — | — | 17:18:42 |
-| ? | other |  | in-flight | 0 | — | — | 17:48:26 |
-| ? | other |  | in-flight | 0 | — | — | 17:49:29 |
+| ? | other |  | result | 0 | — | — | 17:57:47 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:57:46 |
 | ? | other |  | in-flight | 0 | — | — | 17:49:12 |
-| ? | other |  | in-flight | 0 | — | — | 17:50:41 |
-| ? | other |  | in-flight | 0 | — | — | 17:52:04 |
+| ? | other |  | in-flight | 0 | — | — | 17:58:22 |
+| ? | other |  | in-flight | 0 | — | — | 17:55:36 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
 | ? | other |  | result | 0 | refine.md | — | 17:06:35 |
 | ? | other |  | result | 0 | — | — | 17:10:01 |
@@ -178,15 +178,18 @@
 | ? | other |  | result | 0 | refute.md | — | 17:33:30 |
 | ? | other |  | in-flight | 0 | — | — | 17:44:48 |
 | ? | other |  | result | 0 | refute-fable.md | — | 17:33:18 |
-| ? | other |  | in-flight | 0 | — | — | 17:51:17 |
-| ? | other |  | in-flight | 0 | — | — | 17:52:15 |
-| ? | other |  | in-flight | 0 | — | — | 17:50:26 |
-| ? | other |  | in-flight | 0 | — | — | 17:49:35 |
-| ? | other |  | in-flight | 0 | — | — | 17:49:08 |
-| ? | other |  | in-flight | 0 | — | — | 17:51:18 |
-| ? | other |  | in-flight | 0 | — | — | 17:50:51 |
-| ? | other |  | in-flight | 0 | — | — | 17:49:56 |
-| ? | other |  | in-flight | 0 | — | — | 17:53:09 |
-| ? | other |  | in-flight | 0 | — | — | 17:49:15 |
+| ? | other |  | in-flight | 0 | — | — | 17:58:35 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:59:25 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:58:21 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:58:02 |
+| ? | other |  | in-flight | 0 | — | — | 17:59:23 |
+| ? | other |  | in-flight | 0 | draft-round-1.md | — | 17:58:23 |
+| ? | other |  | result | 0 | — | — | 17:55:57 |
+| ? | other |  | in-flight | 0 | — | — | 17:57:09 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:59:19 |
+| ? | other |  | in-flight | 0 | — | — | 17:59:09 |
+| ? | other |  | in-flight | 0 | — | — | 17:55:14 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 17:57:57 |
+| ? | other |  | in-flight | 0 | — | — | 17:59:25 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).

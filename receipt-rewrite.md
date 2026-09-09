@@ -2783,3 +2783,28 @@ test-side files), so this is the banked E2 ratchet and not this car's.
    export with no consumer, and a chair who would rather it were removed can have it removed in
    a line.
 
+
+---
+
+## CAR 8b-W — THE DEFENSE DESK'S WIRING
+
+**STATUS: PARTIAL — in flight.** Seat: Opus 5 — Fable-unvalidated. Chair: Fable 5.1 (session
+67af10e4). Dock `$SC/laneRW-DEFW`, base `f73bdbf16` (the §919 CAS). Chartered by ADDENDUM 4 of
+`brief-REWRITE-car8b-defense.md`; the shape is SEAM car 3h's (the key table exposed, key identity
+proven over the 768 RATE towns, the 1,050 DRIFT rows and an exhaustive input sweep, zero drift on
+the manifest classifier, the census re-taken by the census rule). Every figure below is the tail
+of a command that ran.
+
+### 8b-W.0 ARRIVAL — executed
+
+```
+$ git -C $SC/laneRW-DEFW rev-parse HEAD
+f73bdbf16d3f7a57c18d7fd57b0478b953043a73
+$ git -C $SC/laneRW-DEFW status --porcelain | wc -l
+       0
+$ V=vit; V2=est; pgrep -fl "$V$V2" | grep -v gate-mutex | wc -l
+       0
+$ ps -r -o pid,pcpu,comm | head          # the machine idle: one zsh at 0.0 %
+```
+
+(sections filled per commit below)
