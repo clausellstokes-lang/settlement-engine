@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 02:19:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 02:28:01 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM train lands — the composed-prose sequence's cars 3a through 5b as thirty
 
@@ -139,7 +139,7 @@ product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM tr
 
 ## WORKFLOW RUNS of chair session 5540cfd2-eea9-4469-ba34-6514b54a83ff (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_02541175-e31: 8 journal lines, 4 agents
-- wf_2dff77d0-392: 77 journal lines, 42 agents
+- wf_2dff77d0-392: 80 journal lines, 42 agents
 - wf_31ce68bc-a03: 18 journal lines, 9 agents
 - wf_568522f1-e3e: 10 journal lines, 5 agents
 - wf_655b3257-ac5: 8 journal lines, 4 agents
@@ -149,4 +149,4 @@ product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM tr
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
 ## PROCESSES: 14568 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;14583 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.97 7.21 14.56
+load: 27.29 31.24 27.74
