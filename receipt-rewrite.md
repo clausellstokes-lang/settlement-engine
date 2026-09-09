@@ -1531,7 +1531,7 @@ re-recorded by this car — the freeze act is the REWRITE's last car) and the §
 
 ## CAR 8a-11 — THE CURES
 
-**STATUS: PARTIAL — in flight.** Chartered at SITTING §U (2026-09-09 08:1x) over
+**STATUS: LANDED WHOLE — nine commits, `f81b95c28` … `b005886ef`.** Chartered at SITTING §U (2026-09-09 08:1x) over
 `skeptic-rewrite/FOLD.md` (CONFIRMED 48 · REFUTED 1 · PARTLY 2 · UNTESTED 3 · NEW 14); the
 charter is brief ADDENDUM 3. Seat: Opus 5 — Fable-unvalidated (a fresh seat, the third of the
 car). Dock `$SC/laneREWRITE` continuing at the 8a tip `5c7eadb18`.
@@ -1562,7 +1562,7 @@ beside the correction, because a receipt whose errors are erased cannot be audit
 | 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | **`320ce227a`** | **LANDED** |
 | 8a-11-7 | a-7 the rename's provenance record | **`b448d3498`** | **LANDED** |
 | 8a-11-8 | a-9 (§U c-6) the RE-INDEXED veto surface gains machine standing | **`da350688e`** | **LANDED** |
-| 8a-11-9… | the three rituals, in the receipt's own three-commit shape | — | not started |
+| 8a-11-9-lighting | the rituals — ONE owed, two measured and refused | **`b005886ef`** | **LANDED** |
 
 ---
 
@@ -2176,4 +2176,126 @@ was claimed at:
 The commit message for `5c7eadb18` said "214 tests over four files" without naming them; they are
 those four (11 + 84 + 41 + 78). At THIS car's tip the same four read **217**, because 8a-11-2 and
 8a-11-3 added three arms to `proseWaveGate.walker.test.js`.
+
+---
+
+### 8a-11-9-lighting — THE RITUALS: ONE OWED, TWO MEASURED AND REFUSED
+
+**LANDED `b005886ef`** over `da350688e`. One file. Zero reader-facing bytes.
+
+ADDENDUM 3 item 10 asks for the three rituals "only where a walker or a stamped file moved". Of
+the three, exactly ONE moved.
+
+### THE LIGHTING CENSUS, BY ITS OWN RITUAL
+
+    LIGHTING_CENSUS_REFREEZE='REWRITE car 8a-11 (Opus 5 — Fable-unvalidated)' \
+    LIGHTING_CENSUS_NOTE='…' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+
+    census REFROZEN at da350688e14b235967f6835d889b954af51787a6:
+      files 2562 -> 2562 · parked 375 -> 375 · credited 2187 -> 2187
+      titles 24158 -> 24163 · suiteTitles 6451 -> 6451
+
+⭐ **ONLY `titles` MOVES, +5, AND THE DELTA IS THE RITUAL'S RATHER THAN A COUNT BY HAND.** The car
+adds five test titles and NO test file, so `files`, `credited`, `parked` and `suiteTitles` must
+not move — and they do not. The five: two arms in `proseWaveGate.walker` at 8a-11-2, one more
+there at 8a-11-3, one in `composeStateProse.test` at 8a-11-4, one in `dossierProseManifest.test`
+at 8a-11-5.
+
+⚠ **AND A SIXTH ARM THAT COUNTS FOR NOTHING, WHICH IS THE MEASUREMENT WORTH KEEPING**: 8a-11-1's
+new arm in `tests/domain/stateProseKernel.test.js` moved NO title. **`tests/domain` is PARKED;
+`tests/lint`, `tests/property` and `tests/copy` are CREDITED.** That is why the 8a-2 receipt's
+warning ("only +1 title was counted for 8 new `it()` blocks … do not assume +8") was right, and
+why this delta was taken from the ritual and not counted by hand.
+
+The ritual FAILS BY DESIGN; the plain re-run is the proof — **34 passed**.
+
+### THE OTHER TWO, MEASURED AND NOT RUN
+
+    node scripts/wiring-census.mjs --dry
+      the committed register is CURRENT; nothing was written
+      bytes committed 2,060,855 · fresh 2,060,855 · delta 0
+      sections that would move: (none) · stamped shas that would move: (none)
+      candidate leaves unmoved · ROWS that would move: 0
+
+    node scripts/check-observed-shape-readers.mjs
+      1,972 finding(s), exactly matching the frozen inventory        (frozenAtSha bc441dccc)
+      shrink-only satisfied: 1,972 -> 1,972
+
+No cure of this car touched a census-stamped file or an observed-shape execution input, so
+neither register is stale and neither `--write` would be a lawful act. **A ritual with nothing to
+record is not run**, and that refusal is a measurement here rather than an omission.
+
+---
+
+## CAR 8a-11 — THE CLOSE
+
+**LANDED WHOLE.** Dock `$SC/laneREWRITE`, tip **`b005886ef`**, porcelain **0**, runners **0**.
+Nine commits over `5c7eadb18`; **16 files, +911 / −180**.
+
+| # | cure | sha |
+|---|---|---|
+| 8a-11-1 | a-1 (§U c-4) the `>= 0` guard's green instrument | **`f81b95c28`** |
+| 8a-11-2 | a-2 (§U c-1) the gate's packet, namespaced and refusing | **`2f68fdd95`** |
+| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | **`1f7c8565d`** |
+| 8a-11-4 | a-4 (§U c-5) ONE HOME for the connective lists | **`872497837`** |
+| 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | **`73e0dd704`** |
+| 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | **`320ce227a`** |
+| 8a-11-7 | a-7 the rename's provenance record | **`b448d3498`** |
+| 8a-11-8 | a-9 (§U c-6) the RE-INDEXED veto surface gains machine standing | **`da350688e`** |
+| 8a-11-9-lighting | the rituals | **`b005886ef`** |
+
+### ⭐⭐ THE ACCEPTANCE LINE (§U.4), EXECUTED AT THE TIP
+
+| line | command | result |
+|---|---|---|
+| `tests/lint` WHOLE, green | `npx vitest run tests/lint` | **154 files passed / 0 failed · 2,593 passed / 0 failed** (`ls tests/lint/*.test.js` = 154, so the whole directory) |
+| `voiceMechanics` at its inherited two files EXACTLY | `npx vitest run tests/copy/voiceMechanics.test.js` | **1 failed | 18 passed** — `labelBands.js` em 5 · `generalStateProse.js` em 3, and nothing else |
+| the projection contract green | `npx vitest run tests/data/dossierStateProseProjection.contract.test.js` | **77 passed** |
+| strict on its ceiling | `node scripts/check-domain-strict.mjs` | **1,120 errors, ceiling 1,120** — exit 0 |
+| the typecheck ratchet | `npm run typecheck:ratchet` | **173 errors, ceiling 173** — exit 0 |
+| the projector | `node scripts/generate-dossier-state-prose.mjs --check` | **exit 0** |
+| ⛔ the classifier, `5c7eadb18` → the tip | `prose-manifest-cells` twice, `prose-manifest-diff` | **REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0 · ADDED 0 · REMOVED 0 · UNCHANGED 73,284 over 525 towns · index-only 0** |
+| eslint over every `.js`/`.mjs` the car touched | `npx eslint <12 files>` | **exit 0, no output** |
+| porcelain / runners | at every commit and at the return | **0 / 0** |
+
+⭐⭐ **AND THE ZERO-BYTE FENCE AS ONE DIGEST.** The tip cell table's sha256 is
+`dfdece7e814a2cafe3b4a3f909e00c7600c7fef429972d208d1edc14d7c2c5db` — **byte-identical to the
+table recorded at `f4005cccd` (car 8a-1's tip), to a fresh recording at `5c7eadb18`, and to a
+fresh recording mid-car at 8a-11-4**. Four independent recordings, one digest: not one of the
+73,284 cells has moved since the index-stable draw landed.
+
+### THE JUDGMENT CALLS, RECORDED FOR VETO
+
+1. **The packet namespace is `<scratch>/packets/<dock>/`, not `<dock>/.packets/`.** ADDENDUM 3
+   offered either. A directory inside the worktree reads as `?? .packets/` in porcelain and would
+   have broken, on every dock, the check the cure exists to protect.
+2. **The packet refusal allows the workflow's own progress.** Same arm at the same or a LATER
+   round writes; another arm, or an EARLIER round, is refused. A gate that refused its own next
+   round would be unusable, and the refusal still convicts the exact incident.
+3. **The bare-spine branch is a FLAG on the lib, not a default.** The shape report's subject is
+   the units a corpus LICENSES (a spine licenses none) and the gate's is the faces a wave is
+   rewriting; a default would have silently widened one of them.
+4. **Four fixture expectations were re-cut to the composer's real output rather than isolated
+   behind an injected one-opener list.** They now read the SHIPPED leaves, which is the true
+   input; the cost is that an owner copy act at the walk moves four lines, and each line says so.
+5. **The `CONNECTIVES` narrowing is a typed cast, not a widened baseline and not an `any`.** The
+   projector emits every leaf under one generic annotation and cannot state the nested shape.
+6. **`stableVid` is exported for a test and for no product caller.** The alternative — a second
+   spelling of the predicate in the test — is the two-homes defect this car cured twice elsewhere.
+
+### WHAT THIS CAR MEASURED THAT THE FOLD DID NOT
+
+1. **Neither register act the fold predicted is owed.** FOLD §4 items 3 and 4 expected the
+   `passage-shape` and `comparator-and-band-rule` rows to move when the WITHHELD `why` and
+   `prose-shape-report.mjs:205` were re-worded. Both rows' source pins name other substrings
+   (`passage-shape`: the closed-set line and `SHIPPED_SHAPE`; `comparator-and-band-rule`: seven
+   substrings in `composeStateProse.js`), the contract test re-reads every one from disk, and it
+   is green. **The register stays at 15 mechanisms and no `--write` was run anywhere.**
+2. **Of the three rituals, one was owed.** The wiring census and the OSR both read CURRENT.
+3. **`tests/domain` is PARKED and `tests/lint` / `tests/property` / `tests/copy` are CREDITED**,
+   measured commit by commit as the titles moved (or did not).
+4. **The lexicon's closure price has grown since 8a-4** — +4 files / **167,469 B** onto a
+   **78,782 B** host, against the receipt's +4 / 150,231 onto 70,252. The four files and the
+   order of magnitude are the finding and both hold; the byte figures are a moment's measurement
+   and the ledger should carry the ratio.
 

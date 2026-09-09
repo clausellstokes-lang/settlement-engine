@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 08:49:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 08:57:05 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste and the sitting — ledger-only, zero product bytes at 29ec62425: seven p
 
@@ -111,7 +111,7 @@ product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste a
 - R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:32
 
-- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST absent · receipt head:
+- **ANCHOR-905** dock `laneANCHOR905` HEAD 4243bdc61 · 7 cars over 6582958ce · porcelain 0 · HOLD-VITEST PRESENT · receipt head:
       | # RECEIPT — ANCHOR-905 — **COMPLETE**
       | 
       | Lane: ANCHOR-905 · Seat: Opus 5 — Fable-unvalidated · Chair: Fable 5.1
@@ -141,5 +141,5 @@ product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste a
 - wf_3b79f7ff-928: 8 journal lines, 4 agents
 - wf_73595d81-51d: 18 journal lines, 9 agents
 
-## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 22.15 10.22 6.67
+## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;96053 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;96056 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 1.81 4.70 5.40
