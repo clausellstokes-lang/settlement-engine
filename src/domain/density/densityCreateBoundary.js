@@ -240,8 +240,13 @@ export const PIPELINE_REACHERS = Object.freeze({
  * the next reader has to look.
  *
  * ⛔ AND THE INCOMING LIVING-CONTENT MARKER IS CLAMPED OFF FIRST, BECAUSE A
- * SPREAD OF `{}` DELETES NOTHING. While the dial is dormant the mint returns an
- * empty object, so it cannot overwrite a marker the incoming config already
+ * SPREAD OF `{}` DELETES NOTHING. ⚠ THE CLAMP BITES AT THE DORMANT DIAL AND ONLY
+ * THERE, which the lighting made visible rather than changed: the mint is spread
+ * LAST, so a non-empty mint always wins and the destructure is load-bearing
+ * exactly when the mint is `{}`. It stays because the dial is one line in both
+ * directions, and the day it is reverted is the day the hole below re-opens if
+ * this destructure has gone. While the dial is dormant the mint returns an empty
+ * object, so it cannot overwrite a marker the incoming config already
  * carries — and a config CAN carry one: the Library's Load hydrates the wizard
  * form from a saved `settlement._config` (`SettlementsPanel.jsx`, "Apply Saved
  * Configuration & Regenerate", also reached from `SettlementDetail.jsx`), and the
@@ -478,7 +483,10 @@ export const GENERATION_LAWS = Object.freeze({
       + 'emitted dist file changing SIZE (658 of 1,377 changed BYTES: the entry chunk\'s hash '
       + 'moves and every file naming it is re-hashed; the earlier "byte-identical" wording here '
       + 'was wrong and was corrected in the same car that measured it), so the law rides the '
-      + 'lazy side with its callers and neither living-content module enters first paint. The '
-      + 'dial stays at the dormant default, so the mint still writes not one config byte.',
+      + 'lazy side with its callers and neither living-content module enters first paint. THE '
+      + 'DIAL IS LIT since 2026-09-08 (owner), so the mint writes exactly one config key on '
+      + 'every classified BIRTH and no other byte of the world moves with it: measured on the '
+      + 'golden 525 and the RATE 768, zero movers. This row read "the dial stays at the dormant '
+      + 'default, so the mint still writes not one config byte" until that day.',
   }),
 });

@@ -32,11 +32,16 @@
  *
  * ⭐ THE DARK PATH LOADS NOTHING AND CANNOT DIVERGE. `livingContentRosterFor`
  * tests the law FIRST and returns the same `null` a run with no pack returns, so
- * a v1 world — which is every world the product mints today — never touches the
- * registry, never awaits anything, and is byte-identical to a world generated
- * before this law existed. The seam is therefore invisible to same-seed output
- * while the dial is dark, and that is provable rather than argued: the dormant
- * corpus hash is unchanged.
+ * a v1 world never touches the registry, never awaits anything, and is
+ * byte-identical to a world generated before this law existed.
+ * ⚠ THE PARENTHESIS THAT USED TO STAND HERE — "which is every world the product
+ * mints today" — IS FALSE SINCE 2026-09-08, when the dial was lit: every world a
+ * BIRTH mints is a v2 world now. What is still true, and is the whole of what
+ * this paragraph needed, is that a v1 world takes the dark branch, and every
+ * world born before the flip is a v1 world for ever (there is no migration, by
+ * `livingContentLaw.js`'s property 3). Measured at the lighting on 1,293
+ * configurations of two corpora: not one byte of a world moves between the two
+ * laws but the law's own declaration.
  *
  * ⛔ AND THE LIT PATH FAILS LOUD, NEVER QUIET. If a world's own config says v2
  * and the roster module was never loaded, this throws instead of returning

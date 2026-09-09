@@ -126,9 +126,15 @@ function memberConfigFor(site, plan) {
     ...DEFAULT_CONFIG,
     // THE CREATE BOUNDARY (ODQ §822). A realm member is unambiguously a BIRTH —
     // it is composed from DEFAULT_CONFIG with no prior world in the call — so it
-    // carries the density law a new world is born under. Dormant today:
-    // `birthConfig` spreads an EMPTY object while the dial sits at the default,
-    // so an Instant World's configs are byte-identical to pre-law ones.
+    // carries the generation laws a new world is born under. ⚠ THIS COMMENT USED
+    // TO END "Dormant today: `birthConfig` spreads an EMPTY object while the dial
+    // sits at the default, so an Instant World's configs are byte-identical to
+    // pre-law ones", and the living-content half of that stopped being true on
+    // 2026-09-08. `birthConfig` now spreads `_livingContentLawVersion: 2` here as
+    // everywhere else; the density dial is still dormant and still spreads
+    // nothing. The configs are no longer byte-identical to pre-law ones, and the
+    // WORLDS still are: measured at the lighting on two corpora, nothing but the
+    // law's own declaration moves.
     ...birthConfig({}),
     settType: site.tier,
     // "Surprise-me within curated bounds": the pipeline rolls the priority

@@ -130,8 +130,14 @@ export function scrubImportedTreasury(settlement) {
  * boundaries, two different honest acts; the single-writer module holds both.
  *
  * Pure, and REFERENCE-IDENTICAL when there is nothing to strip: a settlement
- * with none of the three keys (which is every settlement this build generates,
- * the dial being dormant) comes back as the very object that went in.
+ * with none of the three keys comes back as the very object that went in.
+ * ⚠ THE PARENTHESIS HERE SAID "which is every settlement this build generates,
+ * the dial being dormant", AND THE DIAL WAS LIT ON 2026-09-08. A generated world
+ * now carries the law marker on its config, so the reference-identical branch is
+ * taken for a NARROWER set than it was: worlds born before the flip, and imported
+ * worlds carrying none of the three. The strip itself is unchanged, and it never
+ * rested on the dial — a record reaches this boundary from an import FILE, which
+ * is exactly where one comes from with no dial moving at all.
  *
  * @param {Record<string, any>|null|undefined} settlement
  * @returns {Record<string, any>|null|undefined}

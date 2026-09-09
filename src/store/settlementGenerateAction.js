@@ -117,8 +117,11 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // BIRTH on every call: it mints a brand-new town from the WIZARD FORM config,
   // so it can never re-stamp an existing world's law. Re-derivation of an
   // existing world goes through regenSection, which reads `settlement.config`
-  // FIRST. Dormant today: birthConfig adds nothing while the dial sits at the
-  // default, so a generation's config stays byte-identical to a pre-law one.
+  // FIRST. ⚠ THIS USED TO END "Dormant today: birthConfig adds nothing while the
+  // dial sits at the default", which stopped being true on 2026-09-08: the
+  // living-content dial is lit, so every town this action mints carries
+  // `_livingContentLawVersion: 2`. Nothing else about the world moves with it,
+  // and a world already on disk is untouched because it never passes here again.
   //
   // ⛔ AND A SAVED WORLD'S CONFIG *CAN* REACH `state.config` — this comment used
   // to say otherwise ("never hydrated from a saved settlement"), and that was

@@ -26,6 +26,16 @@
  *      the new law by upgrade. Its law travels in its own persisted `config`
  *      (the same bag that carries `_seed`), so a save, a load, a same-seed
  *      regen and an undo all replay the law the world was BORN under.
+ *      ⭐⭐ AND THE DIAL WAS LIT ON 2026-09-08 WITH NO MIGRATION AND NO READ-PATH
+ *      STAMP, ON THE OWNER'S WORD, BECAUSE EVERY PRE-LIGHTING WORLD WAS TEST
+ *      DATA: "There are no true launched settlements or campaigns … All of those
+ *      that exist were tests in which case inconsequential". The owner's first
+ *      word that day asked for the retroactive half as well; his second
+ *      DISCHARGED it, and this property is therefore unchanged rather than
+ *      excepted. A world born under law 1 stays law 1 for ever, dark and working,
+ *      its record absent; a world born after the flip is law 2; and NOTHING on
+ *      any read, save, load, regen, undo or import path stamps a persisted
+ *      config. Do not write a migration, a stamp or a provenance line for one.
  *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION` is the
  *      sole place a new world's law is chosen, and reverting is the same line.
  *

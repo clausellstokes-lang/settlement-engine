@@ -415,9 +415,11 @@ function selectedCampaignMechanics(ingest, selected) {
  * function, a second account's exactness records reached a destination world
  * with the SOURCE account's ledger ids intact, unwarned. The gap used to be
  * declared rather than cured on the ground that no world carries these records
- * while the living-content dial is dormant; that ground is false at this
+ * while the living-content dial is dormant; that ground was false at this
  * boundary of all places, because its input is an import FILE — exactly where
- * such a record comes from without any dial.
+ * such a record comes from without any dial. (The dial was lit on 2026-09-08,
+ * which retires the ground a second time rather than changing anything here: the
+ * cure never rested on it.)
  *
  * ⛔ WHY BOTH RECORDS, TOGETHER. `customContentProvenance` (what materialized)
  * and `customContentRoster` (what was in scope) are minted side by side at the
@@ -456,8 +458,13 @@ function selectedCampaignMechanics(ingest, selected) {
  * it is the same honest act. (2) `observedShapeReaders.walker` resolves a
  * `settlement`-shaped receiver in THIS file (it holds a frozen row for
  * `importedFrom on settlement`), and its corpus is GENERATED worlds — which carry
- * neither record while the living-content dial is dormant. A value read would
- * therefore be scored a reader-with-no-writer and reds a shrink-only ratchet that
+ * neither record. ⚠ THE GROUND FOR THAT LAST CLAUSE WAS "while the living-content
+ * dial is dormant", AND IT WAS THE WRONG MECHANISM even before the dial was lit on
+ * 2026-09-08: what keeps the roster off that corpus is that the corpus generates
+ * with `customContent: {}`, so the roster has no definition to record and the
+ * builder writes no key. Measured at the lighting: 0 of 525 golden rows and 0 of
+ * 768 RATE towns carry the key under law 2. A value read would therefore still be
+ * scored a reader-with-no-writer and would still red a shrink-only ratchet that
  * cannot lawfully be grown. The walker is right about generated worlds and blind
  * to this boundary, whose input is an import FILE; the presence test states the
  * strip without asserting anything about a value no generator writes.

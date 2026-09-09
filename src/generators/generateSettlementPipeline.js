@@ -153,10 +153,15 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
       finalCtx.settlement.customContentProvenance = contentProvenance;
     }
     // ── THE INERT LIVING-CONTENT ROSTER (ODQ §866) ───────────────────────────
-    // DORMANT BY DEFAULT: `buildLivingContentRoster` returns null unless this
-    // world's own config carries `_livingContentLawVersion: 2`, so a v1 world —
-    // which is every world the product mints today — takes the same branch a
-    // run with no pack takes and this block writes not one byte.
+    // GATED ON THE WORLD'S OWN CONFIG: `buildLivingContentRoster` returns null
+    // unless this world's own config carries `_livingContentLawVersion: 2`, so a
+    // v1 world takes the same branch a run with no pack takes and this block
+    // writes not one byte. ⚠ "a v1 world, which is every world the product mints
+    // today" is what this comment used to say, and the second half stopped being
+    // true on 2026-09-08 when the dial was lit; a v1 world is now every world
+    // born BEFORE that day, and there is no migration. ⭐ AND A LIT WORLD STILL
+    // WRITES NO KEY unless the run's reviewed environment held a living-content
+    // definition: the builder returns null when no bucket yields a row.
     //
     // It sits HERE, beside the provenance receipt, for the same reason that
     // receipt does: every RNG draw is finished by this line, so a roster can

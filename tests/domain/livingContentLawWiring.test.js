@@ -88,6 +88,14 @@ import { isAllowedConfigKey } from '../../src/store/configSlice.js';
 // asserting about it.
 import { migrateSettlementConfig } from '../../src/lib/settlementConfigMigration.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+// The three roster readers this file can drive directly. The two inside
+// `accountImportBody.js` are driven end to end by tests/store/accountImportSlice,
+// and the reconciliation drop by tests/lib/importReconciliation.
+import { scrubGalleryImportLivingContent } from '../../src/lib/importScrub.js';
+import {
+  remapAccountSettlementLivingContentRoster,
+} from '../../src/lib/accountSettlementContentPortability.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
@@ -548,5 +556,116 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     // and nothing in this file should stop them.
     expect(materializesLivingContent(LIT_CONFIG)).toBe(true);
     expect(materializesLivingContent(CONFIG)).toBe(false);
+  });
+});
+
+/**
+ * ⭐⭐ NO MIGRATION — THE OWNER'S SECOND RULING OF 2026-09-08, PROVED ON THE LIT
+ * BUILD.
+ *
+ * The owner's first word that day asked for the lighting to apply
+ * "Retroactively as well"; his second DISCHARGED that half rather than deferring
+ * it: "There are no true launched settlements or campaigns … All of those that
+ * exist were tests in which case inconsequential." So the module's law stands
+ * exactly as written — property 3 of `livingContentLaw.js`, THERE IS NO
+ * MIGRATION, DELIBERATELY — and nothing was written to stamp a persisted config
+ * on any path.
+ *
+ * ⛔ WHAT THAT MAKES FALSIFIABLE, AND WHY IT IS WORTH ARMS. A migration is not
+ * the only way a world acquires a law: a read path that falls back to the DIAL
+ * would re-birth every saved world the moment the dial moved, which is the exact
+ * PROMISE breach the version gate exists to prevent, and it would do it
+ * silently. The arms below take a world born BEFORE the flip through the hops a
+ * saved world really makes on the lit build and require it to come back as dark
+ * as it went in.
+ */
+describe('NO MIGRATION — a law-1 world stays law-1 on every path, on the LIT build', () => {
+  it('⛔ a PERSISTED law-1 world survives load, section regen and the clone seam unstamped', async () => {
+    const { createSettlementSlice } = await import('../../src/store/settlementSlice.js');
+    const store = create(immer((...a) => ({
+      ...stubSlice(),
+      ...createSettlementSlice(...a),
+    })));
+
+    // BORN BEFORE THE FLIP: a markerless world, exactly what a saved world from
+    // any day before 2026-09-08 is.
+    const born = generateSettlementPipeline({ ...CONFIG }, null, { seed: 'no-migration-born' });
+    expect(born.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    expect(born[ROSTER_KEY]).toBeUndefined();
+
+    // LOAD: the JSON round trip a save and a reload are.
+    const loaded = JSON.parse(JSON.stringify(born));
+
+    // …onto a store whose wizard config IS lit, which is the adversarial setting:
+    // if any read path consulted the form config or the dial, the regen below
+    // would stamp the world.
+    store.setState({ settlement: loaded, config: { ...LIT_CONFIG }, phase: 'draft', locks: {} });
+    expect(
+      materializesLivingContent(store.getState().config),
+      'the store config is not lit — this arm would pass on a world nothing threatened',
+    ).toBe(true);
+    expect(
+      NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
+      'the build is not lit — the whole point of this arm is that a LIT build leaves a v1 world alone',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+
+    const npcsBefore = JSON.stringify(loaded.npcs);
+    await store.getState().regenSection('npcs');
+    const after = store.getState().settlement;
+    // THE POSITIVE CONTROL: the regen really ran, so the three absences below are
+    // absences after a live operation and not after a no-op.
+    expect(
+      JSON.stringify(after.npcs),
+      'regenSection("npcs") did not change the world — this arm would be asserting that an'
+      + ' operation which never ran also failed to stamp a law',
+    ).not.toBe(npcsBefore);
+
+    // UNDO / SNAPSHOT: the clone seam every undo, snapshot and version-history
+    // entry round-trips through.
+    const cloned = deepClone(after);
+
+    for (const [label, world] of [['loaded', loaded], ['regenerated', after], ['cloned', cloned]]) {
+      expect(
+        world.config[LIVING_CONTENT_LAW_CONFIG_KEY],
+        `${label}: a world born under law 1 acquired a law marker on a lit build. There is NO`
+        + ' MIGRATION, deliberately, and no path may stamp a persisted config.',
+      ).toBeUndefined();
+      expect(resolveLivingContentLawVersion(world.config))
+        .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+      expect(world[ROSTER_KEY], `${label}: a law-1 world acquired a roster`).toBeUndefined();
+    }
+  });
+
+  it('⭐ every reader of the roster key treats ABSENT as empty, driven not argued', () => {
+    // ⛔ WHY THIS IS AN ARM AND NOT A READING. "There is no migration" means most
+    // worlds in the estate will never carry this key, so every reader of it meets
+    // `undefined` as its ordinary case. A reader that dereferenced instead of
+    // testing for presence would turn a pre-lighting save into a crash on a
+    // boundary the user never chose to cross.
+    const dark = generateSettlementPipeline({ ...CONFIG }, null, { seed: 'no-migration-readers' });
+    expect(Object.hasOwn(dark, ROSTER_KEY), 'the fixture must NOT carry the key').toBe(false);
+
+    // 1. THE GALLERY STRIP — and it is reference-identical when there is nothing
+    //    to strip, which is the stronger claim: it did not merely survive, it did
+    //    not allocate.
+    expect(scrubGalleryImportLivingContent(dark)).toBe(dark);
+    expect(scrubGalleryImportLivingContent(null)).toBeNull();
+    expect(scrubGalleryImportLivingContent(undefined)).toBeUndefined();
+
+    // 2. THE ACCOUNT REMAPPER — absent is `{ok: true, roster: null}`, never a
+    //    refusal, so an import of a pre-lighting world is not warned about a
+    //    record it never had.
+    for (const absent of [undefined, null]) {
+      const result = remapAccountSettlementLivingContentRoster(absent, {});
+      expect(result.ok).toBe(true);
+      expect(result.roster).toBeNull();
+    }
+
+    // 3. THE PUBLIC PROJECTIONS, both modes.
+    for (const options of [undefined, { full: true }]) {
+      const projected = toPublicSafe(dark, options);
+      expect(Object.hasOwn(projected, ROSTER_KEY)).toBe(false);
+      expect(projected.name).toBe(dark.name);
+    }
   });
 });
