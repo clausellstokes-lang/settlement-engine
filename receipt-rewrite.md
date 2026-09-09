@@ -1525,3 +1525,97 @@ re-recorded by this car — the freeze act is the REWRITE's last car) and the §
   owner's, signed at the walk.
 - **ARCH §2.3 gains `kin`** — a modifier-only `poolMeta` field the composer reads. Recorded on the
   SHIFT REGISTER in the same commit; the ARCHITECTURE document is the chair's to amend.
+
+
+---
+
+## CAR 8a-11 — THE CURES
+
+**STATUS: PARTIAL — in flight.** Chartered at SITTING §U (2026-09-09 08:1x) over
+`skeptic-rewrite/FOLD.md` (CONFIRMED 48 · REFUTED 1 · PARTLY 2 · UNTESTED 3 · NEW 14); the
+charter is brief ADDENDUM 3. Seat: Opus 5 — Fable-unvalidated (a fresh seat, the third of the
+car). Dock `$SC/laneREWRITE` continuing at the 8a tip `5c7eadb18`.
+
+Every figure below comes from a command that ran in this dock with its exit code captured.
+⛔ THIS SECTION CORRECTS THE CAR 8a SECTION ABOVE AND DELETES NOTHING FROM IT: the corrected
+sentences are struck in place under "CORRECTED AT THE FOLD" and the original wording is kept
+beside the correction, because a receipt whose errors are erased cannot be audited.
+
+### Open state (executed at car open)
+
+| fact | command | value |
+|---|---|---|
+| dock tip | `git rev-parse HEAD` | `5c7eadb18105f19dce6ac04b4e2782d5bad68355` |
+| porcelain | `git status --porcelain \| wc -l` | 0 |
+| runners | `V=vit; V2=est; pgrep -fl "$V$V2" \| grep -v gate-mutex \| wc -l` | 0 |
+| node | `node -v` | v24.12.0 |
+
+### The commits
+
+| # | cure | sha | status |
+|---|---|---|---|
+| 8a-11-1 | a-1 (§U c-4) the `>= 0` guard's green instrument | **`f81b95c28`** | **LANDED** |
+| 8a-11-2 | a-2 (§U c-1) the gate's packet target, namespaced and refusing | — | IN FLIGHT |
+| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | — | not started |
+| 8a-11-4 | a-4 (§U c-5) one home for the connective lists | — | not started |
+| 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | — | not started |
+| 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | — | not started |
+| 8a-11-7 | a-7 the rename's provenance record | — | not started |
+| 8a-11-8 | a-9 (§U c-6) the RE-INDEXED veto surface gains machine standing | — | not started |
+| 8a-11-9… | the three rituals, in the receipt's own three-commit shape | — | not started |
+
+---
+
+### 8a-11-1 — CURE a-1 (§U c-4): THE `>= 0` GUARD GETS A GREEN INSTRUMENT
+
+**LANDED `f81b95c28`** over `5c7eadb18`. Two files. Zero reader-facing bytes.
+
+`stableVid` is EXPORTED from `src/domain/display/stateProse/stateProseKernel.js` (no product
+caller; the composer's import fence is untouched) and `tests/domain/stateProseKernel.test.js`
+gains one arm that CALLS it rather than re-deriving its predicate over the leaves.
+
+⛔ **THE DEFECT THE FOLD FOUND, RESTATED FROM ITS OWN MEASUREMENT.** The existing sweep
+("⭐ THE SHIPPED STATE CORPUS NEVER REACHES THE MODULUS FALLBACK") spells
+`!Number.isInteger(row.vid) || row.vid < 0` a SECOND time over the six leaves. It pins the
+CORPUS's ids and is blind to the KERNEL, so the exact defect car 8a-1 was written to stop —
+`vid <= 0` — passed both named acceptances while seven pools reverted to the modulus.
+
+### THE ARM, AND WHY IT IS PER SEED RATHER THAN PER COUNT
+
+| half | what it asserts | figure |
+|---|---|---|
+| the predicate | `stableVid({vid: 0})` is `0`; `{vid: 1}` is 1; `{vid: 6}` is 6 | — |
+| the other side | nine non-ids read `null` (`undefined` · `null` · `-1` · `1.5` · `NaN` · `Infinity` · `'0'` · `'2'` · `true`), and so do `null` and `undefined` variants | 0 admitted |
+| the DRAW | `drawVariant` on a synthetic four-row pool numbered 0..3, over 400 seeds | **299 of 400** disagree with the modulus · vid 0 takes **104** |
+| the contrast | the modulus takes vid 0 on **110** of the same 400 | — |
+| the shipped seven | read off the live leaves: 7 zero-led pools, none of which the kernel reads as id-less | 7 · 0 |
+
+⭐ **THE COUNTS LOOK ALIKE AND THE PER-SEED ANSWERS DO NOT** (104 against 110), which is why
+the arm compares the two draws SEED BY SEED. A count test would have passed under the plant.
+
+### THE PLANT, EXECUTED
+
+    cp src/domain/display/stateProse/stateProseKernel.js <backup>
+    perl -pi -e 's/\|\| vid < 0\) return null;/|| vid <= 0) return null;/' <the kernel>
+    md5 ab2e56e2c5fa7da53a4c4cb8021aeedd   (planted)
+
+    clean tree   npx vitest run tests/domain/stateProseKernel.test.js   38 passed
+    planted      1 failed | 37 passed
+                 ⛔ vid 0 is a REAL id: a `> 0` guard splits the corpus: expected null to be +0
+    restored     (from the pre-plant copy, never `git checkout --`)      38 passed
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/domain/stateProseKernel.test.js` | **38 passed** (37 before) |
+| `tests/lint/composeStateProseFence.test.js` + the projection contract | **86 passed** |
+| eslint (2 files) | exit 0 |
+| `node scripts/check-domain-strict.mjs` | **1,120 errors, ceiling 1,120** — exit 0 |
+| `node scripts/check-full-typecheck.mjs` | **173 errors, ceiling 173** — exit 0 |
+| `node scripts/check-observed-shape-readers.mjs` | **1,972 findings, exactly the frozen inventory** — exit 0 |
+| `node scripts/wiring-census.mjs --dry` | CURRENT · delta 0 · sections (none) · ROWS 0 |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | **34 passed** — the kernel's test file is PARKED, so no title moved and no ritual is owed by this commit |
+| projector `--check` | exit 0 |
+| runners / porcelain | 0 / 0 |
+
