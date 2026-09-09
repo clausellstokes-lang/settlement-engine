@@ -1,1 +1,0 @@
-{"url": "fantasyliterature.com/author-interviews/guy-gavriel-kay-2/", "archived_snapshots": {"closest": {"status": "200", "available": true, "url": "http://web.archive.org/web/20250515225734/https://fantasyliterature.com/author-interviews/guy-gavriel-kay-2/", "timestamp": "20250515225734"}}}

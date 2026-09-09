@@ -1,8 +1,0 @@
-  quiet_local            seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
-  realistic_regional     seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
-  dramatic_campaign      seam HOLDS — soak keys=56 == birth keys=56, values equal, order equal, norm(table)==table
-  static_campaign        seam HOLDS — soak keys=36 == birth keys=36, values equal, order equal, norm(table)==table
-  narrative_campaign     seam HOLDS — soak keys=37 == birth keys=37, values equal, order equal, norm(table)==table
-  living_realm           seam HOLDS — soak keys=55 == birth keys=55, values equal, order equal, norm(table)==table
-  full_simulation        seam HOLDS — soak keys=70 == birth keys=70, values equal, order equal, norm(table)==table
-preset-seam: 7 preset(s), 0 refused -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lprobe-out-905/902-osr18/seam/preset-seam-report.json

@@ -1,1 +1,0 @@
-{"meta": {"count": 0, "db_response_time_ms": 8, "page": 1, "per_page": 25, "groups_count": null, "x_query": {"oql": "works where it cites (W3092498066)", "oqo": {"get_rows": "works", "filter_rows": [{"column_id": "referenced_works", "value": "W3092498066"}]}, "url": "/works?filter=referenced_works:W3092498066&per_page=25"}, "cost_usd": 0.0001}, "results": [], "group_by": []}
