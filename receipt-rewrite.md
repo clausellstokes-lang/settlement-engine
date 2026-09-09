@@ -267,3 +267,127 @@ baseline is a shrink-only surface belonging to whoever owns those files.
 | eslint | `npx eslint <the ten touched files>` | **exit 0, no output** |
 | runners | before every vitest, own shell | **0** every time |
 
+
+---
+
+## 8a-2 — PASSAGE SHAPES: THE FOURTH SEEDED DRAW, LICENSED AND MEASURED
+
+Chartered at SITTING §T.4 adopting agenda C⁗; the owner's rulings (a)–(e) of 2026-09-08 ~22:4x.
+**Nothing ships a second shape.** `composeStateProse.js` is NOT a caller of the new module, the
+shipped arrangement stays shape 1, and the manifest classifier prints every class at zero.
+
+### What landed
+
+| file | what |
+|---|---|
+| `src/domain/prose/passageShapes.js` (new) | the closed set of three, the lawful-set computation with every refusal carrying its reason, the seeded selection, the noun carry, and the render half |
+| `scripts/lib/prose-composed-units.mjs` (new) | every composed unit a corpus LICENSES, from `poolMeta.attach` — shared so 8a-5's gate does not re-spell it |
+| `scripts/prose-shape-report.mjs` (new) | ruling (c)'s distribution table |
+| `tests/lint/prosePassageShapes.walker.test.js` (new) | 11 arms, each refusal convicted by a plant one fact from its lawful control |
+| `src/domain/prose/composedWalker.js` | `contentWords` EXPORTED so the estate has one stop list, not two |
+| `docs/content/prose-shift-register.json` | the `passage-shape` mechanism, its two source pins and its measured table |
+| `scripts/mutation-sweep.sh` + `scripts/mutation-coverage-manifest.json` | the E-A plant and its entry |
+| `tests/lint/proseWiringCensus.walker.test.js` | the island roster's fourteenth module |
+| `docs/content/wiring-census.json` | the stamp re-taken |
+
+### ⛔ THE CAR'S CENTRAL MEASUREMENT — THE TABLE RULING (c) ASKS FOR CANNOT BE READ ON THE SHIPPED CORPUS
+
+    node scripts/prose-shape-report.mjs                                          exit 0
+    attach-bearing pools 0 · composable units 0 · units WITH a shape question 0 · draws 0
+
+Not one pool of the product corpus carries a non-empty `attach` set, so not one composed unit has
+a modifier, so not one unit has a shape question. This is not a gap in the script and not a defect:
+the SHIFT REGISTER already pins `attach-set` at **0** with the idiom *"EMPTY on every pool at this
+tip, BY CONSTRUCTION: every shipped pool is a spine and a spine's attach set is empty. Car 9
+authors the first non-empty one."* The composed-prose model is wired and DARK. The script prints
+that finding rather than an empty table, and names the four columns it cannot supply with the car
+that owes each.
+
+### THE TABLE, DRIVEN ON THE TASTE'S COMMITTED DOCK (laneTASTE f07b98529, read-only history)
+
+    node scripts/prose-shape-report.mjs --corpus <taste-corpus.json>             exit 0
+    attach-bearing pools 7 · composable units 408 · units WITH a shape question 408 · draws 26112
+    consequence.clause joints exist: NO — shape 3 is WITHHELD
+
+| MARGINAL | draws | share |
+|---|---|---|
+| spine-then-sentence | 23,907 | **91.56 %** |
+| sentence-then-spine | 2,205 | **8.44 %** |
+| clause-seat | 0 | 0.00 % |
+
+| CONDITIONAL on the lawful set | n | spine-then-sentence | sentence-then-spine |
+|---|---|---|---|
+| lawful = {1} | 21,824 | 100.00 % | — |
+| lawful = {1, 2} | 4,288 | **48.58 %** | **51.42 %** |
+
+⭐ **THIS IS THE DISCRIMINATION RULING (c) WAS WRITTEN TO MAKE, AND IT ANSWERS CLEANLY: SHAPE 1's
+MARGINAL DOMINANCE IS NOT A TIC.** Conditional on both shapes being lawful the draw splits
+48.58 / 51.42 %, which is a coin. Shape 1 leads the marginal only because it is the SOLE lawful
+shape on 21,824 of 26,112 draws. The binding constraint is the thread rule, not the draw: **341 of
+the 408 units refuse shape 2 for want of a noun carried into the spine**, and all 408 refuse shape
+3 because the `consequence.clause` list is empty.
+
+Duplicate-unit rate per shape policy, in basis points: **fixed 9,844 · licensed draw 9,818**. The
+movement is 26 bp and is reported as small — shape variation is not a lever on repetition at this
+sample. Ruling (c) pairs the two columns precisely so a small movement there cannot be sold as a
+large one. Relation distribution: `addition` 100 % of 408. Construction via `composedOrderIdOf`:
+V1 83.09 %, the empty id 16.91 %.
+
+### The design decisions, recorded vetoably
+
+1. **AN ARGMAX, NOT A MODULUS, for the shape draw** — a departure from the brief's literal key
+   `seed::blockId::poolKey::shape`, which is kept as the PARENT and suffixed per shape. The reason
+   is not consistency with law 6 but the same defect in a worse form: the lawful set's SIZE varies
+   UNIT BY UNIT, so a modulus over it would make one unit's shape depend on how many OTHER shapes
+   happened to be lawful for it. Under law 6 that instability was a one-time re-index; here it
+   would be permanent. Driven: over 4,000 seeds, not one read moves between two already-lawful
+   shapes, and the newcomer takes 40–60 % of them.
+2. **The module lives in `src/domain/prose/`, not beside the composer**, and is on the wiring
+   census ISLAND roster as its fourteenth module. That fence is what makes "nothing ships a second
+   shape at car 8a" a MEASUREMENT: the walker asserts that no file in `src/` outside the island
+   names `passageShapes`, so the day `composeStateProse.js` appears in that list, a second shape
+   has shipped and the register's `passage-shape` row owes a declared movement.
+3. **`contentWords` is exported rather than re-spelled.** A second stop list is two vocabularies
+   that drift invisibly, because both halves would agree with themselves. The words this one
+   refuses — `town`, `settlement`, `place`, `thing` — are exactly the ones that would make every
+   pair of sentences in the dossier look threaded.
+
+### EXECUTED ACCEPTANCE
+
+    npx vitest run tests/lint/prosePassageShapes.walker.test.js        11 passed
+    npx vitest run tests/data/dossierStateProseProjection.contract.test.js  68 passed
+    npx vitest run tests/lint                    149 files passed / 1 failed · 2,502 passed / 1
+    npx tsc --noEmit -p tsconfig.full.json       173 errors, 0 in any file this car touched
+    npx eslint <the seven touched files>         exit 0, no output
+
+**THE ZERO-BYTE FENCE**, classifier over 8a-1's tip against 8a-2's:
+
+    REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0 · UNCHANGED 73284 · ADDED 0 · REMOVED 0
+
+### The estate's own gates, each fired and each cured at cause
+
+Five walkers refused the new module. Every one of them was right and none was silenced.
+
+| walker | what it caught | the cure |
+|---|---|---|
+| `proseWiringCensus` (e) THE FENCE | a fourteenth src/ file naming an island module | `passageShapes.js` added to the ISLAND roster with its reason; the `composedHits` equality moved from "reached from nowhere" to "reached from exactly one place INSIDE the island", and a NEW equality pins `passageShapes` itself as reached from nowhere — the vacuous-fence shape handed on |
+| `proseWiringCensus` census stamp ×2 | the committed census stale | re-taken. `--dry` first: **rows 0 · shas 0 · bytes delta 0 · only `stamp` moves**; the whole diff is `producerIndexFiles` 1154 → 1155, one line for one new src file |
+| `domainAnyCastBaseline` ×4 | three `/** @type {any} */` casts | removed at cause by typing `PASSAGE_SHAPES` as `ReadonlyArray<string>`; zero casts remain |
+| `negativeAssertionAnchor` | four un-anchored negatives in my walker | each given a one-line `// anchored:` marker naming the paired positive that follows it (the refusal's own `why`, read off the same result) |
+| `mutationCoverageManifest` | a new invariant file with no E-A entry | a real PLANT, not a rationale and never `uncovered` |
+
+**THE E-A PLANT, MEASURED BY EXECUTION** (cp backup, cp restore, never the checkout family;
+md5 `dae4ad49fd1af7510aa59c14f1bdfd98` before and after):
+
+    perl -0pi -e "s/carries: shared\.length > 0/carries: shared.length >= 0/" src/domain/prose/passageShapes.js
+
+    clean tree   11 passed
+    planted      EXACTLY 1 red — "SHAPE 2 NEEDS THE NOUN CARRY" — 10 passed
+    restored     cmp-identical, 11 passed
+
+One character. It makes `nounCarry` report a carry on every pair including pairs sharing no word,
+so every unit becomes eligible for sentence-first: the shape stops being LICENSED by the
+composition and becomes merely AVAILABLE to it, which is ruling (b)'s exact failure. Nothing
+downstream would say so — the distribution table would show a healthy-looking rise in shape 2's
+conditional share, which is the reading ruling (c) built that column to trust.
+
