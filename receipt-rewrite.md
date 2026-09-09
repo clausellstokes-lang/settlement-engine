@@ -35,7 +35,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-6 | the arm-Q cure + the field-synonym table | **`e2ac44a9c`** | **LANDED** |
 | 8a-7 | the face-count ratchet | **`99e8e56e8`** | **LANDED** |
 | 8a-8 | T-F12's class list re-cut | **`31faa63aa`** | **LANDED** |
-| 8a-9 | the connectives lists to the floors (public-copy drafts) | — | pending |
+| 8a-9 | the connectives lists to the floors (public-copy drafts) | **`bc441dccc`** | **LANDED** |
 | 8a-10 | the register car | — | pending |
 
 ---
@@ -1246,3 +1246,95 @@ and by nothing that renders. The classifier reads UNCHANGED 73,284.
 | typecheck | 173 errors | 
 | eslint | exit 0 |
 | runners / porcelain | 0 / 0 |
+
+---
+
+## 8a-9 — THE CONNECTIVE LISTS TO THEIR FLOORS, AS PUBLIC-COPY DRAFTS (S12; §13 row 27)
+
+**LANDED `bc441dccc`** over `31faa63aa`. Six files. **Zero reader-facing bytes**, and one
+generated-leaf growth declared.
+
+### THE FOUR LISTS, DRAFTED
+
+| relation | seat | floor | joints, in order |
+|---|---|---|---|
+| `consequence` | `clause` | 3 | `, so` · `, and so` · `, leaving` |
+| `tension` | `sentence` | 3 | `Against that,` · `Even so,` · `At the same time,` |
+| `contrast` | `sentence` | 3 | **EMPTY-OPENER** · `Instead,` · `In its place,` |
+| `addition` | `sentence` | 3 | **EMPTY-OPENER** · `Beside that,` · `Also,` |
+
+They are **DRAFTS**: §13 row 27 makes the connectives' copy the owner's, signed at the walk. The
+EMPTY OPENER keeps its place at the HEAD of the two lists that assert adjacency itself — S12 in
+terms, and the joint the owner's own worked line uses.
+
+### ⛔ A LIST LENGTH IS THE MODULUS OF THE JOINT DRAW — AND IT RE-ROLLED NOTHING
+
+Growing a list is a DECLARED ROW on the SHIFT REGISTER's `connective-list-length` mechanism
+(0/0/1/1 → 3/3/3/3, written in this commit). It moved no read, **measured rather than argued**:
+no shipped pool declares `role: modifier`, so the composer draws no joint on any town, and
+growing a list from one to three re-rolls nothing because nothing was ever rolled. The classifier
+printed **UNCHANGED 73,284**.
+
+### ⛔ STILL UNLICENSED IS NOT THE SAME AS UNWRITTEN
+
+None of the engine's 165 relation rows joins two fields a desk reads (car 0's F1), so `seatOf`
+answers `not-consequence` on all 708 pools and the composer cannot reach the `consequence` or
+`tension` list at all. **What the floors buy is that the day a licence exists the writers are not
+also inventing the joinery.** The leaf's own header says so, and the contract asserts the header
+says so — the previous header's sentence *"The two OWED lists stand empty…"* had become false and
+was cured in the projector rather than left in a generated file.
+
+### THE ARM ASSERTS THE COPY VERBATIM, AND TWO THINGS THE PROJECTOR DID NOT CHECK
+
+The joints are asserted by their exact strings rather than by length, because they are COPY and a
+reader of the contract should meet them. Beyond the projector's four refusals (em dash, `which`,
+digit, percent — re-asserted on all twelve joints of the leaf itself), the arm adds **the seat's
+own shape**:
+
+- a CLAUSE joint carries its comma at the **FRONT** (`arrange` appends it directly to the spine's
+  trimmed sentence: `${trimmed}${phrase} ${text}.`);
+- a SENTENCE opener carries it at the **END** and opens on a capital (`${spine} ${opener}
+  ${downCased}`).
+
+A joint on the wrong side of its comma would compose a sentence nobody intended, and nothing in
+the estate said so before.
+
+### THE BYTE ROW, DECLARED
+
+    src/data/dossierConnectives.generated.js   1,365 -> 2,046 raw   (gzip 795 -> 1,138)
+    ceiling 2,122 raw / 1,236 gzip — under both
+    scripts/.prose-byte-baseline.json: one declared row appended, naming the car, the delta
+    and the reason; the chain reaches today's bytes, which is what the ratchet checks
+
+The six PROSE leaves are byte-identical.
+
+### ⛔ A SECOND DECLARED RED, CARRIED TO 8a-10 FOR THE FIRST ONE'S REASON
+
+`tests/lint/observedShapeReaders.walker.test.js` names the connectives leaf as a drifted
+execution INPUT. Lawful, and the shrink-only re-freeze absorbs it — but the re-freeze REFUSES A
+DIRTY TREE, executed:
+
+    node scripts/check-observed-shape-readers.mjs --write
+    Error: observed-shape current sourceTree is not the exact committed HEAD input tree
+
+Exactly the lighting census's shape. It is a register-car act and cannot be done per commit.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| projector | `--check` exit 0; only the connectives leaf moved |
+| `tests/data/dossierStateProseProjection.contract.test.js` | **77 passed** |
+| `tests/domain/composeStateProse.test.js` | **50 passed** |
+| `npx vitest run tests/lint` | **152 files passed / 2 failed · 2,588 passed / 2** (both declared, both 8a-10's) |
+| classifier, 8a-8 → 8a-9 | **UNCHANGED 73,284 · every class 0** |
+| eslint | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+### The judgment call, recorded for veto
+
+**THE COPY ITSELF IS A DRAFT AND THE LANE WROTE IT.** §13 row 27 makes it the owner's, signed at
+the walk; the brief asked for drafts at this car. Each joint is cut to the register card's voice —
+flat, clerkly, no figure, no forecast, no em dash, no `, which` — and the two lists that assert
+adjacency keep the empty opener first. A chair or the owner may replace any of the twelve without
+touching a mechanism: the lists are data behind a draw nothing reaches yet.
