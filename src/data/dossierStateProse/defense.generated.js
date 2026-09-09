@@ -417,51 +417,81 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: plagued, perimeter but NO force to hold it": [
         {
           "angle": "ledger",
-          "text": "{settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night.",
+          "text": "The works about the town are up, and the country beyond them is plagued with beasts. On the works {settlement} keeps neither garrison nor militia.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Neither garrison nor militia is kept, and the wall stands unheld. Beyond that wall the country about {settlement} is monster country.",
+            "The circuit stands, and under arms the town holds nothing. The country lying about {settlement} runs with beasts.",
+            "Beasts have the run of the country outside the town. The perimeter at {settlement} is up and unmanned."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger walks the perimeter at {settlement} and finds long stretches of good work with nobody on them, in a country where that matters a great deal.",
+          "text": "Beast country comes up to the wall about {settlement}, and the wall is unheld.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Plagued country lies about {settlement}, and its perimeter stands without garrison or militia.",
+            "Monsters are in the country up to the circuit of {settlement}, and the circuit is unmanned.",
+            "Outside {settlement} the country is monster country, and nothing under arms stands on the town's works."
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "The works at {settlement} are doing less each season as the watch thins, and the thinning is not being reversed.",
+          "text": "The wall about {settlement} goes on standing and goes on unheld in beast country.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Monsters remain in the country about {settlement}, and the perimeter remains without garrison or militia.",
+            "The country about {settlement} stays plagued, and the works stay up and empty.",
+            "Beasts go on in the country about {settlement}, and the circuit goes on unmanned."
+          ]
         }
       ],
       "Beasts & Monsters: plagued, NO perimeter and NO force": [
         {
           "angle": "ledger",
-          "text": "An embattled country and nothing organized standing in it: {settlement} has no line, no force and no specialist recourse, and survival here rests on terrain, distance and the ability to leave.",
+          "text": "Beasts hold the country about {settlement}, and the town keeps no perimeter and no force.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Creatures work the country outside {settlement}, and the town has no wall and nobody under arms.",
+            "Where the country runs with beasts, {settlement} sets no line about it and keeps no force.",
+            "About {settlement} the country is plagued, and the town is neither walled nor armed."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town does not defend itself. What it does is watch, and move, and hope the pressure goes around it, and that is understood by everyone in it.",
+          "text": "The country about the town is given over to beasts. The town sets against it neither a wall nor any people under arms.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The beasts have the country, and the town neither walls itself nor keeps a force.",
+            "The town is unwalled and unarmed in plagued country.",
+            "Plagued country runs up to the town. The town shows no line and no force."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met.",
+          "text": "Beyond {settlement} the country is plagued, and the town's edge holds neither a wall nor a force.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Nothing at the edge of {settlement} is walled or held, and the country beyond is plagued.",
+            "Beasts are what the country about {settlement} holds, and the town within it stands without a perimeter and without any force.",
+            "A plagued country lies about {settlement}, and the town in it has no wall and no force."
+          ]
         }
       ],
       "Beasts & Monsters: frontier, credible deterrence": [
@@ -580,49 +610,79 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: walls AND professional garrison": [
         {
           "angle": "ledger",
-          "text": "{settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.",
+          "text": "The wall at {settlement} stands, and the men who hold it are soldiers by trade. That deters raiding and it deters a conventional assault, and it does not extend to a long siege with nothing stored behind the wall.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A standing garrison keeps the line at {settlement}, and the line does not stand on its own. It answers a raid and it answers an assault brought in order, and no answer of that kind reaches a long siege with nothing stored behind the line.",
+            "At {settlement} a paid garrison stands on a wall that the town keeps up. Raids are deterred by that and so are assaults brought on in the ordinary way, and a long siege with nothing stored behind the wall is not.",
+            "The men on the perimeter at {settlement} are soldiers by profession, and the perimeter is where they stand. A raid is held off and so is a conventional assault, and a long siege with nothing stored behind the perimeter is past what the men on it can hold."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.",
+          "text": "A stranger comes up to {settlement} and takes the measure of the place. The wall stands and the men who belong to it stand with it, and the stranger prices an attempt against both.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "An outsider walking up to {settlement} finds the works manned and not empty. The estimate an outsider brings does not survive that, and the cost of an attempt is set again on the spot.",
+            "A traveller who stops at {settlement} sees soldiers standing where the line runs. The cost of an attempt on the town is read off the line and the soldiers together, and the traveller reads it before going on.",
+            "From outside {settlement} the wall shows and the soldiers on it show too. A newcomer who prices an attempt on the town prices it against the wall and the soldiers at once, and not against the wall alone."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town believes it could be held, and the belief is founded on something rather than on hope.",
+          "text": "The town takes it as settled that the place could be held. What the town has standing is the ground for saying so, and hope does not enter into the reckoning.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Here the place is spoken of as one that could be held. The ground for saying it is what the town has in hand, and hope is no part of the ground.",
+            "The matter of whether the place could be held is settled in this town. What settles the matter is in plain sight, and the town does not have to reach for hope in order to say so.",
+            "Confidence that the place could be held is ordinary talk. What it rests on is what the town keeps in hand, and hope is not what holds it up."
+          ]
         }
       ],
       "Invasion & War: walls with citizen militia": [
         {
           "angle": "ledger",
-          "text": "Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.",
+          "text": "Walls at {settlement} are held by the town's own people, and against raiders that holds. Against a company that arrives in order with a siege train it does not.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The people on the wall at {settlement} are the town's own. They would turn a raid and not a company that fights for a living and brings gear for a wall.",
+            "Raiders do not get past the townspeople on the wall at {settlement}. Professionals with a siege train would.",
+            "Behind the wall at {settlement} stands a militia of the town's own. It is credible against raiders and not against an attacker who comes trained and brings siege gear."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town would turn out and does not pretend that turning out is the same as being defended.",
+          "text": "The town would turn out. A turnout is not a defence.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Townsfolk would come out. What comes out is a militia and not a defence.",
+            "The muster would fill, and a town on its feet is not a town defended.",
+            "Turning out is what this town would do, and it is not the same as being defended."
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "What {settlement} has would hold against the first thing and is unlikely to hold against the second, and nothing in hand changes that.",
+          "text": "What stands at {settlement} would hold against a raid and is unlikely to hold against a trained attempt with siege gear. The same arrangement stands in either case.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A raid would be held at {settlement}, and a company that comes in order with a siege train would not. The means are the same in both.",
+            "Against raiders what {settlement} keeps would serve. Against professionals with siege gear the same keeping would not.",
+            "This town's answer to raiders would hold at {settlement}. That same answer is unlikely to hold against a trained company with a siege train."
+          ]
         }
       ],
       "Invasion & War: walls with NO force": [
@@ -676,25 +736,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: militia only": [
         {
           "angle": "ledger",
-          "text": "{settlement} can put armed citizens on their own ground, which counts for something against a disorganized raid and for nothing at all against a disciplined force.",
+          "text": "{settlement} can put its own citizens under arms on their own ground. That ground is worth something against a raid in disorder and nothing at all against a force that keeps its ranks.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The muster at {settlement} is townspeople under arms on their own ground. That muster is a match for a raid in disorder, and no match at all for a force under discipline.",
+            "Arms at {settlement} sit in the hands of the town's own people. On their own ground they would hold a war band that came in no order, and give way to a company in step.",
+            "Townspeople under arms are what {settlement} can raise, and they raise it on home ground. Raiders who come in no order are matched on that ground, and troops who keep their order are met by nothing."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town knows its own country and knows that knowing it is not an answer to a professional army.",
+          "text": "The town knows its own country, and it knows what that knowledge is worth. Against a professional army it is worth nothing, and the town does not argue the point.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The people of this town know the country they live in. That knowledge is no answer to a professional army, and the town does not claim it is.",
+            "The ground under this town is what the town understands. That understanding does not put a professional army out of the country, and the town does not say it would.",
+            "Nothing this town knows about its own country would stop a professional army. The town's own estimate of the matter runs no higher."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} meets armed townspeople who are entirely competent on their own ground and have never stood in a line with anybody.",
+          "text": "A stranger at {settlement} meets armed townspeople, entirely competent on their own ground. The formed line is no part of their practice.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Whoever comes to {settlement} out of the country meets armed townspeople who are sure on their own ground. The formed line is not among the things they practise.",
+            "An outsider at {settlement} finds weapons in the hands of townspeople, and finds them capable on ground of their own. The drill of ranks is outside what these townspeople do.",
+            "A traveller at {settlement} is met by townspeople carrying arms, at home on the ground they stand on. Of the formed line they have no practice."
+          ]
         }
       ],
       "Invasion & War: neither walls nor force": [
@@ -774,27 +849,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Internal Security: detention without process": [
         {
           "angle": "ledger",
-          "text": "{settlement} can hold people and has no settled way of deciding whether it should, which makes enforcement here a matter of who is doing it.",
+          "text": "Confinement is within this town's power at {settlement} and process is not, so a person stays held as long as one judgment holds.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The power to hold stands at {settlement} and the power to try does not, so a holding answers to the word that made it and to nothing else.",
+            "A person is taken at {settlement} and kept. What follows is settled by whoever ordered the taking and by no court.",
+            "A holding at {settlement} runs with nothing laid against the person, so what it comes to is decided by whoever applies the power."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is careful in a way he would not need to be in a town with courts, and cannot say precisely why.",
+          "text": "A stranger at {settlement} walks with a care that a town with courts would not ask, and the reason is not one the stranger can give.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Visitors go carefully at {settlement}, and nobody tells them why. The same visitor in a town with courts would need less care.",
+            "A traveller keeps a caution at {settlement} that a court would make needless, and nobody offers a reason for the caution.",
+            "The stranger's care at {settlement} is never accounted for. A court would account for it, and the town keeps no court."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town can put a person away at {settlement} and cannot say on what grounds, and has learned not to ask on whose.",
+          "text": "A person can be put away at {settlement}, and the town will not say on what ground, nor ask on whose.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "This town confines and names no ground. On whose word a person is confined at {settlement} is a question nobody here puts.",
+            "People are held at {settlement} on grounds the town never states, and whose authority stands behind a holding is never asked.",
+            "The town puts a person away at {settlement} and states no ground. Whose order it was the town never asks."
+          ]
         }
       ],
       "Internal Security: no legal infrastructure": [
@@ -824,25 +914,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: STRONG": [
         {
           "angle": "ledger",
-          "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.",
+          "text": "The revenue of {settlement} stands above the charge that a sustained crisis would lay on the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Emergencies at {settlement} are paid from income.",
+            "A long emergency at {settlement} draws on what the town earns.",
+            "Crisis spending at {settlement} sits inside ordinary means."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
+          "text": "The town can pay its own way through a hard turn.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "What a crisis costs, the town has.",
+            "When a bad stretch has to be paid for, the money is already in the town's keeping.",
+            "Hard going here is a charge the town can carry."
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.",
+          "text": "Money is not what would give way at {settlement}.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Cost is not the constraint on what {settlement} could bring to a sustained crisis.",
+            "Under sustained pressure {settlement} is carried by its own money.",
+            "Should a sustained crisis come to {settlement}, the town would not have to choose what to leave undone."
+          ]
         }
       ],
       "Economic Survival: ADEQUATE": [
@@ -946,25 +1051,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: granary AND parish care only": [
         {
           "angle": "ledger",
-          "text": "There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.",
+          "text": "Grain is laid by at {settlement} against hunger, and the clergy tend the sick. What the clergy can do against disease is better than nothing and well short of a hospital.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The stores at {settlement} are held against want, and the sick are left to the parish. Parish care falls well short of a hospital and is still more than nothing at all.",
+            "What is kept back at {settlement} stands against hunger, and the church nurses the ill. A hospital would do more, and nothing at all would do less.",
+            "Hunger at {settlement} would be met out of the store, and sickness by the church. The church is more than nothing against a disease and less than a hospital."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.",
+          "text": "A bad year is something the town can eat its way through. A plague it meets with prayer, and after the prayer with nursing.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Want the town can sit through on what is stored. Sickness it answers with prayer, and with nursing behind the prayer.",
+            "Food enough to carry the town through a year that fails is in hand, and a plague is met by the parish at prayer and the parish at the bedside, in that order.",
+            "Stored food carries the town through a year gone wrong. The town's answer to a plague is prayer, and nursing when the praying is done."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger finds a full store and a modest infirmary at {settlement}, and can see which of the two the town has spent its thinking on.",
+          "text": "A traveller stopping at {settlement} finds the store full and the infirmary small, and can tell from the pair which of the two the town has thought about.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "What a stranger sees at {settlement} is a full store and a small room for the sick. Where the town's thinking went is plain in the pair.",
+            "The granary at {settlement} is in good supply and the sick-room barely furnished. A stranger reads the preference off the pair.",
+            "A stranger walks past a full store at {settlement} and into a small room where the sick are nursed, and does not have to ask which of them the town has favoured."
+          ]
         }
       ],
       "Disasters & Famine: granary, NO medical provision": [
@@ -994,49 +1114,79 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: NO reserves, hospital present": [
         {
           "angle": "ledger",
-          "text": "{settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.",
+          "text": "The hospital at {settlement} can take an outbreak in and hold it there, and the town keeps nothing back against a failed harvest. The failure and the hardship fall in the same season.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A fever at {settlement} can be treated and kept from spreading. Against a poor harvest the town has laid by nothing, and the failed harvest is the harvest that brings the want.",
+            "The sick at {settlement} are taken in and kept apart. What the town has laid up against a failed harvest is nothing, and hardship is not deferred past the season of the failure.",
+            "An outbreak at {settlement} can be treated and confined. Behind a failed harvest the town keeps nothing at all, and the hardship arrives with the harvest."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.",
+          "text": "The town is set better against sickness than against hunger, and takes no comfort in the ordering. Towns are ordinarily set the other way about.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Sickness is better met here than hunger. The town takes no ease in that, and the order is uncommon among towns.",
+            "A plague would find more provision here than a poor harvest would, and the town draws no comfort from it. Such an arrangement is rare.",
+            "This town is readier against a sickness than against hunger, and no ease comes to it from the difference. That ordering is seldom found in a town."
+          ]
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.",
+          "text": "The provision at {settlement} answers the sickness the town has met and stops short of the hunger it has not. The gap between them is not being closed.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A hospital at {settlement} stands against the sickness the town has met, and nothing stands against the hunger it has not. Nothing in hand is making up the difference.",
+            "Care for the sick at {settlement} matches a trouble the town has known, and no store matches the trouble it has not. The arrangement is not being altered.",
+            "Against sickness {settlement} has a hospital, and against hunger it has nothing. The town has met the sickness and not the hunger, and the difference is left where it stands."
+          ]
         }
       ],
       "Disasters & Famine: NO reserves, NO medical provision": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.",
+          "text": "No food is set aside at {settlement} against a bad year, and no one in the town treats the sick. The year that fails is hardship at once, and the plague burns itself out.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Against a bad year {settlement} keeps no reserve of food, and against a sickness nobody at all. Hardship comes with the bad year, and the sickness is waited out.",
+            "At {settlement} neither a store against the bad year nor a hand for the sick is held anywhere. The sickness runs its course, and the failed harvest is hardship with no interval.",
+            "Nothing is laid up at {settlement} against a bad year, and nobody here nurses the sick. A failed harvest is want at once, and the sickness ends unaided."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.",
+          "text": "The town's answer to a sickness is the answer it gives a bad season. Both are endured, and the counting comes after.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A season gone bad and a sickness come to one answer here, and that answer is to bear the thing. The count is taken when the thing has gone by.",
+            "Hunger and the sickness are met in one way here, lived through while they last and counted when they are done.",
+            "Between a bad season and a sickness the town makes no difference of answer, and it holds on through each. A reckoning follows when each is over."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger looking for the granary or the sick-house at {settlement} is directed to neither, because there is neither.",
+          "text": "A stranger asking after the granary or the sick-house at {settlement} is sent to neither. The town keeps no such place.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A newcomer at {settlement} asking after the store of food or the house of the sick is given no direction, because the town holds neither.",
+            "Whoever comes to {settlement} looking for a grain store or a sickroom is directed to neither. Neither building stands in the town.",
+            "Strangers at {settlement} ask where the grain is kept and where the sick are taken, and get no answer to either. Nothing in the town goes by either name."
+          ]
         }
       ]
     },
@@ -1061,9 +1211,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1077,9 +1227,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1157,9 +1307,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1173,9 +1323,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1221,9 +1371,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1285,9 +1435,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1317,9 +1467,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1397,9 +1547,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1429,9 +1579,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -1445,9 +1595,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,

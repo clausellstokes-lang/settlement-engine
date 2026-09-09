@@ -2607,14 +2607,32 @@ supplies the ancestry.
    - `[face]` Where the country about {settlement} runs with creatures, the town's people go on keeping the wall up.
 
 **`Beasts & Monsters`: `plagued`, perimeter but NO force to hold it**
-1. `[ledger]` {settlement} has a wall and nobody to man it. The line is a chokepoint on paper and a chokepoint requires people standing in it, which this town cannot supply for more than a night.
-2. `[visitor]` A stranger walks the perimeter at {settlement} and finds long stretches of good work with nobody on them, in a country where that matters a great deal.
-3. `[unfolding]` The works at {settlement} are doing less each season as the watch thins, and the thinning is not being reversed.
+1. `[ledger]` The works about the town are up, and the country beyond them is plagued with beasts. On the works {settlement} keeps neither garrison nor militia.
+   - `[face]` Neither garrison nor militia is kept, and the wall stands unheld. Beyond that wall the country about {settlement} is monster country.
+   - `[face]` The circuit stands, and under arms the town holds nothing. The country lying about {settlement} runs with beasts.
+   - `[face]` Beasts have the run of the country outside the town. The perimeter at {settlement} is up and unmanned.
+2. `[visitor]` Beast country comes up to the wall about {settlement}, and the wall is unheld.
+   - `[face]` Plagued country lies about {settlement}, and its perimeter stands without garrison or militia.
+   - `[face]` Monsters are in the country up to the circuit of {settlement}, and the circuit is unmanned.
+   - `[face]` Outside {settlement} the country is monster country, and nothing under arms stands on the town's works.
+3. `[unfolding]` The wall about {settlement} goes on standing and goes on unheld in beast country.
+   - `[face]` Monsters remain in the country about {settlement}, and the perimeter remains without garrison or militia.
+   - `[face]` The country about {settlement} stays plagued, and the works stay up and empty.
+   - `[face]` Beasts go on in the country about {settlement}, and the circuit goes on unmanned.
 
 **`Beasts & Monsters`: `plagued`, NO perimeter and NO force**
-1. `[ledger]` An embattled country and nothing organized standing in it: {settlement} has no line, no force and no specialist recourse, and survival here rests on terrain, distance and the ability to leave.
-2. `[street]` The town does not defend itself. What it does is watch, and move, and hope the pressure goes around it, and that is understood by everyone in it.
-3. `[visitor]` A stranger arriving at {settlement} understands the danger before anybody explains it, because nothing about the place is arranged as though danger were expected to be met.
+1. `[ledger]` Beasts hold the country about {settlement}, and the town keeps no perimeter and no force.
+   - `[face]` Creatures work the country outside {settlement}, and the town has no wall and nobody under arms.
+   - `[face]` Where the country runs with beasts, {settlement} sets no line about it and keeps no force.
+   - `[face]` About {settlement} the country is plagued, and the town is neither walled nor armed.
+2. `[street]` The country about the town is given over to beasts. The town sets against it neither a wall nor any people under arms.
+   - `[face]` The beasts have the country, and the town neither walls itself nor keeps a force.
+   - `[face]` The town is unwalled and unarmed in plagued country.
+   - `[face]` Plagued country runs up to the town. The town shows no line and no force.
+3. `[visitor]` Beyond {settlement} the country is plagued, and the town's edge holds neither a wall nor a force.
+   - `[face]` Nothing at the edge of {settlement} is walled or held, and the country beyond is plagued.
+   - `[face]` Beasts are what the country about {settlement} holds, and the town within it stands without a perimeter and without any force.
+   - `[face]` A plagued country lies about {settlement}, and the town in it has no wall and no force.
 
 **`Beasts & Monsters`: `frontier`, credible deterrence**
 1. `[ledger]` {settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.
@@ -2646,14 +2664,32 @@ supplies the ancestry.
 3. `[visitor]` A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
 
 **`Invasion & War`: walls AND professional garrison**
-1. `[ledger]` {settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.
-2. `[visitor]` A stranger sizing {settlement} up sees the two things that matter together (the wall and the men who belong to it) and revises what an attempt would cost.
-3. `[street]` The town believes it could be held, and the belief is founded on something rather than on hope.
+1. `[ledger]` The wall at {settlement} stands, and the men who hold it are soldiers by trade. That deters raiding and it deters a conventional assault, and it does not extend to a long siege with nothing stored behind the wall.
+   - `[face]` A standing garrison keeps the line at {settlement}, and the line does not stand on its own. It answers a raid and it answers an assault brought in order, and no answer of that kind reaches a long siege with nothing stored behind the line.
+   - `[face]` At {settlement} a paid garrison stands on a wall that the town keeps up. Raids are deterred by that and so are assaults brought on in the ordinary way, and a long siege with nothing stored behind the wall is not.
+   - `[face]` The men on the perimeter at {settlement} are soldiers by profession, and the perimeter is where they stand. A raid is held off and so is a conventional assault, and a long siege with nothing stored behind the perimeter is past what the men on it can hold.
+2. `[visitor]` A stranger comes up to {settlement} and takes the measure of the place. The wall stands and the men who belong to it stand with it, and the stranger prices an attempt against both.
+   - `[face]` An outsider walking up to {settlement} finds the works manned and not empty. The estimate an outsider brings does not survive that, and the cost of an attempt is set again on the spot.
+   - `[face]` A traveller who stops at {settlement} sees soldiers standing where the line runs. The cost of an attempt on the town is read off the line and the soldiers together, and the traveller reads it before going on.
+   - `[face]` From outside {settlement} the wall shows and the soldiers on it show too. A newcomer who prices an attempt on the town prices it against the wall and the soldiers at once, and not against the wall alone.
+3. `[street]` The town takes it as settled that the place could be held. What the town has standing is the ground for saying so, and hope does not enter into the reckoning.
+   - `[face]` Here the place is spoken of as one that could be held. The ground for saying it is what the town has in hand, and hope is no part of the ground.
+   - `[face]` The matter of whether the place could be held is settled in this town. What settles the matter is in plain sight, and the town does not have to reach for hope in order to say so.
+   - `[face]` Confidence that the place could be held is ordinary talk. What it rests on is what the town keeps in hand, and hope is not what holds it up.
 
 **`Invasion & War`: walls with citizen militia**
-1. `[ledger]` Walls at {settlement} with townspeople behind them: credible against raiders, and inadequate against anybody who arrives professionally and brought siege gear.
-2. `[street]` The town would turn out and does not pretend that turning out is the same as being defended.
-3. `[unfolding]` What {settlement} has would hold against the first thing and is unlikely to hold against the second, and nothing in hand changes that.
+1. `[ledger]` Walls at {settlement} are held by the town's own people, and against raiders that holds. Against a company that arrives in order with a siege train it does not.
+   - `[face]` The people on the wall at {settlement} are the town's own. They would turn a raid and not a company that fights for a living and brings gear for a wall.
+   - `[face]` Raiders do not get past the townspeople on the wall at {settlement}. Professionals with a siege train would.
+   - `[face]` Behind the wall at {settlement} stands a militia of the town's own. It is credible against raiders and not against an attacker who comes trained and brings siege gear.
+2. `[street]` The town would turn out. A turnout is not a defence.
+   - `[face]` Townsfolk would come out. What comes out is a militia and not a defence.
+   - `[face]` The muster would fill, and a town on its feet is not a town defended.
+   - `[face]` Turning out is what this town would do, and it is not the same as being defended.
+3. `[unfolding]` What stands at {settlement} would hold against a raid and is unlikely to hold against a trained attempt with siege gear. The same arrangement stands in either case.
+   - `[face]` A raid would be held at {settlement}, and a company that comes in order with a siege train would not. The means are the same in both.
+   - `[face]` Against raiders what {settlement} keeps would serve. Against professionals with siege gear the same keeping would not.
+   - `[face]` This town's answer to raiders would hold at {settlement}. That same answer is unlikely to hold against a trained company with a siege train.
 
 **`Invasion & War`: walls with NO force**
 1. `[ledger]` {settlement} has walls and nobody to put on them. A determined attacker takes this town with ladders and patience, and requires nothing else.
@@ -2666,9 +2702,18 @@ supplies the ancestry.
 3. `[visitor]` A stranger sees soldiers at {settlement} and no line for them to stand behind, and can see how that decides where any fight would happen.
 
 **`Invasion & War`: militia only**
-1. `[ledger]` {settlement} can put armed citizens on their own ground, which counts for something against a disorganized raid and for nothing at all against a disciplined force.
-2. `[street]` The town knows its own country and knows that knowing it is not an answer to a professional army.
-3. `[visitor]` A stranger at {settlement} meets armed townspeople who are entirely competent on their own ground and have never stood in a line with anybody.
+1. `[ledger]` {settlement} can put its own citizens under arms on their own ground. That ground is worth something against a raid in disorder and nothing at all against a force that keeps its ranks.
+   - `[face]` The muster at {settlement} is townspeople under arms on their own ground. That muster is a match for a raid in disorder, and no match at all for a force under discipline.
+   - `[face]` Arms at {settlement} sit in the hands of the town's own people. On their own ground they would hold a war band that came in no order, and give way to a company in step.
+   - `[face]` Townspeople under arms are what {settlement} can raise, and they raise it on home ground. Raiders who come in no order are matched on that ground, and troops who keep their order are met by nothing.
+2. `[street]` The town knows its own country, and it knows what that knowledge is worth. Against a professional army it is worth nothing, and the town does not argue the point.
+   - `[face]` The people of this town know the country they live in. That knowledge is no answer to a professional army, and the town does not claim it is.
+   - `[face]` The ground under this town is what the town understands. That understanding does not put a professional army out of the country, and the town does not say it would.
+   - `[face]` Nothing this town knows about its own country would stop a professional army. The town's own estimate of the matter runs no higher.
+3. `[visitor]` A stranger at {settlement} meets armed townspeople, entirely competent on their own ground. The formed line is no part of their practice.
+   - `[face]` Whoever comes to {settlement} out of the country meets armed townspeople who are sure on their own ground. The formed line is not among the things they practise.
+   - `[face]` An outsider at {settlement} finds weapons in the hands of townspeople, and finds them capable on ground of their own. The drill of ranks is outside what these townspeople do.
+   - `[face]` A traveller at {settlement} is met by townspeople carrying arms, at home on the ground they stand on. Of the formed line they have no practice.
 
 **`Invasion & War`: neither walls nor force**
 1. `[ledger]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
@@ -2686,9 +2731,18 @@ supplies the ancestry.
 3. `[unfolding]` Each judgment {settlement} cannot enforce costs the next one a little of its weight, and the town's courts are spending down a reputation they cannot replace.
 
 **`Internal Security`: detention without process**
-1. `[ledger]` {settlement} can hold people and has no settled way of deciding whether it should, which makes enforcement here a matter of who is doing it.
-2. `[visitor]` A stranger at {settlement} is careful in a way he would not need to be in a town with courts, and cannot say precisely why.
-3. `[street]` The town can put a person away at {settlement} and cannot say on what grounds, and has learned not to ask on whose.
+1. `[ledger]` Confinement is within this town's power at {settlement} and process is not, so a person stays held as long as one judgment holds.
+   - `[face]` The power to hold stands at {settlement} and the power to try does not, so a holding answers to the word that made it and to nothing else.
+   - `[face]` A person is taken at {settlement} and kept. What follows is settled by whoever ordered the taking and by no court.
+   - `[face]` A holding at {settlement} runs with nothing laid against the person, so what it comes to is decided by whoever applies the power.
+2. `[visitor]` A stranger at {settlement} walks with a care that a town with courts would not ask, and the reason is not one the stranger can give.
+   - `[face]` Visitors go carefully at {settlement}, and nobody tells them why. The same visitor in a town with courts would need less care.
+   - `[face]` A traveller keeps a caution at {settlement} that a court would make needless, and nobody offers a reason for the caution.
+   - `[face]` The stranger's care at {settlement} is never accounted for. A court would account for it, and the town keeps no court.
+3. `[street]` A person can be put away at {settlement}, and the town will not say on what ground, nor ask on whose.
+   - `[face]` This town confines and names no ground. On whose word a person is confined at {settlement} is a question nobody here puts.
+   - `[face]` People are held at {settlement} on grounds the town never states, and whose authority stands behind a holding is never asked.
+   - `[face]` The town puts a person away at {settlement} and states no ground. Whose order it was the town never asks.
 
 **`Internal Security`: no legal infrastructure**
 1. `[ledger]` There is no legal machinery at {settlement}; order here rests on force alone, and force alone deters only while it is present.
@@ -2696,9 +2750,18 @@ supplies the ancestry.
 3. `[visitor]` A stranger wronged at {settlement} discovers there is nowhere to take it, and that the discovery surprises nobody local.
 
 **`Economic Survival`: `STRONG`**
-1. `[ledger]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.
-2. `[street]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
-3. `[counterforce]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
+1. `[ledger]` The revenue of {settlement} stands above the charge that a sustained crisis would lay on the town.
+   - `[face]` Emergencies at {settlement} are paid from income.
+   - `[face]` A long emergency at {settlement} draws on what the town earns.
+   - `[face]` Crisis spending at {settlement} sits inside ordinary means.
+2. `[street]` The town can pay its own way through a hard turn.
+   - `[face]` What a crisis costs, the town has.
+   - `[face]` When a bad stretch has to be paid for, the money is already in the town's keeping.
+   - `[face]` Hard going here is a charge the town can carry.
+3. `[counterforce]` Money is not what would give way at {settlement}.
+   - `[face]` Cost is not the constraint on what {settlement} could bring to a sustained crisis.
+   - `[face]` Under sustained pressure {settlement} is carried by its own money.
+   - `[face]` Should a sustained crisis come to {settlement}, the town would not have to choose what to leave undone.
 
 **`Economic Survival`: `ADEQUATE`**
 1. `[ledger]` {settlement} can fund a short crisis. A long one begins eating reserves within a few months, and the reserves are not deep enough to hide that from anybody.
@@ -2721,9 +2784,18 @@ supplies the ancestry.
 3. `[counterforce]` Neither a failed harvest nor an outbreak turns into a catastrophe at {settlement}, and the reason is in the two buildings rather than in the luck.
 
 **`Disasters & Famine`: granary AND parish care only**
-1. `[ledger]` There is food stored at {settlement} and there are clergy who tend the sick: reserves against hunger, and against disease something better than nothing and well short of a hospital.
-2. `[street]` The town can eat through a bad year. What it does about a plague is pray and nurse, in that order.
-3. `[visitor]` A stranger finds a full store and a modest infirmary at {settlement}, and can see which of the two the town has spent its thinking on.
+1. `[ledger]` Grain is laid by at {settlement} against hunger, and the clergy tend the sick. What the clergy can do against disease is better than nothing and well short of a hospital.
+   - `[face]` The stores at {settlement} are held against want, and the sick are left to the parish. Parish care falls well short of a hospital and is still more than nothing at all.
+   - `[face]` What is kept back at {settlement} stands against hunger, and the church nurses the ill. A hospital would do more, and nothing at all would do less.
+   - `[face]` Hunger at {settlement} would be met out of the store, and sickness by the church. The church is more than nothing against a disease and less than a hospital.
+2. `[street]` A bad year is something the town can eat its way through. A plague it meets with prayer, and after the prayer with nursing.
+   - `[face]` Want the town can sit through on what is stored. Sickness it answers with prayer, and with nursing behind the prayer.
+   - `[face]` Food enough to carry the town through a year that fails is in hand, and a plague is met by the parish at prayer and the parish at the bedside, in that order.
+   - `[face]` Stored food carries the town through a year gone wrong. The town's answer to a plague is prayer, and nursing when the praying is done.
+3. `[visitor]` A traveller stopping at {settlement} finds the store full and the infirmary small, and can tell from the pair which of the two the town has thought about.
+   - `[face]` What a stranger sees at {settlement} is a full store and a small room for the sick. Where the town's thinking went is plain in the pair.
+   - `[face]` The granary at {settlement} is in good supply and the sick-room barely furnished. A stranger reads the preference off the pair.
+   - `[face]` A stranger walks past a full store at {settlement} and into a small room where the sick are nursed, and does not have to ask which of them the town has favoured.
 
 **`Disasters & Famine`: granary, NO medical provision**
 1. `[ledger]` {settlement} can feed itself through a failed harvest and has nothing at all against disease; a sickness here spreads until it stops of its own accord.
@@ -2731,14 +2803,32 @@ supplies the ancestry.
 3. `[street]` The town can outlast a hungry year at {settlement} and has no answer at all to a sick one, and knows which of the two it fears.
 
 **`Disasters & Famine`: NO reserves, hospital present**
-1. `[ledger]` {settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.
-2. `[street]` The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.
-3. `[unfolding]` {settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.
+1. `[ledger]` The hospital at {settlement} can take an outbreak in and hold it there, and the town keeps nothing back against a failed harvest. The failure and the hardship fall in the same season.
+   - `[face]` A fever at {settlement} can be treated and kept from spreading. Against a poor harvest the town has laid by nothing, and the failed harvest is the harvest that brings the want.
+   - `[face]` The sick at {settlement} are taken in and kept apart. What the town has laid up against a failed harvest is nothing, and hardship is not deferred past the season of the failure.
+   - `[face]` An outbreak at {settlement} can be treated and confined. Behind a failed harvest the town keeps nothing at all, and the hardship arrives with the harvest.
+2. `[street]` The town is set better against sickness than against hunger, and takes no comfort in the ordering. Towns are ordinarily set the other way about.
+   - `[face]` Sickness is better met here than hunger. The town takes no ease in that, and the order is uncommon among towns.
+   - `[face]` A plague would find more provision here than a poor harvest would, and the town draws no comfort from it. Such an arrangement is rare.
+   - `[face]` This town is readier against a sickness than against hunger, and no ease comes to it from the difference. That ordering is seldom found in a town.
+3. `[unfolding]` The provision at {settlement} answers the sickness the town has met and stops short of the hunger it has not. The gap between them is not being closed.
+   - `[face]` A hospital at {settlement} stands against the sickness the town has met, and nothing stands against the hunger it has not. Nothing in hand is making up the difference.
+   - `[face]` Care for the sick at {settlement} matches a trouble the town has known, and no store matches the trouble it has not. The arrangement is not being altered.
+   - `[face]` Against sickness {settlement} has a hospital, and against hunger it has nothing. The town has met the sickness and not the hunger, and the difference is left where it stands.
 
 **`Disasters & Famine`: NO reserves, NO medical provision**
-1. `[ledger]` {settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.
-2. `[street]` The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
-3. `[visitor]` A stranger looking for the granary or the sick-house at {settlement} is directed to neither, because there is neither.
+1. `[ledger]` No food is set aside at {settlement} against a bad year, and no one in the town treats the sick. The year that fails is hardship at once, and the plague burns itself out.
+   - `[face]` Against a bad year {settlement} keeps no reserve of food, and against a sickness nobody at all. Hardship comes with the bad year, and the sickness is waited out.
+   - `[face]` At {settlement} neither a store against the bad year nor a hand for the sick is held anywhere. The sickness runs its course, and the failed harvest is hardship with no interval.
+   - `[face]` Nothing is laid up at {settlement} against a bad year, and nobody here nurses the sick. A failed harvest is want at once, and the sickness ends unaided.
+2. `[street]` The town's answer to a sickness is the answer it gives a bad season. Both are endured, and the counting comes after.
+   - `[face]` A season gone bad and a sickness come to one answer here, and that answer is to bear the thing. The count is taken when the thing has gone by.
+   - `[face]` Hunger and the sickness are met in one way here, lived through while they last and counted when they are done.
+   - `[face]` Between a bad season and a sickness the town makes no difference of answer, and it holds on through each. A reckoning follows when each is over.
+3. `[visitor]` A stranger asking after the granary or the sick-house at {settlement} is sent to neither. The town keeps no such place.
+   - `[face]` A newcomer at {settlement} asking after the store of food or the house of the sick is given no direction, because the town holds neither.
+   - `[face]` Whoever comes to {settlement} looking for a grain store or a sickroom is directed to neither. Neither building stands in the town.
+   - `[face]` Strangers at {settlement} ask where the grain is kept and where the sick are taken, and get no answer to either. Nothing in the town goes by either name.
 
 ---
 
