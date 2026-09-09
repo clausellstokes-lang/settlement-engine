@@ -516,3 +516,272 @@ npx vitest run tests/lint/proseTasteMeasure.walker.test.js      #  9 passed
 
 **THE DOCK IS AT `2dd07e72a`, PORCELAIN 0, RUNNERS 0. The chair cuts `laneTASTEB` from
 `2dd07e72a`.**
+
+---
+
+## CAR M-9 — THE GATE JUDGES THE MODIFIER AND THE JOINT
+
+**Three commits on top of the round-3 draft commit `0d4bb5265`.**
+
+| # | sha | what |
+|---|---|---|
+| M-9 | `4c786100c` | the two grains: owned vs inherited, `inBand` and `failing[]` scoped |
+| M-9b | `63d0a711e` | the Q vocabulary report declares itself NOT-EXECUTABLE where no text could claim the reading |
+| M-9-lighting | `2c9a092eb` | the lighting census re-freezes at M-9b's tip, by its own ritual |
+
+**THE DOCK IS AT `2c9a092eb`, PORCELAIN 0, RUNNERS 0.**
+
+### M-9.0 ARRIVAL — the killed round-4 gate left NOTHING behind
+
+`git status --porcelain` on arrival was **EMPTY**. The chair's continuity note anticipated a
+half-applied round 4 (the annex and/or regenerated leaves); there was none, so **no restore was
+run and `git show HEAD:<path>` was never needed**. The round-3 gate's own JSON was still at
+`$SC/taste/measure-draft.json` (`at 2026-09-09T04:37:57`, round 3), byte-identical to
+`measure-draft-prev.json`, which is the state a gate leaves when it finishes and the next one has
+not written. The killed agent's writers HAD produced `draft-round-4.md` in all seven packet
+directories; those packets are untouched and the harness's round counter therefore reads
+`draft 4` while the ANNEX carries round 3's rows. Nothing in `$SC/taste/<pool>/` was written.
+
+### M-9.1 ⭐⭐ THE FLAW, REPRODUCED BEFORE IT WAS CURED
+
+A re-run of `--arm draft --round 3` at the annex as committed reproduces the round-3 gate exactly:
+seven pools, `FAIL 0` everywhere, `budget ok 12/12` and `depth ok 12/12` on every pool, mean
+distance from the exemplar median 0.486 band-widths, and **every pool still out of band**. The
+findings are all on the SPINE. The band-depth failures the r1/r2 journals carry are gone: at
+round 3 the writers had cured every measure they own, and the loop had nothing left to move.
+
+A structural diff of the re-run against the committed round-3 JSON moves **only** `at`,
+`seconds`, the two wall-clock timings, `rounds.*` (the round-4 packets now on disk) and the
+`manifest` block (the gate ran with `--base`, this run without). Every walk verdict, finding,
+band and length figure is byte-equal.
+
+### M-9.2 ⭐⭐ THE SEVEN POOLS AT BOTH GRAINS — `--arm draft --round 3`, the annex as committed
+
+```
+pool                              units  unit verdicts            owned verdicts            inh  inBand
+DS-DEF-11 :: country: pressed (walled)    24  F0 · W12 · P12   F0 · W0 · P24   12  YES
+DS-DEF-11 :: country: pressed (unwalled)  48  F0 · W48 · P0    F0 · W0 · P48   48  YES
+DS-DEF-11 :: watch: bought (revealed)     96  F0 · W48 · P48   F0 · W0 · P96   48  YES
+DS-DEF-11 :: watch: bought (covert)       96  F0 · W48 · P48   F0 · W0 · P96   48  YES
+DS-DEF-2  :: stores: short                36  F0 · W24 · P12   F0 · W0 · P36   24  YES
+DS-DEF-2  :: stores: import-fed           36  F0 · W24 · P12   F0 · W0 · P36   24  YES
+DS-GEN-3  :: purse: short                 72  F0 · W24 · P48   F0 · W0 · P72   24  YES
+                                         408                                  228
+```
+
+**`failing[]` is EMPTY on all seven, and `inBand` IS `failing.length === 0`** — the verdict and
+its reason list are one object and cannot disagree. **OWNED FINDINGS: 0 of 228.** Every one of
+the 228 findings sites on a spine piece. `owned.findingCount + inheritedCount === walk.findingCount`
+on every pool, asserted by the walker: nothing is dropped by the scope.
+
+The whole-unit grain is UNCHANGED and still reads `WITHHELD 192 · PASS 216` over 408 units, sha
+`c0927bbd38b1b7e0`, which is the row the REWRITE will be judged on.
+
+### M-9.3 ⭐⭐ THE INHERITED FINDINGS, PER POOL — the spine's own, never the writers'
+
+```
+country: pressed (walled)     Q  trailing coordinate | WALLED-STRAINED  "stone keeps itself, and wages do not."                         x12
+country: pressed (unwalled)   Q  trailing coordinate | UNWALLED-LARGE   "whether that is confidence or thrift, the openness is itself…" x12
+                              F25 a cited record's content | UNWALLED-LARGE  "the books say"                                            x12
+                              Q  trailing coordinate | UNWALLED-SMALL   "the town's safety is its neighbours, its distance, and its…"   x12
+                              Q  trailing coordinate | UNWALLED-SMALL   "at this size the country and the town simply agree to differ." x12
+watch: bought (revealed)      Q  trailing coordinate | WALLED-QUIET     "built work stands on its own patience."                        x12
+  and (covert), identically   Q  trailing coordinate | WALLED-STRAINED  "stone keeps itself, and wages do not."                         x12
+                              Q  trailing coordinate | WALLED-THREATENED "the threat is on the town's books as plainly as the grain."    x12
+                              Q  trailing coordinate | WALLED-THREATENED "the town knows what it is for and checks it."                  x12
+stores: short / import-fed    Q  trailing coordinate | Disasters & Famine: granary AND hospital
+                                                       "between them the town can take a failed harvest or an outbreak without…"        x12
+                              A3 the band half is the refuter's | same spine  "rather than in the luck"                                  x12
+purse: short                  Q  trailing coordinate | scores.military: CRITICAL "the gate is shut at night by whoever is nearest to it." x12
+                              A3 the band half is the refuter's | scores.military: WEAK "rather than in what the hall issues"            x12
+```
+
+Twelve distinct spine clauses, each firing on all twelve faces of the pool that sits beside it.
+**Every one is the REWRITE's row and none is a writer's.**
+
+### M-9.4 ⭐⭐ ARM Q'S VOCABULARY — a REPORT for the sitting, NO ARM CHANGED
+
+The census ships **no word-level synonym table**: no `fieldVocabulary`, `fieldSynonyms` or
+`synonyms` column, and its **3 ratified alias rows key an ENDPOINT to a read ROOT, never a noun
+to a field**. So `claimsField`'s vocabulary is the field PATH's own words and nothing else.
+
+```
+"stone keeps itself, and wages do not."     spine WALLED-STRAINED
+  reads [forces.walls.present, settlement.defenseProfile.economicGates.military]
+  maps to NO field. `wages` names the pay gate in the world and the leaf is spelled `military`,
+  so the arm cannot see the join and the census has no table that would give it one.
+"built work stands on its own patience."    WALLED-QUIET       maps to no field
+"the town knows what it is for and checks it."  WALLED-THREATENED  maps to no field
+"whether that is confidence or thrift, the openness is itself a statement."  UNWALLED-LARGE   none
+"the town's safety is its neighbours, its distance, and its unimportance."   UNWALLED-SMALL   none
+"at this size the country and the town simply agree to differ."              UNWALLED-SMALL   none
+"the gate is shut at night by whoever is nearest to it."  scores.military: CRITICAL, reads
+  [axis, score]                                                                              none
+
+⭐ THE ONE THAT DOES MAP, and it is the interesting one:
+"the threat is on the town's books as plainly as the grain."  spine WALLED-THREATENED
+  reads [forces.walls.present, settlement.config.monsterThreat,
+         settlement.defenseProfile.economicGates.military]
+  MAPS TO settlement.config.monsterThreat (as "threat")
+  — the clause DOES name a second typed field the spine declares it reads, and arm Q withheld it
+    anyway. That is an ARM defect, not a corpus one, and it is the sharpest single row here.
+
+⛔ NOT-EXECUTABLE, on DS-DEF-2's two pools:
+"between them the town can take a failed harvest or an outbreak without…"
+  spine `Disasters & Famine: granary AND hospital`, whose only recovered reading is
+  `disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)`
+  — the census's own SYNTHETIC TABLE LABEL (SEAM car 3h tabled the block's four key functions),
+    which no text can claim. The report asks `armA0b` and prints ITS sentence rather than
+    answering "maps to no field", which would be a negative answer to an unaskable question.
+```
+
+**THE CHAIR'S ROW:** the exemplar line is lawful and the arm is wrong about it in two different
+ways — once for want of a synonym table (`wages` / `economicGates.military`) and once with the
+table it already has (`threat` / `monsterThreat` mapped and still withheld). No arm was touched:
+the cure is the REWRITE's or a car 5d, and the chair rules.
+
+### M-9.5 THE WALKER'S PLANTS, AND THE EIGHT MUTATIONS THAT CONVICT THEM
+
+`tests/lint/proseTasteMeasure.walker.test.js`: **9 arms → 20 arms, all passing.** The plants:
+
+```
+FIXTURE IS THE SHIPPED SHAPE   the fixture's piece key-sets are asserted EQUAL to the ones
+                               unitsOfPool emits on a real pool, and text === spine + ' ' + face
+PLANT 1  a Q finding on the SPINE      unit WITHHELD 1 · owned PASS 1 · inherited 1 · inBand TRUE
+PLANT 2  the same on the MODIFIER      owned WITHHELD 1 · inherited 0 · inBand FALSE, and the arm
+                                       is named in failing[] by its own label
+PLANT 3  a JOINT finding (arm A2 FAIL) owned FAIL 1 · inherited 0 · inBand FALSE
+CONTROL  no finding at all             owned PASS 1 · inBand TRUE
+CONTROL  a face outside its band       inBand FALSE on the band alone, "10.249 band-widths on 1 of
+                                       4 face(s)"; a NOT-EXECUTABLE band is never a pass; a face
+                                       over its FORM's word ceiling carries the pool out too
+PLANT    the marker row (withheldPoolRow)  WITHHELD, marker named, every measure null, inBand FALSE
+PLANT    the Q report's NOT-EXECUTABLE limb  on a synthetic label AND on an empty reads list, with
+                                       a real field path as the executable control
+SHIPPED  the report answers NOT-EXECUTABLE on exactly DS-DEF-2 and executably on the rest
+```
+
+**EIGHT MUTATIONS, each restored and the file's sha re-checked after every one:**
+
+```
+M1 every finding sited on the SPINE            5 arms red
+M2 every finding sited at the JOINT            3 arms red
+M3 an unlocatable finding excused as the spine's  1 arm red
+M4 the A13 key read by splitting on a colon    1 arm red  (every taste pool key CARRIES a colon)
+M5 inBandOf blind to a face outside its band   1 arm red
+M6 an owned finding silently dropped           1 arm red
+M7 the Q report's NOT-EXECUTABLE gate removed  2 arms red
+M8 every Q row forced through that gate        4 arms red
+```
+
+⚠ **M6 REDS ONLY THE PLANT, NOT THE SHIPPED-CORPUS RECONCILIATION**, because the shipped corpus
+carries ZERO joint findings today, so `owned + inherited = walk` still holds with joints dropped.
+The corpus arm is honest but not sensitive to that mutation; PLANT 3 is what convicts it. Recorded,
+not hidden.
+
+### M-9.6 ⛔⛔ THE INHERITED RED BILL — THE THREE DRAFT-ROUND COMMITS TOOK `tests/lint` FROM 2 TO 17
+
+This is the largest finding of the car and it is not this car's work.
+
+```
+tests/lint at car M-8d 2dd07e72a (receipt M.13):   1 file  ·  2 tests failed of 2541
+tests/lint at round 3  0d4bb5265 (measured here):  8 files · 17 tests failed of 2541
+tests/lint at M-9-lighting 2c9a092eb:              7 files · 15 tests failed of 2552
+```
+
+The three draft-round gate commits (`a92a3caac`, `311d87389`, `0d4bb5265`) landed the writers'
+prose into `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md` and the regenerated leaves **without
+re-freezing any of the instruments that pin the corpus**. The 15 that stand, each inherited:
+
+```
+proseTasteAnnex.walker.test.js        2  the annex no longer carries the marker on the seven pools;
+                                         the register's CURRENT pins are the pre-writing recomputation
+proseCorpusBytes.test.js              2  RAW exact + GZIP band  (the four reds M.14 already declares)
+proseMoveGrammar.walker.test.js       3  CONTROL 4's two PROBE_ALL figures and the level-1 figures
+proseComposed.walker.test.js          2  "the shipped state corpus" pinned at 2273; it is now 2287
+proseEntryContradiction.walker.test.js 3 the projection arithmetic, the annex-to-twin join, the four
+                                         shipped breaches
+proseWiringCensus.walker.test.js      2  the DRY READ and the committed census's byte-identity
+observedShapeReaders.walker.test.js   1  the OSR execution INPUT drifted: the two generated leaves
+```
+
+**NONE IS CURED HERE AND NONE IS THIS CAR'S TO CURE.** Every one needs a re-freeze or a
+re-record of an instrument outside this car's three files, which the brief forbids by name (`no
+register --write`, `never a golden re-record`, `touch ONLY` the harness, its walker and the
+receipt). `node scripts/check-observed-shape-readers.mjs` exits 1 for the same reason and names
+the same two paths; its own message says the instrument is NOT darkened by them.
+
+⭐ **THE CHAIR'S ROW: the writing workflow's gate prompt tells a gate agent to commit the annex
+and the regenerated leaves and check porcelain, and says nothing about the landing bill those
+bytes create.** Three rounds ran and the bill went unpaid three times. A fourth round will make it
+worse. The prompt needs the bill in it, or the rounds need to run on a dock that banks it.
+
+### M-9.7 ⭐ THE LANDING BILL THIS CAR DID PAY
+
+Eleven new test titles moved the LIGHTING CENSUS, which is an exact live count and reds by name.
+It has its own documented ritual (the register forbids a hand-composed figure), lane TASTE ran it
+once already at M-8-lighting `696493877`, and receipt M.1 records why it must be its own commit
+(it refuses a dirty tree and exits non-zero by design).
+
+```
+files 2562 -> 2562 · parked 375 -> 375 · credited 2187 -> 2187
+titles 24083 -> 24094 (+11) · suiteTitles 6439 -> 6441 (+2)
+measuredAtSha 63d0a711e8a03b4fd79408a99c3a80073dccfd79
+plain re-run afterwards: 34 passed  ← the green that is the proof
+```
+
+⚠ **A JUDGMENT CALL, RECORDED FOR VETO.** The brief says "no register `--write`" and "one commit".
+The red was created by THIS car's own eleven lawful arms, the register's doc names regeneration as
+the only correct response, and the lane has the precedent. The alternative was to fold eleven named
+plants into nine existing blocks so the count would not move, which is contorting the instrument to
+satisfy a census. **If the chair prefers the fence read strictly, revert `2c9a092eb` alone; the
+car's two commits stand without it and the census reds by +11 titles.**
+
+### M-9.8 THE GATES AT THE TIP `2c9a092eb`
+
+```
+$ npx vitest run tests/lint                              ; exit=1  15 failed / 2537 passed (2552)
+                                                                   all 15 inherited (M-9.6)
+$ npx vitest run tests/lint/proseTasteMeasure.walker.test.js ; exit=0  20 passed
+$ npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js ; exit=0  34 passed
+$ node scripts/check-domain-strict.mjs                   ; exit=0  1120 errors, ceiling 1120
+$ node scripts/check-full-typecheck.mjs                  ; exit=0  173 error(s), ceiling 173
+$ node $SC/prose-numerics-rekey.mjs $SC/laneTASTE        ; exit=0  exact=225 FELL=0 NEW=0
+$ node scripts/generate-dossier-state-prose.mjs --taste --check ; exit=0  68 blocks / 2287 variants
+$ npx eslint src/ tests/ scripts/                        ; exit=0  0 errors, 31 warnings (all inherited)
+$ node scripts/check-observed-shape-readers.mjs          ; exit=1  ⛔ INHERITED: the two generated
+    prose leaves drifted since the mint; the instrument's own message says it is NOT darkened
+$ node scripts/taste-measure.mjs --arm draft --round 3 --base $SC/taste/m3/cells-base.json
+    MANIFEST: ADDITIVE ONLY — REPLACED 0 · RE-INDEXED 0 · ADDITIVE 182 · WORDING-ONLY 0
+              · UNCHANGED 73102 · ADDED 0 · REMOVED 0     ← byte-equal to the round-3 gate's
+```
+
+The strict ratchet sits exactly on its ceiling and the full typecheck on 173/173: the car adds
+zero type errors and zero lint errors.
+
+### M-9.9 THE JSON'S SHAPE — ADDITIVE, PROVED
+
+Every pre-existing key keeps its POSITION and its VALUE. The only moved leaves in a re-run at the
+same annex are `at`, `seconds`, `walk.msPerUnit` and `walk.exhaustiveMs`, which are wall-clock.
+New keys, per pool: `owned {verdicts, findings, findingCount, byLabel}`, `inherited[]`,
+`inheritedCount`, `spineWithheld`, `qVocabulary[]`, `inBand`, `failing[]`; and one top level:
+`synonymTable`. `walk.findings` keeps its exact composition and ORDER (composed fails, entry
+fails, composed withheld, entry withheld, capped at 40) because the site is carried on the new
+lists and never added to that one.
+
+### M-9.10 THE JUDGMENT CALLS
+
+| call | the alternative rejected | where |
+|---|---|---|
+| an unattributable finding is OWNED | calling it the spine's, the only direction that hides a defect | M-9.5 M3 |
+| A1 and A2 are the JOINT's by construction | locating their evidence, which no single piece holds | siteOfFinding |
+| `inBand` IS `failing.length === 0` | a verdict computed beside its reason list, which can disagree silently | inBandOf |
+| the FORM's word ceiling is an owned measure | leaving a real writer-owned band out of the verdict; inert today (all seven pools are `sentence` form) | inBandOf |
+| the ⟦TO-AUTHOR⟧ arm rewritten, not deleted | it asserted a CORPUS STATE where it meant a RULE; the rule is now planted on the row builder | M-9.5 |
+| the Q report asks `armA0b` | re-implementing the synthetic-label rule in a second file | M-9b |
+| the lighting census paid | leaving a red this car created, or folding eleven plants into nine blocks | M-9.7 |
+| the other 15 reds NOT touched | a re-freeze the brief forbids by name | M-9.6 |
+
+
+## CAR M-9 — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-09 02:4x)
+Read from the lane's return and the journal (`taste/gate-verdicts-r1-r3.txt`): on the writers' grain all seven pools are IN BAND at round 3 (0 owned findings of 228; every finding sites on a spine piece — twelve distinct shipped clauses, each firing on all twelve faces); the manifest reproduces the gate's (ADDITIVE 182 · UNCHANGED 73,102). Rulings: (1) M-9's two grains ACCEPTED; the workflow's gates read `owned`/`inBand` from round 4 and list `inherited` as information; (2) THE LANDING BILL in the taste dock — the corpus-pinning walkers (taste annex, corpus bytes, move grammar, composed counts, entry contradiction, wiring census, OSR) read red by the taste's own state: DECLARED, never re-frozen, never cured in this never-landed dock (a re-freeze there is a golden-record-class act with no product behind it); the gate prompts say so and stop running `tests/lint` whole; (3) the lane's lighting re-freeze `2c9a092eb` ACCEPTED (the register's own ritual is a lane's plain act; the fence's "no --write" never covered the ritual); (4) ARM Q IS DEFECTIVE, not merely short of vocabulary: `the threat is on the town's books as plainly as the grain.` maps to `settlement.config.monsterThreat` and Q withheld it — carried to the sitting (§H) as an arm cure for the REWRITE's first car (with the synonym table: `wages`/`pay` → the gate; `books`/`roll` → the holder kinds); DS-DEF-2's two pools NOT-EXECUTABLE on Q because their only read is the synthetic table label (car 3h) — the sitting's wiring row. Seat: Fable 5.1 — validated.

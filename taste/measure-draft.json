@@ -1,7 +1,7 @@
 {
  "arm": "draft",
  "round": 3,
- "at": "2026-09-09T05:44:40",
+ "at": "2026-09-09T05:53:58",
  "projection": {
   "ok": true,
   "waivers": [
@@ -4792,8 +4792,30 @@
   }
  },
  "manifest": {
-  "executable": false,
-  "why": "no --base cells table was supplied, so no cell can be classified"
+  "base": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/taste/m3/cells-base.json",
+  "cells": 73284,
+  "byClass": {
+   "REPLACED": 0,
+   "RE-INDEXED": 0,
+   "ADDITIVE": 182,
+   "WORDING-ONLY": 0,
+   "UNCHANGED": 73102
+  },
+  "added": 0,
+  "removed": 0,
+  "indexOnly": 0,
+  "lines": [
+   "PROSE MANIFEST DIFF · 73284 cells on the tip side",
+   "  REPLACED       cells       0 · towns     0",
+   "  RE-INDEXED     cells       0 · towns     0",
+   "  ADDITIVE       cells     182 · towns    91",
+   "  WORDING-ONLY   cells       0 · towns     0",
+   "  UNCHANGED      cells   73102 · towns   525",
+   "  ADDED          cells       0",
+   "  REMOVED        cells       0",
+   "  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)"
+  ],
+  "stop": false
  },
  "variety": {
   "executable": false,
@@ -4807,5 +4829,5 @@
   "tieBp": 0,
   "note": ""
  },
- "seconds": 0
+ "seconds": 10
 }

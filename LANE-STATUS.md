@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 01:48:03 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 01:54:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM train lands — the composed-prose sequence's cars 3a through 5b as thirty
 
@@ -148,5 +148,5 @@ product claude/composite-r4 = 8961388ce · ledger = e568f6825 §916: the SEAM tr
 - wf_d3c44881-503: 38 journal lines, 19 agents
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
-## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;85720 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;# -*- coding: utf-8 -*-;import io;p='"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engin;s=io.open(p,encoding='"'"'utf-8'"'"').read();old="(E4, §917): totalFiles 2502 -> 2503 (+1: tests/domain/livingCont;new="(E4, §917, SECOND CHAIN after LIGHT car 3 and the chair'"'"'s ce;assert old in s; s=s.replace(old,new,1); io.open(p,'"'"'w'"'"',encodin;PYEOF;i=0; while { [ "$(pgrep -fl '"'"'taste-measure|prose-rate-corpus|build;
-load: 12.27 11.06 11.55
+## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;85720 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;# -*- coding: utf-8 -*-;import io;p='"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engin;s=io.open(p,encoding='"'"'utf-8'"'"').read();old="(E4, §917): totalFiles 2502 -> 2503 (+1: tests/domain/livingCont;new="(E4, §917, SECOND CHAIN after LIGHT car 3 and the chair'"'"'s ce;assert old in s; s=s.replace(old,new,1); io.open(p,'"'"'w'"'"',encodin;PYEOF;i=0; while { [ "$(pgrep -fl '"'"'taste-measure|prose-rate-corpus|build;89761 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
+load: 10.60 7.32 9.40
