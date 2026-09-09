@@ -1,18 +1,21 @@
 {
  "arm": "draft",
- "round": 4,
- "at": "2026-09-09T05:58:55",
+ "round": 0,
+ "at": "2026-09-09T10:07:13",
+ "roster": {
+  "pools": 2,
+  "why": "--pools named 2 pool(s) by hand"
+ },
+ "sections": {
+  "pools": 708,
+  "sections": 6,
+  "unreached": [],
+  "twice": []
+ },
  "projection": {
   "ok": true,
-  "waivers": [
-   "[dossier-prose] ⛔ --taste WAIVED 5 refusal(s) that the shipped build makes. The shipped projector (no --taste) refuses each of these BY NAME:",
-   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: short: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
-   "[dossier-prose]   DOSSIER_STATE DS-DEF-2 :: stores: import-fed: ATTACH `Disasters & Famine: granary AND hospital`: the spine's key and the modifier's key name the same civic object class `store`, which is a restatement the field guard cannot see (T-F12)",
-   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (walled): ATTACH `WALLED-STRAINED`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
-   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-LARGE`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)",
-   "[dossier-prose]   DOSSIER_STATE DS-DEF-11 :: country: pressed (unwalled): ATTACH `UNWALLED-SMALL`: the spine's key and the modifier's key name the same civic object class `wall`, which is a restatement the field guard cannot see (T-F12)"
-  ],
-  "detail": "[dossier-prose] verified 68 state blocks / 2287 variants across 6 desks, 78 causal families / 468 variants"
+  "waivers": [],
+  "detail": "[dossier-prose] verified 68 state blocks / 2266 variants across 6 desks, 78 causal families / 468 variants"
  },
  "exemplars": {
   "dir": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/primary",
@@ -38,44 +41,30 @@
  "pools": [
   {
    "block": "DS-DEF-11",
-   "pool": "country: pressed (walled)",
-   "dir": "def11-country-walled",
+   "pool": "WALLED-STRAINED",
+   "dir": "ds-def-11-walled-strained",
    "verdict": "WITHHELD",
    "why": "",
-   "variants": 3,
+   "variants": 2,
    "faces": [
-    4,
-    4,
-    4
+    1,
+    1
    ],
-   "attach": [
-    "WALLED-STRAINED"
-   ],
-   "rateBp": 6693,
+   "attach": [],
+   "rateBp": 5924,
    "departure": 0,
    "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
+    "draftRounds": 0,
     "refineA": false,
     "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
+    "files": []
    },
-   "units": 24,
+   "units": 2,
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 12,
-     "PASS": 12
+     "WITHHELD": 1,
+     "PASS": 1
     },
     "findings": [
      {
@@ -87,119 +76,9 @@
       "column": "(second typed field)",
       "value": "settlement, defwork",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
      }
     ],
-    "findingCount": 12
+    "findingCount": 1
    },
    "lengths": {
     "form": "sentence",
@@ -208,28 +87,13 @@
      {
       "vid": 1,
       "faces": [
-       13,
-       13,
-       10,
-       14
+       18
       ]
      },
      {
       "vid": 2,
       "faces": [
-       9,
-       12,
-       10,
-       11
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       11,
-       13,
-       12,
-       10
+       23
       ]
      }
     ]
@@ -237,21 +101,35 @@
    "siblings": [
     {
      "vid": 1,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0
+     "notExecutable": 1,
+     "spread": {
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+     }
     },
     {
      "vid": 2,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
+     "notExecutable": 1,
+     "spread": {
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+     }
     }
    ],
    "band": [
@@ -260,2648 +138,131 @@
      "face": 0,
      "executable": true,
      "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
      "budgetOk": true,
      "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 24
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-STRAINED",
-     "clause": "stone keeps itself, and wages do not.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    }
-   ],
-   "inheritedCount": 12,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "stone keeps itself, and wages do not.",
-     "spineKey": "WALLED-STRAINED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": true,
-   "failing": []
-  },
-  {
-   "block": "DS-DEF-11",
-   "pool": "country: pressed (unwalled)",
-   "dir": "def11-country-unwalled",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    4,
-    4,
-    4
-   ],
-   "attach": [
-    "UNWALLED-LARGE",
-    "UNWALLED-SMALL"
-   ],
-   "rateBp": 6693,
-   "departure": 0,
-   "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
-    "refineA": false,
-    "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
-   },
-   "units": 48,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 48,
-     "PASS": 0
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-LARGE",
-      "klass": "F25",
-      "arm": "a cited record's content",
-      "clause": "the books say",
-      "column": "(cited record)",
-      "value": "unresolved",
-      "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "at this size the country and the town simply agree to differ.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "at this size the country and the town simply agree to differ.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "at this size the country and the town simply agree to differ.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: UNWALLED-SMALL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "at this size the country and the town simply agree to differ.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 13,
+       "exceeded": 13,
+       "exceededShare": 1,
+       "deepest": {
+        "metric": "punctuation.semicolonRate",
+        "depth": 3.33,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 0.863,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
      }
-    ],
-    "findingCount": 48
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       9,
-       10,
-       10,
-       10
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       8,
-       10,
-       9,
-       11
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       12,
-       12,
-       12,
-       9
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
     },
     {
      "vid": 2,
      "face": 0,
      "executable": true,
      "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
+     "scored": 8,
+     "exceeded": 1,
+     "exceededShare": 0.125,
      "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 48
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "UNWALLED-LARGE",
-     "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "F25 · a cited record's content",
-     "arm": "a cited record's content",
-     "klass": "F25",
-     "channel": "WITHHELD",
-     "spineKey": "UNWALLED-LARGE",
-     "clause": "the books say",
-     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "UNWALLED-SMALL",
-     "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "UNWALLED-SMALL",
-     "clause": "at this size the country and the town simply agree to differ.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    }
-   ],
-   "inheritedCount": 48,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "whether that is confidence or thrift, the openness is itself a statement.",
-     "spineKey": "UNWALLED-LARGE",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.tier"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
-     "spineKey": "UNWALLED-SMALL",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.tier"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "at this size the country and the town simply agree to differ.",
-     "spineKey": "UNWALLED-SMALL",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.tier"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": true,
-   "failing": []
-  },
-  {
-   "block": "DS-DEF-11",
-   "pool": "watch: bought (revealed)",
-   "dir": "def11-watch-revealed",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    4,
-    4,
-    4
-   ],
-   "attach": [
-    "WALLED-QUIET",
-    "WALLED-STRAINED",
-    "WALLED-THREATENED"
-   ],
-   "rateBp": null,
-   "departure": null,
-   "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
-    "refineA": false,
-    "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
-   },
-   "units": 96,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 48,
-     "PASS": 48
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     }
-    ],
-    "findingCount": 48
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       11,
-       8,
-       18,
-       19
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       12,
-       8,
-       19,
-       11
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       13,
-       9,
-       19,
-       13
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 96
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-QUIET",
-     "clause": "built work stands on its own patience.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-STRAINED",
-     "clause": "stone keeps itself, and wages do not.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-THREATENED",
-     "clause": "the threat is on the town's books as plainly as the grain.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-THREATENED",
-     "clause": "the town knows what it is for and checks it.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    }
-   ],
-   "inheritedCount": 48,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "built work stands on its own patience.",
-     "spineKey": "WALLED-QUIET",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "stone keeps itself, and wages do not.",
-     "spineKey": "WALLED-STRAINED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "the threat is on the town's books as plainly as the grain.",
-     "spineKey": "WALLED-THREATENED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [
-      "settlement.config.monsterThreat (as \"threat\")"
-     ],
-     "executable": true,
-     "verdict": "the clause DOES name a field the spine declares it reads, so the arm and the census disagree",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "the town knows what it is for and checks it.",
-     "spineKey": "WALLED-THREATENED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": true,
-   "failing": []
-  },
-  {
-   "block": "DS-DEF-11",
-   "pool": "watch: bought (covert)",
-   "dir": "def11-watch-covert",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    4,
-    4,
-    4
-   ],
-   "attach": [
-    "WALLED-QUIET",
-    "WALLED-STRAINED",
-    "WALLED-THREATENED"
-   ],
-   "rateBp": null,
-   "departure": null,
-   "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
-    "refineA": false,
-    "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
-   },
-   "units": 96,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 48,
-     "PASS": 48
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
-      "column": "(second typed field)",
-      "value": "defwork, settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the threat is on the town's books as plainly as the grain.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-THREATENED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the town knows what it is for and checks it.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     }
-    ],
-    "findingCount": 48
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       10,
-       17,
-       11,
-       9
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       11,
-       9,
-       14,
-       8
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       14,
-       10,
-       9,
-       17
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "closers.abstractNounRate",
-      "depth": 8.6,
+      "metric": "shapes.whichTailRate",
+      "depth": 26.027,
       "side": "over"
      },
-     "meanDistanceFromMedian": 0.903,
+     "meanDistanceFromMedian": 3.536,
      "budgetOk": true,
      "depthOk": false,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
+     "perfectionSuspect": false,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 1,
+       "exceededShare": 0.125,
+       "deepest": {
+        "metric": "shapes.whichTailRate",
+        "depth": 26.027,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 3.536,
+       "budgetOk": true,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 2,
+       "scored": 13,
+       "exceeded": 13,
+       "exceededShare": 1,
+       "deepest": {
+        "metric": "punctuation.semicolonRate",
+        "depth": 3.33,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 0.863,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
     }
    ],
    "provenance": {
     "citations": 0,
     "a13": 0
    },
+   "corpusBand": {
+    "executable": true,
+    "sentences": 2,
+    "scored": 13,
+    "exceeded": 13,
+    "exceededShare": 1,
+    "deepest": {
+     "metric": "punctuation.semicolonRate",
+     "depth": 3.33,
+     "side": "over"
+    },
+    "meanDistanceFromMedian": 0.863,
+    "budgetOk": false,
+    "depthOk": false,
+    "perfectionSuspect": false,
+    "grain": "corpus"
+   },
+   "corpusWords": 41,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 96
+     "PASS": 2
     },
     "findings": [],
     "findingCount": 0,
@@ -2913,95 +274,21 @@
      "arm": "a trailing coordinate naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
-     "spineKey": "WALLED-QUIET",
-     "clause": "built work stands on its own patience.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
      "spineKey": "WALLED-STRAINED",
      "clause": "stone keeps itself, and wages do not.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-THREATENED",
-     "clause": "the threat is on the town's books as plainly as the grain.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-THREATENED",
-     "clause": "the town knows what it is for and checks it.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
+     "count": 1
     }
    ],
-   "inheritedCount": 48,
+   "inheritedCount": 1,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "built work stands on its own patience.",
-     "spineKey": "WALLED-QUIET",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
      "clause": "stone keeps itself, and wages do not.",
      "spineKey": "WALLED-STRAINED",
-     "count": 12,
+     "count": 1,
      "reads": [
       "forces.walls.present",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "the threat is on the town's books as plainly as the grain.",
-     "spineKey": "WALLED-THREATENED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [
-      "settlement.config.monsterThreat (as \"threat\")"
-     ],
-     "executable": true,
-     "verdict": "the clause DOES name a field the spine declares it reads, so the arm and the census disagree",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    },
-    {
-     "clause": "the town knows what it is for and checks it.",
-     "spineKey": "WALLED-THREATENED",
-     "count": 12,
-     "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
       "settlement.defenseProfile.economicGates.military"
      ],
      "mapped": [],
@@ -3013,272 +300,53 @@
    "inBand": false,
    "failing": [
     {
-     "measure": "band depth · closers.abstractNounRate (over)",
-     "value": "8.6 band-widths on 1 of 12 face(s)",
+     "measure": "band depth · shapes.whichTailRate (over)",
+     "value": "26.027 band-widths on 1 of 2 face(s)",
      "band": "DEPTH at most 1.75 band-widths on every face"
     }
    ]
   },
   {
-   "block": "DS-DEF-2",
-   "pool": "stores: short",
-   "dir": "def2-stores-short",
+   "block": "DS-DEF-11",
+   "pool": "WALLED-QUIET",
+   "dir": "ds-def-11-walled-quiet",
    "verdict": "WITHHELD",
    "why": "",
    "variants": 3,
    "faces": [
-    4,
-    4,
-    4
+    1,
+    1,
+    1
    ],
-   "attach": [
-    "Disasters & Famine: granary AND hospital"
-   ],
-   "rateBp": 1563,
-   "departure": 0,
+   "attach": [],
+   "rateBp": 13,
+   "departure": 1,
    "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
+    "draftRounds": 0,
     "refineA": false,
     "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
+    "files": []
    },
-   "units": 36,
+   "units": 3,
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 24,
-     "PASS": 12
+     "WITHHELD": 1,
+     "PASS": 2
     },
     "findings": [
      {
       "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "id": "DS-DEF-11 :: WALLED-QUIET",
       "klass": "Q",
       "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+      "clause": "built work stands on its own patience.",
       "column": "(second typed field)",
-      "value": "settlement",
+      "value": "defwork",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
      }
     ],
-    "findingCount": 24
+    "findingCount": 1
    },
    "lengths": {
     "form": "sentence",
@@ -3287,28 +355,19 @@
      {
       "vid": 1,
       "faces": [
-       10,
-       19,
-       9,
-       8
+       21
       ]
      },
      {
       "vid": 2,
       "faces": [
-       17,
-       12,
-       20,
-       10
+       21
       ]
      },
      {
       "vid": 3,
       "faces": [
-       8,
-       10,
-       16,
-       17
+       21
       ]
      }
     ]
@@ -3316,21 +375,51 @@
    "siblings": [
     {
      "vid": 1,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0
+     "notExecutable": 1,
+     "spread": {
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+     }
     },
     {
      "vid": 2,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0
+     "notExecutable": 1,
+     "spread": {
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+     }
     },
     {
      "vid": 3,
-     "faces": 4,
+     "faces": 1,
      "synonymSwaps": 0,
-     "notExecutable": 0
+     "notExecutable": 1,
+     "spread": {
+      "pairs": 0,
+      "minOverlapBp": null,
+      "maxOverlapBp": null,
+      "medianOverlapBp": null,
+      "sameOpenerPairs": 0,
+      "sameSegmentPairs": 0,
+      "nearest": null,
+      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
+     }
     }
    ],
    "band": [
@@ -3339,227 +428,170 @@
      "face": 0,
      "executable": true,
      "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
      "budgetOk": true,
      "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 3,
+       "scored": 13,
+       "exceeded": 11,
+       "exceededShare": 0.846,
+       "deepest": {
+        "metric": "punctuation.semicolonRate",
+        "depth": 4.799,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 1.264,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
     },
     {
      "vid": 2,
      "face": 0,
      "executable": true,
      "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
      "budgetOk": true,
      "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 3,
+       "scored": 13,
+       "exceeded": 11,
+       "exceededShare": 0.846,
+       "deepest": {
+        "metric": "punctuation.semicolonRate",
+        "depth": 4.799,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 1.264,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
     },
     {
      "vid": 3,
      "face": 0,
      "executable": true,
      "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
+     "scored": 8,
+     "exceeded": 0,
+     "exceededShare": 0,
+     "deepest": null,
+     "meanDistanceFromMedian": 0.259,
      "budgetOk": true,
      "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
+     "perfectionSuspect": true,
+     "grain": "face",
+     "grains": {
+      "face": {
+       "executable": true,
+       "sentences": 1,
+       "scored": 8,
+       "exceeded": 0,
+       "exceededShare": 0,
+       "deepest": null,
+       "meanDistanceFromMedian": 0.259,
+       "budgetOk": true,
+       "depthOk": true,
+       "perfectionSuspect": true,
+       "grain": "face"
+      },
+      "corpus": {
+       "executable": true,
+       "sentences": 3,
+       "scored": 13,
+       "exceeded": 11,
+       "exceededShare": 0.846,
+       "deepest": {
+        "metric": "punctuation.semicolonRate",
+        "depth": 4.799,
+        "side": "over"
+       },
+       "meanDistanceFromMedian": 1.264,
+       "budgetOk": false,
+       "depthOk": false,
+       "perfectionSuspect": false,
+       "grain": "corpus"
+      }
+     }
     }
    ],
    "provenance": {
     "citations": 0,
     "a13": 0
    },
+   "corpusBand": {
+    "executable": true,
+    "sentences": 3,
+    "scored": 13,
+    "exceeded": 11,
+    "exceededShare": 0.846,
+    "deepest": {
+     "metric": "punctuation.semicolonRate",
+     "depth": 4.799,
+     "side": "over"
+    },
+    "meanDistanceFromMedian": 1.264,
+    "budgetOk": false,
+    "depthOk": false,
+    "perfectionSuspect": false,
+    "grain": "corpus"
+   },
+   "corpusWords": 63,
    "owned": {
     "verdicts": {
      "FAIL": 0,
      "WITHHELD": 0,
-     "PASS": 36
+     "PASS": 3
     },
     "findings": [],
     "findingCount": 0,
@@ -3571,1207 +603,23 @@
      "arm": "a trailing coordinate naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "spineKey": "WALLED-QUIET",
+     "clause": "built work stands on its own patience.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "A3 · the band half is the refuter's",
-     "arm": "A3",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "clause": "rather than in the luck",
-     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
-     "count": 12
+     "count": 1
     }
    ],
-   "inheritedCount": 24,
+   "inheritedCount": 1,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "count": 12,
+     "clause": "built work stands on its own patience.",
+     "spineKey": "WALLED-QUIET",
+     "count": 1,
      "reads": [
-      "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": true,
-   "failing": []
-  },
-  {
-   "block": "DS-DEF-2",
-   "pool": "stores: import-fed",
-   "dir": "def2-stores-importfed",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    4,
-    4,
-    4
-   ],
-   "attach": [
-    "Disasters & Famine: granary AND hospital"
-   ],
-   "rateBp": 4010,
-   "departure": 0,
-   "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
-    "refineA": false,
-    "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
-   },
-   "units": 36,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 24,
-     "PASS": 12
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in the luck",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
-     }
-    ],
-    "findingCount": 24
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       13,
-       8,
-       8,
-       8
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       12,
-       9,
-       9,
-       10
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       9,
-       13,
-       10,
-       9
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 36
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "A3 · the band half is the refuter's",
-     "arm": "A3",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "clause": "rather than in the luck",
-     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
-     "count": 12
-    }
-   ],
-   "inheritedCount": 24,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
-     "spineKey": "Disasters & Famine: granary AND hospital",
-     "count": 12,
-     "reads": [
-      "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
-     ],
-     "mapped": [],
-     "executable": false,
-     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": true,
-   "failing": []
-  },
-  {
-   "block": "DS-GEN-3",
-   "pool": "purse: short",
-   "dir": "gen3-purse-short",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 3,
-   "faces": [
-    4,
-    4,
-    4
-   ],
-   "attach": [
-    "scores.military: CRITICAL",
-    "scores.military: WEAK"
-   ],
-   "rateBp": 6641,
-   "departure": 0,
-   "rounds": {
-    "draftRounds": 4,
-    "rounds": [
-     1,
-     2,
-     3,
-     4
-    ],
-    "refineA": false,
-    "refineB": false,
-    "files": [
-     "draft-round-1.md",
-     "draft-round-2.md",
-     "draft-round-3.md",
-     "draft-round-4.md"
-    ]
-   },
-   "units": 72,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 24,
-     "PASS": 48
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: CRITICAL",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "the gate is shut at night by whoever is nearest to it.",
-      "column": "(second typed field)",
-      "value": "settlement",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     },
-     {
-      "channel": "WITHHELD",
-      "id": "DS-GEN-3 :: scores.military: WEAK",
-      "arm": "A3",
-      "subject": "the band half is the refuter's",
-      "value": "rather than in what the hall issues",
-      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)"
-     }
-    ],
-    "findingCount": 24
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       13,
-       11,
-       12,
-       13
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       11,
-       12,
-       11,
-       10
-      ]
-     },
-     {
-      "vid": 3,
-      "faces": [
-       14,
-       12,
-       12,
-       12
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 2,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    },
-    {
-     "vid": 3,
-     "faces": 4,
-     "synonymSwaps": 0,
-     "notExecutable": 0
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 1,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 2,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 1,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 2,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    },
-    {
-     "vid": 3,
-     "face": 3,
-     "executable": true,
-     "sentences": 1,
-     "scored": 21,
-     "exceeded": 13,
-     "exceededShare": 0.619,
-     "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
-     },
-     "meanDistanceFromMedian": 0.486,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": false
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 72
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "scores.military: CRITICAL",
-     "clause": "the gate is shut at night by whoever is nearest to it.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 12
-    },
-    {
-     "label": "A3 · the band half is the refuter's",
-     "arm": "A3",
-     "klass": "",
-     "channel": "WITHHELD",
-     "spineKey": "scores.military: WEAK",
-     "clause": "rather than in what the hall issues",
-     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)",
-     "count": 12
-    }
-   ],
-   "inheritedCount": 24,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "the gate is shut at night by whoever is nearest to it.",
-     "spineKey": "scores.military: CRITICAL",
-     "count": 12,
-     "reads": [
-      "axis",
-      "score"
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
      ],
      "mapped": [],
      "executable": true,
@@ -4784,56 +632,161 @@
   }
  ],
  "walk": {
-  "totalUnits": 408,
-  "n": 408,
+  "totalUnits": 5,
+  "n": 5,
   "exhaustive": true,
-  "msPerUnit": 0.625,
-  "exhaustiveMs": 255,
+  "msPerUnit": 0.2,
+  "exhaustiveMs": 1,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
-  "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
+  "sampleSha": "3c520ce1922970b44a2faedb429ede293084d32c089807de04c821d10babb20e",
   "verdicts": {
    "FAIL": 0,
-   "WITHHELD": 192,
-   "PASS": 216
+   "WITHHELD": 2,
+   "PASS": 3
   }
  },
  "manifest": {
-  "base": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/taste/m3/cells-base.json",
-  "cells": 73284,
-  "byClass": {
-   "REPLACED": 0,
-   "RE-INDEXED": 0,
-   "ADDITIVE": 182,
-   "WORDING-ONLY": 0,
-   "UNCHANGED": 73102
-  },
-  "added": 0,
-  "removed": 0,
-  "indexOnly": 0,
-  "lines": [
-   "PROSE MANIFEST DIFF · 73284 cells on the tip side",
-   "  REPLACED       cells       0 · towns     0",
-   "  RE-INDEXED     cells       0 · towns     0",
-   "  ADDITIVE       cells     182 · towns    91",
-   "  WORDING-ONLY   cells       0 · towns     0",
-   "  UNCHANGED      cells   73102 · towns   525",
-   "  ADDED          cells       0",
-   "  REMOVED        cells       0",
-   "  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)"
-  ],
-  "stop": false
+  "executable": false,
+  "why": "no --base cells table was supplied, so no cell can be classified"
  },
  "variety": {
   "executable": false,
   "why": "the VARIETY run was not asked for (--variety 0)"
  },
  "ties": {
-  "rungs": 8,
-  "multiCandidateRungs": 4,
-  "pairs": 30,
+  "rungs": 0,
+  "multiCandidateRungs": 0,
+  "pairs": 0,
   "ties": 0,
   "tieBp": 0,
-  "note": ""
+  "note": "NOT-EXECUTABLE: no rung of the taste carries two candidates that can fire together"
  },
- "seconds": 30
+ "exemplarCitations": {
+  "executable": true,
+  "leavesRead": 3,
+  "leavesTotal": 10,
+  "absent": [
+   "martin-chronicle",
+   "martin-narrative",
+   "tolkien-elevated",
+   "tolkien-plain",
+   "dnd-flavor",
+   "dnd-rules",
+   "dnd-rules-srd52"
+  ],
+  "rows": [
+   {
+    "leaf": "leguin-fiction",
+    "sentences": 161,
+    "citations": 0,
+    "perUnitBp": 0
+   },
+   {
+    "leaf": "leguin-nonfiction-spoken",
+    "sentences": 348,
+    "citations": 0,
+    "perUnitBp": 0
+   },
+   {
+    "leaf": "leguin-nonfiction-written",
+    "sentences": 277,
+    "citations": 0,
+    "perUnitBp": 0
+   }
+  ],
+  "sentences": 786,
+  "citations": 0,
+  "perUnitBp": 0,
+  "detectorLive": true,
+  "why": "3 of 10 leaf register(s) carry raw prose on this machine"
+ },
+ "fixture": {
+  "executable": true,
+  "at": "DS-GEN-11 :: viable: true: the arithmetic closes",
+  "towns": [
+   {
+    "label": "captured",
+    "seed": "rate-9-2",
+    "standing": "INTERESTED",
+    "kind": "treasury",
+    "holder": "Town hall",
+    "interested": true,
+    "playerCompiled": "The town works, and works for the reasons a town of this kind usually works.",
+    "dmCompiled": "The town works, and works for the reasons a town of this kind usually works.",
+    "dmSentence": "The treasury that keeps this is the Town hall, and the Town hall stands to gain by what it says.",
+    "renderInline": {
+     "player": "The town works, and works for the reasons a town of this kind usually works.",
+     "dm": "The treasury that keeps this is the Town hall, and the Town hall stands to gain by what it says.",
+     "passagesDiffer": true
+    },
+    "renderPenLine": {
+     "player": "The town works, and works for the reasons a town of this kind usually works.",
+     "dm": "The town works, and works for the reasons a town of this kind usually works.",
+     "pen": "The treasury that keeps this is the Town hall, and the Town hall stands to gain by what it says.",
+     "passagesDiffer": false
+    },
+    "passagesIdentical": true
+   },
+   {
+    "label": "clean",
+    "seed": "rate-3-0",
+    "standing": "LICENSED",
+    "kind": "treasury",
+    "holder": "Weekly market",
+    "interested": false,
+    "playerCompiled": "The town works, and works for the reasons a town of this kind usually works.",
+    "dmCompiled": "The town works, and works for the reasons a town of this kind usually works.",
+    "dmSentence": null,
+    "renderInline": {
+     "player": "The town works, and works for the reasons a town of this kind usually works.",
+     "dm": "The town works, and works for the reasons a town of this kind usually works.",
+     "passagesDiffer": false
+    },
+    "renderPenLine": {
+     "player": "The town works, and works for the reasons a town of this kind usually works.",
+     "dm": "The town works, and works for the reasons a town of this kind usually works.",
+     "pen": null,
+     "passagesDiffer": false
+    },
+    "passagesIdentical": true
+   }
+  ],
+  "pairedTownHolds": true,
+  "why": ""
+ },
+ "shapes": {
+  "executable": true,
+  "corpus": null,
+  "lines": [
+   "PASSAGE-SHAPE DISTRIBUTION (REWRITE car 8a-2; owner ruling (c) of 2026-09-08)",
+   "  attach-bearing pools 0 · composable units 0 · units WITH a shape question 0 · draws 0",
+   "  consequence.clause joints exist: NO — shape 3 is WITHHELD",
+   "  ⛔ THE TABLE IS EMPTY, AND THE EMPTINESS IS THE MEASUREMENT.",
+   "     Not one pool of this corpus carries a non-empty `attach` set, so not one",
+   "     composed unit has a modifier, so not one unit has a shape question. This is",
+   "     not a defect and it is not a gap in this script: the SHIFT REGISTER pins",
+   "     `attach-set` at 0 with the idiom \"EMPTY on every pool at this tip, BY",
+   "     CONSTRUCTION: every shipped pool is a spine and a spine's attach set is",
+   "     empty\". The composed-prose model is wired and DARK.",
+   "     The shape distribution therefore cannot be ruled on at 8a and the sitting",
+   "     reads it when a desk section lands attach rows (8b, the defense section).",
+   "     Run this script with --corpus over such a corpus to get the full table.",
+   "  OWED to a named car, never silently omitted:",
+   "    the THREAD verdicts",
+   "        car 8a item 4 — `armThread` is chartered REPORTED until 8b's first batch",
+   "    the BAND figures at the corrected grain",
+   "        car 8a item 5a — the band position is a CONSTANT at the face grain (SITTING §T.5), so a band column printed here would be the same tuple on every row",
+   "    the read-aloud assessment",
+   "        the sitting's own act, on the strings this table prints",
+   "    the claim/wiring census (A0b) after variation",
+   "        car 8a item 5, which lands the gate that carries A0b over a section"
+  ],
+  "why": ""
+ },
+ "banked": {
+  "count": 0,
+  "pools": [],
+  "rule": "Part B §21.2: a set that cannot be made lawful is banked as a refusal row with its faces, never trimmed, and this count only ever falls"
+ },
+ "seconds": 0
 }
