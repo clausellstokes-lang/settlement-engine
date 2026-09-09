@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: (E4, §916): totalFiles 2499 -> 2502 (+3: tests/domain/composeStateProse.test.js, tests/lint/composeStateProseFence.test.js, tests/lint/proseComposed.walker.test.js), entries 3 unchanged (no owed-ledger car; the three banked rows unmoved, the E2 row INHERITED), totalTests REFUSED in advance — this run derives it (the lighting census credits +182 titles / +42 suite titles since §915, a hint not a prediction); NO ceiling(s) HELD line may print — a HELD line is a STOP (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
