@@ -2880,9 +2880,18 @@ may not say the contract is failing unless the economic arm supplies that.
 **PDF PARITY:** parity.
 
 **walls PRESENT**
-1. `[visitor]` There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.
-2. `[ledger]` {settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.
-3. `[street]` The town has a wall and arranges its day around the gates without noticing that it does.
+1. `[visitor]` Seen from outside, {settlement} ends at a wall.
+   - `[face]` What stands at the edge of {settlement} is a wall, and the town lies within.
+   - `[face]` The wall of {settlement} is the town's outer bound.
+   - `[face]` Beyond the wall lies {settlement}.
+2. `[ledger]` {settlement} is walled, and a wall is what the town holds under the head of defense.
+   - `[face]` On this account {settlement} stands walled, and stands so at present.
+   - `[face]` Fortification at {settlement} is a wall, and that wall is standing.
+   - `[face]` What {settlement} carries here is a wall.
+3. `[street]` The town has a wall for its edge.
+   - `[face]` Round the town goes a wall.
+   - `[face]` Inside the wall is where the town is, and the wall is up.
+   - `[face]` Walled is the state of the town.
 
 **walls ABSENT**
 1. `[ledger]` {settlement} is unfortified. There is no perimeter, which means the town cannot control entry and cannot make a chokepoint of anything.
@@ -2890,9 +2899,18 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[street]` The town has an edge rather than a boundary at {settlement}, and the edge is wherever the last building happens to be.
 
 **garrison PRESENT**
-1. `[ledger]` {settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.
-2. `[street]` The soldiers at {settlement} belong to the town rather than to a season; they are a fixture, with all the friction and all the reliability of one.
-3. `[visitor]` A stranger at {settlement} is counted at the gate by somebody whose job that is, and is counted again on the way out.
+1. `[ledger]` {settlement} keeps a garrison of its own, in arms and in place.
+   - `[face]` The town's garrison at {settlement} is held in standing service.
+   - `[face]` A standing force is kept at {settlement}, kept by the town.
+   - `[face]` The soldiery at {settlement} is permanent, and the town's.
+2. `[street]` Soldiers at {settlement} are kept standing.
+   - `[face]` The soldiers at {settlement} are a fixture, and the town's own.
+   - `[face]` The town keeps its own soldiers at {settlement}.
+   - `[face]` A body of soldiers stands at {settlement}, kept there by the town.
+3. `[visitor]` A stranger who comes to {settlement} comes to a town that keeps soldiers.
+   - `[face]` A stranger at {settlement} finds soldiers, and finds them the town's own.
+   - `[face]` What a stranger meets at {settlement} is soldiery the town keeps.
+   - `[face]` To a stranger at {settlement}, the soldiers are the town's, and permanent.
 
 **militia PRESENT (no garrison)**
 1. `[ledger]` {settlement}'s defense is its own people under arms. They know the ground, they can be raised, and raising them stops everything else the town was doing.
@@ -2900,14 +2918,32 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[counterforce]` {settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
 
 **watch PRESENT**
-1. `[ledger]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the walls and is not built for what arrives outside them.
-2. `[street]` There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
-3. `[visitor]` A stranger walking {settlement} late is looked at rather than stopped, and the looking is systematic enough to notice.
+1. `[ledger]` The town at {settlement} keeps a watch.
+   - `[face]` A watch stands at {settlement}.
+   - `[face]` A standing watch is kept at {settlement}.
+   - `[face]` The watch at {settlement} is in place.
+2. `[street]` The watch at {settlement} is the town's.
+   - `[face]` The town's watch at {settlement} stands.
+   - `[face]` Here at {settlement} a watch is kept.
+   - `[face]` A watch belongs to the town at {settlement}.
+3. `[visitor]` A watch is posted at {settlement}.
+   - `[face]` The watch at {settlement} is a fixture of the town.
+   - `[face]` The town's watch at {settlement} is maintained.
+   - `[face]` At {settlement} a watch is held by the town.
 
 **NO organized force at all**
-1. `[ledger]` {settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.
-2. `[street]` The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.
-3. `[visitor]` A stranger at {settlement} can find nobody whose responsibility the town's defense is, because it is not anybody's.
+1. `[ledger]` Defense at {settlement} is the charge of no garrison or militia, and order of no watch.
+   - `[face]` Nothing of the town's keeping stands under arms at {settlement}, and no watch is set.
+   - `[face]` Neither soldiery nor watch is kept at {settlement}.
+   - `[face]` The town keeps neither garrison nor watch at {settlement}, and raises no militia.
+2. `[street]` The town keeps no soldiers of its own and sets no watch.
+   - `[face]` Nothing here is on watch for the town, and nothing under arms.
+   - `[face]` Order here answers to no watch, and defense to no garrison or militia.
+   - `[face]` The streets go unwatched, and the town's defense rests with no body it has raised.
+3. `[visitor]` A stranger enters {settlement} unmet by any watch and unchallenged by garrison or militia.
+   - `[face]` A stranger's arrival at {settlement} is marked by no watch, and answered by no garrison and by no militia.
+   - `[face]` Whoever arrives at {settlement} answers to no watch and to no soldiery the town keeps.
+   - `[face]` Neither watch nor armed body of the town's meets a stranger at {settlement}.
 
 **mercenary / contracted forces PRESENT**
 1. `[ledger]` Part of what defends {settlement} is contracted rather than owed: competent, available, and loyal for exactly as long as the terms run.
@@ -2915,9 +2951,18 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[unfolding]` The contracted companies at {settlement} are doing the work they were engaged for, and the engagement has an end written into it that the town has not yet had to think about.
 
 **charter hall PRESENT (specialist monster response)**
-1. `[ledger]` {settlement} keeps a charter for specialist work. The things a garrison is wrong for go to people retained to handle exactly them.
-2. `[street]` There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
-3. `[visitor]` A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
+1. `[ledger]` Against monsters, {settlement} holds a chartered hall.
+   - `[face]` A charter for monster work is in force at {settlement}.
+   - `[face]` A hall stands chartered at {settlement} for monster work.
+   - `[face]` The town keeps monster work under charter at {settlement}.
+2. `[street]` Monster work at {settlement} is the charter hall's business.
+   - `[face]` A hall on charter at {settlement} carries the monster work.
+   - `[face]` At {settlement} the monster work is written into a hall's charter.
+   - `[face]` Monster work is charter work at {settlement}.
+3. `[visitor]` A stranger at {settlement} finds the monster work in a chartered hall's keeping.
+   - `[face]` Arriving at {settlement}, a stranger meets a hall chartered against monsters.
+   - `[face]` For a stranger at {settlement}, the monster work belongs to a chartered hall.
+   - `[face]` A stranger who comes to {settlement} with monster business carries it to a hall that holds a charter for exactly that.
 
 **charter hall ABSENT where the country warrants one**
 1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is the garrison's problem regardless of whether the garrison is the right answer to it.
@@ -2925,9 +2970,18 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[street]` The town sends soldiers to things soldiers are wrong for at {settlement}, and pays for the wrongness each time.
 
 **arcane defense PRESENT**
-1. `[ledger]` {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
-2. `[visitor]` A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it.
-3. `[street]` There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.
+1. `[ledger]` Arcane defense stands at {settlement}.
+   - `[face]` What {settlement} keeps for its defense is partly arcane.
+   - `[face]` Warding counts in the provision {settlement} makes for defense.
+   - `[face]` The arcane has a share in the defense of {settlement}.
+2. `[visitor]` The stranger who comes to {settlement} comes to a town with arcane provision in its defense.
+   - `[face]` A newcomer at {settlement} arrives in a town where warding is kept.
+   - `[face]` What guards a stranger at {settlement} is in part arcane.
+   - `[face]` An outsider at {settlement} is under its arcane defense.
+3. `[street]` The town at {settlement} is warded.
+   - `[face]` Warding is in place at {settlement}.
+   - `[face]` Arcane work goes on at {settlement} as part of its defense.
+   - `[face]` Arcane provision belongs to the defense of {settlement}.
 
 **arcane defense ABSENT**
 1. `[ledger]` {settlement}'s defense is conventional throughout. What arrives unseen here goes undetected and therefore unanswered.

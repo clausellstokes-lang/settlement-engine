@@ -2208,25 +2208,40 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "walls PRESENT": [
         {
           "angle": "visitor",
-          "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
+          "text": "Seen from outside, {settlement} ends at a wall.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "What stands at the edge of {settlement} is a wall, and the town lies within.",
+            "The wall of {settlement} is the town's outer bound.",
+            "Beyond the wall lies {settlement}."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "{settlement} controls its own entry points. That is what a perimeter buys: not invulnerability, but the choice of where anything happens.",
+          "text": "{settlement} is walled, and a wall is what the town holds under the head of defense.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "On this account {settlement} stands walled, and stands so at present.",
+            "Fortification at {settlement} is a wall, and that wall is standing.",
+            "What {settlement} carries here is a wall."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town has a wall and arranges its day around the gates without noticing that it does.",
+          "text": "The town has a wall for its edge.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Round the town goes a wall.",
+            "Inside the wall is where the town is, and the wall is up.",
+            "Walled is the state of the town."
+          ]
         }
       ],
       "walls ABSENT": [
@@ -2258,27 +2273,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "garrison PRESENT": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a standing force: people whose work is the defense of this town and who are answerable for it as work.",
+          "text": "{settlement} keeps a garrison of its own, in arms and in place.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "The town's garrison at {settlement} is held in standing service.",
+            "A standing force is kept at {settlement}, kept by the town.",
+            "The soldiery at {settlement} is permanent, and the town's."
+          ]
         },
         {
           "angle": "street",
-          "text": "The soldiers at {settlement} belong to the town rather than to a season; they are a fixture, with all the friction and all the reliability of one.",
+          "text": "Soldiers at {settlement} are kept standing.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The soldiers at {settlement} are a fixture, and the town's own.",
+            "The town keeps its own soldiers at {settlement}.",
+            "A body of soldiers stands at {settlement}, kept there by the town."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is counted at the gate by somebody whose job that is, and is counted again on the way out.",
+          "text": "A stranger who comes to {settlement} comes to a town that keeps soldiers.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A stranger at {settlement} finds soldiers, and finds them the town's own.",
+            "What a stranger meets at {settlement} is soldiery the town keeps.",
+            "To a stranger at {settlement}, the soldiers are the town's, and permanent."
+          ]
         }
       ],
       "militia PRESENT (no garrison)": [
@@ -2308,51 +2338,81 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "watch PRESENT": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the walls and is not built for what arrives outside them.",
+          "text": "The town at {settlement} keeps a watch.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A watch stands at {settlement}.",
+            "A standing watch is kept at {settlement}.",
+            "The watch at {settlement} is in place."
+          ]
         },
         {
           "angle": "street",
-          "text": "There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.",
+          "text": "The watch at {settlement} is the town's.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The town's watch at {settlement} stands.",
+            "Here at {settlement} a watch is kept.",
+            "A watch belongs to the town at {settlement}."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger walking {settlement} late is looked at rather than stopped, and the looking is systematic enough to notice.",
+          "text": "A watch is posted at {settlement}.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "The watch at {settlement} is a fixture of the town.",
+            "The town's watch at {settlement} is maintained.",
+            "At {settlement} a watch is held by the town."
+          ]
         }
       ],
       "NO organized force at all": [
         {
           "angle": "ledger",
-          "text": "{settlement} has no organized force. Defense here is individual armed citizens, with no command, no training and no way to coordinate a response.",
+          "text": "Defense at {settlement} is the charge of no garrison or militia, and order of no watch.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Nothing of the town's keeping stands under arms at {settlement}, and no watch is set.",
+            "Neither soldiery nor watch is kept at {settlement}.",
+            "The town keeps neither garrison nor watch at {settlement}, and raises no militia."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town would defend itself as a crowd defends itself, which is to say briefly and in several directions at once.",
+          "text": "The town keeps no soldiers of its own and sets no watch.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Nothing here is on watch for the town, and nothing under arms.",
+            "Order here answers to no watch, and defense to no garrison or militia.",
+            "The streets go unwatched, and the town's defense rests with no body it has raised."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} can find nobody whose responsibility the town's defense is, because it is not anybody's.",
+          "text": "A stranger enters {settlement} unmet by any watch and unchallenged by garrison or militia.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "A stranger's arrival at {settlement} is marked by no watch, and answered by no garrison and by no militia.",
+            "Whoever arrives at {settlement} answers to no watch and to no soldiery the town keeps.",
+            "Neither watch nor armed body of the town's meets a stranger at {settlement}."
+          ]
         }
       ],
       "mercenary / contracted forces PRESENT": [
@@ -2382,27 +2442,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "charter hall PRESENT (specialist monster response)": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a charter for specialist work. The things a garrison is wrong for go to people retained to handle exactly them.",
+          "text": "Against monsters, {settlement} holds a chartered hall.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "A charter for monster work is in force at {settlement}.",
+            "A hall stands chartered at {settlement} for monster work.",
+            "The town keeps monster work under charter at {settlement}."
+          ]
         },
         {
           "angle": "street",
-          "text": "There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.",
+          "text": "Monster work at {settlement} is the charter hall's business.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A hall on charter at {settlement} carries the monster work.",
+            "At {settlement} the monster work is written into a hall's charter.",
+            "Monster work is charter work at {settlement}."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+          "text": "A stranger at {settlement} finds the monster work in a chartered hall's keeping.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Arriving at {settlement}, a stranger meets a hall chartered against monsters.",
+            "For a stranger at {settlement}, the monster work belongs to a chartered hall.",
+            "A stranger who comes to {settlement} with monster business carries it to a hall that holds a charter for exactly that."
+          ]
         }
       ],
       "charter hall ABSENT where the country warrants one": [
@@ -2434,27 +2509,42 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "arcane defense PRESENT": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.",
+          "text": "Arcane defense stands at {settlement}.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "What {settlement} keeps for its defense is partly arcane.",
+            "Warding counts in the provision {settlement} makes for defense.",
+            "The arcane has a share in the defense of {settlement}."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it.",
+          "text": "The stranger who comes to {settlement} comes to a town with arcane provision in its defense.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "A newcomer at {settlement} arrives in a town where warding is kept.",
+            "What guards a stranger at {settlement} is in part arcane.",
+            "An outsider at {settlement} is under its arcane defense."
+          ]
         },
         {
           "angle": "street",
-          "text": "There are wards at {settlement} the town does not discuss and would notice immediately if they stopped.",
+          "text": "The town at {settlement} is warded.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Warding is in place at {settlement}.",
+            "Arcane work goes on at {settlement} as part of its defense.",
+            "Arcane provision belongs to the defense of {settlement}."
+          ]
         }
       ],
       "arcane defense ABSENT": [
@@ -2487,9 +2577,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -2519,9 +2609,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -2551,9 +2641,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -2567,9 +2657,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -2599,9 +2689,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -2631,9 +2721,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
