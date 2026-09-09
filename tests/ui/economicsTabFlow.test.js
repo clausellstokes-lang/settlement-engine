@@ -102,7 +102,18 @@ const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
  * mount is actually in the DOM rather than behind a collapsed header.
  */
 const SPEAKING = {
-  id: 'forge_town', name: 'Forge Town', _seed: 'forge_town', tier: 'town',
+  // ⛔ RE-SEEDED at car 8a-12. Both pins below are LIVENESS ANCHORS on a DRAWN member of a
+  // pool, and which member a pool draws is a function of this `_seed`
+  // (`stateProseKernel.js` `drawVariant`, keyed `seed::blockId::poolKey`) — so car 8a-1's
+  // index-stable draw (ARCH §13 row 22, SIGNED at SITTING §N.2) moved DS-ECO-9's member
+  // without moving one byte of the corpus, the desk or the gate this file exists to prove.
+  // The act is the anchor helper's own instruction — "choose an anchor that still travels
+  // this path — do not delete the anchor to get green": a seed under the NEW draw that draws
+  // both anchored members. Measured, not invented: `economyDeskRead` was driven over
+  // candidate seeds and this was the first that held (22 candidates). `id` and `saveId` stay
+  // `forge_town` — only `_seed` reaches the draw. The DESK-ECON2 fixture further down carries
+  // NO seed at all and is canonical-at-zero, so no draw rule can move it.
+  id: 'forge_town', name: 'Forge Town', _seed: 'forge_town-b', tier: 'town',
   economicState: {
     prosperity: 'Comfortable', economicComplexity: 'a market town', tradeAccess: 'road',
     situationDesc: 'The market square keeps its hours.',

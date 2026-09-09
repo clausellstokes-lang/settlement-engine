@@ -44,6 +44,38 @@ const e = React.createElement;
 afterEach(cleanup);
 
 /**
+ * ⛔ WHY FIVE FIXTURES BELOW CARRY A SUFFIXED `_seed` (REWRITE car 8a-12, and the rule for the
+ * next seat that finds one of these red).
+ *
+ * Every sentence pinned in this file is a LIVENESS ANCHOR on a DRAWN member of a pool — the
+ * `before` half of `expectPresentThenAbsent`, which exists so the "and it is gone publicly"
+ * half cannot pass over an empty page. WHICH member a pool draws is a function of the
+ * fixture's `_seed` (`stateProseKernel.js` `drawVariant`, keyed `seed::blockId::poolKey`), so
+ * a change to the DRAW RULE moves the drawn member without moving one byte of the corpus, the
+ * desk or the gate — and every anchor here reds at once while the thing they guard is
+ * perfectly well.
+ *
+ * That is exactly what car 8a-1's index-stable draw did (ARCH §13 row 22, SIGNED at SITTING
+ * §N.2; RE-INDEXED 43,685 of 73,284 cells = 59.61 %). The act is the one 8a-1 took in three
+ * desk suites and the anchor helper states in its own words — "choose an anchor that still
+ * travels this path — do not delete the anchor to get green": a seed under the NEW draw that
+ * still draws the anchored member. NOTHING here is deleted, no assertion is loosened to a
+ * substring that would pass vacuously, and no `src/` byte moved.
+ *
+ * ⚠ THE SEEDS ARE MEASURED, NOT INVENTED, and the odd-looking ones are odd for a reason. A
+ * fixture's seed must satisfy EVERY pin drawn off it at once — `SPEAKING` carries eight
+ * independent pools — so the seed was searched for by driving `generalDeskLines` over
+ * candidate seeds until one drew all of them (SPEAKING took 111,965 candidates; the others
+ * between 22 and 121). Any seed the search returns is as good as any other; the suffix is a
+ * coordinate, not a name.
+ *
+ * ⚠ AND THEY WILL MOVE AGAIN, BY DESIGN. Under the index-stable draw, appending a wording to
+ * a pool moves about 1/n of that pool's reads — so the REWRITE's own NEVER-TRIM growth will
+ * re-roll some of these anchors on the block cars. A red here is that, until proved
+ * otherwise: re-seed it, never delete it.
+ */
+
+/**
  * A town that genuinely DRAWS every Overview position the general desk owns. Each field is
  * in the shape the real producer writes — proved in the last describe — and each is the
  * CANONICAL path rather than the corpus title's abbreviation: the institution booleans live
@@ -52,7 +84,12 @@ afterEach(cleanup);
  * would render BARE and dimension-less on every settlement ever generated.
  */
 const SPEAKING = Object.freeze({
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark', tier: 'town',
+  // ⛔ RE-SEEDED at car 8a-12 (see the block above), and this is the fixture the note is
+  // about: EIGHT pools are pinned off this one seed — the seven of the Overview loop and
+  // DS-POP-3 through `COUNTED`, which spreads this record — so the seed had to draw all
+  // eight. `id` stays `steinmark`: the ledger lookups and the rendered NAME are keyed on it,
+  // and only `_seed` reaches the draw (`generalDeskRead.js`: `String(r?._seed ?? r?.id)`).
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-16jm', tier: 'town',
   prominentRelationship: {
     npc1: 'Mugain', npc2: 'Felix', type: 'Outstanding Debt',
     phrasing: 'Mugain and Felix are connected by something neither discusses openly.',
@@ -228,7 +265,10 @@ describe('THE FIXTURE IS SHAPED LIKE A REAL TOWN (the desk law\'s trap 4)', () =
  * difference is exactly why DS-GEN-1 stays dark while DS-GEN-9 speaks.
  */
 const CHRONICLED = Object.freeze({
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark', tier: 'town',
+  // RE-SEEDED at car 8a-12 (see the block above): four history pins ride this seed —
+  // DS-GEN-9's identity and marker, DS-GEN-14 and DS-GEN-16 — and the doubled-article arm
+  // anchors on the DS-GEN-16 one, so all four had to hold together.
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-w', tier: 'town',
   history: {
     age: 285,
     historicalCharacter: 'A town that has outlasted its own explanations.',
@@ -311,7 +351,8 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
  * which is where the producer writes it and NOT where the corpus title abbreviates it to.
  */
 const UNVIABLE = Object.freeze({
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark',
+  // RE-SEEDED at car 8a-12 (see the block above): DS-GEN-11's three lenses ride this seed.
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-c',
   economicViability: {
     viable: false,
     summary: '✗ NOT VIABLE: the sums do not close',
@@ -495,7 +536,10 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
  * the ruin). The fixture is shaped like `satellitesLedger.js`'s own `SatelliteRecord`.
  */
 const FALLEN = Object.freeze({
-  id: 'ashfall', name: 'Ashfall', _seed: 'ashfall',
+  // RE-SEEDED at car 8a-12 (see the block above): DS-GEN-8's three surfaces — the remnant
+  // grade, the ancient ruin and the forced steading — ride this seed. `id` stays `ashfall`
+  // because `SteadingsSection` resolves the campaign's satellites ledger by it.
+  id: 'ashfall', name: 'Ashfall', _seed: 'ashfall-27',
   lifecycleStatus: 'relic_ruin',
   history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } },
 });
@@ -581,7 +625,10 @@ describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free v
  * so a render that drew the patron line here would be fluent and false.
  */
 const LINKED = Object.freeze({
-  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark', history: {},
+  // RE-SEEDED at car 8a-12 (see the block above): DS-REL-1's three pins ride this seed, and
+  // so does the arm that the OTHER end's sentence never appears — that one is an exclusion
+  // whose anchor is the client-end draw, so it holds only while the client end still draws.
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark-v', history: {},
   neighbourNetwork: [{
     id: 'n1', name: 'Thornmere', neighbourName: 'Thornmere', neighbourTier: 'town',
     relationshipType: 'patron', localRelationshipRole: 'client',
