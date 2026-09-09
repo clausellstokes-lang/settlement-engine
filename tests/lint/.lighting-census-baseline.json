@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "707118f8034fccc182e0110e2b878ef724b922c0",
-  "measuredBy": "lane LIGHT, car 2 (Opus 5 — Fable-unvalidated)",
+  "measuredAtSha": "f4433c94301dc569c522cc4abcd40ee436f97869",
+  "measuredBy": "lane LIGHT, car 3 (Opus 5 — Fable-unvalidated)",
   "date": "2026-09-09",
-  "note": "Lane LIGHT car 2 landed the LIGHT skeptic fold cures and added exactly TWO test blocks, no test file and no describe. importReconciliation +1 (car 2a: a world the LIT PRODUCT minted, driven through the reconciliation boundary, asserting the foreign birth-law marker absent on both of its config echoes) and livingContentMaterialization +1 (car 2e: the mint dormant branch executed through the real function at a dark dial). titles 24046 -> 24048; files, parked, credited and suiteTitles are all unmoved, because no file and no describe was added. Cars 2c and 2d strengthened existing arms in place and moved no title: the payload walker arm became an ordering check and the RATE arm gained assertions inside a test it already had.",
+  "note": "Lane LIGHT car 3 added exactly ONE live test title, and it is the walker arm that holds the two declared worker rows to the create boundary aggregate (tests/lint/densityCreateBoundary.walker.test.js, car 3a: the aggregate must await exactly the one loader those rows arm). titles 24048 -> 24049. Car 3b also added one it() to tests/build/generationWorkerLazy.test.js (the module-worker arm), and it costs NOTHING here because it sits inside describe.runIf(DIST_EXISTS) and runIf is a NON_FOCUSING modifier in this walker closed grammar, so its titles are never live. files, parked, credited and suiteTitles are unmoved: no test file and no describe was added.",
   "files": 2557,
   "parked": 375,
   "credited": 2182,
-  "titles": 24048,
+  "titles": 24049,
   "suiteTitles": 6422
 }
