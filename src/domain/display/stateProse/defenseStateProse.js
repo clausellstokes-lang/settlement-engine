@@ -664,6 +664,34 @@ export const TERRAIN_DEFENCE_NAMES = Object.freeze(Object.keys(TERRAIN_DEFENCE_O
 export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
 
 /**
+ * DS-DEF-1 lens 1's key table — the four readiness bands, one pool each.
+ *
+ * ⭐⭐ THE SAME EXPOSURE SEAM CAR 3h MADE FOR DS-DEF-2, ON THE BLOCK NEXT DOOR. The estate's
+ * wiring register (the instrument island under `src/domain/prose/`, which no product file may
+ * name) recovers a pool's selecting predicate down a four-rung ladder, and this lens sat on
+ * the fourth rung for the same reason `economicRowPoolKey` did: it built its key by TEMPLATE
+ * over a BAND CALL, and a template hole that is a function call resolves to no reading at all.
+ * All four of its pools read "no key function returns this key as a literal", which is a true
+ * report and an unusable one, and ARCH §8.2's own rule then refuses the block a list row until
+ * the wiring lands. This table is that wiring: the band word is the key, so the register
+ * recovers an exact `if and only if`.
+ *
+ * ⚠ THE TABLE IS NOW THE ROSTER, WHERE THE CORPUS LOOKUP USED TO BE, and the equality is
+ * asserted rather than enforced invisibly at the draw. The shipped function built the key by
+ * template and then asked `CORPUS['DS-DEF-1'].pools[key]` whether the corpus carried it. Both
+ * halves of the 1:1 are bound by the desk suite instead: every band word `scoreBand` can emit
+ * is a key of this table, and every value of it is a live pool of the shipped corpus. A band
+ * the corpus stopped carrying reds an arm rather than going quiet in front of a reader.
+ * @type {Readonly<Record<string, string>>}
+ */
+const READINESS_ROW_POOL = Object.freeze({
+  STRONG: 'readiness STRONG',
+  ADEQUATE: 'readiness ADEQUATE',
+  WEAK: 'readiness WEAK',
+  CRITICAL: 'readiness CRITICAL',
+});
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -675,8 +703,7 @@ export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
  */
 export function posturePoolKey(readinessScore) {
   if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
-  const key = `readiness ${scoreBand(readinessScore)}`;
-  return CORPUS['DS-DEF-1'].pools[key] ? key : null;
+  return READINESS_ROW_POOL[scoreBand(readinessScore)] || null;
 }
 
 /**

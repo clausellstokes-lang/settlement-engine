@@ -619,6 +619,22 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     const built = generateDefenseProfile(fort({ walls: true, garrison: true }));
     expect(typeof built.readiness.score).toBe('number');
     expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${scoreBand(built.readiness.score)}`);
+    // ⛔ THE ROSTER THE CORPUS GUARD USED TO ENFORCE, NOW BOUND BOTH WAYS (REWRITE car 8b-W).
+    // Until this car the key was built by template and then checked against
+    // `CORPUS['DS-DEF-1'].pools[key]` at runtime — a 1:1 nothing outside the running process
+    // could read, and the reason all four pools sat on the register's fourth rung.
+    // `READINESS_ROW_POOL` is that roster, module-private so the projection contract's
+    // exported-string-map guard stays satisfied, and the equality it used to enforce is
+    // asserted here instead, in both directions and over the whole band range.
+    const reachedReadiness = new Set();
+    for (let n = -20; n <= 120; n += 1) {
+      const key = posturePoolKey(n);
+      expect(DEF1_POOLS[key], `a readiness score of ${n} must key a LIVE pool`).toBeTruthy();
+      reachedReadiness.add(key);
+    }
+    expect([...reachedReadiness].sort(),
+      'and the corpus\'s four readiness pools are exactly what the band reaches')
+      .toEqual(Object.keys(DEF1_POOLS).filter((k) => k.startsWith('readiness ')).sort());
   });
 
   it('an absent readiness score is SILENCE, not CRITICAL', () => {
