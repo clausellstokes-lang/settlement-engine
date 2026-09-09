@@ -31,7 +31,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-2 | passage shapes — the licensed fourth draw + the distribution report | **`39c88b02d`** | **LANDED** |
 | 8a-3 | the taste's instruments landed by name, without the annex rows | **`83e8acf17`** | **LANDED** |
 | 8a-4 | `armThread` + the kinship tiebreak | **`94c41fdb8`** | **LANDED** |
-| 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | — | pending |
+| 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | **`e26ad7838`** | **LANDED** |
 | 8a-6 | the arm-Q cure + the field-synonym table | — | pending |
 | 8a-7 | the face-count ratchet | — | pending |
 | 8a-8 | T-F12's class list re-cut | — | pending |
@@ -790,3 +790,207 @@ acceptance had already been shown not to reach a real red. **1,092 files passed 
 17,494 tests passed / 3 failed.** The three: the two chartered `dossierProseManifest` arms (DRIFT
 and PROVENANCE — the manifest fixture is NOT re-recorded by this car) and the inherited golden
 master. Nothing else in 17,497 tests moved.
+
+---
+
+## 8a-5 — THE WAVE'S GATE: `scripts/prose-wave-gate.mjs`
+
+**LANDED `e26ad7838`** over `94c41fdb8`. Five files (two of them renames). Zero reader-facing
+bytes, proven.
+
+### THE MOVE, AND WHY IT IS A MOVE
+
+    git mv scripts/taste-measure.mjs              scripts/prose-wave-gate.mjs
+    git mv tests/lint/proseTasteMeasure.walker.test.js  tests/lint/proseWaveGate.walker.test.js
+
+The brief allows "a thin alias or removed with its walker in the same commit, never a second
+implementation". Neither: the file was RENAMED, so there is one implementation and its whole
+history follows it. The mutation-coverage entry's key moved with it.
+
+### ⛔⛔ THE LARGEST FINDING — THE GATE HAD NO SUBJECT
+
+`unitsOfPool` composed the CARTESIAN of a modifier pool and its attach set. A SPINE's attach set
+is empty on all 708 pools by construction (the SHIFT REGISTER pins `attach-set` at 0), so the
+gate composed **nothing** for the very pools the REWRITE rewrites. Car 8a-3 cured the SYMPTOM —
+an absent pool reading as `PASS` — but a gate that answers honestly about a population of zero
+is still a gate with no subject.
+
+A spine pool now composes ONE UNIT PER FACE, one piece, `role: 'spine'`. Every composed-only arm
+(A1's overlap, A2's joint, A3's contrast, Thread) declares NOT-EXECUTABLE on it rather than
+inventing a second piece to have something to compare; the ENTRY arms — the claim classes, the
+digits, the em dash, the fragment form — are what judge a spine face, and they are what the
+REWRITE is graded on. Executed: `unitsOfPool('DS-DEF-11', 'WALLED-STRAINED')` reads **2 units**
+(2 variants × 1 face), and both absent cases still answer `[]`.
+
+### ⭐⭐ (a) THE BAND GRAIN — THE OLD PATH REPRODUCES SITTING §T.5's FIGURES TO THE DIGIT
+
+Driven on two faces of very different length against the whole 21-metric band set:
+
+| face | scored | exceeded | share | mean | deepest |
+|---|---|---|---|---|---|
+| `The wall is kept out of the purse.` (8 words) | 21 | 13 | **0.619** | **0.486** | `wordsPerSentence.neighbourVariation` **1.597 under** |
+| the same plus a 17-word tail (25 words) | 21 | 13 | **0.619** | **0.486** | the same, **1.597 under** |
+
+Identical, which is the chair's finding executed rather than recalled. **Thirteen of the
+twenty-one are properties of a TEXT** — a share of sentences, a rate per sentence, a variation
+BETWEEN neighbours, a repeated opener — and on ONE sentence every one reads 0 and falls under
+every exemplar floor, so the budget was met vacuously at 13 ≤ floor(21 × 2/3) = 14.
+
+**THE CURE IS A GRAIN, NOT A THRESHOLD.** `TEXT_LEVEL_METRICS` (13) score the pool's RENDERED
+CORPUS; `FACE_LEVEL_METRICS` (8 — colon, em dash, question, exclamation, parenthesis,
+participial opener, which-tail, dialogue) score the FACE. The two are disjoint and sum to 21,
+asserted. Both grains print.
+
+**THE PLANT, EXECUTED** — the same two faces, each inside a corpus of four sentences:
+
+| grain | short-face corpus | long-face corpus | verdict |
+|---|---|---|---|
+| CORPUS (13) | exceeded **12/13** · share 0.923 · mean **0.533** | exceeded **11/13** · share 0.846 · mean **0.500** | **THEY DIFFER** |
+| FACE (8) | exceeded 0 · mean 0.259 | exceeded 0 · mean 0.259 | the same — and rightly |
+
+The face grain reads alike BECAUSE THE LEXICON AGREES: neither sentence carries any of the
+eight. That is asserted with its reason, and a third face carrying an em dash is driven beside
+it and MOVES, so "alike" is a reading and never a constant again.
+
+On the real corpus the discrimination is visible in the table: `DS-DEF-11 :: WALLED-STRAINED`
+prints `distinct tuples 2 of 2 face(s)` where `WALLED-QUIET` prints `1 of 3` — three faces of
+identical length and lexicon, which the old grain could not have told from three of different.
+
+### (b) THE SIBLING DISTANCE, ON THE ESTATE'S OWN RULER
+
+`siblingSpreadOf` reports min / median / max content-token overlap in basis points, the
+same-opener and same-segment pair counts, and the NEAREST pair — all through `siblingDistance`,
+which already exists. **⛔ IT SEES WHAT A5 CANNOT**, driven: a paraphrase pair whose opener
+differs (`The muster roll is short at the wall.` / `At the wall the muster roll runs short.`)
+reads `sameOpenerPairs 0` — A5's opener test does not fire — and `overlap ≥ 6000 bp`, which is
+the pair for what it is. REPORTED; the floor is set at 8b's fold (SITTING §T.3 row 8).
+
+### (c) THE EXEMPLAR CITATION RATE — MEASURED, WITH ITS DENOMINATOR
+
+    EXEMPLAR CITATION RATE: 0 citation(s) over 786 sentence(s) = 0 bp per unit,
+                            on 3 of 10 leaf register(s)
+      per leaf: leguin-fiction 0 bp · leguin-nonfiction-spoken 0 bp · leguin-nonfiction-written 0 bp
+      no raw prose on this machine for: martin-chronicle, martin-narrative, tolkien-elevated,
+                                        tolkien-plain, dnd-flavor, dnd-rules, dnd-rules-srd52
+      the control sentence scores > 0, so a zero above is the prose's
+
+⭐ **A FINDING FOR THE SITTING:** the three exemplar registers that can be read carry **ZERO**
+provenance clauses by `provenanceCount`'s own definition over 786 sentences. SITTING §T.4 set
+the budget at "≤ 1 citation per unit, provisional until this rate is read". It is read: the
+exemplars do not cite at all, so a budget of one per unit is not a tight band — it is far above
+anything the exemplar prose does. Reported, not ruled.
+
+⛔ The NON-VACUITY CONTROL runs on every call, because a zero from prose that cites nothing and
+a zero from a dead detector are the same number and opposite findings.
+
+### (d) THE FIXTURE SECTION — THE INTERESTED FACT BOTH WAYS (agenda C‴)
+
+`DS-GEN-11 :: viable: true: the arithmetic closes` (SITTING §R c-22's own row):
+
+    ── captured (rate-9-2) · treasury · holder Town hall · standing INTERESTED
+       1 PLAYER, as compiled     "The town works, and works for the reasons a town of this kind usually works."
+       2 DM, INLINE replacement  "The treasury that keeps this is the Town hall, and the Town hall
+                                  stands to gain by what it says."      [passages differ: YES]
+       3 DM, PEN LINE beside     "The town works, and works for the reasons a town of this kind usually works."
+         + pen                   "The treasury that keeps this is the Town hall, and the Town hall
+                                  stands to gain by what it says."
+       4 the compiled passage is identical on both audiences: YES
+    ── clean (rate-3-0) · treasury · holder Weekly market · standing LICENSED
+       1..4 as above, and the pen slot is EMPTY: this holder is not interested here
+    PAIRED-TOWN ARM over the fixture: HOLDS
+
+⛔ **THE DM SENTENCE IS THE GATE'S OWN ILLUSTRATION AND THE OUTPUT SAYS SO.** No pool carries a
+`dm-only` face on this row, so there is nothing to draw; the gate builds one from the HOLDER
+CENSUS's three facts (kind, named holder, standing) and labels it. What the sitting is being
+shown is the ARRANGEMENT, which is C‴'s question, and the arrangement is real whatever the
+sentence is. The CLEAN CONTROL HAS NO PEN LINE AT ALL — which is what makes the pair a pair.
+
+### (e) `--shapes`
+
+Shells out to `scripts/prose-shape-report.mjs` and prints its lines verbatim. It does not
+import it, because that script is an ENTRY that prints at import time; a subprocess is the
+honest way to say "this is the other instrument's answer".
+
+### THE TWO-PHASE RULE, ENCODED (Part B §21.2)
+
+`keepOrRevert` answers KEEP / REVERT / BANK. ⛔ **"NO NEW FAILURE" IS BY MEASURE NAME, NOT BY
+COUNT** — two failures traded one for one hold the count and would pass a count test while the
+set moved sideways, which §21.2 refuses in terms. Driven: `{a,b} → {a,c}` is a **REVERT** with
+`newFailures ['c']` and `cured ['b']` at an unchanged count of 2. A KEEP names its own limit
+(SITTING §T.4: the gate read 0 owned findings on all 13 kept refinements while the blind
+refuters failed 26 of 42). The BANKED count is printed and shrink-only.
+
+### ⛔ THE ROSTER — A DESK SECTION IS A LEAF, AND THE FIRST CUT WAS WRONG
+
+Written by hand as a PREFIX list it read general = DS-GEN, DS-HK, DS-CND and warFaith = DS-WAR,
+DS-FTH, DS-REL. The projector's own DESKS table
+(`scripts/generate-dossier-state-prose.mjs:108`) says general = DS-GEN, DS-REL, DS-POP, DS-HK
+and stressors = DS-STR, DS-CND. Two prefixes on the wrong desk and DS-POP on none: **29 of the
+708 pools were reachable from no section at all.** Caught by executing the roster, not by
+reading it.
+
+Cured by deriving: a leaf IS a section. `sectionsCoverEveryPool()` asserts the partition —
+**6 leaves · 708 pools · unreached 0 · counted twice 0** — and the six read
+defense 126 · economy 105 · general 193 · power 79 · stressors 67 · warFaith 138.
+
+### THE REFUTERS' GROUNDS AS ARMS (SITTING §T.5), AND THEIR RATE ON THE SHIPPED CORPUS
+
+| arm | channel | plant | control | fires on 2,266 |
+|---|---|---|---|---|
+| `armTail` | REPORT | `…, at least for now.` | `…, and the purse is thin.` | **0** |
+| `armAspect` | REPORT | `will never shut` · `has been paid` | `is shut at dusk` | **177** |
+| `armRestatement` | REPORT | two clauses at 10,000 bp overlap | a second clause that adds a fact | **6** |
+| `armAmbiguity` | **WITHHELD** | `without cover` | `behind a low wall` | **0** |
+
+⛔ **NONE OF THE FOUR GATES**, asserted on every plant: refuters default to FAIL when uncertain
+and the sitting recorded that "the count overstates; the classes are real". An arm cut from an
+overstating count and gated on the first day would refuse lawful prose, and a refused lawful
+face is a TRIM. The paraphrase ground is (b) above; the costume ground is the grammar walker's
+own move ceiling and no second detector is minted; the C7 ground already exists.
+
+⭐ The Aspect arm's 177 is not noise — inspected: `The margin has been narrowing…`, `it has paid
+for and must keep paying for`, `The town has never needed to think about what is outside it`.
+Real perfect-aspect and forecast constructions in today's prose, which is exactly the authoring
+debt the REWRITE inherits. `armRestatement` is asserted NOT to fire on the same pair split
+across two SENTENCES, because that is what Thread rewards — the two arms must not read each
+other's evidence.
+
+### THE GATE'S USAGE LINE, VERBATIM FROM THE HEADER
+
+     *   node scripts/prose-wave-gate.mjs --arm draft --round 3
+     *   node scripts/prose-wave-gate.mjs --arm A --base <cells.json>
+     *   node scripts/prose-wave-gate.mjs --arm draft --variety 1     a cheap slice of measure (d)
+     *   node scripts/prose-wave-gate.mjs --section defense           a DESK SECTION's spine pools
+     *   node scripts/prose-wave-gate.mjs --shapes --corpus <f>       item 2's distribution table
+     *
+     * READ-ONLY except the JSON it writes at `$PACKETS/measure-<arm>.json`.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| the gate, driven | `node scripts/prose-wave-gate.mjs --pools "DS-DEF-11 :: WALLED-STRAINED,DS-DEF-11 :: WALLED-QUIET" --shapes` — **exit 0**, every section printed |
+| `tests/lint/proseWaveGate.walker.test.js` | **41 passed** (20 before) |
+| `tests/lint/proseComposed.walker.test.js` | **84 passed** (77 before) |
+| `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,582 passed / 1** (the declared lighting red) |
+| projector | `--check` exit 0 |
+| classifier, 8a-4 → 8a-5 | **UNCHANGED 73,284 · every class 0** |
+| typecheck | 173 errors, **0 in any file this car touched** (one introduced and cured: `armRestatement`'s option bag was typed closed) |
+| eslint | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+### The judgment calls, recorded for veto
+
+1. **RENAMED rather than aliased.** The brief allowed either. A rename keeps one implementation
+   and its history; an alias is a second name that outlives the reason for it.
+2. **The section roster is DERIVED FROM THE LEAVES, not from a prefix table.** The prefix table
+   was written first, was wrong, and the error was silent. A derived roster cannot be wrong
+   about which desk owns a block, because the leaf IS the desk.
+3. **`bandPositionOf` is KEPT, not deleted.** It is the arithmetic both grains call, and the
+   walker drives it on the whole 21-metric set precisely to reproduce the defect. Deleting it
+   would have removed the only executable proof that the cure cures something.
+4. **The fixture's DM sentence is the gate's illustration, printed with that label.** The
+   alternative — authoring a real `dm-only` face — is SURFACES-DM's work and would have put an
+   unwritten byte in front of the sitting as though it were the wave's.
+5. **Four of the seven refuter grounds land; three do not, each with its reason** (the
+   paraphrase is (b); the costume is the grammar walker's; C7 exists).
