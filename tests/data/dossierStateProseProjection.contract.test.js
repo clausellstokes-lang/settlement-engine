@@ -295,6 +295,107 @@ describe('the dossier state-prose projection', () => {
     expect(causalVariants).toBeGreaterThanOrEqual(468);
   });
 
+  it('⭐⭐ never shrinks: the FACE inventory is a ratchet too (C\u2032; Part B \u00a722 d)', () => {
+    // ⛔ THE OWNER'S "NEVER TRIM", DEFINED (Part B §22 d, confirmed 2026-09-08): "the variant
+    // count and the face count are ratchets that red on any fall; the annex is append-only".
+    // The variant half has been armed since the projection's first landing; the FACE half was
+    // not, and SITTING §T.4 (agenda C′) ordered it "armed beside the variant ratchet BEFORE the
+    // REWRITE's first writing workflow" — which is this car, the last one before 8b.
+    //
+    // ⛔ THE ESTATE-WIDE FLOOR IS RE-PINNED TO THE MEASURED TOTAL, on the variant ratchet's own
+    // standing rule (CT-0 §5 R-5): a stale floor leaves slack, and slack is where a regression
+    // hides. 2,266 today because every one of the 2,266 variants carries exactly ONE face; the
+    // REWRITE's families grow toward four and this line rises with them, car by car.
+    const faceTotal = META_ROWS.reduce((n, r) => n + r.meta.faceCounts.reduce((m, c) => m + c, 0), 0);
+    expect(faceTotal, 'the face inventory only ever rises').toBeGreaterThanOrEqual(2266);
+
+    // ⛔ PER POOL, AND THE ARITHMETIC IS THE FLOOR WHILE EVERY FAMILY IS SINGLE-FACED. A pool
+    // carries one faceCounts entry per variant and every entry is at least 1, so its face total
+    // is at least its variant count — and the variant count is itself a ratchet. That makes the
+    // per-pool floor RISE automatically as families grow, with no second list of 708 integers
+    // that would all read 1 today and that nobody would re-measure.
+    const structural = META_ROWS.filter((r) => r.meta.faceCounts.length !== r.meta.variantCount
+      || r.meta.faceCounts.some((c) => !Number.isInteger(c) || c < 1))
+      .map((r) => `${r.id} :: ${r.pool}`);
+    expect(structural, 'a face count that is not one integer per variant, each at least 1')
+      .toEqual([]);
+    const belowOwnVariants = META_ROWS
+      .filter((r) => r.meta.faceCounts.reduce((m, c) => m + c, 0) < r.meta.variantCount)
+      .map((r) => `${r.id} :: ${r.pool}`);
+    expect(belowOwnVariants, 'no pool carries fewer faces than variants').toEqual([]);
+
+    // ⭐ AND THE DECLARED PER-POOL FLOORS, for the day a pool rises above the universal one.
+    // Read from the SHIFT REGISTER rather than typed here, on the `reIndexed` idiom car 8a-1
+    // landed: a floor is a DECLARED ROW a car writes in the same commit as the growth, and the
+    // contract holds the corpus to it. EMPTY today by construction — no family has grown — and
+    // SHRINK-ONLY: a floor may be added or raised and never lowered.
+    const declared = (SHIFT_REGISTER.mechanisms
+      .find((m) => m.id === 'face-count-per-variant') || {}).floors || {};
+    expect(Object.keys(declared).length,
+      'no family has grown yet, so no pool needs a floor above its own variant count').toBe(0);
+    for (const [at, floor] of Object.entries(declared)) {
+      const row = META_ROWS.find((r) => `${r.id} :: ${r.pool}` === at);
+      expect(row, `${at}: a declared face floor for a pool the corpus does not carry`).toBeTruthy();
+      expect(row.meta.faceCounts.reduce((m, c) => m + c, 0),
+        `${at}: the corpus fell below its own declared face floor — this is a TRIM`)
+        .toBeGreaterThanOrEqual(Number(floor));
+    }
+  });
+
+  it('⭐ THE ANNEX IS APPEND-ONLY: the pool roster only ever grows (Part B \u00a722 d)', () => {
+    // The register's `pool-key-rename` digest reds on ANY key change, which catches a rename
+    // and a removal alike but cannot tell them from an ADDITION. "Append-only" is the other
+    // half and it is a count: the roster may gain keys and may never lose one.
+    expect(META_ROWS.length, 'the pool roster only ever grows').toBeGreaterThanOrEqual(708);
+    // AND NO KEY IS EMPTY OR DUPLICATED, which is what would let a removal hide inside a gain.
+    const ids = META_ROWS.map((r) => `${r.id} :: ${r.pool}`);
+    expect(new Set(ids).size, 'no (block, pool) is counted twice').toBe(ids.length);
+    expect(ids.filter((at) => /:: $/.test(at)), 'no pool with an empty key').toEqual([]);
+  });
+
+  it('⭐⭐ THE SEVEN `canonical` ROWS, NAMED ONE BY ONE, AND THEIR SINGLE-FACED STANDING (C\u2032)', () => {
+    // SITTING §T.4 adopting agenda C′: "the single-face canonical rows bound to live engine
+    // strings are named one by one and their single-faced standing recorded". They are named
+    // rather than counted because the record is the point: a reader of this file must be able
+    // to see WHICH rows the estate has promised never to give a second face, and why.
+    //
+    // ⛔ WHY THEY STAY SINGLE-FACED. Each `canonical` row is a BYTE-COPY of a string the
+    // ENGINE already owns and ships (the ONE-HOME rule, enforced at the projection). A second
+    // face on such a row would be a second wording of a sentence the engine emits, which is
+    // two homes for one string — the drift class the projector refuses by name. So "never
+    // trim" and "grow toward four" apply to the AUTHORED rows of these pools, and the
+    // canonical row at vid 0 keeps exactly one face BY REFUSAL (P-F6), not by neglect.
+    //
+    // ⛔ AND THEY ARE THE SAME SEVEN CAR 8a-1 FOUND, which is why `vid: 0` is a real id: these
+    // pools number 0..n-1 while the other 701 number 1..n, and a `> 0` guard on the draw would
+    // have split the corpus into two draw regimes silently.
+    const CANONICAL = [
+      'DS-ECO-3 :: ADEQUATE',
+      'DS-ECO-3 :: SHORTAGE \u00d7 trade-dependent',
+      'DS-ECO-3 :: SURPLUS \u00d7 trade-dependent',
+      'DS-ECO-6 :: TIER: minor shadow activity (\u22653)',
+      'DS-ECO-6 :: TIER: significant off-book activity (\u226515)',
+      'DS-ECO-7 :: CATALOG',
+      'DS-ECO-7 :: TALLIES',
+    ];
+    // DERIVED, NOT TRANSCRIBED: the seven are exactly the pools whose vid list contains 0.
+    const withZero = META_ROWS.filter((r) => r.meta.vids.includes(0))
+      .map((r) => `${r.id} :: ${r.pool}`).sort();
+    expect(withZero, 'the seven pools that lead with a canonical row').toEqual([...CANONICAL].sort());
+    expect(withZero.length, 'three on DS-ECO-3, two on DS-ECO-6, two on DS-ECO-7').toBe(7);
+    for (const at of CANONICAL) {
+      const row = META_ROWS.find((r) => `${r.id} :: ${r.pool}` === at);
+      const zeroAt = row.meta.vids.indexOf(0);
+      expect(zeroAt, `${at}: the canonical row leads the pool`).toBe(0);
+      expect(row.meta.faceCounts[zeroAt], `${at}: the canonical row is SINGLE-FACED`).toBe(1);
+      const block = allStateBlocks.find(([id]) => id === row.id)[1];
+      const variant = block.pools[row.pool][zeroAt];
+      expect(variant.angle, `${at}: and it is angled \`canonical\``).toBe('canonical');
+      expect(String(variant.text).length, `${at}: and it carries the engine's own sentence`)
+        .toBeGreaterThan(20);
+    }
+  });
+
   it('gives every causal family exactly six arm-tagged variants in one pool', () => {
     for (const [id, family] of Object.entries(DOSSIER_CAUSAL_PROSE)) {
       const keys = Object.keys(family.pools);
