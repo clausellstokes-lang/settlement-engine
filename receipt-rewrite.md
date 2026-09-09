@@ -2507,3 +2507,12 @@ files under `tests/ui`), so this is the banked E2 ratchet and not this car's.
    committed — if the chair wants the matcher standing, it is a walker's worth of code and a
    car of its own.
 
+
+---
+
+## CAR 8a-13 — DRAW-FOLLOWING ANCHORS
+
+**PARTIAL — the section is being filled as the car lands.** Seat: Opus 5 — Fable-unvalidated.
+Dock `laneREWRITE`, cut at `188010225`. Chartered by ADDENDUM 5 (chair, 2026-09-09 09:5x).
+TESTS AND TEST HELPERS ONLY: `git diff --stat 188010225..HEAD -- src` is EMPTY.
+
