@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 14:06:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 14:13:13 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE train's first car lands — the index-stable draw signed (59.61 % of ce
 
@@ -140,13 +140,13 @@ product claude/composite-r4 = f73bdbf16 · ledger = d7f4c6b0e §919: the REWRITE
 ## WORKFLOW RUNS of chair session 67af10e4-7386-48d4-8cd3-b2985d4885c2 (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_183dda09-702: 202 journal lines, 104 agents
 - wf_3b79f7ff-928: 8 journal lines, 4 agents
-- wf_525170fc-546: 11 journal lines, 6 agents
+- wf_525170fc-546: 14 journal lines, 8 agents
 - wf_73595d81-51d: 18 journal lines, 9 agents
 - wf_7e1abdf4-c9a: 48 journal lines, 24 agents
 - wf_b6204819-335: 72 journal lines, 36 agents
 - wf_e49b0611-dbb: 13 journal lines, 7 agents
-- wf_e70e2f5c-7fb: 9 journal lines, 5 agents
-- wf_f9cf9a1d-188: 22 journal lines, 14 agents
+- wf_e70e2f5c-7fb: 13 journal lines, 7 agents
+- wf_f9cf9a1d-188: 24 journal lines, 15 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.78 2.59 3.20
+load: 2.64 2.39 2.87
