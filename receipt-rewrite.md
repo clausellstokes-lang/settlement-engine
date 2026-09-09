@@ -1556,8 +1556,8 @@ beside the correction, because a receipt whose errors are erased cannot be audit
 |---|---|---|---|
 | 8a-11-1 | a-1 (§U c-4) the `>= 0` guard's green instrument | **`f81b95c28`** | **LANDED** |
 | 8a-11-2 | a-2 (§U c-1) the gate's packet target, namespaced and refusing | **`2f68fdd95`** | **LANDED** |
-| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | — | IN FLIGHT |
-| 8a-11-4 | a-4 (§U c-5) one home for the connective lists | — | not started |
+| 8a-11-3 | a-3 (§U c-2) ONE `unitsOfPool` | **`1f7c8565d`** | **LANDED** |
+| 8a-11-4 | a-4 (§U c-5) one home for the connective lists | — | IN FLIGHT |
 | 8a-11-5 | a-5 (§U c-3) the false seed sentence, struck in the estate | — | not started |
 | 8a-11-6 | a-6 + a-8 two stale sentences in the two scripts | — | not started |
 | 8a-11-7 | a-7 the rename's provenance record | — | not started |
@@ -1686,4 +1686,62 @@ ritual REFUSES A DIRTY TREE. ⚠ Measured on the way: `tests/domain/` is PARKED 
 is CREDITED — 8a-11-1's new arm moved no title and these two moved +2.
 ⛔ **INHERITED RED, unchanged**: `tests/copy/voiceMechanics.test.js`, `labelBands.js` em 5 and
 `generalStateProse.js` em 3, identical at the §917 tip.
+
+---
+
+### 8a-11-3 — CURE a-3 (§U c-2): ONE `unitsOfPool`
+
+**LANDED `1f7c8565d`** over `2f68fdd95`. Three files, **+119 / −93**. Zero reader-facing bytes.
+
+The bare-spine branch moved WHOLE out of `scripts/prose-wave-gate.mjs` into
+`scripts/lib/prose-composed-units.mjs` behind `bareSpine`; the gate's `unitsOfPool` is now four
+lines that call it, and `facesOf` moved with it for the same reason one function smaller. The
+gate lost 106 lines and the lib gained 62.
+
+⛔ **THE LIB'S DOCBLOCK NAMED A CONSUMER IT DID NOT HAVE, FOR A WHOLE CAR.** It asserted "the
+wave's gate at 8a-5" from the day it was written; the only importer was
+`scripts/prose-shape-report.mjs:32`. It now names its consumers by grep, and the cross-check arm
+is what keeps the sentence true.
+
+### THE CROSS-CHECK ARM
+
+Drives BOTH exports over `poolRosterOf({section: 'defense'})` — 126 rows — and asserts equal
+counts and equal text pool by pool.
+
+| assertion | figure |
+|---|---|
+| pools compared | **126** |
+| units compared (the non-vacuity floor: two builders agreeing about nothing is not agreement) | **383** |
+| pools the two read differently | **0** |
+| the FLAG is a flag: `libUnitsOfPool(…, 'WALLED-STRAINED')` with no flag | `[]` — a spine licenses no composed unit, which is the shape report's subject |
+| the same call with `{ bareSpine: true }` | **2** |
+
+⭐ The corpus the arm hands the lib is `Object.assign({}, ...Object.values(SECTION_LEAVES))` —
+built from the gate's OWN section table, because a hand-written list here would be the second
+roster car 8a-5 already caught drifting once.
+
+### THE PLANT, EXECUTED
+
+    perl -pi -e "s/…poolKey, \{ bareSpine: true \}\);/…poolKey);/" scripts/prose-wave-gate.mjs
+
+    clean tree   44 passed
+    planted      2 failed | 42 passed
+                 ⭐⭐ ONE UNIT BUILDER: the gate and the lib agree on EVERY pool of a section
+                 "a pool the two builders read differently: expected [ …(5) ] to deeply equal []"
+                 (and the spine-pool arm beside it: "expected +0 to be 2")
+    restored     (inverse copy) 44 passed
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `proseWaveGate.walker` · `prosePassageShapes.walker` · `proseComposed.walker` · the projection contract | **216 passed** over four files (44 · 11 · 84 · 77) |
+| `node scripts/prose-shape-report.mjs` | exit 0 — the product finding unchanged: attach-bearing pools 0 · units 0 · draws 0 |
+| `tests/lint/sizeBaseline.test.js` + `tests/lint/mutationCoverageManifest.test.js` | green |
+| eslint (3 files) | exit 0 |
+| `check-full-typecheck` / `check-domain-strict` | **173/173** · **1,120/1,120** |
+| `wiring-census --dry` | CURRENT · delta 0 · ROWS 0 |
+| `check-observed-shape-readers` | **1,972**, exactly the frozen inventory |
+| projector `--check` | exit 0 |
+| runners / porcelain | 0 / 0 |
 
