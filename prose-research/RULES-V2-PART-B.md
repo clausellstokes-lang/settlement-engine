@@ -672,3 +672,12 @@ Trimming is any act that makes the record smaller; "never trim" means the counts
 
 ## 23. THE TASTE'S TWO ARMS (owner, 2026-09-08 ~20:4x)
 The five pools are refined twice from one lawful Opus draft: arm A by an Opus refiner, arm B by a Fable refiner; Fable refuters judge both blind; the sitting's table (rounds · refusals · verdicts · band position · sibling distance · cost per set) is the owner's ground for the WAVE's staffing. The chair's recommendation on record: Opus drafts, Fable refines, Fable refutes.
+
+## 21.1 THE CEILING, NOT THE MIDDLE (owner, 2026-09-08 ~21:1x)
+The band is a licence, not a target: a face may sit at the band's middle or its edge if that is the ideal. The refinement round pushes every face toward the higher end, the ceiling, as far as one effort allows — the sharpest licensed fact, the strongest rhythm inside the voice, the widest sibling distance, zero tics, the clerk's ear — and is measured against the best exemplar face, never the average (§19: the estate median is never a target). Position inside a band is reported as information only.
+
+## 21.2 EVERY SET IS REFINED (owner, 2026-09-08 ~21:2x)
+The refinement round covers every wording set: a lawful face that sits just above the floor is pushed toward the ceiling (lawful is not done), and a set still unlawful after the draft phase is pushed closer to the law — as many failing states removed as one effort allows, never a new one added. A lawful set keeps its refinement only if it stays lawful; an unlawful set keeps it if its failure count falls or holds with no new failure; otherwise the set reverts. A set that cannot be made lawful is banked as a refusal row with its faces, never trimmed, and the banked count is printed and only ever falls.
+
+## 21.3 ONE EFFORT, THE CEILING FOR EVERY SET (owner, 2026-09-08 ~21:3x)
+An unlawful set is pushed toward the ceiling as far as one effort allows, exactly as a lawful one is; the law is the shape of the ceiling, so a face at the ceiling is lawful by definition and the two aims are one aim. Where one effort must choose between a sharper wording and a licensed one, the licensed one wins, because an unlawful face never ships. There is no second refinement pass: the gate keeps or reverts, and a set that cannot be made lawful is banked. Whether a second pass is ever added is a sitting decision on the taste's numbers.
