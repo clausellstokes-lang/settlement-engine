@@ -1,7 +1,8 @@
 /**
- * proseTasteMeasure.walker.test.js — THE HARNESS'S OWN ARMS (TASTE car M-7).
+ * proseWaveGate.walker.test.js — THE WAVE GATE'S OWN ARMS (TASTE car M-7, renamed and
+ * extended at REWRITE car 8a-5 with the harness it walks).
  *
- * ⛔ WHY A HARNESS NEEDS ARMS AT ALL. `scripts/taste-measure.mjs` is the only thing standing
+ * ⛔ WHY A HARNESS NEEDS ARMS AT ALL. `scripts/prose-wave-gate.mjs` is the only thing standing
  * between a wording set and the sitting: a writing round is accepted or refused on its output
  * and on nothing else. So the two failure modes that would let a bad set through are the ones
  * held here.
@@ -27,10 +28,13 @@ import path from 'node:path';
 import url from 'node:url';
 
 import {
-  ENTRY_NUMBERS, EXEMPLAR_DIR, EXEMPLAR_LEAVES, PACKETS, bandPositionOf, censusSynonymTable,
-  exemplarBands, inBandOf, labelOfFinding, measure, qVocabularyReport, roundsOf, sampleSizeFor,
-  scopedWalkOf, siteOfFinding, tableLines, tieRate, unitsOfPool, withheldPoolRow,
-} from '../../scripts/taste-measure.mjs';
+  ENTRY_NUMBERS, EXEMPLAR_DIR, EXEMPLAR_LEAVES, FACE_LEVEL_METRICS, PACKETS, SECTION_LEAVES,
+  TEXT_LEVEL_METRICS, bandGrainsOf, bandPositionAt, bandPositionOf, censusSynonymTable,
+  exemplarBands, exemplarCitationRate, fixtureSection, inBandOf, keepOrRevert, labelOfFinding,
+  measure, poolRosterOf, qVocabularyReport, roundsOf, sampleSizeFor, scopedWalkOf,
+  sectionsCoverEveryPool, shapeReport, siblingSpreadOf, siteOfFinding, tableLines, tieRate,
+  unitsOfPool, withheldPoolRow,
+} from '../../scripts/prose-wave-gate.mjs';
 import { AUTHORING_MARKER } from '../../scripts/lib/dossier-annex-grammar.mjs';
 import { TASTE_POOLS } from '../../scripts/prose-licence-card.mjs';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
@@ -101,10 +105,23 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     }
   });
 
-  it('is EMPTY on a pool whose attach set is empty, and never a guess', () => {
-    // A spine takes no attach set, so it composes no unit; the harness must answer 0 rather
-    // than falling back to some other population.
-    expect(unitsOfPool('DS-DEF-11', 'WALLED-STRAINED')).toEqual([]);
+  it('⭐⭐ A SPINE POOL COMPOSES ITS OWN FACES, which is the REWRITE\'s unit (car 8a-5)', () => {
+    // ⛔ THIS ARM READ `toEqual([])` UNTIL REWRITE car 8a-5, AND THAT WAS THE GATE HAVING NO
+    // SUBJECT. The taste walked MODIFIER pools, whose unit is the cartesian of an attach set;
+    // the REWRITE's first writing workflow rewrites a DESK SECTION's SPINE pools and grows
+    // their faces, and a spine's attach set is empty on all 708 by construction. Under the old
+    // rule the gate composed NOTHING for the very pools the wave is about.
+    const units = unitsOfPool('DS-DEF-11', 'WALLED-STRAINED');
+    expect(units.length, 'two variants, one face each').toBe(2);
+    for (const unit of units) {
+      expect(unit.pieces, 'a bare spine is ONE piece').toHaveLength(1);
+      expect(unit.pieces[0].role).toBe('spine');
+      expect(unit.pieces[0].key).toBe('WALLED-STRAINED');
+      expect(unit.poolKey, 'and the unit is addressed at the pool itself').toBe('WALLED-STRAINED');
+      expect(unit.text, 'its text is the face, with nothing appended').toBe(unit.pieces[0].text);
+    }
+    // AND THE ABSENT CASES STILL ANSWER NOTHING, which is what stops the widening from
+    // becoming a fallback: a pool that does not exist composes no unit at all.
     expect(unitsOfPool('DS-DEF-11', 'no such pool')).toEqual([]);
     expect(unitsOfPool('NO-SUCH-BLOCK', 'x')).toEqual([]);
   });
@@ -603,4 +620,248 @@ describe('⭐ ARM Q\'S VOCABULARY IS REPORTED AND NO ARM IS CHANGED', () => {
     expect(def2.every((r) => r.executable === false)).toBe(true);
     expect(rest.every((r) => r.executable === true)).toBe(true);
   }, 120_000);
+});
+
+// ── REWRITE car 8a-5: THE FIVE PIECES SITTING §T.5 FOUND MISSING ────────────────────
+
+describe('⭐⭐ (a) THE BAND GRAIN, CURED — the constant the sitting struck (SITTING §T.5)', () => {
+  const exemplars = exemplarBands(EXEMPLAR_DIR);
+  const SHORT = 'The wall is kept out of the purse.';
+  const LONG = 'The wall is kept out of the purse, and the muster roll behind it was paid twice'
+    + ' over in a season when the harvest came in light.';
+  const REST = [
+    'Grain moves upriver by autumn.',
+    'The gate is shut at dusk by whoever is nearest.',
+    'Tolls pay the mason before they pay the watch.',
+  ];
+  const corpusWith = (face) => [face, ...REST].join(' ');
+
+  it('the split is 13 text-level and 8 word-level, and the two do not overlap', () => {
+    expect(TEXT_LEVEL_METRICS.length, 'the thirteen the chair\'s probe named').toBe(13);
+    expect(FACE_LEVEL_METRICS.length, 'and the eight a single sentence answers').toBe(8);
+    expect(TEXT_LEVEL_METRICS.filter((m) => FACE_LEVEL_METRICS.includes(m)),
+      'a metric on both sides would be scored twice').toEqual([]);
+    expect(TEXT_LEVEL_METRICS.length + FACE_LEVEL_METRICS.length,
+      'and together they are the twenty-one, so none is dropped').toBe(21);
+  });
+
+  it('⛔ THE OLD PATH REPRODUCES THE DEFECT EXACTLY, which is what makes the cure a cure', () => {
+    if (!exemplars.bands) { expect(exemplars.why).toBeTruthy(); return; }
+    // SITTING §T.5, CONFIRMED by the chair's own probe: an 8-word face, a 15-word face and the
+    // draft's breach line all scored `exceeded 13/21 · share 0.619 · mean 0.486 · deepest
+    // wordsPerSentence.neighbourVariation 1.597 under`. Driven here on two faces of very
+    // different length, against the WHOLE 21-metric band set.
+    const before = bandPositionOf(SHORT, exemplars);
+    const after = bandPositionOf(LONG, exemplars);
+    expect(before.scored, 'all twenty-one scored on one sentence').toBe(21);
+    expect(before.exceeded).toBe(13);
+    expect(before.exceededShare).toBe(0.619);
+    expect(before.meanDistanceFromMedian).toBe(0.486);
+    expect(before.deepest.metric).toBe('wordsPerSentence.neighbourVariation');
+    expect(before.deepest.depth).toBe(1.597);
+    expect(before.deepest.side).toBe('under');
+    // AND THE TWO FACES ARE INDISTINGUISHABLE, which is the whole finding.
+    expect({ ...after }, 'two faces of different length read the IDENTICAL tuple')
+      .toEqual({ ...before });
+  });
+
+  it('⭐ THE PLANT: two faces of different length now read DIFFERENT text-grain figures', () => {
+    if (!exemplars.bands) { expect(exemplars.why).toBeTruthy(); return; }
+    const a = bandGrainsOf(SHORT, corpusWith(SHORT), exemplars);
+    const b = bandGrainsOf(LONG, corpusWith(LONG), exemplars);
+    // THE CORPUS GRAIN DISCRIMINATES, which the face grain could not.
+    expect(a.corpus.scored).toBe(13);
+    expect(b.corpus.scored).toBe(13);
+    expect(a.corpus.exceeded === b.corpus.exceeded
+      && a.corpus.meanDistanceFromMedian === b.corpus.meanDistanceFromMedian,
+    'the two corpora must not read the same tuple').toBe(false);
+    // AND THE FACE GRAIN READS THE SAME ONLY WHERE THE LEXICON AGREES, which here it does:
+    // neither face carries a colon, an em dash, a question, an exclamation, a parenthesis, a
+    // participial opener, a which-tail or a line of dialogue. That is a fact about the two
+    // sentences and not a property of the instrument, so it is asserted with its reason.
+    expect(a.face.exceeded, 'neither face trips a word-level band').toBe(0);
+    expect(b.face.exceeded).toBe(0);
+    expect(a.face.meanDistanceFromMedian).toBe(b.face.meanDistanceFromMedian);
+    // ⛔ AND THE FACE GRAIN IS NOT A CONSTANT: a face that DOES carry one of the eight moves.
+    const withDash = bandPositionAt('The wall is kept — and kept badly — out of the purse.', exemplars, 'face');
+    expect(withDash.exceeded, 'an em dash is a word-level fact and the face grain sees it')
+      .toBeGreaterThan(0);
+  });
+
+  it('every band row carries BOTH grains and says which is which', () => {
+    if (!exemplars.bands) { expect(exemplars.why).toBeTruthy(); return; }
+    const grains = bandGrainsOf(SHORT, corpusWith(SHORT), exemplars);
+    expect(grains.face.grain).toBe('face');
+    expect(grains.corpus.grain).toBe('corpus');
+  });
+});
+
+describe('(b) THE SIBLING SPREAD — a distance, not a detector (SITTING §T.3 row 8)', () => {
+  it('reports the distribution over a variant\'s faces, in basis points', () => {
+    const spread = siblingSpreadOf([
+      'The wall is kept out of the purse.',
+      'The purse pays for the wall.',
+      'Grain moves upriver by autumn.',
+    ]);
+    expect(spread.pairs, 'three faces make three pairs').toBe(3);
+    expect(spread.maxOverlapBp, 'the nearest pair shares half its content words').toBe(5000);
+    expect(spread.minOverlapBp, 'and the farthest shares none').toBe(0);
+    expect(spread.nearest.overlapBp).toBe(spread.maxOverlapBp);
+    expect(Number.isInteger(spread.medianOverlapBp), 'the median is an integer in bp').toBe(true);
+  });
+
+  it('⛔ NOT-EXECUTABLE on a one-face variant, which is every shipped variant at this tip', () => {
+    const spread = siblingSpreadOf(['only one face']);
+    expect(spread.pairs).toBe(0);
+    expect(spread.minOverlapBp).toBeNull();
+    expect(spread.why).toContain('NOT-EXECUTABLE');
+  });
+
+  it('⛔ IT SEES WHAT A5 CANNOT: a paraphrase pair with a different opener', () => {
+    // A5 fires only when the opener AND the segment count AND the overlap all agree, so a
+    // paraphrase that changes its first two words is invisible to it. The distance is not.
+    const paraphrase = ['The muster roll is short at the wall.', 'At the wall the muster roll runs short.'];
+    const spread = siblingSpreadOf(paraphrase);
+    expect(spread.sameOpenerPairs, 'A5\'s opener test does NOT fire').toBe(0);
+    expect(spread.maxOverlapBp, 'and the distance shows the pair for what it is')
+      .toBeGreaterThanOrEqual(6000);
+  });
+});
+
+describe('(c) THE EXEMPLAR CITATION RATE — with its denominator and its control', () => {
+  const rate = exemplarCitationRate(EXEMPLAR_DIR);
+
+  it('reads whichever leaves have raw prose and NAMES the ones it could not', () => {
+    expect(rate.leavesTotal).toBe(EXEMPLAR_LEAVES.length);
+    expect(rate.leavesRead + rate.absent.length, 'every leaf is read or named absent')
+      .toBe(EXEMPLAR_LEAVES.length);
+    for (const leaf of rate.absent) expect(EXEMPLAR_LEAVES).toContain(leaf);
+  });
+
+  it('⛔ THE NON-VACUITY CONTROL: a zero rate must not come from a dead detector', () => {
+    // A rate of zero from prose that cites nothing and a rate of zero from a detector that
+    // cannot fire are the same number and opposite findings. The control sentence is one the
+    // detector must find, and the report carries its answer beside the rate.
+    expect(rate.detectorLive, 'the control sentence scores above zero').toBe(true);
+    if (rate.executable) {
+      expect(rate.sentences, 'and the denominator is real prose').toBeGreaterThan(100);
+      expect(rate.perUnitBp, 'the rate is a number in bp').toBeGreaterThanOrEqual(0);
+    }
+  });
+});
+
+describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴)', () => {
+  const fixture = fixtureSection();
+
+  it('composes the captured town and the clean control, and names their standings', () => {
+    expect(fixture.executable, fixture.why || '').toBe(true);
+    expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
+    const captured = fixture.towns[0];
+    const clean = fixture.towns[1];
+    expect(captured.standing, 'rate-9-2 is the captured town').toBe('INTERESTED');
+    expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
+    expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
+  });
+
+  it('⭐ THE TWO RENDERINGS DIFFER IN EXACTLY ONE WAY, which is what the sitting is being shown', () => {
+    const captured = fixture.towns[0];
+    // INLINE: the DM page carries a DIFFERENT passage. PEN LINE: the same passage on both, and
+    // the DM's knowledge in the adjacent slot. That contrast IS agenda C‴'s question.
+    expect(captured.renderInline.passagesDiffer, 'the inline rendering splits the two pages').toBe(true);
+    expect(captured.renderInline.player).not.toBe(captured.renderInline.dm);
+    expect(captured.renderPenLine.passagesDiffer).toBe(false);
+    expect(captured.renderPenLine.player).toBe(captured.renderPenLine.dm);
+    expect(captured.renderPenLine.pen, 'and the pen carries the interested fact').toBeTruthy();
+  });
+
+  it('⛔ THE CONTROL HAS NO PEN LINE AT ALL, which is what makes the pair a pair', () => {
+    const clean = fixture.towns[1];
+    expect(clean.renderPenLine.pen, 'a LICENSED holder is not interested, so nothing is owed')
+      .toBeNull();
+    expect(clean.renderInline.passagesDiffer, 'and the inline rendering has nothing to inline')
+      .toBe(false);
+  });
+
+  it('THE PAIRED-TOWN ARM at the passage grain holds on both towns', () => {
+    for (const town of fixture.towns) {
+      expect(town.passagesIdentical, `${town.label}: the compiled passage must be audience-independent`)
+        .toBe(true);
+    }
+    expect(fixture.pairedTownHolds).toBe(true);
+  });
+});
+
+describe('(e) `--shapes` — reached, never re-spelled', () => {
+  it('returns the shape report\'s OWN lines, verbatim', () => {
+    const report = shapeReport(null);
+    expect(report.executable, report.why).toBe(true);
+    expect(report.lines[0]).toContain('PASSAGE-SHAPE DISTRIBUTION');
+    expect(report.lines.join('\n'), 'the product corpus has no shape question at this tip')
+      .toContain('attach-bearing pools 0');
+  });
+});
+
+describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted', () => {
+  it('⛔ THE SIX LEAVES COVER EVERY POOL EXACTLY ONCE', () => {
+    // The first cut of this roster was a hand-written PREFIX list and it put DS-REL and DS-CND
+    // on the wrong desks and DS-POP on none, leaving 29 of the 708 pools reachable from no
+    // section at all. Deriving the roster from the leaves makes that impossible; asserting the
+    // partition makes "impossible" a measurement.
+    const cover = sectionsCoverEveryPool();
+    expect(cover.sections).toBe(6);
+    expect(cover.pools, 'every shipped pool').toBe(708);
+    expect(cover.unreached, 'a pool no section reaches').toEqual([]);
+    expect(cover.twice, 'a pool two sections claim').toEqual([]);
+  });
+
+  it('each section names its own leaf\'s pools, and a bad name is NOT-EXECUTABLE', () => {
+    let total = 0;
+    for (const section of Object.keys(SECTION_LEAVES)) {
+      const roster = poolRosterOf({ section });
+      expect(roster.rows.length, `${section} must have pools`).toBeGreaterThan(0);
+      total += roster.rows.length;
+      for (const row of roster.rows) {
+        expect(row.dir, 'the packet directory is DERIVED from the key, never invented')
+          .toMatch(/^[a-z0-9-]+$/);
+      }
+    }
+    expect(total, 'and the six sum to the corpus').toBe(708);
+    expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
+    expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
+    expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);
+  });
+});
+
+describe('THE TWO-PHASE RULE, ENCODED (Part B §21.2)', () => {
+  const failing = (...names) => ({ failing: names.map((measure) => ({ measure })) });
+
+  it('a lawful set KEEPS only if it stays lawful', () => {
+    expect(keepOrRevert(failing(), failing()).verdict).toBe('KEEP');
+    expect(keepOrRevert(failing(), failing('band depth')).verdict).toBe('REVERT');
+  });
+
+  it('an unlawful set KEEPS if its failures fall or hold with NONE NEW', () => {
+    expect(keepOrRevert(failing('a', 'b'), failing('a')).verdict).toBe('KEEP');
+    expect(keepOrRevert(failing('a'), failing('a')).verdict, 'holding is not losing').toBe('KEEP');
+  });
+
+  it('⛔ THE TRADE IS A REVERT, and a count test would have passed it', () => {
+    // Two failures traded one for one hold the COUNT and move the set sideways. §21.2 says
+    // "with no new failure" in terms, so the rule is by measure NAME.
+    const verdict = keepOrRevert(failing('a', 'b'), failing('a', 'c'));
+    expect(verdict.verdict).toBe('REVERT');
+    expect(verdict.before).toBe(verdict.after);
+    expect(verdict.newFailures).toEqual(['c']);
+    expect(verdict.cured).toEqual(['b']);
+  });
+
+  it('two DRY rounds BANK an unlawful set, and never a lawful one', () => {
+    expect(keepOrRevert(failing('a'), failing('a'), { dryRounds: 2 }).verdict).toBe('BANK');
+    expect(keepOrRevert(failing('a'), failing(), { dryRounds: 2 }).verdict,
+      'a set that became lawful on the second dry round is not banked').toBe('KEEP');
+  });
+
+  it('a KEEP names its own limit — the gate is not the refuters (SITTING §T.4)', () => {
+    expect(keepOrRevert(failing(), failing()).why).toContain('refuters');
+  });
 });

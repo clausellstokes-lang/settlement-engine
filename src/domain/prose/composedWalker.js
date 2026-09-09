@@ -45,7 +45,7 @@
  * @enforced-by tests/lint/proseComposed.walker.test.js
  */
 import { CONTRAST_SHAPES } from './entryLexicons.js';
-import { sentencesOf, typedFactsOf, walkEntry } from './entryWalker.js';
+import { clausesOf, sentencesOf, typedFactsOf, walkEntry } from './entryWalker.js';
 import { classifyMoves, composedOrderIdOf } from './moveGrammar.js';
 
 /**
@@ -91,7 +91,8 @@ import { classifyMoves, composedOrderIdOf } from './moveGrammar.js';
 
 /** THE ROSTER — every arm this module owns, so a walker cannot silently drop one. */
 export const COMPOSED_ARMS = Object.freeze([
-  'A0b', 'A1', 'A2', 'A3', 'A5', 'A6', 'A9', 'A11', 'A13', 'C7', 'Thread',
+  'A0b', 'A1', 'A2', 'A3', 'A5', 'A6', 'A9', 'A11', 'A13', 'Aspect', 'Ambiguity', 'C7',
+  'Restatement', 'Tail', 'Thread',
 ]);
 
 /** @returns {ComposedResult} an empty result, so every arm starts from the same shape */
@@ -875,6 +876,166 @@ export function armThread(unit) {
   return out;
 }
 
+// ── THE REFUTERS' GROUNDS, AS REPORTED ARMS (SITTING §T.5) ──────────────────────────
+
+/**
+ * ⛔⛔ WHY THESE FOUR ARMS EXIST, AND THE MEASUREMENT THAT ORDERED THEM (SITTING §T.5).
+ *
+ * "THE GATE'S BLIND SPOT, MEASURED: the gate read 0 owned findings on all 13 kept refinements;
+ * the blind refuters failed 26 of 42 refined variants (12 A · 14 B) on grounds no owned arm
+ * carries." The sitting ruled the wave's refute phase EXHAUSTIVE until the gate gains those
+ * grounds as arms, and chartered them here as REPORTED arms.
+ *
+ * The refuters' seven classes, and where each lands:
+ *   1. a qualification hung as a TAIL (R-DA-03)            → `armTail`, below
+ *   2. a sibling PARAPHRASE beyond a synonym swap          → the gate's `siblingSpreadOf`,
+ *      which reports the DISTANCE A5's detector cannot see (item 5b)
+ *   3. a FORECAST (`never`) or a PERFECT ASPECT on a standing fact → `armAspect`
+ *   4. an AMBIGUITY read after the defence spine           → `armAmbiguity`, WITHHELD
+ *   5. a fact RESTATED inside one sentence                 → `armRestatement`
+ *   6. costume in the syntax (a predicate-fronted inversion) → the grammar walker's own move
+ *      ceiling already carries it; no second detector is minted
+ *   7. a same-page contradiction with the CRITICAL ledger spine → armC7, which exists
+ *
+ * ⛔ EVERY ONE IS REPORT (or WITHHELD), NEVER FAIL. Refuters default to FAIL when uncertain, so
+ * the sitting recorded that "the count overstates; the classes are real". An arm cut from an
+ * overstating count and gated on the first day would refuse lawful prose, and a refused lawful
+ * face is a trim. They report until a fold has read their rate on real wording sets.
+ */
+
+/** A qualifying tail is a comma followed by a hedge that adds no fact. */
+const TAIL_HEDGES = Object.freeze([
+  'at least for now', 'for now', 'for the moment', 'more or less', 'in a manner of speaking',
+  'so to speak', 'in its way', 'in a sense', 'after a fashion', 'if it comes to that',
+  'or so they say', 'or so it is said', 'as such', 'in the main', 'by and large',
+  'all things considered', 'to a degree', 'up to a point', 'in any case', 'at any rate',
+]);
+
+/**
+ * ⭐ ARM TAIL (SITTING §T.5, refuter class 1; R-DA-03) — A QUALIFICATION HUNG ON THE END.
+ *
+ * The move-grammar's R-DA-03 refuses a clause that qualifies the sentence away after it has
+ * already been made. The shape the refuters caught is narrower and mechanical: a FINAL comma
+ * clause that is one of the register's hedges and states no fact of its own. It is reported
+ * with the tail quoted, because whether a given tail earns its place is the chair's call and
+ * not a regex's.
+ * @param {ComposedUnitRow} unit
+ * @returns {ComposedResult}
+ */
+export function armTail(unit) {
+  const out = emptyResult();
+  const id = addressOf(unit);
+  for (const sentence of sentencesOf(String(unit.text || ''))) {
+    const at = sentence.lastIndexOf(',');
+    if (at < 0) continue;
+    const tail = sentence.slice(at + 1).replace(/[.?!]\s*$/, '').trim().toLowerCase();
+    if (!tail) continue;
+    const hedge = TAIL_HEDGES.find((phrase) => tail === phrase);
+    if (!hedge) continue;
+    emit(out, row(id, 'Tail', 'REPORT', 'a qualification hung as a tail', tail,
+      'the sentence makes its claim and then takes some of it back in a final comma clause that'
+      + ' states no fact of its own (R-DA-03; SITTING §T.5 refuter class 1)'));
+  }
+  return out;
+}
+
+/** A forecast, and a perfect aspect, in the register's own words. */
+// `will never` and `shall never` are DROPPED as members: `never` already matches inside them,
+// so keeping the compounds reports one clause twice and inflates the arm's own rate.
+const FORECAST_WORDS = Object.freeze(['never', 'always', 'forever']);
+const PERFECT_ASPECT = /\b(has|have|had) (?:never |always |long |already )?(?:been|stood|kept|held|paid|run|gone|come|grown|fallen|risen)\b/i;
+
+/**
+ * ⭐ ARM ASPECT (SITTING §T.5, refuter class 3) — A FORECAST OR A PERFECT ASPECT ON A STANDING
+ * FACT.
+ *
+ * THE PROMISE's own ground: the record states what IS, and a standing fact has no history in
+ * the corpus to have a perfect aspect about and no future to be forecast into. "The watch has
+ * never been paid" claims a past the engine does not hold; "the gate will never shut" claims a
+ * future no fact licenses. Both were refuter findings on both arms.
+ * @param {ComposedUnitRow} unit
+ * @returns {ComposedResult}
+ */
+export function armAspect(unit) {
+  const out = emptyResult();
+  const id = addressOf(unit);
+  const text = String(unit.text || '');
+  const lower = text.toLowerCase();
+  for (const word of FORECAST_WORDS) {
+    if (!new RegExp(`\\b${word}\\b`).test(lower)) continue;
+    emit(out, row(id, 'Aspect', 'REPORT', 'a forecast on a standing fact', word,
+      'the record states what IS; a standing fact carries no future for a forecast to reach'));
+  }
+  const perfect = text.match(PERFECT_ASPECT);
+  if (perfect) {
+    emit(out, row(id, 'Aspect', 'REPORT', 'a perfect aspect on a standing fact', perfect[0],
+      'the perfect aspect claims a history the engine does not hold for this fact'));
+  }
+  return out;
+}
+
+/**
+ * ⭐ ARM RESTATEMENT (SITTING §T.5, refuter class 5) — A FACT SAID TWICE INSIDE ONE SENTENCE.
+ *
+ * Not the echo bound (A11 counts facts across a PAGE-SET) and not the thread rule (which asks
+ * for a carried noun BETWEEN sentences). This is one sentence whose two halves say the same
+ * thing: the clauses either side of a joint share their content words. The threshold is the
+ * estate's own overlap ruler in basis points, and it is high on purpose — a shared noun is the
+ * thread doing its job, and only a near-total overlap is a restatement.
+ * @param {ComposedUnitRow} unit
+ * @param {{restatementFloorBp?: number, [key: string]: unknown}} [options] the walk's own
+ *   option bag, of which this arm reads one key; typed open so `walkComposed` can hand over
+ *   the same object every other arm receives rather than a second one built for this arm
+ * @returns {ComposedResult}
+ */
+export function armRestatement(unit, options = {}) {
+  const out = emptyResult();
+  const id = addressOf(unit);
+  const floor = typeof options.restatementFloorBp === 'number' ? options.restatementFloorBp : 6000;
+  for (const sentence of sentencesOf(String(unit.text || ''))) {
+    const clauses = clausesOf(sentence).filter((clause) => contentWords(clause).length >= 2);
+    for (let at = 1; at < clauses.length; at += 1) {
+      const { overlapBp } = siblingDistance(clauses[at - 1], clauses[at]);
+      if (overlapBp < floor) continue;
+      emit(out, row(id, 'Restatement', 'REPORT', 'a fact restated inside one sentence',
+        `${overlapBp} bp overlap · "${clauses[at - 1].trim()}" / "${clauses[at].trim()}"`,
+        'the two halves of one sentence carry the same content words, so the second half adds'
+        + ' emphasis rather than a fact (SITTING §T.5 refuter class 5)'));
+    }
+  }
+  return out;
+}
+
+/** The readings the refuters caught opening a claim after the defence spine. */
+const AMBIGUOUS_AFTER_SPINE = Object.freeze([
+  'without cover', 'short of its charge', 'under strength', 'out of hand', 'in name only',
+  'past its best', 'beyond its means', 'off the books',
+]);
+
+/**
+ * ⭐ ARM AMBIGUITY (SITTING §T.5, refuter class 4) — A PHRASE THAT OPENS A SECOND READING.
+ *
+ * ⛔ WITHHELD, NOT REPORT, AND THE CHANNEL IS THE RULING. The refuters' finding is that a
+ * phrase like `without cover` reads one way beside a wall and another beside a muster, so the
+ * claim it makes depends on what the reader just read. That is a QUESTION FOR A REFUTER and not
+ * a mechanical verdict — WITHHELD is the estate's channel for exactly that, and `verdictOf`
+ * treats a WITHHELD row as never a pass.
+ * @param {ComposedUnitRow} unit
+ * @returns {ComposedResult}
+ */
+export function armAmbiguity(unit) {
+  const out = emptyResult();
+  const id = addressOf(unit);
+  const lower = String(unit.text || '').toLowerCase();
+  for (const phrase of AMBIGUOUS_AFTER_SPINE) {
+    if (!lower.includes(phrase)) continue;
+    emit(out, row(id, 'Ambiguity', 'WITHHELD', 'a reading that depends on the spine', phrase,
+      'this phrase carries a second reading beside a different spine, so what the unit claims'
+      + ' depends on what the reader just read — a refuter answers it, never a regex'));
+  }
+  return out;
+}
+
 // ── A13 · the PROVENANCE move ───────────────────────────────────────────────────────
 
 /** The three standings the holder census answers with; the two that do not license a citation. */
@@ -1022,6 +1183,13 @@ export function walkComposed(unit, ground, options = {}) {
   // ⛔ THREAD LAST, AND REPORT-ONLY. Its rows never reach `composedVerdictOf` (REPORT is not a
   // channel that verdict reads), so landing it changes no pool's verdict at any tip before 8b.
   mergeResults(composed, armThread(unit));
+  // ⛔ THE REFUTERS' GROUNDS (SITTING §T.5), REPORT AND WITHHELD ONLY. `armAmbiguity` is the one
+  // that can move a verdict, and it moves it to WITHHELD — a question a refuter owes an answer
+  // on, which is the channel the sitting named for it.
+  mergeResults(composed, armTail(unit));
+  mergeResults(composed, armAspect(unit));
+  mergeResults(composed, armRestatement(unit, options));
+  mergeResults(composed, armAmbiguity(unit));
   return {
     entry: walkEntry(composedEntryOf(unit, { register: options.register }), ground),
     composed,

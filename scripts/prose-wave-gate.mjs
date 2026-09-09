@@ -1,6 +1,19 @@
 #!/usr/bin/env node
 /**
- * scripts/taste-measure.mjs — THE TASTE'S GATE (TASTE car M-7; the brief's nine measures).
+ * scripts/prose-wave-gate.mjs — THE WAVE'S GATE (REWRITE car 8a-5, generalised from the taste's
+ * harness `scripts/taste-measure.mjs`, TASTE cars M-7 / M-9 / M-9b, which this file REPLACES).
+ *
+ * ⛔ ONE IMPLEMENTATION, NOT TWO. The old script is not aliased and not kept: it was renamed
+ * into this one and its walker with it, in the same commit, because a gate that exists twice
+ * is two gates that disagree the first time somebody cures one of them. Everything the taste
+ * measured is still measured here; what is new is the SUBJECT (a DESK SECTION's spine pools
+ * and their faces, which is the REWRITE's unit) and the five pieces the sitting found missing.
+ *
+ * WHAT IT IS. The writing workflow calls this after EVERY round, on every arm, and reads its
+ * JSON. It is the only thing standing between a wording set and the sitting, so it is written
+ * to the estate's own rule: every figure comes from an instrument that already exists and is
+ * already plant-convicted, nothing here re-implements a rule that lives somewhere else, and a
+ * measure whose input is absent says NOT-EXECUTABLE rather than answering zero.
  *
  * WHAT IT IS. The writing workflow calls this after EVERY round, on every arm, and reads its
  * JSON. It is the only thing standing between a wording set and the sitting, so it is written
@@ -27,9 +40,32 @@
  * NOT-EXECUTABLE. That is the harness's own honesty rule: an unwritten set must not read as a
  * clean one, and it must not read as a failing one either.
  *
- *   node scripts/taste-measure.mjs --arm draft --round 3
- *   node scripts/taste-measure.mjs --arm A --base <cells.json>
- *   node scripts/taste-measure.mjs --arm draft --variety 1     a cheap slice of measure (d)
+ * ⭐ THE FIVE PIECES SITTING §T.5 FOUND MISSING, EACH LANDED HERE WITH ITS PLANT:
+ *   (a) THE BAND GRAIN, CURED. `bandPositionOf` scored 21 TEXT-level metrics against ONE
+ *       sentence, and 13 of them read zero on any single sentence, so every face in all four
+ *       taste JSONs carried the IDENTICAL tuple (exceeded 13/21 · share 0.619 · mean 0.486 ·
+ *       deepest neighbourVariation 1.597 under). The band column was a constant wearing a
+ *       measurement's clothes. Cured by splitting the metrics: the TEXT-level thirteen are
+ *       scored on the pool's RENDERED CORPUS and the word-level eight on the FACE, and BOTH
+ *       grains are printed so a reader can see which one moved.
+ *   (b) A SIBLING DISTANCE on the estate's own ruler (`siblingDistance`) beside A5's
+ *       synonym-swap count, which is a detector and not a distance. REPORTED at 8a; the floor
+ *       is set at 8b's fold (SITTING §T.3 row 8).
+ *   (c) THE EXEMPLAR CITATION RATE per unit, over whichever of the ten leaf registers has raw
+ *       prose on this machine, with the denominator printed. The provenance budget of at most
+ *       one citation per unit is PROVISIONAL until this is read (SITTING §T.4).
+ *   (d) THE FIXTURE SECTION: the interested fact rendered BOTH WAYS on the captured town and
+ *       the clean control, with the compiled passage asserted identical on both audiences.
+ *   (e) `--shapes`, which reaches `scripts/prose-shape-report.mjs` (REWRITE car 8a-2).
+ *
+ * AND THE TWO-PHASE RULE of Part B §21 as the gate's own KEEP-OR-REVERT verdict, with the
+ * BANKED count printed and shrink-only.
+ *
+ *   node scripts/prose-wave-gate.mjs --arm draft --round 3
+ *   node scripts/prose-wave-gate.mjs --arm A --base <cells.json>
+ *   node scripts/prose-wave-gate.mjs --arm draft --variety 1     a cheap slice of measure (d)
+ *   node scripts/prose-wave-gate.mjs --section defense           a DESK SECTION's spine pools
+ *   node scripts/prose-wave-gate.mjs --shapes --corpus <f>       item 2's distribution table
  *
  * READ-ONLY except the JSON it writes at `$PACKETS/measure-<arm>.json`.
  */
@@ -43,6 +79,7 @@ import { estateGround, withEntryContext } from '../src/domain/prose/entryGround.
 import {
   armA0b, armA5, claimsField, composedVerdictOf, provenanceCount, sampleOf, walkComposed,
 } from '../src/domain/prose/composedWalker.js';
+import { sentencesOf } from '../src/domain/prose/entryWalker.js';
 import { AUTHORING_MARKER } from './lib/dossier-annex-grammar.mjs';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../src/domain/prose/proseFingerprint.js';
 import { spineRows } from '../src/domain/prose/wiringCensus.js';
@@ -56,8 +93,18 @@ import { driftRun } from '../tests/helpers/dossierManifest.js';
 import { classifyCells, diffLines } from './prose-manifest-diff.mjs';
 import { TASTE_POOLS } from './prose-licence-card.mjs';
 import { tasteTown, INTERESTED_TOWNS } from '../tests/fixtures/tasteTowns.js';
+import { composeStateProse } from '../src/domain/display/stateProse/composeStateProse.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../src/data/dossierStateProse/general.generated.js';
+// ⭐ ALL SIX LEAVES (REWRITE car 8a-5). The taste read two because its seven pools lived in
+// two; the REWRITE's subject is a DESK SECTION and there are six desks, so the gate must be
+// able to walk any of them. `--section` names one; `--pools` names an explicit list.
+import { DOSSIER_STATE_PROSE_ECONOMY } from '../src/data/dossierStateProse/economy.generated.js';
+import { DOSSIER_STATE_PROSE_POWER } from '../src/data/dossierStateProse/power.generated.js';
+import { DOSSIER_STATE_PROSE_STRESSORS } from '../src/data/dossierStateProse/stressors.generated.js';
+import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../src/data/dossierStateProse/warFaith.generated.js';
+import { siblingDistance } from '../src/domain/prose/composedWalker.js';
+import { INTERESTED_ROW } from './taste-holders.mjs';
 import { DOSSIER_RELATIONS } from '../src/data/dossierRelations.generated.js';
 import { DOSSIER_PROSE_NORMS } from '../src/data/proseNorms.generated.js';
 
@@ -130,7 +177,114 @@ const quoted = (text) => {
 };
 
 /** The corpus, as one block map. */
-const CORPUS = { ...DOSSIER_STATE_PROSE_DEFENSE, ...DOSSIER_STATE_PROSE_GENERAL };
+const CORPUS = {
+  ...DOSSIER_STATE_PROSE_DEFENSE, ...DOSSIER_STATE_PROSE_GENERAL, ...DOSSIER_STATE_PROSE_ECONOMY,
+  ...DOSSIER_STATE_PROSE_POWER, ...DOSSIER_STATE_PROSE_STRESSORS, ...DOSSIER_STATE_PROSE_WAR_FAITH,
+};
+
+/**
+ * ⭐⭐ A DESK SECTION IS A LEAF, AND THE ROSTER IS DERIVED RATHER THAN TRANSCRIBED.
+ *
+ * ⛔ THE FIRST CUT OF THIS TABLE WAS A HAND-WRITTEN PREFIX LIST AND IT DRIFTED IMMEDIATELY,
+ * which is recorded here because it is the reason for the shape. Written by hand it read
+ * general = DS-GEN, DS-HK, DS-CND and warFaith = DS-WAR, DS-FTH, DS-REL; the projector's own
+ * DESKS table (`scripts/generate-dossier-state-prose.mjs:108`) says general = DS-GEN, DS-REL,
+ * DS-POP, DS-HK and stressors = DS-STR, DS-CND. Two prefixes were on the wrong desk and DS-POP
+ * was on none, so 29 of the 708 pools were reachable from no section at all — a gate silently
+ * unable to walk part of its own corpus.
+ *
+ * The cure is to stop transcribing: a leaf IS a section. Each of the six generated leaves
+ * exports exactly the blocks its desk owns, so the six of them partition the corpus BY
+ * CONSTRUCTION and no prefix list can be wrong. `sectionsCoverEveryPool` below asserts the
+ * partition rather than trusting it.
+ * @type {Readonly<Record<string, object>>}
+ */
+export const SECTION_LEAVES = Object.freeze({
+  defense: DOSSIER_STATE_PROSE_DEFENSE,
+  economy: DOSSIER_STATE_PROSE_ECONOMY,
+  general: DOSSIER_STATE_PROSE_GENERAL,
+  power: DOSSIER_STATE_PROSE_POWER,
+  stressors: DOSSIER_STATE_PROSE_STRESSORS,
+  warFaith: DOSSIER_STATE_PROSE_WAR_FAITH,
+});
+
+/**
+ * THE PARTITION, AS A MEASUREMENT. Every pool of the merged corpus belongs to exactly one
+ * section, and every section's pools belong to the corpus — asserted by the walker so the
+ * "derived, therefore correct" claim above is a figure rather than an argument.
+ * @returns {{pools: number, sections: number, unreached: string[], twice: string[]}}
+ */
+export function sectionsCoverEveryPool() {
+  /** @type {Map<string, number>} */
+  const seen = new Map();
+  for (const leaf of Object.values(SECTION_LEAVES)) {
+    for (const block of Object.keys(leaf)) {
+      for (const pool of Object.keys(leaf[block].pools || {})) {
+        const at = `${block} :: ${pool}`;
+        seen.set(at, (seen.get(at) || 0) + 1);
+      }
+    }
+  }
+  /** @type {string[]} */
+  const unreached = [];
+  for (const block of Object.keys(CORPUS)) {
+    for (const pool of Object.keys(CORPUS[block].pools || {})) {
+      if (!seen.has(`${block} :: ${pool}`)) unreached.push(`${block} :: ${pool}`);
+    }
+  }
+  return {
+    pools: seen.size,
+    sections: Object.keys(SECTION_LEAVES).length,
+    unreached,
+    twice: [...seen].filter(([, n]) => n > 1).map(([at]) => at),
+  };
+}
+
+/**
+ * ⭐ THE POOL ROSTER THE GATE WALKS.
+ *
+ * ⛔ THE PACKET DIRECTORY IS DERIVED FROM THE KEY AND NEVER INVENTED. The taste's seven rows
+ * carried a hand-written `dir`; a section's pools cannot, so the directory is a slug of
+ * `block :: pool` and the round counter reads it exactly as it read the taste's. A pool with
+ * no packet directory answers `draftRounds 0`, which is the honest reading of "nobody has
+ * written for it yet" rather than an error.
+ * @param {{section?: string|null, pools?: string|null}} options
+ * @returns {{rows: Array<{block: string, pool: string, dir: string}>, why: string}}
+ */
+export function poolRosterOf(options) {
+  const slug = (block, pool) => `${block}-${pool}`.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
+  if (options.pools) {
+    const rows = String(options.pools).split(',').map((s) => s.trim()).filter(Boolean)
+      .map((entry) => {
+        const [block, pool] = entry.split('::').map((s) => s.trim());
+        return { block, pool, dir: slug(block, pool) };
+      });
+    return { rows, why: `--pools named ${rows.length} pool(s) by hand` };
+  }
+  if (options.section) {
+    const leaf = SECTION_LEAVES[options.section];
+    if (!leaf) {
+      return {
+        rows: [],
+        why: `NOT-EXECUTABLE: no desk section named \`${options.section}\`;`
+          + ` the six are ${Object.keys(SECTION_LEAVES).join(', ')}`,
+      };
+    }
+    /** @type {Array<{block: string, pool: string, dir: string}>} */
+    const rows = [];
+    for (const block of Object.keys(leaf).sort()) {
+      for (const pool of Object.keys(leaf[block].pools || {}).sort()) {
+        rows.push({ block, pool, dir: slug(block, pool) });
+      }
+    }
+    return {
+      rows,
+      why: `--section ${options.section} over ${Object.keys(leaf).length} block(s) of its own leaf`,
+    };
+  }
+  return { rows: [...TASTE_POOLS], why: 'no --section and no --pools: the taste\'s seven' };
+}
 const CENSUS = JSON.parse(readFileSync(path.join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
 const CENSUS_ROWS = new Map(spineRows(CENSUS.rows).map((r) => [`${r.block} :: ${r.pool}`, r]));
 const ALL_ROWS = new Map(CENSUS.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
@@ -187,10 +341,110 @@ export function exemplarBands(dir) {
 }
 
 /**
+ * ⛔⛔ THE THIRTEEN METRICS THAT READ ZERO ON ANY ONE SENTENCE (SITTING §T.5, CONFIRMED by the
+ * chair's own probe over the harness's `bandPositionOf` and `exemplarBands`).
+ *
+ * THE DEFECT, IN ONE LINE: an 8-word face, a 15-word face and the taste draft's covert breach
+ * line all scored `exceeded 13/21 · share 0.619 · mean 0.486 · deepest
+ * wordsPerSentence.neighbourVariation 1.597 under`. Every face in all four taste JSONs carried
+ * the identical tuple except one. The reason is arithmetic, not sampling: thirteen of the
+ * twenty-one banded metrics are properties of a TEXT — a share of sentences, a rate per
+ * sentence, a variation BETWEEN neighbours, a repeat of an opener — and on a single sentence
+ * every one of them is 0 or undefined, which falls under every exemplar floor. The BUDGET was
+ * then met vacuously (13 ≤ floor(21 × 2/3) = 14), and the only thing that could ever move a
+ * face was an OVER-side lexicon trigger. The two-arm table's band column was STRUCK as a
+ * discriminator on exactly this ground.
+ *
+ * THE CURE IS A GRAIN, NOT A THRESHOLD. These thirteen are scored on the pool's RENDERED
+ * CORPUS — every unit the pool composes, joined as one text — where "a share of sentences over
+ * thirty words" is a question with an answer. The remaining eight are word-level or closer
+ * metrics that a single sentence really does answer, and they stay on the FACE. Both grains are
+ * printed side by side, so a reader can see which one moved and neither can be mistaken for
+ * the other.
+ * @type {ReadonlyArray<string>}
+ */
+export const TEXT_LEVEL_METRICS = Object.freeze([
+  'wordsPerSentence.shareUnder8',
+  'wordsPerSentence.shareOver30',
+  'wordsPerSentence.neighbourVariation',
+  'punctuation.semicolonRate',
+  'shapes.antithesisRate',
+  'shapes.triadRate',
+  'shapes.doubledAdjectiveRate',
+  'shapes.adverbsPerSentence',
+  'shapes.thereIsOpenerRate',
+  'closers.abstractNounRate',
+  'closers.pronounRate',
+  'openers.sameOpenerAsPreviousRate',
+  'runsOfThreeSameLengthBand',
+]);
+
+/**
+ * The eight that a single sentence genuinely answers: a colon, an em dash, a question mark, an
+ * exclamation, a parenthesis, a participial opener, a which-tail and a line of dialogue are all
+ * visible in one sentence, and their absence there is a fact about the sentence rather than an
+ * artefact of the grain.
+ * @type {ReadonlyArray<string>}
+ */
+export const FACE_LEVEL_METRICS = Object.freeze(
+  RATE_METRICS.filter((metric) => !TEXT_LEVEL_METRICS.includes(metric)),
+);
+
+/**
+ * The bands restricted to one grain's metrics, so `scoreAgainstBands` scores only what the
+ * grain can answer. A band the grain cannot answer is not scored as a pass; it is not scored.
+ * @param {{bands: object|null, medians: object|null, why?: string}} exemplars
+ * @param {ReadonlyArray<string>} metrics
+ */
+function bandsFor(exemplars, metrics) {
+  if (!exemplars.bands) return null;
+  /** @type {Record<string, {lo: number, hi: number}>} */
+  const out = {};
+  for (const metric of metrics) if (exemplars.bands[metric]) out[metric] = exemplars.bands[metric];
+  return out;
+}
+
+/**
+ * One text's band position at ONE GRAIN: which soft rules it exceeds, how deep, and how far it
+ * sits from the exemplar MEDIAN of each band it is scored on.
+ *
+ * ⛔ `grain` NAMES WHICH METRICS ARE ASKED, and it is required rather than defaulted, because a
+ * default is how the old defect survived: the caller must say whether it is handing over a FACE
+ * or a CORPUS, and the answer carries the grain it was measured at.
+ * @param {string} text
+ * @param {{bands: object|null, medians: object|null, why?: string}} exemplars
+ * @param {'face'|'corpus'} grain
+ */
+export function bandPositionAt(text, exemplars, grain) {
+  const metrics = grain === 'corpus' ? TEXT_LEVEL_METRICS : FACE_LEVEL_METRICS;
+  const scoped = bandsFor(exemplars, metrics);
+  if (!scoped) return { executable: false, grain, why: exemplars.why };
+  return { ...bandPositionOf(text, { ...exemplars, bands: scoped }), grain };
+}
+
+/**
+ * BOTH GRAINS FOR ONE FACE, which is what a writer's row prints: the word-level measures on
+ * the face itself, and the text-level measures on the corpus the face is part of.
+ * @param {string} face
+ * @param {string} corpusText every unit of the pool, joined
+ * @param {{bands: object|null, medians: object|null, why?: string}} exemplars
+ */
+export function bandGrainsOf(face, corpusText, exemplars) {
+  return {
+    face: bandPositionAt(face, exemplars, 'face'),
+    corpus: bandPositionAt(corpusText, exemplars, 'corpus'),
+  };
+}
+
+/**
  * One face's band position: which soft rules it exceeds, how deep, and how far it sits from
  * the exemplar MEDIAN of each band it is scored on.
+ *
+ * ⚠ KEPT AS THE SCORER BOTH GRAINS CALL, AND NO LONGER CALLED DIRECTLY BY THE MEASURE. It is
+ * the arithmetic; `bandPositionAt` is the grain. Calling this with the whole 21-metric band set
+ * on a single sentence is the defect SITTING §T.5 struck, so the measure never does.
  * @param {string} text
- * @param {{bands: object|null, medians: object|null}} exemplars
+ * @param {{bands: object|null, medians: object|null, why?: string}} exemplars
  */
 export function bandPositionOf(text, exemplars) {
   if (!exemplars.bands) return { executable: false, why: exemplars.why };
@@ -253,6 +507,39 @@ export function unitsOfPool(blockId, poolKey) {
   const pool = block?.pools?.[poolKey] || [];
   /** @type {Array<object>} */
   const units = [];
+  // ⭐⭐ THE REWRITE'S UNIT IS A SPINE POOL'S OWN FACES (REWRITE car 8a-5, generalising the
+  // taste's harness). The taste walked MODIFIER pools, whose unit is the cartesian of an
+  // attach set; the REWRITE's first writing workflow rewrites a DESK SECTION's SPINE pools and
+  // grows their faces, and a spine's attach set is empty BY CONSTRUCTION (the SHIFT REGISTER
+  // pins `attach-set` at 0 on all 708). Under the taste's rule that pool composed NOTHING and
+  // the gate had nothing to walk — which is exactly the absent-pool lie car 8a-3 cured, and
+  // curing the symptom is not the same as giving the gate its subject.
+  //
+  // ⛔ A BARE SPINE IS ONE PIECE AND SAYS SO. The row carries `role: 'spine'` and no modifier,
+  // no relation and no seat, so every composed-only arm (A1's overlap, A2's joint, A3's
+  // contrast, the thread) declares NOT-EXECUTABLE on it rather than inventing a second piece
+  // to have something to compare. The ENTRY arms — the claim classes, the digits, the em dash,
+  // the fragment form — are the ones that judge a spine face, and they are the ones the
+  // REWRITE is graded on.
+  if (!Array.isArray(meta?.attach) || meta.attach.length === 0) {
+    for (const variant of pool) {
+      for (const face of facesOf(variant)) {
+        units.push({
+          blockId,
+          poolKey,
+          text: face,
+          pieces: [{
+            role: 'spine',
+            key: poolKey,
+            text: face,
+            slots: variant.slots || [],
+            marks: variant.marks || [],
+          }],
+        });
+      }
+    }
+    return units;
+  }
   for (const spineKey of meta?.attach || []) {
     const spinePool = block.pools[spineKey] || [];
     for (const spine of spinePool) {
@@ -763,6 +1050,350 @@ export function absentPoolRow(entry, input) {
   };
 }
 
+// ── (b) THE SIBLING DISTANCE, ON THE ESTATE'S OWN RULER ─────────────────────────────
+
+/**
+ * ⭐ SITTING §T.3 row 8, and the gap it names: "⚠ the harness carries NO distance figure, and
+ * the refuters found sibling PARAPHRASE on both arms that A5 cannot see".
+ *
+ * A5 is a DETECTOR: it reports a pair only when all three of its tests fire at once (same
+ * opener AND same segment count AND an overlap at or above a floor that defaults to 10,000 bp,
+ * i.e. an exact content-token match). That answers "is this pair a synonym swap"; it does not
+ * answer "how far apart are these two faces", which is what a FLOOR has to be cut from. Seven
+ * paraphrase pairs at the taste sat under A5's radar for exactly that reason.
+ *
+ * ⛔ NO NEW RULER. `siblingDistance` already exists in the composed walker and already measures
+ * the three things `check-pair` measures — the two-word opener, the sentence count through the
+ * estate's own splitter, and the content-token overlap in BASIS POINTS as an integer. This
+ * function reports its DISTRIBUTION over a variant's faces; it sets no floor, because SITTING
+ * §T.3 sets the floor at 8b's fold on the numbers this print produces.
+ * @param {ReadonlyArray<string>} faces
+ * @returns {{pairs: number, minOverlapBp: number|null, maxOverlapBp: number|null,
+ *   medianOverlapBp: number|null, sameOpenerPairs: number, sameSegmentPairs: number,
+ *   nearest: {a: number, b: number, overlapBp: number}|null, why: string}}
+ */
+export function siblingSpreadOf(faces) {
+  const list = faces || [];
+  if (list.length < 2) {
+    return {
+      pairs: 0,
+      minOverlapBp: null,
+      maxOverlapBp: null,
+      medianOverlapBp: null,
+      sameOpenerPairs: 0,
+      sameSegmentPairs: 0,
+      nearest: null,
+      why: `NOT-EXECUTABLE: a distance needs two faces and this variant carries ${list.length}`,
+    };
+  }
+  /** @type {Array<{a: number, b: number, overlapBp: number, sameOpener: boolean, sameSegments: boolean}>} */
+  const rows = [];
+  for (let a = 0; a < list.length; a += 1) {
+    for (let b = a + 1; b < list.length; b += 1) {
+      rows.push({ a, b, ...siblingDistance(list[a], list[b]) });
+    }
+  }
+  const overlaps = rows.map((r) => r.overlapBp).sort((x, y) => x - y);
+  const mid = Math.floor(overlaps.length / 2);
+  return {
+    pairs: rows.length,
+    minOverlapBp: overlaps[0],
+    maxOverlapBp: overlaps[overlaps.length - 1],
+    // The median in BASIS POINTS as an integer, the even case averaged and floored — the
+    // estate's rule against a float printed as a decimal, kept at the report grain too.
+    medianOverlapBp: overlaps.length % 2 === 1
+      ? overlaps[mid] : Math.floor((overlaps[mid - 1] + overlaps[mid]) / 2),
+    sameOpenerPairs: rows.filter((r) => r.sameOpener).length,
+    sameSegmentPairs: rows.filter((r) => r.sameSegments).length,
+    nearest: rows.slice().sort((x, y) => y.overlapBp - x.overlapBp)[0] || null,
+    why: '',
+  };
+}
+
+// ── (c) THE EXEMPLAR CITATION RATE ──────────────────────────────────────────────────
+
+/**
+ * ⭐ SITTING §T.4: the provenance budget is "≤ 1 citation per unit, and only on a LICENSED
+ * holder — SET BY RULE; ⚠ the exemplar citation rate per unit is NOT measured … the budget is
+ * provisional until it is read".
+ *
+ * This reads it, over whichever of the ten leaf registers has RAW PROSE on this machine, using
+ * the SAME `provenanceCount` the gate scores a face with — so the exemplar rate and the
+ * corpus rate are one ruler and not two.
+ *
+ * ⛔ THE DENOMINATOR IS PRINTED AND THE ABSENT LEAVES ARE NAMED. `primary/raw` carries the raw
+ * text for only some of the ten (the Martin, Tolkien and D&D intermediates were HTML and PDF
+ * and the derived numbers are all that survive), so the rate is a measurement over a stated
+ * subset and says which leaves it could not read. A rate averaged over "the exemplars" without
+ * that denominator would be a figure nobody could check.
+ * @param {string} dir the exemplar directory
+ */
+export function exemplarCitationRate(dir) {
+  const raw = path.join(dir, 'raw');
+  /** @type {Array<{leaf: string, sentences: number, citations: number, perUnitBp: number}>} */
+  const rows = [];
+  /** @type {string[]} */
+  const absent = [];
+  for (const leaf of EXEMPLAR_LEAVES) {
+    // The raw files are named with underscores where the fingerprint leaves use hyphens.
+    const at = path.join(raw, `${leaf.replace(/-/g, '_')}.txt`);
+    if (!existsSync(at)) { absent.push(leaf); continue; }
+    const text = readFileSync(at, 'utf8');
+    const sentences = sentencesOf(text);
+    const citations = sentences.reduce((n, sentence) => n + provenanceCount(sentence), 0);
+    rows.push({
+      leaf,
+      sentences: sentences.length,
+      citations,
+      perUnitBp: sentences.length ? Math.round((citations * 10000) / sentences.length) : 0,
+    });
+  }
+  const sentences = rows.reduce((n, r) => n + r.sentences, 0);
+  const citations = rows.reduce((n, r) => n + r.citations, 0);
+  // ⛔ THE NON-VACUITY CONTROL, RUN ON EVERY CALL. A rate of zero from a DEAD DETECTOR and a
+  // rate of zero from prose that cites nothing are the same number and opposite findings, and
+  // this is the estate's own rule about an instrument that can only answer one way. The probe
+  // is one sentence the detector must find, and the report carries the answer beside the rate.
+  const probe = provenanceCount('The muster roll is the watch\'s own, and the watch is bought.');
+  return {
+    executable: rows.length > 0,
+    leavesRead: rows.length,
+    leavesTotal: EXEMPLAR_LEAVES.length,
+    absent,
+    rows,
+    sentences,
+    citations,
+    perUnitBp: sentences ? Math.round((citations * 10000) / sentences) : null,
+    detectorLive: probe > 0,
+    why: rows.length === 0
+      ? `NOT-EXECUTABLE: no raw exemplar prose under ${raw}, so no rate can be read`
+      : `${rows.length} of ${EXEMPLAR_LEAVES.length} leaf register(s) carry raw prose on this machine`
+        + `${probe > 0 ? '' : ' — AND THE DETECTOR IS DEAD: the control sentence scored 0, so the rate below means nothing'}`,
+  };
+}
+
+// ── (d) THE FIXTURE SECTION — THE INTERESTED FACT, BOTH WAYS, ON BOTH TOWNS ─────────
+
+/**
+ * ⭐⭐ SITTING §T.4, THE PEN LINE (agenda C‴), ADOPTED PROVISIONALLY AND OWED THIS PRINT:
+ * "⚠ The taste could NOT compose the interested fact both ways: the harness has no fixture
+ * section and no `--shapes` … so the side-by-side is OWED at 8a item 5d on the rate-9-2
+ * fixture … and the adoption stays provisional until the owner has seen it."
+ *
+ * THE FOUR STRINGS, on the captured town `rate-9-2` and the clean control `rate-3-0`:
+ *   1. THE PLAYER FACE AS COMPILED — the pool's own drawn sentence, filled, audience `player`.
+ *   2. THE DM FACE INLINE — the C‴ rendering the owner asked to see REPLACED: a dm-only face
+ *      woven into the passage in the player face's place.
+ *   3. THE DM'S PEN LINE — the C‴ rendering the chair recommends: the same DM sentence beside
+ *      the block, in the slot the DM page already keeps, with the passage untouched.
+ *   4. THE COMPILED PASSAGE ON BOTH AUDIENCES, asserted IDENTICAL, which is the property the
+ *      pen line buys and the whole reason the chair recommends it.
+ *
+ * ⛔⛔ THE DM SENTENCE IS THE GATE'S OWN ILLUSTRATION AND IT SAYS SO IN THE OUTPUT. No pool in
+ * the corpus carries a `dm-only` face on this row, so there is nothing to draw; the gate builds
+ * one from the HOLDER CENSUS's own answer for this town (the kind, the named holder, the
+ * standing) and labels it `[gate illustration]` in the printed table. It is never written, never
+ * projected and never a corpus byte — the wave's writers author the real one at SURFACES-DM.
+ * What the sitting is being shown is the ARRANGEMENT of the two renderings, which is the
+ * question C‴ asks, and the arrangement is real whatever the sentence is.
+ * ⛔ IT TAKES NO `sourceOf` READER AND RESOLVES THE ROW ITSELF, deliberately: the caller's
+ * reader is scoped to ONE pool of ONE block by the loop it lives in, and this fixture is about
+ * a NAMED row on a NAMED pair of towns. Reaching for the caller's would have silently measured
+ * whichever pool the loop was on.
+ * @returns {object}
+ */
+export function fixtureSection() {
+  const block = CORPUS[INTERESTED_ROW.block];
+  const pool = block?.pools?.[INTERESTED_ROW.pool];
+  if (!Array.isArray(pool) || pool.length === 0) {
+    return {
+      executable: false,
+      why: `NOT-EXECUTABLE: the corpus carries no pool ${INTERESTED_ROW.block} ::`
+        + ` ${INTERESTED_ROW.pool}, which is the row SITTING §R c-22 names`,
+    };
+  }
+  const censusRow = ALL_ROWS.get(`${INTERESTED_ROW.block} :: ${INTERESTED_ROW.pool}`) || null;
+  /** @type {Array<object>} */
+  const towns = [];
+  for (const spec of INTERESTED_TOWNS) {
+    const settlement = tasteTown(spec);
+    const source = censusRow ? sourceOfForTown(censusRow, settlement, {}) : null;
+    const player = composeStateProse(CORPUS, INTERESTED_ROW.block, {
+      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'player',
+    });
+    const dm = composeStateProse(CORPUS, INTERESTED_ROW.block, {
+      spineKey: INTERESTED_ROW.pool, candidates: [], turns: [], slots: {}, seed: spec.seed, audience: 'dm',
+    });
+    const interested = Boolean(source && source.standing === 'INTERESTED');
+    // ⛔ ONLY AN INTERESTED ROW HAS A DM SENTENCE AT ALL, AND THE CLEAN TOWN IS THE CONTROL.
+    // `rate-3-0` resolves the same treasury row to a standing of LICENSED, so its pen slot is
+    // EMPTY — which is the whole reason the pair is a pair. A fixture that printed a pen line
+    // on both towns would be showing the arrangement without showing what governs it.
+    const penSentence = interested && source && source.holder
+      ? `The ${source.kind} that keeps this is the ${source.holder}, and the ${source.holder}`
+        + ' stands to gain by what it says.'
+      : null;
+    const passage = player ? player.text : '';
+    towns.push({
+      label: spec.label,
+      seed: spec.seed,
+      standing: source ? source.standing : null,
+      kind: source ? source.kind : null,
+      holder: source ? source.holder : null,
+      interested,
+      playerCompiled: player ? player.text : null,
+      dmCompiled: dm ? dm.text : null,
+      dmSentence: penSentence,
+      // ⭐ (2) THE INLINE RENDERING (C‴'s "replacement face"): on the DM page the interested
+      // fact takes the PLAYER FACE'S PLACE inside the passage, so the two pages carry two
+      // different passages. This is the rendering the owner asked to see beside the other.
+      renderInline: {
+        player: passage,
+        dm: penSentence || passage,
+        passagesDiffer: Boolean(penSentence),
+      },
+      // ⭐ (3) THE PEN-LINE RENDERING (C‴ as the chair recommends): the passage is the SAME on
+      // both pages and the DM's knowledge rides in the adjacent slot the DM page already keeps.
+      renderPenLine: {
+        player: passage,
+        dm: passage,
+        pen: penSentence,
+        passagesDiffer: false,
+      },
+      // (4) THE PROPERTY THE PEN LINE BUYS, measured on the composer's own output.
+      passagesIdentical: Boolean(player && dm && player.text === dm.text),
+    });
+  }
+  return {
+    executable: true,
+    at: `${INTERESTED_ROW.block} :: ${INTERESTED_ROW.pool}`,
+    towns,
+    // ⛔ THE ARM, NOT THE ILLUSTRATION: on EVERY fixture town the compiled passage must read
+    // the same on both audiences. That is the paired-town arm at the passage grain, and it is
+    // what makes the pen line's claim ("the compiled passage becomes AUDIENCE-INDEPENDENT") a
+    // measurement. A dm-only face woven inline would break it, which is the point.
+    pairedTownHolds: towns.every((t) => t.passagesIdentical),
+    why: '',
+  };
+}
+
+// ── (e) `--shapes` — REACHED, NEVER RE-SPELLED ──────────────────────────────────────
+
+/**
+ * ⭐ ITEM 5(e): "the `--shapes` report of item 2 reachable from the gate".
+ *
+ * ⛔ IT SHELLS OUT RATHER THAN IMPORTING, and that is deliberate. `prose-shape-report.mjs` is
+ * an ENTRY script that prints a table; importing it would either run it at import time or force
+ * it to be split into a lib for one caller. The gate is a REPORT harness, not a hot path, and a
+ * subprocess is the honest way to say "this is the other instrument's answer, verbatim" — the
+ * lines below are that script's own output and this file re-derives none of them.
+ * @param {string|null} corpus a corpus JSON to drive the report on, or null for the product
+ */
+export function shapeReport(corpus) {
+  const args = [path.join(ROOT, 'scripts/prose-shape-report.mjs'), ...(corpus ? ['--corpus', corpus] : [])];
+  try {
+    const text = execFileSync('node', args, { cwd: ROOT, encoding: 'utf8' });
+    return { executable: true, corpus, lines: text.split('\n').filter(Boolean), why: '' };
+  } catch (error) {
+    const e = /** @type {any} */ (error);
+    return {
+      executable: false,
+      corpus,
+      lines: [],
+      why: `the shape report exited non-zero: ${String(e.stderr || e.message).split('\n')[0]}`,
+    };
+  }
+}
+
+// ── THE TWO-PHASE RULE OF Part B §21, AS THE GATE'S KEEP-OR-REVERT VERDICT ──────────
+
+/**
+ * ⭐⭐ Part B §21.2, ENCODED (owner, 2026-09-08 ~21:2x), and amended by SITTING §T.4.
+ *
+ * "A lawful set keeps its refinement only if it stays lawful; an unlawful set keeps it if its
+ * failure count falls or holds with no new failure; otherwise the set reverts. A set that
+ * cannot be made lawful is banked as a refusal row with its faces, never trimmed, and the
+ * banked count is printed and only ever falls."
+ *
+ * ⛔ THE THREE VERDICTS ARE NOT A RANKING. KEEP, REVERT and BANK answer different questions:
+ * KEEP and REVERT are about ONE refinement against the draft it replaced; BANK is about a set
+ * that has run out of rounds. A gate that folded them into "pass / fail" would lose the fact
+ * that a REVERTED set still has its lawful draft and a BANKED set has none.
+ *
+ * ⛔ "NO NEW FAILURE" IS BY MEASURE NAME AND NOT BY COUNT. Two failures traded one for one
+ * would hold the count and pass a count test while the set had moved sideways, which §21.2's
+ * "with no new failure" refuses in terms. The names come from `inBandOf`'s `failing[]`.
+ *
+ * ⚠ AND THE VERDICT IS THE GATE'S, WHICH SITTING §T.4 SAYS IS NOT THE WHOLE ANSWER: the gate
+ * read 0 owned findings on all 13 kept refinements at the taste while the blind refuters failed
+ * 26 of 42 on grounds no owned arm carries. So a KEEP here is "the gate found nothing", and the
+ * chair rules per variant on the refuters' CONFIRMED findings afterwards. The verdict names
+ * that limit in its own `why`.
+ * @param {{failing: ReadonlyArray<{measure: string}>}} draft the lawful-or-not draft state
+ * @param {{failing: ReadonlyArray<{measure: string}>}} refined the state after the refinement
+ * @param {{dryRounds?: number}} [options] two consecutive dry rounds bank the set (§21)
+ * @returns {{verdict: 'KEEP'|'REVERT'|'BANK', why: string, before: number, after: number,
+ *   newFailures: string[], cured: string[]}}
+ */
+export function keepOrRevert(draft, refined, options = {}) {
+  const before = (draft.failing || []).map((f) => f.measure);
+  const after = (refined.failing || []).map((f) => f.measure);
+  const newFailures = after.filter((m) => !before.includes(m));
+  const cured = before.filter((m) => !after.includes(m));
+  if ((options.dryRounds || 0) >= 2 && after.length > 0) {
+    return {
+      verdict: 'BANK',
+      why: `two consecutive rounds moved no failing measure and ${after.length} remain:`
+        + ' the set is banked as a refusal row with its faces, never trimmed (Part B §21)',
+      before: before.length,
+      after: after.length,
+      newFailures,
+      cured,
+    };
+  }
+  if (before.length === 0) {
+    return after.length === 0
+      ? {
+        verdict: 'KEEP',
+        why: 'a lawful set stayed lawful, so the refinement keeps — which is the GATE\'s'
+          + ' verdict only; the refuters\' findings decide per variant afterwards (SITTING §T.4)',
+        before: 0,
+        after: 0,
+        newFailures,
+        cured,
+      }
+      : {
+        verdict: 'REVERT',
+        why: `a lawful set became unlawful: ${newFailures.join(', ') || after.join(', ')}`,
+        before: 0,
+        after: after.length,
+        newFailures,
+        cured,
+      };
+  }
+  if (newFailures.length === 0 && after.length <= before.length) {
+    return {
+      verdict: 'KEEP',
+      why: `an unlawful set kept its refinement: failures ${before.length} -> ${after.length}`
+        + ` with none new${cured.length ? ` (cured ${cured.join(', ')})` : ''}`,
+      before: before.length,
+      after: after.length,
+      newFailures,
+      cured,
+    };
+  }
+  return {
+    verdict: 'REVERT',
+    why: newFailures.length
+      ? `the refinement added a failure that was not there: ${newFailures.join(', ')}`
+      : `the failure count rose ${before.length} -> ${after.length}`,
+    before: before.length,
+    after: after.length,
+    newFailures,
+    cured,
+  };
+}
+
 // ── (h) THE ROUND COUNTERS, READ AND NEVER WRITTEN ──────────────────────────────────
 
 /**
@@ -876,14 +1507,19 @@ export function sampleSizeFor(total, msPerUnit) {
 
 /**
  * THE WHOLE MEASURE for one arm.
- * @param {{arm: string, round: number, base: string|null, variety: number,
- *   exemplars: string}} options
+ * @param {{arm: string, round: number, base: string|null, variety: number, exemplars: string,
+ *   section?: string|null, pools?: string|null, shapes?: boolean, corpus?: string|null}} options
  */
 export async function measure(options) {
   const started = Date.now();
+  const roster = poolRosterOf({ section: options.section || null, pools: options.pools || null });
   /** @type {Record<string, unknown>} */
   const out = {
-    arm: options.arm, round: options.round, at: new Date().toISOString().slice(0, 19),
+    arm: options.arm,
+    round: options.round,
+    at: new Date().toISOString().slice(0, 19),
+    roster: { pools: roster.rows.length, why: roster.why },
+    sections: sectionsCoverEveryPool(),
   };
 
   // (a) THE PROJECTION.
@@ -931,7 +1567,7 @@ export async function measure(options) {
   const pools = [];
   /** @type {Array<object>} */
   const allUnits = [];
-  for (const entry of TASTE_POOLS) {
+  for (const entry of roster.rows) {
     const block = CORPUS[entry.block];
     const meta = block?.poolMeta?.[entry.pool];
     const variants = block?.pools?.[entry.pool] || [];
@@ -1008,10 +1644,26 @@ export async function measure(options) {
         faces: faces.length,
         synonymSwaps: a5.reports.length,
         notExecutable: a5.notExecutable.length,
+        // ⭐ (b) THE DISTANCE BESIDE THE DETECTOR (SITTING §T.3 row 8). A5 answers "is this pair
+        // a synonym swap"; this answers "how far apart are they", which is what a floor is cut
+        // from. Reported at 8a; the floor is set at 8b's fold.
+        spread: siblingSpreadOf(faces),
       };
     });
+    // ⭐⭐ (a) THE POOL'S RENDERED CORPUS — every unit it composes, joined as one text. This is
+    // what the THIRTEEN text-level metrics are scored on; scoring them against one sentence is
+    // the defect SITTING §T.5 struck, and the two grains are carried apart from here on.
+    const corpusText = units.map((unit) => unit.text).join(' ');
     const band = variants.flatMap((v, i) => facesOf(v)
-      .map((face, f) => ({ vid: v.vid ?? i, face: f, ...bandPositionOf(face, exemplars) })));
+      .map((face, f) => {
+        const grains = bandGrainsOf(face, corpusText, exemplars);
+        // The row keeps the FACE grain's shape at the top level so every existing reader —
+        // `inBandOf`, the table, the walker's arms — goes on reading a band row, and gains
+        // `grains` beside it so the corpus half is never mistaken for the face half.
+        return {
+          vid: v.vid ?? i, face: f, ...grains.face, grains,
+        };
+      }));
     const cited = variants.reduce((n, v) => n + facesOf(v).reduce((m, face) => m + provenanceCount(face), 0), 0);
     const built = {
       block: entry.block,
@@ -1031,6 +1683,11 @@ export async function measure(options) {
       siblings,
       band,
       provenance: { citations: cited, a13: findings.filter((f) => f.arm === 'A13').length },
+      // ⭐ (a) THE POOL'S CORPUS GRAIN, ONCE PER POOL rather than once per face: the thirteen
+      // text-level metrics are a property of the corpus, so repeating them per face would be
+      // the same number printed n times — which is how the old defect read as a measurement.
+      corpusBand: bandPositionAt(corpusText, exemplars, 'corpus'),
+      corpusWords: words(corpusText),
       owned: scoped.owned,
       inherited: scoped.inherited,
       inheritedCount: scoped.inheritedCount,
@@ -1105,6 +1762,28 @@ export async function measure(options) {
   // (f) THE TIE RATE.
   out.ties = tieRate(['rate-9-2', 'rate-3-0', 'prose-0', 'prose-1', 'golden-master-v3']);
 
+  // ⭐ (c) THE EXEMPLAR CITATION RATE — the band the provenance budget is provisional against.
+  out.exemplarCitations = exemplarCitationRate(options.exemplars);
+
+  // ⭐ (d) THE FIXTURE SECTION — the interested fact both ways, on both towns.
+  out.fixture = fixtureSection();
+
+  // ⭐ (e) THE SHAPE REPORT, reached and never re-spelled.
+  out.shapes = options.shapes
+    ? shapeReport(options.corpus || null)
+    : { executable: false, why: 'the shape report was not asked for (no --shapes)' };
+
+  // ⭐ THE BANKED COUNT, SHRINK-ONLY (Part B §21.2). A banked set is a refusal row with its
+  // faces; it is never trimmed, and the count only ever falls. The gate prints it from the
+  // pools' own verdicts so nobody has to keep a second list.
+  const banked = pools.filter((pool) => pool.verdict === 'FAIL' && (pool.rounds?.draftRounds || 0) >= 2);
+  out.banked = {
+    count: banked.length,
+    pools: banked.map((pool) => `${pool.block} :: ${pool.pool}`),
+    rule: 'Part B §21.2: a set that cannot be made lawful is banked as a refusal row with its'
+      + ' faces, never trimmed, and this count only ever falls',
+  };
+
   out.seconds = Math.round((Date.now() - started) / 1000);
   return out;
 }
@@ -1112,10 +1791,15 @@ export async function measure(options) {
 /** ONE TABLE PER POOL — the thing a gate agent reads. */
 export function tableLines(out) {
   const lines = [
-    `TASTE MEASURE · arm ${out.arm}${out.round ? ` · round ${out.round}` : ''} · ${out.at}`,
+    `PROSE WAVE GATE · arm ${out.arm}${out.round ? ` · round ${out.round}` : ''} · ${out.at}`,
+    `  roster: ${out.roster.pools} pool(s) — ${out.roster.why}`,
+    `  sections: ${out.sections.sections} leaves cover ${out.sections.pools} pool(s)`
+      + ` · unreached ${out.sections.unreached.length} · counted twice ${out.sections.twice.length}`,
     `  projection: ${out.projection.ok ? 'GREEN' : 'RED'} — ${out.projection.detail}`,
     `  exemplar bands: ${out.exemplars.metricsBanded} metric(s) over ${out.exemplars.labels.length} leaves`
       + `${out.exemplars.why ? ` — NOT-EXECUTABLE: ${out.exemplars.why}` : ''}`,
+    `  band GRAIN: ${TEXT_LEVEL_METRICS.length} text-level metric(s) on the pool's rendered corpus`
+      + ` · ${FACE_LEVEL_METRICS.length} word-level on the face (SITTING §T.5's cure)`,
   ];
   for (const pool of out.pools) {
     lines.push('');
@@ -1155,16 +1839,38 @@ export function tableLines(out) {
     lines.push(`     words per face: ${lens.join(' · ')}`
       + `${pool.lengths.ceiling ? ` (fragment ceiling ${pool.lengths.ceiling})` : ' (sentence form)'}`);
     lines.push(`     sibling distance: ${pool.siblings.map((s) => `#${s.vid} ${s.faces} faces, ${s.synonymSwaps} synonym swap(s)`).join(' · ')}`);
+    for (const sib of pool.siblings) {
+      lines.push(sib.spread.why
+        ? `     sibling SPREAD #${sib.vid}: ${sib.spread.why}`
+        : `     sibling SPREAD #${sib.vid}: ${sib.spread.pairs} pair(s) · overlap`
+          + ` min ${sib.spread.minOverlapBp} / median ${sib.spread.medianOverlapBp} /`
+          + ` max ${sib.spread.maxOverlapBp} bp · same opener ${sib.spread.sameOpenerPairs}`
+          + ` · same segments ${sib.spread.sameSegmentPairs}`);
+    }
+    // ⭐⭐ BOTH GRAINS, PRINTED SIDE BY SIDE (SITTING §T.5's cure). The FACE row is the eight
+    // word-level metrics on each face; the CORPUS row is the thirteen text-level metrics on the
+    // pool's whole rendered corpus, ONCE. A reader who sees the same face figures on every face
+    // is looking at a lexicon that agrees, not at an instrument that cannot tell them apart.
     const banded = pool.band.filter((b) => b.executable);
     if (banded.length) {
       const mean = Math.round((banded.reduce((n, b) => n + (b.meanDistanceFromMedian || 0), 0) / banded.length) * 1000) / 1000;
-      lines.push(`     band position: mean distance from the exemplar median ${mean} band-widths`
+      lines.push(`     band position FACE grain (${FACE_LEVEL_METRICS.length} word-level metrics):`
+        + ` mean distance from the exemplar median ${mean} band-widths`
         + ` · budget ok on ${banded.filter((b) => b.budgetOk).length}/${banded.length}`
         + ` · depth ok on ${banded.filter((b) => b.depthOk).length}/${banded.length}`
-        + ` · perfection-suspect ${banded.filter((b) => b.perfectionSuspect).length}`);
+        + ` · perfection-suspect ${banded.filter((b) => b.perfectionSuspect).length}`
+        + ` · distinct tuples ${new Set(banded.map((b) => `${b.exceeded}/${b.scored}:${b.meanDistanceFromMedian}`)).size}`
+        + ` of ${banded.length} face(s)`);
     } else {
-      lines.push('     band position: NOT-EXECUTABLE');
+      lines.push('     band position FACE grain: NOT-EXECUTABLE');
     }
+    const cb = pool.corpusBand;
+    lines.push(cb && cb.executable
+      ? `     band position CORPUS grain (${TEXT_LEVEL_METRICS.length} text-level metrics over`
+        + ` ${pool.corpusWords} word(s)): exceeded ${cb.exceeded}/${cb.scored}`
+        + ` · share ${cb.exceededShare} · mean ${cb.meanDistanceFromMedian}`
+        + ` · deepest ${cb.deepest ? `${cb.deepest.metric} ${cb.deepest.depth} ${cb.deepest.side}` : 'none'}`
+      : `     band position CORPUS grain: NOT-EXECUTABLE${cb && cb.why ? ` — ${cb.why}` : ''}`);
     lines.push(`     provenance: ${pool.provenance.citations} citation(s) · A13 rows ${pool.provenance.a13}`);
   }
   lines.push('');
@@ -1189,6 +1895,48 @@ export function tableLines(out) {
   }
   lines.push(`  TIES: ${out.ties.multiCandidateRungs} multi-candidate rung(s) · ${out.ties.ties} of`
     + ` ${out.ties.pairs} pair(s) tie · ${out.ties.tieBp} bp${out.ties.note ? ` — ${out.ties.note}` : ''}`);
+  // ⭐ (c) THE EXEMPLAR CITATION RATE — the band the provenance budget is provisional against.
+  const ec = out.exemplarCitations;
+  lines.push(ec.executable
+    ? `  EXEMPLAR CITATION RATE: ${ec.citations} citation(s) over ${ec.sentences} sentence(s)`
+      + ` = ${ec.perUnitBp} bp per unit, on ${ec.leavesRead} of ${ec.leavesTotal} leaf register(s)`
+      + `${ec.detectorLive ? '' : ' ⛔ THE DETECTOR IS DEAD'}`
+    : `  EXEMPLAR CITATION RATE: NOT-EXECUTABLE — ${ec.why}`);
+  if (ec.executable) {
+    lines.push(`        per leaf: ${ec.rows.map((r) => `${r.leaf} ${r.perUnitBp} bp`).join(' · ')}`);
+    lines.push(`        no raw prose on this machine for: ${ec.absent.join(', ') || '(none)'}`);
+    lines.push(`        the control sentence scores ${ec.detectorLive ? '> 0, so a zero above is the prose\'s' : '0 — nothing below means anything'}`);
+  }
+  // ⭐ (d) THE FIXTURE SECTION — the interested fact, both renderings, both towns.
+  if (out.fixture.executable) {
+    lines.push('');
+    lines.push(`  FIXTURE · ${out.fixture.at} · the interested fact rendered BOTH WAYS (SITTING §T.4, agenda C‴)`);
+    lines.push(`     the DM sentence below is the GATE'S OWN ILLUSTRATION, built from the holder`);
+    lines.push('     census and never projected: what the sitting is shown is the ARRANGEMENT.');
+    for (const town of out.fixture.towns) {
+      lines.push(`     ── ${town.label} (${town.seed}) · ${town.kind} · holder ${town.holder || '(none)'}`
+        + ` · standing ${town.standing}`);
+      lines.push(`        1 PLAYER, as compiled     "${quoted(town.playerCompiled)}"`);
+      lines.push(`        2 DM, INLINE replacement  "${quoted(town.renderInline.dm)}"`
+        + `   [passages differ: ${town.renderInline.passagesDiffer ? 'YES' : 'no'}]`);
+      lines.push(`        3 DM, PEN LINE beside     "${quoted(town.renderPenLine.dm)}"`);
+      lines.push(`          + pen                   ${town.renderPenLine.pen ? `"${quoted(town.renderPenLine.pen)}"` : '(none: this holder is not interested here)'}`);
+      lines.push(`        4 the compiled passage is identical on both audiences: ${town.passagesIdentical ? 'YES' : 'NO'}`);
+    }
+    lines.push(`     PAIRED-TOWN ARM over the fixture: ${out.fixture.pairedTownHolds ? 'HOLDS' : '⛔ BROKEN'}`);
+  } else {
+    lines.push(`  FIXTURE: NOT-EXECUTABLE — ${out.fixture.why}`);
+  }
+  // ⭐ (e) THE SHAPE REPORT.
+  if (out.shapes.executable) {
+    lines.push('');
+    lines.push('  SHAPES (scripts/prose-shape-report.mjs, verbatim):');
+    for (const line of out.shapes.lines) lines.push(`    ${line}`);
+  } else {
+    lines.push(`  SHAPES: NOT-EXECUTABLE — ${out.shapes.why}`);
+  }
+  lines.push(`  BANKED: ${out.banked.count} set(s) — ${out.banked.pools.join(' · ') || 'none'}`);
+  lines.push(`          ${out.banked.rule}`);
   lines.push(`  ${out.seconds} s`);
   return lines;
 }
@@ -1207,6 +1955,10 @@ async function main() {
     base: at('--base', null),
     variety: Number(at('--variety', 0)),
     exemplars: String(at('--exemplars', EXEMPLAR_DIR)),
+    section: at('--section', null),
+    pools: at('--pools', null),
+    shapes: argv.includes('--shapes'),
+    corpus: at('--corpus', null),
   });
   delete out.varietyCells;
   for (const line of tableLines(out)) console.log(line);
@@ -1215,4 +1967,4 @@ async function main() {
   console.log(`  wrote ${target}`);
 }
 
-if (process.argv[1] && process.argv[1].endsWith('taste-measure.mjs')) await main();
+if (process.argv[1] && process.argv[1].endsWith('prose-wave-gate.mjs')) await main();

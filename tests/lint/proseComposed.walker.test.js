@@ -32,7 +32,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
-  armA0b, armA1, armA11, armA13, armA3, armA5, armA6, armA9, armC7, armThread,
+  armA0b, armA1, armA11, armA13, armA3, armA5, armA6, armA9, armAmbiguity, armAspect, armC7,
+  armRestatement, armTail, armThread,
   claimTokensOf, claimsField, composedEntryOf, composedOrderOf, composedVerdictOf,
   COMPOSED_ARMS, provenanceCount, reWalkBlock, sampleOf, siblingDistance, walkComposed,
 } from '../../src/domain/prose/composedWalker.js';
@@ -183,7 +184,10 @@ describe('GUARD THE GUARD — the inputs this file judges are the real ones', ()
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
-    expect([...COMPOSED_ARMS].sort()).toEqual(['A0b', 'A1', 'A11', 'A13', 'A2', 'A3', 'A5', 'A6', 'A9', 'C7', 'Thread']);
+    expect([...COMPOSED_ARMS].sort()).toEqual([
+      'A0b', 'A1', 'A11', 'A13', 'A2', 'A3', 'A5', 'A6', 'A9', 'Ambiguity', 'Aspect', 'C7',
+      'Restatement', 'Tail', 'Thread',
+    ]);
   });
 
   it('THE SHIPPED STATE the not-executable arms rest on, asserted rather than assumed', () => {
@@ -885,6 +889,103 @@ describe('⭐⭐ Thread — adjacent sentences of a composed unit must connect (
       { fact: 'muster', key: 'muster: short', role: 'modifier', mount: 'defense.posture' },
     ]);
     expect(same.fails.map((f) => f.subject)).toEqual(['the fact already spines']);
+  });
+});
+
+describe('⭐⭐ THE REFUTERS\' GROUNDS, AS REPORTED ARMS (SITTING §T.5)', () => {
+  /** @param {string} text @returns {any} */
+  const unitOf = (text) => ({
+    id: 'DS-DEF-11 :: WALLED-STRAINED', blockId: 'DS-DEF-11', poolKey: 'WALLED-STRAINED',
+    text, pieces: [],
+  });
+  /** @param {any} out @returns {string[]} */
+  const subjects = (out) => [...out.reports, ...out.withheld].map((f) => f.subject);
+
+  it('THE GROUND: the gate read 0 owned findings while the refuters failed 26 of 42', () => {
+    // SITTING §T.5's measurement, made executable rather than remembered: the four arms below
+    // are the classes the blind refuters convicted on and no owned arm carried. They are on
+    // the ROSTER, which is what stops one of them being dropped without a red.
+    for (const arm of ['Tail', 'Aspect', 'Restatement', 'Ambiguity']) {
+      expect(COMPOSED_ARMS, `${arm} must be on the roster`).toContain(arm);
+    }
+  });
+
+  it('⛔ TAIL — a qualification hung on the end, and a real second clause that is not', () => {
+    expect(subjects(armTail(unitOf('The watch is paid out of the purse, at least for now.'))))
+      .toEqual(['a qualification hung as a tail']);
+    expect(armTail(unitOf('The watch is paid out of the purse, and the purse is thin.')).reports,
+      'a comma clause that states a fact is not a tail').toEqual([]);
+  });
+
+  it('⛔ ASPECT — a forecast and a perfect aspect on a standing fact', () => {
+    expect(subjects(armAspect(unitOf('The gate will never shut before dusk.'))))
+      .toEqual(['a forecast on a standing fact']);
+    expect(subjects(armAspect(unitOf('The watch has been paid out of the purse.'))))
+      .toEqual(['a perfect aspect on a standing fact']);
+    expect(armAspect(unitOf('The gate is shut at dusk by whoever is nearest.')).reports,
+      'a present-tense standing fact is what the register is for').toEqual([]);
+  });
+
+  it('⛔ RESTATEMENT — one sentence whose two halves carry the same content words', () => {
+    const out = armRestatement(unitOf('The muster roll is short, and the roll of the muster is short.'));
+    expect(subjects(out)).toEqual(['a fact restated inside one sentence']);
+    expect(out.reports[0].value, 'and it prints the overlap it measured').toContain('bp overlap');
+    expect(armRestatement(unitOf('The muster roll is short, and the purse is why.')).reports,
+      'a second clause that adds a fact is the thread, not a restatement').toEqual([]);
+    // ⛔ AND IT IS NOT THE THREAD RULE INVERTED: the SAME pair across two SENTENCES is exactly
+    // what Thread rewards, so the two arms must not be reading each other's evidence.
+    expect(armRestatement(unitOf('The muster roll is short. The purse is why.')).reports).toEqual([]);
+  });
+
+  it('⛔ AMBIGUITY — WITHHELD, because the channel IS the ruling', () => {
+    const out = armAmbiguity(unitOf('The north quarter stands without cover.'));
+    expect(out.reports, 'this is not a REPORT: it is a question a refuter owes').toEqual([]);
+    expect(out.withheld.map((f) => f.subject)).toEqual(['a reading that depends on the spine']);
+    expect(armAmbiguity(unitOf('The north quarter stands behind a low wall.')).withheld).toEqual([]);
+  });
+
+  it('⛔ NONE OF THE FOUR GATES: every finding is REPORT or WITHHELD, never FAIL', () => {
+    // Refuters default to FAIL when uncertain, so SITTING §T.5 recorded that "the count
+    // overstates; the classes are real". An arm cut from an overstating count and gated on the
+    // first day would refuse lawful prose, and a refused lawful face is a TRIM.
+    const plants = [
+      'The watch is paid out of the purse, at least for now.',
+      'The gate will never shut before dusk.',
+      'The muster roll is short, and the roll of the muster is short.',
+      'The north quarter stands without cover.',
+    ];
+    for (const text of plants) {
+      for (const arm of [armTail, armAspect, armRestatement, armAmbiguity]) {
+        expect(arm(unitOf(text)).fails, `${text} must not FAIL`).toEqual([]);
+      }
+    }
+  });
+
+  it('THE RATE ON THE SHIPPED CORPUS, printed — the authoring debt the REWRITE inherits', () => {
+    // The arms are landed to be run on wording sets that do not exist yet, so their rate on
+    // TODAY's prose is the only reading available and it is a REPORT. It is asserted as a
+    // BOUND rather than an exact figure: an arm firing on most of the corpus would be a
+    // detector too loose to be worth having, and one firing on none would be untested.
+    const tally = {
+      Tail: 0, Aspect: 0, Restatement: 0, Ambiguity: 0,
+    };
+    for (const entry of corpus) {
+      const unit = unitOf(entry.text);
+      if (armTail(unit).reports.length) tally.Tail += 1;
+      if (armAspect(unit).reports.length) tally.Aspect += 1;
+      if (armRestatement(unit).reports.length) tally.Restatement += 1;
+      if (armAmbiguity(unit).withheld.length) tally.Ambiguity += 1;
+    }
+    console.log(`\nSITTING §T.5's four arms on the shipped corpus (${corpus.length} variants)`
+      + `\n  Tail ${tally.Tail} · Aspect ${tally.Aspect} · Restatement ${tally.Restatement}`
+      + ` · Ambiguity ${tally.Ambiguity}\n`);
+    for (const [arm, n] of Object.entries(tally)) {
+      expect(n, `${arm} fires on more than half the corpus, which is a detector too loose to keep`)
+        .toBeLessThan(corpus.length / 2);
+    }
+    // AND THE ONE THAT DOES FIRE IS NAMED, so a future cure that silenced it reds here.
+    expect(tally.Aspect, 'the perfect aspect and the forecast are real in today\'s prose')
+      .toBeGreaterThan(0);
   });
 });
 
