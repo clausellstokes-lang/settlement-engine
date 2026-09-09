@@ -1,0 +1,149 @@
+PROOF_HEAD=ef3ee6cbd4e0b48355daad2d2c269d79e554cbbd start 23:19:10 load=2.26 2.61 3.76
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 48192 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHT
+
+
+[shift-register] 14 mechanisms, 4 named NOT mechanisms, measured at 708 pools / 2266 variants
+  variant-count-per-pool     integer+digest           3 — THIN-pool growth (car 9b), owner-gated per batch
+  face-count-per-variant     integer+integer+digest   1 — the REWRITE + FACES freeze (cars 8a-8n), one owner re-
+  vids                       digest                   none — a renumbering is REFUSED at the projector
+  pool-key-rename            digest                   none — a rename is a REPLACED cell for every town and has 
+  connective-list-length     map                      a declared row of its own — a longer list re-rolls every j
+  norm-bit                   integer+integer+integer+digest a declared row — a bit crossing the line is a CHAIR FINDIN
+  attach-set                 integer+digest           a declared ADDITIVE row per block (the classifier prints A
+  draw-formula               source                   1 — under §13 row 22 the index-stable draw lands ONCE, in 
+  face-draw-key              source                   1 — the faces land with the rewrite
+  connective-draw-key        source                   with the first list longer than one phrase
+  comparator-and-band-rule   source+integer           a declared row — a comparator change re-orders candidates 
+  fact-and-position-budget   map                      a declared row
+  registry-id                integer                  4 — TURNS (car 11), owner-gated per turn class
+  instance-key               integer                  2 — the list-position keys (car 10), owner-gated
+
+[state-key] 68 STATE-KEY paragraphs read · 46 name a field their own header declares · 110 tokens · 16 AGREE with the branch grain and are transcribed · 23 name a field in a block the census recovered NOTHING for · 71 name a field the census does not read on a block it did resolve. Nothing is written: a transcription the census does not carry would move a census row.
+  DARK-BLOCK  DS-ECO-4 :: tag
+  DARK-BLOCK  DS-ECO-4 :: highlight
+  DARK-BLOCK  DS-ECO-5 :: entrepot
+  DARK-BLOCK  DS-ECO-5 :: dependency
+  DARK-BLOCK  DS-ECO-5 :: magicRecovery
+  DARK-BLOCK  DS-ECO-7 :: tallies
+  DARK-BLOCK  DS-ECO-7 :: catalog
+  DARK-BLOCK  DS-DEF-3 :: safetyProfile.safetyLabel
+  DARK-BLOCK  DS-DEF-7 :: defense_readiness.band
+  DARK-BLOCK  DS-DEF-7 :: defense
+  DARK-BLOCK  DS-DEF-7 :: besiegingTargets
+  DARK-BLOCK  DS-DEF-10 :: DEFENSE_STRESS_STATUS
+  DARK-BLOCK  DS-WAR-4 :: aggressionPosture
+  DARK-BLOCK  DS-WAR-5 :: war_front
+  DARK-BLOCK  DS-POP-1 :: QUANTITY_BANDS
+  DARK-BLOCK  DS-POP-1 :: deficit01
+  DARK-BLOCK  DS-GEN-1 :: type
+  DARK-BLOCK  DS-GEN-1 :: tensions
+  DARK-BLOCK  DS-GEN-15 :: fabricRead
+  DARK-BLOCK  DS-FTH-4 :: tenure
+  DARK-BLOCK  DS-FTH-4 :: compound.inst.hasChurch
+  DARK-BLOCK  DS-FTH-4 :: temple
+  DARK-BLOCK  DS-FTH-4 :: standing
+  READS-OTHER DS-ECO-1 :: prosperity
+  READS-OTHER DS-ECO-1 :: tradeAccess
+  READS-OTHER DS-ECO-1 :: compound.economyOutput
+  READS-OTHER DS-ECO-1 :: economicComplexity
+  READS-OTHER DS-ECO-1 :: situationDesc
+  READS-OTHER DS-ECO-3 :: isTradeDependent
+  READS-OTHER DS-ECO-11 :: terrain
+  READS-OTHER DS-ECO-11 :: unexploited
+  READS-OTHER DS-ECO-11 :: partiallyExploited
+  READS-OTHER DS-ECO-11 :: fullyExploited
+  READS-OTHER DS-SUP-3 :: tier
+  READS-OTHER DS-POW-1 :: publicLegitimacy.label
+  READS-OTHER DS-POW-2 :: governingName
+  READS-OTHER DS-POW-3 :: ladderInstabilityOf
+  READS-OTHER DS-POW-5 :: economicBase
+  READS-OTHER DS-POW-5 :: governingName
+  READS-OTHER DS-POW-5 :: power
+  READS-OTHER DS-POW-7 :: strain
+  READS-OTHER DS-DEF-1 :: resourceAnalysis.terrain
+  READS-OTHER DS-DEF-1 :: resourceAnalysis.strategicValue
+  READS-OTHER DS-DEF-1 :: safetyProfile.guardEffectivenessDesc
+  READS-OTHER DS-DEF-2 :: config.monsterThreat
+  READS-OTHER DS-DEF-2 :: compound.inst
+  READS-OTHER DS-DEF-2 :: institutions.walls
+  READS-OTHER DS-DEF-4 :: capture
+  READS-OTHER DS-DEF-8 :: type
+  READS-OTHER DS-DEF-8 :: DEFENSE_STRESS_STATUS
+  READS-OTHER DS-DEF-8 :: stress.summary
+  READS-OTHER DS-DEF-8 :: stress.viabilityNote
+  READS-OTHER DS-DEF-8 :: summary
+  READS-OTHER DS-DEF-8 :: viabilityNote
+  READS-OTHER DS-DEF-9 :: activeChains[].magicNote
+  READS-OTHER DS-WAR-1 :: settlementWarStatus
+  READS-OTHER DS-WAR-2 :: complianceState
+  READS-OTHER DS-WAR-3 :: faith
+  READS-OTHER DS-STR-1 :: stress[].type
+  READS-OTHER DS-STR-2 :: counterforceAssessment
+  READS-OTHER DS-STR-2 :: synergyAssessment
+  READS-OTHER DS-CND-1 :: severityBand
+  READS-OTHER DS-FTH-3 :: standing
+  READS-OTHER DS-FTH-3 :: legitimacy
+  READS-OTHER DS-FTH-3 :: suppressed
+  READS-OTHER DS-FTH-3 :: deities[ref].covert
+  READS-OTHER DS-GEN-2 :: issue
+  READS-OTHER DS-GEN-2 :: stakes
+  READS-OTHER DS-GEN-3 :: readiness.label
+  READS-OTHER DS-GEN-3 :: foodSecurity.label
+  READS-OTHER DS-GEN-7 :: type
+  READS-OTHER DS-GEN-7 :: severity
+  READS-OTHER DS-GEN-8 :: yearsAgo
+  READS-OTHER DS-GEN-8 :: ancientRuin.yearsAgo
+  READS-OTHER DS-REL-1 :: relationshipType
+  READS-OTHER DS-REL-2 :: flagDriven
+  READS-OTHER DS-GEN-9 :: historicalEvents[].type
+  READS-OTHER DS-GEN-9 :: severity
+  READS-OTHER DS-GEN-9 :: major
+  READS-OTHER DS-GEN-9 :: anchored
+  READS-OTHER DS-GEN-9 :: founding
+  READS-OTHER DS-GEN-9 :: age
+  READS-OTHER DS-GEN-9 :: founding.reason
+  READS-OTHER DS-GEN-9 :: founding.initialChallenge
+  READS-OTHER DS-GEN-9 :: history
+  READS-OTHER DS-GEN-16 :: lastingEffects
+  READS-OTHER DS-GEN-16 :: type
+  READS-OTHER DS-GEN-16 :: anchored
+  READS-OTHER DS-GEN-17 :: hasCourtSystem
+  READS-OTHER DS-GEN-17 :: hasPrison
+  READS-OTHER DS-GEN-17 :: hasNavy
+  READS-OTHER DS-GEN-17 :: hasMagicInst
+  READS-OTHER DS-GEN-17 :: hasGranary
+  READS-OTHER DS-GEN-17 :: hasHospital
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 21882ms
+     × every config produces byte-identical output to the golden master 21876ms
+
+[compose] 8496 reads over 708 pools x 2 audiences x 6 seeds · 8370 composed a unit · drift 0
+[compose] base-side synthesis checked on 73284 cells of 1050 rows · mismatches 0
+[compose] recorded cells whose authored vid and audible index differ: 0 of 73284 · mixed pools in the corpus 12 · reached by the DRIFT run 2 (DS-ECO-6 :: TIER: minor shadow activity (≥3) | DS-POW-1 :: governanceFractured true)
+
+[drawFace] 10,000 seeds over four faces: 2448 / 2533 / 2500 / 2519 · worst deviation 1.201 SE
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1242ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 11ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 4227ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 12ms
+ ❯ tests/lint/writerReach.walker.test.js (56 tests | 1 failed) 69552ms
+     × the declared DARK register is structurally lawful and every row is live-verified 14ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/lint/premiumGateSingleSource.test.js (7 tests | 1 failed) 352346ms
+     × the census equals the set of src files spelling a raw premium comparison 350198ms
+ ❯ tests/lint/controlBytes.test.js (4 tests | 1 failed) 352899ms
+     × no raw control bytes (C0 except tab/LF/CR, plus DEL) anywhere in src/** or tests/** 352887ms
+ ❯ tests/lint/hazardRegistryFailClosed.test.js (33 tests | 1 failed) 350768ms
+     × exits ZERO on a well-formed registry (so every red below is attributable) 347488ms
+ ❯ tests/lint/implicitNeutralSingleSource.test.js (6 tests | 1 failed) 352661ms
+     × no file except effectiveNeighbours.js mints an implicit neutral neighbour 350379ms
+ ❯ tests/domain/intentAtlasSoakDistiller.test.js (7 tests | 1 failed) 376275ms
+     × the documented default run reproduces the committed distillate byte for byte 373571ms
+[ai-spend-alarm] dispatch failed (not fatal): network down
+Not implemented: HTMLMediaElement's pause() method
+Not implemented: HTMLMediaElement's load() method
