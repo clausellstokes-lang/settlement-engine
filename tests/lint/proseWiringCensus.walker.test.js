@@ -1069,7 +1069,10 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
     expect(objectClassOf('WALLED-STRAINED')).toBe('wall');
     expect(objectClassOf('Disasters & Famine: NO reserves, NO medical provision')).toBe('store');
     expect(objectClassOf('MOOD: calm'), 'a key naming no civic object gets none').toBe(null);
-    expect(Object.keys(CIVIC_OBJECT_CLASSES).length, 'the list is closed at ten classes').toBe(10);
+    // ⛔ ELEVEN SINCE REWRITE car 8a-8 (SITTING §T.5's T-F12 re-cut): `storehouse` split out of
+    // `store`, because the word `granary` named two different civic objects and one class
+    // could not tell the STOCK from the BUILDING THAT HOLDS IT. Closed at eleven.
+    expect(Object.keys(CIVIC_OBJECT_CLASSES).length, 'the list is closed at eleven classes').toBe(11);
     // THE SAME-CLASS ATTACH, convicted: two keys of one block naming one object.
     const spine = 'Disasters & Famine: NO reserves, NO medical provision';
     const modifier = 'stores: short';
@@ -1084,7 +1087,8 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
     // admitted a `care` modifier beside a spine that already names the hospital. The census now
     // records the SET and a refusal reads the INTERSECTION.
     expect(objectClassesOf('Disasters & Famine: granary AND hospital'),
-      'the key names a store AND a care house, in the frozen list\'s order').toEqual(['store', 'care']);
+      'the key lists two BUILDINGS — a storehouse and a care house — and no stock level')
+      .toEqual(['care', 'storehouse']);
     expect(objectClassesOf('Disasters & Famine: NO reserves, NO medical provision'),
       'and the shipped key the walker used to pin as `store` alone').toEqual(['store', 'care']);
     expect(objectClassesOf('MOOD: calm'), 'a key naming no civic object gets an empty set').toEqual([]);
@@ -1093,8 +1097,57 @@ describe('car 0 — `covert`, `objectClass` and the numeric key', () => {
       'the SET refuses what the first class admitted: both name the care house').toBe(true);
     expect(intersects('Disasters & Famine: granary AND hospital', 'WALLED-STRAINED'),
       'and a modifier over a different object still attaches').toBe(false);
-    expect(committedSpines.filter((r) => (r.objectClasses || []).length > 1).length,
-      'shipped keys naming MORE THAN ONE class, which first-wins decided silently').toBe(12);
+    // ⭐⭐ REWRITE car 8a-8 — THE FIVE WAIVED REFUSALS, EACH WITH ITS NEW VERDICT (SITTING §T.5;
+    // TASTE M.15). Four of the seven attach sites ARCH §6.3–§6.5 specifies were refused by the
+    // key-string proxy; the taste WAIVED them behind `--taste` and handed the sitting the
+    // measurement. Re-cut, all five are LAWFUL PROJECTIONS and each on a stated ground.
+    //
+    //   THREE collided on the POLARITY MARKER T-F3 requires the key to carry. `country: pressed
+    //   (walled)` is about the COUNTRY, which is not a civic object of the town at all; the
+    //   `(walled)` was one rule's word being read by another. Stripped, the key names nothing.
+    expect(objectClassesOf('country: pressed (walled)'),
+      'the country is not a civic object; the marker was T-F3\'s and not the writer\'s').toEqual([]);
+    expect(objectClassesOf('country: pressed (unwalled)')).toEqual([]);
+    expect(intersects('country: pressed (walled)', 'WALLED-STRAINED')).toBe(false);
+    expect(intersects('country: pressed (unwalled)', 'UNWALLED-LARGE')).toBe(false);
+    expect(intersects('country: pressed (unwalled)', 'UNWALLED-SMALL')).toBe(false);
+    //   TWO collided on the BUILDING/STOCK conflation. The spine LISTS BUILDINGS; the modifier
+    //   speaks about the STOCK LEVEL, which is a fact the list does not carry.
+    expect(intersects('stores: short', 'Disasters & Famine: granary AND hospital')).toBe(false);
+    expect(intersects('stores: import-fed', 'Disasters & Famine: granary AND hospital')).toBe(false);
+    // ⛔⛔ AND THE GUARD STILL BITES WHERE ARCH §6.4 SAYS IT MUST — "only the two `NO reserves`
+    // cells are held". Those two spines carry a STOCK word of their own, so they class as
+    // `store` and refuse the same modifier. The re-cut licenses the three building rows and
+    // refuses the two stock rows, which is the architecture's own ruling reproduced by the
+    // proxy rather than waived around.
+    expect(intersects('stores: short', 'Disasters & Famine: NO reserves, hospital present')).toBe(true);
+    expect(intersects('stores: short', 'Disasters & Famine: NO reserves, NO medical provision')).toBe(true);
+    // AND THE CONSERVATIVE HALF OF THE SPLIT: a storehouse standing ALONE reads as its stock,
+    // so a stock modifier is still refused beside `GRANARY: thin`.
+    expect(objectClassesOf('GRANARY: thin')).toEqual(['store', 'storehouse']);
+    expect(intersects('stores: short', 'GRANARY: thin'),
+      'a lone granary is about what is in it, so the restatement is still caught').toBe(true);
+    // ⛔ 12 -> 17 AT REWRITE car 8a-8, and the five are named rather than counted: the four
+    // `DS-ECO-2 :: GRANARY: <band>` rows and `DS-DEF-6 :: Logistics & Supply: Granary in
+    // isolation` gain `storehouse` beside the `store` they already had, because a lone
+    // storehouse reads as its stock TOO. The other six granary rows traded `store` for
+    // `storehouse` and did not change count.
+    const multi = committedSpines.filter((r) => (r.objectClasses || []).length > 1);
+    expect(multi.length, 'shipped keys naming MORE THAN ONE class').toBe(17);
+    expect(multi.filter((r) => (r.objectClasses || []).includes('storehouse'))
+      .map((r) => `${r.block} :: ${r.pool}`).sort(), 'the storehouse rows, named')
+      .toEqual([
+        'DS-DEF-2 :: Disasters & Famine: granary AND hospital',
+        'DS-DEF-2 :: Disasters & Famine: granary AND parish care only',
+        'DS-DEF-2 :: Disasters & Famine: granary, NO medical provision',
+        'DS-DEF-6 :: Logistics & Supply: Granary + port',
+        'DS-DEF-6 :: Logistics & Supply: Granary in isolation',
+        'DS-DEF-6 :: Logistics & Supply: Granary with road supply',
+        'DS-ECO-2 :: GRANARY: nearly empty',
+        'DS-ECO-2 :: GRANARY: stocked',
+        'DS-ECO-2 :: GRANARY: thin',
+        'DS-ECO-2 :: GRANARY: well stocked',
+      ]);
     // ⛔ NOT-EXECUTABLE ON THE MODIFIER SIDE, DECLARED (REWRITE car 8a-3). TASTE car M-2 pins
     // `stores: import-fed` here — a modifier key naming a STORE and a MARKET, which is why the
     // T-F12 refusal must read the SET on the modifier side too. This tree has no modifier row

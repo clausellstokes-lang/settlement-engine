@@ -1301,7 +1301,12 @@ export const JS_METHOD_TAILS = Object.freeze(new Set([
 export const CIVIC_OBJECT_CLASSES = Object.freeze({
   wall: Object.freeze(['wall', 'walled', 'unwalled', 'perimeter', 'rampart', 'palisade', 'gate']),
   force: Object.freeze(['garrison', 'militia', 'muster', 'watch', 'guard', 'soldier', 'patrol', 'armed']),
-  store: Object.freeze(['granary', 'stores', 'reserve', 'reserves', 'stock', 'larder', 'harvest']),
+  // ⛔⛔ `granary` LEFT THIS CLASS AT REWRITE car 8a-8 (SITTING §T.5's T-F12 re-cut). The word
+  // named two different civic objects and the class could not tell them apart: `GRANARY: thin`
+  // is about the STOCK, and `Disasters & Famine: granary AND hospital` is about WHICH BUILDINGS
+  // EXIST. One class for both refused `stores: short` beside the very attach site ARCH §8.3's
+  // own worked card names. The STOCK words stay here; the BUILDING has its own class below.
+  store: Object.freeze(['stores', 'reserve', 'reserves', 'stock', 'larder', 'harvest']),
   market: Object.freeze(['market', 'trade', 'export', 'import', 'commerce', 'merchant', 'caravan']),
   law: Object.freeze(['court', 'prison', 'gaol', 'law', 'justice', 'magistrate', 'assize']),
   temple: Object.freeze(['temple', 'shrine', 'church', 'parish', 'clergy', 'faith', 'patron']),
@@ -1309,7 +1314,32 @@ export const CIVIC_OBJECT_CLASSES = Object.freeze({
   hall: Object.freeze(['hall', 'council', 'charter', 'seat', 'office', 'chamber', 'moot']),
   care: Object.freeze(['hospital', 'infirmary', 'healer', 'medical', 'physician', 'ward']),
   craft: Object.freeze(['forge', 'smith', 'workshop', 'guild', 'craft', 'mill', 'yard']),
+  // ⭐ THE BUILDING THAT HOLDS THE STOCK, split out of `store` at REWRITE car 8a-8. A key
+  // naming it ALONGSIDE ANOTHER CIVIC OBJECT is listing buildings; a key naming it ALONE is
+  // speaking about what is in it, and `objectClassesOf` reads it as the stock there too. That
+  // asymmetry is deliberate and it errs SAFE: a lone `granary` keeps `store`, so a stock
+  // modifier is still refused beside it.
+  storehouse: Object.freeze(['granary', 'silo', 'storehouse', 'warehouse']),
 });
+
+/**
+ * ⛔⛔ THE POLARITY MARKER A SIBLING KEY CARRIES BECAUSE T-F3 REQUIRES IT (REWRITE car 8a-8).
+ *
+ * T-F3 makes a relation that flips with the spine's polarity into TWO pools with disjoint
+ * attach sets, and naming that pair puts the SPINE'S POLARITY in the modifier's key:
+ * `country: pressed (walled)` and `country: pressed (unwalled)`. T-F12 then read `walled` as a
+ * civic object the key names, so the modifier collided with every DS-DEF-11 spine on a word
+ * one rule made the other rule write. Three of the taste's five waived refusals were that.
+ *
+ * ⛔ A CLOSED LIST OF POLARITY WORDS, NOT "ANY TRAILING PARENTHETICAL". A parenthetical can
+ * name a real object, and a rule that stripped all of them would blind the guard wherever a
+ * writer used one. These eight are values of a boolean-ish typed field, and nothing else.
+ *
+ * ⛔ AND IT MOVES NO SHIPPED ROW: measured, ZERO of the 708 shipped keys carries a trailing
+ * polarity parenthetical, because only a T-F3 SIBLING PAIR needs one and no shipped pool is a
+ * modifier. The cure bites exactly where the defect was.
+ */
+const POLARITY_MARKER = /\s*\((?:walled|unwalled|present|absent|revealed|covert|true|false)\)\s*$/i;
 
 /**
  * ⭐ EVERY civic object class a pool key names, in the frozen list's own order — never the
@@ -1326,10 +1356,21 @@ export const CIVIC_OBJECT_CLASSES = Object.freeze({
  * @returns {string[]} every matching class, in the frozen list's order
  */
 export function objectClassesOf(poolKey) {
-  const words = new Set(String(poolKey).toLowerCase().split(/[^a-z]+/).filter(Boolean));
-  return Object.entries(CIVIC_OBJECT_CLASSES)
+  // ⭐ THE T-F3 POLARITY MARKER IS STRIPPED FIRST (REWRITE car 8a-8): it is the sibling rule's
+  // word and not the writer's, so reading it as a civic object made one rule refuse another.
+  const key = String(poolKey).replace(POLARITY_MARKER, '');
+  const words = new Set(key.toLowerCase().split(/[^a-z]+/).filter(Boolean));
+  const classes = Object.entries(CIVIC_OBJECT_CLASSES)
     .filter(([, tokens]) => tokens.some((token) => words.has(token)))
     .map(([klass]) => klass);
+  // ⭐ A STOREHOUSE STANDING ALONE IS READ AS ITS STOCK, which is the conservative half of the
+  // split: `GRANARY: thin` names one object and is about what is in it, so a `stores:` modifier
+  // beside it is still a restatement and is still refused. A storehouse named ALONGSIDE another
+  // civic object — `granary AND hospital` — is a list of buildings, and a stock modifier beside
+  // it adds a fact rather than repeating one. ARCH §6.4 says exactly that in words: only the two
+  // `NO reserves` cells are held, and those two carry a STOCK word of their own.
+  if (classes.length === 1 && classes[0] === 'storehouse') classes.unshift('store');
+  return classes;
 }
 
 /**

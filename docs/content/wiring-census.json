@@ -1880,10 +1880,10 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store",
-        "care"
+        "care",
+        "storehouse"
       ],
-      "objectClass": "store",
+      "objectClass": "care",
       "sites": [
         "defense.threatAssessment"
       ],
@@ -1943,10 +1943,10 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store",
-        "temple"
+        "temple",
+        "storehouse"
       ],
-      "objectClass": "store",
+      "objectClass": "temple",
       "sites": [
         "defense.threatAssessment"
       ],
@@ -2006,10 +2006,10 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store",
-        "care"
+        "care",
+        "storehouse"
       ],
-      "objectClass": "store",
+      "objectClass": "care",
       "sites": [
         "defense.threatAssessment"
       ],
@@ -4266,10 +4266,10 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store",
-        "road"
+        "road",
+        "storehouse"
       ],
-      "objectClass": "store",
+      "objectClass": "road",
       "sites": [
         "defense.supportingCapabilities"
       ],
@@ -4313,7 +4313,8 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store"
+        "store",
+        "storehouse"
       ],
       "objectClass": "store",
       "sites": [
@@ -4362,10 +4363,10 @@
       "absent": {},
       "covert": false,
       "objectClasses": [
-        "store",
-        "road"
+        "road",
+        "storehouse"
       ],
-      "objectClass": "store",
+      "objectClass": "road",
       "sites": [
         "defense.supportingCapabilities"
       ],
@@ -7370,7 +7371,8 @@
       },
       "covert": false,
       "objectClasses": [
-        "store"
+        "store",
+        "storehouse"
       ],
       "objectClass": "store",
       "sites": [
@@ -7448,7 +7450,8 @@
       },
       "covert": false,
       "objectClasses": [
-        "store"
+        "store",
+        "storehouse"
       ],
       "objectClass": "store",
       "sites": [
@@ -7526,7 +7529,8 @@
       },
       "covert": false,
       "objectClasses": [
-        "store"
+        "store",
+        "storehouse"
       ],
       "objectClass": "store",
       "sites": [
@@ -7603,7 +7607,8 @@
       },
       "covert": false,
       "objectClasses": [
-        "store"
+        "store",
+        "storehouse"
       ],
       "objectClass": "store",
       "sites": [
