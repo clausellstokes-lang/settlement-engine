@@ -210,8 +210,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
   test('ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers', () => {
     // A census that resolved nothing and a census that resolved everything are both useless
     // and both look healthy from a distance. The arm pins the split.
-    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(340);
-    expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(368);
+    expect(summary.resolved, 'pools that reached a recovery RUNG').toBe(361);
+    expect(summary.unresolved, 'pools reported WIRING-UNRESOLVED with a reason').toBe(347);
     expect(summary.resolved + summary.unresolved, 'and the two exhaust the census').toBe(summary.total);
     expect(summary.resolved, 'zero resolved rows would mean the reader is dark').toBeGreaterThan(0);
     expect(summary.unresolved, 'zero unresolved rows would mean it is guessing').toBeGreaterThan(0);
@@ -228,8 +228,8 @@ describe('the wiring census — TOTALITY over the corpus', () => {
     // read. Sweep plant #84 makes the pair non-vacuous by execution: the literal rung
     // returning `predicate: []` unconditionally reds these two and leaves the split above
     // green, which is exactly the blindness plant #80 cannot see.
-    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(207);
-    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(207);
+    expect(summary.resolvedWithPredicate, 'RESOLVED rows carrying at least one predicate row').toBe(229);
+    expect(summary.resolvedWithCleanPredicate, 'and of those, every row a readable comparison').toBe(229);
     expect(summary.resolvedWithPredicate, 'a rung reached is never fewer than a predicate read')
       .toBeLessThanOrEqual(summary.resolved);
     expect(summary.resolvedWithCleanPredicate).toBeLessThanOrEqual(summary.resolvedWithPredicate);
@@ -280,7 +280,7 @@ describe('the census printed BESIDE the composed-fill census (report-only)', () 
     expect(summary.slotless.length, 'pools naming a slot the block\'s bag never fills').toBe(65);
     expect(summary.bagless.length, 'pools in a block with no bag at all').toBe(140);
     expect(summary.predicatesOverUnreadFields.length, 'predicates over a field no composer holds').toBe(99);
-    expect(summary.syntheticTableFields, 'and the table rung\'s own labels, counted apart').toBe(100);
+    expect(summary.syntheticTableFields, 'and the table rung\'s own labels, counted apart').toBe(122);
   });
 });
 
@@ -647,7 +647,10 @@ describe('THE MAP READ THE OTHER WAY — fact → text, and the three tiers', ()
     const facts = factIndex(spines);
     // 63 AND NOT 59 SINCE SEAM car 3h: DS-DEF-2's four exposed key tables add four synthetic
     // table labels to the inverse, one per table, and no ordinary reading moved with them.
-    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(63);
+    // 68 AND NOT 63 SINCE REWRITE car 8b-W: five more tables, five more labels — DS-DEF-1's
+    // readiness bands, DS-DEF-3's two, DS-DEF-4's capture ladder and DS-DEF-6's supply family.
+    // Still no ordinary reading moved: every one of the five is a label this instrument minted.
+    expect(facts.length, 'distinct readings a key function conjoins, at this tip').toBe(68);
     const poolsNamed = new Set(facts.flatMap((f) => f.pools));
     const resolvedWithFields = spines.filter((r) => r.predicate.length > 0);
     expect(poolsNamed.size, 'every pool with a recovered predicate appears in the inverse')
@@ -838,7 +841,7 @@ describe('the source readers themselves', () => {
     // two counts are asserted EQUAL, so the next same-named pair cannot go quiet.
     expect(census.consulted, 'and the ladder actually walks every one of them').toBe(census.functions);
     expect(census.consulted, 'as an integer, not only as an equality').toBe(118);
-    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(33);
+    expect(census.tables, 'module-level key tables (object shape and pair-array shape)').toBe(38);
   });
 
   test('a reader that went dark would report zero, so both readers are pinned against a fixture', () => {
@@ -880,8 +883,8 @@ describe('car 0 — `reads`, and the NARROWS line that may narrow it', () => {
     // day they diverge is the day a modifier row is born and this line must move deliberately.
     expect(committed.rows.length, 'the census still covers every pool').toBe(708);
     expect(committedSpines.length, 'of which SPINES, the population the totals count').toBe(708);
-    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(309);
-    expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(399);
+    expect(committed.totals.branchGrainRows, 'rows whose selecting branch was recovered').toBe(330);
+    expect(committed.totals.functionGrainRows, 'and rows that fall back, fail-closed').toBe(378);
     expect(committed.totals.branchGrainRows + committed.totals.functionGrainRows).toBe(708);
     for (const row of committed.rows) {
       expect(['branch', 'function'], `${row.pool} names its grain`).toContain(row.readsGrain);
@@ -1011,7 +1014,7 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // ⚠ THE THREE MOVED WITH THE GRAIN (car 0e). `absent` is keyed on `reads`, so the branch
     // grain shrinks the read paths from 757 to 529 and the distribution with them; nothing
     // about a path's absence semantics changed, only how many paths a pool is entitled to.
-    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(370);
+    expect(totals.measured, 'read paths whose absence a predicate can see').toBe(367);
     expect(totals.default, 'read paths where a fallback hides it').toBe(3);
     expect(totals['not-produced'], 'read paths no writer in the estate produces').toBe(60);
     // ⭐ THE FOURTH LABEL, ADDED AT MEASURE CAR 3 (the fold's cure 8, and the shape its P5
@@ -1021,12 +1024,12 @@ describe('car 0 — `absent`: a measurement, or a default wearing a reading\'s c
     // eighteen cells, and every one of them was a wrong verdict rather than a finding.
     expect(totals['method-call'], 'read paths whose tail is a builtin, not a field').toBe(18);
     expect(Object.values(totals).reduce((a, b) => a + b, 0), 'and the four labels partition the read paths')
-      .toBe(451);
+      .toBe(448);
     // ⛔ THE TABLE RUNG CARRIES NO ABSENCE RECORD (car 10, cure 4, applied to a new column).
     // Rung 3's field is `"<reader> (via <TABLE> in <file>)"` — this instrument's own label —
     // so asking a producer index about it answers `not-produced` on every table row BY
     // CONSTRUCTION. The rows are counted, never dropped in silence.
-    expect(committed.totals.tableRungRowsWithoutAbsence, 'and they are counted').toBe(100);
+    expect(committed.totals.tableRungRowsWithoutAbsence, 'and they are counted').toBe(122);
     for (const row of committed.rows) {
       if (row.rung === 'table') expect(Object.keys(row.absent), `${row.pool} carries no absence record`).toEqual([]);
     }
@@ -1398,7 +1401,7 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     const gen3 = coverage.find((c) => c.block === 'DS-GEN-3');
     expect(gen3.spines, 'DS-GEN-3 is the estate\'s widest block').toBe(42);
     expect(gen3.spinesReachedBp, 'and every one of its spines can carry a modifier').toBe(10000);
-    expect(coverage.length, 'and that is fifty of the sixty-eight blocks').toBe(50);
+    expect(coverage.length, 'and that is fifty-one of the sixty-eight blocks').toBe(51);
     // ⭐⭐ THE RULING'S OWN CONSEQUENCE, MEASURED (SITTING §O.1, car 0e). Under the
     // FUNCTION-WIDE grain twenty-six of the fifty composable blocks read 0 bp, because on a
     // block whose pools come from ONE ladder every spine carried the same read set. The
@@ -1406,8 +1409,8 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     // §6.3 works its whole example — is one: `country: pressed (walled)` attaching to
     // STRAINED is reachable at this grain and was not at the last.
     const dark = coverage.filter((c) => c.spinesReachedBp === 0).map((c) => c.block);
-    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(21);
-    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(25);
+    expect(dark.length, 'blocks where no fact of the block can attach to any spine of it').toBe(20);
+    expect(committed.grains.function.cannotAttach.length, 'against the grain the ruling replaced').toBe(24);
     expect(committed.grains.function.cannotAttach.filter((b) => !dark.includes(b)),
       'and these four are what the branch grain buys')
       .toEqual(['DS-DEF-11', 'DS-DEF-9', 'DS-ECO-9', 'DS-POW-3']);
@@ -1455,15 +1458,15 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
 
   test('the fact budget is counted over RESOLVED rows and refuses the rest', () => {
     const budget = committed.factBudget;
-    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(49);
-    expect(budget.executable, 'counted over the RESOLVED rows').toBe(340);
+    expect(budget.zeroK, 'RESOLVED spines that can never take a modifier: k = 3 - |reads| <= 0').toBe(48);
+    expect(budget.executable, 'counted over the RESOLVED rows').toBe(361);
     // ⛔ NOT-EXECUTABLE, NEVER k = 3. An UNRESOLVED row reads `[]`, which would answer "three
     // free seats" on a pool whose predicate nobody has recovered — the friendliest number,
     // and the §908 law forbids exactly that.
-    expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(368);
+    expect(budget.notExecutable, 'and the UNRESOLVED rows declare themselves').toBe(347);
     expect(budget.executable + budget.notExecutable).toBe(708);
     const summed = budget.histogram.reduce((total, [, n]) => total + n, 0);
-    expect(summed, 'the histogram carries every executable row once').toBe(340);
+    expect(summed, 'the histogram carries every executable row once').toBe(361);
     // The rule itself, on a fixture: a three-field spine has no seat and a one-field spine has two.
     const rows = [
       { block: 'B', pool: 'p1', status: WIRING_STATUS.RESOLVED, reads: ['a', 'b', 'c'] },
@@ -1473,10 +1476,15 @@ describe('car 0 — the derived ATTACH sets, their coverage, and the fact budget
     expect(factBudget(rows).zeroK).toBe(1);
     expect(factBudget(rows).notExecutable).toBe(1);
     expect(Object.fromEntries(factBudget(rows).histogram)).toEqual({ 0: 1, 2: 1 });
-    // AND THE BRANCH GRAIN IS WHAT THAT 49 IS COUNTED OVER, with the function-wide reading
+    // AND THE BRANCH GRAIN IS WHAT THAT 48 IS COUNTED OVER, with the function-wide reading
     // beside it: the ruling's cost is 72 rows that leave k = 0, printed in ONE table.
-    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(49);
-    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(121);
+    // 49 → 48 AND 121 → 120 AT REWRITE car 8b-W, and the mover is one row rather than the
+    // twenty-one: DS-GEN-6's `isolated` was falsely attributed to the defence desk's
+    // `supplyLogisticsPoolKey` — its comparison literal `'isolated'` is also that pool's NAME —
+    // and read three fields for k = 0. It now resolves through its OWN desk's table at k = 2.
+    // The twenty-one newly RESOLVED rows all land at k = 2 and none of them is a zero.
+    expect(committed.grains.branch.zeroK, 'the shipped grain').toBe(48);
+    expect(committed.grains.function.zeroK, 'and the grain the ruling replaced').toBe(120);
   });
 });
 
@@ -1508,9 +1516,9 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // construction per reachable (kind x fact x value), so the count per kind is its input.
     const custom = committed.customReachable;
     expect(custom.byKind.length, 'the eight authorable kinds, enumerated from the manifest').toBe(8);
-    expect(custom.rows.length, 'in-house (block, pool) predicates a custom definition can reach').toBe(21);
+    expect(custom.rows.length, 'in-house (block, pool) predicates a custom definition can reach').toBe(25);
     expect(Object.fromEntries(custom.byKind), 'per kind, as integers').toEqual({
-      services: 6, resources: 6, institutions: 5, factions: 2, tradeGoods: 2, stressors: 0, deities: 0, traditions: 0,
+      services: 7, resources: 7, institutions: 6, factions: 2, tradeGoods: 3, stressors: 0, deities: 0, traditions: 0,
     });
     for (const row of custom.rows) {
       expect(['bucket', 'field', 'value'], `${row.pool} names which limb caught it`).toContain(row.via);
@@ -1564,15 +1572,25 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // only by a field some OTHER branch of the same key function tested. 89 AND NOT 85 SINCE
     // SEAM car 3h: the four exposed DS-DEF-2 tables each root in their own synthetic label,
     // which is a root no relation endpoint can ever meet — so the finding below is unmoved
-    // and the denominator it is measured against grew by exactly four.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(89);
+    // and the denominator it is measured against grew by exactly four. 94 AND NOT 89 SINCE
+    // REWRITE car 8b-W, for the same reason and by the same arithmetic: five more tables.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(94);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
-    // ⭐ TWO ROWS JOIN ON ONE ENDPOINT AT THE LEAF, and one of them is the ARCH document's
+    // ⭐ THREE ROWS JOIN ON ONE ENDPOINT AT THE LEAF, and one of them is the ARCH document's
     // own worked edge — `econOutput` degrading `economicGates.military`. Even that edge is
     // half-joined, because the desks read the gate as an unrooted parameter.
-    expect(join.leafEither, 'two rows touch a desk read at the leaf').toBe(2);
+    // ⭐ THE THIRD ARRIVED WITH REWRITE car 8b-W AND IS WORTH THE LINE, because it shows what
+    // a table rung buys and what it does not. `signal:captureState -> cause:captured` now
+    // touches a desk read at the LEAF, because rung 3's label carries the key function's own
+    // PARAMETER NAME inside it (`text(captureState) (via …)`) and the leaf normaliser splits
+    // the label into segments. DS-DEF-4's capture pools really are about that signal, so the
+    // touch is true rather than an artefact — but `strictEither` is still 0 above, because the
+    // STRICT join reads the label's ROOT, which is the label. A wiring car buys the leaf-level
+    // reach and does not buy the strict one; only a read path spelled as the world spells it
+    // would.
+    expect(join.leafEither, 'three rows touch a desk read at the leaf').toBe(3);
     expect(join.leafRows, 'and none of them on BOTH endpoints').toEqual([]);
     // THE CONSEQUENCE, stated as an executable fact rather than a caution: until a
     // normalisation lands, the clause seat has no licensed row and every modifier at this
@@ -1642,8 +1660,9 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
       expect(row.at, `${row.endpoint} carries a citation a reader can open`).not.toBe('');
     }
     // 19 AND NOT 15 SINCE SEAM car 3h: four more table labels, four more roots the draft
-    // excludes by name rather than offering as a join target.
-    expect(draft.syntheticRootsExcluded, 'the instrument\'s own table labels are not join targets').toBe(19);
+    // excludes by name rather than offering as a join target. 24 AND NOT 19 SINCE REWRITE
+    // car 8b-W: the defense desk's five remaining tables, excluded on the same ground.
+    expect(draft.syntheticRootsExcluded, 'the instrument\'s own table labels are not join targets').toBe(24);
     // ⭐ THE THREE IDENTIFIER ROWS, which are the draft's whole strength and come from the
     // census's own read paths — including ARCH §5.2's OWN WORKED EDGE, whose gate endpoint
     // the defence desk reads at `settlement.defenseProfile.economicGates.military`.
@@ -1785,23 +1804,31 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // ⚠ MEASURED AT CAR 5c, AFTER THE CAPTURE STANDING LANDED, AND THEY DID NOT MOVE. These
     // are SOURCE counts — which record-holder kind a row's fields resolve to — and the capture
     // standing is a TOWN standing that no register row can carry. The rule moved 40 rows'
-    // `stateOrgan` and not one row's `standing`, so 114 / 3 / 591 and 191 / 5 / 415 are the
-    // same integers car 5b measured, now held.
+    // `stateOrgan` and not one row's `standing`, so 114 / 3 / 591 and 191 / 5 are the same
+    // integers car 5b measured, now held.
+    // ⭐ THE ROW COUNTS ARE STILL THOSE INTEGERS AFTER REWRITE car 8b-W, AND THE FIELD COUNT
+    // MOVED BY EXACTLY WHAT THE CAR ADDED. 415 → 444 is +31 −2: the twenty-one newly RESOLVED
+    // rows contribute the ARGUMENT NAMES the holder reader lifts out of each rung-3 label (one
+    // each for DS-DEF-1, -3 and -4; THREE each for DS-DEF-6, whose situation reader takes three
+    // parameters), and DS-GEN-6's `isolated` gives back two — it left a FALSE attribution to a
+    // defence key function for its own desk's table. Not one field changed STANDING: every one
+    // of the twenty-nine is SOURCE-UNRESOLVED on the `no-mapping` ground, which is what a
+    // parameter name lifted from an instrument label must be.
     expect(summary.rows, 'ROWS by source standing').toEqual({
       LICENSED: 114, OFFICE: 3, 'SOURCE-UNRESOLVED': 591,
     });
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 415,
+      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 444,
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
     expect(Object.values(summary.fields).reduce((a, b) => a + b, 0),
-      'over this many sourced field entries').toBe(611);
+      'over this many sourced field entries').toBe(640);
     expect(summary.twoSourceRows, 'rows whose fields resolve to more than one kind').toBe(10);
-    expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
+    expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(347);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
     // from a kind with no institution behind it, and collapsing them would hide which is which.
-    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 415, 'no-institution-in-roster': 0 });
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 444, 'no-institution-in-roster': 0 });
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
       ['muster', 61], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 13],
       ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],

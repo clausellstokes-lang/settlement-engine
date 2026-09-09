@@ -1056,7 +1056,11 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect(wrong).toEqual([]);
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
-    expect({ present, absent }).toEqual({ present: 340, absent: 368 });
+    // 340 / 368 → 361 / 347 AT REWRITE car 8b-W, which tabled twenty-one defence pools that
+    // had been reporting rung 4. The split IS the census's, so this pair moves whenever a
+    // wiring car lands and the leaves are regenerated in the same act; the arm's value is the
+    // JOIN above, which is what would catch a census that moved and a leaf that did not.
+    expect({ present, absent }).toEqual({ present: 361, absent: 347 });
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 

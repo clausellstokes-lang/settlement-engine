@@ -4453,7 +4453,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "readsCount": 3,
+        "readsCount": 1,
         "attach": []
       },
       "road": {

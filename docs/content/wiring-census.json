@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
       "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "8aeeba2e1fc32113aefaa6900056902d41feeec481ee87ac3d4d06d4c62855a2",
+      "src/domain/display/stateProse/defenseStateProse.js": "0bc366748d629dbe09126e051dfe0a977c261ad2418b7e23c1198017d32f057b",
       "src/domain/display/stateProse/stressorsStateProse.js": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
       "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
@@ -24,17 +24,17 @@
     "pools": 708,
     "blocks": 68,
     "variants": 2266,
-    "resolved": 340,
-    "unresolved": 368,
-    "resolvedWithPredicate": 207,
-    "resolvedWithCleanPredicate": 207,
+    "resolved": 361,
+    "unresolved": 347,
+    "resolvedWithPredicate": 229,
+    "resolvedWithCleanPredicate": 229,
     "keyFunctions": 118,
     "keyFunctionsConsulted": 118,
-    "keyTables": 33,
+    "keyTables": 38,
     "slotless": 65,
     "bagless": 140,
     "predicatesOverUnreadFields": 99,
-    "syntheticTableFields": 100,
+    "syntheticTableFields": 122,
     "tiers": {
       "MISSING": 34,
       "THIN": 483,
@@ -49,21 +49,21 @@
     "objectClassed": 99,
     "mountedRows": 566,
     "absent": {
-      "measured": 370,
+      "measured": 367,
       "default": 3,
       "not-produced": 60,
       "method-call": 18
     },
-    "zeroK": 49,
-    "kExecutable": 340,
-    "kNotExecutable": 368,
-    "branchGrainRows": 309,
-    "functionGrainRows": 399,
-    "customReachableRows": 21,
+    "zeroK": 48,
+    "kExecutable": 361,
+    "kNotExecutable": 347,
+    "branchGrainRows": 330,
+    "functionGrainRows": 378,
+    "customReachableRows": 25,
     "relationRows": 165,
     "relationRowsJoinable": 0,
     "ratifiedAliases": 3,
-    "tableRungRowsWithoutAbsence": 100,
+    "tableRungRowsWithoutAbsence": 122,
     "modifierEligibleFactsByTab": [
       [
         "viability",
@@ -138,15 +138,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "STRONG"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "READINESS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -156,13 +168,15 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2487,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -182,15 +196,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "ADEQUATE"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "READINESS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -200,13 +226,15 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2578,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -226,15 +254,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "WEAK"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "READINESS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -244,13 +284,15 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 3099,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -270,15 +312,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "CRITICAL"
+        }
+      ],
+      "branchReads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "READINESS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -288,13 +342,15 @@
         "defense.postureHeader"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1823,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "readinessScore": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2170,15 +2226,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "Very Safe"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2188,13 +2256,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2214,15 +2284,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "Safe"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2232,13 +2314,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 26,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2258,15 +2342,27 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "Moderate"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2276,13 +2372,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 6602,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2302,15 +2400,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "Unsafe"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2320,13 +2430,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 143,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2346,15 +2458,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "Dangerous"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2364,13 +2488,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 313,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2390,15 +2516,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "a crisis has rewritten the label"
+        }
+      ],
+      "branchReads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "PUBLIC_ORDER_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2408,13 +2546,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2852,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2434,15 +2574,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "a reading is present"
+        }
+      ],
+      "branchReads": [
+        "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "FIRST_SURVEY_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2452,13 +2604,15 @@
         "defense.publicOrder"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 9935,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "safetyLabel": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2709,15 +2863,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 3,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "none"
+        }
+      ],
+      "branchReads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRIMINAL_CAPTURE_POOL",
+      "rung": "table",
+      "reads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2727,13 +2893,15 @@
         "defense.criminalStructure"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "captureState": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2756,15 +2924,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "adversarial"
+        }
+      ],
+      "branchReads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRIMINAL_CAPTURE_POOL",
+      "rung": "table",
+      "reads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2774,13 +2954,15 @@
         "defense.criminalStructure"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "captureState": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2803,15 +2985,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 3,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "equilibrium"
+        }
+      ],
+      "branchReads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRIMINAL_CAPTURE_POOL",
+      "rung": "table",
+      "reads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2821,13 +3015,15 @@
         "defense.criminalStructure"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "captureState": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2850,15 +3046,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "corrupted"
+        }
+      ],
+      "branchReads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRIMINAL_CAPTURE_POOL",
+      "rung": "table",
+      "reads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2868,13 +3076,15 @@
         "defense.criminalStructure"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "captureState": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -2897,15 +3107,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 3,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "capture"
+        }
+      ],
+      "branchReads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "CRIMINAL_CAPTURE_POOL",
+      "rung": "table",
+      "reads": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -2915,13 +3137,15 @@
         "defense.criminalStructure"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": null,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "captureState": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -4253,15 +4477,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, port"
+        }
+      ],
+      "branchReads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -4274,13 +4510,17 @@
         "defense.supportingCapabilities"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 1354,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "granary": "",
+          "port": "",
+          "access": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -4300,15 +4540,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, isolated"
+        }
+      ],
+      "branchReads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -4321,13 +4573,17 @@
         "defense.supportingCapabilities"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 625,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "granary": "",
+          "port": "",
+          "access": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -4350,15 +4606,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 2,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "granary, road supply"
+        }
+      ],
+      "branchReads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -4371,13 +4639,17 @@
         "defense.supportingCapabilities"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 2969,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "granary": "",
+          "port": "",
+          "access": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -4397,15 +4669,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no reserves, port open"
+        }
+      ],
+      "branchReads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -4418,13 +4702,17 @@
         "defense.supportingCapabilities"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 768,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "granary": "",
+          "port": "",
+          "access": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -4444,15 +4732,27 @@
       "hasBag": true,
       "variants": 3,
       "grammars": 1,
-      "predicate": [],
-      "branchReads": [],
-      "fieldsRead": [],
-      "status": "WIRING-UNRESOLVED",
-      "reason": "no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it",
-      "keyFunction": "",
-      "rung": "none",
-      "reads": [],
-      "readsGrain": "function",
+      "predicate": [
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "op": "===",
+          "value": "no reserves, landlocked"
+        }
+      ],
+      "branchReads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "fieldsRead": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "SUPPLY_LOGISTICS_ROW_POOL",
+      "rung": "table",
+      "reads": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readsGrain": "branch",
       "narrowed": false,
       "absent": {},
       "covert": false,
@@ -4464,13 +4764,17 @@
         "defense.supportingCapabilities"
       ],
       "attach": [],
-      "k": null,
+      "k": 2,
       "rateBp": 4219,
       "departure": null,
       "source": {
         "kind": "",
         "kinds": [],
-        "fields": {},
+        "fields": {
+          "granary": "",
+          "port": "",
+          "access": ""
+        },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
@@ -17696,33 +18000,29 @@
       "hasBag": true,
       "variants": 4,
       "grammars": 1,
-      "predicate": [],
+      "predicate": [
+        {
+          "field": "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)",
+          "op": "===",
+          "value": "isolated"
+        }
+      ],
       "branchReads": [
-        "granary",
-        "port",
-        "settlement.config.tradeRouteAccess"
+        "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
       ],
       "fieldsRead": [
-        "granary",
-        "port",
-        "settlement.config.tradeRouteAccess"
+        "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
       ],
       "status": "RESOLVED",
       "reason": "",
-      "keyFunction": "supplyLogisticsPoolKey",
-      "rung": "literal",
+      "keyFunction": "ORIGIN_POOL_OF_ROUTE",
+      "rung": "table",
       "reads": [
-        "granary",
-        "port",
-        "settlement.config.tradeRouteAccess"
+        "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
       ],
       "readsGrain": "branch",
       "narrowed": false,
-      "absent": {
-        "granary": "measured",
-        "port": "measured",
-        "settlement.config.tradeRouteAccess": "measured"
-      },
+      "absent": {},
       "covert": false,
       "objectClasses": [],
       "objectClass": null,
@@ -17730,7 +18030,7 @@
         "overview.origin"
       ],
       "attach": [],
-      "k": 0,
+      "k": 2,
       "rateBp": 1341,
       "departure": null,
       "source": {
@@ -17739,9 +18039,7 @@
           "toll-bar"
         ],
         "fields": {
-          "granary": "",
-          "port": "",
-          "settlement.config.tradeRouteAccess": "toll-bar"
+          "tradeRouteAccess": "toll-bar"
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -39084,6 +39382,17 @@
       ]
     },
     {
+      "fact": "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-3 :: First-Survey qualification (the reading is a first look)"
+      ],
+      "variants": 3,
+      "grammars": 2,
+      "blocks": [
+        "DS-DEF-3"
+      ]
+    },
+    {
       "fact": "forces.charter.present",
       "pools": [
         "DS-DEF-5 :: charter hall PRESENT (specialist monster response)"
@@ -39281,6 +39590,22 @@
       ]
     },
     {
+      "fact": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-3 :: Very Safe",
+        "DS-DEF-3 :: Safe",
+        "DS-DEF-3 :: Moderate",
+        "DS-DEF-3 :: Unsafe",
+        "DS-DEF-3 :: Dangerous",
+        "DS-DEF-3 :: COMPOUND override (a crisis stress has rewritten the label)"
+      ],
+      "variants": 20,
+      "grammars": 8,
+      "blocks": [
+        "DS-DEF-3"
+      ]
+    },
+    {
       "fact": "reading.rungs.length",
       "pools": [
         "DS-POW-3 :: shallow ladder (few rungs recorded)"
@@ -39358,6 +39683,20 @@
       ]
     },
     {
+      "fact": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-1 :: readiness STRONG",
+        "DS-DEF-1 :: readiness ADEQUATE",
+        "DS-DEF-1 :: readiness WEAK",
+        "DS-DEF-1 :: readiness CRITICAL"
+      ],
+      "variants": 14,
+      "grammars": 8,
+      "blocks": [
+        "DS-DEF-1"
+      ]
+    },
+    {
       "fact": "settlement.defenseProfile.economicGates.military",
       "pools": [
         "DS-DEF-11 :: WALLED-STRAINED"
@@ -39377,6 +39716,36 @@
       "grammars": 1,
       "blocks": [
         "DS-DEF-8"
+      ]
+    },
+    {
+      "fact": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-6 :: Logistics & Supply: Granary + port",
+        "DS-DEF-6 :: Logistics & Supply: Granary in isolation",
+        "DS-DEF-6 :: Logistics & Supply: Granary with road supply",
+        "DS-DEF-6 :: Logistics & Supply: No reserves, port open",
+        "DS-DEF-6 :: Logistics & Supply: No reserves, landlocked"
+      ],
+      "variants": 15,
+      "grammars": 6,
+      "blocks": [
+        "DS-DEF-6"
+      ]
+    },
+    {
+      "fact": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+      "pools": [
+        "DS-DEF-4 :: capture none",
+        "DS-DEF-4 :: capture adversarial",
+        "DS-DEF-4 :: capture equilibrium",
+        "DS-DEF-4 :: capture corrupted",
+        "DS-DEF-4 :: capture capture"
+      ],
+      "variants": 15,
+      "grammars": 13,
+      "blocks": [
+        "DS-DEF-4"
       ]
     },
     {
@@ -39511,10 +39880,11 @@
     {
       "fact": "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)",
       "pools": [
-        "DS-GEN-6 :: crossroads"
+        "DS-GEN-6 :: crossroads",
+        "DS-GEN-6 :: isolated"
       ],
-      "variants": 4,
-      "grammars": 2,
+      "variants": 8,
+      "grammars": 3,
       "blocks": [
         "DS-GEN-6"
       ]
@@ -39794,6 +40164,15 @@
         "modifierMounts": []
       },
       {
+        "field": "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "foodBalance",
         "mountsSpine": 2,
         "mountsModifier": 0,
@@ -39813,11 +40192,10 @@
       },
       {
         "field": "granary",
-        "mountsSpine": 3,
+        "mountsSpine": 2,
         "mountsModifier": 0,
         "spineTabs": [
-          "economics",
-          "overview"
+          "economics"
         ],
         "modifierMounts": []
       },
@@ -39967,11 +40345,10 @@
       },
       {
         "field": "port",
-        "mountsSpine": 2,
+        "mountsSpine": 1,
         "mountsModifier": 0,
         "spineTabs": [
-          "defense",
-          "overview"
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -39986,6 +40363,15 @@
       },
       {
         "field": "prison",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse",
         "mountsSpine": 1,
         "mountsModifier": 0,
         "spineTabs": [
@@ -41466,12 +41852,20 @@
         "modifierMounts": []
       },
       {
+        "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "settlement.config",
-        "mountsSpine": 2,
+        "mountsSpine": 1,
         "mountsModifier": 14,
         "spineTabs": [
-          "defense",
-          "overview"
+          "defense"
         ],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -41739,11 +42133,29 @@
         "modifierMounts": []
       },
       {
+        "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "term",
         "mountsSpine": 1,
         "mountsModifier": 0,
         "spineTabs": [
           "war"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "defense"
         ],
         "modifierMounts": []
       },
@@ -41940,10 +42352,10 @@
     },
     {
       "block": "DS-DEF-1",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000
+      "meanReachBp": 6667
     },
     {
       "block": "DS-DEF-11",
@@ -41960,11 +42372,18 @@
       "meanReachBp": 8077
     },
     {
-      "block": "DS-DEF-4",
-      "spines": 4,
+      "block": "DS-DEF-3",
+      "spines": 7,
       "facts": 2,
       "spinesReachedBp": 10000,
       "meanReachBp": 5000
+    },
+    {
+      "block": "DS-DEF-4",
+      "spines": 9,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6667
     },
     {
       "block": "DS-DEF-5",
@@ -41975,10 +42394,10 @@
     },
     {
       "block": "DS-DEF-6",
-      "spines": 3,
-      "facts": 3,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0
+      "spines": 8,
+      "facts": 4,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5625
     },
     {
       "block": "DS-DEF-8",
@@ -42144,9 +42563,9 @@
     {
       "block": "DS-GEN-6",
       "spines": 9,
-      "facts": 9,
+      "facts": 6,
       "spinesReachedBp": 10000,
-      "meanReachBp": 8395
+      "meanReachBp": 7963
     },
     {
       "block": "DS-GEN-7",
@@ -42364,14 +42783,27 @@
     },
     {
       "block": "DS-DEF-1",
-      "spines": 4,
-      "facts": 2,
+      "spines": 8,
+      "facts": 3,
       "spinesReachedBp": 10000,
-      "meanReachBp": 5000,
+      "meanReachBp": 6667,
       "byFact": [
+        {
+          "field": "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "terrain FAVOURABLE to the defender",
+            "terrain EXPOSED",
+            "strategic value HIGH",
+            "strategic value LOW"
+          ]
+        },
         {
           "field": "text(terrain) (via TERRAIN_DEFENCE_OF in defenseStateProse.js)",
           "attach": [
+            "readiness STRONG",
+            "readiness ADEQUATE",
+            "readiness WEAK",
+            "readiness CRITICAL",
             "strategic value HIGH",
             "strategic value LOW"
           ]
@@ -42379,6 +42811,10 @@
         {
           "field": "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)",
           "attach": [
+            "readiness STRONG",
+            "readiness ADEQUATE",
+            "readiness WEAK",
+            "readiness CRITICAL",
             "terrain FAVOURABLE to the defender",
             "terrain EXPOSED"
           ]
@@ -42587,16 +43023,47 @@
       ]
     },
     {
-      "block": "DS-DEF-4",
-      "spines": 4,
+      "block": "DS-DEF-3",
+      "spines": 7,
       "facts": 2,
       "spinesReachedBp": 10000,
       "meanReachBp": 5000,
       "byFact": [
         {
+          "field": "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Very Safe",
+            "Safe",
+            "Moderate",
+            "Unsafe",
+            "Dangerous",
+            "COMPOUND override (a crisis stress has rewritten the label)"
+          ]
+        },
+        {
+          "field": "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "First-Survey qualification (the reading is a first look)"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DS-DEF-4",
+      "spines": 9,
+      "facts": 3,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 6667,
+      "byFact": [
+        {
           "field": "key (via CRIMINAL_STRUCTURE_POOL in defenseStateProse.js)",
           "attach": [
-            "structure null (nothing organized recognized)"
+            "structure null (nothing organized recognized)",
+            "capture none",
+            "capture adversarial",
+            "capture equilibrium",
+            "capture corrupted",
+            "capture capture"
           ]
         },
         {
@@ -42604,7 +43071,21 @@
           "attach": [
             "structure organized",
             "structure semi-organized",
-            "structure diffuse"
+            "structure diffuse",
+            "capture none",
+            "capture adversarial",
+            "capture equilibrium",
+            "capture corrupted",
+            "capture capture"
+          ]
+        },
+        {
+          "field": "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)",
+          "attach": [
+            "structure organized",
+            "structure semi-organized",
+            "structure diffuse",
+            "structure null (nothing organized recognized)"
           ]
         }
       ]
@@ -42725,22 +43206,48 @@
     },
     {
       "block": "DS-DEF-6",
-      "spines": 3,
-      "facts": 3,
-      "spinesReachedBp": 0,
-      "meanReachBp": 0,
+      "spines": 8,
+      "facts": 4,
+      "spinesReachedBp": 10000,
+      "meanReachBp": 5625,
       "byFact": [
         {
           "field": "blockaded",
-          "attach": []
+          "attach": [
+            "Logistics & Supply: Granary + port",
+            "Logistics & Supply: Granary in isolation",
+            "Logistics & Supply: Granary with road supply",
+            "Logistics & Supply: No reserves, port open",
+            "Logistics & Supply: No reserves, landlocked"
+          ]
         },
         {
           "field": "navy",
-          "attach": []
+          "attach": [
+            "Logistics & Supply: Granary + port",
+            "Logistics & Supply: Granary in isolation",
+            "Logistics & Supply: Granary with road supply",
+            "Logistics & Supply: No reserves, port open",
+            "Logistics & Supply: No reserves, landlocked"
+          ]
         },
         {
           "field": "port",
-          "attach": []
+          "attach": [
+            "Logistics & Supply: Granary + port",
+            "Logistics & Supply: Granary in isolation",
+            "Logistics & Supply: Granary with road supply",
+            "Logistics & Supply: No reserves, port open",
+            "Logistics & Supply: No reserves, landlocked"
+          ]
+        },
+        {
+          "field": "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)",
+          "attach": [
+            "Naval Defense: Naval force",
+            "Naval Defense: Port only",
+            "Naval Defense: Under blockade"
+          ]
         }
       ]
     },
@@ -43659,36 +44166,10 @@
     {
       "block": "DS-GEN-6",
       "spines": 9,
-      "facts": 9,
+      "facts": 6,
       "spinesReachedBp": 10000,
-      "meanReachBp": 8395,
+      "meanReachBp": 7963,
       "byFact": [
-        {
-          "field": "granary",
-          "attach": [
-            "crossroads",
-            "port",
-            "river",
-            "road",
-            "tier overlay: metropolis",
-            "tier overlay: city",
-            "tier overlay: thorp / hamlet",
-            "tier overlay: other tiers"
-          ]
-        },
-        {
-          "field": "port",
-          "attach": [
-            "crossroads",
-            "port",
-            "river",
-            "road",
-            "tier overlay: metropolis",
-            "tier overlay: city",
-            "tier overlay: thorp / hamlet",
-            "tier overlay: other tiers"
-          ]
-        },
         {
           "field": "readings",
           "attach": [
@@ -43740,19 +44221,6 @@
           ]
         },
         {
-          "field": "settlement.config.tradeRouteAccess",
-          "attach": [
-            "crossroads",
-            "port",
-            "river",
-            "road",
-            "tier overlay: metropolis",
-            "tier overlay: city",
-            "tier overlay: thorp / hamlet",
-            "tier overlay: other tiers"
-          ]
-        },
-        {
           "field": "text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)",
           "attach": [
             "crossroads",
@@ -43768,7 +44236,6 @@
           "attach": [
             "port",
             "river",
-            "isolated",
             "road",
             "tier overlay: metropolis",
             "tier overlay: city",
@@ -44516,9 +44983,9 @@
     }
   ],
   "factBudget": {
-    "zeroK": 49,
-    "executable": 340,
-    "notExecutable": 368,
+    "zeroK": 48,
+    "executable": 361,
+    "notExecutable": 347,
     "byBlock": [
       [
         "DS-ECO-12",
@@ -44573,7 +45040,7 @@
         "DS-DEF-6",
         {
           "zeroK": 3,
-          "spines": 3
+          "spines": 8
         }
       ],
       [
@@ -44605,13 +45072,6 @@
         }
       ],
       [
-        "DS-GEN-6",
-        {
-          "zeroK": 1,
-          "spines": 9
-        }
-      ],
-      [
         "DS-WAR-2",
         {
           "zeroK": 1,
@@ -44629,7 +45089,7 @@
         "DS-DEF-1",
         {
           "zeroK": 0,
-          "spines": 4
+          "spines": 8
         }
       ],
       [
@@ -44640,10 +45100,17 @@
         }
       ],
       [
+        "DS-DEF-3",
+        {
+          "zeroK": 0,
+          "spines": 7
+        }
+      ],
+      [
         "DS-DEF-4",
         {
           "zeroK": 0,
-          "spines": 4
+          "spines": 9
         }
       ],
       [
@@ -44721,6 +45188,13 @@
         {
           "zeroK": 0,
           "spines": 5
+        }
+      ],
+      [
+        "DS-GEN-6",
+        {
+          "zeroK": 0,
+          "spines": 9
         }
       ],
       [
@@ -44882,7 +45356,7 @@
       ],
       [
         0,
-        26
+        25
       ],
       [
         1,
@@ -44890,15 +45364,15 @@
       ],
       [
         2,
-        212
+        234
       ]
     ]
   },
   "grains": {
     "branch": {
-      "zeroK": 49,
-      "executable": 340,
-      "notExecutable": 368,
+      "zeroK": 48,
+      "executable": 361,
+      "notExecutable": 347,
       "histogram": [
         [
           -2,
@@ -44910,7 +45384,7 @@
         ],
         [
           0,
-          26
+          25
         ],
         [
           1,
@@ -44918,12 +45392,11 @@
         ],
         [
           2,
-          212
+          234
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
-        "DS-DEF-6",
         "DS-ECO-1",
         "DS-ECO-10",
         "DS-ECO-3",
@@ -44945,7 +45418,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 551,
+      "readPaths": 570,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -45002,9 +45475,9 @@
       ]
     },
     "function": {
-      "zeroK": 121,
-      "executable": 340,
-      "notExecutable": 368,
+      "zeroK": 120,
+      "executable": 361,
+      "notExecutable": 347,
       "histogram": [
         [
           -6,
@@ -45024,7 +45497,7 @@
         ],
         [
           0,
-          66
+          65
         ],
         [
           1,
@@ -45032,13 +45505,12 @@
         ],
         [
           2,
-          132
+          154
         ]
       ],
-      "blocksWithSpine": 50,
+      "blocksWithSpine": 51,
       "cannotAttach": [
         "DS-DEF-11",
-        "DS-DEF-6",
         "DS-DEF-9",
         "DS-ECO-1",
         "DS-ECO-10",
@@ -45063,7 +45535,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 779,
+      "readPaths": 798,
       "modifierEligibleFactsByTab": [
         [
           "viability",
@@ -45124,19 +45596,19 @@
     "byKind": [
       [
         "services",
-        6
+        7
       ],
       [
         "resources",
-        6
+        7
       ],
       [
         "institutions",
-        5
+        6
       ],
       [
         "tradeGoods",
-        2
+        3
       ],
       [
         "factions",
@@ -45156,6 +45628,34 @@
       ]
     ],
     "rows": [
+      {
+        "block": "DS-DEF-4",
+        "pool": "capture none",
+        "kind": "institutions",
+        "via": "value",
+        "on": "none"
+      },
+      {
+        "block": "DS-DEF-4",
+        "pool": "capture none",
+        "kind": "services",
+        "via": "value",
+        "on": "none"
+      },
+      {
+        "block": "DS-DEF-4",
+        "pool": "capture none",
+        "kind": "resources",
+        "via": "value",
+        "on": "none"
+      },
+      {
+        "block": "DS-DEF-4",
+        "pool": "capture none",
+        "kind": "tradeGoods",
+        "via": "value",
+        "on": "none"
+      },
       {
         "block": "DS-ECO-10",
         "pool": "POSTURE: none",
@@ -45414,7 +45914,7 @@
       "fields": {
         "LICENSED": 191,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 415
+        "SOURCE-UNRESOLVED": 444
       },
       "byKind": [
         [
@@ -45459,11 +45959,11 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 415,
+        "no-mapping": 444,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
-      "rowsWithNoReading": 368,
+      "rowsWithNoReading": 347,
       "kindsWithNoInstitution": [
         "tradition"
       ]
@@ -46816,10 +47316,10 @@
       "strictBoth": 0,
       "strictEither": 0,
       "leafBoth": 0,
-      "leafEither": 2,
+      "leafEither": 3,
       "leafRows": [],
-      "deskRoots": 89,
-      "deskSegments": 192
+      "deskRoots": 94,
+      "deskSegments": 204
     }
   },
   "ratifiedAliases": {
@@ -46989,11 +47489,6 @@
       "roll",
       "rolls"
     ],
-    "granary": [
-      "book",
-      "books",
-      "toll"
-    ],
     "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)": [
       "muster",
       "roll",
@@ -47137,11 +47632,6 @@
       "books",
       "chest",
       "purse"
-    ],
-    "settlement.config.tradeRouteAccess": [
-      "book",
-      "books",
-      "toll"
     ],
     "settlement.defenseProfile.economicGates.military": [
       "muster",
@@ -47588,32 +48078,40 @@
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness STRONG",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "READINESS_ROW_POOL",
       "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness ADEQUATE",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "READINESS_ROW_POOL",
       "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness WEAK",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "READINESS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-1",
       "subject": "readiness CRITICAL",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "scoreBand(readinessScore) (via READINESS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "READINESS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
@@ -47917,56 +48415,70 @@
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "Very Safe",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "Safe",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "Moderate",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "Unsafe",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "Dangerous",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "COMPOUND override (a crisis stress has rewritten the label)",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "publicOrderSituation(safetyLabel) (via PUBLIC_ORDER_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "PUBLIC_ORDER_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-3",
       "subject": "First-Survey qualification (the reading is a first look)",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "firstSurveySituation(safetyLabel) (via FIRST_SURVEY_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "FIRST_SURVEY_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
@@ -48011,40 +48523,50 @@
       "tier": "COVERED",
       "block": "DS-DEF-4",
       "subject": "capture none",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "CRIMINAL_CAPTURE_POOL",
       "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
       "block": "DS-DEF-4",
       "subject": "capture adversarial",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "CRIMINAL_CAPTURE_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
       "block": "DS-DEF-4",
       "subject": "capture equilibrium",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "CRIMINAL_CAPTURE_POOL",
       "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
       "block": "DS-DEF-4",
       "subject": "capture corrupted",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "CRIMINAL_CAPTURE_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {seat, settlement}"
     },
     {
       "tier": "COVERED",
       "block": "DS-DEF-4",
       "subject": "capture capture",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "text(captureState) (via CRIMINAL_CAPTURE_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "CRIMINAL_CAPTURE_POOL",
       "count": "3 variant(s) · 3 grammar(s) · slots {seat, settlement}"
     },
     {
@@ -48251,40 +48773,50 @@
       "tier": "THIN",
       "block": "DS-DEF-6",
       "subject": "Logistics & Supply: Granary + port",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "SUPPLY_LOGISTICS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
       "subject": "Logistics & Supply: Granary in isolation",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "SUPPLY_LOGISTICS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
       "block": "DS-DEF-6",
       "subject": "Logistics & Supply: Granary with road supply",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "SUPPLY_LOGISTICS_ROW_POOL",
       "count": "3 variant(s) · 2 grammar(s) · slots {route, settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
       "subject": "Logistics & Supply: No reserves, port open",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "SUPPLY_LOGISTICS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
       "subject": "Logistics & Supply: No reserves, landlocked",
-      "fields": [],
-      "readingFunction": "(unresolved)",
+      "fields": [
+        "supplyLogisticsSituation(granary, port, access) (via SUPPLY_LOGISTICS_ROW_POOL in defenseStateProse.js)"
+      ],
+      "readingFunction": "SUPPLY_LOGISTICS_ROW_POOL",
       "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
@@ -50365,8 +50897,10 @@
       "tier": "THIN",
       "block": "DS-GEN-6",
       "subject": "isolated",
-      "fields": [],
-      "readingFunction": "supplyLogisticsPoolKey",
+      "fields": [
+        "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)"
+      ],
+      "readingFunction": "ORIGIN_POOL_OF_ROUTE",
       "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {

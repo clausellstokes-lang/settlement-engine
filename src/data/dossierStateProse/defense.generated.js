@@ -247,6 +247,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": []
       },
       "readiness ADEQUATE": {
@@ -264,6 +265,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": []
       },
       "readiness WEAK": {
@@ -279,6 +281,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "readiness CRITICAL": {
@@ -294,6 +297,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "terrain FAVOURABLE to the defender": {
@@ -1656,6 +1660,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Safe": {
@@ -1671,6 +1676,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Moderate": {
@@ -1688,6 +1694,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Unsafe": {
@@ -1703,6 +1710,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Dangerous": {
@@ -1718,6 +1726,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "COMPOUND override (a crisis stress has rewritten the label)": {
@@ -1733,6 +1742,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "First-Survey qualification (the reading is a first look)": {
@@ -1748,6 +1758,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       }
     }
@@ -2113,6 +2124,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "capture adversarial": {
@@ -2128,6 +2140,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "capture equilibrium": {
@@ -2143,6 +2156,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "capture corrupted": {
@@ -2158,6 +2172,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "capture capture": {
@@ -2173,6 +2188,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       }
     }
@@ -3414,6 +3430,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Logistics & Supply: Granary in isolation": {
@@ -3429,6 +3446,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Logistics & Supply: Granary with road supply": {
@@ -3444,6 +3462,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Logistics & Supply: No reserves, port open": {
@@ -3459,6 +3478,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Logistics & Supply: No reserves, landlocked": {
@@ -3474,6 +3494,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       },
       "Naval Defense: Naval force": {
