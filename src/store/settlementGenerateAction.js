@@ -53,7 +53,7 @@ import {
 // composer — are both lazy. This lane is reached solely through
 // settlementSlice.js's dynamic import, so importing the boundary here keeps it
 // on the lazy side with its callers (MEASURED, lane L-MAT: closure 239 -> 238).
-import { birthConfig } from '../domain/density/densityCreateBoundary.js';
+import { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 import { activateFaithIfEntitled, resetSettlementIdentity } from './settlementLifecycleHelpers.js';
 
 /** Request correlation. A counter, never a clock and never a random draw. */
@@ -143,6 +143,16 @@ export async function generateSettlementAction(set, get, seedOverride) {
   }));
 
   const contentRuntimeOptions = await loadSettlementContentRuntimeOptions(state);
+  // THE CREATE BOUNDARY'S OTHER HALF (see `loadGenerationLawPayloads`). The
+  // config above has just been minted under this build's laws, and one of those
+  // laws is obeyed by a module behind a lazy seam: a lit config reaching the
+  // pipeline with that payload unloaded THROWS rather than degrading. Awaited
+  // HERE, on the lane's own async edge, because the in-thread fallback shares
+  // this module instance and is therefore armed by this call; the WORKER
+  // transport evaluates its own copy of the graph and arms itself in
+  // `generation.worker.js`. Idempotent and memoized on the seam's slot, so the
+  // second generation onward pays nothing.
+  await loadGenerationLawPayloads();
   const seed = seedOverride || generateSeed();
 
   const request = {

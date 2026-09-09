@@ -39,7 +39,14 @@ export default function WorldPage({ code, onNavigate }) {
     // The composer (and, through it, the generator engine) is loaded ONLY here —
     // dynamic import keeps it off first paint.
     import('../lib/instantWorld/composeInstantWorld.js')
-      .then(({ composeInstantWorld }) => {
+      .then(async ({ composeInstantWorld, loadGenerationLawPayloads }) => {
+        if (cancelled) return;
+        // The create boundary's async edge: every member below is a BIRTH, and a
+        // birth's law can be one the pipeline reaches through a lazy seam. The
+        // composer is synchronous, so the await belongs to this caller. It comes
+        // out of the SAME chunk the composer does, so it costs no second fetch,
+        // and it is not a render body — this is an effect.
+        await loadGenerationLawPayloads();
         if (cancelled) return;
         const bundle = composeInstantWorld({ seed: decoded.seed, basicConfig: decoded.basicConfig });
         if (cancelled) return;

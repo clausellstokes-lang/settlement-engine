@@ -123,9 +123,24 @@ describe('generation worker — source boundary', () => {
     expect(client).not.toMatch(/generationRequest/);
   });
 
-  it('the worker shell statically imports the core and the protocol, and nothing under src/workers imports the store, saves or a DOM global', () => {
+  it('the worker shell statically imports the core, the protocol and the create boundary, and nothing under src/workers imports the store, saves or a DOM global', () => {
     const shell = source('src/workers/generation.worker.js');
-    expect(staticImports(shell).sort()).toEqual(['../lib/generationProtocol.js', './generationRequest.js']);
+    // ⭐ THE THIRD EDGE IS THE CREATE BOUNDARY'S ASYNC PAYLOAD LOADER, AND IT IS
+    // TRANSPORT WORK (lane LIGHT, car 1a). A generation law can be obeyed by a
+    // module behind a lazy seam — the living-content roster is — and the pipeline
+    // THROWS rather than degrading when that payload is unloaded. The main
+    // thread's lane awaits it too, and that is not a duplicate: a Web Worker
+    // evaluates its OWN copy of the module graph, so the seam's registry here is
+    // a different slot and a main-thread load does not arm it. The list stays
+    // EXACT rather than becoming a `toContain`, because the whole point of this
+    // arm is that the shell's static surface is small and every addition is
+    // argued; the boundary is itself outside vite's eager first-paint graph (the
+    // arm above pins the lane and the core the same way).
+    expect(staticImports(shell).sort()).toEqual([
+      '../domain/density/densityCreateBoundary.js',
+      '../lib/generationProtocol.js',
+      './generationRequest.js',
+    ]);
 
     const workerFiles = readdirSync(join(ROOT, 'src/workers')).filter(f => /\.js$/.test(f));
     expect(workerFiles.length).toBeGreaterThanOrEqual(5); // the scan is not vacuous

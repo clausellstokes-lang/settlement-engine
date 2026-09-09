@@ -54,6 +54,17 @@
 import { generateSettlementPipeline } from '../../generators/generateSettlementPipeline.js';
 import { DEFAULT_CONFIG } from '../../store/configSlice.js';
 import { birthConfig } from '../../domain/density/densityCreateBoundary.js';
+// ⭐ THE CREATE BOUNDARY'S ASYNC EDGE, RE-EXPORTED RATHER THAN WRAPPED. This
+// composer is SYNCHRONOUS by design — it is the pure realm composer, and making
+// it async to await a payload would change every caller's shape for a load that
+// is idempotent and memoized. So the callers await it, and they reach it through
+// THIS module because all three already pay for this chunk: a caller that has
+// dynamically imported the composer needs no second dynamic import to arm the
+// seam. It is a re-export and not a second wrapper because a second NAME for one
+// act is how two call sites come to await different things. The edge is
+// lazy -> lazy (this file's static import of the boundary is one line above),
+// so it adds no module to any closure.
+export { loadGenerationLawPayloads } from '../../domain/density/densityCreateBoundary.js';
 import { deriveGraphWithDiscoveredCandidates } from '../../domain/region/discoverDependencyCandidates.js';
 import { ensureRegionalGraph, ensureWizardNewsFeed } from '../../domain/region/index.js';
 import { ensureWorldState } from '../../domain/worldPulse/worldState.js';

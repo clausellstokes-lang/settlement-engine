@@ -92,6 +92,15 @@ import { newSettlementLivingContentLaw } from '../content/livingContentLaw.js';
 // imports nothing, so this adds no module to any closure the law import above
 // did not already bring.
 import { LIVING_CONTENT_LAW_CONFIG_KEY } from '../content/livingContentLawVersion.js';
+// ⭐ THE OTHER HALF OF A MINT, AND THE REASON IT LIVES HERE. A mint is
+// synchronous by construction; a PAYLOAD behind a lazy boundary is not. The
+// living-content law's roster is reached through `livingContentSeam.js`'s
+// dynamic import, and a generation whose config carries that law THROWS when the
+// payload was never loaded, so "which law does a birth mint" and "what must be
+// loaded before that law can be obeyed" are two halves of one question and are
+// answered in one file. The seam is engine-side already (the pipeline imports it
+// statically), so this edge adds no module to any closure.
+import { loadLivingContentRoster } from '../content/livingContentSeam.js';
 
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
@@ -132,7 +141,18 @@ export const BOUNDARY_CLASSES = Object.freeze(['BIRTH', 'DERIVED', 'PREVIEW', 'E
  * THROUGH when the mint and the call live in two files. A row that carries it
  * is held to the tree by its executor's reach, not its own.
  *
- * @type {Readonly<Record<string, {class: string, why: string, reachesVia?: string}>>}
+ * ⭐ `payloadAwaitedBy` IS REQUIRED ON EVERY ROW, and it is the second half of
+ * the boundary (see `loadGenerationLawPayloads` above): the modules that await
+ * the lazy payload before this row's pipeline call runs. It is a LIST because a
+ * reacher can be entered from more than one thread — the generation core is
+ * entered in-thread by the store's lane and in a Web Worker by the worker shell,
+ * and a worker evaluates its own copy of the seam, so each entry point loads for
+ * itself. Every named module is held to the tree: the walker requires each one
+ * to really await the loader, so a row cannot name a module that stopped doing
+ * it.
+ *
+ * @type {Readonly<Record<string, {class: string, why: string, reachesVia?: string,
+ *   payloadAwaitedBy: ReadonlyArray<string>}>>}
  */
 export const PIPELINE_REACHERS = Object.freeze({
   'src/store/settlementGenerateAction.js': Object.freeze({
@@ -149,6 +169,7 @@ export const PIPELINE_REACHERS = Object.freeze({
       + 'the law here on the main thread and sends it as request data; the executor named '
       + 'below is what actually calls the pipeline.',
     reachesVia: 'src/workers/generationRequest.js',
+    payloadAwaitedBy: Object.freeze(['src/store/settlementGenerateAction.js']),
   }),
   'src/workers/generationRequest.js': Object.freeze({
     class: 'EXECUTOR',
@@ -156,27 +177,46 @@ export const PIPELINE_REACHERS = Object.freeze({
       + 'BIRTH caller that built it; minting again here would stamp a second law over a '
       + 'config that already carries one, and it would do so for every transport including '
       + 'the previews and re-derivations that must never mint at all.',
+    // TWO entry points, two module instances: the store's lane awaits the payload
+    // in-thread, and the worker shell awaits it inside its own message handler
+    // because a Web Worker evaluates its own copy of the seam and a main-thread
+    // load does not arm it.
+    payloadAwaitedBy: Object.freeze([
+      'src/store/settlementGenerateAction.js',
+      'src/workers/generation.worker.js',
+    ]),
   }),
   'src/lib/instantWorld/composeInstantWorld.js': Object.freeze({
     class: 'BIRTH',
     why: 'the realm composer mints every member settlement from DEFAULT_CONFIG via '
       + 'memberConfigFor; there is no prior world in the call at all.',
+    // The composer is SYNCHRONOUS by design, so it cannot await anything itself;
+    // its three callers do it, and it re-exports the loader so a caller that has
+    // already paid for the composer's chunk needs no second dynamic import.
+    payloadAwaitedBy: Object.freeze([
+      'src/store/instantWorldBody.js',
+      'src/components/WorldPage.jsx',
+      'src/components/surveyor/ConstructionPanel.jsx',
+    ]),
   }),
   'src/components/surveyor/ConstructionPanel.jsx': Object.freeze({
     class: 'PREVIEW',
     why: 'generates a dossier only to compare it against the surveyor\'s construct '
       + 'constraints and report deviations; the result is not committed as a world.',
+    payloadAwaitedBy: Object.freeze(['src/components/surveyor/ConstructionPanel.jsx']),
   }),
   'src/workers/customContentPreview.worker.js': Object.freeze({
     class: 'PREVIEW',
     why: 'renders a preview of what homebrew content would do to a generation; the '
       + 'output is shown, never persisted.',
+    payloadAwaitedBy: Object.freeze(['src/workers/customContentPreview.worker.js']),
   }),
   'src/store/campaignContentBindingSession.js': Object.freeze({
     class: 'PREVIEW',
     why: 'forges a SAME-SEED before/after sample so a content-binding change can be '
       + 'shown to the user; minting here would make the sample differ from the world it '
       + 'is meant to predict.',
+    payloadAwaitedBy: Object.freeze(['src/store/campaignContentBindingSession.js']),
   }),
 });
 
@@ -229,6 +269,65 @@ export function birthConfig(config) {
     ...newSettlementDensityLaw(),
     ...newSettlementLivingContentLaw(),
   });
+}
+
+/**
+ * ⭐⭐ THE CREATE BOUNDARY'S ASYNC EDGE — the ONE call every module that can
+ * reach `generateSettlementPipeline` awaits before it reaches it.
+ *
+ * ════════════════════════════════════════════════════════════════════════════
+ * WHY A GENERATION HAS AN ASYNC PRELUDE AT ALL
+ * ════════════════════════════════════════════════════════════════════════════
+ *
+ * `birthConfig` above answers "which law does a birth mint" synchronously,
+ * because the pipeline is synchronous and a config is data. But the
+ * living-content law's ROSTER is not data — it is a module behind
+ * `livingContentSeam.js`'s dynamic `import(`, and that boundary exists for a
+ * measured byte reason (a static edge from the pipeline moved the first-paint
+ * closure 1,045,910 to 1,095,584 against a 1,047,000 ceiling). The seam
+ * therefore answers dormant-or-lit synchronously and FAILS LOUD when a world's
+ * own config says v2 and the payload was never loaded:
+ * `[livingContentSeam] v2 world, roster payload not loaded`, thrown out of the
+ * pipeline. A quiet `null` there would be a same-seed divergence conditioned on
+ * whether a chunk happened to be fetched, which is the one failure a lazy seam
+ * must never introduce.
+ *
+ * ⛔⛔ AND THIS FUNCTION IS WHAT THE ESTATE DID NOT HAVE. `loadLivingContentRoster`
+ * had NO CALLER in `src/`: the seam defined it and nothing invoked it. That
+ * outage — not the dial — was the true ground of every "the roster is inert"
+ * claim in this estate, and lighting the dial without curing it first would have
+ * taken GENERATION DOWN on every path rather than producing leaky worlds.
+ * Recorded in four places while it stood; cured here, first, before the dial
+ * moved.
+ *
+ * ⭐ IT IS AWAITED BY EVERY REACHER, NOT ONLY BY A BIRTH, AND THAT IS MEASURED
+ * RATHER THAN CAUTIOUS. The seam's gate reads the WORLD'S config, not the
+ * build's dial, and a config carrying the marker can arrive from an IMPORT FILE
+ * with no dial moving at all (the Library's "Apply Saved Configuration &
+ * Regenerate" hydrates the wizard form from a saved `settlement._config`, and
+ * `updateConfig` admits the underscore family by prefix). A PREVIEW or an
+ * EXECUTOR can therefore meet a lit config on a build whose dial is dark. Every
+ * row of `PIPELINE_REACHERS` names, in `payloadAwaitedBy`, the module that
+ * awaits this on its behalf, and `tests/lint/densityCreateBoundary.walker.test.js`
+ * holds those names to the tree.
+ *
+ * ⚠ IT IS NEVER CALLED AT MODULE LOAD, AND THE FENCE IS BYTES. Awaiting it in a
+ * module body would make the roster closure a startup fetch for whichever chunk
+ * did it; awaiting it inside the async function that is ABOUT to generate keeps
+ * the payload exactly as lazy as the seam made it. It is also idempotent and
+ * memoized on the seam's slot, so a second await after the first resolves is
+ * free and every reacher may call it unconditionally.
+ *
+ * ⚠ AND ONCE PER MODULE INSTANCE, WHICH IS WHY THE TWO WORKER SHELLS CALL IT
+ * THEMSELVES. The seam's registry is module state, and a Web Worker evaluates
+ * its own copy of the graph: a main-thread load does not arm the worker's seam.
+ * `src/workers/generation.worker.js` and `src/workers/customContentPreview.worker.js`
+ * await it inside their own message handlers for that reason and no other.
+ *
+ * @returns {Promise<void>}
+ */
+export async function loadGenerationLawPayloads() {
+  await loadLivingContentRoster();
 }
 
 /**

@@ -72,8 +72,9 @@ import {
   materializesLivingContent,
   readLivingContentLawVersion,
 } from '../../src/domain/content/livingContentLawVersion.js';
-// The REGISTRY half is still the seam's, and arming it is what makes every lit
-// arm below take the path production WOULD take after loadLivingContentRoster().
+// The REGISTRY half is still the seam's, and arming it here is what lets a lit arm
+// run WITHOUT awaiting anything: production reaches the same builder through
+// `loadGenerationLawPayloads()` (lane LIGHT, car 1a), which is async by nature.
 import {
   registerLivingContentRosterBuilder,
 } from '../../src/domain/content/livingContentSeam.js';
@@ -92,12 +93,16 @@ import {
 // reached through a dynamic import in production (livingContentSeam.js), and the
 // pipeline throws rather than quietly degrading when a v2 world finds no builder
 // registered. Registering the real builder here is what makes every lit arm below
-// exercise the path production WOULD take after `loadLivingContentRoster()`.
-// ⚠ "WOULD", NOT "DOES", AND THE TENSE IS THE WHOLE POINT (§912, R-J; the sibling
-// `livingContentLawWiring.test.js` carries the same correction, and this file was the
-// second home of the false friend, cured at §913): nothing in `src/` calls
-// `loadLivingContentRoster`, so production reaches the throw and not the builder. This
-// hand-registration is the only thing making a lit roster reachable in the estate today.
+// exercise the path production takes after `loadGenerationLawPayloads()`.
+// ⭐ "TAKES", NOT "WOULD TAKE", AND THE TENSE MOVED ON THE LIGHTING DAY (lane LIGHT,
+// car 1a). The two files that carried the "WOULD" correction (§912 R-J, §913) were
+// right at the time: nothing in `src/` called the loader, so production reached the
+// throw and not the builder, and this hand-registration was the only thing making a
+// lit roster reachable in the estate. The loader now has a caller on every path that
+// can reach the pipeline, held to the tree by
+// `tests/lint/densityCreateBoundary.walker.test.js`. The registration stays because
+// this file is SYNCHRONOUS and the product's edge is async, not because the product
+// still cannot arm itself.
 registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const CONFIG = Object.freeze({

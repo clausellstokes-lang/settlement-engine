@@ -87,6 +87,16 @@ export function livingContentRosterLoaded() {
  * with a `from`-clause regex, and a static edge here would put the whole roster
  * closure back into eager `engine-core`.
  *
+ * ⭐ ITS CALLER IS `loadGenerationLawPayloads()` IN
+ * `src/domain/density/densityCreateBoundary.js`, and nothing else in `src/` calls
+ * it directly. That single-caller shape is deliberate: the create boundary is
+ * where "which laws does a generation obey" is already answered, so the payload a
+ * law needs is loaded in the same place rather than in seven. For the whole
+ * dormant life of this law the function had NO caller at all, which meant
+ * lighting the dial would have thrown out of every generation instead of building
+ * a roster; `tests/lint/densityCreateBoundary.walker.test.js` now holds the caller
+ * set to the tree so that state cannot return unnoticed.
+ *
  * @returns {Promise<void>}
  */
 export async function loadLivingContentRoster() {

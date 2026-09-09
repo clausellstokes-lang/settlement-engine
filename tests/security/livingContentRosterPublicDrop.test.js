@@ -45,17 +45,18 @@
  * back from the server still carries them. Same V1 boundary
  * `townMapEditsPublicDrop.test.js` records for `mapEdits`, same reason.
  *
- * ⛔⛔ AND THE ONE FACT A LIGHTING ENGINEER MEETS BEFORE ANY OF THIS (§912, R-J).
- * `loadLivingContentRoster` HAS NO CALLER. `livingContentSeam.js` defines it and
- * nothing in `src/` invokes it (the occurrence count this sentence used to carry was
- * false at its own commit — the sentence was one of the occurrences — and was deleted
- * at §913), so lighting the
- * dial does not produce leaky worlds — it produces NO worlds: a lit config throws
+ * ⭐⭐ AND THE ONE FACT A LIGHTING ENGINEER MET BEFORE ANY OF THIS, NOW DISCHARGED
+ * (§912, R-J; cured by lane LIGHT, car 1a). `loadLivingContentRoster` HAD NO CALLER:
+ * `livingContentSeam.js` defined it and nothing in `src/` invoked it (the occurrence
+ * count this sentence used to carry was false at its own commit — the sentence was
+ * one of the occurrences — and was deleted at §913), so lighting the dial did not
+ * produce leaky worlds, it produced NO worlds: a lit config threw
  * `[livingContentSeam] v2 world, roster payload not loaded` out of
- * `generateSettlementPipeline`. That outage, not the dial, is the true ground of
- * every inertness claim in this file; the arms below arm the seam explicitly
- * (see the `registerLivingContentRosterBuilder` call) which is exactly why they
- * can measure a real roster while the product cannot build one.
+ * `generateSettlementPipeline`. That outage, and not the dial, was the true ground of
+ * every inertness claim in this file, and it is gone: the create boundary's
+ * `loadGenerationLawPayloads()` is awaited by every module that can reach the
+ * pipeline. The arms below still arm the seam explicitly (see the
+ * `registerLivingContentRosterBuilder` call) because they are synchronous.
  *
  * @enforced-by this test
  */

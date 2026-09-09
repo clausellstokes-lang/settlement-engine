@@ -19,7 +19,12 @@
 import { saves as savesService } from '../lib/saves.js';
 import { deriveGraphWithDiscoveredCandidates } from '../domain/region/discoverDependencyCandidates.js';
 import { ensureRegionalGraph } from '../domain/region/index.js';
-import { composeInstantWorld } from '../lib/instantWorld/composeInstantWorld.js';
+import {
+  composeInstantWorld,
+  // The create boundary's async edge, re-exported by the composer because the
+  // composer is synchronous and cannot await its own payloads.
+  loadGenerationLawPayloads,
+} from '../lib/instantWorld/composeInstantWorld.js';
 import { generateSeed } from '../kernel/prng.js';
 import { accountRuntimeBinding } from './campaignContentBindingModel.js';
 import {
@@ -137,6 +142,13 @@ export async function runInstantWorld({
         customContent: accountRuntime.customContent || {},
         tunables: accountRuntime.tunables || {},
       };
+
+  // THE CREATE BOUNDARY'S OTHER HALF. Every member settlement below is a BIRTH,
+  // so each is minted under this build's generation laws — and one of those laws
+  // is obeyed by a module behind a lazy seam that the pipeline throws on when it
+  // is unloaded. Awaited here, on the action's own async edge, because the
+  // composer itself is synchronous. Idempotent and memoized.
+  await loadGenerationLawPayloads();
 
   // Capture auth before the synchronous composition work as well as before the
   // first durable write. JavaScript cannot interleave an account switch during

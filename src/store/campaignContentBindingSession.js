@@ -78,6 +78,15 @@ export async function previewCampaignContentBindingMigrationSession({
   const { generateSettlementPipeline } = await import(
     '../generators/generateSettlementPipeline.js'
   );
+  // THE CREATE BOUNDARY'S ASYNC EDGE. This session is a PREVIEW and mints no
+  // law, but the sample is forged from an EXISTING world's config, so it carries
+  // whatever law that world was born under — and the pipeline throws rather than
+  // degrading when that law's lazy payload was never loaded. Awaited beside the
+  // pipeline's own dynamic import, on the same async edge.
+  const { loadGenerationLawPayloads } = await import(
+    '../domain/density/densityCreateBoundary.js'
+  );
+  await loadGenerationLawPayloads();
   let sameSeedSample;
   try {
     sameSeedSample = forgeContentRuntimeComparison({

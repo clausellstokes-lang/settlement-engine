@@ -2,29 +2,29 @@
  * livingContentRoster.js — the INERT roster of reviewed living-content
  * definitions that were in scope for one generation run.
  *
- * ⛔⛔ READ THIS FIRST IF YOU ARE ABOUT TO LIGHT THE DIAL: THE LOADER HAS NO
- * CALLER, SO LIGHTING IT TAKES GENERATION DOWN (§912, R-J — recorded, not cured).
- * `loadLivingContentRoster` (`livingContentSeam.js`) is the only thing that
- * registers this module's builder, and NOTHING IN `src/` CALLS IT. (This sentence
- * used to count the occurrences — "exactly twice: its own definition and one comment
- * beside it" — which was false the moment it was written, because the sentence is
- * itself one of them. A count of a token in the tree cannot be shipped inside the
- * tree; the no-caller fact can, and it is the whole of what matters. §913.)
- * So on a lit config
- * `livingContentRosterFor` finds no registered builder and THROWS
+ * ⭐⭐ THE LOADER HAS A CALLER NOW, AND THAT WAS THE LIGHTING DAY'S FIRST ACT
+ * (lane LIGHT, car 1a). This paragraph used to read "THE LOADER HAS NO CALLER, SO
+ * LIGHTING IT TAKES GENERATION DOWN" (§912, R-J — recorded, not cured), and it was
+ * true: `loadLivingContentRoster` (`livingContentSeam.js`) is the only thing that
+ * registers this module's builder, and nothing in `src/` invoked it, so a lit
+ * config found no registered builder and THREW
  * `[livingContentSeam] v2 world, roster payload not loaded` out of
- * `generateSettlementPipeline` — not a leaky world, no world at all. Wiring that
- * call is the first task of the lighting car, before any behaviour below is worth
- * reasoning about.
+ * `generateSettlementPipeline` — not a leaky world, no world at all. The cure is
+ * `loadGenerationLawPayloads()` in `src/domain/density/densityCreateBoundary.js`,
+ * awaited by every module that can reach the pipeline;
+ * `tests/lint/densityCreateBoundary.walker.test.js` holds that caller set to the
+ * tree, per row and flatly, so the outage cannot return silently.
  *
- * ⇒ AND IT IS THE TRUE GROUND OF EVERY "THE ROSTER IS INERT" CLAIM IN THIS
- * ESTATE. The dial is NOT that ground: the gate is
- * `materializesLivingContent(settlement.config)` — the WORLD'S config, not the
- * build's dial — and a config carrying the marker can arrive from an import file
- * without any dial being moved. Tests that arm the seam themselves (they call
- * `registerLivingContentRosterBuilder` directly) can therefore build real rosters
- * on a build where the product cannot, which is exactly why the security arms are
- * able to measure a drop at all.
+ * ⇒ AND THE OUTAGE, WHILE IT STOOD, WAS THE TRUE GROUND OF EVERY "THE ROSTER IS
+ * INERT" CLAIM IN THIS ESTATE — the correction is kept rather than deleted,
+ * because the second half of it still binds. The dial was never that ground: the
+ * gate is `materializesLivingContent(settlement.config)` — the WORLD'S config, not
+ * the build's dial — and a config carrying the marker can arrive from an import
+ * file without any dial being moved. That is why the import boundaries below are
+ * cured on their own account and not on the dial's. Tests that arm the seam
+ * themselves (they call `registerLivingContentRosterBuilder` directly) were how a
+ * real roster could be built at all while the loader was uncalled, which is why
+ * the security arms could measure a drop on a build the product could not light.
  *
  * ⛔ WHAT THIS IS FOR. ODQ §866 found the presentation-neutrality instrument
  * vacuous for the `deities.*` cases; TE-INSTR-1 re-measured it and the vacuity

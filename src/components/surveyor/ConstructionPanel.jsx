@@ -76,6 +76,14 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
     setGenerating(true); setGenerated(null); setCommitted(null);
     try {
       const cmp = await import('../../domain/construct/intentComparator.js');
+      // THE CREATE BOUNDARY'S ASYNC EDGE, awaited once for BOTH branches. This
+      // panel is a PREVIEW and mints no law, but the config it was handed can
+      // already carry one (the gate reads the WORLD'S config, never the build's
+      // dial), and the pipeline throws rather than degrading when that law's
+      // lazy payload was never loaded. The composer's chunk is where the loader
+      // is re-exported from, so the realm branch pays no second fetch.
+      const { loadGenerationLawPayloads } = await import('../../lib/instantWorld/composeInstantWorld.js');
+      await loadGenerationLawPayloads();
       if (scope === 'realm') {
         const { composeInstantWorld } = await import('../../lib/instantWorld/composeInstantWorld.js');
         const { settlements } = composeInstantWorld({ seed, basicConfig: config });

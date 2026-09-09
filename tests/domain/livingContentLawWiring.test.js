@@ -40,18 +40,20 @@
  *                 `tests/store/campaignSlice.galleryImport.test.js`, and the
  *                 reconciliation path in `tests/lib/importReconciliation.test.js`.
  *
- * ⛔⛔ AND THE FACT THAT OUTRANKS EVERY INERTNESS CLAIM IN THIS FILE (§912, R-J).
- * `loadLivingContentRoster` HAS NO CALLER in `src/` — `livingContentSeam.js` defines
- * it and nothing invokes it. (The enumeration that used to stand here — "only its own
- * definition and one comment beside it" — was self-falsifying, this sentence being a
- * further occurrence; deleted at §913, the no-caller fact kept.) So lighting
- * the dial does not produce v2 worlds; it produces a THROW,
- * `[livingContentSeam] v2 world, roster payload not loaded`, out of
- * `generateSettlementPipeline`. That outage is the real reason no shipped world
- * carries a roster — NOT the dial, whose gate reads the WORLD'S config and can be
- * satisfied by an import file. The arms below arm the seam by hand (see the
- * `registerLivingContentRosterBuilder` call), which is what lets them measure real
- * lit behaviour on a build that cannot yet produce it.
+ * ⭐⭐ THE OUTAGE THAT OUTRANKED EVERY INERTNESS CLAIM IN THIS FILE IS CURED (§912,
+ * R-J; cured by lane LIGHT, car 1a). `loadLivingContentRoster` HAD NO CALLER in
+ * `src/` — `livingContentSeam.js` defined it and nothing invoked it. (The
+ * enumeration that used to stand here — "only its own definition and one comment
+ * beside it" — was self-falsifying, this sentence being a further occurrence;
+ * deleted at §913, the no-caller fact kept.) So lighting the dial did not produce v2
+ * worlds; it produced a THROW, `[livingContentSeam] v2 world, roster payload not
+ * loaded`, out of `generateSettlementPipeline`. That outage, and not the dial, was
+ * the real reason no shipped world carried a roster — the dial's gate reads the
+ * WORLD'S config and can be satisfied by an import file. The caller is now
+ * `loadGenerationLawPayloads()` on the create boundary, awaited by every module that
+ * can reach the pipeline. The arms below still arm the seam BY HAND, and now for a
+ * different reason: this file is synchronous and the product's edge is async, so
+ * hand-registration is how a synchronous arm reaches the same builder.
  *
  * @enforced-by this test
  */
@@ -95,13 +97,14 @@ vi.mock('../../src/lib/saves.js', () => ({
 // reached through a dynamic import in production, and the pipeline THROWS rather
 // than quietly degrading when a v2 world finds no builder registered. Registering
 // the real builder makes the lit arms below take the path production WOULD take
-// after `loadLivingContentRoster()` — and, more to the point here, it means a
+// after `loadGenerationLawPayloads()` — and, more to the point here, it means a
 // DARK arm that accidentally went lit would surface as a wrong world rather than
 // as a throw that could be mistaken for the law being off.
-// ⚠ "WOULD", NOT "DOES", AND THE TENSE IS THE WHOLE POINT (§912, R-J): nothing in
-// `src/` calls `loadLivingContentRoster`, so production reaches the throw and not
-// the builder. This hand-registration is the ONLY thing making a lit roster
-// reachable anywhere in the estate today.
+// ⭐ THE TENSE MOVED ON THE LIGHTING DAY (lane LIGHT, car 1a). It read "WOULD take"
+// here, and the §912 R-J ground was true then: nothing in `src/` called
+// `loadLivingContentRoster`, so production reached the throw and not the builder.
+// The loader has a caller now, on every path that can reach the pipeline; the
+// hand-registration stays because this file is synchronous.
 registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const CONFIG = Object.freeze({

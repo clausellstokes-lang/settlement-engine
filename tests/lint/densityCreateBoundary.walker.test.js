@@ -248,6 +248,88 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
     }
   });
 
+  // ── THE BOUNDARY'S OTHER HALF: THE LAZY PAYLOAD ────────────────────────────
+  // ⭐⭐ WHY THIS ARM EXISTS, AND WHY IT IS HERE RATHER THAN IN A BEHAVIOUR SUITE
+  // (lane LIGHT, car 1a). A generation law can be obeyed by a module behind a
+  // LAZY seam. The living-content law is: its roster lives behind
+  // `livingContentSeam.js`'s dynamic import, and the seam fails LOUD rather than
+  // quietly when a world's own config says v2 and the payload was never loaded.
+  // For the whole of this law's life the loader had NO CALLER in `src/` — the
+  // seam defined `loadLivingContentRoster` and nothing invoked it — so lighting
+  // the dial would have taken GENERATION DOWN on every path instead of producing
+  // a roster. That is not a defect a behaviour suite catches, because a behaviour
+  // suite arms the seam by hand; it is a WIRING fact about the caller set, which
+  // is exactly what this walker is for.
+  //
+  // The manifest above already answers "which module reaches the pipeline". This
+  // arm holds the second answer to the tree: for every such module, WHO awaits
+  // the payload before it runs. The list is per-row because a reacher can be
+  // entered from more than one module instance — the generation core is entered
+  // in-thread by the store's lane and inside a Web Worker by the worker shell,
+  // and a worker evaluates its own copy of the seam, so a main-thread load does
+  // not arm it.
+  it('⭐ every reacher declares who awaits the lazy generation-law payload, and they really do', () => {
+    const AWAIT_CALL = 'await loadGenerationLawPayloads(';
+    // ANTI-VACUITY, FIRST AND ON THE MATCHER ITSELF. An absence-shaped scan whose
+    // needle never matches anything reports every tree clean.
+    expect(
+      `const x = 1; ${AWAIT_CALL});`.includes(AWAIT_CALL),
+      'the needle cannot match its own positive control',
+    ).toBe(true);
+    expect(
+      'const bundle = composeInstantWorld({ seed });'.includes(AWAIT_CALL),
+      'the needle matches a line that does NOT await the loader — it proves nothing',
+    ).toBe(false);
+
+    const offenders = [];
+    for (const [rel, row] of Object.entries(PIPELINE_REACHERS)) {
+      const named = row.payloadAwaitedBy;
+      if (!Array.isArray(named) || named.length === 0) {
+        offenders.push(`${rel}: no payloadAwaitedBy — say which module awaits the payload `
+          + 'before this row reaches the pipeline');
+        continue;
+      }
+      for (const awaiter of named) {
+        let code;
+        try {
+          code = stripCommentsAndStrings(readFileSync(join(process.cwd(), awaiter), 'utf-8'));
+        } catch { offenders.push(`${rel}: ${awaiter} does not exist`); continue; }
+        if (!code.includes(AWAIT_CALL)) {
+          offenders.push(`${rel}: ${awaiter} no longer awaits the payload`);
+        }
+      }
+    }
+    expect(
+      offenders,
+      'a module that can reach generateSettlementPipeline has lost the await that loads the '
+      + 'generation laws\' lazy payloads. On a world whose config carries the living-content '
+      + 'law that is not a degraded world, it is NO world: the seam throws '
+      + '"[livingContentSeam] v2 world, roster payload not loaded" out of the pipeline. '
+      + 'Restore the await, or move the row\'s payloadAwaitedBy to whatever module owns it '
+      + 'now. Offenders: '
+      + `${offenders.join(' | ')}`,
+    ).toEqual([]);
+  });
+
+  it('the payload loader has a caller in src/ at all (the outage arm)', () => {
+    // ⛔ THE FLAT FACT, KEPT SEPARATE FROM THE PER-ROW ARM ABOVE. The per-row arm
+    // can only convict a module the manifest already names; this one convicts an
+    // estate in which the boundary's async edge itself went uncalled, which is
+    // the state `src/` was actually in until lane LIGHT.
+    const callers = sourceFiles()
+      .filter(rel => stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'))
+        .includes('loadGenerationLawPayloads('))
+      // The boundary DECLARES it; a declaration is not a call.
+      .filter(rel => rel !== 'src/domain/density/densityCreateBoundary.js');
+    expect(
+      callers.length,
+      'nothing in src/ names the create boundary\'s async payload edge. That is the exact '
+      + 'state this estate shipped in for the whole dormant life of the living-content law, '
+      + 'and it is why lighting the dial would have taken generation down rather than '
+      + 'produced a roster.',
+    ).toBeGreaterThan(1);
+  });
+
   it('every BIRTH mints the law, and nothing else does', () => {
     const birthsNotMinting = Object.entries(PIPELINE_REACHERS)
       .filter(([rel, row]) => row.class === 'BIRTH' && !mintsIn(rel))

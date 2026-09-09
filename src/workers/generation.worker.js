@@ -15,6 +15,12 @@
  */
 
 import { runGenerationRequest } from './generationRequest.js';
+// ⭐ THE CREATE BOUNDARY'S ASYNC EDGE, AWAITED ON THIS SIDE OF THE TRANSPORT.
+// The store's lane awaits it too, and that is not a duplicate: a Web Worker
+// evaluates its OWN copy of the module graph, so the seam's registry here is a
+// different slot from the main thread's and a main-thread load does not arm it.
+// This is transport, and loading a payload the core needs is transport work.
+import { loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 import {
   GENERATION_ERROR_KIND,
   GENERATION_RESULT_KIND,
@@ -22,7 +28,11 @@ import {
   isValidGenerationRequest,
 } from '../lib/generationProtocol.js';
 
-self.onmessage = (event) => {
+// ⚠ ASYNC, AND THE ONE AWAIT BELOW IS WHY. The handler stays a thin transport:
+// it awaits the generation laws' lazy payloads INSIDE the existing try, so a
+// load failure answers `pipeline_threw` with its message like every other
+// failure rather than becoming an unhandled rejection the main thread waits out.
+self.onmessage = async (event) => {
   const request = event?.data;
   const requestId = request?.requestId;
   const post = (packet) => self.postMessage({ ...packet, workerContract: GENERATION_WORKER_CONTRACT });
@@ -41,6 +51,7 @@ self.onmessage = (event) => {
   // is an error that can name the step it died on instead of a bare apology.
   let lastStepId = null;
   try {
+    await loadGenerationLawPayloads();
     const result = runGenerationRequest(request, (stepEvent) => {
       lastStepId = stepEvent?.step?.id ?? lastStepId;
       post(stepEvent);
