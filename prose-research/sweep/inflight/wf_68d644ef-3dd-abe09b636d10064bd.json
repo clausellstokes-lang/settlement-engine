@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 75,
+ "firstTs": "2026-09-09T22:51:58.760Z",
+ "lastTs": "2026-09-09T22:59:09.553Z",
+ "tools": {
+  "Bash": 18,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Let me check a sibling packet for the exact expected format.",
+ "run": "wf_68d644ef-3dd",
+ "agent": "abe09b636d10064bd",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_68d644ef-3dd/agent-abe09b636d10064bd.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 18:53:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 18:59:16 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -114,21 +114,21 @@
 | ? | other |  | failed | 0 | — | — | 19:10:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:35:02 |
 | ? | other |  | failed | 0 | — | — | 19:09:40 |
-| ? | other |  | in-flight | 0 | — | — | 22:53:09 |
+| ? | other |  | in-flight | 0 | — | — | 22:58:47 |
 | ? | other |  | failed | 0 | — | — | 19:07:58 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:31:30 |
 | ? | other |  | failed | 0 | — | — | 19:10:37 |
 | ? | other |  | result | 0 | — | — | 22:33:58 |
 | ? | other |  | result | 0 | — | — | 22:51:21 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:32:15 |
-| ? | other |  | in-flight | 0 | — | — | 22:53:12 |
-| ? | other |  | in-flight | 0 | — | — | 22:52:38 |
+| ? | other |  | result | 0 | draft-round-2.md | — | 22:58:16 |
+| ? | other |  | in-flight | 0 | — | — | 22:57:45 |
 | ? | other |  | failed | 0 | draft-round-1.md | — | 19:09:16 |
 | ? | other |  | result | 0 | — | — | 22:32:09 |
 | ? | other |  | failed | 0 | — | — | 19:07:57 |
 | ? | other |  | result | 0 | — | — | 22:45:07 |
 | ? | other |  | failed | 0 | — | — | 19:09:13 |
-| ? | other |  | in-flight | 0 | — | — | 22:53:11 |
+| ? | other |  | in-flight | 0 | — | — | 22:57:45 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:39:34 |
 | ? | other |  | result | 0 | refute-fable.md | — | 19:04:52 |
 | ? | other |  | result | 0 | — | — | 19:04:34 |
@@ -166,22 +166,23 @@
 | ? | other |  | failed | 0 | — | — | 19:08:17 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:32:08 |
 | ? | other |  | failed | 0 | — | — | 19:08:23 |
+| ? | other |  | in-flight | 0 | — | — | 22:57:41 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:33:04 |
 | ? | other |  | failed | 0 | — | — | 19:11:26 |
 | ? | other |  | result | 0 | — | — | 22:33:13 |
 | ? | other |  | failed | 0 | — | — | 19:08:18 |
 | ? | other |  | failed | 0 | — | — | 19:08:21 |
-| ? | other |  | in-flight | 0 | — | — | 22:46:52 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 22:56:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:51:58 |
 | ? | other |  | failed | 0 | — | — | 19:08:21 |
 | ? | other |  | failed | 0 | — | — | 19:08:17 |
 | ? | other |  | failed | 0 | — | — | 19:08:22 |
 | ? | other |  | failed | 0 | — | — | 19:08:16 |
-| ? | other |  | in-flight | 0 | — | — | 22:52:31 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 22:54:01 |
 | ? | other |  | failed | 0 | — | — | 19:08:16 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:45:31 |
-| ? | other |  | in-flight | 0 | — | — | 22:53:11 |
-| ? | other |  | in-flight | 0 | — | — | 22:52:16 |
+| ? | other |  | in-flight | 0 | — | — | 22:59:09 |
+| ? | other |  | result | 0 | — | — | 22:54:01 |
 | ? | other |  | failed | 0 | — | — | 19:08:19 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:34:29 |
 | ? | other |  | failed | 0 | — | — | 19:08:17 |
@@ -192,14 +193,18 @@
 | ? | other |  | failed | 0 | — | — | 19:08:20 |
 | ? | other |  | failed | 0 | — | — | 19:09:28 |
 | ? | other |  | failed | 0 | — | — | 19:08:20 |
+| ? | other |  | in-flight | 0 | — | — | 22:56:39 |
 | ? | other |  | failed | 0 | — | — | 19:08:22 |
 | ? | other |  | failed | 0 | — | — | 19:08:51 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:07 |
 | ? | other |  | failed | 0 | — | — | 19:11:23 |
-| ? | other |  | in-flight | 0 | — | — | 22:47:31 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 22:55:25 |
+| ? | other |  | in-flight | 0 | — | — | 22:56:12 |
 | ? | other |  | result | 0 | — | — | 22:34:13 |
 | ? | other |  | failed | 0 | — | — | 19:08:18 |
-| ? | other |  | in-flight | 0 | — | — | 22:53:09 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 22:56:51 |
+| ? | other |  | in-flight | 0 | — | — | 22:55:28 |
+| ? | other |  | in-flight | 0 | — | — | 22:59:15 |
 | ? | other |  | failed | 0 | — | — | 19:08:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
@@ -281,12 +286,13 @@
 | ? | other |  | result | 0 | — | — | 18:34:06 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 17:58:21 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 17:58:02 |
-| ? | other |  | in-flight | 0 | — | — | 22:50:15 |
-| ? | other |  | in-flight | 0 | — | — | 22:51:16 |
-| ? | other |  | in-flight | 0 | — | — | 22:50:15 |
-| ? | other |  | in-flight | 0 | — | — | 22:50:25 |
+| ? | other |  | in-flight | 0 | — | — | 22:59:13 |
+| ? | other |  | in-flight | 0 | — | — | 22:59:06 |
+| ? | other |  | in-flight | 0 | — | — | 22:58:55 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 22:58:49 |
 | ? | other |  | in-flight | 0 | — | — | 22:50:23 |
-| ? | other |  | in-flight | 0 | — | — | 22:52:03 |
+| ? | other |  | in-flight | 0 | — | — | 22:58:34 |
+| ? | other |  | in-flight | 0 | — | — | 22:59:13 |
 | ? | other |  | in-flight | 0 | — | — | 22:48:48 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 18:34:33 |
 | ? | other |  | in-flight | 0 | — | — | 18:34:41 |
