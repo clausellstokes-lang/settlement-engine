@@ -5970,17 +5970,17 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 
 **`WALLED-THREATENED`**
 1. `[ledger]` Danger in the country is a standing entry on {settlement}'s books, and against that entry the town keeps its {defwork} in repair.
-   - `[face]` On {settlement}'s account the country is dangerous ground, and the upkeep of the {defwork} is a line the town still bears.
-   - `[face]` The {defwork} at {settlement} is kept up as a charge the town carries. That charge answers the country's danger.
-   - `[face]` Set against dangerous country, the {defwork} at {settlement} is a cost the town enters and pays.
-2. `[street]` Against dangerous country the {defwork} at {settlement} is kept up as working fabric.
-   - `[face]` Dangerous country is the standing condition at {settlement}; the {defwork} is kept in service against it.
-   - `[face]` Used and mended in the ordinary way, the {defwork} at {settlement} answers dangerous country.
-   - `[face]` The {defwork} at {settlement} is in use. The country it stands against is dangerous ground, and the town keeps the work sound.
+   - `[face]` The cost of the {defwork} at {settlement} is a line entered against a dangerous country, and the town pays it.
+   - `[face]` The {defwork} at {settlement} answers a dangerous country. The charge for keeping it up is one the town meets.
+   - `[face]` The town is current on the upkeep of the {defwork} at {settlement}, and the country it stands in is dangerous.
+2. `[street]` Dangerous country is the standing condition at {settlement}, and the {defwork} is kept up as working fabric.
+   - `[face]` The threat in the country holds; the {defwork} at {settlement} is kept in service.
+   - `[face]` The country around {settlement} is not quiet, and the {defwork} is used and mended in the ordinary way.
+   - `[face]` The {defwork} at {settlement} is in use. The country is dangerous, and the town keeps the work sound.
 3. `[visitor]` A working enclosure stands at {settlement}, and the country it faces is dangerous ground.
-   - `[face]` Dangerous country lies about {settlement}, and the enclosure is kept.
-   - `[face]` Beyond {settlement} the country carries danger, and the town is closed against that danger. The enclosure is kept sound.
-   - `[face]` Enclosed against dangerous country, {settlement} keeps the enclosure fit for use.
+   - `[face]` The enclosure at {settlement} is kept sound in dangerous country.
+   - `[face]` Danger stands in the country about {settlement}, and the town is closed to it. The enclosure is mended.
+   - `[face]` Enclosed and fit for use, {settlement} stands where the country is dangerous.
 
 **`WALLED-QUIET`**
 1. `[visitor]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
@@ -5988,14 +5988,14 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[ledger]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
 
 **`WALLED-STRAINED`**
-1. `[ledger]` The {defwork} at {settlement} stands, and the muster is short of its funding.
-   - `[face]` On the muster roll at {settlement} the pay is under its due, and the {defwork} holds.
-   - `[face]` The wage roll at {settlement} is not met. The town's {defwork} is in place.
-   - `[face]` Wages at {settlement} run short of the roll, and the {defwork} stands.
-2. `[unfolding]` Pay for {settlement}'s muster stands open on the roll, and the {defwork} is up.
-   - `[face]` The roll at {settlement} sets a wage above what the muster is paid, and the {defwork} holds.
-   - `[face]` Muster pay at {settlement} is not made up. The town has its {defwork}.
-   - `[face]` At {settlement} the muster is not paid to its full wage, and the {defwork} is in place.
+1. `[ledger]` The {defwork} at {settlement} stands, and the muster is short of its wage.
+   - `[face]` On the muster roll at {settlement} the pay sits under its due, and the {defwork} holds.
+   - `[face]` Wages at {settlement} are met short of the roll. The town's {defwork} is in place.
+   - `[face]` At {settlement} the {defwork} is up. The town's muster is paid below its roll.
+2. `[unfolding]` Pay for {settlement}'s muster is a term left open on the roll, and the {defwork} stands.
+   - `[face]` The roll at {settlement} sets a wage above the muster's pay, and the {defwork} is in place.
+   - `[face]` Muster pay at {settlement} is not made up to the roll. The town has its {defwork}.
+   - `[face]` The muster at {settlement} is not paid to its full wage, and the {defwork} is up.
 
 **`UNWALLED-SMALL`**
 1. `[street]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.

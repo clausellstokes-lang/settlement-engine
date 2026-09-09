@@ -5233,23 +5233,23 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "On {settlement}'s account the country is dangerous ground, and the upkeep of the {defwork} is a line the town still bears.",
-            "The {defwork} at {settlement} is kept up as a charge the town carries. That charge answers the country's danger.",
-            "Set against dangerous country, the {defwork} at {settlement} is a cost the town enters and pays."
+            "The cost of the {defwork} at {settlement} is a line entered against a dangerous country, and the town pays it.",
+            "The {defwork} at {settlement} answers a dangerous country. The charge for keeping it up is one the town meets.",
+            "The town is current on the upkeep of the {defwork} at {settlement}, and the country it stands in is dangerous."
           ]
         },
         {
           "angle": "street",
-          "text": "Against dangerous country the {defwork} at {settlement} is kept up as working fabric.",
+          "text": "Dangerous country is the standing condition at {settlement}, and the {defwork} is kept up as working fabric.",
           "slots": [
-            "defwork",
-            "settlement"
+            "settlement",
+            "defwork"
           ],
           "vid": 2,
           "wordings": [
-            "Dangerous country is the standing condition at {settlement}; the {defwork} is kept in service against it.",
-            "Used and mended in the ordinary way, the {defwork} at {settlement} answers dangerous country.",
-            "The {defwork} at {settlement} is in use. The country it stands against is dangerous ground, and the town keeps the work sound."
+            "The threat in the country holds; the {defwork} at {settlement} is kept in service.",
+            "The country around {settlement} is not quiet, and the {defwork} is used and mended in the ordinary way.",
+            "The {defwork} at {settlement} is in use. The country is dangerous, and the town keeps the work sound."
           ]
         },
         {
@@ -5260,9 +5260,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "Dangerous country lies about {settlement}, and the enclosure is kept.",
-            "Beyond {settlement} the country carries danger, and the town is closed against that danger. The enclosure is kept sound.",
-            "Enclosed against dangerous country, {settlement} keeps the enclosure fit for use."
+            "The enclosure at {settlement} is kept sound in dangerous country.",
+            "Danger stands in the country about {settlement}, and the town is closed to it. The enclosure is mended.",
+            "Enclosed and fit for use, {settlement} stands where the country is dangerous."
           ]
         }
       ],
@@ -5297,30 +5297,30 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-STRAINED": [
         {
           "angle": "ledger",
-          "text": "The {defwork} at {settlement} stands, and the muster is short of its funding.",
+          "text": "The {defwork} at {settlement} stands, and the muster is short of its wage.",
           "slots": [
             "defwork",
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "On the muster roll at {settlement} the pay is under its due, and the {defwork} holds.",
-            "The wage roll at {settlement} is not met. The town's {defwork} is in place.",
-            "Wages at {settlement} run short of the roll, and the {defwork} stands."
+            "On the muster roll at {settlement} the pay sits under its due, and the {defwork} holds.",
+            "Wages at {settlement} are met short of the roll. The town's {defwork} is in place.",
+            "At {settlement} the {defwork} is up. The town's muster is paid below its roll."
           ]
         },
         {
           "angle": "unfolding",
-          "text": "Pay for {settlement}'s muster stands open on the roll, and the {defwork} is up.",
+          "text": "Pay for {settlement}'s muster is a term left open on the roll, and the {defwork} stands.",
           "slots": [
             "settlement",
             "defwork"
           ],
           "vid": 2,
           "wordings": [
-            "The roll at {settlement} sets a wage above what the muster is paid, and the {defwork} holds.",
-            "Muster pay at {settlement} is not made up. The town has its {defwork}.",
-            "At {settlement} the muster is not paid to its full wage, and the {defwork} is in place."
+            "The roll at {settlement} sets a wage above the muster's pay, and the {defwork} is in place.",
+            "Muster pay at {settlement} is not made up to the roll. The town has its {defwork}.",
+            "The muster at {settlement} is not paid to its full wage, and the {defwork} is up."
           ]
         }
       ],
