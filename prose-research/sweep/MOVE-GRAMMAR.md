@@ -353,3 +353,6 @@ Control 4 stands: today's R1 leaves RED on arm E, which carries a fail channel. 
 
 ### §4.4.3 — THE PROVENANCE MOVE (owner "Do it", 2026-09-08; SITTING §Q)
 A move that names the holder of the record a fact comes from ("the count is the watch's own"; "the toll roll, which the Salters keep, shows…" is refused for its "which" — write it as two sentences or a lawful joint). Licensed only where the census's `source` column resolves the holder for THIS town; budgeted from the exemplar bands like every move (the rate measured at the taste, car 6, and set at the sitting, car 7); classified by arm A13; a citation on a fact whose holder is the office itself is a finding (the office does not cite its own books).
+
+### §1.4.1 — THE THREAD (owner, 2026-09-08 ~21:4x; a wall of every composed order)
+Adjacent sentences of a composed unit must connect: an added sentence carries a noun forward from the sentence before it, or its change of subject is the passage's one turn outward and sits last. The spine is first; modifiers follow by salience; a kinship tiebreak inside a band keeps the modifier that shares the spine's subject nearest the spine (ruled at the sitting). A11's echo bound counts facts, not nouns: a deliberate noun echo for the thread is lawful.
