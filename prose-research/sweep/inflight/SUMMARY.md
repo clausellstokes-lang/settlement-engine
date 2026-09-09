@@ -1,15 +1,20 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 11:43:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 11:49:01 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
-| ? | other |  | in-flight | 0 | — | — | 15:37:07 |
-| ? | other |  | in-flight | 0 | draft-round-1.md | — | 15:42:48 |
-| ? | other |  | in-flight | 0 | — | — | 15:36:48 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:46:13 |
+| ? | other |  | in-flight | 0 | — | — | 15:46:19 |
+| ? | other |  | in-flight | 0 | — | — | 15:49:00 |
+| ? | other |  | in-flight | 0 | — | — | 15:47:32 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:43:08 |
+| ? | other |  | in-flight | 0 | — | — | 15:49:00 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:48:55 |
 | ? | other |  | result | 0 | — | — | 15:37:52 |
-| ? | other |  | in-flight | 0 | — | — | 15:38:07 |
-| ? | other |  | in-flight | 0 | draft-round-1.md | — | 15:42:58 |
+| ? | other |  | in-flight | 0 | — | — | 15:47:59 |
+| ? | other |  | in-flight | 0 | — | — | 15:45:51 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:45:11 |
 | ? | other |  | result | 0 | — | — | 15:35:31 |
-| ? | other |  | in-flight | 0 | — | — | 15:39:15 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:48:55 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:35:40 |
 | ? | other |  | result | 0 | — | — | 15:36:43 |
 | ? | other |  | result | 0 | — | — | 11:49:05 |
@@ -17,15 +22,16 @@
 | ? | other |  | result | 0 | — | — | 11:56:04 |
 | ? | other |  | result | 0 | instruments-and-gate.md | — | 11:46:59 |
 | ? | other |  | result | 0 | — | — | 15:38:15 |
-| ? | other |  | in-flight | 0 | — | — | 15:41:49 |
-| ? | other |  | in-flight | 0 | — | — | 15:42:59 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:43:54 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:47:49 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:41:31 |
-| ? | other |  | in-flight | 0 | — | — | 15:29:47 |
+| ? | other |  | in-flight | 0 | — | — | 15:44:17 |
+| ? | other |  | in-flight | 0 | — | — | 15:49:01 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:36:57 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:39:37 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:41:47 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:39:06 |
-| ? | other |  | in-flight | 0 | — | — | 15:39:05 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 15:48:56 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:38:52 |
 | ? | other |  | result | 0 | — | — | 15:33:03 |
 | ? | other |  | result | 0 | — | — | 15:35:37 |
