@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 02:49:50 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 02:57:51 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -6,16 +6,16 @@
 | ? | other |  | result | 0 | — | — | 06:02:34 |
 | ? | other |  | result | 0 | refine-A.md | — | 06:26:31 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:55:10 |
-| ? | other |  | in-flight | 0 | — | — | 06:47:13 |
-| ? | other |  | in-flight | 0 | — | — | 06:49:47 |
-| ? | other |  | in-flight | 0 | — | — | 06:48:03 |
-| ? | other |  | in-flight | 0 | — | — | 06:46:46 |
+| ? | other |  | result | 0 | refine-B.md | — | 06:56:09 |
+| ? | other |  | in-flight | 0 | — | — | 06:57:14 |
+| ? | other |  | result | 0 | refine-B.md | — | 06:56:51 |
+| ? | other |  | result | 0 | refine-B.md | — | 06:57:20 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:12:31 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:34:33 |
 | ? | other |  | result | 0 | refine-A.md | — | 06:17:52 |
 | ? | other |  | result | 0 | — | — | 03:15:40 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 03:20:15 |
-| ? | other |  | in-flight | 0 | — | — | 06:45:37 |
+| ? | other |  | result | 0 | refine-B.md | — | 06:56:55 |
 | ? | other |  | result | 0 | — | — | 06:19:51 |
 | ? | other |  | result | 0 | — | — | 04:07:50 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:59:17 |
@@ -24,6 +24,7 @@
 | ? | other |  | result | 0 | draft-round-2.md | — | 04:00:12 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:25:50 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:24:37 |
+| ? | other |  | in-flight | 0 | — | — | 06:57:50 |
 | ? | other |  | result | 0 | — | — | 03:41:15 |
 | ? | other |  | result | 0 | — | — | 04:57:56 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 04:20:19 |
@@ -44,7 +45,7 @@
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:18:03 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 03:58:18 |
 | ? | other |  | result | 0 | — | — | 04:28:08 |
-| ? | other |  | in-flight | 0 | — | — | 06:49:03 |
+| ? | other |  | result | 0 | refine-B.md | — | 06:57:08 |
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:01:23 |
 | ? | other |  | result | 0 | draft-round-4.md | — | 05:03:40 |
 | ? | other |  | result | 0 | — | — | 03:14:43 |
