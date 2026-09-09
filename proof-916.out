@@ -2,3 +2,4 @@
   probe: load=1.78 workers=0 streak=2 waited=60s
   probe: load=1.82 workers=0 streak=3 waited=120s
 QUIET CONFIRMED after 120s
+PROOF_EXIT=0
