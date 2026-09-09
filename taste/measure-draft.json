@@ -1,7 +1,7 @@
 {
  "arm": "draft",
  "round": 3,
- "at": "2026-09-09T05:22:52",
+ "at": "2026-09-09T05:31:57",
  "projection": {
   "ok": true,
   "waivers": [
@@ -30,6 +30,10 @@
   ],
   "metricsBanded": 21,
   "why": ""
+ },
+ "synonymTable": {
+  "fields": 0,
+  "why": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
  },
  "pools": [
   {
@@ -471,7 +475,47 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 24
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-STRAINED",
+     "clause": "stone keeps itself, and wages do not.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 12,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "stone keeps itself, and wages do not.",
+     "spineKey": "WALLED-STRAINED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-11",
@@ -1193,7 +1237,101 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 48
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "UNWALLED-LARGE",
+     "clause": "whether that is confidence or thrift, the openness is itself a statement.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "F25 · a cited record's content",
+     "arm": "a cited record's content",
+     "klass": "F25",
+     "channel": "WITHHELD",
+     "spineKey": "UNWALLED-LARGE",
+     "clause": "the books say",
+     "description": "the predicate is attributed to a record; fault 25 asks what that record HOLDS, and no loader reaches its fields yet",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "UNWALLED-SMALL",
+     "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "UNWALLED-SMALL",
+     "clause": "at this size the country and the town simply agree to differ.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 48,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "whether that is confidence or thrift, the openness is itself a statement.",
+     "spineKey": "UNWALLED-LARGE",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.tier"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "the town's safety is its neighbours, its distance, and its unimportance.",
+     "spineKey": "UNWALLED-SMALL",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.tier"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "at this size the country and the town simply agree to differ.",
+     "spineKey": "UNWALLED-SMALL",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.tier"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-11",
@@ -1916,7 +2054,118 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 96
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-QUIET",
+     "clause": "built work stands on its own patience.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-STRAINED",
+     "clause": "stone keeps itself, and wages do not.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-THREATENED",
+     "clause": "the threat is on the town's books as plainly as the grain.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-THREATENED",
+     "clause": "the town knows what it is for and checks it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 48,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "built work stands on its own patience.",
+     "spineKey": "WALLED-QUIET",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "stone keeps itself, and wages do not.",
+     "spineKey": "WALLED-STRAINED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "the threat is on the town's books as plainly as the grain.",
+     "spineKey": "WALLED-THREATENED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [
+      "settlement.config.monsterThreat (as \"threat\")"
+     ],
+     "verdict": "the clause DOES name a field the spine declares it reads, so the arm and the census disagree",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "the town knows what it is for and checks it.",
+     "spineKey": "WALLED-THREATENED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-11",
@@ -2639,7 +2888,118 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 96
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-QUIET",
+     "clause": "built work stands on its own patience.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-STRAINED",
+     "clause": "stone keeps itself, and wages do not.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-THREATENED",
+     "clause": "the threat is on the town's books as plainly as the grain.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "WALLED-THREATENED",
+     "clause": "the town knows what it is for and checks it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 48,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "built work stands on its own patience.",
+     "spineKey": "WALLED-QUIET",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "stone keeps itself, and wages do not.",
+     "spineKey": "WALLED-STRAINED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "the threat is on the town's books as plainly as the grain.",
+     "spineKey": "WALLED-THREATENED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [
+      "settlement.config.monsterThreat (as \"threat\")"
+     ],
+     "verdict": "the clause DOES name a field the spine declares it reads, so the arm and the census disagree",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    },
+    {
+     "clause": "the town knows what it is for and checks it.",
+     "spineKey": "WALLED-THREATENED",
+     "count": 12,
+     "reads": [
+      "forces.walls.present",
+      "settlement.config.monsterThreat",
+      "settlement.defenseProfile.economicGates.military"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-2",
@@ -3176,7 +3536,56 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 36
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "rather than in the luck",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 24,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "count": 12,
+     "reads": [
+      "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-DEF-2",
@@ -3713,7 +4122,56 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 36
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "rather than in the luck",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 24,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "count": 12,
+     "reads": [
+      "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   },
   {
    "block": "DS-GEN-3",
@@ -4251,15 +4709,65 @@
    "provenance": {
     "citations": 0,
     "a13": 0
-   }
+   },
+   "owned": {
+    "verdicts": {
+     "FAIL": 0,
+     "WITHHELD": 0,
+     "PASS": 72
+    },
+    "findings": [],
+    "findingCount": 0,
+    "byLabel": []
+   },
+   "inherited": [
+    {
+     "label": "Q · a trailing coordinate naming no second field",
+     "arm": "a trailing coordinate naming no second field",
+     "klass": "Q",
+     "channel": "WITHHELD",
+     "spineKey": "scores.military: CRITICAL",
+     "clause": "the gate is shut at night by whoever is nearest to it.",
+     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 12
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "scores.military: WEAK",
+     "clause": "rather than in what the hall issues",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: scores.military: STRONG | scores.military: ADEQUATE | scores.military: WEAK | scores.military: CRITICAL)",
+     "count": 12
+    }
+   ],
+   "inheritedCount": 24,
+   "spineWithheld": true,
+   "qVocabulary": [
+    {
+     "clause": "the gate is shut at night by whoever is nearest to it.",
+     "spineKey": "scores.military: CRITICAL",
+     "count": 12,
+     "reads": [
+      "axis",
+      "score"
+     ],
+     "mapped": [],
+     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
+     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+    }
+   ],
+   "inBand": true,
+   "failing": []
   }
  ],
  "walk": {
   "totalUnits": 408,
   "n": 408,
   "exhaustive": true,
-  "msPerUnit": 0.215,
-  "exhaustiveMs": 88,
+  "msPerUnit": 0.225,
+  "exhaustiveMs": 92,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
   "verdicts": {
