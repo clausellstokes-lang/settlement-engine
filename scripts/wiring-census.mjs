@@ -46,6 +46,7 @@ import {
   spineRows, tierRows, TIERS, WIRING_STATUS, wiringCensus,
 } from '../src/domain/prose/wiringCensus.js';
 import { holderCensus, sourceSummary } from '../src/domain/prose/holderTable.js';
+import { fieldSynonymTable } from '../src/domain/prose/fieldSynonyms.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS } from '../src/domain/display/stateProse/dossierMounts.js';
 import { CONDITION_ARCHETYPE_TEMPLATES } from '../src/domain/activeConditions.js';
 import { canonicalAffectedSystems } from '../src/domain/worldPulse/stressorsCore.js';
@@ -1103,6 +1104,18 @@ export async function buildCensus(options = {}) {
         + ' SEAM car 4 and carries exactly these rows.',
       rows: ratifiedAliasRows,
     },
+    // ⭐⭐ THE FIELD-SYNONYM TABLE (REWRITE car 8a-6; SITTING §H rule 3). A REPORT column and
+    // never a gate: the nouns a field may be named by in prose, so arm Q, F25 and A0b can see a
+    // clause that names a real second field in the field's own WORLD word rather than in its
+    // PATH's word. `wages` names the military economic gate; `books` and `roll` name the record
+    // a holder kind keeps. Ratified like an alias — every row cites where the join comes from.
+    fieldSynonyms: fieldSynonymTable(spines),
+    fieldSynonymsRuling: 'SITTING §H rule 3 and the chair\'s M-9 ruling 4. THE COLUMN IS A'
+      + ' REPORT: it widens what an arm can SEE and licenses nothing on its own. A synonym is'
+      + ' ratified like an alias — cited to the card, never to a comment or a prose string — so'
+      + ' a row whose only evidence is that a writer used the word is not a synonym. The'
+      + ' HOLDER-KIND nouns are generated from the frozen HOLDER_KINDS list rather than typed,'
+      + ' so a kind added there gains its nouns with no edit.',
     tiers,
     rate: options.rates || null,
     narrowsRefusals: census.refusals,

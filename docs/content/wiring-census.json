@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1155
+    "producerIndexFiles": 1156
   },
   "totals": {
     "pools": 708,
@@ -46843,6 +46843,401 @@
       }
     ]
   },
+  "fieldSynonyms": {
+    "analysis.economicStrengths": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "analysis.strategicValue": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "beastsRowSituation(family, perimeter, force) (via BEASTS_ROW_POOL in defenseStateProse.js)": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "blockaded": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "covert": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "doc": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "doc.termLines": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "eco": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "eco.foodSecurity.stockpile": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "eco.foodSecurity.stockpile.blockadeBypass": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "eco.foodSecurity.stockpile.blockaded": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "eco.incomeSources": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "eco.incomeSources.filter": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "eco.incomeSources.length": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "eco.incomeSources.reduce": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "eco.isEntrepot": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "eco.localProduction": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "eco.primaryExports": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "eco.primaryImports": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "eco.safetyProfile.blackMarketCapture": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "faith.piety.trend": [
+      "book",
+      "books",
+      "register"
+    ],
+    "faith.unaffiliated": [
+      "book",
+      "books",
+      "register"
+    ],
+    "forces": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "forces.charter.present": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "forces.garrison.present": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "forces.mercenary.present": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "forces.militia.present": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "forces.walls.present": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "granary": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "ledger": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "ledger.present": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "legitimacy": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "legitimacy.breakdown": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "legitimacy.govMultiplier": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "legitimacy.governanceFractured": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "marker.yearsAgo": [
+      "memory",
+      "word"
+    ],
+    "namedChain": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "navy": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "politics.blocs": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "port": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "power.criminalCaptureState": [
+      "roll",
+      "rolls",
+      "watch"
+    ],
+    "power.recentConflict": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "power.stability": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "readings": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.activeChains": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.criticalIssueCount": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "readings.exploitation": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.exportPosture.status": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.isEntrepot": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.primaryImports": [
+      "book",
+      "books",
+      "stall"
+    ],
+    "readings.prominentRelationship": [
+      "book",
+      "books",
+      "record"
+    ],
+    "readings.structuralSuggestions": [
+      "book",
+      "books",
+      "record"
+    ],
+    "readings.structuralSuggestions.length": [
+      "book",
+      "books",
+      "record"
+    ],
+    "readings.structuralViolations": [
+      "book",
+      "books",
+      "record"
+    ],
+    "readings.structuralViolations.length": [
+      "book",
+      "books",
+      "record"
+    ],
+    "readings.tradeRouteAccess": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "readings.viable": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "settlement.config.tradeRouteAccess": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "settlement.defenseProfile.economicGates.military": [
+      "muster",
+      "pay",
+      "purse",
+      "roll",
+      "rolls",
+      "wage",
+      "wages"
+    ],
+    "settlement.defenseProfile.magicDependency": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "settlement.economicViability.viable": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "settlement.tier": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "stress": [
+      "books",
+      "chest",
+      "purse"
+    ],
+    "term": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "term.fraying": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "term.yearsRemaining": [
+      "record",
+      "roll",
+      "rolls"
+    ],
+    "text(terrainType) (via TERRAIN_FAMILY_OF in generalStateProse.js)": [
+      "book",
+      "books"
+    ],
+    "text(tradeRouteAccess) (via ORIGIN_POOL_OF_ROUTE in generalStateProse.js)": [
+      "book",
+      "books",
+      "toll"
+    ],
+    "war.mobilization.ticksToDeploy": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.occupation": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.occupierPosition": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.occupierPosition.stretchedThin": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.postureState": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.status": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.status.besiegedBy": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.status.besiegingTargets": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
+    "war.status.besiegingTargets.length": [
+      "muster",
+      "roll",
+      "rolls"
+    ]
+  },
+  "fieldSynonymsRuling": "SITTING §H rule 3 and the chair's M-9 ruling 4. THE COLUMN IS A REPORT: it widens what an arm can SEE and licenses nothing on its own. A synonym is ratified like an alias — cited to the card, never to a comment or a prose string — so a row whose only evidence is that a writer used the word is not a synonym. The HOLDER-KIND nouns are generated from the frozen HOLDER_KINDS list rather than typed, so a kind added there gains its nouns with no edit.",
   "tiers": [
     {
       "tier": "MISSING",

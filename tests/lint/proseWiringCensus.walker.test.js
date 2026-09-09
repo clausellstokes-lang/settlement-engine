@@ -66,6 +66,9 @@ import { UNMOUNTED_BLOCKS } from '../../src/domain/display/stateProse/dossierMou
 import { loadStateLeaves, poolCells, ROOT, STATE_ANNEX } from '../helpers/dossierCorpus.js';
 import { readAnnexDeclarations } from '../../scripts/lib/dossier-annex-grammar.mjs';
 import {
+  FIELD_SYNONYM_ROWS, HOLDER_KIND_NOUN_ROWS, fieldSynonymTable, fieldSynonymsFor,
+} from '../../src/domain/prose/fieldSynonyms.js';
+import {
   composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites, unrenderedFacts,
 } from '../helpers/dossierComposedFill.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
@@ -488,7 +491,7 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     expect(allUnresolved.resolved, 'and one with nothing resolved is a third').toBe(0);
   });
 
-  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its THIRTEEN modules', () => {
+  test('(e) THE FENCE: no src/ file outside the ISLAND names any of its FIFTEEN modules', () => {
     // ⛔ WIDENED FROM ONE MODULE TO TEN (INSTR-912 car 10, cure 10; FOLD-2 hazard H8). The
     // arm fenced `wiringCensus` alone, so a §913 or wave car could wire `entryWalker`,
     // `grammarWalker`, `moveGrammar`, `presenceMeasure`, `plantLedger`, `proseFingerprint`,
@@ -499,6 +502,15 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       'src/domain/prose/entryGround.js',
       'src/domain/prose/entryLexicons.js',
       'src/domain/prose/entryWalker.js',
+      // ⭐ THE FIFTEENTH, ADDED BY REWRITE car 8a-6. `fieldSynonyms.js` is the RATIFIED TABLE
+      // of nouns a field may be named by — the column arm Q, F25 and A0b read. It is fenced
+      // because it is an authoring licence: a product surface reaching for it would be a desk
+      // deciding at render what a field may be called, which is the census's ruling and not a
+      // desk's. It lives out here rather than inside `wiringCensus.js` because that file was
+      // over its 800-line ceiling with it, and because ratified data does not belong inside a
+      // scanner — the move also stopped the census reading the table's own property names as
+      // leaf keys the estate writes.
+      'src/domain/prose/fieldSynonyms.js',
       'src/domain/prose/grammarWalker.js',
       // ⭐ THE THIRTEENTH, ADDED BY SEAM CAR 5b. The holder table answers "who keeps the record
       // this fact comes from", which is a question a DM PANEL would very much like to ask at
@@ -561,20 +573,37 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     // through it and nothing else in the estate names it. A fence that held because nothing
     // imports the module at all would pass the loop above and prove nothing.
     const holderHits = files.filter(([, text]) => text.includes('holderTable')).map(([p]) => p);
-    expect(holderHits, 'the census IMPORTS it; the composed walker NAMES it in arm A13\'s docblock,'
-      + ' which is lawful because both are inside the island')
-      .toEqual(['src/domain/prose/composedWalker.js', 'src/domain/prose/holderTable.js',
-        'src/domain/prose/wiringCensus.js']);
+    expect(holderHits, 'the census IMPORTS it; the composed walker NAMES it in arm A13\'s docblock;'
+      + ' and REWRITE car 8a-6\'s synonym table imports HOLDER_KINDS so a kind added to that'
+      + ' frozen list gains its record nouns with no edit — all three lawful because every one'
+      + ' of them is inside the island')
+      .toEqual(['src/domain/prose/composedWalker.js', 'src/domain/prose/fieldSynonyms.js',
+        'src/domain/prose/holderTable.js', 'src/domain/prose/wiringCensus.js']);
     // AND THE INSIDE OF THE ISLAND IS STILL ONE GRAPH, not thirteen copies of the same fence:
     // the census names exactly one module of the eleven, so the equality the first cut
     // asserted is kept as the sharpest single case rather than lost inside the loop.
     const censusHits = files.filter(([, text]) => text.includes('wiringCensus')).map(([p]) => p);
-    expect(censusHits).toEqual(['src/domain/prose/wiringCensus.js']);
+    // ⭐ TWO SINCE REWRITE car 8a-6, and the second is a NAMING and not an import:
+    // `fieldSynonyms.js` says in its own docblock why it is NOT inside `wiringCensus.js` (that
+    // file was over its 800-line ceiling with the table in it, and a scanner is no home for
+    // ratified data). Lawful for the same reason arm A13's docblock may name `holderTable`:
+    // both files are inside the island. No product surface names it, which the breaches loop
+    // above is what proves.
+    expect(censusHits).toEqual([
+      'src/domain/prose/fieldSynonyms.js', 'src/domain/prose/wiringCensus.js',
+    ]);
     // AND THE ELEVENTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND, which is the
     // paired positive: a fence that held because nothing imports the module at all would
     // pass this loop and prove nothing.
     const branchHits = files.filter(([, text]) => text.includes('wiringBranch')).map(([p]) => p);
-    expect(branchHits).toEqual(['src/domain/prose/wiringBranch.js', 'src/domain/prose/wiringCensus.js']);
+    // ⭐ THREE SINCE REWRITE car 8a-6: `fieldSynonyms.js` cites `wiringBranch.js` in its
+    // docblock as the PRECEDENT for its own existence — car 0 split the branch reader out of
+    // the census for the same ceiling reason rather than banking a burn-down row. A citation
+    // is a naming, not an import, and both files are inside the island.
+    expect(branchHits).toEqual([
+      'src/domain/prose/fieldSynonyms.js', 'src/domain/prose/wiringBranch.js',
+      'src/domain/prose/wiringCensus.js',
+    ]);
     // AND THE TWELFTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND SINCE REWRITE car
     // 8a-2, which is the state this arm was written to notice. It said "a desk that reached
     // for it would move this list", and the list moved — lawfully, to an importer INSIDE the
@@ -591,6 +620,18 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     // in src/ names it, because the composer is deliberately NOT its caller at car 8a. The day
     // `composeStateProse.js` appears in this list, a second passage shape has shipped and the
     // register's `passage-shape` row owes a declared movement.
+    // AND THE FIFTEENTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND (REWRITE car 8a-6):
+    // `fieldSynonyms` is named by nothing in `src/` but itself. Its readers are all OUTSIDE
+    // `src/` — the census script, the wave gate and the walkers — which is lawful because the
+    // fence is about PRODUCT surfaces reaching the island, and a script is not one.
+    const synonymHits = files.filter(([, text]) => text.includes('fieldSynonyms')).map(([p]) => p);
+    // TWO, AND THE SECOND IS A NAMING: `entryWalker.js`'s `ProseEntry` typedef says where a
+    // `vocabulary` comes from, which is what makes arm Q's new column readable rather than
+    // magic. Both are inside the island; its READERS — the census script, the wave gate and
+    // the walkers — are all outside `src/`, which is lawful because the fence is about PRODUCT
+    // surfaces reaching the island and a script is not one.
+    expect(synonymHits, 'no product surface decides at render what a field may be called')
+      .toEqual(['src/domain/prose/entryWalker.js', 'src/domain/prose/fieldSynonyms.js']);
     const shapeHits = files.filter(([, text]) => text.includes('passageShapes')).map(([p]) => p);
     expect(shapeHits, 'nothing ships a second shape at car 8a, measured rather than promised')
       .toEqual([
@@ -2338,3 +2379,66 @@ describe('car 0 — the RATE corpus, its per-tier arm and the occurrence bound',
   });
 });
 
+describe('⭐⭐ REWRITE car 8a-6 — THE FIELD-SYNONYM TABLE, a REPORT column ratified like an alias', () => {
+  test('the ratified rows are short, closed and each CITED', () => {
+    // SITTING §H rule 3, and the alias law applied: "a synonym is ratified like an alias —
+    // cited to the card, never to a comment or a prose string". A generous table would make
+    // arm Q quieter without anybody deciding it should be, so the roster is short and every
+    // row says where the join comes from.
+    expect(FIELD_SYNONYM_ROWS.length, 'the ratified field rows at this tip').toBe(1);
+    for (const row of FIELD_SYNONYM_ROWS) {
+      expect(row.field, 'a row names a FIELD PATH, not a pool key').toContain('.');
+      expect(row.nouns.length, 'and at least one noun').toBeGreaterThan(0);
+      expect(row.at, 'and cites where the join comes from').toContain('SITTING');
+    }
+    expect(FIELD_SYNONYM_ROWS[0].field).toBe('settlement.defenseProfile.economicGates.military');
+    expect(FIELD_SYNONYM_ROWS[0].nouns, 'the owner\'s own exemplar word').toContain('wages');
+  });
+
+  test('⛔ THE HOLDER NOUNS ARE ROWS, NOT AN OBJECT KEYED BY KIND, and the reason is a defect', () => {
+    // ⛔⛔ WRITTEN FIRST AS `{ treasury: [...], court: [...], … }`, this table CHANGED THE
+    // CENSUS'S OWN MEASUREMENT: the census scans `src/` for the leaf keys the estate WRITES,
+    // read a property named `court:` inside the module it scans, and flipped the `absent` label
+    // on four DS-DEF-2 rows from `not-produced` to `measured`. An instrument that contaminates
+    // its own reading by being added to the file it reads is the class this register exists to
+    // refuse. As rows there is no key for the producer scan to misread.
+    expect(Array.isArray(HOLDER_KIND_NOUN_ROWS), 'a LIST, so no property name is a write').toBe(true);
+    const kinds = HOLDER_KIND_NOUN_ROWS.map((r) => r.kind);
+    expect([...new Set(kinds)].length, 'no kind twice').toBe(kinds.length);
+    // AND EVERY KIND OF THE FROZEN LIST IS COVERED, so a kind added there is not silently mute.
+    for (const kind of HOLDER_KINDS) expect(kinds, `${kind} has no record noun`).toContain(kind);
+  });
+
+  test('the per-row vocabulary joins the FIELD rows and the HOLDER nouns, and keeps them apart', () => {
+    // A `roll` is the record the WHOLE row is kept in; `wages` names ONE gate. Merging the two
+    // would let a `books` claim a field the treasury does not keep.
+    const gate = 'settlement.defenseProfile.economicGates.military';
+    expect(fieldSynonymsFor({ reads: [gate], source: { kind: 'treasury' } })[gate].sort())
+      .toEqual(['books', 'chest', 'pay', 'purse', 'wage', 'wages']);
+    expect(fieldSynonymsFor({ reads: [gate], source: {} })[gate].sort(),
+      'with no holder kind, only the field row applies')
+      .toEqual(['pay', 'purse', 'wage', 'wages']);
+    expect(fieldSynonymsFor({ reads: ['forces.walls.present'], source: {} }),
+      'a field with no row and no kind gains nothing').toEqual({});
+    expect(fieldSynonymsFor({}), 'and a row with no reads answers nothing').toEqual({});
+  });
+
+  test('the COMMITTED census carries the column, and it agrees with the module', () => {
+    const committedTable = /** @type {any} */ (JSON.parse(readFileSync(CENSUS_JSON, 'utf8'))).fieldSynonyms;
+    expect(committedTable, 'the register ships the REPORT column').toBeTruthy();
+    expect(fieldSynonymTable(spineRows(census.rows)), 'and it is the module\'s own answer')
+      .toEqual(committedTable);
+    expect(Object.keys(committedTable).length, 'over this many fields').toBeGreaterThan(0);
+    expect(committedTable['settlement.defenseProfile.economicGates.military'],
+      'including the row SITTING §H names').toContain('wages');
+  });
+
+  test('⛔ IT IS A REPORT AND NEVER A GATE: no row of the census carries a per-row synonym column', () => {
+    // The table is a top-level section keyed by FIELD. Writing it onto each ROW would make it
+    // look like a licence the row carries, and a reader would have to guess whether an arm was
+    // reading the row's own column or the register's table.
+    const withColumn = census.rows.filter((row) => row.fieldSynonyms !== undefined
+      || row.synonyms !== undefined || row.fieldVocabulary !== undefined);
+    expect(withColumn.map((r) => `${r.block} :: ${r.pool}`)).toEqual([]);
+  });
+});

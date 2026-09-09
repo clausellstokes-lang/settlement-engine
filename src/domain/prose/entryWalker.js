@@ -85,6 +85,15 @@ import {
  * @property {string} [angle]
  * @property {ReadonlyArray<string>} [marks]
  * @property {ReadonlyArray<string>} [slots] the slots the variant DECLARES it names
+ * @property {ReadonlyArray<string>} [reads] the TYPED FIELDS the pool's selecting branch
+ *   evaluates, from the wiring census. ⭐ ADDED AT REWRITE car 8a-6 so ARM Q can ask the
+ *   question it was written to ask: R-DA-03 licenses a qualifier by a SECOND TYPED FIELD, and
+ *   until this column reached the walker the arm could only look for a `{slot}` or a band word
+ *   — so a clause naming a real second field in the field's OWN words was withheld anyway.
+ * @property {Readonly<Record<string, ReadonlyArray<string>>>} [vocabulary] the census's
+ *   `fieldSynonyms` REPORT column for this row: the nouns a field may be named by in prose,
+ *   ratified like an alias and cited to the card (SITTING §H rule 3). Absent is not a failure;
+ *   it narrows what the arm can see to the field path's own words.
  * @property {string} [file]
  * @property {number} [line]
  * @property {string} [register] R1 · R2 · R5 · R6 · R7 · annex · generator …
@@ -797,6 +806,54 @@ function armD(entry, ground, out) {
 }
 
 /**
+ * The words that CLAIM a field, derived from the field's own path.
+ *
+ * A dotted path's last segment is the field; a camel-cased segment is two or more words the
+ * prose would spell apart (`economicGates` is "economic gates"); a plural and its singular are
+ * one claim. A caller with a richer vocabulary passes it in; nothing is guessed beyond the
+ * name the census itself carries.
+ * @param {string} field
+ * @returns {string[]} lower-case tokens, longest first
+ */
+export function claimTokensOf(field) {
+  const path = String(field || '').split('.').filter(Boolean);
+  const leaf = path.length ? path[path.length - 1] : '';
+  if (leaf === '') return [];
+  const words = leaf.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().split(/[\s_]+/)
+    .filter((word) => word.length > 2);
+  /** @type {string[]} */
+  const tokens = [];
+  for (const word of [leaf.toLowerCase(), ...words]) {
+    if (word.length <= 2 || tokens.includes(word)) continue;
+    tokens.push(word);
+    const singular = word.endsWith('s') ? word.slice(0, -1) : `${word}s`;
+    if (singular.length > 2 && !tokens.includes(singular)) tokens.push(singular);
+  }
+  return tokens.sort((a, b) => b.length - a.length);
+}
+
+/**
+ * Does this text CLAIM this field? A `{slot}` naming the field's leaf is a typed reference and
+ * counts outright; otherwise one of the field's own words must stand as a whole word.
+ * @param {string} text
+ * @param {string} field
+ * @param {Readonly<Record<string, ReadonlyArray<string>>>} [vocabulary] extra words per field
+ * @returns {string} the token that claimed it, or `''`
+ */
+export function claimsField(text, field, vocabulary = {}) {
+  const body = String(text || '');
+  const lower = body.toLowerCase();
+  const extra = vocabulary[field] || [];
+  const tokens = [...claimTokensOf(field), ...extra.map((word) => String(word).toLowerCase())];
+  for (const token of tokens) {
+    if (body.includes(`{${token}}`)) return `{${token}}`;
+    const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp(`\\b${escaped}\\b`).test(lower)) return token;
+  }
+  return '';
+}
+
+/**
  * ARM Q — the QUALIFY licence (R-DA-03 as the chair restated it after the taste sample's
  * third refutation: a second FACT licensed by a SECOND typed field, its own sentence, never
  * a which-tail). A second sentence that references no slot and no typed field is an
@@ -813,6 +870,22 @@ function armQualify(entry, ground, out) {
    * @param {string} segment the candidate qualifier
    * @param {string} shape the arm's own name for the shape it found
    */
+  // ⭐⭐ THE THIRD LICENCE, AND THE ARM'S CURE AT CAUSE (REWRITE car 8a-6; SITTING §H rule 3
+  // and the chair's M-9 ruling 4: "ARM Q IS DEFECTIVE, not merely short of vocabulary").
+  //
+  // ⛔ THE CONVICTING ROW, KEPT: `the threat is on the town's books as plainly as the grain.`
+  // sits on a spine that READS `settlement.config.monsterThreat`, names it in the field's own
+  // word — `threat` — and arm Q withheld it anyway. The arm asked two questions (is there a
+  // `{slot}`? is there a band word?) and never the one R-DA-03 actually asks: does the segment
+  // name a SECOND TYPED FIELD. It could not ask it, because the walker had no `reads` column.
+  // Now it does, and the question is put through `claimsField` — the estate's one reader of
+  // "does this text claim this field" — with the census's ratified synonyms as its vocabulary.
+  //
+  // ⛔ AND THE WITHHOLD SAYS WHICH FIELDS IT CONSULTED, so an unlicensed segment is still a
+  // refuter's question and never a silent pass, and a reader can see whether the arm was short
+  // of a column or the line was short of a fact.
+  const reads = Array.isArray(entry.reads) ? entry.reads : [];
+  const vocabulary = entry.vocabulary || {};
   const consider = (segment, shape) => {
     const text = segment.trim();
     if (!text) return;
@@ -820,8 +893,14 @@ function armQualify(entry, ground, out) {
     // A segment carrying a band word or a status word is grounded in the same typed reading
     // and is not the unlicensed shape.
     if (bandReadings(text).length) return;
+    const claimed = reads.map((field) => ({ field, token: claimsField(text, field, vocabulary) }))
+      .filter((row) => row.token !== '');
+    if (claimed.length) return; // a SECOND TYPED FIELD is named in words: licensed (R-DA-03)
     out.withheld.push(finding(entry, 'Q', shape, text,
-      '(second typed field)', declared.join(', ') || 'none',
+      '(second typed field)',
+      reads.length
+        ? `reads [${reads.join(', ')}]; none claimed`
+        : (declared.join(', ') || 'none'),
       'R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter\'s call'));
   };
   for (let i = 1; i < raw.length; i++) consider(raw[i], 'a second sentence naming no second field');

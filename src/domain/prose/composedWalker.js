@@ -45,7 +45,16 @@
  * @enforced-by tests/lint/proseComposed.walker.test.js
  */
 import { CONTRAST_SHAPES } from './entryLexicons.js';
-import { clausesOf, sentencesOf, typedFactsOf, walkEntry } from './entryWalker.js';
+import {
+  claimTokensOf, claimsField, clausesOf, sentencesOf, typedFactsOf, walkEntry,
+} from './entryWalker.js';
+
+// ⭐ RE-EXPORTED, NOT RE-SPELLED (REWRITE car 8a-6). `claimTokensOf` and `claimsField` moved
+// DOWN into `entryWalker.js` so ARM Q can read them: this module imports that one, so the
+// dependency could only run one way. Every existing caller — the wave gate, the walkers, the
+// projection contract — goes on importing them from here, and there is still exactly one
+// implementation of "does this text claim this field".
+export { claimTokensOf, claimsField };
 import { classifyMoves, composedOrderIdOf } from './moveGrammar.js';
 
 /**
@@ -163,7 +172,8 @@ export function mergeResults(into, from) {
  * would report nothing. The MARKS are the union for the same reason and a harder one: the
  * audience law truncates the WHOLE unit, so one `dm-only` piece marks the unit.
  * @param {ComposedUnitRow} unit
- * @param {{register?: string, file?: string}} [extra]
+ * @param {{register?: string, file?: string, reads?: ReadonlyArray<string>,
+ *   vocabulary?: Readonly<Record<string, ReadonlyArray<string>>>}} [extra]
  * @returns {import('./entryWalker.js').ProseEntry}
  */
 export function composedEntryOf(unit, extra = {}) {
@@ -184,6 +194,12 @@ export function composedEntryOf(unit, extra = {}) {
     slots,
     register: extra.register || 'R1',
     file: extra.file || '',
+    // ⭐ THE TYPED READS AND THEIR RATIFIED NOUNS (REWRITE car 8a-6), carried so ARM Q can ask
+    // whether a qualifier names a SECOND TYPED FIELD. ABSENT is a narrowing and not a failure:
+    // a caller that brings no census reader gets the arm it had before this car, which is why
+    // both are optional rather than required.
+    ...(Array.isArray(extra.reads) ? { reads: extra.reads } : {}),
+    ...(extra.vocabulary ? { vocabulary: extra.vocabulary } : {}),
   };
 }
 
@@ -217,53 +233,6 @@ export function composedOrderOf(unit) {
 /** The census's own synthetic label for a recovered TABLE reading, which is not a field. */
 const SYNTHETIC_READ_RE = /\(via .+ in .+\)$/;
 
-/**
- * The words that CLAIM a field, derived from the field's own path.
- *
- * A dotted path's last segment is the field; a camel-cased segment is two or more words the
- * prose would spell apart (`economicGates` is "economic gates"); a plural and its singular are
- * one claim. A caller with a richer vocabulary passes it in; nothing is guessed beyond the
- * name the census itself carries.
- * @param {string} field
- * @returns {string[]} lower-case tokens, longest first
- */
-export function claimTokensOf(field) {
-  const path = String(field || '').split('.').filter(Boolean);
-  const leaf = path.length ? path[path.length - 1] : '';
-  if (leaf === '') return [];
-  const words = leaf.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().split(/[\s_]+/)
-    .filter((word) => word.length > 2);
-  /** @type {string[]} */
-  const tokens = [];
-  for (const word of [leaf.toLowerCase(), ...words]) {
-    if (word.length <= 2 || tokens.includes(word)) continue;
-    tokens.push(word);
-    const singular = word.endsWith('s') ? word.slice(0, -1) : `${word}s`;
-    if (singular.length > 2 && !tokens.includes(singular)) tokens.push(singular);
-  }
-  return tokens.sort((a, b) => b.length - a.length);
-}
-
-/**
- * Does this text CLAIM this field? A `{slot}` naming the field's leaf is a typed reference and
- * counts outright; otherwise one of the field's own words must stand as a whole word.
- * @param {string} text
- * @param {string} field
- * @param {Readonly<Record<string, ReadonlyArray<string>>>} [vocabulary] extra words per field
- * @returns {string} the token that claimed it, or `''`
- */
-export function claimsField(text, field, vocabulary = {}) {
-  const body = String(text || '');
-  const lower = body.toLowerCase();
-  const extra = vocabulary[field] || [];
-  const tokens = [...claimTokensOf(field), ...extra.map((word) => String(word).toLowerCase())];
-  for (const token of tokens) {
-    if (body.includes(`{${token}}`)) return `{${token}}`;
-    const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    if (new RegExp(`\\b${escaped}\\b`).test(lower)) return token;
-  }
-  return '';
-}
 
 /**
  * Does the pool's predicate hold this field FALSE? That is what makes an unnamed field an
@@ -1170,6 +1139,8 @@ export function armC7(pageSet) {
  * @param {{relations?: Readonly<Record<string, ReadonlyArray<{relation: string,
  *   direction: string}>>>, primaryOf?: (key: string) => string, fieldOf?: (key: string) => string,
  *   siblingKeys?: ReadonlyArray<string>, register?: string,
+ *   readsOf?: (key: string) => ReadonlyArray<string>,
+ *   vocabularyOf?: (key: string) => Readonly<Record<string, ReadonlyArray<string>>>,
  *   sourceOf?: (key: string) => {kind: string, holder: string|null, standing: string}|null}} [options]
  * @returns {{entry: import('./entryWalker.js').WalkResult, composed: ComposedResult,
  *   order: {moves: string[], id: string, level: 0|1|2}}}
@@ -1191,7 +1162,12 @@ export function walkComposed(unit, ground, options = {}) {
   mergeResults(composed, armRestatement(unit, options));
   mergeResults(composed, armAmbiguity(unit));
   return {
-    entry: walkEntry(composedEntryOf(unit, { register: options.register }), ground),
+    entry: walkEntry(composedEntryOf(unit, {
+      register: options.register,
+      // ARM Q's own two columns, taken from the caller's census readers where it brought them.
+      reads: options.readsOf ? options.readsOf(unit.poolKey) : undefined,
+      vocabulary: options.vocabularyOf ? options.vocabularyOf(unit.poolKey) : undefined,
+    }), ground),
     composed,
     order: composedOrderOf(unit),
   };

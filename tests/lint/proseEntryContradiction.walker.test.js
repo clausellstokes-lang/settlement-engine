@@ -50,6 +50,9 @@
  * @see tests/fixtures/brackwaterTables.js
  */
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { verdictOf, walkEntry, walkPair } from '../../src/domain/prose/entryWalker.js';
 import { BAND_PHRASES, OFFICE_NOUN_CANDIDATES } from '../../src/domain/prose/entryLexicons.js';
 import { estateGround, withEntryContext } from '../../src/domain/prose/entryGround.js';
@@ -69,6 +72,10 @@ import {
 } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { fieldSynonymsFor } from '../../src/domain/prose/fieldSynonyms.js';
+
+/** The committed wiring census, read once — arm Q's `reads` column and its synonyms. */
+const census = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../docs/content/wiring-census.json'), 'utf8'));
 
 /**
  * The estate's OFFICE roster, DERIVED from EVERY role source rather than transcribed.
@@ -644,6 +651,77 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(329);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
+  });
+
+  it('⭐⭐ REWRITE car 8a-6 — ARM Q ASKS THE QUESTION R-DA-03 ACTUALLY ASKS', async () => {
+    // ⛔ THE ARM WAS DEFECTIVE, not merely short of vocabulary (the chair's M-9 ruling 4;
+    // SITTING §H rule 3). R-DA-03 licenses a qualifier by a SECOND TYPED FIELD, and arm Q
+    // asked two OTHER questions — is there a `{slot}`, is there a band word — because the
+    // walker had no `reads` column to ask the real one with. Two lines convicted it:
+    //
+    //   `the threat is on the town's books as plainly as the grain.`  names `monsterThreat`
+    //      in the FIELD'S OWN WORD and was withheld anyway — the sharpest single row.
+    //   `stone keeps itself, and wages do not.`  names the military economic gate by the noun
+    //      it IS in the world, which the field PATH does not contain.
+    //
+    // BOTH ARE KEPT AS PLANTS, and the third line is the control that must STAY withheld.
+    const ground = withEntryContext(estateGround({ officeRoster: deriveOfficeRoster() }), {});
+    const censusRow = census.rows.find((r) => r.block === 'DS-DEF-11' && r.pool === 'WALLED-THREATENED');
+    expect(censusRow, 'the anchor row is still in the census').toBeTruthy();
+    expect(censusRow.reads, 'and it reads the three fields the plants name')
+      .toContain('settlement.config.monsterThreat');
+    const vocabulary = fieldSynonymsFor(censusRow);
+    expect(vocabulary['settlement.defenseProfile.economicGates.military'],
+      'the ratified synonym row is the one SITTING §H names').toContain('wages');
+    /** @param {string} text @param {boolean} cured */
+    const qFindings = (text, cured) => walkEntry({
+      id: 'plant', text, register: 'R1', slots: [],
+      ...(cured ? { reads: censusRow.reads, vocabulary } : {}),
+    }, ground).withheld.filter((f) => f.klass === 'Q');
+
+    const threat = 'The wall is high. The threat is on the town books as plainly as the grain.';
+    const wages = 'The wall stands well enough. Stone keeps itself, and wages do not.';
+    const patience = 'The wall is high. Built work stands on its own patience.';
+    // BEFORE — the arm without its column, which is every caller that brings no census reader.
+    expect(qFindings(threat, false).length, 'the field\'s OWN word was withheld').toBe(1);
+    expect(qFindings(wages, false).length, 'and so was the ratified synonym').toBe(1);
+    expect(qFindings(patience, false).length, 'and so was the line that names nothing').toBe(1);
+    // AFTER — the same three, with the pool's reads and the census's synonyms.
+    expect(qFindings(threat, true), 'the threat clause claims monsterThreat').toEqual([]);
+    expect(qFindings(wages, true), 'the wages clause claims the military gate').toEqual([]);
+    // ⛔ AND THE CONTROL HOLDS, which is what stops the cure being a silencing: a segment that
+    // names no field the spine reads is still a refuter's question.
+    expect(qFindings(patience, true).length, 'a segment naming no field is STILL withheld').toBe(1);
+    expect(qFindings(patience, true)[0].value, 'and the withhold names the fields it consulted')
+      .toContain('none claimed');
+  });
+
+  it('THE MOVEMENT ARM Q\'S CURE MAKES, MEASURED AND PRINTED (REWRITE car 8a-6)', async () => {
+    // ⛔ THE CURE IS OPT-IN BECAUSE THE DATA FLOW FORCES IT, not because that was safer: the
+    // walker cannot invent a pool's `reads`, so a caller that brings no census reader gets the
+    // arm it had before. Every shipped walker is such a caller, which is why the 329 above did
+    // not move. What DOES move is the wave gate, which brings both columns — so the size of the
+    // movement is measured here rather than discovered at 8b.
+    const ground = withEntryContext(estateGround({ officeRoster: deriveOfficeRoster() }), {});
+    const byPool = new Map(census.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
+    const leaves = await loadStateLeaves();
+    let before = 0;
+    let after = 0;
+    for (const entry of leaves) {
+      const row = byPool.get(`${entry.block} :: ${entry.pool}`);
+      if (!row) continue;
+      const bare = walkEntry(entry, ground).withheld.filter((f) => f.klass === 'Q').length;
+      const cured = walkEntry({
+        ...entry, reads: row.reads, vocabulary: fieldSynonymsFor(row),
+      }, ground).withheld.filter((f) => f.klass === 'Q').length;
+      before += bare;
+      after += cured;
+    }
+    console.log(`\n  Q · the cure's movement on the shipped corpus: ${before} withheld -> ${after}`
+      + ` with the reads column and the ratified synonyms (${before - after} licensed)\n`);
+    expect(after, 'the cure LICENSES rows; it can never withhold more than the arm did before')
+      .toBeLessThanOrEqual(before);
+    expect(before - after, 'and it licenses some, or the column bought nothing').toBeGreaterThan(0);
   });
 
   it('finds the breaches the sitting did NOT name, and prints the corpus census', async () => {

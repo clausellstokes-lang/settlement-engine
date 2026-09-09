@@ -543,13 +543,23 @@ describe('⭐ ARM Q\'S VOCABULARY IS REPORTED AND NO ARM IS CHANGED', () => {
   it('says whether the clause\'s nouns map to a field the spine reads, and names the table it used', () => {
     const census = JSON.parse(readFileSync(path.join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
     const table = censusSynonymTable(census);
-    // AT THIS TIP THE CENSUS SHIPS NONE, and the report says so by naming what it looked for
-    // rather than by asserting an absence a reader cannot check.
-    expect(table.table).toEqual({});
-    expect(table.why).toContain('fieldVocabulary');
-    expect(table.why, 'and it counts the alias rows the census DOES carry')
-      .toContain(`${census.ratifiedAliases.rows.length} ratified alias row(s)`);
-    // ⛔ AND THE READER IS NOT BLIND TO A TABLE THAT LANDS LATER: a census carrying one is read.
+    // ⭐ THE TABLE LANDED AT REWRITE car 8a-6 AND THIS ARM SAID IT WOULD BE READ WHEN IT DID.
+    // Until then the census shipped none and the report named what it had looked for; the
+    // reader was written to find one under any of three names, and the census now writes
+    // `fieldSynonyms`. The `why` is empty because there is nothing left to explain away.
+    expect(table.why, 'a table ships, so the report has no absence to name').toBe('');
+    expect(Object.keys(table.table).length, 'and it is not an empty object wearing a name')
+      .toBeGreaterThan(0);
+    expect(table.table['settlement.defenseProfile.economicGates.military'],
+      'including the row SITTING §H rule 3 names').toContain('wages');
+    // ⛔ AND THE ABSENCE BRANCH IS STILL LIVE, driven on a census that carries no table — the
+    // half this arm used to prove on the product, kept as a plant so it cannot rot.
+    const bare = censusSynonymTable({ ratifiedAliases: { rows: [1, 2, 3] } });
+    expect(bare.table).toEqual({});
+    expect(bare.why).toContain('fieldVocabulary');
+    expect(bare.why, 'and it counts the alias rows that census DOES carry')
+      .toContain('3 ratified alias row(s)');
+    // AND THE READER FINDS A TABLE UNDER ANY OF THE THREE NAMES.
     const supplied = censusSynonymTable({ fieldVocabulary: { 'a.b': ['wages'] } });
     expect(supplied.why).toBe('');
     expect(supplied.table['a.b']).toEqual(['wages']);
@@ -571,11 +581,17 @@ describe('⭐ ARM Q\'S VOCABULARY IS REPORTED AND NO ARM IS CHANGED', () => {
     const report = qVocabularyReport(inherited, (key) => reads[key] || [], table);
     // ⛔ ONLY THE Q ROWS: the report is arm Q's vocabulary and not a second walk.
     expect(report).toHaveLength(2);
-    // THE OWNER'S EXEMPLAR LINE: `wages` names the pay gate and the arm's vocabulary cannot see it.
-    expect(report[0].mapped).toEqual([]);
+    // ⭐⭐ THE OWNER'S EXEMPLAR LINE, AND IT NOW MAPS (REWRITE car 8a-6). `wages` names the
+    // military economic gate through the census's ratified synonym row, which is exactly the
+    // join SITTING §H rule 3 asked for. Before this car it read `[]` and the report said the
+    // census shipped no table; the arm is kept, and what changed is the answer.
+    expect(report[0].mapped)
+      .toEqual(['settlement.defenseProfile.economicGates.military (as "wages")']);
     expect(report[0].reads).toEqual(reads['WALLED-STRAINED']);
-    expect(report[0].verdict).toContain('names no field');
-    expect(report[0].synonymTable).toBe(table.why);
+    expect(report[0].verdict).toContain('DOES name a field');
+    expect(report[0].synonymTable, 'and the row names the table it used').toBe(
+      'a word-level synonym table ships and was applied',
+    );
     // AND THE OTHER HALF OF THE REPORT IS REAL: a clause that DOES name a field the spine reads,
     // which is the case that says the arm and the census disagree rather than the writer erring.
     expect(report[1].mapped).toEqual(['settlement.config.monsterThreat (as "threat")']);

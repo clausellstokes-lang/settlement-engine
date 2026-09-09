@@ -83,6 +83,7 @@ import { sentencesOf } from '../src/domain/prose/entryWalker.js';
 import { AUTHORING_MARKER } from './lib/dossier-annex-grammar.mjs';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../src/domain/prose/proseFingerprint.js';
 import { spineRows } from '../src/domain/prose/wiringCensus.js';
+import { fieldSynonymsFor } from '../src/domain/prose/fieldSynonyms.js';
 import { sourceOfForTown } from '../src/domain/prose/holderTable.js';
 import { FACTION_ROLES } from '../src/generators/factionRoles.js';
 import * as ROLE_CATALOG from '../src/generators/npc/factionRoleCatalog.js';
@@ -1620,6 +1621,12 @@ export async function measure(options) {
       relations: DOSSIER_RELATIONS,
       primaryOf: (key) => (CENSUS_ROWS.get(`${entry.block} :: ${key}`)?.reads || [])[0] || '',
       fieldOf: (key) => (ALL_ROWS.get(`${entry.block} :: ${key}`)?.reads || [])[0] || '',
+      // ⭐ ARM Q'S TWO COLUMNS (REWRITE car 8a-6). The arm licenses a qualifier that names a
+      // SECOND TYPED FIELD, which it could not see until the walker was handed the pool's own
+      // `reads` and the census's ratified `fieldSynonyms`. Both come from the census and
+      // neither is invented here.
+      readsOf: (key) => (ALL_ROWS.get(`${entry.block} :: ${key}`)?.reads || []),
+      vocabularyOf: (key) => fieldSynonymsFor(ALL_ROWS.get(`${entry.block} :: ${key}`) || {}),
       siblingKeys: Object.keys(block.pools),
       register: 'R1',
       sourceOf,
