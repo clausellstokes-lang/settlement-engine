@@ -32,8 +32,8 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-3 | the taste's instruments landed by name, without the annex rows | **`83e8acf17`** | **LANDED** |
 | 8a-4 | `armThread` + the kinship tiebreak | **`94c41fdb8`** | **LANDED** |
 | 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | **`e26ad7838`** | **LANDED** |
-| 8a-6 | the arm-Q cure + the field-synonym table | — | pending |
-| 8a-7 | the face-count ratchet | — | pending |
+| 8a-6 | the arm-Q cure + the field-synonym table | **`e2ac44a9c`** | **LANDED** |
+| 8a-7 | the face-count ratchet | **`99e8e56e8`** | **LANDED** |
 | 8a-8 | T-F12's class list re-cut | — | pending |
 | 8a-9 | the connectives lists to the floors (public-copy drafts) | — | pending |
 | 8a-10 | the register car | — | pending |
@@ -994,3 +994,180 @@ other's evidence.
    unwritten byte in front of the sitting as though it were the wave's.
 5. **Four of the seven refuter grounds land; three do not, each with its reason** (the
    paraphrase is (b); the costume is the grammar walker's; C7 exists).
+
+---
+
+## 8a-6 — THE ARM-Q CURE AND THE FIELD-SYNONYM TABLE (SITTING §H rule 3; M-9 ruling 4)
+
+**LANDED `e2ac44a9c`** over `e26ad7838`. Nine files, one of them new. Zero reader-facing bytes.
+
+### ⛔⛔ THE ARM WAS DEFECTIVE, AND THE CURE IS THE QUESTION IT NEVER ASKED
+
+R-DA-03 licenses a qualifier by a SECOND TYPED FIELD. `armQualify` asked two other questions —
+is there a `{slot}`? is there a band word? — and could not ask the real one, because the walker
+had no `reads` column to ask it with. Both convicting lines are kept, and both are driven:
+
+| line | BEFORE (no `reads`) | AFTER (`reads` + synonyms) |
+|---|---|---|
+| `The threat is on the town books as plainly as the grain.` | **WITHHELD Q** | **no Q finding** |
+| `Stone keeps itself, and wages do not.` | **WITHHELD Q** | **no Q finding** |
+| `Built work stands on its own patience.` (the CONTROL) | WITHHELD Q | **WITHHELD Q** |
+
+The first needed NO synonym — `threat` is the field's own word and the arm simply never looked.
+The second needed the ratified row. The control still withholds, and the withhold now names the
+fields it consulted (`reads [...]; none claimed`), so a reader can tell a short column from a
+short line.
+
+**THE MOVEMENT, MEASURED AND PRINTED** on the shipped corpus with both columns supplied:
+
+    Q · the cure's movement: 890 withheld -> 875 with the reads column and the ratified
+        synonyms (15 licensed)
+
+⛔ **THE CURE IS OPT-IN BECAUSE THE DATA FLOW FORCES IT, not because that was safer.** A walker
+cannot invent a pool's `reads`; it must be handed them. Every shipped walker brings no census
+reader, which is why the entry walker's own 329-pin did not move. The wave gate brings both
+columns, so the size of the movement is measured here rather than discovered at 8b.
+
+### THE TABLE — `src/domain/prose/fieldSynonyms.js`, THE ISLAND'S FIFTEENTH MODULE
+
+One ratified FIELD row (`settlement.defenseProfile.economicGates.military` → `wages` · `wage` ·
+`pay` · `purse`, cited to SITTING §H rule 3) and twelve HOLDER-KIND rows generated against the
+frozen `HOLDER_KINDS`. The two are kept apart on purpose: a `roll` is the record the whole ROW
+is kept in, while `wages` names ONE gate, and merging them would let a `books` claim a field the
+treasury does not keep. The module THROWS AT LOAD if a kind is added to `HOLDER_KINDS` with no
+record noun, because a table silently covering eleven of twelve kinds is an arm quietly blind on
+the twelfth.
+
+The census writes `fieldSynonyms` + `fieldSynonymsRuling`. The gate's `censusSynonymTable` has
+looked for one under three names since M-9b and now finds it: its report line moves from *"the
+wiring census ships NO word-level synonym table"* to *"a word-level synonym table ships and was
+applied"*.
+
+### ⛔⛔ TWO DEFECTS THIS CAR PRODUCED AND CAUGHT, RECORDED WHERE THEY HAPPENED
+
+**1. THE INSTRUMENT CONTAMINATED ITS OWN MEASUREMENT.** Written first as an object keyed by kind
+— `{ treasury: [...], court: [...], … }` — INSIDE `wiringCensus.js`, the table changed what the
+census believes the estate produces: the producer scan reads `src/` for the leaf keys writers
+write, saw a property named `court:` in the module it scans, and flipped the `absent` label on
+four DS-DEF-2 rows from `not-produced` to `measured`.
+
+    node scripts/wiring-census.mjs --dry     ROWS that would move: 4   ← the object form
+    node scripts/wiring-census.mjs --dry     ROWS that would move: 0   ← as a list of rows
+
+No comment could have fixed that; the SHAPE had to stop being a write. The walker carries the
+finding so the shape cannot drift back.
+
+**2. IT TOOK `wiringCensus.js` OVER ITS 800 EFFECTIVE-LINE CEILING**, and
+`tests/lint/sizeBaseline.test.js` refused it by name — *"decompose it, or add it as a burn-down
+entry"*. **Decomposed**, which is the honest half of that choice and the shape ARCH car 0 already
+chose once (the branch reader became `wiringBranch.js` rather than a banked row). It is also the
+truer home: a ratified table is DATA a sitting signs, and the census is a SCANNER.
+⭐ `src/domain/prose/wiringCensus.js` is **byte-identical to its parent commit**.
+
+### THE ONE VOCABULARY, MOVED RATHER THAN COPIED
+
+`claimTokensOf` and `claimsField` moved DOWN into `entryWalker.js` — arm Q needs them and
+`composedWalker.js` imports that module, so the dependency could only run one way — and are
+RE-EXPORTED from `composedWalker.js`. Every existing caller (the wave gate, the walkers, the
+projection contract) is untouched, and there is still exactly one implementation of "does this
+text claim this field".
+
+### DS-DEF-2, PRINTED AS THE WIRING ROW IT IS
+
+    arm Q vocabulary REPORT: "between them the town can take a failed harvest or an outbreak…"
+      against spine `Disasters & Famine: granary AND hospital`
+      reads [disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL …)]
+      NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not
+      a field path, so no text can claim it
+      a word-level synonym table ships and was applied
+
+NOT cured by a synonym, exactly as the brief requires: its only recovered reading is car 3h's
+synthetic table label.
+
+### THE ISLAND FENCE MOVED FOUR EQUALITIES, EACH A NAMING AND NONE AN IMPORT
+
+| equality | before | after, and why |
+|---|---|---|
+| the roster | THIRTEEN modules | **FIFTEEN** — `passageShapes` (8a-2) and `fieldSynonyms` (this car) |
+| `holderTable` reached from | 3 | **4** — `fieldSynonyms` imports `HOLDER_KINDS` |
+| `wiringCensus` named by | 1 | **2** — `fieldSynonyms`'s docblock says why it is not inside it |
+| `wiringBranch` named by | 2 | **3** — cited as the PRECEDENT for the decomposition |
+| `fieldSynonyms` named by | — | **2** — itself and `entryWalker`'s `ProseEntry` typedef |
+
+Every one is inside the island; the breaches loop proves no product surface reaches it. Its
+READERS are all outside `src/` — the census script, the wave gate and the walkers — which is
+lawful because the fence is about product surfaces and a script is not one.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/lint/proseEntryContradiction.walker.test.js` | **29 passed** (27 before) |
+| `tests/lint/proseWiringCensus.walker.test.js` | **78 passed** (73 before) |
+| `tests/lint/proseWaveGate.walker.test.js` | **41 passed** |
+| `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,589 passed / 1** |
+| `node scripts/wiring-census.mjs --dry` | ROWS 0 · shas 0 · only the two new sections |
+| projector | `--check` exit 0 |
+| classifier, 8a-5 → 8a-6 | **UNCHANGED 73,284 · every class 0** |
+| typecheck | 173 errors, **0 in any file this car touched** |
+| eslint | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+---
+
+## 8a-7 — THE FACE-COUNT RATCHET (C′; Part B §22 d)
+
+**LANDED `99e8e56e8`** over `e2ac44a9c`. Two files. Zero reader-facing bytes.
+
+### THE THREE ARMS
+
+| arm | what it holds | today |
+|---|---|---|
+| the ESTATE-WIDE floor | `sum(faceCounts) >= 2266`, re-pinned to the measured total on the variant ratchet's own rule | **2,266** — every variant carries exactly one face |
+| PER POOL, structure | one `faceCounts` entry per variant, every entry an integer ≥ 1 | 0 offenders of 708 |
+| PER POOL, floor | no pool below its OWN variant count | 0 offenders |
+| the DECLARED floors | the register's new `floors` block, shrink-only | **{}**, asserted empty |
+| the ANNEX, append-only | the roster only grows: `>= 708`, no duplicate, no empty key | 708 |
+
+⛔ **THE PER-POOL FLOOR IS THE ARITHMETIC WHILE EVERY FAMILY IS SINGLE-FACED, and saying so is
+better than a second list of 708 integers that would all read 1.** A pool's face total is at
+least its variant count, and the variant count is itself a ratchet — so the per-pool floor RISES
+on its own as families grow. A floor ABOVE that universal one is a DECLARED ROW on the SHIFT
+REGISTER, written in the same commit as the growth, on the `reIndexed` idiom car 8a-1 landed.
+
+### ⭐⭐ THE SEVEN, NAMED — AND DERIVED, NOT TRANSCRIBED
+
+They are exactly the pools whose vid list contains **0**, which the arm asserts against the
+hand-written roster in both directions:
+
+| block | pool | vids | faceCounts | angle at vid 0 |
+|---|---|---|---|---|
+| DS-ECO-3 | `ADEQUATE` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-3 | `SHORTAGE × trade-dependent` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-3 | `SURPLUS × trade-dependent` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-6 | `TIER: minor shadow activity (≥3)` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-6 | `TIER: significant off-book activity (≥15)` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-7 | `CATALOG` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+| DS-ECO-7 | `TALLIES` | 0,1,2,3 | 1,1,1,1 | `canonical` |
+
+Three, two and two — ARCH §16 item 5's own arithmetic, re-measured. Each is asserted to LEAD
+its pool, to be SINGLE-FACED, and to carry the angle `canonical`.
+
+⛔ **THEIR SINGLE-FACED STANDING, RECORDED.** Each is a BYTE-COPY of a string the ENGINE already
+owns and ships (the ONE-HOME rule the projector enforces). A second face on such a row would be
+a second wording of a sentence the engine emits — two homes for one string, the drift class the
+projector refuses by name. So "grow toward four" applies to the AUTHORED rows of these pools and
+the canonical row at vid 0 keeps ONE face **by refusal** (P-F6), never by neglect. They are the
+same seven car 8a-1 found, which is why `vid: 0` is a real id and a `> 0` guard would have split
+the corpus into two draw regimes silently.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/data/dossierStateProseProjection.contract.test.js` | **77 passed** (74 before) |
+| `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,589 passed / 1** |
+| projector | `--check` exit 0 |
+| classifier, 8a-6 → 8a-7 | **UNCHANGED 73,284 · every class 0** |
+| eslint | exit 0 |
+| runners / porcelain | 0 / 0 |
