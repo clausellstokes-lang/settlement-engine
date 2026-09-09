@@ -93,14 +93,20 @@ export function livingContentRosterLoaded() {
  * closure back into eager `engine-core`.
  *
  * ⭐ ITS CALLER IS `loadGenerationLawPayloads()` IN
- * `src/domain/density/densityCreateBoundary.js`, and nothing else in `src/` calls
- * it directly. That single-caller shape is deliberate: the create boundary is
- * where "which laws does a generation obey" is already answered, so the payload a
- * law needs is loaded in the same place rather than in seven. For the whole
- * dormant life of this law the function had NO caller at all, which meant
- * lighting the dial would have thrown out of every generation instead of building
- * a roster; `tests/lint/densityCreateBoundary.walker.test.js` now holds the caller
- * set to the tree so that state cannot return unnoticed.
+ * `src/domain/density/densityCreateBoundary.js` — plus, since lane LIGHT's car
+ * 3a, the two WORKER SHELLS, which call this loader directly. The create boundary
+ * is where "which laws does a generation obey" is already answered, so on the
+ * main thread the payload a law needs is loaded in the same place rather than in
+ * seven. A worker is the measured exception: it evaluates its own copy of the
+ * graph, the boundary module is otherwise absent from that graph while this seam
+ * is already in it, and a worker bundle is held under a monotone-down byte
+ * ceiling, so routing a worker's arming through the aggregate costs bytes for
+ * nothing. `tests/lint/densityCreateBoundary.walker.test.js` declares those two
+ * rows by name and reds if the aggregate ever grows a second payload the shells
+ * would miss. For the whole dormant life of this law the function had NO caller
+ * at all, which meant lighting the dial would have thrown out of every generation
+ * instead of building a roster; that walker holds the caller set to the tree so
+ * the state cannot return unnoticed.
  *
  * @returns {Promise<void>}
  */

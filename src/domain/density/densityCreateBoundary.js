@@ -323,11 +323,26 @@ export function birthConfig(config) {
  * memoized on the seam's slot, so a second await after the first resolves is
  * free and every reacher may call it unconditionally.
  *
- * ⚠ AND ONCE PER MODULE INSTANCE, WHICH IS WHY THE TWO WORKER SHELLS CALL IT
- * THEMSELVES. The seam's registry is module state, and a Web Worker evaluates
- * its own copy of the graph: a main-thread load does not arm the worker's seam.
- * `src/workers/generation.worker.js` and `src/workers/customContentPreview.worker.js`
- * await it inside their own message handlers for that reason and no other.
+ * ⚠ AND ONCE PER MODULE INSTANCE, WHICH IS WHY THE TWO WORKER SHELLS ARM THE
+ * SEAM THEMSELVES. The seam's registry is module state, and a Web Worker
+ * evaluates its own copy of the graph: a main-thread load does not arm the
+ * worker's seam. `src/workers/generation.worker.js` and
+ * `src/workers/customContentPreview.worker.js` therefore arm it inside their own
+ * message handlers, for that reason and no other.
+ *
+ * ⛔ THEY DO IT BY CALLING THE SEAM'S `loadLivingContentRoster` DIRECTLY, NOT
+ * THIS AGGREGATE, AND THE REASON IS BYTES (lane LIGHT, car 3a). This module is
+ * otherwise absent from a worker's module graph while the seam is already in it,
+ * so the aggregate would drag a whole file into a transport bundle that is held
+ * under a MONOTONE-DOWN ceiling and buy the worker nothing: 31 B measured on each
+ * worker bundle at `dd0b68c0d`. Every MAIN-THREAD reacher still comes through
+ * here, which is the point of the aggregate existing.
+ *
+ * ⚠ THAT SHORTCUT IS SOUND ONLY WHILE THIS FUNCTION AWAITS ONE LOADER. Add a
+ * second payload below and the two worker shells silently stop arming it, which
+ * would show up as a world that generates in-thread and throws in the worker.
+ * `tests/lint/densityCreateBoundary.walker.test.js` reads this body and reds the
+ * moment a second await appears, so the workers cannot be forgotten quietly.
  *
  * @returns {Promise<void>}
  */

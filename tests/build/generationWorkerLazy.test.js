@@ -123,21 +123,30 @@ describe('generation worker — source boundary', () => {
     expect(client).not.toMatch(/generationRequest/);
   });
 
-  it('the worker shell statically imports the core, the protocol and the create boundary, and nothing under src/workers imports the store, saves or a DOM global', () => {
+  it('the worker shell statically imports the core, the protocol and the lazy seam, and nothing under src/workers imports the store, saves or a DOM global', () => {
     const shell = source('src/workers/generation.worker.js');
-    // ⭐ THE THIRD EDGE IS THE CREATE BOUNDARY'S ASYNC PAYLOAD LOADER, AND IT IS
-    // TRANSPORT WORK (lane LIGHT, car 1a). A generation law can be obeyed by a
-    // module behind a lazy seam — the living-content roster is — and the pipeline
-    // THROWS rather than degrading when that payload is unloaded. The main
-    // thread's lane awaits it too, and that is not a duplicate: a Web Worker
-    // evaluates its OWN copy of the module graph, so the seam's registry here is
-    // a different slot and a main-thread load does not arm it. The list stays
-    // EXACT rather than becoming a `toContain`, because the whole point of this
-    // arm is that the shell's static surface is small and every addition is
-    // argued; the boundary is itself outside vite's eager first-paint graph (the
-    // arm above pins the lane and the core the same way).
+    // ⭐ THE THIRD EDGE IS THE LAZY PAYLOAD'S LOADER, AND IT IS TRANSPORT WORK
+    // (lane LIGHT, car 1a). A generation law can be obeyed by a module behind a
+    // lazy seam — the living-content roster is — and the pipeline THROWS rather
+    // than degrading when that payload is unloaded. The main thread's lane arms
+    // it too, and that is not a duplicate: a Web Worker evaluates its OWN copy of
+    // the module graph, so the seam's registry here is a different slot and a
+    // main-thread load does not arm it.
+    //
+    // ⛔ IT IS THE SEAM'S `loadLivingContentRoster`, NOT THE CREATE BOUNDARY'S
+    // `loadGenerationLawPayloads`, AND THE REASON IS MEASURED (car 3a). The
+    // boundary module is otherwise absent from this worker's graph while the seam
+    // is already in it, so routing through the aggregate cost the bundle 31 B for
+    // nothing under a monotone-down ceiling. The main-thread reachers keep the
+    // aggregate. `tests/lint/densityCreateBoundary.walker.test.js` declares the two
+    // worker rows and reds if the aggregate ever grows a payload they would miss.
+    //
+    // The list stays EXACT rather than becoming a `toContain`, because the whole
+    // point of this arm is that the shell's static surface is small and every
+    // addition is argued; the seam is itself outside vite's eager first-paint
+    // graph (the arm above pins the lane and the core the same way).
     expect(staticImports(shell).sort()).toEqual([
-      '../domain/density/densityCreateBoundary.js',
+      '../domain/content/livingContentSeam.js',
       '../lib/generationProtocol.js',
       './generationRequest.js',
     ]);

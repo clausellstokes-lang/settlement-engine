@@ -165,6 +165,52 @@ const PAYLOAD_CONSUMER_CALLS = Object.freeze([
 const PAYLOAD_AWAIT_CALL = 'await loadGenerationLawPayloads(';
 
 /**
+ * ⭐⭐ THE TWO AWAITERS THAT ARM THE SEAM DIRECTLY, DECLARED BY NAME (lane LIGHT,
+ * car 3a). This is a TABLE, not a loosened needle: every awaiter not listed here
+ * is still held to the exact literal `await loadGenerationLawPayloads(`, and a
+ * module that quietly swapped the boundary's aggregate for a single payload
+ * loader still reds unless somebody adds it here and says why.
+ *
+ * ⛔ WHY THEY DEPART, MEASURED. `loadGenerationLawPayloads()` lives on
+ * `densityCreateBoundary.js`, which nothing else in a worker's module graph
+ * imports, while `livingContentSeam.js` is already in it (the pipeline calls
+ * `livingContentRosterFor`). A Web Worker evaluates its OWN copy of the graph, so
+ * routing a worker's arming through the aggregate pulls a whole module into a
+ * transport bundle that is held under a MONOTONE-DOWN byte ceiling and buys the
+ * worker nothing: 31 B on each of the two worker bundles at `dd0b68c0d`. The
+ * main-thread reachers keep the aggregate, because they are where "which laws
+ * does this generation obey" is answered and they pay no such ceiling.
+ *
+ * ⚠ AND THE DEPARTURE IS ONLY SOUND WHILE THE AGGREGATE IS THIS ONE LOADER. The
+ * arm below the table holds that to the tree: if `loadGenerationLawPayloads()`
+ * ever awaits a SECOND payload, these two shells would silently stop arming it,
+ * and the arm reds until the rows are revisited.
+ *
+ * @type {Readonly<Record<string, {call: string, why: string}>>}
+ */
+const AWAITER_LOADER_CALLS = Object.freeze({
+  'src/workers/generation.worker.js': Object.freeze({
+    call: 'await loadLivingContentRoster(',
+    why: 'a worker bundle under a monotone-down ceiling; the seam is already in its graph and '
+      + 'the create boundary is not',
+  }),
+  'src/workers/customContentPreview.worker.js': Object.freeze({
+    call: 'await loadLivingContentRoster(',
+    why: 'the same shape as the generation shell, and the same reason; this bundle carries no '
+      + 'ceiling test today, so it is held here by argument rather than by bytes',
+  }),
+});
+
+/** The exact await literal a named awaiter is held to. */
+const awaitCallFor = (awaiter) => AWAITER_LOADER_CALLS[awaiter]?.call ?? PAYLOAD_AWAIT_CALL;
+
+/** Every distinct await literal the table admits, the default included. */
+const DECLARED_AWAIT_CALLS = Object.freeze([...new Set([
+  PAYLOAD_AWAIT_CALL,
+  ...Object.values(AWAITER_LOADER_CALLS).map(row => row.call),
+])]);
+
+/**
  * ⭐ DOES AN AWAIT OF THE PAYLOAD LOADER PRECEDE A CONSUMER CALL INSIDE ITS OWN
  * FUNCTION BODY? (lane LIGHT car 2c.)
  *
@@ -189,15 +235,21 @@ const PAYLOAD_AWAIT_CALL = 'await loadGenerationLawPayloads(';
  *
  * The code passed in is already comment- and string-stripped, so no brace inside
  * a string or a comment can move the depth.
+ *
+ * ⚠ THE AWAIT LITERAL IS A PARAMETER, AND IT IS STILL A LITERAL (lane LIGHT, car
+ * 3a). The two worker shells arm the seam's own loader rather than the create
+ * boundary's aggregate, and the honest way to admit that is to hand this scanner
+ * the exact string that row declares in `AWAITER_LOADER_CALLS` — never to widen
+ * the needle into a regex that would also accept a call nobody has argued for.
  */
-function awaitPrecedesConsumer(code) {
+function awaitPrecedesConsumer(code, awaitCall = PAYLOAD_AWAIT_CALL) {
   for (
-    let at = code.indexOf(PAYLOAD_AWAIT_CALL);
+    let at = code.indexOf(awaitCall);
     at !== -1;
-    at = code.indexOf(PAYLOAD_AWAIT_CALL, at + 1)
+    at = code.indexOf(awaitCall, at + 1)
   ) {
     let depth = 0;
-    for (let i = at + PAYLOAD_AWAIT_CALL.length; i < code.length; i += 1) {
+    for (let i = at + awaitCall.length; i < code.length; i += 1) {
       const ch = code[i];
       if (ch === '{') { depth += 1; continue; }
       if (ch === '}') {
@@ -334,16 +386,31 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
   // not arm it.
   it('⭐ every reacher declares who awaits the lazy generation-law payload, and they really do', () => {
     const AWAIT_CALL = PAYLOAD_AWAIT_CALL;
-    // ANTI-VACUITY, FIRST AND ON THE MATCHER ITSELF. An absence-shaped scan whose
-    // needle never matches anything reports every tree clean.
+    // ANTI-VACUITY, FIRST AND ON THE MATCHER ITSELF, FOR EVERY DECLARED NEEDLE.
+    // An absence-shaped scan whose needle never matches anything reports every
+    // tree clean, and the table admits two needles now, not one.
+    expect(DECLARED_AWAIT_CALLS.length).toBeGreaterThanOrEqual(2);
+    for (const needle of DECLARED_AWAIT_CALLS) {
+      expect(
+        `const x = 1; ${needle});`.includes(needle),
+        `the needle ${needle} cannot match its own positive control`,
+      ).toBe(true);
+      expect(
+        'const bundle = composeInstantWorld({ seed });'.includes(needle),
+        `the needle ${needle} matches a line that does NOT await a loader — it proves nothing`,
+      ).toBe(false);
+    }
+    // ⛔ AND THE TWO NEEDLES MUST NOT BE INTERCHANGEABLE. If the worker rows'
+    // literal were a prefix or a superstring of the default, declaring a row
+    // would quietly excuse it from both checks at once.
     expect(
-      `const x = 1; ${AWAIT_CALL});`.includes(AWAIT_CALL),
-      'the needle cannot match its own positive control',
-    ).toBe(true);
-    expect(
-      'const bundle = composeInstantWorld({ seed });'.includes(AWAIT_CALL),
-      'the needle matches a line that does NOT await the loader — it proves nothing',
+      DECLARED_AWAIT_CALLS.some(needle => needle !== AWAIT_CALL && needle.includes(AWAIT_CALL)),
+      'a declared await literal CONTAINS the default one, so the table cannot tell them apart',
     ).toBe(false);
+    expect(
+      Object.keys(AWAITER_LOADER_CALLS).every(rel => String(AWAITER_LOADER_CALLS[rel].why).length > 40),
+      'a declared departure from the aggregate needs a reason, not just a different string',
+    ).toBe(true);
 
     // ⭐ AND THE SAME CONTROL ON THE ORDERING SCANNER, IN THE SHAPES THIS ESTATE
     // ACTUALLY SHIPS (lane LIGHT car 2c). A control that cannot exercise the
@@ -392,6 +459,44 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
       + ' pipeline call, which arms nothing on the live path',
     ).toBe(false);
 
+    // ⭐ AND THE SHIPPED WORKER SHAPE AS THE TABLE NOW DECLARES IT (car 3a): the
+    // same `try`, arming the SEAM'S loader. A control written only against the
+    // aggregate would leave the two worker rows scanned by nothing they ship.
+    const SEAM_CALL = 'await loadLivingContentRoster(';
+    const SHAPE_WORKER_SEAM_OK = 'self.onmessage = async (event) => {\n'
+      + '  try {\n'
+      + '    await loadLivingContentRoster();\n'
+      + '    const result = runGenerationRequest(request);\n'
+      + '  } catch (error) { report(error); }\n};';
+    const SHAPE_WORKER_SEAM_MOVED = 'self.onmessage = async (event) => {\n'
+      + '  try {\n'
+      + '    const result = runGenerationRequest(request);\n'
+      + '    await loadLivingContentRoster();\n'
+      + '  } catch (error) { report(error); }\n};';
+    expect(
+      DECLARED_AWAIT_CALLS.includes(SEAM_CALL),
+      'the worker rows no longer declare the seam loader this control is written for',
+    ).toBe(true);
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_SEAM_OK, SEAM_CALL),
+      'the ordering scanner cannot see the shipped worker shape with the seam\'s loader',
+    ).toBe(true);
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_SEAM_MOVED, SEAM_CALL),
+      'the ordering scanner passes a seam-loader await MOVED BELOW the pipeline call',
+    ).toBe(false);
+    // ⛔ AND THE NEEDLES DO NOT COVER FOR EACH OTHER: the shipped worker shape
+    // read with the DEFAULT needle must fail, or a worker that stopped arming
+    // anything at all would still pass under whichever needle happened to match.
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_SEAM_OK, AWAIT_CALL),
+      'the default needle matches a body that only arms the seam loader',
+    ).toBe(false);
+    expect(
+      awaitPrecedesConsumer(SHAPE_WORKER_OK, SEAM_CALL),
+      'the seam needle matches a body that only awaits the aggregate',
+    ).toBe(false);
+
     const offenders = [];
     const consumersSeen = new Set();
     for (const [rel, row] of Object.entries(PIPELINE_REACHERS)) {
@@ -406,12 +511,15 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
         try {
           code = stripCommentsAndStrings(readFileSync(join(process.cwd(), awaiter), 'utf-8'));
         } catch { offenders.push(`${rel}: ${awaiter} does not exist`); continue; }
-        if (!code.includes(AWAIT_CALL)) {
-          offenders.push(`${rel}: ${awaiter} no longer awaits the payload`);
+        // The literal this awaiter is held to: the boundary's aggregate unless
+        // `AWAITER_LOADER_CALLS` declares a departure for it, with a reason.
+        const declaredCall = awaitCallFor(awaiter);
+        if (!code.includes(declaredCall)) {
+          offenders.push(`${rel}: ${awaiter} no longer contains ${declaredCall.trim()})`);
           continue;
         }
         // ⭐ THE ORDERING HALF (cure A3). Presence is not arming.
-        if (!awaitPrecedesConsumer(code)) {
+        if (!awaitPrecedesConsumer(code, declaredCall)) {
           offenders.push(`${rel}: ${awaiter} awaits the payload, but NOT before the generation `
             + 'call in the same function body — the await was moved below it, or into a branch '
             + 'the live path does not take');
@@ -440,6 +548,70 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
       'a declared payload-consumer call is named by NO awaiter. Either it was renamed — in '
       + 'which case the ordering scan above is now blind to that module — or it is a stale '
       + 'needle that should be removed with its reason.',
+    ).toEqual([]);
+  });
+
+  // ── THE PRICE OF THE TWO DECLARED DEPARTURES ────────────────────────────────
+  // ⭐⭐ WHY THIS ARM EXISTS (lane LIGHT, car 3a). The two worker shells arm the
+  // SEAM'S loader instead of the create boundary's aggregate, to keep a module
+  // the worker needs for nothing out of a bundle held under a monotone-down byte
+  // ceiling. That shortcut is sound for exactly one reason: the aggregate awaits
+  // one payload and it is the one they arm. The day a second generation law puts
+  // a payload behind a lazy seam, `loadGenerationLawPayloads()` grows a second
+  // await, every main-thread reacher picks it up for free, and the two workers
+  // silently stop arming it: a v-next world would then throw out of the worker
+  // and generate fine in-thread, which is the worst shape a defect can take.
+  // Nothing else in the estate would notice, so this arm is the notice.
+  it('⭐ each declared worker departure arms the WHOLE of the boundary aggregate', () => {
+    const BOUNDARY = 'src/domain/density/densityCreateBoundary.js';
+    const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), BOUNDARY), 'utf-8'));
+    const head = 'export async function loadGenerationLawPayloads(';
+    const at = code.indexOf(head);
+    expect(at, `${BOUNDARY} no longer declares the aggregate where this arm reads it`)
+      .toBeGreaterThan(-1);
+
+    // The body, taken brace to matching brace, so a later function's awaits
+    // cannot be read as this one's.
+    const open = code.indexOf('{', at + head.length);
+    expect(open, 'the aggregate has no body').toBeGreaterThan(-1);
+    let depth = 0;
+    let end = -1;
+    for (let i = open; i < code.length; i += 1) {
+      if (code[i] === '{') depth += 1;
+      else if (code[i] === '}') { depth -= 1; if (depth === 0) { end = i; break; } }
+    }
+    expect(end, 'the aggregate\'s body does not close').toBeGreaterThan(open);
+    const body = code.slice(open, end + 1);
+    // Positive control on the scanner before anything is concluded from it.
+    expect(
+      [...'{ await someLoader(); }'.matchAll(/await\s+([A-Za-z_$][\w$]*)\s*\(/g)].map(m => m[1]),
+      'the awaited-loader scanner cannot see its own positive control',
+    ).toEqual(['someLoader']);
+
+    const awaited = [...body.matchAll(/await\s+([A-Za-z_$][\w$]*)\s*\(/g)].map(m => m[1]);
+    expect(
+      awaited.length,
+      `${BOUNDARY}'s aggregate awaits ${awaited.length} payload loader(s) (${awaited.join(', ')}). `
+      + 'The worker shells declared in AWAITER_LOADER_CALLS arm ONE loader directly, which is '
+      + 'sound only while the aggregate is that one loader. A second payload here is invisible '
+      + 'to both workers: revisit the two rows, and give the workers whatever they now miss.',
+    ).toBe(1);
+    expect(
+      [...new Set(Object.values(AWAITER_LOADER_CALLS).map(row => row.call))],
+      `the declared worker departures do not arm ${awaited[0]}, which is what the aggregate awaits`,
+    ).toEqual([`await ${awaited[0]}(`]);
+
+    // ⛔ AND NO STALE ROWS. A departure declared for a module no reacher names is
+    // an excuse sitting in the tree waiting to cover a module that acquires the
+    // name later.
+    const namedAwaiters = new Set(
+      Object.values(PIPELINE_REACHERS).flatMap(row => row.payloadAwaitedBy || []),
+    );
+    const stale = Object.keys(AWAITER_LOADER_CALLS).filter(rel => !namedAwaiters.has(rel));
+    expect(
+      stale,
+      `AWAITER_LOADER_CALLS excuses ${stale.join(', ')}, which no PIPELINE_REACHERS row names `
+      + 'as an awaiter at all',
     ).toEqual([]);
   });
 

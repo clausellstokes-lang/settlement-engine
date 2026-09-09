@@ -11,9 +11,12 @@
  * `[livingContentSeam] v2 world, roster payload not loaded` out of
  * `generateSettlementPipeline` — not a leaky world, no world at all. The cure is
  * `loadGenerationLawPayloads()` in `src/domain/density/densityCreateBoundary.js`,
- * awaited by every module that can reach the pipeline;
+ * awaited by every main-thread module that can reach the pipeline, and the seam's
+ * `loadLivingContentRoster()` itself in the two WORKER shells, which are held
+ * under a byte ceiling the aggregate would cost them for nothing (car 3a);
  * `tests/lint/densityCreateBoundary.walker.test.js` holds that caller set to the
- * tree, per row and flatly, so the outage cannot return silently.
+ * tree, per row and flatly, with the two worker rows declared by name, so the
+ * outage cannot return silently.
  *
  * ⇒ AND THE OUTAGE, WHILE IT STOOD, WAS THE TRUE GROUND OF EVERY "THE ROSTER IS
  * INERT" CLAIM IN THIS ESTATE — the correction is kept rather than deleted,
