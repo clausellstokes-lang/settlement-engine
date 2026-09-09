@@ -153,3 +153,189 @@ module scope with them: `worldCode`, `constructRealm`, `composeInstantWorld`, `c
 `instantWorldBinding` 6 · `worldConditionsRegen` 3 · `customContentTunablesRuntime` 5 ·
 `locksEngine` 13 · `regenPreservation` 6 · `editProseQueueSpine` 14 · `pendingEditsQueueReset` 5 ·
 `settlementSlice.sentinelTierRegate` 4 · `campaignWorldPulseSpatialCanon` 16. eslint 0.
+
+---
+
+## CAR 1c — THE PROMISE UNDER LAW 2, BY BYTES (`807de3eef`)
+
+New file `tests/domain/livingContentPromiseBytes.test.js` (5 tests, 44.16 s). Both corpora are
+IMPORTED, never re-spelled: `tests/helpers/goldenMasterCorpus.js` and
+`scripts/prose-rate-corpus.mjs`'s `rateGrid()`.
+
+| corpus | N | movers | roster under law 1 | roster under law 2 | wrong law | seconds |
+|---|---|---|---|---|---|---|
+| GOLDEN 525 | 525 | **0** | 0 | 0 | 0 | 29.4 |
+| RATE 768 | 768 | **0** | 0 | 0 | 0 | 28.9 |
+
+**Not one byte other than the law's own declaration moved on 1,293 configurations.** `wrongLaw=0`
+is what stops the comparison being one law run twice: every dark row resolved to v1, every lit
+row to v2.
+
+### The one excepted field, and a MEASURED CORRECTION TO THE BRIEF
+The brief expects `customContentRoster` to be "a frozen record under 2, EMPTY when the run's
+reviewed environment holds no living-content definition". **Measured: it is ABSENT, not an empty
+record.** `buildLivingContentRoster` returns `null` when no bucket yields a row, so law 2 writes
+NO KEY AT ALL on such a run — the empty-roster count is 0 of 525 and 0 of 768, not 1,293 empty
+records. Emitting an empty record instead would widen the persisted settlement shape on every
+world the product mints, which is an owner-gated persistence decision: **REFUSED, with this
+measurement.** The module's own header already argues for the null.
+
+### And the roster is not vacuous (the anti-vacuity measurement)
+A lit birth driven through `birthConfig` with `tests/fixtures/customContentReferencePack.js`:
+roster PRESENT, `schemaVersion` 1, buckets `deities · factions · stressors · traditions`, one row
+each; the dark twin carries none; and after removing the marker AND the roster the two worlds are
+**byte-identical**. Materialization is eligibility, and recording moves no other byte.
+
+### One arm was wrong on its first cut, corrected in place
+The lifecycle arm replayed from `loaded.config` on the pipeline docblock's claim that
+`config._seed` "is how a saved settlement replays itself". It is not: a generated
+`settlement.config` is the RESOLVED config and carries no `_seed`, so re-running on it produces a
+DIFFERENT TOWN (`densityCreateBoundary.js`'s header records the same executed finding). The arm
+replays from the INPUT config and asserts separately that the LAW travels on the persisted config.
+
+---
+
+## CAR 1d — NO MIGRATION (`4c95c926f`)
+
+The owner's second word of 2026-09-08 DISCHARGES the retroactive half of the first: there is
+nothing to migrate. `livingContentLaw.js`'s property 3 stands unchanged and gains ONE dated
+paragraph quoting the owner. **No migration, no read-path stamp, no provenance line for one.**
+
+### The arms
+* A PERSISTED law-1 world — markerless, exactly what any save from before the flip is — JSON
+  round-tripped, placed on a store whose WIZARD CONFIG IS LIT, `regenSection('npcs')` run against
+  it, then taken through the clone seam every undo, snapshot and version-history entry round-trips
+  through. All three hops leave the marker absent, the resolved law at 1, and the roster absent.
+  Two positive controls: the build is asserted LIT, and the regen is asserted to have really
+  rewritten `npcs`.
+* Every reader treats ABSENT as empty, driven: the gallery strip (REFERENCE-identical — it did not
+  merely survive, it did not allocate), the account remapper (`{ok:true, roster:null}`, never a
+  refusal), both public projections.
+
+**THE PLANT:** `importScrub.js`'s presence test replaced by a dereference reds the arm with
+`TypeError: Cannot read properties of undefined (reading 'schemaVersion')` — 1 failed / 15 passed.
+Restored, md5 MATCH, 16 passed.
+
+### Six stale sentences corrected where they stand
+`livingContentSeam.js` · `generateSettlementPipeline.js` · `composeInstantWorld.js` ·
+`settlementGenerateAction.js` · `importScrub.js` · `densityCreateBoundary.js`'s GENERATION_LAWS
+`why` STRING. ⭐ And one of them named the WRONG MECHANISM even before the flip:
+`importReconciliationAdmission.js` grounded the OSR walker's blindness on "the dial is dormant",
+when what actually keeps the roster off that corpus is `customContent: {}`.
+
+---
+
+## CAR 1e — THE THREE HOLES' ARMS AT DIAL 2 (`fc546fd2e`)
+
+| suite | at dial 2 |
+|---|---|
+| `importScrub` (gallery ingest, DEF-1) | 13 passed |
+| `campaignSlice.galleryImport` (the second gallery path) | 6 passed |
+| `importReconciliation` (DEF-3) | 18 passed |
+| `accountImportSlice` (DEF-4/DEF-5, live entry + every `versionHistory[i].settlement`) | 26 passed |
+| `accountSettlementContentPortability` (the remap-or-drop law) | 17 passed |
+| `livingContentRosterPublicDrop` (O-11 path 1) | 7 passed |
+| `livingContentLawWiring` (DEF-2's clamp, both directions) | 19 passed |
+
+⭐ **AND THE ARM NONE OF THEM HAD.** Every L-MAT-FIX cure drives a HAND-BUILT roster, because on
+the day they were written the product could not mint one. This car adds a world minted by the LIT
+PRODUCT (through `birthConfig`, with a reviewed environment) carried into the boundaries: the
+anti-vacuity arm first (marker 2, buckets exactly the law's four, provenance beside it), then the
+gallery ingest drop (roster + provenance + the foreign birth law, town intact) and both public
+projections.
+
+⚠ **RECORDED, NOT CURED:** the DM-full projection carries the law MARKER on the config. A build
+fact, not an account-scoped identifier, and the gallery INGEST drops it on the way back in.
+
+---
+
+## CAR 1f — THE LIT WALKERS (`5faa1c4b9`)
+
+`mechanismLitCoverage` is **green (12 passed) and BLIND to this law**, and now says so in its own
+header. Both axes miss a VERSIONED GENERATION LAW: axis 1 enumerates flat modules under
+`src/domain/worldPulse` (these live under `src/domain/content/`), axis 2 enumerates `<x>Enabled`
+simulation-rules flags (this is a version constant, and the lit path is decided by the WORLD'S
+persisted config). It was green while the law shipped unlit, green now it is lit, and green
+through the whole period when lighting would have taken generation down.
+
+The reference-pack drive and the DM-full arm landed in 1e, where the boundary arms are.
+
+---
+
+## REGISTER — THE LIGHTING CENSUS (`48c001cc8`)
+
+Refrozen by its own ritual on a clean tree at `5faa1c4b9`, verified by a plain re-run (34 passed).
+
+    files 2556 -> 2557 · parked 375 -> 375 · credited 2181 -> 2182
+    titles 24031 -> 24046 · suiteTitles 6419 -> 6422
+
+⚠ The note was written wrong once ("no suite title moved", against the same run's 6419 -> 6422)
+and RE-MEASURED rather than patched; the second refreeze moved no figure, which is the proof only
+the prose changed.
+
+---
+
+## REFUSALS — each with its measurement
+
+### R1 — the writer-reach REGISTER DIGEST (`--write` refused; the chair's register car)
+Lighting the dial convicts the dark-register row `customContentRoster on settlement` at clause
+D-dial, in the instrument's own words:
+
+```
+writer-reach dark register row "customContentRoster on settlement" is UNVERIFIABLE (clause D-dial):
+the shipped dial NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION already EQUALS the lit
+ROSTER_LIVING_CONTENT_LAW_VERSION (2), so the key is written on every world and this read must be
+judged normally. Retire the row rather than outliving its own premise.
+```
+
+The row's own `lighting` prose said the same before the day came ("this row must die with its
+premise"). It is **STRUCK** from `scripts/lib/writer-dark-register.mjs` (6 rows → 5) with the
+retirement recorded in the register's header. That moves ONE frozen value and nothing else:
+
+    registerDigest  ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0
+                 -> 14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501
+
+**Everything else is unmoved, measured:** `node scripts/check-writer-reach.mjs` (plain, no flag)
+**exits 0** and prints `WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326
+(reviewable 526)`, identical to `scripts/.writer-reach-baseline.json`'s `population`
+(`judged 6532, lit 560, litName 4646, dark 1326`), `reviewableDarkCount 526`,
+`pendingSurfaceCeiling 3`, `darkUnregistered 1322`. The baseline file is **untouched**
+(`git status --porcelain scripts/.writer-reach-baseline.json` → 0 lines).
+
+⛔ This lane may not run a register `--write` (the brief's fence permits only the lighting census
+ritual and the wiring census count-only re-take). So **`tests/lint/writerReach.walker.test.js` is
+left RED on that ONE digest arm — 55 of 56 pass** — for the chair's register car. Five other arms
+that referenced the retired row were re-authored so the digest is the only red: the row count
+(6 → 5), the dial-rows list (two → one), and three plants whose DOOR moved to the DENSITY dial
+(still 1 against a register version of 2), because a plant that dies at D-dial never reaches the
+clause it was built for.
+
+### R2 — the roster's EMPTY-RECORD shape (owner-gated persistence; refused)
+See car 1c. The brief expects an empty frozen record under law 2; the code writes NO KEY. Changing
+that widens the persisted settlement shape on every world the product mints.
+
+### R3 — the `_gallery_dm_full_json` SQL twin (owner-gated migration; refused, and it is the
+lane's one real exposure finding)
+The CLIENT half of the DM-full drop is landed (`publicSafe.js` deletes both records). The SERVER
+re-issues the stored row through `_gallery_dm_full_json` (net-current at migration 129), which
+drops a NAMED list and passes everything else — neither `customContentRoster` nor
+`customContentProvenance` is on that list, so a dossier shared with `gallery_share_dm` and read
+back from the server still carries the author's unadopted homebrew library.
+
+⚠ **THE LIGHTING DID NOT OPEN THIS DOOR, IT WIDENED IT BY ONE KEY.**
+`customContentProvenance` is written by the pipeline with no reference to any dial and has ridden
+that path for as long as it has existed; lighting adds `customContentRoster` beside it. **BOTH are
+conditional on the run's reviewed environment holding custom content** — measured on this build, a
+generation with `customContent: {}` writes NEITHER key, lit or dark (0 of 525, 0 of 768). The
+exposure window is authors of homebrew who then DM-share, not every user.
+
+A migration is a deploy-shaped act on a shared surface: **no migration file was written.** The
+spent dial tripwire in `livingContentRosterPublicDrop.test.js` was re-cut onto the real gap — a
+pin over the net-current SQL body asserting it strips NEITHER key, with a BANK-THE-WIN instruction
+so the arm's RED is the cure arriving.
+
+### R4 — the test-totals census (`check-test-ratchet.mjs`) NOT run
+It runs the whole suite, which this lane's fences forbid. **Predicted delta, counted by hand from
+the executed per-file figures: +1 test file, +15 tests.** (livingContentPromiseBytes +5 in a new
+file; livingContentLawWiring +7; densityCreateBoundary.walker +2; livingContentRosterPublicDrop
++1.) `tests/lint/testRatchet.test.js` itself is green at 94 passed.
