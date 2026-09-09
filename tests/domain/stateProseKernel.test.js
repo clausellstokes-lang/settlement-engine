@@ -39,6 +39,7 @@ import {
   hashKey,
   poolDimensions,
   readStateProse,
+  stableVid,
   stateProseSentence,
   variantIsAnchored,
   variantIsAudible,
@@ -750,6 +751,61 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
       'DS-ECO-7 :: CATALOG',
       'DS-ECO-7 :: TALLIES',
     ]);
+  });
+
+  it('⭐⭐ THE GUARD ITSELF: `stableVid` READS vid 0 AS A REAL ID, and the draw proves it', () => {
+    // ⛔ WHY THIS ARM EXISTS, and it is the skeptic's finding rather than a tidy-up (SITTING
+    // §U c-4, fold NEW-1). The sweep above names the seven canonical-led pools, but it
+    // RE-DERIVES the id-less predicate over the leaves — `!Number.isInteger(vid) || vid < 0`
+    // spelled a second time — so it pins the CORPUS and is blind to the KERNEL. Measured by
+    // the skeptic: with `|| vid <= 0` planted in `stableVid`, this file read 37 passed and
+    // the projection contract read 77 passed while seven shipped pools silently reverted to
+    // the modulus draw. Between car 8a-1 and the REWRITE's freeze act there was no green
+    // instrument standing over the corpus's only draw-regime split. This is that instrument:
+    // it calls the kernel's own predicate, so a guard that moves cannot pass.
+    expect(stableVid({ vid: 0 }), '⛔ vid 0 is a REAL id: a `> 0` guard splits the corpus')
+      .toBe(0);
+    expect(stableVid({ vid: 1 }), 'and an ordinary id is itself').toBe(1);
+    expect(stableVid({ vid: 6 }), 'and the deepest id the corpus carries').toBe(6);
+    // The other side, so the predicate is not merely permissive: everything that is NOT an
+    // annex row number reads as ABSENT and takes the fallback.
+    const notAnId = [undefined, null, -1, 1.5, Number.NaN, Number.POSITIVE_INFINITY, '0', '2', true];
+    expect(notAnId.filter((vid) => stableVid({ vid }) !== null), 'a non-id read as an id')
+      .toEqual([]);
+    expect(stableVid(null), 'and no variant at all is no id').toBeNull();
+    expect(stableVid(undefined)).toBeNull();
+
+    // ⭐ AND THE DRAW, on a synthetic pool numbered from ZERO exactly as the seven are. The
+    // argmax and the modulus are different functions, so on a pool the guard admits they
+    // DISAGREE on most seeds; on a pool the guard rejects they agree on every seed by
+    // construction, because the argmax branch is never entered. That contrast is what makes
+    // this arm sensitive to the guard rather than to the corpus.
+    const zeroLed = Object.freeze([0, 1, 2, 3].map((vid) => Object.freeze({
+      vid, text: `synthetic wording ${vid}`, angle: vid === 0 ? 'canonical' : 'authored',
+    })));
+    const SYN_SEEDS = Array.from({ length: 400 }, (_, i) => `vid-zero-${i}`);
+    let differ = 0;
+    let zeroWins = 0;
+    for (const seed of SYN_SEEDS) {
+      const drawn = drawVariant(zeroLed, 'DS-SYN-0', 'zero-led', seed);
+      if (drawn !== modulusDraw(zeroLed, 'DS-SYN-0', 'zero-led', seed)) differ += 1;
+      if (drawn.vid === 0) zeroWins += 1;
+    }
+    // MEASURED at this tip: 299 of 400 seeds disagree with the modulus, and vid 0 takes 104
+    // of the 400 draws (a quarter, which is the uniformity the argmax owes a four-row pool;
+    // the modulus takes it on 110, and those two numbers being close is the point — the
+    // COUNTS look alike, the per-seed answers do not, which is why this arm is per-seed).
+    // Under the `vid <= 0` plant BOTH collapse: the pool takes the fallback on every seed, so
+    // `differ` is 0 and this line reds by name.
+    expect(differ, '⛔ THE PLANT: a zero-led pool that agrees with the modulus on EVERY seed'
+      + ' means the guard read its id as absent').toBe(299);
+    expect(zeroWins, 'and vid 0 is drawn like any other row, not skipped').toBe(104);
+    // The seven shipped zero-led pools are the same shape, and their draw is asserted to be
+    // the argmax's rather than the fallback's — read off the live leaves, not the synthetic.
+    const shippedZeroLed = STATE_POOLS.filter(({ pool }) => pool[0].vid === 0);
+    expect(shippedZeroLed.length, 'the seven canonical-led pools').toBe(7);
+    const fellBack = shippedZeroLed.filter(({ pool }) => pool.every((v) => stableVid(v) === null));
+    expect(fellBack, 'a shipped zero-led pool the kernel reads as id-less').toEqual([]);
   });
 
   it('⭐ THE CAUSAL REGISTER STILL TAKES THE MODULUS, so this car moved none of its reads', () => {

@@ -318,10 +318,20 @@ export function fillSlots(text, slots) {
  * silent split of the corpus into two draw regimes, which is the failure this comment is
  * here to stop somebody re-introducing. Driven: the sweep in the kernel's test names all
  * seven by block and pool.
+ *
+ * ⛔ WHY THIS IS AN EXPORT AND NOT A PRIVATE HELPER (REWRITE car 8a-11, SITTING §U c-4). The
+ * sweep that names the seven RE-DERIVES the id-less predicate over the leaves; it pins the
+ * CORPUS's ids and never calls this function, so a `vid <= 0` planted right here left both
+ * named acceptances green while seven pools reverted to the modulus. An instrument that
+ * cannot see the guard is not standing over it. The kernel's own predicate is therefore
+ * reachable, and the test asserts it on `vid: 0` and drives `drawVariant` on a synthetic
+ * vid-0 pool whose draw must differ from the modulus. Exported for that arm and for no
+ * product caller: `tests/lint/composeStateProseFence.test.js` holds the composer's import
+ * list, and no `src/` file outside this module names it.
  * @param {StateProseVariant|null|undefined} variant
  * @returns {number|null}
  */
-function stableVid(variant) {
+export function stableVid(variant) {
   const vid = variant ? variant.vid : undefined;
   // ⛔ THE NARROWING IS WRITTEN OUT rather than left to `Number.isInteger`, which the strict
   // domain typecheck does not read as a type guard: `typeof vid === 'number'` is what tells it
