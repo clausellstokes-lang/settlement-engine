@@ -49,7 +49,7 @@
  * copy should be deleted. Recorded as owed rather than left to be re-found.
  */
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   admitCustomContentDefinition,
@@ -327,13 +327,83 @@ describe('living-content materialization law', () => {
       newSettlementLivingContentLaw(),
       'the create boundary must mint the lit marker, and exactly one key',
     ).toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
-    // …and the DORMANT branch of the mint is still reachable and still correct,
-    // which is what keeps the revert a one-line act rather than a rewrite. The
-    // function reads the dial and nothing else, so the branch is exercised by
-    // reading the leaf's own default through the same closed test.
+    // …and the LEAF's own closed test still answers the dormant default, which is
+    // what a markerless world resolves through on every read path.
+    // ⚠ THIS PAIR IS NOT THE MINT'S DORMANT BRANCH, AND IT USED TO SAY IT WAS
+    // (corrected 2026-09-08, lane LIGHT car 2e, on the fold's row 3). What these
+    // two lines exercise is `readLivingContentLawVersion` and
+    // `materializesLivingContent` — the LEAF — while the mint's `{}` branch is a
+    // different function's ternary. The branch is executed by the arm below, and
+    // by nothing else in the estate.
     expect(readLivingContentLawVersion(DEFAULT_LIVING_CONTENT_LAW_VERSION))
       .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
     expect(materializesLivingContent({})).toBe(false);
+  });
+
+  /**
+   * ⭐⭐ THE MINT'S DORMANT BRANCH, EXECUTED THROUGH THE REAL FUNCTION (lane
+   * LIGHT car 2e, 2026-09-08; the fold's row 3 and its untested row U3).
+   *
+   * ⛔ THE STATE THIS ARM WAS WRITTEN FOR. After the dial was lit,
+   * `newSettlementLivingContentLaw()` had exactly two real call sites in the
+   * estate and both took the LIT branch; every DARK drive in
+   * `livingContentLawWiring.test.js` replaces the function WHOLESALE with
+   * `vi.doMock`, so it proves what the boundary does with a dark mint and says
+   * nothing about the shipped one. The `{}` branch was therefore executed by
+   * NOTHING, while three receipts and this file's own comment claimed it was
+   * still exercised. A branch nobody runs is a revert nobody has tested, and the
+   * one-line revert is the whole argument for the dial's shape.
+   *
+   * ⛔ WHY THE LEAF IS MOCKED AND NOT THE MINT. The dial is a module-level const
+   * (`NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION = ROSTER_LIVING_CONTENT_LAW_VERSION`),
+   * so the only way to vary it without editing the shipped source line is to vary
+   * what the LEAF hands the law module and re-import. Mocking the leaf leaves the
+   * mint itself untouched: the ternary, the key and the returned object are the
+   * product's own. Mocking the mint would be the very substitution that left this
+   * branch unexecuted in the first place. No runtime switch was added to the
+   * product for this, deliberately.
+   */
+  it('⭐ the mint\'s DORMANT branch is executed by the real function at a dark dial', async () => {
+    vi.resetModules();
+    vi.doMock('../../src/domain/content/livingContentLawVersion.js', async (importOriginal) => ({
+      .../** @type {Record<string, unknown>} */ (await importOriginal()),
+      ROSTER_LIVING_CONTENT_LAW_VERSION: DEFAULT_LIVING_CONTENT_LAW_VERSION,
+    }));
+    let darkMint;
+    try {
+      const dark = await import('../../src/domain/content/livingContentLaw.js');
+      // ⛔ IT IS THE REAL FUNCTION. If this ever became a mock the arm would be
+      // asserting the fixture's own return value, which is the exact false green
+      // it exists to replace.
+      expect(
+        vi.isMockFunction(dark.newSettlementLivingContentLaw),
+        'the mint was replaced rather than driven — this arm would then prove nothing',
+      ).toBe(false);
+      expect(dark.NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION)
+        .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+      darkMint = dark.newSettlementLivingContentLaw();
+    } finally {
+      vi.doUnmock('../../src/domain/content/livingContentLawVersion.js');
+      vi.resetModules();
+    }
+    expect(
+      darkMint,
+      'the mint wrote something at the dormant dial. A dark birth must carry NO key at all:'
+      + ' an empty-but-present marker is a persisted shape change on every world the product'
+      + ' mints, and a non-empty one re-births every world under a law nobody chose.',
+    ).toEqual({});
+    expect(Object.keys(/** @type {Record<string, unknown>} */ (darkMint))).toEqual([]);
+
+    // ⭐ AND THE SAME REAL FUNCTION, RE-IMPORTED WITH THE LEAF UNTOUCHED, MINTS
+    // THE MARKER. This is what makes the `{}` above a BRANCH rather than an
+    // artefact of the substitution: one function, one ternary, two answers, and
+    // the only thing that moved between them is the value the leaf hands it.
+    const lit = await import('../../src/domain/content/livingContentLaw.js');
+    expect(lit.NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION)
+      .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(lit.newSettlementLivingContentLaw())
+      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+    vi.resetModules();
   });
 
   // ⚠ ONE NAMED TEST THAT LOOPS INSIDE — deliberately NOT `it.each`, and the reason
