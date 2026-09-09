@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 74,
+ "firstTs": "2026-09-09T07:56:27.722Z",
+ "lastTs": "2026-09-09T07:59:51.109Z",
+ "tools": {
+  "Bash": 11,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I will read the table and the harness files first.",
+ "run": "wf_73595d81-51d",
+ "agent": "a4661d03c6a569913",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_73595d81-51d/agent-a4661d03c6a569913.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
