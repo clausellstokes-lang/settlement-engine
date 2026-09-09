@@ -956,3 +956,9 @@ dist/assets/vendor-pdf-Cnik_ppM.js                              1,623.20 kB │ 
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
 
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 16888 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] STRICT DIST OK — 54 discovered/reported file(s), 472 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.
+GATE_END=2026-09-09T15:23:56Z
+TRUE_EXIT=0
+GATE_LOAD_POST=10.79 17.15 17.95
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=f73bdbf16d3f7a57c18d7fd57b0478b953043a73
