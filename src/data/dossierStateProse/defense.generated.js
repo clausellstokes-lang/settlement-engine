@@ -5226,29 +5226,44 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-THREATENED": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.",
+          "text": "Danger in the country is a standing entry on {settlement}'s books, and against that entry the town keeps its {defwork} in repair.",
           "slots": [
             "settlement",
             "defwork"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "On {settlement}'s account the country is dangerous ground, and the upkeep of the {defwork} is a line the town still bears.",
+            "The {defwork} at {settlement} is kept up as a charge the town carries. That charge answers the country's danger.",
+            "Set against dangerous country, the {defwork} at {settlement} is a cost the town enters and pays."
+          ]
         },
         {
           "angle": "street",
-          "text": "Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.",
+          "text": "Against dangerous country the {defwork} at {settlement} is kept up as working fabric.",
           "slots": [
-            "settlement",
-            "defwork"
+            "defwork",
+            "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Dangerous country is the standing condition at {settlement}; the {defwork} is kept in service against it.",
+            "Used and mended in the ordinary way, the {defwork} at {settlement} answers dangerous country.",
+            "The {defwork} at {settlement} is in use. The country it stands against is dangerous ground, and the town keeps the work sound."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "{settlement} is enclosed the way working things are enclosed: against something, and recently attended to.",
+          "text": "A working enclosure stands at {settlement}, and the country it faces is dangerous ground.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Dangerous country lies about {settlement}, and the enclosure is kept.",
+            "Beyond {settlement} the country carries danger, and the town is closed against that danger. The enclosure is kept sound.",
+            "Enclosed against dangerous country, {settlement} keeps the enclosure fit for use."
+          ]
         }
       ],
       "WALLED-QUIET": [
@@ -5341,9 +5356,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,

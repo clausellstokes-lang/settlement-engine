@@ -5969,9 +5969,18 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **PROVENANCE:** The enclosure mechanism is engine-native TWICE OVER, and both halves are structural reads of live fields: the threat side (walls score against the threat axes) and the purse side (the upkeep gate, whose asymmetry between stone and wages is the generator's own recorded rule, not an authored flourish). The one historical clause this block might want — WHEN the wall was raised — has NO backing fact at this tip and is deliberately absent; it arrives with the fabric epochs (CT-1b). R-DST-A: `DS-DEF-5` is the armed-forces SURFACE and `DS-DEF-10` the arms LADDER; this block is the why-frame for the fortification fact alone and composes BESIDE them, never over the same cell twice. `UNWALLED-LARGE` is the mandatory `[counterforce]` arm (§0b): the engine records a gate, so the dossier must be able to say the wall did NOT get built.
 
 **`WALLED-THREATENED`**
-1. `[ledger]` {settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.
-2. `[street]` Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.
-3. `[visitor]` {settlement} is enclosed the way working things are enclosed: against something, and recently attended to.
+1. `[ledger]` Danger in the country is a standing entry on {settlement}'s books, and against that entry the town keeps its {defwork} in repair.
+   - `[face]` On {settlement}'s account the country is dangerous ground, and the upkeep of the {defwork} is a line the town still bears.
+   - `[face]` The {defwork} at {settlement} is kept up as a charge the town carries. That charge answers the country's danger.
+   - `[face]` Set against dangerous country, the {defwork} at {settlement} is a cost the town enters and pays.
+2. `[street]` Against dangerous country the {defwork} at {settlement} is kept up as working fabric.
+   - `[face]` Dangerous country is the standing condition at {settlement}; the {defwork} is kept in service against it.
+   - `[face]` Used and mended in the ordinary way, the {defwork} at {settlement} answers dangerous country.
+   - `[face]` The {defwork} at {settlement} is in use. The country it stands against is dangerous ground, and the town keeps the work sound.
+3. `[visitor]` A working enclosure stands at {settlement}, and the country it faces is dangerous ground.
+   - `[face]` Dangerous country lies about {settlement}, and the enclosure is kept.
+   - `[face]` Beyond {settlement} the country carries danger, and the town is closed against that danger. The enclosure is kept sound.
+   - `[face]` Enclosed against dangerous country, {settlement} keeps the enclosure fit for use.
 
 **`WALLED-QUIET`**
 1. `[visitor]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
