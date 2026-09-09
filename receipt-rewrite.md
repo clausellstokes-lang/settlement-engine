@@ -6,7 +6,7 @@ Seat: Opus 5 — Fable-unvalidated. Lane: REWRITE. Chair session 67af10e4.
 
 ## CAR 8a — THE KERNEL, THE INSTRUMENTS AND THE GATE
 
-**STATUS: PARTIAL — in flight.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
+**STATUS: LANDED WHOLE — twelve commits, `f4005cccd` … `5c7eadb18`.** Chartered at SITTING §T.10 (2026-09-09); ARCH §12 row 8a; §N.2 SIGNED;
 Part B §20–§23. Dock `$SC/laneREWRITE`, cut at the §917 product tip `29ec62425` (detached HEAD,
 porcelain 0 at open, runners 0 at open — both executed, exit 0).
 
@@ -36,7 +36,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-7 | the face-count ratchet | **`99e8e56e8`** | **LANDED** |
 | 8a-8 | T-F12's class list re-cut | **`31faa63aa`** | **LANDED** |
 | 8a-9 | the connectives lists to the floors (public-copy drafts) | **`bc441dccc`** | **LANDED** |
-| 8a-10 | the register car | — | pending |
+| 8a-10 | the register car | **`fa6696860`** + **`12b240397`** (lighting) + **`5c7eadb18`** (voice) | **LANDED** |
 
 ---
 
@@ -1338,3 +1338,190 @@ the walk; the brief asked for drafts at this car. Each joint is cut to the regis
 flat, clerkly, no figure, no forecast, no em dash, no `, which` — and the two lists that assert
 adjacency keep the empty opener first. A chair or the owner may replace any of the twelve without
 touching a mechanism: the lists are data behind a draw nothing reaches yet.
+
+---
+
+## 8a-10 — THE REGISTER CAR, IN THREE COMMITS
+
+**LANDED `fa6696860` · `12b240397` · `5c7eadb18`** over `bc441dccc`.
+
+⛔ **THREE COMMITS AND NOT ONE, because two rituals refuse a dirty tree.** The estate's own
+precedent is the taste's M-8, which was five commits for exactly this reason. Executed proof of
+the refusal, not recalled: `node scripts/check-observed-shape-readers.mjs --write` on a dirty tree
+answers *"observed-shape current sourceTree is not the exact committed HEAD input tree"*, and the
+lighting ritual answers the same way.
+
+### `fa6696860` — THE REGISTER ACTS
+
+| act | result |
+|---|---|
+| the wiring census | `--dry` reads **CURRENT** — delta 0, sections (none), ROWS 0. It was re-taken in the three cars that moved it (8a-3, 8a-6, 8a-8), each with its printed proof |
+| the OSR re-freeze | **1,972 findings / 1,397 identities across 386 files**, absorbing the ONE drifted execution input (8a-9's connectives leaf). Shrink-only. The walker reads **44 passed** after it |
+| the SHIFT REGISTER | printed by the contract test, all **fifteen** mechanisms, the train's new pin shapes visible: `passage-shape source+source` · `comparator-and-band-rule source+integer+integer` · `face-count-per-variant` with its `floors` block · `connective-list-length map` at 3/3/3/3 |
+| the byte ratchets, DRY | **every one of the nine leaves EXACTLY at its pinned figure, delta 0** — the only leaf the train moved is the connectives leaf, declared at 8a-9 |
+| typecheck | `check-full-typecheck.mjs` — OK, **173 errors, ceiling 173** |
+
+### ⛔⛔ A GATE THE EARLIER CARS' ACCEPTANCES DID NOT REACH — `typecheck:domain:strict`
+
+A SECOND typecheck, over `tsconfig.domain-strict.json`, whose rule is **"new/worsened files must
+be strict-clean"** and not "stay under the ceiling". It red on three files this train touched:
+
+    src/domain/display/stateProse/stateProseKernel.js: 2 strict errors (baseline 0) — +2   [car 8a-1]
+    src/domain/prose/entryWalker.js:                   2 strict errors (baseline 0) — +2   [car 8a-6]
+    src/domain/prose/fieldSynonyms.js:                 1 strict errors (baseline 0) — +1   [car 8a-6]
+
+⭐ **NONE WAS FIXED BY WIDENING THE BASELINE; all three are cured at cause, and two of them are
+the same mistake.** `stableVid`'s `Number.isInteger(vid) && vid >= 0` is not read as a TYPE GUARD
+by strict tsc, so the narrowing is written out as `typeof vid !== 'number'` with the integer half
+kept beside it — and `>= 0`, never `> 0`, because vid 0 is a real id on seven shipped pools. The
+other two were **JSDoc blocks my own edits had SEPARATED from the declarations they document**: a
+comment inserted between a docblock and its arrow function silently un-types both parameters, and
+nothing but this gate said so. Both docblocks are back against their declarations.
+
+    [domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+
+### `12b240397` — THE LIGHTING CENSUS RE-FREEZE, BY ITS OWN RITUAL
+
+    census REFROZEN at fa66968607aefc95097ba0e2771ea91938be1218:
+      files 2557 -> 2562 · parked 375 -> 375 · credited 2182 -> 2187
+      titles 24049 -> 24158 · suiteTitles 6422 -> 6451
+
+⚠ **THE +5 FILE COUNT IS A NET**, and the note records it: the train landed nine test files and
+removed one — `proseTasteMeasure.walker.test.js` RENAMED to `proseWaveGate.walker.test.js` (8a-5),
+`proseTasteCandidates.walker.test.js` REFUSED to 8b (8a-3), five taste walkers landed (8a-3), and
+`fieldSynonyms.js` is a src file the census counts its own way.
+
+⭐ **THE 8a-2 RECEIPT'S WARNING HELD AND WAS MEASURED RATHER THAN ASSUMED:** *"only +1 title was
+counted for 8 new `it()` blocks … Measure at 8a-10; do not assume +8."* Measured: **+109 titles
+over +5 credited files.**
+
+The refreeze run FAILS BY DESIGN so it can never be mistaken for a passing gate; the plain re-run
+is the proof — **34 passed**.
+
+### `5c7eadb18` — ⛔ THREE EM DASHES IN `src/` PROSE LITERALS, CAUGHT BY THE ESTATE AND NOT BY THE LANE
+
+"No em dash, exclamation mark or digit in a `src/` prose literal" binds every commit of this
+train. `tests/copy/voiceMechanics.test.js` is **not in `tests/lint`**, which is the acceptance the
+earlier cars ran, so three literals reached the tree:
+
+| file | car | what |
+|---|---|---|
+| `src/domain/prose/passageShapes.js:201` | 8a-2 (the first seat) | a `why` string |
+| `src/domain/prose/composedWalker.js` | 8a-5 | `armAmbiguity`'s description |
+| `src/domain/prose/fieldSynonyms.js:51` | 8a-6 | a ratified row's `at` citation |
+
+Each cured by punctuation and not by rewording — a semicolon, a full stop and a colon carry what
+the dash carried. The four walkers that read these strings pass unchanged (**214 tests**).
+
+⚠ The two §917-INHERITED files are LEFT per ADDENDUM 1 ruling 7: `labelBands.js` (em 5) and
+`generalStateProse.js` (em 3) are red at the dock's BASE tip with a clean tree, their em dashes
+sit in FILE-HEADER COMMENTS, and the baseline carries no entry for either — an instrument question
+about `stringLiteralContents`, not a voice question, and outside 8a's charter.
+
+### ⭐⭐ THE NAMED ACCEPTANCE, MET
+
+    npx vitest run tests/lint     154 files passed / 0 failed  ·  2,590 passed / 0 failed
+
+Both declared reds are paid: the lighting census carried from 8a-1, and the observed-shape input
+carried from 8a-9.
+
+### ⛔ THE ZERO-BYTE FENCE OVER THE WHOLE TRAIN
+
+    node scripts/prose-manifest-diff.mjs cells-8a2.json cells-8a10.json     (39c88b02d → the tip)
+      REPLACED 0 · RE-INDEXED 0 · ADDITIVE 0 · WORDING-ONLY 0
+      UNCHANGED cells 73284 · towns 525 · ADDED 0 · REMOVED 0
+      (of the UNCHANGED, cells whose audience-filtered INDEX moved: 0)
+
+**Not one of the 73,284 cells moved across eight commits.** The car's own fence, executed end to
+end rather than per commit only.
+
+### THE FINAL SWEEP
+
+    npx vitest run tests/domain tests/property tests/data
+      1,092 files passed / 2 failed  ·  17,497 passed / 3 failed
+
+The three are the two CHARTERED `dossierProseManifest` arms (the manifest fixture is NOT
+re-recorded by this car — the freeze act is the REWRITE's last car) and the §917-INHERITED
+`generatorGoldenMaster`. Nothing else in 17,500 tests moved.
+
+---
+
+## CAR 8a — THE CLOSE (second seat: Opus 5 — Fable-unvalidated, continuing under ADDENDUM 1)
+
+**LANDED WHOLE.** Dock `$SC/laneREWRITE`, tip **`5c7eadb18`**, porcelain **0**, runners **0**.
+
+| # | item | sha |
+|---|---|---|
+| 8a-1 | the index-stable draw | `f4005cccd` *(first seat)* |
+| 8a-2 | passage shapes, the licensed fourth draw | `39c88b02d` *(first seat)* |
+| 8a-3 | the taste's instruments, without the annex rows | **`83e8acf17`** |
+| 8a-4 | `armThread` + the kinship head | **`94c41fdb8`** |
+| 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | **`e26ad7838`** |
+| 8a-6 | the arm-Q cure + the field-synonym table | **`e2ac44a9c`** |
+| 8a-7 | the face-count ratchet | **`99e8e56e8`** |
+| 8a-8 | T-F12's class list re-cut | **`31faa63aa`** |
+| 8a-9 | the connectives lists to their floors | **`bc441dccc`** |
+| 8a-10 | the register car | **`fa6696860`** |
+| 8a-10-lighting | the lighting census, by its ritual | **`12b240397`** |
+| 8a-10-voice | three em dashes cured | **`5c7eadb18`** |
+
+### THE REFUSALS, EACH WITH ITS MEASUREMENT
+
+1. **`tests/lint/proseTasteAnnex.walker.test.js` — REFUSED** (chair's ADDENDUM 1 ruling 5): it
+   tests annex rows this car does not land.
+2. **`tests/lint/proseTasteCandidates.walker.test.js` — REFUSED WHOLE** to 8b. Measured: **8 of
+   its 9 arms red** without the seven candidate functions; the ninth passes vacuously.
+3. **The M-2 walker deltas to `proseComposed` / `proseEntryContradiction` / `proseMoveGrammar` —
+   REFUSED WHOLE**: unlike `proseWiringCensus`, whose delta is a MECHANISM plus pins, those three
+   are nothing but the annex's counts (2273 / 715 / 5247 / 2037) and an `AUTHORING_MARKER` filter
+   over a corpus that carries no marker.
+4. **M-3's two candidate-plumbing files — REFUSED** to 8b (ADDENDUM 1 ruling 4).
+5. **The composer may not read a lexicon — REFUSED, with the measurement.** ARCH §4.1: *"an import
+   from generation, the pulse kernel or `src/domain/prose/` reds"*; the fence holds the import
+   roster at three and calls a fourth *"a chair conversation, not an edit"*; and `closureCost`
+   prices it at **+4 files / +150,231 B onto a 70,252 B closure**. The kinship signal is
+   PROJECTED instead.
+6. **The exemplar citation rate is executable on 3 of 10 leaf registers** — the other seven have
+   no raw prose on this machine and are NAMED.
+7. **`proseTasteMeasure`'s "THE FIXTURE IS THE SHIPPED SHAPE" arm could not be kept armed** — it
+   needs a real unit to compare the M-9 fixture against; owed to 8b, named rather than papered.
+8. **Three of the seven refuter grounds did not become new arms**, each with its reason: the
+   paraphrase is item 5(b)'s distance; the costume ground is the grammar walker's own move
+   ceiling; C7 already exists.
+
+### THE FINDINGS THIS SEAT PRODUCED THAT OUTLIVE IT
+
+1. **The wave gate had NO SUBJECT.** `unitsOfPool` composed only the cartesian of a modifier's
+   attach set, and a SPINE's attach set is empty on all 708 — so the gate composed nothing for the
+   very pools the REWRITE rewrites. Cured at 8a-5.
+2. **The harness called an ABSENT pool `PASS` with an empty reason.** Car M-9 guarded an UNWRITTEN
+   set; an absent one fell through. `absentPoolRow` is that guard's other half (8a-3).
+3. **An instrument can contaminate its own measurement by being added to the file it reads.** The
+   synonym table as an object keyed by kind made the census's producer scan read `court:` as a
+   leaf key the estate writes, and flipped four DS-DEF-2 rows' `absent` labels. Shape, not comment,
+   was the cure (8a-6).
+4. **A hand-written prefix table drifted from the projector's own DESKS on its first day**, leaving
+   29 of 708 pools reachable from no section. A leaf IS a section (8a-5).
+5. **A comment inserted between a JSDoc block and its arrow function silently un-types both
+   parameters**, and only `typecheck:domain:strict` says so (8a-10).
+6. **`Number.isInteger(x) && x >= 0` is not a TYPE GUARD to strict tsc** — the narrowing has to be
+   written as `typeof x !== 'number'` (8a-10).
+7. **`tests/lint` does not reach `tests/domain`, `tests/copy` or the two typecheck ratchets.** Three
+   real reds this train produced were invisible to its own named acceptance: an economy-desk
+   provenance pin (8a-3, cured at 8a-4), three em-dash literals (8a-2/5/6, cured at 8a-10-voice)
+   and three strict errors (8a-1/6, cured at 8a-10).
+8. **`tests/property/generatorGoldenMaster.test.js` is RED at the §917 product tip** on all 525
+   configs, with a clean tree, at `29ec62425` and at `39c88b02d` alike. INHERITED, reported to the
+   chair, not this lane's.
+
+### WHAT THE CHAIR OWES A DECISION ON
+
+- **The exemplar citation rate is 0 over 786 sentences** on the three readable leaf registers, with
+  a live detector. SITTING §T.4's provisional budget of ≤ 1 citation per unit is therefore far
+  above anything the exemplar prose does. A sitting row, not a lane's.
+- **The pen line vs the inline rendering** is now composed both ways on both fixture towns (8a-5).
+  SITTING §T.4 said the adoption stays provisional "until the owner has seen it"; it is printable.
+- **The twelve connective joints are the lane's DRAFT** (8a-9). §13 row 27 makes the copy the
+  owner's, signed at the walk.
+- **ARCH §2.3 gains `kin`** — a modifier-only `poolMeta` field the composer reads. Recorded on the
+  SHIFT REGISTER in the same commit; the ARCHITECTURE document is the chair's to amend.
