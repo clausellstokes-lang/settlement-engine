@@ -116,7 +116,21 @@ import {
  *  on"), and reverting is the same one line: put
  *  DEFAULT_LIVING_CONTENT_LAW_VERSION back. EXISTING worlds are untouched either
  *  way — they never pass through create again, and nothing on any read path
- *  stamps a persisted config (property 3 below). */
+ *  stamps a persisted config (property 3 below).
+ *
+ *  ⛔ THE `@type {number}` IS LOAD-BEARING AND WAS EARNED BY A STRICT RED, NOT
+ *  ADDED FOR TIDINESS. Without it TypeScript infers the LITERAL type of whatever
+ *  the dial happens to hold, so `newSettlementLivingContentLaw`'s dormant branch
+ *  becomes `2 === 1` and the strict kernel convicts it: "This comparison appears
+ *  to be unintentional because the types '2' and '1' have no overlap" (TS2367,
+ *  `check-domain-strict`, on the day the dial was lit). The comparison is not
+ *  unintentional; it is the whole mechanism, and it is what keeps the dormant
+ *  branch reachable so the revert stays one line. A dial's declared type must be
+ *  the SPACE of law versions and never today's setting, or every reader of it
+ *  becomes a reader of one build's configuration. The sibling density dial needs
+ *  no annotation ONLY because it sits at the default, where the comparison's two
+ *  literals happen to overlap; it will need this the day it is lit.
+ *  @type {number} */
 export const NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION =
   ROSTER_LIVING_CONTENT_LAW_VERSION;
 
