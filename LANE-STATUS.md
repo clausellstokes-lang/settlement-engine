@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 09:03:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 09:12:47 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste and the sitting — ledger-only, zero product bytes at 29ec62425: seven p
 
@@ -142,4 +142,4 @@ product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste a
 - wf_73595d81-51d: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;96053 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;96056 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 20.12 12.38 8.50
+load: 15.96 19.30 15.13
