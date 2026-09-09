@@ -1,10 +1,10 @@
 {
  "arm": "draft",
  "round": 0,
- "at": "2026-09-09T10:07:13",
+ "at": "2026-09-09T10:22:27",
  "roster": {
-  "pools": 2,
-  "why": "--pools named 2 pool(s) by hand"
+  "pools": 1,
+  "why": "--pools named 1 pool(s) by hand"
  },
  "sections": {
   "pools": 708,
@@ -35,281 +35,14 @@
   "why": ""
  },
  "synonymTable": {
-  "fields": 0,
-  "why": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+  "fields": 78,
+  "why": ""
  },
  "pools": [
   {
-   "block": "DS-DEF-11",
-   "pool": "WALLED-STRAINED",
-   "dir": "ds-def-11-walled-strained",
-   "verdict": "WITHHELD",
-   "why": "",
-   "variants": 2,
-   "faces": [
-    1,
-    1
-   ],
-   "attach": [],
-   "rateBp": 5924,
-   "departure": 0,
-   "rounds": {
-    "draftRounds": 0,
-    "refineA": false,
-    "refineB": false,
-    "files": []
-   },
-   "units": 2,
-   "walk": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 1,
-     "PASS": 1
-    },
-    "findings": [
-     {
-      "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-STRAINED",
-      "klass": "Q",
-      "arm": "a trailing coordinate naming no second field",
-      "clause": "stone keeps itself, and wages do not.",
-      "column": "(second typed field)",
-      "value": "settlement, defwork",
-      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
-     }
-    ],
-    "findingCount": 1
-   },
-   "lengths": {
-    "form": "sentence",
-    "ceiling": null,
-    "rows": [
-     {
-      "vid": 1,
-      "faces": [
-       18
-      ]
-     },
-     {
-      "vid": 2,
-      "faces": [
-       23
-      ]
-     }
-    ]
-   },
-   "siblings": [
-    {
-     "vid": 1,
-     "faces": 1,
-     "synonymSwaps": 0,
-     "notExecutable": 1,
-     "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
-     }
-    },
-    {
-     "vid": 2,
-     "faces": 1,
-     "synonymSwaps": 0,
-     "notExecutable": 1,
-     "spread": {
-      "pairs": 0,
-      "minOverlapBp": null,
-      "maxOverlapBp": null,
-      "medianOverlapBp": null,
-      "sameOpenerPairs": 0,
-      "sameSegmentPairs": 0,
-      "nearest": null,
-      "why": "NOT-EXECUTABLE: a distance needs two faces and this variant carries 1"
-     }
-    }
-   ],
-   "band": [
-    {
-     "vid": 1,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 0,
-     "exceededShare": 0,
-     "deepest": null,
-     "meanDistanceFromMedian": 0.259,
-     "budgetOk": true,
-     "depthOk": true,
-     "perfectionSuspect": true,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 0,
-       "exceededShare": 0,
-       "deepest": null,
-       "meanDistanceFromMedian": 0.259,
-       "budgetOk": true,
-       "depthOk": true,
-       "perfectionSuspect": true,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 2,
-       "scored": 13,
-       "exceeded": 13,
-       "exceededShare": 1,
-       "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 3.33,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 0.863,
-       "budgetOk": false,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    },
-    {
-     "vid": 2,
-     "face": 0,
-     "executable": true,
-     "sentences": 1,
-     "scored": 8,
-     "exceeded": 1,
-     "exceededShare": 0.125,
-     "deepest": {
-      "metric": "shapes.whichTailRate",
-      "depth": 26.027,
-      "side": "over"
-     },
-     "meanDistanceFromMedian": 3.536,
-     "budgetOk": true,
-     "depthOk": false,
-     "perfectionSuspect": false,
-     "grain": "face",
-     "grains": {
-      "face": {
-       "executable": true,
-       "sentences": 1,
-       "scored": 8,
-       "exceeded": 1,
-       "exceededShare": 0.125,
-       "deepest": {
-        "metric": "shapes.whichTailRate",
-        "depth": 26.027,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 3.536,
-       "budgetOk": true,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "face"
-      },
-      "corpus": {
-       "executable": true,
-       "sentences": 2,
-       "scored": 13,
-       "exceeded": 13,
-       "exceededShare": 1,
-       "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 3.33,
-        "side": "over"
-       },
-       "meanDistanceFromMedian": 0.863,
-       "budgetOk": false,
-       "depthOk": false,
-       "perfectionSuspect": false,
-       "grain": "corpus"
-      }
-     }
-    }
-   ],
-   "provenance": {
-    "citations": 0,
-    "a13": 0
-   },
-   "corpusBand": {
-    "executable": true,
-    "sentences": 2,
-    "scored": 13,
-    "exceeded": 13,
-    "exceededShare": 1,
-    "deepest": {
-     "metric": "punctuation.semicolonRate",
-     "depth": 3.33,
-     "side": "over"
-    },
-    "meanDistanceFromMedian": 0.863,
-    "budgetOk": false,
-    "depthOk": false,
-    "perfectionSuspect": false,
-    "grain": "corpus"
-   },
-   "corpusWords": 41,
-   "owned": {
-    "verdicts": {
-     "FAIL": 0,
-     "WITHHELD": 0,
-     "PASS": 2
-    },
-    "findings": [],
-    "findingCount": 0,
-    "byLabel": []
-   },
-   "inherited": [
-    {
-     "label": "Q · a trailing coordinate naming no second field",
-     "arm": "a trailing coordinate naming no second field",
-     "klass": "Q",
-     "channel": "WITHHELD",
-     "spineKey": "WALLED-STRAINED",
-     "clause": "stone keeps itself, and wages do not.",
-     "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
-     "count": 1
-    }
-   ],
-   "inheritedCount": 1,
-   "spineWithheld": true,
-   "qVocabulary": [
-    {
-     "clause": "stone keeps itself, and wages do not.",
-     "spineKey": "WALLED-STRAINED",
-     "count": 1,
-     "reads": [
-      "forces.walls.present",
-      "settlement.defenseProfile.economicGates.military"
-     ],
-     "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
-    }
-   ],
-   "inBand": false,
-   "failing": [
-    {
-     "measure": "band depth · shapes.whichTailRate (over)",
-     "value": "26.027 band-widths on 1 of 2 face(s)",
-     "band": "DEPTH at most 1.75 band-widths on every face"
-    }
-   ]
-  },
-  {
-   "block": "DS-DEF-11",
-   "pool": "WALLED-QUIET",
-   "dir": "ds-def-11-walled-quiet",
+   "block": "DS-DEF-2",
+   "pool": "Disasters & Famine: granary AND hospital",
+   "dir": "ds-def-2-disasters-famine-granary-and-hospital",
    "verdict": "WITHHELD",
    "why": "",
    "variants": 3,
@@ -319,8 +52,8 @@
     1
    ],
    "attach": [],
-   "rateBp": 13,
-   "departure": 1,
+   "rateBp": 3542,
+   "departure": 0,
    "rounds": {
     "draftRounds": 0,
     "refineA": false,
@@ -331,22 +64,30 @@
    "walk": {
     "verdicts": {
      "FAIL": 0,
-     "WITHHELD": 1,
-     "PASS": 2
+     "WITHHELD": 2,
+     "PASS": 1
     },
     "findings": [
      {
       "channel": "WITHHELD",
-      "id": "DS-DEF-11 :: WALLED-QUIET",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
       "klass": "Q",
       "arm": "a trailing coordinate naming no second field",
-      "clause": "built work stands on its own patience.",
+      "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
       "column": "(second typed field)",
-      "value": "defwork",
+      "value": "reads [disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)]; none claimed",
       "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call"
+     },
+     {
+      "channel": "WITHHELD",
+      "id": "DS-DEF-2 :: Disasters & Famine: granary AND hospital",
+      "arm": "A3",
+      "subject": "the band half is the refuter's",
+      "value": "rather than in the luck",
+      "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)"
      }
     ],
-    "findingCount": 1
+    "findingCount": 2
    },
    "lengths": {
     "form": "sentence",
@@ -355,7 +96,7 @@
      {
       "vid": 1,
       "faces": [
-       21
+       31
       ]
      },
      {
@@ -367,7 +108,7 @@
      {
       "vid": 3,
       "faces": [
-       21
+       26
       ]
      }
     ]
@@ -458,11 +199,11 @@
        "exceeded": 11,
        "exceededShare": 0.846,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 4.799,
+        "metric": "shapes.antithesisRate",
+        "depth": 9.191,
         "side": "over"
        },
-       "meanDistanceFromMedian": 1.264,
+       "meanDistanceFromMedian": 1.464,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -505,11 +246,11 @@
        "exceeded": 11,
        "exceededShare": 0.846,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 4.799,
+        "metric": "shapes.antithesisRate",
+        "depth": 9.191,
         "side": "over"
        },
-       "meanDistanceFromMedian": 1.264,
+       "meanDistanceFromMedian": 1.464,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -552,11 +293,11 @@
        "exceeded": 11,
        "exceededShare": 0.846,
        "deepest": {
-        "metric": "punctuation.semicolonRate",
-        "depth": 4.799,
+        "metric": "shapes.antithesisRate",
+        "depth": 9.191,
         "side": "over"
        },
-       "meanDistanceFromMedian": 1.264,
+       "meanDistanceFromMedian": 1.464,
        "budgetOk": false,
        "depthOk": false,
        "perfectionSuspect": false,
@@ -576,17 +317,17 @@
     "exceeded": 11,
     "exceededShare": 0.846,
     "deepest": {
-     "metric": "punctuation.semicolonRate",
-     "depth": 4.799,
+     "metric": "shapes.antithesisRate",
+     "depth": 9.191,
      "side": "over"
     },
-    "meanDistanceFromMedian": 1.264,
+    "meanDistanceFromMedian": 1.464,
     "budgetOk": false,
     "depthOk": false,
     "perfectionSuspect": false,
     "grain": "corpus"
    },
-   "corpusWords": 63,
+   "corpusWords": 78,
    "owned": {
     "verdicts": {
      "FAIL": 0,
@@ -603,28 +344,36 @@
      "arm": "a trailing coordinate naming no second field",
      "klass": "Q",
      "channel": "WITHHELD",
-     "spineKey": "WALLED-QUIET",
-     "clause": "built work stands on its own patience.",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
      "description": "R-DA-03 licenses a QUALIFY by a SECOND typed field; this segment names none; a second fact or a summarising beat is the refuter's call",
+     "count": 1
+    },
+    {
+     "label": "A3 · the band half is the refuter's",
+     "arm": "A3",
+     "klass": "",
+     "channel": "WITHHELD",
+     "spineKey": "Disasters & Famine: granary AND hospital",
+     "clause": "rather than in the luck",
+     "description": "no sibling KEY names this alternative; whether a sibling BAND supplies it is the refuter's (siblings: Beasts & Monsters: plagued, perimeter AND organized force | Beasts & Monsters: plagued, perimeter but NO force to hold it | Beasts & Monsters: plagued, NO perimeter and NO force | Beasts & Monsters: frontier, credible deterrence)",
      "count": 1
     }
    ],
-   "inheritedCount": 1,
+   "inheritedCount": 2,
    "spineWithheld": true,
    "qVocabulary": [
     {
-     "clause": "built work stands on its own patience.",
-     "spineKey": "WALLED-QUIET",
+     "clause": "between them the town can take a failed harvest or an outbreak without either becoming a catastrophe.",
+     "spineKey": "Disasters & Famine: granary AND hospital",
      "count": 1,
      "reads": [
-      "forces.walls.present",
-      "settlement.config.monsterThreat",
-      "settlement.defenseProfile.economicGates.military"
+      "disasterRowSituation(granary, hospital, church) (via DISASTER_ROW_POOL in defenseStateProse.js)"
      ],
      "mapped": [],
-     "executable": true,
-     "verdict": "the clause names no field the spine declares it reads, under the vocabulary the census supplies",
-     "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
+     "executable": false,
+     "verdict": "NOT-EXECUTABLE: the recovered reading is the census's own synthetic table label and not a field path, so no text can claim it",
+     "synonymTable": "a word-level synonym table ships and was applied"
     }
    ],
    "inBand": true,
@@ -632,17 +381,17 @@
   }
  ],
  "walk": {
-  "totalUnits": 5,
-  "n": 5,
+  "totalUnits": 3,
+  "n": 3,
   "exhaustive": true,
-  "msPerUnit": 0.2,
+  "msPerUnit": 0.3333333333333333,
   "exhaustiveMs": 1,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
-  "sampleSha": "3c520ce1922970b44a2faedb429ede293084d32c089807de04c821d10babb20e",
+  "sampleSha": "42754f92700cb9a31a566de6a6be8057854045a779cd693f4ae18237d12bb63f",
   "verdicts": {
    "FAIL": 0,
-   "WITHHELD": 2,
-   "PASS": 3
+   "WITHHELD": 1,
+   "PASS": 2
   }
  },
  "manifest": {
@@ -755,33 +504,8 @@
   "why": ""
  },
  "shapes": {
-  "executable": true,
-  "corpus": null,
-  "lines": [
-   "PASSAGE-SHAPE DISTRIBUTION (REWRITE car 8a-2; owner ruling (c) of 2026-09-08)",
-   "  attach-bearing pools 0 · composable units 0 · units WITH a shape question 0 · draws 0",
-   "  consequence.clause joints exist: NO — shape 3 is WITHHELD",
-   "  ⛔ THE TABLE IS EMPTY, AND THE EMPTINESS IS THE MEASUREMENT.",
-   "     Not one pool of this corpus carries a non-empty `attach` set, so not one",
-   "     composed unit has a modifier, so not one unit has a shape question. This is",
-   "     not a defect and it is not a gap in this script: the SHIFT REGISTER pins",
-   "     `attach-set` at 0 with the idiom \"EMPTY on every pool at this tip, BY",
-   "     CONSTRUCTION: every shipped pool is a spine and a spine's attach set is",
-   "     empty\". The composed-prose model is wired and DARK.",
-   "     The shape distribution therefore cannot be ruled on at 8a and the sitting",
-   "     reads it when a desk section lands attach rows (8b, the defense section).",
-   "     Run this script with --corpus over such a corpus to get the full table.",
-   "  OWED to a named car, never silently omitted:",
-   "    the THREAD verdicts",
-   "        car 8a item 4 — `armThread` is chartered REPORTED until 8b's first batch",
-   "    the BAND figures at the corrected grain",
-   "        car 8a item 5a — the band position is a CONSTANT at the face grain (SITTING §T.5), so a band column printed here would be the same tuple on every row",
-   "    the read-aloud assessment",
-   "        the sitting's own act, on the strings this table prints",
-   "    the claim/wiring census (A0b) after variation",
-   "        car 8a item 5, which lands the gate that carries A0b over a section"
-  ],
-  "why": ""
+  "executable": false,
+  "why": "the shape report was not asked for (no --shapes)"
  },
  "banked": {
   "count": 0,
