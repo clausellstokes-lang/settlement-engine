@@ -1,7 +1,7 @@
 {
  "arm": "draft",
- "round": 3,
- "at": "2026-09-09T05:53:58",
+ "round": 4,
+ "at": "2026-09-09T05:58:55",
  "projection": {
   "ok": true,
   "waivers": [
@@ -208,27 +208,27 @@
      {
       "vid": 1,
       "faces": [
-       12,
-       9,
-       9,
-       10
+       13,
+       13,
+       10,
+       14
       ]
      },
      {
       "vid": 2,
       "faces": [
-       11,
+       9,
        12,
-       11,
+       10,
        11
       ]
      },
      {
       "vid": 3,
       "faces": [
-       14,
-       9,
-       10,
+       11,
+       13,
+       12,
        10
       ]
      }
@@ -973,7 +973,7 @@
       "faces": [
        9,
        10,
-       13,
+       10,
        10
       ]
      },
@@ -982,8 +982,8 @@
       "faces": [
        8,
        10,
-       10,
-       12
+       9,
+       11
       ]
      },
      {
@@ -991,8 +991,8 @@
       "faces": [
        12,
        12,
-       15,
-       8
+       12,
+       9
       ]
      }
     ]
@@ -1793,23 +1793,23 @@
       "faces": [
        11,
        8,
-       13,
-       17
+       18,
+       19
       ]
      },
      {
       "vid": 2,
       "faces": [
-       11,
        12,
-       18,
-       8
+       8,
+       19,
+       11
       ]
      },
      {
       "vid": 3,
       "faces": [
-       14,
+       13,
        9,
        19,
        13
@@ -2630,9 +2630,9 @@
       "vid": 1,
       "faces": [
        10,
-       14,
-       10,
-       13
+       17,
+       11,
+       9
       ]
      },
      {
@@ -2640,17 +2640,17 @@
       "faces": [
        11,
        9,
-       13,
-       12
+       14,
+       8
       ]
      },
      {
       "vid": 3,
       "faces": [
-       11,
-       16,
+       14,
        10,
-       13
+       9,
+       17
       ]
      }
     ]
@@ -2757,13 +2757,13 @@
      "exceeded": 13,
      "exceededShare": 0.619,
      "deepest": {
-      "metric": "wordsPerSentence.neighbourVariation",
-      "depth": 1.597,
-      "side": "under"
+      "metric": "closers.abstractNounRate",
+      "depth": 8.6,
+      "side": "over"
      },
-     "meanDistanceFromMedian": 0.486,
+     "meanDistanceFromMedian": 0.903,
      "budgetOk": true,
-     "depthOk": true,
+     "depthOk": false,
      "perfectionSuspect": false
     },
     {
@@ -3010,8 +3010,14 @@
      "synonymTable": "the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or synonyms column); its 3 ratified alias row(s) key an ENDPOINT to a read ROOT and never a noun to a field, so a noun the field name does not contain can map to nothing"
     }
    ],
-   "inBand": true,
-   "failing": []
+   "inBand": false,
+   "failing": [
+    {
+     "measure": "band depth · closers.abstractNounRate (over)",
+     "value": "8.6 band-widths on 1 of 12 face(s)",
+     "band": "DEPTH at most 1.75 band-widths on every face"
+    }
+   ]
   },
   {
    "block": "DS-DEF-2",
@@ -3282,27 +3288,27 @@
       "vid": 1,
       "faces": [
        10,
-       20,
-       10,
-       13
+       19,
+       9,
+       8
       ]
      },
      {
       "vid": 2,
       "faces": [
-       15,
-       13,
-       9,
+       17,
+       12,
+       20,
        10
       ]
      },
      {
       "vid": 3,
       "faces": [
-       11,
+       8,
        10,
-       13,
-       8
+       16,
+       17
       ]
      }
     ]
@@ -3868,19 +3874,19 @@
      {
       "vid": 1,
       "faces": [
-       11,
+       13,
        8,
        8,
-       9
+       8
       ]
      },
      {
       "vid": 2,
       "faces": [
-       11,
+       12,
        9,
-       10,
-       13
+       9,
+       10
       ]
      },
      {
@@ -3888,8 +3894,8 @@
       "faces": [
        9,
        13,
-       8,
-       10
+       10,
+       9
       ]
      }
     ]
@@ -4458,23 +4464,23 @@
       "faces": [
        13,
        11,
-       11,
-       11
+       12,
+       13
       ]
      },
      {
       "vid": 2,
       "faces": [
-       13,
-       14,
+       11,
        12,
+       11,
        10
       ]
      },
      {
       "vid": 3,
       "faces": [
-       13,
+       14,
        12,
        12,
        12
@@ -4781,8 +4787,8 @@
   "totalUnits": 408,
   "n": 408,
   "exhaustive": true,
-  "msPerUnit": 0.215,
-  "exhaustiveMs": 88,
+  "msPerUnit": 0.625,
+  "exhaustiveMs": 255,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
   "verdicts": {
@@ -4829,5 +4835,5 @@
   "tieBp": 0,
   "note": ""
  },
- "seconds": 10
+ "seconds": 30
 }
