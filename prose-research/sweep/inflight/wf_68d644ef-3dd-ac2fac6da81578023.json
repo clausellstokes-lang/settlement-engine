@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 70,
+ "firstTs": "2026-09-09T22:22:24.565Z",
+ "lastTs": "2026-09-09T22:23:38.455Z",
+ "tools": {
+  "Bash": 10,
+  "Read": 9
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the remaining voice documents.",
+ "run": "wf_68d644ef-3dd",
+ "agent": "ac2fac6da81578023",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_68d644ef-3dd/agent-ac2fac6da81578023.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
