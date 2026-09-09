@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 07:45:27 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 07:51:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste and the sitting — ledger-only, zero product bytes at 29ec62425: seven p
 
@@ -138,8 +138,8 @@ product claude/composite-r4 = 29ec62425 · ledger = 82158dc5f §918: the taste a
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
 ## WORKFLOW RUNS of chair session 67af10e4-7386-48d4-8cd3-b2985d4885c2 (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_3b79f7ff-928: 3 journal lines, 3 agents
+- wf_3b79f7ff-928: 7 journal lines, 4 agents
 - wf_73595d81-51d: 18 journal lines, 9 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 4.66 6.63 6.99
+load: 3.87 4.49 5.78

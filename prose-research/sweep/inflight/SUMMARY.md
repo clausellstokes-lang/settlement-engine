@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 07:46:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 07:52:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -60,9 +60,10 @@
 | ? | other |  | result | 0 | — | — | 06:01:49 |
 | ? | other |  | in-flight | 0 | — | — | 07:20:25 |
 | ? | other |  | result | 0 | — | — | 05:01:09 |
-| ? | other |  | in-flight | 0 | — | — | 11:46:08 |
-| ? | other |  | in-flight | 0 | fences-registers-receipt.md | — | 11:46:14 |
-| ? | other |  | in-flight | 0 | instruments-and-gate.md | — | 11:46:13 |
+| ? | other |  | result | 0 | — | — | 11:49:05 |
+| ? | other |  | result | 0 | fences-registers-receipt.md | — | 11:47:17 |
+| ? | other |  | in-flight | 0 | — | — | 11:52:23 |
+| ? | other |  | result | 0 | instruments-and-gate.md | — | 11:46:59 |
 | ? | other |  | result | 0 | refute-XY.md | — | 07:39:34 |
 | ? | other |  | result | 0 | — | — | 07:40:22 |
 | ? | other |  | result | 0 | — | — | 07:45:03 |
