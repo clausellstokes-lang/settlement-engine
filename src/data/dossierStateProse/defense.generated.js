@@ -32,14 +32,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
-          "text": "What {settlement} can field and what it has built are both in good order. Threatening the town would take real effort, and the town knows as much.",
+          "text": "What {settlement} can field and what it has built are both in good order. A threat against the town would take real effort, and the town knows as much.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
             "The force {settlement} fields is in good order, and so is the fabric it has raised. An attempt on the town would be dear work, and nobody in it thinks otherwise.",
-            "In what it can field and in what it has built, {settlement} is sound. Threatening it would be no light undertaking, and the town understands the cost.",
+            "In what it can field and in what it has built, {settlement} is sound. An assault on it would be no light undertaking, and the town understands the cost.",
             "The fielded strength and the built defence at {settlement} stand equally sound. Any move against the town would cost real effort, and the town carries that in its reckoning."
           ]
         },
@@ -239,7 +239,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "slots": [],
           "vid": 2,
           "wordings": [
-            "Knowing the worth of the town is ordinary here, and so is knowing that the worth is noted abroad. Most of what the town settles is settled in that light.",
+            "The value of the place is common knowledge here, and the town holds it known abroad as well. Little the town settles stands apart from that value.",
             "Nothing about what the place is worth is lost on the town, nor is the attention it draws from outside. Much of what the town chooses is chosen with both in view.",
             "The measure of the place is taken here, and the town knows it is taken elsewhere as well. A great deal of what the town decides rests on that knowledge."
           ]

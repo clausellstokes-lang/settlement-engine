@@ -2526,9 +2526,9 @@ margin *arm*. They are different fields on different rows and both are kept;
    - `[face]` The approaches are watched and the works are in repair. Nothing at {settlement} has been thrown up in a hurry, and the town reads as defended from the road.
    - `[face]` No part of the defence at {settlement} is makeshift, and the approaches are under watch. A stranger coming in by road reads a held town and works that are kept.
    - `[face]` The road offers a stranger the look of a defended place at {settlement}, and none of it is hasty work. The approaches are watched, and the works are sound.
-2. `[ledger]` What {settlement} can field and what it has built are both in good order. Threatening the town would take real effort, and the town knows as much.
+2. `[ledger]` What {settlement} can field and what it has built are both in good order. A threat against the town would take real effort, and the town knows as much.
    - `[face]` The force {settlement} fields is in good order, and so is the fabric it has raised. An attempt on the town would be dear work, and nobody in it thinks otherwise.
-   - `[face]` In what it can field and in what it has built, {settlement} is sound. Threatening it would be no light undertaking, and the town understands the cost.
+   - `[face]` In what it can field and in what it has built, {settlement} is sound. An assault on it would be no light undertaking, and the town understands the cost.
    - `[face]` The fielded strength and the built defence at {settlement} stand equally sound. Any move against the town would cost real effort, and the town carries that in its reckoning.
 3. `[street]` Attack is not much on the town's mind at {settlement}, and complacency is not the reason. The arrangements are in place, and nothing else is doing the work.
    - `[face]` Nobody at {settlement} spends much of the day expecting an attack, and complacency has no part in it. The arrangements stand, and the town relies on nothing else instead.
@@ -2580,7 +2580,7 @@ margin *arm*. They are different fields on different rows and both are kept;
    - `[face]` Something at {settlement} is worth the taking, and there the town's whole defensive problem lies. Its worth to the town must stand above its worth as a spoil.
    - `[face]` Another would want what {settlement} has, and the town's defence has no other question in it. The town must count for more in its own hands than in another's.
 2. `[street]` The town is aware of what it sits on, and aware that others are aware. That awareness runs underneath a great deal of what it decides.
-   - `[face]` Knowing the worth of the town is ordinary here, and so is knowing that the worth is noted abroad. Most of what the town settles is settled in that light.
+   - `[face]` The value of the place is common knowledge here, and the town holds it known abroad as well. Little the town settles stands apart from that value.
    - `[face]` Nothing about what the place is worth is lost on the town, nor is the attention it draws from outside. Much of what the town chooses is chosen with both in view.
    - `[face]` The measure of the place is taken here, and the town knows it is taken elsewhere as well. A great deal of what the town decides rests on that knowledge.
 3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and shortly afterwards why the town is so careful about who it offends.
