@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f43b6bc7820df956051969d256569a71a356c100",
-  "measuredBy": "lane SEAM, car 5c (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-08",
-  "note": "SEAM car 5c added TEN it/test blocks to three EXISTING lint files (proseMoveGrammar +4, proseComposed +3, proseWiringCensus +3; vitest 2479 -> 2489 over 149 files). This census credits SIX of them, and the split was measured with this walker by reverting one file at a time: proseComposed +3, proseWiringCensus +3, proseMoveGrammar +0. proseMoveGrammar is a PARKED file and was already parked at the previous freeze (parked holds at 375) - it carries a table-driven it() whose title is a template literal, so none of its titles is credited and the four new ones inherit that. No file added, none newly parked, no suite title moved.",
-  "files": 2556,
+  "measuredAtSha": "d0dc0884ec62cf03f4e67ae3e7e9a523226e5a0c",
+  "measuredBy": "lane TASTE (Opus 5)",
+  "date": "2026-09-09",
+  "note": "TASTE cars M-1..M-8 add six tests/lint walker files and their titles; the dock is never landed",
+  "files": 2562,
   "parked": 375,
-  "credited": 2181,
-  "titles": 24031,
-  "suiteTitles": 6419
+  "credited": 2187,
+  "titles": 24083,
+  "suiteTitles": 6439
 }
