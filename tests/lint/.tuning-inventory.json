@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "21fe864fa475f929bcf9dc3e3728e256ce3c6d7f",
-  "measuredBy": "Fable 5.1 chair — §900 desk landing",
-  "date": "2026-09-05",
-  "note": "IRREGULAR_TUNING (SEAT-78, a draft row), the two-band CHANCE_MEETING_NEWS_TUNING (ENC-4b), TUNEREG-2 three tables (the desk consist): no ceiling rises; P3 per file shrink-only; taken on the clean tree after register car 2",
+  "measuredAtSha": "93844e1c3b77ea075109f95ebddec209db45d2f7",
+  "measuredBy": "lane TASTE (Opus 5)",
+  "date": "2026-09-09",
+  "note": "TASTE car M-3: the defense candidates leaf imports src/domain/corruption.js (ARCH 6.3, closure measured and admitted at 6 files / 150,985 B against the 293,079 B precedent), so six corruption tuning constants gain one dependent each; no tuning VALUE moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -158,6 +158,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -200,6 +201,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -243,6 +245,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -293,6 +296,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -335,6 +339,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -376,6 +381,7 @@
         "src/domain/causalState.js",
         "src/domain/display/deityEffects.js",
         "src/domain/display/glossary.js",
+        "src/domain/display/stateProse/defenseStateProseCandidates.js",
         "src/domain/events/affordanceManifest.js",
         "src/domain/events/mutateEntities.js",
         "src/domain/undercity/colonization.js",
@@ -728,7 +734,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 437,
+      "line": 438,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -742,7 +748,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 438,
+      "line": 439,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -756,7 +762,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 915,
+      "line": 916,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
@@ -770,7 +776,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 362,
+      "line": 363,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -784,7 +790,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 578,
+      "line": 579,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -798,7 +804,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 580,
+      "line": 581,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -812,7 +818,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 582,
+      "line": 583,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -826,7 +832,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 584,
+      "line": 585,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -840,7 +846,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 258,
+      "line": 259,
       "spanDigest": "7ba947e7a8eeeeaf7c1099788047bdabcfe31b570173434bd82b0f9d83263184",
       "leaves": {
         "value": 0.25
