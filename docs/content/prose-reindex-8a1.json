@@ -1,0 +1,203 @@
+{
+ "_doc": "THE CLASSIFIER'S OWN OUTPUT for the one-time re-index of REWRITE car 8a-1, committed so the register's declared draw-formula.reIndexed block has machine standing. SITTING §U c-6 (the fold's NEW-3). It is produced by classifying two per-cell tables against each other; the two tables' sha256 digests are stated below and the recorder that writes them is deterministic, so any reader can re-run scripts/prose-manifest-cells.mjs at the two shas and re-derive every figure here.",
+ "car": "REWRITE car 8a-1",
+ "baseSha": "29ec62425",
+ "tipSha": "f4005cccd",
+ "corpus": "DRIFT — 525 configurations x 2 audiences",
+ "measuredBy": "node scripts/prose-manifest-cells.mjs --out <file> at each sha, then classifyCells() from scripts/prose-manifest-diff.mjs",
+ "cellsFiles": {
+  "base": {
+   "sha256": "5f4639665484e88cb47e43a57a8fd00991baf50dbca8699f50e8710fa9b5f5f2",
+   "bytes": 35754576,
+   "cells": 73284
+  },
+  "tip": {
+   "sha256": "dfdece7e814a2cafe3b4a3f909e00c7600c7fef429972d208d1edc14d7c2c5db",
+   "bytes": 35751874,
+   "cells": 73284
+  }
+ },
+ "cells": 73284,
+ "byClass": {
+  "REPLACED": 0,
+  "RE-INDEXED": 43685,
+  "ADDITIVE": 0,
+  "WORDING-ONLY": 0,
+  "UNCHANGED": 29599,
+  "ADDED": 0,
+  "REMOVED": 0
+ },
+ "indexOnly": 0,
+ "byAudience": {
+  "dm": {
+   "cells": 36660,
+   "reIndexed": 21994
+  },
+  "player": {
+   "cells": 36624,
+   "reIndexed": 21691
+  }
+ },
+ "byBlock": {
+  "DS-CND-1": {
+   "cells": 2064,
+   "reIndexed": 1604
+  },
+  "DS-DEF-1": {
+   "cells": 2250,
+   "reIndexed": 2248
+  },
+  "DS-DEF-11": {
+   "cells": 1050,
+   "reIndexed": 516
+  },
+  "DS-DEF-2": {
+   "cells": 4202,
+   "reIndexed": 2600
+  },
+  "DS-DEF-3": {
+   "cells": 2100,
+   "reIndexed": 2004
+  },
+  "DS-DEF-5": {
+   "cells": 3562,
+   "reIndexed": 1544
+  },
+  "DS-DEF-6": {
+   "cells": 1192,
+   "reIndexed": 968
+  },
+  "DS-DEF-8": {
+   "cells": 2064,
+   "reIndexed": 1032
+  },
+  "DS-DEF-9": {
+   "cells": 1050,
+   "reIndexed": 18
+  },
+  "DS-ECO-1": {
+   "cells": 1050,
+   "reIndexed": 1022
+  },
+  "DS-ECO-10": {
+   "cells": 1050,
+   "reIndexed": 134
+  },
+  "DS-ECO-11": {
+   "cells": 3896,
+   "reIndexed": 1636
+  },
+  "DS-ECO-12": {
+   "cells": 2100,
+   "reIndexed": 1986
+  },
+  "DS-ECO-2": {
+   "cells": 1050,
+   "reIndexed": 60
+  },
+  "DS-ECO-6": {
+   "cells": 618,
+   "reIndexed": 303
+  },
+  "DS-ECO-8": {
+   "cells": 1050,
+   "reIndexed": 1044
+  },
+  "DS-ECO-9": {
+   "cells": 978,
+   "reIndexed": 268
+  },
+  "DS-FTH-2": {
+   "cells": 1050,
+   "reIndexed": 18
+  },
+  "DS-GEN-11": {
+   "cells": 3150,
+   "reIndexed": 1980
+  },
+  "DS-GEN-12": {
+   "cells": 1050,
+   "reIndexed": 884
+  },
+  "DS-GEN-13": {
+   "cells": 1050,
+   "reIndexed": 916
+  },
+  "DS-GEN-14": {
+   "cells": 1050,
+   "reIndexed": 1038
+  },
+  "DS-GEN-16": {
+   "cells": 1050,
+   "reIndexed": 1014
+  },
+  "DS-GEN-17": {
+   "cells": 1050,
+   "reIndexed": 12
+  },
+  "DS-GEN-18": {
+   "cells": 854,
+   "reIndexed": 4
+  },
+  "DS-GEN-2": {
+   "cells": 572,
+   "reIndexed": 336
+  },
+  "DS-GEN-3": {
+   "cells": 9546,
+   "reIndexed": 6184
+  },
+  "DS-GEN-5": {
+   "cells": 1050,
+   "reIndexed": 1050
+  },
+  "DS-GEN-6": {
+   "cells": 2100,
+   "reIndexed": 366
+  },
+  "DS-GEN-7": {
+   "cells": 296,
+   "reIndexed": 2
+  },
+  "DS-GEN-9": {
+   "cells": 3822,
+   "reIndexed": 1512
+  },
+  "DS-POW-1": {
+   "cells": 2080,
+   "reIndexed": 2068
+  },
+  "DS-POW-2": {
+   "cells": 2100,
+   "reIndexed": 964
+  },
+  "DS-POW-4": {
+   "cells": 2100,
+   "reIndexed": 1544
+  },
+  "DS-POW-5": {
+   "cells": 2100,
+   "reIndexed": 1066
+  },
+  "DS-POW-6": {
+   "cells": 582,
+   "reIndexed": 198
+  },
+  "DS-POW-7": {
+   "cells": 1050,
+   "reIndexed": 12
+  },
+  "DS-REL-2": {
+   "cells": 2100,
+   "reIndexed": 2094
+  },
+  "DS-STR-1": {
+   "cells": 1032,
+   "reIndexed": 1032
+  },
+  "DS-SUP-3": {
+   "cells": 1124,
+   "reIndexed": 404
+  }
+ }
+}

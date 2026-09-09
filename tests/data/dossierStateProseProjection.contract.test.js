@@ -908,6 +908,15 @@ const CENSUS_BY_POOL = new Map(CENSUS.rows.map((r) => [`${r.block} :: ${r.pool}`
 const SHIFT_REGISTER = JSON.parse(
   readFileSync(resolve(ROOT, 'docs/content/prose-shift-register.json'), 'utf8'),
 );
+/**
+ * ⭐ THE CLASSIFIER'S OWN OUTPUT for car 8a-1's one-time re-index, committed at REWRITE car
+ * 8a-11 so the register's DECLARED `draw-formula.reIndexed` block has something to be
+ * recomputed FROM (SITTING §U c-6). Until then a self-consistent falsification of that block
+ * passed 77/77 and printed itself to the owner as the veto surface.
+ */
+const REINDEX = JSON.parse(
+  readFileSync(resolve(ROOT, 'docs/content/prose-reindex-8a1.json'), 'utf8'),
+);
 
 /** Every (block, pool) of the STATE register with its metadata, ordered as the pins are. */
 const META_ROWS = allStateBlocks
@@ -1246,6 +1255,62 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
     expect(summed, 'the classes must partition the cells').toBe(rec.cells);
     expect(rec.byAudience.dm.cells + rec.byAudience.player.cells).toBe(rec.cells);
     expect(rec.byAudience.dm.reIndexed + rec.byAudience.player.reIndexed).toBe(moved);
+
+    // ⭐⭐ AND THE RECOMPUTATION, which is what turns this row from a declaration into a
+    // measurement (REWRITE car 8a-11, SITTING §U c-6; the fold's NEW-3). The arithmetic above
+    // is INTERNAL — it holds the row against itself — so a SELF-CONSISTENT falsification
+    // passed it: RE-INDEXED 40000 · UNCHANGED 33284 · dm 20000 · player 20000 reads 77/77 and
+    // prints "RE-INDEXED 40000 54.58 %" to the owner as the veto surface. The classifier's own
+    // per-class, per-block output is now committed beside the row, so every declared field is
+    // recomputed from data rather than believed.
+    //
+    // ⛔ AND THE COMMITTED JSON IS ITSELF ANCHORED, or it would be a second hand-typed number
+    // one file over: it carries the sha256 of the TWO per-cell tables it was classified from,
+    // and `scripts/prose-manifest-cells.mjs` is deterministic — re-running it at the two shas
+    // reproduces those bytes, which is how the tip digest was confirmed three times (at
+    // f4005cccd, at 5c7eadb18 and at this car's own tip, byte-identical each time).
+    expect(REINDEX.car, 'the committed classifier output is car 8a-1\'s').toBe(rec.car);
+    expect(REINDEX.baseSha).toBe(rec.baseSha);
+    for (const side of ['base', 'tip']) {
+      expect(REINDEX.cellsFiles[side].sha256, `the ${side} cell table's digest`)
+        .toMatch(/^[0-9a-f]{64}$/);
+      expect(REINDEX.cellsFiles[side].cells, `the ${side} cell table's row count`)
+        .toBe(rec.cells);
+    }
+    // (i) THE CELL TOTAL AND EVERY CLASS, re-derived from the per-block table.
+    const blocks = Object.entries(REINDEX.byBlock);
+    const recomputed = {
+      cells: blocks.reduce((n, [, b]) => n + b.cells, 0),
+      moved: blocks.reduce((n, [, b]) => n + b.reIndexed, 0),
+      blocksTouched: blocks.filter(([, b]) => b.reIndexed > 0).length,
+      blocksUntouched: blocks.filter(([, b]) => b.reIndexed === 0).length,
+    };
+    expect({
+      cells: rec.cells,
+      moved,
+      blocksTouched: rec.blocksTouched,
+      blocksUntouched: rec.blocksUntouched,
+    }, '⛔ the declared re-index must be the classifier\'s own arithmetic, block by block')
+      .toEqual(recomputed);
+    expect(classes.UNCHANGED, 'and UNCHANGED is what the moved cells leave behind')
+      .toBe(recomputed.cells - recomputed.moved);
+    // (ii) THE AUDIENCE HALVES, from the classifier's own split.
+    expect({ dm: rec.byAudience.dm, player: rec.byAudience.player },
+      'the declared audience halves must be the classifier\'s')
+      .toEqual({ dm: REINDEX.byAudience.dm, player: REINDEX.byAudience.player });
+    expect(REINDEX.byClass, 'and every class, including the five the fence holds at zero')
+      .toEqual({ ...classes });
+    expect(REINDEX.indexOnly).toBe(rec.indexOnly);
+    // (iii) THE DEEPEST AND SHALLOWEST BLOCKS ARE DERIVED, so the two prose figures on the row
+    // are held by the same data as the integers beside them.
+    const shares = blocks.map(([id, b]) => ({ id, share: b.reIndexed / b.cells }))
+      .sort((a, b) => b.share - a.share || (a.id < b.id ? -1 : 1));
+    const deepest = shares.filter((r) => r.share === shares[0].share).map((r) => r.id);
+    const shallowest = shares[shares.length - 1];
+    for (const id of deepest) expect(rec.deepest, 'the deepest block, named').toContain(id);
+    expect(rec.shallowest, 'the shallowest block, named').toContain(shallowest.id);
+    expect(rec.shallowest, 'with its share to two places')
+      .toContain(`${(shallowest.share * 100).toFixed(2)}`);
     // And a floor under the record itself: a re-index of nothing would mean the draw did not
     // actually change, and a re-index of everything would mean it was not a draw change.
     expect(moved).toBeGreaterThan(0);
