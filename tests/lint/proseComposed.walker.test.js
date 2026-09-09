@@ -40,7 +40,9 @@ import { armA2 } from '../../src/domain/prose/composedWalker.js';
 import { composedOrderIdOf, LEVEL1_ORDERS, LEVEL2_ORDERS, MOVES } from '../../src/domain/prose/moveGrammar.js';
 import { estateGround, withEntryContext } from '../../src/domain/prose/entryGround.js';
 import { composeStateProse, composeStateProseMount } from '../../src/domain/display/stateProse/composeStateProse.js';
-import { assertPoolDeclaration, TURN_KEY_REGISTRY, turnKeyStanding } from '../../scripts/lib/dossier-annex-grammar.mjs';
+import {
+  assertPoolDeclaration, AUTHORING_MARKER, TURN_KEY_REGISTRY, turnKeyStanding,
+} from '../../scripts/lib/dossier-annex-grammar.mjs';
 import { bandSiblingsOf, pairArms } from '../../scripts/check-pair.mjs';
 import { loadStateLeaves } from '../helpers/dossierCorpus.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -58,6 +60,20 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const census = JSON.parse(readFileSync(join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
 const censusByPool = new Map(census.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
 const corpus = await loadStateLeaves();
+/**
+ * ⭐ THE AUTHORED CORPUS — every variant EXCEPT an unwritten placeholder (TASTE car M-2).
+ *
+ * ⛔ WHY THE FILTER, AND WHY IT IS NOT A CEILING RAISE. The taste's seven modifier pools land
+ * their typed lines before their prose exists and carry one `[plain]` row whose whole text is
+ * the authoring marker. A0b reconciles a variant's CLAIMS against its declared `reads`, so a
+ * placeholder that claims nothing reads as seven under-claims and the SHRINK-ONLY ceiling
+ * moves 1282 -> 1287 — the instrument measuring the absence of prose and calling it an
+ * authoring debt. Raising the ceiling would bank that artefact permanently; filtering the
+ * marker keeps the ceiling at the figure it was measured at and pays the debt down the day the
+ * writers replace the row. The count of filtered rows is asserted, so the filter can never
+ * quietly swallow a real variant.
+ */
+const authored = corpus.filter((e) => !String(e.text).includes(AUTHORING_MARKER));
 
 /**
  * The office roster, DERIVED from the role catalogues exactly as
@@ -178,8 +194,13 @@ function unitRowOf(unit, texts) {
 
 describe('GUARD THE GUARD — the inputs this file judges are the real ones', () => {
   it('the corpus, the census and the relation leaf are the shipped ones, not empty stubs', () => {
-    expect(corpus.length, 'the shipped state corpus').toBe(2266);
-    expect(census.rows.length, 'the committed wiring census').toBe(708);
+    // ⛔ 2266 -> 2273 AND 708 -> 715 AT TASTE car M-2: the dock births seven modifier pools,
+    // each carrying ONE unwritten placeholder row. The AUTHORED corpus is unmoved at 2,266,
+    // which is the figure every reading in this file is pinned on.
+    expect(corpus.length, 'the shipped state corpus').toBe(2273);
+    expect(authored.length, 'of which AUTHORED, the population every reading here is pinned on').toBe(2266);
+    expect(corpus.length - authored.length, 'and unwritten placeholders').toBe(7);
+    expect(census.rows.length, 'the committed wiring census').toBe(715);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.
@@ -365,7 +386,7 @@ describe('A0b — the text claims every declared field and no other', () => {
     let notExecutable = 0;
     /** @type {Set<string>} */
     const pools = new Set();
-    for (const entry of corpus) {
+    for (const entry of authored) {
       const row = censusByPool.get(`${entry.block} :: ${entry.pool}`);
       const out = armA0b({
         id: `${entry.block} :: ${entry.pool}`,
@@ -381,7 +402,7 @@ describe('A0b — the text claims every declared field and no other', () => {
       notExecutable += out.notExecutable.length;
     }
     console.log(`\nA0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves`
-      + `\n  variants walked      ${corpus.length}`
+      + `\n  variants walked      ${authored.length}`
       + `\n  over-claims          ${tally['over-claim']}`
       + `\n  under-claims         ${tally['under-claim']}`
       + `\n  implicit negations   ${tally['implicit-negation']}`

@@ -69,6 +69,7 @@ import {
 } from '../helpers/dossierCorpus.js';
 import { composedFillByBlock, fillSites } from '../helpers/dossierComposedFill.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { AUTHORING_MARKER } from '../../scripts/lib/dossier-annex-grammar.mjs';
 
 /**
  * The estate's OFFICE roster, DERIVED from EVERY role source rather than transcribed.
@@ -298,7 +299,11 @@ describe('the positive controls — a licensed sentence must resolve', () => {
 
 describe('the corpus loaders — fail-closed, and counted against the probe', () => {
   it('loads every home and reproduces the projection\'s own arithmetic', async () => {
-    const leaves = await loadStateLeaves();
+    // ⛔ THE AUTHORED LEAVES (TASTE car M-2): the taste's seven modifier pools carry one
+    // unwritten placeholder row each, and PROBE_ALL's figures are counts of AUTHORED prose.
+    const allLeaves = await loadStateLeaves();
+    const leaves = allLeaves.filter((e) => !String(e.text).includes(AUTHORING_MARKER));
+    expect(allLeaves.length - leaves.length, 'unwritten placeholder rows, filtered by name').toBe(7);
     const causal = await loadCausalLeaf();
     const crier = await loadCrierVoice();
     const generator = loadInFunctionNarratives();
@@ -311,16 +316,22 @@ describe('the corpus loaders — fail-closed, and counted against the probe', ()
   });
 
   it('joins every annex row to its projected twin, so a breach can be cited by line', async () => {
+    // ⛔ THE JOIN TAKES THE WHOLE CORPUS, AND THE COUNT TAKES THE AUTHORED HALF (TASTE car
+    // M-2). Filtering the LEAVES would leave the taste's seven annex rows with no twin and
+    // report them as UNJOINED — the arm's own "a row nobody projected" finding, manufactured.
+    // The join is total over 715 pools; PROBE_ALL's 2,030 counts authored rows.
     const leaves = await loadStateLeaves();
     const { joined, unjoined, leafLines } = joinAnnexToLeaves(loadStateAnnex(), leaves);
+    const authoredJoined = joined.filter((r) => !String(r.text).includes(AUTHORING_MARKER));
     // PROBE_ALL R-4: 2,030 wired DOSSIER_STATE rows.
-    expect(joined.length).toBe(2030);
+    expect(joined.length - authoredJoined.length, 'unwritten placeholder rows, joined and named').toBe(7);
+    expect(authoredJoined.length).toBe(2030);
     expect(unjoined).toEqual([]);
     // The compact-row grammar (a whole pool on one bullet line, 225 variants) carries no
     // per-row address, so not every leaf variant has an annex line. That gap is the ADDRESS
     // reader's, is declared, and is why the pool grammar stays with the projection.
     expect(leafLines.size).toBeLessThan(leaves.length);
-    expect(leafLines.size).toBe(2030);
+    expect(leafLines.size).toBe(2037);
   });
 });
 
@@ -403,8 +414,12 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     }
     // The fourth: the ANNEX row, cited by its own line number.
     const annexRow = joinAnnexToLeaves(loadStateAnnex(), leaves).joined
-      .find((row) => row.line === 5233);
-    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5233 did not load').toBeTruthy();
+      // ⛔ 5233 -> 5247 AT TASTE car M-2. The two `stores:` pools' typed lines were inserted
+      // into DS-DEF-2 fourteen lines above this row; the row itself is byte-unchanged and the
+      // arm is the same one. A line-cited breach is a line-cited breach, so the number moves
+      // with the file rather than the citation being loosened to a text search.
+      .find((row) => row.line === 5247);
+    expect(annexRow, 'RECEIPT_POOLS_DOSSIER_STATE.md:5247 did not load').toBeTruthy();
     expect(walkEntry(annexRow, withEntryContext(base, {})).fails.map((f) => f.arm))
       .toContain('exemption on a null column');
   });

@@ -121,7 +121,8 @@
     "sourceLicensedRows": 114,
     "sourceOfficeRows": 3,
     "sourceUnresolvedRows": 591,
-    "sourceTwoSourceRows": 10
+    "sourceTwoSourceRows": 10,
+    "modifierRows": 7
   },
   "rows": [
     {
@@ -2149,6 +2150,117 @@
           "granary": "",
           "hospital": "",
           "church": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "stores: short",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.foodSecurity.label": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "store"
+      ],
+      "objectClass": "store",
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.foodSecurity.label": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-2",
+      "pool": "stores: import-fed",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "fieldsRead": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "settlement.economicState.foodSecurity.label"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.economicState.foodSecurity.label": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "store",
+        "market"
+      ],
+      "objectClass": "store",
+      "sites": [
+        "defense.threatAssessment"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "settlement.economicState.foodSecurity.label": ""
         },
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
@@ -6785,6 +6897,230 @@
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
         "standing": "LICENSED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-11",
+      "pool": "country: pressed (walled)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "settlement.config.monsterThreat"
+      ],
+      "fieldsRead": [
+        "settlement.config.monsterThreat"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "settlement.config.monsterThreat"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.config.monsterThreat": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
+      "objectClass": "wall",
+      "sites": [
+        "defense.wallRationale"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "road",
+        "kinds": [
+          "road"
+        ],
+        "fields": {
+          "settlement.config.monsterThreat": "road"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-11",
+      "pool": "country: pressed (unwalled)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "settlement.config.monsterThreat"
+      ],
+      "fieldsRead": [
+        "settlement.config.monsterThreat"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "settlement.config.monsterThreat"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "settlement.config.monsterThreat": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "wall"
+      ],
+      "objectClass": "wall",
+      "sites": [
+        "defense.wallRationale"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "road",
+        "kinds": [
+          "road"
+        ],
+        "fields": {
+          "settlement.config.monsterThreat": "road"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-11",
+      "pool": "watch: bought (revealed)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "compromised.revealed"
+      ],
+      "fieldsRead": [
+        "compromised.revealed"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "compromised.revealed"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "compromised.revealed": "measured"
+      },
+      "covert": false,
+      "objectClasses": [
+        "force"
+      ],
+      "objectClass": "force",
+      "sites": [
+        "defense.wallRationale"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "compromised.revealed": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-DEF-11",
+      "pool": "watch: bought (covert)",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "compromised.covert"
+      ],
+      "fieldsRead": [
+        "compromised.covert"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "compromised.covert"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "compromised.covert": "measured"
+      },
+      "covert": true,
+      "objectClasses": [
+        "force"
+      ],
+      "objectClass": "force",
+      "sites": [
+        "defense.wallRationale"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "",
+        "kinds": [],
+        "fields": {
+          "compromised.covert": ""
+        },
+        "holder": null,
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       }
     },
@@ -17185,6 +17521,61 @@
         "holder": null,
         "holderReason": "no mapping row resolves any field this pool reads",
         "standing": "SOURCE-UNRESOLVED",
+        "twoSource": false
+      }
+    },
+    {
+      "block": "DS-GEN-3",
+      "pool": "purse: short",
+      "slotsFilled": [
+        "settlement"
+      ],
+      "slotsNamed": [],
+      "slotsWithoutProvider": [],
+      "hasBag": true,
+      "variants": 1,
+      "grammars": 1,
+      "role": "modifier",
+      "predicate": [],
+      "branchReads": [
+        "readings.economicGates.military"
+      ],
+      "fieldsRead": [
+        "readings.economicGates.military"
+      ],
+      "status": "RESOLVED",
+      "reason": "",
+      "keyFunction": "",
+      "rung": "annex",
+      "reads": [
+        "readings.economicGates.military"
+      ],
+      "readsGrain": "branch",
+      "narrowed": false,
+      "absent": {
+        "readings.economicGates.military": "measured"
+      },
+      "covert": false,
+      "objectClasses": [],
+      "objectClass": null,
+      "sites": [
+        "overview.systemsHealth"
+      ],
+      "attach": [],
+      "k": 2,
+      "rateBp": null,
+      "departure": null,
+      "source": {
+        "kind": "muster",
+        "kinds": [
+          "muster"
+        ],
+        "fields": {
+          "readings.economicGates.military": "muster"
+        },
+        "holder": null,
+        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+        "standing": "LICENSED",
         "twoSource": false
       }
     },
@@ -38768,6 +39159,177 @@
       }
     }
   ],
+  "modifiers": {
+    "ruling": "ARCH §2.3, §2.5: a MODIFIER pool declares its ROLE and its one READS path in the annex, and its selecting predicate lives in its desk's *StateProseCandidates.js leaf. No rung of the wiring ladder can recover it, so the row is taken from the annex declaration and says so (rung `annex`). It is NOT a spine of its block and no spine-shaped figure of this register counts it.",
+    "rows": [
+      {
+        "block": "DS-DEF-2",
+        "pool": "stores: short",
+        "reads": [
+          "settlement.economicState.foodSecurity.label"
+        ],
+        "covert": false,
+        "objectClasses": [
+          "store"
+        ],
+        "source": {
+          "kind": "",
+          "kinds": [],
+          "fields": {
+            "settlement.economicState.foodSecurity.label": ""
+          },
+          "holder": null,
+          "holderReason": "no mapping row resolves any field this pool reads",
+          "standing": "SOURCE-UNRESOLVED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-DEF-2",
+        "pool": "stores: import-fed",
+        "reads": [
+          "settlement.economicState.foodSecurity.label"
+        ],
+        "covert": false,
+        "objectClasses": [
+          "store",
+          "market"
+        ],
+        "source": {
+          "kind": "",
+          "kinds": [],
+          "fields": {
+            "settlement.economicState.foodSecurity.label": ""
+          },
+          "holder": null,
+          "holderReason": "no mapping row resolves any field this pool reads",
+          "standing": "SOURCE-UNRESOLVED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-DEF-11",
+        "pool": "country: pressed (walled)",
+        "reads": [
+          "settlement.config.monsterThreat"
+        ],
+        "covert": false,
+        "objectClasses": [
+          "wall"
+        ],
+        "source": {
+          "kind": "road",
+          "kinds": [
+            "road"
+          ],
+          "fields": {
+            "settlement.config.monsterThreat": "road"
+          },
+          "holder": null,
+          "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+          "standing": "LICENSED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-DEF-11",
+        "pool": "country: pressed (unwalled)",
+        "reads": [
+          "settlement.config.monsterThreat"
+        ],
+        "covert": false,
+        "objectClasses": [
+          "wall"
+        ],
+        "source": {
+          "kind": "road",
+          "kinds": [
+            "road"
+          ],
+          "fields": {
+            "settlement.config.monsterThreat": "road"
+          },
+          "holder": null,
+          "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+          "standing": "LICENSED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-DEF-11",
+        "pool": "watch: bought (revealed)",
+        "reads": [
+          "compromised.revealed"
+        ],
+        "covert": false,
+        "objectClasses": [
+          "force"
+        ],
+        "source": {
+          "kind": "",
+          "kinds": [],
+          "fields": {
+            "compromised.revealed": ""
+          },
+          "holder": null,
+          "holderReason": "no mapping row resolves any field this pool reads",
+          "standing": "SOURCE-UNRESOLVED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-DEF-11",
+        "pool": "watch: bought (covert)",
+        "reads": [
+          "compromised.covert"
+        ],
+        "covert": true,
+        "objectClasses": [
+          "force"
+        ],
+        "source": {
+          "kind": "",
+          "kinds": [],
+          "fields": {
+            "compromised.covert": ""
+          },
+          "holder": null,
+          "holderReason": "no mapping row resolves any field this pool reads",
+          "standing": "SOURCE-UNRESOLVED",
+          "twoSource": false
+        },
+        "variants": 1
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "purse: short",
+        "reads": [
+          "readings.economicGates.military"
+        ],
+        "covert": false,
+        "objectClasses": [],
+        "source": {
+          "kind": "muster",
+          "kinds": [
+            "muster"
+          ],
+          "fields": {
+            "readings.economicGates.military": "muster"
+          },
+          "holder": null,
+          "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
+          "standing": "LICENSED",
+          "twoSource": false
+        },
+        "variants": 1
+      }
+    ]
+  },
   "factIndex": [
     {
       "fact": "`${text(note?.type)}|${text(note?.tab)}` (via COHERENCE_POOL_OF in generalStateProse.js)",

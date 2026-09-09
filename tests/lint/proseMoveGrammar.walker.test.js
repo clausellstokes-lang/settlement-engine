@@ -37,6 +37,7 @@ import {
 } from '../../src/domain/prose/moveGrammar.js';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../../src/domain/prose/proseFingerprint.js';
 import { typedFactsOf } from '../../src/domain/prose/entryWalker.js';
+import { AUTHORING_MARKER } from '../../scripts/lib/dossier-annex-grammar.mjs';
 import {
   ARM_CONTROLS, ARM_D_CONTROL, ARM_D_PAIR_CONTROL, CHAIR_CEILINGS, CHAIR_THREE_NUMBERS,
   C_SIBLING_CONTROL, fairDraw, HAND_TAGGED, OWNER_TEMPLATE_SEQUENCE, ROTA_SEQUENCE,
@@ -97,7 +98,14 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
   });
 
   it('CONTROL 4 — today\'s R1 leaves reproduce PROBE_ALL\'s two figures EXACTLY, with the segment definition pinned', async () => {
-    const leaves = await loadStateLeaves();
+    // ⛔ THE AUTHORED LEAVES, NOT THE PLACEHOLDERS (TASTE car M-2). The taste's seven modifier
+    // pools carry ONE unwritten row each, and a one-variant pool has a uniform segment count
+    // by arithmetic: including them moves 407/708 to 414/715 and the calibration would be
+    // measuring the absence of prose. The filter is asserted below so it cannot swallow a real
+    // pool, and the figures stay the ones SITTING B.3 and Part B §14 recorded.
+    const allLeaves = await loadStateLeaves();
+    const leaves = allLeaves.filter((e) => !String(e.text).includes(AUTHORING_MARKER));
+    expect(allLeaves.length - leaves.length, 'unwritten placeholder rows, filtered by name').toBe(7);
     const cells = poolCells(leaves);
     let uniformSegments = 0;
     let repeatedOpener = 0;
@@ -119,7 +127,8 @@ describe('the four negative controls and the positive one (MOVE-GRAMMAR §4.4, a
     // today's R1 leaves must RED on ARM E. Arm E had no fail channel at all, so the control
     // was being met by a different instrument. `armESpread` is that channel, and this is the
     // control executed on the arm.
-    const leaves = await loadStateLeaves();
+    const leaves = (await loadStateLeaves())
+      .filter((e) => !String(e.text).includes(AUTHORING_MARKER));
     const report = walkGrammar({
       corpus: leaves, cells: poolCells(leaves), register: 'dossier', ceilings: CHAIR_CEILINGS,
     });

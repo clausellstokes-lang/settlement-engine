@@ -39,12 +39,34 @@ import { isCovertPath } from '../src/domain/prose/wiringCensus.js';
 import { parseSlotShapes, mergeSlotShapes, assertSlotShapesTotal } from './lib/dossier-slot-shapes.mjs';
 import {
   CONNECTIVES_HEADING_RE, FACE_ROW_RE, GRAMMAR_TAG_RE, applyDeclaration, assertCensusCurrent,
-  assertFaces, assertPoolDeclaration, isDeclarationLine, parseConnectives, readDeclarations,
-  seatMeta, seatOf, vidsOf,
+  assertFaces, assertNoAuthoringMarker, assertPoolDeclaration, isDeclarationLine,
+  parseConnectives, readDeclarations, seatMeta, seatOf, vidsOf,
 } from './lib/dossier-annex-grammar.mjs';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
+/**
+ * ⭐⭐ `--taste` — THE DOCK-ONLY FLAG OF TASTE car 6 (ARCH §12 row 6), AND THE ONE THING THE
+ * SHIPPED BUILD NEVER PASSES.
+ *
+ * The taste lands seven modifier pools' TYPED LINES before their prose exists, because a
+ * writer authors against a licence card that can only be printed once the pool has a census
+ * row. Two rules relax behind this flag and NOTHING else does:
+ *
+ *   1. a variant whose text carries the authoring marker is admitted (without the flag the
+ *      projector refuses it BY NAME, so a placeholder can never ship);
+ *   2. T-F12's civic-object-class collision on an ATTACH is PRINTED rather than thrown,
+ *      because the key-string proxy refuses four of the seven attach sites ARCH §6.3-§6.5
+ *      specifies — three of them on the POLARITY MARKER that the sibling rule T-F3 requires
+ *      the key to carry. The waivers are printed with the class each collided on and the
+ *      sitting rules; arm A1 over the real text is unaffected and still gates.
+ *
+ * Every waiver taken is printed at the end of the run and counted, so a silent relaxation is
+ * impossible: a flag whose effect nobody prints is a flag nobody can audit.
+ */
+const tasteMode = process.argv.includes('--taste');
+/** @type {string[]} every refusal the taste flag relaxed, printed at the end of the run. */
+const tasteWaivers = [];
 
 const STATE_DOC = path.join(ROOT, 'docs/content/RECEIPT_POOLS_DOSSIER_STATE.md');
 const CAUSAL_DOC = path.join(ROOT, 'docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md');
@@ -392,7 +414,15 @@ function parseAnnex(src, headerRe, label, options = {}) {
     if (skipping || !block) continue;
 
     if (isDeclarationLine(line)) {
-      if (pool === null && lastBold !== null) { openPool(poolKeyOf(lastBold)); lastBold = null; }
+      // ⛔ A PENDING LABEL ALWAYS OPENS ITS POOL HERE (TASTE car M-2). The guard was
+      // `pool === null && lastBold !== null`, which is only true for the FIRST pool of a
+      // block: on the second and every later one a pending bold label was ignored and the
+      // typed lines were folded into the PREVIOUS pool's declarations — a modifier's ROLE,
+      // READS and ATTACH landing silently on the spine above it. It has never fired because
+      // the annex carried no typed line at all until this car, and it would have fired on the
+      // first one authored after a block's opening pool. The plant is in the projection
+      // contract: two declared pools in one block, and the second's READS must be its own.
+      if (lastBold !== null) { openPool(poolKeyOf(lastBold)); lastBold = null; }
       if (pool === null) throw new Error(`${label} ${block.id}: a typed line stands outside any pool (line ${i + 1})`);
       for (const decl of readDeclarations(line)) {
         applyDeclaration(decl, pool.declared, `${label} ${block.id} :: ${pool.key}`);
@@ -724,7 +754,10 @@ function projectBlocks(blocks, options = {}) {
           edgesFrom: meta.edgesFrom,
           blockPoolKeys,
           declaredRoleByPool,
+          taste: meta.taste,
+          waive: meta.waive,
         });
+        assertNoAuthoringMarker(label, p.variants, meta.taste, meta.waive);
         const form = p.declared.form
           || (p.declared.relation === 'consequence' ? 'fragment' : 'sentence');
         for (const v of p.variants) {
@@ -951,6 +984,8 @@ const slotShapes = mergeSlotShapes([
 
 const stateData = projectBlocks(stateBlocks, {
   meta: {
+    taste: tasteMode,
+    waive: (message) => tasteWaivers.push(message),
     censusOf,
     edgesFrom,
     shapeOf: (slot) => slotShapes.shapeOf(slot),
@@ -1092,7 +1127,12 @@ emitted.push({
     'wiring census\'s RATE corpus and FROZEN at the pool\'s birth car (P-F4).',
     'A BIT AND NOT A RATE, deliberately: a rate re-measured by an unrelated car would re-order',
     'installed worlds without anyone intending it. The measured rate stays a REPORT in the census.',
-    `MEASURED: ${normRows} of ${census.rows.length} pools fired on the RATE corpus (768 towns,`,
+    // ⛔ THE DENOMINATOR IS THE POOLS THE RATE CORPUS COULD MEASURE, WHICH IS THE SPINE COUNT
+    // (TASTE car M-2). `census.rows.length` gained the taste's seven modifier rows, and no
+    // modifier has a rate yet — its predicate lives in a candidate leaf the corpus walk does
+    // not call — so "271 of 715" would report seven pools as measured-and-silent when they were
+    // never measured at all. `totals.pools` is the census's own spine count.
+    `MEASURED: ${normRows} of ${census.totals.pools} pools fired on the RATE corpus (768 towns,`,
     `192 cells, 4 seeds); ${departureOnes} of them read 1 at the departure line of`,
     `${DEPARTURE_LINE_BP} basis points.`,
     'A POOL WITH NO ROW IS ABSENT, NOT ZERO, and the composer reads an absent row as "not a',
@@ -1165,6 +1205,17 @@ const seatLine = Object.entries(SEAT_TALLY.reasons).sort()
   .map(([reason, n]) => `${reason} ${n}`).join(' · ');
 console.log(`[dossier-prose] seats: ${SEAT_TALLY.sentence} sentence / ${SEAT_TALLY.clause} clause`
   + ` over ${SEAT_TALLY.sentence + SEAT_TALLY.clause} state pools (${seatLine})`);
+
+// ⭐⭐ EVERY WAIVER THE `--taste` FLAG TOOK, PRINTED AND COUNTED. A relaxation nobody prints is
+// a relaxation nobody can audit, so the run says exactly which refusals it did not make and
+// why. Without the flag this list is empty by construction: each waiver site throws first.
+if (tasteWaivers.length > 0) {
+  console.log(`[dossier-prose] ⛔ --taste WAIVED ${tasteWaivers.length} refusal(s) that the shipped`
+    + ' build makes. The shipped projector (no --taste) refuses each of these BY NAME:');
+  for (const line of tasteWaivers) console.log(`[dossier-prose]   ${line}`);
+} else if (tasteMode) {
+  console.log('[dossier-prose] --taste was passed and NO refusal needed waiving.');
+}
 
 if (checkOnly) {
   for (const e of emitted) {

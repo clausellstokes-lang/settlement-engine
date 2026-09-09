@@ -1,12 +1,8 @@
 {
   "_doc": "THE SHIFT REGISTER (ARCH-COMPOSED-PROSE §8.6; lane SEAM car 4). EVERY MECHANISM WHOSE CHANGE RE-ROLLS A DRAWN INDEX, each with its PIN, its DOOR and its declared-row idiom. THE PROMISE (W3): a FACT shift is forbidden; a TEXT shift is declared and owner-signed. v1 of the architecture declared two shifts and carried at least three more undeclared, which is the failure this file exists to make impossible: a mechanism absent from this register is a same-seed text shift nobody signed. Consumed by tests/data/dossierStateProseProjection.contract.test.js, which PRINTS the register and RECOMPUTES every pin from the leaves themselves. Nothing reads this at runtime and nothing ships it.",
-
   "_pinIdiom": "A PIN IS A MEASUREMENT, NOT A PROMISE. Each row's `pin` is recomputed by the contract test from the committed leaves (`integer` and `map` compared directly, `digest` re-derived over the named material, `source` asserted as a substring of the named file), so a mechanism that moves without its row moving reds NAMING THE MECHANISM. A car that intends the move edits the row IN THE SAME COMMIT as the change and records the shift class; a car that did not intend it has just been told. This is the `.prose-byte-baseline.json` declared-row idiom applied to draw mechanisms instead of bytes.",
-
   "_digestMaterial": "Every `digest` pin is sha256 over one line per pool, the pools ordered by `${block} :: ${pool}` ascending, joined by a single newline with no trailing newline. The line is `${block} :: ${pool} :: ${value}` except for `pool-key-rename`, whose line is `${block} :: ${pool}` alone, and for `norm-bit`, whose line is `${blockId}::${poolKey} ${departure}` over the norm leaf's own rows in key order. A digest is used wherever the mechanism is per-pool: 708 integers cannot be read by a person, and a digest that moves names the mechanism while the diff names the pool.",
-
   "_shiftClasses": "ARCH §8.6 declares FOUR text-shift classes and nothing else re-rolls a drawn index: 1 the REWRITE + FACES freeze (car 8a-8n, one owner re-record); 2 the list-position keys (car 10); 3 THIN-pool growth (car 9b); 4 TURNS (car 11). Each row below names the class it would land under. A row whose `shift` is `none` names a mechanism that must NEVER move: a renumbering, and a pool-key rename.",
-
   "measuredAt": {
     "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
@@ -14,7 +10,6 @@
     "pools": 708,
     "variants": 2266
   },
-
   "mechanisms": [
     {
       "id": "variant-count-per-pool",
@@ -23,9 +18,32 @@
       "door": "the projection contract's variant ratchet, and poolMeta.variantCount per pool",
       "idiom": "a declared car; the classifier prints RE-INDEXED per pool with its town count (about 75.71 per cent of that pool's reads move under `% length`)",
       "pin": [
-        { "kind": "integer", "over": "the sum of poolMeta.variantCount over all 708 pools", "value": 2266 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.variantCount per pool", "value": "b0dcbe38d43731d6d75692a1f91670bae05932def2bdd893b914bc2371b175f1" }
-      ]
+        {
+          "kind": "integer",
+          "over": "the sum of poolMeta.variantCount over all 708 pools",
+          "value": 2273
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.variantCount per pool",
+          "value": "68e2829d301cee900addeb8503741c7787ece7245b70701df3393a8317558060"
+        }
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-2, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone.",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "sum": 2266,
+        "digest": "b0dcbe38d43731d6d75692a1f91670bae05932def2bdd893b914bc2371b175f1"
+      }
     },
     {
       "id": "face-count-per-variant",
@@ -34,10 +52,38 @@
       "door": "the projection contract, against poolMeta.faceCounts",
       "idiom": "a declared sub-car; after the freeze a new wording goes in a NEW KEY and never in an existing set (read-specs S9). The seven `canonical` rows keep ONE face by refusal (P-F6)",
       "pin": [
-        { "kind": "integer", "over": "the sum of every faceCounts entry over all 708 pools", "value": 2266 },
-        { "kind": "integer", "over": "the largest faceCounts entry anywhere in the corpus", "value": 1 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.faceCounts per pool, joined by commas", "value": "0fa317c13a7610e23ae250994e5dea69ef29be857417b5b2aca7a70936bda366" }
-      ]
+        {
+          "kind": "integer",
+          "over": "the sum of every faceCounts entry over all 708 pools",
+          "value": 2273
+        },
+        {
+          "kind": "integer",
+          "over": "the largest faceCounts entry anywhere in the corpus",
+          "value": 1
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.faceCounts per pool, joined by commas",
+          "value": "b475a663953ce3d22b698cf2db7ecf591c14b455200fecb9e75a2be0d4d6d51f"
+        }
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-2, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone.",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "sum": 2266,
+        "max": 1,
+        "digest": "0fa317c13a7610e23ae250994e5dea69ef29be857417b5b2aca7a70936bda366"
+      }
     },
     {
       "id": "vids",
@@ -46,8 +92,26 @@
       "door": "the projection contract, against poolMeta.vids; `vidsOf` in scripts/lib/dossier-annex-grammar.mjs throws",
       "idiom": "a new variant takes the NEXT number; nothing is ever deleted and nothing is renumbered (NEVER TRIM, §2.6)",
       "pin": [
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.vids per pool, joined by commas", "value": "42bb876078541a86a816db3d2fc95f2b468e81eb2d0b969aed9560f160e389b9" }
-      ]
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.vids per pool, joined by commas",
+          "value": "b2fdab98970dd0295ba6642a4c6e756a9105ee46dc07aae83b27d565c5260d1d"
+        }
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-2, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone.",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "digest": "42bb876078541a86a816db3d2fc95f2b468e81eb2d0b969aed9560f160e389b9"
+      }
     },
     {
       "id": "pool-key-rename",
@@ -56,8 +120,26 @@
       "door": "the projection contract's key diff (0 ADDED / 0 REMOVED / 0 CHANGED)",
       "idiom": "renameable only while the corpus is dark; a live rename is the owner's row",
       "pin": [
-        { "kind": "digest", "algo": "sha256", "over": "`${block} :: ${pool}` for all 708 pools, in order", "value": "346451703b9b7934636988a77a9c13ce7377f58d5268342eaeb8131620887dbc" }
-      ]
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "`${block} :: ${pool}` for all 708 pools, in order",
+          "value": "581ffeefa69ea9df9260cd0da0908614f93418a8c8023e9050ad865c674fd0f9"
+        }
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-2, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone.",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "digest": "346451703b9b7934636988a77a9c13ce7377f58d5268342eaeb8131620887dbc"
+      }
     },
     {
       "id": "connective-list-length",
@@ -66,7 +148,16 @@
       "door": "the connectives leaf's pinned header and §7b's own pin column",
       "idiom": "the sitting authors the two OWED lists (ARCH §12 car 7); growth after that is a declared row here",
       "pin": [
-        { "kind": "map", "over": "the length of each list in src/data/dossierConnectives.generated.js", "value": { "consequence.clause": 0, "tension.sentence": 0, "contrast.sentence": 1, "addition.sentence": 1 } }
+        {
+          "kind": "map",
+          "over": "the length of each list in src/data/dossierConnectives.generated.js",
+          "value": {
+            "consequence.clause": 0,
+            "tension.sentence": 0,
+            "contrast.sentence": 1,
+            "addition.sentence": 1
+          }
+        }
       ]
     },
     {
@@ -76,10 +167,27 @@
       "door": "src/data/proseNorms.generated.js, projected from the census's RATE corpus",
       "idiom": "the bit is FROZEN at the pool's birth car (P-F4); a rate re-measured by an unrelated car would re-order installed worlds without anyone intending it, which is why the leaf carries a BIT and the census keeps the rate as a REPORT",
       "pin": [
-        { "kind": "integer", "over": "the number of pools carrying a measured bit", "value": 271 },
-        { "kind": "integer", "over": "the number of those bits that read 1", "value": 72 },
-        { "kind": "integer", "over": "the departure line, in basis points, in the census's rate.departureReport", "value": 1000 },
-        { "kind": "digest", "algo": "sha256", "over": "the norm leaf's rows as `${key} ${departure}`", "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d" }
+        {
+          "kind": "integer",
+          "over": "the number of pools carrying a measured bit",
+          "value": 271
+        },
+        {
+          "kind": "integer",
+          "over": "the number of those bits that read 1",
+          "value": 72
+        },
+        {
+          "kind": "integer",
+          "over": "the departure line, in basis points, in the census's rate.departureReport",
+          "value": 1000
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "the norm leaf's rows as `${key} ${departure}`",
+          "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+        }
       ]
     },
     {
@@ -89,9 +197,32 @@
       "door": "the projection contract, against poolMeta.attach",
       "idiom": "EMPTY on every pool at this tip, by construction: every shipped pool is a spine and a spine's attach set is empty. Car 9 authors the first non-empty one",
       "pin": [
-        { "kind": "integer", "over": "the number of pools whose attach set is non-empty", "value": 0 },
-        { "kind": "digest", "algo": "sha256", "over": "poolMeta.attach per pool, joined by pipes", "value": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59" }
-      ]
+        {
+          "kind": "integer",
+          "over": "the number of pools whose attach set is non-empty",
+          "value": 7
+        },
+        {
+          "kind": "digest",
+          "algo": "sha256",
+          "over": "poolMeta.attach per pool, joined by pipes",
+          "value": "ef35ed72c6215611e8e9ba8a7aae42ce58345ffdd4a0070b3b5d8178c32d5bfd"
+        }
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-2, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone.",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "nonEmpty": 0,
+        "digest": "c24f2c9b7fb9bf8067097458264d0b160c994f6a7ffd337c8d380db39af00c59"
+      }
     },
     {
       "id": "draw-formula",
@@ -100,7 +231,13 @@
       "door": "src/domain/display/stateProse/stateProseKernel.js",
       "idiom": "owner-signed once on the classifier's per-cell diff; the chair measured 75.71 per cent of reads re-rolling on one append under `% length` against 24.17 per cent under the index-stable argmax",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length"
+          ]
+        }
       ]
     },
     {
@@ -110,7 +247,13 @@
       "door": "src/domain/display/stateProse/stateProseKernel.js `drawFace`",
       "idiom": "the suffix is `::w` and the script that measures it must spell `::w` (P-F10)",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/stateProseKernel.js", "contains": ["`${seed}::${blockId}::${poolKey}::w`"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/stateProseKernel.js",
+          "contains": [
+            "`${seed}::${blockId}::${poolKey}::w`"
+          ]
+        }
       ]
     },
     {
@@ -120,7 +263,13 @@
       "door": "src/domain/display/stateProse/composeStateProse.js `drawConnective`",
       "idiom": "no hash at all while the list holds one phrase, which is both shipped lists today",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`"] }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`"
+          ]
+        }
       ]
     },
     {
@@ -131,8 +280,22 @@
       "idiom": "never a locale API anywhere a draw is ordered (the lint ban in the composer's fence)",
       "note": "⛔ THE BAND RULE WAS UNPINNED UNTIL SEAM CAR 5c (the seam fold's R3; SITTING §R cure 3). The row was named `comparator-and-band-rule` while its only pin covered the salience DRAW KEY and the comparator's TIE-BREAK; `bandOf` and `departureBit` appeared in ZERO pins register-wide, so a car that made `consequence` count toward the band, or added a fourth signal, would have re-ordered every multi-candidate rung for every existing world with this register GREEN and the shift undeclared — the one thing the register exists to make impossible. Pin 1 now carries the combining rule verbatim: the tension signal's own test, the three-signal sum, and the departure bit's threshold. Pin 2 holds the LEAF side of the same rule, so the mitigation the schema lens measured (no rung has two candidates today) is itself a measurement rather than an assurance.",
       "pin": [
-        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["`${seed}::${blockId}::${spineKey}::salience::${row.key}`", "return a.key < b.key ? -1 : 1;", "const tension = row.meta.relation === 'tension' || row.meta.relation === 'contrast' ? 1 : 0;", "return departureBit(norms, blockId, row.key) + tension + row.change;", "return row && row.departure === 1 ? 1 : 0;"] },
-        { "kind": "integer", "over": "pools whose DECLARED relation contributes the band's tension signal (relation tension or contrast)", "value": 0 }
+        {
+          "kind": "source",
+          "file": "src/domain/display/stateProse/composeStateProse.js",
+          "contains": [
+            "`${seed}::${blockId}::${spineKey}::salience::${row.key}`",
+            "return a.key < b.key ? -1 : 1;",
+            "const tension = row.meta.relation === 'tension' || row.meta.relation === 'contrast' ? 1 : 0;",
+            "return departureBit(norms, blockId, row.key) + tension + row.change;",
+            "return row && row.departure === 1 ? 1 : 0;"
+          ]
+        },
+        {
+          "kind": "integer",
+          "over": "pools whose DECLARED relation contributes the band's tension signal (relation tension or contrast)",
+          "value": 0
+        }
       ]
     },
     {
@@ -142,7 +305,14 @@
       "door": "src/domain/display/stateProse/composeStateProse.js COMPOSITION_BOUNDS",
       "idiom": "one frozen record, at zero in the tuning register (P2); a raise is a declared row here and an amendment to ARCH §4.4",
       "pin": [
-        { "kind": "map", "over": "the composer's exported COMPOSITION_BOUNDS", "value": { "facts": 3, "modifierBearingRungs": 2 } }
+        {
+          "kind": "map",
+          "over": "the composer's exported COMPOSITION_BOUNDS",
+          "value": {
+            "facts": 3,
+            "modifierBearingRungs": 2
+          }
+        }
       ]
     },
     {
@@ -152,7 +322,11 @@
       "door": "scripts/lib/dossier-annex-grammar.mjs TURN_KEY_REGISTRY, and the projector's EXPLAINS refusal",
       "idiom": "the classifier prints REPLACED per turn class with the towns; tiers 1a to 1c are AVAILABLE and both tier-2 forms are REFUSED at the dossier",
       "pin": [
-        { "kind": "integer", "over": "the number of pools declaring role `turn`", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "the number of pools declaring role `turn`",
+          "value": 0
+        }
       ]
     },
     {
@@ -162,11 +336,14 @@
       "door": "src/domain/display/stateProse/generalStateProse.js and generalDeskRead.js; the projector's ATTACH refusal on the index-paired blocks lifts with it",
       "idiom": "every moved list row named by the classifier; until then modifiers are REFUSED on DS-GEN-2, DS-GEN-8 and DS-REL-1",
       "pin": [
-        { "kind": "integer", "over": "the number of pools in an index-paired block carrying a non-empty attach set", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "the number of pools in an index-paired block carrying a non-empty attach set",
+          "value": 0
+        }
       ]
     }
   ],
-
   "notMechanisms": [
     {
       "id": "readsCount",
@@ -189,11 +366,34 @@
       "why": "IT IS NOT A MECHANISM OF THIS REGISTER AT THIS TIP, and that is a measurement rather than a judgment: the licence resolves to `sentence` on all 708 pools with the reason `not-a-modifier` on every one, so no value of it reaches a draw at all. It is not a modulus, not a key, not an ordering and not an eligibility test — `drawVariant` reads `blockId` and `poolKey` and never a pool's fields (ARCH §2.1) — and what it decides is ARRANGEMENT: which of two seats a modifier takes, and which connective list the joint is drawn from. ⛔ IT BECOMES SHIFT-CLASS THE DAY THE FIRST `consequence` ROW IS LICENSED. A pool moving from `sentence` to `clause` moves the connective draw onto a different list and re-arranges the unit, so the car that lands an alias joining a relation endpoint to a desk read root promotes this row to a mechanism with its pin, its door and its shift class — and the register says so here rather than in a lane's receipt. Until then: the join is 0 of 165 (car 0's F1, re-derived in the projection contract), no shipped pool declares `role: modifier`, and the key is emitted nowhere, because an ABSENT seat reads in the composer as the sentence.",
       "pinNote": "⛔ THE ONE REGISTER ENTRY CARRIED BY ARGUMENT RATHER THAN BY A PIN, UNTIL SEAM CAR 5c (the seam fold; SITTING §R cure 4). The argument above is sound and the skeptic could not refute it — but nothing RED if a later car started emitting `seat` on a spine, because the recompute loop walked `mechanisms` only. The pin below is the promotion trigger made executable: the day the count leaves zero, this row must be moved to `mechanisms` with its door and its shift class, and the register says so before the car does.",
       "pin": [
-        { "kind": "integer", "over": "pools carrying a seat key", "value": 0 }
+        {
+          "kind": "integer",
+          "over": "pools carrying a seat key",
+          "value": 7,
+          "note": "⛔ MOVED 0 -> 7 BY THE TASTE'S SEVEN MODIFIERS (TASTE car M-2), AND THE PROMOTION TRIGGER HAS NOT FIRED. `seatMeta` emits `seat` on every modifier, so this integer counts modifiers and not clause seats; the trigger this row's own note describes is a pool moving from `sentence` to `clause`, which is the pin below. All seven read `seat: sentence` with `seatReason: not-consequence` — the join is still 0 of 165 and no relation row licenses a consequence — so the ARRANGEMENT this key decides is unchanged on every one of them."
+        },
+        {
+          "kind": "integer",
+          "over": "pools carrying a seat of `clause` — the promotion trigger this row's note names",
+          "value": 0,
+          "note": "⭐ ADDED AT TASTE car M-2, because the pin above could not express the trigger it was written to hold. The day this integer leaves zero the row moves to `mechanisms` with its door and its shift class: a clause seat draws its joint from a DIFFERENT connective list and re-arranges the unit."
+        }
       ],
       "reserved": [
-        { "key": "seatReason", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:519", "shippedOn": 0, "readBy": "(no module)", "why": "the resolver's closed-vocabulary reason for a SENTENCE seat, emitted on a modifier only and therefore on no shipped pool. It is a diagnostic for the WAVE, not an input: naming it RESERVED here closes the chair's `a reader or named reserved` rule, and the projection contract's stray-key arm reads THIS LIST, so a car that started shipping it on a spine reds by name." },
-        { "key": "seatRow", "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:520", "shippedOn": 0, "readBy": "(no module)", "why": "the relation row ids that licensed a CLAUSE seat, emitted on a modifier only and therefore on no shipped pool. Same disposition as `seatReason`: a WAVE diagnostic, reserved rather than read, and held at zero by the stray-key arm." }
+        {
+          "key": "seatReason",
+          "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:519",
+          "shippedOn": 0,
+          "readBy": "(no module)",
+          "why": "the resolver's closed-vocabulary reason for a SENTENCE seat, emitted on a modifier only and therefore on no shipped pool. It is a diagnostic for the WAVE, not an input: naming it RESERVED here closes the chair's `a reader or named reserved` rule, and the projection contract's stray-key arm reads THIS LIST, so a car that started shipping it on a spine reds by name."
+        },
+        {
+          "key": "seatRow",
+          "emittedBy": "scripts/lib/dossier-annex-grammar.mjs:520",
+          "shippedOn": 0,
+          "readBy": "(no module)",
+          "why": "the relation row ids that licensed a CLAUSE seat, emitted on a modifier only and therefore on no shipped pool. Same disposition as `seatReason`: a WAVE diagnostic, reserved rather than read, and held at zero by the stray-key arm."
+        }
       ]
     }
   ]

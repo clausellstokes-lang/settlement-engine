@@ -98,11 +98,13 @@ describe('the licence card is projected from the census row, field for field', (
       expect(line, `the card names the read path ${path}`).toContain(path);
       expect(line, `and the census's absent kind for ${path}`).toContain(row.absent[path]);
     }
-    // AND NOTHING ELSE: every field the row does NOT read is absent from the line.
-    for (const path of row.fieldsRead.filter((f) => !row.reads.includes(f))) {
-      expect(line, `${path} is in fieldsRead but not in reads, so the card must not name it`)
-        .not.toContain(path);
-    }
+    // AND NOTHING ELSE: every field the row does NOT read is absent from the line. Written as
+    // a POSITIVE assertion over the offenders rather than as a bare negative per path, so the
+    // liveness half is the loop above (every `reads` path proved PRESENT on this same line).
+    const outside = row.fieldsRead.filter((f) => !row.reads.includes(f));
+    expect(outside.length, 'the anchor pool reads FEWER fields than its key function').toBeGreaterThan(0);
+    expect(outside.filter((path) => line.includes(path)),
+      'a field in fieldsRead but not in reads must not reach the card').toEqual([]);
     expect(readsLines({ reads: [] })[0]).toContain('recovered no reading');
   });
 
@@ -144,8 +146,10 @@ describe('a plant that edits the census row moves the card line BY NAME', () => 
     const dirty = lineOf(card({
       reads: [planted], absent: { [planted]: 'measured' },
     }), 'reads');
+    // anchored: the paired PRESENT assertion on the next line is the liveness half
     expect(clean).not.toContain(planted);
     expect(dirty).toContain(planted);
+    // anchored: `clean` above carries this exact path, so the line is proved live before it is proved absent
     expect(dirty).not.toContain('forces.walls.present');
   });
 
@@ -153,6 +157,7 @@ describe('a plant that edits the census row moves the card line BY NAME', () => 
     const dirty = card({ predicate: [{ field: 'settlement.plantedGate', op: '>=', value: '99' }] });
     expect(lineOf(dirty, 'predicate')).toContain('settlement.plantedGate >= 99');
     expect(lineOf(dirty, 'may claim')).toContain('plantedGate');
+    // anchored: the PRESENT half is the line above, over the same builder and the same label
     expect(lineOf(card(), 'may claim')).not.toContain('plantedGate');
   });
 
@@ -173,6 +178,7 @@ describe('a plant that edits the census row moves the card line BY NAME', () => 
 
   it('a planted objectClass adds exactly one clause to `may NOT`', () => {
     expect(lineOf(card({ objectClass: 'granary' }), 'may NOT')).toContain('`granary`');
+    // anchored: the line above proves the clause is emitted at all, over the same label
     expect(lineOf(card({ objectClass: null }), 'may NOT')).not.toContain('civic object of the class');
   });
 

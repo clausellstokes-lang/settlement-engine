@@ -2722,6 +2722,20 @@ supplies the ancestry.
 2. `[street]` The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
 3. `[visitor]` A stranger looking for the granary or the sick-house at {settlement} is directed to neither, because there is neither.
 
+**`stores: short`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
+**READS:** `settlement.economicState.foodSecurity.label`
+**RELATION:** `addition`
+**ATTACH:** `Disasters & Famine: granary AND hospital`
+1. `[plain]` ⟦TO-AUTHOR⟧ stores: short
+
+**`stores: import-fed`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
+**READS:** `settlement.economicState.foodSecurity.label`
+**RELATION:** `addition`
+**ATTACH:** `Disasters & Famine: granary AND hospital`
+1. `[plain]` ⟦TO-AUTHOR⟧ stores: import-fed
+
 ---
 
 ### DS-DEF-3: `Defense › Public order banner` · `defenseProfile.scores.internal + safetyProfile.{safetyLabel,safetyDesc}`
@@ -5361,6 +5375,13 @@ shared letter would collide.*
 - `Deficit` — 1. `[ledger]` What {settlement} needs exceeds what it produces and what it can bring in together, and the shortfall is carried by the households. · 2. `[street]` There is less in {settlement} than there are people to eat it, and the arithmetic reaches the poorest quarters first. · 3. `[visitor]` The granary at {settlement} is open and the queue at it is longer than the stock behind it. · 4. `[threshold]` {settlement} is short and not yet starving, and what stands between the two is the stores rather than the harvest.
 - `Deficit × Active Famine` — 1. `[ledger]` {settlement} is short of food past the point that stores or purchase can answer, and the rolls are being kept for reasons other than trade. · 2. `[street]` Hunger in {settlement} is general, and what people are arranging now is not meals but order. · 3. `[visitor]` The first thing a stranger is asked in {settlement} is whether they have brought anything. · 4. `[threshold]` There is no rung below this one on the ladder {settlement} is on; what changes from here is not the grade but the count.
 
+**`purse: short`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
+**READS:** `readings.economicGates.military`
+**RELATION:** `addition`
+**ATTACH:** `scores.military: CRITICAL` `scores.military: WEAK`
+1. `[plain]` ⟦TO-AUTHOR⟧ purse: short
+
 ---
 
 ### DS-GEN-4: Overview › Active crisis banners (stressors): **FOLDED INTO `DS-STR-1`**
@@ -5989,6 +6010,34 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`UNWALLED-LARGE`**
 1. `[counterforce]` {settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.
 2. `[ledger]` A town of {settlement}'s weight without a circuit is spending its defense money on something else, and the books say what.
+
+**`country: pressed (walled)`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
+**READS:** `settlement.config.monsterThreat`
+**RELATION:** `addition`
+**ATTACH:** `WALLED-STRAINED`
+1. `[plain]` ⟦TO-AUTHOR⟧ country: pressed (walled)
+
+**`country: pressed (unwalled)`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `PRESENT`
+**READS:** `settlement.config.monsterThreat`
+**RELATION:** `addition`
+**ATTACH:** `UNWALLED-LARGE` `UNWALLED-SMALL`
+1. `[plain]` ⟦TO-AUTHOR⟧ country: pressed (unwalled)
+
+**`watch: bought (revealed)`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `INSTITUTION`
+**READS:** `compromised.revealed`
+**RELATION:** `addition`
+**ATTACH:** `WALLED-QUIET` `WALLED-STRAINED` `WALLED-THREATENED`
+1. `[plain]` ⟦TO-AUTHOR⟧ watch: bought (revealed)
+
+**`watch: bought (covert)`**
+**ROLE:** `modifier` · **FORM:** `sentence` · **MOVE:** `INSTITUTION`
+**READS:** `compromised.covert`
+**RELATION:** `addition`
+**ATTACH:** `WALLED-QUIET` `WALLED-STRAINED` `WALLED-THREATENED`
+1. `[plain · dm-only]` ⟦TO-AUTHOR⟧ watch: bought (covert)
 
 ---
 
