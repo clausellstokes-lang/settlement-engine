@@ -93,6 +93,10 @@ import {
 } from '../src/domain/prose/composedWalker.js';
 import { sentencesOf } from '../src/domain/prose/entryWalker.js';
 import { AUTHORING_MARKER } from './lib/dossier-annex-grammar.mjs';
+// ⭐ THE ESTATE'S ONE UNIT BUILDER (REWRITE car 8a-2, consumed here at 8a-11 under SITTING §U
+// c-2). `facesOf` comes with it: a second spelling of "the parent text and its wordings" is the
+// same two-homes defect one function smaller.
+import { facesOf, unitsOfPool as libUnitsOfPool } from './lib/prose-composed-units.mjs';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../src/domain/prose/proseFingerprint.js';
 import { spineRows } from '../src/domain/prose/wiringCensus.js';
 import { fieldSynonymsFor } from '../src/domain/prose/fieldSynonyms.js';
@@ -575,101 +579,29 @@ export function bandPositionOf(text, exemplars) {
   };
 }
 
-// ── THE UNITS: the CARTESIAN composition of a modifier pool with its attach set ──────
-
-/** The pool's variants, with their faces expanded (parent + wordings). */
-function facesOf(variant) {
-  return [variant.text, ...(Array.isArray(variant.wordings) ? variant.wordings : [])];
-}
+// ── THE UNITS: ONE IMPLEMENTATION, IN scripts/lib/prose-composed-units.mjs ──────────
 
 /**
- * ⭐ EVERY COMPOSED UNIT ONE MODIFIER POOL CAN PRODUCE: each spine of its attach set, times
- * each variant of that spine, times each variant of the pool, times each FACE of each.
+ * ⭐⭐ EVERY COMPOSED UNIT THIS GATE WALKS, from the estate's ONE unit builder.
  *
- * ⛔ THE ARRANGEMENT IS THE COMPOSER'S OWN RULE AND NOT THIS FILE'S GUESS. Every taste pool is
- * an `addition` at the SENTENCE seat, whose connective list holds exactly the EMPTY OPENER
- * (ARCH §4.5, E-F10), and `arrange` down-cases the modifier's first token only AFTER A
- * NON-EMPTY opener. So the unit is `spine + ' ' + modifier`, verbatim. `--check-arrangement`
- * drives the real composer on a real town and asserts this reproduces it.
+ * ⛔ WHY THIS IS FOUR LINES AND NOT NINETY (REWRITE car 8a-11, SITTING §U c-2). Car 8a-5 landed
+ * this gate with its own copy of the cartesian beside `scripts/lib/prose-composed-units.mjs`,
+ * which car 8a-2 had already landed for exactly this purpose. The two then diverged on shipped
+ * input the first time anybody drove both — `DS-DEF-11 :: WALLED-STRAINED` gate 2 / lib 0,
+ * `WALLED-QUIET` 3 / 0, `DS-DEF-2 :: Disasters & Famine: granary AND hospital` 3 / 0 — because
+ * the bare-spine branch lived only here, and NOTHING cross-checked them while both fed the same
+ * sitting. That is the hazard this file's own header names one screen up: two gates that
+ * disagree the first time somebody cures one of them.
+ *
+ * The bare-spine branch now lives in the lib behind `bareSpine`, and
+ * `tests/lint/proseWaveGate.walker.test.js` drives BOTH exports over `poolRosterOf({section})`
+ * and asserts they agree pool by pool.
  * @param {string} blockId
  * @param {string} poolKey
  * @returns {Array<object>} composed unit rows for the walker
  */
 export function unitsOfPool(blockId, poolKey) {
-  const block = CORPUS[blockId];
-  const meta = block?.poolMeta?.[poolKey];
-  const pool = block?.pools?.[poolKey] || [];
-  /** @type {Array<object>} */
-  const units = [];
-  // ⭐⭐ THE REWRITE'S UNIT IS A SPINE POOL'S OWN FACES (REWRITE car 8a-5, generalising the
-  // taste's harness). The taste walked MODIFIER pools, whose unit is the cartesian of an
-  // attach set; the REWRITE's first writing workflow rewrites a DESK SECTION's SPINE pools and
-  // grows their faces, and a spine's attach set is empty BY CONSTRUCTION (the SHIFT REGISTER
-  // pins `attach-set` at 0 on all 708). Under the taste's rule that pool composed NOTHING and
-  // the gate had nothing to walk — which is exactly the absent-pool lie car 8a-3 cured, and
-  // curing the symptom is not the same as giving the gate its subject.
-  //
-  // ⛔ A BARE SPINE IS ONE PIECE AND SAYS SO. The row carries `role: 'spine'` and no modifier,
-  // no relation and no seat, so every composed-only arm (A1's overlap, A2's joint, A3's
-  // contrast, the thread) declares NOT-EXECUTABLE on it rather than inventing a second piece
-  // to have something to compare. The ENTRY arms — the claim classes, the digits, the em dash,
-  // the fragment form — are the ones that judge a spine face, and they are the ones the
-  // REWRITE is graded on.
-  if (!Array.isArray(meta?.attach) || meta.attach.length === 0) {
-    for (const variant of pool) {
-      for (const face of facesOf(variant)) {
-        units.push({
-          blockId,
-          poolKey,
-          text: face,
-          pieces: [{
-            role: 'spine',
-            key: poolKey,
-            text: face,
-            slots: variant.slots || [],
-            marks: variant.marks || [],
-          }],
-        });
-      }
-    }
-    return units;
-  }
-  for (const spineKey of meta?.attach || []) {
-    const spinePool = block.pools[spineKey] || [];
-    for (const spine of spinePool) {
-      for (const spineFace of facesOf(spine)) {
-        for (const variant of pool) {
-          for (const face of facesOf(variant)) {
-            units.push({
-              blockId,
-              poolKey: spineKey,
-              text: `${spineFace} ${face}`,
-              pieces: [
-                {
-                  role: 'spine',
-                  key: spineKey,
-                  text: spineFace,
-                  slots: spine.slots || [],
-                  marks: spine.marks || [],
-                },
-                {
-                  role: 'modifier',
-                  key: poolKey,
-                  text: face,
-                  slots: variant.slots || [],
-                  marks: variant.marks || [],
-                  relation: meta.relation,
-                  declaredRelation: meta.relation,
-                  seat: meta.seat || 'sentence',
-                },
-              ],
-            });
-          }
-        }
-      }
-    }
-  }
-  return units;
+  return libUnitsOfPool(CORPUS, blockId, poolKey, { bareSpine: true });
 }
 
 // ── ⭐⭐ CAR M-9: THE SITE OF A FINDING — THE WRITERS' GRAIN, AND THE SPINE'S ────────

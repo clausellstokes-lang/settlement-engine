@@ -37,11 +37,18 @@ import {
   unitsOfPool, withheldPoolRow,
 } from '../../scripts/prose-wave-gate.mjs';
 import { AUTHORING_MARKER } from '../../scripts/lib/dossier-annex-grammar.mjs';
+import { unitsOfPool as libUnitsOfPool } from '../../scripts/lib/prose-composed-units.mjs';
 import { TASTE_POOLS } from '../../scripts/prose-licence-card.mjs';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 
 const CORPUS = { ...DOSSIER_STATE_PROSE_DEFENSE, ...DOSSIER_STATE_PROSE_GENERAL };
+/**
+ * The whole merged corpus, built from the gate's OWN section table rather than transcribed —
+ * the cross-check arm below has to hand the lib the same corpus the gate reads, and a
+ * hand-written list here would be the second roster car 8a-5 already found drifting once.
+ */
+const CORPUS_ALL = Object.assign({}, ...Object.values(SECTION_LEAVES));
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '../..');
 
 /**
@@ -125,6 +132,43 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // becoming a fallback: a pool that does not exist composes no unit at all.
     expect(unitsOfPool('DS-DEF-11', 'no such pool')).toEqual([]);
     expect(unitsOfPool('NO-SUCH-BLOCK', 'x')).toEqual([]);
+  });
+
+  it('⭐⭐ ONE UNIT BUILDER: the gate and the lib agree on EVERY pool of a section', () => {
+    // ⛔ THE FORK THIS ARM CLOSES (SITTING §U c-2, fold NEW-1 of the gate lens). Car 8a-2
+    // landed `scripts/lib/prose-composed-units.mjs` for exactly this job and 8a-5 landed the
+    // gate with a SECOND copy beside it. Driven on shipped input the two disagreed at once —
+    // DS-DEF-11 :: WALLED-STRAINED gate 2 / lib 0, WALLED-QUIET 3 / 0, DS-DEF-2 :: Disasters &
+    // Famine: granary AND hospital 3 / 0 — because the bare-spine branch lived only in the
+    // gate, and nothing cross-checked them while both fed the same sitting. The branch now
+    // lives in the lib behind `bareSpine` and the gate is four lines; this arm is what keeps
+    // it that way, because a fork does not announce itself.
+    const roster = poolRosterOf({ section: 'defense' });
+    expect(roster.rows.length, 'the section must have a roster to compare over')
+      .toBeGreaterThanOrEqual(100);
+    const disagree = [];
+    let total = 0;
+    for (const { block, pool } of roster.rows) {
+      const mine = unitsOfPool(block, pool);
+      const theirs = libUnitsOfPool(CORPUS_ALL, block, pool, { bareSpine: true });
+      total += mine.length;
+      if (mine.length !== theirs.length) {
+        disagree.push(`${block} :: ${pool} — gate ${mine.length} / lib ${theirs.length}`);
+      } else if (mine.some((u, i) => u.text !== theirs[i].text)) {
+        disagree.push(`${block} :: ${pool} — same count, different text`);
+      }
+    }
+    expect(disagree.slice(0, 5), 'a pool the two builders read differently').toEqual([]);
+    // NON-VACUITY on the only axis that could hide a fork: a comparison over zero units is two
+    // implementations agreeing about nothing. The defense section composes 383 units today.
+    expect(total, 'the units actually compared').toBe(383);
+    // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
+    // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
+    // different on purpose, and this is the line that says so.
+    expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED'), 'a spine licenses no'
+      + ' composed unit, which is the shape report\'s subject').toEqual([]);
+    expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED', { bareSpine: true }).length)
+      .toBe(2);
   });
 });
 
