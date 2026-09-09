@@ -28,7 +28,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | # | item | sha | status |
 |---|---|---|---|
 | 8a-1 | the index-stable draw (§N.2) | **`f4005cccd`** | **LANDED** |
-| 8a-2 | passage shapes — the licensed fourth draw + the distribution report | — | pending |
+| 8a-2 | passage shapes — the licensed fourth draw + the distribution report | **`39c88b02d`** | **LANDED** |
 | 8a-3 | the taste's instruments landed by name, without the annex rows | — | pending |
 | 8a-4 | `armThread` + the kinship tiebreak | — | pending |
 | 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | — | pending |
@@ -390,4 +390,99 @@ so every unit becomes eligible for sentence-first: the shape stops being LICENSE
 composition and becomes merely AVAILABLE to it, which is ruling (b)'s exact failure. Nothing
 downstream would say so — the distribution table would show a healthy-looking rise in shape 2's
 conditional share, which is the reading ruling (c) built that column to trust.
+
+
+---
+
+## CAR 8a — WHERE THIS SESSION STOPPED, AND THE RESUME
+
+**LANDED, each to its full executed acceptance:** 8a-1 `f4005cccd`, 8a-2 `39c88b02d`.
+**Dock tip `39c88b02d` · porcelain 0 · runners 0.**
+
+**NOT STARTED: 8a-3 through 8a-10.** They are not partials — no byte of them is in the tree.
+
+### The standing red, declared and owned
+
+`tests/lint/sovereigntyLightingContract.walker.test.js` — the lighting census `titles`
+24,049 → 24,050. It is the ONLY red in `tests/lint` (149 files / 2,502 tests pass). It is
+carried to 8a-10 by design: the refreeze ritual REFUSES A DIRTY TREE, so it is a register-car
+act and cannot be done per commit. ARCH §12 lists `lighting` as a predicted door for this car.
+
+    LIGHTING_CENSUS_REFREEZE='<lane or seat id>' LIGHTING_CENSUS_NOTE='<why it moved>' \
+      npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js
+
+⚠ It EXITS NON-ZERO BY DESIGN so a refreeze can never be mistaken for a passing gate; re-run the
+walker plainly afterwards and that green is the proof.
+
+⚠ Only +1 title was counted for 8 new `it()` blocks, so the census counts titles in CREDITED files
+only and one of the two files this car touched is PARKED. Measure at 8a-10; do not assume +8.
+
+Also standing: `tests/property/dossierProseManifest.test.js` reds in EXACTLY TWO ARMS — the DRIFT
+arm and the PROVENANCE arm — and no others. Both are chartered by the brief ("the manifest fixture
+is NOT re-recorded by this car; the freeze act is the REWRITE's last car"). The other 12 arms pass.
+
+### ⛔ RECON DONE FOR 8a-3, so the next seat does not re-derive it
+
+Item 3 is ELEVEN cherry-picks landing as ONE commit, so it cannot be part-landed. Two splits are
+tangled and the recon below is executed, not guessed.
+
+**M-2 `1af673d07` — THE RISK IS REAL BUT THE SPLIT IS CLEAN, MEASURED.** The instrument half
+carries a genuine parser cure to `scripts/generate-dossier-state-prose.mjs`: the pending-bold-label
+guard was `pool === null && lastBold !== null`, "which is only true for the FIRST pool of a block:
+on the second and every later one a pending bold label was ignored". A parser cure taken WITHOUT
+the annex rows could re-project the EXISTING annex and move reader-facing bytes, which 8a forbids
+absolutely. **MEASURED against that fear and it does not hold:** across both regenerated leaves in
+that commit the only REMOVED lines are the two header comments carrying the variant counts —
+1 removed / 171 added in `defense.generated.js`, 1 removed / 29 added in `general.generated.js`.
+No existing projected sentence moved. So the cure adds pools and changes none, and the instrument
+half should leave `node scripts/generate-dossier-state-prose.mjs --check` green with the annex
+untouched. **THAT CHECK IS THE FIRST THING 8a-3 MUST RUN**, before any other pick.
+
+Also in M-2's instrument half: `--taste`, a DOCK-ONLY projector flag whose entire purpose is to
+admit the taste's annex rows (an authoring marker, and T-F12's civic-object-class waivers). Landed
+without those rows it is a dark flag with nothing to relax. Harmless, but it should land with a
+line saying so rather than arriving unexplained.
+
+**M-3 `69eb79415` — TWO FILES IN THE "INSTRUMENT HALF" ARE CANDIDATE PLUMBING, NOT INSTRUMENTS.**
+`src/components/new/generalDeskRead.js` (+7) hands `economicGates` to the general desk and
+`generalStateProse.js` (+4) widens its reading-bag typedef to receive it. Both exist solely to feed
+DS-GEN-3's `purse: short` CANDIDATE FUNCTION, which the brief explicitly refuses ("NOT the seven
+candidate functions — they land with their desk sections"). The chair's call: land the pair as dark
+plumbing now, or refuse them to 8b with the candidate they serve. The brief's own logic points at
+refusing them; recorded here rather than decided by an implementer.
+
+**The mechanics the brief fixes, and one it does not.** Every pick is `git cherry-pick -n` and
+re-staged BY FILE. To DROP a refused file the tree must be put back without `git checkout --`,
+which the standing hazards call out as work-destroying: use `git show HEAD:<path> > <path>` for a
+tracked file and delete an untracked one. Print the files taken and the files refused per pick.
+
+**The acceptance, and it is sharp:** with no annex row landed, `tests/lint` WHOLE reads green at
+every commit. The taste's own declared reds in its dock are the corpus-pinning walkers, and they
+must NOT appear in the product. Candidates for refusal on that ground:
+`tests/lint/proseTasteAnnex.walker.test.js` (a 316-line NEW file in M-2 that tests the annex rows,
+which are not landed) and any arm of `proseTasteCandidates.walker.test.js` bound to the seven
+candidate functions.
+
+**Sequencing note for 8a-5.** `scripts/taste-measure.mjs` arrives at 8a-3 via M-7 + M-9 + M-9b and
+is GENERALISED at 8a-5 into `scripts/prose-wave-gate.mjs`; the brief requires the old script then
+become a thin alias or be removed with its walker in the same commit, never a second
+implementation. `scripts/lib/prose-composed-units.mjs` already landed at 8a-2 holds the shared
+unit builder (`unitsOfPool`, `attachBearingPools`, `unitsOfCorpus`) so the gate does not re-spell
+what `taste-measure.mjs:250` spells today.
+
+**Item 2's report is already wired for item 5(e).** `scripts/prose-shape-report.mjs --corpus <f>`
+is the `--shapes` surface; the gate reaches it by handing it a corpus.
+
+### The four findings this session produced that outlive it
+
+1. **`vid: 0` is a real stable id.** A `> 0` guard silently splits the corpus into two draw
+   regimes. Seven pools lead with a `canonical` row numbered 0.
+2. **`attach-set` is 0 across all 708 pools**, so the composed-prose model is wired and DARK and
+   NO shape, thread or band question can be asked of the product corpus until a desk section lands
+   attach rows at 8b. Every 8a instrument that measures composed units must be driven on a supplied
+   corpus, and must say so rather than printing an empty table.
+3. **Every DRIFT configuration shares one `_seed`**, so a per-pool count over DRIFT is a town count
+   wearing a draw's clothes. Any pin phrased as "N positions" over DRIFT is N towns times ONE coin,
+   and any draw change re-rolls it. The audience-divergence control lost half its breadth to that.
+4. **`tests/copy/voiceMechanics.test.js` is RED at the §917 product tip** and not from this car.
 
