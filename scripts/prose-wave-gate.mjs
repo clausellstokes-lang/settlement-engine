@@ -15,12 +15,6 @@
  * already plant-convicted, nothing here re-implements a rule that lives somewhere else, and a
  * measure whose input is absent says NOT-EXECUTABLE rather than answering zero.
  *
- * WHAT IT IS. The writing workflow calls this after EVERY round, on every arm, and reads its
- * JSON. It is the only thing standing between a wording set and the sitting, so it is written
- * to the estate's own rule: every figure comes from an instrument that already exists and is
- * already plant-convicted, nothing here re-implements a rule that lives somewhere else, and a
- * measure whose input is absent says NOT-EXECUTABLE rather than answering zero.
- *
  * THE NINE MEASURES, in the brief's own order:
  *   (a) the projection — `generate-dossier-state-prose.mjs --taste --check`, and the waivers
  *       it took, printed;

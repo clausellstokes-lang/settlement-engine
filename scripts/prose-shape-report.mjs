@@ -210,7 +210,7 @@ function print(r) {
  */
 const OWED = Object.freeze([
   ['the THREAD verdicts', 'car 8a item 4 — `armThread` is chartered REPORTED until 8b\'s first batch'],
-  ['the BAND figures at the corrected grain', 'car 8a item 5a — the band position is a CONSTANT at the face grain (SITTING §T.5), so a band column printed here would be the same tuple on every row'],
+  ['the BAND figures at the corrected grain', 'car 8a item 5 — the gate (scripts/prose-wave-gate.mjs) carries the two grains and this report does not: the THIRTEEN text-level metrics are a property of a pool\'s RENDERED CORPUS and the EIGHT word-level ones of the face, so a band column here would need a corpus this table is not handed. The old line said the band position is a CONSTANT at the face grain; car 8a-5 refuted that by execution — two faces of one lexicon read 0 exceeded / mean 0.259 alike, and the same face carrying an em dash reads 1 exceeded / 0.125 / mean 1.410, so the face grain MOVES on lexicon and the corpus grain on length'],
   ['the read-aloud assessment', 'the sitting\'s own act, on the strings this table prints'],
   ['the claim/wiring census (A0b) after variation', 'car 8a item 5, which lands the gate that carries A0b over a section'],
 ]);
