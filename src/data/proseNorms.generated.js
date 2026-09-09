@@ -3,7 +3,7 @@
 // wiring census's RATE corpus and FROZEN at the pool's birth car (P-F4).
 // A BIT AND NOT A RATE, deliberately: a rate re-measured by an unrelated car would re-order
 // installed worlds without anyone intending it. The measured rate stays a REPORT in the census.
-// MEASURED: 271 of 708 pools fired on the RATE corpus (768 towns,
+// MEASURED: 276 of 708 pools fired on the RATE corpus (768 towns,
 // 192 cells, 4 seeds); 72 of them read 1 at the departure line of
 // 1000 basis points.
 // A POOL WITH NO ROW IS ABSENT, NOT ZERO, and the composer reads an absent row as "not a
@@ -104,6 +104,12 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
     "departure": 1
   },
   "DS-DEF-2::Disasters & Famine: NO reserves, NO medical provision": {
+    "departure": 0
+  },
+  "DS-DEF-2::stores: short": {
+    "departure": 0
+  },
+  "DS-DEF-2::stores: import-fed": {
     "departure": 0
   },
   "DS-DEF-3::Safe": {
@@ -207,6 +213,12 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   },
   "DS-DEF-11::UNWALLED-LARGE": {
     "departure": 1
+  },
+  "DS-DEF-11::country: pressed (walled)": {
+    "departure": 0
+  },
+  "DS-DEF-11::country: pressed (unwalled)": {
+    "departure": 0
   },
   "DS-ECO-1::COMBINATION C1: a high rung on a working approach": {
     "departure": 0
@@ -492,6 +504,9 @@ export const DOSSIER_PROSE_NORMS = /* #__PURE__ */ Object.freeze({
   },
   "DS-GEN-3::foodSecurity.label: Deficit × Active Famine": {
     "departure": 1
+  },
+  "DS-GEN-3::purse: short": {
+    "departure": 0
   },
   "DS-GEN-5::market (route crossroads)": {
     "departure": 0

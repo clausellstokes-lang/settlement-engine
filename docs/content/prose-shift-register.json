@@ -170,7 +170,7 @@
         {
           "kind": "integer",
           "over": "the number of pools carrying a measured bit",
-          "value": 271
+          "value": 276
         },
         {
           "kind": "integer",
@@ -186,9 +186,34 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "the norm leaf's rows as `${key} ${departure}`",
-          "value": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+          "value": "d03461e700b2df53a768cde254e075e6c3be147ad62f01d23f0c688fba1673ab"
         }
-      ]
+      ],
+      "additive": "A DECLARED ADDITIVE ROW (TASTE car M-4, ARCH §12 row 6): the taste's SEVEN modifier pools are born in the dock at laneTASTE and are NEVER LANDED. Every pin below is recomputed over ALL 715 pools; the SPINE-only recomputation over the 708 pools of the §916 tip 8961388ce is byte-identical to `additiveBase`, which is the executable form of \"every existing pin unmoved\": a new pool moves nothing existing, and the walker asserts both readings rather than either alone. FIVE of the seven carry a bit and TWO carry none: `watch: bought (revealed)` and `watch: bought (covert)` fire on 0 of the 768 RATE towns, so the RATE table has no row for them at all and the norm leaf is ABSENT there rather than 0 (\"a pool with no row is ABSENT, not zero\", the leaf's own header).",
+      "additivePools": [
+        "DS-DEF-11 :: country: pressed (walled)",
+        "DS-DEF-11 :: country: pressed (unwalled)",
+        "DS-DEF-11 :: watch: bought (revealed)",
+        "DS-DEF-11 :: watch: bought (covert)",
+        "DS-DEF-2 :: stores: short",
+        "DS-DEF-2 :: stores: import-fed",
+        "DS-GEN-3 :: purse: short"
+      ],
+      "additiveBase": {
+        "rows": 271,
+        "ones": 72,
+        "lineBp": 1000,
+        "digest": "820cda139c5111e74e89440c7797eefa9fd5c972cb67704b68d0ba6c26e29a2d"
+      },
+      "measuredRates": {
+        "DS-DEF-11 :: country: pressed (walled)": 6693,
+        "DS-DEF-11 :: country: pressed (unwalled)": 6693,
+        "DS-DEF-11 :: watch: bought (revealed)": null,
+        "DS-DEF-11 :: watch: bought (covert)": null,
+        "DS-DEF-2 :: stores: short": 1563,
+        "DS-DEF-2 :: stores: import-fed": 4010,
+        "DS-GEN-3 :: purse: short": 6641
+      }
     },
     {
       "id": "attach-set",

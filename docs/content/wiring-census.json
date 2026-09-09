@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
+      "src/domain/display/stateProse/generalStateProse.js": "2c80f85d9381b4be9a23eadd0a392ff0282992e1a5ac4b274a49c385d98d1e7f",
       "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
       "src/domain/display/stateProse/defenseStateProse.js": "8aeeba2e1fc32113aefaa6900056902d41feeec481ee87ac3d4d06d4c62855a2",
@@ -11,9 +11,9 @@
       "src/domain/display/stateProse/dossierMounts.js": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603"
     },
     "candidateLeaves": {
-      "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
+      "src/domain/display/stateProse/defenseStateProseCandidates.js": "1e3ccc0de2f6b6a9b271e593619a1acb91f448aecc7cb0453d1afa07eeca5141",
       "src/domain/display/stateProse/economyStateProseCandidates.js": "23867dd06dee7ad16f390ff0841cdde9e910b6f119bb3197eb62b4035d120383",
-      "src/domain/display/stateProse/generalStateProseCandidates.js": "5f0aa429b9b621e733e19a581e469b51d7f59fd1e7906cabaaee0cc5e4716304",
+      "src/domain/display/stateProse/generalStateProseCandidates.js": "e86774a9c86b0aa73955beaaac9bd8c2360ac72bfe4db842f9d4e9bd67127e3e",
       "src/domain/display/stateProse/powerStateProseCandidates.js": "43366c4d3932ae35f1f4a52e51fbb91d0379c0addf333258c28cee328098b9ea",
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
@@ -2198,7 +2198,7 @@
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 1563,
       "departure": null,
       "source": {
         "kind": "",
@@ -2254,7 +2254,7 @@
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 4010,
       "departure": null,
       "source": {
         "kind": "",
@@ -6941,7 +6941,7 @@
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 6693,
       "departure": null,
       "source": {
         "kind": "road",
@@ -6998,7 +6998,7 @@
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 6693,
       "departure": null,
       "source": {
         "kind": "road",
@@ -17563,7 +17563,7 @@
       ],
       "attach": [],
       "k": 2,
-      "rateBp": null,
+      "rateBp": 6641,
       "departure": null,
       "source": {
         "kind": "muster",
@@ -55088,6 +55088,90 @@
         "wizardRateBp": 8503
       },
       {
+        "block": "DS-DEF-11",
+        "pool": "country: pressed (walled)",
+        "towns": 514,
+        "n": 768,
+        "rateBp": 6693,
+        "loBp": 6352,
+        "hiBp": 7016,
+        "byTier": {
+          "thorp": {
+            "towns": 87,
+            "n": 128,
+            "rateBp": 6797
+          },
+          "hamlet": {
+            "towns": 88,
+            "n": 128,
+            "rateBp": 6875
+          },
+          "village": {
+            "towns": 86,
+            "n": 128,
+            "rateBp": 6719
+          },
+          "town": {
+            "towns": 85,
+            "n": 128,
+            "rateBp": 6641
+          },
+          "city": {
+            "towns": 83,
+            "n": 128,
+            "rateBp": 6484
+          },
+          "metropolis": {
+            "towns": 85,
+            "n": 128,
+            "rateBp": 6641
+          }
+        },
+        "wizardRateBp": 6810
+      },
+      {
+        "block": "DS-DEF-11",
+        "pool": "country: pressed (unwalled)",
+        "towns": 514,
+        "n": 768,
+        "rateBp": 6693,
+        "loBp": 6352,
+        "hiBp": 7016,
+        "byTier": {
+          "thorp": {
+            "towns": 87,
+            "n": 128,
+            "rateBp": 6797
+          },
+          "hamlet": {
+            "towns": 88,
+            "n": 128,
+            "rateBp": 6875
+          },
+          "village": {
+            "towns": 86,
+            "n": 128,
+            "rateBp": 6719
+          },
+          "town": {
+            "towns": 85,
+            "n": 128,
+            "rateBp": 6641
+          },
+          "city": {
+            "towns": 83,
+            "n": 128,
+            "rateBp": 6484
+          },
+          "metropolis": {
+            "towns": 85,
+            "n": 128,
+            "rateBp": 6641
+          }
+        },
+        "wizardRateBp": 6810
+      },
+      {
         "block": "DS-GEN-16",
         "pool": "LAYERED-ANCHORED",
         "towns": 512,
@@ -55157,6 +55241,48 @@
             "towns": 101,
             "n": 128,
             "rateBp": 7891
+          },
+          "city": {
+            "towns": 128,
+            "n": 128,
+            "rateBp": 10000
+          },
+          "metropolis": {
+            "towns": 128,
+            "n": 128,
+            "rateBp": 10000
+          }
+        },
+        "wizardRateBp": 6393
+      },
+      {
+        "block": "DS-GEN-3",
+        "pool": "purse: short",
+        "towns": 510,
+        "n": 768,
+        "rateBp": 6641,
+        "loBp": 6299,
+        "hiBp": 6966,
+        "byTier": {
+          "thorp": {
+            "towns": 60,
+            "n": 128,
+            "rateBp": 4688
+          },
+          "hamlet": {
+            "towns": 49,
+            "n": 128,
+            "rateBp": 3828
+          },
+          "village": {
+            "towns": 28,
+            "n": 128,
+            "rateBp": 2188
+          },
+          "town": {
+            "towns": 117,
+            "n": 128,
+            "rateBp": 9141
           },
           "city": {
             "towns": 128,
@@ -56388,6 +56514,48 @@
           }
         },
         "wizardRateBp": 4674
+      },
+      {
+        "block": "DS-DEF-2",
+        "pool": "stores: import-fed",
+        "towns": 308,
+        "n": 768,
+        "rateBp": 4010,
+        "loBp": 3670,
+        "hiBp": 4361,
+        "byTier": {
+          "thorp": {
+            "towns": 54,
+            "n": 128,
+            "rateBp": 4219
+          },
+          "hamlet": {
+            "towns": 49,
+            "n": 128,
+            "rateBp": 3828
+          },
+          "village": {
+            "towns": 47,
+            "n": 128,
+            "rateBp": 3672
+          },
+          "town": {
+            "towns": 47,
+            "n": 128,
+            "rateBp": 3672
+          },
+          "city": {
+            "towns": 53,
+            "n": 128,
+            "rateBp": 4141
+          },
+          "metropolis": {
+            "towns": 58,
+            "n": 128,
+            "rateBp": 4531
+          }
+        },
+        "wizardRateBp": 3268
       },
       {
         "block": "DS-ECO-9",
@@ -60336,6 +60504,48 @@
           }
         },
         "wizardRateBp": 91
+      },
+      {
+        "block": "DS-DEF-2",
+        "pool": "stores: short",
+        "towns": 120,
+        "n": 768,
+        "rateBp": 1563,
+        "loBp": 1323,
+        "hiBp": 1836,
+        "byTier": {
+          "thorp": {
+            "towns": 25,
+            "n": 128,
+            "rateBp": 1953
+          },
+          "hamlet": {
+            "towns": 24,
+            "n": 128,
+            "rateBp": 1875
+          },
+          "village": {
+            "towns": 19,
+            "n": 128,
+            "rateBp": 1484
+          },
+          "town": {
+            "towns": 16,
+            "n": 128,
+            "rateBp": 1250
+          },
+          "city": {
+            "towns": 19,
+            "n": 128,
+            "rateBp": 1484
+          },
+          "metropolis": {
+            "towns": 17,
+            "n": 128,
+            "rateBp": 1328
+          }
+        },
+        "wizardRateBp": 365
       },
       {
         "block": "DS-ECO-9",
@@ -70253,7 +70463,7 @@
     "departureReport": {
       "lineBp": 1000,
       "uncommon": 72,
-      "common": 199
+      "common": 204
     },
     "pairs": {
       "n": 768,

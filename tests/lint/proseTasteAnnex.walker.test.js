@@ -27,6 +27,7 @@ import { join } from 'node:path';
 
 import { ROOT, STATE_ANNEX } from '../helpers/dossierCorpus.js';
 import { modifierRows, spineRows } from '../../src/domain/prose/wiringCensus.js';
+import { DOSSIER_PROSE_NORMS } from '../../src/data/proseNorms.generated.js';
 import {
   AUTHORING_MARKER, assertNoAuthoringMarker, assertPoolDeclaration, readAnnexDeclarations,
 } from '../../scripts/lib/dossier-annex-grammar.mjs';
@@ -182,6 +183,41 @@ describe('⭐⭐ THE ADDITIVE PROOF — every SHIFT REGISTER pin over the SPINE 
     expect(SPINE_META.filter((r) => r.meta.seat !== undefined)).toEqual([]);
   });
 
+  it('the NORM BIT is additive too: five of the seven carry one and the 271 behind them do not move', () => {
+    const norm = mechanism('norm-bit');
+    const bits = Object.entries(DOSSIER_PROSE_NORMS)
+      .map(([key, row]) => ({ key, departure: /** @type {any} */ (row).departure }))
+      .sort((a, b) => (a.key < b.key ? -1 : 1));
+    const taste = new Set(TASTE.map((t) => `${t.block}::${t.pool}`));
+    const spine = bits.filter((r) => !taste.has(r.key));
+    const line = (r) => `${r.key} ${r.departure}`;
+    const digest = (rows) => sha256Hex(rows.map(line).join('\n'));
+    // ⛔ FIVE, NOT SEVEN: the two watch pools fire on 0 of the 768 RATE towns, so the rate
+    // table has NO ROW for them and the norm leaf is ABSENT there rather than 0 — the leaf's
+    // own "a pool with no row is ABSENT, not zero". That is a measurement, and the register
+    // records the five measured rates beside it.
+    expect(bits.length - spine.length, 'taste pools carrying a measured bit').toBe(5);
+    for (const [at, rate] of Object.entries(norm.measuredRates)) {
+      const key = at.replace(' :: ', '::');
+      if (rate === null) expect(DOSSIER_PROSE_NORMS[key], `${at} has no bit`).toBeUndefined();
+      else expect(DOSSIER_PROSE_NORMS[key], `${at} has a bit`).toBeTruthy();
+      // AND THE BIT IS THE RATE AGAINST THE LINE, not a value anybody chose.
+      if (rate !== null) {
+        expect(DOSSIER_PROSE_NORMS[key].departure, `${at} at ${rate} bp against the 1000 bp line`)
+          .toBe(rate < 1000 ? 1 : 0);
+      }
+    }
+    // THE ADDITIVE PROOF, the same shape as the five mechanisms above.
+    expect(spine.length).toBe(norm.additiveBase.rows);
+    expect(spine.filter((r) => r.departure === 1).length).toBe(norm.additiveBase.ones);
+    expect(digest(spine)).toBe(norm.additiveBase.digest);
+    // AND THE CURRENT PINS ARE THE RECOMPUTATION OVER ALL OF THEM.
+    const value = (kind, i = 0) => norm.pin.filter((p) => p.kind === kind)[i].value;
+    expect(bits.length).toBe(value('integer'));
+    expect(bits.filter((r) => r.departure === 1).length).toBe(value('integer', 1));
+    expect(digest(bits)).toBe(value('digest'));
+  });
+
   it('and the register\'s CURRENT pins are the recomputation over all pools, seven included', () => {
     const pins = (id) => mechanism(id).pin;
     const value = (id, kind, n = 0) => pins(id).filter((p) => p.kind === kind)[n].value;
@@ -208,7 +244,8 @@ describe('⭐⭐ THE ADDITIVE PROOF — every SHIFT REGISTER pin over the SPINE 
   it('every mechanism carrying an ADDITIVE row names the seven pools it was moved by', () => {
     const moved = REGISTER.mechanisms.filter((m) => m.additive);
     expect(moved.map((m) => m.id).sort()).toEqual([
-      'attach-set', 'face-count-per-variant', 'pool-key-rename', 'variant-count-per-pool', 'vids',
+      'attach-set', 'face-count-per-variant', 'norm-bit', 'pool-key-rename',
+      'variant-count-per-pool', 'vids',
     ]);
     for (const m of moved) {
       expect(m.additivePools.sort(), `${m.id} names the additive pools`)
@@ -218,7 +255,6 @@ describe('⭐⭐ THE ADDITIVE PROOF — every SHIFT REGISTER pin over the SPINE 
     // AND NO OTHER MECHANISM MOVED: the ones with no additive row are the ones whose pins are
     // integers at zero or a source string, and those are asserted unmoved by their own arms.
     const untouched = REGISTER.mechanisms.filter((m) => !m.additive).map((m) => m.id);
-    expect(untouched).toContain('norm-bit');
     expect(untouched).toContain('draw-formula');
     expect(untouched).toContain('registry-id');
   });
