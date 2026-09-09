@@ -5988,8 +5988,14 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[ledger]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
 
 **`WALLED-STRAINED`**
-1. `[ledger]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
-2. `[unfolding]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+1. `[ledger]` The {defwork} at {settlement} stands, and the muster is short of its funding.
+   - `[face]` On the muster roll at {settlement} the pay is under its due, and the {defwork} holds.
+   - `[face]` The wage roll at {settlement} is not met. The town's {defwork} is in place.
+   - `[face]` Wages at {settlement} run short of the roll, and the {defwork} stands.
+2. `[unfolding]` Pay for {settlement}'s muster stands open on the roll, and the {defwork} is up.
+   - `[face]` Funding for the muster at {settlement} falls short of its wage, and the {defwork} holds.
+   - `[face]` The pay due the muster is not made up at {settlement}. The town has its {defwork}.
+   - `[face]` At {settlement} the muster is not paid to its full wage, and the {defwork} is in place.
 
 **`UNWALLED-SMALL`**
 1. `[street]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.

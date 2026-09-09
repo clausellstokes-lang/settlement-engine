@@ -5297,21 +5297,31 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "WALLED-STRAINED": [
         {
           "angle": "ledger",
-          "text": "{settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.",
-          "slots": [
-            "settlement",
-            "defwork"
-          ],
-          "vid": 1
-        },
-        {
-          "angle": "unfolding",
-          "text": "The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.",
+          "text": "The {defwork} at {settlement} stands, and the muster is short of its funding.",
           "slots": [
             "defwork",
             "settlement"
           ],
-          "vid": 2
+          "vid": 1,
+          "wordings": [
+            "On the muster roll at {settlement} the pay is under its due, and the {defwork} holds.",
+            "The wage roll at {settlement} is not met. The town's {defwork} is in place.",
+            "Wages at {settlement} run short of the roll, and the {defwork} stands."
+          ]
+        },
+        {
+          "angle": "unfolding",
+          "text": "Pay for {settlement}'s muster stands open on the roll, and the {defwork} is up.",
+          "slots": [
+            "settlement",
+            "defwork"
+          ],
+          "vid": 2,
+          "wordings": [
+            "Funding for the muster at {settlement} falls short of its wage, and the {defwork} holds.",
+            "The pay due the muster is not made up at {settlement}. The town has its {defwork}.",
+            "At {settlement} the muster is not paid to its full wage, and the {defwork} is in place."
+          ]
         }
       ],
       "UNWALLED-SMALL": [
@@ -5388,8 +5398,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 2,
         "faceCounts": [
-          1,
-          1
+          4,
+          4
         ],
         "vids": [
           1,
