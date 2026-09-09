@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 03:28:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 03:34:31 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT train lands — the living-content dial lit for every new world on the ow
 
@@ -137,16 +137,8 @@ product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT t
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 363 · partial 174 · verdict files 41 (triage 1, regrade r7) · section 09-06 18:21 · critic 09-06 18:39
 - LAST-RUNS: tolkien r7-not-launched/(none — nothingToRun 17:26), kay r8/wf_d76e605d-6d1, leguin r11/wf_49ef9b66-2e6, wolfe r8/wf_8cd21474-a7b, martin r8/wf_0cd91522-1ce, hobb r7/wf_255b6391-7fb, dnd r13/wf_2c525e43-1f2, ai r12/wf_6dd3b009-2b0, dnd_r13 r13/wf_2c525e43-1f2, leguin_r11 r11/wf_49ef9b66-2e6, dnd_r14 r14/
 
-## WORKFLOW RUNS of chair session 5540cfd2-eea9-4469-ba34-6514b54a83ff (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_02541175-e31: 8 journal lines, 4 agents
-- wf_2dff77d0-392: 112 journal lines, 58 agents
-- wf_31ce68bc-a03: 18 journal lines, 9 agents
-- wf_568522f1-e3e: 10 journal lines, 5 agents
-- wf_655b3257-ac5: 8 journal lines, 4 agents
-- wf_b0228653-707: 12 journal lines, 6 agents
-- wf_cb9a6435-c7b: 8 journal lines, 4 agents
-- wf_d3c44881-503: 38 journal lines, 19 agents
-- wf_d89a58a7-4c7: 8 journal lines, 4 agents
+## WORKFLOW RUNS of chair session 67af10e4-7386-48d4-8cd3-b2985d4885c2 (journal lines; a run dies with the session — the FILES above are the checkpoint)
+- wf_73595d81-51d: 6 journal lines, 6 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.77 3.84 3.77
+load: 5.50 4.97 4.29
