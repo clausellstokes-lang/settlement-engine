@@ -1,7 +1,7 @@
 {
  "arm": "draft",
  "round": 3,
- "at": "2026-09-09T04:37:57",
+ "at": "2026-09-09T05:22:52",
  "projection": {
   "ok": true,
   "waivers": [
@@ -50,18 +50,20 @@
    "rateBp": 6693,
    "departure": 0,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 24,
@@ -490,18 +492,20 @@
    "rateBp": 6693,
    "departure": 0,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 48,
@@ -1211,18 +1215,20 @@
    "rateBp": null,
    "departure": null,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 96,
@@ -1932,18 +1938,20 @@
    "rateBp": null,
    "departure": null,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 96,
@@ -2651,18 +2659,20 @@
    "rateBp": 1563,
    "departure": 0,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 36,
@@ -3186,18 +3196,20 @@
    "rateBp": 4010,
    "departure": 0,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 36,
@@ -3722,18 +3734,20 @@
    "rateBp": 6641,
    "departure": 0,
    "rounds": {
-    "draftRounds": 3,
+    "draftRounds": 4,
     "rounds": [
      1,
      2,
-     3
+     3,
+     4
     ],
     "refineA": false,
     "refineB": false,
     "files": [
      "draft-round-1.md",
      "draft-round-2.md",
-     "draft-round-3.md"
+     "draft-round-3.md",
+     "draft-round-4.md"
     ]
    },
    "units": 72,
@@ -4244,8 +4258,8 @@
   "totalUnits": 408,
   "n": 408,
   "exhaustive": true,
-  "msPerUnit": 1.28,
-  "exhaustiveMs": 522,
+  "msPerUnit": 0.215,
+  "exhaustiveMs": 88,
   "confidence": "the whole population is walked, so every arm rate is exact and no interval applies",
   "sampleSha": "c0927bbd38b1b7e0d945e4a6c194ee7bfa02194f68daaf33952f0a803ef8e4b4",
   "verdicts": {
@@ -4255,30 +4269,8 @@
   }
  },
  "manifest": {
-  "base": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/taste/m3/cells-base.json",
-  "cells": 73284,
-  "byClass": {
-   "REPLACED": 0,
-   "RE-INDEXED": 0,
-   "ADDITIVE": 182,
-   "WORDING-ONLY": 0,
-   "UNCHANGED": 73102
-  },
-  "added": 0,
-  "removed": 0,
-  "indexOnly": 0,
-  "lines": [
-   "PROSE MANIFEST DIFF · 73284 cells on the tip side",
-   "  REPLACED       cells       0 · towns     0",
-   "  RE-INDEXED     cells       0 · towns     0",
-   "  ADDITIVE       cells     182 · towns    91",
-   "  WORDING-ONLY   cells       0 · towns     0",
-   "  UNCHANGED      cells   73102 · towns   525",
-   "  ADDED          cells       0",
-   "  REMOVED        cells       0",
-   "  (of the UNCHANGED, cells whose audience-filtered INDEX moved with no reader-visible change: 0)"
-  ],
-  "stop": false
+  "executable": false,
+  "why": "no --base cells table was supplied, so no cell can be classified"
  },
  "variety": {
   "executable": false,
@@ -4292,5 +4284,5 @@
   "tieBp": 0,
   "note": ""
  },
- "seconds": 41
+ "seconds": 0
 }
