@@ -120,6 +120,28 @@
       }
     },
     {
+      "id": "passage-shape",
+      "mechanism": "the PASSAGE SHAPE — which of the closed set of three arrangements a composed unit takes (spine then sentence · sentence then spine · the clause seat). A fourth SEEDED DRAW, chartered at SITTING §T.4 adopting agenda C⁗, on its own suffix key `${seed}::${blockId}::${poolKey}::shape::${shape}` as an ARGMAX over the lawful set, so the variant, face and joint draws are untouched by a shape arriving and a shape becoming lawful takes only the reads it wins",
+      "shift": "1 — the REWRITE + FACES freeze, IF the sitting adopts a second shape at 8a's fold. NOTHING SHIPS A SECOND SHAPE AT car 8a: the model and its report landed at 8a-2 and `composeStateProse.js` is not a caller, so the shipped arrangement is shape 1 and this row moves no read yet",
+      "door": "src/domain/prose/passageShapes.js (the closed set and the draw) and src/domain/display/stateProse/composeStateProse.js `arrange` (the shipped arrangement). The second pin is the one that matters: it reds the day the composer takes a shape, which is the declared act",
+      "idiom": "the set is CLOSED AT THREE by the owner's ruling (a) and a fourth is an owner act, never an author's; the shape is a SURFACE like a face and moves no fact between the record and the pen; a shape is LICENSED by the composition and never rescued by it, so the lawful set is computed first and the draw only selects among it",
+      "pin": [
+        { "kind": "source", "file": "src/domain/prose/passageShapes.js", "contains": ["'spine-then-sentence', 'sentence-then-spine', 'clause-seat',", "export const SHIPPED_SHAPE = 'spine-then-sentence';"] },
+        { "kind": "source", "file": "src/domain/display/stateProse/composeStateProse.js", "contains": ["const opener = asOpener(modifier.phrase);", "if (!opener) return `${spineText} ${modifier.text}`;"] }
+      ],
+      "measured": {
+        "_doc": "THE DISTRIBUTION TABLE ruling (c) asks the sitting for. It cannot be read on the SHIPPED corpus and the reason is pinned two rows below: `attach-set` is 0, so no unit has a modifier and no unit has a shape question. The figures here are the script DRIVEN on the taste's committed dock (laneTASTE f07b98529, read-only history), which is the only corpus carrying attach rows at this date. 8b re-runs it on the defense section and the sitting rules there.",
+        "measuredBy": "node scripts/prose-shape-report.mjs --corpus <corpus.json>",
+        "corpus": "laneTASTE @ f07b98529 — 7 attach-bearing pools, 408 composable units, 64 fixed seeds, 26,112 draws",
+        "shippedCorpusUnits": 0,
+        "marginal": { "spine-then-sentence": "91.56 %", "sentence-then-spine": "8.44 %", "clause-seat": "0.00 %" },
+        "conditional": { "lawful set = {1} (n 21824)": { "spine-then-sentence": "100.00 %" }, "lawful set = {1,2} (n 4288)": { "spine-then-sentence": "48.58 %", "sentence-then-spine": "51.42 %" } },
+        "reading": "SHAPE 1's MARGINAL DOMINANCE IS NOT A TIC, which is the exact discrimination ruling (c) was written to make. Conditional on both shapes being lawful the draw splits 48.58 / 51.42 per cent, so shape 1 leads the marginal only because it is the sole lawful shape on 21,824 of 26,112 draws. 341 of the 408 units refuse shape 2 for want of a noun carried into the spine, so the thread rule is the binding constraint and not the draw.",
+        "duplicateUnitRateBp": { "fixed": 9844, "licensedDraw": 9818 },
+        "note": "The duplicate-unit rate moves 26 basis points, which is small and is reported as small: shape variation is not a lever on repetition at this sample, and ruling (c) pairs the two columns precisely so a small movement there cannot be sold as a large one."
+      }
+    },
+    {
       "id": "face-draw-key",
       "mechanism": "the wording-face key — a SUFFIX of the variant key, so the parent string never changes",
       "shift": "1 — the faces land with the rewrite",

@@ -982,7 +982,7 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
       + `${SHIFT_REGISTER.measuredAt.pools} pools / ${SHIFT_REGISTER.measuredAt.variants} variants\n`);
     process.stdout.write(`${lines.join('\n')}\n`);
     // Non-vacuity: the file was read and it holds the roster ARCH §8.6 enumerates.
-    expect(SHIFT_REGISTER.mechanisms.length).toBeGreaterThanOrEqual(14);
+    expect(SHIFT_REGISTER.mechanisms.length).toBeGreaterThanOrEqual(15);
     const ids = SHIFT_REGISTER.mechanisms.map((m) => m.id);
     expect(new Set(ids).size, 'a duplicate mechanism id').toBe(ids.length);
     for (const m of SHIFT_REGISTER.mechanisms) {
@@ -996,6 +996,11 @@ describe('SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (A
       'variant-count-per-pool', 'face-count-per-variant', 'vids', 'pool-key-rename',
       'connective-list-length', 'norm-bit', 'attach-set', 'draw-formula',
       'comparator-and-band-rule', 'fact-and-position-budget', 'registry-id', 'instance-key',
+      // REWRITE car 8a-2. The FOURTH seeded draw. It ships nothing yet — the composer is not
+      // a caller — and it is on the register from the day the mechanism exists rather than
+      // from the day it moves a read, which is the register's whole discipline: a mechanism
+      // absent from this file is a same-seed text shift nobody signed.
+      'passage-shape',
     ]));
   });
 

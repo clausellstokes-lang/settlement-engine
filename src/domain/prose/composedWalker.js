@@ -497,8 +497,19 @@ const ALTERNATIVE_STOP = Object.freeze([
   'thing', 'things',
 ]);
 
-/** @param {string} text @returns {string[]} the content words of a phrase, lower-cased */
-function contentWords(text) {
+/**
+ * The content words of a phrase, lower-cased and de-duplicated.
+ *
+ * ⛔ EXPORTED AT REWRITE car 8a-2 SO THERE IS ONE STOP LIST AND NOT TWO. `passageShapes.js`
+ * needs exactly this vocabulary to decide whether an added face carries a noun into the
+ * spine, and the words this list refuses — `town`, `settlement`, `place`, `thing` — are
+ * precisely the ones that would make every pair of sentences in the dossier look connected.
+ * A second copy would drift, and the drift would be invisible because both halves would agree
+ * with themselves.
+ * @param {string} text
+ * @returns {string[]}
+ */
+export function contentWords(text) {
   const words = String(text || '').toLowerCase().replace(/\{[a-z_0-9]+\}/g, ' ')
     .replace(/[^a-z ]/g, ' ').split(/\s+/)
     .filter((word) => word.length >= 4 && !ALTERNATIVE_STOP.includes(word));

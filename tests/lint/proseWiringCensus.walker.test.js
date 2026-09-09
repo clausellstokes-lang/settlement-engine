@@ -457,6 +457,14 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
       // product surface, and the fence is cheapest before that happens rather than after.
       'src/domain/prose/holderTable.js',
       'src/domain/prose/moveGrammar.js',
+      // ⭐ THE FOURTEENTH, ADDED BY REWRITE car 8a-2. `passageShapes.js` models the fourth
+      // seeded draw — which of three arrangements a composed unit takes. It is fenced for the
+      // same reason `composedWalker.js` is, only more so: its subject is a PRODUCT shape, and
+      // the day the sitting adopts a second shape the composer becomes its caller BY A
+      // DECLARED ACT on the SHIFT REGISTER's `passage-shape` row. Until then no product
+      // surface may reach it, and this fence is what makes "nothing ships a second shape at
+      // car 8a" a measurement rather than a promise.
+      'src/domain/prose/passageShapes.js',
       'src/domain/prose/plantLedger.js',
       'src/domain/prose/presenceMeasure.js',
       'src/domain/prose/proseFingerprint.js',
@@ -517,13 +525,29 @@ describe('THE CONTROLS — each must fire, and each cure must stop it firing', (
     // pass this loop and prove nothing.
     const branchHits = files.filter(([, text]) => text.includes('wiringBranch')).map(([p]) => p);
     expect(branchHits).toEqual(['src/domain/prose/wiringBranch.js', 'src/domain/prose/wiringCensus.js']);
-    // AND THE TWELFTH IS REACHED FROM NOWHERE AT ALL, which is a THIRD shape and needs saying:
-    // the composed walker is a GATE instrument with no importer inside the island either, so
-    // its fence holds vacuously today. The arm asserts exactly that state rather than letting a
-    // future importer arrive unremarked — `composedWalker` names itself and nothing else names
-    // it, and a desk that reached for it would move this list.
+    // AND THE TWELFTH IS REACHED FROM EXACTLY ONE PLACE INSIDE THE ISLAND SINCE REWRITE car
+    // 8a-2, which is the state this arm was written to notice. It said "a desk that reached
+    // for it would move this list", and the list moved — lawfully, to an importer INSIDE the
+    // island: `passageShapes.js` takes `contentWords` from the composed walker so the estate
+    // has ONE stop list rather than two, and a second copy of that vocabulary is exactly the
+    // drift nobody would see (both halves would agree with themselves). The fence is
+    // unchanged: no file OUTSIDE the island names it, which the breaches loop above proves.
     const composedHits = files.filter(([, text]) => text.includes('composedWalker')).map(([p]) => p);
-    expect(composedHits).toEqual(['src/domain/prose/composedWalker.js']);
+    expect(composedHits).toEqual([
+      'src/domain/prose/composedWalker.js', 'src/domain/prose/passageShapes.js',
+    ]);
+    // AND THE FOURTEENTH IS REACHED FROM NOWHERE AT ALL, which is the vacuous-fence shape the
+    // composed walker used to hold and now hands on: `passageShapes` names itself and nothing
+    // in src/ names it, because the composer is deliberately NOT its caller at car 8a. The day
+    // `composeStateProse.js` appears in this list, a second passage shape has shipped and the
+    // register's `passage-shape` row owes a declared movement.
+    const shapeHits = files.filter(([, text]) => text.includes('passageShapes')).map(([p]) => p);
+    expect(shapeHits, 'nothing ships a second shape at car 8a, measured rather than promised')
+      .toEqual([
+        // NAMED in the composed walker's `contentWords` docblock, which is lawful for the same
+        // reason arm A13's docblock may name `holderTable`: both files are inside the island.
+        'src/domain/prose/composedWalker.js', 'src/domain/prose/passageShapes.js',
+      ]);
   });
 });
 

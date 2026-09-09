@@ -45,6 +45,7 @@ results=()
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
   src/domain/prose/composedWalker.js
+  src/domain/prose/passageShapes.js
   src/domain/display/stateProse/composeStateProse.js
   src/data/dossierStateProse/stressors.generated.js
   src/domain/prose/wiringCensus.js
@@ -1380,6 +1381,24 @@ check_caught "compose-state-prose-fence/the composer's tie-break becomes a local
 #     => 66 passed.
 perl -0pi -e "s/emit\(out, row\(id, 'A2', 'WITHHELD', 'unestablished join'/emit(out, row(id, 'A2', 'FAIL', 'unestablished join'/" src/domain/prose/composedWalker.js
 check_caught "prose-composed-walker/an unestablished relation join is reported as a refused one" src/domain/prose/composedWalker.js "npx vitest run tests/lint/proseComposed.walker.test.js --no-file-parallelism"
+
+# ── REWRITE car 8a-2 · THE PASSAGE SHAPE IS RESCUED INSTEAD OF LICENSED ────────────────
+#     The owner's ruling (b) on passage shapes is one sentence and it is the whole design:
+#     "A SHAPE IS LICENSED BY THE COMPOSITION, NEVER RESCUED BY IT". Shape 2 puts the added
+#     fact FIRST, so the reader meets it with no spine to hang it on, and the only thing that
+#     makes it readable is the added sentence handing a noun forward into the spine. Remove
+#     that guard and every unit becomes eligible for sentence-first — the shape stops being
+#     licensed by the composition and starts being available to it, which is the failure the
+#     module exists to refuse and which no distribution table would show as anything but a
+#     healthy-looking rise in shape 2's share.
+#     The plant is ONE CHARACTER: `> 0` becomes `>= 0`, so `nounCarry` reports a carry on
+#     every pair including pairs sharing no word at all.
+#     Measured before landing (lane REWRITE, 2026-09-09; cp backup, cp restore, never the
+#     checkout family; md5 dae4ad49fd1af7510aa59c14f1bdfd98 before and after): clean tree =>
+#     11 passed; planted => EXACTLY 1 red, "SHAPE 2 NEEDS THE NOUN CARRY", 10 passed;
+#     restored cmp-identical => 11 passed.
+perl -0pi -e "s/carries: shared\.length > 0/carries: shared.length >= 0/" src/domain/prose/passageShapes.js
+check_caught "prose-passage-shapes/a passage shape is rescued by the composition instead of licensed by it" src/domain/prose/passageShapes.js "npx vitest run tests/lint/prosePassageShapes.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
