@@ -2304,11 +2304,206 @@ fresh recording mid-car at 8a-11-4**. Four independent recordings, one digest: n
 
 ## CAR 8a-12 — THE NINE ANCHORS RE-SEEDED
 
-**PARTIAL — in flight.** Seat: Opus 5 — Fable-unvalidated. Dock `laneREWRITE`, from `b005886ef`.
-Chartered by ADDENDUM 4 (chair, 2026-09-09 09:2x) over the §919 whole-suite proof
-(`whole-919.log`: 32,919 passed · 14 failed; five expected reds, NINE new ones, all in
-`tests/ui/`). Every new red is a LIVENESS ANCHOR on a DRAWN SENTENCE that the SIGNED
-index-stable draw of 8a-1 now draws differently under the tests' own seeds. The act follows
-8a-1's own ("THREE PRE-EXISTING PINS ON DRAWN TEXT, RE-SEEDED NOT DELETED"): a new seed that
-still draws the anchored member. **No anchor is deleted, no assertion weakened, no `src/` byte
-moved.** Sections below are filled as each step's command exits.
+**LANDED** as one commit `188010225` over `b005886ef`. Seat: Opus 5 — Fable-unvalidated. Dock
+`laneREWRITE`. Chartered by ADDENDUM 4 (chair, 2026-09-09 09:2x) over the §919 whole-suite
+proof (`whole-919.log`: 32,919 passed · 14 failed — five expected reds and NINE new ones, all
+in `tests/ui/`). Porcelain 0 and runners 0 at the return.
+
+### WHAT THE NINE ACTUALLY WERE
+
+Every one is a LIVENESS ANCHOR: the `before` half of `expectPresentThenAbsent`, whose whole
+job is that the "and it is gone on a public dossier" half cannot pass over an empty page.
+Each anchor is a DRAWN member of a pool, and which member a pool draws is a function of the
+fixture's `_seed` (`stateProseKernel.js` `drawVariant`, keyed `seed::blockId::poolKey`). Car
+8a-1's index-stable draw (ARCH §13 row 22, SIGNED at SITTING §N.2; RE-INDEXED 43,685 of
+73,284 = 59.61 %) therefore moved the drawn member **without moving one byte of the corpus,
+the desk or the paid-surface gate those arms exist to prove** — the same class 8a-1 met and
+cured in three desk suites, in a family neither its acceptance line nor the cure car's
+reached.
+
+⛔ **THE NINE ARMS WERE NINE, BUT THE PINS WERE SIXTEEN.** A `for` loop over pins throws on
+the first, so the proof's nine failure lines named nine sentences and HID the rest: of the 23
+corpus pins in `generalDeskTabFlow.test.js`, **sixteen had moved**, not eight. Measured before
+any edit, by driving the desk readers at the shipped seeds (below) — a seat that had cured
+only the nine printed sentences would have landed a car that reds on the next loop iteration.
+
+### THE INSTRUMENT, CALIBRATED BEFORE IT WAS TRUSTED
+
+The search ran on the desk readers rather than on a React render, because a render costs
+~10 ms and `SPEAKING` needed six figures of candidates. That substitution is only safe if the
+reader reproduces the DOM's verdict, so it was **calibrated against the proof's own readings
+first** — every fixture, at its shipped seed, printed exactly what `whole-919.log` reported,
+present and absent alike:
+
+| fixture | shipped seed | at the shipped seed |
+|---|---|---|
+| `SPEAKING` (+ `COUNTED`) | `steinmark` | all 8 ABSENT |
+| `CHRONICLED` | `steinmark` | IDENTITY, RECORD absent · MARKER, FOUNDED present |
+| `UNVIABLE` | `steinmark` | FIRST_SURVEY absent · VERDICT, CONTRADICTIONS present |
+| `FALLEN` | `ashfall` | REMNANT, RUIN absent · STEADING present |
+| `LINKED` | `steinmark` | CONTACTS, ENGAGEMENT absent · TIE present |
+| `ECO SPEAKING` | `forge_town` | FOOD absent · HEADER present |
+| `FORGE` (DS-GEN-18) | `forge_town` | CRAFT present — **no act owed** |
+
+### THE ACT, PER FIXTURE
+
+The anchor helper's own words are the instruction — *"choose an anchor that still travels this
+path — do not delete the anchor to get green"* — and 8a-1's own act is the precedent. Six
+fixtures take a new `_seed` that draws EVERY member pinned off it. **No anchor deleted, no
+assertion weakened to a substring that would pass vacuously, no `src/` byte moved:** the whole
+diff is six seed strings plus the comments that say why (`git diff -U0` filtered to
+non-comment lines shows exactly six pairs).
+
+| file | fixture · arms | old seed → new seed | pins that had to hold together | candidates tried |
+|---|---|---|---|---|
+| `tests/ui/generalDeskTabFlow.test.js` | `SPEAKING` — the six-blocks loop, the ONE CALLER counts, DS-POP-3 (via `COUNTED`), the unread ring | `steinmark` → **`steinmark-16jm`** | 8: DS-GEN-12/13/17/3/2/7, DS-REL-2, DS-POP-3 | 111,965 |
+| ″ | `CHRONICLED` — the history positions, the `{calamity}` doubled-article arm | `steinmark` → **`steinmark-w`** | 4: DS-GEN-9 ×2, DS-GEN-14, DS-GEN-16 | 33 |
+| ″ | `UNVIABLE` — the three DS-GEN-11 lenses | `steinmark` → **`steinmark-c`** | 3 | 23 |
+| ″ | `FALLEN` — DS-GEN-8's three surfaces | `ashfall` → **`ashfall-27`** | 3: remnant, ancient ruin, forced steading | 86 |
+| ″ | `LINKED` — DS-REL-1's two lenses and the engagement | `steinmark` → **`steinmark-v`** | 3 + the patron-end exclusion | 121 |
+| `tests/ui/economicsTabFlow.test.js` | `SPEAKING` — the public gate | `forge_town` → **`forge_town-b`** | 2: DS-ECO-1, DS-ECO-9 | 22 |
+
+`FORGE` (DS-GEN-18), `HOOKED` (the framing arm compares render LENGTHS, not sentences), the
+`living` control (asserts the empty string) and DESK-ECON2's `GROUND` (**no `_seed` and no
+`id` at all — canonical-at-zero by kernel law 4, which no draw rule can move**) are LEFT
+untouched, each for the reason named.
+
+⚠ **THE SEEDS ARE COORDINATES, NOT NAMES, AND `steinmark-16jm` IS UGLY FOR A REASON.** A
+fixture's seed must satisfy every pin drawn off it AT ONCE; eight independent pools is a joint
+event of about 1 in 112,000, so any seed that satisfies it looks random. That is a property of
+the requirement, not a choice — three alternates were recorded in case one is preferred
+(`steinmark-1zk2`, `steinmark-2eef`). The reasoning is written into the file above the
+fixtures so the next seat re-seeds rather than deletes.
+
+### THE NEGATIVE CONTROL — WHY THIS GREEN IS NOT A VACUOUS ONE
+
+Not one assertion string changed. The identical assertions, against the identical helper, RED
+at the old seeds (that is `whole-919.log`, executed) and PASS at the new ones. The proof that
+these anchors can still fail is the proof that already failed them.
+
+### THE SWEEP — every test family, matched rather than eyeballed
+
+⛔ **THE CLASS IS NARROWER THAN "A PROSE PIN".** The index-stable draw moves a read only where
+a pool's members carry a `vid`; a pool with none falls back to the modulus and nothing moves.
+The corpus AT RISK is therefore exactly the six STATE leaves, and the risk rides one field of
+one variant: `"text"`. A pool KEY, a block id, a title, a slot name and an `angle` are all
+draw-immune — that is what ADDENDUM 4 means by "anchor on the key".
+
+    CORPUS AT RISK    6 state leaves, 2,264 variant texts
+    CAUSAL REGISTER   468 variant texts, 0 carry a vid — MODULUS FALLBACK, no read can move
+    SEARCHED          2,614 files under tests/ across 38 families
+                      (domain 981 · components 257 · lib 169 · ui 157 · lint 156 · security 147
+                       · store 141 · generators 111 · property 90 · build 54 · pdf 43
+                       · edgeFunctions 38 · joins 32 · helpers 31 · data 24 · architecture 19
+                       · design 20 · docs 19 · simulation 15 · fixtures 15 · ops 14
+                       · soak-harness 12 · copy 10 · kernel 10 · hooks 9 · config 8 · scripts 7
+                       · application 6 · foundry 5 · interior 4 · map 2 · perf 2 · utils 1
+                       · mcp 1 · smoke 1 · setup 1 · dossier 1 · generation.test.js 1)
+    CANDIDATES        68,065 string literals of >= 18 chars carrying a space
+    PINS FOUND        65 literals in 18 files
+
+Matched by ALIGNMENT, not by grep: each variant is split on its `{slot}`s into FIXED SEGMENTS
+— the only runs a renderer cannot alter — and a literal counts when it can be aligned against
+that list with every slot standing for one arbitrary fill of 1..80 characters, over a floor of
+**18 characters of fixed text** (without that floor an alignment can spend the whole literal
+inside fills and match nothing, which is the vacuity the sweep exists to avoid: at floor 0 it
+reported 49,233 "pins"). Candidates were narrowed by the FOUR rarest indexed words rather than
+the single rarest — a fragment carries filled slots, and a fill word can be rare in the corpus
+for a different variant entirely, which is what made the first pass report a clean sweep over
+files that do carry pins.
+
+**THE LEDGER — 18 files, 2 moved, 16 left:**
+
+| file | pins | act | reason |
+|---|---|---|---|
+| `tests/ui/generalDeskTabFlow.test.js` | 23 | **MOVED** (5 seeds) | the eight red arms |
+| `tests/ui/economicsTabFlow.test.js` | 9 | **MOVED** (1 seed) | the ninth red arm; the other 7 are DESK-ECON2's canonical-at-zero fixture |
+| `tests/domain/generalStateProseDesk.test.js` | 3 | LEFT | a real seeded draw — **green focused, 69 passed** |
+| `tests/domain/defenseStateProseDesk.test.js` | 3 | LEFT | a real seeded draw, re-seeded already at 8a-1 — **green focused, 91 passed** |
+| `tests/domain/economyStateProseDesk.test.js` | 3 | LEFT | 2 pins carry an UNRENDERED `{slot}` (a corpus read, not a draw); 1 is docblock text — **green focused, 59 passed** |
+| `tests/domain/warFaithStateProseDesk.test.js` | 3 | LEFT | a real seeded draw, re-seeded already at 8a-1 (`thornwall-b`) — **green focused, 28 passed** |
+| `tests/data/dossierStateProseProjection.contract.test.js` | 2 | LEFT | reads the projection, not a draw — **green, 77 passed** |
+| `tests/lint/proseWaveGate.walker.test.js` | 5 | LEFT | corpus text as fixture INPUT to the gate, never drawn — green in `tests/lint` whole |
+| `tests/lint/proseEntryContradiction.walker.test.js` | 3 | LEFT | same — walker input |
+| `tests/lint/proseComposed.walker.test.js` | 3 | LEFT | same — walker input, pinned WITH its `{settlement}` unfilled |
+| `tests/lint/dossierMountRegistry.walker.test.js` | 1 | LEFT | a hand-built rung fixture, not a draw |
+| `tests/lint/envoyKindPools.walker.test.js` | 1 | LEFT | a different pool family's authored list |
+| `tests/domain/settlementLifecycleFirstClass.test.js` | 1 | LEFT | the CHRONICLE event's description — generator-authored; the phrase is shared with the corpus, the code path is not |
+| `tests/domain/magicRegimeLifecycle.test.js` | 1 | LEFT | `remnantReason`, a generator field — never reaches `drawVariant` |
+| `tests/generators/settlementReason.test.js` | 1 | LEFT | a generator line (`lines[0]`), same |
+| `tests/domain/stressorAftermath.test.js` | 1 | LEFT | a TEST TITLE — false positive of the matcher |
+| `tests/domain/npc/paradigmAxisCatalog.test.js` | 1 | LEFT | a test title — false positive |
+| `tests/ui/warRemembranceReader.test.jsx` | 1 | LEFT | a UI heading used as an `expectAbsentWithAnchor` anchor; not corpus prose — false positive, and green in `tests/ui` whole |
+
+⚠ **TWO KNOWN RECALL LIMITS OF THE MATCHER, stated rather than hidden.** (1) The 18-character
+fixed-text floor rejects a real pin whose fixed run is shorter — `PATRON_LINE`
+(`Thornmere looks to Steinmark`, fixed run `" looks to "` = 10) is a genuine corpus pin the
+sweep does NOT list; it is covered here because it sits in a file this car moved. (2) A pin
+whose every content word is a slot fill cannot be narrowed to its variant. Both limits shrink
+the ledger, never inflate it, and both are why the ledger is offered beside the executed
+whole-suite proof rather than instead of it.
+
+### ⛔ A CORRECTION OWED — THE COMMIT MESSAGE'S SWEEP COUNT IS WRONG
+
+`188010225`'s message says **"56 pins in 18 files"**. The final figure is **65 pins in 18
+files**; 56 was the count from the pass BEFORE the rare-word narrowing was widened from one
+word to four, and the two numbers were crossed while the message was written. The FILE count
+(18) and every conclusion drawn from the ledger are unaffected — the widening only ADDED nine
+pins, all of them in files already listed. Recorded here rather than amended (the lane may not
+amend); the chair may want it in the §919 row.
+
+### ACCEPTANCE — every figure from a command that was run, with its exit
+
+| gate | command | result | exit |
+|---|---|---|---|
+| the two cured files | `npx vitest run tests/ui/generalDeskTabFlow.test.js` | **Tests 24 passed (24)** · Test Files 1 passed | **0** |
+| ″ | `npx vitest run tests/ui/economicsTabFlow.test.js` | **Tests 13 passed (13)** · Test Files 1 passed | **0** |
+| **`tests/ui` WHOLE** (the car's named acceptance) | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/ui` | **Test Files 157 passed (157) · Tests 989 passed (989)** | **0** |
+| **`tests/lint` WHOLE** | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint` | **Test Files 154 passed (154) · Tests 2,593 passed (2,593)** | **0** |
+| the projection contract | `npx vitest run tests/data/dossierStateProseProjection.contract.test.js` | **Tests 77 passed (77)** | **0** |
+| strict domain | `node scripts/check-domain-strict.mjs` | `✓ no strict-type regressions (1120 errors, ceiling 1120)` | **0** |
+| typecheck ratchet | `npm run typecheck:ratchet` | `OK — no type regressions (173 error(s), ceiling 173)` | **0** |
+| eslint | `npx eslint <the two touched files>` | no output | **0** |
+| sweep evidence | four desk suites, focused, one at a time | 69 · 91 · 59 · 28 passed | **0** each |
+| runner count | own shell, before every vitest | **0** every time (11 checks) | — |
+| machine load | `ps -r` before the whole runs | one `/bin/zsh` at 0.0 % — no system process to make a run vacuous | — |
+
+**THE ONE RED, INHERITED AND UNCHANGED.** `npx vitest run tests/copy/voiceMechanics.test.js`
+exits 1 at its **inherited two files exactly**, byte-identical to the §917 tip and to
+ADDENDUM 2's declaration:
+
+    src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+    src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+
+Tests 1 failed | 18 passed (19). Neither file is touched by this car (the whole diff is two
+files under `tests/ui`), so this is the banked E2 ratchet and not this car's.
+
+### FINDINGS FOR THE FOLD AND THE §919 ROW
+
+1. ⚠ **THESE ANCHORS WILL RE-ROLL AGAIN, BY DESIGN, AND THAT IS THE REWRITE'S OWN DOING.**
+   Under the index-stable draw, appending a wording to an n-member pool moves about `1/(n+1)`
+   of its reads. NEVER TRIM means every block car of the rewrite appends. `SPEAKING` alone
+   pins eight pools, so a car that adds one wording to each is expected to break roughly
+   `8/(n+1)` ≈ 1–2 of its anchors — and the loop will again print ONE of them. This is not an
+   argument against the draw (that is signed and correct); it is a standing cost of pinning a
+   DRAWN sentence in a rendered-DOM test, and it now falls due once per block car. **Two
+   structural cures are available and neither is this car's to take:** give these arms an
+   anchor no draw can move (the desk's rung `provenance.poolKey` reaches the reader nowhere,
+   so it would need a `data-` attribute on the rendering — a `src/` change), or teach the
+   wave gate of 8a-5 to re-seed the UI fixtures as part of a block's keep-or-revert. Flagged
+   for the skeptic pass and for 8b's brief.
+2. ⚠ **THE ACCEPTANCE-GAP HAZARD NOW HAS ITS FOURTH FAMILY, AND A FIFTH IS PREDICTABLE.**
+   8a's line reached neither `tests/ui` nor `tests/domain`; 8a-11's reached neither. The
+   sweep's ledger says where the next one will land: `tests/domain`'s four desk suites carry
+   nine live seeded pins and are in NO car's acceptance line — they are green today only
+   because 8a-1 happened to cure three of them by hand. Naming the four desk suites plus
+   `tests/ui/generalDeskTabFlow.test.js` and `tests/ui/economicsTabFlow.test.js` as a standing
+   six-file gate after any draw-touching commit would close the class; recommended to the
+   chair, not taken here.
+3. The instruments are in this seat's scratchpad
+   (`.../67af10e4-.../scratchpad/s8a12/`: `probe.mjs` the calibrated seed search,
+   `sweep.mjs` the alignment matcher, `sweep.txt` the full 65-pin listing with each pin's
+   corpus source printed beside it). Nothing was written into the dock, and none of it is
+   committed — if the chair wants the matcher standing, it is a walker's worth of code and a
+   car of its own.
+
