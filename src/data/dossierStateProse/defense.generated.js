@@ -133,101 +133,161 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "terrain FAVOURABLE to the defender": [
         {
           "angle": "visitor",
-          "text": "The ground does more for {settlement} than the town does. The approach is narrow, and anything coming at it has to come the long way and in the open.",
+          "text": "The way into {settlement} runs over ground of the kind that favours the defender.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Ground that is hard on an attacker lies about {settlement}.",
+            "Whatever comes at {settlement} crosses the defender's ground.",
+            "The advantage of the ground at {settlement} is the defender's."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "{settlement} is sited where the terrain carries part of the defense; what the town has built is worth more here than the same works would be on flat ground.",
+          "text": "Part of what defends {settlement} is the site itself.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "What the site gives {settlement} is unbuilt defence.",
+            "Among what holds {settlement} is the ground it stands on.",
+            "In the reckoning at {settlement}, the ground stands to the defender's account."
+          ]
         },
         {
           "angle": "counterforce",
-          "text": "The ground here does the arguing. Anything weighing an attempt on {settlement} has to weigh the approach first, and the approach is the part that does not improve with numbers.",
+          "text": "An attempt on {settlement} meets the ground before it meets the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Force brought against {settlement} has the country to get through.",
+            "Ground stands against whatever comes at {settlement}.",
+            "The country about {settlement} counts for the defender."
+          ]
         }
       ],
       "terrain EXPOSED": [
         {
           "angle": "visitor",
-          "text": "{settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.",
+          "text": "The approaches to {settlement} lie open, and the ground carries no part of the defense.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "Open country comes up to {settlement} on every side, and a defense takes nothing from such ground.",
+            "No ground about {settlement} serves a defense. The country is level to the edge of the town.",
+            "The horizon runs unbroken around {settlement}, and the ground beneath the town does nothing in its defense."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "The site gives {settlement} nothing defensively. Every advantage the town holds is one it has paid for and must keep paying for.",
+          "text": "The ground at {settlement} counts for nothing in the defense of the town.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The defense of {settlement} owes nothing to its ground.",
+            "Nothing in the site of {settlement} tells in the town's defense.",
+            "In any account of its defense, {settlement} takes nothing from its site."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.",
+          "text": "No hill stands over {settlement} and no narrows guard the approach. The ground gives the town no cover.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Nothing overlooks {settlement} and nothing pinches the approach, and the ground takes no part in the defense.",
+            "The country about {settlement} shows no rise and no narrows, and the defense takes nothing from the ground.",
+            "The town has no hill to hold and no narrows to close, and the ground at {settlement} does not enter the defense."
+          ]
         }
       ],
       "strategic value HIGH": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds something worth taking, and that is the whole of the defensive problem: the town must be worth more to keep than it is to seize.",
+          "text": "{settlement} holds something worth taking.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "In worth, {settlement} stands high.",
+            "What {settlement} has is worth an attempt on it.",
+            "The gain in taking {settlement} would not be small."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town is aware of what it sits on and aware that others are aware, and the awareness runs underneath a great deal of what it decides.",
+          "text": "What the town sits on is worth having.",
           "slots": [],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Seizing the town would repay the effort.",
+            "The town is worth the taking.",
+            "Reckoned for the taking, the town comes out worth it."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.",
+          "text": "A place worth wanting is what {settlement} is.",
           "slots": [
             "settlement"
           ],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "The taking of {settlement} would be worth the doing.",
+            "High worth attaches to {settlement}.",
+            "On the scale of what a place is worth taking, {settlement} sits high."
+          ]
         }
       ],
       "strategic value LOW": [
         {
           "angle": "counterforce",
-          "text": "Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.",
+          "text": "Nothing at {settlement} is worth the taking.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "No prize is to be had at {settlement}.",
+            "As plunder {settlement} comes to nothing.",
+            "What could be seized at {settlement} is not worth the seizing."
+          ]
         },
         {
           "angle": "ledger",
-          "text": "{settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.",
+          "text": "What {settlement} holds does not make it a prize.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "The worth of taking {settlement} is nothing.",
+            "Little at {settlement} would repay the taking.",
+            "Taking {settlement} would gain nothing."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.",
+          "text": "The town has nothing in it worth taking.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "The pickings in the town would be slim.",
+            "Anything carried out of the town would not be worth the carrying.",
+            "Nothing worth taking away is kept in the town."
+          ]
         }
       ]
     },
@@ -300,9 +360,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -316,9 +376,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -332,9 +392,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
@@ -348,9 +408,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
-          1,
-          1,
-          1
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
