@@ -377,9 +377,27 @@ lit, and the note says so. The baseline was NOT widened.
 | the byte ratchets `tests/lint/sizeBaseline.test.js`, `tests/lint/proseCorpusBytes.test.js` | green inside the whole `tests/lint` run |
 | first-paint byte budget `tests/build/vendorPdfLazy.test.js` | **27 passed / 27 skipped** |
 | `eslint src/ tests/ scripts/` | **exit 0** — 0 errors, 31 warnings, **none on any file this lane touched** |
+| voice E2 `tests/copy/voiceMechanics.test.js` | **1 failed / 18 passed** — and the failure is INHERITED, not this lane's (below) |
 | `tests/lint/testRatchet.test.js` | 94 passed |
 | porcelain | **0** |
 | vitest runners at return | **0** |
+
+### ⚠ THE VOICE E2 RED IS INHERITED, AND THE PROOF IS THREE-WAY
+The arm reports exactly two files:
+
+```
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+```
+
+1. **The chair predicted this state at §916**, in `run-registers-916.sh`'s own PREDICTIONS line:
+   "voice E2 = the two INHERITED banked files (labelBands em 5, generalStateProse em 3)". The
+   file names and both counts match exactly.
+2. **`git diff --stat 8961388ce..HEAD` on both files is EMPTY** — this lane never touched either.
+3. **Every line this lane added to a src file is a COMMENT**, except two: the
+   `loadGenerationLawPayloads` import and its `await` in `settlementGenerateAction.js`. Neither
+   carries an em dash, an exclamation mark, a `toFixed` or a float interpolation, and the E2
+   ratchet's scope is `src/data + src/domain` in any case.
 
 ⚠ **NOT RUN, AND WHY:** `node scripts/check-test-ratchet.mjs --update` (the census totals) runs the
 WHOLE SUITE, which this lane's fences forbid; it is the chair's ratchet ritual. No vite build was
