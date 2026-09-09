@@ -1018,49 +1018,49 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "All the food that comes to {settlement}, grown or carried, still leaves the town short of what it eats.",
-            "Food to be had at {settlement} does not go round.",
-            "What lies in hand at {settlement} does not stretch to feed the town."
+            "What is grown at {settlement} and what is carried in do not, taken together, amount to what the town eats.",
+            "Food reaching {settlement} stops short of the town's own eating.",
+            "Beside what is eaten, the food {settlement} comes by does not stand level."
           ]
         },
         {
           "angle": "plain",
-          "text": "The town does not feed itself out of what {settlement} raises and brings in.",
+          "text": "Out of what is raised and brought in, the town at {settlement} is not fed.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "For its food the town at {settlement} comes up short.",
             "Nothing that {settlement} raises or takes in is enough to feed the town.",
-            "Enough food is beyond {settlement} as things stand."
+            "Provision at {settlement} does not answer the town's need.",
+            "For its food the town at {settlement} comes up short."
           ]
         },
         {
           "angle": "plain",
-          "text": "What the town eats at {settlement} outruns the food in hand.",
+          "text": "At {settlement} the town is short in the matter of food.",
           "slots": [
             "settlement"
           ],
           "vid": 3,
           "wordings": [
-            "A shortfall in food stands between what {settlement} eats and what it comes by.",
-            "Short in food is how the town at {settlement} stands.",
-            "In the matter of food the town at {settlement} does not come by enough to eat."
+            "Want of food is where the town at {settlement} stands.",
+            "What lies in hand at {settlement} does not stretch to feed the town.",
+            "Enough food is beyond {settlement} as things stand."
           ]
         }
       ],
       "stores: import-fed": [
         {
           "angle": "plain",
-          "text": "The food eaten at {settlement} is brought in from outside the town.",
+          "text": "The food eaten at {settlement} comes in from outside the town.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "From outside the town comes the food that {settlement} eats.",
-            "Food is carried to {settlement} out of other places.",
+            "From beyond the town comes what {settlement} eats.",
+            "Food is carried to {settlement} from other places.",
             "At {settlement} the food is fetched in from elsewhere."
           ]
         },
@@ -1072,22 +1072,22 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "The town lives on food carried into {settlement} from elsewhere.",
-            "In the matter of food, {settlement} is provisioned from outside the town.",
-            "What keeps {settlement} fed is drawn in from other places."
+            "The town at {settlement} is fed on carried food.",
+            "What the town eats at {settlement} arrives from other parts.",
+            "In the matter of food the town at {settlement} lives on what arrives."
           ]
         },
         {
           "angle": "plain",
-          "text": "The stores at {settlement} are filled from outside the town.",
+          "text": "The stores at {settlement} are filled from other parts.",
           "slots": [
             "settlement"
           ],
           "vid": 3,
           "wordings": [
-            "The reserve held at {settlement} is laid in from elsewhere.",
-            "What stands in store at {settlement} comes from other places.",
-            "Food put by at {settlement} is carried in from outside."
+            "Out of other places comes what the town at {settlement} lays in store.",
+            "Carried food fills the store that {settlement} keeps.",
+            "What {settlement} puts by in store is drawn from elsewhere."
           ]
         }
       ]
@@ -5466,41 +5466,41 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "country: pressed (walled)": [
         {
           "angle": "plain",
-          "text": "The country about {settlement} is on the books as pressed country.",
+          "text": "The country about {settlement} is entered as beset country on the books.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "Pressed is how the country about {settlement} is entered.",
-            "Around {settlement} the country grades as pressed, and holds at that grade.",
-            "The ground about {settlement} comes under the pressed head."
+            "Beset is how {settlement}'s own country takes its grade.",
+            "Under the beset head the country about {settlement} stands.",
+            "Around {settlement} the country is set down as beset country."
           ]
         },
         {
           "angle": "plain",
-          "text": "The ordinary state of the ground about {settlement} is beset country.",
+          "text": "The ordinary case of the country about {settlement} is beset country.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "In the common run of things the country about {settlement} is menaced.",
-            "By plain reckoning the ground about {settlement} stands harried.",
-            "Beset country about {settlement} is the usual case, and the case holds."
+            "In the common run of things the country around {settlement} stands harried.",
+            "Beset country about {settlement} is the standing case of the record.",
+            "By the usual reckoning the country about {settlement} counts as beset."
           ]
         },
         {
           "angle": "plain",
-          "text": "The settled grade does not cover the country about {settlement} at present.",
+          "text": "The settled grade does not cover the country about {settlement} as the record stands.",
           "slots": [
             "settlement"
           ],
           "vid": 3,
           "wordings": [
-            "Beyond {settlement} the country falls outside the settled grade.",
-            "Under the settled grade the ground about {settlement} does not fall.",
-            "Settled country is not the class the ground about {settlement} keeps."
+            "About {settlement} the country falls outside the settled grade.",
+            "Outside the settled grade the country about {settlement} is held.",
+            "Settled is not the grade the country about {settlement} carries."
           ]
         }
       ],
@@ -5513,9 +5513,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "Hard country surrounds {settlement} as a standing fact.",
-            "Danger holds about {settlement} as a fixed feature of that country.",
-            "Hostile country lies about {settlement} in the ordinary way of that ground."
+            "Rough country runs up against {settlement} in the common case.",
+            "Danger holds close about {settlement} as a fixed feature of that hard country.",
+            "About {settlement} the ground carries danger of the standing kind."
           ]
         },
         {
@@ -5526,9 +5526,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "Quiet is not what the country about {settlement} holds.",
-            "In the country around {settlement}, unquiet is the plain state of the ground.",
-            "Unquiet ground lies about {settlement} as the country's plain state."
+            "Hard country lies about {settlement} where quiet would otherwise stand.",
+            "In the country around {settlement}, unquiet is the ordinary state.",
+            "Unquiet ground sits about {settlement} in the plain way of that country."
           ]
         },
         {
@@ -5541,7 +5541,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Danger of the continuing kind is the plain condition of {settlement}'s country.",
             "Live danger runs through the country about {settlement} as a standing state of the ground.",
-            "Trouble sits in the country about {settlement} as a settled habit."
+            "Trouble in the country about {settlement} is present."
           ]
         }
       ],
@@ -5561,7 +5561,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "plain",
-          "text": "Obedience in {settlement}'s watch is bought without concealment.",
+          "text": "Obedience in {settlement}'s watch is bought in sight of the town.",
           "slots": [
             "settlement"
           ],
@@ -5574,14 +5574,14 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "plain",
-          "text": "A watch that has been bought is what {settlement} keeps in open public view.",
+          "text": "A watch that has been bought is kept by {settlement} in open public view.",
           "slots": [
             "settlement"
           ],
           "vid": 3,
           "wordings": [
             "The bought watch of {settlement} stands under open notice.",
-            "The keeping of a watch that has been bought counts as open dealing in the public business of {settlement}.",
+            "The keeping of a watch that has been bought counts in the public affairs of {settlement} as open dealing.",
             "What {settlement} has for a watch is sold in the town's plain sight."
           ]
         }
@@ -5592,15 +5592,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "The watch {settlement} keeps has been bought out of public view.",
+          "text": "The watch {settlement} keeps is bought out of public sight.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "Another interest holds the watch {settlement} keeps, and holds it clear of the town's public dealing.",
-            "Suborned without public notice, the watch {settlement} keeps stands bought.",
-            "A buyer has the watch {settlement} keeps, and the buying stays covert."
+            "Another interest holds the watch {settlement} keeps, and holds it clear of public dealing.",
+            "Suborned without public notice, the watch of {settlement} stands bought.",
+            "A buyer has {settlement}'s watch, and the buying stays out of common talk."
           ]
         },
         {
@@ -5608,15 +5608,15 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "dm-only"
           ],
-          "text": "Under a covert arrangement the watch {settlement} keeps answers a purchaser.",
+          "text": "Under a covert arrangement the watch in {settlement} answers a purchaser.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "Unexposed, the purchase that holds the watch {settlement} keeps still stands.",
+            "Unexposed, the purchase that holds {settlement}'s watch still stands.",
             "The buying of the watch {settlement} keeps sits outside the town's public word.",
-            "Obedience in the watch {settlement} keeps runs to a covert buyer."
+            "Obedience in the watch that {settlement} keeps runs to a covert buyer."
           ]
         },
         {
@@ -5631,7 +5631,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3,
           "wordings": [
             "To a buyer the watch {settlement} keeps is sold, and the selling stands without public notice.",
-            "Bought, and covert, the watch {settlement} keeps answers a buyer.",
+            "Bought, and covert, the watch of {settlement} answers a buyer.",
             "What {settlement} has for a watch is bought, and the buying goes unannounced."
           ]
         }

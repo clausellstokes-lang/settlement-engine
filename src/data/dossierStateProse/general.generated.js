@@ -3084,28 +3084,28 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "purse: short": [
         {
           "angle": "plain",
-          "text": "The purse at {settlement} falls short of what its defences come to in upkeep.",
+          "text": "The purse at {settlement} falls short of the standing charge of its defences.",
           "slots": [
             "settlement"
           ],
           "vid": 1,
           "wordings": [
-            "What {settlement} lays out on its defences runs under their standing charge.",
-            "Beside the upkeep of its defences, {settlement} shows the lesser purse.",
+            "What {settlement} lays out on its defences runs under their upkeep.",
+            "Beside what its defences come to, {settlement} shows the lesser purse.",
             "Coin at {settlement} does not reach the keeping of its defences."
           ]
         },
         {
           "angle": "plain",
-          "text": "The upkeep of the defences held at {settlement}'s charge is not met in full.",
+          "text": "The upkeep of the defences at {settlement}'s charge is not met in full.",
           "slots": [
             "settlement"
           ],
           "vid": 2,
           "wordings": [
-            "What keeping its defences comes to is more than the purse at {settlement} meets.",
-            "Above what {settlement} lays out stands the charge of keeping its defences.",
-            "Keeping the defences at {settlement} runs dearer than the purse."
+            "What the defences at {settlement} take in upkeep is more than the purse meets.",
+            "Above the purse at {settlement} stands the charge of keeping its defences.",
+            "The keeping of {settlement}'s defences runs dearer than its purse."
           ]
         },
         {
