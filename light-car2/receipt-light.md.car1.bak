@@ -1,11 +1,4 @@
-# RECEIPT — LANE LIGHT — car 1 (the dial lit and landed) + car 2 (the fold's cures)
-
-⚠ **THIS FILE WAS CAR 1's RECEIPT AND CARRIES CAR 2's CORRECTIONS IN PLACE.** The
-LIGHT skeptic fold (`$SC/skeptic-light/FOLD.md`, 32 CONFIRMED · 2 REFUTED · 7 PARTLY ·
-8 UNTESTED · 1 NEW) convicted eight sentences below. Every one is corrected WHERE IT
-STANDS and marked `[corrected at car 2: …]` rather than deleted, so a reader meets the
-false sentence and its correction together instead of a silently tidied record. Car 2's
-own arms and figures are in **§ CAR 2** at the foot.
+# RECEIPT — LANE LIGHT — car 1 (the dial lit and landed)
 
 Seat: Opus 5 — Fable-unvalidated · Lane: LIGHT · Dock: `$SC/laneLIGHT`, cut at the §916 product
 tip `8961388ce` (claude/composite-r4), detached HEAD, `node_modules` symlinked (never cloned, no
@@ -91,23 +84,6 @@ seeds the eager derivation). The seam's own three regex arms
 taken; the two derivations plus the excision-list read are what stand in its place, and no build
 was run (the fence).
 
-⛔ **[corrected at car 2: B7 — THIS IS A MODULE-GRAPH PROOF, AND NO BYTE CLAIM IN THIS
-LANE WAS EXECUTED.]** The paragraph above reads as though the derivations stood in for the
-missing dist. They do not stand in for the BYTES. Measured by the fold: `vendorPdfLazy`
-is **27 passed / 27 skipped** — `distExists` is false, so exactly half that file, every
-dist-reading contract, skipped; and `tests/lint/sizeBaseline.test.js` contains **0**
-occurrences of `dist`, so the byte ratchets' dry reads are not a substitute either. Three
-things remain unmeasured in bytes at this tip: chunk membership for `livingContentRoster.js`
-and its `customContentManifest.js` closure; the first-paint total against its ceiling (the
-seam's own header cites 1,045,910 -> 1,095,584 against 1,047,000); and the two WORKER
-bundles, which car 1a gave genuinely new static edges — `densityCreateBoundary.js` and
-`livingContentLaw.js` were not in either shell's pre-car static closure, and
-`generationWorkerLazy`'s exact import list went 2 -> 3. The module GRAPH proof is sound and
-independently re-derived at both trees (263 -> 263); the emitted delta is not this lane's
-to claim. **The chair's ruling C5 disposes of it: §917 owes no separate build because
-`run-gate-917.sh` runs `npm run check` — the production build, STRICT DIST, the first-paint
-ceilings and the 27 dist contracts live — so every byte claim is executed AT THE GATE.**
-
 ### Executed (one focused file at a time, runners 0 before each)
 `densityCreateBoundary.walker` 16 · `livingContentSeamLazy` 6 · `livingContentLawWiring` 12 ·
 `livingContentMaterialization` 11 · `livingContentRosterPublicDrop` 6 ·
@@ -148,18 +124,8 @@ rows; the three md5s above are the control.
 
 ### The dial's own arms, inverted rather than relaxed
 * `livingContentMaterialization`: `is dormant by default` → `the dial is LIT, and the mint writes
-  the marker and nothing else`, ~~with the dormant branch still exercised through the leaf's closed
-  test~~.
-  ⛔ **[corrected at car 2: B2 — THE STRUCK CLAUSE IS FALSE, AND IT WAS FALSE WHEN WRITTEN.]**
-  At car 1's tip the mint's `{}` branch was **executed by nothing**. `newSettlementLivingContentLaw()`
-  had exactly two real call sites in the estate (`livingContentLawWiring.test.js:235`,
-  `livingContentMaterialization.test.js:327`) and both took the LIT branch, while every DARK drive
-  (`boundaryWithDarkLaw`) replaces the function WHOLESALE with `vi.doMock`. What the leaf's closed
-  test exercises is `readLivingContentLawVersion(DEFAULT)` and `materializesLivingContent({})` —
-  the LEAF, not the mint's ternary. **CURED at car 2e**, and the blindness is EXECUTED, not argued:
-  with the dormant branch planted to write a marker, `livingContentLawWiring` stayed **19 passed**
-  and the pre-cure `livingContentMaterialization` stayed **11 passed**. The revert was, until car 2e,
-  a one-line act no arm had ever run.
+  the marker and nothing else`, with the dormant branch still exercised through the leaf's closed
+  test.
 * `livingContentLawWiring`: `boundaryWithDarkLaw()` added as the mirror of `boundaryWithLitLaw()`;
   the file's two halves SWAP SIDES. The dark arms are kept because the dial is one line in BOTH
   directions and an estate that stops exercising the dormant branch cannot revert on a bad day.
@@ -204,17 +170,6 @@ IMPORTED, never re-spelled: `tests/helpers/goldenMasterCorpus.js` and
 **Not one byte other than the law's own declaration moved on 1,293 configurations.** `wrongLaw=0`
 is what stops the comparison being one law run twice: every dark row resolved to v1, every lit
 row to v2.
-
-⚠ **[corrected at car 2: B3 — TWO CELLS OF THE RATE ROW WERE STATED, NOT MEASURED BY THE FILE
-THAT PRINTS THEM.]** At car 1's tip the RATE arm counted only `v2RosterCount` and asserted only
-`moved`; it never asserted `verdict.v1`/`verdict.v2` per row and never counted `v1Roster`. So
-"roster under law 1 = 0" and "wrong law = 0" on the RATE row were true (the fold measured both
-independently on three seeds and on 96 pack-loaded towns) and carried by a table rather than by
-an assertion. **CURED at car 2d**, and the blindness is EXECUTED: with
-`readLivingContentLawVersion` planted to return the dormant default for every value, the RATE arm
-as committed at `5c8d7b6d5` ran **1 passed** while the cured arm reds by name
-(`rate-0-0: the lit arm is not v2: expected 1 to be 2`). The GOLDEN row's cells were asserted
-from the day that arm was written; only the RATE row was carrying prose.
 
 ### The one excepted field, and a MEASURED CORRECTION TO THE BRIEF
 The brief expects `customContentRoster` to be "a frozen record under 2, EMPTY when the run's
@@ -289,32 +244,12 @@ anti-vacuity arm first (marker 2, buckets exactly the law's four, provenance bes
 gallery ingest drop (roster + provenance + the foreign birth law, town intact) and both public
 projections.
 
-⚠ **[corrected at car 2: B6 — THE HEADLINE OVERSTATES ITS SCOPE, AND THE BODY BELOW IT DOES NOT.]**
-The lit-minted world reaches **THREE** arms at car 1's tip, not "the boundaries": the gallery ingest
-and the two public projections. The reconciliation drop and the account remap / `versionHistory`
-hole are still driven by hand-built rosters, which the car's own text says plainly ("deliberately
-NOT re-driven here"). **The reconciliation half is closed at car 2a** — a lit-product-minted world
-now goes through `admitExistingCampaignImport` itself. The ACCOUNT remap and the `versionHistory`
-hole remain hand-built and are deferred-and-recorded, not forgotten: they need an archive receipt,
-which is a fixture that suite already owns.
-
 ⚠ **RECORDED, NOT CURED:** the DM-full projection carries the law MARKER on the config. A build
 fact, not an account-scoped identifier, and the gallery INGEST drops it on the way back in.
 
 ---
 
 ## CAR 1f — THE LIT WALKERS (`5faa1c4b9`)
-
-⚠ **[corrected at car 2: B8 — THE TITLE BUYS DOCUMENTATION, NOT COVERAGE. Read it as "the lit
-walkers, and the one that is BLIND".]** The car's entire diff to `mechanismLitCoverage.test.js`
-is an **18-line header comment**: zero executable change, the walker's denominator unmoved, the
-green identical before and after. The body below is honest about this ("green and BLIND … and now
-says so in its own header"); the CAR TITLE is not, and a title is what a later reader indexes on.
-⇒ **THE GAP, NAMED AND DEFERRED-AND-RECORDED (chair, S.3):** nothing in the estate enumerates
-VERSIONED GENERATION LAWS and demands a lit proof of each, the way `mechanismLitCoverage` does for
-`worldPulse` mechanisms. `GENERATION_LAWS` in `densityCreateBoundary.js` is the nearest register and
-it checks WIRING (who may mint), never lit coverage. A walker for that is a CAPACITY-train row, not
-this lane's — recorded so it is not re-found as a new finding.
 
 `mechanismLitCoverage` is **green (12 passed) and BLIND to this law**, and now says so in its own
 header. Both axes miss a VERSIONED GENERATION LAW: axis 1 enumerates flat modules under
@@ -355,14 +290,7 @@ judged normally. Retire the row rather than outliving its own premise.
 
 The row's own `lighting` prose said the same before the day came ("this row must die with its
 premise"). It is **STRUCK** from `scripts/lib/writer-dark-register.mjs` (6 rows → 5) with the
-retirement recorded in the register's header. ~~That moves ONE frozen value and nothing else:~~
-
-⚠ **[corrected at car 2: B4 — THE `--write` MOVES TWO VALUES, NOT ONE.]** `baselineOf()` rebuilds
-the whole object and stamps `sha: headSha(root)`, so the chair's register car will move the digest
-**and `frozenAtSha`** — `455ec96a4abace0ae7eb68d09e419820bacd5b5d` -> the §917 sha. Nothing else:
-population, closureSizes, scanStats, the three digests, `pendingSurfaceCeiling` 3,
-`reviewableDarkCount` 526 and `darkUnregistered` 1322 are identical on the plain run, at car 1's
-tip and again at car 2's. The one frozen value the strike itself causes is:
+retirement recorded in the register's header. That moves ONE frozen value and nothing else:
 
     registerDigest  ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0
                  -> 14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501
@@ -400,26 +328,6 @@ that path for as long as it has existed; lighting adds `customContentRoster` bes
 conditional on the run's reviewed environment holding custom content** — measured on this build, a
 generation with `customContent: {}` writes NEITHER key, lit or dark (0 of 525, 0 of 768). The
 exposure window is authors of homebrew who then DM-share, not every user.
-
-⛔⛔ **[corrected at car 2: B5 — LITERALLY TRUE, MATERIALLY UNDERSTATED, AND THIS IS THE
-SENTENCE THAT REACHES THE OWNER.]** "Alike conditional" and "one more key" both survive a
-literal reading and both price the debt smaller than it is. Three measurements, none of them
-this lane's opinion:
-1. **THE TWO KEYS ARE NOT ALIKE CONDITIONAL.** On 96 RATE towns with the reference pack loaded:
-   **roster 96/96, provenance 32/96.** The provenance receipt is written only when the generated
-   town ADOPTED a definition; the roster is written whenever the environment HOLDS one. The added
-   key therefore rides **three times as many** DM-shared dossiers as the key already riding.
-2. **IT IS A STRICT SUPERSET, NOT A SIBLING.** `publicSafe.js:283-287` in the estate's own words:
-   the roster records every reviewed living-content definition in scope, adopted or NOT, while
-   provenance names which of them materialized. The exposure is the author's WHOLE UNADOPTED
-   LIBRARY, not the part that landed in the town.
-3. **THE ROSTER'S SERVER EXPOSURE WENT FROM UNREACHABLE TO LIVE AT CAR 1a.** Before the loader
-   gained a caller, a lit config threw out of the pipeline, so no product-minted world could carry
-   a roster at all. The provenance door was open; the roster was not standing at it.
-**The refusal is unchanged and correct** — a migration is a deploy-shaped act on a shared surface
-and remains owner-gated. What changes is the PRICE the owner is quoted. The chair's ruling C4:
-land lit with the SQL twin as it is, and the §917 ledger row states this as an OWNER ROW carrying
-this measurement, never as "one more key on an already-open door".
 
 A migration is a deploy-shaped act on a shared surface: **no migration file was written.** The
 spent dial tripwire in `livingContentRosterPublicDrop.test.js` was re-cut onto the real gap — a
@@ -486,20 +394,10 @@ src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → cur
    "voice E2 = the two INHERITED banked files (labelBands em 5, generalStateProse em 3)". The
    file names and both counts match exactly.
 2. **`git diff --stat 8961388ce..HEAD` on both files is EMPTY** — this lane never touched either.
-3. ~~**Every line this lane added to a src file is a COMMENT**, except two: the
-   `loadGenerationLawPayloads` import and its `await` in `settlementGenerateAction.js`.~~
-   ⛔ **[corrected at car 2: B1 — THE FIGURE IS FALSE; THE CONCLUSION IS NOT.]** Measured over
-   `git diff 8961388ce..990a7860a -- src/`: **339 added src lines, of which 47 are non-comment and
-   non-blank** (the dial line, the loader and its seven await sites, six `payloadAwaitedBy` rows,
-   one re-export, two `self.onmessage = async`, and five lines of one `GENERATION_LAWS` `why`
-   string) — not two. Re-measured at car 2 and reproduced exactly. Car 2 adds **75 src lines, 15
-   of them non-comment and non-blank**; the whole lane over the §916 tip is **414 added src lines,
-   62 non-comment and non-blank**. A false figure inside a true finding is the class this estate
-   refuses in other people's work, which is why it is corrected rather than dropped. The E2
-   conclusion stands on legs 1 and 2, both of which the fold confirmed independently, and the
-   scan below re-runs clean at car 2's tip: no added `src/` string literal in either range carries
-   an em dash, an exclamation mark, a `toFixed` or a float interpolation, and the E2 ratchet's
-   scope is `src/data + src/domain` in any case.
+3. **Every line this lane added to a src file is a COMMENT**, except two: the
+   `loadGenerationLawPayloads` import and its `await` in `settlementGenerateAction.js`. Neither
+   carries an em dash, an exclamation mark, a `toFixed` or a float interpolation, and the E2
+   ratchet's scope is `src/data + src/domain` in any case.
 
 ⚠ **NOT RUN, AND WHY:** `node scripts/check-test-ratchet.mjs --update` (the census totals) runs the
 WHOLE SUITE, which this lane's fences forbid; it is the chair's ratchet ritual. No vite build was
@@ -522,189 +420,3 @@ the two vite derivations plus the excision-list read.
 | 1g the strict annotation | `990a7860a` |
 
 Dock tip `990a7860a`, 8 cars over `8961388ce`, porcelain 0.
-
----
-
-# § CAR 2 — THE FOLD'S CURES (five cars over `990a7860a`; chair, SITTING §S)
-
-Seat: Opus 5 — Fable-unvalidated · Dock `$SC/laneLIGHT`, `node_modules` symlinked, no build taken.
-Charter: SITTING §S.4 — A1 (strip + arm + blast radius), A2, A3, A4, the dark-dial mint arm, B1–B8.
-**Every figure below is from a command this car executed and whose output I read.**
-
-| car | sha | what |
-|---|---|---|
-| 2a | `e7bf28383` | the reconciliation boundary strips the foreign birth law, on BOTH of the marker's echoes (A1, ruling C1) |
-| 2c | `5c8d7b6d5` | the payload arm checks ORDER, not presence (A3, ruling C6) |
-| 2d | `fa9ccc74d` | the RATE arm asserts what it prints (A4) |
-| 2e | `707118f80` | the dark-dial mint arm — the dormant branch executed through the real function |
-| 2b | `ef3ee6cbd` | register: the lighting census refrozen by ritual, and **A2 REFUSED with the measurement** |
-
-The consist is **6 files: 1 `src/`, 5 `tests/`** (one of them the census register the brief permits).
-Nothing under `src/domain/display/stateProse/`, `src/domain/prose/` or `src/data/dossierStateProse/`;
-no other census; no leaf. Five commits, each carrying all three trailers.
-
-## 2a — A1, AND THE MARKER HAS TWO ECHOES
-
-`dropReconciledSettlementContentRecords` now strips `LIVING_CONTENT_LAW_CONFIG_KEY` in the
-destructure shape `importScrub.js:158-166` already ships, reading the key from the leaf that
-declares it. SILENTLY — no third `settlement_content_record_unmappable` issue — and unconditional
-on either record, because since the lighting the ordinary reconciled import is marker-carrying and
-roster-less, which is the lying shape itself.
-
-⭐ **THE FIRST CUT STRIPPED `settlement.config` ALONE, AS THE RULING NAMES IT, AND THE ARM FAILED.**
-Measured: after admission the persisted **`settlement._config` still read `_livingContentLawVersion`**,
-and it was that config's ONLY underscore-prefixed key. The gallery importer needs one strip only
-because `gallery.js`'s `stripImportConfidential` deletes `_config` wholesale as a regeneration
-hazard; nothing deletes it here. Cleaning one echo and leaving the other tells the same lie one
-level down, on the very object `SaveToLibraryButton.jsx` persists as a save's regeneration input.
-**The strip runs over both echoes — an extension of C1's ground to its second echo, recorded here
-for the chair to veto.**
-
-    the arm (new, in importReconciliation.test.js)   19 passed (18 -> 19; that file carried 0 marker assertions)
-    PLANT — the strip removed                        1 failed / 18 passed (19), by the arm's own name:
-      "the reconciled world kept a FOREIGN account's birth-law marker. With the roster dropped two
-       lines below, that is a world claiming it was born under the roster law while carrying no
-       roster — permanently, because nothing downstream re-mints one."
-      restored by cp · md5 8bb4df172ab347908d04de4b49cb9ec4 · cmp OK · porcelain 5 before, 5 after
-
-    BLAST RADIUS, all four re-run     accountImportSlice                26 passed
-                                      accountSettlementContentPortability 17 passed
-                                      importScrub                       13 passed
-                                      campaignSlice.galleryImport        6 passed
-    THE PROMISE, re-run after A1      livingContentPromiseBytes  5 passed, 42.52 s — 0 movers on 1,293
-                                      livingContentLawWiring    19 passed
-    OSR (read only, no write)         exit 0 — 1972 finding(s), exactly matching the frozen inventory
-    EAGER_FIRST_PAINT_MODULES         263 — the new leaf edge into src/lib did not enter first paint
-
-## 2c — A3, AND THE RELOCATION PLANT (untested row U6, now executed)
-
-`awaitPrecedesConsumer()` walks FORWARD from the await with a relative brace depth of zero over the
-comment- and string-stripped code: a consumer call found while the depth is still >= 0 was reached
-without the await's own block closing. Six CALL-form needles, because every awaiter names its
-consumer in an import line ABOVE the await and two of the seven pass the pipeline as a VALUE. The
-needle list is itself held to the tree. Four controls, all SHIPPED shapes.
-
-    the walker, clean tree            16 passed (title count unmoved — strengthened in place)
-    PLANT — the await MOVED (not deleted) below `runGeneration` in settlementGenerateAction.js:
-                                      1 failed / 15 passed (16), naming BOTH rows that declare it:
-      "src/store/settlementGenerateAction.js: … awaits the payload, but NOT before the generation
-       call in the same function body — the await was moved below it, or into a branch the live
-       path does not take"  |  "src/workers/generationRequest.js: … (same)"
-      ⛔ and the file STILL CONTAINED the literal, at line 198 — the old presence arm would have
-         stayed GREEN. That is U6 discharged by execution rather than by belief.
-      restored by cp · md5 e92c201764474476727eac8d4af29d9a · cmp OK · porcelain 3 before, 3 after
-
-## 2d — A4, AND THE BLINDNESS EXECUTED
-
-The RATE arm gains `verdict.v1` / `verdict.v2` per row (768 x 2, named by seed) and `v1RosterCount`
-pinned at 0. **The file goes 5 tests -> 5 tests** — no block, no describe, so the §917 test-census
-prediction does not move with this car.
-
-    clean control                     livingContentPromiseBytes 5 passed, 42.52 s
-    PLANT — `readLivingContentLawVersion` made to return the dormant default for every value, then
-    the RATE arm alone re-run twice against the SAME planted product:
-      (1) WITH the cure               1 failed — "rate-0-0: the lit arm is not v2: expected 1 to be 2"
-      (2) the PRE-CURE arm, as        1 passed — GREEN under the identical plant. The byte
-          committed at 5c8d7b6d5      comparison cannot see it: `worldBytes` subtracts the marker
-          (git show HEAD:…)           either way, so `moved` stays [] and `v2RosterCount` stays 0
-                                      while both worlds are law 1.
-      restored · leaf md5 745052ee9aa158069f9dc855ceda7e6d · cmp OK on both files · porcelain 2 -> 2
-
-## 2e — THE DARK-DIAL MINT ARM (untested row U3, now executed)
-
-The dial is a module-level const, so the arm varies what the LEAF hands the law module and
-re-imports under `vi.resetModules`. **The mint itself is untouched** — the ternary, the key and the
-returned object are the product's own — and `vi.isMockFunction` is asserted false inside the arm so
-a future substitution cannot quietly restore the false green. The same real function, re-imported
-with the leaf untouched, mints the marker: one function, one ternary, two answers.
-⇒ **THE BRIEF'S REFUSAL CONDITION WAS NOT REACHED.** No runtime switch was added to the product; the
-leaf is a seam the harness already owns, and the shipped source line was never edited.
-
-    the arm                           12 passed (11 -> 12)
-    PLANT — the dormant branch made to write an empty-but-present marker:
-                                      1 failed / 11 passed (12) —
-      "the mint wrote something at the dormant dial … expected { _livingContentLawVersion: 1 } to
-       deeply equal {}"
-    ⛔ THE BLINDNESS, EXECUTED under that same plant:
-      livingContentLawWiring          19 passed — green on a corrupted dormant branch
-      livingContentMaterialization    11 passed — the PRE-CURE file (git show fa9ccc74d:…), green
-      restored · md5 c123bdf7a491120922084a46ce21cc7a · cmp OK on both files · porcelain 1 -> 1
-
-## 2b — THE CENSUS REFROZEN, AND ⛔⛔ CURE A2 REFUSED WITH THE MEASUREMENT
-
-The walker was **RED before this car** (`expected 24048 to be 24046`), which is the proof the door
-had to open. Refrozen by the baseline's own ritual on a CLEAN tree at `707118f80`, then verified by
-a plain re-run — **34 passed**.
-
-    files       2557 -> 2557   ·  parked  375 -> 375  ·  credited 2182 -> 2182
-    titles     24046 -> 24048  ·  suiteTitles 6422 -> 6422
-    (+2 = car 2a's one test and car 2e's one test; cars 2c and 2d moved no title)
-
-**A2 IS REFUSED.** The fold recorded `"date": "2026-09-09"` as a stale provenance numeral against a
-refreeze the commit body, `measuredBy` and the receipt all place on 2026-09-08. **It is not stale.
-It is UTC, and it is the ritual's own output:**
-
-    tests/lint/sovereigntyLightingContract.walker.test.js:744
-        date: new Date().toISOString().slice(0, 10),          <- toISOString is UTC
-
-    prior refreeze commit 48c001cc8   2026-09-08 21:57:50 -0400  =  2026-09-09T01:57:50+00:00
-    this machine at this car          local 2026-09-08 23:05 EDT =  utc 2026-09-09 03:05 UTC
-    and THIS refreeze, run by the ritual with no hand near the field, wrote "2026-09-09" a SECOND
-    time — independently reproducing the numeral the cure asked to correct.
-
-The one-numeral hand edit would replace a value the instrument PRODUCES with one it cannot
-reproduce, and the next refreeze would write 2026-09-09 back. The walker asserts only that the four
-provenance strings are non-blank, so nothing turns on the value.
-⇒ **What the chair may still want is a DIFFERENT act:** if the census should stamp the measuring
-seat's LOCAL day, that is a one-line change to line 744 of the walker and a register car of its
-own. Not taken here — the walker is an instrument and this lane holds no ruling on it. Vetoable.
-
-## THE GATES AT CAR 2's TIP `ef3ee6cbd`
-
-| gate | result |
-|---|---|
-| whole `tests/lint` (once, at the tip) | **1 failed / 2490 passed (2491)** across **148 passed / 1 failed (149)** files — the ONE failure is the refused writer-reach register digest (R1), the same two digests as at car 1's tip. ⇒ discharges the fold's untested row **U1** exactly as predicted. |
-| `check-domain-strict` | **exit 0** — "no strict-type regressions (1120 errors, ceiling 1120)" |
-| `check-full-typecheck` | **exit 0** — "no type regressions (173 error(s), ceiling 173)" |
-| OSR `check-observed-shape-readers` (read only) | **exit 0** — "1972 finding(s), exactly matching the frozen inventory"; **no write** |
-| prose-numerics re-key (dry) | **exit 0** — `baseline=225 live=225 parseErrors=0 · exact=225 rekeyed=0 relocated=0 FELL=0 NEW=0` |
-| writer-reach plain (dry) | **exit 0** — `judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526)`, identical to the banked population; baseline file untouched |
-| lighting census walker (plain, post-refreeze) | **34 passed** |
-| the cast walker `domainAnyCastBaseline` | green inside the whole `tests/lint` run |
-| `eslint src/ tests/ scripts/` | **exit 0** — 0 errors, 31 warnings; **overlap with car 2's 6 touched files EMPTY** |
-| added-`src/`-literal scan (em dash / bang / `toFixed` / float) | **0 hits** in `990a7860a..HEAD` and in `8961388ce..HEAD` |
-| porcelain | **0** |
-| vitest runners at return | **0** |
-
-## WHAT CAR 2 MOVES IN THE §917 PREDICTIONS
-
-* **test-census ratchet `--update`**: the fold predicted `totalFiles 2502 -> 2503`, `totalTests 32436 -> 32451`
-  and warned to run it AFTER A1/A4. Both have landed. The fold's +15 split
-  (`livingContentPromiseBytes` +5, `livingContentLawWiring` +7, `densityCreateBoundary.walker` +2,
-  `livingContentRosterPublicDrop` +1) contains **no `importReconciliation` row** — car 1's whole
-  change to that file was a three-line prose amendment — so car 2's two tests are the sixteenth and
-  the seventeenth: **A1 adds one** (`importReconciliation` 18 -> 19), **A4 adds none** (assertions
-  inside two existing blocks), **the dark-dial arm adds one** (`livingContentMaterialization`
-  11 -> 12), and **no new test FILE**. ⇒ the prediction becomes **`totalFiles 2503`,
-  `totalTests 32453`** (+1 file, +17 tests over the banked `2502` / `32436`). Counted at source and
-  cross-checked against the lighting census's own independent `titles` move of +2 at car 2b.
-  ⚠ An earlier draft of this line read `32452` / "+16" by folding car 2a's test into the fold's
-  +15; corrected here rather than patched silently, because a stale numeral in a prediction is the
-  class this receipt spent car 2b refusing.
-* **writer-reach `--write`**: unchanged — digest and `frozenAtSha`, nothing else (B4).
-* **lighting census**: already moved, by ritual, at car 2b. Nothing left for §917.
-* **OSR · prose-numerics**: nothing, re-measured at this tip.
-
-## ⚠ ONE OBSERVATION FOR THE CHAIR, NOT A FINDING, AND NOT CURED
-
-`prepareSettlementEntry` strips `_seed` at the top level and `scrubImportedConfig` strips
-`config._seed`, but **nothing on the reconciliation path touches `settlement._config`**, which is
-why car 2a had to strip the marker's second echo by hand. On the world this car measured, that
-`_config`'s only underscore-prefixed key was the law marker, so no seed rode with it. **Whether a
-source export whose `_config` carries `_seed` would survive this boundary was NOT measured**, and it
-is not this lane's row: it is a seed-dormancy question about a different key, on a path whose
-`_config` handling differs from the gallery path's wholesale delete (`gallery.js:127`). Recorded so
-it is not re-found as a new finding, and so it can be measured on purpose by whoever owns it.
-
-## CAR 2 — THE CHAIR'S VERIFICATION AND RULINGS (Fable, 2026-09-08 23:1x)
-Re-measured at `ef3ee6cbd` (13 cars over 8961388ce; porcelain 0): the reconciliation module now names the law key (CONFIRMED by grep); the lane's whole `tests/lint` 148/149 with the one refused writer-reach digest (the chair's door). Rulings: (1) A1's extension to the `settlement._config` echo — ACCEPTED as within C1's ground (a boundary that drops a record drops every echo of the marker that claims it; the arm proved the first cut insufficient); (2) A2 REFUSED by the lane on a true ground — the census date is UTC written by the ritual itself (`sovereigntyLightingContract.walker.test.js:744`), so `2026-09-09` is not stale; SITTING §S c-3 is AMENDED: the numeral stands, and whether the ritual writes local days is a one-line instrument change for a later register car, not taken; (3) the dark-dial mint arm landed through the version leaf under `vi.resetModules` with no runtime switch — ACCEPTED; (4) the observation that nothing on the reconciliation path touches `settlement._config`, so whether a source export's `_seed` survives that boundary is unmeasured — a PROMISE-adjacent row for the sitting agenda (§G) and a small arm in the next boundary car; (5) the §917 test-census prediction is `totalFiles 2503`, `totalTests` derived (+17 by the lane's count, never predicted). Seat: Fable 5.1 — validated.

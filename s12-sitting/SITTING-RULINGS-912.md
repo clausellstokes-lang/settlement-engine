@@ -265,3 +265,5 @@ Seat: Fable 5.1 — validated
 **S.4 The charter — LIGHT car 2 (Opus, laneLIGHT at 990a7860a):** A1 (strip + arm + blast radius), A2, A3, A4, the dark-dial mint arm, B1–B8; then the §917 chain.
 
 Seat: Fable 5.1 — validated
+
+**§S.5 — amended at LIGHT car 2 (chair, 23:1x):** c-3 withdrawn — the lighting census's date is UTC written by the ritual (`:744`), not a stale numeral; A1 extended to the `_config` echo (a boundary that drops a record drops every echo of the marker); an open row: whether a source export's `_seed` survives the reconciliation boundary (unmeasured; an arm in the next boundary car). Seat: Fable 5.1 — validated
