@@ -2512,7 +2512,274 @@ files under `tests/ui`), so this is the banked E2 ratchet and not this car's.
 
 ## CAR 8a-13 — DRAW-FOLLOWING ANCHORS
 
-**PARTIAL — the section is being filled as the car lands.** Seat: Opus 5 — Fable-unvalidated.
-Dock `laneREWRITE`, cut at `188010225`. Chartered by ADDENDUM 5 (chair, 2026-09-09 09:5x).
-TESTS AND TEST HELPERS ONLY: `git diff --stat 188010225..HEAD -- src` is EMPTY.
+**LANDED** as two commits over `188010225`: `cea20ddb3` (the car) and `cc22f1d72` (the
+lighting refreeze, which the ritual refuses to run on a dirty tree). Seat: Opus 5 —
+Fable-unvalidated. Dock `laneREWRITE`. Chartered by ADDENDUM 5 (chair, 2026-09-09 09:5x).
+TESTS AND TEST HELPERS ONLY: `git diff --stat 188010225..HEAD -- src` prints NOTHING.
+Porcelain 0 and runners 0 at the return.
+
+### WHAT THE CLASS ACTUALLY IS, AND WHY THE THIRD FIX HAD TO BE STRUCTURAL
+
+A liveness anchor on state prose pins a SENTENCE. It MEANS "this block draws at this
+position, privately, and is silent on a free dossier"; it SAYS "this position draws THIS
+WORDING". Those are different claims, and only the first is the arm's subject. Which wording
+a pool draws is a function of the fixture's seed and of the draw rule, so a change to either
+— or a rewrite of the wording under Shift 1, or an APPENDED wording that wins the draw under
+NEVER TRIM — reds every literal pin at once while the thing it guards is perfectly well.
+
+| car | the act | the bill |
+|---|---|---|
+| 8a-1 | the index-stable draw (RE-INDEXED 43,685 of 73,284 = 59.61 %) | three desk pins re-seeded by hand |
+| 8a-12 | the §919 proof's nine reds | SIXTEEN pins moved; six fixtures re-seeded; **111,965 candidate seeds** for `SPEAKING` alone, because eight independent pools had to be satisfied at once |
+| every block car of the REWRITE, from here on | one appended wording per pool | ≈ `8/(n+1)` of `SPEAKING`'s anchors, i.e. one or two, **for ever** |
+
+### THE HELPER — `tests/helpers/drawnProse.js` (new, 300 lines)
+
+    drawnMember({ leaf | corpus, blockId, poolKey, seed, audience, slots, dimensions })  -> string
+    drawnMembers(specs, shared)   -> the shape it was given (array -> array, object -> object)
+    variantByVid({ ...spec, vid }) -> one NAMED wording's own filled text, by its stable id
+    poolMemberTexts(spec)          -> EVERY renderable member of a pool, filled
+    STATE_LEAVES                   -> the six leaves by desk name (the walker reads this too)
+
+`drawnMember` drives BOTH shipped read paths and neither is decorative: `readStateProse`
+(`stateProseKernel.js:481`) for the kernel grain, `composeStateProse` (`composeStateProse.js:793`)
+for the desk's own grain — every rung in the estate is built by the composer — and the composed
+unit is REFUSED unless it opens on the spine the kernel drew (`arrange` puts the spine first in
+both seats; the clause seat only strips its final stop, so the check survives the day a modifier
+attaches). A null read is a HARD ERROR naming the four causes, never an empty string: an anchor
+that silently became `''` would make every `toContain` downstream pass vacuously, which is the
+exact defect `anchoredNegatives.js` exists to prevent, moved one step earlier.
+
+⛔ **IT IS NOT "ASK THE DESK AND CHECK IT ANSWERED", and the file's own old comment demanded
+that it not be.** The helper NEVER SEES THE SETTLEMENT. The test names the block, the pool, the
+audience and the fills — the whole semantic claim — and computes from the CORPUS; the render
+comes from the DESK; the two meet only at the assertion. A desk that stopped drawing that pool,
+lost a fill, or drew a different pool still reds on the liveness half.
+
+⚠ **THE SLOT BAG MUST BE THE DESK'S, NOT A SUPERSET — measured, not reasoned.** A bag with one
+extra fill makes a variant the desk considers UNANCHORED eligible here, which moves the draw.
+Caught in the act while this car was written: `DS-GEN-14 :: FOUNDED-OLD` with `timeband_age`
+added to its bag drew *"Steinmark was made on purpose…"* where the desk draws *"Steinmark reads
+as a place built to a plan…"*. That is also the proof the helper is not tautological — it is
+sensitive to an input the desk fixes.
+
+### THE CALIBRATION — THE INSTRUMENT WAS CHECKED BEFORE IT WAS TRUSTED
+
+Ground truth was taken by driving the SHIPPED DESKS (`generalStateProse`, `economyStateProse`,
+`warFaithStateProse`) at the shipped seeds and recovering each rendered sentence's provenance by
+aligning it against its variant template. **All 34 specs the car needed then matched the helper's
+output EXACTLY, byte for byte**, on the first pass but one (the `FOUNDED` bag above).
+
+### THE ACT, PER FILE
+
+**35 literal state-prose fragments removed. Not one anchor deleted; not one assertion weakened
+to a substring; no `src/` byte moved.**
+
+| file | literals removed | became |
+|---|---|---|
+| `tests/ui/generalDeskTabFlow.test.js` | **24** (the sweep's 23 + `PATRON_LINE`, which 8a-12's matcher missed) | 22 computed anchors (5 `drawnMembers` blocks + 3 `drawnMember`), and 2 replaced by WHOLE-POOL rosters |
+| `tests/ui/economicsTabFlow.test.js` | **9** (2 seeded + the 7 canonical-at-zero `GROUND_LINES`) | 9 computed anchors in 2 `drawnMembers` blocks |
+| `tests/domain/generalStateProseDesk.test.js` | **1** (`toContain('a supply that has failed upstream')`) | `expect(line).toBe(drawnMember(…))` — STRONGER, and it follows a rewrite |
+| `tests/domain/warFaithStateProseDesk.test.js` | **1** (a two-part concatenated sentence in `toBe`) | `expect(line).toBe(drawnMember(…))`, the `toContain('Eastmarch')` / `toContain('Thornwall')` pair kept above it so the equality stays a DIRECTION claim |
+
+**TWO EXCLUSIONS WERE WIDENED FROM ONE WORDING TO THE WHOLE POOL**, which is strictly stronger
+and covers a member appended tomorrow the day it lands: the patron-end exclusion now refuses all
+3 wordings of `DS-REL-1 :: patron`, and the unread-ring arm refuses both wordings of
+`DS-POP-3 :: LEVEL` rather than the one it happened to name.
+
+**AND ONE ARM GAINED ITS REAL SUBJECT.** The `{calamity}` doubled-article arm anchored on
+whatever DS-GEN-16 drew — but only TWO of `ANCHORED-RECENT`'s three wordings name `{calamity}`
+at all, so whether the DOM arm touched the seam was seed luck. It now fills all three from the
+desk's own `calamityFill` (imported, not transcribed: `calamityFill('The Great Fire')` = `great
+fire`) and checks each directly.
+
+### THE FOR-LOOP THAT HID SEVEN FAILURES
+
+Five bare pin loops became `collectSeedFailures` + `expectNoSeedFailures`, and three new
+collected loops were added — **8 in `generalDeskTabFlow`, 1 in `economicsTabFlow`**. Proven by
+plant B below, where the collected loops printed **7 of 7 · 4 of 4 · 3 of 3 · 4 of 4** instead of
+the first casualty.
+
+### THE WALKER — `tests/lint/proseDrawnAnchors.walker.test.js` (new, 503 lines)
+
+Aligns every string literal in every `tests/**/*.test.js(x)` — outside comments, interpolating
+template literals skipped — against the six leaves' 2,266 variant texts, each `{slot}` standing
+for one arbitrary fill of 1..80 characters, over a floor of **18 characters of FIXED text
+actually matched**. Narrowed by the four rarest indexed words (one word sends real pins to the
+wrong posting list — 8a-12's own measured miss). Seven false-positive rows frozen SHRINK-ONLY
+with each one's reason read at the freeze; the four fixture-input files exempt BY NAME with a
+non-vacuity arm over each; the six cured files held at EXACT ZERO.
+
+⛔ **THE CHARTERED SCOPE WAS BUILT, MEASURED AND REFUSED, WITH THE MEASUREMENT.** ADDENDUM 5
+asks for a scan "inside `toContain(` / `queryByText(` / `toMatch(` or an anchor call". Built that
+way and run at this tip it reports **TWO** pins in the whole corpus — and would have caught
+**NONE of the sixteen that actually bit at 8a-12**, because every one of them was a
+`const GROUND = '…'` at module scope that an assertion later names. A detector that misses the
+shape of its own founding incident is not a detector. The scan is widened to every literal and
+the extra false positives are carried in the roster with their reasons.
+
+⚠ **AND THE MATCHER WAS WIDENED ONCE MORE, for the same reason.** Its first cut required a fixed
+run reached after a slot to match in FULL, so `'What the realm has lost'` aligned on nine
+characters instead of eighteen and slipped under the floor. A literal may now END part-way
+through such a run. Two recall limits remain and are stated in the header: a pin whose fixed runs
+total under 18 characters (`'Thornmere looks to Steinmark'`, fixed run `' looks to '` = 10) and a
+pin split across `+` into under-floor pieces. Both SHRINK the ledger, never inflate it.
+
+**THE SEVEN SURVIVORS — not one is a pin on a drawn sentence, each read at the freeze:**
+
+| file:line | the literal | what it really is |
+|---|---|---|
+| `tests/domain/magicRegimeLifecycle.test.js:221` | `the building stands` | `remnantReason`, a GENERATOR field — never reaches `drawVariant` |
+| `tests/domain/settlementLifecycleFirstClass.test.js:400` | `left with the wagons` | a CHRONICLE event description, same |
+| `tests/domain/stressorAftermath.test.js:89` | `a settlement without a history object still gains one` | a TEST TITLE — the matcher's own false positive |
+| `tests/lint/dossierMountRegistry.walker.test.js:640` | `The town does not grow what it eats.` | a hand-built rung fixture handed to the registry's reader |
+| `tests/lint/economyReadModelCoverage.walker.test.js:414` | `last survey may not be fully counted` | a NEEDLE for a source scan over `src/` — the opposite direction |
+| `tests/lint/envoyKindPools.walker.test.js:55` | `The messenger has no new vote…` | a different pool family's AUTHORED roster |
+| `tests/ui/warRemembranceReader.test.jsx:136` | `What the realm has lost` | a UI HEADING used as an `expectAbsentWithAnchor` anchor; not corpus prose |
+
+The last is why the EXACT-ZERO rule names SIX FILES rather than the whole of `tests/ui`: a false
+positive is kept in the ledger with its reason rather than special-cased into invisibility.
+
+### THE THREE PLANTS — each executed, each restored, each printed
+
+**(a) DRAW-IMMUNITY — the property the whole car exists to buy.** `drawVariant`'s parent key in
+`stateProseKernel.js` perturbed to `` `${seed}::${blockId}::${poolKey}::plant` ``, which re-rolls
+every state pool the index-stable draw touches.
+
+    the plant is LIVE, measured not assumed:  14 of 34 converted anchors MOVED under it
+    tests/ui/generalDeskTabFlow + economicsTabFlow      Tests 37 passed (37)     exit 0
+    tests/domain/generalStateProseDesk + warFaithDesk   Tests 97 passed (97)     exit 0
+    restored:  git show HEAD:src/domain/display/stateProse/stateProseKernel.js > <path>
+               git diff --stat HEAD -- src   EMPTY
+
+Before this car those same 37 tests carried sixteen literal pins and would have gone red.
+
+**(b) LIVENESS — the converted anchors can still fail, and they fail BY NAME.** The paid-surface
+gate forced in `generalDeskRead.js` (`const publicDossier = true;`) and in `economyDeskRead.js`
+(the SILENT desk returned unconditionally), so the private render draws nothing while the corpus
+is untouched.
+
+    Test Files  2 failed (2) · Tests  17 failed | 20 passed (37)
+    every failure a LIVENESS ANCHOR naming its block and position, e.g.
+      LIVENESS ANCHOR [the general desk at DS-GEN-12 the ground (overview.ground)]: the
+      before-collection must already contain the member the operation is supposed to remove.
+    and the COLLECTED loops printed the true counts rather than the first casualty:
+      7 of 7 · 4 of 4 · 3 of 3 · 4 of 4
+    restored the same way; git diff --stat HEAD -- src   EMPTY
+
+**(c) THE WALKER'S OWN PLANT.** A literal anchor authored the old way —
+`const PLANTED_ANCHOR = 'Steinmark is administered, visibly: rules here have rooms';` — appended
+to `tests/ui/generalDeskTabFlow.test.js`, one of the six cured files.
+
+    × no NEW file carries a literal state-prose anchor, and no frozen row grows
+        + "tests/ui/generalDeskTabFlow.test.js: 1 (frozen none)"
+    × ⛔ the six files car 8a-13 cured are held at EXACT ZERO
+        A literal state-prose anchor has re-entered a cured family.
+        + "tests/ui/generalDeskTabFlow.test.js"
+    Tests  2 failed | 4 passed (6)
+    restored by inverse copy, cmp-identical, md5 e05969dc60f8a3c612aa73bab4851368 before and after
+
+### THE FOUR GATES THE NEW FILES TRIPPED, EACH CURED AT CAUSE
+
+`tests/lint` whole went red in four places on the first run, all of them this car's, and none of
+them the walker's own subject — which is itself the acceptance-gap hazard working correctly:
+
+1. **`goldenFreeze.walker`** — `UPDATE_DRAWN_ANCHOR_ALLOWLIST` is a golden-adjacent env spelling
+   nobody had enrolled. Written as an EXCLUSION in `tests/fixtures/.golden-freeze-register.json`
+   (a shrink-only test-corpus inventory, the sibling of `UPDATE_EPISTEMIC_ALLOWLIST`; not a
+   world fingerprint).
+2. **`mutationCoverageManifest`** — the new walker had no entry. A `kind: "rationale"` entry
+   landed carrying the three plants above verbatim, on the standing ground that
+   `mutation-sweep.sh` reverts with `git checkout --`, which this program's shared tree forbids.
+3. **`negativeAssertionAnchor.walker`** — the two `not.toMatch` in the new `{calamity}` arm were
+   un-anchored. `// anchored:` markers added on the assertions' own lines, naming
+   `poolMemberTexts`'s refusal-to-return-empty and the `CALAMITY` fill assertion as the liveness.
+4. **`sovereigntyLightingContract.walker`** — the census moved. Refrozen by its own ritual in a
+   SECOND commit, because the ritual refuses a dirty tree by design.
+
+⚠ **ONE JSON HAZARD, RECORDED.** A `json.load`/`json.dumps` round-trip of either register
+rewrites the whole file: `ensure_ascii=True` escapes every `—` and `§` (29 insertions / 22
+deletions on a one-row append), and `ensure_ascii=False` un-escapes the ones already stored
+escaped (40 / 35). Both were caught by reading the diff, reverted with
+`git show HEAD:<path> > <path>`, and replaced by a surgical text insertion — final diffs
+**+7 lines** and **+5 lines**, insertions only.
+
+### THE LIGHTING REFREEZE (commit 2, `cc22f1d72`)
+
+    census REFROZEN at cea20ddb30d9359ec72f579ccd87dd171758737e by REWRITE car 8a-13:
+      files 2562 -> 2563 · parked 375 -> 375 · credited 2187 -> 2188
+      titles 24163 -> 24169 · suiteTitles 6451 -> 6452
+    plain re-run without LIGHTING_CENSUS_REFREEZE:  34 passed   <- the receipt
+
+Two files land and only ONE is a test file: the walker carries six titles under one describe,
+which is the whole of the title movement. `drawnProse.js` is a pure helper and is uncredited by
+construction. The four converted suites gained no titles and lost none — the car replaced
+literal anchors with computed ones INSIDE existing arms, which is why `files` moves by one while
+`titles` moves by exactly six. Of the three rituals ONE was owed: the wiring census and the OSR
+read CURRENT at this tree (no `src/` byte and no stamped file moved), and a ritual with nothing
+to record is not run.
+
+### ACCEPTANCE — every figure from a command that was run, with its exit
+
+| gate | command | result | exit |
+|---|---|---|---|
+| **`tests/ui` WHOLE** | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/ui` | **Test Files 157 passed (157) · Tests 989 passed (989)** | **0** |
+| **`tests/lint` WHOLE** | `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint` | **Test Files 155 passed (155) · Tests 2,599 passed (2,599)** | **0** |
+| the four desk suites | `npx vitest run <the four, one call>` | **Test Files 4 passed · Tests 247 passed (247)** | **0** |
+| ″ focused, one at a time | defense · economy · general · warFaith | 91 · 59 · 69 · 28 passed | **0** each |
+| the two cured UI files | `npx vitest run <each>` | **24 passed (24)** · **13 passed (13)** | **0** |
+| the new walker | `npx vitest run tests/lint/proseDrawnAnchors.walker.test.js` | **6 passed (6)** | **0** |
+| the projection contract | `npx vitest run tests/data/dossierStateProseProjection.contract.test.js` | **77 passed (77)** | **0** |
+| strict domain | `node scripts/check-domain-strict.mjs` | `✓ no strict-type regressions (1120 errors, ceiling 1120)` | **0** |
+| typecheck ratchet | `npm run typecheck:ratchet` | `OK — no type regressions (173 error(s), ceiling 173)` | **0** |
+| the projector | `node scripts/generate-dossier-state-prose.mjs --check` | 68 state blocks / 2,266 variants verified | **0** |
+| eslint | `npx eslint <the six touched/new files>` | no output | **0** |
+| ⛔ ZERO `src/` BYTES | `git diff --stat 188010225..HEAD -- src` | **prints nothing** | — |
+| runner count | own one-line shell, before every vitest | **0** every time | — |
+| machine load | `ps -r` before each whole run | one `/bin/zsh` at 0.0 % — no system process to make a run vacuous | — |
+
+**THE ONE RED, INHERITED AND UNCHANGED.** `npx vitest run tests/copy/voiceMechanics.test.js`
+exits 1 at its inherited two files exactly, byte-identical to the §917 tip:
+
+    src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+    src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+
+Tests 1 failed | 18 passed (19). Neither file is touched by this car (the whole diff is nine
+test-side files), so this is the banked E2 ratchet and not this car's.
+
+### FINDINGS FOR THE FOLD AND THE §919 ROW
+
+1. ⛔ **8a-12'S LEDGER MISDESCRIBES THE FOUR DESK SUITES, AND THE CORRECTION MATTERS FOR 8b.**
+   Its rows say "a real seeded draw" for general (3 pins), defense (3) and warFaith (3) — nine
+   "live seeded pins", which ADDENDUM 5 inherits. Read one by one at this tip, **only TWO of the
+   twelve desk-suite pins are assertions at all**: `generalStateProseDesk:1430` and
+   `warFaithStateProseDesk:421-422`. The other ten are CORPUS SENTENCES QUOTED IN COMMENTS —
+   documentation of why a fill or a pool key is what it is. 8a-12's matcher scanned quoted runs
+   without a comment tokenizer; this car's walker strips comments, which is why its scan of the
+   same corpus is narrower and truer. **The four desk suites were never the standing risk the
+   ledger implied; the two `tests/ui` flow suites were, and are now cured.**
+2. ⚠ **THE STANDING SIX-FILE GATE 8a-12 RECOMMENDED IS NO LONGER OWED FOR THIS CLASS.** Its
+   finding 2 proposed naming the four desk suites plus the two UI suites as a gate after any
+   draw-touching commit. Plant (a) is the evidence that the class is closed instead: those same
+   six files stay green under a draw rule that moves 14 of 34 anchors. A gate would still catch
+   OTHER regressions in them; it is no longer the guard against re-index breakage.
+3. ⚠ **THE WALKER IS A DETECTOR, NOT A PROOF OF ABSENCE.** Its two recall limits (an under-floor
+   fixed run; a pin split across `+`) are real and stated in its header. `PATRON_LINE` was a
+   genuine pin it cannot see, cured here only because it sat in a file this car converted whole.
+   The ledger is a CEILING on what is tolerated, offered beside the executed whole-directory
+   proofs rather than instead of them.
+4. ⚠ **THE HELPER'S COST IS AN IMPORT OF ALL SIX LEAVES (884 KB of generated JS) IN ANY FILE
+   THAT USES IT.** In `tests/lint` the walker's first cold run took ~21 s of import time against
+   ~2 s warm. It is test-side only and reaches no bundle — `drawnProse.js` is a test helper and
+   the walker imports `STATE_LEAVES` from it rather than re-reading the leaves — but a future car
+   that spreads the helper across many small suites should expect the transform cost, not be
+   surprised by it.
+5. ⚠ **`variantByVid` SHIPS UNUSED BY THE PRODUCT ARMS AND THAT IS DELIBERATE, NOT DEAD CODE.**
+   The two "specific variant" arms ADDENDUM 5 named were both better served by the WHOLE-POOL
+   roster (`poolMemberTexts`), which is strictly stronger under NEVER TRIM: naming one vid would
+   have re-introduced the brittleness one layer down. `variantByVid` is kept because the shape
+   ADDENDUM 5 describes will be wanted the first time an arm is genuinely about one wording. ⚠ IT
+   IS CALLED BY NOTHING IN THE TREE TODAY — stated plainly rather than dressed up: it is an
+   export with no consumer, and a chair who would rather it were removed can have it removed in
+   a line.
 

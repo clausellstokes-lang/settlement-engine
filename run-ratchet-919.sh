@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: totalFiles 2503 -> 2508 (+5: proseLicenceCard.walker, prosePassageShapes.walker, proseTasteCorruption.walker, proseTasteInterested.walker, proseWaveGate.walker — derived from git diff --name-status 29ec62425..b005886ef: 5 added, 0 deleted, 0 renamed); entries 3 unchanged; HELD must be 0; totalTests derived by this run (REFUSED in advance), the direction up (the consist adds arms in 12 modified files) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: totalFiles 2503 -> 2509 (+6: proseLicenceCard.walker, prosePassageShapes.walker, proseTasteCorruption.walker, proseTasteInterested.walker, proseWaveGate.walker, proseDrawnAnchors.walker — derived from git diff --name-status 29ec62425..cc22f1d72: 6 added, 0 deleted, 0 renamed); entries 3 unchanged; HELD must be 0; totalTests derived by this run (REFUSED in advance), the direction up (the consist adds arms in 12 modified files) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
