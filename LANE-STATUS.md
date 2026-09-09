@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-08 20:32:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-08 20:38:40 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE train lands — the composed-prose sequence's cars 0, 1 and 2 as twenty
 
@@ -146,5 +146,5 @@ product claude/composite-r4 = 3b22b5c56 · ledger = 097a22b3f §915: the MEASURE
 - wf_d3c44881-503: 38 journal lines, 19 agents
 - wf_d89a58a7-4c7: 8 journal lines, 4 agents
 
-## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;90135 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;# -*- coding: utf-8 -*-;import io;SC='"'"'/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engi;p=SC+'"'"'run-ratchet-916.sh'"'"'; s=io.open(p,encoding='"'"'utf-8'"'";pred="(E4, §916): totalFiles 2499 -> 2502 (+3: tests/domain/composeSt;assert s.count('"'"'__PREDICTION__'"'"')==1;s=s.replace('"'"'__PREDICTION__'"'"',pred); io.open(p,'"'"'w'"'"',enco;PYEOF;sh -n $SC/run-ratchet-916.sh && cd $SC/laneSEAM && sh $SC/run-ratchet-;90139 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;
-load: 19.80 25.98 30.32
+## PROCESSES: 12571 /bin/zsh -c source /Users/cstokes/.claude/shell-snapshots/snapsh;12573 sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-eng;57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
+load: 7.23 9.87 20.46

@@ -20,7 +20,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "GATE_HEAD=$(git rev-parse HEAD)"
 CARS=$(git rev-list --count $BASE..HEAD); echo "GATE_CARS=$CARS"
-[ "$CARS" = "35" ] || { echo "REFUSED: expected 35 cars over $BASE, found $CARS"; exit 7; }
+[ "$CARS" = "38" ] || { echo "REFUSED: expected 38 cars over $BASE, found $CARS"; exit 7; }
 echo "GATE_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
 echo "GATE_LOAD_PRE=$(uptime | sed 's/.*averages: //')"
 echo "GATE_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
