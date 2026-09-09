@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 03:39:57 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 03:47:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -65,10 +65,11 @@
 | ? | other |  | result | 0 | FOLD.md | — | 02:40:16 |
 | ? | other |  | result | 0 | — | — | 02:29:00 |
 | ? | other |  | result | 0 | refute-XY.md | — | 07:39:34 |
-| ? | other |  | in-flight | 0 | — | — | 07:39:46 |
-| ? | other |  | in-flight | 0 | — | — | 07:39:55 |
-| ? | other |  | in-flight | 0 | — | — | 07:38:54 |
-| ? | other |  | in-flight | 0 | — | — | 07:36:05 |
+| ? | other |  | result | 0 | — | — | 07:40:22 |
+| ? | other |  | result | 0 | — | — | 07:45:03 |
+| ? | other |  | result | 0 | — | — | 07:42:23 |
+| ? | other |  | result | 0 | — | — | 07:40:53 |
+| ? | other |  | in-flight | 0 | — | — | 07:47:47 |
 | ? | other |  | result | 0 | — | — | 07:38:18 |
 | ? | other |  | result | 0 | — | — | 07:39:45 |
 
