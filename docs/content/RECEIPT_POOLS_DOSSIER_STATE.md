@@ -2522,28 +2522,40 @@ margin *arm*. They are different fields on different rows and both are kept;
 **PDF PARITY:** parity.
 
 **readiness `STRONG`**
-1. `[visitor]` A traveller coming in by road meets a defended place, and the approaches to {settlement} are watched. The works are kept up, and nothing in the arrangement is patched together.
-   - `[face]` The approaches are watched and the works are in repair. Nothing at {settlement} has been thrown up in a hurry, and the town reads as defended from the road.
-   - `[face]` No part of the defence at {settlement} is makeshift, and the approaches are under watch. A stranger coming in by road reads a held town and works that are kept.
-   - `[face]` The road offers a stranger the look of a defended place at {settlement}, and none of it is hasty work. The approaches are watched, and the works are sound.
-2. `[ledger]` What {settlement} can field and what it has built are both in good order. A threat against the town would take real effort, and the town knows as much.
-   - `[face]` The force {settlement} fields is in good order, and so is the fabric it has raised. An attempt on the town would be dear work, and nobody in it thinks otherwise.
-   - `[face]` In what it can field and in what it has built, {settlement} is sound. An assault on it would be no light undertaking, and the town understands the cost.
-   - `[face]` The fielded strength and the built defence at {settlement} stand equally sound. Any move against the town would cost real effort, and the town carries that in its reckoning.
-3. `[street]` Attack is not much on the town's mind at {settlement}, and complacency is not the reason. The arrangements are in place, and nothing else is doing the work.
-   - `[face]` Nobody at {settlement} spends much of the day expecting an attack, and complacency has no part in it. The arrangements stand, and the town relies on nothing else instead.
-   - `[face]` The thought of attack comes up seldom at {settlement}, and not for want of care. What the town has arranged is standing, and nothing else is set in its place.
-   - `[face]` Little of the day at {settlement} goes on the prospect of attack, and that is not ease of mind. The town leans on no substitute, and its arrangements are in order.
+1. `[visitor]` A traveller coming in by road meets a defended place, and the approaches to {settlement} are watched. The town's works are kept up and nothing in the arrangement is patched together.
+   - `[face]` The approaches are watched and the works are in repair. Nothing at {settlement} is hurried work, and the town reads as defended from the road.
+   - `[face]` No part of the defence at {settlement} is makeshift, and the approaches are under watch. A stranger coming in by road reads a held town and works kept whole.
+   - `[face]` The road gives a stranger the look of a defended place at {settlement}, and none of it is hasty work. The works are sound, and watch is kept on the approaches.
+2. `[ledger]` What {settlement} can field and what it has built are both in good order. A threat made good against the town would take real effort, and the town knows as much.
+   - `[face]` The force {settlement} fields is in trim, and so is the fabric it has raised. An attempt on the town would be dear work, and nobody in it thinks otherwise.
+   - `[face]` In what {settlement} can field and in what it has built, the place is well found. An assault on it would be no light undertaking, and the town understands the cost.
+   - `[face]` The fielded strength and the built defence at {settlement} stand equally sound. Any move against the town would be hard bought, and the town carries that in its reckoning.
+3. `[street]` The arrangements are in place and nothing else is doing the work. Attack is not much on the town's mind at {settlement}, and complacency is not the reason.
+   - `[face]` Nobody at {settlement} spends much of the day expecting an attack, and complacency has no part in it. The arrangements stand, and the town relies on nothing else.
+   - `[face]` The thought of attack comes up seldom at {settlement}, and not for want of care. What the town has arranged holds, and nothing else is set in its place.
+   - `[face]` Little of the day at {settlement} goes on the prospect of attack, and that is not ease of mind. The town leans on no substitute, and the arrangements are in order.
 4. `[counterforce]` At present nothing presses {settlement}, and the quiet is not luck. A town set this well is not worth the price of an attempt.
-   - `[face]` Chance has no share in the quiet at {settlement}, and nothing is pressing the town at present. A place set this well is not worth the cost of a try.
-   - `[face]` Quiet holds at {settlement}. None of it is luck, and an attempt on a town in this condition costs more than it returns.
-   - `[face]` Nothing stands against {settlement} at present. A town arranged to this standard is not worth the outlay, and the quiet owes nothing to accident.
+   - `[face]` Chance has no share in the quiet at {settlement}, and nothing is pressing the town at present. A town in this order does not repay the cost of a try.
+   - `[face]` Quiet holds at {settlement}. None of it is luck, and an attempt on a town in this condition costs more than it wins.
+   - `[face]` Nothing stands against {settlement}. A town arranged to this standard is not worth the outlay, and the quiet owes nothing to accident.
 
 **readiness `ADEQUATE`**
-1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
-2. `[visitor]` A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.
-3. `[street]` The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.
-4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
+1. `[ledger]` What {settlement} holds against likely trouble covers it, and covers it to the line. Nothing in that cover would stretch to a call arriving while another is still open.
+   - `[face]` At {settlement} the reckoning comes out even and leaves nothing over. Every likely trouble has its answer there, and a trouble coming beside another would find that answer already spoken for.
+   - `[face]` Against the trouble it expects, {settlement} keeps enough and keeps no more. What is kept stands where it is set, and a call raised on top of another would have nothing to draw on.
+   - `[face]` The margin at {settlement} is the part that is missing. What does stand meets what the town is likely to face, and a call made while another is open would find nothing in reserve.
+2. `[visitor]` A stranger reaching {settlement} finds an ordinary defended town. What the town has in place is enough to be taken in earnest, and short of anything a stranger would rest on.
+   - `[face]` To a stranger arriving, {settlement} is defended in the ordinary way. The defence is enough to be reckoned with, and short of anything that would answer for safety.
+   - `[face]` The defence at {settlement} is ordinary. A stranger takes it seriously, and would find no comfort in the arrangement.
+   - `[face]` Defended is what a stranger takes {settlement} for, and defended is the whole of the reading. What makes it true is in place; what would make it easy is not.
+3. `[street]` The town's account of itself is that it holds against the usual trouble, and claims no more than that. The account matches what the town has.
+   - `[face]` Asked, the town says it can hold against ordinary trouble, and says nothing past that. What it says and what it has come out the same.
+   - `[face]` What the town claims for itself is the ordinary run of trouble and nothing beyond. The claim is not larger than what the town holds.
+   - `[face]` Ordinary trouble the town expects to meet, and it puts the case no further. The case as put is the case as it stands.
+4. `[threshold]` The arrangements at {settlement} are sufficient, and sufficient exactly. A further demand on them would be met by leaving a standing pressure unmet.
+   - `[face]` Sufficiency at {settlement} is reached and not passed. That sufficiency answers what presses the town now, and a pressure past it would take its answer from one already given.
+   - `[face]` Nothing at {settlement} stands spare. Every part of the arrangement stands against a pressure that exists, and a further pressure would be taken up by a part already engaged.
+   - `[face]` The point {settlement} has reached is the one where the arrangements carry exactly what is on them. Anything more would come off something already carrying.
 
 **readiness `WEAK`**
 1. `[ledger]` The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.
@@ -2556,18 +2568,18 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.
 
 **terrain FAVOURABLE to the defender**
-1. `[visitor]` The ground at {settlement} favours whoever holds the town.
-   - `[face]` Whatever comes at {settlement} must first cross ground that is hard going for an attacker.
-   - `[face]` Rough country about {settlement} is unbuilt defence.
-   - `[face]` From any side, the way in to {settlement} is the defender's ground.
-2. `[ledger]` Part of the defence at {settlement} stands to the account of the site.
-   - `[face]` The site enters the reckoning at {settlement} on the defender's side.
-   - `[face]` In its siting, {settlement} has the better of the country.
-   - `[face]` Counted into what holds {settlement} is the ground under the town.
-3. `[counterforce]` Any attempt on {settlement} contends with the country before it contends with anybody.
-   - `[face]` To come at {settlement} is harder than to hold the place.
-   - `[face]` The country about {settlement} stands in the way of any force that comes.
-   - `[face]` Nothing comes at {settlement} on level terms.
+1. `[visitor]` Whoever holds {settlement} holds ground that favours the defender.
+   - `[face]` Whatever comes at {settlement} must first cross ground that is hard on an attacker.
+   - `[face]` The land about {settlement} is unbuilt defence.
+   - `[face]` From any side, the way into {settlement} is the defender's own.
+2. `[ledger]` Part of the defence at {settlement} stands to the site's account.
+   - `[face]` The site of {settlement} enters the reckoning on the defender's side.
+   - `[face]` In its siting, {settlement} draws an advantage from the country.
+   - `[face]` Counted into what holds {settlement} is the ground.
+3. `[counterforce]` Any attempt on {settlement} contends with the ground before it contends with anybody.
+   - `[face]` To come at {settlement} is harder than to hold the town.
+   - `[face]` The country about {settlement} lies across the path of any force.
+   - `[face]` Nothing reaches {settlement} on level terms.
 
 **terrain EXPOSED**
 1. `[visitor]` {settlement} sits open. There is no ground here that helps it, and everything the town has must be built rather than found.
@@ -2575,32 +2587,32 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[street]` The town has no hill and no narrows and does not pretend otherwise; what {settlement} holds it holds by standing on it.
 
 **strategic value HIGH**
-1. `[ledger]` What {settlement} holds is worth taking, and that is the whole of the town's defensive problem. The town must be worth more to keep than it is to seize.
-   - `[face]` A prize stands at {settlement}, and the defence of the place is that one reckoning. It must come out for the town and against whoever would take it.
-   - `[face]` Something at {settlement} is worth the taking, and there the town's whole defensive problem lies. Its worth to the town must stand above its worth as a spoil.
-   - `[face]` Another would want what {settlement} has, and the town's defence has no other question in it. The town must count for more in its own hands than in another's.
-2. `[street]` The town is aware of what it sits on, and aware that others are aware. That awareness runs underneath a great deal of what it decides.
-   - `[face]` The value of the place is common knowledge here, and the town holds it known abroad as well. Little the town settles stands apart from that value.
-   - `[face]` Nothing about what the place is worth is lost on the town, nor is the attention it draws from outside. Much of what the town chooses is chosen with both in view.
-   - `[face]` The measure of the place is taken here, and the town knows it is taken elsewhere as well. A great deal of what the town decides rests on that knowledge.
-3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and shortly afterwards why the town is so careful about who it offends.
-   - `[face]` A day at {settlement} is enough for a stranger to see why the place is wanted. A little longer is enough for the same stranger to see why the town chooses its quarrels with care.
-   - `[face]` Inside a day a stranger sees what draws others to {settlement}. Soon after, the same stranger sees why the town is sparing with its offence.
-   - `[face]` Why anybody would want {settlement} is plain to a stranger by the end of a day. Why the town is careful whom it offends is plain to the same stranger not long after.
+1. `[ledger]` What {settlement} holds is worth taking, and the town's defence turns on that one fact. The town must be worth more to keep than it is to seize.
+   - `[face]` A prize stands at {settlement}, and the whole defence of the place is that reckoning. It must come out for keeping over taking.
+   - `[face]` Something at {settlement} is worth the taking, and the town's defence weighs nothing else. Its worth to the town must stand above its worth as a spoil.
+   - `[face]` Another would want what {settlement} has, and the town's defence answers to that alone. In its own hands the town must count for more than it would count for in a taker's.
+2. `[street]` The town is aware of what it sits on, and aware that others are aware. Very little it does stands clear of that awareness.
+   - `[face]` The value of the place is common knowledge here, and the town knows it is common knowledge abroad. Little the town settles stands apart from that value.
+   - `[face]` Nothing about what the place is worth is lost on the town, and nothing about the notice that worth draws from outside. Neither of those is absent from the town's dealings.
+   - `[face]` The measure of the place is taken here, and the town knows it is taken elsewhere as well. By that measure a great part of the town's business is settled.
+3. `[visitor]` A stranger takes a day to see why anybody would want {settlement}, and not much longer to see why the town is careful whom it offends.
+   - `[face]` A day at {settlement} is enough to show a stranger why the place is wanted. Why the town keeps its quarrels few takes the same stranger a little longer.
+   - `[face]` Inside a day a stranger sees what draws others to {settlement}. The town's care over whom it offends follows soon after.
+   - `[face]` Why anybody would want {settlement} is plain to a stranger by the end of a day. Not long after, so is the care the town takes over giving offence.
 
 **strategic value LOW**
 1. `[counterforce]` Nothing at {settlement} would repay an attempt on the town.
-   - `[face]` The taking of {settlement} would be a bad bargain.
-   - `[face]` More would be spent on an attempt at {settlement} than the place is worth.
+   - `[face]` The taking of {settlement} would leave the taker poorer.
+   - `[face]` More would be spent on an attempt at {settlement} than the place would fetch.
    - `[face]` Whoever came for {settlement} would come for little.
 2. `[ledger]` No prize stands at {settlement}.
-   - `[face]` Among places worth having, {settlement} does not figure.
-   - `[face]` The value of {settlement} to anybody outside it is small.
-   - `[face]` For all that {settlement} holds, the gain in having it is poor.
+   - `[face]` Among places worth the trouble, {settlement} does not figure.
+   - `[face]` The value of {settlement} to an outsider is small.
+   - `[face]` For all that {settlement} holds, the keeping of it makes a slight return.
 3. `[street]` The town is not the kind of place anybody takes.
-   - `[face]` What the town has, nobody else wants.
+   - `[face]` What the town has is worth little elsewhere.
    - `[face]` Nothing here would pay for the coming.
-   - `[face]` What would be got here would not answer for the work.
+   - `[face]` What could be got here would not answer for the work.
 
 ---
 
