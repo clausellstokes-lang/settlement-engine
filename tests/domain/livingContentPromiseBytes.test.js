@@ -188,10 +188,24 @@ describe('THE PROMISE under the living-content law, by bytes', () => {
     expect(towns.length, 'the RATE corpus is not the 768-town grid this arm is stated at').toBe(768);
     const moved = [];
     let v2RosterCount = 0;
+    let v1RosterCount = 0;
     for (const town of towns) {
       const verdict = comparePair(town.config, town.seed);
       if (!verdict.same) moved.push(town.seed);
       if (verdict.v2Roster) v2RosterCount += 1;
+      if (verdict.v1Roster) v1RosterCount += 1;
+      // ⭐ THE TWO CELLS THIS ARM PRINTED BUT DID NOT MEASURE (lane LIGHT car 2d,
+      // on the fold's cure A4). The golden arm above has asserted the two laws
+      // per row since it was written; this one counted only `v2Roster` and
+      // asserted only `moved`, so "roster under law 1 = 0" and "wrong law = 0"
+      // were STATED by the receipt's table and measured by nothing. A sameness
+      // claim between two laws is worth nothing until the two laws are shown to
+      // be two, and it is worth less on THIS corpus than on the golden one,
+      // because four seeds a cell is exactly where a seeded draw would show.
+      expect(verdict.v1, `${town.seed}: the dark arm is not v1`)
+        .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+      expect(verdict.v2, `${town.seed}: the lit arm is not v2`)
+        .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
     }
     expect(
       moved,
@@ -200,6 +214,10 @@ describe('THE PROMISE under the living-content law, by bytes', () => {
       + ' golden grid\'s single seed cannot see. STOP and report; do not re-record anything.'
       + ` Seeds that moved: ${moved.slice(0, 10).join(', ')}`,
     ).toEqual([]);
+    // THE ROSTER IS ABSENT ON EVERY ROW UNDER BOTH LAWS, and under law 1 that is
+    // the law rather than an accident: law 1 has no roster to write at all, and
+    // these runs pass `customContent: {}` so law 2 has nothing to record either.
+    expect(v1RosterCount).toBe(0);
     expect(v2RosterCount).toBe(0);
   }, 240_000);
 
