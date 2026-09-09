@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 102,
+ "firstTs": "2026-09-09T17:23:58.253Z",
+ "lastTs": "2026-09-09T17:26:03.804Z",
+ "tools": {
+  "Read": 4,
+  "Bash": 31
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll read the voice documents, the kept rows, the draft, the licence card, and the old shipped rows in parallel.",
+ "run": "wf_e49b0611-dbb",
+ "agent": "a7264bb5b836bf720",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_e49b0611-dbb/agent-a7264bb5b836bf720.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

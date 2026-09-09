@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:21:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:27:14 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -83,6 +83,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:48:55 |
 | ? | other |  | result | 0 | — | — | 16:19:10 |
 | ? | other |  | failed | 0 | — | — | 17:18:41 |
+| ? | other |  | in-flight | 0 | — | — | 17:27:08 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 16:48:54 |
 | ? | other |  | failed | 0 | — | — | 17:18:44 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:35:40 |
@@ -135,7 +136,7 @@
 | ? | other |  | result | 0 | — | — | 16:36:36 |
 | ? | other |  | result | 0 | — | — | 16:15:05 |
 | ? | other |  | result | 0 | refine.md | — | 16:34:46 |
-| ? | other |  | in-flight | 0 | — | — | 17:18:20 |
+| ? | other |  | result | 0 | refute.md | — | 17:24:41 |
 | ? | other |  | result | 0 | refine.md | — | 16:56:04 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:41:47 |
 | ? | other |  | result | 0 | — | — | 17:12:16 |
@@ -157,6 +158,12 @@
 | ? | other |  | failed | 0 | — | — | 17:19:34 |
 | ? | other |  | result | 0 | — | — | 16:07:54 |
 | ? | other |  | result | 0 | — | — | 16:05:15 |
+| ? | other |  | in-flight | 0 | — | — | 17:27:00 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 16:05:45 |
+| ? | other |  | in-flight | 0 | — | — | 17:25:38 |
+| ? | other |  | in-flight | 0 | — | — | 17:26:09 |
+| ? | other |  | in-flight | 0 | — | — | 17:27:12 |
+| ? | other |  | in-flight | 0 | — | — | 17:25:07 |
+| ? | other |  | in-flight | 0 | — | — | 17:26:03 |
 
 RECOVERY after a cutoff: for a finder whose journal says in-flight/failed and whose checkpoint is absent or complete=false, its urlsFetched list is the seed for the re-run (`mk-round.py … --inflight` folds it into the angle prompt as PRIOR PROGRESS); a verifier chunk without its verdict file simply re-runs (15 claims).
