@@ -48,6 +48,24 @@
  *   - baseline entry now covered → strike it from the baseline (shrink);
  *   - mechanism/flag deleted from source → strike its baseline/registry entry.
  *
+ * ⛔ WHAT THIS WALKER DOES NOT SEE, NAMED RATHER THAN LEFT TO BE ASSUMED (lane
+ * LIGHT, 2026-09-08). Its denominator is `src/domain/worldPulse` plus the
+ * `<x>Enabled` simulation-rules flags, and BOTH axes miss the estate's other
+ * kind of opt-in entirely: a VERSIONED GENERATION LAW. The living-content law is
+ * one — `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION` is a version constant, not an
+ * `<x>Enabled` flag; its modules live under `src/domain/content/`, not under
+ * worldPulse; and its lit path is decided by the WORLD'S persisted config rather
+ * than by a rules bag. So this walker was green on the day that law shipped
+ * unlit, green on the day it shipped lit, and green through the whole period when
+ * lighting it would have taken generation down for want of a loader caller. That
+ * is not a defect in this walker: it is the scope it declares. The generation
+ * laws are held instead by
+ * `tests/lint/densityCreateBoundary.walker.test.js` (which caller may mint, and
+ * who must await the lazy payload) and proved lit by
+ * `tests/domain/livingContentLawWiring.test.js` and
+ * `tests/domain/livingContentPromiseBytes.test.js`. Cited here so a reader who
+ * takes this walker's green as estate-wide lit coverage meets the boundary first.
+ *
  * Pure source/test-corpus reads + one pure-constant runtime import — no engine
  * state, no rng, no clock; byte-inert to first paint and to every golden.
  */
