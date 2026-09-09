@@ -668,7 +668,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "wordings": [
             "Townsfolk would come out. What comes out is a militia and not a defence.",
             "The muster would fill, and a town on its feet is not a town defended.",
-            "Turning out is what this town would do, and it is not the same as being defended."
+            "What this town would do is turn out, and a turnout does not amount to a defence."
           ]
         },
         {

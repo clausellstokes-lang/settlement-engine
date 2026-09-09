@@ -2685,7 +2685,7 @@ supplies the ancestry.
 2. `[street]` The town would turn out. A turnout is not a defence.
    - `[face]` Townsfolk would come out. What comes out is a militia and not a defence.
    - `[face]` The muster would fill, and a town on its feet is not a town defended.
-   - `[face]` Turning out is what this town would do, and it is not the same as being defended.
+   - `[face]` What this town would do is turn out, and a turnout does not amount to a defence.
 3. `[unfolding]` What stands at {settlement} would hold against a raid and is unlikely to hold against a trained attempt with siege gear. The same arrangement stands in either case.
    - `[face]` A raid would be held at {settlement}, and a company that comes in order with a siege train would not. The means are the same in both.
    - `[face]` Against raiders what {settlement} keeps would serve. Against professionals with siege gear the same keeping would not.
