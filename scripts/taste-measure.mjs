@@ -41,7 +41,7 @@ import url from 'node:url';
 
 import { estateGround, withEntryContext } from '../src/domain/prose/entryGround.js';
 import {
-  armA5, composedVerdictOf, provenanceCount, sampleOf, walkComposed,
+  armA5, claimsField, composedVerdictOf, provenanceCount, sampleOf, walkComposed,
 } from '../src/domain/prose/composedWalker.js';
 import { AUTHORING_MARKER } from './lib/dossier-annex-grammar.mjs';
 import { fingerprint, RATE_METRICS, scoreAgainstBands } from '../src/domain/prose/proseFingerprint.js';
@@ -123,6 +123,11 @@ export const ENTRY_NUMBERS = Object.freeze({ budgetShare: 2 / 3, depth: 1.75 });
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
 /** @param {string} text @returns {number} */
 const words = (text) => String(text).trim().split(/\s+/).filter(Boolean).length;
+/** A clause as the TABLE prints it: one line, and long enough to be recognised. @param {string} text */
+const quoted = (text) => {
+  const flat = String(text || '').replace(/\s+/g, ' ').trim();
+  return flat.length > 96 ? `${flat.slice(0, 93)}...` : flat;
+};
 
 /** The corpus, as one block map. */
 const CORPUS = { ...DOSSIER_STATE_PROSE_DEFENSE, ...DOSSIER_STATE_PROSE_GENERAL };
@@ -286,6 +291,401 @@ export function unitsOfPool(blockId, poolKey) {
   return units;
 }
 
+// ── ⭐⭐ CAR M-9: THE SITE OF A FINDING — THE WRITERS' GRAIN, AND THE SPINE'S ────────
+
+/**
+ * ⭐⭐ WHY THIS SECTION EXISTS, AND THE MEASUREMENT THAT FORCED IT. Rounds 1 to 3 of the writing
+ * workflow took a pool's verdict at the WHOLE-UNIT grain: a composed unit is WITHHELD when any
+ * arm withholds on any part of it, and a pool is out of band while any of its units is withheld.
+ * On the shipped corpus that verdict cannot be reached by writing, because the SPINE half of
+ * every unit is pre-rewrite text the writers may not touch. At round 3 the projector accepted
+ * all twelve rows of all seven pools VERBATIM and every band measure had cleared, and all seven
+ * pools still read out of band on findings quoting the spine's own clauses: arm Q on
+ * `stone keeps itself, and wages do not.`, F25 on `the books say`, A3 on `rather than in the
+ * luck`. The loop was DRY BY CONSTRUCTION, because a writer cannot move a measure whose subject
+ * is a sentence they did not write and may not edit.
+ *
+ * So the verdict is taken at TWO grains and both are printed. The UNIT grain is unchanged and is
+ * what the REWRITE will be judged on. The OWNED grain counts a finding only where its SITE is
+ * the modifier's own piece or the JOINT between the two, and the spine's own findings are
+ * collected as INHERITED, printed with the arm, the spine key and the quoted clause, and never
+ * counted against the pool.
+ *
+ * ⛔ THE DEFAULT IS OWNED AND NEVER INHERITED. The arranged unit is `spine + ' ' + modifier`
+ * verbatim, so every clause of it lies inside the spine, inside the modifier, or across the
+ * boundary; the third is the JOINT and it is the writers' own, because the connective, the seat
+ * and the thread are what they chose. A finding whose evidence cannot be located in either piece
+ * is therefore read at the joint and COUNTS. An unattributable finding must never be excused as
+ * the spine's: that is the only direction of this rule that could hide a defect, and a gate that
+ * hid one would be the false green the harness exists to refuse.
+ */
+
+/** The composed arms whose subject IS the join, so they can belong to no single piece. */
+export const JOINT_ARMS = Object.freeze(['A1', 'A2']);
+
+/**
+ * One finding's name, in the grain the gate rounds already printed: the entry walker answers in
+ * its closed `klass` vocabulary with a prose arm name, the composed arms answer with an arm id
+ * and a subject.
+ * @param {{arm?: string, klass?: string, subject?: string}} finding
+ * @returns {string}
+ */
+export function labelOfFinding(finding) {
+  const arm = String(finding.arm || '');
+  return finding.klass ? `${finding.klass} · ${arm}` : `${arm} · ${String(finding.subject || '')}`;
+}
+
+/**
+ * ⭐⭐ WHERE ONE FINDING SITS: the spine's own piece, the modifier's piece, or the JOINT.
+ *
+ * The handle is the one each family already carries and no new one is minted. An ENTRY finding
+ * names the CLAUSE the detector fired in (`entryWalker.finding`'s own field), so the clause is
+ * located in the pieces' texts. A COMPOSED finding names its arm: A1 and A2 read ACROSS the
+ * pieces by construction, A13 names the citing piece by key on its row, and A3 quotes the
+ * rejected alternative, which is located the same way a clause is.
+ * @param {{arm?: string, klass?: string, clause?: string, value?: string}} finding
+ * @param {{pieces?: ReadonlyArray<{role: string, key: string, text: string}>}} unit
+ * @returns {{site: 'spine'|'modifier'|'joint', key: string, evidence: string, why: string}}
+ */
+export function siteOfFinding(finding, unit) {
+  const pieces = unit && Array.isArray(unit.pieces) ? unit.pieces : [];
+  const spine = pieces.find((piece) => piece.role === 'spine') || null;
+  const modifier = pieces.find((piece) => piece.role === 'modifier') || null;
+  const composedArm = finding.klass === undefined ? String(finding.arm || '') : '';
+  if (JOINT_ARMS.includes(composedArm)) {
+    return {
+      site: 'joint',
+      key: modifier ? modifier.key : '',
+      evidence: String(finding.value || ''),
+      why: `arm ${composedArm} reads across the pieces, so its subject is the joint and never one half of it`,
+    };
+  }
+  if (composedArm === 'A13') {
+    const named = String(finding.value || '');
+    // ⛔ NOT A SPLIT ON THE COLON. Every taste pool key CARRIES a colon (`stores: short`), so a
+    // `value.split(':')[0]` would name the pool `stores` and match nothing. The row is either the
+    // bare key or `key: detail`, so the test is an exact match or that one prefix.
+    const holds = (piece) => piece !== null && (named === piece.key || named.startsWith(`${piece.key}: `));
+    if (holds(modifier)) {
+      return {
+        site: 'modifier', key: modifier.key, evidence: named, why: 'the citing piece named on the A13 row is the modifier',
+      };
+    }
+    if (holds(spine)) {
+      return {
+        site: 'spine', key: spine.key, evidence: named, why: 'the citing piece named on the A13 row is the spine',
+      };
+    }
+    return {
+      site: 'joint', key: modifier ? modifier.key : '', evidence: named, why: 'the A13 row names no piece this unit carries, so the finding is read at the joint and counts',
+    };
+  }
+  const evidence = String(finding.clause || (composedArm === 'A3' ? finding.value : '') || '').trim();
+  const needle = evidence.toLowerCase();
+  const inSpine = spine !== null && needle !== '' && String(spine.text).toLowerCase().includes(needle);
+  const inModifier = modifier !== null && needle !== '' && String(modifier.text).toLowerCase().includes(needle);
+  if (inSpine && !inModifier) {
+    return {
+      site: 'spine', key: spine.key, evidence, why: 'the clause the detector fired in lies inside the spine\'s own text, which the writers may not edit',
+    };
+  }
+  if (inModifier && !inSpine) {
+    return {
+      site: 'modifier', key: modifier.key, evidence, why: 'the clause the detector fired in lies inside the modifier\'s own face',
+    };
+  }
+  return {
+    site: 'joint',
+    key: modifier ? modifier.key : '',
+    evidence,
+    why: needle === ''
+      ? 'the finding carries no locatable evidence, so it is read at the joint and counts against the pool'
+      : 'the clause crosses the boundary between the two pieces, or stands in both, so it is the joint\'s and counts',
+  };
+}
+
+/**
+ * ⭐⭐ ONE WALK, TWO GRAINS. The unit verdicts are exactly what they were; the OWNED verdict of a
+ * unit is taken over the findings whose site is the modifier or the joint, and the spine's are
+ * grouped as inherited with their count.
+ * @param {ReadonlyArray<object>} units
+ * @param {(unit: object) => {entry: {fails: object[], withheld: object[]},
+ *   composed: {fails: object[], withheld: object[]}}} walkOne
+ */
+export function scopedWalkOf(units, walkOne) {
+  /** @type {Record<string, number>} */
+  const verdicts = { FAIL: 0, WITHHELD: 0, PASS: 0 };
+  /** @type {Record<string, number>} */
+  const ownedVerdicts = { FAIL: 0, WITHHELD: 0, PASS: 0 };
+  /** @type {Array<object>} */
+  const findings = [];
+  /** @type {Array<object>} */
+  const owned = [];
+  /** @type {Map<string, {label: string, arm: string, klass: string, channel: string,
+   *   spineKey: string, clause: string, description: string, count: number}>} */
+  const inherited = new Map();
+  /** @type {Map<string, number>} */
+  const ownedByLabel = new Map();
+  for (const unit of units || []) {
+    const result = walkOne(unit);
+    verdicts[composedVerdictOf(/** @type {any} */ (result))] += 1;
+    /** @type {Array<object>} */
+    const here = [];
+    // ⛔ THE ORDER IS THE ONE THE JSON ALREADY SHIPS — composed fails, entry fails, then the two
+    // withheld lists — because `walk.findings` is that list capped at 40 and a reordering here
+    // would move a figure this car does not touch.
+    for (const f of [...result.composed.fails, ...result.entry.fails]) here.push({ channel: 'FAIL', ...f });
+    for (const f of [...result.composed.withheld, ...result.entry.withheld]) here.push({ channel: 'WITHHELD', ...f });
+    findings.push(...here);
+    let fail = 0;
+    let withheld = 0;
+    for (const f of here) {
+      const at = siteOfFinding(f, unit);
+      const label = labelOfFinding(f);
+      if (at.site === 'spine') {
+        const key = `${label} ${at.key} ${at.evidence}`;
+        const seen = inherited.get(key);
+        if (seen) {
+          seen.count += 1;
+        } else {
+          inherited.set(key, {
+            label,
+            arm: String(f.arm || ''),
+            klass: String(f.klass || ''),
+            channel: String(f.channel || ''),
+            spineKey: at.key,
+            clause: at.evidence,
+            description: String(f.description || ''),
+            count: 1,
+          });
+        }
+        continue;
+      }
+      owned.push({
+        ...f, site: at.site, siteKey: at.key, siteWhy: at.why,
+      });
+      ownedByLabel.set(label, (ownedByLabel.get(label) || 0) + 1);
+      if (f.channel === 'FAIL') fail += 1; else withheld += 1;
+    }
+    if (fail > 0) ownedVerdicts.FAIL += 1;
+    else if (withheld > 0) ownedVerdicts.WITHHELD += 1;
+    else ownedVerdicts.PASS += 1;
+  }
+  const rows = [...inherited.values()];
+  return {
+    verdicts,
+    findings,
+    owned: {
+      verdicts: ownedVerdicts,
+      findings: owned.slice(0, 40),
+      findingCount: owned.length,
+      byLabel: [...ownedByLabel].map(([label, count]) => ({ label, count })),
+    },
+    inherited: rows,
+    inheritedCount: rows.reduce((n, r) => n + r.count, 0),
+  };
+}
+
+/**
+ * ⭐⭐ THE GATE'S OWN VERDICT, SCOPED. A pool is IN BAND when every face sits inside every band it
+ * is measured on and every OWNED arm is green. The failing measures are returned in the shape the
+ * writing workflow's schema already asks a gate agent for (`measure`, `value`, `band`), so the
+ * gate copies them rather than composing a sentence of its own about a number it did not measure.
+ *
+ * ⛔ `inBand` IS `failing.length === 0` AND IS NOT A SECOND OPINION. A verdict computed apart
+ * from its own reason list is a pair that can disagree, and the disagreement is always silent.
+ * @param {{band?: Array<object>|null, lengths?: {form: string, ceiling: number|null,
+ *   rows: Array<{faces: number[]}>}|null, owned?: {verdicts: Record<string, number>,
+ *   byLabel: Array<{label: string, count: number}>}|null}} pool
+ * @returns {{inBand: boolean, failing: Array<{measure: string, value: string, band: string}>}}
+ */
+export function inBandOf(pool) {
+  /** @type {Array<{measure: string, value: string, band: string}>} */
+  const failing = [];
+  const band = Array.isArray(pool.band) ? pool.band : [];
+  const measured = band.filter((face) => face.executable);
+  const absent = band.filter((face) => !face.executable);
+  if (band.length === 0) {
+    failing.push({
+      measure: 'band position',
+      value: 'NOT-EXECUTABLE: no face was measured',
+      band: 'every face measured against the ten leaf registers',
+    });
+  } else if (absent.length) {
+    failing.push({
+      measure: 'band position',
+      value: `NOT-EXECUTABLE on ${absent.length} of ${band.length} face(s): ${absent[0].why}`,
+      band: 'every face measured against the ten leaf registers',
+    });
+  }
+  /** @type {Map<string, {depth: number, side: string, faces: number}>} */
+  const deep = new Map();
+  for (const face of measured) {
+    if (face.depthOk || !face.deepest) continue;
+    const seen = deep.get(face.deepest.metric) || { depth: 0, side: face.deepest.side, faces: 0 };
+    seen.faces += 1;
+    if (face.deepest.depth > seen.depth) {
+      seen.depth = face.deepest.depth;
+      seen.side = face.deepest.side;
+    }
+    deep.set(face.deepest.metric, seen);
+  }
+  for (const [metric, seen] of deep) {
+    failing.push({
+      measure: `band depth · ${metric} (${seen.side})`,
+      value: `${seen.depth} band-widths on ${seen.faces} of ${measured.length} face(s)`,
+      band: `DEPTH at most ${ENTRY_NUMBERS.depth} band-widths on every face`,
+    });
+  }
+  const overBudget = measured.filter((face) => face.budgetOk === false);
+  if (overBudget.length) {
+    failing.push({
+      measure: 'band budget',
+      value: `over on ${overBudget.length} of ${measured.length} face(s)`,
+      band: 'a face exceeds at most two thirds of the soft rules measurable on it',
+    });
+  }
+  const lengths = pool.lengths || null;
+  if (lengths && lengths.ceiling) {
+    const over = (lengths.rows || []).flatMap((r) => r.faces).filter((n) => n > lengths.ceiling);
+    if (over.length) {
+      failing.push({
+        measure: `words per face (${lengths.form} form)`,
+        value: `${over.join(', ')} word(s) on ${over.length} face(s)`,
+        band: `at most ${lengths.ceiling} words`,
+      });
+    }
+  }
+  const owned = pool.owned || null;
+  if (owned) {
+    for (const { label, count } of owned.byLabel) {
+      failing.push({
+        measure: `composed walk · ${label}`,
+        value: `${count} owned finding(s)`,
+        band: 'every owned arm green: FAIL 0 and WITHHELD 0 over the pool\'s composed units',
+      });
+    }
+    if (owned.verdicts.FAIL > 0 || owned.verdicts.WITHHELD > 0) {
+      failing.push({
+        measure: 'composed walk · owned unit verdicts',
+        value: `FAIL ${owned.verdicts.FAIL} · WITHHELD ${owned.verdicts.WITHHELD} · PASS ${owned.verdicts.PASS}`,
+        band: 'FAIL 0 and WITHHELD 0 on the writers\' own grain',
+      });
+    }
+  }
+  return { inBand: failing.length === 0, failing };
+}
+
+/**
+ * ⭐ THE CENSUS'S WORD-LEVEL SYNONYM TABLE, if it ships one. It does not at this tip, and the
+ * report says so by NAMING the columns it looked for and what the census's only alias rows
+ * actually key, rather than by asserting an absence nobody can check.
+ * @param {Record<string, unknown>} census
+ * @returns {{table: Record<string, ReadonlyArray<string>>, why: string}}
+ */
+export function censusSynonymTable(census) {
+  for (const key of ['fieldVocabulary', 'fieldSynonyms', 'synonyms']) {
+    const at = census ? census[key] : null;
+    if (at && typeof at === 'object' && !Array.isArray(at)) {
+      return { table: /** @type {any} */ (at), why: '' };
+    }
+  }
+  const aliases = /** @type {any} */ (census || {}).ratifiedAliases;
+  const rows = aliases && Array.isArray(aliases.rows) ? aliases.rows.length : 0;
+  return {
+    table: {},
+    why: 'the wiring census ships NO word-level synonym table (no fieldVocabulary, fieldSynonyms or'
+      + ` synonyms column); its ${rows} ratified alias row(s) key an ENDPOINT to a read ROOT and`
+      + ' never a noun to a field, so a noun the field name does not contain can map to nothing',
+  };
+}
+
+/**
+ * ⭐⭐ ARM Q'S VOCABULARY, REPORTED AND NOT CURED (the chair's car M-9 item 3).
+ *
+ * `stone keeps itself, and wages do not.` is the owner's exemplar line and it is LAWFUL: the
+ * spine reads the pay gate and `wages` names it. Arm Q flags the coordinate as naming no second
+ * field because the arm's reader is `claimsField`, whose vocabulary is derived from the field's
+ * own PATH (`economicGates.military` yields "military") plus whatever synonym table the caller
+ * brings. So this function asks the question the sitting needs answered and changes no arm: for
+ * each inherited Q finding, do the clause's own words map to a field the SPINE declares it reads,
+ * under the census's synonym table? The arm is car 5's and the cure is the REWRITE's or a 5d.
+ * @param {ReadonlyArray<{klass: string, clause: string, spineKey: string, count: number}>} inherited
+ * @param {(key: string) => ReadonlyArray<string>} readsOf
+ * @param {{table: Record<string, ReadonlyArray<string>>, why: string}} vocabulary
+ */
+export function qVocabularyReport(inherited, readsOf, vocabulary) {
+  /** @type {Array<object>} */
+  const rows = [];
+  for (const row of inherited || []) {
+    if (row.klass !== 'Q') continue;
+    const reads = readsOf(row.spineKey) || [];
+    /** @type {string[]} */
+    const mapped = [];
+    for (const field of reads) {
+      const token = claimsField(row.clause, field, vocabulary.table);
+      if (token !== '') mapped.push(`${field} (as "${token}")`);
+    }
+    rows.push({
+      clause: row.clause,
+      spineKey: row.spineKey,
+      count: row.count,
+      reads: [...reads],
+      mapped,
+      verdict: mapped.length
+        ? 'the clause DOES name a field the spine declares it reads, so the arm and the census disagree'
+        : 'the clause names no field the spine declares it reads, under the vocabulary the census supplies',
+      synonymTable: vocabulary.why || 'a word-level synonym table ships and was applied',
+    });
+  }
+  return rows;
+}
+
+/**
+ * ⭐ THE HONESTY ROW — a pool whose wording set is still unwritten. It is a function so the arm
+ * that holds the rule stays ARMED after every pool has been written: a test can plant a marked
+ * variant list and read the row this file itself builds, rather than a re-implementation of it.
+ * @param {{block: string, pool: string, dir: string}} entry
+ * @param {{variants: ReadonlyArray<object>, marked: ReadonlyArray<object>, attach: string[],
+ *   rateBp: number|null, departure: number|null, rounds: object}} input
+ */
+export function withheldPoolRow(entry, input) {
+  return {
+    block: entry.block,
+    pool: entry.pool,
+    dir: entry.dir,
+    verdict: 'WITHHELD',
+    why: `${input.marked.length} of ${input.variants.length} variant(s) still carry ${AUTHORING_MARKER}:`
+      + ' the wording set has not been written, so every measure below is NOT-EXECUTABLE',
+    variants: input.variants.length,
+    faces: input.variants.map((v) => facesOf(v).length),
+    attach: input.attach,
+    rateBp: input.rateBp,
+    // ⛔ THE BIT IS THE NORM LEAF'S AND NOT THE CENSUS ROW'S. The census keeps the RATE
+    // as a report and `row.departure` is null on every row by construction; the FROZEN
+    // bit is what the composer's salience band reads, so that is what the table prints.
+    departure: input.departure,
+    rounds: input.rounds,
+    units: 0,
+    walk: null,
+    lengths: null,
+    siblings: null,
+    band: null,
+    provenance: null,
+    inBand: false,
+    failing: [{
+      measure: 'the wording set',
+      value: `${input.marked.length} of ${input.variants.length} variant(s) carry ${AUTHORING_MARKER}`,
+      band: 'a written set, whose measures are executable',
+    }],
+    owned: null,
+    inherited: [],
+    inheritedCount: 0,
+    spineWithheld: false,
+    qVocabulary: [],
+  };
+}
+
 // ── (h) THE ROUND COUNTERS, READ AND NEVER WRITTEN ──────────────────────────────────
 
 /**
@@ -437,6 +837,9 @@ export async function measure(options) {
     const resolved = sourceOfForTown(row, captured, {});
     return { kind: resolved.kind, holder: resolved.holder, standing: resolved.standing };
   };
+  // ⭐ CAR M-9 item 3: the vocabulary arm Q's reader is given, and the honest note when the
+  // census supplies none. Read ONCE, so every pool's report names the same table.
+  const synonyms = censusSynonymTable(CENSUS);
   const exemplars = exemplarBands(options.exemplars);
   out.exemplars = {
     dir: options.exemplars,
@@ -444,6 +847,7 @@ export async function measure(options) {
     metricsBanded: exemplars.bands ? Object.keys(exemplars.bands).length : 0,
     why: exemplars.why,
   };
+  out.synonymTable = { fields: Object.keys(synonyms.table).length, why: synonyms.why };
 
   // (b) (e) (g) PER POOL.
   /** @type {Array<object>} */
@@ -458,29 +862,14 @@ export async function measure(options) {
     const rounds = roundsOf(entry.dir);
     const row = ALL_ROWS.get(`${entry.block} :: ${entry.pool}`);
     if (marked.length > 0) {
-      pools.push({
-        block: entry.block,
-        pool: entry.pool,
-        dir: entry.dir,
-        verdict: 'WITHHELD',
-        why: `${marked.length} of ${variants.length} variant(s) still carry ${AUTHORING_MARKER}:`
-          + ' the wording set has not been written, so every measure below is NOT-EXECUTABLE',
-        variants: variants.length,
-        faces: variants.map((v) => facesOf(v).length),
+      pools.push(withheldPoolRow(entry, {
+        variants,
+        marked,
         attach: meta?.attach || [],
         rateBp: row?.rateBp ?? null,
-        // ⛔ THE BIT IS THE NORM LEAF'S AND NOT THE CENSUS ROW'S. The census keeps the RATE
-        // as a report and `row.departure` is null on every row by construction; the FROZEN
-        // bit is what the composer's salience band reads, so that is what the table prints.
         departure: DOSSIER_PROSE_NORMS[`${entry.block}::${entry.pool}`]?.departure ?? null,
         rounds,
-        units: 0,
-        walk: null,
-        lengths: null,
-        siblings: null,
-        band: null,
-        provenance: null,
-      });
+      }));
       continue;
     }
     const units = unitsOfPool(entry.block, entry.pool);
@@ -493,20 +882,11 @@ export async function measure(options) {
       register: 'R1',
       sourceOf,
     };
-    /** @type {Record<string, number>} */
-    const verdicts = { FAIL: 0, WITHHELD: 0, PASS: 0 };
-    /** @type {Array<object>} */
-    const findings = [];
-    for (const unit of units) {
-      const result = walkComposed(unit, withEntryContext(ground, {}), options2);
-      verdicts[composedVerdictOf(result)] += 1;
-      for (const f of [...result.composed.fails, ...result.entry.fails]) {
-        findings.push({ channel: 'FAIL', ...f });
-      }
-      for (const f of [...result.composed.withheld, ...result.entry.withheld]) {
-        findings.push({ channel: 'WITHHELD', ...f });
-      }
-    }
+    // ⭐⭐ CAR M-9: ONE WALK, READ AT TWO GRAINS. The unit verdicts are what they always were;
+    // the OWNED verdicts and the INHERITED list are the writers' grain and the spine's.
+    const scoped = scopedWalkOf(units, (unit) => walkComposed(unit, withEntryContext(ground, {}), options2));
+    const verdicts = scoped.verdicts;
+    const findings = scoped.findings;
     // (e) LENGTHS, SIBLING DISTANCE, BAND POSITION — per variant, over its faces.
     const form = meta?.form || 'sentence';
     const ceiling = form === 'fragment' ? 12 : null;
@@ -527,7 +907,7 @@ export async function measure(options) {
     const band = variants.flatMap((v, i) => facesOf(v)
       .map((face, f) => ({ vid: v.vid ?? i, face: f, ...bandPositionOf(face, exemplars) })));
     const cited = variants.reduce((n, v) => n + facesOf(v).reduce((m, face) => m + provenanceCount(face), 0), 0);
-    pools.push({
+    const built = {
       block: entry.block,
       pool: entry.pool,
       dir: entry.dir,
@@ -545,7 +925,17 @@ export async function measure(options) {
       siblings,
       band,
       provenance: { citations: cited, a13: findings.filter((f) => f.arm === 'A13').length },
-    });
+      owned: scoped.owned,
+      inherited: scoped.inherited,
+      inheritedCount: scoped.inheritedCount,
+      spineWithheld: scoped.inheritedCount > 0,
+      qVocabulary: qVocabularyReport(
+        scoped.inherited,
+        (key) => (ALL_ROWS.get(`${entry.block} :: ${key}`)?.reads || []),
+        synonyms,
+      ),
+    };
+    pools.push({ ...built, ...inBandOf(built) });
   }
   out.pools = pools;
 
@@ -623,7 +1013,7 @@ export function tableLines(out) {
   ];
   for (const pool of out.pools) {
     lines.push('');
-    lines.push(`  ── ${pool.block} :: ${pool.pool}   [${pool.verdict}]`);
+    lines.push(`  ── ${pool.block} :: ${pool.pool}   [${pool.verdict}]  inBand ${pool.inBand ? 'YES' : 'NO'}`);
     if (pool.why) lines.push(`     ${pool.why}`);
     lines.push(`     variants ${pool.variants} · faces ${pool.faces.join('/') || '-'}`
       + ` · attach ${pool.attach.length} · units ${pool.units}`
@@ -631,9 +1021,28 @@ export function tableLines(out) {
       + ` · departure ${pool.departure === null ? 'ABSENT' : pool.departure}`);
     lines.push(`     rounds: draft ${pool.rounds.draftRounds} · refine-A ${pool.rounds.refineA ? 'yes' : 'no'}`
       + ` · refine-B ${pool.rounds.refineB ? 'yes' : 'no'}`);
+    // ⭐⭐ CAR M-9: the failing measures are the WRITERS' OWN, and they are the whole of the
+    // reason `inBand` reads what it reads (`inBand` IS `failing.length === 0`).
+    for (const fail of pool.failing || []) {
+      lines.push(`     failing: ${fail.measure} = ${fail.value} | band ${fail.band}`);
+    }
     if (!pool.walk) continue;
     lines.push(`     walk: FAIL ${pool.walk.verdicts.FAIL} · WITHHELD ${pool.walk.verdicts.WITHHELD}`
       + ` · PASS ${pool.walk.verdicts.PASS} · findings ${pool.walk.findingCount}`);
+    lines.push(`     unit: FAIL ${pool.walk.verdicts.FAIL} · WITHHELD ${pool.walk.verdicts.WITHHELD}`
+      + ` · PASS ${pool.walk.verdicts.PASS}   ·   owned: FAIL ${pool.owned.verdicts.FAIL}`
+      + ` · WITHHELD ${pool.owned.verdicts.WITHHELD} · PASS ${pool.owned.verdicts.PASS}`
+      + ` (${pool.owned.findingCount} owned finding(s), ${pool.inheritedCount} inherited)`);
+    for (const row of pool.inherited) {
+      lines.push(`     inherited (the SPINE's own, never counted against this pool): ${row.label}`
+        + ` · spine \`${row.spineKey}\` · "${quoted(row.clause)}" x ${row.count}`);
+    }
+    for (const row of pool.qVocabulary) {
+      lines.push(`     arm Q vocabulary REPORT (no arm changed): "${quoted(row.clause)}" against spine`
+        + ` \`${row.spineKey}\` reads [${row.reads.join(', ') || 'none recovered'}]`);
+      lines.push(`       ${row.mapped.length ? `maps to ${row.mapped.join(' · ')}` : 'maps to no field'} — ${row.verdict}`);
+      lines.push(`       ${row.synonymTable}`);
+    }
     const lens = pool.lengths.rows.flatMap((r) => r.faces);
     lines.push(`     words per face: ${lens.join(' · ')}`
       + `${pool.lengths.ceiling ? ` (fragment ceiling ${pool.lengths.ceiling})` : ' (sentence form)'}`);
