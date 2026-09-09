@@ -31,7 +31,8 @@ import {
   ENTRY_NUMBERS, EXEMPLAR_DIR, EXEMPLAR_LEAVES, FACE_LEVEL_METRICS, PACKETS, SECTION_LEAVES,
   TEXT_LEVEL_METRICS, bandGrainsOf, bandPositionAt, bandPositionOf, censusSynonymTable,
   exemplarBands, exemplarCitationRate, fixtureSection, inBandOf, keepOrRevert, labelOfFinding,
-  measure, poolRosterOf, qVocabularyReport, roundsOf, sampleSizeFor, scopedWalkOf,
+  measure, packetDirFor, packetRefusal, packetTargetFor, poolRosterOf, qVocabularyReport,
+  roundsOf, sampleSizeFor, scopedWalkOf,
   sectionsCoverEveryPool, shapeReport, siblingSpreadOf, siteOfFinding, tableLines, tieRate,
   unitsOfPool, withheldPoolRow,
 } from '../../scripts/prose-wave-gate.mjs';
@@ -157,7 +158,76 @@ describe('the harness reads the packet directory and writes nothing in it', () =
     expect(absent).toEqual({
       draftRounds: 0, refineA: false, refineB: false, files: [],
     });
-    expect(existsSync(PACKETS), 'the packet root the workflow writes into').toBe(true);
+    expect(existsSync(PACKETS), 'the packet root the workflow READS from').toBe(true);
+  });
+
+  it('⭐⭐ THE PACKET IT WRITES IS NAMESPACED BY DOCK, and two arms in one tree are two paths', () => {
+    // ⛔ THE INCIDENT THIS ARM IS CUT FROM (SITTING §U c-1, fold NEW-2). The gate used to write
+    // `${PACKETS}/measure-${arm}.json` — one path shared by every dock under the chair's
+    // scratchpad — with `--arm` defaulting to `draft` and no refusal on an existing file. A
+    // skeptic's bare probe destroyed laneTASTE's live round-4 draft packet that way
+    // (169,324 B -> 17,245 B). 8b runs arms A and B concurrently by design, so this is the
+    // FALSE-GREEN INSTRUMENT class: a folder would read another run's figures under this
+    // run's name and could not tell.
+    const had = Object.prototype.hasOwnProperty.call(process.env, 'PACKETS');
+    const previous = process.env.PACKETS;
+    delete process.env.PACKETS;
+    try {
+      // (i) TWO ARMS IN ONE TREE ARE TWO PATHS.
+      const armA = packetTargetFor({ arm: 'A' });
+      const armB = packetTargetFor({ arm: 'B' });
+      expect(armA).not.toBe(armB);
+      expect(path.dirname(armA), 'and they share this dock\'s own packet directory')
+        .toBe(path.dirname(armB));
+      expect(path.basename(armA)).toBe('measure-A.json');
+
+      // (ii) TWO DOCKS ARE TWO DIRECTORIES — the half the filename alone cannot give, and the
+      // half the incident needed.
+      expect(packetDirFor('/tmp/scratch/laneONE'))
+        .not.toBe(packetDirFor('/tmp/scratch/laneTWO'));
+      expect(packetDirFor('/tmp/scratch/laneONE')).toBe(path.join('/tmp/scratch/packets', 'laneONE'));
+
+      // (iii) IT IS NEVER THE WRITERS' SHARED ROOT, and never inside the worktree — an
+      // untracked directory in the dock would break the porcelain-0 law every gate run is
+      // held to, which is why the namespace sits BESIDE the docks.
+      expect(path.dirname(armA)).not.toBe(PACKETS);
+      expect(armA.startsWith(`${ROOT}${path.sep}`), 'the packet must not land inside the dock')
+        .toBe(false);
+
+      // (iv) `--out` names the whole path; `$PACKETS` names the directory.
+      expect(packetTargetFor({ arm: 'A', out: '/tmp/somewhere/mine.json' }))
+        .toBe(path.resolve('/tmp/somewhere/mine.json'));
+      process.env.PACKETS = '/tmp/env-packets';
+      expect(packetTargetFor({ arm: 'draft' }))
+        .toBe(path.join(path.resolve('/tmp/env-packets'), 'measure-draft.json'));
+    } finally {
+      if (had) process.env.PACKETS = previous; else delete process.env.PACKETS;
+    }
+  });
+
+  it('⭐⭐ A FOREIGN PACKET IS REFUSED — another arm, or a LATER round, is never overwritten', () => {
+    // The exact incident, as a row: a bare `--arm draft --round 0` probe against a live
+    // round-4 draft packet.
+    const live = { arm: 'draft', round: 4, at: '2026-09-09T05:58:55' };
+    const bare = packetRefusal({ existing: live, arm: 'draft', round: 0 });
+    expect(bare, 'a bare probe must not clobber a round-4 measurement').toBeTruthy();
+    expect(bare).toContain('LATER measurement');
+    expect(bare).toContain('round 4');
+    expect(bare).toContain('2026-09-09T05:58:55');
+    expect(bare).toContain('--out');
+    // The other shape of foreign: a sibling arm's file, reached through `--out`.
+    const other = packetRefusal({ existing: { arm: 'A', round: 1 }, arm: 'B', round: 1 });
+    expect(other).toContain('belongs to another run');
+    expect(other).toContain('arm "A"');
+    // ⛔ AND THE CONTROL, because a refusal that refused everything would be useless: the
+    // workflow's own progress is allowed. Same arm at the same round (a re-run), same arm at a
+    // later round (the next round), and no file at all.
+    expect(packetRefusal({ existing: live, arm: 'draft', round: 4 }), 're-running a round')
+      .toBeNull();
+    expect(packetRefusal({ existing: live, arm: 'draft', round: 5 }), 'the next round').toBeNull();
+    expect(packetRefusal({ existing: null, arm: 'draft', round: 0 }), 'nothing there').toBeNull();
+    expect(packetRefusal({ existing: {}, arm: 'draft', round: 0 }), 'a file with no header'
+      + ' is not a packet').toBeNull();
   });
 });
 

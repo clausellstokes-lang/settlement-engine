@@ -66,12 +66,24 @@
  *   node scripts/prose-wave-gate.mjs --arm draft --variety 1     a cheap slice of measure (d)
  *   node scripts/prose-wave-gate.mjs --section defense           a DESK SECTION's spine pools
  *   node scripts/prose-wave-gate.mjs --shapes --corpus <f>       item 2's distribution table
+ *   node scripts/prose-wave-gate.mjs --arm A --out <path.json>   name the packet explicitly
  *
- * READ-ONLY except the JSON it writes at `$PACKETS/measure-<arm>.json`.
+ * ⛔ ALWAYS PASS `--section` OR `--pools`. The bare roster is the taste's seven pool NAMES,
+ * which are annex rows this tree does not carry, so a bare run composes ZERO units and every
+ * row reads NOT-EXECUTABLE. That is honest and it is not a measurement; 8b's workflow names a
+ * roster on every call (fold NEW-5).
+ *
+ * READ-ONLY except ONE JSON, written at `<scratch>/packets/<dock>/measure-<arm>.json` —
+ * NAMESPACED BY DOCK since REWRITE car 8a-11 (SITTING §U c-1), overridable by `$PACKETS` (the
+ * directory) or `--out` (the whole path), and REFUSED where the file already there names
+ * another arm or a later round. It does not write into `$PACKETS/`, which is the writers'
+ * shared packet root and is only ever listed.
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import {
+  existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync,
+} from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
 
@@ -142,8 +154,89 @@ function deriveOfficeRoster() {
   return [...roles].sort();
 }
 const SCRATCH = path.resolve(ROOT, '..');
-/** Where the writers' packets live, and where the JSON is written. */
+/**
+ * Where the WRITERS' packets live. READ ONLY: `roundsOf` lists this directory and opens
+ * nothing in it. It is deliberately SHARED across docks, because a pool's rounds are the
+ * wave's fact and not one dock's. Nothing writes here — see `packetTargetFor` for the write.
+ */
 export const PACKETS = path.join(SCRATCH, 'taste');
+
+/**
+ * ⭐⭐ WHERE THE MEASUREMENT IS WRITTEN, NAMESPACED BY DOCK (REWRITE car 8a-11, SITTING §U c-1).
+ *
+ * ⛔ THE DEFECT THIS CURES, AND IT BIT A LIVE MEASUREMENT. Until this cure the run wrote
+ * `${PACKETS}/measure-${arm}.json` — one SHARED path for every dock cut under the chair's
+ * scratchpad — with no `--out`, no environment override, no refusal on an existing file, and
+ * `--arm` defaulting to `draft`. A skeptic's bare read-only-looking probe therefore overwrote
+ * laneTASTE's live round-4 draft packet (169,324 B down to 17,245 B; restored from
+ * `measure-draft-prev.json`). The wave's writing workflow calls this gate after EVERY round on
+ * EVERY arm, and 8b runs arms A and B concurrently by design, so a gate that clobbers a
+ * sibling's measurement is the FALSE-GREEN INSTRUMENT class: the packet a folder later reads
+ * would carry another run's figures under this run's name.
+ *
+ * ⛔ WHY THE DEFAULT IS `<scratch>/packets/<dock>/` AND NOT `<dock>/.packets/`. Both namespace
+ * by dock. A directory INSIDE the worktree does not: an untracked `.packets/` shows up as `??`
+ * in `git status --porcelain`, and porcelain 0 between commits is the law every gate run in
+ * this program is held to — the cure would have broken the check it exists to protect, on
+ * every dock, silently. So the namespace sits beside the docks rather than inside one, and the
+ * dock's own directory name is the namespace.
+ *
+ * `$PACKETS` overrides the DIRECTORY; `--out` overrides the whole PATH, and the workflow
+ * passes it per arm as belt and braces (SITTING §U c-1).
+ * @param {string} [root] the dock, which is this file's own repository root
+ * @returns {string}
+ */
+export function packetDirFor(root = ROOT) {
+  const override = process.env.PACKETS;
+  if (override && override.trim() !== '') return path.resolve(override);
+  return path.join(path.resolve(root, '..'), 'packets', path.basename(path.resolve(root)));
+}
+
+/**
+ * The file this run writes, which is a function of the dock, the arm and the flags — never a
+ * constant.
+ * @param {{arm: string, out?: string|null, root?: string}} options
+ * @returns {string}
+ */
+export function packetTargetFor(options) {
+  const { arm, out = null, root = ROOT } = options;
+  if (out && String(out).trim() !== '') return path.resolve(String(out));
+  return path.join(packetDirFor(root), `measure-${arm}.json`);
+}
+
+/**
+ * ⛔ THE REFUSAL — a packet whose own header says it belongs to another run is never
+ * overwritten, and the gate exits non-zero rather than writing.
+ *
+ * TWO SHAPES OF FOREIGN, and both are the incident above. (i) A DIFFERENT ARM: the file at the
+ * target names an arm this run is not, which is what `--out` pointed at a sibling's path looks
+ * like. (ii) A LATER ROUND: the file names a round GREATER than this run's, which is exactly
+ * how a bare `--round 0` probe destroyed a round-4 measurement. Re-running the SAME arm at the
+ * same or a later round is the workflow's own progress and is allowed, because a gate that
+ * refused its own next round would be unusable.
+ *
+ * A packet carrying no header at all is not refused: it is not a packet.
+ * @param {{existing: object|null|undefined, arm: string, round: number}} options
+ * @returns {string|null} the refusal, or null where the write is this run's own
+ */
+export function packetRefusal(options) {
+  const { existing, arm, round } = options;
+  if (!existing || typeof existing !== 'object') return null;
+  const theirArm = /** @type {any} */ (existing).arm;
+  const theirRound = Number(/** @type {any} */ (existing).round);
+  const stamped = /** @type {any} */ (existing).at;
+  const whose = `it carries arm "${String(theirArm)}" round ${String(/** @type {any} */ (existing).round)}`
+    + `${stamped ? ` written at ${String(stamped)}` : ''}`;
+  if (theirArm !== undefined && String(theirArm) !== String(arm)) {
+    return `REFUSED: the packet at this path belongs to another run — ${whose},`
+      + ` and this run is arm "${arm}" round ${round}. Pass --out to name your own path.`;
+  }
+  if (Number.isFinite(theirRound) && theirRound > Number(round)) {
+    return `REFUSED: the packet at this path is a LATER measurement — ${whose},`
+      + ` and this run is arm "${arm}" round ${round}. Pass --out to name your own path.`;
+  }
+  return null;
+}
 /** The research kit's exemplar fingerprints, which never ship. */
 export const EXEMPLAR_DIR = path.join(SCRATCH, 'prose-research/primary');
 
@@ -1969,7 +2062,19 @@ async function main() {
   });
   delete out.varietyCells;
   for (const line of tableLines(out)) console.log(line);
-  const target = path.join(PACKETS, `measure-${arm}.json`);
+  // ⛔ THE PACKET IS NAMESPACED BY DOCK AND NEVER CLOBBERS A FOREIGN RUN (SITTING §U c-1).
+  const target = packetTargetFor({ arm, out: at('--out', null) });
+  const existing = existsSync(target)
+    ? (() => { try { return JSON.parse(readFileSync(target, 'utf8')); } catch { return null; } })()
+    : null;
+  const refusal = packetRefusal({ existing, arm, round: Number(at('--round', 0)) });
+  if (refusal) {
+    console.error(`  ${refusal}`);
+    console.error(`  target ${target}`);
+    process.exitCode = 1;
+    return;
+  }
+  mkdirSync(path.dirname(target), { recursive: true });
   writeFileSync(target, `${JSON.stringify(out, null, 1)}\n`);
   console.log(`  wrote ${target}`);
 }
