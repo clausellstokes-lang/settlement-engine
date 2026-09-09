@@ -34,7 +34,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | **`e26ad7838`** | **LANDED** |
 | 8a-6 | the arm-Q cure + the field-synonym table | **`e2ac44a9c`** | **LANDED** |
 | 8a-7 | the face-count ratchet | **`99e8e56e8`** | **LANDED** |
-| 8a-8 | T-F12's class list re-cut | — | pending |
+| 8a-8 | T-F12's class list re-cut | **`31faa63aa`** | **LANDED** |
 | 8a-9 | the connectives lists to the floors (public-copy drafts) | — | pending |
 | 8a-10 | the register car | — | pending |
 
@@ -1169,5 +1169,80 @@ the corpus into two draw regimes silently.
 | `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,589 passed / 1** |
 | projector | `--check` exit 0 |
 | classifier, 8a-6 → 8a-7 | **UNCHANGED 73,284 · every class 0** |
+| eslint | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+---
+
+## 8a-8 — T-F12's CLASS LIST RE-CUT (SITTING §T.5; TASTE M.15)
+
+**LANDED `31faa63aa`** over `99e8e56e8`. Three files. Zero reader-facing bytes.
+
+### ⭐⭐ THE FIVE, EACH WITH ITS NEW VERDICT — ALL FIVE LAWFUL, EACH ON A STATED GROUND
+
+| modifier | spine | classes now | verdict |
+|---|---|---|---|
+| `stores: short` | `Disasters & Famine: granary AND hospital` | `[store]` × `[care, storehouse]` | **LAWFUL** — the spine lists BUILDINGS, the modifier speaks about the STOCK |
+| `stores: import-fed` | the same | `[store, market]` × `[care, storehouse]` | **LAWFUL**, same ground |
+| `country: pressed (walled)` | `WALLED-STRAINED` | `[]` × `[wall]` | **LAWFUL** — the marker is T-F3's word, and the COUNTRY is not a civic object of the town |
+| `country: pressed (unwalled)` | `UNWALLED-LARGE` | `[]` × `[wall]` | **LAWFUL**, same ground |
+| `country: pressed (unwalled)` | `UNWALLED-SMALL` | `[]` × `[wall]` | **LAWFUL**, same ground |
+
+### THE TWO CURES
+
+**1. THE POLARITY MARKER, STRIPPED FROM A CLOSED LIST.** T-F3 makes a relation that flips with
+the spine's polarity into TWO pools with disjoint attach sets, and naming that pair puts the
+SPINE'S polarity in the modifier's key. T-F12 then read `walled` as a civic object the modifier
+names. The marker is stripped before classing — from a closed list of eight polarity words and
+never "any trailing parenthetical", because a parenthetical can name a real object and a rule
+that stripped all of them would blind the guard.
+⭐ **MEASURED: ZERO of the 708 shipped keys carries a trailing polarity parenthetical**, because
+only a T-F3 SIBLING PAIR needs one and no shipped pool is a modifier. The cure bites exactly
+where the defect was and nowhere else.
+
+**2. `storehouse` SPLIT OUT OF `store` AS THE ELEVENTH CLASS.** `granary` named two different
+civic objects and one class could not tell them apart.
+
+⭐⭐ **AND THE CONSERVATIVE HALF IS WHAT MAKES THE SPLIT TRUE RATHER THAN CONVENIENT.** A
+storehouse named ALONE reads as its stock too, so `GRANARY: thin` classes `[store, storehouse]`
+and `stores: short` is STILL refused beside it. More sharply:
+
+    intersects('stores: short', 'Disasters & Famine: NO reserves, hospital present')      true
+    intersects('stores: short', 'Disasters & Famine: NO reserves, NO medical provision')  true
+
+The two `NO reserves` spines carry a STOCK word of their own, so they class as `store` and still
+refuse the same modifier. **That is ARCH §6.4's own sentence — "only the two `NO reserves` cells
+are held" — reproduced BY THE PROXY instead of waived around.** The re-cut licenses the three
+BUILDING rows and refuses the two STOCK rows, which is the exact line the architecture draws in
+words.
+
+### THE TEN SHIPPED ROWS THAT MOVED, NAMED
+
+| row | before | after |
+|---|---|---|
+| DS-DEF-2 :: `Disasters & Famine: granary AND hospital` | store, care | **care, storehouse** |
+| DS-DEF-2 :: `Disasters & Famine: granary AND parish care only` | store, temple | **storehouse, temple** |
+| DS-DEF-2 :: `Disasters & Famine: granary, NO medical provision` | store, care | **care, storehouse** |
+| DS-DEF-6 :: `Logistics & Supply: Granary + port` | store, road | **road, storehouse** |
+| DS-DEF-6 :: `Logistics & Supply: Granary with road supply` | store, road | **road, storehouse** |
+| DS-DEF-6 :: `Logistics & Supply: Granary in isolation` | store | **store, storehouse** |
+| DS-ECO-2 :: `GRANARY: well stocked` · `stocked` · `thin` · `nearly empty` | store | **store, storehouse** |
+
+Multi-class rows **12 → 17**, and the seventeen's storehouse members are asserted by name rather
+than counted. `--dry` read `ROWS that would move: 10 · stamped shas (none) · sections: rows`, and
+the census was re-taken by its own rule (the brief pre-rules the move at item 8).
+
+⭐ **NOT ONE PROJECTED BYTE MOVES**: the class column is read by the projector's ATTACH refusal
+and by nothing that renders. The classifier reads UNCHANGED 73,284.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/lint/proseWiringCensus.walker.test.js` | **78 passed** |
+| `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,589 passed / 1** |
+| projector | `--check` exit 0 |
+| classifier, 8a-7 → 8a-8 | **UNCHANGED 73,284 · every class 0** |
+| typecheck | 173 errors | 
 | eslint | exit 0 |
 | runners / porcelain | 0 / 0 |
