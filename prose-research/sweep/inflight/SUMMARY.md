@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 14:41:41 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 14:49:46 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -110,15 +110,15 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 17:57:46 |
 | ? | other |  | result | 0 | — | — | 18:01:20 |
 | ? | other |  | result | 0 | — | — | 18:23:47 |
-| ? | other |  | in-flight | 0 | refine.md | — | 18:41:27 |
-| ? | other |  | in-flight | 0 | — | — | 18:33:12 |
-| ? | other |  | in-flight | 0 | — | — | 18:40:39 |
+| ? | other |  | result | 0 | refine.md | — | 18:42:14 |
+| ? | other |  | result | 0 | refine.md | — | 18:48:45 |
+| ? | other |  | in-flight | 0 | — | — | 18:48:50 |
 | ? | other |  | result | 0 | — | — | 18:25:58 |
 | ? | other |  | result | 0 | — | — | 18:00:17 |
-| ? | other |  | in-flight | 0 | — | — | 18:33:49 |
+| ? | other |  | result | 0 | refine.md | — | 18:43:41 |
 | ? | other |  | result | 0 | — | — | 18:31:48 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 18:05:03 |
-| ? | other |  | in-flight | 0 | — | — | 18:33:39 |
+| ? | other |  | result | 0 | refine.md | — | 18:49:41 |
 | ? | other |  | result | 0 | — | — | 18:11:54 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
 | ? | other |  | result | 0 | refine.md | — | 17:06:35 |
