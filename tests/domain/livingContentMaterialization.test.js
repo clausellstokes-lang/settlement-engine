@@ -314,13 +314,26 @@ function worldBytes(settlement) {
 
 describe('living-content materialization law', () => {
   // ── THE LAW ITSELF ─────────────────────────────────────────────────────────
-  it('is dormant by default and the dial writes nothing', () => {
+  it('⭐ the dial is LIT, and the mint writes the marker and nothing else', () => {
+    // ⭐⭐ THIS ARM WAS `is dormant by default and the dial writes nothing`, AND IT
+    // IS INVERTED RATHER THAN DELETED (2026-09-08, lane LIGHT car 1b). The owner
+    // ruled the dial lit; an arm that asserted dormancy is now an arm asserting
+    // the opposite of the product, and softening it to "whatever the dial says"
+    // would make the flip unobservable in either direction. It still fails the
+    // day the dial moves, which is the whole job of a one-line dial's arm.
     expect(NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION)
-      .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+      .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
     expect(
       newSettlementLivingContentLaw(),
-      'the create boundary must write NO byte while the dial sits at the default',
-    ).toEqual({});
+      'the create boundary must mint the lit marker, and exactly one key',
+    ).toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+    // …and the DORMANT branch of the mint is still reachable and still correct,
+    // which is what keeps the revert a one-line act rather than a rewrite. The
+    // function reads the dial and nothing else, so the branch is exercised by
+    // reading the leaf's own default through the same closed test.
+    expect(readLivingContentLawVersion(DEFAULT_LIVING_CONTENT_LAW_VERSION))
+      .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+    expect(materializesLivingContent({})).toBe(false);
   });
 
   // ⚠ ONE NAMED TEST THAT LOOPS INSIDE — deliberately NOT `it.each`, and the reason

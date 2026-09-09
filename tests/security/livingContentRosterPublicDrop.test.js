@@ -40,10 +40,22 @@
  * share model: `gallery_share_dm` publishes to "anyone who opens this gallery
  * page", so it is not a transfer to the owner's own other device and no reader of
  * a full share is entitled to the author's unadopted library.
- * ⚠ THE SERVER TWIN IS STILL OWED AND IS OWNER-GATED — `_gallery_dm_full_json`
- * (supabase migrations 121/129) re-issues both keys, so a shared dossier read
- * back from the server still carries them. Same V1 boundary
- * `townMapEditsPublicDrop.test.js` records for `mapEdits`, same reason.
+ * ⚠⚠ THE SERVER TWIN IS STILL OWED AND IS OWNER-GATED — `_gallery_dm_full_json`
+ * (supabase migrations 121/129) drops a NAMED list and passes everything else
+ * through, so a shared dossier read back from the server still carries both keys.
+ * Same V1 boundary `townMapEditsPublicDrop.test.js` records for `mapEdits`, same
+ * reason. It is pinned by the last arm in this file, whose red IS the cure
+ * arriving.
+ *
+ * ⭐ AND THE LIGHTING DID NOT OPEN THAT DOOR, IT WIDENED IT BY ONE KEY (measured,
+ * 2026-09-08). `customContentProvenance` is written by the pipeline with no
+ * reference to any dial, so it has ridden the server path for as long as the path
+ * has existed; what lighting adds is `customContentRoster` beside it. Both are
+ * conditional on the run's reviewed environment holding custom content — a
+ * generation with `customContent: {}` writes NEITHER key, lit or dark — so the
+ * exposure window is authors of homebrew who then DM-share, not every user. Lane
+ * LIGHT refused to write the migration (a migration is owner-gated) and recorded
+ * this measurement instead.
  *
  * ⭐⭐ AND THE ONE FACT A LIGHTING ENGINEER MET BEFORE ANY OF THIS, NOW DISCHARGED
  * (§912, R-J; cured by lane LIGHT, car 1a). `loadLivingContentRoster` HAD NO CALLER:
@@ -61,6 +73,8 @@
  * @enforced-by this test
  */
 import { describe, expect, it } from 'vitest';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 
 import { toPublicSafe, PUBLIC_TOPLEVEL_KEYS, PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -91,6 +105,27 @@ registerLivingContentRosterBuilder(buildLivingContentRoster);
 
 const ROSTER_KEY = 'customContentRoster';
 const PROVENANCE_KEY = 'customContentProvenance';
+
+const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
+
+/** Latest-wins extraction of the net-current `_gallery_dm_full_json` body across
+ *  all migrations (file order) — the same spelling `galleryDmFull.pglite.test.js`
+ *  uses, deliberately, so the two files cannot disagree about which server body
+ *  they are talking about. Anchored at line start so header prose quoting the
+ *  statement is not mistaken for a definition. */
+function netCurrentDmFullSql() {
+  if (!existsSync(MIGRATIONS_DIR)) return null;
+  const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
+  const re = /^create\s+or\s+replace\s+function\s+public\._gallery_dm_full_json\b[\s\S]*?\$\$;/igm;
+  let last = null;
+  for (const f of files) {
+    const matches = readFileSync(join(MIGRATIONS_DIR, f), 'utf-8').match(re);
+    if (matches && matches.length) last = matches[matches.length - 1];
+  }
+  return last;
+}
+
+const DM_FULL_SQL = netCurrentDmFullSql();
 
 const CONFIG = Object.freeze({
   settType: 'town',
@@ -263,23 +298,66 @@ describe('O-11 path 1 — the living-content roster is dropped from the public p
     expect(full.name).toBe(settlement.name);
     expect(full.config).toBeTruthy();
 
-    // ⛔ THE HALF THAT IS NOT LANDED, ASSERTED SO THE LIGHTING DAY MUST VISIT THIS
-    // FILE. The SERVER re-issues the DM-full payload from `_gallery_dm_full_json`
-    // (migrations 121/129), which has no delete for either key — so a shared
-    // dossier read back through the server still carries them. That twin is a
-    // migration and is owner-gated; this arm is the tripwire that keeps it from
-    // being forgotten.
+    // ⭐ THE DIAL HAS BEEN LIT (2026-09-08). This is where the old tripwire stood:
+    // `expect(NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION).toBe(DEFAULT_…)`, whose
+    // job was to make the lighting day visit this file. It did its job and is
+    // spent, so it is replaced by a pin on the thing that is actually still owed
+    // rather than deleted for a green.
     expect(
       NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
-      'THE DIAL HAS BEEN LIT. The CLIENT half of the DM-full drop is landed (publicSafe.js),'
-      + ' but its SERVER twin is NOT: `_gallery_dm_full_json` (supabase migrations 121/129)'
-      + ' still re-issues customContentRoster and customContentProvenance, so a DM-shared'
-      + ' dossier read back from the server carries the author\'s private library. Land that'
-      + ' migration before this ships.'
-      + ' ⚠ AND EXPECT A TOTAL GENERATION OUTAGE FIRST: `loadLivingContentRoster` has NO'
-      + ' caller in src/ (livingContentSeam.js defines it; nothing calls it), so a lit config'
-      + ' throws "[livingContentSeam] v2 world, roster payload not loaded" before any world'
-      + ' is built. Wire the loader before reading anything else in this file as a symptom.',
-    ).toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+      'the dial is expected LIT here; if it was reverted, re-read the SERVER-TWIN arm below,'
+      + ' whose exposure window closes with it',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+  });
+
+  // ── THE HALF THAT IS STILL OWED, AND IT IS A MIGRATION ─────────────────────
+  it('⛔ THE SERVER TWIN IS STILL OPEN, pinned by the migration text — striking this arm is how the cure is banked', () => {
+    // ⛔⛔ WHAT IS EXPOSED, MEASURED RATHER THAN FEARED. The CLIENT half of the
+    // DM-full drop is landed (the arm above): `toPublicSafe(s, { full: true })`
+    // deletes both records. The SERVER does not run that projection at all — it
+    // re-issues the DM-full payload from the stored row through
+    // `_gallery_dm_full_json`, which drops a NAMED list and passes everything else
+    // through. Neither key is on that list, so a dossier shared with
+    // `gallery_share_dm` and read back from the server still carries the author's
+    // unadopted homebrew library.
+    //
+    // ⚠ AND THE LIGHTING DID NOT OPEN THIS DOOR, IT WIDENED IT BY ONE KEY.
+    // `customContentProvenance` is written by the pipeline with no reference to
+    // any dial, so it has ridden this path for as long as the path has existed.
+    // What lighting adds is `customContentRoster` beside it. BOTH are conditional
+    // on the run's reviewed environment holding custom content: measured on this
+    // build, a generation with `customContent: {}` writes NEITHER key, lit or
+    // dark, so the window is authors of homebrew who then DM-share, not everyone.
+    //
+    // ⛔ THE MIGRATION IS OWNER-GATED AND WAS NOT WRITTEN BY THE LIGHTING LANE.
+    // A migration is a deploy-shaped act on a shared surface; lane LIGHT refused
+    // it with this measurement rather than taking it quietly.
+    //
+    // ⭐ HOW TO BANK THE WIN: when the SQL twin lands, THIS ARM REDS, and that red
+    // is the cure arriving. Strike the arm, strike the paragraph in this file's
+    // header that records the debt, and let `galleryDmFull.pglite.test.js` execute
+    // the new strip. An arm that stayed green through its own cure would be a
+    // deleted alarm.
+    expect(existsSync(MIGRATIONS_DIR), `migrations dir missing: ${MIGRATIONS_DIR}`).toBe(true);
+    expect(
+      DM_FULL_SQL,
+      '_gallery_dm_full_json is not defined in any migration — renamed, or the extractor broke.'
+      + ' Either way this arm is measuring nothing.',
+    ).toBeTruthy();
+    // NON-VACUITY: the extractor really read the net-current body, and that body
+    // really does strip things — so "neither key is stripped" is a finding about
+    // this SQL and not about an empty string.
+    expect(DM_FULL_SQL).toContain('_gallery_dm_full_json');
+    expect(DM_FULL_SQL, 'the net-current body strips nothing at all — the extractor is stale')
+      .toContain("- 'dmNotes'");
+    expect(DM_FULL_SQL).toContain("- 'latentPantheon'");
+    for (const key of [ROSTER_KEY, PROVENANCE_KEY]) {
+      expect(
+        DM_FULL_SQL.includes(key),
+        `${key} IS now handled by the net-current _gallery_dm_full_json body. If you just landed`
+        + ' the SQL twin: good, that is the cure. Strike this arm and the debt paragraph in this'
+        + " file's header, and pin the executed strip in galleryDmFull.pglite.test.js instead.",
+      ).toBe(false);
+    }
   });
 });

@@ -278,7 +278,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
 
   test('the declared DARK register is structurally lawful and every row is live-verified', () => {
     expect(() => assertWriterDarkRegister()).not.toThrow();
-    expect(WRITER_DARK_REGISTER.length).toBe(6);
+    // ⭐ SIX BECAME FIVE ON THE LIGHTING DAY (2026-09-08, lane LIGHT car 1b).
+    // `customContentRoster on settlement` was retired by its own premise: it was
+    // dark-by-construction because the living-content dial shipped at 1, the dial
+    // is at 2 now, and clause D-dial says what to do about that in the failure it
+    // throws. The register's own header carries the retirement.
+    expect(WRITER_DARK_REGISTER.length).toBe(5);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -784,10 +789,16 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     }
   });
 
-  test('the two generation-dial rows are LIVE-VERIFIED, and NEITHER writer writes in any of OSR’s four spellings — the executed bit is the write proof', () => {
+  test('the surviving generation-dial row is LIVE-VERIFIED, and its writer writes in none of OSR’s four spellings — the executed bit is the write proof', () => {
     const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
+    // ⭐ ONE ROW, NOT TWO, SINCE 2026-09-08. The living-content pair member
+    // (`customContentRoster on settlement`) was retired when its dial was lit; the
+    // density row survives because its own dial is still at 1 against a register
+    // version of 2. The pipeline assertion below is kept and NOT reduced with the
+    // row: the assignment it pins is what made the text probe blind in the first
+    // place, and it is still the shape a future re-registration would rest on.
     expect(dialRows.map((row) => row.identity).sort())
-      .toEqual(['customContentRoster on settlement', 'densityRungRole on npcs']);
+      .toEqual(['densityRungRole on npcs']);
     // THE WHOLE REASON FOR THE RULING, asserted rather than asserted-about: the text
     // probe finds NOTHING at either writer. `customContentRoster` is written by an
     // ASSIGNMENT and `densityRungRole` through a COMPUTED PROPERTY KEY behind
@@ -817,15 +828,21 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     // is invisible to the text probe — and it differs in ONE respect: it is not in
     // the measured dialGated set. If the widening had swallowed the clause, this
     // would sail through. It must convict.
+    // ⚠ THE PLANT'S DOOR IS THE DENSITY DIAL, AND IT MOVED THERE ON THE LIGHTING
+    // DAY. It used to name the living-content dial, which is LIT now, so clause
+    // D-dial convicted the plant before clause W could — a plant that dies of the
+    // wrong cause proves nothing about the clause it was built for. The density
+    // dial is still 1 against a register version of 2, so the plant reaches the
+    // clause it is aimed at.
     const notGated = {
       identity: 'plantedAssignmentKey on settlement', key: 'plantedAssignmentKey', shape: 'settlement',
       writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
       door: {
-        kind: 'generation-dial', configKey: '_livingContentLawVersion',
-        dialModule: 'src/domain/content/livingContentLaw.js',
-        dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
-        litModule: 'src/domain/content/livingContentLawVersion.js',
-        litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
+        kind: 'generation-dial', configKey: '_densityLawVersion',
+        dialModule: 'src/domain/density/densityLaw.js',
+        dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
+        litModule: 'src/domain/density/densityLaw.js',
+        litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
       },
       lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§7 the probe',
     };
@@ -901,7 +918,9 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal', async () => {
-    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'customContentRoster on settlement');
+    // The row moved from the living-content pair member to the density one when
+    // the former was retired at the lighting; the clause under test is the same.
+    const row = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'densityRungRole on npcs');
     const message = await convicts([row], { verdicts: live.verdicts });
     expect(message).toContain('clause W');
     expect(message).toContain('no measured dialGated set was supplied');
@@ -1220,9 +1239,17 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // set. The reverse — every gated identity carries a row — remains OWED for the
     // other 29, and the frozen roster above is what guards them meanwhile.
     const dialRows = WRITER_DARK_REGISTER.filter((row) => row.door?.kind === 'generation-dial');
+    // One row since the living-content dial was lit and its row retired with its
+    // premise; the direction this arm guards is unchanged.
     expect(dialRows.map((row) => row.identity).sort())
-      .toEqual(['customContentRoster on settlement', 'densityRungRole on npcs']);
+      .toEqual(['densityRungRole on npcs']);
     for (const row of dialRows) expect(gated.has(row.identity)).toBe(true);
+    // ⭐ AND THE RETIRED IDENTITY IS STILL DIAL-GATED, WHICH IS WHY THE FROZEN
+    // ROSTER ABOVE IS THE THING GUARDING IT NOW. Retiring a register row does not
+    // make the key ordinary: a lit world still writes it and a dark one does not.
+    // What changed is that the estate's own dial is the lit one, so the row can no
+    // longer claim the key is dark by construction.
+    expect(gated.has('customContentRoster on settlement')).toBe(true);
   });
 
   test('the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs', () => {
@@ -1242,15 +1269,20 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // The row shape a widened clause W would admit, driven end to end against the
     // real doors: the dial is dark (so D-dial passes) and the identity has gained a
     // reader (so clause S convicts with the strike instruction).
+    // ⚠ THE DOOR IS THE DENSITY DIAL SINCE 2026-09-08, for the reason the sibling
+    // plant above gives: clause S is only reachable while D-dial passes, and the
+    // living-content dial no longer passes it. The key and the writer stay the
+    // living-content ones, because what this arm is about is a DARK row that gains
+    // a surface reader, not about which dial guards it.
     const dialRow = {
       identity: 'customContentRoster on settlement', key: 'customContentRoster', shape: 'settlement',
       writer: 'src/generators/generateSettlementPipeline.js', reason: 'dark-by-construction',
       door: {
-        kind: 'generation-dial', configKey: '_livingContentLawVersion',
-        dialModule: 'src/domain/content/livingContentLaw.js',
-        dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
-        litModule: 'src/domain/content/livingContentLawVersion.js',
-        litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
+        kind: 'generation-dial', configKey: '_densityLawVersion',
+        dialModule: 'src/domain/density/densityLaw.js',
+        dialExport: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
+        litModule: 'src/domain/density/densityLaw.js',
+        litExport: 'REGISTER_VII_DENSITY_LAW_VERSION',
       },
       lighting: 'x'.repeat(90), car: '§7 the probe', charter: '§866 the MAT pick',
     };
@@ -1274,7 +1306,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
         readSource: (path) => (path === dialRow.writer
           ? 'const settlement = { customContentRoster: roster };\n' : read(path)),
         importModule: async () => ({
-          NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION: 2, ROSTER_LIVING_CONTENT_LAW_VERSION: 2,
+          NEW_SETTLEMENT_DENSITY_LAW_VERSION: 2, REGISTER_VII_DENSITY_LAW_VERSION: 2,
         }),
         dialGated: gated,
       });

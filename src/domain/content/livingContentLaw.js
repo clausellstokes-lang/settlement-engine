@@ -15,6 +15,10 @@
  *      v1 world's settlement is byte-identical to one generated before this law
  *      existed. `newSettlementLivingContentLaw()` returns an EMPTY object while
  *      the dial sits at the default, so even the create boundary writes nothing.
+ *      ⭐ THE DIAL IS NO LONGER AT THE DEFAULT (below), so today the mint returns
+ *      the marker and a BIRTH is a v2 world. This property still governs every
+ *      world born BEFORE that flip: their configs are markerless, the read is a
+ *      closed test on the config alone (property 2), and nothing stamps them.
  *   2. THE READ IS A CLOSED MEMBERSHIP TEST, NOT A `>=` COMPARE. Anything that
  *      is not an enabled version — absent, garbage, a future v3 that has not
  *      shipped — coerces to the default. Fail closed.
@@ -25,14 +29,24 @@
  *   4. THE DIAL IS ONE LINE. `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION` is the
  *      sole place a new world's law is chosen, and reverting is the same line.
  *
- * ⛔ THE DIAL IS AT 1 AND THAT IS THE RULING, NOT AN OMISSION. Lighting this
- * law is a SEPARATE owner decision, for a reason this module states rather than
- * leaves to be rediscovered: the four categories are the estate's LIVING
- * CONTENT, and `tests/fixtures/customContentReferencePack.js` states the
- * governing law in its own header — "the living-content definitions
- * deliberately have no automatic activation event: their presence in a reviewed
- * environment must not make a generated settlement silently adopt a deity,
- * faction, stressor, or tradition."
+ * ⭐⭐ THE DIAL IS LIT, ON THE OWNER'S WORD OF 2026-09-08, AND THE SENTENCE IT
+ * REPLACES IS KEPT SO THE CHANGE READS AS A DECISION RATHER THAN A DRIFT. This
+ * paragraph said "THE DIAL IS AT 1 AND THAT IS THE RULING, NOT AN OMISSION.
+ * Lighting this law is a SEPARATE owner decision". That decision was taken: the
+ * owner ruled "feel free to land everything lit on", and lane LIGHT lit it after
+ * curing the outage that would otherwise have made lighting a total generation
+ * failure rather than a roster (see `livingContentSeam.js`'s loader and its
+ * caller on the create boundary).
+ *
+ * ⛔ AND THE REASON THE DECISION WAS THE OWNER'S IS UNCHANGED AND STILL BINDS.
+ * The four categories are the estate's LIVING CONTENT, and
+ * `tests/fixtures/customContentReferencePack.js` states the governing law in its
+ * own header — "the living-content definitions deliberately have no automatic
+ * activation event: their presence in a reviewed environment must not make a
+ * generated settlement silently adopt a deity, faction, stressor, or tradition."
+ * Lighting this dial does not touch that law, because what v2 lights is a RECORD
+ * and not an activation; the paragraph below is the whole of why, and it is the
+ * paragraph a future widening has to get past.
  *
  * ⭐ MATERIALIZATION IS NOT ADOPTION, AND THE WHOLE DESIGN TURNS ON THAT
  * DISTINCTION. What v2 lights is a roster — `settlement.customContentRoster` —
@@ -74,6 +88,7 @@
 import {
   LIVING_CONTENT_LAW_CONFIG_KEY,
   DEFAULT_LIVING_CONTENT_LAW_VERSION,
+  ROSTER_LIVING_CONTENT_LAW_VERSION,
 } from './livingContentLawVersion.js';
 
 // ⛔ AND IT IS DELIBERATELY NOT RE-EXPORTED FROM HERE. A convenience
@@ -86,13 +101,14 @@ import {
 // `livingContentLawVersion.js` directly, which is also the honest edge: the gate
 // is engine-side vocabulary, not lazy vocabulary.
 
-/** ⭐ THE ONE DIAL — the living-content law a NEWLY-created world mints under.
- *  Held at the dormant default until the owner rules on lighting; flipping it to
- *  ROSTER_LIVING_CONTENT_LAW_VERSION is that ruling's one-line act, and
- *  reverting is the same one line. EXISTING worlds are untouched either way —
- *  they never pass through create again. */
+/** ⭐⭐ THE ONE DIAL — the living-content law a NEWLY-created world mints under.
+ *  LIT on 2026-09-08, on the owner's word ("feel free to land everything lit
+ *  on"), and reverting is the same one line: put
+ *  DEFAULT_LIVING_CONTENT_LAW_VERSION back. EXISTING worlds are untouched either
+ *  way — they never pass through create again, and nothing on any read path
+ *  stamps a persisted config (property 3 below). */
 export const NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION =
-  DEFAULT_LIVING_CONTENT_LAW_VERSION;
+  ROSTER_LIVING_CONTENT_LAW_VERSION;
 
 /**
  * ⛔ THE FOUR LIVING-CONTENT BUCKETS, AND WHY THESE FOUR.
@@ -132,11 +148,13 @@ export const LIVING_CONTENT_BUCKETS = Object.freeze([
  * Re-derivation goes through `regenSection`, which reads `settlement.config`
  * FIRST and so replays the law the world was born under.
  *
- * ⛔ AND WIRING IT IS NOT LIGHTING IT. The dial above stays at the dormant
- * default, so this function returns `{}` and a birth's config is byte-identical
- * to one taken before the law existed. A v2 world is still produced only by
- * passing `_livingContentLawVersion: 2` explicitly, which is how this file's own
- * fixtures drive it. Lighting is a separate owner act — see the dial's comment.
+ * ⭐ AND IT IS NOW LIT AS WELL AS WIRED (2026-09-08). This paragraph said "AND
+ * WIRING IT IS NOT LIGHTING IT. The dial above stays at the dormant default, so
+ * this function returns `{}`", and that was true for the whole of the law's
+ * dormant life. The dial is at the roster version now, so this function returns
+ * the marker and every classified BIRTH mints a v2 world. The function's SHAPE
+ * is unchanged, and that is what keeps the flip one line in either direction: it
+ * reads the dial and nothing else, so reverting the dial reverts the mint.
  *
  * ⛔⛔ THE BLOCKER THAT HELD THIS UNWIRED WAS BYTES, AND THE CURE WAS NOT THE ONE
  * PREDICTED. The record here said the mint belonged on "the LAZY engine side

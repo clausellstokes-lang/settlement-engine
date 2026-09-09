@@ -31,7 +31,7 @@
  *
  * Usage: node scripts/observe-genesis-war-ramp.mjs [--ticks N] [--seeds N]
  */
-import { composeInstantWorld } from '../src/lib/instantWorld/composeInstantWorld.js';
+import { composeInstantWorld, loadGenerationLawPayloads } from '../src/lib/instantWorld/composeInstantWorld.js';
 import { advanceCampaignWorld } from '../src/domain/worldPulse/advanceCampaignWorld.js';
 
 const argv = process.argv.slice(2);
@@ -83,6 +83,12 @@ function foundingStampScan(campaign) {
   walk(campaign, 'campaign');
   return hits;
 }
+
+// The create boundary's async prelude. The composer is a BIRTH and is
+// synchronous, so it cannot load the lazy payload the law it mints needs; since
+// the living-content dial was lit (2026-09-08) the seam throws rather than
+// degrading when nothing has. Top-level await, like this script's own loop.
+await loadGenerationLawPayloads();
 
 const rows = [];
 for (let i = 0; i < SEEDS; i++) {

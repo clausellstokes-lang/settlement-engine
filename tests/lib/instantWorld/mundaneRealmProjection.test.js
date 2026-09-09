@@ -25,6 +25,18 @@
  */
 import { describe, test, expect } from 'vitest';
 import { composeInstantWorld } from '../../../src/lib/instantWorld/composeInstantWorld.js';
+// ⭐ THE CREATE BOUNDARY'S ASYNC PRELUDE — A TEST IS A CALLER LIKE ANY OTHER
+// (2026-09-08, lane LIGHT car 1b). `composeInstantWorld` is a classified BIRTH and
+// is SYNCHRONOUS by design, so it cannot load the lazy payload the law it mints
+// needs: since the living-content dial was lit, every world it mints is a v2 world,
+// and the seam THROWS rather than degrading when the roster payload was never
+// loaded. Production awaits `loadGenerationLawPayloads()` on the async edge of each
+// of the composer's three callers; this file awaits it at module scope, which is
+// where it has to be because this family composes outside a hook.
+import { loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
+
+await loadGenerationLawPayloads();
+
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { DERIVED_CONFIG_KEYS } from '../../../src/store/settlementSlice.js';
 import { realmMagicIsMundane } from '../../../src/domain/worldPulse/simulationRules.js';

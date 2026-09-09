@@ -66,9 +66,24 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
 
 /**
  * THE REGISTER. Rows 1, 2, 3 and 6 of the volume's six drafted rows. Rows 1 and 2
- * are the generation-dial pair, admitted by Car 4 once the chair ruled clause W
+ * were the generation-dial pair, admitted by Car 4 once the chair ruled clause W
  * reason-aware (ledger §882.15) — before that ruling no instrument in the estate
  * could hold them, because their writes are an assignment and a computed key.
+ *
+ * ⭐⭐ ROW 1 IS RETIRED, BY ITS OWN PREMISE, ON THE DAY THE DIAL WAS LIT
+ * (2026-09-08, lane LIGHT car 1b). `customContentRoster on settlement` was
+ * dark-by-construction because `NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION`
+ * shipped at 1 against a roster law of 2. Its own `lighting` prose said what to
+ * do when that stopped being true — "When the owner rolls the dial the key
+ * becomes an ordinary written fact and this row must die with its premise" — and
+ * clause D-dial says the same in the failure it throws: "Retire the row rather
+ * than outliving its own premise." The row is struck rather than reworded,
+ * because a dormancy claim whose ground has gone is not a claim to soften. The
+ * identity is now judged NORMALLY, and what that judgement finds is a key no
+ * world in the corpus writes: the roster materializes only where the run's
+ * reviewed environment holds a living-content definition, and the walker's
+ * corpus is generated under `customContent: {}`.
+ *
  * Rows 3 and 6 were Car 1's:
  * Car 0 adjudicated all six at C' (⟦G0-13⟧) and found rows 1–2 are Car 3's
  * (their keys are not written under the dark corpus at all), row 4's key never
@@ -77,29 +92,6 @@ export const SIMULATION_FLAG_PATTERN = /^[a-z][A-Za-z0-9]*Enabled$/;
  * `worldState` identity is judgeable).
  */
 export const WRITER_DARK_REGISTER = Object.freeze([
-  Object.freeze({
-    identity: 'customContentRoster on settlement',
-    key: 'customContentRoster',
-    shape: 'settlement',
-    writer: 'src/generators/generateSettlementPipeline.js',
-    reason: 'dark-by-construction',
-    door: Object.freeze({
-      kind: 'generation-dial',
-      configKey: '_livingContentLawVersion',
-      dialModule: 'src/domain/content/livingContentLaw.js',
-      dialExport: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
-      litModule: 'src/domain/content/livingContentLawVersion.js',
-      litExport: 'ROSTER_LIVING_CONTENT_LAW_VERSION',
-    }),
-    lighting: 'The living-content roster is the v2 law\'s one additive key, and no shipped world writes it: the '
-      + 'dial ships at 1 while the roster law is 2, so livingContentRosterFor returns null before the registry is '
-      + 'ever consulted and the key is never allocated. It is therefore dark by CONSTRUCTION rather than by '
-      + 'neglect, and the bit is executed both ways every scan: a lit corpus writes it, the shipped corpus does '
-      + 'not. When the owner rolls the dial the key becomes an ordinary written fact and this row must die with '
-      + 'its premise, which is exactly what clause S convicts.',
-    car: '§7 WRWALKER Car 4, the reason-aware clauses ruled at ledger §882.15',
-    charter: '§866 the MAT pick that first wrote the roster key',
-  }),
   Object.freeze({
     identity: 'densityRungRole on npcs',
     key: 'densityRungRole',

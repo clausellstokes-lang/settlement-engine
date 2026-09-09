@@ -144,6 +144,18 @@ async function driveRealm(tree, oracle) {
   const { composeInstantWorld } = await loadFromTree(
     tree, 'src/lib/instantWorld/composeInstantWorld.js',
   );
+  // The create boundary's async prelude, loaded FROM THE SAME TREE as the
+  // composer so a comparison across two trees arms each tree's own seam. The
+  // composer is a BIRTH and is synchronous, so it cannot do this itself, and
+  // since the living-content dial was lit the seam throws rather than degrading.
+  // A tree that predates the loader has no such export; that is not an error
+  // here, it is the older tree being older, so the reach is tolerant.
+  try {
+    const boundary = await loadFromTree(tree, 'src/domain/density/densityCreateBoundary.js');
+    if (typeof boundary.loadGenerationLawPayloads === 'function') {
+      await boundary.loadGenerationLawPayloads();
+    }
+  } catch { /* an older tree has no payload edge; its worlds are v1 by construction */ }
   const rows = [];
   for (let i = 0; i < REALM_COUNT; i += 1) {
     const seed = `dormancy-bit-compare-realm-${String(i).padStart(3, '0')}`;

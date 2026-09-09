@@ -11,6 +11,18 @@ import { describe, test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { composeInstantWorld, instantWorldFingerprint } from '../../../src/lib/instantWorld/composeInstantWorld.js';
+// ⭐ THE CREATE BOUNDARY'S ASYNC PRELUDE — A TEST IS A CALLER LIKE ANY OTHER
+// (2026-09-08, lane LIGHT car 1b). `composeInstantWorld` is a classified BIRTH and
+// is SYNCHRONOUS by design, so it cannot load the lazy payload the law it mints
+// needs: since the living-content dial was lit, every world it mints is a v2 world,
+// and the seam THROWS rather than degrading when the roster payload was never
+// loaded. Production awaits `loadGenerationLawPayloads()` on the async edge of each
+// of the composer's three callers; this file awaits it at module scope, which is
+// where it has to be because this family composes outside a hook.
+import { loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
+
+await loadGenerationLawPayloads();
+
 import { REALM_SIZES, MAP_KINDS, TONES, deriveWorldPlan } from '../../../src/domain/instantWorld/worldPlan.js';
 import { isCanonSave } from '../../../src/domain/campaign/canon.js';
 import { validateDossier } from '../../../src/domain/validation/consistency.js';

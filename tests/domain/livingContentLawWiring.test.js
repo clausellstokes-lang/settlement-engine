@@ -15,12 +15,16 @@
  * fireable while the mint had no caller. This is the day it is, so it is fired
  * here deliberately and proved not to fire in the product.
  *
- * ⛔ THE DIAL STAYS AT 1, AND THAT IS WHY THIS FILE HAS TWO HALVES. With the dial
- * dormant the mint returns `{}`, so a test that only ran the product path would
- * be green because NOTHING HAPPENS — the vacuous green this estate refuses. Every
- * dark arm below is therefore paired with a LIT one that drives the same code
- * with the law's module mocked to a lit dial. The dark arms are the product
- * truth; the lit arms are what stops them proving nothing.
+ * ⭐⭐ THE DIAL IS LIT SINCE 2026-09-08, AND THE FILE'S TWO HALVES SWAPPED SIDES
+ * RATHER THAN COLLAPSING. This paragraph read "THE DIAL STAYS AT 1, AND THAT IS
+ * WHY THIS FILE HAS TWO HALVES": with the dial dormant the mint returned `{}`, so
+ * a test that only ran the product path was green because NOTHING HAPPENED, and
+ * every dark arm was paired with a LIT one driven through a mocked lit dial. The
+ * product path is the LIT one now, so the pairing is inverted: the lit arms are
+ * the product truth and the DARK arms are driven through `boundaryWithDarkLaw()`.
+ * Both halves are kept, and keeping the dark half is not tidiness — the dial is
+ * one line in BOTH directions, and an estate that has stopped exercising the
+ * dormant branch cannot revert it on a bad day.
  *
  * THE LIFECYCLE PATHS, each with its own way of breaking the promise:
  *   CREATE      — a birth mints; proved to write zero bytes while dormant, and
@@ -115,8 +119,10 @@ const CONFIG = Object.freeze({
   monsterThreat: 'civilized',
 });
 
-/** A config that asks for the law EXPLICITLY, which is the only way to get a v2
- *  world while the dial is dormant. */
+/** A config that asks for the law EXPLICITLY. It was the ONLY way to get a v2
+ *  world while the dial was dormant; since the lighting it is how an arm names a
+ *  world's law without depending on the dial, which is the honest shape for a
+ *  file whose subject is the difference between the two. */
 const LIT_CONFIG = Object.freeze({
   ...CONFIG,
   [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
@@ -140,6 +146,43 @@ async function boundaryWithLitLaw() {
   return mod;
 }
 
+/** ⭐ THE MIRROR OF `boundaryWithLitLaw`, AND THE DIAL'S FLIP IS WHY IT EXISTS
+ *  (2026-09-08, lane LIGHT car 1b). Until the dial was lit the PRODUCT was the
+ *  dark half and the lit half had to be mocked; now it is the other way round.
+ *  Every dark arm below is driven through this so it keeps proving what it always
+ *  proved — that the mint writes nothing at the dormant dial, which is what makes
+ *  reverting the dial a one-line act rather than a hope. */
+async function boundaryWithDarkLaw() {
+  vi.resetModules();
+  vi.doMock('../../src/domain/content/livingContentLaw.js', () => ({
+    LIVING_CONTENT_BUCKETS: Object.freeze(['deities', 'factions', 'stressors', 'traditions']),
+    NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION: DEFAULT_LIVING_CONTENT_LAW_VERSION,
+    newSettlementLivingContentLaw: () => ({}),
+  }));
+  return import('../../src/domain/density/densityCreateBoundary.js');
+}
+
+/** A settlement's bytes with BOTH config echoes of the law marker removed.
+ *
+ *  ⚠ THE MARKER RIDES TWO ECHOES, `config` AND `_config`, and this is the
+ *  materialization suite's own measured helper rather than a second opinion: a
+ *  first cut there stripped only `config` and missed by exactly 29 bytes, the
+ *  literal length of `,"_livingContentLawVersion":2`. Stripping the marker is
+ *  what lets a byte comparison answer the question this file actually asks —
+ *  whether lighting the dial moved anything OTHER than the law it declares. */
+function worldBytesWithoutMarker(settlement) {
+  const strip = (bag) => {
+    if (!bag || typeof bag !== 'object') return bag;
+    const { [LIVING_CONTENT_LAW_CONFIG_KEY]: _marker, ...rest } = bag;
+    return rest;
+  };
+  return JSON.stringify({
+    ...settlement,
+    config: strip(settlement.config),
+    _config: strip(settlement._config),
+  });
+}
+
 const stubSlice = () => ({
   auth: { user: null, tier: 'free', loading: false },
   config: { ...CONFIG },
@@ -160,7 +203,11 @@ const stubSlice = () => ({
 
 describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
   // ── THE REGISTER AND THE DIAL ──────────────────────────────────────────────
-  it('the register says WIRED and the dial says DORMANT — wiring is not lighting', () => {
+  it('⭐ the register says WIRED and the dial says LIT — the separate owner act was taken', () => {
+    // ⭐⭐ THIS ARM READ `the dial says DORMANT — wiring is not lighting` UNTIL
+    // 2026-09-08. The owner took the separate act, so the assertion is inverted
+    // rather than relaxed: a dial arm that accepts either value cannot see the
+    // dial move, and this dial is one line in both directions.
     expect(
       GENERATION_LAWS.livingContent.wiring,
       'this file is written against a WIRED law; if the row went back to UNWIRED the'
@@ -169,36 +216,72 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
     expect(GENERATION_LAWS.livingContent.configKey).toBe(LIVING_CONTENT_LAW_CONFIG_KEY);
     expect(
       NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION,
-      'the dial must stay at the dormant default — lighting it is a separate owner act',
-    ).toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
-    expect(newSettlementLivingContentLaw()).toEqual({});
+      'the dial is LIT (owner, 2026-09-08). If this reads 1 the dial was reverted, which is a'
+      + ' lawful one-line act — but every lit arm below is then asserting about a mint that'
+      + ' writes nothing, so revert this arm with it.',
+    ).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(newSettlementLivingContentLaw())
+      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
   });
 
   // ── CREATE ─────────────────────────────────────────────────────────────────
-  it('CREATE (dark): birthConfig writes not one config byte', () => {
+  it('⭐ CREATE (LIT, the product path): birthConfig writes the law marker and NOTHING else', () => {
     const minted = birthConfig({ ...CONFIG });
-    expect(minted).toEqual({ ...CONFIG });
-    expect(Object.keys(minted).sort()).toEqual(Object.keys(CONFIG).sort());
-    expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    expect(minted).toEqual({
+      ...CONFIG, [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION,
+    });
+    // EXACTLY ONE KEY MORE than the config handed in — the arm that would catch a
+    // mint that started writing a second field, or the density mint waking up.
+    expect(Object.keys(minted).sort())
+      .toEqual([...Object.keys(CONFIG), LIVING_CONTENT_LAW_CONFIG_KEY].sort());
     // Null/undefined tolerance is the boundary's own contract, unchanged by the
     // second mint being spread beside the first.
-    expect(birthConfig(null)).toEqual({});
-    expect(birthConfig(undefined)).toEqual({});
+    expect(birthConfig(null))
+      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
+    expect(birthConfig(undefined))
+      .toEqual({ [LIVING_CONTENT_LAW_CONFIG_KEY]: ROSTER_LIVING_CONTENT_LAW_VERSION });
   });
 
-  it('CREATE (dark, THE SAME-SEED CONTROL): a birth through the boundary is the same world', () => {
-    // The strongest statement the dark half can make: run the REAL pipeline
-    // twice on one seed, once with the config the boundary produces and once
-    // with the raw config, and require the two settlements to be identical.
-    // If the wiring ever wrote a byte at the dormant dial, this reds — no
-    // golden file to re-record, and no way for the change to ride silently.
+  it('CREATE (dark, fired deliberately): at the dormant dial birthConfig still writes not one byte', () => {
+    // ⭐ THE ARM THIS FILE USED TO RUN AGAINST THE PRODUCT, KEPT AND DRIVEN
+    // THROUGH A MOCKED DARK LAW. It is what makes reverting the dial a one-line
+    // act rather than a hope: the mint's dormant branch is exercised, not argued.
+    return boundaryWithDarkLaw().then((mod) => {
+      const minted = mod.birthConfig({ ...CONFIG });
+      expect(minted).toEqual({ ...CONFIG });
+      expect(Object.keys(minted).sort()).toEqual(Object.keys(CONFIG).sort());
+      expect(minted[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+      expect(mod.birthConfig(null)).toEqual({});
+      expect(mod.birthConfig(undefined)).toEqual({});
+      vi.doUnmock('../../src/domain/content/livingContentLaw.js');
+      vi.resetModules();
+    });
+  });
+
+  it('⭐⭐ CREATE (THE SAME-SEED CONTROL, LIT): a birth through the boundary is the same world but the law it declares', () => {
+    // ⭐⭐ THE ARM THE WHOLE LIGHTING RESTS ON, AND ITS CLAIM CHANGED SHAPE ON
+    // 2026-09-08 WITHOUT WEAKENING. It used to require the two settlements to be
+    // IDENTICAL, which was the strongest thing a dormant dial could say. A lit
+    // dial writes one config key by definition, so identity would now be a claim
+    // that the dial does not work. What it must still say — and does — is that
+    // NOTHING ELSE MOVED: the same seed makes the same town, field for field,
+    // once the marker's two config echoes are removed.
     const seed = 'l-mat-wiring-same-seed';
     const through = generateSettlementPipeline(birthConfig({ ...CONFIG }), null, { seed });
     const raw = generateSettlementPipeline({ ...CONFIG }, null, { seed });
-    expect(through).toEqual(raw);
-    expect(through[ROSTER_KEY]).toBeUndefined();
+    expect(worldBytesWithoutMarker(through)).toBe(worldBytesWithoutMarker(raw));
+    // …and the marker really is there, so the comparison above is a subtraction
+    // and not a description of two identical inputs.
     expect(resolveLivingContentLawVersion(through.config))
+      .toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(resolveLivingContentLawVersion(raw.config))
       .toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+    // THE ROSTER IS ABSENT ON BOTH, and that is the law and not an accident: this
+    // run's reviewed environment holds no living-content definition, so the roster
+    // has nothing to record and no key is written. Lighting the dial makes a world
+    // ELIGIBLE for a roster; it does not give it one.
+    expect(through[ROSTER_KEY]).toBeUndefined();
+    expect(raw[ROSTER_KEY]).toBeUndefined();
   });
 
   it('⛔ CREATE (THE CLAMP): a LIT marker arriving through the wizard form cannot birth a v2 world', () => {
@@ -229,22 +312,59 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
       'the hydrated lit config no longer mints a roster — the clamp arm below is vacuous',
     ).not.toBeNull();
 
-    const born = birthConfig(hydrated);
-    expect(born[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+    // ⭐⭐ AND THE CLAMP IS DRIVEN AT THE DORMANT DIAL, WHICH IS THE ONLY DIAL IT
+    // MATTERS AT — a fact the lighting day made visible rather than changed
+    // (2026-09-08, lane LIGHT car 1b). `birthConfig` spreads the mint LAST, so a
+    // non-empty mint always wins and the marker cannot survive whatever the
+    // incoming config says. The defect DEF-2 cured was a spread of `{}`, which
+    // deletes nothing: at the dormant dial, and only there, the destructure is the
+    // whole of what keeps a birth's law the dial's law. Running this arm against
+    // the LIT product would therefore prove nothing about the clamp at all, and it
+    // is run against a mocked dark law for exactly that reason. The lit direction
+    // has its own arm below.
+    return boundaryWithDarkLaw().then((mod) => {
+      const born = mod.birthConfig(hydrated);
+      expect(born[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+      expect(
+        Object.hasOwn(born, LIVING_CONTENT_LAW_CONFIG_KEY),
+        'the marker key survived birthConfig — a birth\'s law is no longer the dial\'s law',
+      ).toBe(false);
+      expect(materializesLivingContent(born)).toBe(false);
+      expect(buildLivingContentRoster(pack, born)).toBeNull();
+      // …and through the REAL pipeline, which is where a roster would actually land.
+      const world = generateSettlementPipeline(born, pack, { seed: 'l-mat-fix-clamp' });
+      expect(world[ROSTER_KEY]).toBeUndefined();
+      expect(world.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
+      // The clamp takes the marker and NOTHING ELSE.
+      expect(Object.keys(born).sort()).toEqual(
+        Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY).sort(),
+      );
+      vi.doUnmock('../../src/domain/content/livingContentLaw.js');
+      vi.resetModules();
+    });
+  });
+
+  it('⛔ CREATE (THE CLAMP, LIT): an imported config\'s marker never decides a birth\'s law', () => {
+    // THE OTHER HALF OF DEF-2, AND THE ONE THAT IS LIVE ON THE SHIPPED BUILD. The
+    // incoming config here declares the DORMANT law, which is the adversarial
+    // direction now: an imported v1 world's configuration, loaded through the
+    // Library and regenerated, must not birth a v1 world on a build whose dial
+    // says v2. The mint spreads last, so it does not — and this arm is what says
+    // so by execution rather than by reading the spread order.
+    const hydratedDark = migrateSettlementConfig({
+      ...CONFIG, [LIVING_CONTENT_LAW_CONFIG_KEY]: DEFAULT_LIVING_CONTENT_LAW_VERSION,
+    });
     expect(
-      Object.hasOwn(born, LIVING_CONTENT_LAW_CONFIG_KEY),
-      'the marker key survived birthConfig — a birth\'s law is no longer the dial\'s law',
-    ).toBe(false);
-    expect(materializesLivingContent(born)).toBe(false);
-    expect(buildLivingContentRoster(pack, born)).toBeNull();
-    // …and through the REAL pipeline, which is where a roster would actually land.
-    const world = generateSettlementPipeline(born, pack, { seed: 'l-mat-fix-clamp' });
-    expect(world[ROSTER_KEY]).toBeUndefined();
-    expect(world.config[LIVING_CONTENT_LAW_CONFIG_KEY]).toBeUndefined();
-    // The clamp takes the marker and NOTHING ELSE.
-    expect(Object.keys(born).sort()).toEqual(
-      Object.keys(hydrated).filter(k => k !== LIVING_CONTENT_LAW_CONFIG_KEY).sort(),
-    );
+      resolveLivingContentLawVersion(hydratedDark),
+      'the hydrated config is not dark — this arm no longer tests the direction it names',
+    ).toBe(DEFAULT_LIVING_CONTENT_LAW_VERSION);
+    const born = birthConfig(hydratedDark);
+    expect(born[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
+    expect(materializesLivingContent(born)).toBe(true);
+    // …and an incoming marker for a version that HAS NOT SHIPPED loses too, which
+    // is the same rule and the one a future v3 would arrive by.
+    const born3 = birthConfig({ ...CONFIG, [LIVING_CONTENT_LAW_CONFIG_KEY]: 3 });
+    expect(born3[LIVING_CONTENT_LAW_CONFIG_KEY]).toBe(ROSTER_LIVING_CONTENT_LAW_VERSION);
   });
 
   it('⛔ THE CLAMP DOES NOT DEFEAT THE MINT: with the dial LIT, a birth is still v2', () => {

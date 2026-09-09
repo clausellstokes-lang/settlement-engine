@@ -585,6 +585,14 @@ vi.mock('../../src/domain/clock.js', async (importOriginal) => {
 });
 
 const { composeInstantWorld } = await import('../../src/lib/instantWorld/composeInstantWorld.js');
+// ⭐ THE CREATE BOUNDARY'S ASYNC PRELUDE (2026-09-08, lane LIGHT car 1b). The
+// composer is a classified BIRTH and is SYNCHRONOUS, so it cannot load the lazy
+// payload the law it mints needs; since the living-content dial was lit the seam
+// THROWS rather than degrading when nothing loaded it. Awaited beside the import
+// that reaches the composer, which is the same shape the composer's three
+// production callers take.
+const { loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
+await loadGenerationLawPayloads();
 const { simulateCampaignWorldInterval } = await import('../../src/domain/worldPulse/advanceInterval.js');
 const { ensureRegionalGraph } = await import('../../src/domain/region/graph.js');
 const { SIMULATION_RULE_PRESETS } = await import('../../src/domain/worldPulse/simulationRules.js');
