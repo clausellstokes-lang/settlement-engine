@@ -1,0 +1,20 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 49,
+ "firstTs": "2026-09-09T17:12:17.022Z",
+ "lastTs": "2026-09-09T17:13:11.332Z",
+ "tools": {
+  "Bash": 8
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I will read the voice documents, the kept rows, the draft, the licence card and the old shipped rows before writing verdicts.",
+ "run": "wf_b6204819-335",
+ "agent": "a14fd1c31d07be870",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_b6204819-335/agent-a14fd1c31d07be870.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

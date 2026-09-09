@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:07:10 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 13:13:11 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -6,6 +6,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 16:13:36 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:46:13 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 16:22:54 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:07 |
 | ? | other |  | result | 0 | — | — | 15:54:23 |
 | ? | other |  | result | 0 | — | — | 16:55:42 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 16:54:38 |
@@ -38,7 +39,7 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:35:40 |
 | ? | other |  | result | 0 |  `attach: (empty)`** — nothing to declare; the pool is the seat, and the connect | — | 16:25:17 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 16:11:32 |
-| ? | other |  | in-flight | 0 | — | — | 17:06:57 |
+| ? | other |  | result | 0 | — | — | 17:11:45 |
 | ? | other |  | result | 0 | — | — | 15:36:43 |
 | ? | other |  | result | 0 | — | — | 11:49:05 |
 | ? | other |  | result | 0 | fences-registers-receipt.md | — | 11:47:17 |
@@ -46,13 +47,14 @@
 | ? | other |  | result | 0 | instruments-and-gate.md | — | 11:46:59 |
 | ? | other |  | result | 0 | — | — | 16:05:41 |
 | ? | other |  | result | 0 | refine.md | — | 17:06:35 |
-| ? | other |  | in-flight | 0 | — | — | 16:58:07 |
+| ? | other |  | result | 0 | — | — | 17:10:01 |
 | ? | other |  | result | 0 | — | — | 16:29:53 |
 | ? | other |  | result | 0 | draft-round-4.md | — | 16:48:43 |
-| ? | other |  | in-flight | 0 | — | — | 16:59:49 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:11 |
+| ? | other |  | result | 0 | refine.md | — | 17:10:04 |
 | ? | other |  | result | 0 | — | — | 15:38:15 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:43:54 |
-| ? | other |  | in-flight | 0 | — | — | 16:57:55 |
+| ? | other |  | result | 0 | refine.md | — | 17:09:58 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:47:49 |
 | ? | other |  | result | 0 | — | — | 16:36:00 |
 | ? | other |  | result | 0 | — | — | 17:06:20 |
@@ -66,24 +68,30 @@
 | ? | other |  | result | 0 | refine.md | — | 16:37:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:39:37 |
 | ? | other |  | result | 0 | draft-round-3.md | — | 16:19:37 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:08 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:10 |
 | ? | other |  | result | 0 | refine.md | — | 16:39:39 |
 | ? | other |  | result | 0 | — | — | 16:36:36 |
 | ? | other |  | result | 0 | — | — | 16:15:05 |
 | ? | other |  | result | 0 | refine.md | — | 16:34:46 |
 | ? | other |  | result | 0 | refine.md | — | 16:56:04 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:41:47 |
-| ? | other |  | in-flight | 0 | — | — | 17:07:04 |
+| ? | other |  | result | 0 | — | — | 17:12:16 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:39:06 |
 | ? | other |  | result | 0 | refine.md | — | 16:36:11 |
 | ? | other |  | result | 0 | — | — | 16:26:33 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:48:56 |
 | ? | other |  | result | 0 | — | — | 16:08:25 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:10 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 15:38:52 |
 | ? | other |  | result | 0 | — | — | 16:20:23 |
 | ? | other |  | result | 0 | refine.md | — | 16:46:02 |
 | ? | other |  | result | 0 | — | — | 15:33:03 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:06 |
 | ? | other |  | result | 0 | refine.md | — | 16:39:00 |
 | ? | other |  | result | 0 | — | — | 15:35:37 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:11 |
+| ? | other |  | in-flight | 0 | — | — | 17:13:11 |
 | ? | other |  | result | 0 | — | — | 16:07:54 |
 | ? | other |  | result | 0 | — | — | 16:05:15 |
 | ? | other |  | result | 0 | draft-round-2.md | — | 16:05:45 |
