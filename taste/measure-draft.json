@@ -1,7 +1,7 @@
 {
  "arm": "draft",
  "round": 0,
- "at": "2026-09-09T02:28:12",
+ "at": "2026-09-09T02:57:47",
  "projection": {
   "ok": true,
   "waivers": [
@@ -56,6 +56,7 @@
    "departure": 0,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -85,6 +86,7 @@
    "departure": 0,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -115,6 +117,7 @@
    "departure": null,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -145,6 +148,7 @@
    "departure": null,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -173,6 +177,7 @@
    "departure": 0,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -201,6 +206,7 @@
    "departure": 0,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
@@ -230,6 +236,7 @@
    "departure": 0,
    "rounds": {
     "draftRounds": 0,
+    "rounds": [],
     "refineA": false,
     "refineB": false,
     "files": []
