@@ -30,7 +30,7 @@ classifier prints `[]` at every commit except where §N.2's RE-INDEXED row is th
 | 8a-1 | the index-stable draw (§N.2) | **`f4005cccd`** | **LANDED** |
 | 8a-2 | passage shapes — the licensed fourth draw + the distribution report | **`39c88b02d`** | **LANDED** |
 | 8a-3 | the taste's instruments landed by name, without the annex rows | **`83e8acf17`** | **LANDED** |
-| 8a-4 | `armThread` + the kinship tiebreak | — | pending |
+| 8a-4 | `armThread` + the kinship tiebreak | **`94c41fdb8`** | **LANDED** |
 | 8a-5 | the wave's gate `scripts/prose-wave-gate.mjs` | — | pending |
 | 8a-6 | the arm-Q cure + the field-synonym table | — | pending |
 | 8a-7 | the face-count ratchet | — | pending |
@@ -656,3 +656,137 @@ to 8a-10 by ADDENDUM 1 ruling 7: the refreeze ritual refuses a dirty tree.
    them would have added three filters that can never fire.
 4. **`absentPoolRow` answers BEFORE the marker branch.** A pool that does not exist is not an
    unwritten one, and every branch below reads a variant list that would be empty.
+
+---
+
+## 8a-4 — `armThread` AND THE KINSHIP HEAD (SITTING §T.4 adopting agenda C″)
+
+**LANDED `94c41fdb8`** over `83e8acf17`. Nine files. Zero reader-facing bytes, proven.
+
+### ⛔⛔ THE BRIEF'S LITERAL IMPLEMENTATION IS REFUSED BY THE ARCHITECTURE, WITH THE MEASUREMENT
+
+The brief asks for the kinship tiebreak "in `composeStateProse.js` `compareSalience`
+(`:496–501`)". The signal C″ describes is LEXICAL — "the modifier sharing the spine's subject
+noun" — and deciding it inside the composer needs the estate's one stop list, which lives in
+`src/domain/prose/composedWalker.js`. Three walls, each executed rather than recalled:
+
+| wall | the measurement |
+|---|---|
+| **ARCH §4.1, verbatim** | "It imports the kernel and the three FROZEN DATA leaves … **an import from generation, the pulse kernel or `src/domain/prose/` reds**" |
+| **the estate's own fence** | `tests/lint/composeStateProseFence.test.js` asserts the composer's import list is EXACTLY `['./stateProseKernel.js']` and `CAR_4_LEAF_SPECIFIERS.length === 3`, whose docblock says "a fourth dependency is a chair conversation, not an edit" |
+| **the closure cost**, driven on this car's own new instrument | `closureCost(composeStateProse.js, composedWalker.js)` → **+4 files · +150,231 B** onto a host closure of **70,252 B**. It would TRIPLE a first-paint module and pull `entryWalker.js`, `entryLexicons.js` and `moveGrammar.js` onto the render path |
+
+A second stop list inside the composer is the drift 8a-2 refused by name (two vocabularies that
+each agree with themselves). A self-calibrating vocabulary derived from the block would be a
+mechanism the architecture does not name.
+
+⭐ **WHAT LANDED INSTEAD, AND WHY IT IS THE ARCHITECTURE'S OWN ANSWER RATHER THAN A DODGE.**
+ARCH §4.1 rules "the DESK supplies KEYS and typed flags, the CORPUS supplies RELATIONS and
+roles, the COMPOSER supplies everything else". So the lexical work happens ONCE, at PROJECTION,
+in the same place and the same idiom as the SEAT LICENCE: `kinSpines`
+(`scripts/lib/dossier-annex-grammar.mjs`) answers which of a modifier's attach spines it
+threads with, and the projector freezes the answer onto `poolMeta.kin`. The composer reads a
+frozen array — `kinOf` is an `Array.isArray` and an `includes`, and nothing else.
+
+**EVERY FACE OF EVERY VARIANT, ON BOTH SIDES.** A spine is kin only where every face of every
+variant of the modifier shares a content word with every face of every variant of that spine.
+The looser reading (any face with any face) was considered and refused: `kin` is read BEFORE the
+face draw, so a kinship that held on some faces would make the ORDER of composition a function
+of which face the seeded draw took — two towns on one seed seating different modifiers for a
+reason no instrument prints.
+
+### THE COMPARATOR'S NEW HEAD IS ONE BIT, NOT TWO
+
+C″ asks for a tiebreak INSIDE a band and a subject shift forced last REGARDLESS of band. With
+one signal those are one rule: a candidate that is not kin is exactly one that shifts the
+subject, so sorting kin first satisfies the second sentence outright and the first as its
+consequence. Two bits would have been a distinction with no signal behind it and a register row
+nobody could measure. The order is now **kin ↓ · band ↓ · seeded permutation ↑ · code-unit key ↑**.
+
+⛔ **AN ABSENT LIST READS AS KIN (fail-open), and that is why this car moves nothing.** Only a
+MODIFIER has an attach set; every one of the 708 shipped pools is a spine with `attach: []`, so
+`kin` is emitted on no pool, every candidate scores 1, and the comparator falls straight through
+to the band it used before. An implementation reading a missing list as "not kin" would have
+read the whole estate as a subject shift.
+
+### THE PLANTS, EACH EXECUTED
+
+| arm | plant | control |
+|---|---|---|
+| kinship outranks the band | two pools carrying BOTH other signals (contrast + change) and `kin: []` lose to one carrying neither and `kin: [SPINE]`, over 40 seeds | the SAME corpus with the `kin` lists removed hands the seat back to the band, and the kin pool never seats |
+| absent ≠ empty | no pool declares `kin` → the seeded permutation still reaches all three | `kin: []` (a measured NO) loses to `kin: [SPINE]` (a measured YES) |
+| `kin` is PER SPINE | `kin: ['spine: some other']` buys nothing at THIS spine | the threading pool seats over 40 seeds |
+| `kinSpines` draw-independence | ONE face of the modifier sharing nothing withdraws the kinship | the same pool without that face threads |
+| the stop list bites | two sentences sharing only `town` are not kin | add one real noun and the thread appears |
+| no vacuous kinship | an empty spine pool, an empty modifier, and an attach naming a pool the block does not carry all answer `[]` | — |
+| Thread: carried | a shared noun passes and the carried word is PRINTED | — |
+| Thread: turn outward | a last-position turn passes | — |
+| Thread: ⛔ mid-passage | a shift that hands nothing back and is not last is `broken`, reason names MID-PASSAGE | the same three positions with the turn moved last read `carried, turn-outward` |
+| Thread: ⛔ second turn | the one licence is spent; reason names SECOND turn outward | — |
+| Thread: NOT-EXECUTABLE | a one-sentence unit reports no verdict and says how many sentences it found | — |
+| ⛔ A11 counts FACTS, Thread counts NOUNS | the deliberate noun echo passes A11 because the two rows carry different facts | the SAME two rows with ONE fact between them fail A11 at once |
+
+⚠ **A MEASURED PROPERTY OF THE RULE, recorded rather than smoothed.** The "second turn outward"
+branch is NEVER REACHABLE ALONE: a turn is licensed only in the LAST position, so a first turn
+anywhere else is already a mid-passage break. The plant therefore carries BOTH failures, and the
+two are told apart by the REASON, which is why the reason is asserted and not only the count.
+
+### ⛔ A RED THIS LANE'S OWN 8a-3 LEFT, FOUND HERE AND CURED
+
+`tests/domain/economyStateProseDesk.test.js:292` pins a rung's provenance with `toEqual`, and
+M-3's `pieces` — landed at 8a-3 — legitimately adds a fourth key (ARCH §4.1 in terms:
+"`provenance` grows `pieces` INSIDE the object `drawnAtMount` strips on a glance row").
+**8a-3's named acceptance was `tests/lint` whole, which does not reach `tests/domain`.** The pin
+is re-cut to assert the key SET exactly plus the one spine piece beside it, so it still refuses
+a fifth key rather than loosening to a subset match. 59 passed.
+
+### THE REGISTER ROW MOVED IN THE SAME COMMIT
+
+`comparator-and-band-rule`: `mechanism`, `shift`, `idiom` and `note` rewritten; the source pin
+gains `if (aKin !== bKin) return bKin - aKin;` and `if (!meta || !Array.isArray(meta.kin)) return 1;`;
+a SECOND integer pin holds "pools shipping a non-empty `kin` list" at **0**. The contract test
+refused the pin until its recomputation was written — *"comparator-and-band-rule pin 2: nothing
+recomputes it — the pin is a promise, not a measurement"* — which is the register working
+exactly as designed, and is quoted here because it is the arm convicting this car.
+
+`kin` is a MECHANISM and not a RESERVED key (the composer reads it), so it joins the projection
+contract's modifier-only stray-key list beside `relation`, `form` and `move`, held at 0 pools.
+
+### EXECUTED ACCEPTANCE
+
+| gate | result |
+|---|---|
+| `tests/domain/composeStateProse.test.js` | **50 passed** (47 before) |
+| `tests/lint/proseComposed.walker.test.js` | **77 passed** (68 before) |
+| `tests/data/dossierStateProseProjection.contract.test.js` | **74 passed** (68 before) |
+| `tests/domain/economyStateProseDesk.test.js` | **59 passed** |
+| the six desk suites | **345 passed / 0** after the cure |
+| `npx vitest run tests/lint` | **153 files passed / 1 failed · 2,554 passed / 1** (the declared lighting red) |
+| `node scripts/generate-dossier-state-prose.mjs --check` | exit 0 |
+| classifier, 8a-3 tip → 8a-4 tip | **UNCHANGED 73,284 · REPLACED / RE-INDEXED / ADDITIVE / WORDING-ONLY / ADDED / REMOVED all 0** |
+| typecheck | 173 errors, **0 in any file this car touched** |
+| eslint (8 files) | exit 0 |
+| runners / porcelain | 0 / 0 |
+
+### ⛔ A SECOND PRE-EXISTING RED AT THE §917 PRODUCT TIP, ESTABLISHED BY EXECUTION
+
+`tests/property/generatorGoldenMaster.test.js` — "every config produces byte-identical output to
+the golden master" fails on **all 525 configs**. Driven at three tips with clean trees:
+
+| tip | tree | result |
+|---|---|---|
+| `29ec62425` (§917 product tip, `$SC/laneLIGHT`) | porcelain 0 | **RED, 525 configs** |
+| `39c88b02d` (8a-2, `$SC/rw8aBASE`) | porcelain 0 | **RED, 525 configs** |
+| this car's tip | porcelain 0 | RED, 525 configs |
+
+It is INHERITED and not this lane's, exactly like `tests/copy/voiceMechanics.test.js`. Reported
+to the chair; not cured, because it is outside 8a's charter and the golden master is an
+owner-facing surface.
+
+⭐ **THE SWEEP THAT FOUND IT, AND WHY IT WAS RUN.** After the economy-desk red the lane ran
+`tests/domain tests/property tests/data` whole ONCE, with the load check first (`ps -r` idle) and
+runners 0 — a directory sweep the brief does not name, run deliberately because 8a-3's named
+acceptance had already been shown not to reach a real red. **1,092 files passed / 2 failed ·
+17,494 tests passed / 3 failed.** The three: the two chartered `dossierProseManifest` arms (DRIFT
+and PROVENANCE — the manifest fixture is NOT re-recorded by this car) and the inherited golden
+master. Nothing else in 17,497 tests moved.
