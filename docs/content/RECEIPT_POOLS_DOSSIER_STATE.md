@@ -2540,10 +2540,22 @@ margin *arm*. They are different fields on different rows and both are kept;
    - `[face]` Whatever might be brought against {settlement} would be met, and met by a defense of real depth.
 
 **readiness `ADEQUATE`**
-1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
-2. `[visitor]` A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.
-3. `[street]` The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.
-4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
+1. `[ledger]` The defense of {settlement} answers the ordinary demand on it and leaves nothing over.
+   - `[face]` At {settlement} the cover stands level with the call upon the town.
+   - `[face]` Against the common run of trouble, {settlement} is provided for in full and no further.
+   - `[face]` Sufficiency without reserve is the defensive standing at {settlement}.
+2. `[visitor]` {settlement} stands as a defended town of the plain sort, sufficient against the usual and no better.
+   - `[face]` Ordinary among defended towns, {settlement} lacks nothing and keeps nothing spare.
+   - `[face]` Common cover is what {settlement} shows, and nothing stands behind the cover.
+   - `[face]` Enough stands at {settlement}, and no more.
+3. `[street]` The town is set up for the usual trouble, and that is where the arrangement ends.
+   - `[face]` Nothing in the town's defense is short, and nothing is spare.
+   - `[face]` What the town keeps does for the common demand and does no more.
+   - `[face]` So far as the usual goes, the town is covered, and the cover stops there.
+4. `[threshold]` The defense at {settlement} stands at its own limit, and the limit is where the cover ends.
+   - `[face]` Cover at {settlement} runs to its edge, and no part of it runs past.
+   - `[face]` Provision at {settlement} reaches the common trouble and stops there.
+   - `[face]` Everything {settlement} keeps in defense answers the ordinary case, and nothing answers past it.
 
 **readiness `WEAK`**
 1. `[ledger]` The defense of {settlement} is thin.
@@ -2569,31 +2581,31 @@ margin *arm*. They are different fields on different rows and both are kept;
    - `[face]` Whatever else the town holds, it holds no defense.
    - `[face]` The town's defense runs to nothing.
 3. `[visitor]` A stranger comes to the middle of {settlement} and meets no defense on the way.
-   - `[face]` Arriving at {settlement}, a stranger finds the town undefended.
+   - `[face]` The stranger who reaches {settlement} passes no defense.
    - `[face]` What a stranger walks into at {settlement} is a town with no defense.
    - `[face]` Nothing at {settlement} stands in a stranger's way.
 
 **terrain FAVOURABLE to the defender**
 1. `[visitor]` The way into {settlement} climbs, and the climb counts for the town.
-   - `[face]` The country falls away below {settlement}, and the town is the better placed for it.
+   - `[face]` Below {settlement} the country falls away, and the town is the better placed for the drop.
    - `[face]` The approach to {settlement} is uphill work, and the work falls to whoever is coming.
    - `[face]` The ground stands higher at {settlement} than in the country around it, and the height is the town's to keep.
 2. `[ledger]` The terrain at {settlement} carries part of the defense, and level ground would carry less.
    - `[face]` The site of {settlement} is worth something to the defense on its own account, and open country would be worth less.
    - `[face]` Part of the defense at {settlement} is in the lie of the land, and a flat site would be the poorer for it.
    - `[face]` Ground of this kind is worth more to {settlement} than flat country would be.
-3. `[counterforce]` Anything that came against {settlement} would come uphill, and the slope is the town's.
-   - `[face]` The climb is what stands in the way of anything reaching {settlement}, and the town holds the far end of it.
+3. `[counterforce]` Whatever came against {settlement} would come up a slope, and the slope is the town's.
+   - `[face]` The climb stands in the way of anything reaching {settlement}, and the town holds its upper end.
    - `[face]` A force pressing {settlement} would press uphill, and the town would be above it.
    - `[face]` Steep ground stands between {settlement} and anything below it.
 
 **terrain EXPOSED**
 1. `[visitor]` Open ground reaches {settlement} from every side.
-   - `[face]` The way in to {settlement} crosses ground without cover or defile.
+   - `[face]` The way in to {settlement} crosses ground unbroken by ridge or defile.
    - `[face]` From any quarter, the approach to {settlement} runs over open country.
    - `[face]` The country about {settlement} carries no rise and no hollow.
 2. `[ledger]` The site of {settlement} holds no advantage of ground.
-   - `[face]` Standing on open ground, {settlement} takes no strength from the land.
+   - `[face]` Under terrain, {settlement} takes no strength from the land.
    - `[face]` The land at {settlement} lies open from end to end.
    - `[face]` Nothing in the site of {settlement} rises or narrows.
 3. `[street]` No hill and no narrows lie anywhere about {settlement}.

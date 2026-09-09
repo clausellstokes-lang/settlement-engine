@@ -73,33 +73,53 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness ADEQUATE": [
         {
           "angle": "ledger",
-          "text": "{settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.",
+          "text": "The defense of {settlement} answers the ordinary demand on it and leaves nothing over.",
           "slots": [
             "settlement"
           ],
-          "vid": 1
+          "vid": 1,
+          "wordings": [
+            "At {settlement} the cover stands level with the call upon the town.",
+            "Against the common run of trouble, {settlement} is provided for in full and no further.",
+            "Sufficiency without reserve is the defensive standing at {settlement}."
+          ]
         },
         {
           "angle": "visitor",
-          "text": "A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.",
+          "text": "{settlement} stands as a defended town of the plain sort, sufficient against the usual and no better.",
           "slots": [
             "settlement"
           ],
-          "vid": 2
+          "vid": 2,
+          "wordings": [
+            "Ordinary among defended towns, {settlement} lacks nothing and keeps nothing spare.",
+            "Common cover is what {settlement} shows, and nothing stands behind the cover.",
+            "Enough stands at {settlement}, and no more."
+          ]
         },
         {
           "angle": "street",
-          "text": "The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.",
+          "text": "The town is set up for the usual trouble, and that is where the arrangement ends.",
           "slots": [],
-          "vid": 3
+          "vid": 3,
+          "wordings": [
+            "Nothing in the town's defense is short, and nothing is spare.",
+            "What the town keeps does for the common demand and does no more.",
+            "So far as the usual goes, the town is covered, and the cover stops there."
+          ]
         },
         {
           "angle": "threshold",
-          "text": "{settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.",
+          "text": "The defense at {settlement} stands at its own limit, and the limit is where the cover ends.",
           "slots": [
             "settlement"
           ],
-          "vid": 4
+          "vid": 4,
+          "wordings": [
+            "Cover at {settlement} runs to its edge, and no part of it runs past.",
+            "Provision at {settlement} reaches the common trouble and stops there.",
+            "Everything {settlement} keeps in defense answers the ordinary case, and nothing answers past it."
+          ]
         }
       ],
       "readiness WEAK": [
@@ -176,7 +196,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 3,
           "wordings": [
-            "Arriving at {settlement}, a stranger finds the town undefended.",
+            "The stranger who reaches {settlement} passes no defense.",
             "What a stranger walks into at {settlement} is a town with no defense.",
             "Nothing at {settlement} stands in a stranger's way."
           ]
@@ -191,7 +211,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The country falls away below {settlement}, and the town is the better placed for it.",
+            "Below {settlement} the country falls away, and the town is the better placed for the drop.",
             "The approach to {settlement} is uphill work, and the work falls to whoever is coming.",
             "The ground stands higher at {settlement} than in the country around it, and the height is the town's to keep."
           ]
@@ -211,13 +231,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Anything that came against {settlement} would come uphill, and the slope is the town's.",
+          "text": "Whatever came against {settlement} would come up a slope, and the slope is the town's.",
           "slots": [
             "settlement"
           ],
           "vid": 3,
           "wordings": [
-            "The climb is what stands in the way of anything reaching {settlement}, and the town holds the far end of it.",
+            "The climb stands in the way of anything reaching {settlement}, and the town holds its upper end.",
             "A force pressing {settlement} would press uphill, and the town would be above it.",
             "Steep ground stands between {settlement} and anything below it."
           ]
@@ -232,7 +252,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 1,
           "wordings": [
-            "The way in to {settlement} crosses ground without cover or defile.",
+            "The way in to {settlement} crosses ground unbroken by ridge or defile.",
             "From any quarter, the approach to {settlement} runs over open country.",
             "The country about {settlement} carries no rise and no hollow."
           ]
@@ -245,7 +265,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           ],
           "vid": 2,
           "wordings": [
-            "Standing on open ground, {settlement} takes no strength from the land.",
+            "Under terrain, {settlement} takes no strength from the land.",
             "The land at {settlement} lies open from end to end.",
             "Nothing in the site of {settlement} rises or narrows."
           ]
@@ -366,10 +386,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         "role": "spine",
         "variantCount": 4,
         "faceCounts": [
-          1,
-          1,
-          1,
-          1
+          4,
+          4,
+          4,
+          4
         ],
         "vids": [
           1,
