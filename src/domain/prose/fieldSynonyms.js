@@ -48,7 +48,7 @@ export const FIELD_SYNONYM_ROWS = Object.freeze([
   Object.freeze({
     field: 'settlement.defenseProfile.economicGates.military',
     nouns: Object.freeze(['wages', 'wage', 'pay', 'purse']),
-    at: 'SITTING §H rule 3 — the military economic gate IS the town\'s pay for its watch;'
+    at: 'SITTING §H rule 3. The military economic gate IS the town\'s pay for its watch;'
       + ' the licence card prints the gate as the pool\'s read and the writers author against it',
   }),
 ]);

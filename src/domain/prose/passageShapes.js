@@ -198,7 +198,7 @@ export function lawfulPassageShapes(unit, facts = {}) {
   else if (facts.clauseJointsExist === false) {
     refused.push({
       shape: 'clause-seat',
-      why: 'WITHHELD — the connectives leaf carries no consequence.clause joint at all, so no world can seat one (8a item 9 drafts the list to its floor of three)',
+      why: 'WITHHELD: the connectives leaf carries no consequence.clause joint at all, so no world can seat one (8a item 9 drafts the list to its floor of three)',
     });
   } else {
     refused.push({ shape: 'clause-seat', why: 'no modifier is seated at the clause seat' });

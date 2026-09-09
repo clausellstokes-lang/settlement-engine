@@ -1000,7 +1000,7 @@ export function armAmbiguity(unit) {
     if (!lower.includes(phrase)) continue;
     emit(out, row(id, 'Ambiguity', 'WITHHELD', 'a reading that depends on the spine', phrase,
       'this phrase carries a second reading beside a different spine, so what the unit claims'
-      + ' depends on what the reader just read — a refuter answers it, never a regex'));
+      + ' depends on what the reader just read; a refuter answers it, never a regex'));
   }
   return out;
 }
