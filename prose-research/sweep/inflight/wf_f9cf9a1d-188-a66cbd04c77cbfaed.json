@@ -1,0 +1,21 @@
+{
+ "role": "other",
+ "name": null,
+ "angle": null,
+ "tag": null,
+ "lines": 148,
+ "firstTs": "2026-09-09T17:47:52.097Z",
+ "lastTs": "2026-09-09T17:53:09.262Z",
+ "tools": {
+  "Bash": 35,
+  "Read": 3
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "Now the voice documents and the pool's current rows.",
+ "run": "wf_f9cf9a1d-188",
+ "agent": "a66cbd04c77cbfaed",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/67af10e4-7386-48d4-8cd3-b2985d4885c2/subagents/workflows/wf_f9cf9a1d-188/agent-a66cbd04c77cbfaed.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
