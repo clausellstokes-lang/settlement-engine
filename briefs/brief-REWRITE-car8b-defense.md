@@ -28,3 +28,9 @@ Seat of the workflows: `$SC/rewrite/rewrite-block.workflow.js` (the chair's scri
 
 ## After the eleven blocks
 The chair's consist over the block docks (cherry-pick by block commit, in the order above, onto `laneREWRITE` at the §919 CAS) → the skeptic pass (one dock per plant-driving lens; the lenses: the classifier's print per block · the judge's rulings re-derived on a sample · the fences and the registers) → cures → the §920 chain (predict · HOLD · proof · registers · register car · ratchet · after-ratchet · texts · gate · after-cas) → then the GENERAL desk (18 blocks, 71 pools, 258 variants) on the same pattern, then economy, power, stressors, and warFaith after its two wiring cars.
+
+## ADDENDUM 1 (chair, 2026-09-09 08:2x, after the 8a fold and SITTING §U) — three rules for every block gate
+- NEVER call the wave gate bare: its default roster composes zero units; pass `--pools` (the block's census keys) or `--section <desk>`.
+- ALWAYS pass `--out <the block dock>/.packets/<arm>` (cure a-2 namespaces packets by dock and refuses a foreign packet; the workflow passes `--out` anyway, belt and braces) — two arms or two docks never share a packet file.
+- The gate runs `tests/copy/voiceMechanics.test.js` and the projection contract after EVERY commit (the acceptance-gap hazard); the judge runs `check-domain-strict` and `typecheck:ratchet` once at the block's final commit.
+- THE PEN LINE (SITTING §U c-7 ii): an INTERESTED fact's DM face is a pen line beside the block, never an inline replacement; a fact the player never reads at all (a covert fact) stays a `dm-only` variant. Writers of DS-DEF-4 (the capture consequence) and any block with a state-organ holder write the pen line as its own row kind per ARCH §2.5's pen grammar (the projector names the line) — if the grammar lacks a pen row kind at 8b's first block, the gate REFUSES the pen rows and the chair charters it as 8b-0.

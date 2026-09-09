@@ -684,3 +684,8 @@ An unlawful set is pushed toward the ceiling as far as one effort allows, exactl
 
 ## 21.4 THE DENSITY LAW (owner, 2026-09-08 ~22:2x)
 "The muster roll is the watch's own, and the watch is bought" stands as first written. A reader's question about a lawful, compressed line is not a verdict against it; compression and idiom that reward the reader are part of the ceiling; the read-aloud ear means the line lands when read, never that it is made plainer. Refiners never trade density for plainness; "unclear" is not a refuter's finding unless a law is broken; a refinement that made a lawful line plainer with no law behind the change is the regression.
+
+## 24. THE PEN LINE, THE COVERT VARIANT, AND THE PROVENANCE CEILING (chair under the owner's delegation, 2026-09-09; SITTING §T.4 and §U c-7; §0–§23 untouched)
+- An INTERESTED fact (a fact the player reads, whose holder is a power with an interest in it) has ONE compiled face on both pages and a DM PEN LINE beside the block naming the holder and its interest from typed facts only; the inline replacement face is not shipped for interested facts. A fact the player never reads at all (a covert fact) stays a `dm-only` variant of its pool. Both mechanisms are kept; they are different things.
+- The provenance budget is a CEILING of one citation per unit, on a licensed holder, and only for one of S3's three reasons (two accounts that disagree; a count from an interested party; a record whose keeper is a power). The exemplar registers with raw text cite at 0 per 786 sentences, so 'rarely' is the norm and a citation habit is a refuter's finding.
+- The twelve connective joints of 8a-9 are the lane's DRAFT public copy; the owner signs the copy at the walk (§13 row 27).
