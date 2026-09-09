@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-09 03:47:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-09 03:53:23 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT train lands — the living-content dial lit for every new world on the ow
 
@@ -141,4 +141,4 @@ product claude/composite-r4 = 29ec62425 · ledger = 460ed5fba §917: the LIGHT t
 - wf_73595d81-51d: 15 journal lines, 8 agents
 
 ## PROCESSES: 57560 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.40 3.21 4.05
+load: 1.87 2.46 3.40
