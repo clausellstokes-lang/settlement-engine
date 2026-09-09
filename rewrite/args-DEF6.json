@@ -1,0 +1,48 @@
+{
+ "block": "DS-DEF-6",
+ "dock": "laneRW-DEF6",
+ "pools": [
+  {
+   "pool": "Naval Defense: Naval force",
+   "dir": "ds-def-6--naval-defense-naval-force",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Naval Defense: Port only",
+   "dir": "ds-def-6--naval-defense-port-only",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 3
+  },
+  {
+   "pool": "Naval Defense: Under blockade",
+   "dir": "ds-def-6--naval-defense-under-blockade",
+   "role": "spine",
+   "status": "RESOLVED",
+   "variants": 4
+  }
+ ],
+ "wiringDebt": [
+  "Economic Backing: Well-funded (WIRING-UNRESOLVED)",
+  "Economic Backing: Adequate (WIRING-UNRESOLVED)",
+  "Economic Backing: Underfunded (WIRING-UNRESOLVED)",
+  "Economic Backing: Critical (WIRING-UNRESOLVED)",
+  "Magical Capability: Arcane support (WIRING-UNRESOLVED)",
+  "Magical Capability: None (WIRING-UNRESOLVED)",
+  "Legal Infrastructure: Court + Prison (WIRING-UNRESOLVED)",
+  "Legal Infrastructure: Court only (WIRING-UNRESOLVED)",
+  "Legal Infrastructure: Prison only (WIRING-UNRESOLVED)",
+  "Legal Infrastructure: None (WIRING-UNRESOLVED)",
+  "Medical Readiness: Hospital present (WIRING-UNRESOLVED)",
+  "Medical Readiness: Clergy care (WIRING-UNRESOLVED)",
+  "Medical Readiness: None (WIRING-UNRESOLVED)",
+  "Logistics & Supply: Granary + port (WIRING-UNRESOLVED)",
+  "Logistics & Supply: Granary in isolation (WIRING-UNRESOLVED)",
+  "Logistics & Supply: Granary with road supply (WIRING-UNRESOLVED)",
+  "Logistics & Supply: No reserves, port open (WIRING-UNRESOLVED)",
+  "Logistics & Supply: No reserves, landlocked (WIRING-UNRESOLVED)"
+ ],
+ "maxRounds": 6
+}

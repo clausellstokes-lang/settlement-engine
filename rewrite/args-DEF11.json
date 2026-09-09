@@ -38,5 +38,6 @@
    "variants": 2
   }
  ],
+ "wiringDebt": [],
  "maxRounds": 6
 }
