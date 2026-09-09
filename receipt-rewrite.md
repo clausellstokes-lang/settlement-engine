@@ -3198,3 +3198,181 @@ lrwxr-xr-x  node_modules/seedrandom -> .../node_modules/seedrandom      # symlin
 baselines, two projected leaves and three test files; no build; porcelain 0 and runners 0.
 The seven blocks' second writing pass runs on docks cut at the consist tip AFTER this car is
 consisted.
+
+---
+
+## CAR 8b-W-5 — THE LICENCE CARD'S TABLE-RUNG LEAF
+
+**STATUS: PARTIAL — the cure is written and proved, the commit and the lighting refreeze are not
+yet on the tip.** (Header written before the work landed, per the lane's own rule; the closing
+STATUS line at the end of this section is the one that binds.)
+
+Seat: Opus 5 (Fable-unvalidated). Lane: REWRITE-8b. Dock: `$SC/laneRW-DEFW`, base `290f86ee0`.
+
+### 8b-W-5.1 THE DEFECT, AS THE WRITERS WERE READING IT
+
+`scripts/lib/prose-licence-card.mjs` derived the claim subject with
+`field.split('.').slice(-1)[0]` at two sites (the `may claim` line, and the echo note's root
+through `rootOfPath`). That is correct for a LITERAL-rung read, whose dotted path really does end
+in the field it claims. It is nonsense for a TABLE-rung read, which the census spells
+`<reader> (via <TABLE> in <file>)` and which has no leaf at all: splitting it on `.` returns the
+tail of the FILE NAME.
+
+Measured over the committed census at `290f86ee0`: **122 of the 708 pools read a table-rung
+reading**, and every one of them printed its licence as
+
+```
+  may claim:  that `js)` (=== STRONG) holds, as a STANDING fact of the record
+```
+
+488 occurrences of `js)` across the 708 cards, in four places per offending card: the `reads`
+line, the `predicate` line, the echo note, and the claim. The first two are the census's own
+recovered text printed verbatim, which is the card's whole contract; the last two were derived,
+and were wrong.
+
+### 8b-W-5.2 THE CURE
+
+Three new exports in the lib, and one line of `licenceCardLines` re-pointed:
+
+| export | what it does |
+|---|---|
+| `parseTableRungRead(read)` | recovers `{reader, args, table, file}`, or `null` for a dotted path — the `null` is every caller's signal to keep its old form byte for byte |
+| `readAsField(read)` | names a read on a line that speaks of fields: a dotted path is itself, a table rung becomes ``the row of `TABLE` selected by `reader` `` |
+| `echoKeyNote(field)` | the echo line's second half, with its own sentence for a table rung |
+
+`mayClaimText` now says the ROW OF THE TABLE. `mayNotText` maps its spine reads through
+`readAsField` AFTER the existing dedupe-and-sort, so a dotted set is untouched. The echo note's
+call site became `echoKeyNote(field)`.
+
+⚖ **ONE DEVIATION FROM THE CHAIR'S WORKED SENTENCE, recorded for veto.** The brief's example
+cited the file in parentheses — ``of `INVASION_ROW_POOL` (defenseStateProse.js)`` — which itself
+contains `js)`. The card cites it in backticks instead: ``of `INVASION_ROW_POOL` in
+`defenseStateProse.js`,``. Same four parts, same order, and the claim line's `js)` count goes to
+zero rather than to 122.
+
+### 8b-W-5.3 THE THREE CARDS, BEFORE AND AFTER (verbatim claim lines)
+
+| card | before | after |
+|---|---|---|
+| `DS-DEF-2 :: Invasion & War: walls AND professional garrison` | ``  may claim:  that `js)` (=== walls, professional garrison) holds, as a STANDING fact of the record`` | ``  may claim:  that the reader `invasionRowSituation(walls, garrison, militia)` selects the row `walls, professional garrison` of `INVASION_ROW_POOL` in `defenseStateProse.js`, as a STANDING fact of the record`` |
+| `DS-DEF-1 :: readiness STRONG` | ``  may claim:  that `js)` (=== STRONG) holds, as a STANDING fact of the record`` | ``  may claim:  that the reader `scoreBand(readinessScore)` selects the row `STRONG` of `READINESS_ROW_POOL` in `defenseStateProse.js`, as a STANDING fact of the record`` |
+| `DS-DEF-11 :: WALLED-STRAINED` (dotted) | ``  may claim:  that `military` (< 1) holds, as a STANDING fact of the record`` | **identical, byte for byte** |
+
+The two table-rung cards moved exactly two lines each (the claim and the echo note); nothing else
+on them moved. The dotted card was proved unmoved by `cmp` over the WHOLE card, not by eye:
+
+```
+$ cmp -s before-def11.txt after-def11.txt && echo "IDENTICAL: $(wc -c < before-def11.txt) bytes"
+IDENTICAL:     1711 bytes
+```
+
+### 8b-W-5.4 THE PLANTS, RED THEN GREEN
+
+Six new arms in `tests/lint/proseLicenceCard.walker.test.js`. The RED control is a single-point
+mutant — `parseTableRungRead` forced to `return null`, which reinstates the pre-cure behaviour at
+all three sites at once — run in the dock and then reverted, the lib restored by sha:
+
+```
+$ npx vitest run tests/lint/proseLicenceCard.walker.test.js      # MUTANT
+   × the census carries BOTH read shapes, and the old idiom really did print `js)`
+   × EVERY pool in the census prints a claim subject that is neither `js` nor a call tail
+   × pins the three cards the chair named, line for line
+   × parses every read shape the census spells, and refuses to parse a dotted path
+   × a table-rung SPINE in an attach set is refused as a table row, not as a file
+   × the echo note tells a table rung its key is the TABLE and a dotted read its root
+   × a claim with no recovered row says so rather than inventing one
+   AssertionError: expected [ …(235) ] to deeply equal []
+   +   "DS-GEN-3 :: foodSecurity.label: Deficit × Active Famine -> `js)`",
+   +   "DS-GEN-3 :: foodSecurity.label: Deficit × Active Famine -> the echo root names a file",
+   Tests  7 failed | 12 passed (19)
+
+$ shasum -a 256 scripts/lib/prose-licence-card.mjs   # cured lib restored, mutant gone
+9e4252fb0ffcebf8da4357961c52e89ade7d344ca8a431f3ad38ac79fbafacc2
+$ npx vitest run tests/lint/proseLicenceCard.walker.test.js
+   Tests  19 passed (19)
+```
+
+⭐ The 12 pre-existing arms stayed GREEN under the mutant. That is the proof the cure did not buy
+the table rung by moving the literal rung.
+
+Plant (a) is over **every one of the 708 census rows**, not a sample — the defect was invisible at
+the anchor pool `DS-DEF-11`, which is literal-rung and printed correctly throughout. Its
+anti-vacuity guard is the table-rung count: the sweep asserts it saw all 122, so a census that
+loses the shape reds rather than passing over an empty set. Plant (b) pins the claim line and the
+echo note of all three named cards as literal strings.
+
+⛔ The `may NOT` clause is reached by NO pool at this tip (zero modifiers attach to a table-rung
+spine), so it is covered by a plant rather than by the sweep: the day a modifier does attach, the
+clause would have named `defenseStateProse.js)` as "a field the attached spine tests".
+
+### 8b-W-5.5 THE SWEEP, AND AN HONEST GREP
+
+```
+$ node <sweep over all 708 census rows through cardMachine>
+cards built: 708   not in corpus: 0   rows: 708
+sweep exit=0
+```
+
+| grep, over all 708 printed cards | before | after |
+|---|---|---|
+| `that \`js)\`` — the nonsense claim subject | **122** | **0** |
+| `js)` on the `may claim:` line | 122 | **0** |
+| `js)` on the echo note | 122 | **0** |
+| `js)` on the `may NOT:` line | 0 | **0** (latent; plant-covered) |
+| `js)` on `reads:` / `predicate:` | 244 | 244 |
+| `js)` TOTAL | 488 | **244** |
+
+⚖ **THE ACCEPTANCE FIGURE, AND WHY IT IS NOT ZERO — recorded for veto.** The brief asked for
+"zero `js)` occurrences". Every DERIVED line is at zero. The residual 244 is the `reads:` and
+`predicate:` lines printing **the census's own recovered reading verbatim** —
+``invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)``
+— which is a legible, true statement of what the pool reads and is the card's constitutional
+property (§8.3: those lines ARE the measurement, and arm 1 asserts the reads line contains the
+row's read path verbatim). Driving them to zero means re-writing the register's own text on the
+two lines whose contract is fidelity. The chair's own worked cure sentence contains `js)` for the
+same reason, so a literal zero was never reachable alongside it. **The lane did not do it. If the
+chair wants the two measurement lines re-rendered as well, that is a second car and a change to
+the card's projection property, not a continuation of this one.**
+
+### 8b-W-5.6 THE GATES
+
+```
+$ npx eslint scripts/lib/prose-licence-card.mjs scripts/prose-licence-card.mjs \
+    tests/lint/proseLicenceCard.walker.test.js         # clean, no output
+$ node scripts/check-domain-strict.mjs
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+$ node scripts/check-full-typecheck.mjs
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+$ node scripts/generate-custom-content-manifest.mjs --check
+custom-content manifest artifacts are current
+```
+
+⭐ **THE MANIFEST CLASSIFIER, PROVED BY DIGEST RATHER THAN ASSERTED.** The cells table was
+measured twice in the dock — once with the cured files, once with all three restored to
+`290f86ee0` by `git show HEAD:<path>` on a porcelain-0 tree — and the two outputs are the same
+file:
+
+```
+dfdece7e814a2cafe3b4a3f909e00c7600c7fef429972d208d1edc14d7c2c5db  cells-base.json
+dfdece7e814a2cafe3b4a3f909e00c7600c7fef429972d208d1edc14d7c2c5db  cells-tip.json
+identical: true      cells base: 73284   cells tip: 73284
+```
+
+That digest is the same one `docs/content/prose-reindex-8a1.json` records for its tip table. A
+card script moves no rendered byte, and this is the measurement rather than the argument.
+
+### 8b-W-5.7 THE ONE THING THE CAR OWED THAT THE BRIEF DID NOT NAME
+
+`tests/lint` whole came back **2 failed / 153 passed** on the first run, and BOTH failures were
+this car's:
+
+1. `negativeAssertionAnchor.walker.test.js` — three bare `not.toContain` assertions in the new
+   arms, ceiling 0. Each had a real structural anchor on the line above; each now carries a
+   one-line `// anchored: …` marker. (⚠ The marker is read only on the assertion's own line or
+   the ONE line immediately above, never wrapped — the walker's own message says this has cost a
+   lane two attempts.)
+2. `sovereigntyLightingContract.walker.test.js` — the lighting census's TEST-TITLE figure moved
+   `24169 -> 24176`, exactly the car's seven new `it` titles. That is a count-only drift and a
+   lane's plain re-take by the register's own ritual, on the precedent of
+   `cc22f1d72 REWRITE car 8a-13-lighting`. It is measured at the CAR'S OWN TIP on a clean tree,
+   so it lands as a second commit and never as an amend.
