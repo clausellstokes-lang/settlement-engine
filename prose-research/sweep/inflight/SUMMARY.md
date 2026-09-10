@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 20:05:42 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-09 20:11:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -123,12 +123,13 @@
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:12:02 |
 | ? | other |  | failed | 0 | — | — | 19:08:35 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 22:44:38 |
+| ? | other |  | in-flight | 0 | — | — | 00:11:38 |
 | ? | other |  | result | 0 | skeleton.md | — | 23:38:11 |
 | ? | other |  | result | 0 | skeleton.md | — | 23:39:42 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:49:26 |
 | ? | other |  | result | 0 | — | — | 23:53:49 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:48:26 |
-| ? | other |  | in-flight | 0 | — | — | 23:57:01 |
+| ? | other |  | result | 0 | draft-round-1.md | — | 00:07:28 |
 | ? | other |  | result | 0 | skeleton.md | — | 23:37:32 |
 | ? | other |  | result | 0 | draft-round-1.md | — | 23:53:48 |
 | ? | other |  | result | 0 | — | — | 23:38:03 |
